@@ -1,0 +1,105 @@
+{
+    "_meta": {
+        "name": "Phoenix Omega — Qwen-Image-Layered text-to-layers decompose (manga V5)",
+        "description": "V5 architecture (replaces V4 L0+L2 split). Renders ONE full manga panel from a single archetype-shaped text prompt and decomposes it into N clean RGBA layers (default: 2 = background + character) via Qwen-Image-Layered (Alibaba native, late-2025). Output: a batch of N images, written to the staging dir as <prefix>_layer_NN.png. Downstream V5 orchestrator (scripts/manga/render_v5_episode.py) reassembles per archetype subject_placement_bbox. Eliminates the L0+L2 coordinate-system mismatch documented in artifacts/research/manga_layer_compositing_research_2026-05-20.md.",
+        "version": "1.0.0",
+        "phase": "V5-A-qwen-image-layered",
+        "license_notes": "Qwen-Image-Layered Apache 2.0 (Comfy-Org repackage); Qwen2.5-VL Apache 2.0",
+        "model_files": {
+            "unet": "qwen_image_layered_fp8mixed.safetensors",
+            "clip": "qwen_2.5_vl_7b_fp8_scaled.safetensors",
+            "vae": "qwen_image_layered_vae.safetensors"
+        },
+        "vram_target_gb": 16,
+        "vram_uncertainty_note": "fp8mixed claims fit in 24GB per Alibaba; 16GB on RTX 5070 Ti is empirical-feasibility-gated (see V5 PR cover and research §9.2). If OOM, fall back to CPU-offload via UNETLoader weight_dtype='fp8_e4m3fn'.",
+        "layer_semantics": "Qwen-Image-Layered default emits 2 layers: layer_0=foreground subject (RGBA cut), layer_1=background scene (RGB). 3-layer mode (layer_0=character / layer_1=mid-objects / layer_2=background) requires layers=3 on EmptyQwenImageLayeredLatentImage."
+    },
+    "37": {
+        "class_type": "UNETLoader",
+        "inputs": {
+            "unet_name": "qwen_image_layered_fp8mixed.safetensors",
+            "weight_dtype": "default"
+        }
+    },
+    "38": {
+        "class_type": "CLIPLoader",
+        "inputs": {
+            "clip_name": "qwen_2.5_vl_7b_fp8_scaled.safetensors",
+            "type": "qwen_image",
+            "device": "default"
+        }
+    },
+    "39": {
+        "class_type": "VAELoader",
+        "inputs": {
+            "vae_name": "qwen_image_layered_vae.safetensors"
+        }
+    },
+    "40": {
+        "class_type": "ModelSamplingAuraFlow",
+        "inputs": {
+            "shift": 1.0,
+            "model": ["37", 0]
+        }
+    },
+    "41": {
+        "class_type": "CLIPTextEncode",
+        "inputs": {
+            "text": "{{positive_prompt}}",
+            "clip": ["38", 0]
+        }
+    },
+    "42": {
+        "class_type": "CLIPTextEncode",
+        "inputs": {
+            "text": "{{negative_prompt}}, text, words, letters, captions, watermark, signature, signs, writing, typography, text characters, font, lettering, logos, subtitles, calligraphy, chinese characters, japanese characters, kanji, hiragana, katakana, hangul",
+            "clip": ["38", 0]
+        }
+    },
+    "43": {
+        "class_type": "EmptyQwenImageLayeredLatentImage",
+        "inputs": {
+            "width": 1024,
+            "height": 1024,
+            "layers": 2,
+            "batch_size": 1
+        }
+    },
+    "44": {
+        "class_type": "KSampler",
+        "inputs": {
+            "seed": 42,
+            "steps": 50,
+            "cfg": 4.0,
+            "sampler_name": "euler",
+            "scheduler": "simple",
+            "denoise": 1.0,
+            "model": ["40", 0],
+            "positive": ["41", 0],
+            "negative": ["42", 0],
+            "latent_image": ["43", 0]
+        }
+    },
+    "45": {
+        "class_type": "LatentCutToBatch",
+        "inputs": {
+            "samples": ["44", 0],
+            "axis": "t",
+            "size": 1
+        }
+    },
+    "46": {
+        "class_type": "VAEDecode",
+        "inputs": {
+            "samples": ["45", 0],
+            "vae": ["39", 0]
+        }
+    },
+    "47": {
+        "class_type": "SaveImage",
+        "inputs": {
+            "filename_prefix": "manga_panel_qwen_layered",
+            "images": ["46", 0]
+        }
+    }
+}
