@@ -161,6 +161,15 @@ def discover_profile_files(root: Path) -> list[Path]:
             continue
         if "examples" in p.parts:
             continue
+        # Skip auxiliary per-series inventory files (compound extensions like
+        # *.object_inventory.yaml, *.style_state.yaml, *.character_pose_inventory.yaml,
+        # *.scene_inventory.yaml). These share series_id with the main profile but
+        # don't carry marketing/launch fields, so treating them as separate series
+        # entries causes false null-marketing_angle failures
+        # (tests/test_manga_catalog_extractor.py::test_all_series_have_required_marketing_fields).
+        # Main series profiles use single-extension filenames: stillness_en_01.yaml.
+        if "." in p.stem:
+            continue
         paths.append(p)
     return paths
 
