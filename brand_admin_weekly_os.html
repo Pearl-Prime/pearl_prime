@@ -74,6 +74,11 @@ html,body{width:100%;height:100%;font-family:"DM Sans",sans-serif;background:#0e
 .copy-btn{flex-shrink:0;background:rgba(180,83,9,.15);border:1px solid var(--border);color:var(--acc2);font-family:var(--mono);font-size:.42rem;letter-spacing:.06em;text-transform:uppercase;padding:5px 10px;border-radius:4px;cursor:pointer;transition:all .15s}
 .copy-btn:hover{background:rgba(180,83,9,.3)}
 .copy-btn.copied{background:rgba(22,163,74,.2);border-color:rgba(22,163,74,.4);color:var(--green)}
+.coord-build-badge{font-family:var(--mono);font-size:.48rem;letter-spacing:.04em;margin-top:8px;color:var(--dim)}
+.coord-build-badge.current{color:var(--green)}
+.coord-build-badge.stale{color:var(--acc2)}
+.coord-build-badge.missing{color:var(--red)}
+.coord-build-badge.loading{opacity:.6}
 
 /* -- Warn / Note -- */
 .warn{border-left:3px solid #dc2626;background:rgba(220,38,38,.06);padding:8px 14px;border-radius:0 6px 6px 0;margin:8px 0;font-size:.72rem;color:var(--mid);line-height:1.55}
@@ -413,7 +418,8 @@ function renderPhase2(){
   h+=`<div class="upload-card">
     <h3>Your Content Package</h3>
     <div style="font-size:.75rem;color:var(--mid);margin-bottom:10px">8 ebooks + 4 manga + 3 micro = 15 titles. Covers, metadata, video included.</div>
-    <a class="action-btn big" onclick="alert('Package download activates when your content pipeline is connected.')">Download Week 1 Package</a>
+    <a class="action-btn big" id="admin-packet-dl-btn" onclick="downloadAdminPacket(event)">Download Week 1 Package</a>
+    <div id="coord-build-badge" class="coord-build-badge loading">Last built: checking…</div>
     <div style="margin-top:10px;font-family:var(--mono);font-size:.5rem;color:var(--dim)">KDP/ GooglePlay/ AppleBooks/ WEBTOON/ Video/ metadata.csv</div>
   </div>`;
 
@@ -443,8 +449,62 @@ function renderPhase2(){
     h+=`</div>`;
   });
   el.innerHTML=h;
+  refreshCoordinationBuildBadge();
 }
 function countUpload(u){ const s=bs(); let c=0; for(let i=1;i<=u.titles;i++) if(s.upload[u.id+'_t'+i]) c++; return c; }
+
+function brandAdminApiBase(){
+  try{var q=new URLSearchParams(window.location.search).get('api_base');if(q)return q.replace(/\/$/,'');}catch(e0){}
+  if(typeof window.__BRAND_ADMIN_API_BASE==='string')return window.__BRAND_ADMIN_API_BASE.replace(/\/$/,'');
+  return 'http://127.0.0.1:8000';
+}
+function currentIsoWeek(){
+  var d=new Date();
+  var thu=new Date(d.getFullYear(),d.getMonth(),d.getDate()+3-(d.getDay()+6)%7);
+  var w1=new Date(thu.getFullYear(),0,4);
+  var wn=1+Math.round(((thu-w1)/86400000-3+(w1.getDay()+6)%7)/7);
+  return thu.getFullYear()+'-W'+String(wn).padStart(2,'0');
+}
+function refreshCoordinationBuildBadge(){
+  var el=document.getElementById('coord-build-badge');
+  if(!el)return;
+  el.className='coord-build-badge loading';
+  el.textContent='Last built: checking…';
+  fetch(brandAdminApiBase()+'/api/brand_admin/coordination-status',{cache:'no-store'})
+    .then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json();})
+    .then(function(data){
+      var st=(data.status||'MISSING').toLowerCase();
+      el.className='coord-build-badge '+st;
+      el.textContent='Last built: '+(data.relative||'never')+' · '+(data.status||'MISSING');
+    })
+    .catch(function(){
+      el.className='coord-build-badge missing';
+      el.textContent='Last built: unavailable · start python3 scripts/run_server.py';
+    });
+}
+function downloadAdminPacket(ev){
+  if(!brandId){alert('Select a brand first.');return;}
+  var week=currentIsoWeek();
+  var btn=ev&&ev.target?ev.target:document.getElementById('admin-packet-dl-btn');
+  var url=brandAdminApiBase()+'/api/brand_admin/download/'+encodeURIComponent(brandId)+'/'+encodeURIComponent(week);
+  if(btn){btn.style.pointerEvents='none';btn.textContent='Downloading…';}
+  fetch(url)
+    .then(function(r){
+      if(r.status===404){throw new Error('No package for this brand/week.');}
+      if(r.status===500){return r.json().then(function(j){throw new Error(j.detail||'Build pipeline failed');});}
+      if(!r.ok)throw new Error('Download failed (HTTP '+r.status+')');
+      return r.blob();
+    })
+    .then(function(blob){
+      var a=document.createElement('a');
+      a.href=URL.createObjectURL(blob);
+      a.download=brandId+'_'+week+'.zip';
+      a.click();
+      URL.revokeObjectURL(a.href);
+    })
+    .catch(function(e){alert(e.message||String(e));})
+    .finally(function(){if(btn){btn.style.pointerEvents='';btn.textContent='Download Week 1 Package';}});
+}
 
 // ── Render Phase 3: Weekly ──
 function renderPhase3(){
