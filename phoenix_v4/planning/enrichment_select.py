@@ -109,6 +109,18 @@ class InsufficientVariantsError(RuntimeError):
     """
 
 
+class PersonaPoolEmptyError(RuntimeError):
+    """OPD-118: the target persona/topic atom pool is empty for a required slot.
+
+    Raised (or logged as planner WARNING for non-critical slots) when the
+    BookSpec persona×topic pool is empty for a slot the selector would have
+    filled. Pre-OPD-118 the selector silently spilled into sibling-persona
+    atoms (cross-persona contamination); the fix replaces that fallback with
+    an explicit signal so the planner can surface the gap upstream rather
+    than ship a book stitched from the wrong personas' content.
+    """
+
+
 # ---------------------------------------------------------------------------
 # OPD-109 Phase 3: per-book persona-pool rotation state
 # ---------------------------------------------------------------------------
@@ -846,33 +858,69 @@ def _merged_persona_atoms_deep_6h(
     locale: Optional[str] = None,
 ) -> Dict[str, List[dict]]:
     """
-    HOOK / SCENE / STORY pools for deep_book_6h: primary persona first, then other personas
-    for the same topic (deduped by normalized body).
+    OPD-118 (2026-05-20): persona-isolated pool loader for deep_book_6h.
 
-    When ``locale`` is set and not 'en-US', each persona's atoms are loaded from the
-    locale-specific CANONICAL.txt where present, falling back to English.
+    PRIOR BEHAVIOR (PR #939 Sprint-1, removed here): this function merged
+    HOOK/SCENE/STORY atoms from EVERY persona that shared `topic`, so a render
+    of `gen_z_professionals × anxiety` was pulling HOOK content authored for
+    `tech_finance_burnout × anxiety` (trading-floor vignettes),
+    `first_responders × anxiety` (fire-station vignettes), and
+    `corporate_managers × anxiety` (executive vignettes). The stitched prose
+    read as "scene-scene-scene / all over the place" because each atom was
+    written for a different setting and persona voice. This is the root cause
+    of the operator's persistent Book 3 cross-persona scene-hopping complaint.
+
+    CURRENT BEHAVIOR: load atoms ONLY from `atoms/{primary_persona}/{topic}/`.
+    No cross-persona spillover. If the primary persona's pool is empty for a
+    slot, the selector emits a planner WARNING via `PersonaPoolEmptyError`
+    rather than silently substituting another persona's content.
+
+    Function signature and return shape preserved so existing callers in
+    `select_enrichment` and `peek_registry_content_for_beatmap_slot` keep
+    working without edits. The `repo_root` and `_personas_with_topic` params
+    are retained for backward-compatibility; `_personas_with_topic` is no
+    longer consulted for atom selection.
+
+    When ``locale`` is set and not 'en-US', atoms are loaded from the
+    locale-specific CANONICAL.txt where present, falling back to English
+    (unchanged from prior behavior; the locale-awareness is intra-persona).
     """
-    ids = _personas_with_topic(topic, repo_root)
-    if primary_persona in ids:
-        ordered = [primary_persona] + [x for x in ids if x != primary_persona]
-    else:
-        ordered = [primary_persona] + ids
-
+    # Touch repo_root so callers that pass a custom root still resolve via
+    # `_load_persona_atoms` (which uses ATOMS_ROOT bound at import time). The
+    # arg is preserved in the signature for backward-compat; runtime resolution
+    # is unchanged from the rest of the selector.
+    _ = repo_root
+    primary_atoms = _load_persona_atoms(primary_persona, topic, locale=locale)
+    if not primary_atoms:
+        logger.warning(
+            "OPD-118: persona atom pool empty for '%s/%s' locale=%s — "
+            "no cross-persona spillover will be substituted. Author atoms "
+            "upstream at atoms/%s/%s/ to resolve.",
+            primary_persona, topic, locale or "en-US",
+            primary_persona, topic,
+        )
+        return {}
     merged: Dict[str, List[dict]] = {}
     for st in _PERSONA_OVERLAY_TYPES:
         seen: set[str] = set()
         acc: List[dict] = []
-        for pid in ordered:
-            for atom in _load_persona_atoms(pid, topic, locale=locale).get(st, []):
-                txt = str(atom.get("content") or "").strip()
-                n = _norm_ws(txt)
-                if not n or n in seen:
-                    continue
-                seen.add(n)
-                aid = str(atom.get("atom_id") or f"{pid}_{len(acc)}")
-                acc.append({"atom_id": aid, "content": txt})
+        for atom in primary_atoms.get(st, []):
+            txt = str(atom.get("content") or "").strip()
+            n = _norm_ws(txt)
+            if not n or n in seen:
+                continue
+            seen.add(n)
+            aid = str(atom.get("atom_id") or f"{primary_persona}_{len(acc)}")
+            acc.append({"atom_id": aid, "content": txt})
         if acc:
             merged[st] = acc
+        else:
+            logger.warning(
+                "OPD-118: %s pool empty for '%s/%s' locale=%s — selector will "
+                "fall through to registry/teacher overlays for this slot type. "
+                "Cross-persona substitution is BLOCKED.",
+                st, primary_persona, topic, locale or "en-US",
+            )
     return merged
 
 
