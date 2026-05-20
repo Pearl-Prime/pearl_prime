@@ -1,0 +1,80 @@
+# OPD-119 / OPD-121 — Monday weekly coordination TSV + admin ZIP packets (PR-only, no direct push to main).
+name: Weekly package writer
+
+on:
+  schedule:
+    - cron: "0 9 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  weekly-packages:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install pyyaml
+
+      - name: Write coordination TSV and manifests
+        run: |
+          PYTHONPATH=. python3 scripts/brand/weekly_package_writer.py
+
+      - name: Build admin ZIP packets
+        run: |
+          PYTHONPATH=. python3 scripts/brand/build_admin_packets.py
+
+      - name: Create PR with weekly artifacts
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          if git diff --quiet && git diff --cached --quiet; then
+            echo "No artifact changes to commit"
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          WEEK_MONDAY=$(python3 -c "from datetime import datetime, timezone, timedelta; d=datetime.now(tz=timezone.utc).date(); m=d-timedelta(days=d.weekday()); print(m.isoformat())")
+          BRANCH="agent/weekly-packages-${WEEK_MONDAY}"
+          git checkout -b "$BRANCH"
+
+          git add artifacts/coordination/weekly_packages_*.tsv
+          git add artifacts/weekly_packages/
+
+          git commit -m "chore(brand): weekly packages ${WEEK_MONDAY} (OPD-119/121)" \
+            -m "Automated Monday coordination TSV + per-brand manifests and ZIP bundles." \
+            -m "Co-Authored-By: github-actions[bot] <github-actions[bot]@users.noreply.github.com>"
+
+          git push -u origin "$BRANCH"
+
+          gh pr create \
+            --title "chore(brand): weekly packages ${WEEK_MONDAY} (OPD-119/121)" \
+            --body "$(cat <<EOF
+## Summary
+- Generated \`artifacts/coordination/weekly_packages_${WEEK_MONDAY}.tsv\`
+- Wrote per-brand \`manifest.json\` under \`artifacts/weekly_packages/<brand>/<YYYY-WW>/\`
+- Built admin ZIP bundles via \`scripts/brand/build_admin_packets.py\`
+
+## Test plan
+- [ ] Review TSV row counts per active brand
+- [ ] Spot-check one ZIP extracts with manifest + referenced files
+- [ ] \`PYTHONPATH=. python3 scripts/brand/weekly_package_endpoint.py --json\` returns non-empty for active brands
+
+Triggered by: \`${{ github.event_name }}\`
+EOF
+)" \
+            --head "$BRANCH" \
+            --base main
