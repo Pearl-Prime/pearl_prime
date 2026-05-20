@@ -56,6 +56,7 @@ angles:
           phase: definition | pattern_recognition | identity_implications | civilizational_spiritual | transcendence_reintegration
           chapter_range: [<int>, <int>]
           assertion: "<layer-N assertion text>"
+          optional_for_topics: [<topic_id>, ...]   # optional; omit = required for all topics
 
   <TOPIC_SPECIFIC_ANGLE_ID>:     # e.g. PROTECTIVE_ALARM
     parent_universal: USEFUL_SIGNAL    # required; angle_id must exist
@@ -97,13 +98,13 @@ In order: `definition → pattern_recognition → identity_implications → civi
 
 ## 3. Inheritance semantics (the parent_universal walk)
 
-Helper: `phoenix_v4.planning.angle_resolver.resolve_angle_with_inheritance(angle_id, registry, *, allow_legacy=False) -> dict`.
+Helper: `phoenix_v4.planning.angle_resolver.resolve_angle_with_inheritance(angle_id, registry, *, allow_legacy=False, topic_id=None) -> dict`.
 
 ### 3.1 Algorithm
 
 1. Look up `angle_id` in `angles:`. If missing, raise `KeyError`.
 2. If the entry has `deprecated: true` and `allow_legacy=False`, raise `DeprecatedAngleError` (caller should resolve through `successor_angle_id`).
-3. Build the parent chain by walking `parent_universal` transitively. Detect cycles; raise `AngleCycleError` if found.
+3. Build the parent chain by walking `parent_universal` transitively. Chains **may exceed depth 1** (e.g. `LOYAL_ADAPTATION → PROTECTIVE_ALARM → USEFUL_SIGNAL` yields `chain_depth=2`). Detect cycles; raise `AngleCycleError` if found. If the chain exceeds `max_chain_depth=5`, raise `AngleChainDepthError`.
 4. Merge fields from root (universal) down to leaf:
    - Structural fields (`arc_variant`, `framing_mode`, `chapter_1_role_bias`, `integration_reinforcement_type`) inherit downward.
    - `journey` block inherits downward; if a leaf declares `journey`, leaf-level keys override inherited keys, with sub-field merging (e.g., a leaf may override `core_mantras` without restating `layer_progression`).
@@ -160,9 +161,38 @@ PROTECTIVE_ALARM:
 
 `PROTECTIVE_ALARM` correctly picks up `framing_mode=reveal` from `USEFUL_SIGNAL` without restating it — this is the inheritance contract verified by the test suite.
 
+### 3.2.1 Multi-level parent chains
+
+Topic-specific angles may point at another topic-specific angle (not only at a universal). Example:
+
+```yaml
+USEFUL_SIGNAL:          # universal (root)
+  journey: { ... }
+
+PROTECTIVE_ALARM:
+  parent_universal: USEFUL_SIGNAL
+
+LOYAL_ADAPTATION:
+  parent_universal: PROTECTIVE_ALARM
+```
+
+`resolve_angle_with_inheritance("LOYAL_ADAPTATION", reg)` walks `LOYAL_ADAPTATION → PROTECTIVE_ALARM → USEFUL_SIGNAL`; `_resolution_provenance.chain_depth` is **2**. The resolver merges root-down the same way as a depth-1 chain. Safety cap: `max_chain_depth=5` (constant in `angle_resolver.py`); longer chains raise `AngleChainDepthError`.
+
 ### 3.3 Cycle detection
 
 `parent_universal` chains must be acyclic. If `A.parent_universal == B` and `B.parent_universal == A` (or any longer cycle), `resolve_angle_with_inheritance` raises `AngleCycleError` with the offending chain in the message.
+
+### 3.4 Canonical topic_id enumeration
+
+**Path:** `config/source_of_truth/canonical_topics.yaml` — authoritative list of 20 `topic_id` values used by `journey.named_object_by_topic` and `catalog_planner_resolution.topic_angle_map`.
+
+Every `journey.named_object_by_topic` block in the registry must declare keys **only** from that file. `angle_resolver.py` validates on resolve and raises `InvalidTopicIdError` on mismatch.
+
+### 3.5 Layer-4 optional_for_topics
+
+Each `journey.layer_progression[]` entry may declare `optional_for_topics: [<topic_id>, ...]`. When `resolve_angle_with_inheritance` is called with `topic_id`, layers whose list includes that `topic_id` are **omitted** from the returned `journey.layer_progression`. Omitted field means the layer is **required** for all topics.
+
+Default (all 20 universals, layer 4 / `civilizational_spiritual`): `optional_for_topics: [sleep_anxiety, boundaries, courage]` — civilizational/spiritual lens is skipped for those topics.
 
 ---
 

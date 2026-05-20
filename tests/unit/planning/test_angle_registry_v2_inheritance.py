@@ -13,9 +13,12 @@ from typing import Any
 import pytest
 
 from phoenix_v4.planning.angle_resolver import (
+    AngleChainDepthError,
     AngleCycleError,
     DeprecatedAngleError,
+    MAX_CHAIN_DEPTH,
     load_angle_registry,
+    load_canonical_topic_ids,
     resolve_angle_with_inheritance,
 )
 
@@ -403,3 +406,65 @@ def test_successor_of_pointers_match_legacy_successor_angle_id(angles):
             f"{aid}.successor_of={successor_of!r} but {successor_of}.successor_angle_id="
             f"{legacy_entry.get('successor_angle_id')!r}"
         )
+
+# ─── Inconsistency fixes (registry v2 PR #1245) ────────────────────────────
+
+
+def test_loyal_adaptation_two_level_chain_depth_is_2(registry):
+    """LOYAL_ADAPTATION → PROTECTIVE_ALARM → USEFUL_SIGNAL resolves with chain_depth=2."""
+    merged = resolve_angle_with_inheritance("LOYAL_ADAPTATION", registry)
+    prov = merged["_resolution_provenance"]
+    assert prov["chain_depth"] == 2
+    assert prov["parent_chain"] == ["LOYAL_ADAPTATION", "PROTECTIVE_ALARM", "USEFUL_SIGNAL"]
+    assert merged["framing_mode"] == "reveal"
+
+
+def test_parent_chain_exceeding_max_depth_raises(registry):
+    """Chains longer than MAX_CHAIN_DEPTH raise AngleChainDepthError."""
+    angles = registry.get("angles") or {}
+    # Build a chain of depth MAX_CHAIN_DEPTH + 1
+    depth = MAX_CHAIN_DEPTH + 1
+    mini_angles = {}
+    for i in range(depth + 1):
+        aid = f"CHAIN_{i}"
+        entry: dict = {"display_name": aid, "core_frame": "x", "use_when": "x"}
+        if i > 0:
+            entry["parent_universal"] = f"CHAIN_{i - 1}"
+        else:
+            entry.update({
+                "arc_variant": "ARC_P",
+                "framing_mode": "reveal",
+                "chapter_1_role_bias": "destabilization",
+                "integration_reinforcement_type": "revelation",
+            })
+        mini_angles[aid] = entry
+    mini = {"angles": mini_angles}
+    with pytest.raises(AngleChainDepthError):
+        resolve_angle_with_inheritance(f"CHAIN_{depth}", mini)
+
+
+def test_named_object_by_topic_keys_subset_of_canonical_topics(angles):
+    """All named_object_by_topic keys must appear in canonical_topics.yaml."""
+    canonical = load_canonical_topic_ids()
+    for aid, entry in angles.items():
+        if entry.get("deprecated") or "parent_universal" in entry:
+            continue
+        named = entry.get("journey", {}).get("named_object_by_topic") or {}
+        extra = set(named.keys()) - canonical
+        assert not extra, f"{aid} named_object_by_topic has non-canonical keys: {sorted(extra)}"
+
+
+def test_layer_4_skipped_for_sleep_anxiety(registry):
+    merged = resolve_angle_with_inheritance("USEFUL_SIGNAL", registry, topic_id="sleep_anxiety")
+    layers = merged["journey"]["layer_progression"]
+    layer_nums = [layer["layer"] for layer in layers]
+    assert 4 not in layer_nums
+    assert len(layers) == 4
+
+
+def test_layer_4_included_for_anxiety_default(registry):
+    merged = resolve_angle_with_inheritance("USEFUL_SIGNAL", registry, topic_id="anxiety")
+    layers = merged["journey"]["layer_progression"]
+    layer_nums = [layer["layer"] for layer in layers]
+    assert 4 in layer_nums
+    assert len(layers) == 5

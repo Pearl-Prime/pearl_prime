@@ -26,8 +26,13 @@ except ImportError:
 
 REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 DEFAULT_ANGLE_REGISTRY = REPO_ROOT / "config" / "angles" / "angle_registry.yaml"
+DEFAULT_CANONICAL_TOPICS = REPO_ROOT / "config" / "source_of_truth" / "canonical_topics.yaml"
+
+MAX_CHAIN_DEPTH = 5
 
 _LOG = logging.getLogger(__name__)
+
+_canonical_topic_ids_cache: Optional[frozenset[str]] = None
 
 # Structural fields that inherit downward through the parent_universal chain.
 _INHERITED_STRUCTURAL_FIELDS = (
@@ -52,6 +57,58 @@ class DeprecatedAngleError(ValueError):
 
 class AngleCycleError(ValueError):
     """Raised when ``parent_universal`` chains form a cycle."""
+
+
+class AngleChainDepthError(ValueError):
+    """Raised when ``parent_universal`` chain exceeds ``MAX_CHAIN_DEPTH``."""
+
+
+class InvalidTopicIdError(ValueError):
+    """Raised when ``journey.named_object_by_topic`` keys are not in canonical_topics.yaml."""
+
+
+def load_canonical_topic_ids(
+    topics_path: Optional[Path] = None,
+    *,
+    use_cache: bool = True,
+) -> frozenset[str]:
+    """Load authoritative topic_id set from ``config/source_of_truth/canonical_topics.yaml``."""
+    global _canonical_topic_ids_cache
+    if use_cache and _canonical_topic_ids_cache is not None:
+        return _canonical_topic_ids_cache
+    path = topics_path or DEFAULT_CANONICAL_TOPICS
+    if not path.exists() or yaml is None:
+        raise FileNotFoundError(
+            f"canonical topics file not found: {path}. "
+            "Create config/source_of_truth/canonical_topics.yaml."
+        )
+    with open(path, encoding="utf-8") as f:
+        data = yaml.safe_load(f) or {}
+    ids = data.get("topic_ids") or []
+    if not isinstance(ids, list) or not ids:
+        raise ValueError(f"canonical_topics.yaml at {path} must declare non-empty topic_ids:")
+    result = frozenset(str(t).strip() for t in ids if str(t).strip())
+    if use_cache:
+        _canonical_topic_ids_cache = result
+    return result
+
+
+def validate_named_object_by_topic(
+    journey: dict[str, Any],
+    angle_id: str,
+    canonical_ids: frozenset[str],
+) -> None:
+    """Ensure ``named_object_by_topic`` keys are a subset of canonical topic_ids."""
+    named = journey.get("named_object_by_topic")
+    if not isinstance(named, dict):
+        return
+    extra = set(named.keys()) - canonical_ids
+    if extra:
+        raise InvalidTopicIdError(
+            f"angle_id {angle_id!r}: journey.named_object_by_topic contains non-canonical "
+            f"topic_ids {sorted(extra)!r}. Allowed keys are listed in "
+            f"config/source_of_truth/canonical_topics.yaml ({len(canonical_ids)} topic_ids)."
+        )
 
 
 def load_angle_registry(registry_path: Optional[Path] = None) -> dict[str, Any]:
@@ -93,7 +150,7 @@ def get_angle_context(
     if "parent_universal" in angles or angles.get("deprecated"):
         try:
             merged = resolve_angle_with_inheritance(angle_id, reg, allow_legacy=True)
-        except (AngleCycleError, KeyError) as exc:
+        except (AngleCycleError, AngleChainDepthError, InvalidTopicIdError, KeyError) as exc:
             _LOG.warning("angle inheritance failed for %r: %s — returning leaf only", angle_id, exc)
             return dict(angles)
         # Strip provenance from the returned dict to preserve v1 caller contract (flat structural fields).
@@ -134,6 +191,7 @@ def resolve_angle_with_inheritance(
     registry: dict[str, Any],
     *,
     allow_legacy: bool = False,
+    topic_id: Optional[str] = None,
 ) -> dict[str, Any]:
     """Merge structural + journey fields by walking the ``parent_universal`` chain.
 
@@ -141,7 +199,9 @@ def resolve_angle_with_inheritance(
 
     - Look up ``angle_id`` in ``registry['angles']``. Missing → ``KeyError``.
     - ``deprecated: true`` with ``allow_legacy=False`` → ``DeprecatedAngleError``.
-    - Walk ``parent_universal`` transitively. Cycle → ``AngleCycleError``.
+    - Walk ``parent_universal`` transitively (chains may exceed depth 1; cap
+      ``MAX_CHAIN_DEPTH``). Cycle → ``AngleCycleError``; depth exceeded →
+      ``AngleChainDepthError``.
     - Merge root-down, leaf overrides. Structural fields and the ``journey`` block
       inherit; ``display_name``, ``core_frame``, ``use_when`` are leaf-only and do
       not inherit.
@@ -152,6 +212,8 @@ def resolve_angle_with_inheritance(
         registry: full registry dict (e.g. from ``load_angle_registry()``).
         allow_legacy: if True, deprecated angles resolve normally with a warning;
             if False (default for new books), deprecated angles raise.
+        topic_id: when set, omit ``layer_progression`` layers whose
+            ``optional_for_topics`` includes this topic.
 
     Returns:
         Merged angle dict with ``_resolution_provenance`` metadata.
@@ -160,6 +222,8 @@ def resolve_angle_with_inheritance(
         KeyError: ``angle_id`` not declared in registry.
         DeprecatedAngleError: angle is deprecated and ``allow_legacy=False``.
         AngleCycleError: ``parent_universal`` chain forms a cycle.
+        AngleChainDepthError: chain depth exceeds ``MAX_CHAIN_DEPTH``.
+        InvalidTopicIdError: ``named_object_by_topic`` keys not in canonical list.
     """
     angles_map = (registry or {}).get("angles") or {}
     if not angle_id or angle_id not in angles_map:
@@ -203,6 +267,16 @@ def resolve_angle_with_inheritance(
         if parent_id is None:
             break
         current_id = str(parent_id).strip() or None
+
+    chain_depth = len(chain) - 1
+    if chain_depth > MAX_CHAIN_DEPTH:
+        chain_path = " → ".join(chain)
+        raise AngleChainDepthError(
+            f"parent_universal chain for angle_id {angle_id!r} exceeds max_chain_depth="
+            f"{MAX_CHAIN_DEPTH} (depth={chain_depth}): {chain_path}"
+        )
+
+    canonical_ids = load_canonical_topic_ids()
 
     # Merge root → leaf. Root (universal) values become the base; descendants override.
     merged: dict[str, Any] = {}
@@ -254,7 +328,7 @@ def resolve_angle_with_inheritance(
     merged["_resolution_provenance"] = {
         "leaf_angle_id": angle_id,
         "parent_chain": list(chain),  # leaf → root
-        "chain_depth": len(chain) - 1,
+        "chain_depth": chain_depth,
         "inherited_fields": [f for f in inherited_fields if f not in leaf_overrides],
         "leaf_overrides": leaf_overrides,
         "is_deprecated": is_deprecated,
@@ -268,7 +342,28 @@ def resolve_angle_with_inheritance(
             successor_angle_id,
         )
 
+    journey = merged.get("journey")
+    if isinstance(journey, dict):
+        validate_named_object_by_topic(journey, angle_id, canonical_ids)
+        if topic_id:
+            _apply_optional_layer_progression(journey, str(topic_id).strip())
+
     return merged
+
+
+def _apply_optional_layer_progression(journey: dict[str, Any], topic_id: str) -> None:
+    """Drop layers whose ``optional_for_topics`` includes ``topic_id`` (in-place)."""
+    layers = journey.get("layer_progression")
+    if not isinstance(layers, list):
+        return
+    journey["layer_progression"] = [
+        layer
+        for layer in layers
+        if not (
+            isinstance(layer, dict)
+            and topic_id in (layer.get("optional_for_topics") or [])
+        )
+    ]
 
 
 def _deep_copy_journey(journey: Any) -> Any:
