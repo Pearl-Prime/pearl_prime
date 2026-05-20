@@ -1,0 +1,14 @@
+{
+  "schema_version": "1.0.0",
+  "artifact_type": "panel_prompts",
+  "render_target": "1080x1920",
+  "prompts": [
+    {
+      "panel_id": "L0_68f134e1f995",
+      "prompt": "Wide establishing shot of Past-work conference room \u2014 desaturated, cool grey-blue flashback palette. Long oval table, low fluorescent / overhead lighting, generic glass-walled modern corporate room. Used for past-failure / activation-register flashback beats. Mira appears small under or beside the conference table; the room itself is unbranded.\n.\n\nLIGHTING: harsh overhead fluorescent light, desaturated cool grey-blue palette throughout (flashback register), color temperature ~6500K, minimal rim, no atmospheric haze, mid-to-low-key exposure with all warm tones suppressed and shadows reading cool blue-grey rather than amber.\n\nSTYLE: soft pen-and-ink linework, variable line weight 0.5-1.2px, warm uneven hand-inked aesthetic, not vector-perfect, soft watercolor wash with gentle 2-4px edge bleed, painterly continuity, no hard cel-shading, low tonal density, breathable negative space, no heavy hatching, no dense screentone, gentle shading, low contrast, value range 180-240 on light skin, no dramatic chiaroscuro.\n\nCOMPOSITION: leave generous empty space at lower-center for character (under table) or full-frame establishing of the frame for subject placement. conference table dominant lower-third, glass walls left-back, fluorescent ceiling diffuser visible \n\nGENRE TRADITION: iyashikei watercolor register, painterly continuity, Yokohama Kaidashi Kiko aesthetic.\n\n\n\nPortrait orientation 1080x1920.",
+      "negative_prompt": "people, person, character, human, figure, named characters, faces, hands, body parts, warm kitchen items, named brand logos, color saturation, plants, text, words, letters, watermark, signature, signs, writing, low resolution, jpeg artifacts, blurry, bad anatomy, no speed lines, no dutch angles, no exaggerated reactions, no sweatdrops, no concentration lines, harsh contrast, busy composition, cluttered",
+      "beat_type": "micro",
+      "engine_routing": "qwen_image_no_pulid"
+    }
+  ]
+}
