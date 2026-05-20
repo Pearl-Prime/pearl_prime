@@ -45,12 +45,13 @@ logger = logging.getLogger(__name__)
 REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 REGISTRY_ROOT = REPO_ROOT / "registry"
 TEACHER_BANKS_ROOT = REPO_ROOT / "SOURCE_OF_TRUTH" / "teacher_banks"
+COMPOSITE_DOCTRINE_ROOT = REPO_ROOT / "SOURCE_OF_TRUTH" / "composite_doctrine"
 ATOMS_ROOT = REPO_ROOT / "atoms"
 
 # Section types that get overlaid in teacher mode (everything except SCENE and REFLECTION)
 _TEACHER_OVERLAY_TYPES = frozenset({
-    "TEACHER_DOCTRINE", "HOOK", "EXERCISE", "INTEGRATION",
-    "PIVOT", "PERMISSION", "TAKEAWAY", "THREAD",
+    "TEACHER_DOCTRINE", "COMPRESSION", "COMPOSITE_TEACHER_DOCTRINE", "HOOK", "EXERCISE",
+    "INTEGRATION", "PIVOT", "PERMISSION", "TAKEAWAY", "THREAD",
 })
 # Section types that get overlaid in regular/persona mode
 _PERSONA_OVERLAY_TYPES = frozenset({"HOOK", "SCENE", "STORY"})
@@ -70,6 +71,10 @@ _PERSONA_OVERLAY_TYPES = frozenset({"HOOK", "SCENE", "STORY"})
 # #4 had to dual-locate atoms in TEACHER_DOCTRINE/ + COMPRESSION/ as a hack).
 _TEACHER_TYPE_MAP = {
     "TEACHER_DOCTRINE": ["TEACHER_DOCTRINE", "COMPRESSION", "REFLECTION", "TEACHING"],
+    "COMPRESSION": ["TEACHER_DOCTRINE", "COMPRESSION", "REFLECTION", "TEACHING"],
+    "COMPOSITE_TEACHER_DOCTRINE": [
+        "TEACHER_DOCTRINE", "COMPRESSION", "REFLECTION", "TEACHING",
+    ],
     "HOOK": ["HOOK"],
     "EXERCISE": ["EXERCISE"],
     "INTEGRATION": ["INTEGRATION"],
@@ -77,6 +82,15 @@ _TEACHER_TYPE_MAP = {
     "PERMISSION": ["PERMISSION"],
     "TAKEAWAY": ["TAKEAWAY"],
     "THREAD": ["THREAD"],
+}
+
+# Regular-mode composite pools (SOURCE_OF_TRUTH/composite_doctrine/<topic_id>/).
+_COMPOSITE_TYPE_MAP = {
+    "TEACHER_DOCTRINE": ["COMPOSITE_TEACHER_DOCTRINE"],
+    "COMPRESSION": ["COMPOSITE_TEACHER_DOCTRINE"],
+    "COMPOSITE_TEACHER_DOCTRINE": ["COMPOSITE_TEACHER_DOCTRINE"],
+    "REFLECTION": ["COMPOSITE_TEACHER_REFLECTION"],
+    "COMPOSITE_TEACHER_REFLECTION": ["COMPOSITE_TEACHER_REFLECTION"],
 }
 
 try:
@@ -190,7 +204,7 @@ def _load_teacher_atoms(teacher_id: str) -> dict[str, list[dict]]:
 # CANONICAL.txt parser (persona atoms)
 # ---------------------------------------------------------------------------
 
-def _parse_canonical_txt(path: Path) -> list[dict]:
+def _parse_canonical_txt(path: Path, *, slot_type: Optional[str] = None) -> list[dict]:
     """Parse atoms/persona/topic/TYPE/CANONICAL.txt into list of atom dicts.
 
     Format:
@@ -201,23 +215,36 @@ def _parse_canonical_txt(path: Path) -> list[dict]:
         prose body
         ---
     """
+    from phoenix_v4.planning.scene_atom_header_parser import attach_scene_metadata
+
     if not path.exists():
         return []
     text = path.read_text(encoding="utf-8")
     blocks: list[dict] = []
     current_id = ""
+    current_header = ""
     in_body = False
     body_lines: list[str] = []
     delimiter_count = 0
+    st_upper = (slot_type or "").strip().upper()
+
+    def _flush_block() -> None:
+        nonlocal current_id, body_lines
+        if not current_id or not body_lines:
+            return
+        content = "\n".join(body_lines).strip()
+        if not content:
+            return
+        atom = {"atom_id": current_id, "content": content, "metadata": {}}
+        if st_upper == "SCENE" or current_id.upper().startswith("SCENE "):
+            atom = attach_scene_metadata(atom, f"## {current_id}")
+        blocks.append(atom)
 
     for line in text.splitlines():
         stripped = line.strip()
         if stripped.startswith("## "):
-            # Save previous block
-            if current_id and body_lines:
-                content = "\n".join(body_lines).strip()
-                if content:
-                    blocks.append({"atom_id": current_id, "content": content})
+            _flush_block()
+            current_header = stripped
             current_id = stripped.replace("## ", "").strip()
             body_lines = []
             in_body = False
@@ -229,19 +256,53 @@ def _parse_canonical_txt(path: Path) -> list[dict]:
         elif in_body:
             body_lines.append(line)
 
-    # Last block
-    if current_id and body_lines:
-        content = "\n".join(body_lines).strip()
-        if content:
-            blocks.append({"atom_id": current_id, "content": content})
-
+    _flush_block()
     return blocks
+
+
+def _load_composite_doctrine_atoms(
+    topic_id: str,
+    repo_root: Optional[Path] = None,
+) -> dict[str, list[dict]]:
+    """Load topic-scoped composite teacher doctrine/reflection from CANONICAL.txt."""
+    topic = (topic_id or "").strip()
+    if not topic:
+        return {}
+    root = (repo_root or REPO_ROOT) / "SOURCE_OF_TRUTH" / "composite_doctrine" / topic
+    atoms: dict[str, list[dict]] = {}
+    doctrine_blocks = _parse_canonical_txt(root / "CANONICAL.txt")
+    if doctrine_blocks:
+        atoms["COMPOSITE_TEACHER_DOCTRINE"] = doctrine_blocks
+    reflection_blocks = _parse_canonical_txt(root / "REFLECTION" / "CANONICAL.txt")
+    if reflection_blocks:
+        atoms["COMPOSITE_TEACHER_REFLECTION"] = reflection_blocks
+    if atoms:
+        logger.info(
+            "Loaded composite doctrine types %s for topic '%s'",
+            list(atoms.keys()),
+            topic,
+        )
+    return atoms
+
+
+def _pick_composite_pool(
+    composite_atoms: dict[str, list[dict]],
+    slot_type: str,
+) -> list[dict]:
+    """First non-empty composite pool for a beatmap/registry slot type."""
+    st = slot_type.strip().upper()
+    for key in _COMPOSITE_TYPE_MAP.get(st, [st]):
+        pool = composite_atoms.get(key, [])
+        if pool:
+            return pool
+    return []
 
 
 _KNOWN_SLOT_DIRS = frozenset({
     "HOOK", "SCENE", "STORY", "REFLECTION", "EXERCISE", "INTEGRATION",
     "TEACHER_DOCTRINE", "COMPRESSION", "PERMISSION", "PIVOT",
     "TAKEAWAY", "THREAD",
+    "ANGLE_DEFINITION", "ANGLE_CALLBACK",
 })
 
 
@@ -304,7 +365,7 @@ def _load_persona_atoms(
         if not canonical.exists():
             continue
         slot_type_upper = sub.name.upper()
-        parsed = _parse_canonical_txt(canonical)
+        parsed = _parse_canonical_txt(canonical, slot_type=slot_type_upper)
         if not parsed:
             continue
         if slot_type_upper in _KNOWN_SLOT_DIRS:

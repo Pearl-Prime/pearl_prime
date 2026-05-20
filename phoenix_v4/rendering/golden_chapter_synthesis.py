@@ -637,7 +637,7 @@ def _bucket_slots(slots: list["EnrichedSlot"]) -> dict[str, list[str]]:
     core: dict[str, list[str]] = {k: [] for k in (
         "HOOK", "SCENE", "STORY", "REFLECTION", "PIVOT", "EXERCISE",
         "INTEGRATION", "THREAD", "TAKEAWAY", "PERMISSION", "COMPRESSION",
-        "TEACHER_DOCTRINE",
+        "TEACHER_DOCTRINE", "ANGLE_DEFINITION", "ANGLE_CALLBACK",
     )}
     depth_story: list[str] = []
     depth_mech: list[str] = []
@@ -725,6 +725,9 @@ def build_virtual_slot_streams(
     slots: list["EnrichedSlot"],
     *,
     chapter_index0: int = 0,
+    angle_id: str = "",
+    angle_layer: Optional[int] = None,
+    topic_id: str = "",
 ) -> tuple[list[str], list[str]]:
     """
     Map enriched beatmap slots → parallel (slot_types, slot_proses) for
@@ -814,6 +817,17 @@ def build_virtual_slot_streams(
     doctrine = _first_or_join(
         b["TEACHER_DOCTRINE"], chapter_index=chapter_index0, bridge_fn=_mk_bridge("TEACHER_DOCTRINE"),
     )
+    # OPD-116/117: no within-slot bridges inside angle definition (authored as one unit).
+    angle_definition = (
+        "\n\n".join(x for x in b["ANGLE_DEFINITION"] if x.strip())
+        if b["ANGLE_DEFINITION"]
+        else ""
+    )
+    angle_callback_raw = (
+        "\n\n".join(x for x in b["ANGLE_CALLBACK"] if x.strip())
+        if b["ANGLE_CALLBACK"]
+        else ""
+    )
     # Sprint-1 word-floor fix: route TEACHER_DOCTRINE to COMPRESSION so it is
     # appended verbatim by compose_chapter_prose (compose_chapter_prose never adds
     # doctrine from slot_map to parts — TEACHER_DOCTRINE was silently discarded).
@@ -823,8 +837,26 @@ def build_virtual_slot_streams(
     # Order matches compose_chapter_prose consumption (opening → … → thread).
     types_: list[str] = []
     proses: list[str] = []
+    angle_callback = ""
+    if angle_callback_raw and angle_id and angle_layer:
+        try:
+            from phoenix_v4.rendering.chapter_composer import prefix_angle_callback_prose
+
+            angle_callback = prefix_angle_callback_prose(
+                angle_callback_raw,
+                angle_id=angle_id,
+                layer=int(angle_layer),
+                topic_id=topic_id,
+            )
+        except Exception:
+            angle_callback = angle_callback_raw
+    elif angle_callback_raw:
+        angle_callback = angle_callback_raw
+
     pairs = [
         ("HOOK", hook),
+        ("ANGLE_CALLBACK", angle_callback),
+        ("ANGLE_DEFINITION", angle_definition),
         ("SCENE", scene),
         ("REFLECTION", reflection),
         ("STORY", story),
@@ -1061,6 +1093,8 @@ def compose_golden_spine_chapter(
     governance_report: Optional[dict[str, Any]] = None,
     mechanism_memory: Any = None,
     exercise_memory: Any = None,
+    angle_id: str = "",
+    angle_layer_by_chapter: Optional[dict[int, int]] = None,
 ) -> tuple[str, dict[str, Any]]:
     """
     Returns (chapter body without ``Chapter N`` heading, synthesis_meta).
@@ -1074,7 +1108,15 @@ def compose_golden_spine_chapter(
     )
     from phoenix_v4.rendering.chapter_composer import compose_chapter_prose
 
-    slot_types, slot_proses = build_virtual_slot_streams(chapter.slots, chapter_index0=chapter_index0)
+    _ch_num = int(getattr(chapter, "number", chapter_index0 + 1))
+    _angle_layer = (angle_layer_by_chapter or {}).get(_ch_num)
+    slot_types, slot_proses = build_virtual_slot_streams(
+        chapter.slots,
+        chapter_index0=chapter_index0,
+        angle_id=angle_id or "",
+        angle_layer=_angle_layer,
+        topic_id=topic_id,
+    )
     meta: dict[str, Any] = {
         "virtual_slot_types": slot_types,
         "beat_model": list(GOLDEN_BEATS),

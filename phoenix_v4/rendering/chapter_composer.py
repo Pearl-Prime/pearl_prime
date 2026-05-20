@@ -1438,6 +1438,128 @@ def _bridge_within_slot(
 
 
 # ---------------------------------------------------------------------------
+# OPD-114 Phase B: scene-depth ladder + archetype_jump bridges
+# ---------------------------------------------------------------------------
+
+_SCENE_ARCHETYPE_CAP = 2
+_ARCHETYPE_JUMP_SHAPE = "archetype_jump"
+
+
+def _first_noun_phrase(text: str) -> str:
+    """Extract a short opening phrase from scene prose for bridge templates."""
+    raw = (text or "").strip()
+    if not raw:
+        return "this"
+    skip = frozenset({"the", "a", "an", "your", "you", "it", "there", "this", "that"})
+    words = re.findall(r"[A-Za-z']+", raw)
+    picked: list[str] = []
+    for w in words:
+        low = w.lower()
+        if low in skip and not picked:
+            continue
+        picked.append(w)
+        if len(picked) >= 4:
+            break
+    return " ".join(picked) if picked else "this"
+
+
+def _bridge_archetype_jump(
+    next_atom: str,
+    *,
+    chapter_index: int = 0,
+    atom_pair_index: int = 0,
+    rotation_state: "WithinSlotRotationState | None" = None,
+) -> str:
+    """Mandatory bridge between SCENE atoms from different archetypes (OPD-114)."""
+    payload = _load_within_slot_bridge_families()
+    families = payload.get("slot_families") or {}
+    family = families.get("SCENE") or {}
+    entries = family.get(_ARCHETYPE_JUMP_SHAPE) or []
+    if not isinstance(entries, list) or not entries:
+        return ""
+
+    seed_root = f"opd114|{int(chapter_index)}|SCENE|archetype_jump|{int(atom_pair_index)}"
+    raw_variants: list[tuple[str, int]] = []
+    for v_idx, entry in enumerate(entries):
+        if not isinstance(entry, dict):
+            continue
+        text = str(entry.get("text") or "").strip()
+        if not text:
+            continue
+        rank_seed = f"{seed_root}|{v_idx}|{text}"
+        rank_digest = hashlib.sha256(rank_seed.encode("utf-8")).digest()
+        raw_variants.append((text, int.from_bytes(rank_digest[:8], "big")))
+
+    if not raw_variants:
+        return ""
+
+    if rotation_state is not None:
+        raw_variants.sort(
+            key=lambda v: (
+                rotation_state.book_count(f"SCENE|{_ARCHETYPE_JUMP_SHAPE}|{v[0]}"),
+                v[1],
+            )
+        )
+        chosen = raw_variants[0][0]
+        rotation_state.register(f"SCENE|{_ARCHETYPE_JUMP_SHAPE}|{chosen}")
+    else:
+        digest = hashlib.sha256(seed_root.encode("utf-8")).digest()
+        chosen = raw_variants[int.from_bytes(digest[:8], "big") % len(raw_variants)][0]
+
+    fill = _first_noun_phrase(next_atom)
+    out = chosen.replace("___", fill)
+    if _LOCALE_TLS:
+        return _gt(out, locale=_LOCALE_TLS)
+    return out
+
+
+def compose_scene_ladder_blocks(
+    blocks: list[tuple[str, Optional[str]]],
+    *,
+    chapter_index: int = 0,
+    rotation_state: "WithinSlotRotationState | None" = None,
+) -> str:
+    """Join SCENE ladder atoms: no bridges within one archetype; archetype_jump across."""
+    cleaned = [(t.strip(), a) for t, a in blocks if (t or "").strip()]
+    if not cleaned:
+        return ""
+    if len(cleaned) == 1:
+        return cleaned[0][0]
+
+    groups: list[tuple[Optional[str], list[str]]] = []
+    for text, arch in cleaned:
+        if groups and groups[-1][0] == arch:
+            groups[-1][1].append(text)
+        else:
+            groups.append((arch, [text]))
+
+    distinct = {g[0] for g in groups}
+    if len(distinct) > _SCENE_ARCHETYPE_CAP:
+        raise ValueError(
+            f"chapter {chapter_index}: SCENE has {len(distinct)} archetypes; "
+            f"max {_SCENE_ARCHETYPE_CAP} per chapter"
+        )
+
+    if len(groups) == 1:
+        return "\n\n".join(groups[0][1])
+
+    out_parts: list[str] = []
+    for gi, (_arch, texts) in enumerate(groups):
+        out_parts.append("\n\n".join(texts))
+        if gi < len(groups) - 1:
+            next_open = groups[gi + 1][1][0]
+            bridge = _bridge_archetype_jump(
+                next_open,
+                chapter_index=chapter_index,
+                atom_pair_index=gi,
+                rotation_state=rotation_state,
+            )
+            if bridge:
+                out_parts.append(bridge)
+    return "\n\n".join(out_parts)
+
+
+# ---------------------------------------------------------------------------
 # Slot transforms
 # ---------------------------------------------------------------------------
 
@@ -1959,6 +2081,36 @@ def _append_anxiety_chapter_one_scan_practice(
     )
 
 
+def angle_callback_memory_line(prior_assertion: str) -> str:
+    """One-sentence recall of the prior journey layer (OPD-116/117)."""
+    ass = (prior_assertion or "").strip()
+    if not ass or ass.upper() == "TODO" or ass.startswith("TODO:"):
+        return ""
+    core = ass.rstrip(".")
+    return f"Earlier I said {core}. Here is what was hidden in that."
+
+
+def prefix_angle_callback_prose(
+    body: str,
+    *,
+    angle_id: str,
+    layer: int,
+    topic_id: str = "",
+) -> str:
+    """Prepend memory-line to callback body using registry layer_progression."""
+    text = (body or "").strip()
+    if not text or layer <= 1:
+        return text
+    from phoenix_v4.planning.angle_journey import merge_angle_journey, prior_layer_assertion
+
+    journey = merge_angle_journey(angle_id)
+    prior = prior_layer_assertion(layer, list(journey.get("layer_progression") or []))
+    prefix = angle_callback_memory_line(prior)
+    if not prefix:
+        return text
+    return f"{prefix}\n\n{text}"
+
+
 def compose_chapter_prose(
     slot_types: list[str],
     slot_proses: list[str],
@@ -2008,6 +2160,8 @@ def compose_chapter_prose(
 
     # Extract slot content
     hook = slot_map.get("HOOK", "")
+    angle_definition = slot_map.get("ANGLE_DEFINITION", "")
+    angle_callback = slot_map.get("ANGLE_CALLBACK", "")
     scene = _polish_scene(slot_map.get("SCENE", ""))
     story_raw = slot_map.get("STORY", "")
     pivot_raw = slot_map.get("PIVOT", "")
@@ -2041,6 +2195,14 @@ def compose_chapter_prose(
     opening = hook if (hook and not _is_placeholder_text(hook)) else scene
     if opening and not _is_placeholder_text(opening):
         parts.append(opening)
+
+    # 1a. OPD-116/117 ANGLE_CALLBACK immediately after HOOK (memory-line already in prose if prefixed upstream)
+    if angle_callback and not _is_placeholder_text(angle_callback):
+        parts.append(angle_callback.strip())
+
+    # 1b. OPD-116/117 ANGLE_DEFINITION — single coherent block, no within-slot bridges
+    if angle_definition and not _is_placeholder_text(angle_definition):
+        parts.append(angle_definition.strip())
 
     # 2. SCENE (if both HOOK and SCENE exist, scene follows hook)
     if hook and scene and not _is_placeholder_text(hook) and not _is_placeholder_text(scene) and scene != opening:
@@ -2694,6 +2856,7 @@ def compose_from_enriched_book(
 
         ch_compose = replace(ch, slots=slots_out)
         book_seed = f"{enriched.persona_id}:{enriched.topic}:{enriched.runtime_format}:ch{ch_idx}"
+        _spine_ctx = enriched.spine_context or {}
         ch_body, _syn_meta = compose_golden_spine_chapter(
             ch_compose,
             chapter_index0=ch_idx,
@@ -2705,6 +2868,8 @@ def compose_from_enriched_book(
             governance_report=report,
             mechanism_memory=mechanism_memory,
             exercise_memory=exercise_memory,
+            angle_id=str(_spine_ctx.get("angle_id") or ""),
+            angle_layer_by_chapter=dict(_spine_ctx.get("angle_layer_by_chapter") or {}),
         )
         ch_body = post_compose_sanitize_chapter(
             ch_body,

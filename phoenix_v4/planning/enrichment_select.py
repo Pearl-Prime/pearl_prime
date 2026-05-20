@@ -36,15 +36,26 @@ from phoenix_v4.planning.registry_resolver import (
     _TEACHER_OVERLAY_TYPES,
     _PERSONA_OVERLAY_TYPES,
     _deterministic_index,
+    _load_composite_doctrine_atoms,
     _load_persona_atoms,
     _load_teacher_atoms,
     _load_yaml,
+    _pick_composite_pool,
     load_registry,
 )
 
 logger = logging.getLogger(__name__)
 
 REPO_ROOT = Path(__file__).resolve().parent.parent.parent
+
+# OPD-115 Phase B: composite teacher doctrine/reflection (regular mode only).
+_COMPOSITE_DOCTRINE_SLOT_TYPES = frozenset({
+    "TEACHER_DOCTRINE", "COMPRESSION", "COMPOSITE_TEACHER_DOCTRINE",
+})
+_COMPOSITE_REFLECTION_SLOT_TYPES = frozenset({
+    "REFLECTION", "COMPOSITE_TEACHER_REFLECTION",
+})
+_COMPOSITE_SLOT_TYPES = _COMPOSITE_DOCTRINE_SLOT_TYPES | _COMPOSITE_REFLECTION_SLOT_TYPES
 
 # ---------------------------------------------------------------------------
 # ACT-010: Doctrine quarantine — pre-selection filter for somatic_first frame
@@ -210,6 +221,88 @@ class PersonaPoolRotationState:
             ).hexdigest()
             return (self._book_usage.get(aid, 0), tiebreak)
         return sorted(range(n), key=_key)
+
+
+# ---------------------------------------------------------------------------
+# OPD-114 Phase B: scene-depth ladder (one anchor archetype per chapter)
+# ---------------------------------------------------------------------------
+
+
+class SceneArchetypeRotationState:
+    """Book-level usage counter for scene archetype ids (least-used-first)."""
+
+    def __init__(self) -> None:
+        self._usage: Dict[str, int] = {}
+
+    def pick_archetype(
+        self,
+        archetype_keys: List[str],
+        chapter_id: int,
+        seed: str,
+    ) -> str:
+        if not archetype_keys:
+            return "__null__"
+        if len(archetype_keys) == 1:
+            return archetype_keys[0]
+
+        def _key(arch: str) -> Tuple[int, str]:
+            tie = hashlib.sha256(
+                f"{seed}:scene_arch:ch{chapter_id}:{arch}".encode("utf-8")
+            ).hexdigest()
+            return (self._usage.get(arch, 0), tie)
+
+        chosen = sorted(archetype_keys, key=_key)[0]
+        self._usage[chosen] = self._usage.get(chosen, 0) + 1
+        return chosen
+
+
+def pick_scene_ladder(
+    chapter_id: int,
+    archetype_pool: List[Dict[str, Any]],
+    story_depth: int,
+    rotation_state: SceneArchetypeRotationState,
+    *,
+    seed: str = "",
+    planner_warnings: Optional[List[str]] = None,
+) -> List["SceneAtom"]:
+    """Pick depth-ordered SCENE atoms L1..story_depth for one anchor archetype."""
+    from phoenix_v4.planning.scene_atom_header_parser import SceneAtom, scene_atom_from_dict
+
+    warns = planner_warnings if planner_warnings is not None else []
+    depth_target = max(1, int(story_depth))
+    atoms = [scene_atom_from_dict(a) for a in archetype_pool if str(a.get("content") or "").strip()]
+    if not atoms:
+        return []
+
+    by_arch: Dict[str, List[SceneAtom]] = defaultdict(list)
+    for atom in atoms:
+        key = atom.archetype if atom.archetype is not None else "__null__"
+        by_arch[key].append(atom)
+
+    for group in by_arch.values():
+        group.sort(key=lambda a: (a.depth_level, a.atom_id))
+
+    anchor = rotation_state.pick_archetype(sorted(by_arch.keys()), chapter_id, seed)
+    pool = by_arch.get(anchor) or atoms
+    by_level = {a.depth_level: a for a in pool}
+    max_level = max(by_level.keys()) if by_level else 1
+
+    ladder: List[SceneAtom] = []
+    for level in range(1, depth_target + 1):
+        if level in by_level:
+            ladder.append(by_level[level])
+        else:
+            break
+
+    if len(ladder) < depth_target:
+        warns.append(
+            f"chapter {chapter_id}: scene archetype {anchor!r} has {max_level} depth level(s), "
+            f"story_depth={depth_target}; scene ladder fallback to available levels"
+        )
+        if not ladder and max_level in by_level:
+            ladder = [by_level[max_level]]
+
+    return ladder
 
 
 # ---------------------------------------------------------------------------
@@ -482,6 +575,39 @@ def _pick_teacher_pool(teacher_atoms: Dict[str, List[dict]], slot_type: str) -> 
         if pool:
             return pool
     return []
+
+
+def _try_composite_content(
+    composite_atoms: Dict[str, List[dict]],
+    slot_type: str,
+    seed_key: str,
+    *,
+    topic_id: str = "",
+    persona_id: str = "",
+    book_frame: str = "somatic_first",
+) -> Optional[Tuple[str, str, int, Dict[str, Any]]]:
+    """Regular mode: topic composite doctrine/reflection before persona pool."""
+    pool = _pick_composite_pool(composite_atoms, slot_type)
+    pool = [
+        a
+        for a in pool
+        if not _is_doctrine_quarantined(str(a.get("content") or ""), book_frame)
+        and atom_passes_book_governance(
+            a.get("metadata"),
+            topic_id=topic_id,
+            persona_id=persona_id,
+            book_frame=book_frame,
+        )
+    ]
+    if not pool:
+        return None
+    idx = _deterministic_index(f"{seed_key}:composite", len(pool))
+    atom = pool[idx]
+    content = str(atom.get("content") or "").strip()
+    if not content:
+        return None
+    aid = str(atom.get("atom_id") or f"composite_{idx}")
+    return content, aid, idx, dict(atom.get("metadata") or {})
 
 
 def _try_teacher_content(
@@ -808,6 +934,130 @@ def _is_practice_atom(atom: dict, *, atom_id: str = "", source_path: str = "") -
 def _filter_practice_pool(pool: List[dict]) -> List[dict]:
     """Keep only atoms whose content is instruction-with-steps (not teaching essay)."""
     return [a for a in (pool or []) if _is_practice_atom(a)]
+
+
+_ANGLE_FALLBACK_CACHE: Optional[dict[str, Any]] = None
+
+
+def _load_angle_journey_fallback() -> dict[str, Any]:
+    global _ANGLE_FALLBACK_CACHE
+    if _ANGLE_FALLBACK_CACHE is not None:
+        return _ANGLE_FALLBACK_CACHE
+    path = REPO_ROOT / "config" / "planning" / "angle_journey_fallback.yaml"
+    _ANGLE_FALLBACK_CACHE = _load_yaml(path) if path.exists() else {}
+    return _ANGLE_FALLBACK_CACHE
+
+
+def _angle_entry_meta(angle_id: str) -> dict[str, Any]:
+    from phoenix_v4.planning.angle_journey import merge_angle_journey
+    from phoenix_v4.planning.angle_resolver import get_angle_context, load_angle_registry
+
+    reg = load_angle_registry()
+    leaf = get_angle_context(angle_id) or {}
+    journey = merge_angle_journey(angle_id, reg)
+    return {
+        "display_name": str(leaf.get("display_name") or angle_id),
+        "core_frame": str(leaf.get("core_frame") or ""),
+        "analogy_lens": str(journey.get("analogy_lens") or ""),
+        "layer_progression": list(journey.get("layer_progression") or []),
+    }
+
+
+def _read_text_atom(path: Path) -> str:
+    if not path.exists():
+        return ""
+    return path.read_text(encoding="utf-8").strip()
+
+
+def _try_angle_definition(
+    *,
+    persona_id: str,
+    topic_id: str,
+    angle_id: str,
+    repo_root: Path,
+    fallback_warnings: List[str],
+) -> Optional[Tuple[str, str, str]]:
+    aid = (angle_id or "").strip()
+    if not aid or not persona_id or not topic_id:
+        return None
+    base = repo_root / "atoms" / persona_id / topic_id / "ANGLE_DEFINITION" / aid / "CANONICAL.txt"
+    body = _read_text_atom(base)
+    if body:
+        return body, "angle_atom", f"angle_def:{aid}"
+    meta = _angle_entry_meta(aid)
+    lens = meta["analogy_lens"]
+    from phoenix_v4.planning.angle_journey import family_default_angle_id
+
+    fam = family_default_angle_id(lens) if lens else None
+    if fam and fam != aid:
+        fam_path = repo_root / "atoms" / persona_id / topic_id / "ANGLE_DEFINITION" / fam / "CANONICAL.txt"
+        body = _read_text_atom(fam_path)
+        if body:
+            fallback_warnings.append(
+                f"ANGLE_DEFINITION: family default {fam!r} for {aid!r}"
+            )
+            return body, "angle_atom_family", f"angle_def_family:{fam}"
+    fb = (_load_angle_journey_fallback().get("generic") or {}).get("angle_definition") or ""
+    tpl = str(fb).format(
+        display_name=meta["display_name"],
+        analogy_lens=lens or "progressive_compression",
+        core_frame=meta["core_frame"] or meta["display_name"],
+    ).strip()
+    fallback_warnings.append(
+        f"ANGLE_DEFINITION: planner-template fallback for {aid!r}"
+    )
+    return tpl, "angle_template", f"angle_def_tpl:{aid}"
+
+
+def _try_angle_callback(
+    *,
+    persona_id: str,
+    topic_id: str,
+    angle_id: str,
+    layer: int,
+    repo_root: Path,
+    fallback_warnings: List[str],
+) -> Optional[Tuple[str, str, str]]:
+    aid = (angle_id or "").strip()
+    if not aid or not persona_id or not topic_id or layer < 1:
+        return None
+    path = repo_root / "atoms" / persona_id / topic_id / "ANGLE_CALLBACK" / aid / f"level_{layer}.yaml"
+    if path.exists():
+        data = _load_yaml(path)
+        if isinstance(data, dict):
+            body = str(data.get("body") or data.get("content") or "").strip()
+            if body:
+                return body, "angle_atom", f"angle_cb:{aid}:L{layer}"
+    meta = _angle_entry_meta(aid)
+    lens = meta["analogy_lens"]
+    from phoenix_v4.planning.angle_journey import family_default_angle_id
+
+    fam = family_default_angle_id(lens) if lens else None
+    if fam and fam != aid:
+        fam_path = repo_root / "atoms" / persona_id / topic_id / "ANGLE_CALLBACK" / fam / f"level_{layer}.yaml"
+        if fam_path.exists():
+            data = _load_yaml(fam_path)
+            if isinstance(data, dict):
+                body = str(data.get("body") or data.get("content") or "").strip()
+                if body:
+                    fallback_warnings.append(
+                        f"ANGLE_CALLBACK: family default {fam!r} L{layer}"
+                    )
+                    return body, "angle_atom_family", f"angle_cb_family:{fam}:L{layer}"
+    prior, phase = "", ""
+    for row in meta["layer_progression"]:
+        if isinstance(row, dict) and int(row.get("layer") or 0) == layer:
+            phase = str(row.get("phase") or "")
+        if isinstance(row, dict) and int(row.get("layer") or 0) == layer - 1:
+            prior = str(row.get("assertion") or "")
+    fb = (_load_angle_journey_fallback().get("generic") or {}).get("angle_callback") or ""
+    tpl = str(fb).format(
+        layer=layer,
+        phase=phase or f"layer_{layer}",
+        prior_assertion=prior or "(opening definition)",
+    ).strip()
+    fallback_warnings.append(f"ANGLE_CALLBACK: planner-template fallback L{layer} for {aid!r}")
+    return tpl, "angle_template", f"angle_cb_tpl:{aid}:L{layer}"
 
 
 def _try_practice_library(
@@ -1284,6 +1534,9 @@ def select_enrichment(
     reg = load_registry(topic)
     sections_root = reg.get("sections") or {}
     teacher_atoms: Dict[str, List[dict]] = _load_teacher_atoms(tid) if tid else {}
+    composite_atoms: Dict[str, List[dict]] = (
+        _load_composite_doctrine_atoms(topic, repo_root=root) if not tid else {}
+    )
     pid = (persona_id or "").strip()
     locale = request.locale
     rf_bm = (bm.runtime_format or "").strip()
@@ -1349,6 +1602,9 @@ def select_enrichment(
 
     enriched_chapters: List[EnrichedChapter] = []
     plan_context = dict(request.spine_context or {})
+    _angle_id_enrich = str(plan_context.get("angle_id") or "").strip()
+    _angle_layer_by_ch = dict(plan_context.get("angle_layer_by_chapter") or {})
+    _angle_fallback_warnings: List[str] = list(plan_context.get("angle_journey_warnings") or [])
 
     # ACT-007: collision_family dedup — track families used in last 2 chapters
     # Each entry is a list of collision_family values for that chapter (0-based index).
@@ -1366,6 +1622,10 @@ def select_enrichment(
     # picks across the available pool instead of hammering the same 3-5 atoms
     # across all 96 SCENE-class slots. See `PersonaPoolRotationState` doc above.
     _persona_rotation = PersonaPoolRotationState()
+    _scene_arch_rotation = SceneArchetypeRotationState()
+    _scene_ladder_done: set[int] = set()
+    _chapter_story_depths_raw = list(_spine.get("chapter_story_depths") or [])
+    _planner_warnings_mut: List[str] = list(_spine.get("chapter_planner_warnings") or [])
 
     # Section packet audit: per-slot source detail (written to enrichment_audit at end).
     _slot_audit: List[Dict[str, Any]] = []
@@ -1406,6 +1666,33 @@ def select_enrichment(
             persona_primary_idx: Optional[int] = None
             teacher_expand_pool: Optional[List[dict]] = None
             teacher_primary_idx: Optional[int] = None
+
+            if not content and _angle_id_enrich and stype == "ANGLE_DEFINITION":
+                _ad = _try_angle_definition(
+                    persona_id=pid,
+                    topic_id=topic,
+                    angle_id=_angle_id_enrich,
+                    repo_root=root,
+                    fallback_warnings=_angle_fallback_warnings,
+                )
+                if _ad:
+                    content, source, source_id = _ad[0], _ad[1], _ad[2]
+                    atom_id = source_id
+            elif not content and _angle_id_enrich and stype == "ANGLE_CALLBACK":
+                _layer = _angle_layer_by_ch.get(bm_ch.number)
+                if _layer:
+                    _ac = _try_angle_callback(
+                        persona_id=pid,
+                        topic_id=topic,
+                        angle_id=_angle_id_enrich,
+                        layer=int(_layer),
+                        repo_root=root,
+                        fallback_warnings=_angle_fallback_warnings,
+                    )
+                    if _ac:
+                        content, source, source_id = _ac[0], _ac[1], _ac[2]
+                        atom_id = source_id
+                        match_scores["angle_layer"] = int(_layer)
 
             # 0) Story schedule: named-character arcs replace SCENE/STORY slots at section indices 2/5/9.
             # section_index is 1-based (slot_i + 1). StorySchedule keys: (chapter_number, section_index).
@@ -1532,7 +1819,27 @@ def select_enrichment(
                             audit_counts["slots_from_practice_library"] += 1
                 else:
                     # Non-EXERCISE: stack persona + registry + teacher
-                    # 1) persona
+                    _composite_filled = False
+                    # 0) composite doctrine/reflection (regular mode; OPD-115 Phase B)
+                    if not tid and composite_atoms and stype in _COMPOSITE_SLOT_TYPES:
+                        _cx_hit = _try_composite_content(
+                            composite_atoms,
+                            stype,
+                            seed_key,
+                            topic_id=topic,
+                            persona_id=persona_id,
+                            book_frame=_frame,
+                        )
+                        if _cx_hit:
+                            _add_pieces.append(_cx_hit[0])
+                            _add_sources.append("composite_doctrine")
+                            _add_ids.append(_cx_hit[1])
+                            _composite_filled = True
+                            audit_counts["slots_from_composite"] = (
+                                audit_counts.get("slots_from_composite", 0) + 1
+                            )
+
+                    # 1) persona (skipped when composite pool supplied content)
                     _ap_pool = [
                         _a for _a in (persona_atoms.get(stype) or [])
                         if not _is_doctrine_quarantined(str(_a.get("content") or ""), _frame)
@@ -1543,28 +1850,57 @@ def select_enrichment(
                             book_frame=_frame,
                         )
                     ]
-                    if _ap_pool:
-                        # OPD-109 Phase 3: rotation-aware least-used pick. Falls
-                        # back to hash-anchor (`_deterministic_index`) for the
-                        # tiebreak so seed-determinism is preserved.
-                        _ap_idx = _persona_rotation.pick_index(_ap_pool, f"{seed_key}:persona")
-                        _ap_atom = _ap_pool[_ap_idx]
-                        _ap_content = str(_ap_atom.get("content") or "").strip()
-                        if _ap_content:
-                            _add_pieces.append(_ap_content)
-                            _add_sources.append("persona_atom")
-                            _ap_aid = str(_ap_atom.get("atom_id") or f"persona_{_ap_idx}")
-                            _add_ids.append(_ap_aid)
-                            audit_counts["slots_from_persona"] += 1
-                            # OPD-109 Phase 3: expose pool + primary index for
-                            # the within-slot expansion path (lines 1521+). The
-                            # previous wiring left these as None, so the slot
-                            # never pulled additional persona atoms, fell short
-                            # of `target_words`, and the rendered book stayed
-                            # 24-200w per slot vs the 1200w target.
-                            persona_expand_pool = _ap_pool
-                            persona_primary_idx = _ap_idx
-                            _persona_rotation.register(_ap_aid)
+                    if _ap_pool and not _composite_filled:
+                        if (
+                            stype == "SCENE"
+                            and chapter_index0 not in _scene_ladder_done
+                        ):
+                            from phoenix_v4.planning.chapter_planner import story_depth_for_runtime
+
+                            if chapter_index0 < len(_chapter_story_depths_raw):
+                                _story_d = int(str(_chapter_story_depths_raw[chapter_index0]))
+                            else:
+                                _story_d = story_depth_for_runtime(rf_bm)
+                            _ladder = pick_scene_ladder(
+                                bm_ch.number,
+                                _ap_pool,
+                                _story_d,
+                                _scene_arch_rotation,
+                                seed=seed,
+                                planner_warnings=_planner_warnings_mut,
+                            )
+                            _scene_ladder_done.add(chapter_index0)
+                            if _ladder:
+                                _add_pieces.append(
+                                    "\n\n".join(a.content for a in _ladder if a.content)
+                                )
+                                _add_sources.append("persona_atom")
+                                _ladder_ids = [a.atom_id for a in _ladder if a.atom_id]
+                                _add_ids.append("+".join(_ladder_ids) or "scene_ladder")
+                                match_scores["scene_ladder"] = [
+                                    {"archetype": a.archetype, "depth_level": a.depth_level}
+                                    for a in _ladder
+                                ]
+                                audit_counts["slots_from_persona"] += 1
+                                for a in _ladder:
+                                    if a.atom_id:
+                                        _persona_rotation.register(a.atom_id)
+                        else:
+                            # OPD-109 Phase 3: rotation-aware least-used pick. Falls
+                            # back to hash-anchor (`_deterministic_index`) for the
+                            # tiebreak so seed-determinism is preserved.
+                            _ap_idx = _persona_rotation.pick_index(_ap_pool, f"{seed_key}:persona")
+                            _ap_atom = _ap_pool[_ap_idx]
+                            _ap_content = str(_ap_atom.get("content") or "").strip()
+                            if _ap_content:
+                                _add_pieces.append(_ap_content)
+                                _add_sources.append("persona_atom")
+                                _ap_aid = str(_ap_atom.get("atom_id") or f"persona_{_ap_idx}")
+                                _add_ids.append(_ap_aid)
+                                audit_counts["slots_from_persona"] += 1
+                                persona_expand_pool = _ap_pool
+                                persona_primary_idx = _ap_idx
+                                _persona_rotation.register(_ap_aid)
 
                     # 2) registry (baseline)
                     _ar_hit = _try_registry_variant(reg_lists, stype, reg_counters, seed_key)
@@ -1838,7 +2174,15 @@ def select_enrichment(
             }
             for (ch_i, sec_i), slot in sorted(_story_schedule.assignments.items())
         ],
+        "angle_journey_fallback_warnings": _angle_fallback_warnings,
+        "angle_id": _angle_id_enrich,
+        "angle_layer_by_chapter": _angle_layer_by_ch,
     }
+
+    _out_spine = dict(request.spine_context or {})
+    if _planner_warnings_mut:
+        _existing_warns = list(_out_spine.get("chapter_planner_warnings") or [])
+        _out_spine["chapter_planner_warnings"] = _existing_warns + _planner_warnings_mut
 
     return EnrichedBook(
         schema_version=1,
@@ -1850,7 +2194,7 @@ def select_enrichment(
         chapters=enriched_chapters,
         total_words=total_words,
         enrichment_audit=enrichment_audit,
-        spine_context=dict(request.spine_context or {}),
+        spine_context=_out_spine,
         locale=locale,
     )
 

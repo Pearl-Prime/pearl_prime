@@ -104,10 +104,8 @@ def main() -> int:
         if role_share >= 0.40:
             failures.append(f"emotional_role_sig density {role_share:.0%} >= 40%")
 
-    if len(angle_ids_non_null) >= 2:
-        angle_share, _ = mode_share(angle_ids_non_null)
-        if angle_share >= 0.50:
-            failures.append(f"angle_id density {angle_share:.0%} >= 50% (count non-null only)")
+    # OPD-116/117: intentional angle-journey waves may share one angle_id across plans.
+    # Same-angle density is no longer a wave FAIL (book-level journey gate owns coherence).
 
     # DEV SPEC 2: compression structure diversity (only when plans use compression)
     compression_pos: List[str] = []
