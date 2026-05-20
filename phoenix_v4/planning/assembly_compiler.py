@@ -760,6 +760,8 @@ def compile_plan(
         json.dumps({"book_spec": book_spec, "format_plan": format_plan, "arc": arc_raw}, sort_keys=True).encode()
     ).hexdigest()[:24]
 
+    _angle_id = book_spec.get("angle_id") if isinstance(book_spec, dict) else getattr(book_spec, "angle_id", None)
+
     # Chapter planner: archetype/weight planning (non-uniform slot application).
     chapter_archetypes_out: Optional[list[str]] = None
     chapter_exercise_modes_out: Optional[list[str]] = None
@@ -769,6 +771,11 @@ def compile_plan(
     chapter_bestseller_structures_out: Optional[list[str]] = None
     try:
         from phoenix_v4.planning.chapter_planner import plan_chapters
+        _runtime_fmt = (
+            format_plan.get("runtime_format")
+            or book_spec.get("runtime_format")
+            or book_spec.get("runtime_format_id")
+        )
         chapter_plan = plan_chapters(
             slot_definitions=slot_definitions,
             chapter_count=chapter_count,
@@ -776,6 +783,8 @@ def compile_plan(
             emotional_role_sequence=emotional_role_sequence if isinstance(emotional_role_sequence, list) else None,
             book_size=(format_plan.get("book_size") or book_spec.get("book_size")),
             enforce_role_distribution=bool(format_plan.get("enforce_arc_role_distribution") or False),
+            angle_id=_angle_id,
+            runtime_format=_runtime_fmt,
         )
         slot_definitions = chapter_plan.slot_definitions
         chapter_archetypes_out = chapter_plan.chapter_archetypes
@@ -850,7 +859,6 @@ def compile_plan(
     used_semantic_families: set[str] = set()
     # Angle Integration (V4.7): chapter 1 framing bias; intro/ending variation: opening_style_id soft bias
     angle_context = None
-    _angle_id = book_spec.get("angle_id") if isinstance(book_spec, dict) else getattr(book_spec, "angle_id", None)
     if _angle_id:
         from phoenix_v4.planning.angle_resolver import get_angle_context
         angle_context = get_angle_context(_angle_id)

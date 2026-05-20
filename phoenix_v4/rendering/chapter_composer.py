@@ -174,6 +174,108 @@ def _load_within_slot_bridge_families() -> dict[str, Any]:
     return _WITHIN_SLOT_BRIDGE_CACHE
 
 
+# ---------------------------------------------------------------------------
+# OPD-112: Next-atom semantic classifier for bridge ↔ following-atom continuity
+# ---------------------------------------------------------------------------
+# When a within-slot bridge promises a particular kind of content
+# (e.g. "The teacher would put it this way."), the bridge selector must
+# refuse to emit it if the next atom is NOT a teacher-attributed teaching.
+# `_classify_atom` inspects the next-atom body for tells and returns a
+# coarse content-class label that maps onto YAML `next_atom_expectation:`.
+#
+# Categories (kept small + cheap, regex-only, no LLM):
+#   teacher_teaching, named_story, mechanism_paragraph, body_anchor,
+#   reflective_pivot, scene_vignette, practical_takeaway, any
+#
+# Defect ref: OPD-112 — bridge ↔ following-atom semantic continuity.
+
+# Substring tells (lowercased). Order matters: first hit wins, except `any`
+# which is reserved for the fallback when no specific pattern matches.
+_NEXT_ATOM_TEACHER_PATTERNS = (
+    re.compile(r"\bahjan\b", re.I),
+    re.compile(r"\b(?:the\s+)?teacher\b", re.I),
+    re.compile(r"\b(?:the\s+)?(?:tradition|lineage|teaching)\b", re.I),
+    re.compile(r"\bdharma\b", re.I),
+    re.compile(r"\bthai\s+forest\b", re.I),
+    re.compile(r"\bbuddha\b", re.I),
+    re.compile(r"\bmaster\s+[A-Z][a-z]+\b", re.I),
+)
+_NEXT_ATOM_MECHANISM_PATTERNS = (
+    re.compile(r"^\s*(?:here\s+is\s+the\s+mechanism|the\s+mechanism\s+(?:is|underneath)|what\s+this\s+means\s+is|underneath\s+the\s+(?:feeling|story|noise))", re.I),
+    re.compile(r"\bthe\s+mechanism\s+(?:is|behind|underneath)\b", re.I),
+    re.compile(r"\b(?:nervous\s+system|alarm)\s+(?:fires|treats|runs)\b", re.I),
+)
+_NEXT_ATOM_BODY_PATTERNS = (
+    re.compile(r"^\s*your\s+(?:chest|jaw|throat|shoulders?|breath|hands?|stomach|gut|face|knee|neck|spine)\b", re.I),
+    re.compile(r"^\s*(?:notice|feel|place)\s+(?:your|the)\s+(?:chest|jaw|throat|breath|hands?|shoulders?|body)\b", re.I),
+)
+_NEXT_ATOM_SCENE_PATTERNS = (
+    re.compile(r"\b(?:slack|notion|figma|jira|zoom|teams|email|inbox|standup|stand-up|sprint|kanban|laptop|monitor|airpods)\b", re.I),
+    re.compile(r"^\s*(?:at\s+\d+(?::\d+)?\s*(?:a\.?m\.?|p\.?m\.?|am|pm)|on\s+(?:monday|tuesday|wednesday|thursday|friday|saturday|sunday))", re.I),
+    re.compile(r"\b(?:meeting|commute|elevator|coffee\s+shop|office|hallway|kitchen\s+counter)\b", re.I),
+)
+_NEXT_ATOM_PRACTICAL_PATTERNS = (
+    re.compile(r"^\s*(?:try\s+this|do\s+this|here\s+is\s+(?:the\s+practice|how)|practice\s*:)", re.I),
+    re.compile(r"^\s*(?:step\s+\d|\d+\.\s)", re.I),
+    re.compile(r"^\s*(?:notice|name|breathe|place|set|write|repeat|count)\b.*\.\s*$", re.I),
+)
+_NEXT_ATOM_REFLECTIVE_PATTERNS = (
+    re.compile(r"^\s*(?:what\s+(?:if|you|the)|where\s+in\s+your|can\s+you\s+name)\b", re.I),
+    re.compile(r"\?\s*$", re.M),
+)
+_NAMED_STORY_PATTERN = re.compile(
+    r"^\s*([A-Z][a-z]{2,}(?:\s+[A-Z][a-z]+)?)\s+(?:was|sat|opened|walked|stared|noticed|stood|looked|leaned|texted|messaged|asked|said|stopped|paused|turned|froze)\b"
+)
+
+
+def _classify_atom(atom: str) -> str:
+    """Return a coarse content-class label for an atom body.
+
+    Used by `_bridge_within_slot` to filter bridge candidates whose YAML
+    `next_atom_expectation` does not match what is actually coming next.
+    Falls back to ``"any"`` when no tell is found — that label is the
+    universal acceptor in the bridge filter.
+
+    Defect ref: OPD-112 — bridge ↔ following-atom semantic continuity.
+    """
+    body = (atom or "").strip()
+    if not body:
+        return "any"
+    head = body[:280]  # check only the opening — fastest tell
+    # Order: most specific first.
+    if any(p.search(head) for p in _NEXT_ATOM_TEACHER_PATTERNS):
+        return "teacher_teaching"
+    if any(p.search(head) for p in _NEXT_ATOM_MECHANISM_PATTERNS):
+        return "mechanism_paragraph"
+    if any(p.search(head) for p in _NEXT_ATOM_BODY_PATTERNS):
+        return "body_anchor"
+    # Named-story pattern is checked BEFORE scene patterns because a
+    # capitalized character name followed by a stative verb is a more
+    # specific tell than ambient scene props (e.g. "monitor", "laptop")
+    # that often appear inside named-character vignettes too.
+    if _NAMED_STORY_PATTERN.search(head):
+        return "named_story"
+    if any(p.search(head) for p in _NEXT_ATOM_SCENE_PATTERNS):
+        return "scene_vignette"
+    if any(p.search(head) for p in _NEXT_ATOM_PRACTICAL_PATTERNS):
+        return "practical_takeaway"
+    if any(p.search(head) for p in _NEXT_ATOM_REFLECTIVE_PATTERNS):
+        return "reflective_pivot"
+    return "any"
+
+
+_NEXT_ATOM_EXPECTATION_LABELS = frozenset({
+    "teacher_teaching",
+    "named_story",
+    "mechanism_paragraph",
+    "body_anchor",
+    "reflective_pivot",
+    "scene_vignette",
+    "practical_takeaway",
+    "any",
+})
+
+
 def _load_chapter_thesis_bank() -> dict:
     """Load config/planning/chapter_thesis_bank.yaml (cached after first call)."""
     global _CHAPTER_THESIS_BANK_CACHE
@@ -1198,23 +1300,31 @@ def _bridge_within_slot(
     seed-only path so existing callers (and the legacy test path) keep
     their behavior. Template-only — no LLM calls.
 
-    Selection (OPD-109 Phase 1.1):
+    Selection (OPD-109 Phase 1.1 + OPD-112 next-atom continuity):
       1. Pick the shape bucket by ``atom_pair_index % len(shapes)``. This
          keeps adjacent bridges inside one slot landing on different
          rhetorical shapes.
-      2. Within the chosen shape, build a candidate list excluding any
-         variant already used in THIS chapter (per-chapter no-reuse).
-      3. If ``rotation_state`` is present, sort the surviving candidates
+      2. OPD-112: classify ``next_atom`` (via :func:`_classify_atom`).
+         Keep only bridges whose YAML ``next_atom_expectation`` matches
+         that class, with ``"any"`` accepting universally. If no narrow
+         match exists, fall back to ``"any"``-tagged bridges; if both
+         buckets are empty, fall back to the full pool (so bridges
+         never go silent — backward-compat with un-annotated YAML).
+      3. Within the surviving candidates, exclude any variant already
+         used in THIS chapter (per-chapter no-reuse).
+      4. If ``rotation_state`` is present, sort the surviving candidates
          by ``(book_usage_count, seed_rank)`` — variants not yet used in
          the book come first; ties break on a SHA digest of the slot
          coordinates so the choice is reproducible.
-      4. Without ``rotation_state``, fall back to the legacy seed-only
+      5. Without ``rotation_state``, fall back to the legacy seed-only
          hash modulo, then a chapter_used filter if a per-render TLS
          state is present.
 
     Returns "" if YAML is missing or the family has no entries.
 
-    Defect ref: docs/diagnostics/OPD-109_RENDERING_LAYER_DIAGNOSIS_2026-05-18.md
+    Defect refs:
+      - docs/diagnostics/OPD-109_RENDERING_LAYER_DIAGNOSIS_2026-05-18.md
+      - OPD-112 (bridge ↔ following-atom semantic continuity, 2026-05-20)
     """
     st_upper = (slot_type or "").strip().upper()
     payload = _load_within_slot_bridge_families()
@@ -1248,23 +1358,50 @@ def _bridge_within_slot(
     if not isinstance(entries, list) or not entries:
         return ""
 
-    # Build (text, seed_rank) tuples for every variant in this shape.
+    # OPD-112: classify the next atom so we can filter bridges whose
+    # `next_atom_expectation:` does not match what is actually coming.
+    next_class = _classify_atom(next_atom)
+
+    # Build (text, seed_rank, expectation) tuples for every variant in this shape.
     # The seed_rank ties variant choice to the slot coordinates so
     # re-renders with the same seed produce identical output.
     seed_root = f"opd109|{int(chapter_index)}|{st_upper}|{int(atom_pair_index)}|{shape_key}"
-    raw_variants: list[tuple[str, int]] = []
+    raw_variants: list[tuple[str, int, str]] = []
     for v_idx, entry in enumerate(entries):
         if not isinstance(entry, dict):
             continue
         text = str(entry.get("text") or "").strip()
         if not text:
             continue
+        # OPD-112: missing field defaults to "any" (backward-compatible —
+        # bridges without explicit expectations remain universal acceptors).
+        expectation = str(entry.get("next_atom_expectation") or "any").strip().lower()
+        if expectation not in _NEXT_ATOM_EXPECTATION_LABELS:
+            expectation = "any"
         rank_seed = f"{seed_root}|{v_idx}|{text}"
         rank_digest = hashlib.sha256(rank_seed.encode("utf-8")).digest()
         seed_rank = int.from_bytes(rank_digest[:8], "big")
-        raw_variants.append((text, seed_rank))
+        raw_variants.append((text, seed_rank, expectation))
     if not raw_variants:
         return ""
+
+    # OPD-112: keep bridges that match next_class exactly, OR are tagged "any"
+    # (universal). If next_class is "any" itself (no tells in next atom), the
+    # whole pool is eligible.
+    if next_class == "any":
+        next_class_filtered = raw_variants
+    else:
+        narrow = [v for v in raw_variants if v[2] == next_class]
+        universal = [v for v in raw_variants if v[2] == "any"]
+        # Prefer narrowly matched candidates; fall back to universal "any"
+        # if none of this shape's variants match next_class. If both empty,
+        # last-resort to the full raw pool so the bridge never goes silent.
+        if narrow:
+            next_class_filtered = narrow
+        elif universal:
+            next_class_filtered = universal
+        else:
+            next_class_filtered = raw_variants
 
     # Resolve rotation state: explicit parameter wins, then per-render TLS,
     # then None (legacy seed-only path).
@@ -1275,16 +1412,15 @@ def _bridge_within_slot(
     if effective_state is not None:
         # Filter out variants already used in THIS chapter (per-chapter no-reuse).
         chapter_filtered = [
-            (text, rank)
-            for (text, rank) in raw_variants
-            if not effective_state.chapter_has_used(chapter_index, text)
+            v for v in next_class_filtered
+            if not effective_state.chapter_has_used(chapter_index, v[0])
         ]
         # If every variant in this shape was used, allow reuse but keep the
         # least-used-in-book first so we still spread the load.
-        candidates = chapter_filtered if chapter_filtered else raw_variants
+        candidates = chapter_filtered if chapter_filtered else next_class_filtered
         candidates_sorted = sorted(
             candidates,
-            key=lambda pair: (effective_state.book_count(pair[0]), pair[1]),
+            key=lambda triple: (effective_state.book_count(triple[0]), triple[1]),
         )
         chosen_text = candidates_sorted[0][0]
         effective_state.register(chapter_index, chosen_text)
@@ -1292,13 +1428,135 @@ def _bridge_within_slot(
         # Legacy seed-only path: pick by hash modulo for backward compat.
         seed = f"{seed_root}|legacy"
         digest = hashlib.sha256(seed.encode("utf-8")).digest()
-        idx = int.from_bytes(digest[:8], "big") % len(raw_variants)
-        chosen_text = raw_variants[idx][0]
+        idx = int.from_bytes(digest[:8], "big") % len(next_class_filtered)
+        chosen_text = next_class_filtered[idx][0]
 
     text_out = chosen_text
     if _LOCALE_TLS:
         text_out = _gt(text_out, locale=_LOCALE_TLS)
     return text_out
+
+
+# ---------------------------------------------------------------------------
+# OPD-114 Phase B: scene-depth ladder + archetype_jump bridges
+# ---------------------------------------------------------------------------
+
+_SCENE_ARCHETYPE_CAP = 2
+_ARCHETYPE_JUMP_SHAPE = "archetype_jump"
+
+
+def _first_noun_phrase(text: str) -> str:
+    """Extract a short opening phrase from scene prose for bridge templates."""
+    raw = (text or "").strip()
+    if not raw:
+        return "this"
+    skip = frozenset({"the", "a", "an", "your", "you", "it", "there", "this", "that"})
+    words = re.findall(r"[A-Za-z']+", raw)
+    picked: list[str] = []
+    for w in words:
+        low = w.lower()
+        if low in skip and not picked:
+            continue
+        picked.append(w)
+        if len(picked) >= 4:
+            break
+    return " ".join(picked) if picked else "this"
+
+
+def _bridge_archetype_jump(
+    next_atom: str,
+    *,
+    chapter_index: int = 0,
+    atom_pair_index: int = 0,
+    rotation_state: "WithinSlotRotationState | None" = None,
+) -> str:
+    """Mandatory bridge between SCENE atoms from different archetypes (OPD-114)."""
+    payload = _load_within_slot_bridge_families()
+    families = payload.get("slot_families") or {}
+    family = families.get("SCENE") or {}
+    entries = family.get(_ARCHETYPE_JUMP_SHAPE) or []
+    if not isinstance(entries, list) or not entries:
+        return ""
+
+    seed_root = f"opd114|{int(chapter_index)}|SCENE|archetype_jump|{int(atom_pair_index)}"
+    raw_variants: list[tuple[str, int]] = []
+    for v_idx, entry in enumerate(entries):
+        if not isinstance(entry, dict):
+            continue
+        text = str(entry.get("text") or "").strip()
+        if not text:
+            continue
+        rank_seed = f"{seed_root}|{v_idx}|{text}"
+        rank_digest = hashlib.sha256(rank_seed.encode("utf-8")).digest()
+        raw_variants.append((text, int.from_bytes(rank_digest[:8], "big")))
+
+    if not raw_variants:
+        return ""
+
+    if rotation_state is not None:
+        raw_variants.sort(
+            key=lambda v: (
+                rotation_state.book_count(f"SCENE|{_ARCHETYPE_JUMP_SHAPE}|{v[0]}"),
+                v[1],
+            )
+        )
+        chosen = raw_variants[0][0]
+        rotation_state.register(f"SCENE|{_ARCHETYPE_JUMP_SHAPE}|{chosen}")
+    else:
+        digest = hashlib.sha256(seed_root.encode("utf-8")).digest()
+        chosen = raw_variants[int.from_bytes(digest[:8], "big") % len(raw_variants)][0]
+
+    fill = _first_noun_phrase(next_atom)
+    out = chosen.replace("___", fill)
+    if _LOCALE_TLS:
+        return _gt(out, locale=_LOCALE_TLS)
+    return out
+
+
+def compose_scene_ladder_blocks(
+    blocks: list[tuple[str, Optional[str]]],
+    *,
+    chapter_index: int = 0,
+    rotation_state: "WithinSlotRotationState | None" = None,
+) -> str:
+    """Join SCENE ladder atoms: no bridges within one archetype; archetype_jump across."""
+    cleaned = [(t.strip(), a) for t, a in blocks if (t or "").strip()]
+    if not cleaned:
+        return ""
+    if len(cleaned) == 1:
+        return cleaned[0][0]
+
+    groups: list[tuple[Optional[str], list[str]]] = []
+    for text, arch in cleaned:
+        if groups and groups[-1][0] == arch:
+            groups[-1][1].append(text)
+        else:
+            groups.append((arch, [text]))
+
+    distinct = {g[0] for g in groups}
+    if len(distinct) > _SCENE_ARCHETYPE_CAP:
+        raise ValueError(
+            f"chapter {chapter_index}: SCENE has {len(distinct)} archetypes; "
+            f"max {_SCENE_ARCHETYPE_CAP} per chapter"
+        )
+
+    if len(groups) == 1:
+        return "\n\n".join(groups[0][1])
+
+    out_parts: list[str] = []
+    for gi, (_arch, texts) in enumerate(groups):
+        out_parts.append("\n\n".join(texts))
+        if gi < len(groups) - 1:
+            next_open = groups[gi + 1][1][0]
+            bridge = _bridge_archetype_jump(
+                next_open,
+                chapter_index=chapter_index,
+                atom_pair_index=gi,
+                rotation_state=rotation_state,
+            )
+            if bridge:
+                out_parts.append(bridge)
+    return "\n\n".join(out_parts)
 
 
 # ---------------------------------------------------------------------------
@@ -1662,6 +1920,44 @@ def _resolve_practice_type(exercise_type_hint: str, exercise_atom_id: str, exerc
     return "body_awareness"
 
 
+# OPD-113: practice_type → exercise_type_template_key mapping. Practice types
+# used by chapter_composer's bridges and exercise_type keys used by the
+# introduction/intro template YAML files share intent but have different names.
+_PRACTICE_TYPE_TO_EXERCISE_TYPE: dict[str, str] = {
+    "breath_regulation": "00_breath_regulation",
+    "grounding": "01_grounding_orientation",
+    "body_scan": "02_body_awareness_scan",
+    "somatic_discharge": "03_somatic_release_discharge",
+    "visualization": "08_emotional_processing_completion",
+    "reflective_prompt": "09_embodied_intention_direction",
+    "attention_training": "02_body_awareness_scan",
+    "vagus_stimulation": "06_vagal_stimulation_sound",
+    "integration_pause": "10_integration_return_to_baseline",
+    "body_awareness": "02_body_awareness_scan",
+}
+
+
+def _exercise_introduction_cue(practice_type: str) -> str:
+    """OPD-113: explicit "Now we're going to do an exercise" cue (Part 1).
+
+    Used by the fallback path when neither component_assembler nor
+    practice_library composers can compose the exercise. Pulls from
+    introduction_templates.yaml so operator-facing language stays consistent.
+    Returns empty string if templates can't be loaded — caller skips silently.
+    """
+    try:
+        from phoenix_v4.exercises.component_assembler import _load_introduction_templates
+        templates = _load_introduction_templates()
+        eff_type = _PRACTICE_TYPE_TO_EXERCISE_TYPE.get(practice_type, "_default")
+        intr = templates.get(eff_type) or templates.get("_default") or {}
+        text = str(intr.get("full", "")).strip()
+        if text and _LOCALE_TLS:
+            return _gt(text, locale=_LOCALE_TLS)
+        return text
+    except Exception:
+        return ""
+
+
 def _post_practice_validation_sentence(
     *,
     emotional_job: str = "",
@@ -1785,6 +2081,36 @@ def _append_anxiety_chapter_one_scan_practice(
     )
 
 
+def angle_callback_memory_line(prior_assertion: str) -> str:
+    """One-sentence recall of the prior journey layer (OPD-116/117)."""
+    ass = (prior_assertion or "").strip()
+    if not ass or ass.upper() == "TODO" or ass.startswith("TODO:"):
+        return ""
+    core = ass.rstrip(".")
+    return f"Earlier I said {core}. Here is what was hidden in that."
+
+
+def prefix_angle_callback_prose(
+    body: str,
+    *,
+    angle_id: str,
+    layer: int,
+    topic_id: str = "",
+) -> str:
+    """Prepend memory-line to callback body using registry layer_progression."""
+    text = (body or "").strip()
+    if not text or layer <= 1:
+        return text
+    from phoenix_v4.planning.angle_journey import merge_angle_journey, prior_layer_assertion
+
+    journey = merge_angle_journey(angle_id)
+    prior = prior_layer_assertion(layer, list(journey.get("layer_progression") or []))
+    prefix = angle_callback_memory_line(prior)
+    if not prefix:
+        return text
+    return f"{prefix}\n\n{text}"
+
+
 def compose_chapter_prose(
     slot_types: list[str],
     slot_proses: list[str],
@@ -1834,6 +2160,8 @@ def compose_chapter_prose(
 
     # Extract slot content
     hook = slot_map.get("HOOK", "")
+    angle_definition = slot_map.get("ANGLE_DEFINITION", "")
+    angle_callback = slot_map.get("ANGLE_CALLBACK", "")
     scene = _polish_scene(slot_map.get("SCENE", ""))
     story_raw = slot_map.get("STORY", "")
     pivot_raw = slot_map.get("PIVOT", "")
@@ -1867,6 +2195,14 @@ def compose_chapter_prose(
     opening = hook if (hook and not _is_placeholder_text(hook)) else scene
     if opening and not _is_placeholder_text(opening):
         parts.append(opening)
+
+    # 1a. OPD-116/117 ANGLE_CALLBACK immediately after HOOK (memory-line already in prose if prefixed upstream)
+    if angle_callback and not _is_placeholder_text(angle_callback):
+        parts.append(angle_callback.strip())
+
+    # 1b. OPD-116/117 ANGLE_DEFINITION — single coherent block, no within-slot bridges
+    if angle_definition and not _is_placeholder_text(angle_definition):
+        parts.append(angle_definition.strip())
 
     # 2. SCENE (if both HOOK and SCENE exist, scene follows hook)
     if hook and scene and not _is_placeholder_text(hook) and not _is_placeholder_text(scene) and scene != opening:
@@ -2073,6 +2409,10 @@ def compose_chapter_prose(
                         bridge_memory=resolved_bridge_memory,
                     )
                 )
+                # OPD-113: explicit introduction cue (Part 1) for fallback path
+                introduction_cue = _exercise_introduction_cue(practice_type)
+                if introduction_cue:
+                    parts.append(introduction_cue)
                 parts.append(
                     _exercise_setup_sentence(
                         reflection_raw,
@@ -2516,6 +2856,7 @@ def compose_from_enriched_book(
 
         ch_compose = replace(ch, slots=slots_out)
         book_seed = f"{enriched.persona_id}:{enriched.topic}:{enriched.runtime_format}:ch{ch_idx}"
+        _spine_ctx = enriched.spine_context or {}
         ch_body, _syn_meta = compose_golden_spine_chapter(
             ch_compose,
             chapter_index0=ch_idx,
@@ -2527,6 +2868,8 @@ def compose_from_enriched_book(
             governance_report=report,
             mechanism_memory=mechanism_memory,
             exercise_memory=exercise_memory,
+            angle_id=str(_spine_ctx.get("angle_id") or ""),
+            angle_layer_by_chapter=dict(_spine_ctx.get("angle_layer_by_chapter") or {}),
         )
         ch_body = post_compose_sanitize_chapter(
             ch_body,

@@ -54,6 +54,21 @@ BESTSELLER_STRUCTURES = [
 ]
 MAX_BESTSELLER_RUN = 3
 
+# OPD-114 Phase B: scene-depth ladder targets per runtime (L1..N within one archetype).
+RUNTIME_SCENE_STORY_DEPTH: dict[str, int] = {
+    "micro_book_15": 1,
+    "standard_book": 2,
+    "extended_book_2h": 3,
+    "deep_book_4h": 4,
+    "deep_book_6h": 5,
+}
+
+
+def story_depth_for_runtime(runtime_format: Optional[str]) -> int:
+    """Return scene ladder depth (1–5) for a runtime_format id."""
+    rf = (runtime_format or "").strip()
+    return int(RUNTIME_SCENE_STORY_DEPTH.get(rf, 2))
+
 
 @dataclass
 class ChapterContract:
@@ -405,6 +420,8 @@ class ChapterPlanResult:
     warnings: list[str]
     chapter_bestseller_structures: Optional[list[str]] = None  # length == chapter_count
     chapter_selector_targets: Optional[list[dict[str, Any]]] = None  # length == chapter_count
+    angle_layer_by_chapter: Optional[dict[int, int]] = None
+    angle_definition_paragraph_weight: Optional[int] = None
 
 
 # Alias for specs that refer to book-level structure planning output.
@@ -527,25 +544,49 @@ def plan_chapters(
     book_size: Optional[str] = None,
     policy_path: Optional[Path] = None,
     enforce_role_distribution: bool = False,
+    angle_id: Optional[str] = None,
+    runtime_format: Optional[str] = None,
 ) -> ChapterPlanResult:
     """
     Build chapter-level archetype/weight plan and derive effective slot_definitions.
     """
+    from phoenix_v4.planning.angle_journey import (
+        ANGLE_DEFINITION_PARAGRAPH_WEIGHT,
+        apply_angle_journey_slots,
+        is_angle_journey_runtime,
+    )
+
+    angle_layer_by_chapter: dict[int, int] = {}
+    angle_journey_warnings: list[str] = []
+    angle_definition_weight: Optional[int] = None
+    working_slots = [list(row) for row in slot_definitions]
+    runtime_story_depth = story_depth_for_runtime(runtime_format)
+
     policy = _load_yaml(policy_path or POLICY_PATH)
     if not policy:
         sel_t = derive_chapter_selector_targets(chapter_count, selector_key_prefix, emotional_role_sequence)
+        out_slots_fb = working_slots
+        if angle_id and is_angle_journey_runtime(runtime_format):
+            out_slots_fb, angle_layer_by_chapter, angle_journey_warnings = apply_angle_journey_slots(
+                out_slots_fb,
+                angle_id=angle_id,
+                runtime_format=runtime_format,
+            )
+            angle_definition_weight = ANGLE_DEFINITION_PARAGRAPH_WEIGHT
         return ChapterPlanResult(
-            slot_definitions=slot_definitions,
+            slot_definitions=out_slots_fb,
             chapter_archetypes=["legacy_uniform"] * chapter_count,
             chapter_exercise_modes=["none"] * chapter_count,
             chapter_reflection_weights=["standard"] * chapter_count,
-            chapter_story_depths=["standard"] * chapter_count,
-            warnings=["chapter_planner_policies missing; fallback to uniform slot plan"],
+            chapter_story_depths=[str(runtime_story_depth)] * chapter_count,
+            warnings=["chapter_planner_policies missing; fallback to uniform slot plan"] + angle_journey_warnings,
             chapter_selector_targets=sel_t,
+            angle_layer_by_chapter=angle_layer_by_chapter or None,
+            angle_definition_paragraph_weight=angle_definition_weight,
         )
 
     size = book_size or infer_book_size(chapter_count, policy)
-    warnings = _role_distribution_warnings(size, emotional_role_sequence, policy)
+    warnings = _role_distribution_warnings(size, emotional_role_sequence, policy) + angle_journey_warnings
     if enforce_role_distribution and warnings:
         raise ValueError("; ".join(warnings))
 
@@ -570,7 +611,7 @@ def plan_chapters(
     reflection_heavy_used = 0
 
     for ch in range(chapter_count):
-        base_row = list(slot_definitions[ch]) if ch < len(slot_definitions) else []
+        base_row = list(working_slots[ch]) if ch < len(working_slots) else []
         role = _chapter_role(emotional_role_sequence, ch)
 
         # 1) Candidate generation
@@ -642,7 +683,7 @@ def plan_chapters(
         sp = archetype_cfg.get("slot_policy") or {}
         ex_mode = str(sp.get("exercise_mode") or "none")
         refl_w = str(sp.get("reflection_weight") or "standard")
-        story_d = str(sp.get("story_depth") or "standard")
+        story_d = str(runtime_story_depth)
 
         if ex_mode == "none":
             chosen_row = [s for s in chosen_row if s != "EXERCISE"]
@@ -670,8 +711,18 @@ def plan_chapters(
         out_slots.append(chosen_row)
         signature_counts[archetype_id] = signature_counts.get(archetype_id, 0) + 1
 
+    final_slots = out_slots
+    if angle_id and is_angle_journey_runtime(runtime_format):
+        final_slots, angle_layer_by_chapter, aj_warns = apply_angle_journey_slots(
+            final_slots,
+            angle_id=angle_id,
+            runtime_format=runtime_format,
+        )
+        warnings = warnings + aj_warns
+        angle_definition_weight = ANGLE_DEFINITION_PARAGRAPH_WEIGHT
+
     return ChapterPlanResult(
-        slot_definitions=out_slots,
+        slot_definitions=final_slots,
         chapter_archetypes=chapter_archetypes,
         chapter_exercise_modes=chapter_exercise_modes,
         chapter_reflection_weights=chapter_reflection_weights,
@@ -679,4 +730,6 @@ def plan_chapters(
         warnings=warnings,
         chapter_bestseller_structures=chapter_bestseller_structures,
         chapter_selector_targets=chapter_selector_targets,
+        angle_layer_by_chapter=angle_layer_by_chapter or None,
+        angle_definition_paragraph_weight=angle_definition_weight,
     )

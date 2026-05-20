@@ -623,6 +623,16 @@ def _run_spine_pipeline_mode(
     fmt_spec = load_format_spec(runtime_fmt, repo_root)
     beatmap = compile_beatmap(shaped_spine, engines_data, fmt_spec, repo_root)
 
+    _spine_angle_id = str(book_spec_for_compiler.get("angle_id") or "").strip()
+    _angle_layer_by_ch: dict[int, int] = {}
+    _angle_journey_warnings: list[str] = []
+    if _spine_angle_id:
+        from phoenix_v4.planning.angle_journey import patch_beatmap_angle_journey
+
+        _angle_layer_by_ch, _angle_journey_warnings = patch_beatmap_angle_journey(
+            beatmap, _spine_angle_id,
+        )
+
     render_dir = Path(args.render_dir) if args.render_dir else Path("artifacts/rendered") / f"spine-{topic_id}"
     render_dir.mkdir(parents=True, exist_ok=True)
 
@@ -665,6 +675,9 @@ def _run_spine_pipeline_mode(
                 "book_plan_id": book_plan.plan_id,
                 "atom_slot_specs": atom_slot_specs,
                 "chapter_selector_targets": _chapter_selector_targets,
+                "angle_id": _spine_angle_id,
+                "angle_layer_by_chapter": _angle_layer_by_ch,
+                "angle_journey_warnings": _angle_journey_warnings,
             },
             locale=_enrich_locale,
             publishable_book=_publishable_book,
@@ -1255,6 +1268,39 @@ def _run_spine_pipeline_mode(
                 for _kw in ("from now on", "next", "choose", "practice", "still", "start")
             )
 
+            _angle_coherence_status = "SKIPPED"
+            _angle_coherence_detail: dict = {"reason": "no angle_id or quality inputs"}
+            try:
+                from phoenix_v4.quality.angle_journey_coherence import (
+                    evaluate_angle_journey_coherence,
+                )
+
+                _spine_angle = str(book_spec_for_compiler.get("angle_id") or "").strip()
+                _angle_layers = dict(
+                    (enriched.spine_context or {}).get("angle_layer_by_chapter") or {}
+                )
+                _ch_proses = [
+                    (c.split("\n\n", 2)[-1] if "\n\n" in c else c)
+                    for c in (_chapters_for_quality or [])
+                ]
+                _aj_result = evaluate_angle_journey_coherence(
+                    angle_id=_spine_angle,
+                    runtime_format=runtime_fmt,
+                    topic_id=topic_id,
+                    chapter_proses=_ch_proses,
+                    angle_layer_by_chapter=_angle_layers,
+                    enriched_chapters=enriched.chapters,
+                )
+                _angle_coherence_status = "PASS" if _aj_result.valid else "FAIL"
+                _angle_coherence_detail = {
+                    "errors": _aj_result.errors,
+                    "warnings": _aj_result.warnings,
+                    "metrics": _aj_result.metrics,
+                }
+            except Exception as _aj_exc:
+                _angle_coherence_status = "SKIPPED"
+                _angle_coherence_detail = {"reason": f"angle_journey_coherence error: {_aj_exc}"}
+
             _book_pass_checks = {
                 "word_budget": {
                     "status": "PASS" if _budget_ok else "FAIL",
@@ -1273,6 +1319,10 @@ def _run_spine_pipeline_mode(
                 },
                 "callback_completion": {
                     "status": "PASS" if _callback_ok else "FAIL",
+                },
+                "angle_journey_coherence": {
+                    "status": _angle_coherence_status,
+                    **_angle_coherence_detail,
                 },
                 "atom_metadata_subchecks": {
                     "status": "SKIPPED",
