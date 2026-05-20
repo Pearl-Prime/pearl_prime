@@ -676,6 +676,14 @@ def _first_or_join(
     OPD-109 Phase 1: `bridge_fn` is forwarded to `_dedupe_paragraphs` when
     multiple parts survive. Default (None) preserves the bare-join behavior
     for every caller that does not pass `bridge_fn`.
+
+    OPD-109 Phase 4 (this revision): callers also pass ``chapter_index`` so
+    ``_dedupe_paragraphs`` can carry the chapter coordinate when computing
+    bridge variant rotation. The single-block path remains a bare return —
+    routing single-slot stacked-atom content through bridge interleaving
+    is deliberately deferred (insufficient HOOK/SCENE variant pool to
+    keep ``book_quality`` phrase-density gate green; see OPD-109 Phase 5
+    follow-up).
     """
     cleaned: list[str] = []
     for p in parts:
@@ -690,7 +698,12 @@ def _first_or_join(
         return ""
     if len(cleaned) == 1:
         return cleaned[0]
-    return _dedupe_paragraphs(cleaned, bridge_fn=bridge_fn)
+    return _dedupe_paragraphs(
+        cleaned,
+        phrase_memory=phrase_memory,
+        chapter_index=chapter_index,
+        bridge_fn=bridge_fn,
+    )
 
 
 def _collapse_chapter_one_story_stack(story: str) -> str:
@@ -747,27 +760,60 @@ def build_virtual_slot_streams(
 
     b = _bucket_slots(slots)
     hook, scene = _dedupe_hook_scene(
-        _first_or_join(b["HOOK"], bridge_fn=_mk_bridge("HOOK")),
-        _first_or_join(b["SCENE"], bridge_fn=_mk_bridge("SCENE")),
+        _first_or_join(
+            b["HOOK"],
+            chapter_index=chapter_index0,
+            bridge_fn=_mk_bridge("HOOK"),
+        ),
+        _first_or_join(
+            b["SCENE"],
+            chapter_index=chapter_index0,
+            bridge_fn=_mk_bridge("SCENE"),
+        ),
     )
-    reflection = _first_or_join(b["REFLECTION"], bridge_fn=_mk_bridge("REFLECTION"))
-    if b["_depth_mech"]:
-        extra = _dedupe_paragraphs(b["_depth_mech"], bridge_fn=_mk_bridge("REFLECTION"))
-        reflection = "\n\n".join(x for x in (reflection, extra) if x)
-    story = _first_or_join(b["STORY"], bridge_fn=_mk_bridge("STORY"))
-    if b["_depth_story"]:
-        extra_s = _dedupe_paragraphs(b["_depth_story"], bridge_fn=_mk_bridge("STORY"))
-        story = "\n\n".join(x for x in (story, extra_s) if x)
+    # OPD-109 Phase 4: aggregate vanilla REFLECTION + depth-pass _depth_mech
+    # into a single bridge-aware stream so transitions fire across the
+    # vanilla/depth boundary as well as within each stream. Prior code did
+    # `"\n\n".join((reflection, extra))` which left the boundary unbridged.
+    # The same aggregation applies to STORY + _depth_story below.
+    reflection_blocks = list(b["REFLECTION"]) + list(b["_depth_mech"])
+    reflection = _first_or_join(
+        reflection_blocks,
+        chapter_index=chapter_index0,
+        bridge_fn=_mk_bridge("REFLECTION"),
+    )
+    story_blocks = list(b["STORY"]) + list(b["_depth_story"])
+    story = _first_or_join(
+        story_blocks,
+        chapter_index=chapter_index0,
+        bridge_fn=_mk_bridge("STORY"),
+    )
     if chapter_index0 == 0 and story.strip():
         story = _collapse_chapter_one_story_stack(story)
-    pivot = _first_or_join(b["PIVOT"], bridge_fn=_mk_bridge("PIVOT"))
-    exercise = _first_or_join(b["EXERCISE"], bridge_fn=_mk_bridge("EXERCISE"))
-    integration = _first_or_join(b["INTEGRATION"], bridge_fn=_mk_bridge("INTEGRATION"))
-    thread = _first_or_join(b["THREAD"], bridge_fn=_mk_bridge("THREAD"))
-    takeaway = _first_or_join(b["TAKEAWAY"], bridge_fn=_mk_bridge("TAKEAWAY"))
-    permission = _first_or_join(b["PERMISSION"], bridge_fn=_mk_bridge("PERMISSION"))
-    compression = _first_or_join(b["COMPRESSION"], bridge_fn=_mk_bridge("COMPRESSION"))
-    doctrine = _first_or_join(b["TEACHER_DOCTRINE"], bridge_fn=_mk_bridge("TEACHER_DOCTRINE"))
+    pivot = _first_or_join(
+        b["PIVOT"], chapter_index=chapter_index0, bridge_fn=_mk_bridge("PIVOT"),
+    )
+    exercise = _first_or_join(
+        b["EXERCISE"], chapter_index=chapter_index0, bridge_fn=_mk_bridge("EXERCISE"),
+    )
+    integration = _first_or_join(
+        b["INTEGRATION"], chapter_index=chapter_index0, bridge_fn=_mk_bridge("INTEGRATION"),
+    )
+    thread = _first_or_join(
+        b["THREAD"], chapter_index=chapter_index0, bridge_fn=_mk_bridge("THREAD"),
+    )
+    takeaway = _first_or_join(
+        b["TAKEAWAY"], chapter_index=chapter_index0, bridge_fn=_mk_bridge("TAKEAWAY"),
+    )
+    permission = _first_or_join(
+        b["PERMISSION"], chapter_index=chapter_index0, bridge_fn=_mk_bridge("PERMISSION"),
+    )
+    compression = _first_or_join(
+        b["COMPRESSION"], chapter_index=chapter_index0, bridge_fn=_mk_bridge("COMPRESSION"),
+    )
+    doctrine = _first_or_join(
+        b["TEACHER_DOCTRINE"], chapter_index=chapter_index0, bridge_fn=_mk_bridge("TEACHER_DOCTRINE"),
+    )
     # Sprint-1 word-floor fix: route TEACHER_DOCTRINE to COMPRESSION so it is
     # appended verbatim by compose_chapter_prose (compose_chapter_prose never adds
     # doctrine from slot_map to parts — TEACHER_DOCTRINE was silently discarded).
