@@ -245,8 +245,24 @@ def check_subject_safe_zone(inp: LayerValidationInput) -> ValidationResult:
     zone_x1 = zone_x0 + zone_w
     zone_y1 = zone_y0 + zone_h
 
-    inside = (bbox[0] >= zone_x0 and bbox[1] >= zone_y0
-              and bbox[2] <= zone_x1 and bbox[3] <= zone_y1)
+    # V4.1: only flag overflow on axes declared must_not_touch=true
+    axes_dict = inp.safe_zone_row.get("subject_must_not_touch_edge_axes") or {}
+    v1_bool = inp.safe_zone_row.get("subject_must_not_touch_edge", True)
+    if v1_bool is False:
+        axes_must = {"top": False, "bottom": False, "left": False, "right": False}
+    elif isinstance(axes_dict, dict):
+        axes_must = {s: bool(axes_dict.get(s, True)) for s in ("top", "bottom", "left", "right")}
+    else:
+        axes_must = {"top": True, "bottom": True, "left": True, "right": True}
+
+    overflow_all = {
+        "left": max(0, zone_x0 - bbox[0]),
+        "top": max(0, zone_y0 - bbox[1]),
+        "right": max(0, bbox[2] - zone_x1),
+        "bottom": max(0, bbox[3] - zone_y1),
+    }
+    overflow_guarded = {s: v for s, v in overflow_all.items() if axes_must[s] and v > 0}
+    overflow_permitted = {s: v for s, v in overflow_all.items() if not axes_must[s] and v > 0}
 
     evidence = {
         "subject_bbox_px": list(bbox),
@@ -254,22 +270,21 @@ def check_subject_safe_zone(inp: LayerValidationInput) -> ValidationResult:
                          round(zone_x1, 1), round(zone_y1, 1)],
         "subject_zone_pct": list(zone),
         "canvas_size": [W, H],
+        "axes_must_not_touch": axes_must,
+        "overflow_px_all": {k: round(v, 1) for k, v in overflow_all.items()},
     }
-    if inside:
+    if overflow_permitted:
+        evidence["overflow_permitted_px"] = {k: round(v, 1) for k, v in overflow_permitted.items()}
+    if not overflow_guarded:
         return _ok("subject_safe_zone", evidence=evidence)
-    overflow = {
-        "left": max(0, zone_x0 - bbox[0]),
-        "top": max(0, zone_y0 - bbox[1]),
-        "right": max(0, bbox[2] - zone_x1),
-        "bottom": max(0, bbox[3] - zone_y1),
-    }
-    evidence["overflow_px"] = {k: round(v, 1) for k, v in overflow.items()}
+    evidence["overflow_guarded_px"] = {k: round(v, 1) for k, v in overflow_guarded.items()}
     return _fail(
         "subject_safe_zone",
         evidence=evidence,
-        hint=f"Subject bbox extends outside safe zone (overflow {overflow}). "
-             f"Re-render with tighter framing clause; safe_zone is {zone[0]}% x {zone[1]}%.",
-        score=min(max(overflow.values()) / max(W, H), 1.0),
+        hint=f"Subject bbox extends outside safe zone on must_not_touch axes {list(overflow_guarded.keys())}. "
+             f"safe_zone is {zone[0]}% x {zone[1]}%. Re-render with tighter framing on those axes "
+             f"OR declare per-axis tolerance.",
+        score=min(max(overflow_guarded.values()) / max(W, H), 1.0),
     )
 
 
@@ -282,10 +297,29 @@ def check_subject_does_not_touch_edge(inp: LayerValidationInput) -> ValidationRe
     if inp.layer_type == "L0":
         return _na("subject_does_not_touch_edge", "L0 IS the canvas")
 
-    must_not_touch = inp.safe_zone_row.get("subject_must_not_touch_edge", True)
-    if not must_not_touch:
+    # V4.1 (spec §15.A.7): per-axis edge contract precedence:
+    #   1. If v1 boolean subject_must_not_touch_edge is False → universal off-switch
+    #      (preserves backward compat with archetype_exception=window_light_threshold)
+    #   2. Else if per-axis dict subject_must_not_touch_edge_axes present → read per axis
+    #   3. Else → all 4 axes guarded (v1.0 default)
+    v1_bool = inp.safe_zone_row.get("subject_must_not_touch_edge", True)
+    if v1_bool is False:
         return _na("subject_does_not_touch_edge",
-                   "archetype_exception permits edge contact")
+                   "archetype_exception permits edge contact (all axes via v1 boolean)")
+
+    axes_dict = inp.safe_zone_row.get("subject_must_not_touch_edge_axes")
+    if isinstance(axes_dict, dict):
+        axes_must = {
+            "top": bool(axes_dict.get("top", True)),
+            "bottom": bool(axes_dict.get("bottom", True)),
+            "left": bool(axes_dict.get("left", True)),
+            "right": bool(axes_dict.get("right", True)),
+        }
+        if not any(axes_must.values()):
+            return _na("subject_does_not_touch_edge",
+                       "all 4 axes permit edge contact (per-axis contract)")
+    else:
+        axes_must = {"top": True, "bottom": True, "left": True, "right": True}
 
     margin_min_pct = inp.safe_zone_row.get("margin_min_pct_all_sides", 5)
 
@@ -322,14 +356,19 @@ def check_subject_does_not_touch_edge(inp: LayerValidationInput) -> ValidationRe
         "right": W - 1 - bbox[2],
         "bottom": H - 1 - bbox[3],
     }
-    insufficient = [s for s, v in clearance.items() if v < margin_px]
+    # V4.1: only flag insufficient on axes that must_not_touch is True
+    insufficient = [s for s, v in clearance.items() if axes_must[s] and v < margin_px]
+    permitted_touches = [s for s, v in clearance.items() if not axes_must[s] and v < margin_px]
     evidence = {
         "clearance_px": clearance,
         "required_min_px": margin_px,
         "required_min_pct": margin_min_pct,
+        "axes_must_not_touch": axes_must,
         "subject_bbox_px": list(bbox),
         "canvas_size": [W, H],
     }
+    if permitted_touches:
+        evidence["permitted_edge_touches"] = permitted_touches
     if not insufficient:
         return _ok("subject_does_not_touch_edge", evidence=evidence)
 
@@ -338,9 +377,10 @@ def check_subject_does_not_touch_edge(inp: LayerValidationInput) -> ValidationRe
         "subject_does_not_touch_edge",
         evidence=evidence,
         hint=f"Subject too close to {','.join(insufficient)} edge(s) "
-             f"(min clearance {margin_min_pct}% / {margin_px}px). "
-             f"Re-render with explicit shoulder/limb margin clause.",
-        score=min(1.0 - (min(clearance.values()) / max(margin_px, 1)), 1.0),
+             f"(min clearance {margin_min_pct}% / {margin_px}px); "
+             f"these axes are declared must_not_touch=true. "
+             f"Re-render with explicit margin clause OR declare per-axis tolerance.",
+        score=min(1.0 - (min(clearance[s] for s in insufficient) / max(margin_px, 1)), 1.0),
     )
 
 
@@ -489,32 +529,55 @@ def check_background_bleed(inp: LayerValidationInput, edge_inset_px: int = 20) -
     alpha = np.array(img.split()[-1])
     H, W = alpha.shape
 
-    # 20px-inward edge band — pixels close to but not at the canvas edge.
-    edge_band = np.concatenate([
-        alpha[:edge_inset_px, :].flatten(),
-        alpha[-edge_inset_px:, :].flatten(),
-        alpha[:, :edge_inset_px].flatten(),
-        alpha[:, -edge_inset_px:].flatten(),
-    ])
-    bleed = int((edge_band > 30).sum())
-    bleed_pct = bleed / edge_band.size * 100
+    # V4.1: per-axis edge contract. Only measure bleed on must_not_touch axes
+    # (per §12.3 limitation: bleed can't distinguish subject-body-at-edge from
+    # scene-fragment-at-edge; for permitted-touch axes the bleed IS the subject,
+    # not contamination).
+    axes_dict = inp.safe_zone_row.get("subject_must_not_touch_edge_axes") or {}
+    v1_bool = inp.safe_zone_row.get("subject_must_not_touch_edge", True)
+    if v1_bool is False:
+        axes_must = {s: False for s in ("top", "bottom", "left", "right")}
+    elif isinstance(axes_dict, dict):
+        axes_must = {s: bool(axes_dict.get(s, True)) for s in ("top", "bottom", "left", "right")}
+    else:
+        axes_must = {s: True for s in ("top", "bottom", "left", "right")}
+
+    edge_bands = {
+        "top": alpha[:edge_inset_px, :].flatten(),
+        "bottom": alpha[-edge_inset_px:, :].flatten(),
+        "left": alpha[:, :edge_inset_px].flatten(),
+        "right": alpha[:, -edge_inset_px:].flatten(),
+    }
+    per_axis_bleed = {
+        s: (round(float((b > 30).sum() / b.size * 100), 2) if b.size > 0 else 0.0)
+        for s, b in edge_bands.items()
+    }
+    # Only count must_not_touch axes
+    guarded_bands = [b for s, b in edge_bands.items() if axes_must[s]]
+    if guarded_bands:
+        guarded = np.concatenate(guarded_bands)
+        bleed_pct = float((guarded > 30).sum() / guarded.size * 100)
+    else:
+        bleed_pct = 0.0
 
     max_bleed_pct = (inp.cutout_policy or {}).get("background_bleed_max_pct", 5.0)
 
     evidence = {
         "edge_inset_px": edge_inset_px,
-        "edge_band_pixels": int(edge_band.size),
-        "bleed_pixels": bleed,
-        "bleed_pct": round(bleed_pct, 2),
+        "axes_must_not_touch": axes_must,
+        "per_axis_bleed_pct": per_axis_bleed,
+        "guarded_axes_bleed_pct": round(bleed_pct, 2),
         "max_bleed_pct": max_bleed_pct,
     }
+    if not any(axes_must.values()):
+        return _na("background_bleed_check",
+                   "all 4 axes permit edge contact; bleed check is moot for this archetype")
     if bleed_pct > max_bleed_pct:
         return _fail(
             "background_bleed_check",
             evidence=evidence,
-            hint=f"Background bleed {bleed_pct:.2f}% > {max_bleed_pct}% threshold. "
-                 f"Scene fragments remain in the edge band. Try alternate cutout model "
-                 f"or re-cutout with alpha_matting=True (stricter background_threshold).",
+            hint=f"Background bleed on guarded axes {bleed_pct:.2f}% > {max_bleed_pct}% threshold. "
+                 f"Per-axis bleed: {per_axis_bleed}. Scene fragments remain on must_not_touch axes.",
             score=min(bleed_pct / 100, 1.0),
         )
     return _ok("background_bleed_check", evidence=evidence)

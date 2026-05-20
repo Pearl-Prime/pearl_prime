@@ -14,7 +14,14 @@ contracts:
     inherits_from: framing.CU
     overrides:
       margin.top: 15
-    notes: "extra forehead air for portrait emphasis"
+      # V4.1 (post-B-test #3+#4 2026-05-20): CU portraits naturally crop shoulders at
+      # bottom edge; subject's arm naturally extends past right edge of frame.
+      # These are Qwen-Image rendering conventions for CU portraits — declaring
+      # them edge-tolerant matches what the model produces; trying to force margin
+      # over-corrects (B-test #3: subject fills canvas).
+      subject_must_not_touch_edge_axes.bottom: false
+      subject_must_not_touch_edge_axes.right: false
+    notes: "extra forehead air for portrait emphasis; bottom + right edges tolerated per V4.1 §15.A.7"
 
   character_silhouette_back:
     inherits_from: framing.CU

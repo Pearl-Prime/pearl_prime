@@ -25,6 +25,11 @@ compiled:
     - 45
     - 95
     subject_must_not_touch_edge: false
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
     subject_zone_pct:
     - 65
     - 80
@@ -47,6 +52,11 @@ compiled:
     margin_min_pct_all_sides: 5
     notes: 'mid-close-up: chest + face; used when chest+arm gesture matters'
     subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
     subject_zone_pct:
     - 55
     - 75
@@ -69,6 +79,11 @@ compiled:
     margin_min_pct_all_sides: 5
     notes: 'mid-close-up: chest + face; used when chest+arm gesture matters'
     subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
     subject_zone_pct:
     - 55
     - 75
@@ -89,6 +104,11 @@ compiled:
     margin_min_pct_all_sides: 5
     notes: 'mid-close-up: chest + face; used when chest+arm gesture matters'
     subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
     subject_zone_pct:
     - 55
     - 75
@@ -111,6 +131,11 @@ compiled:
     margin_min_pct_all_sides: 5
     notes: 'mid-close-up: chest + face; used when chest+arm gesture matters'
     subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
     subject_zone_pct:
     - 55
     - 75
@@ -131,6 +156,11 @@ compiled:
     margin_min_pct_all_sides: 5
     notes: 'mid-close-up: chest + face; used when chest+arm gesture matters'
     subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
     subject_zone_pct:
     - 55
     - 75
@@ -153,6 +183,11 @@ compiled:
     margin_min_pct_all_sides: 5
     notes: 'mid-close-up: chest + face; used when chest+arm gesture matters'
     subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
     subject_zone_pct:
     - 55
     - 75
@@ -175,6 +210,11 @@ compiled:
     margin_min_pct_all_sides: 5
     notes: 'mid-close-up: chest + face; used when chest+arm gesture matters'
     subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
     subject_zone_pct:
     - 55
     - 75
@@ -197,6 +237,11 @@ compiled:
     margin_min_pct_all_sides: 5
     notes: 'mid-close-up: chest + face; used when chest+arm gesture matters'
     subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
     subject_zone_pct:
     - 55
     - 75
@@ -220,6 +265,11 @@ compiled:
     notes: 'close-up: face + shoulders; forehead has air; shoulders may crop at the
       very bottom edge intentionally'
     subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: false
+      left: true
+      right: false
+      top: true
     subject_zone_pct:
     - 65
     - 80
@@ -243,6 +293,11 @@ compiled:
     notes: 'close-up: face + shoulders; forehead has air; shoulders may crop at the
       very bottom edge intentionally'
     subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: false
+      left: true
+      right: false
+      top: true
     subject_zone_pct:
     - 65
     - 80
@@ -264,6 +319,11 @@ compiled:
     notes: 'close-up: face + shoulders; forehead has air; shoulders may crop at the
       very bottom edge intentionally'
     subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: false
+      left: true
+      right: false
+      top: true
     subject_zone_pct:
     - 65
     - 80
@@ -287,6 +347,11 @@ compiled:
     notes: 'close-up: face + shoulders; forehead has air; shoulders may crop at the
       very bottom edge intentionally'
     subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: false
+      left: true
+      right: false
+      top: true
     subject_zone_pct:
     - 65
     - 80
@@ -308,6 +373,11 @@ compiled:
     notes: 'close-up: face + shoulders; forehead has air; shoulders may crop at the
       very bottom edge intentionally'
     subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: false
+      left: true
+      right: false
+      top: true
     subject_zone_pct:
     - 65
     - 80
@@ -331,6 +401,11 @@ compiled:
     notes: 'close-up: face + shoulders; forehead has air; shoulders may crop at the
       very bottom edge intentionally'
     subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: false
+      left: true
+      right: false
+      top: true
     subject_zone_pct:
     - 65
     - 80
@@ -354,6 +429,11 @@ compiled:
     notes: 'close-up: face + shoulders; forehead has air; shoulders may crop at the
       very bottom edge intentionally'
     subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: false
+      left: true
+      right: false
+      top: true
     subject_zone_pct:
     - 65
     - 80
@@ -377,6 +457,11 @@ compiled:
     notes: 'close-up: face + shoulders; forehead has air; shoulders may crop at the
       very bottom edge intentionally'
     subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: false
+      left: true
+      right: false
+      top: true
     subject_zone_pct:
     - 65
     - 80
@@ -399,6 +484,11 @@ compiled:
     margin_min_pct_all_sides: 5
     notes: 'medium: full upper body, knees-up; most common character framing'
     subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
     subject_zone_pct:
     - 50
     - 90
@@ -421,6 +511,11 @@ compiled:
     margin_min_pct_all_sides: 5
     notes: 'medium: full upper body, knees-up; most common character framing'
     subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
     subject_zone_pct:
     - 50
     - 90
@@ -441,6 +536,11 @@ compiled:
     margin_min_pct_all_sides: 5
     notes: 'medium: full upper body, knees-up; most common character framing'
     subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
     subject_zone_pct:
     - 55
     - 90
@@ -463,6 +563,11 @@ compiled:
     margin_min_pct_all_sides: 5
     notes: 'medium: full upper body, knees-up; most common character framing'
     subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
     subject_zone_pct:
     - 50
     - 90
@@ -483,6 +588,11 @@ compiled:
     margin_min_pct_all_sides: 5
     notes: 'medium: full upper body, knees-up; most common character framing'
     subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
     subject_zone_pct:
     - 50
     - 90
@@ -505,6 +615,11 @@ compiled:
     margin_min_pct_all_sides: 5
     notes: 'medium: full upper body, knees-up; most common character framing'
     subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
     subject_zone_pct:
     - 50
     - 90
@@ -527,6 +642,11 @@ compiled:
     margin_min_pct_all_sides: 5
     notes: 'medium: full upper body, knees-up; most common character framing'
     subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
     subject_zone_pct:
     - 50
     - 90
@@ -549,6 +669,11 @@ compiled:
     margin_min_pct_all_sides: 5
     notes: 'medium: full upper body, knees-up; most common character framing'
     subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
     subject_zone_pct:
     - 50
     - 90
@@ -572,6 +697,11 @@ compiled:
     notes: 'extreme close-up: macro of object/eye/hand; subject IS the panel; tight
       tolerances OK'
     subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
     subject_zone_pct:
     - 65
     - 65
@@ -595,6 +725,11 @@ compiled:
     notes: 'extreme close-up: macro of object/eye/hand; subject IS the panel; tight
       tolerances OK'
     subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
     subject_zone_pct:
     - 65
     - 65
@@ -616,6 +751,11 @@ compiled:
     notes: 'extreme close-up: macro of object/eye/hand; subject IS the panel; tight
       tolerances OK'
     subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
     subject_zone_pct:
     - 65
     - 65
@@ -639,6 +779,11 @@ compiled:
     notes: 'extreme close-up: macro of object/eye/hand; subject IS the panel; tight
       tolerances OK'
     subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
     subject_zone_pct:
     - 65
     - 65
@@ -660,6 +805,11 @@ compiled:
     notes: 'extreme close-up: macro of object/eye/hand; subject IS the panel; tight
       tolerances OK'
     subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
     subject_zone_pct:
     - 65
     - 65
@@ -683,6 +833,11 @@ compiled:
     notes: 'extreme close-up: macro of object/eye/hand; subject IS the panel; tight
       tolerances OK'
     subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
     subject_zone_pct:
     - 65
     - 65
@@ -706,6 +861,11 @@ compiled:
     notes: 'extreme close-up: macro of object/eye/hand; subject IS the panel; tight
       tolerances OK'
     subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
     subject_zone_pct:
     - 65
     - 65
@@ -729,6 +889,11 @@ compiled:
     notes: 'extreme close-up: macro of object/eye/hand; subject IS the panel; tight
       tolerances OK'
     subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
     subject_zone_pct:
     - 65
     - 65
@@ -752,6 +917,11 @@ compiled:
     notes: 'extreme close-up: macro of object/eye/hand; subject IS the panel; tight
       tolerances OK'
     subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
     subject_zone_pct:
     - 70
     - 60
@@ -775,6 +945,11 @@ compiled:
     notes: 'extreme close-up: macro of object/eye/hand; subject IS the panel; tight
       tolerances OK'
     subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
     subject_zone_pct:
     - 70
     - 60
@@ -796,6 +971,11 @@ compiled:
     notes: 'extreme close-up: macro of object/eye/hand; subject IS the panel; tight
       tolerances OK'
     subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
     subject_zone_pct:
     - 70
     - 60
@@ -819,6 +999,11 @@ compiled:
     notes: 'extreme close-up: macro of object/eye/hand; subject IS the panel; tight
       tolerances OK'
     subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
     subject_zone_pct:
     - 70
     - 60
@@ -840,6 +1025,11 @@ compiled:
     notes: 'extreme close-up: macro of object/eye/hand; subject IS the panel; tight
       tolerances OK'
     subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
     subject_zone_pct:
     - 70
     - 60
@@ -863,6 +1053,11 @@ compiled:
     notes: 'extreme close-up: macro of object/eye/hand; subject IS the panel; tight
       tolerances OK'
     subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
     subject_zone_pct:
     - 70
     - 60
@@ -886,6 +1081,11 @@ compiled:
     notes: 'extreme close-up: macro of object/eye/hand; subject IS the panel; tight
       tolerances OK'
     subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
     subject_zone_pct:
     - 70
     - 60
@@ -909,6 +1109,11 @@ compiled:
     notes: 'extreme close-up: macro of object/eye/hand; subject IS the panel; tight
       tolerances OK'
     subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
     subject_zone_pct:
     - 70
     - 60
@@ -932,6 +1137,11 @@ compiled:
     notes: 'extreme close-up: macro of object/eye/hand; subject IS the panel; tight
       tolerances OK'
     subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
     subject_zone_pct:
     - 70
     - 70
@@ -955,6 +1165,11 @@ compiled:
     notes: 'extreme close-up: macro of object/eye/hand; subject IS the panel; tight
       tolerances OK'
     subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
     subject_zone_pct:
     - 70
     - 70
@@ -976,6 +1191,11 @@ compiled:
     notes: 'extreme close-up: macro of object/eye/hand; subject IS the panel; tight
       tolerances OK'
     subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
     subject_zone_pct:
     - 70
     - 70
@@ -999,6 +1219,11 @@ compiled:
     notes: 'extreme close-up: macro of object/eye/hand; subject IS the panel; tight
       tolerances OK'
     subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
     subject_zone_pct:
     - 70
     - 70
@@ -1020,6 +1245,11 @@ compiled:
     notes: 'extreme close-up: macro of object/eye/hand; subject IS the panel; tight
       tolerances OK'
     subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
     subject_zone_pct:
     - 70
     - 70
@@ -1043,6 +1273,11 @@ compiled:
     notes: 'extreme close-up: macro of object/eye/hand; subject IS the panel; tight
       tolerances OK'
     subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
     subject_zone_pct:
     - 70
     - 70
@@ -1066,6 +1301,11 @@ compiled:
     notes: 'extreme close-up: macro of object/eye/hand; subject IS the panel; tight
       tolerances OK'
     subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
     subject_zone_pct:
     - 70
     - 70
@@ -1089,6 +1329,11 @@ compiled:
     notes: 'extreme close-up: macro of object/eye/hand; subject IS the panel; tight
       tolerances OK'
     subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
     subject_zone_pct:
     - 70
     - 70
@@ -1112,6 +1357,11 @@ compiled:
     notes: 'close-up: face + shoulders; forehead has air; shoulders may crop at the
       very bottom edge intentionally'
     subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
     subject_zone_pct:
     - 65
     - 80
@@ -1135,6 +1385,11 @@ compiled:
     notes: 'close-up: face + shoulders; forehead has air; shoulders may crop at the
       very bottom edge intentionally'
     subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
     subject_zone_pct:
     - 65
     - 80
@@ -1156,6 +1411,11 @@ compiled:
     notes: 'close-up: face + shoulders; forehead has air; shoulders may crop at the
       very bottom edge intentionally'
     subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
     subject_zone_pct:
     - 65
     - 80
@@ -1179,6 +1439,11 @@ compiled:
     notes: 'close-up: face + shoulders; forehead has air; shoulders may crop at the
       very bottom edge intentionally'
     subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
     subject_zone_pct:
     - 65
     - 80
@@ -1200,6 +1465,11 @@ compiled:
     notes: 'close-up: face + shoulders; forehead has air; shoulders may crop at the
       very bottom edge intentionally'
     subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
     subject_zone_pct:
     - 65
     - 80
@@ -1223,6 +1493,11 @@ compiled:
     notes: 'close-up: face + shoulders; forehead has air; shoulders may crop at the
       very bottom edge intentionally'
     subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
     subject_zone_pct:
     - 65
     - 80
@@ -1246,6 +1521,11 @@ compiled:
     notes: 'close-up: face + shoulders; forehead has air; shoulders may crop at the
       very bottom edge intentionally'
     subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
     subject_zone_pct:
     - 65
     - 80
@@ -1269,6 +1549,11 @@ compiled:
     notes: 'close-up: face + shoulders; forehead has air; shoulders may crop at the
       very bottom edge intentionally'
     subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
     subject_zone_pct:
     - 65
     - 80
@@ -1292,6 +1577,11 @@ compiled:
     notes: 'extreme close-up: macro of object/eye/hand; subject IS the panel; tight
       tolerances OK'
     subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
     subject_zone_pct:
     - 60
     - 55
@@ -1315,6 +1605,11 @@ compiled:
     notes: 'extreme close-up: macro of object/eye/hand; subject IS the panel; tight
       tolerances OK'
     subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
     subject_zone_pct:
     - 60
     - 55
@@ -1336,6 +1631,11 @@ compiled:
     notes: 'extreme close-up: macro of object/eye/hand; subject IS the panel; tight
       tolerances OK'
     subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
     subject_zone_pct:
     - 60
     - 55
@@ -1359,6 +1659,11 @@ compiled:
     notes: 'extreme close-up: macro of object/eye/hand; subject IS the panel; tight
       tolerances OK'
     subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
     subject_zone_pct:
     - 60
     - 55
@@ -1380,6 +1685,11 @@ compiled:
     notes: 'extreme close-up: macro of object/eye/hand; subject IS the panel; tight
       tolerances OK'
     subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
     subject_zone_pct:
     - 60
     - 55
@@ -1403,6 +1713,11 @@ compiled:
     notes: 'extreme close-up: macro of object/eye/hand; subject IS the panel; tight
       tolerances OK'
     subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
     subject_zone_pct:
     - 60
     - 55
@@ -1426,6 +1741,11 @@ compiled:
     notes: 'extreme close-up: macro of object/eye/hand; subject IS the panel; tight
       tolerances OK'
     subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
     subject_zone_pct:
     - 60
     - 55
@@ -1449,6 +1769,11 @@ compiled:
     notes: 'extreme close-up: macro of object/eye/hand; subject IS the panel; tight
       tolerances OK'
     subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
     subject_zone_pct:
     - 60
     - 55
@@ -1471,6 +1796,11 @@ compiled:
     margin_min_pct_all_sides: 5
     notes: overhead / top-down view; object(s) center-frame
     subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
     subject_zone_pct:
     - 65
     - 75
@@ -1493,6 +1823,11 @@ compiled:
     margin_min_pct_all_sides: 5
     notes: overhead / top-down view; object(s) center-frame
     subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
     subject_zone_pct:
     - 65
     - 75
@@ -1513,6 +1848,11 @@ compiled:
     margin_min_pct_all_sides: 5
     notes: overhead / top-down view; object(s) center-frame
     subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
     subject_zone_pct:
     - 65
     - 75
@@ -1535,6 +1875,11 @@ compiled:
     margin_min_pct_all_sides: 5
     notes: overhead / top-down view; object(s) center-frame
     subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
     subject_zone_pct:
     - 65
     - 75
@@ -1555,6 +1900,11 @@ compiled:
     margin_min_pct_all_sides: 5
     notes: overhead / top-down view; object(s) center-frame
     subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
     subject_zone_pct:
     - 65
     - 75
@@ -1577,6 +1927,11 @@ compiled:
     margin_min_pct_all_sides: 5
     notes: overhead / top-down view; object(s) center-frame
     subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
     subject_zone_pct:
     - 65
     - 75
@@ -1599,6 +1954,11 @@ compiled:
     margin_min_pct_all_sides: 5
     notes: overhead / top-down view; object(s) center-frame
     subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
     subject_zone_pct:
     - 65
     - 75
@@ -1621,6 +1981,11 @@ compiled:
     margin_min_pct_all_sides: 5
     notes: overhead / top-down view; object(s) center-frame
     subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
     subject_zone_pct:
     - 65
     - 75
@@ -1644,6 +2009,11 @@ compiled:
     notes: 'extreme close-up: macro of object/eye/hand; subject IS the panel; tight
       tolerances OK'
     subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
     subject_zone_pct:
     - 75
     - 80
@@ -1667,6 +2037,11 @@ compiled:
     notes: 'extreme close-up: macro of object/eye/hand; subject IS the panel; tight
       tolerances OK'
     subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
     subject_zone_pct:
     - 75
     - 80
@@ -1688,6 +2063,11 @@ compiled:
     notes: 'extreme close-up: macro of object/eye/hand; subject IS the panel; tight
       tolerances OK'
     subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
     subject_zone_pct:
     - 75
     - 80
@@ -1711,6 +2091,11 @@ compiled:
     notes: 'extreme close-up: macro of object/eye/hand; subject IS the panel; tight
       tolerances OK'
     subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
     subject_zone_pct:
     - 75
     - 80
@@ -1732,6 +2117,11 @@ compiled:
     notes: 'extreme close-up: macro of object/eye/hand; subject IS the panel; tight
       tolerances OK'
     subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
     subject_zone_pct:
     - 75
     - 80
@@ -1755,6 +2145,11 @@ compiled:
     notes: 'extreme close-up: macro of object/eye/hand; subject IS the panel; tight
       tolerances OK'
     subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
     subject_zone_pct:
     - 75
     - 80
@@ -1778,6 +2173,11 @@ compiled:
     notes: 'extreme close-up: macro of object/eye/hand; subject IS the panel; tight
       tolerances OK'
     subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
     subject_zone_pct:
     - 75
     - 80
@@ -1801,6 +2201,11 @@ compiled:
     notes: 'extreme close-up: macro of object/eye/hand; subject IS the panel; tight
       tolerances OK'
     subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
     subject_zone_pct:
     - 75
     - 80
@@ -1823,6 +2228,11 @@ compiled:
     margin_min_pct_all_sides: 5
     notes: overhead / top-down view; object(s) center-frame
     subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
     subject_zone_pct:
     - 35
     - 45
@@ -1845,6 +2255,11 @@ compiled:
     margin_min_pct_all_sides: 5
     notes: overhead / top-down view; object(s) center-frame
     subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
     subject_zone_pct:
     - 35
     - 45
@@ -1865,6 +2280,11 @@ compiled:
     margin_min_pct_all_sides: 5
     notes: overhead / top-down view; object(s) center-frame
     subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
     subject_zone_pct:
     - 35
     - 45
@@ -1887,6 +2307,11 @@ compiled:
     margin_min_pct_all_sides: 5
     notes: overhead / top-down view; object(s) center-frame
     subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
     subject_zone_pct:
     - 35
     - 45
@@ -1907,6 +2332,11 @@ compiled:
     margin_min_pct_all_sides: 5
     notes: overhead / top-down view; object(s) center-frame
     subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
     subject_zone_pct:
     - 35
     - 45
@@ -1929,6 +2359,11 @@ compiled:
     margin_min_pct_all_sides: 5
     notes: overhead / top-down view; object(s) center-frame
     subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
     subject_zone_pct:
     - 35
     - 45
@@ -1951,6 +2386,11 @@ compiled:
     margin_min_pct_all_sides: 5
     notes: overhead / top-down view; object(s) center-frame
     subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
     subject_zone_pct:
     - 35
     - 45
@@ -1973,6 +2413,11 @@ compiled:
     margin_min_pct_all_sides: 5
     notes: overhead / top-down view; object(s) center-frame
     subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
     subject_zone_pct:
     - 35
     - 45
