@@ -8,6 +8,9 @@ contracts:
 
   character_full_figure:
     inherits_from: framing.MS
+    overrides:
+      # V4.2: full-body shots — feet/ground at bottom is anatomically correct
+      subject_must_not_touch_edge_axes.bottom: false
     notes: "default for full-body shots; archetypes may override to framing.LS for wider"
 
   character_face_only:
@@ -40,6 +43,11 @@ contracts:
       margin.bottom: 17.5
       margin.left: 17.5
       margin.right: 17.5
+      # V4.2 (2026-05-20 smoke): hand close-ups naturally have table at bottom
+      # + arm entering from one side. Permit bottom + sides.
+      subject_must_not_touch_edge_axes.bottom: false
+      subject_must_not_touch_edge_axes.left: false
+      subject_must_not_touch_edge_axes.right: false
 
   character_hands_and_arms:
     inherits_from: framing.ECU
@@ -49,10 +57,18 @@ contracts:
       margin.bottom: 15
       margin.left: 15
       margin.right: 15
+      # V4.2: cup-wrapping pose. Bottom = table; sides = arms extending.
+      subject_must_not_touch_edge_axes.bottom: false
+      subject_must_not_touch_edge_axes.left: false
+      subject_must_not_touch_edge_axes.right: false
     notes: "e.g., cup-wrapping pose"
 
   character_chest_partial:
     inherits_from: framing.MCU
+    overrides:
+      # V4.2: chest_breath_micro etc. Bottom = waist/chair; head crop allowed.
+      subject_must_not_touch_edge_axes.bottom: false
+      subject_must_not_touch_edge_axes.right: false
     notes: "for chest_breath_micro etc."
 
   character_pet_only:
@@ -63,6 +79,8 @@ contracts:
       margin.bottom: 15
       margin.left: 15
       margin.right: 15
+      # V4.2: pet sits on floor/lap/windowsill — bottom naturally cropped.
+      subject_must_not_touch_edge_axes.bottom: false
     notes: "small companion animal close-up"
 
   object_macro:

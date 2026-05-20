@@ -1,45 +1,36 @@
-# Continuity state — ep001_005.
-# chapter_script intent: "Body register — sympathetic activation cue"
-#   Tight close-up on Mira's chest area; slight tension lines; quickening pulse.
-#   Beat type: micro (within-scene continuation).
-
-schema_version: "1.0.0"
+schema_version: 1.0.0
 panel_id: ep001_005
 inherits_from: ep001_004
 beat_type: micro
-
+archetype: chest_breath_micro
 scene_state:
   scene_id: kitchen_table_aoki
   temporal: dawn
   light_rig_id: K01_dawn_window_warm
-
 character_state:
   mira_aoki:
-    character_design_hash: "axes_only_PENDING_compute"
+    character_design_hash: axes_only_PENDING_compute
     pose_id: chest_breath_micro
-    expression_dial: 0.4                # +0.1 from prev (0.3) — within micro bound (0.3)
+    expression_dial: 0.4
     emotional: anxious
-    gaze_direction: off_frame_down       # face not visible; body register
+    gaze_direction: off_frame_down
     hand_state: tucked_self_soothing
     breath_phase: quickening
-
 prop_state:
-  cup: full                             # carried; no transition
-  phone: face_up_notification           # face_up_dark -> face_up_notification (adjacent in enum)
+  cup: full
+  phone: face_up_notification
   succulent_in_clay_pot: normal
-
 continuity_invariants:
-  - "scene unchanged (micro beat)"
-  - "expression_dial Δ = +0.1 ≤ 0.3 (micro bound)"
-  - "phone advances face_up_dark -> face_up_notification (adjacent)"
-  - "emotional state transitions calm_with_subtle_unease -> anxious (heuristic; class-D)"
-
+- scene unchanged (micro beat)
+- expression_dial Δ = +0.1 ≤ 0.3 (micro bound)
+- phone advances face_up_dark -> face_up_notification (adjacent)
+- emotional state transitions calm_with_subtle_unease -> anxious (heuristic; class-D)
 relational_field:
   active_entities:
-    - id: mira_aoki
-      on_frame: true
-      role: subject
-  shared_attention_anchor: phone        # implicit — body responding to phone trigger
+  - id: mira_aoki
+    on_frame: true
+    role: subject
+  shared_attention_anchor: phone
   emotional_tension_vector:
     direction: rising
     magnitude_delta_from_prev: 0.1

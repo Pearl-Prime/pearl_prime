@@ -249,13 +249,13 @@ def test_subject_safe_zone_centered_subject_passes(tmp_path: Path):
 
 def test_subject_safe_zone_oversize_subject_fails(tmp_path: Path):
     """v0.6: for L2, safe_zone runs on the post-cutout RGBA. V4.1: must_not_touch
-    axes track overflow. Use character_hand_only (all 4 axes guarded) so all 4
+    axes track overflow. Use object_macro (all 4 axes guarded — V4.2: all character_* subjects permit at least bottom) so all 4
     overflow."""
     cutout = tmp_path / "big_cutout.png"
     _make_rgba_cutout(cutout, subject_pct=(0.9, 0.95))  # opaque region 90% of canvas
     inp = vl.LayerValidationInput(
         image_path=cutout, layer_type="L2",
-        safe_zone_row=_safe_zone_for("subject=character_hand_only|framing=ECU|genre=healing"),
+        safe_zone_row=_safe_zone_for("subject=object_macro|framing=ECU|genre=healing"),
         cutout_image_path=cutout,
     )
     r = vl.check_subject_safe_zone(inp)
@@ -263,7 +263,7 @@ def test_subject_safe_zone_oversize_subject_fails(tmp_path: Path):
     # V4.1: overflow is split into guarded vs permitted; both keys may exist
     assert "overflow_px_all" in r.evidence
     assert "overflow_guarded_px" in r.evidence
-    # character_hand_only guards all 4 axes
+    # object_macro guards all 4 axes per V4.2
     assert set(r.evidence["overflow_guarded_px"].keys()) == {"left", "top", "right", "bottom"}
 
 
@@ -327,12 +327,12 @@ def test_subject_does_not_touch_edge_full_bleed_fails(tmp_path: Path):
 
     Use character_hand_only (NOT character_face_only): per V4.1 §15.A.7,
     character_face_only permits bottom + right edge contact (CU portraits crop
-    shoulders naturally). character_hand_only still guards all 4 axes."""
+    shoulders naturally). object_macro guards all 4 axes (V4.2)."""
     cutout = tmp_path / "bleed_cutout.png"
     _make_rgba_cutout_full_bleed(cutout)
     inp = vl.LayerValidationInput(
         image_path=cutout, layer_type="L2",
-        safe_zone_row=_safe_zone_for("subject=character_hand_only|framing=ECU|genre=healing"),
+        safe_zone_row=_safe_zone_for("subject=object_macro|framing=ECU|genre=healing"),
         cutout_image_path=cutout,
     )
     r = vl.check_subject_does_not_touch_edge(inp)
@@ -642,7 +642,7 @@ def test_l2_cutout_with_edge_bleed_fails_v06(tmp_path: Path):
     _make_rgba_cutout_with_bleed(cutout)
     inp = vl.LayerValidationInput(
         image_path=cutout, layer_type="L2",
-        safe_zone_row=_safe_zone_for("subject=character_hand_only|framing=ECU|genre=healing"),
+        safe_zone_row=_safe_zone_for("subject=object_macro|framing=ECU|genre=healing"),
         cutout_image_path=cutout,
     )
     results = vl.validate_layer(inp)

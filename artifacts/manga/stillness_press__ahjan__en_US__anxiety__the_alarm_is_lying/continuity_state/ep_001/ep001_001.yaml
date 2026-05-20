@@ -1,35 +1,25 @@
-# Continuity state — ep001_001 (episode opener).
-# Per MANGA_LAYER_RENDER_CONTRACT_SPEC.md §6.1.
-# chapter_script intent: "DAPPLED LIGHT HAND — establish safety palette, regulating cue"
-#   Bedroom at 6:47 AM. No figure yet — bedsheets hold the shape of someone
-#   who has not yet woken. Tree-leaf shadows. Phone face-down. Succulent.
-
-schema_version: "1.0.0"
+schema_version: 1.0.0
 panel_id: ep001_001
-inherits_from: null                  # episode opener
-beat_type: spatial                   # establishing wide
-
+inherits_from: null
+beat_type: spatial
+archetype: sparse_establishing_wide
 scene_state:
   scene_id: bedroom_aoki
   temporal: dawn
   light_rig_id: K01_dawn_window_warm
   weather_anchor: soft_clouded_light
-
-character_state: {}                  # no character on stage yet (bedsheets hold shape)
-
+character_state: {}
 prop_state:
   phone: face_down
   succulent_in_clay_pot: normal
-
-continuity_invariants:               # human-readable assertion list
-  - "no characters on stage; bedroom established empty"
-  - "phone face-down (baseline before activation)"
-
+continuity_invariants:
+- no characters on stage; bedroom established empty
+- phone face-down (baseline before activation)
 relational_field:
   active_entities:
-    - id: mira_aoki
-      on_frame: false
-      role: implied_listener         # the panel's "subject" is implied absence
+  - id: mira_aoki
+    on_frame: false
+    role: implied_listener
   shared_attention_anchor: null
   implied_partner_position: null
   emotional_tension_vector:
