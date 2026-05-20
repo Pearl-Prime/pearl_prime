@@ -1,0 +1,46 @@
+# Continuity state — ep001_004.
+# chapter_script intent: "Activation onset — quiet trigger, not a jump scare"
+#   POV from Mira's angle. Phone screen lit; notification banner appears.
+#   Cup still in frame at bottom edge. Beat type: spatial (POV shift).
+
+schema_version: "1.0.0"
+panel_id: ep001_004
+inherits_from: ep001_003
+beat_type: spatial
+
+scene_state:
+  scene_id: kitchen_table_aoki
+  temporal: dawn
+  light_rig_id: K01_dawn_window_warm
+
+character_state:
+  mira_aoki:
+    character_design_hash: "axes_only_PENDING_compute"
+    pose_id: hand_only_table              # POV from Mira; her hand may be in frame
+    expression_dial: 0.3                  # slight uptick — quiet trigger
+    emotional: calm_with_subtle_unease
+    gaze_direction: at_named_object_phone  # phone is now in prop_state and just lit
+    hand_state: relaxed_open
+
+prop_state:
+  cup: full                              # carried forward
+  phone: face_up_dark                    # transitional state (face_down -> face_up_dark is adjacent)
+                                          # The notification banner of the original chapter_script lands in
+                                          # the FOLLOWING panel (ep001_004b would be face_up_notification).
+                                          # This panel is the POV-shift onto the phone before it lights up.
+  succulent_in_clay_pot: normal
+
+continuity_invariants:
+  - "POV shift (spatial beat) — scene anchor unchanged"
+  - "phone advances face_down -> face_up_dark (adjacent in enum, micro change)"
+  - "notification glow lands in next panel ep001_004b (face_up_dark -> face_up_notification, adjacent)"
+
+relational_field:
+  active_entities:
+    - id: mira_aoki
+      on_frame: true
+      role: subject
+  shared_attention_anchor: phone
+  emotional_tension_vector:
+    direction: rising
+    magnitude_delta_from_prev: 0.1

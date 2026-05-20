@@ -1,0 +1,140 @@
+# Scene inventory for stillness_en_01.
+# Per MANGA_LAYER_RENDER_CONTRACT_SPEC.md §8.2 + §6.9 (light_rigs).
+#
+# Single source of truth: each scene rendered ONCE per (scene_id, temporal_variant).
+# Locale-neutral for V4 launch (no signage); locale variants deferred (§15.B.3).
+#
+# Derived from artifacts/manga/chapter_scripts/.../ep_001.yaml panel descriptions.
+
+schema_version: "1.0.0"
+series_id: stillness_en_01
+brand_id: stillness_press
+locale: en_US
+genre: healing
+authority_spec: docs/specs/MANGA_LAYER_RENDER_CONTRACT_SPEC.md
+
+scenes:
+
+  - scene_id: bedroom_aoki
+    description: >
+      Mira's bedroom. Single window with gauze curtains (camera-left).
+      Wooden bedside table with phone (face-down), small clock, and a single
+      potted succulent in a clay pot. Bed with cream-toned linens. Tree-leaf
+      shadows occasionally play across the opposite wall. Wall paint: warm
+      pale cream. Floor: pale wood. No people, no figures in the bed.
+    subject_bbox_region_clause: "upper-third (where character may sit up) or center-frame (bed shape)"
+    scene_specific_composition_clause: "bedside table at lower-left third, window with curtains right of frame, succulent visible on table"
+    forbidden_objects_clause: "kettle, cup, kitchen items, multiple people, named characters"
+    render_resolution: [1080, 1920]
+    locale_variant_required: false
+    used_in_archetypes:
+      - sparse_establishing_wide
+      - dappled_light_hand
+      - hand_table_micro
+      - phone_notification_macro
+    light_rigs:
+      - light_rig_id: K01_dawn_window_warm     # ep_001 6:47 AM canonical
+      - light_rig_id: K02_morning_window_neutral
+      - light_rig_id: K06_evening_warm_amber
+      - light_rig_id: K07_night_lamp_warm
+
+  - scene_id: kitchen_table_aoki
+    description: >
+      Mira's kitchen. Small wooden table center-left. Window with gauze
+      curtain (camera-left), dappled tree-leaf shadow on the cream wall.
+      Houseplant (monstera) on windowsill. Wooden chair at the table.
+      Counter and stove visible in background-right with the kettle.
+      Warm cream + sage palette. Empty mug rack on wall. No people in scene.
+    subject_bbox_region_clause: "upper-right third for character placement, lower-left third for kettle/cup placement"
+    scene_specific_composition_clause: "table at lower-third, window upper-left with dappled light, monstera lower-left, sage accent on cabinet handles"
+    forbidden_objects_clause: "phone in scene (phone is L3 close-object), multiple people, named characters, electronic devices except kettle, decorative clutter"
+    render_resolution: [1080, 1920]
+    locale_variant_required: false
+    used_in_archetypes:
+      - tea_beat_close_up
+      - kettle_steam_macro
+      - morning_routine_sequence
+      - window_light_threshold
+      - character_quiet_face
+      - hand_table_micro
+      - food_preparation_overhead
+      - sparse_establishing_wide
+    light_rigs:
+      - light_rig_id: K01_dawn_window_warm
+      - light_rig_id: K02_morning_window_neutral
+      - light_rig_id: K06_evening_warm_amber
+      - light_rig_id: K07_night_lamp_warm
+
+  - scene_id: home_office_corner
+    description: >
+      Small home-office desk in a corner of the apartment. Laptop closed
+      on the desk (lid latched), notebook stacked beside it. A small lamp.
+      A potted plant on the desk corner. Cork board with a few muted Post-its.
+      Pale sage wall behind. Wooden chair tucked in. Soft natural light from
+      a side window (off-frame). No people, no electronic screens lit.
+    subject_bbox_region_clause: "center-frame for character at desk, lower-third for hand/notebook"
+    scene_specific_composition_clause: "desk surface dominant lower-half, laptop center-table, plant lower-right, cork board upper-right wall"
+    forbidden_objects_clause: "screen content visible (laptop closed), phone, multiple people, kettle (kettle is kitchen-scene only)"
+    render_resolution: [1080, 1920]
+    locale_variant_required: false
+    used_in_archetypes:
+      - hand_table_micro
+      - character_quiet_face
+      - phone_notification_macro
+      - sparse_establishing_wide
+    light_rigs:
+      - light_rig_id: K02_morning_window_neutral
+      - light_rig_id: K03_midday_bright_natural
+      - light_rig_id: K05_afternoon_golden
+      - light_rig_id: K07_night_lamp_warm
+
+  - scene_id: conference_room_flashback
+    description: >
+      Past-work conference room — desaturated, cool grey-blue flashback palette.
+      Long oval table, low fluorescent / overhead lighting, generic glass-walled
+      modern corporate room. Used for past-failure / activation-register flashback
+      beats. Mira appears small under or beside the conference table; the room
+      itself is unbranded.
+    subject_bbox_region_clause: "lower-center for character (under table) or full-frame establishing"
+    scene_specific_composition_clause: "conference table dominant lower-third, glass walls left-back, fluorescent ceiling diffuser visible"
+    forbidden_objects_clause: "warm kitchen items, named brand logos, color saturation, plants"
+    render_resolution: [1080, 1920]
+    locale_variant_required: false
+    used_in_archetypes:
+      - sparse_establishing_wide
+      - chest_breath_micro
+      - character_face_micro_tension
+    light_rigs:
+      - light_rig_id: K_flashback_cool_grey_blue
+
+  - scene_id: neighborhood_walking_path
+    description: >
+      Quiet residential walking path in Mira's neighborhood. Low garden
+      walls, occasional camphor or maple tree, distant rooftops, soft
+      sky. Mild paving stones underfoot. Sparse — one or two unbranded
+      buildings visible. No people, no vehicles, no signage visible.
+    subject_bbox_region_clause: "center-frame for walking figure, lower-third for path foreground"
+    scene_specific_composition_clause: "path runs from lower-center to upper-third vanishing point, trees framing left/right, soft sky upper-fifth"
+    forbidden_objects_clause: "signage with text, vehicles, multiple people, named landmarks"
+    render_resolution: [1080, 1920]
+    locale_variant_required: false   # may flip to true if Phase 2 adds locale-specific signage
+    used_in_archetypes:
+      - walking_in_thought_medium
+      - sparse_establishing_wide
+      - long_drop_decompression
+      - miyazaki_ma_pause
+    light_rigs:
+      - light_rig_id: K02_morning_window_neutral
+      - light_rig_id: K03_midday_bright_natural
+      - light_rig_id: K05_afternoon_golden
+      - light_rig_id: K06_evening_warm_amber
+
+# ── notes ────────────────────────────────────────────────────────────────
+# - V4 launch covers ep_001's confirmed scenes (bedroom, kitchen).
+# - home_office_corner + neighborhood_walking_path declared for later episodes;
+#   not all 4 temporal variants need to be rendered upfront — render on
+#   first archetype demand (§6.8 empirical caching).
+# - locale_variant_required: false for all V4-launch scenes; Phase 2 may
+#   flip neighborhood_walking_path to true if signage becomes locale-specific.
+# - Each scene declares ≥1 light_rig from config/manga/light_rigs/iyashikei.yaml.
+#   §6.3.A invariant 7 (light_rig_within_scene) validates this membership.

@@ -1,0 +1,82 @@
+# Subject contracts — indexed by subject type.
+# Per MANGA_LAYER_RENDER_CONTRACT_SPEC.md §5.4.
+# Inherits from framing_contract via `inherits_from: framing.<id>`.
+
+schema_version: "1.0.0"
+type: "subject_contract"
+contracts:
+
+  character_full_figure:
+    inherits_from: framing.MS
+    notes: "default for full-body shots; archetypes may override to framing.LS for wider"
+
+  character_face_only:
+    inherits_from: framing.CU
+    overrides:
+      margin.top: 15
+    notes: "extra forehead air for portrait emphasis"
+
+  character_silhouette_back:
+    inherits_from: framing.CU
+    overrides:
+      margin.top: 10
+      margin.bottom: 10
+      margin.left: 10
+      margin.right: 10
+    notes: "silhouettes are forgiving — looser rules; can also inherit from MCU per archetype"
+
+  character_hand_only:
+    inherits_from: framing.ECU
+    overrides:
+      subject_zone_pct: [65, 65]
+      margin.top: 17.5
+      margin.bottom: 17.5
+      margin.left: 17.5
+      margin.right: 17.5
+
+  character_hands_and_arms:
+    inherits_from: framing.ECU
+    overrides:
+      subject_zone_pct: [70, 60]
+      margin.top: 15
+      margin.bottom: 15
+      margin.left: 15
+      margin.right: 15
+    notes: "e.g., cup-wrapping pose"
+
+  character_chest_partial:
+    inherits_from: framing.MCU
+    notes: "for chest_breath_micro etc."
+
+  character_pet_only:
+    inherits_from: framing.ECU
+    overrides:
+      subject_zone_pct: [70, 70]
+      margin.top: 15
+      margin.bottom: 15
+      margin.left: 15
+      margin.right: 15
+    notes: "small companion animal close-up"
+
+  object_macro:
+    inherits_from: framing.ECU
+
+  object_scene_fit:
+    inherits_from: framing.insert
+    overrides:
+      subject_zone_pct: [35, 45]
+    notes: "L3 object positioned per archetype bbox; small scene-embedded object"
+
+  multi_object_overhead:
+    inherits_from: framing.insert
+    notes: "food preparation, table spread"
+
+  food_close_up:
+    inherits_from: framing.ECU
+    overrides:
+      subject_zone_pct: [60, 55]
+      margin.top: 20
+      margin.bottom: 20
+      margin.left: 20
+      margin.right: 20
+    notes: "single dish, plate-on-table angle"

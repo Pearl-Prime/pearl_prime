@@ -1,0 +1,44 @@
+# Continuity state — ep001_002.
+# chapter_script intent: "TEA BEAT — first sensory anchor"
+#   Close-up on a hand wrapping a ceramic cup of tea. Steam curls upward.
+#   Beat type: spatial (scene transition from bedroom to kitchen).
+
+schema_version: "1.0.0"
+panel_id: ep001_002
+inherits_from: ep001_001
+beat_type: standard                    # scene transition bedroom -> kitchen (spec §6.3.A SCENE_JUMP_BEAT_TYPES)
+
+scene_state:
+  scene_id: kitchen_table_aoki        # spatial jump — bedroom → kitchen (legal on spatial beat)
+  temporal: dawn                       # same time of day
+  light_rig_id: K01_dawn_window_warm
+
+character_state:
+  mira_aoki:
+    character_design_hash: "axes_only_PENDING_compute"   # placeholder; backfilled at render time
+    pose_id: hands_wrapping_cup
+    expression_dial: 0.2                # calm baseline
+    emotional: calm
+    gaze_direction: off_frame_down      # looking down at cup; cup is in-frame, face is not
+    hand_state: wrapping_cup
+
+prop_state:
+  cup: full                             # full tea, steaming
+  phone: face_down                      # still face-down from panel 001
+  succulent_in_clay_pot: normal         # carried from prev (still in bedroom — narratively persistent)
+
+continuity_invariants:
+  - "scene jump bedroom -> kitchen on spatial beat (allowed)"
+  - "phone state persists face_down"
+  - "cup is first introduced in this panel; no prev to compare"
+
+relational_field:
+  active_entities:
+    - id: mira_aoki
+      on_frame: true                    # hand visible
+      role: subject
+  shared_attention_anchor: cup
+  implied_partner_position: null
+  emotional_tension_vector:
+    direction: steady
+    magnitude_delta_from_prev: 0.0      # not on stage in prev panel; no delta meaningful

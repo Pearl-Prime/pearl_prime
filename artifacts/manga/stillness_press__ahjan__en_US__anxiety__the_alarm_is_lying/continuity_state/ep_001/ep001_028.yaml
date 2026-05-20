@@ -1,0 +1,42 @@
+schema_version: 1.0.0
+panel_id: ep001_028
+inherits_from: ep001_027
+beat_type: micro
+archetype: character_quiet_face
+scene_state:
+  scene_id: kitchen_table_aoki
+  temporal: morning
+  light_rig_id: K02_morning_window_neutral
+character_state:
+  mira_aoki:
+    character_design_hash: axes_only_PENDING_compute
+    pose_id: front_portrait_seated_calm
+    expression_dial: 0.2
+    emotional: present
+    gaze_direction: at_named_object_kettle
+    hand_state: relaxed_open
+prop_state:
+  cup: half
+  phone: face_up_notification
+  succulent_in_clay_pot: normal
+  laptop: open_to_calendar
+  finch: perched_on_windowsill
+  smoke_detector: steady_green
+  kettle: on_burner_boiling
+relational_field:
+  active_entities:
+  - id: mira_aoki
+    on_frame: true
+    role: subject
+  shared_attention_anchor: kettle
+  emotional_tension_vector:
+    direction: steady
+    magnitude_delta_from_prev: 0.0
+render_deferred: true
+deferral_reason: 'face-only archetype CU portrait fails subject_does_not_touch_edge
+  contract after 4 B-tests (2026-05-20); render quality high (identity + expression
+  + scene_context all on-target) but bbox naturally touches right+bottom edges per
+  CU portrait composition. V4.1 scope: implement per-axis subject_must_not_touch_edge
+  (top/bottom/left/right separately) like archetype_exception=window_light_threshold
+  pattern, OR alternative render-side solution (per-character LoRA, dedicated face-render
+  workflow).'

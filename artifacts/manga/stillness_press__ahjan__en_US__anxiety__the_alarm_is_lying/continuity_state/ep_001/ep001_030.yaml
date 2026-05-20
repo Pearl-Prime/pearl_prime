@@ -1,0 +1,36 @@
+schema_version: 1.0.0
+panel_id: ep001_030
+inherits_from: ep001_029
+beat_type: spatial
+archetype: tea_beat_close_up
+scene_state:
+  scene_id: kitchen_table_aoki
+  temporal: morning
+  light_rig_id: K02_morning_window_neutral
+character_state:
+  mira_aoki:
+    character_design_hash: axes_only_PENDING_compute
+    pose_id: hands_wrapping_cup
+    expression_dial: 0.2
+    emotional: present
+    gaze_direction: off_frame_down
+    hand_state: wrapping_cup
+prop_state:
+  cup: half
+  phone: face_up_notification
+  succulent_in_clay_pot: normal
+  laptop: open_to_calendar
+  finch: perched_on_windowsill
+  smoke_detector: steady_green
+  kettle: off_burner_residual_steam
+relational_field:
+  active_entities:
+  - id: mira_aoki
+    on_frame: true
+    role: subject
+  shared_attention_anchor: cup
+  emotional_tension_vector:
+    direction: steady
+    magnitude_delta_from_prev: 0.0
+continuity_invariants:
+- kettle transitions on_burner_boiling -> off_burner_residual_steam (adjacent in enum)

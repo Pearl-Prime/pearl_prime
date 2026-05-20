@@ -1,0 +1,22 @@
+schema_version: 1.0.0
+panel_id: ep001_035
+inherits_from: ep001_034
+beat_type: standard
+archetype: sparse_establishing_wide
+scene_state:
+  scene_id: kitchen_table_aoki
+  temporal: morning
+  light_rig_id: K02_morning_window_neutral
+character_state: {}
+prop_state: {}
+relational_field:
+  active_entities:
+  - id: mira_aoki
+    on_frame: true
+    role: subject
+  shared_attention_anchor: null
+  emotional_tension_vector:
+    direction: steady
+    magnitude_delta_from_prev: 0.0
+continuity_invariants:
+- typographic outro on soft cream; no scene render; archetype placeholder

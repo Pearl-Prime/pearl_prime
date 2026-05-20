@@ -1,0 +1,141 @@
+# Object inventory for stillness_en_01.
+# Per MANGA_LAYER_RENDER_CONTRACT_SPEC.md §8.3.
+#
+# Each object_id × state_variant is a cached L1/L3 render. Continuity-state
+# changes drive separate cache entries (§6.4). State transitions validated
+# by validate_continuity_invariants.py §6.3.A invariant 3 (prop_persistence)
+# against config/manga/continuity/prop_evolution.yaml.
+
+schema_version: "1.0.0"
+series_id: stillness_en_01
+brand_id: stillness_press
+
+objects:
+
+  - object_id: cup
+    description: "Matte ceramic cup, warm cream glaze, slight rim irregularity (hand-thrown look), no decorative pattern"
+    object_type: object_macro                    # subject_contract entry for safe-zone lookup
+    layer_class: L3                              # close foreground object
+    backdrop: pure_white
+    backdrop_hex: "#FFFFFF"
+    state_variants_required:                     # per prop_evolution_enum
+      - empty
+      - half
+      - full
+    render_resolution: [1080, 1920]
+    used_in_archetypes:
+      - tea_beat_close_up
+      - hand_table_micro
+      - shared_meal_table_medium
+      - kettle_steam_macro
+    z_order_default: above_L2                    # cup occludes hand-tips
+    prompt_template_extras:                      # injected into L3 template
+      empty: "ceramic cup, interior visible as cream-cream gradient, no liquid"
+      half: "ceramic cup half-full with steaming amber tea, liquid level mid-cup, steam visible above rim"
+      full: "ceramic cup full of steaming amber tea, liquid level near rim, steam plume curling upward"
+
+  - object_id: kettle
+    description: "Matte ceramic kettle, warm cream glaze, simple handle, curved spout, no decorative marking"
+    object_type: object_macro
+    layer_class: L3
+    backdrop: pure_white
+    backdrop_hex: "#FFFFFF"
+    state_variants_required:
+      - off_burner
+      - on_burner_just_lit
+      - on_burner_boiling
+      - off_burner_residual_steam
+    render_resolution: [1080, 1920]
+    used_in_archetypes:
+      - kettle_steam_macro
+      - morning_routine_sequence
+    z_order_default: above_L2
+    prompt_template_extras:
+      off_burner: "kettle resting on table, no steam, no flame visible"
+      on_burner_just_lit: "kettle on burner with gentle blue gas flame visible at base, no steam yet"
+      on_burner_boiling: "kettle on burner with vigorous steam plume from spout reaching upper frame, faint flame at base"
+      off_burner_residual_steam: "kettle off burner, residual gentle steam from spout, no flame"
+
+  - object_id: phone
+    description: "Slim modern smartphone, dark matte case, no visible branding, screen face-down by default"
+    object_type: object_macro
+    layer_class: L3
+    backdrop: pure_white
+    backdrop_hex: "#FFFFFF"
+    state_variants_required:
+      - face_down
+      - face_up_dark
+      - face_up_notification
+      - in_hand_being_read
+    render_resolution: [1080, 1920]
+    used_in_archetypes:
+      - phone_notification_macro
+      - hand_table_micro
+    z_order_default: above_L2
+    prompt_template_extras:
+      face_down: "phone resting screen-down on wooden surface, dark matte back visible, no glow"
+      face_up_dark: "phone screen-up but dark, no notification, faint edge highlight"
+      face_up_notification: "phone screen-up displaying a single notification banner with subject line text obscured (blur or generic shape — no readable text), faint glow on surrounding surface"
+      in_hand_being_read: "phone held in hand, screen tilted toward viewer, notification banner visible but with text blurred/illegible"
+
+  - object_id: succulent_in_clay_pot
+    description: "Small succulent (echeveria-style rosette) in a hand-thrown terracotta clay pot, soil visible at base, one or two leaves catching light"
+    object_type: object_macro
+    layer_class: L1                              # mid-distance environmental anchor
+    backdrop: pure_white
+    backdrop_hex: "#FFFFFF"
+    state_variants_required:
+      - normal
+      - watered_normal
+    render_resolution: [1080, 1920]
+    used_in_archetypes:
+      - dappled_light_hand
+      - seasonal_anchor_object
+      - sparse_establishing_wide
+    z_order_default: behind_L2                   # plant on bedside; character may overlap
+    prompt_template_extras:
+      normal: "succulent in terracotta pot, leaves slightly closed, normal hydration"
+      watered_normal: "succulent in terracotta pot with slight water droplet on leaves, fresh hydrated look"
+
+  - object_id: journal
+    description: "Small softcover notebook, plain unbranded cover (warm cream or sage), narrow elastic band, hand-feeling not corporate"
+    object_type: object_macro
+    layer_class: L3
+    backdrop: pure_white
+    backdrop_hex: "#FFFFFF"
+    state_variants_required:
+      - closed
+      - open_to_blank_page
+      - open_to_written_page
+      - closed_with_pen_visible
+    render_resolution: [1080, 1920]
+    used_in_archetypes:
+      - hand_table_micro
+      - sparse_establishing_wide
+    z_order_default: above_L2
+    prompt_template_extras:
+      closed: "notebook closed flat on table, cover plain, elastic band across"
+      open_to_blank_page: "notebook open to blank white page, faint horizontal rule lines barely visible"
+      open_to_written_page: "notebook open to a page with handwritten text indicated as suggestive ink strokes (no readable words), warm-colored ink"
+      closed_with_pen_visible: "notebook closed with a slim wooden pen resting on top, elastic band across"
+
+  - object_id: jade_pendant
+    description: "Small smooth jade-green pendant on slim leather cord; identity-anchor accessory (visible on Mira in every panel where neckline is in frame)"
+    object_type: object_scene_fit                # very small; usually composited into character L2
+    layer_class: L1                              # rarely a standalone L1; usually part of character
+    backdrop: pure_white
+    backdrop_hex: "#FFFFFF"
+    state_variants_required:
+      - worn
+    render_resolution: [1080, 1920]
+    used_in_archetypes:
+      - tea_beat_close_up
+      - character_quiet_face
+      - seasonal_anchor_object
+    z_order_default: above_L2
+    prompt_template_extras:
+      worn: "small smooth jade-green pendant on slim leather cord, hanging at neckline, mid-day-light reflection visible"
+
+authority:
+  spec: docs/specs/MANGA_LAYER_RENDER_CONTRACT_SPEC.md §8.3
+  prop_evolution: config/manga/continuity/prop_evolution.yaml

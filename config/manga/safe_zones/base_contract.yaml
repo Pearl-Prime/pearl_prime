@@ -1,0 +1,12 @@
+# Base contract — universal defaults applied to all framings/subjects/genres.
+# Per MANGA_LAYER_RENDER_CONTRACT_SPEC.md §5.2.
+
+schema_version: "1.0.0"
+type: "base_contract"
+contract:
+  margin_min_pct_all_sides: 5
+  backdrop: pure_white
+  backdrop_corner_tolerance: 5
+  subject_must_not_touch_edge: true
+  feather_px: 0
+  alpha_bimodal: true
