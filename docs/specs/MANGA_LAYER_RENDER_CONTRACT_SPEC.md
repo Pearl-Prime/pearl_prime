@@ -1,16 +1,23 @@
-# Manga Layer Render Contract Spec (v0.6.3 — V4 spec doc-split + Phase 1 ToonOut cutout_engine)
+# Manga Layer Render Contract Spec (v0.7 — V5 single-render decompose supersedes V4 L0+L2 split)
 
-**Status:** AUTHORITY (v0.6.3 — Phase 1 ToonOut + doc-split, 2026-05-20)
+**Status:** AUTHORITY (v0.7 — operator-directed 2026-05-20 after V4 ep_001 composite review; cumulative with v0.6.3 Phase 1 ToonOut + v0.6.2 doc-split)
 **Author:** Pearl_Architect + Pearl_Int + Pearl_Research
-**Schema version:** 0.6.3 (Phase 1 ToonOut cutout_engine extension; cumulative with v0.6.2 doc-split)
+**Schema version:** 0.7.0 (major architectural amendment: V5 Qwen-Image-Layered supersedes V4 L0+L2 split; V4 sections retained as the experiment-of-record)
+**Changes since v0.6.3 (v0.7 — V5 architectural pivot):**
+- §16 NEW — V5 Qwen-Image-Layered architecture documented in a standalone sibling spec at `docs/specs/MANGA_V5_LAYERED_ARCHITECTURE.md` v1.0.0 (decision, model files, workflow JSON, layer semantics, orchestrator design, V4→V5 carryforward/changes, acceptance criteria, open risks, Phase 1 ToonOut fallback). This V4 spec inserts a short §16 DEPRECATION MARKER that points to the standalone doc, lists what V5 supersedes from this spec, and lists what V5 reuses unchanged. Doc-split honors the §15.C.6 trip-wire (commit to split before 1900 lines).
+- §16 marker — V5 supersedes from this spec: §3 (layer pipeline architecture), §4 (layer taxonomy), §7 (per-archetype layer composition maps), §13.4 (Phase D render scripts), §15.A.6 (V4 composite-level operator review). V5 does NOT supersede §5 (safe-zone contracts), §5.9 (prompt compiler), `MANGA_CONTINUITY_STATE_SPEC.md` (formerly §6), §12 (validator infrastructure), §14 (failure modes & recovery), §15.A.1 (identity lock) — these remain authoritative under both V4 and V5.
+- §17 RENUMBERED — was §16 Appendix A; content unchanged.
+- §18 RENUMBERED — was §17 Appendix B; content unchanged.
+- Operator decision basis (2026-05-20): reviewed 35 V4 ep_001 composites, found only 2/35 properly placed the subject. Root cause is two-layered: (a) rembg cutout precision keeps chair/stove fragments attached to the silhouette; (b) L0 and L2 are independent Qwen renders with no shared coordinate system. V5 eliminates the L0+L2 split entirely via Qwen-Image-Layered native decompose.
+- New files: `docs/specs/MANGA_V5_LAYERED_ARCHITECTURE.md` (standalone V5 spec), `scripts/image_generation/comfyui_workflows/qwen_image_layered_decompose.json` (V5 workflow JSON, 11 nodes), `scripts/manga/v5_qwen_layered_feasibility.py` (V5 feasibility test driver), `scripts/manga/render_v5_episode.py` (V5 episode orchestrator), `artifacts/research/manga_layer_compositing_research_2026-05-20.md` (Pearl_Research findings).
 **Changes since v0.6.2 (v0.6.3 — Phase 1 ToonOut):**
 - §8.1 + §12.3 EXTENDED — Phase 1 ToonOut `cutout_engine` field added per V5 spec §13. Default `"rembg"` preserves v0.6 behavior; `"toonout"` opts a per-archetype cutout in to BiRefNet anime-FT. Side-by-side test script: `scripts/manga/v4_toonout_side_by_side.py`. Loader: `scripts/manga/manga_cutout_toonout.py`. Weights: `models/cutout/toonout/birefnet_finetuned_toonout.pth` (operator pulls separately; 885 MB; HF joelseytre/toonout).
 **Changes since v0.6.1 (v0.6.2 — doc-split execution):**
-- §6 SHORTENED — State Continuity Architecture extracted to standalone sibling spec `docs/specs/MANGA_CONTINUITY_STATE_SPEC.md` v1.0.0. V4 spec retains a short §6 DOC-SPLIT MARKER. Honors §15.C.6 trip-wire + operator directive 2026-05-20 (target <1,800 lines). Continuity state will become a dual-architecture authority (V4 + V5) once PR #1258 lands.
-- §13 ARCHIVED — V3.1-to-V4 validator-first migration plan extracted to standalone historical archive `docs/specs/MANGA_V4_MIGRATION_PLAN_ARCHIVE.md` v1.0.0. V4 spec retains a short §13 ARCHIVE MARKER. Plan is frozen as historical record; V5 will have its own acceptance criteria in `MANGA_V5_LAYERED_ARCHITECTURE.md` once that spec lands.
+- §6 SHORTENED — State Continuity Architecture extracted to standalone sibling spec `docs/specs/MANGA_CONTINUITY_STATE_SPEC.md` v1.0.0. V4 spec retains a short §6 DOC-SPLIT MARKER. Honors §15.C.6 trip-wire + operator directive 2026-05-20 (target <1,800 lines). Continuity state is now dual-architecture authority (V4 + V5) per §16 V5 marker.
+- §13 ARCHIVED — V3.1-to-V4 validator-first migration plan extracted to standalone historical archive `docs/specs/MANGA_V4_MIGRATION_PLAN_ARCHIVE.md` v1.0.0. V4 spec retains a short §13 ARCHIVE MARKER. Plan is frozen as historical record; V5 has its own acceptance criteria in `MANGA_V5_LAYERED_ARCHITECTURE.md §11`.
 - Cross-references updated throughout §1.3, §2.4 "See:" line, §4.4, §7.2, §8.3, §12.3, §12.5, §14.B.1, §14.C, §14.D, §14.F, §15.A.1, §15.A.2, §15.A.4, §15.A.6, §15.B.1, §15.C.5, §15.C.7, §17 Appendix B.
 - Header schema version bumped 0.6.1 → 0.6.2.
-- Resulting V4 spec length: ~1,479 lines (was 2,032). Buffer below 1,800 trip-wire: ~321 lines.
+- Resulting V4 spec length: ~1,479 lines (was 2,032 pre-doc-split). Buffer below 1,800 trip-wire: ~321 lines. After V5 §16 marker insertion: ~1,510 lines, still ~290 lines below trip-wire.
 **Changes since v0.6 (B-test #2 follow-up):**
 - §8.1 EXTENDED — L2 prompt contract flips from "suppress scene" to "specify archetype-appropriate scene context"
 - §7.2 EXTENDED — archetype `layer_render_contract.L2_char` gains required `scene_context_clause` field
@@ -1448,7 +1455,40 @@ These are decisions, not gaps. Out-of-scope intentionally.
 
 ---
 
-## 16. Appendix A — Authority chain
+## 16. V5 — Qwen-Image-Layered architecture (DEPRECATION MARKER; full spec in standalone doc) — NEW v0.7
+
+**The V4 layer-render architecture described in §3–§13 is deprecated for ep_001+ production.** Operator review of 35 V4 composites on 2026-05-20 found only 2/35 properly placed the subject. Root cause analysis identified two failure modes (rembg cutout-residue artifacts; L0/L2 coordinate-system mismatch) that cannot be fixed by tuning V4 — only by an architectural shift. Pearl_Research evaluated 2025–2026 SOTA options (`artifacts/research/manga_layer_compositing_research_2026-05-20.md`) and operator approved Phase 2 (Qwen-Image-Layered native decompose) on 2026-05-20.
+
+**V5 is documented in a standalone sibling spec:**
+- **`docs/specs/MANGA_V5_LAYERED_ARCHITECTURE.md` v1.0.0** — canonical V5 architecture, model file requirements, workflow JSON contract, layer semantics, orchestrator design, acceptance criteria, open risks, Phase 1 ToonOut fallback path.
+
+**Doc-split rationale:** Per §15.C.6 (doc-split trip-wire at 1900 lines), inflating this spec with the full V5 architecture would push it past 2,400 lines. The standalone V5 doc honors that commitment.
+
+**What V5 supersedes from this spec:**
+- §3 Architecture: the layer pipeline (V4's L0+L2 split)
+- §4 Layer taxonomy (L0/L1/L2 are no longer independent renders in V5; L3/L4 deferred)
+- §7 Per-archetype layer composition maps (V5 adds a `V5_layered_decompose` block)
+- §13.4 Phase D — render pipeline scripts (V5 orchestrator is `render_v5_episode.py`)
+- §15.A.6 V4 composite-level operator review (V5 has its own acceptance criteria in standalone doc §11)
+
+**What V5 does NOT supersede (these sections remain authoritative under both V4 and V5):**
+- §5 Safe-zone hierarchical contract inheritance
+- §5.9 Contract-to-prompt compiler
+- §6 Continuity state schema
+- §12 Validator infrastructure
+- §14 Failure modes & recovery strategy (including §14.F failure budget)
+- §15.A.1 Identity lock acceptance criteria
+
+V4 sections remain valid as (a) the experiment-of-record showing why V5 was necessary, and (b) the contract scaffolding V5 reuses unchanged, and (c) the fallback path for V3.1 single-pass rendering.
+
+<!-- Detailed V5 architecture (decision, model files, workflow JSON, layer semantics,
+     orchestrator design, V4-to-V5 carryforward/changes, acceptance criteria, open
+     risks, Phase 1 ToonOut fallback) is in docs/specs/MANGA_V5_LAYERED_ARCHITECTURE.md.
+     V4 spec retains this short deprecation marker only (per §15.C.6 doc-split). -->
+
+---
+
+## 17. Appendix A — Authority chain
 
 This spec inherits from / extends:
 - `docs/specs/MANGA_V3_3_MODEL_ROUTING_SPEC.md` (engine routing per archetype)
@@ -1473,7 +1513,7 @@ This spec is referenced by (planned):
 
 ---
 
-## 17. Appendix B — One-page operator summary
+## 18. Appendix B — One-page operator summary
 
 **The architectural reframe:** we stop "generating manga panels" and start **compiling manga panels from typed render assets under constrained contracts**. The model fulfills the contract or fails it — like a compiler.
 
