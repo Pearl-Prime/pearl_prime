@@ -1935,6 +1935,132 @@ slot_families:
         - edge
         - same
 
+# OPD-123 (2026-05-20): story-introduction bridges fire at the slot boundary
+# when entering a named-character STORY atom (section → named story).
+# Loaded by chapter_composer._bridge_story_introduction (not within-slot).
+story_introduction:
+  section_to_named_story:
+    - text: "Let me tell you about somebody who had the same problem."
+      next_atom_expectation: named_story
+      stems:
+      - story introduction named character
+      roots:
+      - somebody
+      - problem
+      - tell
+    - text: "Here is what this looks like in one person's life."
+      next_atom_expectation: named_story
+      stems:
+      - story introduction one person
+      roots:
+      - life
+      - person
+      - looks
+    - text: "There is someone I have been thinking about. Let me describe."
+      next_atom_expectation: named_story
+      stems:
+      - story introduction someone thinking
+      roots:
+      - describe
+      - someone
+      - thinking
+    - text: "Watch this play out in a single body."
+      next_atom_expectation: named_story
+      stems:
+      - story introduction single body
+      roots:
+      - body
+      - play
+      - watch
+    - text: "A specific person. A specific Wednesday. A specific room."
+      next_atom_expectation: named_story
+      stems:
+      - story introduction specific person room
+      roots:
+      - person
+      - room
+      - wednesday
+    - text: "I want to bring this down to one human."
+      next_atom_expectation: named_story
+      stems:
+      - story introduction one human
+      roots:
+      - human
+      - bring
+      - down
+    - text: "Picture someone you might know. Maybe yourself."
+      next_atom_expectation: named_story
+      stems:
+      - story introduction picture someone
+      roots:
+      - picture
+      - know
+      - yourself
+    - text: "There is a name attached to this. Let me give it to you."
+      next_atom_expectation: named_story
+      stems:
+      - story introduction name attached
+      roots:
+      - name
+      - attached
+      - give
+    - text: "Move from the pattern to a person."
+      next_atom_expectation: named_story
+      stems:
+      - story introduction pattern to person
+      roots:
+      - pattern
+      - person
+      - move
+    - text: "The shape lives in lived life. Here is one."
+      next_atom_expectation: named_story
+      stems:
+      - story introduction lived life shape
+      roots:
+      - shape
+      - life
+      - lived
+    - text: "Let me make this less abstract."
+      next_atom_expectation: named_story
+      stems:
+      - story introduction less abstract
+      roots:
+      - abstract
+      - less
+      - make
+    - text: "Walk through this with one person who actually lived it."
+      next_atom_expectation: named_story
+      stems:
+      - story introduction walk through lived
+      roots:
+      - lived
+      - person
+      - walk
+    - text: "Before the lesson hardens, meet someone who carried this pattern home."
+      next_atom_expectation: named_story
+      stems:
+      - story introduction meet someone pattern
+      roots:
+      - lesson
+      - pattern
+      - meet
+    - text: "The mechanism has a face. Here is whose body learned it first."
+      next_atom_expectation: named_story
+      stems:
+      - story introduction mechanism face body
+      roots:
+      - body
+      - face
+      - mechanism
+    - text: "Set the theory aside for a breath. A real week is about to speak."
+      next_atom_expectation: named_story
+      stems:
+      - story introduction real week speak
+      roots:
+      - breath
+      - theory
+      - week
+
 # Default fallback for slot types not listed above
 default_family:
   generic_continuation:

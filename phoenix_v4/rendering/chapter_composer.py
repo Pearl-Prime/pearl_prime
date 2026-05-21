@@ -1284,6 +1284,96 @@ def _bridge_before_integration(
 # Defect ref: docs/diagnostics/OPD-109_RENDERING_LAYER_DIAGNOSIS_2026-05-18.md
 # ---------------------------------------------------------------------------
 
+def _bridge_story_introduction(
+    next_atom: str,
+    *,
+    chapter_index: int = 0,
+    atom_pair_index: int = 0,
+    rotation_state: "WithinSlotRotationState | None" = None,
+) -> str:
+    """OPD-123: one-sentence bridge before a named-character STORY atom body.
+
+    Fires at the slot boundary going INTO STORY (not between SCENE atoms).
+    Selection is deterministic; uses ``story_introduction`` / ``section_to_named_story``
+    variants from within_slot_bridge_families.yaml.
+    """
+    if _classify_atom(next_atom) != "named_story":
+        return ""
+
+    payload = _load_within_slot_bridge_families()
+    family = payload.get("story_introduction") or {}
+    entries = family.get("section_to_named_story") or []
+    if not isinstance(entries, list) or not entries:
+        return ""
+
+    seed_root = (
+        f"opd123|{int(chapter_index)}|STORY|story_intro|{int(atom_pair_index)}"
+    )
+    raw_variants: list[tuple[str, int]] = []
+    for v_idx, entry in enumerate(entries):
+        if not isinstance(entry, dict):
+            continue
+        text = str(entry.get("text") or "").strip()
+        if not text:
+            continue
+        expectation = str(entry.get("next_atom_expectation") or "any").strip().lower()
+        if expectation not in ("named_story", "any"):
+            continue
+        rank_seed = f"{seed_root}|{v_idx}|{text}"
+        rank_digest = hashlib.sha256(rank_seed.encode("utf-8")).digest()
+        raw_variants.append((text, int.from_bytes(rank_digest[:8], "big")))
+
+    if not raw_variants:
+        return ""
+
+    effective_state: "WithinSlotRotationState | None" = (
+        rotation_state if rotation_state is not None else _WITHIN_SLOT_ROTATION_TLS
+    )
+    if effective_state is not None:
+        chapter_filtered = [
+            v
+            for v in raw_variants
+            if not effective_state.chapter_has_used(chapter_index, v[0])
+        ]
+        candidates = chapter_filtered if chapter_filtered else raw_variants
+        candidates_sorted = sorted(
+            candidates,
+            key=lambda triple: (effective_state.book_count(triple[0]), triple[1]),
+        )
+        chosen_text = candidates_sorted[0][0]
+        effective_state.register(chapter_index, chosen_text)
+    else:
+        digest = hashlib.sha256(seed_root.encode("utf-8")).digest()
+        chosen_text = raw_variants[int.from_bytes(digest[:8], "big") % len(raw_variants)][0]
+
+    if _LOCALE_TLS:
+        return _gt(chosen_text, locale=_LOCALE_TLS)
+    return chosen_text
+
+
+def prepend_story_introduction_bridge(
+    story_text: str,
+    first_atom: str,
+    *,
+    chapter_index: int = 0,
+    rotation_state: "WithinSlotRotationState | None" = None,
+) -> str:
+    """Prepend OPD-123 story_introduction bridge when ``first_atom`` is a named story."""
+    body = (story_text or "").strip()
+    if not body:
+        return body
+    bridge = _bridge_story_introduction(
+        first_atom,
+        chapter_index=chapter_index,
+        rotation_state=rotation_state,
+    ).strip()
+    if not bridge:
+        return body
+    if bridge in body:
+        return body
+    return f"{bridge}\n\n{body}"
+
+
 def _bridge_within_slot(
     prev_atom: str,
     next_atom: str,
@@ -2208,7 +2298,46 @@ def compose_chapter_prose(
     if hook and scene and not _is_placeholder_text(hook) and not _is_placeholder_text(scene) and scene != opening:
         parts.append(scene)
 
-    # 3. Bridge → Mechanism (derived from reflection)
+    # 3. OPD-124: first section content (reflection teaching) before named story.
+    if reflection_raw and not _is_placeholder_text(reflection_raw):
+        trimmed = _trim_reflection(reflection_raw)
+        if trimmed:
+            parts.append(trimmed)
+
+    # 4. STORY with optional QA label
+    if story_raw and not _is_placeholder_text(story_raw):
+        parts.append(
+            _bridge_before_story(
+                thesis,
+                reflection=reflection_raw,
+                story=story_raw,
+                emotional_job=emotional_role,
+                chapter_index=chapter_index,
+                total_chapters=total_chapters,
+                bridge_memory=resolved_bridge_memory,
+            )
+        )
+        story_raw = prepend_story_introduction_bridge(
+            story_raw,
+            story_raw,
+            chapter_index=chapter_index,
+        )
+        if include_slot_labels_qa:
+            # Find the original atom_id for STORY
+            for st, prose in zip(slot_types, slot_proses):
+                if st.strip().upper() == "STORY" and prose == story_raw:
+                    break
+        parts.append(story_raw)
+
+    # 5a. PIVOT (land the story before teaching — Writer Spec §4.3a)
+    if pivot_raw and not _is_placeholder_text(pivot_raw):
+        parts.append(pivot_raw)
+
+    # 5b. COMPRESSION (if present, adds density/summary)
+    if compression_raw and not _is_placeholder_text(compression_raw):
+        parts.append(compression_raw)
+
+    # 5c. Mechanism deepening after story + section land (OPD-124 sequence).
     if thesis:
         parts.append(
             _bridge_after_opening(
@@ -2230,42 +2359,7 @@ def compose_chapter_prose(
         parts.append(mechanism)
         parts.append(thesis)
 
-    # 4. Trimmed reflection (the teaching layer — trimmed to thesis-relevant sentences)
-    if reflection_raw and not _is_placeholder_text(reflection_raw):
-        trimmed = _trim_reflection(reflection_raw)
-        if trimmed:
-            parts.append(trimmed)
-
-    # 5. STORY with optional QA label
-    if story_raw and not _is_placeholder_text(story_raw):
-        parts.append(
-            _bridge_before_story(
-                thesis,
-                reflection=reflection_raw,
-                story=story_raw,
-                emotional_job=emotional_role,
-                chapter_index=chapter_index,
-                total_chapters=total_chapters,
-                bridge_memory=resolved_bridge_memory,
-            )
-        )
-        if include_slot_labels_qa:
-            # Find the original atom_id for STORY
-            for st, prose in zip(slot_types, slot_proses):
-                if st.strip().upper() == "STORY" and prose == story_raw:
-                    break
-        parts.append(story_raw)
-
-    # 5a. PIVOT (land the story before teaching — Writer Spec §4.3a)
-    # PIVOT names what the story revealed without explaining. Placed between STORY and REFLECTION.
-    if pivot_raw and not _is_placeholder_text(pivot_raw):
-        parts.append(pivot_raw)
-
-    # 6. COMPRESSION (if present, adds density/summary)
-    if compression_raw and not _is_placeholder_text(compression_raw):
-        parts.append(compression_raw)
-
-    # 7. Exercise with bridge
+    # 6. Exercise with bridge
     # If exercise is placeholder or empty, try practice library (272 exercises with aha + integration)
     exercise_from_library_34 = False
     practice_type = _resolve_practice_type(exercise_type_hint, exercise_atom_id, exercise_raw)

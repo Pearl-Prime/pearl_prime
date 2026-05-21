@@ -791,6 +791,17 @@ def build_virtual_slot_streams(
         chapter_index=chapter_index0,
         bridge_fn=_mk_bridge("STORY"),
     )
+    if story_blocks:
+        try:
+            from phoenix_v4.rendering.chapter_composer import prepend_story_introduction_bridge
+
+            story = prepend_story_introduction_bridge(
+                story,
+                story_blocks[0],
+                chapter_index=chapter_index0,
+            )
+        except Exception:
+            pass
     if chapter_index0 == 0 and story.strip():
         story = _collapse_chapter_one_story_stack(story)
     pivot = _first_or_join(
