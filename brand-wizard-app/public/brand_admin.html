@@ -125,6 +125,10 @@ html,body{width:100%;height:100%;font-family:"DM Sans",sans-serif;background:#0e
 .coord-build-badge.stale{color:var(--acc2)}
 .coord-build-badge.missing{color:var(--red)}
 .coord-build-badge.loading{opacity:.6}
+.admin-dl-spinner{display:inline-flex;align-items:center;margin-right:6px;vertical-align:middle}
+.admin-dl-spinner svg{animation:admin-dl-spin .8s linear infinite}
+@keyframes admin-dl-spin{to{transform:rotate(360deg)}}
+.pp-btn:disabled,.action-btn:disabled{opacity:.55;cursor:not-allowed;pointer-events:none}
 
 /* -- Day Card (Phase 3) -- */
 .day-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px;margin:16px 0}
@@ -273,6 +277,7 @@ html,body{width:100%;height:100%;font-family:"DM Sans",sans-serif;background:#0e
 <body>
 <script src="assets/i18n.js"></script>
 <script src="assets/icons.js"></script>
+<script src="js/toast.js"></script>
 
 <!-- Top Bar -->
 <div id="topbar">
@@ -857,11 +862,16 @@ function renderPhase2(){
   });
   el.innerHTML=h;
   renderIcons(el);
-  refreshCoordinationBuildBadge();
+  startCoordBadgePolling();
 }
 function countUpload(u){ const s=bs(); let c=0; for(let i=1;i<=u.titles;i++) if(s.upload[u.id+'_t'+i]) c++; return c; }
 
 // ── Admin Packet Download (OPD-120: real ZIP via FastAPI) ──
+var _adminPacketDownloading=false;
+var _coordBadgePollTimer=null;
+var _coordBadgeLastStatus=null;
+var _coordBadgeBuildToastShown=false;
+var ADMIN_DL_SPINNER='<span class="admin-dl-spinner" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg></span>';
 function brandAdminApiBase(){
   try{var q=new URLSearchParams(window.location.search).get('api_base');if(q)return q.replace(/\/$/,'');}catch(e0){}
   if(typeof window.__BRAND_ADMIN_API_BASE==='string')return window.__BRAND_ADMIN_API_BASE.replace(/\/$/,'');
@@ -874,34 +884,71 @@ function currentIsoWeek(){
   var wn=1+Math.round(((thu-w1)/86400000-3+(w1.getDay()+6)%7)/7);
   return thu.getFullYear()+'-W'+String(wn).padStart(2,'0');
 }
-function refreshCoordinationBuildBadge(){
+function adminDownloadButtonIdleHtml(){
+  return (typeof icon==='function'?icon('arrow_right','sm'):'')+' Download';
+}
+function setAdminDownloadButtonLoading(btn,loading){
+  if(!btn)return;
+  if(loading){btn.disabled=true;btn.innerHTML=ADMIN_DL_SPINNER+' Building…';}
+  else{btn.disabled=false;btn.innerHTML=adminDownloadButtonIdleHtml();}
+}
+function stopCoordBadgePolling(){
+  if(_coordBadgePollTimer){clearTimeout(_coordBadgePollTimer);_coordBadgePollTimer=null;}
+}
+function scheduleCoordBadgePoll(){
+  stopCoordBadgePolling();
+  _coordBadgePollTimer=setTimeout(function(){
+    _coordBadgePollTimer=null;
+    if(!document.hidden)refreshCoordinationBuildBadge(true);
+    scheduleCoordBadgePoll();
+  },60000);
+}
+function startCoordBadgePolling(){
+  refreshCoordinationBuildBadge(false);
+  scheduleCoordBadgePoll();
+  if(!window.__coordBadgeVisBound){
+    window.__coordBadgeVisBound=true;
+    document.addEventListener('visibilitychange',function(){
+      if(!document.hidden)refreshCoordinationBuildBadge(true);
+    });
+  }
+}
+function refreshCoordinationBuildBadge(fromPoll){
   var el=document.getElementById('coord-build-badge');
   if(!el)return;
-  el.className='coord-build-badge loading';
-  el.textContent='Last built: checking…';
+  if(!fromPoll){el.className='coord-build-badge loading';el.textContent='Last built: checking…';}
   fetch(brandAdminApiBase()+'/api/brand_admin/coordination-status',{cache:'no-store'})
     .then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json();})
     .then(function(data){
-      var st=(data.status||'MISSING').toLowerCase();
-      el.className='coord-build-badge '+st;
-      el.textContent='Last built: '+(data.relative||'never')+' · '+(data.status||'MISSING');
+      var st=String(data.status||'MISSING').toUpperCase();
+      var prev=_coordBadgeLastStatus;
+      _coordBadgeLastStatus=st;
+      el.className='coord-build-badge '+st.toLowerCase();
+      el.textContent='Last built: '+(data.relative||'never')+' · '+st;
+      if(fromPoll&&prev==='MISSING'&&st==='CURRENT'&&!_coordBadgeBuildToastShown){
+        _coordBadgeBuildToastShown=true;
+        if(typeof toast!=='undefined')toast.info('Weekly package built — refresh to download latest');
+      }
     })
     .catch(function(){
+      _coordBadgeLastStatus=null;
       el.className='coord-build-badge missing';
       el.textContent='Last built: unavailable · start python3 scripts/run_server.py';
     });
 }
 function downloadAdminPacket(ev){
-  if(!brandId){alert('Select a brand first.');return;}
+  if(_adminPacketDownloading)return;
+  if(!brandId){if(typeof toast!=='undefined')toast.error('Select a brand first.');return;}
   var week=currentIsoWeek();
-  var btn=ev&&ev.target?ev.target:document.getElementById('admin-packet-dl-btn');
+  var btn=(ev&&ev.currentTarget)||document.getElementById('admin-packet-dl-btn');
   var url=brandAdminApiBase()+'/api/brand_admin/download/'+encodeURIComponent(brandId)+'/'+encodeURIComponent(week);
-  if(btn){btn.disabled=true;btn.textContent='Downloading…';}
+  _adminPacketDownloading=true;
+  setAdminDownloadButtonLoading(btn,true);
   fetch(url)
     .then(function(r){
-      if(r.status===404){throw new Error('No package for this brand/week. Run weekly_package_writer + build_admin_packets or wait for Monday cron.');}
-      if(r.status===500){return r.json().then(function(j){throw new Error(j.detail||'Build pipeline failed — see Monday cron logs');});}
-      if(!r.ok)throw new Error('Download failed (HTTP '+r.status+')');
+      if(r.status===404){var e=new Error('404');e._toastMsg='No package for '+brandId+'/'+week+'. Has Monday cron run?';throw e;}
+      if(r.status===500){return r.json().catch(function(){return{};}).then(function(){var e=new Error('500');e._toastMsg='Build pipeline failed. Check Monday cron logs.';throw e;});}
+      if(!r.ok){var e=new Error('HTTP');e._toastMsg='Download failed (HTTP '+r.status+')';throw e;}
       return r.blob();
     })
     .then(function(blob){
@@ -910,10 +957,19 @@ function downloadAdminPacket(ev){
       a.download=brandId+'_'+week+'.zip';
       a.click();
       URL.revokeObjectURL(a.href);
+      if(typeof toast!=='undefined')toast.success('Downloaded '+brandId+'_'+week+'.zip');
     })
-    .catch(function(e){alert(e.message||String(e));})
+    .catch(function(e){
+      var msg=e&&e._toastMsg;
+      if(!msg)msg=e&&(e.message||String(e));
+      if((e instanceof TypeError)||(e&&e.name==='TypeError')||/Failed to fetch|NetworkError|Load failed|fetch/i.test(String(msg))){
+        msg='Server unreachable. Is the API running?';
+      }
+      if(typeof toast!=='undefined')toast.error(msg);
+    })
     .finally(function(){
-      if(btn){btn.disabled=false;btn.innerHTML=(typeof icon==='function'?icon('arrow_right','sm'):'')+' Download';}
+      _adminPacketDownloading=false;
+      setAdminDownloadButtonLoading(btn,false);
     });
 }
 
