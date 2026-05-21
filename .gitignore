@@ -108,3 +108,6 @@ assets/manga_catalog/
 
 # Cloud-native agents Layer 2 — local R2 mirror (gitignored, blobs live in R2)
 artifacts/r2_cache/
+
+# Phase 1 ToonOut: 885 MB BiRefNet anime-FT weights (operator pulls separately)
+models/cutout/

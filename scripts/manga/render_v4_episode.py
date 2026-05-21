@@ -350,21 +350,41 @@ def dispatch_render(panel_id: str, prompt: str, negative_prompt: str,
 
 
 def apply_cutout(rendered_png: Path, cutout_policy: dict, out_path: Path) -> Path:
-    """Apply rembg cutout per archetype.cutout_policy."""
-    from rembg import remove, new_session
-    model_name = cutout_policy["model"]
-    session = new_session(model_name)
-    kwargs = {}
-    if cutout_policy.get("alpha_matting"):
-        kwargs["alpha_matting"] = True
-        kwargs["alpha_matting_foreground_threshold"] = cutout_policy.get(
-            "alpha_matting_foreground_threshold", 240)
-        kwargs["alpha_matting_background_threshold"] = cutout_policy.get(
-            "alpha_matting_background_threshold", 10)
-    rgba = remove(Image.open(rendered_png), session=session, **kwargs)
+    """Apply cutout per archetype.cutout_policy.
+
+    v0.7 Phase 1 (per docs/specs/MANGA_V5_LAYERED_ARCHITECTURE.md §13):
+    cutout_engine selects backend. Default "rembg" preserves v0.6 behavior.
+    cutout_engine="toonout" uses BiRefNet fine-tuned weights from
+    MatteoKartoon/BiRefNet (HF: joelseytre/toonout). Output contract is identical:
+    RGBA PIL.Image at the same dims as the input, alpha channel = subject mask.
+    """
+    engine = cutout_policy.get("cutout_engine", "rembg")
     out_path.parent.mkdir(parents=True, exist_ok=True)
-    rgba.save(out_path)
-    return out_path
+
+    if engine == "rembg":
+        from rembg import remove, new_session
+        model_name = cutout_policy["model"]
+        session = new_session(model_name)
+        kwargs = {}
+        if cutout_policy.get("alpha_matting"):
+            kwargs["alpha_matting"] = True
+            kwargs["alpha_matting_foreground_threshold"] = cutout_policy.get(
+                "alpha_matting_foreground_threshold", 240)
+            kwargs["alpha_matting_background_threshold"] = cutout_policy.get(
+                "alpha_matting_background_threshold", 10)
+        rgba = remove(Image.open(rendered_png), session=session, **kwargs)
+        rgba.save(out_path)
+        return out_path
+
+    if engine == "toonout":
+        from manga_cutout_toonout import toonout_cutout
+        rgba = toonout_cutout(Image.open(rendered_png).convert("RGB"))
+        rgba.save(out_path)
+        return out_path
+
+    raise ValueError(
+        f"unknown cutout_engine={engine!r}; valid: 'rembg' | 'toonout'"
+    )
 
 
 def composite_panel(panel: dict, manifest: dict, cache_dir: Path,
@@ -475,7 +495,7 @@ def run_episode(profile_id: str, artifacts_series_id: str, episode_id: str, comf
                 print(f"  [L2 {i+1}/{len(l2_items)}] {l2_id} {l2_meta['character_id']}|{l2_meta['pose_id']}|{l2_meta['emotional']} dispatching...")
                 dispatch_render(l2_id, bundle.positive, bundle.negative, l2_dir, comfy_url)
             if not (cutout_target.is_file() and cutout_target.stat().st_size > 0):
-                print(f"            -> cutout via {cutout_policy['model']}...")
+                print(f"            -> cutout via engine={cutout_policy.get('cutout_engine','rembg')} model={cutout_policy.get('model','-')}...")
                 apply_cutout(target, cutout_policy, cutout_target)
             # validate
             inp = vl.LayerValidationInput(

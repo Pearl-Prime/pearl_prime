@@ -105,14 +105,15 @@ archetypes:
     scene_context_clause: "centered portrait, subject occupies center of frame with breathing room on all sides, soft warm-cream wall texture behind, no furniture or kitchen visible — wall and window light suggestion only, shallow depth of field, subject does not touch frame edges"
     attached_props_clause: "subject's face is the panel; no objects, no held items, no surrounding scene structure"
     cutout_policy:
-      model: u2net_human_seg                         # pivoted from birefnet (CPU-unviable per 2026-05-20 matrix)
+      cutout_engine: toonout                         # Phase 1 opt-in (per V5 spec §13)
+      model: u2net_human_seg                         # rembg fallback if toonout weights unavailable
       keep_attached_props: []
       alpha_matting: true
       alpha_matting_foreground_threshold: 240
       alpha_matting_background_threshold: 10
       character_extraction_coverage_min_pct: 0.50
-      background_bleed_max_pct: 15                   # elevated tolerance pending tighter-framing re-render
-      bleed_tolerance_rationale: "elevated pending tighter-framing re-render; target <=5% post B-test-3 (2026-05-20)"
+      background_bleed_max_pct: 5                    # tightened from 15 (toonout claims 99% PA per V5 §13)
+      bleed_tolerance_rationale: "tightened to 5% under cutout_engine=toonout; reverted to 15 under rembg fallback"
 
   character_face_micro_tension:
     subject_type: character_face_only
@@ -120,21 +121,23 @@ archetypes:
     scene_context_clause: "centered portrait, subject occupies center of frame with breathing room on all sides, subtle tension cues in eyes and jaw — micro-furrow at brow, soft warm-cream wall texture behind, no furniture or kitchen visible — wall and window light suggestion only, shallow depth of field, subject does not touch frame edges"
     attached_props_clause: "subject's face is the panel; no objects or held items; subtle tension reading in expression only"
     cutout_policy:
-      model: u2net_human_seg
+      cutout_engine: toonout                         # Phase 1 opt-in (per V5 spec §13)
+      model: u2net_human_seg                         # rembg fallback if toonout weights unavailable
       keep_attached_props: []
       alpha_matting: true
       alpha_matting_foreground_threshold: 240
       alpha_matting_background_threshold: 10
       character_extraction_coverage_min_pct: 0.50
-      background_bleed_max_pct: 15
-      bleed_tolerance_rationale: "elevated pending tighter-framing re-render; target <=5% post B-test-3 (2026-05-20)"
+      background_bleed_max_pct: 5                    # tightened from 15 (toonout claims 99% PA per V5 §13)
+      bleed_tolerance_rationale: "tightened to 5% under cutout_engine=toonout; reverted to 15 under rembg fallback"
 
   chest_breath_micro:
     subject_type: character_chest_partial
     scene_context_clause: "soft interior context behind subject's chest and shoulders, warm low-key light, implied seated posture (chair-back or sweater fabric visible)"
     attached_props_clause: "no props; subject's chest and breath are the focus"
     cutout_policy:
-      model: u2net_human_seg                         # chest+shoulders is body, u2net keeps it tighter
+      cutout_engine: toonout                         # Phase 1 opt-in (per V5 spec §13)
+      model: u2net_human_seg                         # rembg fallback if toonout weights unavailable
       keep_attached_props: []
       alpha_matting: true
       alpha_matting_foreground_threshold: 240
@@ -147,7 +150,8 @@ archetypes:
     scene_context_clause: "wooden table surface in soft warm light, subject's hand resting on or near the table"
     attached_props_clause: "table surface visible, optionally a small prop the hand is near (cup, journal, or phone face-down)"
     cutout_policy:
-      model: u2net_human_seg
+      cutout_engine: toonout                         # Phase 1 opt-in (per V5 spec §13)
+      model: u2net_human_seg                         # rembg fallback if toonout weights unavailable
       keep_attached_props: [cup, journal, phone]     # optional — present per panel's continuity_state
       alpha_matting: true
       alpha_matting_foreground_threshold: 240
