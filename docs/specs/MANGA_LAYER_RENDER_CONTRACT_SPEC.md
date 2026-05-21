@@ -1,8 +1,15 @@
-# Manga Layer Render Contract Spec (v0.6.1 — scene-prior is load-bearing)
+# Manga Layer Render Contract Spec (v0.7 — V5 single-render decompose supersedes V4 L0+L2 split)
 
-**Status:** AUTHORITY (v0.6.1 — operator-directed 2026-05-19 after B-test #2)
+**Status:** AUTHORITY (v0.7 — operator-directed 2026-05-20 after V4 ep_001 composite review)
 **Author:** Pearl_Architect + Pearl_Int + Pearl_Research
-**Schema version:** 0.6.1 (sub-amendment: L2 prompt flips from suppression to specification)
+**Schema version:** 0.7.0 (major architectural amendment: V5 Qwen-Image-Layered supersedes V4 L0+L2 split; V4 sections retained as the experiment-of-record)
+**Changes since v0.6.3 (V5 architectural pivot — doc-split):**
+- §16 SHORTENED — V5 Qwen-Image-Layered architecture is documented in a standalone sibling spec at `docs/specs/MANGA_V5_LAYERED_ARCHITECTURE.md` v1.0.0 (decision, model files, workflow JSON, layer semantics, orchestrator design, V4→V5 carryforward/changes, acceptance criteria, open risks, Phase 1 ToonOut fallback). This V4 spec retains only a 15-line §16 DEPRECATION MARKER that points to the standalone doc, lists what V5 supersedes from this spec, and lists what V5 reuses unchanged. Doc-split honors the §15.C.6 trip-wire (commit to split before 1900 lines); inflating this spec with the full V5 architecture would push it past 2,400 lines.
+- §16 marker — V5 supersedes from this spec: §3 (layer pipeline architecture), §4 (layer taxonomy), §7 (per-archetype layer composition maps), §13.4 (Phase D render scripts), §15.A.6 (V4 composite-level operator review). V5 does NOT supersede §5 (safe-zone contracts), §5.9 (prompt compiler), §6 (continuity state), §12 (validator infrastructure), §14 (failure modes & recovery), §15.A.1 (identity lock) — these remain authoritative under both V4 and V5.
+- §17 RENUMBERED — was §16 Appendix A; content unchanged.
+- §18 RENUMBERED — was §17 Appendix B; content unchanged.
+- Operator decision basis (2026-05-20): reviewed 35 V4 ep_001 composites, found only 2/35 properly placed the subject (the rest exhibited "Mira floats above the bottom" + "table from her pic doesn't match the background" failure modes documented in `artifacts/research/manga_layer_compositing_research_2026-05-20.md`). Root cause is two-layered: (a) rembg cutout precision keeps chair/stove fragments attached to the silhouette; (b) L0 and L2 are independent Qwen renders with no shared coordinate system, so even a perfect cutout produces a subject floating above L0's bottom edge. V5 eliminates the L0+L2 split entirely.
+- New files committed in this same session: `docs/specs/MANGA_V5_LAYERED_ARCHITECTURE.md` (standalone V5 spec), `scripts/image_generation/comfyui_workflows/qwen_image_layered_decompose.json` (V5 workflow JSON, 11 nodes), `scripts/manga/v5_qwen_layered_feasibility.py` (V5 feasibility test driver), `artifacts/research/manga_layer_compositing_research_2026-05-20.md` (Pearl_Research findings).
 **Changes since v0.6 (B-test #2 follow-up):**
 - §8.1 EXTENDED — L2 prompt contract flips from "suppress scene" to "specify archetype-appropriate scene context"
 - §7.2 EXTENDED — archetype `layer_render_contract.L2_char` gains required `scene_context_clause` field
@@ -1980,7 +1987,40 @@ These are decisions, not gaps. Out-of-scope intentionally.
 
 ---
 
-## 16. Appendix A — Authority chain
+## 16. V5 — Qwen-Image-Layered architecture (DEPRECATION MARKER; full spec in standalone doc) — NEW v0.7
+
+**The V4 layer-render architecture described in §3–§13 is deprecated for ep_001+ production.** Operator review of 35 V4 composites on 2026-05-20 found only 2/35 properly placed the subject. Root cause analysis identified two failure modes (rembg cutout-residue artifacts; L0/L2 coordinate-system mismatch) that cannot be fixed by tuning V4 — only by an architectural shift. Pearl_Research evaluated 2025–2026 SOTA options (`artifacts/research/manga_layer_compositing_research_2026-05-20.md`) and operator approved Phase 2 (Qwen-Image-Layered native decompose) on 2026-05-20.
+
+**V5 is documented in a standalone sibling spec:**
+- **`docs/specs/MANGA_V5_LAYERED_ARCHITECTURE.md` v1.0.0** — canonical V5 architecture, model file requirements, workflow JSON contract, layer semantics, orchestrator design, acceptance criteria, open risks, Phase 1 ToonOut fallback path.
+
+**Doc-split rationale:** Per §15.C.6 (doc-split trip-wire at 1900 lines), inflating this spec with the full V5 architecture would push it past 2,400 lines. The standalone V5 doc honors that commitment.
+
+**What V5 supersedes from this spec:**
+- §3 Architecture: the layer pipeline (V4's L0+L2 split)
+- §4 Layer taxonomy (L0/L1/L2 are no longer independent renders in V5; L3/L4 deferred)
+- §7 Per-archetype layer composition maps (V5 adds a `V5_layered_decompose` block)
+- §13.4 Phase D — render pipeline scripts (V5 orchestrator is `render_v5_episode.py`)
+- §15.A.6 V4 composite-level operator review (V5 has its own acceptance criteria in standalone doc §11)
+
+**What V5 does NOT supersede (these sections remain authoritative under both V4 and V5):**
+- §5 Safe-zone hierarchical contract inheritance
+- §5.9 Contract-to-prompt compiler
+- §6 Continuity state schema
+- §12 Validator infrastructure
+- §14 Failure modes & recovery strategy (including §14.F failure budget)
+- §15.A.1 Identity lock acceptance criteria
+
+V4 sections remain valid as (a) the experiment-of-record showing why V5 was necessary, and (b) the contract scaffolding V5 reuses unchanged, and (c) the fallback path for V3.1 single-pass rendering.
+
+<!-- Detailed V5 architecture (decision, model files, workflow JSON, layer semantics,
+     orchestrator design, V4-to-V5 carryforward/changes, acceptance criteria, open
+     risks, Phase 1 ToonOut fallback) is in docs/specs/MANGA_V5_LAYERED_ARCHITECTURE.md.
+     V4 spec retains this short deprecation marker only (per §15.C.6 doc-split). -->
+
+---
+
+## 17. Appendix A — Authority chain
 
 This spec inherits from / extends:
 - `docs/specs/MANGA_V3_3_MODEL_ROUTING_SPEC.md` (engine routing per archetype)
@@ -2005,7 +2045,7 @@ This spec is referenced by (planned):
 
 ---
 
-## 17. Appendix B — One-page operator summary
+## 18. Appendix B — One-page operator summary
 
 **The architectural reframe:** we stop "generating manga panels" and start **compiling manga panels from typed render assets under constrained contracts**. The model fulfills the contract or fails it — like a compiler.
 
