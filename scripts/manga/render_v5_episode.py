@@ -291,9 +291,18 @@ def dispatch_layered_render(
             f"{json.dumps(outputs)[:500]}"
         )
 
-    if len(all_images) != expected_layers:
+    # EMPIRICAL FINDING (feasibility test 2026-05-20, prompt_id c150b219):
+    # Qwen-Image-Layered with `layers=N` emits N+1 SaveImage outputs in this order:
+    #   layer_00 = composite full panel (RGBA, 100% opaque) — use directly as panel
+    #   layer_01 = background only (RGBA, 100% opaque, subject region inpainted)
+    #   layer_02..N = decomposed component layers (RGBA, alpha-cut subject etc.)
+    # So expected_outputs = expected_layers + 1 (composite + N decomposed). Validation
+    # accepts either expected_layers or expected_layers + 1 to be defensive about
+    # archetype configs that may use either convention.
+    accepted_counts = (expected_layers, expected_layers + 1)
+    if len(all_images) not in accepted_counts:
         raise LayerCountMismatchError(
-            f"expected {expected_layers} layers for {panel_id}, got {len(all_images)} "
+            f"expected {accepted_counts} outputs for {panel_id}, got {len(all_images)} "
             f"(node distribution: "
             f"{ {nid: sum(1 for n, _ in all_images if n == nid) for nid in {n for n, _ in all_images}} })"
         )
@@ -758,15 +767,25 @@ def process_panel(
     summary["dispatch_time_sec"] = dispatch_telem.get("dispatch_time_sec")
     summary["vram_peak_gb"] = dispatch_telem.get("vram_peak_gb")
 
-    # ── recompose ──────────────────────────────────────────────────────
+    # ── composite (use model's built-in composite at layer_00) ─────────
+    # Per empirical finding (feasibility test 2026-05-20, prompt_id c150b219):
+    # Qwen-Image-Layered emits the composite full panel at layer_00 (100% opaque RGBA).
+    # No PIL recompose needed — copy layer_00 directly as composite.png. The remaining
+    # layer_01+ files (background + decomposed components) are retained at
+    # panel_dir/layer_NN.png as forensic / re-edit assets per V5 spec §8.
+    import shutil
     composite_path = panel_dir / "composite.png"
-    try:
-        recompose_layers(layer_paths, composite_path)
-    except Exception as e:
-        print(f"            RECOMPOSE_FAIL: {e}")
-        summary["outcome"] = "fail"
-        summary["reason"] = f"recompose_error: {e}"
-        return summary
+    if len(layer_paths) >= 1 and layer_paths[0].is_file():
+        shutil.copyfile(layer_paths[0], composite_path)
+    else:
+        # Fallback: legacy decomposition-only mode (no built-in composite from model)
+        try:
+            recompose_layers(layer_paths, composite_path)
+        except Exception as e:
+            print(f"            RECOMPOSE_FAIL: {e}")
+            summary["outcome"] = "fail"
+            summary["reason"] = f"recompose_error: {e}"
+            return summary
 
     # ── validate ───────────────────────────────────────────────────────
     arch_meta = (
@@ -869,6 +888,10 @@ def run_episode(
             REPO / "artifacts/manga" / artifacts_series_id / "panels_v5" / episode_id
         )
     else:
+        # Resolve relative output_dir against REPO so .relative_to(REPO) below works
+        output_dir = Path(output_dir)
+        if not output_dir.is_absolute():
+            output_dir = (REPO / output_dir).resolve()
         panels_root = output_dir / episode_id
     panels_root.mkdir(parents=True, exist_ok=True)
 

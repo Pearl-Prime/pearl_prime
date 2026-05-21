@@ -84,8 +84,8 @@
         "class_type": "LatentCutToBatch",
         "inputs": {
             "samples": ["44", 0],
-            "axis": "t",
-            "size": 1
+            "dim": "t",
+            "slice_size": 1
         }
     },
     "46": {
