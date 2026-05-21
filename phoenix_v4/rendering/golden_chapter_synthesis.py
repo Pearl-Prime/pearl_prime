@@ -651,7 +651,11 @@ def _bucket_slots(slots: list["EnrichedSlot"]) -> dict[str, list[str]]:
             cleaned = _strip_slot_artifacts(cleaned)
             if not cleaned:
                 continue
-            if "STORY" in st or "SCENE" in st:
+            if st in ("DEPTH_PRACTICE_SCAFFOLD",):
+                core["EXERCISE"].append(cleaned)
+            elif st in ("DEPTH_INTEGRATION_LANDING",):
+                core["INTEGRATION"].append(cleaned)
+            elif "STORY" in st or "SCENE" in st:
                 depth_story.append(cleaned)
             else:
                 depth_mech.append(cleaned)
@@ -807,9 +811,6 @@ def build_virtual_slot_streams(
     pivot = _first_or_join(
         b["PIVOT"], chapter_index=chapter_index0, bridge_fn=_mk_bridge("PIVOT"),
     )
-    exercise = _first_or_join(
-        b["EXERCISE"], chapter_index=chapter_index0, bridge_fn=_mk_bridge("EXERCISE"),
-    )
     integration = _first_or_join(
         b["INTEGRATION"], chapter_index=chapter_index0, bridge_fn=_mk_bridge("INTEGRATION"),
     )
@@ -874,7 +875,6 @@ def build_virtual_slot_streams(
         ("PIVOT", pivot),
         ("COMPRESSION", compression),
         ("TEACHER_DOCTRINE", doctrine),
-        ("EXERCISE", exercise),
         ("PERMISSION", permission),
         ("INTEGRATION", integration),
         ("TAKEAWAY", takeaway),
@@ -884,6 +884,11 @@ def build_virtual_slot_streams(
         if prose:
             types_.append(st)
             proses.append(prose)
+    for ex_block in b["EXERCISE"]:
+        ex_clean = _strip_slot_artifacts(ex_block, chapter_index=chapter_index0)
+        if ex_clean:
+            types_.append("EXERCISE")
+            proses.append(ex_clean)
     if not types_:
         return [], []
     return types_, proses

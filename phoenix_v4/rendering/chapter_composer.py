@@ -2241,10 +2241,12 @@ def compose_chapter_prose(
     _LOCALE_TLS = locale
     resolved_bridge_memory = bridge_memory if bridge_memory is not None else _BOOK_BRIDGE_MEMORY_TLS
 
-    # Build slot_type → prose map (take first non-placeholder for each type)
+    # Build slot_type → prose map (first non-placeholder) + lists for multi-slot types
     slot_map: dict[str, str] = {}
+    slot_lists: dict[str, list[str]] = {}
     for st, prose in zip(slot_types, slot_proses):
         st_upper = st.strip().upper()
+        slot_lists.setdefault(st_upper, []).append(prose)
         if st_upper not in slot_map or _is_placeholder_text(slot_map[st_upper]):
             slot_map[st_upper] = prose
 
@@ -2257,7 +2259,10 @@ def compose_chapter_prose(
     pivot_raw = slot_map.get("PIVOT", "")
     reflection_raw = slot_map.get("REFLECTION", "")
     integration_raw = _shape_integration(slot_map.get("INTEGRATION", ""))
-    exercise_raw = slot_map.get("EXERCISE", "")
+    exercise_blocks = [
+        p for p in slot_lists.get("EXERCISE", [])
+        if p and not _is_placeholder_text(p)
+    ]
     permission_raw = slot_map.get("PERMISSION", "")
     takeaway_raw = slot_map.get("TAKEAWAY", "")
     thread_raw = slot_map.get("THREAD", "")
@@ -2359,11 +2364,8 @@ def compose_chapter_prose(
         parts.append(mechanism)
         parts.append(thesis)
 
-    # 6. Exercise with bridge
-    # If exercise is placeholder or empty, try practice library (272 exercises with aha + integration)
-    exercise_from_library_34 = False
-    practice_type = _resolve_practice_type(exercise_type_hint, exercise_atom_id, exercise_raw)
-    if _is_placeholder_text(exercise_raw) or not exercise_raw:
+    # 6. Exercise with bridge — preserve every EXERCISE slot (Holistic v2 Phase B)
+    if not exercise_blocks:
         try:
             from phoenix_v4.exercises.practice_library_loader import get_exercise_for_chapter
             seed = book_seed or f"ch{chapter_index}:{thesis[:20]}"
@@ -2374,12 +2376,14 @@ def compose_chapter_prose(
                 seed=seed,
             )
             if composed:
-                exercise_raw = composed
-                exercise_from_library_34 = True
+                exercise_blocks = [composed]
         except Exception:
             pass
 
-    if exercise_raw and not _is_placeholder_text(exercise_raw):
+    for ex_idx, exercise_raw in enumerate(exercise_blocks):
+        exercise_from_library_34 = ex_idx == 0 and len(exercise_blocks) == 1 and not slot_lists.get("EXERCISE")
+        practice_type = _resolve_practice_type(exercise_type_hint, exercise_atom_id, exercise_raw)
+        int_for_ex = integration_raw if ex_idx == len(exercise_blocks) - 1 else ""
         eff_context = exercise_context or _build_assembly_context(
             chapter_index=chapter_index,
             total_chapters=total_chapters,
@@ -2387,7 +2391,7 @@ def compose_chapter_prose(
             exercise_atom_id=exercise_atom_id,
             topic_id=topic_id,
             persona_id=persona_id,
-            exercise_repeat_index=exercise_repeat_index,
+            exercise_repeat_index=exercise_repeat_index + ex_idx,
         )
         assembled_ok = False
         try:
@@ -2399,7 +2403,7 @@ def compose_chapter_prose(
                 description_text=exercise_raw,
                 ctx=eff_context,
                 aha_text="",
-                integration_text=integration_raw,
+                integration_text=int_for_ex,
             )
             if composed_exercise.strip():
                 parts.append(
@@ -2437,7 +2441,8 @@ def compose_chapter_prose(
                     _bump_exercise_stat(exercise_source_stats, "library_34_fallback")
                 else:
                     _bump_exercise_stat(exercise_source_stats, "registry")
-                integration_raw = ""
+                if ex_idx == len(exercise_blocks) - 1:
+                    integration_raw = ""
         except Exception:
             assembled_ok = False
 

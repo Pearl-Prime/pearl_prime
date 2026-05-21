@@ -1610,11 +1610,6 @@ def select_enrichment(
     # Each entry is a list of collision_family values for that chapter (0-based index).
     _chapter_collision_families: List[List[str]] = []
 
-    # Story schedule + BookSlotTracker: unconditional as of PR #612.
-    # Additive stacking is the only mode; waterfall no longer exists.
-    _story_schedule: StorySchedule = build_story_schedule(
-        persona_id=persona_id, topic=topic, seed=seed, repo_root=root
-    )
     _book_tracker = BookSlotTracker()
 
     # OPD-109 Phase 3: per-book rotation state for persona atom picks. Prefers
@@ -1626,6 +1621,16 @@ def select_enrichment(
     _scene_ladder_done: set[int] = set()
     _chapter_story_depths_raw = list(_spine.get("chapter_story_depths") or [])
     _planner_warnings_mut: List[str] = list(_spine.get("chapter_planner_warnings") or [])
+
+    # Story schedule + BookSlotTracker: unconditional as of PR #612.
+    _story_schedule: StorySchedule = build_story_schedule(
+        persona_id=persona_id,
+        topic=topic,
+        seed=seed,
+        repo_root=root,
+        runtime_format=rf_bm,
+        planner_warnings=_planner_warnings_mut,
+    )
 
     # Section packet audit: per-slot source detail (written to enrichment_audit at end).
     _slot_audit: List[Dict[str, Any]] = []
@@ -3046,8 +3051,13 @@ def _fill_chapter_depth(
                 _depth_seed = f"depth:{topic}:{chapter.number}:{module_name}"
                 trimmed = _aw(trimmed, teacher_id=tid, section_type=module_name, seed=_depth_seed, spine_context=enriched_book.spine_context)
 
+            slot_type_out = (
+                "EXERCISE"
+                if module_name == "practice_scaffold"
+                else f"DEPTH_{module_name.upper()}"
+            )
             depth_slot = EnrichedSlot(
-                slot_type=f"DEPTH_{module_name.upper()}",
+                slot_type=slot_type_out,
                 content=trimmed,
                 source=f"depth_module:{module_name}:{source.get('type')}",
                 source_id=f"depth_{module_name}_{chapter.number}_{pass_label}",

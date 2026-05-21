@@ -394,6 +394,55 @@ def assign_chapter_purpose_contracts(
     return out
 
 
+def _strip_doctrine_intro_headers(text: str) -> str:
+    chunks: list[str] = []
+    for para in text.split("\n\n"):
+        p = para.strip()
+        if not p or p.startswith("## ") or p == "---":
+            continue
+        chunks.append(p)
+    return "\n\n".join(chunks).strip()
+
+
+def _teacher_doctrine_intro_fallback(teacher_id: str, repo_root: Path) -> str:
+    path = repo_root / "SOURCE_OF_TRUTH" / "teacher_banks" / teacher_id / "doctrine" / "doctrine.yaml"
+    data = _load_yaml(path)
+    if not data:
+        return ""
+    tradition = str(data.get("tradition") or data.get("display_name") or teacher_id).strip()
+    core = str(data.get("core_principles") or "").strip()
+    if tradition and core:
+        return f"{tradition} {core}"
+    return tradition or core
+
+
+def resolve_teacher_doctrine_intro(
+    persona_id: str,
+    topic: str,
+    teacher_id: Optional[str],
+    repo_root: Path,
+    chapter_architecture_version: int = 1,
+) -> str:
+    """Holistic v2: book-level doctrine preamble before Chapter 1 (OPD-130)."""
+    if int(chapter_architecture_version) != 2:
+        return ""
+    tid = (teacher_id or "").strip().lower()
+    if not tid:
+        return ""
+    atom_path = (
+        repo_root
+        / "atoms"
+        / persona_id
+        / topic
+        / "TEACHER_DOCTRINE_INTRO"
+        / tid
+        / "CANONICAL.txt"
+    )
+    if atom_path.is_file():
+        return _strip_doctrine_intro_headers(atom_path.read_text(encoding="utf-8"))
+    return _teacher_doctrine_intro_fallback(tid, repo_root)
+
+
 # Phase pools (1-indexed chapter numbers). Keys must match BESTSELLER_STRUCTURES entries.
 _PHASE_POOLS: dict[str, list[str]] = {
     "opening":      ["gladwell_spiral", "zoom_lens", "van_der_kolk"],

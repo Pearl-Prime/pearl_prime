@@ -678,6 +678,11 @@ def _run_spine_pipeline_mode(
                 "angle_id": _spine_angle_id,
                 "angle_layer_by_chapter": _angle_layer_by_ch,
                 "angle_journey_warnings": _angle_journey_warnings,
+                "chapter_architecture_version": int(
+                    book_spec_for_compiler.get("chapter_architecture_version")
+                    or getattr(args, "chapter_architecture_version", None)
+                    or 1
+                ),
             },
             locale=_enrich_locale,
             publishable_book=_publishable_book,
@@ -781,6 +786,23 @@ def _run_spine_pipeline_mode(
     prose, _whole_book_dedupe_notes = dedupe_scene_furniture_book(prose)
     if _whole_book_dedupe_notes:
         _governance_report.setdefault("whole_book_dedupe_notes", []).extend(_whole_book_dedupe_notes)
+    _arch_v = int(
+        book_spec_for_compiler.get("chapter_architecture_version")
+        or getattr(args, "chapter_architecture_version", None)
+        or 1
+    )
+    if _arch_v == 2 and teacher_for_enrich:
+        from phoenix_v4.planning.chapter_planner import resolve_teacher_doctrine_intro
+
+        _preamble = resolve_teacher_doctrine_intro(
+            persona_id,
+            topic_id,
+            teacher_for_enrich,
+            repo_root,
+            chapter_architecture_version=_arch_v,
+        )
+        if _preamble:
+            prose = f"Note on the Teachings\n\n{_preamble}\n\n{prose}"
     # Apply per-chapter word cap from modular output format (see apply_output_format_to_plan above).
     # Preserves the "Chapter N" heading line and paragraph structure so downstream gates can
     # still parse chapters via _extract_registry_chapters; only the body is truncated by words.
@@ -1380,6 +1402,11 @@ def _run_spine_pipeline_mode(
             "chapter_count": len(enriched.chapters),
             "pre_depth_total_words": pre_depth_words,
             "post_depth_total_words": post_depth_words,
+            "chapter_architecture_version": _arch_v,
+            "angle_id": _spine_angle_id,
+            "chapter_planner_warnings": list(
+                (enriched.spine_context or {}).get("chapter_planner_warnings") or []
+            ),
         }
         out_path = Path(args.out)
         out_path.parent.mkdir(parents=True, exist_ok=True)
@@ -1632,6 +1659,13 @@ def main() -> int:
         ),
     )
     ap.add_argument("--seed", default="pipeline_seed_001", help="Determinism seed")
+    ap.add_argument(
+        "--chapter-architecture-version",
+        type=int,
+        default=None,
+        choices=[1, 2],
+        help="Holistic chapter architecture: 1=legacy slot-fill, 2=assemble-full-unit (OPD-129/113)",
+    )
     ap.add_argument(
         "--runtime-format",
         default=None,
@@ -2026,6 +2060,8 @@ def main() -> int:
         arc_topic=getattr(arc, "topic", None),
     )
     book_spec_for_compiler = {**book_spec.to_dict(), "topic_id": canonical_topic, "persona_id": canonical_persona}
+    if getattr(args, "chapter_architecture_version", None) is not None:
+        book_spec_for_compiler["chapter_architecture_version"] = int(args.chapter_architecture_version)
 
     alias_data = _load_yaml(ALIASES_PATH)
     topic_alias_target = (alias_data.get("topic_aliases") or {}).get(topic_id, topic_id)
