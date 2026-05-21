@@ -985,9 +985,19 @@ def run_episode(
         "finished_utc": finished_utc,
         "per_panel": per_panel_summaries,
     }
-    (panels_root / "_run_telemetry.json").write_text(
-        json.dumps(run_telemetry, indent=2)
-    )
+    # Telemetry persistence per v1.0.1 spec amendment:
+    # - Full-episode runs write `_run_telemetry.json` (the canonical episode record)
+    # - --only-panel single-panel retries write a timestamped sidecar
+    #   `_run_telemetry_<panel_id>_<finished_utc_compact>.json` so they don't
+    #   overwrite the full-episode telemetry (empirical 2026-05-21 bug: ep001_001
+    #   single-panel retry clobbered the 35-panel run telemetry).
+    if only_panel:
+        ts_compact = finished_utc.replace(":", "").replace("-", "").replace("T", "_").replace("Z", "Z")
+        telem_filename = f"_run_telemetry_{only_panel}_{ts_compact}.json"
+    else:
+        telem_filename = "_run_telemetry.json"
+    telem_path = panels_root / telem_filename
+    telem_path.write_text(json.dumps(run_telemetry, indent=2))
 
     print()
     print(
@@ -997,7 +1007,7 @@ def run_episode(
         f"peak_vram={peak_vram_gb} GB | mean_dispatch={mean_dispatch_sec} s | "
         f"elapsed={elapsed_sec} s ==="
     )
-    print(f"  run telemetry: {(panels_root / '_run_telemetry.json').relative_to(REPO)}")
+    print(f"  run telemetry: {telem_path.relative_to(REPO)}")
     return run_telemetry
 
 
