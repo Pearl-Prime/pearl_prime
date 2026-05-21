@@ -10,6 +10,7 @@ https://huggingface.co/joelseytre/toonout/resolve/main/birefnet_finetuned_toonou
 Tier 1 (operator-present). No LLM calls. Per CLAUDE.md tier policy.
 """
 from __future__ import annotations
+import os
 from functools import lru_cache
 from pathlib import Path
 from PIL import Image
@@ -44,7 +45,27 @@ def _load_toonout_model():
         else:
             clean[k] = v
     model.load_state_dict(clean)
-    device = "cuda" if torch.cuda.is_available() else "cpu"
+    # Empirical (Pearl Star, 2026-05-20): the ToonOut .pth state_dict mixes float32
+    # and float16 tensors. Without .float() the inference call raises
+    # "RuntimeError: Input type (float) and bias type (c10::Half) should be the same".
+    # Cast model to float32 to match the float32 input from torchvision transforms.
+    model = model.float()
+    # CUDA selection: respects env var override TOONOUT_DEVICE for environments where
+    # the installed torch lacks RTX 50-series (Blackwell SM 12.0) kernels — e.g.
+    # Pearl Star with torch==2.5.1 hits "no kernel image is available for execution
+    # on the device" on a 5070 Ti. Default tries CUDA, falls back to CPU on error.
+    override = os.environ.get("TOONOUT_DEVICE")
+    if override in ("cpu", "cuda"):
+        device = override
+    elif torch.cuda.is_available():
+        try:
+            # Trigger a tiny CUDA op to detect missing kernels early
+            torch.tensor([1.0]).to("cuda")
+            device = "cuda"
+        except RuntimeError:
+            device = "cpu"
+    else:
+        device = "cpu"
     return model.to(device).eval(), device
 
 
