@@ -1,8 +1,14 @@
-# Manga Layer Render Contract Spec (v0.6.1 — scene-prior is load-bearing)
+# Manga Layer Render Contract Spec (v0.6.2 — V4 spec doc-split: §6 to MANGA_CONTINUITY_STATE_SPEC, §13 to MANGA_V4_MIGRATION_PLAN_ARCHIVE)
 
-**Status:** AUTHORITY (v0.6.1 — operator-directed 2026-05-19 after B-test #2)
+**Status:** AUTHORITY (v0.6.2 — doc-split executed 2026-05-20 per §15.C.6 trip-wire + operator directive)
 **Author:** Pearl_Architect + Pearl_Int + Pearl_Research
-**Schema version:** 0.6.1 (sub-amendment: L2 prompt flips from suppression to specification)
+**Schema version:** 0.6.2 (doc-split execution — §6 + §13 moved to sibling docs; cross-references updated)
+**Changes since v0.6.1 (v0.6.2 — doc-split execution):**
+- §6 SHORTENED — State Continuity Architecture extracted to standalone sibling spec `docs/specs/MANGA_CONTINUITY_STATE_SPEC.md` v1.0.0. V4 spec retains a short §6 DOC-SPLIT MARKER. Honors §15.C.6 trip-wire + operator directive 2026-05-20 (target <1,800 lines). Continuity state will become a dual-architecture authority (V4 + V5) once PR #1258 lands.
+- §13 ARCHIVED — V3.1-to-V4 validator-first migration plan extracted to standalone historical archive `docs/specs/MANGA_V4_MIGRATION_PLAN_ARCHIVE.md` v1.0.0. V4 spec retains a short §13 ARCHIVE MARKER. Plan is frozen as historical record; V5 will have its own acceptance criteria in `MANGA_V5_LAYERED_ARCHITECTURE.md` once that spec lands.
+- Cross-references updated throughout §1.3, §2.4 "See:" line, §4.4, §7.2, §8.3, §12.3, §12.5, §14.B.1, §14.C, §14.D, §14.F, §15.A.1, §15.A.2, §15.A.4, §15.A.6, §15.B.1, §15.C.5, §15.C.7, §17 Appendix B.
+- Header schema version bumped 0.6.1 → 0.6.2.
+- Resulting V4 spec length: ~1,479 lines (was 2,032). Buffer below 1,800 trip-wire: ~321 lines.
 **Changes since v0.6 (B-test #2 follow-up):**
 - §8.1 EXTENDED — L2 prompt contract flips from "suppress scene" to "specify archetype-appropriate scene context"
 - §7.2 EXTENDED — archetype `layer_render_contract.L2_char` gains required `scene_context_clause` field
@@ -97,7 +103,7 @@ This is an **image-first** architecture. We deliberately do NOT build:
 |---|---|
 | 2D bbox placement | 3D coordinates / transforms |
 | temporal_state enum (`dawn/day/evening/night`) | continuous time-of-day with light-position interpolation |
-| light_rig as scene-state metadata (§6.9) | actual lighting calculation / shadow casting |
+| light_rig as scene-state metadata (sibling `MANGA_CONTINUITY_STATE_SPEC.md §9`) | actual lighting calculation / shadow casting |
 | prop_state enum (`empty/half/full`) | physical fluid simulation |
 | gaze_at_named_object_X enum | eye-line vector geometry between two characters |
 | pose enum + CLIP-detected verification | skeletal pose vector or IK |
@@ -228,7 +234,7 @@ Each layer type has a distinct render contract. Below are the type definitions.
 
 The L2 *layer asset* is the post-cutout RGBA PNG. The L2 *render artifact* is the pre-cutout RGB PNG (preserved for re-cutout if policy changes).
 
-**See:** §5 (Subject Safe Zones — applied to post-cutout subject bbox), §6 (continuity state), §8.1 (cutout contract), §12.3 (revised class-A gates).
+**See:** §5 (Subject Safe Zones — applied to post-cutout subject bbox), sibling `MANGA_CONTINUITY_STATE_SPEC.md` (continuity state — formerly §6 of this spec), §8.1 (cutout contract), §12.3 (revised class-A gates).
 
 ### 4.4 L3 — Close objects (in-hand, on-table, in-foreground)
 
@@ -238,7 +244,7 @@ The L2 *layer asset* is the post-cutout RGBA PNG. The L2 *render artifact* is th
 - Same as L1, but margin requirements relax to 10% (close foreground tolerates tight crop)
 - Backdrop: pure white default; pure black for translucent (glass, steam)
 - Z-order: paste AFTER L2 if the object occludes the character (cup blocking part of face); paste BEFORE L2 if character occludes the object (hand wrapping cup)
-- **prop_state**-aware: same `object_id` at different states (cup_empty, cup_half, cup_full) = different cached renders (see §6.4)
+- **prop_state**-aware: same `object_id` at different states (cup_empty, cup_half, cup_full) = different cached renders (see sibling `MANGA_CONTINUITY_STATE_SPEC.md §5`)
 
 ### 4.5 L4 — Atmospheric overlay
 
@@ -547,509 +553,35 @@ BACKDROP: isolated subject on {safe_zone.backdrop_name} background ({safe_zone.b
 
 ---
 
-## 6. State Continuity Architecture (NEW in v0.2)
-
-The biggest weakness of v0.1: it solved framing, isolation, reuse — but the pipeline still couldn't tell that "Mira sitting in panel 3" is **emotionally adjacent** to "Mira sitting in panel 4." Panels rendered correctly in isolation; they didn't read coherently in sequence.
-
-v0.2 adds **continuity state** as a first-class input that sits between `story_beat` and `archetype`:
-
-```
-chapter_script.yaml
-   ↓ extracts
-story_state                    (the beat's narrative position)
-   ↓ rolls forward through
-continuity_state               (per-character, per-prop, per-scene running state)
-   ↓ selects
-archetype                      (composition contract)
-   ↓ instantiates
-layers (L0-L4)                 (render assets)
-   ↓ composites
-panel                          (the deliverable)
-```
-
-The continuity state is what makes consecutive panels feel like the same world.
-
-### 6.1 Continuity state schema
-
-Continuity state is **per-panel** but **inherits from the previous panel** by default (with explicit deltas).
-
-```yaml
-# Path: artifacts/manga/<series>/continuity_state/<episode_id>/<panel_id>.yaml
-schema_version: "1.0.0"
-panel_id: "ep001_004"
-inherits_from: "ep001_003"           # previous panel (or null for episode opening)
-
-character_state:                     # one block per character on stage
-  mira_aoki:
-    emotional: "anxious_diminishing"  # enum — see §6.2
-    posture: "seated_upright_to_slumped"  # transition or steady-state
-    gaze_direction: "down_at_cup"     # one of: at_camera / at_named_object_X / off_frame_L / off_frame_R / up / down
-    hand_state: "wrapping_cup"        # registers with §6.4 prop_state
-    breath_phase: "exhale_settling"   # for somatic archetypes (chest_breath_micro)
-    expression_dial: 0.3              # 0.0 = fully neutral, 1.0 = peak expression cap
-
-scene_state:
-  scene_id: "kitchen_table_dawn"
-  temporal: "dawn_to_morning"        # enum — affects L0 light direction
-  weather_anchor: "soft_clouded_light"
-
-prop_state:                          # per-prop running state
-  cup_ceramic: "full_warm_steam_visible"
-  kettle: "off_burner_residual_steam"
-
-continuity_invariants:               # things that MUST match prior panel
-  - "mira gaze direction continuous from ep001_003 (was looking down at cup; still looking down)"
-  - "cup is the same cup (no rim chip flip)"
-  - "window light source still camera-left"
-
-relational_field:                    # NEW v0.4 — single-char archetypes are already implicitly relational
-  active_entities:                   # who is "on stage" — even off-frame
-    - id: "mira_aoki"
-      on_frame: true
-    - id: "off_frame_presence_partner"  # operator/reader sometimes implied as conversational partner
-      on_frame: false
-      role: implied_listener
-  shared_attention_anchor: "cup_ceramic"  # what's the focus of attention — driven by gaze enum
-  implied_partner_position: null     # null for solo; for paired scenes, "camera_left" / "across_table" / etc.
-  emotional_tension_vector:          # the running emotional gradient through the scene
-    direction: "diminishing"          # rising | steady | diminishing | inflection
-    magnitude_delta_from_prev: -0.1   # bounded change from previous panel's expression_dial
-```
-
-**Note:** for V4 launch, `relational_field` exists in the schema but only `active_entities`, `shared_attention_anchor`, and `emotional_tension_vector.direction` are validated. Full multi-character relational fields (eye-line geometry, paired emotional state, contact continuity) are Phase 2 — see §15.B.1. The schema reservation here prevents Phase-2 work from requiring a continuity_state migration.
-
-### 6.2 The state vocabularies (enums)
-
-Limited vocabularies so the system stays finite and the prompt builder can map them deterministically.
-
-```yaml
-emotional_state_enum:
-  - calm
-  - calm_with_subtle_unease
-  - anxious
-  - anxious_diminishing                 # mid-regulation (iyashikei core arc)
-  - exhausted
-  - present                              # post-regulation, the iyashikei "yes" moment
-  - dissociating                         # disconnect (rare; trauma arcs)
-  - joyful_quiet
-  - joyful_active
-  # (~12 entries for V4 launch; extensible per genre)
-
-posture_enum:
-  - seated_upright
-  - seated_slumped
-  - standing_grounded
-  - standing_braced
-  - walking_thoughtful
-  - reaching_for_object
-  - holding_object_close_to_chest
-  - lying_down_relaxed
-  - lying_down_tense
-
-gaze_enum:
-  - at_camera
-  - at_named_object_X        # X = specific prop_id
-  - at_named_character_Y     # Y = specific character_id
-  - off_frame_left
-  - off_frame_right
-  - off_frame_up
-  - off_frame_down
-  - eyes_closed
-  - middle_distance         # "thousand-yard stare" — iyashikei + horror staple
-
-hand_state_enum:
-  - relaxed_open
-  - clenched
-  - gripping_X              # X = prop_id
-  - wrapping_X
-  - reaching_for_X
-  - gesturing_open
-  - tucked_self_soothing
-  - covering_face
-
-prop_evolution_enum:        # extends per prop type
-  cup:
-    - empty
-    - half
-    - full
-    - tipped_spilled
-  kettle:
-    - off_burner
-    - on_burner_just_lit
-    - on_burner_boiling
-    - off_burner_residual_steam
-  phone:
-    - face_down
-    - face_up_dark
-    - face_up_notification
-    - in_hand_being_read
-```
-
-### 6.3 Continuity invariants (the gates that prevent jarring transitions)
-
-Invariants are split into **deterministic** (V4 launch enforced, brutally simple, no model inference) and **heuristic / narrative** (Phase B.2+ — model-assisted, advisory rather than enforced).
-
-#### 6.3.A Deterministic invariants (V4 launch — enforced by `validate_continuity_invariants.py` V1)
-
-These are pure structural checks — string equality, set membership, bounded numeric delta. Zero model inference, zero ambiguity.
-
-```yaml
-continuity_invariants_deterministic:
-  - id: "scene_continuity"
-    rule: "scene_state.scene_id == prev.scene_state.scene_id UNLESS beat_type ∈ {standard, long_drop, miyazaki_ma}"
-  - id: "character_identity_continuity"
-    rule: "character_state[id].character_design_hash == prev.character_state[id].character_design_hash for all id ∈ stage"
-    # character_design_hash definition (v0.5.1 amendment):
-    #   Required component:
-    #     axes_hash = sha256(canonical_json(character_design.axes))
-    #       — covers the 12 locked semantic axes per character_design_axes.yaml
-    #   Optional component (concatenated when present):
-    #     ref_hash = sha256(file_content(character_design.reference_image_path))
-    #       — captures the PuLID/LoRA identity-anchor image
-    #   character_design_hash = axes_hash if no reference_image_path
-    #                         = axes_hash + "|" + ref_hash if reference_image_path populated
-    #
-    # V4 LAUNCH LIMITATION (called out per §15.A.2):
-    #   When PuLID is blocked (EVA-CLIP hang) AND no per-character LoRA exists,
-    #   character_design_hash = axes_hash only. The structural invariant PASSES
-    #   when two panels declare the same axes — but this does NOT guarantee the
-    #   diffusion model rendered the same face. Perceptual identity drift is a
-    #   class-C concern (Phase B.2), explicitly deferred. §15.A.2's "identity
-    #   lock" acceptance gate is NOT satisfied by hash-equality alone; it
-    #   requires either PuLID OR LoRA active to pass.
-  - id: "prop_persistence"
-    rule: "prop_state[id] in {prev.prop_state[id], any value in prop_evolution_enum[type] reachable in 1 step} for all id ∈ stage_props"
-  - id: "gaze_target_validity"
-    rule: "if gaze == at_named_object_X, X must exist in scene_state OR prop_state"
-  - id: "temporal_continuity"
-    rule: "temporal ∈ {prev.temporal, next-step-in-cycle(prev.temporal)} UNLESS beat_type == standard"
-  - id: "expression_dial_bounded_delta"
-    rule: "|expression_dial - prev.expression_dial| ≤ 0.3 if beat_type == micro; ≤ 0.5 if spatial; unbounded if standard+"
-  - id: "light_rig_within_scene"
-    rule: "light_rig_id ∈ scene_inventory.scenes[scene_id].light_rigs"
-```
-
-These rules are evaluable by a YAML reader + string ops + numeric comparisons. They form V1 of the continuity validator.
-
-#### 6.3.B Heuristic / narrative invariants (Phase B.2 — model-assisted, advisory)
-
-These are the rules the operator critique flagged as "heuristic scorers pretending to be validators." They are STILL useful, but they cannot share a severity class with deterministic invariants.
-
-```yaml
-continuity_invariants_heuristic:
-  - id: "emotional_pendulation_iyashikei"
-    rule: "emotional state transitions follow pendulation grammar (no calm→peak_anxious in one beat)"
-    enforcement: WARN_NOT_FAIL              # advisory at V4 launch
-    detector: "LLM zero-shot via Pearl_Star qwen-instruct against pendulation_grammar.yaml"
-  - id: "gaze_continuity_semantic"
-    rule: "if prev gaze at_named_object_X and curr gaze ≠ at_named_object_X, curr gaze should be off_frame in the direction of X (semantic intent: 'character looked away' rather than 'character teleported attention')"
-    enforcement: WARN_NOT_FAIL
-    detector: "rule-based check against gaze enum + direction vocabulary; advisory because intent is ambiguous"
-  - id: "emotional_tension_arc_coherence"
-    rule: "emotional_tension_vector.direction should be coherent across chapter (not flipping rising/diminishing every 2 panels without narrative cause)"
-    enforcement: SCORE_ONLY                  # diagnostic, never blocking
-    detector: "LLM evaluation against chapter pacing model"
-```
-
-V4 launch: deterministic invariants block render-cache writes. Heuristic invariants surface in `qa_review_queue.yaml` (§14.E) for operator triage but do NOT block. Phase B.2 work elevates heuristics to enforced after the deterministic core has stabilized.
-
-### 6.4 How continuity state modifies layer prompts
-
-```python
-# Pseudo-code for prompt builder
-def build_l2_prompt(character_id, archetype, continuity_state, series):
-    base = series.character_design[character_id].render_prompt_base
-    pose_suffix = archetype.subject_type.pose_clause(continuity_state[character_id].posture)
-    gaze_suffix = render_gaze(continuity_state[character_id].gaze_direction)
-    hand_suffix = render_hand(continuity_state[character_id].hand_state)
-    emotion_suffix = render_emotion_via_axes(
-        continuity_state[character_id].emotional,
-        continuity_state[character_id].expression_dial,
-        character_design.expression_frequency_cap  # respects identity contract
-    )
-    return f"{base}. {pose_suffix}. {gaze_suffix}. {hand_suffix}. {emotion_suffix}. {safe_zone_clause(archetype)}"
-```
-
-Result: same Mira identity, different emotional inflection per panel — **without re-prompting the character_design**. Identity preserved; state varied.
-
-### 6.5 Prop state evolution drives separate L3 renders
-
-`cup_ceramic` at three states = three cached L3 layers:
-- `cup_ceramic__empty.png`
-- `cup_ceramic__half.png`
-- `cup_ceramic__full.png`
-
-The chapter_script declares prop_state per panel; the builder selects the matching L3 cutout. No re-rendering at panel time.
-
-### 6.6 Temporal state drives separate L0 renders
-
-`kitchen_table` at four temporals = four cached L0 layers:
-- `kitchen_table__dawn.png`
-- `kitchen_table__morning.png`
-- `kitchen_table__evening.png`
-- `kitchen_table__night.png`
-
-Single scene, four lighting states. Composited identically; light direction continuity preserved within each temporal block.
-
-### 6.7 Continuity state record (what gets persisted)
-
-For each panel: `artifacts/manga/<series>/continuity_state/<episode>/<panel>.yaml` — full state record. Inherited diffs only (the previous panel's values carry forward unless overridden). Validates against §6.3 invariants pre-render.
-
-For each rendered layer: `artifacts/manga/<series>/render_cache/<layer_id>.png` — the binary asset. Cache key = `(layer_type, subject_id, pose_id, continuity_state_hash)`. Cache invalidation: §14.
-
-### 6.8 State cardinality management (combinatorial explosion containment)
-
-State has a multiplication problem. For a single L2 character layer:
-
-```
-unique_renders = |pose| × |emotional| × |hand_state| × |gaze| × |expression_dial steps|
-              × |temporal| × |light_rig_id|
-```
-
-For Mira with V4 launch vocabularies: 9 poses × 9 emotional × 8 hand_state × 9 gaze × 11 dial-steps × 4 temporal × 4 light-rigs = **102,816 theoretically distinct cache entries per character**. The actual demand from a chapter_script is ~0.1% of that, but **left unchecked the cache stops being a cache and starts being a per-render output dir** — which defeats the architecture.
-
-The spec contains the explosion with four orthogonal strategies:
-
-**Strategy 1 — Empirical caching (lazy, not eager).** Never pre-compute the cartesian product. Render the (pose, emotional, hand, gaze, dial, temporal, rig) tuple ONLY when a chapter_script panel demands it. Cache it. Evict LRU when total cache exceeds budget (default: 200 entries per character).
-
-**Strategy 2 — State quantization.** Continuous fields are quantized to coarse buckets:
-- `expression_dial`: 11 steps (0.0, 0.1, ... 1.0). Render budget says ~5 used per series.
-- Light rig: indexed (not freeform parameters) — see §6.9.
-- Temporal: 4 buckets (dawn/day/evening/night). No interpolation.
-
-Quantization is a contract: if two panels declare `expression_dial: 0.34` and `expression_dial: 0.37`, both map to bucket `0.3` → same cache key → same render. Reader will not see the difference; cache hit rate skyrockets.
-
-**Strategy 3 — Hierarchical state inheritance (continuity exploits sequence-locality).** Most state changes are small-delta. A panel inherits 90% of the previous panel's state by default; only the explicit deltas are unique to it. The state-hash for caching is computed AFTER inheritance, so:
-- Panel 3: `(pose=seated_upright, emotional=anxious_diminishing, hand=wrapping_cup, gaze=down_at_cup, dial=0.3, temporal=dawn, rig=K01)` → cache key A
-- Panel 4: inherits panel 3, overrides `(dial=0.4)` → key A' (one-step-removed) — likely cache MISS first time, then HIT on similar 0.3→0.4 transitions in other panels.
-
-Sequence-locality means real chapter_scripts visit ~30-60 unique state tuples per 30-panel episode, not 100,000.
-
-**Strategy 4 — Factorized render deltas (Phase 2; not V4 launch).** If the cache still explodes for action genres or ensemble casts, the next move is factorization: render a base L2 (pose-only, neutral emotional, plain hand, forward gaze) ONCE per pose; then synthesize the (emotional, hand, gaze, dial) inflection as an *additive image delta* via img2img-with-low-strength or LoRA-residual. Reduces cardinality by ~50× at the cost of an extra render pipeline stage. NOT implemented for V4 — flagged here as the escape hatch.
-
-**Cardinality budgets per series (gates):**
-- L0 cache: ≤ 32 entries (8 scenes × 4 temporals)
-- L1 cache: ≤ 20 entries
-- L2 cache: ≤ 200 entries per character (LRU evict beyond)
-- L3 cache: ≤ 60 entries (15 objects × 4 state variants)
-- L4 cache: ≤ 20 entries (atmospheric effects, often reused across series)
-
-**What this protects against:** the architecture remaining safe for iyashikei single-protagonist scale (✅ launch). For action genres / ensemble casts (Phase 2), Strategy 4 (factorized deltas) is the escape; it's a known-future-work item, not a launch blocker.
-
-### 6.9 Light rig as first-class scene state (replaces v0.2's lighting-direction-only model)
-
-v0.2's lighting coherence checking was a direction vector with 45° tolerance. That's necessary but insufficient. Lighting mismatch shows up across many axes:
-
-| axis | mismatch symptom |
-|---|---|
-| direction | shadows fall opposite ways across L0 vs L2 |
-| softness | L0 has hard shadows (sunlight), L2 has soft shadows (cloudy) — character looks pasted in |
-| color_temperature | L0 is warm 2800K (dawn), L2 is cool 6500K (noon) — character looks "wrong time of day" |
-| rim_intensity | L0 has dramatic rim-light from window; L2 has flat lighting — character pops as a sticker |
-| ambient_bounce | L0 ambient is warm cream (warm walls reflecting); L2 ambient is neutral gray — character feels cold in a warm scene |
-| atmospheric_diffusion | L0 has hazy morning-fog atmospheric; L2 is sharp/crisp — character feels foregrounded inappropriately |
-| exposure_range | L0 is high-key (most pixels in 200–255 range); L2 is mid-key (100–180 range) — character feels darker than scene |
-
-The fix: **light rigs are first-class scene state**, declared in `scene_inventory.yaml` and inherited by every layer rendered into that scene.
-
-```yaml
-# scene_inventory.yaml
-scenes:
-  - scene_id: "kitchen_table_dawn"
-    light_rigs:
-      - light_rig_id: "K01_dawn_window_warm"
-        primary_direction: "camera_left_slightly_above"   # 8-direction enum
-        primary_softness: "soft"                            # hard | medium | soft | very_soft
-        primary_color_temp_K: 3200
-        rim_intensity: 0.3                                  # 0–1
-        ambient_bounce_color: "warm_cream_FFE6C2"
-        atmospheric_diffusion: 0.4                          # 0–1; 0=clear, 1=heavy fog/dust
-        exposure_key: "high_key_dawn"                       # low | mid | high
-        prompt_clause: "warm dawn light from camera-left, soft window-diffused, gentle warm bounce on shadow side, slight atmospheric haze, high-key exposure with 200-250 brightness range"
-      - light_rig_id: "K02_morning_window_neutral"
-        # ... different rig for same scene at later time
-```
-
-**Enforcement at render time:**
-1. L0 render is associated with one `light_rig_id` (the canonical lighting for that L0).
-2. L2 render PROMPT inherits the light_rig.prompt_clause: every character render literally includes "warm dawn light from camera-left, soft window-diffused, gentle warm bounce ..."
-3. L3 render PROMPT inherits the same clause for objects.
-4. QA gate §14.B.1 validates light rig coherence post-composite by detecting the 7 axes above (direction, softness, temperature, rim, bounce, diffusion, exposure) and comparing against the declared light_rig values.
-
-**Why this is image-first not world-engine (per §1.3):** the light rig is a *prompt-injected metadata bundle and a post-render-validation target*, not an actual lighting calculation. We don't compute shadows. We constrain the renderer to produce consistent shadows. That's a contract, not a simulation.
-
-**Pre-built light rig library:** `config/manga/light_rigs/iyashikei.yaml` defines ~8 named rigs (K01–K08) covering: dawn window warm, dawn window cool, morning bright, midday flat, afternoon golden, evening warm, dusk dim, night lamp-warm, night moonlight-cool. Phase-2 genres add their own (mecha cockpit, fantasy_torchlight, horror_fluorescent, etc.).
-
-**Scene_inventory references rigs by ID** (not by inline definition). One rig serves many scenes. One scene can have several time-of-day rigs.
-
-### 6.10 Visual-compilation vs narrative-evolution boundary (architectural modularization risk)
-
-v0.3's continuity_state has accumulated responsibilities. As the operator flagged:
-> "continuity_state is creeping toward semantic dramaturgy state management. That is no longer 'render continuity.' It is partially a writing engine, partially a cinematography engine, partially a render QA engine. Those concerns may need modularization."
-
-The spec acknowledges the risk and pre-declares the modularization boundary so V4 doesn't entangle systems that should be separable.
-
-**Two systems coexist in `continuity_state.yaml` today:**
-
-| system | concern | examples |
-|---|---|---|
-| **Visual compilation state** | what the renderer needs to fulfill the layer contract | pose, hand_state, gaze enum, prop_state, temporal, light_rig_id, character_design_hash |
-| **Narrative evolution state** | what the next chapter beat needs to track | emotional, emotional_tension_vector, relational_field, expression_dial as dramatic intensity |
-
-For V4 launch they share one file. For Phase 2 they may need separation:
-- `continuity_state.visual.yaml` — feeds the renderer + render-cache
-- `continuity_state.narrative.yaml` — feeds the writer + chapter coherence checks
-- A shared join key: `panel_id`
-
-**V4 design choice:** keep them together with explicit section labels. Don't entangle the validators across the boundary. The deterministic continuity validator (§6.3.A) reads ONLY visual-compilation fields. The heuristic validator (§6.3.B) reads ONLY narrative fields. Operators editing one section don't break the other.
-
-**The lesson:** as the architecture grows, resist the merge. Render orchestration and dramaturgy are different problem domains. Sharing a YAML file is fine; sharing a validator code path is not.
-
-### 6.11 Cache telemetry (economic instrumentation)
-
-Cardinality controls (§6.8) are necessary but invisible without telemetry. v0.4 adds an observability contract so the cache can be reasoned about operationally.
-
-**Path:** `artifacts/manga/<series>/render_telemetry/<episode_id>.yaml`
-
-Emitted by `render_layer_inventory.py` at the end of each episode build:
-
-```yaml
-schema_version: "1.0.0"
-series_id: "stillness_en_01"
-episode_id: "ep_001"
-build_started_utc: "2026-05-19T14:00:00Z"
-build_completed_utc: "2026-05-19T15:30:00Z"
-
-layer_cache:
-  L0:
-    unique_renders: 4              # 1 scene × 4 temporals
-    panels_served: 30
-    hit_rate: 0.93                  # 28 cache hits / 30 panels
-    invalidation_fanout: 0          # times this episode's L0 layer was invalidated downstream
-  L2_mira_aoki:
-    unique_renders: 12              # 8 poses × ~1.5 state inflection avg
-    panels_served: 26               # panels with character (vs 4 without)
-    hit_rate: 0.69                  # 18 hits / 26 — first run; will rise on subsequent episodes
-    avg_rerenders_per_success: 1.2  # validator rejected 20% of first attempts; rerendered with hardened prompts
-    invalidation_fanout: 1          # character_design.yaml edited mid-build invalidated 12 cached L2 renders
-  L3:
-    unique_renders: 6
-    panels_served: 22
-    hit_rate: 0.82
-  L4:
-    unique_renders: 3
-    panels_served: 14
-    hit_rate: 1.00                  # overlay reused every time
-
-continuity_reuse_ratio: 0.71        # 0.71 of panels inherited >80% of their continuity_state from prev panel — high inheritance = good locality
-deterministic_validator:
-  pass: 27
-  fail: 3                            # 3 panels failed deterministic gates; rerendered
-  fail_classes:
-    backdrop_corner_check: 2
-    subject_does_not_touch_edge: 1
-heuristic_validator:
-  pass: 28
-  warn: 2                            # advisory only at V4 launch
-  warn_classes:
-    emotional_pendulation_iyashikei: 1
-    gaze_continuity_semantic: 1
-
-render_cost:
-  total_gpu_seconds: 2580
-  unique_render_seconds: 1620        # what we actually paid (vs 30-panel single-pass would be ~3600s)
-  cache_savings_pct: 55              # 1620 vs 3600 — half the cost via reuse
-  per_panel_avg_seconds: 86          # composite-time per delivered panel
-```
-
-**What this enables:**
-- After episode 1, see hit_rate trends. If L2 hit_rate < 0.5 across multiple series, cardinality strategy needs tuning.
-- After series 1, see continuity_reuse_ratio. If < 0.5, the chapter_script is doing too many gratuitous state changes; flag for writer.
-- After 10 episodes, see invalidation_fanout. High numbers mean character_design/scene_inventory churn is expensive; freeze them earlier.
-- After 1 catalog (~10 series), see cache_savings_pct vs render_cost. Trade-off this against quality.
-
-**Telemetry is data, not policy.** v0.4 does not auto-tune based on telemetry. Future work (Phase 3+) may close the loop. For V4: observability is enough.
-
-### 6.12 Style-state continuity (NEW in v0.5 — the missing 4th continuity dimension)
-
-v0.4 covered three continuity dimensions:
-1. **Identity** — same character across panels (PuLID / LoRA, embedding distance)
-2. **Structural** — same layer composition / framing / spatial layout (archetype contracts)
-3. **Semantic / narrative** — same gaze / pose / emotional arc (continuity_state §6.1)
-
-v0.5 adds the fourth: **stylistic / aesthetic continuity** — the renderer-level look-and-feel that operates above palette and below identity.
-
-| axis | what it controls | drift symptom |
-|---|---|---|
-| **line_weight** | thickness + variation of ink linework | one panel feels sketchy, the next feels heavily inked |
-| **wash_softness** | watercolor blending edge softness | one panel has hard cel-shading, the next bleeds painterly |
-| **tonal_density** | screentone / hatching density | panels with similar light feel differently weighted |
-| **shading_aggression** | shadow saturation, halftone cutoffs | character feels "flatter" or "deeper" between scenes |
-| **panel_border_treatment** | gutter widths, border ink weight | continuity broken at composite seam |
-
-These can drift even when identity, structural, and semantic continuity all hold. **Across 300 panels of one episode they may look "off but not wrong"; across 10 episodes of one series, or across 288 series in a catalog, the drift accumulates into a perceptible quality ceiling.**
-
-**Schema — `style_state.yaml` per series:**
-```yaml
-# config/source_of_truth/manga_profiles/series/<series>.style_state.yaml
-schema_version: "1.0.0"
-series_id: "stillness_en_01"
-canonical_style:
-  line_weight:
-    primary: "soft pen-and-ink, variable 0.5-1.2px"
-    consistency_target: "warm uneven hand-inked, not vector-perfect"
-  wash_softness:
-    primary: "watercolor wash, soft edge bleed 2-4px"
-    avoid: ["hard cel-shading", "vector flats", "airbrush gradient"]
-  tonal_density:
-    primary: "low — 15-25% non-white coverage outside subject"
-    avoid: ["heavy hatching", "dense screentone"]
-  shading_aggression:
-    primary: "gentle — value range 180-240 for shadows on light skin"
-    avoid: ["dramatic chiaroscuro", "high-contrast black/white"]
-  panel_border_treatment:
-    primary: "no rendered borders — vertical scroll webtoon"
-prompt_clauses:                    # the strings that get injected into prompts
-  line_weight_clause: "soft pen-and-ink linework, variable line weight, warm uneven hand-inked aesthetic"
-  wash_softness_clause: "soft watercolor wash with gentle 2-4px edge bleed"
-  tonal_density_clause: "low tonal density, breathable negative space, no heavy hatching"
-  shading_aggression_clause: "gentle shading, low contrast, value range 180-240 on light skin"
-```
-
-**Where it's enforced:**
-- Render prompts (§5.9): `{style_state.line_weight_clause}` and friends are template slots injected into every L0/L2/L3 prompt
-- QA gates (§12): class-C perceptual evaluator `style_fingerprint_drift` — extract style features (edge density via Canny + tonal histogram via grayscale variance + stroke-width estimation) per render, cluster within the series, flag outliers > 2σ
-- Telemetry (§6.11): per-episode `style_drift_pct` reports outlier count
-
-**V4 launch posture:** `style_state.yaml` authored per series (Phase C). Prompt clauses injected (class-A — deterministic). Drift detector is class-C — advisory only at V4; promotion to class-A FAIL via the trip-wire below.
-
-**Class-C → class-A promotion trip-wire (NEW v0.5.1 — no more indefinite "pending calibration"):**
-
-The drift detector auto-promotes from class-C SCORE/WARN to class-A FAIL when ALL of the following are observed in production telemetry:
-
-```yaml
-style_drift_detector_promotion_trip_wire:
-  observation_window: "last 5 episodes shipped" 
-  correlation_threshold:
-    metric: "rate of operator-rejected panels that ALSO triggered drift detector"
-    minimum_correlation_pct: 80           # if ≥80% of operator-rejected panels were already flagged by drift detector, the detector is calibrated enough to trust
-  false_positive_ceiling:
-    metric: "rate of drift-flagged panels that operator did NOT reject"
-    maximum_false_positive_pct: 5         # FP rate must be ≤5% before promotion
-  panel_volume_minimum: 200               # ≥200 panels reviewed in window (statistical floor)
-  on_trip_wire_met:
-    action: "auto-emit promotion proposal to qa_review_queue.yaml + alert operator"
-    requires: "operator approval to enact class-A FAIL severity" 
-    documentation: "promotion records appended to MANGA_LAYER_RENDER_CONTRACT_SPEC.md changelog"
-  on_trip_wire_not_met:
-    action: "remain class-C; log telemetry; re-evaluate after next 5 episodes"
-```
-
-**Why this matters:** "pending calibration" without a trigger is indefinite by default. v0.5.1 makes the promotion an explicit data-driven decision with a numerical condition. The detector promotes itself when the data supports it; without that data the detector stays advisory.
-
-**Why class-C at V4 (still):** the drift detector itself is a perceptual model with non-trivial false-positive rate. The prompt-injection of canonical style clauses IS the V4 enforcement; the detector is the V4.5+ confirmation that fires automatically when its accuracy clears the bar.
-
-**Cross-spec interaction:** `style_state.yaml` references the same `genre_modifier` palette in `drawing_tradition_per_genre.yaml`. Style state is the series-level expression of the genre-level drawing tradition. Genre = "iyashikei watercolor"; style_state = "this series's specific iyashikei watercolor."
+## 6. State Continuity Architecture (DOC-SPLIT MARKER; full spec in standalone doc) — NEW v0.6.2
+
+**The continuity-state architecture is documented in a standalone sibling spec:**
+- **`docs/specs/MANGA_CONTINUITY_STATE_SPEC.md` v1.0.0** — canonical continuity-state schema, state vocabularies, deterministic + heuristic invariants (§3.A / §3.B), prompt-modification semantics, state-driven cache strategy, cardinality controls, light rigs (§9), cache telemetry, style-state continuity.
+
+**Doc-split rationale:** Per §15.C.6 (1,900-line trip-wire) + operator directive 2026-05-20 (target <1,800), §6's 506 lines were extracted to a standalone authority. Continuity state will become a dual-architecture authority once V5 lands (PR #1258); a contract shared by two render architectures belongs in its own doc.
+
+**V4-side sections that depend on continuity state (cross-references point to sibling doc):**
+- §1.3 image-first boundary table
+- §4.3 L2 (character)
+- §7.2 archetype schema
+- §8.3 object_inventory
+- §12.3 L2 gates
+- §12.5 composite gates
+- §13 (now archived; see §13 archive marker)
+- §14.B.1 / §14.C — failure tables citing continuity invariants
+- §14.F — failure-budget provenance
+- §15.A.1 / §15.A.2 / §15.A.4 — identity-lock + extraction + continuity acceptance gates
+- §15.B.1 / §15.C.5 — multi-character cliff + pose-transition research tracks
+- §16 Appendix A — Authority chain
+- §17 Appendix B — Operator summary
+
+**What V4 spec retains in §6:** only this marker. Sibling doc is source of truth.
+
+<!-- Detailed continuity-state architecture (schema, state vocabularies, invariants,
+     prompt-modification semantics, cache strategy, cardinality, light rigs, telemetry,
+     style-state continuity) is in docs/specs/MANGA_CONTINUITY_STATE_SPEC.md.
+     V4 spec retains this short doc-split marker only (per §15.C.6 + operator
+     directive 2026-05-20). -->
 
 ---
 
@@ -1141,7 +673,7 @@ Each series needs **three inventories** so layers can be rendered once and reuse
 `config/source_of_truth/manga_profiles/series/<series_id>.yaml` already has `character_design` with 12 axes (`config/manga/character_design_axes.yaml`). No change needed to existing structure.
 
 **Additions per series:**
-- `character_pose_inventory:` — list of poses (front-portrait, side-portrait, hand-only, hands-and-arms-on-cup, full-body-walking, full-body-sitting, etc.) cross-referenced with continuity_state vocabularies from §6.2.
+- `character_pose_inventory:` — list of poses (front-portrait, side-portrait, hand-only, hands-and-arms-on-cup, full-body-walking, full-body-sitting, etc.) cross-referenced with continuity_state vocabularies from sibling `MANGA_CONTINUITY_STATE_SPEC.md §2`.
 - Each pose × emotional × hand_state combination eligible for caching.
 
 ### 8.2 `scene_inventory.yaml` (NEW — to author per series)
@@ -1175,7 +707,7 @@ objects:
   - object_id: "cup_ceramic"
     description: "Matte ceramic cup, warm cream glaze, slight rim chip (continuity detail)"
     object_type: "object_macro"
-    state_variants_required: [empty, half, full]   # drives §6.5
+    state_variants_required: [empty, half, full]   # drives sibling MANGA_CONTINUITY_STATE_SPEC.md §5
     render_resolution: [1080, 1920]
     used_in_archetypes: [tea_beat_close_up, hand_table_micro, shared_meal_table_medium]
     backdrop: "pure_white"
@@ -1379,8 +911,8 @@ L2 gates differ from L1/L3 because L2 is two-stage (pre-cutout render + post-cut
 | `subject_type_pose_match` (CLIP zero-shot) | C — perceptual | WARN |
 | `face_visible_for_face_archetypes` (upstream face_confidence > 0.85) | A — contract | FAIL |
 | `forbidden_anatomy` (extra fingers, missing limbs — model-based) | C — perceptual | WARN |
-| `continuity_invariants_deterministic` (§6.3.A) | A — contract | FAIL |
-| `continuity_invariants_heuristic` (§6.3.B) | D — narrative | SCORE |
+| `continuity_invariants_deterministic` (sibling `MANGA_CONTINUITY_STATE_SPEC.md §3.A`) | A — contract | FAIL |
+| `continuity_invariants_heuristic` (sibling `MANGA_CONTINUITY_STATE_SPEC.md §3.B`) | D — narrative | SCORE |
 
 **KNOWN LIMITATION (v0.6.3 logged 2026-05-20, post-B-test-#3):** `background_bleed_check` cannot distinguish subject-body-at-edge from scene-fragment-at-edge without ML segmentation. For face-only archetypes (`character_quiet_face`, `character_face_micro_tension`, `pet_companion_micro`), treat `background_bleed_check` PASS as **necessary but not sufficient**; the primary gate is `subject_does_not_touch_edge`. If both bleed and edge-touch FAIL together, the diagnosis is over-tight framing (subject fills canvas) — re-author scene_context_clause to use breathing-room language per the compile-time WARN in `contract_to_prompt_compiler.py` (looks for "fill the frame", "edge to edge", etc., when safe_zone declares non-zero margins).
 
@@ -1434,7 +966,7 @@ def check_background_bleed(cutout_rgba, edge_inset_px=20, max_bleed_pct=5):
 | `archetype_compliance` (iyashikei.yaml qa_gates: negative space %, eye-flow, forbidden grammar) | mixed A/B/C — split per gate | per-gate severity |
 | `seam_check` (no visible cutout artifacts at paste boundaries via edge-detection density) | B — heuristic | WARN |
 | `lettering_safe_zones_clear` (bubble paste zones don't conflict with composited subjects) | A — contract | FAIL |
-| `lighting_rig_coherence` (§14.B.1 — 7-axis per §6.9) | C — perceptual (will mature toward A as detectors stabilize) | WARN (advisory V4; FAIL by axis as calibrated) |
+| `lighting_rig_coherence` (§14.B.1 — 7-axis per sibling `MANGA_CONTINUITY_STATE_SPEC.md §9`) | C — perceptual (will mature toward A as detectors stabilize) | WARN (advisory V4; FAIL by axis as calibrated) |
 
 ### 12.6 What the validators output
 
@@ -1456,111 +988,26 @@ Only class-A FAIL results halt the pipeline. Class B/C/D results aggregate into 
 
 ---
 
-## 13. Migration Plan (V3.1 → V4) — Validator-First
+## 13. Migration Plan V3.1 → V4 (ARCHIVE MARKER; full plan in standalone doc) — NEW v0.6.2
 
-**Architectural principle (operator-directed, v0.3 critique):** _"Build the validator infrastructure BEFORE expanding archetypes. Validators are what transform the architecture from AI art workflow into contract-governed render system."_
+**The V3.1-to-V4 validator-first migration plan is archived in a standalone sibling spec:**
+- **`docs/specs/MANGA_V4_MIGRATION_PLAN_ARCHIVE.md` v1.0.0** — Phase A spec review, Phase B.1 deterministic validator core + Phase B.2 hardening, Phase C schema authoring, Phase D render pipeline, Phase E baseline comparison, Phase F catalog rollout, V3.1 in-flight handling, validator-first rationale.
 
-Phases are reordered accordingly: validators are Phase B (was Phase C in v0.2). No archetype authoring proceeds until the validators can verify what's authored.
+**Archive rationale:** Phase D (former §13.4 — render pipeline scripts) is set to be superseded by the V5 orchestrator (`render_v5_episode.py`) once PR #1258 lands — V5 replaces V4's `build_layer_render_prompts.py` + `render_layer_inventory.py` + `compose_layered_panel.py`. The rest of the plan remains true as a historical record but is no longer the active migration plan; V5 will have its own acceptance criteria in `MANGA_V5_LAYERED_ARCHITECTURE.md` once that spec lands.
 
-### 13.1 Phase A — Spec review (THIS doc, 2026-05-19)
-Operator reviews v0.3. Approve §5 inheritance + §6.1-6.9 continuity + light-rig + cardinality controls + §8 inventories + §14 failure modes.
+**V4-side sections that still reference §13 (cross-references point to sibling archive):**
+- §15.A.6 (V4 composite review gate) cites former §13.6 catalog-rollout precondition
+- §15.C.7 (ontology hardening) cites former §13.6 per-genre rollout audit
+- §17 Appendix B operator summary references former "§13 reordered"
 
-### 13.2 Phase B — Build validator infrastructure (THE FOUNDATION) — V1 = brutally deterministic only
+**What V4 spec retains in §13:** only this marker. Sibling archive preserves the validator-first phase plan as historical authority.
 
-Built **against the spec, not against any series authoring**. Per the v0.4 operator critique, V1 implements ONLY class-A contract validators (§12.0) — no model inference, no heuristic thresholds beyond fixed-rule numeric checks. Heuristic / perceptual / narrative scorers come in Phase B.2 after the deterministic core is stable.
-
-**Phase B.1 — Deterministic core (V4 launch dependency):**
-
-Three deterministic foundation scripts, in strict dependency order.
-
-1. **`scripts/manga/compile_safe_zones.py`** (FIRST — foundational)
-   - Inputs: §5 inheritance YAML (`base_contract` + `framing_contract` + `subject_contract` + `genre_modifier` + `archetype_exception`)
-   - Output: flat compiled table (§5.7) as `config/manga/compiled/safe_zones.yaml`
-   - **Implementation constraint:** fully deterministic. YAML loader + dict merge + override precedence. No AI, no heuristics, no thresholds. Pure data transformation.
-   - **Tests:** golden snapshot — input YAML hash → output table hash must be stable across runs. Every cell in v0.3's compiled-view table (§5.7) must reproduce from inheritance composition.
-   - Why first: §5 is the source of truth; the other validators read from `safe_zones.yaml`.
-
-2. **`scripts/manga/contract_to_prompt_compiler.py`** (NEW v0.5 — Phase B.1 step 1.5)
-   - Inputs: compiled safe_zone row + character_design + continuity_state + light_rig + style_state + layer type
-   - Output: `PromptBundle(positive, negative, parameters, cache_key, provenance)` per §5.9
-   - **Implementation constraint:** plain `str.format_map(...)` substitution. No LLM. No fuzzy fallbacks. Missing slot data is fatal.
-   - **Tests:** golden snapshot — fixed input tuple → stable `(positive, negative)` sha256. Spot-check that injecting the §5.5 example contract produces the §5.5 example prompt suffix exactly.
-   - Why between steps 1 and 2: `validate_layer.py` needs to verify renders against prompts that were generated; without a deterministic prompt compiler, the validator chases a moving target.
-
-3. **`scripts/manga/validate_layer.py`** (THIRD — class-A gates from §12.1–§12.5)
-   - Inputs: a rendered layer PNG + the layer's declared contract (subject_type, framing, genre, backdrop)
-   - **Implements ONLY class-A gates in V1:**
-     - `backdrop_corner_check` (4 corner RGB sample, ±5 tolerance)
-     - `subject_safe_zone` (non-backdrop bbox vs compiled safe zone from compile_safe_zones.py output)
-     - `subject_does_not_touch_edge` (5px clearance check)
-     - `rembg_clean_alpha` (post-cutout alpha histogram bimodality)
-     - `face_visible_for_face_archetypes` (face detection MAY use a model but threshold is a fixed 0.85; result is binary)
-     - `negative_space_in_bbox` (pixel variance check, fixed threshold 0.15)
-     - `effect_density` (non-backdrop pixel % within 5–35% range)
-     - `lettering_safe_zones_clear` (bbox intersection — pure geometric)
-   - Output: list of `ValidationResult` (per §12.6). ANY class-A FAIL halts cache write.
-   - **Tests:** take the 3 layer-demo Mira renders (sage backdrop) — validator MUST flag them ALL as backdrop_corner_check FAIL. Take synthetic pure-white-bg image with subject in safe zone — validator MUST pass it. Take pure-white-bg with subject touching edge — validator MUST flag.
-
-4. **`scripts/manga/validate_continuity_invariants.py`** (FOURTH — §6.3.A deterministic only)
-   - Inputs: panel N continuity_state YAML + panel N+1 continuity_state YAML + archetype IDs
-   - **Implements ONLY §6.3.A deterministic invariants in V1:**
-     - scene_continuity (string equality + beat_type allow-list)
-     - character_identity_continuity (character_design_hash equality)
-     - prop_persistence (state ∈ prev_state ∪ reachable-in-1-step set)
-     - gaze_target_validity (named target exists in scene/prop state)
-     - temporal_continuity (next-step-in-cycle check)
-     - expression_dial_bounded_delta (|Δ| ≤ bound by beat_type)
-     - light_rig_within_scene (set membership)
-   - Output: list of `ValidationResult` per §12.6. FAIL on any deterministic violation.
-   - **§6.3.B heuristic invariants explicitly NOT implemented in V1** — they live in Phase B.2.
-   - **Tests:** synthetic state pairs covering each invariant — each MUST catch the violation it targets, MUST NOT false-positive on valid pairs.
-
-**Phase B.1 definition of done:** all four scripts in `scripts/manga/`, each with a pytest suite exercising pass AND fail cases. Run `pytest scripts/manga/tests/validators/` → green. NO Phase C authoring before B.1 is green.
-
-**Phase B.2 — Heuristic / perceptual / narrative scorers (post-launch hardening):**
-
-Built AFTER B.1 is stable and Phase C has produced enough real renders to calibrate against.
-- `validate_layer.py` extended with class-B heuristics (palette_compliance, seam_check)
-- `validate_layer.py` extended with class-C perceptual evaluators (identity_distance, pose_match, lighting_rig_coherence)
-- `validate_continuity_invariants.py` extended with class-D narrative invariants (emotional_pendulation, tension_arc_coherence)
-- Severity is `SCORE` or `WARN` until per-check calibration data shows < 3% false-positive rate; then per-check spec amendment may promote to `FAIL`.
-
-Phase B.2 is NOT a V4 launch blocker. V4 ships with deterministic-only validation; advisory scorers add safety net incrementally.
-
-### 13.3 Phase C — Schema authoring for ONE series (target: stillness_en_01)
-Now the validators exist; authoring is verifiable.
-- Author `stillness_en_01.scene_inventory.yaml` (4–6 scenes × ≤4 temporal variants × declared light_rig_id from §6.9 library)
-- Author `stillness_en_01.object_inventory.yaml` (8–12 objects × state variants)
-- Add `layer_render_contract` to all 19 iyashikei archetypes
-- Add `character_pose_inventory` to Mira's character_design
-- Hand-author `continuity_state/ep_001/*.yaml` from existing chapter_script
-- Author `config/manga/light_rigs/iyashikei.yaml` (~8 rigs K01-K08)
-- Every authored file passes its corresponding validator.
-
-### 13.4 Phase D — Render pipeline scripts
-- New: `scripts/manga/build_layer_render_prompts.py` — emits per-layer prompts from inventory + continuity_state + safe_zones; injects light_rig.prompt_clause
-- New: `scripts/manga/render_layer_inventory.py` — renders the L0/L1/L2/L3/L4 cache for a series
-- New: `scripts/manga/compose_layered_panel.py` — rembg + PIL composite using §10 math
-- Modify: `build_panel_prompts_v3.py` → layer mode when archetype has `layer_render_contract`
-- Modify: `queue_panel_renders.py` → dispatch layer-renders; route per §11 engine map
-- Every render output passes `validate_layer.py` before entering cache; every panel composite passes the composite gates.
-
-### 13.5 Phase E — Validate vs V3.1 baseline
-Render `stillness_en_01 ep_001` via V4. Side-by-side vs V3.1 (currently rendering at PID 37394). Operator review.
-
-### 13.6 Phase F — Catalog rollout
-Apply V4 to all `stillness_press` iyashikei series. Author archetype catalogs for the other 7 top-priority genres (separate Phase 2 spec — `MANGA_LAYER_GENRE_EXTENSIONS_SPEC.md`).
-
-### 13.7 What V3.1 in-flight today still ships
-V3.1 single-engine re-render running now (PID 37394) ships as V3.1 — better than V3 (no cross-engine drift), worse than V4 (no identity lock, no layer reuse, no continuity invariants, no light-rig coherence). V3.1 is the operational fallback for archetypes V4 doesn't yet cover (§15.B).
-
-### 13.8 Why this order matters (validator-first rationale)
-
-Two failure modes that validator-first prevents:
-
-**Without validators:** I author a `scene_inventory.yaml`, run the prompt builder, get rendered layers — and have no way to know if they're contract-compliant short of eyeballing the output. Errors compound silently. The system reverts to probabilistic prompting (better-than-V3.1 but not deterministic).
-
-**With validators:** every authored input passes a gate before render; every rendered layer passes a gate before composite; every composite passes a gate before delivery. Errors are caught at the boundary they occur. The system is a contract-governed pipeline, which is the entire point of the spec.
+<!-- Detailed V3.1-to-V4 migration plan (Phase A spec review, Phase B.1 deterministic
+     validator core + Phase B.2 hardening, Phase C schema authoring, Phase D render
+     pipeline, Phase E baseline comparison, Phase F catalog rollout, V3.1 in-flight
+     handling, validator-first rationale) is in
+     docs/specs/MANGA_V4_MIGRATION_PLAN_ARCHIVE.md. V4 spec retains this short
+     archive marker only (per §15.C.6 + operator directive 2026-05-20). -->
 
 ---
 
@@ -1583,19 +1030,19 @@ Layered systems fail differently than monolithic systems. v0.1 had QA gates (§1
 
 | failure | detection | fallback | rerender policy | cache invalidation |
 |---|---|---|---|---|
-| **B.1 Lighting rig mismatch** (any of: direction, softness, color_temp, rim, ambient_bounce, atmospheric_diffusion, exposure — see §6.9) | 7-axis detector per §6.9: (i) direction via gradient analysis on L0 vs L2 shadow side; (ii) softness via shadow-edge falloff length; (iii) color_temp via white-balance estimation on highlights; (iv) rim_intensity via rim-region brightness vs body avg; (v) ambient_bounce via shadow-side color sampling; (vi) diffusion via global contrast / haze measure; (vii) exposure via histogram center. Any axis exceeding tolerance = mismatch. | rerender L2 with the FULL light_rig.prompt_clause re-injected (not just direction) | retry L2 up to 2×. If still fails: accept axis-by-axis (some axes are acceptable mismatches, e.g., exposure within 30% is fine; direction must match within 45°). Log per-axis. | invalidate `<L2_layer_id>` only; keep L0. |
+| **B.1 Lighting rig mismatch** (any of: direction, softness, color_temp, rim, ambient_bounce, atmospheric_diffusion, exposure — see sibling `MANGA_CONTINUITY_STATE_SPEC.md §9`) | 7-axis detector per sibling `MANGA_CONTINUITY_STATE_SPEC.md §9`: (i) direction via gradient analysis on L0 vs L2 shadow side; (ii) softness via shadow-edge falloff length; (iii) color_temp via white-balance estimation on highlights; (iv) rim_intensity via rim-region brightness vs body avg; (v) ambient_bounce via shadow-side color sampling; (vi) diffusion via global contrast / haze measure; (vii) exposure via histogram center. Any axis exceeding tolerance = mismatch. | rerender L2 with the FULL light_rig.prompt_clause re-injected (not just direction) | retry L2 up to 2×. If still fails: accept axis-by-axis (some axes are acceptable mismatches, e.g., exposure within 30% is fine; direction must match within 45°). Log per-axis. | invalidate `<L2_layer_id>` only; keep L0. |
 | **B.2 Perspective mismatch** (L0 isometric overhead; L2 character rendered front-on) | declared archetype framing (insert/CU/MS/...) compared against detected L2 perspective via CLIP | rerender L2 with explicit perspective clause from archetype framing row | retry L2 up to 2×. | invalidate `<L2_layer_id>` only. |
 | **B.3 Pose-scale mismatch** (character rendered at portrait scale but archetype's subject_placement_bbox calls for long-shot scale) | post-cutout-bbox vs archetype subject_zone — if cutout bbox > 2× the zone area or < 0.5× | rescale at composite time (acceptable for ±30%); rerender if outside that range | retry up to 2× with explicit framing clause | invalidate `<L2_layer_id>` only. |
 | **B.4 Atmospheric overlay contamination** (steam L4 overlapping face L2 causes visual artifact — e.g., face features fade into steam) | post-composite saliency map; if L2-face-region saliency drops > 50% after L4 composite | reduce L4 opacity to 0.3 max in face region (per-pixel masking) | accept reduced opacity; no rerender needed | no invalidation. |
 | **B.5 Seam visibility** (composite paste boundary visible — edge halo, sudden tone shift) | edge-detection across paste boundary; if edge density > scene mean × 2 | apply 1px alpha matting at composite boundary as remediation (NOT full feather — just edge-AA) | no rerender; remediation in composite step. | no invalidation. |
 
-### 14.C Continuity failures (detected by §6.3 invariants)
+### 14.C Continuity failures (detected by sibling `MANGA_CONTINUITY_STATE_SPEC.md §3` invariants)
 
 | failure | detection | fallback | rerender policy | cache invalidation |
 |---|---|---|---|---|
-| **C.1 Gaze discontinuity** (panel N gaze at_cup; panel N+1 gaze at_camera with no transitional beat) | §6.3 gaze-continuity invariant | flag panel N+1 for chapter_script edit (add transitional beat OR change gaze) | no auto-rerender — requires chapter_script change. Escalate to writer. | no invalidation. |
-| **C.2 Prop state regression** (cup_full in panel N, cup_empty in panel N+1, no drink-action panel between) | §6.3 prop continuity invariant | flag chapter_script for review — likely a continuity bug | no auto-rerender. | no invalidation. |
-| **C.3 Emotional pendulation violation** (calm → peak_anxious in one beat for iyashikei) | §6.3 emotional invariant per iyashikei rules | flag for chapter_script edit (insert intermediate beat) | no auto-rerender. | no invalidation. |
+| **C.1 Gaze discontinuity** (panel N gaze at_cup; panel N+1 gaze at_camera with no transitional beat) | sibling `MANGA_CONTINUITY_STATE_SPEC.md §3` gaze-continuity invariant | flag panel N+1 for chapter_script edit (add transitional beat OR change gaze) | no auto-rerender — requires chapter_script change. Escalate to writer. | no invalidation. |
+| **C.2 Prop state regression** (cup_full in panel N, cup_empty in panel N+1, no drink-action panel between) | sibling `MANGA_CONTINUITY_STATE_SPEC.md §3` prop continuity invariant | flag chapter_script for review — likely a continuity bug | no auto-rerender. | no invalidation. |
+| **C.3 Emotional pendulation violation** (calm → peak_anxious in one beat for iyashikei) | sibling `MANGA_CONTINUITY_STATE_SPEC.md §3` emotional invariant per iyashikei rules | flag for chapter_script edit (insert intermediate beat) | no auto-rerender. | no invalidation. |
 | **C.4 Identity flip across panels** (Mira's hair color shifts; eye geometry shifts) | embed all L2 renders for same character in episode; cluster — if outlier > 0.55 distance | rerender outlier L2 with stronger identity inputs | retry up to 3× | invalidate the outlier `<layer_id>`. |
 
 ### 14.D Cache invalidation triggers (across the system)
@@ -1606,7 +1053,7 @@ Layered systems fail differently than monolithic systems. v0.1 had QA gates (§1
 | `scene_inventory.yaml` edit | all `<L0_layer_id>` and `<L1_layer_id>` for that scene_id |
 | `object_inventory.yaml` edit | all `<L3_layer_id>` for that object_id |
 | `iyashikei.yaml` archetype edit | nothing automatic (archetype changes affect composition, not layer renders) BUT next composite for that archetype rebuilds |
-| spec (this doc) edit affecting §5 or §6 | regenerate `scripts/manga/compile_safe_zones.py` output; recompute continuity_state hashes |
+| spec edit affecting §5 of this doc OR sibling `MANGA_CONTINUITY_STATE_SPEC.md` | regenerate `scripts/manga/compile_safe_zones.py` output; recompute continuity_state hashes |
 
 ### 14.E Manual-review queue
 
@@ -1730,7 +1177,7 @@ panel_provenance:
   fallback_chain: []             # the sequence of attempts that led to the final output
 ```
 
-This provenance feeds `render_telemetry/<episode>.yaml` (§6.11) and surfaces per-panel quality tier for operator dashboards.
+This provenance feeds `render_telemetry/<episode>.yaml` (sibling `MANGA_CONTINUITY_STATE_SPEC.md §11`) and surfaces per-panel quality tier for operator dashboards.
 
 **Halt conditions (when the orchestrator stops on its own):**
 - per_episode failure_rate > 3% (transient — episode-scoped)
@@ -1805,7 +1252,7 @@ Each blocker is a testable pass/fail gate, not a narrative goal. V4 ships when a
 **Pass requires all of:**
 - One of: (i) PuLID-FaceNet operational (EVA-CLIP download issue resolved) OR (ii) per-character LoRA trained on `ai-toolkit` for at least the `stillness_en_01` protagonist (Mira Aoki)
 - Synthetic test: across N=30 panels rendered for character X, **embedding cosine distance ≤ 0.55 on 100% of panels** (per §12.3 `identity_distance` gate, class-C threshold)
-- **Hash-equality is necessary but NOT sufficient.** Per §6.3.A amendment, when PuLID and LoRA are both inactive, `character_design_hash = axes_hash` only — same hash does not guarantee same rendered face. §15.A.2 explicitly requires one of {PuLID-active, per-character-LoRA-trained} as a precondition for this gate to be evaluable. The structural validator (§6.3.A) can still pass; the perceptual gate (this §15.A.2) cannot pass without an identity-locking engine.
+- **Hash-equality is necessary but NOT sufficient.** Per sibling `MANGA_CONTINUITY_STATE_SPEC.md §3.A` amendment, when PuLID and LoRA are both inactive, `character_design_hash = axes_hash` only — same hash does not guarantee same rendered face. §15.A.2 explicitly requires one of {PuLID-active, per-character-LoRA-trained} as a precondition for this gate to be evaluable. The structural validator (sibling `MANGA_CONTINUITY_STATE_SPEC.md §3.A`) can still pass; the perceptual gate (this §15.A.2) cannot pass without an identity-locking engine.
 - First-attempt success rate ≥ 95% (≤ 5% requiring retry to clear the distance gate)
 - After one retry, success rate ≥ 99%
 - Operator manual review: random sample of 5 panels — "is this the same character?" → **5/5 yes** required
@@ -1843,8 +1290,8 @@ Each blocker is a testable pass/fail gate, not a narrative goal. V4 ships when a
 
 **Pass requires all of:**
 - `scripts/manga/validate_continuity_invariants.py` exists and `pytest scripts/manga/tests/validators/test_continuity_invariants.py` → green
-- All §6.3.A deterministic invariants implemented; class-A FAIL halts panel build
-- All §6.3.B heuristic invariants implemented at SCORE/WARN severity (advisory only at V4)
+- All sibling `MANGA_CONTINUITY_STATE_SPEC.md §3.A` deterministic invariants implemented; class-A FAIL halts panel build
+- All sibling `MANGA_CONTINUITY_STATE_SPEC.md §3.B` heuristic invariants implemented at SCORE/WARN severity (advisory only at V4)
 - Synthetic test fixtures cover each invariant pass + fail case
 - Validator runs in ≤ 500 ms per panel-pair on Pearl Star CPU
 - False-positive rate ≤ 0.5% on 100-panel pilot for deterministic invariants
@@ -1881,7 +1328,7 @@ The first five gates test layers in isolation; this gate tests the assembled com
 
 **Test path:** `artifacts/manga/<series>/v4_acceptance_review/<timestamp>/` — composited panels + filled review template
 **Manual gate:** this one cannot be automated. Operator review IS the gate.
-**Fallback if unmet:** V4 does not launch for that archetype set / series. Diagnose which panels failed, iterate on prompt templates / continuity_state / light_rig, re-run review. Catalog rollout (§13.6) does not begin until composite review passes for `stillness_en_01`.
+**Fallback if unmet:** V4 does not launch for that archetype set / series. Diagnose which panels failed, iterate on prompt templates / continuity_state / light_rig, re-run review. Catalog rollout (sibling `MANGA_V4_MIGRATION_PLAN_ARCHIVE.md §7`, formerly §13.6 of this spec) does not begin until composite review passes for `stillness_en_01`.
 
 #### 15.A.7 Per-axis `subject_does_not_touch_edge` — V4.1 design item (NEW 2026-05-20 post-B-test-#4)
 
@@ -1913,7 +1360,7 @@ These are decisions, not gaps. Out-of-scope intentionally.
    - **Eye-line geometry.** If A is looking at B, the rendered angle of A's gaze must terminate at B's actual rendered head position post-composite. This is a geometric constraint the renderer doesn't know about.
    - **Pose interdependence.** A reaching for B's hand requires both renders to agree on contact geometry. Independent layer renders won't unless they're conditioned on each other (which is a circular dependency).
    - **Overlap semantics.** Z-order between A and B is dynamic per archetype, not static (A passes in front of B in one panel; B in front of A in the next). The flat L2 namespace can't express it without sub-layering.
-   - **Shared light rig.** §6.9 handles this — both characters inherit the scene's light_rig — but it requires the QA gate to validate BOTH L2 renders, not one.
+   - **Shared light rig.** Sibling `MANGA_CONTINUITY_STATE_SPEC.md §9` handles this — both characters inherit the scene's light_rig — but it requires the QA gate to validate BOTH L2 renders, not one.
    - **Touch / contact continuity.** Hands touching, shoulders brushing — pixel-level boundary must be consistent across panels (no "fingers visibly separate, then visibly joined, then visibly separate" in three consecutive panels).
    - **Emotional co-regulation.** If A is calming B, their `emotional_state` is COUPLED — not independent. The continuity invariant system has no concept of paired-state dynamics yet.
 
@@ -1931,7 +1378,7 @@ These are decisions, not gaps. Out-of-scope intentionally.
 2. **Semantic continuity inference.** Today: continuity_state must be hand-authored per panel. Goal: infer it from chapter_script.yaml using an LLM (Pearl_Star qwen-instruct). Research questions: what's the inference accuracy? What's the operator override cost?
 3. **Adaptive safe-zone inference.** Today: safe zones are fixed-percentage rules from §5. Goal: per-archetype, learn the actual safe zone empirically from successful renders. Research questions: do the §5 defaults hold up across genres? Where do they fail?
 4. **Lighting coherence detector.** §14.B.1 requires detecting lighting direction mismatch. Today: no such detector exists. Research questions: which models do this well? Cost per panel?
-5. **Pose transition grammar.** §6.3 invariants enforce gross continuity. Sub-question: are there pose-specific transition rules? (e.g., "sitting → standing" needs 1 transitional beat; "sitting → reaching" can be direct).
+5. **Pose transition grammar.** Sibling `MANGA_CONTINUITY_STATE_SPEC.md §3` invariants enforce gross continuity. Sub-question: are there pose-specific transition rules? (e.g., "sitting → standing" needs 1 transitional beat; "sitting → reaching" can be direct).
 
 6. **Spec gravity (document partition at scale).** This spec is approaching the threshold where one document tries to serve both implementation and theory readers. **v0.5.1 trip-wire (initial commitment):** when the spec reaches **1900 lines**, partition is required before next material amendment.
 
@@ -1947,7 +1394,7 @@ These are decisions, not gaps. Out-of-scope intentionally.
 7. **Ontology hardening risk.** The enums (`emotional_state`, `posture`, `gaze`, `hand_state`, `prop_evolution`, light_rig taxonomy, archetype families) constrain chaos, which is good. But over time, they risk **calcifying into hidden storytelling-grammar assumptions** — the ontology starts shaping what stories CAN be told rather than reflecting stories being told.
    - Iyashikei is a forgiving stress test: small vocabularies, slow pacing, internal-focus. The current enums fit.
    - Action genres, ensemble casts, branching narratives, cross-cultural stories may need vocabulary EXTENSIONS the current ontology forecloses (e.g., `emotional_state` has no `betrayal_recognition` or `tactical_focus`; `gaze` has no `combat_target_lock`).
-   - **Mitigation:** before each genre rollout (per §13.6), audit the ontology against ≥3 bestseller exemplars in that genre and explicitly approve additions/deprecations. The enum is a contract, not a frozen truth.
+   - **Mitigation:** before each genre rollout (per sibling `MANGA_V4_MIGRATION_PLAN_ARCHIVE.md §7`, formerly §13.6 of this spec), audit the ontology against ≥3 bestseller exemplars in that genre and explicitly approve additions/deprecations. The enum is a contract, not a frozen truth.
    - **Detection signal:** if writers start using "Other" / freeform fields more than rare-edge-case rates (~5%), the ontology is constraining the work and needs revision.
    - Not actionable in V4 (iyashikei-only). Logged for Phase 2 onward.
 
@@ -2013,7 +1460,7 @@ This spec is referenced by (planned):
 
 1. **Safe-zone contract** (§5) — hierarchical: `base → framing → subject → genre_modifier → archetype_exception`. Flat table is a compiled view; YAML inheritance is source of truth.
 
-2. **Continuity contract** (§6) — `story_state → continuity_state → archetype → layers → composite`. Per-panel state record (emotional, posture, gaze, hand_state, prop_state, temporal). §6.3 invariants gate sequence coherence.
+2. **Continuity contract** (see sibling `MANGA_CONTINUITY_STATE_SPEC.md` — formerly §6 of this spec) — `story_state → continuity_state → archetype → layers → composite`. Per-panel state record (emotional, posture, gaze, hand_state, prop_state, temporal). Sibling spec §3 invariants gate sequence coherence.
 
 3. **Layer contract** (§3, §4, §7, §8) — 5 render layers (L0–L4) + reserved namespaces for semantic / export / ink / animation layers. Per-archetype layer composition map. Per-series inventories (character_pose, scene, object).
 
@@ -2027,6 +1474,6 @@ This spec is referenced by (planned):
 
 **The strategic bridge:** once layers are stable image assets, motion manga, VN-style branching, reusable cinematic grammar, and persistent cinematographic world models all become feasible without architectural rework. Reserve namespace `A0–A9` for animation today (§4.6) so we don't repaint the bike-shed when the unlock arrives.
 
-**Recommended next action (v0.3, validator-first):** operator approves §5, §6 (including §6.8 cardinality + §6.9 light rigs), §8, §13 reordered, §14 → I build Phase B's three validators (`compile_safe_zones.py` → `validate_layer.py` → `validate_continuity_invariants.py`) → only after validators pass synthetic tests do I author Phase C inventories for `stillness_en_01` → re-prompt Mira on pure-white backdrop → second layer demo passes validators end-to-end → V4 dispatcher ships ep_001 layered.
+**Recommended next action (v0.3, validator-first):** operator approves §5, sibling `MANGA_CONTINUITY_STATE_SPEC.md` (including §8 cardinality + §9 light rigs — formerly §6.8 + §6.9 of this spec), §8 of this spec, sibling `MANGA_V4_MIGRATION_PLAN_ARCHIVE.md` (formerly §13 of this spec, reordered to validator-first), §14 → I build Phase B's three validators (`compile_safe_zones.py` → `validate_layer.py` → `validate_continuity_invariants.py`) → only after validators pass synthetic tests do I author Phase C inventories for `stillness_en_01` → re-prompt Mira on pure-white backdrop → second layer demo passes validators end-to-end → V4 dispatcher ships ep_001 layered.
 
 — end of spec v0.2 —
