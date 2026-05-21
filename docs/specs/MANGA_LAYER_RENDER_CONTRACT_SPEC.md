@@ -1,8 +1,10 @@
-# Manga Layer Render Contract Spec (v0.6.2 — V4 spec doc-split: §6 to MANGA_CONTINUITY_STATE_SPEC, §13 to MANGA_V4_MIGRATION_PLAN_ARCHIVE)
+# Manga Layer Render Contract Spec (v0.6.3 — V4 spec doc-split + Phase 1 ToonOut cutout_engine)
 
-**Status:** AUTHORITY (v0.6.2 — doc-split executed 2026-05-20 per §15.C.6 trip-wire + operator directive)
+**Status:** AUTHORITY (v0.6.3 — Phase 1 ToonOut + doc-split, 2026-05-20)
 **Author:** Pearl_Architect + Pearl_Int + Pearl_Research
-**Schema version:** 0.6.2 (doc-split execution — §6 + §13 moved to sibling docs; cross-references updated)
+**Schema version:** 0.6.3 (Phase 1 ToonOut cutout_engine extension; cumulative with v0.6.2 doc-split)
+**Changes since v0.6.2 (v0.6.3 — Phase 1 ToonOut):**
+- §8.1 + §12.3 EXTENDED — Phase 1 ToonOut `cutout_engine` field added per V5 spec §13. Default `"rembg"` preserves v0.6 behavior; `"toonout"` opts a per-archetype cutout in to BiRefNet anime-FT. Side-by-side test script: `scripts/manga/v4_toonout_side_by_side.py`. Loader: `scripts/manga/manga_cutout_toonout.py`. Weights: `models/cutout/toonout/birefnet_finetuned_toonout.pth` (operator pulls separately; 885 MB; HF joelseytre/toonout).
 **Changes since v0.6.1 (v0.6.2 — doc-split execution):**
 - §6 SHORTENED — State Continuity Architecture extracted to standalone sibling spec `docs/specs/MANGA_CONTINUITY_STATE_SPEC.md` v1.0.0. V4 spec retains a short §6 DOC-SPLIT MARKER. Honors §15.C.6 trip-wire + operator directive 2026-05-20 (target <1,800 lines). Continuity state will become a dual-architecture authority (V4 + V5) once PR #1258 lands.
 - §13 ARCHIVED — V3.1-to-V4 validator-first migration plan extracted to standalone historical archive `docs/specs/MANGA_V4_MIGRATION_PLAN_ARCHIVE.md` v1.0.0. V4 spec retains a short §13 ARCHIVE MARKER. Plan is frozen as historical record; V5 will have its own acceptance criteria in `MANGA_V5_LAYERED_ARCHITECTURE.md` once that spec lands.
@@ -776,6 +778,20 @@ cutout_policy:
 
 **Alpha matting (NEW v0.6):** mandatory for L2 cutouts. `rembg.remove(im, session=session, alpha_matting=True, alpha_matting_foreground_threshold=240, alpha_matting_background_threshold=10)`. Reduces silhouette edge softness from ~1.5-2% gray-band to <1%.
 
+**Phase 1 ToonOut cutout_engine (NEW v0.7 — 2026-05-20):** per
+`docs/specs/MANGA_V5_LAYERED_ARCHITECTURE.md` §13, `cutout_policy` gains an
+optional `cutout_engine` field (`"rembg"` default | `"toonout"`). When
+`cutout_engine: "toonout"`, the orchestrator routes through BiRefNet fine-tuned
+on anime (MatteoKartoon/BiRefNet, MIT, 2025-09; HF weights:
+joelseytre/toonout, 885 MB .pth) instead of rembg. Output contract is
+identical (RGBA PIL.Image at input dims, alpha channel = subject mask), so
+§12.3 L2 cutout gates (`rembg_clean_alpha`, `character_extraction_coverage`,
+`background_bleed_check`) flow through unchanged. Phase 1 opt-in targets
+the 4 face-only archetypes (`character_quiet_face`, `character_face_micro_tension`,
+`chest_breath_micro`, `hand_table_micro`) where research §1 documented the
+worst V4 cutout-residue artifacts. Other archetypes remain on rembg until
+Phase 1 side-by-side review clears them for migration.
+
 **Alternative pure-black backdrop:** still permitted for dark-haired/dark-clothed characters where scene context might compromise readability. Same cutout-contract pipeline applies.
 
 ### 9.2 Object layers (L1, L3)
@@ -915,6 +931,11 @@ L2 gates differ from L1/L3 because L2 is two-stage (pre-cutout render + post-cut
 | `continuity_invariants_heuristic` (sibling `MANGA_CONTINUITY_STATE_SPEC.md §3.B`) | D — narrative | SCORE |
 
 **KNOWN LIMITATION (v0.6.3 logged 2026-05-20, post-B-test-#3):** `background_bleed_check` cannot distinguish subject-body-at-edge from scene-fragment-at-edge without ML segmentation. For face-only archetypes (`character_quiet_face`, `character_face_micro_tension`, `pet_companion_micro`), treat `background_bleed_check` PASS as **necessary but not sufficient**; the primary gate is `subject_does_not_touch_edge`. If both bleed and edge-touch FAIL together, the diagnosis is over-tight framing (subject fills canvas) — re-author scene_context_clause to use breathing-room language per the compile-time WARN in `contract_to_prompt_compiler.py` (looks for "fill the frame", "edge to edge", etc., when safe_zone declares non-zero margins).
+
+**v0.7 note (2026-05-20):** ToonOut (`cutout_engine: "toonout"`) flows through
+these same gates unchanged. Per research §2.1 the paper claims 99.0% PA on the
+"Action" category — empirical validation gated on side-by-side test output at
+`artifacts/manga/.../experiments/v4_toonout_test/` before broader rollout.
 
 
 **Two new class-A gates (v0.6) detailed:**
