@@ -121,21 +121,45 @@ Milestones are gated — each completes before the next starts. Compute on Pearl
 
 **Scope:** Pearl_Author skill that takes (series_profile, episode_index, chapter_beatsheet, character_design, style_state) → emits 35 continuity_state YAMLs per episode. Generator deterministic from a single operator-authored beatsheet per episode.
 
-**Authoring inputs the generator needs from the operator (per episode):**
-- High-level beat structure (opening anchor → 4 acts → closing decompression)
-- Character pose progression (which archetypes appear in which order)
-- Scene state evolution (kitchen → window → garden, etc.)
-- Light rig changes per beat
-- ~30-60 min per episode operator authoring (vs ~17h per episode manual panel authoring)
+**Step 0 (added v1.2 per operator 2026-05-22) — Reverse-engineer the beatsheet from ep_001's 35 YAMLs BEFORE writing any generator code.**
+
+Operator rationale (verbatim): *"the continuity_state generator is the highest-leverage piece of infrastructure in this entire plan, and it's also the one most likely to be underspecified when you start building it. The 35 hand-authored ep_001 YAMLs are your only ground truth. Before you write a line of generator code, do one thing: Extract the beatsheet from ep_001 manually. Take the 35 existing continuity_state YAMLs and work backwards — what is the minimal operator-authored beatsheet that would allow a generator to reproduce them? That exercise tells you exactly what the generator's input contract needs to be, which archetypes require explicit operator intent vs can be inferred from scene/emotional state, and where the generator will need heuristics vs deterministic rules. If you skip this and design the generator input contract from theory, you'll build something that looks reasonable but fails on the first real episode because the beatsheet abstraction doesn't capture what the panel YAMLs actually encode."*
+
+**Step 0 deliverables:**
+- `artifacts/manga/.../continuity_state/ep_001/_extracted_beatsheet.yaml` — the minimal operator-authored input contract that, run through the generator, would reproduce the 35 ep_001 YAMLs
+- `docs/PEARL_AUTHOR_BEATSHEET_DESIGN_NOTES.md` — what fell out of the extraction:
+  - which YAML fields are **deterministic from beatsheet+series_profile+style_state** (no operator input needed per panel)
+  - which fields require **explicit operator intent per panel/beat** (must surface as a beatsheet slot)
+  - which fields require **heuristic inference** (e.g., gaze_direction follows shared_attention_anchor; expression_dial Δ must stay ≤ 0.3 per micro-beat per V4 spec §6.3)
+  - which fields are **archetype-specific** vs **universal** (the generator's per-archetype dispatch logic surface)
+- Beatsheet schema YAML at `docs/specs/MANGA_BEATSHEET_SCHEMA.yaml`
+
+**Step 0 anti-goal:** do NOT design the beatsheet from theory + retrofit YAML output. Bottom-up from the 35 concrete YAMLs.
+
+**Step 0 cost:** ~1-2 days of structured reverse-engineering before code is written.
+
+**Step 1+ — Build the generator** (post-Step 0, ~1 week):
+- Pearl_Author skill that consumes the Step 0 schema + per-episode beatsheet + series_profile + character_design + style_state, emits N continuity_state YAMLs
+- Per-archetype dispatch logic (using the Step 0 surface)
+- Heuristic application (expression_dial Δ bounds, gaze→anchor inference, etc.)
+
+**Authoring inputs the generator needs from the operator (per episode) — refined by Step 0:**
+- The exact shape will fall out of Step 0. v1.2 estimate (subject to revision after Step 0):
+  - High-level beat structure (opening anchor → 4 acts → closing decompression)
+  - Character pose progression (which archetypes appear in which order)
+  - Scene state evolution (kitchen → window → garden, etc.)
+  - Light rig changes per beat
+- Target ~30-60 min per episode operator authoring (vs ~17h per episode manual panel authoring). Revise estimate post-Step 0.
 
 **Exit criteria:**
+- Step 0 complete: `_extracted_beatsheet.yaml` + design notes + schema YAML committed
 - Generator emits valid continuity_state YAMLs that pass `scripts/manga/validate_continuity_invariants.py`
-- Round-trip test: regenerate ep_001 from a beatsheet derived from existing 35 YAMLs; output matches existing within tolerance
+- **Round-trip test**: regenerate ep_001 from the Step 0 beatsheet; output matches existing 35 YAMLs within declared tolerance (exact match on structural fields; bounded numerical drift on dial-style fields). Per operator: *"The round-trip test in Milestone C's exit criteria already requires this — do it upfront as the design input, not as the final validation."*
 - Documentation at `docs/PEARL_AUTHOR_CONTINUITY_STATE_GENERATOR.md`
 
-**Cost:** ~1 week build + iteration
+**Cost:** Step 0 ~1-2 days + Step 1+ ~1 week = ~9-12 days total
 
-**Owner:** Pearl_Author (new skill); operator authors first 1-2 beatsheets to validate generator
+**Owner:** Pearl_Author drives Step 0 reverse-engineering with operator review; same agent builds Step 1+ generator. Operator authors first 1-2 beatsheets to validate generator before B starts.
 
 ### Milestone D — Generalize to 4 top genres (cross-genre proof)
 
