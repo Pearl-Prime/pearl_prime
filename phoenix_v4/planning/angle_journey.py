@@ -197,8 +197,15 @@ def patch_beatmap_angle_journey(beatmap: Any, angle_id: str) -> tuple[dict[int, 
         runtime_format=getattr(beatmap, "runtime_format", None),
     )
     for ch, new_types in zip(beatmap.chapters, updated):
-        by_type = {s.slot_type.strip().upper(): s for s in ch.slots}
-        hook_tw = by_type.get("HOOK", ch.slots[0] if ch.slots else None)
+        # OPD-143: build a per-type FIFO queue of existing slots so repeated slot_types
+        # (e.g. 3× STORY at sec 2/5/9, 2× REFLECTION, 2× EXERCISE in SOMATIC_10_SLOT_GRID)
+        # each consume a distinct original BeatmapSlot. The previous dict-based lookup
+        # collapsed all occurrences onto the last slot of that type, which made every
+        # STORY slot resolve to (chapter, sec=9) — i.e. turning_point — at injection time.
+        by_type_queue: dict[str, list[Any]] = {}
+        for s in ch.slots:
+            by_type_queue.setdefault(s.slot_type.strip().upper(), []).append(s)
+        hook_tw = (by_type_queue.get("HOOK") or [ch.slots[0] if ch.slots else None])[0]
         base_tw = int(getattr(hook_tw, "target_words", 320) or 320)
         angle_def_tw = max(base_tw * 3, ANGLE_DEFINITION_PARAGRAPH_WEIGHT * 75)
         angle_cb_tw = max(base_tw, 280)
@@ -206,9 +213,9 @@ def patch_beatmap_angle_journey(beatmap: Any, angle_id: str) -> tuple[dict[int, 
         sec_idx = 0
         for st in new_types:
             sec_idx += 1
-            existing = by_type.get(st)
-            if existing is not None:
-                new_slots.append(existing)
+            queue = by_type_queue.get(st)
+            if queue:
+                new_slots.append(queue.pop(0))
                 continue
             tw = angle_def_tw if st == ANGLE_DEFINITION_SLOT else angle_cb_tw
             crit = dict((hook_tw.atom_selection_criteria if hook_tw else {}) or {})
