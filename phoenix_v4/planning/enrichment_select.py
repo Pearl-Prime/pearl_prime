@@ -1700,11 +1700,17 @@ def select_enrichment(
                         match_scores["angle_layer"] = int(_layer)
 
             # 0) Story schedule: named-character arcs replace SCENE/STORY slots at section indices 2/5/9.
-            # section_index is 1-based (slot_i + 1). StorySchedule keys: (chapter_number, section_index).
+            # section_index is 1-based. StorySchedule keys: (chapter_number, section_index).
             # STORY check added 2026-04-26 alongside SOMATIC_10_SLOT_GRID sec 2/5/9 SCENE→STORY change:
             # preserves story_schedule routing for personas with story_atoms/anchored coverage (gen_z_professionals × anxiety today);
             # personas without coverage fall through to persona_atoms["STORY"] waterfall (engine bank + generic 859-bank merged).
-            _sec_idx = slot_i + 1
+            #
+            # OPD-142 fix (2026-05-21): PR #1248 (OPD-116/117 angle journey) inserted ANGLE_DEFINITION /
+            # ANGLE_CALLBACK slots into the slot list, breaking the `slot_i + 1 == somatic_section_index`
+            # invariant that PR #669's routing depended on. We now key off the slot's preserved
+            # somatic_section_index (patch_beatmap_angle_journey preserves it; see beatmap_compile.py:209-212).
+            # Fall back to slot_i + 1 only when somatic_section_index is not set (short formats / non-v2).
+            _sec_idx = getattr(slot, "somatic_section_index", 0) or (slot_i + 1)
             if stype in ("SCENE", "STORY") and _sec_idx in SCENE_SECTION_INDICES:
                 _sched_slot = _story_schedule.get(bm_ch.number, _sec_idx)
                 if _sched_slot is not None and _sched_slot.text:
