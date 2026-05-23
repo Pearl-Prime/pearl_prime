@@ -1,9 +1,11 @@
 # Manga V5.1 Catalog Rollout Plan
 
-**Status:** PLAN (operator-reviewable; pre-execution)
+**Status:** PLAN v1.1 — operator decisions captured 2026-05-22 (see §11)
 **Author:** Pearl_PM + Pearl_Architect
-**Date:** 2026-05-22
+**Date:** 2026-05-22 (v1.0); amended 2026-05-22 (v1.1)
 **Decision context:** Operator question (2026-05-22): *"do we have all the plans to do this for all the genres and styles?"* Honest answer: **no — V5.1 architecture proven on 1 series; ~364 series unauthored to V5.1 dispatch readiness.** This doc inventories the gap + proposes ordered milestones.
+
+**v1.1 amendments (2026-05-22 operator decisions):** Sequencing now C before B (Milestone C is non-negotiable unlock). Milestone B adds cross-episode identity check. Milestone D genres updated to stress-test spec breadth, not just volume. Milestone F starts ja-JP. Milestone H scoping starts in parallel with B. See §11 for full decision text + rationales.
 
 ---
 
@@ -102,19 +104,18 @@ Milestones are gated — each completes before the next starts. Compute on Pearl
 
 **Scope:** V5.1 re-render of ep_002–ep_010 of the same series (~350 more composites, all-on-Pearl-Star). Operator review confirms identity consistency holds across 10 episodes + character continuity is visible.
 
-**Prerequisite:** Milestone A acceptance verdict ≥31/35.
+**Prerequisite (v1.1 operator decision):** Milestone A acceptance verdict ≥31/35 AND Milestone C generator validated via ep_001 round-trip. The 175h manual-authoring-debt path is explicitly rejected; B uses C's output.
 
 **Exit criteria:**
 - All 350 V5.1 composites rendered
-- Cross-episode identity consistency check: same Mira across all 10 episodes (operator visual; programmatic `qa_face_distance.py` ≤ 0.55 cosine on 95% of L2 panels)
-- Style consistency: no visible drift between ep_001 and ep_010
+- **Per-episode acceptance**: ≥31/35 shippable per episode (same as ep_001 §11 gate; v1.1 operator decision: "within each episode the bar stays the same")
+- **NEW v1.1 — Cross-episode identity check**: `scripts/manga/character_individuation/qa_face_distance.py` cosine ≤ 0.55 on ≥95% of L2 panels **across all 10 episodes** (not just within each). Operator rationale: *"if identity drifts between ep_003 and ep_007, you need to catch it before calling the series shippable."* This is the check ep_001 alone cannot prove.
+- Style consistency: no visible drift between ep_001 and ep_010 (operator visual review)
 - Series-level operator approval to ship as stillness_press__ahjan__en_US__anxiety v1.0
 
 **Cost:** ~75h Pearl Star compute (9 episodes × 35 panels × ~25 min) + ~4h operator review
 
-**Owner:** dispatch driver (extended from ep_001), no new authoring required (continuity_state for ep_002-010 needs authoring — see prerequisite below)
-
-**Hidden cost:** **Continuity state for ep_002-010 of this series is NOT YET AUTHORED.** Even though V3.1 panels exist, the V5.1 dispatch needs per-panel continuity_state YAMLs that we don't have for ep_002+. Either (a) author them manually (10 episodes × 35 panels × 30 min = ~175h person-time), or (b) build the generator (Milestone C) first.
+**Owner:** dispatch driver (extended from ep_001) + Pearl_Author (continuity_state via Milestone C generator)
 
 ### Milestone C — Build the continuity_state generator (the unlock)
 
@@ -138,7 +139,17 @@ Milestones are gated — each completes before the next starts. Compute on Pearl
 
 ### Milestone D — Generalize to 4 top genres (cross-genre proof)
 
-**Scope:** Author panel_template + run V5.1 on 1 series each in: slice_of_life, workplace, supernatural_everyday, sports. Healing/iyashikei already done.
+**Scope (v1.1 operator decision):** Author panel_template + run V5.1 on 1 series each in: **slice_of_life, workplace, romance, dark_fantasy**. Healing/iyashikei already done.
+
+**Operator rationale (2026-05-22) for the genre swap:** *"keep slice_of_life and workplace, swap the other two. slice_of_life (77 series) and workplace (41 series) are your two largest genre buckets — correct picks. supernatural_everyday and sports are small (33 and 18). Swap them for romance (8 series but high commercial value, tests relational composition) and dark_fantasy (10 series, tests the dramatic_bleed archetype you stubbed in §5.3). You want genres that stress-test different parts of the spec, not just volume."*
+
+**Genre selection logic:**
+| Genre | Catalog volume | Spec-stress dimension being validated |
+|---|---|---|
+| slice_of_life | 77 series (largest) | Volume; ambient-life panel diversity |
+| workplace | 41 series (#3 largest) | Volume; multi-character office/meeting compositions |
+| romance | 8 series (high commercial value) | Relational composition — 2-character intimate scenes, gaze-interaction archetypes |
+| dark_fantasy | 10 series | Stress-tests V4 spec §5.3 `dramatic_bleed_allowed` flag (set in 4 archetypes per `config/manga/compiled/safe_zones.yaml` lines 70/283/502/715) — first test of safe-zone bleed semantics outside iyashikei |
 
 **Per-genre work:**
 - Genre craft study (analog to `artifacts/research/manga_quality_bar/01_iyashikei_craft_study.md`): 1-2 days research per genre
@@ -148,9 +159,10 @@ Milestones are gated — each completes before the next starts. Compute on Pearl
 - V5.1 dispatch + operator review: ~10h Pearl Star compute + ~2h review each
 
 **Exit criteria:**
-- 4 new genre templates committed
+- 4 new genre templates committed (slice_of_life, workplace, romance, dark_fantasy)
 - 4 new pilot series ship V5.1 ep_001 (35 panels each) with operator §11 approval (≥31/35)
 - Cross-genre style consistency: each genre has distinct, identifiable aesthetic matching its declared `drawing_tradition_per_genre.yaml` entry
+- `dramatic_bleed_allowed` semantics validated on dark_fantasy pilot (panels with the flag set actually produce dramatic-bleed renders that V5.1 composites correctly)
 
 **Cost:** ~3-4 weeks total (parallel authoring; sequential Pearl Star dispatch)
 
@@ -178,14 +190,23 @@ Milestones are gated — each completes before the next starts. Compute on Pearl
 
 **Scope:** Per-locale style_state overrides for the top-5 locales (en-US, ja-JP, ko-KR, fr-FR, de-DE). E.g., ja-JP iyashikei may want stronger natural-light bias; fr-FR may want softer pastel palette.
 
+**Sequencing (v1.1 operator decision): ja-JP first.** Operator rationale: *"18 series already in the catalog with ja-JP declared. That's real inventory waiting. en-US is already proven (stillness series). ja-JP is the first genuine unknown — typography, panel reading direction conventions, aesthetic delta. Surface those risks on a small batch before scaling en-US further."*
+
 **Per-locale work:**
 - Locale style audit: ~2 days per locale (collaborate with a native-fluent reviewer if possible)
 - Authoring per-locale style_state override file
 - Smoke test: 1 panel × 1 series re-rendered with locale override → operator verdict
 
+**ja-JP locale-specific deliverables (added v1.1):**
+- Typography validation: ja-JP brand series use vertical CJK lettering per `agent/manga-lettering-v2-20260507` PR #945 — confirm V5.1 composites are still compatible with the lettering overlay step
+- Reading direction convention: ja-JP manga reads right-to-left; verify panel composition makes sense in that direction (not just left-to-right en-US flow)
+- Aesthetic delta scout: does ja-JP iyashikei want a different style_state from en-US iyashikei? Operator-or-fluent-reviewer call
+
+**Sequencing within Milestone F:** ja-JP → ko-KR → fr-FR → de-DE → re-validate en-US. Five locales × ~2-3 days each ≈ ~3 weeks total.
+
 **Cost:** ~3 weeks
 
-**Owner:** Pearl_Architect + operator + locale-fluent reviewers
+**Owner:** Pearl_Architect + operator + locale-fluent reviewers (ja-JP fluent reviewer needed first)
 
 ### Milestone G — Catalog scale-up (~800 high-confidence configs target)
 
@@ -207,9 +228,24 @@ Milestones are gated — each completes before the next starts. Compute on Pearl
 
 **Owner:** Pearl_PM coordinates; Pearl_Author drives content; Pearl_Star drives compute
 
-### Milestone H — Compute infrastructure scaling (out of plan scope; depends on Milestone G validation)
+### Milestone H — Compute infrastructure scaling
 
-**Scope:** When Milestone G validates the workflow, scale compute beyond single-GPU Pearl Star. Options: additional Pearl Star nodes, RunComfy hosted inference (commercial flag check required), local cluster build. Out of scope for THIS plan.
+**Scope (v1.1 amended):** Scope NOW in parallel with Milestone B; decide after Milestone D validates workflow economics.
+
+**Operator rationale (2026-05-22):** *"start scoping now, in parallel with B. You don't need decisions yet, but the 600-days-serial math in §3.2 means the compute constraint is already visible. Start the scoping conversation now so you're not blocked at Milestone G waiting for infrastructure that takes 3 months to procure. Scope it in parallel; decide after Milestone D validates the workflow economics."*
+
+**Scoping deliverable (target: end of Milestone B):** `docs/MANGA_V5_COMPUTE_SCALING_OPTIONS.md` covering:
+- Option 1: Additional Pearl Star nodes (more RTX 5070 Ti or 5090) — capex + procurement lead-time + power/network
+- Option 2: RunComfy hosted Qwen-Image inference — per-image cost + license/commercial flag verification (per CLAUDE.md banned-paid-API list, must confirm)
+- Option 3: Local 4-8 GPU cluster build — capex + ops overhead + Pearl Star colocation feasibility
+- Option 4: AWS/GCP on-demand Qwen-Image — burst capacity + cost ceiling + commercial license alignment
+- Option 5: Hybrid (Pearl Star + cloud burst for queue overflow)
+
+**Decision gate:** Compare options against Milestone D's actual measured throughput + ~ep cost / panel. Choose post-D when economics are known.
+
+**Cost (scoping only, in parallel with B):** ~1 week to write the options doc + price-discovery on each path. Does NOT block any other milestone.
+
+**Owner:** Pearl_PM scopes; operator decides post-D.
 
 ---
 
@@ -268,17 +304,62 @@ Total wallclock from today to first 40-series catalog ship: ~7-9 months at singl
 
 ---
 
-## 9. Decision points for operator
+## 9. Decision points for operator (RESOLVED in v1.1 — see §10)
 
-1. **Approve plan sequencing as written, or reorder?** Specifically: prioritize Milestone C (generator build) immediately after Milestone A, or push it to after Milestone B manual ep_002-010 dispatch?
-2. **Acceptance criteria for Milestone B** — same as ep_001 (≥31/35 shippable per episode) or different for downstream episodes?
-3. **Genre selection for Milestone D** — slice_of_life / workplace / supernatural_everyday / sports per catalog distribution, or different priority based on commercial intent?
-4. **Per-locale rollout order** — ja-JP first (18 series in catalog), or en-US first (Milestone A series's locale)?
-5. **Milestone H pre-planning** — start scoping compute infrastructure scaling NOW (in parallel with Milestone B), or defer until Milestone G validates the workflow?
+All 5 decision points resolved 2026-05-22. See §11 for full operator decisions + rationales. Original questions retained for context:
+
+1. **Approve plan sequencing as written, or reorder?** → C before B (resolved §10.1)
+2. **Acceptance criteria for Milestone B** — same as ep_001 or different? → Same per-episode + NEW cross-episode identity check (resolved §10.2)
+3. **Genre selection for Milestone D** — top-volume or stress-test-spec? → slice_of_life, workplace, romance, dark_fantasy (resolved §10.3)
+4. **Per-locale rollout order** — ja-JP first or en-US first? → ja-JP first (resolved §10.4)
+5. **Milestone H pre-planning** — scope NOW in parallel with B, or defer until G? → Scope NOW (resolved §10.5)
 
 ---
 
-## 10. Authority
+## 10. Operator decisions (2026-05-22, v1.1)
+
+Operator answered §9's 5 questions directly. Verbatim where load-bearing.
+
+### 10.1 Sequencing — C before B (CONFIRMED)
+
+> *"Build the generator immediately after Milestone A acceptance. Doing B manually first is 175 hours of authoring debt you'd have to pay anyway, and it teaches you nothing the generator wouldn't surface faster. The round-trip test (regenerate ep_001 from a beatsheet) gives you confidence before you run B at scale. Don't skip it."*
+
+**Effect:** §6 sequencing already had C before B. v1.1 amendment: B's prerequisite block (§Milestone B) now explicitly requires *both* A acceptance AND C round-trip validation. The 175h-manual path is rejected, not deferred.
+
+### 10.2 Milestone B acceptance — same per-episode + NEW cross-episode identity check
+
+> *"same as ep_001 (≥31/35 per episode), but add one cross-episode check. Within each episode the bar stays the same. Add: Mira face-distance cosine ≤0.55 on 95% of L2 panels across episodes, not just within. That's the thing ep_001 alone can't prove. If identity drifts between ep_003 and ep_007, you need to catch it before calling the series shippable."*
+
+**Effect:** Milestone B exit criteria updated. Cross-episode check uses `scripts/manga/character_individuation/qa_face_distance.py` (verified to exist) at cosine ≤ 0.55 on ≥95% of L2 panels **across all 10 episodes**. New ship-blocker.
+
+### 10.3 Milestone D genre selection — SWAP
+
+Original pick (v1.0): slice_of_life, workplace, supernatural_everyday, sports.
+v1.1 pick: **slice_of_life, workplace, romance, dark_fantasy**.
+
+> *"keep slice_of_life and workplace, swap the other two. slice_of_life (77 series) and workplace (41 series) are your two largest genre buckets — correct picks. supernatural_everyday and sports are small (33 and 18). Swap them for romance (8 series but high commercial value, tests relational composition) and dark_fantasy (10 series, tests the dramatic_bleed archetype you stubbed in §5.3). You want genres that stress-test different parts of the spec, not just volume."*
+
+**Effect:** Milestone D scope updated. `dramatic_bleed_allowed` flag confirmed at V4 spec §5.3:399, with 4 archetype-level enablings in `config/manga/compiled/safe_zones.yaml` (lines 70/283/502/715). dark_fantasy pilot validates this V4-stubbed semantics at first non-iyashikei dispatch. romance pilot validates 2-character relational composition that the V4 spec deferred (§15.B.1 "multi-char cliff").
+
+### 10.4 Locale rollout — ja-JP first
+
+> *"ja-JP first. 18 series already in the catalog with ja-JP declared. That's real inventory waiting. en-US is already proven (stillness series). ja-JP is the first genuine unknown — typography, panel reading direction conventions, aesthetic delta. Surface those risks on a small batch before scaling en-US further."*
+
+**Effect:** Milestone F sequencing pinned to ja-JP → ko-KR → fr-FR → de-DE → re-validate en-US. ja-JP gets explicit subbullets covering vertical CJK lettering (per PR #945), right-to-left reading direction, and aesthetic delta scouting. Recruitment of a ja-JP fluent reviewer is now a prerequisite.
+
+### 10.5 Milestone H — scope now in parallel with B
+
+> *"start scoping now, in parallel with B. You don't need decisions yet, but the 600-days-serial math in §3.2 means the compute constraint is already visible. Start the scoping conversation now so you're not blocked at Milestone G waiting for infrastructure that takes 3 months to procure. Scope it in parallel; decide after Milestone D validates the workflow economics."*
+
+**Effect:** Milestone H promoted from "out of scope" to "scoping deliverable due end of Milestone B." Pearl_PM writes `docs/MANGA_V5_COMPUTE_SCALING_OPTIONS.md` covering 5 options (additional Pearl Star nodes / RunComfy hosted / local cluster build / cloud burst / hybrid). Decision gate is post-D when measured throughput/cost economics inform the option ranking.
+
+### 10.6 Operator decision authority + audit trail
+
+All 5 decisions logged to `artifacts/coordination/operator_decisions_log.tsv` as OPD-135 through OPD-139. Per `docs/PEARL_OPERATOR_PROXY_SPEC.md`, these are "in-envelope" decisions (within V5.1 catalog scope already approved). Pearl_PM executes per these; no further operator gate until next milestone exit.
+
+---
+
+## 11. Authority
 
 This plan is reviewable / amendable by:
 - Operator (final approval per milestone gate)
