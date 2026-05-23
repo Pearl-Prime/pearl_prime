@@ -2877,6 +2877,16 @@ def compose_from_enriched_book(
     rid = (enriched.runtime_format or "").strip()
     format_cap = int(overrides[rid]) if rid in overrides else format_default
 
+    # OPD-135: 5-part exercise assembly (PR #1275) needs ≥2 EXERCISE slots per
+    # practice chapter to drive Part 4 (aha) and Part 5 (integration) coverage.
+    # Raise a per-chapter floor when (a) runtime is deep_book_6h, or (b) the
+    # holistic-v2 chapter architecture is active. Apply only to chapters whose
+    # contract already permits ≥1 exercise so we preserve the recognition /
+    # resolution chapters' zero-exercise intent.
+    _spine_ctx_cap = enriched.spine_context or {}
+    _arch_v = int(_spine_ctx_cap.get("chapter_architecture_version") or 1)
+    five_part_floor = 2 if (rid == "deep_book_6h" or _arch_v == 2) else 0
+
     from phoenix_v4.planning.chapter_planner import assign_chapter_purpose_contracts
 
     contracts = assign_chapter_purpose_contracts(
@@ -2903,7 +2913,13 @@ def compose_from_enriched_book(
     chapters_prose: list[str] = []
     for ch_idx, ch in enumerate(enriched.chapters):
         contract = contracts[ch_idx] if ch_idx < len(contracts) else contracts[-1]
-        max_allowed = min(int(contract.max_exercises), format_cap)
+        contract_cap = int(contract.max_exercises)
+        # OPD-135: lift the contract cap to `five_part_floor` for practice
+        # chapters under deep_book_6h / arch v2, but never below contract zero
+        # (recognition / resolution chapters stay exercise-free).
+        if five_part_floor and contract_cap >= 1:
+            contract_cap = max(contract_cap, five_part_floor)
+        max_allowed = min(contract_cap, format_cap)
 
         ex_seen = 0
         slots_out = []
