@@ -43,19 +43,28 @@ echo "════════════════════════�
 echo ""
 
 # 1. Check Pearl Star dispatch state
+# Use ps+grep with explicit grep -v of the search command itself to avoid
+# the well-known pgrep false-positive (the search command's argv contains
+# the search term, so pgrep -af matches itself). Also cross-check against
+# _run_summary.json existence — the dispatcher writes that file only on exit.
 echo "→ Step 1: Pearl Star dispatch state"
-DRIVER_STATUS=$(ssh -o ConnectTimeout=10 "$PS_HOST" "pgrep -af 'dispatch.py' | head -2" 2>&1)
-if echo "$DRIVER_STATUS" | grep -q 'dispatch.py'; then
-    echo "  ⚠  Dispatch driver STILL RUNNING:"
-    echo "$DRIVER_STATUS" | sed 's/^/    /'
-    REMOTE_DONE=$(ssh "$PS_HOST" "ls $PS_ROOT/composed/ 2>/dev/null | wc -l" 2>/dev/null)
+DRIVER_PIDS=$(ssh -o ConnectTimeout=10 "$PS_HOST" "ps -e -o pid,cmd | grep 'python3 .*dispatch.py' | grep -v grep | awk '{print \$1}'" 2>/dev/null)
+SUMMARY_EXISTS=$(ssh -o ConnectTimeout=10 "$PS_HOST" "test -f $PS_ROOT/_run_summary.json && echo yes || echo no" 2>/dev/null)
+REMOTE_DONE=$(ssh "$PS_HOST" "ls $PS_ROOT/composed/ 2>/dev/null | wc -l" 2>/dev/null)
+
+if [ -n "$DRIVER_PIDS" ] && [ "$SUMMARY_EXISTS" != "yes" ]; then
+    echo "  ⚠  Dispatch driver STILL RUNNING (PIDs: $(echo $DRIVER_PIDS | tr '\n' ' '))"
     echo "  ⚠  Composites on Pearl Star so far: ${REMOTE_DONE}/35"
     echo ""
     echo "  Dispatch not yet finished. Wait for completion or check progress with:"
     echo "    ssh $PS_HOST 'tail -10 ~/v51_dispatch/_run_log.txt'"
     exit 2
 fi
-echo "  ✓ dispatch driver no longer running on Pearl Star (run complete)"
+if [ "$SUMMARY_EXISTS" = "yes" ]; then
+    echo "  ✓ _run_summary.json present on Pearl Star (run complete)"
+else
+    echo "  ✓ dispatch driver no longer running on Pearl Star; ${REMOTE_DONE}/35 composites on disk"
+fi
 echo ""
 
 # 2. Rsync results from Pearl Star
