@@ -245,6 +245,18 @@ definitions:
             description: "prop_id (from this beat's prop_state) or character_id (from stage_characters)."
         description: "What's the focus of attention? Drives gaze_direction heuristic H2. Operator-authored per beat (B-cat)."
 
+      # ── Tension vector override (OPD-144) ───────────────────────────────
+
+      tension_override:
+        type: string
+        enum: [rising, steady, easing, reversing]
+        description: |
+          OPTIONAL operator override for relational_field.emotional_tension_vector.direction.
+          Default (per OPEN-3 / OPD-144): generator emits literal H3 numerical-delta semantic
+          (rising > 0, steady = 0, diminishing < 0 — mapped to enum). Operator sets this
+          field to override with narrative semantics (e.g. `steady` on a +0.1 dial bump
+          that's NOT meant as activation). Added in schema v1.0 per OPD-144 (2026-05-24).
+
       # ── Rhyme partner reference ─────────────────────────────────────────
 
       rhyme_partner_beat:
@@ -374,6 +386,10 @@ version_history:
       - "Single-character episodes (multi-character deferred to v1.1 per OPEN-7)"
       - "iyashikei genre archetypes (12 of 19 exercised by ep_001)"
       - "Single locale (en_US) — locale aesthetic deltas are style_state concern, not beatsheet concern (per OPEN-8)"
+    amendments:
+      - date: "2026-05-24"
+        author: "Pearl_Author per OPD-144"
+        change: "Added Beat.tension_override (optional, enum [rising|steady|easing|reversing]). Encodes operator-narrative override for emotional_tension_vector.direction per OPD-144 / OPEN-3. Schema version unchanged (additive, optional field; v1.0.0 ergonomic extension)."
 
 # ── Future extensions (NOT yet schema; documented for direction) ─────────────
 
