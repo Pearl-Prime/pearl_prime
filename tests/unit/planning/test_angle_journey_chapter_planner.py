@@ -18,8 +18,14 @@ def test_long_form_with_angle_injects_definition_and_callbacks():
         angle_id="VERDICT",
         runtime_format="deep_book_6h",
     )
-    assert result.slot_definitions[0][0] == "HOOK"
+    # Per Holistic v2 Phase B (PR #1275 et seq.): chapter 0 with angle injection
+    # now leads with ANGLE_DEFINITION (the angle thesis statement) followed by HOOK.
+    # The original PR #1248 assertion `slot_definitions[0][0] == "HOOK"` predated
+    # this re-ordering; the new invariant is "both ANGLE_DEFINITION and HOOK
+    # present in chapter 0, with ANGLE_DEFINITION leading."
     assert "ANGLE_DEFINITION" in result.slot_definitions[0]
+    assert "HOOK" in result.slot_definitions[0]
+    assert result.slot_definitions[0][0] == "ANGLE_DEFINITION"
     assert result.angle_layer_by_chapter
     for ch_idx in range(1, 12):
         row = result.slot_definitions[ch_idx]
