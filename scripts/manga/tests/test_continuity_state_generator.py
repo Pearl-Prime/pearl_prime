@@ -454,6 +454,331 @@ class TestEp001RoundTrip(unittest.TestCase):
 
 
 # ─────────────────────────────────────────────────────────────────────────────
+# OPD-147 / OPD-148 — multi-character extension + new archetype dispatch
+# ─────────────────────────────────────────────────────────────────────────────
+
+
+# Two-character beatsheet fixture used by the new tests below. Keeps Mira as
+# stage_characters[0] (protagonist contract); Dr. Morimoto is the secondary.
+MULTI_CHAR_BEATSHEET_BASE = dedent("""
+    schema_version: "1.0.0"
+    beatsheet_type: episode
+    series_id: stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying
+    episode_id: ep_002
+    stage_characters:
+      - mira_aoki
+      - dr_morimoto
+    defaults:
+      scene_id: office_meeting_room
+      temporal: morning
+      light_rig_id: K02_morning_window_neutral
+      prop_state:
+        laptop_meeting: open_between_them
+    beats:
+      - beat_id: b01
+        archetype: character_face_micro_tension
+        beat_type: micro
+        character:
+          mira_aoki:
+            on_frame: true
+            pose_id: face_close_seated_speaking
+            expression_dial: 0.6
+            emotional: anxious
+            gaze: at_named_character_dr_morimoto
+            hand_state: relaxed_open
+          dr_morimoto:
+            on_frame: false
+            role: implied_listener
+      - beat_id: b02
+        archetype: secondary_character_face_close
+        subject_actor: dr_morimoto
+        beat_type: micro
+        character:
+          mira_aoki:
+            on_frame: false
+            role: implied_listener
+          dr_morimoto:
+            on_frame: true
+            role: subject
+            pose_id: face_close_seated_calm
+            expression_dial: 0.2
+            emotional: calm
+            gaze: at_named_character_mira_aoki
+            hand_state: relaxed_open
+        shared_attention_anchor: dr_morimoto
+      - beat_id: b03
+        archetype: character_face_micro_tension
+        beat_type: micro
+        character:
+          mira_aoki:
+            on_frame: true
+            pose_id: face_close_seated_speaking
+            expression_dial: 0.5
+            emotional: anxious_diminishing
+            gaze: at_named_character_dr_morimoto
+            hand_state: relaxed_open
+          dr_morimoto:
+            on_frame: false
+            role: implied_listener
+        tension_override: easing
+      - beat_id: b04
+        archetype: typographic_caption_card
+        caption_style: mid_episode_strip
+        caption_text: "It's not danger. It's just steam."
+        beat_type: micro
+        character:
+          mira_aoki: null
+          dr_morimoto: null
+""").strip()
+
+
+class TestSecondaryCharacterFaceCloseDispatch(unittest.TestCase):
+    """OPD-147: secondary_character_face_close DEFINE.
+
+    Verifies the new archetype dispatches correctly under the multi-character
+    extension: subject_actor binds the on-frame character, the protagonist is
+    off-frame, character_state contains only the subject_actor, v41 boilerplate
+    fires.
+    """
+
+    def setUp(self):
+        path = _write_temp_yaml(MULTI_CHAR_BEATSHEET_BASE)
+        self.beatsheet = gen.load_beatsheet(path)
+        self.panels = gen.generate_continuity_state(self.beatsheet, {})
+
+    def test_secondary_character_face_close_dispatch_dr_morimoto(self):
+        """b02: beat with archetype=secondary_character_face_close +
+        subject_actor=dr_morimoto produces correct on-frame state for
+        Dr. Morimoto and off-frame state for Mira."""
+        b02_panel = self.panels[1]
+        self.assertEqual(b02_panel["archetype"], "secondary_character_face_close")
+        self.assertEqual(b02_panel["subject_actor"], "dr_morimoto")
+
+        # Dr. Morimoto: on-frame subject; character_state present
+        cs_morimoto = b02_panel["character_state"].get("dr_morimoto")
+        self.assertIsNotNone(cs_morimoto,
+                             "dr_morimoto must have character_state when he's the subject_actor")
+        self.assertEqual(cs_morimoto["pose_id"], "face_close_seated_calm")
+        self.assertEqual(cs_morimoto["expression_dial"], 0.2)
+        self.assertEqual(cs_morimoto["emotional"], "calm")
+
+        # Mira: off-frame; no character_state entry (suppressed via POV)
+        self.assertNotIn("mira_aoki", b02_panel["character_state"],
+                         "Mira's character_state must be suppressed under "
+                         "secondary_character_face_close POV")
+
+        # Active entities: Dr. Morimoto on_frame=true, Mira on_frame=false
+        active = {e["id"]: e for e in b02_panel["relational_field"]["active_entities"]}
+        self.assertTrue(active["dr_morimoto"]["on_frame"])
+        self.assertEqual(active["dr_morimoto"]["role"], "subject")
+        self.assertFalse(active["mira_aoki"]["on_frame"])
+        self.assertEqual(active["mira_aoki"]["role"], "implied_listener")
+
+        # H8: v41_per_axis_edge_resolved fires (face-only archetype past activation onset)
+        # Note: beat_index 1 (b02) is < 5, so v41 doesn't fire here. Verify the
+        # archetype IS in V41_FACE_ARCHETYPES even though this specific beat
+        # doesn't emit (matches V1 ep001_003 behavior).
+        self.assertIn("secondary_character_face_close", gen.V41_FACE_ARCHETYPES)
+
+    def test_secondary_character_face_close_missing_subject_actor_raises(self):
+        """Without subject_actor, schema validation raises."""
+        # Build via dict mutation to avoid indentation-fragile string replace.
+        bs = yaml.safe_load(MULTI_CHAR_BEATSHEET_BASE)
+        del bs["beats"][1]["subject_actor"]
+        path = _write_temp_yaml(yaml.safe_dump(bs))
+        with self.assertRaises(gen.BeatsheetValidationError) as cm:
+            gen.load_beatsheet(path)
+        self.assertIn("subject_actor", str(cm.exception).lower())
+
+    def test_secondary_character_face_close_invalid_subject_actor_raises(self):
+        """subject_actor not in stage_characters raises."""
+        bs = yaml.safe_load(MULTI_CHAR_BEATSHEET_BASE)
+        bs["beats"][1]["subject_actor"] = "ghost_character"
+        path = _write_temp_yaml(yaml.safe_dump(bs))
+        with self.assertRaises(gen.BeatsheetValidationError):
+            gen.load_beatsheet(path)
+
+
+class TestTypographicCaptionCardDispatch(unittest.TestCase):
+    """OPD-148: typographic_caption_card DEFINE (META cluster).
+
+    Verifies the new META archetype: empty character_state for ALL stage
+    characters, caption_text + caption_style preserved, render_directive
+    emitted, scene_state.light_rig_id suppressed, both characters off_frame.
+    """
+
+    def setUp(self):
+        path = _write_temp_yaml(MULTI_CHAR_BEATSHEET_BASE)
+        self.beatsheet = gen.load_beatsheet(path)
+        self.panels = gen.generate_continuity_state(self.beatsheet, {})
+
+    def test_typographic_caption_card_dispatch(self):
+        """b04: typographic_caption_card emits caption_text + caption_style +
+        render_directive; character_state is empty for all stage characters;
+        active_entities show on_frame=false for both."""
+        b04_panel = self.panels[3]
+        self.assertEqual(b04_panel["archetype"], "typographic_caption_card")
+
+        # META fields preserved
+        self.assertEqual(b04_panel["caption_style"], "mid_episode_strip")
+        self.assertEqual(b04_panel["caption_text"], "It's not danger. It's just steam.")
+        self.assertEqual(b04_panel["render_directive"], "typographic_only")
+
+        # character_state: all stage_characters suppressed
+        self.assertEqual(b04_panel["character_state"], {},
+                         "typographic_caption_card must suppress all character_state")
+
+        # active_entities: every entity off_frame
+        for entity in b04_panel["relational_field"]["active_entities"]:
+            self.assertFalse(entity["on_frame"],
+                             f"{entity['id']} must be on_frame=false for "
+                             f"typographic_caption_card META archetype")
+            self.assertEqual(entity["role"], "implied_listener")
+
+        # scene_state.light_rig_id dropped (no L0 lighting under META)
+        self.assertNotIn("light_rig_id", b04_panel["scene_state"],
+                         "typographic_caption_card must drop light_rig_id "
+                         "(rendered via lettering pipeline, not L0/L1/L2/L3)")
+
+    def test_typographic_caption_card_missing_caption_style_raises(self):
+        bs = yaml.safe_load(MULTI_CHAR_BEATSHEET_BASE)
+        del bs["beats"][3]["caption_style"]
+        path = _write_temp_yaml(yaml.safe_dump(bs))
+        with self.assertRaises(gen.BeatsheetValidationError):
+            gen.load_beatsheet(path)
+
+    def test_typographic_caption_card_invalid_caption_style_raises(self):
+        bs = yaml.safe_load(MULTI_CHAR_BEATSHEET_BASE)
+        bs["beats"][3]["caption_style"] = "bogus_style"
+        path = _write_temp_yaml(yaml.safe_dump(bs))
+        with self.assertRaises(gen.BeatsheetValidationError):
+            gen.load_beatsheet(path)
+
+
+class TestMultiCharacterInheritance(unittest.TestCase):
+    """OPD-147 multi-character generator extension.
+
+    Verifies per-character inheritance: when beat N is Dr. Morimoto-focused,
+    Mira's state (and dial cache) inherits from beat N-1 so that beat N+1
+    (back to Mira) reads the correct prev_dial. Mira's pose at beat N-1 must
+    not get clobbered by archetype-default re-application when the protagonist
+    is implicitly off-stage.
+    """
+
+    def setUp(self):
+        path = _write_temp_yaml(MULTI_CHAR_BEATSHEET_BASE)
+        self.beatsheet = gen.load_beatsheet(path)
+        self.panels = gen.generate_continuity_state(self.beatsheet, {})
+
+    def test_multi_character_inheritance(self):
+        """Mira's dial chain inherits across the Dr. Morimoto-focused b02:
+        b01 sets Mira dial=0.6; b02 has Mira implied off-frame (no character
+        state); b03 sets Mira dial=0.5 — generator must compute
+        magnitude_delta = 0.5 - 0.6 = -0.1, NOT 0.0 (which would mean Mira's
+        cache was reset to None on b02)."""
+        b03_panel = self.panels[2]
+        tension = b03_panel["relational_field"]["emotional_tension_vector"]
+        # The protagonist's dial inheritance chain continues across b02
+        # (where Mira is implied off-frame for the secondary character CU).
+        self.assertAlmostEqual(
+            tension["magnitude_delta_from_prev"], -0.1, places=3,
+            msg="Multi-character inheritance: Mira's dial cache must "
+                "persist across b02 (subject_actor=dr_morimoto POV)"
+        )
+        # direction: operator override "easing"
+        self.assertEqual(tension["direction"], "easing")
+
+    def test_secondary_subject_actor_does_not_force_protagonist_character_state(self):
+        """When subject_actor is set, the protagonist character_state is
+        SUPPRESSED (not just on_frame=false). Verifies b02's character_state
+        contains only dr_morimoto, not mira_aoki even with stale inheritance."""
+        b02_panel = self.panels[1]
+        self.assertNotIn("mira_aoki", b02_panel["character_state"])
+        self.assertIn("dr_morimoto", b02_panel["character_state"])
+
+    def test_protagonist_remains_stage_characters_index_0(self):
+        """The multi-character extension preserves stage_characters[0] as the
+        protagonist (tension vector source). Verify order is stable in
+        active_entities across all beats."""
+        for panel in self.panels:
+            entities = panel["relational_field"]["active_entities"]
+            self.assertEqual(entities[0]["id"], "mira_aoki",
+                             f"protagonist must remain stage_characters[0] "
+                             f"on panel {panel['panel_id']}")
+
+
+class TestEp001RoundTripStillPassesAfterMultiCharExtension(unittest.TestCase):
+    """The regression gate. ep_001 is the V1 single-character episode whose
+    35 ground-truth YAMLs must still round-trip byte-clean (zero strict
+    EXACT/ENUM/NUMERIC/STRUCTURAL divergences) after the multi-character
+    extension lands. Without this test, multi-character refactors could
+    silently regress single-char inheritance.
+
+    This test is a deliberate duplicate of TestEp001RoundTrip.test_round_trip_passes_strict_diff
+    but lives in this class so the regression gate is unambiguously named in
+    the new-archetype + multi-char workstream.
+
+    Per docs/PEARL_ARCHITECT_BRIEF_EP002_CANDIDATE_ARCHETYPES.md acceptance
+    criterion #2 (this PR's regression gate).
+    """
+
+    def test_ep_001_round_trip_still_passes_after_multi_char_extension(self):
+        sys.path.insert(0, str(REPO / "scripts" / "manga"))
+        import diff_continuity_state as diff
+
+        beatsheet_path = (
+            REPO / "artifacts" / "manga"
+            / "stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying"
+            / "continuity_state" / "ep_001"
+            / "_extracted_beatsheet.yaml"
+        )
+        if not beatsheet_path.exists():
+            self.skipTest("ep_001 beatsheet not present in this checkout")
+
+        out_dir = Path(tempfile.mkdtemp(prefix="v51_step2_ep_001_regression_"))
+        beatsheet = gen.load_beatsheet(beatsheet_path)
+        configs = gen.load_config_inputs(beatsheet, REPO)
+        panels = gen.generate_continuity_state(beatsheet, configs)
+        for panel in panels:
+            gen.emit_panel_yaml(panel, out_dir / f"{panel['panel_id']}.yaml")
+
+        gt_dir = (
+            REPO / "artifacts" / "manga"
+            / "stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying"
+            / "continuity_state" / "ep_001"
+        )
+        gen_files = sorted(p for p in out_dir.glob("*.yaml"))
+        gt_files = sorted(p for p in gt_dir.glob("ep001_*.yaml"))
+        gen_by_stem = {p.stem: p for p in gen_files}
+        gt_by_stem = {p.stem: p for p in gt_files}
+
+        all_divergences = []
+        for stem in sorted(set(gen_by_stem) & set(gt_by_stem)):
+            all_divergences.extend(
+                diff.diff_continuity_state(gen_by_stem[stem], gt_by_stem[stem])
+            )
+
+        strict_classes = {"EXACT", "ENUM", "NUMERIC", "STRUCTURAL"}
+        strict = [
+            d for d in all_divergences
+            if d.class_ in strict_classes and not d.acceptable
+        ]
+        self.assertEqual(strict, [],
+                         "MULTI-CHARACTER REGRESSION: ep_001 single-char "
+                         "round-trip must remain byte-clean after extension. "
+                         "Got {} strict divergences:\n{}".format(
+                             len(strict),
+                             "\n".join(
+                                 "  [{}] {}.{}: gen={!r} gt={!r}".format(
+                                     d.class_, d.panel_id, d.field_path,
+                                     d.generated_value, d.ground_truth_value,
+                                 )
+                                 for d in strict[:10]
+                             ),
+                         ))
+
+
+# ─────────────────────────────────────────────────────────────────────────────
 # Main
 # ─────────────────────────────────────────────────────────────────────────────
 

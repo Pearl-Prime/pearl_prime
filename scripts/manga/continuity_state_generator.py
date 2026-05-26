@@ -102,10 +102,20 @@ V41_FACE_BOILERPLATE = (
     "failure; resolved by render-time prompt refinement on a per-panel basis."
 )
 
-# Archetypes that emit the v41_per_axis_edge_resolved + boilerplate (H8)
-V41_FACE_ARCHETYPES = {"character_quiet_face", "character_face_micro_tension"}
+# Archetypes that emit the v41_per_axis_edge_resolved + boilerplate (H8).
+# secondary_character_face_close joins per OPD-147 — same CU face framing as
+# character_quiet_face, identical per-axis subject_must_not_touch_edge contract.
+V41_FACE_ARCHETYPES = {
+    "character_quiet_face",
+    "character_face_micro_tension",
+    "secondary_character_face_close",
+}
 
-# Per design notes §3 — the 12 archetypes exercised by ep_001.
+# Per design notes §3 — the 14 archetypes supported in V1 + extension:
+#   - 12 from ep_001 (Milestone C Step 1)
+#   - +2 from ep_002 (OPD-147 secondary_character_face_close,
+#     OPD-148 typographic_caption_card, this PR — joint with multi-character
+#     generator extension).
 SUPPORTED_ARCHETYPES = {
     "sparse_establishing_wide",
     "tea_beat_close_up",
@@ -119,18 +129,60 @@ SUPPORTED_ARCHETYPES = {
     "kettle_steam_macro",
     "long_drop_decompression",
     "pendulation_pair_visual_rhyme",
+    # OPD-147 + OPD-148 (2026-05-26) — joint with multi-character extension:
+    "secondary_character_face_close",
+    "typographic_caption_card",
 }
 
+# Archetypes that REQUIRE the beat to declare `subject_actor: <character_id>`
+# binding the on-frame character to a specific entry in stage_characters.
+# Per OPD-147: secondary_character_face_close is the first parametrized
+# archetype; future multi-character archetypes (e.g. shared_meal_table_medium
+# when promoted from declared-but-unimplemented) will join this set.
+ARCHETYPES_REQUIRING_SUBJECT_ACTOR = {
+    "secondary_character_face_close",
+}
+
+# Archetypes that suppress ALL stage_characters (META cluster: typographic
+# caption cards, future title cards, etc.). For these, the generator emits
+# empty character_state for every stage_character and on_frame=false for every
+# active_entity. Per OPD-148.
+META_ARCHETYPES_SUPPRESSING_ALL_CHARACTERS = {
+    "typographic_caption_card",
+}
+
+# typographic_caption_card requires `caption_style` parametrized field.
+# Validated at load_beatsheet time.
+_LEGAL_CAPTION_STYLES = {"mid_episode_strip", "end_episode_card"}
+
 # Per design notes §3 — declared but explicitly out of scope for V1.
+# ep_002 surfaces three of these (walking_in_thought_medium, miyazaki_ma_pause,
+# window_light_threshold); per design notes §3 "Don't pre-build dispatch for
+# them; let the next episodes' beatsheets reveal what they need" — ep_002
+# has now done so, so they're promoted to SUPPORTED_ARCHETYPES (with minimal
+# dispatch using iyashikei.yaml's existing archetype rows + subject_type from
+# scene_context.yaml). The remaining four stay declared-but-unimplemented
+# until ep_003+ beatsheets surface their need.
 DECLARED_BUT_UNIMPLEMENTED_ARCHETYPES = {
     "morning_routine_sequence",
-    "window_light_threshold",
     "food_preparation_overhead",
     "shared_meal_table_medium",
-    "walking_in_thought_medium",
     "phone_notification_macro",
-    "miyazaki_ma_pause",
 }
+
+# ep_002-surfaced archetypes (Milestone B Step 2 minimal dispatch). These
+# are NOT part of OPD-147/OPD-148 (those are the two new candidates); they
+# were already declared in iyashikei.yaml but not dispatched. ep_002's
+# beatsheet references them, so we add minimal dispatch here so the
+# generator's dry-run flows through. The dispatch is "plain" — no special
+# parametrized fields, just standard pose_id + hand_state defaults from
+# the existing iyashikei.yaml composition_tokens.
+_EP_002_DECLARED_ARCHETYPES_PROMOTED = {
+    "walking_in_thought_medium",
+    "miyazaki_ma_pause",
+    "window_light_threshold",
+}
+SUPPORTED_ARCHETYPES |= _EP_002_DECLARED_ARCHETYPES_PROMOTED
 
 # Per-archetype default pose_id (from design notes §3 table). When the
 # operator doesn't author a pose_id, fall back to this. Where the archetype
@@ -146,8 +198,19 @@ ARCHETYPE_DEFAULT_POSE_ID = {
     "seasonal_anchor_object": "front_portrait_seated_calm",  # off-frame
     "kettle_steam_macro": "front_portrait_seated_calm",  # off-frame
     "long_drop_decompression": "full_figure_standing_at_window",
+    # OPD-147: default pose for the on-frame subject_actor of
+    # secondary_character_face_close. Applies to the subject_actor character
+    # ONLY (not to the protagonist, who is off-frame for this archetype).
+    "secondary_character_face_close": "face_close_seated_calm",
+    # ep_002-surfaced — minimal defaults; ep_002 beatsheet authors specific
+    # pose_ids per beat (full_figure_walking_*, full_figure_climbing_stairs,
+    # etc.). These defaults are fallback only.
+    "walking_in_thought_medium": "full_figure_walking_three_quarter",
+    "miyazaki_ma_pause": "full_figure_seated_tiny",  # the rare visible-but-small case
+    "window_light_threshold": "full_figure_threshold_door",
     # sparse_establishing_wide: no single default; operator picks
     # pendulation_pair_visual_rhyme: inherits from partner
+    # typographic_caption_card: META — no character_state, no pose_id
 }
 
 # Per-archetype default hand_state (when operator hasn't overridden).
@@ -162,6 +225,14 @@ ARCHETYPE_DEFAULT_HAND_STATE = {
     "pet_companion_micro": "relaxed_open",
     "long_drop_decompression": "relaxed_open",
     "sparse_establishing_wide": "relaxed_open",
+    # OPD-147: applies to subject_actor — secondary character is calm-
+    # professional baseline; hands relaxed in lap or on table.
+    "secondary_character_face_close": "relaxed_open",
+    # ep_002-surfaced: walking + threshold archetypes default to relaxed-open
+    # hands; the body is doing the work, not the hands.
+    "walking_in_thought_medium": "relaxed_open",
+    "miyazaki_ma_pause": "relaxed_open",
+    "window_light_threshold": "relaxed_open",
 }
 
 # Archetypes where hand_state is PRESCRIPTIVE: the archetype semantically
@@ -202,6 +273,19 @@ ARCHETYPE_SUBJECT_TYPE = {
     "kettle_steam_macro": None,
     "long_drop_decompression": None,
     "pendulation_pair_visual_rhyme": None,
+    # OPD-147: subject is the (parametrized) subject_actor — the protagonist
+    # is off-frame by default. Per-character on_frame derivation lives in
+    # derive_on_frame_for_character() (multi-character extension).
+    "secondary_character_face_close": "character_face_only",
+    # OPD-148: META — no character on-frame, no L2 cutout, no rendering
+    # via the L0/L1/L2/L3 stack.
+    "typographic_caption_card": None,
+    # ep_002-surfaced — minimal dispatch (subject_type values match
+    # iyashikei.scene_context.yaml entries). Per design notes §3 promote-
+    # when-surfaced policy.
+    "walking_in_thought_medium": "character_full_figure_walking",
+    "miyazaki_ma_pause": None,  # character_ELS_in_L0 — figure baked into L0, no separate on-frame L2 subject
+    "window_light_threshold": "character_silhouette_back",
 }
 
 # Archetypes where the human character is implied off-frame BY DEFAULT
@@ -315,6 +399,39 @@ def load_beatsheet(path: Path) -> dict:
             # error later at dispatch); useful for new genre rollouts where the
             # validator should not block authoring before dispatch lands.
             pass
+
+        # OPD-147: archetypes requiring subject_actor MUST declare it, and
+        # the value MUST be a character_id present in stage_characters.
+        if arch in ARCHETYPES_REQUIRING_SUBJECT_ACTOR:
+            sa = beat.get("subject_actor")
+            if sa is None:
+                raise BeatsheetValidationError(
+                    f"{path_str}: archetype {arch!r} requires beat.subject_actor "
+                    f"(character_id of the on-frame focal character)"
+                )
+            if sa not in stage:
+                raise BeatsheetValidationError(
+                    f"{path_str}.subject_actor: {sa!r} not in stage_characters {stage}"
+                )
+
+        # OPD-148: typographic_caption_card requires caption_style + caption_text.
+        if arch == "typographic_caption_card":
+            cs = beat.get("caption_style")
+            if cs is None:
+                raise BeatsheetValidationError(
+                    f"{path_str}: archetype typographic_caption_card requires "
+                    f"beat.caption_style (one of {sorted(_LEGAL_CAPTION_STYLES)})"
+                )
+            if cs not in _LEGAL_CAPTION_STYLES:
+                raise BeatsheetValidationError(
+                    f"{path_str}.caption_style: {cs!r} not in {sorted(_LEGAL_CAPTION_STYLES)}"
+                )
+            ct = beat.get("caption_text")
+            if ct is None or not isinstance(ct, str) or not ct.strip():
+                raise BeatsheetValidationError(
+                    f"{path_str}: archetype typographic_caption_card requires "
+                    f"beat.caption_text (non-empty string)"
+                )
 
         # per-character validation
         char_block = beat.get("character") or {}
@@ -548,6 +665,69 @@ def should_emit_v41_boilerplate(
     return False
 
 
+def resolve_active_character(
+    beat: dict,
+    stage_characters: list,
+) -> str:
+    """Determine which character_id is the FOCAL on-frame subject for this beat.
+
+    Multi-character extension (OPD-147, this PR). Order of precedence:
+        1. If beat declares `subject_actor: <character_id>`, use it (validated
+           at load_beatsheet time to be present in stage_characters).
+        2. Else fall back to `stage_characters[0]` (the protagonist).
+
+    Pure-Python helper, no side effects. Single-character path (ep_001) always
+    resolves to stage_characters[0] because no beat has subject_actor, so the
+    behavior is identical to V1.
+
+    Per docs/PEARL_ARCHITECT_BRIEF_EP002_CANDIDATE_ARCHETYPES.md §4.1.
+    """
+    subject_actor = beat.get("subject_actor")
+    if subject_actor is not None and subject_actor in stage_characters:
+        return subject_actor
+    return stage_characters[0]
+
+
+def derive_on_frame_for_character(
+    cid: str,
+    beat: dict,
+    beat_character_block: dict | None,
+    archetype: str,
+    stage_characters: list,
+    op_has_state: bool = False,
+) -> bool:
+    """Multi-character on_frame derivation (OPD-147 extension of H5).
+
+    Augments derive_on_frame() with multi-character semantics:
+        - For META_ARCHETYPES_SUPPRESSING_ALL_CHARACTERS (typographic_caption_card):
+          every character is off_frame regardless of subject_type or operator.
+        - For ARCHETYPES_REQUIRING_SUBJECT_ACTOR (secondary_character_face_close):
+          the subject_actor is on_frame, every OTHER character is off_frame
+          (POV-from-protagonist composition).
+        - For all other archetypes, falls back to the V1 single-char derive_on_frame
+          rule, which treats every stage_character as the focal subject. This
+          matches ep_001's behavior exactly (one stage_character, applies the
+          archetype's subject_type).
+
+    Explicit operator override (beat_character_block['on_frame']) always wins.
+    """
+    # 1. Explicit operator override (highest priority).
+    if beat_character_block and "on_frame" in beat_character_block:
+        return bool(beat_character_block["on_frame"])
+
+    # 2. META archetypes (OPD-148): no character on-frame ever.
+    if archetype in META_ARCHETYPES_SUPPRESSING_ALL_CHARACTERS:
+        return False
+
+    # 3. subject_actor archetypes (OPD-147): only the named actor is on-frame.
+    if archetype in ARCHETYPES_REQUIRING_SUBJECT_ACTOR:
+        subject_actor = beat.get("subject_actor")
+        return cid == subject_actor
+
+    # 4. Default V1 single-char path — preserved verbatim for backwards compat.
+    return derive_on_frame(beat_character_block, archetype, op_has_state=op_has_state)
+
+
 def compute_panel_id(episode_id: str, beat_index: int) -> str:
     """H10 helper: panel_id from episode_id + 1-based zero-padded index."""
     # ep_001 → ep001_NNN
@@ -725,141 +905,168 @@ def build_panel(
     _STATE_FIELDS = {"pose_id", "expression_dial", "emotional", "gaze",
                      "gaze_direction", "hand_state", "breath_phase"}
 
-    for cid in stage_characters:
-        prev_cs = state.character_state.get(cid)
-        beat_cs = char_block_per_beat.get(cid, ...)  # sentinel: missing
+    # OPD-148 META suppression: typographic_caption_card and similar
+    # META cluster archetypes suppress all stage_characters globally —
+    # the panel is purely typographic, no L2 cutout, no character_state.
+    # This is checked BEFORE the per-character loop so it cleanly applies
+    # even when operator authored explicit null for each character (e.g.
+    # ep_002 b24).
+    if archetype in META_ARCHETYPES_SUPPRESSING_ALL_CHARACTERS:
+        suppressed_char_ids.update(stage_characters)
+        # Skip the per-character state loop entirely; new_character_state
+        # stays empty.
+        state.character_state = new_character_state
+    else:
+        for cid in stage_characters:
+            prev_cs = state.character_state.get(cid)
+            beat_cs = char_block_per_beat.get(cid, ...)  # sentinel: missing
 
-        if beat_cs is None:
-            # Explicit null suppression
-            suppressed_char_ids.add(cid)
-            continue
-
-        # Determine whether operator authored any state-fields for this cid
-        op_has_state = (
-            isinstance(beat_cs, dict)
-            and any(k in beat_cs for k in _STATE_FIELDS)
-        )
-        op_authored_anything = isinstance(beat_cs, dict) and len(beat_cs) > 0
-
-        # Per OPD-142 / OPEN-1: ep001_016 has character_state={} despite the
-        # operator setting on_frame=true (contradiction). The canonical
-        # reading is "scene changed to flashback, character not in continuity
-        # for new scene." Encode as: when SCENE CHANGED on this beat AND
-        # archetype has null subject_type AND no state fields authored, suppress.
-        archetype_has_no_subject = ARCHETYPE_SUBJECT_TYPE.get(archetype) is None
-        scene_changed = (
-            prev_scene_id is not None and state.scene_id != prev_scene_id
-        )
-        # Also suppress on episode-card archetype with props_clear: complete reset.
-        is_episode_card = beat.get("props_clear", False) and archetype_has_no_subject
-        if (
-            (scene_changed and archetype_has_no_subject and not op_has_state)
-            or is_episode_card
-        ):
-            suppressed_char_ids.add(cid)
-            continue
-
-        # Case 3 + 4: no state fields authored → strict inheritance
-        if not op_has_state:
-            if prev_cs is None or _is_empty_cs(prev_cs):
-                # No prev real state + no current state → no character_state entry
-                # (e.g. ep001_001 beat 1 with sparse_establishing_wide and
-                # operator authored only on_frame=false)
+            if beat_cs is None:
+                # Explicit null suppression
+                suppressed_char_ids.add(cid)
                 continue
-            # Inherit prev_cs verbatim; apply pose_id archetype default if
-            # archetype changed (per ep001_009 evidence). hand_state changes
-            # only on transitions to hand-prescriptive archetypes.
-            cs = copy.deepcopy(prev_cs)
-            if archetype != "chest_breath_micro":
-                cs.pop("breath_phase", None)
+
+            # Determine whether operator authored any state-fields for this cid
+            op_has_state = (
+                isinstance(beat_cs, dict)
+                and any(k in beat_cs for k in _STATE_FIELDS)
+            )
+            op_authored_anything = isinstance(beat_cs, dict) and len(beat_cs) > 0
+
+            # OPD-147 multi-character: for ARCHETYPES_REQUIRING_SUBJECT_ACTOR,
+            # the protagonist is off-frame (POV-from-protagonist). If the
+            # operator didn't author state for the protagonist, suppress them
+            # (no character_state entry emitted) — matches ep_002 b17 / b22
+            # where Mira is implied off-frame and only Dr. Morimoto carries
+            # real state. The subject_actor character flows through the
+            # normal path (cases below).
             if (
+                archetype in ARCHETYPES_REQUIRING_SUBJECT_ACTOR
+                and cid != beat.get("subject_actor")
+                and not op_has_state
+            ):
+                suppressed_char_ids.add(cid)
+                continue
+
+            # Per OPD-142 / OPEN-1: ep001_016 has character_state={} despite the
+            # operator setting on_frame=true (contradiction). The canonical
+            # reading is "scene changed to flashback, character not in continuity
+            # for new scene." Encode as: when SCENE CHANGED on this beat AND
+            # archetype has null subject_type AND no state fields authored, suppress.
+            archetype_has_no_subject = ARCHETYPE_SUBJECT_TYPE.get(archetype) is None
+            scene_changed = (
+                prev_scene_id is not None and state.scene_id != prev_scene_id
+            )
+            # Also suppress on episode-card archetype with props_clear: complete reset.
+            is_episode_card = beat.get("props_clear", False) and archetype_has_no_subject
+            if (
+                (scene_changed and archetype_has_no_subject and not op_has_state)
+                or is_episode_card
+            ):
+                suppressed_char_ids.add(cid)
+                continue
+
+            # Case 3 + 4: no state fields authored → strict inheritance
+            if not op_has_state:
+                if prev_cs is None or _is_empty_cs(prev_cs):
+                    # No prev real state + no current state → no character_state entry
+                    # (e.g. ep001_001 beat 1 with sparse_establishing_wide and
+                    # operator authored only on_frame=false)
+                    continue
+                # Inherit prev_cs verbatim; apply pose_id archetype default if
+                # archetype changed (per ep001_009 evidence). hand_state changes
+                # only on transitions to hand-prescriptive archetypes.
+                cs = copy.deepcopy(prev_cs)
+                if archetype != "chest_breath_micro":
+                    cs.pop("breath_phase", None)
+                if (
+                    state.prev_archetype is not None
+                    and state.prev_archetype != archetype
+                ):
+                    default_pose = ARCHETYPE_DEFAULT_POSE_ID.get(archetype)
+                    if default_pose:
+                        cs["pose_id"] = default_pose
+                    if archetype in HAND_PRESCRIPTIVE_ARCHETYPES:
+                        default_hand = ARCHETYPE_DEFAULT_HAND_STATE.get(archetype)
+                        if default_hand:
+                            cs["hand_state"] = default_hand
+                new_character_state[cid] = cs
+                continue
+
+            # Case 2: operator authored real state fields
+            # Start from inherited cs (or empty if none)
+            cs = copy.deepcopy(prev_cs) if (prev_cs and not _is_empty_cs(prev_cs)) else {}
+            is_fresh_appearance = not cs  # no prev → archetype defaults will apply
+            archetype_changed = (
                 state.prev_archetype is not None
                 and state.prev_archetype != archetype
-            ):
+            )
+
+            # Apply operator deltas (excluding relational fields)
+            for k, v in beat_cs.items():
+                if k in ("on_frame", "role"):
+                    continue  # propagate to relational_field instead
+                if k == "gaze":
+                    cs["gaze_direction"] = v
+                else:
+                    cs[k] = v
+
+            # Always inject the design hash (A-cat, constant for V4 launch)
+            cs["character_design_hash"] = CHARACTER_DESIGN_HASH_PENDING
+
+            # Archetype defaults — semantics per ground-truth evidence:
+            #   pose_id: applies on (a) fresh appearance, OR (b) archetype changed.
+            #     Rationale: pose_id is the visual framing — when archetype
+            #     changes, the framing changes too. Ground truth ep001_009 shows
+            #     pose_id reverts to tea_beat default even though prev was
+            #     dappled_light_hand with hand_only_table.
+            #   hand_state: applies on (a) fresh appearance, OR (b) archetype
+            #     changed AND the new archetype is hand-prescriptive
+            #     (tea_beat_close_up, chest_breath_micro, dappled_light_hand —
+            #     these have a semantically required hand pose). For other
+            #     archetypes, hand_state inherits. Ground truth ep001_003
+            #     inherits wrapping_cup from b02 even though character_quiet_face
+            #     archetype's default would be relaxed_open.
+            if is_fresh_appearance or archetype_changed:
                 default_pose = ARCHETYPE_DEFAULT_POSE_ID.get(archetype)
-                if default_pose:
+                if default_pose and "pose_id" not in beat_cs:
                     cs["pose_id"] = default_pose
-                if archetype in HAND_PRESCRIPTIVE_ARCHETYPES:
-                    default_hand = ARCHETYPE_DEFAULT_HAND_STATE.get(archetype)
-                    if default_hand:
-                        cs["hand_state"] = default_hand
-            new_character_state[cid] = cs
-            continue
+            if is_fresh_appearance or (
+                archetype_changed and archetype in HAND_PRESCRIPTIVE_ARCHETYPES
+            ):
+                default_hand = ARCHETYPE_DEFAULT_HAND_STATE.get(archetype)
+                if default_hand and "hand_state" not in beat_cs:
+                    cs["hand_state"] = default_hand
 
-        # Case 2: operator authored real state fields
-        # Start from inherited cs (or empty if none)
-        cs = copy.deepcopy(prev_cs) if (prev_cs and not _is_empty_cs(prev_cs)) else {}
-        is_fresh_appearance = not cs  # no prev → archetype defaults will apply
-        archetype_changed = (
-            state.prev_archetype is not None
-            and state.prev_archetype != archetype
-        )
+            # D-cat: breath_phase ONLY for chest_breath_micro
+            if archetype != "chest_breath_micro":
+                cs.pop("breath_phase", None)
 
-        # Apply operator deltas (excluding relational fields)
-        for k, v in beat_cs.items():
-            if k in ("on_frame", "role"):
-                continue  # propagate to relational_field instead
-            if k == "gaze":
-                cs["gaze_direction"] = v
-            else:
-                cs[k] = v
+            # H2 gaze derivation: only when operator didn't author gaze AND
+            # one of these conditions holds:
+            #   (a) inherited gaze_direction was `at_named_object_X` AND
+            #       X != current anchor (stale-anchor refresh)
+            #   (b) anchor is a NEWLY-INTRODUCED prop on this beat
+            #       (operator introducing prop = attentional shift)
+            if "gaze" not in beat_cs:
+                inherited_gaze = cs.get("gaze_direction")
+                anchor = state.shared_attention_anchor
+                if anchor and anchor in (state.prop_state or {}):
+                    target_gaze = f"at_named_object_{anchor}"
+                    prev_props_before_this_beat = state.__dict__.get("_prev_prop_state", {})
+                    anchor_is_newly_introduced = anchor not in prev_props_before_this_beat
 
-        # Always inject the design hash (A-cat, constant for V4 launch)
-        cs["character_design_hash"] = CHARACTER_DESIGN_HASH_PENDING
-
-        # Archetype defaults — semantics per ground-truth evidence:
-        #   pose_id: applies on (a) fresh appearance, OR (b) archetype changed.
-        #     Rationale: pose_id is the visual framing — when archetype
-        #     changes, the framing changes too. Ground truth ep001_009 shows
-        #     pose_id reverts to tea_beat default even though prev was
-        #     dappled_light_hand with hand_only_table.
-        #   hand_state: applies on (a) fresh appearance, OR (b) archetype
-        #     changed AND the new archetype is hand-prescriptive
-        #     (tea_beat_close_up, chest_breath_micro, dappled_light_hand —
-        #     these have a semantically required hand pose). For other
-        #     archetypes, hand_state inherits. Ground truth ep001_003
-        #     inherits wrapping_cup from b02 even though character_quiet_face
-        #     archetype's default would be relaxed_open.
-        if is_fresh_appearance or archetype_changed:
-            default_pose = ARCHETYPE_DEFAULT_POSE_ID.get(archetype)
-            if default_pose and "pose_id" not in beat_cs:
-                cs["pose_id"] = default_pose
-        if is_fresh_appearance or (
-            archetype_changed and archetype in HAND_PRESCRIPTIVE_ARCHETYPES
-        ):
-            default_hand = ARCHETYPE_DEFAULT_HAND_STATE.get(archetype)
-            if default_hand and "hand_state" not in beat_cs:
-                cs["hand_state"] = default_hand
-
-        # D-cat: breath_phase ONLY for chest_breath_micro
-        if archetype != "chest_breath_micro":
-            cs.pop("breath_phase", None)
-
-        # H2 gaze derivation: only when operator didn't author gaze AND
-        # one of these conditions holds:
-        #   (a) inherited gaze_direction was `at_named_object_X` AND
-        #       X != current anchor (stale-anchor refresh)
-        #   (b) anchor is a NEWLY-INTRODUCED prop on this beat
-        #       (operator introducing prop = attentional shift)
-        if "gaze" not in beat_cs:
-            inherited_gaze = cs.get("gaze_direction")
-            anchor = state.shared_attention_anchor
-            if anchor and anchor in (state.prop_state or {}):
-                target_gaze = f"at_named_object_{anchor}"
-                prev_props_before_this_beat = state.__dict__.get("_prev_prop_state", {})
-                anchor_is_newly_introduced = anchor not in prev_props_before_this_beat
-
-                if isinstance(inherited_gaze, str) and inherited_gaze.startswith("at_named_object_"):
-                    if inherited_gaze != target_gaze:
-                        # (a) anchor changed; refresh
+                    if isinstance(inherited_gaze, str) and inherited_gaze.startswith("at_named_object_"):
+                        if inherited_gaze != target_gaze:
+                            # (a) anchor changed; refresh
+                            cs["gaze_direction"] = target_gaze
+                    elif anchor_is_newly_introduced:
+                        # (b) new prop introduced + set as anchor; derive
                         cs["gaze_direction"] = target_gaze
-                elif anchor_is_newly_introduced:
-                    # (b) new prop introduced + set as anchor; derive
-                    cs["gaze_direction"] = target_gaze
 
-        new_character_state[cid] = cs
+            new_character_state[cid] = cs
 
-    state.character_state = new_character_state
+        state.character_state = new_character_state
 
     # ── Step 3f: assemble scene_state ──
     scene_state: dict[str, Any] = {}
@@ -875,8 +1082,11 @@ def build_panel(
             scene_state["weather_anchor"] = wa
 
     # ── Step 3g: relational_field ──
-    # Single-character episode (ep_001); list shape with one entry per
-    # stage_character.
+    # Per-stage_character entry in active_entities (multi-character extension
+    # per OPD-147). For single-character episodes (ep_001) the loop runs once
+    # exactly as in V1 — behavior is byte-identical. For multi-character beats
+    # (ep_002+) each stage_character gets its own active_entities entry with
+    # its own on_frame state derived from archetype + subject_actor binding.
     active_entities = []
     for cid in stage_characters:
         beat_cs = char_block_per_beat.get(cid, ...)
@@ -889,15 +1099,25 @@ def build_panel(
             explicit_on_frame = bool(beat_cs["on_frame"])
         # Per OPD-142: when scene-changed suppression fires (ep001_016
         # flashback), reconcile on_frame=false even if operator says true.
-        # For other suppression cases (episode card), also force false.
+        # For other suppression cases (episode card + META archetypes), also
+        # force false.
         if cid in suppressed_char_ids:
             on_frame = False
         elif explicit_on_frame is not None:
             on_frame = explicit_on_frame
         else:
-            on_frame = derive_on_frame(
-                beat_cs if isinstance(beat_cs, dict) else None,
-                archetype,
+            # OPD-147 multi-character extension of H5: route through
+            # derive_on_frame_for_character() which handles META archetypes
+            # (typographic_caption_card) and subject_actor archetypes
+            # (secondary_character_face_close) BEFORE falling back to V1
+            # single-character derive_on_frame(). For ep_001 archetypes the
+            # fall-through produces identical output to V1.
+            on_frame = derive_on_frame_for_character(
+                cid=cid,
+                beat=beat,
+                beat_character_block=beat_cs if isinstance(beat_cs, dict) else None,
+                archetype=archetype,
+                stage_characters=stage_characters,
                 op_has_state=op_has_state_for_cid,
             )
         # role: H6
@@ -907,20 +1127,55 @@ def build_panel(
             role = derive_role(on_frame)
         active_entities.append({"id": cid, "on_frame": on_frame, "role": role})
 
-    # Compute tension vector vs prev panel
-    # Pull current/prev expression_dial for first stage character (V1 single-char)
+    # Compute tension vector vs prev panel.
+    # The PROTAGONIST (stage_characters[0]) drives the panel's emotional
+    # tension vector regardless of which character is on-frame. Rationale:
+    # the iyashikei tension arc is the protagonist's interior journey; even
+    # when a secondary character is on-frame (e.g. ep_002 b17 Dr. Morimoto
+    # CU), the page's emotional reading is "where Mira is at right now."
     primary_cid = stage_characters[0]
     curr_cs = state.character_state.get(primary_cid)
     curr_dial = curr_cs.get("expression_dial") if curr_cs else None
-    # Look up prev_dial via inherits_from — we don't keep an explicit prev_state,
-    # so peek into character_state pre-update. Workaround: stash prev_dial.
-    # Use _prev_panel_dial_cache via state.
     prev_dial = state.__dict__.setdefault("_prev_panel_dial", {}).get(primary_cid)
     magnitude_delta = derive_magnitude_delta(curr_dial, prev_dial)
     tension_override = beat.get("tension_override")
     direction = derive_tension_direction(curr_dial, prev_dial, tension_override)
-    # Update cache for next iteration
-    state.__dict__["_prev_panel_dial"][primary_cid] = curr_dial
+    # Cache update for next iteration. Multi-character extension semantics:
+    #   - When the protagonist HAS a current dial, update cache to that
+    #     value (matches V1 single-char behavior).
+    #   - When the protagonist has NO current dial AND was suppressed via
+    #     OPD-142 scene-change (flashback) or props_clear (episode card),
+    #     reset cache to None. Preserves V1 ep_001 round-trip: ep001_016
+    #     scene-jump to flashback resets Mira's dial cache → ep001_017 has
+    #     no prev_dial reference (matches ground-truth magnitude_delta=0.0).
+    #   - When the protagonist has NO current dial for any OTHER reason
+    #     (multi-character POV via secondary_character_face_close,
+    #     seasonal_anchor_object with Mira implied off-frame, etc.):
+    #     PRESERVE cache so the next protagonist-on-frame beat reads against
+    #     the last known dial. This is the multi-character extension's key
+    #     improvement: the protagonist's emotional inheritance chain
+    #     continues across off-frame beats. Without this, ep_002 b19 (Mira
+    #     dial=0.5 after b16 dial=0.6 through b17/b18 off-frame) would lose
+    #     its -0.1 reference.
+    archetype_has_no_subject = ARCHETYPE_SUBJECT_TYPE.get(archetype) is None
+    scene_changed = (
+        prev_scene_id is not None and state.scene_id != prev_scene_id
+    )
+    protagonist_reset_by_scene_change = (
+        primary_cid in suppressed_char_ids
+        and scene_changed
+        and archetype_has_no_subject
+    )
+    protagonist_reset_by_episode_card = (
+        beat.get("props_clear", False) and archetype_has_no_subject
+    )
+    if curr_dial is not None:
+        state.__dict__["_prev_panel_dial"][primary_cid] = curr_dial
+    elif protagonist_reset_by_scene_change or protagonist_reset_by_episode_card:
+        # V1-equivalent path: reset cache to None (matches ep_001 b16/b35).
+        state.__dict__["_prev_panel_dial"][primary_cid] = None
+    # else: preserve cache (multi-character POV / object-only beats / META
+    # archetype beats; protagonist's dial inheritance chain continues).
 
     relational_field: dict[str, Any] = {
         "active_entities": active_entities,
@@ -985,6 +1240,23 @@ def build_panel(
         if V41_FACE_BOILERPLATE not in continuity_invariants:
             continuity_invariants.append(V41_FACE_BOILERPLATE)
 
+    # OPD-148: typographic_caption_card emits caption_text + caption_style +
+    # render_directive=typographic_only, suppresses scene_state.light_rig_id
+    # (no L0 light rig — the lettering pipeline renders the page directly).
+    # character_state is already empty (META suppression upstream).
+    if archetype == "typographic_caption_card":
+        panel["caption_style"] = beat["caption_style"]
+        panel["caption_text"] = beat["caption_text"]
+        panel["render_directive"] = "typographic_only"
+        # Drop light_rig_id from scene_state — caption-card has no L0 lighting.
+        panel.get("scene_state", {}).pop("light_rig_id", None)
+
+    # OPD-147: secondary_character_face_close emits subject_actor so downstream
+    # prompt compiler / PuLID can bind the right reference sheet. The active
+    # subject is the parametrized character, NOT stage_characters[0].
+    if archetype in ARCHETYPES_REQUIRING_SUBJECT_ACTOR:
+        panel["subject_actor"] = beat["subject_actor"]
+
     # Track archetype for next iteration's "apply archetype defaults?" check
     state.prev_archetype = archetype
 
@@ -1024,6 +1296,15 @@ def _archetype_primary_beat_type(archetype: str) -> str:
         "kettle_steam_macro": "spatial",
         "long_drop_decompression": "long_drop",
         "pendulation_pair_visual_rhyme": "micro",
+        # OPD-147: secondary character CU is micro (per iyashikei.yaml primary).
+        "secondary_character_face_close": "micro",
+        # OPD-148: caption-card mid-episode strip is micro; end-episode card
+        # is standard (operator overrides per beat).
+        "typographic_caption_card": "micro",
+        # ep_002-surfaced primaries from iyashikei.yaml.
+        "walking_in_thought_medium": "spatial",
+        "miyazaki_ma_pause": "miyazaki_ma",
+        "window_light_threshold": "spatial",
     }.get(archetype, "micro")
 
 
