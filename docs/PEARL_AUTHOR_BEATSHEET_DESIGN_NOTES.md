@@ -1,9 +1,14 @@
 # Pearl_Author Beatsheet Design Notes — Milestone C Step 0
 
-**Status:** DESIGN NOTES (Step 0 deliverable per OPD-140, 2026-05-22)
+**Status:** DESIGN NOTES (Step 0 deliverable per OPD-140, 2026-05-22; extended Milestone B Step 2 per OPDs 147+148, 2026-05-26)
 **Authors:** Pearl_Author (this pass) + operator review
-**Date:** 2026-05-22
+**Date:** 2026-05-22 (initial), amended 2026-05-26
 **Method:** Bottom-up reverse-extraction from the 35 hand-authored ep_001 continuity_state YAMLs in `artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/continuity_state/ep_001/`. No theory-down design; every classification decision below is anchored to specific panel_ids.
+
+**Version history:**
+- **v1.0** (2026-05-22): Initial reverse-extraction; 12 ep_001 archetypes dispatched; single-character semantics.
+- **v1.1** (2026-05-24): Schema gains `tension_override` field per OPD-146.
+- **v1.2** (2026-05-26): Multi-character generator extension shipped (joint with OPDs 147+148). New archetypes: `secondary_character_face_close` (OPD-147, parametrized via `subject_actor`) and `typographic_caption_card` (OPD-148, META cluster). Promoted from declared-but-unimplemented (ep_002 surfaced): `walking_in_thought_medium`, `miyazaki_ma_pause`, `window_light_threshold`. OPEN-5 and OPEN-7 resolved.
 
 **Companion deliverables:**
 - `artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/continuity_state/ep_001/_extracted_beatsheet.yaml` — the actual reverse-extracted beatsheet for ep_001
@@ -192,24 +197,53 @@ Trivial; no operator input.
 
 ## §3 Per-archetype dispatch table
 
-For each iyashikei archetype that appears in ep_001's 35 panels, this is what the generator must fill (in addition to common fields). All 12 archetypes used:
+For each iyashikei archetype dispatched by the generator. The 12 ep_001 archetypes seed the table; ep_002 surfaces 5 more (2 new candidates per OPDs 147/148, 3 promotions from declared-but-unimplemented).
 
-| Archetype | Count | Default `pose_id` | Default `hand_state` | Special fields | `subject_type` (drives on_frame) |
-|---|---|---|---|---|---|
-| `sparse_establishing_wide` | 7 | `front_portrait_seated_calm` OR `full_figure_standing_at_window` (operator picks) | `relaxed_open` | none | `null` → on_frame default false; operator overrides up |
-| `tea_beat_close_up` | 5 | `hands_wrapping_cup` | `wrapping_cup` | none | `character_hands_only` → on_frame: true |
-| `character_quiet_face` | 5 | `front_portrait_seated_calm` | `relaxed_open` | EMITS `v41_per_axis_edge_resolved` + V4.1 boilerplate | `character_face_only` → on_frame: true |
-| `chest_breath_micro` | 4 | `chest_breath_micro` | `tucked_self_soothing` | **REQUIRES** `breath_phase` ∈ {quickening, inhale, exhale_settling} | `character_chest_partial` → on_frame: true |
-| `character_face_micro_tension` | 4 | `front_portrait_seated_tense` | `tucked_self_soothing` OR `relaxed_open` (operator picks) | EMITS `v41_per_axis_edge_resolved` + V4.1 boilerplate | `character_face_only` → on_frame: true |
-| `hand_table_micro` | 4 | `hand_only_table` | varies — `relaxed_open` / `tucked_self_soothing` / `reaching_for_X` per intent | none | `character_hand_only` → on_frame: true |
-| `dappled_light_hand` | 1 | `hand_only_table` | `wrapping_cup` (often holds prop) | none | `character_hand_only` → on_frame: true |
-| `pet_companion_micro` | 1 | (off-frame implied: `front_portrait_seated_calm`) | `relaxed_open` | none; human is OFF-frame | `character_pet_only` → human on_frame: false |
-| `seasonal_anchor_object` | 1 | (off-frame implied) | n/a | none; object-only panel, no L2 cutout | `null` → on_frame: false |
-| `kettle_steam_macro` | 1 | (off-frame implied) | n/a | none; object-only panel, no L2 cutout | `null` → on_frame: false |
-| `long_drop_decompression` | 1 | `full_figure_standing_at_window` | `relaxed_open` | beat_type forced to `long_drop` | `null` → on_frame: true if operator wants tiny figure (ep001_029 has on_frame: true) |
-| `pendulation_pair_visual_rhyme` | 1 | (inherits from rhyme partner) | (inherits) | takes `rhyme_partner_beat` field; copies composition | `null` → off-frame |
+| Archetype | Count (ep_001) | Count (ep_002) | Default `pose_id` | Default `hand_state` | Special fields | `subject_type` (drives on_frame) |
+|---|---|---|---|---|---|---|
+| `sparse_establishing_wide` | 7 | 4 | `front_portrait_seated_calm` OR `full_figure_standing_at_window` (operator picks) | `relaxed_open` | none | `null` → on_frame default false; operator overrides up |
+| `tea_beat_close_up` | 5 | 2 | `hands_wrapping_cup` | `wrapping_cup` | none | `character_hands_only` → on_frame: true |
+| `character_quiet_face` | 5 | 4 | `front_portrait_seated_calm` | `relaxed_open` | EMITS `v41_per_axis_edge_resolved` + V4.1 boilerplate | `character_face_only` → on_frame: true |
+| `chest_breath_micro` | 4 | 3 | `chest_breath_micro` | `tucked_self_soothing` | **REQUIRES** `breath_phase` ∈ {quickening, inhale, exhale_settling} | `character_chest_partial` → on_frame: true |
+| `character_face_micro_tension` | 4 | 3 | `front_portrait_seated_tense` | `tucked_self_soothing` OR `relaxed_open` (operator picks) | EMITS `v41_per_axis_edge_resolved` + V4.1 boilerplate | `character_face_only` → on_frame: true |
+| `hand_table_micro` | 4 | 3 | `hand_only_table` | varies — `relaxed_open` / `tucked_self_soothing` / `reaching_for_X` per intent | none | `character_hand_only` → on_frame: true |
+| `dappled_light_hand` | 1 | 0 | `hand_only_table` | `wrapping_cup` (often holds prop) | none | `character_hand_only` → on_frame: true |
+| `pet_companion_micro` | 1 | 0 | (off-frame implied: `front_portrait_seated_calm`) | `relaxed_open` | none; human is OFF-frame | `character_pet_only` → human on_frame: false |
+| `seasonal_anchor_object` | 1 | 2 | (off-frame implied) | n/a | none; object-only panel, no L2 cutout | `null` → on_frame: false |
+| `kettle_steam_macro` | 1 | 1 | (off-frame implied) | n/a | none; object-only panel, no L2 cutout | `null` → on_frame: false |
+| `long_drop_decompression` | 1 | 1 | `full_figure_standing_at_window` | `relaxed_open` | beat_type forced to `long_drop` | `null` → on_frame: true if operator wants tiny figure (ep001_029 has on_frame: true) |
+| `pendulation_pair_visual_rhyme` | 1 | 0 | (inherits from rhyme partner) | (inherits) | takes `rhyme_partner_beat` field; copies composition | `null` → off-frame |
+| **`secondary_character_face_close`** *(OPD-147, 2026-05-26)* | 0 | 2 | `face_close_seated_calm` | `relaxed_open` | **REQUIRES `subject_actor` (character_id in stage_characters)**; EMITS `v41_per_axis_edge_resolved` + V4.1 boilerplate; EMITS `subject_actor` in panel output for downstream PuLID binding | `character_face_only` → on_frame: true for subject_actor, false for all other stage_characters (POV-from-protagonist) |
+| **`typographic_caption_card`** *(OPD-148, 2026-05-26, META cluster)* | 0 | 1 | (n/a — META) | (n/a) | **REQUIRES `caption_style` ∈ {mid_episode_strip, end_episode_card}** + **`caption_text: string`**; EMITS `render_directive: typographic_only`, drops `scene_state.light_rig_id`; suppresses character_state for ALL stage_characters | `null` → on_frame: false for all stage_characters |
+| `walking_in_thought_medium` *(ep_002 promotion from declared-but-unimplemented)* | 0 | 2 | `full_figure_walking_three_quarter` | `relaxed_open` | none | `character_full_figure_walking` → on_frame: true |
+| `miyazaki_ma_pause` *(ep_002 promotion)* | 0 | 1 | `full_figure_seated_tiny` | `relaxed_open` | beat_type primary forced to `miyazaki_ma` | `null` (`character_ELS_in_L0` — figure baked into L0) → on_frame: operator-picks (b14 ep_002 has on_frame: true for tiny figure) |
+| `window_light_threshold` *(ep_002 promotion)* | 0 | 2 | `full_figure_threshold_door` | `relaxed_open` | none | `character_silhouette_back` → on_frame: true |
 
-**Coverage gap surfaced by Step 0:** iyashikei.yaml declares 19 archetypes; ep_001 uses 12. The 7 unused archetypes (`morning_routine_sequence`, `window_light_threshold`, `food_preparation_overhead`, `shared_meal_table_medium`, `walking_in_thought_medium`, `phone_notification_macro`, `miyazaki_ma_pause`) will surface their own dispatch needs in ep_002+. Don't pre-build dispatch for them; let the next episodes' beatsheets reveal what they need.
+### §3.1 The first parametrized archetype (OPD-147)
+
+`secondary_character_face_close` is the **first parametrized archetype**: it requires a `subject_actor: <character_id>` field per beat that binds the on-frame focal character. This is also the first archetype that diverges from the V1 "single stage_character" assumption. The generator's multi-character extension (this PR, joint with OPD-147) supports parametrized subject binding by:
+
+1. Beat schema validates `subject_actor ∈ stage_characters`.
+2. Generator's per-character state loop SUPPRESSES the protagonist (and any other non-subject_actor stage_character) when archetype is in `ARCHETYPES_REQUIRING_SUBJECT_ACTOR` and no operator state was authored for them.
+3. `derive_on_frame_for_character()` (new H5 extension) returns on_frame=true only for cid == subject_actor.
+4. Panel output emits `subject_actor: <character_id>` so downstream prompt compiler / PuLID binds the right reference sheet.
+5. Protagonist's dial cache is PRESERVED across the off-frame beat — the inheritance chain continues so the next protagonist-on-frame beat reads against the right prev_dial.
+
+Future parametrized archetypes (e.g. multi-character `shared_meal_table_medium` when promoted) will join `ARCHETYPES_REQUIRING_SUBJECT_ACTOR`.
+
+### §3.2 META archetypes (OPD-148)
+
+`typographic_caption_card` introduces a **META cluster** of renderable-but-no-L0/L1/L2/L3 archetypes. META archetypes:
+
+1. Drop `scene_state.light_rig_id` from output (no L0 lighting).
+2. Emit empty `character_state: {}` for ALL stage_characters (no L2 cutouts).
+3. Emit `render_directive: <directive>` so downstream pipeline routes around the layer stack.
+4. Take their own parametrized fields (here: `caption_style` + `caption_text`).
+5. Force every active_entities entry to `on_frame: false`.
+
+Future META archetypes (e.g. title cards, transition wipes) will join `META_ARCHETYPES_SUPPRESSING_ALL_CHARACTERS`.
+
+**Coverage status post-ep_002:** iyashikei.yaml now declares 21 archetypes (was 19; +2 from OPDs 147+148). The generator dispatches 17 of these (14 supported from ep_001+ep_002 + 3 promoted from declared-but-unimplemented). The remaining 4 (`morning_routine_sequence`, `food_preparation_overhead`, `shared_meal_table_medium`, `phone_notification_macro`) stay declared-but-unimplemented until ep_003+ beatsheets surface their need.
 
 ---
 
@@ -291,11 +325,11 @@ beatsheet.yaml + (series_profile, scene_inventory, style_state, panel_template, 
 
 **OPEN-4 — Pose_id default per archetype.** The `iyashikei.yaml` panel template declares composition_tokens but no `default_pose_id`. The 7 distinct pose_ids used in ep_001 correlate strongly with archetype but not deterministically (e.g., `sparse_establishing_wide` uses 3 different pose_ids depending on what's in frame). Recommendation: extend `iyashikei.yaml` archetypes with an optional `default_pose_id` field; operator override always allowed. Document this as a Milestone-D pre-req for cross-genre rollout.
 
-**OPEN-5 — Archetype for ep001_035 (episode card).** Ground truth uses `archetype: sparse_establishing_wide` for an empty typographic outro that has no rendered scene. This is a placeholder. `iyashikei.yaml` has no "typographic_outro" archetype. Recommendation: add a `meta` cluster archetype `typographic_episode_card` with `subject_type: null`, `cutout_policy: null`, that explicitly skips rendering and emits the outro lettering only.
+**OPEN-5 — RESOLVED (OPD-148, 2026-05-26).** Archetype for ep001_035 (episode card) / ep_002 b24 (mid-episode caption strip): resolved by the new `typographic_caption_card` META archetype shipped jointly with OPD-148. The archetype takes `caption_style` ∈ {`mid_episode_strip`, `end_episode_card`} so the same archetype serves both the ep_002 b24 mid-strip and the ep_001 b35 outro pattern. ep_001 b35 retroactive cleanup (re-author from `sparse_establishing_wide` to `typographic_caption_card` with `caption_style: end_episode_card`) is a sibling follow-up workstream (the ep_001 ground truth YAMLs stay immutable for round-trip integrity; retroactive cleanup happens in a fresh ep_001 v2 if and when operator pulls that trigger).
 
 **OPEN-6 — `pendulation_pair_visual_rhyme` composition copying.** Beatsheet declares `rhyme_partner_beat: b25` for b33. The generator needs to decide whether to copy partner's composition_tokens / pose_id / framing into the new panel, or whether the operator should re-author. Ground truth at ep001_033 has explicit `pose_id: front_portrait_seated_calm` (different from b25 which has no pose_id because off-frame); operator did NOT auto-copy. Recommendation: V1 generator treats `pendulation_pair_visual_rhyme` as documentation only (no composition copying); operator re-authors per beat. V2 may add copy-with-override.
 
-**OPEN-7 — Multi-character beats.** ep_001 is single-character (only `mira_aoki`). The beatsheet schema declares `stage_characters` as a list, but with only one entry the multi-character semantics are untested. ep_003 introduces `mother` (per stillness_en_01.yaml minor_cast). Validate the multi-character beat shape against ep_003's eventual beatsheet (Milestone B blocker).
+**OPEN-7 — RESOLVED (OPD-147, 2026-05-26, joint with this PR).** Multi-character beats are now supported in the generator. The first concrete user is the new `secondary_character_face_close` archetype (Dr. Morimoto across the meeting table in ep_002 b17 + b22). The extension preserves V1 single-character behavior exactly (ep_001 round-trip remains byte-clean — proven by `test_ep_001_round_trip_still_passes_after_multi_char_extension`). Key surface: `stage_characters` is a list; each beat may declare `subject_actor: <character_id>` to bind the on-frame focal character; protagonist (stage_characters[0]) drives the panel's `emotional_tension_vector` regardless of on-frame status; protagonist dial cache PRESERVES across off-frame beats so inheritance chain continues. ep_003 (mother) + ep_004+ (Kenji) will exercise additional shapes without further generator changes expected.
 
 **OPEN-8 — Style state injection.** The style_state.yaml prompt_clauses (line_weight, wash_softness, tonal_density, shading_aggression) are injected into rendering prompts, NOT into continuity_state YAMLs. The beatsheet correctly omits them. Confirm with Pearl_Architect that this boundary holds.
 

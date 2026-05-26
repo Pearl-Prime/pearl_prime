@@ -346,6 +346,54 @@ archetypes:
     engine_routing: flux_dev
     engine_routing_rationale: "Hand macro; anatomy detail critical (extra fingers risk on schnell); flux_dev"
 
+  # ────────────────────────────────────────────────────────────────────────────
+  # SOMATIC — secondary_character_face_close (OPD-147, 2026-05-26)
+  # ────────────────────────────────────────────────────────────────────────────
+  # First parametrized archetype: the on-frame subject is a NAMED character
+  # specified per-beat via `subject_actor: <character_id>` (must be in
+  # stage_characters). PuLID reference sheet binds to subject_actor's
+  # character_design.reference_sheet, NOT the protagonist's. The composition
+  # tokens are deliberately identity-neutral so a single archetype serves
+  # Dr. Morimoto in ep_002, Mira's mother in ep_003, Kenji in ep_004+, etc.
+  #
+  # Per docs/PEARL_ARCHITECT_BRIEF_EP002_CANDIDATE_ARCHETYPES.md §3.2.
+  secondary_character_face_close:
+    cluster: somatic
+    framing: CU                       # close-up of secondary character
+    beat_role: gesture                # the secondary contributes pacing / recognition
+    beat_type:
+      primary: micro
+    aspect_hint: square_1_1
+    subject_placement_bbox: [22, 12, 78, 88]   # matches character_quiet_face CU framing
+    eye_flow_anchor: eyes
+    eye_flow_anchor_detail: "secondary character's eyes — addressed-to-protagonist gaze"
+    composition_tokens:
+      - "close-up of the secondary character (identity parametrized via subject_actor)"
+      - "neutral-soft professional expression by default"
+      - "soft window light from camera-left"
+      - "no exaggerated reactions"
+      - "POV-from-protagonist composition — protagonist implied off-frame"
+      - "shallow depth of field"
+      - "rule of thirds"
+      - "warm-neutral palette appropriate to the scene"
+    parametrized_fields:
+      - field: subject_actor
+        type: character_id
+        required: true
+        semantics: "the character_id (from stage_characters) whose face fills the frame; PuLID reference sheet binds to this character's character_design.reference_sheet, not the protagonist's"
+    subject_actor_field: required     # generator-facing flag — beat MUST declare subject_actor
+    typical_pairing:
+      preceded_by: [sparse_establishing_wide, character_face_micro_tension]
+      followed_by: [character_quiet_face, character_face_micro_tension]
+    forbidden_pairing:
+      - "must not appear back-to-back with same subject_actor more than 2x (avoid talking-head montage anti-pattern)"
+    bestseller_exemplars:
+      - "March Comes in Like a Lion — Hina/Akari close-ups on Rei"
+      - "Komi Can't Communicate — Tadano/Najimi reaction beats across Komi"
+      - "Sweetness & Lightning — Inuzuka-on-Tsumugi close-ups"
+    engine_routing: qwen_image_pulid
+    engine_routing_rationale: "FACE close-up; identity-critical; PuLID locks to subject_actor's reference sheet (not protagonist's)"
+
   # ============================================================
   # CLUSTER 3: COMPANION beats (the small living others)
   # ============================================================
@@ -663,6 +711,54 @@ archetypes:
     bestseller_exemplars:
       - "Polar Bear Café — repeat-pose café-counter beats showing emotional recovery"
       - "March — Rei's recurring chair-at-shogi-board beats with shifting body language"
+
+  # ────────────────────────────────────────────────────────────────────────────
+  # META — typographic_caption_card (OPD-148, 2026-05-26)
+  # ────────────────────────────────────────────────────────────────────────────
+  # Second renderable-meta archetype: typographic caption card. Used mid-episode
+  # (caption-strip across near-black field) or at episode close (end-card).
+  # subject_type=null, cutout_policy=null — the downstream lettering pipeline
+  # composes the layout directly; no L0/L1/L2/L3 render. Resolves OPEN-5 from
+  # PEARL_AUTHOR_BEATSHEET_DESIGN_NOTES.md (ep_001 b35 was a placeholder using
+  # sparse_establishing_wide).
+  #
+  # Per docs/PEARL_ARCHITECT_BRIEF_EP002_CANDIDATE_ARCHETYPES.md §3.3.
+  typographic_caption_card:
+    cluster: meta
+    framing: insert                   # not a renderable image frame — a typographic insert
+    beat_role: closure                # caption-card lands recognition; also attunement when mid-episode
+    beat_type:
+      primary: micro
+      secondary: standard             # if used as end-episode card with scene transition
+    aspect_hint: any                  # caption-card aspect dictated by composer, not archetype
+    subject_placement_bbox: meta_n_a
+    eye_flow_anchor: caption_center
+    composition_tokens:
+      - "near-black field with thin frame of light at the edges"
+      - "caption strip across the center, large legible type"
+      - "no character, no scene, no environment"
+      - "typographic register only — the page itself is the medium"
+      - "iyashikei mood marker — the recognition lands without imagery"
+    parametrized_fields:
+      - field: caption_style
+        type: enum
+        values: [mid_episode_strip, end_episode_card]
+        required: true
+        default: mid_episode_strip
+        semantics: "mid_episode_strip = caption strip across near-black mid-episode panel (~5-15 words); end_episode_card = full episode-card with title/author/credits at episode close"
+      - field: caption_text
+        type: string
+        required: true
+        semantics: "the literal text on the card (lifted from chapter_script narrator_caption_by_locale[<locale>] for the corresponding panel; passed through to downstream lettering pipeline)"
+    typical_pairing:
+      preceded_by: [character_quiet_face, character_face_micro_tension]
+      followed_by: [character_quiet_face]
+      uniqueness: "limit 1-2 mid_episode_strip per episode; end_episode_card is once-per-episode at episode close"
+    bestseller_exemplars:
+      - "March Comes in Like a Lion — chapter-break caption pages"
+      - "Mushishi — interstitial narrator-only pages between scenes"
+    engine_routing: meta_n_a
+    engine_routing_rationale: "no L0/L2 render; downstream lettering pipeline composes the caption-card layout directly"
 
 # ── Phase H QA gates (validation checklist for V3 renders) ───────────────────
 # Sourced from artifacts/research/manga_quality_bar/01_iyashikei_craft_study.md
