@@ -138,6 +138,7 @@ def build_platform_zips_for_brand(
             "deliverables": {dtype: block},
         }
         zip_out = platform_zip_path(pkg_base, brand_id, week_iso, slug)
+        zip_out.parent.mkdir(parents=True, exist_ok=True)
         with zipfile.ZipFile(zip_out, "w", compression=zipfile.ZIP_DEFLATED) as zf:
             zf.writestr("manifest.json", json.dumps(plat_manifest, indent=2) + "\n")
             if readme.is_file():
