@@ -93,3 +93,16 @@ Sketching this script in <30 lines is not feasible without that decision; deferr
 This package was created under lane `brand_admin_and_investor_enhancement` from `docs/OLD_CHAT_AND_HOME_PROMOTION_SPEC.md` section 4.
 
 Path X separation ratified by operator 2026-04-27. See `docs/PEARL_ARCHITECT_STATE.md` BR-CANON-01 Path X cap entry for the architecture decision; see `specs/MANGA_CATALOG_RECONCILIATION_SPEC.md` for the manga reconciliation governance.
+
+## Brand admin operations dashboard surfaces
+
+| File | Role | Status |
+|------|------|--------|
+| `brand-wizard-app/public/brand_admin_v2.html` | **Operator weekly-work surface (v2, 2026-05-24).** ~37 global brands (manga canon slots 1–37) × ISO-week downloads. Page 1 picker, Page 2 brand week view + history + outbound dashboard links. Reuses `/api/brand_admin/*` endpoints. Monolithic per-brand-per-week ZIP today (all platform Download buttons point at the same ZIP). No setup/credentials/investor/localhost-helper panels. | **canonical-weekly-work** |
+| `brand-wizard-app/public/brand_handoff_dashboard.html` | Brand handoff / status dashboard (link-out target from v2) | active |
+| `brand-wizard-app/public/content_inventory.html` | Content inventory / manga catalog visibility (link-out target from v2) | active |
+| `brand-wizard-app/public/brand_admin_weekly_os.html` | Legacy weekly-OS sibling (phase wizard + i18n). Not the v2 weekly-work surface. | archived sibling |
+
+**Operator-visible canon (pending BR-CANON-02):** the 37 manga brands in `config/manga/canonical_brand_list.yaml` are the default picker set for v2. Book (26) and music (38+) axes are joined via `brand_id` overlap where it exists; Path X keeps the three registries distinct.
+
+**API:** `GET /api/brand_admin/brand_index`, `GET /api/brand_admin/brand/{id}/planned_volumes`, `GET /api/brand_admin/brand/{id}/weekly?week=YYYY-Www`, `GET /api/brand_admin/download/{id}/{week}` (monolithic ZIP). Week format is **`YYYY-Www`** (e.g. `2026-W21`).
