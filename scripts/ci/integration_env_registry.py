@@ -117,6 +117,8 @@ REGISTRY: list[tuple[str, str, bool, str]] = [
     ("RunComfy", "RUNCOMFY_API_KEY", False, "RunComfy API key (FALLBACK image gen — cloud backup when ComfyUI unavailable)"),
     ("RunComfy", "RUNCOMFY_TOKEN", False, "Alias accepted by some scripts/task briefs; same Bearer material as RUNCOMFY_API_KEY (Keychain parity per N3 2026-04-27)"),
     ("RunComfy", "RUNCOMFY_DEPLOYMENT_ID", False, "RunComfy deployment ID (default: 677edba8-ace0-4b2b-bad2-8e94b9959065)"),
+    # fal.ai serverless GPU inference (Milestone H §7.1 smoke test target — Qwen-Image-Layered hosted endpoint)
+    ("fal.ai", "FAL_KEY", False, "fal.ai serverless GPU inference key (canonical env var name per fal-client SDK). Used for Milestone H §7.1 Qwen-Image-Layered smoke test. Apache-2.0 model, commercial-clean ToS. Pricing: $0.06/image stage 2 + $0.02/MP stage 1. Get: https://fal.ai/dashboard/keys (see docs/runbooks/PEARL_INT_FAL_AI_SETUP_2026-05-27.md)"),
 ]
 
 ENV_VARS_TRACKED_COUNT = len({row[1] for row in REGISTRY})

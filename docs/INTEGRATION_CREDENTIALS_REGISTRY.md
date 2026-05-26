@@ -2,7 +2,7 @@
 
 **Purpose:** Single canonical reference for every external service credential in Phoenix Omega.
 **Owner:** Pearl_Int / Pearl_Architect
-**Last updated:** 2026-04-19 (Added Groq, xAI/Grok, Together AI as Pearl News EN free-tier LLM providers)
+**Last updated:** 2026-05-27 (Added §12a fal.ai — serverless GPU inference, blocks Milestone H §7.1 per OPD-149; setup runbook + `FAL_KEY` env var registered)
 **Rule:** No actual secrets in this file. Only env var names, documentation, and pointers.
 
 ### Phase 1 + 2 scope (deliverables)
@@ -257,6 +257,23 @@ This reads the registry below and reports which env vars are set vs missing.
 | **How to obtain** | Install Ollama locally: https://ollama.com/ — runs on `localhost:11434` by default |
 | **Required vs optional** | Optional — alternative to Qwen for local research |
 | **Status** | Wired in research script |
+
+### 12a. fal.ai — Serverless GPU inference (Qwen-Image-Layered + other hosted models)
+
+| Field | Value |
+|-------|-------|
+| **Env vars** | `FAL_KEY` |
+| **Consumed by** | Milestone H §7.1 smoke test (`fal-ai/qwen-image-layered/lora` endpoint). Future V5.1 catalog rollout dispatcher pending operator decision. |
+| **GitHub workflows** | None yet (smoke test runs locally / interactively) |
+| **How to obtain** | fal.ai dashboard: https://fal.ai/dashboard/keys — sign in, "Add Key", copy once (shown only at creation). Free tier: small credit on signup. Full setup runbook: [docs/runbooks/PEARL_INT_FAL_AI_SETUP_2026-05-27.md](./runbooks/PEARL_INT_FAL_AI_SETUP_2026-05-27.md) |
+| **Required vs optional** | Optional — blocks Milestone H §7.1 smoke test until operator provisions. Not used elsewhere yet. |
+| **Status** | **NOT YET PROVISIONED** — Phoenix has no fal.ai account as of 2026-05-27. OPD-149 (operator-approved) gates Milestone H §7.1 smoke test on this credential. OPD-151 status. |
+| **Pricing reference** | [`docs/MANGA_V5_COMPUTE_SCALING_OPTIONS.md`](./MANGA_V5_COMPUTE_SCALING_OPTIONS.md) §3.4: `fal-ai/qwen-image` stage 1 = $0.02/MP, `fal-ai/qwen-image-layered/lora` stage 2 = $0.06/image. Two-stage panel ≈ $0.08 (smoke test cost ≈ $1 for one ep_001 panel pair). |
+| **License / commercial-clean** | Apache-2.0 model + fal.ai commercial-clean ToS per scout `artifacts/research/iyashikei_style_lora_scout_2026-05-21.md` Channel 1 + scaling-options doc §3.4 line 150. |
+| **Env var name standard** | `FAL_KEY` is the canonical name the [`fal-client`](https://github.com/fal-ai/fal/tree/main/projects/fal_client) Python/JS SDK reads automatically. Do NOT use `FAL_API_KEY` or other variants — the SDK will not find them. |
+| **Base URL** | `https://fal.run/<model-id>` (REST queue API, e.g. `https://fal.run/fal-ai/qwen-image-layered/lora`); status polling via `https://queue.fal.run/<model-id>/requests/<request-id>/status`. |
+| **Validation** | `curl -sS -H "Authorization: Key $FAL_KEY" https://fal.run/fal-ai/qwen-image -d '{}' -H "content-type: application/json"` — expect a JSON response (queue accept or validation error from a missing-prompt body), NOT a 401. Cheap GET alternative: `curl -sS -H "Authorization: Key $FAL_KEY" https://queue.fal.run/fal-ai/qwen-image/requests/00000000-0000-0000-0000-000000000000/status` should return 404-not-found JSON (proving auth ok), not 401. |
+| **Detailed docs** | [docs/runbooks/PEARL_INT_FAL_AI_SETUP_2026-05-27.md](./runbooks/PEARL_INT_FAL_AI_SETUP_2026-05-27.md) — operator setup steps |
 
 ---
 
