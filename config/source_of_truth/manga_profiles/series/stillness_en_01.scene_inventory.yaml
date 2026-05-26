@@ -129,6 +129,215 @@ scenes:
       - light_rig_id: K05_afternoon_golden
       - light_rig_id: K06_evening_warm_amber
 
+  # ── ep_002 SCENES — Mira's workday arc (commute → office → rooftop) ────────
+  # Authored per OPDs 148/149/150 (elevator DOWNGRADE / Dr. Morimoto secondary
+  # close DEFINE / typographic_caption_card DEFINE). Iyashikei aesthetic
+  # constraint holds across all office interiors: warm cream + sage palette,
+  # soft natural light, plants where plausible, no branded signage, no cold
+  # fluorescent overhead (defer that semantic to conference_room_flashback).
+
+  - scene_id: street_sidewalk
+    description: >
+      Quiet urban sidewalk transitioning from residential to commercial,
+      late-morning sun warming the pavement. Low garden walls on one side,
+      a modest unbranded storefront awning on the other, occasional
+      camphor or maple tree softening the edge. Pale concrete with
+      gentle wear. Distant rooftops in soft focus. No vehicles, no
+      pedestrians, no signage with legible text. Mira walks this on
+      her way to the office.
+    subject_bbox_region_clause: "center-frame for walking figure, lower-third for sidewalk foreground"
+    scene_specific_composition_clause: "sidewalk runs from lower-center to upper-third vanishing point, low walls and tree foliage framing left/right, soft sky upper-fifth, warm cream + sage palette"
+    forbidden_objects_clause: "signage with legible text, vehicles, crowds, multiple people, named landmarks, branded storefronts, traffic signals with text"
+    render_resolution: [1080, 1920]
+    locale_variant_required: false
+    used_in_archetypes:
+      - walking_in_thought_medium
+      - sparse_establishing_wide
+      - miyazaki_ma_pause
+    light_rigs:
+      - light_rig_id: K02_morning_window_neutral
+      - light_rig_id: K03_midday_bright_natural
+      - light_rig_id: K05_afternoon_golden
+
+  - scene_id: office_lobby
+    description: >
+      Corporate building lobby — modest scale, brand-neutral. Tall glass
+      entry wall (camera-left) admitting soft late-morning daylight,
+      pale stone floor, warm cream walls with one section of sage accent.
+      A single large monstera in a low planter near the entry (the
+      lobby anchor plant). One unbranded reception desk in soft focus
+      mid-background, no attendant on frame. Iyashikei-warm despite the
+      corporate function: no cold steel, no glaring overheads, no logos,
+      no signage with text. Mira enters here.
+    subject_bbox_region_clause: "center-frame for entering figure, lower-third for floor foreground, lower-left third for monstera_lobby placement"
+    scene_specific_composition_clause: "glass wall upper-left, monstera at lower-left third (jade-green leaves rhyming with jade_pendant), reception desk soft-focus mid-background-right, sage accent panel behind desk, warm cream floor catching daylight"
+    forbidden_objects_clause: "branded signage, logos, security gates with text, crowds, multiple anonymous people, cold steel surfaces, fluorescent overhead lighting, decorative clutter"
+    render_resolution: [1080, 1920]
+    locale_variant_required: false
+    used_in_archetypes:
+      - sparse_establishing_wide
+      - walking_in_thought_medium
+      - seasonal_anchor_object
+      - character_quiet_face
+    light_rigs:
+      - light_rig_id: K02_morning_window_neutral
+      - light_rig_id: K03_midday_bright_natural
+
+  - scene_id: office_elevator
+    description: >
+      Interior of an office elevator — enclosed, vertical motion implied
+      via subtle floor-indicator glow above the door. Warm wood-paneled
+      walls (NOT cold brushed steel), pale cream ceiling, soft warm
+      interior lamp from above. One anonymous extra may stand
+      faceless-or-back-turned at the edge of frame for the
+      character_face_micro_tension beat per OPD-148 (scene context
+      carries the elevator semantics; no special archetype). No floor
+      buttons with legible text, no advertising panels, no logos. Mira
+      occupies the center; the space is small and still.
+    subject_bbox_region_clause: "center-frame for standing figure, edge-of-frame for optional anonymous extra (back-turned only)"
+    scene_specific_composition_clause: "wood-paneled wall behind subject, soft interior overhead lamp pool, narrow vertical framing emphasizing enclosure, optional second figure at right or left edge (faceless/back-turned), warm cream + sage tonal floor"
+    forbidden_objects_clause: "elevator buttons with legible numbers, advertising panels with text, branded signage, multiple faces on frame, cold steel surfaces, fluorescent overhead lighting, mirror reflections of other people"
+    render_resolution: [1080, 1920]
+    locale_variant_required: false
+    used_in_archetypes:
+      - character_face_micro_tension
+      - sparse_establishing_wide
+    light_rigs:
+      - light_rig_id: K07_night_lamp_warm
+      - light_rig_id: K02_morning_window_neutral
+
+  - scene_id: office_waiting_area
+    description: >
+      Small waiting area near the meeting rooms — two upholstered chairs
+      in a warm muted tone, a low wooden table between them, a single
+      potted plant (smaller monstera or peace lily) on the table or in a
+      corner. Large window on one side admitting soft morning light;
+      distant city skyline visible through the glass (used in the
+      miyazaki_ma_pause awe-pullback at b14). Warm cream walls with one
+      sage accent. No magazines with legible text, no televisions, no
+      reception screens. Iyashikei-quiet despite the corporate context.
+    subject_bbox_region_clause: "lower-third for seated figure (chair placement), full-frame for awe-pullback wide showing tiny seated figure"
+    scene_specific_composition_clause: "window wall upper-right (city skyline soft-focus behind glass), two chairs at lower-third facing each other, low table between with single plant, sage accent wall upper-left, warm cream floor"
+    forbidden_objects_clause: "branded signage, logos, magazines with legible text, televisions, monitors, multiple anonymous people, cold corporate furniture, fluorescent overhead lighting"
+    render_resolution: [1080, 1920]
+    locale_variant_required: false
+    used_in_archetypes:
+      - character_quiet_face
+      - sparse_establishing_wide
+      - walking_in_thought_medium
+      - hand_table_micro
+      - chest_breath_micro
+      - miyazaki_ma_pause
+    light_rigs:
+      - light_rig_id: K02_morning_window_neutral
+      - light_rig_id: K03_midday_bright_natural
+      - light_rig_id: K05_afternoon_golden
+
+  - scene_id: office_meeting_room
+    description: >
+      Small interior meeting room — iyashikei-warm, NOT the cold
+      flashback conference room. Round (or modestly rectangular) wooden
+      table at center, four upholstered chairs in muted warm tones. One
+      tall window admitting soft morning daylight on the camera-left
+      wall, sage accent wall opposite. A single small potted plant on
+      the table or on a low credenza behind. A laptop sits open at the
+      table center (laptop_meeting). A water glass and a smoke detector
+      visible on the upper wall (smoke_detector_meeting_room — the
+      continuity-callback object that rhymes with ep_001 b25). Walls
+      warm cream; floor pale wood. Brand-neutral. This is where Mira
+      meets Dr. Morimoto.
+    subject_bbox_region_clause: "lower-third for seated figures (across table), center-frame for POV-from-Mira shots toward Dr. Morimoto, full-frame for sparse_establishing_wide"
+    scene_specific_composition_clause: "round wooden table dominant lower-third, two chairs visible across from each other, window upper-left with soft warm light, sage accent wall upper-right, smoke detector small on upper wall (continuity anchor), laptop_meeting and water_glass on table, single potted plant on credenza or table corner"
+    forbidden_objects_clause: "fluorescent overhead lighting, cold grey-blue palette, glass-walled corporate aesthetic, branded signage, logos, whiteboards with legible text, projector screens, multiple anonymous people, cold steel surfaces"
+    render_resolution: [1080, 1920]
+    locale_variant_required: false
+    used_in_archetypes:
+      - secondary_character_face_close
+      - character_quiet_face
+      - character_face_micro_tension
+      - sparse_establishing_wide
+      - hand_table_micro
+      - seasonal_anchor_object
+    light_rigs:
+      - light_rig_id: K02_morning_window_neutral
+      - light_rig_id: K03_midday_bright_natural
+      - light_rig_id: K05_afternoon_golden
+
+  - scene_id: office_corridor
+    description: >
+      Interior corridor between meeting rooms — warm cream walls, pale
+      wood floor with gentle grain, modest crown moulding suggesting
+      iyashikei-residential register rather than corporate-clinical. One
+      window at the far end (vanishing-point) admitting soft daylight,
+      one or two unobtrusive doors flanking. A single low potted plant
+      on the floor near a door, a framed muted abstract on one wall
+      (no legible text). No reception desk in this corridor, no door
+      numbers with text, no overhead fluorescents. Soft and breathable.
+    subject_bbox_region_clause: "center-frame for walking figure receding to vanishing point, lower-third for floor foreground"
+    scene_specific_composition_clause: "corridor runs from lower-center to upper-third vanishing point at far window, doors flanking left/right in soft focus, low plant lower-right near a door, warm cream walls, sage tonal floor catching daylight from far window"
+    forbidden_objects_clause: "door numbers with legible text, exit signs with text, branded signage, logos, fluorescent overhead lighting, cold steel handrails, multiple anonymous people, security cameras"
+    render_resolution: [1080, 1920]
+    locale_variant_required: false
+    used_in_archetypes:
+      - walking_in_thought_medium
+      - sparse_establishing_wide
+    light_rigs:
+      - light_rig_id: K02_morning_window_neutral
+      - light_rig_id: K03_midday_bright_natural
+
+  - scene_id: office_stairwell
+    description: >
+      Interior stairwell — vertical compression, pale concrete or muted
+      cream walls, simple metal handrail, pale stone or wood treads.
+      Tall narrow window on one landing admitting a single shaft of
+      daylight; otherwise overhead lighting that reads cool and slightly
+      harsh per chapter_script intent (the one office interior where
+      Mira makes a sensory-regulation choice). Per b27 the rig may pin
+      K_flashback_cool_grey_blue to render the harsh-fluorescent
+      sensation; alternate rigs are available for re-render under softer
+      conditions. No signage with legible text, no floor-number stencils.
+    subject_bbox_region_clause: "center-frame for climbing figure, lower-third for tread foreground, full-frame for vertical wide"
+    scene_specific_composition_clause: "stairs ascending diagonally from lower-left to upper-right, metal handrail at right edge, tall narrow window on far landing admitting single shaft of daylight, pale concrete walls, vertical compression emphasized"
+    forbidden_objects_clause: "floor-number stencils with legible text, exit signs with text, branded signage, logos, multiple anonymous people, graffiti, fire hoses with legible labels"
+    render_resolution: [1080, 1920]
+    locale_variant_required: false
+    used_in_archetypes:
+      - walking_in_thought_medium
+      - long_drop_decompression
+      - miyazaki_ma_pause
+      - window_light_threshold
+    light_rigs:
+      - light_rig_id: K_flashback_cool_grey_blue   # b27 operator-pinned: harsh fluorescent sensation
+      - light_rig_id: K03_midday_bright_natural    # alternate: skylight-softened re-render
+      - light_rig_id: K02_morning_window_neutral
+
+  - scene_id: office_rooftop
+    description: >
+      Building rooftop, exterior — wide sky dominating upper two-thirds,
+      distant city skyline soft-focus along the horizon. A modest
+      rooftop surface in pale concrete or warm tile, one unobtrusive
+      HVAC unit at the far edge (small silhouette), a single low wooden
+      bench mid-frame. A few potted plants near the bench (someone
+      tends this rooftop). Low parapet wall at the edge with simple
+      railing. Late-afternoon golden light per ep_002 b28-b29 reveal.
+      No branded signage on rooftop equipment, no antennas with legible
+      labels, no satellite dishes prominent. Sky and breath.
+    subject_bbox_region_clause: "center-frame or lower-left third for figure at railing (back-three-quarter view per b29), upper two-thirds for sky, full-frame for sparse_establishing_wide"
+    scene_specific_composition_clause: "sky upper two-thirds with soft cloud forms, city skyline soft-focus along upper-third horizon line, rooftop surface lower-third, bench mid-frame, parapet railing along far edge, potted plants near bench, HVAC silhouette small at far edge"
+    forbidden_objects_clause: "branded signage on equipment, satellite dishes prominent, antenna arrays with labels, multiple people, helipad markings with legible text, advertising on neighboring buildings"
+    render_resolution: [1080, 1920]
+    locale_variant_required: false
+    used_in_archetypes:
+      - sparse_establishing_wide
+      - character_quiet_face
+      - miyazaki_ma_pause
+      - long_drop_decompression
+      - window_light_threshold
+    light_rigs:
+      - light_rig_id: K05_afternoon_golden         # b28-b29 operator-pinned: golden-hour reveal
+      - light_rig_id: K03_midday_bright_natural
+      - light_rig_id: K06_evening_warm_amber
+
 # ── notes ────────────────────────────────────────────────────────────────
 # - V4 launch covers ep_001's confirmed scenes (bedroom, kitchen).
 # - home_office_corner + neighborhood_walking_path declared for later episodes;
