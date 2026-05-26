@@ -4,6 +4,13 @@
 set -e
 branch=$(git rev-parse --abbrev-ref HEAD)
 remote="${1:-origin}"
+# OPD numbering — surface current max on origin/main so new entries don't collide
+git fetch origin main --quiet 2>/dev/null || true
+max_opd=$(git show origin/main:artifacts/coordination/operator_decisions_log.tsv 2>/dev/null \
+  | awk -F'\t' '/^OPD-[0-9]+\t/ {n=$1; sub(/^OPD-/, "", n); if (n+0 > max) max=n+0} END {print max}')
+if [ -n "$max_opd" ] && [ "$max_opd" -gt 0 ]; then
+  echo "ℹ️  Current max OPD on origin/main: OPD-${max_opd} — next new OPD should be OPD-$((max_opd + 1))"
+fi
 if [[ "$branch" == "main" || "$branch" == "master" ]]; then
   if git rev-parse --verify "$remote/main" &>/dev/null || git rev-parse --verify "$remote/master" &>/dev/null; then
     echo "Direct push to main is not allowed. Use a PR." >&2
