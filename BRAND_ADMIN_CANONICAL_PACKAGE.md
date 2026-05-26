@@ -93,3 +93,18 @@ Sketching this script in <30 lines is not feasible without that decision; deferr
 This package was created under lane `brand_admin_and_investor_enhancement` from `docs/OLD_CHAT_AND_HOME_PROMOTION_SPEC.md` section 4.
 
 Path X separation ratified by operator 2026-04-27. See `docs/PEARL_ARCHITECT_STATE.md` BR-CANON-01 Path X cap entry for the architecture decision; see `specs/MANGA_CATALOG_RECONCILIATION_SPEC.md` for the manga reconciliation governance.
+
+
+## Brand admin operations dashboard surface
+
+The canonical operations dashboard surface (per **DASH-02**, see `docs/PEARL_ARCHITECT_STATE.md`) is:
+
+| File | Role | Status |
+|------|------|--------|
+| `brand-wizard-app/public/brand_admin.html` | **Canonical operations dashboard.** Pearl_Brand owns this surface. Serves the brand picker, phase wizard (Overview/Setup/Upload/Weekly), live brand index across 3 axes (book + manga + music), per-brand books × platforms grid, and the worldwide-go-live panels (active-brand classifier, weekly packaging status, RunComfy spend, manga character). Optional API mode requires `python3 scripts/run_server.py` on port 8000. | **canonical** |
+| `brand_admin.html` (repo root) | Archived static copy without the worldwide-go-live panels. Kept for `file://` operator review when the wizard public copy or server is unavailable. Do NOT add features here — work lands in the canonical copy above. | **archived-but-kept** |
+| `brand_admin_weekly_os.html` | Weekly-OS / i18n sibling focused on coordination build status and weekly packaging. Not the primary operations dashboard. | **weekly-OS sibling** |
+
+The brand index served at `GET /api/brand_admin/brand_index` is the live source-of-truth (replaces the prior hardcoded 24-row inline catalog). Per **BR-CANON-01 Path X**: book and manga axes are intentionally distinct; music is a third axis per **MUSIC-MODE-BRAND-INTEGRATION-V1-01**. A `brand_id` MAY appear on more than one axis (e.g. `stillness_press` exists on both book and manga); consumers should treat axis as the secondary key.
+
+The per-brand books × platforms grid (`GET /api/brand_admin/brand/{brand_id}/books_by_platform`) joins each brand's topic vocabulary to `config/funnel/store_url_tracker.yaml`. The manga axis topic vocabulary aligns directly to store_url_tracker keys; the book axis uses `family_allowlist` which is a different ontology — a wiring gap surfaced in the endpoint response as `ontology_gap`. Follow-up under `ws_brand_admin_store_url_backfill_*`.
