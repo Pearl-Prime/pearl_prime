@@ -15,6 +15,9 @@ F5: named-character continuity discontinuity → WARN on per-chapter rotation
 F6: pedagogical-cadence 4-gram repetition → WARN/FAIL
 F7: over-prescribed practice density per chapter → WARN/FAIL
 F8: citation grafting → deferred until anchor corpus lands (artifacts/reference/trade_pub_anchors/)
+F9-F10: reserved (unclaimed detector ID gaps)
+F11: HOOK atom first-paragraph abstract opening (lacks scene-first person+situation+posture) → WARN
+     Per HOOK-SCENE-FIRST-01 / OPD-144; V1 WARN-only (future ws may escalate to HARD_FAIL)
 
 Verdicts:
   PASS         — 0 FAIL, 0 WARN
@@ -41,7 +44,7 @@ import yaml
 
 @dataclass(frozen=True)
 class RegisterFinding:
-    failure_id: str         # F1..F8
+    failure_id: str         # F1..F8, F11 (F9-F10 reserved)
     severity: str           # WARN / FAIL / HARD_FAIL
     chapter: Optional[int]  # 1-indexed; None for book-level findings
     summary: str            # short human description
@@ -514,6 +517,232 @@ def _detect_f7_practice_density(chapters: list[tuple[int, str]]) -> list[Registe
 
 
 # ─────────────────────────────────────────────────────────────────────────────
+# F11 — HOOK atom first-paragraph abstract opening (HOOK-SCENE-FIRST-01)
+# ─────────────────────────────────────────────────────────────────────────────
+
+F11_WINDOW_CHARS = 200
+
+F11_PERSON_PRONOUN_RE = re.compile(
+    r"\b(?:a person|she|he|they|you|your)\b",
+    re.IGNORECASE,
+)
+F11_PERSON_ROLE_NOUN_RE = re.compile(
+    r"\b(?:person|woman|man|mother|father|daughter|son|executive|engineer|"
+    r"professional|colleague|client|vp|ceo|manager|employee|graduate|student)\b",
+    re.IGNORECASE,
+)
+F11_NAMED_CHARACTER_RE = re.compile(
+    r"^[A-Z][a-z]{2,}\s+(?:woke|sat|stood|walked|has|used|lies|keeps|doesn't|don't)\b",
+)
+F11_SETTING_NOUN_RE = re.compile(
+    r"\b(?:bathroom|office|kitchen|car|bed|stall|meeting|job|room|desk|home|"
+    r"highway|hospital|store|airport|elevator|hallway|classroom|restaurant|"
+    r"bedroom|apartment|building|floor|chair|table|screen|phone|email|invoice|"
+    r"account|bank|client|revenue|pitch|deal)\b",
+    re.IGNORECASE,
+)
+F11_PRESENT_CONTINUOUS_RE = re.compile(
+    r"\b(?:sitting|standing|pressing|breathing|holding|driving|waiting|lying|"
+    r"sleeping|running|refreshing|scrolling|typing|checking|replaying|thinking|"
+    r"crying|listening|watching|reading|writing|pitching)\b",
+    re.IGNORECASE,
+)
+F11_BODY_POSTURE_RE = re.compile(
+    r"\b(?:sitting|standing|pressing|breathing|holding|tightens|clenched|jaw|"
+    r"shoulders|ribs|chest|throat|hands|heart|mouth|nose|eyes|gut|stomach|"
+    r"sweat|trembling|shaking|frozen|slumped|hunched|curled|gripping|leaning)\b",
+    re.IGNORECASE,
+)
+F11_ABSTRACT_OPENING_RE = re.compile(
+    r"^\s*(?:"
+    r"Nightfall|The mind|Awareness|Consciousness|Worth\b|Every decision|"
+    r"The\s+(?:mind|body|soul|truth|worth|stakes|pivot|public|private)\b|"
+    r"Your worth\b|Philosophy\b|Abstract\b"
+    r")",
+    re.IGNORECASE,
+)
+_HOOK_VARIATION_RE = re.compile(r"^##\s+HOOK\s+(v\d+)\s*$", re.MULTILINE)
+_HOOK_BODY_RE = re.compile(
+    r"---\s*\n+---\s*\n+([\s\S]*?)\n+---",
+    re.MULTILINE,
+)
+
+
+def _parse_hook_variation_first_paragraphs(atom_text: str) -> list[tuple[str, str]]:
+    """Return (variation_id, first_paragraph) for each ## HOOK block in a CANONICAL atom."""
+    variations: list[tuple[str, str]] = []
+    headers = list(_HOOK_VARIATION_RE.finditer(atom_text))
+    if not headers:
+        stripped = atom_text.strip()
+        if stripped:
+            first_para = _split_paragraphs(stripped)[0] if _split_paragraphs(stripped) else stripped
+            variations.append(("inline", first_para))
+        return variations
+
+    for i, header in enumerate(headers):
+        var_id = header.group(1)
+        start = header.end()
+        end = headers[i + 1].start() if i + 1 < len(headers) else len(atom_text)
+        block = atom_text[start:end]
+        body_match = _HOOK_BODY_RE.search(block)
+        if body_match:
+            body = body_match.group(1).strip()
+        else:
+            body = block.strip()
+        paragraphs = _split_paragraphs(body)
+        if paragraphs:
+            variations.append((var_id, paragraphs[0]))
+    return variations
+
+
+def _f11_scene_first_signals(first_paragraph: str) -> dict[str, bool]:
+    """Heuristic scene-first signals in the first 200 chars (V1; refine after corpus tagging)."""
+    window = first_paragraph[:F11_WINDOW_CHARS]
+
+    concrete_person = bool(
+        F11_NAMED_CHARACTER_RE.match(first_paragraph.strip())
+        or re.search(r"\b(?:she|he|they)\b", window, re.IGNORECASE)
+        or (
+            F11_PERSON_PRONOUN_RE.search(window)
+            and F11_PERSON_ROLE_NOUN_RE.search(window)
+        )
+    )
+    concrete_situation = bool(
+        F11_SETTING_NOUN_RE.search(window)
+        or F11_PRESENT_CONTINUOUS_RE.search(window)
+        or re.search(
+            r"\b(?:\d{1,2}:\d{2}\s*(?:am|pm)?|monday|tuesday|wednesday|thursday|friday|"
+            r"saturday|sunday|tonight|morning|midnight|3am|4am)\b",
+            window,
+            re.IGNORECASE,
+        )
+    )
+    concrete_body_posture = bool(
+        F11_BODY_POSTURE_RE.search(window)
+        or re.search(
+            r"\b(?:sweat|sweats|woke|wakes|awake|insomnia|exhaustion|tired|lowers her voice)\b",
+            window,
+            re.IGNORECASE,
+        )
+    )
+
+    return {
+        "concrete_person": concrete_person,
+        "concrete_situation": concrete_situation,
+        "concrete_body_posture": concrete_body_posture,
+    }
+
+
+def _f11_first_paragraph_warns(first_paragraph: str) -> tuple[bool, dict]:
+    """
+    True when the HOOK opening should surface F11 WARN.
+
+    Fail when: (a) abstract-noun-phrase opening, or (b) zero of three scene-first signals.
+    """
+    para = first_paragraph.strip()
+    if not para:
+        return False, {"reason": "empty_paragraph"}
+
+    signals = _f11_scene_first_signals(para)
+    signal_count = sum(signals.values())
+    abstract_opening = bool(F11_ABSTRACT_OPENING_RE.match(para))
+
+    warns = abstract_opening or signal_count == 0
+    return warns, {
+        "signals": signals,
+        "signal_count": signal_count,
+        "abstract_opening": abstract_opening,
+    }
+
+
+def _detect_f11_hook_abstract_opening(
+    hook_atoms: list[tuple[str, str]],
+) -> list[RegisterFinding]:
+    """
+    Flag HOOK atom first paragraphs that open philosophy-first instead of scene-first.
+
+    Each hook_atoms entry is (atom_path, atom_file_text). Only v01 is checked when
+    check_all_variations=False (default integration path); set check_all_variations
+    via evaluate_register(hook_atoms=..., f11_all_variations=True).
+    """
+    findings: list[RegisterFinding] = []
+    for atom_path, atom_text in hook_atoms:
+        variations = _parse_hook_variation_first_paragraphs(atom_text)
+        if not variations:
+            continue
+        # V1: first variation only (production HOOK slot uses v01)
+        var_id, first_para = variations[0]
+        warns, meta = _f11_first_paragraph_warns(first_para)
+        if not warns:
+            continue
+        signals = meta.get("signals", {})
+        missing = [k for k, v in signals.items() if not v]
+        findings.append(RegisterFinding(
+            failure_id="F11",
+            severity="WARN",
+            chapter=None,
+            summary=(
+                f"HOOK {var_id} first paragraph lacks scene-first opening "
+                f"({meta.get('signal_count', 0)}/3 signals; abstract_opening={meta.get('abstract_opening')})"
+            ),
+            evidence={
+                "detector_id": "F11",
+                "severity": "WARN",
+                "atom_path": atom_path,
+                "variation": var_id,
+                "evidence_snippet": first_para[:F11_WINDOW_CHARS],
+                "signals": signals,
+                "missing_signals": missing,
+                "abstract_opening": meta.get("abstract_opening", False),
+                "cap": "HOOK-SCENE-FIRST-01",
+            },
+        ))
+    return findings
+
+
+def _detect_f11_hook_abstract_opening_all_variations(
+    hook_atoms: list[tuple[str, str]],
+) -> list[RegisterFinding]:
+    """Like _detect_f11_hook_abstract_opening but checks every HOOK variation in each atom."""
+    findings: list[RegisterFinding] = []
+    for atom_path, atom_text in hook_atoms:
+        for var_id, first_para in _parse_hook_variation_first_paragraphs(atom_text):
+            warns, meta = _f11_first_paragraph_warns(first_para)
+            if not warns:
+                continue
+            signals = meta.get("signals", {})
+            findings.append(RegisterFinding(
+                failure_id="F11",
+                severity="WARN",
+                chapter=None,
+                summary=(
+                    f"HOOK {var_id} first paragraph lacks scene-first opening "
+                    f"({meta.get('signal_count', 0)}/3 signals)"
+                ),
+                evidence={
+                    "detector_id": "F11",
+                    "severity": "WARN",
+                    "atom_path": atom_path,
+                    "variation": var_id,
+                    "evidence_snippet": first_para[:F11_WINDOW_CHARS],
+                    "signals": signals,
+                    "abstract_opening": meta.get("abstract_opening", False),
+                    "cap": "HOOK-SCENE-FIRST-01",
+                },
+            ))
+    return findings
+
+
+def load_hook_atoms_from_paths(paths: list[Path]) -> list[tuple[str, str]]:
+    """Read HOOK CANONICAL.txt paths into (relative_path, text) tuples for F11."""
+    loaded: list[tuple[str, str]] = []
+    for p in paths:
+        path = Path(p)
+        loaded.append((str(path), path.read_text(encoding="utf-8")))
+    return loaded
+
+
+# ─────────────────────────────────────────────────────────────────────────────
 # Aggregate verdict
 # ─────────────────────────────────────────────────────────────────────────────
 
@@ -542,6 +771,7 @@ def _route_suggested_lanes(findings: list[RegisterFinding]) -> list[str]:
         "F5": "Pearl_Architect (named-character roster strategy decision) + Pearl_Editor (story_atom roster updates)",
         "F6": "Pearl_Editor + Pearl_Writer (cadence variety in pedagogical-cadence atoms)",
         "F7": "Pearl_Architect (per-chapter practice-density cap) + Pearl_Editor (atom routing)",
+        "F11": "Pearl_Editor (HOOK/ANGLE_DEFINITION scene-first rewrite per HOOK-SCENE-FIRST-01)",
     }
     seen: set[str] = set()
     lanes: list[str] = []
@@ -564,12 +794,17 @@ def evaluate_register(
     persona_id: str = "",
     topic_id: str = "",
     quality_profile: str = "production",
+    hook_atoms: Optional[list[tuple[str, str]]] = None,
+    f11_all_variations: bool = False,
 ) -> RegisterGateResult:
     """
-    Score the rendered book against the F1-F7 detectors.
+    Score the rendered book against the F1-F7 detectors (+ optional F11 on HOOK atoms).
 
     F8 (citation grafting) is deferred until anchor corpus
     (artifacts/reference/trade_pub_anchors/) lands.
+
+    When hook_atoms is provided, each entry is (atom_path, CANONICAL.txt text) and
+    F11 runs per HOOK-SCENE-FIRST-01 (WARN-only in V1).
 
     Returns a RegisterGateResult with verdict + per-F findings + suggested
     remediation lanes.
@@ -584,23 +819,32 @@ def evaluate_register(
     findings += _detect_f5_named_character_continuity(chapters)
     findings += _detect_f6_cadence_repetition(chapters)
     findings += _detect_f7_practice_density(chapters)
+    if hook_atoms:
+        if f11_all_variations:
+            findings += _detect_f11_hook_abstract_opening_all_variations(hook_atoms)
+        else:
+            findings += _detect_f11_hook_abstract_opening(hook_atoms)
 
     verdict = _aggregate_verdict(findings)
     lanes = _route_suggested_lanes(findings)
 
+    book_metrics: dict = {
+        "chapter_count": len(chapters),
+        "word_count": len(book_text.split()),
+        "teacher_id": teacher_id,
+        "persona_id": persona_id,
+        "topic_id": topic_id,
+        "quality_profile": quality_profile,
+        "spec_version": "1.0.0",
+        "f8_deferred": "anchor_corpus_required",
+    }
+    if hook_atoms is not None:
+        book_metrics["f11_hook_atoms_checked"] = len(hook_atoms)
+
     return RegisterGateResult(
         verdict=verdict,
         findings=findings,
-        book_metrics={
-            "chapter_count": len(chapters),
-            "word_count": len(book_text.split()),
-            "teacher_id": teacher_id,
-            "persona_id": persona_id,
-            "topic_id": topic_id,
-            "quality_profile": quality_profile,
-            "spec_version": "1.0.0",
-            "f8_deferred": "anchor_corpus_required",
-        },
+        book_metrics=book_metrics,
         suggested_lanes=lanes,
     )
 
@@ -634,7 +878,7 @@ def evaluate_register_from_path(
 
 if __name__ == "__main__":
     import argparse
-    parser = argparse.ArgumentParser(description="Score a Pearl Prime book.txt against the register gate (F1-F7).")
+    parser = argparse.ArgumentParser(description="Score a Pearl Prime book.txt against the register gate (F1-F7, optional F11).")
     parser.add_argument("--book", required=True, help="Path to book.txt")
     parser.add_argument("--teacher", default="", help="Teacher ID (e.g. ahjan); enables F3 doctrine check")
     parser.add_argument("--persona", default="", help="Persona ID (info only)")

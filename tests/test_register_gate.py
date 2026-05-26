@@ -11,8 +11,11 @@ from pathlib import Path
 import pytest
 
 from phoenix_v4.quality.register_gate import (
+    _f11_first_paragraph_warns,
+    _parse_hook_variation_first_paragraphs,
     evaluate_register,
     evaluate_register_from_path,
+    load_hook_atoms_from_paths,
 )
 
 
@@ -230,6 +233,133 @@ CALIBRATION_BOOK = (
     / "ahjan_gen_z_professionals_anxiety_en_US_20260518T131809Z_round5"
     / "book.txt"
 )
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# F11 — HOOK atom first-paragraph abstract opening (HOOK-SCENE-FIRST-01)
+# ─────────────────────────────────────────────────────────────────────────────
+
+SCENE_FIRST_HOOK_V01 = (
+    "Diane woke at 3:14am with her heart already ahead of her, cataloging everything "
+    "that could go wrong before she'd opened her eyes."
+)
+
+PHILOSOPHY_FIRST_HOOK_V01 = (
+    "Your worth is your business. Your business is your worth. So every decision "
+    "becomes a referendum on your value as a human."
+)
+
+MIKI_SCENE_FIRST = (
+    "Somewhere right now, a person is sitting in a bathroom stall at their new job, "
+    "pressing their phone against their thigh so nobody hears the screen light up, "
+    "breathing through their mouth because their nose is too congested from the silent "
+    "crying they did in the car on the way here."
+)
+
+OMOTE_PHILOSOPHY_FIRST = (
+    "Nightfall strips the surface away. This happens automatically, without consent "
+    "and without ceremony. The lights go off."
+)
+
+MIXED_HOOK_ATOM = """## HOOK v01
+---
+
+---
+Awareness is the first casualty of a busy mind. The thoughts arrive before the body does.
+---
+
+## HOOK v02
+---
+
+---
+She sat in the kitchen at 5am, hands wrapped around a cold mug, listening to the refrigerator hum.
+---
+"""
+
+
+def test_f11_scene_first_paragraph_passes():
+    warns, _meta = _f11_first_paragraph_warns(SCENE_FIRST_HOOK_V01)
+    assert warns is False
+
+
+def test_f11_philosophy_first_paragraph_warns():
+    warns, meta = _f11_first_paragraph_warns(PHILOSOPHY_FIRST_HOOK_V01)
+    assert warns is True
+    assert meta.get("abstract_opening") is True
+
+
+def test_f11_miki_reference_scene_first_passes():
+    warns, _meta = _f11_first_paragraph_warns(MIKI_SCENE_FIRST)
+    assert warns is False
+
+
+def test_f11_omote_reference_philosophy_first_warns():
+    warns, meta = _f11_first_paragraph_warns(OMOTE_PHILOSOPHY_FIRST)
+    assert warns is True
+    assert meta.get("abstract_opening") is True
+
+
+def test_f11_mixed_atom_warns_on_v01_only():
+    variations = _parse_hook_variation_first_paragraphs(MIXED_HOOK_ATOM)
+    assert variations[0][0] == "v01"
+    warns_v01, _ = _f11_first_paragraph_warns(variations[0][1])
+    warns_v02, _ = _f11_first_paragraph_warns(variations[1][1])
+    assert warns_v01 is True
+    assert warns_v02 is False
+
+
+def test_f11_register_gate_integration_five_atom_sample():
+    """Full register run with 5 HOOK atoms from HOOK-SCENE-FIRST-01 empirical sample."""
+    atom_fixtures = [
+        ("atoms/midlife_women/anxiety/HOOK/CANONICAL.txt", SCENE_FIRST_HOOK_V01),
+        (
+            "atoms/entrepreneurs/anxiety/HOOK/CANONICAL.txt",
+            "Your chest tightens when the client goes silent. The invoice sits unpaid and the email sits unopened.",
+        ),
+        (
+            "atoms/midlife_women/imposter_syndrome/HOOK/CANONICAL.txt",
+            "She has twenty-two years of experience and a graduate degree and she still lowers her voice slightly when she speaks in the Monday meeting.",
+        ),
+        (
+            "atoms/midlife_women/sleep_anxiety/HOOK/CANONICAL.txt",
+            "She wakes at 3:17am and the night sweats have already passed and now it's the thoughts.",
+        ),
+        ("atoms/entrepreneurs/overthinking/HOOK/CANONICAL.txt", PHILOSOPHY_FIRST_HOOK_V01),
+    ]
+    hook_atoms = []
+    for path, first_para in atom_fixtures:
+        hook_atoms.append((
+            path,
+            f"## HOOK v01\n---\n\n---\n{first_para}\n---\n",
+        ))
+    body = "Chapter 1\n\nMinimal rendered book body for F11 integration.\n"
+    result = evaluate_register(body, hook_atoms=hook_atoms)
+    f11 = [f for f in result.findings if f.failure_id == "F11"]
+    assert len(f11) == 1
+    assert f11[0].severity == "WARN"
+    assert "overthinking" in f11[0].evidence["atom_path"]
+    assert "Your worth" in f11[0].evidence["evidence_snippet"]
+
+
+HOOK_ATOM_PATHS = [
+    REPO_ROOT / "atoms/midlife_women/anxiety/HOOK/CANONICAL.txt",
+    REPO_ROOT / "atoms/entrepreneurs/anxiety/HOOK/CANONICAL.txt",
+    REPO_ROOT / "atoms/midlife_women/imposter_syndrome/HOOK/CANONICAL.txt",
+    REPO_ROOT / "atoms/midlife_women/sleep_anxiety/HOOK/CANONICAL.txt",
+    REPO_ROOT / "atoms/entrepreneurs/overthinking/HOOK/CANONICAL.txt",
+]
+
+
+@pytest.mark.skipif(
+    not all(p.exists() for p in HOOK_ATOM_PATHS),
+    reason="HOOK atom corpus not checked out in this worktree",
+)
+def test_f11_integration_on_disk_hook_corpus_sample():
+    hook_atoms = load_hook_atoms_from_paths(HOOK_ATOM_PATHS)
+    result = evaluate_register("Chapter 1\n\nRendered hook chapter placeholder.\n", hook_atoms=hook_atoms)
+    f11 = [f for f in result.findings if f.failure_id == "F11"]
+    assert len(f11) == 1
+    assert any("overthinking" in f.evidence["atom_path"] for f in f11)
 
 
 @pytest.mark.skipif(not CALIBRATION_BOOK.exists(), reason="calibration book not on disk in this worktree")
