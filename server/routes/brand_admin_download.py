@@ -1,15 +1,22 @@
 """
-Thin Brand Admin download API (OPD-120).
+Thin Brand Admin download API (OPD-120 / OPD-145 split-at-build).
 
-Serves weekly admin ZIPs produced by ``scripts/brand/build_admin_packets.py`` (OPD-119/121).
+Serves weekly admin ZIPs: monolithic per-week or per-platform subdirs.
 """
 from __future__ import annotations
 
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
+from typing import Optional
 
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Query
 from fastapi.responses import FileResponse
+
+from server.brand_admin_platform import (
+    PLATFORM_SLUGS,
+    monolithic_zip_path,
+    platform_zip_path,
+)
 
 REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 COORD_DIR = REPO_ROOT / "artifacts" / "coordination"
@@ -20,10 +27,6 @@ router = APIRouter(prefix="/api/brand_admin", tags=["brand-admin-download"])
 
 def iso_week_monday(d: date) -> date:
     return d - timedelta(days=d.weekday())
-
-
-def admin_zip_path(brand_id: str, week: str) -> Path:
-    return PACKAGES_DIR / brand_id / week / f"{brand_id}_{week}.zip"
 
 
 def _relative_phrase(when: datetime) -> str:
@@ -78,22 +81,44 @@ async def get_coordination_status() -> dict:
     return coordination_build_status()
 
 
+def _stream_zip(zip_path: Path) -> FileResponse:
+    return FileResponse(
+        zip_path,
+        media_type="application/zip",
+        filename=zip_path.name,
+        headers={"Content-Disposition": f'attachment; filename="{zip_path.name}"'},
+    )
+
+
 @router.get("/download/{brand_id}/{week}")
-async def download_admin_packet(brand_id: str, week: str):
-    """Stream ``<brand>_<week>.zip`` or return actionable errors."""
+async def download_admin_packet(
+    brand_id: str,
+    week: str,
+    platform: Optional[str] = Query(None, description="Platform slug (OPD-145 split-at-build)"),
+):
+    """Stream monolithic ``<brand>_<week>.zip`` or per-platform ``<brand>_<week>_<platform>.zip``."""
     if not brand_id or ".." in brand_id or "/" in brand_id:
         raise HTTPException(status_code=400, detail="Invalid brand_id")
     if not week or ".." in week or "/" in week:
         raise HTTPException(status_code=400, detail="Invalid week")
 
-    zip_path = admin_zip_path(brand_id, week)
-    if zip_path.is_file() and zip_path.stat().st_size > 0:
-        return FileResponse(
-            zip_path,
-            media_type="application/zip",
-            filename=zip_path.name,
-            headers={"Content-Disposition": f'attachment; filename="{zip_path.name}"'},
+    if platform is not None:
+        plat = platform.strip()
+        if not plat or ".." in plat or "/" in plat or "\\" in plat:
+            raise HTTPException(status_code=400, detail="Invalid platform")
+        if plat not in PLATFORM_SLUGS:
+            raise HTTPException(status_code=400, detail=f"Unknown platform '{plat}'")
+        zip_path = platform_zip_path(PACKAGES_DIR, brand_id, week, plat)
+        if zip_path.is_file() and zip_path.stat().st_size > 0:
+            return _stream_zip(zip_path)
+        raise HTTPException(
+            status_code=404,
+            detail=f"No per-platform package for brand '{brand_id}' week '{week}' platform '{plat}'",
         )
+
+    zip_path = monolithic_zip_path(PACKAGES_DIR, brand_id, week)
+    if zip_path.is_file() and zip_path.stat().st_size > 0:
+        return _stream_zip(zip_path)
 
     week_dir = PACKAGES_DIR / brand_id / week
     manifest = week_dir / "manifest.json"

@@ -66,12 +66,15 @@ def test_history_weeks_max_12():
 
 
 def test_platform_rows_map_books_to_stores():
-    out = _run(brand_admin_public.brand_weekly("stillness_press"))
+    out = _run(brand_admin_public.brand_weekly("stillness_press", week="2026-W22"))
     rows = out["platform_rows"]
     kdp = next(r for r in rows if r["platform"] == "Amazon KDP")
     assert kdp["from_deliverable"] == "books"
+    assert kdp.get("platform_id") == "kdp"
     web = next(r for r in rows if r["platform"] == "WEBTOON")
     assert web["from_deliverable"] == "manga_panels"
+    if kdp.get("download_url"):
+        assert "?platform=kdp" in kdp["download_url"]
 
 
 def test_books_by_platform_stillness_press():

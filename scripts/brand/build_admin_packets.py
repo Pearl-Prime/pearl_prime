@@ -28,6 +28,11 @@ from scripts.brand.weekly_package_writer import TSV_COLUMNS, week_iso_label
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
+
+from server.brand_admin_platform import PLATFORM_SPECS, platform_zip_path  # noqa: E402
+
 
 def _parse_tsv(text: str) -> list[dict[str, str]]:
     buf = io.StringIO(text)
@@ -101,6 +106,47 @@ def build_zip_for_brand(
     return zip_out, missing
 
 
+def build_platform_zips_for_brand(
+    repo_root: Path,
+    brand_id: str,
+    week_iso: str,
+    *,
+    packages_dir: Path | None = None,
+) -> list[Path]:
+    """Emit per-platform ZIPs under ``<week>/<platform>/`` (OPD-145 split-at-build)."""
+    root = repo_root.resolve()
+    pkg_base = (packages_dir or root / "artifacts" / "weekly_packages").resolve()
+    manifest_path = pkg_base / brand_id / week_iso / "manifest.json"
+    if not manifest_path.is_file():
+        return []
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    readme = pkg_base / brand_id / week_iso / "README.txt"
+    built: list[Path] = []
+    deliverables = manifest.get("deliverables") or {}
+    for slug, dtype in PLATFORM_SPECS:
+        block = deliverables.get(dtype)
+        if not isinstance(block, dict):
+            continue
+        files = block.get("files") or []
+        if not files:
+            continue
+        plat_manifest = {
+            "brand_id": brand_id,
+            "week_iso": week_iso,
+            "platform": slug,
+            "deliverable_type": dtype,
+            "deliverables": {dtype: block},
+        }
+        zip_out = platform_zip_path(pkg_base, brand_id, week_iso, slug)
+        with zipfile.ZipFile(zip_out, "w", compression=zipfile.ZIP_DEFLATED) as zf:
+            zf.writestr("manifest.json", json.dumps(plat_manifest, indent=2) + "\n")
+            if readme.is_file():
+                zf.write(readme, "README.txt")
+        if zip_out.stat().st_size > 0:
+            built.append(zip_out)
+    return built
+
+
 def apply_download_urls(
     records: list[dict[str, str]],
     *,
@@ -144,6 +190,7 @@ def build_packets(
         zip_path, missing = build_zip_for_brand(root, bid, week_iso, packages_dir=pkg)
         if zip_path is None:
             continue
+        build_platform_zips_for_brand(root, bid, week_iso, packages_dir=pkg)
         rel = zip_path.resolve().relative_to(root).as_posix()
         built[bid] = rel
         if missing:

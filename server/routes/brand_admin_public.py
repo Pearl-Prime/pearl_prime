@@ -20,6 +20,12 @@ from typing import Any, Optional
 
 from fastapi import APIRouter, HTTPException
 
+from server.brand_admin_platform import (
+    PLATFORM_SLUG_BY_DISPLAY,
+    monolithic_zip_path,
+    platform_zip_path,
+)
+
 logger = logging.getLogger(__name__)
 
 REPO_ROOT = Path(__file__).resolve().parent.parent.parent
@@ -429,14 +435,26 @@ def _deliverables_from_manifest(manifest: Optional[dict[str, Any]]) -> dict[str,
 
 
 def _package_zip_url(brand_id: str, week: str) -> Optional[str]:
-    zip_path = PACKAGES_DIR / brand_id / week / f"{brand_id}_{week}.zip"
+    zip_path = monolithic_zip_path(PACKAGES_DIR, brand_id, week)
     if zip_path.is_file() and zip_path.stat().st_size > 0:
         return f"/api/brand_admin/download/{brand_id}/{week}"
     return None
 
 
+def _platform_download_url(brand_id: str, week: str, platform_display: str, count: int) -> Optional[str]:
+    if count <= 0:
+        return None
+    slug = PLATFORM_SLUG_BY_DISPLAY.get(platform_display)
+    if not slug:
+        return None
+    zip_path = platform_zip_path(PACKAGES_DIR, brand_id, week, slug)
+    if zip_path.is_file() and zip_path.stat().st_size > 0:
+        return f"/api/brand_admin/download/{brand_id}/{week}?platform={slug}"
+    return None
+
+
 def _package_status(brand_id: str, week: str) -> str:
-    zip_path = PACKAGES_DIR / brand_id / week / f"{brand_id}_{week}.zip"
+    zip_path = monolithic_zip_path(PACKAGES_DIR, brand_id, week)
     manifest = PACKAGES_DIR / brand_id / week / "manifest.json"
     if zip_path.is_file() and zip_path.stat().st_size > 0:
         return "current"
@@ -462,7 +480,11 @@ def _history_weeks(brand_id: str, current_week: str, limit: int = 12) -> list[st
     return weeks[:limit]
 
 
-def _platform_rows(deliverables: dict[str, dict[str, Any]], zip_url: Optional[str]) -> list[dict[str, Any]]:
+def _platform_rows(
+    brand_id: str,
+    week: str,
+    deliverables: dict[str, dict[str, Any]],
+) -> list[dict[str, Any]]:
     rows: list[dict[str, Any]] = []
     seen: set[tuple[str, str]] = set()
     for platform, dtype, label in PLATFORM_ROW_DEFS:
@@ -476,13 +498,15 @@ def _platform_rows(deliverables: dict[str, dict[str, Any]], zip_url: Optional[st
             blurb = f"{count} {label}"
         else:
             blurb = f"0 {label} this week"
+        dl = _platform_download_url(brand_id, week, platform, count)
         rows.append(
             {
                 "platform": platform,
+                "platform_id": PLATFORM_SLUG_BY_DISPLAY.get(platform),
                 "from_deliverable": dtype,
                 "blurb": blurb,
-                "download_url": zip_url if zip_url and count > 0 else None,
-                "deemphasized": count == 0,
+                "download_url": dl,
+                "deemphasized": dl is None,
             }
         )
     return rows
@@ -508,7 +532,7 @@ async def brand_weekly(
         "package_zip_url": zip_url,
         "package_status": _package_status(brand_id, week_iso),
         "deliverables": deliverables,
-        "platform_rows": _platform_rows(deliverables, zip_url),
+        "platform_rows": _platform_rows(brand_id, week_iso, deliverables),
         "history_weeks": _history_weeks(brand_id, week_iso),
         "build_hint": (
             None
