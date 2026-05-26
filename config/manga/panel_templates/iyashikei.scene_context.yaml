@@ -160,7 +160,7 @@ archetypes:
       background_bleed_max_pct: 7                    # table edge legitimately at bottom of frame
 
   secondary_character_face_close:
-    # OPD-147 (2026-05-26): first multi-character archetype — the on-frame
+    # OPD-149 (2026-05-26): first multi-character archetype — the on-frame
     # subject is the character_id named in the beat's `subject_actor` field
     # (not the protagonist). PuLID reference_sheet_path resolves from
     # subject_actor character_id, NOT from stage_characters[0]. Camera frames
@@ -311,7 +311,7 @@ archetypes:
     cutout_policy: null                              # composes from partner's cached layers
 
   typographic_caption_card:
-    # OPD-148 (2026-05-26): META archetype — no L0 / no L1 / no L2 / no L3
+    # OPD-150 (2026-05-26): META archetype — no L0 / no L1 / no L2 / no L3
     # render. Downstream lettering pipeline composes a typographic caption-
     # card layout directly from the beat's `caption_text` + `caption_style`
     # fields. Generator emits an empty-shape continuity_state YAML (no

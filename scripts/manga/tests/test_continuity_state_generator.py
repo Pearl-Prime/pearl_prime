@@ -454,7 +454,7 @@ class TestEp001RoundTrip(unittest.TestCase):
 
 
 # ─────────────────────────────────────────────────────────────────────────────
-# OPD-147 / OPD-148 — multi-character extension + new archetype dispatch
+# OPD-149 / OPD-150 — multi-character extension + new archetype dispatch
 # ─────────────────────────────────────────────────────────────────────────────
 
 
@@ -533,7 +533,7 @@ MULTI_CHAR_BEATSHEET_BASE = dedent("""
 
 
 class TestSecondaryCharacterFaceCloseDispatch(unittest.TestCase):
-    """OPD-147: secondary_character_face_close DEFINE.
+    """OPD-149: secondary_character_face_close DEFINE.
 
     Verifies the new archetype dispatches correctly under the multi-character
     extension: subject_actor binds the on-frame character, the protagonist is
@@ -600,7 +600,7 @@ class TestSecondaryCharacterFaceCloseDispatch(unittest.TestCase):
 
 
 class TestTypographicCaptionCardDispatch(unittest.TestCase):
-    """OPD-148: typographic_caption_card DEFINE (META cluster).
+    """OPD-150: typographic_caption_card DEFINE (META cluster).
 
     Verifies the new META archetype: empty character_state for ALL stage
     characters, caption_text + caption_style preserved, render_directive
@@ -656,7 +656,7 @@ class TestTypographicCaptionCardDispatch(unittest.TestCase):
 
 
 class TestMultiCharacterInheritance(unittest.TestCase):
-    """OPD-147 multi-character generator extension.
+    """OPD-149 multi-character generator extension.
 
     Verifies per-character inheritance: when beat N is Dr. Morimoto-focused,
     Mira's state (and dial cache) inherits from beat N-1 so that beat N+1

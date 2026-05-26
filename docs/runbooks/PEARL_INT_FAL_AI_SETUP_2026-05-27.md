@@ -2,7 +2,7 @@
 
 **Date:** 2026-05-27
 **Owner:** Pearl_Int
-**Trigger:** OPD-149 (2026-05-26) — operator approved Milestone H §7.1 fal.ai smoke test; blocked on credential setup
+**Trigger:** OPD-151 (2026-05-26) — operator approved Milestone H §7.1 fal.ai smoke test; blocked on credential setup
 **Estimated operator time:** 10-15 minutes (one-time)
 **Cost:** $0 to create account + key. Smoke test compute ≈ $1 (two-stage 1024×1024 panel pair).
 
@@ -90,7 +90,7 @@ cat /tmp/fal_validate.json
 - **HTTP:401** + auth-error JSON → key was copied wrong. Repeat Step 2.
 - **HTTP:000** or connection refused → network issue, not credential issue. Retry.
 
-### Step 6 — Mark OPD-149 ready for execution
+### Step 6 — Mark OPD-151 ready for execution
 
 Add a follow-up line to `artifacts/coordination/operator_decisions_log.tsv` (or reply in chat) noting that the FAL_KEY is now provisioned. The next Pearl_Int / Pearl_Dev session that picks up Milestone H §7.1 will see the credential, run the smoke test, and pipe results back.
 
@@ -103,7 +103,7 @@ Add a follow-up line to `artifacts/coordination/operator_decisions_log.tsv` (or 
 | `scripts/ci/integration_env_registry.py` | UPDATED | Adds `FAL_KEY` row so loader auto-exports it once it's in Keychain |
 | `docs/INTEGRATION_CREDENTIALS_REGISTRY.md` §12a | UPDATED | Single canonical doc entry for fal.ai (env var, validation, license, pricing) |
 | `docs/runbooks/PEARL_INT_FAL_AI_SETUP_2026-05-27.md` | NEW (this file) | The step-by-step you're reading |
-| `artifacts/coordination/operator_decisions_log.tsv` OPD-151 | — | Separate entry for the Cloudflare Workers Builds debt; not gated on fal.ai |
+| `artifacts/coordination/operator_decisions_log.tsv` OPD-153 | — | Separate entry for the Cloudflare Workers Builds debt; not gated on fal.ai |
 
 No production code references `FAL_KEY` yet — the smoke test dispatcher will land in a follow-up PR once the credential exists. This is intentional: Pearl_Int does NOT scaffold callers ahead of credentials per the discover-before-acting protocol.
 
@@ -131,7 +131,7 @@ No production code references `FAL_KEY` yet — the smoke test dispatcher will l
 
 ## Cross-references
 
-- OPD-149 — operator approval for the smoke test (blocker)
+- OPD-151 — operator approval for the smoke test (blocker)
 - `docs/MANGA_V5_COMPUTE_SCALING_OPTIONS.md` §3.4 + §7.1 — why fal.ai, what the smoke test measures
 - `docs/INTEGRATION_CREDENTIALS_REGISTRY.md` §12a — canonical credential entry
 - `scripts/ci/integration_env_registry.py` — env var registration (`FAL_KEY` row)

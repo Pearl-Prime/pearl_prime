@@ -2,7 +2,7 @@
 
 **Purpose:** Single canonical reference for every external service credential in Phoenix Omega.
 **Owner:** Pearl_Int / Pearl_Architect
-**Last updated:** 2026-05-27 (Added §12a fal.ai — serverless GPU inference, blocks Milestone H §7.1 per OPD-149; setup runbook + `FAL_KEY` env var registered)
+**Last updated:** 2026-05-27 (Added §12a fal.ai — serverless GPU inference, blocks Milestone H §7.1 per OPD-151; setup runbook + `FAL_KEY` env var registered)
 **Rule:** No actual secrets in this file. Only env var names, documentation, and pointers.
 
 ### Phase 1 + 2 scope (deliverables)
@@ -267,7 +267,7 @@ This reads the registry below and reports which env vars are set vs missing.
 | **GitHub workflows** | None yet (smoke test runs locally / interactively) |
 | **How to obtain** | fal.ai dashboard: https://fal.ai/dashboard/keys — sign in, "Add Key", copy once (shown only at creation). Free tier: small credit on signup. Full setup runbook: [docs/runbooks/PEARL_INT_FAL_AI_SETUP_2026-05-27.md](./runbooks/PEARL_INT_FAL_AI_SETUP_2026-05-27.md) |
 | **Required vs optional** | Optional — blocks Milestone H §7.1 smoke test until operator provisions. Not used elsewhere yet. |
-| **Status** | **NOT YET PROVISIONED** — Phoenix has no fal.ai account as of 2026-05-27. OPD-149 (operator-approved) gates Milestone H §7.1 smoke test on this credential. OPD-151 status. |
+| **Status** | **NOT YET PROVISIONED** — Phoenix has no fal.ai account as of 2026-05-27. OPD-151 (operator-approved) gates Milestone H §7.1 smoke test on this credential. OPD-153 status. |
 | **Pricing reference** | [`docs/MANGA_V5_COMPUTE_SCALING_OPTIONS.md`](./MANGA_V5_COMPUTE_SCALING_OPTIONS.md) §3.4: `fal-ai/qwen-image` stage 1 = $0.02/MP, `fal-ai/qwen-image-layered/lora` stage 2 = $0.06/image. Two-stage panel ≈ $0.08 (smoke test cost ≈ $1 for one ep_001 panel pair). |
 | **License / commercial-clean** | Apache-2.0 model + fal.ai commercial-clean ToS per scout `artifacts/research/iyashikei_style_lora_scout_2026-05-21.md` Channel 1 + scaling-options doc §3.4 line 150. |
 | **Env var name standard** | `FAL_KEY` is the canonical name the [`fal-client`](https://github.com/fal-ai/fal/tree/main/projects/fal_client) Python/JS SDK reads automatically. Do NOT use `FAL_API_KEY` or other variants — the SDK will not find them. |
