@@ -6,7 +6,7 @@ Covers:
     - Per-archetype dispatch (12 supported archetypes)
     - H1-H10 heuristic rules (pure-function correctness)
     - Emitter (YAML round-trip via safe_load)
-    - OPD-144 tension_override behavior
+    - OPD-146 tension_override behavior
     - End-to-end round-trip integration test on ep_001
 
 Run from repo root:
@@ -247,7 +247,7 @@ class TestHeuristicRules(unittest.TestCase):
         self.assertEqual(d, "steady")
 
     def test_h3_tension_override_per_opd_144(self):
-        # OPD-144: operator's tension_override takes precedence over literal H3
+        # OPD-146: operator's tension_override takes precedence over literal H3
         d = gen.derive_tension_direction(0.4, 0.3, tension_override="steady")
         self.assertEqual(d, "steady")
         d = gen.derive_tension_direction(0.3, 0.3, tension_override="rising")

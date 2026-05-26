@@ -28,7 +28,7 @@ Known-acceptable divergences (per OPD-142/143/144 + design notes §7.2):
       this archetype/scene to reconcile.
     - ep001_006 / ep001_026 tension direction: ground truth says 'steady' for
       +0.1 dial deltas (narrative semantics); generator emits 'rising' (literal
-      H3 semantics) per OPD-144 / design notes OPEN-3.
+      H3 semantics) per OPD-146 / design notes OPEN-3.
     - magnitude_delta_from_prev: ground truth carries 0.0 in several cases
       where the literal arithmetic delta is non-zero; per OPD-143, the
       generator uses literal arithmetic.
@@ -127,13 +127,13 @@ _KNOWN_ACCEPTABLE: list[tuple[str, str, str]] = [
     ("ep001_035", "relational_field.active_entities[0].role",
      "OPD-142: episode-card panel; role=implied_listener consistent with on_frame=false"),
 
-    # ── OPD-144 (H3 emotional_tension_vector.direction) ────────────────────
+    # ── OPD-146 (H3 emotional_tension_vector.direction) ────────────────────
     # Generator emits literal numerical-delta semantics; ground truth uses
-    # narrative semantics for several panels. Per OPD-144, generator is
+    # narrative semantics for several panels. Per OPD-146, generator is
     # canonical; operator can override via beat.tension_override.
     *[
         (pid, "relational_field.emotional_tension_vector.direction",
-         f"OPD-144: literal H3 numerical-delta semantics differ from ground-truth narrative")
+         f"OPD-146: literal H3 numerical-delta semantics differ from ground-truth narrative")
         for pid in (
             "ep001_004", "ep001_005", "ep001_006", "ep001_007", "ep001_010",
             "ep001_011", "ep001_013", "ep001_014", "ep001_015", "ep001_017",

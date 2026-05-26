@@ -36,7 +36,7 @@ Encoded operator decisions (from artifacts/coordination/operator_decisions_log.t
     OPD-143 (OPEN-2, ep001_017 dial citation):
         Generator computes magnitude_delta arithmetically from inheritance chain.
         Comment field is operator prose; generator never reads it.
-    OPD-144 (OPEN-3, tension_vector.direction):
+    OPD-146 (OPEN-3, tension_vector.direction):
         Generator default = literal H3 (numerical delta sign mapped to enum).
         Operator override via beat.tension_override (enum: rising|steady|easing|reversing).
 """
@@ -385,7 +385,7 @@ def load_beatsheet(path: Path) -> dict:
                 f"{path_str}.beat_type: {bt!r} not in {sorted(_LEGAL_BEAT_TYPES)}"
             )
 
-        # tension_override enum check (OPD-144)
+        # tension_override enum check (OPD-146)
         to = beat.get("tension_override")
         if to is not None and to not in _LEGAL_TENSION_OVERRIDES:
             raise BeatsheetValidationError(
@@ -549,12 +549,12 @@ def derive_tension_direction(
     prev_dial: float | None,
     tension_override: str | None,
 ) -> str:
-    """H3 + OPD-144: emotional_tension_vector.direction.
+    """H3 + OPD-146: emotional_tension_vector.direction.
 
     Default (literal): numerical delta sign → enum.
         delta > 0 → 'rising'
         delta < 0 → 'easing'   (V4 ground truth uses 'diminishing' as well;
-                                 OPD-144 normalized to 'easing' but legacy
+                                 OPD-146 normalized to 'easing' but legacy
                                  ground truth has neither — only 'rising' and
                                  'steady'. Documenting this distinction is
                                  deliberate; the diff harness treats this as a
@@ -562,7 +562,7 @@ def derive_tension_direction(
                                  enum reconciliation in Phase B.2.)
         delta == 0 → 'steady'
 
-    OPD-144 override: if tension_override is set, return that verbatim.
+    OPD-146 override: if tension_override is set, return that verbatim.
     """
     if tension_override is not None:
         return tension_override

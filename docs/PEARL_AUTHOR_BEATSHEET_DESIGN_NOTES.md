@@ -7,7 +7,7 @@
 
 **Version history:**
 - **v1.0** (2026-05-22): Initial reverse-extraction; 12 ep_001 archetypes dispatched; single-character semantics.
-- **v1.1** (2026-05-24): Schema gains `tension_override` field per OPD-144.
+- **v1.1** (2026-05-24): Schema gains `tension_override` field per OPD-146.
 - **v1.2** (2026-05-26): Multi-character generator extension shipped (joint with OPDs 147+148). New archetypes: `secondary_character_face_close` (OPD-147, parametrized via `subject_actor`) and `typographic_caption_card` (OPD-148, META cluster). Promoted from declared-but-unimplemented (ep_002 surfaced): `walking_in_thought_medium`, `miyazaki_ma_pause`, `window_light_threshold`. OPEN-5 and OPEN-7 resolved.
 
 **Companion deliverables:**
