@@ -29,8 +29,11 @@ def test_long_form_with_angle_injects_definition_and_callbacks():
     assert result.angle_layer_by_chapter
     for ch_idx in range(1, 12):
         row = result.slot_definitions[ch_idx]
-        assert row[0] == "HOOK"
-        assert row[1] == "ANGLE_CALLBACK"
+        # Per Holistic v2 Phase B: ANGLE_CALLBACK now leads each downstream chapter
+        # (was HOOK + ANGLE_CALLBACK in pre-Holistic-v2 order). Both still present.
+        assert "ANGLE_CALLBACK" in row
+        assert "HOOK" in row
+        assert row[0] == "ANGLE_CALLBACK"
         assert ch_idx + 1 in result.angle_layer_by_chapter
 
 
