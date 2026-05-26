@@ -289,7 +289,7 @@ beats:
   # ── ACTIVATION 2 — elevator + waiting ─────────────────────────────────────
 
   - beat_id: b11
-    # OPD-146 (2026-05-26): DOWNGRADE per Pearl_Architect brief recommendation.
+    # OPD-148 (2026-05-26): DOWNGRADE per Pearl_Architect brief recommendation.
     # Operator: "elevator_interior_micro_tension — DOWNGRADE. The brief's
     # reasoning is correct. Single beat, one episode, scene context carries the
     # elevator semantics. Don't bloat the dispatch table for one panel."
@@ -314,7 +314,7 @@ beats:
         hand_state: relaxed_open
     shared_attention_anchor: null
     notes: |
-      Downgraded to character_face_micro_tension per OPD-146.
+      Downgraded to character_face_micro_tension per OPD-148.
       Pre-downgrade rationale (kept for archive — explains why it was authored
       as a candidate originally): elevator interior is a distinct iyashikei
       composition register (enclosed, vertical motion, faceless extra in frame).
@@ -438,12 +438,12 @@ beats:
       OPEN-E: scene_id 'office_meeting_room' needs scene_inventory backfill.
 
   - beat_id: b17
-    # OPD-147 (2026-05-26): DEFINE accepted — secondary_character_face_close is
+    # OPD-149 (2026-05-26): DEFINE accepted — secondary_character_face_close is
     # now a supported iyashikei archetype (joint workstream with multi-character
     # generator extension). Per brief §3.2 the subject_actor field is required
     # to bind PuLID to the right reference sheet.
     archetype: secondary_character_face_close
-    subject_actor: dr_morimoto             # OPD-147: parametrized on-frame focal character
+    subject_actor: dr_morimoto             # OPD-149: parametrized on-frame focal character
     beat_type: micro
     intent: "Close on Dr. Morimoto. Speaking. Calm, professional. Not warm, not cold."
     character:
@@ -460,7 +460,7 @@ beats:
         hand_state: relaxed_open
     shared_attention_anchor: dr_morimoto
     notes: |
-      Per OPD-147: DEFINE accepted. V3.1 PANEL 17 CONFIRMED close-up. Operator
+      Per OPD-149: DEFINE accepted. V3.1 PANEL 17 CONFIRMED close-up. Operator
       reading: chapter_script writer-note "never close-up" was aspirational
       shorthand for "Dr. Morimoto is not a focal character"; the literal panel
       description (and V3.1 render) IS a close-up. The new archetype binds
@@ -547,9 +547,9 @@ beats:
     notes: "rhymes structurally with ep_001 b10 (reaching) and ep_001 b19 (sip taken)"
 
   - beat_id: b22
-    # OPD-147 (2026-05-26): DEFINE accepted (same as b17).
+    # OPD-149 (2026-05-26): DEFINE accepted (same as b17).
     archetype: secondary_character_face_close
-    subject_actor: dr_morimoto             # OPD-147: parametrized on-frame focal character
+    subject_actor: dr_morimoto             # OPD-149: parametrized on-frame focal character
     beat_type: micro
     intent: "Dr. Morimoto across the table. Not impatient. Just waiting. 'Take your time.'"
     character:
@@ -565,7 +565,7 @@ beats:
         gaze: at_named_character_mira_aoki
         hand_state: relaxed_open
     shared_attention_anchor: dr_morimoto
-    notes: "second instance of secondary_character_face_close (per OPD-147 DEFINE); same composition as b17"
+    notes: "second instance of secondary_character_face_close (per OPD-149 DEFINE); same composition as b17"
 
   # ── GROUND 3 — internal anchor: the smoke detector frame applied ─────────
 
@@ -587,12 +587,12 @@ beats:
     shared_attention_anchor: null
 
   - beat_id: b24
-    # OPD-148 (2026-05-26): DEFINE accepted — typographic_caption_card is now
+    # OPD-150 (2026-05-26): DEFINE accepted — typographic_caption_card is now
     # a supported iyashikei META archetype. Per brief §3.3 the caption_style
     # and caption_text fields are required so the lettering pipeline can
     # render the card directly (no L0/L1/L2/L3 stack).
     archetype: typographic_caption_card
-    caption_style: mid_episode_strip      # OPD-148: mid-episode caption strip across near-black panel
+    caption_style: mid_episode_strip      # OPD-150: mid-episode caption strip across near-black panel
     caption_text: "It's not danger. It's just steam."   # from chapter_script narrator_caption_by_locale.en_US
     beat_type: micro
     intent: "ALMOST black panel — thin frame of light + caption strip. 'It's not danger. It's just steam.'"
@@ -601,7 +601,7 @@ beats:
       dr_morimoto: null                  # explicit null
     shared_attention_anchor: null
     notes: |
-      Per OPD-148: DEFINE accepted. META archetype — generator emits
+      Per OPD-150: DEFINE accepted. META archetype — generator emits
       caption_text + caption_style + render_directive=typographic_only,
       suppresses character_state for all stage_characters, drops
       scene_state.light_rig_id. Downstream lettering pipeline composes the

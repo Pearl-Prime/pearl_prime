@@ -103,7 +103,7 @@ V41_FACE_BOILERPLATE = (
 )
 
 # Archetypes that emit the v41_per_axis_edge_resolved + boilerplate (H8).
-# secondary_character_face_close joins per OPD-147 — same CU face framing as
+# secondary_character_face_close joins per OPD-149 — same CU face framing as
 # character_quiet_face, identical per-axis subject_must_not_touch_edge contract.
 V41_FACE_ARCHETYPES = {
     "character_quiet_face",
@@ -113,8 +113,8 @@ V41_FACE_ARCHETYPES = {
 
 # Per design notes §3 — the 14 archetypes supported in V1 + extension:
 #   - 12 from ep_001 (Milestone C Step 1)
-#   - +2 from ep_002 (OPD-147 secondary_character_face_close,
-#     OPD-148 typographic_caption_card, this PR — joint with multi-character
+#   - +2 from ep_002 (OPD-149 secondary_character_face_close,
+#     OPD-150 typographic_caption_card, this PR — joint with multi-character
 #     generator extension).
 SUPPORTED_ARCHETYPES = {
     "sparse_establishing_wide",
@@ -129,14 +129,14 @@ SUPPORTED_ARCHETYPES = {
     "kettle_steam_macro",
     "long_drop_decompression",
     "pendulation_pair_visual_rhyme",
-    # OPD-147 + OPD-148 (2026-05-26) — joint with multi-character extension:
+    # OPD-149 + OPD-150 (2026-05-26) — joint with multi-character extension:
     "secondary_character_face_close",
     "typographic_caption_card",
 }
 
 # Archetypes that REQUIRE the beat to declare `subject_actor: <character_id>`
 # binding the on-frame character to a specific entry in stage_characters.
-# Per OPD-147: secondary_character_face_close is the first parametrized
+# Per OPD-149: secondary_character_face_close is the first parametrized
 # archetype; future multi-character archetypes (e.g. shared_meal_table_medium
 # when promoted from declared-but-unimplemented) will join this set.
 ARCHETYPES_REQUIRING_SUBJECT_ACTOR = {
@@ -146,7 +146,7 @@ ARCHETYPES_REQUIRING_SUBJECT_ACTOR = {
 # Archetypes that suppress ALL stage_characters (META cluster: typographic
 # caption cards, future title cards, etc.). For these, the generator emits
 # empty character_state for every stage_character and on_frame=false for every
-# active_entity. Per OPD-148.
+# active_entity. Per OPD-150.
 META_ARCHETYPES_SUPPRESSING_ALL_CHARACTERS = {
     "typographic_caption_card",
 }
@@ -171,7 +171,7 @@ DECLARED_BUT_UNIMPLEMENTED_ARCHETYPES = {
 }
 
 # ep_002-surfaced archetypes (Milestone B Step 2 minimal dispatch). These
-# are NOT part of OPD-147/OPD-148 (those are the two new candidates); they
+# are NOT part of OPD-149/OPD-150 (those are the two new candidates); they
 # were already declared in iyashikei.yaml but not dispatched. ep_002's
 # beatsheet references them, so we add minimal dispatch here so the
 # generator's dry-run flows through. The dispatch is "plain" — no special
@@ -198,7 +198,7 @@ ARCHETYPE_DEFAULT_POSE_ID = {
     "seasonal_anchor_object": "front_portrait_seated_calm",  # off-frame
     "kettle_steam_macro": "front_portrait_seated_calm",  # off-frame
     "long_drop_decompression": "full_figure_standing_at_window",
-    # OPD-147: default pose for the on-frame subject_actor of
+    # OPD-149: default pose for the on-frame subject_actor of
     # secondary_character_face_close. Applies to the subject_actor character
     # ONLY (not to the protagonist, who is off-frame for this archetype).
     "secondary_character_face_close": "face_close_seated_calm",
@@ -225,7 +225,7 @@ ARCHETYPE_DEFAULT_HAND_STATE = {
     "pet_companion_micro": "relaxed_open",
     "long_drop_decompression": "relaxed_open",
     "sparse_establishing_wide": "relaxed_open",
-    # OPD-147: applies to subject_actor — secondary character is calm-
+    # OPD-149: applies to subject_actor — secondary character is calm-
     # professional baseline; hands relaxed in lap or on table.
     "secondary_character_face_close": "relaxed_open",
     # ep_002-surfaced: walking + threshold archetypes default to relaxed-open
@@ -273,11 +273,11 @@ ARCHETYPE_SUBJECT_TYPE = {
     "kettle_steam_macro": None,
     "long_drop_decompression": None,
     "pendulation_pair_visual_rhyme": None,
-    # OPD-147: subject is the (parametrized) subject_actor — the protagonist
+    # OPD-149: subject is the (parametrized) subject_actor — the protagonist
     # is off-frame by default. Per-character on_frame derivation lives in
     # derive_on_frame_for_character() (multi-character extension).
     "secondary_character_face_close": "character_face_only",
-    # OPD-148: META — no character on-frame, no L2 cutout, no rendering
+    # OPD-150: META — no character on-frame, no L2 cutout, no rendering
     # via the L0/L1/L2/L3 stack.
     "typographic_caption_card": None,
     # ep_002-surfaced — minimal dispatch (subject_type values match
@@ -400,7 +400,7 @@ def load_beatsheet(path: Path) -> dict:
             # validator should not block authoring before dispatch lands.
             pass
 
-        # OPD-147: archetypes requiring subject_actor MUST declare it, and
+        # OPD-149: archetypes requiring subject_actor MUST declare it, and
         # the value MUST be a character_id present in stage_characters.
         if arch in ARCHETYPES_REQUIRING_SUBJECT_ACTOR:
             sa = beat.get("subject_actor")
@@ -414,7 +414,7 @@ def load_beatsheet(path: Path) -> dict:
                     f"{path_str}.subject_actor: {sa!r} not in stage_characters {stage}"
                 )
 
-        # OPD-148: typographic_caption_card requires caption_style + caption_text.
+        # OPD-150: typographic_caption_card requires caption_style + caption_text.
         if arch == "typographic_caption_card":
             cs = beat.get("caption_style")
             if cs is None:
@@ -554,7 +554,7 @@ def derive_tension_direction(
     Default (literal): numerical delta sign → enum.
         delta > 0 → 'rising'
         delta < 0 → 'easing'   (V4 ground truth uses 'diminishing' as well;
-                                 OPD-146 normalized to 'easing' but legacy
+                                 OPD-148 normalized to 'easing' but legacy
                                  ground truth has neither — only 'rising' and
                                  'steady'. Documenting this distinction is
                                  deliberate; the diff harness treats this as a
@@ -671,7 +671,7 @@ def resolve_active_character(
 ) -> str:
     """Determine which character_id is the FOCAL on-frame subject for this beat.
 
-    Multi-character extension (OPD-147, this PR). Order of precedence:
+    Multi-character extension (OPD-149, this PR). Order of precedence:
         1. If beat declares `subject_actor: <character_id>`, use it (validated
            at load_beatsheet time to be present in stage_characters).
         2. Else fall back to `stage_characters[0]` (the protagonist).
@@ -696,7 +696,7 @@ def derive_on_frame_for_character(
     stage_characters: list,
     op_has_state: bool = False,
 ) -> bool:
-    """Multi-character on_frame derivation (OPD-147 extension of H5).
+    """Multi-character on_frame derivation (OPD-149 extension of H5).
 
     Augments derive_on_frame() with multi-character semantics:
         - For META_ARCHETYPES_SUPPRESSING_ALL_CHARACTERS (typographic_caption_card):
@@ -715,11 +715,11 @@ def derive_on_frame_for_character(
     if beat_character_block and "on_frame" in beat_character_block:
         return bool(beat_character_block["on_frame"])
 
-    # 2. META archetypes (OPD-148): no character on-frame ever.
+    # 2. META archetypes (OPD-150): no character on-frame ever.
     if archetype in META_ARCHETYPES_SUPPRESSING_ALL_CHARACTERS:
         return False
 
-    # 3. subject_actor archetypes (OPD-147): only the named actor is on-frame.
+    # 3. subject_actor archetypes (OPD-149): only the named actor is on-frame.
     if archetype in ARCHETYPES_REQUIRING_SUBJECT_ACTOR:
         subject_actor = beat.get("subject_actor")
         return cid == subject_actor
@@ -905,7 +905,7 @@ def build_panel(
     _STATE_FIELDS = {"pose_id", "expression_dial", "emotional", "gaze",
                      "gaze_direction", "hand_state", "breath_phase"}
 
-    # OPD-148 META suppression: typographic_caption_card and similar
+    # OPD-150 META suppression: typographic_caption_card and similar
     # META cluster archetypes suppress all stage_characters globally —
     # the panel is purely typographic, no L2 cutout, no character_state.
     # This is checked BEFORE the per-character loop so it cleanly applies
@@ -933,7 +933,7 @@ def build_panel(
             )
             op_authored_anything = isinstance(beat_cs, dict) and len(beat_cs) > 0
 
-            # OPD-147 multi-character: for ARCHETYPES_REQUIRING_SUBJECT_ACTOR,
+            # OPD-149 multi-character: for ARCHETYPES_REQUIRING_SUBJECT_ACTOR,
             # the protagonist is off-frame (POV-from-protagonist). If the
             # operator didn't author state for the protagonist, suppress them
             # (no character_state entry emitted) — matches ep_002 b17 / b22
@@ -1083,7 +1083,7 @@ def build_panel(
 
     # ── Step 3g: relational_field ──
     # Per-stage_character entry in active_entities (multi-character extension
-    # per OPD-147). For single-character episodes (ep_001) the loop runs once
+    # per OPD-149). For single-character episodes (ep_001) the loop runs once
     # exactly as in V1 — behavior is byte-identical. For multi-character beats
     # (ep_002+) each stage_character gets its own active_entities entry with
     # its own on_frame state derived from archetype + subject_actor binding.
@@ -1106,7 +1106,7 @@ def build_panel(
         elif explicit_on_frame is not None:
             on_frame = explicit_on_frame
         else:
-            # OPD-147 multi-character extension of H5: route through
+            # OPD-149 multi-character extension of H5: route through
             # derive_on_frame_for_character() which handles META archetypes
             # (typographic_caption_card) and subject_actor archetypes
             # (secondary_character_face_close) BEFORE falling back to V1
@@ -1240,7 +1240,7 @@ def build_panel(
         if V41_FACE_BOILERPLATE not in continuity_invariants:
             continuity_invariants.append(V41_FACE_BOILERPLATE)
 
-    # OPD-148: typographic_caption_card emits caption_text + caption_style +
+    # OPD-150: typographic_caption_card emits caption_text + caption_style +
     # render_directive=typographic_only, suppresses scene_state.light_rig_id
     # (no L0 light rig — the lettering pipeline renders the page directly).
     # character_state is already empty (META suppression upstream).
@@ -1251,7 +1251,7 @@ def build_panel(
         # Drop light_rig_id from scene_state — caption-card has no L0 lighting.
         panel.get("scene_state", {}).pop("light_rig_id", None)
 
-    # OPD-147: secondary_character_face_close emits subject_actor so downstream
+    # OPD-149: secondary_character_face_close emits subject_actor so downstream
     # prompt compiler / PuLID can bind the right reference sheet. The active
     # subject is the parametrized character, NOT stage_characters[0].
     if archetype in ARCHETYPES_REQUIRING_SUBJECT_ACTOR:
@@ -1296,9 +1296,9 @@ def _archetype_primary_beat_type(archetype: str) -> str:
         "kettle_steam_macro": "spatial",
         "long_drop_decompression": "long_drop",
         "pendulation_pair_visual_rhyme": "micro",
-        # OPD-147: secondary character CU is micro (per iyashikei.yaml primary).
+        # OPD-149: secondary character CU is micro (per iyashikei.yaml primary).
         "secondary_character_face_close": "micro",
-        # OPD-148: caption-card mid-episode strip is micro; end-episode card
+        # OPD-150: caption-card mid-episode strip is micro; end-episode card
         # is standard (operator overrides per beat).
         "typographic_caption_card": "micro",
         # ep_002-surfaced primaries from iyashikei.yaml.
