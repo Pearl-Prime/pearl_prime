@@ -1833,3 +1833,129 @@ overlay_param:
 **Authority:** This cap entry + the four phase PRs (1219, 1220, this PR, and the Phase 5 PR).
 
 ---
+
+### HOOK-SCENE-FIRST-01 — HOOK + ANGLE_DEFINITION atoms must open scene-first (1 specific person + 1 specific situation + 1 specific body posture); philosophy may appear AFTER the scene, never before (OPD-144 ratified 2026-05-21)
+
+**Status:** **ratified** (operator decision 2026-05-21; logged 2026-05-23 via PR #1292; cap entry authored via this PR).
+
+**Context:** Operator 2026-05-21 comparison of two AUTHORED reference books in `artifacts/pipeline_examples/`:
+
+- **Miki — scene-first opening** (`artifacts/pipeline_examples/miki/book_miki_imposter_syndrome_15min.txt:26`): *"Somewhere right now, a person is sitting in a bathroom stall at their new job, pressing their phone against their thigh so nobody hears the screen light up, breathing through their mouth because their nose is too congested from the silent crying they did in the car on the way here."* Contains (1) specific person ("a person… at their new job"), (2) specific situation ("sitting in a bathroom stall"), (3) specific body posture ("pressing their phone against their thigh… breathing through their mouth"). Reader recognition arrives in sentence 1.
+- **Omote — philosophy-first opening** (`artifacts/pipeline_examples/omote/book_omote_sleep_anxiety_15min.txt:27`): *"Nightfall strips the surface away. This happens automatically, without consent and without ceremony. The lights go off. The room darkens. The sounds of the day recede — traffic, conversation, the hum of machines and obligations and schedules and the low buzz of perpetual performance. And in the sudden quiet, the interior speaks."* Abstract event; no specific person; no specific body posture. Concrete reader recognition arrives at paragraph 4 ("The email that went unanswered…"). Operator: *"The Omote book ch1 is not as good as the Miki book."*
+
+Both are AUTHORED reference texts (not pipeline-generated output) under `artifacts/pipeline_examples/{teacher}/`. The diagnosis is about an authoring rule (which way to open a HOOK), not a pipeline bug. Operator decision of record: **OPD-144** in `artifacts/coordination/operator_decisions_log.tsv` (recovered from `old_chat_specs/Untitled 127.txt` L91-110, landed via PR #1292 commit `74a8c6fa5`). Affected atom paths per OPD-144: `atoms/*/*/HOOK/CANONICAL.txt` and `atoms/*/*/ANGLE_DEFINITION/CANONICAL.txt`.
+
+**Decision:** **HOOK atom first paragraph MUST contain (1) one specific person, (2) one specific situation/setting, (3) one specific body posture.** Philosophical or abstract claims may appear AFTER the scene, never before. This is the binding authoring rule for:
+
+| Atom type | Path glob | Scope of rule |
+|---|---|---|
+| `HOOK` | `atoms/<persona>/<topic>/HOOK/CANONICAL.txt` | First paragraph must be scene-first |
+| `ANGLE_DEFINITION` | `atoms/<persona>/<topic>/ANGLE_DEFINITION/CANONICAL.txt` | First paragraph must be scene-first (per OPD-144 affected_paths) |
+
+Reading-order rule: **scene first, philosophy second.** Binding for NEW authoring as of 2026-05-21. EXISTING atoms are reviewed under the Pearl_Editor brief addendum ws (see Action items §1) — atoms that violate the rule are tagged for rewrite queue but NOT rewritten in that ws; the rewrite queue is a separate downstream ws gated on the brief addendum landing.
+
+**Anti-drift check:**
+
+- Does NOT contradict `TEMPLATE-UNIVERSAL-01` — HOOK is one of the 10 sections in `SOMATIC_10_SLOT_GRID`; this is a within-section authoring constraint, supplemental to the 12-spine × 10-section × 3-floor universal structure; doesn't change shape.
+- Does NOT contradict `BESTSELLER-INJECTIONS-MANDATORY-01` — HOOK is grid-architectural across all profiles per `SOMATIC_10_SLOT_GRID`; this entry tightens HOOK *content quality*, doesn't add or remove an injection.
+- Does NOT contradict `EXERCISE-BANK-RESOLUTION-01` — EXERCISE-scoped, no overlap.
+- Does NOT contradict `SPEC-739-THRESHOLD-01` / `SPEC-739-VALIDATOR-MULTISOURCE-01` — threshold is shape/count of variations; this is content quality within a variation.
+- Does NOT contradict `BG-PR-09 Phase-2 closeout` — STORY-at-sec-2/5/9 grid swap, no HOOK overlap.
+- REINFORCES `PEARL-EDITOR-UPSTREAM-01` — routes the brief addendum + corpus tagging to Pearl_Editor consistent with the authority-flow framing (content authority precedes render consumption).
+- No new spec authored in this entry. The scene-first rule MAY amend `PEARL_PRIME_BESTSELLER_WRITING_OVERLAY_SPEC.md` in a future ws gated on Pearl_Editor brief addendum landing (deferred — Open Question Q2 below).
+
+**Empirical state:** Sample of 5 HOOK CANONICAL.txt files (out of 211 total HOOK atoms surveyed during discovery): `atoms/midlife_women/anxiety/HOOK/CANONICAL.txt`, `atoms/entrepreneurs/anxiety/HOOK/CANONICAL.txt`, `atoms/midlife_women/imposter_syndrome/HOOK/CANONICAL.txt`, `atoms/midlife_women/sleep_anxiety/HOOK/CANONICAL.txt`, `atoms/entrepreneurs/overthinking/HOOK/CANONICAL.txt`. Distribution: **4/5 scene-first, 1/5 philosophy-first.** The philosophy-first atom is `atoms/entrepreneurs/overthinking/HOOK/CANONICAL.txt:7`, opening with *"Your worth is your business. Your business is your worth. So every decision becomes a referendum on your value as a human."* The sample is too small to be authoritative across the full 211-atom corpus, but it confirms the problem is **real and present** (~20% philosophy-first in this random slice) — worth a brief addendum + a detector, not hypothetical. Full corpus tagging is Pearl_Editor's ws scope.
+
+**F11 detector ID claim:** Operator chose F11 per OPD-144 (`phoenix_v4/quality/register_gate.py (F11 detector target)` in OPD-144 affected_paths). Grep verification confirms F11 is unclaimed:
+
+```
+$ grep -RIn 'F11\b\|register.gate.F11\|RG.F11' . --include='*.py' --include='*.yaml' --include='*.md'  (excluding worktrees + old_chat_specs)
+(no output)
+```
+
+F1–F8 currently claimed in `phoenix_v4/quality/register_gate.py:10-17` (F8 deferred pending anchor corpus at `artifacts/reference/trade_pub_anchors/`). F9 and F10 are unclaimed gaps — operator chose F11 explicitly, leaving F9/F10 reserved for future detectors (cap entry records this empirically; not Pearl_Architect's decision to renumber).
+
+**Action items:**
+
+1. **Pearl_Editor (`ws_pearl_editor_hook_scene_first_brief_addendum_20260523`)** — author brief addendum codifying the scene-first HOOK + ANGLE_DEFINITION authoring rule per this cap entry; review existing `atoms/*/*/HOOK/CANONICAL.txt` corpus (211 files) AND existing `atoms/*/*/ANGLE_DEFINITION/CANONICAL.txt` corpus; tag philosophy-first atoms for rewrite queue (do NOT rewrite in this ws — queue only). Output: `docs/PEARL_EDITOR_BRIEF.md` addendum section + a tagging artifact (e.g., `artifacts/qa/HOOK_SCENE_FIRST_TAGGING_*.tsv` — Pearl_Editor's call on format). Iteration cap = 1 PR. No code edits.
+2. **Pearl_Dev (`ws_pearl_dev_register_gate_f11_hook_abstract_detector_20260523`)** — implement register-gate **F11: HOOK atom first-paragraph abstract-opening detector**. Triggers on first paragraph lacking concrete-person + concrete-situation + concrete-body-posture signal. Surface as register-gate **WARN** (not HARD_FAIL) until brief-addendum corpus pass completes. Add F11 line to `phoenix_v4/quality/register_gate.py:10-17` docstring + implement detector function alongside F1-F7. Iteration cap = 1 PR. Soft dependency on Pearl_Editor's corpus tagging (informs detector's edge-case heuristics) but NOT a hard blocker — Pearl_Dev can implement against the cap-entry rule text alone.
+3. **Pearl_PM** — route `ws_pearl_editor_hook_scene_first_brief_addendum_20260523` and `ws_pearl_dev_register_gate_f11_hook_abstract_detector_20260523` (both opened in `artifacts/coordination/ACTIVE_WORKSTREAMS.tsv` via this PR) for execution.
+4. **Pearl_Architect (deferred ws)** — if/when Pearl_Editor brief addendum lands and the corpus rewrite queue is non-trivial, open a follow-up cap entry / amendment considering whether the scene-first rule should be amended INTO `PEARL_PRIME_BESTSELLER_WRITING_OVERLAY_SPEC.md` as a spec-level rule (not just brief-addendum). Open Question Q2 below.
+
+**Handoffs:**
+
+- Pearl_PM → routes `ws_pearl_editor_hook_scene_first_brief_addendum_20260523` + `ws_pearl_dev_register_gate_f11_hook_abstract_detector_20260523` → trigger = this cap-entry PR merged (which also requires PR #1292 to merge first, since this PR is stacked on PR #1292).
+- Pearl_Editor → `ws_pearl_editor_hook_scene_first_brief_addendum_20260523` → independent execution after Pearl_PM routes.
+- Pearl_Dev → `ws_pearl_dev_register_gate_f11_hook_abstract_detector_20260523` → soft dep on Pearl_Editor's corpus tagging; can start in parallel with Editor's review.
+
+**Open questions (for future amendment, not decided here):**
+
+- **Q1.** Should F11 eventually escalate from WARN to HARD_FAIL once the brief-addendum corpus pass completes and the philosophy-first atoms are rewritten? Cap entry leaves this OPEN for a future amendment. Pearl_Dev's V1 implementation: WARN-only.
+- **Q2.** Should the scene-first rule be amended INTO `PEARL_PRIME_BESTSELLER_WRITING_OVERLAY_SPEC.md` as spec-level (not just brief-addendum-level)? Cap entry leaves this OPEN; revisit after Pearl_Editor brief addendum lands.
+
+**Authority:** This cap entry + OPD-144 (`artifacts/coordination/operator_decisions_log.tsv` row, landed via PR #1292) + this cap-entry PR.
+
+---
+
+### BR-CANON-02-GLOBAL-BRAND-IDENTITY — Operator-visible 37 = manga canon × cross-axis JOIN view (additive cap on Path X, decision ratified 2026-05-26)
+
+**Status:** **ratified** (operator decision via PR #1305 ship + acknowledged in PR #1309 ws opening + load-bearing on main since commit `182c96582`).
+
+**Context:** Operator framing 2026-05-24 in v2 dashboard spec: "Each brand is a global brand, not manga-only or book-only." PR #1305's `brand-wizard-app/public/brand_admin_v2.html` surfaces ~37 brands with `axes_present: [book, manga, music]` chips per card — a JOIN view over the 3 Path X axes. BR-CANON-01 Path X cap entry established that book / manga / music are intentionally distinct registries that DO NOT converge. The operator's v2 framing does not contradict Path X — it adds an **operator-visible JOIN view** above the 3 axes. This cap codifies the join without merging the registries.
+
+Load-bearing evidence on `origin/main` (merge order 2026-05-26):
+
+| Commit | PR | What landed |
+|---|---|---|
+| `c1fa2c8a2` | #1309 | Opened follow-up ws rows including this cap ws |
+| `dbeb40e0b` | #1296 | `brand_index` + `_book_brand_rows` / `_manga_brand_rows` / `_music_brand_rows` |
+| `182c96582` | #1305 | v2 picker + `axes_present` chips via `planned_volumes` |
+| `03914d36c` | #1312 | 37-brand `artifacts/weekly_packages` stub seed (`2026-W22`) |
+
+**Decision:** The operator-visible "global brand" set = **manga canonical list slots 1–37** (`config/manga/canonical_brand_list.yaml`), used as the picker canon for `brand_admin_v2.html` (`renderPicker` iterates `brand_index().manga`). Brand identity is shared across axes via the **`brand_id` key** when the same id exists in more than one registry (e.g., `stillness_press` on book + manga; `axes_present` materializes the join via `_axes_for_brand` in `server/routes/brand_admin_public.py`). The 3 registries remain authoritative for their respective content pipelines:
+
+| Axis | Registry | Pipeline owner | Typical count |
+|---|---|---|---|
+| **Book** | `config/brand_registry.yaml` | Pearl_Prime | 26 active keys (locale variants may differ) |
+| **Manga** | `config/manga/canonical_brand_list.yaml` | Pearl_Brand | **37** (operator picker canon) |
+| **Music** | `config/music/music_brand_registry.yaml` | Pearl_Brand | 38+ (`id_space_start=38`; music-only slugs) |
+
+The "global brand" is a **VIEW** (join + projection at endpoint-time), not a new registry:
+
+- `_book_brand_rows()`, `_manga_brand_rows()`, `_music_brand_rows()` emit per-axis rows.
+- `brand_index()` returns `{book, manga, music, counts}` without merging registries.
+- `_axes_for_brand(brand_id)` computes which axes apply for a given `brand_id`.
+- `planned_volumes` (v2 picker cards) exposes `axes_present: _axes_for_brand(brand_id)`.
+
+No new YAML, no new join table, no `config/global_brand_registry.yaml`.
+
+**Anti-drift check:**
+
+- Path X separation **REMAINS BINDING**. BR-CANON-02 is **ADDITIVE** on BR-CANON-01 Path X — not a supersession.
+- DO NOT introduce a persisted "global registry" file — the join is computed at endpoint-time.
+- DO NOT modify any of the 3 source registries from a "global brand" framing.
+- DO NOT rename `brand_id` values to enforce join keys — accept book-only locale variants (`*_en_us`), music-only slots 38+, and manga-only ids; `axes_present` reflects reality.
+- DO NOT expand operator-visible canon beyond manga's 37 without a successor cap (**BR-CANON-03** or later amendment).
+
+**Action items:** None directly. This cap ratifies what is already on main:
+
+- `server/routes/brand_admin_public.py:brand_index` — computes the join (PR #1296, `dbeb40e0b`)
+- `brand-wizard-app/public/brand_admin_v2.html` — renders `axes_present` chips (PR #1305, `182c96582`)
+- `artifacts/weekly_packages/<brand>/2026-W22/` — 37 stub packages (PR #1312, `03914d36c`)
+
+**Handoffs:**
+
+- **Pearl_PM:** use **BR-CANON-02-GLOBAL-BRAND-IDENTITY** when routing any future "global brand" / "cross-axis" / "join" / "all brands view" ws's.
+- **Pearl_Brand:** continues owning dashboard surfaces under **DASH-02**; BR-CANON-02 ratifies what v2 already does.
+- **Pearl_Architect (FOLLOW-UP, operator-gated):** if operator later expands operator-visible canon beyond 37, open **BR-CANON-03** (or successor) specifying the new operator-visible canon — do NOT modify BR-CANON-02 in place.
+- **Pearl_Editor + Pearl_Marketing:** `ws_planned_volumes_per_brand_backfill_20260526` backfills per-axis volume data; BR-CANON-02 does NOT gate that work.
+
+**Cross-references:**
+
+- **BR-CANON-01** + Path X update + Path X cap entry (this state doc) — foundation BR-CANON-02 builds on
+- **MUSIC-MODE-BRAND-INTEGRATION-V1-01** (this state doc) — music axis (slot 38+); BR-CANON-02 surfaces music in the join when `music_brands` entries share `brand_id`
+- **DASH-02** (this state doc) — Pearl_Brand ownership of the dashboard surface that materializes the join
+- **WORLDWIDE-CATALOG-GO-LIVE-V1-PROGRAM-01** (this state doc) — parent program; brand_dashboard + weekly_packaging surfaces
+- **BRAND_ADMIN_CANONICAL_PACKAGE.md** — declares v2 canonical-weekly-work (cross-reference only; not amended by this cap)
+
+---
