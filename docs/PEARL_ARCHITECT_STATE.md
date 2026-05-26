@@ -1487,7 +1487,37 @@ overlay_param:
 
 ### CI-BASELINE-RECOVERY-V1-01 — CI baseline recovery: required-check root causes + phased recovery (Pearl_DevOps cap + spec 2026-05-09)
 
-**Status:** **proposed** — pending operator priority pick and answers to Q1–Q3 in `docs/specs/CI_BASELINE_RECOVERY_V1_SPEC.md` §16.
+**Status:** **complete** — **AMENDMENT-20260527-CI-BASELINE-RECOVERY-COMPLETE** (Phase 4 acceptance PARTIAL; ruleset merge path without `--admin` restored).
+
+#### CI-BASELINE-RECOVERY-V1-01 — AMENDMENT-20260527-CI-BASELINE-RECOVERY-COMPLETE
+
+**Authorization:** Pearl_DevOps `ws_ci_recovery_acceptance` close-out **2026-05-27**.
+
+**`main` HEAD anchor:** `15b46e37a29d5a6349e0d0cfa1a189f6ba1abc18` (PR #1325).
+
+**Verdict:** **PARTIAL** (see `artifacts/qa/ci_baseline_recovery_v1_acceptance_20260527.md`).
+
+**Binding outcomes:**
+
+1. **Phase 1 (#997)** — `Verify governance` false positive on `bypass_actors` audit field: **fixed**; green on merge commits and current `main`.
+2. **Phase 2 (#1006 policy + #1011 WARN)** — author `cover_art` gate **relax-to-warn** per AMENDMENT-2026-05-10: **landed**; **Core tests** **success** on `main` HEAD at acceptance time.
+3. **Ruleset merge hygiene** — GitHub ruleset `13451138` requires **only** `Verify governance`; last **3** merged PRs (#1325, #1324, #1323) and last **15** sampled merges: **no** merge commit with failing `Verify governance` → **routine `--admin` for required-check bypass is no longer the default path**.
+4. **OPD-152** — PR-template cascade-prevention checkbox for planner/composer signal + test assertion co-commit: **landed** (PR #1322 chain).
+5. **OPD-153** — `Workers Builds: pearl-prime` reclassified as **accepted non-blocking noise**; operator dashboard disconnect remains optional (audit Path A1).
+6. **PR #1325** — `preflight_push.sh` surfaces max OPD on `origin/main` to reduce numbering collisions.
+
+**Deferred (not blocking this amendment):**
+
+- **Release gates** still **failure** on `main` HEAD — continue under **`ws_ci_recovery_release_gates`** (Phase 3).
+- **EI V2 gates** — not observed on acceptance HEAD (path-filter / trigger gap); address only if promotion to ruleset required.
+
+**Project / workstream status:** `PRJ-CI-BASELINE-RECOVERY-V1` → **completed**; `ws_ci_recovery_acceptance` → **completed**; `ws_ci_recovery_release_gates` → **runnable** (Release gates green).
+
+**Anti-drift:** Do not claim full yaml-contract green (`Core` + `Release` + `EI V2` + `Verify governance`) on `main` until Release gates Phase 3 evidence exists — this amendment closes the **ruleset / `--admin`** recovery goal only.
+
+---
+
+**Prior status (archived):** **proposed** — pending operator priority pick and answers to Q1–Q3 in `docs/specs/CI_BASELINE_RECOVERY_V1_SPEC.md` §16.
 
 **Subsystem:** `pearl_devops` (primary); coordination with `Pearl_Editor` on cover art policy.
 
