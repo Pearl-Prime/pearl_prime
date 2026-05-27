@@ -37,12 +37,20 @@ DEFAULT_COORD_DIR = REPO_ROOT / "artifacts" / "coordination"
 DEFAULT_PACKAGES_DIR = REPO_ROOT / "artifacts" / "weekly_packages"
 
 # Canonical deliverable types for brand-admin weekly bundles.
+#
+# ``audiobook`` was added per AMENDMENT-2026-05-27-BRAND-ADMIN-V2-PHASE-1-P0-COMPLETE
+# §3 (Phase 2 audiobook axis: Pearl_Audio audiobook pipeline → M4B + chapter markers
+# → packaged into ``<brand>/<week>/{audible,google_play_audiobook}/``). Per-axis
+# discovery below resolves an audiobook M4B (+ optional .cue sidecar) under
+# ``artifacts/weekly_packages/<brand>/<week>/audiobook/`` (shared source for both
+# platforms; split-at-build packager emits per-platform ZIPs).
 DELIVERABLE_TYPES: tuple[str, ...] = (
     "books",
     "atoms",
     "manga_panels",
     "pearl_news",
     "podcast",
+    "audiobook",
 )
 
 TSV_COLUMNS: tuple[str, ...] = (
@@ -269,6 +277,17 @@ def discover_deliverable_files(
         pod = pkg / "podcast"
         if pod.is_dir():
             for p in sorted(pod.rglob("*")):
+                if p.is_file():
+                    found.append(_rel(root, p))
+
+    elif deliverable_type == "audiobook":
+        # Per AMENDMENT-2026-05-27-BRAND-ADMIN-V2-PHASE-1-P0-COMPLETE §3, audiobook
+        # source assets (M4B + optional .cue chapter sidecar) live under
+        # ``<brand>/<week>/audiobook/`` and are shared by the audible +
+        # google_play_audiobook platforms (split-at-build emits per-platform ZIPs).
+        ab = pkg / "audiobook"
+        if ab.is_dir():
+            for p in sorted(ab.rglob("*")):
                 if p.is_file():
                     found.append(_rel(root, p))
 

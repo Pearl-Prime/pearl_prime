@@ -48,12 +48,13 @@ COORD_DIR = REPO_ROOT / "artifacts" / "coordination"
 
 PLATFORM_COLUMNS = ("kdp", "apple_books", "google_play", "kobo", "store_url_live")
 
-DELIVERABLE_TYPES = ("books", "atoms", "manga_panels", "pearl_news", "podcast")
+DELIVERABLE_TYPES = ("books", "atoms", "manga_panels", "pearl_news", "podcast", "audiobook")
 
 WEEK_ISO_RE = re.compile(r"^\d{4}-W(0[1-9]|[1-4]\d|5[0-3])$")
 MONDAY_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 
 # Operator-facing platform rows mapped from manifest deliverable keys (atoms omitted).
+# Audible + Google Play Audiobooks added per AMENDMENT-2026-05-27 §3 (audiobook axis).
 PLATFORM_ROW_DEFS: tuple[tuple[str, str, str], ...] = (
     ("Amazon KDP", "books", "books for KDP"),
     ("Google Play", "books", "books for Google Play"),
@@ -64,6 +65,8 @@ PLATFORM_ROW_DEFS: tuple[tuple[str, str, str], ...] = (
     ("Piccoma", "manga_panels", "manga episodes"),
     ("Spotify Podcast", "podcast", "podcast MP3s"),
     ("Apple Podcasts", "podcast", "podcast MP3s"),
+    ("Audible", "audiobook", "audiobook M4B(s)"),
+    ("Google Play Audiobooks", "audiobook", "audiobook M4B(s)"),
     ("Pearl News", "pearl_news", "Pearl News articles"),
 )
 

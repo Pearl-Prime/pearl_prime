@@ -4,6 +4,12 @@ from __future__ import annotations
 from pathlib import Path
 
 # (platform_slug, deliverable_type)
+#
+# Audiobook axis (AMENDMENT-2026-05-27-BRAND-ADMIN-V2-PHASE-1-P0-COMPLETE §3):
+# Audible and Google Play (audiobook variant) ship the same source M4B + chapter
+# markers under deliverable_type ``audiobook``. ``google_play`` (ebook variant) and
+# ``google_play_audiobook`` are distinct platform slugs so the split-at-build packager
+# (OPD-145) can emit separate per-platform ZIPs without colliding.
 PLATFORM_SPECS: tuple[tuple[str, str], ...] = (
     ("kdp", "books"),
     ("google_play", "books"),
@@ -14,6 +20,8 @@ PLATFORM_SPECS: tuple[tuple[str, str], ...] = (
     ("piccoma", "manga_panels"),
     ("spotify_podcast", "podcast"),
     ("apple_podcasts", "podcast"),
+    ("audible", "audiobook"),
+    ("google_play_audiobook", "audiobook"),
     ("pearl_news", "pearl_news"),
 )
 
@@ -29,9 +37,15 @@ PLATFORM_SLUG_BY_DISPLAY: dict[str, str] = {
     "Piccoma": "piccoma",
     "Spotify Podcast": "spotify_podcast",
     "Apple Podcasts": "apple_podcasts",
+    "Audible": "audible",
+    "Google Play Audiobooks": "google_play_audiobook",
     "Pearl News": "pearl_news",
 }
 
+# DELIVERABLE_BY_PLATFORM maps platform_slug → deliverable_type.
+# NOTE: dict(PLATFORM_SPECS) collapses duplicate deliverable_types onto the LAST
+# platform per type (intentional: a slug→type lookup is 1:1; type→slug is 1:N and
+# requires iterating PLATFORM_SPECS).
 DELIVERABLE_BY_PLATFORM: dict[str, str] = dict(PLATFORM_SPECS)
 
 

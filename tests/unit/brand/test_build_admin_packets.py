@@ -133,3 +133,65 @@ def test_platform_zip_includes_deliverable_files(tmp_path: Path) -> None:
         names = set(zf.namelist())
         assert "manifest.json" in names
         assert epub_rel in names, f"kdp zip missing deliverable file: {sorted(names)}"
+
+
+def test_audiobook_axis_per_platform_zip(tmp_path: Path) -> None:
+    """AMENDMENT-2026-05-27 §3 audiobook axis: M4B under ``<brand>/<week>/audiobook/``
+    must be discovered and emitted into per-platform ZIPs for both ``audible`` and
+    ``google_play_audiobook`` slugs via the split-at-build packager (OPD-145)."""
+    brand = "delta_brand"
+    (tmp_path / "config/manga").mkdir(parents=True, exist_ok=True)
+    (tmp_path / "config/brand_registry.yaml").write_text(
+        f"schema_version: 1\nbrands:\n  {brand}:\n    lifecycle: active\n",
+        encoding="utf-8",
+    )
+    (tmp_path / "config/manga/canonical_brand_list.yaml").write_text(
+        f"schema_version: 1\nbrands:\n  {brand}:\n    tier: core\n",
+        encoding="utf-8",
+    )
+
+    mon = date(2026, 5, 4)
+    week_iso = "2026-W19"
+    audiobook_dir = tmp_path / "artifacts/weekly_packages" / brand / week_iso / "audiobook"
+    audiobook_dir.mkdir(parents=True, exist_ok=True)
+    m4b = audiobook_dir / f"{brand}_{week_iso}_audiobook.m4b"
+    cue = audiobook_dir / f"{brand}_{week_iso}_audiobook.cue"
+    m4b.write_bytes(b"\x00\x00\x00\x18ftypM4B \x00\x00\x00\x00")  # minimal MP4 ftyp atom
+    cue.write_text("FILE \"x.m4b\" MP4\n", encoding="utf-8")
+
+    write_weekly_packages(
+        tmp_path, week_monday=mon, brand_ids=[brand], generated_at="2026-05-05T12:00:00Z"
+    )
+
+    # The writer should discover and mark audiobook as ready.
+    manifest = json.loads(
+        (tmp_path / "artifacts/weekly_packages" / brand / week_iso / "manifest.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    ab_block = manifest["deliverables"]["audiobook"]
+    assert ab_block["status"] == "ready"
+    ab_rels = set(ab_block["files"])
+    assert any(p.endswith("_audiobook.m4b") for p in ab_rels)
+    assert any(p.endswith("_audiobook.cue") for p in ab_rels)
+
+    built = build_packets(tmp_path, week_monday=mon)
+    assert brand in built
+
+    # Both audible + google_play_audiobook per-platform ZIPs must contain the M4B.
+    for platform in ("audible", "google_play_audiobook"):
+        platform_zip = (
+            tmp_path
+            / "artifacts/weekly_packages"
+            / brand
+            / week_iso
+            / platform
+            / f"{brand}_{week_iso}_{platform}.zip"
+        )
+        assert platform_zip.is_file(), f"missing per-platform ZIP for {platform}"
+        with zipfile.ZipFile(platform_zip, "r") as zf:
+            names = set(zf.namelist())
+            assert "manifest.json" in names
+            plat_manifest = json.loads(zf.read("manifest.json").decode("utf-8"))
+            assert plat_manifest["platform"] == platform
+            assert plat_manifest["deliverable_type"] == "audiobook"
