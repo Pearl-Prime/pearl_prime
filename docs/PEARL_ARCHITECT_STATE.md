@@ -1989,3 +1989,78 @@ No new YAML, no new join table, no `config/global_brand_registry.yaml`.
 - **BRAND_ADMIN_CANONICAL_PACKAGE.md** — declares v2 canonical-weekly-work (cross-reference only; not amended by this cap)
 
 ---
+
+#### WORLDWIDE-CATALOG-GO-LIVE-V1-PROGRAM-01 — AMENDMENT-2026-05-27-BRAND-ADMIN-V2-PHASE-1-P0-COMPLETE
+
+**Authorization:** Brand-Admin-V2 sub-program **Phase 1 P0 100% complete**. Five constituent PRs landed on `main`, each gated through `Verify governance` (ruleset 13451138) + Core tests + Release gates + EI V2 gates. Operator-visible 37-brand picker now renders real planned-volume numbers across **book / manga / podcast / audiobook** axes; weekly-work dashboard surfaces per-platform downloads (KDP / WEBTOON / Spotify / Pearl News) with split-at-build per OPD-145.
+
+**`main` HEAD anchor (doc authoring):** post-PR #1337 merge (planned-volumes backfill landed; HEAD advances with this AMENDMENT PR).
+
+---
+
+##### 1. PHASE 1 P0 100% COMPLETE — Brand-Admin-V2 sub-program
+
+Sub-program scope = **operator-visible 37-brand × 4-axis × per-platform-download weekly-work dashboard**. All five constituent capabilities shipped:
+
+| Capability | PR | Merge SHA | Authority |
+|---|---|---|---|
+| Live 3-axis brand index endpoint (book / manga / music) | #1296 | `dbeb40e0b` | `server/routes/brand_admin_public.py` |
+| V2 weekly-work dashboard + picker (`brand_admin_v2.html`) | #1305 | `182c96582` | `BRAND_ADMIN_CANONICAL_PACKAGE.md` |
+| Per-platform download route (OPD-145 split-at-build) | #1326 | `c7a645e44` | `scripts/brand/build_admin_packets.py` |
+| Per-brand planned volumes backfill (37 brands × 3 axes) | #1337 | `e5cb4dc92` | `config/brand_admin/manga_canon_planned_volumes.yaml` |
+| Mkdir-parent fix for split-at-build zip writer | #1334 | `d6bcaa5ac` | `scripts/brand/build_admin_packets.py:141` |
+
+**Supporting cap entry:** `BR-CANON-02-GLOBAL-BRAND-IDENTITY` (this state doc) — additive JOIN cap declaring brand_id as cross-axis JOIN key while preserving Path X 37-manga + 24×13=312-book + 38+ music separation.
+
+**Operator-visible deliverable:** http://127.0.0.1:8000 → `brand-wizard-app/public/brand_admin_v2.html` → 37-brand picker → click brand → per-week × per-platform downloads.
+
+**Binding claim (verbatim):** **Brand-Admin-V2 Phase 1 P0 is 100% complete** for `PRJ-WORLDWIDE-CATALOG-GO-LIVE-V1` at the milestone boundary defined by the 5 PRs above + planned-volumes backfill landing.
+
+---
+
+##### 2. PHASE 2 ENTRY CRITERIA (brand-admin-v2 sub-program)
+
+1. **Phase 1 P0 milestone closed** — this AMENDMENT (5 PRs landed + planned-volumes coverage matrix).
+2. **CI baseline clean for brand-admin sub-program** — `tests/test_brand_admin_v2_api.py` + `tests/unit/brand/test_build_admin_packets.py` green on `main` HEAD (verified post-#1334).
+3. **Path X anti-drift held** — 37-manga canon unchanged; book pipeline (24×13=312) unchanged; music registry (38+) unchanged; brand_id JOIN materialized only at dashboard surface per `BR-CANON-02`.
+4. **OPD-145 split-at-build pattern adopted** — per-platform ZIPs under `artifacts/weekly_packages/<brand>/<week>/<platform>/<brand>_<week>_<platform>.zip` per OPD-145 ratification.
+
+---
+
+##### 3. PHASE 2 SCOPE — Real-content build × 4 axes + cron wireup
+
+Five **runnable** workstreams now opened (table §5). Sub-program Phase 2 P0 = move from **planned numbers** (configs only) to **real shippable content** flowing through each per-platform pipeline weekly. Cron wireup = Monday weekly job that re-generates per-brand × per-platform ZIPs against the latest content tree.
+
+- **Book axis (KDP ebook):** Pearl_Prime bestseller pipeline → KDP EPUB output → packaged into `<brand>/<week>/kdp/<brand>_<week>_kdp.zip`
+- **Manga axis (KDP paperback + WEBTOON):** Manga V2 layered render → KDP paperback PDF + WEBTOON vertical-scroll → packaged into `<brand>/<week>/kdp/` and `<brand>/<week>/webtoon/`
+- **Podcast axis (Spotify):** Pearl_Audio podcast pipeline → MP3 + show notes → packaged into `<brand>/<week>/spotify/`
+- **Audiobook axis (Audible / Spotify / Google Play):** Pearl_Audio audiobook pipeline → M4B + chapter markers → packaged into `<brand>/<week>/audible/` and `<brand>/<week>/google_play/`
+- **Cron wireup:** GitHub Actions `weekly_package_writer.yml` (existing scaffold) → activate Monday 9am UTC schedule → re-run `scripts/brand/build_admin_packets.py` on the live content tree
+
+---
+
+##### 4. ANTI-DRIFT
+
+- The claim **"Brand-Admin-V2 Phase 1 P0 is 100% complete"** is **BINDING** for this sub-program record — it **cannot** be downgraded or contradicted in coordination docs **without a new operator AMENDMENT** referencing this block.
+- **Phase 2 workstreams** enumerated in §5 are **runnable** (`status=runnable` in `artifacts/coordination/ACTIVE_WORKSTREAMS.tsv`); each requires operator authorization to spawn (Pearl_Conductor policy unchanged).
+- **Path X 37-manga canon is FROZEN** at brand_id scope — Phase 2 real-content axes use the existing 37 brand_ids, do NOT add 38th manga brand, do NOT modify `config/manga/canonical_brand_list.yaml`.
+- **Music brands (slot 38+)** remain wizard-onboarded only — no manual seeding into Phase 2 real-content backfill.
+- **Per-platform ZIP semantics** = split-at-build per OPD-145; do NOT introduce slice-on-demand variant without separate AMENDMENT.
+
+---
+
+##### 5. ACTION ITEMS (named `ws_*` — prompts not authored in this amendment)
+
+| workstream_id | Primary owners | Intent |
+|---|---|---|
+| `ws_brand_admin_v2_real_content_build_book_axis_20260527` | Pearl_Prime + Pearl_Dev | Wire Pearl_Prime bestseller output → KDP ebook EPUB → `<brand>/<week>/kdp/<brand>_<week>_kdp.zip` (37 manga-canon brands; weekly cadence) |
+| `ws_brand_admin_v2_real_content_build_manga_axis_20260527` | Pearl_Author + Pearl_Dev (Manga V2) | Wire Manga V2 layered render → KDP paperback PDF + WEBTOON vertical-scroll → `<brand>/<week>/{kdp,webtoon}/` (37 manga-canon brands) |
+| `ws_brand_admin_v2_real_content_build_podcast_axis_20260527` | Pearl_Audio + Pearl_Dev | Wire Pearl_Audio podcast → MP3 + show notes → `<brand>/<week>/spotify/` (37 manga-canon brands) |
+| `ws_brand_admin_v2_real_content_build_audiobook_axis_20260527` | Pearl_Audio + Pearl_Dev | Wire Pearl_Audio audiobook → M4B + chapter markers → `<brand>/<week>/{audible,google_play}/` (37 manga-canon brands) |
+| `ws_brand_admin_v2_weekly_cron_wireup_20260527` | Pearl_DevOps | Activate Monday 9am UTC `weekly_package_writer.yml` GitHub Actions schedule + verify per-brand × per-platform ZIPs regenerate against live content tree |
+
+**Sequencing:** Real-content × 4 axes can run in parallel (independent content pipelines). Cron wireup is gated on at least 1 of the 4 axes landing (so the cron has real content to package).
+
+**Pointers:** `artifacts/coordination/ACTIVE_WORKSTREAMS.tsv` (5 new `runnable` ws rows below); `BRAND_ADMIN_CANONICAL_PACKAGE.md` (v2 canonical-weekly-work surface); `BR-CANON-02-GLOBAL-BRAND-IDENTITY` (this state doc — JOIN cap); `config/brand_admin/manga_canon_planned_volumes.yaml` (planned-volumes SSOT from #1337); `artifacts/brand_admin/planned_volumes_coverage_20260527.tsv` (coverage matrix evidence).
+
+---
