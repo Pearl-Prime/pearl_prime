@@ -355,11 +355,19 @@ HOOK_ATOM_PATHS = [
     reason="HOOK atom corpus not checked out in this worktree",
 )
 def test_f11_integration_on_disk_hook_corpus_sample():
+    # NOTE (HOOK-SCENE-FIRST-01 P0 rewrite, 2026-05-27):
+    # Pearl_Editor rewrote 41 P0 HOOK atoms (including entrepreneurs/overthinking) to
+    # scene-first in this same PR. The pre-rewrite assertion expected exactly 1 F11 WARN
+    # (on overthinking); post-rewrite all 5 atoms in HOOK_ATOM_PATHS now open scene-first
+    # so F11 correctly returns 0 findings. The synthetic test_f11_integration_full_loop
+    # above still exercises the detector on a known-bad fixture (preserved).
     hook_atoms = load_hook_atoms_from_paths(HOOK_ATOM_PATHS)
     result = evaluate_register("Chapter 1\n\nRendered hook chapter placeholder.\n", hook_atoms=hook_atoms)
     f11 = [f for f in result.findings if f.failure_id == "F11"]
-    assert len(f11) == 1
-    assert any("overthinking" in f.evidence["atom_path"] for f in f11)
+    assert len(f11) == 0, (
+        f"Expected 0 F11 WARN findings on P0 corpus sample (all 5 rewritten scene-first); "
+        f"got {len(f11)}: {[f.evidence.get('atom_path') for f in f11]}"
+    )
 
 
 @pytest.mark.skipif(not CALIBRATION_BOOK.exists(), reason="calibration book not on disk in this worktree")
