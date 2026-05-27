@@ -2064,3 +2064,73 @@ Five **runnable** workstreams now opened (table §5). Sub-program Phase 2 P0 = m
 **Pointers:** `artifacts/coordination/ACTIVE_WORKSTREAMS.tsv` (5 new `runnable` ws rows below); `BRAND_ADMIN_CANONICAL_PACKAGE.md` (v2 canonical-weekly-work surface); `BR-CANON-02-GLOBAL-BRAND-IDENTITY` (this state doc — JOIN cap); `config/brand_admin/manga_canon_planned_volumes.yaml` (planned-volumes SSOT from #1337); `artifacts/brand_admin/planned_volumes_coverage_20260527.tsv` (coverage matrix evidence).
 
 ---
+
+#### WORLDWIDE-CATALOG-GO-LIVE-V1-PROGRAM-01 — AMENDMENT-2026-05-27-BRAND-ADMIN-V2-PHASE-2-P0-COMPLETE
+
+**Authorization:** Brand-Admin-V2 sub-program **Phase 2 P0 100% complete**. All 5 Phase 2 P0 workstreams (real-content build × 4 axes + weekly cron wireup) shipped end-to-end via 5 PRs in a single autonomous multi-agent session (2026-05-27). MVP scope: stillness_press brand × week 2026-W22. Total paid-API spend: **$0** (free Edge TTS for podcast; local CosyVoice2 for audiobook; reused existing V4 panels for manga; no RunComfy/ElevenLabs charges).
+
+**`main` HEAD anchor (doc authoring):** post-PR #1349 merge (manga axis MVP landed; HEAD advances with this AMENDMENT PR).
+
+---
+
+##### 1. PHASE 2 P0 100% COMPLETE — Brand-Admin-V2 sub-program
+
+All 5 Phase 2 P0 workstreams from AMENDMENT-2026-05-27 §5 shipped via 5 PRs:
+
+| Capability | PR | Merge SHA | Authority |
+|---|---|---|---|
+| Book axis MVP (stillness_press 2026-W22 KDP EPUB; 1.5 MB, 11 chapters) | #1344 | `18c7b777c` | `scripts/release/build_epub.py` + manifest entry; **bonus: fixed packager bug** (`build_platform_zips_for_brand` was only writing manifest+README, missing deliverable files) |
+| Podcast axis MVP (stillness_press 2026-W22 Spotify+Apple MP3; 55s, 887KB; free Edge TTS) | #1347 | `b6f873a82` | `scripts/podcast/render_simple_episode.py` (NEW) + Edge TTS fallback after ElevenLabs 401 |
+| Audiobook axis MVP (stillness_press 2026-W22 Audible+Google Play M4B; 6.5min, 2.5MB; 3 chapter atoms; local CosyVoice2) | #1346 | `e50bbb649` | New `audible` + `google_play_audiobook` platform slugs; `audiobook` deliverable_type; ffmpeg-only M4B re-encode |
+| Manga axis MVP (stillness_press 2026-W22 KDP PDF + WEBTOON PNG; 5.3MB PDF + 1080×68016 PNG; reused 35 V4 ep_001 panels) | #1349 | `89e924fae` | `scripts/brand/build_stillness_manga_2026w22.py` (NEW) + 4-axis composite manifest |
+| Cron wireup (Monday 9am UTC weekly_package_writer.yml + auto-PR pattern; **bonus: fixed hidden heredoc/YAML bug** that had been silently breaking the workflow since PR #1251) | #1348 | `85d3fbb39` | `.github/workflows/weekly_package_writer.yml` |
+
+**Composite manifest:** `artifacts/weekly_packages/stillness_press/2026-W22/manifest.json` now declares `package_type=book_axis_mvp+podcast_axis_mvp+audiobook_axis_mvp+manga_axis_mvp` with all 4 axes status=ready.
+
+**Operator-visible deliverable:** http://127.0.0.1:8000 → `brand-wizard-app/public/brand_admin_v2.html` → stillness_press → 2026-W22 → 6 platform download cards (KDP / WEBTOON / Spotify / Apple Podcasts / Audible / Google Play) all non-null.
+
+**Binding claim (verbatim):** **Brand-Admin-V2 Phase 2 P0 is 100% complete** for `PRJ-WORLDWIDE-CATALOG-GO-LIVE-V1` at the milestone boundary defined by the 5 PRs above + composite-manifest end-to-end smoke pass.
+
+---
+
+##### 2. PHASE 3 ENTRY CRITERIA (brand-admin-v2 sub-program)
+
+1. **Phase 2 P0 milestone closed** — this AMENDMENT (5 PRs landed + 4-axis composite live).
+2. **CI baseline clean** — all required checks green on `main` HEAD; Workers Builds = OPD-153 noise (non-blocking).
+3. **Cron operational** — `weekly_package_writer.yml` runs Monday 9am UTC; auto-PRs land in `agent/weekly-packages-YYYY-MM-DD` branches for operator review.
+4. **HOOK-SCENE-FIRST-01 corpus pass complete** — 41 P0 (#1336) + 100 P1 (#1342) + 37 P2 (#1341) = **178 atoms rewritten scene-first**; F11 corpus at or near 0 WARN. Unblocks Open Question Q1 (F11 WARN → HARD_FAIL escalation; routed to Pearl_Architect).
+
+---
+
+##### 3. PHASE 3 SCOPE — Per-brand scale-out from 1 brand × 1 week → 37 brands × weekly cadence
+
+Phase 2 P0 was MVP scope (1 brand, 1 week, 4 axes). Phase 3 P0 = horizontal scale-out:
+
+- **Per-brand content build at scale:** apply the 4-axis pattern to all 37 manga-canon brands. Each axis has its own pipeline; Phase 3 work is brand-specific source content authoring (Pearl_Editor + Pearl_Marketing scope, not Pearl_Dev).
+- **Cron stability:** verify Monday 9am UTC cron successfully opens auto-PR + content stays current week over week; eyeball auto-PR contents for the first 2-3 weeks.
+- **Operator review of PR #1350** (cron-generated `weekly_packages_2026-05-25.tsv` PR with -555 lines / 0 +) — deferred to operator decision because large-deletion smell needs human eyeball.
+
+Phase 3 P0 workstreams **NOT YET OPENED** — pending operator authorization on per-axis cadence + brand priority order. Recommendation: open `ws_brand_admin_v2_phase_3_p0_*` rows in a separate Pearl_PM cycle.
+
+---
+
+##### 4. ANTI-DRIFT
+
+- The claim **"Brand-Admin-V2 Phase 2 P0 is 100% complete"** is **BINDING** for this sub-program record — cannot be downgraded without new operator AMENDMENT referencing this block.
+- **Path X 37-manga canon FROZEN.**
+- **Book pipeline 24×13=312 FROZEN.**
+- **Music registry 38+ FROZEN.**
+- **OPD-145 split-at-build semantics PRESERVED** — all 5 PRs adhered (no slice-on-demand variant introduced).
+- **OPD-153 cascade-prevention HELD** — Workers Builds failures accepted as known noise; all merges used `--admin --squash --delete-branch` with required ruleset (`Verify governance`) green.
+- **Tier 1 LLM policy ADHERED** — content authoring used Claude Code (operator-present session); paid APIs (ElevenLabs, RunComfy) gated by $5 cap; all axes shipped with $0 paid-API spend by falling back to free/local alternatives.
+
+---
+
+##### 5. OPERATOR ACTION ITEMS
+
+1. **PR #1350** — cron-generated `weekly_packages_2026-05-25.tsv` PR (0 additions / 555 deletions). Operator decision needed: merge (legitimate regen) or close (data loss concern)? Recommend eyeball-review before merge.
+2. **ELEVENLABS_API_KEY rotation** — Keychain key returned 401 invalid_api_key during podcast axis work. Rotate with: `security add-generic-password -s ELEVENLABS_API_KEY -a $USER -w <new_key>`. No blocker (podcast axis fell back to Edge TTS), but unblocks higher-quality TTS for future production.
+3. **F11 WARN → HARD_FAIL escalation** (HOOK-SCENE-FIRST-01 Open Question Q1) — 178-atom corpus is now scene-first; F11 detector likely safe to promote from WARN to HARD_FAIL. Recommend Pearl_Architect ws to author the escalation.
+4. **Phase 3 P0 dispatch** — per-brand scale-out from 1 brand → 37 brands. Awaits operator authorization on cadence + brand priority.
+
+**Pointers:** `artifacts/coordination/ACTIVE_WORKSTREAMS.tsv` (7 ws rows flipped completed in this PR + 1 new P2 row); `BRAND_ADMIN_CANONICAL_PACKAGE.md`; `artifacts/weekly_packages/stillness_press/2026-W22/manifest.json` (4-axis composite); prior `AMENDMENT-2026-05-27-BRAND-ADMIN-V2-PHASE-1-P0-COMPLETE` (this state doc).
