@@ -7,7 +7,11 @@ import zipfile
 from datetime import date
 from pathlib import Path
 
-from scripts.brand.build_admin_packets import build_packets, build_zip_for_brand
+from scripts.brand.build_admin_packets import (
+    build_packets,
+    build_platform_zips_for_brand,
+    build_zip_for_brand,
+)
 from scripts.brand.weekly_package_writer import render_tsv, write_weekly_packages
 
 
@@ -91,3 +95,41 @@ def test_end_to_end_writer_then_builder(tmp_path: Path) -> None:
     zip_path, _ = build_zip_for_brand(tmp_path, brand, week_iso)
     assert zip_path is not None
     assert zip_path.stat().st_size > 0
+
+
+def test_platform_zip_includes_deliverable_files(tmp_path: Path) -> None:
+    """Book axis MVP: per-platform ZIP must embed the actual deliverable, not
+    just the platform manifest. Regression guard for stillness_press 2026-W22
+    KDP wiring."""
+    brand = "delta_press"
+    week_iso = "2026-W22"
+    pkg = tmp_path / "artifacts" / "weekly_packages"
+    week_dir = pkg / brand / week_iso
+    (week_dir / "kdp").mkdir(parents=True, exist_ok=True)
+
+    epub_rel = f"artifacts/weekly_packages/{brand}/{week_iso}/kdp/{brand}_{week_iso}_kdp.epub"
+    epub_path = tmp_path / epub_rel
+    epub_path.write_bytes(b"PK\x03\x04epub-fixture-bytes\n")
+
+    manifest = {
+        "brand_id": brand,
+        "week_iso": week_iso,
+        "deliverables": {
+            "books": {
+                "status": "ready",
+                "files": [epub_rel],
+            }
+        },
+    }
+    (week_dir / "manifest.json").write_text(
+        json.dumps(manifest, indent=2) + "\n",
+        encoding="utf-8",
+    )
+
+    built = build_platform_zips_for_brand(tmp_path, brand, week_iso, packages_dir=pkg)
+    kdp_zip = pkg / brand / week_iso / "kdp" / f"{brand}_{week_iso}_kdp.zip"
+    assert kdp_zip in built
+    with zipfile.ZipFile(kdp_zip, "r") as zf:
+        names = set(zf.namelist())
+        assert "manifest.json" in names
+        assert epub_rel in names, f"kdp zip missing deliverable file: {sorted(names)}"

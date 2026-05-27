@@ -113,7 +113,15 @@ def build_platform_zips_for_brand(
     *,
     packages_dir: Path | None = None,
 ) -> list[Path]:
-    """Emit per-platform ZIPs under ``<week>/<platform>/`` (OPD-145 split-at-build)."""
+    """Emit per-platform ZIPs under ``<week>/<platform>/`` (OPD-145 split-at-build).
+
+    Each platform ZIP contains the platform-scoped manifest, the brand week
+    README (if present), and every deliverable file the manifest points at for
+    that platform's deliverable type. Repo-relative paths in ``files`` are
+    resolved against ``repo_root``; paths that fall outside ``repo_root`` (e.g.
+    test fixtures rooted at ``packages_dir``) fall back to ``packages_dir``.
+    Missing files are reported on stderr and skipped (book axis MVP).
+    """
     root = repo_root.resolve()
     pkg_base = (packages_dir or root / "artifacts" / "weekly_packages").resolve()
     manifest_path = pkg_base / brand_id / week_iso / "manifest.json"
@@ -143,6 +151,21 @@ def build_platform_zips_for_brand(
             zf.writestr("manifest.json", json.dumps(plat_manifest, indent=2) + "\n")
             if readme.is_file():
                 zf.write(readme, "README.txt")
+            for rel in files:
+                if not isinstance(rel, str) or not rel.strip():
+                    continue
+                src = (root / rel).resolve() if not Path(rel).is_absolute() else Path(rel)
+                if not src.is_file():
+                    fallback = (pkg_base.parent / rel).resolve() if not Path(rel).is_absolute() else None
+                    if fallback is not None and fallback.is_file():
+                        src = fallback
+                if not src.is_file():
+                    print(
+                        f"warn: {brand_id} {slug} zip missing file: {rel}",
+                        file=sys.stderr,
+                    )
+                    continue
+                zf.write(src, rel)
         if zip_out.stat().st_size > 0:
             built.append(zip_out)
     return built
