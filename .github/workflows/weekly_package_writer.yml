@@ -60,21 +60,21 @@ jobs:
 
           git push -u origin "$BRANCH"
 
+          PR_BODY_FILE="$(mktemp)"
+          {
+            printf '## Summary\n'
+            printf -- '- Generated `artifacts/coordination/weekly_packages_%s.tsv`\n' "${WEEK_MONDAY}"
+            printf -- '- Wrote per-brand `manifest.json` under `artifacts/weekly_packages/<brand>/<YYYY-WW>/`\n'
+            printf -- '- Built admin ZIP bundles via `scripts/brand/build_admin_packets.py`\n\n'
+            printf '## Test plan\n'
+            printf -- '- [ ] Review TSV row counts per active brand\n'
+            printf -- '- [ ] Spot-check one ZIP extracts with manifest + referenced files\n'
+            printf -- '- [ ] `PYTHONPATH=. python3 scripts/brand/weekly_package_endpoint.py --json` returns non-empty for active brands\n\n'
+            printf 'Triggered by: `%s`\n' "${{ github.event_name }}"
+          } > "$PR_BODY_FILE"
+
           gh pr create \
             --title "chore(brand): weekly packages ${WEEK_MONDAY} (OPD-119/121)" \
-            --body "$(cat <<EOF
-## Summary
-- Generated \`artifacts/coordination/weekly_packages_${WEEK_MONDAY}.tsv\`
-- Wrote per-brand \`manifest.json\` under \`artifacts/weekly_packages/<brand>/<YYYY-WW>/\`
-- Built admin ZIP bundles via \`scripts/brand/build_admin_packets.py\`
-
-## Test plan
-- [ ] Review TSV row counts per active brand
-- [ ] Spot-check one ZIP extracts with manifest + referenced files
-- [ ] \`PYTHONPATH=. python3 scripts/brand/weekly_package_endpoint.py --json\` returns non-empty for active brands
-
-Triggered by: \`${{ github.event_name }}\`
-EOF
-)" \
+            --body-file "$PR_BODY_FILE" \
             --head "$BRANCH" \
             --base main
