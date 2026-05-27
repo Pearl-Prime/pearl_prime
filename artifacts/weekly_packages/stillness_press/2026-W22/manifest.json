@@ -2,8 +2,8 @@
   "brand_id": "stillness_press",
   "week_iso": "2026-W22",
   "week_monday": "2026-05-25",
-  "generated_at": "2026-05-28T01:33:00Z",
-  "package_type": "book_axis_mvp",
+  "generated_at": "2026-05-28T01:55:00Z",
+  "package_type": "book_axis_mvp+podcast_axis_mvp",
   "deliverables": {
     "books": {
       "status": "ready",
@@ -30,10 +30,19 @@
       ]
     },
     "podcast": {
-      "status": "stub",
+      "status": "ready",
       "files": [
-        "README.txt"
-      ]
+        "artifacts/weekly_packages/stillness_press/2026-W22/spotify_podcast/ep01_weekly_check_in_2026-W22.mp3",
+        "artifacts/weekly_packages/stillness_press/2026-W22/spotify_podcast/show_notes.md",
+        "artifacts/weekly_packages/stillness_press/2026-W22/spotify_podcast/script.txt",
+        "artifacts/weekly_packages/stillness_press/2026-W22/apple_podcasts/ep01_weekly_check_in_2026-W22.mp3",
+        "artifacts/weekly_packages/stillness_press/2026-W22/apple_podcasts/show_notes.md"
+      ],
+      "episode_id": "stillness_press_weekly_check_in_2026-W22_ep01",
+      "series_title": "The Stillness Check-In",
+      "duration_s": 55.25,
+      "voice_provider": "edge_tts:en-US-JennyNeural",
+      "source_workstream": "ws_brand_admin_v2_real_content_build_podcast_axis_20260527"
     }
   }
 }
