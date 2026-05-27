@@ -40,6 +40,7 @@ router = APIRouter(prefix="/api/brand_admin", tags=["brand-admin-public"])
 BOOK_REGISTRY = REPO_ROOT / "config" / "brand_registry.yaml"
 MANGA_REGISTRY = REPO_ROOT / "config" / "manga" / "canonical_brand_list.yaml"
 MANGA_SERIES_PLAN = REPO_ROOT / "config" / "manga" / "manga_brand_series_plan.yaml"
+MANGA_CANON_PLANNED = REPO_ROOT / "config" / "brand_admin" / "manga_canon_planned_volumes.yaml"
 MUSIC_REGISTRY = REPO_ROOT / "config" / "music" / "music_brand_registry.yaml"
 STORE_URL_TRACKER = REPO_ROOT / "config" / "funnel" / "store_url_tracker.yaml"
 PACKAGES_DIR = REPO_ROOT / "artifacts" / "weekly_packages"
@@ -347,6 +348,24 @@ def _locales_for_brand(brand_id: str) -> list[str]:
     return locales
 
 
+def _manga_canon_planned_body(brand_id: str) -> dict[str, Any]:
+    doc = _load_yaml(MANGA_CANON_PLANNED)
+    body = (doc.get("brands") or {}).get(brand_id)
+    return body if isinstance(body, dict) else {}
+
+
+def _series_plan_body_for_brand(brand_id: str) -> dict[str, Any]:
+    """Resolve manga_brand_series_plan row via canon alias or direct brand_id."""
+    plan_doc = _load_yaml(MANGA_SERIES_PLAN)
+    series = plan_doc.get("brands") or {}
+    canon_row = _manga_canon_planned_body(brand_id)
+    plan_key = canon_row.get("series_plan_key") or brand_id
+    body = series.get(plan_key) if isinstance(series.get(plan_key), dict) else {}
+    if not body:
+        body = series.get(brand_id) if isinstance(series.get(brand_id), dict) else {}
+    return body
+
+
 @router.get("/brand/{brand_id}/planned_volumes")
 async def planned_volumes(brand_id: str) -> dict[str, Any]:
     _validate_brand_id(brand_id)
@@ -355,26 +374,46 @@ async def planned_volumes(brand_id: str) -> dict[str, Any]:
 
     gaps: list[str] = []
     manga_body = (_load_yaml(MANGA_REGISTRY).get("brands") or {}).get(brand_id) or {}
-    series_body = (_load_yaml(MANGA_SERIES_PLAN).get("brands") or {}).get(brand_id) or {}
+    canon_planned = _manga_canon_planned_body(brand_id)
+    series_body = _series_plan_body_for_brand(brand_id)
     defaults = _load_yaml(MANGA_SERIES_PLAN).get("global_defaults") or {}
+    tier_defaults = (_load_yaml(MANGA_CANON_PLANNED).get("tier_defaults") or {}).get(
+        canon_planned.get("tier") or (manga_body.get("tier") if isinstance(manga_body, dict) else None)
+        or "core",
+        {},
+    )
 
-    ebooks = series_body.get("volumes_per_year_target") or defaults.get("volumes_per_year_target")
+    ebooks = (
+        canon_planned.get("volumes_per_year_target")
+        or series_body.get("volumes_per_year_target")
+        or tier_defaults.get("volumes_per_year_target")
+        or defaults.get("volumes_per_year_target")
+    )
     if ebooks is None:
         gaps.append("ebook plan absent")
 
-    manga_series = series_body.get("active_series_target") or defaults.get("active_series_target")
+    manga_series = (
+        canon_planned.get("active_series_target")
+        or series_body.get("active_series_target")
+        or tier_defaults.get("active_series_target")
+        or defaults.get("active_series_target")
+    )
     if manga_series is None and brand_id not in (_load_yaml(MANGA_REGISTRY).get("brands") or {}):
         gaps.append("manga series plan absent")
 
-    podcast = None
-    podcast_dir = REPO_ROOT / "config" / "podcast"
-    if podcast_dir.is_dir():
-        gaps.append("podcast per-brand counts not wired (config present)")
-    else:
+    podcast = (
+        canon_planned.get("episodes_per_year_target")
+        or tier_defaults.get("episodes_per_year_target")
+    )
+    if podcast is None:
         gaps.append("podcast plan absent")
 
-    audiobook = None
-    gaps.append("audiobook plan absent")
+    audiobook = (
+        canon_planned.get("titles_per_year_target")
+        or tier_defaults.get("titles_per_year_target")
+    )
+    if audiobook is None:
+        gaps.append("audiobook plan absent")
 
     parts: list[str] = []
     if ebooks is not None:
@@ -382,7 +421,9 @@ async def planned_volumes(brand_id: str) -> dict[str, Any]:
     if manga_series is not None:
         parts.append(f"{manga_series} manga series")
     if podcast is not None:
-        parts.append(f"{podcast} podcasts")
+        parts.append(f"{podcast} podcasts/yr")
+    if audiobook is not None:
+        parts.append(f"{audiobook} audiobooks/yr")
     locales = _locales_for_brand(brand_id)
     if locales:
         parts.append(f"{len(locales)} locale{'s' if len(locales) != 1 else ''}")
@@ -404,6 +445,9 @@ async def planned_volumes(brand_id: str) -> dict[str, Any]:
         "summary_line": " · ".join(parts) if parts else "No plan data yet",
         "gaps": gaps,
         "axes_present": _axes_for_brand(brand_id),
+        "source": MANGA_CANON_PLANNED.relative_to(REPO_ROOT).as_posix()
+        if canon_planned
+        else MANGA_SERIES_PLAN.relative_to(REPO_ROOT).as_posix(),
     }
 
 

@@ -31,6 +31,22 @@ def test_planned_volumes_shape():
     assert "summary_line" in out
     assert "gaps" in out
     assert isinstance(out["locales_active"], list)
+    assert out["planned"]["ebooks"] is not None
+    assert out["planned"]["manga_series"] is not None
+    assert out["planned"]["podcast"] is not None
+    assert out["planned"]["audiobook"] is not None
+    assert out["gaps"] == []
+    assert "ebooks/yr" in out["summary_line"]
+    assert "podcasts/yr" in out["summary_line"]
+    assert "audiobooks/yr" in out["summary_line"]
+
+
+def test_planned_volumes_canon_brand_without_legacy_series_plan_key():
+    """Canonical-only brand IDs must resolve via manga_canon_planned_volumes.yaml."""
+    out = _run(brand_admin_public.planned_volumes("adhd_forge_mystery"))
+    assert out["planned"]["podcast"] is not None
+    assert out["planned"]["audiobook"] is not None
+    assert out["gaps"] == []
 
 
 def test_planned_volumes_unknown_404():
