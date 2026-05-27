@@ -195,3 +195,54 @@ def test_audiobook_axis_per_platform_zip(tmp_path: Path) -> None:
             plat_manifest = json.loads(zf.read("manifest.json").decode("utf-8"))
             assert plat_manifest["platform"] == platform
             assert plat_manifest["deliverable_type"] == "audiobook"
+
+
+def test_platform_zip_includes_manga_deliverable_for_all_manga_platforms(
+    tmp_path: Path,
+) -> None:
+    """Manga axis MVP: per-platform ZIPs for ALL THREE manga platform slugs
+    (WEBTOON, LINE Manga, Piccoma) must embed the rendered manga deliverable
+    files (e.g. manga.pdf + manga.png) referenced under
+    ``deliverables.manga_panels.files``. Regression guard for stillness_press
+    2026-W22 WEBTOON wiring."""
+    brand = "epsilon_press"
+    week_iso = "2026-W22"
+    pkg = tmp_path / "artifacts" / "weekly_packages"
+    week_dir = pkg / brand / week_iso
+    week_dir.mkdir(parents=True, exist_ok=True)
+    (week_dir / "README.txt").write_text("test readme\n", encoding="utf-8")
+
+    # Two real deliverable files on disk (KDP-style PDF and WEBTOON-style PNG).
+    pdf_rel = f"artifacts/weekly_packages/{brand}/{week_iso}/kdp/{brand}_{week_iso}_manga.pdf"
+    png_rel = f"artifacts/weekly_packages/{brand}/{week_iso}/webtoon/{brand}_{week_iso}_manga.png"
+    for rel in (pdf_rel, png_rel):
+        path = tmp_path / rel
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_bytes(b"manga-deliverable-fixture\n")
+
+    manifest = {
+        "brand_id": brand,
+        "week_iso": week_iso,
+        "deliverables": {
+            "manga_panels": {
+                "status": "ready",
+                "files": [pdf_rel, png_rel],
+            }
+        },
+    }
+    (week_dir / "manifest.json").write_text(
+        json.dumps(manifest, indent=2) + "\n", encoding="utf-8"
+    )
+
+    built = build_platform_zips_for_brand(tmp_path, brand, week_iso, packages_dir=pkg)
+    built_platforms = {p.parent.name for p in built}
+    assert {"webtoon", "line_manga", "piccoma"}.issubset(
+        built_platforms
+    ), f"expected all 3 manga platforms; got {sorted(built_platforms)}"
+
+    webtoon_zip = next(p for p in built if p.parent.name == "webtoon")
+    with zipfile.ZipFile(webtoon_zip, "r") as zf:
+        names = set(zf.namelist())
+        assert "manifest.json" in names
+        assert pdf_rel in names, f"webtoon zip missing pdf: {sorted(names)}"
+        assert png_rel in names, f"webtoon zip missing png: {sorted(names)}"

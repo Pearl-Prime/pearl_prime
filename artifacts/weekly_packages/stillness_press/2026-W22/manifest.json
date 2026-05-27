@@ -2,8 +2,8 @@
   "brand_id": "stillness_press",
   "week_iso": "2026-W22",
   "week_monday": "2026-05-25",
-  "generated_at": "2026-05-28T02:00:00Z",
-  "package_type": "book_axis_mvp+podcast_axis_mvp+audiobook_axis_mvp",
+  "generated_at": "2026-05-28T02:15:00Z",
+  "package_type": "book_axis_mvp+podcast_axis_mvp+audiobook_axis_mvp+manga_axis_mvp",
   "deliverables": {
     "books": {
       "status": "ready",
@@ -18,10 +18,17 @@
       ]
     },
     "manga_panels": {
-      "status": "stub",
+      "status": "ready",
       "files": [
-        "README.txt"
-      ]
+        "artifacts/weekly_packages/stillness_press/2026-W22/kdp/stillness_press_2026-W22_manga.pdf",
+        "artifacts/weekly_packages/stillness_press/2026-W22/webtoon/stillness_press_2026-W22_manga.png"
+      ],
+      "episode_id": "ep_001",
+      "episode_title": "The Alarm Is Lying \u2014 Episode 1",
+      "panel_count": 35,
+      "render_source": "V4_composed_v4_qwen",
+      "kdp_pdf": "artifacts/weekly_packages/stillness_press/2026-W22/kdp/stillness_press_2026-W22_manga.pdf",
+      "webtoon_png": "artifacts/weekly_packages/stillness_press/2026-W22/webtoon/stillness_press_2026-W22_manga.png"
     },
     "pearl_news": {
       "status": "stub",
