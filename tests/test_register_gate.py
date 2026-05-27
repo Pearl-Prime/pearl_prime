@@ -350,6 +350,38 @@ HOOK_ATOM_PATHS = [
 ]
 
 
+HOOK_P2_ATOM_PATHS = [
+    REPO_ROOT / rel
+    for rel in (
+        "atoms/educators/anxiety/HOOK/CANONICAL.txt",
+        "atoms/gen_alpha_students/burnout/HOOK/CANONICAL.txt",
+        "atoms/nyc_executives/anxiety/HOOK/CANONICAL.txt",
+    )
+]
+
+
+@pytest.mark.skipif(
+    not all(p.exists() for p in HOOK_P2_ATOM_PATHS),
+    reason="P2 HOOK atom batch not checked out in this worktree",
+)
+def test_f11_p2_hook_batch_zero_warns():
+    """HOOK-SCENE-FIRST-01 P2 batch: 37 low-prominence atoms rewritten scene-first."""
+    from scripts.pearl_editor.apply_hook_p2_scene_first_rewrites import REWRITES
+
+    p2_paths = [REPO_ROOT / rel for rel in REWRITES]
+    assert len(p2_paths) == 37, f"expected 37 P2 rewrite targets, got {len(p2_paths)}"
+    hook_atoms = load_hook_atoms_from_paths(p2_paths)
+    result = evaluate_register(
+        "Chapter 1\n\nRendered hook chapter placeholder.\n",
+        hook_atoms=hook_atoms,
+    )
+    f11 = [f for f in result.findings if f.failure_id == "F11"]
+    assert len(f11) == 0, (
+        f"Expected 0 F11 WARN on P2 batch (37 atoms); got {len(f11)}: "
+        f"{[f.evidence.get('atom_path') for f in f11]}"
+    )
+
+
 @pytest.mark.skipif(
     not all(p.exists() for p in HOOK_ATOM_PATHS),
     reason="HOOK atom corpus not checked out in this worktree",
