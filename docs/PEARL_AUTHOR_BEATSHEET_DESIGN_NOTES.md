@@ -333,6 +333,8 @@ beatsheet.yaml + (series_profile, scene_inventory, style_state, panel_template, 
 
 **OPEN-8 — Style state injection.** The style_state.yaml prompt_clauses (line_weight, wash_softness, tonal_density, shading_aggression) are injected into rendering prompts, NOT into continuity_state YAMLs. The beatsheet correctly omits them. Confirm with Pearl_Architect that this boundary holds.
 
+**OPEN-9 — phantom panel reference `ep001_004b` (cosmetic; surfaced 2026-05-29).** `ep001_004.yaml`'s `continuity_invariants` states the notification glow "lands in next panel ep001_004b" — but no `ep001_004b` exists; the 1:1 beat→panel mapping makes the next panel `ep001_005`. Stale-comment artifact from an earlier sub-panel scheme. Per the round-trip-immutability rule (see OPEN-5), do NOT edit the ground-truth YAML — fix in the `ep_001 v2` cleanup bucket. Surfaced by an independent bottom-up re-derivation that otherwise byte-validates this beatsheet's contract (confirms the §1 field classification + the "only `archetype` is unconditionally required" finding).
+
 ---
 
 ## §7 Validation plan (the round-trip test)
