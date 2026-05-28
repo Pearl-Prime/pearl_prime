@@ -19,6 +19,7 @@ locales:
   it_IT: { language: Italian, region: Italy, currency: EUR, tier: secondary }
   zh_SG: { language: "Simplified Chinese", region: Singapore, currency: SGD, tier: tertiary }
   hu_HU: { language: Hungarian, region: Hungary, currency: HUF, tier: tertiary }
+  pt_BR: { language: Portuguese, region: Brazil, currency: BRL, tier: secondary }  # ratified 2026-05-29 (LATAM §1A): manga-forward, top-2 priority w/ France
 
 # ── Canonical Topics (17 active) ─────────────────────────────────────
 topics:
@@ -141,6 +142,15 @@ lane_content_mix:
     micro_manga: 0.05           # short episodes
     micro_ebook: 0.20           # text micro
 
+  # Brazil: top-3 ex-Asia anime market; manga-forward (One Piece = #2 comic). LATAM §1A.
+  pt_BR:
+    manga_series: 0.13          # WEBTOON Canvas BR + Brazilian manga apps
+    manga_standalone: 0.08      # KDP BR graphic novel / tankōbon
+    ebook_series: 0.32          # text series
+    ebook_standalone: 0.27      # text standalone
+    micro_manga: 0.05           # short episodes
+    micro_ebook: 0.15           # text micro
+
   # China: SKIP (inaccessible without local entity)
   zh_CN:
     manga_series: 0.00
@@ -197,6 +207,7 @@ locale_pricing:
   it_IT: { multiplier: 0.85, min_micro: 0.99, max_standard: 22.99 }
   zh_SG: { multiplier: 0.45, min_micro: 1.50, max_standard: 10.00 }
   hu_HU: { multiplier: 0.40, min_micro: 0.99, max_standard: 14.99 }
+  pt_BR: { multiplier: 0.60, min_micro: 0.99, max_standard: 16.99 }  # ratified band 0.55–0.65 (LATAM §1A); BRL, price-sensitive market
 
 # ── Kill List (Never Build) ──────────────────────────────────────────
 kill_list:
