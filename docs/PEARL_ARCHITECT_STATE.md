@@ -2134,3 +2134,15 @@ Phase 3 P0 workstreams **NOT YET OPENED** — pending operator authorization on 
 4. **Phase 3 P0 dispatch** — per-brand scale-out from 1 brand → 37 brands. Awaits operator authorization on cadence + brand priority.
 
 **Pointers:** `artifacts/coordination/ACTIVE_WORKSTREAMS.tsv` (7 ws rows flipped completed in this PR + 1 new P2 row); `BRAND_ADMIN_CANONICAL_PACKAGE.md`; `artifacts/weekly_packages/stillness_press/2026-W22/manifest.json` (4-axis composite); prior `AMENDMENT-2026-05-27-BRAND-ADMIN-V2-PHASE-1-P0-COMPLETE` (this state doc).
+
+---
+
+### MANGA-RENDER-LINEAGE-01 — V4/V5 contract+continuity_state chain canonical for render; SpiritualTech VISUAL_AGENT prompt-planning superseded-for-layered (ratified 2026-05-29)
+
+**Status:** **ratified** (operator decision 2026-05-29; this cap entry + [`docs/MANGA_RENDER_LINEAGE_DECISION_2026-05-29.md`](./MANGA_RENDER_LINEAGE_DECISION_2026-05-29.md)).
+
+**Decision:** Two manga render lineages existed, sharing only `continuity_state`. **CANONICAL for render** = the V4/V5 contract + `continuity_state` chain (`contract_to_prompt_compiler` → `scripts/manga/render_v5_episode.py`, Qwen-Image-Layered — what AUTHORITY V5.1 runs and what `continuity_state_generator.py` scales). **SUPERSEDED for the layered-render approach** = SpiritualTech `VISUAL_AGENT` / `build_panel_prompts.py` prompt-planning (retained as experiment-of-record / non-layered fallback). **RETAINED** = `LETTERING_AGENT` + `LAYOUT_AGENT` (post-render text/composition; reconcile against V5 lettering-v2 PR #945). **Open impl item:** align any reused VISUAL_AGENT prompt logic to the Qwen natural-language-prose strategy (`docs/CHARACTER_INDIVIDUATION_PIPELINE_SPEC_2026-05-02.md` §2.3).
+
+**How to apply:** route render-pipeline work through the V4/V5 contract + `continuity_state` chain; do NOT build new layered render on the SpiritualTech `panel_prompts.json` path.
+
+**Authority:** this cap entry + `docs/MANGA_RENDER_LINEAGE_DECISION_2026-05-29.md` + `docs/specs/MANGA_V5_LAYERED_ARCHITECTURE.md` (V5.1 render AUTHORITY).

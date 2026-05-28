@@ -13,9 +13,9 @@ This file is created as part of extending the manga catalog generator from 5 →
 
 This plan is a **scaffold** — it defines the locale slot in the generator pipeline but DOES NOT yet contain the per-brand × per-genre allocation research that the CJK and US plans contain. Until Pearl_Research authors the §3 + §4 + §5 sections, the generator will fall back to defaults for `es_LA` rows.
 
-## 1A. PROPOSED — Pearl_Research authoring (2026-05-29) — PENDING OPERATOR RATIFICATION
+## 1A. RATIFIED — es_LA + pt_BR strategy (2026-05-29, operator)
 
-> Research-grounded proposals that **set strategy** (brand/format/genre per market). NOT ratified. `es_LA` is a wired locale (fill §3/§4 from here on ratification); `pt_BR` is **NOT** a wired locale — adding it is a scope expansion (see wiring flag). Figures cited inline; full source list in the originating research pass.
+> **✅ RATIFIED 2026-05-29 (operator).** These strategies are accepted; §3/§4 are authored from here. **Locale-wiring scope expansion APPROVED** — `pt_BR` (manga-forward, 2nd priority after France) to be wired via a separately-governed `VALID_LOCALES` + schema + `lane_content_mix` + `format_routing` change with series_plan regen (its own atomic PR, NOT done here); `es_LA` needs its dedicated `lane_content_mix` + `_GENRE_REVENUE_WEIGHTS` + format_routing. Figures cited inline.
 
 ### es_LA (Spanish-LATAM, Mexico-anchored)
 - **Format mix (proposed):** ebook ~80% / manga ~10% / **audiobook companion on all hero titles** — audiobook is the growth engine (Mexico audiobooks $88.5M → $461.5M by 2030, **31.5% CAGR**; books +12.6% in 2024 = strongest global growth; self-help ≈ 30% of ebook revenue).

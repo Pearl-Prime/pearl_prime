@@ -67,9 +67,9 @@ When adding any of these:
 3. Author per-locale strategic doc section (or new file)
 4. Add format-routing config entries
 
-## 6.1 PROPOSED research — de_DE / fr_FR / it_IT / es_ES (2026-05-29) — PENDING OPERATOR RATIFICATION
+## 6.1 RATIFIED — de_DE / fr_FR / it_IT / es_ES strategy (2026-05-29, operator)
 
-> Research-grounded proposals for the §6 future European locales. NOT yet wired (per §6 checklist). **Sets strategy — not ratified.** Western markets are ebook-heavy / manga-light except France (genuine manga culture); audiobook is the universal growth lever.
+> **✅ RATIFIED 2026-05-29 (operator).** These per-market strategies are accepted. **Locale-wiring scope expansion APPROVED** — priority **France + Brazil first** (genuine manga cultures), then DE/ES/IT/MX (ebook-forward). Implementation = a separately-governed `VALID_LOCALES` + schema-enum + `lane_content_mix` + `format_routing` change with a series_plan regen (thousands of files → its own atomic PR per the 2X.4 pattern; NOT done here). Western markets are ebook-heavy / manga-light except France; audiobook is the universal growth lever.
 
 ### Germany (de_DE)
 - **Format mix (proposed):** ebook ~80% / manga ~10% / **audiobook companion** (Germany = #1 EU audiobook market by volume; books €9.88B in 2024). Manga = a YA-driven aisle, not a self-help vehicle.

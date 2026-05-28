@@ -1,7 +1,7 @@
 # Manga Render Lineage — Reconciliation Decision
 
 **Date:** 2026-05-29
-**Status:** RECOMMENDATION — pending operator ratification (architecture decision)
+**Status:** ✅ RATIFIED 2026-05-29 (operator). The recommendation below is the accepted decision; recorded as cap `MANGA-RENDER-LINEAGE-01` in `docs/PEARL_ARCHITECT_STATE.md`.
 **Authority context:** `docs/specs/MANGA_V5_LAYERED_ARCHITECTURE.md` (AUTHORITY 2026-05-20)
 **Origin:** provenance audit follow-up (the "two parallel render lineages" weak-link)
 
