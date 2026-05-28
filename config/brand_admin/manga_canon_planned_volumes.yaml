@@ -2,9 +2,10 @@ schema_version: 1
 registry_id: manga_canon_planned_volumes
 owner: pearl_brand
 status: active
-source: ws_planned_volumes_per_brand_backfill_20260526; tier baselines Pearl_Marketing
-last_updated: '2026-05-27'
+source: manga_series_plans SSOT (manga_series count); tier baselines Pearl_Marketing
+last_updated: '2026-05-28'
 brand_list_source: config/manga/canonical_brand_list.yaml
+series_count_source: config/source_of_truth/manga_series_plans/en_US
 tier_defaults:
   flagship:
     volumes_per_year_target: 8
@@ -31,238 +32,239 @@ series_plan_alias:
   solar_return_isekai: solar_return
   warrior_calm_cultivation: warrior_calm
   bright_presence_tw_seinen: bright_presence_tw
-notes: Brand-admin planned_volumes SSOT for 37 Path X manga-canon brands. Ebook/manga_series
-  values prefer manga_brand_series_plan.yaml via series_plan_key; podcast/audiobook
-  use tier baselines unless overridden per brand.
+notes: Brand-admin planned_volumes registry for 37 Path X manga-canon brands. active_series_target
+  = REAL planned series count from the 37-brand SSOT (series counts are locale-invariant;
+  en_US is the reference locale). volumes_per_year_target prefers curated manga_brand_series_plan.yaml
+  via series_plan_key, else tier baseline; podcast/audiobook use tier baselines.
 brands:
   adhd_forge_mystery:
     tier: niche
     volumes_per_year_target: 4
-    active_series_target: 2
+    active_series_target: 4
     episodes_per_year_target: 26
     titles_per_year_target: 4
   bio_flow_healing:
     tier: niche
     volumes_per_year_target: 4
-    active_series_target: 2
+    active_series_target: 6
     episodes_per_year_target: 26
     titles_per_year_target: 4
   body_memory_shojo:
     tier: core
     volumes_per_year_target: 5
-    active_series_target: 3
+    active_series_target: 8
     episodes_per_year_target: 40
     titles_per_year_target: 5
     series_plan_key: body_memory
   bright_presence_tw_seinen:
     tier: niche
     volumes_per_year_target: 5
-    active_series_target: 3
+    active_series_target: 4
     episodes_per_year_target: 26
     titles_per_year_target: 5
     series_plan_key: bright_presence_tw
   calm_student_school:
     tier: niche
     volumes_per_year_target: 4
-    active_series_target: 2
+    active_series_target: 4
     episodes_per_year_target: 26
     titles_per_year_target: 4
   career_lift_workplace:
     tier: core
     volumes_per_year_target: 6
-    active_series_target: 3
+    active_series_target: 8
     episodes_per_year_target: 40
     titles_per_year_target: 6
   cognitive_clarity:
     tier: flagship
     volumes_per_year_target: 8
-    active_series_target: 4
+    active_series_target: 14
     episodes_per_year_target: 52
     titles_per_year_target: 8
   confidence_core_romance:
     tier: niche
     volumes_per_year_target: 4
-    active_series_target: 2
+    active_series_target: 6
     episodes_per_year_target: 26
     titles_per_year_target: 4
   creative_unfold_social:
     tier: niche
     volumes_per_year_target: 4
-    active_series_target: 2
+    active_series_target: 4
     episodes_per_year_target: 26
     titles_per_year_target: 4
   devotion_path_shonen:
     tier: niche
     volumes_per_year_target: 6
-    active_series_target: 3
+    active_series_target: 6
     episodes_per_year_target: 26
     titles_per_year_target: 6
     series_plan_key: devotion_path
   digital_ground:
     tier: flagship
     volumes_per_year_target: 8
-    active_series_target: 4
+    active_series_target: 14
     episodes_per_year_target: 52
     titles_per_year_target: 8
   executive_calm_workplace:
     tier: core
     volumes_per_year_target: 6
-    active_series_target: 3
+    active_series_target: 8
     episodes_per_year_target: 40
     titles_per_year_target: 6
   focus_sprint_workplace:
     tier: core
     volumes_per_year_target: 6
-    active_series_target: 3
+    active_series_target: 8
     episodes_per_year_target: 40
     titles_per_year_target: 6
   gentle_growth_healing:
     tier: core
     volumes_per_year_target: 6
-    active_series_target: 3
+    active_series_target: 8
     episodes_per_year_target: 40
     titles_per_year_target: 6
   healing_ground_healing:
     tier: core
     volumes_per_year_target: 6
-    active_series_target: 3
+    active_series_target: 8
     episodes_per_year_target: 40
     titles_per_year_target: 6
   heart_balance_shojo:
     tier: core
     volumes_per_year_target: 5
-    active_series_target: 3
+    active_series_target: 8
     episodes_per_year_target: 40
     titles_per_year_target: 5
     series_plan_key: heart_balance
   high_performer_workplace:
     tier: core
     volumes_per_year_target: 6
-    active_series_target: 3
+    active_series_target: 8
     episodes_per_year_target: 40
     titles_per_year_target: 6
   hormone_reset_healing:
     tier: niche
     volumes_per_year_target: 4
-    active_series_target: 2
+    active_series_target: 6
     episodes_per_year_target: 26
     titles_per_year_target: 4
   legacy_builder_memoir:
     tier: niche
     volumes_per_year_target: 4
-    active_series_target: 2
+    active_series_target: 4
     episodes_per_year_target: 26
     titles_per_year_target: 4
   longevity_lab_healing:
     tier: niche
     volumes_per_year_target: 4
-    active_series_target: 2
+    active_series_target: 6
     episodes_per_year_target: 26
     titles_per_year_target: 4
   minimal_mind_healing:
     tier: core
     volumes_per_year_target: 6
-    active_series_target: 3
+    active_series_target: 8
     episodes_per_year_target: 40
     titles_per_year_target: 6
   morning_momentum_workplace:
     tier: core
     volumes_per_year_target: 6
-    active_series_target: 3
+    active_series_target: 8
     episodes_per_year_target: 40
     titles_per_year_target: 6
   night_reset_healing:
     tier: core
     volumes_per_year_target: 6
-    active_series_target: 3
+    active_series_target: 8
     episodes_per_year_target: 40
     titles_per_year_target: 6
   optimizer_workplace:
     tier: core
     volumes_per_year_target: 6
-    active_series_target: 3
+    active_series_target: 8
     episodes_per_year_target: 40
     titles_per_year_target: 6
   qi_foundation_cultivation:
     tier: niche
     volumes_per_year_target: 6
-    active_series_target: 3
+    active_series_target: 4
     episodes_per_year_target: 26
     titles_per_year_target: 6
   relational_calm_iyashikei:
     tier: core
     volumes_per_year_target: 8
-    active_series_target: 4
+    active_series_target: 8
     episodes_per_year_target: 40
     titles_per_year_target: 8
     series_plan_key: relational_calm
   relationship_clarity_romance:
     tier: niche
     volumes_per_year_target: 4
-    active_series_target: 2
+    active_series_target: 6
     episodes_per_year_target: 26
     titles_per_year_target: 4
   resilient_parent_social:
     tier: niche
     volumes_per_year_target: 4
-    active_series_target: 2
+    active_series_target: 6
     episodes_per_year_target: 26
     titles_per_year_target: 4
   sleep_restoration_iyashikei:
     tier: core
     volumes_per_year_target: 4
-    active_series_target: 2
+    active_series_target: 10
     episodes_per_year_target: 40
     titles_per_year_target: 4
     series_plan_key: sleep_restoration
   solar_return_isekai:
     tier: niche
     volumes_per_year_target: 6
-    active_series_target: 3
+    active_series_target: 4
     episodes_per_year_target: 26
     titles_per_year_target: 6
     series_plan_key: solar_return
   somatic_wisdom_shojo:
     tier: core
     volumes_per_year_target: 5
-    active_series_target: 3
+    active_series_target: 10
     episodes_per_year_target: 40
     titles_per_year_target: 5
     series_plan_key: somatic_wisdom
   spiritual_ground_supernatural:
     tier: niche
     volumes_per_year_target: 4
-    active_series_target: 2
+    active_series_target: 6
     episodes_per_year_target: 26
     titles_per_year_target: 4
   stabilizer_healing:
     tier: core
     volumes_per_year_target: 6
-    active_series_target: 3
+    active_series_target: 8
     episodes_per_year_target: 40
     titles_per_year_target: 6
   stillness_press:
     tier: flagship
     volumes_per_year_target: 6
-    active_series_target: 3
+    active_series_target: 16
     episodes_per_year_target: 52
     titles_per_year_target: 6
   stoic_edge_battle:
     tier: niche
     volumes_per_year_target: 4
-    active_series_target: 2
+    active_series_target: 6
     episodes_per_year_target: 26
     titles_per_year_target: 4
   trauma_path_healing:
     tier: niche
     volumes_per_year_target: 4
-    active_series_target: 2
+    active_series_target: 6
     episodes_per_year_target: 26
     titles_per_year_target: 4
   warrior_calm_cultivation:
     tier: niche
     volumes_per_year_target: 6
-    active_series_target: 3
+    active_series_target: 6
     episodes_per_year_target: 26
     titles_per_year_target: 6
     series_plan_key: warrior_calm
