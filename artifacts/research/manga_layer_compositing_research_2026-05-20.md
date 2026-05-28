@@ -9,6 +9,8 @@
 - `artifacts/manga/.../experiments/v4_b_test/ep001_006_L2_v4btest2_face_only_alpha_u2net_human_seg_v2.png` — visible chair sliver kept by u2net_human_seg.
 - `artifacts/manga/.../experiments/v4_b_test/ep001_006_L2_v4btest2_face_only_alpha_isnet_anime_v2.png` — isnet-anime keeps stove fragment behind shoulder.
 
+> **Evidence note (provenance, 2026-05-29):** the `experiments/v4_b_test/` cutout files cited above are NOT present in the repo checkout (cannot be re-verified). The core V4→V5 decision is independently corroborated by the 35 `composed_v4_qwen/ep_001/` composites + the operator ep_001 review — see `docs/specs/MANGA_V5_LAYERED_ARCHITECTURE.md`.
+
 ---
 
 ## Executive summary (the recommended architectural shift)

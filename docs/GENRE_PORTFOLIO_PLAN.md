@@ -2,6 +2,7 @@
 **Created:** 2026-04-23
 **Authority:** Pearl_Research market analysis (session b70157a3, ae0c457d6bfbbc4bc)
 **Scope:** All 37 brands — genre portfolio percentages, wellness embedding map, revenue potential
+**Sources (provenance):** empirical genre shares from [`artifacts/research/popular_genre_ranking_2026-05-02.md`](../artifacts/research/popular_genre_ranking_2026-05-02.md) (Oricon/ICv2/Ken Research); V2 reweight in [`artifacts/research/marketing_grounded_per_genre_allocation_2026-05-13.md`](../artifacts/research/marketing_grounded_per_genre_allocation_2026-05-13.md); per-genre bestseller dossiers in [`artifacts/research/genre_bestseller_dossiers/`](../artifacts/research/genre_bestseller_dossiers/). The revenue figures below (Berserk 70M, Frieren 32M, Evangelion $16B, etc.) are illustrative comparables, not a single cited study.
 
 ---
 

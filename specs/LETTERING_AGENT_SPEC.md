@@ -4,6 +4,8 @@ Full Agent Specification — AI Manga Dharma System
 
 *SpiritualTech Systems · Confidential · v1.1*
 
+> **Render-authority note (provenance, 2026-05-29):** SpiritualTech-lineage lettering spec. The current production lettering path is the V5 lettering-v2 work (PR #945, `agent/manga-lettering-v2-20260507`), downstream of the V5.1 render chain (`docs/specs/MANGA_V5_LAYERED_ARCHITECTURE.md`). These lineages are not yet cross-reconciled — confirm which applies before production use.
+
 ---
 
 ## 1. Role, Boundary & Position

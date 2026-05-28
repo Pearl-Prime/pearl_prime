@@ -69,6 +69,13 @@ content_mix:
 # - Manga sells on Amazon KDP as graphic novel EPUB
 # - WEBTOON Canvas 2026 supports 7 languages
 # - France = #1 EU manga market (35% share)
+#
+# PROVENANCE (2026-05-29): the manga shares below were re-weighted UPWARD from the
+# cited global_manga_distribution_strategy.md §6.1 (e.g. en_US manga ~20% here vs
+# strategy 30%; ja_JP ~70% vs 40%; ko_KR ~60% vs 35%; zh_TW ~55% vs 25%). Intentional
+# portfolio bet, not a faithful copy of the source. This is the OPERATIVE per-market
+# format-mix SSOT (market_catalog_registry.yaml::content_mix is stale) — but know it
+# diverges from the cited research numbers.
 
 lane_content_mix:
   # Japan: manga-primary. Piccoma #1 app ($482M+), webtoon $10.85B.

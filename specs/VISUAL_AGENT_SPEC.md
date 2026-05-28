@@ -4,6 +4,8 @@ Full Agent Specification — AI Manga Dharma System
 
 *SpiritualTech Systems · Confidential · v1.1*
 
+> **Render-authority note (provenance, 2026-05-29):** this is the SpiritualTech-lineage visual spec (FLUX/SDXL prompt planning, LoRA identity). The **current production render pipeline** is V5.1 — `docs/specs/MANGA_V5_LAYERED_ARCHITECTURE.md` (Qwen-Image-Layered) + `docs/specs/MANGA_CONTINUITY_STATE_SPEC.md` + PuLID-FLUX identity. The two lineages are not yet cross-reconciled; confirm which render path applies (operator-tier) before production use. Prompt approach here aligns with `docs/COMFYUI_FLUX_MANGA_PROMPTING_RESEARCH_2026-04-29.md`.
+
 ---
 
 ## 1. Role, Boundary & Position
