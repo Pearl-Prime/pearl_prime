@@ -19,6 +19,11 @@ Generate complete catalog **content** (books, manga series/titles, podcast scrip
 - **`config/brand_registry.yaml` (≈28 keys) is the SEPARATE book-pipeline axis (24×13=312).** Do NOT conflate it with the 37 manga canon. The fan-out "37" is manga canon.
 - **4 launch locales:** `en_US`, `ja_JP`, `zh_TW`, `zh_CN` (Tier-1 markets per master catalog plan; the other 9 locales are later phases).
 
+### Manga gold-template bar (operator 2026-05-29 — V5.1 required)
+- **V4 manga (`composed_v4_qwen`, L0+L2+rembg) is NOT gold-template-eligible.** Wave 1 approval requires **V5.1** panels per [docs/specs/MANGA_V5_LAYERED_ARCHITECTURE.md](./specs/MANGA_V5_LAYERED_ARCHITECTURE.md) with operator §11 acceptance ([docs/MANGA_V5_CATALOG_ROLLOUT_PLAN.md](./MANGA_V5_CATALOG_ROLLOUT_PLAN.md) Milestone A: ≥31/35 shippable on ep_001 re-render).
+- **Catalog inventory is already planned:** 1,350 `series_plan` YAMLs exist; **1,349/1,350** have `title: TBD` at plan stage (expected). Open work = **titles/content + V5.1 render pipeline**, not a fresh planning pass.
+- **Scale unlock:** continuity-state generator (rollout **Milestone C**) before catalog-wide V5.1 dispatch — see rollout plan §3.
+
 ---
 
 ## Source-of-Truth Inputs (canonical)
@@ -92,10 +97,10 @@ flowchart TD
 - Per brand: write book TEXT (HOOK scene-first), build EPUB + ComfyUI cover (two-stage: FLUX imagery, PIL text overlay — never title in prompt, per COVER-REGISTRY-01).
 - Readiness states: planned → draft → review → ready.
 
-### WS3 — Manga full catalog (100% series/titles)
-- Manga series plan exists (1,350 series YAMLs). **Generation** = scripts + panel renders.
-- Per series: chapter beats + panel descriptions → ComfyUI render (V2 multi-model per MANGA-LAYERED-PIPELINE-V2-01) → KDP PDF + WEBTOON strip.
-- Reuse existing `composed_v4` panels where present (don't re-render).
+### WS3 — Manga full catalog (render + titles — plan banked)
+- Manga series plan exists (**1,350** series YAMLs; titles mostly `TBD` until generation). **Do not replan.**
+- Per series: beatsheet + continuity_state → **V5.1** render on Pearl Star ([docs/specs/MANGA_V5_LAYERED_ARCHITECTURE.md](./specs/MANGA_V5_LAYERED_ARCHITECTURE.md)) → KDP PDF + WEBTOON strip.
+- **Do not treat V4 `composed_v4_qwen` as shippable or gold-template.** Re-render through V5.1; identity/V2 individuation per `MANGA-LAYERED-PIPELINE-V2-01` in [docs/PEARL_ARCHITECT_STATE.md](./PEARL_ARCHITECT_STATE.md) is a parallel quality lane, not a substitute for V5.1.
 
 ### WS4 — Podcast scripts (all brands)
 - Plan exists (podcast 148/148 from #1355). **Generation** = episode scripts per `config/podcast/` format contracts + locale variants.
@@ -119,14 +124,15 @@ flowchart TD
 
 ## Known drift (fix opportunistically, do not block fan-out)
 - `config/manga/manga_brand_series_plan.yaml` legacy file = 13/37 brands but still feeds 6 scripts incl. the brand-admin planned-volume generator → under-counts manga for 24 brands. Migration flagged (chip). The generated 37×4 SSOT is the truth.
-- Series/episode titles are `TBD` at plan stage (expected; filled at generation).
+- **Series titles:** **1,349/1,350** `series_plan` YAMLs have `title: TBD` (verified 2026-05-28). This is expected at plan stage — title synthesis is **generation work**, not Layer 1 planning.
+- **`config/brand_registry.yaml`** = book pipeline (24×13). Do not use for manga fan-out counts.
 
 ---
 
 ## Success criteria
 - Every in-scope brand (37) has generated content for books + manga series/titles + podcast scripts + image bank, in all 4 locales.
-- `US-ENG Brand 1` + `JP Brand 1` = complete end-to-end gold templates, operator-approved.
-- Manga catalog reaches 100% rendered across in-scope brands.
+- `US-ENG Brand 1` + `JP Brand 1` = complete end-to-end gold templates, **operator-approved at V5.1 manga quality** (not V4).
+- Manga catalog reaches 100% **V5.1-rendered** across in-scope brands (after continuity-state generator unlock per rollout plan).
 - Readiness traceable via `brand_admin_v2.html` (non-null downloads across the board) + manifest/index outputs.
 
 ---

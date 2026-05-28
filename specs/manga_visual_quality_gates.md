@@ -1,8 +1,10 @@
 # Manga Visual Quality Gates Specification
 ## AI Manga Dharma System — SpiritualTech Systems
 
+> **ASPIRATIONAL (2026-05-29):** Design target per [docs/MANGA_PIPELINE_AUDIT_2026-04-26.md](../docs/MANGA_PIPELINE_AUDIT_2026-04-26.md) — MQG gates not fully wired into `chapter_runner`. Live release checks: [specs/QC_AGENT_SPEC.md](./QC_AGENT_SPEC.md) + `config/manga/gate_registry.yaml`. Render authority: [docs/specs/MANGA_V5_LAYERED_ARCHITECTURE.md](../docs/specs/MANGA_V5_LAYERED_ARCHITECTURE.md).
+
 **Version:** 1.0
-**Status:** Design
+**Status:** Design (ASPIRATIONAL — see banner)
 **Workstream:** 7
 **Date:** 2026-04-17
 **Gate IDs:** MQG-01 through MQG-08

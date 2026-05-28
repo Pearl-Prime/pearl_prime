@@ -1,6 +1,8 @@
 # Manga Catalogs — en_US + ja_JP — 2026-04-28
 
 **Status:** materialized.
+
+> **Historical materialization (12 brands, 2026-04-28) — NOT the canon.** The 37-brand SSOT (`config/source_of_truth/manga_series_plans/`, 1,350 series across 5 locales, EXECUTED via Phase 2X) is the truth; this Apr-28 drop is a pre-canon operational artifact retained for history.
 **Authority:** [`docs/MANGA_CATALOG_PLAN_EN_US_JA_JP_ZH_TW_ZH_CN_2026-04-28.md`](MANGA_CATALOG_PLAN_EN_US_JA_JP_ZH_TW_ZH_CN_2026-04-28.md) §2.1, §2.2, §3, §5
 **Generator:** [`scripts/catalog/generate_manga_catalog.py`](../scripts/catalog/generate_manga_catalog.py)
 **Outputs:** [`artifacts/catalog/manga/`](../artifacts/catalog/manga/)

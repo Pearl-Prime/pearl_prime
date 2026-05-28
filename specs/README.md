@@ -21,8 +21,8 @@
 This repo now includes the full AI Manga Dharma spec suite: one master
 pipeline summary plus 13 agent/system specs covering series setup, chapter
 production, lettering/layout, QC, and brand/anti-spam controls. These specs
-should be read together with [MANGA_MODE_SYSTEM_SPEC.md](./MANGA_MODE_SYSTEM_SPEC.md),
-which remains the broader system-level reference.
+should be read together with the master [AI_MANGA_PIPELINE_SUMMARY.md](./AI_MANGA_PIPELINE_SUMMARY.md).
+(The older [archive/MANGA_MODE_SYSTEM_SPEC.md](./archive/MANGA_MODE_SYSTEM_SPEC.md) was archived 2026-04-26 per Phase 2X.5 — zero code references; read for history only, not as current authority.)
 
 | Spec | Purpose |
 |------|---------|

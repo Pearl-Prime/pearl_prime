@@ -1,5 +1,7 @@
 # Manga Pipeline Audit — Phase 1 Synthesis
 
+> **Snapshot banner (2026-05-29):** Phase 1 READ-only audit (2026-04-26). **Phase 2X catalog reconciliation EXECUTED** (#693/#696/#698/#699/#700/#737) — live SSOT **1,350** `series_plan` + **18,900** `book_plan` (not the 132/716 stale counts below). **Render authority:** V5.1 ([docs/specs/MANGA_V5_LAYERED_ARCHITECTURE.md](./specs/MANGA_V5_LAYERED_ARCHITECTURE.md)); V4 `composed_v4_qwen` panels are history, not gold-template-eligible. **Fan-out:** [docs/GLOBAL_CATALOG_FANOUT_EXECUTION_PLAN.md](./GLOBAL_CATALOG_FANOUT_EXECUTION_PLAN.md) — Layer 1 plan banked 444/444 (#1355); Wave 1 ~80% in flight. Read §1–§7 for the 2026-04-26 reasoning; use the docs above for current execution truth.
+
 **Date:** 2026-04-26
 **Author:** Pearl_Architect (synthesis) + Pearl_Research (parallel reads, 5 subagents) + Pearl_PM (catalog planning)
 **Scope:** READ-only audit across `artifacts/research/manga_*` + `artifacts/research/webtoon_*` + `artifacts/research/strategic_audit/` + `docs/MANGA_*` + `docs/research/manga_craft/` + `specs/AI_MANGA_PIPELINE_SUMMARY.md` + `specs/manga_*` + `specs/MANGA_*` + `schemas/manga/` + `phoenix_v4/manga/` + `scripts/manga/` + `config/source_of_truth/manga_*` + `config/manga/` + `artifacts/manga/`
