@@ -37,10 +37,19 @@ This reads the registry below and reports which env vars are set vs missing.
 
 ### 0. Pearl Star — Local Inference Server (PRIMARY)
 
+> **⚠️ AGENTS MUST RUN `eval "$(python3 scripts/ci/load_integration_env_from_keychain.py)"` BEFORE
+> REACHING PEARL STAR.** The Keychain is the single source of truth for the live endpoints. Do **NOT**
+> hardcode an IP and do **NOT** trust the stale `192.168.1.112` LAN address that older docs/scripts
+> default to — it is **WRONG** and unreachable off the operator's LAN. Pearl Star is reachable over
+> **Tailscale** at `pearlstar.tail7fd910.ts.net` (verified 2026-05-28: `/system_stats` HTTP 200,
+> Ollama `gemma3:27b` + `qwen2.5:14b` loaded). A prior agent concluded "Pearl Star unreachable" purely
+> because it used the stale `192.168.1.112` default instead of loading Keychain env first. Verify before
+> generating: `curl -s --max-time 8 "$COMFYUI_URL/system_stats"` must return HTTP 200.
+
 | Field | Value |
 |-------|-------|
-| **Server** | Ubuntu 24.04 at `PEARL_STAR_IP` (default: 192.168.1.112 LAN) |
-| **Services** | Ollama/Qwen3:14b (:11434), ComfyUI/FLUX.1-dev (:8188), CosyVoice2 (:9880) |
+| **Server** | Ubuntu 24.04, reached via Tailscale `pearlstar.tail7fd910.ts.net` (NOT the stale `192.168.1.112` LAN default). SSH alias `pearl_star` → host `pearlstar`. Endpoints come from Keychain via `load_integration_env_from_keychain.py`. |
+| **Services** | Ollama/Qwen (:11434, `qwen2.5:14b` + `gemma3:27b`), ComfyUI/FLUX (:8188), CosyVoice2 (:9880) |
 | **Env vars** | `PEARL_STAR_IP`, `COMFYUI_URL`, `COSYVOICE_URL` (optional gated downloads: `HF_TOKEN`) |
 | **Consumed by** | `phoenix_v4/manga/image_backend.py`, `scripts/image_generation/runcomfy_batch.py`, `scripts/video/flux_client.py`, `scripts/audio/generate_presenter_audio.py`, `scripts/localization/llm_client.py`, `pearl_news/pipeline/llm_expand.py` |
 | **How to obtain** | See [docs/UBUNTU_PRODUCTION_SERVER_SETUP.md](./UBUNTU_PRODUCTION_SERVER_SETUP.md) |
@@ -66,11 +75,16 @@ This reads the registry below and reports which env vars are set vs missing.
 - **CJK TTS:** CosyVoice2 on Pearl Star for zh/ja/ko. Edge-TTS is free fallback. ElevenLabs remains primary for EN.
 - **EN TTS:** ElevenLabs — NO CHANGE.
 
-**Keychain (macOS, for load_integration_env_from_keychain.py):**
-- `PEARL_STAR_IP` = 192.168.1.112
-- `COMFYUI_URL` = http://192.168.1.112:8188
-- `COSYVOICE_URL` = http://192.168.1.112:9880
-- `QWEN_BASE_URL` = http://192.168.1.112:11434/v1
+**Keychain (macOS, for load_integration_env_from_keychain.py) — VERIFIED LIVE 2026-05-28 (Tailscale):**
+- `COMFYUI_URL` = `http://pearlstar.tail7fd910.ts.net:8188`  ✅ HTTP 200 `/system_stats`
+- `QWEN_BASE_URL` = `http://pearlstar.tail7fd910.ts.net:11434/v1`  ✅ HTTP 200 (`gemma3:27b`, `qwen2.5:14b`)
+- `COSYVOICE_URL` = `http://pearlstar.tail7fd910.ts.net:9880`
+- `PEARL_STAR_IP` = (legacy LAN var; the Tailscale `*.ts.net` URLs above are what scripts should consume.
+  The old `192.168.1.112` value only works on the operator's local LAN and must NOT be assumed reachable.)
+
+These are the values the Keychain returns; the literal endpoints above are documentation only — always
+**load them at runtime** via `eval "$(python3 scripts/ci/load_integration_env_from_keychain.py)"` rather
+than copy-pasting, so a future endpoint rotation is picked up automatically.
 
 **Hugging Face (`HF_TOKEN`) — Pearl Star gated downloads (optional):**
 - **Env var:** `HF_TOKEN` (user access token — **Keychain only**; do not paste into repo docs or commits).

@@ -1,16 +1,37 @@
 # stillness_press Manga — Brand-1 Deep Build Manifest
 
-**Layer 2 validation.** 3 series scripted; series 1 fully rendered (35 panels) + assembled to KDP PDF + WEBTOON strip.
+**Layer 2 validation.** 3 series scripted; **all 3 ep_001 now RENDERED** on Pearl Star ComfyUI
+(series 1 = 35 panels reused from main; series 2 + 3 rendered 2026-05-28 via the live Tailscale
+endpoint, disproving the prior "Pearl Star unreachable" stub).
 
-## Series scripted (ep_001 each)
+## Series scripted + rendered (ep_001 each)
 
 | # | Series | title_id | character | topic | script | render |
 |---|---|---|---|---|---|---|
-| 1 | What the Body Holds | `stillness_press_anxiety_vol1` | Mira / Hana | anxiety | `scripts/series1_what_the_body_holds_ep001.md` | **RENDERED** (35 panels) + assembled |
-| 2 | The Night Before You Sleep | `stillness_press_sleep_vol1` | Yuki | sleep_anxiety | `scripts/series2_the_night_before_you_sleep_ep001.md` | script-only (render-ready) |
-| 3 | Hands, Shoulders, Breath | `stillness_press_somatic_vol1` | Mei | somatic_healing | `scripts/series3_hands_shoulders_breath_ep001.md` | script-only (render-ready) |
+| 1 | What the Body Holds | `stillness_press_anxiety_vol1` | Mira / Hana | anxiety | `scripts/series1_what_the_body_holds_ep001.md` | **RENDERED** (35 panels) + assembled (on main) |
+| 2 | The Night Before You Sleep | `stillness_press_sleep_vol1` | Yuki | sleep_anxiety | `scripts/series2_the_night_before_you_sleep_ep001.md` | **RENDERED** (34 panels) + assembled 2026-05-28 |
+| 3 | Hands, Shoulders, Breath | `stillness_press_somatic_vol1` | Mei | somatic_healing | `scripts/series3_hands_shoulders_breath_ep001.md` | **RENDERED** (34 panels) + assembled 2026-05-28 |
 
 This covers all 3 of the stillness_press `active_series_target` (per `config/manga/manga_brand_series_plan.yaml`: anxiety=1, sleep_anxiety=1, somatic_healing=1).
+
+## Series 2 + 3 render (NEW — Pearl Star ComfyUI, this session)
+
+Rendered with `render_series_panels.py` (parses each render-ready markdown script → text-free
+iyashikei FLUX prompts → `flux1-schnell-fp8` 4-step, 1080×1920 WEBTOON-vertical, per-panel
+deterministic seed). Backend: **Pearl Star ComfyUI over Tailscale** (`$COMFYUI_URL`, load via
+`scripts/ci/load_integration_env_from_keychain.py` — NOT the stale 192.168.1.112). $0 spend.
+
+Per-panel source PNGs (~2 MB each) are **git-ignored** (`rendered/.gitignore`) because brand1_deep
+ships raw blobs and they exceed the 1 MB no-binary-blobs cap; they are reproducible from the scripts.
+Committed in-repo proof: `rendered/series{2,3}_contact_sheet.png` (downscaled grids, <1 MB) +
+`rendered/<series>/ep_001/RENDER_PROGRESS.tsv`. Assemble deliverables with `assemble_series.py`:
+
+| Deliverable | Size | Reproduce |
+|---|---|---|
+| `assembled/series2_ep001/kdp.pdf` | ~5.3 MB, 34pp | `assemble_series.py --series 2` [LOCAL] |
+| `assembled/series2_ep001/webtoon_strip.png` | ~43 MB, 800px | `assemble_series.py --series 2` [LOCAL] |
+| `assembled/series3_ep001/kdp.pdf` | ~5 MB, 34pp | `assemble_series.py --series 3` [LOCAL] |
+| `assembled/series3_ep001/webtoon_strip.png` | ~40 MB, 800px | `assemble_series.py --series 3` [LOCAL] |
 
 ## Series 1 rendered assets (REUSED — already on main)
 
@@ -35,10 +56,13 @@ A prior identical assembly already ships in the W22 weekly package:
 and `…/webtoon/stillness_press_2026-W22_manga.png` (68 MB, full-res). For production distribution,
 push assembled binaries to Cloudflare R2 via `scripts/artifacts/r2_sync.py` (Layer 2 pattern).
 
-## Render continuation (series 2 + 3)
+## Lettering / ja_JP continuation
 
-Series 2 and 3 ep_001 are scripted with render-ready panel descriptions (~35 panels each).
-To render: feed each script's panel descriptions through `scripts/manga/build_panel_prompts_v2.py`
-→ `scripts/manga/render_v4_episode.py` against Pearl Star ComfyUI (`http://192.168.1.112:8188`,
-RTX 3060). **Pearl Star was UNREACHABLE from this session** (local network); rendering deferred
-to an operator-present session on the Pearl Star LAN. $0 expected (Pearl Star primary).
+The rendered panels are language-agnostic art. The lettering layer (captions/dialogue/SFX from
+each markdown script) is composited downstream; the ja_JP lettering re-translates only the text
+layer via Qwen on Pearl Star (Tier 2). Per the series plans, ja webtoon cadence is bi-weekly.
+
+For higher-fidelity character-locked renders (named cast face-lock), the V4 layered pipeline
+(`scripts/manga/render_v4_episode.py`, needs per-panel `continuity_state` YAMLs) remains the
+production path; this session used the lighter txt2img path to validate that series 2 + 3 render
+end-to-end on the live Pearl Star endpoint. $0 spend (Pearl Star primary, RTX 5070 Ti).
