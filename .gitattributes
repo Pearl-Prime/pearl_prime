@@ -77,3 +77,11 @@ brand-wizard-app/public/teacher_pics/manga/*.png -filter -diff -merge -text
 brand-wizard-app/public/assets/manga_covers/ahjan_portrait.png -filter -diff -merge -text
 brand-wizard-app/public/assets/manga_covers/joshin_portrait.png -filter -diff -merge -text
 brand-wizard-app/public/assets/manga_covers/pamela_fellows_portrait.png -filter -diff -merge -text
+
+# Brand-1 deep build (Layer 2 validation) — small KDP deliverables committed as
+# regular git blobs, NOT LFS. Rationale: the GitHub LFS budget is exhausted (see
+# teacher_pics note above), so LFS-tracked files land as 130-byte pointers with no
+# real bytes pushed. These cover PNGs (<110 KB) and EPUBs (<110 KB) are all well
+# under the no-binary-blobs.yml 1 MB cap, so they ship correctly as plain blobs.
+artifacts/catalog/brand1_deep/**/*.png -filter -diff -merge -text
+artifacts/catalog/brand1_deep/**/*.epub -filter -diff -merge -text
