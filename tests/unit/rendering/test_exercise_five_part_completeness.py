@@ -24,7 +24,8 @@ Tests in this file:
       (the dominant rule for chapter 2+ in a 6h book, formerly used lean intro).
     - test_assemble_exercise_5_parts_at_session_close: 5 parts at session close
       (formerly skipped intro/description).
-    - test_quick_repeat_skips_introduction: quick_repeat suppresses the cue (no fatigue).
+    - test_quick_repeat_renders_full: quick_repeat now renders all 5 parts
+      (operator directive 2026-05-29 — lean/skip on repeats is disabled).
     - test_practice_library_compose_emits_introduction: alternate path also emits the cue.
     - test_introduction_per_exercise_type: a sample of types each have unique introductions.
     - test_short_form_atoms_without_explicit_markers_still_render: backward compatibility.
@@ -189,13 +190,14 @@ def test_assemble_exercise_5_parts_at_session_close() -> None:
 
 
 # ---------------------------------------------------------------------------
-# Test 5: quick_repeat — operator-allowed exception — skips the cue.
-# This is the only rule where intro/introduction/etc. are intentionally
-# suppressed: repeating the same exercise 3+ times in one session doesn't
-# need the explicit "now we're going to do..." cue again.
+# Test 5: quick_repeat now renders ALL 5 parts in full.
+# Operator directive (2026-05-29): "I don't want ANY story or exercise to be
+# lean." quick_repeat previously skipped the cue/wrappers and leaned the
+# description; lean/skip suppression on repeats is now disabled, so a repeated
+# exercise renders the full 5-part structure like every other rule.
 # ---------------------------------------------------------------------------
 
-def test_quick_repeat_skips_introduction() -> None:
+def test_quick_repeat_renders_full() -> None:
     ctx = AssemblyContext(
         first_encounter=False,
         emotional_state=EmotionalState.NEUTRAL,
@@ -204,9 +206,12 @@ def test_quick_repeat_skips_introduction() -> None:
     )
     sel = ca.select_components(ctx)
     assert sel.rule_name == "quick_repeat"
-    assert sel.introduction == ComponentMode.SKIP, (
-        "quick_repeat must skip the introduction (avoid repetition fatigue)"
-    )
+    # Lean is deprecated — quick_repeat emits every component in full.
+    assert sel.introduction == ComponentMode.FULL
+    assert sel.intro == ComponentMode.FULL
+    assert sel.description == ComponentMode.FULL
+    assert sel.aha == ComponentMode.FULL
+    assert sel.integration == ComponentMode.FULL
 
 
 # ---------------------------------------------------------------------------

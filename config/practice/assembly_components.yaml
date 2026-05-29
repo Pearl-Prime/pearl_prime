@@ -1,6 +1,11 @@
 # Exercise component assembly rules.
 # Ordered list — first matching rule wins.
-# Each rule specifies match conditions and component modes (full/lean/skip).
+# Each rule specifies match conditions and component modes (full/skip).
+# NOTE (operator directive, 2026-05-29): the `lean` mode is DEPRECATED. No
+# STORY or EXERCISE may ever be truncated, so the assembler treats LEAN as a
+# no-op (resolves to FULL). Any remaining `lean` value here would render in
+# full anyway; rules use `full`/`skip` only. `skip` omits a wrapper entirely
+# (a flow choice) but never shortens authored content.
 # bridge_tone: "gentle" triggers the softer bridge variant for post-emotional content.
 #
 # OPD-113 (2026-05-20): added `introduction` mode per rule. Maps to operator's
@@ -18,16 +23,24 @@ version: 1
 
 rules:
   - name: quick_repeat
-    description: "Exercise done 2+ times already in this session — minimal wrapper"
+    description: "Exercise repeated in this session — still rendered in full"
+    # Operator directive (2026-05-29): no exercise may ever be leaned/truncated.
+    # This rule previously skipped every wrapper and leaned the description,
+    # collapsing a repeated exercise to ~3 setup sentences and dropping the
+    # authored aha + integration entirely. It now renders the complete 5-part
+    # structure so every exercise is FULL on every path (spine AND legacy),
+    # every runtime, every chapter. The rule is retained (not deleted) so the
+    # repeat_count match still resolves deterministically — it just no longer
+    # shortens or omits any authored content.
     match:
       repeat_count_gte: 2
     components:
-      bridge: skip
-      introduction: skip   # OPD-113: a repeat doesn't need the explicit cue again
-      intro: skip
-      description: lean
-      aha: skip
-      integration: skip
+      bridge: full
+      introduction: full
+      intro: full
+      description: full
+      aha: full
+      integration: full
 
   - name: emotional_pivot
     description: "Heavy emotional content just landed — full gentle transition into exercise"
@@ -43,12 +56,16 @@ rules:
     bridge_tone: gentle
 
   - name: flow_state
-    description: "Reader is in good rhythm — light entry, skip integration to keep momentum"
+    description: "Reader is in good rhythm — full entry, skip integration to keep momentum"
     match:
       emotional_state: flow
     components:
-      bridge: lean
-      introduction: lean   # OPD-113: keep the cue even in flow state, just shorter
+      # Operator directive (2026-05-29): lean is disabled — emitted components
+      # render in full. (intro/integration remain skipped to preserve the
+      # in-flow momentum; skipping a wrapper is not truncation of authored
+      # content, and the description/aha guidance is always full.)
+      bridge: full
+      introduction: full
       intro: skip
       description: full
       aha: full
@@ -73,7 +90,7 @@ rules:
       first_encounter: false
       repeat_count_lte: 1
     components:
-      bridge: lean
+      bridge: full         # 2026-05-29: lean disabled — render the full bridge
       introduction: full   # OPD-113: every exercise still gets the explicit cue
       intro: full          # OPD-113: keep the named description (was 'lean')
       description: full
@@ -93,10 +110,10 @@ rules:
       integration: full
 
   - name: default
-    description: "No specific context — lean bridge, full everything else"
+    description: "No specific context — full everything"
     match: {}
     components:
-      bridge: lean
+      bridge: full         # 2026-05-29: lean disabled — render the full bridge
       introduction: full   # OPD-113
       intro: full
       description: full

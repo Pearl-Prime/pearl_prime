@@ -190,11 +190,18 @@ def _sentences(text: str) -> list[str]:
 
 
 def _derive_lean(full_text: str, max_sentences: int = 2) -> str:
-    """Derive lean variant: first N sentences of full text."""
-    sents = _sentences(full_text)
-    if not sents:
-        return full_text
-    return " ".join(sents[:max_sentences])
+    """Return the FULL text unchanged — lean derivation is disabled.
+
+    Operator directive (2026-05-29): no STORY or EXERCISE may ever be leaned /
+    truncated. This helper used to return the first ``max_sentences`` of the
+    text; it now returns the text verbatim so that any precomputed ``lean``
+    variant equals ``full``. Combined with ``_get_text`` (which also treats
+    LEAN as FULL), this guarantees authored exercise content is never
+    shortened, no matter which code path requests a lean variant. The
+    ``max_sentences`` parameter is retained for call-site compatibility but no
+    longer caps the output.
+    """
+    return full_text or ""
 
 
 # ---------------------------------------------------------------------------
@@ -470,12 +477,21 @@ def resolve_from_ab_tady_components(exercise_data: dict) -> ExerciseComponents:
 # ---------------------------------------------------------------------------
 
 def _get_text(variants: ComponentVariants, mode: ComponentMode, tone: str = "") -> str:
-    """Select the right text variant based on mode and tone."""
+    """Select the right text variant based on mode and tone.
+
+    Operator directive (2026-05-29): no STORY or EXERCISE may ever be leaned /
+    truncated. LEAN is therefore treated as a no-op and resolves to the FULL
+    variant. This is the single canonical guarantee point for the assembler:
+    every exercise component (bridge → introduction → intro → description →
+    aha → integration) renders in full on every path (spine AND legacy
+    registry), every runtime, and every chapter regardless of which assembly
+    rule fires. SKIP is still honored, so wrappers a rule deliberately omits
+    stay omitted — but nothing that is emitted is ever shortened.
+    """
     if mode == ComponentMode.SKIP:
         return ""
-    if mode == ComponentMode.LEAN:
-        return variants.lean or _derive_lean(variants.full)
-    # FULL mode
+    # LEAN is deprecated and intentionally falls through to FULL: lean is a
+    # no-op so authored exercise/story content is never truncated.
     if tone == "gentle" and variants.gentle:
         return variants.gentle
     return variants.full
