@@ -2146,3 +2146,48 @@ Phase 3 P0 workstreams **NOT YET OPENED** — pending operator authorization on 
 **How to apply:** route render-pipeline work through the V4/V5 contract + `continuity_state` chain; do NOT build new layered render on the SpiritualTech `panel_prompts.json` path.
 
 **Authority:** this cap entry + `docs/MANGA_RENDER_LINEAGE_DECISION_2026-05-29.md` + `docs/specs/MANGA_V5_LAYERED_ARCHITECTURE.md` (V5.1 render AUTHORITY).
+---
+
+### COHESIVE-FLOW-PATH-DEFAULT-SPINE-01 — Flip `--pipeline-mode` default `registry` → `spine` (operator Option A; ratified 2026-05-30)
+
+**Status:** **ratified** (operator decision 2026-05-30; cap entry only — implementation deferred to Pearl_Dev).
+
+**Context:** Read-only audit [PR #1379](https://github.com/Ahjan108/phoenix_omega_v4.8/pull/1379) + [`artifacts/qa/COHESIVE_FLOW_12x10x5_ARCHITECTURE_AUDIT.md`](../artifacts/qa/COHESIVE_FLOW_12x10x5_ARCHITECTURE_AUDIT.md) confirms **12×10×5 is real on the spine path** (`SOMATIC_10_SLOT_GRID`, PR #395) and that the operative drift is **path divergence**: spec + catalog SSOT declare spine canonical, but `scripts/run_pipeline.py` argparse default is `registry` (`:1604`), so agents and batch runners that omit `--pipeline-mode` silently ship the legacy 9-slot bestseller beat. [`docs/PEARL_PRIME_BOOK_SYSTEM_CANONICAL.md`](./PEARL_PRIME_BOOK_SYSTEM_CANONICAL.md) **§1.1** already flags this as *"the most consequential spec↔code drift in Pearl Prime today"* and pre-schedules the fix workstream.
+
+**Decision gate (operator pick on PR #1379 thread):**
+
+| Option | Mechanism | Outcome |
+|--------|-----------|---------|
+| **A (ratified)** | Flip global argparse default `registry` → `spine` at `run_pipeline.py` (+ mirror sites) + regression test | **Closes silent fallback** for every caller that omits the flag |
+| **B (rejected)** | Route catalog/batch drivers only (`run_max_quality_catalog.py` et al. pass `--pipeline-mode spine`) | Batch ships spine; **ad-hoc CLI and other callers still default to legacy** — mixed state, easy re-drift |
+| **C (rejected)** | Keep code default `registry`; enforce spine only via docs / explicit operator discipline (§1.1 interim rule) | **Does not fix spec↔code drift**; agents continue to silently hit legacy when the flag is omitted |
+
+**Decision:** **Option A.** Operator rationale: **avoid silent fallback to legacy** — the canonical 12×10×5 cohesive-flow spine (`SOMATIC_10_SLOT_GRID`, Priya `story_schedule` at sec 2/5/9, 5 story variants) must be the default ship path, not an opt-in flag behind a legacy default.
+
+**Pearl_Dev implementation scope (NOT this cap PR — cite only):**
+
+| Touch point | File:line | Change |
+|-------------|-----------|--------|
+| Primary argparse default | `scripts/run_pipeline.py:1604` | `default="registry"` → `default="spine"` |
+| Mirror site 1 | `scripts/run_pipeline.py:1763` | same default flip |
+| Mirror site 2 | `scripts/run_pipeline.py:1951` | same default flip |
+| Mirror site 3 | `scripts/run_pipeline.py:2295` | same default flip |
+| Regression test | new test module (Pearl_Dev's call) | assert `--pipeline-mode` default is `spine` at module import |
+
+**Downstream workstream:** `ws_pipeline_mode_default_flip_to_spine_20260518` (Pearl_Dev; small PR; scheduled before catalog-scale production per §1.1). Complements audit restoration Step 1 (explicit `--pipeline-mode spine` on batch drivers) — Steps 1+2 should land together per audit interaction note; **this cap ratifies Step 2 (default flip)** as the binding architecture decision.
+
+**Anti-drift check:**
+
+- Does NOT implement code — cap entry only; no `run_pipeline.py` edits in the architect PR.
+- Does NOT contradict `TEMPLATE-UNIVERSAL-01` — spine path *is* the 12-chapter spine × 10-section grid source-of-truth; flipping default aligns code with that cap.
+- Does NOT close PR #1379 — audit artifact remains the forensic substrate; this entry ratifies the operator path-default pick against that audit.
+- REINFORCES `PEARL_PRIME_BOOK_SYSTEM_CANONICAL.md` §1.1 — removes the interim "MUST pass `--pipeline-mode spine` explicitly" burden once Pearl_Dev lands the ws.
+
+**Action items:**
+
+1. **Pearl_Dev (`ws_pipeline_mode_default_flip_to_spine_20260518`)** — implement the four default flips + import-time default regression test; audit all `run_pipeline.py` callers before merge (§1.1 risk: MEDIUM). Iteration cap = 1 PR.
+2. **Pearl_Dev / Pearl_GitHub (follow-on, not gated on cap merge)** — restoration Step 1 from PR #1379 audit: add `--pipeline-mode spine` to `scripts/run_max_quality_catalog.py` and any other catalog/batch driver that omits the flag (LOW risk; canary 5-book gate pass-rate first).
+3. **Pearl_PM** — ensure `ws_pipeline_mode_default_flip_to_spine_20260518` is routed in `artifacts/coordination/ACTIVE_WORKSTREAMS.tsv` with trigger = this cap-entry PR merged (do not mark completed until Pearl_Dev PR merges).
+4. **Pearl_Architect** — comment on PR #1379 when this cap PR merges: `Option A ratified — cap COHESIVE-FLOW-PATH-DEFAULT-SPINE-01 landed at <PR-link>`.
+
+**Authority:** this cap entry + [PR #1379](https://github.com/Ahjan108/phoenix_omega_v4.8/pull/1379) + [`artifacts/qa/COHESIVE_FLOW_12x10x5_ARCHITECTURE_AUDIT.md`](../artifacts/qa/COHESIVE_FLOW_12x10x5_ARCHITECTURE_AUDIT.md) + [`docs/PEARL_PRIME_BOOK_SYSTEM_CANONICAL.md`](./PEARL_PRIME_BOOK_SYSTEM_CANONICAL.md) §1.1.
