@@ -2,7 +2,9 @@
 
 **Purpose:** Single canonical reference for every external service credential in Phoenix Omega.
 **Owner:** Pearl_Int / Pearl_Architect
-**Last updated:** 2026-05-27 (Added §12a fal.ai — serverless GPU inference, blocks Milestone H §7.1 per OPD-151; setup runbook + `FAL_KEY` env var registered)
+**Last updated:** 2026-06-02 (Added §5R Cloudflare R2 — artifact storage; Pearl Star autonomous self-monitoring section in [`pearl_star_node_inventory.md`](../skills/pearl-int/references/pearl_star_node_inventory.md); setup runbook at [`docs/runbooks/PEARL_STAR_SETUP_RUNBOOK.md`](./runbooks/PEARL_STAR_SETUP_RUNBOOK.md))
+
+**Prior:** 2026-05-27 (Added §12a fal.ai — serverless GPU inference, blocks Milestone H §7.1 per OPD-151; setup runbook + `FAL_KEY` env var registered)
 **Rule:** No actual secrets in this file. Only env var names, documentation, and pointers.
 
 ### Phase 1 + 2 scope (deliverables)
@@ -189,6 +191,19 @@ than copy-pasting, so a future endpoint rotation is picked up automatically.
 | **Required vs optional** | Required for video/image pipeline and brand-admin pages deployment |
 | **Status** | Wired in CI and local scripts |
 | **Detailed docs** | [docs/VIDEO_CLOUDFLARE_FLUX_CREDENTIALS.md](./VIDEO_CLOUDFLARE_FLUX_CREDENTIALS.md) |
+
+### 5R. Cloudflare R2 — Artifact storage (long-running pipelines)
+
+| Field | Value |
+|-------|-------|
+| **Env vars** | `R2_ACCESS_KEY_ID`, `R2_SECRET_ACCESS_KEY`, `R2_ACCOUNT_ID`, `R2_BUCKET`, `R2_ENDPOINT` |
+| **Consumed by** | `scripts/artifacts/r2_sync.py`, `scripts/artifacts/setup_r2.sh`, Pearl Star autonomous-orchestrator sample uploads (long-running manga / pearl_news bulks). Tracked in code registry at `scripts/ci/integration_env_registry.py`. |
+| **GitHub workflows** | None today (Pearl Star pushes directly via `rclone`); future scheduled artifact rotation could move here. |
+| **How to obtain** | Cloudflare Dashboard → R2 → Manage R2 API Tokens → create bucket-scoped token. Result page shows Access Key ID + Secret Access Key + jurisdiction-specific S3 endpoint URL. Operator paste this into the gitignored staging file `docs/cloudflare_api.txt` and Pearl_Int loads it into Keychain per [`skills/pearl-int/references/credential_staging_files.md`](../skills/pearl-int/references/credential_staging_files.md). |
+| **Required vs optional** | Required for Pearl Star autonomous self-monitoring (orchestrator sample uploads + dashboards) and for any `r2_sync.py` consumer. Optional for laptop-only workflows that never write to R2. |
+| **Status** | Wired in Keychain (verified 2026-06-02 Pearl_Int); rclone remote `r2` configured on Pearl Star with `no_check_bucket=true` (bucket-scoped token has no account-level `CreateBucket` permission). |
+| **Bucket** | `phoenix-omega-artifacts` (existing prefixes: `manga/`, `teacher_showcase/`). EU jurisdiction — the endpoint host hash differs from `R2_ACCOUNT_ID`, so `R2_ENDPOINT` must be set explicitly (the value Cloudflare shows on the token result page). `scripts/artifacts/r2_sync.py` reads `R2_ENDPOINT` first and falls back to the default host format when unset. |
+| **Pearl Star setup** | See [`docs/runbooks/PEARL_STAR_SETUP_RUNBOOK.md`](./runbooks/PEARL_STAR_SETUP_RUNBOOK.md) Step 4 for the no-secrets-in-chat configure procedure. |
 
 ### 6. GitHub API
 
