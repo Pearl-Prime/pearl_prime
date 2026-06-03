@@ -207,8 +207,14 @@ def main() -> int:
 
     for series_dir in series_list:
         series_id = series_dir.name
-        chapters = sorted(c.stem for c in series_dir.glob("ep_*.yaml"))
-        log(f"=== series: {series_id} ({len(chapters)} chapters) ===")
+        raw_chapters = sorted(c.stem for c in series_dir.glob("ep_*.yaml"))
+        # Skip chapters lacking panel_prompts (Pearl_Writer hasn't authored prompts yet).
+        chapters = [c for c in raw_chapters
+                    if (PANEL_PROMPTS_DIR / series_id / f"{c}.panel_prompts.json").exists()]
+        skipped = [c for c in raw_chapters if c not in chapters]
+        log(f"=== series: {series_id} ({len(chapters)} renderable / {len(raw_chapters)} chapter_scripts) ===")
+        if skipped:
+            log(f"  skipped (no panel_prompts authored): {skipped}")
         for chapter_id in chapters:
             sentinel = SENTINEL_DIR / f"ja_jp_phase2_{series_id}__{chapter_id}.ok"
             if sentinel.exists():

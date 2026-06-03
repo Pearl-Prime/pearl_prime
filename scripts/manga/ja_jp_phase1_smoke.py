@@ -232,10 +232,23 @@ def main() -> int:
     if not series_dir.exists():
         log(f"FATAL: series dir not found: {series_dir}")
         return 1
-    chapters = [c.stem for c in sorted(series_dir.glob("ep_*.yaml"))]
-    log(f"Phase 1 smoke target: {args.series}; chapters={chapters}")
+    raw_chapters = [c.stem for c in sorted(series_dir.glob("ep_*.yaml"))]
+    # Intersect with panel_prompts availability — a chapter without authored
+    # panel_prompts can't be rendered, so silently skip it (not a smoke fail).
+    chapters = []
+    skipped_no_prompts = []
+    for c in raw_chapters:
+        if (PANEL_PROMPTS_DIR / args.series / f"{c}.panel_prompts.json").exists():
+            chapters.append(c)
+        else:
+            skipped_no_prompts.append(c)
+    log(f"Phase 1 smoke target: {args.series}")
+    log(f"  chapter_scripts found: {raw_chapters}")
+    log(f"  renderable (with panel_prompts): {chapters}")
+    if skipped_no_prompts:
+        log(f"  skipped (no panel_prompts authored): {skipped_no_prompts}")
     if not chapters:
-        log("No chapters to render. (Expected if no en_US chapter scripts are authored.)")
+        log("No renderable chapters. (chapter_scripts exist but no panel_prompts authored yet — Pearl_Writer follow-up.)")
         return 1
 
     panels_by_chapter: dict[str, list[Path]] = {}
