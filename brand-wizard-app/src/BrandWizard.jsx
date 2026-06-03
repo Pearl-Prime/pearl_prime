@@ -1400,10 +1400,21 @@ function Step2PrimaryReader({ state, update, i18n = {} }) {
     { key: "tools", label: "Breathwork / tools", hint: "Utility-first experiences and practical support flows." },
     { key: "hybrid", label: "Hybrid lane", hint: "Blend book, manga, and editorial proof in one path." },
   ];
+  // marketChoices = canonical VALID_LOCALES (12) per scripts/manga/generate_series_plans_from_catalog.py:44-51
+  // and PR #1369 (ratified 2026-05-29 expansion). Keep in sync when locales added.
   const marketChoices = [
-    { key: "us", label: "United States (en-US)", hint: "Primary launch market." },
-    { key: "japan", label: "Japan (ja-JP)", hint: "Localized visual and wording expectations." },
-    { key: "taiwan", label: "Taiwan (zh-TW)", hint: "Traditional Chinese market alignment." },
+    { key: "us",       locale: "en_US", label: "United States (en-US)",  hint: "Primary launch market." },
+    { key: "japan",    locale: "ja_JP", label: "Japan (ja-JP)",          hint: "Localized visual and wording expectations." },
+    { key: "korea",    locale: "ko_KR", label: "South Korea (ko-KR)",    hint: "Manhwa / webtoon-forward market." },
+    { key: "taiwan",   locale: "zh_TW", label: "Taiwan (zh-TW)",         hint: "Traditional Chinese — distinct register from HK." },
+    { key: "hongkong", locale: "zh_HK", label: "Hong Kong (zh-HK)",      hint: "Traditional Chinese — distinct register from Taiwan." },
+    { key: "china",    locale: "zh_CN", label: "Mainland China (zh-CN)", hint: "Simplified Chinese — gray-zone distribution per OQ-6." },
+    { key: "latam",    locale: "es_LA", label: "Latin America (es-LA)",  hint: "Spanish-language pan-LATAM." },
+    { key: "france",   locale: "fr_FR", label: "France (fr-FR)",         hint: "Top manga culture in Europe." },
+    { key: "germany",  locale: "de_DE", label: "Germany (de-DE)",        hint: "Ebook-forward European market." },
+    { key: "italy",    locale: "it_IT", label: "Italy (it-IT)",          hint: "Ebook-forward European market." },
+    { key: "hungary",  locale: "hu_HU", label: "Hungary (hu-HU)",        hint: "Central Europe entry market." },
+    { key: "brazil",   locale: "pt_BR", label: "Brazil (pt-BR)",         hint: "Top manga culture in Americas." },
   ];
 
   const selectedLane = state.onboardingLane || "self_help";
