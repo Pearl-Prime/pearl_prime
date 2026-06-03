@@ -95,7 +95,9 @@ def test_runcomfy_cost_check_cooldown_at_cap(tmp_path: Path) -> None:
 
 def test_run_batches_skips_runcomfy_when_cooled_down(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     spend = tmp_path / "spend.tsv"
-    spend.write_text("date\tspend_usd\n2026-05-01\t12.00\n", encoding="utf-8")
+    # Spend must exceed _COOLDOWN_USD (raised from 10→25 in PR #1422 for RunComfy
+    # deprecation burn). 100.00 stays comfortably above any future cap bumps too.
+    spend.write_text("date\tspend_usd\n2026-05-01\t100.00\n", encoding="utf-8")
     monkeypatch.setattr(batch_runner, "RUNCOMFY_SPEND_TSV", spend)
     batches = [
         {"batch_id": "r1", "locale": "en-US", "dispatch_path": "runcomfy", "sequence": 1},
