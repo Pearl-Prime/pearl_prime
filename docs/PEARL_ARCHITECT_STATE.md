@@ -1404,6 +1404,8 @@ overlay_param:
 
 **Status:** **active** (operator authorization; OPERATOR DECISION CARD: NONE — binding immediately).
 
+> **AMENDMENT-2026-06-03-RUNCOMFY-DEPRECATION-IN-PROGRESS:** Operator has decided to retire the RunComfy paid lane. Current balance ($20.48) is being burned on one-time high-value renders (character refs / ep_002 V5.1 / flagship parity / KDP covers / style probes) before account closure. Cap is **TEMPORARILY raised from $10 to $25** in 4 enforcement sites (`runcomfy_dispatch.py:88`, `runcomfy_cost_tracker.py:29`, `dispatchers/runcomfy_dispatcher.py:164`, `batch_runner.py:43`) to allow the burn. After closure, a follow-up PR restores `_COOLDOWN_USD = 10.0` and removes RunComfy from the dual-path entirely (Pearl Star becomes single-path canonical). Burn receipt: `artifacts/qa/runcomfy_burn_receipt_20260603.md` (forthcoming).
+
 **PROJECT_ID:** `PRJ-DUAL-PATH-IMAGE-RENDER-V1`.  
 **Subsystem:** `integrations` (primary RunComfy wiring); `manga_pipeline`; `brand_admin`; cross-cutting.  
 **Spec:** [`docs/specs/IMG_RENDER_DUAL_PATH_V1_SPEC.md`](./specs/IMG_RENDER_DUAL_PATH_V1_SPEC.md).

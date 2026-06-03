@@ -26,8 +26,8 @@ from zoneinfo import ZoneInfo
 REPO_ROOT = Path(__file__).resolve().parents[2]
 _DEFAULT_SPEND_TSV = REPO_ROOT / "artifacts" / "qa" / "runcomfy_monthly_spend.tsv"
 _BILLING_URL = "https://api.runcomfy.com/v1/account/billing/summary"
-_COOLDOWN_USD = 10.0
-_WARN_USD = 8.0
+_COOLDOWN_USD = 25.0  # TEMPORARY: RunComfy deprecation burn — restore to 10.0 after closure
+_WARN_USD = 20.0  # TEMPORARY: bumped from 8.0 alongside cap raise
 _TZ_DEFAULT = "America/Los_Angeles"
 
 

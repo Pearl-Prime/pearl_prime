@@ -161,9 +161,9 @@ def dispatch(
         billing = {"cumulative_month_spend_usd": spend, "billing_poll_error": True}
 
     result["billing_snapshot_usd"] = spend
-    if spend >= 10.0:
+    if spend >= 25.0:  # TEMPORARY: RunComfy deprecation burn — restore to 10.0 after closure
         result["status"] = "suppressed_cooldown"
-        result["notes"] = "RunComfy cumulative_month_spend_usd >= $10; job not submitted."
+        result["notes"] = "RunComfy cumulative_month_spend_usd >= $25; job not submitted (deprecation-burn cap)."
         return result
 
     api_key = _runcomfy_api_key()
