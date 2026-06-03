@@ -303,15 +303,32 @@
   fields.forEach(f => f.addEventListener('input', updateProgress));
   fields.forEach(f => f.addEventListener('change', updateProgress));
 
-  // Form submit
+  // Form submit — save reflections to localStorage as YAML-emit input,
+  // show success state, then advance into the wizard at step 1 (same
+  // wizard surface the Teacher Books flow enters after teacher selection).
   document.getElementById('survey-form').addEventListener('submit', function(e) {
     e.preventDefault();
     const data = {};
     new FormData(this).forEach((v, k) => { data[k] = v; });
+    // Persist reflections so the wizard / YAML emit picks them up.
+    try {
+      localStorage.setItem('phoenix_musician_reflections', JSON.stringify({
+        savedAt: new Date().toISOString(),
+        reflections: data
+      }));
+      // Reaffirm music-books mode (set by the Music Books CTA on pearl_prime_v6-3).
+      localStorage.setItem('phoenix_book_mode', JSON.stringify({
+        mode: 'music', teacher: null
+      }));
+    } catch (_) { /* private mode / quota — non-fatal */ }
     console.log('Survey data:', JSON.stringify(data, null, 2));
-    // TODO: POST to backend or save as YAML via API
     document.getElementById('survey-form').style.display = 'none';
     document.getElementById('success').style.display = 'block';
+    // Advance to wizard step 1. Same target the teacher_showcase.html
+    // select-flow uses. Short delay so the user sees the success state.
+    setTimeout(function () {
+      window.location.href = '/wizard.html?mode=music&step=1';
+    }, 900);
   });
 </script>
 </body>
