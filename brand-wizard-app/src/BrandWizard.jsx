@@ -1354,10 +1354,10 @@ function Step1Archetype({ state, update, i18n = {} }) {
           >
             <div className="flex items-center gap-2">
               <BookOpen size={18} className="text-gray-900" />
-              <span className="font-bold text-sm text-white">Book mode</span>
+              <span className="font-bold text-sm text-gray-900">Book mode</span>
               {!isMusic && <div className="ml-auto w-5 h-5 rounded-full bg-gray-900 flex items-center justify-center"><Check size={12} className="text-white" /></div>}
             </div>
-            <p className="text-[11px] text-white mt-1.5 leading-relaxed">Self-help, memoir, manga, editorial — the standard catalog path with archetype, persona, voice, and visual style.</p>
+            <p className="text-[11px] text-gray-700 mt-1.5 leading-relaxed">Self-help, memoir, manga, editorial — the standard catalog path with archetype, persona, voice, and visual style.</p>
           </button>
           <button
             type="button"
@@ -1366,10 +1366,10 @@ function Step1Archetype({ state, update, i18n = {} }) {
           >
             <div className="flex items-center gap-2">
               <Headphones size={18} className="text-amber-600" />
-              <span className="font-bold text-sm text-white">Music mode</span>
+              <span className="font-bold text-sm text-amber-800">Music mode</span>
               {isMusic && <div className="ml-auto w-5 h-5 rounded-full bg-amber-600 flex items-center justify-center"><Check size={12} className="text-white" /></div>}
             </div>
-            <p className="text-[11px] text-white mt-1.5 leading-relaxed">First-class music brand (id 38+). Step 4 becomes the musician reflections survey — voice, themes, healing intent, consent.</p>
+            <p className="text-[11px] text-gray-700 mt-1.5 leading-relaxed">First-class music brand (id 38+). Step 4 becomes the musician reflections survey — voice, themes, healing intent, consent.</p>
           </button>
         </div>
       </div>
