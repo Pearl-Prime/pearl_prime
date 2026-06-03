@@ -110,6 +110,7 @@ def bubble_chapter(series_id: str, chapter_id: str, *, locale: str = "ja_JP") ->
     try:
         sys.path.insert(0, str(REPO_ROOT))
         from phoenix_v4.manga.chapter import bubble_render  # type: ignore
+        from phoenix_v4.manga.chapter import lettering_from_script  # type: ignore
         import yaml  # type: ignore
     except Exception as e:
         log(f"  bubble import failed: {e}")
@@ -127,7 +128,12 @@ def bubble_chapter(series_id: str, chapter_id: str, *, locale: str = "ja_JP") ->
     except Exception as e:
         log(f"  yaml load failed: {e}")
         return False
-    lettering_spec = chapter_script.get("lettering_spec") or {"lettering_panels": []}
+    # Build lettering_spec from the chapter_script via canonical builder.
+    try:
+        lettering_spec = lettering_from_script.build_lettering_spec_from_chapter_script(chapter_script)
+    except Exception as e:
+        log(f"  lettering_from_script failed: {e}; falling back to empty spec")
+        lettering_spec = {"lettering_panels": []}
     bubble_style_config = {"styles": {"round": {}, "spiky": {}, "cloud": {}}}
     out_dir = BUBBLED_OUT_DIR / series_id / chapter_id / locale
     out_dir.mkdir(parents=True, exist_ok=True)
