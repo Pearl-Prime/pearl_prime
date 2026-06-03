@@ -1352,23 +1352,7 @@ function Step1Archetype({ state, update, i18n = {} }) {
 
 function Step2PrimaryReader({ state, update, i18n = {} }) {
   const { tPersonas: _P = PERSONAS } = i18n;
-  const laneChoices = [
-    { key: "self_help", label: "Self-help books", hint: "Long-form titles and programs for deep transformation." },
-    { key: "manga", label: "Manga / visual stories", hint: "Panel-first storytelling for youth and visual-native readers." },
-    { key: "pearl_news", label: "Pearl News editorial", hint: "Article-led civic and narrative explainers." },
-    { key: "tools", label: "Breathwork / tools", hint: "Utility-first experiences and practical support flows." },
-    { key: "hybrid", label: "Hybrid lane", hint: "Blend book, manga, and editorial proof in one path." },
-  ];
-  const marketChoices = [
-    { key: "us", label: "United States (en-US)", hint: "Primary launch market." },
-    { key: "japan", label: "Japan (ja-JP)", hint: "Localized visual and wording expectations." },
-    { key: "taiwan", label: "Taiwan (zh-TW)", hint: "Traditional Chinese market alignment." },
-  ];
-
-  const selectedLane = state.onboardingLane || "self_help";
-  const selectedMarket = state.onboardingMarket || "us";
-
-  const selectedFormatFocus = selectedLane === "manga" ? "manga" : state.formatFocus;
+  // Market/lane step removed 2026-06-03 — locale routing happens server-side.
 
   return (
     <div>
@@ -3375,28 +3359,25 @@ function IntroJourney({ onNext, onBack, onChooseTeacher }) {
             </div>
           </div>
           <div className="mt-8" />
-          <div className="mt-6 text-center">
+          {/* Mode picker — Teacher Books + Music Books (canonical 2026-06-03). */}
+          <div className="mt-6 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
             <button
               type="button"
               onClick={onChooseTeacher}
               className="inline-flex items-center gap-2 rounded-2xl bg-gray-900 px-8 py-3.5 text-sm font-bold text-white shadow-lg transition-all hover:-translate-y-0.5 hover:bg-gray-800"
             >
-              {t("ui", "開始建立你的品牌")} <ArrowRight size={18} />
+              {t("ui", "老師之書")} <ArrowRight size={18} />
             </button>
-          </div>
-          {/* Composite mode — skip teacher selection entirely */}
-          <div className="mt-3 text-center">
             <button
               type="button"
               onClick={() => {
-                try { localStorage.setItem("phoenix_book_mode", JSON.stringify({ mode: "composite", teacher: null })); } catch (_) {}
-                onNext();
+                try { localStorage.setItem("phoenix_book_mode", JSON.stringify({ mode: "music", teacher: null })); } catch (_) {}
+                window.location.href = "/musician_reflections_survey";
               }}
-              className="inline-flex items-center gap-2 rounded-2xl border border-amber-400/40 bg-transparent px-6 py-2.5 text-xs font-semibold text-amber-200 transition-all hover:bg-amber-500/10"
+              className="inline-flex items-center gap-2 rounded-2xl bg-gray-900 px-8 py-3.5 text-sm font-bold text-white shadow-lg transition-all hover:-translate-y-0.5 hover:bg-gray-800"
             >
-              {t("ui", "或：綜合模式（無教師）")} <ArrowRight size={14} />
+              {t("ui", "音樂之書")} <ArrowRight size={18} />
             </button>
-            <div className="mt-2 text-[10px] text-white/50">{t("ui", "為此品牌創作所有書籍，不使用教師之聲")}</div>
           </div>
         </div>
       </div>
@@ -3587,12 +3568,12 @@ export default function BrandWizard() {
   const goToHowItWorks = () => { setPhase("intro"); setIntroPage(1); scrollTop(); };
   const goToTeacherShowcase = () => { window.location.href = "teacher_showcase.html"; };
 
-  // If ?teacher= or ?mode=composite in URL, skip intro and jump straight to wizard step 1.
+  // If ?teacher= / ?mode=composite / ?mode=music in URL, skip intro and jump to wizard step 1.
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const urlTeacher = params.get("teacher");
     const urlMode = params.get("mode");
-    if (urlTeacher || urlMode === "composite") { setPhase("wizard"); setStep(0); scrollTop(); }
+    if (urlTeacher || urlMode === "composite" || urlMode === "music") { setPhase("wizard"); setStep(0); scrollTop(); }
   }, []);
 
   // INTRO: 0=welcome, 1=journey → straight to wizard (preview pages removed)

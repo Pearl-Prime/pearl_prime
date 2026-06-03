@@ -103,6 +103,21 @@ If step 1 isn't possible (you don't own/can't get access to the b80152c3 account
 
 ---
 
+## Surface routing — which HTML page is the actual wizard?
+
+The Pages project deploys ~28 HTML surfaces. Most are static pages, one is the React wizard. Easy to edit the wrong one. Map (verified 2026-06-03):
+
+| URL | What it actually is | Edit target if behavior change |
+|---|---|---|
+| `/pearl_prime_v6-3` (+ `-en`, `-ja`, `-tw`, `-zh`) | **Static slide deck** (1300-line standalone HTML with embedded JS — slide navigation, no React). Contains the "Become a Brand Director" orange CTA that links to `/wizard`. Source: `public/pearl_prime_v6-3*.html`. | Direct HTML edit |
+| `/wizard` (+ `-ja`, `-tw`, `-zh`) | **React BrandWizard entry point**. Vite-built from `src/BrandWizard.jsx` (+ locale variants). The "Teacher Books" / "Music Books" IntroJourney mode picker lives here at line ~3437. | `src/BrandWizard*.jsx` |
+| `/onboarding` (`onboarding.html`) | Same React BrandWizard — alternate URL, same bundle. | `src/BrandWizard.jsx` |
+| `/teacher_showcase` | **Static HTML** teacher grid. `chooseTeacher(id)` saves to localStorage + setTimeout-redirects to `wizard.html?teacher=<id>`. Source: `public/teacher_showcase.html`. | Direct HTML edit |
+| `/musician_reflections_survey` | **Static HTML** music brand survey. Submit handler saves to localStorage + redirects to `wizard.html?mode=music&step=1`. Source: `public/musician_reflections_survey.html`. | Direct HTML edit |
+| `/brand_admin*`, `/marketing_dashboard`, etc. | Various static HTML dashboards | Direct HTML edit |
+
+**The 2026-06-03 trap that wasted an hour:** the operator said "edit the page at `/pearl_prime_v6-3`" and the buttons they described ("Choose Your Teacher" / "Composite mode"). I assumed those buttons were IN `pearl_prime_v6-3.html`. They were NOT — `pearl_prime_v6-3.html` is a pure slide deck. The buttons live in `src/BrandWizard.jsx` (the React wizard the slide deck LINKS to). Diagnostic: if you're about to edit, first `grep -n "<button-text>" public/<page>.html src/BrandWizard*.jsx` to find which file actually owns the UI string.
+
 ## Known stale wrangler.toml — followup needed
 
 `brand-wizard-app/wrangler.toml`:
