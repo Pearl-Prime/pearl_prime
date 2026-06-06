@@ -52,7 +52,9 @@ BUBBLED_OUT_DIR = REPO_ROOT / "artifacts" / "manga" / "bubbled"
 PROGRESS_DIR = REPO_ROOT / "artifacts" / "manga"
 
 QUEUE_RENDER = REPO_ROOT / "scripts" / "manga" / "queue_panel_renders.py"
-H1A_WORKFLOW = REPO_ROOT / "scripts" / "image_generation" / "comfyui_workflows" / "flux_txt2img_manga.json"
+_DEFAULT_H1A_WORKFLOW = REPO_ROOT / "scripts" / "image_generation" / "comfyui_workflows" / "flux_txt2img_manga.json"
+_ENV_WORKFLOW = os.environ.get("MANGA_WORKFLOW_PATH")
+H1A_WORKFLOW = Path(_ENV_WORKFLOW) if _ENV_WORKFLOW else _DEFAULT_H1A_WORKFLOW
 
 PHASE1_SERIES = "stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying"
 
