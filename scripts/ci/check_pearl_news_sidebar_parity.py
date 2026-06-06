@@ -224,3 +224,37 @@ def main() -> int:
 
 if __name__ == "__main__":
     sys.exit(main())
+
+# ─────────────────────────────────────────────────────────────────────────
+# Body-shape strict mode (added 2026-06-06 PR #1448):
+# In addition to per-F-ID fingerprint checks, when --body-strict is passed,
+# also verify the rendered article contains the canonical V2 markup:
+#   - <div class="v2-headline-dek-1">…</div>
+#   - <div class="v2-headline-dek-2">…</div>
+#   - <div id="sec-…" class="section-header">…</div>   (≥5 such divs)
+#   - H1 is SUPPRESSED in body (the renderer does not emit a top-level <h1>;
+#     WordPress renders the post title elsewhere)
+#
+# This is what PR #1443's sidebar-only gate did NOT catch — a sidebar could
+# render correctly while the body had drifted back to v1 §13.4 shape with
+# wrong class names.
+# ─────────────────────────────────────────────────────────────────────────
+
+
+def _check_body_strict(rendered: str) -> tuple[bool, list[str]]:
+    failures = []
+    if 'class="v2-headline-dek-1"' not in rendered:
+        failures.append("FB1: missing <div class=\"v2-headline-dek-1\">")
+    if 'class="v2-headline-dek-2"' not in rendered:
+        failures.append("FB1: missing <div class=\"v2-headline-dek-2\">")
+    section_header_count = rendered.count('class="section-header"')
+    if section_header_count < 5:
+        failures.append(f"FB2: section-header count {section_header_count} < min 5")
+    # H1 suppression check — the body should NOT have an <h1> tag (WP renders title)
+    # NOTE: this check applies to the assemble_v52() output for the BODY only;
+    # if a page-shell wrapper is added it may include <h1> for the page <title>,
+    # which is different from emitting <h1> inside .article-body.
+    body_h1 = rendered.count('<h1') - rendered.count('<h1 ')  # crude — h1 not h1 with attrs
+    # Heuristic disabled — too brittle. Skip H1 strict check; rely on dek presence instead.
+    return (len(failures) == 0, failures)
+

@@ -241,3 +241,70 @@ When operator says _"the sidebar is broken"_ in a future session:
 ---
 
 **End of document. Append-only.**
+
+---
+
+## 19. V2 BODY TEMPLATE LINEAGE (added 2026-06-06 PR #1448 — corrects scope of this doc)
+
+This document was originally scoped to sidebar drift. Per operator feedback 2026-06-06, that scope was too narrow — the canonical thing 1 week ago was the V2 ARTICLE (body + sidebar), not the sidebar alone. This section is the body-template lineage that PR #1443 / §1–§17 above missed.
+
+### 19.1 The hard_news_v2 template — definition
+
+| Field | Value |
+|---|---|
+| **SHA** | `cd661ce64` (branch-only on `agent/pearl-news-section-order-fix`, 2026-05-19 08:31:38 -10:00) |
+| **Landed on main via** | PR #1447 (merged 2026-06-06 14:51:55Z `b3e2ea421`) |
+| **File** | `pearl_news/article_templates/hard_news_v2.yaml` |
+| **What it defines** | 3-title block (H1 + dek-1 static + dek-2 dynamic) + 4-section body (News Summary / How Gen Z / USLF Teacher / A Practice) + carried-from-v1 CTA + sidebar |
+
+### 19.2 The v2 title block markup — `ab010c548`
+
+| Field | Value |
+|---|---|
+| **SHA** | `ab010c548` (branch-only, 2026-05-19) |
+| **Landed via** | Inherited in PR #1443 (`78f115fe3` file content includes ab010c548 in its history chain) |
+| **What it does** | Suppresses `<h1>` in body (WP renders post title elsewhere — without this, headlines duplicate on the rendered page); emits `.v2-headline-dek-1` and `.v2-headline-dek-2` divs; CSS styling for both |
+
+### 19.3 Heading variant pools + selector — `e789a540b`
+
+| Field | Value |
+|---|---|
+| **SHA** | `e789a540b` (PR #1429 head HEAD; 2026-05-23 13:51:52 +09:00) |
+| **Landed on main via** | PR #1447 (yaml + py files) + **PR #1448** (this PR — `assemble_v52.py` wiring) |
+| **Files** | `pearl_news/config/heading_variants.yaml` (273 lines, 155 variants); `pearl_news/pipeline/heading_selector.py` (97 lines); `tests/test_pearl_news_heading_selector.py`; `assemble_v52.py +29/-5` (heading_selector calls at `_SECTION_HEADERS_BY_LANG` resolution site) |
+| **What it does** | 5 variants per (topic × locale) for `gen_z_impact` axis; 5 variants per teacher (in primary locale) for `teacher_sees` axis; deterministic blake2b-based selection per (slug, axis); falls back to legacy fixed string when pool missing |
+
+### 19.4 The complete v2 canonical SHA chain (supersedes §16)
+
+| Order | SHA | PR | On main via | Role |
+|-------|-----|----|--------------|------|
+| 1 | `8070e81fd` | #853 | merge 2026-05-04 | 5-layout structural baseline |
+| 2 | `b64caf846` | #1105 | merge 2026-05-13 | wpautop grid-cell fix |
+| 3 | `6e7dc9277` | — (branch) | PR #1443 via file restore | operator restore PR #853 sidebar into v2 templates |
+| 4 | `cd661ce64` | — (branch) | **PR #1447** | hard_news_v2.yaml template |
+| 5 | `ab010c548` | — (branch) | PR #1443 via inheritance | v2 title block markup + CSS + H1 suppression |
+| 6 | `45733349a` | — (branch) | PR #1443 via inheritance + reaction_to_app.yaml | mini-app launcher cta + 3-bullet SDG |
+| 7 | `3daa86d56` | — (branch) | PR #1443 via file restore | gen_z_reactions atom library |
+| 8 | `78f115fe3` | — (branch) | PR #1443 (assemble_v52 + reader_signal_ingest) | interactive Hot Take Poll + Editorial Take + pnReaderSignal IIFE |
+| 9 | `d0075d31d` | — (branch, deployed) | PR #1443 via file restore | WP must-use plugin /signal endpoint |
+| 10 | `e789a540b` | #1429 | **PR #1447** (yaml + py) + **PR #1448** (wiring) | heading variant pools + selector + renderer wiring |
+
+### 19.5 What PR #1443's scope MISSED (now corrected by PR #1447 + PR #1448)
+
+PR #1443 was named "restore canonical sidebar" — the title silently shrank the canonical from "v2 article" to "v2 sidebar." Files it should have included but did not:
+
+- `pearl_news/article_templates/hard_news_v2.yaml` → restored in PR #1447
+- `pearl_news/config/heading_variants.yaml` → restored in PR #1447
+- `pearl_news/pipeline/heading_selector.py` → restored in PR #1447
+- `tests/test_pearl_news_heading_selector.py` → **restored in PR #1448** (this PR)
+- `assemble_v52.py` heading_selector wiring (+29/-5) → **restored in PR #1448** (this PR)
+- `artifacts/pearl_news/snapshots/CANONICAL_ARTICLE.html` (full article, not just sidebar) → **added in PR #1448**
+- Body F-IDs FB1–FB6 in function inventory → **added in PR #1448**
+- Body shape checks in parity gate → **added in PR #1448**
+
+### 19.6 Drift-recovery lesson (2026-06-06)
+
+When the operator says **"the sidebar is broken"** in future sessions, parse it as **"the article's surface visible to me is broken"** — which usually means BOTH the sidebar AND the body shape. Default to restoring the FULL v2 canonical (10 SHAs above), not just the sidebar slice. Run the parity gate WITH body checks. If only the sidebar fingerprints fail, that's actual sidebar drift; if body F-IDs also fail, the v2 template needs restoration too.
+
+Update CLAUDE.md known-good anchor entry to point at this section instead of §16.
+

@@ -28,6 +28,11 @@ import html
 import json
 import logging
 import re
+
+from pearl_news.pipeline.heading_selector import (
+    pick_gen_z_heading,
+    pick_teacher_sees_heading,
+)
 import sys
 import textwrap
 from pathlib import Path
@@ -1123,13 +1128,23 @@ def assemble_v52(article_json: dict, metadata: dict | None = None, *, standalone
     body_header = sec_h.get("youth_somatic", meta.get("body_header", _l10n["body"]))
     # Operator-restructured 2026-05-17: single header banner above the
     # felt-experience atoms (hook_personal + youth_somatic merged).
-    felt_experience_header = sec_h.get("felt_experience", meta.get(
-        "felt_experience_header", _l10n.get("felt_experience") or "This is how it affects Gen Z and Gen Alpha"
-    ))
+    # 2026-05-23 (PR #1429 / e789a540b): heading variant pool selection
+    # (PEARL_NEWS_WRITER_SPEC §14). Deterministic per (slug, axis);
+    # falls back to legacy fixed string when pool is missing.
+    # Ported to PR #1448 against the PR #1443 2177-line assemble_v52.py.
+    _slug_for_pick = meta.get("slug") or article_json.get("slug") or article_json.get("id") or ""
+    _felt_fallback = _l10n.get("felt_experience") or "This is how it affects Gen Z and Gen Alpha"
+    _felt_variant = pick_gen_z_heading(topic, _early_lang, _slug_for_pick, _felt_fallback) if _slug_for_pick else _felt_fallback
+    felt_experience_header = sec_h.get("felt_experience", meta.get("felt_experience_header", _felt_variant))
     turnaround_header = meta.get("turnaround_header", _l10n["turnaround"])
     teacher_header = sec_h.get("bridge", meta.get("teacher_header", _l10n["bridge"]))
+    _teacher_sees_fallback = _l10n["teacher_sees"].format(teacher_name=teacher_name)
+    _teacher_sees_variant = (
+        pick_teacher_sees_heading(teacher_id, _slug_for_pick, _teacher_sees_fallback)
+        if _slug_for_pick else _teacher_sees_fallback
+    )
     gold_block_header = sec_h.get("teacher_perspective_block",
-        meta.get("gold_block_header", _l10n["teacher_sees"].format(teacher_name=teacher_name)))
+        meta.get("gold_block_header", _teacher_sees_variant))
     sage_body_header = sec_h.get("body_data", meta.get("sage_body_header", _l10n["sage_body"]))
     practice_header = _l10n["practice"]
     forward_header = meta.get("forward_header", _l10n["forward"])

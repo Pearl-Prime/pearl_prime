@@ -264,3 +264,87 @@ None as of 2026-06-04. (If a future operator decision deprecates a function, mov
 ---
 
 **End of document.**
+
+---
+
+## 11. Body F-IDs (FB1-FB6 — added 2026-06-06 PR #1448)
+
+The sidebar F-IDs F1–F5 cover the right-column cards. The body of the article has its own canonical structure (the v2 hard_news shape) — these FB-IDs make body drift detectable.
+
+### FB1 — V2 Title Block
+
+**Markup:** Two `<div>` elements directly under the article body, immediately after the hero region.
+
+```html
+<div class="v2-headline-dek-1">How this news is affecting Gen Z</div>
+<div class="v2-headline-dek-2">A Naqshbandi Sufi Teacher Shares A Helpful Insight</div>
+```
+
+**Source SHA history:**
+- `cd661ce64` (branch-only → PR #1447) — hard_news_v2.yaml template that DEFINES the 3-title block
+- `ab010c548` (branch-only → inherited via PR #1443 file content) — the `.v2-headline-dek-1` / `.v2-headline-dek-2` markup emission + CSS, plus H1 suppression in body (WP renders post title elsewhere)
+- `e789a540b` (PR #1429 → PR #1447 partial → PR #1448 wiring) — variant-pool selection for dek-2
+
+**Test fingerprints:** `class="v2-headline-dek-1"`, `class="v2-headline-dek-2"` — each at least 1 occurrence in renderer output.
+
+### FB2 — V2 Section-Header Divs
+
+**Markup:** `<div id="sec-X" class="section-header">LABEL</div>` — text directly inside the div, NOT nested in `<h2>`.
+
+**Source SHA history:** `cd661ce64` template definition; renderer emission inherited via PR #1443.
+
+**Test fingerprints:** `class="section-header"` — minimum 5 occurrences (one per body section).
+
+**Critical:** Canonical 3724 snapshot has 6 section-header divs. Five mandatory: News Summary, How Gen Z, Teacher, Take Action Now!, Your Voice Has Power. The sixth depends on article type (varies).
+
+### FB3 — Gen Z Section Heading (variant pool)
+
+**Markup:** `<div id="sec-v2-genz" class="section-header">{variant text}</div>` where variant comes from `heading_variants.yaml` `gen_z_impact` axis (5 variants × topic × locale).
+
+**Source SHA history:** `e789a540b` (PR #1447 yaml + PR #1448 wiring). Variant selected via `pick_gen_z_heading(topic, lang, slug, fallback)`.
+
+**Test fingerprints:** The default English variant `"How this news is affecting Gen Z"` appears in both `v2-headline-dek-1` (top of article) AND the section-header (sec-v2-genz). Minimum 2 occurrences.
+
+### FB4 — Teacher Section Heading (variant pool)
+
+**Markup:** `<div id="sec-v2-teacher" class="section-header">{variant text}</div>` from `teacher_sees` axis (5 variants × teacher in primary locale).
+
+**Source SHA history:** `e789a540b`. Variant from `pick_teacher_sees_heading(teacher_id, slug, fallback)`.
+
+**Critical doctrinal rule:** Tradition-role only, NEVER teacher name. The heading invokes "A Naqshbandi Sufi Teacher" / "A Channeler" / "A Tao Grandmaster" — never "Maat" / "Junko" / "Master Sha" by personal name.
+
+**Test fingerprints:** `"Shares A Helpful Insight"` substring (or locale-equivalent) — appears in dek-2 + section-header. Minimum 2 occurrences.
+
+### FB5 — Take Action Now Section
+
+**Markup:** `<div class="section-header">Take Action Now!</div>` followed by CTA boilerplate paragraph that **explicitly directs reader to vote/submit in the sidebar**.
+
+**Why mandatory:** This section wires the body to the sidebar. Without it, the sidebar's purpose is invisible — readers see poll buttons but no instruction to use them. Operator's prior diagnosis "text without function" was a sidebar failure mode, but this body failure mode is parallel.
+
+**Source SHA history:** Carried unchanged from v1 (`8070e81fd` PR #853) into v2 (`cd661ce64`).
+
+**Test fingerprints:** literal substring `"Take Action Now!"`.
+
+### FB6 — Your Voice Has Power Section
+
+**Markup:** `<div class="section-header">Your Voice Has Power</div>` followed by closer paragraph framing reader response as editorial input.
+
+**Why mandatory:** Closes the body, explicitly frames `pn-take-card` (sidebar F5) as editorial input not comment. Without it, the editorial-input function is unframed.
+
+**Source SHA history:** v1 carry-over → v2.
+
+**Test fingerprints:** literal substring `"Your Voice Has Power"`.
+
+---
+
+## 12. Quick-reference body fingerprint summary
+
+| F-ID | Element | Canonical marker | Min count |
+|------|---------|------------------|-----------|
+| FB1 | V2 title block | `class="v2-headline-dek-1"` + `class="v2-headline-dek-2"` | 1 each |
+| FB2 | Section-header divs | `class="section-header"` | 5 |
+| FB3 | Gen Z section heading | `How this news is affecting Gen Z` (en default) | 2 (dek-1 + section) |
+| FB4 | Teacher section heading | `Shares A Helpful Insight` (en default) | 2 (dek-2 + section) |
+| FB5 | Take Action Now! | `Take Action Now!` | 1 |
+| FB6 | Your Voice Has Power | `Your Voice Has Power` | 1 |
+
