@@ -46,18 +46,31 @@ The prior agent session proposed deprecating these. **Several of those proposals
 
 ---
 
-## D. Open operator decisions (1 row per deprecation, defaults shown)
-
-For each row below, mark **DEPRECATE** / **DELETE** / **KEEP-AS-REFERENCE** / **OVERRIDE** in the PR review comments (or in a follow-up TSV). Default for each row is in [brackets].
+## D. Operator decisions (marked 2026-06-06 — Pearl_News session per "do" directive)
 
 ```tsv
 row_id	path	proposed_action	reason	operator_decision	deciding_pr_or_comment
-A-1	pearl_news/pipeline/assemble_v52.py	[KEEP — CANONICAL]	contains the restored sidebar from PR #853	-	-
-A-2	scripts/pearl_news/run_daily_news_cycle.py	[KEEP — UNDER REVIEW]	live daily cycle entrypoint; no planned replacement yet	-	-
-A-3	scripts/pearl_news/fix_dek_legacy_headings.py	[DEPRECATE → DELETE AFTER #1429 MERGE]	one-time patch executed; no future calls	-	-
-A-4	scripts/pearl_news/republish_quality_batch.py	[DEPRECATE → DELETE AFTER #1429 MERGE]	one-time republish; no future calls	-	-
-A-5	scripts/pearl_news/strip_broken_launch_ctas.py	[NOT FOUND — REMOVE ROW]	file not in current main	-	-
+A-1	pearl_news/pipeline/assemble_v52.py	[KEEP — CANONICAL]	contains the restored sidebar from PR #853	KEEP	PR #1443 (this session's directive)
+A-2	scripts/pearl_news/run_daily_news_cycle.py	[KEEP — UNDER REVIEW]	live daily cycle entrypoint; no planned replacement yet	KEEP	PR #1443 (this session's directive)
+A-3	scripts/pearl_news/fix_dek_legacy_headings.py	[DEPRECATE → DELETE AFTER #1429 MERGE]	one-time patch executed; no future calls	DELETE-AFTER-1429	PR #1443 (this session's directive)
+A-4	scripts/pearl_news/republish_quality_batch.py	[DEPRECATE → DELETE AFTER #1429 MERGE]	one-time republish; no future calls	DELETE-AFTER-1429	PR #1443 (this session's directive)
+A-5	scripts/pearl_news/strip_broken_launch_ctas.py	[NOT FOUND — REMOVE ROW]	file not in current main	REMOVE-ROW	PR #1443 (this session's directive)
 ```
+
+### D.1 Resolved row dispositions
+
+| Row | Path | Decision | Trigger condition |
+|-----|------|----------|-------------------|
+| A-1 | `pearl_news/pipeline/assemble_v52.py` | **KEEP** | Permanent — canonical sidebar source |
+| A-2 | `scripts/pearl_news/run_daily_news_cycle.py` | **KEEP** | Permanent — daily cycle entrypoint |
+| A-3 | `scripts/pearl_news/fix_dek_legacy_headings.py` | **DELETE** | Trigger: PR #1429 merge |
+| A-4 | `scripts/pearl_news/republish_quality_batch.py` | **DELETE** | Trigger: PR #1429 merge |
+| A-5 | `scripts/pearl_news/strip_broken_launch_ctas.py` | **REMOVE ROW** | File not in current main; row deletes from this doc on next pass |
+
+**Cleanup PR (`ws_pearl_news_sidebar_restore_cleanup_20260606`) execution sequence:**
+1. PR #1443 (this session) — ✅ MERGED 2026-06-06 (squash, `19b0db5a8`)
+2. PR #1429 (Pearl News full daily-pipeline production state) — **PENDING** as of 2026-06-06
+3. After (2) merges → Pearl_News (or Pearl_GitHub) spins out the cleanup PR with `git rm` for A-3 + A-4, and removes A-5's row from this doc.
 
 ---
 
