@@ -409,6 +409,32 @@ def main() -> int:
     if not gate("18. Author cover art (launchable authors: registry + PNG + style/palette)", cover_art_ok, gate18_detail):
         failed += 1
 
+    # --- 19. Pearl News sidebar parity (added 2026-06-04, sidebar restore PR) ---
+    # Authority: docs/PEARL_NEWS_SIDEBAR_VERSION_HISTORY.md §16 (canonical SHA chain)
+    #            docs/PEARL_NEWS_SIDEBAR_FUNCTION_INVENTORY.md (F1..F5 + INFRA)
+    #            docs/PEARL_NEWS_WRITER_SPEC.md §S (Sidebar Restoration Protocol)
+    # Why this gate: WP td_post_template silently no-ops via REST; sidebar
+    # regressions don't surface until operator views the rendered page.
+    # This gate catches drift at the pre-publish stage.
+    sidebar_gate = REPO_ROOT / "scripts" / "ci" / "check_pearl_news_sidebar_parity.py"
+    if sidebar_gate.exists():
+        try:
+            r = subprocess.run(
+                [sys.executable, str(sidebar_gate)],
+                capture_output=True,
+                text=True,
+                timeout=60,
+            )
+            sidebar_ok = r.returncode == 0
+            sidebar_detail = (r.stdout.splitlines()[0] if r.stdout else r.stderr.splitlines()[0] if r.stderr else "no output").strip()
+        except Exception as e:
+            sidebar_ok = False
+            sidebar_detail = str(e)
+        if not gate("19. Pearl News sidebar parity (5 cards + pnReaderSignal IIFE)", sidebar_ok, sidebar_detail):
+            failed += 1
+    else:
+        gate("19. Pearl News sidebar parity", True, "gate script not present; skip", skip=True)
+
     # --- Report ---
     print("V4.5 Production Readiness — 19 conditions\n")
     for name, status, detail in RESULTS:

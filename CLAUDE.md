@@ -139,6 +139,22 @@ bash scripts/git/health_check.sh
 
 Use it at session start, before every push, and hourly during active repo work.
 
+## Known-good anchors (high-drift subsystems)
+
+Append-only registry of last-known-good SHAs/PRs per high-drift subsystem. Start here, restore by `git checkout`, do not re-author. Mirror of `~/.claude/projects/-Users-ahjan-phoenix-omega/memory/project_known_good_anchors.md`.
+
+### Pearl News sidebar (5-card system + interactive layer)
+
+- **Canonical PR:** #853 (`8070e81fd`) — feat(pearl_news): five-layout sidebar system + --layout CLI + governing spec
+- **Composite chain (6 SHAs):** see `docs/PEARL_NEWS_SIDEBAR_VERSION_HISTORY.md` §16
+- **Function inventory (F1–F5 + INFRA):** `docs/PEARL_NEWS_SIDEBAR_FUNCTION_INVENTORY.md`
+- **Canonical snapshot (gold master):** `artifacts/pearl_news/snapshots/CANONICAL_SIDEBAR.html`
+- **Metadata + fingerprints:** `artifacts/pearl_news/snapshots/CANONICAL_SIDEBAR_METADATA.json`
+- **CI parity gate:** `scripts/ci/check_pearl_news_sidebar_parity.py` (BLOCKS publish on drift; wired into `.github/workflows/pearl-news-daily.yml` + `scripts/run_production_readiness_gates.py` gate #19)
+- **Regression test:** `tests/test_pearl_news_sidebar_parity.py`
+- **Sidebar restoration protocol:** `docs/PEARL_NEWS_WRITER_SPEC.md` §S
+- **Drift signal:** operator says "the sidebar is broken" / "you have text but no function" / "you keep dropping the sidebar" → DO NOT fresh-fix. Run the parity gate, read VERSION_HISTORY §16, restore by `git checkout <sha> -- <path>`.
+
 ## When In Doubt
 
 - Read `skills/pearl-github/SKILL.md`
