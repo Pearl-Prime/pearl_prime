@@ -2249,3 +2249,176 @@ Phase 3 P0 workstreams **NOT YET OPENED** — pending operator authorization on 
 **Handoffs:** **Pearl_PM** — coordination cleanup after this cap PR merges; child ws statuses remain `proposed` until operator Q-PRP-* answers land. **Pearl_Architect** — `PEARL-PRIME-STOREFRONT-V1-01-AMENDMENT` cap entry to be authored when Q-PRP-* answers come back, flipping cap + project + ws statuses to `active` / `runnable`. **Pearl_Dev + Pearl_Int + Pearl_Marketing + Pearl_Writer** — own implementation fan-out (router prompts post-merge per child ws). Pearl_Operator_Proxy may decide Q-PRP-* items within its envelope per `docs/PEARL_OPERATOR_PROXY_SPEC.md` and log to `artifacts/coordination/operator_decisions_log.tsv`.
 
 **Pointers:** [`docs/specs/PEARL_PRIME_STOREFRONT_V1_SPEC.md`](./specs/PEARL_PRIME_STOREFRONT_V1_SPEC.md) (this V1 spec — ~22 sections, ~13 cited research sources); `artifacts/coordination/ACTIVE_PROJECTS.tsv` (`PRJ-PEARL-PRIME-STOREFRONT-V1`); `artifacts/coordination/ACTIVE_WORKSTREAMS.tsv` (5 new `proposed` ws rows); `artifacts/coordination/SUBSYSTEM_AUTHORITY_MAP.tsv` (new `storefront` subsystem row); `MUSIC-MODE-BRAND-INTEGRATION-V1-01` (cap entry — sister music-brands integration); `WORLDWIDE-CATALOG-GO-LIVE-V1-PROGRAM-01` (surface-11 parent program); `BR-CANON-02` (Path X 37 frozen); `skills/pearl-int/references/cloudflare_pages_deploy.md` (CF deploy authority — Traps 1-4); `docs/INTEGRATION_CREDENTIALS_REGISTRY.md` (CF account + R2 credentials registry).
+
+#### PEARL-PRIME-STOREFRONT-V1-01 — AMENDMENT — 2026-06-04 (operator Q-PRP-01..16 binding answers; 4 departures from defaults ratified)
+
+**Status:** **active** — operator answers to all 16 `Q-PRP-*` captured in [`docs/specs/PEARL_PRIME_STOREFRONT_V1_SPEC.md` §AMENDMENT-2026-06-04](./specs/PEARL_PRIME_STOREFRONT_V1_SPEC.md#amendment-2026-06-04); cap **`PEARL-PRIME-STOREFRONT-V1-01`** flipped **`proposed → active`**; project **`PRJ-PEARL-PRIME-STOREFRONT-V1`** flipped **`proposed → active`** in `artifacts/coordination/ACTIVE_PROJECTS.tsv`; **5 `ws_*` rows** flipped **`proposed → runnable`** in `artifacts/coordination/ACTIVE_WORKSTREAMS.tsv`; **`storefront` subsystem row** flipped **`proposed → active`** in `artifacts/coordination/SUBSYSTEM_AUTHORITY_MAP.tsv`.
+
+**Authorization:** Operator session 2026-06-04 (Pearl_Architect cap-AMENDMENT lane). Source-of-truth merge: parent PR [#1433](https://github.com/Ahjan108/phoenix_omega_v4.8/pull/1433) (SHA `69e9855f72471603f320f1b96ae72e899a3e8778`) landed on `origin/main` 2026-06-04; this AMENDMENT PR ratifies the Q-PRP-* decision card against that parent.
+
+**`main` HEAD anchor (doc authoring):** post-PR #1433 merge; HEAD advances with this AMENDMENT PR.
+
+---
+
+##### 1. OPERATOR ANSWERS — all 16 `Q-PRP-*` locked
+
+| ID | Decision | Vs default |
+|---|---|---|
+| **Q-PRP-DOMAIN-01** | `pearlprime.shop` | default |
+| **Q-PRP-PAY-01** | **Snipcart free tier** ($0/mo under $629/mo revenue; 2% + Stripe per-tx above) | **DEPARTURE** (was Stripe Checkout direct) |
+| **Q-PRP-AUTH-01** | **Optional — guest checkout OK** (account created post-purchase for re-download) | **DEPARTURE** (was magic-link only) |
+| **Q-PRP-CART-01** | **Hybrid — Buy-Now default + cart icon visible** | upgrade (was single-item Buy-Now Phase 1) |
+| **Q-PRP-REVIEW-01** | Logged-in (any email) + post-publish moderation + Cloudflare Turnstile | default |
+| **Q-PRP-RECO-01** | Reuse `phoenix_recommender` Phase A (deterministic) | default |
+| **Q-PRP-PRICE-01** | Spec defaults ($4.99 ebook / $9.99 audiobook / $1.99 manga chapter / $9.99 3-vol bundle / $14.99 6-vol bundle) + operator price book for per-locale FX (no live FX) | default |
+| **Q-PRP-MANGA-DELIVERY-01** | Both — WEBTOON in-browser reader + full PDF download | default |
+| **Q-PRP-AUDIOBOOK-DELIVERY-01** | Both — in-browser streaming player + MP3 download | default |
+| **Q-PRP-SAMPLE-01** | First chapter (book + manga) / 30 sec (audiobook) / first track (music) | default |
+| **Q-PRP-WRITER-AUDIT-01** | Staged — en-US `anxiety` + `overthinking` × all personas first; ja-JP atom audit follows operator review of staged report | default (now operationally extended to include ja-JP atoms as Phase A scope ratchet — see §3 below) |
+| **Q-PRP-CTA-UNIFY-01** | **HARD cutover at launch day** — all current external-platform CTAs (Amazon / Google Play / Apple Books / Kobo / Audible / WEBTOON / Honto / Audible JP) rewritten BEFORE launch across `funnel/`, marketing surfaces, `brand-wizard-app/public/free/`, `somatic_exercise_freebee_apps/`, email YAMLs, and social CTAs. **No soft-transition coexistence.** | **DEPARTURE** (was soft-deprecate-redirect-replace) |
+| **Q-PRP-LICENSE-01** | Custom **MIT** for our code; Snipcart is the SaaS dep at the cart/checkout boundary | default |
+| **Q-PRP-ROLLOUT-01** | **Full Phase 1+2 at launch** — en-US + ja-JP × book + audiobook + manga + automated catalog ingest cron + audiobook sample player + manga WEBTOON reader all live on day 1 | **DEPARTURE** (was en-US ebook only Phase 1) |
+| **Q-PRP-MUSIC-SKU-01** | **Per-album + per-track + per-brand subscription (all three)** — maximum optionality; per-track $0.99-$1.99, per-album default $9.99, per-brand subscription $4.99/mo unlimited access to one music brand | **DEPARTURE** (was per-album only Phase 3) |
+| **Q-PRP-SERIES-BUNDLE-01** | Flat tier — $9.99 (3-vol) / $14.99 (6-vol) / $19.99 (10-vol) | default |
+
+**4 departures (Q-PRP-PAY-01, Q-PRP-AUTH-01, Q-PRP-CTA-UNIFY-01, Q-PRP-ROLLOUT-01) + 1 super-set (Q-PRP-MUSIC-SKU-01)** are binding architectural shifts — see §2 + §3.
+
+---
+
+##### 2. DEPARTURES — binding architectural shifts (with rationale)
+
+###### 2.1 Q-PRP-PAY-01 — Snipcart free tier becomes PRIMARY
+
+**Decision:** Snipcart's free tier ($0/mo under $629/mo revenue; 2% + Stripe per-tx above the threshold) is the storefront's cart + checkout + digital-delivery layer. Stripe Checkout remains the underlying payment processor (Snipcart wraps it).
+
+**Architectural impact:** Spec §3 PRIMARY/FALLBACK swap. Old: custom CF Pages + Workers + D1 + R2 + KV + **Stripe Checkout direct**. New: custom CF Pages + Workers + D1 + R2 + KV for catalog browse + reviews + brand-lane UX, with **Snipcart drop-in** owning cart UI + Stripe-Checkout handoff + signed-URL digital delivery. Reduces our payment-integration surface (no `/api/checkout`, `/api/webhook/stripe`, no `order_table` for non-Snipcart fields). D1 `order` table becomes a Snipcart-webhook mirror.
+
+**Cost model:** $0 platform fees until storefront revenue passes ~$629/mo (Snipcart free-tier ceiling). Above that ~$629/mo revenue: 2% Snipcart + 2.9% + 30¢ Stripe = ~5% effective per-tx. Compares favorably to LemonSqueezy/Paddle MoR (5% + 50¢) but slightly above direct Stripe (2.9% + 30¢). Operator gets a true zero-fee launch ramp.
+
+**Trade-offs:**
+- Snipcart's cart UI limits Pearl Prime brand customization at the cart drawer step (we control the page UX up to the Buy button + the post-checkout return surface).
+- Digital delivery via Snipcart's signed-URL pattern adds a third-party hop to the M4B/PDF/EPUB download flow; signed-URL TTL controlled by Snipcart, not us.
+- Snipcart SaaS terms apply to cart data; reviews + catalog + library remain on our D1/R2.
+
+**Anti-drift:** No app code merged in this AMENDMENT PR — Snipcart wiring lands under `ws_pearl_prime_storefront_v1_cloudflare_wiring_20260603` (now also includes Snipcart account provisioning + webhook routes).
+
+###### 2.2 Q-PRP-AUTH-01 — Optional accounts (guest checkout OK)
+
+**Decision:** No login required to purchase. Snipcart collects email at checkout for receipt + signed-URL delivery. Accounts auto-provisioned post-purchase for re-download access; users can later set a password / magic-link for the account.
+
+**Architectural impact:** Spec §11 auth flow added: post-purchase, the Stripe-receipt email becomes the account identifier; `/account/library?email=...&token=...` flow uses a one-time signed token on the email-receipt link. Reviews can be submitted by anyone with email-verified-via-Turnstile (not gated on account); verified-purchase badge auto-applied when `email_hash` matches an `order_item` row. Pearl Prime "fully-signed-in account" remains optional UX uplift.
+
+**Trade-offs:**
+- Lowest checkout friction (matches LemonSqueezy direct-buy default).
+- Re-download flow depends on the receipt-email link; if buyer loses email, recovery via Snipcart support.
+- Review attribution is by email rather than account_id — same anti-impersonation logic applies.
+
+###### 2.3 Q-PRP-CTA-UNIFY-01 — HARD cutover at launch day
+
+**Decision:** Zero coexistence period. Before launch day, every paid-content CTA in the entire ecosystem is rewritten to the storefront's per-SKU canonical URL. No legacy `amazon.com/dp` / `play.google.com/store/books` / `audible.com/pd` / `books.apple.com` / `kobo.com/ebook` / `webtoons.com` / `honto.jp` / `audible.co.jp` URL remains in production content.
+
+**Surfaces covered (pre-launch sweep mandatory):**
+1. `funnel/` (Flask proof-loop hub + per-topic landing pages)
+2. `config/marketing/`, `docs/marketing/`, `scripts/marketing/`, `marketing_deep_research/`
+3. `brand-wizard-app/public/free/` (15 freebie landing pages)
+4. `somatic_exercise_freebee_apps/` (HTML somatic tools)
+5. Email sequence YAMLs (lead-nurture, post-purchase, win-back)
+6. Social-CTA registries (link-in-bio, X/Twitter, Instagram, TikTok descriptions)
+7. **ja-JP equivalents of all of the above** (per Q-PRP-ROLLOUT-01 Full P1+P2 scope — see §2.4)
+
+**Architectural impact:** `ws_freebie_cta_redirect_unification_20260603` scope doubles: en-US sweep + ja-JP sweep simultaneously. CI guard `scripts/ci/check_external_buy_links.py` lands before launch and gates the launch milestone — zero violations required, not "warn-and-fix-later". Static-content sweep is mandatory pre-launch QA gate.
+
+**Trade-offs:**
+- Highest pre-launch operational burden.
+- Cleanest end-state: no broken-link transition period; no stale-email-sequence support tickets.
+- Risk: if a single surface is missed in the sweep, that surface 404s on launch day (vs gracefully redirecting under a soft cutover). Mitigation: CI guard as enforcement.
+
+**Anti-drift:** `config/funnel/store_url_tracker.yaml` is **deleted** (not archived) on launch day — successor `config/storefront/sku_url_map.yaml` is the only SKU URL registry post-cutover. Legacy file retained in git history only.
+
+###### 2.4 Q-PRP-ROLLOUT-01 — Full Phase 1+2 at launch
+
+**Decision:** Launch day = en-US + ja-JP × {book, audiobook, manga} + automated catalog ingest cron + audiobook in-browser streaming player + manga WEBTOON in-browser reader + Snipcart cart + reviews + brand-lane filter + locale switcher. Phase 3 (zh-TW, zh-CN, music) and Phase 4 (ko-KR) deferred unchanged.
+
+**Renamed phases:**
+- ~~Phase 1~~ → **Phase A (launch)** — en-US + ja-JP × book + audiobook + manga + auto catalog + reviews + Snipcart
+- ~~Phase 2~~ → folded into Phase A
+- ~~Phase 3~~ → **Phase B** — + zh-TW + zh-CN + music + series bundles + recommender personalization
+- ~~Phase 4~~ → **Phase C** — + ko-KR (gated on `distribution_status` clearance per `docs/CJK_CATALOG_PLAN.md`)
+
+**Architectural impact:** All Phase-A workstreams operate against both locales from kick-off:
+- `ws_pearl_prime_storefront_v1_ui_mockups_20260603`: mockups include both en-US and ja-JP variants (font preamble already supports CJK via DM Sans + Cormorant; ja-JP body fallback via `Noto Sans JP` chained after DM Sans).
+- `ws_pearl_prime_storefront_v1_cloudflare_wiring_20260603`: D1 schema seeds both locales; R2 layout pre-allocates both locale prefixes; locale routing live at launch.
+- `ws_freebie_cta_redirect_unification_20260603`: ja-JP CTAs in scope (per §2.3).
+- `ws_pearl_writer_next_step_atom_audit_20260603`: en-US starter staged (Q-PRP-WRITER-AUDIT-01 default) but ja-JP atoms join Phase A scope as soon as the staged en-US audit clears — operator-review-gated transition.
+
+**Trade-offs:**
+- ~3× launch surface area.
+- Catalog projector must support both locales at launch — currently materialized for en-US only (`artifacts/catalog/pearl_prime_book_script_catalogs/en_US_catalog.csv`), ja-JP catalog projection lands in this Phase A scope.
+- ja-JP audiobook narrator infra (`config/tts/narrator_voice_assignments.yaml` + CosyVoice2) already operational per `ws_voice_pipeline_activation_20260409`; storefront consumes existing outputs.
+- ja-JP manga assets already operational per Manga V2 pipeline; storefront consumes existing R2-equivalent outputs.
+
+**Anti-drift:** Phase A launch is gated on en-US AND ja-JP e2e smoke (≥1 real purchase + ≥1 real review + ≥1 download in EACH locale across EACH product type = 6 smoke combinations minimum). If ja-JP smoke fails close to launch, Phase A demotes to en-US-only Phase A and ja-JP slips to Phase A.1 — operator-decision-gated, NOT auto-fallback.
+
+###### 2.5 Q-PRP-MUSIC-SKU-01 — Per-album + per-track + per-brand subscription (all three)
+
+**Decision:** Phase B (was Phase 3) music SKU model supports all three shapes simultaneously: per-track ($0.99-$1.99), per-album ($9.99 default), per-brand subscription ($4.99/mo unlimited access to one music brand 38+).
+
+**Architectural impact:** Spec §2.4 music SKU shape expands. Catalog model:
+- `sku.product_type='music'` with `sku.sub_type ∈ {'track', 'album', 'brand_subscription'}` (new column).
+- Snipcart product types: standard one-off (track + album) + recurring (brand_subscription).
+- Brand-subscription SKU joins to `subscription` table tracking active subscribers; gates streaming access to all music SKUs under that brand_id.
+
+**Trade-offs:**
+- Maximum revenue-shape optionality; matches iTunes-era buyer expectations (per-track) + Bandcamp-era (per-album) + Spotify-era (subscription).
+- Snipcart recurring-billing complexity at Phase B launch.
+- UX choice-paralysis risk at music SKU detail page — mitigation: surface the per-album as default "Buy" button with collapsed "or per-track / or subscribe" disclosure.
+
+**Anti-drift:** Music SKU sub-type model lands in Phase B. Phase A launch is books + audiobooks + manga only — no music SKUs surfaced. If operator wants music at Phase A, that requires a NEW amendment cap entry — `PEARL-PRIME-STOREFRONT-V1-01-AMENDMENT-2026-06-04-MUSIC-PHASE-A`.
+
+---
+
+##### 3. STATUS TRANSITIONS
+
+- Cap entry **`PEARL-PRIME-STOREFRONT-V1-01`**: status **`proposed → active`**.
+- Project **`PRJ-PEARL-PRIME-STOREFRONT-V1`** in `ACTIVE_PROJECTS.tsv`: status **`proposed → active`**; `open_questions` field updated `Q-PRP-01..16` → **RESOLVED 2026-06-04 (see AMENDMENT-2026-06-04)**; `next_action` field updated to ws fan-out + Phase A milestone gates.
+- 5 `ws_*` rows in `ACTIVE_WORKSTREAMS.tsv`: status **`proposed → runnable`**:
+  - `ws_pearl_prime_storefront_v1_framework_research_20260603` → **completed** (research evidence is the merged §3 + §22 of spec; Snipcart-PRIMARY decision per §2.1)
+  - `ws_pearl_prime_storefront_v1_ui_mockups_20260603` → **runnable** (en-US + ja-JP variants; cart hybrid UX; guest checkout flow)
+  - `ws_pearl_prime_storefront_v1_cloudflare_wiring_20260603` → **runnable** (CF infra + Snipcart account + webhook routes)
+  - `ws_pearl_writer_next_step_atom_audit_20260603` → **runnable** (staged en-US `anxiety` + `overthinking` first; ja-JP atoms staged after operator review)
+  - `ws_freebie_cta_redirect_unification_20260603` → **runnable** (HARD cutover; ja-JP CTAs in scope; CI guard mandatory pre-launch)
+- Subsystem **`storefront`** row in `SUBSYSTEM_AUTHORITY_MAP.tsv`: status **`proposed → active`**.
+
+**Implementation ownership (named, not authored here):**
+
+- **a.** `ws_pearl_prime_storefront_v1_framework_research_20260603` → **Pearl_Architect (completed via this AMENDMENT)**
+- **b.** `ws_pearl_prime_storefront_v1_ui_mockups_20260603` → **Pearl_Dev**
+- **c.** `ws_pearl_prime_storefront_v1_cloudflare_wiring_20260603` → **Pearl_Int**
+- **d.** `ws_pearl_writer_next_step_atom_audit_20260603` → **Pearl_Writer**
+- **e.** `ws_freebie_cta_redirect_unification_20260603` → **Pearl_Marketing + Pearl_Dev**
+
+---
+
+##### 4. ANTI-DRIFT
+
+- The decisions above are **BINDING** for the storefront V1 program. Any modification requires a new AMENDMENT cap entry referencing this block.
+- **Path X 37 brand list FROZEN** per `BR-CANON-02` — storefront reads, never mutates.
+- **Music 38+ FROZEN** per `MUSIC-MODE-BRAND-INTEGRATION-V1-01` — storefront treats music as first-class product type in Phase B from V1 design, with 3-shape SKU model per §2.5.
+- **Pearl Prime visual identity NON-NEGOTIABLE** — `#0e0a06` / `#faf6f0` / `#d97706` amber-600 + Cormorant Garamond + DM Sans + DM Mono.
+- **No paid LLM APIs** per `CLAUDE.md` Tier policy — storefront frontend runtime = no LLM calls; recommender = `phoenix_recommender` (deterministic); review summarization (if added Phase B+) = Tier 2 Gemma/Qwen on Pearl Star OR Tier 1 Claude Code attended only.
+- **Cloudflare account `b80152c319f941e6e92f928e2617a3d5`** for all Pages + Workers + D1 + R2 + KV provisioning per `skills/pearl-int/references/cloudflare_pages_deploy.md` Traps 1-4 — never the `ahjansamvara@gmail.com` personal account (which has no Pages projects).
+- **Snipcart account ownership** = Pearl_Int operational concern; webhook secret rotation cadence in `docs/INTEGRATION_CREDENTIALS_REGISTRY.md` (Pearl_Int ws scope to add row).
+- **HARD CTA cutover** = enforcement-by-CI-guard, not advisory. Zero `amazon.com/dp` / `play.google.com/store/books` / `audible.com/pd` / `books.apple.com` / `kobo.com/ebook` / `webtoons.com` / `honto.jp` / `audible.co.jp` URLs in production content at launch.
+- **Phase A launch gate** = en-US AND ja-JP e2e smoke (≥1 real purchase + ≥1 real review + ≥1 download × EACH locale × EACH product type = 6 smoke combinations). Demotion-to-en-US-only-Phase-A possible if ja-JP smoke fails close to launch; operator-decision-gated.
+
+---
+
+##### 5. OPERATOR ACTION ITEMS
+
+1. **Pearl_Dev** — pick up `ws_pearl_prime_storefront_v1_ui_mockups_20260603` (router prompt below). 12 mockups, en-US + ja-JP variants, hybrid-cart UX, guest-checkout flow, Snipcart drop-in surfaces (cart drawer mock at the brand layer; checkout handoff stub).
+2. **Pearl_Int** — pick up `ws_pearl_prime_storefront_v1_cloudflare_wiring_20260603` (router prompt below). CF Pages + Workers + D1 + R2 + KV under account `b80152c3...`; Snipcart account provisioning + webhook routes; `.github/workflows/pearl-prime-storefront-deploy.yml` mirroring brand-admin-onboarding-pages.yml pattern.
+3. **Pearl_Writer** — pick up `ws_pearl_writer_next_step_atom_audit_20260603` (router prompt below). Staged en-US `anxiety` + `overthinking` × all personas first; coverage report at `artifacts/qa/next_step_atom_audit_2026-06-XX.tsv` + summary.
+4. **Pearl_Marketing + Pearl_Dev** — pick up `ws_freebie_cta_redirect_unification_20260603` (router prompt below). HARD cutover sweep across all 7 surface categories (en-US + ja-JP); `scripts/ci/check_external_buy_links.py` lands before launch; zero violations gates launch.
+5. **Pearl_PM** — coordination cleanup after this AMENDMENT PR merges; 5 ws rows now `runnable`; track Phase A launch milestone gate (6 smoke combinations).
+
+**Pointers:** `docs/specs/PEARL_PRIME_STOREFRONT_V1_SPEC.md` (now includes `§AMENDMENT-2026-06-04`); `artifacts/coordination/ACTIVE_PROJECTS.tsv` (`PRJ-PEARL-PRIME-STOREFRONT-V1` status active); `artifacts/coordination/ACTIVE_WORKSTREAMS.tsv` (5 ws rows runnable); `artifacts/coordination/SUBSYSTEM_AUTHORITY_MAP.tsv` (storefront active); parent cap `PEARL-PRIME-STOREFRONT-V1-01` (this state doc); parent PR [#1433](https://github.com/Ahjan108/phoenix_omega_v4.8/pull/1433) (SHA `69e9855f7`).

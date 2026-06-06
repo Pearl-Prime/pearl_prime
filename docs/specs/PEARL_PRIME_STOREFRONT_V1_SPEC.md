@@ -965,3 +965,177 @@ Total search count: 10 (per spec mandate) + 3 targeted WebFetch confirmations = 
 ---
 
 **End of spec.** Operator answers to §17 unblock the AMENDMENT cap entry and fan-out to the 5 child workstreams listed in the §3 of the cap entry and in `artifacts/coordination/ACTIVE_WORKSTREAMS.tsv`.
+
+---
+
+## §AMENDMENT-2026-06-04 — Operator Ratification of Q-PRP-01..16 + 4 Departures from Defaults
+
+**Status:** **active** — all 16 `Q-PRP-*` answered 2026-06-04; cap `PEARL-PRIME-STOREFRONT-V1-01` flipped `proposed → active`; binding decisions below. Parent merge: [PR #1433](https://github.com/Ahjan108/phoenix_omega_v4.8/pull/1433) SHA `69e9855f72471603f320f1b96ae72e899a3e8778`. This AMENDMENT layered onto the parent spec — when sections conflict, this AMENDMENT wins.
+
+### §AMENDMENT-2026-06-04.1 — Final Q-PRP-* answers
+
+| ID | Decision | Vs default |
+|---|---|---|
+| Q-PRP-DOMAIN-01 | `pearlprime.shop` | default |
+| **Q-PRP-PAY-01** | **Snipcart free tier** ($0/mo under $629/mo revenue; 2% + Stripe per-tx above) | **DEPARTURE** |
+| **Q-PRP-AUTH-01** | **Optional — guest checkout OK** (account auto-provisioned post-purchase) | **DEPARTURE** |
+| Q-PRP-CART-01 | Hybrid — Buy-Now default + cart icon visible | upgrade |
+| Q-PRP-REVIEW-01 | Logged-in (any email) + post-publish moderation + Turnstile | default |
+| Q-PRP-RECO-01 | Reuse `phoenix_recommender` Phase A | default |
+| Q-PRP-PRICE-01 | Spec defaults + operator price book (no live FX) | default |
+| Q-PRP-MANGA-DELIVERY-01 | Both — WEBTOON reader + full PDF | default |
+| Q-PRP-AUDIOBOOK-DELIVERY-01 | Both — streaming player + MP3 download | default |
+| Q-PRP-SAMPLE-01 | First chapter / 30 sec / first track | default |
+| Q-PRP-WRITER-AUDIT-01 | Staged — en-US `anxiety` + `overthinking` × all personas first; ja-JP follows operator review | default (operationally extended for Phase A scope per §AMENDMENT-2026-06-04.4) |
+| **Q-PRP-CTA-UNIFY-01** | **HARD cutover at launch day** — zero coexistence period | **DEPARTURE** |
+| Q-PRP-LICENSE-01 | Custom MIT (Snipcart = SaaS dep at cart/checkout boundary) | default |
+| **Q-PRP-ROLLOUT-01** | **Full Phase 1+2 at launch** (en-US + ja-JP × book + audiobook + manga) | **DEPARTURE** |
+| **Q-PRP-MUSIC-SKU-01** | **Per-album + per-track + per-brand subscription (all three)** | DEPARTURE (super-set) |
+| Q-PRP-SERIES-BUNDLE-01 | Flat tier ($9.99 / $14.99 / $19.99) | default |
+
+### §AMENDMENT-2026-06-04.2 — §3 Architecture Selection — REVISED (Snipcart PRIMARY)
+
+**§3 PRIMARY recommendation FLIPS** per Q-PRP-PAY-01:
+
+- **NEW PRIMARY** = Custom CF Pages + Workers + D1 + R2 + KV for catalog browse + reviews + brand-lane UX + recommender rail, with **Snipcart drop-in** owning cart UI + Stripe-Checkout handoff + signed-URL digital delivery. License: MIT (our code) + Snipcart SaaS terms (at the cart/checkout boundary).
+- **NEW FALLBACK** = Custom CF Pages + Workers + D1 + R2 + KV + **Stripe Checkout direct** (the parent spec's prior PRIMARY). Switchable additively if Snipcart's free tier ceiling becomes a constraint or feature gap surfaces.
+
+**Cost model:**
+- Storefront revenue ≤ $629/mo → ~$5/mo CF infra + $0 Snipcart + 2.9% + 30¢ Stripe per-tx = **near-zero platform overhead**.
+- Storefront revenue > $629/mo → ~$5/mo CF + 2% Snipcart + 2.9% + 30¢ Stripe per-tx = ~5% effective per-tx (vs LemonSqueezy 5% + 50¢ MoR).
+
+**Snipcart integration model (replaces parent §10):**
+- Snipcart loaded via `<script>` tag on every SKU detail page.
+- "Buy Now" / "Add to Cart" buttons use Snipcart's HTML data attributes (`data-item-id`, `data-item-name`, `data-item-price`, `data-item-url`, `data-item-file-guid`).
+- `data-item-url` points to the storefront's SKU detail page (Snipcart fetches metadata at cart-build time).
+- `data-item-file-guid` references a Snipcart-hosted file pointer that signs an R2 URL via webhook on `order.completed`.
+- Snipcart webhook `order.completed` → Worker `/api/webhook/snipcart` → write `order` + `order_item` rows to D1 mirror; trigger entitlement email via Cloudflare Email Workers (Phase A) or fallback to Snipcart's built-in order email.
+- Refunds via Snipcart dashboard fire `order.refunded` webhook → flip `order.status='refunded'` → invalidate signed-URL refresh within 24h.
+
+**D1 schema deltas vs parent spec:**
+- `order` table simplifies: no `stripe_session_id` / `stripe_payment_intent_id` columns; instead `snipcart_order_token` (UNIQUE).
+- `order_item` table unchanged.
+- New `subscription` table (Phase B) for brand-subscription music SKUs.
+
+### §AMENDMENT-2026-06-04.3 — §10 + §11 + §12 + §13 + §14 — Snipcart-aware revisions
+
+**§10 (Payment Processing) — REVISED:**
+- Stripe Checkout direct → **Snipcart wrapping Stripe**.
+- No `/api/checkout` Worker route (Snipcart cart drawer handles).
+- New `/api/webhook/snipcart` Worker route for `order.completed` + `order.refunded`.
+- Webhook signature verification against `SNIPCART_WEBHOOK_SECRET` (operator-set in CF Workers env vars, sourced from Snipcart dashboard).
+- Per-locale currency routing controlled by Snipcart product definitions (one product per `(sku_id, locale, currency)` triple).
+
+**§11 (Star Reviews) — REVISED for guest reviews:**
+- Per Q-PRP-AUTH-01, reviews can be submitted by anyone with a verified email (no full account required).
+- Verified-purchase badge auto-applied when `email_hash` matches an `order_item.email_hash`.
+- Account auto-provisioned post-purchase from Snipcart receipt email — that account can edit/delete its own reviews subsequently.
+
+**§12 (Audiobook Delivery) + §13 (Manga Delivery) — REVISED for Snipcart signed-URL flow:**
+- Free preview (30-sec audio / first chapter manga) remains served from public R2 URLs by the catalog projector (no change).
+- Paid full delivery now routes through Snipcart: Snipcart serves a `data-item-file-guid` token → on `order.completed` webhook our Worker generates a fresh 60-minute R2 signed URL → return that URL to Snipcart's customer email + `/account/library` re-download flow.
+- In-browser streaming/reader UI remains our own (Snipcart only owns the file-delivery handoff, not the playback surface).
+
+**§14 (CTA Unification) — REVISED for HARD cutover:**
+- Per Q-PRP-CTA-UNIFY-01, **no soft-deprecate-redirect-replace period**. All seven surface categories (funnel/, marketing surfaces, brand-wizard-app/public/free/, somatic_exercise_freebee_apps/, email YAMLs, social-CTA registries, **ja-JP equivalents of all six**) swept BEFORE launch.
+- `config/funnel/store_url_tracker.yaml` is **deleted** at launch (not archived). Successor `config/storefront/sku_url_map.yaml` is sole SKU URL registry post-cutover.
+- CI guard `scripts/ci/check_external_buy_links.py` blocks `amazon.com/dp` / `play.google.com/store/books` / `audible.com/pd` / `books.apple.com` / `kobo.com/ebook` / `webtoons.com` / `honto.jp` / `audible.co.jp` patterns; zero violations gates launch milestone (not a warning-soft fail).
+- Pre-launch sweep is mandatory `ws_freebie_cta_redirect_unification_20260603` exit criterion.
+
+### §AMENDMENT-2026-06-04.4 — §16 Phased Rollout — REVISED (phase collapse + rename)
+
+Per Q-PRP-ROLLOUT-01:
+
+| **Old phase** | **New phase** | **Scope** | **Gate to next** |
+|---|---|---|---|
+| Phase 1 (MVP) | folded into Phase A | — | — |
+| Phase 2 | folded into Phase A | — | — |
+| — | **Phase A (launch)** | **en-US + ja-JP** × **book + audiobook + manga** + Snipcart cart + auto catalog cron + reviews + brand-lane filter + locale switcher + audiobook sample player + manga WEBTOON reader + recommender rail | **6 smoke combinations green** (en-US AND ja-JP × book AND audiobook AND manga = 6 e2e: ≥1 real purchase + ≥1 real review + ≥1 download in each combination) |
+| Phase 3 | **Phase B** | + zh-TW + zh-CN locales + music product type (all 3 SKU sub-types per Q-PRP-MUSIC-SKU-01) + series bundles + recommender personalization | CJK e2e smoke + music album e2e smoke + brand-subscription recurring-billing e2e smoke |
+| Phase 4 | **Phase C** | + ko-KR (gated on `distribution_status` clearance per `docs/CJK_CATALOG_PLAN.md`) | KO market entry approval |
+
+**Phase A demotion clause:** If ja-JP smoke fails close to launch, Phase A may demote to en-US-only Phase A (ja-JP slips to Phase A.1) per operator decision — NOT auto-fallback. Operator-decision-logged in `artifacts/coordination/operator_decisions_log.tsv`.
+
+### §AMENDMENT-2026-06-04.5 — §2 + §7 Music SKU Model — REVISED (3-shape)
+
+Per Q-PRP-MUSIC-SKU-01:
+
+**§2.4 music SKU expansion:**
+- `sku.product_type='music'` with new `sku.sub_type ∈ {'track', 'album', 'brand_subscription'}` column.
+- Inner key per sub-type:
+  - `track`: `<album_slug>_<track_slug>` (e.g., `album_quiet_hour_track_03_breath`)
+  - `album`: `<album_slug>` (e.g., `album_quiet_hour`)
+  - `brand_subscription`: `<musician_handle>_subscription` (e.g., `ahjansam_music_subscription`)
+- Pricing:
+  - Track: $0.99-$1.99 per locale price book
+  - Album: $9.99 default per locale price book
+  - Brand subscription: $4.99/mo unlimited access to all music SKUs under that `brand_id`
+
+**§7 catalog wiring expansion:**
+- New D1 `subscription` table (Phase B):
+  ```sql
+  CREATE TABLE subscription (
+    subscription_id   TEXT PRIMARY KEY,
+    account_id        TEXT,
+    email             TEXT NOT NULL,
+    brand_id          TEXT NOT NULL,                -- the subscribed music brand
+    snipcart_subscription_id TEXT UNIQUE,
+    status            TEXT NOT NULL,                -- 'active' | 'past_due' | 'cancelled' | 'expired'
+    started_at        INTEGER NOT NULL,
+    next_renewal_at   INTEGER,
+    cancelled_at      INTEGER,
+    locale            TEXT NOT NULL,
+    currency          TEXT NOT NULL,
+    price_cents       INTEGER NOT NULL
+  );
+  CREATE INDEX idx_subscription_email_status ON subscription(email, status);
+  CREATE INDEX idx_subscription_brand_status ON subscription(brand_id, status);
+  ```
+- Music brand-subscription gating: streaming-access endpoint checks `subscription.status='active'` for `(email, brand_id)` before signing R2 URLs for any music SKU under that brand.
+
+**§6 UI deltas (Phase B):**
+- Music SKU detail page surfaces 3 buttons: "Buy this track" / "Buy the album" / "Subscribe to this brand" — with the album as visual default and the other two collapsed under a disclosure.
+
+### §AMENDMENT-2026-06-04.6 — §6 Cart UI — REVISED (Hybrid)
+
+Per Q-PRP-CART-01:
+
+**§6.6 cart component update:**
+- Cart icon **always visible** in header (with item-count badge when non-empty).
+- "Buy Now" buttons trigger Snipcart's checkout-directly-from-button flow (skip cart drawer).
+- "Add to Cart" affordance on SKU cards + SKU detail page (secondary button) opens Snipcart cart drawer.
+- Cart drawer persists items in Snipcart's cookie-backed cart (60-minute idle TTL by default; configurable).
+- Signed-in flow: cart contents auto-merge with any pending Snipcart cart for that email.
+
+### §AMENDMENT-2026-06-04.7 — §15 Atom Audit — REVISED scope cascade
+
+Per Q-PRP-WRITER-AUDIT-01 staged default AND Q-PRP-ROLLOUT-01 Full Phase A:
+
+- **First pass:** en-US `anxiety` + `overthinking` × all personas across `atoms/<persona>/{anxiety,overthinking}/{COMPRESSION,REFLECTION,INTEGRATION,HOOK}/CANONICAL.txt` + `SOURCE_OF_TRUTH/teacher_banks/<teacher_id>/{anxiety,overthinking}/*.txt`. Coverage report at `artifacts/qa/next_step_atom_audit_2026-06-XX.tsv` + summary at `artifacts/qa/next_step_atom_audit_2026-06-XX_summary.md`.
+- **Second pass (operator-review-gated):** en-US remaining topics across all personas + ja-JP `anxiety` + `overthinking` × all personas. Triggered by operator approval of first-pass scope expansion.
+- **Phase A gate:** Audit + rewrite cycle complete for **en-US + ja-JP** before launch (per HARD CTA cutover semantics — same logic applies to atoms recommending external books).
+- Rewrite (separate ws gated on operator-approval per parent §15.6) → `ws_pearl_writer_next_step_atom_rewrite_2026-06-XX` operates per-topic after each audit pass.
+
+### §AMENDMENT-2026-06-04.8 — Anti-drift (binding)
+
+All decisions in this AMENDMENT are **BINDING** for storefront V1 program. Modifications require a new AMENDMENT cap entry referencing this block. Path X 37 FROZEN; music 38+ FROZEN; Pearl Prime visual tokens NON-NEGOTIABLE; no paid LLM APIs; Cloudflare account `b80152c3...` for provisioning; HARD CTA cutover enforced by CI; Phase A launch gated on 6 smoke combinations.
+
+### §AMENDMENT-2026-06-04.9 — Section-conflict resolution table
+
+When parent spec sections conflict with this AMENDMENT, AMENDMENT wins:
+
+| Parent §  | Conflict | Resolution |
+|---|---|---|
+| §3.2 PRIMARY = custom + Stripe direct | Q-PRP-PAY-01 = Snipcart | §AMENDMENT-2026-06-04.2 swaps PRIMARY/FALLBACK |
+| §6.6 cart = single-item Buy-Now Phase 1 | Q-PRP-CART-01 = Hybrid | §AMENDMENT-2026-06-04.6 updates UI |
+| §10 Stripe Checkout direct + webhook | Q-PRP-PAY-01 = Snipcart wraps Stripe | §AMENDMENT-2026-06-04.3 §10 revisions |
+| §11 review gating | Q-PRP-AUTH-01 = optional accounts | §AMENDMENT-2026-06-04.3 §11 revisions |
+| §12 + §13 delivery via Stripe direct + R2 signed URLs | Q-PRP-PAY-01 = Snipcart routes file-delivery | §AMENDMENT-2026-06-04.3 §12/§13 revisions |
+| §14.5 soft-deprecate-redirect-replace | Q-PRP-CTA-UNIFY-01 = HARD cutover | §AMENDMENT-2026-06-04.3 §14 revisions |
+| §16 4-phase table (Phase 1/2/3/4) | Q-PRP-ROLLOUT-01 = Full P1+P2 at launch | §AMENDMENT-2026-06-04.4 phase collapse |
+| §2.4 music SKU shape (per-album default) | Q-PRP-MUSIC-SKU-01 = all three | §AMENDMENT-2026-06-04.5 expansion |
+| §17 Q-PRP open questions | All 16 answered 2026-06-04 | §AMENDMENT-2026-06-04.1 table |
+
+---
+
+**End of §AMENDMENT-2026-06-04.** Next: 5 ws router prompts (Pearl_Dev mockups; Pearl_Int CF + Snipcart wiring; Pearl_Writer atom audit; Pearl_Marketing + Pearl_Dev CTA unification; Pearl_PM coordination tracking). Phase A launch gated on 6 smoke combinations (en-US + ja-JP × book + audiobook + manga).
