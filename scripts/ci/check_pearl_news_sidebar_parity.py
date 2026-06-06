@@ -64,7 +64,15 @@ def _load_metadata() -> dict:
 
 
 def _render_sample_article() -> str:
-    """Render a synthetic article via assemble_v52 (no LLM, no network)."""
+    """Render a synthetic article via assemble_v52 (no LLM, no network).
+
+    Updated 2026-06-06 (PR #1450 fix-up): activates the v2 template path
+    + populates all slot keys with minimal synthetic content, so the
+    renderer emits the full v2 markup (5 section-headers + dek-1/dek-2 +
+    Take Action Now! / Your Voice Has Power sections). Without these
+    inputs the renderer falls back to the legacy v1 path and the body
+    F-IDs FB1-FB6 fingerprints are absent.
+    """
     sys.path.insert(0, str(REPO_ROOT))
     try:
         from pearl_news.pipeline.assemble_v52 import assemble_v52
@@ -72,10 +80,18 @@ def _render_sample_article() -> str:
         print(f"FAIL: cannot import assemble_v52: {e}", file=sys.stderr)
         sys.exit(3)
 
-    # Minimal synthetic inputs. The renderer must produce a complete
-    # sidebar even with this minimal article_json — that's the point of
-    # the canonical anchor (PR #853 anchors say the exercise-card is
-    # "ALWAYS rendered").
+    # All slot keys read by assemble_v52 (v2 path) — see lines 770-1006.
+    # Each is populated with a minimal synthetic value so the renderer
+    # emits the full v2 body shape. The CONTENT is throw-away; the gate
+    # checks SHAPE.
+    _slots = {k: f"Synthetic {k} for the parity-gate probe." for k in [
+        "headline_layer_1", "headline_layer_2", "news_peg", "news_summary",
+        "hook_personal", "hook_big_picture", "youth_somatic", "teacher_intro",
+        "teacher_witness", "body_data", "turnaround", "bridge",
+        "teacher_perspective", "practice_announce", "forward_look",
+        "sdg_un_tie", "youth_impact", "gen_z_reactions",
+    ]}
+
     article_json = {
         "id": "pn-sidebar-parity-probe",
         "slug": "pn-sidebar-parity-probe",
@@ -85,13 +101,19 @@ def _render_sample_article() -> str:
         "teacher_id": "junko",
         "topic": "mental_health",
         "sdg": {"primary": 3},
-        "slots": {},
+        "slots": _slots,
     }
     meta = {
         "layout": "default",
         "language": "en",
         "teacher_id": "junko",
         "topic": "mental_health",
+        "slug": "pn-sidebar-parity-probe",
+        # Activate the V2 article path (hard_news_v2 template). Without
+        # this, assemble_v52 emits the legacy v1 shape (no
+        # v2-headline-dek-* divs, no sec-v2-genz / sec-v2-teacher
+        # section-headers), and FB1-FB6 fingerprints fail.
+        "template": "hard_news_v2",
     }
     try:
         return assemble_v52(article_json, meta)
