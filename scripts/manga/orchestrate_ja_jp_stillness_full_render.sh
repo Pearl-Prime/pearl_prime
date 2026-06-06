@@ -137,6 +137,14 @@ else
     run_phase2 || { echo "Phase 2 FAILED; orchestrator halting (per-chapter sentinels preserved)."; refresh_dashboard; exit 1; }
 fi
 
+# --- PHASE 3 — book assembler (cover + scroll + PDF + R2 sync per series) ---
+echo "=========================================="
+echo "=== PHASE 3 — book assembly @ $(date -u +%Y-%m-%dT%H:%M:%SZ) ==="
+echo "=========================================="
+P3_ARGS=()
+[ "$SKIP_R2" = "1" ] && P3_ARGS+=(--skip-r2)
+python3 scripts/manga/ja_jp_phase3_assemble.py "${P3_ARGS[@]}" || echo "Phase 3 returned non-zero (per-series BOOK_COMPLETE sentinels preserved)"
+
 refresh_dashboard
 echo "=========================================="
 echo "=== ORCHESTRATOR COMPLETE @ $(date -u +%Y-%m-%dT%H:%M:%SZ) ==="
