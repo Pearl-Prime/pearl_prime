@@ -42,6 +42,11 @@ SKIP_COMMIT="${SKIP_COMMIT:-0}"
 DRY_RUN="${DRY_RUN:-0}"
 DASHBOARD_INTERVAL_SECONDS="${DASHBOARD_INTERVAL_SECONDS:-3600}"
 
+# Translation model — Pearl Star Ollama defaults to qwen2.5:7b which is NOT
+# loaded. The actually-loaded model is qwen2.5:14b. Default here so Phase 0
+# actually translates instead of silently failing with HTTP 404.
+export QWEN_MODEL="${QWEN_MODEL:-qwen2.5:14b}"
+
 phase_log() {
     local phase="$1"
     echo "=========================================="
