@@ -103,7 +103,7 @@ stages:
           line_native_fast:    "+168h"       # Day 7
           email_equivalent_slow: "+168h"     # Day 7 (E3+96h ≥ 48h gap satisfied)
         proof_loop_role: "soft_pitch"
-        primary_action: "Introduce book gently. Link card to BookWalker / Amazon JP. No coupon."
+        primary_action: "Introduce book gently. Link card to Pearl Prime Storefront SKU (pearlprime.shop/ja-JP/book/<brand_id>/<inner_key>). No coupon."  # AMENDMENT-2026-06-04.3 §14 HARD CTA cutover: external BookWalker / Amazon JP paid links replaced with storefront SKU URL.
         message_type: line_link_card
         # The 48h-min-gap-from-story-to-offer rule (per FREEBIE_MARKETING_PLAN.md) is
         # honored: m3→m4 = 96h. Do not compress below 48h.
@@ -234,7 +234,7 @@ liff_endpoints:
     used_by_states: [m2_second_exercise]
   book_preview:
     path: "/liff/preview/${book_slug}"
-    purpose: "Sample chapter + 1-tap purchase routing (BookWalker / Amazon JP / LINE Pay)"
+    purpose: "Sample chapter + 1-tap purchase routing to Pearl Prime Storefront SKU (pearlprime.shop/ja-JP/...)"  # AMENDMENT-2026-06-04.3 §14 HARD CTA cutover: external BookWalker / Amazon JP paths removed.
     used_by_states: [m4_soft_pitch, m5_hard_pitch]
 
 # ---------------------------------------------------------------------------

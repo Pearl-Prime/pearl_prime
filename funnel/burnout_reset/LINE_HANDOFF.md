@@ -127,9 +127,9 @@ Three different APIs, three different pricing/behaviors. Pick deliberately.
 | `line_contact_tags` | `contact_id`, `tag` (composite unique on (contact_id, tag)) |
 | `line_messages_sent` | `contact_id`, `message_slot`, `sent_at`, `replyToken_or_pushId`, `cost_quota_units` |
 | `line_events` | `contact_id`, `event_type`, `payload_json`, `received_at` |
-| `line_purchases` | `contact_id`, `book_slug`, `platform` (bookwalker / amazon_jp / line_pay), `purchase_at`, `revenue_jpy` |
+| `line_purchases` | `contact_id`, `book_slug`, `platform` (pearlprime_storefront / line_pay), `purchase_at`, `revenue_jpy` |
 
-The `line_purchases` table is populated either via affiliate-platform postback (BookWalker / Amazon JP affiliate webhooks) or via LINE Pay merchant webhook (when direct sale is enabled in Phase 2).
+The `line_purchases` table is populated via Pearl Prime Storefront Snipcart `order.completed` webhook (per `docs/specs/PEARL_PRIME_STOREFRONT_V1_SPEC.md` §AMENDMENT-2026-06-04.3 §10) or via LINE Pay merchant webhook (when direct sale is enabled). Per §14 HARD CTA cutover (2026-06-04 AMENDMENT), external affiliate paths (BookWalker / Amazon JP) are no longer used — paid CTAs route exclusively to `pearlprime.shop/ja-JP/...`.
 
 ---
 
@@ -190,7 +190,7 @@ LINE has a built-in coupon primitive (rich message with redemption tracking) —
 - **Redemption tracking:** LINE reports redemption count in OA Manager; pull via Insight API into our DB.
 - **One coupon per active campaign per hub** to keep redemption analytics clean. Rotate coupons monthly.
 
-When the freebie funnel routes to off-platform purchase (BookWalker / Amazon JP affiliate), the LINE coupon does NOT apply — that's a platform-specific discount the seller controls. Reserve LINE-native coupons for `Phase 2` direct-sale-via-LINE-Pay.
+Per `docs/specs/PEARL_PRIME_STOREFRONT_V1_SPEC.md` §AMENDMENT-2026-06-04.3 §14 (HARD CTA cutover, 2026-06-04), the freebie funnel routes paid purchases to the Pearl Prime Storefront (`pearlprime.shop/ja-JP/...`) — not to BookWalker / Amazon JP affiliate paths. LINE-native coupons can therefore be honored at storefront checkout via Snipcart promo codes. Reserve LINE-Pay direct-sale-on-LINE for the post-launch native-pay phase.
 
 ---
 
