@@ -1,0 +1,24 @@
+{
+  "name": "pearl-prime-storefront",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Pearl Prime Storefront V1 — Cloudflare Pages + Workers + D1 + R2 + KV marketplace for Pearl Prime catalog SKUs. Infrastructure scaffold only (Pearl_Int ws). Application code lands via subsequent Pearl_Dev ws gated on this PR + UI mockup approval.",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.0",
+    "vite": "^5.2.0"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Ahjan108/phoenix_omega.git",
+    "directory": "storefront"
+  },
+  "homepage": "https://github.com/Ahjan108/phoenix_omega/blob/main/docs/specs/PEARL_PRIME_STOREFRONT_V1_SPEC.md"
+}

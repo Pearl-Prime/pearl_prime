@@ -1,0 +1,53 @@
+# Pearl Prime Storefront — Cloudflare Pages + Workers deployment config
+#
+# Project name MUST be `pearl-prime-storefront` (NOT `phoenix-command` — that is
+# the legacy project name from brand-wizard-app/wrangler.toml; see
+# `skills/pearl-int/references/cloudflare_pages_deploy.md` Trap 2).
+#
+# Spec: docs/specs/PEARL_PRIME_STOREFRONT_V1_SPEC.md §5 (hosting topology).
+# AMENDMENT: docs/specs/PEARL_PRIME_STOREFRONT_V1_SPEC.md §AMENDMENT-2026-06-04
+# (Snipcart wraps Stripe — PRIMARY payment).
+#
+# Deploy path: PR → merge to main → .github/workflows/pearl-prime-storefront-deploy.yml
+# auto-fires → wrangler-action@v3 deploys via repo secrets CLOUDFLARE_API_TOKEN +
+# CLOUDFLARE_ACCOUNT_ID. DO NOT run `wrangler pages deploy` from a laptop
+# (`cloudflare_pages_deploy.md` Traps 1-4).
+#
+# Cloudflare account: provision ALL resources (Pages + D1 + R2 + KV) under
+# account `b80152c319f941e6e92f928e2617a3d5`. The operator's
+# `ahjansamvara@gmail.com` account (`626d6eb8162a8121f74e59235d82a4f5`) has ZERO
+# Pages projects and the GitHub-Actions deploy pattern is scoped to b80152c3...
+#
+# Operator-action-required resource IDs are tracked in:
+#   skills/pearl-int/references/storefront_resource_ids.md
+#
+# Once provisioned, populate the [[d1_databases]], [[r2_buckets]], and
+# [[kv_namespaces]] bindings below with the real IDs and uncomment.
+
+name = "pearl-prime-storefront"
+compatibility_date = "2026-06-06"
+pages_build_output_dir = "./dist"
+
+# --- D1 binding (uncomment + populate after operator provisions) ---
+# [[d1_databases]]
+# binding = "DB"
+# database_name = "pearl_prime_storefront"
+# database_id = "<OPERATOR-ACTION-REQUIRED: pearl_prime_storefront D1 ID>"
+# # See skills/pearl-int/references/storefront_resource_ids.md §2
+
+# --- R2 binding (uncomment + populate after operator provisions) ---
+# [[r2_buckets]]
+# binding = "ASSETS"
+# bucket_name = "pearl-prime-storefront-assets"
+# # See skills/pearl-int/references/storefront_resource_ids.md §3
+
+# --- KV binding (uncomment + populate after operator provisions) ---
+# [[kv_namespaces]]
+# binding = "SESSION_CART"
+# id = "<OPERATOR-ACTION-REQUIRED: pearl_prime_storefront_session_cart KV namespace ID>"
+# # See skills/pearl-int/references/storefront_resource_ids.md §4
+
+# --- Snipcart-wraps-Stripe webhook secret (Cloudflare Pages env var; NOT in this file) ---
+# In Cloudflare dashboard → Pages → pearl-prime-storefront → Settings → Environment
+# variables → add `SNIPCART_WEBHOOK_SECRET` (encrypt). Rotation cadence quarterly
+# per docs/INTEGRATION_CREDENTIALS_REGISTRY.md.

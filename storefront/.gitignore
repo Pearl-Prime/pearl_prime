@@ -1,0 +1,32 @@
+# Build output
+dist/
+.vite/
+
+# Dependencies
+node_modules/
+
+# Wrangler local state
+.wrangler/
+.dev.vars
+.dev.vars.*
+
+# Local D1 SQLite shadows
+*.sqlite
+*.sqlite-journal
+*.sqlite-wal
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.log
+
+# Editor / OS
+.DS_Store
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Snipcart local sandbox keys (never commit) — load from Keychain instead
+.snipcart-local.json
