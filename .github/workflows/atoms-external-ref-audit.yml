@@ -1,0 +1,138 @@
+name: Atoms External Reference Audit
+
+# Non-blocking warning workflow for the Pearl Prime Storefront V1 atom audit
+# (spec §15 + AMENDMENT-2026-06-04.7).
+#
+# Per §15.6 (and the AMENDMENT cascade), this workflow is WARNING-ONLY in the
+# audit phase. The rewrite workstream (`ws_pearl_writer_next_step_atom_rewrite_*`)
+# will graduate this to a blocking check after operator review of the stage-2
+# audit results.
+#
+# Triggers: PRs and pushes that modify atom CANONICAL.txt files or teacher-bank
+# approved-atom YAMLs. Posts a comment summarizing any net-new external-reference
+# matches in the changed files vs main.
+
+on:
+  push:
+    branches: [main, master]
+    paths:
+      - 'atoms/**/*.txt'
+      - 'SOURCE_OF_TRUTH/teacher_banks/**/*.yaml'
+      - 'scripts/ci/check_atoms_external_book_references.py'
+      - '.github/workflows/atoms-external-ref-audit.yml'
+  pull_request:
+    branches: [main, master]
+    paths:
+      - 'atoms/**/*.txt'
+      - 'SOURCE_OF_TRUTH/teacher_banks/**/*.yaml'
+      - 'scripts/ci/check_atoms_external_book_references.py'
+      - '.github/workflows/atoms-external-ref-audit.yml'
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  audit:
+    name: Detect off-catalog references in atoms
+    runs-on: ubuntu-latest
+    # Non-blocking: always exits success even if hits found.
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Determine changed atom files
+        id: changed
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            BASE_SHA="${{ github.event.pull_request.base.sha }}"
+          else
+            BASE_SHA=$(git rev-parse HEAD~1 || git rev-parse HEAD)
+          fi
+          CHANGED=$(git diff --name-only "$BASE_SHA"..HEAD -- \
+            'atoms/**/CANONICAL.txt' \
+            'SOURCE_OF_TRUTH/teacher_banks/**/*.yaml' | tr '\n' ' ' || true)
+          echo "files=$CHANGED" >> "$GITHUB_OUTPUT"
+          echo "Changed atom paths: $CHANGED"
+
+      - name: Run external-reference detector on changed files
+        if: steps.changed.outputs.files != ''
+        run: |
+          mkdir -p artifacts/qa
+          PYTHONPATH=. python3 scripts/ci/check_atoms_external_book_references.py \
+            --paths ${{ steps.changed.outputs.files }} \
+            --out artifacts/qa/pr_delta_atom_audit.tsv \
+            --quiet || true
+
+      - name: Run full-scope stage-1 detector (informational)
+        run: |
+          mkdir -p artifacts/qa
+          PYTHONPATH=. python3 scripts/ci/check_atoms_external_book_references.py \
+            --scope stage1 \
+            --out artifacts/qa/full_stage1_atom_audit.tsv \
+            --quiet || true
+
+      - name: Summarize findings
+        if: always()
+        run: |
+          echo "## Atoms external-reference audit (informational)" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          if [ -f artifacts/qa/pr_delta_atom_audit.tsv ]; then
+            DELTA_HITS=$(tail -n +2 artifacts/qa/pr_delta_atom_audit.tsv | wc -l | tr -d ' ')
+            echo "**Delta vs main (changed files only):** $DELTA_HITS hits" >> "$GITHUB_STEP_SUMMARY"
+          fi
+          STAGE1_HITS=$(tail -n +2 artifacts/qa/full_stage1_atom_audit.tsv | wc -l | tr -d ' ')
+          echo "**Full stage-1 scope hits:** $STAGE1_HITS" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "Per spec §15.6, this check is **informational** — not blocking." >> "$GITHUB_STEP_SUMMARY"
+          echo "See \`docs/specs/PEARL_PRIME_STOREFRONT_V1_SPEC.md\` §15 + §AMENDMENT-2026-06-04.7." >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload audit artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: atoms-external-ref-audit
+          path: |
+            artifacts/qa/pr_delta_atom_audit.tsv
+            artifacts/qa/full_stage1_atom_audit.tsv
+          retention-days: 30
+
+      - name: Comment delta on PR
+        if: github.event_name == 'pull_request' && steps.changed.outputs.files != ''
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const path = 'artifacts/qa/pr_delta_atom_audit.tsv';
+            if (!fs.existsSync(path)) return;
+            const lines = fs.readFileSync(path, 'utf-8').trim().split('\n');
+            const dataLines = lines.slice(1);
+            if (dataLines.length === 0) {
+              return;  // No hits, no comment
+            }
+            const rows = dataLines.slice(0, 20).map(l => l.split('\t'));
+            let body = '## Atoms external-reference audit (delta vs main)\n\n';
+            body += `**${dataLines.length}** off-catalog reference candidate(s) detected in changed atom files.\n\n`;
+            body += '| file | line | match_type | matched_text | suggested_action |\n';
+            body += '|---|---|---|---|---|\n';
+            for (const r of rows) {
+              const safe = r.map(c => (c || '').replace(/\|/g, '\\|'));
+              body += `| ${safe[0]} | ${safe[1]} | ${safe[2]} | ${safe[3]} | ${safe[4]} |\n`;
+            }
+            if (dataLines.length > 20) {
+              body += `\n_… and ${dataLines.length - 20} more (see artifact \`atoms-external-ref-audit\` for full TSV)._\n`;
+            }
+            body += '\n**This check is informational (non-blocking)** per spec §15.6.';
+            body += '\nThe rewrite workstream will graduate this to a blocking check.\n';
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body,
+            });
