@@ -2422,3 +2422,69 @@ Phase 3 P0 workstreams **NOT YET OPENED** — pending operator authorization on 
 5. **Pearl_PM** — coordination cleanup after this AMENDMENT PR merges; 5 ws rows now `runnable`; track Phase A launch milestone gate (6 smoke combinations).
 
 **Pointers:** `docs/specs/PEARL_PRIME_STOREFRONT_V1_SPEC.md` (now includes `§AMENDMENT-2026-06-04`); `artifacts/coordination/ACTIVE_PROJECTS.tsv` (`PRJ-PEARL-PRIME-STOREFRONT-V1` status active); `artifacts/coordination/ACTIVE_WORKSTREAMS.tsv` (5 ws rows runnable); `artifacts/coordination/SUBSYSTEM_AUTHORITY_MAP.tsv` (storefront active); parent cap `PEARL-PRIME-STOREFRONT-V1-01` (this state doc); parent PR [#1433](https://github.com/Ahjan108/phoenix_omega_v4.8/pull/1433) (SHA `69e9855f7`).
+
+
+### PEARL-PRIME-ONE-PATH-V1-01 — Canonical Pearl Prime ebook path (20-dimension lockdown + 18-row deletion manifest + runtime fail-fast); supersedes partial constraints in CRAFT_DEPTH_OVERLAY proposal (ratified PROPOSAL pending operator answers to §10 Q-OP-* of spec; 2026-06-06)
+
+**Status:** **PROPOSAL — awaiting operator answers to 12 Q-OP-* + cap-entry merge → ACTIVE** (2026-06-06; Pearl_Architect authoring this PR).
+
+**Context:** 7-axis Pearl Prime full audit (2026-06-06; `artifacts/qa/pearl_prime_audit_2026-06-06.md`) + 2 independent editorial critiques + the gold-reference artifact ladder at `artifacts/pearl_prime/gold_reference_ladder_2026-05-30/` converged: ONE path produces bestseller-grade output (gen_z_professionals × anxiety × spiral × F006 × ahjan, persona-keyed atom coverage complete, 12-chapter spine, 10-section grid, production profile, --exercise-journeys, --pipeline-mode spine). Everything else surfaces as the recurring critique pattern (repetition cascade, three-voice fragmentation, decorative-metaphor inflation, illustration-not-story characters). Operator directive (verbatim): *"verify, best way for pearl prime. and do permanently delete all lesser ways. i need to know the best way for all and drop the weaker stuff so that no agent gets the option of doing it lesser."*
+
+**Decision:** Define the canonical path with 20-dimension precision (every knob + every assert-point); enumerate every lesser configuration the current HEAD silently permits (18 rows L01-L18); specify the runtime fail-fast enforcement contract (one exception class per dimension; no fallbacks); fan out 6 child ws's across 4 phases (mechanical sweeps → runtime gates → content backfill → craft-gate activation); 12 operator Q-OP-* with recommended defaults. The spec: [`docs/specs/PEARL_PRIME_ONE_PATH_LOCKDOWN_V1_SPEC.md`](../docs/specs/PEARL_PRIME_ONE_PATH_LOCKDOWN_V1_SPEC.md). The manifest: [`artifacts/qa/pearl_prime_one_path_deletion_manifest_20260606.tsv`](../artifacts/qa/pearl_prime_one_path_deletion_manifest_20260606.tsv).
+
+| Dimension layer | Canonical value | Enforcement |
+|---|---|---|
+| Arc + spine + sections | `arc.chapter_count: 12`; 10-section SOMATIC_10_SLOT_GRID; ≥3 variant floor; STORY at sec 2/5/9 | runtime asserts at story_planner / beatmap_compile / registry_resolver / knob_apply |
+| Profile + injections | `--quality-profile production` only for catalog; `--exercise-journeys` mandatory; EXERCISE strict-canonical (no practice_library fall-through); `--pipeline-mode spine` only | CLI argparse reject + EnrichmentGapError + COHESIVE-FLOW-PATH-DEFAULT-SPINE-01 default flip |
+| Persona-keyed atoms | ALL 16 slot-type dirs required per persona×topic (HOOK / STORY / SCENE / REFLECTION / EXERCISE / COMPRESSION / PIVOT / PERMISSION / PERMISSION_GRANT / TAKEAWAY / THREAD / INTEGRATION / TEACHER_DOCTRINE / TEACHER_DOCTRINE_INTRO / ANGLE_DEFINITION / ANGLE_CALLBACK); NO fallback to teacher_banks/doctrine | PersonaAtomCoverageError precondition before compose loop |
+| Hook + voice + character | scene-first HOOK (F11 WARN→BLOCK); slot-zoned voice braid (Pearl_Architect recommended); every named character must transform; pronoun continuity per character_roster.yaml | HookAbstractOpeningError + VoiceOutOfZoneError + CharacterIllustrationOnlyError + PronounContinuityError |
+| Craft caps | ≤5 signature_phrases per book; decorative metaphor cap per chapter; chapter-to-chapter cosine similarity < 0.85; engine-scoped signal/amplification framing for spiral/overwhelm/shame/false_alarm/watcher; Ahjan named-contemplative-source specificity; zero placeholder leakage | DecorativeMetaphorInflationError + ChapterProgressionLoopError + SignalAmplificationMissingError + GenericBuddhistDriftError + PlaceholderLeakageError |
+| Audiobook coherence | midpoint-wpm ∈ [130, 200] per runtime format | AudiobookWpmOutOfBandError (format-registry validator) |
+
+**Scope-in:** every catalog output (production profile). **Scope-out:** ad-hoc operator-attended smoke runs (per Q-OP-DRAFT-PROFILE-SMOKE-01 recommended (a) — draft profile permitted only with explicit `--smoke` flag + no `--catalog-target`/`--book-plan-id ref_*`).
+
+**Cross-references (10 amended cap entries):**
+- AMENDS `TEMPLATE-UNIVERSAL-01` (line 576) — 12-spine + 10-grid + ≥3-floor hard-enforced; registry source layer needs Phase 3b backfill
+- AMENDS `BESTSELLER-INJECTIONS-MANDATORY-01` (line 601) — production-only catalog; STORY label drift closed; --exercise-journeys mandatory
+- PROMOTES `EXERCISE-BANK-RESOLUTION-01` (line 677) — Option 1 strict-canonical → mandatory at runtime
+- PROMOTES `SPEC-739-THRESHOLD-01` (line 308) — runtime variant-floor assert closes A4 anomaly
+- PROMOTES `HOOK-SCENE-FIRST-01` (line 1867) — F11 WARN→BLOCK; resolves Open Q1
+- CLOSES `AUTO-PLAN-SSOT-01` + `-AMENDMENT` (line 438, 523) — refactor SHIPPED; ws_auto_plan_ssot_refactor_20260505 status flip to completed
+- EXTENDS `PR-D-SPINE-01` (line 407) — `compact_chapter_subset` extended for L01 20-arc compression case
+- AMENDS PENDING Q-OP-L10 `CATALOG-800-PER-BRAND-01` (line 629) — top-5-locale demote to top-3 (en-US + ja-JP + zh-TW); de-DE/fr-FR atoms absent
+- EXTENDS `COHESIVE-FLOW-PATH-DEFAULT-SPINE-01` (recent) — single-knob `--pipeline-mode` default flip extended to full 20-dimension lockdown
+- HONORS `PEARL-EDITOR-UPSTREAM-01` (line 649) + `TEACHER-POOL-SEMANTICS-01` (line 728) + `QUOTE-ATOM-ROUTING-01` (line 705) — unchanged; this lockdown operates within their existing authority
+
+**Open Q's (full text + recommended defaults in `docs/specs/PEARL_PRIME_ONE_PATH_LOCKDOWN_V1_SPEC.md` §10):**
+- Q-OP-L01-ARC-STRATEGY-01 (449 of 531 arcs at 20-chapter): (a) compress-to-12 default [RECOMMEND] / (b) Pearl_Writer rewrite all / (c) hybrid
+- Q-OP-L09-PERSONA-FLOOR-01: (a) backfill-all-first / (b) staged: corp_mgrs + working_parents + first_responders first [RECOMMEND] / (c) block uncovered personas
+- Q-OP-L10-LOCALE-SCOPE-01: (a) backfill de-DE+fr-FR / (b) demote to top-3 [RECOMMEND] / (c) per-locale staged AMENDMENT
+- Q-OP-VOICE-BRAID-01: (a) alternate / (b) slot-zoned [RECOMMEND] / (c) collapse
+- Q-OP-CHAPTER-REPETITION-THRESHOLD-01: T = (a) 0.85 [RECOMMEND] / (b) 0.80 / (c) 0.90
+- Q-OP-METAPHOR-CAP-N-01: N = (a) 5/chapter [RECOMMEND] / (b) 3 / (c) 7
+- Q-OP-SIGNATURE-PHRASES-COUNT-01: whitelist size = (a) 5 [RECOMMEND] / (b) 7 / (c) 3
+- Q-OP-DRAFT-PROFILE-SMOKE-01: --smoke flag exempt operator-attended runs? (a) YES [RECOMMEND] / (b) NO
+- Q-OP-RUNTIME-FAIL-MESSAGE-LANGUAGE-01: failure-message audience = (a) operator / (b) agent / (c) both [RECOMMEND]
+- Q-OP-MIGRATION-CADENCE-01: (a) single-PR-per-ws atomic [RECOMMEND] / (b) per-L-row / (c) Pearl_PM sequences
+- Q-OP-MOVE-4-VERDICT-RECOMPUTE-01: recompute 27/30 under production+§13? (a) YES before Phase 1 dispatches [RECOMMEND] / (b) NO
+- Q-OP-GOLD-REFERENCE-SHA-PIN-01: pin gold-ref SHA to MEMORY.md? (a) YES [RECOMMEND] / (b) NO
+- Q-OP-CRAFT-DEPTH-OVERLAY-PROPOSAL-DISPOSITION-01: predecessor proposal disposition = (a) SUPERSEDED-BY frontmatter mark [RECOMMEND] / (b) delete
+
+**Action items:**
+1. **Operator:** answer 12 Q-OP-* in spec §10 → unblocks cap-entry status proposed → active.
+2. **Pearl_PM:** spawn 6 child ws's (already authored in `artifacts/coordination/ACTIVE_WORKSTREAMS.tsv` rows under this PR) per phase-order in spec §7: Phase 1 mechanical sweeps → Phase 2 runtime gates → Phase 3a persona-keyed atoms + Phase 3b registry backfill in parallel → Phase 4 craft-gate activation → Pearl_PM meta-ws coordinates throughout.
+3. **Pearl_PM:** status-flip `ws_auto_plan_ssot_refactor_20260505` to completed (per Audit Agent A3 — refactor shipped; FORMAT_CHAPTER_COUNTS removed).
+4. **Pearl_PM:** scope-amend `ws_register_gate_f11_hook_abstract_detector_20260523` to elevate F11 WARN→BLOCK per D10.
+5. **Pearl_PM:** cross-link `ws_exercise_strict_canonical_production_20260506` to D7 of this spec.
+6. **Pearl_Architect (post-Phase-2):** recompute Move 4 verdict under production+§13 rubric per Q-OP-MOVE-4-VERDICT-RECOMPUTE-01 (a); refresh operator confidence baseline.
+7. **Pearl_PM:** mark `docs/PEARL_PRIME_CRAFT_DEPTH_OVERLAY_PROPOSAL_2026-06-06.md` frontmatter SUPERSEDED-BY-PEARL-PRIME-ONE-PATH-V1-01 per Q-OP-CRAFT-DEPTH-OVERLAY-PROPOSAL-DISPOSITION-01 (a).
+8. **Pearl_GitHub:** when next refreshing `docs/DOCS_INDEX.md`, add routing note "Pearl Prime canonical path = ONE-PATH-V1; lesser configurations fail-fast per the runtime cascade in spec §5."
+
+**Anti-drift check:** No new spec architecture; this consolidates 10 existing cap entries + the CRAFT_DEPTH_OVERLAY proposal into one enforcement contract. Gold reference at `artifacts/pearl_prime/gold_reference_ladder_2026-05-30/` IS the canonical SHA per `feedback_drift_recovery_git_first`; this lockdown is git-first restoration encoded as runtime enforcement. Memory `feedback_validation_before_scaling` honored: Phase 3 content backfill gates Phase 4 craft gates; lockdown gates catalog-scale runs.
+
+**Handoffs:**
+- Operator → answer 12 Q-OP-* on this PR thread or in `artifacts/coordination/operator_decisions_log.tsv` → trigger cap-entry status flip proposed → active.
+- Pearl_PM → spawn 6 child ws's (already authored in ACTIVE_WORKSTREAMS rows under this PR) per Q-OP-MIGRATION-CADENCE-01 default (a) single-PR-per-ws-atomic.
+- Pearl_Dev → Phase 1 first PR within 1 week of operator green-light; Phase 2 within 3 weeks of Phase 1 land.
+- Pearl_Editor + Pearl_Writer → Phase 3a + 3b rolling per-persona / per-topic; rolling ws status updates per stage.
+- Pearl_Architect → Move 4 verdict recompute after Phase 2 lands; gold-reference SHA pin to MEMORY.md after operator answers Q-OP-GOLD-REFERENCE-SHA-PIN-01 (a).
