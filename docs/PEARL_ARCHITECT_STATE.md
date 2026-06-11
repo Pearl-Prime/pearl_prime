@@ -2646,3 +2646,21 @@ Back-compat: legacy `blocks: {setup, instruction, prompt, close}` retained; lega
 5. **Pearl_GitHub** — when next refreshing `docs/DOCS_INDEX.md`, add cross-link for `EXERCISE-COMPONENT-SCHEMA-LIFT-01` cap entry under EXERCISE/practice library subsystem section.
 
 **Authority:** this cap entry + [`specs/PRACTICE_ITEM_SCHEMA.md`](../specs/PRACTICE_ITEM_SCHEMA.md) (v2) + [`config/practice/validation.yaml`](../config/practice/validation.yaml) (v2) + [`config/practice/selection_rules.yaml`](../config/practice/selection_rules.yaml) (v2; `component_variant_by_format` block) + the 2 Pearl_Dev ws rows in [`artifacts/coordination/ACTIVE_WORKSTREAMS.tsv`](../artifacts/coordination/ACTIVE_WORKSTREAMS.tsv).
+
+**ACCEPTANCE CRITERIA (added via AMENDMENT-2026-06-11):**
+
+When Pearl_Dev's 2 ws PRs land (`ws_pearl_dev_practice_ingest_components_lift_20260610` + `ws_pearl_dev_renderer_practice_components_consume_20260610`), operator + reviewer apply this A1-A6 checklist as a deterministic merge gate. Pearl_Editor preservation audit ws (`ws_pearl_editor_exercise_preservation_audit_20260611`) verifies A1 + A2 + A3 + A4 + A6 post-merge with per-item evidence.
+
+- **A1.** Schema accepts v2 components without losing v1 data (post-ingest spot-check 5 items diff matches inbox source files).
+- **A2.** Re-ingest produces **311 rows total (272 library_34 + 39 ab_tady_37)** vs current 272.
+- **A3.** Zero content loss verifiable via Pearl_Editor preservation audit ws — every inbox component field present in store row for **≥99% of items**; flagged items <1% with explicit per-item evidence.
+- **A4.** Renderer reads structured components for at least 1 production-profile smoke combo (`gen_z_professionals × anxiety × ahjan × deep_book_4h`) and produces **visible aha + integration text** in rendered output.
+- **A5.** `component_variant_by_format` selects **full** for `{deep_book_4h, extended_book_2h, deep_book_6h}`; **lean** for the 17 other runtime formats — confirmed via per-format dry-run.
+- **A6.** ab_tady_37 items render under slot_07_PRACTICE when bestseller-grade smoke targets a registry with slot_07 active (post-merge of `ws_pearl_editor_slot_07_practice_supply_backfill_20260611`).
+
+**Cross-references (added via AMENDMENT-2026-06-11):**
+
+- **AMENDMENT-2026-06-11** (this AMENDMENT PR; cross-links SSOT §17 + adds A1-A6 above + adds Pearl_Editor preservation audit ws + adds slot_07 supply backfill ws per Q-Atom-INCLUDE-SLOT-07-BACKFILL-WS-01 (a)).
+- **SSOT §17** (this SSOT's AMENDMENT block; canonical surface for the A1-A6 checklist with §17.4 + §17.5 ws cross-refs).
+- **`ws_pearl_editor_exercise_preservation_audit_20260611`** (NEW; gated on both Pearl_Dev ws's merge; verifies A1-A6).
+- **`ws_pearl_editor_slot_07_practice_supply_backfill_20260611`** (NEW optional; gated on all three above + operator Q-Atom-SLOT-07-PRIORITY-01 answer).

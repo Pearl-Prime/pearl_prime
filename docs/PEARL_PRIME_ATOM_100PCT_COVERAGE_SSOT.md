@@ -95,7 +95,9 @@ Required at `atoms/<persona>/<topic>/<atom_type>/CANONICAL.txt` per the runtime 
 | 3 | **REFLECTION** | Sections 3 + 7 of grid | YES | `SOMATIC_10_SLOT_GRID[2]`, `[6]` |
 | 4 | **INTEGRATION** | Section 10 closer | YES | `SOMATIC_10_SLOT_GRID[9]` |
 | 5 | **STORY** | Sections 2 + 5 + 9 of grid; named-character bestseller bank per `BESTSELLER-INJECTIONS-MANDATORY-01` | YES | `SOMATIC_10_SLOT_GRID[1]`, `[4]`, `[8]`; engine bank under `atoms/<persona>/<topic>/<engine>/CANONICAL.txt` |
-| 6 | **EXERCISE** | Sections 4 + 8 of grid; canonical exercise atom per `EXERCISE-BANK-RESOLUTION-01` Option 1 (strict-canonical for production) | YES | `SOMATIC_10_SLOT_GRID[3]`, `[7]`; falls through to `teacher_banks/<teacher>/approved_atoms/EXERCISE/` then `practice_library/store/practice_items.jsonl` per spec §4.5 |
+| 6 | **EXERCISE** | Sections 4 + 8 of grid; canonical exercise atom per `EXERCISE-BANK-RESOLUTION-01` Option 1 (strict-canonical for production) | YES | `SOMATIC_10_SLOT_GRID[3]`, `[7]`; falls through to `teacher_banks/<teacher>/approved_atoms/EXERCISE/` then `practice_library/store/practice_items.jsonl` per spec §4.5 [^exercise-component-lift] |
+
+[^exercise-component-lift]: **Footnote (per AMENDMENT-2026-06-11 §17):** [PR #1486](https://github.com/Ahjan108/phoenix_omega_v4.8/pull/1486) (`EXERCISE-COMPONENT-SCHEMA-LIFT-01`, 771e714e8) lifted PracticeItem schema v1 → v2 with parallel `components` field `{bridge, intro, description, aha, integration} × {full, lean}`. Renderer reads components when present; falls back to v1 `text` + teacher-config wrappers when components null. Per-format variant policy in [`config/practice/selection_rules.yaml`](../config/practice/selection_rules.yaml) `component_variant_by_format`: **full** for `{extended_book_2h, deep_book_4h, deep_book_6h}`; **lean** for 17 other runtime formats. See §17 for the full AMENDMENT block + A1-A6 acceptance criteria for Pearl_Dev review.
 
 ### Class 2 — Overlay-routed (3 types — NOT persona-keyed at runtime)
 
@@ -395,6 +397,23 @@ Per `PEARL-EDITOR-UPSTREAM-01` + `EXERCISE-BANK-RESOLUTION-01` + `QUOTE-ATOM-ROU
 
 ---
 
+### AMENDMENT-2026-06-11 cross-refs (3 RESOLVED via [PR #1486](https://github.com/Ahjan108/phoenix_omega_v4.8/pull/1486) `EXERCISE-COMPONENT-SCHEMA-LIFT-01`):
+
+- **Q-Atom-DRIFT-A-LIFT-01** (schema strategy: extend blocks OR parallel components) → **RESOLVED via PR #1486 (b)**: parallel `components` field added at v2; legacy `blocks` retained for back-compat.
+- **Q-Atom-DRIFT-B-INGEST-01** (ab_tady_37 ingest enablement) → **RESOLVED via [`ws_pearl_dev_practice_ingest_components_lift_20260610`](../artifacts/coordination/ACTIVE_WORKSTREAMS.tsv)** (a): include in next ingest pass; 39 items → 311-row store post-merge.
+- **Q-Atom-PER-SOURCE-LEAN-FULL-01** (format_registry picker) → **RESOLVED via [`config/practice/selection_rules.yaml`](../config/practice/selection_rules.yaml) `component_variant_by_format`**: full for deep_book_4h + extended_book_2h + deep_book_6h; lean for the 17 other runtime formats.
+
+### AMENDMENT-2026-06-11 NEW Q-Atom-* (4 questions):
+
+- **Q-Atom-SLOT-07-PRIORITY-01** — slot_07 supply backfill priority. **Options:** (a) breath_regulation first (39 ab_tady items already land here post-ingest; max coverage / min new authoring) [**RECOMMEND**]; (b) grounding_orientation; (c) body_awareness_scan; (d) operator-custom priority.
+- **Q-Atom-AUDIT-PASS-THRESHOLD-01** — Pearl_Editor preservation audit pass threshold. **Options:** (a) ≥99% items zero-loss [**RECOMMEND**]; (b) 100% strict; (c) ≥95% with explicit per-item gap report.
+- **Q-Atom-INCLUDE-PEARL-PM-ITER-3-01** — Include Pearl_PM Phase A tracker iter 3 update in this AMENDMENT PR? **Options:** (a) YES + add deliverable #4; (b) NO + defer to Pearl_PM's own iter session [**RECOMMEND** — preserves Pearl_PM ownership boundary].
+- **Q-Atom-INCLUDE-SLOT-07-BACKFILL-WS-01** — Include optional slot_07 supply backfill ws row in this PR? **Options:** (a) YES — captures the future-track surface so it doesn't get lost [**RECOMMEND**]; (b) NO + defer.
+
+**Total Q-Atom-* (post-AMENDMENT-2026-06-11):** 16 + 3 RESOLVED + 4 new = **20**.
+
+---
+
 ## §13. SSOT Update Protocol
 
 **Every child atom-authoring ws PR must update §9 gap matrix in place:**
@@ -495,4 +514,53 @@ This SSOT supersedes every prior **partial-coverage** atom audit. The originals 
 
 ---
 
-*End of SSOT v1. Update protocol: §13. Cap entry: `ATOM-100PCT-COVERAGE-SSOT-V1-01`. Operator answers Q-Atom-* → child ws's spawn per §10 + §11 → §9 gap matrix shrinks per §13 → §16 acceptance gates Phase A launch.*
+---
+
+## §17. AMENDMENT-2026-06-11 — EXERCISE schema lift cross-link
+
+### §17.1 Trigger
+
+[PR #1486](https://github.com/Ahjan108/phoenix_omega_v4.8/pull/1486) (`EXERCISE-COMPONENT-SCHEMA-LIFT-01`, commit `771e714e8`) landed in parallel to this SSOT (PR #1485) closing two real drifts in the EXERCISE backstop path. The two PRs are orthogonal subsystems — atom coverage (this SSOT) and practice library schema (PR #1486) — but the AMENDMENT cross-links both so operator reading the SSOT sees the schema-lift context, the cap-entry-level acceptance checklist is explicit, and Pearl_Editor preservation audit becomes a tracked workstream rather than informal NEXT_ACTION.
+
+### §17.2 PR #1486 summary
+
+- **5 files changed:** `specs/PRACTICE_ITEM_SCHEMA.md` (v1 → v2; parallel `components` field §2.5); `config/practice/validation.yaml` (v1 → v2; `components_schema` block); `config/practice/selection_rules.yaml` (v1 → v2; `component_variant_by_format`); `docs/PEARL_ARCHITECT_STATE.md` (APPEND cap entry `EXERCISE-COMPONENT-SCHEMA-LIFT-01`); `artifacts/coordination/ACTIVE_WORKSTREAMS.tsv` (APPEND 2 ws rows).
+- **2 Pearl_Dev ws's queued** (status=proposed; gated on PR #1486 merge): `ws_pearl_dev_practice_ingest_components_lift_20260610` (items 2+3: ingest fix + ab_tady_37 source branch) + `ws_pearl_dev_renderer_practice_components_consume_20260610` (item 4: renderer reads structured components; HARD-gated on ingest ws landing first).
+- **Cap entry status:** ratified (Pearl_Architect cap layer; Pearl_Dev impl routed).
+
+### §17.3 Acceptance criteria checklist (paired with §17.6 below)
+
+When the 2 Pearl_Dev ws PRs from PR #1486 land, operator + reviewer apply the [A1-A6 checklist](#176-acceptance-criteria-verbatim) below as a deterministic merge gate. No A1-A6 row checked → do NOT merge.
+
+### §17.4 Pearl_Editor preservation audit ws
+
+`ws_pearl_editor_exercise_preservation_audit_20260611` (this AMENDMENT — status=proposed). Fires AFTER both Pearl_Dev ws's merge. Per-item diff inbox SOURCE_OF_TRUTH/practice_library/inbox/*_PRODUCTION_READY.json against post-re-ingest `practice_items.jsonl` row content. Pass threshold = ≥99% items zero-loss per Q-Atom-AUDIT-PASS-THRESHOLD-01 default (a). Output: `artifacts/qa/exercise_preservation_audit_<UTC-YYYY-MM-DD>.{md,tsv}`. Verifies A1 + A2 + A3 + A4 + A6 of §17.6.
+
+### §17.5 slot_07_PRACTICE supply backfill (follow-up — optional ws this PR)
+
+PR #1486's schema lift unblocks the slot_07_PRACTICE supply gap (`config/practice/selection_rules.yaml` lists 11 content_types; current store carries 0 items for most; ab_tady_37's 39 items map to `breath_regulation` namespacing). Per Q-Atom-INCLUDE-SLOT-07-BACKFILL-WS-01 default (a), this AMENDMENT also appends `ws_pearl_editor_slot_07_practice_supply_backfill_20260611` (status=proposed; gated on PR #1486 + 2 Pearl_Dev ws's merged). Target: ≥8 items per content_type × 11 types = 88 items minimum; staged authoring per Q-Atom-SLOT-07-PRIORITY-01 priority order.
+
+### §17.6 Acceptance criteria (verbatim — also in cap entry)
+
+**A1.** Schema accepts v2 components without losing v1 data (post-ingest spot-check 5 items diff matches inbox source files).
+
+**A2.** Re-ingest produces **311 rows total (272 library_34 + 39 ab_tady_37)** vs current 272.
+
+**A3.** Zero content loss verifiable via Pearl_Editor preservation audit ws — every inbox component field present in store row for **≥99% of items**; flagged items <1% with explicit per-item evidence.
+
+**A4.** Renderer reads structured components for at least 1 production-profile smoke combo (`gen_z_professionals × anxiety × ahjan × deep_book_4h`) and produces **visible aha + integration text** in rendered output.
+
+**A5.** `component_variant_by_format` selects **full** for `{deep_book_4h, extended_book_2h, deep_book_6h}`; **lean** for the 17 other runtime formats — confirmed via per-format dry-run.
+
+**A6.** ab_tady_37 items render under slot_07_PRACTICE when bestseller-grade smoke targets a registry with slot_07 active (post-merge of `ws_pearl_editor_slot_07_practice_supply_backfill_20260611`).
+
+### §17.7 New ws cross-refs
+
+- `ws_pearl_editor_exercise_preservation_audit_20260611` — Pearl_Editor; verifies A1-A6 above; status=proposed.
+- `ws_pearl_editor_slot_07_practice_supply_backfill_20260611` — Pearl_Editor + Pearl_Writer; backfill 11 slot_07 content_types per Q-Atom-SLOT-07-PRIORITY-01 priority; status=proposed.
+
+Both rows appended in this AMENDMENT's `ACTIVE_WORKSTREAMS.tsv` commit.
+
+---
+
+*End of SSOT v1 + AMENDMENT-2026-06-11. Update protocol: §13. Cap entries: `ATOM-100PCT-COVERAGE-SSOT-V1-01` + `EXERCISE-COMPONENT-SCHEMA-LIFT-01` (cross-linked). Operator answers Q-Atom-* → child ws's spawn per §10 + §11 + §17 → §9 gap matrix shrinks per §13 + EXERCISE component shape preserved per §17.6 A1-A6 → §16 acceptance gates Phase A launch.*
