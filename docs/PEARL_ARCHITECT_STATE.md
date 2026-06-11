@@ -2488,3 +2488,71 @@ Phase 3 P0 workstreams **NOT YET OPENED** — pending operator authorization on 
 - Pearl_Dev → Phase 1 first PR within 1 week of operator green-light; Phase 2 within 3 weeks of Phase 1 land.
 - Pearl_Editor + Pearl_Writer → Phase 3a + 3b rolling per-persona / per-topic; rolling ws status updates per stage.
 - Pearl_Architect → Move 4 verdict recompute after Phase 2 lands; gold-reference SHA pin to MEMORY.md after operator answers Q-OP-GOLD-REFERENCE-SHA-PIN-01 (a).
+
+---
+
+### ATOM-100PCT-COVERAGE-SSOT-V1-01 — Pearl Prime atom 100% coverage SSOT + gap matrix + Phase A launch gate (proposed 2026-06-06)
+
+**Status:** **PROPOSAL — awaiting operator answers to 16 Q-Atom-* in [`docs/PEARL_PRIME_ATOM_100PCT_COVERAGE_SSOT.md`](./PEARL_PRIME_ATOM_100PCT_COVERAGE_SSOT.md) §12 → ACTIVE** (Pearl_Architect authoring this PR).
+
+**Context:** Operator directive (verbatim 2026-06-06): *"I want 100% of atoms so I can write all books for all personas and topics and languages. Use existing docs that did this and update them with new findings."* Prior atom audits ([`persona_atom_audit.md`](../artifacts/audit/persona_atom_audit.md), [`teacher_bank_audit.md`](../artifacts/audit/teacher_bank_audit.md), [`registry_coverage_vs_catalog.md`](../artifacts/audit/registry_coverage_vs_catalog.md), [`P1_HEALTH_REPORT_2026_04_10.md`](../artifacts/audit/P1_HEALTH_REPORT_2026_04_10.md), [`pearl_prime_audit_2026-06-06.md`](../artifacts/qa/pearl_prime_audit_2026-06-06.md)) gave partial coverage by axis; no single SSOT existed for the full P × T × A × L × V matrix. This cap entry ratifies the new SSOT as canonical for "100% atom coverage" semantics + operationalizes `PEARL-PRIME-ONE-PATH-V1-01` D8 (16-slot persona-keyed coverage) as a tier-ordered gap matrix gating Phase A en-US catalog launch under `CATALOG-800-PER-BRAND-01`.
+
+**Decision:** Land [`docs/PEARL_PRIME_ATOM_100PCT_COVERAGE_SSOT.md`](./PEARL_PRIME_ATOM_100PCT_COVERAGE_SSOT.md) as canonical 100%-coverage SSOT (16 §s) + [`artifacts/qa/pearl_prime_atom_100pct_gap_matrix_20260606.tsv`](../artifacts/qa/pearl_prime_atom_100pct_gap_matrix_20260606.tsv) as the machine-readable gap surface (20,803 rows). Mark 4-5 prior partial-coverage audit docs DEPRECATED + cross-link forward. Open 4 child ws's (Pearl_Editor Tier P0 / Pearl_Writer Tier P0 engine atoms / Pearl_Localization Tier P2 ja-JP / Pearl_Dev CI guard) under `proposed` status pending operator green-light. Mark `ws_atom_gap_fill_20260410` SUPERSEDED — its scope (~288 teacher atoms + ~357 persona×topic zero-atoms) is a strict subset of Tier P0 + P1 of this SSOT.
+
+**Scope:**
+
+| Layer | What this SSOT does |
+|---|---|
+| Matrix definition | Defines dimensions P=14 × T=15 × A=9 (directive scope) × L=13 × V≥3; cap-D8 = 16 tracked via Q-Atom-DIRECTIVE-9-VS-CAP-16-01 |
+| Current coverage audit | §8.1-8.7 per-persona × per-topic × per-atom-type × per-locale + named-character STORY bank + teacher-bank cross-cuts |
+| Gap matrix | §9 → TSV with 20,803 rows; every (persona, topic, atom_type, locale) tuple with current_variants < required_variants |
+| Prioritization | §10 Tier P0-P5 — P0 = gold-reference personas × priority topics × overlay-routed types; P5 = extended locales + variant enrichment |
+| Authoring ownership | §11 routes each atom-type to Pearl_Editor (Class 2 overlay-routed + EXERCISE) / Pearl_Writer (Class 1 persona-keyed) / Pearl_Localization (all locale variants) / Pearl_Dev (CI guard) |
+| 16 Q-Atom-* | §12 — operator decides persona scope, locale scope, variant ceiling, ONE-PATH spec sequencing, 9-vs-16 atom-type framing, etc. |
+| CI guard spec | §14 — `scripts/ci/check_atom_100pct_coverage.py` (Pearl_Dev ws); gates Phase A launch on Tier P0 + P1 = 0 |
+| Update protocol | §13 — every child atom-authoring ws PR auto-updates §9 in place |
+| Acceptance | §16 — Phase A en-US launch requires P0 + P1 cleared; Phase B-E require P2-P5 cleared per locale |
+
+**Routing-class split (§3):** persona-keyed required (HOOK / COMPRESSION / REFLECTION / INTEGRATION / STORY / EXERCISE = 6) + overlay-routed required at teacher_banks/registry (QUOTE / TEACHER_DOCTRINE / PERMISSION_GRANT = 3). The directive's "9 atom types per cell" parses to **6 persona-keyed cells + 3 overlay-routed backing entries** rather than 9 persona-keyed cells (otherwise `QUOTE-ATOM-ROUTING-01` retire-as-orphan ratification is contradicted). See Q-Atom-DIRECTIVE-9-VS-CAP-16-01 for the cap-D8-vs-directive reconciliation question.
+
+**Phase A en-US launch criteria** (per `CATALOG-800-PER-BRAND-01` + ONE-PATH-V1-01):
+
+- Tier P0 cleared: 105 cells filled (6 priority personas × 6 priority topics × Class 2 overlay backing).
+- Tier P1 cleared: 548 cells filled (full breadth — educators 7T + nyc_executives 7T + gen_z_student 3T + midlife_women arc-block + remaining personas' Class 2 backing).
+- CI guard PASS on P0 + P1.
+- ONE-PATH-V1-01 D4 runtime variant-floor assertion landed (`ws_runtime_variant_floor_assertion_20260606`).
+- ONE-PATH-V1-01 D8 PersonaAtomCoverageError precondition landed.
+
+**Aggregate counts (gap matrix):**
+
+| Tier | Rows | Hours |
+|---|---:|---:|
+| P0 | 105 | 125 |
+| P1 | 548 | 665 |
+| P2 | 803 | 982 |
+| P3 | 2,550 | 3,180 |
+| P4 | 1,829 | 2,329 |
+| P5 | 14,968 | 19,337 |
+| **Total** | **20,803** | **~26,618** |
+
+**Cross-references:**
+
+- AGGREGATES: `PEARL-PRIME-ONE-PATH-V1-01` (line 2427) — D8 16-slot persona-keyed canonical; Phase 3 atom-backfill phase operationalized as this SSOT's tier-ordered gap matrix.
+- HONORS: `TEMPLATE-UNIVERSAL-01` (576), `SPEC-739-THRESHOLD-01` (308), `PEARL-EDITOR-UPSTREAM-01` (649), `QUOTE-ATOM-ROUTING-01` (705), `BESTSELLER-INJECTIONS-MANDATORY-01` (601), `EXERCISE-BANK-RESOLUTION-01` (677), `TEACHER-POOL-SEMANTICS-01` (728), `HOOK-SCENE-FIRST-01` (1867), `CATALOG-800-PER-BRAND-01` (629), `AUTO-PLAN-SSOT-01-AMENDMENT` (523), `COHESIVE-FLOW-PATH-DEFAULT-SPINE-01`, `SPEC-739-VALIDATOR-AWARENESS` (358).
+- SUPERSEDES: 5 partial-coverage audit docs by DEPRECATED-cross-link (originals retained per [`AGENT_FILE_PERSISTENCE_PROTOCOL.md`](./AGENT_FILE_PERSISTENCE_PROTOCOL.md)).
+- SPAWNS: 4 child ws's + marks `ws_atom_gap_fill_20260410` SUPERSEDED.
+
+**Anti-drift check:** No new architecture. Consolidates 5 partial audits into one SSOT + machine-readable gap matrix. Subordinates to ONE-PATH-V1-01 D8 for atom-type canonical (16-slot framing); audits the directive's 9-subset; surfaces the 9-vs-16 reconciliation as Q-Atom-DIRECTIVE-9-VS-CAP-16-01. Memory `feedback_validation_before_scaling` honored: this SSOT IS the validation that gates catalog scale-up; no Phase A launch until Tier P0 = 0. Memory `feedback_drift_recovery_git_first` honored: prior audit docs retained as historical lineage (no deletion). Memory `feedback_discover_before_acting` honored: DISCOVERY REPORT emitted before any deliverable authored.
+
+**Action items:**
+
+1. **Operator** → answer 16 Q-Atom-* in SSOT §12 → triggers cap-entry status flip proposed → active. Recommended pairing: answer in same cycle as ONE-PATH-V1-01's 12 Q-OP-* (Q-Atom-ONE-PATH-SPEC-FILE-01 default (a)).
+2. **Pearl_PM** → spawn 4 child ws's (already authored in `artifacts/coordination/ACTIVE_WORKSTREAMS.tsv` under this PR) per §11 + §10 tier ordering. Mark `ws_atom_gap_fill_20260410` SUPERSEDED per `next_action` update.
+3. **Pearl_Dev** → `ws_pearl_dev_atom_100pct_ci_guard_20260606` first PR within 2 weeks of operator green-light per Q-Atom-CI-GUARD-SEVERITY-01 (a).
+4. **Pearl_Editor** → `ws_pearl_editor_atom_100pct_tier_p0_persona_keyed_20260606` Tier P0 (105 rows; ~125 hr) within 4 weeks of green-light per Q-Atom-PRIORITY-PERSONAS-01 + Q-Atom-PRIORITY-TOPICS-01 defaults.
+5. **Pearl_Writer** → `ws_pearl_writer_atom_100pct_tier_p0_engine_atoms_20260606` Tier P1 (548 rows; ~665 hr) parallel-with Pearl_Editor; staged per persona per `feedback_campaign_session_pacing`.
+6. **Pearl_Localization** → `ws_pearl_localization_atom_100pct_tier_p2_ja_jp_20260606` Tier P2 (803 rows; ~982 hr) gated on Phase A complete.
+7. **Pearl_Architect (this entry post-active)** → quarterly SSOT refresh (gap matrix re-run + tier delta) per Q-Atom-SSOT-UPDATE-CADENCE-01 default (a).
+8. **Pearl_GitHub** → when next refreshing `docs/DOCS_INDEX.md`, add SSOT routing note "100%-atom-coverage canonical = ATOM-100PCT-COVERAGE-SSOT-V1-01; partial-coverage audit docs (P1_HEALTH, persona_atom_audit, teacher_bank_audit, registry_coverage_vs_catalog) are historical lineage".
+
+**Authority:** this cap entry + [`docs/PEARL_PRIME_ATOM_100PCT_COVERAGE_SSOT.md`](./PEARL_PRIME_ATOM_100PCT_COVERAGE_SSOT.md) + [`artifacts/qa/pearl_prime_atom_100pct_gap_matrix_20260606.tsv`](../artifacts/qa/pearl_prime_atom_100pct_gap_matrix_20260606.tsv) + [`artifacts/qa/pearl_prime_atom_100pct_summary_20260606.md`](../artifacts/qa/pearl_prime_atom_100pct_summary_20260606.md).
