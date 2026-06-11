@@ -2696,3 +2696,95 @@ When Pearl_Dev's 2 ws PRs land (`ws_pearl_dev_practice_ingest_components_lift_20
 **Anti-drift check:** No new spec; no new ws's; no code. Pure status-flip + decision-log + RESOLVED stamps. Memory `feedback_operator_proxy_routing` honored: 20 in-envelope decisions logged canonically. Memory `feedback_validation_before_scaling` honored: this ratification IS the validation that unblocks Phase A scaling; without it, no ws dispatches.
 
 **Authority:** this cap entry + parent cap entry `ATOM-100PCT-COVERAGE-SSOT-V1-01` (status flipped) + [`docs/PEARL_PRIME_ATOM_100PCT_COVERAGE_SSOT.md`](./PEARL_PRIME_ATOM_100PCT_COVERAGE_SSOT.md) §18 + [`artifacts/coordination/operator_decisions_log.tsv`](../artifacts/coordination/operator_decisions_log.tsv) (20 OPD entries) + [`artifacts/coordination/pearl_prime_atom_phase_a_launch_tracker.md`](../artifacts/coordination/pearl_prime_atom_phase_a_launch_tracker.md) §D + §G (updated to reflect post-ratification state).
+
+---
+
+### PEARL-STAR-JOB-QUEUE-V1-01 — Pearl Star job queue + scheduler + stall-recovery + concurrency-caps architecture (materialized ACTIVE 2026-06-11)
+
+**Status:** **ACTIVE 2026-06-11** (materialized; not a status flip — no prior PROPOSAL entry existed on `main` because the parent SPEC [`docs/specs/PEARL_STAR_JOB_QUEUE_V1_SPEC.md`](./specs/PEARL_STAR_JOB_QUEUE_V1_SPEC.md) lives in PR [#1492](https://github.com/Ahjan108/phoenix_omega_v4.8/pull/1492) and has not yet merged. Operator chose **Option 1** landing path via cross-session relay 2026-06-11: ratify the 16 Q-PSQ-* decisions and materialize this cap entry as ACTIVE off `main` now, deferring `SPEC §9 RESOLVED` stamps to #1492's merge. The load-bearing artifact unblocking the Pearl_Int install gate is this cap → ACTIVE on `main`, **not** the §9 textual stamps; the OPD log + this cap entry ARE the authoritative decision record. See HANDOFF NOTE below for stale-OPD reconciliation when #1492 lands.).
+
+**Context:** Operator directive (Pearl Star idle window reserved 2026-06-11T15:01Z..2026-06-12T06:00Z; ref `artifacts/qa/pearl_star_idle_window_reserved_20260611.txt`): unblock Pearl_Int Phase A install (Postgres 17 + Procrastinate + ComfyUI-Persistent-Queue overlay + 6 systemd units + 3 smokes) on a job-queue + scheduler + stall-recovery + concurrency-caps architecture for the four Pearl Star workload classes (t2i, llm, tts, orch). Pearl_Research authored the spec in PR #1492 with 16 Q-PSQ-* open questions + recommended defaults. Operator authorized batch ratification of all 16 recommended defaults via cross-session message ("**Land it via Option 1 — branch off main, defer the §9 stamp**").
+
+**Decision (16 Q-PSQ-* batch ratification, all recommended defaults):**
+
+| # | Q-PSQ-ID | Decision (recommended default) | OPD-ID |
+|---:|---|---|---|
+| 1 | `Q-PSQ-PRIMARY-QUEUE-01` | Procrastinate + Postgres | OPD-20260611-025 |
+| 2 | `Q-PSQ-BROKER-01` | Postgres 17 | OPD-20260611-026 |
+| 3 | `Q-PSQ-COMFYUI-COMPOSE-01` | Compose (Pearl_Star_queue front-of-queue + ComfyUI-Persistent-Queue) | OPD-20260611-027 |
+| 4 | `Q-PSQ-WATCHDOG-INTERVAL-01` | 30 s emit / 60 s tick | OPD-20260611-028 |
+| 5 | `Q-PSQ-STALL-MULTIPLIER-01` | N=3 | OPD-20260611-029 |
+| 6 | `Q-PSQ-RETRY-BUDGET-01` | 1 retry transient (t2i, tts); 2 retries (llm); 3 retries (orch) | OPD-20260611-030 |
+| 7 | `Q-PSQ-DEAD-LETTER-01` | Dead-letter queue + operator-review surface | OPD-20260611-031 |
+| 8 | `Q-PSQ-DASHBOARD-01` | CLI-only Phase A → web UI Phase C | OPD-20260611-032 |
+| 9 | `Q-PSQ-CONCURRENT-LIMITS-01` | 50% of Phase 2 measured value (safety headroom) | OPD-20260611-033 |
+| 10 | `Q-PSQ-ROLLOUT-PHASE-A-WORKLOAD-01` | t2i flux-schnell (highest volume; book covers) | OPD-20260611-034 |
+| 11 | `Q-PSQ-PERSISTENCE-LEVEL-01` | fsync every commit (synchronous_commit=on) | OPD-20260611-035 |
+| 12 | `Q-PSQ-OBSERVABILITY-01` | Basic file logs + nvidia-smi snapshots Phase A → Prometheus + Grafana Phase C | OPD-20260611-036 |
+| 13 | `Q-PSQ-LICENSE-BROKER-01` | Valkey (Linux Foundation BSD) | OPD-20260611-037 |
+| 14 | `Q-PSQ-PHASE-D-RAY-01` | Defer; revisit when Pearl Star 2 exists | OPD-20260611-038 |
+| 15 | `Q-PSQ-BACKPRESSURE-01` | N=500 pending per workload | OPD-20260611-039 |
+| 16 | `Q-PSQ-VLLM-OLLAMA-01` | Keep Ollama; track vLLM | OPD-20260611-040 |
+
+All 16 decisions logged in [`artifacts/coordination/operator_decisions_log.tsv`](../artifacts/coordination/operator_decisions_log.tsv) (rows OPD-20260611-025 through OPD-20260611-040).
+
+**HANDOFF NOTE — to #1492 + downstream agents touching SPEC §9:**
+
+This cap entry is the **authoritative decision record** for the 16 Q-PSQ-*; the SPEC `§9 RESOLVED` textual stamps are deferred until PR #1492 merges. When #1492 lands:
+
+1. **Rebase #1492's stale OPD log onto `main`.** #1492's branch carries an old draft of the OPD log with `OPD-20260611-001..016` for Q-PSQ entries — that draft is a **stale subset** superseded by `OPD-20260611-025..040` on `main` (which is the canonical superset). Keep `main`'s rows; drop #1492's superseded draft rows in the rebase. The Q-Atom ratification PR (now merged) consumed `OPD-20260611-001..020` for Q-Atom-* decisions, and Pearl_Localization consumed `OPD-20260611-021..024`; so #1492's 001..016 draft is straight-up collision with already-canonical entries.
+2. **Stamp `SPEC §9 RESOLVED` per `OPD-20260611-025..040`.** Append `RESOLVED 2026-06-11: option (recommended default) per OPD-20260611-0XX` (where XX = 25..40 mapped per the table above) to each Q-PSQ-* row in `§9`. Optionally append a new `§17 DECISIONS RESOLVED 2026-06-11` block mirroring this table.
+3. **Do NOT re-propose the cap.** This cap entry is already **ACTIVE** on `main`; #1492's merge must not re-introduce a PROPOSAL banner. The cap-entry materialization is canonical here, not in #1492.
+4. **Q-PSQ decisions are canonical in the OPD log + this cap entry — NOT in #1492's §9.** If a conflict surfaces (e.g., #1492's §9 stale-text disagrees with OPD log decision), the OPD log + cap entry win. #1492's §9 should be brought into alignment, not the other way around.
+
+**Architecture surface (compressed; full def in [`docs/specs/PEARL_STAR_JOB_QUEUE_V1_SPEC.md`](./specs/PEARL_STAR_JOB_QUEUE_V1_SPEC.md) once #1492 merges):**
+
+| Layer | Decision |
+|---|---|
+| Queue framework + broker | Procrastinate + Postgres 17 (OPD-025/026) |
+| ComfyUI composition | Compose Pearl_Star_queue front-of-queue + ComfyUI-Persistent-Queue overlay (OPD-027) |
+| Stall detection | 30 s heartbeat emit / 60 s watchdog tick / N=3 × normal-floor stall threshold (OPD-028/029) |
+| Retry budgets | 1 retry transient (t2i, tts); 2 retries (llm); 3 retries (orch); dead-letter + operator-review surface (OPD-030/031) |
+| Dashboard phasing | CLI-only Phase A (`scripts/queue/pscli.py`) → web UI Phase C (OPD-032) |
+| Concurrency caps | 50% of Phase 2 measured value per workload (safety headroom; OPD-033) |
+| Dogfood workload | t2i flux-schnell first (highest volume; book covers; $-maker; OPD-034) |
+| Persistence guarantee | `synchronous_commit=on` (fsync every commit; OPD-035) |
+| Observability | File logs + `nvidia-smi` snapshots Phase A → Prometheus + Grafana Phase C (OPD-036) |
+| License broker fallback | Valkey (Linux Foundation BSD) — only if Redis chosen; not the default path (OPD-037) |
+| Phase D multi-node | Defer; revisit when Pearl Star 2 exists (OPD-038) |
+| Backpressure alert | N=500 pending per workload (OPD-039) |
+| LLM serving Phase B | Keep Ollama; track vLLM (OPD-040) |
+
+**Phased rollout (per `SPEC §8` in #1492):**
+
+- **Phase A** (this ratification unblocks): single-box install — Postgres 17 + Procrastinate + ComfyUI-Persistent-Queue + 6 systemd units (`postgresql@17`, `procrastinate-worker`, `pearl-star-watchdog`, `comfyui`, `ollama`, `pearl-star-monitor`) + `pscli` + 3 smokes (A1 flux-schnell book cover <60s; A2 watchdog stall auto-kill+requeue; A3 reboot persistence 5 jobs survive systemctl reboot). Dogfood = t2i flux-schnell.
+- **Phase B:** add llm + tts + orch workers; add Pearl News routing; expand smokes.
+- **Phase C:** observability (Prometheus + Grafana); web UI dashboard.
+- **Phase D:** deferred (Pearl Star 2 multi-node).
+
+**Cross-references:**
+
+- HONORS `CATALOG-800-PER-BRAND-01` — Phase A dogfood (t2i flux-schnell book covers) is the $-maker tier per memory `project_800_high_confidence_configs`.
+- HONORS `feedback_operator_proxy_routing` — 16 in-envelope decisions logged canonically; no escalation.
+- HONORS `feedback_validation_before_scaling` — Phase A smokes (A1/A2/A3) gate Phase B; no scaling without queue-persistence + stall-recovery validation.
+- COMPOSES with `INTEGRATION_CREDENTIALS_REGISTRY.md` §0 — Pearl Star endpoints (`COMFYUI_URL` / `QWEN_BASE_URL` / `COSYVOICE_URL`) consumed by workers via Keychain eval.
+- COMPOSES with `PEARL-PRIME-ONE-PATH-V1-01` (Pearl_Prime ebook chapter atom jobs enqueue via llm-worker).
+- COMPOSES with `ATOM-100PCT-COVERAGE-SSOT-V1-01` (atom authoring + CI guard ws's are queue-job candidates Phase B+).
+- AMENDED-BY future PR that flips §9 RESOLVED stamps on #1492's merge (see HANDOFF NOTE above).
+
+**Anti-drift check:**
+
+- No new architecture invented here. This cap materializes ACTIVE the decisions Pearl_Research already drafted in #1492 §9 — recommended defaults verbatim, no operator override.
+- No new ws's spawned here. Pearl_Int Phase A install ws (`ws_pearl_int_pearl_star_phase_a_install_20260611`) is separately routed per `ACTIVE_WORKSTREAMS.tsv` (held pending this cap → ACTIVE).
+- No code changes here. Pure cap-entry materialization + decision log.
+- Memory `feedback_drift_recovery_git_first` honored: when #1492 lands, the rebase reconciliation (see HANDOFF NOTE step 1) preserves `main`'s canonical OPD entries via git-first rather than re-authoring.
+- Memory `feedback_discover_before_acting` honored: max OPD on `main` = 024 verified before authoring 025..040 (collision-free; verification gate `cut -f1 operator_decisions_log.tsv | grep OPD-20260611 | sort | uniq -d == EMPTY`).
+
+**Action items:**
+
+1. **Pearl_Int** → Phase A install fires once this PR merges. Read `docs/specs/PEARL_STAR_JOB_QUEUE_V1_SPEC.md` §8 (from #1492 branch if not yet merged, or `main` if #1492 has landed) for the install runbook. Reservation window `2026-06-11T15:01Z..2026-06-12T06:00Z`.
+2. **Pearl_Research (PR #1492 author)** → when #1492's merge cycle resumes, apply the HANDOFF NOTE 4 steps (rebase stale OPD log, stamp §9 RESOLVED, do NOT re-propose cap, accept OPD log as canonical).
+3. **Pearl_PM** → next iter banner captures this cap as ACTIVE + Pearl_Int Phase A in-flight + Pearl_Research empirical Phase 2 (12-test concurrency matrix re-run) held pending operator readiness (ComfyUI `/free` + CosyVoice2 `:9880` listening confirmation).
+4. **Pearl_GitHub** → when next refreshing `docs/DOCS_INDEX.md`, add cross-link for `PEARL-STAR-JOB-QUEUE-V1-01` cap entry under Pearl Star / job-queue subsystem section.
+
+**Authority:** this cap entry + [`artifacts/coordination/operator_decisions_log.tsv`](../artifacts/coordination/operator_decisions_log.tsv) (16 OPD entries 025..040) + (post-merge) [`docs/specs/PEARL_STAR_JOB_QUEUE_V1_SPEC.md`](./specs/PEARL_STAR_JOB_QUEUE_V1_SPEC.md) §9 RESOLVED stamps via PR #1492 reconciliation.
