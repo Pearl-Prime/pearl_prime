@@ -2556,3 +2556,93 @@ Phase 3 P0 workstreams **NOT YET OPENED** — pending operator authorization on 
 8. **Pearl_GitHub** → when next refreshing `docs/DOCS_INDEX.md`, add SSOT routing note "100%-atom-coverage canonical = ATOM-100PCT-COVERAGE-SSOT-V1-01; partial-coverage audit docs (P1_HEALTH, persona_atom_audit, teacher_bank_audit, registry_coverage_vs_catalog) are historical lineage".
 
 **Authority:** this cap entry + [`docs/PEARL_PRIME_ATOM_100PCT_COVERAGE_SSOT.md`](./PEARL_PRIME_ATOM_100PCT_COVERAGE_SSOT.md) + [`artifacts/qa/pearl_prime_atom_100pct_gap_matrix_20260606.tsv`](../artifacts/qa/pearl_prime_atom_100pct_gap_matrix_20260606.tsv) + [`artifacts/qa/pearl_prime_atom_100pct_summary_20260606.md`](../artifacts/qa/pearl_prime_atom_100pct_summary_20260606.md).
+
+---
+
+### EXERCISE-COMPONENT-SCHEMA-LIFT-01 — Practice item schema v2 (5-component × {full, lean} preservation); ingest fix + ab_tady_37 ingest + renderer upgrade routed to Pearl_Dev (ratified 2026-06-10)
+
+**Status:** **ratified — Pearl_Architect cap layer** (schema + per-format variant policy land in this PR). **Pearl_Dev impl** (ingest + ab_tady_37 source branch + renderer upgrade) routed to 2 child ws's, status=proposed.
+
+**Context:** Discovery 2026-06-10 (operator question: "do all exercises have ab_tady_37 structure with ahha, intro, integration?") surfaced two real drifts in the EXERCISE backstop path:
+
+1. **Schema downgrade drift.** Inbox files (`exercises_ab_tady_37_PRODUCTION_READY.json` 39 items + 8 × `*_library_34_PRODUCTION_READY.json` 272 items = **311 items**) carry a rich 5-component × {full, lean} authoring shape (`bridge`, `intro`, `description`, `aha`, `integration` × 2 variants = 10 prose slots per item). The canonical schema at `specs/PRACTICE_ITEM_SCHEMA.md` v1 declares only `blocks: {setup, instruction, prompt, close}` — 4 nullable slots — and the ingest script at `scripts/practice/ingest_practice_libraries.py:49 + :83` hardcodes `blocks: {setup: None, instruction: None, prompt: None, close: None}` for every row. Result: **the store (`SOURCE_OF_TRUTH/practice_library/store/practice_items.jsonl`, 272 rows) loses all 5-component structure on ingest.** Renderer never sees `aha` or `integration` even when the inbox authored them; current behavior falls back to teacher-config `exercise_wrapper.intro_templates` + `close_templates` which authors 1 short intro + 1 short close at runtime, missing the rich teaching shape entirely.
+
+2. **Ingest coverage drift.** `validation.yaml` and `PRACTICE_ITEM_SCHEMA.md` both declare `ab_tady_37` as a valid `source` enum, and `selection_rules.SLOT_07_PRACTICE.allowed_content_types` lists 11 slot_07 types (`breath_regulation`, `grounding_orientation`, etc.) — all match ab_tady_37's `exercise_type` namespacing. But the ingest script has no branch for `exercises_ab_tady_37_PRODUCTION_READY.json` — **39 production-ready exercises sit in inbox un-ingested, zero `ab37_*` rows in the store.** Slot_07 supply is empty; backstop is `library_34`-only.
+
+These drifts compound the `EXERCISE-BANK-RESOLUTION-01` Option 1 strict-canonical decision: even when production-profile catalog falls back to teacher_banks (mandatory under that cap), the practice-library fall-through used by teacher-mode and non-production runs is structurally weaker than the inbox authoring supports. The wrappers under `docs/PRACTICE_LIBRARY_TEACHER_FALLBACK.md` are doing intro/close work the inbox already authored — and doing it less specifically.
+
+**Decision:** Land schema v2 (parallel `components` field, not replacement) + per-format variant policy in this Pearl_Architect cap PR. Route ingest fix + ab_tady_37 source branch + renderer upgrade to 2 Pearl_Dev child ws's.
+
+**Schema v2 shape** (full def in [`specs/PRACTICE_ITEM_SCHEMA.md`](../specs/PRACTICE_ITEM_SCHEMA.md) §2.5):
+
+```
+components:
+  bridge:       {full: <string>, lean: <string>}   # book-flow announcement
+  intro:        {full: <string>, lean: <string>}   # name + frame
+  description:  {full: <string>, lean: <string>}   # imperatives-only practice prose
+  aha:          {full: <string>, lean: <string>}   # moment-of-recognition
+  integration:  {full: <string>, lean: <string>}   # carry-back to chapter
+```
+
+Back-compat: legacy `blocks: {setup, instruction, prompt, close}` retained; legacy `text` carries `components.description.full` when components present. v1 items continue to validate (with `components: null` for `source=manual`).
+
+**Per-format variant policy** (full def in `config/practice/selection_rules.yaml` `component_variant_by_format`):
+
+| Variant | Runtime formats | Rationale |
+|---|---|---|
+| **full** | extended_book_2h, deep_book_4h, deep_book_6h | ≥120 duration_minutes; word budget per chapter accommodates the rich 5-component shape alongside the other 9 SOMATIC_10_SLOT_GRID slots |
+| **lean** | micro_book_15, micro_book_20, short_book_30, standard_book, all 3 compact_* + 10 Group A formats | <120 duration_minutes OR compact spine; word budget too tight for full 5-component shape |
+
+**Cross-references (12 cap entries):**
+
+- HONORS `EXERCISE-BANK-RESOLUTION-01` (line 677) — orthogonal; production-profile strict-canonical decision unchanged. This cap addresses the structural shape of practice items, not whether they fire under production.
+- HONORS `ATOM-100PCT-COVERAGE-SSOT-V1-01` (just-merged) — EXERCISE coverage in §3 + §11 of that SSOT is independent of component shape; this cap adds the structural-quality dimension.
+- HONORS `PEARL-PRIME-ONE-PATH-V1-01` D7 — strict-canonical at runtime unchanged; this cap upgrades the practice-library backstop shape that teacher-mode + non-production paths still use.
+- HONORS `TEMPLATE-UNIVERSAL-01` — SOMATIC_10_SLOT_GRID 10-section layout unchanged; this cap operates within EXERCISE-slot internals.
+- HONORS `PEARL-EDITOR-UPSTREAM-01` — Pearl_Editor authority for atom + practice authoring preserved.
+- HONORS `TEACHER-POOL-SEMANTICS-01` — first-match deterministic teacher pool unchanged; teacher wrappers stay as fallback when `components` null.
+- AMENDS `PRACTICE_ITEM_SCHEMA.md` v1 → v2 (this PR ratifies the schema bump).
+- AMENDS `config/practice/validation.yaml` v1 → v2 (`components_schema` block + `components_required_for_sources` + per-slot char limits).
+- AMENDS `config/practice/selection_rules.yaml` v1 → v2 (`component_variant_by_format` block).
+- ROUTES `ws_pearl_dev_practice_ingest_components_lift_20260610` (Pearl_Dev impl items 2 + 3).
+- ROUTES `ws_pearl_dev_renderer_practice_components_consume_20260610` (Pearl_Dev impl item 4).
+- AMENDS `docs/PRACTICE_LIBRARY_TEACHER_FALLBACK.md` (Pearl_Dev ws scope — when components present, renderer prefers `components.intro` over teacher-config templates; teacher wrappers stay as fallback path for v1 + manual items).
+
+**Scope-in:** practice library schema (specs) + validation config + selection rules. Pearl_Dev ws's cover the rest:
+
+| Item from operator directive | Owner | Scope | In this PR? |
+|---|---|---|---|
+| 1. Schema amendment | Pearl_Architect | `specs/PRACTICE_ITEM_SCHEMA.md` v2; `config/practice/validation.yaml` v2 | YES |
+| 5. Per-format lean/full pick | Pearl_Architect | `config/practice/selection_rules.yaml` `component_variant_by_format` | YES |
+| 2. Ingest fix (re-ingest preserving components) | Pearl_Dev | `scripts/practice/ingest_practice_libraries.py:49 + :83` delete null-block hardcodes; populate from inbox `components`; bump rows to version=2 | ws_pearl_dev_practice_ingest_components_lift_20260610 |
+| 3. ab_tady_37 ingest | Pearl_Dev | `ingest_practice_libraries.py` add source branch + content_type passthrough | same ws as item 2 |
+| 4. Renderer upgrade | Pearl_Dev | `phoenix_v4/rendering/book_renderer.py` `_wrap_practice_fallback_exercise` reads `components.<slot>.<variant>` per `component_variant_by_format`; teacher wrappers remain fallback for v1 + null-components items | ws_pearl_dev_renderer_practice_components_consume_20260610 |
+
+**Scope-out (explicit):**
+
+- Does NOT author component prose for the 10 BASELINE gratitude items (separate `EXERCISE-BANK-RESOLUTION-01` Option 1 work).
+- Does NOT promote ab_tady_37 to production-profile (separate cap-entry decision; this cap just gets ab_tady_37 ingested).
+- Does NOT author components for the 609 persona-keyed `atoms/<persona>/<topic>/EXERCISE/CANONICAL.txt` block files or the 249 teacher-bank `approved_atoms/EXERCISE/*.yaml` files. Those carry single-blob prose by design today; a separate ws (`ws_pearl_editor_exercise_5_component_atom_lift_2026XXXX`, not opened in this PR) could lift the persona-keyed + teacher-bank atoms to components in a future cycle.
+- Does NOT change the EXERCISE-BACKSTOP allowed_content_types list under production-profile (still gated by EXERCISE-BANK-RESOLUTION-01).
+
+**Anti-drift check:**
+
+- Adds `components` as a PARALLEL field; does NOT remove `blocks` or `text`. v1 readers continue to function (read `text`); v1 items continue to validate (no `components` required for `source=manual`).
+- Schema versioning is binding per [§5](../specs/PRACTICE_ITEM_SCHEMA.md): consumers MUST accept both v1 and v2.
+- Pearl_Dev re-ingest atomic per ws: store flips v1 → v2 in one PR. No partial state where some rows have components and others don't.
+- Renderer upgrade is permissive: prefer components when present; fall through to `text` + teacher-config wrappers when null. No new failure surface.
+- Memory `feedback_drift_recovery_git_first` honored: the inbox files ARE the canonical authored shape; this cap restores their structural data on read instead of silently dropping it on ingest.
+
+**Action items:**
+
+1. **Pearl_Dev (ws_pearl_dev_practice_ingest_components_lift_20260610)** — re-author `scripts/practice/ingest_practice_libraries.py`: delete the null-block hardcodes at lines 49 + 83; populate `blocks` from `components` (bridge→setup, intro→instruction-prelude, description→instruction, aha→prompt, integration→close — preserves v1 readers); populate the new `components` field from inbox `components` 1:1; bump `version` to 2 for all ingested rows. Add source branch for `exercises_ab_tady_37_PRODUCTION_READY.json` (item 3 — same ws): produce 39 rows with `source=ab_tady_37`, `practice_id=ab37_<exercise_type>_<index>`. Re-run ingest; store flips from 272 v1 rows to 311 v2 rows. Validate via `scripts/practice/validate_practice_store.py` (extend to enforce `components_schema` per v2 rules). 1 PR; ~80-120 LoC changes.
+
+2. **Pearl_Dev (ws_pearl_dev_renderer_practice_components_consume_20260610)** — upgrade `phoenix_v4/rendering/book_renderer.py:_wrap_practice_fallback_exercise`: when the resolved practice item has `components` non-null, render as `components.bridge.<variant> + components.intro.<variant> + components.description.<variant> + components.aha.<variant> + components.integration.<variant>` joined with appropriate paragraph breaks. Variant picked from `config/practice/selection_rules.yaml::component_variant_by_format` per the current runtime format (passed via `plan` arg). When `components` null OR `component_variant_by_format` returns "text" fallback, retain existing teacher-config wrapper path. Add deterministic-selection assertion (same hash inputs → same component variant chosen). 1 PR; ~50-80 LoC.
+
+3. **Pearl_Editor (no ws this PR)** — when `ws_pearl_dev_practice_ingest_components_lift_20260610` lands, review randomly-sampled 10 of 311 ingested items for component prose quality + tts_rhythm compliance. If avg-sentence-words >18 in any component, flag for re-authoring (out-of-scope for this cap's PR; a separate small ws can address).
+
+4. **Pearl_PM** — track 2 Pearl_Dev ws's as paired (renderer ws gated on ingest ws landing first; otherwise renderer would crash on missing components field).
+
+5. **Pearl_GitHub** — when next refreshing `docs/DOCS_INDEX.md`, add cross-link for `EXERCISE-COMPONENT-SCHEMA-LIFT-01` cap entry under EXERCISE/practice library subsystem section.
+
+**Authority:** this cap entry + [`specs/PRACTICE_ITEM_SCHEMA.md`](../specs/PRACTICE_ITEM_SCHEMA.md) (v2) + [`config/practice/validation.yaml`](../config/practice/validation.yaml) (v2) + [`config/practice/selection_rules.yaml`](../config/practice/selection_rules.yaml) (v2; `component_variant_by_format` block) + the 2 Pearl_Dev ws rows in [`artifacts/coordination/ACTIVE_WORKSTREAMS.tsv`](../artifacts/coordination/ACTIVE_WORKSTREAMS.tsv).
