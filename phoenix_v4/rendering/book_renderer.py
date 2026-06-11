@@ -74,13 +74,20 @@ _METADATA_LINE_RE = re.compile(
     r"^\s*"
     r"(family|voice_mode|mode|reframe_type|mechanism_emphasis|"
     r"weight|carry_line|atom_id|BAND|MECHANISM_DEPTH|"
-    r"COST_TYPE|COST_INTENSITY|IDENTITY_STAGE)"
+    r"COST_TYPE|COST_INTENSITY|IDENTITY_STAGE|"
+    r"fingerprint|char_count|paragraph_count|sentence_count)"
     r"\s*:",
     re.IGNORECASE,
 )
 
 # Inline block headers like [family: F4 voice_mode: guide mechanism_emphasis: automatic]
 _METADATA_BLOCK_RE = re.compile(r"^\[.*?(family|voice_mode|mode|reframe_type).*?\]", re.IGNORECASE)
+
+# Angle-journey planner-template placeholders (config/planning/angle_journey_fallback.yaml)
+# leak when per-angle ANGLE_DEFINITION / ANGLE_CALLBACK atoms are uncommissioned. Each renders
+# as a blank-line-delimited block led by a bracketed "[Angle journey — …]" marker; the leader
+# and its interpolated follow-on lines (e.g. "Phase: …. Prior layer: …") are all scaffolding.
+_ANGLE_JOURNEY_PLACEHOLDER_RE = re.compile(r"^\s*\[Angle journey\b", re.IGNORECASE)
 
 # Title-page lines like "Topic: anxiety" or "Persona: gen_z_professionals"
 _TITLE_META_RE = re.compile(r"^(Topic|Persona)\s*:", re.IGNORECASE)
@@ -288,6 +295,25 @@ def _strip_scaffolding_lines(text: str) -> str:
             continue
         out.append(stripped)
     return "\n".join(out)
+
+
+def _strip_angle_journey_placeholders(text: str) -> str:
+    """Drop blank-line-delimited paragraphs led by an '[Angle journey — …]' placeholder marker.
+
+    These blocks come from config/planning/angle_journey_fallback.yaml when the per-angle
+    ANGLE_DEFINITION / ANGLE_CALLBACK atoms have not been authored. The whole paragraph —
+    bracketed leader plus interpolated follow-on lines such as "This book follows the … lens:"
+    or "Phase: …. Prior layer: …" — is planner scaffolding, never reader-facing prose, so the
+    entire block is removed (a line-level strip would orphan the follow-on lines).
+    """
+    paragraphs = re.split(r"\n\s*\n", text)
+    kept: list[str] = []
+    for para in paragraphs:
+        first_nonempty = next((ln for ln in para.splitlines() if ln.strip()), "")
+        if _ANGLE_JOURNEY_PLACEHOLDER_RE.match(first_nonempty):
+            continue
+        kept.append(para)
+    return "\n\n".join(kept)
 
 
 def _dedup_repeated_blocks(
@@ -612,7 +638,8 @@ def clean_for_delivery(
 
     Order of operations:
       1. Resolve known loc-var placeholders with universal or location-aware fallbacks.
-      2. Strip pipeline metadata lines and markdown scaffolding.
+      2. Strip pipeline metadata lines (incl. atom fingerprint blocks), angle-journey
+         planner-template placeholder blocks, and markdown scaffolding.
       3. Remove repeated long paragraphs (same normalized fingerprint), unless the plan's
          runtime format word minimum would be violated (then pre-dedup text is kept).
       4. Strip any residual {Placeholder} tokens (e.g. story-atom fiction
@@ -624,6 +651,7 @@ def clean_for_delivery(
     """
     text = _resolve_loc_var_fallbacks(text, plan=plan)
     text = _strip_scaffolding_lines(text)
+    text = _strip_angle_journey_placeholders(text)
     text = re.sub(r"\s*\{['\"][^'\"]+['\"]\s*:\s*", " ", text)
     text = re.sub(r"\s*\[\s*\{\s*['\"][^'\"]+['\"]\s*:\s*", " ", text)
     text = _dedup_repeated_blocks(text, word_floor=_delivery_word_floor_from_plan(plan))
