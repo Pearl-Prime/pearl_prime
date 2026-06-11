@@ -2491,9 +2491,9 @@ Phase 3 P0 workstreams **NOT YET OPENED** — pending operator authorization on 
 
 ---
 
-### ATOM-100PCT-COVERAGE-SSOT-V1-01 — Pearl Prime atom 100% coverage SSOT + gap matrix + Phase A launch gate (proposed 2026-06-06)
+### ATOM-100PCT-COVERAGE-SSOT-V1-01 — Pearl Prime atom 100% coverage SSOT + gap matrix + Phase A launch gate (proposed 2026-06-06; **ratified ACTIVE 2026-06-11**)
 
-**Status:** **PROPOSAL — awaiting operator answers to 16 Q-Atom-* in [`docs/PEARL_PRIME_ATOM_100PCT_COVERAGE_SSOT.md`](./PEARL_PRIME_ATOM_100PCT_COVERAGE_SSOT.md) §12 → ACTIVE** (Pearl_Architect authoring this PR).
+**Status:** **ACTIVE 2026-06-11** (was PROPOSAL — flipped per operator batch ratification of all 20 Q-Atom-* via AMENDMENT-RATIFICATION-2026-06-11 PR + 20 OPD log entries OPD-20260611-001 through OPD-20260611-020). See `ATOM-100PCT-COVERAGE-SSOT-V1-01-RATIFICATION-2026-06-11` cap entry below for ratification details.
 
 **Context:** Operator directive (verbatim 2026-06-06): *"I want 100% of atoms so I can write all books for all personas and topics and languages. Use existing docs that did this and update them with new findings."* Prior atom audits ([`persona_atom_audit.md`](../artifacts/audit/persona_atom_audit.md), [`teacher_bank_audit.md`](../artifacts/audit/teacher_bank_audit.md), [`registry_coverage_vs_catalog.md`](../artifacts/audit/registry_coverage_vs_catalog.md), [`P1_HEALTH_REPORT_2026_04_10.md`](../artifacts/audit/P1_HEALTH_REPORT_2026_04_10.md), [`pearl_prime_audit_2026-06-06.md`](../artifacts/qa/pearl_prime_audit_2026-06-06.md)) gave partial coverage by axis; no single SSOT existed for the full P × T × A × L × V matrix. This cap entry ratifies the new SSOT as canonical for "100% atom coverage" semantics + operationalizes `PEARL-PRIME-ONE-PATH-V1-01` D8 (16-slot persona-keyed coverage) as a tier-ordered gap matrix gating Phase A en-US catalog launch under `CATALOG-800-PER-BRAND-01`.
 
@@ -2664,3 +2664,35 @@ When Pearl_Dev's 2 ws PRs land (`ws_pearl_dev_practice_ingest_components_lift_20
 - **SSOT §17** (this SSOT's AMENDMENT block; canonical surface for the A1-A6 checklist with §17.4 + §17.5 ws cross-refs).
 - **`ws_pearl_editor_exercise_preservation_audit_20260611`** (NEW; gated on both Pearl_Dev ws's merge; verifies A1-A6).
 - **`ws_pearl_editor_slot_07_practice_supply_backfill_20260611`** (NEW optional; gated on all three above + operator Q-Atom-SLOT-07-PRIORITY-01 answer).
+
+---
+
+### ATOM-100PCT-COVERAGE-SSOT-V1-01-RATIFICATION-2026-06-11 — operator batch ratification of all 20 Q-Atom-* (status ACTIVE)
+
+**Status:** **RATIFIED 2026-06-11** — flips parent cap `ATOM-100PCT-COVERAGE-SSOT-V1-01` from PROPOSAL → ACTIVE.
+
+**Context:** Pearl_PM tracker iter 1 ([PR #1489](https://github.com/Ahjan108/phoenix_omega_v4.8/pull/1489)) §G identified operator decision as the critical-path bottleneck (20 of 20 Q-Atom-* PENDING). Operator answered via Mode A (recommended defaults) with **1 override**: `Q-Atom-LOCALE-SCOPE-01` = (b) top-3 (en-US + ja-JP + zh-TW), overriding recommended (c) en-US only.
+
+**Decision summary:** 20 Q-Atom-* resolved; 1 override; 0 ambiguous. Logged as OPD-20260611-001 through OPD-20260611-020 in [`artifacts/coordination/operator_decisions_log.tsv`](../artifacts/coordination/operator_decisions_log.tsv). RESOLVED stamps appended inline below each Q-Atom in SSOT §12. SSOT §18 summary table mirrors this cap entry.
+
+**Material implication of LOCALE-SCOPE override:** Phase A en-US + Phase B ja-JP unchanged. Phase C zh-TW only (vs zh-TW + zh-CN); zh-CN + ko-KR + extended-CJK + EU/ES locales move to post-Phase-A optional. Phase A launch-gating gap rows ≈ 653 (P0 + P1 en-US persona-keyed + Class 2 overlay).
+
+**Cap entries flipped:**
+- `ATOM-100PCT-COVERAGE-SSOT-V1-01` — PROPOSAL → **ACTIVE 2026-06-11** (binding for the Phase A en-US launch gate).
+- `EXERCISE-COMPONENT-SCHEMA-LIFT-01` — unchanged (was already `ratified` per PR #1486).
+- `PEARL-PRIME-ONE-PATH-V1-01` — unchanged (remains PROPOSAL per Q-Atom-ONE-PATH-SPEC-FILE-01 (a) pair-cycle; ratifies on its own track when operator answers its 12 Q-OP-*).
+
+**Downstream cascade unblocked:** Per Pearl_PM tracker §G, bottleneck shifts from "operator decision" → "PR merge sequence". The 4 immediately-unblocked ws's dispatch when the first parent PR merges:
+1. `ws_pearl_editor_atom_100pct_tier_p0_persona_keyed_20260606`
+2. `ws_pearl_writer_atom_100pct_tier_p0_engine_atoms_20260606`
+3. `ws_pearl_dev_atom_100pct_ci_guard_20260606`
+4. `ws_pearl_dev_practice_ingest_components_lift_20260610`
+
+**Action items:**
+1. **Operator** → merge this ratification PR (small atomic; can merge alongside #1485 + #1486 + #1488 + #1489 in cleanup batch).
+2. **Pearl_PM iter 2** → fires on first parent PR merge per tracker §H trigger; dispatches the 4 immediately-unblocked ws's.
+3. **Pearl_Architect (this entry post-active)** → quarterly SSOT refresh per Q-Atom-SSOT-UPDATE-CADENCE-01 (a) cadence.
+
+**Anti-drift check:** No new spec; no new ws's; no code. Pure status-flip + decision-log + RESOLVED stamps. Memory `feedback_operator_proxy_routing` honored: 20 in-envelope decisions logged canonically. Memory `feedback_validation_before_scaling` honored: this ratification IS the validation that unblocks Phase A scaling; without it, no ws dispatches.
+
+**Authority:** this cap entry + parent cap entry `ATOM-100PCT-COVERAGE-SSOT-V1-01` (status flipped) + [`docs/PEARL_PRIME_ATOM_100PCT_COVERAGE_SSOT.md`](./PEARL_PRIME_ATOM_100PCT_COVERAGE_SSOT.md) §18 + [`artifacts/coordination/operator_decisions_log.tsv`](../artifacts/coordination/operator_decisions_log.tsv) (20 OPD entries) + [`artifacts/coordination/pearl_prime_atom_phase_a_launch_tracker.md`](../artifacts/coordination/pearl_prime_atom_phase_a_launch_tracker.md) §D + §G (updated to reflect post-ratification state).

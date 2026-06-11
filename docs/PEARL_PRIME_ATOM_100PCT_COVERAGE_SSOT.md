@@ -361,37 +361,71 @@ Per `PEARL-EDITOR-UPSTREAM-01` + `EXERCISE-BANK-RESOLUTION-01` + `QUOTE-ATOM-ROU
 
 **Q-Atom-PERSONA-SCOPE-01** — Persona enumeration. **Options:** (a) keep all 14 + backfill all to 100% [**RECOMMEND** if launch is months away — preserves optionality]; (b) retire midlife_women + educators + nyc_executives (under-developed) + concentrate authoring on top 8; (c) staged — top 8 to 100% first, near-empty backfilled in Phase 2.
 
+  → **RESOLVED 2026-06-11:** (a) keep all 14 personas + backfill all to 100% — logged as **OPD-20260611-001** ([operator_decisions_log.tsv](../artifacts/coordination/operator_decisions_log.tsv)).
+
 **Q-Atom-LOCALE-SCOPE-01** — Locale ceiling. **Options:** (a) ALL 13 official locales per `locale_registry.yaml`; (b) top-3 (en-US + ja-JP + zh-TW) per `AMENDMENT-2026-06-04.2` cascade recommended-default; (c) en-US only for Phase A; locales follow [**RECOMMEND** for SSOT acceptance criteria — anchor Phase A on en-US]; (d) add de-DE + fr-FR per audit A6 EU gap (operator vetoes `CATALOG-800-PER-BRAND-01` top-5 math) — multi-quarter cost.
+
+  → **RESOLVED 2026-06-11:** (b) top-3 (en-US + ja-JP + zh-TW) — OPERATOR OVERRIDE from recommended (c) — logged as **OPD-20260611-002** ([operator_decisions_log.tsv](../artifacts/coordination/operator_decisions_log.tsv)).
 
 **Q-Atom-LOCALE-PHASE-01** — Locale sequencing. **Options:** (a) en-US → ja-JP → zh-TW → zh-CN → ko-KR [**RECOMMEND** market priority]; (b) en-US + ja-JP parallel → zh-TW + zh-CN parallel → ko-KR; (c) operator-custom.
 
+  → **RESOLVED 2026-06-11:** (a) en-US → ja-JP → zh-TW → zh-CN → ko-KR (first 3 = Phase A/B/C per Q-Atom-LOCALE-SCOPE-01 override) — logged as **OPD-20260611-003** ([operator_decisions_log.tsv](../artifacts/coordination/operator_decisions_log.tsv)).
+
 **Q-Atom-VARIANT-CEILING-01** — Variant ceiling. **Options:** (a) ≥3 floor + ≤5 ceiling per current `SPEC-739-THRESHOLD-01` + ONE-PATH-LOCKDOWN [**RECOMMEND**]; (b) ≥5 floor (raise the bar); (c) ≥3 floor + ≤7 ceiling.
+
+  → **RESOLVED 2026-06-11:** (a) ≥3 floor + ≤5 ceiling per SPEC-739-THRESHOLD-01 — logged as **OPD-20260611-004** ([operator_decisions_log.tsv](../artifacts/coordination/operator_decisions_log.tsv)).
 
 **Q-Atom-PERSONA-KEYED-FALLBACK-01** — For Tier P1 personas without persona-keyed TEACHER_DOCTRINE yet — (a) BLOCK catalog runs until backfilled [**RECOMMEND** per ONE-PATH runtime fail-fast]; (b) allow generic teacher_banks/doctrine fallback during transition; (c) author placeholder persona-keyed atoms (lower-quality stopgap) + flag for revision.
 
+  → **RESOLVED 2026-06-11:** (a) BLOCK catalog runs until backfilled (no generic fallback) — logged as **OPD-20260611-005** ([operator_decisions_log.tsv](../artifacts/coordination/operator_decisions_log.tsv)).
+
 **Q-Atom-STORY-BANK-EXPANSION-01** — Named-character bestseller bank. **Options:** (a) keep current ~1,375 atoms + expand only for new P×T cells; (b) expand to ≥3 named characters per P×T cell (target ≈ 630 STORY atoms minimum) [**RECOMMEND**]; (c) expand to ≥5 named characters per cell.
+
+  → **RESOLVED 2026-06-11:** (b) ≥3 named characters per P×T cell (~630 STORY engine variants minimum) — logged as **OPD-20260611-006** ([operator_decisions_log.tsv](../artifacts/coordination/operator_decisions_log.tsv)).
 
 **Q-Atom-TEACHER-BANK-SCOPE-01** — Teacher-bank coverage (13 teachers × 15 topics × ~4 atom types). **Options:** (a) all 13 teachers × all 15 topics complete [**RECOMMEND**]; (b) staged per teacher priority; (c) reduce teacher roster to top 8.
 
+  → **RESOLVED 2026-06-11:** (a) all 13 teachers × all 15 topics complete — logged as **OPD-20260611-007** ([operator_decisions_log.tsv](../artifacts/coordination/operator_decisions_log.tsv)).
+
 **Q-Atom-PRIORITY-PERSONAS-01** — Tier P0 priority personas (5-6 to launch Phase A en-US). **Recommend:** gen_z_professionals (GOLD) + corporate_managers + working_parents + first_responders + healthcare_rns + gen_x_sandwich. Operator confirms.
+
+  → **RESOLVED 2026-06-11:** gen_z_professionals + corporate_managers + working_parents + first_responders + healthcare_rns + gen_x_sandwich — logged as **OPD-20260611-008** ([operator_decisions_log.tsv](../artifacts/coordination/operator_decisions_log.tsv)).
 
 **Q-Atom-PRIORITY-TOPICS-01** — Tier P0 priority topics (5-6 to launch Phase A en-US). **Recommend:** anxiety + overthinking + burnout + boundaries + self_worth + depression. Operator confirms.
 
+  → **RESOLVED 2026-06-11:** anxiety + overthinking + burnout + boundaries + self_worth + depression — logged as **OPD-20260611-009** ([operator_decisions_log.tsv](../artifacts/coordination/operator_decisions_log.tsv)).
+
 **Q-Atom-EXERCISE-BANK-RESOLUTION-01** — Per `EXERCISE-BANK-RESOLUTION-01` Option 1 (strict-canonical for production) — confirm strict-canonical exercise atoms required for Tier P0 cells; gratitude_practices_v1 promotion to PRODUCTION_READY gated on SSOT?
+
+  → **RESOLVED 2026-06-11:** (a) strict-canonical for Tier P0; gratitude_practices_v1 separate work — logged as **OPD-20260611-010** ([operator_decisions_log.tsv](../artifacts/coordination/operator_decisions_log.tsv)).
 
 **Q-Atom-MASTER-ARC-INTERACTION-01** — Per `pearl_prime_audit_2026-06-06.md` axis A2 — 449/531 master arcs declare `chapter_count: 20`. Atom authoring is per persona×topic per ONE-PATH compression strategy; arc shape does not change atom requirements. **Confirm: atom requirements per ONE-PATH are independent of arc `chapter_count`.**
 
+  → **RESOLVED 2026-06-11:** (a) confirm atom requirements independent of arc chapter_count — logged as **OPD-20260611-011** ([operator_decisions_log.tsv](../artifacts/coordination/operator_decisions_log.tsv)).
+
 **Q-Atom-CI-GUARD-SEVERITY-01** — `scripts/ci/check_atom_100pct_coverage.py` (§14). **Options:** (a) HARD FAIL on missing Tier P0 cells under production-profile catalog runs [**RECOMMEND** per ONE-PATH runtime fail-fast semantics]; (b) warn-only; (c) operator-tier-selectable per phase.
+
+  → **RESOLVED 2026-06-11:** (a) HARD FAIL on missing Tier P0 cell under production-profile catalog runs — logged as **OPD-20260611-012** ([operator_decisions_log.tsv](../artifacts/coordination/operator_decisions_log.tsv)).
 
 **Q-Atom-SSOT-UPDATE-CADENCE-01** — Per §13 update protocol. **Options:** (a) every atom-authoring ws PR auto-updates §9 gap matrix [**RECOMMEND**]; (b) weekly batch update; (c) per-tier-completion update only.
 
+  → **RESOLVED 2026-06-11:** (a) every atom-authoring ws PR auto-updates §9 gap matrix in place — logged as **OPD-20260611-013** ([operator_decisions_log.tsv](../artifacts/coordination/operator_decisions_log.tsv)).
+
 **Q-Atom-DE-DE-FR-FR-01** — de-DE / fr-FR locale gap. **Options:** (a) defer per `AMENDMENT-2026-06-04.2` recommended demote-to-top-3 [**RECOMMEND**]; (b) backfill (multi-quarter; high cost); (c) skip permanently — operator confirms.
+
+  → **RESOLVED 2026-06-11:** (a) defer per AMENDMENT-2026-06-04.2 top-3 demote (aligned with Q-Atom-LOCALE-SCOPE-01 override) — logged as **OPD-20260611-014** ([operator_decisions_log.tsv](../artifacts/coordination/operator_decisions_log.tsv)).
 
 **Q-Atom-ONE-PATH-SPEC-FILE-01** *(new — surfaced by discovery + reconciled)* — `docs/specs/PEARL_PRIME_ONE_PATH_LOCKDOWN_V1_SPEC.md` exists at `agent/pearl-architect-pearl-prime-one-path-lockdown-v1-20260606` (in this PR's parent merge lineage); cap entry `PEARL-PRIME-ONE-PATH-V1-01` status = **PROPOSAL** awaiting operator answers to 12 Q-OP-* (see `PEARL_ARCHITECT_STATE.md:2427-2490`). This SSOT subordinates to the ONE-PATH-V1-01 spec for the persona-keyed atom-type catalog (D8 = 16 slots) and operationalizes its Phase 3 content-backfill phase as the gap matrix + tier ordering. **Options:** (a) wait for ONE-PATH-V1-01 ratification (operator answers Q-OP-* on its PR thread) then ratify this SSOT in the same cycle [**RECOMMEND** — preserves anti-drift]; (b) ratify this SSOT independently — Phase A scope-of-work is well-defined regardless of ONE-PATH ratification; (c) operator-direct on sequencing.
 
+  → **RESOLVED 2026-06-11:** (a) wait for ONE-PATH-V1-01 ratification; pair-cycle — logged as **OPD-20260611-015** ([operator_decisions_log.tsv](../artifacts/coordination/operator_decisions_log.tsv)).
+
 **Q-Atom-DIRECTIVE-9-VS-CAP-16-01** *(new — surfaced by discovery)* — The directive's "9 atom types per cell" framing is a SUBSET of `PEARL-PRIME-ONE-PATH-V1-01` D8's "16 persona-keyed slot-type dirs per persona×topic" canonical (adds SCENE / PIVOT / PERMISSION / TAKEAWAY / THREAD / TEACHER_DOCTRINE_INTRO / ANGLE_DEFINITION / ANGLE_CALLBACK to the directive's 9). Discovery shows the 7 extra slot-types are largely covered already (PIVOT=1,757 / PERMISSION=1,760 / TAKEAWAY=1,760 / THREAD=1,749 / SCENE=609 / TEACHER_DOCTRINE_INTRO=10 / ANGLE_DEFINITION + ANGLE_CALLBACK observed in atoms/ tree). **Options:** (a) accept the §3 routing-class split as SSOT canonical — 6 persona-keyed + 3 overlay-routed = the directive's 9; track the other 7 slot-types under cap entry ONE-PATH-V1-01 D8 alone [**RECOMMEND**] — preserves directive scope without contradicting cap entry; (b) expand SSOT scope to all 16 per cap D8 — gap matrix expands 1.78× to ~36,990 rows; ~47,400 estimated hours; (c) shrink cap D8 to the directive's 9 (architectural change requiring separate Pearl_Architect cap-amendment ws).
 
+  → **RESOLVED 2026-06-11:** (a) accept §3 routing-class split as SSOT canonical (9 directive scope; 7 extras under ONE-PATH-V1-01 D8) — logged as **OPD-20260611-016** ([operator_decisions_log.tsv](../artifacts/coordination/operator_decisions_log.tsv)).
+
 **Q-Atom-LEGACY-ATOM-TYPES-01** *(new — surfaced by discovery)* — Per ONE-PATH-V1-01 D8: 16 persona-keyed slot-type dirs are canonical. The 7 dirs beyond the directive's 9 (SCENE / PIVOT / PERMISSION / TAKEAWAY / THREAD / TEACHER_DOCTRINE_INTRO / ANGLE_DEFINITION / ANGLE_CALLBACK) appear well-populated in discovery scans (PIVOT=1,757, PERMISSION=1,760, TAKEAWAY=1,760, THREAD=1,749, SCENE=609, TEACHER_DOCTRINE_INTRO=10). **Options:** (a) accept Q-Atom-DIRECTIVE-9-VS-CAP-16-01 (a) and track these 7 under ONE-PATH-V1-01 alone [**RECOMMEND** — minimizes SSOT scope-creep]; (b) expand SSOT scope to all 16 — pair-vote with Q-Atom-DIRECTIVE-9-VS-CAP-16-01 (b); (c) audit each of the 7 for runtime usage + decide individually.
+
+  → **RESOLVED 2026-06-11:** (a) track 7 legacy slot-types under ONE-PATH-V1-01 alone (pair-vote with DIRECTIVE-9-VS-CAP-16-01) — logged as **OPD-20260611-016** ([operator_decisions_log.tsv](../artifacts/coordination/operator_decisions_log.tsv)).
 
 **Total Q-Atom-***: **16** (above the ≥12 target).
 
@@ -406,9 +440,17 @@ Per `PEARL-EDITOR-UPSTREAM-01` + `EXERCISE-BANK-RESOLUTION-01` + `QUOTE-ATOM-ROU
 ### AMENDMENT-2026-06-11 NEW Q-Atom-* (4 questions):
 
 - **Q-Atom-SLOT-07-PRIORITY-01** — slot_07 supply backfill priority. **Options:** (a) breath_regulation first (39 ab_tady items already land here post-ingest; max coverage / min new authoring) [**RECOMMEND**]; (b) grounding_orientation; (c) body_awareness_scan; (d) operator-custom priority.
+
+  → **RESOLVED 2026-06-11:** (a) breath_regulation first (ab_tady_37 39 items land there post-ingest) — logged as **OPD-20260611-017** ([operator_decisions_log.tsv](../artifacts/coordination/operator_decisions_log.tsv)).
 - **Q-Atom-AUDIT-PASS-THRESHOLD-01** — Pearl_Editor preservation audit pass threshold. **Options:** (a) ≥99% items zero-loss [**RECOMMEND**]; (b) 100% strict; (c) ≥95% with explicit per-item gap report.
+
+  → **RESOLVED 2026-06-11:** (a) ≥99% items zero-loss in Pearl_Editor preservation audit — logged as **OPD-20260611-018** ([operator_decisions_log.tsv](../artifacts/coordination/operator_decisions_log.tsv)).
 - **Q-Atom-INCLUDE-PEARL-PM-ITER-3-01** — Include Pearl_PM Phase A tracker iter 3 update in this AMENDMENT PR? **Options:** (a) YES + add deliverable #4; (b) NO + defer to Pearl_PM's own iter session [**RECOMMEND** — preserves Pearl_PM ownership boundary].
+
+  → **RESOLVED 2026-06-11:** (b) defer to Pearl_PM's own iter session (PR #1489 closes the loop) — logged as **OPD-20260611-019** ([operator_decisions_log.tsv](../artifacts/coordination/operator_decisions_log.tsv)).
 - **Q-Atom-INCLUDE-SLOT-07-BACKFILL-WS-01** — Include optional slot_07 supply backfill ws row in this PR? **Options:** (a) YES — captures the future-track surface so it doesn't get lost [**RECOMMEND**]; (b) NO + defer.
+
+  → **RESOLVED 2026-06-11:** (a) YES — included in PR #1488 — logged as **OPD-20260611-020** ([operator_decisions_log.tsv](../artifacts/coordination/operator_decisions_log.tsv)).
 
 **Total Q-Atom-* (post-AMENDMENT-2026-06-11):** 16 + 3 RESOLVED + 4 new = **20**.
 
@@ -563,4 +605,62 @@ Both rows appended in this AMENDMENT's `ACTIVE_WORKSTREAMS.tsv` commit.
 
 ---
 
-*End of SSOT v1 + AMENDMENT-2026-06-11. Update protocol: §13. Cap entries: `ATOM-100PCT-COVERAGE-SSOT-V1-01` + `EXERCISE-COMPONENT-SCHEMA-LIFT-01` (cross-linked). Operator answers Q-Atom-* → child ws's spawn per §10 + §11 + §17 → §9 gap matrix shrinks per §13 + EXERCISE component shape preserved per §17.6 A1-A6 → §16 acceptance gates Phase A launch.*
+## §18. DECISIONS RESOLVED 2026-06-11 — operator batch ratification of all 20 Q-Atom-*
+
+Operator ratified all 20 Q-Atom-* via Mode A (recommended defaults) with **1 override**: `Q-Atom-LOCALE-SCOPE-01` = (b) top-3 (en-US + ja-JP + zh-TW), overriding recommended (c) en-US only.
+
+Logged to [`artifacts/coordination/operator_decisions_log.tsv`](../artifacts/coordination/operator_decisions_log.tsv) as OPD-20260611-001 through OPD-20260611-020.
+
+### Decision summary (20 rows)
+
+| # | Q-Atom-ID | Chosen option | OPD-ID |
+|---|---|---|---|
+| 1 | `Q-Atom-PERSONA-SCOPE-01` | (a) keep all 14 + backfill all to 100% | OPD-20260611-001 |
+| 2 | `Q-Atom-LOCALE-SCOPE-01` | **(b) top-3 (en-US + ja-JP + zh-TW) — OPERATOR OVERRIDE** | OPD-20260611-002 |
+| 3 | `Q-Atom-LOCALE-PHASE-01` | (a) en-US → ja-JP → zh-TW → zh-CN → ko-KR | OPD-20260611-003 |
+| 4 | `Q-Atom-VARIANT-CEILING-01` | (a) ≥3 floor + ≤5 ceiling per SPEC-739-THRESHOLD-01 | OPD-20260611-004 |
+| 5 | `Q-Atom-PERSONA-KEYED-FALLBACK-01` | (a) BLOCK catalog runs until backfilled | OPD-20260611-005 |
+| 6 | `Q-Atom-STORY-BANK-EXPANSION-01` | (b) ≥3 named characters per P×T cell (~630 STORY min) | OPD-20260611-006 |
+| 7 | `Q-Atom-TEACHER-BANK-SCOPE-01` | (a) all 13 teachers × all 15 topics complete | OPD-20260611-007 |
+| 8 | `Q-Atom-PRIORITY-PERSONAS-01` | gen_z_professionals + corporate_managers + working_parents + first_responders + healthcare_rns + gen_x_sandwich | OPD-20260611-008 |
+| 9 | `Q-Atom-PRIORITY-TOPICS-01` | anxiety + overthinking + burnout + boundaries + self_worth + depression | OPD-20260611-009 |
+| 10 | `Q-Atom-EXERCISE-BANK-RESOLUTION-01` | (a) strict-canonical for Tier P0; gratitude separate | OPD-20260611-010 |
+| 11 | `Q-Atom-MASTER-ARC-INTERACTION-01` | (a) atom requirements independent of arc chapter_count | OPD-20260611-011 |
+| 12 | `Q-Atom-CI-GUARD-SEVERITY-01` | (a) HARD FAIL on missing Tier P0 cell under production-profile | OPD-20260611-012 |
+| 13 | `Q-Atom-SSOT-UPDATE-CADENCE-01` | (a) every atom-authoring ws PR auto-updates §9 | OPD-20260611-013 |
+| 14 | `Q-Atom-DE-DE-FR-FR-01` | (a) defer per AMENDMENT-2026-06-04.2 (consistent with #2) | OPD-20260611-014 |
+| 15 | `Q-Atom-ONE-PATH-SPEC-FILE-01` | (a) wait for ONE-PATH-V1-01 ratification; pair-cycle | OPD-20260611-015 |
+| 16 | `Q-Atom-DIRECTIVE-9-VS-CAP-16-01` | (a) accept §3 routing-class split as SSOT canonical | OPD-20260611-016 |
+| 16b | `Q-Atom-LEGACY-ATOM-TYPES-01` *(pair-vote with #16)* | (a) track 7 legacy slot-types under ONE-PATH-V1-01 D8 alone | OPD-20260611-016 |
+| 17 | `Q-Atom-SLOT-07-PRIORITY-01` | (a) breath_regulation first (ab_tady_37 covers it) | OPD-20260611-017 |
+| 18 | `Q-Atom-AUDIT-PASS-THRESHOLD-01` | (a) ≥99% items zero-loss | OPD-20260611-018 |
+| 19 | `Q-Atom-INCLUDE-PEARL-PM-ITER-3-01` | (b) defer to Pearl_PM's own iter session (PR #1489 closes loop) | OPD-20260611-019 |
+| 20 | `Q-Atom-INCLUDE-SLOT-07-BACKFILL-WS-01` | (a) YES — included in PR #1488 | OPD-20260611-020 |
+
+### Material implications of LOCALE-SCOPE override
+
+Per Q-Atom-LOCALE-SCOPE-01 (b) operator override:
+- **Phase A en-US** scope unchanged (1,890 cells × ≥3 variants = 5,670 atoms minimum).
+- **Phase B ja-JP** scope unchanged (1,890 cells × ≥3 = 5,670 atoms).
+- **Phase C zh-TW only** (vs SSOT §2's Phase C = zh-TW + zh-CN) → P3 gap matrix scope shrinks ≈ 50%.
+- **Phase D ko-KR + zh-HK + zh-SG** + **Phase E extended locales (es-* / fr-FR / de-DE / it-IT / hu-HU)** moved to **post-Phase-A optional** per Q-Atom-DE-DE-FR-FR-01 (a) defer.
+- Total Phase A launch-gating gap rows ≈ **653** (P0 + P1 en-US persona-keyed + Class 2 overlay).
+
+### Cap entry status flips
+
+- `ATOM-100PCT-COVERAGE-SSOT-V1-01` — PROPOSAL → **ACTIVE 2026-06-11** per this batch ratification (see [`PEARL_ARCHITECT_STATE.md`](./PEARL_ARCHITECT_STATE.md) under `ATOM-100PCT-COVERAGE-SSOT-V1-01-RATIFICATION-2026-06-11`).
+- `EXERCISE-COMPONENT-SCHEMA-LIFT-01` — already `ratified` per PR #1486; no change.
+- `PEARL-PRIME-ONE-PATH-V1-01` — remains PROPOSAL pending operator answers to 12 Q-OP-* on its own PR thread (per Q-Atom-ONE-PATH-SPEC-FILE-01 (a) pair-cycle).
+
+### Downstream cascade unblocked
+
+Per [`pearl_prime_atom_phase_a_launch_tracker.md`](../artifacts/coordination/pearl_prime_atom_phase_a_launch_tracker.md) §G: bottleneck shifts from "operator decision" → "PR merge sequence". The **4 immediately-unblocked ws's** dispatch when the first parent PR merges:
+
+1. `ws_pearl_editor_atom_100pct_tier_p0_persona_keyed_20260606` (Tier P0; gated on #1485)
+2. `ws_pearl_writer_atom_100pct_tier_p0_engine_atoms_20260606` (Tier P0+P1; gated on #1485)
+3. `ws_pearl_dev_atom_100pct_ci_guard_20260606` (CI guard; gated on #1485)
+4. `ws_pearl_dev_practice_ingest_components_lift_20260610` (ingest; gated on #1486)
+
+---
+
+*End of SSOT v1 + AMENDMENT-2026-06-11 + RATIFICATION-2026-06-11 (§18). Update protocol: §13. Cap entries: `ATOM-100PCT-COVERAGE-SSOT-V1-01` (now ACTIVE) + `EXERCISE-COMPONENT-SCHEMA-LIFT-01` (ratified). All 20 Q-Atom-* RESOLVED. Phase A launch gates per §16 + §17.6 A1-A6.*
