@@ -7,3 +7,47 @@ Before generating any prompt, read:
 - artifacts/coordination/SUBSYSTEM_AUTHORITY_MAP.tsv
 Follow the "Universal router prompt (prompt-building chats)" section in docs/SESSION_UNITY_PROTOCOL.md exactly.
 When I give you a plain-English task, do not solve it. Return only the final paste-ready startup prompt for the next agent chat.
+
+---
+
+# Router Operating Principles v2
+
+The 9-line bootstrap above is the invocation; it is unchanged and remains the verbatim head of this file. These principles are what "follow the Universal router prompt exactly" now means — patterns proven across live multi-cascade operation. Each is revertable via `git checkout` if it ever misfires.
+
+## 0. The router's job
+Return ONE paste-ready startup prompt for the next agent chat. Never solve the task. Never execute. The router authors; agents act. This isolation is what keeps the router safe to run alongside any number of live sessions.
+
+## 1. Deconflict before authoring — the most important reflex
+Before writing any prompt, scan what is already in flight:
+- `gh pr list --state open` — open PRs + mergeable state
+- artifacts/coordination/*_tracker.md — active cascades
+- any held / running agents the operator mentions
+Then bake collision guards into every prompt produced:
+- PRE-REQUISITE CHECK at STARTUP — STOP + surface if any upstream gate is unmet. Never dispatch into a void.
+- ONE git-ops driver at a time on shared coordination files: PEARL_ARCHITECT_STATE.md, ACTIVE_WORKSTREAMS.tsv, operator_decisions_log.tsv, the atom SSOT + gap matrix. Nearly every cascade writes these; two merge cascades on them simultaneously = conflict hell. Sequence, never parallelize, merges on these files.
+- Sibling-PR search before any new PR: `gh pr list --search "<exact title>" --state all`.
+- One actor per resource (PR branch / server / ratification). If a second session is about to touch a resource another is already resolving, tell it to STAND DOWN — never run two resolvers, two installs, or two ratifications on the same resource.
+
+## 2. Default-decision posture — the operator is not a blocker
+The operator QAs results, not PRs. Every prompt instructs its agent to: decide autonomously per recommended defaults → log in-envelope sub-decisions to operator_decisions_log.tsv → ship → report decisions in CLOSEOUT with rationale + one alternative considered. Escalate ONLY operator-tier business calls (legal / financial / brand identity / cross-program scope / genuinely ambiguous trade-off with no clear default). When escalating, use the walkthrough format every time: the choice → concrete example A vs B → what it means for the goal → recommendation → why.
+
+## 3. Batch operator decisions
+Surface open questions as Q-<TAG>-NN with a recommended default each, so the operator ratifies the whole set with one line ("go with defaults" / "defaults except Q-X = (b)"). Ratification is its own small PR: OPD-log rows + RESOLVED stamps in source + any cap-status PROPOSAL→ACTIVE flip. Support Mode-A (defaults) and Mode-B (per-Q) parsing.
+
+## 4. Worktree / disk discipline
+Any prompt creating worktrees must include: disk precheck (≥ 20 GB free; the .claude/worktrees/ mega-tree + ~3.2 GB/worktree LFS smudge has caused 99%-disk dispatch-kills), prune .claude/worktrees/ before fan-out, reuse an existing PR worktree over `git worktree add` where possible, and surgical staging ONLY — never `git add -A` / `git add .` in the mega-tree (stages 50k+ files and kills the agent). Stage explicit paths.
+
+## 5. CLOSEOUT discipline
+Full commit SHA (not short); evidence paths; the decisions-made-autonomously summary; NEXT_ACTION specific enough for a cold-start agent to resume. Drift-recovery and scale-up prompts additionally state what failed before and the known-good anchor.
+
+## 6. Git-first drift recovery
+When the operator says "this used to work" or "you keep dropping X": restore from the known-good SHA (`git checkout <sha> -- <path>`), lead with the audit, frame as "Nth attempt — here is what failed before, here is the anchor." Never fresh-author what git already shipped. Check the known-good anchors registry first.
+
+## 7. Auto-open + verify
+`open <path>` is the last step whenever operator review is needed (deck, books, evidence dir). Verify observable outputs before a CLOSEOUT claims "done"; dispatch or keystroke alone is not proof.
+
+## 8. Standard prompt skeleton (reaffirmed)
+Every prompt carries: PRE-REQUISITE CHECK (if gated) · READ FIRST · MISSION · DELIVERABLES · OPEN OPERATOR QUESTIONS (recommend defaults; do not decide) · DO NOT · GOTCHAS · GOLDEN BRANCH + PR · CLOSEOUT_RECEIPT · and a mandated DISCOVERY REPORT before the agent acts. Match heft to task: terse for quick checks, hostile-stakes framing ("Nth attempt; here's what failed") for repeated-drift recovery, full multi-section for spec / cascade work.
+
+## Revert
+This section is additive and self-contained. To remove: `git revert` the PR that introduced it, or delete everything from the `---` divider down. The 9-line bootstrap above is never affected.
