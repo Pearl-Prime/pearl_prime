@@ -1,0 +1,174 @@
+=== HARDWARE @ 2026-06-11T01:07:09Z ===
+--- nvidia-smi (full) ---
+name, memory.total [MiB], memory.free [MiB], memory.used [MiB], driver_version, utilization.gpu [%], utilization.memory [%], temperature.gpu, power.draw [W], clocks.current.graphics [MHz]
+NVIDIA GeForce RTX 5070 Ti, 16303 MiB, 4649 MiB, 11191 MiB, 580.126.09, 0 %, 0 %, 37, 17.38 W, 180 MHz
+--- nvidia-smi -L ---
+GPU 0: NVIDIA GeForce RTX 5070 Ti (UUID: GPU-98468469-ac3c-3ce0-33c6-1b8e2bea784e)
+--- nvidia-smi nvlink ---
+--- nvidia-smi compute ---
+pid, process_name, used_gpu_memory [MiB]
+3567277, ./venv/bin/python, 11166 MiB
+--- CUDA version (/usr/local/cuda) ---
+--- lscpu ---
+Architecture:                            x86_64
+CPU op-mode(s):                          32-bit, 64-bit
+Address sizes:                           48 bits physical, 48 bits virtual
+Byte Order:                              Little Endian
+CPU(s):                                  16
+On-line CPU(s) list:                     0-15
+Vendor ID:                               AuthenticAMD
+Model name:                              AMD Ryzen 7 7700 8-Core Processor
+CPU family:                              25
+Model:                                   97
+Thread(s) per core:                      2
+Core(s) per socket:                      8
+Socket(s):                               1
+Stepping:                                2
+Frequency boost:                         enabled
+CPU(s) scaling MHz:                      64%
+CPU max MHz:                             5392.8721
+CPU min MHz:                             422.3340
+BogoMIPS:                                7585.65
+Flags:                                   fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good amd_lbr_v2 nopl xtopology nonstop_tsc cpuid extd_apicid aperfmperf rapl pni pclmulqdq monitor ssse3 fma cx16 sse4_1 sse4_2 movbe popcnt aes xsave avx f16c rdrand lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt tce topoext perfctr_core perfctr_nb bpext perfctr_llc mwaitx cpuid_fault cpb cat_l3 cdp_l3 hw_pstate ssbd mba perfmon_v2 ibrs ibpb stibp ibrs_enhanced vmmcall fsgsbase bmi1 avx2 smep bmi2 erms invpcid cqm rdt_a avx512f avx512dq rdseed adx smap avx512ifma clflushopt clwb avx512cd sha_ni avx512bw avx512vl xsaveopt xsavec xgetbv1 xsaves cqm_llc cqm_occup_llc cqm_mbm_total cqm_mbm_local user_shstk avx512_bf16 clzero irperf xsaveerptr rdpru wbnoinvd cppc arat npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold avic vgif x2avic v_spec_ctrl vnmi avx512vbmi umip pku ospke avx512_vbmi2 gfni vaes vpclmulqdq avx512_vnni avx512_bitalg avx512_vpopcntdq rdpid overflow_recov succor smca fsrm flush_l1d amd_lbr_pmc_freeze
+Virtualization:                          AMD-V
+L1d cache:                               256 KiB (8 instances)
+L1i cache:                               256 KiB (8 instances)
+L2 cache:                                8 MiB (8 instances)
+L3 cache:                                32 MiB (1 instance)
+NUMA node(s):                            1
+NUMA node0 CPU(s):                       0-15
+Vulnerability Gather data sampling:      Not affected
+Vulnerability Ghostwrite:                Not affected
+Vulnerability Indirect target selection: Not affected
+Vulnerability Itlb multihit:             Not affected
+Vulnerability L1tf:                      Not affected
+--- nproc ---
+16
+--- free -h ---
+               total        used        free      shared  buff/cache   available
+Mem:            61Gi       4.4Gi       2.6Gi        42Mi        55Gi        57Gi
+Swap:          8.0Gi       4.0Gi       4.0Gi
+--- /proc/meminfo head ---
+MemTotal:       64925448 kB
+MemFree:         2753256 kB
+MemAvailable:   60270224 kB
+Buffers:          788180 kB
+Cached:         56221416 kB
+--- df -h ---
+Filesystem      Size  Used Avail Use% Mounted on
+tmpfs           6.2G  3.1M  6.2G   1% /run
+/dev/nvme0n1p2  1.8T  287G  1.5T  17% /
+tmpfs            31G  8.0K   31G   1% /dev/shm
+tmpfs           5.0M   16K  5.0M   1% /run/lock
+efivarfs        128K   26K   98K  21% /sys/firmware/efi/efivars
+/dev/nvme0n1p1  1.1G  6.2M  1.1G   1% /boot/efi
+tmpfs           6.2G  116K  6.2G   1% /run/user/1000
+--- ip addr (filtered) ---
+lo               UNKNOWN        127.0.0.1/8 ::1/128 
+wlp7s0           UP             192.168.1.106/24 2001:b011:e00d:770e:861a:3d70:8baa:434e/64 2001:b011:e00d:770e:a5b3:cdbd:6b84:b563/64 2001:b011:e00d:770e:8763:5bf3:2a2a:1701/64 fe80::9094:38ab:f88b:3712/64 
+tailscale0       UNKNOWN        100.92.68.74/32 fd7a:115c:a1e0::4135:444a/128 fe80::b313:62a7:2f2b:db9c/64 
+--- uname ---
+Linux pearlstar 6.17.0-22-generic #22~24.04.1-Ubuntu SMP PREEMPT_DYNAMIC Thu Mar 26 15:25:54 UTC 2 x86_64 x86_64 x86_64 GNU/Linux
+--- os-release ---
+PRETTY_NAME="Ubuntu 24.04.4 LTS"
+NAME="Ubuntu"
+VERSION_ID="24.04"
+VERSION="24.04.4 LTS (Noble Numbat)"
+VERSION_CODENAME=noble
+ID=ubuntu
+ID_LIKE=debian
+HOME_URL="https://www.ubuntu.com/"
+--- uptime + loadavg ---
+ 18:07:09 up 47 days, 21:08,  5 users,  load average: 0.00, 0.04, 0.13
+0.00 0.04 0.13 1/942 62927
+
+=== SOFTWARE @ 2026-06-11T01:07:09Z ===
+--- python3 ---
+/usr/bin/python3
+Python 3.12.3
+--- ollama list ---
+NAME           ID              SIZE      MODIFIED     
+gemma3:27b     a418f5838eaf    17 GB     8 weeks ago     
+qwen2.5:14b    7cdf5a0187d5    9.0 GB    2 months ago    
+--- ollama ps ---
+NAME    ID    SIZE    PROCESSOR    CONTEXT    UNTIL 
+--- pip key packages ---
+/usr/bin/pip
+--- venv pip (ComfyUI) ---
+VENV: /home/ahjan108/phoenix_server/ComfyUI/venv
+comfy-aimdo                            0.2.12
+comfy-kitchen                          0.2.8
+comfyui-embedded-docs                  0.4.3
+comfyui_frontend_package               1.42.8
+comfyui_workflow_templates             0.9.44
+comfyui-workflow-templates-core        0.3.193
+comfyui-workflow-templates-media-api   0.3.68
+comfyui-workflow-templates-media-image 0.3.117
+comfyui-workflow-templates-media-other 0.3.165
+comfyui-workflow-templates-media-video 0.3.72
+torch                                  2.11.0
+torchaudio                             2.11.0
+torchsde                               0.2.6
+torchvision                            0.26.0
+transformers                           5.5.0
+triton                                 3.6.0
+--- which comfyui? ---
+/home/ahjan108/phoenix_server/ComfyUI
+--- ollama models dir ---
+--- CosyVoice (find) ---
+/home/ahjan108/phoenix_server/CosyVoice2
+/home/ahjan108/phoenix_server/CosyVoice2/pretrained_models/CosyVoice2-0.5B
+/home/ahjan108/phoenix_server/CosyVoice2/cosyvoice
+/home/ahjan108/.cache/huggingface/hub/models--FunAudioLLM--CosyVoice2-0.5B
+--- TTS engines (find) ---
+/home/ahjan108/piper_voices
+--- services (systemd) ---
+  ollama.service                loaded active running Ollama Service
+--- process queue/broker presence ---
+--- listening ports of interest ---
+LISTEN 0      128                        0.0.0.0:8188       0.0.0.0:*    users:(("python",pid=3567277,fd=46))
+LISTEN 0      4096                             *:11434            *:*                                        
+--- ComfyUI /system_stats ---
+{"system": {"os": "linux", "ram_total": 66483658752, "ram_free": 61717241856, "comfyui_version": "0.18.1", "required_frontend_version": "1.42.8", "installed_templates_version": "0.9.44", "required_templates_version": "0.9.44", "python_version": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]", "pytorch_version": "2.11.0+cu130", "embedded_python": false, "argv": ["main.py", "--listen", "0.0.0.0", "--port", "8188"]}, "devices": [{"name": "cuda:0 NVIDIA GeForce RTX 5070 Ti : cudaMallocAsync", "type": "cuda", "index": 0, "vram_total": 16609378304, "vram_free": 4898611288, "torch_vram_total": 33554432, "torch_vram_free": 23781464}]}--- Ollama /api/tags ---
+{"models":[{"name":"gemma3:27b","model":"gemma3:27b","modified_at":"2026-04-11T21:01:40.695921085-07:00","size":17396936941,"digest":"a418f5838eaf7fe2cfe0a3046c8384b68ba43a4435542c942f9db00a5f342203","details":{"parent_model":"","format":"gguf","family":"gemma3","families":["gemma3"],"parameter_size":"27.4B","quantization_level":"Q4_K_M"}},{"name":"qwen2.5:14b","model":"qwen2.5:14b","modified_at":"2026-04-08T15:25:25.250672784-07:00","size":8988124069,"digest":"7cdf5a0187d5c58cc5d369b255592f7841d1c4696d45a8c8a9489440385b22f6","details":{"parent_model":"","format":"gguf","family":"qwen2","families":["qwen2"],"parameter_size":"14.8B","quantization_level":"Q4_K_M"}}]}--- CosyVoice /info ---
+curl: (7) Failed to connect to localhost port 9880 after 0 ms: Couldn't connect to server
+--- ComfyUI checkpoints (top-level) ---
+ROOT: /home/ahjan108/phoenix_server/ComfyUI/models
+total 144
+drwxrwxr-x 29 ahjan108 ahjan108  4096 May  9 08:07 .
+drwxrwxr-x 28 ahjan108 ahjan108  4096 May 19 01:24 ..
+drwxrwxr-x  2 ahjan108 ahjan108  4096 Apr  7 01:31 audio_encoders
+drwxrwxr-x  3 ahjan108 ahjan108  4096 May  9 07:06 .cache
+drwxrwxr-x  3 ahjan108 ahjan108  4096 May 18 23:24 checkpoints
+drwxrwxr-x  4 ahjan108 ahjan108  4096 May  8 19:25 clip
+drwxrwxr-x  2 ahjan108 ahjan108  4096 Apr  7 01:31 clip_vision
+drwxrwxr-x  2 ahjan108 ahjan108  4096 Apr  7 01:31 configs
+drwxrwxr-x  2 ahjan108 ahjan108  4096 Apr  7 01:31 controlnet
+drwxrwxr-x  3 ahjan108 ahjan108  4096 May 18 19:30 diffusers
+drwxrwxr-x  3 ahjan108 ahjan108  4096 May 20 20:37 diffusion_models
+drwxrwxr-x  2 ahjan108 ahjan108  4096 Apr  7 01:31 embeddings
+-rw-rw-r--  1 ahjan108 ahjan108  1519 May  9 07:06 .gitattributes
+drwxrwxr-x  2 ahjan108 ahjan108  4096 Apr  7 01:31 gligen
+drwxrwxr-x  2 ahjan108 ahjan108  4096 Apr  7 01:31 hypernetworks
+drwxrwxr-x  2 ahjan108 ahjan108  4096 Apr  7 01:31 latent_upscale_models
+-rw-rw-r--  1 ahjan108 ahjan108 11343 May  9 07:06 LICENSE
+drwxrwxr-x  2 ahjan108 ahjan108  4096 Apr 13 14:38 loras
+-rw-rw-r--  1 ahjan108 ahjan108   443 May  9 07:06 model_index.json
+checkpoints/:
+animagine-xl-4.0.safetensors
+animagine_xl_4_0.safetensors
+flux1-dev-fp8.safetensors
+flux1-schnell-fp8.safetensors
+put_checkpoints_here
+loras/:
+flat_colour_anime_schnell_v3.4.safetensors
+flat_colour_anime_v3.4.safetensors
+put_loras_here
+173G	/home/ahjan108/phoenix_server/ComfyUI/models
+--- HF cache ---
+561M	/home/ahjan108/.cache/huggingface
+--- marker check ---
+# Phoenix Omega — Pearl Star marker
+# Created: 2026-04-25T18:14:39Z
+# Host:    pearlstar
+# Purpose: signals to scripts/agent/assert_remote.py that this is Pearl Star
