@@ -2912,3 +2912,138 @@ This cap entry is the **authoritative decision record** for the 16 Q-PSQ-*; the 
 **Anti-drift check:** No new architecture. Single-axis gate-text relaxation on already-ratified parent cap entry; preserves all quality contracts + completion-gate semantics. Memory `feedback_validation_before_scaling` honored: parallel dispatch on a *priority-scoped* sub-set (gen_z_professionals × anxiety + overthinking), not the full Tier P2 — validation gates remain. Memory `feedback_discover_before_acting` honored: read parent SSOT §10 + §11 + ws row + cap entry before authoring amendment.
 
 **Authority:** this amendment block + SSOT [`§AMENDMENT-2026-06-11-LOCALE-PARALLEL-RELAX`](./PEARL_PRIME_ATOM_100PCT_COVERAGE_SSOT.md#amendment-2026-06-11-locale-parallel-relax) + OPD-20260611-002 + OPD-20260611-003.
+### SANGHA-KARMA-YOGA-V1-01 — Sangha Karma Yoga V1 program — 7-pillar volunteer pathway + universal-pillar profit-share + tiered spiritual access (**ACTIVE** 2026-06-11; ratified)
+
+**Status:** **ACTIVE** (ratified 2026-06-11 per operator green-light). All open Q-SKY-* in `docs/specs/SANGHA_KARMA_YOGA_PROGRAM_SPEC.md` §13 RESOLVED to recommended defaults via batch ratification (OPD-20260611-056), **EXCEPT `Q-SKY-LEGAL-01` = DEFERRED** (OPD-20260611-057 — profit-share legal vehicle requires legal counsel; the operator-locked 1%-per-active-contributor mechanism stands as placeholder; no allocation paid until counsel confirms the distribution vehicle). Six were already operator-resolved 2026-06-09 (MASTER-NAMING-01, MASTER-ROTATION-01, UNSAY-NAMING-01, PEARL-EMPOWERMENT-DEFINITION-01, PROFIT-PEARL-NEWS-01, 48-SOCIAL-BINDING-01). V1.5 level-progression layer ratified in parallel (see AMENDMENT-2026-06-06-LEVELS below).
+
+**Context:** Operator directive — structure a **Sangha Karma Yoga** volunteer pathway where sangha members serve the mission across **7 work pillars** (Pearl Prime / 48 Social / Pearl News / USLF / UNSAY / Sangha brand admins / Sangha onboarding), anchored by **weekly Sunday Zoom coordination** + **quarterly master teachings** + **Pearl empowerments from Ahjan** + **annual in-person USLF retreat**. This program is **not new content** — operator has been teaching karma yoga and sangha unity for 4+ years (`./teachers/ahjan/intake/Dharma Talks/2018-2022`; 23 archived sangha satsangs); this cap **formalizes program structure** around that existing operator teaching. Mission backbone from operator's own voice (`old_chat_specs/USLF_3_LA.txt`): *"Uplift the world with the alliance of these great masters through the offering of content."*
+
+**Cross-reference:** **`MUSIC-MODE-BRAND-INTEGRATION-V1-01`** is the precedent for first-class archetype + brands 38+; this cap follows the same pattern with **Sangha brands at id 200+** (clear of Path X 37 + music 38+). Parent program **`PRJ-WORLDWIDE-CATALOG-GO-LIVE-V1-PROGRAM-01`** is the umbrella; Sangha brand lanes (P6) land inside its catalog go-live. **`PEARL-PRIME-STOREFRONT-V1-01` AMENDMENT-2026-06-04** — Sangha brands inherit storefront destination + locale parity. **V1.5 layer** at `SANGHA-KARMA-YOGA-V1-01-AMENDMENT-2026-06-06-LEVELS` specifies the per-quarter level progression.
+
+**Decision (locked sections — ratification package):**
+
+1. **Subsystem:** **`sangha_program`** (NEW — row added to `artifacts/coordination/SUBSYSTEM_AUTHORITY_MAP.tsv`). Authority doc = `docs/specs/SANGHA_KARMA_YOGA_PROGRAM_SPEC.md`. Owner = Pearl_Architect (spec) + Operator (program lead).
+
+2. **7 work pillars:** P1 Pearl Prime / P2 48 Social / P3 Pearl News / P4 USLF / P5 UNSAY / P6 Sangha brand admins / P7 Sangha new-student onboarding. Each shadows specific Pearl_* agents. No 8th pillar in V1 (Q-SKY-PILLAR-ADD-01 = defer).
+
+3. **Role ladder:** Karma Yogi → Dharma Steward (pillar lead) → Sangha Author (brand admin) → Pearl Empowered (lineage milestone, NOT rank promotion) → Cross-pillar Coordinator (optional rotating).
+
+4. **Cadence — "extremely powerful, not extremely frequent":** 1 weekly Sunday Zoom (60 min coordination, NOT teaching) + 1 quarterly master teaching + 1 quarterly Pearl empowerment + 1 annual in-person USLF retreat.
+
+5. **Profit-share mechanism (Q-SKY-LEGAL-01 / PROFIT-PCT-01 / PROFIT-CAP-01 / PROFIT-PEARL-NEWS-01 / 48-SOCIAL-BINDING-01 / GAP-SKY-06 all resolved by operator 2026-06-09 with single mechanism):**
+   - **Pearl Prime receives 5% of all-brand income** (operator's standing economics, pre-existing).
+   - **Active Karma Yogis each receive 1% of Pearl Prime's income** per quarter active.
+   - = **0.05% of total brand income per active Karma Yogi per quarter** (effective).
+   - **Universal-pillar scope:** any work in any of the 7 pillars qualifies — Tier I is NOT pillar-restricted.
+   - **Active** = 4+ Sundays attended + ≥ 1 shipped deliverable per pillar.
+   - Layered with operator's pre-existing "10%-to-teachers" flow (LA transcript framing); both flows operate.
+   - **Pillar P3 Pearl News + P4 USLF + P5 UNSAY + P6 Sangha brand admins + P7 Sangha onboarding all qualify for Tier I** (not Tier II only).
+   - **Legal vehicle pending** under narrowed Q-SKY-LEGAL-01 (mechanism is locked; legal-counsel review confirms vehicle before any allocation paid).
+
+6. **Tier II — spiritual access (all active):** quarterly master teaching + quarterly Pearl empowerment + annual USLF retreat (active = 3 of 4 quarters in prior year) + volunteer-only archive + Sangha Author credit (P6 only).
+
+7. **Tier III — recognition (sustained service):** annual Sangha Dharma Steward titles at USLF retreat + possible 1:1 master time (Q-SKY-1V1-MASTER-01) + possible travel stipend (Q-SKY-STIPEND-01).
+
+8. **Operator-ratified Plan A master rotation (resolves Q-SKY-MASTER-ROTATION-01 + Q-SKY-MASTER-NAMING-01):**
+   - Q1 = `master_feung` (Chinese wisdom synthesis / Hua Shan / Xi'an; "Master Fan Zhou" = "Master Fun" = `master_feung` — same person, canonical slug)
+   - Q2 = `master_wu` (Taoist geomancy / Long Mai / Dragon Veins)
+   - Q3 = `junko` (New Age channeling / ascended masters / cosmic council)
+   - Q4 = `joshin_sensei` (Shingon / Dainichi Nyorai / Sokushin Jōbutsu) + Ahjan Pearl Transmission
+
+9. **Sangha brand admins (P6) DEEP DIVE in spec §8** — Sangha brands defined by composite-voice (≥3 master banks); brand ID space 200+; brand-admin tooling reuse; Path X 37 + music 38+ untouched; storefront destination via Pearl Prime storefront.
+
+10. **Phased rollout:** Phase A pilot (12-20 sangha members, 1 quarter) → Phase B full sangha + Tier I activation post-legal-counsel → Phase C formalization + USLF authority doc + V1.1 follow-up caps → Phase D steady state.
+
+11. **Q-SKY-* count: 31** in spec §13. Six resolved 2026-06-09; 25 awaiting operator.
+
+12. **Anti-drift:** No invented spiritual benefits; no marketing-funnel voice on brochure; no specific dollar amounts (mechanism + framework only); no 8th pillar without operator approval; no paid LLM APIs; no code changes (program-design only); no Path X 37 touch; Tier III gravity humility ("the gravity speaks for itself").
+
+**Action items — Workstreams (this PR appends 1 project row + 1 subsystem row; V1.5 AMENDMENT appends 3 more ws rows):**
+
+- **Project row:** `PRJ-SANGHA-KARMA-YOGA-V1` added to `ACTIVE_PROJECTS.tsv` (status=proposed).
+- **Subsystem row:** `sangha_program` added to `SUBSYSTEM_AUTHORITY_MAP.tsv` (status=proposed).
+- **Phase A activation gated on:** operator answers to remaining 25 Q-SKY-* (especially LEGAL-01 legal-counsel review + PILLAR-LEAD-INITIAL-01 + DECK-DIRECT-ADDRESS-01 slide 18) + V1.5 plan selection per Q-OP-PROGRESSION-SHIP-01.
+
+**Budget (Tier 1, operator-present):** This session = design + ratification only. Phase A operations attended by operator throughout. **No paid LLM APIs.**
+
+**Anti-drift check:** Does not invent program — formalizes operator's existing 2018-2022 sangha karma yoga teaching. Does not touch Path X 37 or music 38+ (Sangha brands at 200+ ID space). Does not duplicate `MUSIC-MODE-BRAND-INTEGRATION-V1-01` — both are first-class archetypes on different axes. Does not author code or touch existing subsystem code/config.
+
+**Handoffs:**
+- **Operator** — answers remaining 25 Q-SKY-* (especially legal-counsel review for vehicle + 7 initial Dharma Stewards nomination + slide 18 direct-address copy + Q-OP-PROGRESSION-SHIP-01 plan selection)
+- **Pearl_PM** — coordination cleanup picks up this PR; opens Phase A first-cohort recruitment ws + Sunday infrastructure ws after operator answers land
+- **Pearl_Architect** — follow-up caps queued: USLF formal authority doc; Sangha brand wizard mode (V1.1); composite voice rules (V1.1); Sangha cover treatment (V1.1); Sangha freebie deltas (V1.1)
+- **Pearl_Marketing** — recruitment copy + funnel integration gated on operator Plan selection
+
+**Pointers:**
+- `docs/specs/SANGHA_KARMA_YOGA_PROGRAM_SPEC.md` (V1 program spec, 18 sections)
+- `docs/specs/SANGHA_KARMA_YOGA_LEVEL_PROGRESSION_SPEC.md` (V1.5 level-progression spec)
+- `artifacts/programs/sangha_karma_yoga_20260606/SANGHA_KARMA_YOGA_OVERVIEW.md` (V1 prose companion)
+- `artifacts/programs/sangha_karma_yoga_20260606/SANGHA_KARMA_YOGA_LEVELS_OVERVIEW.md` (V1.5 prose companion)
+- `artifacts/programs/sangha_karma_yoga_20260606/SANGHA_KARMA_YOGA_INVITATION.pptx` (V1 brochure deck, 20 slides)
+- `artifacts/programs/sangha_karma_yoga_20260606/SANGHA_KARMA_YOGA_LEVELS_APPENDIX.pptx` (V1.5 deck appendix, 16 slides)
+- `artifacts/coordination/ACTIVE_PROJECTS.tsv` (`PRJ-SANGHA-KARMA-YOGA-V1`)
+- `artifacts/coordination/SUBSYSTEM_AUTHORITY_MAP.tsv` (`sangha_program`)
+- `old_chat_specs/USLF_3_LA.txt` (operator's canonical USLF voice)
+- `./teachers/ahjan/intake/Dharma Talks/` (23 operator karma-yoga + sangha satsangs, 2018-2022)
+
+### SANGHA-KARMA-YOGA-V1-01-AMENDMENT-2026-06-06-LEVELS — Year-of-becoming level-progression layer (4 plans + Pearl News feedback loop; **proposed** 2026-06-09)
+
+**Status:** **proposed** — operator review pending on Q-OP-* in `docs/specs/SANGHA_KARMA_YOGA_LEVEL_PROGRESSION_SPEC.md` §11. Operator master rotation (Plan A Q1-Q4) **ratified 2026-06-09** — see Q-OP-MASTER-ALLIANCE-CONFIRM-01.
+
+**Context:** Operator directive (verbatim): *"It's not just a mission to save the world, it's a mission of self-development, self-mastery. This is the coolest thing in the world to be a part of. Even the first level after the first three months, you'll get the level that wipes away their karma — that's tremendous."* V1 specifies program body; V1.5 specifies the **year-of-becoming arc** inside the body — 4 quarters × 4 empowerments × 4 attainment levels, culminating at Vairocana World Bodhisattva (operator's working name) via Joshin's Shingon teaching + Ahjan Pearl Transmission at Q4. Plus the **Pearl News feedback loop** — volunteer SEES alignment manifest in world's good news via monthly Volunteer Digest.
+
+**Cross-reference:** Parent cap **`SANGHA-KARMA-YOGA-V1-01`** (program body); parent program **`PRJ-SANGHA-KARMA-YOGA-V1`** (no new project row — V1.5 lands under same project); subsystem **`sangha_program`** (existing under V1); subsystem **`pearl_news`** (existing; volunteer-digest is additive — new sibling pipeline `pearl_news/pipeline/volunteer_digest.py` to be authored by `ws_pearl_news_volunteer_digest_pipeline_20260606`).
+
+**Decision (locked sections — ratification package):**
+
+1. **1-year arc skeleton:** 4 quarters × 4 empowerments × 4 attainment levels. Per-quarter shape: **Penance** (90 days impeccable karma yoga in pillar) → **Empowerment** (world master gives level teaching) → **Alignment** (volunteer becomes vessel for level's world-domain) → **Naming** (attainment-state name conferred). 4 levels in 1 year locked (Q-OP-LADDER-LENGTH-01 default).
+
+2. **Plan A — Operator's Vairocana World Bodhisattva ladder (recommended default):**
+   - **Q1** master_feung → Karma Clearing via Authentic Presence → **Cleansed-Karma Sangha Adept** → Pearl News domain: personal redemption stories
+   - **Q2** master_wu → Ecological-Harmony Alignment → **Dragon-Vein Aligned Sangha Adept** → Pearl News domain: ecological wins
+   - **Q3** junko → Gen-Z / Alpha Uplift via Cosmic-Council Transmission → **Cosmic-Council Channel-Holder** → Pearl News domain: youth flourishing
+   - **Q4** joshin_sensei (Shingon Dainichi Nyorai teaching) + Ahjan Pearl Transmission → **Vairocana World Bodhisattva** → Pearl News domain: universal good
+   - Per-level attainment-state names have 3 candidates each (operator picks via Q-OP-LEVEL-NAMES-PLAN-A).
+   - Joshin's Q4 transmission is canonical (Shingon's *Sokushin Jōbutsu* attainment doctrine; Dainichi Nyorai is central deity of Joshin's lineage's mandalas).
+
+3. **Plan B — Mahāyāna Six Pāramitā compressed (alternative):** Q1 Dāna+Śīla / Q2 Kṣānti+Vīrya / Q3 Dhyāna / Q4 Prajñā → Pāramitā-Bodhisattva. Uncontroversial Mahāyāna canon; minimal lineage-deference gate.
+
+4. **Plan C — Vajrayāna / Mikkyō 4-Initiation INSPIRED (alternative):** Q1 Vase / Q2 Secret / Q3 Wisdom-Knowledge / Q4 Word → Vajrasattva-Aligned World Bodhisattva. **"Inspired by" framing load-bearing** — not actual abhiṣeka; Joshin Sensei consent + Pearl_Editor lineage-holder review **mandatory** before ship per Q-OP-CROSS-TRADITION-DEFERENCE-01.
+
+5. **Plan D — Tao-Buddha-Hindu-Pearl Polestar (alternative — maximum alliance fit):** Q1 Taoist (Pure-Qi) / Q2 Buddhist (Karuṇā) / Q3 Hindu (Dharma Body — Sai Maa via Acharya Dayananda Das candidate) / Q4 Ahjan Pearl Transmission synthesis → Vairocana World Bodhisattva (converges with Plan A's Q4 name).
+
+6. **Comparison matrix in spec §7** — side-by-side; Pearl_Architect's recommendations summarized.
+
+7. **Pearl News feedback loop (spec §8):**
+   - **Monthly Volunteer Digest** — per-volunteer, per-level domain-filtered top-N world-good-news stories
+   - **Implementation:** new pipeline `pearl_news/pipeline/volunteer_digest.py` (sibling of `run_article_pipeline.py`); new config `pearl_news/config/level_domain_filters.yaml`; new state file `artifacts/programs/sangha_karma_yoga/volunteer_roster.yaml`
+   - **Closing tagline (Q-OP-DIGEST-LANGUAGE-01 default humble framing):** *"These are the world's gifts this month — and your year of service is one of the conditions that lets them flourish."*
+   - **Anti-spam:** monthly cadence max; no marketing copy; per-volunteer opt-in default-on-active-status
+
+8. **Empowerment ceremony shape (spec §9):** 90-min special Sunday — pre-ceremony silence (10) + teaching (30-45) + empowerment/alignment moment (15-20) + naming (10) + closing dedication (5-10). Q4 = Joshin teaches Shingon first; Ahjan Pearl Transmission seals (Q-OP-Q4-DUAL-MASTER-01 default).
+
+9. **3 new ws rows** appended to `ACTIVE_WORKSTREAMS.tsv`:
+   - `ws_pearl_news_volunteer_digest_pipeline_20260606` (Pearl_News + Pearl_Dev) — proposed
+   - `ws_pearl_editor_world_master_lineage_doc_20260606` (Pearl_Editor) — proposed
+   - `ws_pearl_marketing_levels_recruitment_copy_20260606` (Pearl_Marketing) — proposed; gated on Q-OP-PROGRESSION-SHIP-01
+
+10. **Q-OP-* count: 17** in spec §11. Master rotation (Q-OP-MASTER-ALLIANCE-CONFIRM-01) ratified 2026-06-09; 16 remain.
+
+11. **Anti-drift:** No fabricated lineage details — `[verify with Pearl_Editor + lineage holder]` flagged where uncertain (3 instances in spec). Reverence first, always. Plan C "inspired by" caveat load-bearing. No promise of supernatural attainments in declarative language — alignment + intention + vessel-becoming framing. Operator's voice = reference.
+
+**Anti-drift check:** Does not edit parent `SANGHA-KARMA-YOGA-V1-01` cap entry. Does not touch V1 spec body — only V1 §18 cross-link added. Does not duplicate Pearl News spec — supplements with volunteer-digest sibling pipeline. No Path X / music-mode / Sangha-brand-ID touches. No paid LLM APIs (volunteer-digest = Tier 2 local Gemma/Qwen acceptable).
+
+**Handoffs:**
+- **Operator** — answers Q-OP-* (especially PROGRESSION-SHIP-01 + LEVEL-NAMES-PLAN-A + LEVEL-4-NAME-PRIMARY-01 + Q4-DUAL-MASTER-01 + CROSS-TRADITION-DEFERENCE-01 + DECK-DIRECT-ADDRESS-01 for V1.5 appendix slide A16)
+- **Pearl_News + Pearl_Dev** — ws_pearl_news_volunteer_digest_pipeline_20260606 (gated on operator Plan selection → drives config)
+- **Pearl_Editor** — ws_pearl_editor_world_master_lineage_doc_20260606 (gated on operator Plan selection + Q-OP-CROSS-TRADITION-DEFERENCE-01; coordinates lineage-holder review per tradition in chosen plan)
+- **Pearl_Marketing** — ws_pearl_marketing_levels_recruitment_copy_20260606 (gated on operator Plan selection)
+
+**Pointers:**
+- `docs/specs/SANGHA_KARMA_YOGA_LEVEL_PROGRESSION_SPEC.md` (V1.5 spec, 17 sections + 17 Q-OP)
+- `artifacts/programs/sangha_karma_yoga_20260606/SANGHA_KARMA_YOGA_LEVELS_OVERVIEW.md` (V1.5 prose companion)
+- `artifacts/programs/sangha_karma_yoga_20260606/SANGHA_KARMA_YOGA_LEVELS_APPENDIX.pptx` (V1.5 deck appendix, 16 slides)
+- `artifacts/coordination/ACTIVE_WORKSTREAMS.tsv` (3 new ws rows)
+- Parent cap `SANGHA-KARMA-YOGA-V1-01` (this state doc)
+- `SOURCE_OF_TRUTH/teacher_banks/{joshin,master_feung,master_wu,junko}/doctrine/doctrine.yaml` (per-master canonical tradition)
+- `pearl_news/pipeline/run_article_pipeline.py` (volunteer-digest sibling-pattern reference)
