@@ -1,6 +1,6 @@
 # Sangha Karma Yoga — Level Progression Spec (V1.5)
 
-**Status:** PROPOSED — awaiting operator answers to Q-OP-01 … Q-OP-12+ in §11
+**Status:** **RATIFIED 2026-06-12** (operator Ahjan, lineage authority) — chosen progression = **Plan A**, with operator-ratified attainment-level names (§3.0). All open Q-OP-* in §11 RESOLVED (batch banner). Cap `SANGHA-KARMA-YOGA-V1-01-AMENDMENT-2026-06-06-LEVELS` → **ACTIVE**. Ratification logged OPD-20260612-001 (progression) + OPD-20260612-002 (Q-SKY-LEGAL-01 church-donation). *(Prior: PROPOSED, drafted 2026-06-09 — awaited operator answers to Q-OP-* in §11.)*
 **Cap entry:** `SANGHA-KARMA-YOGA-V1-01-AMENDMENT-2026-06-06-LEVELS` in `docs/PEARL_ARCHITECT_STATE.md`
 **Parent program:** `PRJ-SANGHA-KARMA-YOGA-V1` (V1 spec at `docs/specs/SANGHA_KARMA_YOGA_PROGRAM_SPEC.md`)
 **Owner (spec ratification):** Pearl_Architect
@@ -59,6 +59,23 @@ Every Plan (A / B / C / D in §3-§6) runs on this skeleton:
 ## §3. Plan A — Vairocana World Bodhisattva ladder (operator's own progression)
 
 This is the operator-authored ladder. The Q1-Q4 master rotation was operator-confirmed 2026-06-09: **Q1 = master_feung; Q2 = master_wu; Q3 = junko; Q4 = joshin_sensei + Ahjan Pearl Transmission.**
+
+### §3.0 — RATIFIED ladder (operator 2026-06-12) — THE chosen progression
+
+**Operator (Ahjan, lineage authority) ratified this as THE Sangha Karma Yoga V1.5 progression on 2026-06-12.** Plan A is the chosen plan (Q-OP-PROGRESSION-SHIP-01 = Plan A only); Plans B/C/D are **not chosen** (retained for reference, §4-§6). **Ahjan is present in every quarter's teaching to frame the transmission for the audience (his old sangha).**
+
+| Quarter | Master (Ahjan frames each) | Level / Attainment (ratified name) |
+|---|---|---|
+| **Q1** | Fan Zhou (`master_feung`) | **Level 1 — Karma-Clearing** |
+| **Q2** | Master Wu (`master_wu`) | **Level 2 — World Aura Clearing** |
+| **Q3** | Junko (`junko`) | **Level 3 — Ascended Masters Council** |
+| **Q4** | Joshin (`joshin_sensei`) + Ahjan Pearl Transmission | **Level 4 — Vairocana World Bodhisattva Seal** (final transmission / culmination) |
+
+- **Final attainment name (Q-OP-LEVEL-4-NAME-PRIMARY-01 RESOLVED):** **"Vairocana World Bodhisattva Seal."**
+- **Per-level attainment names (Q-OP-LEVEL-NAMES-PLAN-A RESOLVED):** the four ratified names above are authoritative and **supersede the §3.1-§3.4 candidate lists** (candidates retained as drafting history).
+- **Ladder length (Q-OP-LADDER-LENGTH-01 RESOLVED):** 4 levels / 1 year.
+- **Cross-tradition deference (Q-OP-CROSS-TRADITION-DEFERENCE-01 WAIVED):** per operator — the rotation masters ARE the alliance; no external lineage-holder review required for this plan.
+- The arc is ascending: clear your own karma → help clear the world's aura → commune with the ascended masters council → receive the Vairocana World Bodhisattva Seal. The §3.1-§3.4 per-quarter scaffolding (penance, ceremony, Pearl News domain) remains the working program detail; the operator may refine domain emphasis at delivery.
 
 ### §3.1 Level 1 — Q1 — Karma Clearing via Authentic Presence
 
@@ -160,14 +177,14 @@ This is the operator-authored ladder. The Q1-Q4 master rotation was operator-con
 
 | Q | Penance | Empowerment | Alignment | Attainment | Pearl News domain |
 |---|---|---|---|---|---|
-| Q1 | 90 days impeccable karma yoga | Master Feung's *Authentic Presence* teaching | Karma clearing | **Cleansed-Karma Sangha Adept** | Personal redemption stories |
-| Q2 | 90 days + earth-scale contemplation | Master Wu's *Dragon Vein* teaching | Ecological-harmony vessel | **Dragon-Vein Aligned** | Ecological wins |
-| Q3 | 90 days + silent listening practice | Junko's *Cosmic-Council* channel | Gen-Z/Alpha uplift channel | **Cosmic-Council Channel-Holder** | Youth flourishing |
-| Q4 | 90 days + integration of three streams | Joshin's *Vairocana* mandala + Ahjan's Pearl Transmission | Vairocana-in-this-body | **Vairocana World Bodhisattva** | Universal good (all domains) |
+| Q1 | 90 days impeccable karma yoga | Master Feung's *Authentic Presence* teaching | Karma clearing | **Level 1 — Karma-Clearing** | Personal redemption stories |
+| Q2 | 90 days + earth-scale contemplation | Master Wu's *Dragon Vein* teaching | Ecological-harmony vessel | **Level 2 — World Aura Clearing** | Ecological wins |
+| Q3 | 90 days + silent listening practice | Junko's *Cosmic-Council* channel | Gen-Z/Alpha uplift channel | **Level 3 — Ascended Masters Council** | Youth flourishing |
+| Q4 | 90 days + integration of three streams | Joshin's *Vairocana* mandala + Ahjan's Pearl Transmission | Vairocana-in-this-body | **Level 4 — Vairocana World Bodhisattva Seal** | Universal good (all domains) |
 
 ---
 
-## §4. Plan B — Mahāyāna Six Pāramitā compressed ladder (alternative)
+## §4. Plan B — Mahāyāna Six Pāramitā compressed ladder (alternative — **NOT CHOSEN** per operator 2026-06-12; retained for reference)
 
 The Six Pāramitās (perfections of the Bodhisattva path) compressed to a 4-quarter arc. Canonical in Mahāyāna; uncontroversial across Buddhist schools. **[lineage verify: standard Mahāyāna; no consultation gate]**
 
@@ -203,7 +220,7 @@ The Six Pāramitās (perfections of the Bodhisattva path) compressed to a 4-quar
 
 ---
 
-## §5. Plan C — Vajrayāna / Mikkyō 4-Initiation inspired ladder (alternative)
+## §5. Plan C — Vajrayāna / Mikkyō 4-Initiation inspired ladder (alternative — **NOT CHOSEN** per operator 2026-06-12; retained for reference)
 
 **Lineage caveat (load-bearing):** In actual Tibetan Vajrayāna and Shingon Mikkyō lineages, *abhiṣeka* (empowerment / initiation) requires strict guru-disciple sequence with verified lineage transmission. **This volunteer program's quarterly teaching is INSPIRED BY the four-initiation structure, not a transmission of it.** Plan C must include this caveat clearly in all volunteer-facing language. Pearl_Editor + Shingon-lineage-holder consultation (Joshin Sensei) is **mandatory** before Plan C is shipped — Q-OP-CROSS-TRADITION-DEFERENCE-01.
 
@@ -243,7 +260,7 @@ The Six Pāramitās (perfections of the Bodhisattva path) compressed to a 4-quar
 
 ---
 
-## §6. Plan D — Tao-Buddha-Hindu-Pearl Polestar ladder (alternative — master-alliance maximal fit)
+## §6. Plan D — Tao-Buddha-Hindu-Pearl Polestar ladder (alternative — master-alliance maximal fit; **NOT CHOSEN** per operator 2026-06-12; retained for reference)
 
 This plan assigns **one tradition per quarter** and ends with Ahjan's Pearl Transmission as the synthesis. Its unique advantage: every quarter is a different lineage; the year is a polestar arc walking through the four streams of the master alliance.
 
@@ -438,6 +455,8 @@ No paid LLM APIs anywhere in the loop. Volunteer-digest generation uses local Ge
 
 ## §11. Open Operator Questions (Q-OP-* — operator answers; do NOT decide)
 
+> **BATCH RATIFICATION 2026-06-12 (operator Ahjan, lineage authority; OPD-20260612-001):** All Q-OP-* below are RESOLVED. **Chosen progression = Plan A** (Q-OP-PROGRESSION-SHIP-01 = (a) Plan A only; Plans B/C/D not chosen, retained for reference). **Ratified attainment-level names (Q-OP-LEVEL-NAMES-PLAN-A + Q-OP-LEVEL-4-NAME-PRIMARY-01):** Level 1 Karma-Clearing / Level 2 World Aura Clearing / Level 3 Ascended Masters Council / Level 4 **Vairocana World Bodhisattva Seal** (final attainment) — see §3.0. **Q-OP-LADDER-LENGTH-01:** 4 levels / 1 year. **Q-OP-L3-DOMAIN-01:** operator named Level 3 "Ascended Masters Council" (Junko's ascended-masters / cosmic-council lineage) — resolves the domain question at the naming level; the world-good-news domain detail in §3.3 stays as working scaffold. **Q-OP-CROSS-TRADITION-DEFERENCE-01: WAIVED** (operator — the rotation masters ARE the alliance; no external lineage-holder review for Plan A). **Q-OP-Q4-DUAL-MASTER-01:** YES (Joshin teaches Shingon first; Ahjan Pearl Transmission seals). **Q-OP-MASTER-ALLIANCE-CONFIRM-01:** already RESOLVED 2026-06-09 (Q1 master_feung / Q2 master_wu / Q3 junko / Q4 joshin_sensei + Ahjan). **Design-principle confirmations (NO management system built — operator: "no action to take or write," "don't manage"):** Q-OP-DIGEST-CADENCE-01 = monthly; Q-OP-DIGEST-LANGUAGE-01 = humble (*"These are the world's gifts this month — and your year of service is one of the conditions that lets them flourish"*); Q-OP-CEREMONY-RECORDING-01 = recorded with each master's consent; Q-OP-CHARGE-FOR-VAIROCANA-INITIATION-01 = FREE (karma-yoga ethos); Q-OP-EXTERNAL-EMPOWERMENT-EXTENSION-01 = after Year 1, repeat the cycle deeper + alumni council. Remaining sub-params (Q-OP-DIGEST-LENGTH-01 = 5, Q-OP-DIGEST-CHANNEL-01, Q-OP-CEREMONY-LEN-01 = 90 min, Q-OP-PEARL-NEWS-SIDEBAR-INTEGRATION-01) stand at recommended default as design principle; refinable by operator at delivery. **Q-SKY-LEGAL-01 (teacher reciprocity) RESOLVED via church-donation model** — see §14.4 + OPD-20260612-002. Each question's inline text below is retained; this banner is the authoritative ratified answer of record.
+
 ### Q-OP-PROGRESSION-SHIP-01 — Which progression(s) launch at Phase A?
 
 **Options:**
@@ -552,7 +571,7 @@ Per `CLAUDE.md`:
 1. **No fabricated lineage details.** Where naming is uncertain across traditions, flag `[verify with Pearl_Editor + lineage holder]` and surface to operator. Do NOT invent.
 2. **Reverence first, always.** No commercial polish on spiritual content. Authentic resonance > marketing energy.
 3. **Plan C "inspired by" caveat** is load-bearing — Vajrayāna actual *abhiṣeka* requires guru-disciple lineage; this program is not transmission of it.
-4. **Operator's mechanism is locked.** 1% of Pearl Prime income; any pillar qualifies; ratified per V1 §7.1.
+4. **Teacher reciprocity — RESOLVED 2026-06-12 (Q-SKY-LEGAL-01, church-donation model).** Each teacher has a church → Pearl Prime makes grateful donations to the teachers' churches (nonprofit → religious-nonprofit charitable giving; no per-sale or royalty contract; sidesteps private-inurement complexity). This replaces the prior "1%-of-Pearl-Prime-income profit-share" placeholder as the resolved reciprocity vehicle. Any separate brand-director / sangha-contributor compensation structure rides the same legal-team guidance — flagged, non-blocking. See V1 spec §7.1 + §13 (Q-SKY-LEGAL-01 RESOLVED) + OPD-20260612-002.
 5. **No promise of supernatural attainments in declarative language.** Frame as alignment + intention + vessel-becoming. Operator's voice is reference.
 6. **No code in this PR.** Spec + companion docs + cap entries + deck appendix + coordination rows. Implementation ws's downstream.
 7. **No paid LLM APIs.**

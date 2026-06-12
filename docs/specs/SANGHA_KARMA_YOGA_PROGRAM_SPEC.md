@@ -1,6 +1,6 @@
 # Sangha Karma Yoga — V1 program spec
 
-**Status:** ACTIVE — RATIFIED 2026-06-11. All open Q-SKY-* resolved to recommended defaults (§13) per operator green-light, EXCEPT **Q-SKY-LEGAL-01 = DEFERRED** (profit-share legal vehicle requires legal counsel; the operator-locked 1%-per-active-contributor mechanism stands as placeholder, no allocation paid until counsel confirms the vehicle). Ratification logged OPD-20260611-056 (batch) + OPD-20260611-057 (LEGAL deferred). Cap `SANGHA-KARMA-YOGA-V1-01` → ACTIVE.
+**Status:** ACTIVE — RATIFIED 2026-06-11. All open Q-SKY-* resolved to recommended defaults (§13) per operator green-light. **`Q-SKY-LEGAL-01` = RESOLVED 2026-06-12** (church-donation model — operator's legal team + accountant: each teacher has a church → Pearl Prime makes grateful donations to the teachers' churches; nonprofit → religious-nonprofit charitable giving; replaces the prior profit-share legal-vehicle placeholder; sidesteps private-inurement complexity; OPD-20260612-002). Ratification logged OPD-20260611-056 (batch) + OPD-20260611-057 (LEGAL deferred — now superseded by OPD-20260612-002). Cap `SANGHA-KARMA-YOGA-V1-01` → ACTIVE; V1.5 levels cap → ACTIVE 2026-06-12.
 **Cap entry:** `SANGHA-KARMA-YOGA-V1-01` in `docs/PEARL_ARCHITECT_STATE.md`
 **Project:** `PRJ-SANGHA-KARMA-YOGA-V1` in `artifacts/coordination/ACTIVE_PROJECTS.tsv`
 **Subsystem:** `sangha_program` (new — `artifacts/coordination/SUBSYSTEM_AUTHORITY_MAP.tsv`)
@@ -195,8 +195,8 @@ The deck (file C) frames these as gifts received before they are responsibilitie
 - **Qualifying work is universal**: a Karma Yogi serving in P4 USLF administration earns the same Tier I share as a Karma Yogi authoring atoms in P1 Pearl Prime. The pillars are dharma-equal under Tier I.
 - **Layered with operator's pre-existing "10% to teachers" flow** (operator's LA transcript framing) — both flows operate; they apply to different parties.
 - **Pillar P3 Pearl News + Pillar P4 USLF + Pillar P5 UNSAY + Pillar P6 Sangha brand admins + Pillar P7 Sangha onboarding all qualify** (resolves Q-SKY-PROFIT-PEARL-NEWS-01 by inclusion — Pearl News contributors are Tier I, not Tier II only).
-- Legal counsel confirms the actual legal vehicle (distribution structure) before any allocation is paid. The percentage mechanism is operator-locked; the legal wrapper is the pending item under a now-narrowed Q-SKY-LEGAL-01.
-- Tier I activation gated only on legal-counsel confirmation. The structural decision is closed.
+- **Q-SKY-LEGAL-01 RESOLVED 2026-06-12 (church-donation model).** The operator's legal team + accountant landed the clean charitable structure: **each teacher has a church → Pearl Prime makes grateful donations to the teachers' churches** (nonprofit → religious-nonprofit charitable giving; no per-sale or royalty contract; sidesteps the private-inurement / royalty-contract complexity). This **replaces the prior "1%-distributable-surplus / profit-share" legal-vehicle placeholder** as the resolved reciprocity vehicle; the 1%-per-active-contributor description above is retained as drafting history.
+- **Brand-director / sangha-contributor compensation:** if a separate compensation structure is needed for sangha contributors (distinct from the teacher-reciprocity resolved above), it rides the **same legal-team guidance** — flagged, **non-blocking**. Tier I activation is no longer gated on an unresolved legal vehicle; the one blocker needing counsel is resolved (OPD-20260612-002).
 
 ### §7.2 Tier II — Spiritual access (all active Karma Yogis across all 7 pillars)
 
@@ -386,12 +386,11 @@ This program's launch + first-year operation is **out-of-envelope by default** �
 
 Recommended defaults are listed inline; operator confirms or overrides.
 
-### Q-SKY-LEGAL-01 — Profit-share LEGAL VEHICLE (narrowed by operator 2026-06-09; **DEFERRED 2026-06-11** — OPD-20260611-057)
-**Status: DEFERRED** — legal counsel required for the distribution vehicle. The operator-locked mechanism (below) STANDS as placeholder; no allocation is paid until counsel confirms the vehicle. This is the ONE exception to the 2026-06-11 batch-default ratification (OPD-20260611-056).
-**Operator-ratified mechanism (resolved):** 1% of Pearl Prime income per active Karma Yogi per quarter (Pearl Prime receives 5% of all-brand income; karma yogis get 1% of that). Any pillar qualifies. See §7.1.
-**Remaining question:** What is the legal vehicle (LLC profit-distribution, member-association allocation, nonprofit grant pool, contractor comp arrangement, hybrid)?
-**Recommended default:** Defer to legal counsel before any allocation is paid. Mechanism is locked; vehicle is the only remaining pending item.
-**Blocker?** Tier I activation only. Spec ratification proceeds.
+### Q-SKY-LEGAL-01 — Profit-share / teacher-reciprocity LEGAL VEHICLE (**RESOLVED 2026-06-12** — church-donation model; OPD-20260612-002; supersedes DEFERRED OPD-20260611-057)
+**Status: RESOLVED** — the operator's legal team + accountant landed the clean charitable structure: **each teacher has a church → Pearl Prime makes grateful donations to the teachers' churches** (a nonprofit giving to other religious nonprofits = textbook charitable activity). **No per-sale contract, no royalty contract — just grateful donation.** This sidesteps the entire private-inurement / royalty-contract complexity that made the legal vehicle the one blocker needing counsel.
+**What it replaces:** the prior placeholder "1%-distributable-surplus / profit-share" legal vehicle. The locked percentage mechanism in §7.1 is retained as drafting history; the resolved reciprocity vehicle is the church-donation model.
+**Brand-director / contributor compensation:** if a separate compensation structure is needed for sangha contributors, it rides the same legal-team guidance — **flagged, non-blocking.**
+**Blocker?** None remaining. The one true blocker is resolved; the spiritual program can launch.
 
 ### Q-SKY-MASTER-NAMING-01 — RESOLVED (operator 2026-06-09)
 Canonical = `master_feung`. Public spoken name = "Master Fan Zhou" (operator's preferred). All three names ("Master Fan Zhou" prompt-instruction / "Master Fun" LA transcript / `master_feung` repo slug) point to the same person.

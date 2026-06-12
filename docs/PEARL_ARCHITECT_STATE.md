@@ -2914,7 +2914,7 @@ This cap entry is the **authoritative decision record** for the 16 Q-PSQ-*; the 
 **Authority:** this amendment block + SSOT [`§AMENDMENT-2026-06-11-LOCALE-PARALLEL-RELAX`](./PEARL_PRIME_ATOM_100PCT_COVERAGE_SSOT.md#amendment-2026-06-11-locale-parallel-relax) + OPD-20260611-002 + OPD-20260611-003.
 ### SANGHA-KARMA-YOGA-V1-01 — Sangha Karma Yoga V1 program — 7-pillar volunteer pathway + universal-pillar profit-share + tiered spiritual access (**ACTIVE** 2026-06-11; ratified)
 
-**Status:** **ACTIVE** (ratified 2026-06-11 per operator green-light). All open Q-SKY-* in `docs/specs/SANGHA_KARMA_YOGA_PROGRAM_SPEC.md` §13 RESOLVED to recommended defaults via batch ratification (OPD-20260611-056), **EXCEPT `Q-SKY-LEGAL-01` = DEFERRED** (OPD-20260611-057 — profit-share legal vehicle requires legal counsel; the operator-locked 1%-per-active-contributor mechanism stands as placeholder; no allocation paid until counsel confirms the distribution vehicle). Six were already operator-resolved 2026-06-09 (MASTER-NAMING-01, MASTER-ROTATION-01, UNSAY-NAMING-01, PEARL-EMPOWERMENT-DEFINITION-01, PROFIT-PEARL-NEWS-01, 48-SOCIAL-BINDING-01). V1.5 level-progression layer ratified in parallel (see AMENDMENT-2026-06-06-LEVELS below).
+**Status:** **ACTIVE** (ratified 2026-06-11 per operator green-light). All open Q-SKY-* in `docs/specs/SANGHA_KARMA_YOGA_PROGRAM_SPEC.md` §13 RESOLVED to recommended defaults via batch ratification (OPD-20260611-056), and **`Q-SKY-LEGAL-01` = RESOLVED 2026-06-12** (church-donation model — operator's legal team + accountant: Pearl Prime makes grateful donations to the teachers' churches; nonprofit → religious-nonprofit charitable giving; replaces the prior profit-share legal-vehicle placeholder; OPD-20260612-002, supersedes the DEFERRED OPD-20260611-057). Six were already operator-resolved 2026-06-09 (MASTER-NAMING-01, MASTER-ROTATION-01, UNSAY-NAMING-01, PEARL-EMPOWERMENT-DEFINITION-01, PROFIT-PEARL-NEWS-01, 48-SOCIAL-BINDING-01). V1.5 level-progression layer ratified in parallel (see AMENDMENT-2026-06-06-LEVELS below).
 
 **Context:** Operator directive — structure a **Sangha Karma Yoga** volunteer pathway where sangha members serve the mission across **7 work pillars** (Pearl Prime / 48 Social / Pearl News / USLF / UNSAY / Sangha brand admins / Sangha onboarding), anchored by **weekly Sunday Zoom coordination** + **quarterly master teachings** + **Pearl empowerments from Ahjan** + **annual in-person USLF retreat**. This program is **not new content** — operator has been teaching karma yoga and sangha unity for 4+ years (`./teachers/ahjan/intake/Dharma Talks/2018-2022`; 23 archived sangha satsangs); this cap **formalizes program structure** around that existing operator teaching. Mission backbone from operator's own voice (`old_chat_specs/USLF_3_LA.txt`): *"Uplift the world with the alliance of these great masters through the offering of content."*
 
@@ -2938,7 +2938,7 @@ This cap entry is the **authoritative decision record** for the 16 Q-PSQ-*; the 
    - **Active** = 4+ Sundays attended + ≥ 1 shipped deliverable per pillar.
    - Layered with operator's pre-existing "10%-to-teachers" flow (LA transcript framing); both flows operate.
    - **Pillar P3 Pearl News + P4 USLF + P5 UNSAY + P6 Sangha brand admins + P7 Sangha onboarding all qualify for Tier I** (not Tier II only).
-   - **Legal vehicle pending** under narrowed Q-SKY-LEGAL-01 (mechanism is locked; legal-counsel review confirms vehicle before any allocation paid).
+   - **Legal vehicle RESOLVED 2026-06-12 (Q-SKY-LEGAL-01, church-donation model):** Pearl Prime makes grateful donations to the teachers' churches (nonprofit → religious-nonprofit charitable giving; no per-sale/royalty contract; replaces the profit-share placeholder; OPD-20260612-002). Any separate sangha-contributor compensation rides the same legal-team guidance — flagged, non-blocking.
 
 6. **Tier II — spiritual access (all active):** quarterly master teaching + quarterly Pearl empowerment + annual USLF retreat (active = 3 of 4 quarters in prior year) + volunteer-only archive + Sangha Author credit (P6 only).
 
@@ -2986,9 +2986,9 @@ This cap entry is the **authoritative decision record** for the 16 Q-PSQ-*; the 
 - `old_chat_specs/USLF_3_LA.txt` (operator's canonical USLF voice)
 - `./teachers/ahjan/intake/Dharma Talks/` (23 operator karma-yoga + sangha satsangs, 2018-2022)
 
-### SANGHA-KARMA-YOGA-V1-01-AMENDMENT-2026-06-06-LEVELS — Year-of-becoming level-progression layer (4 plans + Pearl News feedback loop; **proposed** 2026-06-09)
+### SANGHA-KARMA-YOGA-V1-01-AMENDMENT-2026-06-06-LEVELS — Year-of-becoming level-progression layer (4 plans + Pearl News feedback loop; **ACTIVE** 2026-06-12; ratified)
 
-**Status:** **proposed** — operator review pending on Q-OP-* in `docs/specs/SANGHA_KARMA_YOGA_LEVEL_PROGRESSION_SPEC.md` §11. Operator master rotation (Plan A Q1-Q4) **ratified 2026-06-09** — see Q-OP-MASTER-ALLIANCE-CONFIRM-01.
+**Status:** **ACTIVE** (ratified 2026-06-12 per operator Ahjan, lineage authority). All Q-OP-* in `docs/specs/SANGHA_KARMA_YOGA_LEVEL_PROGRESSION_SPEC.md` §11 RESOLVED via batch ratification (OPD-20260612-001). **Chosen progression = Plan A** (Q-OP-PROGRESSION-SHIP-01); Plans B/C/D not chosen (retained for reference). **Operator-ratified attainment-level ladder (Ahjan frames every quarter for his old sangha):** Q1 Fan Zhou (`master_feung`) → **Level 1 Karma-Clearing**; Q2 Master Wu (`master_wu`) → **Level 2 World Aura Clearing**; Q3 Junko (`junko`) → **Level 3 Ascended Masters Council**; Q4 Joshin (`joshin_sensei`) + Ahjan Pearl Transmission → **Level 4 Vairocana World Bodhisattva Seal** (final transmission). Master rotation already ratified 2026-06-09 (Q-OP-MASTER-ALLIANCE-CONFIRM-01). Cross-tradition deference WAIVED per operator. Monthly digest / recorded-with-consent / free / repeat-deeper + alumni council confirmed as design principles only (no management system built). **Q-SKY-LEGAL-01 RESOLVED 2026-06-12 via church-donation model** (Pearl Prime grateful donations to teachers' churches; replaces profit-share placeholder; OPD-20260612-002).
 
 **Context:** Operator directive (verbatim): *"It's not just a mission to save the world, it's a mission of self-development, self-mastery. This is the coolest thing in the world to be a part of. Even the first level after the first three months, you'll get the level that wipes away their karma — that's tremendous."* V1 specifies program body; V1.5 specifies the **year-of-becoming arc** inside the body — 4 quarters × 4 empowerments × 4 attainment levels, culminating at Vairocana World Bodhisattva (operator's working name) via Joshin's Shingon teaching + Ahjan Pearl Transmission at Q4. Plus the **Pearl News feedback loop** — volunteer SEES alignment manifest in world's good news via monthly Volunteer Digest.
 
@@ -2998,12 +2998,12 @@ This cap entry is the **authoritative decision record** for the 16 Q-PSQ-*; the 
 
 1. **1-year arc skeleton:** 4 quarters × 4 empowerments × 4 attainment levels. Per-quarter shape: **Penance** (90 days impeccable karma yoga in pillar) → **Empowerment** (world master gives level teaching) → **Alignment** (volunteer becomes vessel for level's world-domain) → **Naming** (attainment-state name conferred). 4 levels in 1 year locked (Q-OP-LADDER-LENGTH-01 default).
 
-2. **Plan A — Operator's Vairocana World Bodhisattva ladder (recommended default):**
-   - **Q1** master_feung → Karma Clearing via Authentic Presence → **Cleansed-Karma Sangha Adept** → Pearl News domain: personal redemption stories
-   - **Q2** master_wu → Ecological-Harmony Alignment → **Dragon-Vein Aligned Sangha Adept** → Pearl News domain: ecological wins
-   - **Q3** junko → Gen-Z / Alpha Uplift via Cosmic-Council Transmission → **Cosmic-Council Channel-Holder** → Pearl News domain: youth flourishing
-   - **Q4** joshin_sensei (Shingon Dainichi Nyorai teaching) + Ahjan Pearl Transmission → **Vairocana World Bodhisattva** → Pearl News domain: universal good
-   - Per-level attainment-state names have 3 candidates each (operator picks via Q-OP-LEVEL-NAMES-PLAN-A).
+2. **Plan A — Operator's Vairocana ladder (CHOSEN — ratified 2026-06-12; Q-OP-PROGRESSION-SHIP-01):** operator-ratified attainment-level names (Q-OP-LEVEL-NAMES-PLAN-A + Q-OP-LEVEL-4-NAME-PRIMARY-01). Ahjan frames every quarter for his old sangha.
+   - **Q1** Fan Zhou (`master_feung`) → **Level 1 Karma-Clearing** → Pearl News domain: personal redemption stories
+   - **Q2** Master Wu (`master_wu`) → **Level 2 World Aura Clearing** → Pearl News domain: ecological / world-energy wins
+   - **Q3** Junko (`junko`) → **Level 3 Ascended Masters Council** → Pearl News domain: youth flourishing / cosmic-council uplift
+   - **Q4** Joshin (`joshin_sensei`, Shingon Dainichi Nyorai teaching) + Ahjan Pearl Transmission → **Level 4 Vairocana World Bodhisattva Seal** (final transmission) → Pearl News domain: universal good
+   - Prior per-level name candidates (Cleansed-Karma Sangha Adept / Dragon-Vein Aligned / Cosmic-Council Channel-Holder / Vairocana World Bodhisattva) retained in spec §3.1-§3.4 as drafting history; operator's ratified names above are authoritative.
    - Joshin's Q4 transmission is canonical (Shingon's *Sokushin Jōbutsu* attainment doctrine; Dainichi Nyorai is central deity of Joshin's lineage's mandalas).
 
 3. **Plan B — Mahāyāna Six Pāramitā compressed (alternative):** Q1 Dāna+Śīla / Q2 Kṣānti+Vīrya / Q3 Dhyāna / Q4 Prajñā → Pāramitā-Bodhisattva. Uncontroversial Mahāyāna canon; minimal lineage-deference gate.
