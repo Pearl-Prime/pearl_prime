@@ -323,7 +323,7 @@ Per the ONE-PATH-LOCKDOWN intent (aggregated from `TEMPLATE-UNIVERSAL-01` + `SPE
 |---|---|---:|---:|---|
 | **P0** | Gates Phase A en-US gold-reference book production for 6 priority personas × 6 priority topics (per Q-Atom-PRIORITY-PERSONAS-01 + Q-Atom-PRIORITY-TOPICS-01). Class 2 overlay-routed types only (QUOTE + TEACHER_DOCTRINE + PERMISSION_GRANT). Resolves via teacher_banks authoring per `QUOTE-ATOM-ROUTING-01` + `SPEC-739-VALIDATOR-AWARENESS`. | 105 | ~125 hr | HARD — production-profile catalog runs hard-reject if P0 cell missing per `PEARL-PRIME-ONE-PATH-V1` runtime fail-fast |
 | **P1** | Completes Phase A en-US full breadth (all 14 personas × 15 topics). Persona-keyed Class 1 gaps (educators 7T, nyc_executives 7T, gen_z_student 3T, midlife_women arc-block) + overlay-routed for remaining 8 personas. | 548 | ~665 hr | HARD — gates non-priority persona/topic catalog launches |
-| **P2** | Phase B ja-JP coverage. Locale variants of Tier P0 + P1 atoms via Pearl_Localization. | 803 | ~982 hr | HARD for ja-JP catalog launch |
+| **P2** | Phase B ja-JP coverage. Locale variants of Tier P0 + P1 atoms via Pearl_Localization. **PARALLEL-DISPATCH AUTHORIZED** per `§AMENDMENT-2026-06-11-LOCALE-PARALLEL-RELAX` — ja-JP STAGE 1 (gen_z_professionals × anxiety + overthinking) may start in parallel with en-US STAGE 1+2+3; ja-JP locale subtree has zero file-path overlap with en-US root atom paths. Gate is now "PR #1485 + #1490 merged (or equivalent SSOT stable on main)" rather than "en-US Tier P0+P1 complete". | 803 | ~982 hr | HARD for ja-JP catalog launch; **PARALLEL DISPATCH** authorized for ja-JP STAGE 1 |
 | **P3** | Phase C zh-TW + zh-CN coverage. | 2,550 | ~3,180 hr | HARD for zh catalog launch |
 | **P4** | Phase D ko-KR + zh-HK + zh-SG. | 1,829 | ~2,329 hr | HARD for ko + extended-CJK catalog launch |
 | **P5** | Extended locales (es-US, es-ES, fr-FR, de-DE, it-IT, hu-HU) + variant enrichment (3 → 5 ceiling) for high-confidence configs. Gated on Q-Atom-LOCALE-SCOPE-01. | 14,968 | ~19,337 hr | SOFT — operator-tier decision per locale; per `CATALOG-800-PER-BRAND-01` top-5 includes 2 EU locales NOT currently authored |
@@ -350,7 +350,7 @@ Per `PEARL-EDITOR-UPSTREAM-01` + `EXERCISE-BANK-RESOLUTION-01` + `QUOTE-ATOM-ROU
 | QUOTE | Pearl_Editor | `teacher_banks/<teacher>/approved_atoms/QUOTE/*.yaml` (NOT persona-keyed per `QUOTE-ATOM-ROUTING-01`) | `ws_pearl_editor_atom_100pct_tier_p0_persona_keyed_20260606` |
 | TEACHER_DOCTRINE | Pearl_Editor | `teacher_banks/<teacher>/doctrine/*.txt` + `teacher_banks/<teacher>/approved_atoms/TEACHING/*.yaml` | same |
 | PERMISSION_GRANT | Pearl_Editor | `teacher_banks/<teacher>/approved_atoms/PERMISSION/*.yaml` (canonical runtime location) | same |
-| **All locale variants** | Pearl_Localization | `atoms/<persona>/<topic>/<atom_type>/locales/<locale>/*.txt` | `ws_pearl_localization_atom_100pct_tier_p2_ja_jp_20260606` (Phase B); P3/P4 ws's spawned after Phase A lands |
+| **All locale variants** | Pearl_Localization | `atoms/<persona>/<topic>/<atom_type>/locales/<locale>/*.txt` | `ws_pearl_localization_atom_100pct_tier_p2_ja_jp_20260606` (Phase B); **PARALLEL-DISPATCH AUTHORIZED** per `§AMENDMENT-2026-06-11-LOCALE-PARALLEL-RELAX` — ja-JP STAGE 1 may start in parallel with en-US STAGE 1+2+3; P3/P4 ws's spawned per Q-Atom-LOCALE-PHASE-01 (operator chose parallel-instead-of-sequential per OPD-20260611-003) |
 | **CI guard** | Pearl_Dev | `scripts/ci/check_atom_100pct_coverage.py` + `.github/workflows/atom_100pct_coverage.yml` | `ws_pearl_dev_atom_100pct_ci_guard_20260606` |
 
 ---
@@ -660,7 +660,37 @@ Per [`pearl_prime_atom_phase_a_launch_tracker.md`](../artifacts/coordination/pea
 2. `ws_pearl_writer_atom_100pct_tier_p0_engine_atoms_20260606` (Tier P0+P1; gated on #1485)
 3. `ws_pearl_dev_atom_100pct_ci_guard_20260606` (CI guard; gated on #1485)
 4. `ws_pearl_dev_practice_ingest_components_lift_20260610` (ingest; gated on #1486)
+## §AMENDMENT-2026-06-11-LOCALE-PARALLEL-RELAX
+
+**Date:** 2026-06-11
+**Authority:** Pearl_PM dispatch + OPD-20260611-002 (LOCALE-SCOPE) + OPD-20260611-003 (LOCALE-PHASE)
+**Change:** Relax Pearl_Localization ja-JP gate. Was "en-US Tier P0+P1 complete = pre-req". Now "PR #1485 + #1490 merged (or equivalent SSOT stable on main) = pre-req". Authorizes ja-JP STAGE 1 to dispatch in parallel with en-US STAGE 1+2+3.
+**Rationale:** ja-JP locale subtree (`atoms/<persona>/<topic>/<atom_type>/locales/ja-JP/`) has zero file-path overlap with en-US root atom paths. Parallel dispatch cuts ~2 weeks from Phase A wall-clock.
+**Scope:** Only the gate text is relaxed; quality contracts (`config/localization/locale_registry.yaml` + `quality_contracts/`) remain in force.
+
+**Operator decision provenance:**
+
+- **OPD-20260611-002 (LOCALE-SCOPE):** locale scope = top-3 (en-US + ja-JP + zh-TW). Resolves §12 Q-Atom-LOCALE-SCOPE-01 toward option (b) top-3 framing.
+- **OPD-20260611-003 (LOCALE-PHASE):** parallel-instead-of-sequential. Resolves §12 Q-Atom-LOCALE-PHASE-01 toward option (b) en-US + ja-JP parallel.
+
+**Sections impacted (gate text already updated in this PR):**
+
+- §10 Tier P2 row — added "PARALLEL-DISPATCH AUTHORIZED" annotation + restated gate as PR-merge-based rather than en-US Phase A completion.
+- §11 "All locale variants" row — added parallel-dispatch authorization for ja-JP STAGE 1.
+
+**Sections NOT impacted:**
+
+- §16 acceptance criteria (Phase B ja-JP still requires P2 cleared = 803 cells × ≥3 variants) — only the *dispatch gate* is relaxed; the *completion gate* stands.
+- §13 SSOT update protocol — unchanged; ja-JP authoring PRs still update §9 gap matrix in place.
+- §14 CI guard — unchanged; severity ladder per Q-Atom-CI-GUARD-SEVERITY-01 (a) still HARD on Tier P0, WARN on P1, INFO on P2+.
+
+**Cross-cap-entry impact:**
+
+- `PEARL_ARCHITECT_STATE.md` cap entry `ATOM-100PCT-COVERAGE-SSOT-V1-01` action-item #6 (Pearl_Localization gating language) is amended by minor-cap-entry `ATOM-100PCT-COVERAGE-SSOT-V1-01-AMENDMENT-LOCALE-PARALLEL-RELAX-2026-06-11`.
+- `artifacts/coordination/ACTIVE_WORKSTREAMS.tsv` row for `ws_pearl_localization_atom_100pct_tier_p2_ja_jp_20260606` — `blockers` column updated from en-US-Phase-A-completion to PR-merge-based gate per this amendment.
+
+**Wall-clock savings:** ~2 weeks compression on Phase A — ja-JP STAGE 1 authoring (gen_z_professionals × anxiety + overthinking, 2 personas × 2 topics × 9 atom types × ja-JP × ≥3 variants ≈ 108 atom variants) can run in parallel with en-US STAGE 1+2+3 (Tier P0 105 cells × 3 = 315 variants + Tier P1 starts) instead of sequentially-after.
 
 ---
 
-*End of SSOT v1 + AMENDMENT-2026-06-11 + RATIFICATION-2026-06-11 (§18). Update protocol: §13. Cap entries: `ATOM-100PCT-COVERAGE-SSOT-V1-01` (now ACTIVE) + `EXERCISE-COMPONENT-SCHEMA-LIFT-01` (ratified). All 20 Q-Atom-* RESOLVED. Phase A launch gates per §16 + §17.6 A1-A6.*
+*End of SSOT v1 + AMENDMENT-2026-06-11 (EXERCISE schema cross-link §17) + RATIFICATION-2026-06-11 (§18) + §AMENDMENT-2026-06-11-LOCALE-PARALLEL-RELAX. Update protocol: §13. Cap entries: `ATOM-100PCT-COVERAGE-SSOT-V1-01` (ACTIVE) + `EXERCISE-COMPONENT-SCHEMA-LIFT-01` (ratified) + minor amendment `ATOM-100PCT-COVERAGE-SSOT-V1-01-AMENDMENT-LOCALE-PARALLEL-RELAX-2026-06-11`. All 20 Q-Atom-* RESOLVED. Phase A launch gates per §16 + §17.6 A1-A6.*

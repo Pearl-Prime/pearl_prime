@@ -2882,3 +2882,33 @@ This cap entry is the **authoritative decision record** for the 16 Q-PSQ-*; the 
 - **Pearl_Architect (this entry)** → post-Phase-A threshold tuning + 90-day empirical review + cap update if thresholds drift.
 
 **Authority:** this cap entry + [`docs/specs/MUSIC_MODE_V2_PRODUCTION_READINESS_SPEC.md`](specs/MUSIC_MODE_V2_PRODUCTION_READINESS_SPEC.md) §5.
+## ATOM-100PCT-COVERAGE-SSOT-V1-01-AMENDMENT-LOCALE-PARALLEL-RELAX-2026-06-11
+
+**Status:** ACTIVE
+**Type:** minor amendment
+**Parent cap:** `ATOM-100PCT-COVERAGE-SSOT-V1-01`
+**Date:** 2026-06-11
+**Authority:** Pearl_PM + OPD-20260611-002 (LOCALE-SCOPE: top-3) + OPD-20260611-003 (LOCALE-PHASE: parallel-instead-of-sequential)
+**Change:** Relax ja-JP locale gate (see SSOT [`§AMENDMENT-2026-06-11-LOCALE-PARALLEL-RELAX`](./PEARL_PRIME_ATOM_100PCT_COVERAGE_SSOT.md#amendment-2026-06-11-locale-parallel-relax))
+**Impact:** Pearl_Localization ws can start ja-JP STAGE 1 immediately; ~2-week Phase A wall-clock compression
+**Scope:** Only the *dispatch gate* is relaxed (was "en-US Tier P0+P1 complete = pre-req"; now "PR #1485 + #1490 merged = pre-req"). The *completion gate* (Phase B ja-JP requires P2 cleared = 803 cells × ≥3 variants) stands per parent SSOT §16.
+
+**Rationale:** ja-JP locale subtree (`atoms/<persona>/<topic>/<atom_type>/locales/ja-JP/`) has zero file-path overlap with en-US root atom paths. Parallel dispatch on the priority sub-scope (gen_z_professionals × anxiety + overthinking) authoring ≈108 ja-JP atom variants alongside en-US Tier P0 + early Tier P1 work cuts ~2 weeks from Phase A wall-clock with zero risk to en-US authoring quality. Quality contracts (`config/localization/locale_registry.yaml` + `quality_contracts/`) remain in force.
+
+**Cross-references:**
+
+- Parent: `ATOM-100PCT-COVERAGE-SSOT-V1-01` (line 2494)
+- Resolves: §12 Q-Atom-LOCALE-SCOPE-01 (toward top-3 option (b)) + Q-Atom-LOCALE-PHASE-01 (toward parallel option (b))
+- Amends action-item #6 of parent cap entry (Pearl_Localization gating language)
+- Touches: [`docs/PEARL_PRIME_ATOM_100PCT_COVERAGE_SSOT.md`](./PEARL_PRIME_ATOM_100PCT_COVERAGE_SSOT.md) §10 Tier P2 + §11 locale-variants row + new §AMENDMENT-2026-06-11-LOCALE-PARALLEL-RELAX section
+- Touches: [`artifacts/coordination/ACTIVE_WORKSTREAMS.tsv`](../artifacts/coordination/ACTIVE_WORKSTREAMS.tsv) — `ws_pearl_localization_atom_100pct_tier_p2_ja_jp_20260606` blockers column
+
+**Action items:**
+
+1. **Pearl_PM** → may now dispatch Pearl_Localization for ja-JP STAGE 1 (gen_z_professionals × anxiety + overthinking) in parallel with en-US STAGE 1+2+3 dispatch.
+2. **Pearl_Localization** → ja-JP STAGE 1 unblocked once this PR merges; proceed with locale_registry.yaml ja-JP register (丁寧語) per ws task statement; reference adi_da ja-JP corpus (570 atoms) for style precedent.
+3. **Pearl_Architect (post-merge)** → resolve Q-Atom-LOCALE-SCOPE-01 + Q-Atom-LOCALE-PHASE-01 in next SSOT refresh per ratified OPD-20260611-002 + OPD-20260611-003.
+
+**Anti-drift check:** No new architecture. Single-axis gate-text relaxation on already-ratified parent cap entry; preserves all quality contracts + completion-gate semantics. Memory `feedback_validation_before_scaling` honored: parallel dispatch on a *priority-scoped* sub-set (gen_z_professionals × anxiety + overthinking), not the full Tier P2 — validation gates remain. Memory `feedback_discover_before_acting` honored: read parent SSOT §10 + §11 + ws row + cap entry before authoring amendment.
+
+**Authority:** this amendment block + SSOT [`§AMENDMENT-2026-06-11-LOCALE-PARALLEL-RELAX`](./PEARL_PRIME_ATOM_100PCT_COVERAGE_SSOT.md#amendment-2026-06-11-locale-parallel-relax) + OPD-20260611-002 + OPD-20260611-003.
