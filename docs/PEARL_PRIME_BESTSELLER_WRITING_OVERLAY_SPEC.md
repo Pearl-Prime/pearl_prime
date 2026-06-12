@@ -27,8 +27,9 @@
 11. [Whole-Book Rules](#11-whole-book-rules)
 12. [Cross-Reference to Existing Gates](#12-cross-reference-to-existing-gates)
 13. [Pearl_Editor Scoring Rubric](#13-pearl_editor-scoring-rubric)
-14. [Appendix A: Banned Openers](#appendix-a-banned-openers)
-15. [Appendix B: Suggested Future Validators](#appendix-b-suggested-future-validators)
+14. [Voice Architecture: One Author + Wrappers](#voice-architecture-one-author--wrappers)
+15. [Appendix A: Banned Openers](#appendix-a-banned-openers)
+16. [Appendix B: Suggested Future Validators](#appendix-b-suggested-future-validators)
 
 ---
 
@@ -268,6 +269,33 @@ V4.5 §4.7a governs THREAD: 1–2 sentences, ≤25 words, final sentences of INT
 
 **What THREAD must avoid:** "In the next chapter…" boilerplate. Fake cliffhangers. Teaser spam. The thread should feel like unresolved pressure, curiosity, or permission — not an announcement.
 
+### 7.3 The dwell-beat contract (insight → dwell → next)
+
+Pearl Prime's most persistent craft failure is **integration starvation**: a chapter races point-to-point, naming insight after insight with no dwell time for any single one to land. This is distinct from repetition (§9) — the sentences are not repeated; they simply arrive too fast for the reader's body to catch up. The reader is informed of three shifts but inhabits none of them. The fix is a per-insight dwell beat, contracted here as a sibling to the INTEGRATION contract (§7.1).
+
+The contract is: **after each named insight, the chapter holds a beat before advancing.** A "named insight" is any sentence that articulates a new pattern, mechanism, reframe, or cost (the Name and Turn moves of §4, and any PIVOT/REFLECTION claim). The beat that follows is not more teaching — it is dwell: a sensory landing, a silence, a single concrete consequence, or a held image that lets the insight settle before the next one is introduced.
+
+**What a dwell beat does (exactly one of):**
+
+- **Land it in the body.** One sensory or postural sentence that gives the insight somewhere to live.
+  - ✓ "You see it now — the apology was never about the spill. Your shoulders already knew; they have been up near your ears since the first paragraph."
+- **Hold the silence.** A short beat that refuses to move on, letting the weight register.
+  - ✓ "Read that again. Then stop reading for a moment. The next sentence can wait."
+- **Name one concrete consequence.** A single lived implication, not a list, not a summary.
+  - ✓ "Which means the next time the phone lights up with their name, the choice is already half-made — and you get to decide which half."
+
+**What breaks the dwell contract:**
+
+- Stacking two named insights in adjacent sentences with no beat between them.
+- Following an insight with a *summary* of the insight (that is not dwell — it is restatement; see §7.1).
+- Following an insight with the *next* insight's setup (the chapter is sprinting).
+- A dwell beat longer than ~40 words (dwell is a held breath, not a passage).
+- Using the same dwell move (e.g. "feet on floor") more than once per chapter (collapses into scaffold; §9 cap applies).
+
+**Dwell diagnostic:** After each insight sentence, ask: does the reader get a beat to feel it before the next idea arrives? If you can read three consecutive insight sentences aloud without a single dwell beat between them, the chapter has integration starvation and must be re-paced. The test is not "is each insight true?" but "did the reader get to *stay* with any of them?"
+
+This contract is enforced at review by §13 criterion #13 and is the craft articulation behind the operator's recurring integration-pacing concern (books must dwell, not just deliver). It composes with — and does not duplicate — the INTEGRATION landing contract (§7.1, which governs the chapter's *closing* beat) and the repetition caps (§9, which govern *recurrence*); dwell governs *pacing between insights inside the chapter body*.
+
 ---
 
 ## 8. Anti-Generic Scene Writing
@@ -463,6 +491,7 @@ This overlay does not replace any existing QA gate. It adds a **craft layer** on
 | V4.5 §14 Emotional Force Thresholds | Force caps per atom type | N/A — force governance is sufficient |
 | Bestseller Structures | Narrative structure selection and beat mapping | Chapter-level Orient/Name/Turn/Give/Pull contract (§4 of this spec) |
 | Chapter Thesis Bank | Thesis sentences per intent × engine | TAKEAWAY must restate thesis; THREAD must create articulable forward tension |
+| V4.5 §4 atom QA + chapter_flow_gate | Atom structural compliance + chapter-flow heuristics | Dwell-beat contract — after each named insight the chapter holds a beat before advancing (§7.3 of this spec); insight→dwell→next pacing, enforced at review by §13 criterion #13 |
 
 ---
 
@@ -484,6 +513,7 @@ When Pearl_Editor reviews a chapter against this overlay, the following rubric a
 | 10 | **Scene specificity** — SCENE contains ≥3 details unique to this moment | 3+ non-transferable sensory details | 2 specific details, 1 generic | Mostly stock imagery |
 | 11 | **Repetition caps** — All caps from §9 respected | All caps clear | 1 cap exceeded by 1 instance | 2+ caps exceeded |
 | 12 | **Functional cadence** — Rhythm changes between atom types and serves emotional function | Cadence is audibly different per atom type | Cadence varies but not consistently matched to function | Monotone rhythm across atom types |
+| 13 | **Dwell** — After each named insight the chapter holds a beat before advancing (§7.3) | Every named insight is followed by a dwell beat (sensory landing, held silence, or single concrete consequence); reader gets to stay with each | Most insights dwell, but at least one pair of named insights is stacked with no beat between them | Chapter races point-to-point; three or more consecutive insight sentences with no dwell beat (integration starvation) |
 
 ### Book-level acceptance criteria
 
@@ -497,6 +527,130 @@ A Pearl Prime book reaches bestseller-grade writing under this overlay when:
 6. Permission lines are sparse and chapter-specific.
 7. Repeated fallback or scaffold phrasing is capped.
 8. The prose sounds orally alive, not evenly generated.
+
+---
+
+## Voice Architecture: One Author + Wrappers
+
+This section makes the book's voice model explicit. It does not introduce a new
+voice rule — it names the architecture that the already-ratified slot-zoning
+implies, and pins the wrapper doctrine that keeps teacher and science material
+inside that architecture.
+
+### The one-author principle
+
+A Pearl Prime book has **one author**: a single orchestrating narrator. That
+author does not flatten the book to a uniform first-person diary. Instead the
+author **modulates register per slot** — and **references** other voices
+(a teacher, a researcher) without ever **becoming** them. The author cites
+Ahjan; the author does not impersonate Ahjan. The author cites a study; the
+author does not narrate as the scientist. "One author" therefore means *one
+consciousness moving through registers*, not *one grammatical person*.
+
+This is the binding reading of the ratified voice braid. Per
+**OPD-20260606-005** (Q-OP-VOICE-BRAID-01 = option (b), slot-zoned), each slot
+has an assigned voice zone, enforced at compile time by the
+`SOMATIC_10_SLOT_GRID` architecture and (at runtime, when built) by D12
+`VoiceOutOfZoneError` / `phoenix_v4/quality/voice_braid_gate.py` of
+[`docs/specs/PEARL_PRIME_ONE_PATH_LOCKDOWN_V1_SPEC.md`](specs/PEARL_PRIME_ONE_PATH_LOCKDOWN_V1_SPEC.md).
+A flattening to undifferentiated first-person would **contradict** that
+ratified decision and is therefore prohibited.
+
+### Slot × treatment table
+
+The 11 canonical slot types (`phoenix_v4/planning/chapter_plan.py`
+`VALID_SLOT_TYPES`) map to a voice zone and a wrapper applicability. The
+"reader-experience role" column ties each slot to the five-moves contract of §4
+where applicable.
+
+| Slot | V4.5 §ref | Reader-experience role (§4 move) | Ratified voice zone (OPD-20260606-005) | Wrapper applicability |
+|------|-----------|----------------------------------|----------------------------------------|-----------------------|
+| **HOOK** | §4.1 | Orient — place the reader inside a moment | authorial-I | none (author's own opening) |
+| **SCENE** | §4.2 | Orient — immerse in sensory situation | second-person present | none (reader is the subject) |
+| **STORY** | §4.3 | Name — articulate the pattern via a character | third-person omniscient | none (narrator tells the story) |
+| **PIVOT** | §4.4 | Turn — overturn the reader's assumption | author's frame (authorial-I register; the turn is the author's) | none |
+| **REFLECTION** | §4.5 | Turn / Give — claim + felt shift | authorial-I | teacher_wrapper / science_wrapper when a cited insight is folded in (stays authorial-I; wrapper supplies attribution only) |
+| **EXERCISE** | §4.x | Give — concrete actionable practice | coach | teacher_wrapper / science_wrapper for the *practice provenance* line (e.g. "a practice from {TRADITION}" / "a practice grounded in {FIELD} research") |
+| **TAKEAWAY** | §4.7 | Give — restate the chapter thesis | authorial-I | none |
+| **INTEGRATION** | §4.6 | Pull — quiet landing that carries forward | authorial-I | none |
+| **THREAD** | §4.7a | Pull — articulable forward tension | authorial-I | none |
+| **PERMISSION** | §4.x | Give — sparse, chapter-specific permission | authorial-I | none |
+| **TEACHER_DOCTRINE** | §4.x | Name / Turn — author-referencing-Ahjan doctrine passage | Ahjan-specific (author references Ahjan; never speaks *as* Ahjan) | teacher_wrapper (mandatory framing; author-referencing) |
+
+Footnote — **COMPRESSION:** the lockdown spec's `SOMATIC_10_SLOT_GRID` /
+persona-keyed coverage (D8) enumerates a `COMPRESSION` atom dir. This overlay
+treats COMPRESSION as a **proposed TEACHER_DOCTRINE sub-variant** (a compressed
+doctrine beat carrying the author-referencing-Ahjan zone), not a 12th
+top-level slot. The canonical chapter-planning slot set remains the 11 in
+`VALID_SLOT_TYPES`; the gold-reference rendered grid collapses to 6 visible
+treatment classes. Any promotion of COMPRESSION to a first-class slot is
+deferred to the lockdown-spec track, not decided here.
+
+### Author-first wrapper doctrine
+
+Teacher and science material enter the book through **wrappers**, never through
+a voice substitution. Two wrapper template configs govern this:
+
+- **`config/catalog_planning/teacher_wrapper_templates.yaml`** (on `origin/main`)
+  — frames teacher / tradition material. The author **references** the teacher
+  ("According to {TEACHER_NAME}…", "The {TRADITION} tradition teaches…"); the
+  author never speaks **as** the teacher. Resolved by
+  `phoenix_v4/rendering/teacher_wrapper.py`, which returns `("", "")` when a
+  wrapper cannot be fully resolved (safety: never emit an unresolved `{SLOT}`
+  token, and never emit an un-attributed teacher claim).
+- **`config/catalog_planning/science_wrapper_templates.yaml`** (NEW; this cap)
+  — frames research material with the identical shape (named / generalized /
+  composite modes; `intro_wrapper` / `exercise_wrapper` / `conclusion_wrapper`
+  each `{pattern, variants[], slot_requirements[]}`; slots `{RESEARCHER}`,
+  `{FINDING}`, `{FIELD}`, `{STUDY}`, `{MECHANISM}`). The author **references**
+  the research ("According to {RESEARCHER}…", "Research in {FIELD} consistently
+  finds…"); the author never narrates **as** the scientist. The Phase-2
+  resolver that consumes it is a sibling of `teacher_wrapper.py`
+  (`ws_pearl_dev_science_wrapper_resolver_20260612`) and inherits the same
+  `("", "")`-on-incomplete safety and the same anti-fabrication rule (named
+  mode requires a real `{STUDY}` + `{RESEARCHER}`; otherwise fall back to
+  generalized mode). The wrapper supplies **attribution inside the slot's own
+  zone** — a FINDING cited in a REFLECTION stays authorial-I; a FINDING that
+  opens a STORY stays third-person omniscient. The wrapper never introduces a
+  new speaker.
+
+### Stage-6 voice-shift lint (F12 — proposed)
+
+A Stage-6 cleanup lint complements — and does **not** duplicate — D12
+`VoiceOutOfZoneError`. D12 catches **cross-zone voice bleed** (e.g. coach voice
+inside a STORY slot). The Stage-6 lint instead catches **un-wrapped
+voice-shift**: teacher-doctrine or science-citation content that shifts register
+*without* having been routed through a wrapper (raw "Master X says…" /
+"Dr. Y proved…" prose that bypassed `teacher_wrapper.py` /
+`science_wrapper` resolution). It surfaces as register-gate failure id **F12**
+(the next free id: F9–F10 are reserved unclaimed gaps and F11 is the HOOK-abstract
+detector, per `phoenix_v4/quality/register_gate.py`), reported with the same
+`VoiceOutOfZoneError` class as D12 so the two share one operator-facing error
+vocabulary:
+
+- **FAIL** on an un-wrapped voice-shift (teacher/science register entered raw,
+  no wrapper attribution present).
+- **WARN** on a thin wrapper (wrapper present but attribution is degenerate —
+  e.g. resolved to the bare pattern with no variant lift, or a generalized-mode
+  claim that should have been named).
+
+The F12 detector is **specced here but UNBUILT**; its build is a Phase-2
+workstream (`ws_pearl_dev_voice_shift_lint_f12_20260612`) that coordinates with
+the D12 `voice_braid_gate.py` build owned by
+`ws_pearl_dev_one_path_phase_4_craft_gates_20260606` (shared `VoiceOutOfZoneError`
+vocabulary; F12 is the un-wrapped-shift sibling of D12's cross-zone check).
+
+### Why this is not a new architecture
+
+Everything above is a naming-and-pinning pass over decisions already on
+`origin/main`: the voice braid is ratified (OPD-20260606-005); the slot set is
+fixed (`VALID_SLOT_TYPES`); the teacher wrapper exists
+(`teacher_wrapper_templates.yaml` + `teacher_wrapper.py`); the cross-zone gate
+is already specced as D12. This section adds exactly two genuinely-new artifacts
+— the **science wrapper template** (data, mirroring the teacher wrapper) and the
+**F12 un-wrapped-shift lint** (specced, built in Phase 2) — and otherwise binds
+the one-author + wrapper doctrine so no agent flattens the voice or smuggles an
+un-attributed teacher / scientist into the prose.
 
 ---
 
