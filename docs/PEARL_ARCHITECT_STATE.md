@@ -3069,3 +3069,50 @@ This cap entry is the **authoritative decision record** for the 16 Q-PSQ-*; the 
 **Handoffs:** **Pearl_Marketing** → implement `ws_pearl_marketing_ja_jp_freebie_pages_authoring_20260606` (15 ja-JP freebie pages + ja-JP email/social CTAs). **Pearl_Writer** → implement `ws_pearl_writer_next_step_atom_audit_stage_2a_localized_20260606` (extend `scripts/ci/check_atoms_external_book_references.py` to localized variants). **Operator** → Phase-A launch remains gated (Snipcart operator-action slots, D1 live migrations, ja-JP freebie ws landing, Q-PRP-STOREFRONT-CONTENT-GATE-01 GREEN) — this entry dispatches work, it does not declare launch.
 
 **Pointers:** parent cap `PEARL-PRIME-STOREFRONT-V1-01` + `AMENDMENT-2026-06-04` (this state doc); `docs/specs/PEARL_PRIME_STOREFRONT_V1_SPEC.md` (§AMENDMENT-2026-06-04); `artifacts/coordination/storefront_v1_phase_a_tracker.md` (iter-2 ratification seed, #1481); `artifacts/coordination/operator_decisions_log.tsv` (OPD-20260606-001..016); closed source PR [#1455](https://github.com/Ahjan108/phoenix_omega_v4.8/pull/1455) (full decision-cards).
+
+### CANONICAL-ARTIFACTS-REGISTRY-V1-01 — Canonical Artifacts Registry + reinvention guard (anti-reinvention Layers 1+2+3) (**ACTIVE** 2026-06-12; ratified 2026-06-12)
+
+**Status:** **ACTIVE** — Q-CAR defaults ratified 2026-06-12 (governance-mechanism, in-envelope; OPD logged). Phase-1 deliverables (spec + registry seed + allowlist schema + principle 9) ship in this PR; the guard `.py` build + full sweep are Phase-2 child workstreams.
+
+**Spec:** `docs/specs/CANONICAL_ARTIFACTS_REGISTRY_SPEC.md` (V1, 9 sections). Registry data: `artifacts/coordination/CANONICAL_ARTIFACTS_REGISTRY.tsv` (9-col TSV, 8 seed rows). Allowlist: `config/governance/reinvention_allowlist.yaml` (empty schema seed). Layer-1 reflex: `docs/agent_brief.txt` §9 "Reuse before authoring".
+
+**Context:** Phoenix Omega's recurring expensive failure = an agent greenfields a NEW X instead of editing the canonical X that already exists, leaving two parallel implementations that drift (the teacher-photo PR#773 overwrite, parallel-assembler / parallel-CLI risks). This cap ratifies a **three-layer anti-reinvention system**: Layer 1 = router reflex (principle 9), Layer 2 = a machine-readable Canonical Artifacts Registry (concept_key → canonical_path → owner), Layer 3 = a reinvention guard EXTENDING `scripts/ci/pr_governance_review.py`. The registry **promotes** (does not replace) the known-good anchors registry in this state doc + `SUBSYSTEM_AUTHORITY_MAP.tsv` into a single file-level lookup.
+
+**Cross-reference:** `SUBSYSTEM_AUTHORITY_MAP.tsv` owns subsystem→authority-doc→owner at the **directory** level; this registry operates at the **specific-file** level (the `subsystem` column is the cross-link). The **known-good anchors registry** (this state doc) remains the prose source of truth for drift history; the registry TSV promotes its highest-confidence facts — prose wins on conflict, TSV `last_verified` refreshes. `pr_governance_review.py` gains ONE check (`check_reinvention`) alongside its existing six — extended, not forked. `DOCS_INDEX.md` is referenced by the registry's authority-doc rows, not duplicated. LLM Tier policy (CLAUDE.md + `.github/workflows/llm-policy-enforcement.yml`) governs the guard's content-overlap arm.
+
+**Decision (ratified Q-CAR defaults):**
+
+1. **SEVERITY = WARN-only (Phase 1).** `check_reinvention()` emits WARN, never BLOCKED, in its first iteration. A false-positive block on a legitimately-new artifact is worse than a missed reinvention. Promotion to BLOCKED for `NO-without-ratification` rows is deferred, gated on false-positive-rate data from real PRs.
+
+2. **SCOPE = seed ~6-10 high-confidence rows now; full sweep deferred.** Registry ships with 8 verified seed rows (each `canonical_path` confirmed on `origin/main` 2026-06-12). The full-repo canonical-artifact enumeration is `ws_pearl_github_canonical_registry_full_seed_sweep_20260612` — this cap does NOT block on it.
+
+3. **OVERLAP-THRESHOLD = 0.80, Tier-2-local; path-match arm ships first.** The guard has two arms: (a) a deterministic **path-match** arm (full normalized `canonical_path` comparison) that ships first in Phase 2, and (b) a semantic **content-overlap** arm (cosine ≥ 0.80) flagged for Phase 2 that MUST use a local embedding model (Gemma/Qwen via Ollama per `config/governance/allowed_llm_patterns.yaml`) — **never a paid LLM API** (a paid-API guard would itself be blocked by llm-policy-enforcement).
+
+4. **OVERRIDE-TAG = `NEW-ARTIFACT-JUSTIFIED: <reason>` + a registry row same-PR.** A genuinely-new artifact is authored by tagging the PR body and adding its own registry row in the same PR. A path colliding with a `NO-without-ratification` row additionally requires a cap-entry / operator ratification (tag alone is insufficient). Standing recurring mirrors go in `config/governance/reinvention_allowlist.yaml` (ships empty).
+
+5. **VERIFY-CADENCE = opportunistic + quarterly.** `last_verified` is refreshed whenever an agent touches a canonical, plus a quarterly sweep.
+
+6. **MATCH-ALGO = full normalized `canonical_path` (NOT bare basename).** Bare-basename matching false-positives on `CANONICAL.txt` / `README.md` / `config.yaml`; full-path normalization avoids them.
+
+7. **LAYER1-COUPLING = principle 9 authored in THIS PR.** `docs/agent_brief.txt` §9 sits between §8 and `## Revert` (additive, revertable; the `## Revert` instruction covers it) and cites the registry **"when present"** so the brief stays valid on refs where the registry has not yet landed.
+
+**Child workstreams (Phase-2 build targets; proposed):**
+- `ws_pearl_github_canonical_registry_full_seed_sweep_20260612` (Pearl_GitHub, `integrations`) — sweep the repo for all canonical artifacts, expand the registry beyond the 8 seed rows.
+- `ws_pearl_dev_reinvention_guard_extension_20260612` (Pearl_Dev, `pearl_devops`) — BUILD `check_reinvention()` + `load_canonical_registry()` in `pr_governance_review.py` (path-match arm first; content-overlap arm Tier-2-local).
+
+**Anti-drift check:** No implementation code in Phase 1 — the spec DESCRIBES the guard; a Phase-2 ws BUILDS it. No paid LLM API anywhere — content-overlap arm is Tier-2-local (Ollama) by hard constraint. Reuse-not-greenfield — extends `pr_governance_review.py`, promotes (does not replace) the known-good anchors registry + `SUBSYSTEM_AUTHORITY_MAP.tsv`, does not duplicate `DOCS_INDEX.md`. Every seed row verified on `origin/main` at authoring. Registry + allowlist confirmed absent before authoring (clear to create, no duplication).
+
+**Handoffs:**
+- **Pearl_GitHub** — `ws_pearl_github_canonical_registry_full_seed_sweep_20260612`: full canonical-artifact sweep, expand registry under review.
+- **Pearl_Dev** — `ws_pearl_dev_reinvention_guard_extension_20260612`: build `check_reinvention()` (path-match arm first; content-overlap Tier-2-local; WARN-only).
+- **Pearl_PM** — coordination cleanup picks up this PR; serializes registry-row appends behind any in-flight `SUBSYSTEM_AUTHORITY_MAP.tsv` writes (both are hot coordination files).
+
+**Pointers:**
+- `docs/specs/CANONICAL_ARTIFACTS_REGISTRY_SPEC.md` (V1 spec, 9 sections)
+- `artifacts/coordination/CANONICAL_ARTIFACTS_REGISTRY.tsv` (9-col, 8 seed rows)
+- `config/governance/reinvention_allowlist.yaml` (empty schema seed)
+- `docs/agent_brief.txt` §9 "Reuse before authoring" (Layer 1 reflex)
+- `scripts/ci/pr_governance_review.py` (Layer 3 host; gains `check_reinvention` in Phase 2)
+- `artifacts/coordination/SUBSYSTEM_AUTHORITY_MAP.tsv` (directory-level companion; cross-link via `subsystem`)
+- `config/governance/allowed_llm_patterns.yaml` (Tier-2 Ollama routing for the content-overlap arm)
+- Known-good anchors registry (this state doc) — prose source of truth the registry promotes
