@@ -184,24 +184,37 @@ def test_apply_wrapper_then_prose_pass_preserves_ellipsis(
 ) -> None:
     _reset_caches_for_tests()
     body = "When you work in the ordinary sense, you extract: hours for wage."
+    spine_context = {"teacher_id": "ahjan"}
+    # Resolve the lead-in independently so we can assert it survives the pass verbatim.
+    prefix, _suffix = resolve_wrapper(
+        teacher_id="ahjan",
+        section_type=section_type,
+        seed=seed,
+        spine_context=spine_context,
+    )
     wrapped = apply_wrapper(
         body,
         teacher_id="ahjan",
         section_type=section_type,
         seed=seed,
-        spine_context={"teacher_id": "ahjan"},
+        spine_context=spine_context,
     )
     out = _resolve_location_placeholders(wrapped)
-    # Find the prefix line (first paragraph) and verify it ends with "..."
-    first_para = out.split("\n\n", 1)[0]
-    assert first_para.endswith("..."), (
-        f"wrapper lead-in lost ellipsis after prose pass: {first_para!r}"
+    # Inline-join model (PR #1508 follow-up, teacher_wrapper.join_wrapped): the ellipsis
+    # lead-in now flows INLINE into the body's opening sentence, so it is no longer
+    # paragraph-terminal. The invariant under test is unchanged in spirit — the
+    # _resolve_location_placeholders collapse pass must NOT turn "...is..." into
+    # "...is." (the F2 sentence-end-preposition artifact). Assert the resolved lead-in
+    # survives the prose pass verbatim, ellipsis intact.
+    assert prefix and (
+        prefix.rstrip().endswith("...") or prefix.rstrip().endswith("…")
+    ), f"expected an ellipsis-terminated intro lead-in, got {prefix!r}"
+    assert prefix.rstrip() in out, (
+        f"wrapper lead-in ellipsis not preserved through prose pass: {out!r}"
     )
-    # Specifically guard against the rendered artifacts that motivated this fix.
-    assert "keeps pointing toward is." + "\n" not in out
-    assert "the path begins with." + "\n" not in out
-    assert not first_para.endswith(" is.")
-    assert not first_para.endswith(" with.")
+    # Guard against the exact collapsed artifacts that motivated the original fix.
+    assert "keeps pointing toward is. " not in out
+    assert "the path begins with. " not in out
 
 
 # ---------------------------------------------------------------------------
