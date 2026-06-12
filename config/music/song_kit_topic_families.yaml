@@ -1,0 +1,142 @@
+# Music Onboarding Song-Kit — 8 topic-family SSOT (V1)
+#
+# Authority chain:
+#   - Cap entry (governing):   MUSIC-ONBOARDING-SONG-KIT-V1-01 in docs/PEARL_ARCHITECT_STATE.md
+#   - Spec (governing):        docs/specs/MUSIC_ONBOARDING_SONG_KIT_V1_SPEC.md (esp. §2, §3)
+#   - Layers atop (ACTIVE):    MUSIC-MODE-V1-01-AMENDMENT-V2-PRODUCTION-READINESS (music-mode V2)
+#   - Rendering / atom bank:   MUSIC-MODE-V1-01 (musician_banks/, 6 slot pools, 2P templates)
+#   - Brand identity / catalog: MUSIC-MODE-BRAND-INTEGRATION-V1-01 (brands 38+, registry)
+#
+# WHAT THIS FILE IS
+#   The single source of truth for the 8 ADDITIVE song-kit topic families. Each family is a
+#   curated GROUPING LABEL over canonical therapeutic topic_ids. It is a routing/authoring aid
+#   for the survey -> generator flow (spec §3): a musician's surveyed primary_themes map onto
+#   one or more families, and each family carries register + mood hints the generator consumes
+#   when drafting lyric atoms (with-lyrics fork) or MusicGen mood-instruction text (no-lyrics fork).
+#
+# WHAT THIS FILE IS NOT (anti-drift — hard boundaries)
+#   1. NOT a new topic taxonomy. `topic_anchors` values below MUST be a subset of
+#      config/source_of_truth/canonical_topics.yaml `topic_ids`. This file adds LABELS that map
+#      onto existing canonical topics; it does NOT mint new topic_ids.
+#   2. Does NOT touch the en-US persona x topic grid, config/manga/canonical_brand_list.yaml,
+#      config/source_of_truth/topic_registry.yaml, or any catalog SSOT. Read-only consumption only.
+#   3. Does NOT replace the 6 slot-pool atom taxonomy (LYRIC_OPENING/CLOSING/BESTSELLER_BEAT +
+#      MUSIC_REFLECTION_OPENING/CLOSING/BESTSELLER_BEAT) — families are an ORTHOGONAL grouping
+#      that informs atom CONTENT, not the slot-pool structure (which stays per MUSIC-MODE-V1-01).
+#   4. `lyric_register_hint` and `instrumental_mood_hint` are AUTHORING HINTS, not enforced enums.
+#      They guide Pearl_Writer (English lyrics) and the MusicGen mood-instruction text. CJK6 lyric
+#      register routes to Qwen (CLAUDE.md Tier policy); unattended runs route to Gemma/Qwen-Ollama.
+#
+# Per-family schema (each item under topic_families):
+#   family_id:               stable snake_case id (the SSOT key; referenced by the generator)
+#   display:                 human-readable label (UI / operator-facing)
+#   topic_anchors:           list of canonical topic_ids (subset of canonical_topics.yaml) —
+#                            the {{topic_anchor}} template var in atoms resolves from these
+#   default_themes:          free-text theme seeds (map onto survey themes.primary_themes;
+#                            authoring guidance, NOT enforced)
+#   lyric_register_hint:     guidance string for the with-lyrics fork (lyric atom drafting)
+#   instrumental_mood_hint:  guidance string for the no-lyrics fork (MusicGen mood-instruction TEXT)
+
+schema_version: 1
+registry_id: song_kit_topic_families
+owner: pearl_editor              # content authority per MUSIC-MODE-V1-01 (Pearl_Editor owns banks)
+archetype: music_mode
+canonical_topics_ref: config/source_of_truth/canonical_topics.yaml   # subset-source (anti-drift #1)
+slot_pools_ref:                  # families inform CONTENT of these pools, not their structure
+  - LYRIC_OPENING
+  - LYRIC_CLOSING
+  - LYRIC_BESTSELLER_BEAT
+  - MUSIC_REFLECTION_OPENING
+  - MUSIC_REFLECTION_CLOSING
+  - MUSIC_REFLECTION_BESTSELLER_BEAT
+
+topic_families:
+  - family_id: recovery_and_repair
+    display: "Recovery & Repair"
+    topic_anchors: [burnout, compassion_fatigue, addiction]
+    default_themes:
+      - "rebuilding after depletion"
+      - "the slow work of repair"
+      - "rest as repair, not reward"
+    lyric_register_hint: "Plain-spoken, patient, present-tense; avoid triumphal arcs — honor the slowness of healing."
+    instrumental_mood_hint: "Warm, restorative, unhurried; soft pads + slow pulse, no climactic swells; tempo ~60-72 BPM."
+
+  - family_id: quiet_courage
+    display: "Quiet Courage"
+    topic_anchors: [courage, boundaries]
+    default_themes:
+      - "small brave acts"
+      - "saying the true thing softly"
+      - "boundaries as self-respect"
+    lyric_register_hint: "Understated resolve; courage shown through small concrete acts, not declarations."
+    instrumental_mood_hint: "Grounded, steady, quietly resolute; gentle low strings + simple rhythmic anchor; tempo ~70-84 BPM."
+
+  - family_id: presence_and_stillness
+    display: "Presence & Stillness"
+    topic_anchors: [overthinking, sleep_anxiety]
+    default_themes:
+      - "returning to the body"
+      - "the mind quieting"
+      - "one breath at a time"
+    lyric_register_hint: "Spare, sensory, slow; let silence carry weight; minimal narration, maximal noticing."
+    instrumental_mood_hint: "Sparse, meditative, spacious; long sustained tones + ample air; near-ambient, tempo ~50-66 BPM."
+
+  - family_id: anxiety_and_overwhelm
+    display: "Anxiety & Overwhelm"
+    topic_anchors: [anxiety, social_anxiety, relationship_anxiety]
+    default_themes:
+      - "static in the ears"
+      - "the racing mind meeting a steadier rhythm"
+      - "you are not your alarm"
+    lyric_register_hint: "Honest about the intensity but de-escalating; meet anxiety as signal, not character flaw."
+    instrumental_mood_hint: "Begins taut, resolves toward calm; gentle downward contour, no jump-scares; tempo ~66-78 BPM settling lower."
+
+  - family_id: grief_and_letting_go
+    display: "Grief & Letting Go"
+    topic_anchors: [grief, divorce]
+    default_themes:
+      - "carrying what is gone"
+      - "loosening the grip without forgetting"
+      - "love that outlives the ending"
+    lyric_register_hint: "Tender, unrushed, no forced closure; let grief be present without resolving it neatly."
+    instrumental_mood_hint: "Elegiac, open, gently melancholic; piano or strings with long decay; tempo ~54-68 BPM, no resolution-cadence."
+
+  - family_id: self_worth_and_shame
+    display: "Self-Worth & Shame"
+    topic_anchors: [self_worth, shame, body_image, imposter_syndrome]
+    default_themes:
+      - "unlearning the inner verdict"
+      - "worth that is not earned"
+      - "meeting shame with plain language"
+    lyric_register_hint: "Compassionate, second-person-leaning; dismantle the inner critic without toxic positivity."
+    instrumental_mood_hint: "Tender then quietly affirming; warm midrange, gradual lift that never becomes anthemic; tempo ~68-80 BPM."
+
+  - family_id: connection_and_belonging
+    display: "Connection & Belonging"
+    topic_anchors: [relationship_anxiety, social_anxiety]
+    default_themes:
+      - "reaching toward others"
+      - "being seen and staying"
+      - "the courage to be known"
+    lyric_register_hint: "Warm, relational, hopeful but grounded; belonging as practice, not arrival."
+    instrumental_mood_hint: "Open-hearted, gently communal; layered but uncluttered textures; tempo ~72-86 BPM."
+
+  - family_id: hope_and_renewal
+    display: "Hope & Renewal"
+    topic_anchors: [depression]
+    default_themes:
+      - "first light after a long dark"
+      - "small returns of color"
+      - "hope as a verb"
+    lyric_register_hint: "Earned, restrained hope; renewal shown through small concrete returns, never saccharine."
+    instrumental_mood_hint: "Slowly brightening, tender optimism; warm tones emerging from sparse opening; tempo ~66-80 BPM rising gently."
+
+# --- Mapping integrity note (for the generator + diversity gate) -------------------------------
+# Every topic_anchor above is verified present in config/source_of_truth/canonical_topics.yaml
+# (anxiety, overthinking, burnout, imposter_syndrome, grief, self_worth, shame, depression,
+#  relationship_anxiety, social_anxiety, sleep_anxiety, boundaries, courage, financial_anxiety,
+#  compassion_fatigue, body_image, addiction, divorce — subset; family-only labels add NO new ids).
+# Some canonical topic_ids are intentionally NOT mapped to a family in V1 (financial_anxiety,
+# money, adhd) — they remain valid catalog topics; song-kit V1 simply does not group them.
+# Multi-family topics (e.g. relationship_anxiety, social_anxiety) are allowed — a topic may seed
+# more than one family; the generator picks the family from surveyed primary_themes intent.
