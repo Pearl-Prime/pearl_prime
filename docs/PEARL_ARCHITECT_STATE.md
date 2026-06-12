@@ -3116,3 +3116,36 @@ This cap entry is the **authoritative decision record** for the 16 Q-PSQ-*; the 
 - `artifacts/coordination/SUBSYSTEM_AUTHORITY_MAP.tsv` (directory-level companion; cross-link via `subsystem`)
 - `config/governance/allowed_llm_patterns.yaml` (Tier-2 Ollama routing for the content-overlap arm)
 - Known-good anchors registry (this state doc) — prose source of truth the registry promotes
+
+### AGENT-SYSTEM-IMPROVEMENT-V2-01 — Agent-system improvement V2: ratify the 2026-06-11 roadmap P0 tier as a new root cap (Langfuse tracing + DeepEval/agentevals eval; `agent_observability` subsystem) (**ACTIVE** 2026-06-12; ratified)
+
+**Status:** **ACTIVE** (ratified 2026-06-12). In-envelope batch-default ratification of the P0 tier of the agent-systems improvement roadmap, per the OPD-055/056 batch-accept-to-stated-defaults precedent (logged this cap as OPD-PLACEHOLDER). Stands **independently of PR #1507 merging** — #1507 is open do-not-merge research; the roadmap content is reproduced in the spec so the cap does not gate on that PR landing.
+
+**Spec:** `docs/specs/AGENT_SYSTEM_IMPROVEMENT_V2_SPEC.md` (new; Phase-1 governance/spec-doc only — DESCRIBES the six P0 builds, ships no implementation code).
+
+**Context:** Pearl_Research's 2026-06-11 SOTA audit (`artifacts/research/agent_systems_audit_20260611/` — PR #1507) scored our 14-agent system vs 2025–26 agent best-practice: **9 doing / 7 partial / 6 gap**. Top gaps = no agent-trajectory eval, no observability/tracing, no skill-eval harness, plus handoff/registry items the 2026-04 spec **designed but never shipped**. The `IMPROVEMENT_ROADMAP.md` prioritized **P0×6 / P1×7 / P2×6**, finish-what-exists first, Tier-2-filtered (zero paid-LLM-API), 🏛-flagged. This cap ratifies the **P0 tier** + two default tool choices.
+
+**Cross-reference:** Extends (does NOT re-litigate) `docs/AGENT_SYSTEM_AUDIT_2026_04.md` + `docs/AGENT_SYSTEM_IMPROVEMENT_SPEC.md` (P0-1 finishes the §5 `check_agent_registry.py` validator named "future"; P0-5 finishes the §4 `AGENT_HANDOFF_SPEC.md` outline — both verified absent on `main` 2026-06-12). New project **`PRJ-AGENT-SYSTEM-IMPROVEMENT-V2`**. New subsystem **`agent_observability`** (owner Pearl_DevOps). Anchor: roadmap `artifacts/research/agent_systems_audit_20260611/IMPROVEMENT_ROADMAP.md` + `SYSTEMS_TOOLING_OPPORTUNITIES.md`.
+
+**Decision (ratification package):**
+
+1. **Six P0 items ratified** (reproduced verbatim in spec §2 with owners + 🏛 flags): P0-1 `scripts/ci/check_agent_registry.py` (Pearl_GitHub; non-🏛); P0-2 run skill-creator evals on the 4 skills (non-🏛); P0-3 trim `skills/pearl-github/SKILL.md` (479/500 lines on `main`; non-🏛); P0-4 stand up Langfuse-or-Phoenix self-hosted + trace ONE pipeline e2e (Pearl_DevOps; 🏛); P0-5 write `docs/AGENT_HANDOFF_SPEC.md` (Pearl_PM; 🏛 doc-only); P0-6 add `consolidate-memory` cadence for `MEMORY.md` (Pearl_PM; non-🏛).
+
+2. **Tracing default = Langfuse (self-hosted, Apache-2.0)** with **Arize Phoenix as a sanctioned drop-in alternate** (vendor-agnostic, local/Docker, native Claude Agent SDK support). Both self-hosted/free/OTel-GenAI-shaped; Pearl_DevOps may swap Langfuse→Phoenix in the P0-4 pilot without re-ratification.
+
+3. **Eval default = DeepEval (Apache-2.0) + agentevals (MIT), LOCAL Gemma/Qwen judge** as the **primary** harness (component metrics + trajectory scoring), with **RAGAS** (claim-level faithfulness for ei_v2/pearl_news citations) and **CometKiwi** (reference-free MT QE for translation) as **domain companions, not primary**.
+
+4. **New subsystem named `agent_observability`, NOT `observability`** — `observability` is already a used subsystem token on `main` (production-KPI / control-plane surface, e.g. `ws_content_inventory_20260407`); `agent_observability` is collision-free (verified) and keeps agent-trajectory tracing distinct from production-KPI observability. Registration to `SUBSYSTEM_AUTHORITY_MAP.tsv` is a Phase-2 task (not done in this cap).
+
+5. **Dispatch gating:** the 4 non-🏛 P0 (P0-1/-2/-3/-6) = **first operator-approved runnable batch** (self-contained, finish-what-exists, near-zero-risk). The 2 🏛 P0 (P0-4/-5) = ratified but **dispatch-gated on `PEARL_ARCHITECT_STATE.md` cascade-settle** (serial-lane discipline for hot-governance-file work) → ws status `proposed`, hold for operator "cascades settled" signal.
+
+**Child workstreams (Phase 2 builds — this cap ships NO code):**
+- `ws_agent_observability_langfuse_pilot_20260612` (Pearl_DevOps; `agent_observability`) — P0-4; **proposed** (🏛, cascade-gated).
+- `ws_agent_eval_harness_deepeval_agentevals_20260612` (eval-tooling) — DeepEval+agentevals harness + P0-2 skill-creator evals; **proposed** (P0-2 callable in the runnable batch; CI-gate wiring waits on P0-4 substrate).
+- `ws_agent_design_gap_closures_20260612` (design-gap-closures) — P0-1 (`check_agent_registry.py`, Pearl_GitHub), P0-3 (SKILL.md trim, Pearl_GitHub), P0-6 (consolidate-memory cadence, Pearl_PM) **runnable**; P0-5 (`AGENT_HANDOFF_SPEC.md`, Pearl_PM, 🏛 doc-only) held with the cascade-gated items.
+
+**Anti-drift check:** Does NOT adopt a paid LLM API (all eval judges = local Gemma/Qwen; all tracing = self-hosted). Does NOT adopt LangGraph/CrewAI/AutoGen/OpenAI-Agents-SDK as a runtime (borrow patterns + OSS components, not a framework — reuse-first / agent-audit #22). Does NOT rewrite the 2026-04 audit/spec — extends + finishes their unshipped items. Does NOT duplicate the existing production-KPI `observability` surface — `agent_observability` is a distinct subsystem/axis/owner. Ships no implementation code (Phase 1).
+
+**Handoffs:** Phase-2 dispatch of the runnable batch (P0-1/-2/-3/-6) → owners (Pearl_GitHub, Pearl_PM, authoring agents) on operator approval of this cap. 🏛 items (P0-4/-5) → held in the post-settle serial queue; router hands them back on the operator "cascades settled" ping. P1/P2 roadmap tiers deferred to a future spec.
+
+**Pointers:** spec `docs/specs/AGENT_SYSTEM_IMPROVEMENT_V2_SPEC.md`; roadmap `artifacts/research/agent_systems_audit_20260611/IMPROVEMENT_ROADMAP.md`, `SYSTEMS_TOOLING_OPPORTUNITIES.md`, `AGENTS_BEST_PRACTICE_AUDIT.md`, `SKILLS_BEST_PRACTICE_AUDIT.md` (PR #1507); prior `docs/AGENT_SYSTEM_AUDIT_2026_04.md` + `docs/AGENT_SYSTEM_IMPROVEMENT_SPEC.md`; subsystem map `artifacts/coordination/SUBSYSTEM_AUTHORITY_MAP.tsv`; registry `config/agents/agent_registry.yaml`; OPD precedent OPD-20260611-055/056.
