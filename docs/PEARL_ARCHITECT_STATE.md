@@ -2788,3 +2788,97 @@ This cap entry is the **authoritative decision record** for the 16 Q-PSQ-*; the 
 4. **Pearl_GitHub** → when next refreshing `docs/DOCS_INDEX.md`, add cross-link for `PEARL-STAR-JOB-QUEUE-V1-01` cap entry under Pearl Star / job-queue subsystem section.
 
 **Authority:** this cap entry + [`artifacts/coordination/operator_decisions_log.tsv`](../artifacts/coordination/operator_decisions_log.tsv) (16 OPD entries 025..040) + (post-merge) [`docs/specs/PEARL_STAR_JOB_QUEUE_V1_SPEC.md`](./specs/PEARL_STAR_JOB_QUEUE_V1_SPEC.md) §9 RESOLVED stamps via PR #1492 reconciliation.
+### MUSIC-MODE-V1-01-AMENDMENT-V2-PRODUCTION-READINESS — 12-correction ratification + Phase A music-launch gate + MusicGen Phase B integration (ACTIVE 2026-06-11)
+
+**Status:** **ACTIVE** (ratified 2026-06-11 per operator green-light; Q-MM-V2-* defaults applied; cap → ACTIVE flips 6 child ws's status=proposed → runnable) — V2 production-readiness layer atop ratified V1 cap entries; doc-only spec + audit + deck + coordination row delta in this PR; no implementation.
+
+**Spec:** [`docs/specs/MUSIC_MODE_V2_PRODUCTION_READINESS_SPEC.md`](specs/MUSIC_MODE_V2_PRODUCTION_READINESS_SPEC.md)
+
+**Companion deck:** [`artifacts/programs/music_mode_v2_20260611/MUSIC_MODE_INTRODUCTION_DECK.pptx`](../artifacts/programs/music_mode_v2_20260611/MUSIC_MODE_INTRODUCTION_DECK.pptx) (10 slides; operator-facing; for musicians + Brand Directors)
+
+**Companion long-form:** [`artifacts/programs/music_mode_v2_20260611/MUSIC_MODE_INTRODUCTION_LONG_FORM.md`](../artifacts/programs/music_mode_v2_20260611/MUSIC_MODE_INTRODUCTION_LONG_FORM.md)
+
+**Audit artifact:** [`artifacts/qa/music_mode_corrections_audit_20260611.tsv`](../artifacts/qa/music_mode_corrections_audit_20260611.tsv) — 12-row machine-readable corrections audit (11 CORRECT + 1 DISPUTED).
+
+**Context:** Operator-pasted prior-turn analysis of music-mode posture against a draft 10-slide operator deck surfaced 12 corrections vs initial deck plan. V2 spec §2 ratifies row-by-row against current `origin/main` spec source; 11/12 confirmed CORRECT; row 1 (800 books per-brand) DISPUTED due to cross-cap contradiction with `CATALOG-800-PER-BRAND-01` (system-wide 800). Plus operator's 3 questions answered (text-to-song / spam-risk / production-status). Plus Phase A music-launch gate authored. Plus diversity gates spec'd (in sibling AMENDMENT below). Plus MusicGen Pearl Star Phase B integration spec'd (auto-WAV-render deferred from V1 line 772). Plus deck ships with 8 deck-confirm-Q's resolved.
+
+**Decision:**
+
+1. **12-row corrections audit RATIFIED:** 11 CORRECT + 1 DISPUTED per spec §2 + audit TSV. Row 1 (CATALOG-800 cross-cap reconciliation) flagged via `Q-MM-V2-CATALOG-800-RECONCILE-01` for separate Pearl_Architect follow-up.
+2. **Phase A music-mode launch gate DEFINED** (spec §4): first real musician onboarded + 6 slot pools backfilled for priority cell + 2P templates authored + smoke book ships + quality rubric PASS + diversity gate PASS + MusicGen prompt emitted + WAV rendered (auto via Phase B OR manual Colab acceptable Phase A).
+3. **Phase A entry conditions LOCKED** at 8 items (spec §4.1); exit milestone = first music-mode book on at least one platform (KDP/Audible/Apple/Google) + brand_admin_v2 dashboard reflects brand.
+4. **Phase A timeline:** 4-6 weeks parallel with en-US atom-coverage Phase A cascade (different agents, different cells, zero conflict).
+5. **MusicGen Pearl Star Phase B integration SPEC'D** (spec §6): 5th workload class on Pearl Star (sibling to Qwen-Image + CosyVoice2 + Ollama + orch); MusicGen-medium recommended default (~5 GB VRAM concurrent with FLUX-schnell); auto-WAV render at `artifacts/music_companions/<brand>/<book>.wav`; deterministic seed per book.
+6. **PEARL-STAR-JOB-QUEUE-V1-01 dependency FLAGGED** (spec §6.5): infra cap entry referenced as TARGET but NOT YET on main. `Q-MM-V2-PEARL-STAR-PHASE-A-CAP-01` recommends separate Pearl_Architect session to author the queue infra cap BEFORE Phase B can advance.
+7. **MusicGen license compliance FLAGGED** (spec §6.7): MIT model code; commercial-use clearance for MusicGen-medium specifically needs Pearl_Int legal review (audio training set provenance) per `Q-MM-V2-MUSICGEN-LICENSE-CHECK-01`.
+8. **Music-side atom-coverage SSOT SCOPED** (Q-MM-V2-MUSICIAN-BANKS-SCOPE-01): parallel structure to `docs/PEARL_PRIME_ATOM_100PCT_COVERAGE_SSOT.md` (en-US side merged PR #1485 2026-06-11); theme/emotion/instrument dimensions deferred to V3.
+
+**Child workstreams opened (6 rows added to `artifacts/coordination/ACTIVE_WORKSTREAMS.tsv` under this PR; status=proposed; gated on operator green-light):**
+
+1. `ws_pearl_architect_music_mode_atom_coverage_ssot_20260611` — author `docs/MUSIC_MODE_ATOM_100PCT_COVERAGE_SSOT.md` sibling to en-US SSOT.
+2. `ws_pearl_editor_pearl_writer_first_real_musician_onboarding_20260611` — operator-nominated musician through wizard + survey + atom authoring for first priority cell.
+3. `ws_pearl_editor_music_slot_pools_priority_backfill_20260611` — 6 music slot pools for top-3 priority cells (recovery + presence + quiet_courage × gen_z_professionals + working_parents × en-US × with-lyrics + no-lyrics).
+4. `ws_pearl_dev_music_brand_diversity_ci_guard_20260611` — `scripts/ci/check_music_brand_diversity.py` per spec §5 (G1-G8); hard-fail under production.
+5. `ws_pearl_int_pearl_star_phase_b_musicgen_workload_20260611` — MusicGen workload class + WAV worker + companion-song smoke (gated on Pearl Star Phase A operational).
+6. `ws_pearl_marketing_music_mode_recruitment_copy_20260611` — copy for recruiting first real musicians; integrates with Sangha Karma Yoga V1.5 brand-administrator pillar P6 (gated on `Q-MM-V2-SANGHA-INTEGRATION-01`).
+
+**Project opened:** `PRJ-MUSIC-MODE-V2-PRODUCTION-LAUNCH` (status=proposed); owner=Pearl_Architect (spec) + Pearl_Editor (atom authoring execution).
+
+**15 open Q-MM-V2-* (recommended defaults; operator answers gate downstream ws's):** see spec §8.
+
+**Anti-drift check:** Does NOT modify V1 cap entry text; appends V2 layer only. Does NOT touch `canonical_brand_list.yaml`. Does NOT mint code or atoms. Does NOT modify `agent_registry.yaml`. Cross-cap row 1 (DISPUTED) does NOT silently reconcile — flagged for operator decision via Q-MM-V2-CATALOG-800-RECONCILE-01. PEARL-STAR-JOB-QUEUE-V1-01 referenced as TARGET only — does NOT pretend to ratify a cap that doesn't exist yet.
+
+**Handoffs:**
+
+- **Pearl_PM** → activate 6 child ws's per operator green-light (status=proposed → runnable per cell prioritization).
+- **Operator** → answer 15 Q-MM-V2-* (especially Q-MM-V2-FIRST-REAL-MUSICIAN-01 = nominate first musician).
+- **Pearl_Architect (separate session)** → author PEARL-STAR-JOB-QUEUE-V1-01 cap + spec + concurrency matrix.
+- **Pearl_Architect (separate session)** → cross-cap reconciliation for CATALOG-800-PER-BRAND-01 vs MUSIC-MODE-BRAND-INTEGRATION-V1-01 §AMENDMENT §3 (row 1 dispute).
+- **Pearl_Editor + Pearl_Writer** → atom-authoring ws's #2 + #3 fire in parallel with en-US atom-coverage cascade.
+- **Pearl_Dev** → diversity gate CI guard ws #4 fires anytime.
+- **Pearl_Int** → Phase B MusicGen ws #5 fires AFTER Pearl Star Phase A operational (~2-3 weeks gating).
+- **Pearl_Marketing** → recruitment copy ws #6 fires after operator confirms Q-MM-V2-FIRST-REAL-MUSICIAN-01.
+
+**Authority:** this cap entry + [`docs/specs/MUSIC_MODE_V2_PRODUCTION_READINESS_SPEC.md`](specs/MUSIC_MODE_V2_PRODUCTION_READINESS_SPEC.md) + [`artifacts/qa/music_mode_corrections_audit_20260611.tsv`](../artifacts/qa/music_mode_corrections_audit_20260611.tsv).
+
+### MUSIC-MODE-BRAND-INTEGRATION-V1-01-AMENDMENT-DIVERSITY-GATES — Anti-spam diversity gate CI guard for music-mode brand catalog batches (ACTIVE 2026-06-11)
+
+**Status:** **ACTIVE** (ratified 2026-06-11 per operator green-light; Q-MM-V2-DIVERSITY-GATE-THRESHOLDS-01 answered; gates G1-G5 HARD_FAIL production-profile, G6-G8 WARN) — appended to MUSIC-MODE-BRAND-INTEGRATION-V1-01; doc-only spec in this PR; no implementation.
+
+**Spec source:** [`docs/specs/MUSIC_MODE_V2_PRODUCTION_READINESS_SPEC.md`](specs/MUSIC_MODE_V2_PRODUCTION_READINESS_SPEC.md) §5.
+
+**Context:** Music-mode brand catalog batches scale to 800 books per active brand at standard tier (per `MUSIC-MODE-BRAND-INTEGRATION-V1-01-AMENDMENT-2026-05-09 §3`). Without guard rails, repeated slot-pool atoms or topic concentration trip KDP/Amazon spam-flag heuristics + erode platform standing. This amendment specs the CI guard `scripts/ci/check_music_brand_diversity.py` authored under `ws_pearl_dev_music_brand_diversity_ci_guard_20260611` (Pearl_Dev).
+
+**Decision: Anti-spam diversity gate thresholds locked at V2 launch (operator-tunable post-launch per smoke results):**
+
+| Gate | Metric | Threshold | Production fail mode | Draft fail mode |
+|---|---|---|---|---|
+| G1 — Per-slot-pool variant reuse | max variant reuse per batch | ≤ max(5, ceil(N/5)) | HARD_FAIL | WARN |
+| G2 — Topic concentration | % single topic | ≤ 30% | HARD_FAIL | WARN |
+| G3 — Persona concentration | % single persona | ≤ 30% | HARD_FAIL | WARN |
+| G4 — Format concentration | % single format | ≤ 50% | HARD_FAIL | WARN |
+| G5 — Locale concentration | per-platform tunable | KDP US ≤70% / KDP JP ≤50% | HARD_FAIL | WARN |
+| G6 — Title fuzzy-similarity clustering | max cluster size | ≤ ceil(N/20) | WARN | WARN |
+| G7 — Author-bio reuse | % reuse | ≤ 60% | WARN | WARN |
+| G8 — Slot-atom rotation Gini | Gini coefficient | ≤ 0.4 | WARN | WARN |
+
+**Production-profile policy:** G1-G5 = HARD_FAIL under `--quality-profile production`; G6-G8 = WARN-only. Draft profile = all WARN.
+
+**Smoke validation (Phase A degraded mode for N<50):** G1 verifies per-chapter slot reuse in the single book; G2-G5 logged as `not_applicable_batch_too_small`.
+
+**KDP/Amazon empirical alignment:** Thresholds derived from observed platform spam-flag heuristics: >50% topic concentration = series-spam (G2+G4+G7), >30% persona-demographic concentration = "demographic farming" (G3), repeated lyric/text patterns = Apple Books flag (G1+G6+G8), bio reuse = Google Play flag (G7).
+
+**Threshold tuning:** Phase A milestone includes 50-book smoke batch + threshold tuning + 90-day post-publish KDP/Amazon flag rate review. `Q-MM-V2-DIVERSITY-GATE-THRESHOLDS-01` flags operator-tunable per-platform overrides.
+
+**Child workstream:** `ws_pearl_dev_music_brand_diversity_ci_guard_20260611` (Pearl_Dev — spec authors `scripts/ci/check_music_brand_diversity.py`; output at `artifacts/qa/music_brand_diversity_report_<brand_id>_<batch_id>.md` + JSON sidecar).
+
+**Anti-drift check:** Additive on existing MUSIC-MODE-BRAND-INTEGRATION-V1-01. Does NOT modify the V1 cap entry text. Does NOT mint code or thresholds outside the spec §5 envelope. Does NOT override `canonical_brand_list.yaml` or Path X. Cap-spec layered; implementation lands under named Pearl_Dev ws.
+
+**Handoffs:**
+
+- **Pearl_PM** → activate `ws_pearl_dev_music_brand_diversity_ci_guard_20260611` per operator green-light.
+- **Pearl_Dev** → author CI script + JSON sidecar schema + hook into `--quality-profile production` catalog runs.
+- **Pearl_DevOps** → wire CI workflow job to run gate before any music-mode catalog batch publishes.
+- **Pearl_Architect (this entry)** → post-Phase-A threshold tuning + 90-day empirical review + cap update if thresholds drift.
+
+**Authority:** this cap entry + [`docs/specs/MUSIC_MODE_V2_PRODUCTION_READINESS_SPEC.md`](specs/MUSIC_MODE_V2_PRODUCTION_READINESS_SPEC.md) §5.
