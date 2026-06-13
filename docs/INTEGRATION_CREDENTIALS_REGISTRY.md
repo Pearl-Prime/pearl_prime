@@ -72,7 +72,7 @@ This reads the registry below and reports which env vars are set vs missing.
 - Ollama: qwen3:14b (9.3 GB Q4_K_M)
 
 **Provider migration (2026-04-08):**
-- **Image generation:** ComfyUI on Pearl Star is now PRIMARY. RunComfy cloud is optional fallback.
+- **Image generation:** ComfyUI on Pearl Star is PRIMARY (sole active path). RunComfy cloud is **DECOMMISSIONED** (paid lane cancelled by operator 2026-06-13 — SWEEP-TAIL; `RUNCOMFY_*` creds removed from registry + Keychain; runtime code retained fail-closed). See `docs/SESSION_HANDOFF_2026_06_11_RUNCOMFY_SUNSET.md` and cap `IMG-RENDER-DUAL-PATH-V1-01` (decommissioned).
 - **CJK LLM:** Ollama/Qwen3:14b on Pearl Star is now the default `QWEN_BASE_URL` target. DashScope is cloud fallback.
 - **CJK TTS:** CosyVoice2 on Pearl Star for zh/ja/ko. Edge-TTS is free fallback. ElevenLabs remains primary for EN.
 - **EN TTS:** ElevenLabs — NO CHANGE.

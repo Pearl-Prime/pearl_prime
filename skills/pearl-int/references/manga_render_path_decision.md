@@ -41,7 +41,9 @@ identity drift. The audit confirmed via PNG inspection of 8 outputs.
   `~/.phoenix_omega_pearl_star` confirms canonical host.
 - **Cost:** $0. This is the default for all manga panel work.
 
-### Path B — RunComfy serverless ComfyUI (PAID; video_bank only as of 2026-05-07)
+### Path B — RunComfy serverless ComfyUI — **DECOMMISSIONED 2026-06-13** (was PAID; video_bank only)
+
+> **DECOMMISSIONED (SWEEP-TAIL 2026-06-13):** Operator cancelled the RunComfy paid lane. `RUNCOMFY_*` credentials removed from the integration registry + macOS Keychain; cap `IMG-RENDER-DUAL-PATH-V1-01` closed → **Path A (Pearl Star/ComfyUI) is the sole active path**. The driver code below is **retained fail-closed** (it is a shared library imported across the manga/image pipeline; full code removal deferred to a tracked follow-up). See `docs/SESSION_HANDOFF_2026_06_11_RUNCOMFY_SUNSET.md`. The historical Path B spec below is preserved for reference only.
 
 - **Endpoint:** `https://api.runcomfy.net/prod/v1`
 - **Deployment:** `677edba8-ace0-4b2b-bad2-8e94b9959065` (`RUNCOMFY_DEPLOYMENT_ID`)

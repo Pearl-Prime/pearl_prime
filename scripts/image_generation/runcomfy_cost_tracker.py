@@ -26,8 +26,8 @@ from zoneinfo import ZoneInfo
 REPO_ROOT = Path(__file__).resolve().parents[2]
 _DEFAULT_SPEND_TSV = REPO_ROOT / "artifacts" / "qa" / "runcomfy_monthly_spend.tsv"
 _BILLING_URL = "https://api.runcomfy.com/v1/account/billing/summary"
-_COOLDOWN_USD = 25.0  # TEMPORARY: RunComfy deprecation burn — restore to 10.0 after closure
-_WARN_USD = 20.0  # TEMPORARY: bumped from 8.0 alongside cap raise
+_COOLDOWN_USD = 10.0  # RunComfy $10/mo soft cap — restored after deprecation-burn closure (SWEEP-TAIL 2026-06-13; paid lane cancelled per IMG-RENDER-DUAL-PATH-V1-01 decommission)
+_WARN_USD = 8.0  # 80% of $10 soft cap — restored from temp $20 burn bump (SWEEP-TAIL 2026-06-13)
 _TZ_DEFAULT = "America/Los_Angeles"
 
 

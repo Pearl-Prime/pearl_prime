@@ -85,7 +85,7 @@ def dispatch_workflow(
     dry_run: bool = True,
     deployment_id: str | None = None,
     spend_tsv: Path | None = None,
-    cooldown_usd: float = 25.0,  # TEMPORARY: RunComfy deprecation burn — restore to 10.0 after closure
+    cooldown_usd: float = 10.0,  # RunComfy $10/mo soft cap — restored after deprecation-burn closure (SWEEP-TAIL 2026-06-13)
     require_token: bool = True,
 ) -> dict[str, Any]:
     """Prepare or submit a RunComfy deployment job for the given workflow JSON.
