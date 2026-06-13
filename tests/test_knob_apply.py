@@ -58,7 +58,9 @@ def test_load_runtime_format_standard():
     # bestseller-chord-audit-2026-05-17 Axis 4: raised ceiling 13000→18000 so
     # 12-chapter arcs don't truncate ch 11-12 content to 0 in
     # phoenix_v4/planning/enrichment_select.py:1228 format_wmax cap. PR #1152.
-    assert spec["word_range"] == [9000, 18000]
+    # DURATION-DERIVATION-01 (#1550): ceiling raised 18000→22000 (cap_word_target=22000);
+    # advertised audiobook_minutes re-derived 55→147. OPD-20260611-062 / OPD-20260613-001.
+    assert spec["word_range"] == [9000, 22000]
     # AUTO-PLAN-SSOT-01-AMENDMENT (2026-05-06) Group B ruling: standard_book
     # chapter_count_default reconciled from 12 (registry pre-amendment) to 10
     # (Python ACT-011/BSG-011 deliberate runtime value, preserved as the
