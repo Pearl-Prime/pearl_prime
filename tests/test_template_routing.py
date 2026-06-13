@@ -32,3 +32,33 @@ def test_missing_config_fallback():
         "standard_book",
         routing_config_path="config/templates/nonexistent.yaml",
     ) == "spine_only"
+
+
+# OPD-106 (2026-05-18): long runtimes (extended_book_2h, deep_book_4h, deep_book_6h)
+# must route to v2_somatic for somatic topics, matching standard_book behaviour and
+# their SOMATIC_FULL_RUNTIME_FORMATS membership in phoenix_v4/planning/beatmap_compile.py.
+def test_somatic_gen_z_deep_book_6h():
+    assert resolve_template_library("anxiety", "gen_z_professionals", "deep_book_6h") == "v2_somatic"
+
+
+def test_somatic_gen_z_extended_book_2h():
+    assert resolve_template_library("anxiety", "gen_z_professionals", "extended_book_2h") == "v2_somatic"
+
+
+def test_somatic_gen_z_deep_book_4h():
+    assert resolve_template_library("anxiety", "gen_z_professionals", "deep_book_4h") == "v2_somatic"
+
+
+def test_somatic_professional_deep_book_6h():
+    assert resolve_template_library("burnout", "burned_out_professional", "deep_book_6h") == "v2_somatic"
+
+
+def test_somatic_executive_deep_book_6h():
+    # Executive voice at deep depths routes to v2_somatic — register collision only
+    # affects compact formats (short_book_30 stays spine_only for executive).
+    assert resolve_template_library("anxiety", "nyc_executives", "deep_book_6h") == "v2_somatic"
+
+
+def test_cognitive_deep_book_6h_falls_to_spine():
+    # Long runtimes for non-somatic families still fall to spine_only (no template bank).
+    assert resolve_template_library("overthinking", "gen_z_professionals", "deep_book_6h") == "spine_only"
