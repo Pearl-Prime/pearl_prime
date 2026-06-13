@@ -63,7 +63,7 @@ LAYOUT_VARIANTS = frozenset({"default", "scroll_story", "dock", "editorial", "wi
 #   body        — the youth-experience section
 #   turnaround  — the agency-pivot block-blue header
 #   bridge      — the event-to-teacher connector
-#   teacher_sees— gold-block header. Format placeholder: {teacher_name}
+#   teacher_sees— gold-block header. Format placeholder: {tradition_role}
 #   sage_body   — block-sage body-data evidence header
 #   practice    — practice_announce block-sage header
 #   forward     — forward_look section
@@ -78,7 +78,7 @@ _SECTION_HEADERS_BY_LANG: dict[str, dict[str, object]] = {
         "felt_experience": "This is how it affects Gen Z and Gen Alpha",
         "turnaround":   "Already Moving",
         "bridge":       "What the Data Skips",
-        "teacher_sees": "What {teacher_name} Sees",
+        "teacher_sees": "What A {tradition_role} Sees",
         "sage_body":    "How Others Experience It",
         "practice":     "The Practice",
         "forward":      "There's a Door",
@@ -103,7 +103,7 @@ _SECTION_HEADERS_BY_LANG: dict[str, dict[str, object]] = {
         "felt_experience": "Z世代とα世代にはこう響く",
         "turnaround":   "すでに動いている",
         "bridge":       "データが飛ばすもの",
-        "teacher_sees": "{teacher_name}が見ているもの",
+        "teacher_sees": "{tradition_role}が見ているもの",
         "sage_body":    "他者の経験から",
         "practice":     "実践",
         "forward":      "扉がある",
@@ -128,7 +128,7 @@ _SECTION_HEADERS_BY_LANG: dict[str, dict[str, object]] = {
         "felt_experience": "这对Z世代和α世代意味着什么",
         "turnaround":   "已经在动",
         "bridge":       "数据漏掉的部分",
-        "teacher_sees": "{teacher_name}所见",
+        "teacher_sees": "{tradition_role}所见",
         "sage_body":    "他人怎么经历",
         "practice":     "实修",
         "forward":      "门在这里",
@@ -153,7 +153,7 @@ _SECTION_HEADERS_BY_LANG: dict[str, dict[str, object]] = {
         "felt_experience": "这对Z世代和α世代意味着什么",
         "turnaround":   "已经在动",
         "bridge":       "数据漏掉的部分",
-        "teacher_sees": "{teacher_name}所见",
+        "teacher_sees": "{tradition_role}所见",
         "sage_body":    "他人怎么经历",
         "practice":     "实修",
         "forward":      "门在这里",
@@ -551,6 +551,68 @@ TEACHER_DB: dict[str, dict[str, Any]] = {
     },
 }
 
+# ── TEACHER × TOPIC PRACTICE OVERRIDES ────────────────────────────────────────
+# TEACHER_DB carries ONE practice per teacher. But the article body pulls its
+# "A Practice" content from the per-(teacher, topic) atom packs
+# (pearl_news/teacher_topic_packs/teachers/<teacher>/<topic>.yaml), and those
+# practices diverge from the TEACHER_DB default — leaving the sidebar timer and
+# the body describing two different practices (handoff 2026-06-07 §5.4).
+#
+# This table is the single lookup keyed by (teacher_id, topic) that unifies
+# them: when a row exists, its keys override the base TEACHER_DB practice for
+# the sidebar exercise-card (name + duration + description + timed steps) so the
+# timer matches the atom the body already announces. No row → base practice.
+# Keys mirror TEACHER_DB practice fields; only the ones present override.
+TEACHER_TOPIC_PRACTICE: dict[tuple[str, str], dict[str, Any]] = {
+    # Maat × mental_health: body atom announces "Mirror Polish", not the
+    # default "Truth-Speaking Practice". Operator-flagged mismatch.
+    ("maat", "mental_health"): {
+        "practice_name": "Mirror Polish",
+        "practice_duration": "5 min",
+        "practice_description": "From Maat's mirror of truth: you polish the surface not to look better, but to see clearly. Designed for the distortion that comparison leaves behind.",
+        "exercise_steps": [
+            {"phase": "Step 1 of 5 · Ground", "duration": 30, "instruction": "Feel your feet on the floor or your body in the chair. You are here — not in the feed, not in the comparison. Here. Let the breath settle before you look at anything."},
+            {"phase": "Step 2 of 5 · Notice the smudge", "duration": 60, "instruction": "Name one thing you saw today that left you feeling smaller — a post, a number, a comparison. Don't argue with it. Just see that it left a mark on the mirror."},
+            {"phase": "Step 3 of 5 · Breathe", "duration": 60, "instruction": "Inhale for 4, exhale for 8. The long exhale tells your nervous system it is safe to look without flinching. Repeat four times.", "breathe": True},
+            {"phase": "Step 4 of 5 · Polish", "duration": 90, "instruction": "Say one true sentence about yourself that the comparison tried to erase — out loud or silently. Not a boast, not a fix. Just what is true underneath the smudge. That is the polish."},
+            {"phase": "Step 5 of 5 · See", "duration": 60, "instruction": "Look once more, plainly. Notice the difference between the distorted reflection and the cleared one. You did not change yourself. You cleared the glass. That is Maat's work."},
+            {"phase": "Complete", "duration": 0, "instruction": "The practice is done. The mirror was never the problem — only what collected on it. One true sentence clears more than an hour of scrolling ever could.", "final": True},
+        ],
+    },
+    # Sai Maa × peace_conflict: body atom announces "Brain Illumination Pause",
+    # not the default "Consciousness Awakening". Operator-flagged mismatch.
+    ("sai_maa", "peace_conflict"): {
+        "practice_name": "Brain Illumination Pause",
+        "practice_duration": "5 min",
+        "practice_description": "From Sai Maa's teaching on illuminating the mind before acting: when the news lands as overwhelm, you pause to let light reach the place that wants to react. Designed for the weight of conflict and displacement.",
+        "exercise_steps": [
+            {"phase": "Step 1 of 5 · Arrive", "duration": 30, "instruction": "Sit and feel your weight on the seat. The conflict you just read about is real, and so is this moment. Let both be true. Soften the jaw and the shoulders."},
+            {"phase": "Step 2 of 5 · Locate the heat", "duration": 50, "instruction": "Find where the news landed in the body — the chest, the gut, behind the eyes. Don't fix it. Just place your attention there, the way you'd place a hand."},
+            {"phase": "Step 3 of 5 · Breathe light", "duration": 70, "instruction": "Inhale for 4 and imagine light entering at the crown; exhale for 8 and let it move down through the place that holds the heat. Repeat five times.", "breathe": True},
+            {"phase": "Step 4 of 5 · Illuminate", "duration": 70, "instruction": "Ask silently: what is one thing still in my reach? Let the answer arrive in the lit space, not the reactive one. Don't grasp for it — let it surface."},
+            {"phase": "Step 5 of 5 · Return", "duration": 60, "instruction": "Open your eyes. Notice that the overwhelm has not vanished, but there is now a lit space beside it from which a clear next step can come. That space is the practice."},
+            {"phase": "Complete", "duration": 0, "instruction": "The practice is done. You did not turn away from the conflict — you brought light to the part of you that wanted to shut down. From there, action is possible. That is what Sai Maa teaches.", "final": True},
+        ],
+    },
+}
+
+
+def _resolve_teacher_practice(teacher: dict, teacher_id: str, topic: str) -> dict:
+    """Return a teacher dict whose practice fields reflect the (teacher_id, topic)
+    override when one exists, else the base TEACHER_DB practice unchanged.
+
+    Single lookup keyed by (teacher_id, topic): unifies the sidebar timer's
+    practice with the body atom's practice (handoff 2026-06-07 §5.4 / §9.2).
+    A shallow copy is returned so the module-level TEACHER_DB is never mutated.
+    """
+    override = TEACHER_TOPIC_PRACTICE.get((teacher_id, topic))
+    if not override:
+        return teacher
+    merged = dict(teacher)
+    merged.update(override)
+    return merged
+
+
 # ── PILLAR MAPPING ────────────────────────────────────────────────────────────
 TOPIC_TO_PILLAR = {
     "climate": "Planet",
@@ -904,6 +966,34 @@ def _mini_app_for_reaction(reaction_id: str | None) -> tuple[str | None, str | N
     return (entry.get("primary"), entry.get("fallback"))
 
 
+_SCRIPT_BLOCK_RE = re.compile(r"(<script\b[^>]*>)(.*?)(</script>)", re.DOTALL | re.IGNORECASE)
+
+
+def _wpautop_proof_scripts(html_doc: str) -> str:
+    """Collapse blank lines inside every inline <script> body so WordPress's
+    wpautop filter cannot inject `</p><p>` into the JS and break it.
+
+    Root cause (handoff 2026-06-07 §5.3): wpautop inserts `</p><p>` at every
+    double-newline, including inside inline <script> content, which raises a
+    `SyntaxError: Unexpected token '<'` and kills the script before any handler
+    attaches. wpautop only triggers on *blank lines* (\\n\\s*\\n), so collapsing
+    blank-line runs to a single newline inside script bodies removes every
+    trigger while preserving single newlines — so `// ...` line comments stay
+    terminated and string literals (including `https://`) are never touched.
+
+    Applied to the final rendered document so callers no longer need the
+    per-post wpautop_proof_script() workaround.
+    """
+    def _collapse(match: "re.Match[str]") -> str:
+        open_tag, body, close_tag = match.group(1), match.group(2), match.group(3)
+        # Collapse any run of newline + optional-whitespace + newline down to a
+        # single newline. Repeat-safe via the +; leaves single newlines intact.
+        collapsed = re.sub(r"\n[ \t]*(?:\r?\n[ \t]*)+", "\n", body)
+        return f"{open_tag}{collapsed}{close_tag}"
+
+    return _SCRIPT_BLOCK_RE.sub(_collapse, html_doc)
+
+
 # Hard News v2 (operator 2026-05-19): leaner 4-body-section flow.
 # Top of article holds H1 + 2 deks ("How this news is affecting Gen Z" +
 # "A {tradition_role} Shares A Helpful Insight"). Body has these fragments:
@@ -963,8 +1053,27 @@ def assemble_v52(article_json: dict, metadata: dict | None = None, *, standalone
 
     topic = meta.get("topic", "general")
     pillar = meta.get("pillar") or _infer_pillar(topic)
-    sdg_num = str(meta.get("sdg", "3"))
+    # Unify the sidebar timer's practice with the body atom's practice via the
+    # single (teacher_id, topic) lookup. No-op when no override row exists.
+    teacher = _resolve_teacher_practice(teacher, teacher_id, topic)
+    # SDG dict-vs-scalar guard: `meta = {**article_json, ...}` can inherit an
+    # `sdg` that is a dict (e.g. {"primary": 3, "secondary": [4]}) rather than a
+    # scalar. str() on that dict produced "{'primary': 3}", which then missed
+    # every SDG_DB key and silently fell back to "3". Normalise to the primary
+    # scalar before stringifying. (handoff 2026-06-07 §9.3)
+    _sdg_raw = meta.get("sdg", "3")
+    if isinstance(_sdg_raw, dict):
+        _sdg_raw = _sdg_raw.get("primary", _sdg_raw.get("sdg", "3"))
+    sdg_num = str(_sdg_raw)
     sdg = SDG_DB.get(sdg_num, SDG_DB["3"])
+    # SDG target override (handoff 2026-06-07 §9.7): SDG_DB hard-codes one target
+    # per SDG (e.g. 16.7), but an article's bullets may speak to a different
+    # target (16.1/16.2/16.3). Let callers override via meta["sdg_target"] (or
+    # the dict form meta["sdg"]["target"]) so the badge matches the article.
+    sdg_target = meta.get("sdg_target")
+    if not sdg_target and isinstance(meta.get("sdg"), dict):
+        sdg_target = meta["sdg"].get("target")
+    sdg_target = str(sdg_target) if sdg_target else sdg["target"]
     template = meta.get("template", "hard_news_spiritual_response")
     article_type = TEMPLATE_TO_TYPE.get(template, "Hard News + Insight + Action")
     news_event = meta.get("news_event", "")
@@ -1138,7 +1247,22 @@ def assemble_v52(article_json: dict, metadata: dict | None = None, *, standalone
     felt_experience_header = sec_h.get("felt_experience", meta.get("felt_experience_header", _felt_variant))
     turnaround_header = meta.get("turnaround_header", _l10n["turnaround"])
     teacher_header = sec_h.get("bridge", meta.get("teacher_header", _l10n["bridge"]))
-    _teacher_sees_fallback = _l10n["teacher_sees"].format(teacher_name=teacher_name)
+    # tradition_role comes from config/teachers/teacher_registry.yaml (added
+    # 2026-05-19); upstream callers should pass it via metadata. Fallback to
+    # teacher_name so renders never crash on missing data. Computed here (ahead
+    # of the legacy teacher_sees fallback) so that header, too, says the role —
+    # not the teacher's name (handoff 2026-06-07 §9.6).
+    _tradition_role = (
+        meta.get("tradition_role")
+        or article_json.get("tradition_role")
+        or teacher_name
+    )
+    # teacher_sees header renders {tradition_role} (e.g. "What A Zen Priest
+    # Sees"), not the teacher's literal name. Pass teacher_name too so any
+    # stale {teacher_name} template still formats rather than raising KeyError.
+    _teacher_sees_fallback = _l10n["teacher_sees"].format(
+        tradition_role=_tradition_role, teacher_name=teacher_name
+    )
     _teacher_sees_variant = (
         pick_teacher_sees_heading(teacher_id, _slug_for_pick, _teacher_sees_fallback)
         if _slug_for_pick else _teacher_sees_fallback
@@ -1153,14 +1277,7 @@ def assemble_v52(article_json: dict, metadata: dict | None = None, *, standalone
     cta_block_paras = _l10n["cta_block_paras"]
 
     # ── hard_news_v2 deks + section headers (operator restructure 2026-05-19) ──
-    # tradition_role comes from config/teachers/teacher_registry.yaml (added
-    # 2026-05-19); upstream callers should pass it via metadata. Fallback to
-    # teacher_name so renders never crash on missing data.
-    _tradition_role = (
-        meta.get("tradition_role")
-        or article_json.get("tradition_role")
-        or teacher_name
-    )
+    # _tradition_role is computed above (ahead of the teacher_sees fallback).
     v2_gen_z_dek = _l10n.get("v2_gen_z_dek", "How this news is affecting Gen Z")
     v2_teacher_dek_tpl = _l10n.get(
         "v2_teacher_dek", "A {tradition_role} Shares A Helpful Insight"
@@ -1293,7 +1410,7 @@ def assemble_v52(article_json: dict, metadata: dict | None = None, *, standalone
         _inline_sdg_html = f'''
     <div class="interstitial interstitial-sdg">
       <h3>SDG Connection</h3>
-      <p><span class="sdg-badge">SDG {_esc(sdg_num)} · {_esc(sdg["name"])} · Target {_esc(sdg["target"])}</span></p>
+      <p><span class="sdg-badge">SDG {_esc(sdg_num)} · {_esc(sdg["name"])} · Target {_esc(sdg_target)}</span></p>
       <p style="margin-top: 10px; font-size: 14px;">{_esc(sdg_content)}</p>
       <p class="disclaimer">Pearl News is an independent nonprofit. We are not affiliated with the United Nations.</p>
     </div>'''
@@ -1506,7 +1623,7 @@ def assemble_v52(article_json: dict, metadata: dict | None = None, *, standalone
 {_layout_css}
 {_root_open}'''
 
-    return _body_open + \
+    _rendered = _body_open + \
         f'''
 <!-- (mock-up pillar nav + authority block removed per operator 2026-05-14:
      "Planet / Mind / Work & Future / ... MIND · Hard News + Insight + Action ..."
@@ -1601,7 +1718,7 @@ def assemble_v52(article_json: dict, metadata: dict | None = None, *, standalone
     <!-- SDG DETAIL (operator 2026-05-19: 3 bullets; disclaimer moved to article bottom) -->
     <div class="sidebar-card">
       <h3>SDG Connection</h3>
-      <p><span class="sdg-badge">SDG {_esc(sdg_num)} · {_esc(sdg["name"])} · Target {_esc(sdg["target"])}</span></p>
+      <p><span class="sdg-badge">SDG {_esc(sdg_num)} · {_esc(sdg["name"])} · Target {_esc(sdg_target)}</span></p>
 {((lambda blts: (
         '      <ul class="sdg-bullets" style="margin-top:12px;padding-left:18px;list-style:disc;">' + chr(10) +
         "".join(f'        <li style="margin-bottom:8px;font-family:var(--font-sans);font-size:13px;color:var(--text-secondary);">{_esc(b)}</li>' + chr(10) for b in blts) +
@@ -1812,6 +1929,11 @@ function toggleExercise() {{
 }})();
 </script>
 ''' + ('</div><!-- /.pn-article-root -->\n</body>\n</html>' if standalone else '</div><!-- /.pn-article-root -->')
+
+    # wpautop-proof every inline <script> so WordPress's wpautop filter cannot
+    # break the JS (handoff 2026-06-07 §5.3 / §9.1). Renderer-level fix that
+    # replaces the per-post wpautop_proof_script() workaround.
+    return _wpautop_proof_scripts(_rendered)
 
 
 # ── CSS BLOCK (extracted from v5.2 gold standard — identical across all articles) ──
