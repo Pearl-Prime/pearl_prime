@@ -8,6 +8,8 @@ batch-assemble ~925 en_US ebooks. Every verdict below is backed by source read i
 assembly_compiler.py, component_assembler.py, the two reference plans, format_registry.yaml,
 the OVERLAY spec, and real STORY/EXERCISE atoms).
 
+> **CORRECTION (2026-05-29):** The § "Sections per chapter" claim that there is "no `SOMATIC_10_SLOT_GRID` anywhere in the render path" is **FALSE for the spine path** — superseded by [`COHESIVE_FLOW_12x10x5_ARCHITECTURE_AUDIT.md`](./COHESIVE_FLOW_12x10x5_ARCHITECTURE_AUDIT.md) Q1. That follow-on audit traced both paths; `SOMATIC_10_SLOT_GRID` is live at `beatmap_compile.py:42` on `--pipeline-mode spine`.
+
 > **Bottom line up front:** Stories and exercises are placed as **WHOLE authored atoms** on
 > the canonical path. There is **one** narrow truncation that is real and matters: the
 > EXERCISE *guidance* is cut to its **first 2 sentences** from the **3rd exercise-bearing
@@ -82,7 +84,7 @@ This is a standalone 8-part composer. It is **not** imported by `run_pipeline.py
 - The `format_registry.yaml` **default beat is 6** types
   (`default_slot_definitions: [HOOK, SCENE, STORY, REFLECTION, EXERCISE, INTEGRATION]`,
   line 9) — but the **plans override** with the 9-slot bestseller beat, so the shipped grid is 9.
-- There is **no** `SOMATIC_10_SLOT_GRID` constant anywhere in the render path; the shipped
+- ~~There is **no** `SOMATIC_10_SLOT_GRID` constant anywhere in the render path~~ **CORRECTED (2026-05-29):** true only of the **legacy/registry** path traced here; the **spine** path uses `SOMATIC_10_SLOT_GRID` (`beatmap_compile.py:42`, `run_pipeline.py:624`) — see [`COHESIVE_FLOW_12x10x5_ARCHITECTURE_AUDIT.md`](./COHESIVE_FLOW_12x10x5_ARCHITECTURE_AUDIT.md) Q1. On the legacy path, the shipped
   per-chapter slot list comes from `format_plan.slot_definitions` (legacy,
   `assembly_compiler.py:739–748`) or from the beatmap/enriched chapter slots (spine). The
   spine `_bucket_slots` recognizes 14 canonical slot names
