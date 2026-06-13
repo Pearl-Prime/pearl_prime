@@ -86,14 +86,40 @@ git status --short | sed -n '1,10p'
 # 5. Lock files
 echo ""
 echo "--- Lock Files ---"
+LOCKS_SEEN=0
+# .git/index.lock — only warn once it has PERSISTED >60s (transient locks are
+# normal here: Xcode/Spotlight run `git status` constantly). NEVER auto-remove.
 if [ -f .git/index.lock ]; then
   LOCK_AGE=$(stat -f "%m" .git/index.lock 2>/dev/null || stat -c "%Y" .git/index.lock 2>/dev/null || echo "0")
   NOW=$(date +%s)
-  LOCK_MINS=$(( (NOW - LOCK_AGE) / 60 ))
-  echo "CRITICAL: .git/index.lock exists (age: ${LOCK_MINS}m)"
-  echo "  If no git process running: rm -f .git/index.lock"
-  ISSUES=$((ISSUES + 1))
-else
+  LOCK_SECS=$(( NOW - LOCK_AGE ))
+  LOCK_MINS=$(( LOCK_SECS / 60 ))
+  if [ "$LOCK_SECS" -gt 60 ]; then
+    echo "CRITICAL: .git/index.lock has persisted ${LOCK_SECS}s (~${LOCK_MINS}m)"
+    echo "  A long-lived lock usually means a crashed git process. Do NOT remove blindly."
+    echo "  If you have confirmed no git process is running: rm -f .git/index.lock"
+    ISSUES=$((ISSUES + 1))
+  else
+    echo "OK: .git/index.lock present but transient (${LOCK_SECS}s old) — likely an in-flight git/Xcode status. Leave it."
+  fi
+  LOCKS_SEEN=1
+fi
+# Worktree locks — warn (do NOT remove) if any worktree is administratively locked.
+if [ -d .git/worktrees ]; then
+  while read -r wl; do
+    [ -z "$wl" ] && continue
+    WT_NAME=$(basename "$(dirname "$wl")")
+    WT_REASON=$(tr -d '\n' < "$wl" 2>/dev/null)
+    if [ -n "$WT_REASON" ]; then
+      echo "WARNING: worktree '$WT_NAME' is locked (reason: $WT_REASON). Do NOT remove the lock; run 'git worktree unlock' deliberately."
+    else
+      echo "WARNING: worktree '$WT_NAME' is locked. Do NOT remove the lock; run 'git worktree unlock' deliberately."
+    fi
+    ISSUES=$((ISSUES + 1))
+    LOCKS_SEEN=1
+  done < <(find .git/worktrees -mindepth 2 -maxdepth 2 -name locked 2>/dev/null)
+fi
+if [ "$LOCKS_SEEN" -eq 0 ]; then
   echo "OK: No lock files"
 fi
 

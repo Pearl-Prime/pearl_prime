@@ -182,6 +182,25 @@ Excluded: `.env`, `.github_token`, credentials, `*.rtf` token files, YouTube/Clo
 
 **No Git LFS configured.** All files must be under 8 MB (push-guard single blob limit).
 
+### Git LFS smudge on `git worktree add` (MANDATORY default)
+
+A handful of binary blobs in this repo *are* LFS-tracked (e.g. `*.xlsx`, `*.docx`).
+When you spin up a worktree, the default LFS smudge filter tries to fetch and
+materialize every one of those blobs. In this repo that **hangs and blows up
+local disk**. For text/code/yaml work you never need the binary contents, so
+always skip the smudge:
+
+```bash
+# Always prefix worktree creation (and any reset/checkout that repopulates files)
+GIT_LFS_SKIP_SMUDGE=1 git worktree add --no-checkout -b agent/<task> <path> origin/main
+```
+
+Keep `GIT_LFS_SKIP_SMUDGE=1` on the `git reset --hard HEAD` / `git checkout`
+reconcile step too — the smudge fires whenever files are repopulated, not just
+on `add`. LFS-tracked files stay as lightweight pointers (you may see a benign
+`files that should have been pointers, but weren't` note); that is expected and
+safe as long as you never stage those binaries.
+
 ---
 
 ## STEP 2: YOUR HARD RULES
