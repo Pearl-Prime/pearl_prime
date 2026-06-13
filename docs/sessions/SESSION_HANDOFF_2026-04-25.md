@@ -282,7 +282,7 @@ python3 scripts/manga/translate_chapter_script.py \
 
 ### B. Render panels via ComfyUI
 
-⚠️ **`scripts/manga/queue_panel_renders.py` is not yet committed** — see "What's missing" below. Until it lands, manually drive ComfyUI from the panel_prompts JSON or use existing `scripts/image_generation/runcomfy_batch.py` patterns. The 35 prompts are at:
+✅ **`scripts/manga/queue_panel_renders.py` is now committed** (lands renders to Pearl Star ComfyUI via the `flux_txt2img_manga.json` workflow; `--dry-run` validates prompts without GPU). The interim manual-driving / `scripts/image_generation/runcomfy_batch.py` fallback is no longer required. The 35 prompts are at:
 
 ```
 artifacts/manga/panel_prompts/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/ep_001.panel_prompts.json
@@ -315,35 +315,53 @@ git commit -m "feat(qa): ep_001 render manifest"
 
 ### D. Compose per-locale episode strips
 
-For each locale (en_US, ja_JP, zh_TW, zh_CN) — produces a Canvas-ready episode payload:
+This step is now a single committed CLI — `scripts/manga/compose_episode_from_renders.py`
+— which fills the former `# … reconstruct panel_images_manifest from rendered out/ dir …`
+placeholder. It reconstructs the `panel_images_manifest` by scanning the rendered
+`out/` dir (reusing `phoenix_v4.manga.image_backend.build_panel_images_manifest`),
+builds the lettering spec, then runs `render_bubbles_on_panels` + `compose_episode_strips`
+per locale. No GPU, no LLM, no network — pure local PIL compositing of already-rendered
+panels. Produces a Canvas-ready `payload.json` + `ep_001_seg_NNN.jpg` per locale.
+
+```bash
+SER=stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying
+
+# Dry run first — validates wiring + manifest reconstruction, no PIL work, no output:
+python3 scripts/manga/compose_episode_from_renders.py \
+  --chapter-script artifacts/manga/chapter_scripts/$SER/ep_001.yaml \
+  --panel-prompts  artifacts/manga/panel_prompts/$SER/ep_001.panel_prompts.json \
+  --renders-dir    out/rendered/$SER/ep_001/ \
+  --dry-run
+
+# Real compose for all locales declared in the chapter script:
+python3 scripts/manga/compose_episode_from_renders.py \
+  --chapter-script artifacts/manga/chapter_scripts/$SER/ep_001.yaml \
+  --panel-prompts  artifacts/manga/panel_prompts/$SER/ep_001.panel_prompts.json \
+  --renders-dir    out/rendered/$SER/ep_001/ \
+  --out-root       out
+# -> out/episodes/<locale>/ep_001/ep_001_seg_NNN.jpg + payload.json (per locale)
+```
+
+Note: `compose_episode_strips` is strict — every panel in the chapter-script page
+ordering must have an `ok` render, or it exits 3 with the missing `panel_id`. Run
+step B (`queue_panel_renders.py`) to full completion first. Verified on ep_001 with
+synthetic 1080×720 renders: 35/35 panels → **27 segments, total_height 25615 px,
+caps_ok=True** for each of en_US / ja_JP / zh_CN / zh_TW.
+
+<details><summary>Under the hood (what the CLI wires)</summary>
 
 ```python
 from phoenix_v4.manga.chapter.bubble_render import render_bubbles_on_panels
 from phoenix_v4.manga.chapter.webtoon_compose import compose_episode_strips
-import yaml, json
-from pathlib import Path
+from phoenix_v4.manga.chapter.lettering_from_script import build_lettering_spec_from_chapter_script
+from phoenix_v4.manga.image_backend import build_panel_images_manifest
 
-chapter = yaml.safe_load(Path("artifacts/manga/chapter_scripts/.../ep_001.yaml").read_text())
-manifest = json.load(open("artifacts/manga/panel_prompts/.../ep_001.panel_prompts.json"))
-# … reconstruct panel_images_manifest from rendered out/ dir …
-
-for locale in ["en_US", "ja_JP", "zh_TW", "zh_CN"]:
-    bubbled = render_bubbles_on_panels(
-        chapter_script=chapter,
-        lettering_spec=chapter,                # v3 schema; same fields
-        panel_images_manifest=panel_images_manifest,
-        bubble_style_config=None,
-        out_dir=Path(f"out/bubbled/{locale}/ep_001/"),
-        locale=locale,
-    )
-    payload = compose_episode_strips(
-        chapter_script=chapter,
-        panel_images_manifest=bubbled,
-        out_dir=Path(f"out/episodes/{locale}/ep_001/"),
-        episode_id="ep_001",
-    )
-    print(f"{locale}: {payload['total_height']}px / {len(payload['segments'])} segments")
+# panel_images_manifest is reconstructed from the rendered out/ dir
+# (one {panel_id, status:"ok", path, width, height} row per rendered PNG),
+# then for each locale: bubble -> compose -> payload.json.
 ```
+
+</details>
 
 ### E. Build WEBTOON Canvas submission package (en_US + zh_TW)
 
