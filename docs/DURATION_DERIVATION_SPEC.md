@@ -144,6 +144,7 @@ runtime_formats:
 | compact_book_5ch_15min | `midpoint` | audit regime=midpoint |
 | compact_book_5ch_20min | `midpoint` | audit regime=midpoint |
 | compact_book_8ch_30min | `midpoint` | audit regime=midpoint |
+| one_hour_book | `midpoint` | NEW first-class 1-hour tier (operator OPD-20260613-001); midpoint(8000,10000)=9000 |
 
 These assignments mirror the `regime` field already recorded per-format in
 `projection_results.json` — they are not new editorial choices.
@@ -216,6 +217,7 @@ can never disagree (closes `RECOMMENDATIONS.md` item C).
 | compact_book_5ch_15min | midpoint | 3,750 | 25 | 16 | 15 | label was −40% |
 | compact_book_5ch_20min | midpoint | 4,750 | 32 | 21 | 20 | label was −38% |
 | compact_book_8ch_30min | midpoint | 6,500 | 43 | 28 | 30 | label was −30% |
+| one_hour_book | midpoint | 9,000 | 60 | 39 | (new tier) | NEW (OPD-20260613-001) |
 
 (`word_target` uses the registry word_range on `origin/main`; e.g. extended_book_2h `[17000,25000]`
 → midpoint 21,000. `standard_book` uses the reconciled `cap_word_target` of 22,000 from §5.)

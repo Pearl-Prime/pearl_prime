@@ -68,6 +68,17 @@ def test_load_runtime_format_standard():
     assert spec["chapter_count_default"] == 10
 
 
+def test_load_runtime_format_one_hour():
+    # DURATION-DERIVATION-01 / OPD-20260613-001: NEW first-class 1-hour tier.
+    # 1hr audiobook @ 150 WPM = exactly 9000 words (= midpoint of [8000,10000]).
+    spec = load_runtime_format("one_hour_book")
+    assert spec["word_range"] == [8000, 10000]
+    assert spec["fill_regime"] == "midpoint"
+    assert spec["audiobook_minutes"] == 60
+    assert spec["ebook_minutes"] == 39
+    assert spec["chapter_count_default"] == 8
+
+
 def test_apply_knobs_anxiety_standard():
     spine = load_spine("anxiety")
     profile = load_knob_profile("anxiety")

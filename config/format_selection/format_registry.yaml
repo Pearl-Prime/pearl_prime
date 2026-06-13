@@ -133,6 +133,16 @@ runtime_formats:
     ebook_minutes: 26      # DERIVED round(6000/230)
     compatible_tiers: [A, B, C]
     compatible_structural_formats: [F003, F006, F007, F011]
+  one_hour_book:
+    duration_minutes: 60  # DEPRECATED — superseded by audiobook_minutes/ebook_minutes (DURATION-DERIVATION-01). Do not hand-edit; readers migrate per follow-up. Overwritten with derived audiobook value.
+    chapter_count_default: 8
+    word_range: [8000, 10000]
+    fill_regime: midpoint  # DURATION-DERIVATION-01 §3.1
+    audiobook_minutes: 60  # DERIVED round(9000/150); word_target=midpoint(8000,10000)=9000 (§4.2). NEW first-class "1-Hour Book" tier — operator-approved (OPD-20260613-001); fills the ~45min→~2.5hr ladder gap. 1hr @ 150 WPM = exactly 9000 words (= standard_book floor).
+    ebook_minutes: 39      # DERIVED round(9000/230)
+    compatible_tiers: [A, B]
+    compatible_structural_formats: [F003, F006, F007, F011]
+
   standard_book:
     duration_minutes: 147  # DEPRECATED — superseded by audiobook_minutes/ebook_minutes (DURATION-DERIVATION-01). Do not hand-edit; readers migrate per follow-up. Overwritten with derived audiobook value (was 55 — the historically wrong label; real audiobook ~143min/2h23m at 150 WPM per PR #1510 audit f27dafdb2).
     chapter_count_default: 10  # AUTO-PLAN-SSOT-01-AMENDMENT Group B: was 12; Python value 10 preserved (most consequential — default canonical book runtime)
