@@ -18,6 +18,12 @@ F8: citation grafting → deferred until anchor corpus lands (artifacts/referenc
 F9-F10: reserved (unclaimed detector ID gaps)
 F11: HOOK atom first-paragraph abstract opening (lacks scene-first person+situation+posture) → WARN
      Per HOOK-SCENE-FIRST-01 / OPD-144; V1 WARN-only (future ws may escalate to HARD_FAIL)
+F12: un-wrapped voice-shift → FAIL on raw teacher/science register (bypassed the wrapper),
+     WARN on a thin wrapper. Per OVERLAY_SPEC §13 "Stage-6 voice-shift lint" + cap
+     BESTSELLER-FIT-PLAN-VOICE-DOCTRINE-V1-01. Shares the VoiceOutOfZoneError vocabulary
+     with D12's voice_braid_gate (cross-zone bleed); F12 is the un-wrapped-shift sibling.
+F13: dwell-beat / integration starvation → FAIL when 3+ consecutive named insights run
+     with no dwell beat between them. Per OVERLAY_SPEC §7.3 dwell contract + §13 criterion #13.
 
 Verdicts:
   PASS         — 0 FAIL, 0 WARN
@@ -44,7 +50,7 @@ import yaml
 
 @dataclass(frozen=True)
 class RegisterFinding:
-    failure_id: str         # F1..F8, F11 (F9-F10 reserved)
+    failure_id: str         # F1..F8, F11, F12, F13 (F9-F10 reserved)
     severity: str           # WARN / FAIL / HARD_FAIL
     chapter: Optional[int]  # 1-indexed; None for book-level findings
     summary: str            # short human description
@@ -743,6 +749,356 @@ def load_hook_atoms_from_paths(paths: list[Path]) -> list[tuple[str, str]]:
 
 
 # ─────────────────────────────────────────────────────────────────────────────
+# F12 — Un-wrapped voice-shift lint (BESTSELLER-FIT-PLAN-VOICE-DOCTRINE-V1-01)
+# ─────────────────────────────────────────────────────────────────────────────
+#
+# Per OVERLAY_SPEC §13 "Stage-6 voice-shift lint (F12)". D12's voice_braid_gate
+# (VoiceOutOfZoneError) catches CROSS-ZONE voice bleed (coach voice inside a STORY
+# slot). F12 — the register_gate-side sibling — catches UN-WRAPPED voice-shift:
+# teacher-doctrine or science-citation register entered RAW, without having been
+# routed through teacher_wrapper.py / science_wrapper resolution.
+#
+# Shared error vocabulary: F12 findings carry evidence["error_class"] =
+# "VoiceOutOfZoneError" so F12 and D12 surface under ONE operator-facing
+# vocabulary (the spec's explicit requirement). voice_braid_gate.py does not yet
+# exist on origin/main, so F12 is the register_gate-side detector; when D12 lands
+# it reuses — does NOT duplicate — this VoiceOutOfZoneError vocabulary.
+#
+# Deterministic heuristic only — NO LLM API (CLAUDE.md Tier policy).
+#
+# Severity:
+#   FAIL — an un-wrapped voice-shift (teacher/science register entered raw, no
+#          wrapper attribution present in the surrounding sentence window).
+#   WARN — a thin wrapper (wrapper present but attribution is degenerate — a bare
+#          generalized "According to <Named individual>" that should have been
+#          routed through named mode, or a wrapper stem with no lift/payload).
+
+# Raw-teacher tells: honorific + named individual speaking AS authority, the exact
+# generalized-mode anti-patterns banned by teacher_wrapper_templates.yaml
+# ("Master X says…", "I came across this teacher", "According to [named
+# individual]…"). These are register entries that bypassed the wrapper.
+F12_RAW_TEACHER_RE = re.compile(
+    r"\b("
+    r"Master\s+[A-Z][a-z]+(?:\s+(?:says|teaches|taught|said|tells|reminds|reminds us|teaches us))?"
+    r"|(?:Sensei|Guru|Roshi|Rōshi|Lama|Swami|Sifu|Sef?u|Rinpoche|Sheikh|Shaykh)\s+[A-Z][a-z]+"
+    r"|I\s+(?:came across|met|studied with|once met|found)\s+(?:this|a|an)\s+(?:teacher|master|guru|monk|sensei|roshi|lama)"
+    r")\b",
+    re.IGNORECASE,
+)
+
+# Raw-science tells: named scientist + proof/overclaim verb, or first-person
+# "a study I read", or the "Scientists have definitively shown" overclaim — the
+# exact generalized-mode anti-patterns banned by science_wrapper_templates.yaml.
+F12_RAW_SCIENCE_RE = re.compile(
+    r"\b("
+    r"Dr\.?\s+[A-Z][a-z]+\s+(?:proved|proves|has proven|definitively|showed|shows|discovered|found|demonstrated)"
+    r"|Professor\s+[A-Z][a-z]+\s+(?:proved|proves|showed|shows|discovered|demonstrated)"
+    r"|(?:a|the|this)\s+study\s+I\s+(?:read|saw|came across|found|remember)"
+    r"|Scientists\s+have\s+definitively\s+(?:shown|proven|proved|demonstrated)"
+    r"|Science\s+has\s+(?:proven|proved|definitively)"
+    r")\b",
+    re.IGNORECASE,
+)
+
+# Wrapper-attribution markers — the signatures that teacher_wrapper.py /
+# science_wrapper resolution leave in the prose (from teacher_wrapper_templates.yaml
+# + science_wrapper_templates.yaml, named + generalized + composite modes). Their
+# presence near a register-shift means the shift WAS wrapped (no FAIL).
+F12_WRAPPER_ATTRIBUTION_RE = re.compile(
+    r"("
+    # teacher wrapper signatures (named + generalized)
+    r"\bAccording to\b"
+    r"|\bIn\s+[A-Z][a-z]+'s\s+(?:framework|reading|work)\b"
+    r"|\bDrawing on\b"
+    r"|\bAs\s+[A-Z][a-z]+\s+reminds us\b"
+    r"|\b(?:the|The)\s+[A-Z][a-z]+\s+tradition\b"
+    r"|\b(?:Tantric|Zen|Theravada|Theravadan|Taoist|Shingon|Sufi|Naqshbandi|"
+    r"Mikkyo|bhakti|somatic|contemplative)\s+(?:tradition|teaching|lineage|practice|approach)\b"
+    r"|\bA practice (?:from|as taught by|grounded in)\b"
+    # science wrapper signatures (named + generalized + composite)
+    r"|\bResearch in\b"
+    r"|\bthe\s+[a-z]+\s+evidence\b"
+    r"|\bAcross studies\b"
+    r"|\bAcross disciplines\b"
+    r"|\bWithin\s+[a-z]+,?\s+the data\b"
+    r"|\bRooted in\b"
+    r"|\bgrounded in\s+[A-Z][a-z]+'s\b"
+    r"|\bDrawn from\b"
+    r")",
+    re.IGNORECASE,
+)
+
+# "Thin wrapper" signal: a generalized-mode "According to <Named Capitalized
+# Person>" — the wrapper stem is present but it names an individual (named-mode
+# content smuggled through a generalized stem), or a wrapper stem that resolved to
+# a bare pattern with no payload after it. WARN, not FAIL.
+F12_THIN_WRAPPER_RE = re.compile(
+    r"\bAccording to\s+(?:Dr\.?\s+)?[A-Z][a-z]+(?:\s+[A-Z][a-z]+)?\s*[.,]",
+)
+
+
+F12_WINDOW_CHARS = 160  # attribution-proximity window around a register-shift marker.
+
+
+def _f12_window_has_wrapper(window: str) -> bool:
+    """True when wrapper-attribution vocabulary is present in the proximity window."""
+    return bool(F12_WRAPPER_ATTRIBUTION_RE.search(window))
+
+
+def _detect_f12_unwrapped_voice_shift(
+    chapters: list[tuple[int, str]],
+) -> list[RegisterFinding]:
+    """
+    Flag teacher / science register that shifted in RAW, bypassing the wrapper.
+
+    Operates on chapter text with a character window (NOT a naive sentence split:
+    the raw-science marker "Dr. X proved" itself contains a period, which a
+    sentence splitter would break apart). For each raw-teacher / raw-science marker
+    match, a ±F12_WINDOW_CHARS window is checked for wrapper-attribution vocab:
+      - no wrapper in window  → F12 FAIL (un-wrapped shift)
+      - wrapper in window     → F12 WARN (thin/degenerate wrapper; raw tell leaked
+                                 through an otherwise-wrapped line)
+    A generalized wrapper stem that names an individual ("According to Dr. X,")
+    is independently flagged WARN (thin wrapper). Findings carry the shared
+    VoiceOutOfZoneError vocabulary so F12 and D12 read the same to the operator.
+    """
+    findings: list[RegisterFinding] = []
+    for ch_num, ch_text in chapters:
+        flagged_spans: list[tuple[int, int]] = []  # de-dupe overlapping markers
+        for register, rx in (("teacher", F12_RAW_TEACHER_RE), ("science", F12_RAW_SCIENCE_RE)):
+            for m in rx.finditer(ch_text):
+                span = (m.start(), m.end())
+                if any(span[0] < e and s < span[1] for s, e in flagged_spans):
+                    continue
+                flagged_spans.append(span)
+                marker = m.group(0)
+                lo = max(0, m.start() - F12_WINDOW_CHARS)
+                hi = min(len(ch_text), m.end() + F12_WINDOW_CHARS)
+                window = ch_text[lo:hi]
+                snippet = ch_text[max(0, m.start() - 30):m.end() + 30].strip()
+                if _f12_window_has_wrapper(window):
+                    findings.append(RegisterFinding(
+                        failure_id="F12",
+                        severity="WARN",
+                        chapter=ch_num,
+                        summary=(
+                            f"thin wrapper — {register} register marker '{marker}' "
+                            f"present alongside a wrapper stem (degenerate attribution)"
+                        ),
+                        evidence={
+                            "error_class": "VoiceOutOfZoneError",
+                            "kind": "thin_wrapper",
+                            "register": register,
+                            "marker": marker,
+                            "snippet": snippet[:160],
+                            "cap": "BESTSELLER-FIT-PLAN-VOICE-DOCTRINE-V1-01",
+                        },
+                    ))
+                else:
+                    findings.append(RegisterFinding(
+                        failure_id="F12",
+                        severity="FAIL",
+                        chapter=ch_num,
+                        summary=(
+                            f"un-wrapped {register} voice-shift: '{marker}' entered raw "
+                            f"(bypassed teacher_wrapper / science_wrapper resolution)"
+                        ),
+                        evidence={
+                            "error_class": "VoiceOutOfZoneError",
+                            "kind": "unwrapped_voice_shift",
+                            "register": register,
+                            "marker": marker,
+                            "snippet": snippet[:160],
+                            "cap": "BESTSELLER-FIT-PLAN-VOICE-DOCTRINE-V1-01",
+                        },
+                    ))
+        # Thin-wrapper: a generalized stem that names an individual ("According to
+        # Dr. X,") even when no raw register verb fired. WARN.
+        for m in F12_THIN_WRAPPER_RE.finditer(ch_text):
+            span = (m.start(), m.end())
+            if any(span[0] < e and s < span[1] for s, e in flagged_spans):
+                continue
+            flagged_spans.append(span)
+            findings.append(RegisterFinding(
+                failure_id="F12",
+                severity="WARN",
+                chapter=ch_num,
+                summary=(
+                    "thin wrapper — generalized stem names an individual "
+                    "(should route through named mode or drop the name)"
+                ),
+                evidence={
+                    "error_class": "VoiceOutOfZoneError",
+                    "kind": "thin_wrapper",
+                    "register": "ambiguous",
+                    "snippet": ch_text[max(0, m.start() - 20):m.end() + 30].strip()[:160],
+                    "cap": "BESTSELLER-FIT-PLAN-VOICE-DOCTRINE-V1-01",
+                },
+            ))
+    return findings
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# F13 — Dwell-beat / integration-starvation (OVERLAY_SPEC §7.3 + §13 criterion #13)
+# ─────────────────────────────────────────────────────────────────────────────
+#
+# Per §7.3: after each NAMED INSIGHT (a sentence articulating a new pattern,
+# mechanism, reframe, or cost — the Name/Turn moves of §4, any PIVOT/REFLECTION
+# claim) the chapter must hold a DWELL BEAT before advancing. A dwell beat is
+# exactly one of: a body/sensory landing, a held silence, or a single concrete
+# consequence — and is ≤~40 words ("a held breath, not a passage").
+#
+# Criterion #13 FAIL (the "broken" band of the §13 rubric): three or more
+# CONSECUTIVE insight sentences with no dwell beat between them — integration
+# starvation. This detector wires that diagnostic in as register-gate finding F13,
+# feeding the editor §13 rubric.
+#
+# Deterministic heuristic only — NO LLM API.
+
+F13_DWELL_MAX_WORDS = 40  # §7.3: "A dwell beat longer than ~40 words ... breaks the contract."
+F13_CONSECUTIVE_INSIGHT_FAIL = 3  # §13 criterion #13 "broken" band.
+
+# Insight markers — a sentence that NAMES a new pattern / mechanism / reframe /
+# cost. (Name and Turn moves of §4; PIVOT/REFLECTION claims.)
+F13_INSIGHT_RE = re.compile(
+    r"("
+    r"\bthe mechanism is\b"
+    r"|\bwhat(?:'s| is) (?:actually )?happening (?:here )?is\b"
+    r"|\bwhich means\b"
+    r"|\bthe (?:real|actual|deeper|hidden) (?:pattern|cost|mechanism|truth|problem|fear|work)\b"
+    r"|\bthe pattern is\b"
+    r"|\bthis is (?:what|why|how|the|not|a)\b"
+    r"|\bis not\b.*\bbut\b"
+    r"|\bwas never (?:about|the)\b"
+    r"|\bthe truth is\b"
+    r"|\bhere(?:'s| is) (?:the|what)\b"
+    r"|\bturns out\b"
+    r"|\bthe point is\b"
+    r"|\bthe reframe\b"
+    r"|\bnotice that\b"
+    r"|\bthe cost (?:is|of)\b"
+    r")",
+    re.IGNORECASE,
+)
+
+# Body / postural landing vocabulary ("land it in the body").
+F13_DWELL_BODY_RE = re.compile(
+    r"\b(?:shoulders|jaw|chest|ribs|throat|breath|breathe|breathing|hands|heart|"
+    r"belly|stomach|gut|spine|neck|skin|feet|chair|floor|lungs|pulse|muscles|"
+    r"tightens|loosens|slumped|hunched|clenched|unclench|exhale|inhale|settle|"
+    r"settles|warmth|weight)\b",
+    re.IGNORECASE,
+)
+
+# Held-silence vocabulary ("hold the silence").
+F13_DWELL_SILENCE_RE = re.compile(
+    r"("
+    r"\bread (?:that|this) again\b"
+    r"|\bstop reading\b"
+    r"|\bthe next (?:sentence|line|paragraph) can wait\b"
+    r"|\b(?:sit|stay|rest|wait) (?:with|here|in) (?:that|this|it)\b"
+    r"|\bfor (?:a|one) (?:moment|breath|beat)\b"
+    r"|\blet (?:that|this|it) (?:land|sit|settle|register)\b"
+    r"|\bdon't move on (?:yet|too fast)\b"
+    r"|\bnothing (?:more|else) to (?:do|say) (?:here|right now)\b"
+    r")",
+    re.IGNORECASE,
+)
+
+# Single-concrete-consequence vocabulary ("name one concrete consequence").
+F13_DWELL_CONSEQUENCE_RE = re.compile(
+    r"("
+    r"\bthe next time\b"
+    r"|\bso (?:tonight|tomorrow|today|the next)\b"
+    r"|\bthe choice is (?:already|now)\b"
+    r"|\bwhich is why,? the next\b"
+    r"|\band you get to\b"
+    r"|\bthat is the (?:moment|cost|price)\b"
+    r")",
+    re.IGNORECASE,
+)
+
+
+def _f13_is_insight(sentence: str) -> bool:
+    return bool(F13_INSIGHT_RE.search(sentence))
+
+
+def _f13_is_dwell_beat(sentence: str) -> bool:
+    """
+    True when the sentence is a dwell beat: a body landing, a held silence, or a
+    single concrete consequence — AND it is ≤~40 words ("a held breath, not a
+    passage", §7.3). A long sentence, even if sensory, is not a dwell beat.
+    """
+    if len(sentence.split()) > F13_DWELL_MAX_WORDS:
+        return False
+    return bool(
+        F13_DWELL_BODY_RE.search(sentence)
+        or F13_DWELL_SILENCE_RE.search(sentence)
+        or F13_DWELL_CONSEQUENCE_RE.search(sentence)
+    )
+
+
+def _detect_f13_dwell_starvation(
+    chapters: list[tuple[int, str]],
+) -> list[RegisterFinding]:
+    """
+    Detect integration starvation per §13 criterion #13: 3+ CONSECUTIVE named
+    insight sentences with no dwell beat between them.
+
+    Walks each chapter's sentences in order, tracking the current run of
+    consecutive insight sentences. A dwell beat (or a long non-insight sentence
+    that is itself not an insight) resets the run. When a run reaches
+    F13_CONSECUTIVE_INSIGHT_FAIL, the chapter FAILS criterion #13.
+    """
+    findings: list[RegisterFinding] = []
+    for ch_num, ch_text in chapters:
+        sentences = _split_sentences(ch_text)
+        run = 0               # current consecutive-insight run length
+        worst_run = 0
+        worst_run_sents: list[str] = []
+        cur_run_sents: list[str] = []
+        flagged = False
+        for sent in sentences:
+            if _f13_is_dwell_beat(sent):
+                # A dwell beat breaks the run — the reader gets to stay.
+                run = 0
+                cur_run_sents = []
+                continue
+            if _f13_is_insight(sent):
+                run += 1
+                cur_run_sents.append(sent)
+                if run > worst_run:
+                    worst_run = run
+                    worst_run_sents = list(cur_run_sents)
+                if run >= F13_CONSECUTIVE_INSIGHT_FAIL and not flagged:
+                    findings.append(RegisterFinding(
+                        failure_id="F13",
+                        severity="FAIL",
+                        chapter=ch_num,
+                        summary=(
+                            f"integration starvation — {run}+ consecutive named "
+                            f"insights with no dwell beat between them "
+                            f"(criterion #13 broken band; §7.3 dwell contract)"
+                        ),
+                        evidence={
+                            "criterion": 13,
+                            "consecutive_insights": run,
+                            "threshold": F13_CONSECUTIVE_INSIGHT_FAIL,
+                            "run_excerpt": [s[:120] for s in cur_run_sents[:5]],
+                            "spec_ref": "OVERLAY_SPEC §7.3 / §13 criterion #13",
+                        },
+                    ))
+                    flagged = True
+            else:
+                # Neutral, non-insight, non-dwell sentence. It is not teaching, but
+                # the spec's diagnostic is specifically about consecutive INSIGHT
+                # sentences with no dwell BEAT between them — a neutral connective
+                # is not a dwell beat, so it does not reset the run.
+                continue
+    return findings
+
+
+# ─────────────────────────────────────────────────────────────────────────────
 # Aggregate verdict
 # ─────────────────────────────────────────────────────────────────────────────
 
@@ -772,6 +1128,8 @@ def _route_suggested_lanes(findings: list[RegisterFinding]) -> list[str]:
         "F6": "Pearl_Editor + Pearl_Writer (cadence variety in pedagogical-cadence atoms)",
         "F7": "Pearl_Architect (per-chapter practice-density cap) + Pearl_Editor (atom routing)",
         "F11": "Pearl_Editor (HOOK/ANGLE_DEFINITION scene-first rewrite per HOOK-SCENE-FIRST-01)",
+        "F12": "Pearl_Dev (route teacher/science register through teacher_wrapper / science_wrapper per BESTSELLER-FIT-PLAN-VOICE-DOCTRINE-V1-01) + Pearl_Editor (re-attribute the raw shift; shares D12 VoiceOutOfZoneError vocab)",
+        "F13": "Pearl_Editor + Pearl_Writer (re-pace per §7.3 dwell contract — insert a dwell beat after each named insight; §13 criterion #13)",
     }
     seen: set[str] = set()
     lanes: list[str] = []
@@ -798,10 +1156,15 @@ def evaluate_register(
     f11_all_variations: bool = False,
 ) -> RegisterGateResult:
     """
-    Score the rendered book against the F1-F7 detectors (+ optional F11 on HOOK atoms).
+    Score the rendered book against the F1-F7 + F12 + F13 detectors
+    (+ optional F11 on HOOK atoms).
 
     F8 (citation grafting) is deferred until anchor corpus
     (artifacts/reference/trade_pub_anchors/) lands.
+
+    F12 (un-wrapped voice-shift, BESTSELLER-FIT-PLAN-VOICE-DOCTRINE-V1-01) and F13
+    (dwell-beat / integration starvation, §7.3 + §13 criterion #13) are book-level
+    deterministic detectors and always run on the chapter text.
 
     When hook_atoms is provided, each entry is (atom_path, CANONICAL.txt text) and
     F11 runs per HOOK-SCENE-FIRST-01 (WARN-only in V1).
@@ -819,6 +1182,8 @@ def evaluate_register(
     findings += _detect_f5_named_character_continuity(chapters)
     findings += _detect_f6_cadence_repetition(chapters)
     findings += _detect_f7_practice_density(chapters)
+    findings += _detect_f12_unwrapped_voice_shift(chapters)
+    findings += _detect_f13_dwell_starvation(chapters)
     if hook_atoms:
         if f11_all_variations:
             findings += _detect_f11_hook_abstract_opening_all_variations(hook_atoms)
@@ -878,7 +1243,7 @@ def evaluate_register_from_path(
 
 if __name__ == "__main__":
     import argparse
-    parser = argparse.ArgumentParser(description="Score a Pearl Prime book.txt against the register gate (F1-F7, optional F11).")
+    parser = argparse.ArgumentParser(description="Score a Pearl Prime book.txt against the register gate (F1-F7, F12, F13, optional F11).")
     parser.add_argument("--book", required=True, help="Path to book.txt")
     parser.add_argument("--teacher", default="", help="Teacher ID (e.g. ahjan); enables F3 doctrine check")
     parser.add_argument("--persona", default="", help="Persona ID (info only)")
