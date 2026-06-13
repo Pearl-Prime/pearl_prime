@@ -3606,8 +3606,32 @@ export default function BrandWizard() {
     const params = new URLSearchParams(window.location.search);
     const urlTeacher = params.get("teacher");
     const urlMode = params.get("mode");
-    if (urlTeacher || urlMode === "composite" || urlMode === "music") { setPhase("wizard"); setStep(0); scrollTop(); }
+    if (urlTeacher || urlMode === "composite" || urlMode === "music") {
+      setPhase("wizard");
+      // Music-mode step 4 skip-if-completed: the musician_reflections_survey writes
+      // localStorage "phoenix_musician_reflections" on submit (then redirects here with
+      // ?mode=music). If that intake is already present, auto-advance past the survey
+      // pane (step index 3 / "Step 4") to Visual Style (index 4) so returning musicians
+      // don't re-take the intake. Absent/invalid → normal step-0 entry.
+      let hasReflections = false;
+      if (urlMode === "music") {
+        try { hasReflections = !!localStorage.getItem("phoenix_musician_reflections"); } catch (_) {}
+      }
+      setStep(hasReflections ? 4 : 0);
+      scrollTop();
+    }
   }, []);
+
+  // Music-mode step 4 skip-if-completed (in-flow guard): if the wizard lands on the
+  // survey pane (step index 3) in music mode while "phoenix_musician_reflections" is
+  // already saved — e.g. via Back navigation after a completed intake — auto-advance
+  // to Visual Style (index 4). Mirrors the on-entry skip above.
+  useEffect(() => {
+    if (state.mode !== "music" || step !== 3) return;
+    let hasReflections = false;
+    try { hasReflections = !!localStorage.getItem("phoenix_musician_reflections"); } catch (_) {}
+    if (hasReflections) { setStep(4); scrollTop(); }
+  }, [step, state.mode]);
 
   // INTRO: 0=welcome, 1=journey → choose teacher → wizard
   if (phase === "intro") {
