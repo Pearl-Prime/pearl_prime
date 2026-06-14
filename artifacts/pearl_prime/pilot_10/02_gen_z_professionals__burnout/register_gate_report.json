@@ -1,0 +1,1463 @@
+{
+  "verdict": "HARD_FAIL",
+  "findings": [
+    {
+      "failure_id": "F1",
+      "severity": "FAIL",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 5 (chapters [1, 3, 4, 7, 11])",
+      "evidence": {
+        "cluster_id": "f1_cluster_000",
+        "instances": [
+          {
+            "chapter": 1,
+            "para_index": 10
+          },
+          {
+            "chapter": 3,
+            "para_index": 12
+          },
+          {
+            "chapter": 4,
+            "para_index": 3
+          },
+          {
+            "chapter": 7,
+            "para_index": 3
+          },
+          {
+            "chapter": 11,
+            "para_index": 3
+          }
+        ],
+        "excerpt": "Across Ahjan's contemplative work, the through-line is... Your mind has the capacity to recognize truth. This capacity d..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [1, 3])",
+      "evidence": {
+        "cluster_id": "f1_cluster_001",
+        "instances": [
+          {
+            "chapter": 1,
+            "para_index": 17
+          },
+          {
+            "chapter": 3,
+            "para_index": 6
+          }
+        ],
+        "excerpt": "Where in your life do you run from what is difficult? Can you name one place where\nyou use busy-ness, distraction, or sl..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [1, 2])",
+      "evidence": {
+        "cluster_id": "f1_cluster_002",
+        "instances": [
+          {
+            "chapter": 1,
+            "para_index": 19
+          },
+          {
+            "chapter": 2,
+            "para_index": 3
+          }
+        ],
+        "excerpt": "Ahjan describes this as the foundation of contemplative... Attachment grows in darkness. When you look directly at what ..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [1, 6])",
+      "evidence": {
+        "cluster_id": "f1_cluster_003",
+        "instances": [
+          {
+            "chapter": 1,
+            "para_index": 38
+          },
+          {
+            "chapter": 6,
+            "para_index": 15
+          }
+        ],
+        "excerpt": "Here is the mechanism. When the system is depleted, the prediction loop changes shape. Instead of forecasting outcomes, ..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [1, 3])",
+      "evidence": {
+        "cluster_id": "f1_cluster_004",
+        "instances": [
+          {
+            "chapter": 1,
+            "para_index": 40
+          },
+          {
+            "chapter": 3,
+            "para_index": 20
+          }
+        ],
+        "excerpt": "In Ahjan's framework, the path begins with... A poignant Buddhist quote aligns perfectly with this theme: Hatred does no..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [1, 12])",
+      "evidence": {
+        "cluster_id": "f1_cluster_005",
+        "instances": [
+          {
+            "chapter": 1,
+            "para_index": 48
+          },
+          {
+            "chapter": 12,
+            "para_index": 26
+          }
+        ],
+        "excerpt": "This is a breath-based practice. You are not trying to breathe perfectly or deeply. You are giving your nervous system a..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [2, 6])",
+      "evidence": {
+        "cluster_id": "f1_cluster_006",
+        "instances": [
+          {
+            "chapter": 2,
+            "para_index": 4
+          },
+          {
+            "chapter": 6,
+            "para_index": 7
+          }
+        ],
+        "excerpt": "There's a specific kind of exhaustion that comes from being the first generation to have named everything about our own ..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [2, 3])",
+      "evidence": {
+        "cluster_id": "f1_cluster_007",
+        "instances": [
+          {
+            "chapter": 2,
+            "para_index": 6
+          },
+          {
+            "chapter": 3,
+            "para_index": 10
+          }
+        ],
+        "excerpt": "What are you attached to that you pretend you are not? Look at it without judgment.\nWhy do you grip it? Is the thing its..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [2, 8])",
+      "evidence": {
+        "cluster_id": "f1_cluster_008",
+        "instances": [
+          {
+            "chapter": 2,
+            "para_index": 10
+          },
+          {
+            "chapter": 8,
+            "para_index": 6
+          }
+        ],
+        "excerpt": "Notice a thought that repeats itself in your mind. Follow it back. Who told you\nthis was true? How long have you carried..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [2, 8])",
+      "evidence": {
+        "cluster_id": "f1_cluster_009",
+        "instances": [
+          {
+            "chapter": 2,
+            "para_index": 14
+          },
+          {
+            "chapter": 8,
+            "para_index": 16
+          }
+        ],
+        "excerpt": "She woke at 4 a.m. again. Not to an alarm \u2014 to the inventory. The deck she hadn't finished. The DM she'd left on read. T..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [2, 9])",
+      "evidence": {
+        "cluster_id": "f1_cluster_010",
+        "instances": [
+          {
+            "chapter": 2,
+            "para_index": 19
+          },
+          {
+            "chapter": 9,
+            "para_index": 14
+          }
+        ],
+        "excerpt": "Here is the mechanism. Burnout shame has a specific shape. It is the conviction that other people in your role are handl..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [2])",
+      "evidence": {
+        "cluster_id": "f1_cluster_011",
+        "instances": [
+          {
+            "chapter": 2,
+            "para_index": 28
+          },
+          {
+            "chapter": 2,
+            "para_index": 45
+          }
+        ],
+        "excerpt": "The real cost of burnout is not lost energy \u2014 it is lost caring. The exhaustion most people notice is the surface. What ..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [2, 3])",
+      "evidence": {
+        "cluster_id": "f1_cluster_012",
+        "instances": [
+          {
+            "chapter": 2,
+            "para_index": 34
+          },
+          {
+            "chapter": 3,
+            "para_index": 36
+          }
+        ],
+        "excerpt": "Notice one task you finished today.\nWrite it down or say it aloud.\nThis happened. You did this.\nFeel the weight of that ..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [2, 3])",
+      "evidence": {
+        "cluster_id": "f1_cluster_013",
+        "instances": [
+          {
+            "chapter": 2,
+            "para_index": 36
+          },
+          {
+            "chapter": 3,
+            "para_index": 31
+          }
+        ],
+        "excerpt": "The win here is not calm. The win is noticing the alarm before it chooses for you.\nto feel different yet. Only notice wh..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [2, 3])",
+      "evidence": {
+        "cluster_id": "f1_cluster_014",
+        "instances": [
+          {
+            "chapter": 2,
+            "para_index": 41
+          },
+          {
+            "chapter": 3,
+            "para_index": 29
+          }
+        ],
+        "excerpt": "Stop checking Slack and email right now.\nClose the laptop lid completely.\nStand up and stretch your arms overhead.\nWalk ..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [2, 10])",
+      "evidence": {
+        "cluster_id": "f1_cluster_015",
+        "instances": [
+          {
+            "chapter": 2,
+            "para_index": 42
+          },
+          {
+            "chapter": 10,
+            "para_index": 33
+          }
+        ],
+        "excerpt": "Now, reflect on the transition.\nStanding slowly may have prevented sudden activation. Stress often spikes during abrupt ..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [3, 10])",
+      "evidence": {
+        "cluster_id": "f1_cluster_016",
+        "instances": [
+          {
+            "chapter": 3,
+            "para_index": 19
+          },
+          {
+            "chapter": 10,
+            "para_index": 18
+          }
+        ],
+        "excerpt": "Here is the mechanism. Your stress response is not designed to run continuously. It is designed to fire, do its job, and..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [3])",
+      "evidence": {
+        "cluster_id": "f1_cluster_017",
+        "instances": [
+          {
+            "chapter": 3,
+            "para_index": 23
+          },
+          {
+            "chapter": 3,
+            "para_index": 41
+          }
+        ],
+        "excerpt": "Underneath burnout is an equation the reader has never consciously examined: worth equals usefulness. Not worth is enhan..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [4, 8])",
+      "evidence": {
+        "cluster_id": "f1_cluster_018",
+        "instances": [
+          {
+            "chapter": 4,
+            "para_index": 15
+          },
+          {
+            "chapter": 8,
+            "para_index": 41
+          }
+        ],
+        "excerpt": "Here is the mechanism. The comparison engine, in burnout conditions, gets cruel. It does not just track relative positio..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [4, 8])",
+      "evidence": {
+        "cluster_id": "f1_cluster_019",
+        "instances": [
+          {
+            "chapter": 4,
+            "para_index": 16
+          },
+          {
+            "chapter": 8,
+            "para_index": 42
+          }
+        ],
+        "excerpt": "Sit with long enough and one thread emerges... Now take another handful of salt and put it in the nearby river. Then, br..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [4])",
+      "evidence": {
+        "cluster_id": "f1_cluster_020",
+        "instances": [
+          {
+            "chapter": 4,
+            "para_index": 19
+          },
+          {
+            "chapter": 4,
+            "para_index": 31
+          }
+        ],
+        "excerpt": "The physical collapse of burnout \u2014 the exhaustion that persists through sleep, the inflammation, the immune dysfunction ..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [4, 9])",
+      "evidence": {
+        "cluster_id": "f1_cluster_021",
+        "instances": [
+          {
+            "chapter": 4,
+            "para_index": 24
+          },
+          {
+            "chapter": 9,
+            "para_index": 29
+          }
+        ],
+        "excerpt": "Now, reflect on the contrast you felt.\nTensing and releasing creates clear differentiation between activation and relaxa..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [5, 8])",
+      "evidence": {
+        "cluster_id": "f1_cluster_022",
+        "instances": [
+          {
+            "chapter": 5,
+            "para_index": 3
+          },
+          {
+            "chapter": 8,
+            "para_index": 3
+          }
+        ],
+        "excerpt": "In Ahjan's framework, the path begins with... Suffering is not a punishment. It is a signal. When you move toward what h..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [5, 7])",
+      "evidence": {
+        "cluster_id": "f1_cluster_023",
+        "instances": [
+          {
+            "chapter": 5,
+            "para_index": 12
+          },
+          {
+            "chapter": 7,
+            "para_index": 18
+          }
+        ],
+        "excerpt": "Here is the mechanism. Every time your attention moves from one channel to another, there is a tax. The brain does not s..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [5, 6])",
+      "evidence": {
+        "cluster_id": "f1_cluster_024",
+        "instances": [
+          {
+            "chapter": 5,
+            "para_index": 13
+          },
+          {
+            "chapter": 6,
+            "para_index": 16
+          }
+        ],
+        "excerpt": "the foundation of contemplative... Ahjan keeps pointing toward a small word that gets larger the longer you sit\nwith it...."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [5, 6])",
+      "evidence": {
+        "cluster_id": "f1_cluster_025",
+        "instances": [
+          {
+            "chapter": 5,
+            "para_index": 14
+          },
+          {
+            "chapter": 6,
+            "para_index": 17
+          }
+        ],
+        "excerpt": "This is the part most people skip. They notice the tightness in the chest\nand immediately try to soften it. They notice ..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [5, 6])",
+      "evidence": {
+        "cluster_id": "f1_cluster_026",
+        "instances": [
+          {
+            "chapter": 5,
+            "para_index": 15
+          },
+          {
+            "chapter": 6,
+            "para_index": 18
+          }
+        ],
+        "excerpt": "\"I see the chest is tight.\" Full stop. Not \"I see the chest is tight, let\nme fix that.\" Not \"I see the chest is tight, w..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [5, 6])",
+      "evidence": {
+        "cluster_id": "f1_cluster_027",
+        "instances": [
+          {
+            "chapter": 5,
+            "para_index": 16
+          },
+          {
+            "chapter": 6,
+            "para_index": 19
+          }
+        ],
+        "excerpt": "Ahjan often says it like this. \"If you are looking at a candle and you keep\nadjusting the candle, you are not actually l..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [5, 6])",
+      "evidence": {
+        "cluster_id": "f1_cluster_028",
+        "instances": [
+          {
+            "chapter": 5,
+            "para_index": 17
+          },
+          {
+            "chapter": 6,
+            "para_index": 20
+          }
+        ],
+        "excerpt": "The same is true for whatever is happening in your body right now. If you\nkeep adjusting it, you are not actually seeing..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [5, 6])",
+      "evidence": {
+        "cluster_id": "f1_cluster_029",
+        "instances": [
+          {
+            "chapter": 5,
+            "para_index": 18
+          },
+          {
+            "chapter": 6,
+            "para_index": 21
+          }
+        ],
+        "excerpt": "Awareness is different. Awareness gives a sensation room to do what it was\ngoing to do anyway. The tightness moves throu..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [5, 6])",
+      "evidence": {
+        "cluster_id": "f1_cluster_030",
+        "instances": [
+          {
+            "chapter": 5,
+            "para_index": 19
+          },
+          {
+            "chapter": 6,
+            "para_index": 22
+          }
+        ],
+        "excerpt": "This is what Ahjan keeps returning to. Notice. Do not correct. See what\nhappens when you simply look."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [5])",
+      "evidence": {
+        "cluster_id": "f1_cluster_031",
+        "instances": [
+          {
+            "chapter": 5,
+            "para_index": 22
+          },
+          {
+            "chapter": 5,
+            "para_index": 36
+          }
+        ],
+        "excerpt": "Overfunctioning is not a personality type or a work ethic. It is a specific coping mechanism: when the threat of worthle..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [5, 12])",
+      "evidence": {
+        "cluster_id": "f1_cluster_032",
+        "instances": [
+          {
+            "chapter": 5,
+            "para_index": 28
+          },
+          {
+            "chapter": 12,
+            "para_index": 33
+          }
+        ],
+        "excerpt": "Now, take a moment and reflect.\nBreathing at an even rhythm may have created a smoother internal tempo. Heart rate varia..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [5, 7])",
+      "evidence": {
+        "cluster_id": "f1_cluster_033",
+        "instances": [
+          {
+            "chapter": 5,
+            "para_index": 33
+          },
+          {
+            "chapter": 7,
+            "para_index": 38
+          }
+        ],
+        "excerpt": "Now, let's acknowledge something important.\nThe longer exhale may have created a settling sensation in the abdomen or sh..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [5, 6])",
+      "evidence": {
+        "cluster_id": "f1_cluster_034",
+        "instances": [
+          {
+            "chapter": 5,
+            "para_index": 34
+          },
+          {
+            "chapter": 6,
+            "para_index": 37
+          }
+        ],
+        "excerpt": "There is a cost the system never measures. The energy required to manage the student loan payment while performing the r..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "FAIL",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 3 (chapters [6, 9, 10])",
+      "evidence": {
+        "cluster_id": "f1_cluster_035",
+        "instances": [
+          {
+            "chapter": 6,
+            "para_index": 3
+          },
+          {
+            "chapter": 9,
+            "para_index": 3
+          },
+          {
+            "chapter": 10,
+            "para_index": 3
+          }
+        ],
+        "excerpt": "What Ahjan keeps pointing toward is... The teachings are not about becoming someone better. They are about seeing who yo..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [6])",
+      "evidence": {
+        "cluster_id": "f1_cluster_036",
+        "instances": [
+          {
+            "chapter": 6,
+            "para_index": 25
+          },
+          {
+            "chapter": 6,
+            "para_index": 39
+          }
+        ],
+        "excerpt": "Rest is not the solution to burnout because burnout is not a rest deficit. Resting and returning to the same pattern wil..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [7])",
+      "evidence": {
+        "cluster_id": "f1_cluster_037",
+        "instances": [
+          {
+            "chapter": 7,
+            "para_index": 27
+          },
+          {
+            "chapter": 7,
+            "para_index": 41
+          }
+        ],
+        "excerpt": "For many burnout sufferers, usefulness is not just a value \u2014 it is identity. The question \"who am I when I'm not produci..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [8, 9])",
+      "evidence": {
+        "cluster_id": "f1_cluster_038",
+        "instances": [
+          {
+            "chapter": 8,
+            "para_index": 18
+          },
+          {
+            "chapter": 9,
+            "para_index": 9
+          }
+        ],
+        "excerpt": "Leadership praised how he'd handled the outage \u2014 steady, fast, no drama in the incident channel. What they praised was t..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [8, 10])",
+      "evidence": {
+        "cluster_id": "f1_cluster_039",
+        "instances": [
+          {
+            "chapter": 8,
+            "para_index": 20
+          },
+          {
+            "chapter": 10,
+            "para_index": 9
+          }
+        ],
+        "excerpt": "She told her best friend she was fine. She told her mom she was fine. She told her own reflection in the elevator's mirr..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [8, 9])",
+      "evidence": {
+        "cluster_id": "f1_cluster_040",
+        "instances": [
+          {
+            "chapter": 8,
+            "para_index": 22
+          },
+          {
+            "chapter": 9,
+            "para_index": 11
+          }
+        ],
+        "excerpt": "Nia cannot feel the keyboard under the fingers. The numbness has reached the hands. Peak intensity. Nia's eyelids drag. ..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [8, 10])",
+      "evidence": {
+        "cluster_id": "f1_cluster_041",
+        "instances": [
+          {
+            "chapter": 8,
+            "para_index": 40
+          },
+          {
+            "chapter": 10,
+            "para_index": 13
+          }
+        ],
+        "excerpt": "The ticket had a deadline. The dread didn't. That was the problem \u2014 everything at work had a sprint, a metric, a definit..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [8])",
+      "evidence": {
+        "cluster_id": "f1_cluster_042",
+        "instances": [
+          {
+            "chapter": 8,
+            "para_index": 45
+          },
+          {
+            "chapter": 8,
+            "para_index": 57
+          }
+        ],
+        "excerpt": "Overfunctioning doesn't stay at work. It moves into relationships as rescuing \u2014 doing for others what they could do for ..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [9])",
+      "evidence": {
+        "cluster_id": "f1_cluster_043",
+        "instances": [
+          {
+            "chapter": 9,
+            "para_index": 18
+          },
+          {
+            "chapter": 9,
+            "para_index": 32
+          }
+        ],
+        "excerpt": "Human capacity is finite. This is not a weakness to overcome or a constraint to optimize around \u2014 it is a biological and..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [9, 11])",
+      "evidence": {
+        "cluster_id": "f1_cluster_044",
+        "instances": [
+          {
+            "chapter": 9,
+            "para_index": 24
+          },
+          {
+            "chapter": 11,
+            "para_index": 30
+          }
+        ],
+        "excerpt": "Now, take a moment to assess your balance.\nRocking introduces predictable motion. Predictability reduces defensive activ..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [10])",
+      "evidence": {
+        "cluster_id": "f1_cluster_045",
+        "instances": [
+          {
+            "chapter": 10,
+            "para_index": 27
+          },
+          {
+            "chapter": 10,
+            "para_index": 40
+          }
+        ],
+        "excerpt": "The first practical move against overfunctioning is not adding rest \u2014 it is making one deliberate choice to not-do somet..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [11])",
+      "evidence": {
+        "cluster_id": "f1_cluster_046",
+        "instances": [
+          {
+            "chapter": 11,
+            "para_index": 24
+          },
+          {
+            "chapter": 11,
+            "para_index": 37
+          }
+        ],
+        "excerpt": "It is possible to have a different relationship to yourself \u2014 one in which your existence doesn't require continuous jus..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [12])",
+      "evidence": {
+        "cluster_id": "f1_cluster_047",
+        "instances": [
+          {
+            "chapter": 12,
+            "para_index": 22
+          },
+          {
+            "chapter": 12,
+            "para_index": 36
+          }
+        ],
+        "excerpt": "Recovery from burnout is not a return to a previous state. The previous state produced the burnout. What is being built ..."
+      }
+    },
+    {
+      "failure_id": "F2",
+      "severity": "HARD_FAIL",
+      "chapter": 1,
+      "summary": "F2.B: sentence ends with dangling preposition (e.g. \"In Ahjan's framework, the path begins with.\")",
+      "evidence": {
+        "rule": "F2.B_sentence_end_preposition",
+        "offset": 1119,
+        "snippet": "ope became the thing you're now running from.\n\nAcro"
+      }
+    },
+    {
+      "failure_id": "F2",
+      "severity": "HARD_FAIL",
+      "chapter": 1,
+      "summary": "F2.B: sentence ends with dangling preposition (e.g. \"In Ahjan's framework, the path begins with.\")",
+      "evidence": {
+        "rule": "F2.B_sentence_end_preposition",
+        "offset": 2675,
+        "snippet": "about your worth or what you're capable of.\n\nWhat"
+      }
+    },
+    {
+      "failure_id": "F2",
+      "severity": "HARD_FAIL",
+      "chapter": 1,
+      "summary": "F2.B: sentence ends with dangling preposition (e.g. \"In Ahjan's framework, the path begins with.\")",
+      "evidence": {
+        "rule": "F2.B_sentence_end_preposition",
+        "offset": 9997,
+        "snippet": "hing.\n\nHere's a breath practice to work with.\n\nThis"
+      }
+    },
+    {
+      "failure_id": "F2",
+      "severity": "HARD_FAIL",
+      "chapter": 1,
+      "summary": "F2.D: sub-4-word fragment \"INTEGRATION v06\" \u2014 likely slot-template artifact",
+      "evidence": {
+        "rule": "F2.D_sub_4_word_paragraph",
+        "text": "INTEGRATION v06"
+      }
+    },
+    {
+      "failure_id": "F2",
+      "severity": "HARD_FAIL",
+      "chapter": 2,
+      "summary": "F2.B: sentence ends with dangling preposition (e.g. \"In Ahjan's framework, the path begins with.\")",
+      "evidence": {
+        "rule": "F2.B_sentence_end_preposition",
+        "offset": 5814,
+        "snippet": "re like something everyone is wrestling with.\n\nSame"
+      }
+    },
+    {
+      "failure_id": "F2",
+      "severity": "HARD_FAIL",
+      "chapter": 2,
+      "summary": "F2.C: sentence starts with lowercase noun \"the\" (template did not fill leading article)",
+      "evidence": {
+        "rule": "F2.C_lowercase_noun_start",
+        "sentence": "the foundation of contemplative..."
+      }
+    },
+    {
+      "failure_id": "F2",
+      "severity": "HARD_FAIL",
+      "chapter": 3,
+      "summary": "F2.D: sub-4-word fragment \"INTEGRATION v04\" \u2014 likely slot-template artifact",
+      "evidence": {
+        "rule": "F2.D_sub_4_word_paragraph",
+        "text": "INTEGRATION v04"
+      }
+    },
+    {
+      "failure_id": "F2",
+      "severity": "HARD_FAIL",
+      "chapter": 5,
+      "summary": "F2.C: sentence starts with lowercase noun \"the\" (template did not fill leading article)",
+      "evidence": {
+        "rule": "F2.C_lowercase_noun_start",
+        "sentence": "the foundation of contemplative..."
+      }
+    },
+    {
+      "failure_id": "F2",
+      "severity": "HARD_FAIL",
+      "chapter": 6,
+      "summary": "F2.B: sentence ends with dangling preposition (e.g. \"In Ahjan's framework, the path begins with.\")",
+      "evidence": {
+        "rule": "F2.B_sentence_end_preposition",
+        "offset": 8082,
+        "snippet": "\n\nHere's an activation practice to work with.\n\nThis"
+      }
+    },
+    {
+      "failure_id": "F2",
+      "severity": "HARD_FAIL",
+      "chapter": 7,
+      "summary": "F2.C: sentence starts with lowercase noun \"the\" (template did not fill leading article)",
+      "evidence": {
+        "rule": "F2.C_lowercase_noun_start",
+        "sentence": "the foundation of contemplative..."
+      }
+    },
+    {
+      "failure_id": "F2",
+      "severity": "HARD_FAIL",
+      "chapter": 11,
+      "summary": "F2.B: sentence ends with dangling preposition (e.g. \"In Ahjan's framework, the path begins with.\")",
+      "evidence": {
+        "rule": "F2.B_sentence_end_preposition",
+        "offset": 7024,
+        "snippet": "ifted and let it settle before you move on.\n\nNow,"
+      }
+    },
+    {
+      "failure_id": "F2",
+      "severity": "HARD_FAIL",
+      "chapter": 11,
+      "summary": "F2.D: sub-4-word fragment \"Worth Without Output\" \u2014 likely slot-template artifact",
+      "evidence": {
+        "rule": "F2.D_sub_4_word_paragraph",
+        "text": "Worth Without Output"
+      }
+    },
+    {
+      "failure_id": "F2",
+      "severity": "HARD_FAIL",
+      "chapter": 12,
+      "summary": "F2.C: sentence starts with lowercase noun \"and\" (template did not fill leading article)",
+      "evidence": {
+        "rule": "F2.C_lowercase_noun_start",
+        "sentence": "and somatic approach..."
+      }
+    },
+    {
+      "failure_id": "F4",
+      "severity": "FAIL",
+      "chapter": null,
+      "summary": "closing-line repeated verbatim in 3 chapters: [1, 4, 6]",
+      "evidence": {
+        "chapters": [
+          1,
+          4,
+          6
+        ],
+        "closing_line": "What remains is the next ordinary moment where the pattern tries to make the decision for you."
+      }
+    },
+    {
+      "failure_id": "F4",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "closing-line repeated verbatim in 2 chapters: [5, 9]",
+      "evidence": {
+        "chapters": [
+          5,
+          9
+        ],
+        "closing_line": "The next pressure point is smaller than it sounds: one place where your body asks for proof before you move."
+      }
+    },
+    {
+      "failure_id": "F4",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "closing-line repeated verbatim in 2 chapters: [7, 11]",
+      "evidence": {
+        "chapters": [
+          7,
+          11
+        ],
+        "closing_line": "From here, the question is how this pattern changes when you meet it before it becomes a whole story."
+      }
+    },
+    {
+      "failure_id": "F6",
+      "severity": "FAIL",
+      "chapter": null,
+      "summary": "pedagogical-cadence 4-gram repeated 3+ times: 19 distinct repeating cadences",
+      "evidence": {
+        "repeats": [
+          {
+            "cadence": [
+              8,
+              9,
+              4,
+              21
+            ],
+            "count": 5
+          },
+          {
+            "cadence": [
+              6,
+              8,
+              4,
+              5
+            ],
+            "count": 3
+          },
+          {
+            "cadence": [
+              4,
+              4,
+              6,
+              4
+            ],
+            "count": 3
+          },
+          {
+            "cadence": [
+              5,
+              1,
+              8,
+              5
+            ],
+            "count": 3
+          },
+          {
+            "cadence": [
+              1,
+              8,
+              5,
+              6
+            ],
+            "count": 3
+          },
+          {
+            "cadence": [
+              8,
+              5,
+              6,
+              9
+            ],
+            "count": 3
+          },
+          {
+            "cadence": [
+              5,
+              6,
+              9,
+              13
+            ],
+            "count": 3
+          },
+          {
+            "cadence": [
+              6,
+              9,
+              13,
+              24
+            ],
+            "count": 3
+          },
+          {
+            "cadence": [
+              3,
+              6,
+              6,
+              5
+            ],
+            "count": 3
+          },
+          {
+            "cadence": [
+              6,
+              6,
+              5,
+              6
+            ],
+            "count": 3
+          },
+          {
+            "cadence": [
+              5,
+              5,
+              7,
+              6
+            ],
+            "count": 4
+          },
+          {
+            "cadence": [
+              8,
+              10,
+              4,
+              8
+            ],
+            "count": 3
+          },
+          {
+            "cadence": [
+              11,
+              4,
+              9,
+              3
+            ],
+            "count": 3
+          },
+          {
+            "cadence": [
+              12,
+              4,
+              7,
+              15
+            ],
+            "count": 5
+          },
+          {
+            "cadence": [
+              12,
+              7,
+              7,
+              2
+            ],
+            "count": 3
+          },
+          {
+            "cadence": [
+              19,
+              11,
+              4,
+              8
+            ],
+            "count": 3
+          },
+          {
+            "cadence": [
+              7,
+              2,
+              8,
+              5
+            ],
+            "count": 3
+          },
+          {
+            "cadence": [
+              8,
+              12,
+              9,
+              9
+            ],
+            "count": 3
+          },
+          {
+            "cadence": [
+              4,
+              3,
+              3,
+              3
+            ],
+            "count": 3
+          }
+        ]
+      }
+    },
+    {
+      "failure_id": "F7",
+      "severity": "FAIL",
+      "chapter": 1,
+      "summary": "over-prescribed practice density: 16 distinct prescribed-action paragraphs",
+      "evidence": {
+        "prescribed_action_count": 16
+      }
+    },
+    {
+      "failure_id": "F7",
+      "severity": "FAIL",
+      "chapter": 2,
+      "summary": "over-prescribed practice density: 20 distinct prescribed-action paragraphs",
+      "evidence": {
+        "prescribed_action_count": 20
+      }
+    },
+    {
+      "failure_id": "F7",
+      "severity": "FAIL",
+      "chapter": 3,
+      "summary": "over-prescribed practice density: 13 distinct prescribed-action paragraphs",
+      "evidence": {
+        "prescribed_action_count": 13
+      }
+    },
+    {
+      "failure_id": "F7",
+      "severity": "FAIL",
+      "chapter": 4,
+      "summary": "over-prescribed practice density: 8 distinct prescribed-action paragraphs",
+      "evidence": {
+        "prescribed_action_count": 8
+      }
+    },
+    {
+      "failure_id": "F7",
+      "severity": "FAIL",
+      "chapter": 5,
+      "summary": "over-prescribed practice density: 12 distinct prescribed-action paragraphs",
+      "evidence": {
+        "prescribed_action_count": 12
+      }
+    },
+    {
+      "failure_id": "F7",
+      "severity": "FAIL",
+      "chapter": 6,
+      "summary": "over-prescribed practice density: 9 distinct prescribed-action paragraphs",
+      "evidence": {
+        "prescribed_action_count": 9
+      }
+    },
+    {
+      "failure_id": "F7",
+      "severity": "FAIL",
+      "chapter": 7,
+      "summary": "over-prescribed practice density: 13 distinct prescribed-action paragraphs",
+      "evidence": {
+        "prescribed_action_count": 13
+      }
+    },
+    {
+      "failure_id": "F7",
+      "severity": "FAIL",
+      "chapter": 8,
+      "summary": "over-prescribed practice density: 13 distinct prescribed-action paragraphs",
+      "evidence": {
+        "prescribed_action_count": 13
+      }
+    },
+    {
+      "failure_id": "F7",
+      "severity": "FAIL",
+      "chapter": 9,
+      "summary": "over-prescribed practice density: 9 distinct prescribed-action paragraphs",
+      "evidence": {
+        "prescribed_action_count": 9
+      }
+    },
+    {
+      "failure_id": "F7",
+      "severity": "FAIL",
+      "chapter": 10,
+      "summary": "over-prescribed practice density: 12 distinct prescribed-action paragraphs",
+      "evidence": {
+        "prescribed_action_count": 12
+      }
+    },
+    {
+      "failure_id": "F7",
+      "severity": "FAIL",
+      "chapter": 11,
+      "summary": "over-prescribed practice density: 12 distinct prescribed-action paragraphs",
+      "evidence": {
+        "prescribed_action_count": 12
+      }
+    },
+    {
+      "failure_id": "F7",
+      "severity": "FAIL",
+      "chapter": 12,
+      "summary": "over-prescribed practice density: 9 distinct prescribed-action paragraphs",
+      "evidence": {
+        "prescribed_action_count": 9
+      }
+    }
+  ],
+  "book_metrics": {
+    "chapter_count": 12,
+    "word_count": 21673,
+    "teacher_id": "ahjan",
+    "persona_id": "gen_z_professionals",
+    "topic_id": "burnout",
+    "quality_profile": "production",
+    "spec_version": "1.0.0",
+    "f8_deferred": "anchor_corpus_required"
+  },
+  "suggested_lanes": [
+    "Pearl_Editor + Pearl_Writer (atom diversification) OR Pearl_Dev (renderer paragraph-template dedupe extension)",
+    "Pearl_Dev (renderer slot-fill validation; HARD-FAIL renderer artifact)",
+    "Pearl_Dev (closing-line uniqueness check in composer)",
+    "Pearl_Editor + Pearl_Writer (cadence variety in pedagogical-cadence atoms)",
+    "Pearl_Architect (per-chapter practice-density cap) + Pearl_Editor (atom routing)"
+  ]
+}

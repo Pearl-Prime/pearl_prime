@@ -1,0 +1,37 @@
+WARNING: --no-job-check: pipeline job enforcement disabled (CI/testing only).
+Template routing: boundaries×gen_x_sandwich×standard_book → spine_only (no template overlay)
+Book planning layer: no pre-authored plan for boundaries x gen_x_sandwich x standard_book (No deterministic BookStructurePlan for topic='boundaries', persona='gen_x_sandwich', runtime='standard_book'. Expected one of: /Users/ahjan/phoenix_omega/config/plans/boundaries_gen_x_sandwich_standard_book.yaml, /Users/ahjan/phoenix_omega/config/plans/boundaries_gen_x_sandwich_deep_book_6h.yaml, /Users/ahjan/phoenix_omega/config/plans/boundaries_gen_x_sandwich_6h.yaml); generating auto-plan.
+Content bank registry unavailable: /Users/ahjan/phoenix_omega/config/content_banks/anxiety_corporate_managers_scene_recognition_bank.yaml: variant 'acmr_001' missing keys ['band', 'ei_v2_targets', 'forbidden_terms', 'frame_allowlist', 'frame_blocklist', 'intensity', 'mechanism_depth', 'ontgp_move', 'persona_allowlist', 'runtime_allowlist', 'signature_phrases', 'slot_type', 'topic_allowlist', 'topic_blocklist']
+Exercise journey outcome mismatch ch=1 thesis=unnamed_feeling violations=['awareness: need>=0.900 got=0.500', 'integration: need>=0.400 got=0.000']
+Exercise journey outcome mismatch ch=2 thesis=unnamed_feeling violations=['awareness: need>=0.900 got=0.500', 'integration: need>=0.400 got=0.000']
+Exercise journey outcome mismatch ch=3 thesis=nothing_worked_yet violations=['awareness: need>=0.700 got=0.500', 'integration: need>=0.550 got=0.500']
+Exercise journey outcome mismatch ch=4 thesis=neck_up_problem violations=['awareness: need>=0.850 got=0.500']
+Exercise journey outcome mismatch ch=5 thesis=burnout_pattern violations=['awareness: need>=0.600 got=0.500', 'integration: need>=0.700 got=0.500']
+Exercise journey outcome mismatch ch=6 thesis=neck_up_problem violations=['awareness: need>=0.850 got=0.500', 'integration: need>=0.250 got=0.000']
+Exercise journey outcome mismatch ch=7 thesis=unnamed_feeling violations=['awareness: need>=0.900 got=0.500', 'integration: need>=0.400 got=0.000']
+Exercise journey outcome mismatch ch=8 thesis=unnamed_feeling violations=['awareness: need>=0.900 got=0.500', 'integration: need>=0.400 got=0.000']
+Exercise journey outcome mismatch ch=9 thesis=burnout_pattern violations=['awareness: need>=0.600 got=0.500', 'regulation: need>=0.550 got=0.500']
+Exercise journey outcome mismatch ch=10 thesis=nothing_worked_yet violations=['awareness: need>=0.700 got=0.500', 'integration: need>=0.550 got=0.500']
+Exercise journey outcome mismatch ch=11 thesis=nothing_worked_yet violations=['awareness: need>=0.700 got=0.500', 'integration: need>=0.550 got=0.500']
+Exercise journey outcome mismatch ch=12 thesis=anxiety_spike violations=['awareness: need>=0.750 got=0.500']
+Exercise governance: dropped EXERCISE slot in chapter 1 (cap=0).
+Exercise governance: dropped EXERCISE slot in chapter 1 (cap=0).
+EXERCISE FALLBACK: Using library_34 for chapter 0 topic boundaries persona gen_x_sandwich. No registry or teacher exercise was available for this slot — add EXERCISE coverage upstream if this is unexpected.
+Exercise governance: dropped EXERCISE slot in chapter 12 (cap=0).
+Exercise governance: dropped EXERCISE slot in chapter 12 (cap=0).
+Chapter contract: chapter 12: emotional_job 'resolution' matches previous chapter — escalation contract may be weak
+EXERCISE FALLBACK: Using library_34 for chapter 11 topic boundaries persona gen_x_sandwich. No registry or teacher exercise was available for this slot — add EXERCISE coverage upstream if this is unexpected.
+Chapter flow gate: PASS (0/12 failed). Report: /Users/ahjan/phoenix_omega/artifacts/pearl_prime/pilot_10/09_gen_x_sandwich__boundaries/chapter_flow_report.json
+Bestseller craft gate (advisory): PASS — overall ONTGP score 0.69
+Scene anti-genericity gate WARN. Report: /Users/ahjan/phoenix_omega/artifacts/pearl_prime/pilot_10/09_gen_x_sandwich__boundaries/scene_gate/spine-boundaries.json
+EI V2: PASS — composite 0.66. Report: /Users/ahjan/phoenix_omega/artifacts/pearl_prime/pilot_10/09_gen_x_sandwich__boundaries/ei_v2_report.json
+Editorial report: WARN — thesis drift 0 chapters, ONTGP 0.69, flow 1.00. Report: /Users/ahjan/phoenix_omega/artifacts/pearl_prime/pilot_10/09_gen_x_sandwich__boundaries/editorial_report.json
+Memorable lines: 9 chapters with >=2 quotable lines / 12. Report: /Users/ahjan/phoenix_omega/artifacts/pearl_prime/pilot_10/09_gen_x_sandwich__boundaries/memorable_line_report.json
+Transformation arc: PASS. Report: /Users/ahjan/phoenix_omega/artifacts/pearl_prime/pilot_10/09_gen_x_sandwich__boundaries/transformation_heatmap.json
+Book pass gate: FAIL. Report: /Users/ahjan/phoenix_omega/artifacts/pearl_prime/pilot_10/09_gen_x_sandwich__boundaries/book_pass_report.json
+Pearl Prime book quality gate: Hold (fail=0 hold=1) — /Users/ahjan/phoenix_omega/artifacts/pearl_prime/pilot_10/09_gen_x_sandwich__boundaries/book_quality_report.json
+BLOCKED: 1 quality gate(s) failed in production mode: book_pass. Use --skip-quality-gates or --quality-profile=draft to bypass.
+Wrote /Users/ahjan/phoenix_omega/artifacts/pearl_prime/pilot_10/09_gen_x_sandwich__boundaries/plan.json
+Rendered book (spine mode): /Users/ahjan/phoenix_omega/artifacts/pearl_prime/pilot_10/09_gen_x_sandwich__boundaries/book.txt
+Quality summary: /Users/ahjan/phoenix_omega/artifacts/pearl_prime/pilot_10/09_gen_x_sandwich__boundaries/quality_summary.json
+EXIT_CODE=1
