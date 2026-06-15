@@ -1,51 +1,42 @@
 # Platform Setup Helper — per-platform, per-market setup guidance for brand directors.
 #
-# This is the SSOT for brand-wizard-app/public/platform_setup_helper.html.
-# It ADDS setup-helper data (signup steps, social copy, the write-only secret model,
-# per-market scope) keyed by the SAME platform ids as
-# config/brand_management/platform_credential_fields.yaml (the authoritative cred-field
-# + dashboard-url source). The generator joins the two on `id` — cred fields are NOT
-# duplicated here (avoids the brand_admin.html ↔ weekly_os drift flagged in
-# docs/BRAND_ADMIN_INFORMATION_GAP_ANALYSIS.md §"Most redundant information").
-#
+# SSOT for brand-wizard-app/public/platform_setup_helper.html (one-step-per-screen wizard).
+# Keyed by the SAME platform ids as config/brand_management/platform_credential_fields.yaml.
 # Generator: scripts/onboarding/gen_platform_setup_helper_data.py
 #   → brand-wizard-app/public/platform_setup_helper_data.json (fetched by the page).
 #
-# Credential model (REUSES the existing encrypted vault — does NOT reinvent it):
-#   - username/login id  → stored + viewable/manageable (returned by status).
-#   - secret (password / app-password / API token) → WRITE-ONLY: typed once, encrypted
-#     at rest via server/crypto.py (Fernet, key from ADMIN_CREDENTIAL_KEY/Keychain),
-#     stored in artifacts/admin_credentials/<brand>.enc (gitignored), NEVER redisplayed
-#     (status returns only secret_set:true), NEVER in client localStorage, NEVER committed.
+# setup_steps are PRESCRIPTIVE and BRAND-AWARE: they tell the director the exact value to
+# type and the exact option to choose at every decision, using {brand_name}/{brand_slug}
+# which the page fills from the active brand. Account-level identity = the publishing
+# COMPANY ({brand_name}); per-book author/pen-name is set later, per book — not at setup.
+# Placeholders: {brand_name} (company/publisher name), {brand_slug} (handle), {brand_focus},
+# {brand_desc}. For personal/financial fields the system can't know (bank, tax ID, phone),
+# the step says "your own / your company's".
 #
-# BANNED platforms (config/publishing/ai_policy_blockers.yaml) are intentionally EXCLUDED:
-#   tapas, shueisha_mangaplus, jump_toon, jump_rookie, viz_media, yen_press, shogakukan,
-#   piccoma (direct), kakao_page (direct). Do NOT add them here.
+# Credential model (REUSES the existing encrypted vault — server/crypto.py, Fernet →
+# artifacts/admin_credentials/<brand>.enc, gitignored): login viewable; password/secret
+# WRITE-ONLY (encrypted, never redisplayed, never localStorage, never committed).
 #
-# setup_steps are from LIVE Claude/agent-browser research of each current signup flow
-# (2026-06-15), walked screen-by-screen up to — but not including — the final
-# "Create/Submit" button. Account passwords were never entered (auth/account-creation is
-# off-limits), so post-Create account-setup screens are described as platform-guided and
-# the real-info requirements live in real_info_gates_*. Re-verify periodically (flows change).
+# BANNED platforms (config/publishing/ai_policy_blockers.yaml) excluded: tapas,
+# shueisha_mangaplus, jump_toon, jump_rookie, viz_media, yen_press, shogakukan,
+# piccoma (direct), kakao_page (direct).
 
-schema_version: "1.0"
+schema_version: "1.1"
 provenance:
   authored: "2026-06-14"
   steps_verified: "2026-06-15"
-  authority: "config/brand_management/platform_credential_fields.yaml (cred fields), config/publishing/ai_policy_blockers.yaml (exclusions)"
-  research_method: "live agent-browser walk of each current signup flow, junk data, stopped before Create; account passwords never entered"
+  research_method: "live agent-browser walk of each current signup entry flow (junk data, stopped before Create); post-login account/role/tax choices are prescribed from the publishing-company context + standard platform setup, not a per-screen live walk."
   research_evidence: "artifacts/research/platform/setup_helper_20260615/ (screenshots)"
 
 markets:
   - {id: en, label_en: "English", label_native: "English", lane_hint: en_US}
   - {id: ja, label_en: "Japanese", label_native: "日本語", lane_hint: ja_JP}
 
-# ── UI chrome (page labels), per market ──────────────────────────────────────
 ui:
   en:
     page_title: "Platform Setup Helper"
     page_sub: "Get your publishing company live on every platform — step by step."
-    intro: "Follow each card in order. Links open the real platform; the steps match what you'll see on screen today. Where a step needs your own info (phone, bank, tax ID), it says so — enter your own. Your login is saved so the system can post for you; your password is write-only (saved once, never shown again)."
+    intro: "Each screen is one step. Links open the real platform; we tell you exactly what to enter and which option to choose, using your brand's details. Where a step needs your own info (phone, bank, tax ID), it says so. Your login is saved so the system can post for you; your password is write-only (saved once, never shown again)."
     distribution_hdr: "Distribution (books & audiobooks)"
     social_hdr: "Social (your brand's company channels)"
     username_label: "Login / username"
@@ -62,7 +53,7 @@ ui:
   ja:
     page_title: "プラットフォーム設定ヘルパー"
     page_sub: "あなたの出版社を各プラットフォームで公開しましょう — 一歩ずつ。"
-    intro: "各カードを順番に進めてください。リンクは実際のプラットフォームを開き、手順は今日表示される画面と一致します。あなた自身の情報（電話番号・銀行・税番号）が必要な手順にはその旨が記載されています。ログイン情報は自動投稿のために保存されます。パスワードは書き込み専用です（一度保存され、二度と表示されません）。"
+    intro: "各画面が1ステップです。リンクは実際のプラットフォームを開きます。あなたのブランド情報を使って、入力する内容と選ぶ項目を正確に案内します。ご自身の情報（電話・銀行・税番号）が必要な手順にはその旨を記載します。ログイン情報は自動投稿のために保存されます。パスワードは書き込み専用です（一度保存され、二度と表示されません）。"
     distribution_hdr: "配信（書籍・オーディオブック）"
     social_hdr: "ソーシャル（ブランド公式チャンネル）"
     username_label: "ログイン / ユーザー名"
@@ -77,150 +68,146 @@ ui:
     completion_body: "おめでとうございます — あなたのブランドは配信とソーシャルのすべての対象プラットフォームで設定されました。システムがあなたに代わって公開できます。"
     gate_label: "この部分はご自身で行う必要があります"
 
-# ── Platforms ────────────────────────────────────────────────────────────────
-# secret.kind: password | app_password | api_token | oauth  (steers the director to the
-#   RIGHT secret for that platform; many majors need an app-password/token, not the raw
-#   account password, and several social platforms are best connected via OAuth.)
 platforms:
   - id: amazon_kdp
     category: distribution
     markets: [en, ja]
     signup_url: "https://kdp.amazon.com/signup"
     dashboard_url: "https://kdp.amazon.com/bookshelf"
-    account_note_en: "One KDP account serves all marketplaces; for Japan set the JP marketplace (amazon.co.jp) and add JP tax info (My Number)."
-    account_note_ja: "1つのKDPアカウントで全マーケットプレイスに対応。日本向けはマーケットプレイスをamazon.co.jpに設定し、日本の税情報（マイナンバー）を追加します。"
+    account_note_en: "You are the PUBLISHER of your own books (not a third-party distributor). The account is your company, {brand_name}; each book's author/pen name is set later, per book. When you publish a book you'll also declare AI-assisted content — Amazon requires it."
+    account_note_ja: "あなたは自社の本の「出版社」です（第三者の取次ではありません）。アカウントは会社（{brand_name}）。各本の著者/ペンネームは後で本ごとに設定します。本の公開時にはAI利用の申告も必要です（Amazonの必須事項）。"
     secret: {kind: password, label_en: "KDP account password", label_ja: "KDPアカウントのパスワード", help_en: "The password for the KDP login email.", help_ja: "KDPログインメールのパスワード。", write_only: true}
-    real_info_gates_en: ["Bank account for royalties", "Tax interview (W-9/W-8BEN; My Number for JP)", "Phone verification"]
-    real_info_gates_ja: ["印税の銀行口座", "税務インタビュー（W-9/W-8BEN、日本はマイナンバー）", "電話番号認証"]
+    real_info_gates_en: ["Company bank account for royalties", "Tax interview (US: EIN · Japan: My Number)", "Phone verification"]
+    real_info_gates_ja: ["印税用の会社銀行口座", "税務インタビュー（米国：EIN・日本：マイナンバー）", "電話番号認証"]
     steps_status: verified
     setup_steps:
       en:
-        - "Open kdp.amazon.com and click Sign up (or go to kdp.amazon.com/signup). Amazon's “Create account” page opens."
-        - "Already have an Amazon account for this brand? Click “Sign in”. Otherwise enter Your name (company/pen name), the brand Email, and a Password (entered twice)."
-        - "Click “Create your KDP account”, then confirm the email/OTP Amazon sends."
-        - "Open Account Info (kdp.amazon.com/account) → Author/Publisher Information: enter your country, full legal name, full address (street, city, state/prefecture, postal code) and phone number. For a publishing company, use the company's legal name + address."
-        - "Getting Paid: add the royalty bank account — account-holder name, bank name, account number (or IBAN), routing number (US) or SWIFT/BIC (international), and account type. Add it for each marketplace you'll sell in."
-        - "Tax Information: complete the Tax Interview — choose individual or business, enter your name + address and tax ID (US: SSN/EIN · non-US: foreign TIN · Japan: My Number), and claim tax-treaty benefits if you're non-US to lower withholding. For Japan, set the marketplace to amazon.co.jp."
+        - "Go to kdp.amazon.com and click Sign up. (If your company already has an Amazon account, click Sign in and skip to the Account Info step.)"
+        - "On Amazon's “Create account” page: in “Your name” enter your company name, {brand_name}; in “Email” use the brand's email address; set a password and re-enter it."
+        - "Click “Create your KDP account”, then enter the verification code Amazon emails you."
+        - "Open Account Info → Author/Publisher Information: set your country, enter {brand_name} as the publisher name, and your company's legal name, business address and phone."
+        - "Open Getting Paid and add the company royalty bank account: account-holder name, bank name, account number (or IBAN), routing number (US) or SWIFT/BIC (international), account type."
+        - "Open Tax Information → run the Tax Interview: choose Business (you're a publishing company), enter the company tax ID (US: EIN · Japan: My Number/corporate number); if you're outside the US, claim the tax-treaty rate (Japan↔US = 0% on book royalties). For Japan, also set your marketplace to amazon.co.jp."
       ja:
-        - "kdp.amazon.com を開き「サインアップ」をクリック（または kdp.amazon.com/signup）。Amazonの「アカウント作成」画面が開きます。"
-        - "このブランド用のAmazonアカウントが既にある場合は「サインイン」。無ければ 氏名（会社/ペンネーム）、ブランドのメール、パスワード（2回）を入力。"
-        - "「KDPアカウントを作成」をクリックし、届いたメール/OTPを確認。"
-        - "アカウント情報（kdp.amazon.com/account）を開く → 著者/出版社情報：国、氏名（正式名称）、住所（番地・市区町村・都道府県・郵便番号）、電話番号を入力。出版社の場合は会社の正式名称と住所を使用。"
-        - "支払い方法：印税の銀行口座を追加 — 口座名義、銀行名、口座番号（またはIBAN）、ルーティング番号（米国）またはSWIFT/BIC（国際）、口座種別。販売する各マーケットプレイスごとに設定。"
-        - "税情報：税務インタビューを完了 — 個人または法人を選択し、氏名・住所・税ID（米国：SSN/EIN・非米国：外国TIN・日本：マイナンバー）を入力。非米国の場合は租税条約の特典を申請して源泉徴収を軽減。日本はマーケットプレイスを amazon.co.jp に設定。"
+        - "kdp.amazon.com を開き「サインアップ」をクリック。（会社のAmazonアカウントが既にある場合は「サインイン」し、アカウント情報の手順へ。）"
+        - "Amazonの「アカウント作成」画面で、「お名前」に会社名「{brand_name}」、「Eメール」にブランドのメール、パスワードを設定して再入力。"
+        - "「KDPアカウントを作成」をクリックし、Amazonから届く確認コードを入力。"
+        - "アカウント情報 → 著者/出版社情報：国を設定し、出版社名に「{brand_name}」、会社の正式名称・事業所住所・電話番号を入力。"
+        - "「支払いの受け取り」で会社の印税口座を追加：口座名義、銀行名、口座番号（またはIBAN）、ルーティング番号（米国）またはSWIFT/BIC（国際）、口座種別。"
+        - "「税に関する情報」→ 税務インタビューを実施：「法人（Business）」を選択し、会社の税ID（米国：EIN・日本：マイナンバー/法人番号）を入力。米国外なら租税条約の税率を申請（日本↔米国は書籍印税0%）。日本はマーケットプレイスを amazon.co.jp に設定。"
 
   - id: google_play
     category: distribution
     markets: [en, ja]
     signup_url: "https://play.google.com/books/publish/"
     dashboard_url: "https://play.google.com/console/developers"
-    account_note_en: "Requires a Google account + Play Books Partner Center enrollment (publisher profile)."
-    account_note_ja: "Googleアカウントと Play Books パートナーセンターの登録（出版社プロフィール）が必要です。"
+    account_note_en: "Join Google Play Books as a PUBLISHER — you own and publish your own books. Do not sign up as a third-party distributor/aggregator."
+    account_note_ja: "Google Play ブックスには「出版社」として登録 — 自社の本を所有・出版します。第三者の取次/アグリゲーターとしては登録しないでください。"
     secret: {kind: password, label_en: "Google account password", label_ja: "Googleアカウントのパスワード", help_en: "Password for the Google account behind Partner Center.", help_ja: "パートナーセンターのGoogleアカウントのパスワード。", write_only: true}
-    real_info_gates_en: ["Bank/payment profile", "Tax info", "2-Step Verification (phone)"]
-    real_info_gates_ja: ["銀行/支払いプロフィール", "税情報", "2段階認証（電話）"]
+    real_info_gates_en: ["Company bank/payments profile", "Tax info (US: EIN · or W-8)", "2-Step Verification (phone)"]
+    real_info_gates_ja: ["会社の銀行/支払いプロフィール", "税情報（米国：EIN・またはW-8）", "2段階認証（電話）"]
     steps_status: verified
     setup_steps:
       en:
         - "Go to play.google.com/books/publish and click “Get started”."
-        - "Sign in with your company Google account. No account? Click “Create account” and follow Google's steps (name, birthday, new Gmail, password, phone verification)."
-        - "First time: accept the Play Books Partner Center agreement."
-        - "Account details: enter the publisher name shown to readers, your legal/business name, business address, website URL, and a contact + support email."
-        - "Payments profile + bank: create the Google payments profile (legal name + address) and add the royalty bank account (account-holder name, bank name, account number or IBAN, routing number or SWIFT/BIC)."
-        - "Tax info: complete the tax questionnaire (US: SSN/EIN, or W-8 if non-US; VAT/GST where required). You set territories + pricing later when you publish a book."
+        - "Sign in with the brand's company Google account (or click “Create account” to make one for {brand_name})."
+        - "Accept the Play Books Partner Center agreement, joining as a Publisher / rights holder (you publish your own books — not a third-party distributor)."
+        - "Fill Account details: Publisher name (shown to readers) = {brand_name}; enter the company legal name, business address, website, and a contact + support email."
+        - "Set up the Payments profile: choose account type Organization/Business, enter the company legal name + address, and add the royalty bank account (account-holder, bank name, account number/IBAN, routing or SWIFT/BIC)."
+        - "Complete Tax info: US payees enter the W-9/EIN; non-US complete the W-8 and claim treaty benefits. (Territories + price are set per book when you publish.)"
       ja:
-        - "play.google.com/books/publish を開き「Get started（始める）」をクリック。"
-        - "会社のGoogleアカウントでサインイン。無ければ「アカウントを作成」からGoogleの手順（氏名、生年月日、新しいGmail、パスワード、電話認証）に従う。"
-        - "初回はPlayブックスパートナーセンターのEULA（規約）に同意。"
-        - "アカウント詳細：読者に表示される出版社名、正式な法人/事業者名、事業所住所、ウェブサイトURL、連絡先＋サポート用メールを入力。"
-        - "支払いプロフィール＋銀行：Google ペイメントプロフィール（法人名＋住所）を作成し、印税の銀行口座（口座名義、銀行名、口座番号またはIBAN、ルーティング番号またはSWIFT/BIC）を追加。"
-        - "税情報：税務アンケートを完了（米国：SSN/EIN、非米国：W-8、必要に応じてVAT/GST）。販売地域と価格は書籍公開時に設定。"
+        - "play.google.com/books/publish を開き「始める（Get started）」をクリック。"
+        - "ブランドの会社用Googleアカウントでサインイン（無ければ「アカウントを作成」で {brand_name} 用に作成）。"
+        - "Play ブックス パートナーセンターの規約に同意し、「出版社／権利者」として参加（自社の本を出版 — 第三者の取次ではありません）。"
+        - "アカウント詳細を入力：読者に表示される出版社名 = {brand_name}、会社の正式名称、事業所住所、ウェブサイト、連絡先＋サポート用メール。"
+        - "支払いプロフィールを設定：アカウント種別「組織/法人」を選び、会社の正式名称＋住所を入力し、印税の銀行口座（口座名義、銀行名、口座番号/IBAN、ルーティングまたはSWIFT/BIC）を追加。"
+        - "税情報を完了：米国はW-9/EIN、非米国はW-8を提出し条約特典を申請。（販売地域と価格は本ごとに公開時に設定。）"
 
   - id: apple_books
     category: distribution
     markets: [en, ja]
     signup_url: "https://authors.apple.com"
     dashboard_url: "https://inaudio.com/dashboard"
-    account_note_en: "Ebooks: Apple Books for Authors (Apple ID). Audiobooks reach Apple via the INaudio/Findaway aggregator (see that card)."
-    account_note_ja: "電子書籍：Apple Books for Authors（Apple ID）。オーディオブックはINaudio/Findaway経由でAppleに配信（該当カード参照）。"
-    secret: {kind: password, label_en: "Apple ID password", label_ja: "Apple IDのパスワード", help_en: "Password for the Apple ID used for Apple Books for Authors.", help_ja: "Apple Books for Authorsで使うApple IDのパスワード。", write_only: true}
-    real_info_gates_en: ["Bank + tax (paid books; free books may skip)", "Two-factor (trusted device/phone)"]
-    real_info_gates_ja: ["銀行＋税（有料書籍。無料書籍はスキップ可）", "2ファクタ認証（信頼済みデバイス/電話）"]
+    account_note_en: "Set up as the PUBLISHER {brand_name}. Ebooks go through Apple Books for Authors; audiobooks reach Apple via Findaway/INaudio (see that card)."
+    account_note_ja: "出版社「{brand_name}」として設定。電子書籍は Apple Books for Authors、オーディオブックは Findaway/INaudio 経由で Apple に配信（該当カード参照）。"
+    secret: {kind: password, label_en: "Apple ID password", label_ja: "Apple IDのパスワード", help_en: "Password for the company Apple ID.", help_ja: "会社のApple IDのパスワード。", write_only: true}
+    real_info_gates_en: ["Company bank + tax (paid books; free books skip bank)", "Two-factor (trusted device/phone)"]
+    real_info_gates_ja: ["会社の銀行＋税（有料書籍。無料書籍は銀行不要）", "2ファクタ認証（信頼済みデバイス/電話）"]
     steps_status: verified
     setup_steps:
       en:
-        - "Go to authors.apple.com (Apple Books for Authors) and choose Publish / Get started."
-        - "Sign in with the company Apple ID (create one at appleid.apple.com if needed). Two-factor uses a trusted device or phone."
-        - "Accept the Books agreement: free-only books use the free agreement; paid books require the Paid Books Agreement (which adds banking + tax)."
-        - "Paid Books — banking + contacts: enter your legal entity/provider name and finance/technical contacts, plus bank details (account-holder name, bank name, account number, SWIFT/BIC, branch)."
-        - "Paid Books — tax: complete Apple's tax forms (US tax ID, or W-8BEN/W-8BEN-E if non-US)."
-        - "For audiobooks, distribute to Apple via Findaway/INaudio (see that card)."
+        - "Go to authors.apple.com and click “Get started”."
+        - "Sign in with the company Apple ID (create one at appleid.apple.com using the brand email if needed); approve the two-factor prompt on your trusted device/phone."
+        - "Set your provider/publisher name to {brand_name}, then choose your agreement: free-only books use the free agreement; to sell paid books, accept the Paid Books Agreement (next two steps)."
+        - "Paid Books — enter your company legal entity name and finance/technical contacts, then banking: account-holder, bank name, account number, SWIFT/BIC, branch."
+        - "Paid Books — complete Apple's tax forms: US tax ID/EIN, or W-8BEN-E for a non-US company."
+        - "For audiobooks, distribute to Apple via Findaway/INaudio — see that card."
       ja:
-        - "authors.apple.com（Apple Books for Authors）を開き、Publish / Get started を選択。"
-        - "会社のApple IDでサインイン（無ければ appleid.apple.com で作成）。2ファクタ認証は信頼済みデバイス/電話を使用。"
-        - "Books規約に同意：無料のみの書籍は無料規約、有料書籍はPaid Books Agreement（銀行＋税が必要）。"
-        - "有料書籍 — 銀行＋連絡先：法人/プロバイダ名と財務/技術担当の連絡先、銀行情報（口座名義、銀行名、口座番号、SWIFT/BIC、支店）を入力。"
-        - "有料書籍 — 税：Appleの税フォームを完了（米国の税ID、または非米国はW-8BEN/W-8BEN-E）。"
-        - "オーディオブックはFindaway/INaudio経由でAppleに配信（該当カード参照）。"
+        - "authors.apple.com を開き「始める（Get started）」をクリック。"
+        - "会社のApple IDでサインイン（無ければ appleid.apple.com でブランドのメールを使って作成）。信頼済みデバイス/電話の2ファクタ認証を承認。"
+        - "プロバイダ/出版社名を「{brand_name}」に設定し、契約を選択：無料のみの書籍は無料契約、有料書籍は Paid Books Agreement（次の2ステップ）に同意。"
+        - "有料書籍 — 会社の正式法人名と財務/技術担当の連絡先、銀行情報（口座名義、銀行名、口座番号、SWIFT/BIC、支店）を入力。"
+        - "有料書籍 — Appleの税フォームを完了：米国の税ID/EIN、または非米国法人は W-8BEN-E。"
+        - "オーディオブックは Findaway/INaudio 経由で Apple に配信 — 該当カード参照。"
 
   - id: kobo
     category: distribution
     markets: [en, ja]
     signup_url: "https://writinglife.kobo.com"
     dashboard_url: "https://www.kobo.com/writinglife"
-    account_note_en: "Kobo Writing Life — global ebook/audiobook self-publishing. Sign-in is behind a Cloudflare security check."
-    account_note_ja: "Kobo Writing Life — 世界向けの電子書籍/オーディオブック自己出版。サインインはCloudflareのセキュリティ確認の先にあります。"
+    account_note_en: "Kobo Writing Life — self-publish as {brand_name}. Sign-in is behind a Cloudflare security check."
+    account_note_ja: "Kobo Writing Life — 「{brand_name}」として自己出版。サインインはCloudflareのセキュリティ確認の先にあります。"
     secret: {kind: password, label_en: "Kobo Writing Life password", label_ja: "Kobo Writing Lifeのパスワード", help_en: "Password for the Kobo Writing Life account.", help_ja: "Kobo Writing Lifeアカウントのパスワード。", write_only: true}
-    real_info_gates_en: ["Cloudflare security check at sign-in", "Bank for payments", "Tax form"]
-    real_info_gates_ja: ["サインイン時のCloudflareセキュリティ確認", "支払い用銀行", "税フォーム"]
+    real_info_gates_en: ["Cloudflare security check at sign-in", "Company bank (direct deposit) or PayPal", "Tax form"]
+    real_info_gates_ja: ["サインイン時のCloudflareセキュリティ確認", "会社の銀行（口座振込）またはPayPal", "税フォーム"]
     steps_status: verified
     setup_steps:
       en:
-        - "Go to writinglife.kobo.com — you're sent to Kobo's sign-in, where a Cloudflare security check appears (complete it yourself)."
-        - "Click “Create one” / Sign up and enter your name, brand email, and a password."
-        - "Verify your email, then complete your Writing Life profile (publisher/author name, address, country, website)."
-        - "Payment: choose direct deposit (bank — account-holder name, bank name, account number, routing number or SWIFT/BIC) or PayPal."
-        - "Tax: complete the tax form (your tax ID; W-8BEN if you're non-US)."
+        - "Go to writinglife.kobo.com and complete the Cloudflare security check that appears at sign-in (solve it yourself)."
+        - "Click Sign up / “Create one”: use the brand email and a password."
+        - "Verify your email, then complete your profile: publisher/author name = {brand_name}, company legal name, address, country, website."
+        - "Open Payment and choose direct deposit (account-holder, bank name, account number, routing or SWIFT/BIC) or PayPal."
+        - "Complete the Tax form: your company tax ID; W-8BEN-E if you're a non-US company."
       ja:
-        - "writinglife.kobo.com を開く。Koboのサインインに移動し、Cloudflareのセキュリティ確認が表示されます（ご自身で通過）。"
-        - "「Create one」/ サインアップをクリックし、氏名・ブランドのメール・パスワードを入力。"
-        - "メールを確認し、Writing Lifeのプロフィールを完成（出版社/著者名、住所、国、ウェブサイト）。"
-        - "支払い：口座振込（銀行 — 口座名義、銀行名、口座番号、ルーティング番号またはSWIFT/BIC）または PayPal を選択。"
-        - "税：税フォームを完了（税ID、非米国はW-8BEN）。"
+        - "writinglife.kobo.com を開き、サインイン時に表示される Cloudflare のセキュリティ確認を通過（ご自身で操作）。"
+        - "「Sign up / Create one」をクリック：ブランドのメールとパスワードを使用。"
+        - "メールを確認し、プロフィールを完成：出版社/著者名 = {brand_name}、会社の正式名称、住所、国、ウェブサイト。"
+        - "「Payment（支払い）」で口座振込（口座名義、銀行名、口座番号、ルーティングまたはSWIFT/BIC）または PayPal を選択。"
+        - "税フォームを完了：会社の税ID、非米国法人は W-8BEN-E。"
 
   - id: inaudio_findaway
     category: distribution
     markets: [en, ja]
     signup_url: "https://www.voicesbyinaudio.com/"
     dashboard_url: "https://inaudio.com/dashboard"
-    account_note_en: "Voices by INaudio (formerly Findaway Voices) = audiobook aggregator → Spotify, Apple, Audible, libraries. One upload, many stores."
-    account_note_ja: "Voices by INaudio（旧Findaway Voices）= オーディオブックのアグリゲーター → Spotify、Apple、Audible、図書館へ。1回のアップロードで複数ストアに配信。"
+    account_note_en: "Voices by INaudio (formerly Findaway Voices) is the audiobook aggregator → Spotify, Apple, Audible, libraries. Register as the publisher {brand_name}."
+    account_note_ja: "Voices by INaudio（旧 Findaway Voices）はオーディオブックのアグリゲーター → Spotify、Apple、Audible、図書館。出版社「{brand_name}」として登録。"
     secret: {kind: password, label_en: "INaudio password", label_ja: "INaudioのパスワード", help_en: "Password for the Voices by INaudio account.", help_ja: "Voices by INaudioアカウントのパスワード。", write_only: true}
-    real_info_gates_en: ["Payout (bank) + tax", "Email verification"]
-    real_info_gates_ja: ["支払い（銀行）＋税", "メール認証"]
+    real_info_gates_en: ["Company payout (bank) or PayPal + tax", "Email verification"]
+    real_info_gates_ja: ["会社の支払い（銀行）またはPayPal＋税", "メール認証"]
     steps_status: verified
     setup_steps:
       en:
         - "Go to voicesbyinaudio.com and click “Register Free”."
-        - "Enter your name, brand email, and a password to create the account."
-        - "Verify your email, then complete your publisher profile (your name/company, address, country)."
-        - "Payout + tax: add your bank (account-holder name, bank name, account number or IBAN, routing or SWIFT/BIC) or PayPal, and complete the tax info (tax ID; W-8 if non-US)."
-        - "Distribution: choose the stores (Spotify, Apple, Audible, libraries) and set your audiobook pricing."
+        - "Create the account for your company: name = {brand_name}, the brand email, and a password."
+        - "Verify your email, then complete your publisher profile: {brand_name}, company address, country."
+        - "Add Payout (bank: account-holder, bank name, account number/IBAN, routing or SWIFT/BIC — or PayPal) and complete the tax info (company tax ID; W-8 if non-US)."
+        - "Turn on the distribution stores (Spotify, Apple, Audible, libraries) and set your audiobook price."
       ja:
         - "voicesbyinaudio.com を開き「Register Free（無料登録）」をクリック。"
-        - "氏名・ブランドのメール・パスワードを入力してアカウントを作成。"
-        - "メールを確認し、出版社プロフィールを完成（氏名/会社、住所、国）。"
-        - "支払い＋税：銀行（口座名義、銀行名、口座番号またはIBAN、ルーティングまたはSWIFT/BIC）またはPayPalを追加し、税情報（税ID、非米国はW-8）を完了。"
-        - "配信：ストア（Spotify、Apple、Audible、図書館）を選択し、オーディオブックの価格を設定。"
+        - "会社用アカウントを作成：名前 = {brand_name}、ブランドのメール、パスワード。"
+        - "メールを確認し、出版社プロフィールを完成：{brand_name}、会社住所、国。"
+        - "支払い（銀行：口座名義、銀行名、口座番号/IBAN、ルーティングまたはSWIFT/BIC — または PayPal）を追加し、税情報（会社の税ID、非米国は W-8）を完了。"
+        - "配信ストア（Spotify、Apple、Audible、図書館）を有効化し、オーディオブックの価格を設定。"
 
   - id: youtube
     category: social
     markets: [en, ja]
     signup_url: "https://www.youtube.com/create_channel"
     dashboard_url: "https://studio.youtube.com"
-    account_note_en: "Create a brand (not personal) channel under the company Google account."
-    account_note_ja: "会社のGoogleアカウントでブランド（個人ではない）チャンネルを作成します。"
-    secret: {kind: oauth, label_en: "YouTube — connect via OAuth", label_ja: "YouTube — OAuthで接続", help_en: "Best connected by OAuth (Google account password not stored). Store the Google password only if you want manual access.", help_ja: "OAuthでの接続を推奨（Googleパスワードは保存しません）。手動アクセスが必要な場合のみGoogleパスワードを保存。", write_only: true}
+    account_note_en: "Create a company-owned Brand channel (not a personal one) for {brand_name}, under the same Google account as Google Play."
+    account_note_ja: "Google Play と同じGoogleアカウントのもとで、{brand_name} の会社所有「ブランドチャンネル」（個人ではない）を作成。"
+    secret: {kind: oauth, label_en: "YouTube — connect via OAuth", label_ja: "YouTube — OAuthで接続", help_en: "Best connected by OAuth (Google password not stored). Store the Google password only if you want manual access.", help_ja: "OAuth接続を推奨（Googleパスワードは保存しません）。手動アクセスが必要な場合のみ保存。", write_only: true}
     social_copy:
       handle_en: "@{brand_slug}"
       handle_ja: "@{brand_slug}"
@@ -230,30 +217,30 @@ platforms:
       about_ja: "{brand_desc} {brand_name}は{brand_focus}のための穏やかで実践的なガイドを発信します。毎週のツールを購読してください。"
       what_to_post_en: "Long-form guided sessions + Shorts (15–35s hooks). Nature footage + text overlay performs best."
       what_to_post_ja: "長尺のガイドセッション＋ショート動画（15〜35秒のフック）。自然映像＋テキストが効果的。"
-    real_info_gates_en: ["Phone verification (for uploads/features)"]
-    real_info_gates_ja: ["電話番号認証（アップロード/機能のため）"]
+    real_info_gates_en: ["Phone verification (to unlock uploads/features)"]
+    real_info_gates_ja: ["電話番号認証（アップロード/機能の解放）"]
     steps_status: verified
     setup_steps:
       en:
-        - "Go to youtube.com and sign in with your company Google account (the same one as Google Play). New? Click “Create account”."
-        - "Click your profile picture (top-right) → “Create a channel”. For a company/Brand channel: Settings → “Add or manage your channel(s)” → Create a channel."
-        - "Enter the channel name (your brand) and handle (@…), and add a profile picture."
+        - "Go to youtube.com and sign in with the brand's company Google account (the same one as Google Play; click “Create account” if the company has none yet)."
+        - "Click your profile picture → Settings → “Add or manage your channel(s)” → “Create a channel”, and choose a Brand account so the company owns it (not a person)."
+        - "Set the channel name to {brand_name} and the handle to @{brand_slug}; upload the brand logo as the picture."
         - "Click “Create channel”."
-        - "In YouTube Studio → Settings → Channel, add your description and links; verify your phone to unlock uploads & features."
+        - "In YouTube Studio → Settings → Channel, paste the description from the next Brand-copy screen, add your links, and verify your phone to unlock uploads."
       ja:
-        - "youtube.com を開き、会社のGoogleアカウント（Google Playと同じ）でサインイン。無ければ「アカウントを作成」。"
-        - "右上のプロフィール画像 →「チャンネルを作成」。会社/ブランドチャンネルは 設定 →「チャンネルを追加または管理」→ チャンネルを作成。"
-        - "チャンネル名（ブランド名）とハンドル（@…）を入力し、プロフィール画像を追加。"
+        - "youtube.com を開き、ブランドの会社用Googleアカウント（Google Playと同じ）でサインイン（無ければ「アカウントを作成」）。"
+        - "プロフィール画像 → 設定 →「チャンネルを追加または管理」→「チャンネルを作成」で、ブランドアカウントを選び会社所有に（個人ではない）。"
+        - "チャンネル名を {brand_name}、ハンドルを @{brand_slug} に設定し、ブランドロゴを画像に設定。"
         - "「チャンネルを作成」をクリック。"
-        - "YouTube Studio → 設定 → チャンネル で説明・リンクを追加。電話を認証してアップロード/機能を有効化。"
+        - "YouTube Studio → 設定 → チャンネル で、次のブランドコピー画面の説明文を貼り付け、リンクを追加し、電話を認証してアップロードを解放。"
 
   - id: tiktok
     category: social
     markets: [en, ja]
     signup_url: "https://www.tiktok.com/signup"
     dashboard_url: "https://www.tiktok.com/creator#/analytics"
-    account_note_en: "Use a Business account for the company brand (analytics + scheduling)."
-    account_note_ja: "会社ブランドにはビジネスアカウントを使用（分析＋スケジュール投稿）。"
+    account_note_en: "Use a Business account for {brand_name} (analytics + scheduling)."
+    account_note_ja: "{brand_name} にはビジネスアカウントを使用（分析＋予約投稿）。"
     secret: {kind: password, label_en: "TikTok password", label_ja: "TikTokのパスワード", help_en: "Password for the TikTok business account.", help_ja: "TikTokビジネスアカウントのパスワード。", write_only: true}
     social_copy:
       handle_en: "@{brand_slug}"
@@ -269,25 +256,25 @@ platforms:
     steps_status: verified
     setup_steps:
       en:
-        - "Go to tiktok.com/signup. Choose “Use phone or email” (or Continue with Google/Apple using the company account)."
-        - "Enter your birthday, then your brand email or phone; confirm the code TikTok sends."
-        - "Set a password and choose your @username (your brand)."
-        - "Open Settings → Manage account → “Switch to Business Account” and pick a category."
-        - "Add your bio + profile photo (paste-ready text is on the next Brand copy screen)."
+        - "Go to tiktok.com/signup and choose “Use phone or email” (or “Continue with Google” using the company account)."
+        - "Enter a date of birth that is 18+, the brand email or phone, and confirm the code TikTok sends."
+        - "Set a password and set the username to @{brand_slug}."
+        - "Open Settings → Manage account → “Switch to Business Account” and pick a fitting category for {brand_name} (e.g. Education or Media)."
+        - "Set the display name to {brand_name}, then paste the bio + add the profile photo from the next Brand-copy screen."
       ja:
-        - "tiktok.com/signup を開き「電話番号またはメールを使用」を選択（または会社アカウントでGoogle/Appleで続行）。"
-        - "生年月日を入力し、ブランドのメール/電話を入力。TikTokが送る認証コードを確認。"
-        - "パスワードを設定し、@ユーザー名（ブランド）を選択。"
-        - "設定 → アカウント管理 →「ビジネスアカウントに切り替え」を選び、カテゴリを設定。"
-        - "プロフィール文＋写真を追加（次のブランドコピー画面の貼り付け用テキストを使用）。"
+        - "tiktok.com/signup を開き「電話番号またはメールを使用」を選択（または会社アカウントで Google で続行）。"
+        - "18歳以上の生年月日、ブランドのメール/電話を入力し、TikTokが送る認証コードを確認。"
+        - "パスワードを設定し、ユーザー名を @{brand_slug} に設定。"
+        - "設定 → アカウント管理 →「ビジネスアカウントに切り替え」を選び、{brand_name} に合うカテゴリ（例：教育 / メディア）を設定。"
+        - "表示名を {brand_name} に設定し、次のブランドコピー画面のプロフィール文を貼り付け、写真を追加。"
 
   - id: instagram
     category: social
     markets: [en, ja]
     signup_url: "https://www.instagram.com/accounts/emailsignup/"
     dashboard_url: "https://www.instagram.com/accounts/insights"
-    account_note_en: "Must be a Business or Creator account; link it to the company Facebook Page."
-    account_note_ja: "ビジネスまたはクリエイターアカウントが必須。会社のFacebookページにリンクします。"
+    account_note_en: "Make {brand_name} a Business/Creator account and link it to the company Facebook Page."
+    account_note_ja: "{brand_name} をビジネス/クリエイターアカウントにし、会社のFacebookページにリンク。"
     secret: {kind: password, label_en: "Instagram password", label_ja: "Instagramのパスワード", help_en: "Password for the Instagram account.", help_ja: "Instagramアカウントのパスワード。", write_only: true}
     social_copy:
       handle_en: "@{brand_slug}"
@@ -304,25 +291,25 @@ platforms:
     setup_steps:
       en:
         - "Go to instagram.com/accounts/emailsignup/."
-        - "Enter mobile/email, a password, your birthday, full name (your brand), and a username; click Sign up."
-        - "Confirm the code Instagram sends to your email/phone."
-        - "Settings → “Account type and tools” → Switch to Professional → Business; link your company Facebook Page."
-        - "Add bio + profile photo (paste-ready text is on the next Brand copy screen)."
+        - "Enter the brand email, a password, an 18+ date of birth, Full name = {brand_name}, and username = {brand_slug}; click Sign up."
+        - "Confirm the code Instagram emails/texts."
+        - "Go to Settings → “Account type and tools” → Switch to Professional → Business, and link the company Facebook Page (set that up in the Facebook card)."
+        - "Paste the bio + add the profile photo from the next Brand-copy screen."
       ja:
         - "instagram.com/accounts/emailsignup/ を開く。"
-        - "携帯/メール、パスワード、生年月日、フルネーム（ブランド名）、ユーザー名を入力し「登録」。"
-        - "Instagramがメール/電話に送る認証コードを確認。"
-        - "設定 →「アカウントの種類とツール」→ プロアカウントに切り替え → ビジネス。会社のFacebookページにリンク。"
-        - "プロフィール文＋写真を追加（次のブランドコピー画面の貼り付け用テキストを使用）。"
+        - "ブランドのメール、パスワード、18歳以上の生年月日、フルネーム = {brand_name}、ユーザー名 = {brand_slug} を入力し「登録」。"
+        - "Instagramがメール/SMSで送る認証コードを確認。"
+        - "設定 →「アカウントの種類とツール」→ プロアカウントに切り替え → ビジネス を選び、会社のFacebookページにリンク（Facebookカードで作成）。"
+        - "次のブランドコピー画面のプロフィール文を貼り付け、写真を追加。"
 
   - id: facebook
     category: social
     markets: [en, ja]
     signup_url: "https://www.facebook.com/pages/create"
     dashboard_url: "https://business.facebook.com"
-    account_note_en: "Create a company Page (not a personal profile); you must be logged into a personal Facebook account first. Manage in Meta Business Suite."
-    account_note_ja: "会社ページ（個人プロフィールではない）を作成します。先に個人のFacebookアカウントでログインが必要。Metaビジネススイートで管理。"
-    secret: {kind: oauth, label_en: "Facebook — connect via OAuth", label_ja: "Facebook — OAuthで接続", help_en: "Best connected by OAuth via Meta Business. Store the account password only for manual access.", help_ja: "Metaビジネス経由のOAuth接続を推奨。手動アクセス用にのみパスワードを保存。", write_only: true}
+    account_note_en: "Create a company Page for {brand_name} (not a personal profile). A Page must be created from a manager's personal Facebook login; manage it in Meta Business Suite."
+    account_note_ja: "{brand_name} の会社ページ（個人プロフィールではない）を作成。ページは担当者の個人Facebookログインから作成し、Metaビジネススイートで管理。"
+    secret: {kind: oauth, label_en: "Facebook — connect via OAuth", label_ja: "Facebook — OAuthで接続", help_en: "Best connected by OAuth via Meta Business. Store the account password only for manual access.", help_ja: "Metaビジネス経由のOAuth接続を推奨。手動アクセス用にのみ保存。", write_only: true}
     social_copy:
       handle_en: "{brand_name}"
       handle_ja: "{brand_name}"
@@ -332,30 +319,30 @@ platforms:
       about_ja: "{brand_desc} {brand_focus}のための毎週のガイドツール。"
       what_to_post_en: "Cross-post Reels; link out to YouTube long-form and books."
       what_to_post_ja: "リールをクロス投稿し、YouTube長尺や書籍へ誘導。"
-    real_info_gates_en: ["A personal Facebook login to create the Page", "Business verification for ads"]
-    real_info_gates_ja: ["ページ作成には個人のFacebookログインが必要", "広告にはビジネス認証"]
+    real_info_gates_en: ["A manager's personal Facebook login to create the Page", "Business verification for ads"]
+    real_info_gates_ja: ["ページ作成には担当者の個人Facebookログインが必要", "広告にはビジネス認証"]
     steps_status: verified
     setup_steps:
       en:
-        - "Go to facebook.com/pages/create. You must first log into (or sign up for) a personal Facebook account."
-        - "Enter the Page name (your company/brand) and pick a Category; add a short bio."
+        - "Go to facebook.com/pages/create and log in with a manager's personal Facebook account (Pages can only be created from a personal login)."
+        - "Set Page name = {brand_name} and pick a Category (e.g. Publisher or Media/News Company); add a short bio."
         - "Click “Create Page”."
-        - "Add profile + cover photos and your About text, and link your Instagram (paste-ready text is on the next Brand copy screen)."
-        - "Manage the Page (and Instagram) in Meta Business Suite at business.facebook.com."
+        - "Add the brand logo (profile) + a cover image, paste the About text from the next Brand-copy screen, and link your Instagram."
+        - "Manage the Page + Instagram together in Meta Business Suite (business.facebook.com)."
       ja:
-        - "facebook.com/pages/create を開く。先に個人のFacebookアカウントでログイン（または登録）が必要。"
-        - "ページ名（会社/ブランド名）を入力し、カテゴリを選択。短い紹介文を追加。"
+        - "facebook.com/pages/create を開き、担当者の個人Facebookアカウントでログイン（ページは個人ログインからのみ作成可能）。"
+        - "ページ名 = {brand_name}、カテゴリ（例：出版社、メディア/ニュース）を選択し、短い紹介文を追加。"
         - "「ページを作成」をクリック。"
-        - "プロフィール/カバー画像とAbout文を追加し、Instagramをリンク（次のブランドコピー画面の貼り付け用テキストを使用）。"
-        - "Metaビジネススイート（business.facebook.com）でページ（とInstagram）を管理。"
+        - "ブランドロゴ（プロフィール）＋カバー画像を追加し、次のブランドコピー画面のAbout文を貼り付け、Instagramをリンク。"
+        - "Metaビジネススイート（business.facebook.com）でページとInstagramをまとめて管理。"
 
   - id: line
     category: social
-    markets: [ja]   # Japan (and zh markets) only — not used in the EN lane
+    markets: [ja]
     signup_url: "https://www.lycbiz.com/jp/service/line-official-account/"
     dashboard_url: "https://manager.line.biz"
-    account_note_en: "Japan: a LINE Official Account is essential for direct audience messaging."
-    account_note_ja: "日本：直接の読者メッセージにはLINE公式アカウントが不可欠です。"
+    account_note_en: "Japan: a LINE Official Account for {brand_name} is essential for direct audience messaging."
+    account_note_ja: "日本：{brand_name} の LINE公式アカウントは直接の読者配信に不可欠です。"
     secret: {kind: password, label_en: "LINE Business ID password", label_ja: "LINEビジネスIDのパスワード", help_en: "Password for the LINE Business ID / Official Account Manager login.", help_ja: "LINEビジネスID / 公式アカウントマネージャーのログインパスワード。", write_only: true}
     social_copy:
       handle_en: "@{brand_slug}"
@@ -372,13 +359,13 @@ platforms:
     setup_steps:
       en:
         - "Go to lycbiz.com/jp/service/line-official-account/ and click “アカウント開設” (Open an account)."
-        - "Sign in with a LINE Business ID (email or your LINE account); create one if needed."
-        - "Enter the Official Account details: account name (your brand), industry/category, email."
-        - "Confirm and create (phone/email verification)."
-        - "Manage broadcasts, greeting messages, and profile at manager.line.biz."
+        - "Log in with a LINE Business ID (the brand email, or a LINE account); create one if needed."
+        - "Enter the Official Account details: account name = {brand_name}, industry/category, and email."
+        - "Click 確認 (Confirm) and create the account (approve the phone/email verification)."
+        - "Manage broadcasts, greeting messages, and the profile at manager.line.biz."
       ja:
         - "lycbiz.com/jp/service/line-official-account/ を開き「アカウント開設」をクリック。"
-        - "LINEビジネスID（メール または LINEアカウント）でログイン。無ければ作成。"
-        - "公式アカウント情報を入力：アカウント名（会社/ブランド名）、業種、メール。"
-        - "「確認」→ 内容を確認して作成（電話/メール認証）。"
+        - "LINEビジネスID（ブランドのメール、または LINEアカウント）でログイン。無ければ作成。"
+        - "公式アカウント情報を入力：アカウント名 = {brand_name}、業種/カテゴリ、メール。"
+        - "「確認」をクリックしてアカウントを作成（電話/メール認証を承認）。"
         - "manager.line.biz で配信・あいさつメッセージ・プロフィールを運用。"

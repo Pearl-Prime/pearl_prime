@@ -184,12 +184,12 @@ function stepScreen(sc){
   let h=railHTML(p.display_name+' · '+(MARKET==='ja'?'手順':'Step')+' '+(sc.i+1)+'/'+sc.total);
   h+='<div class="card"><div class="card-head"><div class="card-title">'+esc(p.display_name)+'</div><span class="chip">'+esc(cat)+'</span></div>';
   if(sc.i===0){
-    if(note) h+='<div class="note">'+esc(note)+'</div>';
+    if(note) h+='<div class="note">'+esc(fillTpl(note))+'</div>';
     h+='<a class="open-btn" href="'+esc(p.signup_url)+'" target="_blank" rel="noopener">↗ '+esc((MARKET==='ja'?'開く：':'Open ')+p.display_name)+'</a>';
   }
   h+='<div class="sec-label">'+esc((MARKET==='ja'?'手順 ':'Step ')+(sc.i+1)+' / '+sc.total)+'</div>';
-  h+='<div class="step-big"><span class="step-num">'+(sc.i+1)+'</span><div>'+esc(sc.txt)+'</div></div>';
-  if(sc.i===0 && gates.length) h+='<div class="gate"><strong>'+esc(t('gate_label'))+':</strong> '+esc(gates.join(' · '))+'</div>';
+  h+='<div class="step-big"><span class="step-num">'+(sc.i+1)+'</span><div>'+esc(fillTpl(sc.txt))+'</div></div>';
+  if(sc.i===0 && gates.length) h+='<div class="gate"><strong>'+esc(t('gate_label'))+':</strong> '+esc(fillTpl(gates.join(' · ')))+'</div>';
   h+=navHTML();
   h+='</div>';
   return h;
