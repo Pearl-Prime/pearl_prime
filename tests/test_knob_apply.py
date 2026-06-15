@@ -481,8 +481,11 @@ def test_load_spine_non_compact_format_returns_full_spine():
     """Non-compact runtime formats (no compact_chapter_subset declared) return full spine."""
     s = load_spine("anxiety", runtime_format="standard_book")
     assert len(s.chapters) == 12
-    s_micro = load_spine("anxiety", runtime_format="micro_book_15")
-    assert len(s_micro.chapters) == 12  # micro_book_15 has no subset declaration
+    # extended_book_2h declares chapter_count_default 14 (≥ the 12-chapter spine) so it
+    # never carries a compact_chapter_subset → full spine. (Was micro_book_15, which #1612
+    # made compact with a 5-chapter subset; it is no longer a non-compact exemplar.)
+    s_ext = load_spine("anxiety", runtime_format="extended_book_2h")
+    assert len(s_ext.chapters) == 12
 
 
 def test_apply_knobs_on_compact_spine_validates_clean():

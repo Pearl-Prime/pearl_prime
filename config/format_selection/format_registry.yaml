@@ -128,6 +128,15 @@ runtime_formats:
     ebook_minutes: 18      # DERIVED round(4250/230)
     compatible_tiers: [A, B, C]
     compatible_structural_formats: [F015, F003]
+    # Spine compression to chapter_count_default (6): one chapter per narrative phase
+    # (HARDSHIP/HELP/HEALING/HOPE) with the HARDSHIP+HOPE bookends doubled — keeps
+    # ch1=recognition and ch12=integration. ch3=pattern_mapping is the same 2nd-HARDSHIP
+    # keeper as the 8ch subset (drops ch2=origin as most phase-overlapping). This is the
+    # 5ch subset [1,4,7,10,12] + ch3. Realizes the declared 6-chapter count in the spine
+    # path (PR-D-SPINE-01); renumbered 1..6 after subset. Without this the spine path
+    # rendered the full 12-chapter spine (~7.2k words, +31..60% over [3000,5500] →
+    # inflated F1 register-repetition). Sibling of micro_book_15's 5ch subset.
+    compact_chapter_subset: [1, 3, 4, 7, 10, 12]
   short_book_30:
     duration_minutes: 40  # DEPRECATED — superseded by audiobook_minutes/ebook_minutes (DURATION-DERIVATION-01). Do not hand-edit; readers migrate per follow-up. Overwritten with derived audiobook value.
     chapter_count_default: 8  # AUTO-PLAN-SSOT-01-AMENDMENT Group B: was 7; Python value 8 preserved

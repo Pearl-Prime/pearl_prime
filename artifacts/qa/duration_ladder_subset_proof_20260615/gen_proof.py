@@ -54,8 +54,17 @@ COMPACT = [
 ]
 SHORT_REF = [
     ("micro_book_15", (2500, 4500)),
+    ("micro_book_20", (3000, 5500)),  # follow-up: newly declares compact_chapter_subset [1,3,4,7,10,12] (ch_default=6)
     ("short_book_30", (4500, 7500)),
     ("one_hour_book", (8000, 10000)),
+]
+# Full-spine control: standard_book declares chapter_count_default=10 but NO
+# compact_chapter_subset — its spine render is intentionally the full 12-chapter gold
+# arc (fill_regime=cap, cap_word_target=22000). Rendered once to show 12ch is ON-TARGET
+# (no overshoot ⇒ no gap ⇒ correctly excluded from subsetting). ch_default=10 governs
+# the separate auto-plan path (book_structure_plan), not the spine path.
+FULL_SPINE_REF = [
+    ("standard_book", (9000, 22000)),
 ]
 
 
@@ -160,6 +169,14 @@ def main() -> int:
             prose = render(fmt, honor)
             j, byid = score(prose)
             emit(fmt, variant, wr, prose, j, byid, rows)
+
+    print("\n=== FULL-SPINE control: standard_book has NO subset — intentionally 12ch (must be in-range, proving it is NOT a gap) ===")
+    for fmt, wr in FULL_SPINE_REF:
+        # honor_subset=True = real pipeline behavior; standard_book declares no subset, so
+        # it renders the full 12-chapter spine either way. In-range here ⇒ correctly excluded.
+        prose = render(fmt, honor_subset=True)
+        j, byid = score(prose)
+        emit(fmt, "full_spine_12ch", wr, prose, j, byid, rows)
 
     (OUT / "SUMMARY.json").write_text(json.dumps(rows, indent=2), encoding="utf-8")
     print(f"\nWrote {OUT / 'SUMMARY.json'}")

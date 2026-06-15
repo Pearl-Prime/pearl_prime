@@ -54,12 +54,50 @@ spine path to honor the existing SSoT counts. Before/after via the **real regist
 | format | declared count | before (12ch) | after (subset) | F1 | overshoot |
 |--------|:--:|:--:|:--:|:--:|:--:|
 | `micro_book_15` | 5 | 12ch / 7393w | **5ch / 5354w** | 16 → **3** (−81%) | +64% → **+19%** |
+| `micro_book_20` ⁽ᶠᵘ⁾ | 6 | 12ch / 8475w | **6ch / 6455w** | 20 → **14** (−30%) | +54% → **+17%** |
 | `short_book_30` | 8 | 12ch / 10839w | **8ch / 8445w** | 35 → **25** (−29%) | +45% → **+13%** |
 | `one_hour_book` | 8 | 12ch / 13095w | **8ch / 12291w** | 39 → **28** (−28%) | +31% → **+23%** |
+
+⁽ᶠᵘ⁾ `micro_book_20` added in the **follow-up** below — it was the one short-tier sibling
+#1612 missed.
 
 `one_hour_book` still overshoots +23% (12291 vs 10000): the atom-floor can't hit the 8–10k band
 at 8 chapters without per-chapter budget tightening — a **depth-budget / duration-derivation**
 follow-up, not a chapter-count one. Chapter count still cut overshoot 8pts and F1 28%.
+
+## Follow-up (2026-06-15): `micro_book_20` gap + full `chapter_count_default < 12` audit
+
+#1612 declared subsets on `micro_book_15`(5) / `short_book_30`(8) / `one_hour_book`(8) — but
+**missed `micro_book_20`**, which declares `chapter_count_default: 6` with no
+`compact_chapter_subset`. The spine path therefore rendered it at the full 12 chapters
+(8475w, **+54% over** [3000,5500], F1=20). This follow-up adds
+`compact_chapter_subset: [1, 3, 4, 7, 10, 12]` — the 5ch anchor set `[1,4,7,10,12]` + `ch3`
+(`pattern_mapping`, the same 2nd-HARDSHIP keeper the 8ch subset uses; drops `ch2`=`origin`).
+Result: **6ch / 6455w / +17% over / F1 20→14** (see the ⁽ᶠᵘ⁾ row above).
+
+### Audit — every `runtime_format` with `chapter_count_default < 12` and no subset
+
+| format | ch_default | spine-path? | decision | rationale |
+|--------|:--:|:--:|--------|-----------|
+| `micro_book_20` | 6 | **yes** | **subset added** `[1,3,4,7,10,12]` | first-class tier (word_range, F015/F003, consumed); overshoots +54% at 12ch — same gap class as `micro_book_15` |
+| `standard_book` | 10 | yes | **excluded (intentional full-12)** | `fill_regime: cap`, `cap_word_target: 22000` is tuned for the 12-chapter **gold** render (22346w = **+2%**, on-target — see control below). `ch_default=10` governs the *auto-plan* path (`book_structure_plan`), not the spine path. Flipping the flagship spine render 12→10 is an **operator-tier product decision** (AUTO-PLAN-SSOT-01-AMENDMENT: *"Most consequential… preserve"*), out of this envelope. |
+| `five_min_practice`, `pocket_guide`, `ten_things_to_do`, `symptom_to_action_atlas`, `daily_text_audio_companion`, `crisis_cards`, `weekly_challenge_pack`, `faq_audiobook`, `myth_vs_mechanism`, `protocol_library` | 5–10 | **no** | **out of scope (modular)** | Group-A backfill: **not consumed** by `format_selector` / `enrichment_select` / `knob_apply` (registry comment + AMENDMENT verified 0 hits); no `word_range` (cannot be budget-scored); modular content shapes (FAQ / cards / listicle / atlas / protocols), not the 4-phase narrative arc the subset assumes. A subset on these would never be read. |
+
+Formats with `chapter_count_default ≥ 12` (`extended_book_2h`=14, `deep_book_4h`=16,
+`deep_book_6h`=20) never over-render — the 12-chapter spine is their ceiling — so they need no
+subset.
+
+### Full-spine control — proof `standard_book` is NOT a gap
+
+| format | variant | chapters | words | vs word_range | F1 | verdict |
+|--------|---------|:--:|:--:|:--:|:--:|:--|
+| `standard_book` | full_spine_12ch | 12 | 22346 | **+2% OVER** | 61 | HARD_FAIL |
+
+`standard_book` declares no subset, so it renders the full 12-chapter gold arc either way and
+lands **on-target** (22346 vs the 22000 cap; matches the published ladder's 22155/+1%). Subsetting
+it to 10 would render ~18.5k — **under** `cap_word_target` and away from the tuned gold target.
+This is the empirical basis for its exclusion: no overshoot ⇒ no gap. (The 10 modular formats are
+absent here because they carry no `word_range` to score against.)
 
 ## Faithfulness check (this harness vs the published ladder)
 

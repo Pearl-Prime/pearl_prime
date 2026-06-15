@@ -128,6 +128,38 @@
     "total_findings": 14
   },
   {
+    "fmt": "micro_book_20",
+    "variant": "before_12ch",
+    "word_range": [
+      3000,
+      5500
+    ],
+    "chapters": 12,
+    "words": 8475,
+    "overshoot": "+54% OVER",
+    "verdict": "HARD_FAIL",
+    "F1": 20,
+    "F2": 5,
+    "F7": 8,
+    "total_findings": 34
+  },
+  {
+    "fmt": "micro_book_20",
+    "variant": "after_subset",
+    "word_range": [
+      3000,
+      5500
+    ],
+    "chapters": 6,
+    "words": 6455,
+    "overshoot": "+17% OVER",
+    "verdict": "HARD_FAIL",
+    "F1": 14,
+    "F2": 5,
+    "F7": 6,
+    "total_findings": 27
+  },
+  {
     "fmt": "short_book_30",
     "variant": "before_12ch",
     "word_range": [
@@ -190,5 +222,21 @@
     "F2": 13,
     "F7": 8,
     "total_findings": 56
+  },
+  {
+    "fmt": "standard_book",
+    "variant": "full_spine_12ch",
+    "word_range": [
+      9000,
+      22000
+    ],
+    "chapters": 12,
+    "words": 22346,
+    "overshoot": "+2% OVER",
+    "verdict": "HARD_FAIL",
+    "F1": 61,
+    "F2": 15,
+    "F7": 12,
+    "total_findings": 97
   }
 ]
