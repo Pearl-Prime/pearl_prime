@@ -522,3 +522,123 @@ def test_named_intro_wrapper_variants_are_f2_clean() -> None:
         findings = _detect_f2_broken_fragments([(1, joined)])
         assert not findings, f"named intro wrapper produced F2 on seed {seed}: {joined!r}"
     _reset_caches_for_tests()
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# DEFERRED-LANE register_verdict (2026-06-15, composer-register-flip):
+# F2.B / F2.D / F2.E grammatical false-positive exclusions. Each test pins BOTH
+# directions — the genuine slot artifact still HARD_FAILs, the legitimate authored
+# prose no longer does — so the hardening cannot silently regress into a gutted gate.
+# ─────────────────────────────────────────────────────────────────────────────
+
+from phoenix_v4.quality.register_gate import (  # noqa: E402
+    _f2b_is_legitimate_stranded_preposition,
+    _is_titlecase_heading,
+    _split_chapters as _split_chapters_for_test,
+)
+
+
+@pytest.mark.parametrize(
+    "sentence",
+    [
+        "Here's a grounding practice to work with.",       # relative-clause stranding
+        "Here's an emotional processing practice to work with.",
+        "Drop the urge to move on.",                        # phrasal verb
+        "Then move on.",
+        "But it changes the room you are answering in.",    # relative-clause stranding
+        "That hope became the thing you're now running from.",
+        "It is not about your worth or what you're capable of.",
+        "What repeated overload teaches you to stop asking for.",  # infinitive complement
+        "You're safe. You're held. You're cared for.",      # passive phrasal
+        "It is what it felt like before it was always on.",  # predicate
+        # Copula-predicate ending with NO relative/infinitive licensor (the gap the original
+        # discriminator missed; observed live in the book05 re-pilot, ch8 parallel prose
+        # "The breath is already moving. … The awareness is already on.").
+        "The awareness is already on.",
+        "The system was on.",
+        "Before you noticed it, the alarm was already on.",
+        "The light is still on.",
+    ],
+)
+def test_f2b_excludes_grammatical_stranded_prepositions(sentence: str) -> None:
+    """Authored prose ending in a grammatically stranded preposition / phrasal-verb
+    particle must NOT trip F2.B (it is not a dropped-slot renderer artifact)."""
+    assert _f2b_is_legitimate_stranded_preposition(sentence), (
+        f"F2.B should treat {sentence!r} as legitimate stranded prose"
+    )
+    body = f"Chapter 1\n\n{sentence}\n\nMore steady content follows here to anchor the chapter.\n"
+    findings = _detect_f2_broken_fragments(_split_chapters_for_test(body))
+    assert not any(f.evidence.get("rule") == "F2.B_sentence_end_preposition" for f in findings), (
+        f"F2.B false-positived on legitimate stranded preposition: {sentence!r}"
+    )
+
+
+@pytest.mark.parametrize(
+    "sentence",
+    [
+        "In Ahjan's framework, the path begins with.",   # dropped {SLOT} after transitive verb
+        "This is the foundation of.",
+        "The through-line is best understood as a.",
+    ],
+)
+def test_f2b_still_hard_fails_genuine_dropped_slot(sentence: str) -> None:
+    """A genuine unfilled-slot dangling preposition (no stranding licensor, transitive
+    lead-in verb) must STILL HARD_FAIL — the hardening must not gut the rule."""
+    assert not _f2b_is_legitimate_stranded_preposition(sentence), (
+        f"F2.B must still treat {sentence!r} as a dropped-slot artifact"
+    )
+    body = f"Chapter 1\n\n{sentence}\n\nMore content here for the chapter body.\n"
+    result = evaluate_register(body)
+    assert result.verdict == "HARD_FAIL"
+    assert any(
+        f.failure_id == "F2" and f.evidence.get("rule") == "F2.B_sentence_end_preposition"
+        for f in result.findings
+    ), f"F2.B missed a genuine dropped-slot artifact: {sentence!r}"
+
+
+@pytest.mark.parametrize("title", ["Small Exposures", "Worth Without Output", "The Cost of Vigilance"])
+def test_f2d_excludes_chapter_title_heading(title: str) -> None:
+    """A clean Title-Case chapter working-title (first paragraph of a chapter body) must
+    not trip F2.D as a sub-4-word fragment."""
+    assert _is_titlecase_heading(title)
+    body = f"Chapter 7\n\n{title}\n\nThe first real paragraph of the chapter follows here with substance.\n"
+    findings = _detect_f2_broken_fragments(_split_chapters_for_test(body))
+    assert not any(f.evidence.get("rule") == "F2.D_sub_4_word_paragraph" for f in findings), (
+        f"F2.D false-positived on chapter title {title!r}"
+    )
+
+
+@pytest.mark.parametrize("leaked", ["INTEGRATION v06", "Ahjan's the practice", "EXERCISE 03"])
+def test_f2d_still_hard_fails_leaked_label(leaked: str) -> None:
+    """A genuine leaked slot/component label or shapeless 3-word fragment must STILL
+    HARD_FAIL, even when it is the first paragraph of a chapter body."""
+    assert not _is_titlecase_heading(leaked)
+    body = f"Chapter 1\n\n{leaked}\n\nThe real chapter content begins in this paragraph here.\n"
+    result = evaluate_register(body)
+    assert result.verdict == "HARD_FAIL"
+    assert any(
+        f.failure_id == "F2" and f.evidence.get("rule") == "F2.D_sub_4_word_paragraph"
+        for f in result.findings
+    ), f"F2.D missed a genuine leaked label: {leaked!r}"
+
+
+def test_f2e_excludes_colon_introducing_a_list_or_content() -> None:
+    """A colon that introduces a numbered list or a following content paragraph across a
+    blank line is authored structure, not a missing post-colon slot."""
+    list_body = (
+        "Chapter 1\n\nTry this for ninety seconds:\n\n"
+        "1. Notice where your attention is scanning right now.\n\n"
+        "2. Name the loudest sensation in one plain word.\n"
+    )
+    findings = _detect_f2_broken_fragments(_split_chapters_for_test(list_body))
+    assert not any(f.evidence.get("rule") == "F2.E_colon_no_content" for f in findings), (
+        "F2.E false-positived on a colon introducing a numbered list"
+    )
+    prose_body = (
+        "Chapter 1\n\nThe teaching in this tradition is simple:\n\n"
+        "Crank the volume down on the trigger and let the reflex pass.\n"
+    )
+    findings2 = _detect_f2_broken_fragments(_split_chapters_for_test(prose_body))
+    assert not any(f.evidence.get("rule") == "F2.E_colon_no_content" for f in findings2), (
+        "F2.E false-positived on a colon introducing a following content paragraph"
+    )

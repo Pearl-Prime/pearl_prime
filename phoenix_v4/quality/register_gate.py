@@ -222,6 +222,129 @@ F2_LOWERCASE_SENTENCE_START_NOUNS = {
     "can", "mechanism", "attachment", "suffering", "love",
 }
 
+# ── F2.B grammatical stranded-preposition / phrasal-verb exclusion ────────────
+# DEFERRED-LANE register_verdict (2026-06-15, composer-register-flip): F2.B flags
+# any sentence ending in a preposition (with/of/by/to/for/on/in/from/the/a) because a
+# *genuine* unfilled-slot artifact ("…the path begins with {SLOT}." → "…begins with.")
+# ends that way. But English legitimately strands prepositions sentence-finally:
+#   • phrasal-verb particles  — "Drop the urge to move on.", "Then move on."
+#   • relative-clause stranding — "the room you are answering in.",
+#                                 "the thing you're now running from.",
+#                                 "a practice to work with."
+#   • infinitive complements   — "what repeated overload teaches you to stop asking for."
+#   • passive / predicate       — "You're cared for.", "before it was always on."
+# All of these are authored content (within_slot_bridge_families.yaml,
+# global_flow_glue_bank.yaml, chapter_composer authored lines, exercise intro templates),
+# not renderer artifacts — yet the bare regex HARD_FAILed the whole register verdict on
+# them. This is the same false-positive-removal class as #1596's F2.C function-word fix.
+#
+# Discriminator (deterministic, no LLM): a sentence-final preposition is a *legitimate
+# stranded preposition* — NOT a dropped-slot artifact — when the clause carries a stranding
+# licensor (a relative pronoun / infinitive "to" / wh-word / "you are|'re" / object pronoun)
+# OR the (verb, preposition) ending is a recognized phrasal verb. The genuine slot artifact
+# asserted by test_f2b ("the path begins with.") has NO such licensor and "begins" is not a
+# phrasal verb, so it still HARD_FAILs.
+
+# Phrasal verbs whose particle legitimately ends a sentence (verb token immediately before
+# the final preposition). Kept deliberately small + high-confidence.
+_F2B_PHRASAL_VERB_ENDINGS = frozenset({
+    ("move", "on"), ("moves", "on"), ("moved", "on"), ("moving", "on"),
+    ("carry", "on"), ("carries", "on"), ("carried", "on"), ("carrying", "on"),
+    ("go", "on"), ("goes", "on"), ("went", "on"), ("going", "on"),
+    ("hold", "on"), ("holds", "on"), ("held", "on"), ("holding", "on"),
+    ("hang", "on"), ("press", "on"), ("read", "on"), ("come", "on"),
+    ("give", "in"), ("gives", "in"), ("gave", "in"), ("giving", "in"),
+    ("cared", "for"), ("care", "for"), ("cares", "for"), ("caring", "for"),
+    ("provided", "for"), ("accounted", "for"),
+})
+
+# Stranding licensors: their presence anywhere in the sentence indicates the final
+# preposition is grammatically stranded (relative clause / infinitive / wh-clause /
+# passive-with-subject), not a dropped template slot.
+_F2B_STRANDING_LICENSOR_RE = re.compile(
+    r"\b("
+    r"to|"                                   # infinitive: "a practice to work with."
+    r"that|which|who|whom|whose|where|"      # relative pronouns
+    r"what|why|how|"                          # wh-clauses: "what is the relationship for."
+    r"you|your|you're|they|them|their|"       # stranded subject/object: "you are answering in."
+    r"i'm|we're|he's|she's|it's|i|we"
+    r")\b",
+    re.IGNORECASE,
+)
+
+# Copula-predicate ending: a sentence-final particle that is the PREDICATE of a
+# linking verb is legitimate prose, not a dropped slot — "The awareness is already on.",
+# "before it was always on.", "the system was on.", "you're cared for." (passive). The
+# bare F2.B regex HARD_FAILed these because they end in on/for/in; none carries a relative/
+# infinitive licensor, so the licensor test above misses them. Pattern: a copula
+# (is/are/was/were/be/been/being/'s/'re/am) optionally followed by ONE adverb (already/
+# always/still/just/now/...) then the final particle. This is the "predicate" case the
+# F2.B block comment already names but the original discriminator did not cover. The
+# genuine slot artifact "the path begins with." has a lexical verb ("begins"), not a
+# copula, immediately before the particle → still HARD_FAILs.
+_F2B_COPULA_PREDICATE_RE = re.compile(
+    r"\b(is|are|was|were|be|been|being|am|'s|'re|isn't|aren't|wasn't|weren't)\b"
+    r"(?:\s+(?:already|always|still|just|now|even|truly|fully|never|only|"
+    r"finally|again|right|all|so|really|quietly|simply)){0,2}\s+"
+    r"(on|in|for|out|over|through|up|down|off|around|about)\.\s*$",
+    re.IGNORECASE,
+)
+
+
+# Lowercase function words that may legitimately appear mid-heading in Title Case
+# (e.g. "Worth Without Output" — but small joiners like of/and/the are commonly lowercased).
+_F2D_TITLE_LOWERCASE_JOINERS = frozenset({
+    "a", "an", "the", "and", "or", "but", "of", "to", "in", "on", "for",
+    "with", "as", "at", "by", "from", "into", "over", "under",
+})
+
+
+def _is_titlecase_heading(para: str) -> bool:
+    """True when `para` reads as a clean Title-Case chapter heading (every content word
+    capitalized, alphabetic only, no digits/labels). Used to keep a chapter's working title
+    from tripping F2.D, while genuine leaked slot labels ("INTEGRATION v06") still HARD_FAIL."""
+    tokens = para.split()
+    if not tokens:
+        return False
+    saw_content_word = False
+    for i, tok in enumerate(tokens):
+        # Allow a trailing terminal-free token only; headings carry no sentence punctuation.
+        if not re.fullmatch(r"[A-Za-z][A-Za-z-]*", tok):
+            return False  # digits, apostrophes, labels (e.g. "v06", "Ahjan's") → not a heading
+        low = tok.lower()
+        if tok[0].isupper():
+            saw_content_word = True
+            continue
+        # A lowercase token is only acceptable as an interior joiner (never first word).
+        if i == 0 or low not in _F2D_TITLE_LOWERCASE_JOINERS:
+            return False
+    return saw_content_word
+
+
+def _f2b_is_legitimate_stranded_preposition(sentence: str) -> bool:
+    """True when a sentence-final preposition is grammatically stranded (legitimate prose),
+    rather than a dropped-slot template artifact. See block comment above."""
+    s = sentence.strip()
+    # Tokenize trailing words; drop the final period.
+    words = re.findall(r"[A-Za-z']+", s.lower())
+    if len(words) < 2:
+        return False
+    verb, prep = words[-2], words[-1]
+    if (verb, prep) in _F2B_PHRASAL_VERB_ENDINGS:
+        return True
+    # Copula-predicate particle ("The awareness is already on.", "it was always on.",
+    # "you're cared for.") — the particle is the predicate of a linking/passive verb, not a
+    # dropped slot. Checked before the licensor test because these sentences carry no
+    # relative/infinitive licensor.
+    if _F2B_COPULA_PREDICATE_RE.search(s):
+        return True
+    # A genuine dropped-slot artifact is a short lead-in clause with no stranding licensor
+    # ("the path begins with."). Real stranded prepositions sit inside a clause that names
+    # the stranded element via a licensor token.
+    if _F2B_STRANDING_LICENSOR_RE.search(s):
+        return True
+    return False
+
 
 def _detect_f2_broken_fragments(chapters: list[tuple[int, str]]) -> list[RegisterFinding]:
     findings = []
@@ -237,6 +360,17 @@ def _detect_f2_broken_fragments(chapters: list[tuple[int, str]]) -> list[Registe
             ))
         # F2.B — ends with preposition + period
         for m in F2_RULES["F2.B_sentence_end_preposition"].finditer(ch_text):
+            # Recover the offending sentence (text from the prior sentence/line boundary up to
+            # the matched period) so we can tell a dropped-slot artifact ("…begins with.")
+            # from a grammatically stranded preposition ("…a practice to work with.").
+            seg_start = max(
+                ch_text.rfind("\n", 0, m.start()),
+                max(ch_text.rfind(". ", 0, m.start()),
+                    max(ch_text.rfind("? ", 0, m.start()), ch_text.rfind("! ", 0, m.start()))),
+            )
+            offending_sentence = ch_text[seg_start + 1 : m.end()].strip()
+            if _f2b_is_legitimate_stranded_preposition(offending_sentence):
+                continue
             findings.append(RegisterFinding(
                 failure_id="F2",
                 severity="HARD_FAIL",
@@ -258,12 +392,23 @@ def _detect_f2_broken_fragments(chapters: list[tuple[int, str]]) -> list[Registe
                     evidence={"rule": "F2.C_lowercase_noun_start", "sentence": sent[:120]},
                 ))
         # F2.D — sub-4-word standalone paragraph (excluding chapter headers, list items)
-        for para in _split_paragraphs(ch_text):
+        _f2d_paras = _split_paragraphs(ch_text)
+        for _pi, para in enumerate(_f2d_paras):
             wc = len(para.split())
             if 0 < wc < 4 and not para.startswith("#") and not para[0].isdigit():
                 # Filter out genuine 1-line caption strips that ARE meant to be short.
                 # Heuristic: a true 3-word slot artifact like "Ahjan's the practice" has no clear sentence shape.
                 if not para.endswith((".", "?", "!")):
+                    # DEFERRED-LANE register_verdict (2026-06-15): the FIRST paragraph of a
+                    # chapter body is the chapter's working title (the renderer emits
+                    # "Chapter N\n\n<Working Title>\n\n…"; _split_chapters has already stripped
+                    # the "Chapter N" line, so the title is _f2d_paras[0]). A clean Title-Case
+                    # heading ("Small Exposures", "Worth Without Output") is NOT a slot artifact.
+                    # Genuine leaked labels still HARD_FAIL: a leaked component label
+                    # ("INTEGRATION v06") carries a digit/lowercase token and never sits at
+                    # index 0, and "Ahjan's the practice" is not Title-Case.
+                    if _pi == 0 and _is_titlecase_heading(para):
+                        continue
                     findings.append(RegisterFinding(
                         failure_id="F2",
                         severity="HARD_FAIL",
@@ -273,6 +418,20 @@ def _detect_f2_broken_fragments(chapters: list[tuple[int, str]]) -> list[Registe
                     ))
         # F2.E — colon followed by paragraph break
         for m in F2_RULES["F2.E_colon_no_content"].finditer(ch_text):
+            # DEFERRED-LANE register_verdict (2026-06-15): the rule's intent is "the slot AFTER
+            # the colon rendered empty". A colon that introduces a numbered/bulleted list or a
+            # following content paragraph across a blank line is legitimate authored structure
+            # ("Try this for ninety seconds:\n\n1. Notice…", "The teaching is simple:\n\nCrank…"),
+            # not a missing slot. Only fire when nothing substantive follows the colon+blank
+            # (EOF, another blank, or a bare heading/label).
+            _after = ch_text[m.end():].lstrip()
+            if _after:
+                _first_line = _after.split("\n", 1)[0].strip()
+                # Real content follows: a list item, or a line with >=3 words. Either means the
+                # post-colon slot was filled (just as its own paragraph) → not an F2.E artifact.
+                _is_list_item = bool(re.match(r"^(\d+[.)]|[-*•])\s+\S", _first_line))
+                if _is_list_item or len(_first_line.split()) >= 3:
+                    continue
             findings.append(RegisterFinding(
                 failure_id="F2",
                 severity="HARD_FAIL",
