@@ -3277,3 +3277,38 @@ This cap entry is the **authoritative decision record** for the 16 Q-PSQ-*; the 
 - Grounding audit: `artifacts/qa/duration_correctness_audit_20260611/` (`DURATION_CORRECTNESS_REPORT.md`, `RECOMMENDATIONS.md`, `projection_results.json`); PR #1510 `f27dafdb2`.
 - Touched-by-Phase-2: `config/format_selection/format_registry.yaml`, `config/duration_scorecard.yaml` (add `ebook_wpm`), `scripts/ci/pr_governance_review.py`.
 - SSOT precedent: `AUTO-PLAN-SSOT-01` (L438), `AUTO-PLAN-SSOT-01-AMENDMENT` (L523).
+---
+
+### DEVOTION-PATH-TOPIC-ENGINE-RECONCILE-01 — devotion_path catalog re-point to topic-native engines (Option A′); reject illegal-arc authoring; A′ *shape* operator-gated (recommended 2026-06-15)
+
+**Status:** **recommended** (architecture decision; option-A′ *shape* size↔speed pick GATED on operator). Cap entry only — no catalog/arc/atom edits in this PR.
+
+**Context:** Pearl_Prime stood down the devotion_path (Open Vessel Press / Sai Maa) en_US assembly 2026-06-15 ([`artifacts/release/2026-W25/devotion_path/HANDOFF_devotion_path_catalog_readiness_20260615.md`](../artifacts/release/2026-W25/devotion_path/HANDOFF_devotion_path_catalog_readiness_20260615.md)): the 99-plan catalog is unbuildable. Root cause: the plans' third axis is the **anxiety-family engine triad `{false_alarm, overwhelm, spiral}` cross-applied to non-anxiety topics `{burnout, courage, imposter_syndrome}`**, violating **`specs/PHOENIX_ARC_FIRST_CANONICAL_SPEC.md §4` ("Each topic has one engine")** as enforced by `config/topic_engine_bindings.yaml`. Coverage matrix: [`artifacts/analysis/devotion_path_topic_engine_reconciliation_20260615/`](../artifacts/analysis/devotion_path_topic_engine_reconciliation_20260615/) (99-plan verdicts + 21-row topic×engine grid).
+
+**Decisive finding:** the catalog is **mis-pointed, not content-starved**. Plan verdicts: 31 `BUILDABLE_LEGAL` · 5 `BUILDS_BUT_ENGINE_ILLEGAL` (gen_z_student F006 seeds) · 2 `MISSING_ARC_ENGINE_LEGAL` · **61 `MISSING_ARC_ENGINE_ILLEGAL`** (catalog engine forbidden for the topic). Meanwhile **85 topic-native, engine-legal, arc+atom-backed cells already exist** (burnout→overwhelm/watcher/grief=33; courage→false_alarm/spiral/shame=30; imposter→shame/comparison=22). The native authored surface (85) is *larger* than the catalog's buildable surface (31).
+
+**Decision:**
+
+| Option | Verdict | Why |
+|--------|---------|-----|
+| **A′ — re-point engine axis to each topic's `allowed_engines`** | **ADOPT** | only canon-restoring option; smallest lift (0–2 arcs); grows legal catalog 31→up to 85 |
+| **B — author 63 missing arcs on current anxiety engines** | **REJECT** | 61/63 are on `forbidden_engines` → manufactures engine-illegal arcs; violates §4; entrenches the defect |
+| **C — ship buildable 31 now** | fold into A′ as **wave-1 ship slice** | the 31 are already engine-legal; C ≡ "A′ restricted to the 31 already-correct plans" |
+
+**Two orthogonal failures — do NOT conflate:** (F-ENGINE) catalog points at forbidden engines / 63 arcs missing → fixed by this re-point (no prose). (F-COHERENCE) composer pulls atoms by `engine` key ignoring `topic`, so even an engine-*legal* plan (e.g. `courage__false_alarm`, arc exists + allowed) renders anxiety prose with the topic string-substituted → **composer-frontier lane #1589/#1590/#1601**, a co-gate, NOT fixed by re-pointing. Arc YAMLs are correctly tagged (`topic`/`engine`); the incoherence is downstream of the arc.
+
+**OPERATOR-GATED (size↔speed — architect does NOT choose):** *which A′ shape* — `A′-wave1-31` (fastest first ship, backfill to 85) vs `A′-mirror-82` (closest to original 99 shape) vs `A′-full-85` (largest legal catalog). **Pearl_Architect recommendation: A′-wave1-31 → backfill toward A′-full-85.** Route via `Pearl_Operator_Proxy` if brokered (`docs/PEARL_OPERATOR_PROXY_SPEC.md`; log `artifacts/coordination/operator_decisions_log.tsv`).
+
+**How to apply:** re-point series_plan + book_plan engine axis per spec §5 map; engine values MUST be a subset of `allowed_engines`; regenerate plan title/subtitle/description from `config/catalog_planning/engine_title_angles.yaml` (anxiety-framed copy MUST NOT carry over); retire illegal book_ids (provenance-preserving, no in-place rename); author only the ≤2 legal `gen_z_student` courage arcs if that persona is retained.
+
+**Action items:**
+
+1. **Operator** — pick the A′ shape (§7 of the spec). Architecture (Option A′) is decided; only the size↔speed schedule is open.
+2. **Pearl_PM / Pearl_Editor (`ws_devotion_path_engine_repoint_20260615`)** — execute the §5 re-point after operator shape pick; trigger = this cap merged + operator pick. Iteration cap = 1 PR for the re-point pass.
+3. **Pearl_Dev / Pearl_Editor (composer-frontier #1589/#1590/#1601)** — land F-COHERENCE (topic-aware `(topic, engine)` atom routing + scaffolding/register fixes); co-gates the assembly.
+4. **Pearl_Dev** — decide the B2 release-profile emission contract (`production` no-emit; "spine-default gate failure") before any production-profile assembly run.
+5. **Pearl_Prime (GATED)** — re-dispatch assembly only after (2) done AND (3) landed AND a re-validated proof slice passes coherence + gates; use the CORRECTED COMPOSITE brief (composite mode, Open Vessel Press, Sai Maa, style_dp/saima_dp covers, `--pipeline-mode spine`).
+
+**Anti-drift:** no catalog/arc/atom/composer/register edits in this cap PR; does not edit `topic_engine_bindings.yaml` or the canonical spec (applies them); subordinate to `PHOENIX_ARC_FIRST_CANONICAL_SPEC.md` (conflict → canon wins); size↔speed pick left to operator.
+
+**Authority:** this cap entry + [`docs/specs/DEVOTION_PATH_TOPIC_ENGINE_RECONCILIATION_V1_SPEC.md`](./specs/DEVOTION_PATH_TOPIC_ENGINE_RECONCILIATION_V1_SPEC.md) + `specs/PHOENIX_ARC_FIRST_CANONICAL_SPEC.md` §4 + `config/topic_engine_bindings.yaml` + [`artifacts/analysis/devotion_path_topic_engine_reconciliation_20260615/`](../artifacts/analysis/devotion_path_topic_engine_reconciliation_20260615/).
