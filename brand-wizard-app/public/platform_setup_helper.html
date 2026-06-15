@@ -171,7 +171,7 @@ function renderTop(){
 function railHTML(ctx){
   const S=buildScreens(); const pct=Math.round(POS/(S.length-1)*100);
   return '<div class="rail"><div class="rail-top"><span class="ctx">'+esc(ctx)+'</span>'+
-    '<span>'+doneCount()+' / '+numPlatforms()+' '+esc(MARKET==='ja'?'準備完了':'ready')+
+    '<span>'+doneCount()+(MARKET==='ja'?' / ':' of ')+numPlatforms()+' '+esc(MARKET==='ja'?'準備完了':'ready')+
     ' &nbsp;<button class="edit-brand" onclick="POS=0;render()">'+esc(MARKET==='ja'?'ブランド編集':'edit brand')+'</button></span></div>'+
     '<div class="bar-track"><div class="bar-fill" style="width:'+pct+'%"></div></div></div>';
 }
@@ -195,13 +195,13 @@ function stepScreen(sc){
   const p=sc.p, cat=p.category==='social'?(MARKET==='ja'?'ソーシャル':'Social'):(MARKET==='ja'?'配信':'Distribution');
   const note=MARKET==='ja'?p.account_note_ja:p.account_note_en;
   const gates=(MARKET==='ja'?p.real_info_gates_ja:p.real_info_gates_en)||[];
-  let h=railHTML(p.display_name+' · '+(MARKET==='ja'?'手順':'Step')+' '+(sc.i+1)+'/'+sc.total);
+  let h=railHTML(p.display_name+' · '+(MARKET==='ja'?'手順':'Step')+' '+(sc.i+1)+(MARKET==='ja'?'/':' of ')+sc.total);
   h+='<div class="card"><div class="card-head"><div class="card-title">'+esc(p.display_name)+'</div><span class="chip">'+esc(cat)+'</span></div>';
   if(sc.i===0){
     if(note) h+='<div class="note">'+esc(fillTpl(note))+'</div>';
     h+='<a class="open-btn" href="'+esc(p.signup_url)+'" target="_blank" rel="noopener">↗ '+esc((MARKET==='ja'?'開く：':'Open ')+p.display_name)+'</a>';
   }
-  h+='<div class="sec-label">'+esc((MARKET==='ja'?'手順 ':'Step ')+(sc.i+1)+' / '+sc.total)+'</div>';
+  h+='<div class="sec-label">'+esc((MARKET==='ja'?'手順 ':'Step ')+(sc.i+1)+(MARKET==='ja'?' / ':' of ')+sc.total)+'</div>';
   h+='<div class="step-big"><span class="step-num">'+(sc.i+1)+'</span><div>'+esc(fillTpl(sc.txt))+'</div></div>';
   if(sc.i===0 && gates.length) h+='<div class="gate"><strong>'+esc(t('gate_label'))+':</strong> '+esc(fillTpl(gates.join(' · ')))+'</div>';
   h+=navHTML();

@@ -161,16 +161,16 @@
     },
     {
       "id": "apple_books",
-      "display_name": "Apple Books (via INaudio)",
+      "display_name": "Apple Books",
       "category": "distribution",
       "markets": [
         "en",
         "ja"
       ],
       "signup_url": "https://authors.apple.com",
-      "dashboard_url": "https://inaudio.com/dashboard",
-      "account_note_en": "Set up as the PUBLISHER {brand_name}. Ebooks go through Apple Books for Authors; audiobooks reach Apple via Findaway/INaudio (see that card).",
-      "account_note_ja": "出版社「{brand_name}」として設定。電子書籍は Apple Books for Authors、オーディオブックは Findaway/INaudio 経由で Apple に配信（該当カード参照）。",
+      "dashboard_url": "https://authors.apple.com",
+      "account_note_en": "EBOOKS. Set up as the publisher {brand_name}. Ebooks are published through Apple Books for Authors. Audiobooks are handled separately through INaudio/Findaway (see that card).",
+      "account_note_ja": "電子書籍。出版社「{brand_name}」として設定。電子書籍は Apple Books for Authors で公開します。オーディオブックは INaudio/Findaway で別途扱います（該当カード参照）。",
       "secret": {
         "kind": "password",
         "label_en": "Apple ID password",
@@ -259,7 +259,7 @@
     },
     {
       "id": "inaudio_findaway",
-      "display_name": "Findaway Voices / INaudio",
+      "display_name": "Findaway / INaudio (audiobooks)",
       "category": "distribution",
       "markets": [
         "en",
@@ -267,8 +267,8 @@
       ],
       "signup_url": "https://www.voicesbyinaudio.com/",
       "dashboard_url": "https://inaudio.com/dashboard",
-      "account_note_en": "Voices by INaudio (formerly Findaway Voices) is the audiobook aggregator → Spotify, Apple, Audible, libraries. Register as the publisher {brand_name}.",
-      "account_note_ja": "Voices by INaudio（旧 Findaway Voices）はオーディオブックのアグリゲーター → Spotify、Apple、Audible、図書館。出版社「{brand_name}」として登録。",
+      "account_note_en": "AUDIOBOOKS ONLY. Voices by INaudio (formerly Findaway Voices) is the audiobook aggregator → Spotify, Apple, Audible, libraries. (Ebooks go through Apple Books / KDP / Kobo — not here.) Register as the publisher {brand_name}.",
+      "account_note_ja": "オーディオブック専用。Voices by INaudio（旧 Findaway Voices）はオーディオブックのアグリゲーター → Spotify、Apple、Audible、図書館。（電子書籍は Apple Books / KDP / Kobo で、ここではありません。）出版社「{brand_name}」として登録。",
       "secret": {
         "kind": "password",
         "label_en": "INaudio password",

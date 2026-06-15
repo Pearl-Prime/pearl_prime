@@ -38,7 +38,7 @@ OUT_PATH = REPO_ROOT / "brand-wizard-app" / "public" / "platform_setup_helper_da
 
 # Display-name fallbacks for ids not present in platform_credential_fields.yaml.
 DISPLAY_FALLBACK = {
-    "inaudio_findaway": "Findaway Voices / INaudio",
+    "inaudio_findaway": "Findaway / INaudio (audiobooks)",
     "facebook": "Facebook",
 }
 
