@@ -798,12 +798,8 @@ function StepHero({ eyebrow, title, subtitle, helper }) {
 function ProgressBar({ step, total, labels, t, state }) {
   const isComplete = step === total - 2; // step 7 ("あなたのブランド") only
   const pct = isComplete ? 100 : ((step + 1) / total) * 100;
-  // Show the real brand name once chosen; otherwise the generic congrats string.
-  const brandName = state ? resolveBrandName(state) : null;
-  const congrats = brandName && brandName !== "Your Brand"
-    ? "おめでとうございます — {brand} が100%設定されました！".replace("{brand}", brandName)
-    : "おめでとうございます — ブランドが100%設定されました！";
-  return (
+  // マッチした出版社名（Step11Launch の祝福ブロック・ディレクターダッシュボードと同じ値）を表示。
+  const congrats = `おめでとうございます — ${resolveBrandName(state)} が100%設定されました！`;  return (
     <div className="brand-studio-panel mb-6 px-5 py-4 sm:mb-8">
       {isComplete && (
         <p className="text-center text-3xl font-extrabold mb-3" style={{ color: '#d97706', fontFamily: 'Cormorant Garamond, serif' }}>
@@ -3086,19 +3082,6 @@ function Step11Launch({ state, update, i18n = {} }) {
       <div className="mb-6 space-y-6">
         <section className="rounded-2xl border border-gray-200/90 bg-white/90 p-5 shadow-sm backdrop-blur-sm">
           <h3 className="mb-4 text-[10px] font-bold uppercase tracking-[0.15em] text-white">1 · Identity &amp; contact</h3>
-          <div className="mb-3">
-            <label className="mb-1 block text-xs font-semibold text-white">ブランド名</label>
-            <input
-              type="text"
-              placeholder={archetypeName(state) || "Your Brand"}
-              className="w-full rounded-xl border border-gray-200 p-3 text-sm outline-none focus:border-gray-500"
-              value={state.brandName || ""}
-              onChange={(e) => update({ brandName: e.target.value })}
-            />
-            <p className="mt-1 text-[10px] text-white/70">
-              デフォルト：<span className="font-semibold">{canonicalArchetypeName(state) || "あなたのアーキタイプ"}</span> · ブランドID：<span className="font-mono">{deriveBrandId(state)}</span>
-            </p>
-          </div>
           <div className="grid grid-cols-2 gap-3">
             <div>
               <label className="mb-1 block text-xs font-semibold text-white">名 *</label>
@@ -3241,7 +3224,7 @@ function Step11Launch({ state, update, i18n = {} }) {
 
       <button
         type="button"
-        onClick={handleLaunch}
+        onClick={goToBrandDashboard}
         disabled={!isReady}
         className={`w-full rounded-2xl py-6 text-3xl font-black uppercase tracking-widest transition-all ${isReady ? "cursor-pointer bg-gradient-to-r from-violet-700 to-indigo-800 text-white shadow-lg shadow-violet-300/40 hover:from-violet-800 hover:to-indigo-900" : "cursor-not-allowed bg-gray-200 text-white"}`}
       >
@@ -3288,7 +3271,7 @@ function canonicalArchetypeName(state) {
 // Effective brand name: user-entered wins; otherwise the canonical English archetype
 // name (registry convention); otherwise a safe generic.
 function resolveBrandName(state) {
-  return (state.brandName && state.brandName.trim()) || canonicalArchetypeName(state) || "Your Brand";
+  return matchBrand(state).corp;  // matched publication corp name (no brand-name entry)
 }
 
 // snake_case a free-text brand name per config/brand_registry.yaml id_format=snake_case.
@@ -3317,20 +3300,107 @@ function _stableHash4(s) {
 // custom CJK-only name anchors on the canonical archetype id + a suffix from the typed
 // name, so it is stable and never blank.
 function deriveBrandId(state) {
-  const custom = (state.brandName && state.brandName.trim()) || "";
-  const canonical = ARCHETYPE_CANONICAL_BRAND[state.archetype];
-  if (!custom) return canonical ? canonical.id : "brand_" + _stableHash4(state.archetype || "none");
-  const base = snakeCaseId(custom);
-  if (!base) {
-    const anchor = canonical ? canonical.id : "brand";
-    return anchor + "_" + _stableHash4(custom);
-  }
-  return base + "_" + _stableHash4(custom);
+  return matchBrand(state).id;  // matched canonical brand_id (config/manga/canonical_brand_list.yaml)
 }
 
 // ═══════════════════════════════════════════════════════════
 // YAML GENERATOR
 // ═══════════════════════════════════════════════════════════
+
+const CANONICAL_BRANDS = [
+  {id:"stillness_press",corp:"Stillness Press",tier:"flagship",primary:"anxiety",secondary:["somatic_healing","sleep","grief","trauma_recovery"]},
+  {id:"cognitive_clarity",corp:"Clear Seeing Books",tier:"flagship",primary:"overthinking",secondary:["imposter_syndrome","burnout","boundaries"]},
+  {id:"digital_ground",corp:"Present Tense Books",tier:"flagship",primary:"burnout",secondary:["imposter_syndrome","financial_anxiety","anxiety","somatic_healing"]},
+  {id:"sleep_restoration_iyashikei",corp:"Night Architecture Books",tier:"core",primary:"sleep",secondary:["anxiety","grief","social_anxiety"]},
+  {id:"somatic_wisdom_shojo",corp:"Felt Sense Publishing",tier:"core",primary:"somatic_healing",secondary:["self_worth","social_anxiety","grief"]},
+  {id:"relational_calm_iyashikei",corp:"Bare Form Books",tier:"core",primary:"social_anxiety",secondary:["boundaries","somatic_healing"]},
+  {id:"healing_ground_healing",corp:"Midday Press",tier:"core",primary:"grief",secondary:["boundaries","overthinking"]},
+  {id:"body_memory_shojo",corp:"Held Ground Press",tier:"core",primary:"somatic_healing",secondary:["trauma_recovery","shame","grief"]},
+  {id:"minimal_mind_healing",corp:"Clearwater Books",tier:"core",primary:"overthinking",secondary:["anxiety","burnout"]},
+  {id:"night_reset_healing",corp:"Still Hour Press",tier:"core",primary:"sleep",secondary:["anxiety","grief"]},
+  {id:"gentle_growth_healing",corp:"Tender Root Books",tier:"core",primary:"self_worth",secondary:["imposter_syndrome","social_anxiety"]},
+  {id:"stabilizer_healing",corp:"Harbor Line Books",tier:"core",primary:"burnout",secondary:["overthinking","financial_anxiety"]},
+  {id:"career_lift_workplace",corp:"Next Chapter Publishing",tier:"core",primary:"imposter_syndrome",secondary:["social_anxiety","financial_anxiety","burnout"]},
+  {id:"high_performer_workplace",corp:"Close Rate Press",tier:"core",primary:"burnout",secondary:["financial_anxiety","imposter_syndrome","overthinking"]},
+  {id:"executive_calm_workplace",corp:"Granite Ridge Publishing",tier:"core",primary:"burnout",secondary:["overthinking","financial_anxiety"]},
+  {id:"morning_momentum_workplace",corp:"First Light Publishing",tier:"core",primary:"burnout",secondary:["courage","self_worth"]},
+  {id:"optimizer_workplace",corp:"Daybreak Editions",tier:"core",primary:"overthinking",secondary:["burnout","imposter_syndrome"]},
+  {id:"focus_sprint_workplace",corp:"Launchpad Press",tier:"core",primary:"adhd_focus",secondary:["imposter_syndrome","social_anxiety"]},
+  {id:"heart_balance_shojo",corp:"Feather & Scale Press",tier:"core",primary:"social_anxiety",secondary:["boundaries","self_worth"]},
+  {id:"trauma_path_healing",corp:"Soft Ground Books",tier:"niche",primary:"grief",secondary:["trauma_recovery","somatic_healing","shame"]},
+  {id:"resilient_parent_social",corp:"Stolen Moment Press",tier:"niche",primary:"burnout",secondary:["self_worth","boundaries"]},
+  {id:"confidence_core_romance",corp:"Threshold Books",tier:"niche",primary:"imposter_syndrome",secondary:["self_worth","social_anxiety"]},
+  {id:"relationship_clarity_romance",corp:"Two Chairs Press",tier:"niche",primary:"social_anxiety",secondary:["boundaries","self_worth"]},
+  {id:"adhd_forge_mystery",corp:"Livewire Books",tier:"niche",primary:"adhd_focus",secondary:["courage","self_worth"]},
+  {id:"devotion_path_shonen",corp:"Open Vessel Press",tier:"niche",primary:"courage",secondary:["self_worth","grief"]},
+  {id:"stoic_edge_battle",corp:"Anvil Books",tier:"niche",primary:"courage",secondary:["grief","self_worth","shame"]},
+  {id:"warrior_calm_cultivation",corp:"Iron Gate Press",tier:"niche",primary:"burnout",secondary:["courage","somatic_healing"]},
+  {id:"spiritual_ground_supernatural",corp:"Deep Well Publishing",tier:"niche",primary:"grief",secondary:["self_worth","courage"]},
+  {id:"solar_return_isekai",corp:"Ember & Ash Publishing",tier:"niche",primary:"self_worth",secondary:["imposter_syndrome","courage"]},
+  {id:"legacy_builder_memoir",corp:"Second Mountain Press",tier:"niche",primary:"self_worth",secondary:["grief","financial_anxiety","shame"]},
+  {id:"bio_flow_healing",corp:"Signal Path Books",tier:"niche",primary:"somatic_healing",secondary:["overthinking","sleep"]},
+  {id:"longevity_lab_healing",corp:"Long Arc Press",tier:"niche",primary:"somatic_healing",secondary:["self_worth","grief"]},
+  {id:"hormone_reset_healing",corp:"Tide & Cycle Books",tier:"niche",primary:"somatic_healing",secondary:["self_worth","anxiety"]},
+  {id:"qi_foundation_cultivation",corp:"Root & Meridian Press",tier:"niche",primary:"somatic_healing",secondary:["courage","burnout"]},
+  {id:"creative_unfold_social",corp:"Blank Canvas Books",tier:"niche",primary:"social_anxiety",secondary:["self_worth","courage"]},
+  {id:"calm_student_school",corp:"Blue Exam Press",tier:"niche",primary:"anxiety",secondary:["social_anxiety","self_worth"]},
+  {id:"bright_presence_tw_seinen",corp:"Open Room Press",tier:"niche",primary:"social_anxiety",secondary:["imposter_syndrome","self_worth"]},
+];
+
+// Archetype -> canonical topics it implies (strongest first; weighted 3/2/1).
+const ARCHETYPE_TOPICS = {
+  nervous_system:      ["anxiety", "somatic_healing", "sleep"],
+  identity_direction:  ["self_worth", "imposter_syndrome"],
+  emotional_healing:   ["grief", "trauma_recovery", "shame"],
+  performance_focus:   ["burnout", "overthinking", "adhd_focus"],
+  spiritual_awakening: ["courage", "self_worth", "grief"],
+};
+
+// Emotional-outcome keyword -> canonical topics (refines the archetype signal).
+const EMOTION_TOPIC_HINTS = [
+  [/calm|rest|grounded|safe|released|body/i, ["anxiety", "somatic_healing", "sleep"]],
+  [/alone|forgiven|grief|loss/i,             ["grief", "trauma_recovery"]],
+  [/control|clear|energ|resilient|focus/i,   ["burnout", "overthinking"]],
+  [/purpose|confiden|hopeful|worth/i,        ["self_worth", "imposter_syndrome"]],
+  [/present|connected|awak|meaning/i,        ["courage", "self_worth"]],
+];
+
+// Search-topic-tag keyword -> canonical topic.
+const TOPIC_KEYWORDS = [
+  [/sleep|night|insomnia/i, "sleep"], [/panic|anx/i, "anxiety"], [/grief|loss|bereave/i, "grief"],
+  [/burnout|exhaust|depleted/i, "burnout"], [/overthink|rumina|spiral/i, "overthinking"],
+  [/somatic|body|nervous|polyvagal/i, "somatic_healing"], [/imposter/i, "imposter_syndrome"],
+  [/worth|confidence|esteem/i, "self_worth"], [/social/i, "social_anxiety"],
+  [/focus|adhd|attention/i, "adhd_focus"], [/boundar/i, "boundaries"], [/trauma/i, "trauma_recovery"],
+  [/shame/i, "shame"], [/financ|money|debt/i, "financial_anxiety"], [/courage|resilien|brave/i, "courage"],
+];
+
+function impliedTopics(state) {
+  const w = new Map();
+  const add = (t, n) => { if (t) w.set(t, (w.get(t) || 0) + n); };
+  (ARCHETYPE_TOPICS[state.archetype] || []).forEach((t, i) => add(t, 3 - Math.min(i, 2)));
+  (state.emotions || []).forEach((e) => { const s = String(e);
+    EMOTION_TOPIC_HINTS.forEach(([re, topics]) => { if (re.test(s)) topics.forEach((t) => add(t, 1)); }); });
+  (state.topicTags || []).forEach((tag) => { const s = String(tag);
+    TOPIC_KEYWORDS.forEach(([re, topic]) => { if (re.test(s)) add(topic, 1); }); });
+  return w;
+}
+
+// Match the wizard YAML to the best-fit EXISTING brand from the 37-brand canonical
+// roster by topic/emotion affinity. primary_topic counts double; ties break by tier.
+// `corp` is the publication imprint name (config/catalog_planning/brand_display_names.yaml).
+function matchBrand(state) {
+  const implied = impliedTopics(state);
+  const tierW = { flagship: 0.3, core: 0.2, niche: 0.1 };
+  let best = CANONICAL_BRANDS[0], bestScore = -1;
+  for (const b of CANONICAL_BRANDS) {
+    let s = (implied.get(b.primary) || 0) * 2;
+    (b.secondary || []).forEach((t) => { s += implied.get(t) || 0; });
+    s += tierW[b.tier] || 0;
+    if (s > bestScore) { bestScore = s; best = b; }
+  }
+  return { id: best.id, corp: best.corp, tier: best.tier, primary: best.primary, score: Math.round(bestScore * 10) / 10 };
+}
 
 function generateYAML(state) {
   const san = (s) => (s || "").replace(/<[^>]*>/g, "").replace(/https?:\/\/\S+/g, "").replace(/[<>"'`]/g, "").substring(0, 500).trim();
