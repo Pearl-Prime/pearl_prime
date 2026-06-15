@@ -673,8 +673,30 @@ function runExport() {
 // ---------------------------------------------------------------------------
 // Init
 // ---------------------------------------------------------------------------
-initBrandBar();
-renderAll(currentBrand);
+// Onboarding handoff: open on the brand the wizard/console assigned. Resolve the canonical
+// unified brand_id (e.g. devotion_path_en_us -> "Open Vessel Press") from the shared bridge JSON
+// (brand_admin_brands.json, gen_brand_admin_brands.py) — same pattern as the console + setup helper.
+const LANE_MARKET={en_us:"us",es_us:"us",zh_tw:"taiwan",zh_hk:"hong_kong",zh_cn:"china",zh_sg:"singapore",ja_jp:"japan",ko_kr:"korea"};
+async function bootHandoff(){
+  try{
+    const qid=new URLSearchParams(location.search).get("brand");
+    if(qid){
+      let b=BRANDS.find(x=>x.id===qid);
+      if(!b){
+        let bridge={};
+        try{ const r=await fetch("brand_admin_brands.json",{cache:"no-store"}); if(r.ok) bridge=await r.json(); }catch(_e){}
+        const info=bridge[qid]||{};
+        const lane=(qid.match(/_([a-z]{2}_[a-z]{2})$/)||[])[1]||"";
+        b={ id:qid, label:info.d||qid.replace(/_/g," ").replace(/\b\w/g,c=>c.toUpperCase()), market:LANE_MARKET[lane]||"us" };
+        BRANDS.unshift(b);
+      }
+      currentBrand=b;
+    }
+  }catch(_e){}
+  initBrandBar();
+  renderAll(currentBrand);
+}
+bootHandoff();
 </script>
 </body>
 </html>

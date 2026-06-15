@@ -614,8 +614,14 @@ function toggleUpload(tid,uid,total){
   if(wasDone>=100 && uploadPct()>=100) celebrate('Phase 2 Complete','Weekly rhythm unlocked!');
 }
 function toggleWeekly(day){
+  const wasDone=weekPct();
   const s=bs(); s.weekly[day]=!s.weekly[day]; save();
   renderPhase3(); renderProgress();
+  if(wasDone<100 && weekPct()>=100){
+    // Phase 3 (final) complete -> hand off to the brand director operations dashboard for this brand.
+    celebrate('Weekly Rhythm Complete','Opening brand operations…');
+    setTimeout(function(){ window.location.href='brand_handoff_dashboard.html?brand='+encodeURIComponent(brandId); },1500);
+  }
 }
 function toggleBody(id){
   const body=document.getElementById(id);
