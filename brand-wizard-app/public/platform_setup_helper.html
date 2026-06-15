@@ -111,6 +111,7 @@ const DATA_URL='./platform_setup_helper_data.json';
 const PROGRESS_KEY='psh_progress';   // non-sensitive: done flags + login (NEVER the password)
 let DATA=null, MARKET='en', BRAND={id:'',name:'',focus:'',desc:'',slug:''}, PROGRESS={}, CRED_STATUS={};
 let POS=0;   // index into buildScreens(); 0 = brand intro
+let SERVER_UP=false;   // local vault server reachable? operator-run = show capture; admin/public = guidance only
 
 function credApiBase(){ try{const q=new URLSearchParams(location.search).get('cred_api'); if(q) return q.replace(/\/$/,'');}catch(e){} return 'http://127.0.0.1:8000'; }
 function t(k){ return ((DATA&&DATA.ui&&DATA.ui[MARKET])||{})[k] || ((DATA&&DATA.ui&&DATA.ui.en)||{})[k] || k; }
@@ -211,13 +212,18 @@ function credScreen(sc){
   const done=!!PROGRESS[pkey()].done[p.id];
   let h=railHTML(p.display_name+' · '+(MARKET==='ja'?'ログイン':'Login'));
   h+='<div class="card"><div class="card-head"><div class="card-title">'+esc(p.display_name)+'</div></div>';
-  h+='<div class="sec-label">'+esc(MARKET==='ja'?'ログイン情報（安全に保存）':'Save your login (encrypted)')+'</div>';
-  h+='<div class="cred-row"><label class="cred-label">'+esc(t('username_label'))+'</label>';
-  h+='<input class="cred-input" type="text" value="'+esc(login)+'" placeholder="'+esc(MARKET==='ja'?'メール または ユーザー名':'email or username')+'" autocomplete="off" oninput="onLogin(\''+p.id+'\',this.value)"></div>';
-  h+='<div class="cred-row"><label class="cred-label">'+esc(slabel)+'</label>';
-  if(st.secret_set){ h+='<div class="secret-state">'+esc(t('secret_set'))+' <button class="copy-btn" onclick="clearSecretSet(\''+p.id+'\')">'+esc(t('secret_update'))+'</button></div>'; }
-  else { h+='<div class="secret-row"><input class="cred-input" id="sec-'+p.id+'" type="password" placeholder="'+esc(shelp||(MARKET==='ja'?'パスワード':'password'))+'" autocomplete="new-password"><button class="secret-save" onclick="saveSecret(\''+p.id+'\')">'+esc(MARKET==='ja'?'保存':'Save')+'</button></div>'; }
-  h+='<div class="secret-note">'+esc(t('secret_writeonly_note'))+'</div><div class="secret-msg" id="secmsg-'+p.id+'"></div></div>';
+  if(SERVER_UP){
+    h+='<div class="sec-label">'+esc(MARKET==='ja'?'ログイン情報（暗号化して保存）':'Save your login (encrypted)')+'</div>';
+    h+='<div class="cred-row"><label class="cred-label">'+esc(t('username_label'))+'</label>';
+    h+='<input class="cred-input" type="text" value="'+esc(login)+'" placeholder="'+esc(MARKET==='ja'?'メール または ユーザー名':'email or username')+'" autocomplete="off" oninput="onLogin(\''+p.id+'\',this.value)"></div>';
+    h+='<div class="cred-row"><label class="cred-label">'+esc(slabel)+'</label>';
+    if(st.secret_set){ h+='<div class="secret-state">'+esc(t('secret_set'))+' <button class="copy-btn" onclick="clearSecretSet(\''+p.id+'\')">'+esc(t('secret_update'))+'</button></div>'; }
+    else { h+='<div class="secret-row"><input class="cred-input" id="sec-'+p.id+'" type="password" placeholder="'+esc(shelp||(MARKET==='ja'?'パスワード':'password'))+'" autocomplete="new-password"><button class="secret-save" onclick="saveSecret(\''+p.id+'\')">'+esc(MARKET==='ja'?'保存':'Save')+'</button></div>'; }
+    h+='<div class="secret-note">'+esc(t('secret_writeonly_note'))+'</div><div class="secret-msg" id="secmsg-'+p.id+'"></div></div>';
+  } else {
+    h+='<div class="sec-label">'+esc(MARKET==='ja'?'ログイン':'Login')+'</div>';
+    h+='<div class="gate" style="border-left-color:var(--acc);background:rgba(180,83,9,.06)">'+esc(MARKET==='ja'?'🔒 プラットフォームのログイン情報はオペレーターが安全に設定します。上の手順を完了したら「次へ」を押してください。':'🔒 Your operator sets up the platform logins securely. Just complete the steps above, then press Next.')+'</div>';
+  }
   // nav: Back · Skip · Mark ready
   h+='<div class="nav"><button class="btn" onclick="goBack()">← '+esc(MARKET==='ja'?'戻る':'Back')+'</button>';
   h+='<button class="btn ghost" onclick="goNext()">'+esc(MARKET==='ja'?'スキップ':'Skip')+'</button><div class="grow"></div>';
@@ -273,6 +279,7 @@ let _pt={};
 function pushLogin(pid){ if(!BRAND.id) return; clearTimeout(_pt[pid]); _pt[pid]=setTimeout(async()=>{
   try{ await fetch(credApiBase()+'/api/v1/setup-helper/credentials',{method:'POST',headers:{'Content-Type':'application/json'},
     body:JSON.stringify({brand_id:BRAND.id,platform:pid,username:{login:(PROGRESS[pkey()].login||{})[pid]||''}})}); }catch(e){} },700); }
+async function pingServer(){ try{ const r=await fetch(credApiBase()+'/health',{cache:'no-store'}); SERVER_UP=!!(r&&r.ok); }catch(e){ SERVER_UP=false; } }
 async function refreshCredStatus(){ CRED_STATUS={}; if(!BRAND.id) return;
   try{ const r=await fetch(credApiBase()+'/api/v1/setup-helper/credentials/status?brand_id='+encodeURIComponent(BRAND.id),{cache:'no-store'});
     if(r.ok){ const j=await r.json(); CRED_STATUS=(j&&j.platforms)||{}; } }catch(e){} }
@@ -280,7 +287,7 @@ async function refreshCredStatus(){ CRED_STATUS={}; if(!BRAND.id) return;
 async function init(){ readBrandFromUrl();
   try{ const r=await fetch(DATA_URL,{cache:'no-store'}); DATA=await r.json(); }
   catch(e){ document.getElementById('app').innerHTML='<div class="loading">Could not load platform data.</div>'; return; }
-  if(!BRAND.slug) BRAND.slug=slug(BRAND.name); loadProgress(); await refreshCredStatus(); render(); }
+  if(!BRAND.slug) BRAND.slug=slug(BRAND.name); loadProgress(); await pingServer(); await refreshCredStatus(); render(); }
 init();
 </script>
 </body>
