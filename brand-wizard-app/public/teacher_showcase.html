@@ -2019,7 +2019,18 @@ function updateChooseBar(id, name) {
 }
 function chooseTeacherFromBar() {
   if (!_selectedTeacher) return;
-  window.location.href = _wizardFile() + '?teacher=' + _selectedTeacher.id;
+  // Persist the same phoenix_book_mode shape chooseTeacher() writes, so the SPA's
+  // generateYAML() reads the selected teacher from localStorage (its primary source)
+  // identically whether the user proceeds via the card button or this sticky bar.
+  // generateYAML falls back to the ?teacher= URL param too, but writing localStorage
+  // here keeps both entry paths self-consistent. teacher = snake_case id; teacherName
+  // = display label. The wizard's ?teacher= useEffect then lands on STEP 1 (index 0).
+  try {
+    localStorage.setItem('phoenix_book_mode', JSON.stringify({
+      mode: 'teacher', teacher: _selectedTeacher.id, teacherName: _selectedTeacher.name
+    }));
+  } catch (e) {}
+  window.location.href = _wizardFile() + '?teacher=' + encodeURIComponent(_selectedTeacher.id);
 }
 function wireSidebarTeacherNav() {
   document.querySelectorAll('.sidebar a.nav-item[data-teacher]').forEach(function (link) {

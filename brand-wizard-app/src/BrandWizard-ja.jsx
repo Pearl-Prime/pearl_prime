@@ -795,14 +795,19 @@ function StepHero({ eyebrow, title, subtitle, helper }) {
   );
 }
 
-function ProgressBar({ step, total, labels, t }) {
+function ProgressBar({ step, total, labels, t, state }) {
   const isComplete = step === total - 2; // step 7 ("あなたのブランド") only
   const pct = isComplete ? 100 : ((step + 1) / total) * 100;
+  // Show the real brand name once chosen; otherwise the generic congrats string.
+  const brandName = state ? resolveBrandName(state) : null;
+  const congrats = brandName && brandName !== "Your Brand"
+    ? "おめでとうございます — {brand} が100%設定されました！".replace("{brand}", brandName)
+    : "おめでとうございます — ブランドが100%設定されました！";
   return (
     <div className="brand-studio-panel mb-6 px-5 py-4 sm:mb-8">
       {isComplete && (
         <p className="text-center text-3xl font-extrabold mb-3" style={{ color: '#d97706', fontFamily: 'Cormorant Garamond, serif' }}>
-          {t("ui", "おめでとうございます — ブランドが100%設定されました！")}
+          {congrats}
         </p>
       )}
       <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
@@ -2815,7 +2820,40 @@ function Step11Launch({ state, update, i18n = {} }) {
   const [showYaml, setShowYaml] = useState(false);
   const [yamlCopied, setYamlCopied] = useState(false);
 
-  const handleLaunch = () => { setYamlOutput(generateYAML(state)); setSubmitted(true); };
+  // ACTIVATE: persist a pending-brand record so brand_admin can resolve this
+  // brand-new brand_id (not in the server index yet), then show the celebration.
+  const persistPendingBrand = () => {
+    const brandId = deriveBrandId(state);
+    const brandName = resolveBrandName(state);
+    let teacher = null;
+    try {
+      const raw = localStorage.getItem("phoenix_book_mode");
+      if (raw) { const m = JSON.parse(raw); teacher = (m && m.teacher) || null; }
+    } catch (_) {}
+    if (!teacher) {
+      const params = new URLSearchParams(window.location.search);
+      teacher = params.get("teacher") || null;
+    }
+    const pending = {
+      brand_id: brandId,
+      brand_name: brandName,
+      teacher,
+      lane: state.onboardingLane || "self_help",
+      market: state.onboardingMarket || "us",
+      archetype: state.archetype || null,
+      created_at: new Date().toISOString(),
+    };
+    try { localStorage.setItem("phoenix_pending_brand", JSON.stringify(pending)); } catch (_) {}
+    return brandId;
+  };
+
+  const handleLaunch = () => { persistPendingBrand(); setYamlOutput(generateYAML(state)); setSubmitted(true); };
+
+  // Navigate to the Brand Admin console -> Phase 3 (Operations) for the minted id.
+  const goToBrandDashboard = () => {
+    const brandId = persistPendingBrand();
+    window.location.href = "brand_admin.html?phase=3&brand=" + encodeURIComponent(brandId);
+  };
 
   if (submitted) {
     const arch = _A.find((a) => a.id === state.archetype);
@@ -2880,7 +2918,7 @@ function Step11Launch({ state, update, i18n = {} }) {
             <style>{`@keyframes pulse { 0%, 100% { transform: scale(1) translateY(0); opacity: 0.4; } 50% { transform: scale(1.5) translateY(-8px); opacity: 0.8; } }`}</style>
 
             <h1 className="text-4xl font-black tracking-tight mb-2 bg-gradient-to-r from-purple-600 via-pink-500 to-amber-500 bg-clip-text text-transparent">
-              Congratulations
+              {resolveBrandName(state)} が100%設定されました！
             </h1>
             <p className="text-lg font-bold text-white mb-1">あなたのブランドの世界が誕生しました。</p>
             <p className="text-sm text-white max-w-md mx-auto leading-relaxed">
@@ -2989,7 +3027,7 @@ function Step11Launch({ state, update, i18n = {} }) {
                   className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-[11px] font-bold transition-colors">
                   <Check size={11} />{yamlCopied ? "コピーしました！" : "コピー"}
                 </button>
-                <button onClick={() => { const blob = new Blob([yamlOutput], {type: "text/yaml"}); const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = "brand-config.yaml"; a.click(); }}
+                <button onClick={() => { const blob = new Blob([yamlOutput], {type: "text/yaml"}); const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = `${deriveBrandId(state)}.yaml`; a.click(); }}
                   className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white text-[11px] font-bold transition-colors">
                   <Download size={11} />ダウンロード .yaml
                 </button>
@@ -3007,6 +3045,14 @@ function Step11Launch({ state, update, i18n = {} }) {
           <p className="text-sm text-white max-w-md mx-auto">
             あなたのブランドの世界が完成しました。Pearl Primeシステムがすべての選択を使って、人生を変えるカタログを生成します。
           </p>
+          {/* Primary handoff: open the Brand Admin console (Phase 3 - Operations). */}
+          <button
+            type="button"
+            onClick={goToBrandDashboard}
+            className="mt-6 inline-flex items-center gap-2 rounded-2xl bg-gradient-to-r from-violet-700 to-indigo-800 px-8 py-4 text-base font-black uppercase tracking-wider text-white shadow-lg shadow-violet-300/40 transition-all hover:from-violet-800 hover:to-indigo-900"
+          >
+            ブランドダッシュボードを開く <ChevronRight size={18} />
+          </button>
         </div>
       </div>
     );
@@ -3040,6 +3086,19 @@ function Step11Launch({ state, update, i18n = {} }) {
       <div className="mb-6 space-y-6">
         <section className="rounded-2xl border border-gray-200/90 bg-white/90 p-5 shadow-sm backdrop-blur-sm">
           <h3 className="mb-4 text-[10px] font-bold uppercase tracking-[0.15em] text-white">1 · Identity &amp; contact</h3>
+          <div className="mb-3">
+            <label className="mb-1 block text-xs font-semibold text-white">ブランド名</label>
+            <input
+              type="text"
+              placeholder={archetypeName(state) || "Your Brand"}
+              className="w-full rounded-xl border border-gray-200 p-3 text-sm outline-none focus:border-gray-500"
+              value={state.brandName || ""}
+              onChange={(e) => update({ brandName: e.target.value })}
+            />
+            <p className="mt-1 text-[10px] text-white/70">
+              デフォルト：<span className="font-semibold">{canonicalArchetypeName(state) || "あなたのアーキタイプ"}</span> · ブランドID：<span className="font-mono">{deriveBrandId(state)}</span>
+            </p>
+          </div>
           <div className="grid grid-cols-2 gap-3">
             <div>
               <label className="mb-1 block text-xs font-semibold text-white">名 *</label>
@@ -3194,6 +3253,82 @@ function Step11Launch({ state, update, i18n = {} }) {
 }
 
 // ═══════════════════════════════════════════════════════════
+// BRAND IDENTITY HELPERS (name + id)
+// ═══════════════════════════════════════════════════════════
+// Single source of truth for the human brand name and the minted snake_case brand_id.
+// Used by generateYAML (YAML emit), the completion screen (display), and the Activate
+// handler (brand_admin handoff) so all three agree on exactly one name + one id.
+
+// IMPORTANT (locale stability): this locale variant localizes the ARCHETYPES `name`
+// field, so the default brand name + brand_id must come from a canonical, locale-
+// INVARIANT map keyed by the stable archetype.id — NOT the displayed name — so the
+// same archetype yields the same brand_id in every locale (nervous_system ->
+// "stillness_lab" everywhere).
+
+const ARCHETYPE_CANONICAL_BRAND = {
+  nervous_system:      { name: "Stillness Lab", id: "stillness_lab" },
+  identity_direction:  { name: "Compass Studio", id: "compass_studio" },
+  emotional_healing:   { name: "Soft Lantern", id: "soft_lantern" },
+  performance_focus:   { name: "Clear Mind Lab", id: "clear_mind_lab" },
+  spiritual_awakening: { name: "Phoenix Rising", id: "phoenix_rising" },
+};
+
+// Localized display name of the chosen archetype (for the field placeholder only).
+function archetypeName(state) {
+  const arch = ARCHETYPES.find((a) => a.id === state.archetype);
+  return arch ? arch.name : null;
+}
+
+// Canonical (English, locale-invariant) brand name for the chosen archetype, or null.
+function canonicalArchetypeName(state) {
+  const c = ARCHETYPE_CANONICAL_BRAND[state.archetype];
+  return c ? c.name : null;
+}
+
+// Effective brand name: user-entered wins; otherwise the canonical English archetype
+// name (registry convention); otherwise a safe generic.
+function resolveBrandName(state) {
+  return (state.brandName && state.brandName.trim()) || canonicalArchetypeName(state) || "Your Brand";
+}
+
+// snake_case a free-text brand name per config/brand_registry.yaml id_format=snake_case.
+function snakeCaseId(name) {
+  return (name || "")
+    .toLowerCase()
+    .normalize("NFKD").replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9]+/g, "_")
+    .replace(/_+/g, "_")
+    .replace(/^_+|_+$/g, "");
+}
+
+// Deterministic 4-char hash (FNV-1a -> base36) for collision-resistance without a live
+// registry read. Same input -> same suffix every render (not random per render).
+function _stableHash4(s) {
+  let h = 0x811c9dc5;
+  for (let i = 0; i < (s || "").length; i++) {
+    h ^= s.charCodeAt(i);
+    h = (h * 0x01000193) >>> 0;
+  }
+  return ("000" + h.toString(36)).slice(-4);
+}
+
+// Mint the brand_id (locale-invariant). Default -> canonical archetype id
+// (e.g. "stillness_lab"). A custom Latin name snake_cases to base + 4-char suffix; a
+// custom CJK-only name anchors on the canonical archetype id + a suffix from the typed
+// name, so it is stable and never blank.
+function deriveBrandId(state) {
+  const custom = (state.brandName && state.brandName.trim()) || "";
+  const canonical = ARCHETYPE_CANONICAL_BRAND[state.archetype];
+  if (!custom) return canonical ? canonical.id : "brand_" + _stableHash4(state.archetype || "none");
+  const base = snakeCaseId(custom);
+  if (!base) {
+    const anchor = canonical ? canonical.id : "brand";
+    return anchor + "_" + _stableHash4(custom);
+  }
+  return base + "_" + _stableHash4(custom);
+}
+
+// ═══════════════════════════════════════════════════════════
 // YAML GENERATOR
 // ═══════════════════════════════════════════════════════════
 
@@ -3218,8 +3353,12 @@ function generateYAML(state) {
     else if (urlMode === "composite") teacherMode = { mode: "composite", teacher: null };
   }
 
+  // Brand identity (name + minted snake_case id), default-filled from the archetype.
+  const brandName = resolveBrandName(state);
+  const brandId = deriveBrandId(state);
+
   let y = `# Brand Admin Application — ${ts}\n# Pearl Prime Brand Configuration\n\n`;
-  y += `brand_admin:\n  first_name: "${san(c.firstName)}"\n  last_name: "${san(c.lastName)}"\n  email: "${san(c.email)}"\n  phone: "${san((c.phoneCode || '+1') + ' ' + c.phone)}"\n\n`;
+  y += `brand_admin:\n  brand_name: "${san(brandName)}"\n  brand_id: "${brandId}"\n  first_name: "${san(c.firstName)}"\n  last_name: "${san(c.lastName)}"\n  email: "${san(c.email)}"\n  phone: "${san((c.phoneCode || '+1') + ' ' + c.phone)}"\n\n`;
   y += `  messaging_channels:\n    line_id: "${san(c.line)}"\n    whatsapp: "${san(c.whatsapp)}"\n    wechat_id: "${san(c.wechat)}"\n    fb_messenger: "${san(c.messenger)}"\n    preferred_channel: "${c.preferred || "email"}"\n\n`;
   y += `  brand_positioning:\n    brand_angle: "${state.archetype}"\n    trigger_moment: "${state.moment}"\n    persona: "${state.persona}"\n\n`;
   y += `  voice_settings:\n`;
@@ -3550,6 +3689,9 @@ export default function BrandWizard() {
   const [introPage, setIntroPage] = useState(0);
   const [step, setStep] = useState(0);
   const [state, setState] = useState({
+    // brandName: human-editable brand label (Step11Launch). Defaults to the chosen
+    // archetype name when blank; the snake_case brand_id is derived from it at emit time.
+    brandName: "",
     archetype: null, persona: null, moment: null,
     voiceSettings: {}, visualStyle: null, emotions: [],
     tradition: "", angles: [], topicTags: [],
@@ -3614,7 +3756,7 @@ export default function BrandWizard() {
         >
           <ChevronLeft size={14} /> {t("ui", "戻る")}
         </button>
-        <ProgressBar step={step} total={9} labels={tStepLabels} t={t} />
+        <ProgressBar step={step} total={9} labels={tStepLabels} t={t} state={state} />
         <div className="brand-studio-panel p-6 sm:p-8 lg:p-10">
           <div className="flex gap-6 lg:gap-8">
             <div className="min-w-0 flex-1">
