@@ -2846,8 +2846,24 @@ function Step11Launch({ state, update, i18n = {} }) {
   const handleLaunch = () => { persistPendingBrand(); setYamlOutput(generateYAML(state)); setSubmitted(true); };
 
   // Navigate to the Brand Admin console -> Phase 3 (Operations) for the minted id.
-  const goToBrandDashboard = () => {
+  const goToBrandDashboard = async () => {
     const brandId = persistPendingBrand();
+    // Land the signup in Pearl Prime: POST the YAML -> logged + assigned to the matched brand
+    // (server/routes/brand_onboarding.py). Graceful: redirect regardless (localStorage fallback).
+    try {
+      const API = (typeof window !== "undefined" && window.__ONBOARDING_API_BASE)
+        || new URLSearchParams(window.location.search).get("api_base")
+        || "http://127.0.0.1:8000";
+      const c = state.contact || {};
+      await fetch(`${API}/api/v1/onboarding/submit`, {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          brand_id: brandId, lane: laneFromMarket(state), publication_corp: resolveBrandName(state),
+          brand_email: c.email || "", contact: { first_name: c.firstName || "", last_name: c.lastName || "", phone: ((c.phoneCode||"") + " " + (c.phone||"")).trim() },
+          wizard_yaml: generateYAML(state), match_score: matchBrand(state).score, match_basis: "topics+emotions",
+        }),
+      });
+    } catch (_) { /* backend offline — pending_brand localStorage still carries it */ }
     window.location.href = "brand_admin.html?phase=3&brand=" + encodeURIComponent(brandId);
   };
 
@@ -3299,8 +3315,18 @@ function _stableHash4(s) {
 // (e.g. "stillness_lab"). A custom Latin name snake_cases to base + 4-char suffix; a
 // custom CJK-only name anchors on the canonical archetype id + a suffix from the typed
 // name, so it is stable and never blank.
+const LANE_FROM_MARKET = {
+  us:"en_US", en:"en_US", tw:"zh_TW", hk:"zh_HK", cn:"zh_CN", sg:"zh_SG",
+  jp:"ja_JP", ja:"ja_JP", kr:"ko_KR", ko:"ko_KR", es:"es_ES", mx:"es_US", es_us:"es_US",
+  fr:"fr_FR", de:"de_DE", it:"it_IT", hu:"hu_HU", br:"pt_BR", pt:"pt_BR",
+};
+function laneFromMarket(state) {
+  const m = String((state && state.onboardingMarket) || "us").toLowerCase();
+  return LANE_FROM_MARKET[m] || "en_US";
+}
 function deriveBrandId(state) {
-  return matchBrand(state).id;  // matched canonical brand_id (config/manga/canonical_brand_list.yaml)
+  // unified brand_id = <matched archetype>_<lane>  (config/brand_management/global_brand_registry_unified.yaml)
+  return `${matchBrand(state).id}_${laneFromMarket(state).toLowerCase()}`;
 }
 
 // ═══════════════════════════════════════════════════════════
@@ -3308,43 +3334,45 @@ function deriveBrandId(state) {
 // ═══════════════════════════════════════════════════════════
 
 const CANONICAL_BRANDS = [
-  {id:"stillness_press",corp:"Stillness Press",tier:"flagship",primary:"anxiety",secondary:["somatic_healing","sleep","grief","trauma_recovery"]},
-  {id:"cognitive_clarity",corp:"Clear Seeing Books",tier:"flagship",primary:"overthinking",secondary:["imposter_syndrome","burnout","boundaries"]},
-  {id:"digital_ground",corp:"Present Tense Books",tier:"flagship",primary:"burnout",secondary:["imposter_syndrome","financial_anxiety","anxiety","somatic_healing"]},
-  {id:"sleep_restoration_iyashikei",corp:"Night Architecture Books",tier:"core",primary:"sleep",secondary:["anxiety","grief","social_anxiety"]},
-  {id:"somatic_wisdom_shojo",corp:"Felt Sense Publishing",tier:"core",primary:"somatic_healing",secondary:["self_worth","social_anxiety","grief"]},
-  {id:"relational_calm_iyashikei",corp:"Bare Form Books",tier:"core",primary:"social_anxiety",secondary:["boundaries","somatic_healing"]},
-  {id:"healing_ground_healing",corp:"Midday Press",tier:"core",primary:"grief",secondary:["boundaries","overthinking"]},
-  {id:"body_memory_shojo",corp:"Held Ground Press",tier:"core",primary:"somatic_healing",secondary:["trauma_recovery","shame","grief"]},
-  {id:"minimal_mind_healing",corp:"Clearwater Books",tier:"core",primary:"overthinking",secondary:["anxiety","burnout"]},
-  {id:"night_reset_healing",corp:"Still Hour Press",tier:"core",primary:"sleep",secondary:["anxiety","grief"]},
-  {id:"gentle_growth_healing",corp:"Tender Root Books",tier:"core",primary:"self_worth",secondary:["imposter_syndrome","social_anxiety"]},
-  {id:"stabilizer_healing",corp:"Harbor Line Books",tier:"core",primary:"burnout",secondary:["overthinking","financial_anxiety"]},
-  {id:"career_lift_workplace",corp:"Next Chapter Publishing",tier:"core",primary:"imposter_syndrome",secondary:["social_anxiety","financial_anxiety","burnout"]},
-  {id:"high_performer_workplace",corp:"Close Rate Press",tier:"core",primary:"burnout",secondary:["financial_anxiety","imposter_syndrome","overthinking"]},
-  {id:"executive_calm_workplace",corp:"Granite Ridge Publishing",tier:"core",primary:"burnout",secondary:["overthinking","financial_anxiety"]},
-  {id:"morning_momentum_workplace",corp:"First Light Publishing",tier:"core",primary:"burnout",secondary:["courage","self_worth"]},
-  {id:"optimizer_workplace",corp:"Daybreak Editions",tier:"core",primary:"overthinking",secondary:["burnout","imposter_syndrome"]},
-  {id:"focus_sprint_workplace",corp:"Launchpad Press",tier:"core",primary:"adhd_focus",secondary:["imposter_syndrome","social_anxiety"]},
-  {id:"heart_balance_shojo",corp:"Feather & Scale Press",tier:"core",primary:"social_anxiety",secondary:["boundaries","self_worth"]},
-  {id:"trauma_path_healing",corp:"Soft Ground Books",tier:"niche",primary:"grief",secondary:["trauma_recovery","somatic_healing","shame"]},
-  {id:"resilient_parent_social",corp:"Stolen Moment Press",tier:"niche",primary:"burnout",secondary:["self_worth","boundaries"]},
-  {id:"confidence_core_romance",corp:"Threshold Books",tier:"niche",primary:"imposter_syndrome",secondary:["self_worth","social_anxiety"]},
-  {id:"relationship_clarity_romance",corp:"Two Chairs Press",tier:"niche",primary:"social_anxiety",secondary:["boundaries","self_worth"]},
-  {id:"adhd_forge_mystery",corp:"Livewire Books",tier:"niche",primary:"adhd_focus",secondary:["courage","self_worth"]},
-  {id:"devotion_path_shonen",corp:"Open Vessel Press",tier:"niche",primary:"courage",secondary:["self_worth","grief"]},
-  {id:"stoic_edge_battle",corp:"Anvil Books",tier:"niche",primary:"courage",secondary:["grief","self_worth","shame"]},
-  {id:"warrior_calm_cultivation",corp:"Iron Gate Press",tier:"niche",primary:"burnout",secondary:["courage","somatic_healing"]},
-  {id:"spiritual_ground_supernatural",corp:"Deep Well Publishing",tier:"niche",primary:"grief",secondary:["self_worth","courage"]},
-  {id:"solar_return_isekai",corp:"Ember & Ash Publishing",tier:"niche",primary:"self_worth",secondary:["imposter_syndrome","courage"]},
-  {id:"legacy_builder_memoir",corp:"Second Mountain Press",tier:"niche",primary:"self_worth",secondary:["grief","financial_anxiety","shame"]},
-  {id:"bio_flow_healing",corp:"Signal Path Books",tier:"niche",primary:"somatic_healing",secondary:["overthinking","sleep"]},
-  {id:"longevity_lab_healing",corp:"Long Arc Press",tier:"niche",primary:"somatic_healing",secondary:["self_worth","grief"]},
-  {id:"hormone_reset_healing",corp:"Tide & Cycle Books",tier:"niche",primary:"somatic_healing",secondary:["self_worth","anxiety"]},
-  {id:"qi_foundation_cultivation",corp:"Root & Meridian Press",tier:"niche",primary:"somatic_healing",secondary:["courage","burnout"]},
-  {id:"creative_unfold_social",corp:"Blank Canvas Books",tier:"niche",primary:"social_anxiety",secondary:["self_worth","courage"]},
-  {id:"calm_student_school",corp:"Blue Exam Press",tier:"niche",primary:"anxiety",secondary:["social_anxiety","self_worth"]},
-  {id:"bright_presence_tw_seinen",corp:"Open Room Press",tier:"niche",primary:"social_anxiety",secondary:["imposter_syndrome","self_worth"]},
+  {id:"awakening_press",corp:"Awakening Press",topics:["self_worth","courage","boundaries","depression","grief"],teacher:true,active:true},
+  {id:"body_memory",corp:"Held Ground Press",topics:["sleep_anxiety","burnout","anxiety","compassion_fatigue","mindfulness"],teacher:true,active:true},
+  {id:"cognitive_clarity",corp:"Clear Seeing Books",topics:["overthinking","imposter_syndrome","burnout","boundaries"],teacher:true,active:false},
+  {id:"devotion_path",corp:"Open Vessel Press",topics:["grief","compassion_fatigue","depression","boundaries"],teacher:true,active:true},
+  {id:"digital_ground",corp:"Present Tense Books",topics:["imposter_syndrome","social_anxiety","self_worth","boundaries"],teacher:true,active:true},
+  {id:"heart_balance",corp:"Feather & Scale Press",topics:["boundaries","self_worth","imposter_syndrome","financial_stress"],teacher:true,active:true},
+  {id:"heart_transmission",corp:"Heart Transmission Press",topics:["self_worth","courage","overthinking","anxiety","mindfulness","grief"],teacher:true,active:true},
+  {id:"qi_foundation",corp:"Root & Meridian Press",topics:["burnout","somatic_healing","courage","self_worth"],teacher:true,active:true},
+  {id:"relational_calm",corp:"Bare Form Books",topics:["overthinking","anxiety","sleep_anxiety","social_anxiety","mindfulness"],teacher:true,active:true},
+  {id:"sleep_restoration",corp:"Night Architecture Books",topics:["grief","depression","self_worth","somatic_healing","courage"],teacher:true,active:true},
+  {id:"solar_return",corp:"Ember & Ash Publishing",topics:["imposter_syndrome","self_worth","courage","overthinking"],teacher:true,active:true},
+  {id:"somatic_wisdom",corp:"Felt Sense Publishing",topics:["anxiety","somatic_healing","sleep_anxiety","burnout"],teacher:true,active:true},
+  {id:"still_forest",corp:"Still Forest Press",topics:["anxiety","overthinking","somatic_healing","depression"],teacher:true,active:true},
+  {id:"stillness_press",corp:"Stillness Press",topics:["anxiety","burnout","depression","self_worth","somatic_healing","mindfulness"],teacher:true,active:true},
+  {id:"warrior_calm",corp:"Iron Gate Press",topics:["courage","burnout","imposter_syndrome","boundaries"],teacher:true,active:true},
+  {id:"adhd_forge",corp:"Livewire Books",topics:["adhd_focus","overthinking","anxiety","imposter_syndrome"],teacher:false,active:true},
+  {id:"bio_flow",corp:"Signal Path Books",topics:["somatic_healing","overthinking","sleep"],teacher:false,active:true},
+  {id:"calm_student",corp:"Blue Exam Press",topics:["anxiety","social_anxiety","self_worth"],teacher:false,active:true},
+  {id:"career_lift",corp:"Next Chapter Publishing",topics:["imposter_syndrome","courage","financial_anxiety"],teacher:false,active:true},
+  {id:"confidence_core",corp:"Threshold Books",topics:["social_anxiety","self_worth","imposter_syndrome"],teacher:false,active:true},
+  {id:"creative_unfold",corp:"Blank Canvas Books",topics:["self_worth","courage","boundaries"],teacher:false,active:true},
+  {id:"executive_calm",corp:"Granite Ridge Publishing",topics:["burnout","anxiety","imposter_syndrome"],teacher:false,active:true},
+  {id:"focus_sprint",corp:"Launchpad Press",topics:["adhd_focus","imposter_syndrome","social_anxiety"],teacher:false,active:true},
+  {id:"gentle_growth",corp:"Tender Root Books",topics:["self_worth","imposter_syndrome","social_anxiety"],teacher:false,active:true},
+  {id:"healing_ground",corp:"Midday Press",topics:["grief","boundaries","overthinking"],teacher:false,active:true},
+  {id:"high_performer",corp:"Close Rate Press",topics:["burnout","financial_anxiety","imposter_syndrome","overthinking"],teacher:false,active:true},
+  {id:"hormone_reset",corp:"Tide & Cycle Books",topics:["somatic_healing","self_worth","anxiety"],teacher:false,active:true},
+  {id:"legacy_builder",corp:"Second Mountain Press",topics:["self_worth","courage","financial_stress"],teacher:false,active:true},
+  {id:"longevity_lab",corp:"Long Arc Press",topics:["somatic_healing","self_worth","grief"],teacher:false,active:true},
+  {id:"minimal_mind",corp:"Clearwater Books",topics:["overthinking","anxiety","burnout"],teacher:false,active:true},
+  {id:"morning_momentum",corp:"First Light Publishing",topics:["burnout","courage","self_worth"],teacher:false,active:true},
+  {id:"night_reset",corp:"Still Hour Press",topics:["sleep_anxiety","anxiety","overthinking"],teacher:false,active:true},
+  {id:"optimizer",corp:"Daybreak Editions",topics:["imposter_syndrome","burnout","overthinking"],teacher:false,active:true},
+  {id:"relationship_clarity",corp:"Two Chairs Press",topics:["boundaries","grief","compassion_fatigue"],teacher:false,active:true},
+  {id:"resilient_parent",corp:"Stolen Moment Press",topics:["burnout","compassion_fatigue","boundaries"],teacher:false,active:true},
+  {id:"spiritual_ground",corp:"Deep Well Publishing",topics:["grief","self_worth","courage"],teacher:false,active:true},
+  {id:"stabilizer",corp:"Harbor Line Books",topics:["burnout","anxiety","somatic_healing"],teacher:false,active:true},
+  {id:"stoic_edge",corp:"Anvil Books",topics:["courage","grief","self_worth","shame"],teacher:false,active:true},
+  {id:"trauma_path",corp:"Soft Ground Books",topics:["grief","trauma_recovery","somatic_healing","shame"],teacher:false,active:true},
 ];
 
 // Archetype -> canonical topics it implies (strongest first; weighted 3/2/1).
@@ -3391,15 +3419,16 @@ function impliedTopics(state) {
 // `corp` is the publication imprint name (config/catalog_planning/brand_display_names.yaml).
 function matchBrand(state) {
   const implied = impliedTopics(state);
-  const tierW = { flagship: 0.3, core: 0.2, niche: 0.1 };
-  let best = CANONICAL_BRANDS[0], bestScore = -1;
+  let best = CANONICAL_BRANDS.find((b) => b.active !== false) || CANONICAL_BRANDS[0], bestScore = -1;
   for (const b of CANONICAL_BRANDS) {
-    let s = (implied.get(b.primary) || 0) * 2;
-    (b.secondary || []).forEach((t) => { s += implied.get(t) || 0; });
-    s += tierW[b.tier] || 0;
+    if (b.active === false) continue;                 // skip inactive (e.g. cognitive_clarity / kenjin)
+    const tops = b.topics || [];
+    let s = (implied.get(tops[0]) || 0) * 2;          // primary topic counts double
+    for (let i = 1; i < tops.length; i++) s += implied.get(tops[i]) || 0;
+    s += b.teacher ? 0.2 : 0.1;                        // tie-break: teacher brands first
     if (s > bestScore) { bestScore = s; best = b; }
   }
-  return { id: best.id, corp: best.corp, tier: best.tier, primary: best.primary, score: Math.round(bestScore * 10) / 10 };
+  return { id: best.id, corp: best.corp, score: Math.round(bestScore * 10) / 10 };
 }
 
 function generateYAML(state) {
