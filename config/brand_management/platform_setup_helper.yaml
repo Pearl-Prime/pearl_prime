@@ -102,7 +102,7 @@ platforms:
     signup_url: "https://play.google.com/books/publish/"
     dashboard_url: "https://play.google.com/console/developers"
     account_note_en: "Join Google Play Books as a PUBLISHER — you own and publish your own books. Do not sign up as a third-party distributor/aggregator."
-    account_note_ja: "Google Play ブックスには「出版社」として登録 — 自社の本を所有・出版します。第三者の取次/アグリゲーターとしては登録しないでください。"
+    account_note_ja: "Google Play ブックスには「出版社」として登録 — 自社の本を所有・出版します（第三者の取次/アグリゲーターとしてではなく）。Partner Center は世界共通（専用の .jp サイトなし）、日本を含む販売地域と価格は本ごとに設定します。"
     secret: {kind: password, label_en: "Google account password", label_ja: "Googleアカウントのパスワード", help_en: "Password for the Google account behind Partner Center.", help_ja: "パートナーセンターのGoogleアカウントのパスワード。", write_only: true}
     real_info_gates_en: ["Company bank/payments profile", "Tax info (US: EIN · or W-8)", "2-Step Verification (phone)"]
     real_info_gates_ja: ["会社の銀行/支払いプロフィール", "税情報（米国：EIN・またはW-8）", "2段階認証（電話）"]
@@ -128,8 +128,8 @@ platforms:
     markets: [en, ja]
     signup_url: "https://authors.apple.com"
     dashboard_url: "https://authors.apple.com"
-    account_note_en: "EBOOKS. Set up as the publisher {brand_name}. Ebooks are published through Apple Books for Authors. Audiobooks are handled separately through INaudio/Findaway (see that card)."
-    account_note_ja: "電子書籍。出版社「{brand_name}」として設定。電子書籍は Apple Books for Authors で公開します。オーディオブックは INaudio/Findaway で別途扱います（該当カード参照）。"
+    account_note_en: "EBOOKS. Set up as the publisher {brand_name}. Apple Books for Authors is ONE global portal (authors.apple.com) — there's no separate .jp site; you choose Japan and your other regions + pricing per book. Audiobooks are handled separately through INaudio/Findaway (see that card)."
+    account_note_ja: "電子書籍。出版社「{brand_name}」として設定。Apple Books for Authors は世界共通の単一ポータル（authors.apple.com）です。専用の .jp サイトはなく、書籍ごとに日本を含む販売地域と価格を選択します。オーディオブックは INaudio/Findaway で別途扱います（該当カード参照）。"
     secret: {kind: password, label_en: "Apple ID password", label_ja: "Apple IDのパスワード", help_en: "Password for the company Apple ID.", help_ja: "会社のApple IDのパスワード。", write_only: true}
     real_info_gates_en: ["Company bank + tax (paid books; free books skip bank)", "Two-factor (trusted device/phone)"]
     real_info_gates_ja: ["会社の銀行＋税（有料書籍。無料書籍は銀行不要）", "2ファクタ認証（信頼済みデバイス/電話）"]
@@ -156,7 +156,7 @@ platforms:
     signup_url: "https://writinglife.kobo.com"
     dashboard_url: "https://www.kobo.com/writinglife"
     account_note_en: "Kobo Writing Life — self-publish as {brand_name}. Sign-in is behind a Cloudflare security check."
-    account_note_ja: "Kobo Writing Life — 「{brand_name}」として自己出版。サインインはCloudflareのセキュリティ確認の先にあります。"
+    account_note_ja: "Kobo Writing Life — 「{brand_name}」として自己出版（世界共通ポータル、専用の .jp サイトなし。日本を含む地域と価格は本ごとに設定）。サインインはCloudflareのセキュリティ確認の先にあります。"
     secret: {kind: password, label_en: "Kobo Writing Life password", label_ja: "Kobo Writing Lifeのパスワード", help_en: "Password for the Kobo Writing Life account.", help_ja: "Kobo Writing Lifeアカウントのパスワード。", write_only: true}
     real_info_gates_en: ["Cloudflare security check at sign-in", "Company bank (direct deposit) or PayPal", "Tax form"]
     real_info_gates_ja: ["サインイン時のCloudflareセキュリティ確認", "会社の銀行（口座振込）またはPayPal", "税フォーム"]
