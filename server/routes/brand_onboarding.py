@@ -1,0 +1,148 @@
+"""
+Brand Onboarding Submit API — the brand wizard's "Activate" lands the signup in Pearl Prime.
+
+Powers brand-wizard-app BrandWizard Activate. The wizard matches the admin's choices to a
+unified brand (config/brand_management/global_brand_registry_unified.yaml — 39×14) and POSTs
+the generated YAML here. This endpoint LOGS the submission and ASSIGNS it to the brand.
+
+Endpoint:
+  POST /api/v1/onboarding/submit  — {brand_id, lane, publication_corp, brand_email, contact,
+                                      wizard_yaml, match_score, match_basis}
+
+Persistence (ALL under artifacts/onboarding/, ALL gitignored — these carry the admin's email;
+emails never enter committed files, per the brand-wizard privacy discipline):
+  - submissions/<YYYY-MM-DD>/<brand_id>__<email-slug>.yaml   the full submission (logged)
+  - submissions_log.tsv                                      append-only index
+  - roster_assignments.yaml                                  the assignment overlay (status:
+        assigned + admin name/email), keyed by brand_id. The committed roster template
+        config/brand_management/brand_admin_users.yaml is NOT mutated (preserves its comments
+        + keeps PII out of git); the backend reads this overlay for live assignment state.
+"""
+from __future__ import annotations
+
+import logging
+import os
+import re
+import tempfile
+from datetime import datetime, timezone
+from pathlib import Path
+from typing import Dict, Optional
+
+from fastapi import APIRouter, HTTPException
+from pydantic import BaseModel, Field
+
+logger = logging.getLogger(__name__)
+router = APIRouter(prefix="/api/v1/onboarding", tags=["onboarding"])
+
+REPO_ROOT = Path(__file__).resolve().parents[2]
+UNIFIED_REGISTRY = REPO_ROOT / "config" / "brand_management" / "global_brand_registry_unified.yaml"
+ONBOARDING_DIR = REPO_ROOT / "artifacts" / "onboarding"
+SUBMISSIONS_DIR = ONBOARDING_DIR / "submissions"
+LOG_TSV = ONBOARDING_DIR / "submissions_log.tsv"
+ASSIGNMENTS_YAML = ONBOARDING_DIR / "roster_assignments.yaml"
+
+_BRAND_RE = re.compile(r"^[a-z0-9][a-z0-9_]{0,127}$")
+_EMAIL_RE = re.compile(r"^[^@\s]+@[^@\s]+\.[^@\s]+$")
+
+
+def _atomic_write(path: Path, content: str) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    fd, tmp = tempfile.mkstemp(prefix=f".{path.name}.", suffix=".tmp", dir=str(path.parent))
+    try:
+        with os.fdopen(fd, "w", encoding="utf-8") as fh:
+            fh.write(content)
+        os.replace(tmp, str(path))
+    except Exception:
+        Path(tmp).unlink(missing_ok=True)
+        raise
+
+
+def _valid_brand_ids() -> set[str]:
+    try:
+        import yaml
+        data = yaml.safe_load(UNIFIED_REGISTRY.read_text(encoding="utf-8")) or {}
+        return set((data.get("brands") or {}).keys())
+    except Exception as e:  # registry missing in some envs → skip strict check, log
+        logger.warning("unified registry unavailable for validation: %s", e)
+        return set()
+
+
+def _email_slug(email: str) -> str:
+    return re.sub(r"[^a-z0-9]+", "_", (email or "anon").lower()).strip("_")[:48] or "anon"
+
+
+class OnboardingSubmission(BaseModel):
+    brand_id: str = Field(..., min_length=1)        # matched unified brand_id, e.g. stillness_press_en_us
+    lane: Optional[str] = None
+    publication_corp: Optional[str] = None          # imprint name, e.g. "Stillness Press"
+    brand_email: Optional[str] = None
+    contact: Optional[Dict[str, str]] = None        # first_name/last_name/phone/...
+    wizard_yaml: str = Field(..., min_length=1)      # the generated brand-config YAML (text)
+    match_score: Optional[float] = None
+    match_basis: Optional[str] = None
+
+
+@router.post("/submit")
+def submit_onboarding(req: OnboardingSubmission) -> dict:
+    """Log the wizard submission + assign it to the matched brand (gitignored overlay)."""
+    brand_id = (req.brand_id or "").strip()
+    if not _BRAND_RE.fullmatch(brand_id):
+        raise HTTPException(status_code=422, detail="invalid brand_id")
+    valid = _valid_brand_ids()
+    if valid and brand_id not in valid:
+        raise HTTPException(status_code=422, detail=f"brand_id not in unified registry: {brand_id}")
+    if len(req.wizard_yaml) > 200_000:
+        raise HTTPException(status_code=422, detail="wizard_yaml too large")
+    email = (req.brand_email or "").strip()
+    if email and not _EMAIL_RE.fullmatch(email):
+        raise HTTPException(status_code=422, detail="invalid brand_email")
+
+    try:
+        import yaml
+    except Exception as e:  # pragma: no cover
+        raise HTTPException(status_code=500, detail=f"pyyaml unavailable: {e}") from e
+
+    now = datetime.now(timezone.utc)
+    day = now.strftime("%Y-%m-%d")
+    ts = now.isoformat(timespec="seconds")
+    contact = req.contact or {}
+    name = " ".join(x for x in [contact.get("first_name"), contact.get("last_name")] if x).strip()
+
+    # 1. LOG — write the full submission YAML (gitignored)
+    sub_path = SUBMISSIONS_DIR / day / f"{brand_id}__{_email_slug(email)}.yaml"
+    record = {
+        "submitted_at": ts, "brand_id": brand_id, "lane": req.lane,
+        "publication_corp": req.publication_corp, "brand_email": email,
+        "contact": contact, "match_score": req.match_score, "match_basis": req.match_basis,
+        "source": "brand_onboarding_wizard",
+    }
+    _atomic_write(sub_path, yaml.safe_dump(record, sort_keys=False, allow_unicode=True)
+                  + "\n# ── wizard YAML ──\n" + req.wizard_yaml)
+
+    # 2. LOG INDEX — append a TSV row (gitignored)
+    if not LOG_TSV.exists():
+        _atomic_write(LOG_TSV, "submitted_at\tbrand_id\tpublication_corp\temail\tname\tmatch_score\n")
+    with LOG_TSV.open("a", encoding="utf-8") as fh:
+        fh.write(f"{ts}\t{brand_id}\t{req.publication_corp or ''}\t{email}\t{name}\t{req.match_score or ''}\n")
+
+    # 3. ASSIGN — upsert the gitignored roster-assignment overlay (committed roster untouched)
+    overlay = {}
+    if ASSIGNMENTS_YAML.exists():
+        try:
+            overlay = yaml.safe_load(ASSIGNMENTS_YAML.read_text(encoding="utf-8")) or {}
+        except Exception:
+            overlay = {}
+    overlay.setdefault("assignments", {})
+    overlay["assignments"][brand_id] = {
+        "status": "assigned", "admin_name": name or None, "admin_email": email or None,
+        "publication_corp": req.publication_corp, "assigned_at": ts,
+        "assigned_via": "brand_onboarding_wizard",
+    }
+    _atomic_write(ASSIGNMENTS_YAML, yaml.safe_dump(overlay, sort_keys=False, allow_unicode=True))
+
+    logger.info("onboarding submit: brand=%s assigned=%s", brand_id, bool(name or email))
+    return {
+        "status": "submitted", "brand_id": brand_id, "assigned": True,
+        "submission_path": str(sub_path.relative_to(REPO_ROOT)),
+        "next": f"brand_admin.html?phase=3&brand={brand_id}",
+    }
