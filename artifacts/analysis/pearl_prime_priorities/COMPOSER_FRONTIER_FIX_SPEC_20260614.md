@@ -227,3 +227,73 @@ DISPATCH/SEQUENCING NOTES: (a) Lane A + Lane C run in parallel; the register HAR
     - MISSING RENDERER GUARD (why it ships): book_renderer.py delivery-contract validator (lines 700-738) and _scrub_inline_leaked_slot_markers (lines 133-156) only catch leaks with a `##` prefix AND only tokens HOOK|STORY|SCENE|MECHANISM_DEPTH|BAND (_ASSEMBLY_SLOT_HEADING_LINE_RE:111, _SECTION_VARIANT_RE:102, line-735 inline check). Leaked labels have NO `##` (stripped at parse) and use arc names + INTEGRATION — outside the token set. golden_chapter_synthesis.py scrubbers (lines 50,491,502) have the same gap. The corruption passes validation undetected.
     - RECONCILIATION (per-book F2 split): every built book has BOTH content-leak (>=2) AND wrapper/bridge (>=5) — 01:4/7, 02:7/6, 04:6/21, 05:7/8, 06:8/5, 07:4/12, 08:4/9, 09:2/6. Neither class alone clears the gate. DOMINANCE: by raw count the wrapper/bridge+gate-FP bucket is larger (~100), but by 'genuine never-ship defect' the content corruption is dominant and decisive — byte-identical raw metadata in reader text, present in books 02/07/08 and latent in 546 files, and it CANNOT be fixed in the composer because the source data is wrong.
 - **fix sketch:** THREE-LANE fix (content lane is the unblocker): (1) CONTENT — repair the 546 corrupted CANONICAL.txt files by prepending `## ` to every block-header line matching `^(HOOK|SCENE|STORY|REFLECTION|PIVOT|EXERCISE|INTEGRATION|THREAD|TAKEAWAY|PERMISSION|COMPRESSION|RECOGNITION|MECHANISM_PROOF|TURNING_POINT|EMBODIMENT|COST_REVEAL|RECKONING)\s+v\d+\s*$` whose next non-empty line is `---`; separately author the `[... content for ... × ...]` stub bodies (spawned task_45c8db25). (2) COMPOSER GUARD — harden book_renderer.py: extend _ASSEMBLY_SLOT_HEADING_LINE_RE + registry_resolver._parse_canonical_txt to recognize bare (no-##) block headers and arc-position tokens, and make _scrub_inline_leaked_slot_markers not early-return on `"##" not in line`; promote a leaked-bare-label check into delivery_contract_gate so any `^<UPPER_TOKEN> v\d+$` standalone line raises DeliveryContractError (fail-closed). (3) CONFIG/TEMPLATE — fix teacher_wrapper_templates.yaml so ellipsis-lead prefixes join inline (no trailing `...` becoming a sentence) and bridge templates don't end on a preposition; AND fix register_gate F2.C lowercase false-positive (it splits grammatical mid-clause sentences). Re-run register gate after lanes (1)+(2) to confirm HARD_FAIL clears.
+
+---
+
+## EXTENSION 2026-06-15 — Adaptive chapter-count (F1 Lever A)
+
+Evidence: [`ADAPTIVE_CHAPTER_COUNT_AND_F1_20260615.md`](./ADAPTIVE_CHAPTER_COUNT_AND_F1_20260615.md)
+· proof: [`../../qa/duration_ladder_subset_proof_20260615/INDEX.md`](../../qa/duration_ladder_subset_proof_20260615/INDEX.md)
+
+### Decision — F1 is a TWO-AXIS, THREE-LANE problem
+The §register_thesis_counter finding above stands: the register **verdict** is F2-only; F1 never
+gates. But F1 is a real prose defect (cross-chapter scaffolding) and the operator's craft
+concern. It has two independent drivers and three remediation lanes:
+
+- **Axis 1 — length** (more words → more paragraphs → more clusters).
+- **Axis 2 — chapter count** (each chapter re-runs HOOK/doctrine/transition/bridge scaffolding;
+  cross-chapter pairwise dedup ⇒ count is a structural multiplier).
+
+| Lane | Owner | Attacks | Flips gate? |
+|---|---|---|---|
+| **A — fewer chapters** (this extension) | Pearl_Prime / core_pipeline | Axis 2 + word-overshoot + F7 | No |
+| **B — scaffolding variety** | bridge ws `ws_bridge_transition_system_20260416` | Axis 1 + 2 | No |
+| **C — F2 data repair** (the 3-lane fix above) | #1601 + atom-repair | the verdict | **Yes** |
+
+A and B are complementary; C is what makes a book ship. Do not conflate "fewer F1 findings" with
+"register PASS."
+
+### Lever A mechanism — per-format `compact_chapter_subset` (SHIPPED, in-envelope)
+`compact_chapter_subset` (PR-D-SPINE-01, ratified) already subsets the 12-chapter spine per
+runtime format. It was **inert** because two `load_spine` call sites omitted `runtime_format=`:
+`scripts/pilot/run_spine_pipeline.py` and `phoenix_v4/planning/beatmap_compile.py:440`. Fixed
+both (the latter also corrected a wrong-original `by_num` mapping for subsetted chapters). Proof:
+cuts F1 37–65% and halves word-overshoot at the 5ch/8ch compact formats.
+
+**In-envelope:** per-format chapter_count is exactly what TEMPLATE-UNIVERSAL-01 endorses
+("per-book chapter_count is the auto-plan's subset over the 12-chapter spine"; it explicitly
+contemplated non-12 counts on `micro_book_15`). No cap amendment needed for per-format subsets.
+
+### Structural finding — subsetting is coherent for ALL topics
+Across 15 spines, the 5ch `[1,4,7,10,12]` and 8ch `[1,3,4,6,7,9,10,12]` positions yield fully
+distinct, arc-spanning roles (5/5, 8/8; always `recognition → … → integration`). So per-format
+positional subsetting is safe beyond anxiety. The matrix (analysis §5): **SHORT&DEEP is the
+recommended classification for all 52 live persona×topic combos at short tiers; SHORT&FAST stays
+Lever-B-gated; no cell is FULL-ONLY** (caveat: `midlife_women` is arc-path-excluded for all tiers
+until master_arcs exist).
+
+### OPEN PRODUCT DECISION (operator sign-off, NOT Architect — both options in-envelope)
+The default short tiers (`micro_book_15`, `short_book_30`, `one_hour_book`) currently render 12
+thin chapters by design (registry comment ll.214–220). Two ways to realize "fewer chapters for
+short books":
+- **Option R (route):** keep them 12-thin; route short-duration requests to the `compact_*`
+  formats (which now subset correctly). No registry change; preserves the two-track design.
+- **Option S (subset):** add `compact_chapter_subset` to the three default short tiers. Larger
+  blast radius (reader-facing chapter-count change across all short books); makes micro/short
+  near-redundant with `compact_*`. This is what the originating brief's deliverable 4b requested.
+
+Recommendation: **Option R** (lower blast radius; `compact_*` already embody SHORT&DEEP). Held
+for operator confirmation before installing either — reader-facing behavior change.
+
+### DEFERRED — per-TOPIC subset = NEW AXIS (DRAFT cap amendment, Pearl_Architect)
+Optimizing *which* beats survive per topic (vs the topic-blind positional subset) requires a
+per-topic subset, a new vocabulary axis. Not required (positional subset is already coherent);
+logged as an optimization.
+
+> **DRAFT amendment to TEMPLATE-UNIVERSAL-01 (for Pearl_Architect ratification — do NOT
+> self-install):** *"`compact_chapter_subset` MAY additionally be declared per-topic (keyed by
+> topic under a format's `compact_chapter_subset_by_topic` map) to let the spine author keep each
+> topic's load-bearing beat under compression. Per-format remains the default and fallback. This
+> extends — does not replace — PR-D-SPINE-01's per-format declarative subset; `_load_compact_chapter_subset`
+> gains a `topic` parameter that prefers the per-topic list when present."* Gate: serialized on
+> PEARL_ARCHITECT_STATE.md per the hot-file lane discipline.
