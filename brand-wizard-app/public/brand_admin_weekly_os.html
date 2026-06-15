@@ -217,8 +217,9 @@ html,body{width:100%;height:100%;font-family:"DM Sans",sans-serif;background:#0e
 
 <script src="js/toast.js"></script>
 <script>
-// ── Brand Data (24 en_US) ──
-const B={
+// ── Brand Data — unified 39×14 from brand_admin_brands.json (gen_brand_admin_brands.py);
+// the const below is a stale fallback if the fetch fails. ──
+let B={
   inner_light_press_en_us:{d:"Inner Light Press",t:"Ahjan",tm:true,tr:"Contemplative / inner light",f:"Meditation, mindfulness, inner peace",tp:["anxiety","burnout","depression","self_worth","somatic_healing","mindfulness"]},
   awakening_press_en_us:{d:"Awakening Press",t:"Adi Da",tm:true,tr:"Radical devotion",f:"Spiritual awakening, radical self-inquiry",tp:["self_worth","courage","boundaries","depression","grief"]},
   vitality_path_en_us:{d:"Vitality Path",t:"Master Feung",tm:true,tr:"Taoist energy cultivation",f:"Energy management, vitality, life force balance",tp:["burnout","somatic_healing","courage","self_worth"]},
@@ -692,7 +693,8 @@ function initBrand(bid){
   else showPhase(1);
 }
 
-function init(){
+async function init(){
+  try{ const r=await fetch('brand_admin_brands.json',{cache:'no-store'}); if(r.ok){ const j=await r.json(); if(j&&Object.keys(j).length) B=j; } }catch(_e){}
   const p=new URLSearchParams(window.location.search);
   const bid=p.get('brand');
   if(bid && B[bid]) initBrand(bid);
