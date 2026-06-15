@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Platform Setup Helper — Pearl Prime</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=DM+Mono:wght@300;400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:100%;min-height:100%;font-family:"DM Sans",sans-serif;background:#0e0a06;color:#faf6f0;overflow-x:hidden}
+:root{--acc:#b45309;--acc2:#d97706;--serif:"Cormorant Garamond",serif;--mono:"DM Mono",monospace;--bg:#0e0a06;--card:rgba(255,255,255,.03);--border:rgba(180,83,9,.15);--dim:rgba(250,246,240,.35);--mid:rgba(250,246,240,.6);--hi:rgba(250,246,240,.9);--green:#4ade80;--red:#f87171}
+
+#topbar{position:fixed;top:0;left:0;right:0;height:52px;background:rgba(14,10,6,.97);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 20px;gap:12px;z-index:100;backdrop-filter:blur(10px)}
+#topbar h1{font-family:var(--serif);font-size:1.05rem;font-weight:300;color:var(--acc2);white-space:nowrap}
+.pill{font-family:var(--mono);font-size:.55rem;color:var(--acc2);border:1px solid var(--border);padding:3px 12px;border-radius:14px;letter-spacing:.04em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:200px}
+.spacer{margin-left:auto}
+.mkt-toggle{display:flex;gap:4px}
+.mkt-btn{font-family:var(--mono);font-size:.55rem;letter-spacing:.06em;color:var(--dim);padding:5px 14px;border-radius:4px;cursor:pointer;border:1px solid var(--border);background:none;transition:all .15s}
+.mkt-btn:hover{color:var(--hi)}
+.mkt-btn.active{color:var(--acc2);background:rgba(180,83,9,.14);border-color:var(--acc)}
+
+.container{max-width:640px;margin:0 auto;padding:80px 20px 60px;min-height:100vh}
+
+.rail{margin-bottom:20px}
+.rail-top{display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mono);font-size:.55rem;letter-spacing:.05em;color:var(--dim);text-transform:uppercase;margin-bottom:7px;gap:10px}
+.rail-top .ctx{color:var(--acc2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bar-track{height:8px;background:rgba(180,83,9,.1);border-radius:4px;overflow:hidden}
+.bar-fill{height:100%;background:linear-gradient(90deg,var(--acc),var(--green));border-radius:4px;transition:width .4s ease}
+
+.card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:24px 24px 26px;min-height:300px;display:flex;flex-direction:column}
+.card-head{display:flex;align-items:center;gap:10px;margin-bottom:4px}
+.card-title{font-family:var(--serif);font-size:1.55rem;font-weight:400;color:#f5d0a9;line-height:1.1}
+.chip{font-family:var(--mono);font-size:.42rem;letter-spacing:.08em;text-transform:uppercase;color:var(--acc2);border:1px solid var(--border);padding:2px 8px;border-radius:10px;margin-left:auto;white-space:nowrap}
+.note{font-size:.8rem;color:var(--mid);line-height:1.55;margin:8px 0 14px}
+.open-btn{display:inline-flex;align-items:center;gap:7px;background:rgba(180,83,9,.2);border:1px solid var(--acc);color:var(--acc2);font-family:var(--mono);font-size:.62rem;letter-spacing:.05em;text-transform:uppercase;padding:11px 20px;border-radius:6px;cursor:pointer;text-decoration:none;transition:all .15s;align-self:flex-start}
+.open-btn:hover{background:rgba(180,83,9,.36);transform:translateY(-1px)}
+
+.sec-label{font-family:var(--mono);font-size:.5rem;letter-spacing:.12em;text-transform:uppercase;color:var(--acc);margin:20px 0 12px;display:flex;align-items:center;gap:8px}
+.sec-label::after{content:'';flex:1;height:1px;background:var(--border)}
+
+/* one big step */
+.step-big{display:flex;gap:16px;align-items:flex-start;font-size:1.12rem;color:var(--hi);line-height:1.55;margin:4px 0;flex:1}
+.step-num{flex-shrink:0;width:42px;height:42px;border-radius:50%;background:rgba(180,83,9,.2);border:1px solid var(--acc);color:var(--acc2);font-family:var(--mono);font-size:1.05rem;display:flex;align-items:center;justify-content:center}
+
+.gate{border-left:3px solid #dc2626;background:rgba(220,38,38,.06);padding:10px 14px;border-radius:0 6px 6px 0;margin:14px 0 0;font-size:.74rem;color:var(--mid);line-height:1.55}
+.gate strong{color:var(--red)}
+
+.prefill{background:rgba(0,0,0,.25);border:1px solid rgba(180,83,9,.1);border-radius:6px;padding:10px 12px;margin:9px 0}
+.prefill-label{font-family:var(--mono);font-size:.42rem;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);margin-bottom:6px}
+.prefill-row{display:flex;align-items:flex-start;gap:8px}
+.prefill-val{flex:1;background:rgba(0,0,0,.3);border:1px solid rgba(180,83,9,.08);border-radius:4px;padding:8px 10px;font-family:var(--mono);font-size:.7rem;color:var(--hi);line-height:1.5;white-space:pre-wrap;word-break:break-word}
+.copy-btn{flex-shrink:0;background:rgba(180,83,9,.15);border:1px solid var(--border);color:var(--acc2);font-family:var(--mono);font-size:.44rem;letter-spacing:.06em;text-transform:uppercase;padding:8px 12px;border-radius:4px;cursor:pointer;transition:all .15s}
+.copy-btn:hover{background:rgba(180,83,9,.3)}
+.copy-btn.copied{background:rgba(22,163,74,.2);border-color:rgba(22,163,74,.4);color:var(--green)}
+
+.cred-row{margin-bottom:14px}
+.cred-label{display:block;font-family:var(--mono);font-size:.55rem;letter-spacing:.05em;color:var(--mid);margin-bottom:6px}
+.cred-input{width:100%;padding:12px 13px;background:rgba(0,0,0,.3);border:1px solid var(--border);border-radius:6px;color:var(--hi);font-family:var(--mono);font-size:.85rem;outline:none;transition:border-color .2s}
+.cred-input:focus{border-color:var(--acc2)}
+.cred-input::placeholder{color:rgba(250,246,240,.2);font-size:.74rem}
+.secret-row{display:flex;gap:8px;align-items:stretch}
+.secret-row .cred-input{flex:1}
+.secret-save{flex-shrink:0;background:rgba(180,83,9,.22);border:1px solid var(--acc);color:var(--acc2);font-family:var(--mono);font-size:.62rem;letter-spacing:.05em;text-transform:uppercase;padding:0 18px;border-radius:6px;cursor:pointer;transition:all .15s}
+.secret-save:hover{background:rgba(180,83,9,.4)}
+.secret-state{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:.74rem;color:var(--green);padding:10px 0}
+.secret-note{font-size:.62rem;color:var(--dim);line-height:1.5;margin-top:6px}
+.secret-msg{font-family:var(--mono);font-size:.6rem;margin-top:7px;line-height:1.45}
+.secret-msg.ok{color:var(--green)}
+.secret-msg.err{color:var(--red)}
+
+.nav{display:flex;align-items:center;gap:10px;margin-top:22px;padding-top:18px;border-top:1px solid var(--border)}
+.nav .grow{flex:1}
+.btn{font-family:var(--mono);font-size:.62rem;letter-spacing:.05em;text-transform:uppercase;padding:12px 22px;border-radius:6px;cursor:pointer;border:1px solid var(--border);background:none;color:var(--mid);transition:all .15s}
+.btn:hover{color:var(--hi);border-color:var(--acc)}
+.btn.ghost{color:var(--dim);border-color:transparent}
+.btn.primary{background:linear-gradient(135deg,rgba(180,83,9,.3),rgba(217,119,6,.22));border-color:var(--acc);color:var(--hi)}
+.btn.primary:hover{background:linear-gradient(135deg,rgba(180,83,9,.45),rgba(217,119,6,.35));transform:translateY(-1px)}
+
+.intro-title{font-family:var(--serif);font-size:2rem;font-weight:300;color:var(--acc2);margin-bottom:6px}
+.intro-sub{font-size:.84rem;color:var(--mid);line-height:1.6;margin-bottom:22px}
+.bb-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:8px}
+@media(max-width:560px){.bb-grid{grid-template-columns:1fr}}
+.bb-field label{display:block;font-family:var(--mono);font-size:.48rem;letter-spacing:.06em;text-transform:uppercase;color:var(--dim);margin-bottom:5px}
+.bb-field input{width:100%;padding:10px 12px;background:rgba(0,0,0,.3);border:1px solid var(--border);border-radius:6px;color:var(--hi);font-family:var(--mono);font-size:.78rem;outline:none}
+.bb-field input:focus{border-color:var(--acc2)}
+
+.done-wrap{text-align:center;padding:34px 16px}
+.done-wrap .big{font-size:3rem;margin-bottom:12px}
+.done-wrap h2{font-family:var(--serif);font-size:2rem;font-weight:300;color:var(--green);margin-bottom:10px}
+.done-wrap p{font-size:.86rem;color:var(--mid);line-height:1.6;max-width:460px;margin:0 auto 8px}
+
+.footer-note{margin-top:18px;font-size:.6rem;color:var(--dim);line-height:1.6}
+.footer-note strong{color:var(--mid)}
+.edit-brand{font-family:var(--mono);font-size:.52rem;color:var(--dim);cursor:pointer;text-decoration:underline;background:none;border:none;white-space:nowrap}
+.edit-brand:hover{color:var(--acc2)}
+.loading{text-align:center;color:var(--dim);font-family:var(--mono);font-size:.7rem;padding:60px 0}
+</style>
+</head>
+<body>
+<div id="topbar">
+  <h1 id="tb-title">Platform Setup Helper</h1>
+  <span class="pill" id="brand-pill">No brand set</span>
+  <div class="spacer"></div>
+  <div class="mkt-toggle" id="mkt-toggle"></div>
+</div>
+
+<div class="container"><div id="app"><div class="loading">Loading…</div></div></div>
+
+<script>
+const DATA_URL='./platform_setup_helper_data.json';
+const PROGRESS_KEY='psh_progress';   // non-sensitive: done flags + login (NEVER the password)
+let DATA=null, MARKET='en', BRAND={id:'',name:'',focus:'',desc:'',slug:''}, PROGRESS={}, CRED_STATUS={};
+let POS=0;   // index into buildScreens(); 0 = brand intro
+
+function credApiBase(){ try{const q=new URLSearchParams(location.search).get('cred_api'); if(q) return q.replace(/\/$/,'');}catch(e){} return 'http://127.0.0.1:8000'; }
+function t(k){ return ((DATA&&DATA.ui&&DATA.ui[MARKET])||{})[k] || ((DATA&&DATA.ui&&DATA.ui.en)||{})[k] || k; }
+function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+function slug(s){ return String(s||'').toLowerCase().replace(/[^a-z0-9]+/g,'_').replace(/^_+|_+$/g,''); }
+function pkey(){ return BRAND.id||BRAND.name||'_'; }
+function loadProgress(){ try{PROGRESS=JSON.parse(localStorage.getItem(PROGRESS_KEY)||'{}');}catch(e){PROGRESS={};} if(!PROGRESS[pkey()]) PROGRESS[pkey()]={done:{},login:{}}; }
+function saveProgress(){ try{localStorage.setItem(PROGRESS_KEY,JSON.stringify(PROGRESS));}catch(e){} }
+function fillTpl(tpl){ return String(tpl||'')
+  .replace(/\{brand_name\}/g,BRAND.name||'Your Brand').replace(/\{brand_focus\}/g,BRAND.focus||'')
+  .replace(/\{brand_desc\}/g,BRAND.desc||'').replace(/\{brand_slug\}/g,BRAND.slug||slug(BRAND.name)||'yourbrand'); }
+function readBrandFromUrl(){ const q=new URLSearchParams(location.search);
+  BRAND.id=q.get('brand')||q.get('brand_id')||''; BRAND.name=q.get('brand_name')||''; BRAND.focus=q.get('brand_focus')||'';
+  BRAND.desc=q.get('brand_desc')||''; BRAND.slug=q.get('brand_slug')||slug(BRAND.name); if(q.get('market')==='ja') MARKET='ja'; }
+function platforms(){ return (DATA.platforms||[]).filter(p=>(p.markets||[]).includes(MARKET))
+  .sort((a,b)=>(a.category===b.category?0:(a.category==='distribution'?-1:1))); }
+
+// Flat one-screen-per-step model
+function buildScreens(){
+  const s=[{type:'brand'}];
+  platforms().forEach(p=>{
+    const steps=((p.setup_steps||{})[MARKET])||[];
+    if(steps.length) steps.forEach((txt,i)=>s.push({type:'step',p,i,txt,total:steps.length}));
+    else s.push({type:'step',p,i:0,txt:(MARKET==='ja'?'手順は近日追加。':'Steps coming soon.'),total:1});
+    if(p.category==='social'&&p.social_copy) s.push({type:'copy',p});
+    s.push({type:'cred',p});
+  });
+  s.push({type:'done'});
+  return s;
+}
+function numPlatforms(){ return platforms().length; }
+function doneCount(){ return platforms().filter(p=>PROGRESS[pkey()].done[p.id]).length; }
+
+function renderTop(){
+  document.getElementById('tb-title').textContent=t('page_title');
+  document.getElementById('brand-pill').textContent=BRAND.name||'No brand set';
+  const mk=document.getElementById('mkt-toggle'); mk.innerHTML='';
+  (DATA.markets||[]).forEach(m=>{ const b=document.createElement('button');
+    b.className='mkt-btn'+(m.id===MARKET?' active':''); b.textContent=m.label_native||m.label_en||m.id;
+    b.onclick=()=>{ MARKET=m.id; const S=buildScreens(); if(POS>=S.length) POS=S.length-1; render(); };
+    mk.appendChild(b); });
+}
+
+function railHTML(ctx){
+  const S=buildScreens(); const pct=Math.round(POS/(S.length-1)*100);
+  return '<div class="rail"><div class="rail-top"><span class="ctx">'+esc(ctx)+'</span>'+
+    '<span>'+doneCount()+' / '+numPlatforms()+' '+esc(MARKET==='ja'?'準備完了':'ready')+
+    ' &nbsp;<button class="edit-brand" onclick="POS=0;render()">'+esc(MARKET==='ja'?'ブランド編集':'edit brand')+'</button></span></div>'+
+    '<div class="bar-track"><div class="bar-fill" style="width:'+pct+'%"></div></div></div>';
+}
+
+/* screen renderers */
+function brandScreen(){
+  return `<div class="intro-title">${esc(t('page_title'))}</div><div class="intro-sub">${esc(t('intro'))}</div>
+  <div class="sec-label">${esc(MARKET==='ja'?'ブランド情報':'Your brand')}</div>
+  <div class="bb-grid">
+    <div class="bb-field"><label>${esc(MARKET==='ja'?'ブランド名':'Brand name')}</label><input id="bf-name" value="${esc(BRAND.name)}" placeholder="${esc(MARKET==='ja'?'例：インナーライト':'e.g. Inner Light Press')}"></div>
+    <div class="bb-field"><label>${esc(MARKET==='ja'?'フォーカス（一言）':'Focus (one line)')}</label><input id="bf-focus" value="${esc(BRAND.focus)}" placeholder="${esc(MARKET==='ja'?'例：不安をやわらげる実践':'e.g. calm tools for anxiety')}"></div>
+    <div class="bb-field"><label>${esc(MARKET==='ja'?'ブランドID（保管用）':'Brand id (for secure save)')}</label><input id="bf-id" value="${esc(BRAND.id)}" placeholder="inner_light_press_en_us"></div>
+    <div class="bb-field"><label>${esc(MARKET==='ja'?'一文の説明':'One-line description')}</label><input id="bf-desc" value="${esc(BRAND.desc)}" placeholder="${esc(MARKET==='ja'?'出版社の説明':'short company description')}"></div>
+  </div>
+  <div class="nav"><div class="grow"></div><button class="btn primary" onclick="startWizard()">${esc(MARKET==='ja'?'設定を始める →':'Start setup →')}</button></div>`;
+}
+function startWizard(){ ['name','focus','id','desc'].forEach(f=>{const el=document.getElementById('bf-'+f); if(el) BRAND[f]=el.value.trim();});
+  BRAND.slug=slug(BRAND.name); loadProgress(); POS=1; refreshCredStatus().then(render); }
+
+function stepScreen(sc){
+  const p=sc.p, cat=p.category==='social'?(MARKET==='ja'?'ソーシャル':'Social'):(MARKET==='ja'?'配信':'Distribution');
+  const note=MARKET==='ja'?p.account_note_ja:p.account_note_en;
+  const gates=(MARKET==='ja'?p.real_info_gates_ja:p.real_info_gates_en)||[];
+  let h=railHTML(p.display_name+' · '+(MARKET==='ja'?'手順':'Step')+' '+(sc.i+1)+'/'+sc.total);
+  h+='<div class="card"><div class="card-head"><div class="card-title">'+esc(p.display_name)+'</div><span class="chip">'+esc(cat)+'</span></div>';
+  if(sc.i===0){
+    if(note) h+='<div class="note">'+esc(note)+'</div>';
+    h+='<a class="open-btn" href="'+esc(p.signup_url)+'" target="_blank" rel="noopener">↗ '+esc((MARKET==='ja'?'開く：':'Open ')+p.display_name)+'</a>';
+  }
+  h+='<div class="sec-label">'+esc((MARKET==='ja'?'手順 ':'Step ')+(sc.i+1)+' / '+sc.total)+'</div>';
+  h+='<div class="step-big"><span class="step-num">'+(sc.i+1)+'</span><div>'+esc(sc.txt)+'</div></div>';
+  if(sc.i===0 && gates.length) h+='<div class="gate"><strong>'+esc(t('gate_label'))+':</strong> '+esc(gates.join(' · '))+'</div>';
+  h+=navHTML();
+  h+='</div>';
+  return h;
+}
+function copyScreen(sc){
+  const p=sc.p, sfx=MARKET==='ja'?'_ja':'_en', sc2=p.social_copy||{};
+  const rows=[['handle',MARKET==='ja'?'ハンドル':'Handle'],['bio',MARKET==='ja'?'プロフィール文':'Bio'],['about',MARKET==='ja'?'About / 説明':'About'],['what_to_post',MARKET==='ja'?'投稿の方針':'What to post']];
+  let h=railHTML(p.display_name+' · '+(MARKET==='ja'?'ブランドコピー':'Brand copy'));
+  h+='<div class="card"><div class="card-head"><div class="card-title">'+esc(p.display_name)+'</div></div>';
+  h+='<div class="sec-label">'+esc(MARKET==='ja'?'貼り付け用ブランドコピー':'Brand copy to paste')+'</div>';
+  rows.forEach(([k,lab])=>{ const tpl=sc2[k+sfx]; if(!tpl) return; const val=fillTpl(tpl);
+    h+='<div class="prefill"><div class="prefill-label">'+esc(lab)+'</div><div class="prefill-row"><div class="prefill-val">'+esc(val)+'</div><button class="copy-btn" onclick="copyText(this,'+JSON.stringify(JSON.stringify(val))+')">'+esc(t('copy_label'))+'</button></div></div>'; });
+  h+=navHTML(); h+='</div>'; return h;
+}
+function credScreen(sc){
+  const p=sc.p, st=CRED_STATUS[p.id]||{}, login=(PROGRESS[pkey()].login||{})[p.id]||'';
+  const sec=p.secret||{}, slabel=(MARKET==='ja'?(sec.label_ja||sec.label_en):sec.label_en)||t('secret_label');
+  const shelp=(MARKET==='ja'?(sec.help_ja||sec.help_en):sec.help_en)||'';
+  const done=!!PROGRESS[pkey()].done[p.id];
+  let h=railHTML(p.display_name+' · '+(MARKET==='ja'?'ログイン':'Login'));
+  h+='<div class="card"><div class="card-head"><div class="card-title">'+esc(p.display_name)+'</div></div>';
+  h+='<div class="sec-label">'+esc(MARKET==='ja'?'ログイン情報（安全に保存）':'Save your login (encrypted)')+'</div>';
+  h+='<div class="cred-row"><label class="cred-label">'+esc(t('username_label'))+'</label>';
+  h+='<input class="cred-input" type="text" value="'+esc(login)+'" placeholder="'+esc(MARKET==='ja'?'メール または ユーザー名':'email or username')+'" autocomplete="off" oninput="onLogin(\''+p.id+'\',this.value)"></div>';
+  h+='<div class="cred-row"><label class="cred-label">'+esc(slabel)+'</label>';
+  if(st.secret_set){ h+='<div class="secret-state">'+esc(t('secret_set'))+' <button class="copy-btn" onclick="clearSecretSet(\''+p.id+'\')">'+esc(t('secret_update'))+'</button></div>'; }
+  else { h+='<div class="secret-row"><input class="cred-input" id="sec-'+p.id+'" type="password" placeholder="'+esc(shelp||(MARKET==='ja'?'パスワード':'password'))+'" autocomplete="new-password"><button class="secret-save" onclick="saveSecret(\''+p.id+'\')">'+esc(MARKET==='ja'?'保存':'Save')+'</button></div>'; }
+  h+='<div class="secret-note">'+esc(t('secret_writeonly_note'))+'</div><div class="secret-msg" id="secmsg-'+p.id+'"></div></div>';
+  // nav: Back · Skip · Mark ready
+  h+='<div class="nav"><button class="btn" onclick="goBack()">← '+esc(MARKET==='ja'?'戻る':'Back')+'</button>';
+  h+='<button class="btn ghost" onclick="goNext()">'+esc(MARKET==='ja'?'スキップ':'Skip')+'</button><div class="grow"></div>';
+  h+='<button class="btn primary" onclick="markReady(\''+p.id+'\')">'+esc(done?(MARKET==='ja'?'次へ →':'Next →'):(t('done_label')+' →'))+'</button></div>';
+  h+='</div>'; return h;
+}
+function doneScreen(){
+  let h='<div class="done-wrap"><div class="big">🎉</div><h2>'+esc(t('completion_title'))+'</h2><p>'+esc(t('completion_body'))+'</p>';
+  h+='<p style="color:var(--acc2)">'+doneCount()+' / '+numPlatforms()+' '+esc(MARKET==='ja'?'準備完了':'ready')+'</p>';
+  h+='<div class="nav" style="justify-content:center;border:none"><button class="btn" onclick="POS=1;render()">← '+esc(MARKET==='ja'?'最初から見直す':'Review from start')+'</button></div></div>';
+  return h;
+}
+function navHTML(){
+  return '<div class="grow"></div><div class="nav"><button class="btn" onclick="goBack()">← '+esc(MARKET==='ja'?'戻る':'Back')+'</button><div class="grow"></div><button class="btn primary" onclick="goNext()">'+esc(MARKET==='ja'?'次へ →':'Next →')+'</button></div>';
+}
+
+function render(){
+  if(!DATA) return; renderTop();
+  const S=buildScreens(); if(POS<0)POS=0; if(POS>=S.length)POS=S.length-1;
+  const sc=S[POS], app=document.getElementById('app');
+  let h='';
+  if(sc.type==='brand') h=brandScreen();
+  else if(sc.type==='step') h=stepScreen(sc);
+  else if(sc.type==='copy') h=copyScreen(sc);
+  else if(sc.type==='cred') h=credScreen(sc);
+  else h=doneScreen();
+  if(sc.type!=='brand'&&sc.type!=='done') h+='<div class="footer-note"><strong>'+esc(MARKET==='ja'?'セキュリティ：':'Security: ')+'</strong>'+esc(MARKET==='ja'?'パスワードは書き込み専用。サーバー側で暗号化して保存し、ブラウザには保存されず、再表示もされません。':'your password is write-only — encrypted on the server, never stored in the browser, never shown again.')+'</div>';
+  app.innerHTML=h; window.scrollTo(0,0);
+}
+
+/* actions */
+function goBack(){ if(POS>0) POS--; render(); }
+function goNext(){ const S=buildScreens(); if(POS<S.length-1) POS++; render(); }
+function markReady(pid){ PROGRESS[pkey()].done[pid]=true; saveProgress(); goNext(); }
+function onLogin(pid,val){ PROGRESS[pkey()].login[pid]=val; saveProgress(); pushLogin(pid); }
+function copyText(btn,jsonStr){ const txt=JSON.parse(jsonStr); navigator.clipboard.writeText(txt).then(()=>{const o=btn.textContent;btn.textContent=t('copied_label');btn.classList.add('copied');setTimeout(()=>{btn.textContent=o;btn.classList.remove('copied');},1300);}); }
+function secMsg(pid,cls,msg){ const el=document.getElementById('secmsg-'+pid); if(el){el.className='secret-msg '+cls; el.textContent=msg;} }
+
+async function saveSecret(pid){
+  const input=document.getElementById('sec-'+pid); if(!input) return;
+  const secret=input.value; if(!secret){ secMsg(pid,'err',MARKET==='ja'?'値を入力してください。':'Enter a value first.'); return; }
+  if(!BRAND.id){ secMsg(pid,'err',MARKET==='ja'?'先にブランドIDを設定（ブランド編集）。':'Set a brand id first (edit brand).'); return; }
+  const login=(PROGRESS[pkey()].login||{})[pid]||'';
+  try{
+    const r=await fetch(credApiBase()+'/api/v1/setup-helper/credentials',{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({brand_id:BRAND.id,platform:pid,username:{login:login},secret:secret})});
+    if(!r.ok) throw new Error('HTTP '+r.status);
+    input.value=''; await refreshCredStatus(); secMsg(pid,'ok',MARKET==='ja'?'暗号化して保存しました。':'Saved (encrypted).'); render();
+  }catch(e){ input.value=''; secMsg(pid,'err',(MARKET==='ja'?'セキュアサーバーに接続できません。パスワードは保存されていません（ブラウザには一切保存しません）。':'Secure server not reachable — password NOT saved (never stored in the browser).')); }
+}
+function clearSecretSet(pid){ if(CRED_STATUS[pid]) CRED_STATUS[pid].secret_set=false; render(); }
+let _pt={};
+function pushLogin(pid){ if(!BRAND.id) return; clearTimeout(_pt[pid]); _pt[pid]=setTimeout(async()=>{
+  try{ await fetch(credApiBase()+'/api/v1/setup-helper/credentials',{method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({brand_id:BRAND.id,platform:pid,username:{login:(PROGRESS[pkey()].login||{})[pid]||''}})}); }catch(e){} },700); }
+async function refreshCredStatus(){ CRED_STATUS={}; if(!BRAND.id) return;
+  try{ const r=await fetch(credApiBase()+'/api/v1/setup-helper/credentials/status?brand_id='+encodeURIComponent(BRAND.id),{cache:'no-store'});
+    if(r.ok){ const j=await r.json(); CRED_STATUS=(j&&j.platforms)||{}; } }catch(e){} }
+
+async function init(){ readBrandFromUrl();
+  try{ const r=await fetch(DATA_URL,{cache:'no-store'}); DATA=await r.json(); }
+  catch(e){ document.getElementById('app').innerHTML='<div class="loading">Could not load platform data.</div>'; return; }
+  if(!BRAND.slug) BRAND.slug=slug(BRAND.name); loadProgress(); await refreshCredStatus(); render(); }
+init();
+</script>
+</body>
+</html>

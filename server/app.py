@@ -27,6 +27,7 @@ from server.routes import (
     config_api,
     brand_admin_download,
     brand_admin_public,
+    setup_helper,
 )
 
 logger = logging.getLogger("phoenix.server")
@@ -79,6 +80,7 @@ def create_app(config: ServerConfig | None = None) -> FastAPI:
     app.include_router(config_api.router)
     app.include_router(brand_admin_download.router)
     app.include_router(brand_admin_public.router)
+    app.include_router(setup_helper.router)
 
     @app.on_event("startup")
     async def _startup():

@@ -747,6 +747,13 @@ function renderPhase1(){
   h+='<div class="overall-upload-bar"><div class="bar-label"><span>Setup Progress</span><strong>'+setupPct()+'%</strong></div>';
   h+='<div class="bar-track"><div class="bar-fill" style="width:'+setupPct()+'%"></div></div></div>';
 
+  // Entry to the full Platform Setup Helper (live per-platform steps EN/JP + write-only encrypted cred capture)
+  h+='<div class="nba-callout" style="margin-bottom:18px">';
+  h+='<div class="nba-icon">'+icon('external','accent')+'</div>';
+  h+='<div class="nba-body"><div class="nba-label">Guided Platform Setup</div>';
+  h+='<div class="nba-text">Step-by-step setup for every platform (English / 日本語) with secure, write-only login capture.';
+  h+=' <a class="action-btn" style="margin-left:6px" href="platform_setup_helper.html?brand='+encodeURIComponent(brandId||'')+'&brand_name='+encodeURIComponent(b.d||'')+'&brand_focus='+encodeURIComponent(b.f||'')+'&brand_desc='+encodeURIComponent(desc(b))+'" target="_blank">'+icon('arrow_right','sm')+' Open Setup Helper</a></div></div></div>';
+
   // Next best action for setup
   if(remaining>0){
     const nextStep=SETUP.find(st=>!s.setup[st.id]);
@@ -1506,7 +1513,6 @@ function resetBrand(){
 
 // ── Init ──
 function initBrand(bid){
-  if(!B[bid]) mergePendingBrand(bid); // resolve a just-activated wizard brand if present
   if(!B[bid]){ renderPicker(); return; }
   brandId=bid; brand=B[bid]; load();
   document.getElementById('picker').classList.remove('show');
@@ -1603,37 +1609,6 @@ function loadLiveBrandIndex(){
     });
 }
 
-// ── Pending brand merge (newly-activated wizard brand, not yet in the server index) ──
-// The Brand Wizard's ACTIVATE step writes localStorage 'phoenix_pending_brand'
-// = {brand_id, brand_name, teacher, lane, market, archetype, created_at} and navigates
-// here as ?brand=<brand_id>. That id is NOT in the live brand_index yet (no Monday cron
-// run / registry write), so without this it would fall through to the picker = dead-end.
-// We synthesize a legacy-shape B[brand_id] entry so initBrand()+showPhase(3) succeed and
-// Phase 3 renders an honest week-1 pending state (panels 404 against the server and show
-// their built-in "no package yet / could not load" messages). A real server entry for the
-// same id always wins (we never overwrite B[bid] if it already exists).
-function mergePendingBrand(bid){
-  if(!bid || B[bid]) return false;
-  let pend=null;
-  try{ pend=JSON.parse(localStorage.getItem('phoenix_pending_brand')||'null'); }catch(e){ pend=null; }
-  if(!pend || pend.brand_id!==bid) return false;
-  B[bid]={
-    d:pend.brand_name||bid,
-    t:pend.teacher||null,
-    tm:!!pend.teacher,
-    tr:pend.lane||'',
-    f:(pend.market?pend.market+' · ':'')+'pending — activated '+(pend.created_at?pend.created_at.split('T')[0]:'today'),
-    tp:[],
-    axis:'book',
-    tier:null,
-    locale:pend.market||null,
-    status:'pending'
-  };
-  if(BRAND_AXES.book.indexOf(bid)===-1) BRAND_AXES.book.push(bid);
-  console.log('[brand_admin] merged pending wizard brand:',bid);
-  return true;
-}
-
 // ── Books × Platforms per brand ──
 function renderBooksByPlatform(bid){
   const tbody=document.getElementById('bbp-tbody');
@@ -1684,9 +1659,6 @@ function init(){
   const bid=p.get('brand');
   // Load the live brand index BEFORE picker/initBrand so the live data drives both.
   loadLiveBrandIndex().then(function(){
-    // Merge a newly-activated wizard brand (localStorage) if it isn't in the server
-    // index yet, so a freshly-minted brand_id resolves instead of falling to the picker.
-    mergePendingBrand(bid);
     if(bid && B[bid]){
       initBrand(bid);
       renderBooksByPlatform(bid);

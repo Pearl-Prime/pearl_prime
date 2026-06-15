@@ -18,6 +18,10 @@ docs/all_credentials.txt
 credentials_manifest.yaml
 scripts/video/credential_setup/credentials_manifest.yaml
 
+# Brand admin platform credential vault (server/crypto.py: Fernet → artifacts/admin_credentials/<brand>.enc).
+# Encrypted at rest, but the per-brand .enc store and any exported Fernet key must NEVER be committed.
+artifacts/admin_credentials/
+
 # Qwen API credential fallbacks (never commit real keys)
 docs/qwen_api_base_url.txt
 docs/qwen_api_key.txt
@@ -111,4 +115,3 @@ artifacts/r2_cache/
 
 # Phase 1 ToonOut: 885 MB BiRefNet anime-FT weights (operator pulls separately)
 models/cutout/
-.claude/worktrees/
