@@ -1,13 +1,24 @@
 #!/usr/bin/env python3
 """
-Bridge: brand-config YAML  →  Platform Setup Helper prefill.
+Bridge: brand-config YAML + unified brand registry  →  Platform Setup Helper prefill.
 
-Scans brand-config YAMLs (any file with a top-level `brand_admin:` key, e.g.
-`way_stream_sanctuary_brand-config.yaml`) and emits two things:
+Emits two things:
 
   1. brand-wizard-app/public/platform_setup_helper_brands.json  (PUBLIC, no PII)
-       { "<brand_id>": {name, focus, desc, slug, market} }
-     → the helper reads this so `?brand=<id>` alone auto-prefills name/focus/desc/slug/market.
+       { "<brand_id>": {name, focus, desc, slug, market, publisher} }
+     → the helper reads this so `?brand=<id>` alone auto-prefills the fields AND shows the
+       PUBLICATION CORP / IMPRINT name (KDP "Published by") — e.g. stillness_press_en_us →
+       "Stillness Press", devotion_path_en_us → "Open Vessel Press".
+     Two sources are merged:
+       • operator brand-config YAMLs (any file with a top-level `brand_admin:` key, e.g.
+         `way_stream_sanctuary_brand-config.yaml`) → name/focus/desc/slug/market.
+       • the canonical 39×14 unified registry (config/brand_management/
+         global_brand_registry_unified.yaml) → a `publisher`-only entry per brand_id so the
+         wizard-assigned ids resolve their imprint even without a per-brand config.
+     The `publisher` label is resolved by the SAME longest-prefix corp lookup #1611 uses
+     in scripts/onboarding/gen_brand_admin_brands.py — the registry's `publication_corp`
+     (longest-prefix base→imprint already baked at registry-build time), with a longest-prefix
+     fallback against brand_display_names.yaml for ids absent from the registry.
      Deliberately NO email/phone here — it would publish every brand's contact email on a
      public URL. Email rides only on a per-brand launch link (below).
 
@@ -21,7 +32,7 @@ Brand id = filename stem minus `_brand-config`. Optional explicit overrides in t
 (`brand_admin.brand_name|brand_focus|brand_desc|brand_slug`) win over derivation.
 
 Usage: python3 scripts/onboarding/gen_setup_helper_brands.py [--check]
-Re-run after adding/editing a brand config.
+Re-run after adding/editing a brand config or rebuilding the unified registry.
 """
 from __future__ import annotations
 
@@ -41,6 +52,8 @@ except ImportError:
 REPO = Path(__file__).resolve().parent.parent.parent
 PUBLIC = REPO / "brand-wizard-app" / "public" / "platform_setup_helper_brands.json"
 OPLINKS = REPO / "artifacts" / "onboarding" / "setup_helper_brand_links.tsv"
+UNIFIED = REPO / "config" / "brand_management" / "global_brand_registry_unified.yaml"
+DISPLAY_NAMES = REPO / "config" / "catalog_planning" / "brand_display_names.yaml"
 PUBLIC_BASE = "https://brand-admin-onboarding.pages.dev/platform_setup_helper"
 LOCAL_BASE = "http://localhost:5174/platform_setup_helper.html"
 
@@ -53,6 +66,56 @@ SCAN_GLOBS = [
 
 def humanize(s) -> str:
     return str(s or "").replace("_", " ").replace("-", " ").strip()
+
+
+# ── Publisher / imprint (KDP "Published by") resolver — same source of truth as #1611 ──
+# (scripts/onboarding/gen_brand_admin_brands.py): the unified registry's `publication_corp`,
+# keyed by full brand_id, where longest-prefix base→imprint is already baked at build time.
+# For ids absent from the registry (e.g. operator demo configs) we fall back to a longest-
+# prefix match against brand_display_names.yaml, then to the brand's own humanized name.
+
+def _load_corp_index() -> dict:
+    """brand_id -> publication corp/imprint name, from the unified 39×14 registry."""
+    if not UNIFIED.exists():
+        return {}
+    reg = (yaml.safe_load(UNIFIED.read_text(encoding="utf-8")) or {}).get("brands") or {}
+    out = {}
+    for bid, b in reg.items():
+        if isinstance(b, dict):
+            corp = b.get("publication_corp") or b.get("display_name")
+            if corp:
+                out[bid] = corp
+    return out
+
+
+def _load_imprint_by_base() -> dict:
+    """base archetype id -> imprint name, for longest-prefix fallback (ids not in registry)."""
+    if not DISPLAY_NAMES.exists():
+        return {}
+    dn = yaml.safe_load(DISPLAY_NAMES.read_text(encoding="utf-8")) or {}
+    out = {}
+    for sect in ("teacher_brands", "standard_brands"):
+        for base, info in (dn.get(sect) or {}).items():
+            if isinstance(info, dict) and info.get("display_name"):
+                out[base] = info["display_name"]
+    return out
+
+
+def resolve_publisher(brand_id: str, corp_by_id: dict, imprint_by_base: dict,
+                      fallback_name: str = "") -> str:
+    """Publisher/imprint label for a brand_id (reuses #1611's publication_corp source)."""
+    # 1) exact full-id hit from the unified registry (canonical 39×14 — longest-prefix baked)
+    corp = corp_by_id.get(brand_id)
+    if corp:
+        return corp
+    # 2) longest-prefix against brand_display_names base ids (ids absent from the registry)
+    parts = str(brand_id or "").split("_")
+    for cut in range(len(parts), 0, -1):
+        base = "_".join(parts[:cut])
+        if base in imprint_by_base:
+            return imprint_by_base[base]
+    # 3) the brand's own display name, else a humanized id
+    return fallback_name or " ".join(w.capitalize() for w in str(brand_id or "").split("_"))
 
 
 def brand_id_from_path(p: Path) -> str:
@@ -97,6 +160,9 @@ def launch_url(base: str, b: dict, with_email: bool) -> str:
 
 
 def build() -> dict:
+    corp_by_id = _load_corp_index()
+    imprint_by_base = _load_imprint_by_base()
+
     files = []
     for g in SCAN_GLOBS:
         files += glob.glob(g)
@@ -110,13 +176,26 @@ def build() -> dict:
         if not isinstance(cfg, dict) or "brand_admin" not in cfg:
             continue
         b = derive(cfg, brand_id_from_path(p))
+        b["publisher"] = resolve_publisher(b["id"], corp_by_id, imprint_by_base,
+                                            fallback_name=b["name"])
         brands[b["id"]] = b
+
+    # Seed the canonical 39×14 brand_ids the wizard assigns (e.g. stillness_press_en_us)
+    # with a publisher-only entry, so `?brand=<id>` resolves its imprint even when no
+    # operator brand-config exists yet. Operator configs above win (don't overwrite).
+    for bid, corp in corp_by_id.items():
+        if bid not in brands:
+            brands[bid] = {"id": bid, "publisher": corp}
     return brands
 
 
 def render_public(brands: dict) -> str:
-    public = {bid: {k: b[k] for k in ("name", "focus", "desc", "slug", "market")}
-              for bid, b in brands.items()}
+    public = {}
+    for bid, b in brands.items():
+        entry = {k: b[k] for k in ("name", "focus", "desc", "slug", "market") if k in b}
+        if b.get("publisher"):
+            entry["publisher"] = b["publisher"]
+        public[bid] = entry
     return json.dumps(public, ensure_ascii=False, indent=2, sort_keys=True) + "\n"
 
 
@@ -139,17 +218,22 @@ def main() -> int:
     PUBLIC.parent.mkdir(parents=True, exist_ok=True)
     PUBLIC.write_text(public_str, encoding="utf-8")
 
+    # Operator launch links only for brands with a full operator config (carry name/email).
+    # Registry-seeded publisher-only entries have no contact info and get no launch link.
+    op_brands = {bid: b for bid, b in brands.items() if "name" in b}
     OPLINKS.parent.mkdir(parents=True, exist_ok=True)
     lines = ["id\tname\temail\tcapture_url_local\tguidance_url_public"]
-    for bid, b in brands.items():
-        lines.append("\t".join([bid, b["name"], b["email"],
+    for bid, b in op_brands.items():
+        lines.append("\t".join([bid, b["name"], b.get("email", ""),
                                 launch_url(LOCAL_BASE, b, True),
                                 launch_url(PUBLIC_BASE, b, False)]))
     OPLINKS.write_text("\n".join(lines) + "\n", encoding="utf-8")
 
-    print(f"{len(brands)} brand(s) → {PUBLIC.name} (public, no email) + {OPLINKS} (operator, gitignored)")
-    for bid in brands:
-        print("  -", bid)
+    seeded = len(brands) - len(op_brands)
+    print(f"{len(op_brands)} operator brand(s) + {seeded} registry publisher entries "
+          f"→ {PUBLIC.name} (public, no email) + {OPLINKS} (operator, gitignored)")
+    for bid in op_brands:
+        print("  -", bid, "→", op_brands[bid].get("publisher", ""))
     return 0
 
 

@@ -109,7 +109,7 @@ html,body{width:100%;min-height:100%;font-family:"DM Sans",sans-serif;background
 <script>
 const DATA_URL='./platform_setup_helper_data.json';
 const PROGRESS_KEY='psh_progress';   // non-sensitive: done flags + login (NEVER the password)
-let DATA=null, MARKET='en', BRAND={id:'',name:'',focus:'',desc:'',slug:''}, PROGRESS={}, CRED_STATUS={};
+let DATA=null, MARKET='en', BRAND={id:'',name:'',focus:'',desc:'',slug:'',publisher:''}, PROGRESS={}, CRED_STATUS={};
 let POS=0;   // index into buildScreens(); 0 = brand intro
 let SERVER_UP=false;   // local vault server reachable? operator-run = show capture; admin/public = guidance only
 
@@ -126,7 +126,8 @@ function fillTpl(tpl){ return String(tpl||'')
   .replace(/\{brand_email\}/g,BRAND.email||(MARKET==='ja'?'ブランドのメール':"your brand's email")); }
 function readBrandFromUrl(){ const q=new URLSearchParams(location.search);
   BRAND.id=q.get('brand')||q.get('brand_id')||''; BRAND.name=q.get('brand_name')||''; BRAND.focus=q.get('brand_focus')||'';
-  BRAND.desc=q.get('brand_desc')||''; BRAND.email=q.get('brand_email')||''; BRAND.slug=q.get('brand_slug')||slug(BRAND.name); if(q.get('market')==='ja') MARKET='ja'; }
+  BRAND.desc=q.get('brand_desc')||''; BRAND.email=q.get('brand_email')||''; BRAND.slug=q.get('brand_slug')||slug(BRAND.name);
+  BRAND.publisher=q.get('publisher')||q.get('brand_publisher')||''; if(q.get('market')==='ja') MARKET='ja'; }
 // Bridge: fill any missing brand fields from the brand-config registry (gen_setup_helper_brands.py).
 async function loadBrandConfig(){
   if(!BRAND.id) return;
@@ -136,6 +137,7 @@ async function loadBrandConfig(){
     if(!BRAND.focus) BRAND.focus=b.focus||'';
     if(!BRAND.desc) BRAND.desc=b.desc||'';
     if(!BRAND.slug) BRAND.slug=b.slug||'';
+    if(!BRAND.publisher) BRAND.publisher=b.publisher||'';
     if(b.market && !new URLSearchParams(location.search).get('market')) MARKET=b.market;
   }catch(e){}
 }
@@ -160,7 +162,7 @@ function doneCount(){ return platforms().filter(p=>PROGRESS[pkey()].done[p.id]).
 
 function renderTop(){
   document.getElementById('tb-title').textContent=t('page_title');
-  document.getElementById('brand-pill').textContent=BRAND.name||'No brand set';
+  document.getElementById('brand-pill').textContent=(BRAND.publisher||BRAND.name)||'No brand set';
   const mk=document.getElementById('mkt-toggle'); mk.innerHTML='';
   (DATA.markets||[]).forEach(m=>{ const b=document.createElement('button');
     b.className='mkt-btn'+(m.id===MARKET?' active':''); b.textContent=m.label_native||m.label_en||m.id;
@@ -180,6 +182,7 @@ function railHTML(ctx){
 function brandScreen(){
   return `<div class="intro-title">${esc(t('page_title'))}</div><div class="intro-sub">${esc(t('intro'))}</div>
   <div class="sec-label">${esc(MARKET==='ja'?'ブランド情報':'Your brand')}</div>
+  ${BRAND.publisher?`<div class="note">${esc(MARKET==='ja'?'出版社（KDP「発行元」）：':'Publisher (KDP “Published by”): ')}<strong>${esc(BRAND.publisher)}</strong></div>`:''}
   <div class="bb-grid">
     <div class="bb-field"><label>${esc(MARKET==='ja'?'ブランド名':'Brand name')}</label><input id="bf-name" value="${esc(BRAND.name)}" placeholder="${esc(MARKET==='ja'?'例：インナーライト':'e.g. Inner Light Press')}"></div>
     <div class="bb-field"><label>${esc(MARKET==='ja'?'フォーカス（一言）':'Focus (one line)')}</label><input id="bf-focus" value="${esc(BRAND.focus)}" placeholder="${esc(MARKET==='ja'?'例：不安をやわらげる実践':'e.g. calm tools for anxiety')}"></div>
