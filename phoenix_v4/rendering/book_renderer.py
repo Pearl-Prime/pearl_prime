@@ -112,6 +112,15 @@ _ASSEMBLY_SLOT_HEADING_LINE_RE = re.compile(
     r"^#{1,3}\s+(HOOK|STORY|SCENE)(?:\s+v\d+)?(?:\s+.*)?$"
 )
 
+# DEFECT 7 (composer-guard lane, fail-closed backstop): bare (no-"## ") atom-id
+# labels — e.g. "INTEGRATION v06", "RECOGNITION v04" — leak verbatim into reader
+# prose when a malformed CANONICAL.txt header is absorbed into the prior atom
+# body. The "## "-prefixed scrubbers above never match these, so they slip
+# through. This pattern matches a standalone all-caps (+ underscore) atom-id
+# label followed by " vNN" and nothing else, so no raw atom-id label reaches
+# reader prose. Whole-line match only — natural prose is never of this form.
+_BARE_ATOM_ID_LINE_RE = re.compile(r"^[A-Z_]+ v\d+$")
+
 # Python dict blobs accidentally pasted into prose (pipeline/debug).
 _INTRO_DICT_OPEN_RE = re.compile(r"\{(?:'intro'|\"intro\"):")
 
@@ -131,7 +140,16 @@ _STORY_SIMPLE_LEAK = re.compile(
 
 
 def _scrub_inline_leaked_slot_markers(line: str) -> str:
-    """Remove concatenated assembly markers (## HOOK v01 --- ---) while keeping prose."""
+    """Remove concatenated assembly markers (## HOOK v01 --- ---) while keeping prose.
+
+    DEFECT 7 composer-guard: do NOT early-return when "##" is absent — a bare
+    standalone atom-id label ("INTEGRATION v06") carries no "##" yet must still be
+    scrubbed so it never reaches reader prose. A whole stripped line that is just a
+    bare atom-id label collapses to the empty string.
+    """
+    # Bare-atom-id backstop runs first and is "##"-independent.
+    if _BARE_ATOM_ID_LINE_RE.match(line.strip()):
+        return ""
     if "##" not in line:
         return line
     s = line
@@ -291,6 +309,7 @@ def _strip_scaffolding_lines(text: str) -> str:
             or _CHAPTER_RE.match(stripped)
             or _ASSEMBLY_SLOT_HEADING_LINE_RE.match(stripped)
             or _SECTION_VARIANT_RE.match(stripped)
+            or _BARE_ATOM_ID_LINE_RE.match(stripped)
         ):
             continue
         out.append(stripped)
@@ -704,6 +723,7 @@ def delivery_contract_gate(text: str, source_hint: str = "output") -> None:
       - Markdown dividers: ---
       - Chapter scaffold markers: ===...=== CHAPTER
       - Assembly section headers: ## HOOK / ## STORY / ## SCENE (case-sensitive slot tokens) / ## MECHANISM_DEPTH / …
+      - Bare atom-id labels: standalone ``<UPPER_TOKEN> vNN`` lines (e.g. ``INTEGRATION v06``) leaked from malformed CANONICAL.txt headers
       - Python intro-dict blobs: ``{'intro':`` / ``{\"intro\":``
     """
     violations: list[str] = []
@@ -727,6 +747,12 @@ def delivery_contract_gate(text: str, source_hint: str = "output") -> None:
         if _SECTION_VARIANT_RE.match(stripped):
             violations.append(
                 f"  line {lineno}: assembly section header leaked {stripped[:50]!r}"
+            )
+        if _BARE_ATOM_ID_LINE_RE.match(stripped):
+            # DEFECT 7 fail-closed backstop: a bare atom-id label
+            # ("INTEGRATION v06") leaked from a malformed CANONICAL.txt header.
+            violations.append(
+                f"  line {lineno}: bare atom-id label leaked {stripped[:50]!r}"
             )
         if _INTRO_DICT_OPEN_RE.search(line):
             violations.append(

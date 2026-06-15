@@ -1349,13 +1349,52 @@ def post_compose_sanitize_chapter(
     return t.strip()
 
 
+def _match_is_sentence_bounded(text: str, start: int, end: int) -> bool:
+    """True iff the [start:end) span is bounded by a sentence/line boundary on BOTH sides.
+
+    A left boundary is start-of-text, start-of-line, or text immediately after a
+    sentence terminator (``.!?``) + whitespace. A right boundary is end-of-text,
+    end-of-line, or a sentence terminator (optionally followed by whitespace).
+    Used by the empty-``replacements`` deletion guard so a surplus phrase can only be
+    removed when it constitutes a whole sentence/line — never a bare mid-sentence
+    substring (which would orphan the surrounding clause).
+    """
+    # Left side: walk back over leading whitespace, then require BOL / SOT / terminator.
+    i = start
+    while i > 0 and text[i - 1] in " \t":
+        i -= 1
+    if i == 0:
+        left_ok = True
+    else:
+        prev = text[i - 1]
+        left_ok = prev in ".!?\n\r"
+    if not left_ok:
+        return False
+    # Right side: walk forward over trailing whitespace, then require EOL / EOT / terminator.
+    j = end
+    while j < len(text) and text[j] in " \t":
+        j += 1
+    if j >= len(text):
+        return True
+    nxt = text[j]
+    return nxt in ".!?\n\r"
+
+
 def _limit_case_insensitive_phrase_occurrences(
     text: str,
     phrase: str,
     keep: int,
     replacements: tuple[str, ...],
 ) -> tuple[str, int]:
-    """Replace occurrences beyond ``keep`` with rotating alternates. Returns (new_text, replaced_n)."""
+    """Replace occurrences beyond ``keep`` with rotating alternates. Returns (new_text, replaced_n).
+
+    When ``replacements`` is empty the surplus match would otherwise be deleted in
+    place; that shears the containing sentence and orphans a byte-identical tail
+    (DEFECT 2 — e.g. "Start with the pressure under the sternum. still bracing.").
+    To prevent that, an empty-``replacements`` deletion is refused unless the match
+    is bounded by sentence boundaries on BOTH sides (whole-sentence / whole-line
+    removal only); a non-bounded surplus match is left untouched.
+    """
     if not text or not phrase:
         return text, 0
     pat = re.compile(re.escape(phrase), re.IGNORECASE)
@@ -1368,13 +1407,58 @@ def _limit_case_insensitive_phrase_occurrences(
         n += 1
         if n <= keep:
             parts.append(m.group(0))
-        else:
-            alt = replacements[(n - keep - 1) % len(replacements)] if replacements else ""
-            parts.append(alt)
+        elif replacements:
+            parts.append(replacements[(n - keep - 1) % len(replacements)])
             replaced += 1
+        elif _match_is_sentence_bounded(text, m.start(), m.end()):
+            # Whole-sentence/whole-line removal is safe — drop the match.
+            replaced += 1
+        else:
+            # Refuse in-place deletion of a mid-sentence substring; keep it intact.
+            parts.append(m.group(0))
+            n -= 1
         pos = m.end()
     parts.append(text[pos:])
     return "".join(parts), replaced
+
+
+# Sentence splitter used by furniture dedupe — boundary AFTER a terminator + space.
+_SENTENCE_SPLIT_RE = re.compile(r"(?<=[.!?])\s+")
+
+# Genuine standalone scene-furniture signatures: each is a complete environmental
+# descriptor clause/sentence. Capping these book-wide removes repeated lighting/
+# locative furniture without shearing prose.
+#
+# DEFECT 2 (truncation orphans): the former list ALSO contained lead/mid-clause
+# fragments of REAL teaching sentences ("by the time you", "that is the part",
+# "not to fix anything", "fix anything just to give", "is a body that",
+# "you can see the", etc.). Capping deleted those substrings IN PLACE, orphaning
+# the surrounding sentence tail (e.g. "...sternum. still bracing." 153x book-wide).
+# Those sentence-interior fragments are PURGED here — they are interiors of real
+# sentences, never standalone furniture, and must never be matched.
+_SCENE_FURNITURE_SIGNATURES = (
+    "soft daylight along the sill",
+    "muted light along the window",
+    "soft traffic noise from outside",
+    "outside noise drifts in without detail",
+    "a hallway hum carries through the corridor",
+    "route motion keeps the rhythm nearby",
+    "the cursor waits where you left it",
+    "the cursor holds where you left it",
+    "a coffee ring stays on the coaster",
+    "your badge stays in your pocket",
+    "a pale reflection at the glass edge",
+    "a shifting reflection at the window",
+    "the street below is visible through the glass",
+    "the street below is visible",
+    "gray light through the window",
+    "an engine note from outside",
+)
+
+
+def _normalize_sentence_for_furniture(sentence: str) -> str:
+    """Lowercased, whitespace-collapsed form used for signature containment tests."""
+    return re.sub(r"\s+", " ", sentence).strip().lower()
 
 
 def dedupe_scene_furniture_book(
@@ -1384,94 +1468,67 @@ def dedupe_scene_furniture_book(
 ) -> tuple[str, list[str]]:
     """
     After ``strengthen_chapter_flow_for_delivery``, generic lighting normalization can
-    repeat the same phrase across many chapters. Cap each known signature string book-wide.
+    repeat the same scene-furniture phrase across many chapters. Cap each known
+    standalone-furniture signature book-wide.
 
-    Extra occurrences are removed (single space) rather than swapped for alternate imagery,
-    to avoid breaking grammar when the phrase sits inside a longer broken clause.
+    Capping is done at SENTENCE granularity (DEFECT 2 fix): the text is split on
+    sentence boundaries and any surplus occurrence past ``max_each`` drops the WHOLE
+    containing sentence — never a bare substring. Deleting a substring in place sheared
+    real sentences and orphaned byte-identical tails across every book; dropping whole
+    sentences cannot orphan a tail. Only genuine standalone furniture descriptors are
+    in ``_SCENE_FURNITURE_SIGNATURES``; sentence-interior teaching fragments have been
+    purged from it.
     """
     notes: list[str] = []
-    work = text or ""
-    signatures = (
-        "soft daylight along the sill",
-        "muted light along the window",
-        "soft traffic noise from outside",
-        "outside noise drifts in without detail",
-        "a hallway hum carries through the corridor",
-        "route motion keeps the rhythm nearby",
-        "the cursor waits where you left it",
-        "the cursor holds where you left it",
-        "a coffee ring stays on the coaster",
-        "your badge stays in your pocket",
-        "a pale reflection at the glass edge",
-        "a shifting reflection at the window",
-        "the street below is visible through the glass",
-        "the street below is visible",
-        "the street below is",
-        "gray light through the window",
-        # Sprint-1 additions — depth-pass phrases that repeatedly fire within chapters
-        "moves through the room",
-        "holds where you left it",
-        "an engine note from outside",
-        "light over the window",
-        "what this means is that",
-        "and your nervous system",
-        "the desk holds the pen",
-        "you can see the",
-        # Sprint-1 wave-3 — multi-fill depth teaching phrases
-        "the point is that",
-        "a different input for a moment",
-        "you do not need to believe",
-        "doing exactly what it was",
-        "is a body that",
-        "by the time you",
-        "your body has already",
-        "before you move on",
-        # Sprint-1 wave-4 — teaching phrases from full-reflection depth pass
-        "your body is running",
-        "fix anything just to give",
-        "just to give yourself",
-        "change from this moment",
-        "happened or did not happen",
-        "did not happen is exactly",
-        "happen is exactly right",
-        "ahjan describes this as",
-        "the alarm without threat",
-        "i want you to",
-        "i want to name",
-        "you do not need",
-        "because the alarm doesn",
-        "not to fix anything",
-        "at the remote work",
-        "that just try it",
-        "this is why the",
-        # Sprint-1 wave-5 — em-dash variants not caught by plain regex
-        "happened — or did not happen — is exactly right",
-        "now, notice something",
-        # Sprint-1 wave-6 — period-separated phrases not caught by word-boundary search
-        "that. just try it",
-        "nothing has to forward",
-        "the cost of this",
-        "both are fine whatever",
-        "both are fine. whatever",
-        "breath at a time",
-        "a nervous system that",
-        "she does not know",
-        "this is not laziness",
-        "is a nervous system",
-        # Sprint-1 wave-7 — TEACHER_DOCTRINE & depth boilerplate: book-wide density >12 cap
-        "drawing on ahjan's mindfulness",
-        "ahjan's mindfulness and somatic",
-        "and somatic teaches us",
-        "according to ahjan",
-        "that is the part",
-        "the remote work improved",
-    )
-    for sig in signatures:
-        work, n = _limit_case_insensitive_phrase_occurrences(work, sig, max_each, ())
+    source = text or ""
+    if not source.strip():
+        return source.strip(), notes
+
+    # Split into sentence units while preserving the trailing whitespace/newlines that
+    # follow each terminator so reassembly is loss-free.
+    pieces = _SENTENCE_SPLIT_RE.split(source)
+    seps = _SENTENCE_SPLIT_RE.findall(source)
+
+    counts: dict[str, int] = {}
+    removed: dict[str, int] = {}
+    kept_pieces: list[str] = []
+    kept_seps: list[str] = []
+
+    for idx, piece in enumerate(pieces):
+        norm = _normalize_sentence_for_furniture(piece)
+        drop_sig: Optional[str] = None
+        for sig in _SCENE_FURNITURE_SIGNATURES:
+            if sig in norm:
+                counts[sig] = counts.get(sig, 0) + 1
+                if counts[sig] > max_each:
+                    drop_sig = sig
+                    break
+        if drop_sig is not None:
+            removed[drop_sig] = removed.get(drop_sig, 0) + 1
+            # Drop this whole sentence; do not carry its separator forward.
+            continue
+        kept_pieces.append(piece)
+        # The separator that FOLLOWS this piece (if any) is retained.
+        if idx < len(seps):
+            kept_seps.append(seps[idx])
+        else:
+            kept_seps.append("")
+
+    # Reassemble: piece + its following separator, in order.
+    rebuilt_parts: list[str] = []
+    for piece, sep in zip(kept_pieces, kept_seps):
+        rebuilt_parts.append(piece)
+        rebuilt_parts.append(sep)
+    work = "".join(rebuilt_parts)
+
+    for sig, n in removed.items():
         if n:
             notes.append(f"removed_extra_occurrences: {sig!r} x{n}")
+
     work = re.sub(r"[ \t]{2,}", " ", work)
     work = re.sub(r"\n{3,}", "\n\n", work)
+    # Collapse any whitespace left dangling before a sentence terminator by a drop.
+    work = re.sub(r"[ \t]+([.!?])", r"\1", work)
     return work.strip(), notes
 
 

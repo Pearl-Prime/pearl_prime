@@ -45,11 +45,23 @@ def _sentences(text: str) -> list[str]:
     return [s.strip() for s in re.split(r"(?<=[.!?])\s+", text.strip()) if s.strip()]
 
 
+# Original narrow form: "[Placeholder: ...]" / "[Missing: ...]" / "[Silence: ...]".
 _PLACEHOLDER_RE = re.compile(r"^\[(?:Placeholder|Missing|Silence)\s*:")
+# DEFECT 5 (hook_placeholders): broaden to catch unfilled editorial/HOOK stub
+# forms that reach reader prose, e.g. "[Persona-specific hook for <persona> × <topic>]",
+# "[... hook for ...]", and TODO/TKTK/TBD/DRAFT markers. Case-insensitive; matches
+# the whole bracketed token so it cannot fire on prose that merely contains the word.
+_PLACEHOLDER_BRACKET_RE = re.compile(
+    r"^\[[^\]]*\b(?:placeholder|hook for|persona-specific|todo|tktk|tbd|draft)\b[^\]]*\]$",
+    re.IGNORECASE,
+)
 
 
 def _is_placeholder_text(text: str) -> bool:
-    return bool(_PLACEHOLDER_RE.match((text or "").strip()))
+    stripped = (text or "").strip()
+    if not stripped:
+        return False
+    return bool(_PLACEHOLDER_RE.match(stripped) or _PLACEHOLDER_BRACKET_RE.match(stripped))
 
 
 _CHAPTER_INDEX_TLS: int = 0  # Thread-local-ish chapter index for variant rotation
@@ -107,6 +119,40 @@ def _pick_variant(options: list[str], *seed_parts: str) -> str:
 def _normalize_emotional_job(emotional_job: str) -> str:
     job = (emotional_job or "").strip().lower()
     return job if job in _EMOTIONAL_JOBS else ""
+
+
+# DEFECT 1 (cross_book_transitions): the planner emits arc-role vocab
+# (ALLOWED_EMOTIONAL_ROLES in arc_loader.py = recognition/destabilization/
+# reframe/stabilization/integration, plus legacy turn/opening/destabilize/
+# escalation/landing) that is NOT identical to the bridge bank's emotional-job
+# vocab (_EMOTIONAL_JOBS). recognition/reframe/integration already overlap, but
+# destabilization/stabilization (and the legacy synonyms) fall through to job=''
+# so _select_bridge_candidate is skipped and the hardcoded fallback pool fires.
+# Mapping these onto bank jobs lets the data-driven 'Ahead of you:' bank fire.
+_ARC_ROLE_TO_EMOTIONAL_JOB = {
+    "turn": "mechanism",
+    "opening": "recognition",
+    "destabilize": "mechanism",
+    "destabilization": "mechanism",
+    "escalation": "mechanism",
+    "landing": "resolution",
+    "stabilization": "resolution",
+}
+
+
+def _resolve_emotional_job(emotional_job: str) -> str:
+    """Resolve a planner arc-role OR a bridge-bank emotional-job to a bank job.
+
+    Returns '' only when the role maps to nothing the bridge bank can serve.
+    """
+    raw = (emotional_job or "").strip().lower()
+    if not raw:
+        return ""
+    direct = _normalize_emotional_job(raw)
+    if direct:
+        return direct
+    mapped = _ARC_ROLE_TO_EMOTIONAL_JOB.get(raw, "")
+    return mapped if mapped in _EMOTIONAL_JOBS else ""
 
 
 def _load_mechanism_thesis_families() -> dict[str, Any]:
@@ -1866,6 +1912,64 @@ def _fallback_takeaway(
     return template.format(core=core)
 
 
+# DEFECT 1 (cross_book_transitions): per-keyword fallback pools. The original
+# code returned ONE constant per thesis keyword, so every book with the same
+# thesis keyword emitted a byte-identical bridge. Each branch now offers several
+# topically-faithful variants routed through _pick_legacy_bridge_with_memory,
+# whose seed mixes book_seed/persona/topic AND whose bridge_memory dedup prevents
+# the same line repeating >1x within a book.
+_FALLBACK_THREAD_KEYWORD_POOLS: tuple[tuple[tuple[str, ...], tuple[str, ...]], ...] = (
+    (
+        ("regret", "choice"),
+        (
+            "What remains is the harder part: how to choose when loss still feels louder than relief.",
+            "The next test is the choice itself, made while regret is still arguing for the safer move.",
+            "From here the question narrows to one decision you keep deferring because loss speaks first.",
+        ),
+    ),
+    (
+        ("comparison",),
+        (
+            "The next pressure point is harder to admit: what happens when someone else's life starts writing your standards for you.",
+            "What remains is the comparison that keeps measuring your day against a version of someone else's.",
+            "From here the work is reclaiming the standard you outsourced to everyone you measure yourself against.",
+        ),
+    ),
+    (
+        ("alarm", "false alarm"),
+        (
+            "What remains is the moment after the alarm fires, when your body still wants to obey a prediction.",
+            "The next pressure point is the second after the alarm, when the body is already braced for a threat that may not come.",
+            "From here the question is what you do once the alarm has fired and the prediction it made still feels like fact.",
+        ),
+    ),
+    (
+        ("shame",),
+        (
+            "What remains is the sentence shame writes after the moment is over, when it tries to turn one event into identity.",
+            "The next move is catching shame mid-sentence, before one moment hardens into a verdict about who you are.",
+            "From here the work is refusing shame the last word it always reaches for after the moment has passed.",
+        ),
+    ),
+    (
+        ("overwhelm",),
+        (
+            "What remains is the quieter cost: what repeated overload teaches you to stop asking for.",
+            "The next pressure point is subtler: the requests overwhelm has quietly trained you to stop making.",
+            "From here the question is what overload has cost you in the asking, not just in the doing.",
+        ),
+    ),
+)
+
+_FALLBACK_THREAD_GENERIC_OPTIONS: tuple[str, ...] = (
+    "What remains is the next ordinary moment where the pattern tries to make the decision for you.",
+    "The next pressure point is smaller than it sounds: one place where your body asks for proof before you move.",
+    "From here, the question is how this pattern changes when you meet it before it becomes a whole story.",
+    "What remains is not more explanation. It is the first honest place this pattern asks for practice.",
+    "The next chapter begins where insight usually thins out: inside the moment you have to choose again.",
+)
+
+
 def _fallback_thread(
     thesis: str,
     chapter_index: int,
@@ -1873,11 +1977,17 @@ def _fallback_thread(
     *,
     emotional_job: str = "",
     bridge_memory: BridgeMemory | None = None,
+    book_seed: str = "",
+    persona_id: str = "",
+    topic_id: str = "",
 ) -> str:
     """Generate a thread-forward when THREAD slot is missing/placeholder."""
     if chapter_index >= total_chapters - 1:
         return ""  # Last chapter: no thread-forward
-    job = _normalize_emotional_job(emotional_job)
+    # DEFECT 1 (A): resolve planner arc-roles (destabilization/stabilization/etc.)
+    # onto bridge-bank jobs so the data-driven 'Ahead of you:' bank actually fires
+    # instead of falling through to the hardcoded pool.
+    job = _resolve_emotional_job(emotional_job)
     if job:
         selected = _select_bridge_candidate(
             bridge_type="thread_fallback",
@@ -1890,25 +2000,40 @@ def _fallback_thread(
         if selected:
             text = str(selected.get("text", "")).strip()
             return _gt(text, locale=_LOCALE_TLS) if _LOCALE_TLS else text
+    # DEFECT 1 (B)+(C): book-distinct literal fallback. Seed every pick with
+    # book_seed/persona/topic so identical thesis+chapter across different books
+    # diverge, and route through bridge_memory so no bridge repeats within a book.
+    seed_parts = (
+        thesis,
+        str(chapter_index),
+        str(total_chapters),
+        book_seed,
+        persona_id,
+        topic_id,
+    )
     lower = thesis.lower()
-    if "regret" in lower or "choice" in lower:
-        return "What remains is the harder part: how to choose when loss still feels louder than relief."
-    if "comparison" in lower:
-        return "The next pressure point is harder to admit: what happens when someone else's life starts writing your standards for you."
-    if "alarm" in lower or "false alarm" in lower:
-        return "What remains is the moment after the alarm fires, when your body still wants to obey a prediction."
-    if "shame" in lower:
-        return "What remains is the sentence shame writes after the moment is over, when it tries to turn one event into identity."
-    if "overwhelm" in lower:
-        return "What remains is the quieter cost: what repeated overload teaches you to stop asking for."
-    options = [
-        "What remains is the next ordinary moment where the pattern tries to make the decision for you.",
-        "The next pressure point is smaller than it sounds: one place where your body asks for proof before you move.",
-        "From here, the question is how this pattern changes when you meet it before it becomes a whole story.",
-        "What remains is not more explanation. It is the first honest place this pattern asks for practice.",
-        "The next chapter begins where insight usually thins out: inside the moment you have to choose again.",
-    ]
-    return _pick_variant(options, thesis, str(chapter_index), str(total_chapters))
+    # _pick_legacy_bridge_with_memory -> _pick_variant already applies locale
+    # translation (_gt) to the chosen string, so do NOT re-wrap the result here.
+    # Build the candidate pool keyword-first (topically faithful variants) then
+    # append the generic options. The wider combined pool gives bridge_memory
+    # enough headroom to avoid within-book repeats even on long all-fallback runs.
+    keyword_label = "generic"
+    candidate_pool: list[str] = []
+    for keywords, pool in _FALLBACK_THREAD_KEYWORD_POOLS:
+        if any(kw in lower for kw in keywords):
+            keyword_label = keywords[0]
+            candidate_pool = list(pool)
+            break
+    for opt in _FALLBACK_THREAD_GENERIC_OPTIONS:
+        if opt not in candidate_pool:
+            candidate_pool.append(opt)
+    return _pick_legacy_bridge_with_memory(
+        candidate_pool,
+        chapter_index=chapter_index,
+        bridge_memory=bridge_memory,
+        family_key=f"thread_fallback_literal|{keyword_label}",
+        seed_parts=seed_parts,
+    )
 
 
 def _exercise_setup_sentence(
@@ -2129,6 +2254,9 @@ def _shape_thread(
     *,
     emotional_job: str = "",
     bridge_memory: BridgeMemory | None = None,
+    book_seed: str = "",
+    persona_id: str = "",
+    topic_id: str = "",
 ) -> str:
     if thread_raw and not _is_placeholder_text(thread_raw):
         cleaned = re.sub(r"\bIn the next chapter,\s*", "", thread_raw, flags=re.I).strip()
@@ -2141,6 +2269,9 @@ def _shape_thread(
         total_chapters,
         emotional_job=emotional_job,
         bridge_memory=bridge_memory,
+        book_seed=book_seed,
+        persona_id=persona_id,
+        topic_id=topic_id,
     )
 
 
@@ -2586,6 +2717,9 @@ def compose_chapter_prose(
             total_chapters,
             emotional_job=emotional_role,
             bridge_memory=resolved_bridge_memory,
+            book_seed=book_seed,
+            persona_id=persona_id,
+            topic_id=topic_id,
         )
         if thesis
         else ""

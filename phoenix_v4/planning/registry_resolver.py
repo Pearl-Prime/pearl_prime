@@ -204,6 +204,45 @@ def _load_teacher_atoms(teacher_id: str) -> dict[str, list[dict]]:
 # CANONICAL.txt parser (persona atoms)
 # ---------------------------------------------------------------------------
 
+# DEFECT 7 (composer-guard lane, fail-closed backstop): 546/3,521 primary
+# CANONICAL.txt banks ship malformed block headers — every even-numbered block
+# loses its "## " prefix and is absorbed into the prior atom body, leaking raw
+# atom-id labels ("INTEGRATION v06", "RECOGNITION v04") verbatim into reader
+# prose. The content-repair lane prepends "## " to those lines; this guard makes
+# the parser ALSO recognize a *bare* block header — a standalone "<TOKEN> vNN"
+# line whose next non-empty line is "---" — so even an un-repaired atom still
+# parses into the correct SEPARATE blocks instead of one merged body.
+#
+# Token set is the EXACT enumerated list from the fix-spec's header-repair regex
+# (COMPOSER_FRONTIER_FIX_SPEC_20260614.md DEFECT 7) so the guard recognizes the
+# same headers the repair script would write.
+import re as _re
+
+_BARE_BLOCK_HEADER_TOKENS = frozenset({
+    "HOOK", "SCENE", "STORY", "REFLECTION", "PIVOT", "EXERCISE", "INTEGRATION",
+    "THREAD", "TAKEAWAY", "PERMISSION", "COMPRESSION", "RECOGNITION",
+    "MECHANISM_PROOF", "TURNING_POINT", "EMBODIMENT", "COST_REVEAL", "RECKONING",
+})
+# A standalone bare header: <UPPER_TOKEN> v<digits>, nothing else on the line.
+_BARE_BLOCK_HEADER_RE = _re.compile(r"^([A-Z][A-Z_]*)\s+v\d+$")
+
+
+def _is_bare_block_header(stripped: str, next_nonempty: str) -> bool:
+    """True if ``stripped`` is a bare (no-"## ") block header for a known token.
+
+    The next non-empty line must be the ``---`` metadata/body delimiter — this is
+    the same structural signature the content-repair lane keys on, and it prevents
+    a grammatical mid-atom phrase (which is never followed by a lone ``---``) from
+    being mistaken for a header.
+    """
+    if next_nonempty.strip() != "---":
+        return False
+    m = _BARE_BLOCK_HEADER_RE.match(stripped)
+    if not m:
+        return False
+    return m.group(1) in _BARE_BLOCK_HEADER_TOKENS
+
+
 def _parse_canonical_txt(path: Path, *, slot_type: Optional[str] = None) -> list[dict]:
     """Parse atoms/persona/topic/TYPE/CANONICAL.txt into list of atom dicts.
 
@@ -214,12 +253,19 @@ def _parse_canonical_txt(path: Path, *, slot_type: Optional[str] = None) -> list
         ---
         prose body
         ---
+
+    Also tolerant of MALFORMED banks where the "## " prefix is missing from a
+    block header (DEFECT 7 data corruption): a standalone ``TYPE vNN`` line whose
+    next non-empty line is ``---`` is recognized as a bare block header and starts
+    a new block, so the un-repaired atom-id label never gets absorbed into the
+    prior block's body and leaked into reader prose.
     """
     from phoenix_v4.planning.scene_atom_header_parser import attach_scene_metadata
 
     if not path.exists():
         return []
     text = path.read_text(encoding="utf-8")
+    raw_lines = text.splitlines()
     blocks: list[dict] = []
     current_id = ""
     current_header = ""
@@ -240,12 +286,28 @@ def _parse_canonical_txt(path: Path, *, slot_type: Optional[str] = None) -> list
             atom = attach_scene_metadata(atom, f"## {current_id}")
         blocks.append(atom)
 
-    for line in text.splitlines():
+    def _next_nonempty(start_idx: int) -> str:
+        for j in range(start_idx + 1, len(raw_lines)):
+            if raw_lines[j].strip():
+                return raw_lines[j]
+        return ""
+
+    for i, line in enumerate(raw_lines):
         stripped = line.strip()
         if stripped.startswith("## "):
             _flush_block()
             current_header = stripped
             current_id = stripped.replace("## ", "").strip()
+            body_lines = []
+            in_body = False
+            delimiter_count = 0
+        elif _is_bare_block_header(stripped, _next_nonempty(i)):
+            # Malformed bank: header line lost its "## " prefix. Treat exactly
+            # like a "## " header so the raw atom-id label cannot be absorbed
+            # into the prior block body.
+            _flush_block()
+            current_header = stripped
+            current_id = stripped
             body_lines = []
             in_body = False
             delimiter_count = 0

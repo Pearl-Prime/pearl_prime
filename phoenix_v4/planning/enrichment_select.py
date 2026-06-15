@@ -552,14 +552,115 @@ def _chapter_key(chapter_num: int) -> str:
     return f"chapter_{chapter_num:02d}"
 
 
-def _registry_type_lists(ch_data: Dict[str, Any]) -> Dict[str, List[Dict[str, Any]]]:
+# DEFECT 4 (cross-persona bleed, COMPOSER_FRONTIER_FIX_SPEC_20260614): registry/
+# {topic}.yaml is topic-keyed and was authored 100% from one persona (label
+# "Gen Z" == persona_id "gen_z_professionals"). The registry read path had NO
+# persona filter, so corporate_managers books rendered gen_z-authored HOOK
+# content (verified books 04/05, 12 foreign lines each). The fix below makes the
+# registry read persona-aware: any section whose `metadata.persona` resolves to a
+# DIFFERENT persona_id than the spine persona is dropped; on no-match the
+# selector falls through to persona_atom/teacher (mirrors the OPD-118
+# "no cross-persona spillover" policy, extended from deep_book_6h to standard_book).
+
+# Explicit registry-label -> canonical persona_id aliases. The registry stores a
+# display label ("Gen Z"); the spine emits a persona_id ("gen_z_professionals").
+# This map disambiguates labels that a token match alone cannot resolve (e.g.
+# bare "Gen Z" must map to gen_z_professionals, NOT gen_z_student).
+_REGISTRY_PERSONA_LABEL_ALIASES: Dict[str, str] = {
+    "genz": "gen_z_professionals",
+    "genzprofessional": "gen_z_professionals",
+    "genzprofessionals": "gen_z_professionals",
+}
+
+# Unauthored registry stub content (e.g. "[Persona-specific hook for X × Y]").
+# Per DEFECT 4 fix point (3): reject these so placeholder text never renders
+# regardless of persona. Matches a bracketed editorial stub that names a hook.
+_REGISTRY_PLACEHOLDER_RE = re.compile(
+    r"^\s*\[[^\]]*\b(?:persona-specific|hook for|placeholder|tbd|tktk|todo|draft)\b[^\]]*\]\s*$",
+    re.IGNORECASE,
+)
+
+
+def _norm_persona_token(value: Any) -> str:
+    """Reduce a persona id/label to a comparable lowercase alphanumeric token.
+
+    "Gen Z" -> "genz"; "gen_z_professionals" -> "genzprofessionals".
+    """
+    return re.sub(r"[^a-z0-9]+", "", str(value or "").lower())
+
+
+def _registry_persona_canonical(label: Any) -> str:
+    """Resolve a registry persona label to a canonical persona_id token.
+
+    Returns the normalized alphanumeric token of the resolved persona_id, or ""
+    when the label is blank (unknown/unlabeled -> caller treats as "no claim").
+    """
+    tok = _norm_persona_token(label)
+    if not tok:
+        return ""
+    if tok in _REGISTRY_PERSONA_LABEL_ALIASES:
+        return _norm_persona_token(_REGISTRY_PERSONA_LABEL_ALIASES[tok])
+    return tok
+
+
+def _registry_persona_matches(section_persona_label: Any, spine_persona_id: str) -> bool:
+    """True iff a registry section's persona is compatible with the spine persona.
+
+    Fail-OPEN only on absence: a section with NO persona label cannot be proven
+    foreign, so it is allowed (absence is not the documented bleed vector — the
+    bleed is explicitly-labeled "Gen Z" leaking into other personas). A section
+    whose label resolves to a DIFFERENT persona_id than the spine is rejected.
+    When the spine persona_id is itself blank we cannot compare, so allow.
+    """
+    spine_tok = _norm_persona_token(spine_persona_id)
+    if not spine_tok:
+        return True
+    sec_tok = _registry_persona_canonical(section_persona_label)
+    if not sec_tok:
+        return True
+    if sec_tok == spine_tok:
+        return True
+    # Prefix tolerance for label/id granularity drift (e.g. a label that
+    # resolves to the family stem of a more specific spine id), but only when
+    # the section token is a strict prefix of the spine token AND not itself a
+    # known sibling alias — this keeps gen_z_professionals vs gen_z_student
+    # distinct because both resolve via the alias map to full ids.
+    return False
+
+
+def _registry_section_persona(sec_data: Dict[str, Any]) -> Any:
+    """Extract a section's authored persona label from its metadata block."""
+    meta = sec_data.get("metadata") if isinstance(sec_data.get("metadata"), dict) else {}
+    return meta.get("persona") or sec_data.get("persona")
+
+
+def _registry_type_lists(
+    ch_data: Dict[str, Any],
+    persona_id: str = "",
+) -> Dict[str, List[Dict[str, Any]]]:
+    """Group a chapter's registry sections by slot type.
+
+    When ``persona_id`` is provided, sections whose authored persona resolves to
+    a different persona_id are dropped (DEFECT 4 cross-persona-bleed fix). A
+    section with no persona label is retained (cannot be proven foreign).
+    """
     sections = ch_data.get("sections") or {}
     by_type: Dict[str, List[Dict[str, Any]]] = defaultdict(list)
     if not isinstance(sections, dict):
         return by_type
+    spine_tok = _norm_persona_token(persona_id)
     for sec_key in sorted(sections.keys()):
         sec_data = sections[sec_key]
         if not isinstance(sec_data, dict):
+            continue
+        if spine_tok and not _registry_persona_matches(
+            _registry_section_persona(sec_data), persona_id
+        ):
+            logger.warning(
+                "DEFECT4: dropping registry section %s (persona=%r) — foreign to "
+                "spine persona_id=%r; falling through to persona_atom/teacher.",
+                sec_key, _registry_section_persona(sec_data), persona_id,
+            )
             continue
         st = str(sec_data.get("type") or "REFLECTION").strip().upper()
         by_type[st].append(sec_data)
@@ -1395,6 +1496,10 @@ def _try_registry_variant(
     vid = str(var.get("variant_id") or f"v{v_idx}")
     if not content:
         return None
+    # DEFECT 4 fix point (3): reject unauthored registry stubs so placeholder
+    # text never renders. Fall through to persona_atom/teacher instead.
+    if _REGISTRY_PLACEHOLDER_RE.match(content):
+        return None
     return content, vid, sec_data, v_idx
 
 
@@ -1418,6 +1523,10 @@ def _peek_registry_variant(
     var = variants[v_idx]
     content = str(var.get("content") or "").strip()
     if not content:
+        return None
+    # DEFECT 4 fix point (3): reject unauthored registry stubs (see
+    # _try_registry_variant). Keeps the peek consistent with selection.
+    if _REGISTRY_PLACEHOLDER_RE.match(content):
         return None
     vid = str(var.get("variant_id") or f"v{v_idx}")
     return content, vid
@@ -1452,12 +1561,12 @@ def peek_registry_content_for_beatmap_slot(
     ch_data = sections_root.get(ch_key)
     if not isinstance(ch_data, dict):
         ch_data = {}
-    reg_lists = _registry_type_lists(ch_data)
+    pid = (persona_id or "").strip()
+    reg_lists = _registry_type_lists(ch_data, persona_id=pid)
     reg_counters: Dict[str, int] = defaultdict(int)
 
     root = repo_root or REPO_ROOT
     teacher_atoms: Dict[str, List[dict]] = _load_teacher_atoms(tid) if tid else {}
-    pid = (persona_id or "").strip()
     rf = (beatmap.runtime_format or "").strip()
     if rf == "deep_book_6h" and pid:
         persona_atoms = _merged_persona_atoms_deep_6h(pid, topic, root, locale=locale)
@@ -1640,7 +1749,7 @@ def select_enrichment(
         ch_data = sections_root.get(ch_key)
         if not isinstance(ch_data, dict):
             ch_data = {}
-        reg_lists = _registry_type_lists(ch_data)
+        reg_lists = _registry_type_lists(ch_data, persona_id=pid)
         reg_counters: Dict[str, int] = defaultdict(int)
 
         chapter_index0 = bm_ch.number - 1
@@ -2863,6 +2972,20 @@ def _load_depth_content(
                 continue
             if sec_data.get("type") not in section_types:
                 continue
+            # DEFECT 4 (cross-persona bleed): skip sections authored for a
+            # different persona than the spine. This depth-resolver does not go
+            # through _registry_type_lists, so the persona filter is applied here
+            # directly. On no matching-persona section we return None and the
+            # caller falls through to persona_atom/teacher.
+            if persona_id and not _registry_persona_matches(
+                _registry_section_persona(sec_data), persona_id
+            ):
+                logger.warning(
+                    "DEFECT4: skipping depth registry section %s (persona=%r) — "
+                    "foreign to spine persona_id=%r.",
+                    _sec_key, _registry_section_persona(sec_data), persona_id,
+                )
+                continue
             variants = sec_data.get("variants", [])
             for pref in variant_preference:
                 pref_l = pref.lower()
@@ -2873,6 +2996,9 @@ def _load_depth_content(
                     vid = str(v.get("variant_id", "")).lower()
                     if pref_l in fam or pref_l in vid:
                         content = str(v.get("content") or "").strip()
+                        # DEFECT 4 fix point (3): never return unauthored stubs.
+                        if _REGISTRY_PLACEHOLDER_RE.match(content):
+                            continue
                         if content and len(content.split()) > 20:
                             return content
         return None
