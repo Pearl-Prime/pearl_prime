@@ -21,6 +21,8 @@ scripts/video/credential_setup/credentials_manifest.yaml
 # Brand admin platform credential vault (server/crypto.py: Fernet → artifacts/admin_credentials/<brand>.enc).
 # Encrypted at rest, but the per-brand .enc store and any exported Fernet key must NEVER be committed.
 artifacts/admin_credentials/
+# Setup-helper per-brand launch links — contain brand emails (operator-only, never commit).
+artifacts/onboarding/setup_helper_brand_links.tsv
 
 # Qwen API credential fallbacks (never commit real keys)
 docs/qwen_api_base_url.txt

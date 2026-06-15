@@ -122,10 +122,23 @@ function loadProgress(){ try{PROGRESS=JSON.parse(localStorage.getItem(PROGRESS_K
 function saveProgress(){ try{localStorage.setItem(PROGRESS_KEY,JSON.stringify(PROGRESS));}catch(e){} }
 function fillTpl(tpl){ return String(tpl||'')
   .replace(/\{brand_name\}/g,BRAND.name||'Your Brand').replace(/\{brand_focus\}/g,BRAND.focus||'')
-  .replace(/\{brand_desc\}/g,BRAND.desc||'').replace(/\{brand_slug\}/g,BRAND.slug||slug(BRAND.name)||'yourbrand'); }
+  .replace(/\{brand_desc\}/g,BRAND.desc||'').replace(/\{brand_slug\}/g,BRAND.slug||slug(BRAND.name)||'yourbrand')
+  .replace(/\{brand_email\}/g,BRAND.email||(MARKET==='ja'?'ブランドのメール':"your brand's email")); }
 function readBrandFromUrl(){ const q=new URLSearchParams(location.search);
   BRAND.id=q.get('brand')||q.get('brand_id')||''; BRAND.name=q.get('brand_name')||''; BRAND.focus=q.get('brand_focus')||'';
-  BRAND.desc=q.get('brand_desc')||''; BRAND.slug=q.get('brand_slug')||slug(BRAND.name); if(q.get('market')==='ja') MARKET='ja'; }
+  BRAND.desc=q.get('brand_desc')||''; BRAND.email=q.get('brand_email')||''; BRAND.slug=q.get('brand_slug')||slug(BRAND.name); if(q.get('market')==='ja') MARKET='ja'; }
+// Bridge: fill any missing brand fields from the brand-config registry (gen_setup_helper_brands.py).
+async function loadBrandConfig(){
+  if(!BRAND.id) return;
+  try{ const r=await fetch('./platform_setup_helper_brands.json',{cache:'no-store'}); if(!r.ok) return;
+    const b=(await r.json())[BRAND.id]; if(!b) return;
+    if(!BRAND.name) BRAND.name=b.name||'';
+    if(!BRAND.focus) BRAND.focus=b.focus||'';
+    if(!BRAND.desc) BRAND.desc=b.desc||'';
+    if(!BRAND.slug) BRAND.slug=b.slug||'';
+    if(b.market && !new URLSearchParams(location.search).get('market')) MARKET=b.market;
+  }catch(e){}
+}
 function platforms(){ return (DATA.platforms||[]).filter(p=>(p.markets||[]).includes(MARKET))
   .sort((a,b)=>(a.category===b.category?0:(a.category==='distribution'?-1:1))); }
 
@@ -206,7 +219,7 @@ function copyScreen(sc){
   h+=navHTML(); h+='</div>'; return h;
 }
 function credScreen(sc){
-  const p=sc.p, st=CRED_STATUS[p.id]||{}, login=(PROGRESS[pkey()].login||{})[p.id]||'';
+  const p=sc.p, st=CRED_STATUS[p.id]||{}, login=(PROGRESS[pkey()].login||{})[p.id]||BRAND.email||'';
   const sec=p.secret||{}, slabel=(MARKET==='ja'?(sec.label_ja||sec.label_en):sec.label_en)||t('secret_label');
   const shelp=(MARKET==='ja'?(sec.help_ja||sec.help_en):sec.help_en)||'';
   const done=!!PROGRESS[pkey()].done[p.id];
@@ -266,7 +279,7 @@ async function saveSecret(pid){
   const input=document.getElementById('sec-'+pid); if(!input) return;
   const secret=input.value; if(!secret){ secMsg(pid,'err',MARKET==='ja'?'値を入力してください。':'Enter a value first.'); return; }
   if(!BRAND.id){ secMsg(pid,'err',MARKET==='ja'?'先にブランドIDを設定（ブランド編集）。':'Set a brand id first (edit brand).'); return; }
-  const login=(PROGRESS[pkey()].login||{})[pid]||'';
+  const login=(PROGRESS[pkey()].login||{})[pid]||BRAND.email||'';
   try{
     const r=await fetch(credApiBase()+'/api/v1/setup-helper/credentials',{method:'POST',headers:{'Content-Type':'application/json'},
       body:JSON.stringify({brand_id:BRAND.id,platform:pid,username:{login:login},secret:secret})});
@@ -287,7 +300,7 @@ async function refreshCredStatus(){ CRED_STATUS={}; if(!BRAND.id) return;
 async function init(){ readBrandFromUrl();
   try{ const r=await fetch(DATA_URL,{cache:'no-store'}); DATA=await r.json(); }
   catch(e){ document.getElementById('app').innerHTML='<div class="loading">Could not load platform data.</div>'; return; }
-  if(!BRAND.slug) BRAND.slug=slug(BRAND.name); loadProgress(); await pingServer(); await refreshCredStatus(); render(); }
+  await loadBrandConfig(); if(!BRAND.slug) BRAND.slug=slug(BRAND.name); loadProgress(); await pingServer(); await refreshCredStatus(); render(); }
 init();
 </script>
 </body>

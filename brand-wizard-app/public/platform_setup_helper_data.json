@@ -92,7 +92,7 @@
       "setup_steps": {
         "en": [
           "Go to kdp.amazon.com and click Sign up. (If your company already has an Amazon account, click Sign in and skip to the Account Info step.)",
-          "On Amazon's “Create account” page: in “Your name” enter your company name, {brand_name}; in “Email” use the brand's email address; set a password and re-enter it.",
+          "On Amazon's “Create account” page: in “Your name” enter your company name, {brand_name}; in “Email” use {brand_email}; set a password and re-enter it.",
           "Click “Create your KDP account”, then enter the verification code Amazon emails you.",
           "Open Account Info → Author/Publisher Information: set your country, enter {brand_name} as the publisher name, and your company's legal name, business address and phone.",
           "Open Getting Paid and add the company royalty bank account: account-holder name, bank name, account number (or IBAN), routing number (US) or SWIFT/BIC (international), account type.",
@@ -100,7 +100,7 @@
         ],
         "ja": [
           "kdp.amazon.com を開き「サインアップ」をクリック。（会社のAmazonアカウントが既にある場合は「サインイン」し、アカウント情報の手順へ。）",
-          "Amazonの「アカウント作成」画面で、「お名前」に会社名「{brand_name}」、「Eメール」にブランドのメール、パスワードを設定して再入力。",
+          "Amazonの「アカウント作成」画面で、「お名前」に会社名「{brand_name}」、「Eメール」に{brand_email}、パスワードを設定して再入力。",
           "「KDPアカウントを作成」をクリックし、Amazonから届く確認コードを入力。",
           "アカウント情報 → 著者/出版社情報：国を設定し、出版社名に「{brand_name}」、会社の正式名称・事業所住所・電話番号を入力。",
           "「支払いの受け取り」で会社の印税口座を追加：口座名義、銀行名、口座番号（またはIBAN）、ルーティング番号（米国）またはSWIFT/BIC（国際）、口座種別。",
@@ -192,7 +192,7 @@
       "setup_steps": {
         "en": [
           "Go to authors.apple.com and click “Get started”.",
-          "Sign in with the company Apple ID (create one at appleid.apple.com using the brand email if needed); approve the two-factor prompt on your trusted device/phone.",
+          "Sign in with the company Apple ID (create one at appleid.apple.com using {brand_email} if needed); approve the two-factor prompt on your trusted device/phone.",
           "Set your provider/publisher name to {brand_name}, then choose your agreement: free-only books use the free agreement; to sell paid books, accept the Paid Books Agreement (next two steps).",
           "Paid Books — enter your company legal entity name and finance/technical contacts, then banking: account-holder, bank name, account number, SWIFT/BIC, branch.",
           "Paid Books — complete Apple's tax forms: US tax ID/EIN, or W-8BEN-E for a non-US company.",
@@ -200,7 +200,7 @@
         ],
         "ja": [
           "authors.apple.com を開き「始める（Get started）」をクリック。",
-          "会社のApple IDでサインイン（無ければ appleid.apple.com でブランドのメールを使って作成）。信頼済みデバイス/電話の2ファクタ認証を承認。",
+          "会社のApple IDでサインイン（無ければ appleid.apple.com で{brand_email}を使って作成）。信頼済みデバイス/電話の2ファクタ認証を承認。",
           "プロバイダ/出版社名を「{brand_name}」に設定し、契約を選択：無料のみの書籍は無料契約、有料書籍は Paid Books Agreement（次の2ステップ）に同意。",
           "有料書籍 — 会社の正式法人名と財務/技術担当の連絡先、銀行情報（口座名義、銀行名、口座番号、SWIFT/BIC、支店）を入力。",
           "有料書籍 — Appleの税フォームを完了：米国の税ID/EIN、または非米国法人は W-8BEN-E。",
@@ -243,14 +243,14 @@
       "setup_steps": {
         "en": [
           "Go to writinglife.kobo.com and complete the Cloudflare security check that appears at sign-in (solve it yourself).",
-          "Click Sign up / “Create one”: use the brand email and a password.",
+          "Click Sign up / “Create one”: use {brand_email} and a password.",
           "Verify your email, then complete your profile: publisher/author name = {brand_name}, company legal name, address, country, website.",
           "Open Payment and choose direct deposit (account-holder, bank name, account number, routing or SWIFT/BIC) or PayPal.",
           "Complete the Tax form: your company tax ID; W-8BEN-E if you're a non-US company."
         ],
         "ja": [
           "writinglife.kobo.com を開き、サインイン時に表示される Cloudflare のセキュリティ確認を通過（ご自身で操作）。",
-          "「Sign up / Create one」をクリック：ブランドのメールとパスワードを使用。",
+          "「Sign up / Create one」をクリック：{brand_email}とパスワードを使用。",
           "メールを確認し、プロフィールを完成：出版社/著者名 = {brand_name}、会社の正式名称、住所、国、ウェブサイト。",
           "「Payment（支払い）」で口座振込（口座名義、銀行名、口座番号、ルーティングまたはSWIFT/BIC）または PayPal を選択。",
           "税フォームを完了：会社の税ID、非米国法人は W-8BEN-E。"
@@ -290,14 +290,14 @@
       "setup_steps": {
         "en": [
           "Go to voicesbyinaudio.com and click “Register Free”.",
-          "Create the account for your company: name = {brand_name}, the brand email, and a password.",
+          "Create the account for your company: name = {brand_name}, {brand_email}, and a password.",
           "Verify your email, then complete your publisher profile: {brand_name}, company address, country.",
           "Add Payout (bank: account-holder, bank name, account number/IBAN, routing or SWIFT/BIC — or PayPal) and complete the tax info (company tax ID; W-8 if non-US).",
           "Turn on the distribution stores (Spotify, Apple, Audible, libraries) and set your audiobook price."
         ],
         "ja": [
           "voicesbyinaudio.com を開き「Register Free（無料登録）」をクリック。",
-          "会社用アカウントを作成：名前 = {brand_name}、ブランドのメール、パスワード。",
+          "会社用アカウントを作成：名前 = {brand_name}、{brand_email}、パスワード。",
           "メールを確認し、出版社プロフィールを完成：{brand_name}、会社住所、国。",
           "支払い（銀行：口座名義、銀行名、口座番号/IBAN、ルーティングまたはSWIFT/BIC — または PayPal）を追加し、税情報（会社の税ID、非米国は W-8）を完了。",
           "配信ストア（Spotify、Apple、Audible、図書館）を有効化し、オーディオブックの価格を設定。"
@@ -400,14 +400,14 @@
       "setup_steps": {
         "en": [
           "Go to tiktok.com/signup and choose “Use phone or email” (or “Continue with Google” using the company account).",
-          "Enter a date of birth that is 18+, the brand email or phone, and confirm the code TikTok sends.",
+          "Enter a date of birth that is 18+, {brand_email} or phone, and confirm the code TikTok sends.",
           "Set a password and set the username to @{brand_slug}.",
           "Open Settings → Manage account → “Switch to Business Account” and pick a fitting category for {brand_name} (e.g. Education or Media).",
           "Set the display name to {brand_name}, then paste the bio + add the profile photo from the next Brand-copy screen."
         ],
         "ja": [
           "tiktok.com/signup を開き「電話番号またはメールを使用」を選択（または会社アカウントで Google で続行）。",
-          "18歳以上の生年月日、ブランドのメール/電話を入力し、TikTokが送る認証コードを確認。",
+          "18歳以上の生年月日、{brand_email}/電話を入力し、TikTokが送る認証コードを確認。",
           "パスワードを設定し、ユーザー名を @{brand_slug} に設定。",
           "設定 → アカウント管理 →「ビジネスアカウントに切り替え」を選び、{brand_name} に合うカテゴリ（例：教育 / メディア）を設定。",
           "表示名を {brand_name} に設定し、次のブランドコピー画面のプロフィール文を貼り付け、写真を追加。"
@@ -454,14 +454,14 @@
       "setup_steps": {
         "en": [
           "Go to instagram.com/accounts/emailsignup/.",
-          "Enter the brand email, a password, an 18+ date of birth, Full name = {brand_name}, and username = {brand_slug}; click Sign up.",
+          "Enter {brand_email}, a password, an 18+ date of birth, Full name = {brand_name}, and username = {brand_slug}; click Sign up.",
           "Confirm the code Instagram emails/texts.",
           "Go to Settings → “Account type and tools” → Switch to Professional → Business, and link the company Facebook Page (set that up in the Facebook card).",
           "Paste the bio + add the profile photo from the next Brand-copy screen."
         ],
         "ja": [
           "instagram.com/accounts/emailsignup/ を開く。",
-          "ブランドのメール、パスワード、18歳以上の生年月日、フルネーム = {brand_name}、ユーザー名 = {brand_slug} を入力し「登録」。",
+          "{brand_email}、パスワード、18歳以上の生年月日、フルネーム = {brand_name}、ユーザー名 = {brand_slug} を入力し「登録」。",
           "Instagramがメール/SMSで送る認証コードを確認。",
           "設定 →「アカウントの種類とツール」→ プロアカウントに切り替え → ビジネス を選び、会社のFacebookページにリンク（Facebookカードで作成）。",
           "次のブランドコピー画面のプロフィール文を貼り付け、写真を追加。"
@@ -563,14 +563,14 @@
       "setup_steps": {
         "en": [
           "Go to lycbiz.com/jp/service/line-official-account/ and click “アカウント開設” (Open an account).",
-          "Log in with a LINE Business ID (the brand email, or a LINE account); create one if needed.",
+          "Log in with a LINE Business ID ({brand_email}, or a LINE account); create one if needed.",
           "Enter the Official Account details: account name = {brand_name}, industry/category, and email.",
           "Click 確認 (Confirm) and create the account (approve the phone/email verification).",
           "Manage broadcasts, greeting messages, and the profile at manager.line.biz."
         ],
         "ja": [
           "lycbiz.com/jp/service/line-official-account/ を開き「アカウント開設」をクリック。",
-          "LINEビジネスID（ブランドのメール、または LINEアカウント）でログイン。無ければ作成。",
+          "LINEビジネスID（{brand_email}、または LINEアカウント）でログイン。無ければ作成。",
           "公式アカウント情報を入力：アカウント名 = {brand_name}、業種/カテゴリ、メール。",
           "「確認」をクリックしてアカウントを作成（電話/メール認証を承認）。",
           "manager.line.biz で配信・あいさつメッセージ・プロフィールを運用。"
