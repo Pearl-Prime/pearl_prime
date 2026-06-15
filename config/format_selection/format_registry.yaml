@@ -115,6 +115,10 @@ runtime_formats:
     ebook_minutes: 15      # DERIVED round(3500/230)
     compatible_tiers: [A, B, C]
     compatible_structural_formats: [F015, F003]
+    # Spine compression to chapter_count_default (5): one chapter per narrative phase
+    # (HARDSHIP/HELP/HEALING/HOPE) + closer. Same curation as compact_book_5ch_* (PR-D-SPINE-01).
+    # Realizes the declared 5-chapter count in the spine path; renumbered 1..5 after subset.
+    compact_chapter_subset: [1, 4, 7, 10, 12]
   micro_book_20:
     duration_minutes: 28  # DEPRECATED — superseded by audiobook_minutes/ebook_minutes (DURATION-DERIVATION-01). Do not hand-edit; readers migrate per follow-up. Overwritten with derived audiobook value.
     chapter_count_default: 6  # AUTO-PLAN-SSOT-01-AMENDMENT Group B: was 5; Python value 6 preserved
@@ -133,6 +137,9 @@ runtime_formats:
     ebook_minutes: 26      # DERIVED round(6000/230)
     compatible_tiers: [A, B, C]
     compatible_structural_formats: [F003, F006, F007, F011]
+    # Spine compression to chapter_count_default (8): 2 chapters per phase + closer.
+    # Same curation as compact_book_8ch_30min (PR-D-SPINE-01). Renumbered 1..8 after subset.
+    compact_chapter_subset: [1, 3, 4, 6, 7, 9, 10, 12]
   one_hour_book:
     duration_minutes: 60  # DEPRECATED — superseded by audiobook_minutes/ebook_minutes (DURATION-DERIVATION-01). Do not hand-edit; readers migrate per follow-up. Overwritten with derived audiobook value.
     chapter_count_default: 8
@@ -142,6 +149,10 @@ runtime_formats:
     ebook_minutes: 39      # DERIVED round(9000/230)
     compatible_tiers: [A, B]
     compatible_structural_formats: [F003, F006, F007, F011]
+    # Spine compression to chapter_count_default (8): 2 chapters per phase + closer
+    # (same 8-chapter curation as short_book_30 / compact_book_8ch_30min). Higher word
+    # budget yields richer chapters at the ~9000w target. Renumbered 1..8 after subset.
+    compact_chapter_subset: [1, 3, 4, 6, 7, 9, 10, 12]
 
   standard_book:
     duration_minutes: 147  # DEPRECATED — superseded by audiobook_minutes/ebook_minutes (DURATION-DERIVATION-01). Do not hand-edit; readers migrate per follow-up. Overwritten with derived audiobook value (was 55 — the historically wrong label; real audiobook ~143min/2h23m at 150 WPM per PR #1510 audit f27dafdb2).

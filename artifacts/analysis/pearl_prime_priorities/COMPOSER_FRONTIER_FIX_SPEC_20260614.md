@@ -272,7 +272,15 @@ recommended classification for all 52 live persona×topic combos at short tiers;
 Lever-B-gated; no cell is FULL-ONLY** (caveat: `midlife_women` is arc-path-excluded for all tiers
 until master_arcs exist).
 
-### OPEN PRODUCT DECISION (operator sign-off, NOT Architect — both options in-envelope)
+### RESOLVED PRODUCT DECISION — Option S chosen (operator 2026-06-15; in-envelope, NOT Architect)
+
+> **Outcome:** operator chose **Option S**. Installed `compact_chapter_subset` on `micro_book_15`
+> (5), `short_book_30` (8), `one_hour_book` (8) — lengths = each format's existing
+> `chapter_count_default`, reusing the ratified compact_* curation. Proof (PR follow-up to #1610):
+> F1 −81% / −29% / −28%; overshoot +64→+19% / +45→+13% / +31→+23%. `one_hour_book` residual +23%
+> = depth-budget follow-up (atom floor vs 8–10k band at 8ch). `micro_book_20` (count 6) + other
+> sub-12 formats lacking a subset are the consistency follow-up. Original options for the record:
+
 The default short tiers (`micro_book_15`, `short_book_30`, `one_hour_book`) currently render 12
 thin chapters by design (registry comment ll.214–220). Two ways to realize "fewer chapters for
 short books":
@@ -282,8 +290,9 @@ short books":
   blast radius (reader-facing chapter-count change across all short books); makes micro/short
   near-redundant with `compact_*`. This is what the originating brief's deliverable 4b requested.
 
-Recommendation: **Option R** (lower blast radius; `compact_*` already embody SHORT&DEEP). Held
-for operator confirmation before installing either — reader-facing behavior change.
+(Original recommendation was Option R for lower blast radius; operator chose Option S above. Note
+Option S turned out to be SSoT-alignment, not a fresh chapter-count decision — the registry
+already declared 5/8/8 via `chapter_count_default`; the subset just wires the spine path to honor it.)
 
 ### DEFERRED — per-TOPIC subset = NEW AXIS (DRAFT cap amendment, Pearl_Architect)
 Optimizing *which* beats survive per topic (vs the topic-blind positional subset) requires a

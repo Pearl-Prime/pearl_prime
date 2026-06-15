@@ -45,19 +45,29 @@ never gates. So this lever improves **prose quality + length** (Lever A); flippi
 PASS additionally needs the **F2** data-layer work (atom-label corruption + teacher-wrapper
 templates) owned by **#1601** + atom-repair — *not* this session.
 
+## Option S — default short tiers subset to `chapter_count_default` (operator-chosen 2026-06-15)
+
+The registry already declared `chapter_count_default` = 5 / 8 / 8 for these tiers, but the spine
+path ignored it (no `compact_chapter_subset`). Declaring the ratified subset patterns wires the
+spine path to honor the existing SSoT counts. Before/after via the **real registry path**:
+
+| format | declared count | before (12ch) | after (subset) | F1 | overshoot |
+|--------|:--:|:--:|:--:|:--:|:--:|
+| `micro_book_15` | 5 | 12ch / 7393w | **5ch / 5354w** | 16 → **3** (−81%) | +64% → **+19%** |
+| `short_book_30` | 8 | 12ch / 10839w | **8ch / 8445w** | 35 → **25** (−29%) | +45% → **+13%** |
+| `one_hour_book` | 8 | 12ch / 13095w | **8ch / 12291w** | 39 → **28** (−28%) | +31% → **+23%** |
+
+`one_hour_book` still overshoots +23% (12291 vs 10000): the atom-floor can't hit the 8–10k band
+at 8 chapters without per-chapter budget tightening — a **depth-budget / duration-derivation**
+follow-up, not a chapter-count one. Chapter count still cut overshoot 8pts and F1 28%.
+
 ## Faithfulness check (this harness vs the published ladder)
 
-Re-rendering the three non-subset short tiers (still 12 chapters) reproduces the published
-`duration_ladder_20260615` within backup-commit drift:
-
-| format | here | published ladder |
-|--------|------|------------------|
-| `micro_book_15` | 12ch / 7393w / F1:16 | 12ch / 7193w / F1:14 |
-| `short_book_30` | 12ch / 10839w / F1:35 | 12ch / 10561w / F1:30 |
-| `one_hour_book` | 12ch / 13095w / F1:39 | 12ch / 12780w / F1:34 |
-
-(Small deltas: hourly auto-backup commits moved `origin/main` past the ladder's
-`ff896141e`; the *before/after deltas above are internally consistent* — same code, same seed.)
+The `before_12ch` column above doubles as the faithfulness check: re-rendering at 12 chapters
+reproduces the published `duration_ladder_20260615` within backup-commit drift (micro 7393 vs
+7193 / F1 16 vs 14; short 10839 vs 10561 / 35 vs 30; one_hour 13095 vs 12780 / 39 vs 34). Hourly
+auto-backup commits moved `origin/main` past the ladder's `ff896141e`; the before/after deltas
+are internally consistent (same code, same seed).
 
 ## Reproduce
 

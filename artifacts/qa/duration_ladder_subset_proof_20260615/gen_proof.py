@@ -154,11 +154,12 @@ def main() -> int:
             prose = render(fmt, honor)
             j, byid = score(prose)
             emit(fmt, variant, wr, prose, j, byid, rows)
-    print("\n=== SHORT non-subset tiers: faithfulness check vs published ladder (still 12ch) ===")
+    print("\n=== DEFAULT short tiers (Option S): before_12ch vs after_subset (now declared in registry) ===")
     for fmt, wr in SHORT_REF:
-        prose = render(fmt, True)  # no subset declared -> 12ch either way
-        j, byid = score(prose)
-        emit(fmt, "reference_12ch", wr, prose, j, byid, rows)
+        for honor, variant in ((False, "before_12ch"), (True, "after_subset")):
+            prose = render(fmt, honor)
+            j, byid = score(prose)
+            emit(fmt, variant, wr, prose, j, byid, rows)
 
     (OUT / "SUMMARY.json").write_text(json.dumps(rows, indent=2), encoding="utf-8")
     print(f"\nWrote {OUT / 'SUMMARY.json'}")

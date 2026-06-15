@@ -140,6 +140,12 @@ formats?) — see the spec extension and the open decision in the closeout. This
 **in-envelope either way** (per-format), so it needs operator product sign-off, not Architect
 ratification.
 
+> **RESOLVED 2026-06-15 — operator chose Option S (subset the default tiers).** Installed
+> `compact_chapter_subset` on `micro_book_15` (5ch), `short_book_30` (8ch), `one_hour_book` (8ch)
+> — lengths = each format's existing `chapter_count_default` (so this is SSoT-alignment, not a new
+> count). Proof: F1 −81% / −29% / −28%; overshoot roughly halved. `one_hour_book` residual +23% is
+> a depth-budget follow-up. See `../../qa/duration_ladder_subset_proof_20260615/INDEX.md` §Option S.
+
 ---
 
 ## 6. Two-lever F1 framing (for the spec)
