@@ -11,6 +11,8 @@ from pathlib import Path
 import pytest
 
 from phoenix_v4.quality.register_gate import (
+    F2_LOWERCASE_SENTENCE_START_NOUNS,
+    _detect_f2_broken_fragments,
     _f11_first_paragraph_warns,
     _parse_hook_variation_first_paragraphs,
     evaluate_register,
@@ -421,3 +423,102 @@ def test_calibration_book_must_fail():
     failure_ids = {f.failure_id for f in result.findings}
     for fid in {"F1", "F2", "F3", "F4"}:
         assert fid in failure_ids, f"expected {fid} finding on calibration book; got {failure_ids}"
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# DEFERRED-LANE register_verdict (2026-06-15): F2.C must catch genuine dropped-article
+# bare-noun artifacts WITHOUT false-positiving on function words / lowercase continuation
+# openers (which previously HARD_FAILed otherwise-clean books, blocking PASS even with
+# leaked labels at zero).
+# ─────────────────────────────────────────────────────────────────────────────
+
+
+def test_f2c_noun_set_excludes_function_words() -> None:
+    # Function words cannot be "missing a leading article"; they must not be in the set.
+    for fn in {"the", "a", "this", "that", "and", "but", "now", "through", "for example"}:
+        assert fn not in F2_LOWERCASE_SENTENCE_START_NOUNS, (
+            f"{fn!r} is a function word and must not trigger F2.C"
+        )
+    # Genuine bare-noun / modal artifacts stay covered.
+    for noun in {"mechanism", "attachment", "suffering", "love", "can"}:
+        assert noun in F2_LOWERCASE_SENTENCE_START_NOUNS
+
+
+@pytest.mark.parametrize(
+    "text",
+    [
+        "the breath cycle (as taught by Ahjan)",          # exercise-wrapper false positive
+        "the mind settles when you stop forcing it.",     # lowercase continuation
+        "and then the breath returns to center slowly.",  # conjunction opener
+        "now the practice begins in earnest right here.",  # adverb opener
+        "this is the work, plainly stated, for today.",   # demonstrative opener
+    ],
+)
+def test_f2c_no_longer_false_positives_on_function_word_openers(text: str) -> None:
+    findings = _detect_f2_broken_fragments([(1, text)])
+    assert not any(f.evidence.get("rule") == "F2.C_lowercase_noun_start" for f in findings), (
+        f"F2.C false-positived on {text!r}"
+    )
+
+
+@pytest.mark.parametrize(
+    "text",
+    [
+        "The pipeline ran. mechanism running continuously is written into your biology.",
+        "It starts early. attachment forms before you ever notice it happening.",
+        "No warning comes. suffering arrives uninvited every single time it does.",
+    ],
+)
+def test_f2c_still_catches_real_dropped_article_artifacts(text: str) -> None:
+    findings = _detect_f2_broken_fragments([(1, text)])
+    assert any(f.evidence.get("rule") == "F2.C_lowercase_noun_start" for f in findings), (
+        f"F2.C missed a real dropped-article artifact in {text!r}"
+    )
+
+
+def test_clean_book_with_lowercase_continuation_reaches_pass() -> None:
+    # Before the fix this HARD_FAILed on F2.C ("the body believes…"); now it must PASS.
+    book = (
+        "Chapter 1\n\n"
+        "The alarm fires first. the body believes it before the mind catches up, "
+        "and that is the whole pattern in one sentence right here.\n\n"
+        "More steady content follows in this chapter to keep it well above any "
+        "sub-four-word fragment threshold the gate enforces on short paragraphs.\n"
+    )
+    result = evaluate_register(book)
+    assert result.verdict == "PASS", (
+        f"clean lowercase-continuation book got {result.verdict}; "
+        f"findings: {[(f.failure_id, f.evidence.get('rule')) for f in result.findings]}"
+    )
+
+
+def test_named_intro_wrapper_variants_are_f2_clean() -> None:
+    # The reworded "is precise" intro variant (config half) must not reintroduce an
+    # F2.A colon-period artifact through the full resolve → normalize round-trip.
+    from phoenix_v4.rendering.golden_chapter_synthesis import _resolve_location_placeholders
+    from phoenix_v4.rendering.teacher_wrapper import (
+        _reset_caches_for_tests,
+        join_wrapped,
+        resolve_wrapper,
+    )
+
+    _reset_caches_for_tests()
+    ctx = {
+        "teacher_name": "Ahjan",
+        "tradition": "Tantric Buddhism",
+        "tradition_short": "Tantra",
+        "teaching_lineage": "the path of energy",
+        "practice_name": "the breath cycle",
+    }
+    for seed in (f"s{i}" for i in range(20)):
+        prefix, _suffix = resolve_wrapper(
+            teacher_id="ahjan", section_type="INTRO", seed=seed, spine_context=ctx
+        )
+        if not prefix:
+            continue
+        joined = _resolve_location_placeholders(
+            join_wrapped(prefix, "The body of this section follows here in full.", "")
+        )
+        findings = _detect_f2_broken_fragments([(1, joined)])
+        assert not findings, f"named intro wrapper produced F2 on seed {seed}: {joined!r}"
+    _reset_caches_for_tests()

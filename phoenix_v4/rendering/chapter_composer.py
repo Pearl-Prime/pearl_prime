@@ -100,6 +100,21 @@ _ROOT_CAP_4_CHAPTER_WINDOW = {
     "cost",
 }
 
+# DEFERRED-LANE bridge_bank (2026-06-15): config/rendering/bridge_transition_families.yaml
+# carries a synthetic per-entry disambiguator stem ("variant-1", "variant-2", …) alongside
+# each entry's real semantic stem (e.g. "name the turn"). These synthetic tokens are NOT
+# anti-reuse signals — only ~2 distinct values span all 840 entries across every bridge_type
+# and emotional_job. Because the book-level BridgeMemory is shared across ALL slots and the
+# THREAD slot is composed LAST (assembly order: INTEGRATION → TAKEAWAY → THREAD), earlier
+# bridge emitters saturate "variant-1"/"variant-2" within the 3-chapter stem window, so the
+# `recent_stem_count(stem) >= 1` gate in _score_bridge_candidate rejected EVERY data-driven
+# "Ahead of you:" thread_fallback candidate (score -10_000) → fell through to the literal pool
+# (0/12 chapters served the bank in repro). Dropping the synthetic token from the stem list at
+# collection time lets real semantic stems still drive dedup while the bank actually serves.
+# Does NOT touch #1589's book-distinct dedup, which keys on exact phrase_used_book + the real
+# semantic stems/roots/shapes — none of which are the synthetic variant token.
+_SYNTHETIC_VARIANT_STEM_RE = re.compile(r"^variant-\d+$")
+
 def _pick_variant(options: list[str], *seed_parts: str) -> str:
     if not options:
         return ""
@@ -596,7 +611,18 @@ def _collect_bridge_candidates(
                 {
                     "text": text,
                     "shape": str(shape).strip().lower(),
-                    "stems": [str(s).strip().lower() for s in (entry.get("stems") or []) if str(s).strip()],
+                    # Drop synthetic "variant-N" disambiguator stems (see
+                    # _SYNTHETIC_VARIANT_STEM_RE) so they cannot poison the shared
+                    # book-level BridgeMemory and starve later-composed slots (THREAD).
+                    "stems": [
+                        s
+                        for s in (
+                            str(s).strip().lower()
+                            for s in (entry.get("stems") or [])
+                            if str(s).strip()
+                        )
+                        if not _SYNTHETIC_VARIANT_STEM_RE.match(s)
+                    ],
                     "roots": [str(r).strip().lower() for r in (entry.get("roots") or []) if str(r).strip()],
                     "scene_bias": [str(k).strip().lower() for k in (entry.get("scene_bias") or []) if str(k).strip()],
                     "position_bias": pos,
@@ -618,6 +644,8 @@ def _score_bridge_candidate(
     shape = str(candidate.get("shape") or "").strip().lower()
     stems = [str(s).strip().lower() for s in candidate.get("stems", [])]
     roots = [str(r).strip().lower() for r in candidate.get("roots", [])]
+    # Hard anti-reuse signals (preserve #1589's book-distinct dedup): exact phrase reuse,
+    # same shape back-to-back in a chapter, and recent reuse of a real *semantic* stem.
     if bridge_memory.phrase_used_book(text) or bridge_memory.phrase_used_chapter(chapter_index, text):
         return -10_000.0
     if shape and bridge_memory.last_shape_by_chapter.get(chapter_index, "") == shape:
@@ -625,11 +653,20 @@ def _score_bridge_candidate(
     for stem in stems:
         if bridge_memory.recent_stem_count(stem, chapter_index, window=3) >= 1:
             return -10_000.0
+
+    # DEFERRED-LANE bridge_bank (2026-06-15): the structural-root cap used to be a hard
+    # -10_000 rejection. For families like thread_fallback ("Ahead of you: …"), EVERY entry
+    # carries the same skeleton roots (next/pattern/chapter), so once a few bank-served
+    # bridges land in a 3-chapter window the cap rejected the entire pool and the selector
+    # fell through to the literal fallback (only 3/12 chapters served the bank even after the
+    # synthetic-stem fix). The real anti-reuse signals above (exact phrase, shape, semantic
+    # stem) have already passed by this point, so a structural-root collision alone should be
+    # a strong *soft* penalty, not a veto — that keeps fresh-shape/fresh-phrase bank entries
+    # eligible while still steering away from over-repeated roots.
+    score = 0.0
     for root in roots:
         if root in _ROOT_CAP_4_CHAPTER_WINDOW and bridge_memory.recent_root_count(root, chapter_index, window=3) >= 3:
-            return -10_000.0
-
-    score = 0.0
+            score -= 6.0
     shape_recent = bridge_memory.recent_shape_count(shape, chapter_index, window=2)
     family_recent = bridge_memory.recent_family_count(bridge_family, chapter_index, window=2)
     score -= max(0.0, float(shape_recent - 1) * 3.0)
@@ -657,6 +694,7 @@ def _select_bridge_candidate(
     total_chapters: int,
     bridge_memory: BridgeMemory | None,
     context_text: str,
+    seed: str = "",
 ) -> dict[str, Any] | None:
     if bridge_memory is None:
         bridge_memory = BridgeMemory()
@@ -684,7 +722,12 @@ def _select_bridge_candidate(
         if score > best_score:
             best, best_score = candidate, score
         elif score == best_score and best is not None:
-            tie_seed = f"{bridge_type}:{chapter_index}:{candidate.get('text','')}".encode("utf-8")
+            # DEFERRED-LANE bridge_bank (2026-06-15): mix the book `seed` into the tie-break
+            # so two books with the same chapter/job/score diverge (the literal fallback was
+            # already book-seeded; the bank path was not, which made bank-served threads
+            # collide across books once the bank started serving). Preserves determinism for
+            # a fixed seed.
+            tie_seed = f"{seed}:{bridge_type}:{chapter_index}:{candidate.get('text','')}".encode("utf-8")
             if int(hashlib.sha256(tie_seed).hexdigest()[:8], 16) % 2 == 0:
                 best = candidate
     if best is None or best_score <= -9999.0:
@@ -1996,6 +2039,7 @@ def _fallback_thread(
             total_chapters=total_chapters,
             bridge_memory=bridge_memory,
             context_text=thesis,
+            seed=f"{book_seed}|{persona_id}|{topic_id}",
         )
         if selected:
             text = str(selected.get("text", "")).strip()

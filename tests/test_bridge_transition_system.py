@@ -226,3 +226,123 @@ def test_compose_chapter_prose_still_returns_valid_output() -> None:
         bridge_memory=cc.BridgeMemory(),
     )
     assert isinstance(out, str) and len(out) > 80
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# DEFERRED-LANE bridge_bank (2026-06-15): the data-driven 'Ahead of you:' thread
+# bank was starved (served 0x in the pilot books) because the shared book-level
+# BridgeMemory was saturated with the synthetic "variant-N" disambiguator stem and
+# the structural-root hard-cap, so every thread_fallback candidate scored -10_000
+# and the selector fell through to the hardcoded literal pool.
+# ─────────────────────────────────────────────────────────────────────────────
+
+
+def test_synthetic_variant_stems_are_dropped_at_collection() -> None:
+    # The bank carries a synthetic "variant-N" stem alongside each real semantic stem.
+    # It must NOT survive into the candidate dict (otherwise it poisons shared memory).
+    cands = cc._collect_bridge_candidates(
+        bridge_type="thread_fallback",
+        emotional_job="recognition",
+        chapter_position="early",
+    )
+    assert cands, "thread_fallback recognition bank should have candidates"
+    for c in cands:
+        assert not any(
+            cc._SYNTHETIC_VARIANT_STEM_RE.match(s) for s in c["stems"]
+        ), f"synthetic variant stem leaked into {c['stems']!r}"
+    # Real semantic stems are still present (dedup signal preserved).
+    assert any(c["stems"] for c in cands), "real semantic stems must survive"
+
+
+def test_synthetic_variant_stem_does_not_block_fresh_candidate() -> None:
+    # Registering "variant-1" (as an earlier slot of any bridge type would) must NOT
+    # veto a thread candidate that only shares that synthetic token.
+    memory = cc.BridgeMemory()
+    memory.register(
+        chapter_index=0,
+        phrase="some earlier bridge",
+        shape="direct_assertion",
+        stems=["variant-1"],  # synthetic token registered by an earlier slot
+        roots=["recognition"],
+        family_key="after_opening|recognition",
+    )
+    fresh = {
+        "text": "Ahead of you: a genuinely fresh thread-forward sentence.",
+        "shape": "question_turn",
+        "stems": ["ask useful next question"],  # real stem, never used
+        "roots": ["recognition"],
+        "scene_bias": [],
+        "position_bias": "any",
+    }
+    score = cc._score_bridge_candidate(
+        fresh,
+        chapter_index=1,
+        total_chapters=12,
+        bridge_memory=memory,
+        bridge_family="thread_fallback|recognition",
+        topic_keywords={"pattern"},
+    )
+    assert score > -9999.0, "fresh candidate must not be vetoed by a synthetic stem"
+
+
+def test_data_driven_thread_bank_actually_serves_across_book() -> None:
+    # Regression guard for the starvation: across a 12-chapter book sharing one
+    # BridgeMemory (as a real render does), the data-driven 'Ahead of you:' bank
+    # must serve at least a few chapters rather than falling 100% to the literal pool.
+    memory = cc.BridgeMemory()
+    roles = [
+        "recognition", "destabilization", "reframe", "stabilization",
+        "integration", "recognition", "mechanism", "reframe",
+        "integration", "stabilization", "recognition", "integration",
+    ]
+    served = 0
+    for ci in range(12):
+        thread = cc._fallback_thread(
+            "seeing the pattern before defending it",
+            chapter_index=ci,
+            total_chapters=12,
+            emotional_job=roles[ci],
+            bridge_memory=memory,
+            book_seed="book-A",
+            persona_id="p",
+            topic_id="anxiety",
+        )
+        if thread.startswith("Ahead of you:"):
+            served += 1
+    assert served >= 2, f"data-driven thread bank served only {served}/12 (starved)"
+
+
+def test_thread_bank_preserves_book_distinct_dedup() -> None:
+    # #1589 guard: even with the bank serving, no exact thread phrase repeats within
+    # a book, and two books (different seeds) diverge.
+    def run(seed: str) -> list[str]:
+        memory = cc.BridgeMemory()
+        roles = [
+            "recognition", "destabilization", "reframe", "stabilization",
+            "integration", "recognition", "mechanism", "reframe",
+            "integration", "stabilization", "recognition",
+        ]
+        out = []
+        for ci in range(11):  # exclude final chapter (returns "")
+            out.append(
+                cc._fallback_thread(
+                    "seeing the pattern before defending it",
+                    chapter_index=ci,
+                    total_chapters=12,
+                    emotional_job=roles[ci],
+                    bridge_memory=memory,
+                    book_seed=seed,
+                    persona_id="p",
+                    topic_id="anxiety",
+                )
+            )
+        return out
+
+    a = run("book-A")
+    b = run("book-B")
+    # No exact repeat within a book (book-distinct dedup intact).
+    assert len(set(a)) == len(a), "thread phrase repeated within a single book"
+    # Determinism for a fixed seed.
+    assert run("book-A") == a
+    # Two different books diverge (cross-book divergence preserved).
+    assert sum(1 for x, y in zip(a, b) if x == y) < len(a)

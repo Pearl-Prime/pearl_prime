@@ -23,7 +23,12 @@ named:
       - "What {TEACHER_NAME} returns to again and again is this..."
       - "For {TEACHER_NAME}, the work begins in the body, not the idea..."
       - "Sit with {TEACHER_NAME}'s {TEACHING_LINEAGE} long enough and one thread emerges..."
-      - "{TEACHER_NAME}'s reading of this is precise: ..."
+      # DEFERRED-LANE register_verdict (2026-06-15): was "...is precise: ..." — the bare
+      # "colon + ellipsis" tail collapses to ":" + "." (the F2.A colon-period artifact) if a
+      # downstream pass ever normalizes the ellipsis to a single period. Reworded to an
+      # ellipsis-only inline lead-in (no colon) so it cannot produce the F2.A artifact, while
+      # keeping the authored "precise" voice.
+      - "{TEACHER_NAME}'s reading of this is precise, and it begins..."
       - "Where {TEACHER_NAME} departs from the usual framing is here..."
       - "Across {TEACHER_NAME}'s {TRADITION_SHORT} work, the through-line is..."
       - "What {TEACHER_NAME} keeps pointing toward is..."

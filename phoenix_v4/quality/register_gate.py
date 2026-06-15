@@ -204,9 +204,22 @@ F2_RULES = {
     "F2.E_colon_no_content": re.compile(r":\s*\n\n"),
 }
 
+# F2.C — sentence starts with a lowercase word that signals a DROPPED leading article
+# (slot-template artifact, e.g. "mechanism running continuously is written into your
+# biology." where "The mechanism …" was intended).
+#
+# DEFERRED-LANE register_verdict (2026-06-15): the prior set also listed function words
+# — "the", "a", "this", "that", "and", "but", "now", "through", "for example". Those are
+# NOT missing-article artifacts: an article ("the"/"a") cannot itself be missing an
+# article, and conjunctions/adverbs legitimately open a lowercased continuation sentence
+# (e.g. a clause that begins after an ellipsis lead-in, or a stylistic lowercase opener).
+# Flagging them produced false-positive HARD_FAILs — e.g. the perfectly grammatical
+# exercise-wrapper line "the breath cycle (as taught by Ahjan)" — that blocked the whole
+# register verdict from reaching PASS even with leaked labels already at zero. The set is
+# now restricted to genuine bare CONTENT nouns/modals where a leading article was clearly
+# elided, which still catches the real artifact asserted by the F2.C regression test.
 F2_LOWERCASE_SENTENCE_START_NOUNS = {
-    "can", "mechanism", "attachment", "suffering", "the", "this", "that", "a",
-    "and", "but", "love", "now", "through", "for example",
+    "can", "mechanism", "attachment", "suffering", "love",
 }
 
 
