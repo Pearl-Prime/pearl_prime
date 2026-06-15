@@ -11,6 +11,10 @@
   </head>
   <body>
     <div id="root"></div>
+    <!-- Onboarding submit API base — set window.__ONBOARDING_API_BASE (or window.__BRAND_ADMIN_API_BASE) to the
+         Pearl Prime portal API for prod; else falls back to ?api_base / http://127.0.0.1:8000.
+         Server: server/routes/brand_onboarding.py (POST /api/v1/onboarding/submit). -->
+    <script>window.__ONBOARDING_API_BASE = window.__ONBOARDING_API_BASE || window.__BRAND_ADMIN_API_BASE || "";</script>
     <script type="module" src="/src/main-ja.jsx"></script>
   </body>
 </html>

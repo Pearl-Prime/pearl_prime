@@ -42,6 +42,7 @@ MANGA_REGISTRY = REPO_ROOT / "config" / "manga" / "canonical_brand_list.yaml"
 MANGA_SERIES_PLAN = REPO_ROOT / "config" / "manga" / "manga_brand_series_plan.yaml"
 MANGA_CANON_PLANNED = REPO_ROOT / "config" / "brand_admin" / "manga_canon_planned_volumes.yaml"
 MUSIC_REGISTRY = REPO_ROOT / "config" / "music" / "music_brand_registry.yaml"
+UNIFIED_REGISTRY = REPO_ROOT / "config" / "brand_management" / "global_brand_registry_unified.yaml"
 STORE_URL_TRACKER = REPO_ROOT / "config" / "funnel" / "store_url_tracker.yaml"
 PACKAGES_DIR = REPO_ROOT / "artifacts" / "weekly_packages"
 COORD_DIR = REPO_ROOT / "artifacts" / "coordination"
@@ -118,6 +119,8 @@ def parse_week_param(week: Optional[str]) -> str:
 
 
 def _brand_exists(brand_id: str) -> bool:
+    if brand_id in (_load_yaml(UNIFIED_REGISTRY).get("brands") or {}):
+        return True  # unified 39×14 ids (e.g. somatic_wisdom_en_us) — what the wizard now assigns
     manga = (_load_yaml(MANGA_REGISTRY).get("brands") or {})
     if brand_id in manga:
         return True
@@ -141,6 +144,32 @@ def _axes_for_brand(brand_id: str) -> list[str]:
             axes.append("music")
             break
     return axes
+
+
+def _unified_brand_rows() -> list[dict]:
+    """The unified 39×14 registry (global_brand_registry_unified.yaml) — the canonical brand set
+    the wizard matches/assigns to. Each brand carries its lane's manga% (manga not standalone)."""
+    brands = _load_yaml(UNIFIED_REGISTRY).get("brands") or {}
+    rows: list[dict] = []
+    for brand_id, body in brands.items():
+        if not isinstance(body, dict):
+            continue
+        pct = body.get("lane_manga_pct")
+        axes = ["book"] + (["manga"] if isinstance(pct, (int, float)) and pct > 0 else [])
+        rows.append({
+            "brand_id": brand_id,
+            "name": body.get("publication_corp") or body.get("display_name") or brand_id,
+            "axis": "book",
+            "axes_present": axes,
+            "lane": body.get("lane_id"),
+            "locale": body.get("locale"),
+            "status": body.get("lifecycle") or "active",
+            "topics": body.get("primary_topics") or [],
+            "lane_manga_pct": pct,
+            "publication_corp": body.get("publication_corp"),
+            "teacher_id": body.get("teacher_id"),
+        })
+    return rows
 
 
 def _book_brand_rows() -> list[dict]:
@@ -232,20 +261,24 @@ def _music_brand_rows() -> list[dict]:
 
 @router.get("/brand_index")
 async def brand_index() -> dict[str, Any]:
+    unified = _unified_brand_rows()
     book = _book_brand_rows()
     manga = _manga_brand_rows()
     music = _music_brand_rows()
     return {
+        "unified": unified,   # canonical 39×14 — the brand set the wizard matches/assigns to
         "book": book,
         "manga": manga,
         "music": music,
         "counts": {
+            "unified": len(unified),
             "book": len(book),
             "manga": len(manga),
             "music": len(music),
             "total": len(book) + len(manga) + len(music),
         },
         "sources": {
+            "unified": UNIFIED_REGISTRY.relative_to(REPO_ROOT).as_posix(),
             "book": BOOK_REGISTRY.relative_to(REPO_ROOT).as_posix(),
             "manga": MANGA_REGISTRY.relative_to(REPO_ROOT).as_posix(),
             "music": MUSIC_REGISTRY.relative_to(REPO_ROOT).as_posix(),

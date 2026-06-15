@@ -1,153 +1,4379 @@
-# Brand Admin Users — 1 admin per brand, organized by lane
-# Each admin receives weekly content packages for their brand.
-# Auth: magic link via email (no passwords).
-# Access: read-only catalog + weekly downloads, packaged by platform.
-# Notification: via configured channel (slack, discord, telegram, line, email).
+# Brand Admin Users — 1 admin per brand (39×14 unified), keyed by canonical <archetype>_<lane>.
+# GENERATED from config/brand_management/global_brand_registry_unified.yaml — do not hand-edit keys.
+# Live assignments are written by the wizard submit endpoint to the gitignored overlay
+# artifacts/onboarding/roster_assignments.yaml (status + admin name/email); this file is the
+# unassigned canonical template. Auth: magic link via email. status: unassigned|assigned.
 
-schema_version: "1.0"
-
-# Admin assignment is per brand_id (from global_brand_registry.yaml).
-# TBD = admin not yet recruited/assigned.
+schema_version: "2.0"
+generated_from: config/brand_management/global_brand_registry_unified.yaml
+total_admins: 546
 
 admins:
-  # ── en_US lane ──────────────────────────────────────────────────
-  # US: each brand has its own non-profit church publication corp.
-  # Admin = church publication manager.
-  inner_light_press_en_us:
-    admin_name: "TBD"
+  adhd_forge_de_de:
+    brand_archetype_id: adhd_forge
+    lane_id: de_DE
+    publication_corp: "Livewire Books"
+    admin_name: ""
     admin_email: ""
-    notification_channel: slack
-    notification_id: ""
+    notification_channel: email
+    status: unassigned
+  adhd_forge_en_us:
+    brand_archetype_id: adhd_forge
     lane_id: en_US
-    status: "unassigned"
-
-  awakening_press_en_us:
-    admin_name: "TBD"
+    publication_corp: "Livewire Books"
+    admin_name: ""
     admin_email: ""
-    notification_channel: slack
-    notification_id: ""
-    lane_id: en_US
-    status: "unassigned"
-
-  # ... (remaining 22 en_US brands follow same pattern)
-
-  # ── ja_JP lane ──────────────────────────────────────────────────
-  # Japan: all brands under Phoenix Omega LLC Japan.
-  # Admin = content manager for Japanese market.
-  inner_light_press_ja_jp:
-    admin_name: "TBD"
+    notification_channel: email
+    status: unassigned
+  adhd_forge_es_es:
+    brand_archetype_id: adhd_forge
+    lane_id: es_ES
+    publication_corp: "Livewire Books"
+    admin_name: ""
     admin_email: ""
-    notification_channel: line
-    notification_id: ""
+    notification_channel: email
+    status: unassigned
+  adhd_forge_es_us:
+    brand_archetype_id: adhd_forge
+    lane_id: es_US
+    publication_corp: "Livewire Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  adhd_forge_fr_fr:
+    brand_archetype_id: adhd_forge
+    lane_id: fr_FR
+    publication_corp: "Livewire Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  adhd_forge_hu_hu:
+    brand_archetype_id: adhd_forge
+    lane_id: hu_HU
+    publication_corp: "Livewire Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  adhd_forge_it_it:
+    brand_archetype_id: adhd_forge
+    lane_id: it_IT
+    publication_corp: "Livewire Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  adhd_forge_ja_jp:
+    brand_archetype_id: adhd_forge
     lane_id: ja_JP
-    status: "unassigned"
-    notes: "Japan team member"
-
-  # ── zh_TW lane ──────────────────────────────────────────────────
-  inner_light_press_zh_tw:
-    admin_name: "TBD"
+    publication_corp: "Livewire Books"
+    admin_name: ""
     admin_email: ""
-    notification_channel: line
-    notification_id: ""
-    lane_id: zh_TW
-    status: "unassigned"
-    notes: "Taiwan team member"
-
-  # ── zh_CN lane ──────────────────────────────────────────────────
-  inner_light_press_zh_cn:
-    admin_name: "TBD"
+    notification_channel: email
+    status: unassigned
+  adhd_forge_ko_kr:
+    brand_archetype_id: adhd_forge
+    lane_id: ko_KR
+    publication_corp: "Livewire Books"
+    admin_name: ""
     admin_email: ""
-    notification_channel: wechat
-    notification_id: ""
+    notification_channel: email
+    status: unassigned
+  adhd_forge_pt_br:
+    brand_archetype_id: adhd_forge
+    lane_id: pt_BR
+    publication_corp: "Livewire Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  adhd_forge_zh_cn:
+    brand_archetype_id: adhd_forge
     lane_id: zh_CN
-    status: "unassigned"
-    notes: "China team member — requires Chinese national"
-
-# ── Portal Access ─────────────────────────────────────────────────
-# Each admin accesses their brand portal at:
-#   catalog.brand-admin-onboarding.pages.dev/{brand_id}
-#
-# Auth: magic link sent to admin_email
-# Views:
-#   /catalog — full catalog of all published titles
-#   /weekly — current week's upload package
-#   /weekly/{week_id} — specific week's package
-#   /weekly/{week_id}/{platform} — platform-specific download
-#
-# Downloads: packaged by platform
-#   /download/google_play — ebooks + metadata
-#   /download/youtube — 10-min videos + thumbnails + metadata
-#   /download/youtube_shorts — 60s portrait videos
-#   /download/tiktok — 30-60s portrait videos
-#   /download/instagram — 60s reels + captions
-#   /download/line — 60-90s portrait (Japan/Taiwan/China only)
-#
-# All downloads are ZIP files containing platform-ready assets.
-# Brand admins CANNOT modify content — read-only access.
-
-# ── Plaid Revenue Collection ──────────────────────────────────────
-# Monthly ACH: 4.8% from each brand admin's bank → Pearl Prime
-#              4.8% from each brand admin's bank → 48 Social
-# Brand admins authorize via Plaid Link (they connect their own bank).
-# We never see their bank credentials — Plaid handles everything.
-# Signed contracts authorize these recurring transfers.
-plaid:
-  client_id: ""              # PLAID_CLIENT_ID env var
-  secret: ""                 # PLAID_SECRET env var
-  environment: "sandbox"     # sandbox → development → production
-  pearl_prime_bank:
-    account_id: ""           # Pearl Prime receiving account (set in env)
-    routing_number: ""
-  forty_eight_social_bank:
-    account_id: ""           # 48 Social receiving account (set in env)
-    routing_number: ""
-  monthly_percentage: 4.8    # 4.8% to each destination = 9.6% total
-  transfer_day_of_month: 1   # 1st of each month
-  minimum_transfer_usd: 1.00 # skip if amount < $1
-
-portal:
-  domain: "catalog.brand-admin-onboarding.pages.dev"
-  hosting: "cloudflare_pages"
-  storage: "cloudflare_r2"
-  auth_method: "magic_link"
-  session_duration_hours: 168  # 7 days
-  download_format: "zip"
-
-  # ── Video Lifecycle ───────────────────────────────────────────────
-  # MP4s are auto-uploaded to platforms by Pearl_Int + Pearl_GitHub.
-  # After upload confirmation, MP4s are stored on Cloudflare R2 for
-  # brand admin viewing during the week. At end of week (Sunday 23:59 UTC),
-  # MP4 files are DELETED from R2 to save storage.
-  # All other files (manifests, metadata, ebooks, thumbnails, captions)
-  # persist indefinitely.
-  video_lifecycle:
-    auto_upload: true                    # Pearl_Int uploads to all platforms automatically
-    upload_agents: ["pearl_int", "pearl_github"]
-    storage_during_week: "cloudflare_r2" # viewable by brand admin during the week
-    mp4_retention_days: 7                # delete MP4s after 7 days
-    mp4_cleanup_schedule: "sunday_2359_utc"
-    cleanup_pattern: "*.mp4"             # only MP4s — everything else persists
-    persist_after_cleanup:
-      - "*.json"      # manifests, metadata, platform variants
-      - "*.csv"       # upload manifests
-      - "*.epub"      # ebooks
-      - "*.jpg"       # thumbnails, cover art
-      - "*.png"       # thumbnails, cover art
-      - "*.txt"       # prose, README
-      - "*.srt"       # subtitles/captions
-    upload_confirmation_required: true   # don't delete until platform confirms upload success
-    cleanup_log: "artifacts/video/cleanup_log.jsonl"
-  platforms_by_lane:
-    en_US: [google_play, youtube, youtube_shorts, tiktok, instagram]
-    ja_JP: [google_play, youtube, youtube_shorts, tiktok, instagram, line]
-    ko_KR: [google_play, youtube, youtube_shorts, tiktok, instagram]
-    zh_TW: [google_play, youtube, youtube_shorts, tiktok, instagram, line]
-    zh_HK: [google_play, youtube, youtube_shorts, tiktok, instagram]
-    zh_CN: [ximalaya, youtube_shorts, tiktok, instagram]  # no Google Play in China
-    zh_SG: [google_play, youtube, youtube_shorts, tiktok, instagram]
-    es_US: [google_play, youtube, youtube_shorts, tiktok, instagram]
-    es_ES: [google_play, youtube, youtube_shorts, tiktok, instagram]
-    fr_FR: [google_play, youtube, youtube_shorts, tiktok, instagram]
-    de_DE: [google_play, youtube, youtube_shorts, tiktok, instagram]
-    it_IT: [google_play, youtube, youtube_shorts, tiktok, instagram]
-    hu_HU: [google_play, youtube, youtube_shorts, tiktok, instagram]
+    publication_corp: "Livewire Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  adhd_forge_zh_hk:
+    brand_archetype_id: adhd_forge
+    lane_id: zh_HK
+    publication_corp: "Livewire Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  adhd_forge_zh_sg:
+    brand_archetype_id: adhd_forge
+    lane_id: zh_SG
+    publication_corp: "Livewire Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  adhd_forge_zh_tw:
+    brand_archetype_id: adhd_forge
+    lane_id: zh_TW
+    publication_corp: "Livewire Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  awakening_press_de_de:
+    brand_archetype_id: awakening_press
+    lane_id: de_DE
+    publication_corp: "Awakening Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  awakening_press_en_us:
+    brand_archetype_id: awakening_press
+    lane_id: en_US
+    publication_corp: "Awakening Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  awakening_press_es_es:
+    brand_archetype_id: awakening_press
+    lane_id: es_ES
+    publication_corp: "Awakening Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  awakening_press_es_us:
+    brand_archetype_id: awakening_press
+    lane_id: es_US
+    publication_corp: "Awakening Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  awakening_press_fr_fr:
+    brand_archetype_id: awakening_press
+    lane_id: fr_FR
+    publication_corp: "Awakening Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  awakening_press_hu_hu:
+    brand_archetype_id: awakening_press
+    lane_id: hu_HU
+    publication_corp: "Awakening Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  awakening_press_it_it:
+    brand_archetype_id: awakening_press
+    lane_id: it_IT
+    publication_corp: "Awakening Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  awakening_press_ja_jp:
+    brand_archetype_id: awakening_press
+    lane_id: ja_JP
+    publication_corp: "Awakening Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  awakening_press_ko_kr:
+    brand_archetype_id: awakening_press
+    lane_id: ko_KR
+    publication_corp: "Awakening Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  awakening_press_pt_br:
+    brand_archetype_id: awakening_press
+    lane_id: pt_BR
+    publication_corp: "Awakening Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  awakening_press_zh_cn:
+    brand_archetype_id: awakening_press
+    lane_id: zh_CN
+    publication_corp: "Awakening Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  awakening_press_zh_hk:
+    brand_archetype_id: awakening_press
+    lane_id: zh_HK
+    publication_corp: "Awakening Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  awakening_press_zh_sg:
+    brand_archetype_id: awakening_press
+    lane_id: zh_SG
+    publication_corp: "Awakening Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  awakening_press_zh_tw:
+    brand_archetype_id: awakening_press
+    lane_id: zh_TW
+    publication_corp: "Awakening Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  bio_flow_de_de:
+    brand_archetype_id: bio_flow
+    lane_id: de_DE
+    publication_corp: "Signal Path Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  bio_flow_en_us:
+    brand_archetype_id: bio_flow
+    lane_id: en_US
+    publication_corp: "Signal Path Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  bio_flow_es_es:
+    brand_archetype_id: bio_flow
+    lane_id: es_ES
+    publication_corp: "Signal Path Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  bio_flow_es_us:
+    brand_archetype_id: bio_flow
+    lane_id: es_US
+    publication_corp: "Signal Path Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  bio_flow_fr_fr:
+    brand_archetype_id: bio_flow
+    lane_id: fr_FR
+    publication_corp: "Signal Path Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  bio_flow_hu_hu:
+    brand_archetype_id: bio_flow
+    lane_id: hu_HU
+    publication_corp: "Signal Path Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  bio_flow_it_it:
+    brand_archetype_id: bio_flow
+    lane_id: it_IT
+    publication_corp: "Signal Path Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  bio_flow_ja_jp:
+    brand_archetype_id: bio_flow
+    lane_id: ja_JP
+    publication_corp: "Signal Path Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  bio_flow_ko_kr:
+    brand_archetype_id: bio_flow
+    lane_id: ko_KR
+    publication_corp: "Signal Path Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  bio_flow_pt_br:
+    brand_archetype_id: bio_flow
+    lane_id: pt_BR
+    publication_corp: "Signal Path Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  bio_flow_zh_cn:
+    brand_archetype_id: bio_flow
+    lane_id: zh_CN
+    publication_corp: "Signal Path Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  bio_flow_zh_hk:
+    brand_archetype_id: bio_flow
+    lane_id: zh_HK
+    publication_corp: "Signal Path Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  bio_flow_zh_sg:
+    brand_archetype_id: bio_flow
+    lane_id: zh_SG
+    publication_corp: "Signal Path Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  bio_flow_zh_tw:
+    brand_archetype_id: bio_flow
+    lane_id: zh_TW
+    publication_corp: "Signal Path Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  body_memory_de_de:
+    brand_archetype_id: body_memory
+    lane_id: de_DE
+    publication_corp: "Held Ground Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  body_memory_en_us:
+    brand_archetype_id: body_memory
+    lane_id: en_US
+    publication_corp: "Held Ground Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  body_memory_es_es:
+    brand_archetype_id: body_memory
+    lane_id: es_ES
+    publication_corp: "Held Ground Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  body_memory_es_us:
+    brand_archetype_id: body_memory
+    lane_id: es_US
+    publication_corp: "Held Ground Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  body_memory_fr_fr:
+    brand_archetype_id: body_memory
+    lane_id: fr_FR
+    publication_corp: "Held Ground Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  body_memory_hu_hu:
+    brand_archetype_id: body_memory
+    lane_id: hu_HU
+    publication_corp: "Held Ground Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  body_memory_it_it:
+    brand_archetype_id: body_memory
+    lane_id: it_IT
+    publication_corp: "Held Ground Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  body_memory_ja_jp:
+    brand_archetype_id: body_memory
+    lane_id: ja_JP
+    publication_corp: "Held Ground Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  body_memory_ko_kr:
+    brand_archetype_id: body_memory
+    lane_id: ko_KR
+    publication_corp: "Held Ground Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  body_memory_pt_br:
+    brand_archetype_id: body_memory
+    lane_id: pt_BR
+    publication_corp: "Held Ground Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  body_memory_zh_cn:
+    brand_archetype_id: body_memory
+    lane_id: zh_CN
+    publication_corp: "Held Ground Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  body_memory_zh_hk:
+    brand_archetype_id: body_memory
+    lane_id: zh_HK
+    publication_corp: "Held Ground Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  body_memory_zh_sg:
+    brand_archetype_id: body_memory
+    lane_id: zh_SG
+    publication_corp: "Held Ground Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  body_memory_zh_tw:
+    brand_archetype_id: body_memory
+    lane_id: zh_TW
+    publication_corp: "Held Ground Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  calm_student_de_de:
+    brand_archetype_id: calm_student
+    lane_id: de_DE
+    publication_corp: "Blue Exam Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  calm_student_en_us:
+    brand_archetype_id: calm_student
+    lane_id: en_US
+    publication_corp: "Blue Exam Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  calm_student_es_es:
+    brand_archetype_id: calm_student
+    lane_id: es_ES
+    publication_corp: "Blue Exam Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  calm_student_es_us:
+    brand_archetype_id: calm_student
+    lane_id: es_US
+    publication_corp: "Blue Exam Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  calm_student_fr_fr:
+    brand_archetype_id: calm_student
+    lane_id: fr_FR
+    publication_corp: "Blue Exam Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  calm_student_hu_hu:
+    brand_archetype_id: calm_student
+    lane_id: hu_HU
+    publication_corp: "Blue Exam Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  calm_student_it_it:
+    brand_archetype_id: calm_student
+    lane_id: it_IT
+    publication_corp: "Blue Exam Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  calm_student_ja_jp:
+    brand_archetype_id: calm_student
+    lane_id: ja_JP
+    publication_corp: "Blue Exam Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  calm_student_ko_kr:
+    brand_archetype_id: calm_student
+    lane_id: ko_KR
+    publication_corp: "Blue Exam Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  calm_student_pt_br:
+    brand_archetype_id: calm_student
+    lane_id: pt_BR
+    publication_corp: "Blue Exam Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  calm_student_zh_cn:
+    brand_archetype_id: calm_student
+    lane_id: zh_CN
+    publication_corp: "Blue Exam Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  calm_student_zh_hk:
+    brand_archetype_id: calm_student
+    lane_id: zh_HK
+    publication_corp: "Blue Exam Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  calm_student_zh_sg:
+    brand_archetype_id: calm_student
+    lane_id: zh_SG
+    publication_corp: "Blue Exam Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  calm_student_zh_tw:
+    brand_archetype_id: calm_student
+    lane_id: zh_TW
+    publication_corp: "Blue Exam Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  career_lift_de_de:
+    brand_archetype_id: career_lift
+    lane_id: de_DE
+    publication_corp: "Next Chapter Publishing"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  career_lift_en_us:
+    brand_archetype_id: career_lift
+    lane_id: en_US
+    publication_corp: "Next Chapter Publishing"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  career_lift_es_es:
+    brand_archetype_id: career_lift
+    lane_id: es_ES
+    publication_corp: "Next Chapter Publishing"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  career_lift_es_us:
+    brand_archetype_id: career_lift
+    lane_id: es_US
+    publication_corp: "Next Chapter Publishing"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  career_lift_fr_fr:
+    brand_archetype_id: career_lift
+    lane_id: fr_FR
+    publication_corp: "Next Chapter Publishing"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  career_lift_hu_hu:
+    brand_archetype_id: career_lift
+    lane_id: hu_HU
+    publication_corp: "Next Chapter Publishing"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  career_lift_it_it:
+    brand_archetype_id: career_lift
+    lane_id: it_IT
+    publication_corp: "Next Chapter Publishing"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  career_lift_ja_jp:
+    brand_archetype_id: career_lift
+    lane_id: ja_JP
+    publication_corp: "Next Chapter Publishing"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  career_lift_ko_kr:
+    brand_archetype_id: career_lift
+    lane_id: ko_KR
+    publication_corp: "Next Chapter Publishing"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  career_lift_pt_br:
+    brand_archetype_id: career_lift
+    lane_id: pt_BR
+    publication_corp: "Next Chapter Publishing"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  career_lift_zh_cn:
+    brand_archetype_id: career_lift
+    lane_id: zh_CN
+    publication_corp: "Next Chapter Publishing"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  career_lift_zh_hk:
+    brand_archetype_id: career_lift
+    lane_id: zh_HK
+    publication_corp: "Next Chapter Publishing"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  career_lift_zh_sg:
+    brand_archetype_id: career_lift
+    lane_id: zh_SG
+    publication_corp: "Next Chapter Publishing"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  career_lift_zh_tw:
+    brand_archetype_id: career_lift
+    lane_id: zh_TW
+    publication_corp: "Next Chapter Publishing"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  cognitive_clarity_de_de:
+    brand_archetype_id: cognitive_clarity
+    lane_id: de_DE
+    publication_corp: "Clear Seeing Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: inactive
+  cognitive_clarity_en_us:
+    brand_archetype_id: cognitive_clarity
+    lane_id: en_US
+    publication_corp: "Clear Seeing Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: inactive
+  cognitive_clarity_es_es:
+    brand_archetype_id: cognitive_clarity
+    lane_id: es_ES
+    publication_corp: "Clear Seeing Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: inactive
+  cognitive_clarity_es_us:
+    brand_archetype_id: cognitive_clarity
+    lane_id: es_US
+    publication_corp: "Clear Seeing Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: inactive
+  cognitive_clarity_fr_fr:
+    brand_archetype_id: cognitive_clarity
+    lane_id: fr_FR
+    publication_corp: "Clear Seeing Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: inactive
+  cognitive_clarity_hu_hu:
+    brand_archetype_id: cognitive_clarity
+    lane_id: hu_HU
+    publication_corp: "Clear Seeing Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: inactive
+  cognitive_clarity_it_it:
+    brand_archetype_id: cognitive_clarity
+    lane_id: it_IT
+    publication_corp: "Clear Seeing Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: inactive
+  cognitive_clarity_ja_jp:
+    brand_archetype_id: cognitive_clarity
+    lane_id: ja_JP
+    publication_corp: "Clear Seeing Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: inactive
+  cognitive_clarity_ko_kr:
+    brand_archetype_id: cognitive_clarity
+    lane_id: ko_KR
+    publication_corp: "Clear Seeing Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: inactive
+  cognitive_clarity_pt_br:
+    brand_archetype_id: cognitive_clarity
+    lane_id: pt_BR
+    publication_corp: "Clear Seeing Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: inactive
+  cognitive_clarity_zh_cn:
+    brand_archetype_id: cognitive_clarity
+    lane_id: zh_CN
+    publication_corp: "Clear Seeing Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: inactive
+  cognitive_clarity_zh_hk:
+    brand_archetype_id: cognitive_clarity
+    lane_id: zh_HK
+    publication_corp: "Clear Seeing Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: inactive
+  cognitive_clarity_zh_sg:
+    brand_archetype_id: cognitive_clarity
+    lane_id: zh_SG
+    publication_corp: "Clear Seeing Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: inactive
+  cognitive_clarity_zh_tw:
+    brand_archetype_id: cognitive_clarity
+    lane_id: zh_TW
+    publication_corp: "Clear Seeing Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: inactive
+  confidence_core_de_de:
+    brand_archetype_id: confidence_core
+    lane_id: de_DE
+    publication_corp: "Threshold Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  confidence_core_en_us:
+    brand_archetype_id: confidence_core
+    lane_id: en_US
+    publication_corp: "Threshold Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  confidence_core_es_es:
+    brand_archetype_id: confidence_core
+    lane_id: es_ES
+    publication_corp: "Threshold Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  confidence_core_es_us:
+    brand_archetype_id: confidence_core
+    lane_id: es_US
+    publication_corp: "Threshold Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  confidence_core_fr_fr:
+    brand_archetype_id: confidence_core
+    lane_id: fr_FR
+    publication_corp: "Threshold Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  confidence_core_hu_hu:
+    brand_archetype_id: confidence_core
+    lane_id: hu_HU
+    publication_corp: "Threshold Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  confidence_core_it_it:
+    brand_archetype_id: confidence_core
+    lane_id: it_IT
+    publication_corp: "Threshold Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  confidence_core_ja_jp:
+    brand_archetype_id: confidence_core
+    lane_id: ja_JP
+    publication_corp: "Threshold Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  confidence_core_ko_kr:
+    brand_archetype_id: confidence_core
+    lane_id: ko_KR
+    publication_corp: "Threshold Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  confidence_core_pt_br:
+    brand_archetype_id: confidence_core
+    lane_id: pt_BR
+    publication_corp: "Threshold Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  confidence_core_zh_cn:
+    brand_archetype_id: confidence_core
+    lane_id: zh_CN
+    publication_corp: "Threshold Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  confidence_core_zh_hk:
+    brand_archetype_id: confidence_core
+    lane_id: zh_HK
+    publication_corp: "Threshold Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  confidence_core_zh_sg:
+    brand_archetype_id: confidence_core
+    lane_id: zh_SG
+    publication_corp: "Threshold Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  confidence_core_zh_tw:
+    brand_archetype_id: confidence_core
+    lane_id: zh_TW
+    publication_corp: "Threshold Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  creative_unfold_de_de:
+    brand_archetype_id: creative_unfold
+    lane_id: de_DE
+    publication_corp: "Blank Canvas Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  creative_unfold_en_us:
+    brand_archetype_id: creative_unfold
+    lane_id: en_US
+    publication_corp: "Blank Canvas Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  creative_unfold_es_es:
+    brand_archetype_id: creative_unfold
+    lane_id: es_ES
+    publication_corp: "Blank Canvas Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  creative_unfold_es_us:
+    brand_archetype_id: creative_unfold
+    lane_id: es_US
+    publication_corp: "Blank Canvas Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  creative_unfold_fr_fr:
+    brand_archetype_id: creative_unfold
+    lane_id: fr_FR
+    publication_corp: "Blank Canvas Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  creative_unfold_hu_hu:
+    brand_archetype_id: creative_unfold
+    lane_id: hu_HU
+    publication_corp: "Blank Canvas Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  creative_unfold_it_it:
+    brand_archetype_id: creative_unfold
+    lane_id: it_IT
+    publication_corp: "Blank Canvas Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  creative_unfold_ja_jp:
+    brand_archetype_id: creative_unfold
+    lane_id: ja_JP
+    publication_corp: "Blank Canvas Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  creative_unfold_ko_kr:
+    brand_archetype_id: creative_unfold
+    lane_id: ko_KR
+    publication_corp: "Blank Canvas Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  creative_unfold_pt_br:
+    brand_archetype_id: creative_unfold
+    lane_id: pt_BR
+    publication_corp: "Blank Canvas Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  creative_unfold_zh_cn:
+    brand_archetype_id: creative_unfold
+    lane_id: zh_CN
+    publication_corp: "Blank Canvas Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  creative_unfold_zh_hk:
+    brand_archetype_id: creative_unfold
+    lane_id: zh_HK
+    publication_corp: "Blank Canvas Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  creative_unfold_zh_sg:
+    brand_archetype_id: creative_unfold
+    lane_id: zh_SG
+    publication_corp: "Blank Canvas Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  creative_unfold_zh_tw:
+    brand_archetype_id: creative_unfold
+    lane_id: zh_TW
+    publication_corp: "Blank Canvas Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  devotion_path_de_de:
+    brand_archetype_id: devotion_path
+    lane_id: de_DE
+    publication_corp: "Open Vessel Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  devotion_path_en_us:
+    brand_archetype_id: devotion_path
+    lane_id: en_US
+    publication_corp: "Open Vessel Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  devotion_path_es_es:
+    brand_archetype_id: devotion_path
+    lane_id: es_ES
+    publication_corp: "Open Vessel Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  devotion_path_es_us:
+    brand_archetype_id: devotion_path
+    lane_id: es_US
+    publication_corp: "Open Vessel Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  devotion_path_fr_fr:
+    brand_archetype_id: devotion_path
+    lane_id: fr_FR
+    publication_corp: "Open Vessel Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  devotion_path_hu_hu:
+    brand_archetype_id: devotion_path
+    lane_id: hu_HU
+    publication_corp: "Open Vessel Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  devotion_path_it_it:
+    brand_archetype_id: devotion_path
+    lane_id: it_IT
+    publication_corp: "Open Vessel Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  devotion_path_ja_jp:
+    brand_archetype_id: devotion_path
+    lane_id: ja_JP
+    publication_corp: "Open Vessel Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  devotion_path_ko_kr:
+    brand_archetype_id: devotion_path
+    lane_id: ko_KR
+    publication_corp: "Open Vessel Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  devotion_path_pt_br:
+    brand_archetype_id: devotion_path
+    lane_id: pt_BR
+    publication_corp: "Open Vessel Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  devotion_path_zh_cn:
+    brand_archetype_id: devotion_path
+    lane_id: zh_CN
+    publication_corp: "Open Vessel Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  devotion_path_zh_hk:
+    brand_archetype_id: devotion_path
+    lane_id: zh_HK
+    publication_corp: "Open Vessel Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  devotion_path_zh_sg:
+    brand_archetype_id: devotion_path
+    lane_id: zh_SG
+    publication_corp: "Open Vessel Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  devotion_path_zh_tw:
+    brand_archetype_id: devotion_path
+    lane_id: zh_TW
+    publication_corp: "Open Vessel Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  digital_ground_de_de:
+    brand_archetype_id: digital_ground
+    lane_id: de_DE
+    publication_corp: "Present Tense Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  digital_ground_en_us:
+    brand_archetype_id: digital_ground
+    lane_id: en_US
+    publication_corp: "Present Tense Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  digital_ground_es_es:
+    brand_archetype_id: digital_ground
+    lane_id: es_ES
+    publication_corp: "Present Tense Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  digital_ground_es_us:
+    brand_archetype_id: digital_ground
+    lane_id: es_US
+    publication_corp: "Present Tense Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  digital_ground_fr_fr:
+    brand_archetype_id: digital_ground
+    lane_id: fr_FR
+    publication_corp: "Present Tense Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  digital_ground_hu_hu:
+    brand_archetype_id: digital_ground
+    lane_id: hu_HU
+    publication_corp: "Present Tense Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  digital_ground_it_it:
+    brand_archetype_id: digital_ground
+    lane_id: it_IT
+    publication_corp: "Present Tense Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  digital_ground_ja_jp:
+    brand_archetype_id: digital_ground
+    lane_id: ja_JP
+    publication_corp: "Present Tense Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  digital_ground_ko_kr:
+    brand_archetype_id: digital_ground
+    lane_id: ko_KR
+    publication_corp: "Present Tense Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  digital_ground_pt_br:
+    brand_archetype_id: digital_ground
+    lane_id: pt_BR
+    publication_corp: "Present Tense Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  digital_ground_zh_cn:
+    brand_archetype_id: digital_ground
+    lane_id: zh_CN
+    publication_corp: "Present Tense Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  digital_ground_zh_hk:
+    brand_archetype_id: digital_ground
+    lane_id: zh_HK
+    publication_corp: "Present Tense Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  digital_ground_zh_sg:
+    brand_archetype_id: digital_ground
+    lane_id: zh_SG
+    publication_corp: "Present Tense Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  digital_ground_zh_tw:
+    brand_archetype_id: digital_ground
+    lane_id: zh_TW
+    publication_corp: "Present Tense Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  executive_calm_de_de:
+    brand_archetype_id: executive_calm
+    lane_id: de_DE
+    publication_corp: "Granite Ridge Publishing"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  executive_calm_en_us:
+    brand_archetype_id: executive_calm
+    lane_id: en_US
+    publication_corp: "Granite Ridge Publishing"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  executive_calm_es_es:
+    brand_archetype_id: executive_calm
+    lane_id: es_ES
+    publication_corp: "Granite Ridge Publishing"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  executive_calm_es_us:
+    brand_archetype_id: executive_calm
+    lane_id: es_US
+    publication_corp: "Granite Ridge Publishing"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  executive_calm_fr_fr:
+    brand_archetype_id: executive_calm
+    lane_id: fr_FR
+    publication_corp: "Granite Ridge Publishing"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  executive_calm_hu_hu:
+    brand_archetype_id: executive_calm
+    lane_id: hu_HU
+    publication_corp: "Granite Ridge Publishing"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  executive_calm_it_it:
+    brand_archetype_id: executive_calm
+    lane_id: it_IT
+    publication_corp: "Granite Ridge Publishing"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  executive_calm_ja_jp:
+    brand_archetype_id: executive_calm
+    lane_id: ja_JP
+    publication_corp: "Granite Ridge Publishing"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  executive_calm_ko_kr:
+    brand_archetype_id: executive_calm
+    lane_id: ko_KR
+    publication_corp: "Granite Ridge Publishing"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  executive_calm_pt_br:
+    brand_archetype_id: executive_calm
+    lane_id: pt_BR
+    publication_corp: "Granite Ridge Publishing"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  executive_calm_zh_cn:
+    brand_archetype_id: executive_calm
+    lane_id: zh_CN
+    publication_corp: "Granite Ridge Publishing"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  executive_calm_zh_hk:
+    brand_archetype_id: executive_calm
+    lane_id: zh_HK
+    publication_corp: "Granite Ridge Publishing"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  executive_calm_zh_sg:
+    brand_archetype_id: executive_calm
+    lane_id: zh_SG
+    publication_corp: "Granite Ridge Publishing"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  executive_calm_zh_tw:
+    brand_archetype_id: executive_calm
+    lane_id: zh_TW
+    publication_corp: "Granite Ridge Publishing"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  focus_sprint_de_de:
+    brand_archetype_id: focus_sprint
+    lane_id: de_DE
+    publication_corp: "Launchpad Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  focus_sprint_en_us:
+    brand_archetype_id: focus_sprint
+    lane_id: en_US
+    publication_corp: "Launchpad Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  focus_sprint_es_es:
+    brand_archetype_id: focus_sprint
+    lane_id: es_ES
+    publication_corp: "Launchpad Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  focus_sprint_es_us:
+    brand_archetype_id: focus_sprint
+    lane_id: es_US
+    publication_corp: "Launchpad Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  focus_sprint_fr_fr:
+    brand_archetype_id: focus_sprint
+    lane_id: fr_FR
+    publication_corp: "Launchpad Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  focus_sprint_hu_hu:
+    brand_archetype_id: focus_sprint
+    lane_id: hu_HU
+    publication_corp: "Launchpad Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  focus_sprint_it_it:
+    brand_archetype_id: focus_sprint
+    lane_id: it_IT
+    publication_corp: "Launchpad Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  focus_sprint_ja_jp:
+    brand_archetype_id: focus_sprint
+    lane_id: ja_JP
+    publication_corp: "Launchpad Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  focus_sprint_ko_kr:
+    brand_archetype_id: focus_sprint
+    lane_id: ko_KR
+    publication_corp: "Launchpad Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  focus_sprint_pt_br:
+    brand_archetype_id: focus_sprint
+    lane_id: pt_BR
+    publication_corp: "Launchpad Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  focus_sprint_zh_cn:
+    brand_archetype_id: focus_sprint
+    lane_id: zh_CN
+    publication_corp: "Launchpad Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  focus_sprint_zh_hk:
+    brand_archetype_id: focus_sprint
+    lane_id: zh_HK
+    publication_corp: "Launchpad Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  focus_sprint_zh_sg:
+    brand_archetype_id: focus_sprint
+    lane_id: zh_SG
+    publication_corp: "Launchpad Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  focus_sprint_zh_tw:
+    brand_archetype_id: focus_sprint
+    lane_id: zh_TW
+    publication_corp: "Launchpad Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  gentle_growth_de_de:
+    brand_archetype_id: gentle_growth
+    lane_id: de_DE
+    publication_corp: "Tender Root Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  gentle_growth_en_us:
+    brand_archetype_id: gentle_growth
+    lane_id: en_US
+    publication_corp: "Tender Root Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  gentle_growth_es_es:
+    brand_archetype_id: gentle_growth
+    lane_id: es_ES
+    publication_corp: "Tender Root Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  gentle_growth_es_us:
+    brand_archetype_id: gentle_growth
+    lane_id: es_US
+    publication_corp: "Tender Root Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  gentle_growth_fr_fr:
+    brand_archetype_id: gentle_growth
+    lane_id: fr_FR
+    publication_corp: "Tender Root Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  gentle_growth_hu_hu:
+    brand_archetype_id: gentle_growth
+    lane_id: hu_HU
+    publication_corp: "Tender Root Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  gentle_growth_it_it:
+    brand_archetype_id: gentle_growth
+    lane_id: it_IT
+    publication_corp: "Tender Root Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  gentle_growth_ja_jp:
+    brand_archetype_id: gentle_growth
+    lane_id: ja_JP
+    publication_corp: "Tender Root Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  gentle_growth_ko_kr:
+    brand_archetype_id: gentle_growth
+    lane_id: ko_KR
+    publication_corp: "Tender Root Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  gentle_growth_pt_br:
+    brand_archetype_id: gentle_growth
+    lane_id: pt_BR
+    publication_corp: "Tender Root Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  gentle_growth_zh_cn:
+    brand_archetype_id: gentle_growth
+    lane_id: zh_CN
+    publication_corp: "Tender Root Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  gentle_growth_zh_hk:
+    brand_archetype_id: gentle_growth
+    lane_id: zh_HK
+    publication_corp: "Tender Root Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  gentle_growth_zh_sg:
+    brand_archetype_id: gentle_growth
+    lane_id: zh_SG
+    publication_corp: "Tender Root Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  gentle_growth_zh_tw:
+    brand_archetype_id: gentle_growth
+    lane_id: zh_TW
+    publication_corp: "Tender Root Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  healing_ground_de_de:
+    brand_archetype_id: healing_ground
+    lane_id: de_DE
+    publication_corp: "Midday Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  healing_ground_en_us:
+    brand_archetype_id: healing_ground
+    lane_id: en_US
+    publication_corp: "Midday Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  healing_ground_es_es:
+    brand_archetype_id: healing_ground
+    lane_id: es_ES
+    publication_corp: "Midday Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  healing_ground_es_us:
+    brand_archetype_id: healing_ground
+    lane_id: es_US
+    publication_corp: "Midday Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  healing_ground_fr_fr:
+    brand_archetype_id: healing_ground
+    lane_id: fr_FR
+    publication_corp: "Midday Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  healing_ground_hu_hu:
+    brand_archetype_id: healing_ground
+    lane_id: hu_HU
+    publication_corp: "Midday Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  healing_ground_it_it:
+    brand_archetype_id: healing_ground
+    lane_id: it_IT
+    publication_corp: "Midday Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  healing_ground_ja_jp:
+    brand_archetype_id: healing_ground
+    lane_id: ja_JP
+    publication_corp: "Midday Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  healing_ground_ko_kr:
+    brand_archetype_id: healing_ground
+    lane_id: ko_KR
+    publication_corp: "Midday Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  healing_ground_pt_br:
+    brand_archetype_id: healing_ground
+    lane_id: pt_BR
+    publication_corp: "Midday Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  healing_ground_zh_cn:
+    brand_archetype_id: healing_ground
+    lane_id: zh_CN
+    publication_corp: "Midday Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  healing_ground_zh_hk:
+    brand_archetype_id: healing_ground
+    lane_id: zh_HK
+    publication_corp: "Midday Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  healing_ground_zh_sg:
+    brand_archetype_id: healing_ground
+    lane_id: zh_SG
+    publication_corp: "Midday Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  healing_ground_zh_tw:
+    brand_archetype_id: healing_ground
+    lane_id: zh_TW
+    publication_corp: "Midday Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  heart_balance_de_de:
+    brand_archetype_id: heart_balance
+    lane_id: de_DE
+    publication_corp: "Feather & Scale Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  heart_balance_en_us:
+    brand_archetype_id: heart_balance
+    lane_id: en_US
+    publication_corp: "Feather & Scale Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  heart_balance_es_es:
+    brand_archetype_id: heart_balance
+    lane_id: es_ES
+    publication_corp: "Feather & Scale Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  heart_balance_es_us:
+    brand_archetype_id: heart_balance
+    lane_id: es_US
+    publication_corp: "Feather & Scale Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  heart_balance_fr_fr:
+    brand_archetype_id: heart_balance
+    lane_id: fr_FR
+    publication_corp: "Feather & Scale Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  heart_balance_hu_hu:
+    brand_archetype_id: heart_balance
+    lane_id: hu_HU
+    publication_corp: "Feather & Scale Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  heart_balance_it_it:
+    brand_archetype_id: heart_balance
+    lane_id: it_IT
+    publication_corp: "Feather & Scale Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  heart_balance_ja_jp:
+    brand_archetype_id: heart_balance
+    lane_id: ja_JP
+    publication_corp: "Feather & Scale Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  heart_balance_ko_kr:
+    brand_archetype_id: heart_balance
+    lane_id: ko_KR
+    publication_corp: "Feather & Scale Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  heart_balance_pt_br:
+    brand_archetype_id: heart_balance
+    lane_id: pt_BR
+    publication_corp: "Feather & Scale Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  heart_balance_zh_cn:
+    brand_archetype_id: heart_balance
+    lane_id: zh_CN
+    publication_corp: "Feather & Scale Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  heart_balance_zh_hk:
+    brand_archetype_id: heart_balance
+    lane_id: zh_HK
+    publication_corp: "Feather & Scale Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  heart_balance_zh_sg:
+    brand_archetype_id: heart_balance
+    lane_id: zh_SG
+    publication_corp: "Feather & Scale Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  heart_balance_zh_tw:
+    brand_archetype_id: heart_balance
+    lane_id: zh_TW
+    publication_corp: "Feather & Scale Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  heart_transmission_de_de:
+    brand_archetype_id: heart_transmission
+    lane_id: de_DE
+    publication_corp: "Heart Transmission Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  heart_transmission_en_us:
+    brand_archetype_id: heart_transmission
+    lane_id: en_US
+    publication_corp: "Heart Transmission Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  heart_transmission_es_es:
+    brand_archetype_id: heart_transmission
+    lane_id: es_ES
+    publication_corp: "Heart Transmission Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  heart_transmission_es_us:
+    brand_archetype_id: heart_transmission
+    lane_id: es_US
+    publication_corp: "Heart Transmission Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  heart_transmission_fr_fr:
+    brand_archetype_id: heart_transmission
+    lane_id: fr_FR
+    publication_corp: "Heart Transmission Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  heart_transmission_hu_hu:
+    brand_archetype_id: heart_transmission
+    lane_id: hu_HU
+    publication_corp: "Heart Transmission Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  heart_transmission_it_it:
+    brand_archetype_id: heart_transmission
+    lane_id: it_IT
+    publication_corp: "Heart Transmission Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  heart_transmission_ja_jp:
+    brand_archetype_id: heart_transmission
+    lane_id: ja_JP
+    publication_corp: "Heart Transmission Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  heart_transmission_ko_kr:
+    brand_archetype_id: heart_transmission
+    lane_id: ko_KR
+    publication_corp: "Heart Transmission Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  heart_transmission_pt_br:
+    brand_archetype_id: heart_transmission
+    lane_id: pt_BR
+    publication_corp: "Heart Transmission Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  heart_transmission_zh_cn:
+    brand_archetype_id: heart_transmission
+    lane_id: zh_CN
+    publication_corp: "Heart Transmission Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  heart_transmission_zh_hk:
+    brand_archetype_id: heart_transmission
+    lane_id: zh_HK
+    publication_corp: "Heart Transmission Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  heart_transmission_zh_sg:
+    brand_archetype_id: heart_transmission
+    lane_id: zh_SG
+    publication_corp: "Heart Transmission Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  heart_transmission_zh_tw:
+    brand_archetype_id: heart_transmission
+    lane_id: zh_TW
+    publication_corp: "Heart Transmission Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  high_performer_de_de:
+    brand_archetype_id: high_performer
+    lane_id: de_DE
+    publication_corp: "Close Rate Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  high_performer_en_us:
+    brand_archetype_id: high_performer
+    lane_id: en_US
+    publication_corp: "Close Rate Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  high_performer_es_es:
+    brand_archetype_id: high_performer
+    lane_id: es_ES
+    publication_corp: "Close Rate Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  high_performer_es_us:
+    brand_archetype_id: high_performer
+    lane_id: es_US
+    publication_corp: "Close Rate Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  high_performer_fr_fr:
+    brand_archetype_id: high_performer
+    lane_id: fr_FR
+    publication_corp: "Close Rate Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  high_performer_hu_hu:
+    brand_archetype_id: high_performer
+    lane_id: hu_HU
+    publication_corp: "Close Rate Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  high_performer_it_it:
+    brand_archetype_id: high_performer
+    lane_id: it_IT
+    publication_corp: "Close Rate Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  high_performer_ja_jp:
+    brand_archetype_id: high_performer
+    lane_id: ja_JP
+    publication_corp: "Close Rate Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  high_performer_ko_kr:
+    brand_archetype_id: high_performer
+    lane_id: ko_KR
+    publication_corp: "Close Rate Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  high_performer_pt_br:
+    brand_archetype_id: high_performer
+    lane_id: pt_BR
+    publication_corp: "Close Rate Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  high_performer_zh_cn:
+    brand_archetype_id: high_performer
+    lane_id: zh_CN
+    publication_corp: "Close Rate Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  high_performer_zh_hk:
+    brand_archetype_id: high_performer
+    lane_id: zh_HK
+    publication_corp: "Close Rate Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  high_performer_zh_sg:
+    brand_archetype_id: high_performer
+    lane_id: zh_SG
+    publication_corp: "Close Rate Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  high_performer_zh_tw:
+    brand_archetype_id: high_performer
+    lane_id: zh_TW
+    publication_corp: "Close Rate Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  hormone_reset_de_de:
+    brand_archetype_id: hormone_reset
+    lane_id: de_DE
+    publication_corp: "Tide & Cycle Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  hormone_reset_en_us:
+    brand_archetype_id: hormone_reset
+    lane_id: en_US
+    publication_corp: "Tide & Cycle Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  hormone_reset_es_es:
+    brand_archetype_id: hormone_reset
+    lane_id: es_ES
+    publication_corp: "Tide & Cycle Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  hormone_reset_es_us:
+    brand_archetype_id: hormone_reset
+    lane_id: es_US
+    publication_corp: "Tide & Cycle Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  hormone_reset_fr_fr:
+    brand_archetype_id: hormone_reset
+    lane_id: fr_FR
+    publication_corp: "Tide & Cycle Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  hormone_reset_hu_hu:
+    brand_archetype_id: hormone_reset
+    lane_id: hu_HU
+    publication_corp: "Tide & Cycle Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  hormone_reset_it_it:
+    brand_archetype_id: hormone_reset
+    lane_id: it_IT
+    publication_corp: "Tide & Cycle Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  hormone_reset_ja_jp:
+    brand_archetype_id: hormone_reset
+    lane_id: ja_JP
+    publication_corp: "Tide & Cycle Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  hormone_reset_ko_kr:
+    brand_archetype_id: hormone_reset
+    lane_id: ko_KR
+    publication_corp: "Tide & Cycle Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  hormone_reset_pt_br:
+    brand_archetype_id: hormone_reset
+    lane_id: pt_BR
+    publication_corp: "Tide & Cycle Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  hormone_reset_zh_cn:
+    brand_archetype_id: hormone_reset
+    lane_id: zh_CN
+    publication_corp: "Tide & Cycle Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  hormone_reset_zh_hk:
+    brand_archetype_id: hormone_reset
+    lane_id: zh_HK
+    publication_corp: "Tide & Cycle Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  hormone_reset_zh_sg:
+    brand_archetype_id: hormone_reset
+    lane_id: zh_SG
+    publication_corp: "Tide & Cycle Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  hormone_reset_zh_tw:
+    brand_archetype_id: hormone_reset
+    lane_id: zh_TW
+    publication_corp: "Tide & Cycle Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  legacy_builder_de_de:
+    brand_archetype_id: legacy_builder
+    lane_id: de_DE
+    publication_corp: "Second Mountain Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  legacy_builder_en_us:
+    brand_archetype_id: legacy_builder
+    lane_id: en_US
+    publication_corp: "Second Mountain Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  legacy_builder_es_es:
+    brand_archetype_id: legacy_builder
+    lane_id: es_ES
+    publication_corp: "Second Mountain Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  legacy_builder_es_us:
+    brand_archetype_id: legacy_builder
+    lane_id: es_US
+    publication_corp: "Second Mountain Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  legacy_builder_fr_fr:
+    brand_archetype_id: legacy_builder
+    lane_id: fr_FR
+    publication_corp: "Second Mountain Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  legacy_builder_hu_hu:
+    brand_archetype_id: legacy_builder
+    lane_id: hu_HU
+    publication_corp: "Second Mountain Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  legacy_builder_it_it:
+    brand_archetype_id: legacy_builder
+    lane_id: it_IT
+    publication_corp: "Second Mountain Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  legacy_builder_ja_jp:
+    brand_archetype_id: legacy_builder
+    lane_id: ja_JP
+    publication_corp: "Second Mountain Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  legacy_builder_ko_kr:
+    brand_archetype_id: legacy_builder
+    lane_id: ko_KR
+    publication_corp: "Second Mountain Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  legacy_builder_pt_br:
+    brand_archetype_id: legacy_builder
+    lane_id: pt_BR
+    publication_corp: "Second Mountain Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  legacy_builder_zh_cn:
+    brand_archetype_id: legacy_builder
+    lane_id: zh_CN
+    publication_corp: "Second Mountain Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  legacy_builder_zh_hk:
+    brand_archetype_id: legacy_builder
+    lane_id: zh_HK
+    publication_corp: "Second Mountain Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  legacy_builder_zh_sg:
+    brand_archetype_id: legacy_builder
+    lane_id: zh_SG
+    publication_corp: "Second Mountain Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  legacy_builder_zh_tw:
+    brand_archetype_id: legacy_builder
+    lane_id: zh_TW
+    publication_corp: "Second Mountain Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  longevity_lab_de_de:
+    brand_archetype_id: longevity_lab
+    lane_id: de_DE
+    publication_corp: "Long Arc Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  longevity_lab_en_us:
+    brand_archetype_id: longevity_lab
+    lane_id: en_US
+    publication_corp: "Long Arc Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  longevity_lab_es_es:
+    brand_archetype_id: longevity_lab
+    lane_id: es_ES
+    publication_corp: "Long Arc Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  longevity_lab_es_us:
+    brand_archetype_id: longevity_lab
+    lane_id: es_US
+    publication_corp: "Long Arc Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  longevity_lab_fr_fr:
+    brand_archetype_id: longevity_lab
+    lane_id: fr_FR
+    publication_corp: "Long Arc Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  longevity_lab_hu_hu:
+    brand_archetype_id: longevity_lab
+    lane_id: hu_HU
+    publication_corp: "Long Arc Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  longevity_lab_it_it:
+    brand_archetype_id: longevity_lab
+    lane_id: it_IT
+    publication_corp: "Long Arc Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  longevity_lab_ja_jp:
+    brand_archetype_id: longevity_lab
+    lane_id: ja_JP
+    publication_corp: "Long Arc Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  longevity_lab_ko_kr:
+    brand_archetype_id: longevity_lab
+    lane_id: ko_KR
+    publication_corp: "Long Arc Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  longevity_lab_pt_br:
+    brand_archetype_id: longevity_lab
+    lane_id: pt_BR
+    publication_corp: "Long Arc Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  longevity_lab_zh_cn:
+    brand_archetype_id: longevity_lab
+    lane_id: zh_CN
+    publication_corp: "Long Arc Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  longevity_lab_zh_hk:
+    brand_archetype_id: longevity_lab
+    lane_id: zh_HK
+    publication_corp: "Long Arc Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  longevity_lab_zh_sg:
+    brand_archetype_id: longevity_lab
+    lane_id: zh_SG
+    publication_corp: "Long Arc Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  longevity_lab_zh_tw:
+    brand_archetype_id: longevity_lab
+    lane_id: zh_TW
+    publication_corp: "Long Arc Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  minimal_mind_de_de:
+    brand_archetype_id: minimal_mind
+    lane_id: de_DE
+    publication_corp: "Clearwater Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  minimal_mind_en_us:
+    brand_archetype_id: minimal_mind
+    lane_id: en_US
+    publication_corp: "Clearwater Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  minimal_mind_es_es:
+    brand_archetype_id: minimal_mind
+    lane_id: es_ES
+    publication_corp: "Clearwater Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  minimal_mind_es_us:
+    brand_archetype_id: minimal_mind
+    lane_id: es_US
+    publication_corp: "Clearwater Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  minimal_mind_fr_fr:
+    brand_archetype_id: minimal_mind
+    lane_id: fr_FR
+    publication_corp: "Clearwater Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  minimal_mind_hu_hu:
+    brand_archetype_id: minimal_mind
+    lane_id: hu_HU
+    publication_corp: "Clearwater Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  minimal_mind_it_it:
+    brand_archetype_id: minimal_mind
+    lane_id: it_IT
+    publication_corp: "Clearwater Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  minimal_mind_ja_jp:
+    brand_archetype_id: minimal_mind
+    lane_id: ja_JP
+    publication_corp: "Clearwater Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  minimal_mind_ko_kr:
+    brand_archetype_id: minimal_mind
+    lane_id: ko_KR
+    publication_corp: "Clearwater Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  minimal_mind_pt_br:
+    brand_archetype_id: minimal_mind
+    lane_id: pt_BR
+    publication_corp: "Clearwater Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  minimal_mind_zh_cn:
+    brand_archetype_id: minimal_mind
+    lane_id: zh_CN
+    publication_corp: "Clearwater Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  minimal_mind_zh_hk:
+    brand_archetype_id: minimal_mind
+    lane_id: zh_HK
+    publication_corp: "Clearwater Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  minimal_mind_zh_sg:
+    brand_archetype_id: minimal_mind
+    lane_id: zh_SG
+    publication_corp: "Clearwater Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  minimal_mind_zh_tw:
+    brand_archetype_id: minimal_mind
+    lane_id: zh_TW
+    publication_corp: "Clearwater Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  morning_momentum_de_de:
+    brand_archetype_id: morning_momentum
+    lane_id: de_DE
+    publication_corp: "First Light Publishing"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  morning_momentum_en_us:
+    brand_archetype_id: morning_momentum
+    lane_id: en_US
+    publication_corp: "First Light Publishing"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  morning_momentum_es_es:
+    brand_archetype_id: morning_momentum
+    lane_id: es_ES
+    publication_corp: "First Light Publishing"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  morning_momentum_es_us:
+    brand_archetype_id: morning_momentum
+    lane_id: es_US
+    publication_corp: "First Light Publishing"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  morning_momentum_fr_fr:
+    brand_archetype_id: morning_momentum
+    lane_id: fr_FR
+    publication_corp: "First Light Publishing"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  morning_momentum_hu_hu:
+    brand_archetype_id: morning_momentum
+    lane_id: hu_HU
+    publication_corp: "First Light Publishing"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  morning_momentum_it_it:
+    brand_archetype_id: morning_momentum
+    lane_id: it_IT
+    publication_corp: "First Light Publishing"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  morning_momentum_ja_jp:
+    brand_archetype_id: morning_momentum
+    lane_id: ja_JP
+    publication_corp: "First Light Publishing"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  morning_momentum_ko_kr:
+    brand_archetype_id: morning_momentum
+    lane_id: ko_KR
+    publication_corp: "First Light Publishing"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  morning_momentum_pt_br:
+    brand_archetype_id: morning_momentum
+    lane_id: pt_BR
+    publication_corp: "First Light Publishing"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  morning_momentum_zh_cn:
+    brand_archetype_id: morning_momentum
+    lane_id: zh_CN
+    publication_corp: "First Light Publishing"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  morning_momentum_zh_hk:
+    brand_archetype_id: morning_momentum
+    lane_id: zh_HK
+    publication_corp: "First Light Publishing"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  morning_momentum_zh_sg:
+    brand_archetype_id: morning_momentum
+    lane_id: zh_SG
+    publication_corp: "First Light Publishing"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  morning_momentum_zh_tw:
+    brand_archetype_id: morning_momentum
+    lane_id: zh_TW
+    publication_corp: "First Light Publishing"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  night_reset_de_de:
+    brand_archetype_id: night_reset
+    lane_id: de_DE
+    publication_corp: "Still Hour Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  night_reset_en_us:
+    brand_archetype_id: night_reset
+    lane_id: en_US
+    publication_corp: "Still Hour Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  night_reset_es_es:
+    brand_archetype_id: night_reset
+    lane_id: es_ES
+    publication_corp: "Still Hour Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  night_reset_es_us:
+    brand_archetype_id: night_reset
+    lane_id: es_US
+    publication_corp: "Still Hour Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  night_reset_fr_fr:
+    brand_archetype_id: night_reset
+    lane_id: fr_FR
+    publication_corp: "Still Hour Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  night_reset_hu_hu:
+    brand_archetype_id: night_reset
+    lane_id: hu_HU
+    publication_corp: "Still Hour Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  night_reset_it_it:
+    brand_archetype_id: night_reset
+    lane_id: it_IT
+    publication_corp: "Still Hour Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  night_reset_ja_jp:
+    brand_archetype_id: night_reset
+    lane_id: ja_JP
+    publication_corp: "Still Hour Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  night_reset_ko_kr:
+    brand_archetype_id: night_reset
+    lane_id: ko_KR
+    publication_corp: "Still Hour Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  night_reset_pt_br:
+    brand_archetype_id: night_reset
+    lane_id: pt_BR
+    publication_corp: "Still Hour Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  night_reset_zh_cn:
+    brand_archetype_id: night_reset
+    lane_id: zh_CN
+    publication_corp: "Still Hour Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  night_reset_zh_hk:
+    brand_archetype_id: night_reset
+    lane_id: zh_HK
+    publication_corp: "Still Hour Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  night_reset_zh_sg:
+    brand_archetype_id: night_reset
+    lane_id: zh_SG
+    publication_corp: "Still Hour Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  night_reset_zh_tw:
+    brand_archetype_id: night_reset
+    lane_id: zh_TW
+    publication_corp: "Still Hour Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  optimizer_de_de:
+    brand_archetype_id: optimizer
+    lane_id: de_DE
+    publication_corp: "Daybreak Editions"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  optimizer_en_us:
+    brand_archetype_id: optimizer
+    lane_id: en_US
+    publication_corp: "Daybreak Editions"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  optimizer_es_es:
+    brand_archetype_id: optimizer
+    lane_id: es_ES
+    publication_corp: "Daybreak Editions"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  optimizer_es_us:
+    brand_archetype_id: optimizer
+    lane_id: es_US
+    publication_corp: "Daybreak Editions"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  optimizer_fr_fr:
+    brand_archetype_id: optimizer
+    lane_id: fr_FR
+    publication_corp: "Daybreak Editions"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  optimizer_hu_hu:
+    brand_archetype_id: optimizer
+    lane_id: hu_HU
+    publication_corp: "Daybreak Editions"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  optimizer_it_it:
+    brand_archetype_id: optimizer
+    lane_id: it_IT
+    publication_corp: "Daybreak Editions"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  optimizer_ja_jp:
+    brand_archetype_id: optimizer
+    lane_id: ja_JP
+    publication_corp: "Daybreak Editions"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  optimizer_ko_kr:
+    brand_archetype_id: optimizer
+    lane_id: ko_KR
+    publication_corp: "Daybreak Editions"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  optimizer_pt_br:
+    brand_archetype_id: optimizer
+    lane_id: pt_BR
+    publication_corp: "Daybreak Editions"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  optimizer_zh_cn:
+    brand_archetype_id: optimizer
+    lane_id: zh_CN
+    publication_corp: "Daybreak Editions"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  optimizer_zh_hk:
+    brand_archetype_id: optimizer
+    lane_id: zh_HK
+    publication_corp: "Daybreak Editions"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  optimizer_zh_sg:
+    brand_archetype_id: optimizer
+    lane_id: zh_SG
+    publication_corp: "Daybreak Editions"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  optimizer_zh_tw:
+    brand_archetype_id: optimizer
+    lane_id: zh_TW
+    publication_corp: "Daybreak Editions"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  qi_foundation_de_de:
+    brand_archetype_id: qi_foundation
+    lane_id: de_DE
+    publication_corp: "Root & Meridian Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  qi_foundation_en_us:
+    brand_archetype_id: qi_foundation
+    lane_id: en_US
+    publication_corp: "Root & Meridian Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  qi_foundation_es_es:
+    brand_archetype_id: qi_foundation
+    lane_id: es_ES
+    publication_corp: "Root & Meridian Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  qi_foundation_es_us:
+    brand_archetype_id: qi_foundation
+    lane_id: es_US
+    publication_corp: "Root & Meridian Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  qi_foundation_fr_fr:
+    brand_archetype_id: qi_foundation
+    lane_id: fr_FR
+    publication_corp: "Root & Meridian Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  qi_foundation_hu_hu:
+    brand_archetype_id: qi_foundation
+    lane_id: hu_HU
+    publication_corp: "Root & Meridian Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  qi_foundation_it_it:
+    brand_archetype_id: qi_foundation
+    lane_id: it_IT
+    publication_corp: "Root & Meridian Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  qi_foundation_ja_jp:
+    brand_archetype_id: qi_foundation
+    lane_id: ja_JP
+    publication_corp: "Root & Meridian Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  qi_foundation_ko_kr:
+    brand_archetype_id: qi_foundation
+    lane_id: ko_KR
+    publication_corp: "Root & Meridian Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  qi_foundation_pt_br:
+    brand_archetype_id: qi_foundation
+    lane_id: pt_BR
+    publication_corp: "Root & Meridian Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  qi_foundation_zh_cn:
+    brand_archetype_id: qi_foundation
+    lane_id: zh_CN
+    publication_corp: "Root & Meridian Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  qi_foundation_zh_hk:
+    brand_archetype_id: qi_foundation
+    lane_id: zh_HK
+    publication_corp: "Root & Meridian Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  qi_foundation_zh_sg:
+    brand_archetype_id: qi_foundation
+    lane_id: zh_SG
+    publication_corp: "Root & Meridian Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  qi_foundation_zh_tw:
+    brand_archetype_id: qi_foundation
+    lane_id: zh_TW
+    publication_corp: "Root & Meridian Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  relational_calm_de_de:
+    brand_archetype_id: relational_calm
+    lane_id: de_DE
+    publication_corp: "Bare Form Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  relational_calm_en_us:
+    brand_archetype_id: relational_calm
+    lane_id: en_US
+    publication_corp: "Bare Form Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  relational_calm_es_es:
+    brand_archetype_id: relational_calm
+    lane_id: es_ES
+    publication_corp: "Bare Form Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  relational_calm_es_us:
+    brand_archetype_id: relational_calm
+    lane_id: es_US
+    publication_corp: "Bare Form Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  relational_calm_fr_fr:
+    brand_archetype_id: relational_calm
+    lane_id: fr_FR
+    publication_corp: "Bare Form Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  relational_calm_hu_hu:
+    brand_archetype_id: relational_calm
+    lane_id: hu_HU
+    publication_corp: "Bare Form Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  relational_calm_it_it:
+    brand_archetype_id: relational_calm
+    lane_id: it_IT
+    publication_corp: "Bare Form Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  relational_calm_ja_jp:
+    brand_archetype_id: relational_calm
+    lane_id: ja_JP
+    publication_corp: "Bare Form Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  relational_calm_ko_kr:
+    brand_archetype_id: relational_calm
+    lane_id: ko_KR
+    publication_corp: "Bare Form Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  relational_calm_pt_br:
+    brand_archetype_id: relational_calm
+    lane_id: pt_BR
+    publication_corp: "Bare Form Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  relational_calm_zh_cn:
+    brand_archetype_id: relational_calm
+    lane_id: zh_CN
+    publication_corp: "Bare Form Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  relational_calm_zh_hk:
+    brand_archetype_id: relational_calm
+    lane_id: zh_HK
+    publication_corp: "Bare Form Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  relational_calm_zh_sg:
+    brand_archetype_id: relational_calm
+    lane_id: zh_SG
+    publication_corp: "Bare Form Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  relational_calm_zh_tw:
+    brand_archetype_id: relational_calm
+    lane_id: zh_TW
+    publication_corp: "Bare Form Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  relationship_clarity_de_de:
+    brand_archetype_id: relationship_clarity
+    lane_id: de_DE
+    publication_corp: "Two Chairs Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  relationship_clarity_en_us:
+    brand_archetype_id: relationship_clarity
+    lane_id: en_US
+    publication_corp: "Two Chairs Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  relationship_clarity_es_es:
+    brand_archetype_id: relationship_clarity
+    lane_id: es_ES
+    publication_corp: "Two Chairs Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  relationship_clarity_es_us:
+    brand_archetype_id: relationship_clarity
+    lane_id: es_US
+    publication_corp: "Two Chairs Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  relationship_clarity_fr_fr:
+    brand_archetype_id: relationship_clarity
+    lane_id: fr_FR
+    publication_corp: "Two Chairs Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  relationship_clarity_hu_hu:
+    brand_archetype_id: relationship_clarity
+    lane_id: hu_HU
+    publication_corp: "Two Chairs Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  relationship_clarity_it_it:
+    brand_archetype_id: relationship_clarity
+    lane_id: it_IT
+    publication_corp: "Two Chairs Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  relationship_clarity_ja_jp:
+    brand_archetype_id: relationship_clarity
+    lane_id: ja_JP
+    publication_corp: "Two Chairs Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  relationship_clarity_ko_kr:
+    brand_archetype_id: relationship_clarity
+    lane_id: ko_KR
+    publication_corp: "Two Chairs Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  relationship_clarity_pt_br:
+    brand_archetype_id: relationship_clarity
+    lane_id: pt_BR
+    publication_corp: "Two Chairs Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  relationship_clarity_zh_cn:
+    brand_archetype_id: relationship_clarity
+    lane_id: zh_CN
+    publication_corp: "Two Chairs Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  relationship_clarity_zh_hk:
+    brand_archetype_id: relationship_clarity
+    lane_id: zh_HK
+    publication_corp: "Two Chairs Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  relationship_clarity_zh_sg:
+    brand_archetype_id: relationship_clarity
+    lane_id: zh_SG
+    publication_corp: "Two Chairs Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  relationship_clarity_zh_tw:
+    brand_archetype_id: relationship_clarity
+    lane_id: zh_TW
+    publication_corp: "Two Chairs Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  resilient_parent_de_de:
+    brand_archetype_id: resilient_parent
+    lane_id: de_DE
+    publication_corp: "Stolen Moment Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  resilient_parent_en_us:
+    brand_archetype_id: resilient_parent
+    lane_id: en_US
+    publication_corp: "Stolen Moment Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  resilient_parent_es_es:
+    brand_archetype_id: resilient_parent
+    lane_id: es_ES
+    publication_corp: "Stolen Moment Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  resilient_parent_es_us:
+    brand_archetype_id: resilient_parent
+    lane_id: es_US
+    publication_corp: "Stolen Moment Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  resilient_parent_fr_fr:
+    brand_archetype_id: resilient_parent
+    lane_id: fr_FR
+    publication_corp: "Stolen Moment Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  resilient_parent_hu_hu:
+    brand_archetype_id: resilient_parent
+    lane_id: hu_HU
+    publication_corp: "Stolen Moment Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  resilient_parent_it_it:
+    brand_archetype_id: resilient_parent
+    lane_id: it_IT
+    publication_corp: "Stolen Moment Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  resilient_parent_ja_jp:
+    brand_archetype_id: resilient_parent
+    lane_id: ja_JP
+    publication_corp: "Stolen Moment Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  resilient_parent_ko_kr:
+    brand_archetype_id: resilient_parent
+    lane_id: ko_KR
+    publication_corp: "Stolen Moment Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  resilient_parent_pt_br:
+    brand_archetype_id: resilient_parent
+    lane_id: pt_BR
+    publication_corp: "Stolen Moment Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  resilient_parent_zh_cn:
+    brand_archetype_id: resilient_parent
+    lane_id: zh_CN
+    publication_corp: "Stolen Moment Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  resilient_parent_zh_hk:
+    brand_archetype_id: resilient_parent
+    lane_id: zh_HK
+    publication_corp: "Stolen Moment Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  resilient_parent_zh_sg:
+    brand_archetype_id: resilient_parent
+    lane_id: zh_SG
+    publication_corp: "Stolen Moment Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  resilient_parent_zh_tw:
+    brand_archetype_id: resilient_parent
+    lane_id: zh_TW
+    publication_corp: "Stolen Moment Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  sleep_restoration_de_de:
+    brand_archetype_id: sleep_restoration
+    lane_id: de_DE
+    publication_corp: "Night Architecture Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  sleep_restoration_en_us:
+    brand_archetype_id: sleep_restoration
+    lane_id: en_US
+    publication_corp: "Night Architecture Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  sleep_restoration_es_es:
+    brand_archetype_id: sleep_restoration
+    lane_id: es_ES
+    publication_corp: "Night Architecture Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  sleep_restoration_es_us:
+    brand_archetype_id: sleep_restoration
+    lane_id: es_US
+    publication_corp: "Night Architecture Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  sleep_restoration_fr_fr:
+    brand_archetype_id: sleep_restoration
+    lane_id: fr_FR
+    publication_corp: "Night Architecture Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  sleep_restoration_hu_hu:
+    brand_archetype_id: sleep_restoration
+    lane_id: hu_HU
+    publication_corp: "Night Architecture Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  sleep_restoration_it_it:
+    brand_archetype_id: sleep_restoration
+    lane_id: it_IT
+    publication_corp: "Night Architecture Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  sleep_restoration_ja_jp:
+    brand_archetype_id: sleep_restoration
+    lane_id: ja_JP
+    publication_corp: "Night Architecture Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  sleep_restoration_ko_kr:
+    brand_archetype_id: sleep_restoration
+    lane_id: ko_KR
+    publication_corp: "Night Architecture Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  sleep_restoration_pt_br:
+    brand_archetype_id: sleep_restoration
+    lane_id: pt_BR
+    publication_corp: "Night Architecture Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  sleep_restoration_zh_cn:
+    brand_archetype_id: sleep_restoration
+    lane_id: zh_CN
+    publication_corp: "Night Architecture Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  sleep_restoration_zh_hk:
+    brand_archetype_id: sleep_restoration
+    lane_id: zh_HK
+    publication_corp: "Night Architecture Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  sleep_restoration_zh_sg:
+    brand_archetype_id: sleep_restoration
+    lane_id: zh_SG
+    publication_corp: "Night Architecture Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  sleep_restoration_zh_tw:
+    brand_archetype_id: sleep_restoration
+    lane_id: zh_TW
+    publication_corp: "Night Architecture Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  solar_return_de_de:
+    brand_archetype_id: solar_return
+    lane_id: de_DE
+    publication_corp: "Ember & Ash Publishing"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  solar_return_en_us:
+    brand_archetype_id: solar_return
+    lane_id: en_US
+    publication_corp: "Ember & Ash Publishing"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  solar_return_es_es:
+    brand_archetype_id: solar_return
+    lane_id: es_ES
+    publication_corp: "Ember & Ash Publishing"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  solar_return_es_us:
+    brand_archetype_id: solar_return
+    lane_id: es_US
+    publication_corp: "Ember & Ash Publishing"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  solar_return_fr_fr:
+    brand_archetype_id: solar_return
+    lane_id: fr_FR
+    publication_corp: "Ember & Ash Publishing"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  solar_return_hu_hu:
+    brand_archetype_id: solar_return
+    lane_id: hu_HU
+    publication_corp: "Ember & Ash Publishing"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  solar_return_it_it:
+    brand_archetype_id: solar_return
+    lane_id: it_IT
+    publication_corp: "Ember & Ash Publishing"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  solar_return_ja_jp:
+    brand_archetype_id: solar_return
+    lane_id: ja_JP
+    publication_corp: "Ember & Ash Publishing"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  solar_return_ko_kr:
+    brand_archetype_id: solar_return
+    lane_id: ko_KR
+    publication_corp: "Ember & Ash Publishing"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  solar_return_pt_br:
+    brand_archetype_id: solar_return
+    lane_id: pt_BR
+    publication_corp: "Ember & Ash Publishing"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  solar_return_zh_cn:
+    brand_archetype_id: solar_return
+    lane_id: zh_CN
+    publication_corp: "Ember & Ash Publishing"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  solar_return_zh_hk:
+    brand_archetype_id: solar_return
+    lane_id: zh_HK
+    publication_corp: "Ember & Ash Publishing"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  solar_return_zh_sg:
+    brand_archetype_id: solar_return
+    lane_id: zh_SG
+    publication_corp: "Ember & Ash Publishing"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  solar_return_zh_tw:
+    brand_archetype_id: solar_return
+    lane_id: zh_TW
+    publication_corp: "Ember & Ash Publishing"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  somatic_wisdom_de_de:
+    brand_archetype_id: somatic_wisdom
+    lane_id: de_DE
+    publication_corp: "Felt Sense Publishing"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  somatic_wisdom_en_us:
+    brand_archetype_id: somatic_wisdom
+    lane_id: en_US
+    publication_corp: "Felt Sense Publishing"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  somatic_wisdom_es_es:
+    brand_archetype_id: somatic_wisdom
+    lane_id: es_ES
+    publication_corp: "Felt Sense Publishing"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  somatic_wisdom_es_us:
+    brand_archetype_id: somatic_wisdom
+    lane_id: es_US
+    publication_corp: "Felt Sense Publishing"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  somatic_wisdom_fr_fr:
+    brand_archetype_id: somatic_wisdom
+    lane_id: fr_FR
+    publication_corp: "Felt Sense Publishing"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  somatic_wisdom_hu_hu:
+    brand_archetype_id: somatic_wisdom
+    lane_id: hu_HU
+    publication_corp: "Felt Sense Publishing"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  somatic_wisdom_it_it:
+    brand_archetype_id: somatic_wisdom
+    lane_id: it_IT
+    publication_corp: "Felt Sense Publishing"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  somatic_wisdom_ja_jp:
+    brand_archetype_id: somatic_wisdom
+    lane_id: ja_JP
+    publication_corp: "Felt Sense Publishing"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  somatic_wisdom_ko_kr:
+    brand_archetype_id: somatic_wisdom
+    lane_id: ko_KR
+    publication_corp: "Felt Sense Publishing"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  somatic_wisdom_pt_br:
+    brand_archetype_id: somatic_wisdom
+    lane_id: pt_BR
+    publication_corp: "Felt Sense Publishing"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  somatic_wisdom_zh_cn:
+    brand_archetype_id: somatic_wisdom
+    lane_id: zh_CN
+    publication_corp: "Felt Sense Publishing"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  somatic_wisdom_zh_hk:
+    brand_archetype_id: somatic_wisdom
+    lane_id: zh_HK
+    publication_corp: "Felt Sense Publishing"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  somatic_wisdom_zh_sg:
+    brand_archetype_id: somatic_wisdom
+    lane_id: zh_SG
+    publication_corp: "Felt Sense Publishing"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  somatic_wisdom_zh_tw:
+    brand_archetype_id: somatic_wisdom
+    lane_id: zh_TW
+    publication_corp: "Felt Sense Publishing"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  spiritual_ground_de_de:
+    brand_archetype_id: spiritual_ground
+    lane_id: de_DE
+    publication_corp: "Deep Well Publishing"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  spiritual_ground_en_us:
+    brand_archetype_id: spiritual_ground
+    lane_id: en_US
+    publication_corp: "Deep Well Publishing"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  spiritual_ground_es_es:
+    brand_archetype_id: spiritual_ground
+    lane_id: es_ES
+    publication_corp: "Deep Well Publishing"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  spiritual_ground_es_us:
+    brand_archetype_id: spiritual_ground
+    lane_id: es_US
+    publication_corp: "Deep Well Publishing"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  spiritual_ground_fr_fr:
+    brand_archetype_id: spiritual_ground
+    lane_id: fr_FR
+    publication_corp: "Deep Well Publishing"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  spiritual_ground_hu_hu:
+    brand_archetype_id: spiritual_ground
+    lane_id: hu_HU
+    publication_corp: "Deep Well Publishing"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  spiritual_ground_it_it:
+    brand_archetype_id: spiritual_ground
+    lane_id: it_IT
+    publication_corp: "Deep Well Publishing"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  spiritual_ground_ja_jp:
+    brand_archetype_id: spiritual_ground
+    lane_id: ja_JP
+    publication_corp: "Deep Well Publishing"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  spiritual_ground_ko_kr:
+    brand_archetype_id: spiritual_ground
+    lane_id: ko_KR
+    publication_corp: "Deep Well Publishing"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  spiritual_ground_pt_br:
+    brand_archetype_id: spiritual_ground
+    lane_id: pt_BR
+    publication_corp: "Deep Well Publishing"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  spiritual_ground_zh_cn:
+    brand_archetype_id: spiritual_ground
+    lane_id: zh_CN
+    publication_corp: "Deep Well Publishing"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  spiritual_ground_zh_hk:
+    brand_archetype_id: spiritual_ground
+    lane_id: zh_HK
+    publication_corp: "Deep Well Publishing"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  spiritual_ground_zh_sg:
+    brand_archetype_id: spiritual_ground
+    lane_id: zh_SG
+    publication_corp: "Deep Well Publishing"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  spiritual_ground_zh_tw:
+    brand_archetype_id: spiritual_ground
+    lane_id: zh_TW
+    publication_corp: "Deep Well Publishing"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  stabilizer_de_de:
+    brand_archetype_id: stabilizer
+    lane_id: de_DE
+    publication_corp: "Harbor Line Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  stabilizer_en_us:
+    brand_archetype_id: stabilizer
+    lane_id: en_US
+    publication_corp: "Harbor Line Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  stabilizer_es_es:
+    brand_archetype_id: stabilizer
+    lane_id: es_ES
+    publication_corp: "Harbor Line Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  stabilizer_es_us:
+    brand_archetype_id: stabilizer
+    lane_id: es_US
+    publication_corp: "Harbor Line Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  stabilizer_fr_fr:
+    brand_archetype_id: stabilizer
+    lane_id: fr_FR
+    publication_corp: "Harbor Line Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  stabilizer_hu_hu:
+    brand_archetype_id: stabilizer
+    lane_id: hu_HU
+    publication_corp: "Harbor Line Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  stabilizer_it_it:
+    brand_archetype_id: stabilizer
+    lane_id: it_IT
+    publication_corp: "Harbor Line Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  stabilizer_ja_jp:
+    brand_archetype_id: stabilizer
+    lane_id: ja_JP
+    publication_corp: "Harbor Line Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  stabilizer_ko_kr:
+    brand_archetype_id: stabilizer
+    lane_id: ko_KR
+    publication_corp: "Harbor Line Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  stabilizer_pt_br:
+    brand_archetype_id: stabilizer
+    lane_id: pt_BR
+    publication_corp: "Harbor Line Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  stabilizer_zh_cn:
+    brand_archetype_id: stabilizer
+    lane_id: zh_CN
+    publication_corp: "Harbor Line Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  stabilizer_zh_hk:
+    brand_archetype_id: stabilizer
+    lane_id: zh_HK
+    publication_corp: "Harbor Line Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  stabilizer_zh_sg:
+    brand_archetype_id: stabilizer
+    lane_id: zh_SG
+    publication_corp: "Harbor Line Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  stabilizer_zh_tw:
+    brand_archetype_id: stabilizer
+    lane_id: zh_TW
+    publication_corp: "Harbor Line Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  still_forest_de_de:
+    brand_archetype_id: still_forest
+    lane_id: de_DE
+    publication_corp: "Still Forest Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  still_forest_en_us:
+    brand_archetype_id: still_forest
+    lane_id: en_US
+    publication_corp: "Still Forest Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  still_forest_es_es:
+    brand_archetype_id: still_forest
+    lane_id: es_ES
+    publication_corp: "Still Forest Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  still_forest_es_us:
+    brand_archetype_id: still_forest
+    lane_id: es_US
+    publication_corp: "Still Forest Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  still_forest_fr_fr:
+    brand_archetype_id: still_forest
+    lane_id: fr_FR
+    publication_corp: "Still Forest Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  still_forest_hu_hu:
+    brand_archetype_id: still_forest
+    lane_id: hu_HU
+    publication_corp: "Still Forest Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  still_forest_it_it:
+    brand_archetype_id: still_forest
+    lane_id: it_IT
+    publication_corp: "Still Forest Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  still_forest_ja_jp:
+    brand_archetype_id: still_forest
+    lane_id: ja_JP
+    publication_corp: "Still Forest Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  still_forest_ko_kr:
+    brand_archetype_id: still_forest
+    lane_id: ko_KR
+    publication_corp: "Still Forest Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  still_forest_pt_br:
+    brand_archetype_id: still_forest
+    lane_id: pt_BR
+    publication_corp: "Still Forest Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  still_forest_zh_cn:
+    brand_archetype_id: still_forest
+    lane_id: zh_CN
+    publication_corp: "Still Forest Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  still_forest_zh_hk:
+    brand_archetype_id: still_forest
+    lane_id: zh_HK
+    publication_corp: "Still Forest Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  still_forest_zh_sg:
+    brand_archetype_id: still_forest
+    lane_id: zh_SG
+    publication_corp: "Still Forest Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  still_forest_zh_tw:
+    brand_archetype_id: still_forest
+    lane_id: zh_TW
+    publication_corp: "Still Forest Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  stillness_press_de_de:
+    brand_archetype_id: stillness_press
+    lane_id: de_DE
+    publication_corp: "Stillness Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  stillness_press_en_us:
+    brand_archetype_id: stillness_press
+    lane_id: en_US
+    publication_corp: "Stillness Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  stillness_press_es_es:
+    brand_archetype_id: stillness_press
+    lane_id: es_ES
+    publication_corp: "Stillness Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  stillness_press_es_us:
+    brand_archetype_id: stillness_press
+    lane_id: es_US
+    publication_corp: "Stillness Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  stillness_press_fr_fr:
+    brand_archetype_id: stillness_press
+    lane_id: fr_FR
+    publication_corp: "Stillness Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  stillness_press_hu_hu:
+    brand_archetype_id: stillness_press
+    lane_id: hu_HU
+    publication_corp: "Stillness Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  stillness_press_it_it:
+    brand_archetype_id: stillness_press
+    lane_id: it_IT
+    publication_corp: "Stillness Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  stillness_press_ja_jp:
+    brand_archetype_id: stillness_press
+    lane_id: ja_JP
+    publication_corp: "Stillness Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  stillness_press_ko_kr:
+    brand_archetype_id: stillness_press
+    lane_id: ko_KR
+    publication_corp: "Stillness Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  stillness_press_pt_br:
+    brand_archetype_id: stillness_press
+    lane_id: pt_BR
+    publication_corp: "Stillness Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  stillness_press_zh_cn:
+    brand_archetype_id: stillness_press
+    lane_id: zh_CN
+    publication_corp: "Stillness Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  stillness_press_zh_hk:
+    brand_archetype_id: stillness_press
+    lane_id: zh_HK
+    publication_corp: "Stillness Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  stillness_press_zh_sg:
+    brand_archetype_id: stillness_press
+    lane_id: zh_SG
+    publication_corp: "Stillness Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  stillness_press_zh_tw:
+    brand_archetype_id: stillness_press
+    lane_id: zh_TW
+    publication_corp: "Stillness Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  stoic_edge_de_de:
+    brand_archetype_id: stoic_edge
+    lane_id: de_DE
+    publication_corp: "Anvil Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  stoic_edge_en_us:
+    brand_archetype_id: stoic_edge
+    lane_id: en_US
+    publication_corp: "Anvil Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  stoic_edge_es_es:
+    brand_archetype_id: stoic_edge
+    lane_id: es_ES
+    publication_corp: "Anvil Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  stoic_edge_es_us:
+    brand_archetype_id: stoic_edge
+    lane_id: es_US
+    publication_corp: "Anvil Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  stoic_edge_fr_fr:
+    brand_archetype_id: stoic_edge
+    lane_id: fr_FR
+    publication_corp: "Anvil Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  stoic_edge_hu_hu:
+    brand_archetype_id: stoic_edge
+    lane_id: hu_HU
+    publication_corp: "Anvil Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  stoic_edge_it_it:
+    brand_archetype_id: stoic_edge
+    lane_id: it_IT
+    publication_corp: "Anvil Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  stoic_edge_ja_jp:
+    brand_archetype_id: stoic_edge
+    lane_id: ja_JP
+    publication_corp: "Anvil Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  stoic_edge_ko_kr:
+    brand_archetype_id: stoic_edge
+    lane_id: ko_KR
+    publication_corp: "Anvil Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  stoic_edge_pt_br:
+    brand_archetype_id: stoic_edge
+    lane_id: pt_BR
+    publication_corp: "Anvil Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  stoic_edge_zh_cn:
+    brand_archetype_id: stoic_edge
+    lane_id: zh_CN
+    publication_corp: "Anvil Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  stoic_edge_zh_hk:
+    brand_archetype_id: stoic_edge
+    lane_id: zh_HK
+    publication_corp: "Anvil Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  stoic_edge_zh_sg:
+    brand_archetype_id: stoic_edge
+    lane_id: zh_SG
+    publication_corp: "Anvil Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  stoic_edge_zh_tw:
+    brand_archetype_id: stoic_edge
+    lane_id: zh_TW
+    publication_corp: "Anvil Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  trauma_path_de_de:
+    brand_archetype_id: trauma_path
+    lane_id: de_DE
+    publication_corp: "Soft Ground Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  trauma_path_en_us:
+    brand_archetype_id: trauma_path
+    lane_id: en_US
+    publication_corp: "Soft Ground Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  trauma_path_es_es:
+    brand_archetype_id: trauma_path
+    lane_id: es_ES
+    publication_corp: "Soft Ground Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  trauma_path_es_us:
+    brand_archetype_id: trauma_path
+    lane_id: es_US
+    publication_corp: "Soft Ground Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  trauma_path_fr_fr:
+    brand_archetype_id: trauma_path
+    lane_id: fr_FR
+    publication_corp: "Soft Ground Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  trauma_path_hu_hu:
+    brand_archetype_id: trauma_path
+    lane_id: hu_HU
+    publication_corp: "Soft Ground Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  trauma_path_it_it:
+    brand_archetype_id: trauma_path
+    lane_id: it_IT
+    publication_corp: "Soft Ground Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  trauma_path_ja_jp:
+    brand_archetype_id: trauma_path
+    lane_id: ja_JP
+    publication_corp: "Soft Ground Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  trauma_path_ko_kr:
+    brand_archetype_id: trauma_path
+    lane_id: ko_KR
+    publication_corp: "Soft Ground Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  trauma_path_pt_br:
+    brand_archetype_id: trauma_path
+    lane_id: pt_BR
+    publication_corp: "Soft Ground Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  trauma_path_zh_cn:
+    brand_archetype_id: trauma_path
+    lane_id: zh_CN
+    publication_corp: "Soft Ground Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  trauma_path_zh_hk:
+    brand_archetype_id: trauma_path
+    lane_id: zh_HK
+    publication_corp: "Soft Ground Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  trauma_path_zh_sg:
+    brand_archetype_id: trauma_path
+    lane_id: zh_SG
+    publication_corp: "Soft Ground Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  trauma_path_zh_tw:
+    brand_archetype_id: trauma_path
+    lane_id: zh_TW
+    publication_corp: "Soft Ground Books"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  warrior_calm_de_de:
+    brand_archetype_id: warrior_calm
+    lane_id: de_DE
+    publication_corp: "Iron Gate Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  warrior_calm_en_us:
+    brand_archetype_id: warrior_calm
+    lane_id: en_US
+    publication_corp: "Iron Gate Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  warrior_calm_es_es:
+    brand_archetype_id: warrior_calm
+    lane_id: es_ES
+    publication_corp: "Iron Gate Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  warrior_calm_es_us:
+    brand_archetype_id: warrior_calm
+    lane_id: es_US
+    publication_corp: "Iron Gate Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  warrior_calm_fr_fr:
+    brand_archetype_id: warrior_calm
+    lane_id: fr_FR
+    publication_corp: "Iron Gate Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  warrior_calm_hu_hu:
+    brand_archetype_id: warrior_calm
+    lane_id: hu_HU
+    publication_corp: "Iron Gate Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  warrior_calm_it_it:
+    brand_archetype_id: warrior_calm
+    lane_id: it_IT
+    publication_corp: "Iron Gate Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  warrior_calm_ja_jp:
+    brand_archetype_id: warrior_calm
+    lane_id: ja_JP
+    publication_corp: "Iron Gate Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  warrior_calm_ko_kr:
+    brand_archetype_id: warrior_calm
+    lane_id: ko_KR
+    publication_corp: "Iron Gate Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  warrior_calm_pt_br:
+    brand_archetype_id: warrior_calm
+    lane_id: pt_BR
+    publication_corp: "Iron Gate Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  warrior_calm_zh_cn:
+    brand_archetype_id: warrior_calm
+    lane_id: zh_CN
+    publication_corp: "Iron Gate Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  warrior_calm_zh_hk:
+    brand_archetype_id: warrior_calm
+    lane_id: zh_HK
+    publication_corp: "Iron Gate Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  warrior_calm_zh_sg:
+    brand_archetype_id: warrior_calm
+    lane_id: zh_SG
+    publication_corp: "Iron Gate Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned
+  warrior_calm_zh_tw:
+    brand_archetype_id: warrior_calm
+    lane_id: zh_TW
+    publication_corp: "Iron Gate Press"
+    admin_name: ""
+    admin_email: ""
+    notification_channel: email
+    status: unassigned

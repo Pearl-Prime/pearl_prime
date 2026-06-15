@@ -80,13 +80,15 @@ brands:
     teacher_id: kenjin
     teacher_mode: true
     tradition: ''
-    brand_focus: ''
+    brand_focus: Shingon ritual technology to disrupt mental spirals without negating
+      the mind; interrupt the thought-loop with embodied ritual
     primary_topics: &id004
     - overthinking
     - imposter_syndrome
     - burnout
     - boundaries
-    primary_personas: &id005 []
+    primary_personas: &id005
+    - overthinking_knowledge_worker
     content_families: &id006 []
     mission: To elevate people, especially the youth, helping them with their life
       challenges and aspirations.
@@ -634,12 +636,13 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: evidence-based habits; feel in control of aging
     primary_topics: &id061
     - somatic_healing
     - self_worth
     - grief
-    primary_personas: &id062 []
+    primary_personas: &id062
+    - longevity_seeker
     content_families: &id063 []
     mission: To elevate people, especially the youth, helping them with their life
       challenges and aspirations.
@@ -739,13 +742,14 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: integrate between sessions; feel safe in body
     primary_topics: &id073
     - grief
     - trauma_recovery
     - somatic_healing
     - shame
-    primary_personas: &id074 []
+    primary_personas: &id074
+    - trauma_recovery_adult
     content_families: &id075 []
     mission: To elevate people, especially the youth, helping them with their life
       challenges and aspirations.
@@ -763,12 +767,13 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: consistent practice; connection to something larger
     primary_topics: &id076
     - grief
     - self_worth
     - courage
-    primary_personas: &id077 []
+    primary_personas: &id077
+    - spiritually_curious_professional
     content_families: &id078 []
     mission: To elevate people, especially the youth, helping them with their life
       challenges and aspirations.
@@ -786,12 +791,13 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: focus and ship; sustain without burning out
     primary_topics: &id079
     - adhd_focus
     - imposter_syndrome
     - social_anxiety
-    primary_personas: &id080 []
+    primary_personas: &id080
+    - startup_founder
     content_families: &id081 []
     mission: To elevate people, especially the youth, helping them with their life
       challenges and aspirations.
@@ -809,12 +815,13 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: hormone-aware habits; feel in control of body
     primary_topics: &id082
     - somatic_healing
     - self_worth
     - anxiety
-    primary_personas: &id083 []
+    primary_personas: &id083
+    - women_35_plus
     content_families: &id084 []
     mission: To elevate people, especially the youth, helping them with their life
       challenges and aspirations.
@@ -832,13 +839,14 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: emotional regulation; mental toughness
     primary_topics: &id085
     - courage
     - grief
     - self_worth
     - shame
-    primary_personas: &id086 []
+    primary_personas: &id086
+    - young_male_growth
     content_families: &id087 []
     mission: To elevate people, especially the youth, helping them with their life
       challenges and aspirations.
@@ -856,12 +864,13 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: focus and sleep; stop spiraling
     primary_topics: &id088
     - anxiety
     - social_anxiety
     - self_worth
-    primary_personas: &id089 []
+    primary_personas: &id089
+    - gen_z_student
     content_families: &id090 []
     mission: To elevate people, especially the youth, helping them with their life
       challenges and aspirations.
@@ -879,12 +888,13 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: somatic regulation; reset in the middle of the day
     primary_topics: &id091
     - grief
     - boundaries
     - overthinking
-    primary_personas: &id092 []
+    primary_personas: &id092
+    - chronic_stress_worker
     content_families: &id093 []
     mission: To elevate people, especially the youth, helping them with their life
       challenges and aspirations.
@@ -902,12 +912,13 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: data-driven habits; optimize and feel good
     primary_topics: &id094
     - somatic_healing
     - overthinking
     - sleep
-    primary_personas: &id095 []
+    primary_personas: &id095
+    - biohacker
     content_families: &id096 []
     mission: To elevate people, especially the youth, helping them with their life
       challenges and aspirations.
@@ -980,12 +991,13 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: morning routine; feel set for the day
     primary_topics: &id103
     - burnout
     - courage
     - self_worth
-    primary_personas: &id104 []
+    primary_personas: &id104
+    - early_riser_professional
     content_families: &id105 []
     mission: To elevate people, especially the youth, helping them with their life
       challenges and aspirations.
@@ -1003,12 +1015,13 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: attention regulation; feel less scattered
     primary_topics: &id106
     - overthinking
     - anxiety
     - burnout
-    primary_personas: &id107 []
+    primary_personas: &id107
+    - digital_overwhelm_adult
     content_families: &id108 []
     mission: To elevate people, especially the youth, helping them with their life
       challenges and aspirations.
@@ -1026,13 +1039,14 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: peak performance; confident under pressure
     primary_topics: &id109
     - burnout
     - financial_anxiety
     - imposter_syndrome
     - overthinking
-    primary_personas: &id110 []
+    primary_personas: &id110
+    - competitive_sales
     content_families: &id111 []
     mission: To elevate people, especially the youth, helping them with their life
       challenges and aspirations.
@@ -1050,12 +1064,13 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: gentle self-inquiry; feel safe exploring
     primary_topics: &id112
     - self_worth
     - imposter_syndrome
     - social_anxiety
-    primary_personas: &id113 []
+    primary_personas: &id113
+    - therapy_newcomer
     content_families: &id114 []
     mission: To elevate people, especially the youth, helping them with their life
       challenges and aspirations.
@@ -1120,7 +1135,8 @@ brands:
     teacher_id: kenjin
     teacher_mode: true
     tradition: ''
-    brand_focus: ''
+    brand_focus: Shingon ritual technology to disrupt mental spirals without negating
+      the mind; interrupt the thought-loop with embodied ritual
     primary_topics: *id004
     primary_personas: *id005
     content_families: *id006
@@ -1502,7 +1518,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: evidence-based habits; feel in control of aging
     primary_topics: *id061
     primary_personas: *id062
     content_families: *id063
@@ -1582,7 +1598,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: integrate between sessions; feel safe in body
     primary_topics: *id073
     primary_personas: *id074
     content_families: *id075
@@ -1602,7 +1618,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: consistent practice; connection to something larger
     primary_topics: *id076
     primary_personas: *id077
     content_families: *id078
@@ -1622,7 +1638,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: focus and ship; sustain without burning out
     primary_topics: *id079
     primary_personas: *id080
     content_families: *id081
@@ -1642,7 +1658,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: hormone-aware habits; feel in control of body
     primary_topics: *id082
     primary_personas: *id083
     content_families: *id084
@@ -1662,7 +1678,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: emotional regulation; mental toughness
     primary_topics: *id085
     primary_personas: *id086
     content_families: *id087
@@ -1682,7 +1698,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: focus and sleep; stop spiraling
     primary_topics: *id088
     primary_personas: *id089
     content_families: *id090
@@ -1702,7 +1718,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: somatic regulation; reset in the middle of the day
     primary_topics: *id091
     primary_personas: *id092
     content_families: *id093
@@ -1722,7 +1738,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: data-driven habits; optimize and feel good
     primary_topics: *id094
     primary_personas: *id095
     content_families: *id096
@@ -1782,7 +1798,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: morning routine; feel set for the day
     primary_topics: *id103
     primary_personas: *id104
     content_families: *id105
@@ -1802,7 +1818,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: attention regulation; feel less scattered
     primary_topics: *id106
     primary_personas: *id107
     content_families: *id108
@@ -1822,7 +1838,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: peak performance; confident under pressure
     primary_topics: *id109
     primary_personas: *id110
     content_families: *id111
@@ -1842,7 +1858,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: gentle self-inquiry; feel safe exploring
     primary_topics: *id112
     primary_personas: *id113
     content_families: *id114
@@ -1902,7 +1918,8 @@ brands:
     teacher_id: kenjin
     teacher_mode: true
     tradition: ''
-    brand_focus: ''
+    brand_focus: Shingon ritual technology to disrupt mental spirals without negating
+      the mind; interrupt the thought-loop with embodied ritual
     primary_topics: *id004
     primary_personas: *id005
     content_families: *id006
@@ -2284,7 +2301,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: evidence-based habits; feel in control of aging
     primary_topics: *id061
     primary_personas: *id062
     content_families: *id063
@@ -2364,7 +2381,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: integrate between sessions; feel safe in body
     primary_topics: *id073
     primary_personas: *id074
     content_families: *id075
@@ -2384,7 +2401,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: consistent practice; connection to something larger
     primary_topics: *id076
     primary_personas: *id077
     content_families: *id078
@@ -2404,7 +2421,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: focus and ship; sustain without burning out
     primary_topics: *id079
     primary_personas: *id080
     content_families: *id081
@@ -2424,7 +2441,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: hormone-aware habits; feel in control of body
     primary_topics: *id082
     primary_personas: *id083
     content_families: *id084
@@ -2444,7 +2461,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: emotional regulation; mental toughness
     primary_topics: *id085
     primary_personas: *id086
     content_families: *id087
@@ -2464,7 +2481,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: focus and sleep; stop spiraling
     primary_topics: *id088
     primary_personas: *id089
     content_families: *id090
@@ -2484,7 +2501,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: somatic regulation; reset in the middle of the day
     primary_topics: *id091
     primary_personas: *id092
     content_families: *id093
@@ -2504,7 +2521,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: data-driven habits; optimize and feel good
     primary_topics: *id094
     primary_personas: *id095
     content_families: *id096
@@ -2564,7 +2581,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: morning routine; feel set for the day
     primary_topics: *id103
     primary_personas: *id104
     content_families: *id105
@@ -2584,7 +2601,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: attention regulation; feel less scattered
     primary_topics: *id106
     primary_personas: *id107
     content_families: *id108
@@ -2604,7 +2621,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: peak performance; confident under pressure
     primary_topics: *id109
     primary_personas: *id110
     content_families: *id111
@@ -2624,7 +2641,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: gentle self-inquiry; feel safe exploring
     primary_topics: *id112
     primary_personas: *id113
     content_families: *id114
@@ -2684,7 +2701,8 @@ brands:
     teacher_id: kenjin
     teacher_mode: true
     tradition: ''
-    brand_focus: ''
+    brand_focus: Shingon ritual technology to disrupt mental spirals without negating
+      the mind; interrupt the thought-loop with embodied ritual
     primary_topics: *id004
     primary_personas: *id005
     content_families: *id006
@@ -3066,7 +3084,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: evidence-based habits; feel in control of aging
     primary_topics: *id061
     primary_personas: *id062
     content_families: *id063
@@ -3146,7 +3164,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: integrate between sessions; feel safe in body
     primary_topics: *id073
     primary_personas: *id074
     content_families: *id075
@@ -3166,7 +3184,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: consistent practice; connection to something larger
     primary_topics: *id076
     primary_personas: *id077
     content_families: *id078
@@ -3186,7 +3204,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: focus and ship; sustain without burning out
     primary_topics: *id079
     primary_personas: *id080
     content_families: *id081
@@ -3206,7 +3224,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: hormone-aware habits; feel in control of body
     primary_topics: *id082
     primary_personas: *id083
     content_families: *id084
@@ -3226,7 +3244,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: emotional regulation; mental toughness
     primary_topics: *id085
     primary_personas: *id086
     content_families: *id087
@@ -3246,7 +3264,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: focus and sleep; stop spiraling
     primary_topics: *id088
     primary_personas: *id089
     content_families: *id090
@@ -3266,7 +3284,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: somatic regulation; reset in the middle of the day
     primary_topics: *id091
     primary_personas: *id092
     content_families: *id093
@@ -3286,7 +3304,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: data-driven habits; optimize and feel good
     primary_topics: *id094
     primary_personas: *id095
     content_families: *id096
@@ -3346,7 +3364,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: morning routine; feel set for the day
     primary_topics: *id103
     primary_personas: *id104
     content_families: *id105
@@ -3366,7 +3384,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: attention regulation; feel less scattered
     primary_topics: *id106
     primary_personas: *id107
     content_families: *id108
@@ -3386,7 +3404,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: peak performance; confident under pressure
     primary_topics: *id109
     primary_personas: *id110
     content_families: *id111
@@ -3406,7 +3424,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: gentle self-inquiry; feel safe exploring
     primary_topics: *id112
     primary_personas: *id113
     content_families: *id114
@@ -3466,7 +3484,8 @@ brands:
     teacher_id: kenjin
     teacher_mode: true
     tradition: ''
-    brand_focus: ''
+    brand_focus: Shingon ritual technology to disrupt mental spirals without negating
+      the mind; interrupt the thought-loop with embodied ritual
     primary_topics: *id004
     primary_personas: *id005
     content_families: *id006
@@ -3848,7 +3867,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: evidence-based habits; feel in control of aging
     primary_topics: *id061
     primary_personas: *id062
     content_families: *id063
@@ -3928,7 +3947,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: integrate between sessions; feel safe in body
     primary_topics: *id073
     primary_personas: *id074
     content_families: *id075
@@ -3948,7 +3967,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: consistent practice; connection to something larger
     primary_topics: *id076
     primary_personas: *id077
     content_families: *id078
@@ -3968,7 +3987,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: focus and ship; sustain without burning out
     primary_topics: *id079
     primary_personas: *id080
     content_families: *id081
@@ -3988,7 +4007,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: hormone-aware habits; feel in control of body
     primary_topics: *id082
     primary_personas: *id083
     content_families: *id084
@@ -4008,7 +4027,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: emotional regulation; mental toughness
     primary_topics: *id085
     primary_personas: *id086
     content_families: *id087
@@ -4028,7 +4047,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: focus and sleep; stop spiraling
     primary_topics: *id088
     primary_personas: *id089
     content_families: *id090
@@ -4048,7 +4067,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: somatic regulation; reset in the middle of the day
     primary_topics: *id091
     primary_personas: *id092
     content_families: *id093
@@ -4068,7 +4087,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: data-driven habits; optimize and feel good
     primary_topics: *id094
     primary_personas: *id095
     content_families: *id096
@@ -4128,7 +4147,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: morning routine; feel set for the day
     primary_topics: *id103
     primary_personas: *id104
     content_families: *id105
@@ -4148,7 +4167,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: attention regulation; feel less scattered
     primary_topics: *id106
     primary_personas: *id107
     content_families: *id108
@@ -4168,7 +4187,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: peak performance; confident under pressure
     primary_topics: *id109
     primary_personas: *id110
     content_families: *id111
@@ -4188,7 +4207,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: gentle self-inquiry; feel safe exploring
     primary_topics: *id112
     primary_personas: *id113
     content_families: *id114
@@ -4248,7 +4267,8 @@ brands:
     teacher_id: kenjin
     teacher_mode: true
     tradition: ''
-    brand_focus: ''
+    brand_focus: Shingon ritual technology to disrupt mental spirals without negating
+      the mind; interrupt the thought-loop with embodied ritual
     primary_topics: *id004
     primary_personas: *id005
     content_families: *id006
@@ -4630,7 +4650,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: evidence-based habits; feel in control of aging
     primary_topics: *id061
     primary_personas: *id062
     content_families: *id063
@@ -4710,7 +4730,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: integrate between sessions; feel safe in body
     primary_topics: *id073
     primary_personas: *id074
     content_families: *id075
@@ -4730,7 +4750,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: consistent practice; connection to something larger
     primary_topics: *id076
     primary_personas: *id077
     content_families: *id078
@@ -4750,7 +4770,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: focus and ship; sustain without burning out
     primary_topics: *id079
     primary_personas: *id080
     content_families: *id081
@@ -4770,7 +4790,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: hormone-aware habits; feel in control of body
     primary_topics: *id082
     primary_personas: *id083
     content_families: *id084
@@ -4790,7 +4810,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: emotional regulation; mental toughness
     primary_topics: *id085
     primary_personas: *id086
     content_families: *id087
@@ -4810,7 +4830,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: focus and sleep; stop spiraling
     primary_topics: *id088
     primary_personas: *id089
     content_families: *id090
@@ -4830,7 +4850,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: somatic regulation; reset in the middle of the day
     primary_topics: *id091
     primary_personas: *id092
     content_families: *id093
@@ -4850,7 +4870,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: data-driven habits; optimize and feel good
     primary_topics: *id094
     primary_personas: *id095
     content_families: *id096
@@ -4910,7 +4930,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: morning routine; feel set for the day
     primary_topics: *id103
     primary_personas: *id104
     content_families: *id105
@@ -4930,7 +4950,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: attention regulation; feel less scattered
     primary_topics: *id106
     primary_personas: *id107
     content_families: *id108
@@ -4950,7 +4970,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: peak performance; confident under pressure
     primary_topics: *id109
     primary_personas: *id110
     content_families: *id111
@@ -4970,7 +4990,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: gentle self-inquiry; feel safe exploring
     primary_topics: *id112
     primary_personas: *id113
     content_families: *id114
@@ -5030,7 +5050,8 @@ brands:
     teacher_id: kenjin
     teacher_mode: true
     tradition: ''
-    brand_focus: ''
+    brand_focus: Shingon ritual technology to disrupt mental spirals without negating
+      the mind; interrupt the thought-loop with embodied ritual
     primary_topics: *id004
     primary_personas: *id005
     content_families: *id006
@@ -5412,7 +5433,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: evidence-based habits; feel in control of aging
     primary_topics: *id061
     primary_personas: *id062
     content_families: *id063
@@ -5492,7 +5513,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: integrate between sessions; feel safe in body
     primary_topics: *id073
     primary_personas: *id074
     content_families: *id075
@@ -5512,7 +5533,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: consistent practice; connection to something larger
     primary_topics: *id076
     primary_personas: *id077
     content_families: *id078
@@ -5532,7 +5553,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: focus and ship; sustain without burning out
     primary_topics: *id079
     primary_personas: *id080
     content_families: *id081
@@ -5552,7 +5573,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: hormone-aware habits; feel in control of body
     primary_topics: *id082
     primary_personas: *id083
     content_families: *id084
@@ -5572,7 +5593,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: emotional regulation; mental toughness
     primary_topics: *id085
     primary_personas: *id086
     content_families: *id087
@@ -5592,7 +5613,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: focus and sleep; stop spiraling
     primary_topics: *id088
     primary_personas: *id089
     content_families: *id090
@@ -5612,7 +5633,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: somatic regulation; reset in the middle of the day
     primary_topics: *id091
     primary_personas: *id092
     content_families: *id093
@@ -5632,7 +5653,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: data-driven habits; optimize and feel good
     primary_topics: *id094
     primary_personas: *id095
     content_families: *id096
@@ -5692,7 +5713,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: morning routine; feel set for the day
     primary_topics: *id103
     primary_personas: *id104
     content_families: *id105
@@ -5712,7 +5733,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: attention regulation; feel less scattered
     primary_topics: *id106
     primary_personas: *id107
     content_families: *id108
@@ -5732,7 +5753,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: peak performance; confident under pressure
     primary_topics: *id109
     primary_personas: *id110
     content_families: *id111
@@ -5752,7 +5773,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: gentle self-inquiry; feel safe exploring
     primary_topics: *id112
     primary_personas: *id113
     content_families: *id114
@@ -5812,7 +5833,8 @@ brands:
     teacher_id: kenjin
     teacher_mode: true
     tradition: ''
-    brand_focus: ''
+    brand_focus: Shingon ritual technology to disrupt mental spirals without negating
+      the mind; interrupt the thought-loop with embodied ritual
     primary_topics: *id004
     primary_personas: *id005
     content_families: *id006
@@ -6194,7 +6216,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: evidence-based habits; feel in control of aging
     primary_topics: *id061
     primary_personas: *id062
     content_families: *id063
@@ -6274,7 +6296,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: integrate between sessions; feel safe in body
     primary_topics: *id073
     primary_personas: *id074
     content_families: *id075
@@ -6294,7 +6316,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: consistent practice; connection to something larger
     primary_topics: *id076
     primary_personas: *id077
     content_families: *id078
@@ -6314,7 +6336,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: focus and ship; sustain without burning out
     primary_topics: *id079
     primary_personas: *id080
     content_families: *id081
@@ -6334,7 +6356,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: hormone-aware habits; feel in control of body
     primary_topics: *id082
     primary_personas: *id083
     content_families: *id084
@@ -6354,7 +6376,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: emotional regulation; mental toughness
     primary_topics: *id085
     primary_personas: *id086
     content_families: *id087
@@ -6374,7 +6396,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: focus and sleep; stop spiraling
     primary_topics: *id088
     primary_personas: *id089
     content_families: *id090
@@ -6394,7 +6416,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: somatic regulation; reset in the middle of the day
     primary_topics: *id091
     primary_personas: *id092
     content_families: *id093
@@ -6414,7 +6436,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: data-driven habits; optimize and feel good
     primary_topics: *id094
     primary_personas: *id095
     content_families: *id096
@@ -6474,7 +6496,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: morning routine; feel set for the day
     primary_topics: *id103
     primary_personas: *id104
     content_families: *id105
@@ -6494,7 +6516,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: attention regulation; feel less scattered
     primary_topics: *id106
     primary_personas: *id107
     content_families: *id108
@@ -6514,7 +6536,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: peak performance; confident under pressure
     primary_topics: *id109
     primary_personas: *id110
     content_families: *id111
@@ -6534,7 +6556,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: gentle self-inquiry; feel safe exploring
     primary_topics: *id112
     primary_personas: *id113
     content_families: *id114
@@ -6594,7 +6616,8 @@ brands:
     teacher_id: kenjin
     teacher_mode: true
     tradition: ''
-    brand_focus: ''
+    brand_focus: Shingon ritual technology to disrupt mental spirals without negating
+      the mind; interrupt the thought-loop with embodied ritual
     primary_topics: *id004
     primary_personas: *id005
     content_families: *id006
@@ -6976,7 +6999,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: evidence-based habits; feel in control of aging
     primary_topics: *id061
     primary_personas: *id062
     content_families: *id063
@@ -7056,7 +7079,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: integrate between sessions; feel safe in body
     primary_topics: *id073
     primary_personas: *id074
     content_families: *id075
@@ -7076,7 +7099,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: consistent practice; connection to something larger
     primary_topics: *id076
     primary_personas: *id077
     content_families: *id078
@@ -7096,7 +7119,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: focus and ship; sustain without burning out
     primary_topics: *id079
     primary_personas: *id080
     content_families: *id081
@@ -7116,7 +7139,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: hormone-aware habits; feel in control of body
     primary_topics: *id082
     primary_personas: *id083
     content_families: *id084
@@ -7136,7 +7159,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: emotional regulation; mental toughness
     primary_topics: *id085
     primary_personas: *id086
     content_families: *id087
@@ -7156,7 +7179,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: focus and sleep; stop spiraling
     primary_topics: *id088
     primary_personas: *id089
     content_families: *id090
@@ -7176,7 +7199,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: somatic regulation; reset in the middle of the day
     primary_topics: *id091
     primary_personas: *id092
     content_families: *id093
@@ -7196,7 +7219,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: data-driven habits; optimize and feel good
     primary_topics: *id094
     primary_personas: *id095
     content_families: *id096
@@ -7256,7 +7279,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: morning routine; feel set for the day
     primary_topics: *id103
     primary_personas: *id104
     content_families: *id105
@@ -7276,7 +7299,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: attention regulation; feel less scattered
     primary_topics: *id106
     primary_personas: *id107
     content_families: *id108
@@ -7296,7 +7319,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: peak performance; confident under pressure
     primary_topics: *id109
     primary_personas: *id110
     content_families: *id111
@@ -7316,7 +7339,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: gentle self-inquiry; feel safe exploring
     primary_topics: *id112
     primary_personas: *id113
     content_families: *id114
@@ -7376,7 +7399,8 @@ brands:
     teacher_id: kenjin
     teacher_mode: true
     tradition: ''
-    brand_focus: ''
+    brand_focus: Shingon ritual technology to disrupt mental spirals without negating
+      the mind; interrupt the thought-loop with embodied ritual
     primary_topics: *id004
     primary_personas: *id005
     content_families: *id006
@@ -7758,7 +7782,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: evidence-based habits; feel in control of aging
     primary_topics: *id061
     primary_personas: *id062
     content_families: *id063
@@ -7838,7 +7862,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: integrate between sessions; feel safe in body
     primary_topics: *id073
     primary_personas: *id074
     content_families: *id075
@@ -7858,7 +7882,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: consistent practice; connection to something larger
     primary_topics: *id076
     primary_personas: *id077
     content_families: *id078
@@ -7878,7 +7902,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: focus and ship; sustain without burning out
     primary_topics: *id079
     primary_personas: *id080
     content_families: *id081
@@ -7898,7 +7922,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: hormone-aware habits; feel in control of body
     primary_topics: *id082
     primary_personas: *id083
     content_families: *id084
@@ -7918,7 +7942,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: emotional regulation; mental toughness
     primary_topics: *id085
     primary_personas: *id086
     content_families: *id087
@@ -7938,7 +7962,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: focus and sleep; stop spiraling
     primary_topics: *id088
     primary_personas: *id089
     content_families: *id090
@@ -7958,7 +7982,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: somatic regulation; reset in the middle of the day
     primary_topics: *id091
     primary_personas: *id092
     content_families: *id093
@@ -7978,7 +8002,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: data-driven habits; optimize and feel good
     primary_topics: *id094
     primary_personas: *id095
     content_families: *id096
@@ -8038,7 +8062,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: morning routine; feel set for the day
     primary_topics: *id103
     primary_personas: *id104
     content_families: *id105
@@ -8058,7 +8082,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: attention regulation; feel less scattered
     primary_topics: *id106
     primary_personas: *id107
     content_families: *id108
@@ -8078,7 +8102,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: peak performance; confident under pressure
     primary_topics: *id109
     primary_personas: *id110
     content_families: *id111
@@ -8098,7 +8122,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: gentle self-inquiry; feel safe exploring
     primary_topics: *id112
     primary_personas: *id113
     content_families: *id114
@@ -8158,7 +8182,8 @@ brands:
     teacher_id: kenjin
     teacher_mode: true
     tradition: ''
-    brand_focus: ''
+    brand_focus: Shingon ritual technology to disrupt mental spirals without negating
+      the mind; interrupt the thought-loop with embodied ritual
     primary_topics: *id004
     primary_personas: *id005
     content_families: *id006
@@ -8540,7 +8565,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: evidence-based habits; feel in control of aging
     primary_topics: *id061
     primary_personas: *id062
     content_families: *id063
@@ -8620,7 +8645,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: integrate between sessions; feel safe in body
     primary_topics: *id073
     primary_personas: *id074
     content_families: *id075
@@ -8640,7 +8665,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: consistent practice; connection to something larger
     primary_topics: *id076
     primary_personas: *id077
     content_families: *id078
@@ -8660,7 +8685,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: focus and ship; sustain without burning out
     primary_topics: *id079
     primary_personas: *id080
     content_families: *id081
@@ -8680,7 +8705,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: hormone-aware habits; feel in control of body
     primary_topics: *id082
     primary_personas: *id083
     content_families: *id084
@@ -8700,7 +8725,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: emotional regulation; mental toughness
     primary_topics: *id085
     primary_personas: *id086
     content_families: *id087
@@ -8720,7 +8745,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: focus and sleep; stop spiraling
     primary_topics: *id088
     primary_personas: *id089
     content_families: *id090
@@ -8740,7 +8765,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: somatic regulation; reset in the middle of the day
     primary_topics: *id091
     primary_personas: *id092
     content_families: *id093
@@ -8760,7 +8785,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: data-driven habits; optimize and feel good
     primary_topics: *id094
     primary_personas: *id095
     content_families: *id096
@@ -8820,7 +8845,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: morning routine; feel set for the day
     primary_topics: *id103
     primary_personas: *id104
     content_families: *id105
@@ -8840,7 +8865,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: attention regulation; feel less scattered
     primary_topics: *id106
     primary_personas: *id107
     content_families: *id108
@@ -8860,7 +8885,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: peak performance; confident under pressure
     primary_topics: *id109
     primary_personas: *id110
     content_families: *id111
@@ -8880,7 +8905,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: gentle self-inquiry; feel safe exploring
     primary_topics: *id112
     primary_personas: *id113
     content_families: *id114
@@ -8940,7 +8965,8 @@ brands:
     teacher_id: kenjin
     teacher_mode: true
     tradition: ''
-    brand_focus: ''
+    brand_focus: Shingon ritual technology to disrupt mental spirals without negating
+      the mind; interrupt the thought-loop with embodied ritual
     primary_topics: *id004
     primary_personas: *id005
     content_families: *id006
@@ -9322,7 +9348,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: evidence-based habits; feel in control of aging
     primary_topics: *id061
     primary_personas: *id062
     content_families: *id063
@@ -9402,7 +9428,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: integrate between sessions; feel safe in body
     primary_topics: *id073
     primary_personas: *id074
     content_families: *id075
@@ -9422,7 +9448,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: consistent practice; connection to something larger
     primary_topics: *id076
     primary_personas: *id077
     content_families: *id078
@@ -9442,7 +9468,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: focus and ship; sustain without burning out
     primary_topics: *id079
     primary_personas: *id080
     content_families: *id081
@@ -9462,7 +9488,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: hormone-aware habits; feel in control of body
     primary_topics: *id082
     primary_personas: *id083
     content_families: *id084
@@ -9482,7 +9508,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: emotional regulation; mental toughness
     primary_topics: *id085
     primary_personas: *id086
     content_families: *id087
@@ -9502,7 +9528,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: focus and sleep; stop spiraling
     primary_topics: *id088
     primary_personas: *id089
     content_families: *id090
@@ -9522,7 +9548,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: somatic regulation; reset in the middle of the day
     primary_topics: *id091
     primary_personas: *id092
     content_families: *id093
@@ -9542,7 +9568,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: data-driven habits; optimize and feel good
     primary_topics: *id094
     primary_personas: *id095
     content_families: *id096
@@ -9602,7 +9628,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: morning routine; feel set for the day
     primary_topics: *id103
     primary_personas: *id104
     content_families: *id105
@@ -9622,7 +9648,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: attention regulation; feel less scattered
     primary_topics: *id106
     primary_personas: *id107
     content_families: *id108
@@ -9642,7 +9668,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: peak performance; confident under pressure
     primary_topics: *id109
     primary_personas: *id110
     content_families: *id111
@@ -9662,7 +9688,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: gentle self-inquiry; feel safe exploring
     primary_topics: *id112
     primary_personas: *id113
     content_families: *id114
@@ -9722,7 +9748,8 @@ brands:
     teacher_id: kenjin
     teacher_mode: true
     tradition: ''
-    brand_focus: ''
+    brand_focus: Shingon ritual technology to disrupt mental spirals without negating
+      the mind; interrupt the thought-loop with embodied ritual
     primary_topics: *id004
     primary_personas: *id005
     content_families: *id006
@@ -10104,7 +10131,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: evidence-based habits; feel in control of aging
     primary_topics: *id061
     primary_personas: *id062
     content_families: *id063
@@ -10184,7 +10211,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: integrate between sessions; feel safe in body
     primary_topics: *id073
     primary_personas: *id074
     content_families: *id075
@@ -10204,7 +10231,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: consistent practice; connection to something larger
     primary_topics: *id076
     primary_personas: *id077
     content_families: *id078
@@ -10224,7 +10251,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: focus and ship; sustain without burning out
     primary_topics: *id079
     primary_personas: *id080
     content_families: *id081
@@ -10244,7 +10271,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: hormone-aware habits; feel in control of body
     primary_topics: *id082
     primary_personas: *id083
     content_families: *id084
@@ -10264,7 +10291,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: emotional regulation; mental toughness
     primary_topics: *id085
     primary_personas: *id086
     content_families: *id087
@@ -10284,7 +10311,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: focus and sleep; stop spiraling
     primary_topics: *id088
     primary_personas: *id089
     content_families: *id090
@@ -10304,7 +10331,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: somatic regulation; reset in the middle of the day
     primary_topics: *id091
     primary_personas: *id092
     content_families: *id093
@@ -10324,7 +10351,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: data-driven habits; optimize and feel good
     primary_topics: *id094
     primary_personas: *id095
     content_families: *id096
@@ -10384,7 +10411,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: morning routine; feel set for the day
     primary_topics: *id103
     primary_personas: *id104
     content_families: *id105
@@ -10404,7 +10431,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: attention regulation; feel less scattered
     primary_topics: *id106
     primary_personas: *id107
     content_families: *id108
@@ -10424,7 +10451,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: peak performance; confident under pressure
     primary_topics: *id109
     primary_personas: *id110
     content_families: *id111
@@ -10444,7 +10471,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: gentle self-inquiry; feel safe exploring
     primary_topics: *id112
     primary_personas: *id113
     content_families: *id114
@@ -10504,7 +10531,8 @@ brands:
     teacher_id: kenjin
     teacher_mode: true
     tradition: ''
-    brand_focus: ''
+    brand_focus: Shingon ritual technology to disrupt mental spirals without negating
+      the mind; interrupt the thought-loop with embodied ritual
     primary_topics: *id004
     primary_personas: *id005
     content_families: *id006
@@ -10886,7 +10914,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: evidence-based habits; feel in control of aging
     primary_topics: *id061
     primary_personas: *id062
     content_families: *id063
@@ -10966,7 +10994,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: integrate between sessions; feel safe in body
     primary_topics: *id073
     primary_personas: *id074
     content_families: *id075
@@ -10986,7 +11014,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: consistent practice; connection to something larger
     primary_topics: *id076
     primary_personas: *id077
     content_families: *id078
@@ -11006,7 +11034,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: focus and ship; sustain without burning out
     primary_topics: *id079
     primary_personas: *id080
     content_families: *id081
@@ -11026,7 +11054,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: hormone-aware habits; feel in control of body
     primary_topics: *id082
     primary_personas: *id083
     content_families: *id084
@@ -11046,7 +11074,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: emotional regulation; mental toughness
     primary_topics: *id085
     primary_personas: *id086
     content_families: *id087
@@ -11066,7 +11094,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: focus and sleep; stop spiraling
     primary_topics: *id088
     primary_personas: *id089
     content_families: *id090
@@ -11086,7 +11114,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: somatic regulation; reset in the middle of the day
     primary_topics: *id091
     primary_personas: *id092
     content_families: *id093
@@ -11106,7 +11134,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: data-driven habits; optimize and feel good
     primary_topics: *id094
     primary_personas: *id095
     content_families: *id096
@@ -11166,7 +11194,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: morning routine; feel set for the day
     primary_topics: *id103
     primary_personas: *id104
     content_families: *id105
@@ -11186,7 +11214,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: attention regulation; feel less scattered
     primary_topics: *id106
     primary_personas: *id107
     content_families: *id108
@@ -11206,7 +11234,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: peak performance; confident under pressure
     primary_topics: *id109
     primary_personas: *id110
     content_families: *id111
@@ -11226,7 +11254,7 @@ brands:
     teacher_id: null
     teacher_mode: false
     tradition: ''
-    brand_focus: ''
+    brand_focus: gentle self-inquiry; feel safe exploring
     primary_topics: *id112
     primary_personas: *id113
     content_families: *id114

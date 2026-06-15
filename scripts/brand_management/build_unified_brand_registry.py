@@ -70,6 +70,18 @@ def main():
     # deep data keyed by deep archetype id (en_US lane carries the base record)
     deep_en = {v["brand_archetype_id"]: v for v in deep.values() if v.get("lane_id")=="en_US"}
 
+    # gtm fallback (deep build-out of thin brands): persona + focus from the archetype sources
+    gtm = {}  # canon_id -> {persona, focus}
+    for b in ta.get("teacher_brand_archetypes", []):
+        g = b.get("gtm_identity") or {}
+        gtm[b["brand_id"]] = {"persona": g.get("persona"),
+                              "focus": "; ".join(x for x in [g.get("functional_job"), g.get("emotional_job")] if x)}
+    _std_key = next((k for k,v in bar.items() if isinstance(v,list) and v and isinstance(v[0],dict) and "brand_id" in v[0]), None)
+    for b in (bar.get(_std_key) or []):
+        g = b.get("gtm_identity") or {}
+        gtm.setdefault(b["brand_id"], {"persona": g.get("persona"),
+                                       "focus": "; ".join(x for x in [g.get("functional_job"), g.get("emotional_job")] if x)})
+
     # canonical-37 topic fallback via manga canon (longest-prefix base match)
     def manga_topics(canon_id):
         for cid, m in manga.items():
@@ -98,8 +110,10 @@ def main():
 
     def archetype_record(canon_id, teacher_id, teacher_mode):
         d = deep_for(canon_id, teacher_mode)
+        g = gtm.get(canon_id, {})
         disp = imprint.get(canon_id) or IMPRINT_FALLBACK.get(canon_id) or canon_id.replace("_"," ").title()
         topics = d.get("primary_topics") or manga_topics(canon_id)
+        personas = d.get("primary_personas") or ([g["persona"]] if g.get("persona") else [])
         return {
             "brand_archetype_id": canon_id,
             "display_name": disp,
@@ -107,9 +121,9 @@ def main():
             "teacher_id": teacher_id,
             "teacher_mode": bool(teacher_mode),
             "tradition": d.get("tradition") or "",
-            "brand_focus": d.get("brand_focus") or "",
+            "brand_focus": d.get("brand_focus") or g.get("focus") or "",
             "primary_topics": topics,
-            "primary_personas": d.get("primary_personas") or [],
+            "primary_personas": personas,
             "content_families": d.get("content_families") or [],
             "mission": d.get("mission") or "To elevate people, especially the youth, helping them with their life challenges and aspirations.",
             "lifecycle": "inactive" if canon_id in INACTIVE else "active",
