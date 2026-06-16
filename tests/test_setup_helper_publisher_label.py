@@ -89,8 +89,24 @@ def test_public_json_has_prove_brands_with_publisher(public_json):
     assert public_json["devotion_path_en_us"]["publisher"] == "Open Vessel Press"
 
 
-def test_public_json_operator_brand_keeps_prefill_and_publisher(public_json):
-    e = public_json.get("way_stream_sanctuary")
+def test_public_json_operator_brand_keeps_prefill_and_publisher(tmp_path, monkeypatch):
+    """An operator brand-config (top-level `brand_admin:`) flows into the public JSON
+    with its prefill name + a resolved publisher. Uses a PII-free demo config and a
+    patched scan path so this holds on CI, where real operator configs are absent
+    (they live only on the operator's machine and carry contact PII)."""
+    import json
+    demo = tmp_path / "way_stream_sanctuary_brand-config.yaml"
+    demo.write_text(
+        'brand_admin:\n'
+        '  first_name: "Waystream"\n'
+        '  last_name: "Sanctuary"\n'
+        '  onboarding_market: "us"\n'
+        '  format_focus: "book"\n',
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(gen, "SCAN_GLOBS", [str(demo)])
+    public = json.loads(gen.render_public(gen.build()))
+    e = public.get("way_stream_sanctuary")
     assert e and e.get("name") == "Waystream Sanctuary"
     assert e.get("publisher")  # has a publisher label too
 
