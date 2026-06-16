@@ -100,22 +100,25 @@ jobs:
           - shard: master_sha
             mode: teacher
             teacher_id: master_sha
-    if: ${{ github.event.inputs.shard == 'all' || github.event.inputs.shard == matrix.shard }}
     steps:
       - name: Checkout repo
+        if: ${{ github.event.inputs.shard == 'all' || github.event.inputs.shard == matrix.shard }}
         uses: actions/checkout@v4
 
       - name: Setup Python 3.11
+        if: ${{ github.event.inputs.shard == 'all' || github.event.inputs.shard == matrix.shard }}
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
       - name: Install deps
+        if: ${{ github.event.inputs.shard == 'all' || github.event.inputs.shard == matrix.shard }}
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
       - name: Preflight runner + Qwen API health
+        if: ${{ github.event.inputs.shard == 'all' || github.event.inputs.shard == matrix.shard }}
         run: |
           set -euo pipefail
           echo "== Qwen model check =="
@@ -135,6 +138,7 @@ jobs:
           PY
 
       - name: Run max-quality shard
+        if: ${{ github.event.inputs.shard == 'all' || github.event.inputs.shard == matrix.shard }}
         run: |
           python3 - <<'PY'
           import shlex
@@ -165,6 +169,7 @@ jobs:
           PY
 
       - name: Upload shard artifacts
+        if: ${{ github.event.inputs.shard == 'all' || github.event.inputs.shard == matrix.shard }}
         uses: actions/upload-artifact@v4
         with:
           name: max-quality-catalog-${{ matrix.shard }}-${{ github.run_id }}
