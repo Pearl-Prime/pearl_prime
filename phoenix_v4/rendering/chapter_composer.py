@@ -1521,10 +1521,15 @@ def _bridge_within_slot(
     if not shape_names:
         return ""
 
-    # Rotate shape bucket by atom_pair_index so adjacent bridges inside the
-    # same slot land in different shape buckets when more than one bucket
-    # is defined for the slot.
-    shape_idx = atom_pair_index % len(shape_names)
+    # Rotate shape bucket by (chapter_index + atom_pair_index) so the same
+    # atom_pair across different chapters does NOT pin to a single bucket.
+    # LEVER-B: previously `atom_pair_index % len(shape_names)` alone meant every
+    # atom_pair divisible by len(shape_names) landed on shape_names[0] in EVERY
+    # chapter (e.g. STORY pairs 9/21/30/36 all -> contrast_lift), funnelling the
+    # cross-chapter dedup into one bucket and recurring the same variant book-wide.
+    # Folding chapter_index in spreads the bucket choice across chapters while
+    # remaining fully deterministic for a fixed (chapter, atom_pair) seed.
+    shape_idx = (int(chapter_index) + int(atom_pair_index)) % len(shape_names)
     shape_key = shape_names[shape_idx]
     entries = family.get(shape_key) or []
     if not isinstance(entries, list) or not entries:
@@ -1545,22 +1550,47 @@ def _bridge_within_slot(
     # The seed_rank ties variant choice to the slot coordinates so
     # re-renders with the same seed produce identical output.
     seed_root = f"opd109|{int(chapter_index)}|{st_upper}|{int(atom_pair_index)}|{shape_key}"
-    raw_variants: list[tuple[str, int, str]] = []
-    for v_idx, entry in enumerate(entries):
-        if not isinstance(entry, dict):
-            continue
-        text = str(entry.get("text") or "").strip()
-        if not text:
-            continue
-        # OPD-112: missing field defaults to "any" (backward-compatible —
-        # bridges without explicit expectations remain universal acceptors).
-        expectation = str(entry.get("next_atom_expectation") or "any").strip().lower()
-        if expectation not in _NEXT_ATOM_EXPECTATION_LABELS:
-            expectation = "any"
-        rank_seed = f"{seed_root}|{v_idx}|{text}"
-        rank_digest = hashlib.sha256(rank_seed.encode("utf-8")).digest()
-        seed_rank = int.from_bytes(rank_digest[:8], "big")
-        raw_variants.append((text, seed_rank, expectation))
+
+    def _variants_for(entry_list: list[Any], bucket_key: str) -> list[tuple[str, int, str]]:
+        out: list[tuple[str, int, str]] = []
+        for v_idx, entry in enumerate(entry_list):
+            if not isinstance(entry, dict):
+                continue
+            text = str(entry.get("text") or "").strip()
+            if not text:
+                continue
+            # OPD-112: missing field defaults to "any" (backward-compatible —
+            # bridges without explicit expectations remain universal acceptors).
+            expectation = str(entry.get("next_atom_expectation") or "any").strip().lower()
+            if expectation not in _NEXT_ATOM_EXPECTATION_LABELS:
+                expectation = "any"
+            rank_seed = f"{seed_root}|{bucket_key}|{v_idx}|{text}"
+            rank_digest = hashlib.sha256(rank_seed.encode("utf-8")).digest()
+            seed_rank = int.from_bytes(rank_digest[:8], "big")
+            out.append((text, seed_rank, expectation))
+        return out
+
+    raw_variants = _variants_for(entries, shape_key)
+
+    # LEVER-B cross-chapter variety: when a rotation state is present we widen
+    # the candidate pool to EVERY shape bucket for this slot (deduped by text).
+    # The chosen bucket above still sets the primary seed/shape; the wider pool
+    # only matters when book-level dedup needs headroom -- it lets the selector
+    # reach a still-unused variant in a sibling bucket instead of recurring the
+    # last bucket's text book-wide. Without rotation state we keep the legacy
+    # single-bucket pool so deterministic seed-only behavior is unchanged.
+    effective_state_preview: "WithinSlotRotationState | None" = (
+        rotation_state if rotation_state is not None else _WITHIN_SLOT_ROTATION_TLS
+    )
+    if effective_state_preview is not None and len(shape_names) > 1:
+        seen_texts = {v[0] for v in raw_variants}
+        for sk in shape_names:
+            if sk == shape_key:
+                continue
+            for cand in _variants_for(family.get(sk) or [], sk):
+                if cand[0] not in seen_texts:
+                    raw_variants.append(cand)
+                    seen_texts.add(cand[0])
     if not raw_variants:
         return ""
 
@@ -1597,8 +1627,17 @@ def _bridge_within_slot(
         # If every variant in this shape was used, allow reuse but keep the
         # least-used-in-book first so we still spread the load.
         candidates = chapter_filtered if chapter_filtered else next_class_filtered
+        # LEVER-B: make book-level no-repeat a HARD preference. When any variant
+        # has never been used in the book, restrict the pool to those -- so a
+        # bridge text cannot recur across chapters while fresh variants remain.
+        # The previous (book_count, seed_rank) sort alone let a between-bucket
+        # tie re-pick the same text book-wide (verified: 'Same body. Different
+        # door.' recurred 8x at full-12 deep). Only when the whole widened pool
+        # is exhausted do we fall back to least-used-first reuse.
+        book_fresh = [v for v in candidates if effective_state.book_count(v[0]) == 0]
+        pool = book_fresh if book_fresh else candidates
         candidates_sorted = sorted(
-            candidates,
+            pool,
             key=lambda triple: (effective_state.book_count(triple[0]), triple[1]),
         )
         chosen_text = candidates_sorted[0][0]

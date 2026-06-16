@@ -119,6 +119,66 @@ def test_bridge_memory_blocks_repeated_exact_phrase() -> None:
     assert memory.phrase_used_book(first["text"])
 
 
+def test_within_slot_bridge_no_cross_chapter_repeat_on_degenerate_pairs() -> None:
+    """LEVER-B: a within-slot bridge must not recur across chapters when fresh
+    variants remain -- even at the degenerate atom_pair pattern that previously
+    pinned every call to one shape bucket.
+
+    Before the fix, ``shape_idx = atom_pair_index % len(shape_names)`` sent every
+    atom_pair divisible by len(shape_names) to ``shape_names[0]`` in EVERY chapter,
+    so the same STORY bridge text ('Same body. Different door.') recurred 8x
+    book-wide in deep_book_6h. Folding chapter_index into the bucket choice + a
+    hard book-level no-repeat preference must yield distinct texts here.
+    """
+    state = cc.WithinSlotRotationState()
+    # All atom_pairs are multiples of 3 (== len(STORY shape buckets)) so the OLD
+    # code returned shape_names[0] for every one of them.
+    degenerate = [(1, 9), (2, 21), (4, 3), (5, 30), (8, 3), (9, 9), (10, 12), (11, 36)]
+    outs = []
+    for ch, ap in degenerate:
+        out = cc._bridge_within_slot(
+            prev_atom="The body keeps the score in real time and never lies.",
+            next_atom="She froze at her desk and the cursor blinked back at her.",
+            slot_type="STORY",
+            atom_pair_index=ap,
+            chapter_index=ch,
+            rotation_state=state,
+        )
+        assert out  # bridge never goes silent
+        outs.append(out)
+    # No exact text may repeat across these chapters while the STORY pool
+    # (49 distinct variants across 3 shape buckets) has fresh entries.
+    assert len(set(outs)) == len(outs), f"cross-chapter repeat: {outs}"
+
+
+def test_within_slot_legacy_seed_only_path_is_deterministic() -> None:
+    """Backward-compat: with no rotation state the within-slot selector stays a
+    pure deterministic seed-only pick (the LEVER-B pool-widening only engages
+    when a rotation state is present)."""
+    prev = cc._WITHIN_SLOT_ROTATION_TLS
+    cc._WITHIN_SLOT_ROTATION_TLS = None
+    try:
+        a = cc._bridge_within_slot(
+            prev_atom="a body sentence long enough to survive cleaning",
+            next_atom="She froze at the desk and the cursor blinked at her.",
+            slot_type="STORY",
+            atom_pair_index=0,
+            chapter_index=3,
+            rotation_state=None,
+        )
+        b = cc._bridge_within_slot(
+            prev_atom="a body sentence long enough to survive cleaning",
+            next_atom="She froze at the desk and the cursor blinked at her.",
+            slot_type="STORY",
+            atom_pair_index=0,
+            chapter_index=3,
+            rotation_state=None,
+        )
+        assert a and a == b
+    finally:
+        cc._WITHIN_SLOT_ROTATION_TLS = prev
+
+
 def test_bridge_memory_limits_same_stem_density() -> None:
     memory = cc.BridgeMemory()
     memory.register(
