@@ -77,7 +77,24 @@
     .platform-name { font-size: 0.95rem; font-weight: 600; }
     .platform-count { font-family: var(--mono); font-size: 0.68rem; color: var(--muted); }
     .platform-dls { margin-left: auto; display: flex; gap: 8px; flex-wrap: wrap; }
-    .platform-body { padding: 6px 16px 14px; }
+    .platform-body { padding: 12px 16px 14px; }
+    .mode-tag { font-family: var(--mono); font-size: 0.6rem; padding: 2px 8px; border-radius: 10px; border: 1px solid var(--border); color: var(--muted); white-space: nowrap; }
+    .mode-bulk { color: var(--green); border-color: var(--green); background: rgba(34,197,94,0.08); }
+    .mode-single { color: var(--yellow); border-color: var(--yellow); background: rgba(250,204,21,0.07); }
+    .mode-rss { color: var(--blue); border-color: var(--blue); background: rgba(96,165,250,0.08); }
+
+    /* ── How-to instructions ── */
+    .howto { background: rgba(0,0,0,0.28); border: 1px solid rgba(180,83,9,0.16); border-radius: 7px; padding: 10px 13px; margin-bottom: 12px; }
+    .howto > summary { font-size: 0.66rem; font-family: var(--mono); text-transform: uppercase; letter-spacing: .07em; color: var(--amber2); cursor: pointer; list-style: none; outline: none; }
+    .howto > summary::-webkit-details-marker { display: none; }
+    .howto > summary::before { content: "▾ "; color: var(--muted); }
+    .howto:not([open]) > summary::before { content: "▸ "; }
+    .howto ol { margin: 9px 0 0; padding-left: 1.2rem; }
+    .howto li { font-size: 0.74rem; color: var(--cream); margin: 4px 0; }
+    .howto .note { font-size: 0.67rem; color: var(--muted); margin-top: 8px; font-style: italic; }
+    .howto code { font-family: var(--mono); font-size: 0.69rem; color: var(--amber2); background: rgba(0,0,0,0.35); padding: 1px 5px; border-radius: 3px; }
+
+    /* ── Title list ── */
     .title-list { list-style: none; }
     .title-list li {
       padding: 8px 0; border-bottom: 1px solid rgba(180,83,9,0.1);
@@ -88,7 +105,8 @@
     .title-text { flex: 1; }
     .format-badge { font-size: 0.6rem; font-family: var(--mono); padding: 1px 7px; border-radius: 10px; border: 1px solid; white-space: nowrap; }
     .fmt-ebook { border-color: var(--blue); color: var(--blue); }
-    .fmt-audio { border-color: var(--yellow); color: var(--yellow); }
+    .fmt-audiobook { border-color: var(--purple); color: var(--purple); }
+    .fmt-episode { border-color: var(--yellow); color: var(--yellow); }
 
     /* ── History view ── */
     .history-list { list-style: none; }
@@ -145,11 +163,7 @@
   <!-- ════════ WEEKLY VIEW ════════ -->
   <div id="view-weekly">
     <div class="viewing-note hidden" id="history-note"></div>
-
-    <!-- Upload-slots summary (quick glance) -->
     <div class="slots-summary" id="slots-summary"></div>
-
-    <!-- Per-platform delivery -->
     <div id="platforms"></div>
   </div>
 
@@ -179,32 +193,82 @@
 "use strict";
 
 // ════════════════════════════════════════════════════════════════════════
-// Single-brand Brand Director Operations.
-// The brand is FIXED — resolved from ?brand=<unified_id> via the shared bridge
-// JSON (brand_admin_brands.json, gen_brand_admin_brands.py). No brand switching:
-// a director sees only their own brand (e.g. devotion_path_en_us → "Open Vessel Press").
+// Single-brand Brand Director Operations. Brand is FIXED from ?brand=<unified_id>
+// via the shared bridge JSON (brand_admin_brands.json). No brand switching.
 //
-// Catalog / weekly-title / per-platform data below is deterministic placeholder
-// shaped exactly like the real handoff packet, so the same bridge that carries the
-// brand name can later carry the real per-platform CSVs + asset manifests.
+// Per-platform delivery + instructions reflect the REAL 2026 upload mechanics
+// (researched per platform). Each retail channel gets ONE download (its metadata
+// packet) + step-by-step "how to upload". Titles/metadata are deterministic
+// placeholders shaped like the real handoff packet, pending the real catalog feed.
 // ════════════════════════════════════════════════════════════════════════
 
 const LANE_MARKET = {en_us:"us",es_us:"us",es_es:"spain",pt_br:"brazil",zh_tw:"taiwan",zh_hk:"hong_kong",zh_cn:"china",zh_sg:"singapore",ja_jp:"japan",ko_kr:"korea"};
 
-// Book platforms (the director's upload destinations) + the podcast feed.
+// Distribution channels. ebooks fan out to all 3 ebook stores; audiobooks → INaudio;
+// serialized audio → the podcast channel. `feed` selects which weekly list a card shows.
 const PLATFORMS = [
-  {id:"google_play", label:"Google Play",            icon:"▶",  kind:"book",    slots:4},
-  {id:"amazon_kdp",  label:"Amazon KDP",             icon:"📖", kind:"book",    slots:2},
-  {id:"apple_books", label:"Apple Books",            icon:"",  kind:"book",    slots:2},
-  {id:"podcast",     label:"Podcast (Spotify / Apple)", icon:"🎙", kind:"podcast", slots:2},
+  {
+    id:"google_play", label:"Google Play Books", icon:"▶", feed:"ebooks", noun:"ebooks",
+    mode:"Bulk upload", modeClass:"mode-bulk", dlLabel:"⬇ Book-list + files",
+    steps:[
+      "Sign in to <b>Google Play Books Partner Center</b> → <b>Book Catalog</b>.",
+      "<b>Advanced options → Upload book list</b> → choose the <code>google_play_booklist.txt</code> from this packet.",
+      "<b>Advanced options → Upload content files</b> → drag in the EPUBs + cover images (each file named with its ISBN).",
+      "<b>View uploaded lists</b> → fix any errors → set each book to <b>For sale</b>."
+    ],
+    note:"Bulk — all titles in one go. The book-list and the EPUB/cover files are two separate uploads; Google joins them by filename, so every file must be named with its ISBN."
+  },
+  {
+    id:"amazon_kdp", label:"Amazon KDP", icon:"📖", feed:"ebooks", noun:"ebooks",
+    mode:"One title at a time", modeClass:"mode-single", dlLabel:"⬇ Copy-paste CSV + files",
+    steps:[
+      "KDP Bookshelf → <b>+ Create → Kindle eBook</b>.",
+      "<b>Copy-paste</b> one row from <code>kdp_metadata.csv</code> (title, description, 7 keywords, 3 categories).",
+      "Answer the <b>AI-content question: Yes</b> for text, <b>Yes</b> for the cover image. Upload that title's EPUB + cover.",
+      "Set price → <b>Publish</b>. Repeat for the next title."
+    ],
+    note:"KDP has no bulk upload — it's one title at a time. The CSV is just your copy-paste source; you attach the EPUB + cover by hand. Max 10 new titles per week."
+  },
+  {
+    id:"apple_books", label:"Apple Books", icon:"", feed:"ebooks", noun:"ebooks",
+    mode:"One title at a time", modeClass:"mode-single", dlLabel:"⬇ Metadata + files",
+    steps:[
+      "Sign in at <b>authors.apple.com</b> → <b>Submit a New Book</b> (any browser — no Mac needed).",
+      "Upload the title's <b>EPUB + sample + cover</b>.",
+      "<b>Copy-paste</b> the metadata from <code>apple_books_metadata.csv</code>; set price + territories → <b>Submit</b>.",
+      "Repeat for the next title."
+    ],
+    note:"One at a time via the web portal. True bulk needs Apple's Mac-only Transporter (technical) or an aggregator — ask us if you ever need it."
+  },
+  {
+    id:"inaudio", label:"Voices by INaudio", icon:"🎧", feed:"audiobooks", noun:"audiobooks",
+    mode:"One title at a time", modeClass:"mode-single", dlLabel:"⬇ Audio + metadata",
+    steps:[
+      "Sign in at <b>inaudio.com</b> → <b>Add new audiobook</b> (this is Findaway Voices, rebranded).",
+      "Copy-paste the metadata; <b>tick “digital voice narration”</b> (required — our audio is AI).",
+      "Upload the cover, then the audio in order: <b>opening credits → chapters → closing credits → retail sample</b>.",
+      "Set price + territories → <b>Submit</b>."
+    ],
+    note:"This is where audiobooks go — NOT Google Play. Audible rejects AI narration, so leave Audible unticked. Audio = per-chapter MP3, 192 kbps CBR, 44.1 kHz."
+  },
+  {
+    id:"podcast", label:"Podcast · Spotify + Apple", icon:"🎙", feed:"episodes", noun:"episodes",
+    mode:"Weekly episode (RSS)", modeClass:"mode-rss", dlLabel:"⬇ Episode sheet + MP3",
+    steps:[
+      "Log in to your podcast host (<b>Spotify for Creators</b>).",
+      "<b>New Episode</b> → upload this week's MP3 (128 kbps, 44.1 kHz).",
+      "Copy-paste the episode <b>title, number, and description</b>; set the publish date → <b>Publish</b>.",
+      "The RSS feed updates automatically — <b>Apple Podcasts + Spotify</b> pick it up within hours. No resubmission."
+    ],
+    note:"Show setup + submitting the RSS feed to Apple/Spotify is a one-time step (already done). Each week you just add the episode."
+  },
 ];
-const BOOK_SLOTS = PLATFORMS.filter(p => p.kind === "book").reduce((a,p)=>a+p.slots,0); // 8
 
-// Catalog launch — drives how far Review History reaches back.
-const CATALOG_START = new Date(2026, 4, 4); // 2026-05-04 (~W18)
+const CATALOG_START = new Date(2026, 4, 4); // 2026-05-04 (~W18) — drives Review History reach-back
+const WEEKLY_EBOOKS = 8, WEEKLY_AUDIOBOOKS = 3, WEEKLY_EPISODES = 2;
 
 let BRAND = {id:"devotion_path_en_us", label:"Open Vessel Press"};
-let currentWeekIdx = null; // null = this week; otherwise an index into weekHistory()
+let currentWeekIdx = null; // null = this week; else index into weekHistory()
 
 // ── ISO-week helpers ──────────────────────────────────────────────────────
 function isoWeek(d) {
@@ -217,11 +281,12 @@ function weekHistory() {
   const out = [], now = new Date();
   let d = new Date(CATALOG_START.getTime());
   while (d <= now) { const l = isoWeek(d); if (!out.includes(l)) out.push(l); d = new Date(d.getTime() + 7*86400000); }
-  return out.reverse(); // newest first
+  return out.reverse();
 }
 function currentWeekLabel() { return isoWeek(new Date()); }
+function weekLabelFor(idx){ const h = weekHistory(); return (idx==null) ? currentWeekLabel() : h[idx]; }
 
-// ── Deterministic catalog (placeholder shaped like real packet) ───────────
+// ── Deterministic catalog (placeholder shaped like the real packet) ───────
 const TITLES = [
   "The Open Vessel","Returning to Stillness","Devotion Without Religion","The Unhurried Heart",
   "Emptiness as Refuge","The Ground That Holds You","Surrender Is Not Defeat","The Quiet That Remains",
@@ -238,74 +303,89 @@ const DESCS = [
   "Letting go when control was the only thing that kept you safe.",
   "Identity rebuild after everything you organized your life around fell away.",
 ];
-const ANGLES = [
-  "For the spiritually weary","Burnout recovery · no dogma","Nervous-system rest",
-  "Identity rebuild after collapse","Overthinkers welcome","Grief-literate stillness",
-];
+const ANGLES = ["For the spiritually weary","Burnout recovery · no dogma","Nervous-system rest","Identity rebuild after collapse","Overthinkers welcome","Grief-literate stillness"];
+const KEYWORDS = ["spiritual practice","mindfulness for burnout","contemplative living","letting go","inner stillness","devotion without religion","nervous system regulation"];
 const COVER_HUES = [18, 32, 268, 200, 150, 340];
 
 function slug(s){ return s.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,""); }
+function isbnFor(i){ return "978" + String(1000000000 + i * 7919).slice(0,10); }
 
 function buildCatalog() {
   return TITLES.map((title, i) => ({
     title,
     desc: DESCS[i % DESCS.length],
     angle: ANGLES[i % ANGLES.length],
+    isbn: isbnFor(i),
+    price: (i % 3 === 0) ? "4.99" : "5.99",
     hue: COVER_HUES[i % COVER_HUES.length],
-    format: i % 4 === 3 ? "audio" : "ebook",
   }));
 }
 
-// Weekly packet: 8 book titles rotate through the catalog so each week differs.
+// Weekly packet: ebooks rotate through the catalog so each week differs. Audiobooks
+// are the audio renditions of the first few; episodes are this week's serialized audio.
 function buildPacket(weekIdx) {
   const cat = buildCatalog(), n = cat.length;
-  const start = (weekIdx * BOOK_SLOTS) % n;
-  const wk = [];
-  for (let i = 0; i < BOOK_SLOTS; i++) wk.push(cat[(start + i) % n]);
-  const byPlat = {};
-  let k = 0;
-  PLATFORMS.filter(p => p.kind === "book").forEach(p => { byPlat[p.id] = wk.slice(k, k + p.slots); k += p.slots; });
-  byPlat["podcast"] = wk.slice(0, 2).map(b => ({...b, format:"audio"})); // weekly audio episodes
-  return { byPlat, titles: wk };
+  const start = (weekIdx * WEEKLY_EBOOKS) % n;
+  const ebooks = [];
+  for (let i = 0; i < WEEKLY_EBOOKS; i++) ebooks.push(cat[(start + i) % n]);
+  const audiobooks = ebooks.slice(0, WEEKLY_AUDIOBOOKS);
+  const episodes = ebooks.slice(0, WEEKLY_EPISODES).map((b, i) => ({...b, epNum: weekIdx * WEEKLY_EPISODES + i + 1}));
+  return { ebooks, audiobooks, episodes };
 }
+function packetFor(idx){ const h = weekHistory(); const realIdx = (idx==null) ? 0 : idx; return buildPacket(h.length - 1 - realIdx); }
+function feedFor(pkt, p){ return pkt[p.feed] || []; }
 
-// ── Downloads (real blobs from the placeholder data) ──────────────────────
+// ── Downloads ──────────────────────────────────────────────────────────────
 function dl(name, text, mime) {
   const a = document.createElement("a");
   a.href = URL.createObjectURL(new Blob([text], {type: mime || "text/plain"}));
   a.download = name; a.click();
 }
-function csvRow(arr){ return arr.map(v => `"${String(v).replace(/"/g,'""')}"`).join(","); }
-function weekLabelFor(idx){ const h = weekHistory(); return (idx==null) ? currentWeekLabel() : h[idx]; }
-function packetFor(idx){ const h = weekHistory(); const realIdx = (idx==null) ? 0 : idx; return buildPacket(h.length - 1 - realIdx); }
+function row(arr, sep){ return arr.map(v => sep === "\t" ? String(v) : `"${String(v).replace(/"/g,'""')}"`).join(sep || ","); }
 
-function platformCSV(pid) {
-  const idx = currentWeekIdx, week = weekLabelFor(idx), pkt = packetFor(idx);
-  const plat = PLATFORMS.find(p => p.id === pid);
-  const rows = [["title","format","short_description","marketing_angle","platform","week","brand"]];
-  (pkt.byPlat[pid] || []).forEach(b => rows.push([b.title, b.format, b.desc, b.angle, plat.label, week, BRAND.label]));
-  dl(`${pid}__${BRAND.id}__${week}.csv`, rows.map(csvRow).join("\n"), "text/csv");
+// Build the platform-correct metadata file (the thing the director copy-pastes/uploads).
+function buildMetadataFile(pid, week, pkt) {
+  const p = PLATFORMS.find(x => x.id === pid);
+  const items = feedFor(pkt, p);
+  if (pid === "google_play") {
+    // tab-delimited book-list: filename (=ISBN) joins to the separately-uploaded EPUB/cover
+    const head = ["identifier","title","contributor","description","language","price_usd","content_file","cover_file"];
+    const rows = items.map(b => [b.isbn, b.title, BRAND.label, b.desc, "en", b.price, `${b.isbn}.epub`, `${b.isbn}_frontcover.jpg`]);
+    return {name:`google_play_booklist__${BRAND.id}__${week}.txt`, text:[head, ...rows].map(r => row(r,"\t")).join("\n"), mime:"text/plain"};
+  }
+  if (pid === "amazon_kdp") {
+    const head = ["title","subtitle","author","description","keyword_1","keyword_2","keyword_3","keyword_4","keyword_5","keyword_6","keyword_7","category_1","category_2","category_3","price_usd","ai_text","ai_images","manuscript_file","cover_file"];
+    const rows = items.map(b => [b.title, b.angle, BRAND.label, b.desc, ...KEYWORDS, "Religion & Spirituality","Self-Help","Body, Mind & Spirit", b.price, "Yes","Yes", `${slug(b.title)}.epub`, `${slug(b.title)}.jpg`]);
+    return {name:`kdp_metadata__${BRAND.id}__${week}.csv`, text:[head, ...rows].map(r => row(r)).join("\n"), mime:"text/csv"};
+  }
+  if (pid === "apple_books") {
+    const head = ["title","author","publisher","description","language","category","price_usd","isbn","epub_file","sample_file","cover_file"];
+    const rows = items.map(b => [b.title, BRAND.label, BRAND.label, b.desc, "EN", "Religion & Spirituality", b.price, b.isbn, `${slug(b.title)}.epub`, `${slug(b.title)}_sample.epub`, `${slug(b.title)}.jpg`]);
+    return {name:`apple_books_metadata__${BRAND.id}__${week}.csv`, text:[head, ...rows].map(r => row(r)).join("\n"), mime:"text/csv"};
+  }
+  if (pid === "inaudio") {
+    const head = ["title","author","narrator","isbn","description","category","price_usd","digital_voice","audio_files","cover_file"];
+    const rows = items.map(b => [b.title, BRAND.label, "Digital voice (AI)", b.isbn, b.desc, "Religion & Spirituality", "9.99", "Yes", `${slug(b.title)}/01_opening.mp3; ${slug(b.title)}/chapters/*.mp3; ${slug(b.title)}/99_closing.mp3; ${slug(b.title)}/retail_sample.mp3`, `${slug(b.title)}_cover.jpg`]);
+    return {name:`inaudio_audiobooks__${BRAND.id}__${week}.csv`, text:[head, ...rows].map(r => row(r)).join("\n"), mime:"text/csv"};
+  }
+  if (pid === "podcast") {
+    const head = ["episode_number","episode_title","publish_date","description","explicit","audio_file"];
+    const rows = items.map(b => [b.epNum, `Ep ${b.epNum}: ${b.title}`, week, b.desc, "No", `${BRAND.id}_ep${String(b.epNum).padStart(3,"0")}.mp3`]);
+    return {name:`podcast_episodes__${BRAND.id}__${week}.csv`, text:[head, ...rows].map(r => row(r)).join("\n"), mime:"text/csv"};
+  }
 }
-function platformFiles(pid) {
-  const idx = currentWeekIdx, week = weekLabelFor(idx), pkt = packetFor(idx);
-  const plat = PLATFORMS.find(p => p.id === pid);
-  const base = `artifacts/admin_handoff/${week}/${BRAND.id}/${pid}`;
-  const lines = [`# ${plat.label} asset manifest — ${BRAND.label} · ${week}`, ""];
-  (pkt.byPlat[pid] || []).forEach(b => {
-    const s = slug(b.title);
-    if (plat.kind === "podcast") {
-      lines.push(`${base}/${s}/episode.mp3`, `${base}/${s}/show_notes.md`, `${base}/${s}/metadata.json`);
-    } else {
-      lines.push(`${base}/${s}/cover.jpg`, `${base}/${s}/manuscript.epub`, `${base}/${s}/metadata.json`);
-    }
-  });
-  dl(`${pid}__${BRAND.id}__${week}__files.txt`, lines.join("\n"), "text/plain");
+function dlPacket(pid) {
+  const week = weekLabelFor(currentWeekIdx), pkt = packetFor(currentWeekIdx);
+  const f = buildMetadataFile(pid, week, pkt);
+  if (f) dl(f.name, f.text, f.mime);
 }
 function downloadAll() {
-  const idx = currentWeekIdx, week = weekLabelFor(idx), pkt = packetFor(idx);
-  const rows = [["title","format","short_description","marketing_angle","platform","week","brand"]];
-  PLATFORMS.forEach(p => (pkt.byPlat[p.id] || []).forEach(b => rows.push([b.title, b.format, b.desc, b.angle, p.label, week, BRAND.label])));
-  dl(`handoff_all_packets__${BRAND.id}__${week}.csv`, rows.map(csvRow).join("\n"), "text/csv");
+  const week = weekLabelFor(currentWeekIdx), pkt = packetFor(currentWeekIdx);
+  const head = ["channel","format","title","isbn_or_ep","description","price_usd","week","brand"];
+  const rows = [head];
+  PLATFORMS.forEach(p => feedFor(pkt, p).forEach(b =>
+    rows.push([p.label, p.noun.replace(/s$/,""), (p.feed==="episodes"?`Ep ${b.epNum}: ${b.title}`:b.title), (b.isbn||b.epNum||""), b.desc, (b.price||"9.99"), week, BRAND.label])));
+  dl(`handoff_all_packets__${BRAND.id}__${week}.csv`, rows.map(r => row(r)).join("\n"), "text/csv");
 }
 
 // ── Renders ───────────────────────────────────────────────────────────────
@@ -318,36 +398,38 @@ function renderWeekly() {
   if (idx == null) { note.classList.add("hidden"); }
   else { note.classList.remove("hidden"); note.innerHTML = `Viewing past week <b style="color:var(--amber2)">${week}</b> &nbsp;·&nbsp; <a href="#" onclick="goThisWeek();return false" style="color:var(--amber2)">→ jump to current week</a>`; }
 
-  // Upload-slots summary
-  const bookPlats = PLATFORMS.filter(p => p.kind === "book");
-  const chips = bookPlats.map(p => `<span class="chip"><b>${(pkt.byPlat[p.id]||[]).length}</b> ${p.label}</span>`).join("");
-  const podCount = (pkt.byPlat["podcast"]||[]).length;
+  // Summary strip — what's going where this week
   document.getElementById("slots-summary").innerHTML =
-    `<span class="lbl">📤 Upload slots</span>${chips}<span class="chip"><b>${BOOK_SLOTS}</b> titles total</span>` +
-    (podCount ? `<span class="chip"><b>${podCount}</b> podcast eps</span>` : "");
+    `<span class="lbl">📦 This week</span>` +
+    `<span class="chip"><b>${pkt.ebooks.length}</b> ebooks → Google Play · KDP · Apple</span>` +
+    `<span class="chip"><b>${pkt.audiobooks.length}</b> audiobooks → INaudio</span>` +
+    `<span class="chip"><b>${pkt.episodes.length}</b> episodes → Podcast</span>`;
 
-  // Per-platform delivery cards
+  // Per-platform cards
   document.getElementById("platforms").innerHTML = PLATFORMS.map(p => {
-    const items = pkt.byPlat[p.id] || [];
-    if (!items.length) return "";
+    const items = feedFor(pkt, p);
+    const fmtClass = p.feed === "audiobooks" ? "fmt-audiobook" : p.feed === "episodes" ? "fmt-episode" : "fmt-ebook";
+    const fmtLabel = p.feed === "audiobooks" ? "audiobook" : p.feed === "episodes" ? "episode" : "ebook";
     const titles = items.map((b, i) => {
-      const fmtClass = b.format === "audio" ? "fmt-audio" : "fmt-ebook";
-      return `<li><span class="title-num">${i+1}.</span><span class="title-text">${b.title}</span><span class="format-badge ${fmtClass}">${b.format}</span></li>`;
+      const label = p.feed === "episodes" ? `Ep ${b.epNum}: ${b.title}` : b.title;
+      return `<li><span class="title-num">${i+1}.</span><span class="title-text">${label}</span><span class="format-badge ${fmtClass}">${fmtLabel}</span></li>`;
     }).join("");
-    const filesLabel = p.kind === "podcast" ? "⬇ MP3 + notes" : "⬇ Files";
-    const csvLabel   = p.kind === "podcast" ? "⬇ Episode metadata" : "⬇ Metadata CSV";
-    const countLabel = p.kind === "podcast" ? `${items.length} episodes this week` : `${items.length} titles · ${p.slots} upload slots`;
     return `<div class="platform-card">
       <div class="platform-head">
         <span class="platform-icon">${p.icon || "📦"}</span>
         <span class="platform-name">${p.label}</span>
-        <span class="platform-count">${countLabel}</span>
-        <span class="platform-dls">
-          <button class="btn sm" onclick="platformCSV('${p.id}')">${csvLabel}</button>
-          <button class="btn sm" onclick="platformFiles('${p.id}')">${filesLabel}</button>
-        </span>
+        <span class="mode-tag ${p.modeClass}">${p.mode}</span>
+        <span class="platform-count">${items.length} ${p.noun} this week</span>
+        <span class="platform-dls"><button class="btn sm primary" onclick="dlPacket('${p.id}')">${p.dlLabel}</button></span>
       </div>
-      <div class="platform-body"><ul class="title-list">${titles}</ul></div>
+      <div class="platform-body">
+        <details class="howto" open>
+          <summary>How to upload to ${p.label}</summary>
+          <ol>${p.steps.map(s => `<li>${s}</li>`).join("")}</ol>
+          <div class="note">${p.note}</div>
+        </details>
+        <ul class="title-list">${titles}</ul>
+      </div>
     </div>`;
   }).join("");
 }
@@ -358,7 +440,7 @@ function renderHistory() {
     const tag = i === 0 ? "this week" : `${i} week${i>1?"s":""} ago`;
     return `<li class="history-row" onclick="openWeek(${i})">
       <span class="history-week">${wk}</span>
-      <span class="history-meta">${BOOK_SLOTS} titles · ${PLATFORMS.length} platforms · ${tag}</span>
+      <span class="history-meta">${WEEKLY_EBOOKS} ebooks · ${WEEKLY_AUDIOBOOKS} audiobooks · ${WEEKLY_EPISODES} episodes · ${tag}</span>
       <span class="history-go">Open packet →</span>
     </li>`;
   }).join("");
