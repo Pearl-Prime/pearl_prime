@@ -27,21 +27,31 @@ SRC = REPO / "config" / "source_of_truth" / "book_plans_en_us"
 OUTDIR = REPO / "brand-wizard-app" / "public" / "brand_catalogs"
 
 
+def humanize(s) -> str:
+    return " ".join(w.capitalize() for w in str(s or "").split("_")) if s else ""
+
+
 def book_from_plan(d: dict, stem: str) -> dict:
     parts = stem.split("__")  # brand, teacher, persona, topic, engine
     desc = d.get("description") or {}
     blurb = (desc.get("short_blurb") if isinstance(desc, dict) else "") or ""
+    long_desc = (desc.get("long_description") if isinstance(desc, dict) else "") or blurb
     price = d.get("target_price") or {}
     kw = ((d.get("keywords") or {}).get("primary") or [])[:7]
+    ap = d.get("author_positioning") or {}
     return {
         "title": (d.get("title") or "").strip(),
         "subtitle": (d.get("subtitle") or "").strip(),
-        "desc": blurb.strip(),
-        "angle": (d.get("cover_tagline") or "").strip(),       # the marketing hook
+        "desc": blurb.strip(),                                  # short blurb (list/cover)
+        "long_desc": long_desc.strip(),                         # full store description
+        "angle": (d.get("cover_tagline") or "").strip(),        # the marketing hook
+        "author": humanize(ap.get("teacher")),                  # narrating teacher (empty for composite)
         "keywords": [str(k) for k in kw],
         "bisac": [str(c) for c in (d.get("bisac_codes") or [])][:3],
         "price": str(price.get("ebook_usd") or "4.99"),
         "audioPrice": str(price.get("audible_usd") or "9.99"),
+        "paperbackPrice": str(price.get("paperback_usd") or ""),
+        "isbn": str(d.get("isbn") or "").strip(),               # real ISBN if assigned (else blank → PENDING)
         "persona": parts[2] if len(parts) > 2 else "",
         "topic": parts[3] if len(parts) > 3 else "",
         "engine": d.get("engine") or (parts[4] if len(parts) > 4 else ""),

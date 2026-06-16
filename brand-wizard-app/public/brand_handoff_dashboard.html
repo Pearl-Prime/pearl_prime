@@ -103,6 +103,7 @@
   <div id="view-weekly">
     <div class="viewing-note hidden" id="history-note"></div>
     <div class="slots-summary" id="slots-summary"></div>
+    <div class="viewing-note" id="ui-files-note"></div>
     <div id="platforms"></div>
   </div>
 
@@ -142,6 +143,7 @@ const CHROME = {
     h1:"Brand Director Operations", sub:"Pearl Prime · weekly content packet", handoff:"Weekly handoff",
     dlAll:"⬇ Download all packets", history:"🕘 Review History", catalog:"📚 View Catalog",
     reviewHistory:"Review History", historyIntro:"Every weekly packet since this brand launched. Click a week to reopen its packet.",
+    filesNote:"Each download is the exact platform intake file with all your titles' metadata. Attach your rendered manuscript, cover, and audio files (from your book production) at upload.",
     back:"← Back to this week", fullCatalog:"Full Catalog —", openPacket:"Open packet →",
     thisWeek:"This week", storeSep:" · ",
     ebookNoun:"ebooks", audiobookNoun:"audiobooks", episodeNoun:"episodes",
@@ -158,6 +160,7 @@ const CHROME = {
     h1:"ブランドディレクター運用", sub:"Pearl Prime · 週次コンテンツパケット", handoff:"週次ハンドオフ",
     dlAll:"⬇ すべてのパケットをダウンロード", history:"🕘 履歴を見る", catalog:"📚 カタログを見る",
     reviewHistory:"履歴", historyIntro:"このブランドの開始以降の週次パケットです。週を選ぶと、そのパケットをもう一度開けます。",
+    filesNote:"各ダウンロードは、全タイトルのメタデータを含む各プラットフォームの正式な入稿ファイルです。原稿・表紙・音声ファイル（制作済みの本のファイル）は、アップロード時に添付してください。",
     back:"← 今週に戻る", fullCatalog:"カタログ —", openPacket:"パケットを開く →",
     thisWeek:"今週", storeSep:"・",
     ebookNoun:"冊", audiobookNoun:"タイトル", episodeNoun:"エピソード",
@@ -175,7 +178,7 @@ const CHROME = {
 // ── Platform sets (each step = a single action the director takes) ─────────
 const PLATFORMS_US = [
   { id:"google_play", label:"Google Play Books", icon:"▶", feed:"ebooks", dlType:"gp_booklist",
-    mode:"Bulk upload", modeClass:"mode-bulk", dlLabel:"⬇ Book-list + files",
+    mode:"Bulk upload", modeClass:"mode-bulk", dlLabel:"⬇ Google Play bulk CSV",
     steps:[
       "Download this packet.",
       "Sign in to <b>Google Play Books Partner Center</b> → <b>Book Catalog</b>.",
@@ -184,7 +187,7 @@ const PLATFORMS_US = [
       "Set each book to <b>For sale</b>.",
     ] },
   { id:"amazon_kdp", label:"Amazon KDP", icon:"📖", feed:"ebooks", dlType:"kdp_csv",
-    mode:"One title at a time", modeClass:"mode-single", dlLabel:"⬇ Copy-paste CSV + files",
+    mode:"One title at a time", modeClass:"mode-single", dlLabel:"⬇ KDP metadata CSV",
     steps:[
       "Download this packet.",
       "Sign in to <b>KDP</b> → <b>+ Create → Kindle eBook</b>.",
@@ -194,7 +197,7 @@ const PLATFORMS_US = [
       "Enter your price → <b>Publish</b>. Do this for each title.",
     ] },
   { id:"apple_books", label:"Apple Books", icon:"", feed:"ebooks", dlType:"ebook_csv",
-    mode:"One title at a time", modeClass:"mode-single", dlLabel:"⬇ Metadata + files",
+    mode:"One title at a time", modeClass:"mode-single", dlLabel:"⬇ Apple metadata CSV",
     steps:[
       "Download this packet.",
       "Sign in at <b>authors.apple.com</b> → <b>Submit a New Book</b>.",
@@ -203,7 +206,7 @@ const PLATFORMS_US = [
       "Enter your price → <b>Submit</b>. Do this for each title.",
     ] },
   { id:"inaudio", label:"Voices by INaudio", icon:"🎧", feed:"audiobooks", dlType:"audiobook_csv",
-    mode:"One title at a time", modeClass:"mode-single", dlLabel:"⬇ Audio + metadata",
+    mode:"One title at a time", modeClass:"mode-single", dlLabel:"⬇ Audiobook metadata",
     steps:[
       "Download this packet.",
       "Sign in at <b>inaudio.com</b> → <b>Add new audiobook</b>.",
@@ -213,7 +216,7 @@ const PLATFORMS_US = [
       "Enter your price → <b>Submit</b>. Do this for each title.",
     ] },
   { id:"podcast", label:"Podcast · Spotify + Apple", icon:"🎙", feed:"episodes", dlType:"podcast_csv",
-    mode:"Weekly episode", modeClass:"mode-rss", dlLabel:"⬇ Episode sheet + MP3",
+    mode:"Weekly episode", modeClass:"mode-rss", dlLabel:"⬇ Episode sheet",
     steps:[
       "Download this packet.",
       "Log in to <b>Spotify for Creators</b>.",
@@ -225,7 +228,7 @@ const PLATFORMS_US = [
 
 const PLATFORMS_JP = [
   { id:"google_play", label:"Google Play Books", icon:"▶", feed:"ebooks", dlType:"gp_booklist",
-    mode:"一括アップロード", modeClass:"mode-bulk", dlLabel:"⬇ ブックリスト＋ファイル",
+    mode:"一括アップロード", modeClass:"mode-bulk", dlLabel:"⬇ Google Play 一括CSV",
     steps:[
       "このパケットをダウンロードします。",
       "<b>Google Play Books パートナーセンター</b>にサインインし、<b>Book Catalog</b> を開きます。",
@@ -234,7 +237,7 @@ const PLATFORMS_JP = [
       "各本を <b>For sale</b> に設定します。",
     ] },
   { id:"amazon_kdp", label:"Amazon KDP", icon:"📖", feed:"ebooks", dlType:"kdp_csv",
-    mode:"1冊ずつ", modeClass:"mode-single", dlLabel:"⬇ コピペ用CSV＋ファイル",
+    mode:"1冊ずつ", modeClass:"mode-single", dlLabel:"⬇ KDP メタデータCSV",
     steps:[
       "このパケットをダウンロードします。",
       "<b>KDP</b>（kdp.amazon.co.jp）にログインし、<b>「+ 作成」→「Kindle本（電子書籍）」</b>を選びます。",
@@ -244,7 +247,7 @@ const PLATFORMS_JP = [
       "価格を入力し <b>「Kindle本を出版」</b> をクリックします。本ごとに繰り返します。",
     ] },
   { id:"apple_books", label:"Apple Books", icon:"", feed:"ebooks", dlType:"ebook_csv",
-    mode:"1冊ずつ", modeClass:"mode-single", dlLabel:"⬇ メタデータ＋ファイル",
+    mode:"1冊ずつ", modeClass:"mode-single", dlLabel:"⬇ メタデータCSV",
     steps:[
       "このパケットをダウンロードします。",
       "<b>authors.apple.com</b> にサインインし、<b>Submit a New Book</b> をクリックします。",
@@ -253,7 +256,7 @@ const PLATFORMS_JP = [
       "価格を設定し <b>Submit</b> をクリックします。本ごとに繰り返します。",
     ] },
   { id:"kobo", label:"楽天Kobo", icon:"📕", feed:"ebooks", dlType:"ebook_csv",
-    mode:"1冊ずつ", modeClass:"mode-single", dlLabel:"⬇ メタデータ＋ファイル",
+    mode:"1冊ずつ", modeClass:"mode-single", dlLabel:"⬇ メタデータCSV",
     steps:[
       "このパケットをダウンロードします。",
       "<b>Kobo Writing Life</b>（kobo.com/writinglife）にログインします。",
@@ -262,7 +265,7 @@ const PLATFORMS_JP = [
       "価格を入力し <b>「電子書籍を出版」</b> をクリックします。本ごとに繰り返します。",
     ] },
   { id:"audiobook_jp", label:"audiobook.jp", icon:"🎧", feed:"audiobooks", dlType:"audiobook_csv",
-    mode:"申し込み", modeClass:"mode-single", dlLabel:"⬇ 音声＋メタデータ",
+    mode:"申し込み", modeClass:"mode-single", dlLabel:"⬇ オーディオブック メタデータ",
     steps:[
       "このパケットをダウンロードします。",
       "<b>オトバンクの配信申し込みフォーム</b>（business.audiobook.jp）を開きます。",
@@ -272,7 +275,7 @@ const PLATFORMS_JP = [
       "申し込みを送信します。",
     ] },
   { id:"podcast", label:"ポッドキャスト · Spotify + Apple", icon:"🎙", feed:"episodes", dlType:"podcast_csv",
-    mode:"毎週エピソード", modeClass:"mode-rss", dlLabel:"⬇ エピソード表＋MP3",
+    mode:"毎週エピソード", modeClass:"mode-rss", dlLabel:"⬇ エピソード表",
     steps:[
       "このパケットをダウンロードします。",
       "<b>Spotify for Creators</b>（creators.spotify.com）にログインします。",
@@ -336,7 +339,8 @@ function buildCatalog() {
   if (REAL_CATALOG && REAL_CATALOG.length) {
     return REAL_CATALOG.map((b, i) => ({
       title: b.title, subtitle: b.subtitle || "", desc: b.desc || "", angle: b.angle || "",
-      isbn: isbnFor(i), price: b.price || priceFor(i), audioP: b.audioPrice || audioPrice(),
+      longDesc: b.long_desc || b.desc || "", author: b.author || "",
+      isbn: b.isbn || "PENDING", price: b.price || priceFor(i), audioP: b.audioPrice || audioPrice(),
       keywords: (b.keywords && b.keywords.length) ? b.keywords : CAT.keywords,
       cats: (b.bisac && b.bisac.length) ? b.bisac : CAT.cats,
       hue: COVER_HUES[i % COVER_HUES.length],
@@ -344,6 +348,7 @@ function buildCatalog() {
   }
   return CAT.titles.map((title, i) => ({
     title, subtitle: "", desc: CAT.descs[i % CAT.descs.length], angle: CAT.angles[i % CAT.angles.length],
+    longDesc: CAT.descs[i % CAT.descs.length], author: "",
     isbn: isbnFor(i), price: priceFor(i), audioP: audioPrice(),
     keywords: CAT.keywords, cats: CAT.cats, hue: COVER_HUES[i % COVER_HUES.length],
   }));
@@ -369,29 +374,35 @@ function dl(name, text, mime) {
 function row(arr, sep){ return arr.map(v => sep === "\t" ? String(v) : `"${String(v).replace(/"/g,'""')}"`).join(sep || ","); }
 function buildMetadataFile(p, week, pkt) {
   const items = feedFor(pkt, p), pc = `price_${CURRENCY}`;
+  const langTag = CURRENCY === "jpy" ? "ja-JP" : "en-US", pub = BRAND.label;
+  const au = b => b.author || pub;                 // narrating teacher, else the imprint (composite)
+  const ef = b => `${slug(b.title)}.epub`, cf = b => `${slug(b.title)}.jpg`;
   if (p.dlType === "gp_booklist") {
-    const head = ["identifier","title","contributor","description","language",pc,"content_file","cover_file"];
-    const rows = items.map(b => [b.isbn, b.title, BRAND.label, b.desc, LANG, b.price, `${b.isbn}.epub`, `${b.isbn}_frontcover.jpg`]);
+    // Google Play Books bulk book-list (tab-delimited flat file) — full metadata.
+    const head = ["identifier","title","subtitle","contributor","description","language",pc,"publisher","bisac_1","bisac_2","bisac_3","maturity_rating","content_file","cover_file"];
+    const rows = items.map(b => [b.isbn||"PENDING", b.title, b.subtitle, au(b), b.longDesc||b.desc, langTag, b.price, pub, ...pad(b.cats,3), "EVERYONE", ef(b), `${slug(b.title)}_frontcover.jpg`]);
     return {name:`google_play_booklist__${BRAND.id}__${week}.txt`, text:[head, ...rows].map(r => row(r,"\t")).join("\n"), mime:"text/plain"};
   }
   if (p.dlType === "kdp_csv") {
-    const head = ["title","subtitle","author","description","keyword_1","keyword_2","keyword_3","keyword_4","keyword_5","keyword_6","keyword_7","category_1","category_2","category_3",pc,"ai_text","ai_images","manuscript_file","cover_file"];
-    const rows = items.map(b => [b.title, b.subtitle || b.angle, BRAND.label, b.desc, ...pad(b.keywords,7), ...pad(b.cats,3), b.price, "Yes","Yes", `${slug(b.title)}.epub`, `${slug(b.title)}.jpg`]);
+    // Amazon KDP — the fields a director copy-pastes into the Kindle eBook form.
+    const head = ["title","subtitle","author","publisher","description","language","keyword_1","keyword_2","keyword_3","keyword_4","keyword_5","keyword_6","keyword_7","category_1","category_2","category_3",pc,"ai_text","ai_images","ai_translation","manuscript_file","cover_file"];
+    const rows = items.map(b => [b.title, b.subtitle||b.angle, au(b), pub, b.longDesc||b.desc, langTag, ...pad(b.keywords,7), ...pad(b.cats,3), b.price, "Yes","Yes","No", ef(b), cf(b)]);
     return {name:`kdp_metadata__${BRAND.id}__${week}.csv`, text:[head, ...rows].map(r => row(r)).join("\n"), mime:"text/csv"};
   }
   if (p.dlType === "ebook_csv") {
-    const head = ["title","author","publisher","description","language","category",pc,"isbn","epub_file","sample_file","cover_file"];
-    const rows = items.map(b => [b.title, BRAND.label, BRAND.label, b.desc, LANG, (b.cats && b.cats[0]) || CAT.cats[0], b.price, b.isbn, `${slug(b.title)}.epub`, `${slug(b.title)}_sample.epub`, `${slug(b.title)}.jpg`]);
+    // Apple Books / Rakuten Kobo — web-form fields + the files to attach.
+    const head = ["title","subtitle","author","publisher","description","language","category",pc,"isbn","epub_file","sample_file","cover_file"];
+    const rows = items.map(b => [b.title, b.subtitle, au(b), pub, b.longDesc||b.desc, langTag, (b.cats&&b.cats[0])||CAT.cats[0], b.price, b.isbn||"PENDING", ef(b), `${slug(b.title)}_sample.epub`, cf(b)]);
     return {name:`${p.id}_metadata__${BRAND.id}__${week}.csv`, text:[head, ...rows].map(r => row(r)).join("\n"), mime:"text/csv"};
   }
   if (p.dlType === "audiobook_csv") {
-    const head = ["title","author","narrator","isbn","description","category",pc,"digital_voice","audio_files","cover_file"];
-    const rows = items.map(b => [b.title, BRAND.label, LANG==="ja"?"AI音声":"Digital voice (AI)", b.isbn, b.desc, (b.cats && b.cats[0]) || CAT.cats[0], b.audioP || audioPrice(), "Yes", `${slug(b.title)}/01_opening.mp3; ${slug(b.title)}/chapters/*.mp3; ${slug(b.title)}/99_closing.mp3; ${slug(b.title)}/retail_sample.mp3`, `${slug(b.title)}_cover.jpg`]);
+    const head = ["title","author","narrator","publisher","isbn","description","category",pc,"digital_voice","audio_files","cover_file"];
+    const rows = items.map(b => [b.title, au(b), LANG==="ja"?"AI音声":"Digital voice (AI)", pub, b.isbn||"PENDING", b.longDesc||b.desc, (b.cats&&b.cats[0])||CAT.cats[0], b.audioP||audioPrice(), "Yes", `${slug(b.title)}/01_opening.mp3; ${slug(b.title)}/chapters/*.mp3; ${slug(b.title)}/99_closing.mp3; ${slug(b.title)}/retail_sample.mp3`, `${slug(b.title)}_cover.jpg`]);
     return {name:`${p.id}_audiobooks__${BRAND.id}__${week}.csv`, text:[head, ...rows].map(r => row(r)).join("\n"), mime:"text/csv"};
   }
   if (p.dlType === "podcast_csv") {
     const head = ["episode_number","episode_title","publish_date","description","explicit","audio_file"];
-    const rows = items.map(b => [b.epNum, `Ep ${b.epNum}: ${b.title}`, week, b.desc, "No", `${BRAND.id}_ep${String(b.epNum).padStart(3,"0")}.mp3`]);
+    const rows = items.map(b => [b.epNum, `Ep ${b.epNum}: ${b.title}`, week, b.longDesc||b.desc, "No", `${BRAND.id}_ep${String(b.epNum).padStart(3,"0")}.mp3`]);
     return {name:`podcast_episodes__${BRAND.id}__${week}.csv`, text:[head, ...rows].map(r => row(r)).join("\n"), mime:"text/csv"};
   }
 }
@@ -503,6 +514,7 @@ function applyChrome() {
   setText("ui-h1", T.h1); setText("ui-sub", T.sub); setText("ui-handoff", T.handoff);
   setText("ui-dlall", T.dlAll); setText("ui-history", T.history); setText("ui-catalog", T.catalog);
   setText("ui-history-h", T.reviewHistory); setText("ui-history-back", T.back); setText("ui-history-intro", T.historyIntro);
+  setText("ui-files-note", T.filesNote);
   setText("ui-catalog-h", T.fullCatalog); setText("ui-catalog-back", T.back);
 }
 function humanize(id){ return id.replace(/_(en_us|es_us|es_es|pt_br|zh_tw|zh_hk|zh_cn|zh_sg|ja_jp|ko_kr)$/,"").replace(/_/g," ").replace(/\b\w/g,c=>c.toUpperCase()); }
