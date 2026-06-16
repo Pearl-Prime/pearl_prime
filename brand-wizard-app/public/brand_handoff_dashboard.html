@@ -213,10 +213,10 @@ const PLATFORMS = [
     steps:[
       "Sign in to <b>Google Play Books Partner Center</b> → <b>Book Catalog</b>.",
       "<b>Advanced options → Upload book list</b> → choose the <code>google_play_booklist.txt</code> from this packet.",
-      "<b>Advanced options → Upload content files</b> → drag in the EPUBs + cover images (each file named with its ISBN).",
-      "<b>View uploaded lists</b> → fix any errors → set each book to <b>For sale</b>."
+      "<b>Advanced options → Upload content files</b> → click <b>Choose files</b> and select all your EPUBs + covers at once (it's a file-picker). Google auto-matches each file to its book by the ISBN in the filename.",
+      "Watch each book flip <b>Pending Content → Processed</b>; fix any errors, then set each book to <b>For sale</b>."
     ],
-    note:"Bulk — all titles in one go. The book-list and the EPUB/cover files are two separate uploads; Google joins them by filename, so every file must be named with its ISBN."
+    note:"Two uploads joined by ISBN — the book-list is the text record; the EPUB + cover are real files that can't live in a spreadsheet, so they upload separately. Name each file with its ISBN (<code>&lt;ISBN&gt;.epub</code>, <code>&lt;ISBN&gt;_frontcover.jpg</code>) to match its book-list row, or Google creates a stray listing. Max 2 GB/file; EPUBs are auto-checked (EpubCheck)."
   },
   {
     id:"amazon_kdp", label:"Amazon KDP", icon:"📖", feed:"ebooks", noun:"ebooks",
