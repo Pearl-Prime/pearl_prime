@@ -38,7 +38,10 @@ def _beatmap_rf(topic: str, runtime_format: str, repo_root=None):
 
     root = repo_root or Path(__file__).resolve().parent.parent
     fmt = load_format_spec(runtime_format, root)
-    spine = load_spine(topic, root)
+    # Source the spine WITH runtime_format so compact formats (micro_book_15, short_book_30,
+    # …) yield a subsetted spine matching the count compile_beatmap re-loads (PR #1610/#1612).
+    # No-op for non-compact formats (no compact_chapter_subset → full spine). Mirrors run_pipeline.
+    spine = load_spine(topic, root, runtime_format=runtime_format)
     shaped = apply_knobs(spine, load_knob_profile(topic, root), runtime_format=runtime_format)
     return compile_beatmap(shaped, load_topic_engines(topic, root), fmt, repo_root=root)
 

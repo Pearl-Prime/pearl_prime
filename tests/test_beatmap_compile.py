@@ -91,7 +91,11 @@ def test_required_section_survives_zero_weight(fmt_std, recwarn):
 def test_forbidden_move_excludes_section():
     """Legacy beatmap path (non-somatic formats) still drops forbidden slots."""
     fmt_short = load_format_spec("short_book_30")
-    spine = load_spine("anxiety")
+    # Source the spine WITH the runtime_format so the shaped/tampered spine matches the
+    # subsetted chapter count that compile_beatmap re-loads (PR #1610 wired the re-load;
+    # PR #1612 gave short_book_30 a compact_chapter_subset → 8 chapters). Mirrors the real
+    # pipeline (scripts/run_pipeline.py, scripts/pilot/run_spine_pipeline.py).
+    spine = load_spine("anxiety", runtime_format="short_book_30")
     shaped = apply_knobs(spine, load_knob_profile("anxiety"), runtime_format="short_book_30")
     tampered = copy.deepcopy(shaped)
     tampered.chapters[0].shaped_section_weights["EXERCISE"] = 0.95
