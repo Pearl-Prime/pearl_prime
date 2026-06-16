@@ -141,11 +141,15 @@ def _load_wrapper_variants_ending_with_ellipsis() -> list[str]:
 
 
 def test_every_wrapper_variant_with_ellipsis_survives() -> None:
-    variants = _load_wrapper_variants_ending_with_ellipsis()
-    # If the YAML went missing or refactored, fail loudly — the YAML is the
-    # single source of truth for the lead-in prose register.
-    assert variants, "no ellipsis-ending wrapper variants found — YAML missing?"
-    for variant in variants:
+    # The wrapper YAML moved from trailing-ellipsis lead-ins to complete-sentence
+    # lead-ins — the stronger fix for OPD-20260518-002: a lead-in like
+    # "...the path begins with..." is now finished in the YAML itself
+    # ("...begins with one honest look at what you keep avoiding."), so there is
+    # no dangling "..." for the prose pass to collapse. Guard that the YAML still
+    # exists (real breakage), but tolerate zero ellipsis variants; any present
+    # must still survive the pass intact.
+    assert _TEMPLATES_PATH.exists(), f"wrapper templates YAML missing: {_TEMPLATES_PATH}"
+    for variant in _load_wrapper_variants_ending_with_ellipsis():
         # Slot tokens like {TEACHER_NAME} are present in the raw YAML — the
         # post-template prose is what matters, but the regex pass operates on
         # the substring after slot resolution. A neutral substitution proves
@@ -206,9 +210,13 @@ def test_apply_wrapper_then_prose_pass_preserves_ellipsis(
     # _resolve_location_placeholders collapse pass must NOT turn "...is..." into
     # "...is." (the F2 sentence-end-preposition artifact). Assert the resolved lead-in
     # survives the prose pass verbatim, ellipsis intact.
-    assert prefix and (
-        prefix.rstrip().endswith("...") or prefix.rstrip().endswith("…")
-    ), f"expected an ellipsis-terminated intro lead-in, got {prefix!r}"
+    # Lead-ins are now complete sentences (the YAML no longer uses trailing
+    # ellipses), so require a proper sentence terminator rather than "..."
+    # specifically. The real invariant is the next assertion: the resolved
+    # lead-in survives the prose pass verbatim (no F2 collapse to "...is.").
+    assert prefix and prefix.rstrip().endswith((".", "!", "?", "...", "…")), (
+        f"expected a complete-sentence intro lead-in, got {prefix!r}"
+    )
     assert prefix.rstrip() in out, (
         f"wrapper lead-in ellipsis not preserved through prose pass: {out!r}"
     )
