@@ -565,6 +565,7 @@ def _dedup_paragraphs_book_wide(
     kept: list[str] = []
     counts_first_seen: dict[str, str] = {}
     sig_seen: list[frozenset] = []  # F1-signature word-sets kept so far (keep=1)
+    short_bridge_seen: set[str] = set()  # terse multi-sentence re-stamps (keep=1)
 
     for para in re.split(r"\n{2,}", text):
         stripped = para.strip()
@@ -588,6 +589,28 @@ def _dedup_paragraphs_book_wide(
                 )
                 continue
             sig_seen.append(ws)
+            kept.append(stripped)
+            continue
+        # Terse multi-sentence re-stamp = a formulaic within-slot transition bridge
+        # ("Same body. Different door. Watch what changes." = 46 chars / 3 sentences).
+        # >=3 sentences packed into < _F1_SIG_MIN_CHARS chars is formulaic, NOT narrative
+        # (real prose paragraphs of 3+ sentences are far longer), so an EXACT cross-chapter
+        # repeat is a spurious bridge re-stamp, not an authored refrain. The within-slot
+        # bridge bank has only ~49 STORY variants for ~276 insertions in a deep book, so
+        # by pigeonhole each variant recurs ~5-6x even with a perfectly uniform selector —
+        # this is the delivery-layer backstop for that capacity limit. EXACT keep=1
+        # (these are < _F1_SIG_MIN_CHARS so the fuzzy signature pass above skips them).
+        # Toggle with PHOENIX_F1_SIGNATURE_DEDUPE=0.
+        if (_f1_signature_dedup_enabled()
+                and wc < _F1_SIG_MAX_WORDS and cc < _F1_SIG_MIN_CHARS
+                and _f1_sig_sentence_count(stripped) >= _F1_SIG_MIN_SENTENCES):
+            sfp = re.sub(r"\s+", " ", re.sub(r"[^\w\s]+", "", stripped.lower())).strip()
+            if sfp in short_bridge_seen:
+                notes.append(
+                    f"book_wide_short_bridge_dedupe: removed re-stamp {stripped[:60]!r}"
+                )
+                continue
+            short_bridge_seen.add(sfp)
             kept.append(stripped)
             continue
         if wc < min_words or cc < min_chars:
