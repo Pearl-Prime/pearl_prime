@@ -1,0 +1,35 @@
+# Atoms parse-sweep guard — fails a PR the instant a clean atoms/**/CANONICAL.txt is
+# mangled into the #1590 metadata-less "## <LABEL> vNN" over-match (-> NO_STORY_POOL).
+#
+# WHY A DEDICATED CHECK: the guard already existed (#1623) but ran only inside "Core tests"
+# (a non-required check), so #1623 self-merged a residual that left the guard RED. This
+# surfaces the sweep as its own named, path-scoped check on every atoms-touching PR, so the
+# signal is visible and an owner can promote it to a required check via the branch ruleset.
+name: Atoms parse sweep
+on:
+  pull_request:
+    paths:
+      - 'atoms/**'
+      - 'scripts/ci/check_canonical_atom_parse_sweep.py'
+      - 'scripts/ci/check_canonical_atom_parse_sweep_baseline.txt'
+      - 'phoenix_v4/planning/assembly_compiler.py'
+      - '.github/workflows/atoms-parse-sweep.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'atoms/**'
+      - 'scripts/ci/check_canonical_atom_parse_sweep.py'
+      - 'scripts/ci/check_canonical_atom_parse_sweep_baseline.txt'
+      - 'phoenix_v4/planning/assembly_compiler.py'
+jobs:
+  parse-sweep:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install deps
+        run: pip install -q pyyaml
+      - name: Run CANONICAL.txt parse-sweep guard (checks A/B/C)
+        run: PYTHONPATH=. python3 scripts/ci/check_canonical_atom_parse_sweep.py

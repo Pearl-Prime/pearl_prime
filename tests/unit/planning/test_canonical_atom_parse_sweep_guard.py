@@ -100,3 +100,41 @@ def test_named_financial_anxiety_tuple_resolves_story_pool() -> None:
             atoms_root, "corporate_managers", "financial_anxiety", engine
         )
         assert pool, f"NO_STORY_POOL for financial_anxiety/{engine} (PR #1590 regression)"
+
+
+def test_named_burnout_overwhelm_pool_resolves_story_pool() -> None:
+    """corporate_managers/burnout/overwhelm — the STORY pool #1623 missed and #1630 restored."""
+    import sys
+
+    sys.path.insert(0, str(REPO_ROOT))
+    from phoenix_v4.gates.check_tuple_viability import _load_story_atoms_for_engine
+
+    pool = _load_story_atoms_for_engine(
+        REPO_ROOT / "atoms", "corporate_managers", "burnout", "overwhelm"
+    )
+    assert pool, "NO_STORY_POOL for burnout/overwhelm (PR #1590 over-match; restored #1630)"
+
+
+def test_no_english_story_pool_carries_overmatch() -> None:
+    """Check (C): an English base STORY pool with the #1590 over-match signature is ALWAYS a
+    regression, independent of the baseline. This is the invariant whose absence let the
+    burnout/overwhelm residual ship under #1623."""
+    report = GUARD.sweep()
+    assert report["story_pool_overmatch"] == [], (
+        "English STORY pool(s) carry an over-match signature (NO_STORY_POOL) and must be "
+        "RESTORED, never baselined: " + ", ".join(report["story_pool_overmatch"][:20])
+    )
+
+
+def test_is_english_story_pool_classification() -> None:
+    """Check (C) targets only English base STORY pools — not locale variants, not role banks."""
+    atoms = GUARD.ATOMS_ROOT
+    assert GUARD.is_english_story_pool(atoms / "corporate_managers/burnout/overwhelm/CANONICAL.txt")
+    assert GUARD.is_english_story_pool(atoms / "first_responders/anxiety/spiral/CANONICAL.txt")
+    # locale variants are a separate CJK backlog -> excluded
+    assert not GUARD.is_english_story_pool(
+        atoms / "corporate_managers/burnout/overwhelm/locales/ja-JP/CANONICAL.txt"
+    )
+    # non-STORY role banks -> excluded (they legitimately fail the STORY parser; baseline-able)
+    assert not GUARD.is_english_story_pool(atoms / "first_responders/anxiety/QUOTE/CANONICAL.txt")
+    assert not GUARD.is_english_story_pool(atoms / "corporate_managers/burnout/HOOK/CANONICAL.txt")

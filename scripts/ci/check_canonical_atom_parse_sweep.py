@@ -32,6 +32,13 @@ failure produces NO_STORY_POOL) over EVERY ``atoms/**/CANONICAL.txt`` and FAILS 
       is caught regardless of whether the strict parser happens to raise, so a future
       over-match cannot hide.
 
+  (C) an ENGLISH BASE STORY pool (atoms/<persona>/<topic>/<story_engine>/CANONICAL.txt,
+      engine in STORY_ENGINES) carries the over-match signature -- checked INDEPENDENTLY
+      of the baseline (report key story_pool_overmatch). A STORY pool is exactly what
+      check_tuple_viability loads, so an over-match there IS NO_STORY_POOL and can never
+      be a baseline-able "pre-existing" state. (C) is the invariant whose absence let
+      #1623 ship the burnout/overwhelm residual; it bounds what (A)/(B)'s baseline can hide.
+
 The baseline allowlist pins the 8,218 pre-existing strict-parse failures that exist
 independently of #1590 (HOOK banks with intentionally-empty metadata + broader,
 out-of-scope DEFECT-7 corruption that this restore did not touch). The guard is GREEN on
@@ -68,6 +75,27 @@ _BLOCK_RE = re.compile(
     r"^##\s+([A-Z_]+)\s+v(\d+)\s*\n---\s*\n([\s\S]*?)\n---",
     re.MULTILINE,
 )
+
+# STORY engine pools (``atoms/<persona>/<topic>/<engine>/CANONICAL.txt``) are exactly what
+# ``check_tuple_viability._load_story_atoms_for_engine`` loads; an over-match here IS the
+# NO_STORY_POOL failure mode. It is therefore checked INDEPENDENTLY of the baseline — a STORY
+# pool can never be silenced by adding it to the allowlist. This is the invariant whose
+# absence let #1623 ship a residual: a clean STORY pool (corporate_managers/burnout/overwhelm)
+# was over-matched yet merged because the only blocking check is "Verify governance".
+STORY_ENGINES = frozenset(
+    {"false_alarm", "overwhelm", "shame", "spiral", "watcher", "grief", "comparison"}
+)
+
+
+def is_english_story_pool(path: Path) -> bool:
+    """True only for ``atoms/<persona>/<topic>/<story_engine>/CANONICAL.txt`` (the English base
+    STORY pool). Locale variants (``.../locales/<loc>/CANONICAL.txt``) are excluded: their
+    pre-existing CJK breakage is a separate voice/infra-gated backlog, not this guard's job."""
+    try:
+        rel = path.relative_to(ATOMS_ROOT).parts
+    except ValueError:
+        return False
+    return len(rel) == 4 and rel[2] in STORY_ENGINES and rel[-1] == "CANONICAL.txt"
 
 
 def _import_strict_parser():
@@ -126,6 +154,7 @@ def sweep() -> dict:
 
     parse_fail: list[str] = []
     signature_fail: list[str] = []
+    story_overmatch: list[str] = []
     for f in files:
         rel = str(f.relative_to(REPO_ROOT))
         try:
@@ -133,13 +162,19 @@ def sweep() -> dict:
         except Exception:  # noqa: BLE001 — the real parser raises ValueError on bad data
             parse_fail.append(rel)
         try:
-            if overmatch_signature_hits(f.read_text(encoding="utf-8")) > 0:
-                signature_fail.append(rel)
+            text = f.read_text(encoding="utf-8")
         except OSError:
             parse_fail.append(rel)
+            continue
+        if overmatch_signature_hits(text) > 0:
+            signature_fail.append(rel)
+            if is_english_story_pool(f):
+                story_overmatch.append(rel)
 
     new_parse_fail = sorted(set(parse_fail) - baseline)
     new_signature_fail = sorted(set(signature_fail) - baseline)
+    # STORY-pool over-match is NOT reduced by the baseline — it is always a NO_STORY_POOL regression.
+    story_overmatch = sorted(set(story_overmatch))
     return {
         "total_files": len(files),
         "baseline_size": len(baseline),
@@ -147,7 +182,8 @@ def sweep() -> dict:
         "signature_fail_total": len(signature_fail),
         "new_parse_failures": new_parse_fail,
         "new_overmatch_signatures": new_signature_fail,
-        "ok": not new_parse_fail and not new_signature_fail,
+        "story_pool_overmatch": story_overmatch,
+        "ok": not new_parse_fail and not new_signature_fail and not story_overmatch,
     }
 
 
@@ -198,12 +234,15 @@ def main(argv: list[str] | None = None) -> int:
         print(f"[parse-sweep] over-match signatures total  : {report['signature_fail_total']}")
         print(f"[parse-sweep] NEW parse failures           : {len(report['new_parse_failures'])}")
         print(f"[parse-sweep] NEW over-match signatures     : {len(report['new_overmatch_signatures'])}")
+        print(f"[parse-sweep] STORY-pool over-match (never OK): {len(report['story_pool_overmatch'])}")
         if not report["ok"]:
             print("\n[parse-sweep] FAIL — atom-header parse regression detected.")
             for f in report["new_parse_failures"][:50]:
                 print(f"    NEW PARSE FAIL: {f}")
             for f in report["new_overmatch_signatures"][:50]:
                 print(f"    NEW OVER-MATCH: {f}")
+            for f in report["story_pool_overmatch"][:50]:
+                print(f"    STORY-POOL OVER-MATCH (restore, never baseline): {f}")
             print(
                 "\nThis is the PR #1590 failure class: a clean CANONICAL.txt was mangled into\n"
                 "metadata-less '## <LABEL> vNN' headers. Restore the body text; do NOT add the\n"
