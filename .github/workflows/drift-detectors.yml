@@ -1,0 +1,60 @@
+name: Drift detectors
+
+on:
+  pull_request:
+    branches: [main, master]
+  push:
+    branches: [main, master]
+
+jobs:
+  drift-detectors:
+    name: Drift detectors
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Resolve diff base
+        id: diff_base
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            echo "base=${{ github.event.pull_request.base.sha }}" >> "$GITHUB_OUTPUT"
+          elif [ -n "${{ github.event.before }}" ] && [ "${{ github.event.before }}" != "0000000000000000000000000000000000000000" ]; then
+            echo "base=${{ github.event.before }}" >> "$GITHUB_OUTPUT"
+          else
+            echo "base=" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Canonical pipeline path (warn until PR #1379 lands)
+        env:
+          CANONICAL_PIPELINE_GATE_MODE: warn
+        run: |
+          BASE="${{ steps.diff_base.outputs.base }}"
+          EXTRA=()
+          if [ -n "$BASE" ]; then
+            EXTRA=(--base "$BASE" --head HEAD)
+          fi
+          PYTHONPATH=scripts/ci:. python3 scripts/ci/check_canonical_pipeline_path.py "${EXTRA[@]}" --gate-mode warn
+
+      - name: Duplicate modules (warn)
+        run: |
+          BASE="${{ steps.diff_base.outputs.base }}"
+          EXTRA=()
+          if [ -n "$BASE" ]; then
+            EXTRA=(--base "$BASE" --head HEAD)
+          fi
+          PYTHONPATH=scripts/ci:. python3 scripts/ci/check_duplicate_modules.py "${EXTRA[@]}"
+
+      - name: Authority doc read (warn)
+        run: |
+          BASE="${{ steps.diff_base.outputs.base }}"
+          EXTRA=()
+          if [ -n "$BASE" ]; then
+            EXTRA=(--base "$BASE" --head HEAD)
+          fi
+          PYTHONPATH=scripts/ci:. python3 scripts/ci/check_authority_doc_read.py "${EXTRA[@]}"

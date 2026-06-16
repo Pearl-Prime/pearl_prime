@@ -54,6 +54,18 @@
 
 ---
 
+## Drift detectors (Layer 5 anti-drift)
+
+Three structural CI checks in [.github/workflows/drift-detectors.yml](../.github/workflows/drift-detectors.yml) catch recurring footguns without relying on human review. All run on PR and push to `main`; they are parallel-safe with Wave 1 governance checks.
+
+**Canonical pipeline path** ([scripts/ci/check_canonical_pipeline_path.py](../scripts/ci/check_canonical_pipeline_path.py)): Scans PR-touched `scripts/**`, `.github/workflows/**`, and `docs/**` for `scripts/run_pipeline.py` invocations in production context (workflows, `--render-book` / `--quality-profile` / `--render-dir`, or docs shell examples). Production calls must include `--pipeline-mode spine`. Legitimate legacy-registry dev/test paths may opt in with `# CI-ALLOWLIST: legacy-registry-ok — <reason>`. **Severity:** blocking FAIL once PR #1379 (spine default) lands; **WARN** until then so legacy main does not block merges.
+
+**Duplicate modules** ([scripts/ci/check_duplicate_modules.py](../scripts/ci/check_duplicate_modules.py)): For each newly added `.py` file in the PR diff, extracts top-level function/class signatures via AST and warns when name + positional arg count (functions) or class name (classes) already exists elsewhere in the repo. **Severity:** WARN only (non-blocking).
+
+**Authority doc read** ([scripts/ci/check_authority_doc_read.py](../scripts/ci/check_authority_doc_read.py)): Maps changed files to subsystems via [artifacts/coordination/SUBSYSTEM_AUTHORITY_MAP.tsv](../artifacts/coordination/SUBSYSTEM_AUTHORITY_MAP.tsv) and warns when the PR body plus commit messages cite none of that subsystem's authority docs. Best-effort backstop — it verifies mention, not that a doc was actually read. **Severity:** WARN only (non-blocking).
+
+---
+
 ## Related docs
 
 - [BRANCH_PROTECTION_REQUIREMENTS.md](BRANCH_PROTECTION_REQUIREMENTS.md) — Required checks and configuration.
