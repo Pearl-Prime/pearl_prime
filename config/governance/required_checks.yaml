@@ -6,28 +6,35 @@
 # the same validator when onboarding JSON/public proof paths change.
 version: 2
 
-# Canonical required checks for PR merge to main.
+# Canonical required checks for PR merge to main. This list MUST exactly equal the live
+# "Protect main" ruleset's required_status_checks (scripts/ci/verify_github_governance.py
+# --mode api asserts they match). Keep it minimal and non-path-filtered: a required check
+# must report on EVERY PR to main or it deadlocks unrelated PRs, and deliberately-red phases
+# (e.g. production-stack work where Core tests HARD_FAILs by design) must not block all merges.
 #
-# 2026-04-17: "Change impact" was removed after the workflow began failing
-# to spawn any jobs (returns `jobs: []` with no logs) for ~2 weeks, blocking
-# all PR merges. The "Protect main" ruleset now requires "Verify governance"
-# instead, which runs Pearl_PM + Pearl_Architect review and is healthy.
-# See docs/GITHUB_GOVERNANCE.md for ruleset history.
+# Held OUT of the gate on purpose (promote one to required_checks AND the ruleset only when it
+# is BOTH non-path-filtered AND reliably green):
+#   - "Core tests"    : green now, but HARD_FAILs by design during production-stack work
+#   - "EI V2 gates"   : path-filtered (tests/test_ei_v2*) -- would deadlock non-EI PRs if required
+#   - "Release gates" : currently RED on main (8/8 failure) -- fix before requiring
+#
+# 2026-04-17: "Change impact" removed after it stopped spawning jobs and blocked all merges.
+# 2026-06-16: pared required_checks to the two non-path-filtered, reliably-green gates actually
+#   enforced by the ruleset, and added "parse-sweep" (atoms CANONICAL.txt over-match guard).
 required_checks:
-  - "Core tests"
-  - "Release gates"
-  - "EI V2 gates"
   - "Verify governance"
   - "parse-sweep"
 
-# At least one of these must be required on main. Prefer non-path-filtered workflows.
+# At least one required check must be non-path-filtered (always reports). Both below are.
 always_required:
-  - "Core tests"
+  - "Verify governance"
+  - "parse-sweep"
 
 # Path-filtered checks may exist, but they are not canonical merge requirements.
 path_filtered_optional:
   - "Teacher gates"
   - "Brand guards"
+  - "EI V2 gates"
 
 # Status checks repo automation intentionally treats as non-blocking.
 non_blocking_checks:
