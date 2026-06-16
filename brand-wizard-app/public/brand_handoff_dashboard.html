@@ -6,73 +6,35 @@
   <title>Pearl Prime — Brand Director Operations</title>
   <style>
     :root {
-      --bg: #0e0a06;
-      --card: #1a1410;
-      --card2: #201810;
-      --border: rgba(180, 83, 9, 0.22);
-      --amber: #b45309;
-      --amber2: #d97706;
-      --cream: #faf6f0;
-      --muted: rgba(250, 246, 240, 0.45);
-      --green: #22c55e;
-      --yellow: #facc15;
-      --blue: #60a5fa;
-      --purple: #a78bfa;
-      --font: "Segoe UI", system-ui, -apple-system, sans-serif;
+      --bg: #0e0a06; --card: #1a1410; --card2: #201810; --border: rgba(180, 83, 9, 0.22);
+      --amber: #b45309; --amber2: #d97706; --cream: #faf6f0; --muted: rgba(250, 246, 240, 0.45);
+      --green: #22c55e; --yellow: #facc15; --blue: #60a5fa; --purple: #a78bfa;
+      --font: "Segoe UI", system-ui, -apple-system, "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
       --mono: ui-monospace, "DM Mono", monospace;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: var(--font); background: var(--bg); color: var(--cream); line-height: 1.5; min-height: 100vh; }
-
-    /* ── Header ── */
-    header {
-      border-bottom: 1px solid var(--border);
-      padding: 1rem 1.5rem;
-      background: linear-gradient(180deg, #120c08, var(--bg));
-      display: flex; align-items: center; gap: 1rem;
-    }
+    body { font-family: var(--font); background: var(--bg); color: var(--cream); line-height: 1.55; min-height: 100vh; }
+    header { border-bottom: 1px solid var(--border); padding: 1rem 1.5rem; background: linear-gradient(180deg, #120c08, var(--bg)); display: flex; align-items: center; gap: 1rem; }
     header h1 { font-size: 1.1rem; font-weight: 600; color: var(--amber2); }
     header .subtitle { font-size: 0.75rem; color: var(--muted); font-family: var(--mono); }
-
-    /* ── Layout ── */
     .page { max-width: 1100px; margin: 0 auto; padding: 1.5rem; }
     .top-bar { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
     .brand-name { font-size: 1.25rem; font-weight: 700; color: var(--cream); }
-    .week-badge {
-      font-family: var(--mono); font-size: 0.7rem; background: rgba(180,83,9,0.2);
-      color: var(--amber2); border: 1px solid var(--border); border-radius: 4px; padding: 2px 8px;
-    }
-    .btn { padding: 7px 15px; border-radius: 6px; border: 1px solid var(--border); background: var(--card);
-           color: var(--cream); font-size: 0.78rem; cursor: pointer; transition: all .15s; }
+    .week-badge { font-family: var(--mono); font-size: 0.7rem; background: rgba(180,83,9,0.2); color: var(--amber2); border: 1px solid var(--border); border-radius: 4px; padding: 2px 8px; }
+    .btn { padding: 7px 15px; border-radius: 6px; border: 1px solid var(--border); background: var(--card); color: var(--cream); font-size: 0.78rem; cursor: pointer; transition: all .15s; }
     .btn:hover { background: rgba(180,83,9,0.25); border-color: var(--amber2); }
     .btn.primary { background: rgba(180,83,9,0.35); border-color: var(--amber2); color: var(--amber2); font-weight: 600; }
     .btn.primary:hover { background: rgba(180,83,9,0.55); }
     .btn.sm { padding: 4px 11px; font-size: 0.72rem; }
     .actions { margin-left: auto; display: flex; gap: 8px; flex-wrap: wrap; }
-
-    /* ── Badges ── */
     .badge { font-family: var(--mono); font-size: 0.65rem; padding: 3px 9px; border-radius: 10px; border: 1px solid; }
     .badge-green { border-color: var(--green); color: var(--green); background: rgba(34,197,94,0.1); }
-
-    /* ── Upload-slots summary strip ── */
-    .slots-summary {
-      background: rgba(180,83,9,0.10); border: 1px solid var(--border); border-radius: 8px;
-      padding: 11px 16px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
-      margin-bottom: 1.5rem; font-size: 0.8rem;
-    }
+    .slots-summary { background: rgba(180,83,9,0.10); border: 1px solid var(--border); border-radius: 8px; padding: 11px 16px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 1.5rem; font-size: 0.8rem; }
     .slots-summary .lbl { font-family: var(--mono); font-size: 0.68rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
     .slots-summary .chip { font-family: var(--mono); font-size: 0.72rem; color: var(--cream); background: var(--card2); border: 1px solid var(--border); border-radius: 20px; padding: 3px 11px; }
     .slots-summary .chip b { color: var(--amber2); }
-
-    /* ── Per-platform delivery cards ── */
-    .platform-card {
-      background: var(--card); border: 1px solid var(--border); border-radius: 10px;
-      margin-bottom: 1.1rem; overflow: hidden;
-    }
-    .platform-head {
-      padding: 13px 16px; border-bottom: 1px solid var(--border);
-      display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
-    }
+    .platform-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; margin-bottom: 1.1rem; overflow: hidden; }
+    .platform-head { padding: 13px 16px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
     .platform-icon { font-size: 1.2rem; }
     .platform-name { font-size: 0.95rem; font-weight: 600; }
     .platform-count { font-family: var(--mono); font-size: 0.68rem; color: var(--muted); }
@@ -82,24 +44,15 @@
     .mode-bulk { color: var(--green); border-color: var(--green); background: rgba(34,197,94,0.08); }
     .mode-single { color: var(--yellow); border-color: var(--yellow); background: rgba(250,204,21,0.07); }
     .mode-rss { color: var(--blue); border-color: var(--blue); background: rgba(96,165,250,0.08); }
-
-    /* ── How-to instructions ── */
     .howto { background: rgba(0,0,0,0.28); border: 1px solid rgba(180,83,9,0.16); border-radius: 7px; padding: 10px 13px; margin-bottom: 12px; }
     .howto > summary { font-size: 0.66rem; font-family: var(--mono); text-transform: uppercase; letter-spacing: .07em; color: var(--amber2); cursor: pointer; list-style: none; outline: none; }
     .howto > summary::-webkit-details-marker { display: none; }
     .howto > summary::before { content: "▾ "; color: var(--muted); }
     .howto:not([open]) > summary::before { content: "▸ "; }
-    .howto ol { margin: 9px 0 0; padding-left: 1.2rem; }
-    .howto li { font-size: 0.74rem; color: var(--cream); margin: 4px 0; }
-    .howto .note { font-size: 0.67rem; color: var(--muted); margin-top: 8px; font-style: italic; }
-    .howto code { font-family: var(--mono); font-size: 0.69rem; color: var(--amber2); background: rgba(0,0,0,0.35); padding: 1px 5px; border-radius: 3px; }
-
-    /* ── Title list ── */
+    .howto ol { margin: 9px 0 0; padding-left: 1.3rem; }
+    .howto li { font-size: 0.76rem; color: var(--cream); margin: 5px 0; }
     .title-list { list-style: none; }
-    .title-list li {
-      padding: 8px 0; border-bottom: 1px solid rgba(180,83,9,0.1);
-      display: flex; align-items: center; gap: 10px; font-size: 0.8rem;
-    }
+    .title-list li { padding: 8px 0; border-bottom: 1px solid rgba(180,83,9,0.1); display: flex; align-items: center; gap: 10px; font-size: 0.8rem; }
     .title-list li:last-child { border-bottom: none; }
     .title-num { font-family: var(--mono); color: var(--muted); font-size: 0.65rem; min-width: 18px; }
     .title-text { flex: 1; }
@@ -107,32 +60,19 @@
     .fmt-ebook { border-color: var(--blue); color: var(--blue); }
     .fmt-audiobook { border-color: var(--purple); color: var(--purple); }
     .fmt-episode { border-color: var(--yellow); color: var(--yellow); }
-
-    /* ── History view ── */
     .history-list { list-style: none; }
-    .history-row {
-      display: flex; align-items: center; gap: 12px; padding: 13px 16px;
-      background: var(--card); border: 1px solid var(--border); border-radius: 8px; margin-bottom: 9px;
-      cursor: pointer; transition: all .15s;
-    }
+    .history-row { display: flex; align-items: center; gap: 12px; padding: 13px 16px; background: var(--card); border: 1px solid var(--border); border-radius: 8px; margin-bottom: 9px; cursor: pointer; transition: all .15s; }
     .history-row:hover { border-color: var(--amber2); background: rgba(180,83,9,0.12); }
     .history-week { font-family: var(--mono); font-weight: 600; color: var(--amber2); min-width: 96px; }
     .history-meta { font-size: 0.75rem; color: var(--muted); flex: 1; }
     .history-go { font-size: 0.72rem; color: var(--amber2); }
-
-    /* ── Catalog view ── */
     .catalog-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1.1rem; }
     .book-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; }
-    .book-cover {
-      height: 150px; display: flex; align-items: center; justify-content: center; text-align: center;
-      padding: 14px; font-weight: 700; font-size: 0.95rem; color: #fff; line-height: 1.25;
-      text-shadow: 0 1px 4px rgba(0,0,0,0.5);
-    }
+    .book-cover { height: 150px; display: flex; align-items: center; justify-content: center; text-align: center; padding: 14px; font-weight: 700; font-size: 0.95rem; color: #fff; line-height: 1.3; text-shadow: 0 1px 4px rgba(0,0,0,0.5); }
     .book-body { padding: 12px 14px; flex: 1; display: flex; flex-direction: column; gap: 6px; }
     .book-title { font-size: 0.85rem; font-weight: 600; }
     .book-desc { font-size: 0.72rem; color: var(--muted); flex: 1; }
     .book-angle { font-size: 0.66rem; font-family: var(--mono); color: var(--amber2); border-top: 1px solid rgba(180,83,9,0.15); padding-top: 7px; }
-
     .section-title { font-size: 0.85rem; font-weight: 600; color: var(--cream); margin: 0 0 1rem; }
     .viewing-note { font-size: 0.72rem; color: var(--muted); font-family: var(--mono); margin-bottom: 1rem; }
     .hidden { display: none; }
@@ -141,134 +81,229 @@
 <body>
 <header>
   <div>
-    <h1>Brand Director Operations</h1>
-    <div class="subtitle">Pearl Prime · weekly content packet</div>
+    <h1 id="ui-h1">Brand Director Operations</h1>
+    <div class="subtitle" id="ui-sub">Pearl Prime · weekly content packet</div>
   </div>
 </header>
 
 <div class="page">
-
-  <!-- Top bar -->
   <div class="top-bar">
     <span class="brand-name" id="brand-name">…</span>
     <span class="week-badge" id="week-label">—</span>
-    <span class="badge badge-green">Weekly handoff</span>
+    <span class="badge badge-green" id="ui-handoff">Weekly handoff</span>
     <div class="actions">
-      <button class="btn primary" onclick="downloadAll()">⬇ Download all packets</button>
-      <button class="btn" onclick="showView('history')">🕘 Review History</button>
-      <button class="btn" onclick="showView('catalog')">📚 View Catalog</button>
+      <button class="btn primary" id="ui-dlall" onclick="downloadAll()">⬇ Download all packets</button>
+      <button class="btn" id="ui-history" onclick="showView('history')">🕘 Review History</button>
+      <button class="btn" id="ui-catalog" onclick="showView('catalog')">📚 View Catalog</button>
     </div>
   </div>
 
-  <!-- ════════ WEEKLY VIEW ════════ -->
   <div id="view-weekly">
     <div class="viewing-note hidden" id="history-note"></div>
     <div class="slots-summary" id="slots-summary"></div>
     <div id="platforms"></div>
   </div>
 
-  <!-- ════════ HISTORY VIEW ════════ -->
   <div id="view-history" class="hidden">
     <div class="top-bar" style="margin-bottom:1rem">
-      <h3 class="section-title" style="margin:0">Review History</h3>
-      <div class="actions"><button class="btn sm" onclick="showView('weekly')">← Back to this week</button></div>
+      <h3 class="section-title" id="ui-history-h" style="margin:0">Review History</h3>
+      <div class="actions"><button class="btn sm" id="ui-history-back" onclick="showView('weekly')">← Back to this week</button></div>
     </div>
-    <p class="viewing-note">Every weekly packet since this brand launched. Click a week to reopen its packet.</p>
+    <p class="viewing-note" id="ui-history-intro">Every weekly packet since this brand launched. Click a week to reopen its packet.</p>
     <ul class="history-list" id="history-list"></ul>
   </div>
 
-  <!-- ════════ CATALOG VIEW ════════ -->
   <div id="view-catalog" class="hidden">
     <div class="top-bar" style="margin-bottom:1rem">
-      <h3 class="section-title" style="margin:0">Full Catalog — <span id="catalog-brand"></span></h3>
-      <div class="actions"><button class="btn sm" onclick="showView('weekly')">← Back to this week</button></div>
+      <h3 class="section-title" style="margin:0"><span id="ui-catalog-h">Full Catalog —</span> <span id="catalog-brand"></span></h3>
+      <div class="actions"><button class="btn sm" id="ui-catalog-back" onclick="showView('weekly')">← Back to this week</button></div>
     </div>
     <p class="viewing-note" id="catalog-count"></p>
     <div class="catalog-grid" id="catalog-grid"></div>
   </div>
-
-</div><!-- /page -->
+</div>
 
 <script>
 "use strict";
 
 // ════════════════════════════════════════════════════════════════════════
-// Single-brand Brand Director Operations. Brand is FIXED from ?brand=<unified_id>
-// via the shared bridge JSON (brand_admin_brands.json). No brand switching.
-//
-// Per-platform delivery + instructions reflect the REAL 2026 upload mechanics
-// (researched per platform). Each retail channel gets ONE download (its metadata
-// packet) + step-by-step "how to upload". Titles/metadata are deterministic
-// placeholders shaped like the real handoff packet, pending the real catalog feed.
+// Single-brand Brand Director Operations. Brand + market are FIXED from
+// ?brand=<unified_id> (lane suffix → market). ja_jp → Japanese UI + Japan
+// platform set; everything else → English + US set. Each platform shows ONE
+// download + action-only steps (exactly what the director does — no automatic
+// behavior, no jargon). Titles/metadata are deterministic placeholders.
 // ════════════════════════════════════════════════════════════════════════
 
-const LANE_MARKET = {en_us:"us",es_us:"us",es_es:"spain",pt_br:"brazil",zh_tw:"taiwan",zh_hk:"hong_kong",zh_cn:"china",zh_sg:"singapore",ja_jp:"japan",ko_kr:"korea"};
+// ── UI chrome strings ──────────────────────────────────────────────────────
+const CHROME = {
+  en: {
+    h1:"Brand Director Operations", sub:"Pearl Prime · weekly content packet", handoff:"Weekly handoff",
+    dlAll:"⬇ Download all packets", history:"🕘 Review History", catalog:"📚 View Catalog",
+    reviewHistory:"Review History", historyIntro:"Every weekly packet since this brand launched. Click a week to reopen its packet.",
+    back:"← Back to this week", fullCatalog:"Full Catalog —", openPacket:"Open packet →",
+    thisWeek:"This week", storeSep:" · ",
+    ebookNoun:"ebooks", audiobookNoun:"audiobooks", episodeNoun:"episodes",
+    fmt:{ebooks:"ebook", audiobooks:"audiobook", episodes:"episode"},
+    toStores:(c,noun,s)=>`<b>${c}</b> ${noun} → ${s}`,
+    countThisWeek:(n,noun)=>`${n} ${noun} this week`,
+    howto:(l)=>`How to upload to ${l}`,
+    historyMeta:(e,a,p,tag)=>`${e} ebooks · ${a} audiobooks · ${p} episodes · ${tag}`,
+    thisWeekTag:"this week", weeksAgo:(n)=>`${n} week${n>1?"s":""} ago`,
+    catalogCount:(n)=>`${n} titles in catalog`,
+    viewingPast:(w)=>`Viewing past week <b style="color:var(--amber2)">${w}</b>`, jumpCurrent:"→ jump to current week",
+  },
+  ja: {
+    h1:"ブランドディレクター運用", sub:"Pearl Prime · 週次コンテンツパケット", handoff:"週次ハンドオフ",
+    dlAll:"⬇ すべてのパケットをダウンロード", history:"🕘 履歴を見る", catalog:"📚 カタログを見る",
+    reviewHistory:"履歴", historyIntro:"このブランドの開始以降の週次パケットです。週を選ぶと、そのパケットをもう一度開けます。",
+    back:"← 今週に戻る", fullCatalog:"カタログ —", openPacket:"パケットを開く →",
+    thisWeek:"今週", storeSep:"・",
+    ebookNoun:"冊", audiobookNoun:"タイトル", episodeNoun:"エピソード",
+    fmt:{ebooks:"電子書籍", audiobooks:"オーディオブック", episodes:"エピソード"},
+    toStores:(c,noun,s)=>`<b>${c}</b>${noun} → ${s}`,
+    countThisWeek:(n,noun)=>`今週 ${n}${noun}`,
+    howto:(l)=>`${l} の公開手順`,
+    historyMeta:(e,a,p,tag)=>`電子書籍${e}・オーディオブック${a}・エピソード${p}・${tag}`,
+    thisWeekTag:"今週", weeksAgo:(n)=>`${n}週間前`,
+    catalogCount:(n)=>`カタログ ${n}タイトル`,
+    viewingPast:(w)=>`過去の週 <b style="color:var(--amber2)">${w}</b> を表示中`, jumpCurrent:"→ 今週へ",
+  },
+};
 
-// Distribution channels. ebooks fan out to all 3 ebook stores; audiobooks → INaudio;
-// serialized audio → the podcast channel. `feed` selects which weekly list a card shows.
-const PLATFORMS = [
-  {
-    id:"google_play", label:"Google Play Books", icon:"▶", feed:"ebooks", noun:"ebooks",
+// ── Platform sets (each step = a single action the director takes) ─────────
+const PLATFORMS_US = [
+  { id:"google_play", label:"Google Play Books", icon:"▶", feed:"ebooks", dlType:"gp_booklist",
     mode:"Bulk upload", modeClass:"mode-bulk", dlLabel:"⬇ Book-list + files",
     steps:[
+      "Download this packet.",
       "Sign in to <b>Google Play Books Partner Center</b> → <b>Book Catalog</b>.",
-      "<b>Advanced options → Upload book list</b> → choose the <code>google_play_booklist.txt</code> from this packet.",
-      "<b>Advanced options → Upload content files</b> → click <b>Choose files</b> and select all your EPUBs + covers at once (it's a file-picker). Google auto-matches each file to its book by the ISBN in the filename.",
-      "Watch each book flip <b>Pending Content → Processed</b>; fix any errors, then set each book to <b>For sale</b>."
-    ],
-    note:"Two uploads joined by ISBN — the book-list is the text record; the EPUB + cover are real files that can't live in a spreadsheet, so they upload separately. Name each file with its ISBN (<code>&lt;ISBN&gt;.epub</code>, <code>&lt;ISBN&gt;_frontcover.jpg</code>) to match its book-list row, or Google creates a stray listing. Max 2 GB/file; EPUBs are auto-checked (EpubCheck)."
-  },
-  {
-    id:"amazon_kdp", label:"Amazon KDP", icon:"📖", feed:"ebooks", noun:"ebooks",
+      "<b>Advanced options → Upload book list</b> → pick the book-list file from the packet.",
+      "<b>Advanced options → Upload content files → Choose files</b> → pick the book files from the packet.",
+      "Set each book to <b>For sale</b>.",
+    ] },
+  { id:"amazon_kdp", label:"Amazon KDP", icon:"📖", feed:"ebooks", dlType:"kdp_csv",
     mode:"One title at a time", modeClass:"mode-single", dlLabel:"⬇ Copy-paste CSV + files",
     steps:[
-      "KDP Bookshelf → <b>+ Create → Kindle eBook</b>.",
-      "<b>Copy-paste</b> one row from <code>kdp_metadata.csv</code> (title, description, 7 keywords, 3 categories).",
-      "Answer the <b>AI-content question: Yes</b> for text, <b>Yes</b> for the cover image. Upload that title's EPUB + cover.",
-      "Set price → <b>Publish</b>. Repeat for the next title."
-    ],
-    note:"KDP has no bulk upload — it's one title at a time. The CSV is just your copy-paste source; you attach the EPUB + cover by hand. Max 10 new titles per week."
-  },
-  {
-    id:"apple_books", label:"Apple Books", icon:"", feed:"ebooks", noun:"ebooks",
+      "Download this packet.",
+      "Sign in to <b>KDP</b> → <b>+ Create → Kindle eBook</b>.",
+      "Copy the title's details from the packet into the fields (title, description, keywords, categories).",
+      "When KDP asks about AI content, answer <b>Yes</b>.",
+      "Upload that title's ebook file and cover from the packet.",
+      "Enter your price → <b>Publish</b>. Do this for each title.",
+    ] },
+  { id:"apple_books", label:"Apple Books", icon:"", feed:"ebooks", dlType:"ebook_csv",
     mode:"One title at a time", modeClass:"mode-single", dlLabel:"⬇ Metadata + files",
     steps:[
-      "Sign in at <b>authors.apple.com</b> → <b>Submit a New Book</b> (any browser — no Mac needed).",
-      "Upload the title's <b>EPUB + sample + cover</b>.",
-      "<b>Copy-paste</b> the metadata from <code>apple_books_metadata.csv</code>; set price + territories → <b>Submit</b>.",
-      "Repeat for the next title."
-    ],
-    note:"One at a time via the web portal. True bulk needs Apple's Mac-only Transporter (technical) or an aggregator — ask us if you ever need it."
-  },
-  {
-    id:"inaudio", label:"Voices by INaudio", icon:"🎧", feed:"audiobooks", noun:"audiobooks",
+      "Download this packet.",
+      "Sign in at <b>authors.apple.com</b> → <b>Submit a New Book</b>.",
+      "Upload the title's ebook file, sample, and cover from the packet.",
+      "Copy the title's details from the packet into the fields.",
+      "Enter your price → <b>Submit</b>. Do this for each title.",
+    ] },
+  { id:"inaudio", label:"Voices by INaudio", icon:"🎧", feed:"audiobooks", dlType:"audiobook_csv",
     mode:"One title at a time", modeClass:"mode-single", dlLabel:"⬇ Audio + metadata",
     steps:[
-      "Sign in at <b>inaudio.com</b> → <b>Add new audiobook</b> (this is Findaway Voices, rebranded).",
-      "Copy-paste the metadata; <b>tick “digital voice narration”</b> (required — our audio is AI).",
-      "Upload the cover, then the audio in order: <b>opening credits → chapters → closing credits → retail sample</b>.",
-      "Set price + territories → <b>Submit</b>."
-    ],
-    note:"This is where audiobooks go — NOT Google Play. Audible rejects AI narration, so leave Audible unticked. Audio = per-chapter MP3, 192 kbps CBR, 44.1 kHz."
-  },
-  {
-    id:"podcast", label:"Podcast · Spotify + Apple", icon:"🎙", feed:"episodes", noun:"episodes",
-    mode:"Weekly episode (RSS)", modeClass:"mode-rss", dlLabel:"⬇ Episode sheet + MP3",
+      "Download this packet.",
+      "Sign in at <b>inaudio.com</b> → <b>Add new audiobook</b>.",
+      "Copy the title's details from the packet into the fields.",
+      "Turn on <b>digital voice narration</b>.",
+      "Upload the cover, then the audio files from the packet in the order shown.",
+      "Enter your price → <b>Submit</b>. Do this for each title.",
+    ] },
+  { id:"podcast", label:"Podcast · Spotify + Apple", icon:"🎙", feed:"episodes", dlType:"podcast_csv",
+    mode:"Weekly episode", modeClass:"mode-rss", dlLabel:"⬇ Episode sheet + MP3",
     steps:[
-      "Log in to your podcast host (<b>Spotify for Creators</b>).",
-      "<b>New Episode</b> → upload this week's MP3 (128 kbps, 44.1 kHz).",
-      "Copy-paste the episode <b>title, number, and description</b>; set the publish date → <b>Publish</b>.",
-      "The RSS feed updates automatically — <b>Apple Podcasts + Spotify</b> pick it up within hours. No resubmission."
-    ],
-    note:"Show setup + submitting the RSS feed to Apple/Spotify is a one-time step (already done). Each week you just add the episode."
-  },
+      "Download this packet.",
+      "Log in to <b>Spotify for Creators</b>.",
+      "<b>New Episode</b> → upload this week's audio file from the packet.",
+      "Copy the episode title, number, and description from the packet.",
+      "Set the date → <b>Publish</b>.",
+    ] },
 ];
 
-const CATALOG_START = new Date(2026, 4, 4); // 2026-05-04 (~W18) — drives Review History reach-back
+const PLATFORMS_JP = [
+  { id:"google_play", label:"Google Play Books", icon:"▶", feed:"ebooks", dlType:"gp_booklist",
+    mode:"一括アップロード", modeClass:"mode-bulk", dlLabel:"⬇ ブックリスト＋ファイル",
+    steps:[
+      "このパケットをダウンロードします。",
+      "<b>Google Play Books パートナーセンター</b>にサインインし、<b>Book Catalog</b> を開きます。",
+      "<b>Advanced options → Upload book list</b> で、パケットのブックリストファイルを選びます。",
+      "<b>Advanced options → Upload content files → Choose files</b> で、パケットの本のファイルを選びます。",
+      "各本を <b>For sale</b> に設定します。",
+    ] },
+  { id:"amazon_kdp", label:"Amazon KDP", icon:"📖", feed:"ebooks", dlType:"kdp_csv",
+    mode:"1冊ずつ", modeClass:"mode-single", dlLabel:"⬇ コピペ用CSV＋ファイル",
+    steps:[
+      "このパケットをダウンロードします。",
+      "<b>KDP</b>（kdp.amazon.co.jp）にログインし、<b>「+ 作成」→「Kindle本（電子書籍）」</b>を選びます。",
+      "パケットの内容を各項目（タイトル・紹介文・キーワード・カテゴリー）に貼り付けます。",
+      "AIコンテンツの質問には <b>「はい」</b> と答えます。",
+      "パケットの原稿ファイルと表紙を <b>「電子書籍の原稿をアップロード」「電子書籍の表紙をアップロード」</b> からアップロードします。",
+      "価格を入力し <b>「Kindle本を出版」</b> をクリックします。本ごとに繰り返します。",
+    ] },
+  { id:"apple_books", label:"Apple Books", icon:"", feed:"ebooks", dlType:"ebook_csv",
+    mode:"1冊ずつ", modeClass:"mode-single", dlLabel:"⬇ メタデータ＋ファイル",
+    steps:[
+      "このパケットをダウンロードします。",
+      "<b>authors.apple.com</b> にサインインし、<b>Submit a New Book</b> をクリックします。",
+      "パケットのEPUBファイル・サンプル・表紙をアップロードします。",
+      "パケットの内容を各項目に貼り付けます（言語は Japanese）。",
+      "価格を設定し <b>Submit</b> をクリックします。本ごとに繰り返します。",
+    ] },
+  { id:"kobo", label:"楽天Kobo", icon:"📕", feed:"ebooks", dlType:"ebook_csv",
+    mode:"1冊ずつ", modeClass:"mode-single", dlLabel:"⬇ メタデータ＋ファイル",
+    steps:[
+      "このパケットをダウンロードします。",
+      "<b>Kobo Writing Life</b>（kobo.com/writinglife）にログインします。",
+      "<b>「電子書籍を作成」</b> をクリックし、パケットの内容（タイトル・著者・紹介文）を貼り付けます。",
+      "パケットのEPUBファイルと表紙をアップロードします。",
+      "価格を入力し <b>「電子書籍を出版」</b> をクリックします。本ごとに繰り返します。",
+    ] },
+  { id:"audiobook_jp", label:"audiobook.jp", icon:"🎧", feed:"audiobooks", dlType:"audiobook_csv",
+    mode:"申し込み", modeClass:"mode-single", dlLabel:"⬇ 音声＋メタデータ",
+    steps:[
+      "このパケットをダウンロードします。",
+      "<b>オトバンクの配信申し込みフォーム</b>（business.audiobook.jp）を開きます。",
+      "パケットの内容（タイトル・著者・紹介文・カテゴリー）を入力します。",
+      "パケットの音声ファイルと表紙を添付します。",
+      "ナレーションは <b>AI音声</b> であることを申告します（パケットの定型文を使います）。",
+      "申し込みを送信します。",
+    ] },
+  { id:"podcast", label:"ポッドキャスト · Spotify + Apple", icon:"🎙", feed:"episodes", dlType:"podcast_csv",
+    mode:"毎週エピソード", modeClass:"mode-rss", dlLabel:"⬇ エピソード表＋MP3",
+    steps:[
+      "このパケットをダウンロードします。",
+      "<b>Spotify for Creators</b>（creators.spotify.com）にログインします。",
+      "<b>「新しいエピソード」</b> から、パケットの音声ファイルをアップロードします。",
+      "パケットのエピソードタイトル・番号・概要を貼り付けます。",
+      "日付を設定し <b>「公開」</b> をクリックします。",
+    ] },
+];
+
+const CATALOG_START = new Date(2026, 4, 4);
 const WEEKLY_EBOOKS = 8, WEEKLY_AUDIOBOOKS = 3, WEEKLY_EPISODES = 2;
 
+// Catalog content (placeholder) — per market so the view reads naturally.
+const CAT_EN = {
+  titles:["The Open Vessel","Returning to Stillness","Devotion Without Religion","The Unhurried Heart","Emptiness as Refuge","The Ground That Holds You","Surrender Is Not Defeat","The Quiet That Remains","Becoming Transparent","The Grace of Enough","Resting in What Is","The End of Seeking","Tender Awareness","The Sacred Ordinary","Letting the Bottom Fall Out","Home Before Thought","The Mercy of Slowness","Nothing to Fix","The Field of Allowing","Trust the Unfolding","The Wordless Yes","Soft Front, Strong Back","The Permission to Pause","Faith Without Certainty"],
+  descs:["A contemplative path back to presence — short chapters for the overwhelmed.","Burnout recovery without dogma: rest as a spiritual practice.","Devotion stripped of religion — for the spiritually homesick.","Nervous-system stillness for people who can't stop bracing.","Letting go when control was the only thing that kept you safe.","Identity rebuild after everything you organized your life around fell away."],
+  angles:["For the spiritually weary","Burnout recovery · no dogma","Nervous-system rest","Identity rebuild after collapse","Overthinkers welcome","Grief-literate stillness"],
+  keywords:["spiritual practice","mindfulness for burnout","contemplative living","letting go","inner stillness","devotion without religion","nervous system"],
+  cats:["Religion & Spirituality","Self-Help","Body, Mind & Spirit"],
+};
+const CAT_JA = {
+  titles:["空(うつ)の器","静けさへ還る","宗教なき祈り","急がない心","余白という安らぎ","あなたを支える大地","明け渡しは敗北ではない","残りつづける静寂","透明になる","足るを知る恵み","あるがままに憩う","探し求めることの終わり"],
+  descs:["圧倒された心のための、現在(いま)へ還る短い瞑想の道。","教義のない燃え尽き回復——休息を実践として。","宗教を脱いだ祈り——心のよりどころを求める人へ。","緊張を手放せない神経系のための静けさ。","制御だけが安全だった人へ、手放すということ。","拠り所を失ったあとの、自己の再構築。"],
+  angles:["心が疲れた人へ","燃え尽き回復・教義なし","神経系を休める","崩壊からの再生","考えすぎる人へ","悲しみに寄り添う静けさ"],
+  keywords:["スピリチュアル","マインドフルネス","瞑想","手放す","内なる静けさ","燃え尽き回復","自律神経"],
+  cats:["宗教・スピリチュアル","自己啓発","心理学"],
+};
+const COVER_HUES = [18, 32, 268, 200, 150, 340];
+
+// ── Market state (set in boot) ──────────────────────────────────────────────
 let BRAND = {id:"devotion_path_en_us", label:"Open Vessel Press"};
-let currentWeekIdx = null; // null = this week; else index into weekHistory()
+let MARKET = "us", LANG = "en", CURRENCY = "usd", PLATFORMS = PLATFORMS_US, T = CHROME.en, CAT = CAT_EN;
+let currentWeekIdx = null;
 
 // ── ISO-week helpers ──────────────────────────────────────────────────────
 function isoWeek(d) {
@@ -286,43 +321,18 @@ function weekHistory() {
 function currentWeekLabel() { return isoWeek(new Date()); }
 function weekLabelFor(idx){ const h = weekHistory(); return (idx==null) ? currentWeekLabel() : h[idx]; }
 
-// ── Deterministic catalog (placeholder shaped like the real packet) ───────
-const TITLES = [
-  "The Open Vessel","Returning to Stillness","Devotion Without Religion","The Unhurried Heart",
-  "Emptiness as Refuge","The Ground That Holds You","Surrender Is Not Defeat","The Quiet That Remains",
-  "Becoming Transparent","The Grace of Enough","Resting in What Is","The End of Seeking",
-  "Tender Awareness","The Sacred Ordinary","Letting the Bottom Fall Out","Home Before Thought",
-  "The Mercy of Slowness","Nothing to Fix","The Field of Allowing","Trust the Unfolding",
-  "The Wordless Yes","Soft Front, Strong Back","The Permission to Pause","Faith Without Certainty",
-];
-const DESCS = [
-  "A contemplative path back to presence — short chapters for the overwhelmed.",
-  "Burnout recovery without dogma: rest as a spiritual practice, not a reward.",
-  "Devotion stripped of religion — for the spiritually homesick.",
-  "Nervous-system stillness for people who can't stop bracing.",
-  "Letting go when control was the only thing that kept you safe.",
-  "Identity rebuild after everything you organized your life around fell away.",
-];
-const ANGLES = ["For the spiritually weary","Burnout recovery · no dogma","Nervous-system rest","Identity rebuild after collapse","Overthinkers welcome","Grief-literate stillness"];
-const KEYWORDS = ["spiritual practice","mindfulness for burnout","contemplative living","letting go","inner stillness","devotion without religion","nervous system regulation"];
-const COVER_HUES = [18, 32, 268, 200, 150, 340];
-
-function slug(s){ return s.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,""); }
+// ── Deterministic catalog ───────────────────────────────────────────────────
+function slug(s){ const x = String(s).toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,""); return x || "title"; }
 function isbnFor(i){ return "978" + String(1000000000 + i * 7919).slice(0,10); }
+function priceFor(i){ return CURRENCY === "jpy" ? (i % 3 === 0 ? "500" : "700") : (i % 3 === 0 ? "4.99" : "5.99"); }
+function audioPrice(){ return CURRENCY === "jpy" ? "1500" : "9.99"; }
 
 function buildCatalog() {
-  return TITLES.map((title, i) => ({
-    title,
-    desc: DESCS[i % DESCS.length],
-    angle: ANGLES[i % ANGLES.length],
-    isbn: isbnFor(i),
-    price: (i % 3 === 0) ? "4.99" : "5.99",
-    hue: COVER_HUES[i % COVER_HUES.length],
+  return CAT.titles.map((title, i) => ({
+    title, desc: CAT.descs[i % CAT.descs.length], angle: CAT.angles[i % CAT.angles.length],
+    isbn: isbnFor(i), price: priceFor(i), hue: COVER_HUES[i % COVER_HUES.length],
   }));
 }
-
-// Weekly packet: ebooks rotate through the catalog so each week differs. Audiobooks
-// are the audio renditions of the first few; episodes are this week's serialized audio.
 function buildPacket(weekIdx) {
   const cat = buildCatalog(), n = cat.length;
   const start = (weekIdx * WEEKLY_EBOOKS) % n;
@@ -342,33 +352,29 @@ function dl(name, text, mime) {
   a.download = name; a.click();
 }
 function row(arr, sep){ return arr.map(v => sep === "\t" ? String(v) : `"${String(v).replace(/"/g,'""')}"`).join(sep || ","); }
-
-// Build the platform-correct metadata file (the thing the director copy-pastes/uploads).
-function buildMetadataFile(pid, week, pkt) {
-  const p = PLATFORMS.find(x => x.id === pid);
-  const items = feedFor(pkt, p);
-  if (pid === "google_play") {
-    // tab-delimited book-list: filename (=ISBN) joins to the separately-uploaded EPUB/cover
-    const head = ["identifier","title","contributor","description","language","price_usd","content_file","cover_file"];
-    const rows = items.map(b => [b.isbn, b.title, BRAND.label, b.desc, "en", b.price, `${b.isbn}.epub`, `${b.isbn}_frontcover.jpg`]);
+function buildMetadataFile(p, week, pkt) {
+  const items = feedFor(pkt, p), pc = `price_${CURRENCY}`;
+  if (p.dlType === "gp_booklist") {
+    const head = ["identifier","title","contributor","description","language",pc,"content_file","cover_file"];
+    const rows = items.map(b => [b.isbn, b.title, BRAND.label, b.desc, LANG, b.price, `${b.isbn}.epub`, `${b.isbn}_frontcover.jpg`]);
     return {name:`google_play_booklist__${BRAND.id}__${week}.txt`, text:[head, ...rows].map(r => row(r,"\t")).join("\n"), mime:"text/plain"};
   }
-  if (pid === "amazon_kdp") {
-    const head = ["title","subtitle","author","description","keyword_1","keyword_2","keyword_3","keyword_4","keyword_5","keyword_6","keyword_7","category_1","category_2","category_3","price_usd","ai_text","ai_images","manuscript_file","cover_file"];
-    const rows = items.map(b => [b.title, b.angle, BRAND.label, b.desc, ...KEYWORDS, "Religion & Spirituality","Self-Help","Body, Mind & Spirit", b.price, "Yes","Yes", `${slug(b.title)}.epub`, `${slug(b.title)}.jpg`]);
+  if (p.dlType === "kdp_csv") {
+    const head = ["title","subtitle","author","description","keyword_1","keyword_2","keyword_3","keyword_4","keyword_5","keyword_6","keyword_7","category_1","category_2","category_3",pc,"ai_text","ai_images","manuscript_file","cover_file"];
+    const rows = items.map(b => [b.title, b.angle, BRAND.label, b.desc, ...CAT.keywords, ...CAT.cats, b.price, "Yes","Yes", `${slug(b.title)}.epub`, `${slug(b.title)}.jpg`]);
     return {name:`kdp_metadata__${BRAND.id}__${week}.csv`, text:[head, ...rows].map(r => row(r)).join("\n"), mime:"text/csv"};
   }
-  if (pid === "apple_books") {
-    const head = ["title","author","publisher","description","language","category","price_usd","isbn","epub_file","sample_file","cover_file"];
-    const rows = items.map(b => [b.title, BRAND.label, BRAND.label, b.desc, "EN", "Religion & Spirituality", b.price, b.isbn, `${slug(b.title)}.epub`, `${slug(b.title)}_sample.epub`, `${slug(b.title)}.jpg`]);
-    return {name:`apple_books_metadata__${BRAND.id}__${week}.csv`, text:[head, ...rows].map(r => row(r)).join("\n"), mime:"text/csv"};
+  if (p.dlType === "ebook_csv") {
+    const head = ["title","author","publisher","description","language","category",pc,"isbn","epub_file","sample_file","cover_file"];
+    const rows = items.map(b => [b.title, BRAND.label, BRAND.label, b.desc, LANG, CAT.cats[0], b.price, b.isbn, `${slug(b.title)}.epub`, `${slug(b.title)}_sample.epub`, `${slug(b.title)}.jpg`]);
+    return {name:`${p.id}_metadata__${BRAND.id}__${week}.csv`, text:[head, ...rows].map(r => row(r)).join("\n"), mime:"text/csv"};
   }
-  if (pid === "inaudio") {
-    const head = ["title","author","narrator","isbn","description","category","price_usd","digital_voice","audio_files","cover_file"];
-    const rows = items.map(b => [b.title, BRAND.label, "Digital voice (AI)", b.isbn, b.desc, "Religion & Spirituality", "9.99", "Yes", `${slug(b.title)}/01_opening.mp3; ${slug(b.title)}/chapters/*.mp3; ${slug(b.title)}/99_closing.mp3; ${slug(b.title)}/retail_sample.mp3`, `${slug(b.title)}_cover.jpg`]);
-    return {name:`inaudio_audiobooks__${BRAND.id}__${week}.csv`, text:[head, ...rows].map(r => row(r)).join("\n"), mime:"text/csv"};
+  if (p.dlType === "audiobook_csv") {
+    const head = ["title","author","narrator","isbn","description","category",pc,"digital_voice","audio_files","cover_file"];
+    const rows = items.map(b => [b.title, BRAND.label, LANG==="ja"?"AI音声":"Digital voice (AI)", b.isbn, b.desc, CAT.cats[0], audioPrice(), "Yes", `${slug(b.title)}/01_opening.mp3; ${slug(b.title)}/chapters/*.mp3; ${slug(b.title)}/99_closing.mp3; ${slug(b.title)}/retail_sample.mp3`, `${slug(b.title)}_cover.jpg`]);
+    return {name:`${p.id}_audiobooks__${BRAND.id}__${week}.csv`, text:[head, ...rows].map(r => row(r)).join("\n"), mime:"text/csv"};
   }
-  if (pid === "podcast") {
+  if (p.dlType === "podcast_csv") {
     const head = ["episode_number","episode_title","publish_date","description","explicit","audio_file"];
     const rows = items.map(b => [b.epNum, `Ep ${b.epNum}: ${b.title}`, week, b.desc, "No", `${BRAND.id}_ep${String(b.epNum).padStart(3,"0")}.mp3`]);
     return {name:`podcast_episodes__${BRAND.id}__${week}.csv`, text:[head, ...rows].map(r => row(r)).join("\n"), mime:"text/csv"};
@@ -376,16 +382,17 @@ function buildMetadataFile(pid, week, pkt) {
 }
 function dlPacket(pid) {
   const week = weekLabelFor(currentWeekIdx), pkt = packetFor(currentWeekIdx);
-  const f = buildMetadataFile(pid, week, pkt);
+  const p = PLATFORMS.find(x => x.id === pid);
+  const f = p && buildMetadataFile(p, week, pkt);
   if (f) dl(f.name, f.text, f.mime);
 }
 function downloadAll() {
   const week = weekLabelFor(currentWeekIdx), pkt = packetFor(currentWeekIdx);
-  const head = ["channel","format","title","isbn_or_ep","description","price_usd","week","brand"];
+  const head = ["channel","format","title","id","description",`price_${CURRENCY}`,"week","brand"];
   const rows = [head];
   PLATFORMS.forEach(p => feedFor(pkt, p).forEach(b =>
-    rows.push([p.label, p.noun.replace(/s$/,""), (p.feed==="episodes"?`Ep ${b.epNum}: ${b.title}`:b.title), (b.isbn||b.epNum||""), b.desc, (b.price||"9.99"), week, BRAND.label])));
-  dl(`handoff_all_packets__${BRAND.id}__${week}.csv`, rows.map(r => row(r)).join("\n"), "text/csv");
+    rows.push([p.label, T.fmt[p.feed], (p.feed==="episodes"?`Ep ${b.epNum}: ${b.title}`:b.title), (b.isbn||b.epNum||""), b.desc, (b.price||audioPrice()), week, BRAND.label])));
+  dl(`all_packets__${BRAND.id}__${week}.csv`, rows.map(r => row(r)).join("\n"), "text/csv");
 }
 
 // ── Renders ───────────────────────────────────────────────────────────────
@@ -395,38 +402,38 @@ function renderWeekly() {
   document.getElementById("week-label").textContent = week;
 
   const note = document.getElementById("history-note");
-  if (idx == null) { note.classList.add("hidden"); }
-  else { note.classList.remove("hidden"); note.innerHTML = `Viewing past week <b style="color:var(--amber2)">${week}</b> &nbsp;·&nbsp; <a href="#" onclick="goThisWeek();return false" style="color:var(--amber2)">→ jump to current week</a>`; }
+  if (idx == null) note.classList.add("hidden");
+  else { note.classList.remove("hidden"); note.innerHTML = `${T.viewingPast(week)} &nbsp;·&nbsp; <a href="#" onclick="goThisWeek();return false" style="color:var(--amber2)">${T.jumpCurrent}</a>`; }
 
-  // Summary strip — what's going where this week
+  const ebookStores = PLATFORMS.filter(p => p.feed === "ebooks").map(p => p.label).join(T.storeSep);
+  const audioStore = (PLATFORMS.find(p => p.feed === "audiobooks") || {}).label || "";
+  const podStore = (PLATFORMS.find(p => p.feed === "episodes") || {}).label || "";
   document.getElementById("slots-summary").innerHTML =
-    `<span class="lbl">📦 This week</span>` +
-    `<span class="chip"><b>${pkt.ebooks.length}</b> ebooks → Google Play · KDP · Apple</span>` +
-    `<span class="chip"><b>${pkt.audiobooks.length}</b> audiobooks → INaudio</span>` +
-    `<span class="chip"><b>${pkt.episodes.length}</b> episodes → Podcast</span>`;
+    `<span class="lbl">📦 ${T.thisWeek}</span>` +
+    `<span class="chip">${T.toStores(pkt.ebooks.length, T.ebookNoun, ebookStores)}</span>` +
+    (audioStore ? `<span class="chip">${T.toStores(pkt.audiobooks.length, T.audiobookNoun, audioStore)}</span>` : "") +
+    (podStore ? `<span class="chip">${T.toStores(pkt.episodes.length, T.episodeNoun, podStore)}</span>` : "");
 
-  // Per-platform cards
   document.getElementById("platforms").innerHTML = PLATFORMS.map(p => {
     const items = feedFor(pkt, p);
     const fmtClass = p.feed === "audiobooks" ? "fmt-audiobook" : p.feed === "episodes" ? "fmt-episode" : "fmt-ebook";
-    const fmtLabel = p.feed === "audiobooks" ? "audiobook" : p.feed === "episodes" ? "episode" : "ebook";
+    const noun = p.feed === "audiobooks" ? T.audiobookNoun : p.feed === "episodes" ? T.episodeNoun : T.ebookNoun;
     const titles = items.map((b, i) => {
       const label = p.feed === "episodes" ? `Ep ${b.epNum}: ${b.title}` : b.title;
-      return `<li><span class="title-num">${i+1}.</span><span class="title-text">${label}</span><span class="format-badge ${fmtClass}">${fmtLabel}</span></li>`;
+      return `<li><span class="title-num">${i+1}.</span><span class="title-text">${label}</span><span class="format-badge ${fmtClass}">${T.fmt[p.feed]}</span></li>`;
     }).join("");
     return `<div class="platform-card">
       <div class="platform-head">
         <span class="platform-icon">${p.icon || "📦"}</span>
         <span class="platform-name">${p.label}</span>
         <span class="mode-tag ${p.modeClass}">${p.mode}</span>
-        <span class="platform-count">${items.length} ${p.noun} this week</span>
+        <span class="platform-count">${T.countThisWeek(items.length, noun)}</span>
         <span class="platform-dls"><button class="btn sm primary" onclick="dlPacket('${p.id}')">${p.dlLabel}</button></span>
       </div>
       <div class="platform-body">
         <details class="howto" open>
-          <summary>How to upload to ${p.label}</summary>
+          <summary>${T.howto(p.label)}</summary>
           <ol>${p.steps.map(s => `<li>${s}</li>`).join("")}</ol>
-          <div class="note">${p.note}</div>
         </details>
         <ul class="title-list">${titles}</ul>
       </div>
@@ -437,11 +444,11 @@ function renderWeekly() {
 function renderHistory() {
   const h = weekHistory();
   document.getElementById("history-list").innerHTML = h.map((wk, i) => {
-    const tag = i === 0 ? "this week" : `${i} week${i>1?"s":""} ago`;
+    const tag = i === 0 ? T.thisWeekTag : T.weeksAgo(i);
     return `<li class="history-row" onclick="openWeek(${i})">
       <span class="history-week">${wk}</span>
-      <span class="history-meta">${WEEKLY_EBOOKS} ebooks · ${WEEKLY_AUDIOBOOKS} audiobooks · ${WEEKLY_EPISODES} episodes · ${tag}</span>
-      <span class="history-go">Open packet →</span>
+      <span class="history-meta">${T.historyMeta(WEEKLY_EBOOKS, WEEKLY_AUDIOBOOKS, WEEKLY_EPISODES, tag)}</span>
+      <span class="history-go">${T.openPacket}</span>
     </li>`;
   }).join("");
 }
@@ -449,7 +456,7 @@ function renderHistory() {
 function renderCatalog() {
   const cat = buildCatalog();
   document.getElementById("catalog-brand").textContent = BRAND.label;
-  document.getElementById("catalog-count").textContent = `${cat.length} titles in catalog`;
+  document.getElementById("catalog-count").textContent = T.catalogCount(cat.length);
   document.getElementById("catalog-grid").innerHTML = cat.map(b => `
     <div class="book-card">
       <div class="book-cover" style="background:linear-gradient(150deg,hsl(${b.hue} 55% 28%),hsl(${(b.hue+30)%360} 60% 16%))">${b.title}</div>
@@ -463,8 +470,7 @@ function renderCatalog() {
 
 // ── View switching ──────────────────────────────────────────────────────────
 function showView(name) {
-  ["weekly","history","catalog"].forEach(v =>
-    document.getElementById("view-" + v).classList.toggle("hidden", v !== name));
+  ["weekly","history","catalog"].forEach(v => document.getElementById("view-" + v).classList.toggle("hidden", v !== name));
   if (name === "history") renderHistory();
   if (name === "catalog") renderCatalog();
   window.scrollTo(0, 0);
@@ -472,11 +478,28 @@ function showView(name) {
 function openWeek(i) { currentWeekIdx = (i === 0) ? null : i; renderWeekly(); showView("weekly"); }
 function goThisWeek() { currentWeekIdx = null; renderWeekly(); }
 
-// ── Boot: resolve the fixed brand from the bridge, then render ──────────────
+// ── Chrome + boot ────────────────────────────────────────────────────────────
+function setText(id, txt){ const e = document.getElementById(id); if (e) e.textContent = txt; }
+function applyChrome() {
+  document.documentElement.lang = LANG;
+  document.title = "Pearl Prime — " + T.h1;
+  setText("ui-h1", T.h1); setText("ui-sub", T.sub); setText("ui-handoff", T.handoff);
+  setText("ui-dlall", T.dlAll); setText("ui-history", T.history); setText("ui-catalog", T.catalog);
+  setText("ui-history-h", T.reviewHistory); setText("ui-history-back", T.back); setText("ui-history-intro", T.historyIntro);
+  setText("ui-catalog-h", T.fullCatalog); setText("ui-catalog-back", T.back);
+}
 function humanize(id){ return id.replace(/_(en_us|es_us|es_es|pt_br|zh_tw|zh_hk|zh_cn|zh_sg|ja_jp|ko_kr)$/,"").replace(/_/g," ").replace(/\b\w/g,c=>c.toUpperCase()); }
 async function boot() {
   const qid = new URLSearchParams(location.search).get("brand");
   const id = qid || BRAND.id;
+  const lane = (id.match(/_([a-z]{2}_[a-z]{2})$/) || [])[1] || "en_us";
+  MARKET = (lane === "ja_jp") ? "jp" : "us";
+  LANG = (MARKET === "jp") ? "ja" : "en";
+  CURRENCY = (MARKET === "jp") ? "jpy" : "usd";
+  PLATFORMS = (MARKET === "jp") ? PLATFORMS_JP : PLATFORMS_US;
+  T = CHROME[LANG];
+  CAT = (MARKET === "jp") ? CAT_JA : CAT_EN;
+  applyChrome();
   let bridge = {};
   try { const r = await fetch("brand_admin_brands.json", {cache:"no-store"}); if (r.ok) bridge = await r.json(); } catch (_e) {}
   const info = bridge[id] || {};
