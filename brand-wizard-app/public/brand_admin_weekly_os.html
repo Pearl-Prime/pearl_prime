@@ -286,6 +286,11 @@ const WEEK=[
 
 // ── State ──
 let brand=null, brandId=null, state={};
+// Static weekly-packet bridge (brand_admin_weekly_packets.json, gen_brand_admin_weekly_packets.py).
+// Read when no ?api_base= is set so the WEEKLY phase shows real packet data on static Pages.
+let PKTS={brands:{},blocked:{},week:null};
+function currentPacket(){ return (brandId&&PKTS.brands&&PKTS.brands[brandId])||null; }
+function currentBlocked(){ return (brandId&&PKTS.blocked&&PKTS.blocked[brandId])||null; }
 function key(){ return brandId||'_'; }
 function load(){ try{ state=JSON.parse(localStorage.getItem('ba_state')||'{}'); }catch(e){ state={}; } }
 function save(){ try{ localStorage.setItem('ba_state',JSON.stringify(state)); }catch(e){} }
@@ -469,6 +474,12 @@ function brandAdminApiBase(){
   if(typeof window.__BRAND_ADMIN_API_BASE==='string')return window.__BRAND_ADMIN_API_BASE.replace(/\/$/,'');
   return 'http://127.0.0.1:8000';
 }
+// True only when an api_base was EXPLICITLY supplied (operator running scripts/run_server.py).
+// On static Cloudflare Pages this is false, so the WEEKLY phase uses the static packet bridge.
+function hasExplicitApiBase(){
+  try{if(new URLSearchParams(window.location.search).get('api_base'))return true;}catch(e0){}
+  return typeof window.__BRAND_ADMIN_API_BASE==='string';
+}
 function currentIsoWeek(){
   var d=new Date();
   var thu=new Date(d.getFullYear(),d.getMonth(),d.getDate()+3-(d.getDay()+6)%7);
@@ -495,6 +506,8 @@ function scheduleCoordBadgePoll(){
 }
 function startCoordBadgePolling(){
   refreshCoordinationBuildBadge(false);
+  // Static mode has no backend to poll — the bridge is fetched once at init.
+  if(!hasExplicitApiBase())return;
   scheduleCoordBadgePoll();
   if(!window.__coordBadgeVisBound){
     window.__coordBadgeVisBound=true;
@@ -506,6 +519,21 @@ function startCoordBadgePolling(){
 function refreshCoordinationBuildBadge(fromPoll){
   var el=document.getElementById('coord-build-badge');
   if(!el)return;
+  // Static mode (Pages, no api_base): reflect the committed packet from the bridge.
+  if(!hasExplicitApiBase()){
+    var pk=currentPacket();
+    if(pk){
+      var co=pk.coordination||{};
+      var ready=pk.headline_axes_ready||pk.axis_count_ready||0;
+      el.className='coord-build-badge current';
+      el.textContent='Week '+(pk.week||PKTS.week||'')+' package ready · '+ready+'/4 axes';
+      return;
+    }
+    var bl=currentBlocked();
+    el.className='coord-build-badge missing';
+    el.textContent=bl?'No package yet — pending catalog reconciliation':'No package for this brand';
+    return;
+  }
   if(!fromPoll){el.className='coord-build-badge loading';el.textContent='Last built: checking…';}
   fetch(brandAdminApiBase()+'/api/brand_admin/coordination-status',{cache:'no-store'})
     .then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json();})
@@ -529,8 +557,35 @@ function refreshCoordinationBuildBadge(fromPoll){
 function downloadAdminPacket(ev){
   if(_adminPacketDownloading)return;
   if(!brandId){if(typeof toast!=='undefined')toast.error('Select a brand first.');return;}
-  var week=currentIsoWeek();
   var btn=(ev&&ev.currentTarget)||document.getElementById('admin-packet-dl-btn');
+  // Static mode (Pages, no api_base): serve the real packet manifest from the bridge as a
+  // downloadable blob. The full multi-axis zip is LFS/backend-served — surfaced via the
+  // api_path when an operator runs scripts/run_server.py (?api_base=...).
+  if(!hasExplicitApiBase()){
+    var pk=currentPacket();
+    if(!pk){
+      var bl=currentBlocked();
+      if(typeof toast!=='undefined')toast.error(bl?('No package yet — '+(bl.reason||'pending catalog reconciliation')):('No package for '+brandId+'.'));
+      return;
+    }
+    try{
+      var dl=pk.download||{};
+      var manifest={brand_id:brandId,packet_dir:pk.packet_dir,week:pk.week,week_monday:pk.week_monday,
+        package_type:pk.package_type,axes:pk.axes,axis_count_ready:pk.axis_count_ready,
+        headline_axes_ready:pk.headline_axes_ready,cost_usd:pk.cost_usd,
+        full_package:{filename:dl.filename,size_bytes:dl.size_bytes,
+          note:'Full multi-axis zip is served by the brand-admin API. Run scripts/run_server.py and open this page with ?api_base=http://127.0.0.1:8000 to download it.'},
+        source:'brand_admin_weekly_packets.json (static bridge)'};
+      var a=document.createElement('a');
+      a.href=URL.createObjectURL(new Blob([JSON.stringify(manifest,null,2)],{type:'application/json'}));
+      a.download=(pk.packet_dir||brandId)+'_'+pk.week+'_manifest.json';
+      a.click();
+      URL.revokeObjectURL(a.href);
+      if(typeof toast!=='undefined')toast.success('Downloaded '+(pk.packet_dir||brandId)+' Week '+pk.week+' manifest ('+(pk.headline_axes_ready||0)+'/4 axes ready)');
+    }catch(e){ if(typeof toast!=='undefined')toast.error('Could not build manifest download.'); }
+    return;
+  }
+  var week=currentIsoWeek();
   var url=brandAdminApiBase()+'/api/brand_admin/download/'+encodeURIComponent(brandId)+'/'+encodeURIComponent(week);
   _adminPacketDownloading=true;
   setAdminDownloadButtonLoading(btn,true);
@@ -701,6 +756,8 @@ function initBrand(bid){
 
 async function init(){
   try{ const r=await fetch('brand_admin_brands.json',{cache:'no-store'}); if(r.ok){ const j=await r.json(); if(j&&Object.keys(j).length) B=j; } }catch(_e){}
+  // Static weekly-packet bridge (second bridge; sibling of brand_admin_brands.json).
+  try{ const rp=await fetch('brand_admin_weekly_packets.json',{cache:'no-store'}); if(rp.ok){ const jp=await rp.json(); if(jp&&jp.brands) PKTS=jp; } }catch(_e2){}
   const p=new URLSearchParams(window.location.search);
   const bid=p.get('brand');
   if(bid && B[bid]) initBrand(bid);
