@@ -22,16 +22,32 @@ OUT = REPO / "brand-wizard-app" / "public" / "brand_admin_brands.json"
 def humanize(s) -> str:
     return " ".join(w.capitalize() for w in str(s or "").split("_")) if s else ""
 
+def _non_buildable() -> set:
+    """Archetype bases the onboarding matcher must NOT land a signup on (0 shippable)."""
+    cfg = REPO / "config" / "brand_management" / "brand_buildability.yaml"
+    try:
+        return set((yaml.safe_load(cfg.read_text(encoding="utf-8")) or {}).get("non_buildable") or {})
+    except Exception:
+        return set()
+
+
 def main() -> None:
     reg = yaml.safe_load(UNIFIED.read_text(encoding="utf-8")) or {}
     brands = reg.get("brands") or {}
+    nb = _non_buildable()
     out = {}
     for bid, b in brands.items():
         if not isinstance(b, dict):
             continue
+        tid = b.get("teacher_id") or ""
+        arch = b.get("brand_archetype_id") or ""
         out[bid] = {
             "d": b.get("publication_corp") or b.get("display_name") or bid,  # display / imprint (KDP publisher)
-            "t": humanize(b.get("teacher_id")),                              # teacher display
+            "t": humanize(tid),                                              # teacher display
+            "tid": tid,                                                      # raw teacher slug (match key)
+            "is_teacher": bool(tid),                                         # teacher brand vs composite
+            "arch": arch,                                                    # archetype base
+            "buildable": bool(arch) and arch not in nb,                      # onboarding may land here?
             "tm": bool(b.get("teacher_mode")),
             "tr": b.get("tradition") or "",
             "f": b.get("brand_focus") or "",

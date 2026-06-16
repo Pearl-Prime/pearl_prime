@@ -1,5 +1,6 @@
 import { useState, useCallback, useRef, useMemo, useEffect } from "react";
 import { useTranslation } from "./useTranslation.jsx";
+import { matchBrand } from "./brandMatch.js";
 import { ChevronRight, ChevronLeft, Eye, Sparkles, BookOpen, Mic, Film, Palette, Heart, Target, Zap, Shield, Sun, Moon, Flame, Feather, Brain, Compass, Star, Check, AlertTriangle, Download, Play, PenTool, Image, Layers, ArrowRight, Users, BarChart3, TrendingUp, Radio, Headphones, Tv, Smartphone, BookMarked, GraduationCap, Clock, Rocket, Award, Crown, Globe, Volume2, Brush, Activity, Search, Hash, Tag, Grip, CircleDot, SlidersHorizontal } from "lucide-react";
 import { OutputProofStrip } from "./onboarding/OutputProofStrip.jsx";
 import { LaneChoiceCard } from "./onboarding/LaneChoiceCard.jsx";
@@ -795,15 +796,14 @@ function StepHero({ eyebrow, title, subtitle, helper }) {
   );
 }
 
-function ProgressBar({ step, total, labels, t, state }) {
+function ProgressBar({ step, total, labels, t }) {
   const isComplete = step === total - 2; // step 7 ("あなたのブランド") only
   const pct = isComplete ? 100 : ((step + 1) / total) * 100;
-  // マッチした出版社名（Step11Launch の祝福ブロック・ディレクターダッシュボードと同じ値）を表示。
-  const congrats = `おめでとうございます — ${resolveBrandName(state)} が100%設定されました！`;  return (
+  return (
     <div className="brand-studio-panel mb-6 px-5 py-4 sm:mb-8">
       {isComplete && (
         <p className="text-center text-3xl font-extrabold mb-3" style={{ color: '#d97706', fontFamily: 'Cormorant Garamond, serif' }}>
-          {congrats}
+          {t("ui", "おめでとうございます — ブランドが100%設定されました！")}
         </p>
       )}
       <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
@@ -2816,55 +2816,26 @@ function Step11Launch({ state, update, i18n = {} }) {
   const [showYaml, setShowYaml] = useState(false);
   const [yamlCopied, setYamlCopied] = useState(false);
 
-  // ACTIVATE: persist a pending-brand record so brand_admin can resolve this
-  // brand-new brand_id (not in the server index yet), then show the celebration.
-  const persistPendingBrand = () => {
-    const brandId = deriveBrandId(state);
-    const brandName = resolveBrandName(state);
-    let teacher = null;
-    try {
-      const raw = localStorage.getItem("phoenix_book_mode");
-      if (raw) { const m = JSON.parse(raw); teacher = (m && m.teacher) || null; }
-    } catch (_) {}
-    if (!teacher) {
-      const params = new URLSearchParams(window.location.search);
-      teacher = params.get("teacher") || null;
-    }
-    const pending = {
-      brand_id: brandId,
-      brand_name: brandName,
-      teacher,
-      lane: state.onboardingLane || "self_help",
-      market: state.onboardingMarket || "us",
-      archetype: state.archetype || null,
-      created_at: new Date().toISOString(),
-    };
-    try { localStorage.setItem("phoenix_pending_brand", JSON.stringify(pending)); } catch (_) {}
-    return brandId;
+  const [matched, setMatched] = useState(null);
+
+  const readTeacherMode = () => {
+    try { const raw = localStorage.getItem("phoenix_book_mode"); if (raw) return JSON.parse(raw); } catch (_) {}
+    const p = new URLSearchParams(window.location.search);
+    const ut = p.get("teacher"), um = p.get("mode");
+    if (ut) return { mode: "teacher", teacher: ut };
+    if (um === "composite") return { mode: "composite", teacher: null };
+    return { mode: "composite", teacher: null };
   };
 
-  const handleLaunch = () => { persistPendingBrand(); setYamlOutput(generateYAML(state)); setSubmitted(true); };
-
-  // Navigate to the Brand Admin console -> Phase 3 (Operations) for the minted id.
-  const goToBrandDashboard = async () => {
-    const brandId = persistPendingBrand();
-    // Land the signup in Pearl Prime: POST the YAML -> logged + assigned to the matched brand
-    // (server/routes/brand_onboarding.py). Graceful: redirect regardless (localStorage fallback).
+  const handleLaunch = async () => {
+    setYamlOutput(generateYAML(state));
+    setSubmitted(true);
     try {
-      const API = (typeof window !== "undefined" && window.__ONBOARDING_API_BASE)
-        || new URLSearchParams(window.location.search).get("api_base")
-        || "http://127.0.0.1:8000";
-      const c = state.contact || {};
-      await fetch(`${API}/api/v1/onboarding/submit`, {
-        method: "POST", headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          brand_id: brandId, lane: laneFromMarket(state), publication_corp: resolveBrandName(state),
-          brand_email: c.email || "", contact: { first_name: c.firstName || "", last_name: c.lastName || "", phone: ((c.phoneCode||"") + " " + (c.phone||"")).trim() },
-          wizard_yaml: generateYAML(state), match_score: matchBrand(state).score, match_basis: "topics+emotions",
-        }),
-      });
-    } catch (_) { /* backend offline — pending_brand localStorage still carries it */ }
-    window.location.href = "brand_admin.html?phase=3&brand=" + encodeURIComponent(brandId);
+      const r = await fetch("brand_admin_brands.json", { cache: "no-store" });
+      const brands = r.ok ? await r.json() : {};
+      const m = matchBrand(state, brands, readTeacherMode());
+      if (m) { setMatched(m); try { localStorage.setItem("phoenix_pending_brand", JSON.stringify(m)); } catch (_) {} }
+    } catch (_) {}
   };
 
   if (submitted) {
@@ -2898,6 +2869,22 @@ function Step11Launch({ state, update, i18n = {} }) {
 
     return (
       <div className="py-4">
+        {/* Assigned brand — the wizard matched these selections to one existing brand */}
+        {matched && (
+          <div className="mb-6 rounded-2xl border border-emerald-300 bg-emerald-50 p-6 text-center">
+            <div className="text-[11px] font-bold uppercase tracking-wider text-emerald-700">{t("ui", "Your assigned brand")}</div>
+            <div className="mt-1 text-2xl font-black text-gray-900">{matched.publication_corp}</div>
+            <div className="mt-1 font-mono text-[11px] text-gray-500">
+              {matched.is_teacher ? `${t("ui", "Teacher brand")} · ${matched.teacher}` : t("ui", "Composite brand")} · {matched.brand_id}
+            </div>
+            <button
+              onClick={() => { window.location.href = "brand_handoff_dashboard.html?brand=" + encodeURIComponent(matched.brand_id); }}
+              className="mt-4 inline-flex items-center gap-2 rounded-xl bg-emerald-600 px-7 py-3 text-sm font-bold text-white shadow-lg transition-all hover:-translate-y-0.5 hover:bg-emerald-700"
+            >
+              {t("ui", "Open Brand Director")} <ArrowRight size={16} />
+            </button>
+          </div>
+        )}
         {/* Celebration Header */}
         <div className="relative text-center mb-8 overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-purple-50 via-white to-white rounded-3xl" />
@@ -2930,7 +2917,7 @@ function Step11Launch({ state, update, i18n = {} }) {
             <style>{`@keyframes pulse { 0%, 100% { transform: scale(1) translateY(0); opacity: 0.4; } 50% { transform: scale(1.5) translateY(-8px); opacity: 0.8; } }`}</style>
 
             <h1 className="text-4xl font-black tracking-tight mb-2 bg-gradient-to-r from-purple-600 via-pink-500 to-amber-500 bg-clip-text text-transparent">
-              {resolveBrandName(state)} が100%設定されました！
+              Congratulations
             </h1>
             <p className="text-lg font-bold text-white mb-1">あなたのブランドの世界が誕生しました。</p>
             <p className="text-sm text-white max-w-md mx-auto leading-relaxed">
@@ -3039,7 +3026,7 @@ function Step11Launch({ state, update, i18n = {} }) {
                   className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-[11px] font-bold transition-colors">
                   <Check size={11} />{yamlCopied ? "コピーしました！" : "コピー"}
                 </button>
-                <button onClick={() => { const blob = new Blob([yamlOutput], {type: "text/yaml"}); const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = `${deriveBrandId(state)}.yaml`; a.click(); }}
+                <button onClick={() => { const blob = new Blob([yamlOutput], {type: "text/yaml"}); const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = "brand-config.yaml"; a.click(); }}
                   className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white text-[11px] font-bold transition-colors">
                   <Download size={11} />ダウンロード .yaml
                 </button>
@@ -3057,14 +3044,6 @@ function Step11Launch({ state, update, i18n = {} }) {
           <p className="text-sm text-white max-w-md mx-auto">
             あなたのブランドの世界が完成しました。Pearl Primeシステムがすべての選択を使って、人生を変えるカタログを生成します。
           </p>
-          {/* Primary handoff: open the Brand Admin console (Phase 3 - Operations). */}
-          <button
-            type="button"
-            onClick={goToBrandDashboard}
-            className="mt-6 inline-flex items-center gap-2 rounded-2xl bg-gradient-to-r from-violet-700 to-indigo-800 px-8 py-4 text-base font-black uppercase tracking-wider text-white shadow-lg shadow-violet-300/40 transition-all hover:from-violet-800 hover:to-indigo-900"
-          >
-            ブランドダッシュボードを開く <ChevronRight size={18} />
-          </button>
         </div>
       </div>
     );
@@ -3240,7 +3219,7 @@ function Step11Launch({ state, update, i18n = {} }) {
 
       <button
         type="button"
-        onClick={goToBrandDashboard}
+        onClick={handleLaunch}
         disabled={!isReady}
         className={`w-full rounded-2xl py-6 text-3xl font-black uppercase tracking-widest transition-all ${isReady ? "cursor-pointer bg-gradient-to-r from-violet-700 to-indigo-800 text-white shadow-lg shadow-violet-300/40 hover:from-violet-800 hover:to-indigo-900" : "cursor-not-allowed bg-gray-200 text-white"}`}
       >
@@ -3252,184 +3231,8 @@ function Step11Launch({ state, update, i18n = {} }) {
 }
 
 // ═══════════════════════════════════════════════════════════
-// BRAND IDENTITY HELPERS (name + id)
-// ═══════════════════════════════════════════════════════════
-// Single source of truth for the human brand name and the minted snake_case brand_id.
-// Used by generateYAML (YAML emit), the completion screen (display), and the Activate
-// handler (brand_admin handoff) so all three agree on exactly one name + one id.
-
-// IMPORTANT (locale stability): this locale variant localizes the ARCHETYPES `name`
-// field, so the default brand name + brand_id must come from a canonical, locale-
-// INVARIANT map keyed by the stable archetype.id — NOT the displayed name — so the
-// same archetype yields the same brand_id in every locale (nervous_system ->
-// "stillness_lab" everywhere).
-
-const ARCHETYPE_CANONICAL_BRAND = {
-  nervous_system:      { name: "Stillness Lab", id: "stillness_lab" },
-  identity_direction:  { name: "Compass Studio", id: "compass_studio" },
-  emotional_healing:   { name: "Soft Lantern", id: "soft_lantern" },
-  performance_focus:   { name: "Clear Mind Lab", id: "clear_mind_lab" },
-  spiritual_awakening: { name: "Phoenix Rising", id: "phoenix_rising" },
-};
-
-// Localized display name of the chosen archetype (for the field placeholder only).
-function archetypeName(state) {
-  const arch = ARCHETYPES.find((a) => a.id === state.archetype);
-  return arch ? arch.name : null;
-}
-
-// Canonical (English, locale-invariant) brand name for the chosen archetype, or null.
-function canonicalArchetypeName(state) {
-  const c = ARCHETYPE_CANONICAL_BRAND[state.archetype];
-  return c ? c.name : null;
-}
-
-// Effective brand name: user-entered wins; otherwise the canonical English archetype
-// name (registry convention); otherwise a safe generic.
-function resolveBrandName(state) {
-  return matchBrand(state).corp;  // matched publication corp name (no brand-name entry)
-}
-
-// snake_case a free-text brand name per config/brand_registry.yaml id_format=snake_case.
-function snakeCaseId(name) {
-  return (name || "")
-    .toLowerCase()
-    .normalize("NFKD").replace(/[\u0300-\u036f]/g, "")
-    .replace(/[^a-z0-9]+/g, "_")
-    .replace(/_+/g, "_")
-    .replace(/^_+|_+$/g, "");
-}
-
-// Deterministic 4-char hash (FNV-1a -> base36) for collision-resistance without a live
-// registry read. Same input -> same suffix every render (not random per render).
-function _stableHash4(s) {
-  let h = 0x811c9dc5;
-  for (let i = 0; i < (s || "").length; i++) {
-    h ^= s.charCodeAt(i);
-    h = (h * 0x01000193) >>> 0;
-  }
-  return ("000" + h.toString(36)).slice(-4);
-}
-
-// Mint the brand_id (locale-invariant). Default -> canonical archetype id
-// (e.g. "stillness_lab"). A custom Latin name snake_cases to base + 4-char suffix; a
-// custom CJK-only name anchors on the canonical archetype id + a suffix from the typed
-// name, so it is stable and never blank.
-const LANE_FROM_MARKET = {
-  us:"en_US", en:"en_US", tw:"zh_TW", hk:"zh_HK", cn:"zh_CN", sg:"zh_SG",
-  jp:"ja_JP", ja:"ja_JP", kr:"ko_KR", ko:"ko_KR", es:"es_ES", mx:"es_US", es_us:"es_US",
-  fr:"fr_FR", de:"de_DE", it:"it_IT", hu:"hu_HU", br:"pt_BR", pt:"pt_BR",
-};
-function laneFromMarket(state) {
-  const m = String((state && state.onboardingMarket) || "us").toLowerCase();
-  return LANE_FROM_MARKET[m] || "en_US";
-}
-function deriveBrandId(state) {
-  // unified brand_id = <matched archetype>_<lane>  (config/brand_management/global_brand_registry_unified.yaml)
-  return `${matchBrand(state).id}_${laneFromMarket(state).toLowerCase()}`;
-}
-
-// ═══════════════════════════════════════════════════════════
 // YAML GENERATOR
 // ═══════════════════════════════════════════════════════════
-
-const CANONICAL_BRANDS = [
-  {id:"awakening_press",corp:"Awakening Press",topics:["self_worth","courage","boundaries","depression","grief"],teacher:true,active:true},
-  {id:"body_memory",corp:"Held Ground Press",topics:["sleep_anxiety","burnout","anxiety","compassion_fatigue","mindfulness"],teacher:true,active:true},
-  {id:"cognitive_clarity",corp:"Clear Seeing Books",topics:["overthinking","imposter_syndrome","burnout","boundaries"],teacher:true,active:false},
-  {id:"devotion_path",corp:"Open Vessel Press",topics:["grief","compassion_fatigue","depression","boundaries"],teacher:true,active:true},
-  {id:"digital_ground",corp:"Present Tense Books",topics:["imposter_syndrome","social_anxiety","self_worth","boundaries"],teacher:true,active:true},
-  {id:"heart_balance",corp:"Feather & Scale Press",topics:["boundaries","self_worth","imposter_syndrome","financial_stress"],teacher:true,active:true},
-  {id:"heart_transmission",corp:"Heart Transmission Press",topics:["self_worth","courage","overthinking","anxiety","mindfulness","grief"],teacher:true,active:true},
-  {id:"qi_foundation",corp:"Root & Meridian Press",topics:["burnout","somatic_healing","courage","self_worth"],teacher:true,active:true},
-  {id:"relational_calm",corp:"Bare Form Books",topics:["overthinking","anxiety","sleep_anxiety","social_anxiety","mindfulness"],teacher:true,active:true},
-  {id:"sleep_restoration",corp:"Night Architecture Books",topics:["grief","depression","self_worth","somatic_healing","courage"],teacher:true,active:true},
-  {id:"solar_return",corp:"Ember & Ash Publishing",topics:["imposter_syndrome","self_worth","courage","overthinking"],teacher:true,active:true},
-  {id:"somatic_wisdom",corp:"Felt Sense Publishing",topics:["anxiety","somatic_healing","sleep_anxiety","burnout"],teacher:true,active:true},
-  {id:"still_forest",corp:"Still Forest Press",topics:["anxiety","overthinking","somatic_healing","depression"],teacher:true,active:true},
-  {id:"stillness_press",corp:"Stillness Press",topics:["anxiety","burnout","depression","self_worth","somatic_healing","mindfulness"],teacher:true,active:true},
-  {id:"warrior_calm",corp:"Iron Gate Press",topics:["courage","burnout","imposter_syndrome","boundaries"],teacher:true,active:true},
-  {id:"adhd_forge",corp:"Livewire Books",topics:["adhd_focus","overthinking","anxiety","imposter_syndrome"],teacher:false,active:true},
-  {id:"bio_flow",corp:"Signal Path Books",topics:["somatic_healing","overthinking","sleep"],teacher:false,active:true},
-  {id:"calm_student",corp:"Blue Exam Press",topics:["anxiety","social_anxiety","self_worth"],teacher:false,active:true},
-  {id:"career_lift",corp:"Next Chapter Publishing",topics:["imposter_syndrome","courage","financial_anxiety"],teacher:false,active:true},
-  {id:"confidence_core",corp:"Threshold Books",topics:["social_anxiety","self_worth","imposter_syndrome"],teacher:false,active:true},
-  {id:"creative_unfold",corp:"Blank Canvas Books",topics:["self_worth","courage","boundaries"],teacher:false,active:true},
-  {id:"executive_calm",corp:"Granite Ridge Publishing",topics:["burnout","anxiety","imposter_syndrome"],teacher:false,active:true},
-  {id:"focus_sprint",corp:"Launchpad Press",topics:["adhd_focus","imposter_syndrome","social_anxiety"],teacher:false,active:true},
-  {id:"gentle_growth",corp:"Tender Root Books",topics:["self_worth","imposter_syndrome","social_anxiety"],teacher:false,active:true},
-  {id:"healing_ground",corp:"Midday Press",topics:["grief","boundaries","overthinking"],teacher:false,active:true},
-  {id:"high_performer",corp:"Close Rate Press",topics:["burnout","financial_anxiety","imposter_syndrome","overthinking"],teacher:false,active:true},
-  {id:"hormone_reset",corp:"Tide & Cycle Books",topics:["somatic_healing","self_worth","anxiety"],teacher:false,active:true},
-  {id:"legacy_builder",corp:"Second Mountain Press",topics:["self_worth","courage","financial_stress"],teacher:false,active:true},
-  {id:"longevity_lab",corp:"Long Arc Press",topics:["somatic_healing","self_worth","grief"],teacher:false,active:true},
-  {id:"minimal_mind",corp:"Clearwater Books",topics:["overthinking","anxiety","burnout"],teacher:false,active:true},
-  {id:"morning_momentum",corp:"First Light Publishing",topics:["burnout","courage","self_worth"],teacher:false,active:true},
-  {id:"night_reset",corp:"Still Hour Press",topics:["sleep_anxiety","anxiety","overthinking"],teacher:false,active:true},
-  {id:"optimizer",corp:"Daybreak Editions",topics:["imposter_syndrome","burnout","overthinking"],teacher:false,active:true},
-  {id:"relationship_clarity",corp:"Two Chairs Press",topics:["boundaries","grief","compassion_fatigue"],teacher:false,active:true},
-  {id:"resilient_parent",corp:"Stolen Moment Press",topics:["burnout","compassion_fatigue","boundaries"],teacher:false,active:true},
-  {id:"spiritual_ground",corp:"Deep Well Publishing",topics:["grief","self_worth","courage"],teacher:false,active:true},
-  {id:"stabilizer",corp:"Harbor Line Books",topics:["burnout","anxiety","somatic_healing"],teacher:false,active:true},
-  {id:"stoic_edge",corp:"Anvil Books",topics:["courage","grief","self_worth","shame"],teacher:false,active:true},
-  {id:"trauma_path",corp:"Soft Ground Books",topics:["grief","trauma_recovery","somatic_healing","shame"],teacher:false,active:true},
-];
-
-// Archetype -> canonical topics it implies (strongest first; weighted 3/2/1).
-const ARCHETYPE_TOPICS = {
-  nervous_system:      ["anxiety", "somatic_healing", "sleep"],
-  identity_direction:  ["self_worth", "imposter_syndrome"],
-  emotional_healing:   ["grief", "trauma_recovery", "shame"],
-  performance_focus:   ["burnout", "overthinking", "adhd_focus"],
-  spiritual_awakening: ["courage", "self_worth", "grief"],
-};
-
-// Emotional-outcome keyword -> canonical topics (refines the archetype signal).
-const EMOTION_TOPIC_HINTS = [
-  [/calm|rest|grounded|safe|released|body/i, ["anxiety", "somatic_healing", "sleep"]],
-  [/alone|forgiven|grief|loss/i,             ["grief", "trauma_recovery"]],
-  [/control|clear|energ|resilient|focus/i,   ["burnout", "overthinking"]],
-  [/purpose|confiden|hopeful|worth/i,        ["self_worth", "imposter_syndrome"]],
-  [/present|connected|awak|meaning/i,        ["courage", "self_worth"]],
-];
-
-// Search-topic-tag keyword -> canonical topic.
-const TOPIC_KEYWORDS = [
-  [/sleep|night|insomnia/i, "sleep"], [/panic|anx/i, "anxiety"], [/grief|loss|bereave/i, "grief"],
-  [/burnout|exhaust|depleted/i, "burnout"], [/overthink|rumina|spiral/i, "overthinking"],
-  [/somatic|body|nervous|polyvagal/i, "somatic_healing"], [/imposter/i, "imposter_syndrome"],
-  [/worth|confidence|esteem/i, "self_worth"], [/social/i, "social_anxiety"],
-  [/focus|adhd|attention/i, "adhd_focus"], [/boundar/i, "boundaries"], [/trauma/i, "trauma_recovery"],
-  [/shame/i, "shame"], [/financ|money|debt/i, "financial_anxiety"], [/courage|resilien|brave/i, "courage"],
-];
-
-function impliedTopics(state) {
-  const w = new Map();
-  const add = (t, n) => { if (t) w.set(t, (w.get(t) || 0) + n); };
-  (ARCHETYPE_TOPICS[state.archetype] || []).forEach((t, i) => add(t, 3 - Math.min(i, 2)));
-  (state.emotions || []).forEach((e) => { const s = String(e);
-    EMOTION_TOPIC_HINTS.forEach(([re, topics]) => { if (re.test(s)) topics.forEach((t) => add(t, 1)); }); });
-  (state.topicTags || []).forEach((tag) => { const s = String(tag);
-    TOPIC_KEYWORDS.forEach(([re, topic]) => { if (re.test(s)) add(topic, 1); }); });
-  return w;
-}
-
-// Match the wizard YAML to the best-fit EXISTING brand from the 37-brand canonical
-// roster by topic/emotion affinity. primary_topic counts double; ties break by tier.
-// `corp` is the publication imprint name (config/catalog_planning/brand_display_names.yaml).
-function matchBrand(state) {
-  const implied = impliedTopics(state);
-  let best = CANONICAL_BRANDS.find((b) => b.active !== false) || CANONICAL_BRANDS[0], bestScore = -1;
-  for (const b of CANONICAL_BRANDS) {
-    if (b.active === false) continue;                 // skip inactive (e.g. cognitive_clarity / kenjin)
-    const tops = b.topics || [];
-    let s = (implied.get(tops[0]) || 0) * 2;          // primary topic counts double
-    for (let i = 1; i < tops.length; i++) s += implied.get(tops[i]) || 0;
-    s += b.teacher ? 0.2 : 0.1;                        // tie-break: teacher brands first
-    if (s > bestScore) { bestScore = s; best = b; }
-  }
-  return { id: best.id, corp: best.corp, score: Math.round(bestScore * 10) / 10 };
-}
 
 function generateYAML(state) {
   const san = (s) => (s || "").replace(/<[^>]*>/g, "").replace(/https?:\/\/\S+/g, "").replace(/[<>"'`]/g, "").substring(0, 500).trim();
@@ -3452,12 +3255,8 @@ function generateYAML(state) {
     else if (urlMode === "composite") teacherMode = { mode: "composite", teacher: null };
   }
 
-  // Brand identity (name + minted snake_case id), default-filled from the archetype.
-  const brandName = resolveBrandName(state);
-  const brandId = deriveBrandId(state);
-
   let y = `# Brand Admin Application — ${ts}\n# Pearl Prime Brand Configuration\n\n`;
-  y += `brand_admin:\n  brand_name: "${san(brandName)}"\n  brand_id: "${brandId}"\n  first_name: "${san(c.firstName)}"\n  last_name: "${san(c.lastName)}"\n  email: "${san(c.email)}"\n  phone: "${san((c.phoneCode || '+1') + ' ' + c.phone)}"\n\n`;
+  y += `brand_admin:\n  first_name: "${san(c.firstName)}"\n  last_name: "${san(c.lastName)}"\n  email: "${san(c.email)}"\n  phone: "${san((c.phoneCode || '+1') + ' ' + c.phone)}"\n\n`;
   y += `  messaging_channels:\n    line_id: "${san(c.line)}"\n    whatsapp: "${san(c.whatsapp)}"\n    wechat_id: "${san(c.wechat)}"\n    fb_messenger: "${san(c.messenger)}"\n    preferred_channel: "${c.preferred || "email"}"\n\n`;
   y += `  brand_positioning:\n    brand_angle: "${state.archetype}"\n    trigger_moment: "${state.moment}"\n    persona: "${state.persona}"\n\n`;
   y += `  voice_settings:\n`;
@@ -3788,9 +3587,6 @@ export default function BrandWizard() {
   const [introPage, setIntroPage] = useState(0);
   const [step, setStep] = useState(0);
   const [state, setState] = useState({
-    // brandName: human-editable brand label (Step11Launch). Defaults to the chosen
-    // archetype name when blank; the snake_case brand_id is derived from it at emit time.
-    brandName: "",
     archetype: null, persona: null, moment: null,
     voiceSettings: {}, visualStyle: null, emotions: [],
     tradition: "", angles: [], topicTags: [],
@@ -3855,7 +3651,7 @@ export default function BrandWizard() {
         >
           <ChevronLeft size={14} /> {t("ui", "戻る")}
         </button>
-        <ProgressBar step={step} total={9} labels={tStepLabels} t={t} state={state} />
+        <ProgressBar step={step} total={9} labels={tStepLabels} t={t} />
         <div className="brand-studio-panel p-6 sm:p-8 lg:p-10">
           <div className="flex gap-6 lg:gap-8">
             <div className="min-w-0 flex-1">
