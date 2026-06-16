@@ -932,18 +932,10 @@ def _run_spine_pipeline_mode(
         or getattr(args, "chapter_architecture_version", None)
         or 1
     )
-    if _arch_v == 2 and teacher_for_enrich:
-        from phoenix_v4.planning.chapter_planner import resolve_teacher_doctrine_intro
-
-        _preamble = resolve_teacher_doctrine_intro(
-            persona_id,
-            topic_id,
-            teacher_for_enrich,
-            repo_root,
-            chapter_architecture_version=_arch_v,
-        )
-        if _preamble:
-            prose = f"Note on the Teachings\n\n{_preamble}\n\n{prose}"
+    # OPD-137: TEACHER_DOCTRINE_INTRO preamble is prepended LAST (right before book.txt write,
+    # see below) so downstream passes (per-chapter word cap via _extract_registry_chapters, locale
+    # post-process, music overlay) cannot strip the "Chapter N"-less preamble block.
+    #
     # Apply per-chapter word cap from modular output format (see apply_output_format_to_plan above).
     # Preserves the "Chapter N" heading line and paragraph structure so downstream gates can
     # still parse chapters via _extract_registry_chapters; only the body is truncated by words.
@@ -1610,6 +1602,24 @@ def _run_spine_pipeline_mode(
                     f"Warning: spine-mode locale post-process skipped for {_spine_locale}: {_loc_e}",
                     file=sys.stderr,
                 )
+        # OPD-137: prepend TEACHER_DOCTRINE_INTRO preamble LAST so it survives every
+        # downstream pass. Triggers whenever the atom file exists for the
+        # teacher × persona × topic combo (atom presence is itself the opt-in signal,
+        # independent of --chapter-architecture-version). Operator memory: spec §2.4 + OPD-130.
+        if teacher_for_enrich:
+            _intro_atom = (
+                repo_root / "atoms" / persona_id / topic_id
+                / "TEACHER_DOCTRINE_INTRO" / teacher_for_enrich.lower() / "CANONICAL.txt"
+            )
+            if _intro_atom.is_file():
+                from phoenix_v4.planning.chapter_planner import resolve_teacher_doctrine_intro
+
+                _preamble = resolve_teacher_doctrine_intro(
+                    persona_id, topic_id, teacher_for_enrich, repo_root,
+                    chapter_architecture_version=2,
+                )
+                if _preamble:
+                    _prose_out = f"Note on the Teachings\n\n{_preamble}\n\n{_prose_out}"
         book_path.write_text(_prose_out, encoding="utf-8")
         print(f"Rendered book (spine mode): {book_path}")
         _gcp = getattr(args, "golden_chapter_pilot", None)
@@ -1633,7 +1643,17 @@ def _run_spine_pipeline_mode(
         budget_obj = budget_from_enriched(enriched)
         budget_obj["source"] = "spine_pipeline"
         budget_obj["book_plan_id"] = book_plan.plan_id
-        budget_obj["word_count"] = word_count
+        # OPD-137 fix: budget.json word_count must match the DELIVERED book.txt
+        # (_prose_out), which now carries the TEACHER_DOCTRINE_INTRO preamble prepended
+        # just above book_path.write_text(_prose_out). The internal `word_count`
+        # (= len(prose.split())) stays the body-prose figure that feeds the runtime
+        # word-budget gate, since the editorial "Note on the Teachings" front-matter
+        # should not count toward runtime bounds. Reporting the delivered count keeps
+        # budget.json honest about the artifact on disk (test_spine_pipeline_integration
+        # ::test_spine_mode_budget_word_count_matches_book) and also corrects the
+        # pre-existing music/locale-overlay drift.
+        budget_obj["word_count"] = len(_prose_out.split())
+        budget_obj["body_word_count"] = word_count
         budget_obj["pre_depth_total_words"] = pre_depth_words
         budget_obj["post_depth_total_words"] = post_depth_words
         (render_dir / "budget.json").write_text(
