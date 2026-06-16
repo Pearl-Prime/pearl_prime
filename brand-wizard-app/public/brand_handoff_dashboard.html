@@ -54,8 +54,9 @@
     .title-list { list-style: none; }
     .title-list li { padding: 8px 0; border-bottom: 1px solid rgba(180,83,9,0.1); display: flex; align-items: center; gap: 10px; font-size: 0.8rem; }
     .title-list li:last-child { border-bottom: none; }
-    .title-num { font-family: var(--mono); color: var(--muted); font-size: 0.65rem; min-width: 18px; }
+    .title-num { font-family: var(--mono); color: var(--muted); font-size: 0.65rem; min-width: 18px; align-self: flex-start; padding-top: 2px; }
     .title-text { flex: 1; }
+    .title-sub { display: block; font-size: 0.66rem; color: var(--muted); }
     .format-badge { font-size: 0.6rem; font-family: var(--mono); padding: 1px 7px; border-radius: 10px; border: 1px solid; white-space: nowrap; }
     .fmt-ebook { border-color: var(--blue); color: var(--blue); }
     .fmt-audiobook { border-color: var(--purple); color: var(--purple); }
@@ -71,6 +72,7 @@
     .book-cover { height: 150px; display: flex; align-items: center; justify-content: center; text-align: center; padding: 14px; font-weight: 700; font-size: 0.95rem; color: #fff; line-height: 1.3; text-shadow: 0 1px 4px rgba(0,0,0,0.5); }
     .book-body { padding: 12px 14px; flex: 1; display: flex; flex-direction: column; gap: 6px; }
     .book-title { font-size: 0.85rem; font-weight: 600; }
+    .book-sub { font-size: 0.68rem; color: var(--muted); font-style: italic; }
     .book-desc { font-size: 0.72rem; color: var(--muted); flex: 1; }
     .book-angle { font-size: 0.66rem; font-family: var(--mono); color: var(--amber2); border-top: 1px solid rgba(180,83,9,0.15); padding-top: 7px; }
     .section-title { font-size: 0.85rem; font-weight: 600; color: var(--cream); margin: 0 0 1rem; }
@@ -303,7 +305,10 @@ const COVER_HUES = [18, 32, 268, 200, 150, 340];
 // ── Market state (set in boot) ──────────────────────────────────────────────
 let BRAND = {id:"devotion_path_en_us", label:"Open Vessel Press"};
 let MARKET = "us", LANG = "en", CURRENCY = "usd", PLATFORMS = PLATFORMS_US, T = CHROME.en, CAT = CAT_EN;
+let REAL_CATALOG = null; // the brand's actual books (from brand_catalogs/<base>.json) when available
 let currentWeekIdx = null;
+function esc(s){ return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+function pad(a, n){ a = (a||[]).slice(0,n); while (a.length < n) a.push(""); return a; }
 
 // ── ISO-week helpers ──────────────────────────────────────────────────────
 function isoWeek(d) {
@@ -328,9 +333,19 @@ function priceFor(i){ return CURRENCY === "jpy" ? (i % 3 === 0 ? "500" : "700") 
 function audioPrice(){ return CURRENCY === "jpy" ? "1500" : "9.99"; }
 
 function buildCatalog() {
+  if (REAL_CATALOG && REAL_CATALOG.length) {
+    return REAL_CATALOG.map((b, i) => ({
+      title: b.title, subtitle: b.subtitle || "", desc: b.desc || "", angle: b.angle || "",
+      isbn: isbnFor(i), price: b.price || priceFor(i), audioP: b.audioPrice || audioPrice(),
+      keywords: (b.keywords && b.keywords.length) ? b.keywords : CAT.keywords,
+      cats: (b.bisac && b.bisac.length) ? b.bisac : CAT.cats,
+      hue: COVER_HUES[i % COVER_HUES.length],
+    }));
+  }
   return CAT.titles.map((title, i) => ({
-    title, desc: CAT.descs[i % CAT.descs.length], angle: CAT.angles[i % CAT.angles.length],
-    isbn: isbnFor(i), price: priceFor(i), hue: COVER_HUES[i % COVER_HUES.length],
+    title, subtitle: "", desc: CAT.descs[i % CAT.descs.length], angle: CAT.angles[i % CAT.angles.length],
+    isbn: isbnFor(i), price: priceFor(i), audioP: audioPrice(),
+    keywords: CAT.keywords, cats: CAT.cats, hue: COVER_HUES[i % COVER_HUES.length],
   }));
 }
 function buildPacket(weekIdx) {
@@ -361,17 +376,17 @@ function buildMetadataFile(p, week, pkt) {
   }
   if (p.dlType === "kdp_csv") {
     const head = ["title","subtitle","author","description","keyword_1","keyword_2","keyword_3","keyword_4","keyword_5","keyword_6","keyword_7","category_1","category_2","category_3",pc,"ai_text","ai_images","manuscript_file","cover_file"];
-    const rows = items.map(b => [b.title, b.angle, BRAND.label, b.desc, ...CAT.keywords, ...CAT.cats, b.price, "Yes","Yes", `${slug(b.title)}.epub`, `${slug(b.title)}.jpg`]);
+    const rows = items.map(b => [b.title, b.subtitle || b.angle, BRAND.label, b.desc, ...pad(b.keywords,7), ...pad(b.cats,3), b.price, "Yes","Yes", `${slug(b.title)}.epub`, `${slug(b.title)}.jpg`]);
     return {name:`kdp_metadata__${BRAND.id}__${week}.csv`, text:[head, ...rows].map(r => row(r)).join("\n"), mime:"text/csv"};
   }
   if (p.dlType === "ebook_csv") {
     const head = ["title","author","publisher","description","language","category",pc,"isbn","epub_file","sample_file","cover_file"];
-    const rows = items.map(b => [b.title, BRAND.label, BRAND.label, b.desc, LANG, CAT.cats[0], b.price, b.isbn, `${slug(b.title)}.epub`, `${slug(b.title)}_sample.epub`, `${slug(b.title)}.jpg`]);
+    const rows = items.map(b => [b.title, BRAND.label, BRAND.label, b.desc, LANG, (b.cats && b.cats[0]) || CAT.cats[0], b.price, b.isbn, `${slug(b.title)}.epub`, `${slug(b.title)}_sample.epub`, `${slug(b.title)}.jpg`]);
     return {name:`${p.id}_metadata__${BRAND.id}__${week}.csv`, text:[head, ...rows].map(r => row(r)).join("\n"), mime:"text/csv"};
   }
   if (p.dlType === "audiobook_csv") {
     const head = ["title","author","narrator","isbn","description","category",pc,"digital_voice","audio_files","cover_file"];
-    const rows = items.map(b => [b.title, BRAND.label, LANG==="ja"?"AI音声":"Digital voice (AI)", b.isbn, b.desc, CAT.cats[0], audioPrice(), "Yes", `${slug(b.title)}/01_opening.mp3; ${slug(b.title)}/chapters/*.mp3; ${slug(b.title)}/99_closing.mp3; ${slug(b.title)}/retail_sample.mp3`, `${slug(b.title)}_cover.jpg`]);
+    const rows = items.map(b => [b.title, BRAND.label, LANG==="ja"?"AI音声":"Digital voice (AI)", b.isbn, b.desc, (b.cats && b.cats[0]) || CAT.cats[0], b.audioP || audioPrice(), "Yes", `${slug(b.title)}/01_opening.mp3; ${slug(b.title)}/chapters/*.mp3; ${slug(b.title)}/99_closing.mp3; ${slug(b.title)}/retail_sample.mp3`, `${slug(b.title)}_cover.jpg`]);
     return {name:`${p.id}_audiobooks__${BRAND.id}__${week}.csv`, text:[head, ...rows].map(r => row(r)).join("\n"), mime:"text/csv"};
   }
   if (p.dlType === "podcast_csv") {
@@ -420,7 +435,8 @@ function renderWeekly() {
     const noun = p.feed === "audiobooks" ? T.audiobookNoun : p.feed === "episodes" ? T.episodeNoun : T.ebookNoun;
     const titles = items.map((b, i) => {
       const label = p.feed === "episodes" ? `Ep ${b.epNum}: ${b.title}` : b.title;
-      return `<li><span class="title-num">${i+1}.</span><span class="title-text">${label}</span><span class="format-badge ${fmtClass}">${T.fmt[p.feed]}</span></li>`;
+      const sub = b.subtitle ? `<span class="title-sub">${esc(b.subtitle)}</span>` : "";
+      return `<li><span class="title-num">${i+1}.</span><span class="title-text">${esc(label)}${sub}</span><span class="format-badge ${fmtClass}">${T.fmt[p.feed]}</span></li>`;
     }).join("");
     return `<div class="platform-card">
       <div class="platform-head">
@@ -459,11 +475,12 @@ function renderCatalog() {
   document.getElementById("catalog-count").textContent = T.catalogCount(cat.length);
   document.getElementById("catalog-grid").innerHTML = cat.map(b => `
     <div class="book-card">
-      <div class="book-cover" style="background:linear-gradient(150deg,hsl(${b.hue} 55% 28%),hsl(${(b.hue+30)%360} 60% 16%))">${b.title}</div>
+      <div class="book-cover" style="background:linear-gradient(150deg,hsl(${b.hue} 55% 28%),hsl(${(b.hue+30)%360} 60% 16%))">${esc(b.title)}</div>
       <div class="book-body">
-        <div class="book-title">${b.title}</div>
-        <div class="book-desc">${b.desc}</div>
-        <div class="book-angle">▸ ${b.angle}</div>
+        <div class="book-title">${esc(b.title)}</div>
+        ${b.subtitle ? `<div class="book-sub">${esc(b.subtitle)}</div>` : ""}
+        <div class="book-desc">${esc(b.desc)}</div>
+        ${b.angle ? `<div class="book-angle">▸ ${esc(b.angle)}</div>` : ""}
       </div>
     </div>`).join("");
 }
@@ -504,6 +521,12 @@ async function boot() {
   try { const r = await fetch("brand_admin_brands.json", {cache:"no-store"}); if (r.ok) bridge = await r.json(); } catch (_e) {}
   const info = bridge[id] || {};
   BRAND = { id, label: info.d || humanize(id) };
+  // Pull the brand's REAL catalog (book plans are en_US only, so US/English view only).
+  REAL_CATALOG = null;
+  if (LANG === "en") {
+    const base = id.replace(/_(en_us|es_us|es_es|pt_br|zh_tw|zh_hk|zh_cn|zh_sg|ja_jp|ko_kr)$/, "");
+    try { const r = await fetch(`brand_catalogs/${base}.json`, {cache:"no-store"}); if (r.ok) { const j = await r.json(); if (j && j.books && j.books.length) REAL_CATALOG = j.books; } } catch (_e) {}
+  }
   renderWeekly();
 }
 boot();
