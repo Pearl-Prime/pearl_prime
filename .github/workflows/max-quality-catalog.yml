@@ -37,7 +37,13 @@ on:
         type: boolean
 
 concurrency:
-  group: max-quality-catalog-${{ github.event.inputs.shard || 'all' }}
+  # On non-dispatch events (e.g. a push that touches this file) the
+  # `github.event.inputs` context is unavailable, so evaluating it in the
+  # workflow-level concurrency group fails workflow startup ("workflow file
+  # issue", 0 jobs). Gate on the event name so the input is only read for a
+  # real workflow_dispatch, and fall back to the always-resolvable run id —
+  # which also keeps the group unique per dispatch.
+  group: max-quality-catalog-${{ github.event_name == 'workflow_dispatch' && github.event.inputs.shard || github.run_id }}
   cancel-in-progress: false
 
 env:
