@@ -1,0 +1,36 @@
+# config/governance/reinvention_allowlist.yaml
+#
+# Standing, reviewed exceptions to the reinvention guard (Layer 3 of the
+# anti-reinvention system; see docs/specs/CANONICAL_ARTIFACTS_REGISTRY_SPEC.md).
+#
+# The reinvention guard (scripts/ci/pr_governance_review.py :: check_reinvention,
+# built in Phase 2) WARNs when an added file looks like a fork of a canonical
+# artifact listed in artifacts/coordination/CANONICAL_ARTIFACTS_REGISTRY.tsv.
+# Most exceptions belong INLINE in a PR via the override tag:
+#     NEW-ARTIFACT-JUSTIFIED: <reason>
+# (plus a registry row in the same PR).
+#
+# THIS FILE is for the rarer case of a STANDING, recurring mirror/sibling that
+# is legitimately allowed to coexist with a canonical and should never WARN —
+# for example a build-output mirror of a source-of-truth directory.
+#
+# SCHEMA (each entry):
+#   - allowed_path:   <repo-relative path or glob that may coexist with a canonical>
+#     mirrors:        <the canonical_path it intentionally mirrors / relates to>
+#     concept_key:    <the registry concept_key it relates to>
+#     reason:         <why this coexistence is correct, not a reinvention>
+#     approved_by:    <agent or operator who approved>
+#     approved_date:  <ISO date>
+#
+# EXAMPLE (illustrative — NOT active; uncomment + review to activate):
+#   - allowed_path: brand-wizard-app/public/teacher_pics/
+#     mirrors: teacher_pics/
+#     concept_key: teacher_real_photos
+#     reason: "Web-app public mirror of the teacher photo SSOT; both restored together (anchor c513ac18d). Not a fork."
+#     approved_by: Pearl_Architect
+#     approved_date: 2026-06-12
+#
+# Phase 1 ships this file EMPTY (schema-only). Entries are added under review.
+
+version: 1
+allowlist: []

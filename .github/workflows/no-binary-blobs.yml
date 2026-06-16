@@ -18,13 +18,13 @@ jobs:
     runs-on: ubuntu-latest
     env:
       MAX_BYTES: 1048576       # 1 MB
-      # NOTE: catalog CSVs (>1 MB UTF-8 text) are explicitly allowed under their
-      # own narrow path. They are deterministic queue artifacts, not binaries
+      # NOTE: catalog CSVs/TSVs (>1 MB UTF-8 text) are explicitly allowed under
+      # narrow paths. They are deterministic queue artifacts, not binaries
       # — Layer 2 R2 storage does not apply. Keep this allowlist tight.
       # KDP overlay fonts: small set of static OFL TTFs used at composite-time.
       # CJK fonts (Noto JP) are larger than 1 MB even when subsetted to
       # Joyo+kana+ASCII; treat them as ship-once assets, not Layer 2 artifacts.
-      ALLOWED_PATHS_REGEX: ^(\\.git/|tests/fixtures/|docs/img/|skills/.+/img/|artifacts/catalog/pearl_prime_book_script_catalogs/.*\.csv$|assets/fonts/kdp_overlay/.+\.(ttf|otf)$)
+      ALLOWED_PATHS_REGEX: ^(\\.git/|tests/fixtures/|docs/img/|skills/.+/img/|artifacts/catalog/pearl_prime_book_script_catalogs/.*\.csv$|artifacts/catalog/.*\.tsv$|assets/fonts/kdp_overlay/.+\.(ttf|otf)$)
     steps:
       - name: Checkout PR
         uses: actions/checkout@v4

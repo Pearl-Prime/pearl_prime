@@ -52,13 +52,20 @@ def test_valid_genres_matches_spec_4_1():
 
 
 def test_valid_locales_includes_kr_per_d_18():
-    """VALID_LOCALES must include ko_KR per spec D-18 (5-locale matrix)
-    and the 3 markets added per operator 2026-04-27 (es_LA, hu_HU, zh_HK)."""
+    """VALID_LOCALES must include ko_KR per spec D-18 (5-locale matrix),
+    the 3 markets added per operator 2026-04-27 (es_LA, hu_HU, zh_HK),
+    and the 4 added per operator ratification 2026-05-29 (fr_FR, de_DE,
+    it_IT, pt_BR; EUROPE_CATALOG_PLAN §6.1 + LATAM_CATALOG_PLAN §1A).
+    es_ES is intentionally NOT wired pending es_LA/es_US/es_ES register
+    reconciliation (the two ratified docs conflict on whether es_ES registers)."""
     mod = _import_module()
     assert "ko_KR" in mod.VALID_LOCALES
-    expected = {"en_US", "ja_JP", "ko_KR", "zh_TW", "zh_CN", "es_LA", "hu_HU", "zh_HK"}
+    expected = {
+        "en_US", "ja_JP", "ko_KR", "zh_TW", "zh_CN", "es_LA", "hu_HU", "zh_HK",
+        "fr_FR", "de_DE", "it_IT", "pt_BR",
+    }
     assert set(mod.VALID_LOCALES) == expected, mod.VALID_LOCALES
-    assert len(mod.VALID_LOCALES) == 8
+    assert len(mod.VALID_LOCALES) == 12
 
 
 def test_dry_run_against_live_strategic_docs():

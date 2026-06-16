@@ -1,0 +1,23 @@
+-- Pearl Prime Storefront — D1 migration 0001 (init placeholder)
+--
+-- Empty placeholder so wrangler can wire the D1 database `pearl_prime_storefront`
+-- to this project at first deploy. Real schemas land in a follow-up Pearl_Dev ws
+-- per spec §7 + §10 + §11 + §AMENDMENT-2026-06-04.3 + .5.
+--
+-- This file MUST exist before the first wrangler deploy. Replace with the actual
+-- DDL in the Pearl_Dev ws (do not edit it here in the infra scaffold ws).
+--
+-- Targeted Phase A tables (Pearl_Dev ws scope, not this PR):
+--   sku                — joined catalog (book/audiobook/manga/music)
+--   sku_locale         — per-locale title/subtitle/description
+--   review             — star + body, Turnstile-guarded
+--   order              — Snipcart-wraps-Stripe order events (webhook payload)
+--   order_line         — per-SKU line items
+--   account            — optional/guest checkout per AMENDMENT Q-PRP-AUTH-01
+--   account_library    — purchased SKUs → R2 signed-URL re-issue
+--   webhook_event_log  — Snipcart inbound events (idempotency key + payload hash)
+--
+-- See spec §7 (catalog + locale model), §10 (orders/payment), §11 (reviews),
+-- §AMENDMENT-2026-06-04.3 (Snipcart webhook), §AMENDMENT-2026-06-04.5 (auth).
+
+SELECT 1 AS init_placeholder;

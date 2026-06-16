@@ -20,6 +20,7 @@ from __future__ import annotations
 import hashlib
 import json
 import logging
+import os
 import re
 from collections import defaultdict
 from dataclasses import asdict, dataclass, field
@@ -36,15 +37,26 @@ from phoenix_v4.planning.registry_resolver import (
     _TEACHER_OVERLAY_TYPES,
     _PERSONA_OVERLAY_TYPES,
     _deterministic_index,
+    _load_composite_doctrine_atoms,
     _load_persona_atoms,
     _load_teacher_atoms,
     _load_yaml,
+    _pick_composite_pool,
     load_registry,
 )
 
 logger = logging.getLogger(__name__)
 
 REPO_ROOT = Path(__file__).resolve().parent.parent.parent
+
+# OPD-115 Phase B: composite teacher doctrine/reflection (regular mode only).
+_COMPOSITE_DOCTRINE_SLOT_TYPES = frozenset({
+    "TEACHER_DOCTRINE", "COMPRESSION", "COMPOSITE_TEACHER_DOCTRINE",
+})
+_COMPOSITE_REFLECTION_SLOT_TYPES = frozenset({
+    "REFLECTION", "COMPOSITE_TEACHER_REFLECTION",
+})
+_COMPOSITE_SLOT_TYPES = _COMPOSITE_DOCTRINE_SLOT_TYPES | _COMPOSITE_REFLECTION_SLOT_TYPES
 
 # ---------------------------------------------------------------------------
 # ACT-010: Doctrine quarantine — pre-selection filter for somatic_first frame
@@ -106,6 +118,18 @@ class InsufficientVariantsError(RuntimeError):
     Raised when a persona/topic section type has fewer than DEFAULT_MIN_VARIANTS (3)
     atom variants loaded — the same condition that causes validate_variant_coverage.py
     --strict to exit non-zero.  Author atoms upstream to resolve.
+    """
+
+
+class PersonaPoolEmptyError(RuntimeError):
+    """OPD-118: the target persona/topic atom pool is empty for a required slot.
+
+    Raised (or logged as planner WARNING for non-critical slots) when the
+    BookSpec persona×topic pool is empty for a slot the selector would have
+    filled. Pre-OPD-118 the selector silently spilled into sibling-persona
+    atoms (cross-persona contamination); the fix replaces that fallback with
+    an explicit signal so the planner can surface the gap upstream rather
+    than ship a book stitched from the wrong personas' content.
     """
 
 
@@ -198,6 +222,88 @@ class PersonaPoolRotationState:
             ).hexdigest()
             return (self._book_usage.get(aid, 0), tiebreak)
         return sorted(range(n), key=_key)
+
+
+# ---------------------------------------------------------------------------
+# OPD-114 Phase B: scene-depth ladder (one anchor archetype per chapter)
+# ---------------------------------------------------------------------------
+
+
+class SceneArchetypeRotationState:
+    """Book-level usage counter for scene archetype ids (least-used-first)."""
+
+    def __init__(self) -> None:
+        self._usage: Dict[str, int] = {}
+
+    def pick_archetype(
+        self,
+        archetype_keys: List[str],
+        chapter_id: int,
+        seed: str,
+    ) -> str:
+        if not archetype_keys:
+            return "__null__"
+        if len(archetype_keys) == 1:
+            return archetype_keys[0]
+
+        def _key(arch: str) -> Tuple[int, str]:
+            tie = hashlib.sha256(
+                f"{seed}:scene_arch:ch{chapter_id}:{arch}".encode("utf-8")
+            ).hexdigest()
+            return (self._usage.get(arch, 0), tie)
+
+        chosen = sorted(archetype_keys, key=_key)[0]
+        self._usage[chosen] = self._usage.get(chosen, 0) + 1
+        return chosen
+
+
+def pick_scene_ladder(
+    chapter_id: int,
+    archetype_pool: List[Dict[str, Any]],
+    story_depth: int,
+    rotation_state: SceneArchetypeRotationState,
+    *,
+    seed: str = "",
+    planner_warnings: Optional[List[str]] = None,
+) -> List["SceneAtom"]:
+    """Pick depth-ordered SCENE atoms L1..story_depth for one anchor archetype."""
+    from phoenix_v4.planning.scene_atom_header_parser import SceneAtom, scene_atom_from_dict
+
+    warns = planner_warnings if planner_warnings is not None else []
+    depth_target = max(1, int(story_depth))
+    atoms = [scene_atom_from_dict(a) for a in archetype_pool if str(a.get("content") or "").strip()]
+    if not atoms:
+        return []
+
+    by_arch: Dict[str, List[SceneAtom]] = defaultdict(list)
+    for atom in atoms:
+        key = atom.archetype if atom.archetype is not None else "__null__"
+        by_arch[key].append(atom)
+
+    for group in by_arch.values():
+        group.sort(key=lambda a: (a.depth_level, a.atom_id))
+
+    anchor = rotation_state.pick_archetype(sorted(by_arch.keys()), chapter_id, seed)
+    pool = by_arch.get(anchor) or atoms
+    by_level = {a.depth_level: a for a in pool}
+    max_level = max(by_level.keys()) if by_level else 1
+
+    ladder: List[SceneAtom] = []
+    for level in range(1, depth_target + 1):
+        if level in by_level:
+            ladder.append(by_level[level])
+        else:
+            break
+
+    if len(ladder) < depth_target:
+        warns.append(
+            f"chapter {chapter_id}: scene archetype {anchor!r} has {max_level} depth level(s), "
+            f"story_depth={depth_target}; scene ladder fallback to available levels"
+        )
+        if not ladder and max_level in by_level:
+            ladder = [by_level[max_level]]
+
+    return ladder
 
 
 # ---------------------------------------------------------------------------
@@ -447,14 +553,115 @@ def _chapter_key(chapter_num: int) -> str:
     return f"chapter_{chapter_num:02d}"
 
 
-def _registry_type_lists(ch_data: Dict[str, Any]) -> Dict[str, List[Dict[str, Any]]]:
+# DEFECT 4 (cross-persona bleed, COMPOSER_FRONTIER_FIX_SPEC_20260614): registry/
+# {topic}.yaml is topic-keyed and was authored 100% from one persona (label
+# "Gen Z" == persona_id "gen_z_professionals"). The registry read path had NO
+# persona filter, so corporate_managers books rendered gen_z-authored HOOK
+# content (verified books 04/05, 12 foreign lines each). The fix below makes the
+# registry read persona-aware: any section whose `metadata.persona` resolves to a
+# DIFFERENT persona_id than the spine persona is dropped; on no-match the
+# selector falls through to persona_atom/teacher (mirrors the OPD-118
+# "no cross-persona spillover" policy, extended from deep_book_6h to standard_book).
+
+# Explicit registry-label -> canonical persona_id aliases. The registry stores a
+# display label ("Gen Z"); the spine emits a persona_id ("gen_z_professionals").
+# This map disambiguates labels that a token match alone cannot resolve (e.g.
+# bare "Gen Z" must map to gen_z_professionals, NOT gen_z_student).
+_REGISTRY_PERSONA_LABEL_ALIASES: Dict[str, str] = {
+    "genz": "gen_z_professionals",
+    "genzprofessional": "gen_z_professionals",
+    "genzprofessionals": "gen_z_professionals",
+}
+
+# Unauthored registry stub content (e.g. "[Persona-specific hook for X × Y]").
+# Per DEFECT 4 fix point (3): reject these so placeholder text never renders
+# regardless of persona. Matches a bracketed editorial stub that names a hook.
+_REGISTRY_PLACEHOLDER_RE = re.compile(
+    r"^\s*\[[^\]]*\b(?:persona-specific|hook for|placeholder|tbd|tktk|todo|draft)\b[^\]]*\]\s*$",
+    re.IGNORECASE,
+)
+
+
+def _norm_persona_token(value: Any) -> str:
+    """Reduce a persona id/label to a comparable lowercase alphanumeric token.
+
+    "Gen Z" -> "genz"; "gen_z_professionals" -> "genzprofessionals".
+    """
+    return re.sub(r"[^a-z0-9]+", "", str(value or "").lower())
+
+
+def _registry_persona_canonical(label: Any) -> str:
+    """Resolve a registry persona label to a canonical persona_id token.
+
+    Returns the normalized alphanumeric token of the resolved persona_id, or ""
+    when the label is blank (unknown/unlabeled -> caller treats as "no claim").
+    """
+    tok = _norm_persona_token(label)
+    if not tok:
+        return ""
+    if tok in _REGISTRY_PERSONA_LABEL_ALIASES:
+        return _norm_persona_token(_REGISTRY_PERSONA_LABEL_ALIASES[tok])
+    return tok
+
+
+def _registry_persona_matches(section_persona_label: Any, spine_persona_id: str) -> bool:
+    """True iff a registry section's persona is compatible with the spine persona.
+
+    Fail-OPEN only on absence: a section with NO persona label cannot be proven
+    foreign, so it is allowed (absence is not the documented bleed vector — the
+    bleed is explicitly-labeled "Gen Z" leaking into other personas). A section
+    whose label resolves to a DIFFERENT persona_id than the spine is rejected.
+    When the spine persona_id is itself blank we cannot compare, so allow.
+    """
+    spine_tok = _norm_persona_token(spine_persona_id)
+    if not spine_tok:
+        return True
+    sec_tok = _registry_persona_canonical(section_persona_label)
+    if not sec_tok:
+        return True
+    if sec_tok == spine_tok:
+        return True
+    # Prefix tolerance for label/id granularity drift (e.g. a label that
+    # resolves to the family stem of a more specific spine id), but only when
+    # the section token is a strict prefix of the spine token AND not itself a
+    # known sibling alias — this keeps gen_z_professionals vs gen_z_student
+    # distinct because both resolve via the alias map to full ids.
+    return False
+
+
+def _registry_section_persona(sec_data: Dict[str, Any]) -> Any:
+    """Extract a section's authored persona label from its metadata block."""
+    meta = sec_data.get("metadata") if isinstance(sec_data.get("metadata"), dict) else {}
+    return meta.get("persona") or sec_data.get("persona")
+
+
+def _registry_type_lists(
+    ch_data: Dict[str, Any],
+    persona_id: str = "",
+) -> Dict[str, List[Dict[str, Any]]]:
+    """Group a chapter's registry sections by slot type.
+
+    When ``persona_id`` is provided, sections whose authored persona resolves to
+    a different persona_id are dropped (DEFECT 4 cross-persona-bleed fix). A
+    section with no persona label is retained (cannot be proven foreign).
+    """
     sections = ch_data.get("sections") or {}
     by_type: Dict[str, List[Dict[str, Any]]] = defaultdict(list)
     if not isinstance(sections, dict):
         return by_type
+    spine_tok = _norm_persona_token(persona_id)
     for sec_key in sorted(sections.keys()):
         sec_data = sections[sec_key]
         if not isinstance(sec_data, dict):
+            continue
+        if spine_tok and not _registry_persona_matches(
+            _registry_section_persona(sec_data), persona_id
+        ):
+            logger.warning(
+                "DEFECT4: dropping registry section %s (persona=%r) — foreign to "
+                "spine persona_id=%r; falling through to persona_atom/teacher.",
+                sec_key, _registry_section_persona(sec_data), persona_id,
+            )
             continue
         st = str(sec_data.get("type") or "REFLECTION").strip().upper()
         by_type[st].append(sec_data)
@@ -470,6 +677,39 @@ def _pick_teacher_pool(teacher_atoms: Dict[str, List[dict]], slot_type: str) -> 
         if pool:
             return pool
     return []
+
+
+def _try_composite_content(
+    composite_atoms: Dict[str, List[dict]],
+    slot_type: str,
+    seed_key: str,
+    *,
+    topic_id: str = "",
+    persona_id: str = "",
+    book_frame: str = "somatic_first",
+) -> Optional[Tuple[str, str, int, Dict[str, Any]]]:
+    """Regular mode: topic composite doctrine/reflection before persona pool."""
+    pool = _pick_composite_pool(composite_atoms, slot_type)
+    pool = [
+        a
+        for a in pool
+        if not _is_doctrine_quarantined(str(a.get("content") or ""), book_frame)
+        and atom_passes_book_governance(
+            a.get("metadata"),
+            topic_id=topic_id,
+            persona_id=persona_id,
+            book_frame=book_frame,
+        )
+    ]
+    if not pool:
+        return None
+    idx = _deterministic_index(f"{seed_key}:composite", len(pool))
+    atom = pool[idx]
+    content = str(atom.get("content") or "").strip()
+    if not content:
+        return None
+    aid = str(atom.get("atom_id") or f"composite_{idx}")
+    return content, aid, idx, dict(atom.get("metadata") or {})
 
 
 def _try_teacher_content(
@@ -798,6 +1038,130 @@ def _filter_practice_pool(pool: List[dict]) -> List[dict]:
     return [a for a in (pool or []) if _is_practice_atom(a)]
 
 
+_ANGLE_FALLBACK_CACHE: Optional[dict[str, Any]] = None
+
+
+def _load_angle_journey_fallback() -> dict[str, Any]:
+    global _ANGLE_FALLBACK_CACHE
+    if _ANGLE_FALLBACK_CACHE is not None:
+        return _ANGLE_FALLBACK_CACHE
+    path = REPO_ROOT / "config" / "planning" / "angle_journey_fallback.yaml"
+    _ANGLE_FALLBACK_CACHE = _load_yaml(path) if path.exists() else {}
+    return _ANGLE_FALLBACK_CACHE
+
+
+def _angle_entry_meta(angle_id: str) -> dict[str, Any]:
+    from phoenix_v4.planning.angle_journey import merge_angle_journey
+    from phoenix_v4.planning.angle_resolver import get_angle_context, load_angle_registry
+
+    reg = load_angle_registry()
+    leaf = get_angle_context(angle_id) or {}
+    journey = merge_angle_journey(angle_id, reg)
+    return {
+        "display_name": str(leaf.get("display_name") or angle_id),
+        "core_frame": str(leaf.get("core_frame") or ""),
+        "analogy_lens": str(journey.get("analogy_lens") or ""),
+        "layer_progression": list(journey.get("layer_progression") or []),
+    }
+
+
+def _read_text_atom(path: Path) -> str:
+    if not path.exists():
+        return ""
+    return path.read_text(encoding="utf-8").strip()
+
+
+def _try_angle_definition(
+    *,
+    persona_id: str,
+    topic_id: str,
+    angle_id: str,
+    repo_root: Path,
+    fallback_warnings: List[str],
+) -> Optional[Tuple[str, str, str]]:
+    aid = (angle_id or "").strip()
+    if not aid or not persona_id or not topic_id:
+        return None
+    base = repo_root / "atoms" / persona_id / topic_id / "ANGLE_DEFINITION" / aid / "CANONICAL.txt"
+    body = _read_text_atom(base)
+    if body:
+        return body, "angle_atom", f"angle_def:{aid}"
+    meta = _angle_entry_meta(aid)
+    lens = meta["analogy_lens"]
+    from phoenix_v4.planning.angle_journey import family_default_angle_id
+
+    fam = family_default_angle_id(lens) if lens else None
+    if fam and fam != aid:
+        fam_path = repo_root / "atoms" / persona_id / topic_id / "ANGLE_DEFINITION" / fam / "CANONICAL.txt"
+        body = _read_text_atom(fam_path)
+        if body:
+            fallback_warnings.append(
+                f"ANGLE_DEFINITION: family default {fam!r} for {aid!r}"
+            )
+            return body, "angle_atom_family", f"angle_def_family:{fam}"
+    fb = (_load_angle_journey_fallback().get("generic") or {}).get("angle_definition") or ""
+    tpl = str(fb).format(
+        display_name=meta["display_name"],
+        analogy_lens=lens or "progressive_compression",
+        core_frame=meta["core_frame"] or meta["display_name"],
+    ).strip()
+    fallback_warnings.append(
+        f"ANGLE_DEFINITION: planner-template fallback for {aid!r}"
+    )
+    return tpl, "angle_template", f"angle_def_tpl:{aid}"
+
+
+def _try_angle_callback(
+    *,
+    persona_id: str,
+    topic_id: str,
+    angle_id: str,
+    layer: int,
+    repo_root: Path,
+    fallback_warnings: List[str],
+) -> Optional[Tuple[str, str, str]]:
+    aid = (angle_id or "").strip()
+    if not aid or not persona_id or not topic_id or layer < 1:
+        return None
+    path = repo_root / "atoms" / persona_id / topic_id / "ANGLE_CALLBACK" / aid / f"level_{layer}.yaml"
+    if path.exists():
+        data = _load_yaml(path)
+        if isinstance(data, dict):
+            body = str(data.get("body") or data.get("content") or "").strip()
+            if body:
+                return body, "angle_atom", f"angle_cb:{aid}:L{layer}"
+    meta = _angle_entry_meta(aid)
+    lens = meta["analogy_lens"]
+    from phoenix_v4.planning.angle_journey import family_default_angle_id
+
+    fam = family_default_angle_id(lens) if lens else None
+    if fam and fam != aid:
+        fam_path = repo_root / "atoms" / persona_id / topic_id / "ANGLE_CALLBACK" / fam / f"level_{layer}.yaml"
+        if fam_path.exists():
+            data = _load_yaml(fam_path)
+            if isinstance(data, dict):
+                body = str(data.get("body") or data.get("content") or "").strip()
+                if body:
+                    fallback_warnings.append(
+                        f"ANGLE_CALLBACK: family default {fam!r} L{layer}"
+                    )
+                    return body, "angle_atom_family", f"angle_cb_family:{fam}:L{layer}"
+    prior, phase = "", ""
+    for row in meta["layer_progression"]:
+        if isinstance(row, dict) and int(row.get("layer") or 0) == layer:
+            phase = str(row.get("phase") or "")
+        if isinstance(row, dict) and int(row.get("layer") or 0) == layer - 1:
+            prior = str(row.get("assertion") or "")
+    fb = (_load_angle_journey_fallback().get("generic") or {}).get("angle_callback") or ""
+    tpl = str(fb).format(
+        layer=layer,
+        phase=phase or f"layer_{layer}",
+        prior_assertion=prior or "(opening definition)",
+    ).strip()
+    fallback_warnings.append(f"ANGLE_CALLBACK: planner-template fallback L{layer} for {aid!r}")
+    return tpl, "angle_template", f"angle_cb_tpl:{aid}:L{layer}"
+
+
 def _try_practice_library(
     chapter_index: int,
     topic_id: str,
@@ -828,6 +1192,156 @@ def _wc(text: str) -> int:
     return len((text or "").split())
 
 
+# ─────────────────────────────────────────────────────────────────────────────
+# Cross-chapter fuzzy depth-dedup (ws_f1_depth_dedup_20260615, task_48b619ed)
+# ─────────────────────────────────────────────────────────────────────────────
+# The depth pass (apply_depth_pass) re-reads atom CANONICAL blocks per chapter.
+# The legacy dedup kept a PER-CHAPTER set of exact ``_norm_ws(body)`` strings, so
+# (a) it never saw what an earlier chapter already used, and (b) even within a
+# book-wide set the exact match was defeated by per-chapter trailing-clause
+# variation (e.g. the composer appends a different one-line tail to the same HOOK
+# atom in each chapter). Result: the SAME atom body (HOOK v02 "The task is open",
+# EXERCISE/doctrine blocks) was re-injected across all 12 chapters, producing the
+# bulk of the full-12 F1 mass (⑤ leverB attribution: 223/224 deep-tier clusters).
+#
+# ``_SeenBodies`` replaces that set with a BOOK-WIDE registry that is still
+# set-compatible (``x in reg`` exact membership + ``reg.add(x)`` are unchanged, so
+# every existing call-site and test keeps working) but additionally exposes
+# ``seen_similar(text)`` — a Jaccard word-set overlap check that MIRRORS the
+# register-gate F1 detector (``_word_set`` + ``_cosine_jaccard`` at
+# ``phoenix_v4/quality/register_gate.py``). A depth candidate whose body is
+# ≥ threshold-similar to one already used book-wide is rejected, so the selector
+# rotates to an unused sibling ARC block / variant instead of re-stamping the same
+# one. Bodies below ``min_words`` are exempt (short transitions may legitimately
+# repeat — matches F1's ≥3-sentence floor and the renderer's min_words exemption).
+#
+# The fuzzy layer is feature-flagged via env ``PHOENIX_DEPTH_DEDUP_FUZZY`` (default
+# on); set "0" to fall back to pure exact-match behavior (the pre-fix baseline).
+_DEPTH_DEDUP_SIM_THRESHOLD = 0.55   # = register_gate F1_SIMILARITY_THRESHOLD
+_DEPTH_DEDUP_MIN_WORDS = 30         # paragraph-class bodies only; short beats exempt
+_DEPTH_DEDUP_TOKEN_RE = re.compile(r"[A-Za-z']+")
+
+
+def _depth_dedup_fuzzy_enabled() -> bool:
+    return (os.environ.get("PHOENIX_DEPTH_DEDUP_FUZZY", "1") or "1") != "0"
+
+
+def _depth_dedup_threshold() -> float:
+    """Similarity threshold for the cross-chapter fuzzy depth-dedup.
+
+    Defaults to ``_DEPTH_DEDUP_SIM_THRESHOLD`` (0.55 = register-gate F1) and is
+    tunable via ``PHOENIX_DEPTH_DEDUP_THRESHOLD`` for calibration sweeps. Higher
+    values dedup only near-identical re-injections (true HOOK/EXERCISE re-stamps,
+    Jaccard ~0.85+) and leave merely-thematically-adjacent atoms in place, which
+    reduces rotation churn on short tiers.
+    """
+    raw = os.environ.get("PHOENIX_DEPTH_DEDUP_THRESHOLD")
+    if raw:
+        try:
+            return max(0.0, min(1.0, float(raw)))
+        except (TypeError, ValueError):
+            pass
+    return _DEPTH_DEDUP_SIM_THRESHOLD
+
+
+def _depth_tokens(text: str) -> List[str]:
+    """Lowercased alpha-token list — identical tokenization to register_gate._word_set
+    so the dedup operates on exactly the tokens the F1 detector would cluster."""
+    return _DEPTH_DEDUP_TOKEN_RE.findall((text or "").lower())
+
+
+def _depth_word_set(text: str) -> frozenset:
+    return frozenset(_depth_tokens(text))
+
+
+def _depth_jaccard(a: frozenset, b: frozenset) -> float:
+    if not a or not b:
+        return 0.0
+    union = len(a | b)
+    return (len(a & b) / union) if union else 0.0
+
+
+class _SeenBodies:
+    """Book-wide registry of used depth-atom bodies.
+
+    Backward-compatible with the plain ``set`` it replaces:
+      * ``_norm_ws(body) in reg``  → exact-string membership (unchanged)
+      * ``reg.add(_norm_ws(body))`` → record exact string (unchanged)
+    Plus a fuzzy layer for cross-chapter near-duplicate suppression:
+      * ``reg.note(raw_body)``      → record the body's word-set for fuzzy checks
+      * ``reg.seen_similar(raw_body)`` → True if ≥ threshold-similar to a prior body
+
+    ``add`` also notes the word-set, so the existing call-sites that register a
+    used body via ``add(_norm_ws(content))`` automatically populate the fuzzy
+    index too — no extra wiring needed at those sites.
+    """
+
+    __slots__ = ("_exact", "_sets", "_threshold", "_min_words", "_fuzzy")
+
+    def __init__(self, threshold: Optional[float] = None,
+                 min_words: int = _DEPTH_DEDUP_MIN_WORDS,
+                 fuzzy: Optional[bool] = None) -> None:
+        self._exact: set = set()
+        self._sets: List[frozenset] = []
+        self._threshold = _depth_dedup_threshold() if threshold is None else threshold
+        self._min_words = min_words
+        self._fuzzy = _depth_dedup_fuzzy_enabled() if fuzzy is None else fuzzy
+
+    # --- set-compatible surface (used by legacy call-sites/tests) ---
+    def __contains__(self, key: str) -> bool:
+        return key in self._exact
+
+    def add(self, key: str) -> None:
+        self._exact.add(key)
+        self.note(key)
+
+    def __len__(self) -> int:  # pragma: no cover - convenience
+        return len(self._exact)
+
+    # --- fuzzy surface ---
+    def note(self, raw_body: str) -> None:
+        """Record a body's word-set so later candidates can be fuzzy-compared.
+
+        Bodies whose TOTAL token count is below ``min_words`` are not indexed —
+        short transitions are allowed to repeat. The Jaccard set itself is what's
+        stored (deduped tokens) but the size gate is on the raw token count so a
+        normal 3-sentence atom paragraph (~30+ words, ~25 unique) still qualifies.
+        """
+        if not self._fuzzy:
+            return
+        toks = _depth_tokens(raw_body)
+        if len(toks) >= self._min_words:
+            self._sets.append(frozenset(toks))
+
+    def seen_similar(self, raw_body: str) -> bool:
+        """True if ``raw_body`` is ≥ threshold-similar (Jaccard) to any noted body.
+
+        Short bodies (< min_words TOTAL tokens) are never considered duplicates
+        so legitimate short transitions keep repeating.
+        """
+        if not self._fuzzy:
+            return False
+        toks = _depth_tokens(raw_body)
+        if len(toks) < self._min_words:
+            return False
+        ws = frozenset(toks)
+        thr = self._threshold
+        for prev in self._sets:
+            if _depth_jaccard(ws, prev) >= thr:
+                return True
+        return False
+
+
+def _seen_similar(book_seen_bodies: Any, raw_body: str) -> bool:
+    """Duck-typed fuzzy check that tolerates a plain ``set`` (legacy callers).
+
+    Returns False when ``book_seen_bodies`` has no fuzzy layer (e.g. a bare set
+    passed by an old test), so those paths keep their exact-only semantics.
+    """
+    fn = getattr(book_seen_bodies, "seen_similar", None)
+    return bool(fn(raw_body)) if callable(fn) else False
+
+
 def _personas_with_topic(topic: str, repo_root: Path) -> List[str]:
     atoms_root = repo_root / "atoms"
     if not atoms_root.is_dir():
@@ -846,33 +1360,69 @@ def _merged_persona_atoms_deep_6h(
     locale: Optional[str] = None,
 ) -> Dict[str, List[dict]]:
     """
-    HOOK / SCENE / STORY pools for deep_book_6h: primary persona first, then other personas
-    for the same topic (deduped by normalized body).
+    OPD-118 (2026-05-20): persona-isolated pool loader for deep_book_6h.
 
-    When ``locale`` is set and not 'en-US', each persona's atoms are loaded from the
-    locale-specific CANONICAL.txt where present, falling back to English.
+    PRIOR BEHAVIOR (PR #939 Sprint-1, removed here): this function merged
+    HOOK/SCENE/STORY atoms from EVERY persona that shared `topic`, so a render
+    of `gen_z_professionals × anxiety` was pulling HOOK content authored for
+    `tech_finance_burnout × anxiety` (trading-floor vignettes),
+    `first_responders × anxiety` (fire-station vignettes), and
+    `corporate_managers × anxiety` (executive vignettes). The stitched prose
+    read as "scene-scene-scene / all over the place" because each atom was
+    written for a different setting and persona voice. This is the root cause
+    of the operator's persistent Book 3 cross-persona scene-hopping complaint.
+
+    CURRENT BEHAVIOR: load atoms ONLY from `atoms/{primary_persona}/{topic}/`.
+    No cross-persona spillover. If the primary persona's pool is empty for a
+    slot, the selector emits a planner WARNING via `PersonaPoolEmptyError`
+    rather than silently substituting another persona's content.
+
+    Function signature and return shape preserved so existing callers in
+    `select_enrichment` and `peek_registry_content_for_beatmap_slot` keep
+    working without edits. The `repo_root` and `_personas_with_topic` params
+    are retained for backward-compatibility; `_personas_with_topic` is no
+    longer consulted for atom selection.
+
+    When ``locale`` is set and not 'en-US', atoms are loaded from the
+    locale-specific CANONICAL.txt where present, falling back to English
+    (unchanged from prior behavior; the locale-awareness is intra-persona).
     """
-    ids = _personas_with_topic(topic, repo_root)
-    if primary_persona in ids:
-        ordered = [primary_persona] + [x for x in ids if x != primary_persona]
-    else:
-        ordered = [primary_persona] + ids
-
+    # Touch repo_root so callers that pass a custom root still resolve via
+    # `_load_persona_atoms` (which uses ATOMS_ROOT bound at import time). The
+    # arg is preserved in the signature for backward-compat; runtime resolution
+    # is unchanged from the rest of the selector.
+    _ = repo_root
+    primary_atoms = _load_persona_atoms(primary_persona, topic, locale=locale)
+    if not primary_atoms:
+        logger.warning(
+            "OPD-118: persona atom pool empty for '%s/%s' locale=%s — "
+            "no cross-persona spillover will be substituted. Author atoms "
+            "upstream at atoms/%s/%s/ to resolve.",
+            primary_persona, topic, locale or "en-US",
+            primary_persona, topic,
+        )
+        return {}
     merged: Dict[str, List[dict]] = {}
     for st in _PERSONA_OVERLAY_TYPES:
         seen: set[str] = set()
         acc: List[dict] = []
-        for pid in ordered:
-            for atom in _load_persona_atoms(pid, topic, locale=locale).get(st, []):
-                txt = str(atom.get("content") or "").strip()
-                n = _norm_ws(txt)
-                if not n or n in seen:
-                    continue
-                seen.add(n)
-                aid = str(atom.get("atom_id") or f"{pid}_{len(acc)}")
-                acc.append({"atom_id": aid, "content": txt})
+        for atom in primary_atoms.get(st, []):
+            txt = str(atom.get("content") or "").strip()
+            n = _norm_ws(txt)
+            if not n or n in seen:
+                continue
+            seen.add(n)
+            aid = str(atom.get("atom_id") or f"{primary_persona}_{len(acc)}")
+            acc.append({"atom_id": aid, "content": txt})
         if acc:
             merged[st] = acc
+        else:
+            logger.warning(
+                "OPD-118: %s pool empty for '%s/%s' locale=%s — selector will "
+                "fall through to registry/teacher overlays for this slot type. "
+                "Cross-persona substitution is BLOCKED.",
+                st, primary_persona, topic, locale or "en-US",
+            )
     return merged
 
 
@@ -1097,6 +1647,10 @@ def _try_registry_variant(
     vid = str(var.get("variant_id") or f"v{v_idx}")
     if not content:
         return None
+    # DEFECT 4 fix point (3): reject unauthored registry stubs so placeholder
+    # text never renders. Fall through to persona_atom/teacher instead.
+    if _REGISTRY_PLACEHOLDER_RE.match(content):
+        return None
     return content, vid, sec_data, v_idx
 
 
@@ -1120,6 +1674,10 @@ def _peek_registry_variant(
     var = variants[v_idx]
     content = str(var.get("content") or "").strip()
     if not content:
+        return None
+    # DEFECT 4 fix point (3): reject unauthored registry stubs (see
+    # _try_registry_variant). Keeps the peek consistent with selection.
+    if _REGISTRY_PLACEHOLDER_RE.match(content):
         return None
     vid = str(var.get("variant_id") or f"v{v_idx}")
     return content, vid
@@ -1154,12 +1712,12 @@ def peek_registry_content_for_beatmap_slot(
     ch_data = sections_root.get(ch_key)
     if not isinstance(ch_data, dict):
         ch_data = {}
-    reg_lists = _registry_type_lists(ch_data)
+    pid = (persona_id or "").strip()
+    reg_lists = _registry_type_lists(ch_data, persona_id=pid)
     reg_counters: Dict[str, int] = defaultdict(int)
 
     root = repo_root or REPO_ROOT
     teacher_atoms: Dict[str, List[dict]] = _load_teacher_atoms(tid) if tid else {}
-    pid = (persona_id or "").strip()
     rf = (beatmap.runtime_format or "").strip()
     if rf == "deep_book_6h" and pid:
         persona_atoms = _merged_persona_atoms_deep_6h(pid, topic, root, locale=locale)
@@ -1236,6 +1794,9 @@ def select_enrichment(
     reg = load_registry(topic)
     sections_root = reg.get("sections") or {}
     teacher_atoms: Dict[str, List[dict]] = _load_teacher_atoms(tid) if tid else {}
+    composite_atoms: Dict[str, List[dict]] = (
+        _load_composite_doctrine_atoms(topic, repo_root=root) if not tid else {}
+    )
     pid = (persona_id or "").strip()
     locale = request.locale
     rf_bm = (bm.runtime_format or "").strip()
@@ -1301,16 +1862,14 @@ def select_enrichment(
 
     enriched_chapters: List[EnrichedChapter] = []
     plan_context = dict(request.spine_context or {})
+    _angle_id_enrich = str(plan_context.get("angle_id") or "").strip()
+    _angle_layer_by_ch = dict(plan_context.get("angle_layer_by_chapter") or {})
+    _angle_fallback_warnings: List[str] = list(plan_context.get("angle_journey_warnings") or [])
 
     # ACT-007: collision_family dedup — track families used in last 2 chapters
     # Each entry is a list of collision_family values for that chapter (0-based index).
     _chapter_collision_families: List[List[str]] = []
 
-    # Story schedule + BookSlotTracker: unconditional as of PR #612.
-    # Additive stacking is the only mode; waterfall no longer exists.
-    _story_schedule: StorySchedule = build_story_schedule(
-        persona_id=persona_id, topic=topic, seed=seed, repo_root=root
-    )
     _book_tracker = BookSlotTracker()
 
     # OPD-109 Phase 3: per-book rotation state for persona atom picks. Prefers
@@ -1318,6 +1877,20 @@ def select_enrichment(
     # picks across the available pool instead of hammering the same 3-5 atoms
     # across all 96 SCENE-class slots. See `PersonaPoolRotationState` doc above.
     _persona_rotation = PersonaPoolRotationState()
+    _scene_arch_rotation = SceneArchetypeRotationState()
+    _scene_ladder_done: set[int] = set()
+    _chapter_story_depths_raw = list(_spine.get("chapter_story_depths") or [])
+    _planner_warnings_mut: List[str] = list(_spine.get("chapter_planner_warnings") or [])
+
+    # Story schedule + BookSlotTracker: unconditional as of PR #612.
+    _story_schedule: StorySchedule = build_story_schedule(
+        persona_id=persona_id,
+        topic=topic,
+        seed=seed,
+        repo_root=root,
+        runtime_format=rf_bm,
+        planner_warnings=_planner_warnings_mut,
+    )
 
     # Section packet audit: per-slot source detail (written to enrichment_audit at end).
     _slot_audit: List[Dict[str, Any]] = []
@@ -1327,7 +1900,7 @@ def select_enrichment(
         ch_data = sections_root.get(ch_key)
         if not isinstance(ch_data, dict):
             ch_data = {}
-        reg_lists = _registry_type_lists(ch_data)
+        reg_lists = _registry_type_lists(ch_data, persona_id=pid)
         reg_counters: Dict[str, int] = defaultdict(int)
 
         chapter_index0 = bm_ch.number - 1
@@ -1359,12 +1932,45 @@ def select_enrichment(
             teacher_expand_pool: Optional[List[dict]] = None
             teacher_primary_idx: Optional[int] = None
 
+            if not content and _angle_id_enrich and stype == "ANGLE_DEFINITION":
+                _ad = _try_angle_definition(
+                    persona_id=pid,
+                    topic_id=topic,
+                    angle_id=_angle_id_enrich,
+                    repo_root=root,
+                    fallback_warnings=_angle_fallback_warnings,
+                )
+                if _ad:
+                    content, source, source_id = _ad[0], _ad[1], _ad[2]
+                    atom_id = source_id
+            elif not content and _angle_id_enrich and stype == "ANGLE_CALLBACK":
+                _layer = _angle_layer_by_ch.get(bm_ch.number)
+                if _layer:
+                    _ac = _try_angle_callback(
+                        persona_id=pid,
+                        topic_id=topic,
+                        angle_id=_angle_id_enrich,
+                        layer=int(_layer),
+                        repo_root=root,
+                        fallback_warnings=_angle_fallback_warnings,
+                    )
+                    if _ac:
+                        content, source, source_id = _ac[0], _ac[1], _ac[2]
+                        atom_id = source_id
+                        match_scores["angle_layer"] = int(_layer)
+
             # 0) Story schedule: named-character arcs replace SCENE/STORY slots at section indices 2/5/9.
-            # section_index is 1-based (slot_i + 1). StorySchedule keys: (chapter_number, section_index).
+            # section_index is 1-based. StorySchedule keys: (chapter_number, section_index).
             # STORY check added 2026-04-26 alongside SOMATIC_10_SLOT_GRID sec 2/5/9 SCENE→STORY change:
             # preserves story_schedule routing for personas with story_atoms/anchored coverage (gen_z_professionals × anxiety today);
             # personas without coverage fall through to persona_atoms["STORY"] waterfall (engine bank + generic 859-bank merged).
-            _sec_idx = slot_i + 1
+            #
+            # OPD-142 fix (2026-05-21): PR #1248 (OPD-116/117 angle journey) inserted ANGLE_DEFINITION /
+            # ANGLE_CALLBACK slots into the slot list, breaking the `slot_i + 1 == somatic_section_index`
+            # invariant that PR #669's routing depended on. We now key off the slot's preserved
+            # somatic_section_index (patch_beatmap_angle_journey preserves it; see beatmap_compile.py:209-212).
+            # Fall back to slot_i + 1 only when somatic_section_index is not set (short formats / non-v2).
+            _sec_idx = getattr(slot, "somatic_section_index", 0) or (slot_i + 1)
             if stype in ("SCENE", "STORY") and _sec_idx in SCENE_SECTION_INDICES:
                 _sched_slot = _story_schedule.get(bm_ch.number, _sec_idx)
                 if _sched_slot is not None and _sched_slot.text:
@@ -1484,7 +2090,27 @@ def select_enrichment(
                             audit_counts["slots_from_practice_library"] += 1
                 else:
                     # Non-EXERCISE: stack persona + registry + teacher
-                    # 1) persona
+                    _composite_filled = False
+                    # 0) composite doctrine/reflection (regular mode; OPD-115 Phase B)
+                    if not tid and composite_atoms and stype in _COMPOSITE_SLOT_TYPES:
+                        _cx_hit = _try_composite_content(
+                            composite_atoms,
+                            stype,
+                            seed_key,
+                            topic_id=topic,
+                            persona_id=persona_id,
+                            book_frame=_frame,
+                        )
+                        if _cx_hit:
+                            _add_pieces.append(_cx_hit[0])
+                            _add_sources.append("composite_doctrine")
+                            _add_ids.append(_cx_hit[1])
+                            _composite_filled = True
+                            audit_counts["slots_from_composite"] = (
+                                audit_counts.get("slots_from_composite", 0) + 1
+                            )
+
+                    # 1) persona (skipped when composite pool supplied content)
                     _ap_pool = [
                         _a for _a in (persona_atoms.get(stype) or [])
                         if not _is_doctrine_quarantined(str(_a.get("content") or ""), _frame)
@@ -1495,28 +2121,57 @@ def select_enrichment(
                             book_frame=_frame,
                         )
                     ]
-                    if _ap_pool:
-                        # OPD-109 Phase 3: rotation-aware least-used pick. Falls
-                        # back to hash-anchor (`_deterministic_index`) for the
-                        # tiebreak so seed-determinism is preserved.
-                        _ap_idx = _persona_rotation.pick_index(_ap_pool, f"{seed_key}:persona")
-                        _ap_atom = _ap_pool[_ap_idx]
-                        _ap_content = str(_ap_atom.get("content") or "").strip()
-                        if _ap_content:
-                            _add_pieces.append(_ap_content)
-                            _add_sources.append("persona_atom")
-                            _ap_aid = str(_ap_atom.get("atom_id") or f"persona_{_ap_idx}")
-                            _add_ids.append(_ap_aid)
-                            audit_counts["slots_from_persona"] += 1
-                            # OPD-109 Phase 3: expose pool + primary index for
-                            # the within-slot expansion path (lines 1521+). The
-                            # previous wiring left these as None, so the slot
-                            # never pulled additional persona atoms, fell short
-                            # of `target_words`, and the rendered book stayed
-                            # 24-200w per slot vs the 1200w target.
-                            persona_expand_pool = _ap_pool
-                            persona_primary_idx = _ap_idx
-                            _persona_rotation.register(_ap_aid)
+                    if _ap_pool and not _composite_filled:
+                        if (
+                            stype == "SCENE"
+                            and chapter_index0 not in _scene_ladder_done
+                        ):
+                            from phoenix_v4.planning.chapter_planner import story_depth_for_runtime
+
+                            if chapter_index0 < len(_chapter_story_depths_raw):
+                                _story_d = int(str(_chapter_story_depths_raw[chapter_index0]))
+                            else:
+                                _story_d = story_depth_for_runtime(rf_bm)
+                            _ladder = pick_scene_ladder(
+                                bm_ch.number,
+                                _ap_pool,
+                                _story_d,
+                                _scene_arch_rotation,
+                                seed=seed,
+                                planner_warnings=_planner_warnings_mut,
+                            )
+                            _scene_ladder_done.add(chapter_index0)
+                            if _ladder:
+                                _add_pieces.append(
+                                    "\n\n".join(a.content for a in _ladder if a.content)
+                                )
+                                _add_sources.append("persona_atom")
+                                _ladder_ids = [a.atom_id for a in _ladder if a.atom_id]
+                                _add_ids.append("+".join(_ladder_ids) or "scene_ladder")
+                                match_scores["scene_ladder"] = [
+                                    {"archetype": a.archetype, "depth_level": a.depth_level}
+                                    for a in _ladder
+                                ]
+                                audit_counts["slots_from_persona"] += 1
+                                for a in _ladder:
+                                    if a.atom_id:
+                                        _persona_rotation.register(a.atom_id)
+                        else:
+                            # OPD-109 Phase 3: rotation-aware least-used pick. Falls
+                            # back to hash-anchor (`_deterministic_index`) for the
+                            # tiebreak so seed-determinism is preserved.
+                            _ap_idx = _persona_rotation.pick_index(_ap_pool, f"{seed_key}:persona")
+                            _ap_atom = _ap_pool[_ap_idx]
+                            _ap_content = str(_ap_atom.get("content") or "").strip()
+                            if _ap_content:
+                                _add_pieces.append(_ap_content)
+                                _add_sources.append("persona_atom")
+                                _ap_aid = str(_ap_atom.get("atom_id") or f"persona_{_ap_idx}")
+                                _add_ids.append(_ap_aid)
+                                audit_counts["slots_from_persona"] += 1
+                                persona_expand_pool = _ap_pool
+                                persona_primary_idx = _ap_idx
+                                _persona_rotation.register(_ap_aid)
 
                     # 2) registry (baseline)
                     _ar_hit = _try_registry_variant(reg_lists, stype, reg_counters, seed_key)
@@ -1790,7 +2445,15 @@ def select_enrichment(
             }
             for (ch_i, sec_i), slot in sorted(_story_schedule.assignments.items())
         ],
+        "angle_journey_fallback_warnings": _angle_fallback_warnings,
+        "angle_id": _angle_id_enrich,
+        "angle_layer_by_chapter": _angle_layer_by_ch,
     }
+
+    _out_spine = dict(request.spine_context or {})
+    if _planner_warnings_mut:
+        _existing_warns = list(_out_spine.get("chapter_planner_warnings") or [])
+        _out_spine["chapter_planner_warnings"] = _existing_warns + _planner_warnings_mut
 
     return EnrichedBook(
         schema_version=1,
@@ -1802,7 +2465,7 @@ def select_enrichment(
         chapters=enriched_chapters,
         total_words=total_words,
         enrichment_audit=enrichment_audit,
-        spine_context=dict(request.spine_context or {}),
+        spine_context=_out_spine,
         locale=locale,
     )
 
@@ -2147,6 +2810,7 @@ def _pick_canonical_block_per_section(
     seed: str,
     slot_label: str,
     source_path: Path,
+    reject: Optional[Any] = None,
 ) -> Optional[Dict[str, str]]:
     """Select a single ARC block from a CANONICAL.txt body per (chapter, section).
 
@@ -2158,6 +2822,16 @@ def _pick_canonical_block_per_section(
     slot {slot_label}``. When the file is single-block we just paste it
     silently; when the file has 0 ARC blocks (plain-prose CANONICAL.txt) we
     emit a WARNING so the degraded fallback is visible.
+
+    ``reject``: optional ``predicate(text) -> bool`` (ws_f1_depth_dedup). When
+    supplied and the deterministically-picked block's body is rejected (already
+    used book-wide / fuzzy-duplicate), the picker ROTATES deterministically
+    through the remaining same-arc candidates to find an unused sibling block
+    (multi-block files like HOOK carry dozens of blocks of headroom). If every
+    same-arc candidate is rejected, returns the original deterministic pick so
+    the slot is still filled (completeness over strict no-repeat) — the rare
+    forced-repeat is then caught by the downstream renderer dedupe. ``reject`` is
+    not applied to single-block files (no sibling to rotate to).
     """
     if not raw_text:
         return None
@@ -2194,7 +2868,18 @@ def _pick_canonical_block_per_section(
         f"{book_seed}:enrichment_per_section:{source_path.parent.name}:"
         f"{arc_pos}:phase{phase}:{chapter_index}:{section_index}:{slot_label}"
     )
-    pick = candidates[_deterministic_index(pick_seed, len(candidates))]
+    start = _deterministic_index(pick_seed, len(candidates))
+    pick = candidates[start]
+    if callable(reject):
+        # Rotate deterministically (wrap-around) past rejected siblings so the
+        # same atom is not re-stamped across chapters; keep the first acceptable
+        # block. Falls back to the original pick if all siblings are rejected.
+        n = len(candidates)
+        for i in range(n):
+            cand = candidates[(start + i) % n]
+            if not reject(cand["text"]):
+                pick = cand
+                break
     logger.info(
         "[enrichment_per_section] selected ARC %s %s for chapter %s "
         "section %s slot %s from %s",
@@ -2264,8 +2949,11 @@ def _select_prose_chunk_unique(
     target = 150
     for i in range(len(paras)):
         para = paras[(start_idx + i) % len(paras)]
-        if _norm_ws(para) in book_seen_bodies:
-            continue  # skip paragraphs already used (base or prior depth)
+        # Skip paragraphs already used (base or prior depth) — exact match, plus
+        # (ws_f1_depth_dedup) cross-chapter fuzzy near-duplicates when the
+        # registry carries a fuzzy layer.
+        if _norm_ws(para) in book_seen_bodies or _seen_similar(book_seen_bodies, para):
+            continue
         collected.append(para)
         if sum(len(p.split()) for p in collected) >= target:
             break
@@ -2308,6 +2996,15 @@ def _load_depth_content(
     source_type = source.get("type")
     persona_id = (persona_id or "").strip()
 
+    # ws_f1_depth_dedup: a body is "already used" if it is an EXACT prior body OR
+    # (when book_seen_bodies carries a fuzzy layer) ≥ Jaccard-threshold similar to
+    # one used earlier in the book. Mirrors the register-gate F1 detector so the
+    # selector rotates off bodies that would otherwise form an F1 cluster.
+    def _already_used(body: str) -> bool:
+        if book_seen_bodies is None:
+            return False
+        return _norm_ws(body) in book_seen_bodies or _seen_similar(book_seen_bodies, body)
+
     if source_type == "teacher_atom":
         if not teacher_id:
             return None
@@ -2333,22 +3030,38 @@ def _load_depth_content(
             # required here — but per-section variation in the index is still
             # the right behavior. INFO telemetry mirrors the persona_atom path
             # so audit is consistent.
-            idx = _deterministic_index(
+            start = _deterministic_index(
                 f"{seed}:teacher:{slot_type}:ch{chapter_number}:sec{section_index}",
                 len(atoms),
             )
-            atom_path = atoms[idx]
-            atom_data = _load_yaml(atom_path)
-            content = str(atom_data.get("body") or atom_data.get("content") or "").strip()
-            if content and len(content.split()) > 20:
-                if book_seen_bodies is not None and _norm_ws(content) in book_seen_bodies:
-                    continue  # already used in another chapter — skip to next slot_type
-                logger.info(
-                    "[enrichment_per_section] selected teacher_atom %s for chapter %s "
-                    "section %s slot %s from %s",
-                    atom_path.stem, chapter_number, section_index, slot_type, atom_path,
-                )
-                return content
+            # ws_f1_depth_dedup: rotate deterministically across this slot_type's
+            # atom files so a teacher atom already used in an earlier chapter is
+            # not re-stamped; keep the first unused body. Falls back to the
+            # original pick if every atom here is used (caller then tries the
+            # next slot_type / source).
+            chosen: Optional[str] = None
+            fallback: Optional[Tuple[Path, str]] = None
+            for off in range(len(atoms)):
+                atom_path = atoms[(start + off) % len(atoms)]
+                atom_data = _load_yaml(atom_path)
+                content = str(atom_data.get("body") or atom_data.get("content") or "").strip()
+                if not (content and len(content.split()) > 20):
+                    continue
+                if fallback is None:
+                    fallback = (atom_path, content)
+                if not _already_used(content):
+                    chosen = content
+                    logger.info(
+                        "[enrichment_per_section] selected teacher_atom %s for chapter %s "
+                        "section %s slot %s from %s",
+                        atom_path.stem, chapter_number, section_index, slot_type, atom_path,
+                    )
+                    break
+            if chosen is not None:
+                return chosen
+            # Every atom in this slot_type is already used — try the next
+            # slot_type rather than forcing a duplicate here.
+            continue
         return None
 
     if source_type == "persona_atom":
@@ -2380,11 +3093,12 @@ def _load_depth_content(
                 seed=f"{seed}:depth_pa:{slot_type}",
                 slot_label=f"depth_pa:{slot_type}",
                 source_path=canonical,
+                reject=_already_used,  # ws_f1_depth_dedup: rotate off used siblings
             )
             if block is not None:
                 btext = block["text"]
-                if book_seen_bodies is not None and _norm_ws(btext) in book_seen_bodies:
-                    continue  # already used — skip to next slot_type
+                if _already_used(btext):
+                    continue  # all siblings used — skip to next slot_type
                 return btext
             # Plain-prose CANONICAL.txt without ARC headers — fall back to the
             # legacy prose-chunk path so we never go silent (a WARNING was
@@ -2396,7 +3110,7 @@ def _load_depth_content(
                 book_seen_bodies,
             )
             if chunk:
-                if book_seen_bodies is not None and _norm_ws(chunk) in book_seen_bodies:
+                if _already_used(chunk):
                     continue
                 return chunk
         topic_dir = repo_root / "atoms" / persona_id / topic
@@ -2423,10 +3137,11 @@ def _load_depth_content(
                     seed=f"{seed}:depth_eng:{engine_dir.name}",
                     slot_label=f"depth_eng:{engine_dir.name}",
                     source_path=canonical,
+                    reject=_already_used,  # ws_f1_depth_dedup: rotate off used siblings
                 )
                 if block is not None:
                     btext = block["text"]
-                    if book_seen_bodies is not None and _norm_ws(btext) in book_seen_bodies:
+                    if _already_used(btext):
                         continue
                     return btext
                 # Plain-prose engine CANONICAL.txt — degraded fallback.
@@ -2437,7 +3152,7 @@ def _load_depth_content(
                     book_seen_bodies,
                 )
                 if chunk:
-                    if book_seen_bodies is not None and _norm_ws(chunk) in book_seen_bodies:
+                    if _already_used(chunk):
                         continue
                     return chunk
         return None
@@ -2460,7 +3175,25 @@ def _load_depth_content(
                 continue
             if sec_data.get("type") not in section_types:
                 continue
+            # DEFECT 4 (cross-persona bleed): skip sections authored for a
+            # different persona than the spine. This depth-resolver does not go
+            # through _registry_type_lists, so the persona filter is applied here
+            # directly. On no matching-persona section we return None and the
+            # caller falls through to persona_atom/teacher.
+            if persona_id and not _registry_persona_matches(
+                _registry_section_persona(sec_data), persona_id
+            ):
+                logger.warning(
+                    "DEFECT4: skipping depth registry section %s (persona=%r) — "
+                    "foreign to spine persona_id=%r.",
+                    _sec_key, _registry_section_persona(sec_data), persona_id,
+                )
+                continue
             variants = sec_data.get("variants", [])
+            # ws_f1_depth_dedup: collect all preference-matching variant bodies,
+            # then prefer one NOT already used book-wide; fall back to the first
+            # match so the slot is still filled.
+            reg_first: Optional[str] = None
             for pref in variant_preference:
                 pref_l = pref.lower()
                 for v in variants:
@@ -2470,8 +3203,16 @@ def _load_depth_content(
                     vid = str(v.get("variant_id", "")).lower()
                     if pref_l in fam or pref_l in vid:
                         content = str(v.get("content") or "").strip()
+                        # DEFECT 4 fix point (3): never return unauthored stubs.
+                        if _REGISTRY_PLACEHOLDER_RE.match(content):
+                            continue
                         if content and len(content.split()) > 20:
-                            return content
+                            if reg_first is None:
+                                reg_first = content
+                            if not _already_used(content):
+                                return content
+            if reg_first is not None:
+                return reg_first
         return None
 
     if source_type == "component_template":
@@ -2484,13 +3225,27 @@ def _load_depth_content(
         items = templates.get(pool, [])
         if not items:
             return None
-        idx = _deterministic_index(f"{seed}:template:{pool}", len(items))
-        item = items[idx]
-        if isinstance(item, str):
-            return item.strip()
-        if isinstance(item, dict):
-            return str(item.get("text") or item.get("content") or "").strip() or None
-        return None
+
+        def _item_text(it: Any) -> Optional[str]:
+            if isinstance(it, str):
+                return it.strip() or None
+            if isinstance(it, dict):
+                return str(it.get("text") or it.get("content") or "").strip() or None
+            return None
+
+        # ws_f1_depth_dedup: rotate across the pool from the deterministic start
+        # so a template body used in an earlier chapter is not re-stamped.
+        start = _deterministic_index(f"{seed}:template:{pool}", len(items))
+        first: Optional[str] = None
+        for off in range(len(items)):
+            txt = _item_text(items[(start + off) % len(items)])
+            if not txt:
+                continue
+            if first is None:
+                first = txt
+            if not _already_used(txt):
+                return txt
+        return first
 
     if source_type == "phoenix_standard":
         rel = source.get("source_path", "")
@@ -2504,8 +3259,16 @@ def _load_depth_content(
         # Include chapter_number in seed so different chapters pick different blocks
         # from the pool (integration_landing has 7 blocks; 12 chapters → some repeats
         # but cross-chapter dedup is better than all chapters getting block 0).
-        idx = _deterministic_index(f"{seed}:phoenix:{chapter_number}", len(blocks))
-        return blocks[idx]
+        # ws_f1_depth_dedup: rotate across blocks to prefer an unused one.
+        start = _deterministic_index(f"{seed}:phoenix:{chapter_number}", len(blocks))
+        first = None
+        for off in range(len(blocks)):
+            blk = blocks[(start + off) % len(blocks)]
+            if first is None:
+                first = blk
+            if not _already_used(blk):
+                return blk
+        return first
 
     if source_type == "exercise_atom":
         rel = source.get("source_path", "")
@@ -2515,9 +3278,20 @@ def _load_depth_content(
         atoms = sorted(path.glob("*.yaml"))
         if not atoms:
             return None
-        idx = _deterministic_index(f"{seed}:exercise", len(atoms))
-        atom_data = _load_yaml(atoms[idx])
-        return str(atom_data.get("body") or atom_data.get("content") or "").strip() or None
+        # ws_f1_depth_dedup: rotate across exercise atoms so the same EXERCISE
+        # body ("Just thirty seconds…") is not re-injected across all chapters.
+        start = _deterministic_index(f"{seed}:exercise", len(atoms))
+        first = None
+        for off in range(len(atoms)):
+            atom_data = _load_yaml(atoms[(start + off) % len(atoms)])
+            body = str(atom_data.get("body") or atom_data.get("content") or "").strip()
+            if not body:
+                continue
+            if first is None:
+                first = body
+            if not _already_used(body):
+                return body
+        return first
 
     if source_type == "practice_library":
         try:
@@ -2547,8 +3321,16 @@ def _load_depth_content(
         pool = long_strings or strings
         if not pool:
             return None
-        idx = _deterministic_index(f"{seed}:exercise_bridge", len(pool))
-        return pool[idx]
+        # ws_f1_depth_dedup: rotate across the bridge-template pool.
+        start = _deterministic_index(f"{seed}:exercise_bridge", len(pool))
+        first = None
+        for off in range(len(pool)):
+            cand = pool[(start + off) % len(pool)]
+            if first is None:
+                first = cand
+            if not _already_used(cand):
+                return cand
+        return first
 
     return None
 
@@ -2654,8 +3436,13 @@ def _fill_chapter_depth(
                 _depth_seed = f"depth:{topic}:{chapter.number}:{module_name}"
                 trimmed = _aw(trimmed, teacher_id=tid, section_type=module_name, seed=_depth_seed, spine_context=enriched_book.spine_context)
 
+            slot_type_out = (
+                "EXERCISE"
+                if module_name == "practice_scaffold"
+                else f"DEPTH_{module_name.upper()}"
+            )
             depth_slot = EnrichedSlot(
-                slot_type=f"DEPTH_{module_name.upper()}",
+                slot_type=slot_type_out,
                 content=trimmed,
                 source=f"depth_module:{module_name}:{source.get('type')}",
                 source_id=f"depth_{module_name}_{chapter.number}_{pass_label}",
@@ -2753,13 +3540,43 @@ def apply_depth_pass(
     depth_budget_starvation: List[Dict[str, Any]] = []
     audit_list: List[Dict[str, Any]] = enriched_book.enrichment_audit["depth_modules_added"]
 
-    # Per-chapter paragraph dedup: each chapter keeps its own set of used paragraph
-    # bodies (across all depth rounds + passes). This prevents the same source
-    # paragraph from appearing multiple times in the SAME chapter (which causes
-    # scene anchor density violations when the same phrase repeats in many paragraphs).
-    # Different chapters CAN reuse the same source paragraphs — cross-chapter
-    # duplicates are handled by _dedup_repeated_blocks in clean_for_delivery.
-    _chapter_seen_bodies: Dict[int, set] = {}
+    # BOOK-WIDE paragraph dedup (ws_f1_depth_dedup_20260615): one registry shared
+    # across ALL chapters + depth rounds + passes. This is the F1 fix.
+    #
+    # Previously this was a PER-CHAPTER set ({chapter.number: set()}), so the depth
+    # selector never saw that an earlier chapter had already injected a given atom
+    # body — the same HOOK/EXERCISE/doctrine block was re-stamped in all 12 chapters
+    # (⑤ leverB attribution: 223/224 deep-tier F1 clusters originate here). The old
+    # comment claimed "cross-chapter duplicates are handled by _dedup_repeated_blocks
+    # in clean_for_delivery", but that downstream pass is chapter-scoped + exact-match
+    # and is defeated by the per-chapter trailing-clause variation the composer adds,
+    # so the duplicates survive into the rendered book and fire F1.
+    #
+    # _SeenBodies is book-wide AND fuzzy: a candidate body that is ≥ Jaccard-threshold
+    # similar (mirrors the register-gate F1 detector) to one already used anywhere in
+    # the book is rejected, so the selector rotates to an unused sibling ARC block /
+    # variant (HOOK has 88 blocks of headroom) — book completeness is preserved by
+    # filling with DIFFERENT content, not by dropping the slot. Intra-chapter
+    # repetition is still suppressed as a side effect (a body used in this chapter is
+    # in the same book-wide registry). Short bodies stay exempt (see _SeenBodies).
+    _book_seen_bodies = _SeenBodies()
+
+    # Pre-seed the registry with the bodies select_enrichment already placed in every
+    # chapter (HOOK / STORY / base slots). Without this, the depth rotation could
+    # pick a sibling block that is itself near-duplicate to a BASE paragraph (which
+    # the depth pass never registered), trading a depth re-injection for a fresh
+    # base↔depth F1 pair. Seeding the existing content first makes the depth pass
+    # avoid colliding with what is already in the book — paragraph-level so multi-atom
+    # slots are each compared. Only the fuzzy index is seeded (note, not add): exact
+    # base strings must stay selectable by depth where intended; we only steer the
+    # rotation away from near-duplicates.
+    for _ch in enriched_book.chapters:
+        for _slot in _ch.slots:
+            body = _slot.content or ""
+            for _para in re.split(r"\n{2,}", body):
+                _para = _para.strip()
+                if _para:
+                    _book_seen_bodies.note(_para)
 
     for _depth_round in range(depth_rounds):
 
@@ -2831,7 +3648,7 @@ def apply_depth_pass(
                 pass_label=f"p1r{_depth_round}",
                 audit_list=audit_list,
                 deficit_floor=deficit_floor,
-                book_seen_bodies=_chapter_seen_bodies.setdefault(chapter.number, set()),
+                book_seen_bodies=_book_seen_bodies,
                 locale=locale,
             )
             reservation_used += added
@@ -2900,7 +3717,7 @@ def apply_depth_pass(
                 pass_label=f"p2r{_depth_round}",
                 audit_list=audit_list,
                 deficit_floor=deficit_floor,
-                book_seen_bodies=_chapter_seen_bodies.setdefault(chapter.number, set()),
+                book_seen_bodies=_book_seen_bodies,
                 locale=locale,
             )
             depth_words_added_by_chapter[chapter.number] += added

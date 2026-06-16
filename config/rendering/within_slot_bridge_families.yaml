@@ -12,6 +12,17 @@
 # 10-13 variants instead of 4-5. The renderer prefers variants not yet used
 # in the book and never reuses a variant within a single chapter.
 #
+# OPD-112 (2026-05-20): every variant tagged with `next_atom_expectation:`
+# so the bridge selector refuses bridges that promise content the next
+# atom does not actually deliver. Operator symptom: "this is Ahjan's
+# framework" followed by content that did not sound like an Ahjan
+# teaching. See chapter_composer._classify_atom + _bridge_within_slot
+# for the filter logic. Categories:
+#   teacher_teaching, named_story, mechanism_paragraph, body_anchor,
+#   reflective_pivot, scene_vignette, practical_takeaway, any
+# A missing field defaults to "any" (backward-compatible — never break
+# an un-annotated YAML; the filter just treats the bridge as universal).
+#
 # Selection: deterministic, keyed by (chapter_index, slot_type, atom_pair_index)
 # tiebreaker. Rotation state is a per-render counter keyed by (slot_type,
 # shape_key, variant_idx). No paid LLM calls. Templates are static strings;
@@ -23,6 +34,8 @@
 #     <SLOT_TYPE>:           # canonical slot type uppercase
 #       <shape_label>:       # rotation bucket (e.g. "noticing_continuation")
 #         - text: "<sentence>"
+#           next_atom_expectation: <category>   # OPD-112 — content-class
+#                                               # promised by this bridge
 #           stems: [<stem-1>, ...]   # anti-reuse stems
 #           roots: [<root-1>, ...]   # anti-reuse roots
 #
@@ -44,6 +57,7 @@ slot_families:
   STORY:
     same_pattern_different_face:
       - text: "The same pattern shows up in a different room."
+        next_atom_expectation: scene_vignette
         stems:
         - pattern travels across scenes
         roots:
@@ -51,6 +65,7 @@ slot_families:
         - room
         - scene
       - text: "Watch how the same shape lands in another life."
+        next_atom_expectation: scene_vignette
         stems:
         - pattern travels across scenes
         roots:
@@ -58,6 +73,7 @@ slot_families:
         - life
         - pattern
       - text: "Another version of this turn happens at a different hour."
+        next_atom_expectation: scene_vignette
         stems:
         - pattern travels across scenes
         roots:
@@ -65,6 +81,7 @@ slot_families:
         - hour
         - version
       - text: "Here is the same beat with new furniture around it."
+        next_atom_expectation: scene_vignette
         stems:
         - pattern travels across scenes
         roots:
@@ -72,6 +89,7 @@ slot_families:
         - furniture
         - pattern
       - text: "Different context, same body response."
+        next_atom_expectation: scene_vignette
         stems:
         - pattern travels across scenes
         roots:
@@ -79,6 +97,7 @@ slot_families:
         - body
         - response
       - text: "A second person walks into this exact moment and meets it the same way."
+        next_atom_expectation: scene_vignette
         stems:
         - pattern travels across scenes
         roots:
@@ -86,6 +105,7 @@ slot_families:
         - moment
         - same
       - text: "Trade the desk for a kitchen counter. The pattern still arrives on cue."
+        next_atom_expectation: scene_vignette
         stems:
         - pattern travels across scenes
         roots:
@@ -93,6 +113,7 @@ slot_families:
         - kitchen
         - cue
       - text: "Move it to a Sunday morning. The script reads the same."
+        next_atom_expectation: scene_vignette
         stems:
         - pattern travels across scenes
         roots:
@@ -100,6 +121,7 @@ slot_families:
         - script
         - same
       - text: "Pick any face in the room. The wave hits each one in turn."
+        next_atom_expectation: scene_vignette
         stems:
         - pattern travels across scenes
         roots:
@@ -107,6 +129,7 @@ slot_families:
         - wave
         - room
       - text: "Same machinery, different operator."
+        next_atom_expectation: scene_vignette
         stems:
         - pattern travels across scenes
         roots:
@@ -114,6 +137,7 @@ slot_families:
         - operator
         - different
       - text: "The pattern is portable. Watch it set up shop in a new building."
+        next_atom_expectation: scene_vignette
         stems:
         - pattern travels across scenes
         roots:
@@ -121,6 +145,7 @@ slot_families:
         - building
         - shop
       - text: "Switch the lighting and the soundtrack. The footwork stays."
+        next_atom_expectation: scene_vignette
         stems:
         - pattern travels across scenes
         roots:
@@ -128,6 +153,7 @@ slot_families:
         - soundtrack
         - footwork
       - text: "Hand the same script to a colleague. They hit the same marks."
+        next_atom_expectation: scene_vignette
         stems:
         - pattern travels across scenes
         roots:
@@ -135,6 +161,7 @@ slot_families:
         - marks
         - hit
       - text: "Send the pattern out into traffic. It lands in the next car."
+        next_atom_expectation: scene_vignette
         stems:
         - pattern travels across scenes
         roots:
@@ -142,6 +169,7 @@ slot_families:
         - next
         - car
       - text: "Same opening, different month. The body remembers its part."
+        next_atom_expectation: scene_vignette
         stems:
         - pattern travels across scenes
         roots:
@@ -149,6 +177,7 @@ slot_families:
         - remembers
         - part
       - text: "Plant it in a different city. It still grows the same fruit."
+        next_atom_expectation: scene_vignette
         stems:
         - pattern travels across scenes
         roots:
@@ -156,6 +185,7 @@ slot_families:
         - city
         - fruit
       - text: "Run the experiment at midnight. The reading does not move."
+        next_atom_expectation: scene_vignette
         stems:
         - pattern travels across scenes
         roots:
@@ -164,6 +194,7 @@ slot_families:
         - reading
     quiet_pivot:
       - text: "Stay with that picture for a moment, then watch this next one."
+        next_atom_expectation: scene_vignette
         stems:
         - pause and observe
         roots:
@@ -171,6 +202,7 @@ slot_families:
         - moment
         - watch
       - text: "Sit with what just happened. Then notice the next scene."
+        next_atom_expectation: scene_vignette
         stems:
         - pause and observe
         roots:
@@ -178,6 +210,7 @@ slot_families:
         - notice
         - scene
       - text: "Hold that frame. A close cousin of it follows."
+        next_atom_expectation: scene_vignette
         stems:
         - pause and observe
         roots:
@@ -185,6 +218,7 @@ slot_families:
         - cousin
         - close
       - text: "Pause there. Now follow the thread into the next moment."
+        next_atom_expectation: scene_vignette
         stems:
         - pause and observe
         roots:
@@ -192,6 +226,7 @@ slot_families:
         - moment
         - pause
       - text: "Let that scene finish breathing before the next one arrives."
+        next_atom_expectation: scene_vignette
         stems:
         - pause and observe
         roots:
@@ -199,6 +234,7 @@ slot_families:
         - arrives
         - finish
       - text: "One slow blink. Now turn your attention to the next image."
+        next_atom_expectation: scene_vignette
         stems:
         - pause and observe
         roots:
@@ -206,6 +242,7 @@ slot_families:
         - attention
         - image
       - text: "Rest your eyes on that scene. Another loads in behind it."
+        next_atom_expectation: scene_vignette
         stems:
         - pause and observe
         roots:
@@ -213,6 +250,7 @@ slot_families:
         - eyes
         - loads
       - text: "Mark that scene with a small flag. Move forward."
+        next_atom_expectation: scene_vignette
         stems:
         - pause and observe
         roots:
@@ -220,6 +258,7 @@ slot_families:
         - flag
         - forward
       - text: "Stop the camera there. Restart it at a slightly later beat."
+        next_atom_expectation: scene_vignette
         stems:
         - pause and observe
         roots:
@@ -227,6 +266,7 @@ slot_families:
         - restart
         - beat
       - text: "Catch your breath inside that pause. Now the next one."
+        next_atom_expectation: scene_vignette
         stems:
         - pause and observe
         roots:
@@ -234,6 +274,7 @@ slot_families:
         - pause
         - breath
       - text: "Let the scene cool for one heartbeat before the next."
+        next_atom_expectation: scene_vignette
         stems:
         - pause and observe
         roots:
@@ -241,6 +282,7 @@ slot_families:
         - heartbeat
         - scene
       - text: "Park there for a second. The next image is right around the corner."
+        next_atom_expectation: scene_vignette
         stems:
         - pause and observe
         roots:
@@ -248,6 +290,7 @@ slot_families:
         - corner
         - second
       - text: "Take a slow breath inside that picture, then keep walking."
+        next_atom_expectation: scene_vignette
         stems:
         - pause and observe
         roots:
@@ -255,6 +298,7 @@ slot_families:
         - walking
         - inside
       - text: "Stay there until your eyes adjust. Then the next moment."
+        next_atom_expectation: scene_vignette
         stems:
         - pause and observe
         roots:
@@ -262,6 +306,7 @@ slot_families:
         - eyes
         - until
       - text: "Wait a beat. The room rearranges itself for the next shot."
+        next_atom_expectation: scene_vignette
         stems:
         - pause and observe
         roots:
@@ -269,6 +314,7 @@ slot_families:
         - room
         - wait
       - text: "Stay close to that scene. The follow-up is one inch ahead."
+        next_atom_expectation: scene_vignette
         stems:
         - pause and observe
         roots:
@@ -277,6 +323,7 @@ slot_families:
         - ahead
     contrast_lift:
       - text: "Now watch what shifts when the trigger comes from a different angle."
+        next_atom_expectation: scene_vignette
         stems:
         - cue from new angle
         roots:
@@ -284,6 +331,7 @@ slot_families:
         - trigger
         - angle
       - text: "Same body. Different door. Watch what changes."
+        next_atom_expectation: scene_vignette
         stems:
         - cue from new angle
         roots:
@@ -291,6 +339,7 @@ slot_families:
         - door
         - change
       - text: "Turn the camera. The same alarm sounds from another angle."
+        next_atom_expectation: scene_vignette
         stems:
         - cue from new angle
         roots:
@@ -298,6 +347,7 @@ slot_families:
         - alarm
         - angle
       - text: "Compare that with what happens when the cue is softer."
+        next_atom_expectation: scene_vignette
         stems:
         - cue from new angle
         roots:
@@ -305,6 +355,7 @@ slot_families:
         - cue
         - soft
       - text: "Crank the volume down on the trigger. The reflex still fires."
+        next_atom_expectation: scene_vignette
         stems:
         - cue from new angle
         roots:
@@ -312,6 +363,7 @@ slot_families:
         - reflex
         - crank
       - text: "Send the same signal at half strength. Watch the response stay full."
+        next_atom_expectation: scene_vignette
         stems:
         - cue from new angle
         roots:
@@ -319,6 +371,7 @@ slot_families:
         - strength
         - response
       - text: "Now reverse the polarity. The body still pays the same price."
+        next_atom_expectation: scene_vignette
         stems:
         - cue from new angle
         roots:
@@ -326,6 +379,7 @@ slot_families:
         - polarity
         - price
       - text: "Place the cue inside a friendly room. The alarm reads it the same."
+        next_atom_expectation: scene_vignette
         stems:
         - cue from new angle
         roots:
@@ -333,6 +387,7 @@ slot_families:
         - room
         - alarm
       - text: "Change the messenger. The message arrives intact."
+        next_atom_expectation: scene_vignette
         stems:
         - cue from new angle
         roots:
@@ -340,6 +395,7 @@ slot_families:
         - message
         - change
       - text: "Set the same scene in slow motion. The pulse beat is identical."
+        next_atom_expectation: scene_vignette
         stems:
         - cue from new angle
         roots:
@@ -347,6 +403,7 @@ slot_families:
         - motion
         - pulse
       - text: "Walk the cue into a kinder hallway. The body still flinches."
+        next_atom_expectation: scene_vignette
         stems:
         - cue from new angle
         roots:
@@ -354,6 +411,7 @@ slot_families:
         - kinder
         - flinches
       - text: "Try the same setup with one comfort added. Watch what survives."
+        next_atom_expectation: scene_vignette
         stems:
         - cue from new angle
         roots:
@@ -361,6 +419,7 @@ slot_families:
         - survives
         - setup
       - text: "Quiet the trigger by half. The pulse note still plays."
+        next_atom_expectation: scene_vignette
         stems:
         - cue from new angle
         roots:
@@ -368,6 +427,7 @@ slot_families:
         - half
         - plays
       - text: "Hand the same cue to a calmer day. The reaction shows up anyway."
+        next_atom_expectation: scene_vignette
         stems:
         - cue from new angle
         roots:
@@ -375,6 +435,7 @@ slot_families:
         - day
         - anyway
       - text: "Soften the lighting on the same beat. The chest interprets it as before."
+        next_atom_expectation: scene_vignette
         stems:
         - cue from new angle
         roots:
@@ -382,6 +443,7 @@ slot_families:
         - lighting
         - interprets
       - text: "Rotate the angle by ten degrees. The chest does not care."
+        next_atom_expectation: scene_vignette
         stems:
         - cue from new angle
         roots:
@@ -392,6 +454,7 @@ slot_families:
   REFLECTION:
     deepen_the_seeing:
       - text: "There is another layer to this, sitting just under the first."
+        next_atom_expectation: reflective_pivot
         stems:
         - layer underneath
         roots:
@@ -399,6 +462,7 @@ slot_families:
         - first
         - under
       - text: "Look one notch deeper than the surface of that."
+        next_atom_expectation: reflective_pivot
         stems:
         - layer underneath
         roots:
@@ -406,6 +470,7 @@ slot_families:
         - deeper
         - surface
       - text: "Beneath that recognition, a second one is waiting."
+        next_atom_expectation: reflective_pivot
         stems:
         - layer underneath
         roots:
@@ -413,6 +478,7 @@ slot_families:
         - recognition
         - waiting
       - text: "The seeing has a downstairs. Step into it."
+        next_atom_expectation: reflective_pivot
         stems:
         - layer underneath
         roots:
@@ -420,6 +486,7 @@ slot_families:
         - step
         - seeing
       - text: "What looks like one piece is actually two, stacked."
+        next_atom_expectation: reflective_pivot
         stems:
         - layer underneath
         roots:
@@ -427,6 +494,7 @@ slot_families:
         - stacked
         - actually
       - text: "Tilt your head. A second pattern sits behind the first."
+        next_atom_expectation: reflective_pivot
         stems:
         - layer underneath
         roots:
@@ -434,6 +502,7 @@ slot_families:
         - head
         - behind
       - text: "Now read what is printed under the first layer of ink."
+        next_atom_expectation: reflective_pivot
         stems:
         - layer underneath
         roots:
@@ -441,6 +510,7 @@ slot_families:
         - ink
         - read
       - text: "Behind that observation, another one is keeping it company."
+        next_atom_expectation: reflective_pivot
         stems:
         - layer underneath
         roots:
@@ -448,6 +518,7 @@ slot_families:
         - company
         - keeping
       - text: "Open the door at the back of that thought."
+        next_atom_expectation: reflective_pivot
         stems:
         - layer underneath
         roots:
@@ -455,6 +526,7 @@ slot_families:
         - back
         - thought
       - text: "Trace what holds that recognition up. There is a floor beneath it."
+        next_atom_expectation: reflective_pivot
         stems:
         - layer underneath
         roots:
@@ -462,6 +534,7 @@ slot_families:
         - trace
         - floor
       - text: "Sit lower in the chair. A second view opens from there."
+        next_atom_expectation: reflective_pivot
         stems:
         - layer underneath
         roots:
@@ -469,6 +542,7 @@ slot_families:
         - view
         - lower
       - text: "Peel back the obvious. Something else lives one inch down."
+        next_atom_expectation: reflective_pivot
         stems:
         - layer underneath
         roots:
@@ -476,6 +550,7 @@ slot_families:
         - obvious
         - inch
       - text: "Crouch a little closer. The grain of the wood becomes visible."
+        next_atom_expectation: reflective_pivot
         stems:
         - layer underneath
         roots:
@@ -483,6 +558,7 @@ slot_families:
         - grain
         - wood
       - text: "Listen for the part of this you have not said yet."
+        next_atom_expectation: reflective_pivot
         stems:
         - layer underneath
         roots:
@@ -490,6 +566,7 @@ slot_families:
         - part
         - said
       - text: "Press in on the seam. A subtler reading opens."
+        next_atom_expectation: reflective_pivot
         stems:
         - layer underneath
         roots:
@@ -497,6 +574,7 @@ slot_families:
         - subtler
         - reading
       - text: "Stand still and the next ring of the observation comes into focus."
+        next_atom_expectation: reflective_pivot
         stems:
         - layer underneath
         roots:
@@ -504,6 +582,7 @@ slot_families:
         - focus
         - still
       - text: "Beyond the first take, a quieter reading is waiting."
+        next_atom_expectation: reflective_pivot
         stems:
         - layer underneath
         roots:
@@ -511,6 +590,7 @@ slot_families:
         - reading
         - take
       - text: "Carry the seeing one room further into the house."
+        next_atom_expectation: reflective_pivot
         stems:
         - layer underneath
         roots:
@@ -518,6 +598,7 @@ slot_families:
         - room
         - further
       - text: "Set the obvious aside. Now consider the smaller signal underneath."
+        next_atom_expectation: reflective_pivot
         stems:
         - layer underneath
         roots:
@@ -525,6 +606,7 @@ slot_families:
         - signal
         - aside
       - text: "Reach past the headline and find the footnote."
+        next_atom_expectation: reflective_pivot
         stems:
         - layer underneath
         roots:
@@ -533,6 +615,7 @@ slot_families:
         - reach
     name_the_mechanism:
       - text: "The mechanism behind this pattern is small and stubborn."
+        next_atom_expectation: mechanism_paragraph
         stems:
         - mechanism name
         roots:
@@ -540,6 +623,7 @@ slot_families:
         - pattern
         - stubborn
       - text: "The engine underneath this is simpler than it looks."
+        next_atom_expectation: mechanism_paragraph
         stems:
         - mechanism name
         roots:
@@ -547,6 +631,7 @@ slot_families:
         - simple
         - underneath
       - text: "What drives this is a single body habit, repeated."
+        next_atom_expectation: mechanism_paragraph
         stems:
         - mechanism name
         roots:
@@ -554,6 +639,7 @@ slot_families:
         - habit
         - body
       - text: "Underneath the story, one nervous-system reflex is doing the work."
+        next_atom_expectation: mechanism_paragraph
         stems:
         - mechanism name
         roots:
@@ -561,6 +647,7 @@ slot_families:
         - story
         - work
       - text: "Strip the costume off. The motor underneath is small and predictable."
+        next_atom_expectation: mechanism_paragraph
         stems:
         - mechanism name
         roots:
@@ -568,6 +655,7 @@ slot_families:
         - motor
         - predictable
       - text: "Boil this down to its parts. There is a small machine inside."
+        next_atom_expectation: mechanism_paragraph
         stems:
         - mechanism name
         roots:
@@ -575,6 +663,7 @@ slot_families:
         - parts
         - machine
       - text: "One feedback loop runs the whole show."
+        next_atom_expectation: mechanism_paragraph
         stems:
         - mechanism name
         roots:
@@ -582,6 +671,7 @@ slot_families:
         - loop
         - show
       - text: "Trace it back to the first move. That move is the lever."
+        next_atom_expectation: mechanism_paragraph
         stems:
         - mechanism name
         roots:
@@ -589,6 +679,7 @@ slot_families:
         - move
         - trace
       - text: "If you slow this down, you can see the gears turn one click at a time."
+        next_atom_expectation: mechanism_paragraph
         stems:
         - mechanism name
         roots:
@@ -596,6 +687,7 @@ slot_families:
         - click
         - slow
       - text: "Name the small habit that keeps the rest running."
+        next_atom_expectation: mechanism_paragraph
         stems:
         - mechanism name
         roots:
@@ -603,6 +695,7 @@ slot_families:
         - keeps
         - small
       - text: "The whole thing rests on one cue and one response."
+        next_atom_expectation: mechanism_paragraph
         stems:
         - mechanism name
         roots:
@@ -610,6 +703,7 @@ slot_families:
         - cue
         - response
       - text: "Pin down the trigger and the cycle becomes visible."
+        next_atom_expectation: mechanism_paragraph
         stems:
         - mechanism name
         roots:
@@ -617,6 +711,7 @@ slot_families:
         - cycle
         - visible
       - text: "Underneath the noise, a smaller pulley is doing the lifting."
+        next_atom_expectation: mechanism_paragraph
         stems:
         - mechanism name
         roots:
@@ -624,6 +719,7 @@ slot_families:
         - lifting
         - noise
       - text: "Follow the wire back to the wall. There is the source."
+        next_atom_expectation: mechanism_paragraph
         stems:
         - mechanism name
         roots:
@@ -631,6 +727,7 @@ slot_families:
         - wall
         - source
       - text: "The whole reaction sits on a tiny pivot. Find the pivot."
+        next_atom_expectation: mechanism_paragraph
         stems:
         - mechanism name
         roots:
@@ -638,6 +735,7 @@ slot_families:
         - tiny
         - reaction
       - text: "There is one rule the system keeps following without asking."
+        next_atom_expectation: mechanism_paragraph
         stems:
         - mechanism name
         roots:
@@ -645,6 +743,7 @@ slot_families:
         - following
         - system
       - text: "Quiet the explanation. Watch the small switch flip."
+        next_atom_expectation: mechanism_paragraph
         stems:
         - mechanism name
         roots:
@@ -652,6 +751,7 @@ slot_families:
         - flip
         - quiet
       - text: "All the moving parts answer to a single hidden setting."
+        next_atom_expectation: mechanism_paragraph
         stems:
         - mechanism name
         roots:
@@ -659,6 +759,7 @@ slot_families:
         - hidden
         - setting
       - text: "A simple if-then is running the whole performance."
+        next_atom_expectation: mechanism_paragraph
         stems:
         - mechanism name
         roots:
@@ -666,6 +767,7 @@ slot_families:
         - simple
         - running
       - text: "The pattern survives because one micro-step keeps repeating."
+        next_atom_expectation: mechanism_paragraph
         stems:
         - mechanism name
         roots:
@@ -674,6 +776,7 @@ slot_families:
         - repeating
     permission_to_pause:
       - text: "It is enough to recognize this much. Sit with it."
+        next_atom_expectation: any
         stems:
         - permission to pause
         roots:
@@ -681,6 +784,7 @@ slot_families:
         - sit
         - recognize
       - text: "Fixing it is not the assignment yet. Seeing it is the whole task."
+        next_atom_expectation: any
         stems:
         - permission to pause
         roots:
@@ -688,6 +792,7 @@ slot_families:
         - assignment
         - whole
       - text: "Naming the pattern is already work. Let it land before the next piece."
+        next_atom_expectation: any
         stems:
         - permission to pause
         roots:
@@ -695,6 +800,7 @@ slot_families:
         - land
         - work
       - text: "Pause. The seeing is enough for this breath."
+        next_atom_expectation: any
         stems:
         - permission to pause
         roots:
@@ -702,6 +808,7 @@ slot_families:
         - breath
         - enough
       - text: "Nothing more is required right now. The noticing carries weight on its own."
+        next_atom_expectation: any
         stems:
         - permission to pause
         roots:
@@ -709,6 +816,7 @@ slot_families:
         - noticing
         - weight
       - text: "Rest at this stop. You do not have to march past it."
+        next_atom_expectation: any
         stems:
         - permission to pause
         roots:
@@ -716,6 +824,7 @@ slot_families:
         - stop
         - march
       - text: "Let the recognition land before you ask it to do anything."
+        next_atom_expectation: any
         stems:
         - permission to pause
         roots:
@@ -723,6 +832,7 @@ slot_families:
         - land
         - anything
       - text: "Spending one quiet beat here is not a delay. It is the work."
+        next_atom_expectation: any
         stems:
         - permission to pause
         roots:
@@ -730,6 +840,7 @@ slot_families:
         - beat
         - delay
       - text: "Drop the urge to move on. Stay one extra moment."
+        next_atom_expectation: any
         stems:
         - permission to pause
         roots:
@@ -737,6 +848,7 @@ slot_families:
         - urge
         - extra
       - text: "If the seeing is small, that is fine. Small still counts."
+        next_atom_expectation: any
         stems:
         - permission to pause
         roots:
@@ -744,6 +856,7 @@ slot_families:
         - fine
         - counts
       - text: "You have permission to stop here for a breath."
+        next_atom_expectation: any
         stems:
         - permission to pause
         roots:
@@ -751,6 +864,7 @@ slot_families:
         - stop
         - breath
       - text: "No next step is owed. Sit until your shoulders soften."
+        next_atom_expectation: any
         stems:
         - permission to pause
         roots:
@@ -758,6 +872,7 @@ slot_families:
         - shoulders
         - soften
       - text: "Catch one breath here without doing anything to earn it."
+        next_atom_expectation: any
         stems:
         - permission to pause
         roots:
@@ -765,6 +880,7 @@ slot_families:
         - earn
         - anything
       - text: "Setting this down for a beat is part of the practice."
+        next_atom_expectation: any
         stems:
         - permission to pause
         roots:
@@ -772,6 +888,7 @@ slot_families:
         - beat
         - practice
       - text: "Trust that the noticing itself is doing some quiet work."
+        next_atom_expectation: any
         stems:
         - permission to pause
         roots:
@@ -779,6 +896,7 @@ slot_families:
         - itself
         - quiet
       - text: "Stay until the sentence lands all the way down."
+        next_atom_expectation: any
         stems:
         - permission to pause
         roots:
@@ -786,6 +904,7 @@ slot_families:
         - lands
         - down
       - text: "Hold this small recognition like a warm cup."
+        next_atom_expectation: any
         stems:
         - permission to pause
         roots:
@@ -793,6 +912,7 @@ slot_families:
         - cup
         - holds
       - text: "Let the chest settle one full breath before continuing."
+        next_atom_expectation: any
         stems:
         - permission to pause
         roots:
@@ -800,6 +920,7 @@ slot_families:
         - settle
         - full
       - text: "The next thought can wait. Stand here for ten seconds."
+        next_atom_expectation: any
         stems:
         - permission to pause
         roots:
@@ -807,6 +928,7 @@ slot_families:
         - seconds
         - stand
       - text: "Rest in what you just saw. No bigger move is asked of you."
+        next_atom_expectation: any
         stems:
         - permission to pause
         roots:
@@ -817,6 +939,7 @@ slot_families:
   EXERCISE:
     next_practice_handoff:
       - text: "Once that lands in the body, try this next move."
+        next_atom_expectation: practical_takeaway
         stems:
         - practice handoff
         roots:
@@ -824,6 +947,7 @@ slot_families:
         - body
         - move
       - text: "When that one feels familiar, the next practice builds on it."
+        next_atom_expectation: practical_takeaway
         stems:
         - practice handoff
         roots:
@@ -831,6 +955,7 @@ slot_families:
         - practice
         - build
       - text: "After a few rounds of that, layer in this one."
+        next_atom_expectation: practical_takeaway
         stems:
         - practice handoff
         roots:
@@ -838,6 +963,7 @@ slot_families:
         - layer
         - one
       - text: "Take that as far as it goes today, then add the next step."
+        next_atom_expectation: practical_takeaway
         stems:
         - practice handoff
         roots:
@@ -845,6 +971,7 @@ slot_families:
         - today
         - step
       - text: "Stack a second practice on top once the first feels easy."
+        next_atom_expectation: practical_takeaway
         stems:
         - practice handoff
         roots:
@@ -852,6 +979,7 @@ slot_families:
         - easy
         - top
       - text: "Carry that small skill into this next experiment."
+        next_atom_expectation: practical_takeaway
         stems:
         - practice handoff
         roots:
@@ -859,6 +987,7 @@ slot_families:
         - experiment
         - carry
       - text: "Run that until it stops feeling clever, then come here."
+        next_atom_expectation: practical_takeaway
         stems:
         - practice handoff
         roots:
@@ -866,6 +995,7 @@ slot_families:
         - run
         - here
       - text: "Hold what you learned from that. The next reps will use it."
+        next_atom_expectation: practical_takeaway
         stems:
         - practice handoff
         roots:
@@ -873,6 +1003,7 @@ slot_families:
         - reps
         - hold
       - text: "Roll that practice into this one without resetting your posture."
+        next_atom_expectation: practical_takeaway
         stems:
         - practice handoff
         roots:
@@ -880,6 +1011,7 @@ slot_families:
         - posture
         - resetting
       - text: "Now extend the practice by one small inch."
+        next_atom_expectation: practical_takeaway
         stems:
         - practice handoff
         roots:
@@ -887,6 +1019,7 @@ slot_families:
         - inch
         - one
       - text: "Bridge from that into the next move while the body is still warm."
+        next_atom_expectation: practical_takeaway
         stems:
         - practice handoff
         roots:
@@ -894,6 +1027,7 @@ slot_families:
         - warm
         - still
       - text: "Tag in the next practice the way one runner hands off to another."
+        next_atom_expectation: practical_takeaway
         stems:
         - practice handoff
         roots:
@@ -902,6 +1036,7 @@ slot_families:
         - hands
     different_door_same_room:
       - text: "Here is another way in to the same opening."
+        next_atom_expectation: practical_takeaway
         stems:
         - alternate entry
         roots:
@@ -909,6 +1044,7 @@ slot_families:
         - opening
         - another
       - text: "Same destination, different doorway."
+        next_atom_expectation: practical_takeaway
         stems:
         - alternate entry
         roots:
@@ -916,6 +1052,7 @@ slot_families:
         - doorway
         - same
       - text: "If that one does not click, this one might."
+        next_atom_expectation: practical_takeaway
         stems:
         - alternate entry
         roots:
@@ -923,6 +1060,7 @@ slot_families:
         - might
         - one
       - text: "Some people land in this through the body; others land through the breath. Try this version."
+        next_atom_expectation: practical_takeaway
         stems:
         - alternate entry
         roots:
@@ -930,6 +1068,7 @@ slot_families:
         - breath
         - version
       - text: "Pick the door that opens for you today."
+        next_atom_expectation: practical_takeaway
         stems:
         - alternate entry
         roots:
@@ -937,6 +1076,7 @@ slot_families:
         - opens
         - today
       - text: "Different handle, same room behind it."
+        next_atom_expectation: practical_takeaway
         stems:
         - alternate entry
         roots:
@@ -944,6 +1084,7 @@ slot_families:
         - behind
         - room
       - text: "If the first route felt forced, this one runs through the side gate."
+        next_atom_expectation: practical_takeaway
         stems:
         - alternate entry
         roots:
@@ -951,6 +1092,7 @@ slot_families:
         - gate
         - side
       - text: "Approach the same skill from a different leg of the journey."
+        next_atom_expectation: practical_takeaway
         stems:
         - alternate entry
         roots:
@@ -958,6 +1100,7 @@ slot_families:
         - leg
         - journey
       - text: "When the front door is jammed, try the window."
+        next_atom_expectation: practical_takeaway
         stems:
         - alternate entry
         roots:
@@ -965,6 +1108,7 @@ slot_families:
         - window
         - front
       - text: "Same medicine, different cup."
+        next_atom_expectation: practical_takeaway
         stems:
         - alternate entry
         roots:
@@ -972,6 +1116,7 @@ slot_families:
         - cup
         - same
       - text: "Walk into the practice from another room of your week."
+        next_atom_expectation: practical_takeaway
         stems:
         - alternate entry
         roots:
@@ -982,6 +1127,7 @@ slot_families:
   INTEGRATION:
     weave_it_in:
       - text: "Now let that thread connect to the rest of the week."
+        next_atom_expectation: any
         stems:
         - weave to context
         roots:
@@ -989,6 +1135,7 @@ slot_families:
         - week
         - connect
       - text: "Carry that small piece into the next ordinary moment."
+        next_atom_expectation: any
         stems:
         - weave to context
         roots:
@@ -996,6 +1143,7 @@ slot_families:
         - ordinary
         - moment
       - text: "Bring that recognition back to one specific place this evening."
+        next_atom_expectation: any
         stems:
         - weave to context
         roots:
@@ -1003,6 +1151,7 @@ slot_families:
         - evening
         - specific
       - text: "Let that move into one conversation you have today."
+        next_atom_expectation: any
         stems:
         - weave to context
         roots:
@@ -1010,6 +1159,7 @@ slot_families:
         - today
         - move
       - text: "Plant that skill in the soil of an ordinary errand."
+        next_atom_expectation: any
         stems:
         - weave to context
         roots:
@@ -1017,6 +1167,7 @@ slot_families:
         - errand
         - soil
       - text: "Spend it on the next small choice in your day."
+        next_atom_expectation: any
         stems:
         - weave to context
         roots:
@@ -1024,6 +1175,7 @@ slot_families:
         - choice
         - day
       - text: "Anchor it to one daily thing you already do."
+        next_atom_expectation: any
         stems:
         - weave to context
         roots:
@@ -1031,6 +1183,7 @@ slot_families:
         - daily
         - already
       - text: "Pin that to your tomorrow morning."
+        next_atom_expectation: any
         stems:
         - weave to context
         roots:
@@ -1038,6 +1191,7 @@ slot_families:
         - tomorrow
         - morning
       - text: "Walk the seeing back to the dinner table."
+        next_atom_expectation: any
         stems:
         - weave to context
         roots:
@@ -1045,6 +1199,7 @@ slot_families:
         - table
         - walk
       - text: "Use it the next time someone asks you a routine question."
+        next_atom_expectation: any
         stems:
         - weave to context
         roots:
@@ -1052,6 +1207,7 @@ slot_families:
         - question
         - someone
       - text: "Let that ripple into the easy part of your afternoon."
+        next_atom_expectation: any
         stems:
         - weave to context
         roots:
@@ -1060,6 +1216,7 @@ slot_families:
         - afternoon
     close_the_loop:
       - text: "That brings us back to where the chapter started, but now with a foothold."
+        next_atom_expectation: any
         stems:
         - loop closure
         roots:
@@ -1067,6 +1224,7 @@ slot_families:
         - chapter
         - foothold
       - text: "The opening question now has a partial answer."
+        next_atom_expectation: any
         stems:
         - loop closure
         roots:
@@ -1074,6 +1232,7 @@ slot_families:
         - question
         - answer
       - text: "Here is the same ground we stood on at the start, seen with new eyes."
+        next_atom_expectation: any
         stems:
         - loop closure
         roots:
@@ -1081,6 +1240,7 @@ slot_families:
         - start
         - eyes
       - text: "We have circled back. The view is different now."
+        next_atom_expectation: any
         stems:
         - loop closure
         roots:
@@ -1088,6 +1248,7 @@ slot_families:
         - view
         - different
       - text: "Notice the rhyme with the opening of this chapter."
+        next_atom_expectation: any
         stems:
         - loop closure
         roots:
@@ -1095,6 +1256,7 @@ slot_families:
         - opening
         - notice
       - text: "Loop closed. The first scene reads differently in light of this one."
+        next_atom_expectation: any
         stems:
         - loop closure
         roots:
@@ -1102,6 +1264,7 @@ slot_families:
         - light
         - first
       - text: "Stand again where we stood at the start. Something has shifted."
+        next_atom_expectation: any
         stems:
         - loop closure
         roots:
@@ -1109,6 +1272,7 @@ slot_families:
         - shifted
         - again
       - text: "The thread that opened this chapter ties off here."
+        next_atom_expectation: any
         stems:
         - loop closure
         roots:
@@ -1116,6 +1280,7 @@ slot_families:
         - ties
         - opened
       - text: "Set this side by side with the first paragraph and listen for the echo."
+        next_atom_expectation: any
         stems:
         - loop closure
         roots:
@@ -1123,6 +1288,7 @@ slot_families:
         - paragraph
         - listen
       - text: "The trip ends roughly where it began, but the body knows more now."
+        next_atom_expectation: any
         stems:
         - loop closure
         roots:
@@ -1130,6 +1296,7 @@ slot_families:
         - knows
         - began
       - text: "Same shore, different tide. The chapter has come full circle."
+        next_atom_expectation: any
         stems:
         - loop closure
         roots:
@@ -1140,6 +1307,7 @@ slot_families:
   TEACHER_DOCTRINE:
     teacher_attribution_bridge:
       - text: "This is what the teaching points to, in plain language."
+        next_atom_expectation: teacher_teaching
         stems:
         - teacher attribution
         roots:
@@ -1147,6 +1315,7 @@ slot_families:
         - plain
         - language
       - text: "The tradition has a phrase for this. Here is one rendering."
+        next_atom_expectation: teacher_teaching
         stems:
         - teacher attribution
         roots:
@@ -1154,6 +1323,7 @@ slot_families:
         - phrase
         - rendering
       - text: "The teacher would put it this way."
+        next_atom_expectation: teacher_teaching
         stems:
         - teacher attribution
         roots:
@@ -1161,6 +1331,7 @@ slot_families:
         - way
         - put
       - text: "Set next to that, another part of the teaching adds a wrinkle."
+        next_atom_expectation: teacher_teaching
         stems:
         - teacher attribution
         roots:
@@ -1168,6 +1339,7 @@ slot_families:
         - wrinkle
         - part
       - text: "Old hands have a short line for this kind of moment."
+        next_atom_expectation: teacher_teaching
         stems:
         - teacher attribution
         roots:
@@ -1175,6 +1347,7 @@ slot_families:
         - line
         - short
       - text: "Stripped of style, the teaching says the same thing."
+        next_atom_expectation: teacher_teaching
         stems:
         - teacher attribution
         roots:
@@ -1182,6 +1355,7 @@ slot_families:
         - style
         - says
       - text: "One phrase from the lineage holds this whole observation."
+        next_atom_expectation: teacher_teaching
         stems:
         - teacher attribution
         roots:
@@ -1189,6 +1363,7 @@ slot_families:
         - phrase
         - whole
       - text: "The teaching frames this in fewer words than we just used."
+        next_atom_expectation: teacher_teaching
         stems:
         - teacher attribution
         roots:
@@ -1196,6 +1371,7 @@ slot_families:
         - fewer
         - words
       - text: "What the elders called this is short and very specific."
+        next_atom_expectation: teacher_teaching
         stems:
         - teacher attribution
         roots:
@@ -1203,6 +1379,7 @@ slot_families:
         - specific
         - called
       - text: "Said the way the teacher would say it:"
+        next_atom_expectation: teacher_teaching
         stems:
         - teacher attribution
         roots:
@@ -1210,6 +1387,7 @@ slot_families:
         - teacher
         - way
       - text: "There is a one-line teaching that lives behind this paragraph."
+        next_atom_expectation: teacher_teaching
         stems:
         - teacher attribution
         roots:
@@ -1218,6 +1396,7 @@ slot_families:
         - lives
     deepen_doctrine:
       - text: "The teaching goes one step further."
+        next_atom_expectation: teacher_teaching
         stems:
         - doctrine deepening
         roots:
@@ -1225,6 +1404,7 @@ slot_families:
         - further
         - teaching
       - text: "Underneath that, the tradition adds a second pointer."
+        next_atom_expectation: teacher_teaching
         stems:
         - doctrine deepening
         roots:
@@ -1232,6 +1412,7 @@ slot_families:
         - pointer
         - second
       - text: "Where the first line ends, the next teaching picks up."
+        next_atom_expectation: teacher_teaching
         stems:
         - doctrine deepening
         roots:
@@ -1239,6 +1420,7 @@ slot_families:
         - picks
         - line
       - text: "There is a companion teaching that lives next to that one."
+        next_atom_expectation: teacher_teaching
         stems:
         - doctrine deepening
         roots:
@@ -1246,6 +1428,7 @@ slot_families:
         - next
         - lives
       - text: "Now the tradition turns the lamp a quarter inch."
+        next_atom_expectation: teacher_teaching
         stems:
         - doctrine deepening
         roots:
@@ -1253,6 +1436,7 @@ slot_families:
         - quarter
         - turn
       - text: "The teaching pushes one finger deeper into the same wound."
+        next_atom_expectation: teacher_teaching
         stems:
         - doctrine deepening
         roots:
@@ -1260,6 +1444,7 @@ slot_families:
         - wound
         - deeper
       - text: "Pair that with this second line from the same lineage."
+        next_atom_expectation: teacher_teaching
         stems:
         - doctrine deepening
         roots:
@@ -1267,6 +1452,7 @@ slot_families:
         - lineage
         - second
       - text: "Move one rung up the same ladder of teaching."
+        next_atom_expectation: teacher_teaching
         stems:
         - doctrine deepening
         roots:
@@ -1274,6 +1460,7 @@ slot_families:
         - ladder
         - up
       - text: "The next pointer is sharper than the one before it."
+        next_atom_expectation: teacher_teaching
         stems:
         - doctrine deepening
         roots:
@@ -1281,6 +1468,7 @@ slot_families:
         - pointer
         - before
       - text: "Listen for the deeper note inside the same teaching."
+        next_atom_expectation: teacher_teaching
         stems:
         - doctrine deepening
         roots:
@@ -1288,6 +1476,7 @@ slot_families:
         - note
         - inside
       - text: "There is a second saying that finishes the first."
+        next_atom_expectation: teacher_teaching
         stems:
         - doctrine deepening
         roots:
@@ -1298,6 +1487,7 @@ slot_families:
   SCENE:
     scene_continuation:
       - text: "Pan across the room. Another small scene is unfolding."
+        next_atom_expectation: scene_vignette
         stems:
         - scene continuation
         roots:
@@ -1305,6 +1495,7 @@ slot_families:
         - room
         - small
       - text: "A few minutes later, in the same building, this happens."
+        next_atom_expectation: scene_vignette
         stems:
         - scene continuation
         roots:
@@ -1312,6 +1503,7 @@ slot_families:
         - building
         - same
       - text: "The day moves a few hours. The body keeps the pattern."
+        next_atom_expectation: scene_vignette
         stems:
         - scene continuation
         roots:
@@ -1319,6 +1511,7 @@ slot_families:
         - body
         - pattern
       - text: "Different desk, different hour, same response."
+        next_atom_expectation: scene_vignette
         stems:
         - scene continuation
         roots:
@@ -1326,6 +1519,7 @@ slot_families:
         - hour
         - response
       - text: "Cut to the kitchen. The scene is still running."
+        next_atom_expectation: scene_vignette
         stems:
         - scene continuation
         roots:
@@ -1333,6 +1527,7 @@ slot_families:
         - kitchen
         - running
       - text: "Two blocks east. The same weight rides on a different set of shoulders."
+        next_atom_expectation: scene_vignette
         stems:
         - scene continuation
         roots:
@@ -1340,6 +1535,7 @@ slot_families:
         - east
         - shoulders
       - text: "Forty minutes pass. The room rearranges. The signal does not."
+        next_atom_expectation: scene_vignette
         stems:
         - scene continuation
         roots:
@@ -1347,6 +1543,7 @@ slot_families:
         - rearranges
         - signal
       - text: "Now the same scene plays out under a different ceiling."
+        next_atom_expectation: scene_vignette
         stems:
         - scene continuation
         roots:
@@ -1354,6 +1551,7 @@ slot_families:
         - plays
         - now
       - text: "Move forward an hour. The chest is still doing its quiet work."
+        next_atom_expectation: scene_vignette
         stems:
         - scene continuation
         roots:
@@ -1361,6 +1559,7 @@ slot_families:
         - chest
         - quiet
       - text: "Same hallway, three doors down."
+        next_atom_expectation: scene_vignette
         stems:
         - scene continuation
         roots:
@@ -1368,6 +1567,7 @@ slot_families:
         - doors
         - three
       - text: "A new face enters the same script."
+        next_atom_expectation: scene_vignette
         stems:
         - scene continuation
         roots:
@@ -1376,6 +1576,7 @@ slot_families:
         - script
     scene_to_inside:
       - text: "Step closer. What is happening inside the body in that moment?"
+        next_atom_expectation: body_anchor
         stems:
         - scene to interior
         roots:
@@ -1383,6 +1584,7 @@ slot_families:
         - inside
         - moment
       - text: "Zoom in on the chest, the breath, the jaw."
+        next_atom_expectation: body_anchor
         stems:
         - scene to interior
         roots:
@@ -1390,6 +1592,7 @@ slot_families:
         - breath
         - jaw
       - text: "Stay with the body for a beat before the next picture."
+        next_atom_expectation: body_anchor
         stems:
         - scene to interior
         roots:
@@ -1397,6 +1600,7 @@ slot_families:
         - beat
         - picture
       - text: "Notice what the nervous system did in that gap."
+        next_atom_expectation: body_anchor
         stems:
         - scene to interior
         roots:
@@ -1404,6 +1608,7 @@ slot_families:
         - system
         - gap
       - text: "Turn the lens inward. What is the gut reporting?"
+        next_atom_expectation: body_anchor
         stems:
         - scene to interior
         roots:
@@ -1411,6 +1616,7 @@ slot_families:
         - gut
         - reporting
       - text: "Where did the breath go when the moment landed?"
+        next_atom_expectation: body_anchor
         stems:
         - scene to interior
         roots:
@@ -1418,6 +1624,7 @@ slot_families:
         - landed
         - where
       - text: "Press against the sternum. What is the data there?"
+        next_atom_expectation: body_anchor
         stems:
         - scene to interior
         roots:
@@ -1425,6 +1632,7 @@ slot_families:
         - data
         - press
       - text: "Track the heat in the face right after that beat."
+        next_atom_expectation: body_anchor
         stems:
         - scene to interior
         roots:
@@ -1432,6 +1640,7 @@ slot_families:
         - face
         - track
       - text: "Inside the same moment, the body is keeping a separate record."
+        next_atom_expectation: body_anchor
         stems:
         - scene to interior
         roots:
@@ -1439,6 +1648,7 @@ slot_families:
         - record
         - separate
       - text: "Pause the outside view. The inside view is more useful."
+        next_atom_expectation: body_anchor
         stems:
         - scene to interior
         roots:
@@ -1446,6 +1656,7 @@ slot_families:
         - inside
         - useful
       - text: "Read what the shoulders are doing before the scene moves on."
+        next_atom_expectation: body_anchor
         stems:
         - scene to interior
         roots:
@@ -1456,6 +1667,7 @@ slot_families:
   COMPRESSION:
     name_it_simple:
       - text: "In one sentence: that is what is happening."
+        next_atom_expectation: any
         stems:
         - simple naming
         roots:
@@ -1463,6 +1675,7 @@ slot_families:
         - happening
         - one
       - text: "Strip the rest away. This is the through-line."
+        next_atom_expectation: any
         stems:
         - simple naming
         roots:
@@ -1470,6 +1683,7 @@ slot_families:
         - through
         - rest
       - text: "If only one piece sticks today, let it be this."
+        next_atom_expectation: any
         stems:
         - simple naming
         roots:
@@ -1477,6 +1691,7 @@ slot_families:
         - sticks
         - today
       - text: "The whole chapter compresses into one observation."
+        next_atom_expectation: any
         stems:
         - simple naming
         roots:
@@ -1484,6 +1699,7 @@ slot_families:
         - observation
         - whole
       - text: "The headline of all of this is short."
+        next_atom_expectation: any
         stems:
         - simple naming
         roots:
@@ -1491,6 +1707,7 @@ slot_families:
         - short
         - all
       - text: "Print this on a sticky note and call it done:"
+        next_atom_expectation: any
         stems:
         - simple naming
         roots:
@@ -1498,6 +1715,7 @@ slot_families:
         - note
         - done
       - text: "Forget the rest if you have to. Keep this line."
+        next_atom_expectation: any
         stems:
         - simple naming
         roots:
@@ -1505,6 +1723,7 @@ slot_families:
         - line
         - keep
       - text: "Underneath, the single phrase is:"
+        next_atom_expectation: any
         stems:
         - simple naming
         roots:
@@ -1512,6 +1731,7 @@ slot_families:
         - phrase
         - underneath
       - text: "If you only carried one sentence away, carry this."
+        next_atom_expectation: any
         stems:
         - simple naming
         roots:
@@ -1519,6 +1739,7 @@ slot_families:
         - away
         - only
       - text: "Reduced to its bones, the point is this:"
+        next_atom_expectation: any
         stems:
         - simple naming
         roots:
@@ -1526,6 +1747,7 @@ slot_families:
         - bones
         - point
       - text: "Drop the explanation. Hold the conclusion."
+        next_atom_expectation: any
         stems:
         - simple naming
         roots:
@@ -1534,6 +1756,7 @@ slot_families:
         - hold
     say_it_again_smaller:
       - text: "Said a smaller way:"
+        next_atom_expectation: any
         stems:
         - restate small
         roots:
@@ -1541,6 +1764,7 @@ slot_families:
         - said
         - way
       - text: "In the plainest version of the same point:"
+        next_atom_expectation: any
         stems:
         - restate small
         roots:
@@ -1548,6 +1772,7 @@ slot_families:
         - version
         - point
       - text: "Boiled down to one breath of language:"
+        next_atom_expectation: any
         stems:
         - restate small
         roots:
@@ -1555,6 +1780,7 @@ slot_families:
         - breath
         - language
       - text: "And, more simply put:"
+        next_atom_expectation: any
         stems:
         - restate small
         roots:
@@ -1562,6 +1788,7 @@ slot_families:
         - put
         - more
       - text: "Smaller still:"
+        next_atom_expectation: any
         stems:
         - restate small
         roots:
@@ -1569,6 +1796,7 @@ slot_families:
         - still
         - even
       - text: "Or, said in fewer words:"
+        next_atom_expectation: any
         stems:
         - restate small
         roots:
@@ -1576,6 +1804,7 @@ slot_families:
         - words
         - said
       - text: "Pocket-sized version:"
+        next_atom_expectation: any
         stems:
         - restate small
         roots:
@@ -1583,6 +1812,7 @@ slot_families:
         - sized
         - version
       - text: "On a postcard:"
+        next_atom_expectation: any
         stems:
         - restate small
         roots:
@@ -1590,6 +1820,7 @@ slot_families:
         - card
         - on
       - text: "One last shrink:"
+        next_atom_expectation: any
         stems:
         - restate small
         roots:
@@ -1597,6 +1828,7 @@ slot_families:
         - last
         - one
       - text: "Tighter still:"
+        next_atom_expectation: any
         stems:
         - restate small
         roots:
@@ -1604,6 +1836,7 @@ slot_families:
         - still
         - even
       - text: "Or, in seven words:"
+        next_atom_expectation: any
         stems:
         - restate small
         roots:
@@ -1614,6 +1847,7 @@ slot_families:
   HOOK:
     hook_continuation:
       - text: "Here is the same opening from a different angle."
+        next_atom_expectation: any
         stems:
         - hook continuation
         roots:
@@ -1621,6 +1855,7 @@ slot_families:
         - angle
         - same
       - text: "Or, said another way:"
+        next_atom_expectation: any
         stems:
         - hook continuation
         roots:
@@ -1628,6 +1863,7 @@ slot_families:
         - way
         - another
       - text: "The question shows up in more than one shape. Here is the next shape."
+        next_atom_expectation: any
         stems:
         - hook continuation
         roots:
@@ -1635,6 +1871,7 @@ slot_families:
         - shape
         - shows
       - text: "Try the same opening through a different door."
+        next_atom_expectation: any
         stems:
         - hook continuation
         roots:
@@ -1642,6 +1879,7 @@ slot_families:
         - door
         - try
       - text: "Pose it as a different reader would:"
+        next_atom_expectation: any
         stems:
         - hook continuation
         roots:
@@ -1649,6 +1887,7 @@ slot_families:
         - reader
         - would
       - text: "Frame the question one more time, with the corners knocked off."
+        next_atom_expectation: any
         stems:
         - hook continuation
         roots:
@@ -1656,6 +1895,7 @@ slot_families:
         - knocked
         - frame
       - text: "Walk in by a side path. The clearing is the same."
+        next_atom_expectation: any
         stems:
         - hook continuation
         roots:
@@ -1663,6 +1903,7 @@ slot_families:
         - path
         - side
       - text: "Open the chapter again from this other angle."
+        next_atom_expectation: any
         stems:
         - hook continuation
         roots:
@@ -1670,6 +1911,7 @@ slot_families:
         - chapter
         - other
       - text: "Ask the same question in plainer clothing:"
+        next_atom_expectation: any
         stems:
         - hook continuation
         roots:
@@ -1677,6 +1919,7 @@ slot_families:
         - clothing
         - ask
       - text: "Try the question lower, closer to the floor:"
+        next_atom_expectation: any
         stems:
         - hook continuation
         roots:
@@ -1684,6 +1927,7 @@ slot_families:
         - closer
         - floor
       - text: "Put a softer edge on the same opening:"
+        next_atom_expectation: any
         stems:
         - hook continuation
         roots:
@@ -1691,10 +1935,137 @@ slot_families:
         - edge
         - same
 
+# OPD-123 (2026-05-20): story-introduction bridges fire at the slot boundary
+# when entering a named-character STORY atom (section → named story).
+# Loaded by chapter_composer._bridge_story_introduction (not within-slot).
+story_introduction:
+  section_to_named_story:
+    - text: "Let me tell you about somebody who had the same problem."
+      next_atom_expectation: named_story
+      stems:
+      - story introduction named character
+      roots:
+      - somebody
+      - problem
+      - tell
+    - text: "Here is what this looks like in one person's life."
+      next_atom_expectation: named_story
+      stems:
+      - story introduction one person
+      roots:
+      - life
+      - person
+      - looks
+    - text: "There is someone I have been thinking about. Let me describe."
+      next_atom_expectation: named_story
+      stems:
+      - story introduction someone thinking
+      roots:
+      - describe
+      - someone
+      - thinking
+    - text: "Watch this play out in a single body."
+      next_atom_expectation: named_story
+      stems:
+      - story introduction single body
+      roots:
+      - body
+      - play
+      - watch
+    - text: "A specific person. A specific Wednesday. A specific room."
+      next_atom_expectation: named_story
+      stems:
+      - story introduction specific person room
+      roots:
+      - person
+      - room
+      - wednesday
+    - text: "I want to bring this down to one human."
+      next_atom_expectation: named_story
+      stems:
+      - story introduction one human
+      roots:
+      - human
+      - bring
+      - down
+    - text: "Picture someone you might know. Maybe yourself."
+      next_atom_expectation: named_story
+      stems:
+      - story introduction picture someone
+      roots:
+      - picture
+      - know
+      - yourself
+    - text: "There is a name attached to this. Let me give it to you."
+      next_atom_expectation: named_story
+      stems:
+      - story introduction name attached
+      roots:
+      - name
+      - attached
+      - give
+    - text: "Move from the pattern to a person."
+      next_atom_expectation: named_story
+      stems:
+      - story introduction pattern to person
+      roots:
+      - pattern
+      - person
+      - move
+    - text: "The shape lives in lived life. Here is one."
+      next_atom_expectation: named_story
+      stems:
+      - story introduction lived life shape
+      roots:
+      - shape
+      - life
+      - lived
+    - text: "Let me make this less abstract."
+      next_atom_expectation: named_story
+      stems:
+      - story introduction less abstract
+      roots:
+      - abstract
+      - less
+      - make
+    - text: "Walk through this with one person who actually lived it."
+      next_atom_expectation: named_story
+      stems:
+      - story introduction walk through lived
+      roots:
+      - lived
+      - person
+      - walk
+    - text: "Before the lesson hardens, meet someone who carried this pattern home."
+      next_atom_expectation: named_story
+      stems:
+      - story introduction meet someone pattern
+      roots:
+      - lesson
+      - pattern
+      - meet
+    - text: "The mechanism has a face. Here is whose body learned it first."
+      next_atom_expectation: named_story
+      stems:
+      - story introduction mechanism face body
+      roots:
+      - body
+      - face
+      - mechanism
+    - text: "Set the theory aside for a breath. A real week is about to speak."
+      next_atom_expectation: named_story
+      stems:
+      - story introduction real week speak
+      roots:
+      - breath
+      - theory
+      - week
+
 # Default fallback for slot types not listed above
 default_family:
   generic_continuation:
     - text: "Here is the same idea seen from another side."
+      next_atom_expectation: any
       stems:
       - generic continuation
       roots:
@@ -1702,6 +2073,7 @@ default_family:
       - side
       - same
     - text: "Another version of the same thing:"
+      next_atom_expectation: any
       stems:
       - generic continuation
       roots:
@@ -1709,6 +2081,7 @@ default_family:
       - thing
       - same
     - text: "Said one more way:"
+      next_atom_expectation: any
       stems:
       - generic continuation
       roots:
@@ -1716,6 +2089,7 @@ default_family:
       - way
       - one
     - text: "A near-cousin of that follows."
+      next_atom_expectation: any
       stems:
       - generic continuation
       roots:
@@ -1723,6 +2097,7 @@ default_family:
       - follows
       - near
     - text: "Now the same point shows up wearing a different sentence."
+      next_atom_expectation: any
       stems:
       - generic continuation
       roots:
@@ -1730,6 +2105,7 @@ default_family:
       - wearing
       - sentence
     - text: "Try the thought again at a slightly different pitch."
+      next_atom_expectation: any
       stems:
       - generic continuation
       roots:
@@ -1737,6 +2113,7 @@ default_family:
       - thought
       - slightly
     - text: "Different wording, same destination."
+      next_atom_expectation: any
       stems:
       - generic continuation
       roots:
@@ -1744,6 +2121,7 @@ default_family:
       - destination
       - different
     - text: "Here is the idea reset and restated."
+      next_atom_expectation: any
       stems:
       - generic continuation
       roots:
@@ -1751,6 +2129,7 @@ default_family:
       - restated
       - idea
     - text: "Listen for the same shape inside the next sentence."
+      next_atom_expectation: any
       stems:
       - generic continuation
       roots:
@@ -1758,6 +2137,7 @@ default_family:
       - inside
       - listen
     - text: "Same target, different arrow."
+      next_atom_expectation: any
       stems:
       - generic continuation
       roots:

@@ -38,13 +38,15 @@ logger = logging.getLogger(__name__)
 
 def load_channel_registry() -> dict:
     """Load channel_registry.yaml and return channels dict keyed by channel_id."""
-    reg = load_yaml("channel_registry.yaml")
+    # _config.load_yaml resolves paths relative to REPO_ROOT, so the path must be
+    # the real config location (config/video/), not a bare filename.
+    reg = load_yaml("config/video/channel_registry.yaml")
     return reg.get("channels", {})
 
 
 def load_upload_config() -> dict:
     """Load upload_config.yaml."""
-    return load_yaml("upload_config.yaml")
+    return load_yaml("config/video/upload_config.yaml")
 
 
 def resolve_video_path(video_dir: Path, channel_id: str, platform: str) -> Path | None:
@@ -70,6 +72,23 @@ def get_brand_for_channel(channel_id: str, channels: dict) -> str:
     """Get brand_id for a channel from the registry."""
     ch = channels.get(channel_id, {})
     return ch.get("brand_id", "unknown")
+
+
+# GitHub Actions matrix passes a short brand suffix (SP/CC). Map it to the brand_id
+# used in config/video/channel_registry.yaml so the daily-publish workflow can drive
+# one matrix leg per brand without enumerating channel ids.
+BRAND_SUFFIX_MAP = {
+    "SP": "stillness_press",
+    "CC": "cognitive_clarity",
+}
+
+
+def resolve_brand_filter(brand_suffix: str | None) -> str | None:
+    """Map a CLI --brand-suffix (SP/CC or a raw brand_id) to a brand_id, or None."""
+    if not brand_suffix:
+        return None
+    key = brand_suffix.strip()
+    return BRAND_SUFFIX_MAP.get(key.upper(), key)
 
 
 def get_platforms_for_channel(
@@ -169,8 +188,13 @@ def run_upload(
     batch_mode: bool,
     dry_run: bool,
     output_path: Path | None,
+    brand_filter: str | None = None,
 ) -> list[dict]:
-    """Orchestrate uploads for one or more channels."""
+    """Orchestrate uploads for one or more channels.
+
+    brand_filter (a brand_id) restricts a batch run to one brand's channels — this is
+    how the daily-publish CI matrix drives one leg per brand (SP/CC).
+    """
     variants_data = load_json(variants_path)
     channels = load_channel_registry()
     upload_config = load_upload_config()
@@ -192,13 +216,23 @@ def run_upload(
         return []
 
     # Determine which channels to process
-    if batch_mode:
+    if batch_mode or brand_filter:
         channel_ids = list(channels.keys())
     elif channel_id:
         channel_ids = [channel_id]
     else:
-        logger.error("Must specify --channel-id or --batch")
+        logger.error("Must specify --channel-id, --batch, or --brand-suffix")
         return []
+
+    # Restrict to a single brand's channels when a brand filter is supplied.
+    if brand_filter:
+        channel_ids = [
+            cid for cid in channel_ids
+            if get_brand_for_channel(cid, channels) == brand_filter
+        ]
+        if not channel_ids:
+            logger.warning("No channels found for brand %s", brand_filter)
+            return []
 
     results: list[dict] = []
 
@@ -293,6 +327,8 @@ def main() -> int:
     parser.add_argument("variants_json", type=Path, help="Path to platform_variants.json")
     parser.add_argument("--channel-id", type=str, help="Single channel to upload for")
     parser.add_argument("--batch", action="store_true", help="Upload for all channels in registry")
+    parser.add_argument("--brand-suffix", type=str, default=None,
+                        help="Upload all channels for one brand (SP=stillness_press, CC=cognitive_clarity, or a raw brand_id). Used by the daily-publish CI matrix.")
     parser.add_argument("--video-dir", type=Path, default=Path("artifacts/video/rendered"),
                         help="Directory containing rendered video files")
     parser.add_argument("--platforms", type=str, help="Comma-separated platform filter (e.g., youtube,tiktok)")
@@ -318,9 +354,10 @@ def main() -> int:
 
     platforms_filter = args.platforms.split(",") if args.platforms else None
     dry_run = not args.no_dry_run
+    brand_filter = resolve_brand_filter(args.brand_suffix)
 
-    if not args.channel_id and not args.batch:
-        parser.error("Must specify --channel-id or --batch")
+    if not args.channel_id and not args.batch and not brand_filter:
+        parser.error("Must specify --channel-id, --batch, or --brand-suffix")
 
     results = run_upload(
         variants_path=args.variants_json,
@@ -329,6 +366,7 @@ def main() -> int:
         platforms_filter=platforms_filter,
         batch_mode=args.batch,
         dry_run=dry_run,
+        brand_filter=brand_filter,
         output_path=args.output,
     )
 

@@ -1,12 +1,13 @@
 {
     "_meta": {
-        "name": "Phoenix Omega — FLUX txt2img Manga (schnell-fp8, webtoon vertical)",
-        "description": "EmptyLatent + KSampler denoise 1.0. Generator replaces {{positive_prompt}} / {{negative_prompt}}. Uses flux1-schnell-fp8 (4-step distilled) at steps=4 cfg=1.0 with euler/simple — schnell is incompatible with steps>=8 and cfg>1 and produces silently degraded outputs in those configs. Default dims 1080x1920 = WEBTOON vertical panel; callers may override via per-panel width/height.",
-        "version": "1.2.0"
+        "name": "Phoenix Omega — FLUX txt2img Manga (H1=A canonical: dev-fp8 / 28 / 3.5 / dpmpp_2m / karras, webtoon vertical)",
+        "description": "EmptyLatent + KSampler denoise 1.0. Generator replaces {{positive_prompt}} / {{negative_prompt}}. Uses flux1-dev-fp8 at 28 steps cfg 3.5 dpmpp_2m / karras — H1=A canonical per docs/feedback_campaign_h1_h2_decisions and skills/pearl-int/references/manga_render_path_decision.md. Default dims 1080x1920 = WEBTOON vertical panel; callers may override via per-panel width/height. This is the brand-1 path (the_alarm_is_lying et al). Brand-2 V1 ship still uses schnell — see flux_txt2img_manga_brand2_schnell.json for that path.",
+        "version": "2.0.0",
+        "h1a_corrected": "PR #807 (2026-04-30) corrected flux_img2img_manga.json and flux_ip_adapter_manga.json to H1=A but missed this file; corrected 2026-06-02 (PR follow-up). flux_txt2img_manga_brand2_schnell.json preserves the schnell config for the brand-2 V1 ship path."
     },
     "1": {
         "class_type": "CheckpointLoaderSimple",
-        "inputs": {"ckpt_name": "flux1-schnell-fp8.safetensors"}
+        "inputs": {"ckpt_name": "flux1-dev-fp8.safetensors"}
     },
     "2": {
         "class_type": "CLIPTextEncode",
@@ -24,10 +25,10 @@
         "class_type": "KSampler",
         "inputs": {
             "seed": 42,
-            "steps": 4,
-            "cfg": 1.0,
-            "sampler_name": "euler",
-            "scheduler": "simple",
+            "steps": 28,
+            "cfg": 3.5,
+            "sampler_name": "dpmpp_2m",
+            "scheduler": "karras",
             "denoise": 1.0,
             "model": ["1", 0],
             "positive": ["2", 0],

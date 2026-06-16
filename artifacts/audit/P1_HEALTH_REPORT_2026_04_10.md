@@ -1,5 +1,9 @@
 # P1 Health Report — Phoenix Omega
 
+> **LINEAGE NOTE 2026-06-06** — the persona-atom + teacher-bank + registry-coverage findings in this report are superseded by [`docs/PEARL_PRIME_ATOM_100PCT_COVERAGE_SSOT.md`](../../docs/PEARL_PRIME_ATOM_100PCT_COVERAGE_SSOT.md) **§8.1** + **§8.7** + **§5**. This 2026-04-10 snapshot is retained as historical lineage per [`AGENT_FILE_PERSISTENCE_PROTOCOL.md`](../../docs/AGENT_FILE_PERSISTENCE_PROTOCOL.md); the DOCS_INDEX + brand-expansion findings remain canonical-as-of-2026-04-10.
+
+---
+
 **Date:** 2026-04-10
 **Project:** proj_state_convergence_20260328
 **Author:** Pearl_Architect + Pearl_PM + Pearl_Editor

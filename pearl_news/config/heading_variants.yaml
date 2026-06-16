@@ -1,0 +1,273 @@
+# Pearl News — heading variant pools.
+#
+# Authority: docs/PEARL_NEWS_WRITER_SPEC.md §14 (added by this PR).
+# Consumed by: pearl_news/pipeline/heading_selector.py.
+# Wired into: pearl_news/pipeline/assemble_v52.py (_SECTION_HEADERS_BY_LANG resolution).
+#
+# Two heading axes get variant pools:
+#
+#   gen_z_impact   — the youth-impact section heading. 5 variants per (topic × locale).
+#                    Replaces the fixed "This is how it affects Gen Z and Gen Alpha"
+#                    in assemble_v52.py:_SECTION_HEADERS_BY_LANG[*]["felt_experience"].
+#
+#   teacher_sees   — the teacher-insight section heading. 5 variants per teacher,
+#                    authored in the teacher's primary locale. Replaces the fixed
+#                    "What {teacher_name} Sees" with a tradition-aware framing
+#                    (per operator: the teacher's NAME is no longer in the heading;
+#                    the heading invokes the tradition, e.g. "A Tao Grandmaster
+#                    Shares A Helpful Insight").
+#
+# Selection is deterministic per article: stable blake2b hash of (post_slug | axis)
+# mod pool_size. Stable across re-publishes. See heading_selector.py for the rule.
+#
+# Falls back to the legacy fixed string in assemble_v52.py if a pool is missing.
+
+schema_version: 1
+
+# ── gen_z_impact ────────────────────────────────────────────────────────────
+# Keyed by topic → locale → list[5 variants]. Active topics from
+# pearl_news/config/teacher_news_roster.yaml: climate, mental_health, education,
+# peace_conflict, partnerships, inequality, economy_work.
+
+gen_z_impact:
+  climate:
+    en:
+      - "How Climate News Is Shaping Gen Z's Outlook"
+      - "The Impact of Climate News on Gen Z"
+      - "Why Climate News Hits Gen Z Differently"
+      - "Gen Z and the Effects of Climate News"
+      - "How Gen Z Is Responding to Climate News"
+    ja:
+      - "気候ニュースがZ世代の見方をどう変えているか"
+      - "気候ニュースがZ世代に与える影響"
+      - "なぜ気候ニュースはZ世代に違うふうに響くのか"
+      - "Z世代と気候ニュースの届き方"
+      - "Z世代は気候ニュースにどう応えているか"
+    zh-cn:
+      - "气候新闻如何塑造Z世代的视角"
+      - "气候新闻对Z世代的影响"
+      - "气候新闻为何对Z世代不同"
+      - "Z世代与气候新闻的回响"
+      - "Z世代如何回应气候新闻"
+
+  mental_health:
+    en:
+      - "How Mental Health News Is Shaping Gen Z's Outlook"
+      - "The Impact of Mental Health News on Gen Z"
+      - "Why Mental Health News Hits Gen Z Differently"
+      - "Gen Z and the Effects of Mental Health News"
+      - "How Gen Z Is Responding to Mental Health News"
+    ja:
+      - "メンタルヘルスのニュースがZ世代の見方をどう変えているか"
+      - "メンタルヘルス報道がZ世代に与える影響"
+      - "なぜメンタルヘルスのニュースはZ世代に違うふうに響くのか"
+      - "Z世代とメンタルヘルス報道の届き方"
+      - "Z世代はメンタルヘルスのニュースにどう応えているか"
+    zh-cn:
+      - "心理健康新闻如何塑造Z世代的视角"
+      - "心理健康新闻对Z世代的影响"
+      - "心理健康新闻为何对Z世代不同"
+      - "Z世代与心理健康新闻的回响"
+      - "Z世代如何回应心理健康新闻"
+
+  education:
+    en:
+      - "How Education News Is Shaping Gen Z's Outlook"
+      - "The Impact of Education News on Gen Z"
+      - "Why Education News Hits Gen Z Differently"
+      - "Gen Z and the Effects of Education News"
+      - "How Gen Z Is Responding to Education News"
+    ja:
+      - "教育ニュースがZ世代の見方をどう変えているか"
+      - "教育ニュースがZ世代に与える影響"
+      - "なぜ教育ニュースはZ世代に違うふうに響くのか"
+      - "Z世代と教育ニュースの届き方"
+      - "Z世代は教育ニュースにどう応えているか"
+    zh-cn:
+      - "教育新闻如何塑造Z世代的视角"
+      - "教育新闻对Z世代的影响"
+      - "教育新闻为何对Z世代不同"
+      - "Z世代与教育新闻的回响"
+      - "Z世代如何回应教育新闻"
+
+  peace_conflict:
+    en:
+      - "How Peace and Conflict News Is Shaping Gen Z's Outlook"
+      - "The Impact of Conflict News on Gen Z"
+      - "Why Conflict News Hits Gen Z Differently"
+      - "Gen Z and the Effects of Peace and Conflict News"
+      - "How Gen Z Is Responding to Conflict News"
+    ja:
+      - "平和と紛争のニュースがZ世代の見方をどう変えているか"
+      - "紛争ニュースがZ世代に与える影響"
+      - "なぜ紛争ニュースはZ世代に違うふうに響くのか"
+      - "Z世代と平和・紛争ニュースの届き方"
+      - "Z世代は紛争ニュースにどう応えているか"
+    zh-cn:
+      - "和平与冲突新闻如何塑造Z世代的视角"
+      - "冲突新闻对Z世代的影响"
+      - "冲突新闻为何对Z世代不同"
+      - "Z世代与和平·冲突新闻的回响"
+      - "Z世代如何回应冲突新闻"
+
+  partnerships:
+    en:
+      - "How Global Partnership News Is Shaping Gen Z's Outlook"
+      - "The Impact of Partnership News on Gen Z"
+      - "Why Partnership News Hits Gen Z Differently"
+      - "Gen Z and the Effects of Global Partnership News"
+      - "How Gen Z Is Responding to Partnership News"
+    ja:
+      - "国際協調のニュースがZ世代の見方をどう変えているか"
+      - "パートナーシップ報道がZ世代に与える影響"
+      - "なぜパートナーシップのニュースはZ世代に違うふうに響くのか"
+      - "Z世代と国際協調ニュースの届き方"
+      - "Z世代はパートナーシップ報道にどう応えているか"
+    zh-cn:
+      - "全球伙伴关系新闻如何塑造Z世代的视角"
+      - "伙伴关系新闻对Z世代的影响"
+      - "伙伴关系新闻为何对Z世代不同"
+      - "Z世代与伙伴关系新闻的回响"
+      - "Z世代如何回应伙伴关系新闻"
+
+  inequality:
+    en:
+      - "How Inequality News Is Shaping Gen Z's Outlook"
+      - "The Impact of Inequality News on Gen Z"
+      - "Why Inequality News Hits Gen Z Differently"
+      - "Gen Z and the Effects of Inequality News"
+      - "How Gen Z Is Responding to Inequality News"
+    ja:
+      - "格差をめぐるニュースがZ世代の見方をどう変えているか"
+      - "格差報道がZ世代に与える影響"
+      - "なぜ格差のニュースはZ世代に違うふうに響くのか"
+      - "Z世代と格差ニュースの届き方"
+      - "Z世代は格差報道にどう応えているか"
+    zh-cn:
+      - "不平等新闻如何塑造Z世代的视角"
+      - "不平等新闻对Z世代的影响"
+      - "不平等新闻为何对Z世代不同"
+      - "Z世代与不平等新闻的回响"
+      - "Z世代如何回应不平等新闻"
+
+  economy_work:
+    en:
+      - "How Economy and Work News Is Shaping Gen Z's Outlook"
+      - "The Impact of Economy News on Gen Z"
+      - "Why Economy News Hits Gen Z Differently"
+      - "Gen Z and the Effects of Economy and Work News"
+      - "How Gen Z Is Responding to Economy News"
+    ja:
+      - "経済と労働のニュースがZ世代の見方をどう変えているか"
+      - "経済ニュースがZ世代に与える影響"
+      - "なぜ経済ニュースはZ世代に違うふうに響くのか"
+      - "Z世代と経済・労働ニュースの届き方"
+      - "Z世代は経済ニュースにどう応えているか"
+    zh-cn:
+      - "经济与劳动新闻如何塑造Z世代的视角"
+      - "经济新闻对Z世代的影响"
+      - "经济新闻为何对Z世代不同"
+      - "Z世代与经济·劳动新闻的回响"
+      - "Z世代如何回应经济新闻"
+
+# ── teacher_sees ────────────────────────────────────────────────────────────
+# Keyed by teacher_id → list[5 variants]. Authored in the teacher's primary
+# locale per pearl_news/config/teacher_language_map.yaml:
+#   en:    ahjan, sai_ma, maat, master_sha
+#   ja:    joshin, junko, miki, omote
+#   zh-cn: master_feung, master_wu
+# Each variant invokes the tradition, NOT the teacher's personal name
+# (per operator: "A Tao Grandmaster Shares A Helpful Insight").
+# Tradition phrases sourced from pearl_news/config/teacher_news_roster.yaml.
+
+teacher_sees:
+
+  ahjan:
+    locale: en
+    variants:
+      - "A Tantric Buddhist Teacher Shares A Helpful Insight"
+      - "A Tantric Buddhist Teacher Offers a Helpful Insight"
+      - "Helpful Wisdom Shared by a Tantric Buddhist Teacher"
+      - "A Tantric Buddhist Teacher Reveals a Useful Insight"
+      - "A Valuable Lesson from a Tantric Buddhist Teacher"
+
+  sai_ma:
+    locale: en
+    variants:
+      - "A Hindu Vishnuswami Teacher Shares A Helpful Insight"
+      - "A Hindu Vishnuswami Teacher Offers a Helpful Insight"
+      - "Helpful Wisdom Shared by a Hindu Vishnuswami Teacher"
+      - "A Hindu Vishnuswami Teacher Reveals a Useful Insight"
+      - "A Valuable Lesson from a Hindu Vishnuswami Teacher"
+
+  maat:
+    locale: en
+    variants:
+      - "A Naqshbandi Sufi Teacher Shares A Helpful Insight"
+      - "A Naqshbandi Sufi Teacher Offers a Helpful Insight"
+      - "Helpful Wisdom Shared by a Naqshbandi Sufi Teacher"
+      - "A Naqshbandi Sufi Teacher Reveals a Useful Insight"
+      - "A Valuable Lesson from a Naqshbandi Sufi Teacher"
+
+  master_sha:
+    locale: en
+    variants:
+      - "A Tao Grandmaster Shares A Helpful Insight"
+      - "A Tao Grandmaster Offers a Helpful Insight"
+      - "Helpful Wisdom Shared by a Tao Grandmaster"
+      - "A Tao Grandmaster Reveals a Useful Insight"
+      - "A Valuable Lesson from a Tao Grandmaster"
+
+  junko:
+    locale: ja
+    variants:
+      - "チャネラーが役に立つ洞察を語る"
+      - "チャネラーが役に立つ気づきを伝える"
+      - "チャネラーから届く役に立つ知恵"
+      - "チャネラーが見えた大切な視点"
+      - "チャネラーから受け取る貴重な学び"
+
+  miki:
+    locale: ja
+    variants:
+      - "日本のライトヒーリングの教師が役に立つ洞察を語る"
+      - "日本のライトヒーリングの教師が役に立つ気づきを伝える"
+      - "日本のライトヒーリングの教師から届く役に立つ知恵"
+      - "日本のライトヒーリングの教師が見えた大切な視点"
+      - "日本のライトヒーリングの教師から受け取る貴重な学び"
+
+  joshin:
+    locale: ja
+    variants:
+      - "真言密教の僧侶が役に立つ洞察を語る"
+      - "真言密教の僧侶が役に立つ気づきを伝える"
+      - "真言密教の僧侶から届く役に立つ知恵"
+      - "真言密教の僧侶が見えた大切な視点"
+      - "真言密教の僧侶から受け取る貴重な学び"
+
+  omote:
+    locale: ja
+    variants:
+      - "大和心の導き手が役に立つ洞察を語る"
+      - "大和心の導き手が役に立つ気づきを伝える"
+      - "大和心の導き手から届く役に立つ知恵"
+      - "大和心の導き手が見えた大切な視点"
+      - "大和心の導き手から受け取る貴重な学び"
+
+  master_feung:
+    locale: zh-cn
+    variants:
+      - "一位中华智慧传统的老师分享一段有益的洞见"
+      - "一位中华智慧传统的老师提供一段有益的洞见"
+      - "来自中华智慧传统的有益智慧分享"
+      - "一位中华智慧传统的老师揭示一段有用的洞见"
+      - "来自中华智慧传统的一份珍贵教导"
+
+  master_wu:
+    locale: zh-cn
+    variants:
+      - "一位道家地理传承的老师分享一段有益的洞见"
+      - "一位道家地理传承的老师提供一段有益的洞见"
+      - "来自道家地理传承的有益智慧分享"
+      - "一位道家地理传承的老师揭示一段有用的洞见"
+      - "来自道家地理传承的一份珍贵教导"

@@ -437,7 +437,11 @@ def compile_beatmap(
     if shaped_spine.stage != "knob_apply":
         warnings.warn(f"Unexpected shaped spine stage {shaped_spine.stage!r}; expected 'knob_apply'", stacklevel=2)
 
-    spine = load_spine(shaped_spine.topic, root)
+    # Re-load with the same runtime_format the shaped spine was built under so the
+    # by_num lookup is keyed by the subsetted+renumbered chapters (PR-D-SPINE-01).
+    # Without runtime_format this returned the full 12-chapter spine, mapping each
+    # subsetted chapter's required_sections/forbidden_moves to the WRONG original.
+    spine = load_spine(shaped_spine.topic, root, runtime_format=shaped_spine.runtime_format)
     by_num = {c.number: c for c in spine.chapters}
 
     canonical_order = list(format_spec.get("canonical_slot_order") or [])

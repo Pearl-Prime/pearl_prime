@@ -410,7 +410,7 @@ def compose_section_packet(
     # Without a teacher_id the content has no owner, no wrapper, and no voice attribution.
     _teacher_id = spine_context.get("teacher_id") or spine_context.get("teacher")
     if teacher_atom_content and _teacher_id:
-        from phoenix_v4.rendering.teacher_wrapper import resolve_wrapper
+        from phoenix_v4.rendering.teacher_wrapper import join_wrapped, resolve_wrapper
 
         _wrap_seed = _packet_injection_seed(spine_context, chapter_index, section_index)
         _prefix, _suffix = resolve_wrapper(
@@ -421,13 +421,9 @@ def compose_section_packet(
         )
         _tw_content = str(teacher_atom_content).strip()
         if _prefix or _suffix:
-            _parts: List[str] = []
-            if _prefix:
-                _parts.append(_prefix)
-            _parts.append(_tw_content)
-            if _suffix:
-                _parts.append(_suffix)
-            _tw_content = "\n\n".join(_parts)
+            # Inline-join ellipsis lead-ins into the doctrine (shared with apply_wrapper)
+            # so intro wrappers do not dangle as their own paragraph. See PR #1508 follow-up.
+            _tw_content = join_wrapped(_prefix, _tw_content, _suffix)
         _append_layer(
             blocks,
             sources_used,

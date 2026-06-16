@@ -43,6 +43,12 @@ duration_adherence_scorecard:
   # TTS WPM estimate (standard audiobook pace)
   tts_wpm: 150
 
+  # Ebook reading-edition WPM (DURATION-DERIVATION-01, docs/DURATION_DERIVATION_SPEC.md §4.3).
+  # Single source of truth for the ebook word->minute conversion; consumed by
+  # phoenix_v4/ops/duration_derivation.py (audiobook uses tts_wpm above). 230 = the
+  # conventional reading rate the duration audit used.
+  ebook_wpm: 230
+
   # Duration tolerance (±% of target considered "adherent")
   duration_tolerance_pct: 10
 

@@ -17,7 +17,9 @@ from phoenix_v4.exercises.models import (
 from phoenix_v4.exercises.component_assembler import (
     _derive_lean,
     _match_rule,
+    _sentences,
     assemble_exercise,
+    assemble_exercise_for_chapter,
     load_assembly_rules,
     resolve_from_ab_tady_components,
     select_components,
@@ -41,8 +43,15 @@ class TestRuleMatching:
         ctx = AssemblyContext(repeat_count=3, first_encounter=False)
         sel = select_components(ctx, rules)
         assert sel.rule_name == "quick_repeat"
-        assert sel.bridge == ComponentMode.SKIP
-        assert sel.description == ComponentMode.LEAN
+        # Operator directive (2026-05-29): lean is disabled. quick_repeat used
+        # to skip every wrapper and lean the description; it now renders the
+        # full 5-part structure so a repeated exercise is never truncated.
+        assert sel.bridge == ComponentMode.FULL
+        assert sel.introduction == ComponentMode.FULL
+        assert sel.intro == ComponentMode.FULL
+        assert sel.description == ComponentMode.FULL
+        assert sel.aha == ComponentMode.FULL
+        assert sel.integration == ComponentMode.FULL
 
     def test_emotional_pivot_fires(self, rules):
         ctx = AssemblyContext(emotional_state=EmotionalState.HEAVY)
@@ -69,8 +78,14 @@ class TestRuleMatching:
         ctx = AssemblyContext(first_encounter=False, repeat_count=0)
         sel = select_components(ctx, rules)
         assert sel.rule_name == "familiar_new_context"
-        assert sel.bridge == ComponentMode.LEAN
-        assert sel.intro == ComponentMode.LEAN
+        # Operator directive (2026-05-29): lean is disabled — the bridge now
+        # resolves to FULL (was LEAN).
+        assert sel.bridge == ComponentMode.FULL
+        # OPD-113: intro changed from LEAN to FULL so the named description
+        # ("This is a X practice...") is always visible in long-form runtimes.
+        assert sel.intro == ComponentMode.FULL
+        # OPD-113: introduction (Part 1 cue) is always emitted for non-repeat paths.
+        assert sel.introduction == ComponentMode.FULL
 
     def test_first_encounter_fires(self, rules):
         ctx = AssemblyContext(first_encounter=True)
@@ -93,10 +108,14 @@ class TestRuleMatching:
 # ---------------------------------------------------------------------------
 
 class TestLeanDerivation:
-    def test_lean_extracts_first_sentences(self):
+    """Operator directive (2026-05-29): lean derivation is disabled — every
+    helper that used to truncate now returns the full text verbatim so no
+    STORY or EXERCISE is ever shortened."""
+
+    def test_lean_returns_full_text_unchanged(self):
         full = "First sentence here. Second sentence follows. Third sentence too. Fourth one."
-        lean = _derive_lean(full, max_sentences=2)
-        assert lean == "First sentence here. Second sentence follows."
+        # Even with max_sentences=2, lean is a no-op and returns the full text.
+        assert _derive_lean(full, max_sentences=2) == full
 
     def test_lean_handles_short_text(self):
         assert _derive_lean("Single sentence.") == "Single sentence."
@@ -157,6 +176,7 @@ class TestAssembleExercise:
         components = self._make_components()
         sel = ComponentSelection(
             bridge=ComponentMode.SKIP,
+            introduction=ComponentMode.SKIP,
             intro=ComponentMode.SKIP,
             description=ComponentMode.LEAN,
             aha=ComponentMode.SKIP,
@@ -167,7 +187,9 @@ class TestAssembleExercise:
         assert "intro" not in result.lower()
         assert "AHA" not in result
         assert "integration" not in result.lower()
-        assert "Step one. Step two." in result
+        # Operator directive (2026-05-29): LEAN is a no-op → the description
+        # renders in FULL (all steps), never truncated to the lean variant.
+        assert "Full description with all steps. Step one. Step two. Step three." in result
 
     def test_gentle_bridge_tone(self):
         components = self._make_components()
@@ -183,20 +205,27 @@ class TestAssembleExercise:
         assert "Gentle bridge" in result
         assert "Full bridge" not in result
 
-    def test_lean_variants_used(self):
+    def test_lean_mode_renders_full(self):
+        """Operator directive (2026-05-29): LEAN is a no-op — every component
+        requested in LEAN mode renders its FULL variant, never the lean one."""
         components = self._make_components()
         sel = ComponentSelection(
             bridge=ComponentMode.LEAN,
+            introduction=ComponentMode.SKIP,
             intro=ComponentMode.LEAN,
             description=ComponentMode.FULL,
             aha=ComponentMode.LEAN,
             integration=ComponentMode.LEAN,
         )
         result = assemble_exercise(components, sel)
-        assert "Lean bridge." in result
-        assert "Lean intro." in result
-        assert "Now, notice this." in result
-        assert "lean." in result
+        # FULL variants are emitted even though LEAN was requested.
+        assert "Full bridge text here." in result
+        assert "Full intro explaining the exercise." in result
+        assert "Full AHA text here." in result
+        assert "full integration text." in result
+        # The lean strings must NOT appear.
+        assert "Lean bridge." not in result
+        assert "Lean intro." not in result
 
 
 # ---------------------------------------------------------------------------
@@ -222,7 +251,10 @@ class TestAbTady37Components:
         assert comps.bridge.lean == "Lean bridge."
         assert comps.aha.full == "Full aha."
 
-    def test_resolve_derives_lean_when_missing(self):
+    def test_resolve_lean_equals_full_when_missing(self):
+        # Operator directive (2026-05-29): lean derivation is disabled, so when
+        # no explicit lean variant is provided the derived lean equals the full
+        # text verbatim (no truncation).
         data = {
             "id": "test",
             "exercise_type": "00_breath_regulation",
@@ -235,7 +267,7 @@ class TestAbTady37Components:
             },
         }
         comps = resolve_from_ab_tady_components(data)
-        assert comps.bridge.lean == "First sentence. Second sentence."
+        assert comps.bridge.lean == "First sentence. Second sentence. Third."
 
 
 # ---------------------------------------------------------------------------
@@ -339,3 +371,101 @@ class TestChapterComposerBackwardCompat:
             exercise_context=ctx,
         )
         assert "Breathe in through your nose" in result
+
+
+# ---------------------------------------------------------------------------
+# Operator directive (2026-05-29): EXERCISE never leans on any path
+# ---------------------------------------------------------------------------
+
+class TestExerciseNeverLeans:
+    """The legacy registry render path supplies a book-global repeat_count, so
+    from the 3rd exercise-bearing chapter onward `quick_repeat` used to fire and
+    collapse the exercise to its first 3 setup sentences. Operator directive:
+    every exercise renders FULL on every path. These tests use the real
+    gen_z_professionals × anxiety box-breathing atom (EXERCISE v01, 13 authored
+    guidance sentences) to prove the lean is gone.
+    """
+
+    # EXERCISE v01 — box breathing — the exact atom from the D1 investigation.
+    BOX_BREATHING = (
+        "Sit back from your screen. Place both feet flat on the floor. "
+        "Feel your heels make contact. Breathe in for four counts. "
+        "Hold for four counts. Breathe out for four counts. "
+        "Hold for four counts. That is one cycle. Do not rush the holds. "
+        "Keep the counts even. Complete four cycles. On the fourth exhale, "
+        "let your shoulders drop before you breathe in again. "
+        "Return to the screen after the fourth cycle."
+    )
+
+    # The atom guidance is 13 sentences; lean (the old defect) kept only 3.
+    FULL_SENTENCE_COUNT = 13
+    OLD_LEAN_SENTENCE_COUNT = 3
+
+    def _assemble_legacy_repeat(self, repeat_count: int) -> str:
+        """Assemble the box-breathing exercise via the legacy path with a
+        book-global repeat_count (chapter 3+ on the registry render path)."""
+        ctx = AssemblyContext(
+            first_encounter=False,        # chapter-0-only is True; ch3+ is False
+            repeat_count=repeat_count,    # legacy book-global count → quick_repeat used to fire
+            chapter_index=3,
+            exercise_id="gen_z_professionals_anxiety_box_breathing",
+        )
+        return assemble_exercise_for_chapter(
+            exercise_id=ctx.exercise_id,
+            exercise_type="00_breath_regulation",
+            description_text=self.BOX_BREATHING,
+            ctx=ctx,
+        )
+
+    def test_legacy_repeat_exercise_renders_full_not_lean(self):
+        """repeat_count>=2 on the legacy path → quick_repeat fires, but the
+        exercise renders FULL: all 13 guidance sentences are present, including
+        the breathing pattern, cycle count, body cue and exit cue that the old
+        lean (first 3 sentences) dropped."""
+        # Confirm the rule that fires is still quick_repeat (so we are exercising
+        # the exact code path that used to truncate).
+        rules = load_assembly_rules(
+            REPO_ROOT / "config" / "practice" / "assembly_components.yaml"
+        )
+        sel = select_components(
+            AssemblyContext(repeat_count=3, first_encounter=False), rules
+        )
+        assert sel.rule_name == "quick_repeat"
+
+        assembled = self._assemble_legacy_repeat(repeat_count=3)
+
+        # The full atom text is present verbatim — nothing truncated.
+        assert self.BOX_BREATHING in assembled
+
+        # Sentence count of the guidance >= the atom's full count (NOT 3).
+        # Count only the box-breathing portion to avoid wrapper sentences
+        # inflating the number; the key is it is far more than the old lean of 3.
+        guidance_sentences = _sentences(self.BOX_BREATHING)
+        assert len(guidance_sentences) == self.FULL_SENTENCE_COUNT
+        assembled_sentences = _sentences(assembled)
+        assert len(assembled_sentences) >= self.FULL_SENTENCE_COUNT
+        assert len(assembled_sentences) > self.OLD_LEAN_SENTENCE_COUNT
+
+        # The breathing mechanics, cycle count, body cue and exit cue — all the
+        # content the old lean discarded — must be present.
+        for must_have in (
+            "Breathe in for four counts.",
+            "Hold for four counts.",
+            "Breathe out for four counts.",
+            "Complete four cycles.",
+            "let your shoulders drop",
+            "Return to the screen after the fourth cycle.",
+        ):
+            assert must_have in assembled, f"missing leaned-away content: {must_have!r}"
+
+    def test_same_technique_repeat_also_full(self):
+        """Because lean is disabled, even a same-technique repeat at a higher
+        repeat_count renders full (the rule's anti-repetition truncation no
+        longer applies)."""
+        first = self._assemble_legacy_repeat(repeat_count=2)
+        later = self._assemble_legacy_repeat(repeat_count=5)
+        for assembled in (first, later):
+            assert self.BOX_BREATHING in assembled
+            assert len(_sentences(assembled)) >= self.FULL_SENTENCE_COUNT
+        # The two repeats carry the same full guidance — no progressive thinning.
+        assert self.BOX_BREATHING in first and self.BOX_BREATHING in later

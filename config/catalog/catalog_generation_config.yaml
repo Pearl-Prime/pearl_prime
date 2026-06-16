@@ -19,6 +19,7 @@ locales:
   it_IT: { language: Italian, region: Italy, currency: EUR, tier: secondary }
   zh_SG: { language: "Simplified Chinese", region: Singapore, currency: SGD, tier: tertiary }
   hu_HU: { language: Hungarian, region: Hungary, currency: HUF, tier: tertiary }
+  pt_BR: { language: Portuguese, region: Brazil, currency: BRL, tier: secondary }  # ratified 2026-05-29 (LATAM §1A): manga-forward, top-2 priority w/ France
 
 # ── Canonical Topics (17 active) ─────────────────────────────────────
 topics:
@@ -69,6 +70,13 @@ content_mix:
 # - Manga sells on Amazon KDP as graphic novel EPUB
 # - WEBTOON Canvas 2026 supports 7 languages
 # - France = #1 EU manga market (35% share)
+#
+# PROVENANCE (2026-05-29): the manga shares below were re-weighted UPWARD from the
+# cited global_manga_distribution_strategy.md §6.1 (e.g. en_US manga ~20% here vs
+# strategy 30%; ja_JP ~70% vs 40%; ko_KR ~60% vs 35%; zh_TW ~55% vs 25%). Intentional
+# portfolio bet, not a faithful copy of the source. This is the OPERATIVE per-market
+# format-mix SSOT (market_catalog_registry.yaml::content_mix is stale) — but know it
+# diverges from the cited research numbers.
 
 lane_content_mix:
   # Japan: manga-primary. Piccoma #1 app ($482M+), webtoon $10.85B.
@@ -134,6 +142,15 @@ lane_content_mix:
     micro_manga: 0.05           # short episodes
     micro_ebook: 0.20           # text micro
 
+  # Brazil: top-3 ex-Asia anime market; manga-forward (One Piece = #2 comic). LATAM §1A.
+  pt_BR:
+    manga_series: 0.13          # WEBTOON Canvas BR + Brazilian manga apps
+    manga_standalone: 0.08      # KDP BR graphic novel / tankōbon
+    ebook_series: 0.32          # text series
+    ebook_standalone: 0.27      # text standalone
+    micro_manga: 0.05           # short episodes
+    micro_ebook: 0.15           # text micro
+
   # China: SKIP (inaccessible without local entity)
   zh_CN:
     manga_series: 0.00
@@ -190,6 +207,7 @@ locale_pricing:
   it_IT: { multiplier: 0.85, min_micro: 0.99, max_standard: 22.99 }
   zh_SG: { multiplier: 0.45, min_micro: 1.50, max_standard: 10.00 }
   hu_HU: { multiplier: 0.40, min_micro: 0.99, max_standard: 14.99 }
+  pt_BR: { multiplier: 0.60, min_micro: 0.99, max_standard: 16.99 }  # ratified band 0.55–0.65 (LATAM §1A); BRL, price-sensitive market
 
 # ── Kill List (Never Build) ──────────────────────────────────────────
 kill_list:

@@ -1,5 +1,9 @@
 # Teacher Bank Content Audit
 
+> **DEPRECATED 2026-06-06** — superseded by [`docs/PEARL_PRIME_ATOM_100PCT_COVERAGE_SSOT.md`](../../docs/PEARL_PRIME_ATOM_100PCT_COVERAGE_SSOT.md) **§8.7** (teacher-bank coverage) and the gap matrix at [`artifacts/qa/pearl_prime_atom_100pct_gap_matrix_20260606.tsv`](../qa/pearl_prime_atom_100pct_gap_matrix_20260606.tsv) (QUOTE/TEACHER_DOCTRINE/PERMISSION_GRANT overlay-routed rows). This doc is retained as historical lineage per [`AGENT_FILE_PERSISTENCE_PROTOCOL.md`](../../docs/AGENT_FILE_PERSISTENCE_PROTOCOL.md).
+
+---
+
 **Date:** 2026-04-10
 **Project:** proj_state_convergence_20260328
 **Scope:** SOURCE_OF_TRUTH/teacher_banks/ — 13 teachers x 13 slot types

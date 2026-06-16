@@ -13,6 +13,7 @@ from __future__ import annotations
 
 import hashlib
 import logging
+import re
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Optional
@@ -27,6 +28,17 @@ logger = logging.getLogger(__name__)
 REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 POLICY_PATH = REPO_ROOT / "config" / "source_of_truth" / "chapter_planner_policies.yaml"
 CHAPTER_PURPOSE_CONTRACTS_PATH = REPO_ROOT / "config" / "source_of_truth" / "chapter_purpose_contracts.yaml"
+CHAPTER_STRUCTURE_TEMPLATE_PATH = (
+    REPO_ROOT / "config" / "rendering" / "chapter_structure_template.yaml"
+)
+
+# OPD-124: long-form runtimes must expose all seven canonical chapter roles in order.
+LONG_FORM_RUNTIME_FORMATS = frozenset(
+    {"standard_book", "extended_book_2h", "deep_book_4h", "deep_book_6h"}
+)
+MICRO_COLLAPSE_RUNTIME_FORMATS = frozenset({"micro_book_15", "micro_book_20"})
+
+_CHAPTER_STRUCTURE_TEMPLATE_CACHE: Optional[dict[str, Any]] = None
 
 ROLE_MAP = {
     "recognition": "introduce",
@@ -53,6 +65,220 @@ BESTSELLER_STRUCTURES = [
     "letter",
 ]
 MAX_BESTSELLER_RUN = 3
+
+# OPD-114 Phase B: scene-depth ladder targets per runtime (L1..N within one archetype).
+RUNTIME_SCENE_STORY_DEPTH: dict[str, int] = {
+    "micro_book_15": 1,
+    "standard_book": 2,
+    "extended_book_2h": 3,
+    "deep_book_4h": 4,
+    "deep_book_6h": 5,
+}
+
+
+def story_depth_for_runtime(runtime_format: Optional[str]) -> int:
+    """Return scene ladder depth (1–5) for a runtime_format id."""
+    rf = (runtime_format or "").strip()
+    return int(RUNTIME_SCENE_STORY_DEPTH.get(rf, 2))
+
+
+def load_chapter_structure_template(
+    path: Optional[Path] = None,
+) -> dict[str, Any]:
+    """Load config/rendering/chapter_structure_template.yaml (OPD-124)."""
+    global _CHAPTER_STRUCTURE_TEMPLATE_CACHE
+    if _CHAPTER_STRUCTURE_TEMPLATE_CACHE is not None:
+        return _CHAPTER_STRUCTURE_TEMPLATE_CACHE
+    data = _load_yaml(path or CHAPTER_STRUCTURE_TEMPLATE_PATH)
+    _CHAPTER_STRUCTURE_TEMPLATE_CACHE = data if isinstance(data, dict) else {}
+    return _CHAPTER_STRUCTURE_TEMPLATE_CACHE
+
+
+def _slot_type_to_canonical_role(slot_type: str, template: dict[str, Any]) -> str:
+    """Map a canonical slot type to operator slot_role (hook, named_story, …)."""
+    st = (slot_type or "").strip().upper()
+    prefix = {str(x).strip().upper() for x in (template.get("prefix_slot_types") or [])}
+    if st in prefix:
+        return st.lower()
+    for entry in template.get("canonical_chapter_sequence") or []:
+        if not isinstance(entry, dict):
+            continue
+        role = str(entry.get("slot_role") or "").strip()
+        types = {str(t).strip().upper() for t in (entry.get("slot_types") or [])}
+        if st in types:
+            return role or st.lower()
+    return "other"
+
+
+def _canonical_type_priority(template: dict[str, Any]) -> dict[str, int]:
+    """Lower index = earlier in chapter (hook first)."""
+    priority: dict[str, int] = {}
+    idx = 0
+    for entry in template.get("canonical_chapter_sequence") or []:
+        if not isinstance(entry, dict):
+            continue
+        for st in entry.get("slot_types") or []:
+            key = str(st).strip().upper()
+            if key and key not in priority:
+                priority[key] = idx
+        idx += 1
+    for st in template.get("prefix_slot_types") or []:
+        key = str(st).strip().upper()
+        if key and key not in priority:
+            priority[key] = -1
+    return priority
+
+
+def enforce_canonical_chapter_sequence(
+    row: list[str],
+    *,
+    runtime_format: Optional[str] = None,
+    chapter_index: int = 0,
+    template: Optional[dict[str, Any]] = None,
+) -> tuple[list[str], list[str], list[str]]:
+    """
+    Reorder one chapter's slot types to hook → scene → section → named story → …
+
+    Returns (reordered_slots, slot_roles, warnings). OPD-124.
+    """
+    rf = (runtime_format or "").strip()
+    tmpl = template if template is not None else load_chapter_structure_template()
+    warnings: list[str] = []
+
+    base = [str(s).strip().upper() for s in row if str(s).strip()]
+    if not base:
+        return [], [], warnings
+
+    if rf in MICRO_COLLAPSE_RUNTIME_FORMATS:
+        deviations = (tmpl.get("deviations_allowed") or {})
+        if deviations.get(rf) == "collapse_scene_section_allowed":
+            if "SCENE" not in base and any(s in base for s in ("REFLECTION", "COMPRESSION")):
+                warnings.append(
+                    f"ch{chapter_index + 1}: micro format may collapse scene+section (no SCENE slot)"
+                )
+        roles = [_slot_type_to_canonical_role(s, tmpl) for s in base]
+        return base, roles, warnings
+
+    if rf not in LONG_FORM_RUNTIME_FORMATS:
+        roles = [_slot_type_to_canonical_role(s, tmpl) for s in base]
+        return base, roles, warnings
+
+    priority = _canonical_type_priority(tmpl)
+    prefix_types = {str(x).strip().upper() for x in (tmpl.get("prefix_slot_types") or [])}
+
+    # OPD-124: cap SCENE at 2 before teaching/story block; first STORY after section content.
+    scenes = [s for s in base if s == "SCENE"]
+    if len(scenes) > 2:
+        warnings.append(
+            f"ch{chapter_index + 1}: SCENE count {len(scenes)} > 2; planner keeps first two before section"
+        )
+    section_types = frozenset({"REFLECTION", "COMPRESSION", "PIVOT"})
+    sections = [s for s in base if s in section_types]
+    stories = [s for s in base if s == "STORY"]
+    teachers = [s for s in base if s in ("TEACHER_DOCTRINE", "COMPOSITE_TEACHER_DOCTRINE")]
+    exercises = [s for s in base if s == "EXERCISE"]
+    close_types = frozenset({"INTEGRATION", "TAKEAWAY", "THREAD", "PERMISSION"})
+    closes = [s for s in base if s in close_types]
+    hooks = [s for s in base if s == "HOOK"]
+    prefixes = [s for s in base if s in prefix_types]
+    other = [
+        s
+        for s in base
+        if s
+        not in (
+            {"HOOK", "SCENE", "STORY", "EXERCISE"}
+            | section_types
+            | close_types
+            | {"TEACHER_DOCTRINE", "COMPOSITE_TEACHER_DOCTRINE"}
+            | prefix_types
+        )
+    ]
+
+    if not hooks:
+        warnings.append(f"ch{chapter_index + 1}: canonical sequence missing hook (HOOK)")
+    if not scenes:
+        warnings.append(
+            f"ch{chapter_index + 1}: canonical sequence missing scene_or_section (SCENE)"
+        )
+    if not sections:
+        warnings.append(
+            f"ch{chapter_index + 1}: canonical sequence missing first_section_content "
+            "(REFLECTION/COMPRESSION/PIVOT)"
+        )
+    if not stories:
+        warnings.append(f"ch{chapter_index + 1}: canonical sequence missing named_story (STORY)")
+
+    first_story = stories[:1]
+    rest_stories = stories[1:]
+    ordered = (
+        prefixes
+        + hooks
+        + scenes[:2]
+        + sections
+        + first_story
+        + teachers
+        + other
+        + exercises
+        + rest_stories
+        + closes
+    )
+    # Preserve any slot types not yet placed (stable append).
+    placed = set(ordered)
+    for s in base:
+        if s not in placed:
+            ordered.append(s)
+            placed.add(s)
+
+    roles = [_slot_type_to_canonical_role(s, tmpl) for s in ordered]
+
+    # Role-order compliance: first STORY index must follow section content.
+    if stories and sections:
+        if ordered.index(stories[0]) < max(ordered.index(s) for s in sections):
+            warnings.append(
+                f"ch{chapter_index + 1}: STORY precedes first_section_content after reorder "
+                "(check enrichment atom lengths separately)"
+            )
+    elif stories and hooks and not sections:
+        if ordered.index(stories[0]) < ordered.index(hooks[0]):
+            warnings.append(f"ch{chapter_index + 1}: STORY precedes HOOK")
+
+    if scenes and stories and ordered.index(scenes[0]) > ordered.index(stories[0]):
+        warnings.append(f"ch{chapter_index + 1}: SCENE follows STORY — sequence violation")
+
+    return ordered, roles, warnings
+
+
+def validate_named_story_slot_expectations(
+    story_prose: str,
+    *,
+    chapter_index: int = 0,
+    min_words: int = 200,
+) -> list[str]:
+    """
+    Planner/render warning when a STORY atom is short or lacks a named-character tell.
+
+    Uses the same classifier as chapter_composer (OPD-112/123). OPD-124 review aid.
+    """
+    warnings: list[str] = []
+    body = (story_prose or "").strip()
+    if not body:
+        warnings.append(f"ch{chapter_index + 1}: STORY slot empty")
+        return warnings
+    word_count = len(re.findall(r"\b\w+\b", body))
+    if word_count < min_words:
+        warnings.append(
+            f"ch{chapter_index + 1}: STORY atom short ({word_count} words < {min_words})"
+        )
+    try:
+        from phoenix_v4.rendering.chapter_composer import _classify_atom
+
+        if _classify_atom(body) != "named_story":
+            warnings.append(
+                f"ch{chapter_index + 1}: STORY atom lacks named-character opening tell"
+            )
+    except Exception:
+        pass
+    return warnings
 
 
 @dataclass
@@ -166,6 +392,55 @@ def assign_chapter_purpose_contracts(
             )
         )
     return out
+
+
+def _strip_doctrine_intro_headers(text: str) -> str:
+    chunks: list[str] = []
+    for para in text.split("\n\n"):
+        p = para.strip()
+        if not p or p.startswith("## ") or p == "---":
+            continue
+        chunks.append(p)
+    return "\n\n".join(chunks).strip()
+
+
+def _teacher_doctrine_intro_fallback(teacher_id: str, repo_root: Path) -> str:
+    path = repo_root / "SOURCE_OF_TRUTH" / "teacher_banks" / teacher_id / "doctrine" / "doctrine.yaml"
+    data = _load_yaml(path)
+    if not data:
+        return ""
+    tradition = str(data.get("tradition") or data.get("display_name") or teacher_id).strip()
+    core = str(data.get("core_principles") or "").strip()
+    if tradition and core:
+        return f"{tradition} {core}"
+    return tradition or core
+
+
+def resolve_teacher_doctrine_intro(
+    persona_id: str,
+    topic: str,
+    teacher_id: Optional[str],
+    repo_root: Path,
+    chapter_architecture_version: int = 1,
+) -> str:
+    """Holistic v2: book-level doctrine preamble before Chapter 1 (OPD-130)."""
+    if int(chapter_architecture_version) != 2:
+        return ""
+    tid = (teacher_id or "").strip().lower()
+    if not tid:
+        return ""
+    atom_path = (
+        repo_root
+        / "atoms"
+        / persona_id
+        / topic
+        / "TEACHER_DOCTRINE_INTRO"
+        / tid
+        / "CANONICAL.txt"
+    )
+    if atom_path.is_file():
+        return _strip_doctrine_intro_headers(atom_path.read_text(encoding="utf-8"))
+    return _teacher_doctrine_intro_fallback(tid, repo_root)
 
 
 # Phase pools (1-indexed chapter numbers). Keys must match BESTSELLER_STRUCTURES entries.
@@ -405,6 +680,9 @@ class ChapterPlanResult:
     warnings: list[str]
     chapter_bestseller_structures: Optional[list[str]] = None  # length == chapter_count
     chapter_selector_targets: Optional[list[dict[str, Any]]] = None  # length == chapter_count
+    angle_layer_by_chapter: Optional[dict[int, int]] = None
+    angle_definition_paragraph_weight: Optional[int] = None
+    chapter_slot_roles: Optional[list[list[str]]] = None  # OPD-124: hook, named_story, …
 
 
 # Alias for specs that refer to book-level structure planning output.
@@ -527,25 +805,64 @@ def plan_chapters(
     book_size: Optional[str] = None,
     policy_path: Optional[Path] = None,
     enforce_role_distribution: bool = False,
+    angle_id: Optional[str] = None,
+    runtime_format: Optional[str] = None,
 ) -> ChapterPlanResult:
     """
     Build chapter-level archetype/weight plan and derive effective slot_definitions.
     """
+    from phoenix_v4.planning.angle_journey import (
+        ANGLE_DEFINITION_PARAGRAPH_WEIGHT,
+        apply_angle_journey_slots,
+        is_angle_journey_runtime,
+    )
+
+    angle_layer_by_chapter: dict[int, int] = {}
+    angle_journey_warnings: list[str] = []
+    angle_definition_weight: Optional[int] = None
+    working_slots = [list(row) for row in slot_definitions]
+    runtime_story_depth = story_depth_for_runtime(runtime_format)
+
     policy = _load_yaml(policy_path or POLICY_PATH)
     if not policy:
         sel_t = derive_chapter_selector_targets(chapter_count, selector_key_prefix, emotional_role_sequence)
+        out_slots_fb = working_slots
+        if angle_id and is_angle_journey_runtime(runtime_format):
+            out_slots_fb, angle_layer_by_chapter, angle_journey_warnings = apply_angle_journey_slots(
+                out_slots_fb,
+                angle_id=angle_id,
+                runtime_format=runtime_format,
+            )
+            angle_definition_weight = ANGLE_DEFINITION_PARAGRAPH_WEIGHT
+        enforced_slots: list[list[str]] = []
+        enforced_roles: list[list[str]] = []
+        seq_warnings: list[str] = []
+        for ch, row in enumerate(out_slots_fb):
+            new_row, roles, w = enforce_canonical_chapter_sequence(
+                row, runtime_format=runtime_format, chapter_index=ch,
+            )
+            enforced_slots.append(new_row)
+            enforced_roles.append(roles)
+            seq_warnings.extend(w)
         return ChapterPlanResult(
-            slot_definitions=slot_definitions,
+            slot_definitions=enforced_slots,
             chapter_archetypes=["legacy_uniform"] * chapter_count,
             chapter_exercise_modes=["none"] * chapter_count,
             chapter_reflection_weights=["standard"] * chapter_count,
-            chapter_story_depths=["standard"] * chapter_count,
-            warnings=["chapter_planner_policies missing; fallback to uniform slot plan"],
+            chapter_story_depths=[str(runtime_story_depth)] * chapter_count,
+            warnings=(
+                ["chapter_planner_policies missing; fallback to uniform slot plan"]
+                + angle_journey_warnings
+                + seq_warnings
+            ),
             chapter_selector_targets=sel_t,
+            angle_layer_by_chapter=angle_layer_by_chapter or None,
+            angle_definition_paragraph_weight=angle_definition_weight,
+            chapter_slot_roles=enforced_roles,
         )
 
     size = book_size or infer_book_size(chapter_count, policy)
-    warnings = _role_distribution_warnings(size, emotional_role_sequence, policy)
+    warnings = _role_distribution_warnings(size, emotional_role_sequence, policy) + angle_journey_warnings
     if enforce_role_distribution and warnings:
         raise ValueError("; ".join(warnings))
 
@@ -570,7 +887,7 @@ def plan_chapters(
     reflection_heavy_used = 0
 
     for ch in range(chapter_count):
-        base_row = list(slot_definitions[ch]) if ch < len(slot_definitions) else []
+        base_row = list(working_slots[ch]) if ch < len(working_slots) else []
         role = _chapter_role(emotional_role_sequence, ch)
 
         # 1) Candidate generation
@@ -642,7 +959,7 @@ def plan_chapters(
         sp = archetype_cfg.get("slot_policy") or {}
         ex_mode = str(sp.get("exercise_mode") or "none")
         refl_w = str(sp.get("reflection_weight") or "standard")
-        story_d = str(sp.get("story_depth") or "standard")
+        story_d = str(runtime_story_depth)
 
         if ex_mode == "none":
             chosen_row = [s for s in chosen_row if s != "EXERCISE"]
@@ -670,8 +987,28 @@ def plan_chapters(
         out_slots.append(chosen_row)
         signature_counts[archetype_id] = signature_counts.get(archetype_id, 0) + 1
 
+    final_slots = out_slots
+    if angle_id and is_angle_journey_runtime(runtime_format):
+        final_slots, angle_layer_by_chapter, aj_warns = apply_angle_journey_slots(
+            final_slots,
+            angle_id=angle_id,
+            runtime_format=runtime_format,
+        )
+        warnings = warnings + aj_warns
+        angle_definition_weight = ANGLE_DEFINITION_PARAGRAPH_WEIGHT
+
+    enforced_slots: list[list[str]] = []
+    enforced_roles: list[list[str]] = []
+    for ch, row in enumerate(final_slots):
+        new_row, roles, seq_warns = enforce_canonical_chapter_sequence(
+            row, runtime_format=runtime_format, chapter_index=ch,
+        )
+        enforced_slots.append(new_row)
+        enforced_roles.append(roles)
+        warnings.extend(seq_warns)
+
     return ChapterPlanResult(
-        slot_definitions=out_slots,
+        slot_definitions=enforced_slots,
         chapter_archetypes=chapter_archetypes,
         chapter_exercise_modes=chapter_exercise_modes,
         chapter_reflection_weights=chapter_reflection_weights,
@@ -679,4 +1016,7 @@ def plan_chapters(
         warnings=warnings,
         chapter_bestseller_structures=chapter_bestseller_structures,
         chapter_selector_targets=chapter_selector_targets,
+        angle_layer_by_chapter=angle_layer_by_chapter or None,
+        angle_definition_paragraph_weight=angle_definition_weight,
+        chapter_slot_roles=enforced_roles,
     )

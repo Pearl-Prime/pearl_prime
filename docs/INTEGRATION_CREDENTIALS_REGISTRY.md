@@ -2,7 +2,9 @@
 
 **Purpose:** Single canonical reference for every external service credential in Phoenix Omega.
 **Owner:** Pearl_Int / Pearl_Architect
-**Last updated:** 2026-04-19 (Added Groq, xAI/Grok, Together AI as Pearl News EN free-tier LLM providers)
+**Last updated:** 2026-06-02 (Added §5R Cloudflare R2 — artifact storage; Pearl Star autonomous self-monitoring section in [`pearl_star_node_inventory.md`](../skills/pearl-int/references/pearl_star_node_inventory.md); setup runbook at [`docs/runbooks/PEARL_STAR_SETUP_RUNBOOK.md`](./runbooks/PEARL_STAR_SETUP_RUNBOOK.md))
+
+**Prior:** 2026-05-27 (Added §12a fal.ai — serverless GPU inference, blocks Milestone H §7.1 per OPD-151; setup runbook + `FAL_KEY` env var registered)
 **Rule:** No actual secrets in this file. Only env var names, documentation, and pointers.
 
 ### Phase 1 + 2 scope (deliverables)
@@ -37,10 +39,19 @@ This reads the registry below and reports which env vars are set vs missing.
 
 ### 0. Pearl Star — Local Inference Server (PRIMARY)
 
+> **⚠️ AGENTS MUST RUN `eval "$(python3 scripts/ci/load_integration_env_from_keychain.py)"` BEFORE
+> REACHING PEARL STAR.** The Keychain is the single source of truth for the live endpoints. Do **NOT**
+> hardcode an IP and do **NOT** trust the stale `192.168.1.112` LAN address that older docs/scripts
+> default to — it is **WRONG** and unreachable off the operator's LAN. Pearl Star is reachable over
+> **Tailscale** at `pearlstar.tail7fd910.ts.net` (verified 2026-05-28: `/system_stats` HTTP 200,
+> Ollama `gemma3:27b` + `qwen2.5:14b` loaded). A prior agent concluded "Pearl Star unreachable" purely
+> because it used the stale `192.168.1.112` default instead of loading Keychain env first. Verify before
+> generating: `curl -s --max-time 8 "$COMFYUI_URL/system_stats"` must return HTTP 200.
+
 | Field | Value |
 |-------|-------|
-| **Server** | Ubuntu 24.04 at `PEARL_STAR_IP` (default: 192.168.1.112 LAN) |
-| **Services** | Ollama/Qwen3:14b (:11434), ComfyUI/FLUX.1-dev (:8188), CosyVoice2 (:9880) |
+| **Server** | Ubuntu 24.04, reached via Tailscale `pearlstar.tail7fd910.ts.net` (NOT the stale `192.168.1.112` LAN default). SSH alias `pearl_star` → host `pearlstar`. Endpoints come from Keychain via `load_integration_env_from_keychain.py`. |
+| **Services** | Ollama/Qwen (:11434, `qwen2.5:14b` + `gemma3:27b`), ComfyUI/FLUX (:8188), CosyVoice2 (:9880) |
 | **Env vars** | `PEARL_STAR_IP`, `COMFYUI_URL`, `COSYVOICE_URL` (optional gated downloads: `HF_TOKEN`) |
 | **Consumed by** | `phoenix_v4/manga/image_backend.py`, `scripts/image_generation/runcomfy_batch.py`, `scripts/video/flux_client.py`, `scripts/audio/generate_presenter_audio.py`, `scripts/localization/llm_client.py`, `pearl_news/pipeline/llm_expand.py` |
 | **How to obtain** | See [docs/UBUNTU_PRODUCTION_SERVER_SETUP.md](./UBUNTU_PRODUCTION_SERVER_SETUP.md) |
@@ -61,16 +72,21 @@ This reads the registry below and reports which env vars are set vs missing.
 - Ollama: qwen3:14b (9.3 GB Q4_K_M)
 
 **Provider migration (2026-04-08):**
-- **Image generation:** ComfyUI on Pearl Star is now PRIMARY. RunComfy cloud is optional fallback.
+- **Image generation:** ComfyUI on Pearl Star is PRIMARY (sole active path). RunComfy cloud is **DECOMMISSIONED** (paid lane cancelled by operator 2026-06-13 — SWEEP-TAIL; `RUNCOMFY_*` creds removed from registry + Keychain; runtime code retained fail-closed). See `docs/SESSION_HANDOFF_2026_06_11_RUNCOMFY_SUNSET.md` and cap `IMG-RENDER-DUAL-PATH-V1-01` (decommissioned).
 - **CJK LLM:** Ollama/Qwen3:14b on Pearl Star is now the default `QWEN_BASE_URL` target. DashScope is cloud fallback.
 - **CJK TTS:** CosyVoice2 on Pearl Star for zh/ja/ko. Edge-TTS is free fallback. ElevenLabs remains primary for EN.
 - **EN TTS:** ElevenLabs — NO CHANGE.
 
-**Keychain (macOS, for load_integration_env_from_keychain.py):**
-- `PEARL_STAR_IP` = 192.168.1.112
-- `COMFYUI_URL` = http://192.168.1.112:8188
-- `COSYVOICE_URL` = http://192.168.1.112:9880
-- `QWEN_BASE_URL` = http://192.168.1.112:11434/v1
+**Keychain (macOS, for load_integration_env_from_keychain.py) — VERIFIED LIVE 2026-05-28 (Tailscale):**
+- `COMFYUI_URL` = `http://pearlstar.tail7fd910.ts.net:8188`  ✅ HTTP 200 `/system_stats`
+- `QWEN_BASE_URL` = `http://pearlstar.tail7fd910.ts.net:11434/v1`  ✅ HTTP 200 (`gemma3:27b`, `qwen2.5:14b`)
+- `COSYVOICE_URL` = `http://pearlstar.tail7fd910.ts.net:9880`
+- `PEARL_STAR_IP` = (legacy LAN var; the Tailscale `*.ts.net` URLs above are what scripts should consume.
+  The old `192.168.1.112` value only works on the operator's local LAN and must NOT be assumed reachable.)
+
+These are the values the Keychain returns; the literal endpoints above are documentation only — always
+**load them at runtime** via `eval "$(python3 scripts/ci/load_integration_env_from_keychain.py)"` rather
+than copy-pasting, so a future endpoint rotation is picked up automatically.
 
 **Hugging Face (`HF_TOKEN`) — Pearl Star gated downloads (optional):**
 - **Env var:** `HF_TOKEN` (user access token — **Keychain only**; do not paste into repo docs or commits).
@@ -176,6 +192,19 @@ This reads the registry below and reports which env vars are set vs missing.
 | **Status** | Wired in CI and local scripts |
 | **Detailed docs** | [docs/VIDEO_CLOUDFLARE_FLUX_CREDENTIALS.md](./VIDEO_CLOUDFLARE_FLUX_CREDENTIALS.md) |
 
+### 5R. Cloudflare R2 — Artifact storage (long-running pipelines)
+
+| Field | Value |
+|-------|-------|
+| **Env vars** | `R2_ACCESS_KEY_ID`, `R2_SECRET_ACCESS_KEY`, `R2_ACCOUNT_ID`, `R2_BUCKET`, `R2_ENDPOINT` |
+| **Consumed by** | `scripts/artifacts/r2_sync.py`, `scripts/artifacts/setup_r2.sh`, Pearl Star autonomous-orchestrator sample uploads (long-running manga / pearl_news bulks). Tracked in code registry at `scripts/ci/integration_env_registry.py`. |
+| **GitHub workflows** | None today (Pearl Star pushes directly via `rclone`); future scheduled artifact rotation could move here. |
+| **How to obtain** | Cloudflare Dashboard → R2 → Manage R2 API Tokens → create bucket-scoped token. Result page shows Access Key ID + Secret Access Key + jurisdiction-specific S3 endpoint URL. Operator paste this into the gitignored staging file `docs/cloudflare_api.txt` and Pearl_Int loads it into Keychain per [`skills/pearl-int/references/credential_staging_files.md`](../skills/pearl-int/references/credential_staging_files.md). |
+| **Required vs optional** | Required for Pearl Star autonomous self-monitoring (orchestrator sample uploads + dashboards) and for any `r2_sync.py` consumer. Optional for laptop-only workflows that never write to R2. |
+| **Status** | Wired in Keychain (verified 2026-06-02 Pearl_Int); rclone remote `r2` configured on Pearl Star with `no_check_bucket=true` (bucket-scoped token has no account-level `CreateBucket` permission). |
+| **Bucket** | `phoenix-omega-artifacts` (existing prefixes: `manga/`, `teacher_showcase/`). EU jurisdiction — the endpoint host hash differs from `R2_ACCOUNT_ID`, so `R2_ENDPOINT` must be set explicitly (the value Cloudflare shows on the token result page). `scripts/artifacts/r2_sync.py` reads `R2_ENDPOINT` first and falls back to the default host format when unset. |
+| **Pearl Star setup** | See [`docs/runbooks/PEARL_STAR_SETUP_RUNBOOK.md`](./runbooks/PEARL_STAR_SETUP_RUNBOOK.md) Step 4 for the no-secrets-in-chat configure procedure. |
+
 ### 6. GitHub API
 
 | Field | Value |
@@ -257,6 +286,23 @@ This reads the registry below and reports which env vars are set vs missing.
 | **How to obtain** | Install Ollama locally: https://ollama.com/ — runs on `localhost:11434` by default |
 | **Required vs optional** | Optional — alternative to Qwen for local research |
 | **Status** | Wired in research script |
+
+### 12a. fal.ai — Serverless GPU inference (Qwen-Image-Layered + other hosted models)
+
+| Field | Value |
+|-------|-------|
+| **Env vars** | `FAL_KEY` |
+| **Consumed by** | Milestone H §7.1 smoke test (`fal-ai/qwen-image-layered/lora` endpoint). Future V5.1 catalog rollout dispatcher pending operator decision. |
+| **GitHub workflows** | None yet (smoke test runs locally / interactively) |
+| **How to obtain** | fal.ai dashboard: https://fal.ai/dashboard/keys — sign in, "Add Key", copy once (shown only at creation). Free tier: small credit on signup. Full setup runbook: [docs/runbooks/PEARL_INT_FAL_AI_SETUP_2026-05-27.md](./runbooks/PEARL_INT_FAL_AI_SETUP_2026-05-27.md) |
+| **Required vs optional** | Optional — blocks Milestone H §7.1 smoke test until operator provisions. Not used elsewhere yet. |
+| **Status** | **NOT YET PROVISIONED** — Phoenix has no fal.ai account as of 2026-05-27. OPD-151 (operator-approved) gates Milestone H §7.1 smoke test on this credential. OPD-153 status. |
+| **Pricing reference** | [`docs/MANGA_V5_COMPUTE_SCALING_OPTIONS.md`](./MANGA_V5_COMPUTE_SCALING_OPTIONS.md) §3.4: `fal-ai/qwen-image` stage 1 = $0.02/MP, `fal-ai/qwen-image-layered/lora` stage 2 = $0.06/image. Two-stage panel ≈ $0.08 (smoke test cost ≈ $1 for one ep_001 panel pair). |
+| **License / commercial-clean** | Apache-2.0 model + fal.ai commercial-clean ToS per scout `artifacts/research/iyashikei_style_lora_scout_2026-05-21.md` Channel 1 + scaling-options doc §3.4 line 150. |
+| **Env var name standard** | `FAL_KEY` is the canonical name the [`fal-client`](https://github.com/fal-ai/fal/tree/main/projects/fal_client) Python/JS SDK reads automatically. Do NOT use `FAL_API_KEY` or other variants — the SDK will not find them. |
+| **Base URL** | `https://fal.run/<model-id>` (REST queue API, e.g. `https://fal.run/fal-ai/qwen-image-layered/lora`); status polling via `https://queue.fal.run/<model-id>/requests/<request-id>/status`. |
+| **Validation** | `curl -sS -H "Authorization: Key $FAL_KEY" https://fal.run/fal-ai/qwen-image -d '{}' -H "content-type: application/json"` — expect a JSON response (queue accept or validation error from a missing-prompt body), NOT a 401. Cheap GET alternative: `curl -sS -H "Authorization: Key $FAL_KEY" https://queue.fal.run/fal-ai/qwen-image/requests/00000000-0000-0000-0000-000000000000/status` should return 404-not-found JSON (proving auth ok), not 401. |
+| **Detailed docs** | [docs/runbooks/PEARL_INT_FAL_AI_SETUP_2026-05-27.md](./runbooks/PEARL_INT_FAL_AI_SETUP_2026-05-27.md) — operator setup steps |
 
 ---
 

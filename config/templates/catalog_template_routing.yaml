@@ -18,21 +18,21 @@ persona_tiers:
 
 routing:
   somatic:
-    gen_z:        {standard_book: v2_somatic, short_book_30: v2_somatic, micro_book_20: spine_only}
-    professional: {standard_book: v2_somatic, short_book_30: v2_somatic, micro_book_20: spine_only}
-    executive:    {standard_book: v2_somatic, short_book_30: spine_only,  micro_book_20: spine_only}
+    gen_z:        {standard_book: v2_somatic, short_book_30: v2_somatic, micro_book_20: spine_only, extended_book_2h: v2_somatic, deep_book_4h: v2_somatic, deep_book_6h: v2_somatic}
+    professional: {standard_book: v2_somatic, short_book_30: v2_somatic, micro_book_20: spine_only, extended_book_2h: v2_somatic, deep_book_4h: v2_somatic, deep_book_6h: v2_somatic}
+    executive:    {standard_book: v2_somatic, short_book_30: spine_only,  micro_book_20: spine_only, extended_book_2h: v2_somatic, deep_book_4h: v2_somatic, deep_book_6h: v2_somatic}
   cognitive:
-    gen_z:        {standard_book: spine_only, short_book_30: spine_only, micro_book_20: spine_only}
-    professional: {standard_book: spine_only, short_book_30: spine_only, micro_book_20: spine_only}
-    executive:    {standard_book: spine_only, short_book_30: spine_only, micro_book_20: spine_only}
+    gen_z:        {standard_book: spine_only, short_book_30: spine_only, micro_book_20: spine_only, extended_book_2h: spine_only, deep_book_4h: spine_only, deep_book_6h: spine_only}
+    professional: {standard_book: spine_only, short_book_30: spine_only, micro_book_20: spine_only, extended_book_2h: spine_only, deep_book_4h: spine_only, deep_book_6h: spine_only}
+    executive:    {standard_book: spine_only, short_book_30: spine_only, micro_book_20: spine_only, extended_book_2h: spine_only, deep_book_4h: spine_only, deep_book_6h: spine_only}
   relational:
-    gen_z:        {standard_book: spine_only, short_book_30: spine_only, micro_book_20: spine_only}
-    professional: {standard_book: spine_only, short_book_30: spine_only, micro_book_20: spine_only}
-    executive:    {standard_book: spine_only, short_book_30: spine_only, micro_book_20: spine_only}
+    gen_z:        {standard_book: spine_only, short_book_30: spine_only, micro_book_20: spine_only, extended_book_2h: spine_only, deep_book_4h: spine_only, deep_book_6h: spine_only}
+    professional: {standard_book: spine_only, short_book_30: spine_only, micro_book_20: spine_only, extended_book_2h: spine_only, deep_book_4h: spine_only, deep_book_6h: spine_only}
+    executive:    {standard_book: spine_only, short_book_30: spine_only, micro_book_20: spine_only, extended_book_2h: spine_only, deep_book_4h: spine_only, deep_book_6h: spine_only}
   financial:
-    gen_z:        {standard_book: spine_only, short_book_30: spine_only, micro_book_20: spine_only}
-    professional: {standard_book: spine_only, short_book_30: spine_only, micro_book_20: spine_only}
-    executive:    {standard_book: spine_only, short_book_30: spine_only, micro_book_20: spine_only}
+    gen_z:        {standard_book: spine_only, short_book_30: spine_only, micro_book_20: spine_only, extended_book_2h: spine_only, deep_book_4h: spine_only, deep_book_6h: spine_only}
+    professional: {standard_book: spine_only, short_book_30: spine_only, micro_book_20: spine_only, extended_book_2h: spine_only, deep_book_4h: spine_only, deep_book_6h: spine_only}
+    executive:    {standard_book: spine_only, short_book_30: spine_only, micro_book_20: spine_only, extended_book_2h: spine_only, deep_book_4h: spine_only, deep_book_6h: spine_only}
 
 fallback: spine_only
 
@@ -45,3 +45,17 @@ rationale:
   executive_somatic_short: >
     Executive voice does not match v2_somatic's nervous-system-reset
     framing at short_book_30 length. spine_only gives cleaner results.
+  long_runtimes_somatic: >
+    OPD-106 (2026-05-18): extended_book_2h, deep_book_4h, deep_book_6h
+    are now routed identically to standard_book for somatic tiers.
+    These runtimes share SOMATIC_FULL_RUNTIME_FORMATS membership in
+    phoenix_v4/planning/beatmap_compile.py (they all consume the v2 somatic
+    10-slot grid), so the routing log was incorrectly reporting "spine_only"
+    for the long runtimes. The structural overlay is already applied via
+    beatmap_compile.resolve_slot_definitions(); this YAML brings the
+    diagnostic signal in line with actual rendering behaviour so operators
+    can verify routing from run.log without grepping into code paths.
+    Long-form executive somatic also routes to v2_somatic — at deep depths
+    the nervous-system framing is appropriate even for executive voice
+    (the short_book_30 register-collision concern only applies to compact
+    formats).

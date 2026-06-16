@@ -67,6 +67,34 @@ When adding any of these:
 3. Author per-locale strategic doc section (or new file)
 4. Add format-routing config entries
 
+## 6.1 RATIFIED — de_DE / fr_FR / it_IT / es_ES strategy (2026-05-29, operator)
+
+> **✅ RATIFIED 2026-05-29 (operator).** These per-market strategies are accepted. **Locale-wiring scope expansion APPROVED** — priority **France + Brazil first** (genuine manga cultures), then DE/ES/IT/MX (ebook-forward). Implementation = a separately-governed `VALID_LOCALES` + schema-enum + `lane_content_mix` + `format_routing` change with a series_plan regen (thousands of files → its own atomic PR per the 2X.4 pattern; NOT done here). Western markets are ebook-heavy / manga-light except France; audiobook is the universal growth lever.
+
+### Germany (de_DE)
+- **Format mix (proposed):** ebook ~80% / manga ~10% / **audiobook companion** (Germany = #1 EU audiobook market by volume; books €9.88B in 2024). Manga = a YA-driven aisle, not a self-help vehicle.
+- **Genre tilt:** OVER `psychological_thriller`, `dark_fantasy` (krimi/seinen tradition), `workplace_drama` (Mittelstand burnout), `sci_fi_cyberpunk`. UNDER sports, cultivation, explicit-`iyashikei` (credentialed/clinical register required; `soul_repair` is a de_DE `brand_locale_kill`).
+- **First-wave brands:** `cognitive_clarity` (CBT/thriller), `digital_ground`, `executive_calm_workplace`, `stabilizer_healing`. **Audiobook-first, not manga-first.**
+
+### France (fr_FR) — deepest Western manga ladder
+- **Format mix (proposed):** ebook ~70% / manga ~15% (highest EU manga weight). France = #1 EU manga market (36M copies 2024; manga ≈ 11% of book revenue; segment ~19.6% CAGR to 2030); WEBTOON Canvas FR launching 2026.
+- **Genre tilt:** OVER `dark_fantasy`, `isekai`, `psychological_horror`, `supernatural_mystery`, `romance_josei_drama` (BD-manga crossover); philosophical register. The prime non-Asian home for the embedded-wellness manga thesis.
+- **First-wave brands:** `stillness_press` (full genre ladder), `cognitive_clarity`, `solar_return_isekai`, `healing_ground_healing`.
+
+### Spain (es_ES)
+- **Format mix (proposed):** ebook ~80% / manga ~10% / audiobook (Storytel / Kobo Plus). Books €3.037B 2024 (+6.3%, 11th growth year); audiobooks +14.9%.
+- **Genre tilt:** OVER `romance_josei_drama`, `psychological_horror`, `supernatural_mystery` (horror-cinema heritage). UNDER sports, cultivation. Credentialed-author framing.
+- **First-wave brands:** `gentle_growth_healing`, `relational_calm_iyashikei`, `heart_balance_shojo`, `confidence_core_romance`. Shares `es_LA` production but **SPLIT register** (European ≠ LATAM Spanish).
+
+### Italy (it_IT)
+- **Format mix (proposed):** ebook ~83% / manga ~12% / audiobook (the lone growth segment, €34M 2025 +13.3%). Manga = 74.4% of comics value but **cooling** (−2.8% 2025).
+- **Genre tilt:** OVER `romance_josei_drama`, `dark_fantasy`, `psychological_horror` (Dylan Dog fumetti tradition), YA-skewing manga. UNDER long explicit self-help (high price-sensitivity).
+- **First-wave brands:** `stillness_press`, `gentle_growth_healing`, `healing_ground_healing`, `relational_calm_iyashikei`. Audiobook + ebook entry; manga as YA-crossover.
+
+**Wiring for any of de/fr/it/es** (per the §6 checklist): `VALID_LOCALES` (both generators) + schema enum bump + per-locale `lane_content_mix` + `format_routing` + `_GENRE_REVENUE_WEIGHTS`. Operator decision (scope expansion). Sources: Publishing Perspectives (DE 2024), Statista/Grand View (FR manga), PW (Spain), AIE/Fumettologica (Italy 2025), Bookwire (Spain), Market Data Forecast (EU audiobook).
+
+---
+
 ## 7. Translation provider routing — DECISION NEEDED for hu_HU
 
 | Provider option | Cost | Quality | Notes |

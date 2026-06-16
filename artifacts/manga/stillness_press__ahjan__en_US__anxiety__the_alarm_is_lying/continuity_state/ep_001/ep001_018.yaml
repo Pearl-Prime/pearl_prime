@@ -1,0 +1,32 @@
+schema_version: 1.0.0
+panel_id: ep001_018
+inherits_from: ep001_017
+beat_type: standard
+archetype: hand_table_micro
+scene_state:
+  scene_id: kitchen_table_aoki
+  temporal: morning
+  light_rig_id: K02_morning_window_neutral
+character_state:
+  mira_aoki:
+    character_design_hash: axes_only_PENDING_compute
+    pose_id: hand_only_table
+    expression_dial: 0.5
+    emotional: anxious_diminishing
+    gaze_direction: off_frame_down
+    hand_state: relaxed_open
+prop_state:
+  cup: full
+  phone: face_up_notification
+  succulent_in_clay_pot: normal
+  laptop: open_to_calendar
+  finch: perched_on_windowsill
+relational_field:
+  active_entities:
+  - id: mira_aoki
+    on_frame: true
+    role: subject
+  shared_attention_anchor: null
+  emotional_tension_vector:
+    direction: steady
+    magnitude_delta_from_prev: 0.0

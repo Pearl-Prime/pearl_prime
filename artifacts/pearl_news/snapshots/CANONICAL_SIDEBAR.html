@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Pearl News — CANONICAL SIDEBAR (extracted from live post 3724)</title>
+<!--
+  GOLD MASTER for Pearl News sidebar parity verification.
+  Source: https://pearlnewsuna.org/?p=3724 (category 33 = World Health)
+  Extracted: 2026-06-04 UTC
+  Composite-canonical SHA chain (see CANONICAL_SIDEBAR_METADATA.json):
+    8070e81fd (PR #853, structural baseline)
+    b64caf846 (PR #1105, wpautop grid-cell fix)
+    6e7dc9277 (operator restore of PR #853 into v2 templates — branch-only)
+    45733349a (mini-app launcher + 3-bullet SDG — branch-only)
+    78f115fe3 (interactive Hot Take Poll + Editorial Take + pnReaderSignal IIFE — branch-only)
+    d0075d31d (WP must-use plugin — branch-only, but deployed)
+
+  Any future change to sidebar markup, CSS, JS, or function set requires:
+    1. Updating CANONICAL_SIDEBAR.html + METADATA.json
+    2. Updating docs/PEARL_NEWS_SIDEBAR_FUNCTION_INVENTORY.md F-IDs
+    3. scripts/ci/check_pearl_news_sidebar_parity.py passing
+    4. Operator approval in the PR body
+-->
+</head>
+<body>
+<div class="sidebar">
+    <!-- GUIDED EXERCISE — interactive timer (PR #853 anchor; ALWAYS rendered) --></p>
+<div class="sidebar-card exercise-card" id="exerciseCard">
+<h3>Practice · Receiving Practice · 5 min</h3>
+<p style="color: rgba(255,255,255,0.65); font-size: 13px;">From Junko&#x27;s teaching on receiving direct guidance. Designed for when you have been trying too hard to figure things out on your own.</p>
+<div class="exercise-display" id="exerciseDisplay">
+<div class="exercise-phase" id="exercisePhase">Ready when you are</div>
+<div class="exercise-timer-num" id="exerciseTimer">5:00</div>
+<div class="exercise-instruction" id="exerciseInstruction">Tap begin to start a guided 5 min practice. Each step will advance automatically.</div>
+</p>
+</div>
+<p>      <button class="exercise-btn" id="exerciseBtn" onclick="toggleExercise()">Begin</button></p>
+<div class="exercise-progress" id="exerciseProgress">
+<div class="step-dot" data-step="0"></div>
+<div class="step-dot" data-step="1"></div>
+<div class="step-dot" data-step="2"></div>
+<div class="step-dot" data-step="3"></div>
+<div class="step-dot" data-step="4"></div>
+<div class="step-dot" data-step="5"></div>
+<div class="step-dot" data-step="6"></div>
+<div class="step-dot" data-step="7"></div>
+</p>
+</div>
+</div>
+<p>    <!-- CTA — mini-app launcher matched by reaction_id (operator 2026-05-19) --></p>
+<div class="sidebar-card cta-card">
+<h3>Free Practice Tool</h3>
+<div class="cta-title">Intention Quadrant</div>
+<div class="cta-body">Channeler Junko offers a 3-minute Soul Frequency Pause for the moments between notifications, when the body has been carrying the load without permission to set it down. It is in the sidebar, timed an</div>
+<p><a href="#sec-v2-practice" class="cta-secondary">Read the practice in this article ↓</a>
+    </div>
+<p>    <!-- SDG DETAIL (operator 2026-05-19: 3 bullets; disclaimer moved to article bottom) --></p>
+<div class="sidebar-card">
+<h3>SDG Connection</h3>
+<p><span class="sdg-badge">SDG 3 · Good Health &amp; Well-Being · Target 3.4</span></p>
+<ul class="sdg-bullets" style="margin-top:12px;padding-left:18px;list-style:disc;">
+<li style="margin-bottom:8px;font-family:var(--font-sans);font-size:13px;color:var(--text-secondary);">Ensure healthy lives and promote well-being for all ages — including mental health and substance abuse prevention.</li>
+<li style="margin-bottom:8px;font-family:var(--font-sans);font-size:13px;color:var(--text-secondary);">Achieve universal health coverage with access to quality essential services and safe, affordable medicines.</li>
+<li style="margin-bottom:8px;font-family:var(--font-sans);font-size:13px;color:var(--text-secondary);">Strengthen the prevention and treatment of communicable and non-communicable diseases worldwide.</li>
+</ul>
+</div>
+<p>    <!-- POLL --><br />
+    <!-- POLL (operator 2026-05-19: now interactive + feeds EI v2 reader-signal log) --></p>
+<div class="sidebar-card pn-poll-card" data-pn-article-id="pn-junko-mental_health-5">
+<h3>Hot Take Poll</h3>
+<p style="margin-bottom: 12px; font-family: var(--font-sans); font-size: 13px; color: var(--text-secondary);">When you read this news, what was your first response?</p>
+<div class="pn-poll-options">
+        <button type="button" class="pn-poll-option" data-pn-value="My chest tightened"><span class="pn-poll-label">My chest tightened</span><span class="pn-poll-bar"></span><span class="pn-poll-count">0%</span></button><br />
+        <button type="button" class="pn-poll-option" data-pn-value="I scrolled past"><span class="pn-poll-label">I scrolled past</span><span class="pn-poll-bar"></span><span class="pn-poll-count">0%</span></button><br />
+        <button type="button" class="pn-poll-option" data-pn-value="I felt nothing"><span class="pn-poll-label">I felt nothing</span><span class="pn-poll-bar"></span><span class="pn-poll-count">0%</span></button><br />
+        <button type="button" class="pn-poll-option" data-pn-value="I texted someone"><span class="pn-poll-label">I texted someone</span><span class="pn-poll-bar"></span><span class="pn-poll-count">0%</span></button></p>
+</div>
+<p class="pn-poll-status" style="font-size: 11px; color: var(--text-muted); margin-top: 8px; font-family: var(--font-sans);">Results after you vote. Responses feed into Pearl News reporting and UNA-USA policy briefs.</p>
+</p>
+</div>
+<p>    <!-- CO-CREATION (operator 2026-05-19: Submit button + reader_signal POST) --></p>
+<div class="sidebar-card pn-take-card" data-pn-article-id="pn-junko-mental_health-5">
+<h3>Your Take → Editorial Input</h3>
+<p style="margin-bottom: 12px; font-size: 13px;">What does this news do to your daily life? Name one specific moment. Your input shapes our reporting and the questions we raise at UNA-USA meetings.</p>
+<p>      <textarea class="pn-take-input cocreation-input" placeholder="Name one specific moment from your daily life…"></textarea><br />
+      <button type="button" class="pn-take-submit" style="display:block;width:100%;padding:10px;margin-top:8px;background:var(--un-blue-dark);color:white;border:none;border-radius:6px;font-family:var(--font-sans);font-size:13px;font-weight:600;cursor:pointer;">Submit Take →</button></p>
+<p class="pn-take-status" style="font-size: 11px; color: var(--text-muted); margin-top: 8px; font-family: var(--font-sans);">Your take is editorial input — not a comment. It becomes source material.</p>
+</p>
+</div>
+</div>
+</div>
+<p><script>
+const steps = [
+  { phase: "Step 1 of 7 · Arrive", duration: 30, instruction: "Sit somewhere quiet. Close your eyes. Let your hands rest open. You are not here to produce an answer. You are here to receive one." },
+  { phase: "Step 2 of 7 · Soften", duration: 40, instruction: "Let your attention drop from your head into your chest. Stop trying to think your way forward. The mind analyzes. The chest receives. Let the chest lead for now." },
+  { phase: "Step 3 of 7 · Breathe", duration: 45, instruction: "Breathe slowly. Each exhale softens the guard a little more. You are not calming down — you are opening a channel. Guidance travels most clearly through a system that is not clenched.", breathe: true },
+  { phase: "Step 4 of 7 · Listen", duration: 60, instruction: "Stop producing. Start listening. Not with your ears — with your whole system. Notice if anything arrives: a word, a feeling, a sense of direction, a warmth. Do not interpret it yet. Just notice what shows up when you stop generating." },
+  { phase: "Step 5 of 7 · Receive", duration: 50, instruction: "Whatever arrived — even if it was faint, strange, or wordless — let it stay. Do not argue with it. Do not test it against logic yet. The meaning may unfold later. Your only job right now is to let it land." },
+  { phase: "Step 6 of 7 · Ground", duration: 40, instruction: "Feel your feet on the floor. Feel the weight of your body. You have been in a receptive state — now bring yourself gently back to ordinary awareness. The message does not disappear when you open your eyes." },
+  { phase: "Step 7 of 7 · Record", duration: 35, instruction: "Open your eyes. Write down whatever arrived, even if it does not make sense yet. One sentence is enough. Over time, these notes become a map of what your guidance is pointing toward." },
+  { phase: "Complete", duration: 0, instruction: "The practice is done. What came through was not your imagination producing content — it was your system receiving a signal it already knew how to recognize. That recognition is the beginning of everything Junko teaches about.", final: true }
+];
+let currentStep = -1, timer = null, secondsLeft = 300;
+let breathInterval = null, stepTimeout = null, paused = false;
+let stepTimeRemaining = 0, started = false;
+function updateTimerDisplay() {
+  const m = Math.floor(secondsLeft / 60), s = secondsLeft % 60;
+  document.getElementById('exerciseTimer').textContent = m + ':' + (s < 10 ? '0' : '') + s;
+}
+function updateProgress(stepIndex) {
+  document.querySelectorAll('.step-dot').forEach((dot, i) => {
+    dot.classList.remove('active', 'done');
+    if (i < stepIndex) dot.classList.add('done');
+    if (i === stepIndex) dot.classList.add('active');
+  });
+}
+function showBreathGuide(container) {
+  if (breathInterval) clearInterval(breathInterval);
+  const guide = document.createElement('div');
+  guide.id = 'breathGuide';
+  guide.style.cssText = 'font-family:var(--font-sans);font-size:24px;font-weight:300;color:rgba(255,255,255,0.9);margin-top:12px;transition:opacity 0.5s;';
+  container.appendChild(guide);
+  let inhaling = true, count = 0;
+  guide.textContent = 'Inhale...';
+  breathInterval = setInterval(() => {
+    if (paused) return;
+    count++;
+    if (inhaling && count >= 4) { inhaling = false; count = 0; guide.textContent = 'Exhale slowly...'; guide.style.opacity = '0.6'; }
+    else if (!inhaling && count >= 8) { inhaling = true; count = 0; guide.textContent = 'Inhale...'; guide.style.opacity = '1'; }
+  }, 1000);
+}
+function advanceStep() {
+  currentStep++;
+  if (breathInterval) { clearInterval(breathInterval); breathInterval = null; }
+  if (stepTimeout) { clearTimeout(stepTimeout); stepTimeout = null; }
+  const step = steps[currentStep];
+  if (!step) return;
+  document.getElementById('exercisePhase').textContent = step.phase;
+  document.getElementById('exerciseInstruction').textContent = step.instruction;
+  updateProgress(currentStep);
+  const oldGuide = document.getElementById('breathGuide');
+  if (oldGuide) oldGuide.remove();
+  if (step.final) {
+    document.getElementById('exerciseTimer').textContent = '✓';
+    document.getElementById('exerciseBtn').textContent = 'Done';
+    document.getElementById('exerciseBtn').disabled = true;
+    updateProgress(steps.length);
+    if (timer) clearInterval(timer);
+    started = false; return;
+  }
+  if (step.breathe) showBreathGuide(document.getElementById('exerciseDisplay'));
+  stepTimeRemaining = step.duration * 1000;
+  stepTimeout = setTimeout(() => { if (currentStep < steps.length - 1) advanceStep(); }, stepTimeRemaining);
+}
+function pauseExercise() {
+  paused = true;
+  if (timer) { clearInterval(timer); timer = null; }
+  if (stepTimeout) { clearTimeout(stepTimeout); stepTimeout = null; }
+  document.getElementById('exerciseBtn').textContent = 'Resume';
+  document.getElementById('exercisePhase').textContent += ' (paused)';
+}
+function resumeExercise() {
+  paused = false;
+  timer = setInterval(() => { if (paused) return; secondsLeft--; if (secondsLeft <= 0) { clearInterval(timer); secondsLeft = 0; } updateTimerDisplay(); }, 1000);
+  if (stepTimeRemaining > 0) stepTimeout = setTimeout(() => { if (currentStep < steps.length - 1) advanceStep(); }, stepTimeRemaining);
+  document.getElementById('exerciseBtn').textContent = 'Pause';
+  const phase = document.getElementById('exercisePhase');
+  phase.textContent = phase.textContent.replace(' (paused)', '');
+}
+function toggleExercise() {
+  const btn = document.getElementById('exerciseBtn');
+  if (!started) {
+    started = true; paused = false; btn.textContent = 'Pause';
+    secondsLeft = 300; updateTimerDisplay();
+    timer = setInterval(() => { if (paused) return; secondsLeft--; if (secondsLeft <= 0) { clearInterval(timer); secondsLeft = 0; } updateTimerDisplay(); }, 1000);
+    advanceStep();
+  } else if (paused) { resumeExercise(); } else { pauseExercise(); }
+}
+
+/* ─── PEARL_NEWS READER SIGNAL (operator restore 2026-05-19) ───────────────
+ * Poll vote + Take submission. Both POST to /wp-json/pearl-news/v1/signal
+ * (a Pearl_News WP REST endpoint that's implemented separately as part of
+ * EI v2 ingest). Results are also cached in localStorage so a returning
+ * reader sees their own vote tallied. If the endpoint is unreachable,
+ * fall back to localStorage-only + mailto: editorial as a safety net so
+ * the operator never loses a reader's input.
+ */
+(function pnReaderSignal() {
+  const ENDPOINT = '/wp-json/pearl-news/v1/signal';
+  const MAILTO_FALLBACK = 'editorial@pearlnewsuna.org';
+
+  function lsKey(scope, articleId) { return 'pn_' + scope + '_' + articleId; }
+  function readLS(key) { try { return JSON.parse(localStorage.getItem(key) || 'null'); } catch (_) { return null; } }
+  function writeLS(key, val) { try { localStorage.setItem(key, JSON.stringify(val)); } catch (_) { /* private mode */ } }
+
+  function postSignal(payload) {
+    return fetch(ENDPOINT, {
+      method: 'POST', headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(payload), credentials: 'omit', keepalive: true,
+    }).then(r => r.ok ? r.json() : Promise.reject(r.status))
+      .catch(err => ({_error: err, _local_only: true}));
+  }</p>
+<p>  /* ── POLL: clickable options, localStorage tally, server POST ── */
+  document.querySelectorAll('.pn-poll-card').forEach(function (card) {
+    const articleId = card.getAttribute('data-pn-article-id');
+    const tallyKey  = lsKey('poll_tally', articleId);
+    const voteKey   = lsKey('poll_vote', articleId);
+    const status    = card.querySelector('.pn-poll-status');
+    const options   = card.querySelectorAll('.pn-poll-option');
+    let tally   = readLS(tallyKey) || {};
+    let myVote  = readLS(voteKey);</p>
+<p>    function render() {
+      const total = Object.values(tally).reduce((a, b) => a + b, 0) || 0;
+      options.forEach(function (btn) {
+        const v = btn.getAttribute('data-pn-value');
+        const count = tally[v] || 0;
+        const pct = total ? Math.round((count / total) * 100) : 0;
+        const bar = btn.querySelector('.pn-poll-bar');
+        const cnt = btn.querySelector('.pn-poll-count');
+        if (bar) bar.style.width = pct + '%';
+        if (cnt) cnt.textContent = (total ? pct + '%' : '');
+        btn.classList.toggle('pn-poll-voted', v === myVote);
+      });
+      if (myVote) {
+        status.textContent = 'You voted: "' + myVote + '". Responses feed Pearl News reporting and UNA-USA briefs.';
+      }
+    }</p>
+<p>    options.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        const value = btn.getAttribute('data-pn-value');
+        if (myVote && tally[myVote]) tally[myVote] = Math.max(0, tally[myVote] - 1);
+        tally[value] = (tally[value] || 0) + 1;
+        myVote = value;
+        writeLS(tallyKey, tally);
+        writeLS(voteKey, myVote);
+        render();
+        postSignal({kind: 'poll_vote', article_id: articleId, value: value, ts: new Date().toISOString()});
+      });
+    });
+    render();
+  });</p>
+<p>  /* ── TAKE: Submit button → server POST, localStorage backup, mailto fallback ── */
+  document.querySelectorAll('.pn-take-card').forEach(function (card) {
+    const articleId = card.getAttribute('data-pn-article-id');
+    const input     = card.querySelector('.pn-take-input');
+    const submit    = card.querySelector('.pn-take-submit');
+    const status    = card.querySelector('.pn-take-status');
+    const takeKey   = lsKey('take_draft', articleId);</p>
+<p>    /* Restore draft on load */
+    const draft = readLS(takeKey);
+    if (draft && input && !input.value) input.value = draft;
+    if (input) input.addEventListener('input', function () { writeLS(takeKey, input.value); });</p>
+<p>    if (submit) {
+      submit.addEventListener('click', function () {
+        const text = (input && input.value || '').trim();
+        if (!text) { status.textContent = 'Type something before submitting.'; status.style.color = 'var(--accent-red, #b91c1c)'; return; }
+        submit.disabled = true; submit.textContent = 'Submitting…';
+        postSignal({kind: 'take', article_id: articleId, text: text, ts: new Date().toISOString()}).then(function (resp) {
+          if (resp && resp._error) {
+            /* Fallback: open mailto so the operator never loses a take */
+            const subject = encodeURIComponent('Pearl News take — ' + articleId);
+            const body    = encodeURIComponent(text + '\n\n— Submitted from ' + window.location.href);
+            window.location.href = 'mailto:' + MAILTO_FALLBACK + '?subject=' + subject + '&body=' + body;
+            status.textContent = 'Server unreachable — opened email fallback. Send it to confirm.';
+            submit.disabled = false; submit.textContent = 'Submit Take →';
+          } else {
+            status.textContent = 'Submitted. Your take is now part of the editorial signal pool.';
+            status.style.color = 'var(--un-blue-dark)';
+            submit.textContent = 'Submitted ✓';
+            try { localStorage.removeItem(takeKey); } catch (_) {}
+          }
+        });
+      });
+    }
+  });
+})();
+</script>
+</div>
+</body>
+</html>

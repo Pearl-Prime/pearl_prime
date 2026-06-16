@@ -1,0 +1,84 @@
+# YouTube -> Freebie Bridge — path-reserved schema (V1: SPEC + CONFIG ONLY)
+#
+# Authority chain:
+#   - Cap entry (governing):   MUSIC-ONBOARDING-SONG-KIT-V1-01 in docs/PEARL_ARCHITECT_STATE.md
+#   - Spec (governing):        docs/specs/MUSIC_ONBOARDING_SONG_KIT_V1_SPEC.md (esp. §5)
+#   - Freebie funnel (reused): MUSIC-MODE-FREEBIE-FUNNEL-V1-02 + funnel/music_mode/templates/m1..m5
+#   - Credentials registry:    docs/INTEGRATION_CREDENTIALS_REGISTRY.md §13 (YouTube; per brand SP/CC/ND)
+#
+# ============================================================================================
+# STATUS: V1 ships this file as a SCHEMA + ONE COMMENTED EXAMPLE ONLY. No real video_id values.
+# NO YouTube API upload is wired in V1. The actual YT publish/poll path is DEFERRED to a
+# Pearl_Marketing / Pearl_Int workstream (see spec §5 + cap child ws). That ws MUST verify
+# credentials in docs/INTEGRATION_CREDENTIALS_REGISTRY.md §13 BEFORE any wiring — do NOT assume
+# creds exist. As of the registry snapshot, YT_* OAuth env vars are documented but marked
+# "Missing — credentials not yet provisioned" for at least some brands.
+# ============================================================================================
+#
+# WHAT THIS BRIDGE DOES (when a Phase-2 ws builds the engine)
+#   Maps a published YouTube video (lyric video / companion-song visualizer / behind-the-song)
+#   to an EXISTING music-mode freebie email-gate, so a YouTube viewer who clicks the pinned/
+#   description link lands on a freebie capture that hands off to the existing funnel m1..m5
+#   templates. The bridge owns ONLY the mapping (video_id -> email-gate -> freebie template);
+#   it does NOT author new freebie types and does NOT replace standard Pearl Prime freebies.
+#
+# ANTI-DRIFT (hard boundaries)
+#   1. Reuses the funnel/music_mode/templates/m1..m5 freebie templates VERBATIM as the gate
+#      targets. Bridge does NOT mint new freebie assets (that is MUSIC-MODE-FREEBIE-FUNNEL-V1-02
+#      territory, owned by Pearl_Marketing).
+#   2. `freebie_template_id` MUST be one of the existing template_ids:
+#        companion_track_download_v1 | preview_clip_30s_v1 | sample_ep_bundle_v1 |
+#        lyric_poster_pdf_v1 | behind_the_song_interview_v1
+#      (these are the template_id fields in funnel/music_mode/templates/m1..m5).
+#   3. `brand_id` MUST resolve to a music-mode brand in config/music/music_brand_registry.yaml
+#      (archetype music_mode, id 38+). NO Path X 37 brands here.
+#   4. No credentials, tokens, or secrets in this file. YouTube OAuth lives ONLY in env vars
+#      (YT_CLIENT_ID_*/YT_CLIENT_SECRET_*/YT_REFRESH_TOKEN_*) loaded from Keychain at runtime by
+#      the Phase-2 ws. This file is a non-secret routing map only.
+#   5. No paid LLM API anywhere. Any auto-generated description/title copy for a YT upload is
+#      English -> Claude subagents (Pearl_Writer) or CJK6 -> Qwen; unattended -> Gemma/Qwen-Ollama
+#      (CLAUDE.md Tier policy). This file stores no generated copy.
+#
+# Per-entry schema (each item under bridge_entries):
+#   bridge_id:             stable snake_case id for this mapping
+#   brand_id:              music-mode brand_id (must exist in music_brand_registry.yaml)
+#   youtube_video_id:      11-char YouTube video id (RESERVED — leave null/empty in V1; the
+#                          Phase-2 ws populates real ids after creds are verified)
+#   video_kind:            enum {lyric_video, companion_visualizer, behind_the_song, preview_clip}
+#   email_gate:
+#     gate_id:             id of the email-capture step (server-relative; no file:// — same rule
+#                          as music_brand_registry survey_yaml_pointer convention)
+#     capture_step:        "email_capture_before_download_link"  (matches m1..m5 gating_step)
+#     consent_copy_ref:    repo path to consent/copy block (Pearl_Writer-authored; not inline)
+#   freebie_template_id:   one of the m1..m5 template_ids (see anti-drift #2)
+#   landing_route:         server-relative route the YT link points at (NO file:// URLs)
+#   song_kit_family:       optional — a family_id from config/music/song_kit_topic_families.yaml
+#                          (lets the bridge align the freebie's emotional register with the song)
+#   notes:                 optional one-line human-readable summary
+
+schema_version: 1
+registry_id: youtube_freebie_bridge
+owner: pearl_marketing          # YT publish path owned by Pearl_Marketing/Pearl_Int (Phase 2)
+archetype: music_mode
+freebie_templates_ref: funnel/music_mode/templates    # m1..m5 (reused verbatim — anti-drift #1/#2)
+music_brand_registry_ref: config/music/music_brand_registry.yaml
+song_kit_families_ref: config/music/song_kit_topic_families.yaml
+credentials_doc_ref: docs/INTEGRATION_CREDENTIALS_REGISTRY.md   # §13 YouTube — verify BEFORE wiring
+
+# V1 ships EMPTY. Populated by the Phase-2 Pearl_Marketing/Pearl_Int ws after credential check.
+bridge_entries: []
+
+# --- COMMENTED EXAMPLE (illustrative only — NOT an active entry; no real video_id) ------------
+# bridge_entries:
+#   - bridge_id: ahjan_music_lyric_video_recovery_01
+#     brand_id: ahjan_music                       # must exist in music_brand_registry.yaml (38+)
+#     youtube_video_id: null                      # RESERVED — Phase-2 ws fills after creds verified
+#     video_kind: lyric_video
+#     email_gate:
+#       gate_id: ahjan_music_companion_song_gate
+#       capture_step: email_capture_before_download_link   # mirrors m1..m5 gating_step
+#       consent_copy_ref: funnel/music_mode/templates/m1_companion_song_download.yaml  # copy_blocks
+#     freebie_template_id: companion_track_download_v1      # = m1 template_id (reused verbatim)
+#     landing_route: /free/music/ahjan_music/companion-song  # server-relative; NO file:// URL
+#     song_kit_family: recovery_and_repair        # from song_kit_topic_families.yaml
+#     notes: "YT lyric video -> email gate -> existing M1 companion-song freebie. Example shape only."

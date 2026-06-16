@@ -399,6 +399,147 @@ def _extract_registry_chapters(prose: str) -> list[str]:
     return chapters
 
 
+def _load_runtime_word_ceiling(runtime_fmt: str, repo_root: Path) -> int | None:
+    """Return the authoritative word-count ceiling for a runtime format.
+
+    Prefers the explicit ``cap_word_target`` override in
+    ``config/format_selection/format_registry.yaml`` (DURATION-DERIVATION-01 §5 —
+    e.g. standard_book pins cap_word_target: 22000 independent of word_range edits),
+    falling back to ``word_range[max]`` when no explicit cap is set. Returns None
+    when neither is resolvable so the caller can no-op safely.
+    """
+    rf = (runtime_fmt or "").strip()
+    if not rf or yaml is None:
+        return None
+    path = repo_root / "config" / "format_selection" / "format_registry.yaml"
+    if not path.exists():
+        return None
+    try:
+        data = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
+    except Exception:
+        return None
+    block = (data.get("runtime_formats") or {}).get(rf)
+    if not isinstance(block, dict):
+        return None
+    cap = block.get("cap_word_target")
+    if isinstance(cap, (int, float)) and int(cap) > 0:
+        return int(cap)
+    wr = block.get("word_range")
+    if isinstance(wr, (list, tuple)) and len(wr) >= 2:
+        try:
+            hi = int(wr[1])
+        except (TypeError, ValueError):
+            return None
+        if hi > 0:
+            return hi
+    return None
+
+
+def _clamp_book_to_word_ceiling(prose: str, ceiling: int) -> tuple[str, int, int]:
+    """Trim a spine-rendered book so its TOTAL word count (incl. front-matter) ≤ ceiling.
+
+    Render-accounting fix (DEFERRED-LANE word_budget 2026-06-15): the spine path fills
+    chapters to the runtime ceiling during apply_depth_pass, then BOTH
+    strengthen_rendered_spine_manuscript passes add words and the arch-v2
+    "Note on the Teachings" preamble prepends ~400 more — all AFTER the depth budget and
+    with no book-level clamp (the existing _per_chapter_word_cap is gated on
+    _cli_output_format, which is empty for spine, so it never fires for standard_book).
+    Result: rebuilt standard_book renders land at ~22.7–24.1k and HARD_FAIL the
+    book_pass word_budget gate (which checks word_count ≤ word_range[max]=22000).
+
+    This trims the chapter BODIES proportionally to the overshoot, preserving:
+      - any non-chapter front-matter before the first "Chapter N" heading (the preamble),
+      - every "Chapter N" heading line,
+      - whole paragraphs where possible (only the final kept paragraph of an
+        over-budget chapter is word-sliced).
+
+    Returns (clamped_prose, pre_words, post_words). No-ops (returns input) when the
+    book is already within the ceiling or has no parseable chapters.
+    """
+    pre_words = len(prose.split())
+    if ceiling <= 0 or pre_words <= ceiling:
+        return prose, pre_words, pre_words
+    chapters = _extract_registry_chapters(prose)
+    if not chapters:
+        return prose, pre_words, pre_words
+
+    # Front-matter = everything before the first chapter heading (e.g. the preamble).
+    first_ch = chapters[0]
+    split_at = prose.find(first_ch)
+    front_matter = prose[:split_at].rstrip() if split_at > 0 else ""
+    front_words = len(front_matter.split())
+
+    chapter_words = [len(c.split()) for c in chapters]  # includes the heading line
+    heading_words = [len((c.splitlines()[0] if c.splitlines() else "").split()) for c in chapters]
+    body_words_list = [cw - hw for cw, hw in zip(chapter_words, heading_words)]
+    body_total = sum(body_words_list)
+    headings_total = sum(heading_words)
+    # Words available for chapter BODIES after reserving front-matter + all headings.
+    body_ceiling = max(0, ceiling - front_words - headings_total)
+    if body_total <= body_ceiling:
+        return prose, pre_words, pre_words
+
+    # Proportional per-chapter body target so the trim is spread evenly, not all on ch1.
+    scale = body_ceiling / body_total if body_total else 0.0
+
+    def _trim_body(body: str, target: int) -> str:
+        if target <= 0:
+            return ""
+        if len(body.split()) <= target:
+            return body
+        paras = re.split(r"\n\s*\n", body)
+        kept: list[str] = []
+        used = 0
+        for p in paras:
+            pw = len(p.split())
+            if used + pw <= target:
+                kept.append(p)
+                used += pw
+            else:
+                remain = target - used
+                if remain > 0:
+                    kept.append(" ".join(p.split()[:remain]))
+                break
+        return "\n\n".join(kept).strip()
+
+    capped: list[str] = []
+    for ch, bw in zip(chapters, body_words_list):
+        lines = ch.splitlines()
+        heading = lines[0] if lines else ""
+        body = "\n".join(lines[1:])
+        target = max(0, int(bw * scale))
+        body = _trim_body(body, target)
+        capped.append(f"{heading}\n\n{body}".strip() if body else heading)
+
+    rebuilt = "\n\n".join(capped)
+    if front_matter:
+        rebuilt = f"{front_matter}\n\n{rebuilt}"
+
+    # Final hard guard: proportional rounding can leave a few words of overshoot.
+    # Trim the tail chapters' final paragraphs until the TOTAL is within the ceiling.
+    over = len(rebuilt.split()) - ceiling
+    if over > 0:
+        capped2 = list(capped)
+        for i in range(len(capped2) - 1, -1, -1):
+            if over <= 0:
+                break
+            lines = capped2[i].splitlines()
+            heading = lines[0] if lines else ""
+            body = "\n".join(lines[1:])
+            bw = len(body.split())
+            if bw <= 0:
+                continue
+            new_target = max(0, bw - over)
+            body = _trim_body(body, new_target)
+            over -= bw - len(body.split())
+            capped2[i] = f"{heading}\n\n{body}".strip() if body else heading
+        rebuilt = "\n\n".join(capped2)
+        if front_matter:
+            rebuilt = f"{front_matter}\n\n{rebuilt}"
+
+    return rebuilt, pre_words, len(rebuilt.split())
+
+
 _SCENE_ANCHOR_CONFIG_CACHE: dict | None = None
 
 
@@ -623,6 +764,16 @@ def _run_spine_pipeline_mode(
     fmt_spec = load_format_spec(runtime_fmt, repo_root)
     beatmap = compile_beatmap(shaped_spine, engines_data, fmt_spec, repo_root)
 
+    _spine_angle_id = str(book_spec_for_compiler.get("angle_id") or "").strip()
+    _angle_layer_by_ch: dict[int, int] = {}
+    _angle_journey_warnings: list[str] = []
+    if _spine_angle_id:
+        from phoenix_v4.planning.angle_journey import patch_beatmap_angle_journey
+
+        _angle_layer_by_ch, _angle_journey_warnings = patch_beatmap_angle_journey(
+            beatmap, _spine_angle_id,
+        )
+
     render_dir = Path(args.render_dir) if args.render_dir else Path("artifacts/rendered") / f"spine-{topic_id}"
     render_dir.mkdir(parents=True, exist_ok=True)
 
@@ -665,6 +816,14 @@ def _run_spine_pipeline_mode(
                 "book_plan_id": book_plan.plan_id,
                 "atom_slot_specs": atom_slot_specs,
                 "chapter_selector_targets": _chapter_selector_targets,
+                "angle_id": _spine_angle_id,
+                "angle_layer_by_chapter": _angle_layer_by_ch,
+                "angle_journey_warnings": _angle_journey_warnings,
+                "chapter_architecture_version": int(
+                    book_spec_for_compiler.get("chapter_architecture_version")
+                    or getattr(args, "chapter_architecture_version", None)
+                    or 1
+                ),
             },
             locale=_enrich_locale,
             publishable_book=_publishable_book,
@@ -768,6 +927,23 @@ def _run_spine_pipeline_mode(
     prose, _whole_book_dedupe_notes = dedupe_scene_furniture_book(prose)
     if _whole_book_dedupe_notes:
         _governance_report.setdefault("whole_book_dedupe_notes", []).extend(_whole_book_dedupe_notes)
+    _arch_v = int(
+        book_spec_for_compiler.get("chapter_architecture_version")
+        or getattr(args, "chapter_architecture_version", None)
+        or 1
+    )
+    if _arch_v == 2 and teacher_for_enrich:
+        from phoenix_v4.planning.chapter_planner import resolve_teacher_doctrine_intro
+
+        _preamble = resolve_teacher_doctrine_intro(
+            persona_id,
+            topic_id,
+            teacher_for_enrich,
+            repo_root,
+            chapter_architecture_version=_arch_v,
+        )
+        if _preamble:
+            prose = f"Note on the Teachings\n\n{_preamble}\n\n{prose}"
     # Apply per-chapter word cap from modular output format (see apply_output_format_to_plan above).
     # Preserves the "Chapter N" heading line and paragraph structure so downstream gates can
     # still parse chapters via _extract_registry_chapters; only the body is truncated by words.
@@ -803,6 +979,24 @@ def _run_spine_pipeline_mode(
             print(
                 f"Per-chapter word cap applied: {_pre_cap_words} → {_post_cap_words} words "
                 f"(cap {_per_chapter_word_cap}w/chapter)",
+                file=sys.stderr,
+            )
+    # Book-level word ceiling clamp (DEFERRED-LANE word_budget 2026-06-15).
+    # The per-chapter cap above only fires for modular output formats (_cli_output_format
+    # set); spine renders (standard_book et al.) have no such cap, so the post-render
+    # strengthen passes + arch-v2 preamble push the book past the runtime word ceiling and
+    # HARD_FAIL the book_pass word_budget gate. This clamp is the missing book-level guard:
+    # it always applies in spine mode and trims the book back to cap_word_target (22000 for
+    # standard_book) so render accounting matches the gate. Trims only — never pads.
+    _runtime_word_ceiling = _load_runtime_word_ceiling(runtime_fmt, repo_root)
+    if _runtime_word_ceiling:
+        prose, _pre_clamp_words, _post_clamp_words = _clamp_book_to_word_ceiling(
+            prose, _runtime_word_ceiling
+        )
+        if _post_clamp_words < _pre_clamp_words:
+            print(
+                f"Book word ceiling clamp applied: {_pre_clamp_words} → {_post_clamp_words} words "
+                f"(ceiling {_runtime_word_ceiling}w, runtime={runtime_fmt})",
                 file=sys.stderr,
             )
     # Default cap is sourced from config/quality/scene_anchor_density_config.yaml.
@@ -1255,6 +1449,39 @@ def _run_spine_pipeline_mode(
                 for _kw in ("from now on", "next", "choose", "practice", "still", "start")
             )
 
+            _angle_coherence_status = "SKIPPED"
+            _angle_coherence_detail: dict = {"reason": "no angle_id or quality inputs"}
+            try:
+                from phoenix_v4.quality.angle_journey_coherence import (
+                    evaluate_angle_journey_coherence,
+                )
+
+                _spine_angle = str(book_spec_for_compiler.get("angle_id") or "").strip()
+                _angle_layers = dict(
+                    (enriched.spine_context or {}).get("angle_layer_by_chapter") or {}
+                )
+                _ch_proses = [
+                    (c.split("\n\n", 2)[-1] if "\n\n" in c else c)
+                    for c in (_chapters_for_quality or [])
+                ]
+                _aj_result = evaluate_angle_journey_coherence(
+                    angle_id=_spine_angle,
+                    runtime_format=runtime_fmt,
+                    topic_id=topic_id,
+                    chapter_proses=_ch_proses,
+                    angle_layer_by_chapter=_angle_layers,
+                    enriched_chapters=enriched.chapters,
+                )
+                _angle_coherence_status = "PASS" if _aj_result.valid else "FAIL"
+                _angle_coherence_detail = {
+                    "errors": _aj_result.errors,
+                    "warnings": _aj_result.warnings,
+                    "metrics": _aj_result.metrics,
+                }
+            except Exception as _aj_exc:
+                _angle_coherence_status = "SKIPPED"
+                _angle_coherence_detail = {"reason": f"angle_journey_coherence error: {_aj_exc}"}
+
             _book_pass_checks = {
                 "word_budget": {
                     "status": "PASS" if _budget_ok else "FAIL",
@@ -1273,6 +1500,10 @@ def _run_spine_pipeline_mode(
                 },
                 "callback_completion": {
                     "status": "PASS" if _callback_ok else "FAIL",
+                },
+                "angle_journey_coherence": {
+                    "status": _angle_coherence_status,
+                    **_angle_coherence_detail,
                 },
                 "atom_metadata_subchecks": {
                     "status": "SKIPPED",
@@ -1330,6 +1561,11 @@ def _run_spine_pipeline_mode(
             "chapter_count": len(enriched.chapters),
             "pre_depth_total_words": pre_depth_words,
             "post_depth_total_words": post_depth_words,
+            "chapter_architecture_version": _arch_v,
+            "angle_id": _spine_angle_id,
+            "chapter_planner_warnings": list(
+                (enriched.spine_context or {}).get("chapter_planner_warnings") or []
+            ),
         }
         out_path = Path(args.out)
         out_path.parent.mkdir(parents=True, exist_ok=True)
@@ -1582,6 +1818,13 @@ def main() -> int:
         ),
     )
     ap.add_argument("--seed", default="pipeline_seed_001", help="Determinism seed")
+    ap.add_argument(
+        "--chapter-architecture-version",
+        type=int,
+        default=None,
+        choices=[1, 2],
+        help="Holistic chapter architecture: 1=legacy slot-fill, 2=assemble-full-unit (OPD-129/113)",
+    )
     ap.add_argument(
         "--runtime-format",
         default=None,
@@ -1976,6 +2219,8 @@ def main() -> int:
         arc_topic=getattr(arc, "topic", None),
     )
     book_spec_for_compiler = {**book_spec.to_dict(), "topic_id": canonical_topic, "persona_id": canonical_persona}
+    if getattr(args, "chapter_architecture_version", None) is not None:
+        book_spec_for_compiler["chapter_architecture_version"] = int(args.chapter_architecture_version)
 
     alias_data = _load_yaml(ALIASES_PATH)
     topic_alias_target = (alias_data.get("topic_aliases") or {}).get(topic_id, topic_id)

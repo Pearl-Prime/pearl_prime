@@ -40,7 +40,7 @@ if str(REPO_ROOT) not in sys.path:
 RUNCOMFY_SPEND_TSV = REPO_ROOT / "artifacts" / "qa" / "runcomfy_monthly_spend.tsv"
 DISPATCH_LOG_TSV = REPO_ROOT / "artifacts" / "qa" / "image_batch_dispatch_log.tsv"
 
-_COOLDOWN_USD = 10.0
+_COOLDOWN_USD = 10.0  # RunComfy $10/mo soft cap — restored after deprecation-burn closure (SWEEP-TAIL 2026-06-13)
 
 
 @dataclass

@@ -9,6 +9,10 @@ Runs on every PR to main. Validates:
 4. DRIFT: detects common drift patterns (duplicate specs, parallel UIs, etc.)
 5. OWNERSHIP: files are in the right subsystem per SUBSYSTEM_AUTHORITY_MAP
 6. CONFLICT: checks for overlap with active workstreams
+7. REINVENTION: WARNs when an added file looks like a fork of a canonical artifact
+   (Layer 3 of the anti-reinvention system; docs/specs/CANONICAL_ARTIFACTS_REGISTRY_SPEC.md)
+8. DURATION: BLOCKs a format_registry.yaml edit that does not co-change the duration
+   derivation spec (docs/DURATION_DERIVATION_SPEC.md §6)
 
 Exit 0 = approved. Exit 1 = blocked (with reasons).
 
@@ -82,6 +86,94 @@ def load_active_workstreams():
                     "owner": row.get("owner_agent", ""),
                 })
     return workstreams
+
+
+def load_canonical_registry():
+    """Load CANONICAL_ARTIFACTS_REGISTRY.tsv → list of canonical-artifact rows.
+
+    Mirrors load_subsystem_map() / load_active_workstreams(): a TSV DictReader,
+    tab-delimited, that FAILS OPEN — returns [] if the file is absent so a PR is
+    never crashed because the registry has not landed on that ref (the registry is
+    a convenience that may or may not be present on a given branch/checkout, per
+    CANONICAL_ARTIFACTS_REGISTRY_SPEC.md §1.1).
+
+    Schema (9 cols, see spec §2): concept_key, canonical_path, sha_or_pr,
+    owner_agent, subsystem, edit_not_recreate, last_verified, supersedes, notes.
+    Rows with an empty canonical_path are skipped (cannot anchor a match).
+
+    A `canonical_path` cell MAY carry multiple ';'-joined mirror paths (the seed
+    `teacher_real_photos` row lists `teacher_pics/;brand-wizard-app/public/teacher_pics/`;
+    this mirrors how SUBSYSTEM_AUTHORITY_MAP.tsv ';'-joins config_path). Each mirror is
+    expanded into its OWN row (sharing the other 8 columns) so every mirror is
+    independently matchable by the guard; the original combined string is preserved in
+    `canonical_path_raw` for messages.
+    """
+    tsv_path = REPO_ROOT / "artifacts" / "coordination" / "CANONICAL_ARTIFACTS_REGISTRY.tsv"
+    if not tsv_path.exists():
+        return []
+
+    rows = []
+    with open(tsv_path, newline='') as f:
+        reader = csv.DictReader(f, delimiter='\t')
+        for row in reader:
+            raw = (row.get("canonical_path") or "").strip()
+            if not raw:
+                continue
+            mirrors = [p.strip() for p in raw.split(";") if p.strip()]
+            for cp in mirrors:
+                rows.append({
+                    "concept_key": (row.get("concept_key") or "").strip(),
+                    "canonical_path": cp,
+                    "canonical_path_raw": raw,
+                    "sha_or_pr": (row.get("sha_or_pr") or "").strip(),
+                    "owner_agent": (row.get("owner_agent") or "").strip(),
+                    "subsystem": (row.get("subsystem") or "").strip(),
+                    "edit_not_recreate": (row.get("edit_not_recreate") or "").strip(),
+                    "last_verified": (row.get("last_verified") or "").strip(),
+                    "supersedes": (row.get("supersedes") or "").strip(),
+                    "notes": (row.get("notes") or "").strip(),
+                })
+    return rows
+
+
+def load_reinvention_allowlist():
+    """Load config/governance/reinvention_allowlist.yaml → set of allowed paths.
+
+    Standing, reviewed exceptions to the reinvention guard (spec §5). FAILS OPEN:
+    returns an empty set if the file is absent, empty, malformed, or if PyYAML is
+    not importable — a missing/broken allowlist must never crash a PR. Each entry's
+    `allowed_path` is normalized (see _normalize_path) for comparison.
+
+    Ships EMPTY (schema-only) in Phase 1; entries are added under review.
+    """
+    yaml_path = REPO_ROOT / "config" / "governance" / "reinvention_allowlist.yaml"
+    if not yaml_path.exists():
+        return set()
+
+    try:
+        import yaml  # local import: keep the module importable even without PyYAML
+    except Exception:
+        return set()
+
+    try:
+        with open(yaml_path) as f:
+            data = yaml.safe_load(f) or {}
+    except Exception:
+        return set()
+
+    entries = []
+    if isinstance(data, dict):
+        entries = data.get("allowlist") or []
+    if not isinstance(entries, list):
+        return set()
+
+    allowed = set()
+    for ent in entries:
+        if isinstance(ent, dict):
+            ap = ent.get("allowed_path")
+            if isinstance(ap, str) and ap.strip():
+                allowed.add(_normalize_path(ap))
+    return allowed
 
 # ---------------------------------------------------------------------------
 # Git diff analysis
@@ -187,6 +279,93 @@ def get_changed_files(pr_number=None):
 
     _telemetry_pr_changed_files("gh_pr_view_json_files", **extra)
     return _files_from_pr_view_json(pr_number)
+
+# ---------------------------------------------------------------------------
+# Override-token plumbing (shared by reinvention + duration guards)
+# ---------------------------------------------------------------------------
+
+def _normalize_path(path: str) -> str:
+    """Normalize a repo-relative path for comparison ONLY (originals kept for msgs).
+
+    - strip leading './'
+    - collapse repeated '/'
+    - strip a trailing '/' (dir rows compare as their bare path)
+    - lowercase-fold (case-insensitive match)
+
+    Per CANONICAL_ARTIFACTS_REGISTRY_SPEC.md §4.1 step 1. The folded form is used
+    only for equality/sibling tests; the original string is surfaced in messages.
+    """
+    p = (path or "").strip()
+    if p.startswith("./"):
+        p = p[2:]
+    while "//" in p:
+        p = p.replace("//", "/")
+    p = p.rstrip("/")
+    return p.lower()
+
+
+def collect_override_text(pr_number=None) -> str:
+    """Gather text in which an override token may appear: PR body + commit messages.
+
+    Override tokens (NEW-ARTIFACT-JUSTIFIED:, DURATION-DERIVATION-OK:) live in the
+    PR description OR a commit body (per both specs). This reader is fail-open and
+    additive — it never raises; if no source is available it returns "".
+
+    Sources, all unioned (any one carrying the token is sufficient):
+      1. Env PR_BODY / GITHUB_PR_BODY — a CI workflow MAY export the PR description
+         (no-op today; forward-compatible so a later workflow tweak Just Works).
+      2. `gh pr view <n> --json body` when --pr <n> was passed (the script already
+         shells gh for that path).
+      3. Commit messages on origin/main..HEAD (default, no --pr path) — the
+         spec-blessed "commit body" channel, available in the current CI.
+    """
+    chunks: list[str] = []
+
+    for env_key in ("PR_BODY", "GITHUB_PR_BODY"):
+        val = os.environ.get(env_key)
+        if val:
+            chunks.append(val)
+
+    if pr_number:
+        try:
+            res = subprocess.run(
+                ["gh", "pr", "view", str(pr_number), "--json", "body"],
+                capture_output=True, text=True, cwd=REPO_ROOT,
+            )
+            if res.returncode == 0 and res.stdout.strip():
+                body = (json.loads(res.stdout) or {}).get("body") or ""
+                if body:
+                    chunks.append(body)
+        except Exception:
+            pass
+    else:
+        try:
+            res = subprocess.run(
+                ["git", "log", "--format=%B", "origin/main..HEAD"],
+                capture_output=True, text=True, cwd=REPO_ROOT,
+            )
+            if res.returncode == 0 and res.stdout.strip():
+                chunks.append(res.stdout)
+        except Exception:
+            pass
+
+    return "\n".join(chunks)
+
+
+def _has_override_token(text: str, token: str) -> bool:
+    """True if `token` appears with a non-empty reason, e.g. 'TOKEN: some reason'.
+
+    Both override tokens require a human-written reason (spec §5 / §6.2). A bare
+    'TOKEN:' with nothing after it does NOT count. Matching is case-sensitive on
+    the token (the tokens are upper-kebab by convention) and tolerant of leading
+    whitespace / list-bullets.
+    """
+    if not text:
+        return False
+    esc = re.escape(token)
+    # token, optional whitespace, ':', then at least one non-space char on the line
+    pattern = re.compile(rf"{esc}\s*:\s*\S.*", re.MULTILINE)
+    return bool(pattern.search(text))
 
 # ---------------------------------------------------------------------------
 # Checks
@@ -354,6 +533,250 @@ def check_workstream_conflict(files, workstreams):
     }
 
 
+def check_reinvention(files, registry, allowlist=None, override_text=""):
+    """Layer-3 anti-reinvention guard (CANONICAL-ARTIFACTS-REGISTRY-V1-01).
+
+    WARNs when an ADDED file looks like a fork of a canonical artifact recorded in
+    artifacts/coordination/CANONICAL_ARTIFACTS_REGISTRY.tsv. Spec:
+    docs/specs/CANONICAL_ARTIFACTS_REGISTRY_SPEC.md §4.
+
+    SEVERITY (Q-CAR-SEVERITY): **WARN-only** in Phase 1 — never BLOCKED. A
+    false-positive block on a legitimately-new artifact is worse than a missed
+    reinvention. Promotion to BLOCKED for NO-without-ratification rows is a deferred
+    follow-up gated on false-positive-rate data.
+
+    MATCH-ALGO (Q-CAR-MATCH-ALGO): **full normalized canonical_path**, NOT bare
+    basename. Bare-basename matching produces false positives on ubiquitous names
+    (CANONICAL.txt, README.md, config.yaml). Two deterministic match shapes fire
+    (Phase-2a, path-match arm; spec §4.1 step 3):
+      (a) exact-path: a newly ADDED file whose normalized path equals a registry
+          row's normalized canonical_path (the canonical was deleted+re-added, or a
+          duplicate landed at the same path on a parallel branch).
+      (b) sibling-fork: an ADDED file with the SAME basename as a canonical_path but
+          under a DIFFERENT parent dir (e.g. pearl_news/v2/assemble_v52.py vs
+          canonical pearl_news/pipeline/assemble_v52.py) — a likely fork. Directory
+          canonical rows (path ending '/') have no basename and skip arm (b).
+
+    The content-overlap (semantic) arm is **Phase-2b** and is NOT implemented here:
+    it would require a local / Tier-2 embedding model (Gemma/Qwen via Ollama) per
+    the LLM Tier policy + .github/workflows/llm-policy-enforcement.yml. A guard that
+    phoned a paid LLM API would itself be blocked. See spec §4.2.
+
+    SUPPRESSION (spec §5):
+      - override tag `NEW-ARTIFACT-JUSTIFIED: <reason>` in the PR body / commit body
+        → the candidate is acknowledged (skipped) for this PR.
+      - config/governance/reinvention_allowlist.yaml standing allowlist → an added
+        path that is a reviewed, recurring mirror never WARNs.
+
+    FAIL-OPEN: an empty/absent registry yields a no-op PASS (registry may not be on
+    this ref). Returns the standard dict shape {check, status, message, details}.
+    """
+    if allowlist is None:
+        allowlist = set()
+
+    if not registry:
+        return {
+            "check": "reinvention",
+            "status": "PASS",
+            "message": "Canonical registry absent/empty — reinvention guard is a no-op on this ref.",
+            "details": {"registry_rows": 0},
+        }
+
+    has_global_override = _has_override_token(override_text, "NEW-ARTIFACT-JUSTIFIED")
+
+    added = [f for f in files if f.get("status") == "A"]
+
+    # Pre-index registry rows by normalized canonical path and by basename.
+    by_norm_path = {}
+    by_basename = defaultdict(list)
+    for row in registry:
+        norm = _normalize_path(row["canonical_path"])
+        by_norm_path[norm] = row
+        # Directory canonicals (original ended with '/') have no usable basename.
+        if not row["canonical_path"].rstrip().endswith("/"):
+            base = norm.rsplit("/", 1)[-1]
+            if base:
+                by_basename[base].append(row)
+
+    findings = []
+    for f in added:
+        orig_path = f["path"]
+        norm = _normalize_path(orig_path)
+
+        # Allowlisted standing mirror → never WARN.
+        if norm in allowlist:
+            continue
+
+        # Arm (a): exact normalized canonical_path match.
+        row = by_norm_path.get(norm)
+        match_kind = None
+        if row is not None:
+            match_kind = "exact_path"
+        else:
+            # Arm (b): same basename under a different parent dir.
+            base = norm.rsplit("/", 1)[-1]
+            for cand in by_basename.get(base, []):
+                cand_norm = _normalize_path(cand["canonical_path"])
+                if cand_norm != norm:  # different full path → a likely fork
+                    row = cand
+                    match_kind = "sibling_basename"
+                    break
+
+        if row is None:
+            continue
+
+        finding = {
+            "added_path": orig_path,
+            "canonical_path": row["canonical_path"],
+            "concept_key": row["concept_key"],
+            "owner_agent": row["owner_agent"],
+            "edit_not_recreate": row["edit_not_recreate"],
+            "match_kind": match_kind,
+            "requires_ratification": row["edit_not_recreate"].startswith("NO"),
+        }
+        findings.append(finding)
+
+    if not findings:
+        return {
+            "check": "reinvention",
+            "status": "PASS",
+            "message": f"No likely reinventions among added files ({len(registry)} canonical rows checked).",
+            "details": {"registry_rows": len(registry), "added_checked": len(added)},
+        }
+
+    if has_global_override:
+        return {
+            "check": "reinvention",
+            "status": "PASS",
+            "message": (
+                f"{len(findings)} candidate reinvention(s) acknowledged via "
+                f"NEW-ARTIFACT-JUSTIFIED override. Ensure a registry row was added in this PR."
+            ),
+            "details": {"justified": findings, "override": "NEW-ARTIFACT-JUSTIFIED"},
+        }
+
+    parts = []
+    for fnd in findings:
+        msg = (
+            f"'{fnd['added_path']}' looks like a fork of canonical "
+            f"'{fnd['canonical_path']}' (concept '{fnd['concept_key']}', owner "
+            f"{fnd['owner_agent'] or '?'})"
+        )
+        if fnd["requires_ratification"]:
+            msg += " — NO-without-ratification: a cap-entry/operator ratification is required for a new variant"
+        parts.append(msg)
+
+    message = (
+        "Possible reinvention(s): " + "; ".join(parts)
+        + ". Remediation: edit the canonical artifact, or add the "
+        "'NEW-ARTIFACT-JUSTIFIED: <reason>' override + a registry row in this same PR."
+    )
+    return {
+        "check": "reinvention",
+        "status": "WARN",
+        "message": message,
+        "details": {"findings": findings, "registry_rows": len(registry)},
+    }
+
+
+def check_duration_derivation(files, override_text=""):
+    """Duration co-change guard (DURATION-DERIVATION-01).
+
+    Spec: docs/DURATION_DERIVATION_SPEC.md §6 (CI guard contract).
+
+    v1 = **path-level co-change BLOCK** (§6.1–§6.2). `get_changed_files()` returns
+    [{status, path}] — changed file PATHS only, no diff content / no field values —
+    so the guard cannot read whether word_range numerically changed. Rule:
+
+      TRIGGER: config/format_selection/format_registry.yaml is in the changed-paths
+               set (status A or M).
+      REQUIRE: docs/DURATION_DERIVATION_SPEC.md is ALSO in the changed-paths set
+               (forces the author to re-read the derivation contract whenever
+               word_range / fill_regime / duration fields could move), ELSE BLOCK.
+      OVERRIDE: a PR-body / commit-trailer token `DURATION-DERIVATION-OK: <reason>`
+               downgrades BLOCK → WARN (for registry edits that provably don't touch
+               word_range/fill_regime/duration — e.g. adding a
+               compatible_structural_formats entry). The token requires a
+               human-written reason.
+
+    A PR that does NOT touch format_registry.yaml → PASS (guard inert).
+
+    ±15% BAND (§6.3, recorded here as the contract; NOT computed in v1): when the
+    guard graduates to value-level it accepts a derived label within **±15%** of the
+    real target — deliberately WIDER than config/duration_scorecard.yaml's
+    `duration_tolerance_pct: 10` (the scorecard's 10% is for *measurement* of
+    renders; the derivation guard's 15% is for *label acceptance*). The 15% band
+    keeps the two already-accepted deep formats green (deep_book_4h real −11%,
+    deep_book_6h real +2%); the scorecard's 10% would wrongly flag deep_book_4h.
+
+    v2 (§6.4, noted — NOT built here): value-level. Read format_registry.yaml at
+    origin/main and at HEAD, diff word_range / fill_regime / cap_word_target per
+    format, recompute audiobook_minutes/ebook_minutes
+    (audiobook = round(word_target / tts_wpm=150); ebook = round(word_target /
+    ebook_wpm=230); word_target derived from fill_regime cap|floor|midpoint, §4.1),
+    and BLOCK if the stored label is outside ±15% of the recomputed value. en-US
+    only (§7); skip formats without a word_range (§8). Requires reading file
+    *contents* at two refs (the script already shells git; additive).
+
+    Returns the standard dict shape {check, status, message, details}.
+    """
+    REGISTRY_PATH = "config/format_selection/format_registry.yaml"
+    SPEC_PATH = "docs/DURATION_DERIVATION_SPEC.md"
+
+    changed_paths = {f.get("path") for f in files}
+
+    registry_touched = REGISTRY_PATH in changed_paths
+    if not registry_touched:
+        return {
+            "check": "duration_derivation",
+            "status": "PASS",
+            "message": f"{REGISTRY_PATH} not in this PR — duration co-change guard inert.",
+            "details": {"registry_touched": False},
+        }
+
+    spec_touched = SPEC_PATH in changed_paths
+    if spec_touched:
+        return {
+            "check": "duration_derivation",
+            "status": "PASS",
+            "message": (
+                f"{REGISTRY_PATH} edited and {SPEC_PATH} co-changed — "
+                "duration derivation contract re-read together."
+            ),
+            "details": {"registry_touched": True, "spec_touched": True},
+        }
+
+    has_override = _has_override_token(override_text, "DURATION-DERIVATION-OK")
+    if has_override:
+        return {
+            "check": "duration_derivation",
+            "status": "WARN",
+            "message": (
+                f"{REGISTRY_PATH} edited WITHOUT {SPEC_PATH}, but "
+                "'DURATION-DERIVATION-OK: <reason>' override present — downgraded BLOCK→WARN. "
+                "Confirm this edit does not touch word_range / fill_regime / duration fields."
+            ),
+            "details": {
+                "registry_touched": True,
+                "spec_touched": False,
+                "override": "DURATION-DERIVATION-OK",
+            },
+        }
+
+    return {
+        "check": "duration_derivation",
+        "status": "BLOCKED",
+        "message": (
+            f"{REGISTRY_PATH} is edited but {SPEC_PATH} is NOT co-changed. A change to the "
+            "runtime-format registry must travel with the duration derivation contract "
+            "(word_range/fill_regime/duration fields drive advertised minutes). Either edit "
+            f"{SPEC_PATH} in this PR, or add 'DURATION-DERIVATION-OK: <reason>' to the PR body "
+            "if this edit provably does not touch word_range/fill_regime/duration."
+        ),
+        "details": {"registry_touched": True, "spec_touched": False, "override": None},
+    }
+
+
 def check_pr_size(files):
     """INFO on PR size for awareness."""
     total = len(files)
@@ -391,6 +814,8 @@ def main():
 
     subsystem_map = load_subsystem_map()
     workstreams = load_active_workstreams()
+    registry = load_canonical_registry()
+    allowlist = load_reinvention_allowlist()
     files = get_changed_files(pr_number)
 
     if not files:
@@ -400,6 +825,8 @@ def main():
             print("✅ No files changed — nothing to review.")
         sys.exit(0)
 
+    override_text = collect_override_text(pr_number)
+
     # Run all checks
     results = [
         check_mass_deletion(files),
@@ -408,6 +835,8 @@ def main():
         check_authority_docs(files, subsystem_map),
         check_drift_patterns(files),
         check_workstream_conflict(files, workstreams),
+        check_reinvention(files, registry, allowlist, override_text),
+        check_duration_derivation(files, override_text),
     ]
 
     blocked = [r for r in results if r["status"] == "BLOCKED"]

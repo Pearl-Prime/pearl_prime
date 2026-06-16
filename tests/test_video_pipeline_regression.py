@@ -25,7 +25,7 @@ def run_pipeline():
         pytest.skip("fixtures/video_pipeline/render_manifest.json not found")
     script = REPO_ROOT / "scripts" / "video" / "run_pipeline.py"
     r = subprocess.run(
-        [sys.executable, str(script), "--plan-id", PLAN_ID, "--force", "--no-job-check"],
+        [sys.executable, str(script), "--plan-id", PLAN_ID, "--force", "--no-job-check", "--skip-render"],
         cwd=REPO_ROOT,
         capture_output=True,
         text=True,

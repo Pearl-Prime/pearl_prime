@@ -1,0 +1,111 @@
+# Pearl Prime Storefront — Cloudflare Pages deploy workflow
+#
+# Mirrors the pattern in `.github/workflows/brand-admin-onboarding-pages.yml`
+# (the canonical Phoenix Omega Pages deploy reference per
+# `skills/pearl-int/references/cloudflare_pages_deploy.md`).
+#
+# Required repo secrets (Settings → Secrets and variables → Actions):
+#   CLOUDFLARE_API_TOKEN — Custom token under account `b80152c319f941e6e92f928e2617a3d5`.
+#     Permissions: Account → Cloudflare Pages → Edit; User → User Details → Read.
+#     Account Resources: Specific account → b80152c3... (NOT "All accounts" which returns empty).
+#     Client IP Filtering: blank.
+#     Already present in repo secrets (shared with brand-admin-onboarding-pages.yml).
+#   CLOUDFLARE_ACCOUNT_ID — `b80152c319f941e6e92f928e2617a3d5` (NOT operator's primary 626d6eb8... account).
+#     Already present in repo secrets (shared with brand-admin-onboarding-pages.yml).
+#
+# Cloudflare Pages project: provisioned once (operator action) named exactly
+# `pearl-prime-storefront` (must match `--project-name` below). After first
+# deploy, confirm the live hostname under Pages → project → Domains
+# (typically https://pearl-prime-storefront.pages.dev). Custom domain
+# (`pearlprime.shop` per Q-PRP-DOMAIN-01 — pending operator DNS confirmation)
+# attached via Pages → project → Custom domains.
+#
+# Operator-action-required resource provisioning runbook:
+#   skills/pearl-int/references/storefront_resource_ids.md
+#
+# Snipcart webhook secret (operator-set):
+#   Cloudflare dashboard → Pages → pearl-prime-storefront → Settings →
+#   Environment variables → `SNIPCART_WEBHOOK_SECRET` (encrypted).
+#   Rotation cadence: quarterly per docs/INTEGRATION_CREDENTIALS_REGISTRY.md.
+#
+# DO NOT run `wrangler pages deploy` from a laptop. Use this workflow.
+
+name: Pearl Prime Storefront (Pages)
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "storefront/**"
+      - ".github/workflows/pearl-prime-storefront-deploy.yml"
+
+concurrency:
+  group: pearl-prime-storefront-pages-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    defaults:
+      run:
+        working-directory: storefront
+    steps:
+      - uses: actions/checkout@v4
+        # NOTE: do NOT enable `lfs: true` — repo LFS budget is exhausted per
+        # brand-admin-onboarding-pages.yml PR #1122. LFS-tracked assets land in R2.
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+          cache-dependency-path: storefront/package-lock.json
+
+      - name: Install and build
+        run: |
+          if [ -f package-lock.json ]; then
+            npm ci
+          else
+            # Scaffold ws: no lockfile yet. Pearl_Dev ws lands package-lock.json.
+            echo "No package-lock.json yet — scaffold-only ws. Skipping build."
+            mkdir -p dist
+            echo "<!-- Pearl Prime Storefront scaffold placeholder; Pearl_Dev ws lands the real bundle. -->" > dist/index.html
+            exit 0
+          fi
+          npm run build
+
+      - name: Upload dist artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: pearl-prime-storefront-dist
+          path: storefront/dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Download build artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: pearl-prime-storefront-dist
+          path: dist
+
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy dist --project-name=pearl-prime-storefront
+
+      - name: Run summary
+        run: |
+          echo "## Pearl Prime Storefront deploy" >> $GITHUB_STEP_SUMMARY
+          echo "- Project: pearl-prime-storefront" >> $GITHUB_STEP_SUMMARY
+          echo "- Account: b80152c3..." >> $GITHUB_STEP_SUMMARY
+          echo "- Live: https://pearl-prime-storefront.pages.dev" >> $GITHUB_STEP_SUMMARY
+          echo "- Runbook: skills/pearl-int/references/storefront_resource_ids.md" >> $GITHUB_STEP_SUMMARY

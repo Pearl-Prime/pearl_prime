@@ -82,6 +82,17 @@ _STRUCTURAL_STARTS = frozenset(
     ["The", "There", "It", "A", "An", "At", "On", "In", "She", "He", "They"]
 )
 
+# Tokens that look like proper nouns at sentence open but are not character names.
+_NER_REJECT = frozenset(
+    [
+        "The", "Another", "It", "It's", "There", "Their", "His", "Her", "This", "That",
+        "A", "An", "She", "He", "They", "Third", "Fourth", "Fifth", "First", "Second",
+        "Last", "Next", "Hey", "Four", "Five", "Sixteen", "Thanksgiving", "Monday",
+        "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday", "Zoom",
+        "April", "Not", "But", "And", "When", "What", "How", "Why", "After", "Before",
+    ]
+)
+
 
 # --------------------------------------------------------------------------- #
 # Data classes
@@ -93,7 +104,7 @@ class AtomFile:
     arc_position: str
     engine: str
     variant: str
-    character: str      # first proper noun found in the text
+    character: Optional[str]  # recurring proper noun in the text, or None
     word_count: int
     text: str
 
@@ -127,20 +138,43 @@ class StorySchedule:
 # Atom loading
 # --------------------------------------------------------------------------- #
 
-def _extract_character(text: str) -> str:
-    """Return the first apparent proper-noun character name from atom text."""
-    words = text.split()
-    if not words:
-        return "unknown"
-    first = words[0].rstrip("'s,.")
-    if first not in _STRUCTURAL_STARTS and first[0].isupper():
-        return first
-    # Try second word
-    if len(words) > 1:
-        second = words[1].rstrip("'s,.")
-        if second[0].isupper() and second not in _STRUCTURAL_STARTS:
-            return second
-    return first
+def _valid_name_token(tok: str) -> bool:
+    return bool(tok) and tok[0].isupper() and tok not in _NER_REJECT and len(tok) >= 2
+
+
+def _token_count(text: str, name: str) -> int:
+    return len(re.findall(rf"\b{re.escape(name)}(?:'s)?\b", text, flags=re.I))
+
+
+def _extract_character(text: str) -> Optional[str]:
+    """Return a recurring proper-noun character name from atom text (NER pass)."""
+    body = text.strip()
+    if not body:
+        return None
+    open_m = re.match(r"^([A-Z][A-Za-zÀ-ÖØ-öø-ÿ]+)(?:'s|'s|\s)", body)
+    if open_m:
+        tok = open_m.group(1).rstrip("'")
+        if _valid_name_token(tok):
+            return tok
+    seen: list[str] = []
+    for m in re.finditer(r"\b([A-Z][A-Za-zÀ-ÖØ-öø-ÿ']+)(?:'s)?\b", body):
+        tok = m.group(1).rstrip("'")
+        if not _valid_name_token(tok) or tok in seen:
+            continue
+        if _token_count(body, tok) >= 2:
+            seen.append(tok)
+    if seen:
+        return seen[0]
+    sentences = re.split(r"(?<=[.!?])\s+", body)
+    for sent in (sentences[:3] if len(sentences) >= 3 else sentences):
+        words = sent.split()
+        for i, w in enumerate(words):
+            if i == 0:
+                continue
+            tok = w.rstrip("'s,.\"")
+            if _valid_name_token(tok) and _token_count(body, tok) >= 2:
+                return tok
+    return None
 
 
 def _load_atoms_for_engine(
@@ -165,7 +199,7 @@ def _load_atoms_for_engine(
                     arc_position=arc_pos,
                     engine=engine,
                     variant=f.stem,
-                    character=_extract_character(text),
+                    character=_extract_character(text) or "unknown",
                     word_count=len(text.split()),
                     text=text,
                 )
@@ -200,6 +234,27 @@ def _index_by_character(atoms: List[AtomFile]) -> Dict[str, Dict[str, List[AtomF
     return idx
 
 
+def _story_assembly_mode(runtime_format: str) -> str:
+    """deep_book_6h uses hard same-character continuity; short formats keep soft borrow."""
+    return "hard" if (runtime_format or "").strip() == "deep_book_6h" else "soft"
+
+
+def _character_has_full_coverage(
+    char: str,
+    char_idx: Dict[str, Dict[str, List[AtomFile]]],
+    used_atom_paths: set,
+) -> bool:
+    char_arcs = char_idx.get(char, {})
+    for arc_pos in ARC_POSITIONS:
+        fresh = [
+            a for a in char_arcs.get(arc_pos, [])
+            if a.path not in used_atom_paths and a.word_count >= 30
+        ]
+        if not fresh:
+            return False
+    return True
+
+
 def _assemble_story(
     primary_character: str,
     char_idx: Dict[str, Dict[str, List[AtomFile]]],
@@ -207,8 +262,9 @@ def _assemble_story(
     seed: str,
     story_num: int,
     used_atom_paths: set,
+    mode: str = "soft",
 ) -> Optional[StoryArc]:
-    """Build a StoryArc for primary_character, filling missing arc positions from the pool."""
+    """Build a StoryArc for primary_character; soft mode may borrow other characters."""
     atoms: Dict[str, AtomFile] = {}
     char_arcs = char_idx.get(primary_character, {})
 
@@ -221,6 +277,8 @@ def _assemble_story(
             idx = _deterministic_index(f"{seed}:story:{story_num}:{arc_pos}:primary", len(available))
             chosen = available[idx]
         else:
+            if mode == "hard":
+                continue  # same-character only — never borrow another character's atom
             # Borrow from the pool — prefer a different character name than primary
             pool = [
                 a for a in all_atoms
@@ -242,6 +300,9 @@ def _assemble_story(
         atoms[arc_pos] = chosen
         used_atom_paths.add(chosen.path)
 
+    if not atoms:
+        return None
+
     return StoryArc(
         story_id=f"story_{story_num}",
         primary_character=primary_character,
@@ -257,20 +318,22 @@ def _select_stories(
     all_atoms: List[AtomFile],
     seed: str,
     n: int,
+    mode: str = "soft",
+    planner_warnings: Optional[List[str]] = None,
 ) -> List[StoryArc]:
     """Select n full-arc stories, preferring characters with the deepest coverage."""
     char_idx = _index_by_character(all_atoms)
+    warns = planner_warnings if planner_warnings is not None else []
 
-    # Score characters: more arc positions = higher priority.
     def coverage(char: str) -> int:
         return sum(1 for arc in ARC_POSITIONS if char_idx[char].get(arc))
 
-    # Prefer named characters over structural starts, then by coverage depth.
     candidates = sorted(
         char_idx.keys(),
         key=lambda c: (
-            0 if c in _STRUCTURAL_STARTS else 1,  # named first
-            coverage(c),                            # deeper coverage
+            0 if c in _STRUCTURAL_STARTS or c == "unknown" else 1,
+            1 if _character_has_full_coverage(c, char_idx, set()) else 0,
+            coverage(c),
         ),
         reverse=True,
     )
@@ -282,13 +345,20 @@ def _select_stories(
     for char in candidates:
         if len(stories) >= n:
             break
-        arc = _assemble_story(char, char_idx, all_atoms, seed, story_num, used_paths)
+        if char in _STRUCTURAL_STARTS or char == "unknown":
+            continue
+        arc = _assemble_story(
+            char, char_idx, all_atoms, seed, story_num, used_paths, mode=mode,
+        )
         if arc:
             stories.append(arc)
             story_num += 1
+        elif mode == "hard":
+            warns.append(
+                f"story_plan: skipped character {char!r} — incomplete arc coverage (hard mode)"
+            )
 
-    # If we still need more stories (sparse pool), fill with pool-only arcs.
-    while len(stories) < n:
+    while len(stories) < n and mode == "soft":
         arc = _assemble_story(
             primary_character="",
             char_idx={},
@@ -296,6 +366,7 @@ def _select_stories(
             seed=seed,
             story_num=story_num,
             used_atom_paths=used_paths,
+            mode=mode,
         )
         if arc is None:
             break
@@ -357,6 +428,8 @@ def build_story_schedule(
     repo_root: Path,
     n_per_phase: int = 3,
     phase_chapters: Optional[Dict[str, range]] = None,
+    runtime_format: str = "",
+    planner_warnings: Optional[List[str]] = None,
 ) -> StorySchedule:
     """Build a full-book story schedule: 3-6 full-arch stories per phase.
 
@@ -375,6 +448,9 @@ def build_story_schedule(
     all_atoms = _load_all_atoms(persona_id, topic, repo_root)
     if not all_atoms:
         return StorySchedule()
+
+    mode = _story_assembly_mode(runtime_format)
+    warns = planner_warnings if planner_warnings is not None else []
 
     p_chapters = phase_chapters or DEFAULT_PHASE_CHAPTERS
     schedule = StorySchedule()
@@ -404,7 +480,8 @@ def build_story_schedule(
         for char in candidates:
             if len(stories) >= n_per_phase:
                 break
-            # Skip characters whose atoms are all already used in a prior phase.
+            if char in _STRUCTURAL_STARTS or char == "unknown":
+                continue
             char_arcs = char_idx.get(char, {})
             has_fresh = any(
                 a.path not in book_used_paths
@@ -414,23 +491,37 @@ def build_story_schedule(
             if not has_fresh:
                 continue
             arc = _assemble_story(
-                char, char_idx, all_atoms, phase_seed, local_num, book_used_paths
+                char,
+                char_idx,
+                all_atoms,
+                phase_seed,
+                local_num,
+                book_used_paths,
+                mode=mode,
             )
             if arc:
                 stories.append(arc)
                 local_num += 1
                 book_story_num += 1
+            elif mode == "hard":
+                warns.append(
+                    f"story_plan:{phase}: could not assemble story for {char!r} (hard mode)"
+                )
 
-        # Fill any remaining slots from the pool (all phases exhausted the named characters).
-        while len(stories) < n_per_phase:
+        while len(stories) < n_per_phase and mode == "soft":
             arc = _assemble_story(
-                "", {}, all_atoms, phase_seed, local_num, book_used_paths
+                "", {}, all_atoms, phase_seed, local_num, book_used_paths, mode=mode,
             )
             if arc is None:
                 break
             stories.append(arc)
             local_num += 1
             book_story_num += 1
+
+        if len(stories) < n_per_phase:
+            warns.append(
+                f"story_plan:{phase}: only {len(stories)}/{n_per_phase} full stories scheduled"
+            )
 
         phase_assignments = _schedule_phase(phase, stories, ch_range)
         schedule.assignments.update(phase_assignments)

@@ -1402,7 +1402,11 @@ overlay_param:
 
 ### IMG-RENDER-DUAL-PATH-V1-01 — Dual-path image generation: Pearl Star (Tier 2, free, canonical) + RunComfy ($10/month soft cap) + locale-first queue (ratified operator Q-IMG-1/2/3, 2026-05-09)
 
-**Status:** **active** (operator authorization; OPERATOR DECISION CARD: NONE — binding immediately).
+**Status:** **decommissioned** — **AMENDMENT-2026-06-13-RUNCOMFY-PAID-LANE-CANCELLED** (RunComfy paid lane cancelled by operator 2026-06-13 via SWEEP-TAIL; Pearl Star Tier-2 single-path canonical remains active). Completes the closure promised in AMENDMENT-2026-06-03-RUNCOMFY-DEPRECATION-IN-PROGRESS below.
+
+**Closure rationale (2026-06-13):** Operator (Ahjan, Tier 1) cancelled the RunComfy paid-lane parallel dispatch pathway. Executed in the sunset PR: the $25 deprecation-burn cap reverted to the canonical **$10** soft cap (warn restored $20→$8) across all 4 enforcement sites; `RUNCOMFY_API_KEY` / `RUNCOMFY_TOKEN` / `RUNCOMFY_DEPLOYMENT_ID` removed from `scripts/ci/integration_env_registry.py` and the macOS Keychain; RunComfy marked DECOMMISSIONED in `docs/INTEGRATION_CREDENTIALS_REGISTRY.md` and `skills/pearl-int/references/manga_render_path_decision.md`. **Pearl Star (Tier 2, free) is now the sole active image-generation path** — backend selection falls through to ComfyUI/Pearl Star with RunComfy creds absent (fail-closed). The RunComfy driver code (`runcomfy_batch.py`, `runcomfy_dispatch.py`, `dispatchers/runcomfy_dispatcher.py`, `image_backend.RunComfyImageBackend`, et al.) is **retained as a fail-closed shared library** — imported by ~9 production modules + tests + CI, so code/CI removal is deferred to a tracked follow-up migration (NOT this PR). Locale-first queue priority (Q-IMG-1/2/3) is preserved on the single path. Operator cancels upstream billing at `https://www.runcomfy.com/profile` before the 2026-06-24 Pro billing date (separate manual step). Ref: `docs/SESSION_HANDOFF_2026_06_11_RUNCOMFY_SUNSET.md`.
+
+> **AMENDMENT-2026-06-03-RUNCOMFY-DEPRECATION-IN-PROGRESS:** Operator has decided to retire the RunComfy paid lane. Current balance ($20.48) is being burned on one-time high-value renders (character refs / ep_002 V5.1 / flagship parity / KDP covers / style probes) before account closure. Cap is **TEMPORARILY raised from $10 to $25** in 4 enforcement sites (`runcomfy_dispatch.py:88`, `runcomfy_cost_tracker.py:29`, `dispatchers/runcomfy_dispatcher.py:164`, `batch_runner.py:43`) to allow the burn. After closure, a follow-up PR restores `_COOLDOWN_USD = 10.0` and removes RunComfy from the dual-path entirely (Pearl Star becomes single-path canonical). Burn receipt: `artifacts/qa/runcomfy_burn_receipt_20260603.md` (forthcoming).
 
 **PROJECT_ID:** `PRJ-DUAL-PATH-IMAGE-RENDER-V1`.  
 **Subsystem:** `integrations` (primary RunComfy wiring); `manga_pipeline`; `brand_admin`; cross-cutting.  
@@ -1487,7 +1491,37 @@ overlay_param:
 
 ### CI-BASELINE-RECOVERY-V1-01 — CI baseline recovery: required-check root causes + phased recovery (Pearl_DevOps cap + spec 2026-05-09)
 
-**Status:** **proposed** — pending operator priority pick and answers to Q1–Q3 in `docs/specs/CI_BASELINE_RECOVERY_V1_SPEC.md` §16.
+**Status:** **complete** — **AMENDMENT-20260527-CI-BASELINE-RECOVERY-COMPLETE** (Phase 4 acceptance PARTIAL; ruleset merge path without `--admin` restored).
+
+#### CI-BASELINE-RECOVERY-V1-01 — AMENDMENT-20260527-CI-BASELINE-RECOVERY-COMPLETE
+
+**Authorization:** Pearl_DevOps `ws_ci_recovery_acceptance` close-out **2026-05-27**.
+
+**`main` HEAD anchor:** `15b46e37a29d5a6349e0d0cfa1a189f6ba1abc18` (PR #1325).
+
+**Verdict:** **PARTIAL** (see `artifacts/qa/ci_baseline_recovery_v1_acceptance_20260527.md`).
+
+**Binding outcomes:**
+
+1. **Phase 1 (#997)** — `Verify governance` false positive on `bypass_actors` audit field: **fixed**; green on merge commits and current `main`.
+2. **Phase 2 (#1006 policy + #1011 WARN)** — author `cover_art` gate **relax-to-warn** per AMENDMENT-2026-05-10: **landed**; **Core tests** **success** on `main` HEAD at acceptance time.
+3. **Ruleset merge hygiene** — GitHub ruleset `13451138` requires **only** `Verify governance`; last **3** merged PRs (#1325, #1324, #1323) and last **15** sampled merges: **no** merge commit with failing `Verify governance` → **routine `--admin` for required-check bypass is no longer the default path**.
+4. **OPD-152** — PR-template cascade-prevention checkbox for planner/composer signal + test assertion co-commit: **landed** (PR #1322 chain).
+5. **OPD-153** — `Workers Builds: pearl-prime` reclassified as **accepted non-blocking noise**; operator dashboard disconnect remains optional (audit Path A1).
+6. **PR #1325** — `preflight_push.sh` surfaces max OPD on `origin/main` to reduce numbering collisions.
+
+**Deferred (not blocking this amendment):**
+
+- **Release gates** still **failure** on `main` HEAD — continue under **`ws_ci_recovery_release_gates`** (Phase 3).
+- **EI V2 gates** — not observed on acceptance HEAD (path-filter / trigger gap); address only if promotion to ruleset required.
+
+**Project / workstream status:** `PRJ-CI-BASELINE-RECOVERY-V1` → **completed**; `ws_ci_recovery_acceptance` → **completed**; `ws_ci_recovery_release_gates` → **runnable** (Release gates green).
+
+**Anti-drift:** Do not claim full yaml-contract green (`Core` + `Release` + `EI V2` + `Verify governance`) on `main` until Release gates Phase 3 evidence exists — this amendment closes the **ruleset / `--admin`** recovery goal only.
+
+---
+
+**Prior status (archived):** **proposed** — pending operator priority pick and answers to Q1–Q3 in `docs/specs/CI_BASELINE_RECOVERY_V1_SPEC.md` §16.
 
 **Subsystem:** `pearl_devops` (primary); coordination with `Pearl_Editor` on cover art policy.
 
@@ -1833,3 +1867,1471 @@ overlay_param:
 **Authority:** This cap entry + the four phase PRs (1219, 1220, this PR, and the Phase 5 PR).
 
 ---
+
+### HOOK-SCENE-FIRST-01 — HOOK + ANGLE_DEFINITION atoms must open scene-first (1 specific person + 1 specific situation + 1 specific body posture); philosophy may appear AFTER the scene, never before (OPD-144 ratified 2026-05-21)
+
+**Status:** **ratified** (operator decision 2026-05-21; logged 2026-05-23 via PR #1292; cap entry authored via this PR).
+
+**Context:** Operator 2026-05-21 comparison of two AUTHORED reference books in `artifacts/pipeline_examples/`:
+
+- **Miki — scene-first opening** (`artifacts/pipeline_examples/miki/book_miki_imposter_syndrome_15min.txt:26`): *"Somewhere right now, a person is sitting in a bathroom stall at their new job, pressing their phone against their thigh so nobody hears the screen light up, breathing through their mouth because their nose is too congested from the silent crying they did in the car on the way here."* Contains (1) specific person ("a person… at their new job"), (2) specific situation ("sitting in a bathroom stall"), (3) specific body posture ("pressing their phone against their thigh… breathing through their mouth"). Reader recognition arrives in sentence 1.
+- **Omote — philosophy-first opening** (`artifacts/pipeline_examples/omote/book_omote_sleep_anxiety_15min.txt:27`): *"Nightfall strips the surface away. This happens automatically, without consent and without ceremony. The lights go off. The room darkens. The sounds of the day recede — traffic, conversation, the hum of machines and obligations and schedules and the low buzz of perpetual performance. And in the sudden quiet, the interior speaks."* Abstract event; no specific person; no specific body posture. Concrete reader recognition arrives at paragraph 4 ("The email that went unanswered…"). Operator: *"The Omote book ch1 is not as good as the Miki book."*
+
+Both are AUTHORED reference texts (not pipeline-generated output) under `artifacts/pipeline_examples/{teacher}/`. The diagnosis is about an authoring rule (which way to open a HOOK), not a pipeline bug. Operator decision of record: **OPD-144** in `artifacts/coordination/operator_decisions_log.tsv` (recovered from `old_chat_specs/Untitled 127.txt` L91-110, landed via PR #1292 commit `74a8c6fa5`). Affected atom paths per OPD-144: `atoms/*/*/HOOK/CANONICAL.txt` and `atoms/*/*/ANGLE_DEFINITION/CANONICAL.txt`.
+
+**Decision:** **HOOK atom first paragraph MUST contain (1) one specific person, (2) one specific situation/setting, (3) one specific body posture.** Philosophical or abstract claims may appear AFTER the scene, never before. This is the binding authoring rule for:
+
+| Atom type | Path glob | Scope of rule |
+|---|---|---|
+| `HOOK` | `atoms/<persona>/<topic>/HOOK/CANONICAL.txt` | First paragraph must be scene-first |
+| `ANGLE_DEFINITION` | `atoms/<persona>/<topic>/ANGLE_DEFINITION/CANONICAL.txt` | First paragraph must be scene-first (per OPD-144 affected_paths) |
+
+Reading-order rule: **scene first, philosophy second.** Binding for NEW authoring as of 2026-05-21. EXISTING atoms are reviewed under the Pearl_Editor brief addendum ws (see Action items §1) — atoms that violate the rule are tagged for rewrite queue but NOT rewritten in that ws; the rewrite queue is a separate downstream ws gated on the brief addendum landing.
+
+**Anti-drift check:**
+
+- Does NOT contradict `TEMPLATE-UNIVERSAL-01` — HOOK is one of the 10 sections in `SOMATIC_10_SLOT_GRID`; this is a within-section authoring constraint, supplemental to the 12-spine × 10-section × 3-floor universal structure; doesn't change shape.
+- Does NOT contradict `BESTSELLER-INJECTIONS-MANDATORY-01` — HOOK is grid-architectural across all profiles per `SOMATIC_10_SLOT_GRID`; this entry tightens HOOK *content quality*, doesn't add or remove an injection.
+- Does NOT contradict `EXERCISE-BANK-RESOLUTION-01` — EXERCISE-scoped, no overlap.
+- Does NOT contradict `SPEC-739-THRESHOLD-01` / `SPEC-739-VALIDATOR-MULTISOURCE-01` — threshold is shape/count of variations; this is content quality within a variation.
+- Does NOT contradict `BG-PR-09 Phase-2 closeout` — STORY-at-sec-2/5/9 grid swap, no HOOK overlap.
+- REINFORCES `PEARL-EDITOR-UPSTREAM-01` — routes the brief addendum + corpus tagging to Pearl_Editor consistent with the authority-flow framing (content authority precedes render consumption).
+- No new spec authored in this entry. The scene-first rule MAY amend `PEARL_PRIME_BESTSELLER_WRITING_OVERLAY_SPEC.md` in a future ws gated on Pearl_Editor brief addendum landing (deferred — Open Question Q2 below).
+
+**Empirical state:** Sample of 5 HOOK CANONICAL.txt files (out of 211 total HOOK atoms surveyed during discovery): `atoms/midlife_women/anxiety/HOOK/CANONICAL.txt`, `atoms/entrepreneurs/anxiety/HOOK/CANONICAL.txt`, `atoms/midlife_women/imposter_syndrome/HOOK/CANONICAL.txt`, `atoms/midlife_women/sleep_anxiety/HOOK/CANONICAL.txt`, `atoms/entrepreneurs/overthinking/HOOK/CANONICAL.txt`. Distribution: **4/5 scene-first, 1/5 philosophy-first.** The philosophy-first atom is `atoms/entrepreneurs/overthinking/HOOK/CANONICAL.txt:7`, opening with *"Your worth is your business. Your business is your worth. So every decision becomes a referendum on your value as a human."* The sample is too small to be authoritative across the full 211-atom corpus, but it confirms the problem is **real and present** (~20% philosophy-first in this random slice) — worth a brief addendum + a detector, not hypothetical. Full corpus tagging is Pearl_Editor's ws scope.
+
+**F11 detector ID claim:** Operator chose F11 per OPD-144 (`phoenix_v4/quality/register_gate.py (F11 detector target)` in OPD-144 affected_paths). Grep verification confirms F11 is unclaimed:
+
+```
+$ grep -RIn 'F11\b\|register.gate.F11\|RG.F11' . --include='*.py' --include='*.yaml' --include='*.md'  (excluding worktrees + old_chat_specs)
+(no output)
+```
+
+F1–F8 currently claimed in `phoenix_v4/quality/register_gate.py:10-17` (F8 deferred pending anchor corpus at `artifacts/reference/trade_pub_anchors/`). F9 and F10 are unclaimed gaps — operator chose F11 explicitly, leaving F9/F10 reserved for future detectors (cap entry records this empirically; not Pearl_Architect's decision to renumber).
+
+**Action items:**
+
+1. **Pearl_Editor (`ws_pearl_editor_hook_scene_first_brief_addendum_20260523`)** — author brief addendum codifying the scene-first HOOK + ANGLE_DEFINITION authoring rule per this cap entry; review existing `atoms/*/*/HOOK/CANONICAL.txt` corpus (211 files) AND existing `atoms/*/*/ANGLE_DEFINITION/CANONICAL.txt` corpus; tag philosophy-first atoms for rewrite queue (do NOT rewrite in this ws — queue only). Output: `docs/PEARL_EDITOR_BRIEF.md` addendum section + a tagging artifact (e.g., `artifacts/qa/HOOK_SCENE_FIRST_TAGGING_*.tsv` — Pearl_Editor's call on format). Iteration cap = 1 PR. No code edits.
+2. **Pearl_Dev (`ws_pearl_dev_register_gate_f11_hook_abstract_detector_20260523`)** — implement register-gate **F11: HOOK atom first-paragraph abstract-opening detector**. Triggers on first paragraph lacking concrete-person + concrete-situation + concrete-body-posture signal. Surface as register-gate **WARN** (not HARD_FAIL) until brief-addendum corpus pass completes. Add F11 line to `phoenix_v4/quality/register_gate.py:10-17` docstring + implement detector function alongside F1-F7. Iteration cap = 1 PR. Soft dependency on Pearl_Editor's corpus tagging (informs detector's edge-case heuristics) but NOT a hard blocker — Pearl_Dev can implement against the cap-entry rule text alone.
+3. **Pearl_PM** — route `ws_pearl_editor_hook_scene_first_brief_addendum_20260523` and `ws_pearl_dev_register_gate_f11_hook_abstract_detector_20260523` (both opened in `artifacts/coordination/ACTIVE_WORKSTREAMS.tsv` via this PR) for execution.
+4. **Pearl_Architect (deferred ws)** — if/when Pearl_Editor brief addendum lands and the corpus rewrite queue is non-trivial, open a follow-up cap entry / amendment considering whether the scene-first rule should be amended INTO `PEARL_PRIME_BESTSELLER_WRITING_OVERLAY_SPEC.md` as a spec-level rule (not just brief-addendum). Open Question Q2 below.
+
+**Handoffs:**
+
+- Pearl_PM → routes `ws_pearl_editor_hook_scene_first_brief_addendum_20260523` + `ws_pearl_dev_register_gate_f11_hook_abstract_detector_20260523` → trigger = this cap-entry PR merged (which also requires PR #1292 to merge first, since this PR is stacked on PR #1292).
+- Pearl_Editor → `ws_pearl_editor_hook_scene_first_brief_addendum_20260523` → independent execution after Pearl_PM routes.
+- Pearl_Dev → `ws_pearl_dev_register_gate_f11_hook_abstract_detector_20260523` → soft dep on Pearl_Editor's corpus tagging; can start in parallel with Editor's review.
+
+**Open questions (for future amendment, not decided here):**
+
+- **Q1.** Should F11 eventually escalate from WARN to HARD_FAIL once the brief-addendum corpus pass completes and the philosophy-first atoms are rewritten? Cap entry leaves this OPEN for a future amendment. Pearl_Dev's V1 implementation: WARN-only.
+- **Q2.** Should the scene-first rule be amended INTO `PEARL_PRIME_BESTSELLER_WRITING_OVERLAY_SPEC.md` as spec-level (not just brief-addendum-level)? Cap entry leaves this OPEN; revisit after Pearl_Editor brief addendum lands.
+
+**Authority:** This cap entry + OPD-144 (`artifacts/coordination/operator_decisions_log.tsv` row, landed via PR #1292) + this cap-entry PR.
+
+---
+
+### BR-CANON-02-GLOBAL-BRAND-IDENTITY — Operator-visible 37 = manga canon × cross-axis JOIN view (additive cap on Path X, decision ratified 2026-05-26)
+
+**Status:** **ratified** (operator decision via PR #1305 ship + acknowledged in PR #1309 ws opening + load-bearing on main since commit `182c96582`).
+
+**Context:** Operator framing 2026-05-24 in v2 dashboard spec: "Each brand is a global brand, not manga-only or book-only." PR #1305's `brand-wizard-app/public/brand_admin_v2.html` surfaces ~37 brands with `axes_present: [book, manga, music]` chips per card — a JOIN view over the 3 Path X axes. BR-CANON-01 Path X cap entry established that book / manga / music are intentionally distinct registries that DO NOT converge. The operator's v2 framing does not contradict Path X — it adds an **operator-visible JOIN view** above the 3 axes. This cap codifies the join without merging the registries.
+
+Load-bearing evidence on `origin/main` (merge order 2026-05-26):
+
+| Commit | PR | What landed |
+|---|---|---|
+| `c1fa2c8a2` | #1309 | Opened follow-up ws rows including this cap ws |
+| `dbeb40e0b` | #1296 | `brand_index` + `_book_brand_rows` / `_manga_brand_rows` / `_music_brand_rows` |
+| `182c96582` | #1305 | v2 picker + `axes_present` chips via `planned_volumes` |
+| `03914d36c` | #1312 | 37-brand `artifacts/weekly_packages` stub seed (`2026-W22`) |
+
+**Decision:** The operator-visible "global brand" set = **manga canonical list slots 1–37** (`config/manga/canonical_brand_list.yaml`), used as the picker canon for `brand_admin_v2.html` (`renderPicker` iterates `brand_index().manga`). Brand identity is shared across axes via the **`brand_id` key** when the same id exists in more than one registry (e.g., `stillness_press` on book + manga; `axes_present` materializes the join via `_axes_for_brand` in `server/routes/brand_admin_public.py`). The 3 registries remain authoritative for their respective content pipelines:
+
+| Axis | Registry | Pipeline owner | Typical count |
+|---|---|---|---|
+| **Book** | `config/brand_registry.yaml` | Pearl_Prime | 26 active keys (locale variants may differ) |
+| **Manga** | `config/manga/canonical_brand_list.yaml` | Pearl_Brand | **37** (operator picker canon) |
+| **Music** | `config/music/music_brand_registry.yaml` | Pearl_Brand | 38+ (`id_space_start=38`; music-only slugs) |
+
+The "global brand" is a **VIEW** (join + projection at endpoint-time), not a new registry:
+
+- `_book_brand_rows()`, `_manga_brand_rows()`, `_music_brand_rows()` emit per-axis rows.
+- `brand_index()` returns `{book, manga, music, counts}` without merging registries.
+- `_axes_for_brand(brand_id)` computes which axes apply for a given `brand_id`.
+- `planned_volumes` (v2 picker cards) exposes `axes_present: _axes_for_brand(brand_id)`.
+
+No new YAML, no new join table, no `config/global_brand_registry.yaml`.
+
+**Anti-drift check:**
+
+- Path X separation **REMAINS BINDING**. BR-CANON-02 is **ADDITIVE** on BR-CANON-01 Path X — not a supersession.
+- DO NOT introduce a persisted "global registry" file — the join is computed at endpoint-time.
+- DO NOT modify any of the 3 source registries from a "global brand" framing.
+- DO NOT rename `brand_id` values to enforce join keys — accept book-only locale variants (`*_en_us`), music-only slots 38+, and manga-only ids; `axes_present` reflects reality.
+- DO NOT expand operator-visible canon beyond manga's 37 without a successor cap (**BR-CANON-03** or later amendment).
+
+**Action items:** None directly. This cap ratifies what is already on main:
+
+- `server/routes/brand_admin_public.py:brand_index` — computes the join (PR #1296, `dbeb40e0b`)
+- `brand-wizard-app/public/brand_admin_v2.html` — renders `axes_present` chips (PR #1305, `182c96582`)
+- `artifacts/weekly_packages/<brand>/2026-W22/` — 37 stub packages (PR #1312, `03914d36c`)
+
+**Handoffs:**
+
+- **Pearl_PM:** use **BR-CANON-02-GLOBAL-BRAND-IDENTITY** when routing any future "global brand" / "cross-axis" / "join" / "all brands view" ws's.
+- **Pearl_Brand:** continues owning dashboard surfaces under **DASH-02**; BR-CANON-02 ratifies what v2 already does.
+- **Pearl_Architect (FOLLOW-UP, operator-gated):** if operator later expands operator-visible canon beyond 37, open **BR-CANON-03** (or successor) specifying the new operator-visible canon — do NOT modify BR-CANON-02 in place.
+- **Pearl_Editor + Pearl_Marketing:** `ws_planned_volumes_per_brand_backfill_20260526` backfills per-axis volume data; BR-CANON-02 does NOT gate that work.
+
+**Cross-references:**
+
+- **BR-CANON-01** + Path X update + Path X cap entry (this state doc) — foundation BR-CANON-02 builds on
+- **MUSIC-MODE-BRAND-INTEGRATION-V1-01** (this state doc) — music axis (slot 38+); BR-CANON-02 surfaces music in the join when `music_brands` entries share `brand_id`
+- **DASH-02** (this state doc) — Pearl_Brand ownership of the dashboard surface that materializes the join
+- **WORLDWIDE-CATALOG-GO-LIVE-V1-PROGRAM-01** (this state doc) — parent program; brand_dashboard + weekly_packaging surfaces
+- **BRAND_ADMIN_CANONICAL_PACKAGE.md** — declares v2 canonical-weekly-work (cross-reference only; not amended by this cap)
+
+---
+
+#### WORLDWIDE-CATALOG-GO-LIVE-V1-PROGRAM-01 — AMENDMENT-2026-05-27-BRAND-ADMIN-V2-PHASE-1-P0-COMPLETE
+
+**Authorization:** Brand-Admin-V2 sub-program **Phase 1 P0 100% complete**. Five constituent PRs landed on `main`, each gated through `Verify governance` (ruleset 13451138) + Core tests + Release gates + EI V2 gates. Operator-visible 37-brand picker now renders real planned-volume numbers across **book / manga / podcast / audiobook** axes; weekly-work dashboard surfaces per-platform downloads (KDP / WEBTOON / Spotify / Pearl News) with split-at-build per OPD-145.
+
+**`main` HEAD anchor (doc authoring):** post-PR #1337 merge (planned-volumes backfill landed; HEAD advances with this AMENDMENT PR).
+
+---
+
+##### 1. PHASE 1 P0 100% COMPLETE — Brand-Admin-V2 sub-program
+
+Sub-program scope = **operator-visible 37-brand × 4-axis × per-platform-download weekly-work dashboard**. All five constituent capabilities shipped:
+
+| Capability | PR | Merge SHA | Authority |
+|---|---|---|---|
+| Live 3-axis brand index endpoint (book / manga / music) | #1296 | `dbeb40e0b` | `server/routes/brand_admin_public.py` |
+| V2 weekly-work dashboard + picker (`brand_admin_v2.html`) | #1305 | `182c96582` | `BRAND_ADMIN_CANONICAL_PACKAGE.md` |
+| Per-platform download route (OPD-145 split-at-build) | #1326 | `c7a645e44` | `scripts/brand/build_admin_packets.py` |
+| Per-brand planned volumes backfill (37 brands × 3 axes) | #1337 | `e5cb4dc92` | `config/brand_admin/manga_canon_planned_volumes.yaml` |
+| Mkdir-parent fix for split-at-build zip writer | #1334 | `d6bcaa5ac` | `scripts/brand/build_admin_packets.py:141` |
+
+**Supporting cap entry:** `BR-CANON-02-GLOBAL-BRAND-IDENTITY` (this state doc) — additive JOIN cap declaring brand_id as cross-axis JOIN key while preserving Path X 37-manga + 24×13=312-book + 38+ music separation.
+
+**Operator-visible deliverable:** http://127.0.0.1:8000 → `brand-wizard-app/public/brand_admin_v2.html` → 37-brand picker → click brand → per-week × per-platform downloads.
+
+**Binding claim (verbatim):** **Brand-Admin-V2 Phase 1 P0 is 100% complete** for `PRJ-WORLDWIDE-CATALOG-GO-LIVE-V1` at the milestone boundary defined by the 5 PRs above + planned-volumes backfill landing.
+
+---
+
+##### 2. PHASE 2 ENTRY CRITERIA (brand-admin-v2 sub-program)
+
+1. **Phase 1 P0 milestone closed** — this AMENDMENT (5 PRs landed + planned-volumes coverage matrix).
+2. **CI baseline clean for brand-admin sub-program** — `tests/test_brand_admin_v2_api.py` + `tests/unit/brand/test_build_admin_packets.py` green on `main` HEAD (verified post-#1334).
+3. **Path X anti-drift held** — 37-manga canon unchanged; book pipeline (24×13=312) unchanged; music registry (38+) unchanged; brand_id JOIN materialized only at dashboard surface per `BR-CANON-02`.
+4. **OPD-145 split-at-build pattern adopted** — per-platform ZIPs under `artifacts/weekly_packages/<brand>/<week>/<platform>/<brand>_<week>_<platform>.zip` per OPD-145 ratification.
+
+---
+
+##### 3. PHASE 2 SCOPE — Real-content build × 4 axes + cron wireup
+
+Five **runnable** workstreams now opened (table §5). Sub-program Phase 2 P0 = move from **planned numbers** (configs only) to **real shippable content** flowing through each per-platform pipeline weekly. Cron wireup = Monday weekly job that re-generates per-brand × per-platform ZIPs against the latest content tree.
+
+- **Book axis (KDP ebook):** Pearl_Prime bestseller pipeline → KDP EPUB output → packaged into `<brand>/<week>/kdp/<brand>_<week>_kdp.zip`
+- **Manga axis (KDP paperback + WEBTOON):** Manga V2 layered render → KDP paperback PDF + WEBTOON vertical-scroll → packaged into `<brand>/<week>/kdp/` and `<brand>/<week>/webtoon/`
+- **Podcast axis (Spotify):** Pearl_Audio podcast pipeline → MP3 + show notes → packaged into `<brand>/<week>/spotify/`
+- **Audiobook axis (Audible / Spotify / Google Play):** Pearl_Audio audiobook pipeline → M4B + chapter markers → packaged into `<brand>/<week>/audible/` and `<brand>/<week>/google_play/`
+- **Cron wireup:** GitHub Actions `weekly_package_writer.yml` (existing scaffold) → activate Monday 9am UTC schedule → re-run `scripts/brand/build_admin_packets.py` on the live content tree
+
+---
+
+##### 4. ANTI-DRIFT
+
+- The claim **"Brand-Admin-V2 Phase 1 P0 is 100% complete"** is **BINDING** for this sub-program record — it **cannot** be downgraded or contradicted in coordination docs **without a new operator AMENDMENT** referencing this block.
+- **Phase 2 workstreams** enumerated in §5 are **runnable** (`status=runnable` in `artifacts/coordination/ACTIVE_WORKSTREAMS.tsv`); each requires operator authorization to spawn (Pearl_Conductor policy unchanged).
+- **Path X 37-manga canon is FROZEN** at brand_id scope — Phase 2 real-content axes use the existing 37 brand_ids, do NOT add 38th manga brand, do NOT modify `config/manga/canonical_brand_list.yaml`.
+- **Music brands (slot 38+)** remain wizard-onboarded only — no manual seeding into Phase 2 real-content backfill.
+- **Per-platform ZIP semantics** = split-at-build per OPD-145; do NOT introduce slice-on-demand variant without separate AMENDMENT.
+
+---
+
+##### 5. ACTION ITEMS (named `ws_*` — prompts not authored in this amendment)
+
+| workstream_id | Primary owners | Intent |
+|---|---|---|
+| `ws_brand_admin_v2_real_content_build_book_axis_20260527` | Pearl_Prime + Pearl_Dev | Wire Pearl_Prime bestseller output → KDP ebook EPUB → `<brand>/<week>/kdp/<brand>_<week>_kdp.zip` (37 manga-canon brands; weekly cadence) |
+| `ws_brand_admin_v2_real_content_build_manga_axis_20260527` | Pearl_Author + Pearl_Dev (Manga V2) | Wire Manga V2 layered render → KDP paperback PDF + WEBTOON vertical-scroll → `<brand>/<week>/{kdp,webtoon}/` (37 manga-canon brands) |
+| `ws_brand_admin_v2_real_content_build_podcast_axis_20260527` | Pearl_Audio + Pearl_Dev | Wire Pearl_Audio podcast → MP3 + show notes → `<brand>/<week>/spotify/` (37 manga-canon brands) |
+| `ws_brand_admin_v2_real_content_build_audiobook_axis_20260527` | Pearl_Audio + Pearl_Dev | Wire Pearl_Audio audiobook → M4B + chapter markers → `<brand>/<week>/{audible,google_play}/` (37 manga-canon brands) |
+| `ws_brand_admin_v2_weekly_cron_wireup_20260527` | Pearl_DevOps | Activate Monday 9am UTC `weekly_package_writer.yml` GitHub Actions schedule + verify per-brand × per-platform ZIPs regenerate against live content tree |
+
+**Sequencing:** Real-content × 4 axes can run in parallel (independent content pipelines). Cron wireup is gated on at least 1 of the 4 axes landing (so the cron has real content to package).
+
+**Pointers:** `artifacts/coordination/ACTIVE_WORKSTREAMS.tsv` (5 new `runnable` ws rows below); `BRAND_ADMIN_CANONICAL_PACKAGE.md` (v2 canonical-weekly-work surface); `BR-CANON-02-GLOBAL-BRAND-IDENTITY` (this state doc — JOIN cap); `config/brand_admin/manga_canon_planned_volumes.yaml` (planned-volumes SSOT from #1337); `artifacts/brand_admin/planned_volumes_coverage_20260527.tsv` (coverage matrix evidence).
+
+---
+
+#### WORLDWIDE-CATALOG-GO-LIVE-V1-PROGRAM-01 — AMENDMENT-2026-05-27-BRAND-ADMIN-V2-PHASE-2-P0-COMPLETE
+
+**Authorization:** Brand-Admin-V2 sub-program **Phase 2 P0 100% complete**. All 5 Phase 2 P0 workstreams (real-content build × 4 axes + weekly cron wireup) shipped end-to-end via 5 PRs in a single autonomous multi-agent session (2026-05-27). MVP scope: stillness_press brand × week 2026-W22. Total paid-API spend: **$0** (free Edge TTS for podcast; local CosyVoice2 for audiobook; reused existing V4 panels for manga; no RunComfy/ElevenLabs charges).
+
+**`main` HEAD anchor (doc authoring):** post-PR #1349 merge (manga axis MVP landed; HEAD advances with this AMENDMENT PR).
+
+---
+
+##### 1. PHASE 2 P0 100% COMPLETE — Brand-Admin-V2 sub-program
+
+All 5 Phase 2 P0 workstreams from AMENDMENT-2026-05-27 §5 shipped via 5 PRs:
+
+| Capability | PR | Merge SHA | Authority |
+|---|---|---|---|
+| Book axis MVP (stillness_press 2026-W22 KDP EPUB; 1.5 MB, 11 chapters) | #1344 | `18c7b777c` | `scripts/release/build_epub.py` + manifest entry; **bonus: fixed packager bug** (`build_platform_zips_for_brand` was only writing manifest+README, missing deliverable files) |
+| Podcast axis MVP (stillness_press 2026-W22 Spotify+Apple MP3; 55s, 887KB; free Edge TTS) | #1347 | `b6f873a82` | `scripts/podcast/render_simple_episode.py` (NEW) + Edge TTS fallback after ElevenLabs 401 |
+| Audiobook axis MVP (stillness_press 2026-W22 Audible+Google Play M4B; 6.5min, 2.5MB; 3 chapter atoms; local CosyVoice2) | #1346 | `e50bbb649` | New `audible` + `google_play_audiobook` platform slugs; `audiobook` deliverable_type; ffmpeg-only M4B re-encode |
+| Manga axis MVP (stillness_press 2026-W22 KDP PDF + WEBTOON PNG; 5.3MB PDF + 1080×68016 PNG; reused 35 V4 ep_001 panels) | #1349 | `89e924fae` | `scripts/brand/build_stillness_manga_2026w22.py` (NEW) + 4-axis composite manifest |
+| Cron wireup (Monday 9am UTC weekly_package_writer.yml + auto-PR pattern; **bonus: fixed hidden heredoc/YAML bug** that had been silently breaking the workflow since PR #1251) | #1348 | `85d3fbb39` | `.github/workflows/weekly_package_writer.yml` |
+
+**Composite manifest:** `artifacts/weekly_packages/stillness_press/2026-W22/manifest.json` now declares `package_type=book_axis_mvp+podcast_axis_mvp+audiobook_axis_mvp+manga_axis_mvp` with all 4 axes status=ready.
+
+**Operator-visible deliverable:** http://127.0.0.1:8000 → `brand-wizard-app/public/brand_admin_v2.html` → stillness_press → 2026-W22 → 6 platform download cards (KDP / WEBTOON / Spotify / Apple Podcasts / Audible / Google Play) all non-null.
+
+**Binding claim (verbatim):** **Brand-Admin-V2 Phase 2 P0 is 100% complete** for `PRJ-WORLDWIDE-CATALOG-GO-LIVE-V1` at the milestone boundary defined by the 5 PRs above + composite-manifest end-to-end smoke pass.
+
+---
+
+##### 2. PHASE 3 ENTRY CRITERIA (brand-admin-v2 sub-program)
+
+1. **Phase 2 P0 milestone closed** — this AMENDMENT (5 PRs landed + 4-axis composite live).
+2. **CI baseline clean** — all required checks green on `main` HEAD; Workers Builds = OPD-153 noise (non-blocking).
+3. **Cron operational** — `weekly_package_writer.yml` runs Monday 9am UTC; auto-PRs land in `agent/weekly-packages-YYYY-MM-DD` branches for operator review.
+4. **HOOK-SCENE-FIRST-01 corpus pass complete** — 41 P0 (#1336) + 100 P1 (#1342) + 37 P2 (#1341) = **178 atoms rewritten scene-first**; F11 corpus at or near 0 WARN. Unblocks Open Question Q1 (F11 WARN → HARD_FAIL escalation; routed to Pearl_Architect).
+
+---
+
+##### 3. PHASE 3 SCOPE — Per-brand scale-out from 1 brand × 1 week → 37 brands × weekly cadence
+
+Phase 2 P0 was MVP scope (1 brand, 1 week, 4 axes). Phase 3 P0 = horizontal scale-out:
+
+- **Per-brand content build at scale:** apply the 4-axis pattern to all 37 manga-canon brands. Each axis has its own pipeline; Phase 3 work is brand-specific source content authoring (Pearl_Editor + Pearl_Marketing scope, not Pearl_Dev).
+- **Cron stability:** verify Monday 9am UTC cron successfully opens auto-PR + content stays current week over week; eyeball auto-PR contents for the first 2-3 weeks.
+- **Operator review of PR #1350** (cron-generated `weekly_packages_2026-05-25.tsv` PR with -555 lines / 0 +) — deferred to operator decision because large-deletion smell needs human eyeball.
+
+Phase 3 P0 workstreams **NOT YET OPENED** — pending operator authorization on per-axis cadence + brand priority order. Recommendation: open `ws_brand_admin_v2_phase_3_p0_*` rows in a separate Pearl_PM cycle.
+
+---
+
+##### 4. ANTI-DRIFT
+
+- The claim **"Brand-Admin-V2 Phase 2 P0 is 100% complete"** is **BINDING** for this sub-program record — cannot be downgraded without new operator AMENDMENT referencing this block.
+- **Path X 37-manga canon FROZEN.**
+- **Book pipeline 24×13=312 FROZEN.**
+- **Music registry 38+ FROZEN.**
+- **OPD-145 split-at-build semantics PRESERVED** — all 5 PRs adhered (no slice-on-demand variant introduced).
+- **OPD-153 cascade-prevention HELD** — Workers Builds failures accepted as known noise; all merges used `--admin --squash --delete-branch` with required ruleset (`Verify governance`) green.
+- **Tier 1 LLM policy ADHERED** — content authoring used Claude Code (operator-present session); paid APIs (ElevenLabs, RunComfy) gated by $5 cap; all axes shipped with $0 paid-API spend by falling back to free/local alternatives.
+
+---
+
+##### 5. OPERATOR ACTION ITEMS
+
+1. **PR #1350** — cron-generated `weekly_packages_2026-05-25.tsv` PR (0 additions / 555 deletions). Operator decision needed: merge (legitimate regen) or close (data loss concern)? Recommend eyeball-review before merge.
+2. **ELEVENLABS_API_KEY rotation** — Keychain key returned 401 invalid_api_key during podcast axis work. Rotate with: `security add-generic-password -s ELEVENLABS_API_KEY -a $USER -w <new_key>`. No blocker (podcast axis fell back to Edge TTS), but unblocks higher-quality TTS for future production.
+3. **F11 WARN → HARD_FAIL escalation** (HOOK-SCENE-FIRST-01 Open Question Q1) — 178-atom corpus is now scene-first; F11 detector likely safe to promote from WARN to HARD_FAIL. Recommend Pearl_Architect ws to author the escalation.
+4. **Phase 3 P0 dispatch** — per-brand scale-out from 1 brand → 37 brands. Awaits operator authorization on cadence + brand priority.
+
+**Pointers:** `artifacts/coordination/ACTIVE_WORKSTREAMS.tsv` (7 ws rows flipped completed in this PR + 1 new P2 row); `BRAND_ADMIN_CANONICAL_PACKAGE.md`; `artifacts/weekly_packages/stillness_press/2026-W22/manifest.json` (4-axis composite); prior `AMENDMENT-2026-05-27-BRAND-ADMIN-V2-PHASE-1-P0-COMPLETE` (this state doc).
+
+---
+
+### MANGA-RENDER-LINEAGE-01 — V4/V5 contract+continuity_state chain canonical for render; SpiritualTech VISUAL_AGENT prompt-planning superseded-for-layered (ratified 2026-05-29)
+
+**Status:** **ratified** (operator decision 2026-05-29; this cap entry + [`docs/MANGA_RENDER_LINEAGE_DECISION_2026-05-29.md`](./MANGA_RENDER_LINEAGE_DECISION_2026-05-29.md)).
+
+**Decision:** Two manga render lineages existed, sharing only `continuity_state`. **CANONICAL for render** = the V4/V5 contract + `continuity_state` chain (`contract_to_prompt_compiler` → `scripts/manga/render_v5_episode.py`, Qwen-Image-Layered — what AUTHORITY V5.1 runs and what `continuity_state_generator.py` scales). **SUPERSEDED for the layered-render approach** = SpiritualTech `VISUAL_AGENT` / `build_panel_prompts.py` prompt-planning (retained as experiment-of-record / non-layered fallback). **RETAINED** = `LETTERING_AGENT` + `LAYOUT_AGENT` (post-render text/composition; reconcile against V5 lettering-v2 PR #945). **Open impl item:** align any reused VISUAL_AGENT prompt logic to the Qwen natural-language-prose strategy (`docs/CHARACTER_INDIVIDUATION_PIPELINE_SPEC_2026-05-02.md` §2.3).
+
+**How to apply:** route render-pipeline work through the V4/V5 contract + `continuity_state` chain; do NOT build new layered render on the SpiritualTech `panel_prompts.json` path.
+
+**Authority:** this cap entry + `docs/MANGA_RENDER_LINEAGE_DECISION_2026-05-29.md` + `docs/specs/MANGA_V5_LAYERED_ARCHITECTURE.md` (V5.1 render AUTHORITY).
+---
+
+### COHESIVE-FLOW-PATH-DEFAULT-SPINE-01 — Flip `--pipeline-mode` default `registry` → `spine` (operator Option A; ratified 2026-05-30)
+
+**Status:** **ratified** (operator decision 2026-05-30; cap entry only — implementation deferred to Pearl_Dev).
+
+**Context:** Read-only audit [PR #1379](https://github.com/Ahjan108/phoenix_omega_v4.8/pull/1379) + [`artifacts/qa/COHESIVE_FLOW_12x10x5_ARCHITECTURE_AUDIT.md`](../artifacts/qa/COHESIVE_FLOW_12x10x5_ARCHITECTURE_AUDIT.md) confirms **12×10×5 is real on the spine path** (`SOMATIC_10_SLOT_GRID`, PR #395) and that the operative drift is **path divergence**: spec + catalog SSOT declare spine canonical, but `scripts/run_pipeline.py` argparse default is `registry` (`:1604`), so agents and batch runners that omit `--pipeline-mode` silently ship the legacy 9-slot bestseller beat. [`docs/PEARL_PRIME_BOOK_SYSTEM_CANONICAL.md`](./PEARL_PRIME_BOOK_SYSTEM_CANONICAL.md) **§1.1** already flags this as *"the most consequential spec↔code drift in Pearl Prime today"* and pre-schedules the fix workstream.
+
+**Decision gate (operator pick on PR #1379 thread):**
+
+| Option | Mechanism | Outcome |
+|--------|-----------|---------|
+| **A (ratified)** | Flip global argparse default `registry` → `spine` at `run_pipeline.py` (+ mirror sites) + regression test | **Closes silent fallback** for every caller that omits the flag |
+| **B (rejected)** | Route catalog/batch drivers only (`run_max_quality_catalog.py` et al. pass `--pipeline-mode spine`) | Batch ships spine; **ad-hoc CLI and other callers still default to legacy** — mixed state, easy re-drift |
+| **C (rejected)** | Keep code default `registry`; enforce spine only via docs / explicit operator discipline (§1.1 interim rule) | **Does not fix spec↔code drift**; agents continue to silently hit legacy when the flag is omitted |
+
+**Decision:** **Option A.** Operator rationale: **avoid silent fallback to legacy** — the canonical 12×10×5 cohesive-flow spine (`SOMATIC_10_SLOT_GRID`, Priya `story_schedule` at sec 2/5/9, 5 story variants) must be the default ship path, not an opt-in flag behind a legacy default.
+
+**Pearl_Dev implementation scope (NOT this cap PR — cite only):**
+
+| Touch point | File:line | Change |
+|-------------|-----------|--------|
+| Primary argparse default | `scripts/run_pipeline.py:1604` | `default="registry"` → `default="spine"` |
+| Mirror site 1 | `scripts/run_pipeline.py:1763` | same default flip |
+| Mirror site 2 | `scripts/run_pipeline.py:1951` | same default flip |
+| Mirror site 3 | `scripts/run_pipeline.py:2295` | same default flip |
+| Regression test | new test module (Pearl_Dev's call) | assert `--pipeline-mode` default is `spine` at module import |
+
+**Downstream workstream:** `ws_pipeline_mode_default_flip_to_spine_20260518` (Pearl_Dev; small PR; scheduled before catalog-scale production per §1.1). Complements audit restoration Step 1 (explicit `--pipeline-mode spine` on batch drivers) — Steps 1+2 should land together per audit interaction note; **this cap ratifies Step 2 (default flip)** as the binding architecture decision.
+
+**Anti-drift check:**
+
+- Does NOT implement code — cap entry only; no `run_pipeline.py` edits in the architect PR.
+- Does NOT contradict `TEMPLATE-UNIVERSAL-01` — spine path *is* the 12-chapter spine × 10-section grid source-of-truth; flipping default aligns code with that cap.
+- Does NOT close PR #1379 — audit artifact remains the forensic substrate; this entry ratifies the operator path-default pick against that audit.
+- REINFORCES `PEARL_PRIME_BOOK_SYSTEM_CANONICAL.md` §1.1 — removes the interim "MUST pass `--pipeline-mode spine` explicitly" burden once Pearl_Dev lands the ws.
+
+**Action items:**
+
+1. **Pearl_Dev (`ws_pipeline_mode_default_flip_to_spine_20260518`)** — implement the four default flips + import-time default regression test; audit all `run_pipeline.py` callers before merge (§1.1 risk: MEDIUM). Iteration cap = 1 PR.
+2. **Pearl_Dev / Pearl_GitHub (follow-on, not gated on cap merge)** — restoration Step 1 from PR #1379 audit: add `--pipeline-mode spine` to `scripts/run_max_quality_catalog.py` and any other catalog/batch driver that omits the flag (LOW risk; canary 5-book gate pass-rate first).
+3. **Pearl_PM** — ensure `ws_pipeline_mode_default_flip_to_spine_20260518` is routed in `artifacts/coordination/ACTIVE_WORKSTREAMS.tsv` with trigger = this cap-entry PR merged (do not mark completed until Pearl_Dev PR merges).
+4. **Pearl_Architect** — comment on PR #1379 when this cap PR merges: `Option A ratified — cap COHESIVE-FLOW-PATH-DEFAULT-SPINE-01 landed at <PR-link>`.
+
+**Authority:** this cap entry + [PR #1379](https://github.com/Ahjan108/phoenix_omega_v4.8/pull/1379) + [`artifacts/qa/COHESIVE_FLOW_12x10x5_ARCHITECTURE_AUDIT.md`](../artifacts/qa/COHESIVE_FLOW_12x10x5_ARCHITECTURE_AUDIT.md) + [`docs/PEARL_PRIME_BOOK_SYSTEM_CANONICAL.md`](./PEARL_PRIME_BOOK_SYSTEM_CANONICAL.md) §1.1.
+
+### PEARL-PRIME-STOREFRONT-V1-01 — Pearl Prime Storefront V1: single-CTA destination Cloudflare-hosted marketplace (book/audiobook/manga/music) across 5 locales (**proposed** 2026-06-03; pending operator Q-PRP-* decision card)
+
+**Status:** **proposed** — doc + spec + coordination only; **no** frontend code, **no** Worker code, **no** D1 schemas authored in repo, **no** Stripe wiring, **no** atom rewrites, **no** CTA URL changes in this PR. Normative architecture, SKU model, UI contract, payment model, CTA unification contract, and atom-audit contract live in [`docs/specs/PEARL_PRIME_STOREFRONT_V1_SPEC.md`](./specs/PEARL_PRIME_STOREFRONT_V1_SPEC.md). Pearl_Architect amendment session **`PEARL-PRIME-STOREFRONT-V1-01-AMENDMENT`** opens once operator answers Q-PRP-01 through Q-PRP-16 land.
+
+**Context:** Operator directive: build a single Pearl-Prime-branded marketplace destination for every paid Pearl Prime content purchase (eBook, audiobook, manga, music) — Amazon-pattern search + browse + grid + filter + star reviews, dark+amber Pearl Prime branding matching the brand-wizard, hosted on Cloudflare. Today, paid CTAs across `funnel/`, `brand-wizard-app/public/free/`, `somatic_exercise_freebee_apps/`, email sequences, and social CTAs route to **third-party platforms** (Amazon KDP, Google Play Books, Apple Books, Kobo, Audible, Spotify, WEBTOON Canvas) per `config/funnel/store_url_tracker.yaml` — that surface is fragmented, brand-anonymous, and revenue-dilutive. The operator-mandated unification cuts that off: *"we won't direct them to Amazon or Google Play or any other platforms for any of our book content: eBooks, audiobooks, and manga."* Pearl Prime Storefront V1 becomes the single canonical paid-CTA destination, with per-SKU URLs that are stable across catalog regen.
+
+**Cross-reference:** **`BR-CANON-02`** (Path X 37 brands FROZEN — storefront reads, does not mutate). **`MUSIC-MODE-BRAND-INTEGRATION-V1-01`** (music brands 38+ first-class — storefront treats music as first-class product type from V1 design, not bolted on at Phase 3). **`WORLDWIDE-CATALOG-GO-LIVE-V1-PROGRAM-01`** (10-surface program — this storefront is **surface 11**, the consumer-facing surface to the existing operator-facing 10). **`COVER-REGISTRY-01`** (cover-art sourcing). **`MANGA-LAYERED-PIPELINE-V2-01`** + **`MANGA-RENDER-LINEAGE-01`** (manga page assets sourced from V4/V5 contract chain). **`IMG-RENDER-DUAL-PATH-V1-01`** (cover-art render path feeds R2 cover assets). **`PEARL_PRIME_BESTSELLER_WRITING_OVERLAY_SPEC.md`** + **`PEARL_PRIME_BOOK_SYSTEM_CANONICAL.md`** (upstream book pipeline). **`BRAND_ADMIN_CANONICAL_PACKAGE.md`** (operator dashboard — distinct surface from this consumer storefront). **`MUSIC-MODE-FREEBIE-FUNNEL-V1-02`** (music freebies remain freebies; music paid CTAs route to storefront). `phoenix_recommender/` (reused for "Customers also bought" rail per `ws_recommender_promotion_20260328`).
+
+**Decision (locked sections — ratification package):**
+
+1. **Architecture (recommended PRIMARY):** **Custom Cloudflare Pages + Workers + D1 + R2 + KV + Stripe Checkout** stack. Rationale: easy-adapt = read existing YAML SSOTs (Path X 37, locale registry, music brand registry, two catalog CSVs) directly without forcing them into a framework's product model; Cloudflare's first-party e-commerce reference architecture matches our topology verbatim; MIT license; ~$5-25/mo at MVP scale. Web-research matrix in [`SPEC §3`](./specs/PEARL_PRIME_STOREFRONT_V1_SPEC.md). **Fallback:** **Snipcart drop-in** on a custom CF Pages static site (catalog + reviews still on D1; cart + checkout + delivery delegated to Snipcart) — additive change, safe-to-pivot-into if Pearl_Dev/Pearl_Int find custom payment+delivery wiring too time-consuming.
+2. **Scope-in (V1 SKU model):** Path X 37 manga brands × 5 locales × {book, audiobook, manga, music} + music 38+ first-class brands. SKU identity = `<product_type>_<locale>_<brand_id>_<inner_key>`; inner_key derived from existing catalog rows in `artifacts/catalog/pearl_prime_book_script_catalogs/<locale>_catalog.csv` (book + audiobook), `artifacts/catalog/manga/<locale>_manga_catalog.csv` (manga), `config/music/music_brand_registry.yaml` + `SOURCE_OF_TRUTH/musician_banks/` (music). Series bundles deferred to Phase 3.
+3. **Scope-out (HARD):** No third-party content (Pearl Prime catalog only). Does NOT replace brand-wizard, brand-admin dashboard, weekly-package writer cron, freebie lead-magnet surfaces, or `phoenix_recommender` (consumed read-only). Atoms remain content-only (no embedded URLs).
+4. **Locale rule:** 5 canonical locales per `config/localization/locale_registry.yaml` — `en-US` (Phase 1), `ja-JP` (Phase 2), `zh-TW` + `zh-CN` (Phase 3), `ko-KR` (Phase 4 gated on `distribution_status` clearance per `docs/CJK_CATALOG_PLAN.md`). Auto-detect via `CF-IPCountry` + `Accept-Language`; persistent `pp_locale` cookie; manual switcher always present.
+5. **UI design tokens (NON-NEGOTIABLE):** `#0e0a06` bg + `#faf6f0` text + `#d97706` amber-600 accent + Cormorant Garamond + DM Sans + DM Mono — per `brand-wizard-app/src/BrandWizard.jsx`, `brand-wizard-app/dist/onboarding.html`, recent PR #1430 (`musician_reflections_survey`), and `MUSIC-MODE-BRAND-INTEGRATION-V1-01`. Font preamble copied verbatim from onboarding.html.
+6. **Payment (recommended default):** Stripe Checkout (2.9% + 30¢; all 5 locale currencies covered modulo CNY caveats — see Q-PRP-PAY-01). Alternates surfaced for operator decision: LemonSqueezy + Paddle (Merchant of Record, 5% + 50¢) and BookFunnel + Stripe (purpose-built ebook/audiobook delivery layer).
+7. **Reviews:** 5-star + free-text + verified-purchase badge (auto-applied when purchase matches); Cloudflare Turnstile for spam; D1 `review` table with post-publish moderation default per Q-PRP-REVIEW-01.
+8. **CTA REDIRECT UNIFICATION (HARD — operator directive verbatim):** Every paid-book / paid-audiobook / paid-manga / paid-music CTA across `funnel/`, marketing surfaces, `brand-wizard-app/public/free/`, `somatic_exercise_freebee_apps/`, email sequences, and social CTAs resolves to a `pearlprime.shop/{locale}/{product_type}/{brand_id}/{inner_key}` URL on Phase 1 launch. `config/funnel/store_url_tracker.yaml` hard-deprecated; successor = `config/storefront/sku_url_map.yaml` (catalog-projector-generated). CI guard `scripts/ci/check_external_buy_links.py` (new — ws scope) scans for amazon.com/dp / play.google.com/store/books / audible.com/pd / books.apple.com / kobo.com/ebook / webtoons.com patterns and blocks paid-book CTAs outside allow-list. **Freebies stay where they are** — only PAID CTAs unify.
+9. **Pearl_Writer next-step atom audit (V1 = AUDIT ONLY, not REWRITE):** Off-catalog book/author/class/org references in `atoms/<persona>/<topic>/{COMPRESSION,REFLECTION,INTEGRATION,HOOK}/CANONICAL.txt` + `SOURCE_OF_TRUTH/teacher_banks/` violate §14 — a reader finishing a Pearl Prime book and being told to read someone else's book is being routed out of ecosystem. CI script `scripts/ci/check_atoms_external_book_references.py` (new — Pearl_Writer ws scope to author) flags external author/title/org regex matches. THIS SESSION's audit ws produces only the coverage report (`artifacts/qa/next_step_atom_audit_<date>.tsv` + summary). The **rewrite** is a SEPARATE follow-up ws (`ws_pearl_writer_next_step_atom_rewrite_<future-date>`) gated on operator approval of Q-PRP-WRITER-AUDIT-01 scope (start narrow vs full sweep).
+10. **Phased rollout (4 phases):** Phase 1 = en-US ebook only + Stripe Checkout + basic reviews + manual catalog ingest; Phase 2 adds ja-JP + audiobook + manga + automated catalog ingest; Phase 3 adds zh-TW + zh-CN + music + series bundles + recommender personalization; Phase 4 adds ko-KR (gated). Each phase ships only after operator review + sign-off.
+11. **Anti-drift (hard):** Path X 37 FROZEN; music 38+ FROZEN; Pearl Prime visual identity non-negotiable; custom MIT code, no paid LLM APIs (per `CLAUDE.md` Tier policy); Cloudflare account `b80152c319f941e6e92f928e2617a3d5` for provisioning (per `cloudflare_pages_deploy.md` Traps 1-4); §14 CTA unification is HARD (no exceptions); §15 atom rewrite scope = audit only this session.
+12. **LLM Tier Policy compliance:** Storefront frontend runtime = **no LLM calls** (catalog pre-projected, reviews user-authored). Recommender = `phoenix_recommender` (deterministic). Any future AI-driven content (review summarization etc.) = Tier 2 Gemma/Qwen on Pearl Star OR Tier 1 Claude Code attended only. Banned in storefront code: `ANTHROPIC_API_KEY`, `CLAUDE_API_KEY`, OpenAI cloud, DashScope cloud, Together, Replicate, Perplexity, Cohere, Mistral paid (enforced by `.github/workflows/llm-policy-enforcement.yml`).
+13. **Action items (named sub-workstreams — five ws rows; not authored or executed here):**
+    - **a.** `ws_pearl_prime_storefront_v1_framework_research_20260603` — this session; research matrix becomes evidence (spec §3 + §22). **Owner:** Pearl_Architect.
+    - **b.** `ws_pearl_prime_storefront_v1_ui_mockups_20260603` — Pearl_Dev authors 12 HTML mockups under `brand-wizard-app/public/storefront_mockups/` matching spec §6 component inventory; dark+amber Pearl Prime tokens; no backend wiring. **Owner:** Pearl_Dev.
+    - **c.** `ws_pearl_prime_storefront_v1_cloudflare_wiring_20260603` — Pearl_Int provisions CF Pages + Workers + D1 + R2 + KV under account `b80152c3...`; sets up `pearl-prime-storefront-deploy.yml` GH Action mirroring brand-wizard pattern; no app code yet. **Owner:** Pearl_Int.
+    - **d.** `ws_pearl_writer_next_step_atom_audit_20260603` — Pearl_Writer authors `scripts/ci/check_atoms_external_book_references.py` per spec §15.3 contract; runs across `atoms/` + `SOURCE_OF_TRUTH/teacher_banks/`; outputs coverage TSV + summary. **Owner:** Pearl_Writer.
+    - **e.** `ws_freebie_cta_redirect_unification_20260603` — Pearl_Marketing + Pearl_Dev sweep `funnel/`, marketing surfaces, `brand-wizard-app/public/free/`, `somatic_exercise_freebee_apps/`, email sequences, social CTAs; deprecate `config/funnel/store_url_tracker.yaml`; author `scripts/ci/check_external_buy_links.py` CI guard. **Owners:** Pearl_Marketing + Pearl_Dev.
+14. **Budget:** **Tier 1** (operator-present) for spec authoring + ratification + Q-card resolution + UI mockups + Cloudflare provisioning + atom audit; **Tier 2** acceptable for unattended catalog projector cron runs **after** SSOT locks and operator Q1-Q16 answers land.
+15. **Status gate:** **proposed** until operator answers Q-PRP-01 through Q-PRP-16 in spec §17 (decision card). Pearl_Architect amendment session **`PEARL-PRIME-STOREFRONT-V1-01-AMENDMENT`** flips to **active** when answers land — at that point 5 ws rows go `proposed → runnable` and PRJ status flips `proposed → active`.
+
+**Operator decision card (verbatim — answer in spec §17):**
+
+- **Q-PRP-DOMAIN-01** — Domain priority: `pearlprime.shop` (default) / `books.pearlprime.com` / `store.pearlprime.com` / `prime.pearlprime.com` / other?
+- **Q-PRP-PAY-01** — Payment processor: Stripe Checkout (default) / LemonSqueezy / Paddle / other? Also: CNY coverage acceptable?
+- **Q-PRP-AUTH-01** — Customer accounts: required / optional / magic-link only (default) / Cloudflare Access?
+- **Q-PRP-CART-01** — Cart model: single-item Buy-Now Phase 1 (default) / multi-item with persistence?
+- **Q-PRP-REVIEW-01** — Reviews: verified-purchase-only / open to logged-in users + post-publish moderation + Turnstile (default) / open to anyone with email?
+- **Q-PRP-RECO-01** — "Customers also bought": reuse phoenix_recommender Phase 1 (default) / hold for Phase 3?
+- **Q-PRP-PRICE-01** — Default price tiers $4.99/$9.99/$1.99-manga-chapter/$9.99-series-bundle (default) + per-locale FX = operator price book? Confirm.
+- **Q-PRP-MANGA-DELIVERY-01** — Full PDF / WEBTOON reader / both (default)?
+- **Q-PRP-AUDIOBOOK-DELIVERY-01** — Streaming / MP3 download / both (default)?
+- **Q-PRP-SAMPLE-01** — Free preview length: first chapter (default) / first 10% / fixed N pages?
+- **Q-PRP-WRITER-AUDIT-01** — Pearl_Writer audit scope: all personas × all topics / staged (default = start with en-US anxiety + overthinking × all personas, expand after)?
+- **Q-PRP-CTA-UNIFY-01** — Cutover: hard-cutover external CTAs / soft-deprecate-redirect-replace (default; storefront URL becomes truth on Phase 1 launch)?
+- **Q-PRP-LICENSE-01** — Storefront license: accept custom-MIT (default) / pin to MIT/Apache-2.0 only?
+- **Q-PRP-ROLLOUT-01** — Phase 1: en-US ebook only (default) / include ja-JP at launch?
+- **Q-PRP-MUSIC-SKU-01** — Music SKU shape: per-track / per-album (default; Phase 3) / per-brand-subscription?
+- **Q-PRP-SERIES-BUNDLE-01** — Series bundle pricing: fixed % discount / flat tier (default — $9.99 for any 3-volume, $14.99 for any 6-volume)?
+
+**Anti-drift check:** Does NOT mutate `config/manga/canonical_brand_list.yaml`, `config/music/music_brand_registry.yaml`, `config/localization/locale_registry.yaml`, or any catalog SSOT in `artifacts/catalog/`. Does NOT touch `atoms/` or `SOURCE_OF_TRUTH/teacher_banks/` — Pearl_Writer audit ws owns execution (and even that ws produces only a coverage report this session, not edits). Does NOT touch `funnel/`, marketing surfaces, `brand-wizard-app/public/free/`, or `store_url_tracker.yaml` — `ws_freebie_cta_redirect_unification` owns execution. Does NOT propose alternate brand sets — Path X 37 is FROZEN per `BR-CANON-02`. Does NOT introduce paid LLM API dependencies — `CLAUDE.md` Tier policy adhered. Does NOT pick the storefront framework before web-research matrix complete — matrix in spec §3 with 13 cited sources. Does NOT decide any Q-PRP-* on operator's behalf — defaults recommended, decisions deferred. Does NOT sprawl PR scope — single spec + cap entry + 4 coordination row appends (5 deliverable files total).
+
+**Handoffs:** **Pearl_PM** — coordination cleanup after this cap PR merges; child ws statuses remain `proposed` until operator Q-PRP-* answers land. **Pearl_Architect** — `PEARL-PRIME-STOREFRONT-V1-01-AMENDMENT` cap entry to be authored when Q-PRP-* answers come back, flipping cap + project + ws statuses to `active` / `runnable`. **Pearl_Dev + Pearl_Int + Pearl_Marketing + Pearl_Writer** — own implementation fan-out (router prompts post-merge per child ws). Pearl_Operator_Proxy may decide Q-PRP-* items within its envelope per `docs/PEARL_OPERATOR_PROXY_SPEC.md` and log to `artifacts/coordination/operator_decisions_log.tsv`.
+
+**Pointers:** [`docs/specs/PEARL_PRIME_STOREFRONT_V1_SPEC.md`](./specs/PEARL_PRIME_STOREFRONT_V1_SPEC.md) (this V1 spec — ~22 sections, ~13 cited research sources); `artifacts/coordination/ACTIVE_PROJECTS.tsv` (`PRJ-PEARL-PRIME-STOREFRONT-V1`); `artifacts/coordination/ACTIVE_WORKSTREAMS.tsv` (5 new `proposed` ws rows); `artifacts/coordination/SUBSYSTEM_AUTHORITY_MAP.tsv` (new `storefront` subsystem row); `MUSIC-MODE-BRAND-INTEGRATION-V1-01` (cap entry — sister music-brands integration); `WORLDWIDE-CATALOG-GO-LIVE-V1-PROGRAM-01` (surface-11 parent program); `BR-CANON-02` (Path X 37 frozen); `skills/pearl-int/references/cloudflare_pages_deploy.md` (CF deploy authority — Traps 1-4); `docs/INTEGRATION_CREDENTIALS_REGISTRY.md` (CF account + R2 credentials registry).
+
+#### PEARL-PRIME-STOREFRONT-V1-01 — AMENDMENT — 2026-06-04 (operator Q-PRP-01..16 binding answers; 4 departures from defaults ratified)
+
+**Status:** **active** — operator answers to all 16 `Q-PRP-*` captured in [`docs/specs/PEARL_PRIME_STOREFRONT_V1_SPEC.md` §AMENDMENT-2026-06-04](./specs/PEARL_PRIME_STOREFRONT_V1_SPEC.md#amendment-2026-06-04); cap **`PEARL-PRIME-STOREFRONT-V1-01`** flipped **`proposed → active`**; project **`PRJ-PEARL-PRIME-STOREFRONT-V1`** flipped **`proposed → active`** in `artifacts/coordination/ACTIVE_PROJECTS.tsv`; **5 `ws_*` rows** flipped **`proposed → runnable`** in `artifacts/coordination/ACTIVE_WORKSTREAMS.tsv`; **`storefront` subsystem row** flipped **`proposed → active`** in `artifacts/coordination/SUBSYSTEM_AUTHORITY_MAP.tsv`.
+
+**Authorization:** Operator session 2026-06-04 (Pearl_Architect cap-AMENDMENT lane). Source-of-truth merge: parent PR [#1433](https://github.com/Ahjan108/phoenix_omega_v4.8/pull/1433) (SHA `69e9855f72471603f320f1b96ae72e899a3e8778`) landed on `origin/main` 2026-06-04; this AMENDMENT PR ratifies the Q-PRP-* decision card against that parent.
+
+**`main` HEAD anchor (doc authoring):** post-PR #1433 merge; HEAD advances with this AMENDMENT PR.
+
+---
+
+##### 1. OPERATOR ANSWERS — all 16 `Q-PRP-*` locked
+
+| ID | Decision | Vs default |
+|---|---|---|
+| **Q-PRP-DOMAIN-01** | `pearlprime.shop` | default |
+| **Q-PRP-PAY-01** | **Snipcart free tier** ($0/mo under $629/mo revenue; 2% + Stripe per-tx above) | **DEPARTURE** (was Stripe Checkout direct) |
+| **Q-PRP-AUTH-01** | **Optional — guest checkout OK** (account created post-purchase for re-download) | **DEPARTURE** (was magic-link only) |
+| **Q-PRP-CART-01** | **Hybrid — Buy-Now default + cart icon visible** | upgrade (was single-item Buy-Now Phase 1) |
+| **Q-PRP-REVIEW-01** | Logged-in (any email) + post-publish moderation + Cloudflare Turnstile | default |
+| **Q-PRP-RECO-01** | Reuse `phoenix_recommender` Phase A (deterministic) | default |
+| **Q-PRP-PRICE-01** | Spec defaults ($4.99 ebook / $9.99 audiobook / $1.99 manga chapter / $9.99 3-vol bundle / $14.99 6-vol bundle) + operator price book for per-locale FX (no live FX) | default |
+| **Q-PRP-MANGA-DELIVERY-01** | Both — WEBTOON in-browser reader + full PDF download | default |
+| **Q-PRP-AUDIOBOOK-DELIVERY-01** | Both — in-browser streaming player + MP3 download | default |
+| **Q-PRP-SAMPLE-01** | First chapter (book + manga) / 30 sec (audiobook) / first track (music) | default |
+| **Q-PRP-WRITER-AUDIT-01** | Staged — en-US `anxiety` + `overthinking` × all personas first; ja-JP atom audit follows operator review of staged report | default (now operationally extended to include ja-JP atoms as Phase A scope ratchet — see §3 below) |
+| **Q-PRP-CTA-UNIFY-01** | **HARD cutover at launch day** — all current external-platform CTAs (Amazon / Google Play / Apple Books / Kobo / Audible / WEBTOON / Honto / Audible JP) rewritten BEFORE launch across `funnel/`, marketing surfaces, `brand-wizard-app/public/free/`, `somatic_exercise_freebee_apps/`, email YAMLs, and social CTAs. **No soft-transition coexistence.** | **DEPARTURE** (was soft-deprecate-redirect-replace) |
+| **Q-PRP-LICENSE-01** | Custom **MIT** for our code; Snipcart is the SaaS dep at the cart/checkout boundary | default |
+| **Q-PRP-ROLLOUT-01** | **Full Phase 1+2 at launch** — en-US + ja-JP × book + audiobook + manga + automated catalog ingest cron + audiobook sample player + manga WEBTOON reader all live on day 1 | **DEPARTURE** (was en-US ebook only Phase 1) |
+| **Q-PRP-MUSIC-SKU-01** | **Per-album + per-track + per-brand subscription (all three)** — maximum optionality; per-track $0.99-$1.99, per-album default $9.99, per-brand subscription $4.99/mo unlimited access to one music brand | **DEPARTURE** (was per-album only Phase 3) |
+| **Q-PRP-SERIES-BUNDLE-01** | Flat tier — $9.99 (3-vol) / $14.99 (6-vol) / $19.99 (10-vol) | default |
+
+**4 departures (Q-PRP-PAY-01, Q-PRP-AUTH-01, Q-PRP-CTA-UNIFY-01, Q-PRP-ROLLOUT-01) + 1 super-set (Q-PRP-MUSIC-SKU-01)** are binding architectural shifts — see §2 + §3.
+
+---
+
+##### 2. DEPARTURES — binding architectural shifts (with rationale)
+
+###### 2.1 Q-PRP-PAY-01 — Snipcart free tier becomes PRIMARY
+
+**Decision:** Snipcart's free tier ($0/mo under $629/mo revenue; 2% + Stripe per-tx above the threshold) is the storefront's cart + checkout + digital-delivery layer. Stripe Checkout remains the underlying payment processor (Snipcart wraps it).
+
+**Architectural impact:** Spec §3 PRIMARY/FALLBACK swap. Old: custom CF Pages + Workers + D1 + R2 + KV + **Stripe Checkout direct**. New: custom CF Pages + Workers + D1 + R2 + KV for catalog browse + reviews + brand-lane UX, with **Snipcart drop-in** owning cart UI + Stripe-Checkout handoff + signed-URL digital delivery. Reduces our payment-integration surface (no `/api/checkout`, `/api/webhook/stripe`, no `order_table` for non-Snipcart fields). D1 `order` table becomes a Snipcart-webhook mirror.
+
+**Cost model:** $0 platform fees until storefront revenue passes ~$629/mo (Snipcart free-tier ceiling). Above that ~$629/mo revenue: 2% Snipcart + 2.9% + 30¢ Stripe = ~5% effective per-tx. Compares favorably to LemonSqueezy/Paddle MoR (5% + 50¢) but slightly above direct Stripe (2.9% + 30¢). Operator gets a true zero-fee launch ramp.
+
+**Trade-offs:**
+- Snipcart's cart UI limits Pearl Prime brand customization at the cart drawer step (we control the page UX up to the Buy button + the post-checkout return surface).
+- Digital delivery via Snipcart's signed-URL pattern adds a third-party hop to the M4B/PDF/EPUB download flow; signed-URL TTL controlled by Snipcart, not us.
+- Snipcart SaaS terms apply to cart data; reviews + catalog + library remain on our D1/R2.
+
+**Anti-drift:** No app code merged in this AMENDMENT PR — Snipcart wiring lands under `ws_pearl_prime_storefront_v1_cloudflare_wiring_20260603` (now also includes Snipcart account provisioning + webhook routes).
+
+###### 2.2 Q-PRP-AUTH-01 — Optional accounts (guest checkout OK)
+
+**Decision:** No login required to purchase. Snipcart collects email at checkout for receipt + signed-URL delivery. Accounts auto-provisioned post-purchase for re-download access; users can later set a password / magic-link for the account.
+
+**Architectural impact:** Spec §11 auth flow added: post-purchase, the Stripe-receipt email becomes the account identifier; `/account/library?email=...&token=...` flow uses a one-time signed token on the email-receipt link. Reviews can be submitted by anyone with email-verified-via-Turnstile (not gated on account); verified-purchase badge auto-applied when `email_hash` matches an `order_item` row. Pearl Prime "fully-signed-in account" remains optional UX uplift.
+
+**Trade-offs:**
+- Lowest checkout friction (matches LemonSqueezy direct-buy default).
+- Re-download flow depends on the receipt-email link; if buyer loses email, recovery via Snipcart support.
+- Review attribution is by email rather than account_id — same anti-impersonation logic applies.
+
+###### 2.3 Q-PRP-CTA-UNIFY-01 — HARD cutover at launch day
+
+**Decision:** Zero coexistence period. Before launch day, every paid-content CTA in the entire ecosystem is rewritten to the storefront's per-SKU canonical URL. No legacy `amazon.com/dp` / `play.google.com/store/books` / `audible.com/pd` / `books.apple.com` / `kobo.com/ebook` / `webtoons.com` / `honto.jp` / `audible.co.jp` URL remains in production content.
+
+**Surfaces covered (pre-launch sweep mandatory):**
+1. `funnel/` (Flask proof-loop hub + per-topic landing pages)
+2. `config/marketing/`, `docs/marketing/`, `scripts/marketing/`, `marketing_deep_research/`
+3. `brand-wizard-app/public/free/` (15 freebie landing pages)
+4. `somatic_exercise_freebee_apps/` (HTML somatic tools)
+5. Email sequence YAMLs (lead-nurture, post-purchase, win-back)
+6. Social-CTA registries (link-in-bio, X/Twitter, Instagram, TikTok descriptions)
+7. **ja-JP equivalents of all of the above** (per Q-PRP-ROLLOUT-01 Full P1+P2 scope — see §2.4)
+
+**Architectural impact:** `ws_freebie_cta_redirect_unification_20260603` scope doubles: en-US sweep + ja-JP sweep simultaneously. CI guard `scripts/ci/check_external_buy_links.py` lands before launch and gates the launch milestone — zero violations required, not "warn-and-fix-later". Static-content sweep is mandatory pre-launch QA gate.
+
+**Trade-offs:**
+- Highest pre-launch operational burden.
+- Cleanest end-state: no broken-link transition period; no stale-email-sequence support tickets.
+- Risk: if a single surface is missed in the sweep, that surface 404s on launch day (vs gracefully redirecting under a soft cutover). Mitigation: CI guard as enforcement.
+
+**Anti-drift:** `config/funnel/store_url_tracker.yaml` is **deleted** (not archived) on launch day — successor `config/storefront/sku_url_map.yaml` is the only SKU URL registry post-cutover. Legacy file retained in git history only.
+
+###### 2.4 Q-PRP-ROLLOUT-01 — Full Phase 1+2 at launch
+
+**Decision:** Launch day = en-US + ja-JP × {book, audiobook, manga} + automated catalog ingest cron + audiobook in-browser streaming player + manga WEBTOON in-browser reader + Snipcart cart + reviews + brand-lane filter + locale switcher. Phase 3 (zh-TW, zh-CN, music) and Phase 4 (ko-KR) deferred unchanged.
+
+**Renamed phases:**
+- ~~Phase 1~~ → **Phase A (launch)** — en-US + ja-JP × book + audiobook + manga + auto catalog + reviews + Snipcart
+- ~~Phase 2~~ → folded into Phase A
+- ~~Phase 3~~ → **Phase B** — + zh-TW + zh-CN + music + series bundles + recommender personalization
+- ~~Phase 4~~ → **Phase C** — + ko-KR (gated on `distribution_status` clearance per `docs/CJK_CATALOG_PLAN.md`)
+
+**Architectural impact:** All Phase-A workstreams operate against both locales from kick-off:
+- `ws_pearl_prime_storefront_v1_ui_mockups_20260603`: mockups include both en-US and ja-JP variants (font preamble already supports CJK via DM Sans + Cormorant; ja-JP body fallback via `Noto Sans JP` chained after DM Sans).
+- `ws_pearl_prime_storefront_v1_cloudflare_wiring_20260603`: D1 schema seeds both locales; R2 layout pre-allocates both locale prefixes; locale routing live at launch.
+- `ws_freebie_cta_redirect_unification_20260603`: ja-JP CTAs in scope (per §2.3).
+- `ws_pearl_writer_next_step_atom_audit_20260603`: en-US starter staged (Q-PRP-WRITER-AUDIT-01 default) but ja-JP atoms join Phase A scope as soon as the staged en-US audit clears — operator-review-gated transition.
+
+**Trade-offs:**
+- ~3× launch surface area.
+- Catalog projector must support both locales at launch — currently materialized for en-US only (`artifacts/catalog/pearl_prime_book_script_catalogs/en_US_catalog.csv`), ja-JP catalog projection lands in this Phase A scope.
+- ja-JP audiobook narrator infra (`config/tts/narrator_voice_assignments.yaml` + CosyVoice2) already operational per `ws_voice_pipeline_activation_20260409`; storefront consumes existing outputs.
+- ja-JP manga assets already operational per Manga V2 pipeline; storefront consumes existing R2-equivalent outputs.
+
+**Anti-drift:** Phase A launch is gated on en-US AND ja-JP e2e smoke (≥1 real purchase + ≥1 real review + ≥1 download in EACH locale across EACH product type = 6 smoke combinations minimum). If ja-JP smoke fails close to launch, Phase A demotes to en-US-only Phase A and ja-JP slips to Phase A.1 — operator-decision-gated, NOT auto-fallback.
+
+###### 2.5 Q-PRP-MUSIC-SKU-01 — Per-album + per-track + per-brand subscription (all three)
+
+**Decision:** Phase B (was Phase 3) music SKU model supports all three shapes simultaneously: per-track ($0.99-$1.99), per-album ($9.99 default), per-brand subscription ($4.99/mo unlimited access to one music brand 38+).
+
+**Architectural impact:** Spec §2.4 music SKU shape expands. Catalog model:
+- `sku.product_type='music'` with `sku.sub_type ∈ {'track', 'album', 'brand_subscription'}` (new column).
+- Snipcart product types: standard one-off (track + album) + recurring (brand_subscription).
+- Brand-subscription SKU joins to `subscription` table tracking active subscribers; gates streaming access to all music SKUs under that brand_id.
+
+**Trade-offs:**
+- Maximum revenue-shape optionality; matches iTunes-era buyer expectations (per-track) + Bandcamp-era (per-album) + Spotify-era (subscription).
+- Snipcart recurring-billing complexity at Phase B launch.
+- UX choice-paralysis risk at music SKU detail page — mitigation: surface the per-album as default "Buy" button with collapsed "or per-track / or subscribe" disclosure.
+
+**Anti-drift:** Music SKU sub-type model lands in Phase B. Phase A launch is books + audiobooks + manga only — no music SKUs surfaced. If operator wants music at Phase A, that requires a NEW amendment cap entry — `PEARL-PRIME-STOREFRONT-V1-01-AMENDMENT-2026-06-04-MUSIC-PHASE-A`.
+
+---
+
+##### 3. STATUS TRANSITIONS
+
+- Cap entry **`PEARL-PRIME-STOREFRONT-V1-01`**: status **`proposed → active`**.
+- Project **`PRJ-PEARL-PRIME-STOREFRONT-V1`** in `ACTIVE_PROJECTS.tsv`: status **`proposed → active`**; `open_questions` field updated `Q-PRP-01..16` → **RESOLVED 2026-06-04 (see AMENDMENT-2026-06-04)**; `next_action` field updated to ws fan-out + Phase A milestone gates.
+- 5 `ws_*` rows in `ACTIVE_WORKSTREAMS.tsv`: status **`proposed → runnable`**:
+  - `ws_pearl_prime_storefront_v1_framework_research_20260603` → **completed** (research evidence is the merged §3 + §22 of spec; Snipcart-PRIMARY decision per §2.1)
+  - `ws_pearl_prime_storefront_v1_ui_mockups_20260603` → **runnable** (en-US + ja-JP variants; cart hybrid UX; guest checkout flow)
+  - `ws_pearl_prime_storefront_v1_cloudflare_wiring_20260603` → **runnable** (CF infra + Snipcart account + webhook routes)
+  - `ws_pearl_writer_next_step_atom_audit_20260603` → **runnable** (staged en-US `anxiety` + `overthinking` first; ja-JP atoms staged after operator review)
+  - `ws_freebie_cta_redirect_unification_20260603` → **runnable** (HARD cutover; ja-JP CTAs in scope; CI guard mandatory pre-launch)
+- Subsystem **`storefront`** row in `SUBSYSTEM_AUTHORITY_MAP.tsv`: status **`proposed → active`**.
+
+**Implementation ownership (named, not authored here):**
+
+- **a.** `ws_pearl_prime_storefront_v1_framework_research_20260603` → **Pearl_Architect (completed via this AMENDMENT)**
+- **b.** `ws_pearl_prime_storefront_v1_ui_mockups_20260603` → **Pearl_Dev**
+- **c.** `ws_pearl_prime_storefront_v1_cloudflare_wiring_20260603` → **Pearl_Int**
+- **d.** `ws_pearl_writer_next_step_atom_audit_20260603` → **Pearl_Writer**
+- **e.** `ws_freebie_cta_redirect_unification_20260603` → **Pearl_Marketing + Pearl_Dev**
+
+---
+
+##### 4. ANTI-DRIFT
+
+- The decisions above are **BINDING** for the storefront V1 program. Any modification requires a new AMENDMENT cap entry referencing this block.
+- **Path X 37 brand list FROZEN** per `BR-CANON-02` — storefront reads, never mutates.
+- **Music 38+ FROZEN** per `MUSIC-MODE-BRAND-INTEGRATION-V1-01` — storefront treats music as first-class product type in Phase B from V1 design, with 3-shape SKU model per §2.5.
+- **Pearl Prime visual identity NON-NEGOTIABLE** — `#0e0a06` / `#faf6f0` / `#d97706` amber-600 + Cormorant Garamond + DM Sans + DM Mono.
+- **No paid LLM APIs** per `CLAUDE.md` Tier policy — storefront frontend runtime = no LLM calls; recommender = `phoenix_recommender` (deterministic); review summarization (if added Phase B+) = Tier 2 Gemma/Qwen on Pearl Star OR Tier 1 Claude Code attended only.
+- **Cloudflare account `b80152c319f941e6e92f928e2617a3d5`** for all Pages + Workers + D1 + R2 + KV provisioning per `skills/pearl-int/references/cloudflare_pages_deploy.md` Traps 1-4 — never the `ahjansamvara@gmail.com` personal account (which has no Pages projects).
+- **Snipcart account ownership** = Pearl_Int operational concern; webhook secret rotation cadence in `docs/INTEGRATION_CREDENTIALS_REGISTRY.md` (Pearl_Int ws scope to add row).
+- **HARD CTA cutover** = enforcement-by-CI-guard, not advisory. Zero `amazon.com/dp` / `play.google.com/store/books` / `audible.com/pd` / `books.apple.com` / `kobo.com/ebook` / `webtoons.com` / `honto.jp` / `audible.co.jp` URLs in production content at launch.
+- **Phase A launch gate** = en-US AND ja-JP e2e smoke (≥1 real purchase + ≥1 real review + ≥1 download × EACH locale × EACH product type = 6 smoke combinations). Demotion-to-en-US-only-Phase-A possible if ja-JP smoke fails close to launch; operator-decision-gated.
+
+---
+
+##### 5. OPERATOR ACTION ITEMS
+
+1. **Pearl_Dev** — pick up `ws_pearl_prime_storefront_v1_ui_mockups_20260603` (router prompt below). 12 mockups, en-US + ja-JP variants, hybrid-cart UX, guest-checkout flow, Snipcart drop-in surfaces (cart drawer mock at the brand layer; checkout handoff stub).
+2. **Pearl_Int** — pick up `ws_pearl_prime_storefront_v1_cloudflare_wiring_20260603` (router prompt below). CF Pages + Workers + D1 + R2 + KV under account `b80152c3...`; Snipcart account provisioning + webhook routes; `.github/workflows/pearl-prime-storefront-deploy.yml` mirroring brand-admin-onboarding-pages.yml pattern.
+3. **Pearl_Writer** — pick up `ws_pearl_writer_next_step_atom_audit_20260603` (router prompt below). Staged en-US `anxiety` + `overthinking` × all personas first; coverage report at `artifacts/qa/next_step_atom_audit_2026-06-XX.tsv` + summary.
+4. **Pearl_Marketing + Pearl_Dev** — pick up `ws_freebie_cta_redirect_unification_20260603` (router prompt below). HARD cutover sweep across all 7 surface categories (en-US + ja-JP); `scripts/ci/check_external_buy_links.py` lands before launch; zero violations gates launch.
+5. **Pearl_PM** — coordination cleanup after this AMENDMENT PR merges; 5 ws rows now `runnable`; track Phase A launch milestone gate (6 smoke combinations).
+
+**Pointers:** `docs/specs/PEARL_PRIME_STOREFRONT_V1_SPEC.md` (now includes `§AMENDMENT-2026-06-04`); `artifacts/coordination/ACTIVE_PROJECTS.tsv` (`PRJ-PEARL-PRIME-STOREFRONT-V1` status active); `artifacts/coordination/ACTIVE_WORKSTREAMS.tsv` (5 ws rows runnable); `artifacts/coordination/SUBSYSTEM_AUTHORITY_MAP.tsv` (storefront active); parent cap `PEARL-PRIME-STOREFRONT-V1-01` (this state doc); parent PR [#1433](https://github.com/Ahjan108/phoenix_omega_v4.8/pull/1433) (SHA `69e9855f7`).
+
+
+### PEARL-PRIME-ONE-PATH-V1-01 — Canonical Pearl Prime ebook path (20-dimension lockdown + 18-row deletion manifest + runtime fail-fast); supersedes partial constraints in CRAFT_DEPTH_OVERLAY proposal (ratified PROPOSAL pending operator answers to §10 Q-OP-* of spec; 2026-06-06)
+
+**Status:** **PROPOSAL — awaiting operator answers to 12 Q-OP-* + cap-entry merge → ACTIVE** (2026-06-06; Pearl_Architect authoring this PR).
+
+**Context:** 7-axis Pearl Prime full audit (2026-06-06; `artifacts/qa/pearl_prime_audit_2026-06-06.md`) + 2 independent editorial critiques + the gold-reference artifact ladder at `artifacts/pearl_prime/gold_reference_ladder_2026-05-30/` converged: ONE path produces bestseller-grade output (gen_z_professionals × anxiety × spiral × F006 × ahjan, persona-keyed atom coverage complete, 12-chapter spine, 10-section grid, production profile, --exercise-journeys, --pipeline-mode spine). Everything else surfaces as the recurring critique pattern (repetition cascade, three-voice fragmentation, decorative-metaphor inflation, illustration-not-story characters). Operator directive (verbatim): *"verify, best way for pearl prime. and do permanently delete all lesser ways. i need to know the best way for all and drop the weaker stuff so that no agent gets the option of doing it lesser."*
+
+**Decision:** Define the canonical path with 20-dimension precision (every knob + every assert-point); enumerate every lesser configuration the current HEAD silently permits (18 rows L01-L18); specify the runtime fail-fast enforcement contract (one exception class per dimension; no fallbacks); fan out 6 child ws's across 4 phases (mechanical sweeps → runtime gates → content backfill → craft-gate activation); 12 operator Q-OP-* with recommended defaults. The spec: [`docs/specs/PEARL_PRIME_ONE_PATH_LOCKDOWN_V1_SPEC.md`](../docs/specs/PEARL_PRIME_ONE_PATH_LOCKDOWN_V1_SPEC.md). The manifest: [`artifacts/qa/pearl_prime_one_path_deletion_manifest_20260606.tsv`](../artifacts/qa/pearl_prime_one_path_deletion_manifest_20260606.tsv).
+
+| Dimension layer | Canonical value | Enforcement |
+|---|---|---|
+| Arc + spine + sections | `arc.chapter_count: 12`; 10-section SOMATIC_10_SLOT_GRID; ≥3 variant floor; STORY at sec 2/5/9 | runtime asserts at story_planner / beatmap_compile / registry_resolver / knob_apply |
+| Profile + injections | `--quality-profile production` only for catalog; `--exercise-journeys` mandatory; EXERCISE strict-canonical (no practice_library fall-through); `--pipeline-mode spine` only | CLI argparse reject + EnrichmentGapError + COHESIVE-FLOW-PATH-DEFAULT-SPINE-01 default flip |
+| Persona-keyed atoms | ALL 16 slot-type dirs required per persona×topic (HOOK / STORY / SCENE / REFLECTION / EXERCISE / COMPRESSION / PIVOT / PERMISSION / PERMISSION_GRANT / TAKEAWAY / THREAD / INTEGRATION / TEACHER_DOCTRINE / TEACHER_DOCTRINE_INTRO / ANGLE_DEFINITION / ANGLE_CALLBACK); NO fallback to teacher_banks/doctrine | PersonaAtomCoverageError precondition before compose loop |
+| Hook + voice + character | scene-first HOOK (F11 WARN→BLOCK); slot-zoned voice braid (Pearl_Architect recommended); every named character must transform; pronoun continuity per character_roster.yaml | HookAbstractOpeningError + VoiceOutOfZoneError + CharacterIllustrationOnlyError + PronounContinuityError |
+| Craft caps | ≤5 signature_phrases per book; decorative metaphor cap per chapter; chapter-to-chapter cosine similarity < 0.85; engine-scoped signal/amplification framing for spiral/overwhelm/shame/false_alarm/watcher; Ahjan named-contemplative-source specificity; zero placeholder leakage | DecorativeMetaphorInflationError + ChapterProgressionLoopError + SignalAmplificationMissingError + GenericBuddhistDriftError + PlaceholderLeakageError |
+| Audiobook coherence | midpoint-wpm ∈ [130, 200] per runtime format | AudiobookWpmOutOfBandError (format-registry validator) |
+
+**Scope-in:** every catalog output (production profile). **Scope-out:** ad-hoc operator-attended smoke runs (per Q-OP-DRAFT-PROFILE-SMOKE-01 recommended (a) — draft profile permitted only with explicit `--smoke` flag + no `--catalog-target`/`--book-plan-id ref_*`).
+
+**Cross-references (10 amended cap entries):**
+- AMENDS `TEMPLATE-UNIVERSAL-01` (line 576) — 12-spine + 10-grid + ≥3-floor hard-enforced; registry source layer needs Phase 3b backfill
+- AMENDS `BESTSELLER-INJECTIONS-MANDATORY-01` (line 601) — production-only catalog; STORY label drift closed; --exercise-journeys mandatory
+- PROMOTES `EXERCISE-BANK-RESOLUTION-01` (line 677) — Option 1 strict-canonical → mandatory at runtime
+- PROMOTES `SPEC-739-THRESHOLD-01` (line 308) — runtime variant-floor assert closes A4 anomaly
+- PROMOTES `HOOK-SCENE-FIRST-01` (line 1867) — F11 WARN→BLOCK; resolves Open Q1
+- CLOSES `AUTO-PLAN-SSOT-01` + `-AMENDMENT` (line 438, 523) — refactor SHIPPED; ws_auto_plan_ssot_refactor_20260505 status flip to completed
+- EXTENDS `PR-D-SPINE-01` (line 407) — `compact_chapter_subset` extended for L01 20-arc compression case
+- AMENDS PENDING Q-OP-L10 `CATALOG-800-PER-BRAND-01` (line 629) — top-5-locale demote to top-3 (en-US + ja-JP + zh-TW); de-DE/fr-FR atoms absent
+- EXTENDS `COHESIVE-FLOW-PATH-DEFAULT-SPINE-01` (recent) — single-knob `--pipeline-mode` default flip extended to full 20-dimension lockdown
+- HONORS `PEARL-EDITOR-UPSTREAM-01` (line 649) + `TEACHER-POOL-SEMANTICS-01` (line 728) + `QUOTE-ATOM-ROUTING-01` (line 705) — unchanged; this lockdown operates within their existing authority
+
+**Open Q's (full text + recommended defaults in `docs/specs/PEARL_PRIME_ONE_PATH_LOCKDOWN_V1_SPEC.md` §10):**
+- Q-OP-L01-ARC-STRATEGY-01 (449 of 531 arcs at 20-chapter): (a) compress-to-12 default [RECOMMEND] / (b) Pearl_Writer rewrite all / (c) hybrid
+- Q-OP-L09-PERSONA-FLOOR-01: (a) backfill-all-first / (b) staged: corp_mgrs + working_parents + first_responders first [RECOMMEND] / (c) block uncovered personas
+- Q-OP-L10-LOCALE-SCOPE-01: (a) backfill de-DE+fr-FR / (b) demote to top-3 [RECOMMEND] / (c) per-locale staged AMENDMENT
+- Q-OP-VOICE-BRAID-01: (a) alternate / (b) slot-zoned [RECOMMEND] / (c) collapse
+- Q-OP-CHAPTER-REPETITION-THRESHOLD-01: T = (a) 0.85 [RECOMMEND] / (b) 0.80 / (c) 0.90
+- Q-OP-METAPHOR-CAP-N-01: N = (a) 5/chapter [RECOMMEND] / (b) 3 / (c) 7
+- Q-OP-SIGNATURE-PHRASES-COUNT-01: whitelist size = (a) 5 [RECOMMEND] / (b) 7 / (c) 3
+- Q-OP-DRAFT-PROFILE-SMOKE-01: --smoke flag exempt operator-attended runs? (a) YES [RECOMMEND] / (b) NO
+- Q-OP-RUNTIME-FAIL-MESSAGE-LANGUAGE-01: failure-message audience = (a) operator / (b) agent / (c) both [RECOMMEND]
+- Q-OP-MIGRATION-CADENCE-01: (a) single-PR-per-ws atomic [RECOMMEND] / (b) per-L-row / (c) Pearl_PM sequences
+- Q-OP-MOVE-4-VERDICT-RECOMPUTE-01: recompute 27/30 under production+§13? (a) YES before Phase 1 dispatches [RECOMMEND] / (b) NO
+- Q-OP-GOLD-REFERENCE-SHA-PIN-01: pin gold-ref SHA to MEMORY.md? (a) YES [RECOMMEND] / (b) NO
+- Q-OP-CRAFT-DEPTH-OVERLAY-PROPOSAL-DISPOSITION-01: predecessor proposal disposition = (a) SUPERSEDED-BY frontmatter mark [RECOMMEND] / (b) delete
+
+**Action items:**
+1. **Operator:** answer 12 Q-OP-* in spec §10 → unblocks cap-entry status proposed → active.
+2. **Pearl_PM:** spawn 6 child ws's (already authored in `artifacts/coordination/ACTIVE_WORKSTREAMS.tsv` rows under this PR) per phase-order in spec §7: Phase 1 mechanical sweeps → Phase 2 runtime gates → Phase 3a persona-keyed atoms + Phase 3b registry backfill in parallel → Phase 4 craft-gate activation → Pearl_PM meta-ws coordinates throughout.
+3. **Pearl_PM:** status-flip `ws_auto_plan_ssot_refactor_20260505` to completed (per Audit Agent A3 — refactor shipped; FORMAT_CHAPTER_COUNTS removed).
+4. **Pearl_PM:** scope-amend `ws_register_gate_f11_hook_abstract_detector_20260523` to elevate F11 WARN→BLOCK per D10.
+5. **Pearl_PM:** cross-link `ws_exercise_strict_canonical_production_20260506` to D7 of this spec.
+6. **Pearl_Architect (post-Phase-2):** recompute Move 4 verdict under production+§13 rubric per Q-OP-MOVE-4-VERDICT-RECOMPUTE-01 (a); refresh operator confidence baseline.
+7. **Pearl_PM:** mark `docs/PEARL_PRIME_CRAFT_DEPTH_OVERLAY_PROPOSAL_2026-06-06.md` frontmatter SUPERSEDED-BY-PEARL-PRIME-ONE-PATH-V1-01 per Q-OP-CRAFT-DEPTH-OVERLAY-PROPOSAL-DISPOSITION-01 (a).
+8. **Pearl_GitHub:** when next refreshing `docs/DOCS_INDEX.md`, add routing note "Pearl Prime canonical path = ONE-PATH-V1; lesser configurations fail-fast per the runtime cascade in spec §5."
+
+**Anti-drift check:** No new spec architecture; this consolidates 10 existing cap entries + the CRAFT_DEPTH_OVERLAY proposal into one enforcement contract. Gold reference at `artifacts/pearl_prime/gold_reference_ladder_2026-05-30/` IS the canonical SHA per `feedback_drift_recovery_git_first`; this lockdown is git-first restoration encoded as runtime enforcement. Memory `feedback_validation_before_scaling` honored: Phase 3 content backfill gates Phase 4 craft gates; lockdown gates catalog-scale runs.
+
+**Handoffs:**
+- Operator → answer 12 Q-OP-* on this PR thread or in `artifacts/coordination/operator_decisions_log.tsv` → trigger cap-entry status flip proposed → active.
+- Pearl_PM → spawn 6 child ws's (already authored in ACTIVE_WORKSTREAMS rows under this PR) per Q-OP-MIGRATION-CADENCE-01 default (a) single-PR-per-ws-atomic.
+- Pearl_Dev → Phase 1 first PR within 1 week of operator green-light; Phase 2 within 3 weeks of Phase 1 land.
+- Pearl_Editor + Pearl_Writer → Phase 3a + 3b rolling per-persona / per-topic; rolling ws status updates per stage.
+- Pearl_Architect → Move 4 verdict recompute after Phase 2 lands; gold-reference SHA pin to MEMORY.md after operator answers Q-OP-GOLD-REFERENCE-SHA-PIN-01 (a).
+
+---
+
+### ATOM-100PCT-COVERAGE-SSOT-V1-01 — Pearl Prime atom 100% coverage SSOT + gap matrix + Phase A launch gate (proposed 2026-06-06; **ratified ACTIVE 2026-06-11**)
+
+**Status:** **ACTIVE 2026-06-11** (was PROPOSAL — flipped per operator batch ratification of all 20 Q-Atom-* via AMENDMENT-RATIFICATION-2026-06-11 PR + 20 OPD log entries OPD-20260611-001 through OPD-20260611-020). See `ATOM-100PCT-COVERAGE-SSOT-V1-01-RATIFICATION-2026-06-11` cap entry below for ratification details.
+
+**Context:** Operator directive (verbatim 2026-06-06): *"I want 100% of atoms so I can write all books for all personas and topics and languages. Use existing docs that did this and update them with new findings."* Prior atom audits ([`persona_atom_audit.md`](../artifacts/audit/persona_atom_audit.md), [`teacher_bank_audit.md`](../artifacts/audit/teacher_bank_audit.md), [`registry_coverage_vs_catalog.md`](../artifacts/audit/registry_coverage_vs_catalog.md), [`P1_HEALTH_REPORT_2026_04_10.md`](../artifacts/audit/P1_HEALTH_REPORT_2026_04_10.md), [`pearl_prime_audit_2026-06-06.md`](../artifacts/qa/pearl_prime_audit_2026-06-06.md)) gave partial coverage by axis; no single SSOT existed for the full P × T × A × L × V matrix. This cap entry ratifies the new SSOT as canonical for "100% atom coverage" semantics + operationalizes `PEARL-PRIME-ONE-PATH-V1-01` D8 (16-slot persona-keyed coverage) as a tier-ordered gap matrix gating Phase A en-US catalog launch under `CATALOG-800-PER-BRAND-01`.
+
+**Decision:** Land [`docs/PEARL_PRIME_ATOM_100PCT_COVERAGE_SSOT.md`](./PEARL_PRIME_ATOM_100PCT_COVERAGE_SSOT.md) as canonical 100%-coverage SSOT (16 §s) + [`artifacts/qa/pearl_prime_atom_100pct_gap_matrix_20260606.tsv`](../artifacts/qa/pearl_prime_atom_100pct_gap_matrix_20260606.tsv) as the machine-readable gap surface (20,803 rows). Mark 4-5 prior partial-coverage audit docs DEPRECATED + cross-link forward. Open 4 child ws's (Pearl_Editor Tier P0 / Pearl_Writer Tier P0 engine atoms / Pearl_Localization Tier P2 ja-JP / Pearl_Dev CI guard) under `proposed` status pending operator green-light. Mark `ws_atom_gap_fill_20260410` SUPERSEDED — its scope (~288 teacher atoms + ~357 persona×topic zero-atoms) is a strict subset of Tier P0 + P1 of this SSOT.
+
+**Scope:**
+
+| Layer | What this SSOT does |
+|---|---|
+| Matrix definition | Defines dimensions P=14 × T=15 × A=9 (directive scope) × L=13 × V≥3; cap-D8 = 16 tracked via Q-Atom-DIRECTIVE-9-VS-CAP-16-01 |
+| Current coverage audit | §8.1-8.7 per-persona × per-topic × per-atom-type × per-locale + named-character STORY bank + teacher-bank cross-cuts |
+| Gap matrix | §9 → TSV with 20,803 rows; every (persona, topic, atom_type, locale) tuple with current_variants < required_variants |
+| Prioritization | §10 Tier P0-P5 — P0 = gold-reference personas × priority topics × overlay-routed types; P5 = extended locales + variant enrichment |
+| Authoring ownership | §11 routes each atom-type to Pearl_Editor (Class 2 overlay-routed + EXERCISE) / Pearl_Writer (Class 1 persona-keyed) / Pearl_Localization (all locale variants) / Pearl_Dev (CI guard) |
+| 16 Q-Atom-* | §12 — operator decides persona scope, locale scope, variant ceiling, ONE-PATH spec sequencing, 9-vs-16 atom-type framing, etc. |
+| CI guard spec | §14 — `scripts/ci/check_atom_100pct_coverage.py` (Pearl_Dev ws); gates Phase A launch on Tier P0 + P1 = 0 |
+| Update protocol | §13 — every child atom-authoring ws PR auto-updates §9 in place |
+| Acceptance | §16 — Phase A en-US launch requires P0 + P1 cleared; Phase B-E require P2-P5 cleared per locale |
+
+**Routing-class split (§3):** persona-keyed required (HOOK / COMPRESSION / REFLECTION / INTEGRATION / STORY / EXERCISE = 6) + overlay-routed required at teacher_banks/registry (QUOTE / TEACHER_DOCTRINE / PERMISSION_GRANT = 3). The directive's "9 atom types per cell" parses to **6 persona-keyed cells + 3 overlay-routed backing entries** rather than 9 persona-keyed cells (otherwise `QUOTE-ATOM-ROUTING-01` retire-as-orphan ratification is contradicted). See Q-Atom-DIRECTIVE-9-VS-CAP-16-01 for the cap-D8-vs-directive reconciliation question.
+
+**Phase A en-US launch criteria** (per `CATALOG-800-PER-BRAND-01` + ONE-PATH-V1-01):
+
+- Tier P0 cleared: 105 cells filled (6 priority personas × 6 priority topics × Class 2 overlay backing).
+- Tier P1 cleared: 548 cells filled (full breadth — educators 7T + nyc_executives 7T + gen_z_student 3T + midlife_women arc-block + remaining personas' Class 2 backing).
+- CI guard PASS on P0 + P1.
+- ONE-PATH-V1-01 D4 runtime variant-floor assertion landed (`ws_runtime_variant_floor_assertion_20260606`).
+- ONE-PATH-V1-01 D8 PersonaAtomCoverageError precondition landed.
+
+**Aggregate counts (gap matrix):**
+
+| Tier | Rows | Hours |
+|---|---:|---:|
+| P0 | 105 | 125 |
+| P1 | 548 | 665 |
+| P2 | 803 | 982 |
+| P3 | 2,550 | 3,180 |
+| P4 | 1,829 | 2,329 |
+| P5 | 14,968 | 19,337 |
+| **Total** | **20,803** | **~26,618** |
+
+**Cross-references:**
+
+- AGGREGATES: `PEARL-PRIME-ONE-PATH-V1-01` (line 2427) — D8 16-slot persona-keyed canonical; Phase 3 atom-backfill phase operationalized as this SSOT's tier-ordered gap matrix.
+- HONORS: `TEMPLATE-UNIVERSAL-01` (576), `SPEC-739-THRESHOLD-01` (308), `PEARL-EDITOR-UPSTREAM-01` (649), `QUOTE-ATOM-ROUTING-01` (705), `BESTSELLER-INJECTIONS-MANDATORY-01` (601), `EXERCISE-BANK-RESOLUTION-01` (677), `TEACHER-POOL-SEMANTICS-01` (728), `HOOK-SCENE-FIRST-01` (1867), `CATALOG-800-PER-BRAND-01` (629), `AUTO-PLAN-SSOT-01-AMENDMENT` (523), `COHESIVE-FLOW-PATH-DEFAULT-SPINE-01`, `SPEC-739-VALIDATOR-AWARENESS` (358).
+- SUPERSEDES: 5 partial-coverage audit docs by DEPRECATED-cross-link (originals retained per [`AGENT_FILE_PERSISTENCE_PROTOCOL.md`](./AGENT_FILE_PERSISTENCE_PROTOCOL.md)).
+- SPAWNS: 4 child ws's + marks `ws_atom_gap_fill_20260410` SUPERSEDED.
+
+**Anti-drift check:** No new architecture. Consolidates 5 partial audits into one SSOT + machine-readable gap matrix. Subordinates to ONE-PATH-V1-01 D8 for atom-type canonical (16-slot framing); audits the directive's 9-subset; surfaces the 9-vs-16 reconciliation as Q-Atom-DIRECTIVE-9-VS-CAP-16-01. Memory `feedback_validation_before_scaling` honored: this SSOT IS the validation that gates catalog scale-up; no Phase A launch until Tier P0 = 0. Memory `feedback_drift_recovery_git_first` honored: prior audit docs retained as historical lineage (no deletion). Memory `feedback_discover_before_acting` honored: DISCOVERY REPORT emitted before any deliverable authored.
+
+**Action items:**
+
+1. **Operator** → answer 16 Q-Atom-* in SSOT §12 → triggers cap-entry status flip proposed → active. Recommended pairing: answer in same cycle as ONE-PATH-V1-01's 12 Q-OP-* (Q-Atom-ONE-PATH-SPEC-FILE-01 default (a)).
+2. **Pearl_PM** → spawn 4 child ws's (already authored in `artifacts/coordination/ACTIVE_WORKSTREAMS.tsv` under this PR) per §11 + §10 tier ordering. Mark `ws_atom_gap_fill_20260410` SUPERSEDED per `next_action` update.
+3. **Pearl_Dev** → `ws_pearl_dev_atom_100pct_ci_guard_20260606` first PR within 2 weeks of operator green-light per Q-Atom-CI-GUARD-SEVERITY-01 (a).
+4. **Pearl_Editor** → `ws_pearl_editor_atom_100pct_tier_p0_persona_keyed_20260606` Tier P0 (105 rows; ~125 hr) within 4 weeks of green-light per Q-Atom-PRIORITY-PERSONAS-01 + Q-Atom-PRIORITY-TOPICS-01 defaults.
+5. **Pearl_Writer** → `ws_pearl_writer_atom_100pct_tier_p0_engine_atoms_20260606` Tier P1 (548 rows; ~665 hr) parallel-with Pearl_Editor; staged per persona per `feedback_campaign_session_pacing`.
+6. **Pearl_Localization** → `ws_pearl_localization_atom_100pct_tier_p2_ja_jp_20260606` Tier P2 (803 rows; ~982 hr) gated on Phase A complete.
+7. **Pearl_Architect (this entry post-active)** → quarterly SSOT refresh (gap matrix re-run + tier delta) per Q-Atom-SSOT-UPDATE-CADENCE-01 default (a).
+8. **Pearl_GitHub** → when next refreshing `docs/DOCS_INDEX.md`, add SSOT routing note "100%-atom-coverage canonical = ATOM-100PCT-COVERAGE-SSOT-V1-01; partial-coverage audit docs (P1_HEALTH, persona_atom_audit, teacher_bank_audit, registry_coverage_vs_catalog) are historical lineage".
+
+**Authority:** this cap entry + [`docs/PEARL_PRIME_ATOM_100PCT_COVERAGE_SSOT.md`](./PEARL_PRIME_ATOM_100PCT_COVERAGE_SSOT.md) + [`artifacts/qa/pearl_prime_atom_100pct_gap_matrix_20260606.tsv`](../artifacts/qa/pearl_prime_atom_100pct_gap_matrix_20260606.tsv) + [`artifacts/qa/pearl_prime_atom_100pct_summary_20260606.md`](../artifacts/qa/pearl_prime_atom_100pct_summary_20260606.md).
+
+---
+
+### EXERCISE-COMPONENT-SCHEMA-LIFT-01 — Practice item schema v2 (5-component × {full, lean} preservation); ingest fix + ab_tady_37 ingest + renderer upgrade routed to Pearl_Dev (ratified 2026-06-10)
+
+**Status:** **ratified — Pearl_Architect cap layer** (schema + per-format variant policy land in this PR). **Pearl_Dev impl** (ingest + ab_tady_37 source branch + renderer upgrade) routed to 2 child ws's, status=proposed.
+
+**Context:** Discovery 2026-06-10 (operator question: "do all exercises have ab_tady_37 structure with ahha, intro, integration?") surfaced two real drifts in the EXERCISE backstop path:
+
+1. **Schema downgrade drift.** Inbox files (`exercises_ab_tady_37_PRODUCTION_READY.json` 39 items + 8 × `*_library_34_PRODUCTION_READY.json` 272 items = **311 items**) carry a rich 5-component × {full, lean} authoring shape (`bridge`, `intro`, `description`, `aha`, `integration` × 2 variants = 10 prose slots per item). The canonical schema at `specs/PRACTICE_ITEM_SCHEMA.md` v1 declares only `blocks: {setup, instruction, prompt, close}` — 4 nullable slots — and the ingest script at `scripts/practice/ingest_practice_libraries.py:49 + :83` hardcodes `blocks: {setup: None, instruction: None, prompt: None, close: None}` for every row. Result: **the store (`SOURCE_OF_TRUTH/practice_library/store/practice_items.jsonl`, 272 rows) loses all 5-component structure on ingest.** Renderer never sees `aha` or `integration` even when the inbox authored them; current behavior falls back to teacher-config `exercise_wrapper.intro_templates` + `close_templates` which authors 1 short intro + 1 short close at runtime, missing the rich teaching shape entirely.
+
+2. **Ingest coverage drift.** `validation.yaml` and `PRACTICE_ITEM_SCHEMA.md` both declare `ab_tady_37` as a valid `source` enum, and `selection_rules.SLOT_07_PRACTICE.allowed_content_types` lists 11 slot_07 types (`breath_regulation`, `grounding_orientation`, etc.) — all match ab_tady_37's `exercise_type` namespacing. But the ingest script has no branch for `exercises_ab_tady_37_PRODUCTION_READY.json` — **39 production-ready exercises sit in inbox un-ingested, zero `ab37_*` rows in the store.** Slot_07 supply is empty; backstop is `library_34`-only.
+
+These drifts compound the `EXERCISE-BANK-RESOLUTION-01` Option 1 strict-canonical decision: even when production-profile catalog falls back to teacher_banks (mandatory under that cap), the practice-library fall-through used by teacher-mode and non-production runs is structurally weaker than the inbox authoring supports. The wrappers under `docs/PRACTICE_LIBRARY_TEACHER_FALLBACK.md` are doing intro/close work the inbox already authored — and doing it less specifically.
+
+**Decision:** Land schema v2 (parallel `components` field, not replacement) + per-format variant policy in this Pearl_Architect cap PR. Route ingest fix + ab_tady_37 source branch + renderer upgrade to 2 Pearl_Dev child ws's.
+
+**Schema v2 shape** (full def in [`specs/PRACTICE_ITEM_SCHEMA.md`](../specs/PRACTICE_ITEM_SCHEMA.md) §2.5):
+
+```
+components:
+  bridge:       {full: <string>, lean: <string>}   # book-flow announcement
+  intro:        {full: <string>, lean: <string>}   # name + frame
+  description:  {full: <string>, lean: <string>}   # imperatives-only practice prose
+  aha:          {full: <string>, lean: <string>}   # moment-of-recognition
+  integration:  {full: <string>, lean: <string>}   # carry-back to chapter
+```
+
+Back-compat: legacy `blocks: {setup, instruction, prompt, close}` retained; legacy `text` carries `components.description.full` when components present. v1 items continue to validate (with `components: null` for `source=manual`).
+
+**Per-format variant policy** (full def in `config/practice/selection_rules.yaml` `component_variant_by_format`):
+
+| Variant | Runtime formats | Rationale |
+|---|---|---|
+| **full** | extended_book_2h, deep_book_4h, deep_book_6h | ≥120 duration_minutes; word budget per chapter accommodates the rich 5-component shape alongside the other 9 SOMATIC_10_SLOT_GRID slots |
+| **lean** | micro_book_15, micro_book_20, short_book_30, standard_book, all 3 compact_* + 10 Group A formats | <120 duration_minutes OR compact spine; word budget too tight for full 5-component shape |
+
+**Cross-references (12 cap entries):**
+
+- HONORS `EXERCISE-BANK-RESOLUTION-01` (line 677) — orthogonal; production-profile strict-canonical decision unchanged. This cap addresses the structural shape of practice items, not whether they fire under production.
+- HONORS `ATOM-100PCT-COVERAGE-SSOT-V1-01` (just-merged) — EXERCISE coverage in §3 + §11 of that SSOT is independent of component shape; this cap adds the structural-quality dimension.
+- HONORS `PEARL-PRIME-ONE-PATH-V1-01` D7 — strict-canonical at runtime unchanged; this cap upgrades the practice-library backstop shape that teacher-mode + non-production paths still use.
+- HONORS `TEMPLATE-UNIVERSAL-01` — SOMATIC_10_SLOT_GRID 10-section layout unchanged; this cap operates within EXERCISE-slot internals.
+- HONORS `PEARL-EDITOR-UPSTREAM-01` — Pearl_Editor authority for atom + practice authoring preserved.
+- HONORS `TEACHER-POOL-SEMANTICS-01` — first-match deterministic teacher pool unchanged; teacher wrappers stay as fallback when `components` null.
+- AMENDS `PRACTICE_ITEM_SCHEMA.md` v1 → v2 (this PR ratifies the schema bump).
+- AMENDS `config/practice/validation.yaml` v1 → v2 (`components_schema` block + `components_required_for_sources` + per-slot char limits).
+- AMENDS `config/practice/selection_rules.yaml` v1 → v2 (`component_variant_by_format` block).
+- ROUTES `ws_pearl_dev_practice_ingest_components_lift_20260610` (Pearl_Dev impl items 2 + 3).
+- ROUTES `ws_pearl_dev_renderer_practice_components_consume_20260610` (Pearl_Dev impl item 4).
+- AMENDS `docs/PRACTICE_LIBRARY_TEACHER_FALLBACK.md` (Pearl_Dev ws scope — when components present, renderer prefers `components.intro` over teacher-config templates; teacher wrappers stay as fallback path for v1 + manual items).
+
+**Scope-in:** practice library schema (specs) + validation config + selection rules. Pearl_Dev ws's cover the rest:
+
+| Item from operator directive | Owner | Scope | In this PR? |
+|---|---|---|---|
+| 1. Schema amendment | Pearl_Architect | `specs/PRACTICE_ITEM_SCHEMA.md` v2; `config/practice/validation.yaml` v2 | YES |
+| 5. Per-format lean/full pick | Pearl_Architect | `config/practice/selection_rules.yaml` `component_variant_by_format` | YES |
+| 2. Ingest fix (re-ingest preserving components) | Pearl_Dev | `scripts/practice/ingest_practice_libraries.py:49 + :83` delete null-block hardcodes; populate from inbox `components`; bump rows to version=2 | ws_pearl_dev_practice_ingest_components_lift_20260610 |
+| 3. ab_tady_37 ingest | Pearl_Dev | `ingest_practice_libraries.py` add source branch + content_type passthrough | same ws as item 2 |
+| 4. Renderer upgrade | Pearl_Dev | `phoenix_v4/rendering/book_renderer.py` `_wrap_practice_fallback_exercise` reads `components.<slot>.<variant>` per `component_variant_by_format`; teacher wrappers remain fallback for v1 + null-components items | ws_pearl_dev_renderer_practice_components_consume_20260610 |
+
+**Scope-out (explicit):**
+
+- Does NOT author component prose for the 10 BASELINE gratitude items (separate `EXERCISE-BANK-RESOLUTION-01` Option 1 work).
+- Does NOT promote ab_tady_37 to production-profile (separate cap-entry decision; this cap just gets ab_tady_37 ingested).
+- Does NOT author components for the 609 persona-keyed `atoms/<persona>/<topic>/EXERCISE/CANONICAL.txt` block files or the 249 teacher-bank `approved_atoms/EXERCISE/*.yaml` files. Those carry single-blob prose by design today; a separate ws (`ws_pearl_editor_exercise_5_component_atom_lift_2026XXXX`, not opened in this PR) could lift the persona-keyed + teacher-bank atoms to components in a future cycle.
+- Does NOT change the EXERCISE-BACKSTOP allowed_content_types list under production-profile (still gated by EXERCISE-BANK-RESOLUTION-01).
+
+**Anti-drift check:**
+
+- Adds `components` as a PARALLEL field; does NOT remove `blocks` or `text`. v1 readers continue to function (read `text`); v1 items continue to validate (no `components` required for `source=manual`).
+- Schema versioning is binding per [§5](../specs/PRACTICE_ITEM_SCHEMA.md): consumers MUST accept both v1 and v2.
+- Pearl_Dev re-ingest atomic per ws: store flips v1 → v2 in one PR. No partial state where some rows have components and others don't.
+- Renderer upgrade is permissive: prefer components when present; fall through to `text` + teacher-config wrappers when null. No new failure surface.
+- Memory `feedback_drift_recovery_git_first` honored: the inbox files ARE the canonical authored shape; this cap restores their structural data on read instead of silently dropping it on ingest.
+
+**Action items:**
+
+1. **Pearl_Dev (ws_pearl_dev_practice_ingest_components_lift_20260610)** — re-author `scripts/practice/ingest_practice_libraries.py`: delete the null-block hardcodes at lines 49 + 83; populate `blocks` from `components` (bridge→setup, intro→instruction-prelude, description→instruction, aha→prompt, integration→close — preserves v1 readers); populate the new `components` field from inbox `components` 1:1; bump `version` to 2 for all ingested rows. Add source branch for `exercises_ab_tady_37_PRODUCTION_READY.json` (item 3 — same ws): produce 39 rows with `source=ab_tady_37`, `practice_id=ab37_<exercise_type>_<index>`. Re-run ingest; store flips from 272 v1 rows to 311 v2 rows. Validate via `scripts/practice/validate_practice_store.py` (extend to enforce `components_schema` per v2 rules). 1 PR; ~80-120 LoC changes.
+
+2. **Pearl_Dev (ws_pearl_dev_renderer_practice_components_consume_20260610)** — upgrade `phoenix_v4/rendering/book_renderer.py:_wrap_practice_fallback_exercise`: when the resolved practice item has `components` non-null, render as `components.bridge.<variant> + components.intro.<variant> + components.description.<variant> + components.aha.<variant> + components.integration.<variant>` joined with appropriate paragraph breaks. Variant picked from `config/practice/selection_rules.yaml::component_variant_by_format` per the current runtime format (passed via `plan` arg). When `components` null OR `component_variant_by_format` returns "text" fallback, retain existing teacher-config wrapper path. Add deterministic-selection assertion (same hash inputs → same component variant chosen). 1 PR; ~50-80 LoC.
+
+3. **Pearl_Editor (no ws this PR)** — when `ws_pearl_dev_practice_ingest_components_lift_20260610` lands, review randomly-sampled 10 of 311 ingested items for component prose quality + tts_rhythm compliance. If avg-sentence-words >18 in any component, flag for re-authoring (out-of-scope for this cap's PR; a separate small ws can address).
+
+4. **Pearl_PM** — track 2 Pearl_Dev ws's as paired (renderer ws gated on ingest ws landing first; otherwise renderer would crash on missing components field).
+
+5. **Pearl_GitHub** — when next refreshing `docs/DOCS_INDEX.md`, add cross-link for `EXERCISE-COMPONENT-SCHEMA-LIFT-01` cap entry under EXERCISE/practice library subsystem section.
+
+**Authority:** this cap entry + [`specs/PRACTICE_ITEM_SCHEMA.md`](../specs/PRACTICE_ITEM_SCHEMA.md) (v2) + [`config/practice/validation.yaml`](../config/practice/validation.yaml) (v2) + [`config/practice/selection_rules.yaml`](../config/practice/selection_rules.yaml) (v2; `component_variant_by_format` block) + the 2 Pearl_Dev ws rows in [`artifacts/coordination/ACTIVE_WORKSTREAMS.tsv`](../artifacts/coordination/ACTIVE_WORKSTREAMS.tsv).
+
+**ACCEPTANCE CRITERIA (added via AMENDMENT-2026-06-11):**
+
+When Pearl_Dev's 2 ws PRs land (`ws_pearl_dev_practice_ingest_components_lift_20260610` + `ws_pearl_dev_renderer_practice_components_consume_20260610`), operator + reviewer apply this A1-A6 checklist as a deterministic merge gate. Pearl_Editor preservation audit ws (`ws_pearl_editor_exercise_preservation_audit_20260611`) verifies A1 + A2 + A3 + A4 + A6 post-merge with per-item evidence.
+
+- **A1.** Schema accepts v2 components without losing v1 data (post-ingest spot-check 5 items diff matches inbox source files).
+- **A2.** Re-ingest produces **311 rows total (272 library_34 + 39 ab_tady_37)** vs current 272.
+- **A3.** Zero content loss verifiable via Pearl_Editor preservation audit ws — every inbox component field present in store row for **≥99% of items**; flagged items <1% with explicit per-item evidence.
+- **A4.** Renderer reads structured components for at least 1 production-profile smoke combo (`gen_z_professionals × anxiety × ahjan × deep_book_4h`) and produces **visible aha + integration text** in rendered output.
+- **A5.** `component_variant_by_format` selects **full** for `{deep_book_4h, extended_book_2h, deep_book_6h}`; **lean** for the 17 other runtime formats — confirmed via per-format dry-run.
+- **A6.** ab_tady_37 items render under slot_07_PRACTICE when bestseller-grade smoke targets a registry with slot_07 active (post-merge of `ws_pearl_editor_slot_07_practice_supply_backfill_20260611`).
+
+**Cross-references (added via AMENDMENT-2026-06-11):**
+
+- **AMENDMENT-2026-06-11** (this AMENDMENT PR; cross-links SSOT §17 + adds A1-A6 above + adds Pearl_Editor preservation audit ws + adds slot_07 supply backfill ws per Q-Atom-INCLUDE-SLOT-07-BACKFILL-WS-01 (a)).
+- **SSOT §17** (this SSOT's AMENDMENT block; canonical surface for the A1-A6 checklist with §17.4 + §17.5 ws cross-refs).
+- **`ws_pearl_editor_exercise_preservation_audit_20260611`** (NEW; gated on both Pearl_Dev ws's merge; verifies A1-A6).
+- **`ws_pearl_editor_slot_07_practice_supply_backfill_20260611`** (NEW optional; gated on all three above + operator Q-Atom-SLOT-07-PRIORITY-01 answer).
+
+---
+
+### ATOM-100PCT-COVERAGE-SSOT-V1-01-RATIFICATION-2026-06-11 — operator batch ratification of all 20 Q-Atom-* (status ACTIVE)
+
+**Status:** **RATIFIED 2026-06-11** — flips parent cap `ATOM-100PCT-COVERAGE-SSOT-V1-01` from PROPOSAL → ACTIVE.
+
+**Context:** Pearl_PM tracker iter 1 ([PR #1489](https://github.com/Ahjan108/phoenix_omega_v4.8/pull/1489)) §G identified operator decision as the critical-path bottleneck (20 of 20 Q-Atom-* PENDING). Operator answered via Mode A (recommended defaults) with **1 override**: `Q-Atom-LOCALE-SCOPE-01` = (b) top-3 (en-US + ja-JP + zh-TW), overriding recommended (c) en-US only.
+
+**Decision summary:** 20 Q-Atom-* resolved; 1 override; 0 ambiguous. Logged as OPD-20260611-001 through OPD-20260611-020 in [`artifacts/coordination/operator_decisions_log.tsv`](../artifacts/coordination/operator_decisions_log.tsv). RESOLVED stamps appended inline below each Q-Atom in SSOT §12. SSOT §18 summary table mirrors this cap entry.
+
+**Material implication of LOCALE-SCOPE override:** Phase A en-US + Phase B ja-JP unchanged. Phase C zh-TW only (vs zh-TW + zh-CN); zh-CN + ko-KR + extended-CJK + EU/ES locales move to post-Phase-A optional. Phase A launch-gating gap rows ≈ 653 (P0 + P1 en-US persona-keyed + Class 2 overlay).
+
+**Cap entries flipped:**
+- `ATOM-100PCT-COVERAGE-SSOT-V1-01` — PROPOSAL → **ACTIVE 2026-06-11** (binding for the Phase A en-US launch gate).
+- `EXERCISE-COMPONENT-SCHEMA-LIFT-01` — unchanged (was already `ratified` per PR #1486).
+- `PEARL-PRIME-ONE-PATH-V1-01` — unchanged (remains PROPOSAL per Q-Atom-ONE-PATH-SPEC-FILE-01 (a) pair-cycle; ratifies on its own track when operator answers its 12 Q-OP-*).
+
+**Downstream cascade unblocked:** Per Pearl_PM tracker §G, bottleneck shifts from "operator decision" → "PR merge sequence". The 4 immediately-unblocked ws's dispatch when the first parent PR merges:
+1. `ws_pearl_editor_atom_100pct_tier_p0_persona_keyed_20260606`
+2. `ws_pearl_writer_atom_100pct_tier_p0_engine_atoms_20260606`
+3. `ws_pearl_dev_atom_100pct_ci_guard_20260606`
+4. `ws_pearl_dev_practice_ingest_components_lift_20260610`
+
+**Action items:**
+1. **Operator** → merge this ratification PR (small atomic; can merge alongside #1485 + #1486 + #1488 + #1489 in cleanup batch).
+2. **Pearl_PM iter 2** → fires on first parent PR merge per tracker §H trigger; dispatches the 4 immediately-unblocked ws's.
+3. **Pearl_Architect (this entry post-active)** → quarterly SSOT refresh per Q-Atom-SSOT-UPDATE-CADENCE-01 (a) cadence.
+
+**Anti-drift check:** No new spec; no new ws's; no code. Pure status-flip + decision-log + RESOLVED stamps. Memory `feedback_operator_proxy_routing` honored: 20 in-envelope decisions logged canonically. Memory `feedback_validation_before_scaling` honored: this ratification IS the validation that unblocks Phase A scaling; without it, no ws dispatches.
+
+**Authority:** this cap entry + parent cap entry `ATOM-100PCT-COVERAGE-SSOT-V1-01` (status flipped) + [`docs/PEARL_PRIME_ATOM_100PCT_COVERAGE_SSOT.md`](./PEARL_PRIME_ATOM_100PCT_COVERAGE_SSOT.md) §18 + [`artifacts/coordination/operator_decisions_log.tsv`](../artifacts/coordination/operator_decisions_log.tsv) (20 OPD entries) + [`artifacts/coordination/pearl_prime_atom_phase_a_launch_tracker.md`](../artifacts/coordination/pearl_prime_atom_phase_a_launch_tracker.md) §D + §G (updated to reflect post-ratification state).
+
+---
+
+### PEARL-STAR-JOB-QUEUE-V1-01 — Pearl Star job queue + scheduler + stall-recovery + concurrency-caps architecture (materialized ACTIVE 2026-06-11)
+
+**Status:** **ACTIVE 2026-06-11** (materialized; not a status flip — no prior PROPOSAL entry existed on `main` because the parent SPEC [`docs/specs/PEARL_STAR_JOB_QUEUE_V1_SPEC.md`](./specs/PEARL_STAR_JOB_QUEUE_V1_SPEC.md) lives in PR [#1492](https://github.com/Ahjan108/phoenix_omega_v4.8/pull/1492) and has not yet merged. Operator chose **Option 1** landing path via cross-session relay 2026-06-11: ratify the 16 Q-PSQ-* decisions and materialize this cap entry as ACTIVE off `main` now, deferring `SPEC §9 RESOLVED` stamps to #1492's merge. The load-bearing artifact unblocking the Pearl_Int install gate is this cap → ACTIVE on `main`, **not** the §9 textual stamps; the OPD log + this cap entry ARE the authoritative decision record. See HANDOFF NOTE below for stale-OPD reconciliation when #1492 lands.).
+
+**Context:** Operator directive (Pearl Star idle window reserved 2026-06-11T15:01Z..2026-06-12T06:00Z; ref `artifacts/qa/pearl_star_idle_window_reserved_20260611.txt`): unblock Pearl_Int Phase A install (Postgres 17 + Procrastinate + ComfyUI-Persistent-Queue overlay + 6 systemd units + 3 smokes) on a job-queue + scheduler + stall-recovery + concurrency-caps architecture for the four Pearl Star workload classes (t2i, llm, tts, orch). Pearl_Research authored the spec in PR #1492 with 16 Q-PSQ-* open questions + recommended defaults. Operator authorized batch ratification of all 16 recommended defaults via cross-session message ("**Land it via Option 1 — branch off main, defer the §9 stamp**").
+
+**Decision (16 Q-PSQ-* batch ratification, all recommended defaults):**
+
+| # | Q-PSQ-ID | Decision (recommended default) | OPD-ID |
+|---:|---|---|---|
+| 1 | `Q-PSQ-PRIMARY-QUEUE-01` | Procrastinate + Postgres | OPD-20260611-025 |
+| 2 | `Q-PSQ-BROKER-01` | Postgres 17 | OPD-20260611-026 |
+| 3 | `Q-PSQ-COMFYUI-COMPOSE-01` | Compose (Pearl_Star_queue front-of-queue + ComfyUI-Persistent-Queue) | OPD-20260611-027 |
+| 4 | `Q-PSQ-WATCHDOG-INTERVAL-01` | 30 s emit / 60 s tick | OPD-20260611-028 |
+| 5 | `Q-PSQ-STALL-MULTIPLIER-01` | N=3 | OPD-20260611-029 |
+| 6 | `Q-PSQ-RETRY-BUDGET-01` | 1 retry transient (t2i, tts); 2 retries (llm); 3 retries (orch) | OPD-20260611-030 |
+| 7 | `Q-PSQ-DEAD-LETTER-01` | Dead-letter queue + operator-review surface | OPD-20260611-031 |
+| 8 | `Q-PSQ-DASHBOARD-01` | CLI-only Phase A → web UI Phase C | OPD-20260611-032 |
+| 9 | `Q-PSQ-CONCURRENT-LIMITS-01` | 50% of Phase 2 measured value (safety headroom) | OPD-20260611-033 |
+| 10 | `Q-PSQ-ROLLOUT-PHASE-A-WORKLOAD-01` | t2i flux-schnell (highest volume; book covers) | OPD-20260611-034 |
+| 11 | `Q-PSQ-PERSISTENCE-LEVEL-01` | fsync every commit (synchronous_commit=on) | OPD-20260611-035 |
+| 12 | `Q-PSQ-OBSERVABILITY-01` | Basic file logs + nvidia-smi snapshots Phase A → Prometheus + Grafana Phase C | OPD-20260611-036 |
+| 13 | `Q-PSQ-LICENSE-BROKER-01` | Valkey (Linux Foundation BSD) | OPD-20260611-037 |
+| 14 | `Q-PSQ-PHASE-D-RAY-01` | Defer; revisit when Pearl Star 2 exists | OPD-20260611-038 |
+| 15 | `Q-PSQ-BACKPRESSURE-01` | N=500 pending per workload | OPD-20260611-039 |
+| 16 | `Q-PSQ-VLLM-OLLAMA-01` | Keep Ollama; track vLLM | OPD-20260611-040 |
+
+All 16 decisions logged in [`artifacts/coordination/operator_decisions_log.tsv`](../artifacts/coordination/operator_decisions_log.tsv) (rows OPD-20260611-025 through OPD-20260611-040).
+
+**HANDOFF NOTE — to #1492 + downstream agents touching SPEC §9:**
+
+This cap entry is the **authoritative decision record** for the 16 Q-PSQ-*; the SPEC `§9 RESOLVED` textual stamps are deferred until PR #1492 merges. When #1492 lands:
+
+1. **Rebase #1492's stale OPD log onto `main`.** #1492's branch carries an old draft of the OPD log with `OPD-20260611-001..016` for Q-PSQ entries — that draft is a **stale subset** superseded by `OPD-20260611-025..040` on `main` (which is the canonical superset). Keep `main`'s rows; drop #1492's superseded draft rows in the rebase. The Q-Atom ratification PR (now merged) consumed `OPD-20260611-001..020` for Q-Atom-* decisions, and Pearl_Localization consumed `OPD-20260611-021..024`; so #1492's 001..016 draft is straight-up collision with already-canonical entries.
+2. **Stamp `SPEC §9 RESOLVED` per `OPD-20260611-025..040`.** Append `RESOLVED 2026-06-11: option (recommended default) per OPD-20260611-0XX` (where XX = 25..40 mapped per the table above) to each Q-PSQ-* row in `§9`. Optionally append a new `§17 DECISIONS RESOLVED 2026-06-11` block mirroring this table.
+3. **Do NOT re-propose the cap.** This cap entry is already **ACTIVE** on `main`; #1492's merge must not re-introduce a PROPOSAL banner. The cap-entry materialization is canonical here, not in #1492.
+4. **Q-PSQ decisions are canonical in the OPD log + this cap entry — NOT in #1492's §9.** If a conflict surfaces (e.g., #1492's §9 stale-text disagrees with OPD log decision), the OPD log + cap entry win. #1492's §9 should be brought into alignment, not the other way around.
+
+**Architecture surface (compressed; full def in [`docs/specs/PEARL_STAR_JOB_QUEUE_V1_SPEC.md`](./specs/PEARL_STAR_JOB_QUEUE_V1_SPEC.md) once #1492 merges):**
+
+| Layer | Decision |
+|---|---|
+| Queue framework + broker | Procrastinate + Postgres 17 (OPD-025/026) |
+| ComfyUI composition | Compose Pearl_Star_queue front-of-queue + ComfyUI-Persistent-Queue overlay (OPD-027) |
+| Stall detection | 30 s heartbeat emit / 60 s watchdog tick / N=3 × normal-floor stall threshold (OPD-028/029) |
+| Retry budgets | 1 retry transient (t2i, tts); 2 retries (llm); 3 retries (orch); dead-letter + operator-review surface (OPD-030/031) |
+| Dashboard phasing | CLI-only Phase A (`scripts/queue/pscli.py`) → web UI Phase C (OPD-032) |
+| Concurrency caps | 50% of Phase 2 measured value per workload (safety headroom; OPD-033) |
+| Dogfood workload | t2i flux-schnell first (highest volume; book covers; $-maker; OPD-034) |
+| Persistence guarantee | `synchronous_commit=on` (fsync every commit; OPD-035) |
+| Observability | File logs + `nvidia-smi` snapshots Phase A → Prometheus + Grafana Phase C (OPD-036) |
+| License broker fallback | Valkey (Linux Foundation BSD) — only if Redis chosen; not the default path (OPD-037) |
+| Phase D multi-node | Defer; revisit when Pearl Star 2 exists (OPD-038) |
+| Backpressure alert | N=500 pending per workload (OPD-039) |
+| LLM serving Phase B | Keep Ollama; track vLLM (OPD-040) |
+
+**Phased rollout (per `SPEC §8` in #1492):**
+
+- **Phase A** (this ratification unblocks): single-box install — Postgres 17 + Procrastinate + ComfyUI-Persistent-Queue + 6 systemd units (`postgresql@17`, `procrastinate-worker`, `pearl-star-watchdog`, `comfyui`, `ollama`, `pearl-star-monitor`) + `pscli` + 3 smokes (A1 flux-schnell book cover <60s; A2 watchdog stall auto-kill+requeue; A3 reboot persistence 5 jobs survive systemctl reboot). Dogfood = t2i flux-schnell.
+- **Phase B:** add llm + tts + orch workers; add Pearl News routing; expand smokes.
+- **Phase C:** observability (Prometheus + Grafana); web UI dashboard.
+- **Phase D:** deferred (Pearl Star 2 multi-node).
+
+**Cross-references:**
+
+- HONORS `CATALOG-800-PER-BRAND-01` — Phase A dogfood (t2i flux-schnell book covers) is the $-maker tier per memory `project_800_high_confidence_configs`.
+- HONORS `feedback_operator_proxy_routing` — 16 in-envelope decisions logged canonically; no escalation.
+- HONORS `feedback_validation_before_scaling` — Phase A smokes (A1/A2/A3) gate Phase B; no scaling without queue-persistence + stall-recovery validation.
+- COMPOSES with `INTEGRATION_CREDENTIALS_REGISTRY.md` §0 — Pearl Star endpoints (`COMFYUI_URL` / `QWEN_BASE_URL` / `COSYVOICE_URL`) consumed by workers via Keychain eval.
+- COMPOSES with `PEARL-PRIME-ONE-PATH-V1-01` (Pearl_Prime ebook chapter atom jobs enqueue via llm-worker).
+- COMPOSES with `ATOM-100PCT-COVERAGE-SSOT-V1-01` (atom authoring + CI guard ws's are queue-job candidates Phase B+).
+- AMENDED-BY future PR that flips §9 RESOLVED stamps on #1492's merge (see HANDOFF NOTE above).
+
+**Anti-drift check:**
+
+- No new architecture invented here. This cap materializes ACTIVE the decisions Pearl_Research already drafted in #1492 §9 — recommended defaults verbatim, no operator override.
+- No new ws's spawned here. Pearl_Int Phase A install ws (`ws_pearl_int_pearl_star_phase_a_install_20260611`) is separately routed per `ACTIVE_WORKSTREAMS.tsv` (held pending this cap → ACTIVE).
+- No code changes here. Pure cap-entry materialization + decision log.
+- Memory `feedback_drift_recovery_git_first` honored: when #1492 lands, the rebase reconciliation (see HANDOFF NOTE step 1) preserves `main`'s canonical OPD entries via git-first rather than re-authoring.
+- Memory `feedback_discover_before_acting` honored: max OPD on `main` = 024 verified before authoring 025..040 (collision-free; verification gate `cut -f1 operator_decisions_log.tsv | grep OPD-20260611 | sort | uniq -d == EMPTY`).
+
+**Action items:**
+
+1. **Pearl_Int** → Phase A install fires once this PR merges. Read `docs/specs/PEARL_STAR_JOB_QUEUE_V1_SPEC.md` §8 (from #1492 branch if not yet merged, or `main` if #1492 has landed) for the install runbook. Reservation window `2026-06-11T15:01Z..2026-06-12T06:00Z`.
+2. **Pearl_Research (PR #1492 author)** → when #1492's merge cycle resumes, apply the HANDOFF NOTE 4 steps (rebase stale OPD log, stamp §9 RESOLVED, do NOT re-propose cap, accept OPD log as canonical).
+3. **Pearl_PM** → next iter banner captures this cap as ACTIVE + Pearl_Int Phase A in-flight + Pearl_Research empirical Phase 2 (12-test concurrency matrix re-run) held pending operator readiness (ComfyUI `/free` + CosyVoice2 `:9880` listening confirmation).
+4. **Pearl_GitHub** → when next refreshing `docs/DOCS_INDEX.md`, add cross-link for `PEARL-STAR-JOB-QUEUE-V1-01` cap entry under Pearl Star / job-queue subsystem section.
+
+**Authority:** this cap entry + [`artifacts/coordination/operator_decisions_log.tsv`](../artifacts/coordination/operator_decisions_log.tsv) (16 OPD entries 025..040) + (post-merge) [`docs/specs/PEARL_STAR_JOB_QUEUE_V1_SPEC.md`](./specs/PEARL_STAR_JOB_QUEUE_V1_SPEC.md) §9 RESOLVED stamps via PR #1492 reconciliation.
+### MUSIC-MODE-V1-01-AMENDMENT-V2-PRODUCTION-READINESS — 12-correction ratification + Phase A music-launch gate + MusicGen Phase B integration (ACTIVE 2026-06-11)
+
+**Status:** **ACTIVE** (ratified 2026-06-11 per operator green-light; Q-MM-V2-* defaults applied; cap → ACTIVE flips 6 child ws's status=proposed → runnable) — V2 production-readiness layer atop ratified V1 cap entries; doc-only spec + audit + deck + coordination row delta in this PR; no implementation.
+
+**Spec:** [`docs/specs/MUSIC_MODE_V2_PRODUCTION_READINESS_SPEC.md`](specs/MUSIC_MODE_V2_PRODUCTION_READINESS_SPEC.md)
+
+**Companion deck:** [`artifacts/programs/music_mode_v2_20260611/MUSIC_MODE_INTRODUCTION_DECK.pptx`](../artifacts/programs/music_mode_v2_20260611/MUSIC_MODE_INTRODUCTION_DECK.pptx) (10 slides; operator-facing; for musicians + Brand Directors)
+
+**Companion long-form:** [`artifacts/programs/music_mode_v2_20260611/MUSIC_MODE_INTRODUCTION_LONG_FORM.md`](../artifacts/programs/music_mode_v2_20260611/MUSIC_MODE_INTRODUCTION_LONG_FORM.md)
+
+**Audit artifact:** [`artifacts/qa/music_mode_corrections_audit_20260611.tsv`](../artifacts/qa/music_mode_corrections_audit_20260611.tsv) — 12-row machine-readable corrections audit (11 CORRECT + 1 DISPUTED).
+
+**Context:** Operator-pasted prior-turn analysis of music-mode posture against a draft 10-slide operator deck surfaced 12 corrections vs initial deck plan. V2 spec §2 ratifies row-by-row against current `origin/main` spec source; 11/12 confirmed CORRECT; row 1 (800 books per-brand) DISPUTED due to cross-cap contradiction with `CATALOG-800-PER-BRAND-01` (system-wide 800). Plus operator's 3 questions answered (text-to-song / spam-risk / production-status). Plus Phase A music-launch gate authored. Plus diversity gates spec'd (in sibling AMENDMENT below). Plus MusicGen Pearl Star Phase B integration spec'd (auto-WAV-render deferred from V1 line 772). Plus deck ships with 8 deck-confirm-Q's resolved.
+
+**Decision:**
+
+1. **12-row corrections audit RATIFIED:** 11 CORRECT + 1 DISPUTED per spec §2 + audit TSV. Row 1 (CATALOG-800 cross-cap reconciliation) flagged via `Q-MM-V2-CATALOG-800-RECONCILE-01` for separate Pearl_Architect follow-up.
+2. **Phase A music-mode launch gate DEFINED** (spec §4): first real musician onboarded + 6 slot pools backfilled for priority cell + 2P templates authored + smoke book ships + quality rubric PASS + diversity gate PASS + MusicGen prompt emitted + WAV rendered (auto via Phase B OR manual Colab acceptable Phase A).
+3. **Phase A entry conditions LOCKED** at 8 items (spec §4.1); exit milestone = first music-mode book on at least one platform (KDP/Audible/Apple/Google) + brand_admin_v2 dashboard reflects brand.
+4. **Phase A timeline:** 4-6 weeks parallel with en-US atom-coverage Phase A cascade (different agents, different cells, zero conflict).
+5. **MusicGen Pearl Star Phase B integration SPEC'D** (spec §6): 5th workload class on Pearl Star (sibling to Qwen-Image + CosyVoice2 + Ollama + orch); MusicGen-medium recommended default (~5 GB VRAM concurrent with FLUX-schnell); auto-WAV render at `artifacts/music_companions/<brand>/<book>.wav`; deterministic seed per book.
+6. **PEARL-STAR-JOB-QUEUE-V1-01 dependency FLAGGED** (spec §6.5): infra cap entry referenced as TARGET but NOT YET on main. `Q-MM-V2-PEARL-STAR-PHASE-A-CAP-01` recommends separate Pearl_Architect session to author the queue infra cap BEFORE Phase B can advance.
+7. **MusicGen license compliance FLAGGED** (spec §6.7): MIT model code; commercial-use clearance for MusicGen-medium specifically needs Pearl_Int legal review (audio training set provenance) per `Q-MM-V2-MUSICGEN-LICENSE-CHECK-01`.
+8. **Music-side atom-coverage SSOT SCOPED** (Q-MM-V2-MUSICIAN-BANKS-SCOPE-01): parallel structure to `docs/PEARL_PRIME_ATOM_100PCT_COVERAGE_SSOT.md` (en-US side merged PR #1485 2026-06-11); theme/emotion/instrument dimensions deferred to V3.
+
+**Child workstreams opened (6 rows added to `artifacts/coordination/ACTIVE_WORKSTREAMS.tsv` under this PR; status=proposed; gated on operator green-light):**
+
+1. `ws_pearl_architect_music_mode_atom_coverage_ssot_20260611` — author `docs/MUSIC_MODE_ATOM_100PCT_COVERAGE_SSOT.md` sibling to en-US SSOT.
+2. `ws_pearl_editor_pearl_writer_first_real_musician_onboarding_20260611` — operator-nominated musician through wizard + survey + atom authoring for first priority cell.
+3. `ws_pearl_editor_music_slot_pools_priority_backfill_20260611` — 6 music slot pools for top-3 priority cells (recovery + presence + quiet_courage × gen_z_professionals + working_parents × en-US × with-lyrics + no-lyrics).
+4. `ws_pearl_dev_music_brand_diversity_ci_guard_20260611` — `scripts/ci/check_music_brand_diversity.py` per spec §5 (G1-G8); hard-fail under production.
+5. `ws_pearl_int_pearl_star_phase_b_musicgen_workload_20260611` — MusicGen workload class + WAV worker + companion-song smoke (gated on Pearl Star Phase A operational).
+6. `ws_pearl_marketing_music_mode_recruitment_copy_20260611` — copy for recruiting first real musicians; integrates with Sangha Karma Yoga V1.5 brand-administrator pillar P6 (gated on `Q-MM-V2-SANGHA-INTEGRATION-01`).
+
+**Project opened:** `PRJ-MUSIC-MODE-V2-PRODUCTION-LAUNCH` (status=proposed); owner=Pearl_Architect (spec) + Pearl_Editor (atom authoring execution).
+
+**15 open Q-MM-V2-* (recommended defaults; operator answers gate downstream ws's):** see spec §8.
+
+**Anti-drift check:** Does NOT modify V1 cap entry text; appends V2 layer only. Does NOT touch `canonical_brand_list.yaml`. Does NOT mint code or atoms. Does NOT modify `agent_registry.yaml`. Cross-cap row 1 (DISPUTED) does NOT silently reconcile — flagged for operator decision via Q-MM-V2-CATALOG-800-RECONCILE-01. PEARL-STAR-JOB-QUEUE-V1-01 referenced as TARGET only — does NOT pretend to ratify a cap that doesn't exist yet.
+
+**Handoffs:**
+
+- **Pearl_PM** → activate 6 child ws's per operator green-light (status=proposed → runnable per cell prioritization).
+- **Operator** → answer 15 Q-MM-V2-* (especially Q-MM-V2-FIRST-REAL-MUSICIAN-01 = nominate first musician).
+- **Pearl_Architect (separate session)** → author PEARL-STAR-JOB-QUEUE-V1-01 cap + spec + concurrency matrix.
+- **Pearl_Architect (separate session)** → cross-cap reconciliation for CATALOG-800-PER-BRAND-01 vs MUSIC-MODE-BRAND-INTEGRATION-V1-01 §AMENDMENT §3 (row 1 dispute).
+- **Pearl_Editor + Pearl_Writer** → atom-authoring ws's #2 + #3 fire in parallel with en-US atom-coverage cascade.
+- **Pearl_Dev** → diversity gate CI guard ws #4 fires anytime.
+- **Pearl_Int** → Phase B MusicGen ws #5 fires AFTER Pearl Star Phase A operational (~2-3 weeks gating).
+- **Pearl_Marketing** → recruitment copy ws #6 fires after operator confirms Q-MM-V2-FIRST-REAL-MUSICIAN-01.
+
+**Authority:** this cap entry + [`docs/specs/MUSIC_MODE_V2_PRODUCTION_READINESS_SPEC.md`](specs/MUSIC_MODE_V2_PRODUCTION_READINESS_SPEC.md) + [`artifacts/qa/music_mode_corrections_audit_20260611.tsv`](../artifacts/qa/music_mode_corrections_audit_20260611.tsv).
+
+### MUSIC-MODE-BRAND-INTEGRATION-V1-01-AMENDMENT-DIVERSITY-GATES — Anti-spam diversity gate CI guard for music-mode brand catalog batches (ACTIVE 2026-06-11)
+
+**Status:** **ACTIVE** (ratified 2026-06-11 per operator green-light; Q-MM-V2-DIVERSITY-GATE-THRESHOLDS-01 answered; gates G1-G5 HARD_FAIL production-profile, G6-G8 WARN) — appended to MUSIC-MODE-BRAND-INTEGRATION-V1-01; doc-only spec in this PR; no implementation.
+
+**Spec source:** [`docs/specs/MUSIC_MODE_V2_PRODUCTION_READINESS_SPEC.md`](specs/MUSIC_MODE_V2_PRODUCTION_READINESS_SPEC.md) §5.
+
+**Context:** Music-mode brand catalog batches scale to 800 books per active brand at standard tier (per `MUSIC-MODE-BRAND-INTEGRATION-V1-01-AMENDMENT-2026-05-09 §3`). Without guard rails, repeated slot-pool atoms or topic concentration trip KDP/Amazon spam-flag heuristics + erode platform standing. This amendment specs the CI guard `scripts/ci/check_music_brand_diversity.py` authored under `ws_pearl_dev_music_brand_diversity_ci_guard_20260611` (Pearl_Dev).
+
+**Decision: Anti-spam diversity gate thresholds locked at V2 launch (operator-tunable post-launch per smoke results):**
+
+| Gate | Metric | Threshold | Production fail mode | Draft fail mode |
+|---|---|---|---|---|
+| G1 — Per-slot-pool variant reuse | max variant reuse per batch | ≤ max(5, ceil(N/5)) | HARD_FAIL | WARN |
+| G2 — Topic concentration | % single topic | ≤ 30% | HARD_FAIL | WARN |
+| G3 — Persona concentration | % single persona | ≤ 30% | HARD_FAIL | WARN |
+| G4 — Format concentration | % single format | ≤ 50% | HARD_FAIL | WARN |
+| G5 — Locale concentration | per-platform tunable | KDP US ≤70% / KDP JP ≤50% | HARD_FAIL | WARN |
+| G6 — Title fuzzy-similarity clustering | max cluster size | ≤ ceil(N/20) | WARN | WARN |
+| G7 — Author-bio reuse | % reuse | ≤ 60% | WARN | WARN |
+| G8 — Slot-atom rotation Gini | Gini coefficient | ≤ 0.4 | WARN | WARN |
+
+**Production-profile policy:** G1-G5 = HARD_FAIL under `--quality-profile production`; G6-G8 = WARN-only. Draft profile = all WARN.
+
+**Smoke validation (Phase A degraded mode for N<50):** G1 verifies per-chapter slot reuse in the single book; G2-G5 logged as `not_applicable_batch_too_small`.
+
+**KDP/Amazon empirical alignment:** Thresholds derived from observed platform spam-flag heuristics: >50% topic concentration = series-spam (G2+G4+G7), >30% persona-demographic concentration = "demographic farming" (G3), repeated lyric/text patterns = Apple Books flag (G1+G6+G8), bio reuse = Google Play flag (G7).
+
+**Threshold tuning:** Phase A milestone includes 50-book smoke batch + threshold tuning + 90-day post-publish KDP/Amazon flag rate review. `Q-MM-V2-DIVERSITY-GATE-THRESHOLDS-01` flags operator-tunable per-platform overrides.
+
+**Child workstream:** `ws_pearl_dev_music_brand_diversity_ci_guard_20260611` (Pearl_Dev — spec authors `scripts/ci/check_music_brand_diversity.py`; output at `artifacts/qa/music_brand_diversity_report_<brand_id>_<batch_id>.md` + JSON sidecar).
+
+**Anti-drift check:** Additive on existing MUSIC-MODE-BRAND-INTEGRATION-V1-01. Does NOT modify the V1 cap entry text. Does NOT mint code or thresholds outside the spec §5 envelope. Does NOT override `canonical_brand_list.yaml` or Path X. Cap-spec layered; implementation lands under named Pearl_Dev ws.
+
+**Handoffs:**
+
+- **Pearl_PM** → activate `ws_pearl_dev_music_brand_diversity_ci_guard_20260611` per operator green-light.
+- **Pearl_Dev** → author CI script + JSON sidecar schema + hook into `--quality-profile production` catalog runs.
+- **Pearl_DevOps** → wire CI workflow job to run gate before any music-mode catalog batch publishes.
+- **Pearl_Architect (this entry)** → post-Phase-A threshold tuning + 90-day empirical review + cap update if thresholds drift.
+
+**Authority:** this cap entry + [`docs/specs/MUSIC_MODE_V2_PRODUCTION_READINESS_SPEC.md`](specs/MUSIC_MODE_V2_PRODUCTION_READINESS_SPEC.md) §5.
+## ATOM-100PCT-COVERAGE-SSOT-V1-01-AMENDMENT-LOCALE-PARALLEL-RELAX-2026-06-11
+
+**Status:** ACTIVE
+**Type:** minor amendment
+**Parent cap:** `ATOM-100PCT-COVERAGE-SSOT-V1-01`
+**Date:** 2026-06-11
+**Authority:** Pearl_PM + OPD-20260611-002 (LOCALE-SCOPE: top-3) + OPD-20260611-003 (LOCALE-PHASE: parallel-instead-of-sequential)
+**Change:** Relax ja-JP locale gate (see SSOT [`§AMENDMENT-2026-06-11-LOCALE-PARALLEL-RELAX`](./PEARL_PRIME_ATOM_100PCT_COVERAGE_SSOT.md#amendment-2026-06-11-locale-parallel-relax))
+**Impact:** Pearl_Localization ws can start ja-JP STAGE 1 immediately; ~2-week Phase A wall-clock compression
+**Scope:** Only the *dispatch gate* is relaxed (was "en-US Tier P0+P1 complete = pre-req"; now "PR #1485 + #1490 merged = pre-req"). The *completion gate* (Phase B ja-JP requires P2 cleared = 803 cells × ≥3 variants) stands per parent SSOT §16.
+
+**Rationale:** ja-JP locale subtree (`atoms/<persona>/<topic>/<atom_type>/locales/ja-JP/`) has zero file-path overlap with en-US root atom paths. Parallel dispatch on the priority sub-scope (gen_z_professionals × anxiety + overthinking) authoring ≈108 ja-JP atom variants alongside en-US Tier P0 + early Tier P1 work cuts ~2 weeks from Phase A wall-clock with zero risk to en-US authoring quality. Quality contracts (`config/localization/locale_registry.yaml` + `quality_contracts/`) remain in force.
+
+**Cross-references:**
+
+- Parent: `ATOM-100PCT-COVERAGE-SSOT-V1-01` (line 2494)
+- Resolves: §12 Q-Atom-LOCALE-SCOPE-01 (toward top-3 option (b)) + Q-Atom-LOCALE-PHASE-01 (toward parallel option (b))
+- Amends action-item #6 of parent cap entry (Pearl_Localization gating language)
+- Touches: [`docs/PEARL_PRIME_ATOM_100PCT_COVERAGE_SSOT.md`](./PEARL_PRIME_ATOM_100PCT_COVERAGE_SSOT.md) §10 Tier P2 + §11 locale-variants row + new §AMENDMENT-2026-06-11-LOCALE-PARALLEL-RELAX section
+- Touches: [`artifacts/coordination/ACTIVE_WORKSTREAMS.tsv`](../artifacts/coordination/ACTIVE_WORKSTREAMS.tsv) — `ws_pearl_localization_atom_100pct_tier_p2_ja_jp_20260606` blockers column
+
+**Action items:**
+
+1. **Pearl_PM** → may now dispatch Pearl_Localization for ja-JP STAGE 1 (gen_z_professionals × anxiety + overthinking) in parallel with en-US STAGE 1+2+3 dispatch.
+2. **Pearl_Localization** → ja-JP STAGE 1 unblocked once this PR merges; proceed with locale_registry.yaml ja-JP register (丁寧語) per ws task statement; reference adi_da ja-JP corpus (570 atoms) for style precedent.
+3. **Pearl_Architect (post-merge)** → resolve Q-Atom-LOCALE-SCOPE-01 + Q-Atom-LOCALE-PHASE-01 in next SSOT refresh per ratified OPD-20260611-002 + OPD-20260611-003.
+
+**Anti-drift check:** No new architecture. Single-axis gate-text relaxation on already-ratified parent cap entry; preserves all quality contracts + completion-gate semantics. Memory `feedback_validation_before_scaling` honored: parallel dispatch on a *priority-scoped* sub-set (gen_z_professionals × anxiety + overthinking), not the full Tier P2 — validation gates remain. Memory `feedback_discover_before_acting` honored: read parent SSOT §10 + §11 + ws row + cap entry before authoring amendment.
+
+**Authority:** this amendment block + SSOT [`§AMENDMENT-2026-06-11-LOCALE-PARALLEL-RELAX`](./PEARL_PRIME_ATOM_100PCT_COVERAGE_SSOT.md#amendment-2026-06-11-locale-parallel-relax) + OPD-20260611-002 + OPD-20260611-003.
+### SANGHA-KARMA-YOGA-V1-01 — Sangha Karma Yoga V1 program — 7-pillar volunteer pathway + universal-pillar profit-share + tiered spiritual access (**ACTIVE** 2026-06-11; ratified)
+
+**Status:** **ACTIVE** (ratified 2026-06-11 per operator green-light). All open Q-SKY-* in `docs/specs/SANGHA_KARMA_YOGA_PROGRAM_SPEC.md` §13 RESOLVED to recommended defaults via batch ratification (OPD-20260611-056), and **`Q-SKY-LEGAL-01` = RESOLVED 2026-06-12** (church-donation model — operator's legal team + accountant: Pearl Prime makes grateful donations to the teachers' churches; nonprofit → religious-nonprofit charitable giving; replaces the prior profit-share legal-vehicle placeholder; OPD-20260612-002, supersedes the DEFERRED OPD-20260611-057). Six were already operator-resolved 2026-06-09 (MASTER-NAMING-01, MASTER-ROTATION-01, UNSAY-NAMING-01, PEARL-EMPOWERMENT-DEFINITION-01, PROFIT-PEARL-NEWS-01, 48-SOCIAL-BINDING-01). V1.5 level-progression layer ratified in parallel (see AMENDMENT-2026-06-06-LEVELS below).
+
+**Context:** Operator directive — structure a **Sangha Karma Yoga** volunteer pathway where sangha members serve the mission across **7 work pillars** (Pearl Prime / 48 Social / Pearl News / USLF / UNSAY / Sangha brand admins / Sangha onboarding), anchored by **weekly Sunday Zoom coordination** + **quarterly master teachings** + **Pearl empowerments from Ahjan** + **annual in-person USLF retreat**. This program is **not new content** — operator has been teaching karma yoga and sangha unity for 4+ years (`./teachers/ahjan/intake/Dharma Talks/2018-2022`; 23 archived sangha satsangs); this cap **formalizes program structure** around that existing operator teaching. Mission backbone from operator's own voice (`old_chat_specs/USLF_3_LA.txt`): *"Uplift the world with the alliance of these great masters through the offering of content."*
+
+**Cross-reference:** **`MUSIC-MODE-BRAND-INTEGRATION-V1-01`** is the precedent for first-class archetype + brands 38+; this cap follows the same pattern with **Sangha brands at id 200+** (clear of Path X 37 + music 38+). Parent program **`PRJ-WORLDWIDE-CATALOG-GO-LIVE-V1-PROGRAM-01`** is the umbrella; Sangha brand lanes (P6) land inside its catalog go-live. **`PEARL-PRIME-STOREFRONT-V1-01` AMENDMENT-2026-06-04** — Sangha brands inherit storefront destination + locale parity. **V1.5 layer** at `SANGHA-KARMA-YOGA-V1-01-AMENDMENT-2026-06-06-LEVELS` specifies the per-quarter level progression.
+
+**Decision (locked sections — ratification package):**
+
+1. **Subsystem:** **`sangha_program`** (NEW — row added to `artifacts/coordination/SUBSYSTEM_AUTHORITY_MAP.tsv`). Authority doc = `docs/specs/SANGHA_KARMA_YOGA_PROGRAM_SPEC.md`. Owner = Pearl_Architect (spec) + Operator (program lead).
+
+2. **7 work pillars:** P1 Pearl Prime / P2 48 Social / P3 Pearl News / P4 USLF / P5 UNSAY / P6 Sangha brand admins / P7 Sangha new-student onboarding. Each shadows specific Pearl_* agents. No 8th pillar in V1 (Q-SKY-PILLAR-ADD-01 = defer).
+
+3. **Role ladder:** Karma Yogi → Dharma Steward (pillar lead) → Sangha Author (brand admin) → Pearl Empowered (lineage milestone, NOT rank promotion) → Cross-pillar Coordinator (optional rotating).
+
+4. **Cadence — "extremely powerful, not extremely frequent":** 1 weekly Sunday Zoom (60 min coordination, NOT teaching) + 1 quarterly master teaching + 1 quarterly Pearl empowerment + 1 annual in-person USLF retreat.
+
+5. **Profit-share mechanism (Q-SKY-LEGAL-01 / PROFIT-PCT-01 / PROFIT-CAP-01 / PROFIT-PEARL-NEWS-01 / 48-SOCIAL-BINDING-01 / GAP-SKY-06 all resolved by operator 2026-06-09 with single mechanism):**
+   - **Pearl Prime receives 5% of all-brand income** (operator's standing economics, pre-existing).
+   - **Active Karma Yogis each receive 1% of Pearl Prime's income** per quarter active.
+   - = **0.05% of total brand income per active Karma Yogi per quarter** (effective).
+   - **Universal-pillar scope:** any work in any of the 7 pillars qualifies — Tier I is NOT pillar-restricted.
+   - **Active** = 4+ Sundays attended + ≥ 1 shipped deliverable per pillar.
+   - Layered with operator's pre-existing "10%-to-teachers" flow (LA transcript framing); both flows operate.
+   - **Pillar P3 Pearl News + P4 USLF + P5 UNSAY + P6 Sangha brand admins + P7 Sangha onboarding all qualify for Tier I** (not Tier II only).
+   - **Legal vehicle RESOLVED 2026-06-12 (Q-SKY-LEGAL-01, church-donation model):** Pearl Prime makes grateful donations to the teachers' churches (nonprofit → religious-nonprofit charitable giving; no per-sale/royalty contract; replaces the profit-share placeholder; OPD-20260612-002). Any separate sangha-contributor compensation rides the same legal-team guidance — flagged, non-blocking.
+
+6. **Tier II — spiritual access (all active):** quarterly master teaching + quarterly Pearl empowerment + annual USLF retreat (active = 3 of 4 quarters in prior year) + volunteer-only archive + Sangha Author credit (P6 only).
+
+7. **Tier III — recognition (sustained service):** annual Sangha Dharma Steward titles at USLF retreat + possible 1:1 master time (Q-SKY-1V1-MASTER-01) + possible travel stipend (Q-SKY-STIPEND-01).
+
+8. **Operator-ratified Plan A master rotation (resolves Q-SKY-MASTER-ROTATION-01 + Q-SKY-MASTER-NAMING-01):**
+   - Q1 = `master_feung` (Chinese wisdom synthesis / Hua Shan / Xi'an; "Master Fan Zhou" = "Master Fun" = `master_feung` — same person, canonical slug)
+   - Q2 = `master_wu` (Taoist geomancy / Long Mai / Dragon Veins)
+   - Q3 = `junko` (New Age channeling / ascended masters / cosmic council)
+   - Q4 = `joshin_sensei` (Shingon / Dainichi Nyorai / Sokushin Jōbutsu) + Ahjan Pearl Transmission
+
+9. **Sangha brand admins (P6) DEEP DIVE in spec §8** — Sangha brands defined by composite-voice (≥3 master banks); brand ID space 200+; brand-admin tooling reuse; Path X 37 + music 38+ untouched; storefront destination via Pearl Prime storefront.
+
+10. **Phased rollout:** Phase A pilot (12-20 sangha members, 1 quarter) → Phase B full sangha + Tier I activation post-legal-counsel → Phase C formalization + USLF authority doc + V1.1 follow-up caps → Phase D steady state.
+
+11. **Q-SKY-* count: 31** in spec §13. Six resolved 2026-06-09; 25 awaiting operator.
+
+12. **Anti-drift:** No invented spiritual benefits; no marketing-funnel voice on brochure; no specific dollar amounts (mechanism + framework only); no 8th pillar without operator approval; no paid LLM APIs; no code changes (program-design only); no Path X 37 touch; Tier III gravity humility ("the gravity speaks for itself").
+
+**Action items — Workstreams (this PR appends 1 project row + 1 subsystem row; V1.5 AMENDMENT appends 3 more ws rows):**
+
+- **Project row:** `PRJ-SANGHA-KARMA-YOGA-V1` added to `ACTIVE_PROJECTS.tsv` (status=proposed).
+- **Subsystem row:** `sangha_program` added to `SUBSYSTEM_AUTHORITY_MAP.tsv` (status=proposed).
+- **Phase A activation gated on:** operator answers to remaining 25 Q-SKY-* (especially LEGAL-01 legal-counsel review + PILLAR-LEAD-INITIAL-01 + DECK-DIRECT-ADDRESS-01 slide 18) + V1.5 plan selection per Q-OP-PROGRESSION-SHIP-01.
+
+**Budget (Tier 1, operator-present):** This session = design + ratification only. Phase A operations attended by operator throughout. **No paid LLM APIs.**
+
+**Anti-drift check:** Does not invent program — formalizes operator's existing 2018-2022 sangha karma yoga teaching. Does not touch Path X 37 or music 38+ (Sangha brands at 200+ ID space). Does not duplicate `MUSIC-MODE-BRAND-INTEGRATION-V1-01` — both are first-class archetypes on different axes. Does not author code or touch existing subsystem code/config.
+
+**Handoffs:**
+- **Operator** — answers remaining 25 Q-SKY-* (especially legal-counsel review for vehicle + 7 initial Dharma Stewards nomination + slide 18 direct-address copy + Q-OP-PROGRESSION-SHIP-01 plan selection)
+- **Pearl_PM** — coordination cleanup picks up this PR; opens Phase A first-cohort recruitment ws + Sunday infrastructure ws after operator answers land
+- **Pearl_Architect** — follow-up caps queued: USLF formal authority doc; Sangha brand wizard mode (V1.1); composite voice rules (V1.1); Sangha cover treatment (V1.1); Sangha freebie deltas (V1.1)
+- **Pearl_Marketing** — recruitment copy + funnel integration gated on operator Plan selection
+
+**Pointers:**
+- `docs/specs/SANGHA_KARMA_YOGA_PROGRAM_SPEC.md` (V1 program spec, 18 sections)
+- `docs/specs/SANGHA_KARMA_YOGA_LEVEL_PROGRESSION_SPEC.md` (V1.5 level-progression spec)
+- `artifacts/programs/sangha_karma_yoga_20260606/SANGHA_KARMA_YOGA_OVERVIEW.md` (V1 prose companion)
+- `artifacts/programs/sangha_karma_yoga_20260606/SANGHA_KARMA_YOGA_LEVELS_OVERVIEW.md` (V1.5 prose companion)
+- `artifacts/programs/sangha_karma_yoga_20260606/SANGHA_KARMA_YOGA_INVITATION.pptx` (V1 brochure deck, 20 slides)
+- `artifacts/programs/sangha_karma_yoga_20260606/SANGHA_KARMA_YOGA_LEVELS_APPENDIX.pptx` (V1.5 deck appendix, 16 slides)
+- `artifacts/coordination/ACTIVE_PROJECTS.tsv` (`PRJ-SANGHA-KARMA-YOGA-V1`)
+- `artifacts/coordination/SUBSYSTEM_AUTHORITY_MAP.tsv` (`sangha_program`)
+- `old_chat_specs/USLF_3_LA.txt` (operator's canonical USLF voice)
+- `./teachers/ahjan/intake/Dharma Talks/` (23 operator karma-yoga + sangha satsangs, 2018-2022)
+
+### SANGHA-KARMA-YOGA-V1-01-AMENDMENT-2026-06-06-LEVELS — Year-of-becoming level-progression layer (4 plans + Pearl News feedback loop; **ACTIVE** 2026-06-12; ratified)
+
+**Status:** **ACTIVE** (ratified 2026-06-12 per operator Ahjan, lineage authority). All Q-OP-* in `docs/specs/SANGHA_KARMA_YOGA_LEVEL_PROGRESSION_SPEC.md` §11 RESOLVED via batch ratification (OPD-20260612-001). **Chosen progression = Plan A** (Q-OP-PROGRESSION-SHIP-01); Plans B/C/D not chosen (retained for reference). **Operator-ratified attainment-level ladder (Ahjan frames every quarter for his old sangha):** Q1 Fan Zhou (`master_feung`) → **Level 1 Karma-Clearing**; Q2 Master Wu (`master_wu`) → **Level 2 World Aura Clearing**; Q3 Junko (`junko`) → **Level 3 Ascended Masters Council**; Q4 Joshin (`joshin_sensei`) + Ahjan Pearl Transmission → **Level 4 Vairocana World Bodhisattva Seal** (final transmission). Master rotation already ratified 2026-06-09 (Q-OP-MASTER-ALLIANCE-CONFIRM-01). Cross-tradition deference WAIVED per operator. Monthly digest / recorded-with-consent / free / repeat-deeper + alumni council confirmed as design principles only (no management system built). **Q-SKY-LEGAL-01 RESOLVED 2026-06-12 via church-donation model** (Pearl Prime grateful donations to teachers' churches; replaces profit-share placeholder; OPD-20260612-002).
+
+**Context:** Operator directive (verbatim): *"It's not just a mission to save the world, it's a mission of self-development, self-mastery. This is the coolest thing in the world to be a part of. Even the first level after the first three months, you'll get the level that wipes away their karma — that's tremendous."* V1 specifies program body; V1.5 specifies the **year-of-becoming arc** inside the body — 4 quarters × 4 empowerments × 4 attainment levels, culminating at Vairocana World Bodhisattva (operator's working name) via Joshin's Shingon teaching + Ahjan Pearl Transmission at Q4. Plus the **Pearl News feedback loop** — volunteer SEES alignment manifest in world's good news via monthly Volunteer Digest.
+
+**Cross-reference:** Parent cap **`SANGHA-KARMA-YOGA-V1-01`** (program body); parent program **`PRJ-SANGHA-KARMA-YOGA-V1`** (no new project row — V1.5 lands under same project); subsystem **`sangha_program`** (existing under V1); subsystem **`pearl_news`** (existing; volunteer-digest is additive — new sibling pipeline `pearl_news/pipeline/volunteer_digest.py` to be authored by `ws_pearl_news_volunteer_digest_pipeline_20260606`).
+
+**Decision (locked sections — ratification package):**
+
+1. **1-year arc skeleton:** 4 quarters × 4 empowerments × 4 attainment levels. Per-quarter shape: **Penance** (90 days impeccable karma yoga in pillar) → **Empowerment** (world master gives level teaching) → **Alignment** (volunteer becomes vessel for level's world-domain) → **Naming** (attainment-state name conferred). 4 levels in 1 year locked (Q-OP-LADDER-LENGTH-01 default).
+
+2. **Plan A — Operator's Vairocana ladder (CHOSEN — ratified 2026-06-12; Q-OP-PROGRESSION-SHIP-01):** operator-ratified attainment-level names (Q-OP-LEVEL-NAMES-PLAN-A + Q-OP-LEVEL-4-NAME-PRIMARY-01). Ahjan frames every quarter for his old sangha.
+   - **Q1** Fan Zhou (`master_feung`) → **Level 1 Karma-Clearing** → Pearl News domain: personal redemption stories
+   - **Q2** Master Wu (`master_wu`) → **Level 2 World Aura Clearing** → Pearl News domain: ecological / world-energy wins
+   - **Q3** Junko (`junko`) → **Level 3 Ascended Masters Council** → Pearl News domain: youth flourishing / cosmic-council uplift
+   - **Q4** Joshin (`joshin_sensei`, Shingon Dainichi Nyorai teaching) + Ahjan Pearl Transmission → **Level 4 Vairocana World Bodhisattva Seal** (final transmission) → Pearl News domain: universal good
+   - Prior per-level name candidates (Cleansed-Karma Sangha Adept / Dragon-Vein Aligned / Cosmic-Council Channel-Holder / Vairocana World Bodhisattva) retained in spec §3.1-§3.4 as drafting history; operator's ratified names above are authoritative.
+   - Joshin's Q4 transmission is canonical (Shingon's *Sokushin Jōbutsu* attainment doctrine; Dainichi Nyorai is central deity of Joshin's lineage's mandalas).
+
+3. **Plan B — Mahāyāna Six Pāramitā compressed (alternative):** Q1 Dāna+Śīla / Q2 Kṣānti+Vīrya / Q3 Dhyāna / Q4 Prajñā → Pāramitā-Bodhisattva. Uncontroversial Mahāyāna canon; minimal lineage-deference gate.
+
+4. **Plan C — Vajrayāna / Mikkyō 4-Initiation INSPIRED (alternative):** Q1 Vase / Q2 Secret / Q3 Wisdom-Knowledge / Q4 Word → Vajrasattva-Aligned World Bodhisattva. **"Inspired by" framing load-bearing** — not actual abhiṣeka; Joshin Sensei consent + Pearl_Editor lineage-holder review **mandatory** before ship per Q-OP-CROSS-TRADITION-DEFERENCE-01.
+
+5. **Plan D — Tao-Buddha-Hindu-Pearl Polestar (alternative — maximum alliance fit):** Q1 Taoist (Pure-Qi) / Q2 Buddhist (Karuṇā) / Q3 Hindu (Dharma Body — Sai Maa via Acharya Dayananda Das candidate) / Q4 Ahjan Pearl Transmission synthesis → Vairocana World Bodhisattva (converges with Plan A's Q4 name).
+
+6. **Comparison matrix in spec §7** — side-by-side; Pearl_Architect's recommendations summarized.
+
+7. **Pearl News feedback loop (spec §8):**
+   - **Monthly Volunteer Digest** — per-volunteer, per-level domain-filtered top-N world-good-news stories
+   - **Implementation:** new pipeline `pearl_news/pipeline/volunteer_digest.py` (sibling of `run_article_pipeline.py`); new config `pearl_news/config/level_domain_filters.yaml`; new state file `artifacts/programs/sangha_karma_yoga/volunteer_roster.yaml`
+   - **Closing tagline (Q-OP-DIGEST-LANGUAGE-01 default humble framing):** *"These are the world's gifts this month — and your year of service is one of the conditions that lets them flourish."*
+   - **Anti-spam:** monthly cadence max; no marketing copy; per-volunteer opt-in default-on-active-status
+
+8. **Empowerment ceremony shape (spec §9):** 90-min special Sunday — pre-ceremony silence (10) + teaching (30-45) + empowerment/alignment moment (15-20) + naming (10) + closing dedication (5-10). Q4 = Joshin teaches Shingon first; Ahjan Pearl Transmission seals (Q-OP-Q4-DUAL-MASTER-01 default).
+
+9. **3 new ws rows** appended to `ACTIVE_WORKSTREAMS.tsv`:
+   - `ws_pearl_news_volunteer_digest_pipeline_20260606` (Pearl_News + Pearl_Dev) — proposed
+   - `ws_pearl_editor_world_master_lineage_doc_20260606` (Pearl_Editor) — proposed
+   - `ws_pearl_marketing_levels_recruitment_copy_20260606` (Pearl_Marketing) — proposed; gated on Q-OP-PROGRESSION-SHIP-01
+
+10. **Q-OP-* count: 17** in spec §11. Master rotation (Q-OP-MASTER-ALLIANCE-CONFIRM-01) ratified 2026-06-09; 16 remain.
+
+11. **Anti-drift:** No fabricated lineage details — `[verify with Pearl_Editor + lineage holder]` flagged where uncertain (3 instances in spec). Reverence first, always. Plan C "inspired by" caveat load-bearing. No promise of supernatural attainments in declarative language — alignment + intention + vessel-becoming framing. Operator's voice = reference.
+
+**Anti-drift check:** Does not edit parent `SANGHA-KARMA-YOGA-V1-01` cap entry. Does not touch V1 spec body — only V1 §18 cross-link added. Does not duplicate Pearl News spec — supplements with volunteer-digest sibling pipeline. No Path X / music-mode / Sangha-brand-ID touches. No paid LLM APIs (volunteer-digest = Tier 2 local Gemma/Qwen acceptable).
+
+**Handoffs:**
+- **Operator** — answers Q-OP-* (especially PROGRESSION-SHIP-01 + LEVEL-NAMES-PLAN-A + LEVEL-4-NAME-PRIMARY-01 + Q4-DUAL-MASTER-01 + CROSS-TRADITION-DEFERENCE-01 + DECK-DIRECT-ADDRESS-01 for V1.5 appendix slide A16)
+- **Pearl_News + Pearl_Dev** — ws_pearl_news_volunteer_digest_pipeline_20260606 (gated on operator Plan selection → drives config)
+- **Pearl_Editor** — ws_pearl_editor_world_master_lineage_doc_20260606 (gated on operator Plan selection + Q-OP-CROSS-TRADITION-DEFERENCE-01; coordinates lineage-holder review per tradition in chosen plan)
+- **Pearl_Marketing** — ws_pearl_marketing_levels_recruitment_copy_20260606 (gated on operator Plan selection)
+
+**Pointers:**
+- `docs/specs/SANGHA_KARMA_YOGA_LEVEL_PROGRESSION_SPEC.md` (V1.5 spec, 17 sections + 17 Q-OP)
+- `artifacts/programs/sangha_karma_yoga_20260606/SANGHA_KARMA_YOGA_LEVELS_OVERVIEW.md` (V1.5 prose companion)
+- `artifacts/programs/sangha_karma_yoga_20260606/SANGHA_KARMA_YOGA_LEVELS_APPENDIX.pptx` (V1.5 deck appendix, 16 slides)
+- `artifacts/coordination/ACTIVE_WORKSTREAMS.tsv` (3 new ws rows)
+- Parent cap `SANGHA-KARMA-YOGA-V1-01` (this state doc)
+- `SOURCE_OF_TRUTH/teacher_banks/{joshin,master_feung,master_wu,junko}/doctrine/doctrine.yaml` (per-master canonical tradition)
+- `pearl_news/pipeline/run_article_pipeline.py` (volunteer-digest sibling-pattern reference)
+
+#### PEARL-PRIME-STOREFRONT-V1-01 — AMENDMENT-2026-06-04.2 — PARALLEL-DISPATCH-RESOLUTION (canonicalized **ratified** 2026-06-12)
+
+**Status:** **ratified** — canonical state-doc landing of `AMENDMENT-2026-06-04.2` (parallel-dispatch surfacings S1/S2/S3 + ja-JP freebie launch-blocker gap + 5-PR merge-order). The amendment's four operator questions were **answered = (a)** and ratified 2026-06-06 via `OPD-20260606-001..016` (logged on main in PR [#1480](https://github.com/Ahjan108/phoenix_omega_v4.8/pull/1480) SHA `11843f9f8`) and the Phase-A tracker iter-2 **seed ratification** in PR [#1481](https://github.com/Ahjan108/phoenix_omega_v4.8/pull/1481) SHA `c1506b171` (merged 2026-06-10). This entry canonicalizes the cap record that PR #1455 authored but could not land (closed on a merge conflict) and applies the deferred coordination mutations. Parent cap `PEARL-PRIME-STOREFRONT-V1-01` remains **`active`**; this is a layered amendment, not a re-author.
+
+**Context:** Pearl_PM dispatched 5 parallel storefront ws on 2026-06-06 (against `AMENDMENT-2026-06-04` HEAD `eb9c4ab84`, PR #1446). All five returned, were operator-reviewed, and have now **merged**: PM tracker [#1448](https://github.com/Ahjan108/phoenix_omega_v4.8/pull/1448) `da691d6c4` · Pearl_Int CF+Snipcart scaffold [#1450](https://github.com/Ahjan108/phoenix_omega_v4.8/pull/1450) `5a481c1e2` · Pearl_Dev 12 UI mockups (en-US + ja-JP) [#1452](https://github.com/Ahjan108/phoenix_omega_v4.8/pull/1452) `4c4ac5e0c` · Pearl_Marketing HARD CTA cutover + CI guard [#1453](https://github.com/Ahjan108/phoenix_omega_v4.8/pull/1453) `2aa09807b` · Pearl_Writer Stage-1 atom audit [#1454](https://github.com/Ahjan108/phoenix_omega_v4.8/pull/1454) `db52b0293`. The merge order followed the ratified `Q-PRP-MERGE-ORDER-01=(a)` sequence (#1448 → #1454 → #1450 → #1452 → #1453).
+
+**Ratified decisions (all = default (a); full decision-cards in the closed PR #1455 diff + the iter-2 tracker):**
+1. **Q-PRP-WRITER-AUDIT-STAGE-02 = (a) Stage-2a localized-first** — external-reference risk concentrates in localized variants (find-grep: 9 files — 6 zh-TW + 1 zh-CN + 2 ja-JP) vs only 2 flags in 4,805 en-US variants. Dispatches `ws_pearl_writer_next_step_atom_audit_stage_2a_localized_20260606`.
+2. **Q-PRP-JA-JP-FREEBIE-GAP-01 = (a) spawn new ws** — `brand-wizard-app/public/free_ja/` does not exist; 15 ja-JP freebie pages are a Phase-A precondition before the HARD CTA cutover can claim ja-JP coverage (Q-PRP-ROLLOUT-01 Full P1+P2). Dispatches `ws_pearl_marketing_ja_jp_freebie_pages_authoring_20260606`.
+3. **Q-PRP-SKU-MAP-PROJECTOR-01 = (a) projector matches hand-curated schema** — the 17,688-row `config/storefront/sku_url_map.yaml` is spec-conformant and remains canonical until a future projector is verified-matching.
+4. **Q-PRP-MERGE-ORDER-01 = (a) recommended sequence** — observed cascade matched.
+
+**Coordination mutations applied in this PR (`artifacts/coordination/ACTIVE_WORKSTREAMS.tsv`):**
+- Status flips (work merged → `completed`): `ws_pearl_prime_storefront_v1_ui_mockups_20260603` (#1452), `ws_pearl_prime_storefront_v1_cloudflare_wiring_20260603` (#1450 scaffold), `ws_pearl_writer_next_step_atom_audit_20260603` (#1454 Stage 1), `ws_freebie_cta_redirect_unification_20260603` (#1453). `ws_pearl_prime_storefront_v1_framework_research_20260603` was already `completed`.
+- **2 follow-on ws dispatched `runnable`** (all gates cleared: operator green = (a) ✓ via OPD-20260606-003/-015; prerequisite PRs #1453/#1454 merged ✓): `ws_pearl_marketing_ja_jp_freebie_pages_authoring_20260606` and `ws_pearl_writer_next_step_atom_audit_stage_2a_localized_20260606`. These are the Phase-2 implementation targets.
+
+**Anti-drift check:** Does NOT modify the parent `PEARL-PRIME-STOREFRONT-V1-01` cap (remains `active`) or any merged PR. Does NOT re-log the 16 OPDs (already on main via #1480 — no duplicate IDs minted). Does NOT implement (no freebie pages, no atom rewrites, no code). Pure append to this state doc + a coordination-row reconciliation. Preserves FROZEN invariants (Path X 37 brands, music 38+, Pearl Prime visual tokens, Cloudflare account `b80152c3…`, no paid LLM APIs).
+
+**Handoffs:** **Pearl_Marketing** → implement `ws_pearl_marketing_ja_jp_freebie_pages_authoring_20260606` (15 ja-JP freebie pages + ja-JP email/social CTAs). **Pearl_Writer** → implement `ws_pearl_writer_next_step_atom_audit_stage_2a_localized_20260606` (extend `scripts/ci/check_atoms_external_book_references.py` to localized variants). **Operator** → Phase-A launch remains gated (Snipcart operator-action slots, D1 live migrations, ja-JP freebie ws landing, Q-PRP-STOREFRONT-CONTENT-GATE-01 GREEN) — this entry dispatches work, it does not declare launch.
+
+**Pointers:** parent cap `PEARL-PRIME-STOREFRONT-V1-01` + `AMENDMENT-2026-06-04` (this state doc); `docs/specs/PEARL_PRIME_STOREFRONT_V1_SPEC.md` (§AMENDMENT-2026-06-04); `artifacts/coordination/storefront_v1_phase_a_tracker.md` (iter-2 ratification seed, #1481); `artifacts/coordination/operator_decisions_log.tsv` (OPD-20260606-001..016); closed source PR [#1455](https://github.com/Ahjan108/phoenix_omega_v4.8/pull/1455) (full decision-cards).
+
+### CANONICAL-ARTIFACTS-REGISTRY-V1-01 — Canonical Artifacts Registry + reinvention guard (anti-reinvention Layers 1+2+3) (**ACTIVE** 2026-06-12; ratified 2026-06-12)
+
+**Status:** **ACTIVE** — Q-CAR defaults ratified 2026-06-12 (governance-mechanism, in-envelope; OPD logged). Phase-1 deliverables (spec + registry seed + allowlist schema + principle 9) ship in this PR; the guard `.py` build + full sweep are Phase-2 child workstreams.
+
+**Spec:** `docs/specs/CANONICAL_ARTIFACTS_REGISTRY_SPEC.md` (V1, 9 sections). Registry data: `artifacts/coordination/CANONICAL_ARTIFACTS_REGISTRY.tsv` (9-col TSV, 8 seed rows). Allowlist: `config/governance/reinvention_allowlist.yaml` (empty schema seed). Layer-1 reflex: `docs/agent_brief.txt` §9 "Reuse before authoring".
+
+**Context:** Phoenix Omega's recurring expensive failure = an agent greenfields a NEW X instead of editing the canonical X that already exists, leaving two parallel implementations that drift (the teacher-photo PR#773 overwrite, parallel-assembler / parallel-CLI risks). This cap ratifies a **three-layer anti-reinvention system**: Layer 1 = router reflex (principle 9), Layer 2 = a machine-readable Canonical Artifacts Registry (concept_key → canonical_path → owner), Layer 3 = a reinvention guard EXTENDING `scripts/ci/pr_governance_review.py`. The registry **promotes** (does not replace) the known-good anchors registry in this state doc + `SUBSYSTEM_AUTHORITY_MAP.tsv` into a single file-level lookup.
+
+**Cross-reference:** `SUBSYSTEM_AUTHORITY_MAP.tsv` owns subsystem→authority-doc→owner at the **directory** level; this registry operates at the **specific-file** level (the `subsystem` column is the cross-link). The **known-good anchors registry** (this state doc) remains the prose source of truth for drift history; the registry TSV promotes its highest-confidence facts — prose wins on conflict, TSV `last_verified` refreshes. `pr_governance_review.py` gains ONE check (`check_reinvention`) alongside its existing six — extended, not forked. `DOCS_INDEX.md` is referenced by the registry's authority-doc rows, not duplicated. LLM Tier policy (CLAUDE.md + `.github/workflows/llm-policy-enforcement.yml`) governs the guard's content-overlap arm.
+
+**Decision (ratified Q-CAR defaults):**
+
+1. **SEVERITY = WARN-only (Phase 1).** `check_reinvention()` emits WARN, never BLOCKED, in its first iteration. A false-positive block on a legitimately-new artifact is worse than a missed reinvention. Promotion to BLOCKED for `NO-without-ratification` rows is deferred, gated on false-positive-rate data from real PRs.
+
+2. **SCOPE = seed ~6-10 high-confidence rows now; full sweep deferred.** Registry ships with 8 verified seed rows (each `canonical_path` confirmed on `origin/main` 2026-06-12). The full-repo canonical-artifact enumeration is `ws_pearl_github_canonical_registry_full_seed_sweep_20260612` — this cap does NOT block on it.
+
+3. **OVERLAP-THRESHOLD = 0.80, Tier-2-local; path-match arm ships first.** The guard has two arms: (a) a deterministic **path-match** arm (full normalized `canonical_path` comparison) that ships first in Phase 2, and (b) a semantic **content-overlap** arm (cosine ≥ 0.80) flagged for Phase 2 that MUST use a local embedding model (Gemma/Qwen via Ollama per `config/governance/allowed_llm_patterns.yaml`) — **never a paid LLM API** (a paid-API guard would itself be blocked by llm-policy-enforcement).
+
+4. **OVERRIDE-TAG = `NEW-ARTIFACT-JUSTIFIED: <reason>` + a registry row same-PR.** A genuinely-new artifact is authored by tagging the PR body and adding its own registry row in the same PR. A path colliding with a `NO-without-ratification` row additionally requires a cap-entry / operator ratification (tag alone is insufficient). Standing recurring mirrors go in `config/governance/reinvention_allowlist.yaml` (ships empty).
+
+5. **VERIFY-CADENCE = opportunistic + quarterly.** `last_verified` is refreshed whenever an agent touches a canonical, plus a quarterly sweep.
+
+6. **MATCH-ALGO = full normalized `canonical_path` (NOT bare basename).** Bare-basename matching false-positives on `CANONICAL.txt` / `README.md` / `config.yaml`; full-path normalization avoids them.
+
+7. **LAYER1-COUPLING = principle 9 authored in THIS PR.** `docs/agent_brief.txt` §9 sits between §8 and `## Revert` (additive, revertable; the `## Revert` instruction covers it) and cites the registry **"when present"** so the brief stays valid on refs where the registry has not yet landed.
+
+**Child workstreams (Phase-2 build targets; proposed):**
+- `ws_pearl_github_canonical_registry_full_seed_sweep_20260612` (Pearl_GitHub, `integrations`) — sweep the repo for all canonical artifacts, expand the registry beyond the 8 seed rows.
+- `ws_pearl_dev_reinvention_guard_extension_20260612` (Pearl_Dev, `pearl_devops`) — BUILD `check_reinvention()` + `load_canonical_registry()` in `pr_governance_review.py` (path-match arm first; content-overlap arm Tier-2-local).
+
+**Anti-drift check:** No implementation code in Phase 1 — the spec DESCRIBES the guard; a Phase-2 ws BUILDS it. No paid LLM API anywhere — content-overlap arm is Tier-2-local (Ollama) by hard constraint. Reuse-not-greenfield — extends `pr_governance_review.py`, promotes (does not replace) the known-good anchors registry + `SUBSYSTEM_AUTHORITY_MAP.tsv`, does not duplicate `DOCS_INDEX.md`. Every seed row verified on `origin/main` at authoring. Registry + allowlist confirmed absent before authoring (clear to create, no duplication).
+
+**Handoffs:**
+- **Pearl_GitHub** — `ws_pearl_github_canonical_registry_full_seed_sweep_20260612`: full canonical-artifact sweep, expand registry under review.
+- **Pearl_Dev** — `ws_pearl_dev_reinvention_guard_extension_20260612`: build `check_reinvention()` (path-match arm first; content-overlap Tier-2-local; WARN-only).
+- **Pearl_PM** — coordination cleanup picks up this PR; serializes registry-row appends behind any in-flight `SUBSYSTEM_AUTHORITY_MAP.tsv` writes (both are hot coordination files).
+
+**Pointers:**
+- `docs/specs/CANONICAL_ARTIFACTS_REGISTRY_SPEC.md` (V1 spec, 9 sections)
+- `artifacts/coordination/CANONICAL_ARTIFACTS_REGISTRY.tsv` (9-col, 8 seed rows)
+- `config/governance/reinvention_allowlist.yaml` (empty schema seed)
+- `docs/agent_brief.txt` §9 "Reuse before authoring" (Layer 1 reflex)
+- `scripts/ci/pr_governance_review.py` (Layer 3 host; gains `check_reinvention` in Phase 2)
+- `artifacts/coordination/SUBSYSTEM_AUTHORITY_MAP.tsv` (directory-level companion; cross-link via `subsystem`)
+- `config/governance/allowed_llm_patterns.yaml` (Tier-2 Ollama routing for the content-overlap arm)
+- Known-good anchors registry (this state doc) — prose source of truth the registry promotes
+
+### AGENT-SYSTEM-IMPROVEMENT-V2-01 — Agent-system improvement V2: ratify the 2026-06-11 roadmap P0 tier as a new root cap (Langfuse tracing + DeepEval/agentevals eval; `agent_observability` subsystem) (**ACTIVE** 2026-06-12; ratified)
+
+**Status:** **ACTIVE** (ratified 2026-06-12). In-envelope batch-default ratification of the P0 tier of the agent-systems improvement roadmap, per the OPD-055/056 batch-accept-to-stated-defaults precedent (logged this cap as OPD-PLACEHOLDER). Stands **independently of PR #1507 merging** — #1507 is open do-not-merge research; the roadmap content is reproduced in the spec so the cap does not gate on that PR landing.
+
+**Spec:** `docs/specs/AGENT_SYSTEM_IMPROVEMENT_V2_SPEC.md` (new; Phase-1 governance/spec-doc only — DESCRIBES the six P0 builds, ships no implementation code).
+
+**Context:** Pearl_Research's 2026-06-11 SOTA audit (`artifacts/research/agent_systems_audit_20260611/` — PR #1507) scored our 14-agent system vs 2025–26 agent best-practice: **9 doing / 7 partial / 6 gap**. Top gaps = no agent-trajectory eval, no observability/tracing, no skill-eval harness, plus handoff/registry items the 2026-04 spec **designed but never shipped**. The `IMPROVEMENT_ROADMAP.md` prioritized **P0×6 / P1×7 / P2×6**, finish-what-exists first, Tier-2-filtered (zero paid-LLM-API), 🏛-flagged. This cap ratifies the **P0 tier** + two default tool choices.
+
+**Cross-reference:** Extends (does NOT re-litigate) `docs/AGENT_SYSTEM_AUDIT_2026_04.md` + `docs/AGENT_SYSTEM_IMPROVEMENT_SPEC.md` (P0-1 finishes the §5 `check_agent_registry.py` validator named "future"; P0-5 finishes the §4 `AGENT_HANDOFF_SPEC.md` outline — both verified absent on `main` 2026-06-12). New project **`PRJ-AGENT-SYSTEM-IMPROVEMENT-V2`**. New subsystem **`agent_observability`** (owner Pearl_DevOps). Anchor: roadmap `artifacts/research/agent_systems_audit_20260611/IMPROVEMENT_ROADMAP.md` + `SYSTEMS_TOOLING_OPPORTUNITIES.md`.
+
+**Decision (ratification package):**
+
+1. **Six P0 items ratified** (reproduced verbatim in spec §2 with owners + 🏛 flags): P0-1 `scripts/ci/check_agent_registry.py` (Pearl_GitHub; non-🏛); P0-2 run skill-creator evals on the 4 skills (non-🏛); P0-3 trim `skills/pearl-github/SKILL.md` (479/500 lines on `main`; non-🏛); P0-4 stand up Langfuse-or-Phoenix self-hosted + trace ONE pipeline e2e (Pearl_DevOps; 🏛); P0-5 write `docs/AGENT_HANDOFF_SPEC.md` (Pearl_PM; 🏛 doc-only); P0-6 add `consolidate-memory` cadence for `MEMORY.md` (Pearl_PM; non-🏛).
+
+2. **Tracing default = Langfuse (self-hosted, Apache-2.0)** with **Arize Phoenix as a sanctioned drop-in alternate** (vendor-agnostic, local/Docker, native Claude Agent SDK support). Both self-hosted/free/OTel-GenAI-shaped; Pearl_DevOps may swap Langfuse→Phoenix in the P0-4 pilot without re-ratification.
+
+3. **Eval default = DeepEval (Apache-2.0) + agentevals (MIT), LOCAL Gemma/Qwen judge** as the **primary** harness (component metrics + trajectory scoring), with **RAGAS** (claim-level faithfulness for ei_v2/pearl_news citations) and **CometKiwi** (reference-free MT QE for translation) as **domain companions, not primary**.
+
+4. **New subsystem named `agent_observability`, NOT `observability`** — `observability` is already a used subsystem token on `main` (production-KPI / control-plane surface, e.g. `ws_content_inventory_20260407`); `agent_observability` is collision-free (verified) and keeps agent-trajectory tracing distinct from production-KPI observability. Registration to `SUBSYSTEM_AUTHORITY_MAP.tsv` is a Phase-2 task (not done in this cap).
+
+5. **Dispatch gating:** the 4 non-🏛 P0 (P0-1/-2/-3/-6) = **first operator-approved runnable batch** (self-contained, finish-what-exists, near-zero-risk). The 2 🏛 P0 (P0-4/-5) = ratified but **dispatch-gated on `PEARL_ARCHITECT_STATE.md` cascade-settle** (serial-lane discipline for hot-governance-file work) → ws status `proposed`, hold for operator "cascades settled" signal.
+
+**Child workstreams (Phase 2 builds — this cap ships NO code):**
+- `ws_agent_observability_langfuse_pilot_20260612` (Pearl_DevOps; `agent_observability`) — P0-4; **proposed** (🏛, cascade-gated).
+- `ws_agent_eval_harness_deepeval_agentevals_20260612` (eval-tooling) — DeepEval+agentevals harness + P0-2 skill-creator evals; **proposed** (P0-2 callable in the runnable batch; CI-gate wiring waits on P0-4 substrate).
+- `ws_agent_design_gap_closures_20260612` (design-gap-closures) — P0-1 (`check_agent_registry.py`, Pearl_GitHub), P0-3 (SKILL.md trim, Pearl_GitHub), P0-6 (consolidate-memory cadence, Pearl_PM) **runnable**; P0-5 (`AGENT_HANDOFF_SPEC.md`, Pearl_PM, 🏛 doc-only) held with the cascade-gated items.
+
+**Anti-drift check:** Does NOT adopt a paid LLM API (all eval judges = local Gemma/Qwen; all tracing = self-hosted). Does NOT adopt LangGraph/CrewAI/AutoGen/OpenAI-Agents-SDK as a runtime (borrow patterns + OSS components, not a framework — reuse-first / agent-audit #22). Does NOT rewrite the 2026-04 audit/spec — extends + finishes their unshipped items. Does NOT duplicate the existing production-KPI `observability` surface — `agent_observability` is a distinct subsystem/axis/owner. Ships no implementation code (Phase 1).
+
+**Handoffs:** Phase-2 dispatch of the runnable batch (P0-1/-2/-3/-6) → owners (Pearl_GitHub, Pearl_PM, authoring agents) on operator approval of this cap. 🏛 items (P0-4/-5) → held in the post-settle serial queue; router hands them back on the operator "cascades settled" ping. P1/P2 roadmap tiers deferred to a future spec.
+
+**Pointers:** spec `docs/specs/AGENT_SYSTEM_IMPROVEMENT_V2_SPEC.md`; roadmap `artifacts/research/agent_systems_audit_20260611/IMPROVEMENT_ROADMAP.md`, `SYSTEMS_TOOLING_OPPORTUNITIES.md`, `AGENTS_BEST_PRACTICE_AUDIT.md`, `SKILLS_BEST_PRACTICE_AUDIT.md` (PR #1507); prior `docs/AGENT_SYSTEM_AUDIT_2026_04.md` + `docs/AGENT_SYSTEM_IMPROVEMENT_SPEC.md`; subsystem map `artifacts/coordination/SUBSYSTEM_AUTHORITY_MAP.tsv`; registry `config/agents/agent_registry.yaml`; OPD precedent OPD-20260611-055/056.
+
+### MUSIC-ONBOARDING-SONG-KIT-V1-01 — Music onboarding song-kit V1: survey→generator engine + 8-family topic taxonomy + YouTube→freebie bridge + Ahjan reference kit (**proposed** 2026-06-12; needs Phase-2 build + operator ratification)
+
+**Status:** **proposed** — Phase-1 governance + spec doc + config-schema + coordination ONLY; **no** implementation code in this PR (the spec DESCRIBES the generator engine; a Phase-2 ws BUILDS it). Layers atop the ACTIVE `MUSIC-MODE-V1-01-AMENDMENT-V2-PRODUCTION-READINESS`. Flips to **active** when operator answers Q-MSK defaults + a Phase-2 build ws is dispatched.
+
+**Spec:** [`docs/specs/MUSIC_ONBOARDING_SONG_KIT_V1_SPEC.md`](specs/MUSIC_ONBOARDING_SONG_KIT_V1_SPEC.md)
+
+**Context:** Music-mode V1/V2 give a musician a brand (38+), a survey, a 6-pool atom bank, an injection overlay, a registry, freebie templates, and diversity gates — but the 6 slot-pool atoms (`LYRIC_OPENING`/`CLOSING`/`BESTSELLER_BEAT` + `MUSIC_REFLECTION_OPENING`/`CLOSING`/`BESTSELLER_BEAT`) are **hand-authored** today (see `SOURCE_OF_TRUTH/musician_banks/test_artist_alpha/`); there is no survey→lyrics or survey→mood-instruction engine. The "Song-Kit" is the onboarding deliverable closing that gap: a tier-compliant survey→generator flow producing a first draft kit of atoms (lyric atoms on the with-lyrics fork; MusicGen mood-instruction TEXT on the no-lyrics fork), grouped by an 8-family topic taxonomy, with **Ahjan as the zeroth/reference kit** seeded from the existing `teacher_banks/ahjan/` corpus. Reuses verbatim: the survey lyrical/instrumental fork (`output_preferences_with_lyrics` vs `output_preferences_no_lyrics` already in `SURVEY_TEMPLATE.yaml`); `phoenix_v4/musician/survey_derivation.py`; the 6 slot pools + 2P templates; `phoenix_v4/planning/music_overlay.py`; `config/music/music_brand_registry.yaml`; `funnel/music_mode/templates/m1..m5`; the ratified G1–G8 diversity gate; `config/source_of_truth/canonical_topics.yaml`. Net-new: the survey→generator ENGINE (spec'd, not built), the 8-family taxonomy, the YouTube→freebie bridge (config schema only), and the Ahjan reference kit.
+
+**Cross-reference:** **`MUSIC-MODE-V1-01`** (rendering / `musician_banks/` / 6 slot pools / 2P templates / survey template — generator emits INTO this structure unchanged). **`MUSIC-MODE-BRAND-INTEGRATION-V1-01`** (+ AMENDMENT-2026-05-09 Q1–Q4 — Ahjan registers as `ahjan_music` per Q2 `<handle>_music` slug). **`MUSIC-MODE-V1-01-AMENDMENT-V2-PRODUCTION-READINESS`** (ACTIVE — Phase A launch gate, MusicGen Phase B + `PEARL-STAR-JOB-QUEUE-V1-01` dependency, atom-coverage SSOT, the priority-backfill ws this generator complements; this cap does NOT modify V2 text). **`MUSIC-MODE-BRAND-INTEGRATION-V1-01-AMENDMENT-DIVERSITY-GATES`** (G1–G8 — REUSED, not duplicated). **`MUSIC-MODE-FREEBIE-FUNNEL-V1-02`** (`funnel/music_mode/templates/m1..m5` — YouTube bridge reuses these freebie templates verbatim; new freebie *types* remain that cap's scope). **`SPEC-739-THRESHOLD-01`** (3-variant floor / 5 optional ceiling — kit completion gate).
+
+**Decision:**
+
+1. **8-family topic taxonomy RATIFIED (default)** per spec §2 + `config/music/song_kit_topic_families.yaml`: `recovery_and_repair` / `quiet_courage` / `presence_and_stillness` / `anxiety_and_overwhelm` / `grief_and_letting_go` / `self_worth_and_shame` / `connection_and_belonging` / `hope_and_renewal`. Additive grouping LABELS over canonical `topic_ids` (subset of `config/source_of_truth/canonical_topics.yaml`); does NOT mint new topic_ids and does NOT touch the en-US persona×topic grid or `canonical_brand_list.yaml`.
+2. **Survey→generator engine SPEC'D (not built)** per spec §3: consumes `SURVEY_TEMPLATE.yaml` (fork reused verbatim) + `survey_derivation.py` derived dicts + the family mapping; with-lyrics→lyric atoms, no-lyrics→MusicGen mood-instruction TEXT; emits into the existing 6-pool atom structure (no new pools/schema/vars); drafts are PROPOSED + human-reviewed (Tier 1). Phase-2 build target.
+3. **Engine tier = Claude subagents (Pearl_Writer) PRIMARY** for English lyrics/reflections (Tier 1, operator-present); Qwen CJK6-only; Gemma-Ollama unattended fallback. No paid LLM APIs (CLAUDE.md Tier policy + `llm-policy-enforcement.yml`; engine must pass `scripts/ci/audit_llm_callers.py`).
+4. **No-lyrics output = MusicGen mood-instruction TEXT only** in V1; WAV render Phase-B-gated per `MUSIC-MODE-V1-01-AMENDMENT-V2-PRODUCTION-READINESS` §6 (`PEARL-STAR-JOB-QUEUE-V1-01` not yet on main).
+5. **Kit completion gated to `SPEC-739-THRESHOLD-01` ≥3 variants/pool**; diversity across variants = the ratified **G1–G8** gate — song-kit authors NO parallel gate (reuse-not-greenfield).
+6. **Ahjan = zeroth/reference kit** (`brand_id ahjan_music`, bank `SOURCE_OF_TRUTH/musician_banks/ahjan/`, registered in `music_brand_registry.yaml`), seeded from the existing `SOURCE_OF_TRUTH/teacher_banks/ahjan/` corpus. **Does NOT silently collapse V2's open `Q-MM-V2-FIRST-REAL-MUSICIAN-01`** (operator-nominated first *real* external musician) — see FLAGGED `Q-MSK-AHJAN-VS-V2-FIRST-01`.
+7. **YouTube→freebie = SPEC + config schema ONLY** in V1 (`config/music/youtube_freebie_bridge.yaml`: empty `bridge_entries`, one commented example, no real video ids). Maps `video_id`→email-gate→existing m1..m5 freebie template. YT API upload deferred to a Pearl_Marketing/Pearl_Int ws that MUST verify creds in `docs/INTEGRATION_CREDENTIALS_REGISTRY.md §13` (per-brand `YT_*` OAuth, marked "Missing" for some brands) BEFORE wiring — do not assume creds.
+
+**Child workstreams (4 rows added to `artifacts/coordination/ACTIVE_WORKSTREAMS.tsv` under this PR; all `proposed`; Phase-2 build targets gated on operator green-light + Phase-2 dispatch):**
+
+1. `ws_pearl_editor_song_kit_generator_20260612` — build the survey→generator orchestrator (Pearl_Editor + Pearl_Writer; consumes `survey_derivation.py` + families; emits draft atoms into the 6 pools; Tier 1).
+2. `ws_pearl_dev_lyric_mood_instruction_engine_20260612` — the with-lyrics lyric-draft path + no-lyrics MusicGen mood-instruction-text path (Pearl_Dev scaffolding; LLM calls route to Pearl_Writer/Qwen/Gemma per Tier policy; no paid API).
+3. `ws_pearl_editor_pearl_writer_ahjan_first_reference_kit_20260612` — author the Ahjan survey + run the generator + review/promote the 6-pool reference kit seeded from `teacher_banks/ahjan/` (Pearl_Editor + Pearl_Writer; Tier 1).
+4. `ws_pearl_marketing_youtube_freebie_bridge_wiring_20260612` — YT→freebie wiring (Pearl_Marketing + Pearl_Int; verify `INTEGRATION_CREDENTIALS_REGISTRY.md §13` creds FIRST; reuse m1..m5 verbatim; populate `youtube_freebie_bridge.yaml` `bridge_entries`).
+
+**Project opened:** `PRJ-MUSIC-ONBOARDING-SONG-KIT-V1` (status=proposed) in `artifacts/coordination/ACTIVE_PROJECTS.tsv`; owner=Pearl_Architect (spec) + Pearl_Editor (generator/kit execution).
+
+**Anti-drift check:** Does NOT modify `MUSIC-MODE-V1-01`, `MUSIC-MODE-BRAND-INTEGRATION-V1-01`, the V2 amendment, the diversity-gate amendment, or the freebie cap entry text — layers a new cap + spec + 2 config files. Does NOT mint engine/generator/resolver code (Phase-2 ws builds it). Does NOT add new slot pools, atom schema, template vars, or survey fields (reuses the on-main structures verbatim). Does NOT mint new `topic_ids` — families are additive labels ⊂ `canonical_topics.yaml`; the en-US persona×topic grid and `canonical_brand_list.yaml` are untouched. Does NOT author a parallel diversity gate (reuses ratified G1–G8). Does NOT author new freebie types (reuses m1..m5; new types stay `MUSIC-MODE-FREEBIE-FUNNEL-V1-02`). Does NOT assume YouTube creds — references the registry and gates wiring on a credential check. Does NOT introduce paid LLM APIs (CLAUDE.md Tier policy; `audit_llm_callers.py`). Does NOT collapse `Q-MM-V2-FIRST-REAL-MUSICIAN-01` — Ahjan reference kit stays distinct from the operator-nominated first real musician.
+
+**Handoffs:**
+
+- **Operator** → answer Q-MSK defaults (§7), especially FLAGGED `Q-MSK-AHJAN-VS-V2-FIRST-01` (do not collapse the V2 first-real-musician question); green-light Phase-2 build.
+- **Pearl_PM** → on green-light, advance the 4 child ws `proposed → runnable` and dispatch Phase-2 build prompts; `PRJ-MUSIC-ONBOARDING-SONG-KIT-V1` `proposed → active`.
+- **Pearl_Editor + Pearl_Writer** → generator orchestrator (ws #1) + Ahjan reference kit (ws #3); Tier 1.
+- **Pearl_Dev** → lyric/mood-instruction engine scaffolding (ws #2); LLM calls route per Tier policy; pass `audit_llm_callers.py`.
+- **Pearl_Marketing + Pearl_Int** → YouTube→freebie wiring (ws #4) AFTER verifying `INTEGRATION_CREDENTIALS_REGISTRY.md §13` creds.
+- **Pearl_Architect (separate session)** → on Phase-2 completion + operator answers, author the AMENDMENT flipping this cap `proposed → active`.
+
+**Pointers:** `docs/specs/MUSIC_ONBOARDING_SONG_KIT_V1_SPEC.md`; `config/music/song_kit_topic_families.yaml`; `config/music/youtube_freebie_bridge.yaml`; `artifacts/coordination/ACTIVE_PROJECTS.tsv` (`PRJ-MUSIC-ONBOARDING-SONG-KIT-V1`); `artifacts/coordination/ACTIVE_WORKSTREAMS.tsv` (4 `ws_*_20260612` rows); `artifacts/coordination/operator_decisions_log.tsv` (Q-MSK defaults row); `artifacts/musician_survey/SURVEY_TEMPLATE.yaml`; `phoenix_v4/musician/survey_derivation.py`; `phoenix_v4/planning/music_overlay.py`; `config/music/music_brand_registry.yaml`; `funnel/music_mode/templates/m1..m5`; `config/source_of_truth/canonical_topics.yaml`; `docs/INTEGRATION_CREDENTIALS_REGISTRY.md` (§13 YouTube); `docs/PEARL_ARCHITECT_STATE.md` (`MUSIC-MODE-V1-01`, `MUSIC-MODE-BRAND-INTEGRATION-V1-01`, `MUSIC-MODE-V1-01-AMENDMENT-V2-PRODUCTION-READINESS`, `...AMENDMENT-DIVERSITY-GATES`, `MUSIC-MODE-FREEBIE-FUNNEL-V1-02`, `SPEC-739-THRESHOLD-01`).
+
+### BESTSELLER-FIT-PLAN-VOICE-DOCTRINE-V1-01 — Dwell-beat craft gate + one-author/wrapper voice doctrine pinned binding on the bestseller overlay (**ACTIVE** 2026-06-12; ratified 2026-06-12)
+
+**Status:** **ACTIVE** — binding craft-layer additions to `docs/PEARL_PRIME_BESTSELLER_WRITING_OVERLAY_SPEC.md`. Pins (1) the dwell-beat gate as a new §13 rubric criterion #13 + §12 cross-ref row + §7.3 `insight→dwell→next` contract block, and (2) the one-author + wrapper voice doctrine as a new top-level "Voice Architecture: One Author + Wrappers" section. Ships the NEW `config/catalog_planning/science_wrapper_templates.yaml` template config. The gate-build / resolver-build / lint-build are Phase-2 workstreams (proposed) — this cap is governance + spec-doc + template-config only; no engine/gate/resolver code lands under it.
+
+**Spec:** `docs/PEARL_PRIME_BESTSELLER_WRITING_OVERLAY_SPEC.md` (587 → 741 lines; three additions only, everything else byte-for-byte preserved): §7.3 dwell-beat contract; §12 cross-ref row + §13 criterion #13 (Dwell); top-level "Voice Architecture: One Author + Wrappers" (11-row slot×treatment table + author-first/teacher_wrapper/science_wrapper/Stage-6-lint doctrine). New template config `config/catalog_planning/science_wrapper_templates.yaml` (mirrors `teacher_wrapper_templates.yaml`).
+
+**Context:** Two operator-craft concerns converge here. (1) **Integration pacing** (memory `project_integration_pacing_priority` — operator's #1 recurring craft concern): books race point-to-point with no dwell time to INTEGRATE, distinct from repetition. The fix is a dwell-beat craft gate, contracted as a sibling to the §7.1 INTEGRATION landing contract and the §4 five-moves, and pinned into the overlay's review rubric. (2) **One author, not a flattening**: the per-slot voice braid is already ratified (`OPD-20260606-005`, Q-OP-VOICE-BRAID-01 = option (b), slot-zoned), but the overlay never named the *architecture* that implies — a single orchestrating narrator that MODULATES register per the ratified zone table and REFERENCES (never becomes) the teacher/scientist. The risk this cap forecloses: an agent reading "one author" as "flatten to first-person," which would directly contradict `OPD-20260606-005`. Teacher material already enters via `teacher_wrapper_templates.yaml` (author-references-Ahjan); science material had no equivalent, so cited research risked entering as raw "Dr. X proved…" prose or an un-attributed first-person-as-scientist voice. This cap adds the science-wrapper mirror + the doctrine that both wrappers supply attribution **inside the slot's own zone**, never a new speaker.
+
+**Cross-reference:**
+- `OPD-20260606-005` (Q-OP-VOICE-BRAID-01 = (b) slot-zoned voice braid) — the ratified decision this cap binds into the overlay verbatim; the one-author principle is its binding reading, NOT a new voice rule.
+- `PEARL-PRIME-ONE-PATH-V1-01` (this state doc) — the overlay's rubric scoring is being promoted to runtime gates under D12–D20 of `docs/specs/PEARL_PRIME_ONE_PATH_LOCKDOWN_V1_SPEC.md`. This cap is **subordinate** to that lockdown track: the F12 un-wrapped-shift lint reuses D12's `VoiceOutOfZoneError` vocabulary; the science-wrapper resolver is a sibling of `teacher_wrapper.py`; COMPRESSION is deferred to the lockdown track as a proposed TEACHER_DOCTRINE sub-variant, not promoted to a 12th slot here.
+- D12 `VoiceOutOfZoneError` / `phoenix_v4/quality/voice_braid_gate.py` (lockdown spec §2) — owned by `ws_pearl_dev_one_path_phase_4_craft_gates_20260606`. The F12 lint COORDINATES with that build (shared error class); it does NOT duplicate it (D12 = cross-zone bleed; F12 = un-wrapped voice-shift).
+- On-main anchors: `phoenix_v4/planning/chapter_plan.py` `VALID_SLOT_TYPES` (11 canonical slots); `config/catalog_planning/teacher_wrapper_templates.yaml` + `phoenix_v4/rendering/teacher_wrapper.py` (`("", "")`-on-incomplete safety, author-references-Ahjan); `phoenix_v4/quality/register_gate.py` (F1–F8, F11 claimed; F9–F10 reserved gaps; F12 = next free id).
+
+**Decision (binding sections — ratification package):**
+
+1. **Dwell-beat gate is binding at review.** Pearl_Editor scores §13 criterion #13 (Dwell) on every chapter under this overlay. The existing gate language is unchanged ("zero fails and no more than two weaks") and now spans 13 criteria. A chapter that races point-to-point — three or more consecutive insight sentences with no dwell beat between them (integration starvation) — FAILS criterion #13. Dwell is defined (§7.3) as exactly one of: a body landing, a held silence, or a single concrete consequence; capped at ~40 words; a repeated dwell move falls under the §9 scaffold cap.
+
+2. **Dwell is distinct from repetition and from the closing landing.** §7.3 governs pacing *between insights inside the chapter body*; §7.1 governs the chapter's *closing* INTEGRATION beat; §9 governs *recurrence*. The three compose and do not overlap; criterion #13 references §7.3 only.
+
+3. **One author = one consciousness moving through registers, NOT one grammatical person.** The author modulates register per the `OPD-20260606-005` slot-zone table and REFERENCES (never becomes) the teacher/scientist. A flattening to undifferentiated first-person is prohibited as a contradiction of the ratified braid. The 11-row slot×treatment table in the new "Voice Architecture" section is the binding map (slot | V4.5 §ref | reader-experience role | ratified voice zone | wrapper applicability).
+
+4. **TEACHER_DOCTRINE is author-referencing-Ahjan (NOT "guide").** The TEACHER_DOCTRINE zone is "Ahjan-specific: author references Ahjan; never speaks *as* Ahjan," enforced by `teacher_wrapper.py` framing (mandatory; `("", "")` on incomplete = never an un-attributed teacher claim).
+
+5. **Science content enters via the NEW `science_wrapper_templates.yaml`, author-referencing-research.** The template mirrors `teacher_wrapper_templates.yaml` exactly: named / generalized / composite modes; `intro_wrapper` / `exercise_wrapper` / `conclusion_wrapper` each `{pattern, variants[], slot_requirements[]}`; slots `{RESEARCHER}` / `{FINDING}` / `{FIELD}` / `{STUDY}` / `{MECHANISM}`; anti-fabrication rule (named mode requires a real study + researcher, else fall back to generalized). The author REFERENCES the research; never narrates AS the scientist. The wrapper supplies attribution **inside the slot's own zone** (a FINDING in a REFLECTION stays authorial-I; a FINDING opening a STORY stays third-person omniscient).
+
+6. **Stage-6 voice-shift lint = F12 (specced-but-UNBUILT), `VoiceOutOfZoneError` vocabulary.** FAIL on an un-wrapped voice-shift (teacher/science register entered raw, bypassing the wrapper); WARN on a thin wrapper (present but degenerate attribution). F12 is the next free register-gate id (F9–F10 reserved, F11 claimed). It is the un-wrapped-shift SIBLING of D12's cross-zone-bleed check and reuses the same error class — one operator-facing vocabulary.
+
+7. **COMPRESSION is a proposed TEACHER_DOCTRINE sub-variant, deferred.** The canonical chapter-planning slot set remains the 11 in `VALID_SLOT_TYPES`; the gold-reference rendered grid collapses to 6 visible treatment classes. Promotion of COMPRESSION to a first-class slot is deferred to the `PEARL-PRIME-ONE-PATH-V1-01` lockdown track (D8 enumerates the `COMPRESSION` atom dir), not decided here.
+
+8. **No implementation code under this cap.** The gate-wiring, the science-wrapper resolver, and the F12 lint are Phase-2 builds (3 proposed ws rows below). This cap ships only: the overlay-spec edits, the `science_wrapper_templates.yaml` template config (data, not code), this cap entry, the ws/opd rows.
+
+**Child workstreams (proposed; Phase-2 builds):**
+- `ws_pearl_dev_voice_shift_lint_f12_20260612` (Pearl_Dev) — build the Stage-6 F12 un-wrapped-voice-shift lint in `register_gate.py`, raising `VoiceOutOfZoneError`; coordinate with the D12 `voice_braid_gate.py` build (shared error class).
+- `ws_pearl_dev_science_wrapper_resolver_20260612` (Pearl_Dev) — build `phoenix_v4/rendering/science_wrapper.py` as a sibling of `teacher_wrapper.py` consuming the new `science_wrapper_templates.yaml` (`("", "")`-on-incomplete safety + anti-fabrication fallback).
+- `ws_pearl_dev_dwell_beat_gate_wiring_20260612` (Pearl_Dev) — wire the §13 criterion #13 dwell-beat check into the register-gate / editor-scoring cascade (deterministic heuristic: insight-sentence run-length detector; no LLM API per CLAUDE.md Tier policy).
+
+**Anti-drift check:** No new architecture — names + pins decisions already on `origin/main` (voice braid ratified `OPD-20260606-005`; slot set fixed `VALID_SLOT_TYPES`; teacher wrapper exists; cross-zone gate already specced as D12). Reuse-not-greenfield: science wrapper MIRRORS the teacher wrapper (does not invent a new shape); F12 lint EXTENDS `register_gate.py` (does not add a parallel gate) and reuses D12's `VoiceOutOfZoneError` (does not coin a new error); the resolver is a SIBLING of `teacher_wrapper.py`. Subordinate to `PEARL-PRIME-ONE-PATH-V1-01` (does not edit its cap entry, its spec, or its Phase-4 ws; COMPRESSION deferred to that track). Overlay edit is additive only — 587→741 lines, everything else byte-for-byte preserved (verified by diff). No paid LLM APIs: all named gates/lints are deterministic heuristics; any prose authoring of new wrapper variants routes to Pearl_Writer (English) / Qwen (CJK6) / Gemma-Qwen-Ollama (unattended), never a paid API (CLAUDE.md Tier policy + `.github/workflows/llm-policy-enforcement.yml`). `feedback_discover_before_acting` honored — DISCOVERY established that the premise's "G1–G6 craft gates" do NOT exist on main (CRAFT_DEPTH_OVERLAY proposal unmerged; #1509 OPEN do-not-merge) and re-anchored every claim to on-main reality.
+
+**Handoffs:**
+- **Pearl_Dev** — three proposed ws above (F12 lint; science-wrapper resolver; dwell-beat-gate wiring); all gate on Phase-2 dispatch and coordinate with `ws_pearl_dev_one_path_phase_4_craft_gates_20260606` for the shared `VoiceOutOfZoneError` vocabulary.
+- **Pearl_Editor** — applies §13 criterion #13 (Dwell) at review immediately (spec-level binding; does not wait on the gate build); authors science-wrapper variant content (English via Pearl_Writer / CJK6 via Qwen) as the named/generalized/composite pools are widened.
+- **Pearl_PM** — sequences the three Phase-2 ws after `PEARL-PRIME-ONE-PATH-V1-01` Phase-4 readiness (the F12 lint shares D12's error class; build D12 first or in lockstep).
+
+**Pointers:**
+- `docs/PEARL_PRIME_BESTSELLER_WRITING_OVERLAY_SPEC.md` (§7.3 + §12 row + §13 criterion #13 + "Voice Architecture: One Author + Wrappers")
+- `config/catalog_planning/science_wrapper_templates.yaml` (NEW template config)
+- `config/catalog_planning/teacher_wrapper_templates.yaml` + `phoenix_v4/rendering/teacher_wrapper.py` (mirror source)
+- `phoenix_v4/planning/chapter_plan.py` (`VALID_SLOT_TYPES` — 11 canonical slots)
+- `phoenix_v4/quality/register_gate.py` (F-id registry; F12 = next free id)
+- `artifacts/coordination/operator_decisions_log.tsv` (`OPD-20260606-005` voice braid)
+- `docs/specs/PEARL_PRIME_ONE_PATH_LOCKDOWN_V1_SPEC.md` (D12 `VoiceOutOfZoneError`; `ws_pearl_dev_one_path_phase_4_craft_gates_20260606`)
+- `artifacts/coordination/ACTIVE_WORKSTREAMS.tsv` (3 new ws rows)
+- Input-only rationale source: PR #1509 fit-plan research (OPEN; do-not-merge; informs the dwell-beat framing, not cited as merged reality)
+
+### DURATION-DERIVATION-01 — Advertised duration is DERIVED from word target ÷ single-sourced `tts_wpm`, not hand-set; `format_registry.yaml` is canonical (**ACTIVE** 2026-06-12; ratified 2026-06-12)
+
+**Status:** **ACTIVE** (ratified 2026-06-12) — new spec `docs/DURATION_DERIVATION_SPEC.md`; mirrors the `AUTO-PLAN-SSOT-01` registry-as-SSOT pattern. The derivation methodology is binding; Phase-2 builds the config fields + CI guard. The one customer-facing number this changes (`standard_book` advertised 55→~147 min, decision 4) is logged as a **reversible OPD, flagged for operator**.
+**Spec:** `docs/DURATION_DERIVATION_SPEC.md` (NEW; this cap entry is its governance record).
+**Context:** The landed duration audit `artifacts/qa/duration_correctness_audit_20260611/` (PR #1510, `f27dafdb2`) proved that a runtime format's advertised duration is a **hand-set label** (`duration_minutes` in `config/format_selection/format_registry.yaml`), disconnected from the format's real word target and from the 150 WPM the product ships at. Headline: `standard_book` is advertised at **55 min** but is really **~143 min / 2h23m** as an audiobook at 150 WPM (**+161%**); 7 of 10 fully-specced formats run long past tolerance; implied WPM spans 125–364 with no formula. The books are gold-quality and the right length — **the labels are wrong.** The ONLY word→minute constant on main is `config/duration_scorecard.yaml tts_wpm:150` (+ `duration_tolerance_pct:10`), consumed solely by the read-only `phoenix_v4/ops/duration_adherence_scorecard.py` — never the source of the advertised number, so label and measurement silently disagree. Three fill regimes already exist implicitly (MIDPOINT = `beatmap_compile.py:651` ±10%-of-midpoint validator; CAP = `standard_book` depth-fill pins to ceiling; FLOOR = `deep_book_6h` "~52K final, clear 50K floor"). This is the broad systematic defect ("Mode 2"); the contained "Mode 1" cap-overshoot (`standard_book` 94% over cap, cap raised 13k→18k→20k while the label never moved) is the same root: words and minutes drift apart because nothing couples them.
+**Cross-reference:** mirrors `AUTO-PLAN-SSOT-01` (L438) + `-AMENDMENT` (L523) — single registry is the canonical home for a per-format value (there `chapter_count_default`; here the duration derivation inputs), and downstream readers DERIVE rather than hand-maintain a divergent copy. Honors the audit's own `RECOMMENDATIONS.md` (cap 20k→22k default at :32; single-source the WPM constant, item C; CJK deferral, item D). The §413 "TTS pace (flat, 150 WPM)" of `docs/PEARL_PRIME_BESTSELLER_WRITING_OVERLAY_SPEC.md` is the second confirmation of intended pace. Does NOT duplicate `duration_scorecard.yaml` — the derivation READS its `tts_wpm`.
+**Decision:**
+1. **Advertised duration becomes a derived pair**, single-sourced: `audiobook_minutes = round(word_target / 150)` and `ebook_minutes = round(word_target / 230)`, both stored per format; listings advertise the field matching the edition. The derivation READS `tts_wpm` from `config/duration_scorecard.yaml` (the same constant the adherence scorecard uses) — it MUST NOT hard-code 150 or re-declare it in `format_registry.yaml`. `ebook_wpm:230` is added once to the same scorecard config.
+2. **A new per-format `fill_regime` field** (`cap | floor | midpoint`) drives `word_target`: cap → `word_range[max]` (or a declared `cap_word_target`); floor → `round(word_range[min] × 1.04)`; midpoint → `round((min+max)/2)`. Initial assignments mirror the `regime` already recorded per-format in `projection_results.json` (standard_book=cap, deep_book_6h=floor, the other 8 = midpoint) — not new editorial choices.
+3. **`realistic_words = word_target` WITHOUT render_inflation.** The audit's `render_inflation 1.073` is a single-format anchor (flagged, extrapolated); the label stays deterministic from config alone. Cap-regime render overshoot is absorbed as cap headroom (decision 4), not folded into the advertised minutes.
+4. **`standard_book` cap reconciliation (the one operator-facing number):** derive the label from the REAL gold render (~21.5k → ~143 min audiobook), set `cap_word_target: 22000` (→ `audiobook_minutes 147`, `ebook_minutes 96`), and **raise the registry `word_range` ceiling 18,000 → 22,000** so the systematic ~21.5k render stops tripping the word-range gate. This replaces "raise the cap to mask overshoot, label never moves" with "raise the cap AND re-derive the label in the same change." Logged as an OPD (`in_envelope=yes`, reversible, **flagged for operator** — it changes a customer-facing advertised number 55→~147 min). NOTE: the audit/`RECOMMENDATIONS.md` frames this as "20k→22k" relative to the depth-fill target; against the registry ceiling on main it is **18k→22k**.
+5. **CI co-change guard (`check_duration_derivation()` in `scripts/ci/pr_governance_review.py`, registered in `main()` results ~L404–411).** v1 is **path-level** because `get_changed_files()` returns changed PATHS only (no diff values): if `format_registry.yaml` is in the changed set, the PR MUST also touch `docs/DURATION_DERIVATION_SPEC.md` (forces re-reading the derivation contract on any word_range edit), else **BLOCK** — downgradable to WARN via a human-reasoned `DURATION-DERIVATION-OK: <reason>` token. Acceptance band = **±15%** (recorded in spec/docstring; computed at v2 value-level), deliberately WIDER than the scorecard's measurement `duration_tolerance_pct:10` so the two accepted deep formats stay green (`deep_book_4h` −11%, `deep_book_6h` +2%). v2 (value-level: read the YAML at two refs, recompute, BLOCK if label outside ±15%) is a noted follow-up, not v1 scope.
+6. **Scope = en-US ONLY.** The derivation early-skips non-en-US (English word-count math); CJK (`ja-JP/zh-TW/zh-CN/ko-KR`) uses character counts + different narration rates and needs a SEPARATE char-based audit before any CJK duration claim ships — that audit is a deferred follow-up, NOT a child ws of this spec.
+7. **Stub formats** (the 10 `word_range`-less `AUTO-PLAN-SSOT-01-AMENDMENT` Group A formats) are SKIPped by both the derivation and the guard; the spec RECOMMENDS blocking them from any duration-advertising listing until `word_range` + derived minutes are populated (separate config task, not a child ws).
+8. **`duration_minutes` deprecated transitionally** (kept with a deprecation comment + overwritten with the derived value so un-migrated readers still advertise the honest number); reader migration (`duration_adherence_scorecard.py` + listing builders → `audiobook_minutes`/`ebook_minutes`) and final removal are a follow-up ws, not a child of this spec.
+**Child workstreams (PROPOSED — Phase-2 build targets; do not run in Phase-1):**
+- `ws_duration_derivation_config_build_20260612` (Pearl_Dev) — add `fill_regime` + `audiobook_minutes`/`ebook_minutes` (+ `standard_book.cap_word_target`) to the 10 fully-specced formats; raise `standard_book` ceiling 18k→22k; add the registry-loader derivation fn (reads `tts_wpm`/`ebook_wpm` from `duration_scorecard.yaml`, §4 formulas, en-US-only + word_range-less skips); deprecate `duration_minutes`; per-regime + reconciliation unit tests.
+- `ws_duration_derivation_ci_guard_20260612` (Pearl_Dev) — add `check_duration_derivation()` to `pr_governance_review.py` + register in `main()`; v1 path-level co-change BLOCK + `DURATION-DERIVATION-OK:` override; docstring records ±15% band + v2 plan; `tests/ci/test_duration_derivation_guard.py`.
+**Anti-drift check:** No implementation code authored in Phase-1 — this cap + `docs/DURATION_DERIVATION_SPEC.md` DESCRIBE the registry fields, the derivation function, and the CI check; the two child ws BUILD them. New spec is justified (no existing duration-derivation authority on main — `git show origin/main:docs/DURATION_DERIVATION_SPEC.md` does not exist; no prior `DURATION-DERIVATION` cap entry). Reuse-not-greenfield: EXTENDS `format_registry.yaml` (new fields, not a new registry), EXTENDS `pr_governance_review.py` (one new check in the existing results list, not a new gate script), READS the existing `duration_scorecard.yaml tts_wpm` (does not duplicate it). No paid LLM API touched (the audit and all derivation are config-read + arithmetic; CLAUDE.md Tier policy preserved). Mirrors AUTO-PLAN-SSOT-01's SSOT discipline rather than inventing a parallel one.
+**Handoffs:**
+- Pearl_Dev → `ws_duration_derivation_config_build_20260612` (NEW; Pearl_PM to dispatch post-settle) → trigger = this cap-entry PR merged.
+- Pearl_Dev → `ws_duration_derivation_ci_guard_20260612` (NEW) → trigger = config-build ws lands (the guard references the spec path + the new fields).
+- Pearl_PM → open the two ws above; the `duration_minutes` reader-migration + CJK char-based audit are separate follow-ups tracked outside this spec's child set.
+**Pointers:**
+- Spec: `docs/DURATION_DERIVATION_SPEC.md`.
+- Grounding audit: `artifacts/qa/duration_correctness_audit_20260611/` (`DURATION_CORRECTNESS_REPORT.md`, `RECOMMENDATIONS.md`, `projection_results.json`); PR #1510 `f27dafdb2`.
+- Touched-by-Phase-2: `config/format_selection/format_registry.yaml`, `config/duration_scorecard.yaml` (add `ebook_wpm`), `scripts/ci/pr_governance_review.py`.
+- SSOT precedent: `AUTO-PLAN-SSOT-01` (L438), `AUTO-PLAN-SSOT-01-AMENDMENT` (L523).
+---
+
+### DEVOTION-PATH-TOPIC-ENGINE-RECONCILE-01 — devotion_path catalog re-point to topic-native engines (Option A′); reject illegal-arc authoring; A′ *shape* operator-gated (recommended 2026-06-15)
+
+**Status:** **recommended** (architecture decision; option-A′ *shape* size↔speed pick GATED on operator). Cap entry only — no catalog/arc/atom edits in this PR.
+
+**Context:** Pearl_Prime stood down the devotion_path (Open Vessel Press / Sai Maa) en_US assembly 2026-06-15 ([`artifacts/release/2026-W25/devotion_path/HANDOFF_devotion_path_catalog_readiness_20260615.md`](../artifacts/release/2026-W25/devotion_path/HANDOFF_devotion_path_catalog_readiness_20260615.md)): the 99-plan catalog is unbuildable. Root cause: the plans' third axis is the **anxiety-family engine triad `{false_alarm, overwhelm, spiral}` cross-applied to non-anxiety topics `{burnout, courage, imposter_syndrome}`**, violating **`specs/PHOENIX_ARC_FIRST_CANONICAL_SPEC.md §4` ("Each topic has one engine")** as enforced by `config/topic_engine_bindings.yaml`. Coverage matrix: [`artifacts/analysis/devotion_path_topic_engine_reconciliation_20260615/`](../artifacts/analysis/devotion_path_topic_engine_reconciliation_20260615/) (99-plan verdicts + 21-row topic×engine grid).
+
+**Decisive finding:** the catalog is **mis-pointed, not content-starved**. Plan verdicts: 31 `BUILDABLE_LEGAL` · 5 `BUILDS_BUT_ENGINE_ILLEGAL` (gen_z_student F006 seeds) · 2 `MISSING_ARC_ENGINE_LEGAL` · **61 `MISSING_ARC_ENGINE_ILLEGAL`** (catalog engine forbidden for the topic). Meanwhile **85 topic-native, engine-legal, arc+atom-backed cells already exist** (burnout→overwhelm/watcher/grief=33; courage→false_alarm/spiral/shame=30; imposter→shame/comparison=22). The native authored surface (85) is *larger* than the catalog's buildable surface (31).
+
+**Decision:**
+
+| Option | Verdict | Why |
+|--------|---------|-----|
+| **A′ — re-point engine axis to each topic's `allowed_engines`** | **ADOPT** | only canon-restoring option; smallest lift (0–2 arcs); grows legal catalog 31→up to 85 |
+| **B — author 63 missing arcs on current anxiety engines** | **REJECT** | 61/63 are on `forbidden_engines` → manufactures engine-illegal arcs; violates §4; entrenches the defect |
+| **C — ship buildable 31 now** | fold into A′ as **wave-1 ship slice** | the 31 are already engine-legal; C ≡ "A′ restricted to the 31 already-correct plans" |
+
+**Two orthogonal failures — do NOT conflate:** (F-ENGINE) catalog points at forbidden engines / 63 arcs missing → fixed by this re-point (no prose). (F-COHERENCE) composer pulls atoms by `engine` key ignoring `topic`, so even an engine-*legal* plan (e.g. `courage__false_alarm`, arc exists + allowed) renders anxiety prose with the topic string-substituted → **composer-frontier lane #1589/#1590/#1601**, a co-gate, NOT fixed by re-pointing. Arc YAMLs are correctly tagged (`topic`/`engine`); the incoherence is downstream of the arc.
+
+**OPERATOR-GATED (size↔speed — architect does NOT choose):** *which A′ shape* — `A′-wave1-31` (fastest first ship, backfill to 85) vs `A′-mirror-82` (closest to original 99 shape) vs `A′-full-85` (largest legal catalog). **Pearl_Architect recommendation: A′-wave1-31 → backfill toward A′-full-85.** Route via `Pearl_Operator_Proxy` if brokered (`docs/PEARL_OPERATOR_PROXY_SPEC.md`; log `artifacts/coordination/operator_decisions_log.tsv`).
+
+**How to apply:** re-point series_plan + book_plan engine axis per spec §5 map; engine values MUST be a subset of `allowed_engines`; regenerate plan title/subtitle/description from `config/catalog_planning/engine_title_angles.yaml` (anxiety-framed copy MUST NOT carry over); retire illegal book_ids (provenance-preserving, no in-place rename); author only the ≤2 legal `gen_z_student` courage arcs if that persona is retained.
+
+**Action items:**
+
+1. **Operator** — pick the A′ shape (§7 of the spec). Architecture (Option A′) is decided; only the size↔speed schedule is open.
+2. **Pearl_PM / Pearl_Editor (`ws_devotion_path_engine_repoint_20260615`)** — execute the §5 re-point after operator shape pick; trigger = this cap merged + operator pick. Iteration cap = 1 PR for the re-point pass.
+3. **Pearl_Dev / Pearl_Editor (composer-frontier #1589/#1590/#1601)** — land F-COHERENCE (topic-aware `(topic, engine)` atom routing + scaffolding/register fixes); co-gates the assembly.
+4. **Pearl_Dev** — decide the B2 release-profile emission contract (`production` no-emit; "spine-default gate failure") before any production-profile assembly run.
+5. **Pearl_Prime (GATED)** — re-dispatch assembly only after (2) done AND (3) landed AND a re-validated proof slice passes coherence + gates; use the CORRECTED COMPOSITE brief (composite mode, Open Vessel Press, Sai Maa, style_dp/saima_dp covers, `--pipeline-mode spine`).
+
+**Anti-drift:** no catalog/arc/atom/composer/register edits in this cap PR; does not edit `topic_engine_bindings.yaml` or the canonical spec (applies them); subordinate to `PHOENIX_ARC_FIRST_CANONICAL_SPEC.md` (conflict → canon wins); size↔speed pick left to operator.
+
+**Authority:** this cap entry + [`docs/specs/DEVOTION_PATH_TOPIC_ENGINE_RECONCILIATION_V1_SPEC.md`](./specs/DEVOTION_PATH_TOPIC_ENGINE_RECONCILIATION_V1_SPEC.md) + `specs/PHOENIX_ARC_FIRST_CANONICAL_SPEC.md` §4 + `config/topic_engine_bindings.yaml` + [`artifacts/analysis/devotion_path_topic_engine_reconciliation_20260615/`](../artifacts/analysis/devotion_path_topic_engine_reconciliation_20260615/).
+
+### TEMPLATE-UNIVERSAL-01-AMENDMENT-2026-06-15-PER-TOPIC-SUBSET-REJECTED — per-TOPIC `compact_chapter_subset` axis is REJECTED as unneeded complexity; per-FORMAT positional subset stays the canonical mechanism (decision 2026-06-15)
+
+**Status:** **REJECTED** (architecture decision; the proposed new axis is NOT installed). Cap entry only — no `format_registry.yaml`, no `knob_apply.py`, no `_load_compact_chapter_subset` change. This entry records the rejection so the axis is not re-litigated.
+
+**What was proposed:** The F1 session drafted (in [`artifacts/analysis/pearl_prime_priorities/COMPOSER_FRONTIER_FIX_SPEC_20260614.md:297-308`](../artifacts/analysis/pearl_prime_priorities/COMPOSER_FRONTIER_FIX_SPEC_20260614.md)) an OPTIONAL amendment to `TEMPLATE-UNIVERSAL-01`: allow `compact_chapter_subset` to ALSO be declared per-topic (a new `compact_chapter_subset_by_topic` map keyed by topic on a format block), with `_load_compact_chapter_subset` gaining a `topic` parameter that prefers the per-topic list when present. Per-format would remain default + fallback. The draft was explicitly self-scoped as an *optimization for the few topics where the topic-blind positional subset drops a load-bearing beat*, NOT a correctness fix, and flagged a single candidate beat: "position 8 = `practical_interruption`".
+
+**Why REJECTED — the trigger condition is not met:** Ratification was conditioned on a concrete topic where the per-format positional subset drops a load-bearing beat. There is none.
+1. **The nominated beat is mis-numbered and is in fact never dropped.** In the canonical 12-chapter spine (`config/spines/<topic>_spine.yaml`; anxiety roles = 1 recognition · 2 origin · 3 pattern_mapping · 4 mechanism · 5 cost_exposure · 6 destabilization · **7 practical_interruption** · 8 practice_under_pressure · 9 somatic_legitimacy · 10 reframe · 11 identity_fracture · 12 integration), `practical_interruption` is spine **position 7, not 8** (position 8 is `practice_under_pressure`). **All seven shipped `compact_chapter_subset` lists include position 7** — 5ch `[1,4,7,10,12]`, 6ch `[1,3,4,7,10,12]`, 8ch `[1,3,4,6,7,9,10,12]`. The one beat the draft called load-bearing is retained by every positional subset; no drop exists. The "position 8" claim conflated the generated `book_plan.json` index with the spine role and named the wrong beat.
+2. **The F1 session's own structural finding corroborates rejection.** Per the same spec (§"subsetting is coherent for ALL topics"): "Across 15 spines, the 5ch `[1,4,7,10,12]` and 8ch `[1,3,4,6,7,9,10,12]` positions yield fully distinct, arc-spanning roles (5/5, 8/8; always `recognition → … → integration`)." The session proved per-format positional subsetting is arc-coherent across all 15 topics and produced NO counterexample.
+3. **Already-rejected sibling + cost.** `PR-D-SPINE-01` already evaluated and **rejected P2 (per-topic compact spines)** as "cost-disproportionate for the thin compact-format coverage and as crossing engineering/content lines." A per-topic axis is the same trade re-proposed at the subset layer: it adds a second curation surface (format × topic), a new config vocabulary, and a wider `_load_compact_chapter_subset` signature — with no demonstrated defect to fix. YAGNI.
+
+**Framing confirmed (for the record):** Had a concrete drop existed, the amendment's *additive* framing would have held — per-topic was an OPTIONAL override with per-format as default+fallback, so it would NOT have retracted `PR-D-SPINE-01` (per-format declarative subset) or `TEMPLATE-UNIVERSAL-01` (chapter_count per-format). The rejection is on **necessity**, not on a framing conflict. If a future spine edit (or a new topic whose spine reorders roles) genuinely drops a load-bearing beat from a positional subset, the cheapest in-canon remedy is to **re-curate that format's per-format `compact_chapter_subset` list** (exactly the `PR-D-SPINE-01` operator-hand-curation mechanism) so the beat's spine position is included — NOT to introduce a per-topic axis. Re-open this only with a named (topic, format, dropped-beat) triple that per-format re-curation cannot satisfy.
+
+**Anti-drift check:** No new spec, no new code shape, no config edit. Preserves the single per-format `compact_chapter_subset` mechanism (`PR-D-SPINE-01`) and the spine-source-of-truth + per-format-auto-plan-subset hybrid (`TEMPLATE-UNIVERSAL-01`). Rejecting the axis keeps the curation surface one-dimensional (per-format), consistent with `AUTO-PLAN-SSOT-01`'s single-registry discipline. Memory `feedback_validation_before_scaling` honored — adjudicated against the F1 proof artifacts and the live spine YAMLs, not the draft's self-description.
+
+**Action items:**
+1. **Pearl_Dev** — NONE. Do **not** implement the `topic` parameter on `_load_compact_chapter_subset`, and do **not** add a `compact_chapter_subset_by_topic` map. The Lever-A per-format subset wiring (already SHIPPED, in-envelope per the fix spec) is the complete chapter-count mechanism.
+2. **Pearl_Prime / core_pipeline** — if a specific (topic, format) compact build ever drops a beat that matters, file a per-format `compact_chapter_subset` re-curation request against `PR-D-SPINE-01`; cite the concrete (topic, format, dropped spine-position) triple.
+
+**Handoffs:** None opened (rejection = no downstream build). The router may close any provisional "per-topic subset axis" workstream as `rejected-by-TEMPLATE-UNIVERSAL-01-AMENDMENT-2026-06-15-PER-TOPIC-SUBSET-REJECTED`.
+
+**Authority:** this cap entry + `TEMPLATE-UNIVERSAL-01` (L576) + `PR-D-SPINE-01` (L407, P2-rejected) + [`artifacts/analysis/pearl_prime_priorities/COMPOSER_FRONTIER_FIX_SPEC_20260614.md:297-308`](../artifacts/analysis/pearl_prime_priorities/COMPOSER_FRONTIER_FIX_SPEC_20260614.md) (the DRAFT) + `config/format_selection/format_registry.yaml` (the 7 shipped subsets, all retaining position 7) + `config/spines/anxiety_spine.yaml` (spine role↔position ground truth).

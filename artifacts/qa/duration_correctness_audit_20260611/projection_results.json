@@ -1,0 +1,619 @@
+{
+  "_meta": {
+    "n_books": 1000,
+    "seed": 20260611,
+    "listen_wpm": 150,
+    "read_wpm": 230,
+    "render_inflation_mean": 1.0727,
+    "render_inflation_sd": 0.05,
+    "render_inflation_source": "MEASURED gold standard_book 21454/20000 (QA budget.json); SINGLE anchor \u2014 flagged",
+    "intended_pace_source": "config/duration_scorecard.yaml tts_wpm:150 + OVERLAY_SPEC \u00a7413",
+    "field_notes": {
+      "bare6beat_skeleton_words": "LOWER BOUND only: n_chapters x ONE variant per 6-beat slot (HOOK/SCENE/STORY/REFLECTION/EXERCISE/INTEGRATION) sampled from real atoms. NOT the pipeline's pre-depth total \u2014 production uses a far richer 15+ slot beatmap (QA book pre_depth was 19,026 via ANGLE_DEFINITION/TEACHER_DOCTRINE/repeated slots). Use this only to show a minimal-beat book is far shorter than the advertised-cap book.",
+      "production_vs_bare6beat_ratio": "production median / bare-6beat median. Reflects richer beatmap + depth-fill combined; do NOT read as '% padding'.",
+      "projected_words": "regime_target x render_inflation. Calibrated: standard_book median 21,514 vs real gold render 21,454 (0.3%)."
+    }
+  },
+  "per_format": {
+    "micro_book_15": {
+      "advertised_minutes": 15,
+      "word_range": [
+        2500,
+        4500
+      ],
+      "regime": "midpoint",
+      "n": 100,
+      "projected_words": {
+        "median": 3790,
+        "mean": 3769,
+        "p10": 3363,
+        "p90": 4083,
+        "min": 3203,
+        "max": 4341
+      },
+      "bare6beat_skeleton_words_median": 2176,
+      "production_vs_bare6beat_ratio": 1.74,
+      "pct_over_cap": 0.0,
+      "pct_under_floor": 0.0,
+      "over_under_vs_cap_median_pct": -15.8,
+      "implied_min_listening": {
+        "median": 25.3,
+        "p10": 22.4,
+        "p90": 27.2
+      },
+      "implied_min_reading": {
+        "median": 16.5,
+        "p10": 14.6,
+        "p90": 17.8
+      },
+      "duration_gap_listening_median_pct": 68.5,
+      "duration_gap_reading_median_pct": 9.9,
+      "mode2_deterministic": {
+        "floor": {
+          "words": 2500,
+          "listen_min": 16.7,
+          "read_min": 10.9,
+          "gap_listen_pct": 11.1,
+          "gap_read_pct": -27.5,
+          "implied_wpm": 167.0
+        },
+        "mid": {
+          "words": 3500,
+          "listen_min": 23.3,
+          "read_min": 15.2,
+          "gap_listen_pct": 55.6,
+          "gap_read_pct": 1.4,
+          "implied_wpm": 233.0
+        },
+        "cap": {
+          "words": 4500,
+          "listen_min": 30.0,
+          "read_min": 19.6,
+          "gap_listen_pct": 100.0,
+          "gap_read_pct": 30.4,
+          "implied_wpm": 300.0
+        }
+      }
+    },
+    "micro_book_20": {
+      "advertised_minutes": 20,
+      "word_range": [
+        3000,
+        5500
+      ],
+      "regime": "midpoint",
+      "n": 100,
+      "projected_words": {
+        "median": 4464,
+        "mean": 4510,
+        "p10": 4143,
+        "p90": 4929,
+        "min": 3756,
+        "max": 5214
+      },
+      "bare6beat_skeleton_words_median": 2651,
+      "production_vs_bare6beat_ratio": 1.68,
+      "pct_over_cap": 0.0,
+      "pct_under_floor": 0.0,
+      "over_under_vs_cap_median_pct": -18.8,
+      "implied_min_listening": {
+        "median": 29.8,
+        "p10": 27.6,
+        "p90": 32.9
+      },
+      "implied_min_reading": {
+        "median": 19.4,
+        "p10": 18.0,
+        "p90": 21.4
+      },
+      "duration_gap_listening_median_pct": 48.8,
+      "duration_gap_reading_median_pct": -3.0,
+      "mode2_deterministic": {
+        "floor": {
+          "words": 3000,
+          "listen_min": 20.0,
+          "read_min": 13.0,
+          "gap_listen_pct": 0.0,
+          "gap_read_pct": -34.8,
+          "implied_wpm": 150.0
+        },
+        "mid": {
+          "words": 4250,
+          "listen_min": 28.3,
+          "read_min": 18.5,
+          "gap_listen_pct": 41.7,
+          "gap_read_pct": -7.6,
+          "implied_wpm": 212.0
+        },
+        "cap": {
+          "words": 5500,
+          "listen_min": 36.7,
+          "read_min": 23.9,
+          "gap_listen_pct": 83.3,
+          "gap_read_pct": 19.6,
+          "implied_wpm": 275.0
+        }
+      }
+    },
+    "short_book_30": {
+      "advertised_minutes": 30,
+      "word_range": [
+        4500,
+        7500
+      ],
+      "regime": "midpoint",
+      "n": 100,
+      "projected_words": {
+        "median": 6434,
+        "mean": 6450,
+        "p10": 5887,
+        "p90": 7071,
+        "min": 5320,
+        "max": 7452
+      },
+      "bare6beat_skeleton_words_median": 3454,
+      "production_vs_bare6beat_ratio": 1.86,
+      "pct_over_cap": 0.0,
+      "pct_under_floor": 0.0,
+      "over_under_vs_cap_median_pct": -14.2,
+      "implied_min_listening": {
+        "median": 42.8,
+        "p10": 39.2,
+        "p90": 47.1
+      },
+      "implied_min_reading": {
+        "median": 27.9,
+        "p10": 25.6,
+        "p90": 30.7
+      },
+      "duration_gap_listening_median_pct": 43.0,
+      "duration_gap_reading_median_pct": -6.8,
+      "mode2_deterministic": {
+        "floor": {
+          "words": 4500,
+          "listen_min": 30.0,
+          "read_min": 19.6,
+          "gap_listen_pct": 0.0,
+          "gap_read_pct": -34.8,
+          "implied_wpm": 150.0
+        },
+        "mid": {
+          "words": 6000,
+          "listen_min": 40.0,
+          "read_min": 26.1,
+          "gap_listen_pct": 33.3,
+          "gap_read_pct": -13.0,
+          "implied_wpm": 200.0
+        },
+        "cap": {
+          "words": 7500,
+          "listen_min": 50.0,
+          "read_min": 32.6,
+          "gap_listen_pct": 66.7,
+          "gap_read_pct": 8.7,
+          "implied_wpm": 250.0
+        }
+      }
+    },
+    "standard_book": {
+      "advertised_minutes": 55,
+      "word_range": [
+        9000,
+        20000
+      ],
+      "regime": "cap",
+      "n": 100,
+      "projected_words": {
+        "median": 21514,
+        "mean": 21516,
+        "p10": 20355,
+        "p90": 22818,
+        "min": 19721,
+        "max": 24729
+      },
+      "bare6beat_skeleton_words_median": 5205,
+      "production_vs_bare6beat_ratio": 4.13,
+      "pct_over_cap": 94.0,
+      "pct_under_floor": 0.0,
+      "over_under_vs_cap_median_pct": 7.6,
+      "implied_min_listening": {
+        "median": 143.4,
+        "p10": 135.7,
+        "p90": 152.1
+      },
+      "implied_min_reading": {
+        "median": 93.5,
+        "p10": 88.5,
+        "p90": 99.2
+      },
+      "duration_gap_listening_median_pct": 160.8,
+      "duration_gap_reading_median_pct": 70.1,
+      "mode2_deterministic": {
+        "floor": {
+          "words": 9000,
+          "listen_min": 60.0,
+          "read_min": 39.1,
+          "gap_listen_pct": 9.1,
+          "gap_read_pct": -28.9,
+          "implied_wpm": 164.0
+        },
+        "mid": {
+          "words": 14500,
+          "listen_min": 96.7,
+          "read_min": 63.0,
+          "gap_listen_pct": 75.8,
+          "gap_read_pct": 14.6,
+          "implied_wpm": 264.0
+        },
+        "cap": {
+          "words": 20000,
+          "listen_min": 133.3,
+          "read_min": 87.0,
+          "gap_listen_pct": 142.4,
+          "gap_read_pct": 58.1,
+          "implied_wpm": 364.0
+        }
+      }
+    },
+    "extended_book_2h": {
+      "advertised_minutes": 120,
+      "word_range": [
+        17000,
+        25000
+      ],
+      "regime": "midpoint",
+      "n": 100,
+      "projected_words": {
+        "median": 22390,
+        "mean": 22484,
+        "p10": 20341,
+        "p90": 24760,
+        "min": 19370,
+        "max": 26937
+      },
+      "bare6beat_skeleton_words_median": 6391,
+      "production_vs_bare6beat_ratio": 3.5,
+      "pct_over_cap": 9.0,
+      "pct_under_floor": 0.0,
+      "over_under_vs_cap_median_pct": -10.4,
+      "implied_min_listening": {
+        "median": 149.2,
+        "p10": 135.6,
+        "p90": 165.1
+      },
+      "implied_min_reading": {
+        "median": 97.3,
+        "p10": 88.4,
+        "p90": 107.7
+      },
+      "duration_gap_listening_median_pct": 24.4,
+      "duration_gap_reading_median_pct": -18.9,
+      "mode2_deterministic": {
+        "floor": {
+          "words": 17000,
+          "listen_min": 113.3,
+          "read_min": 73.9,
+          "gap_listen_pct": -5.6,
+          "gap_read_pct": -38.4,
+          "implied_wpm": 142.0
+        },
+        "mid": {
+          "words": 21000,
+          "listen_min": 140.0,
+          "read_min": 91.3,
+          "gap_listen_pct": 16.7,
+          "gap_read_pct": -23.9,
+          "implied_wpm": 175.0
+        },
+        "cap": {
+          "words": 25000,
+          "listen_min": 166.7,
+          "read_min": 108.7,
+          "gap_listen_pct": 38.9,
+          "gap_read_pct": -9.4,
+          "implied_wpm": 208.0
+        }
+      }
+    },
+    "deep_book_4h": {
+      "advertised_minutes": 240,
+      "word_range": [
+        20000,
+        40000
+      ],
+      "regime": "midpoint",
+      "n": 100,
+      "projected_words": {
+        "median": 32129,
+        "mean": 32436,
+        "p10": 29061,
+        "p90": 36379,
+        "min": 26893,
+        "max": 38890
+      },
+      "bare6beat_skeleton_words_median": 7190,
+      "production_vs_bare6beat_ratio": 4.47,
+      "pct_over_cap": 0.0,
+      "pct_under_floor": 0.0,
+      "over_under_vs_cap_median_pct": -19.6,
+      "implied_min_listening": {
+        "median": 214.2,
+        "p10": 193.7,
+        "p90": 242.5
+      },
+      "implied_min_reading": {
+        "median": 139.7,
+        "p10": 126.4,
+        "p90": 158.2
+      },
+      "duration_gap_listening_median_pct": -10.8,
+      "duration_gap_reading_median_pct": -41.8,
+      "mode2_deterministic": {
+        "floor": {
+          "words": 20000,
+          "listen_min": 133.3,
+          "read_min": 87.0,
+          "gap_listen_pct": -44.4,
+          "gap_read_pct": -63.8,
+          "implied_wpm": 83.0
+        },
+        "mid": {
+          "words": 30000,
+          "listen_min": 200.0,
+          "read_min": 130.4,
+          "gap_listen_pct": -16.7,
+          "gap_read_pct": -45.7,
+          "implied_wpm": 125.0
+        },
+        "cap": {
+          "words": 40000,
+          "listen_min": 266.7,
+          "read_min": 173.9,
+          "gap_listen_pct": 11.1,
+          "gap_read_pct": -27.5,
+          "implied_wpm": 167.0
+        }
+      }
+    },
+    "deep_book_6h": {
+      "advertised_minutes": 360,
+      "word_range": [
+        50000,
+        72000
+      ],
+      "regime": "floor",
+      "n": 100,
+      "projected_words": {
+        "median": 55229,
+        "mean": 55491,
+        "p10": 51970,
+        "p90": 58822,
+        "min": 50437,
+        "max": 63657
+      },
+      "bare6beat_skeleton_words_median": 8943,
+      "production_vs_bare6beat_ratio": 6.18,
+      "pct_over_cap": 0.0,
+      "pct_under_floor": 0.0,
+      "over_under_vs_cap_median_pct": -23.3,
+      "implied_min_listening": {
+        "median": 368.2,
+        "p10": 346.5,
+        "p90": 392.1
+      },
+      "implied_min_reading": {
+        "median": 240.1,
+        "p10": 226.0,
+        "p90": 255.7
+      },
+      "duration_gap_listening_median_pct": 2.2,
+      "duration_gap_reading_median_pct": -33.3,
+      "mode2_deterministic": {
+        "floor": {
+          "words": 50000,
+          "listen_min": 333.3,
+          "read_min": 217.4,
+          "gap_listen_pct": -7.4,
+          "gap_read_pct": -39.6,
+          "implied_wpm": 139.0
+        },
+        "mid": {
+          "words": 61000,
+          "listen_min": 406.7,
+          "read_min": 265.2,
+          "gap_listen_pct": 13.0,
+          "gap_read_pct": -26.3,
+          "implied_wpm": 169.0
+        },
+        "cap": {
+          "words": 72000,
+          "listen_min": 480.0,
+          "read_min": 313.0,
+          "gap_listen_pct": 33.3,
+          "gap_read_pct": -13.0,
+          "implied_wpm": 200.0
+        }
+      }
+    },
+    "compact_book_5ch_15min": {
+      "advertised_minutes": 15,
+      "word_range": [
+        3000,
+        4500
+      ],
+      "regime": "midpoint",
+      "n": 100,
+      "projected_words": {
+        "median": 4014,
+        "mean": 4023,
+        "p10": 3577,
+        "p90": 4412,
+        "min": 3345,
+        "max": 4787
+      },
+      "bare6beat_skeleton_words_median": 2335,
+      "production_vs_bare6beat_ratio": 1.72,
+      "pct_over_cap": 6.0,
+      "pct_under_floor": 0.0,
+      "over_under_vs_cap_median_pct": -10.8,
+      "implied_min_listening": {
+        "median": 26.8,
+        "p10": 23.8,
+        "p90": 29.4
+      },
+      "implied_min_reading": {
+        "median": 17.4,
+        "p10": 15.6,
+        "p90": 19.2
+      },
+      "duration_gap_listening_median_pct": 78.4,
+      "duration_gap_reading_median_pct": 16.4,
+      "mode2_deterministic": {
+        "floor": {
+          "words": 3000,
+          "listen_min": 20.0,
+          "read_min": 13.0,
+          "gap_listen_pct": 33.3,
+          "gap_read_pct": -13.0,
+          "implied_wpm": 200.0
+        },
+        "mid": {
+          "words": 3750,
+          "listen_min": 25.0,
+          "read_min": 16.3,
+          "gap_listen_pct": 66.7,
+          "gap_read_pct": 8.7,
+          "implied_wpm": 250.0
+        },
+        "cap": {
+          "words": 4500,
+          "listen_min": 30.0,
+          "read_min": 19.6,
+          "gap_listen_pct": 100.0,
+          "gap_read_pct": 30.4,
+          "implied_wpm": 300.0
+        }
+      }
+    },
+    "compact_book_5ch_20min": {
+      "advertised_minutes": 20,
+      "word_range": [
+        4000,
+        5500
+      ],
+      "regime": "midpoint",
+      "n": 100,
+      "projected_words": {
+        "median": 5146,
+        "mean": 5146,
+        "p10": 4596,
+        "p90": 5595,
+        "min": 4229,
+        "max": 5823
+      },
+      "bare6beat_skeleton_words_median": 2282,
+      "production_vs_bare6beat_ratio": 2.26,
+      "pct_over_cap": 19.0,
+      "pct_under_floor": 0.0,
+      "over_under_vs_cap_median_pct": -6.4,
+      "implied_min_listening": {
+        "median": 34.3,
+        "p10": 30.6,
+        "p90": 37.3
+      },
+      "implied_min_reading": {
+        "median": 22.4,
+        "p10": 20.0,
+        "p90": 24.3
+      },
+      "duration_gap_listening_median_pct": 71.5,
+      "duration_gap_reading_median_pct": 11.9,
+      "mode2_deterministic": {
+        "floor": {
+          "words": 4000,
+          "listen_min": 26.7,
+          "read_min": 17.4,
+          "gap_listen_pct": 33.3,
+          "gap_read_pct": -13.0,
+          "implied_wpm": 200.0
+        },
+        "mid": {
+          "words": 4750,
+          "listen_min": 31.7,
+          "read_min": 20.7,
+          "gap_listen_pct": 58.3,
+          "gap_read_pct": 3.3,
+          "implied_wpm": 238.0
+        },
+        "cap": {
+          "words": 5500,
+          "listen_min": 36.7,
+          "read_min": 23.9,
+          "gap_listen_pct": 83.3,
+          "gap_read_pct": 19.6,
+          "implied_wpm": 275.0
+        }
+      }
+    },
+    "compact_book_8ch_30min": {
+      "advertised_minutes": 30,
+      "word_range": [
+        5500,
+        7500
+      ],
+      "regime": "midpoint",
+      "n": 100,
+      "projected_words": {
+        "median": 7130,
+        "mean": 7117,
+        "p10": 6446,
+        "p90": 7744,
+        "min": 5999,
+        "max": 8147
+      },
+      "bare6beat_skeleton_words_median": 3609,
+      "production_vs_bare6beat_ratio": 1.98,
+      "pct_over_cap": 21.0,
+      "pct_under_floor": 0.0,
+      "over_under_vs_cap_median_pct": -4.9,
+      "implied_min_listening": {
+        "median": 47.5,
+        "p10": 43.0,
+        "p90": 51.6
+      },
+      "implied_min_reading": {
+        "median": 31.0,
+        "p10": 28.0,
+        "p90": 33.7
+      },
+      "duration_gap_listening_median_pct": 58.5,
+      "duration_gap_reading_median_pct": 3.4,
+      "mode2_deterministic": {
+        "floor": {
+          "words": 5500,
+          "listen_min": 36.7,
+          "read_min": 23.9,
+          "gap_listen_pct": 22.2,
+          "gap_read_pct": -20.3,
+          "implied_wpm": 183.0
+        },
+        "mid": {
+          "words": 6500,
+          "listen_min": 43.3,
+          "read_min": 28.3,
+          "gap_listen_pct": 44.4,
+          "gap_read_pct": -5.8,
+          "implied_wpm": 217.0
+        },
+        "cap": {
+          "words": 7500,
+          "listen_min": 50.0,
+          "read_min": 32.6,
+          "gap_listen_pct": 66.7,
+          "gap_read_pct": 8.7,
+          "implied_wpm": 250.0
+        }
+      }
+    }
+  }
+}

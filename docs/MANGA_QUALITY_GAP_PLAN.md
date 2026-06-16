@@ -1,6 +1,8 @@
 # MANGA_QUALITY_GAP_PLAN.md
 # Phoenix Omega — Manga Quality Forensic Analysis & Sprint Plan
 
+> **HISTORICAL — 2026-04-17 forensic, pre-ep_001-ship.** Describes since-resolved stubs (stub writer, 64×64 placeholders, filmstrip compositor). Read for history, not current state. Current: `docs/MANGA_PIPELINE_AUDIT_2026-04-26.md` (post-ship snapshot) + the V5 render stack (`docs/specs/MANGA_V5_LAYERED_ARCHITECTURE.md`, `docs/MANGA_V5_CATALOG_ROLLOUT_PLAN.md`).
+
 **Session:** manga-quality-forensic-analysis-20260417  
 **Branch:** agent/manga-quality-analysis-20260417-144928  
 **Date:** 2026-04-17  

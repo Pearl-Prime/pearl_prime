@@ -52,8 +52,6 @@ jobs:
       # DashScope (fallback — Alibaba Cloud)
       DASHSCOPE_API_KEY: ${{ secrets.QWEN_API_KEY }}
       DASHSCOPE_BASE_URL: ${{ secrets.QWEN_BASE_URL }}
-      DASHSCOPE_MODEL: ${{ secrets.QWEN_MODEL }} (feat(localization): wire Together AI as primary LLM provider, DashScope as fallback)
-      DASHSCOPE_BASE_URL: ${{ secrets.QWEN_BASE_URL }}
       DASHSCOPE_MODEL: ${{ secrets.QWEN_MODEL }}
     steps:
       - uses: actions/checkout@v4

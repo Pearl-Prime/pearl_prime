@@ -63,7 +63,10 @@ DEFAULT_STEPS = 22  # FLUX-schnell-fp8 sweet spot for manga panels
 DEFAULT_GUIDANCE = 3.8
 DEFAULT_SEED = 42
 POLL_INTERVAL_SEC = 2.0
-POLL_TIMEOUT_SEC = 300.0  # 5 min per panel
+# Per-panel poll timeout. H1=A (flux1-dev / 28 steps / cfg 3.5) at 1080x1920
+# on a shared GPU can hit 4-7 min on contested VRAM; bump to 15 min and let the
+# orchestrator override via env if needed. 5 min was the schnell-era default.
+POLL_TIMEOUT_SEC = float(os.environ.get("QUEUE_POLL_TIMEOUT_SEC", "900"))  # 15 min per panel
 
 
 def _post_json(url: str, payload: dict) -> dict:
@@ -152,7 +155,36 @@ def queue_one_panel(
             out_path.parent.mkdir(parents=True, exist_ok=True)
             out_path.write_bytes(png_bytes)
             return True, f"{panel_id}: wrote {out_path.name} ({len(png_bytes):,} bytes)"
-    return False, f"{panel_id}: poll timeout after {POLL_TIMEOUT_SEC}s"
+    # Belt-and-suspenders: ComfyUI sometimes finishes the render *after* our
+    # poll deadline. Before declaring FAIL, do one more wait + history check
+    # and try to download. Catches panels that landed in the last few seconds
+    # of our timeout window.
+    for _ in range(30):  # ~60 sec grace window
+        time.sleep(2.0)
+        try:
+            history = _get_json(f"{comfy_url}/history/{prompt_id}")
+        except urllib.error.URLError:
+            continue
+        if prompt_id not in history:
+            continue
+        outputs = history[prompt_id].get("outputs", {})
+        for node_outputs in outputs.values():
+            images = node_outputs.get("images", [])
+            if not images:
+                continue
+            img = images[0]
+            view_url = (
+                f"{comfy_url}/view?filename={img['filename']}"
+                f"&subfolder={img.get('subfolder', '')}&type={img.get('type', 'output')}"
+            )
+            try:
+                png_bytes = _get_bytes(view_url)
+            except urllib.error.URLError:
+                continue
+            out_path.parent.mkdir(parents=True, exist_ok=True)
+            out_path.write_bytes(png_bytes)
+            return True, f"{panel_id}: wrote {out_path.name} ({len(png_bytes):,} bytes) [post-timeout grace]"
+    return False, f"{panel_id}: poll timeout after {POLL_TIMEOUT_SEC}s (grace window exhausted)"
 
 
 def main() -> int:

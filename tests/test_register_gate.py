@@ -11,8 +11,13 @@ from pathlib import Path
 import pytest
 
 from phoenix_v4.quality.register_gate import (
+    F2_LOWERCASE_SENTENCE_START_NOUNS,
+    _detect_f2_broken_fragments,
+    _f11_first_paragraph_warns,
+    _parse_hook_variation_first_paragraphs,
     evaluate_register,
     evaluate_register_from_path,
+    load_hook_atoms_from_paths,
 )
 
 
@@ -232,6 +237,172 @@ CALIBRATION_BOOK = (
 )
 
 
+# ─────────────────────────────────────────────────────────────────────────────
+# F11 — HOOK atom first-paragraph abstract opening (HOOK-SCENE-FIRST-01)
+# ─────────────────────────────────────────────────────────────────────────────
+
+SCENE_FIRST_HOOK_V01 = (
+    "Diane woke at 3:14am with her heart already ahead of her, cataloging everything "
+    "that could go wrong before she'd opened her eyes."
+)
+
+PHILOSOPHY_FIRST_HOOK_V01 = (
+    "Your worth is your business. Your business is your worth. So every decision "
+    "becomes a referendum on your value as a human."
+)
+
+MIKI_SCENE_FIRST = (
+    "Somewhere right now, a person is sitting in a bathroom stall at their new job, "
+    "pressing their phone against their thigh so nobody hears the screen light up, "
+    "breathing through their mouth because their nose is too congested from the silent "
+    "crying they did in the car on the way here."
+)
+
+OMOTE_PHILOSOPHY_FIRST = (
+    "Nightfall strips the surface away. This happens automatically, without consent "
+    "and without ceremony. The lights go off."
+)
+
+MIXED_HOOK_ATOM = """## HOOK v01
+---
+
+---
+Awareness is the first casualty of a busy mind. The thoughts arrive before the body does.
+---
+
+## HOOK v02
+---
+
+---
+She sat in the kitchen at 5am, hands wrapped around a cold mug, listening to the refrigerator hum.
+---
+"""
+
+
+def test_f11_scene_first_paragraph_passes():
+    warns, _meta = _f11_first_paragraph_warns(SCENE_FIRST_HOOK_V01)
+    assert warns is False
+
+
+def test_f11_philosophy_first_paragraph_warns():
+    warns, meta = _f11_first_paragraph_warns(PHILOSOPHY_FIRST_HOOK_V01)
+    assert warns is True
+    assert meta.get("abstract_opening") is True
+
+
+def test_f11_miki_reference_scene_first_passes():
+    warns, _meta = _f11_first_paragraph_warns(MIKI_SCENE_FIRST)
+    assert warns is False
+
+
+def test_f11_omote_reference_philosophy_first_warns():
+    warns, meta = _f11_first_paragraph_warns(OMOTE_PHILOSOPHY_FIRST)
+    assert warns is True
+    assert meta.get("abstract_opening") is True
+
+
+def test_f11_mixed_atom_warns_on_v01_only():
+    variations = _parse_hook_variation_first_paragraphs(MIXED_HOOK_ATOM)
+    assert variations[0][0] == "v01"
+    warns_v01, _ = _f11_first_paragraph_warns(variations[0][1])
+    warns_v02, _ = _f11_first_paragraph_warns(variations[1][1])
+    assert warns_v01 is True
+    assert warns_v02 is False
+
+
+def test_f11_register_gate_integration_five_atom_sample():
+    """Full register run with 5 HOOK atoms from HOOK-SCENE-FIRST-01 empirical sample."""
+    atom_fixtures = [
+        ("atoms/midlife_women/anxiety/HOOK/CANONICAL.txt", SCENE_FIRST_HOOK_V01),
+        (
+            "atoms/entrepreneurs/anxiety/HOOK/CANONICAL.txt",
+            "Your chest tightens when the client goes silent. The invoice sits unpaid and the email sits unopened.",
+        ),
+        (
+            "atoms/midlife_women/imposter_syndrome/HOOK/CANONICAL.txt",
+            "She has twenty-two years of experience and a graduate degree and she still lowers her voice slightly when she speaks in the Monday meeting.",
+        ),
+        (
+            "atoms/midlife_women/sleep_anxiety/HOOK/CANONICAL.txt",
+            "She wakes at 3:17am and the night sweats have already passed and now it's the thoughts.",
+        ),
+        ("atoms/entrepreneurs/overthinking/HOOK/CANONICAL.txt", PHILOSOPHY_FIRST_HOOK_V01),
+    ]
+    hook_atoms = []
+    for path, first_para in atom_fixtures:
+        hook_atoms.append((
+            path,
+            f"## HOOK v01\n---\n\n---\n{first_para}\n---\n",
+        ))
+    body = "Chapter 1\n\nMinimal rendered book body for F11 integration.\n"
+    result = evaluate_register(body, hook_atoms=hook_atoms)
+    f11 = [f for f in result.findings if f.failure_id == "F11"]
+    assert len(f11) == 1
+    assert f11[0].severity == "WARN"
+    assert "overthinking" in f11[0].evidence["atom_path"]
+    assert "Your worth" in f11[0].evidence["evidence_snippet"]
+
+
+HOOK_ATOM_PATHS = [
+    REPO_ROOT / "atoms/midlife_women/anxiety/HOOK/CANONICAL.txt",
+    REPO_ROOT / "atoms/entrepreneurs/anxiety/HOOK/CANONICAL.txt",
+    REPO_ROOT / "atoms/midlife_women/imposter_syndrome/HOOK/CANONICAL.txt",
+    REPO_ROOT / "atoms/midlife_women/sleep_anxiety/HOOK/CANONICAL.txt",
+    REPO_ROOT / "atoms/entrepreneurs/overthinking/HOOK/CANONICAL.txt",
+]
+
+
+HOOK_P2_ATOM_PATHS = [
+    REPO_ROOT / rel
+    for rel in (
+        "atoms/educators/anxiety/HOOK/CANONICAL.txt",
+        "atoms/gen_alpha_students/burnout/HOOK/CANONICAL.txt",
+        "atoms/nyc_executives/anxiety/HOOK/CANONICAL.txt",
+    )
+]
+
+
+@pytest.mark.skipif(
+    not all(p.exists() for p in HOOK_P2_ATOM_PATHS),
+    reason="P2 HOOK atom batch not checked out in this worktree",
+)
+def test_f11_p2_hook_batch_zero_warns():
+    """HOOK-SCENE-FIRST-01 P2 batch: 37 low-prominence atoms rewritten scene-first."""
+    from scripts.pearl_editor.apply_hook_p2_scene_first_rewrites import REWRITES
+
+    p2_paths = [REPO_ROOT / rel for rel in REWRITES]
+    assert len(p2_paths) == 37, f"expected 37 P2 rewrite targets, got {len(p2_paths)}"
+    hook_atoms = load_hook_atoms_from_paths(p2_paths)
+    result = evaluate_register(
+        "Chapter 1\n\nRendered hook chapter placeholder.\n",
+        hook_atoms=hook_atoms,
+    )
+    f11 = [f for f in result.findings if f.failure_id == "F11"]
+    assert len(f11) == 0, (
+        f"Expected 0 F11 WARN on P2 batch (37 atoms); got {len(f11)}: "
+        f"{[f.evidence.get('atom_path') for f in f11]}"
+    )
+
+
+@pytest.mark.skipif(
+    not all(p.exists() for p in HOOK_ATOM_PATHS),
+    reason="HOOK atom corpus not checked out in this worktree",
+)
+def test_f11_integration_on_disk_hook_corpus_sample():
+    # NOTE (HOOK-SCENE-FIRST-01 P0+P1 rewrites, 2026-05-27):
+    # Pearl_Editor rewrote 41 P0 HOOK atoms in PR #1336 and 100 P1 atoms in this PR
+    # (including entrepreneurs/overthinking) to scene-first. All 5 atoms in HOOK_ATOM_PATHS
+    # now open scene-first so F11 correctly returns 0 findings. The synthetic
+    # test_f11_integration_full_loop above still exercises the detector on a known-bad fixture.
+    hook_atoms = load_hook_atoms_from_paths(HOOK_ATOM_PATHS)
+    result = evaluate_register("Chapter 1\n\nRendered hook chapter placeholder.\n", hook_atoms=hook_atoms)
+    f11 = [f for f in result.findings if f.failure_id == "F11"]
+    assert len(f11) == 0, (
+        f"Expected 0 F11 WARN findings on P0+P1 corpus sample (all 5 rewritten scene-first); "
+        f"got {len(f11)}: {[f.evidence.get('atom_path') for f in f11]}"
+    )
+
+
 @pytest.mark.skipif(not CALIBRATION_BOOK.exists(), reason="calibration book not on disk in this worktree")
 def test_calibration_book_must_fail():
     """
@@ -252,3 +423,222 @@ def test_calibration_book_must_fail():
     failure_ids = {f.failure_id for f in result.findings}
     for fid in {"F1", "F2", "F3", "F4"}:
         assert fid in failure_ids, f"expected {fid} finding on calibration book; got {failure_ids}"
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# DEFERRED-LANE register_verdict (2026-06-15): F2.C must catch genuine dropped-article
+# bare-noun artifacts WITHOUT false-positiving on function words / lowercase continuation
+# openers (which previously HARD_FAILed otherwise-clean books, blocking PASS even with
+# leaked labels at zero).
+# ─────────────────────────────────────────────────────────────────────────────
+
+
+def test_f2c_noun_set_excludes_function_words() -> None:
+    # Function words cannot be "missing a leading article"; they must not be in the set.
+    for fn in {"the", "a", "this", "that", "and", "but", "now", "through", "for example"}:
+        assert fn not in F2_LOWERCASE_SENTENCE_START_NOUNS, (
+            f"{fn!r} is a function word and must not trigger F2.C"
+        )
+    # Genuine bare-noun / modal artifacts stay covered.
+    for noun in {"mechanism", "attachment", "suffering", "love", "can"}:
+        assert noun in F2_LOWERCASE_SENTENCE_START_NOUNS
+
+
+@pytest.mark.parametrize(
+    "text",
+    [
+        "the breath cycle (as taught by Ahjan)",          # exercise-wrapper false positive
+        "the mind settles when you stop forcing it.",     # lowercase continuation
+        "and then the breath returns to center slowly.",  # conjunction opener
+        "now the practice begins in earnest right here.",  # adverb opener
+        "this is the work, plainly stated, for today.",   # demonstrative opener
+    ],
+)
+def test_f2c_no_longer_false_positives_on_function_word_openers(text: str) -> None:
+    findings = _detect_f2_broken_fragments([(1, text)])
+    assert not any(f.evidence.get("rule") == "F2.C_lowercase_noun_start" for f in findings), (
+        f"F2.C false-positived on {text!r}"
+    )
+
+
+@pytest.mark.parametrize(
+    "text",
+    [
+        "The pipeline ran. mechanism running continuously is written into your biology.",
+        "It starts early. attachment forms before you ever notice it happening.",
+        "No warning comes. suffering arrives uninvited every single time it does.",
+    ],
+)
+def test_f2c_still_catches_real_dropped_article_artifacts(text: str) -> None:
+    findings = _detect_f2_broken_fragments([(1, text)])
+    assert any(f.evidence.get("rule") == "F2.C_lowercase_noun_start" for f in findings), (
+        f"F2.C missed a real dropped-article artifact in {text!r}"
+    )
+
+
+def test_clean_book_with_lowercase_continuation_reaches_pass() -> None:
+    # Before the fix this HARD_FAILed on F2.C ("the body believes…"); now it must PASS.
+    book = (
+        "Chapter 1\n\n"
+        "The alarm fires first. the body believes it before the mind catches up, "
+        "and that is the whole pattern in one sentence right here.\n\n"
+        "More steady content follows in this chapter to keep it well above any "
+        "sub-four-word fragment threshold the gate enforces on short paragraphs.\n"
+    )
+    result = evaluate_register(book)
+    assert result.verdict == "PASS", (
+        f"clean lowercase-continuation book got {result.verdict}; "
+        f"findings: {[(f.failure_id, f.evidence.get('rule')) for f in result.findings]}"
+    )
+
+
+def test_named_intro_wrapper_variants_are_f2_clean() -> None:
+    # The reworded "is precise" intro variant (config half) must not reintroduce an
+    # F2.A colon-period artifact through the full resolve → normalize round-trip.
+    from phoenix_v4.rendering.golden_chapter_synthesis import _resolve_location_placeholders
+    from phoenix_v4.rendering.teacher_wrapper import (
+        _reset_caches_for_tests,
+        join_wrapped,
+        resolve_wrapper,
+    )
+
+    _reset_caches_for_tests()
+    ctx = {
+        "teacher_name": "Ahjan",
+        "tradition": "Tantric Buddhism",
+        "tradition_short": "Tantra",
+        "teaching_lineage": "the path of energy",
+        "practice_name": "the breath cycle",
+    }
+    for seed in (f"s{i}" for i in range(20)):
+        prefix, _suffix = resolve_wrapper(
+            teacher_id="ahjan", section_type="INTRO", seed=seed, spine_context=ctx
+        )
+        if not prefix:
+            continue
+        joined = _resolve_location_placeholders(
+            join_wrapped(prefix, "The body of this section follows here in full.", "")
+        )
+        findings = _detect_f2_broken_fragments([(1, joined)])
+        assert not findings, f"named intro wrapper produced F2 on seed {seed}: {joined!r}"
+    _reset_caches_for_tests()
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# DEFERRED-LANE register_verdict (2026-06-15, composer-register-flip):
+# F2.B / F2.D / F2.E grammatical false-positive exclusions. Each test pins BOTH
+# directions — the genuine slot artifact still HARD_FAILs, the legitimate authored
+# prose no longer does — so the hardening cannot silently regress into a gutted gate.
+# ─────────────────────────────────────────────────────────────────────────────
+
+from phoenix_v4.quality.register_gate import (  # noqa: E402
+    _f2b_is_legitimate_stranded_preposition,
+    _is_titlecase_heading,
+    _split_chapters as _split_chapters_for_test,
+)
+
+
+@pytest.mark.parametrize(
+    "sentence",
+    [
+        "Here's a grounding practice to work with.",       # relative-clause stranding
+        "Here's an emotional processing practice to work with.",
+        "Drop the urge to move on.",                        # phrasal verb
+        "Then move on.",
+        "But it changes the room you are answering in.",    # relative-clause stranding
+        "That hope became the thing you're now running from.",
+        "It is not about your worth or what you're capable of.",
+        "What repeated overload teaches you to stop asking for.",  # infinitive complement
+        "You're safe. You're held. You're cared for.",      # passive phrasal
+        "It is what it felt like before it was always on.",  # predicate
+        # Copula-predicate ending with NO relative/infinitive licensor (the gap the original
+        # discriminator missed; observed live in the book05 re-pilot, ch8 parallel prose
+        # "The breath is already moving. … The awareness is already on.").
+        "The awareness is already on.",
+        "The system was on.",
+        "Before you noticed it, the alarm was already on.",
+        "The light is still on.",
+    ],
+)
+def test_f2b_excludes_grammatical_stranded_prepositions(sentence: str) -> None:
+    """Authored prose ending in a grammatically stranded preposition / phrasal-verb
+    particle must NOT trip F2.B (it is not a dropped-slot renderer artifact)."""
+    assert _f2b_is_legitimate_stranded_preposition(sentence), (
+        f"F2.B should treat {sentence!r} as legitimate stranded prose"
+    )
+    body = f"Chapter 1\n\n{sentence}\n\nMore steady content follows here to anchor the chapter.\n"
+    findings = _detect_f2_broken_fragments(_split_chapters_for_test(body))
+    assert not any(f.evidence.get("rule") == "F2.B_sentence_end_preposition" for f in findings), (
+        f"F2.B false-positived on legitimate stranded preposition: {sentence!r}"
+    )
+
+
+@pytest.mark.parametrize(
+    "sentence",
+    [
+        "In Ahjan's framework, the path begins with.",   # dropped {SLOT} after transitive verb
+        "This is the foundation of.",
+        "The through-line is best understood as a.",
+    ],
+)
+def test_f2b_still_hard_fails_genuine_dropped_slot(sentence: str) -> None:
+    """A genuine unfilled-slot dangling preposition (no stranding licensor, transitive
+    lead-in verb) must STILL HARD_FAIL — the hardening must not gut the rule."""
+    assert not _f2b_is_legitimate_stranded_preposition(sentence), (
+        f"F2.B must still treat {sentence!r} as a dropped-slot artifact"
+    )
+    body = f"Chapter 1\n\n{sentence}\n\nMore content here for the chapter body.\n"
+    result = evaluate_register(body)
+    assert result.verdict == "HARD_FAIL"
+    assert any(
+        f.failure_id == "F2" and f.evidence.get("rule") == "F2.B_sentence_end_preposition"
+        for f in result.findings
+    ), f"F2.B missed a genuine dropped-slot artifact: {sentence!r}"
+
+
+@pytest.mark.parametrize("title", ["Small Exposures", "Worth Without Output", "The Cost of Vigilance"])
+def test_f2d_excludes_chapter_title_heading(title: str) -> None:
+    """A clean Title-Case chapter working-title (first paragraph of a chapter body) must
+    not trip F2.D as a sub-4-word fragment."""
+    assert _is_titlecase_heading(title)
+    body = f"Chapter 7\n\n{title}\n\nThe first real paragraph of the chapter follows here with substance.\n"
+    findings = _detect_f2_broken_fragments(_split_chapters_for_test(body))
+    assert not any(f.evidence.get("rule") == "F2.D_sub_4_word_paragraph" for f in findings), (
+        f"F2.D false-positived on chapter title {title!r}"
+    )
+
+
+@pytest.mark.parametrize("leaked", ["INTEGRATION v06", "Ahjan's the practice", "EXERCISE 03"])
+def test_f2d_still_hard_fails_leaked_label(leaked: str) -> None:
+    """A genuine leaked slot/component label or shapeless 3-word fragment must STILL
+    HARD_FAIL, even when it is the first paragraph of a chapter body."""
+    assert not _is_titlecase_heading(leaked)
+    body = f"Chapter 1\n\n{leaked}\n\nThe real chapter content begins in this paragraph here.\n"
+    result = evaluate_register(body)
+    assert result.verdict == "HARD_FAIL"
+    assert any(
+        f.failure_id == "F2" and f.evidence.get("rule") == "F2.D_sub_4_word_paragraph"
+        for f in result.findings
+    ), f"F2.D missed a genuine leaked label: {leaked!r}"
+
+
+def test_f2e_excludes_colon_introducing_a_list_or_content() -> None:
+    """A colon that introduces a numbered list or a following content paragraph across a
+    blank line is authored structure, not a missing post-colon slot."""
+    list_body = (
+        "Chapter 1\n\nTry this for ninety seconds:\n\n"
+        "1. Notice where your attention is scanning right now.\n\n"
+        "2. Name the loudest sensation in one plain word.\n"
+    )
+    findings = _detect_f2_broken_fragments(_split_chapters_for_test(list_body))
+    assert not any(f.evidence.get("rule") == "F2.E_colon_no_content" for f in findings), (
+        "F2.E false-positived on a colon introducing a numbered list"
+    )
+    prose_body = (
+        "Chapter 1\n\nThe teaching in this tradition is simple:\n\n"
+        "Crank the volume down on the trigger and let the reflex pass.\n"
+    )
+    findings2 = _detect_f2_broken_fragments(_split_chapters_for_test(prose_body))
+    assert not any(f.evidence.get("rule") == "F2.E_colon_no_content" for f in findings2), (
+        "F2.E false-positived on a colon introducing a following content paragraph"
+    )

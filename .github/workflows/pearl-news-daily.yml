@@ -64,6 +64,17 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
+      # ───────────────────────────────────────────────────────────────────
+      # Pearl News sidebar parity gate (BLOCKS publish on parity-fail).
+      # Authority: docs/PEARL_NEWS_SIDEBAR_VERSION_HISTORY.md,
+      #            docs/PEARL_NEWS_SIDEBAR_FUNCTION_INVENTORY.md,
+      #            docs/PEARL_NEWS_WRITER_SPEC.md §S.
+      # If this step fails, the assembled sidebar has drifted from the
+      # canonical SHA chain. Restore per §S; do NOT bypass this gate.
+      # ───────────────────────────────────────────────────────────────────
+      - name: Check Pearl News sidebar parity
+        run: python3 scripts/ci/check_pearl_news_sidebar_parity.py --verbose
+
       - name: Determine cycle from schedule
         id: cycle
         run: |

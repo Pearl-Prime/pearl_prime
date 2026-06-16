@@ -75,6 +75,31 @@ Each integration entry:
   - Group chat messaging (currently disabled, can enable)
 - **Notes:** Created via LINE Official Account Manager → enabled Messaging API. Auto-reply and greeting messages currently enabled (disable for bot-only mode). For file sending (CSV, MP3, MP4), use the Messaging API's file message type or upload to external URL + send as content message.
 
+### Pearl Prime Storefront (Cloudflare Pages + D1 + R2 + KV + Snipcart-wraps-Stripe)
+- **Service:** Pearl Prime book / audiobook / manga / music marketplace per `docs/specs/PEARL_PRIME_STOREFRONT_V1_SPEC.md` (active per PR #1433) + AMENDMENT-2026-06-04 (PR #1446 — 16 Q-PRP-* ratified)
+- **Status:** scaffold (infra) — application code follows in Pearl_Dev ws; resources are OPERATOR-ACTION-REQUIRED per runbook
+- **Cap:** `PEARL-PRIME-STOREFRONT-V1-01`
+- **Subsystem:** `storefront`
+- **CF account:** `b80152c319f941e6e92f928e2617a3d5` (NOT the operator's primary `626d6eb8...` per `cloudflare_pages_deploy.md` Trap 3)
+- **CF resources (8 operator-action-required slots):**
+  - **Pages project** `pearl-prime-storefront` — live at `https://pearl-prime-storefront.pages.dev` post first deploy (custom domain `pearlprime.shop` Q-PRP-DOMAIN-01)
+  - **D1 database** `pearl_prime_storefront` — single instance at Phase A; read-replicas at Phase B per spec §5.2
+  - **R2 bucket** `pearl-prime-storefront-assets` — `en-US/` + `ja-JP/` prefixes pre-allocated for Phase A
+  - **KV namespace** `pearl_prime_storefront_session_cart` — 60-minute TTL for anonymous cart; persisted to D1 on sign-in
+  - **API token** — recommend reuse existing `CLOUDFLARE_API_TOKEN` repo secret (already b80152c3-scoped); fallback `CLOUDFLARE_API_TOKEN_PAGES_STOREFRONT` scoped variant
+- **Snipcart (3 operator-action-required slots):**
+  - Account email (operator-chosen; matches WordPress / brand-admin pattern)
+  - `SNIPCART_API_KEY` (secret) + `SNIPCART_PUBLIC_API_KEY` (public, embedded in storefront HTML)
+  - `SNIPCART_WEBHOOK_SECRET` (Cloudflare Pages env var + Keychain; quarterly rotation cadence per `docs/INTEGRATION_CREDENTIALS_REGISTRY.md`)
+- **Payment gateway:** Snipcart wraps Stripe per AMENDMENT Q-PRP-PAY-01 (Stripe Checkout direct = FALLBACK). Operator picks the Stripe account; agent never auto-executes financial-system handshakes per `CLAUDE.md`.
+- **Operator runbook + resource IDs reference:** [`storefront_resource_ids.md`](./storefront_resource_ids.md) (template — populated as resources are provisioned)
+- **Deploy workflow:** [`.github/workflows/pearl-prime-storefront-deploy.yml`](../../../.github/workflows/pearl-prime-storefront-deploy.yml) (mirrors `brand-admin-onboarding-pages.yml`; `wrangler-action@v3` via repo secrets `CLOUDFLARE_API_TOKEN` + `CLOUDFLARE_ACCOUNT_ID`; trigger: `storefront/**` or workflow file change on `main`)
+- **Repo scaffold:** `storefront/{package.json,wrangler.toml,migrations/0001_init.sql,README.md,.gitignore}` (this PR)
+- **Env vars registered:** `STOREFRONT_D1_ID`, `STOREFRONT_R2_BUCKET`, `STOREFRONT_KV_NAMESPACE_ID`, `CLOUDFLARE_API_TOKEN_PAGES_STOREFRONT`, `SNIPCART_API_KEY`, `SNIPCART_PUBLIC_API_KEY`, `SNIPCART_WEBHOOK_SECRET` (see `scripts/ci/integration_env_registry.py`)
+- **DO NOT run `wrangler pages deploy` from a laptop** — same Trap 1-4 contraindications as `brand-admin-onboarding`; deploy only via the CI workflow.
+- **Last Validated:** 2026-06-06 (scaffold ws; no resources provisioned yet)
+- **Notes:** Phase A launch surface per AMENDMENT Q-PRP-ROLLOUT-01 = en-US AND ja-JP × book AND audiobook AND manga (6 smoke combinations green = launch gate). Music SKU model = per-album + per-track + per-brand-subscription (all three at Phase B) per Q-PRP-MUSIC-SKU-01.
+
 ---
 
 ## Known Integration Templates

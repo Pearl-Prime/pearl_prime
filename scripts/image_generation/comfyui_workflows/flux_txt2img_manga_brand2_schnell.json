@@ -1,0 +1,47 @@
+{
+    "_meta": {
+        "name": "Phoenix Omega — FLUX txt2img Manga (brand-2 V1 schnell path: schnell-fp8 / 4 / 1.0 / euler / simple, webtoon vertical)",
+        "description": "EmptyLatent + KSampler denoise 1.0. Generator replaces {{positive_prompt}} / {{negative_prompt}}. Uses flux1-schnell-fp8 (4-step distilled) at steps=4 cfg=1.0 with euler/simple — schnell is incompatible with steps>=8 and cfg>1 and produces silently degraded outputs in those configs. Default dims 1080x1920 = WEBTOON vertical panel. This is the brand-2 V1 ship path; brand-1 (the_alarm_is_lying et al) uses H1=A via flux_txt2img_manga.json.",
+        "version": "1.2.0",
+        "preserved_from": "Old flux_txt2img_manga.json schnell config (pre-2026-06-02). Kept for brand-2 V1 ship which is operator-approved on schnell per skills/pearl-int/references/manga_render_path_decision.md."
+    },
+    "1": {
+        "class_type": "CheckpointLoaderSimple",
+        "inputs": {"ckpt_name": "flux1-schnell-fp8.safetensors"}
+    },
+    "2": {
+        "class_type": "CLIPTextEncode",
+        "inputs": {"text": "{{positive_prompt}}", "clip": ["1", 1]}
+    },
+    "3": {
+        "class_type": "CLIPTextEncode",
+        "inputs": {"text": "{{negative_prompt}}, text, words, letters, captions, watermark, signature, signs, writing, typography, text characters, font, lettering, logos, subtitles, calligraphy", "clip": ["1", 1]}
+    },
+    "4": {
+        "class_type": "EmptyLatentImage",
+        "inputs": {"width": 1080, "height": 1920, "batch_size": 1}
+    },
+    "5": {
+        "class_type": "KSampler",
+        "inputs": {
+            "seed": 42,
+            "steps": 4,
+            "cfg": 1.0,
+            "sampler_name": "euler",
+            "scheduler": "simple",
+            "denoise": 1.0,
+            "model": ["1", 0],
+            "positive": ["2", 0],
+            "negative": ["3", 0],
+            "latent_image": ["4", 0]
+        }
+    },
+    "6": {
+        "class_type": "VAEDecode",
+        "inputs": {"samples": ["5", 0], "vae": ["1", 2]}
+    },
+    "7": {
+        "class_type": "SaveImage",
+        "inputs": {"filename_prefix": "manga_panel", "images": ["6", 0]}
+    }
+}

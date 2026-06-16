@@ -1,0 +1,57 @@
+# Pearl News — Hard News v2 (operator restructure 2026-05-19)
+# Replaces the longer hard_news_spiritual_response sequence with a leaner
+# 6-section flow. Same hard-news use cases (breaking news, climate, conflict,
+# AI/regulation, economic shift) — different layout.
+#
+# Top of article:
+#   Title 1 (H1)      LLM-generated main headline (locale-aware)
+#   Title 2 (dek-1)   Static: "How this news is affecting Gen Z" (localized)
+#   Title 3 (dek-2)   Dynamic: "A {tradition_role} Shares A Helpful Insight"
+#                     where tradition_role comes from teacher_registry.yaml
+#                     (e.g. "Shingon Priest" for Joshin, "Tantric Buddhist
+#                     Teacher" for Ahjan).
+#
+# Body:
+#   News Summary      LLM, ~2x the v1 length, with one paragraph tying the
+#                     story to its primary SDG.
+#   How Gen Z         Deterministic atom (gen_z_reactions): 50-word reactions
+#   is Affected       per topic, 5 variations rotated by article_id.
+#   USLF Teacher's    Deterministic atom (teacher_perspective).
+#   View
+#   A Practice        Deterministic atom (practice).
+#
+# Bottom (carried from v1 — unchanged):
+#   Take Action Now! / Your Voice Has Power CTA block + sidebar.
+
+template_id: hard_news_v2
+name: "Hard News v2"
+
+section_slots:
+  - slot: headline_layer_1
+    source: generate
+    notes: "LLM-generated. Locale-specific prompt at prompts/.../locales/<lang>/headline_layer_1.txt."
+  - slot: subhead_gen_z
+    source: static_label
+    notes: "Localized via _SECTION_HEADERS_BY_LANG['felt_experience'] (existing key)."
+  - slot: subhead_teacher
+    source: tradition_role
+    notes: "Composed from teacher_registry.yaml `tradition_role` field + localized 'Shares A Helpful Insight'."
+  - slot: news_summary_long
+    source: generate
+    required: true
+    notes: "LLM-generated, ~2x v1 length. Prompt MUST end with one paragraph linking the story to its primary SDG."
+  - slot: gen_z_reactions
+    source: gen_z_reactions
+    required: true
+    notes: "Deterministic atom from pearl_news/atoms/gen_z_reactions/<topic>.yaml — 5 variations × 50 words."
+  - slot: teacher_perspective
+    source: teacher_quotes_practices
+    required: true
+    notes: "Deterministic atom from teacher_topic_packs (existing field)."
+  - slot: practice
+    source: teacher_quotes_practices
+    required: true
+    notes: "Deterministic atom from teacher_topic_packs.practice (existing field)."
+  - slot: cta_block
+    source: static_boilerplate
+    notes: "Take Action Now! + Your Voice Has Power; carried from v1 unchanged."

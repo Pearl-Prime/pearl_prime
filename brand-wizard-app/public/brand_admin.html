@@ -120,6 +120,15 @@ html,body{width:100%;height:100%;font-family:"DM Sans",sans-serif;background:#0e
 .upload-status-badge{font-family:var(--mono);font-size:.38rem;letter-spacing:.08em;text-transform:uppercase;padding:2px 8px;border-radius:2px;margin-left:auto}
 .upload-status-badge.done{background:rgba(74,222,128,.1);border:1px solid rgba(74,222,128,.2);color:var(--green)}
 .upload-status-badge.pending{background:rgba(180,83,9,.08);border:1px solid rgba(180,83,9,.15);color:var(--acc2)}
+.coord-build-badge{font-family:var(--mono);font-size:.48rem;letter-spacing:.04em;margin-top:8px;color:var(--dim)}
+.coord-build-badge.current{color:var(--green)}
+.coord-build-badge.stale{color:var(--acc2)}
+.coord-build-badge.missing{color:var(--red)}
+.coord-build-badge.loading{opacity:.6}
+.admin-dl-spinner{display:inline-flex;align-items:center;margin-right:6px;vertical-align:middle}
+.admin-dl-spinner svg{animation:admin-dl-spin .8s linear infinite}
+@keyframes admin-dl-spin{to{transform:rotate(360deg)}}
+.pp-btn:disabled,.action-btn:disabled{opacity:.55;cursor:not-allowed;pointer-events:none}
 
 /* -- Day Card (Phase 3) -- */
 .day-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px;margin:16px 0}
@@ -268,6 +277,7 @@ html,body{width:100%;height:100%;font-family:"DM Sans",sans-serif;background:#0e
 <body>
 <script src="assets/i18n.js"></script>
 <script src="assets/icons.js"></script>
+<script src="js/toast.js"></script>
 
 <!-- Top Bar -->
 <div id="topbar">
@@ -396,6 +406,23 @@ html,body{width:100%;height:100%;font-family:"DM Sans",sans-serif;background:#0e
   <div id="phase2" class="phase-section"></div>
   <div id="phase3" class="phase-section"></div>
 
+  <!-- Books × Platforms grid for the selected brand (operator visibility surface) -->
+  <section id="books-by-platform" class="phase-section visible" aria-live="polite" style="margin-top:24px">
+    <div class="section-hdr" style="margin:0 0 8px;display:flex;align-items:center;gap:8px">
+      <span class="pp-icon sm" data-icon="book"></span>
+      <span class="section-hdr-title">Books × Platforms for this brand</span>
+      <button type="button" class="action-btn" style="margin-left:auto;padding:6px 12px;font-size:.5rem" onclick="refreshBooksByPlatform()">Refresh</button>
+    </div>
+    <div class="ab-muted" style="font-size:.48rem;margin:0 0 8px;line-height:1.45" id="bbp-axis-hint">Axis: —</div>
+    <div class="ab-table-wrap">
+      <table class="ab-table" id="bbp-table">
+        <thead><tr><th>Book (topic)</th><th>Status</th><th>kdp</th><th>apple_books</th><th>google_play</th><th>kobo</th><th>store_url_live</th></tr></thead>
+        <tbody id="bbp-tbody"><tr><td colspan="7" class="ab-muted">Waiting for brand selection…</td></tr></tbody>
+      </table>
+    </div>
+    <div class="ab-muted" id="bbp-hint" style="font-size:.48rem;line-height:1.5;margin-top:6px"></div>
+  </section>
+
   <!-- Quick Links -->
   <div style="margin-top:40px;padding-top:20px;border-top:1px solid var(--border);text-align:center">
     <div class="section-hdr" style="justify-content:center">
@@ -415,39 +442,42 @@ html,body{width:100%;height:100%;font-family:"DM Sans",sans-serif;background:#0e
       <a class="qlink" href="https://manager.line.biz" target="_blank"><span class="pp-icon sm" data-icon="social"></span> LINE</a>
     </div>
     <div style="margin-top:16px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
-      <a class="action-btn" onclick="resetBrand()" style="cursor:pointer" data-i18n="admin.btn.change"><span class="pp-icon sm" data-icon="arrow_left"></span> Change Brand</a>
-      <a class="action-btn" href="brand_admin_setup_guide.html" target="_blank" data-i18n="admin.btn.docs"><span class="pp-icon sm" data-icon="info"></span> Detailed Setup Docs</a>
-    </div>
+      <a class="action-btn" onclick="resetBrand()" style="cursor:pointer" data-i18n="admin.btn.change"><span class="pp-icon sm" data-icon="arrow_left"></span> Change Brand</a>    </div>
   </div>
 </div>
 
 <script>
-// ── Brand Data (24 en_US) ──
-const B={
-  inner_light_press_en_us:{d:"Inner Light Press",t:"Ahjan",tm:true,tr:"Contemplative / inner light",f:"Meditation, mindfulness, inner peace",tp:["anxiety","burnout","depression","self_worth","somatic_healing","mindfulness"]},
-  awakening_press_en_us:{d:"Awakening Press",t:"Adi Da",tm:true,tr:"Radical devotion",f:"Spiritual awakening, radical self-inquiry",tp:["self_worth","courage","boundaries","depression","grief"]},
-  vitality_path_en_us:{d:"Vitality Path",t:"Master Feung",tm:true,tr:"Taoist energy cultivation",f:"Energy management, vitality, life force balance",tp:["burnout","somatic_healing","courage","self_worth"]},
-  healing_ground_press_en_us:{d:"Healing Ground Press",t:"Sai Ma",tm:true,tr:"Divine healing / compassion",f:"Grief integration, emotional healing",tp:["grief","compassion_fatigue","depression","boundaries"]},
-  cosmic_edge_en_us:{d:"Cosmic Edge",t:"Ra",tm:true,tr:"Cosmic consciousness",f:"Purpose, meaning, existential clarity",tp:["imposter_syndrome","self_worth","courage","overthinking"]},
-  zen_clarity_en_us:{d:"Zen Clarity",t:"Junko",tm:true,tr:"Japanese mindfulness / zen",f:"Mental clarity, overthinking relief",tp:["overthinking","anxiety","sleep_anxiety","social_anxiety","mindfulness"]},
-  gen_spark_en_us:{d:"Gen Spark",t:"Miki",tm:true,tr:"Youth activation",f:"Gen Z grounding, identity, confidence",tp:["imposter_syndrome","social_anxiety","self_worth","boundaries"]},
-  iron_will_en_us:{d:"Iron Will",t:"Master Wu",tm:true,tr:"Warrior discipline",f:"Discipline, resilience, courage",tp:["courage","burnout","imposter_syndrome","boundaries"]},
-  body_wisdom_en_us:{d:"Body Wisdom",t:"Pamela Fellows",tm:true,tr:"Somatic therapy / polyvagal",f:"Nervous system regulation, somatic awareness",tp:["anxiety","somatic_healing","sleep_anxiety","burnout"]},
-  still_forest_en_us:{d:"Still Forest",t:"Joshin",tm:true,tr:"Forest meditation",f:"Nature-based grounding, presence",tp:["anxiety","overthinking","somatic_healing","depression"]},
-  truth_compass_en_us:{d:"Truth Compass",t:"Maat",tm:true,tr:"Divine principle / truth",f:"Boundaries, self-worth, integrity",tp:["boundaries","self_worth","imposter_syndrome","financial_stress"]},
-  gentle_wave_en_us:{d:"Gentle Wave",t:"Omote",tm:true,tr:"Japanese healing",f:"Sleep, rest, gentle recovery",tp:["sleep_anxiety","burnout","anxiety","compassion_fatigue","mindfulness"]},
-  soul_repair_en_us:{d:"Soul Repair",t:"Master Sha",tm:true,tr:"Soul healing",f:"Trauma recovery, spiritual healing",tp:["grief","depression","self_worth","somatic_healing","courage"]},
-  stabilizer_en_us:{d:"Stabilizer",t:null,tm:false,tr:"",f:"Burnout recovery, nervous system regulation",tp:["burnout","anxiety","somatic_healing"]},
-  optimizer_en_us:{d:"Optimizer",t:null,tm:false,tr:"",f:"Peak performance, focus, productivity",tp:["imposter_syndrome","burnout","overthinking"]},
-  night_reset_en_us:{d:"Night Reset",t:null,tm:false,tr:"",f:"Sleep anxiety, insomnia, nighttime rest",tp:["sleep_anxiety","anxiety","overthinking"]},
-  career_lift_en_us:{d:"Career Lift",t:null,tm:false,tr:"",f:"Career transitions, feeling unstuck",tp:["imposter_syndrome","courage","financial_anxiety"]},
-  adhd_forge_en_us:{d:"ADHD Forge",t:null,tm:false,tr:"",f:"Neurodivergent focus, ADHD support",tp:["adhd_focus","overthinking","anxiety","imposter_syndrome"]},
-  creative_unfold_en_us:{d:"Creative Unfold",t:null,tm:false,tr:"",f:"Creative blocks, artistic expression",tp:["self_worth","courage","boundaries"]},
-  resilient_parent_en_us:{d:"Resilient Parent",t:null,tm:false,tr:"",f:"Parenting stress, co-regulation",tp:["burnout","compassion_fatigue","boundaries"]},
-  executive_calm_en_us:{d:"Executive Calm",t:null,tm:false,tr:"",f:"Executive performance, leadership under pressure",tp:["burnout","anxiety","imposter_syndrome"]},
-  confidence_core_en_us:{d:"Confidence Core",t:null,tm:false,tr:"",f:"Social anxiety, confidence building",tp:["social_anxiety","self_worth","imposter_syndrome"]},
-  relationship_clarity_en_us:{d:"Relationship Clarity",t:null,tm:false,tr:"",f:"Relationship repair, co-regulation",tp:["boundaries","grief","compassion_fatigue"]},
-  legacy_builder_en_us:{d:"Legacy Builder",t:null,tm:false,tr:"",f:"Life transitions, legacy, reinvention",tp:["self_worth","courage","financial_stress"]}
+// ── Brand Data (live across 3 axes: book + manga + music) ──
+// Replaces the prior embedded 24-entry catalog. Populated by loadLiveBrandIndex()
+// from GET /api/brand_admin/brand_index which reads:
+//   - config/brand_registry.yaml             (26 book brands, locale-keyed)
+//   - config/manga/canonical_brand_list.yaml (37 manga brands — Path X canon)
+//   - config/music/music_brand_registry.yaml (38+ music brands)
+// Total ~64+ vs the prior hardcoded 24. See server/routes/brand_admin_public.py.
+var B={};
+var BRAND_AXES={book:[],manga:[],music:[]};
+var BRAND_AXIS_FILTER='all';
+var BRAND_INDEX_COUNTS={book:0,manga:0,music:0,total:0};
+var BRAND_INDEX_LOADED=false;
+// Legacy teacher tags preserved for the 13 active en_US archetype brands so the
+// existing teacher attribution still surfaces in the picker card. Looked up by
+// brand_id after the live index lands; never used as a source-of-truth for the
+// brand list itself. Extend via config/brand_author_assignments.yaml + exposing
+// teacher_id via brand_index endpoint (TODO follow-up ws).
+var LEGACY_TEACHER_TAGS={
+  inner_light_press_en_us:"Ahjan",
+  awakening_press_en_us:"Adi Da",
+  vitality_path_en_us:"Master Feung",
+  healing_ground_press_en_us:"Sai Ma",
+  cosmic_edge_en_us:"Ra",
+  zen_clarity_en_us:"Junko",
+  gen_spark_en_us:"Miki",
+  iron_will_en_us:"Master Wu",
+  body_wisdom_en_us:"Pamela Fellows",
+  still_forest_en_us:"Joshin",
+  truth_compass_en_us:"Maat",
+  gentle_wave_en_us:"Omote",
+  soul_repair_en_us:"Master Sha"
 };
 
 const KW={anxiety:"anxiety relief, calm, stress management",burnout:"burnout recovery, rest, energy restoration",depression:"emotional healing, hope, mental wellness",self_worth:"self-worth, confidence, self-esteem",somatic_healing:"somatic healing, body awareness, nervous system",mindfulness:"mindfulness, meditation, present moment",courage:"courage, bravery, resilience, inner strength",boundaries:"healthy boundaries, self-protection, assertiveness",grief:"grief support, loss, healing after loss",compassion_fatigue:"compassion fatigue, caregiver support",overthinking:"overthinking, mental clarity, calm mind",sleep_anxiety:"sleep anxiety, insomnia help, restful sleep",social_anxiety:"social anxiety, social confidence",imposter_syndrome:"imposter syndrome, self-doubt, confidence",financial_stress:"financial stress, money anxiety, abundance",financial_anxiety:"financial anxiety, career confidence",adhd_focus:"ADHD focus, neurodivergent support, attention"};
@@ -717,6 +747,13 @@ function renderPhase1(){
   h+='<div class="overall-upload-bar"><div class="bar-label"><span>Setup Progress</span><strong>'+setupPct()+'%</strong></div>';
   h+='<div class="bar-track"><div class="bar-fill" style="width:'+setupPct()+'%"></div></div></div>';
 
+  // Entry to the full Platform Setup Helper (live per-platform steps EN/JP + write-only encrypted cred capture)
+  h+='<div class="nba-callout" style="margin-bottom:18px">';
+  h+='<div class="nba-icon">'+icon('external','accent')+'</div>';
+  h+='<div class="nba-body"><div class="nba-label">Guided Platform Setup</div>';
+  h+='<div class="nba-text">Step-by-step setup for every platform (English / 日本語) with secure, write-only login capture.';
+  h+=' <a class="action-btn" style="margin-left:6px" href="platform_setup_helper.html?brand='+encodeURIComponent(brandId||'')+'&brand_name='+encodeURIComponent(b.d||'')+'&brand_focus='+encodeURIComponent(b.f||'')+'&brand_desc='+encodeURIComponent(desc(b))+'" target="_blank">'+icon('arrow_right','sm')+' Open Setup Helper</a></div></div></div>';
+
   // Next best action for setup
   if(remaining>0){
     const nextStep=SETUP.find(st=>!s.setup[st.id]);
@@ -814,8 +851,9 @@ function renderPhase2(){
   h+='<div style="font-family:var(--mono);font-size:.5rem;letter-spacing:.08em;text-transform:uppercase;color:var(--acc2);margin-bottom:4px">Content Package</div>';
   h+='<div style="font-size:.75rem;color:var(--mid)">8 ebooks + 4 manga + 3 micro = 15 titles. Covers, metadata, video included.</div>';
   h+='</div>';
-  h+='<button class="pp-btn primary" onclick="downloadAdminPacket()">'+icon('arrow_right','sm')+' Download</button>';
+  h+='<button class="pp-btn primary" id="admin-packet-dl-btn" onclick="downloadAdminPacket(event)">'+icon('arrow_right','sm')+' Download</button>';
   h+='</div>';
+  h+='<div id="coord-build-badge" class="coord-build-badge loading">Last built: checking…</div>';
 
   // Per-platform upload cards
   UPLOADS.forEach(function(u){
@@ -851,46 +889,115 @@ function renderPhase2(){
   });
   el.innerHTML=h;
   renderIcons(el);
+  startCoordBadgePolling();
 }
 function countUpload(u){ const s=bs(); let c=0; for(let i=1;i<=u.titles;i++) if(s.upload[u.id+'_t'+i]) c++; return c; }
 
-// ── Admin Packet Download ──
-function downloadAdminPacket(){
-  if(!brand){ alert('Select a brand first.'); return; }
-  const week=(function(){
-    var d=new Date();
-    var thu=new Date(d.getFullYear(),d.getMonth(),d.getDate()+3-(d.getDay()+6)%7);
-    var w1=new Date(thu.getFullYear(),0,4);
-    var wn=1+Math.round(((thu-w1)/86400000-3+(w1.getDay()+6)%7)/7);
-    return thu.getFullYear()+'-W'+String(wn).padStart(2,'0');
-  })();
-  var titles=UPLOADS.reduce(function(acc,u){
-    for(var i=1;i<=u.titles;i++) acc.push({title:brand.d+': Title '+i,platform:u.id,format:u.manga?'manga':u.video?'audio':'ebook'});
-    return acc;
-  },[]);
-  var platforms={};
-  UPLOADS.forEach(function(u){ platforms[u.id]={cap:u.titles,titles:titles.filter(function(t){return t.platform===u.id;})}; });
-  var packet={
-    brand_id:brandId,
-    brand_label:brand.d,
-    week:week,
-    generated_at:new Date().toISOString(),
-    catalog_summary:{total_titles:titles.length,ebook:titles.filter(function(t){return t.format==='ebook';}).length,manga:titles.filter(function(t){return t.format==='manga';}).length,audio:titles.filter(function(t){return t.format==='audio';}).length},
-    upload_slots:platforms,
-    this_week_titles:titles,
-    qa_summary:{health:'green',pass_rate:null,note:'Run: python3 scripts/qa/run_bestseller_analysis.py --brand '+brandId},
-    manga_status:[],
-    action_checklist:[
-      {priority:'high',icon:'📤',title:'Upload titles to all platforms',cmd:'python3 scripts/release/build_admin_packets.py --brand '+brandId+' --week current'},
-      {priority:'med',icon:'✅',title:'Run QA analysis',cmd:'python3 scripts/qa/run_bestseller_analysis.py --brand '+brandId},
-      {priority:'med',icon:'📦',title:'Export full handoff packet',cmd:'python3 scripts/release/export_brand_admin_data.py --brand '+brandId+' --week current'},
-    ],
-  };
-  var blob=new Blob([JSON.stringify(packet,null,2)],{type:'application/json'});
-  var a=document.createElement('a');
-  a.href=URL.createObjectURL(blob);
-  a.download='admin_data_'+brandId+'_'+week+'.json';
-  a.click();
+// ── Admin Packet Download (OPD-120: real ZIP via FastAPI) ──
+var _adminPacketDownloading=false;
+var _coordBadgePollTimer=null;
+var _coordBadgeLastStatus=null;
+var _coordBadgeBuildToastShown=false;
+var ADMIN_DL_SPINNER='<span class="admin-dl-spinner" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg></span>';
+function brandAdminApiBase(){
+  try{var q=new URLSearchParams(window.location.search).get('api_base');if(q)return q.replace(/\/$/,'');}catch(e0){}
+  if(typeof window.__BRAND_ADMIN_API_BASE==='string')return window.__BRAND_ADMIN_API_BASE.replace(/\/$/,'');
+  return 'http://127.0.0.1:8000';
+}
+function currentIsoWeek(){
+  var d=new Date();
+  var thu=new Date(d.getFullYear(),d.getMonth(),d.getDate()+3-(d.getDay()+6)%7);
+  var w1=new Date(thu.getFullYear(),0,4);
+  var wn=1+Math.round(((thu-w1)/86400000-3+(w1.getDay()+6)%7)/7);
+  return thu.getFullYear()+'-W'+String(wn).padStart(2,'0');
+}
+function adminDownloadButtonIdleHtml(){
+  return (typeof icon==='function'?icon('arrow_right','sm'):'')+' Download';
+}
+function setAdminDownloadButtonLoading(btn,loading){
+  if(!btn)return;
+  if(loading){btn.disabled=true;btn.innerHTML=ADMIN_DL_SPINNER+' Building…';}
+  else{btn.disabled=false;btn.innerHTML=adminDownloadButtonIdleHtml();}
+}
+function stopCoordBadgePolling(){
+  if(_coordBadgePollTimer){clearTimeout(_coordBadgePollTimer);_coordBadgePollTimer=null;}
+}
+function scheduleCoordBadgePoll(){
+  stopCoordBadgePolling();
+  _coordBadgePollTimer=setTimeout(function(){
+    _coordBadgePollTimer=null;
+    if(!document.hidden)refreshCoordinationBuildBadge(true);
+    scheduleCoordBadgePoll();
+  },60000);
+}
+function startCoordBadgePolling(){
+  refreshCoordinationBuildBadge(false);
+  scheduleCoordBadgePoll();
+  if(!window.__coordBadgeVisBound){
+    window.__coordBadgeVisBound=true;
+    document.addEventListener('visibilitychange',function(){
+      if(!document.hidden)refreshCoordinationBuildBadge(true);
+    });
+  }
+}
+function refreshCoordinationBuildBadge(fromPoll){
+  var el=document.getElementById('coord-build-badge');
+  if(!el)return;
+  if(!fromPoll){el.className='coord-build-badge loading';el.textContent='Last built: checking…';}
+  fetch(brandAdminApiBase()+'/api/brand_admin/coordination-status',{cache:'no-store'})
+    .then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json();})
+    .then(function(data){
+      var st=String(data.status||'MISSING').toUpperCase();
+      var prev=_coordBadgeLastStatus;
+      _coordBadgeLastStatus=st;
+      el.className='coord-build-badge '+st.toLowerCase();
+      el.textContent='Last built: '+(data.relative||'never')+' · '+st;
+      if(fromPoll&&prev==='MISSING'&&st==='CURRENT'&&!_coordBadgeBuildToastShown){
+        _coordBadgeBuildToastShown=true;
+        if(typeof toast!=='undefined')toast.info('Weekly package built — refresh to download latest');
+      }
+    })
+    .catch(function(){
+      _coordBadgeLastStatus=null;
+      el.className='coord-build-badge missing';
+      el.textContent='Last built: unavailable · start python3 scripts/run_server.py';
+    });
+}
+function downloadAdminPacket(ev){
+  if(_adminPacketDownloading)return;
+  if(!brandId){if(typeof toast!=='undefined')toast.error('Select a brand first.');return;}
+  var week=currentIsoWeek();
+  var btn=(ev&&ev.currentTarget)||document.getElementById('admin-packet-dl-btn');
+  var url=brandAdminApiBase()+'/api/brand_admin/download/'+encodeURIComponent(brandId)+'/'+encodeURIComponent(week);
+  _adminPacketDownloading=true;
+  setAdminDownloadButtonLoading(btn,true);
+  fetch(url)
+    .then(function(r){
+      if(r.status===404){var e=new Error('404');e._toastMsg='No package for '+brandId+'/'+week+'. Has Monday cron run?';throw e;}
+      if(r.status===500){return r.json().catch(function(){return{};}).then(function(){var e=new Error('500');e._toastMsg='Build pipeline failed. Check Monday cron logs.';throw e;});}
+      if(!r.ok){var e=new Error('HTTP');e._toastMsg='Download failed (HTTP '+r.status+')';throw e;}
+      return r.blob();
+    })
+    .then(function(blob){
+      var a=document.createElement('a');
+      a.href=URL.createObjectURL(blob);
+      a.download=brandId+'_'+week+'.zip';
+      a.click();
+      URL.revokeObjectURL(a.href);
+      if(typeof toast!=='undefined')toast.success('Downloaded '+brandId+'_'+week+'.zip');
+    })
+    .catch(function(e){
+      var msg=e&&e._toastMsg;
+      if(!msg)msg=e&&(e.message||String(e));
+      if((e instanceof TypeError)||(e&&e.name==='TypeError')||/Failed to fetch|NetworkError|Load failed|fetch/i.test(String(msg))){
+        msg='Server unreachable. Is the API running?';
+      }
+      if(typeof toast!=='undefined')toast.error(msg);
+    })
+    .finally(function(){
+      _adminPacketDownloading=false;
+      setAdminDownloadButtonLoading(btn,false);
+    });
 }
 
 // ── Render Phase 3: Weekly Operations ──
@@ -1339,17 +1446,53 @@ function refreshRuncomfySpendPanel(){
 }
 
 // ── Brand Picker ──
+function setBrandAxisFilter(axis){
+  BRAND_AXIS_FILTER=axis;
+  renderPicker();
+}
+function _axisLabel(axis,count){
+  return (axis==='all'?'All':axis.charAt(0).toUpperCase()+axis.slice(1))+' ('+count+')';
+}
 function renderPicker(){
   const el=document.getElementById('picker');
   el.classList.add('show');
   document.getElementById('main-wrap').style.display='none';
-  let h='<h1>Brand Admin</h1><p class="sub">Select a brand to begin</p><div class="brand-grid">';
-  for(const [bid,b] of Object.entries(B)){
-    h+='<div class="brand-card" onclick="selectBrand(\''+bid+'\')">';
-    h+='<h3>'+b.d+'</h3>';
-    h+='<div class="focus">'+b.f+'</div>';
-    if(b.tm) h+='<span class="teacher-tag">'+b.t+'</span>';
+  // Header + axis filter tabs
+  let h='<h1>Brand Admin</h1><p class="sub">Select a brand to begin</p>';
+  if(BRAND_INDEX_LOADED){
+    const c=BRAND_INDEX_COUNTS;
+    h+='<div style="display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 14px;align-items:center">';
+    h+='<span style="font-size:.5rem;color:var(--dim);margin-right:4px">Filter:</span>';
+    [['all',c.total],['book',c.book],['manga',c.manga],['music',c.music]].forEach(function(p){
+      const isActive=BRAND_AXIS_FILTER===p[0];
+      h+='<button type="button" class="action-btn" style="margin:0;padding:6px 12px;font-size:.5rem;'
+         +(isActive?'background:var(--acc);color:#fff':'background:transparent;color:var(--mid)')
+         +'" onclick="setBrandAxisFilter(\''+p[0]+'\')">'+_axisLabel(p[0],p[1])+'</button>';
+    });
     h+='</div>';
+  } else {
+    h+='<p style="font-size:.5rem;color:var(--dim);margin-bottom:14px">Loading brand index from registry…</p>';
+  }
+  // Brand grid
+  h+='<div class="brand-grid">';
+  let shownCount=0;
+  for(const [bid,b] of Object.entries(B)){
+    if(BRAND_AXIS_FILTER!=='all' && b.axis!==BRAND_AXIS_FILTER) continue;
+    shownCount++;
+    h+='<div class="brand-card" onclick="selectBrand(\''+bid+'\')">';
+    h+='<h3>'+(b.d||bid)+'</h3>';
+    h+='<div class="focus">'+(b.f||'')+'</div>';
+    // Axis + tier/locale pills
+    const pills=[];
+    if(b.axis) pills.push('<span style="font-size:.4rem;color:var(--acc2);border:1px solid var(--border);padding:1px 5px;border-radius:3px;text-transform:uppercase">'+b.axis+'</span>');
+    if(b.tier) pills.push('<span style="font-size:.4rem;color:var(--mid);padding:1px 5px">'+b.tier+'</span>');
+    if(b.locale) pills.push('<span style="font-size:.4rem;color:var(--mid);padding:1px 5px">'+b.locale+'</span>');
+    if(pills.length) h+='<div style="margin-top:6px;display:flex;gap:4px;flex-wrap:wrap">'+pills.join('')+'</div>';
+    if(b.tm && b.t) h+='<span class="teacher-tag">'+b.t+'</span>';
+    h+='</div>';
+  }
+  if(BRAND_INDEX_LOADED && shownCount===0){
+    h+='<p style="font-size:.55rem;color:var(--dim);grid-column:1/-1">No brands match filter \''+BRAND_AXIS_FILTER+'\'.</p>';
   }
   h+='</div>';
   el.innerHTML=h;
@@ -1360,6 +1503,7 @@ function renderPicker(){
 function selectBrand(bid){
   history.replaceState(null,'','?brand='+bid);
   initBrand(bid);
+  renderBooksByPlatform(bid);
 }
 function resetBrand(){
   history.replaceState(null,'','?');
@@ -1415,11 +1559,113 @@ function initBrand(bid){
   }
 }
 
+// ── Live brand index load (replaces the prior hardcoded const B) ──
+function loadLiveBrandIndex(){
+  return fetch(brandAdminApiBase()+'/api/brand_admin/brand_index',{cache:'no-store'})
+    .then(function(r){if(!r.ok)throw new Error('brand_index '+r.status);return r.json();})
+    .then(function(data){
+      // Project each axis's rows into the legacy B[] shape so existing call sites
+      // (initBrand, selectBrand, phase renderers) keep working unchanged.
+      Object.keys(B).forEach(function(k){delete B[k];});
+      BRAND_AXES={book:[],manga:[],music:[]};
+      ['book','manga','music'].forEach(function(axis){
+        (data[axis]||[]).forEach(function(row){
+          const bid=row.brand_id;
+          if(!bid) return;
+          const teacher=LEGACY_TEACHER_TAGS[bid]||row.musician_handle||null;
+          // For manga, primary_topic is the focus headline; for book, locale; for music, archetype.
+          let focus='';
+          if(axis==='manga'){
+            focus=(row.primary_topic||'').replace(/_/g,' ');
+            if(row.demographic) focus+=' · '+row.demographic;
+            if(row.notes) focus=row.notes;
+          } else if(axis==='book'){
+            focus=(row.locale||'')+(row.catalog_id?' · '+row.catalog_id:'');
+          } else if(axis==='music'){
+            focus=(row.archetype||'music')+(row.status==='inactive'?' · inactive':'');
+          }
+          B[bid]={
+            d:row.name||bid,
+            t:teacher,
+            tm:!!teacher,
+            tr:row.tier||row.demographic||'',
+            f:focus,
+            tp:row.topics||[],
+            axis:axis,
+            tier:row.tier||null,
+            locale:row.locale||null,
+            status:row.status||'active'
+          };
+          BRAND_AXES[axis].push(bid);
+        });
+      });
+      BRAND_INDEX_COUNTS=data.counts||{book:0,manga:0,music:0,total:0};
+      BRAND_INDEX_LOADED=true;
+      console.log('[brand_admin] live brand index loaded:',BRAND_INDEX_COUNTS);
+    })
+    .catch(function(err){
+      console.warn('[brand_admin] brand_index fetch failed:',err);
+      BRAND_INDEX_LOADED=false;
+    });
+}
+
+// ── Books × Platforms per brand ──
+function renderBooksByPlatform(bid){
+  const tbody=document.getElementById('bbp-tbody');
+  const hint=document.getElementById('bbp-hint');
+  const axisHint=document.getElementById('bbp-axis-hint');
+  if(!tbody) return; // section absent (older HTML copy)
+  tbody.innerHTML='<tr><td colspan="7" class="ab-muted">Loading…</td></tr>';
+  if(hint) hint.textContent='';
+  fetch(brandAdminApiBase()+'/api/brand_admin/brand/'+encodeURIComponent(bid)+'/books_by_platform',{cache:'no-store'})
+    .then(function(r){if(!r.ok)throw new Error('books_by_platform '+r.status);return r.json();})
+    .then(function(data){
+      if(axisHint) axisHint.textContent='Axis: '+(data.axis||'—');
+      if(!data.books||!data.books.length){
+        tbody.innerHTML='<tr><td colspan="7" class="ab-muted">'+(data.empty_state_message||'No books published yet.')+'</td></tr>';
+      } else {
+        let rows='';
+        data.books.forEach(function(b){
+          rows+='<tr>';
+          rows+='<td><strong>'+abEsc(b.title||b.topic||'')+'</strong></td>';
+          rows+='<td>'+abEsc(b.status||'—')+'</td>';
+          ['kdp','apple_books','google_play','kobo','store_url_live'].forEach(function(plat){
+            const url=b.platforms?b.platforms[plat]:null;
+            if(url){rows+='<td><a href="'+abEsc(url)+'" target="_blank" rel="noopener" style="color:var(--acc2);text-decoration:underline">link</a></td>';}
+            else{rows+='<td class="ab-muted">—</td>';}
+          });
+          rows+='</tr>';
+        });
+        tbody.innerHTML=rows;
+      }
+      if(hint){
+        let parts=[];
+        if(data.ontology_gap) parts.push(data.ontology_gap);
+        if(data.source) parts.push('Source: '+abEsc(data.source));
+        hint.innerHTML=parts.join(' · ');
+      }
+    })
+    .catch(function(err){
+      tbody.innerHTML='<tr><td colspan="7" class="ab-muted">Could not load books_by_platform: '+abEsc(err.message)+'. Start: PYTHONPATH=. python3 scripts/run_server.py</td></tr>';
+      if(axisHint) axisHint.textContent='Axis: —';
+    });
+}
+function refreshBooksByPlatform(){
+  if(typeof brandId==='string'&&brandId) renderBooksByPlatform(brandId);
+}
+
 function init(){
   const p=new URLSearchParams(window.location.search);
   const bid=p.get('brand');
-  if(bid && B[bid]) initBrand(bid);
-  else renderPicker();
+  // Load the live brand index BEFORE picker/initBrand so the live data drives both.
+  loadLiveBrandIndex().then(function(){
+    if(bid && B[bid]){
+      initBrand(bid);
+      renderBooksByPlatform(bid);
+    } else {
+      renderPicker();
+    }
+  });
 }
 init();
 </script>

@@ -1,5 +1,9 @@
 # Persona Atom Pool Audit
 
+> **DEPRECATED 2026-06-06** — superseded by [`docs/PEARL_PRIME_ATOM_100PCT_COVERAGE_SSOT.md`](../../docs/PEARL_PRIME_ATOM_100PCT_COVERAGE_SSOT.md) **§8.1** (per-persona atom-type coverage) and **§8.3** (P×T 9-type completeness). This doc is retained as historical lineage per [`AGENT_FILE_PERSISTENCE_PROTOCOL.md`](../../docs/AGENT_FILE_PERSISTENCE_PROTOCOL.md). For current 100% coverage state, query the SSOT + the gap matrix at [`artifacts/qa/pearl_prime_atom_100pct_gap_matrix_20260606.tsv`](../qa/pearl_prime_atom_100pct_gap_matrix_20260606.tsv).
+
+---
+
 **Date:** 2026-04-10
 **Project:** proj_state_convergence_20260328
 **Scope:** atoms/ — 13 personas × 15 canonical topics

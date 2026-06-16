@@ -34,6 +34,25 @@ RENDERS_ROOT = REPO_ROOT / "artifacts" / "pearl_prime_en_us" / "first_100_qa" / 
 SPECS_ROOT = REPO_ROOT / "artifacts" / "pearl_prime_en_us" / "first_100_qa" / "specs"
 TSV_OUT = REPO_ROOT / "artifacts" / "pearl_prime_en_us" / "bestseller_audit_20260513.tsv"
 MD_OUT = REPO_ROOT / "artifacts" / "qa" / "en_us_catalog_bestseller_audit_2026-05-13.md"
+SCENE_ANCHOR_CONFIG = REPO_ROOT / "config" / "quality" / "scene_anchor_density_config.yaml"
+
+
+def live_scene_anchor_cap() -> int:
+    """Return the CURRENT default per-chapter scene_anchor_density cap.
+
+    Single source of truth is config/quality/scene_anchor_density_config.yaml
+    (the same file run_pipeline.py reads). Hardcoding the cap in remediation
+    prose is how this report drifted: it asserted cap=2 for ~3 weeks after
+    PR #1091 raised the live gate to cap=3, mis-directing every reader into
+    re-investigating an already-fixed gate. Read it live instead.
+    """
+    try:
+        import yaml  # type: ignore
+
+        data = yaml.safe_load(SCENE_ANCHOR_CONFIG.read_text(encoding="utf-8")) or {}
+        return int(data.get("default_cap_per_chapter", 3))
+    except Exception:
+        return 3
 
 
 def verdict_from_score(score):
@@ -259,10 +278,17 @@ def main() -> int:
                   f"median {statistics.median(ms):.3f}, range "
                   f"[{min(ms):.3f}, {max(ms):.3f}]. Distribution is tight — every rendered "
                   f"book clears the PASS threshold.")
-    md.append("- **Bottom line:** the bestseller-grade gap in the en_US catalog is NOT score quality — "
-              "the rendered books all pass. The gap is **pipeline yield**. Until scene_anchor_density "
-              "failures are addressed, ~87% of planner-allocated BookSpecs never reach the bestseller "
-              "scoring stage.")
+    _sa_cap = live_scene_anchor_cap()
+    _miss_pct = 100.0 * missing / total if total else 0.0
+    md.append(f"- **Bottom line:** the bestseller-grade gap in the en_US catalog is NOT score quality — "
+              f"the rendered books all pass. The gap is **pipeline yield**: "
+              f"**{missing}/{total} ({_miss_pct:.1f}%)** of planner-allocated BookSpecs did not reach the "
+              f"bestseller scoring stage in THIS run's inputs. "
+              f"NOTE: the live `scene_anchor_density` per-chapter cap is now **{_sa_cap}** "
+              f"(config/quality/scene_anchor_density_config.yaml; raised 2→3 in PR #1091). "
+              f"Any `scene_anchor_density` count above reflects the render inputs present when this "
+              f"audit was generated — re-render the catalog at cap={_sa_cap} before treating the "
+              f"yield-loss figure as current.")
     md.append("")
     md.append("---")
     md.append("")
@@ -372,16 +398,30 @@ def main() -> int:
     md.append("")
     md.append("### Pipeline yield recommendations (the actual bottleneck)")
     md.append("")
-    md.append("The bestseller score is moot for 87% of the catalog because those books fail at "
-              "production quality gates before scoring. Prioritized remediation:")
+    md.append(f"The bestseller score is moot for the **{missing}/{total} ({_miss_pct:.1f}%)** of the "
+              f"catalog that failed production quality gates before scoring in this run's inputs. "
+              f"Prioritized remediation:")
     md.append("")
     top_fail_label, top_fail_count = top_fail
     if top_fail_label:
-        md.append(f"1. **`{top_fail_label}` ({top_fail_count} books, "
-                  f"{100.0*top_fail_count/total:.1f}%)** — single largest source of yield loss. "
-                  f"This gate caps repeated >3-word phrases at 2 per book; investigate spine-mode "
-                  f"prose duplication, then either (a) loosen cap (after impact analysis), "
-                  f"(b) post-render dedup pass, or (c) source-atom variation backfill.")
+        if top_fail_label == "scene_anchor_density":
+            md.append(f"1. **`{top_fail_label}` ({top_fail_count} books, "
+                      f"{100.0*top_fail_count/total:.1f}%)** — this gate caps any single ≥4-word phrase "
+                      f"to a maximum number of paragraphs **per chapter** (NOT per book). "
+                      f"The live cap is **{_sa_cap}** "
+                      f"(config/quality/scene_anchor_density_config.yaml). "
+                      f"PR #1091 raised it 2→3 after finding 156/168 legacy failures were a single "
+                      f"paragraph over the old cap=2 (natural rhetorical motifs), while genuine 4+ "
+                      f"paragraph repetition stays blocked. If this count is non-trivial AND the render "
+                      f"inputs predate PR #1091, the fix is to **re-render at cap={_sa_cap}**, not to "
+                      f"re-loosen the gate. Only if fresh cap={_sa_cap} renders still fail in bulk should "
+                      f"you pursue (a) per-plan scene_anchor_cap tuning, (b) post-render dedup, or "
+                      f"(c) source-atom variation backfill.")
+        else:
+            md.append(f"1. **`{top_fail_label}` ({top_fail_count} books, "
+                      f"{100.0*top_fail_count/total:.1f}%)** — single largest source of yield loss. "
+                      f"Investigate the gate's failure mode, then decide whether to fix upstream "
+                      f"(prose/atom variation) or adjust the gate after impact analysis.")
     other_fails = sorted(
         ((k, v) for k, v in fail_counts_tldr.items() if k not in ("RENDERED", top_fail_label)),
         key=lambda kv: -kv[1],

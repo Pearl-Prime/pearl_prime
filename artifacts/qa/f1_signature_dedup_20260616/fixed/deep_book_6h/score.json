@@ -1,0 +1,64 @@
+{
+  "arm": "fixed",
+  "format": "deep_book_6h",
+  "chapters": 12,
+  "words": 59159,
+  "verdict": "HARD_FAIL",
+  "F1": 93,
+  "F2": 38,
+  "F7": 12,
+  "total_findings": 146,
+  "F1_sizes": {
+    "2": 90,
+    "3": 2,
+    "6": 1
+  },
+  "cluster_phrase_counts": {
+    "HOOK v02 'The task is open'": 1,
+    "EXERCISE 'Just thirty seconds'": 1,
+    "EXERCISE 'Now, I want you to notice'": 2,
+    "doctrine 'This is The Unspoken'": 1
+  },
+  "largest_f1": [
+    {
+      "size": 6,
+      "summary": "templated paragraph cluster size 6 (chapters [2, 3, 6, 7, 10, 12])",
+      "excerpt": "Same body. Different door. Watch what changes."
+    },
+    {
+      "size": 3,
+      "summary": "templated paragraph cluster size 3 (chapters [1, 4, 8])",
+      "excerpt": "Here is the mechanism. Your body has an alarm system that is older than your job. It evolved to fire fast and ask questi..."
+    },
+    {
+      "size": 3,
+      "summary": "templated paragraph cluster size 3 (chapters [1, 5, 7])",
+      "excerpt": "This is The Unspoken. Notice. Do not analyze. You do not need to believe that. Just try it."
+    },
+    {
+      "size": 2,
+      "summary": "templated paragraph cluster size 2 (chapters [1, 5])",
+      "excerpt": "At 11:47 p.m., lying on your back, you are rehearsing tomorrow's stand-up. You are not deciding what to say. You decided..."
+    },
+    {
+      "size": 2,
+      "summary": "templated paragraph cluster size 2 (chapters [1, 5])",
+      "excerpt": "What the body is doing here is older than any planner app. It is trying to take a future event \u2014 uncertain, unfinished, ..."
+    },
+    {
+      "size": 2,
+      "summary": "templated paragraph cluster size 2 (chapters [1, 5])",
+      "excerpt": "The cost of this rehearsal is paid in the body. The heart rate that should be in sleep range is in low-grade preparation..."
+    },
+    {
+      "size": 2,
+      "summary": "templated paragraph cluster size 2 (chapters [1, 2])",
+      "excerpt": "Notice a thought that repeats itself in your mind. Follow it back. Who told you\nthis was true? How long have you carried..."
+    },
+    {
+      "size": 2,
+      "summary": "templated paragraph cluster size 2 (chapters [1, 7])",
+      "excerpt": "The good news lands. The manager says the work is strong. The launch goes clean. The review reads like a review you woul..."
+    }
+  ]
+}

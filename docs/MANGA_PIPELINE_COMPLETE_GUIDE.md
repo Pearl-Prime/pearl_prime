@@ -1,5 +1,7 @@
 # Pearl Prime — Manga Pipeline (complete operator guide)
 
+> **Routing (2026-05-29):** Use this doc for **`config/pipeline_registry.yaml` jobs** (`create_job.py` → `run_chapter_production.py` + ITE). For **`run_manga_pipeline.py` / weekly smoke**, use [MANGA_PRODUCTION_PIPELINE.md](./MANGA_PRODUCTION_PIPELINE.md). For **`run_manga_chapter.py` DAG**, use [MANGA_PIPELINE_ONBOARDING.md](./MANGA_PIPELINE_ONBOARDING.md). **V5.1 renders:** [docs/specs/MANGA_V5_LAYERED_ARCHITECTURE.md](./specs/MANGA_V5_LAYERED_ARCHITECTURE.md).
+
 **Production:** `scripts/manga/run_chapter_production.py`  
 **ITE:** `scripts/manga/ite_*.py`  
 **Registry:** `config/pipeline_registry.yaml` → `pipelines.manga`  

@@ -1,9 +1,20 @@
 import { Globe } from "lucide-react";
 
+// Per-market accent palette — extend when marketChoices in BrandWizard.jsx grows.
+// Unmapped keys fall back to DEFAULT_MARKET (slate/gray).
 const MARKET_ACCENT = {
-  us: { gradient: "from-indigo-500 to-violet-600", soft: "from-indigo-50/90 to-violet-50/70", label: "text-indigo-700" },
-  japan: { gradient: "from-rose-500 to-red-600", soft: "from-rose-50/90 to-red-50/60", label: "text-rose-700" },
-  taiwan: { gradient: "from-emerald-500 to-teal-600", soft: "from-emerald-50/90 to-teal-50/60", label: "text-emerald-700" },
+  us:       { gradient: "from-indigo-500 to-violet-600", soft: "from-indigo-50/90 to-violet-50/70", label: "text-indigo-700" },
+  japan:    { gradient: "from-rose-500 to-red-600",      soft: "from-rose-50/90 to-red-50/60",      label: "text-rose-700" },
+  korea:    { gradient: "from-pink-500 to-fuchsia-600",  soft: "from-pink-50/90 to-fuchsia-50/60",  label: "text-pink-700" },
+  taiwan:   { gradient: "from-emerald-500 to-teal-600",  soft: "from-emerald-50/90 to-teal-50/60",  label: "text-emerald-700" },
+  hongkong: { gradient: "from-cyan-500 to-sky-600",      soft: "from-cyan-50/90 to-sky-50/60",      label: "text-cyan-700" },
+  china:    { gradient: "from-amber-500 to-orange-600",  soft: "from-amber-50/90 to-orange-50/60",  label: "text-amber-700" },
+  latam:    { gradient: "from-orange-500 to-red-500",    soft: "from-orange-50/90 to-red-50/60",    label: "text-orange-700" },
+  france:   { gradient: "from-blue-500 to-indigo-600",   soft: "from-blue-50/90 to-indigo-50/60",   label: "text-blue-700" },
+  germany:  { gradient: "from-yellow-500 to-amber-600",  soft: "from-yellow-50/90 to-amber-50/60",  label: "text-yellow-700" },
+  italy:    { gradient: "from-green-500 to-emerald-600", soft: "from-green-50/90 to-emerald-50/60", label: "text-green-700" },
+  hungary:  { gradient: "from-red-500 to-rose-600",      soft: "from-red-50/90 to-rose-50/60",      label: "text-red-700" },
+  brazil:   { gradient: "from-lime-500 to-green-600",    soft: "from-lime-50/90 to-green-50/60",    label: "text-lime-700" },
 };
 
 const DEFAULT_MARKET = {

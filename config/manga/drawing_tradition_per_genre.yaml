@@ -40,7 +40,9 @@ cross_references:
 
 schema_version: "1.0"
 last_updated: "2026-05-02"
-genres_total: 25
+genres_total: 26   # 26 drawing-tradition blocks (top_8 8 + deferred 18) — splits horror into
+                   # psychological_horror + horror, vs the 25 catalog genres in
+                   # config/manga/canonical_genre_list.yaml (that file is the genre-COUNT SSOT).
 top_8_priority: [healing, dark_fantasy, psychological_horror, mecha, romance, slice_of_life, fantasy_adventure, comedy]
 deferred_phase_2: [battle, sports, mystery, horror, workplace, essay, food, family, procedural, historical, cultivation, sci_fi_cyberpunk, supernatural_everyday, school, memoir, social_issue, graphic_medicine, battle_internal]
 

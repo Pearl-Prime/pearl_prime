@@ -1,5 +1,6 @@
 import { useState, useCallback, useRef, useMemo, useEffect } from "react";
 import { useTranslation } from "./useTranslation.jsx";
+import { matchBrand } from "./brandMatch.js";
 import { ChevronRight, ChevronLeft, Eye, Sparkles, BookOpen, Mic, Film, Palette, Heart, Target, Zap, Shield, Sun, Moon, Flame, Feather, Brain, Compass, Star, Check, AlertTriangle, Download, Play, PenTool, Image, Layers, ArrowRight, Users, BarChart3, TrendingUp, Radio, Headphones, Tv, Smartphone, BookMarked, GraduationCap, Clock, Rocket, Award, Crown, Globe, Volume2, Brush, Activity, Search, Hash, Tag, Grip, CircleDot, SlidersHorizontal } from "lucide-react";
 import { OutputProofStrip } from "./onboarding/OutputProofStrip.jsx";
 import { LaneChoiceCard } from "./onboarding/LaneChoiceCard.jsx";
@@ -1343,50 +1344,15 @@ function Step1Archetype({ state, update, i18n = {} }) {
         subtitle="Your archetype is the feeling readers associate with you — across prose, covers, video, and social. Pick the worldview that matches how you want to show up."
         helper="Each card includes a short vision of the world your brand invites readers into."
       />
-      {/* §2 MUSIC-MODE-BRAND-INTEGRATION-V1-01: archetype/mode selector — Book mode uses standard archetype path; Music mode (brand-id space 38+) swaps step 4 to the musician_reflections_survey. */}
-      <div className="mb-6 rounded-2xl border-2 border-gray-200 bg-white p-4">
-        <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.2em] text-violet-600">Mode</p>
-        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-          <button
-            type="button"
-            onClick={() => update({ mode: "book" })}
-            className={`text-left p-4 rounded-xl border-2 transition-all ${!isMusic ? "border-gray-900 bg-gray-50 shadow-md" : "border-gray-200 bg-white hover:border-gray-300"}`}
-          >
-            <div className="flex items-center gap-2">
-              <BookOpen size={18} className="text-gray-900" />
-              <span className="font-bold text-sm text-white">Book mode</span>
-              {!isMusic && <div className="ml-auto w-5 h-5 rounded-full bg-gray-900 flex items-center justify-center"><Check size={12} className="text-white" /></div>}
-            </div>
-            <p className="text-[11px] text-white mt-1.5 leading-relaxed">Self-help, memoir, manga, editorial — the standard catalog path with archetype, persona, voice, and visual style.</p>
-          </button>
-          <button
-            type="button"
-            onClick={() => update({ mode: "music" })}
-            className={`text-left p-4 rounded-xl border-2 transition-all ${isMusic ? "border-amber-500 bg-amber-50 shadow-md" : "border-gray-200 bg-white hover:border-gray-300"}`}
-          >
-            <div className="flex items-center gap-2">
-              <Headphones size={18} className="text-amber-600" />
-              <span className="font-bold text-sm text-white">Music mode</span>
-              {isMusic && <div className="ml-auto w-5 h-5 rounded-full bg-amber-600 flex items-center justify-center"><Check size={12} className="text-white" /></div>}
-            </div>
-            <p className="text-[11px] text-white mt-1.5 leading-relaxed">First-class music brand (id 38+). Step 4 becomes the musician reflections survey — voice, themes, healing intent, consent.</p>
-          </button>
-        </div>
+      {/* Mode selector removed 2026-06-03: mode is now picked at the pearl_prime_v6-3
+          IntroJourney via the Teacher Books / Music Books buttons. From step 1 on,
+          both modes share the same wizard surface. */}
+      <div className="mb-6 rounded-xl border border-indigo-100/80 bg-indigo-50/60 px-4 py-3 backdrop-blur-sm">
+        <p className="text-xs font-medium text-indigo-900">{useTranslation().t("steps", "This is the highest-leverage choice in the studio — everything else builds on the emotional territory you choose here.")}</p>
       </div>
-      {!isMusic ? (
-        <>
-          <div className="mb-6 rounded-xl border border-indigo-100/80 bg-indigo-50/60 px-4 py-3 backdrop-blur-sm">
-            <p className="text-xs font-medium text-indigo-900">{useTranslation().t("steps", "This is the highest-leverage choice in the studio — everything else builds on the emotional territory you choose here.")}</p>
-          </div>
-          <div className="grid grid-cols-1 gap-3">
-            {_A.map((arch) => <ArchetypeCard key={arch.id} arch={arch} selected={state.archetype} onClick={(id) => update({ archetype: id })} />)}
-          </div>
-        </>
-      ) : (
-        <div className="mb-6 rounded-xl border border-amber-200/80 bg-amber-50/60 px-4 py-3 backdrop-blur-sm">
-          <p className="text-xs font-medium text-amber-900">Music mode selected — your brand archetype is set by the musician reflections survey at step 4. Continue to capture your primary listener context, then complete the survey on step 4.</p>
-        </div>
-      )}
+      <div className="grid grid-cols-1 gap-3">
+        {_A.map((arch) => <ArchetypeCard key={arch.id} arch={arch} selected={state.archetype} onClick={(id) => update({ archetype: id })} />)}
+      </div>
     </div>
   );
 }
@@ -1400,16 +1366,9 @@ function Step2PrimaryReader({ state, update, i18n = {} }) {
     { key: "tools", label: "Breathwork / tools", hint: "Utility-first experiences and practical support flows." },
     { key: "hybrid", label: "Hybrid lane", hint: "Blend book, manga, and editorial proof in one path." },
   ];
-  const marketChoices = [
-    { key: "us", label: "United States (en-US)", hint: "Primary launch market." },
-    { key: "japan", label: "Japan (ja-JP)", hint: "Localized visual and wording expectations." },
-    { key: "taiwan", label: "Taiwan (zh-TW)", hint: "Traditional Chinese market alignment." },
-  ];
-
-  const selectedLane = state.onboardingLane || "self_help";
-  const selectedMarket = state.onboardingMarket || "us";
-
-  const selectedFormatFocus = selectedLane === "manga" ? "manga" : state.formatFocus;
+  // Market step removed 2026-06-03 — locale routing happens server-side via the
+  // catalog generator's VALID_LOCALES list; the wizard does not need a market
+  // picker. (Reverts PR #1417's 12-locale expansion which was operator-disapproved.)
 
   return (
     <div>
@@ -2871,8 +2830,29 @@ function Step11Launch({ state, update, i18n = {} }) {
   const [yamlOutput, setYamlOutput] = useState("");
   const [showYaml, setShowYaml] = useState(false);
   const [yamlCopied, setYamlCopied] = useState(false);
+  const [matched, setMatched] = useState(null);
 
-  const handleLaunch = () => { setYamlOutput(generateYAML(state)); setSubmitted(true); };
+  // Read the teacher/composite selection (teacher_showcase sets phoenix_book_mode;
+  // ?teacher / ?mode=composite are URL fallbacks). Same contract as generateYAML.
+  const readTeacherMode = () => {
+    try { const raw = localStorage.getItem("phoenix_book_mode"); if (raw) return JSON.parse(raw); } catch (_) {}
+    const p = new URLSearchParams(window.location.search);
+    const ut = p.get("teacher"), um = p.get("mode");
+    if (ut) return { mode: "teacher", teacher: ut };
+    if (um === "composite") return { mode: "composite", teacher: null };
+    return { mode: "composite", teacher: null };
+  };
+
+  const handleLaunch = async () => {
+    setYamlOutput(generateYAML(state));
+    setSubmitted(true);
+    try {
+      const r = await fetch("brand_admin_brands.json", { cache: "no-store" });
+      const brands = r.ok ? await r.json() : {};
+      const m = matchBrand(state, brands, readTeacherMode());
+      if (m) { setMatched(m); try { localStorage.setItem("phoenix_pending_brand", JSON.stringify(m)); } catch (_) {} }
+    } catch (_) {}
+  };
 
   if (submitted) {
     const arch = _A.find((a) => a.id === state.archetype);
@@ -2905,6 +2885,22 @@ function Step11Launch({ state, update, i18n = {} }) {
 
     return (
       <div className="py-4">
+        {/* Assigned brand — the wizard matched these selections to one existing brand */}
+        {matched && (
+          <div className="mb-6 rounded-2xl border border-emerald-300 bg-emerald-50 p-6 text-center">
+            <div className="text-[11px] font-bold uppercase tracking-wider text-emerald-700">{t("ui", "Your assigned brand")}</div>
+            <div className="mt-1 text-2xl font-black text-gray-900">{matched.publication_corp}</div>
+            <div className="mt-1 font-mono text-[11px] text-gray-500">
+              {matched.is_teacher ? `${t("ui", "Teacher brand")} · ${matched.teacher}` : t("ui", "Composite brand")} · {matched.brand_id}
+            </div>
+            <button
+              onClick={() => { window.location.href = "brand_handoff_dashboard.html?brand=" + encodeURIComponent(matched.brand_id); }}
+              className="mt-4 inline-flex items-center gap-2 rounded-xl bg-emerald-600 px-7 py-3 text-sm font-bold text-white shadow-lg transition-all hover:-translate-y-0.5 hover:bg-emerald-700"
+            >
+              {t("ui", "Open Brand Director")} <ArrowRight size={16} />
+            </button>
+          </div>
+        )}
         {/* Celebration Header */}
         <div className="relative text-center mb-8 overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-purple-50 via-white to-white rounded-3xl" />
@@ -3423,30 +3419,30 @@ function IntroJourney({ onNext, onBack, onChooseTeacher }) {
             </div>
           </div>
           <div className="mt-8" />
-          <div className="mt-6 text-center">
+          {/* Mode picker — two identical primary buttons. Operator-ratified 2026-06-03:
+              Teacher Books → teacher_showcase flow (existing path).
+              Music Books   → musician_reflections_survey, then converges into the
+                              wizard at step 1 (same wizard for both modes from there).
+              The legacy "composite mode (no teacher)" CTA is retired; composite
+              for non-music brands is handled inside teacher_showcase.html. */}
+          <div className="mt-6 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
             <button
               type="button"
               onClick={onChooseTeacher}
               className="inline-flex items-center gap-2 rounded-2xl bg-gray-900 px-8 py-3.5 text-sm font-bold text-white shadow-lg transition-all hover:-translate-y-0.5 hover:bg-gray-800"
             >
-              {t("ui", "Choose Your Teacher")} <ArrowRight size={18} />
+              {t("ui", "Teacher Books")} <ArrowRight size={18} />
             </button>
-          </div>
-          {/* Secondary path: composite mode — skip teacher selection entirely.
-              Sets phoenix_book_mode in localStorage, then jumps to Step 1.
-              YAML emit at generateYAML() handles teacher === null as composite. */}
-          <div className="mt-3 text-center">
             <button
               type="button"
               onClick={() => {
-                try { localStorage.setItem("phoenix_book_mode", JSON.stringify({ mode: "composite", teacher: null })); } catch (_) {}
-                onNext();
+                try { localStorage.setItem("phoenix_book_mode", JSON.stringify({ mode: "music", teacher: null })); } catch (_) {}
+                window.location.href = "/musician_reflections_survey";
               }}
-              className="inline-flex items-center gap-2 rounded-2xl border border-amber-400/40 bg-transparent px-6 py-2.5 text-xs font-semibold text-amber-200 transition-all hover:bg-amber-500/10"
+              className="inline-flex items-center gap-2 rounded-2xl bg-gray-900 px-8 py-3.5 text-sm font-bold text-white shadow-lg transition-all hover:-translate-y-0.5 hover:bg-gray-800"
             >
-              {t("ui", "Or: Composite mode (no teacher)")} <ArrowRight size={14} />
+              {t("ui", "Music Books")} <ArrowRight size={18} />
             </button>
-            <div className="mt-2 text-[10px] text-white/50">{t("ui", "Author all books for this brand without a teacher voice")}</div>
           </div>
         </div>
       </div>
@@ -3640,13 +3636,15 @@ export default function BrandWizard() {
   const goToHowItWorks = () => { setPhase("intro"); setIntroPage(1); scrollTop(); };
   const goToTeacherShowcase = () => { window.location.href = "teacher_showcase.html"; };
 
-  // If ?teacher= or ?mode=composite in URL, skip intro and jump straight to wizard step 1.
-  // Composite mode is set by the "Composite (no teacher)" CTA on teacher_showcase.html.
+  // If ?teacher= or ?mode= in URL, skip intro and jump straight to wizard step 1.
+  // - teacher: set by teacher_showcase.html chooseTeacher() after select
+  // - mode=composite: legacy (now unused; kept for back-compat with old URLs)
+  // - mode=music: set by musician_reflections_survey.html submit after Music Books flow
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const urlTeacher = params.get("teacher");
     const urlMode = params.get("mode");
-    if (urlTeacher || urlMode === "composite") { setPhase("wizard"); setStep(0); scrollTop(); }
+    if (urlTeacher || urlMode === "composite" || urlMode === "music") { setPhase("wizard"); setStep(0); scrollTop(); }
   }, []);
 
   // INTRO: 0=welcome, 1=journey → choose teacher → wizard
