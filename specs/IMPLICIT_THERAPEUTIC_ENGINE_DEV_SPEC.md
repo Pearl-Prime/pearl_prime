@@ -2,6 +2,8 @@
 
 **Last updated:** 2026-03-30
 **Status:** Dev spec — pending review
+
+> **Enforcement status (provenance, 2026-05-29):** the `vt_stealth` implicit/explicit-ratio gate (§12) is SPECIFIED here but NOT yet wired into the live authoring pipeline (this spec is pending review / implementation deferred). The genre-first / small-embedded-self-help proportion is currently enforced structurally by `specs/MANGA_STORY_ARCHITECT_SPEC.md` (carrier beats never first/last, embedded among 2–6 others; anti-preachy gates) + `specs/MANGA_TEACHING_LIBRARY_SPEC.md` (atom text withheld from the Chapter Writer). Source framework: `artifacts/research/therapeutic_embed_psychology_framework_2026-05-13.md`.
 **Authority scope:** All visual (manga/illustrated), video, and music/soundtrack production pipelines
 **Depends on:** `specs/AI_MANGA_PIPELINE_SUMMARY.md`, `specs/MANGA_GENRE_AGENT_SPEC.md`, `config/quality/ei_v2_config.yaml`, `specs/PHOENIX_V4_5_WRITER_SPEC_TTS_v1.3.md`, `docs/assembly/SOMATIC_BOOK_BLUEPRINT.yaml`
 **Research basis:** `research/2026-03-30_implicit-therapeutic-visual-media.md` (26 source clusters)

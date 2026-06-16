@@ -6,6 +6,16 @@
 #   config/catalog_planning/locale_brand_names.yaml  (12 market locales)
 #   config/catalog/catalog_generation_config.yaml  (locale/tier definitions)
 # Authority: Big View Phase 1
+#
+# PROVENANCE (2026-05-29): the per-market `content_mix` percentages here are a
+# 2026-04-22 PLANNING ARTIFACT, NOT research-grounded. Authoritative per-market
+# format mix (ebook vs manga/webtoon) = config/catalog/catalog_generation_config.yaml
+# ::lane_content_mix (cites global_manga_distribution_strategy.md §6.1). Do NOT cite
+# this content_mix for format %. Known stale: japan manga 60 here vs lane_content_mix
+# 70 vs research 40; taiwan/france show NO manga line despite being manga markets.
+# EU / LATAM / Brazil / Hungary / HK / SG content_mix are PLACEHOLDERS — their catalog
+# plans (docs/EUROPE_CATALOG_PLAN.md, docs/LATAM_CATALOG_PLAN.md) mark format+genre
+# "TO RESEARCH" (unfilled scaffolds).
 
 version: "1.0"
 generated: "2026-04-22"

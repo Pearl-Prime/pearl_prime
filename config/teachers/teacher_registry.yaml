@@ -8,6 +8,8 @@ all_canonical_topics: &all_topics
 teachers:
   adi_da:
     display_name: "Adi Da"
+    formal_name: "Adi Da"
+    pronouns: "he/him"
     kb_id: "adi_da"
     doctrine_profile: "adi_da"
     ei_profile:
@@ -32,6 +34,8 @@ teachers:
   ahjan:
     formal_name: "ahjan sensei"
     display_name: "Ahjan"
+    pronouns: "he/him"
+    honorific: "sensei"
     kb_id: "ahjan"
     doctrine_profile: "ahjan_contemplative"
     # The teacher's name is "ahjan" — not a Thai honorific. Short: ahjan; formal: ahjan sensei.
@@ -48,6 +52,9 @@ teachers:
 
   master_feung:
     display_name: "Master Feung"
+    formal_name: "Master Feung"
+    pronouns: "he/him"
+    honorific: "Master"
     kb_id: "master_feung"
     doctrine_profile: "master_feung"
     allowed_topics: *all_topics
@@ -63,6 +70,8 @@ teachers:
 
   sai_ma:
     display_name: "Sai Maa"
+    formal_name: "Sai Maa"
+    pronouns: "she/her"
     kb_id: "sai_ma"
     doctrine_profile: "sai_ma"
     allowed_topics: *all_topics
@@ -78,6 +87,8 @@ teachers:
 
   ra:
     display_name: "Ra"
+    formal_name: "Ra"
+    pronouns: "they/them"   # provisional — operator decision pending; see PEARL_NEWS_WRITER_SPEC if changed
     kb_id: "ra"
     doctrine_profile: "ra"
     allowed_topics: *all_topics
@@ -93,6 +104,9 @@ teachers:
 
   junko:
     display_name: "Junko"
+    formal_name: "Channeler Junko"
+    pronouns: "she/her"
+    honorific: "Channeler"
     kb_id: "junko"
     doctrine_profile: "junko"
     allowed_topics: *all_topics
@@ -106,8 +120,32 @@ teachers:
       require_teacher_exercise: true
       allow_generic_fallback_for_scene: true
 
+  miyuki:
+    display_name: "Miyuki"
+    formal_name: "Miyuki"
+    pronouns: "she/her"
+    honorific: null  # lay-secular Kyoto teacher; no honorific per OPD-111
+    kb_id: "miyuki"
+    doctrine_profile: "miyuki"
+    tradition: "Japanese contemplative — ganbaru, mono no aware, body-anchored; lay-secular, Zen-adjacent without explicit lineage"
+    sub_school: null
+    lineage_root: null   # lay practitioner, no formal transmission
+    allowed_topics: *all_topics
+    disallowed_topics: [manifestation, get_rich_quick]
+    forbidden_traditions: [channeling, light_language, zen_explicit, shingon, theravada_explicit]  # Per OPD-111 — Miyuki is lay-Japanese-contemplative, NOT channeling (Junko), NOT Sōtō Zen (Kenjin), NOT Shingon (Joshin)
+    allowed_engines: [shame, false_alarm, overwhelm, spiral, watcher, grief, comparison]
+    allowed_resolution_types: [open_loop, internal_shift_only, grounded_reframe]
+    identity_shift_allowed: false
+    preferred_formats: [F006, standard_book]
+    teacher_mode_defaults:
+      require_teacher_story: true
+      require_teacher_exercise: true
+      allow_generic_fallback_for_scene: true
+
   miki:
     display_name: "Miki"
+    formal_name: "Miki"
+    pronouns: "she/her"
     kb_id: "miki"
     doctrine_profile: "miki"
     allowed_topics: *all_topics
@@ -123,6 +161,9 @@ teachers:
 
   master_wu:
     display_name: "Master Wu"
+    formal_name: "Master Wu"
+    pronouns: "he/him"
+    honorific: "Master"
     kb_id: "master_wu"
     doctrine_profile: "master_wu"
     allowed_topics: *all_topics
@@ -138,6 +179,8 @@ teachers:
 
   pamela_fellows:
     display_name: "Pamela Fellows"
+    formal_name: "Pamela Fellows"
+    pronouns: "she/her"
     kb_id: "pamela_fellows"
     doctrine_profile: "pamela_fellows"
     allowed_topics: *all_topics
@@ -153,10 +196,40 @@ teachers:
 
   joshin:
     display_name: "Joshin"
+    formal_name: "Joshin Ajari"
+    pronouns: "he/him"
+    honorific: "Ajari"  # 阿闍梨 — Shingon ācārya; NOT roshi (Zen-specific) per OPD-105
     kb_id: "joshin"
     doctrine_profile: "joshin"
+    tradition: "Shingon Esoteric Buddhism (Kōyasan Shingon-shū)"
+    sub_school: "kogi_koyasan"  # Kogi Shingon, Mount Kōya headquarters
+    lineage_root: "Kōbō Daishi (Kūkai, 774-835)"
     allowed_topics: *all_topics
     disallowed_topics: [manifestation, get_rich_quick]
+    forbidden_traditions: [zen, theravada]  # Zen drift is the canonical OPD-105 error
+    allowed_engines: [overwhelm, shame]
+    allowed_resolution_types: [open_loop, internal_shift_only, grounded_reframe]
+    identity_shift_allowed: false
+    preferred_formats: [F006, standard_book]
+    teacher_mode_defaults:
+      require_teacher_story: true
+      require_teacher_exercise: true
+      allow_generic_fallback_for_scene: true
+
+  kenjin:
+    display_name: "Kenjin Roshi"
+    formal_name: "Kenjin Roshi"
+    short_name: "Kenjin"
+    pronouns: "he/him"
+    honorific: "Roshi"  # 老師 — canonical Zen senior teacher title
+    kb_id: "kenjin"
+    doctrine_profile: "kenjin"
+    tradition: "Sōtō Zen Buddhism"
+    sub_school: "soto_zen"
+    lineage_root: "Eihei Dōgen Zenji (1200-1253), via Tendō Nyojō; Sōtō school"
+    allowed_topics: *all_topics
+    disallowed_topics: [manifestation, get_rich_quick]
+    forbidden_traditions: [shingon, theravada]  # Per OPD-105 — Kenjin owns Zen, NOT Shingon
     allowed_engines: [overwhelm, shame]
     allowed_resolution_types: [open_loop, internal_shift_only, grounded_reframe]
     identity_shift_allowed: false
@@ -168,6 +241,9 @@ teachers:
 
   maat:
     display_name: "Maat"
+    formal_name: "Teacher Ma'at"
+    pronouns: "she/her"
+    honorific: "Teacher"
     kb_id: "maat"
     doctrine_profile: "maat"
     teacher_as_principle: true
@@ -184,6 +260,9 @@ teachers:
 
   omote:
     display_name: "Omote"
+    formal_name: "Omote Sensei"
+    pronouns: "he/him"
+    honorific: "Sensei"
     kb_id: "omote"
     doctrine_profile: "omote"
     allowed_topics: *all_topics
@@ -199,6 +278,9 @@ teachers:
 
   master_sha:
     display_name: "Master Sha"
+    formal_name: "Dr. and Master Sha"
+    pronouns: "he/him"
+    honorific: "Dr. and Master"
     kb_id: "master_sha"
     doctrine_profile: "master_sha"
     allowed_topics: *all_topics

@@ -237,6 +237,32 @@ def resolve_wrapper(
     return ("", "")
 
 
+def join_wrapped(prefix: str, body: str, suffix: str) -> str:
+    """Join a resolved (prefix, body, suffix) framing into delivered prose.
+
+    intro_wrapper prefixes are *continuation lead-ins* that end in an ellipsis
+    ("What {TEACHER_NAME} keeps pointing toward is...") and are authored to flow
+    INLINE into the body's opening sentence. Joining them with a paragraph break
+    orphans the lead-in ("...is..." dangling above the doctrine) — the
+    TEACHER_DOCTRINE_INTRO bleed (follow-up to PR #1508). So an ellipsis-terminated
+    prefix is joined inline with a single space; a label-style prefix (exercise
+    wrappers, e.g. "A practice from {TEACHER_NAME}: ...") keeps its paragraph break.
+    Suffixes (conclusion wrappers) are always appended as their own closing paragraph.
+    """
+    body = (body or "").strip()
+    out = body
+    if prefix:
+        p = prefix.rstrip()
+        if p.endswith("...") or p.endswith("…"):
+            out = f"{p} {out.lstrip()}".strip() if out else p
+        else:
+            out = f"{p}\n\n{out}".strip() if out else p
+    if suffix:
+        s = suffix.strip()
+        out = f"{out}\n\n{s}".strip() if out else s
+    return out
+
+
 def apply_wrapper(
     content: str,
     *,
@@ -259,10 +285,4 @@ def apply_wrapper(
     )
     if not prefix and not suffix:
         return body
-    parts: List[str] = []
-    if prefix:
-        parts.append(prefix)
-    parts.append(body)
-    if suffix:
-        parts.append(suffix)
-    return "\n\n".join(parts)
+    return join_wrapped(prefix, body, suffix)

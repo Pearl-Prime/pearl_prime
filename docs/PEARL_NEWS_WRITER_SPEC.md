@@ -501,3 +501,75 @@ wp_result = post_article(
 | Publish | Direct `post_article()` in chat | Via `run_teacher()` in cycle runner |
 
 Both workflows use the same `post_article()` function and the same INV-5/INV-6 injection rules.
+
+---
+
+## §S. Sidebar Restoration Protocol (added 2026-06-04)
+
+**Authority:** This appendix governs any change to the Pearl News sidebar markup, CSS, JS, or function set. Companion docs: `docs/PEARL_NEWS_SIDEBAR_VERSION_HISTORY.md` (chronology + canonical SHA chain), `docs/PEARL_NEWS_SIDEBAR_FUNCTION_INVENTORY.md` (F-ID definitions).
+
+### S.1 Why this appendix exists
+
+Per memory `project_known_good_anchors.md` (Pearl News entry): the operator has reported sidebar drift ~25 times across sessions. Every fresh-fix attempt failed. The fix has always been `git checkout <canonical-SHA> -- <path>`. This appendix is the rule that prevents the 26th instance.
+
+### S.2 The sidebar canonical chain
+
+The sidebar is composite of 6 SHAs (full table in `PEARL_NEWS_SIDEBAR_VERSION_HISTORY.md` §16):
+
+1. `8070e81fd` (PR #853) — structural baseline; 5-layout system; CANONICAL anchor
+2. `b64caf846` (PR #1105) — wpautop grid-cell fix
+3. `6e7dc9277` (branch-only) — operator restore of PR #853 into v2 templates
+4. `45733349a` (branch-only) — mini-app launcher cta-card variant
+5. `78f115fe3` (branch-only) — interactive Hot Take Poll + Editorial Take + pnReaderSignal IIFE
+6. `d0075d31d` (branch-only, deployed) — WP must-use plugin `/wp-json/pearl-news/v1/signal`
+
+### S.3 The 5 canonical functions
+
+| F-ID | Card | Function |
+|------|------|---------|
+| F1 | `exercise-card` | Guided practice timer (per-teacher 5–8 step JS, breath guide, step-dots) |
+| F2 | `cta-card` | Free Practice Tool / mini-app launcher (gated on practice_app_slug) |
+| F3 | `sidebar-card` SDG Connection | SDG badge + 3 bullets from `sdg_news_topic_mapping.yaml` |
+| F4 | `pn-poll-card` | Hot Take Poll — 4 clickable options, localStorage tally, POST to `/wp-json/pearl-news/v1/signal` |
+| F5 | `pn-take-card` | Editorial Input — textarea + Submit Take, same endpoint, mailto fallback |
+
+Plus `INFRA pnReaderSignal` IIFE — cross-cutting JS handler that backs F4 + F5.
+
+### S.4 Rules for any future sidebar change
+
+Any PR that touches sidebar markup, CSS, JS, or the function set MUST:
+
+1. **Update `artifacts/pearl_news/snapshots/CANONICAL_SIDEBAR.html`** — extract from a freshly-rendered live post that demonstrates the new state.
+2. **Update `artifacts/pearl_news/snapshots/CANONICAL_SIDEBAR_METADATA.json`** — add/update `function_test_fingerprints.<F-ID>` for affected functions. New F-IDs use the next available number (F6, F7, …).
+3. **Update `docs/PEARL_NEWS_SIDEBAR_FUNCTION_INVENTORY.md`** — author or revise the F-ID entry per the template at the doc's §9.
+4. **Update `docs/PEARL_NEWS_SIDEBAR_VERSION_HISTORY.md`** — append a new chronology row with verdict + evidence.
+5. **`scripts/ci/check_pearl_news_sidebar_parity.py` MUST PASS** — run locally; non-zero exit blocks the PR.
+6. **`tests/test_pearl_news_sidebar_parity.py` MUST PASS** — `pytest` it.
+7. **Operator approval in the PR body** — explicit quote/comment authorizing the change. The parity gate cannot be bypassed without operator sign-off.
+
+### S.5 Drift-recovery procedure (when sidebar breaks)
+
+When operator says _"the sidebar is broken"_:
+
+1. **Read `PEARL_NEWS_SIDEBAR_VERSION_HISTORY.md` + `PEARL_NEWS_SIDEBAR_FUNCTION_INVENTORY.md`** first — DO NOT start fresh-fixing.
+2. **Run** `python3 scripts/ci/check_pearl_news_sidebar_parity.py` to see which F-IDs are missing.
+3. **For each missing F-ID,** look up the source SHA in `PEARL_NEWS_SIDEBAR_VERSION_HISTORY.md` §16, run `git checkout <sha> -- <path>`.
+4. **Re-run the parity gate.** If it still fails after restoring the documented files, the canonical snapshot itself may have stale fingerprints — refresh per S.4 above.
+5. **NEVER re-author sidebar markup, CSS, or JS.** Every regression has been a re-author attempt that compounded the drift.
+
+### S.6 The WP backend
+
+Sidebar F4 + F5 POST to `/wp-json/pearl-news/v1/signal`. The backing WP plugin lives at `pearl_news/wp_plugin/pearl-news-signal.php` (and deploys to `wp-content/mu-plugins/` on the WP server). If the endpoint is unreachable, the `pnReaderSignal` IIFE falls back to mailto `editorial@pearlnewsuna.org` so no input is ever lost — but operator-visible failure on poll-click should always trigger:
+
+- Probe `curl https://pearlnewsuna.org/wp-json/pearl-news/v1` to verify the plugin is auto-loaded
+- POST test: `curl -X POST -H 'Content-Type: application/json' -d '{"kind":"poll_vote","article_id":"diag","value":"diag","ts":"..."}' https://pearlnewsuna.org/wp-json/pearl-news/v1/signal` — expect `{"ok":true,"signal_id":"..."}`
+
+### S.7 Known drift: deployed plugin vs. repo plugin
+
+As of 2026-06-04, the deployed WP plugin on `pearlnewsuna.org` exposes 10 endpoints (`/signal`, `/poll`, `/editorial`, `/advocate`, `/freebie`, `/feedback`, plus GET variants). The repo plugin at `d0075d31d` implements only 2 (`/signal` + `/signal/aggregate`). Operator accepted this lag for the 2026-06-03 restore PR; a follow-up workstream is needed to either pull the live PHP source or author the additional routes. Tracked as `Q-PNS-PLUGIN-DRIFT-01` in `PEARL_NEWS_SIDEBAR_VERSION_HISTORY.md` §17.
+
+### S.8 Deprecated content: §13.5 inline-CSS approach
+
+The earlier `§13.5 — Step 5 — Byline + sidebar injection` block describes an inline-CSS `1fr 280px` grid approach. **That approach is SUPERSEDED by PR #853's category-template path.** The Newspaper theme uses category-specific custom page-builder templates; setting `categories=[<topic_category_id>]` causes the theme to load the page-builder + sidebar widget bindings. With `categories=[]`, the theme falls back to a stripped layout that omits the sidebar entirely.
+
+For new code: ignore §13.5 inline-CSS; use the canonical category-template approach (`TOPIC_TO_CATEGORY` map referenced in the prior session's chat at `scripts/pearl_news/generate_writer_article.py` — to be ratified when PR #1429 lands).

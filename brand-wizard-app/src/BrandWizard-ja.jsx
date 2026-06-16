@@ -1,5 +1,6 @@
 import { useState, useCallback, useRef, useMemo, useEffect } from "react";
 import { useTranslation } from "./useTranslation.jsx";
+import { matchBrand } from "./brandMatch.js";
 import { ChevronRight, ChevronLeft, Eye, Sparkles, BookOpen, Mic, Film, Palette, Heart, Target, Zap, Shield, Sun, Moon, Flame, Feather, Brain, Compass, Star, Check, AlertTriangle, Download, Play, PenTool, Image, Layers, ArrowRight, Users, BarChart3, TrendingUp, Radio, Headphones, Tv, Smartphone, BookMarked, GraduationCap, Clock, Rocket, Award, Crown, Globe, Volume2, Brush, Activity, Search, Hash, Tag, Grip, CircleDot, SlidersHorizontal } from "lucide-react";
 import { OutputProofStrip } from "./onboarding/OutputProofStrip.jsx";
 import { LaneChoiceCard } from "./onboarding/LaneChoiceCard.jsx";
@@ -1352,23 +1353,7 @@ function Step1Archetype({ state, update, i18n = {} }) {
 
 function Step2PrimaryReader({ state, update, i18n = {} }) {
   const { tPersonas: _P = PERSONAS } = i18n;
-  const laneChoices = [
-    { key: "self_help", label: "Self-help books", hint: "Long-form titles and programs for deep transformation." },
-    { key: "manga", label: "Manga / visual stories", hint: "Panel-first storytelling for youth and visual-native readers." },
-    { key: "pearl_news", label: "Pearl News editorial", hint: "Article-led civic and narrative explainers." },
-    { key: "tools", label: "Breathwork / tools", hint: "Utility-first experiences and practical support flows." },
-    { key: "hybrid", label: "Hybrid lane", hint: "Blend book, manga, and editorial proof in one path." },
-  ];
-  const marketChoices = [
-    { key: "us", label: "United States (en-US)", hint: "Primary launch market." },
-    { key: "japan", label: "Japan (ja-JP)", hint: "Localized visual and wording expectations." },
-    { key: "taiwan", label: "Taiwan (zh-TW)", hint: "Traditional Chinese market alignment." },
-  ];
-
-  const selectedLane = state.onboardingLane || "self_help";
-  const selectedMarket = state.onboardingMarket || "us";
-
-  const selectedFormatFocus = selectedLane === "manga" ? "manga" : state.formatFocus;
+  // Market/lane step removed 2026-06-03 — locale routing happens server-side.
 
   return (
     <div>
@@ -2831,7 +2816,27 @@ function Step11Launch({ state, update, i18n = {} }) {
   const [showYaml, setShowYaml] = useState(false);
   const [yamlCopied, setYamlCopied] = useState(false);
 
-  const handleLaunch = () => { setYamlOutput(generateYAML(state)); setSubmitted(true); };
+  const [matched, setMatched] = useState(null);
+
+  const readTeacherMode = () => {
+    try { const raw = localStorage.getItem("phoenix_book_mode"); if (raw) return JSON.parse(raw); } catch (_) {}
+    const p = new URLSearchParams(window.location.search);
+    const ut = p.get("teacher"), um = p.get("mode");
+    if (ut) return { mode: "teacher", teacher: ut };
+    if (um === "composite") return { mode: "composite", teacher: null };
+    return { mode: "composite", teacher: null };
+  };
+
+  const handleLaunch = async () => {
+    setYamlOutput(generateYAML(state));
+    setSubmitted(true);
+    try {
+      const r = await fetch("brand_admin_brands.json", { cache: "no-store" });
+      const brands = r.ok ? await r.json() : {};
+      const m = matchBrand(state, brands, readTeacherMode());
+      if (m) { setMatched(m); try { localStorage.setItem("phoenix_pending_brand", JSON.stringify(m)); } catch (_) {} }
+    } catch (_) {}
+  };
 
   if (submitted) {
     const arch = _A.find((a) => a.id === state.archetype);
@@ -2864,6 +2869,22 @@ function Step11Launch({ state, update, i18n = {} }) {
 
     return (
       <div className="py-4">
+        {/* Assigned brand — the wizard matched these selections to one existing brand */}
+        {matched && (
+          <div className="mb-6 rounded-2xl border border-emerald-300 bg-emerald-50 p-6 text-center">
+            <div className="text-[11px] font-bold uppercase tracking-wider text-emerald-700">{t("ui", "Your assigned brand")}</div>
+            <div className="mt-1 text-2xl font-black text-gray-900">{matched.publication_corp}</div>
+            <div className="mt-1 font-mono text-[11px] text-gray-500">
+              {matched.is_teacher ? `${t("ui", "Teacher brand")} · ${matched.teacher}` : t("ui", "Composite brand")} · {matched.brand_id}
+            </div>
+            <button
+              onClick={() => { window.location.href = "brand_handoff_dashboard.html?brand=" + encodeURIComponent(matched.brand_id); }}
+              className="mt-4 inline-flex items-center gap-2 rounded-xl bg-emerald-600 px-7 py-3 text-sm font-bold text-white shadow-lg transition-all hover:-translate-y-0.5 hover:bg-emerald-700"
+            >
+              {t("ui", "Open Brand Director")} <ArrowRight size={16} />
+            </button>
+          </div>
+        )}
         {/* Celebration Header */}
         <div className="relative text-center mb-8 overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-purple-50 via-white to-white rounded-3xl" />
@@ -3375,28 +3396,25 @@ function IntroJourney({ onNext, onBack, onChooseTeacher }) {
             </div>
           </div>
           <div className="mt-8" />
-          <div className="mt-6 text-center">
+          {/* Mode picker — Teacher Books + Music Books (canonical 2026-06-03). */}
+          <div className="mt-6 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
             <button
               type="button"
               onClick={onChooseTeacher}
               className="inline-flex items-center gap-2 rounded-2xl bg-gray-900 px-8 py-3.5 text-sm font-bold text-white shadow-lg transition-all hover:-translate-y-0.5 hover:bg-gray-800"
             >
-              {t("ui", "ブランド構築を開始")} <ArrowRight size={18} />
+              {t("ui", "教師の本")} <ArrowRight size={18} />
             </button>
-          </div>
-          {/* Composite mode — skip teacher selection entirely */}
-          <div className="mt-3 text-center">
             <button
               type="button"
               onClick={() => {
-                try { localStorage.setItem("phoenix_book_mode", JSON.stringify({ mode: "composite", teacher: null })); } catch (_) {}
-                onNext();
+                try { localStorage.setItem("phoenix_book_mode", JSON.stringify({ mode: "music", teacher: null })); } catch (_) {}
+                window.location.href = "/musician_reflections_survey";
               }}
-              className="inline-flex items-center gap-2 rounded-2xl border border-amber-400/40 bg-transparent px-6 py-2.5 text-xs font-semibold text-amber-200 transition-all hover:bg-amber-500/10"
+              className="inline-flex items-center gap-2 rounded-2xl bg-gray-900 px-8 py-3.5 text-sm font-bold text-white shadow-lg transition-all hover:-translate-y-0.5 hover:bg-gray-800"
             >
-              {t("ui", "または：コンポジット（教師なし）")} <ArrowRight size={14} />
+              {t("ui", "音楽の本")} <ArrowRight size={18} />
             </button>
-            <div className="mt-2 text-[10px] text-white/50">{t("ui", "この銘柄の全ての書籍を、教師の声なしで執筆")}</div>
           </div>
         </div>
       </div>
@@ -3587,12 +3605,12 @@ export default function BrandWizard() {
   const goToHowItWorks = () => { setPhase("intro"); setIntroPage(1); scrollTop(); };
   const goToTeacherShowcase = () => { window.location.href = "teacher_showcase.html"; };
 
-  // If ?teacher= or ?mode=composite in URL, skip intro and jump straight to wizard step 1.
+  // If ?teacher= / ?mode=composite / ?mode=music in URL, skip intro and jump to wizard step 1.
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const urlTeacher = params.get("teacher");
     const urlMode = params.get("mode");
-    if (urlTeacher || urlMode === "composite") { setPhase("wizard"); setStep(0); scrollTop(); }
+    if (urlTeacher || urlMode === "composite" || urlMode === "music") { setPhase("wizard"); setStep(0); scrollTop(); }
   }, []);
 
   // INTRO: 0=welcome, 1=journey → straight to wizard (preview pages removed)

@@ -105,13 +105,13 @@ brands:
   # ── 2. COGNITIVE CLARITY — teacher: joshin — genre: seinen ──────────────
   cognitive_clarity:
     brand_id: cognitive_clarity
-    teacher_id: joshin
+    teacher_id: kenjin
     genre: seinen
     style_archetype: sharp_psychological
     character_prompt_ref: "config/manga/teacher_character_prompts.yaml#joshin"
 
     teacher_character:
-      character_id: joshin_sensei
+      character_id: kenjin_sensei
       display_name: "Joshin"
       role: teacher_analyst
       signature_elements:
@@ -342,17 +342,17 @@ brands:
       ip_adapter_weight: 0.85
 
 
-  # ── 7. RELATIONAL CALM — teacher: junko — genre: iyashikei ───────────────
+  # ── 7. RELATIONAL CALM — teacher: miyuki — genre: iyashikei (per OPD-111) ─
   relational_calm:
     brand_id: relational_calm
-    teacher_id: junko
+    teacher_id: miyuki
     genre: iyashikei
     style_archetype: cozy_iyashikei
-    character_prompt_ref: "config/manga/teacher_character_prompts.yaml#junko"
+    character_prompt_ref: "config/manga/teacher_character_prompts.yaml#miyuki"
 
     teacher_character:
-      character_id: junko_sensei
-      display_name: "Junko"
+      character_id: miyuki_sensei
+      display_name: "Miyuki"
       role: teacher_relational_healer
       signature_elements:
         - "warm linework, domestic cosiness"
@@ -378,10 +378,10 @@ brands:
 
     market_variants:
       ja_JP:
-        teacher_display_name: "純子先生"
-        setting_notes: "Japanese domestic interior as primary setting — wabi-sabi aesthetics."
+        teacher_display_name: "美雪さん"  # per OPD-111 — Miyuki, no honorific (sensei reserved for ordained)
+        setting_notes: "Japanese domestic interior as primary setting — Kyoto wabi-sabi aesthetics."
       ko_KR:
-        teacher_display_name: "준코"
+        teacher_display_name: "미유키"
 
     asset_notes:
       backgrounds_per_chapter: 5

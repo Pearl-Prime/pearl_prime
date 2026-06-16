@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 """
-Generate Global Brand Registry — 24 brands × 13 lanes = 312 brand instances.
+Generate Global Brand Registry — N brands × 13 lanes brand instances.
+
+Counts are derived from teacher_brand_map.yaml (14 teacher + 11 non-teacher
+= 25/lane post-OPD-111 §7.C heart_transmission addition; was 13+11=24 pre-OPD-111).
 
 Reads teacher_brand_map.yaml + locale_registry.yaml + brand_archetype_registry.yaml
 and produces the full global_brand_registry.yaml.
@@ -124,14 +127,16 @@ def generate_registry(lanes: list[str] | None = None) -> dict:
                 "mission": global_mission,
             }
 
+    teacher_brand_count = len(teacher_brands)
+    non_teacher_brand_count = len(non_teacher_brands)
     return {
         "schema_version": "1.0",
         "generated_by": "generate_global_registry.py",
         "total_brands": len(brands),
         "total_lanes": len(target_lanes),
-        "brands_per_lane": 24,
-        "teacher_brands_per_lane": 13,
-        "non_teacher_brands_per_lane": 11,
+        "brands_per_lane": teacher_brand_count + non_teacher_brand_count,
+        "teacher_brands_per_lane": teacher_brand_count,
+        "non_teacher_brands_per_lane": non_teacher_brand_count,
         "brands": brands,
     }
 

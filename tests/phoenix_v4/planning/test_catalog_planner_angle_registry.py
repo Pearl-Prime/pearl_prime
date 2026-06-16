@@ -112,11 +112,12 @@ def test_registry_miss_strict_raises(tmp_path: Path) -> None:
         p.produce_single("lonely_topic", "any_persona", brand_id="phoenix", angle_strict=True)
 
 
-def test_live_registry_maps_relationship_anxiety_to_hidden_truth() -> None:
-    """Integration: repo angle_registry.yaml declares relationship_anxiety → HIDDEN_TRUTH."""
+def test_live_registry_maps_relationship_anxiety_to_familiar_wound() -> None:
+    """Integration: repo angle_registry.yaml v2 declares relationship_anxiety → FAMILIAR_WOUND
+    (previously HIDDEN_TRUTH under v1; remapped per docs/plans/ANGLE_CATALOG_V2_2026-05-20.md §6)."""
     p = CatalogPlanner()
     spec = p.produce_single("relationship_anxiety", "nyc_exec", brand_id="phoenix")
-    assert spec.angle_id == "HIDDEN_TRUTH"
+    assert spec.angle_id == "FAMILIAR_WOUND"
     meta = p.last_angle_resolution_meta()
     assert meta.get("registry_hit") is True
-    assert meta.get("registry_angle_id") == "HIDDEN_TRUTH"
+    assert meta.get("registry_angle_id") == "FAMILIAR_WOUND"

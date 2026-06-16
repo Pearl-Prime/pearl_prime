@@ -182,6 +182,25 @@ Excluded: `.env`, `.github_token`, credentials, `*.rtf` token files, YouTube/Clo
 
 **No Git LFS configured.** All files must be under 8 MB (push-guard single blob limit).
 
+### Git LFS smudge on `git worktree add` (MANDATORY default)
+
+A handful of binary blobs in this repo *are* LFS-tracked (e.g. `*.xlsx`, `*.docx`).
+When you spin up a worktree, the default LFS smudge filter tries to fetch and
+materialize every one of those blobs. In this repo that **hangs and blows up
+local disk**. For text/code/yaml work you never need the binary contents, so
+always skip the smudge:
+
+```bash
+# Always prefix worktree creation (and any reset/checkout that repopulates files)
+GIT_LFS_SKIP_SMUDGE=1 git worktree add --no-checkout -b agent/<task> <path> origin/main
+```
+
+Keep `GIT_LFS_SKIP_SMUDGE=1` on the `git reset --hard HEAD` / `git checkout`
+reconcile step too — the smudge fires whenever files are repopulated, not just
+on `add`. LFS-tracked files stay as lightweight pointers (you may see a benign
+`files that should have been pointers, but weren't` note); that is expected and
+safe as long as you never stage those binaries.
+
 ---
 
 ## STEP 2: YOUR HARD RULES
@@ -399,48 +418,10 @@ git push origin --delete agent/<task>
 
 ## STEP 6: DISASTER RECOVERY
 
-### Scenario: Push hangs / times out
-```bash
-# Kill and retry with safe_push (has exponential backoff)
-scripts/git/safe_push.sh origin <branch>
-```
-
-### Scenario: Branch diverged from main
-```bash
-git fetch origin
-git rev-list --left-right --count origin/main...HEAD
-# If diverged: rebase or cherry-pick to clean branch
-git checkout -b agent/<task>-clean origin/main
-git cherry-pick <commit1> <commit2> ...
-```
-
-### Scenario: Accidentally committed on main
-```bash
-# DO NOT push. Create a branch with your commit, then reset main.
-git branch rescue-$(date +%Y%m%d)
-git checkout main
-git reset --hard origin/main
-git checkout rescue-$(date +%Y%m%d)
-# Push the rescue branch instead
-```
-
-### Scenario: Corrupted index
-```bash
-rm -f .git/index.lock .git/index
-git read-tree HEAD
-git checkout -f HEAD
-```
-
-### Scenario: Need to split an oversized commit
-```bash
-# Soft reset to unstage
-git reset --soft HEAD~1
-# Stage and commit in smaller chunks (max 15 files, 1000 lines per commit)
-git add file1.py file2.py
-git commit -m "feat(scope): first chunk"
-git add file3.py file4.py
-git commit -m "feat(scope): second chunk"
-```
+Full recovery runbook (push hangs, diverged branch, accidental main commit,
+corrupted index, oversized-commit split) lives in
+`skills/pearl-github/references/disaster_recovery.md`. Read it before attempting
+any recovery, then re-run STEP 0 preflight before pushing.
 
 ---
 

@@ -1,4 +1,13 @@
 # Therapeutic Scroll Craft Reference for Phoenix Omega
+
+> **2026-05-18 update (OPD-20260518-105):** Joshin re-classified to Shingon
+> (Kōyasan Shingon-shū) per the doctrinal-misclassification correction. The
+> Zen-language sections of this document now apply to **Kenjin Roshi** (Sōtō
+> Zen, new teacher), not Joshin. Cognitive Clarity / Clear Seeing Books brand
+> wholesale-migrated from Joshin to Kenjin. See
+> [`docs/migrations/JOSHIN_SHINGON_KENJIN_ZEN_MIGRATION_PLAN_2026-05-18.md`](../../docs/migrations/JOSHIN_SHINGON_KENJIN_ZEN_MIGRATION_PLAN_2026-05-18.md)
+> for the full migration plan and the four phase PRs (#1207, #1208, #1209, this PR).
+
 ## Date: 2026-04-25
 ## Author: Pearl_Research (Creative Craft pass)
 ## Scope: How to make the SCROLL ITSELF therapeutic — concrete, prescriptive techniques for art directors and scriptwriters of Phoenix Omega's manga/webtoon catalog.

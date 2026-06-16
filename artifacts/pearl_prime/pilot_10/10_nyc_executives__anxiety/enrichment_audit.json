@@ -1,0 +1,1907 @@
+{
+  "total_slots": 132,
+  "slots_from_teacher": 36,
+  "slots_from_persona": 108,
+  "slots_from_registry": 47,
+  "slots_from_practice_library": 0,
+  "practice_library_warnings": 0,
+  "slots_empty": 0,
+  "slots_format_scaled": 1,
+  "format_word_cap_max": 20000,
+  "slots_from_content_bank": 0,
+  "total_words": 19946,
+  "total_target_words": 18701,
+  "gap_details": [],
+  "persona_id": "nyc_executives",
+  "teacher_id": "ahjan",
+  "section_packet_audit": [
+    {
+      "chapter": 1,
+      "slot_index": 0,
+      "slot_type": "HOOK",
+      "source": "persona_atom+registry+teacher_atom",
+      "source_id": "HOOK v01+ch01_sec01_hook_f5+ahjan_HOOK_003",
+      "variant_id": "ch01_sec01_hook_f5",
+      "words": 101
+    },
+    {
+      "chapter": 1,
+      "slot_index": 1,
+      "slot_type": "ANGLE_DEFINITION",
+      "source": "angle_template",
+      "source_id": "angle_def_tpl:PROTECTIVE_ALARM",
+      "variant_id": "",
+      "words": 48
+    },
+    {
+      "chapter": 1,
+      "slot_index": 2,
+      "slot_type": "STORY",
+      "source": "persona_atom",
+      "source_id": "TURNING_POINT v05",
+      "variant_id": "",
+      "words": 179
+    },
+    {
+      "chapter": 1,
+      "slot_index": 3,
+      "slot_type": "REFLECTION",
+      "source": "persona_atom+registry",
+      "source_id": "REFLECTION v03+ch01_sec05_reflection_f1",
+      "variant_id": "ch01_sec05_reflection_f1",
+      "words": 89
+    },
+    {
+      "chapter": 1,
+      "slot_index": 4,
+      "slot_type": "EXERCISE",
+      "source": "persona_atom",
+      "source_id": "EXERCISE v15",
+      "variant_id": "",
+      "words": 58
+    },
+    {
+      "chapter": 1,
+      "slot_index": 5,
+      "slot_type": "STORY",
+      "source": "persona_atom",
+      "source_id": "EMBODIMENT v07",
+      "variant_id": "",
+      "words": 111
+    },
+    {
+      "chapter": 1,
+      "slot_index": 6,
+      "slot_type": "TEACHER_DOCTRINE",
+      "source": "registry+teacher_atom",
+      "source_id": "ch01_sec06_teacherdoctrine_d05+ahjan_QUOTE_002_mined",
+      "variant_id": "ch01_sec06_teacherdoctrine_d05",
+      "words": 39
+    },
+    {
+      "chapter": 1,
+      "slot_index": 7,
+      "slot_type": "REFLECTION",
+      "source": "persona_atom+registry",
+      "source_id": "REFLECTION v16+ch01_sec07_reflection_f1",
+      "variant_id": "ch01_sec07_reflection_f1",
+      "words": 330
+    },
+    {
+      "chapter": 1,
+      "slot_index": 8,
+      "slot_type": "EXERCISE",
+      "source": "persona_atom",
+      "source_id": "EXERCISE v08",
+      "variant_id": "",
+      "words": 64
+    },
+    {
+      "chapter": 1,
+      "slot_index": 9,
+      "slot_type": "STORY",
+      "source": "persona_atom",
+      "source_id": "EMBODIMENT v02",
+      "variant_id": "",
+      "words": 38
+    },
+    {
+      "chapter": 1,
+      "slot_index": 10,
+      "slot_type": "INTEGRATION",
+      "source": "persona_atom+registry+teacher_atom",
+      "source_id": "INTEGRATION v09+ch01_sec09_integration_f1+ahjan_INTEGRATION_001",
+      "variant_id": "ch01_sec09_integration_f1",
+      "words": 218
+    },
+    {
+      "chapter": 2,
+      "slot_index": 0,
+      "slot_type": "HOOK",
+      "source": "persona_atom+registry+teacher_atom",
+      "source_id": "HOOK v26+ch02_sec01_hook_f2+ahjan_HOOK_002",
+      "variant_id": "ch02_sec01_hook_f2",
+      "words": 82
+    },
+    {
+      "chapter": 2,
+      "slot_index": 1,
+      "slot_type": "ANGLE_CALLBACK",
+      "source": "angle_template",
+      "source_id": "angle_cb_tpl:PROTECTIVE_ALARM:L1",
+      "variant_id": "",
+      "words": 26
+    },
+    {
+      "chapter": 2,
+      "slot_index": 2,
+      "slot_type": "STORY",
+      "source": "persona_atom",
+      "source_id": "RECOGNITION v04",
+      "variant_id": "",
+      "words": 201
+    },
+    {
+      "chapter": 2,
+      "slot_index": 3,
+      "slot_type": "REFLECTION",
+      "source": "persona_atom+registry",
+      "source_id": "REFLECTION v15+ch02_sec03_reflection_f2",
+      "variant_id": "ch02_sec03_reflection_f2",
+      "words": 48
+    },
+    {
+      "chapter": 2,
+      "slot_index": 4,
+      "slot_type": "EXERCISE",
+      "source": "persona_atom",
+      "source_id": "EXERCISE v09",
+      "variant_id": "",
+      "words": 58
+    },
+    {
+      "chapter": 2,
+      "slot_index": 5,
+      "slot_type": "STORY",
+      "source": "persona_atom",
+      "source_id": "COST_REVEAL v02",
+      "variant_id": "",
+      "words": 172
+    },
+    {
+      "chapter": 2,
+      "slot_index": 6,
+      "slot_type": "TEACHER_DOCTRINE",
+      "source": "teacher_atom",
+      "source_id": "ahjan_TEACHER_DOCTRINE_009",
+      "variant_id": "",
+      "words": 383
+    },
+    {
+      "chapter": 2,
+      "slot_index": 7,
+      "slot_type": "REFLECTION",
+      "source": "persona_atom+registry",
+      "source_id": "REFLECTION v27+ch02_sec04_reflection_f2",
+      "variant_id": "ch02_sec04_reflection_f2",
+      "words": 48
+    },
+    {
+      "chapter": 2,
+      "slot_index": 8,
+      "slot_type": "EXERCISE",
+      "source": "persona_atom",
+      "source_id": "EXERCISE v18",
+      "variant_id": "",
+      "words": 51
+    },
+    {
+      "chapter": 2,
+      "slot_index": 9,
+      "slot_type": "STORY",
+      "source": "persona_atom",
+      "source_id": "STORY v02",
+      "variant_id": "",
+      "words": 57
+    },
+    {
+      "chapter": 2,
+      "slot_index": 10,
+      "slot_type": "INTEGRATION",
+      "source": "persona_atom+registry+teacher_atom",
+      "source_id": "INTEGRATION v10+ch02_sec09_integration_f3+ahjan_INTEGRATION_003",
+      "variant_id": "ch02_sec09_integration_f3",
+      "words": 223
+    },
+    {
+      "chapter": 3,
+      "slot_index": 0,
+      "slot_type": "HOOK",
+      "source": "persona_atom+registry+teacher_atom",
+      "source_id": "HOOK v02+ch03_sec01_hook_f3+ahjan_HOOK_011",
+      "variant_id": "ch03_sec01_hook_f3",
+      "words": 75
+    },
+    {
+      "chapter": 3,
+      "slot_index": 1,
+      "slot_type": "ANGLE_CALLBACK",
+      "source": "angle_template",
+      "source_id": "angle_cb_tpl:PROTECTIVE_ALARM:L2",
+      "variant_id": "",
+      "words": 25
+    },
+    {
+      "chapter": 3,
+      "slot_index": 2,
+      "slot_type": "STORY",
+      "source": "persona_atom",
+      "source_id": "EMBODIMENT v04",
+      "variant_id": "",
+      "words": 80
+    },
+    {
+      "chapter": 3,
+      "slot_index": 3,
+      "slot_type": "REFLECTION",
+      "source": "persona_atom+registry",
+      "source_id": "REFLECTION v05+ch03_sec03_reflection_f2",
+      "variant_id": "ch03_sec03_reflection_f2",
+      "words": 48
+    },
+    {
+      "chapter": 3,
+      "slot_index": 4,
+      "slot_type": "EXERCISE",
+      "source": "persona_atom",
+      "source_id": "EXERCISE v01",
+      "variant_id": "",
+      "words": 72
+    },
+    {
+      "chapter": 3,
+      "slot_index": 5,
+      "slot_type": "STORY",
+      "source": "persona_atom",
+      "source_id": "STORY v05",
+      "variant_id": "",
+      "words": 47
+    },
+    {
+      "chapter": 3,
+      "slot_index": 6,
+      "slot_type": "TEACHER_DOCTRINE",
+      "source": "teacher_atom",
+      "source_id": "ahjan_TEACHER_DOCTRINE_004",
+      "variant_id": "",
+      "words": 380
+    },
+    {
+      "chapter": 3,
+      "slot_index": 7,
+      "slot_type": "REFLECTION",
+      "source": "persona_atom+registry",
+      "source_id": "REFLECTION v23+ch03_sec04_reflection_f3",
+      "variant_id": "ch03_sec04_reflection_f3",
+      "words": 49
+    },
+    {
+      "chapter": 3,
+      "slot_index": 8,
+      "slot_type": "EXERCISE",
+      "source": "persona_atom",
+      "source_id": "EXERCISE v11",
+      "variant_id": "",
+      "words": 53
+    },
+    {
+      "chapter": 3,
+      "slot_index": 9,
+      "slot_type": "STORY",
+      "source": "persona_atom",
+      "source_id": "EMBODIMENT v06",
+      "variant_id": "",
+      "words": 115
+    },
+    {
+      "chapter": 3,
+      "slot_index": 10,
+      "slot_type": "INTEGRATION",
+      "source": "persona_atom+registry+teacher_atom",
+      "source_id": "INTEGRATION v05+ch03_sec08_integration_f1+ahjan_INTEGRATION_001",
+      "variant_id": "ch03_sec08_integration_f1",
+      "words": 214
+    },
+    {
+      "chapter": 4,
+      "slot_index": 0,
+      "slot_type": "HOOK",
+      "source": "persona_atom+registry+teacher_atom",
+      "source_id": "HOOK v16+ch04_sec01_hook_f2+ahjan_HOOK_009",
+      "variant_id": "ch04_sec01_hook_f2",
+      "words": 78
+    },
+    {
+      "chapter": 4,
+      "slot_index": 1,
+      "slot_type": "ANGLE_CALLBACK",
+      "source": "angle_template",
+      "source_id": "angle_cb_tpl:PROTECTIVE_ALARM:L2",
+      "variant_id": "",
+      "words": 25
+    },
+    {
+      "chapter": 4,
+      "slot_index": 2,
+      "slot_type": "STORY",
+      "source": "persona_atom",
+      "source_id": "TURNING_POINT v03",
+      "variant_id": "",
+      "words": 40
+    },
+    {
+      "chapter": 4,
+      "slot_index": 3,
+      "slot_type": "REFLECTION",
+      "source": "persona_atom+registry",
+      "source_id": "REFLECTION v11+ch04_sec03_reflection_f1",
+      "variant_id": "ch04_sec03_reflection_f1",
+      "words": 48
+    },
+    {
+      "chapter": 4,
+      "slot_index": 4,
+      "slot_type": "EXERCISE",
+      "source": "persona_atom",
+      "source_id": "EXERCISE v17",
+      "variant_id": "",
+      "words": 51
+    },
+    {
+      "chapter": 4,
+      "slot_index": 5,
+      "slot_type": "STORY",
+      "source": "persona_atom",
+      "source_id": "MECHANISM_PROOF v06",
+      "variant_id": "",
+      "words": 110
+    },
+    {
+      "chapter": 4,
+      "slot_index": 6,
+      "slot_type": "TEACHER_DOCTRINE",
+      "source": "teacher_atom",
+      "source_id": "ahjan_QUOTE_007_mined",
+      "variant_id": "",
+      "words": 21
+    },
+    {
+      "chapter": 4,
+      "slot_index": 7,
+      "slot_type": "REFLECTION",
+      "source": "persona_atom+registry",
+      "source_id": "REFLECTION v25+ch04_sec04_reflection_f3",
+      "variant_id": "ch04_sec04_reflection_f3",
+      "words": 331
+    },
+    {
+      "chapter": 4,
+      "slot_index": 8,
+      "slot_type": "EXERCISE",
+      "source": "persona_atom",
+      "source_id": "EXERCISE v14",
+      "variant_id": "",
+      "words": 50
+    },
+    {
+      "chapter": 4,
+      "slot_index": 9,
+      "slot_type": "STORY",
+      "source": "persona_atom",
+      "source_id": "RECOGNITION v02",
+      "variant_id": "",
+      "words": 45
+    },
+    {
+      "chapter": 4,
+      "slot_index": 10,
+      "slot_type": "INTEGRATION",
+      "source": "persona_atom+registry+teacher_atom",
+      "source_id": "INTEGRATION v19+ch04_sec07_integration_f1+ahjan_INTEGRATION_005",
+      "variant_id": "ch04_sec07_integration_f1",
+      "words": 253
+    },
+    {
+      "chapter": 5,
+      "slot_index": 0,
+      "slot_type": "HOOK",
+      "source": "persona_atom+registry+teacher_atom",
+      "source_id": "HOOK v09+ch05_sec01_hook_f5+ahjan_HOOK_001",
+      "variant_id": "ch05_sec01_hook_f5",
+      "words": 77
+    },
+    {
+      "chapter": 5,
+      "slot_index": 1,
+      "slot_type": "ANGLE_CALLBACK",
+      "source": "angle_template",
+      "source_id": "angle_cb_tpl:PROTECTIVE_ALARM:L2",
+      "variant_id": "",
+      "words": 25
+    },
+    {
+      "chapter": 5,
+      "slot_index": 2,
+      "slot_type": "STORY",
+      "source": "persona_atom",
+      "source_id": "TURNING_POINT v04",
+      "variant_id": "",
+      "words": 36
+    },
+    {
+      "chapter": 5,
+      "slot_index": 3,
+      "slot_type": "REFLECTION",
+      "source": "persona_atom+registry",
+      "source_id": "REFLECTION v07+ch05_sec03_reflection_f3",
+      "variant_id": "ch05_sec03_reflection_f3",
+      "words": 49
+    },
+    {
+      "chapter": 5,
+      "slot_index": 4,
+      "slot_type": "EXERCISE",
+      "source": "persona_atom",
+      "source_id": "EXERCISE v04",
+      "variant_id": "",
+      "words": 69
+    },
+    {
+      "chapter": 5,
+      "slot_index": 5,
+      "slot_type": "STORY",
+      "source": "persona_atom",
+      "source_id": "STORY v11",
+      "variant_id": "",
+      "words": 60
+    },
+    {
+      "chapter": 5,
+      "slot_index": 6,
+      "slot_type": "TEACHER_DOCTRINE",
+      "source": "teacher_atom",
+      "source_id": "ahjan_TEACHER_DOCTRINE_003",
+      "variant_id": "",
+      "words": 362
+    },
+    {
+      "chapter": 5,
+      "slot_index": 7,
+      "slot_type": "REFLECTION",
+      "source": "persona_atom+registry",
+      "source_id": "REFLECTION v24+ch05_sec04_reflection_f1",
+      "variant_id": "ch05_sec04_reflection_f1",
+      "words": 327
+    },
+    {
+      "chapter": 5,
+      "slot_index": 8,
+      "slot_type": "EXERCISE",
+      "source": "persona_atom",
+      "source_id": "EXERCISE v21",
+      "variant_id": "",
+      "words": 52
+    },
+    {
+      "chapter": 5,
+      "slot_index": 9,
+      "slot_type": "STORY",
+      "source": "persona_atom",
+      "source_id": "TURNING_POINT v06",
+      "variant_id": "",
+      "words": 119
+    },
+    {
+      "chapter": 5,
+      "slot_index": 10,
+      "slot_type": "INTEGRATION",
+      "source": "persona_atom+registry+teacher_atom",
+      "source_id": "INTEGRATION v17+ch05_sec07_integration_f2+ahjan_INTEGRATION_011",
+      "variant_id": "ch05_sec07_integration_f2",
+      "words": 237
+    },
+    {
+      "chapter": 6,
+      "slot_index": 0,
+      "slot_type": "HOOK",
+      "source": "persona_atom+registry+teacher_atom",
+      "source_id": "HOOK v28+ch06_sec01_hook_f1+ahjan_HOOK_000",
+      "variant_id": "ch06_sec01_hook_f1",
+      "words": 76
+    },
+    {
+      "chapter": 6,
+      "slot_index": 1,
+      "slot_type": "ANGLE_CALLBACK",
+      "source": "angle_template",
+      "source_id": "angle_cb_tpl:PROTECTIVE_ALARM:L3",
+      "variant_id": "",
+      "words": 25
+    },
+    {
+      "chapter": 6,
+      "slot_index": 2,
+      "slot_type": "STORY",
+      "source": "persona_atom",
+      "source_id": "TURNING_POINT v07",
+      "variant_id": "",
+      "words": 120
+    },
+    {
+      "chapter": 6,
+      "slot_index": 3,
+      "slot_type": "REFLECTION",
+      "source": "persona_atom+registry",
+      "source_id": "REFLECTION v29+ch06_sec03_reflection_f3",
+      "variant_id": "ch06_sec03_reflection_f3",
+      "words": 49
+    },
+    {
+      "chapter": 6,
+      "slot_index": 4,
+      "slot_type": "EXERCISE",
+      "source": "persona_atom",
+      "source_id": "EXERCISE v13",
+      "variant_id": "",
+      "words": 54
+    },
+    {
+      "chapter": 6,
+      "slot_index": 5,
+      "slot_type": "STORY",
+      "source": "persona_atom",
+      "source_id": "RECKONING v04",
+      "variant_id": "",
+      "words": 246
+    },
+    {
+      "chapter": 6,
+      "slot_index": 6,
+      "slot_type": "TEACHER_DOCTRINE",
+      "source": "teacher_atom",
+      "source_id": "ahjan_QUOTE_001_mined",
+      "variant_id": "",
+      "words": 35
+    },
+    {
+      "chapter": 6,
+      "slot_index": 7,
+      "slot_type": "REFLECTION",
+      "source": "persona_atom+registry",
+      "source_id": "REFLECTION v18+ch06_sec04_reflection_f1",
+      "variant_id": "ch06_sec04_reflection_f1",
+      "words": 329
+    },
+    {
+      "chapter": 6,
+      "slot_index": 8,
+      "slot_type": "EXERCISE",
+      "source": "persona_atom",
+      "source_id": "EXERCISE v02",
+      "variant_id": "",
+      "words": 74
+    },
+    {
+      "chapter": 6,
+      "slot_index": 9,
+      "slot_type": "STORY",
+      "source": "persona_atom",
+      "source_id": "RECOGNITION v05",
+      "variant_id": "",
+      "words": 177
+    },
+    {
+      "chapter": 6,
+      "slot_index": 10,
+      "slot_type": "INTEGRATION",
+      "source": "persona_atom+registry+teacher_atom",
+      "source_id": "INTEGRATION v11+ch06_sec07_integration_f2+ahjan_INTEGRATION_003",
+      "variant_id": "ch06_sec07_integration_f2",
+      "words": 207
+    },
+    {
+      "chapter": 7,
+      "slot_index": 0,
+      "slot_type": "HOOK",
+      "source": "persona_atom+registry+teacher_atom",
+      "source_id": "HOOK v19+ch07_sec01_hook_f3+ahjan_HOOK_010",
+      "variant_id": "ch07_sec01_hook_f3",
+      "words": 71
+    },
+    {
+      "chapter": 7,
+      "slot_index": 1,
+      "slot_type": "ANGLE_CALLBACK",
+      "source": "angle_template",
+      "source_id": "angle_cb_tpl:PROTECTIVE_ALARM:L3",
+      "variant_id": "",
+      "words": 25
+    },
+    {
+      "chapter": 7,
+      "slot_index": 2,
+      "slot_type": "STORY",
+      "source": "persona_atom",
+      "source_id": "RECKONING v05",
+      "variant_id": "",
+      "words": 269
+    },
+    {
+      "chapter": 7,
+      "slot_index": 3,
+      "slot_type": "REFLECTION",
+      "source": "persona_atom+registry",
+      "source_id": "REFLECTION v01+ch07_sec06_reflection_f3",
+      "variant_id": "ch07_sec06_reflection_f3",
+      "words": 49
+    },
+    {
+      "chapter": 7,
+      "slot_index": 4,
+      "slot_type": "EXERCISE",
+      "source": "persona_atom",
+      "source_id": "EXERCISE v26",
+      "variant_id": "",
+      "words": 43
+    },
+    {
+      "chapter": 7,
+      "slot_index": 5,
+      "slot_type": "STORY",
+      "source": "persona_atom",
+      "source_id": "STORY v03",
+      "variant_id": "",
+      "words": 60
+    },
+    {
+      "chapter": 7,
+      "slot_index": 6,
+      "slot_type": "TEACHER_DOCTRINE",
+      "source": "teacher_atom",
+      "source_id": "ahjan_QUOTE_007_mined",
+      "variant_id": "",
+      "words": 24
+    },
+    {
+      "chapter": 7,
+      "slot_index": 7,
+      "slot_type": "REFLECTION",
+      "source": "persona_atom",
+      "source_id": "REFLECTION v20",
+      "variant_id": "",
+      "words": 282
+    },
+    {
+      "chapter": 7,
+      "slot_index": 8,
+      "slot_type": "EXERCISE",
+      "source": "persona_atom",
+      "source_id": "EXERCISE v27",
+      "variant_id": "",
+      "words": 51
+    },
+    {
+      "chapter": 7,
+      "slot_index": 9,
+      "slot_type": "STORY",
+      "source": "persona_atom",
+      "source_id": "RECOGNITION v03",
+      "variant_id": "",
+      "words": 170
+    },
+    {
+      "chapter": 7,
+      "slot_index": 10,
+      "slot_type": "INTEGRATION",
+      "source": "persona_atom+registry+teacher_atom",
+      "source_id": "INTEGRATION v21+ch07_sec07_integration_f2+ahjan_INTEGRATION_011",
+      "variant_id": "ch07_sec07_integration_f2",
+      "words": 180
+    },
+    {
+      "chapter": 8,
+      "slot_index": 0,
+      "slot_type": "HOOK",
+      "source": "persona_atom+registry+teacher_atom",
+      "source_id": "HOOK v27+ch08_sec01_hook_f4+ahjan_HOOK_004",
+      "variant_id": "ch08_sec01_hook_f4",
+      "words": 70
+    },
+    {
+      "chapter": 8,
+      "slot_index": 1,
+      "slot_type": "ANGLE_CALLBACK",
+      "source": "angle_template",
+      "source_id": "angle_cb_tpl:PROTECTIVE_ALARM:L4",
+      "variant_id": "",
+      "words": 25
+    },
+    {
+      "chapter": 8,
+      "slot_index": 2,
+      "slot_type": "STORY",
+      "source": "persona_atom",
+      "source_id": "MECHANISM_PROOF v01",
+      "variant_id": "",
+      "words": 43
+    },
+    {
+      "chapter": 8,
+      "slot_index": 3,
+      "slot_type": "REFLECTION",
+      "source": "persona_atom+registry",
+      "source_id": "REFLECTION v17+ch08_sec06_reflection_f1",
+      "variant_id": "ch08_sec06_reflection_f1",
+      "words": 329
+    },
+    {
+      "chapter": 8,
+      "slot_index": 4,
+      "slot_type": "EXERCISE",
+      "source": "persona_atom",
+      "source_id": "EXERCISE v07",
+      "variant_id": "",
+      "words": 59
+    },
+    {
+      "chapter": 8,
+      "slot_index": 5,
+      "slot_type": "STORY",
+      "source": "persona_atom",
+      "source_id": "MECHANISM_PROOF v07",
+      "variant_id": "",
+      "words": 109
+    },
+    {
+      "chapter": 8,
+      "slot_index": 6,
+      "slot_type": "TEACHER_DOCTRINE",
+      "source": "teacher_atom",
+      "source_id": "ahjan_TEACHER_DOCTRINE_006",
+      "variant_id": "",
+      "words": 380
+    },
+    {
+      "chapter": 8,
+      "slot_index": 7,
+      "slot_type": "REFLECTION",
+      "source": "persona_atom",
+      "source_id": "REFLECTION v19",
+      "variant_id": "",
+      "words": 283
+    },
+    {
+      "chapter": 8,
+      "slot_index": 8,
+      "slot_type": "EXERCISE",
+      "source": "persona_atom",
+      "source_id": "EXERCISE v22",
+      "variant_id": "",
+      "words": 47
+    },
+    {
+      "chapter": 8,
+      "slot_index": 9,
+      "slot_type": "STORY",
+      "source": "persona_atom",
+      "source_id": "MECHANISM_PROOF v02",
+      "variant_id": "",
+      "words": 44
+    },
+    {
+      "chapter": 8,
+      "slot_index": 10,
+      "slot_type": "INTEGRATION",
+      "source": "persona_atom+registry+teacher_atom",
+      "source_id": "INTEGRATION v01+ch08_sec07_integration_f1+ahjan_INTEGRATION_009",
+      "variant_id": "ch08_sec07_integration_f1",
+      "words": 232
+    },
+    {
+      "chapter": 9,
+      "slot_index": 0,
+      "slot_type": "HOOK",
+      "source": "persona_atom+registry+teacher_atom",
+      "source_id": "HOOK v17+ch09_sec01_hook_f4+ahjan_HOOK_007",
+      "variant_id": "ch09_sec01_hook_f4",
+      "words": 73
+    },
+    {
+      "chapter": 9,
+      "slot_index": 1,
+      "slot_type": "ANGLE_CALLBACK",
+      "source": "angle_template",
+      "source_id": "angle_cb_tpl:PROTECTIVE_ALARM:L4",
+      "variant_id": "",
+      "words": 25
+    },
+    {
+      "chapter": 9,
+      "slot_index": 2,
+      "slot_type": "STORY",
+      "source": "persona_atom",
+      "source_id": "MECHANISM_PROOF v03",
+      "variant_id": "",
+      "words": 42
+    },
+    {
+      "chapter": 9,
+      "slot_index": 3,
+      "slot_type": "REFLECTION",
+      "source": "persona_atom+registry",
+      "source_id": "REFLECTION v13+ch09_sec03_reflection_f3",
+      "variant_id": "ch09_sec03_reflection_f3",
+      "words": 49
+    },
+    {
+      "chapter": 9,
+      "slot_index": 4,
+      "slot_type": "EXERCISE",
+      "source": "persona_atom",
+      "source_id": "EXERCISE v03",
+      "variant_id": "",
+      "words": 71
+    },
+    {
+      "chapter": 9,
+      "slot_index": 5,
+      "slot_type": "STORY",
+      "source": "persona_atom",
+      "source_id": "MECHANISM_PROOF v04",
+      "variant_id": "",
+      "words": 182
+    },
+    {
+      "chapter": 9,
+      "slot_index": 6,
+      "slot_type": "TEACHER_DOCTRINE",
+      "source": "teacher_atom",
+      "source_id": "ahjan_TEACHER_DOCTRINE_001",
+      "variant_id": "",
+      "words": 347
+    },
+    {
+      "chapter": 9,
+      "slot_index": 7,
+      "slot_type": "REFLECTION",
+      "source": "persona_atom+registry",
+      "source_id": "REFLECTION v21+ch09_sec04_reflection_f2",
+      "variant_id": "ch09_sec04_reflection_f2",
+      "words": 48
+    },
+    {
+      "chapter": 9,
+      "slot_index": 8,
+      "slot_type": "EXERCISE",
+      "source": "persona_atom",
+      "source_id": "EXERCISE v05",
+      "variant_id": "",
+      "words": 66
+    },
+    {
+      "chapter": 9,
+      "slot_index": 9,
+      "slot_type": "STORY",
+      "source": "persona_atom",
+      "source_id": "TURNING_POINT v01",
+      "variant_id": "",
+      "words": 129
+    },
+    {
+      "chapter": 9,
+      "slot_index": 10,
+      "slot_type": "INTEGRATION",
+      "source": "persona_atom+registry+teacher_atom",
+      "source_id": "INTEGRATION v25+ch09_sec07_integration_f2+ahjan_INTEGRATION_000",
+      "variant_id": "ch09_sec07_integration_f2",
+      "words": 170
+    },
+    {
+      "chapter": 10,
+      "slot_index": 0,
+      "slot_type": "HOOK",
+      "source": "persona_atom+registry+teacher_atom",
+      "source_id": "HOOK v03+ch10_sec01_hook_f4+ahjan_HOOK_002",
+      "variant_id": "ch10_sec01_hook_f4",
+      "words": 70
+    },
+    {
+      "chapter": 10,
+      "slot_index": 1,
+      "slot_type": "ANGLE_CALLBACK",
+      "source": "angle_template",
+      "source_id": "angle_cb_tpl:PROTECTIVE_ALARM:L4",
+      "variant_id": "",
+      "words": 25
+    },
+    {
+      "chapter": 10,
+      "slot_index": 2,
+      "slot_type": "STORY",
+      "source": "persona_atom",
+      "source_id": "STORY v19",
+      "variant_id": "",
+      "words": 68
+    },
+    {
+      "chapter": 10,
+      "slot_index": 3,
+      "slot_type": "REFLECTION",
+      "source": "persona_atom+registry",
+      "source_id": "REFLECTION v09+ch10_sec03_reflection_f1",
+      "variant_id": "ch10_sec03_reflection_f1",
+      "words": 48
+    },
+    {
+      "chapter": 10,
+      "slot_index": 4,
+      "slot_type": "EXERCISE",
+      "source": "persona_atom",
+      "source_id": "EXERCISE v10",
+      "variant_id": "",
+      "words": 64
+    },
+    {
+      "chapter": 10,
+      "slot_index": 5,
+      "slot_type": "STORY",
+      "source": "persona_atom",
+      "source_id": "RECOGNITION v01",
+      "variant_id": "",
+      "words": 44
+    },
+    {
+      "chapter": 10,
+      "slot_index": 6,
+      "slot_type": "TEACHER_DOCTRINE",
+      "source": "teacher_atom",
+      "source_id": "ahjan_TEACHER_DOCTRINE_002",
+      "variant_id": "",
+      "words": 370
+    },
+    {
+      "chapter": 10,
+      "slot_index": 7,
+      "slot_type": "REFLECTION",
+      "source": "persona_atom+registry",
+      "source_id": "REFLECTION v22+ch10_sec04_reflection_f1",
+      "variant_id": "ch10_sec04_reflection_f1",
+      "words": 327
+    },
+    {
+      "chapter": 10,
+      "slot_index": 8,
+      "slot_type": "EXERCISE",
+      "source": "persona_atom",
+      "source_id": "EXERCISE v06",
+      "variant_id": "",
+      "words": 69
+    },
+    {
+      "chapter": 10,
+      "slot_index": 9,
+      "slot_type": "STORY",
+      "source": "persona_atom",
+      "source_id": "TURNING_POINT v02",
+      "variant_id": "",
+      "words": 76
+    },
+    {
+      "chapter": 10,
+      "slot_index": 10,
+      "slot_type": "INTEGRATION",
+      "source": "persona_atom+registry+teacher_atom",
+      "source_id": "INTEGRATION v08+ch10_sec07_integration_f1+ahjan_INTEGRATION_003",
+      "variant_id": "ch10_sec07_integration_f1",
+      "words": 221
+    },
+    {
+      "chapter": 11,
+      "slot_index": 0,
+      "slot_type": "HOOK",
+      "source": "persona_atom+registry+teacher_atom",
+      "source_id": "HOOK v13+ch11_sec01_hook_f2+ahjan_HOOK_000",
+      "variant_id": "ch11_sec01_hook_f2",
+      "words": 88
+    },
+    {
+      "chapter": 11,
+      "slot_index": 1,
+      "slot_type": "ANGLE_CALLBACK",
+      "source": "angle_template",
+      "source_id": "angle_cb_tpl:PROTECTIVE_ALARM:L5",
+      "variant_id": "",
+      "words": 25
+    },
+    {
+      "chapter": 11,
+      "slot_index": 2,
+      "slot_type": "STORY",
+      "source": "persona_atom",
+      "source_id": "COST_REVEAL v01",
+      "variant_id": "",
+      "words": 208
+    },
+    {
+      "chapter": 11,
+      "slot_index": 3,
+      "slot_type": "REFLECTION",
+      "source": "persona_atom+registry",
+      "source_id": "REFLECTION v21+ch11_sec03_reflection_f1",
+      "variant_id": "ch11_sec03_reflection_f1",
+      "words": 328
+    },
+    {
+      "chapter": 11,
+      "slot_index": 4,
+      "slot_type": "EXERCISE",
+      "source": "persona_atom",
+      "source_id": "EXERCISE v16",
+      "variant_id": "",
+      "words": 51
+    },
+    {
+      "chapter": 11,
+      "slot_index": 5,
+      "slot_type": "STORY",
+      "source": "persona_atom",
+      "source_id": "MECHANISM_PROOF v05",
+      "variant_id": "",
+      "words": 41
+    },
+    {
+      "chapter": 11,
+      "slot_index": 6,
+      "slot_type": "TEACHER_DOCTRINE",
+      "source": "teacher_atom",
+      "source_id": "ahjan_TEACHER_DOCTRINE_000",
+      "variant_id": "",
+      "words": 330
+    },
+    {
+      "chapter": 11,
+      "slot_index": 7,
+      "slot_type": "REFLECTION",
+      "source": "persona_atom+registry",
+      "source_id": "REFLECTION v01+ch11_sec04_reflection_f3",
+      "variant_id": "ch11_sec04_reflection_f3",
+      "words": 49
+    },
+    {
+      "chapter": 11,
+      "slot_index": 8,
+      "slot_type": "EXERCISE",
+      "source": "persona_atom",
+      "source_id": "EXERCISE v19",
+      "variant_id": "",
+      "words": 53
+    },
+    {
+      "chapter": 11,
+      "slot_index": 9,
+      "slot_type": "STORY",
+      "source": "persona_atom",
+      "source_id": "COST_REVEAL v03",
+      "variant_id": "",
+      "words": 188
+    },
+    {
+      "chapter": 11,
+      "slot_index": 10,
+      "slot_type": "INTEGRATION",
+      "source": "persona_atom+registry+teacher_atom",
+      "source_id": "INTEGRATION v24+ch11_sec07_integration_f1+ahjan_INTEGRATION_009",
+      "variant_id": "ch11_sec07_integration_f1",
+      "words": 171
+    },
+    {
+      "chapter": 12,
+      "slot_index": 0,
+      "slot_type": "HOOK",
+      "source": "persona_atom+registry+teacher_atom",
+      "source_id": "HOOK v25+ch12_sec01_hook_f2+ahjan_HOOK_009",
+      "variant_id": "ch12_sec01_hook_f2",
+      "words": 87
+    },
+    {
+      "chapter": 12,
+      "slot_index": 1,
+      "slot_type": "ANGLE_CALLBACK",
+      "source": "angle_template",
+      "source_id": "angle_cb_tpl:PROTECTIVE_ALARM:L5",
+      "variant_id": "",
+      "words": 25
+    },
+    {
+      "chapter": 12,
+      "slot_index": 2,
+      "slot_type": "STORY",
+      "source": "persona_atom",
+      "source_id": "COST_REVEAL v04",
+      "variant_id": "",
+      "words": 170
+    },
+    {
+      "chapter": 12,
+      "slot_index": 3,
+      "slot_type": "REFLECTION",
+      "source": "persona_atom+registry",
+      "source_id": "REFLECTION v11+ch12_sec03_reflection_f1",
+      "variant_id": "ch12_sec03_reflection_f1",
+      "words": 48
+    },
+    {
+      "chapter": 12,
+      "slot_index": 4,
+      "slot_type": "EXERCISE",
+      "source": "persona_atom",
+      "source_id": "EXERCISE v20",
+      "variant_id": "",
+      "words": 35
+    },
+    {
+      "chapter": 12,
+      "slot_index": 5,
+      "slot_type": "STORY",
+      "source": "persona_atom",
+      "source_id": "EMBODIMENT v01",
+      "variant_id": "",
+      "words": 115
+    },
+    {
+      "chapter": 12,
+      "slot_index": 6,
+      "slot_type": "TEACHER_DOCTRINE",
+      "source": "teacher_atom",
+      "source_id": "ahjan_QUOTE_004_mined",
+      "variant_id": "",
+      "words": 24
+    },
+    {
+      "chapter": 12,
+      "slot_index": 7,
+      "slot_type": "REFLECTION",
+      "source": "persona_atom+registry",
+      "source_id": "REFLECTION v24+ch12_sec04_reflection_f1",
+      "variant_id": "ch12_sec04_reflection_f1",
+      "words": 327
+    },
+    {
+      "chapter": 12,
+      "slot_index": 8,
+      "slot_type": "EXERCISE",
+      "source": "persona_atom",
+      "source_id": "EXERCISE v23",
+      "variant_id": "",
+      "words": 49
+    },
+    {
+      "chapter": 12,
+      "slot_index": 9,
+      "slot_type": "STORY",
+      "source": "persona_atom",
+      "source_id": "EMBODIMENT v03",
+      "variant_id": "",
+      "words": 41
+    },
+    {
+      "chapter": 12,
+      "slot_index": 10,
+      "slot_type": "INTEGRATION",
+      "source": "persona_atom+registry+teacher_atom",
+      "source_id": "INTEGRATION v18+ch12_sec07_integration_f1+ahjan_INTEGRATION_007",
+      "variant_id": "ch12_sec07_integration_f1",
+      "words": 218
+    }
+  ],
+  "book_slot_tracker_used_ids": [
+    "ch10_sec03_reflection_f1",
+    "ch06_sec04_reflection_f1",
+    "ch01_sec07_reflection_f1",
+    "ch09_sec04_reflection_f2",
+    "ch04_sec04_reflection_f3",
+    "ch06_sec07_integration_f2",
+    "ch03_sec01_hook_f3",
+    "ch10_sec01_hook_f4",
+    "ch12_sec03_reflection_f1",
+    "ch03_sec03_reflection_f2",
+    "ch01_sec01_hook_f5",
+    "ch11_sec04_reflection_f3",
+    "ch04_sec01_hook_f2",
+    "ch07_sec06_reflection_f3",
+    "ch05_sec03_reflection_f3",
+    "ch02_sec09_integration_f3",
+    "ch06_sec01_hook_f1",
+    "ch01_sec06_teacherdoctrine_d05",
+    "ch09_sec03_reflection_f3",
+    "ch09_sec07_integration_f2",
+    "ch01_sec09_integration_f1",
+    "ch01_sec05_reflection_f1",
+    "ch03_sec08_integration_f1",
+    "ch04_sec07_integration_f1",
+    "ch07_sec07_integration_f2",
+    "ch12_sec04_reflection_f1",
+    "ch02_sec01_hook_f2",
+    "ch08_sec06_reflection_f1",
+    "ch05_sec07_integration_f2",
+    "ch02_sec03_reflection_f2",
+    "ch06_sec03_reflection_f3",
+    "ch11_sec01_hook_f2",
+    "ch12_sec01_hook_f2",
+    "ch04_sec03_reflection_f1",
+    "ch11_sec07_integration_f1",
+    "ch05_sec01_hook_f5",
+    "ch08_sec07_integration_f1",
+    "ch05_sec04_reflection_f1",
+    "ch11_sec03_reflection_f1",
+    "ch09_sec01_hook_f4",
+    "ch07_sec01_hook_f3",
+    "ch10_sec04_reflection_f1",
+    "ch08_sec01_hook_f4",
+    "ch12_sec07_integration_f1",
+    "ch02_sec04_reflection_f2",
+    "ch03_sec04_reflection_f3",
+    "ch10_sec07_integration_f1"
+  ],
+  "story_schedule": [],
+  "angle_journey_fallback_warnings": [
+    "angle_journey: ch2 layer 1 assertion TODO; callback slot still injected",
+    "angle_journey: ch3 layer 2 assertion TODO; callback slot still injected",
+    "angle_journey: ch4 layer 2 assertion TODO; callback slot still injected",
+    "angle_journey: ch5 layer 2 assertion TODO; callback slot still injected",
+    "angle_journey: ch6 layer 3 assertion TODO; callback slot still injected",
+    "angle_journey: ch7 layer 3 assertion TODO; callback slot still injected",
+    "angle_journey: ch8 layer 4 assertion TODO; callback slot still injected",
+    "angle_journey: ch9 layer 4 assertion TODO; callback slot still injected",
+    "angle_journey: ch10 layer 4 assertion TODO; callback slot still injected",
+    "angle_journey: ch11 layer 5 assertion TODO; callback slot still injected",
+    "angle_journey: ch12 layer 5 assertion TODO; callback slot still injected",
+    "ANGLE_DEFINITION: planner-template fallback for 'PROTECTIVE_ALARM'",
+    "ANGLE_CALLBACK: planner-template fallback L1 for 'PROTECTIVE_ALARM'",
+    "ANGLE_CALLBACK: planner-template fallback L2 for 'PROTECTIVE_ALARM'",
+    "ANGLE_CALLBACK: planner-template fallback L2 for 'PROTECTIVE_ALARM'",
+    "ANGLE_CALLBACK: planner-template fallback L2 for 'PROTECTIVE_ALARM'",
+    "ANGLE_CALLBACK: planner-template fallback L3 for 'PROTECTIVE_ALARM'",
+    "ANGLE_CALLBACK: planner-template fallback L3 for 'PROTECTIVE_ALARM'",
+    "ANGLE_CALLBACK: planner-template fallback L4 for 'PROTECTIVE_ALARM'",
+    "ANGLE_CALLBACK: planner-template fallback L4 for 'PROTECTIVE_ALARM'",
+    "ANGLE_CALLBACK: planner-template fallback L4 for 'PROTECTIVE_ALARM'",
+    "ANGLE_CALLBACK: planner-template fallback L5 for 'PROTECTIVE_ALARM'",
+    "ANGLE_CALLBACK: planner-template fallback L5 for 'PROTECTIVE_ALARM'"
+  ],
+  "angle_id": "PROTECTIVE_ALARM",
+  "angle_layer_by_chapter": {
+    "2": 1,
+    "3": 2,
+    "4": 2,
+    "5": 2,
+    "6": 3,
+    "7": 3,
+    "8": 4,
+    "9": 4,
+    "10": 4,
+    "11": 5,
+    "12": 5
+  },
+  "depth_modules_added": [
+    {
+      "chapter": 1,
+      "module": "recognition_depth",
+      "source_type": "teacher_atom",
+      "words_added": 28,
+      "remaining_deficit": 388,
+      "depth_round": 0,
+      "pass": "p1r0"
+    },
+    {
+      "chapter": 1,
+      "module": "recognition_depth",
+      "source_type": "persona_atom",
+      "words_added": 35,
+      "remaining_deficit": 353,
+      "depth_round": 0,
+      "pass": "p1r0"
+    },
+    {
+      "chapter": 1,
+      "module": "recognition_depth",
+      "source_type": "registry_variant",
+      "words_added": 24,
+      "remaining_deficit": 329,
+      "depth_round": 0,
+      "pass": "p1r0"
+    },
+    {
+      "chapter": 1,
+      "module": "story_scene",
+      "source_type": "teacher_atom",
+      "words_added": 140,
+      "remaining_deficit": 189,
+      "depth_round": 0,
+      "pass": "p1r0"
+    },
+    {
+      "chapter": 1,
+      "module": "story_scene",
+      "source_type": "persona_atom",
+      "words_added": 168,
+      "remaining_deficit": 21,
+      "depth_round": 0,
+      "pass": "p1r0"
+    },
+    {
+      "chapter": 2,
+      "module": "recognition_depth",
+      "source_type": "teacher_atom",
+      "words_added": 42,
+      "remaining_deficit": 97,
+      "depth_round": 0,
+      "pass": "p1r0"
+    },
+    {
+      "chapter": 3,
+      "module": "recognition_depth",
+      "source_type": "teacher_atom",
+      "words_added": 33,
+      "remaining_deficit": 297,
+      "depth_round": 0,
+      "pass": "p1r0"
+    },
+    {
+      "chapter": 3,
+      "module": "recognition_depth",
+      "source_type": "persona_atom",
+      "words_added": 35,
+      "remaining_deficit": 262,
+      "depth_round": 0,
+      "pass": "p1r0"
+    },
+    {
+      "chapter": 3,
+      "module": "recognition_depth",
+      "source_type": "registry_variant",
+      "words_added": 24,
+      "remaining_deficit": 238,
+      "depth_round": 0,
+      "pass": "p1r0"
+    },
+    {
+      "chapter": 3,
+      "module": "story_scene",
+      "source_type": "teacher_atom",
+      "words_added": 102,
+      "remaining_deficit": 136,
+      "depth_round": 0,
+      "pass": "p1r0"
+    },
+    {
+      "chapter": 3,
+      "module": "story_scene",
+      "source_type": "persona_atom",
+      "words_added": 136,
+      "remaining_deficit": 0,
+      "depth_round": 0,
+      "pass": "p1r0"
+    },
+    {
+      "chapter": 4,
+      "module": "story_scene",
+      "source_type": "teacher_atom",
+      "words_added": 140,
+      "remaining_deficit": 276,
+      "depth_round": 0,
+      "pass": "p1r0"
+    },
+    {
+      "chapter": 4,
+      "module": "story_scene",
+      "source_type": "persona_atom",
+      "words_added": 174,
+      "remaining_deficit": 102,
+      "depth_round": 0,
+      "pass": "p1r0"
+    },
+    {
+      "chapter": 4,
+      "module": "story_scene",
+      "source_type": "registry_variant",
+      "words_added": 24,
+      "remaining_deficit": 78,
+      "depth_round": 0,
+      "pass": "p1r0"
+    },
+    {
+      "chapter": 7,
+      "module": "mechanism_depth",
+      "source_type": "teacher_atom",
+      "words_added": 72,
+      "remaining_deficit": 192,
+      "depth_round": 0,
+      "pass": "p1r0"
+    },
+    {
+      "chapter": 7,
+      "module": "mechanism_depth",
+      "source_type": "registry_variant",
+      "words_added": 46,
+      "remaining_deficit": 146,
+      "depth_round": 0,
+      "pass": "p1r0"
+    },
+    {
+      "chapter": 7,
+      "module": "mechanism_depth",
+      "source_type": "persona_atom",
+      "words_added": 146,
+      "remaining_deficit": 0,
+      "depth_round": 0,
+      "pass": "p1r0"
+    },
+    {
+      "chapter": 9,
+      "module": "mechanism_depth",
+      "source_type": "teacher_atom",
+      "words_added": 58,
+      "remaining_deficit": 228,
+      "depth_round": 0,
+      "pass": "p1r0"
+    },
+    {
+      "chapter": 9,
+      "module": "mechanism_depth",
+      "source_type": "registry_variant",
+      "words_added": 46,
+      "remaining_deficit": 182,
+      "depth_round": 0,
+      "pass": "p1r0"
+    },
+    {
+      "chapter": 9,
+      "module": "mechanism_depth",
+      "source_type": "persona_atom",
+      "words_added": 172,
+      "remaining_deficit": 10,
+      "depth_round": 0,
+      "pass": "p1r0"
+    },
+    {
+      "chapter": 10,
+      "module": "mechanism_depth",
+      "source_type": "teacher_atom",
+      "words_added": 75,
+      "remaining_deficit": 31,
+      "depth_round": 0,
+      "pass": "p1r0"
+    },
+    {
+      "chapter": 12,
+      "module": "mechanism_depth",
+      "source_type": "teacher_atom",
+      "words_added": 35,
+      "remaining_deficit": 314,
+      "depth_round": 0,
+      "pass": "p1r0"
+    },
+    {
+      "chapter": 12,
+      "module": "mechanism_depth",
+      "source_type": "registry_variant",
+      "words_added": 46,
+      "remaining_deficit": 268,
+      "depth_round": 0,
+      "pass": "p1r0"
+    },
+    {
+      "chapter": 12,
+      "module": "mechanism_depth",
+      "source_type": "persona_atom",
+      "words_added": 175,
+      "remaining_deficit": 93,
+      "depth_round": 0,
+      "pass": "p1r0"
+    },
+    {
+      "chapter": 12,
+      "module": "mechanism_depth",
+      "source_type": "teacher_atom",
+      "words_added": 52,
+      "remaining_deficit": 781,
+      "depth_round": 0,
+      "pass": "p2r0"
+    },
+    {
+      "chapter": 12,
+      "module": "mechanism_depth",
+      "source_type": "registry_variant",
+      "words_added": 46,
+      "remaining_deficit": 735,
+      "depth_round": 0,
+      "pass": "p2r0"
+    },
+    {
+      "chapter": 12,
+      "module": "mechanism_depth",
+      "source_type": "persona_atom",
+      "words_added": 176,
+      "remaining_deficit": 559,
+      "depth_round": 0,
+      "pass": "p2r0"
+    },
+    {
+      "chapter": 12,
+      "module": "story_scene",
+      "source_type": "teacher_atom",
+      "words_added": 185,
+      "remaining_deficit": 374,
+      "depth_round": 0,
+      "pass": "p2r0"
+    },
+    {
+      "chapter": 12,
+      "module": "story_scene",
+      "source_type": "persona_atom",
+      "words_added": 176,
+      "remaining_deficit": 198,
+      "depth_round": 0,
+      "pass": "p2r0"
+    },
+    {
+      "chapter": 12,
+      "module": "story_scene",
+      "source_type": "registry_variant",
+      "words_added": 24,
+      "remaining_deficit": 174,
+      "depth_round": 0,
+      "pass": "p2r0"
+    },
+    {
+      "chapter": 12,
+      "module": "persona_specificity",
+      "source_type": "persona_atom",
+      "words_added": 35,
+      "remaining_deficit": 139,
+      "depth_round": 0,
+      "pass": "p2r0"
+    },
+    {
+      "chapter": 12,
+      "module": "consequence_exposure",
+      "source_type": "teacher_atom",
+      "words_added": 68,
+      "remaining_deficit": 71,
+      "depth_round": 0,
+      "pass": "p2r0"
+    },
+    {
+      "chapter": 9,
+      "module": "mechanism_depth",
+      "source_type": "teacher_atom",
+      "words_added": 61,
+      "remaining_deficit": 645,
+      "depth_round": 0,
+      "pass": "p2r0"
+    },
+    {
+      "chapter": 9,
+      "module": "mechanism_depth",
+      "source_type": "registry_variant",
+      "words_added": 46,
+      "remaining_deficit": 599,
+      "depth_round": 0,
+      "pass": "p2r0"
+    },
+    {
+      "chapter": 9,
+      "module": "mechanism_depth",
+      "source_type": "persona_atom",
+      "words_added": 200,
+      "remaining_deficit": 399,
+      "depth_round": 0,
+      "pass": "p2r0"
+    },
+    {
+      "chapter": 9,
+      "module": "story_scene",
+      "source_type": "teacher_atom",
+      "words_added": 101,
+      "remaining_deficit": 298,
+      "depth_round": 0,
+      "pass": "p2r0"
+    },
+    {
+      "chapter": 9,
+      "module": "story_scene",
+      "source_type": "persona_atom",
+      "words_added": 166,
+      "remaining_deficit": 132,
+      "depth_round": 0,
+      "pass": "p2r0"
+    },
+    {
+      "chapter": 9,
+      "module": "story_scene",
+      "source_type": "registry_variant",
+      "words_added": 24,
+      "remaining_deficit": 108,
+      "depth_round": 0,
+      "pass": "p2r0"
+    },
+    {
+      "chapter": 9,
+      "module": "persona_specificity",
+      "source_type": "persona_atom",
+      "words_added": 35,
+      "remaining_deficit": 73,
+      "depth_round": 0,
+      "pass": "p2r0"
+    },
+    {
+      "chapter": 7,
+      "module": "mechanism_depth",
+      "source_type": "teacher_atom",
+      "words_added": 70,
+      "remaining_deficit": 532,
+      "depth_round": 0,
+      "pass": "p2r0"
+    },
+    {
+      "chapter": 7,
+      "module": "mechanism_depth",
+      "source_type": "registry_variant",
+      "words_added": 46,
+      "remaining_deficit": 486,
+      "depth_round": 0,
+      "pass": "p2r0"
+    },
+    {
+      "chapter": 7,
+      "module": "mechanism_depth",
+      "source_type": "persona_atom",
+      "words_added": 189,
+      "remaining_deficit": 297,
+      "depth_round": 0,
+      "pass": "p2r0"
+    },
+    {
+      "chapter": 7,
+      "module": "story_scene",
+      "source_type": "teacher_atom",
+      "words_added": 168,
+      "remaining_deficit": 129,
+      "depth_round": 0,
+      "pass": "p2r0"
+    },
+    {
+      "chapter": 7,
+      "module": "story_scene",
+      "source_type": "persona_atom",
+      "words_added": 129,
+      "remaining_deficit": 0,
+      "depth_round": 0,
+      "pass": "p2r0"
+    },
+    {
+      "chapter": 10,
+      "module": "mechanism_depth",
+      "source_type": "teacher_atom",
+      "words_added": 67,
+      "remaining_deficit": 54,
+      "depth_round": 0,
+      "pass": "p2r0"
+    }
+  ],
+  "depth_budget_policy": {
+    "mode": "per_chapter_reservation",
+    "book_wmax": 20000,
+    "reserved_min_per_chapter": 416,
+    "target_per_chapter": 833,
+    "max_per_chapter": 1666
+  },
+  "depth_budget_by_chapter": [
+    {
+      "chapter": 1,
+      "pre_depth_words": 1275,
+      "depth_words_added": 395,
+      "post_depth_words": 1670,
+      "reserved_min_met": false
+    },
+    {
+      "chapter": 2,
+      "pre_depth_words": 1349,
+      "depth_words_added": 42,
+      "post_depth_words": 1391,
+      "reserved_min_met": false
+    },
+    {
+      "chapter": 3,
+      "pre_depth_words": 1158,
+      "depth_words_added": 330,
+      "post_depth_words": 1488,
+      "reserved_min_met": false
+    },
+    {
+      "chapter": 4,
+      "pre_depth_words": 1052,
+      "depth_words_added": 338,
+      "post_depth_words": 1390,
+      "reserved_min_met": false
+    },
+    {
+      "chapter": 5,
+      "pre_depth_words": 1580,
+      "depth_words_added": 0,
+      "post_depth_words": 1580,
+      "reserved_min_met": false
+    },
+    {
+      "chapter": 6,
+      "pre_depth_words": 1392,
+      "depth_words_added": 0,
+      "post_depth_words": 1392,
+      "reserved_min_met": false
+    },
+    {
+      "chapter": 7,
+      "pre_depth_words": 1224,
+      "depth_words_added": 866,
+      "post_depth_words": 2090,
+      "reserved_min_met": true
+    },
+    {
+      "chapter": 8,
+      "pre_depth_words": 1621,
+      "depth_words_added": 0,
+      "post_depth_words": 1621,
+      "reserved_min_met": false
+    },
+    {
+      "chapter": 9,
+      "pre_depth_words": 1202,
+      "depth_words_added": 909,
+      "post_depth_words": 2111,
+      "reserved_min_met": true
+    },
+    {
+      "chapter": 10,
+      "pre_depth_words": 1382,
+      "depth_words_added": 142,
+      "post_depth_words": 1524,
+      "reserved_min_met": false
+    },
+    {
+      "chapter": 11,
+      "pre_depth_words": 1532,
+      "depth_words_added": 0,
+      "post_depth_words": 1532,
+      "reserved_min_met": false
+    },
+    {
+      "chapter": 12,
+      "pre_depth_words": 1139,
+      "depth_words_added": 1018,
+      "post_depth_words": 2157,
+      "reserved_min_met": true
+    }
+  ],
+  "depth_budget_starvation": [],
+  "exercise_journeys": [
+    {
+      "chapter": 1,
+      "thesis_id": "emotional_overwhelm",
+      "journey_type": "2_step",
+      "exercise_ids": [
+        "body_scan_v1",
+        "extended_exhale_v2"
+      ]
+    },
+    {
+      "chapter": 2,
+      "thesis_id": "anxiety_spike",
+      "journey_type": "2_step",
+      "exercise_ids": [
+        "body_scan_v1",
+        "extended_exhale_v2"
+      ]
+    },
+    {
+      "chapter": 3,
+      "thesis_id": "unnamed_feeling",
+      "journey_type": "2_step",
+      "exercise_ids": [
+        "sensation_tracking_v1",
+        "extended_exhale_v2"
+      ]
+    },
+    {
+      "chapter": 4,
+      "thesis_id": "unnamed_feeling",
+      "journey_type": "2_step",
+      "exercise_ids": [
+        "body_scan_v1",
+        "extended_exhale_v2"
+      ]
+    },
+    {
+      "chapter": 5,
+      "thesis_id": "emotional_overwhelm",
+      "journey_type": "2_step",
+      "exercise_ids": [
+        "body_scan_v1",
+        "extended_exhale_v2"
+      ]
+    },
+    {
+      "chapter": 6,
+      "thesis_id": "anxiety_spike",
+      "journey_type": "2_step",
+      "exercise_ids": [
+        "sensation_tracking_v1",
+        "extended_exhale_v2"
+      ]
+    },
+    {
+      "chapter": 7,
+      "thesis_id": "anxiety_spike",
+      "journey_type": "2_step",
+      "exercise_ids": [
+        "body_scan_v1",
+        "extended_exhale_v2"
+      ]
+    },
+    {
+      "chapter": 8,
+      "thesis_id": "unnamed_feeling",
+      "journey_type": "2_step",
+      "exercise_ids": [
+        "body_scan_v1",
+        "extended_exhale_v2"
+      ]
+    },
+    {
+      "chapter": 9,
+      "thesis_id": "unnamed_feeling",
+      "journey_type": "2_step",
+      "exercise_ids": [
+        "body_scan_v1",
+        "extended_exhale_v2"
+      ]
+    },
+    {
+      "chapter": 10,
+      "thesis_id": "unnamed_feeling",
+      "journey_type": "2_step",
+      "exercise_ids": [
+        "sensation_tracking_v1",
+        "extended_exhale_v2"
+      ]
+    },
+    {
+      "chapter": 11,
+      "thesis_id": "emotional_overwhelm",
+      "journey_type": "2_step",
+      "exercise_ids": [
+        "sensation_tracking_v1",
+        "breath_anchor_v1"
+      ]
+    },
+    {
+      "chapter": 12,
+      "thesis_id": "anxiety_spike",
+      "journey_type": "2_step",
+      "exercise_ids": [
+        "sensation_tracking_v1",
+        "breath_anchor_v1"
+      ]
+    }
+  ]
+}

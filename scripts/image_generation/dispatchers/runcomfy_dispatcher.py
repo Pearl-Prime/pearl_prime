@@ -161,9 +161,9 @@ def dispatch(
         billing = {"cumulative_month_spend_usd": spend, "billing_poll_error": True}
 
     result["billing_snapshot_usd"] = spend
-    if spend >= 10.0:
+    if spend >= 10.0:  # RunComfy $10/mo soft cap — restored after deprecation-burn closure (SWEEP-TAIL 2026-06-13)
         result["status"] = "suppressed_cooldown"
-        result["notes"] = "RunComfy cumulative_month_spend_usd >= $10; job not submitted."
+        result["notes"] = "RunComfy cumulative_month_spend_usd >= $10; job not submitted (soft cap)."
         return result
 
     api_key = _runcomfy_api_key()

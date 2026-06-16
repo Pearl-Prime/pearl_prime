@@ -1,7 +1,9 @@
 atom_id: junko_PERMISSION_001
-band: universal
-body: Your body is not a problem to solve. It is an intelligence to trust. Let it lead when the mind is spinning.
+band: 2
+body: You do not have to interpret what you felt. You only have to be honest that you felt it.
 teacher:
   teacher_id: junko
-  source_refs: []
-  synthesis_method: doctrine_grounded
+  source_refs:
+  - teachers/junko/junko_doctrine_notes.rtf
+  - teachers/junko/junko_yt.rtf
+  synthesis_method: doctrine_grounded_v1

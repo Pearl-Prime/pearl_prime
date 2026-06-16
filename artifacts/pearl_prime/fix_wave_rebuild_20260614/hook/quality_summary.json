@@ -1,0 +1,429 @@
+{
+  "source": "spine_pipeline",
+  "topic_id": "burnout",
+  "persona_id": "corporate_managers",
+  "teacher_id": "ahjan",
+  "runtime_format": "standard_book",
+  "book_plan_id": "generated_burnout_corporate_managers_standard_book",
+  "quality_profile": "production",
+  "gates_run": true,
+  "gates_hard": true,
+  "gates": {
+    "chapter_flow": {
+      "status": "PASS",
+      "report": "chapter_flow_report.json"
+    },
+    "bestseller_craft": {
+      "status": "PASS",
+      "overall_score": 0.625
+    },
+    "ei_v2": {
+      "status": "PASS",
+      "composite": 0.6451,
+      "report": "ei_v2_report.json"
+    },
+    "editorial": {
+      "status": "WARN",
+      "report": "editorial_report.json"
+    },
+    "memorable_lines": {
+      "status": "WARN",
+      "chapters_with_two_or_more_quotable_lines": 8,
+      "chapter_count": 12,
+      "report": "memorable_line_report.json"
+    },
+    "transformation_arc": {
+      "status": "WARN",
+      "report": "transformation_heatmap.json"
+    },
+    "book_pass": {
+      "status": "FAIL",
+      "report": "book_pass_report.json"
+    }
+  },
+  "quality_gate_failures": [
+    "book_pass",
+    "scene_anti_genericity"
+  ],
+  "overall_status": "FAIL",
+  "book_quality_gate": {
+    "release_band": "Hold",
+    "report_path": "/Users/ahjan/phoenix_omega/artifacts/pearl_prime/fix_wave_rebuild_20260614/hook/book_quality_report.json",
+    "fail_reasons": [],
+    "hold_reasons": [
+      "repeated phrase density above book cap"
+    ]
+  },
+  "pre_depth_total_words": 13428,
+  "post_depth_total_words": 20714,
+  "frame": "somatic_first",
+  "governance_report": {
+    "exercise_slots_dropped": [
+      {
+        "chapter": 1,
+        "chapter_index": 0,
+        "slot_type": "EXERCISE",
+        "max_allowed": 0,
+        "contract_max_exercises": 0,
+        "format_cap": 2
+      },
+      {
+        "chapter": 1,
+        "chapter_index": 0,
+        "slot_type": "EXERCISE",
+        "max_allowed": 0,
+        "contract_max_exercises": 0,
+        "format_cap": 2
+      },
+      {
+        "chapter": 9,
+        "chapter_index": 8,
+        "slot_type": "EXERCISE",
+        "max_allowed": 2,
+        "contract_max_exercises": 2,
+        "format_cap": 2
+      },
+      {
+        "chapter": 9,
+        "chapter_index": 8,
+        "slot_type": "EXERCISE",
+        "max_allowed": 2,
+        "contract_max_exercises": 2,
+        "format_cap": 2
+      },
+      {
+        "chapter": 9,
+        "chapter_index": 8,
+        "slot_type": "EXERCISE",
+        "max_allowed": 2,
+        "contract_max_exercises": 2,
+        "format_cap": 2
+      },
+      {
+        "chapter": 9,
+        "chapter_index": 8,
+        "slot_type": "EXERCISE",
+        "max_allowed": 2,
+        "contract_max_exercises": 2,
+        "format_cap": 2
+      },
+      {
+        "chapter": 10,
+        "chapter_index": 9,
+        "slot_type": "EXERCISE",
+        "max_allowed": 2,
+        "contract_max_exercises": 1,
+        "format_cap": 2
+      },
+      {
+        "chapter": 10,
+        "chapter_index": 9,
+        "slot_type": "EXERCISE",
+        "max_allowed": 2,
+        "contract_max_exercises": 1,
+        "format_cap": 2
+      },
+      {
+        "chapter": 10,
+        "chapter_index": 9,
+        "slot_type": "EXERCISE",
+        "max_allowed": 2,
+        "contract_max_exercises": 1,
+        "format_cap": 2
+      },
+      {
+        "chapter": 10,
+        "chapter_index": 9,
+        "slot_type": "EXERCISE",
+        "max_allowed": 2,
+        "contract_max_exercises": 1,
+        "format_cap": 2
+      },
+      {
+        "chapter": 11,
+        "chapter_index": 10,
+        "slot_type": "EXERCISE",
+        "max_allowed": 2,
+        "contract_max_exercises": 1,
+        "format_cap": 2
+      },
+      {
+        "chapter": 11,
+        "chapter_index": 10,
+        "slot_type": "EXERCISE",
+        "max_allowed": 2,
+        "contract_max_exercises": 1,
+        "format_cap": 2
+      },
+      {
+        "chapter": 11,
+        "chapter_index": 10,
+        "slot_type": "EXERCISE",
+        "max_allowed": 2,
+        "contract_max_exercises": 1,
+        "format_cap": 2
+      },
+      {
+        "chapter": 11,
+        "chapter_index": 10,
+        "slot_type": "EXERCISE",
+        "max_allowed": 2,
+        "contract_max_exercises": 1,
+        "format_cap": 2
+      },
+      {
+        "chapter": 12,
+        "chapter_index": 11,
+        "slot_type": "EXERCISE",
+        "max_allowed": 0,
+        "contract_max_exercises": 0,
+        "format_cap": 2
+      },
+      {
+        "chapter": 12,
+        "chapter_index": 11,
+        "slot_type": "EXERCISE",
+        "max_allowed": 0,
+        "contract_max_exercises": 0,
+        "format_cap": 2
+      },
+      {
+        "chapter": 12,
+        "chapter_index": 11,
+        "slot_type": "EXERCISE",
+        "max_allowed": 0,
+        "contract_max_exercises": 0,
+        "format_cap": 2
+      },
+      {
+        "chapter": 12,
+        "chapter_index": 11,
+        "slot_type": "EXERCISE",
+        "max_allowed": 0,
+        "contract_max_exercises": 0,
+        "format_cap": 2
+      },
+      {
+        "chapter": 12,
+        "chapter_index": 11,
+        "slot_type": "EXERCISE",
+        "max_allowed": 0,
+        "contract_max_exercises": 0,
+        "format_cap": 2
+      },
+      {
+        "chapter": 12,
+        "chapter_index": 11,
+        "slot_type": "EXERCISE",
+        "max_allowed": 0,
+        "contract_max_exercises": 0,
+        "format_cap": 2
+      }
+    ],
+    "chapter_contract_warnings": [
+      "chapter 12: emotional_job 'resolution' matches previous chapter \u2014 escalation contract may be weak"
+    ],
+    "frame_governance_chapters": [],
+    "frame_softened_sentences": [],
+    "frame_stripped_sentences": [],
+    "frame_hard_fail_reasons": [],
+    "recurrence_report": [
+      "removed_extra_occurrences: 'an engine note from outside' x8"
+    ],
+    "whole_book_dedupe_notes": [
+      "book_wide_paragraph_dedupe: removed_extra (occurrence 3) 'Elena is at her kitchen table at 11:20 PM, corporate badge still on her bag, sho'",
+      "book_wide_paragraph_dedupe: removed_extra (occurrence 3) 'The win here is not calm. The win is noticing the alarm before it chooses for yo'",
+      "book_wide_paragraph_dedupe: removed_extra (occurrence 4) 'The win here is not calm. The win is noticing the alarm before it chooses for yo'",
+      "book_wide_paragraph_dedupe: removed_extra (occurrence 5) 'The win here is not calm. The win is noticing the alarm before it chooses for yo'",
+      "book_wide_paragraph_dedupe: removed_extra (occurrence 3) 'Notice your jaw right now. Is it clenched. Release it. Let your tongue drop from'",
+      "book_wide_paragraph_dedupe: removed_extra (occurrence 4) 'Elena is at her kitchen table at 11:20 PM, corporate badge still on her bag, sho'",
+      "book_wide_paragraph_dedupe: removed_extra (occurrence 6) 'The win here is not calm. The win is noticing the alarm before it chooses for yo'",
+      "book_wide_paragraph_dedupe: removed_extra (occurrence 5) 'Elena is at her kitchen table at 11:20 PM, corporate badge still on her bag, sho'",
+      "book_wide_paragraph_dedupe: removed_extra (occurrence 7) 'The win here is not calm. The win is noticing the alarm before it chooses for yo'",
+      "book_wide_paragraph_dedupe: removed_extra (occurrence 4) 'Notice your jaw right now. Is it clenched. Release it. Let your tongue drop from'",
+      "book_wide_paragraph_dedupe: removed_extra (occurrence 6) 'Elena is at her kitchen table at 11:20 PM, corporate badge still on her bag, sho'",
+      "book_wide_paragraph_dedupe: removed_extra (occurrence 3) 'The story of his burnout was not dramatic. There was no collapse, no scene, no s'",
+      "book_wide_paragraph_dedupe: removed_extra (occurrence 3) 'Now, take a moment to assess your balance.\\nRocking introduces predictable motion'",
+      "book_wide_paragraph_dedupe: removed_extra (occurrence 8) 'The win here is not calm. The win is noticing the alarm before it chooses for yo'",
+      "book_wide_paragraph_dedupe: removed_extra (occurrence 3) 'Now, take a moment and reflect.\\nBreathing at an even rhythm may have created a s'",
+      "book_wide_paragraph_dedupe: removed_extra (occurrence 7) 'Elena is at her kitchen table at 11:20 PM, corporate badge still on her bag, sho'",
+      "book_wide_paragraph_dedupe: removed_extra (occurrence 3) 'The first kind is meditation as escape. You sit down. You close your eyes.\\nYou r'",
+      "book_wide_paragraph_dedupe: removed_extra (occurrence 3) 'The second kind is meditation as showing up. You sit down. You close your\\neyes. '",
+      "book_wide_paragraph_dedupe: removed_extra (occurrence 3) 'Ahjan teaches the second kind. He says, \"You are not here to leave your\\nlife. Yo'",
+      "book_wide_paragraph_dedupe: removed_extra (occurrence 3) 'When Ahjan teaches a student to sit, he is not teaching them how to feel\\nbetter '",
+      "book_wide_paragraph_dedupe: removed_extra (occurrence 3) 'This sounds simple. It is the hardest thing many people will ever do.\\nBecause sh'"
+    ]
+  },
+  "exercise_slots_dropped": [
+    {
+      "chapter": 1,
+      "chapter_index": 0,
+      "slot_type": "EXERCISE",
+      "max_allowed": 0,
+      "contract_max_exercises": 0,
+      "format_cap": 2
+    },
+    {
+      "chapter": 1,
+      "chapter_index": 0,
+      "slot_type": "EXERCISE",
+      "max_allowed": 0,
+      "contract_max_exercises": 0,
+      "format_cap": 2
+    },
+    {
+      "chapter": 9,
+      "chapter_index": 8,
+      "slot_type": "EXERCISE",
+      "max_allowed": 2,
+      "contract_max_exercises": 2,
+      "format_cap": 2
+    },
+    {
+      "chapter": 9,
+      "chapter_index": 8,
+      "slot_type": "EXERCISE",
+      "max_allowed": 2,
+      "contract_max_exercises": 2,
+      "format_cap": 2
+    },
+    {
+      "chapter": 9,
+      "chapter_index": 8,
+      "slot_type": "EXERCISE",
+      "max_allowed": 2,
+      "contract_max_exercises": 2,
+      "format_cap": 2
+    },
+    {
+      "chapter": 9,
+      "chapter_index": 8,
+      "slot_type": "EXERCISE",
+      "max_allowed": 2,
+      "contract_max_exercises": 2,
+      "format_cap": 2
+    },
+    {
+      "chapter": 10,
+      "chapter_index": 9,
+      "slot_type": "EXERCISE",
+      "max_allowed": 2,
+      "contract_max_exercises": 1,
+      "format_cap": 2
+    },
+    {
+      "chapter": 10,
+      "chapter_index": 9,
+      "slot_type": "EXERCISE",
+      "max_allowed": 2,
+      "contract_max_exercises": 1,
+      "format_cap": 2
+    },
+    {
+      "chapter": 10,
+      "chapter_index": 9,
+      "slot_type": "EXERCISE",
+      "max_allowed": 2,
+      "contract_max_exercises": 1,
+      "format_cap": 2
+    },
+    {
+      "chapter": 10,
+      "chapter_index": 9,
+      "slot_type": "EXERCISE",
+      "max_allowed": 2,
+      "contract_max_exercises": 1,
+      "format_cap": 2
+    },
+    {
+      "chapter": 11,
+      "chapter_index": 10,
+      "slot_type": "EXERCISE",
+      "max_allowed": 2,
+      "contract_max_exercises": 1,
+      "format_cap": 2
+    },
+    {
+      "chapter": 11,
+      "chapter_index": 10,
+      "slot_type": "EXERCISE",
+      "max_allowed": 2,
+      "contract_max_exercises": 1,
+      "format_cap": 2
+    },
+    {
+      "chapter": 11,
+      "chapter_index": 10,
+      "slot_type": "EXERCISE",
+      "max_allowed": 2,
+      "contract_max_exercises": 1,
+      "format_cap": 2
+    },
+    {
+      "chapter": 11,
+      "chapter_index": 10,
+      "slot_type": "EXERCISE",
+      "max_allowed": 2,
+      "contract_max_exercises": 1,
+      "format_cap": 2
+    },
+    {
+      "chapter": 12,
+      "chapter_index": 11,
+      "slot_type": "EXERCISE",
+      "max_allowed": 0,
+      "contract_max_exercises": 0,
+      "format_cap": 2
+    },
+    {
+      "chapter": 12,
+      "chapter_index": 11,
+      "slot_type": "EXERCISE",
+      "max_allowed": 0,
+      "contract_max_exercises": 0,
+      "format_cap": 2
+    },
+    {
+      "chapter": 12,
+      "chapter_index": 11,
+      "slot_type": "EXERCISE",
+      "max_allowed": 0,
+      "contract_max_exercises": 0,
+      "format_cap": 2
+    },
+    {
+      "chapter": 12,
+      "chapter_index": 11,
+      "slot_type": "EXERCISE",
+      "max_allowed": 0,
+      "contract_max_exercises": 0,
+      "format_cap": 2
+    },
+    {
+      "chapter": 12,
+      "chapter_index": 11,
+      "slot_type": "EXERCISE",
+      "max_allowed": 0,
+      "contract_max_exercises": 0,
+      "format_cap": 2
+    },
+    {
+      "chapter": 12,
+      "chapter_index": 11,
+      "slot_type": "EXERCISE",
+      "max_allowed": 0,
+      "contract_max_exercises": 0,
+      "format_cap": 2
+    }
+  ],
+  "chapter_contract_warnings": [
+    "chapter 12: emotional_job 'resolution' matches previous chapter \u2014 escalation contract may be weak"
+  ],
+  "frame_governance_chapters": [],
+  "frame_softened_sentences": [],
+  "frame_stripped_sentences": [],
+  "frame_hard_fail_reasons": [],
+  "recurrence_report": [
+    "removed_extra_occurrences: 'an engine note from outside' x8"
+  ]
+}

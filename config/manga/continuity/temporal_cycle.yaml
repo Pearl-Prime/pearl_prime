@@ -1,0 +1,22 @@
+# Temporal cycle — declares the legal next-step-in-cycle transitions.
+# Per MANGA_LAYER_RENDER_CONTRACT_SPEC.md §6.2 temporal_state enum.
+
+schema_version: "1.0.0"
+type: "temporal_cycle"
+
+# Canonical cycle. temporal at panel N+1 must be the same as N, or the
+# successor in this list, UNLESS beat_type allows scene jump.
+cycle:
+  - dawn
+  - morning
+  - midday
+  - afternoon
+  - evening
+  - night
+  # wraps: night -> dawn (next day) is legal
+
+# beat_types that exempt the cycle constraint entirely.
+exemption_beat_types:
+  - standard
+  - long_drop
+  - miyazaki_ma

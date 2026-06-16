@@ -39,8 +39,8 @@ def main() -> int:
     ap.add_argument("--video-id", default=None, help="Video ID (default: video-<plan_id>)")
     ap.add_argument("--force", action="store_true", help="Overwrite existing artifacts at every stage")
     ap.add_argument("--assets-dir", default=None, help="Assets directory for render")
-    ap.add_argument("--skip-render", action="store_true", default=True, help="Skip FFmpeg render (default True)")
-    ap.add_argument("--no-skip-render", action="store_true", help="Run FFmpeg render when assets-dir is set")
+    ap.add_argument("--skip-render", action="store_true", default=False, help="Skip the FFmpeg render stage (default: render runs)")
+    ap.add_argument("--no-skip-render", action="store_true", help="Deprecated no-op: render now runs by default; kept for backward compat")
     ap.add_argument("--format", default="short", help="VCE format: short|mid|long|motion_comic|lofi|exercise")
     ap.add_argument("--platforms", default="youtube,tiktok", help="Comma-separated targets for platform adapter")
     ap.add_argument("--languages", default="en", help="Comma-separated locales for multilang stage")
@@ -49,8 +49,8 @@ def main() -> int:
     ap.add_argument("--title", default="When anxiety shows up", help="Stub/final title for distribution")
     ap.add_argument("--description", default="A short on noticing anxiety without fighting it.", help="Description")
     ap.add_argument("--tags", default="anxiety,mindfulness,therapeutic", help="Comma-separated tags")
-    ap.add_argument("--voice", action="store_true", help="Generate voice narration via ElevenLabs TTS")
-    ap.add_argument("--music", action="store_true", help="Generate background music via ElevenLabs (costs $)")
+    ap.add_argument("--voice", action="store_true", help="Generate voice narration via free/local TTS (CosyVoice2 CJK / Edge-TTS EN; never ElevenLabs)")
+    ap.add_argument("--music", action="store_true", help="Also run voice synthesis (music bed itself comes from --music-bank, the free bank)")
     ap.add_argument("--music-bank", action="store_true", help="Select music from free music bank (recommended)")
     ap.add_argument("--auto-generate", action="store_true", help="Auto-generate missing image assets via RunComfy")
     ap.add_argument("--upload", action="store_true", help="Run Stage 18 Upload/Publish after pipeline (dry-run by default)")
@@ -149,12 +149,16 @@ def main() -> int:
         except Exception as e:
             print(f"Warning: music bank failed ({e})", file=sys.stderr)
 
-    # ── Voice synthesis (ElevenLabs TTS) — opt-in via --voice ──
+    # ── Voice synthesis (free/local TTS: CosyVoice2 CJK / Edge-TTS EN) — opt-in via --voice ──
     if args.voice or args.music:
+        # Derive a routing locale from the first --languages entry (bare "en" -> "en-US").
+        first_lang = (args.languages.split(",")[0] or "en").strip()
+        voice_locale = "en-US" if first_lang.lower() in ("en", "en-us") else first_lang
         voice_cmd = [
             py, str(scripts / "run_voice_synthesis.py"),
             str(out_root / "soundtrack_plan.json"),
             "-o", str(out_root / "audio"),
+            "--locale", voice_locale,
         ]
         if args.music:
             voice_cmd.append("--music")

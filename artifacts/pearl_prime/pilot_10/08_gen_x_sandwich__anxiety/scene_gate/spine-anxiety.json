@@ -1,0 +1,21 @@
+{
+  "status": "WARN",
+  "mode": "production",
+  "blocking": false,
+  "errors": [],
+  "warnings": [
+    "ch0: THREE_DETAIL_RULE: only 2 unique sensory detail(s), need >=3",
+    "ch3: THREE_DETAIL_RULE: only 2 unique sensory detail(s), need >=3",
+    "ch4: THREE_DETAIL_RULE: only 2 unique sensory detail(s), need >=3",
+    "ch7: THREE_DETAIL_RULE: only 2 unique sensory detail(s), need >=3",
+    "ch8: THREE_DETAIL_RULE: only 1 unique sensory detail(s), need >=3",
+    "ch9: THREE_DETAIL_RULE: only 2 unique sensory detail(s), need >=3"
+  ],
+  "metrics": {
+    "chapter_count": 12,
+    "collision_count": 0,
+    "repeated_location_count": 0,
+    "chapters_below_3_details": 6,
+    "chapters_without_action": 0
+  }
+}

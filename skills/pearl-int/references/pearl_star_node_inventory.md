@@ -55,18 +55,23 @@ timm             1.0.26
 
 ```
 ~/phoenix_server/ComfyUI/models/checkpoints/
-├── flux1-schnell-fp8.safetensors           # 17 GiB; Apache 2.0; brand-2 V1 ship base; now also FLUX-PuLID path
-└── flux1-dev-fp8.safetensors               # 1.5 MB STUB (DEPRECATED; non-commercial license; safe to leave)
+├── flux1-schnell-fp8.safetensors           # 17 GiB; Apache 2.0; brand-2 V1 ship base; also FLUX-PuLID path
+├── flux1-dev-fp8.safetensors               # 17 GiB; landed 2026-05-18 (verified 2026-06-02 Pearl_Int);
+│                                           #   H1=A canonical config (28 steps / cfg 3.5 / dpmpp_2m / karras)
+│                                           #   non-commercial license — operator-cleared for canonical manga
+│                                           #   panel work per feedback_campaign_h1_h2_decisions
+└── animagine-xl-4.0.safetensors            # 6.94 GiB; openrail++; V2 shojo/iyashikei path
 ```
 
-**Deferred to HF_TOKEN download session** (Pearl Star → HF CDN throttled to ~50 KB/s without auth — discovered during Phase B install attempt):
+> **2026-06-02 correction (Pearl_Int):** an earlier revision of this section listed `flux1-dev-fp8.safetensors` as a 1.5 MB stub deferred to a future HF_TOKEN session. That landed on 2026-05-18; the file is the real 17 GiB checkpoint. The H1=A path is unblocked.
+
+**Qwen-Image (still deferred to HF_TOKEN download session)** — Pearl Star → HF CDN throttled to ~50 KB/s without auth:
 
 | Component | Size | License | When |
 |---|---|---|---|
-| `animagine-xl-4.0.safetensors` (canonical single file) | 6.94 GB | openrail++ | Path B': operator generates HF_TOKEN, adds to Keychain via `security add-generic-password -s phoenix-omega -a HF_TOKEN -w <token> -U`, runs `hf download cagliostrolab/animagine-xl-4.0 animagine-xl-4.0.safetensors --local-dir .` — should complete in 2-20 min on the authenticated rate |
-| Qwen-Image (split-files via Comfy-Org repackage: `qwen_image_2512_fp8_e4m3fn.safetensors` + `qwen_2.5_vl_7b_fp8_scaled.safetensors` + `qwen_image_vae.safetensors`) | ~30 GB total | apache-2.0 | Same focused session OR a later one. Note: the workflow JSON `qwen_image_txt2img_manga.json` (PR #926) currently uses `CheckpointLoaderSimple` (single-file convention); Comfy-Org's split-files format requires `UNETLoader` + `DualCLIPLoader` + `VAELoader` — small Pearl_Dev workflow JSON edit bundled with this download. |
+| Qwen-Image (split-files via Comfy-Org repackage: `qwen_image_2512_fp8_e4m3fn.safetensors` + `qwen_2.5_vl_7b_fp8_scaled.safetensors` + `qwen_image_vae.safetensors`) | ~30 GB total | apache-2.0 | HF_TOKEN session. The workflow JSON `qwen_image_txt2img_manga.json` (PR #926) currently uses `CheckpointLoaderSimple` (single-file convention); Comfy-Org's split-files format requires `UNETLoader` + `DualCLIPLoader` + `VAELoader` — small Pearl_Dev workflow JSON edit bundled with this download. |
 
-The engine router's `available_engines` parameter (added in this PR) gates routing: until the downloads land, all V2 routes degrade to FLUX-schnell + PuLID-FaceNet. After downloads land, the runtime caller sets `available_engines={ENGINE_FLUX_SCHNELL, ENGINE_ANIMAGINE}` (and later also `ENGINE_QWEN`) to enable full V2 routing.
+The engine router's `available_engines` parameter gates routing: with FLUX-dev + Animagine both present, V2 routes for shojo/iyashikei (Animagine) and FLUX-dev paths are live; Qwen-Image routes for seinen/josei still degrade to FLUX-schnell + PuLID-FaceNet until the Qwen download lands.
 
 ## License posture (post Phase B)
 
@@ -85,3 +90,56 @@ Phase C will add (in order):
 - WD-EVA02-large-tagger-v3 (Phase E QA tagger)
 
 This file gets updated as each Phase lands.
+
+---
+
+## Pearl Star autonomous self-monitoring (verified 2026-06-02; Pearl_Int)
+
+Long-running orchestrator runs on Pearl Star (e.g., 5-day bulk renders) need two capabilities that don't ship in the base Ubuntu install: a GitHub CLI for progress commits and an `rclone` remote for sample uploads to R2. Both are installed user-local on Pearl Star (no `sudo` available) and verified end-to-end.
+
+### Installed binaries (user-local, no `sudo` required)
+
+```
+~/.local/bin/gh        # v2.45.0 — tarball install from https://github.com/cli/cli/releases
+~/.local/bin/rclone    # v1.69.0 — zip install from https://downloads.rclone.org/
+~/.bashrc              # exports PATH=$HOME/.local/bin:$PATH (idempotent — checked before append)
+```
+
+### `gh` auth state
+
+- **Account:** `Ahjan108`
+- **Storage:** `/home/ahjan108/.config/gh/hosts.yml` (token only on disk after `gh auth login --with-token`)
+- **Scopes:** `gist`, `read:org`, `repo`, `workflow` ✅ (sufficient for progress commits + PR list)
+- **Origin of token:** operator's local Keychain (`security find-generic-password -s phoenix-omega -a GH_TOKEN -w`). The same token now lives in Keychain under both `GH_TOKEN` and `GITHUB_TOKEN`.
+
+### `rclone` R2 remote `r2`
+
+- **Config file:** `~/.config/rclone/rclone.conf`
+- **Remote name:** `r2`
+- **Provider:** `s3` / `Cloudflare`
+- **Endpoint:** EU-jurisdiction host (lives in Keychain as `R2_ENDPOINT` — host hash differs from `R2_ACCOUNT_ID`)
+- **Bucket:** `phoenix-omega-artifacts` (existing prefixes: `manga/`, `teacher_showcase/`)
+- **Required setting:** `no_check_bucket = true` — the R2 token is bucket-scoped, no account-level `CreateBucket` permission. Without `no_check_bucket`, every upload pre-validates via `CreateBucket` and 403s.
+
+### Verification commands (re-run any time)
+
+```bash
+# gh auth
+ssh pearl_star '~/.local/bin/gh auth status'
+ssh pearl_star 'cd ~/phoenix_omega && ~/.local/bin/gh pr list --limit 1'
+
+# rclone R2 round-trip (writes test/po_smoke_$timestamp.txt, deletes, confirms gone)
+ssh pearl_star 'TS=$(date +%s); echo smoke > /tmp/po_smoke_$TS.txt
+  ~/.local/bin/rclone copy /tmp/po_smoke_$TS.txt r2:phoenix-omega-artifacts/test/
+  ~/.local/bin/rclone ls r2:phoenix-omega-artifacts/test/ | grep po_smoke_$TS
+  ~/.local/bin/rclone delete r2:phoenix-omega-artifacts/test/po_smoke_$TS.txt
+  rm -f /tmp/po_smoke_$TS.txt'
+```
+
+### tmux substitute (no sudo, no install)
+
+Pearl Star does not have `tmux` installed and `sudo apt install tmux` requires the operator's password. For long-running orchestrators, use `nohup … &` plus `disown` instead of a tmux session. The orchestrator log file is the source of truth; monitor via `ssh pearl_star "tail -f <log>"`. Abort via `ssh pearl_star "pkill -f <script-name>"`.
+
+### Setup runbook (full procedure)
+
+See [`docs/runbooks/PEARL_STAR_SETUP_RUNBOOK.md`](../../docs/runbooks/PEARL_STAR_SETUP_RUNBOOK.md) for the end-to-end procedure when rebuilding the Pearl Star host or onboarding a new one.

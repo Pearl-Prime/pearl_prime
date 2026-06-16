@@ -58,12 +58,25 @@ def test_load_runtime_format_standard():
     # bestseller-chord-audit-2026-05-17 Axis 4: raised ceiling 13000→18000 so
     # 12-chapter arcs don't truncate ch 11-12 content to 0 in
     # phoenix_v4/planning/enrichment_select.py:1228 format_wmax cap. PR #1152.
-    assert spec["word_range"] == [9000, 18000]
+    # DURATION-DERIVATION-01 (#1550): ceiling raised 18000→22000 (cap_word_target=22000);
+    # advertised audiobook_minutes re-derived 55→147. OPD-20260611-062 / OPD-20260613-001.
+    assert spec["word_range"] == [9000, 22000]
     # AUTO-PLAN-SSOT-01-AMENDMENT (2026-05-06) Group B ruling: standard_book
     # chapter_count_default reconciled from 12 (registry pre-amendment) to 10
     # (Python ACT-011/BSG-011 deliberate runtime value, preserved as the
     # behavior-preserving choice). See docs/PEARL_ARCHITECT_STATE.md.
     assert spec["chapter_count_default"] == 10
+
+
+def test_load_runtime_format_one_hour():
+    # DURATION-DERIVATION-01 / OPD-20260613-001: NEW first-class 1-hour tier.
+    # 1hr audiobook @ 150 WPM = exactly 9000 words (= midpoint of [8000,10000]).
+    spec = load_runtime_format("one_hour_book")
+    assert spec["word_range"] == [8000, 10000]
+    assert spec["fill_regime"] == "midpoint"
+    assert spec["audiobook_minutes"] == 60
+    assert spec["ebook_minutes"] == 39
+    assert spec["chapter_count_default"] == 8
 
 
 def test_apply_knobs_anxiety_standard():
@@ -468,8 +481,11 @@ def test_load_spine_non_compact_format_returns_full_spine():
     """Non-compact runtime formats (no compact_chapter_subset declared) return full spine."""
     s = load_spine("anxiety", runtime_format="standard_book")
     assert len(s.chapters) == 12
-    s_micro = load_spine("anxiety", runtime_format="micro_book_15")
-    assert len(s_micro.chapters) == 12  # micro_book_15 has no subset declaration
+    # extended_book_2h declares chapter_count_default 14 (≥ the 12-chapter spine) so it
+    # never carries a compact_chapter_subset → full spine. (Was micro_book_15, which #1612
+    # made compact with a 5-chapter subset; it is no longer a non-compact exemplar.)
+    s_ext = load_spine("anxiety", runtime_format="extended_book_2h")
+    assert len(s_ext.chapters) == 12
 
 
 def test_apply_knobs_on_compact_spine_validates_clean():

@@ -1,0 +1,247 @@
+# ═══════════════════════════════════════════════════════════════════════════
+# CHAPTER SCRIPT — The Thought That Wouldn't Die — Episode 1
+# ═══════════════════════════════════════════════════════════════════════════
+# Series:        stillness_press__yuna_stormwhisper__en_US__overthinking__the_thought_that_wouldnt_die
+# Episode:       ep_001 — "3:14 AM"
+# Author (EI):   Yuna Stormwhisper
+# Teacher:       yuna_stormwhisper (atmospheric horror / overthinking spirals)
+# Engine:        recursive_loop
+# Genre:         psychological_horror
+# Style:         claustrophobic_anime
+#
+# Premise:
+#   Kana Yamamoto, 28, novelist. One paragraph she can't finish. The thought
+#   about the paragraph won't die — it multiplies. Horror not as monster but
+#   as the same thought, slightly different each time, lining the walls of
+#   her room like wallpaper she's been peeling all night.
+#
+# Episode arc — the spiral as horror:
+#   tightening (sentence won't land) → multiplying (the thought has copies)
+#   → claustrophobic (the room is smaller now) → recognition (this is
+#   overthinking, not danger) → break (one breath that doesn't reach the spiral)
+#
+# CRAFT FORMULAS (psychological horror register):
+#   Mirror Beat — same composition repeating with subtle variation (the spiral)
+#   Threshold Shrink — room/desk dimensions compress panel-to-panel
+#   Echo Lettering — same line returns word-by-word, never complete
+#   Light Decline — practical lights dim across the arc
+#
+# ═══════════════════════════════════════════════════════════════════════════
+
+schema_version: "1.0.0"
+artifact_type: chapter_script_writer_handoff
+schema_authority: schemas/manga/chapter_script_writer_handoff.schema.json
+
+series_id: stillness_press__yuna_stormwhisper__en_US__overthinking__the_thought_that_wouldnt_die
+chapter_id: ep_001
+title: "The Thought That Wouldn't Die — Episode 1: 3:14 AM"
+manga_author: Yuna Stormwhisper
+teacher_id: yuna_stormwhisper
+brand_id: stillness_press
+engine: recursive_loop
+locale: en_US
+default_locale: en_US
+available_locales: [en_US]
+
+main_characters:
+  - id: kana
+    name: Kana Yamamoto
+    age: 28
+    role: protagonist (novelist; mid-career; chronic over-thinker)
+    visual_anchor: "shoulder-length black hair tied back loose, oversized grey cardigan, pale complexion, deep under-eye shadows, no jewelry, fingertips ink-stained"
+
+scene_palette:
+  primary: cold blue desk-lamp white + deep wall shadow
+  secondary: faint amber from a streetlight through the curtain
+  accent: a single red LED on the wall clock — visual through-line of the time pressure
+  spiral_palette: monochrome with the red LED as the only color in the climax
+  break_palette: warmer white (the laptop screen finally going dark)
+
+# ═══════════════════════════════════════════════════════════════════════════
+# PAGES (12 panels — tighter, claustrophobic)
+# ═══════════════════════════════════════════════════════════════════════════
+
+pages:
+  - page_id: ep_001_p01
+    panels:
+
+      # ── OPENING — the desk at 3:14 AM ─────────────────────────────────
+      - panel_id: ep001_001
+        scene: |
+          Wide establishing — a small writer's desk in a dim apartment.
+          Cold blue desk lamp. Laptop open. A coffee mug, empty. A wall
+          clock with a single red LED dot at the 3. Beyond the desk, a
+          window with a curtain half-drawn — orange streetlight bleeds in.
+          No figure yet.
+        beat_type: ~
+        intent: "OPENING — establish the claustrophobic frame, the time, the cold"
+        silence_confirmed: true
+
+      - panel_id: ep001_002
+        scene: |
+          Medium — Kana at the desk, seen from behind. Shoulder-length
+          black hair tied back loose, oversized grey cardigan. Hands on
+          the keyboard but not moving. The laptop screen is bright — a
+          single paragraph visible, cursor blinking at its end.
+        beat_type: micro
+        narrator_caption_by_locale:
+          en_US: "3:14 AM. The same paragraph. The seventh hour."
+
+      - panel_id: ep001_003
+        scene: |
+          Close on the laptop screen — a paragraph of text, the cursor
+          blinking at the end of an unfinished sentence: "She turned the
+          key and—". Below it, in the document margin, faint shadows of
+          previous attempts crossed out, layered.
+        beat_type: micro
+        intent: "ECHO LETTERING — the sentence that won't finish"
+        dialogue_lines:
+          - speaker: kana_internal
+            text_by_locale:
+              en_US: "Just one word. Any word."
+            intensity: whisper
+            bubble_style: cloud_thought
+            tail_style: dotless
+            position_hint: top_right
+            font_override_by_locale:
+              en_US: italic_internal
+
+      # ── ACTIVATION — the spiral begins (Mirror Beat 1) ────────────────
+      - panel_id: ep001_004
+        scene: |
+          Same composition as panel 2 — Kana at the desk from behind.
+          But the room is subtly smaller. The shadows on the walls are
+          slightly more present. The cardigan looks heavier. The clock's
+          red LED is brighter, more saturated.
+        beat_type: micro
+        intent: "MIRROR BEAT 1 — same shot, threshold shrinks"
+
+      - panel_id: ep001_005
+        scene: |
+          Tight close on Kana's face, half-lit by the laptop screen.
+          Eyes wide, not blinking. The blue light reflects in her irises
+          in a way that suggests recursion — small infinite versions of
+          herself.
+        beat_type: micro
+        dialogue_lines:
+          - speaker: kana_internal
+            text_by_locale:
+              en_US: "What if she doesn't turn the key. What if she runs. What if she has always been running."
+            intensity: whisper
+            bubble_style: cloud_thought
+            tail_style: dotless
+            position_hint: top_left
+            font_override_by_locale:
+              en_US: italic_internal
+
+      # ── CLAUSTROPHOBIC — the wall fills with thoughts ─────────────────
+      - panel_id: ep001_006
+        scene: |
+          Mid-distance — pull back to see the wall behind Kana's desk.
+          The shadows aren't shadows anymore — they're soft, blurred
+          handwriting. The same sentence fragment, written sideways,
+          upside-down, mirrored. "She turned the key and—" repeating
+          like wallpaper. Kana hasn't seen it yet.
+        beat_type: spatial
+        intent: "THRESHOLD SHRINK — the spiral is visible as environment"
+        silence_confirmed: true
+
+      - panel_id: ep001_007
+        scene: |
+          Closer — Kana glances up. Her face starts to register what
+          she's seeing on the wall. Small furrow between her brows. The
+          paragraph cursor still blinks. The red LED brighter.
+        beat_type: micro
+        dialogue_lines:
+          - speaker: kana_internal
+            text_by_locale:
+              en_US: "When did I write—"
+            intensity: whisper
+            bubble_style: cloud_thought
+            tail_style: dotless
+            position_hint: top_right
+            font_override_by_locale:
+              en_US: italic_internal
+
+      # ── PEAK — Mirror Beat 2 with the recognition ─────────────────────
+      - panel_id: ep001_008
+        scene: |
+          Same composition as panel 4 again. Same shot from behind. Room
+          smaller still. Shadows now dense, the handwriting almost
+          legible. The cardigan fills more of the frame. The LED is the
+          ONLY warm color in the panel — everything else gone deep blue
+          and black.
+        beat_type: micro
+        intent: "MIRROR BEAT 2 — claustrophobic peak"
+        sfx_by_locale:
+          en_US: ["...tick"]
+
+      - panel_id: ep001_009
+        scene: |
+          Tightest close — Kana's eye. Just the eye. The reflection in
+          the pupil shows the laptop, but tiny, and beyond it the wall,
+          and on the wall the sentence, and in the sentence another wall.
+          Mise-en-abyme — the spiral reflected forever.
+        beat_type: micro
+        intent: "PEAK — the spiral made visible inside her own eye"
+        narrator_caption_by_locale:
+          en_US: "Not a danger. A loop."
+
+      # ── BREAK — the small recognition ─────────────────────────────────
+      - panel_id: ep001_010
+        scene: |
+          Pull back to medium. Kana takes her hands off the keyboard.
+          Lets them rest on the desk. Looks not at the laptop, not at
+          the wall. Just at her own hands. The shadows on the wall
+          haven't gone away — they're still there — but she isn't
+          looking at them.
+        beat_type: spatial
+        intent: "RECOGNITION — choosing not to look at the spiral"
+
+      - panel_id: ep001_011
+        scene: |
+          Close — Kana exhales. The breath visible as faint condensation
+          in the cold blue light. One slow exhale. The cursor still
+          blinks. The LED still red. Nothing in the room has changed
+          except her gaze.
+        beat_type: long_drop
+        intent: "BREAK — one breath that doesn't enter the spiral"
+        silence_confirmed: true
+
+      # ── COMPLETION — laptop goes dark ──────────────────────────────────
+      - panel_id: ep001_012
+        scene: |
+          Wide — same composition as panel 1, but now the laptop screen
+          has gone dark (sleep mode). Kana sits at the desk, hands still
+          on it, eyes closed. The red LED still glows but the wall
+          shadows have softened — not gone, just softer. Through the
+          window the streetlight amber feels warmer now. End of episode.
+        beat_type: long_drop
+        intent: "COMPLETION — the room is the same; her relationship to it has shifted"
+        silence_confirmed: true
+        narrator_caption_by_locale:
+          en_US: "The thought is still there. I am not the thought."
+
+# ═══════════════════════════════════════════════════════════════════════════
+# WRITER NOTES
+# ═══════════════════════════════════════════════════════════════════════════
+notes:
+  arc_position: |
+    Episode 1 of N (planned 10-12). The teaching: a recurring thought
+    isn't a danger signal — it's a loop your mind has cached. The
+    practice is recognizing the loop (not stopping it), and choosing
+    where to put attention.
+  pacing_register: |
+    Psychological horror works through repetition + threshold compression.
+    Three Mirror Beat panels (2, 4, 8) carry the spiral. The Long Drop
+    panels (11, 12) are the regulatory beats — slower, larger, silent.
+  yuna_stormwhisper_signature: |
+    Yuna's craft: horror as recognition, not threat. Every series
+    isolates a thought-pattern that lives in the body and shows it as
+    environment. The thoughts ARE the wallpaper, the cold light, the
+    shrinking room. Recognition is the climax. No exorcism — just gaze
+    redirection.
+  translation_handoff: |
+    text_by_locale dicts populated for en_US. Run translate_chapter_script.py
+    for ja_JP / zh_TW / zh_CN. Internal monologue style preserved in
+    italic_internal font_override.

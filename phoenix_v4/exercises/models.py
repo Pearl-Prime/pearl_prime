@@ -1,7 +1,18 @@
 """
 Exercise component data models for the composable exercise assembly system.
 
-Exercises are decomposed into 5 components: BRIDGE, INTRO, DESCRIPTION, AHA, INTEGRATION.
+Exercises are decomposed into these components, mapped to the operator's
+5-part exercise structure (OPD-113):
+
+  1. INTRODUCTION  — "Now we're going to do an exercise."  (introduction_templates.yaml)
+  2. DESCRIPTION   — "This is a X practice..."             (intro_templates.yaml; called INTRO in code)
+  3. GUIDANCE      — the atom text itself                  (passed as description_text → DESCRIPTION)
+  4. AHA           — what happens / what to notice         (aha_noticing_phoenix_standard.yaml)
+  5. INTEGRATION   — how to carry it forward               (integration_phoenix_standard.yaml)
+
+In addition, an optional BRIDGE prefixes the introduction to soften the transition
+from prior narrative content into the exercise.
+
 Each component can be rendered in FULL, LEAN, or SKIP mode depending on assembly context.
 """
 from __future__ import annotations
@@ -49,11 +60,17 @@ class ComponentVariants:
 
 @dataclass
 class ExerciseComponents:
-    """All 5 component variants for a single exercise."""
+    """All component variants for a single exercise.
+
+    OPD-113: `introduction` was added as the explicit "Now we're going to do an
+    exercise" cue (operator's Part 1 of the 5-part exercise structure). It is
+    backward-compatible — when its variants are empty, the assembler emits nothing.
+    """
 
     exercise_id: str = ""
     exercise_type: str = ""
     bridge: ComponentVariants = field(default_factory=ComponentVariants)
+    introduction: ComponentVariants = field(default_factory=ComponentVariants)  # OPD-113
     intro: ComponentVariants = field(default_factory=ComponentVariants)
     description: ComponentVariants = field(default_factory=ComponentVariants)
     aha: ComponentVariants = field(default_factory=ComponentVariants)
@@ -65,6 +82,7 @@ class ComponentSelection:
     """Resolved selection: which mode for each component."""
 
     bridge: ComponentMode = ComponentMode.LEAN
+    introduction: ComponentMode = ComponentMode.FULL  # OPD-113: default to explicit cue
     intro: ComponentMode = ComponentMode.FULL
     description: ComponentMode = ComponentMode.FULL
     aha: ComponentMode = ComponentMode.FULL

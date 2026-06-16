@@ -32,8 +32,8 @@ brands:
     content: [audiobooks, manga, video, exercises, freebies]
 
   cognitive_clarity:
-    primary_teacher: joshin
-    teachers: [joshin]
+    primary_teacher: kenjin
+    teachers: [kenjin]
     topic_focus: [zen, direct_pointing, sitting, koans, self_inquiry]
     content: [audiobooks, manga, video, exercises, freebies]
 
@@ -44,8 +44,8 @@ brands:
     content: [audiobooks, manga, video, exercises, freebies]
 
   qi_foundation:
-    primary_teacher: master_feung
-    teachers: [master_feung]
+    primary_teacher: master_wu
+    teachers: [master_wu]
     topic_focus: [qi_cultivation, stability, foundation, chronic_stress, taiji]
     content: [audiobooks, manga, video, exercises, freebies]
 
@@ -62,14 +62,14 @@ brands:
     content: [audiobooks, manga, video, exercises, freebies]
 
   relational_calm:
-    primary_teacher: junko
-    teachers: [junko]
+    primary_teacher: miyuki  # per OPD-111
+    teachers: [miyuki]
     topic_focus: [relational_harmony, shame, inner_security, belonging]
     content: [audiobooks, manga, video, exercises, freebies]
 
   warrior_calm:
-    primary_teacher: master_wu
-    teachers: [master_wu]
+    primary_teacher: master_feung
+    teachers: [master_feung]
     topic_focus: [panic_response, composure, warrior_calm, resilience]
     content: [audiobooks, manga, video, exercises, freebies]
 
@@ -106,6 +106,9 @@ teacher_constraints:
   joshin:
     max_books_per_topic: 4
     max_books_per_persona: 5
+  kenjin:  # OPD-105: new Soto Zen teacher; mirrors joshin guardrails
+    max_books_per_topic: 4
+    max_books_per_persona: 5
   pamela_fellows:
     max_books_per_topic: 4
     max_books_per_persona: 5
@@ -119,6 +122,9 @@ teacher_constraints:
     max_books_per_topic: 4
     max_books_per_persona: 5
   junko:
+    max_books_per_topic: 3
+    max_books_per_persona: 4
+  miyuki:  # per OPD-111 — Japanese contemplative (lay-secular, wabi-sabi)
     max_books_per_topic: 3
     max_books_per_persona: 4
   master_wu:

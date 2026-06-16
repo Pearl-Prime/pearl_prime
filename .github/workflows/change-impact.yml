@@ -69,22 +69,22 @@ jobs:
 
             BODY="$ICON **PR Governance Review** — $VERDICT
 
-| Check | Result |
-|-------|--------|"
+          | Check | Result |
+          |-------|--------|"
 
             # Parse each check from JSON
             CHECKS=$(python3 -c "
-import json
-data = json.load(open('/tmp/governance_review.json'))
-icons = {'PASS': '✅', 'WARN': '⚠️', 'BLOCKED': '⛔'}
-for c in data.get('checks', []):
-    icon = icons.get(c['status'], '❓')
-    print(f'| {icon} {c[\"check\"]} | {c[\"message\"]} |')
-")
+          import json
+          data = json.load(open('/tmp/governance_review.json'))
+          icons = {'PASS': '✅', 'WARN': '⚠️', 'BLOCKED': '⛔'}
+          for c in data.get('checks', []):
+              icon = icons.get(c['status'], '❓')
+              print(f'| {icon} {c[\"check\"]} | {c[\"message\"]} |')
+          ")
             BODY="$BODY
-$CHECKS
+          $CHECKS
 
-_Automated by Pearl_PM + Pearl_Architect governance gate_"
+          _Automated by Pearl_PM + Pearl_Architect governance gate_"
 
             # Post as PR comment (find and update existing or create new)
             PR_NUM=${{ github.event.pull_request.number }}

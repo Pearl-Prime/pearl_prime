@@ -1,0 +1,126 @@
+{
+  "title": "Lever B \u2014 cross-chapter scaffolding variety (within-slot bridge rotation)",
+  "date": "2026-06-15",
+  "author": "Pearl_Dev",
+  "cell": "gen_z_professionals x anxiety (ahjan)",
+  "base": "origin/main a4021381c (BOTH variants built on identical origin/main composer; only the Lever-B edit toggled)",
+  "build": "scripts/pilot/run_spine_pipeline.py --quality-profile draft (deterministic, no paid API)",
+  "in_scope_fix": "phoenix_v4/rendering/chapter_composer.py::_bridge_within_slot \u2014 chapter-folded shape-bucket rotation + cross-bucket pool widening + HARD book-level no-repeat",
+  "tiers": [
+    {
+      "format": "standard_book",
+      "baseline_origin_main": {
+        "verdict": "HARD_FAIL",
+        "chapters": 12,
+        "words": 23468,
+        "F1": 61,
+        "F1_sizes": {
+          "2": 59,
+          "3": 1,
+          "4": 1
+        },
+        "F2": 6,
+        "F7": 12
+      },
+      "after_leverB": {
+        "verdict": "HARD_FAIL",
+        "chapters": 12,
+        "words": 23408,
+        "F1": 61,
+        "F1_sizes": {
+          "2": 59,
+          "3": 1,
+          "4": 1
+        },
+        "F2": 6,
+        "F7": 12
+      }
+    },
+    {
+      "format": "extended_book_2h",
+      "baseline_origin_main": {
+        "verdict": "HARD_FAIL",
+        "chapters": 12,
+        "words": 25937,
+        "F1": 67,
+        "F1_sizes": {
+          "2": 64,
+          "3": 2,
+          "4": 1
+        },
+        "F2": 6,
+        "F7": 12
+      },
+      "after_leverB": {
+        "verdict": "HARD_FAIL",
+        "chapters": 12,
+        "words": 25800,
+        "F1": 67,
+        "F1_sizes": {
+          "2": 64,
+          "3": 2,
+          "4": 1
+        },
+        "F2": 6,
+        "F7": 12
+      }
+    },
+    {
+      "format": "deep_book_6h",
+      "baseline_origin_main": {
+        "verdict": "HARD_FAIL",
+        "chapters": 12,
+        "words": 59265,
+        "F1": 224,
+        "F1_sizes": {
+          "2": 203,
+          "3": 12,
+          "4": 4,
+          "8": 1,
+          "9": 1,
+          "10": 1,
+          "12": 1,
+          "14": 1
+        },
+        "F2": 31,
+        "F7": 12
+      },
+      "after_leverB": {
+        "verdict": "HARD_FAIL",
+        "chapters": 12,
+        "words": 59253,
+        "F1": 224,
+        "F1_sizes": {
+          "2": 203,
+          "3": 12,
+          "4": 4,
+          "6": 1,
+          "9": 1,
+          "10": 1,
+          "12": 1,
+          "14": 1
+        },
+        "F2": 31,
+        "F7": 12
+      }
+    }
+  ],
+  "in_scope_cluster_proof_deep_book_6h": {
+    "Same body. Different door (raw count)": {
+      "baseline": 8,
+      "after_leverB": 6
+    },
+    "size-8 within-slot cluster present": {
+      "baseline": true,
+      "after_leverB": false
+    }
+  },
+  "F1_attribution_deep_book_6h": {
+    "total_clusters": 224,
+    "in_scope_within_slot": 1,
+    "out_of_scope_depth": 223,
+    "in_scope_share_pct": 0.4
+  },
+  "headline": "Book-level F1 unchanged (224->224 / 61->61 / 67->67) because 99.6% of full-12 F1 is emitted OUTSIDE the Lever-B WRITE_SCOPE (enrichment_select.py depth re-injection). The in-scope composer cluster IS eliminated (size-8 -> gone).",
+  "verdict_note": "register verdict stays HARD_FAIL (F2-only; F1 never gates)."
+}

@@ -128,3 +128,5 @@ NEXT_ACTION:    <what the next agent should do>
 Use this in chats whose job is to **build the next agent's startup prompt** rather than do the work themselves. The router reads the coordination TSVs and authority docs, then returns one paste-ready startup prompt for the next agent chat — it does not solve the task.
 
 **Canonical full text:** [./agent_brief.txt](./agent_brief.txt) — paste-ready, single source of truth. Do not duplicate the template here; edit `agent_brief.txt` and let this section continue to point at it to prevent drift.
+
+Operating reflexes (deconfliction, default-decision posture, worktree discipline, batching) are encoded as "Router Operating Principles v2" below the bootstrap in that same file; a compliant router reads the whole file.

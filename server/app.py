@@ -20,7 +20,16 @@ from starlette.middleware.cors import CORSMiddleware
 from server.config import ServerConfig
 from server.middleware.auth import APIKeyMiddleware
 from server.middleware.rate_limit import RateLimitMiddleware
-from server.routes import health, system, catalog, config_api
+from server.routes import (
+    health,
+    system,
+    catalog,
+    config_api,
+    brand_admin_download,
+    brand_admin_public,
+    setup_helper,
+    brand_onboarding,
+)
 
 logger = logging.getLogger("phoenix.server")
 
@@ -70,6 +79,10 @@ def create_app(config: ServerConfig | None = None) -> FastAPI:
     app.include_router(system.router)
     app.include_router(catalog.router)
     app.include_router(config_api.router)
+    app.include_router(brand_admin_download.router)
+    app.include_router(brand_admin_public.router)
+    app.include_router(setup_helper.router)
+    app.include_router(brand_onboarding.router)
 
     @app.on_event("startup")
     async def _startup():

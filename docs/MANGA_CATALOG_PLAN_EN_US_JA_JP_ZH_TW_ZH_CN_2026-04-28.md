@@ -1,6 +1,8 @@
 # Manga Catalog Plan — en_US / ja_JP / zh_TW / zh_CN — 2026-04-28
 
 **Status:** PLAN ONLY — no manga catalog files generated.
+
+> **Status note (2026-05-28):** The per-market format/genre matrices here remain the materialization source for `config/manga/brand_genre_allocation.yaml`. BUT the 12–13-brand roster predates the 37-brand canon — for **brands** use `config/manga/canonical_brand_list.yaml` (37) + the generated SSOT `config/source_of_truth/manga_series_plans/` (1,350 series, EXECUTED via Phase 2X). Genre %s are V1.2-era; the marketing-grounded V2 reweight target is `artifacts/research/marketing_grounded_per_genre_allocation_2026-05-13.md`.
 **Authority for genre union:** [`config/manga/canonical_genre_list.yaml`](../config/manga/canonical_genre_list.yaml) (Precondition A output, 25 canonical genres)
 **Authority for brand list:** [`config/catalog/market_catalog_registry.yaml`](../config/catalog/market_catalog_registry.yaml)
 **Authority for archetype fit:** [`config/catalog_planning/teacher_brand_archetypes.yaml`](../config/catalog_planning/teacher_brand_archetypes.yaml), [`config/catalog_planning/brand_archetype_registry.yaml`](../config/catalog_planning/brand_archetype_registry.yaml)

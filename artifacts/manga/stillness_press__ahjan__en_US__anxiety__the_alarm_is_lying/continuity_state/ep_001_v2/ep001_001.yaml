@@ -1,0 +1,27 @@
+schema_version: 1.0.0
+panel_id: ep001_001
+inherits_from: null
+beat_type: spatial
+archetype: sparse_establishing_wide
+scene_state:
+  scene_id: bedroom_aoki
+  temporal: dawn
+  light_rig_id: K01_dawn_window_warm
+  weather_anchor: soft_clouded_light
+character_state: {}
+prop_state:
+  phone: face_down
+  succulent_in_clay_pot: normal
+continuity_invariants:
+- no characters on stage; bedroom established empty
+- phone face-down (baseline before activation)
+relational_field:
+  active_entities:
+  - id: mira_aoki
+    on_frame: false
+    role: implied_listener
+  shared_attention_anchor: null
+  implied_partner_position: null
+  emotional_tension_vector:
+    direction: steady
+    magnitude_delta_from_prev: 0.0

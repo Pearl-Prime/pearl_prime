@@ -16,7 +16,7 @@ import json
 import re
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import TYPE_CHECKING, Any, Optional
+from typing import TYPE_CHECKING, Any, Callable, Optional
 
 if TYPE_CHECKING:
     from phoenix_v4.planning.enrichment_select import EnrichedChapter, EnrichedSlot
@@ -454,7 +454,15 @@ def _resolve_location_placeholders(
     t = re.sub(r"(?i)\bis there below\b", "is audible outside", t)
     t = re.sub(r"[ \t]{2,}", " ", t)
     t = re.sub(r"[ \t]+\.[ \t]+", ". ", t)
-    t = re.sub(r"([.!?])\1+", r"\1", t)
+    # Collapse runs of duplicated sentence terminators (e.g. ".." → ".", "??" → "?"),
+    # but PRESERVE legitimate three-dot ellipses ("..." stays "..."), and clamp
+    # over-long period runs ("...." or longer) back to a canonical three-dot ellipsis.
+    # The original ``([.!?])\1+`` collapsed every ``...`` to ``.``, breaking lead-in
+    # wrapper templates like ``"What {TEACHER} keeps pointing toward is..."`` —
+    # producing the F2 register-gate ``"... is."`` artifact. See OPD-20260518-002.
+    t = re.sub(r"\.{4,}", "...", t)
+    t = re.sub(r"([!?])\1+", r"\1", t)
+    t = re.sub(r"(?<!\.)\.\.(?!\.)", ".", t)
     t = re.sub(r"\s+,", ",", t)
     t = re.sub(r"\(\s+", "(", t)
     t = re.sub(r"\s+\)", ")", t)
@@ -555,7 +563,18 @@ def _dedupe_paragraphs(
     *,
     phrase_memory: EnvironmentPhraseMemory | None = None,
     chapter_index: int = 0,
+    bridge_fn: "Callable[[str, str, int], str] | None" = None,
 ) -> str:
+    """Dedupe paragraphs across blocks and join them.
+
+    OPD-109 Phase 1: if `bridge_fn` is provided, it is called between every
+    pair of adjacent surviving paragraphs and the returned 1-sentence
+    transition is interleaved into the output. Callback signature:
+        bridge_fn(prev_atom: str, next_atom: str, atom_pair_index: int) -> str
+    `bridge_fn` returning "" is treated as no-op (atoms still join with the
+    bare "\\n\\n" separator). Default (None) preserves backward-compat with
+    every existing caller.
+    """
     seen_prefixes: set[str] = set()
     seen_suffixes: set[str] = set()
     out: list[str] = []
@@ -582,7 +601,20 @@ def _dedupe_paragraphs(
             seen_prefixes.add(prefix_key)
             seen_suffixes.add(suffix_key)
             out.append(p)
-    return "\n\n".join(out)
+    if bridge_fn is None or len(out) < 2:
+        return "\n\n".join(out)
+    woven: list[str] = []
+    for i, p in enumerate(out):
+        if i > 0:
+            try:
+                bridge = bridge_fn(out[i - 1], p, i - 1) or ""
+            except Exception:
+                bridge = ""
+            bridge = (bridge or "").strip()
+            if bridge:
+                woven.append(bridge)
+        woven.append(p)
+    return "\n\n".join(woven)
 
 
 def _dedupe_hook_scene(hook: str, scene: str) -> tuple[str, str]:
@@ -605,7 +637,7 @@ def _bucket_slots(slots: list["EnrichedSlot"]) -> dict[str, list[str]]:
     core: dict[str, list[str]] = {k: [] for k in (
         "HOOK", "SCENE", "STORY", "REFLECTION", "PIVOT", "EXERCISE",
         "INTEGRATION", "THREAD", "TAKEAWAY", "PERMISSION", "COMPRESSION",
-        "TEACHER_DOCTRINE",
+        "TEACHER_DOCTRINE", "ANGLE_DEFINITION", "ANGLE_CALLBACK",
     )}
     depth_story: list[str] = []
     depth_mech: list[str] = []
@@ -619,7 +651,11 @@ def _bucket_slots(slots: list["EnrichedSlot"]) -> dict[str, list[str]]:
             cleaned = _strip_slot_artifacts(cleaned)
             if not cleaned:
                 continue
-            if "STORY" in st or "SCENE" in st:
+            if st in ("DEPTH_PRACTICE_SCAFFOLD",):
+                core["EXERCISE"].append(cleaned)
+            elif st in ("DEPTH_INTEGRATION_LANDING",):
+                core["INTEGRATION"].append(cleaned)
+            elif "STORY" in st or "SCENE" in st:
                 depth_story.append(cleaned)
             else:
                 depth_mech.append(cleaned)
@@ -637,7 +673,22 @@ def _first_or_join(
     *,
     phrase_memory: EnvironmentPhraseMemory | None = None,
     chapter_index: int = 0,
+    bridge_fn: "Callable[[str, str, int], str] | None" = None,
 ) -> str:
+    """Clean parts and join them, optionally interleaving bridge sentences.
+
+    OPD-109 Phase 1: `bridge_fn` is forwarded to `_dedupe_paragraphs` when
+    multiple parts survive. Default (None) preserves the bare-join behavior
+    for every caller that does not pass `bridge_fn`.
+
+    OPD-109 Phase 4 (this revision): callers also pass ``chapter_index`` so
+    ``_dedupe_paragraphs`` can carry the chapter coordinate when computing
+    bridge variant rotation. The single-block path remains a bare return —
+    routing single-slot stacked-atom content through bridge interleaving
+    is deliberately deferred (insufficient HOOK/SCENE variant pool to
+    keep ``book_quality`` phrase-density gate green; see OPD-109 Phase 5
+    follow-up).
+    """
     cleaned: list[str] = []
     for p in parts:
         fixed = _strip_slot_artifacts(
@@ -651,7 +702,12 @@ def _first_or_join(
         return ""
     if len(cleaned) == 1:
         return cleaned[0]
-    return _dedupe_paragraphs(cleaned)
+    return _dedupe_paragraphs(
+        cleaned,
+        phrase_memory=phrase_memory,
+        chapter_index=chapter_index,
+        bridge_fn=bridge_fn,
+    )
 
 
 def _collapse_chapter_one_story_stack(story: str) -> str:
@@ -673,31 +729,117 @@ def build_virtual_slot_streams(
     slots: list["EnrichedSlot"],
     *,
     chapter_index0: int = 0,
+    angle_id: str = "",
+    angle_layer: Optional[int] = None,
+    topic_id: str = "",
 ) -> tuple[list[str], list[str]]:
     """
     Map enriched beatmap slots → parallel (slot_types, slot_proses) for
     ``compose_chapter_prose`` (one prose string per canonical slot type).
+
+    OPD-109 Phase 1: when atoms stack inside a single slot (long runtimes),
+    interleave a 1-sentence within-slot bridge between consecutive atoms via
+    `chapter_composer._bridge_within_slot`. Bridge selection is deterministic
+    on (chapter_index0, slot_type, atom_pair_index). No paid-LLM dependency.
+    See docs/diagnostics/OPD-109_RENDERING_LAYER_DIAGNOSIS_2026-05-18.md.
     """
+    # Late import to avoid module-level circularity with chapter_composer.
+    try:
+        from phoenix_v4.rendering import chapter_composer as _cc
+
+        def _mk_bridge(stype: str) -> "Callable[[str, str, int], str]":
+            def _fn(prev: str, nxt: str, idx: int) -> str:
+                try:
+                    return _cc._bridge_within_slot(
+                        prev_atom=prev,
+                        next_atom=nxt,
+                        slot_type=stype,
+                        atom_pair_index=idx,
+                        chapter_index=chapter_index0,
+                    )
+                except Exception:
+                    return ""
+
+            return _fn
+    except Exception:
+        def _mk_bridge(stype: str) -> "Callable[[str, str, int], str]":
+            return lambda _p, _n, _i: ""
+
     b = _bucket_slots(slots)
-    hook, scene = _dedupe_hook_scene(_first_or_join(b["HOOK"]), _first_or_join(b["SCENE"]))
-    reflection = _first_or_join(b["REFLECTION"])
-    if b["_depth_mech"]:
-        extra = _dedupe_paragraphs(b["_depth_mech"])
-        reflection = "\n\n".join(x for x in (reflection, extra) if x)
-    story = _first_or_join(b["STORY"])
-    if b["_depth_story"]:
-        extra_s = _dedupe_paragraphs(b["_depth_story"])
-        story = "\n\n".join(x for x in (story, extra_s) if x)
+    hook, scene = _dedupe_hook_scene(
+        _first_or_join(
+            b["HOOK"],
+            chapter_index=chapter_index0,
+            bridge_fn=_mk_bridge("HOOK"),
+        ),
+        _first_or_join(
+            b["SCENE"],
+            chapter_index=chapter_index0,
+            bridge_fn=_mk_bridge("SCENE"),
+        ),
+    )
+    # OPD-109 Phase 4: aggregate vanilla REFLECTION + depth-pass _depth_mech
+    # into a single bridge-aware stream so transitions fire across the
+    # vanilla/depth boundary as well as within each stream. Prior code did
+    # `"\n\n".join((reflection, extra))` which left the boundary unbridged.
+    # The same aggregation applies to STORY + _depth_story below.
+    reflection_blocks = list(b["REFLECTION"]) + list(b["_depth_mech"])
+    reflection = _first_or_join(
+        reflection_blocks,
+        chapter_index=chapter_index0,
+        bridge_fn=_mk_bridge("REFLECTION"),
+    )
+    story_blocks = list(b["STORY"]) + list(b["_depth_story"])
+    story = _first_or_join(
+        story_blocks,
+        chapter_index=chapter_index0,
+        bridge_fn=_mk_bridge("STORY"),
+    )
+    if story_blocks:
+        try:
+            from phoenix_v4.rendering.chapter_composer import prepend_story_introduction_bridge
+
+            story = prepend_story_introduction_bridge(
+                story,
+                story_blocks[0],
+                chapter_index=chapter_index0,
+            )
+        except Exception:
+            pass
     if chapter_index0 == 0 and story.strip():
         story = _collapse_chapter_one_story_stack(story)
-    pivot = _first_or_join(b["PIVOT"])
-    exercise = _first_or_join(b["EXERCISE"])
-    integration = _first_or_join(b["INTEGRATION"])
-    thread = _first_or_join(b["THREAD"])
-    takeaway = _first_or_join(b["TAKEAWAY"])
-    permission = _first_or_join(b["PERMISSION"])
-    compression = _first_or_join(b["COMPRESSION"])
-    doctrine = _first_or_join(b["TEACHER_DOCTRINE"])
+    pivot = _first_or_join(
+        b["PIVOT"], chapter_index=chapter_index0, bridge_fn=_mk_bridge("PIVOT"),
+    )
+    integration = _first_or_join(
+        b["INTEGRATION"], chapter_index=chapter_index0, bridge_fn=_mk_bridge("INTEGRATION"),
+    )
+    thread = _first_or_join(
+        b["THREAD"], chapter_index=chapter_index0, bridge_fn=_mk_bridge("THREAD"),
+    )
+    takeaway = _first_or_join(
+        b["TAKEAWAY"], chapter_index=chapter_index0, bridge_fn=_mk_bridge("TAKEAWAY"),
+    )
+    permission = _first_or_join(
+        b["PERMISSION"], chapter_index=chapter_index0, bridge_fn=_mk_bridge("PERMISSION"),
+    )
+    compression = _first_or_join(
+        b["COMPRESSION"], chapter_index=chapter_index0, bridge_fn=_mk_bridge("COMPRESSION"),
+    )
+    doctrine = _first_or_join(
+        b["TEACHER_DOCTRINE"], chapter_index=chapter_index0, bridge_fn=_mk_bridge("TEACHER_DOCTRINE"),
+    )
+    # OPD-116/117: no within-slot bridges inside angle definition (authored as one unit).
+    angle_definition = (
+        "\n\n".join(x for x in b["ANGLE_DEFINITION"] if x.strip())
+        if b["ANGLE_DEFINITION"]
+        else ""
+    )
+    angle_callback_raw = (
+        "\n\n".join(x for x in b["ANGLE_CALLBACK"] if x.strip())
+        if b["ANGLE_CALLBACK"]
+        else ""
+    )
     # Sprint-1 word-floor fix: route TEACHER_DOCTRINE to COMPRESSION so it is
     # appended verbatim by compose_chapter_prose (compose_chapter_prose never adds
     # doctrine from slot_map to parts — TEACHER_DOCTRINE was silently discarded).
@@ -707,15 +849,32 @@ def build_virtual_slot_streams(
     # Order matches compose_chapter_prose consumption (opening → … → thread).
     types_: list[str] = []
     proses: list[str] = []
+    angle_callback = ""
+    if angle_callback_raw and angle_id and angle_layer:
+        try:
+            from phoenix_v4.rendering.chapter_composer import prefix_angle_callback_prose
+
+            angle_callback = prefix_angle_callback_prose(
+                angle_callback_raw,
+                angle_id=angle_id,
+                layer=int(angle_layer),
+                topic_id=topic_id,
+            )
+        except Exception:
+            angle_callback = angle_callback_raw
+    elif angle_callback_raw:
+        angle_callback = angle_callback_raw
+
     pairs = [
         ("HOOK", hook),
+        ("ANGLE_CALLBACK", angle_callback),
+        ("ANGLE_DEFINITION", angle_definition),
         ("SCENE", scene),
         ("REFLECTION", reflection),
         ("STORY", story),
         ("PIVOT", pivot),
         ("COMPRESSION", compression),
         ("TEACHER_DOCTRINE", doctrine),
-        ("EXERCISE", exercise),
         ("PERMISSION", permission),
         ("INTEGRATION", integration),
         ("TAKEAWAY", takeaway),
@@ -725,6 +884,11 @@ def build_virtual_slot_streams(
         if prose:
             types_.append(st)
             proses.append(prose)
+    for ex_block in b["EXERCISE"]:
+        ex_clean = _strip_slot_artifacts(ex_block, chapter_index=chapter_index0)
+        if ex_clean:
+            types_.append("EXERCISE")
+            proses.append(ex_clean)
     if not types_:
         return [], []
     return types_, proses
@@ -945,6 +1109,8 @@ def compose_golden_spine_chapter(
     governance_report: Optional[dict[str, Any]] = None,
     mechanism_memory: Any = None,
     exercise_memory: Any = None,
+    angle_id: str = "",
+    angle_layer_by_chapter: Optional[dict[int, int]] = None,
 ) -> tuple[str, dict[str, Any]]:
     """
     Returns (chapter body without ``Chapter N`` heading, synthesis_meta).
@@ -958,7 +1124,15 @@ def compose_golden_spine_chapter(
     )
     from phoenix_v4.rendering.chapter_composer import compose_chapter_prose
 
-    slot_types, slot_proses = build_virtual_slot_streams(chapter.slots, chapter_index0=chapter_index0)
+    _ch_num = int(getattr(chapter, "number", chapter_index0 + 1))
+    _angle_layer = (angle_layer_by_chapter or {}).get(_ch_num)
+    slot_types, slot_proses = build_virtual_slot_streams(
+        chapter.slots,
+        chapter_index0=chapter_index0,
+        angle_id=angle_id or "",
+        angle_layer=_angle_layer,
+        topic_id=topic_id,
+    )
     meta: dict[str, Any] = {
         "virtual_slot_types": slot_types,
         "beat_model": list(GOLDEN_BEATS),
@@ -1175,13 +1349,52 @@ def post_compose_sanitize_chapter(
     return t.strip()
 
 
+def _match_is_sentence_bounded(text: str, start: int, end: int) -> bool:
+    """True iff the [start:end) span is bounded by a sentence/line boundary on BOTH sides.
+
+    A left boundary is start-of-text, start-of-line, or text immediately after a
+    sentence terminator (``.!?``) + whitespace. A right boundary is end-of-text,
+    end-of-line, or a sentence terminator (optionally followed by whitespace).
+    Used by the empty-``replacements`` deletion guard so a surplus phrase can only be
+    removed when it constitutes a whole sentence/line — never a bare mid-sentence
+    substring (which would orphan the surrounding clause).
+    """
+    # Left side: walk back over leading whitespace, then require BOL / SOT / terminator.
+    i = start
+    while i > 0 and text[i - 1] in " \t":
+        i -= 1
+    if i == 0:
+        left_ok = True
+    else:
+        prev = text[i - 1]
+        left_ok = prev in ".!?\n\r"
+    if not left_ok:
+        return False
+    # Right side: walk forward over trailing whitespace, then require EOL / EOT / terminator.
+    j = end
+    while j < len(text) and text[j] in " \t":
+        j += 1
+    if j >= len(text):
+        return True
+    nxt = text[j]
+    return nxt in ".!?\n\r"
+
+
 def _limit_case_insensitive_phrase_occurrences(
     text: str,
     phrase: str,
     keep: int,
     replacements: tuple[str, ...],
 ) -> tuple[str, int]:
-    """Replace occurrences beyond ``keep`` with rotating alternates. Returns (new_text, replaced_n)."""
+    """Replace occurrences beyond ``keep`` with rotating alternates. Returns (new_text, replaced_n).
+
+    When ``replacements`` is empty the surplus match would otherwise be deleted in
+    place; that shears the containing sentence and orphans a byte-identical tail
+    (DEFECT 2 — e.g. "Start with the pressure under the sternum. still bracing.").
+    To prevent that, an empty-``replacements`` deletion is refused unless the match
+    is bounded by sentence boundaries on BOTH sides (whole-sentence / whole-line
+    removal only); a non-bounded surplus match is left untouched.
+    """
     if not text or not phrase:
         return text, 0
     pat = re.compile(re.escape(phrase), re.IGNORECASE)
@@ -1194,13 +1407,58 @@ def _limit_case_insensitive_phrase_occurrences(
         n += 1
         if n <= keep:
             parts.append(m.group(0))
-        else:
-            alt = replacements[(n - keep - 1) % len(replacements)] if replacements else ""
-            parts.append(alt)
+        elif replacements:
+            parts.append(replacements[(n - keep - 1) % len(replacements)])
             replaced += 1
+        elif _match_is_sentence_bounded(text, m.start(), m.end()):
+            # Whole-sentence/whole-line removal is safe — drop the match.
+            replaced += 1
+        else:
+            # Refuse in-place deletion of a mid-sentence substring; keep it intact.
+            parts.append(m.group(0))
+            n -= 1
         pos = m.end()
     parts.append(text[pos:])
     return "".join(parts), replaced
+
+
+# Sentence splitter used by furniture dedupe — boundary AFTER a terminator + space.
+_SENTENCE_SPLIT_RE = re.compile(r"(?<=[.!?])\s+")
+
+# Genuine standalone scene-furniture signatures: each is a complete environmental
+# descriptor clause/sentence. Capping these book-wide removes repeated lighting/
+# locative furniture without shearing prose.
+#
+# DEFECT 2 (truncation orphans): the former list ALSO contained lead/mid-clause
+# fragments of REAL teaching sentences ("by the time you", "that is the part",
+# "not to fix anything", "fix anything just to give", "is a body that",
+# "you can see the", etc.). Capping deleted those substrings IN PLACE, orphaning
+# the surrounding sentence tail (e.g. "...sternum. still bracing." 153x book-wide).
+# Those sentence-interior fragments are PURGED here — they are interiors of real
+# sentences, never standalone furniture, and must never be matched.
+_SCENE_FURNITURE_SIGNATURES = (
+    "soft daylight along the sill",
+    "muted light along the window",
+    "soft traffic noise from outside",
+    "outside noise drifts in without detail",
+    "a hallway hum carries through the corridor",
+    "route motion keeps the rhythm nearby",
+    "the cursor waits where you left it",
+    "the cursor holds where you left it",
+    "a coffee ring stays on the coaster",
+    "your badge stays in your pocket",
+    "a pale reflection at the glass edge",
+    "a shifting reflection at the window",
+    "the street below is visible through the glass",
+    "the street below is visible",
+    "gray light through the window",
+    "an engine note from outside",
+)
+
+
+def _normalize_sentence_for_furniture(sentence: str) -> str:
+    """Lowercased, whitespace-collapsed form used for signature containment tests."""
+    return re.sub(r"\s+", " ", sentence).strip().lower()
 
 
 def dedupe_scene_furniture_book(
@@ -1210,94 +1468,67 @@ def dedupe_scene_furniture_book(
 ) -> tuple[str, list[str]]:
     """
     After ``strengthen_chapter_flow_for_delivery``, generic lighting normalization can
-    repeat the same phrase across many chapters. Cap each known signature string book-wide.
+    repeat the same scene-furniture phrase across many chapters. Cap each known
+    standalone-furniture signature book-wide.
 
-    Extra occurrences are removed (single space) rather than swapped for alternate imagery,
-    to avoid breaking grammar when the phrase sits inside a longer broken clause.
+    Capping is done at SENTENCE granularity (DEFECT 2 fix): the text is split on
+    sentence boundaries and any surplus occurrence past ``max_each`` drops the WHOLE
+    containing sentence — never a bare substring. Deleting a substring in place sheared
+    real sentences and orphaned byte-identical tails across every book; dropping whole
+    sentences cannot orphan a tail. Only genuine standalone furniture descriptors are
+    in ``_SCENE_FURNITURE_SIGNATURES``; sentence-interior teaching fragments have been
+    purged from it.
     """
     notes: list[str] = []
-    work = text or ""
-    signatures = (
-        "soft daylight along the sill",
-        "muted light along the window",
-        "soft traffic noise from outside",
-        "outside noise drifts in without detail",
-        "a hallway hum carries through the corridor",
-        "route motion keeps the rhythm nearby",
-        "the cursor waits where you left it",
-        "the cursor holds where you left it",
-        "a coffee ring stays on the coaster",
-        "your badge stays in your pocket",
-        "a pale reflection at the glass edge",
-        "a shifting reflection at the window",
-        "the street below is visible through the glass",
-        "the street below is visible",
-        "the street below is",
-        "gray light through the window",
-        # Sprint-1 additions — depth-pass phrases that repeatedly fire within chapters
-        "moves through the room",
-        "holds where you left it",
-        "an engine note from outside",
-        "light over the window",
-        "what this means is that",
-        "and your nervous system",
-        "the desk holds the pen",
-        "you can see the",
-        # Sprint-1 wave-3 — multi-fill depth teaching phrases
-        "the point is that",
-        "a different input for a moment",
-        "you do not need to believe",
-        "doing exactly what it was",
-        "is a body that",
-        "by the time you",
-        "your body has already",
-        "before you move on",
-        # Sprint-1 wave-4 — teaching phrases from full-reflection depth pass
-        "your body is running",
-        "fix anything just to give",
-        "just to give yourself",
-        "change from this moment",
-        "happened or did not happen",
-        "did not happen is exactly",
-        "happen is exactly right",
-        "ahjan describes this as",
-        "the alarm without threat",
-        "i want you to",
-        "i want to name",
-        "you do not need",
-        "because the alarm doesn",
-        "not to fix anything",
-        "at the remote work",
-        "that just try it",
-        "this is why the",
-        # Sprint-1 wave-5 — em-dash variants not caught by plain regex
-        "happened — or did not happen — is exactly right",
-        "now, notice something",
-        # Sprint-1 wave-6 — period-separated phrases not caught by word-boundary search
-        "that. just try it",
-        "nothing has to forward",
-        "the cost of this",
-        "both are fine whatever",
-        "both are fine. whatever",
-        "breath at a time",
-        "a nervous system that",
-        "she does not know",
-        "this is not laziness",
-        "is a nervous system",
-        # Sprint-1 wave-7 — TEACHER_DOCTRINE & depth boilerplate: book-wide density >12 cap
-        "drawing on ahjan's mindfulness",
-        "ahjan's mindfulness and somatic",
-        "and somatic teaches us",
-        "according to ahjan",
-        "that is the part",
-        "the remote work improved",
-    )
-    for sig in signatures:
-        work, n = _limit_case_insensitive_phrase_occurrences(work, sig, max_each, ())
+    source = text or ""
+    if not source.strip():
+        return source.strip(), notes
+
+    # Split into sentence units while preserving the trailing whitespace/newlines that
+    # follow each terminator so reassembly is loss-free.
+    pieces = _SENTENCE_SPLIT_RE.split(source)
+    seps = _SENTENCE_SPLIT_RE.findall(source)
+
+    counts: dict[str, int] = {}
+    removed: dict[str, int] = {}
+    kept_pieces: list[str] = []
+    kept_seps: list[str] = []
+
+    for idx, piece in enumerate(pieces):
+        norm = _normalize_sentence_for_furniture(piece)
+        drop_sig: Optional[str] = None
+        for sig in _SCENE_FURNITURE_SIGNATURES:
+            if sig in norm:
+                counts[sig] = counts.get(sig, 0) + 1
+                if counts[sig] > max_each:
+                    drop_sig = sig
+                    break
+        if drop_sig is not None:
+            removed[drop_sig] = removed.get(drop_sig, 0) + 1
+            # Drop this whole sentence; do not carry its separator forward.
+            continue
+        kept_pieces.append(piece)
+        # The separator that FOLLOWS this piece (if any) is retained.
+        if idx < len(seps):
+            kept_seps.append(seps[idx])
+        else:
+            kept_seps.append("")
+
+    # Reassemble: piece + its following separator, in order.
+    rebuilt_parts: list[str] = []
+    for piece, sep in zip(kept_pieces, kept_seps):
+        rebuilt_parts.append(piece)
+        rebuilt_parts.append(sep)
+    work = "".join(rebuilt_parts)
+
+    for sig, n in removed.items():
         if n:
             notes.append(f"removed_extra_occurrences: {sig!r} x{n}")
+
     work = re.sub(r"[ \t]{2,}", " ", work)
     work = re.sub(r"\n{3,}", "\n\n", work)
+    # Collapse any whitespace left dangling before a sentence terminator by a drop.
+    work = re.sub(r"[ \t]+([.!?])", r"\1", work)
     return work.strip(), notes
 
 

@@ -1,8 +1,10 @@
 atom_id: junko_TAKEAWAY_014
-slot_type: TAKEAWAY
+band: 2
+body: The cosmic council does not require devotion. They require attention. Attention is freer than devotion. Devotion can
+  be performed; attention cannot.
 teacher:
   teacher_id: junko
-  source_refs: []
-  synthesis_method: doctrine_grounded
-body: |
-  The pattern is not your identity. It is a signal worth reading.
+  source_refs:
+  - teachers/junko/junko_doctrine_notes.rtf
+  - teachers/junko/junko_yt.rtf
+  synthesis_method: doctrine_grounded_v1

@@ -1,9 +1,10 @@
-# Teacher Mode Brand Archetypes — 12 brands, each owned by 1 teacher.
+# Teacher Mode Brand Archetypes — 13 brands, each owned by 1 teacher.
 # Authority: config/catalog_planning/teacher_brand_lane_assignments.yaml
 #            artifacts/research/teacher_market_validation_matrix_2026_04_04.md
 #
 # Same structure as brand_archetype_registry.yaml (24 standard brands).
-# These 12 + those 24 = 36 brands per lane.
+# These 13 + those 24 = 37 brands per lane (post-OPD-111 §7.C; was 12+24=36
+# pre-OPD-111 when Junko shared zen_clarity; she now owns heart_transmission).
 #
 # RULE: Each teacher brand has a UNIQUE persona × topic × emotional_job
 # grouping that does NOT overlap with any standard brand.
@@ -52,26 +53,33 @@ teacher_brand_archetypes:
 
   # ── 02 COGNITIVE CLARITY (Joshin) ──────────────────────────────────────
   - brand_id: cognitive_clarity
-    teacher: joshin
+    # Doctrine-aligned with SOURCE_OF_TRUTH/teacher_banks/kenjin/doctrine/doctrine.yaml:
+    # Soto Zen Buddhism (per OPD-105 brand re-routing). Original Shingon framing — Buddhahood in this
+    # body; ritual technology for digital natives. Zen framing and "pure heart /
+    # non-separation language" are explicitly prohibited (Joshin is Shingon esoteric,
+    # not Zen).
+    teacher: kenjin
     display_name: "Cognitive Clarity"
-    tradition: "Zen Buddhism — direct pointing, dropping the story, pure heart"
+    tradition: "Shingon Esoteric Buddhism (Mikkyo) — Sanmitsu (three mysteries: body, speech, mind), Sokushin Jobutsu (Buddhahood in this body), ritual technology for digital natives"
     gtm_identity:
       persona: overthinking_knowledge_worker
       age_range: [25, 50]
-      emotional_job: "stop believing the thinker"
-      functional_job: "inquiry practice to dissolve thought loops"
+      emotional_job: "interrupt the thought-loop with embodied ritual"
+      functional_job: "Shingon ritual technology to disrupt mental spirals without negating the mind"
       primary_moment: thought_spiral
     discovery_contract:
       keyword_clusters:
-        primary: ["zen clarity", "stop overthinking", "inquiry meditation"]
-        secondary: ["dropping the story", "koans for modern life", "direct seeing"]
+        primary: ["Shingon practice", "stop overthinking", "ritual meditation"]
+        secondary: ["mudra and mantra", "esoteric Buddhism for modern life", "Sokushin Jobutsu"]
     unique_angle: >
-      The problem isn't the thoughts. The problem is you believe them.
-      Joshin's Zen inquiry doesn't calm the mind — it shows you the mind
-      was never the problem. Direct pointing. No stories. Pure heart.
+      The problem isn't the thoughts. The problem is the thinking-only
+      mode that has no body to anchor to. Joshin's Shingon practice uses
+      Sanmitsu — body (mudra), speech (mantra), mind (visualization) —
+      to interrupt the spiral with embodied ritual, not with negation.
+      Mikkyo for digital natives.
     anti_spam_differentiation:
-      vs_optimizer: "Optimizer manages focus for productivity. Cognitive Clarity dissolves the thinker entirely."
-      vs_spiritual_ground: "Spiritual Ground explores. Cognitive Clarity cuts — direct, no frills, Zen."
+      vs_optimizer: "Optimizer manages focus for productivity. Cognitive Clarity uses Shingon ritual to disrupt the spiral entirely."
+      vs_spiritual_ground: "Spiritual Ground explores. Cognitive Clarity practices — Mikkyo ritual technology, body-speech-mind together."
 
   # ── 03 SOMATIC WISDOM (Pamela Fellows) ─────────────────────────────────
   - brand_id: somatic_wisdom
@@ -144,33 +152,37 @@ teacher_brand_archetypes:
       vs_calm_student: "Calm Student manages exam stress. Digital Ground addresses the deeper crisis — identity dissolution."
 
   # ── 06 HEART BALANCE (Maat) ────────────────────────────────────────────
+  # Doctrine-aligned with SOURCE_OF_TRUTH/teacher_banks/maat/doctrine/doctrine.yaml:
+  # Naqshbandi Sufi (Hazrat Inayat Khan lineage). Egyptian goddess/mythology
+  # framing is explicitly prohibited.
   - brand_id: heart_balance
     teacher: maat
     display_name: "Heart Balance"
-    tradition: "Egyptian Wisdom — Ma'at, truth-speaking, feather of truth, shadow honored equally"
+    tradition: "Naqshbandi Sufi — path of the heart, qalb (heart-knowing), dhikr (remembrance), fanaa (dissolution), Hazrat Inayat Khan lineage"
     gtm_identity:
       persona: shadow_work_seeker
       age_range: [28, 55]
       emotional_job: "speak what the heart knows"
-      functional_job: "truth-and-balance practice through shadow integration"
+      functional_job: "Sufi heart-path practice for the buried truth the qalb already senses"
       primary_moment: suppressed_truth_surfacing
     discovery_contract:
       keyword_clusters:
-        primary: ["shadow work practice", "inner truth", "balance and justice"]
-        secondary: ["ancestral wisdom", "grief honoring", "Egyptian spiritual wisdom"]
+        primary: ["shadow work practice", "inner truth", "qalb heart-knowing"]
+        secondary: ["dhikr practice", "Sufi heart path", "Naqshbandi tradition"]
     unique_angle: >
-      The heart already knows what you're afraid to say. Maat teaches the
-      Egyptian practice of weighing truth — your shadow honored equally with
-      your light. Not positivity. Not fixing. Balance.
+      The heart already knows what you're afraid to say. Ma'at teaches the
+      Sufi path of the heart — the qalb that senses what the mind defended
+      against, the dhikr that remembers what the contract left out. Not
+      positivity. Not fixing. Recognition.
     anti_spam_differentiation:
-      vs_gentle_growth: "Gentle Growth explores safely. Heart Balance demands truth — the shadow doesn't wait for you to be ready."
-      vs_spiritual_ground: "Spiritual Ground seeks. Heart Balance weighs — the feather of truth, not the curiosity of the seeker."
+      vs_gentle_growth: "Gentle Growth explores safely. Heart Balance demands truth — the qalb doesn't wait for you to be ready."
+      vs_spiritual_ground: "Spiritual Ground seeks. Heart Balance recognizes — the heart-knowing, not the curiosity of the seeker."
 
-  # ── 07 RELATIONAL CALM (Junko) ─────────────────────────────────────────
+  # ── 07 RELATIONAL CALM (Miyuki) — per OPD-111 ──────────────────────────
   - brand_id: relational_calm
-    teacher: junko
+    teacher: miyuki
     display_name: "Relational Calm"
-    tradition: "Japanese Zazen — radical acceptance, beginner's mind, wabi-sabi, relational harmony"
+    tradition: "Japanese contemplative — wabi-sabi, ganbaru, mono no aware, relational harmony (lay-secular)"
     gtm_identity:
       persona: shame_carrying_people_pleaser
       age_range: [25, 50]
@@ -183,7 +195,7 @@ teacher_brand_archetypes:
         secondary: ["wabi-sabi living", "beginner's mind", "relational anxiety"]
     unique_angle: >
       You've been performing "fine" so long you forgot what real feels like.
-      Junko teaches through Zen's radical acceptance — this moment, including
+      Miyuki teaches through Japanese contemplative practice — this moment, including
       your shame, is already complete. Nothing to fix. Spare, precise, no extra words.
     anti_spam_differentiation:
       vs_relationship_clarity: "Relationship Clarity repairs couples. Relational Calm heals the self-in-relationship — shame, not conflict."
@@ -237,49 +249,62 @@ teacher_brand_archetypes:
 
   # ── 10 BODY MEMORY (Omote) ────────────────────────────────────────────
   - brand_id: body_memory
+    # Doctrine-aligned with SOURCE_OF_TRUTH/teacher_banks/omote/doctrine/doctrine.yaml:
+    # Japanese spiritual-historical navigation; Yamato-gokoro (Japanese spirit)
+    # awakening; sacred geography; Project Phoenix lineage. Noh theater as
+    # primary framing and "omote/surface" as primary concept are prohibited.
     teacher: omote
     display_name: "Body Memory"
-    tradition: "Japanese Body Practice — Shiatsu, Noh theater, authentic presence, seasonal body"
+    tradition: "Yamato-gokoro awakening — Japanese spiritual-historical navigation, sacred geography, Project Phoenix lineage; grief held in the land of the body"
     gtm_identity:
       persona: unprocessed_grief_carrier
       age_range: [30, 65]
-      emotional_job: "let the body remember what the mind forgot"
-      functional_job: "body-centered grief processing through Japanese somatic tradition"
+      emotional_job: "let the body remember what the spirit-history carries"
+      functional_job: "grief-as-sacred-geography practice in the Yamato-gokoro lineage"
       primary_moment: grief_stored_in_body
     discovery_contract:
       keyword_clusters:
         primary: ["body grief processing", "somatic grief", "body memory healing"]
-        secondary: ["shiatsu therapy", "seasonal healing", "authentic presence"]
+        secondary: ["Yamato-gokoro awakening", "sacred geography practice", "Project Phoenix lineage"]
     unique_angle: >
       The grief lives in your shoulders. Your hips. Your jaw. Omote teaches
-      through Noh theater's principle — the body remembers what the mind erased.
-      Not talk therapy. Not meditation. The body itself as the archive of loss.
+      that the body is its own sacred geography — the land where ancestral
+      and personal grief settle and wait. Yamato-gokoro awakening reads that
+      geography. Not talk therapy. Not technique. The body as the territory
+      the spirit-history still inhabits.
     anti_spam_differentiation:
-      vs_trauma_path: "Trauma Path is clinical safety. Body Memory is Japanese body practice — the archive is in the flesh, not the narrative."
-      vs_somatic_wisdom: "Somatic Wisdom explains why. Body Memory listens to where — the body's geography of grief."
+      vs_trauma_path: "Trauma Path is clinical safety. Body Memory is Yamato-gokoro awakening — the spirit-history reading the body's own terrain."
+      vs_somatic_wisdom: "Somatic Wisdom explains why. Body Memory navigates where — the body's sacred geography of grief."
 
   # ── 11 SOLAR RETURN (Ra) ──────────────────────────────────────────────
+  # Doctrine-aligned with SOURCE_OF_TRUTH/teacher_banks/ra/doctrine/doctrine.yaml:
+  # nondual witnessing awareness; I AM consciousness inquiry; Ra Netjer tradition
+  # (the name does not establish doctrine). Egyptian / African spiritual framing
+  # is explicitly prohibited.
   - brand_id: solar_return
     teacher: ra
     display_name: "Solar Return"
-    tradition: "Egyptian Solar Tradition — witnessing awareness, fire and renewal, burnout as initiation"
+    tradition: "Nondual witnessing awareness — I AM consciousness inquiry, witness practice, costume-dropping (releasing performed identity), clarity as kindness"
     gtm_identity:
       persona: burnout_survivor_rebuilding
       age_range: [30, 50]
-      emotional_job: "find the fire that doesn't consume"
-      functional_job: "reframing burnout as initiation through solar wisdom"
+      emotional_job: "find the witness the burnout could not touch"
+      functional_job: "I AM inquiry for the awareness that watched the burning and was not consumed"
       primary_moment: post_burnout_emptiness
     discovery_contract:
       keyword_clusters:
         primary: ["burnout recovery meaning", "post-burnout rebuilding", "finding purpose after burnout"]
-        secondary: ["witnessing awareness", "fire and renewal", "sacred burnout"]
+        secondary: ["I AM inquiry", "witness recognition", "costume-dropping practice"]
     unique_angle: >
-      Burnout wasn't failure. It was initiation. Ra teaches the Egyptian
-      solar cycle — the fire that burns you down is the same fire that
-      rebuilds you. Not recovery. Transformation. The ashes are the material.
+      Burnout exhausts the costumed self — the version of you that was
+      performing employability, availability, and steadiness. Ra teaches
+      the recognition that the witness behind the burning was never the
+      one being burned. Not recovery as restoration. Not reframing as
+      alchemy. Recognition that what watched the collapse was untouched
+      by it.
     anti_spam_differentiation:
-      vs_stabilizer: "Stabilizer recovers from burnout. Solar Return reframes it — burnout as initiation, not injury."
-      vs_career_lift: "Career Lift gets unstuck. Solar Return asks: what if being stuck was the beginning, not the problem?"
+      vs_stabilizer: "Stabilizer recovers from burnout. Solar Return recognizes the witness the burnout never reached."
+      vs_career_lift: "Career Lift gets unstuck. Solar Return asks: what if being stuck was the costume, not the self?"
 
   # ── 12 DEVOTION PATH (Sai Ma) ─────────────────────────────────────────
   - brand_id: devotion_path
@@ -303,3 +328,57 @@ teacher_brand_archetypes:
     anti_spam_differentiation:
       vs_resilient_parent: "Resilient Parent builds coping. Devotion Path opens receiving — the problem isn't capacity, it's direction."
       vs_spiritual_ground: "Spiritual Ground explores. Devotion Path surrenders — not seeking, but being found."
+
+  # ── 13 HEART TRANSMISSION (Junko) — per OPD-111 §7.C ───────────────────
+  # Doctrine-aligned with SOURCE_OF_TRUTH/teacher_banks/junko/doctrine/doctrine.yaml:
+  # Channeling / light language / ascended masters / cosmic guidance. Junko is a
+  # receiver, not a teacher in the conventional sense — messages arrive as gifts,
+  # not instructions. Zen / Buddhist / Japanese contemplative framings are forbidden;
+  # technique-first language is forbidden; "personal mastery" framing is forbidden.
+  # Tagline ("Receive the messages your heart already knows are true.") is 8th-grade
+  # reading level per operator preference OPD-100.
+  - brand_id: heart_transmission
+    teacher: junko
+    display_name: "Heart Transmission"
+    tagline: "Receive the messages your heart already knows are true."
+    tradition: "Channeling / light language / ascended masters / cosmic guidance (New Age)"
+    gtm_identity:
+      persona: spiritually_seeking_awakener
+      age_range: [28, 55]
+      emotional_job: "trust the inner knowing that words can't explain"
+      functional_job: "channeled cosmic guidance for soul-level awakening and remembrance"
+      primary_moment: inner_knowing_arrival
+    discovery_contract:
+      keyword_clusters:
+        primary: ["light language messages", "channeled guidance", "spiritual awakening"]
+        secondary:
+          - "ascended masters"
+          - "cosmic council"
+          - "soul remembrance"
+          - "frequency transmission"
+          - "lightworker guidance"
+          - "Age of Air spirituality"
+          - "heart awakening"
+          - "energetic attunement"
+    unique_angle: >
+      The message is not invented — it is received. Junko channels light
+      language and cosmic guidance from ascended masters and the source
+      field, then offers it whole. Not teaching, not technique. Recognition
+      of what your soul already knows. The heart is the receiver; the
+      transmission is the gift.
+    anti_spam_differentiation:
+      vs_cosmic_edge: "Cosmic Edge explores universal meaning intellectually. Heart Transmission delivers received messages — the difference between thinking about cosmos and feeling its voice."
+      vs_solar_return: "Solar Return recognizes the witness through burnout. Heart Transmission receives guidance from beyond the self — the channel is the practice."
+      vs_devotion_path: "Devotion Path surrenders inward to receive love. Heart Transmission receives cosmic messages — surrender is the posture, transmission is the content."
+      vs_relational_calm: "Relational Calm (Miyuki) sits in the body's contemplative quiet. Heart Transmission listens for the voice that arrives — luminous, not still; cosmic, not domestic."
+    visual_register:
+      palette: "luminous gold-rose, soft cosmic blue, warm celestial light"
+      motifs: "soft halos, ascending light particles, hands raised in reception, open palms, starlight wash"
+      excluded: "ink-brush, enso, wabi-sabi monochrome, kitchen-table domestic, Zen-coded stillness"
+      distinct_from_miyuki: "Miyuki = ink and silence; Heart Transmission = light and reception. Miyuki sits at the kitchen table; Junko stands with hands open to the cosmic field."
+    cover_art_prompt_skeleton: >
+      A serene Japanese woman in flowing luminous robes stands receptively
+      with hands raised toward soft cosmic light, golden-rose particles
+      drifting around her, warm celestial halo behind her shoulders, expression
+      open and listening, transmissive presence — distinct from monochrome
+      contemplative imagery; no ink-brush, no enso, no domestic settings.

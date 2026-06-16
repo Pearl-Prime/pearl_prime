@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pearl Prime — Books, Audiobooks &amp; Manga that meet you where you are</title>
+<meta name="description" content="Pearl Prime Storefront — books, audiobooks, and manga produced by Pearl Prime, in your locale.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style"
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Mono:wght@300;400&family=DM+Sans:wght@300;400;500&display=swap"
+      onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Mono:wght@300;400&family=DM+Sans:wght@300;400;500&display=swap"></noscript>
+<link rel="stylesheet" href="./storefront.css">
+</head>
+<body>
+
+<!-- ─── SVG cover defs (token-only amber gradient) ───────────────────────── -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="ppCover1" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%"   stop-color="#1a1410"/>
+      <stop offset="55%"  stop-color="#92400e"/>
+      <stop offset="100%" stop-color="#d97706"/>
+    </linearGradient>
+    <linearGradient id="ppCover2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"   stop-color="#0e0a06"/>
+      <stop offset="60%"  stop-color="#3f3530"/>
+      <stop offset="100%" stop-color="#92400e"/>
+    </linearGradient>
+    <linearGradient id="ppCover3" x1="1" y1="0" x2="0" y2="1">
+      <stop offset="0%"   stop-color="#d97706"/>
+      <stop offset="50%"  stop-color="#3f3530"/>
+      <stop offset="100%" stop-color="#1a1410"/>
+    </linearGradient>
+    <linearGradient id="ppCover4" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0%"   stop-color="#0e0a06"/>
+      <stop offset="100%" stop-color="#92400e"/>
+    </linearGradient>
+  </defs>
+</svg>
+
+<!-- ─── Header ─────────────────────────────────────────────────────────── -->
+<header class="pp-header">
+  <div class="pp-header-inner">
+    <a href="./locale_landing_en_US.html" class="pp-wordmark">Pearl <em>Prime</em></a>
+    <div class="pp-search">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" placeholder="Search books, audiobooks, manga…" aria-label="Search">
+    </div>
+    <div class="pp-header-actions">
+      <div class="pp-locale-switcher" aria-label="Locale switcher">
+        <span class="pp-locale-current">EN-US</span>
+        <svg width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M1 1l4 4 4-4"/></svg>
+        <div class="pp-locale-dropdown" role="menu">
+          <a href="./locale_landing_en_US.html"><span>English (US)</span><span></span></a>
+          <a href="./locale_landing_ja_JP.html"><span>日本語 (JP)</span><span></span></a>
+          <a><span>繁體中文 (TW)</span><span class="pp-locale-soon">Phase B</span></a>
+          <a><span>简体中文 (CN)</span><span class="pp-locale-soon">Phase B</span></a>
+          <a><span>한국어 (KR)</span><span class="pp-locale-soon">Phase C</span></a>
+        </div>
+      </div>
+      <a class="pp-sign-in" href="#">Sign in <span class="pp-optional">(optional)</span></a>
+      <button class="pp-icon-btn" aria-label="Cart" title="Cart">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg>
+        <span class="pp-cart-badge">2</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Brand chip rail — 12 chips visible; demonstrates 37-brand rail UX -->
+  <nav class="pp-chip-rail" aria-label="Pearl Prime brands">
+    <a class="pp-chip is-active">All</a>
+    <a class="pp-chip">Stillness Press</a>
+    <a class="pp-chip">Cognitive Clarity</a>
+    <a class="pp-chip">Digital Ground</a>
+    <a class="pp-chip">Sleep Restoration</a>
+    <a class="pp-chip">Somatic Wisdom</a>
+    <a class="pp-chip">Relational Calm</a>
+    <a class="pp-chip">Healing Ground</a>
+    <a class="pp-chip">Minimal Mind</a>
+    <a class="pp-chip">Night Reset</a>
+    <a class="pp-chip">Warrior Calm</a>
+    <a class="pp-chip">AhjanSam Music</a>
+    <a class="pp-chip">+ 26 more</a>
+  </nav>
+</header>
+
+<!-- ─── Hero ───────────────────────────────────────────────────────────── -->
+<section class="pp-hero pp-container">
+  <div class="pp-hero-eyebrow">Pearl Prime Storefront · Phase A · en-US</div>
+  <h1>Books, audiobooks, and manga that <em>meet you where you are.</em></h1>
+  <p>A direct marketplace for the Pearl Prime catalog — somatic, nervous-system-aware writing from the studios behind Stillness Press, Cognitive Clarity, Digital Ground and 34 sibling imprints. No third-party catalog. No affiliate links. Just our work, in your locale.</p>
+</section>
+
+<!-- ─── Bestsellers in this locale ─────────────────────────────────────── -->
+<section class="pp-section pp-container">
+  <div class="pp-section-title">Bestsellers · en-US · This week</div>
+
+  <div class="pp-grid">
+
+    <a class="pp-card" href="./product_detail_book.html" aria-label="Quiet Safe Enough — book">
+      <div class="pp-cover is-book">
+        <svg viewBox="0 0 200 300" preserveAspectRatio="xMidYMid slice">
+          <rect width="200" height="300" fill="url(#ppCover1)"/>
+          <text x="100" y="140" text-anchor="middle" fill="#faf6f0" font-family="Cormorant Garamond" font-size="22" font-style="italic">Quiet</text>
+          <text x="100" y="172" text-anchor="middle" fill="#faf6f0" font-family="Cormorant Garamond" font-size="22">Safe Enough</text>
+          <rect x="40" y="195" width="120" height="1" fill="#faf6f0" opacity="0.4"/>
+          <text x="100" y="218" text-anchor="middle" fill="#faf6f0" opacity="0.7" font-family="DM Sans" font-size="9">AHJANSAM · STILLNESS PRESS</text>
+        </svg>
+      </div>
+      <div class="pp-card-meta">
+        <div class="pp-card-brand">Stillness Press</div>
+        <div class="pp-card-title">Quiet Safe Enough</div>
+        <div class="pp-card-subtitle">How to Calm Anxiety and Reclaim Your Nervous System — for mid-level leaders</div>
+        <div class="pp-card-rating"><span class="pp-stars">★★★★★</span> <span>4.6 · 184 reviews</span></div>
+        <div class="pp-card-footer">
+          <span class="pp-price">$4.99</span>
+          <span class="pp-format-pill">Book · EPUB</span>
+        </div>
+      </div>
+    </a>
+
+    <a class="pp-card" href="./product_detail_book.html">
+      <div class="pp-cover is-book">
+        <svg viewBox="0 0 200 300" preserveAspectRatio="xMidYMid slice">
+          <rect width="200" height="300" fill="url(#ppCover2)"/>
+          <text x="100" y="140" text-anchor="middle" fill="#faf6f0" font-family="Cormorant Garamond" font-size="22" font-style="italic">Quiet</text>
+          <text x="100" y="172" text-anchor="middle" fill="#faf6f0" font-family="Cormorant Garamond" font-size="22">Threshold Calm</text>
+          <rect x="40" y="195" width="120" height="1" fill="#faf6f0" opacity="0.4"/>
+          <text x="100" y="218" text-anchor="middle" fill="#faf6f0" opacity="0.7" font-family="DM Sans" font-size="9">AHJANSAM · STILLNESS PRESS</text>
+        </svg>
+      </div>
+      <div class="pp-card-meta">
+        <div class="pp-card-brand">Stillness Press</div>
+        <div class="pp-card-title">Quiet Threshold Calm</div>
+        <div class="pp-card-subtitle">Crossing Out of Anxiety One Moment at a Time — for millennial women</div>
+        <div class="pp-card-rating"><span class="pp-stars">★★★★★</span> <span>4.8 · 311 reviews</span></div>
+        <div class="pp-card-footer">
+          <span class="pp-price">$4.99</span>
+          <span class="pp-format-pill">Book · EPUB</span>
+        </div>
+      </div>
+    </a>
+
+    <a class="pp-card" href="./product_detail_audiobook.html">
+      <div class="pp-cover is-audio">
+        <svg viewBox="0 0 200 220" preserveAspectRatio="xMidYMid slice">
+          <rect width="200" height="220" fill="url(#ppCover3)"/>
+          <circle cx="100" cy="110" r="48" fill="none" stroke="#faf6f0" stroke-width="1.4" opacity="0.7"/>
+          <circle cx="100" cy="110" r="14" fill="#faf6f0"/>
+          <polygon points="96,102 96,118 110,110" fill="#0e0a06"/>
+          <text x="100" y="195" text-anchor="middle" fill="#faf6f0" opacity="0.7" font-family="DM Sans" font-size="9">AUDIOBOOK · 1H 20M</text>
+        </svg>
+      </div>
+      <div class="pp-card-meta">
+        <div class="pp-card-brand">Stillness Press · Audio</div>
+        <div class="pp-card-title">Quiet Safe Enough — Audiobook</div>
+        <div class="pp-card-subtitle">Narrated by AhjanSam · 1 hr 20 min</div>
+        <div class="pp-card-rating"><span class="pp-stars">★★★★★</span> <span>4.7 · 74 reviews</span></div>
+        <div class="pp-card-footer">
+          <span class="pp-price">$9.99</span>
+          <span class="pp-format-pill">Audio · M4B</span>
+        </div>
+      </div>
+    </a>
+
+    <a class="pp-card" href="./product_detail_manga.html">
+      <div class="pp-cover is-manga">
+        <svg viewBox="0 0 200 280" preserveAspectRatio="xMidYMid slice">
+          <rect width="200" height="280" fill="url(#ppCover4)"/>
+          <rect x="20" y="35" width="160" height="60" fill="#0e0a06" opacity="0.55"/>
+          <rect x="20" y="105" width="74" height="86" fill="#0e0a06" opacity="0.55"/>
+          <rect x="106" y="105" width="74" height="86" fill="#0e0a06" opacity="0.55"/>
+          <text x="100" y="225" text-anchor="middle" fill="#faf6f0" font-family="Cormorant Garamond" font-size="22">Tea Light</text>
+          <text x="100" y="250" text-anchor="middle" fill="#faf6f0" font-family="Cormorant Garamond" font-size="22" font-style="italic">Mornings</text>
+        </svg>
+      </div>
+      <div class="pp-card-meta">
+        <div class="pp-card-brand">Stillness Press · Manga</div>
+        <div class="pp-card-title">Tea Light Mornings · Vol 1</div>
+        <div class="pp-card-subtitle">An iyashikei manga about coming home to your nervous system</div>
+        <div class="pp-card-rating"><span class="pp-stars">★★★★★</span> <span>4.8 · 524 reviews</span></div>
+        <div class="pp-card-footer">
+          <span class="pp-price">$1.99</span>
+          <span class="pp-format-pill">Manga · WEBTOON</span>
+        </div>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<!-- ─── Featured brands ────────────────────────────────────────────────── -->
+<section class="pp-section pp-container">
+  <div class="pp-section-title">Featured Brands · 11 of 37 active in en-US</div>
+
+  <div class="pp-grid">
+    <a class="pp-card">
+      <div class="pp-cover is-book">
+        <svg viewBox="0 0 200 300" preserveAspectRatio="xMidYMid slice">
+          <rect width="200" height="300" fill="url(#ppCover2)"/>
+          <text x="100" y="160" text-anchor="middle" fill="#faf6f0" font-family="Cormorant Garamond" font-size="20">Stillness Press</text>
+          <text x="100" y="200" text-anchor="middle" fill="#faf6f0" opacity="0.6" font-family="DM Sans" font-size="10">Anxiety · Somatic · Sleep</text>
+        </svg>
+      </div>
+      <div class="pp-card-meta">
+        <div class="pp-card-brand">Flagship · Josei</div>
+        <div class="pp-card-title">Stillness Press</div>
+        <div class="pp-card-subtitle">For minds that can't shut off — somatic-first writing for adult readers.</div>
+        <div class="pp-card-footer">
+          <span class="pp-format-pill">42 books · 4 manga · 1 audiobook</span>
+        </div>
+      </div>
+    </a>
+
+    <a class="pp-card">
+      <div class="pp-cover is-book">
+        <svg viewBox="0 0 200 300" preserveAspectRatio="xMidYMid slice">
+          <rect width="200" height="300" fill="url(#ppCover1)"/>
+          <text x="100" y="160" text-anchor="middle" fill="#faf6f0" font-family="Cormorant Garamond" font-size="20">Cognitive Clarity</text>
+          <text x="100" y="200" text-anchor="middle" fill="#faf6f0" opacity="0.6" font-family="DM Sans" font-size="10">Overthinking · CBT-adjacent</text>
+        </svg>
+      </div>
+      <div class="pp-card-meta">
+        <div class="pp-card-brand">Flagship · Seinen</div>
+        <div class="pp-card-title">Cognitive Clarity</div>
+        <div class="pp-card-subtitle">Loop-breakers for men who think too much and act too little.</div>
+        <div class="pp-card-footer">
+          <span class="pp-format-pill">38 books · 3 manga</span>
+        </div>
+      </div>
+    </a>
+
+    <a class="pp-card">
+      <div class="pp-cover is-book">
+        <svg viewBox="0 0 200 300" preserveAspectRatio="xMidYMid slice">
+          <rect width="200" height="300" fill="url(#ppCover3)"/>
+          <text x="100" y="160" text-anchor="middle" fill="#faf6f0" font-family="Cormorant Garamond" font-size="20">Digital Ground</text>
+          <text x="100" y="200" text-anchor="middle" fill="#faf6f0" opacity="0.6" font-family="DM Sans" font-size="10">Burnout · Tech Worker · Manhwa</text>
+        </svg>
+      </div>
+      <div class="pp-card-meta">
+        <div class="pp-card-brand">Flagship · Manhwa</div>
+        <div class="pp-card-title">Digital Ground</div>
+        <div class="pp-card-subtitle">For people who built the systems that broke them. Recovery, gently engineered.</div>
+        <div class="pp-card-footer">
+          <span class="pp-format-pill">22 books · 5 manga</span>
+        </div>
+      </div>
+    </a>
+
+    <a class="pp-card">
+      <div class="pp-cover is-book">
+        <svg viewBox="0 0 200 300" preserveAspectRatio="xMidYMid slice">
+          <rect width="200" height="300" fill="url(#ppCover4)"/>
+          <text x="100" y="160" text-anchor="middle" fill="#faf6f0" font-family="Cormorant Garamond" font-size="20">AhjanSam Music</text>
+          <text x="100" y="200" text-anchor="middle" fill="#faf6f0" opacity="0.6" font-family="DM Sans" font-size="10">Ambient · Somatic · Ritual</text>
+        </svg>
+      </div>
+      <div class="pp-card-meta">
+        <div class="pp-card-brand">Music · Flagship</div>
+        <div class="pp-card-title">AhjanSam Music</div>
+        <div class="pp-card-subtitle">Albums, tracks, and a brand-subscription for the entire studio catalog.</div>
+        <div class="pp-card-footer">
+          <span class="pp-format-pill">Phase B · Music product type</span>
+        </div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- ─── New this week ──────────────────────────────────────────────────── -->
+<section class="pp-section pp-container">
+  <div class="pp-section-title">New this week</div>
+
+  <div class="pp-grid">
+
+    <a class="pp-card">
+      <div class="pp-cover is-book">
+        <svg viewBox="0 0 200 300" preserveAspectRatio="xMidYMid slice">
+          <rect width="200" height="300" fill="url(#ppCover1)"/>
+          <text x="100" y="150" text-anchor="middle" fill="#faf6f0" font-family="Cormorant Garamond" font-size="20">The Loop</text>
+          <text x="100" y="180" text-anchor="middle" fill="#faf6f0" font-family="Cormorant Garamond" font-size="20" font-style="italic">That Frees You</text>
+          <text x="100" y="225" text-anchor="middle" fill="#faf6f0" opacity="0.7" font-family="DM Sans" font-size="9">COGNITIVE CLARITY</text>
+        </svg>
+      </div>
+      <div class="pp-card-meta">
+        <div class="pp-card-brand">Cognitive Clarity</div>
+        <div class="pp-card-title">The Loop That Frees You</div>
+        <div class="pp-card-subtitle">Letting go of overthinking without forcing it away — for tech and finance pros</div>
+        <div class="pp-card-rating"><span class="pp-stars">★★★★★</span> <span>4.7 · 248</span></div>
+        <div class="pp-card-footer">
+          <span class="pp-price">$4.99</span>
+          <span class="pp-format-pill">Book · EPUB</span>
+        </div>
+      </div>
+    </a>
+
+    <a class="pp-card">
+      <div class="pp-cover is-book">
+        <svg viewBox="0 0 200 300" preserveAspectRatio="xMidYMid slice">
+          <rect width="200" height="300" fill="url(#ppCover2)"/>
+          <text x="100" y="150" text-anchor="middle" fill="#faf6f0" font-family="Cormorant Garamond" font-size="20">Soft</text>
+          <text x="100" y="180" text-anchor="middle" fill="#faf6f0" font-family="Cormorant Garamond" font-size="20" font-style="italic">Steadying</text>
+          <text x="100" y="225" text-anchor="middle" fill="#faf6f0" opacity="0.7" font-family="DM Sans" font-size="9">DIGITAL GROUND</text>
+        </svg>
+      </div>
+      <div class="pp-card-meta">
+        <div class="pp-card-brand">Digital Ground</div>
+        <div class="pp-card-title">Soft Steadying</div>
+        <div class="pp-card-subtitle">A burnout reset for the always-on generation — for Gen Z professionals</div>
+        <div class="pp-card-rating"><span class="pp-stars">★★★★☆</span> <span>4.4 · 142</span></div>
+        <div class="pp-card-footer">
+          <span class="pp-price">$4.99</span>
+          <span class="pp-format-pill">Book · EPUB</span>
+        </div>
+      </div>
+    </a>
+
+    <a class="pp-card">
+      <div class="pp-cover is-book">
+        <svg viewBox="0 0 200 300" preserveAspectRatio="xMidYMid slice">
+          <rect width="200" height="300" fill="url(#ppCover3)"/>
+          <text x="100" y="150" text-anchor="middle" fill="#faf6f0" font-family="Cormorant Garamond" font-size="20">Ground</text>
+          <text x="100" y="180" text-anchor="middle" fill="#faf6f0" font-family="Cormorant Garamond" font-size="20" font-style="italic">Where You Stand</text>
+          <text x="100" y="225" text-anchor="middle" fill="#faf6f0" opacity="0.7" font-family="DM Sans" font-size="9">NIGHT RESET</text>
+        </svg>
+      </div>
+      <div class="pp-card-meta">
+        <div class="pp-card-brand">Night Reset</div>
+        <div class="pp-card-title">Ground Where You Stand</div>
+        <div class="pp-card-subtitle">Sleep without forcing it — for night-shift nurses</div>
+        <div class="pp-card-rating"><span class="pp-stars">★★★★★</span> <span>4.9 · 412</span></div>
+        <div class="pp-card-footer">
+          <span class="pp-price">$4.99</span>
+          <span class="pp-format-pill">Book · EPUB</span>
+        </div>
+      </div>
+    </a>
+
+    <a class="pp-card">
+      <div class="pp-cover is-book">
+        <svg viewBox="0 0 200 300" preserveAspectRatio="xMidYMid slice">
+          <rect width="200" height="300" fill="url(#ppCover4)"/>
+          <text x="100" y="150" text-anchor="middle" fill="#faf6f0" font-family="Cormorant Garamond" font-size="20">Less</text>
+          <text x="100" y="180" text-anchor="middle" fill="#faf6f0" font-family="Cormorant Garamond" font-size="20" font-style="italic">to Hold</text>
+          <text x="100" y="225" text-anchor="middle" fill="#faf6f0" opacity="0.7" font-family="DM Sans" font-size="9">MINIMAL MIND</text>
+        </svg>
+      </div>
+      <div class="pp-card-meta">
+        <div class="pp-card-brand">Minimal Mind</div>
+        <div class="pp-card-title">Less to Hold</div>
+        <div class="pp-card-subtitle">A quiet practice for tired minds — for working parents</div>
+        <div class="pp-card-rating"><span class="pp-stars">★★★★★</span> <span>4.6 · 207</span></div>
+        <div class="pp-card-footer">
+          <span class="pp-price">$4.99</span>
+          <span class="pp-format-pill">Book · EPUB</span>
+        </div>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<div class="pp-mockup-note">
+  <strong>Mockup #1 · Locale landing · en-US.</strong>
+  Spec §6.2.12 + §7.4 + §8.2 locale switcher.
+  Bestsellers ranking is deterministic per §9.3 (not personalized at Phase A).
+  ja-JP companion: <a href="./locale_landing_ja_JP.html">locale_landing_ja_JP.html</a>.
+</div>
+
+<footer class="pp-footer">
+  <a href="./index.html">All mockups</a> ·
+  <a href="./README.md">README</a> ·
+  Pearl Prime Storefront V1 · Phase A
+</footer>
+
+</body>
+</html>

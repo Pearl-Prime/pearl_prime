@@ -29,7 +29,8 @@ TEACHER_COLORS = {
     "ahjan": (["#64748B", "#D4A574"], "#B8860B"),
     "adi_da": (["#4A1A2A", "#1A0A10"], "#FF6B35"),
     "joshin": (["#1A1A1A", "#FFFFFF"], "#8B7355"),
-    "junko": (["#F5F0E8", "#A0937D"], "#8B7D6B"),
+    "junko": (["#F2C14E", "#5A4A8A"], "#FFD700"),  # per OPD-111 — cosmic/channeling palette (gold/luminous blue)
+    "miyuki": (["#F5F0E8", "#A0937D"], "#8B7D6B"),  # per OPD-111 — inherits former junko wabi-sabi palette
     "maat": (["#312E81", "#D97706"], "#F59E0B"),
     "master_feung": (["#8B7355", "#D4A574"], "#C5A03D"),
     "master_sha": (["#1A0033", "#8B5CF6"], "#A78BFA"),
@@ -43,7 +44,7 @@ TEACHER_COLORS = {
 
 TEACHER_NAMES = {
     "ahjan": "Ahjan", "adi_da": "Adi Da", "joshin": "Joshin",
-    "junko": "Junko", "maat": "Maat", "master_feung": "Master Feung",
+    "junko": "Junko", "miyuki": "Miyuki", "maat": "Maat", "master_feung": "Master Feung",
     "master_sha": "Master Sha", "master_wu": "Master Wu", "miki": "Miki",
     "omote": "Omote", "pamela_fellows": "Pamela Fellows", "ra": "Ra",
     "sai_ma": "Sai Ma",

@@ -88,7 +88,7 @@ brands:
       key_visual_count: 3
 
   cognitive_clarity:
-    teacher: joshin
+    teacher: kenjin
     manga_mode: teacher
     art_style_ref: cognitive_clarity
     primary_topic: overthinking
@@ -97,7 +97,7 @@ brands:
     heavy_lanes:
       series_a:
         teacher_student_series: true
-        description: "Joshin guides a student through the seeing mind — learning to observe thoughts without being captured"
+        description: "Kenjin guides a student through the seeing mind — learning to observe thoughts without being captured"
         title: "The Seeing Mind"
         topic: overthinking
         angle_source: overthinking
@@ -226,14 +226,14 @@ brands:
     light_lanes: { package: covers_plus_key_visuals, cover_count: 3, key_visual_count: 3 }
 
   relational_calm:
-    teacher: junko
+    teacher: miyuki  # per OPD-111
     manga_mode: teacher
     art_style_ref: relational_calm
     primary_topic: boundaries
     secondary_topic: anxiety
     anthology_topic: self_worth
     heavy_lanes:
-      series_a: { teacher_student_series: true, description: "Junko guides a student through the empty cup — learning radical acceptance in relationships", title: "The Empty Cup", topic: boundaries, angle_source: boundaries, episode_count: 8, band_curve: gentle_rise, search_intent: behavioral_change, primary_mechanism: overwhelm_containment, panel_estimate: 368 }
+      series_a: { teacher_student_series: true, description: "Miyuki guides a student through the empty cup — learning radical acceptance in relationships", title: "The Empty Cup", topic: boundaries, angle_source: boundaries, episode_count: 8, band_curve: gentle_rise, search_intent: behavioral_change, primary_mechanism: overwhelm_containment, panel_estimate: 368 }
       series_b: { title: "Still Water", topic: anxiety, angle_source: anxiety, episode_count: 8, band_curve: wave_cycle, search_intent: problem_solving, primary_mechanism: nervous_system_safety, panel_estimate: 368 }
       series_c: { title: "Enough", topic: self_worth, angle_source: self_worth, episode_count: 5, band_curve: steady_build, search_intent: identity_validation, primary_mechanism: comparison_release, panel_estimate: 140 }
     medium_lanes: { series_a: { title: "The Empty Cup", topic: boundaries, episode_count: 6, panel_estimate: 276 } }

@@ -53,6 +53,17 @@ REGISTRY: list[tuple[str, str, bool, str]] = [
     ("Cloudflare R2", "R2_ACCOUNT_ID", False, "R2 account ID for S3 endpoint URL (same value as CLOUDFLARE_ACCOUNT_ID; scoped separately for r2_sync.py + setup_r2.sh consumers)"),
     ("Cloudflare R2", "R2_BUCKET", False, "R2 bucket name (default: phoenix-omega-artifacts)"),
     ("Cloudflare R2", "R2_ENDPOINT", False, "S3 endpoint URL override. Set this for EU-jurisdiction or non-default-jurisdiction buckets where the host is NOT https://<R2_ACCOUNT_ID>.r2.cloudflarestorage.com. Cloudflare shows the correct URL on the R2 → Manage R2 API Tokens result page."),
+    # --- Pearl Prime Storefront (Cloudflare Pages + D1 + R2 + KV + Snipcart-wraps-Stripe) ---
+    # Spec: docs/specs/PEARL_PRIME_STOREFRONT_V1_SPEC.md §5 + AMENDMENT-2026-06-04 (PR #1446)
+    # Operator runbook + resource IDs: skills/pearl-int/references/storefront_resource_ids.md
+    # Deploy: .github/workflows/pearl-prime-storefront-deploy.yml
+    ("Pearl Prime Storefront", "CLOUDFLARE_API_TOKEN_PAGES_STOREFRONT", False, "Optional storefront-scoped Pages token. Default: REUSE existing CLOUDFLARE_API_TOKEN repo secret (already b80152c3-scoped). Only create this variant if you want the storefront workflow to fail-loud when writing to non-storefront Pages projects. See storefront_resource_ids.md §5."),
+    ("Pearl Prime Storefront", "STOREFRONT_D1_ID", False, "Cloudflare D1 database ID for `pearl_prime_storefront`. Populated by operator after dashboard provisioning per storefront_resource_ids.md §2. Required before Pearl_Dev application code lands."),
+    ("Pearl Prime Storefront", "STOREFRONT_R2_BUCKET", False, "Cloudflare R2 bucket name for storefront assets — default `pearl-prime-storefront-assets`. Bucket name IS the identifier (no separate UUID). en-US/ + ja-JP/ prefixes pre-allocated per spec §2.2 Phase A."),
+    ("Pearl Prime Storefront", "STOREFRONT_KV_NAMESPACE_ID", False, "Cloudflare KV namespace ID for `pearl_prime_storefront_session_cart`. 60-minute TTL for anonymous browsing carts. Populated by operator per storefront_resource_ids.md §4."),
+    ("Snipcart", "SNIPCART_API_KEY", False, "Snipcart secret API key — server-side only (Pages Functions / Worker). Free tier per AMENDMENT Q-PRP-PAY-01. Get: app.snipcart.com → API keys. Store in Keychain ONLY; never commit. See storefront_resource_ids.md §6."),
+    ("Snipcart", "SNIPCART_PUBLIC_API_KEY", False, "Snipcart public API key — embedded in storefront HTML for the drop-in JS. Get: app.snipcart.com → API keys. Public-safe (rate-limited)."),
+    ("Snipcart", "SNIPCART_WEBHOOK_SECRET", False, "Snipcart webhook signing secret — verifies inbound webhook payloads to `/api/webhook/snipcart`. Stored in Cloudflare Pages env var (encrypted) AND macOS Keychain. Quarterly rotation per docs/INTEGRATION_CREDENTIALS_REGISTRY.md."),
     ("GitHub", "GITHUB_TOKEN", False, "GitHub API (auto in Actions)"),
     ("GitHub", "GITHUB_REPOSITORY", False, "owner/repo for API calls; auto in Actions"),
     # --- Publishing ---
@@ -113,10 +124,12 @@ REGISTRY: list[tuple[str, str, bool, str]] = [
         False,
         "Hugging Face user access token for gated model downloads on Pearl Star (huggingface-cli / ComfyUI). macOS Keychain only — never commit the value.",
     ),
-    # Image generation (PRIMARY — ComfyUI on Pearl Star; RunComfy is cloud fallback)
-    ("RunComfy", "RUNCOMFY_API_KEY", False, "RunComfy API key (FALLBACK image gen — cloud backup when ComfyUI unavailable)"),
-    ("RunComfy", "RUNCOMFY_TOKEN", False, "Alias accepted by some scripts/task briefs; same Bearer material as RUNCOMFY_API_KEY (Keychain parity per N3 2026-04-27)"),
-    ("RunComfy", "RUNCOMFY_DEPLOYMENT_ID", False, "RunComfy deployment ID (default: 677edba8-ace0-4b2b-bad2-8e94b9959065)"),
+    # Image generation (PRIMARY — ComfyUI on Pearl Star). RunComfy paid lane DECOMMISSIONED 2026-06-13
+    # (operator cancelled — SWEEP-TAIL). RUNCOMFY_* removed from registry + Keychain; runtime code kept
+    # fail-closed (backend selection falls through to Pearl Star/ComfyUI when creds absent). See cap
+    # IMG-RENDER-DUAL-PATH-V1-01 (decommissioned) and docs/SESSION_HANDOFF_2026_06_11_RUNCOMFY_SUNSET.md.
+    # fal.ai serverless GPU inference (Milestone H §7.1 smoke test target — Qwen-Image-Layered hosted endpoint)
+    ("fal.ai", "FAL_KEY", False, "fal.ai serverless GPU inference key (canonical env var name per fal-client SDK). Used for Milestone H §7.1 Qwen-Image-Layered smoke test. Apache-2.0 model, commercial-clean ToS. Pricing: $0.06/image stage 2 + $0.02/MP stage 1. Get: https://fal.ai/dashboard/keys (see docs/runbooks/PEARL_INT_FAL_AI_SETUP_2026-05-27.md)"),
 ]
 
 ENV_VARS_TRACKED_COUNT = len({row[1] for row in REGISTRY})

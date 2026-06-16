@@ -1,10 +1,17 @@
-name: Cleanup stale agent branches
+name: Cleanup stale branches
 
 # Phoenix Omega cloud-native migration — Layer 1.
-# Nightly job that prunes agent/* branches whose PR has been merged or
+# Daily job that prunes stale branches whose PR has been merged or
 # closed for more than the retention window. Prevents the disk-full
 # pattern that motivated the cloud-native migration (32 GB of stale
 # .claude/worktrees from never-cleaned agent branches).
+#
+# Branches scanned: agent/*, claude/*, feat/*, docs/*, triage/*, research/*,
+#                   codex/*, worktree-*
+# Branches NEVER touched: main, develop, release/*, hotfix/*, v*, archive/*
+# Branches with no PR ever opened are skipped (could be unpushed real work).
+# Before deletion, every branch is tag-archived to origin as
+# archive/<branch>-<YYYY-MM-DD> so the work is recoverable forever.
 
 on:
   schedule:
@@ -42,31 +49,78 @@ jobs:
           echo "retention_days=${{ inputs.retention_days || 7 }}" >> "$GITHUB_OUTPUT"
           echo "dry_run=${{ inputs.dry_run || 'false' }}" >> "$GITHUB_OUTPUT"
 
-      - name: Prune merged/closed agent branches
+      - name: Prune merged/closed stale branches
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           RETENTION_DAYS: ${{ steps.inputs.outputs.retention_days }}
           DRY_RUN: ${{ steps.inputs.outputs.dry_run }}
         run: |
           set -euo pipefail
-          echo "═══ Phoenix Omega — Stale Agent Branch Cleanup ═══"
+          echo "═══ Phoenix Omega — Stale Branch Cleanup ═══"
           echo "Retention: ${RETENTION_DAYS}d   Dry-run: ${DRY_RUN}"
           echo ""
 
           cutoff_iso=$(date -u -d "${RETENTION_DAYS} days ago" +%Y-%m-%dT%H:%M:%SZ)
+          today_tag=$(date -u +%Y-%m-%d)
           echo "Cutoff: ${cutoff_iso}"
+          echo "Archive tag suffix: ${today_tag}"
           echo ""
 
-          deleted=0
-          skipped=0
+          # Patterns explicitly NEVER touched (substring or prefix protection)
+          is_protected() {
+            local b="$1"
+            case "$b" in
+              main|master|develop) return 0;;
+              release/*|hotfix/*|archive/*) return 0;;
+              v[0-9]*|*-protected) return 0;;
+              *) return 1;;
+            esac
+          }
 
-          # Enumerate remote agent/* branches
-          git ls-remote --heads origin 'agent/*' | awk '{print $2}' | sed 's|refs/heads/||' | while read -r branch; do
-            # Find the most recent PR for this branch (any state)
+          deleted=0
+          archived=0
+          skipped=0
+          protected=0
+          summary_lines=""
+
+          # Glob list — every prefix subject to cleanup
+          PREFIXES=(
+            'agent/*'
+            'claude/*'
+            'feat/*'
+            'docs/*'
+            'triage/*'
+            'research/*'
+            'codex/*'
+            'worktree-*'
+            'chore/*'
+            'fix/*'
+          )
+
+          # Build branch list (newline-separated)
+          for pfx in "${PREFIXES[@]}"; do
+            git ls-remote --heads origin "$pfx" 2>/dev/null
+          done | awk '{print $2}' | sed 's|refs/heads/||' | sort -u > /tmp/candidate_branches.txt
+
+          total=$(wc -l < /tmp/candidate_branches.txt | tr -d ' ')
+          echo "Candidate branches: $total"
+          echo ""
+
+          while read -r branch; do
+            [ -z "$branch" ] && continue
+
+            if is_protected "$branch"; then
+              echo "protect  ${branch}"
+              protected=$((protected+1))
+              continue
+            fi
+
+            # Get most recent PR (any state)
             pr=$(gh pr list --state all --head "$branch" \
                    --json number,state,mergedAt,closedAt --limit 1 \
-                   --jq '.[0]')
+                   --jq '.[0]' 2>/dev/null || echo "")
             if [ -z "$pr" ] || [ "$pr" = "null" ]; then
+              # No PR ever opened — could be unpushed/forgotten real work. SKIP.
               echo "skip  ${branch}: no PR ever opened"
               skipped=$((skipped+1))
               continue
@@ -76,7 +130,6 @@ jobs:
             merged_at=$(echo "$pr" | jq -r '.mergedAt')
             closed_at=$(echo "$pr" | jq -r '.closedAt')
 
-            # When did this PR finish? Pick mergedAt if merged, closedAt if closed
             finished_at=""
             if [ "$state" = "MERGED" ] && [ "$merged_at" != "null" ]; then
               finished_at="$merged_at"
@@ -88,22 +141,70 @@ jobs:
               continue
             fi
 
-            # Compare finished_at vs cutoff_iso lexically (ISO 8601 sorts correctly)
             if [ "$finished_at" \< "$cutoff_iso" ]; then
+              # Sanitize branch name for tag (no slashes in tag names work, but archive/<branch> nested is fine)
+              # Replace nothing — git tags can contain slashes
+              archive_tag="archive/${branch}-${today_tag}"
+
               if [ "$DRY_RUN" = "true" ]; then
-                echo "would-delete  ${branch} (state=${state} finished=${finished_at})"
+                echo "would-archive-and-delete  ${branch} → ${archive_tag} (state=${state} finished=${finished_at})"
+                deleted=$((deleted+1))
               else
-                echo "delete  ${branch} (state=${state} finished=${finished_at})"
+                # Get the SHA of the branch tip to anchor the tag
+                sha=$(git ls-remote origin "refs/heads/${branch}" | awk '{print $1}')
+                if [ -z "$sha" ]; then
+                  echo "WARN  ${branch}: cannot resolve SHA — skipping delete"
+                  skipped=$((skipped+1))
+                  continue
+                fi
+
+                # Tag-archive first (annotated tag with metadata)
+                if ! git tag -m "Archive of ${branch} on ${today_tag}. PR ${state} at ${finished_at}." "${archive_tag}" "${sha}" 2>/dev/null; then
+                  echo "WARN  ${branch}: tag ${archive_tag} already exists or tag failed — proceeding without re-tag"
+                fi
+                if git push origin "${archive_tag}" 2>&1 | grep -v '^$' || true; then
+                  echo "archive  ${branch} → ${archive_tag}"
+                  archived=$((archived+1))
+                fi
+
+                # Delete the branch
+                echo "delete   ${branch} (state=${state} finished=${finished_at})"
                 git push origin --delete "$branch" 2>&1 | grep -v "^$" || true
+                deleted=$((deleted+1))
+                summary_lines="${summary_lines}- \`${branch}\` → \`${archive_tag}\` (PR ${state} ${finished_at})"$'\n'
               fi
-              deleted=$((deleted+1))
             else
               echo "keep  ${branch} (within retention, finished=${finished_at})"
               skipped=$((skipped+1))
             fi
-          done
+          done < /tmp/candidate_branches.txt
 
           echo ""
           echo "═══ Summary ═══"
-          echo "Deleted: ${deleted}"
-          echo "Skipped: ${skipped}"
+          echo "Candidates scanned:  ${total}"
+          echo "Branches deleted:    ${deleted}"
+          echo "Branches archived:   ${archived}"
+          echo "Branches protected:  ${protected}"
+          echo "Branches skipped:    ${skipped}"
+
+          # Step summary for the GitHub Actions UI
+          {
+            echo "## Stale Branch Cleanup — $(date -u +%Y-%m-%d)"
+            echo ""
+            echo "- Candidates scanned: \`${total}\`"
+            echo "- Deleted: \`${deleted}\`"
+            echo "- Archived: \`${archived}\`"
+            echo "- Protected: \`${protected}\`"
+            echo "- Skipped: \`${skipped}\`"
+            echo ""
+            if [ -n "${summary_lines}" ]; then
+              echo "### Archived + Deleted"
+              echo "${summary_lines}"
+              echo ""
+              echo "**Recover any of these:**"
+              echo '```bash'
+              echo "git fetch origin --tags"
+              echo "git checkout -b recovered/<name> archive/<branch>-${today_tag}"
+              echo '```'
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"

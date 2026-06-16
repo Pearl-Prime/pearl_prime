@@ -1,0 +1,75 @@
+# Image Bank Coverage Plan — Non-Manga-Interior Slots
+# Authority: Pearl_Architect coordinator session 2026-05-30
+# Scope: book covers, manga covers (retail/showcase), video/podcast thumbnails, marketing/social, freebie/funnel
+# EXCLUDED: manga_interior panels — DEFER to Prompt 3 (Pearl_Dev) artifact; not double-counted here
+# Sources: parallel sub-agent inventory (domains a–e); brand_locale_surface_coverage_matrix_2026-05-30.tsv (Prompt 1)
+# Path X: author bases + manga showcase covers render once en_US; kdp/audiobook per brand×locale; video/marketing may be locale-specific
+# Render policy: IMG-RENDER-DUAL-PATH-V1-01 — Pearl_Star primary; RunComfy locale overflow; none = composited/no raster
+# Wave 1 deep templates: US1 = stillness_press en_US; JP1 = stillness_press ja_JP
+brand_id	locale	slot_domain	slot_type	required	present_count	gap_count	render_path	notes
+__catalog__	n/a	book_covers	author_base_background	30	17	13	Pearl_Star	Registry authors in author_cover_art_registry.yaml; locale-agnostic Path X
+__catalog__	n/a	book_covers	author_cover_4slot_flux	120	0	120	Pearl_Star	symbolic+environmental+abstract+human × 30 authors; 0 on disk
+__catalog__	n/a	book_covers	kdp_cover_front	800	52	748	Pearl_Star	Per parallel_image_generation_plan Wave 3 target per active brand×locale; 52 en_US wizard seeds only
+__catalog__	n/a	book_covers	audiobook_cover	800	14	786	Pearl_Star	Same baseline as kdp; en_US seeds only in brand-wizard-app/public/assets/covers/
+__catalog__	n/a	manga_covers	manga_cover_showcase	296	97	199	Pearl_Star	Normative 8 variants×37 brands×en_US baseline; 97 PNG in manga_covers/ (13 teacher brands); 19 brands zero
+__catalog__	n/a	manga_covers	manga_cover_back	296	0	296	none	Print-wrap aspirational only; 0 _back.png on disk
+__catalog__	n/a	manga_covers	triptych_teacher_showcase	39	39	0	Pearl_Star	13 teachers × 3 (portrait/scene/symbolic); ws_teacher_manga_triptych complete
+__catalog__	n/a	video_podcast	youtube_thumbnail	36	12	24	Pearl_Star	3 variants × 12 teachers V1; 12 test thumbs in artifacts/video/rendered only
+__catalog__	n/a	video_podcast	podcast_cover_art	148	0	148	none	3000×3000 per brand×locale podcast lane; not in video/image_banks/
+__catalog__	n/a	video_podcast	video_bank_global	3	3	0	Pearl_Star	Brand-agnostic vb_*.png; target met
+__catalog__	n/a	video_podcast	teacher_video_bank	384	0	384	Pearl_Star	32 manifest refs; 0 per-teacher dirs on disk
+__catalog__	n/a	marketing_social	social_cta_topic_config	15	15	0	none	15 topics × 8 post types in social_cta_config.yaml; copy not raster
+__catalog__	n/a	marketing_social	social_image_per_book	40	0	40	none	48 Social partner generates 30–50 posts/book from R2; external engine
+__catalog__	n/a	marketing_social	v32_social_text_wiring	37	8	29	none	Text specs only in v32_social_wiring.yaml
+__catalog__	n/a	freebie_funnel	freebie_landing_hero	15	15	0	none	CSS-composited; 0 PNG in brand-wizard-app/public/free/
+__catalog__	n/a	freebie_funnel	og_share_image	42	0	42	none	15 landings + 27 breathwork LPs missing og:image
+__catalog__	n/a	freebie_funnel	somatic_exercise_app_visual	42	42	0	none	Inline HTML/CSS/SVG; no app icon PNGs
+__catalog__	n/a	manga_interior	DEFER_PROMPT3	manga_panel	518	56	462	DEFER	Pearl_Dev Prompt 3 owns interior slot planning; 56 panels in manga_panels/ inventoried there only
+stillness_press	en_US	book_covers	author_cover_4slot_flux	48	0	48	Pearl_Star	Wave 1 US1 deep template; 12 pen-names × 4 FLUX slots; ahjan teacher base present legacy only
+stillness_press	en_US	book_covers	author_base_background	12	1	11	Pearl_Star	ahjan_base.png present; 11 stillness pen-names missing legacy bases
+stillness_press	en_US	book_covers	kdp_cover_front	800	4	796	Pearl_Star	4 en_US kdp seeds in wizard inventory; PIL composite per book at render
+stillness_press	en_US	book_covers	audiobook_cover	800	2	798	Pearl_Star	2 en_US audiobook seeds; two-stage FLUX+PIL policy COVER-REGISTRY-01
+stillness_press	ja_JP	book_covers	kdp_cover_front	800	0	800	RunComfy	Wave 1 JP1; locale expansion queue priority 1 per IMG-RENDER-DUAL-PATH-V1-01
+stillness_press	ja_JP	book_covers	audiobook_cover	800	0	800	RunComfy	JP1 book lane; author bases reuse en_US Path X
+stillness_press	en_US	manga_covers	manga_cover_showcase	8	14	0	Pearl_Star	14 files in manga_covers/ (triptych+views+topics); exceeds 8-variant minimum
+stillness_press	en_US	manga_covers	triptych_teacher_showcase	3	3	0	Pearl_Star	ahjan triptych complete; Pearl Star flux_txt2img_manga.json
+stillness_press	en_US	manga_covers	manga_cover_back	1	0	1	none	Print wrap not inventoried
+stillness_press	ja_JP	manga_covers	manga_cover_showcase	8	0	8	RunComfy	45 ja_JP catalog cover-named assets in assets/manga_catalog/; 0 in manga_covers/ folder
+stillness_press	ja_JP	manga_covers	triptych_teacher_showcase	3	0	3	RunComfy	JP1 locale expansion; teacher showcase en_US only today
+stillness_press	en_US	video_podcast	youtube_thumbnail	3	0	3	Pearl_Star	ahjan teacher_30s script exists; no dedicated branded thumbs yet
+stillness_press	en_US	video_podcast	podcast_cover_art	1	0	1	none	60 en_US podcast scripts planned; cover via podcast cover_art_design_system
+stillness_press	ja_JP	video_podcast	podcast_cover_art	1	0	1	none	32 ja_JP podcast scripts planned; locale-specific artwork required
+stillness_press	en_US	video_podcast	teacher_30s_vertical	1	0	1	Pearl_Star	Feedstock: assets/manga_catalog/stillness_press 1906 PNG; preset teacher_30s_vertical_v1 TBD
+stillness_press	en_US	marketing_social	social_cta_resolved	120	120	0	none	15 topics × 8 post types; English copy in config/funnel/
+stillness_press	en_US	marketing_social	social_image_raster	40	0	40	none	48 Social pulls from R2 weekly manifest; not in weekly package ZIP today
+stillness_press	ja_JP	marketing_social	social_cta_resolved	120	0	120	none	10-language CTA table spec-only; funnel YAML en-only
+stillness_press	en_US	freebie_funnel	freebie_landing_hero	4	4	0	none	anxiety/somatic/sleep/grief topic slugs for stillness topics
+stillness_press	ja_JP	freebie_funnel	freebie_landing_hero	4	0	4	none	JP1 blocked on locale HTML not images
+stillness_press	en_US	freebie_funnel	og_share_image	4	0	4	none	Optional Wave 1 polish; composited or FLUX if added later
+stillness_press	en_US	manga_interior	DEFER_PROMPT3	manga_panel	14	0	14	DEFER	Prompt 1 matrix: 14 required en_US interior; present in manga_panels/ counted in Pearl_Dev artifact only
+stillness_press	ja_JP	manga_interior	DEFER_PROMPT3	manga_panel	14	0	14	DEFER	Path X optional regen; cross-market ship from en_US panels
+cognitive_clarity	en_US	book_covers	kdp_cover_front	800	4	796	Pearl_Star	4 wizard kdp seeds; not in author_cover_art_registry
+cognitive_clarity	en_US	manga_covers	manga_cover_showcase	8	9	0	Pearl_Star	joshin teacher brand; 9 manga_covers/ files
+cognitive_clarity	ja_JP	manga_covers	manga_cover_showcase	8	0	8	RunComfy	Locale expansion cohort 1
+warrior_calm_cultivation	en_US	manga_covers	manga_cover_showcase	8	9	0	Pearl_Star	Only brand besides stillness with multi-locale catalog cover assets
+warrior_calm_cultivation	ja_JP	manga_covers	manga_cover_showcase	8	13	0	RunComfy	13 ja_JP catalog cover-named PNGs
+warrior_calm_cultivation	zh_TW	manga_covers	manga_cover_showcase	8	14	0	RunComfy	14 zh_TW catalog cover-named PNGs
+warrior_calm_cultivation	zh_CN	manga_covers	manga_cover_showcase	8	14	0	RunComfy	14 zh_CN catalog cover-named PNGs
+relational_calm_iyashikei	en_US	manga_covers	manga_cover_showcase	8	9	0	Pearl_Star	junko→miyuki migration; triptych for miyuki not junko
+digital_ground	en_US	manga_covers	manga_cover_showcase	8	9	0	Pearl_Star	miki teacher brand
+body_memory_shojo	en_US	manga_covers	manga_cover_showcase	8	7	1	Pearl_Star	omote teacher brand
+sleep_restoration_iyashikei	en_US	manga_covers	manga_cover_showcase	8	7	1	Pearl_Star	master_sha teacher brand
+somatic_wisdom_shojo	en_US	manga_covers	manga_cover_showcase	8	7	1	Pearl_Star	pamela_fellows teacher brand
+devotion_path_shonen	en_US	manga_covers	manga_cover_showcase	8	7	1	Pearl_Star	sai_ma teacher brand
+heart_balance_shojo	en_US	manga_covers	manga_cover_showcase	8	6	2	Pearl_Star	maat teacher brand
+qi_foundation_cultivation	en_US	manga_covers	manga_cover_showcase	8	7	1	Pearl_Star	master_feung; absent from canonical_brand_list until cap reconcile
+solar_return_isekai	en_US	manga_covers	manga_cover_showcase	8	7	1	Pearl_Star	ra teacher brand
+__zero_brand_rollup__	en_US	manga_covers	manga_cover_showcase	152	0	152	Pearl_Star	19 of 37 brands with zero manga_cover assets per May-09 audit; 19×8=152 cells
+__zero_brand_rollup__	en_US	book_covers	kdp_cover_front	15200	0	15200	Pearl_Star	19 zero brands × 800 kdp target (future Wave 2 en_US fill)
+__locale_expansion__	ja_JP	manga_covers	manga_cover_showcase	216	45	171	RunComfy	~27 brands×8 minus stillness/warrior partial; cohort 1 priority
+__locale_expansion__	zh_TW	manga_covers	manga_cover_showcase	216	16	200	RunComfy	cohort 1
+__locale_expansion__	zh_CN	manga_covers	manga_cover_showcase	216	17	199	RunComfy	cohort 1
+__priority_queue__	n/a	book_covers	author_cover_4slot_flux	48	0	48	Pearl_Star	P0 Wave 1: stillness_press 12 pen-names before catalog scale
+__priority_queue__	n/a	manga_covers	triptych_teacher_showcase	0	39	0	none	Complete; do not re-render
+__priority_queue__	n/a	video_podcast	teacher_30s_vertical	12	0	12	Pearl_Star	Pilot joshin/cognitive_clarity ja_JP after stillness ahjan en_US
+__priority_queue__	n/a	marketing_social	weekly_r2_social_feed	1	0	1	none	Add social_images axis to weekly package manifest (Pearl_PM follow-up)

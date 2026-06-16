@@ -2,7 +2,9 @@ atom_id: junko_HOOK_011
 band: 2
 teacher:
   teacher_id: junko
-  source_refs: []
-  synthesis_method: authored_v1
-body: Stillness is not empty. Look closer.
-hook_type: essential
+  source_refs:
+  - teachers/junko/junko_doctrine_notes.rtf
+  - teachers/junko/junko_yt.rtf
+  synthesis_method: doctrine_grounded_v1
+body: I am not the source. I am the channel through which the source is heard.
+hook_type: opening_statement

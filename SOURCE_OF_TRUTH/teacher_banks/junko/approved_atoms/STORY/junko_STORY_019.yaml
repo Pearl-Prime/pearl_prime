@@ -1,29 +1,28 @@
 atom_id: junko_STORY_019
 story_origin: composite
-story_type: character_study
+story_type: conduit_session
 emotional_intensity_band: 4
-body: |
-  Riku has meditated for eleven years. He knows the terminology. He teaches it to others on Sunday mornings.
+body: 'A man named Reuben — Argentinian, fifty-four — came to a workshop in Patagonia. He was an academic. He had been mocking
+  spirituality for thirty years and had also been afraid of it for thirty years.
 
-  Then his wife says she's been lonely inside their marriage for most of it. She says this quietly, at dinner, without anger.
 
-  Riku sits with that sentence for three days. His zazen becomes performance review. He checks his posture. Adjusts his breath. Searches for the correct response inside himself like a man patting his pockets for keys he knows aren't there.
+  The cosmic council did not mock him in return. They were direct. They said: you have spent thirty years building defenses
+  against what you most want. The defenses are tired. You may put them down.
 
-  On the fourth morning he stops correcting his posture. His back rounds. His chin drops. He breathes badly.
 
-  Something in his chest cracks open—not metaphor. An actual physical release, like a knuckle popped. His eyes water. He doesn't wipe them.
-
-  He has spent eleven years learning to sit. He has no idea how to be looked at. The cushion holds him anyway. The breath continues without his help.
-
-  Shoshin, a teacher once told him, means you don't already know. He thought he understood that. He sits now in the not-understanding. It is nothing like what he taught.
+  He put them down in the workshop. He wept, then laughed, then could not speak. He had not known he could feel this much.
+  He returned the next year. He had become a more honest scholar in the interim. The honesty came from receiving, not from
+  arguing.'
 band: 4
 teacher:
   teacher_id: junko
-  source_refs: []
-  synthesis_method: authored_v2
-never_know: true
-misfire_tax: true
-mechanism_depth: 5
+  source_refs:
+  - teachers/junko/junko_doctrine_notes.rtf
+  - teachers/junko/junko_yt.rtf
+  synthesis_method: doctrine_grounded_v1
+misfire_tax: false
+never_know: false
+mechanism_depth: 1
 identity_stage: self_claim
 cost_type: identity
-cost_intensity: 5
+cost_intensity: 3

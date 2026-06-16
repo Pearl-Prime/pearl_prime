@@ -29,7 +29,8 @@ REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 # Teacher → gender for voice selection
 TEACHER_GENDER = {
     "ahjan": "male", "adi_da": "male", "joshin": "female",
-    "junko": "female", "maat": "female", "master_feung": "male",
+    "junko": "female", "miyuki": "female",  # per OPD-111
+    "maat": "female", "master_feung": "male",
     "master_sha": "male", "master_wu": "male", "miki": "female",
     "omote": "male", "pamela_fellows": "female", "ra": "male",
     "sai_ma": "female",
@@ -38,7 +39,8 @@ TEACHER_GENDER = {
 # Topic assignments for audiobook (column C from plan)
 TEACHER_AUDIOBOOK_TOPIC = {
     "ahjan": "depression", "adi_da": "depression", "joshin": "sleep_anxiety",
-    "junko": "imposter_syndrome", "maat": "courage", "master_feung": "self_worth",
+    "junko": "imposter_syndrome", "miyuki": "imposter_syndrome",  # per OPD-111
+    "maat": "courage", "master_feung": "self_worth",
     "master_sha": "anxiety", "master_wu": "self_worth", "miki": "compassion_fatigue",
     "omote": "imposter_syndrome", "pamela_fellows": "burnout", "ra": "self_worth",
     "sai_ma": "boundaries",

@@ -1,0 +1,36 @@
+schema_version: 1.0.0
+panel_id: ep001_027
+inherits_from: ep001_026
+beat_type: spatial
+archetype: kettle_steam_macro
+scene_state:
+  scene_id: kitchen_table_aoki
+  temporal: morning
+  light_rig_id: K02_morning_window_neutral
+character_state:
+  mira_aoki:
+    character_design_hash: axes_only_PENDING_compute
+    pose_id: front_portrait_seated_calm
+    expression_dial: 0.3
+    emotional: present
+    gaze_direction: at_named_object_kettle
+    hand_state: relaxed_open
+prop_state:
+  cup: half
+  phone: face_up_notification
+  succulent_in_clay_pot: normal
+  laptop: open_to_calendar
+  finch: perched_on_windowsill
+  smoke_detector: steady_green
+  kettle: on_burner_boiling
+relational_field:
+  active_entities:
+  - id: mira_aoki
+    on_frame: false
+    role: implied_listener
+  shared_attention_anchor: kettle
+  emotional_tension_vector:
+    direction: steady
+    magnitude_delta_from_prev: 0.0
+continuity_invariants:
+- 'kettle introduced this panel; visual rhyme: steam = false alarm input'

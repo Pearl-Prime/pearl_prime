@@ -52,7 +52,11 @@ def main() -> int:
     out_dir = Path(args.output_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
 
-    spine = load_spine(topic, REPO_ROOT)
+    # Pass runtime_format so compact formats subset the spine via
+    # config/format_selection/format_registry.yaml::compact_chapter_subset
+    # (PR-D-SPINE-01). Without this the pilot QA always rendered the full
+    # 12-chapter spine regardless of the declared format — mirror run_pipeline.py:613.
+    spine = load_spine(topic, REPO_ROOT, runtime_format=args.runtime_format)
     knobs = load_knob_profile(topic, REPO_ROOT)
     shaped = apply_knobs(
         spine,

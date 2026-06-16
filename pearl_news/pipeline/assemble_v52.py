@@ -28,6 +28,11 @@ import html
 import json
 import logging
 import re
+
+from pearl_news.pipeline.heading_selector import (
+    pick_gen_z_heading,
+    pick_teacher_sees_heading,
+)
 import sys
 import textwrap
 from pathlib import Path
@@ -58,7 +63,7 @@ LAYOUT_VARIANTS = frozenset({"default", "scroll_story", "dock", "editorial", "wi
 #   body        — the youth-experience section
 #   turnaround  — the agency-pivot block-blue header
 #   bridge      — the event-to-teacher connector
-#   teacher_sees— gold-block header. Format placeholder: {teacher_name}
+#   teacher_sees— gold-block header. Format placeholder: {tradition_role}
 #   sage_body   — block-sage body-data evidence header
 #   practice    — practice_announce block-sage header
 #   forward     — forward_look section
@@ -73,12 +78,18 @@ _SECTION_HEADERS_BY_LANG: dict[str, dict[str, object]] = {
         "felt_experience": "This is how it affects Gen Z and Gen Alpha",
         "turnaround":   "Already Moving",
         "bridge":       "What the Data Skips",
-        "teacher_sees": "What {teacher_name} Sees",
+        "teacher_sees": "What A {tradition_role} Sees",
         "sage_body":    "How Others Experience It",
         "practice":     "The Practice",
         "forward":      "There's a Door",
         "data_chain":   "Your Voice Has Power",
         "take_action":  "Take Action Now!",
+        # ── hard_news_v2 (operator restructure 2026-05-19) ──
+        "v2_gen_z_dek":          "How this news is affecting Gen Z",
+        "v2_teacher_dek":        "A {tradition_role} Shares A Helpful Insight",
+        "v2_gen_z_section":      "How this news is affecting Gen Z",
+        "v2_teacher_section":    "A {tradition_role} Shares A Helpful Insight",
+        "v2_practice_section":   "A Practice",
         "cta_block_paras": [
             "The poll on this page connects to that chain. Pearl News brings aggregated reader data to UNA-USA convenings and UN press briefings.",
             "Your response is not a comment. It is a data point in a set that gets presented to people deciding which questions get asked.",
@@ -92,12 +103,18 @@ _SECTION_HEADERS_BY_LANG: dict[str, dict[str, object]] = {
         "felt_experience": "Z世代とα世代にはこう響く",
         "turnaround":   "すでに動いている",
         "bridge":       "データが飛ばすもの",
-        "teacher_sees": "{teacher_name}が見ているもの",
+        "teacher_sees": "{tradition_role}が見ているもの",
         "sage_body":    "他者の経験から",
         "practice":     "実践",
         "forward":      "扉がある",
         "data_chain":   "あなたの声には力がある",
         "take_action":  "今、行動を",
+        # ── hard_news_v2 ──
+        "v2_gen_z_dek":          "このニュースがZ世代にどう影響するか",
+        "v2_teacher_dek":        "{tradition_role}が役立つ洞察を共有",
+        "v2_gen_z_section":      "このニュースがZ世代にどう影響するか",
+        "v2_teacher_section":    "{tradition_role}が役立つ洞察を共有",
+        "v2_practice_section":   "実践のひとつ",
         "cta_block_paras": [
             "このページの投票はそのつながりに接続します。Pearl Newsは集約された読者データをUNA-USAの会合やUNの記者ブリーフィングに持ち込みます。",
             "あなたの応答はコメントではありません。問いを決める人々の前に提示される、データセットのひとつの点です。",
@@ -111,12 +128,18 @@ _SECTION_HEADERS_BY_LANG: dict[str, dict[str, object]] = {
         "felt_experience": "这对Z世代和α世代意味着什么",
         "turnaround":   "已经在动",
         "bridge":       "数据漏掉的部分",
-        "teacher_sees": "{teacher_name}所见",
+        "teacher_sees": "{tradition_role}所见",
         "sage_body":    "他人怎么经历",
         "practice":     "实修",
         "forward":      "门在这里",
         "data_chain":   "你的声音有力量",
         "take_action":  "现在就行动",
+        # ── hard_news_v2 ──
+        "v2_gen_z_dek":          "这条新闻如何影响Z世代",
+        "v2_teacher_dek":        "{tradition_role}分享一个有用的见解",
+        "v2_gen_z_section":      "这条新闻如何影响Z世代",
+        "v2_teacher_section":    "{tradition_role}分享一个有用的见解",
+        "v2_practice_section":   "一项实修",
         "cta_block_paras": [
             "本页的投票连接到那条链。Pearl News把汇总后的读者数据带到UNA-USA的会议与联合国记者会上。",
             "你的回应不是评论。它是数据集中的一个点,呈现给决定哪些问题被提出的人。",
@@ -130,7 +153,7 @@ _SECTION_HEADERS_BY_LANG: dict[str, dict[str, object]] = {
         "felt_experience": "这对Z世代和α世代意味着什么",
         "turnaround":   "已经在动",
         "bridge":       "数据漏掉的部分",
-        "teacher_sees": "{teacher_name}所见",
+        "teacher_sees": "{tradition_role}所见",
         "sage_body":    "他人怎么经历",
         "practice":     "实修",
         "forward":      "门在这里",
@@ -528,6 +551,68 @@ TEACHER_DB: dict[str, dict[str, Any]] = {
     },
 }
 
+# ── TEACHER × TOPIC PRACTICE OVERRIDES ────────────────────────────────────────
+# TEACHER_DB carries ONE practice per teacher. But the article body pulls its
+# "A Practice" content from the per-(teacher, topic) atom packs
+# (pearl_news/teacher_topic_packs/teachers/<teacher>/<topic>.yaml), and those
+# practices diverge from the TEACHER_DB default — leaving the sidebar timer and
+# the body describing two different practices (handoff 2026-06-07 §5.4).
+#
+# This table is the single lookup keyed by (teacher_id, topic) that unifies
+# them: when a row exists, its keys override the base TEACHER_DB practice for
+# the sidebar exercise-card (name + duration + description + timed steps) so the
+# timer matches the atom the body already announces. No row → base practice.
+# Keys mirror TEACHER_DB practice fields; only the ones present override.
+TEACHER_TOPIC_PRACTICE: dict[tuple[str, str], dict[str, Any]] = {
+    # Maat × mental_health: body atom announces "Mirror Polish", not the
+    # default "Truth-Speaking Practice". Operator-flagged mismatch.
+    ("maat", "mental_health"): {
+        "practice_name": "Mirror Polish",
+        "practice_duration": "5 min",
+        "practice_description": "From Maat's mirror of truth: you polish the surface not to look better, but to see clearly. Designed for the distortion that comparison leaves behind.",
+        "exercise_steps": [
+            {"phase": "Step 1 of 5 · Ground", "duration": 30, "instruction": "Feel your feet on the floor or your body in the chair. You are here — not in the feed, not in the comparison. Here. Let the breath settle before you look at anything."},
+            {"phase": "Step 2 of 5 · Notice the smudge", "duration": 60, "instruction": "Name one thing you saw today that left you feeling smaller — a post, a number, a comparison. Don't argue with it. Just see that it left a mark on the mirror."},
+            {"phase": "Step 3 of 5 · Breathe", "duration": 60, "instruction": "Inhale for 4, exhale for 8. The long exhale tells your nervous system it is safe to look without flinching. Repeat four times.", "breathe": True},
+            {"phase": "Step 4 of 5 · Polish", "duration": 90, "instruction": "Say one true sentence about yourself that the comparison tried to erase — out loud or silently. Not a boast, not a fix. Just what is true underneath the smudge. That is the polish."},
+            {"phase": "Step 5 of 5 · See", "duration": 60, "instruction": "Look once more, plainly. Notice the difference between the distorted reflection and the cleared one. You did not change yourself. You cleared the glass. That is Maat's work."},
+            {"phase": "Complete", "duration": 0, "instruction": "The practice is done. The mirror was never the problem — only what collected on it. One true sentence clears more than an hour of scrolling ever could.", "final": True},
+        ],
+    },
+    # Sai Maa × peace_conflict: body atom announces "Brain Illumination Pause",
+    # not the default "Consciousness Awakening". Operator-flagged mismatch.
+    ("sai_maa", "peace_conflict"): {
+        "practice_name": "Brain Illumination Pause",
+        "practice_duration": "5 min",
+        "practice_description": "From Sai Maa's teaching on illuminating the mind before acting: when the news lands as overwhelm, you pause to let light reach the place that wants to react. Designed for the weight of conflict and displacement.",
+        "exercise_steps": [
+            {"phase": "Step 1 of 5 · Arrive", "duration": 30, "instruction": "Sit and feel your weight on the seat. The conflict you just read about is real, and so is this moment. Let both be true. Soften the jaw and the shoulders."},
+            {"phase": "Step 2 of 5 · Locate the heat", "duration": 50, "instruction": "Find where the news landed in the body — the chest, the gut, behind the eyes. Don't fix it. Just place your attention there, the way you'd place a hand."},
+            {"phase": "Step 3 of 5 · Breathe light", "duration": 70, "instruction": "Inhale for 4 and imagine light entering at the crown; exhale for 8 and let it move down through the place that holds the heat. Repeat five times.", "breathe": True},
+            {"phase": "Step 4 of 5 · Illuminate", "duration": 70, "instruction": "Ask silently: what is one thing still in my reach? Let the answer arrive in the lit space, not the reactive one. Don't grasp for it — let it surface."},
+            {"phase": "Step 5 of 5 · Return", "duration": 60, "instruction": "Open your eyes. Notice that the overwhelm has not vanished, but there is now a lit space beside it from which a clear next step can come. That space is the practice."},
+            {"phase": "Complete", "duration": 0, "instruction": "The practice is done. You did not turn away from the conflict — you brought light to the part of you that wanted to shut down. From there, action is possible. That is what Sai Maa teaches.", "final": True},
+        ],
+    },
+}
+
+
+def _resolve_teacher_practice(teacher: dict, teacher_id: str, topic: str) -> dict:
+    """Return a teacher dict whose practice fields reflect the (teacher_id, topic)
+    override when one exists, else the base TEACHER_DB practice unchanged.
+
+    Single lookup keyed by (teacher_id, topic): unifies the sidebar timer's
+    practice with the body atom's practice (handoff 2026-06-07 §5.4 / §9.2).
+    A shallow copy is returned so the module-level TEACHER_DB is never mutated.
+    """
+    override = TEACHER_TOPIC_PRACTICE.get((teacher_id, topic))
+    if not override:
+        return teacher
+    merged = dict(teacher)
+    merged.update(override)
+    return merged
+
+
 # ── PILLAR MAPPING ────────────────────────────────────────────────────────────
 TOPIC_TO_PILLAR = {
     "climate": "Planet",
@@ -825,11 +910,16 @@ _HARD_NEWS_FRAGMENT_BY_SLOT = {
 #  3) Then the two felt-experience atoms (hook_personal + youth_somatic)
 #     under that header.
 #  4) Then teacher voice / practice / forward look as before.
-# The "hook" and "youth" fragments are merged into a single "felt_experience"
-# fragment that renders both atoms under one banner header.
+# Operator section-order update (2026-05-19): un-merge the felt_experience
+# combo back into separate "hook" and "youth" fragments so each gets its
+# own header ("The Weight of It" / "What It Looks Like"). News peg leads.
+#
+# Final layout: TITLE → NEWS PEG → SOMATIC HOOK → YOUTH BODY → teacher intro
+# → witness → body data → turnaround → bridge → perspective → practice → forward.
 _DEFAULT_HARD_NEWS_FRAGMENT_ORDER = [
     "news",
-    "felt_experience",
+    "hook",
+    "youth",
     "intro",
     "witness",
     "evidence",
@@ -838,6 +928,81 @@ _DEFAULT_HARD_NEWS_FRAGMENT_ORDER = [
     "perspective",
     "practice",
     "forward",
+]
+
+# ── v2 config loaders (operator 2026-05-19) ──
+# Lazy-load YAML configs once per process.
+import functools as _functools
+
+
+@_functools.lru_cache(maxsize=1)
+def _load_reaction_to_app() -> dict:
+    """Load pearl_news/config/reaction_to_app.yaml (reaction_id → mini-app)."""
+    import yaml as _y
+    p = Path(__file__).resolve().parent.parent / "config" / "reaction_to_app.yaml"
+    if not p.exists():
+        return {}
+    with p.open() as f:
+        return (_y.safe_load(f) or {}).get("reactions", {})
+
+
+@_functools.lru_cache(maxsize=1)
+def _load_sdg_bullets() -> dict:
+    """Load pearl_news/config/sdg_bullets.yaml (sdg_num → name + 3 bullets)."""
+    import yaml as _y
+    p = Path(__file__).resolve().parent.parent / "config" / "sdg_bullets.yaml"
+    if not p.exists():
+        return {}
+    with p.open() as f:
+        return (_y.safe_load(f) or {}).get("sdgs", {})
+
+
+def _mini_app_for_reaction(reaction_id: str | None) -> tuple[str | None, str | None]:
+    """Return (app_filename, fallback_filename) for the given reaction, or (None, None)."""
+    if not reaction_id:
+        return (None, None)
+    table = _load_reaction_to_app()
+    entry = table.get(reaction_id) or {}
+    return (entry.get("primary"), entry.get("fallback"))
+
+
+_SCRIPT_BLOCK_RE = re.compile(r"(<script\b[^>]*>)(.*?)(</script>)", re.DOTALL | re.IGNORECASE)
+
+
+def _wpautop_proof_scripts(html_doc: str) -> str:
+    """Collapse blank lines inside every inline <script> body so WordPress's
+    wpautop filter cannot inject `</p><p>` into the JS and break it.
+
+    Root cause (handoff 2026-06-07 §5.3): wpautop inserts `</p><p>` at every
+    double-newline, including inside inline <script> content, which raises a
+    `SyntaxError: Unexpected token '<'` and kills the script before any handler
+    attaches. wpautop only triggers on *blank lines* (\\n\\s*\\n), so collapsing
+    blank-line runs to a single newline inside script bodies removes every
+    trigger while preserving single newlines — so `// ...` line comments stay
+    terminated and string literals (including `https://`) are never touched.
+
+    Applied to the final rendered document so callers no longer need the
+    per-post wpautop_proof_script() workaround.
+    """
+    def _collapse(match: "re.Match[str]") -> str:
+        open_tag, body, close_tag = match.group(1), match.group(2), match.group(3)
+        # Collapse any run of newline + optional-whitespace + newline down to a
+        # single newline. Repeat-safe via the +; leaves single newlines intact.
+        collapsed = re.sub(r"\n[ \t]*(?:\r?\n[ \t]*)+", "\n", body)
+        return f"{open_tag}{collapsed}{close_tag}"
+
+    return _SCRIPT_BLOCK_RE.sub(_collapse, html_doc)
+
+
+# Hard News v2 (operator 2026-05-19): leaner 4-body-section flow.
+# Top of article holds H1 + 2 deks ("How this news is affecting Gen Z" +
+# "A {tradition_role} Shares A Helpful Insight"). Body has these fragments:
+_DEFAULT_HARD_NEWS_V2_FRAGMENT_ORDER = [
+    "news",                # NEWS SUMMARY (LLM, intended 2x v1 length w/ SDG-tie para — prompt update is a follow-up)
+    "v2_gen_z_section",    # "How this news is affecting Gen Z" section + gen_z_reactions atom
+    "v2_teacher_section",  # "A {tradition_role} Shares A Helpful Insight" section + teacher_perspective
+    "v2_practice_section", # "A Practice" section + practice atom
+    "forward",             # Take Action Now! / Your Voice Has Power CTA block (unchanged)
 ]
 
 
@@ -888,8 +1053,27 @@ def assemble_v52(article_json: dict, metadata: dict | None = None, *, standalone
 
     topic = meta.get("topic", "general")
     pillar = meta.get("pillar") or _infer_pillar(topic)
-    sdg_num = str(meta.get("sdg", "3"))
+    # Unify the sidebar timer's practice with the body atom's practice via the
+    # single (teacher_id, topic) lookup. No-op when no override row exists.
+    teacher = _resolve_teacher_practice(teacher, teacher_id, topic)
+    # SDG dict-vs-scalar guard: `meta = {**article_json, ...}` can inherit an
+    # `sdg` that is a dict (e.g. {"primary": 3, "secondary": [4]}) rather than a
+    # scalar. str() on that dict produced "{'primary': 3}", which then missed
+    # every SDG_DB key and silently fell back to "3". Normalise to the primary
+    # scalar before stringifying. (handoff 2026-06-07 §9.3)
+    _sdg_raw = meta.get("sdg", "3")
+    if isinstance(_sdg_raw, dict):
+        _sdg_raw = _sdg_raw.get("primary", _sdg_raw.get("sdg", "3"))
+    sdg_num = str(_sdg_raw)
     sdg = SDG_DB.get(sdg_num, SDG_DB["3"])
+    # SDG target override (handoff 2026-06-07 §9.7): SDG_DB hard-codes one target
+    # per SDG (e.g. 16.7), but an article's bullets may speak to a different
+    # target (16.1/16.2/16.3). Let callers override via meta["sdg_target"] (or
+    # the dict form meta["sdg"]["target"]) so the badge matches the article.
+    sdg_target = meta.get("sdg_target")
+    if not sdg_target and isinstance(meta.get("sdg"), dict):
+        sdg_target = meta["sdg"].get("target")
+    sdg_target = str(sdg_target) if sdg_target else sdg["target"]
     template = meta.get("template", "hard_news_spiritual_response")
     article_type = TEMPLATE_TO_TYPE.get(template, "Hard News + Insight + Action")
     news_event = meta.get("news_event", "")
@@ -1053,19 +1237,58 @@ def assemble_v52(article_json: dict, metadata: dict | None = None, *, standalone
     body_header = sec_h.get("youth_somatic", meta.get("body_header", _l10n["body"]))
     # Operator-restructured 2026-05-17: single header banner above the
     # felt-experience atoms (hook_personal + youth_somatic merged).
-    felt_experience_header = sec_h.get("felt_experience", meta.get(
-        "felt_experience_header", _l10n.get("felt_experience") or "This is how it affects Gen Z and Gen Alpha"
-    ))
+    # 2026-05-23 (PR #1429 / e789a540b): heading variant pool selection
+    # (PEARL_NEWS_WRITER_SPEC §14). Deterministic per (slug, axis);
+    # falls back to legacy fixed string when pool is missing.
+    # Ported to PR #1448 against the PR #1443 2177-line assemble_v52.py.
+    _slug_for_pick = meta.get("slug") or article_json.get("slug") or article_json.get("id") or ""
+    _felt_fallback = _l10n.get("felt_experience") or "This is how it affects Gen Z and Gen Alpha"
+    _felt_variant = pick_gen_z_heading(topic, _early_lang, _slug_for_pick, _felt_fallback) if _slug_for_pick else _felt_fallback
+    felt_experience_header = sec_h.get("felt_experience", meta.get("felt_experience_header", _felt_variant))
     turnaround_header = meta.get("turnaround_header", _l10n["turnaround"])
     teacher_header = sec_h.get("bridge", meta.get("teacher_header", _l10n["bridge"]))
+    # tradition_role comes from config/teachers/teacher_registry.yaml (added
+    # 2026-05-19); upstream callers should pass it via metadata. Fallback to
+    # teacher_name so renders never crash on missing data. Computed here (ahead
+    # of the legacy teacher_sees fallback) so that header, too, says the role —
+    # not the teacher's name (handoff 2026-06-07 §9.6).
+    _tradition_role = (
+        meta.get("tradition_role")
+        or article_json.get("tradition_role")
+        or teacher_name
+    )
+    # teacher_sees header renders {tradition_role} (e.g. "What A Zen Priest
+    # Sees"), not the teacher's literal name. Pass teacher_name too so any
+    # stale {teacher_name} template still formats rather than raising KeyError.
+    _teacher_sees_fallback = _l10n["teacher_sees"].format(
+        tradition_role=_tradition_role, teacher_name=teacher_name
+    )
+    _teacher_sees_variant = (
+        pick_teacher_sees_heading(teacher_id, _slug_for_pick, _teacher_sees_fallback)
+        if _slug_for_pick else _teacher_sees_fallback
+    )
     gold_block_header = sec_h.get("teacher_perspective_block",
-        meta.get("gold_block_header", _l10n["teacher_sees"].format(teacher_name=teacher_name)))
+        meta.get("gold_block_header", _teacher_sees_variant))
     sage_body_header = sec_h.get("body_data", meta.get("sage_body_header", _l10n["sage_body"]))
     practice_header = _l10n["practice"]
     forward_header = meta.get("forward_header", _l10n["forward"])
     data_chain_header = _l10n["data_chain"]
     take_action_header = _l10n["take_action"]
     cta_block_paras = _l10n["cta_block_paras"]
+
+    # ── hard_news_v2 deks + section headers (operator restructure 2026-05-19) ──
+    # _tradition_role is computed above (ahead of the teacher_sees fallback).
+    v2_gen_z_dek = _l10n.get("v2_gen_z_dek", "How this news is affecting Gen Z")
+    v2_teacher_dek_tpl = _l10n.get(
+        "v2_teacher_dek", "A {tradition_role} Shares A Helpful Insight"
+    )
+    v2_teacher_dek = v2_teacher_dek_tpl.format(tradition_role=_tradition_role)
+    v2_gen_z_section_header = _l10n.get("v2_gen_z_section", v2_gen_z_dek)
+    v2_teacher_section_header_tpl = _l10n.get(
+        "v2_teacher_section", "A {tradition_role} Shares A Helpful Insight"
+    )
+    v2_teacher_section_header = v2_teacher_section_header_tpl.format(tradition_role=_tradition_role)
+    v2_practice_section_header = _l10n.get("v2_practice_section", "A Practice")
 
     # ── Build exercise step dots ──
     total_steps = len(teacher["exercise_steps"])
@@ -1187,7 +1410,7 @@ def assemble_v52(article_json: dict, metadata: dict | None = None, *, standalone
         _inline_sdg_html = f'''
     <div class="interstitial interstitial-sdg">
       <h3>SDG Connection</h3>
-      <p><span class="sdg-badge">SDG {_esc(sdg_num)} · {_esc(sdg["name"])} · Target {_esc(sdg["target"])}</span></p>
+      <p><span class="sdg-badge">SDG {_esc(sdg_num)} · {_esc(sdg["name"])} · Target {_esc(sdg_target)}</span></p>
       <p style="margin-top: 10px; font-size: 14px;">{_esc(sdg_content)}</p>
       <p class="disclaimer">Pearl News is an independent nonprofit. We are not affiliated with the United Nations.</p>
     </div>'''
@@ -1238,7 +1461,9 @@ def assemble_v52(article_json: dict, metadata: dict | None = None, *, standalone
   </div>'''
 
     _hard_news_fragment_order = _DEFAULT_HARD_NEWS_FRAGMENT_ORDER
-    if template == "hard_news_spiritual_response" and _is_14_slot_format(slots):
+    if template == "hard_news_v2":
+        _hard_news_fragment_order = _DEFAULT_HARD_NEWS_V2_FRAGMENT_ORDER
+    elif template == "hard_news_spiritual_response" and _is_14_slot_format(slots):
         _hard_news_fragment_order = _resolve_hard_news_fragment_order(meta)
 
     _hard_news_fragment_html = {
@@ -1327,6 +1552,51 @@ def assemble_v52(article_json: dict, metadata: dict | None = None, *, standalone
             f'{_paras(forward_paras[1:])}\n'
             f'{_inline_poll_html}\n'
         ) if forward_paras else "",
+        # ── hard_news_v2 fragments (operator 2026-05-19) ──
+        # v2_gen_z_section: "How this news is affecting Gen Z" header + the
+        # gen_z_reactions atom (NEW deterministic atom: 50 words × 5
+        # variations per topic — atom library is a follow-up; for now we
+        # render whatever the caller passes in slots["gen_z_reactions"],
+        # falling back to youth_somatic + hook_personal if the new slot
+        # is empty).
+        "v2_gen_z_section": (
+            (lambda body: (
+                f'    <!-- V2 GEN Z SECTION -->\n'
+                f'    <div id="sec-v2-genz" class="section-header">{_esc(v2_gen_z_section_header)}</div>\n'
+                f'{_paras(_split_into_paragraphs(body))}\n'
+            ) if body else "")(
+                (slots.get("gen_z_reactions") or "").strip()
+                or "\n\n".join(p for p in [
+                    (slots.get("hook_personal") or "").strip(),
+                    _strip_loop_sequence_label((slots.get("youth_somatic") or "").strip()),
+                ] if p)
+            )
+        ),
+        # v2_teacher_section: dynamic header includes tradition_role; body is
+        # the teacher_perspective slot (existing atom).
+        "v2_teacher_section": (
+            (lambda body: (
+                f'    <!-- V2 TEACHER SECTION -->\n'
+                f'    <div id="sec-v2-teacher" class="section-header">{_esc(v2_teacher_section_header)}</div>\n'
+                f'{_paras(_split_into_paragraphs(body))}\n'
+            ) if body else "")(
+                (slots.get("teacher_perspective") or "").strip()
+            )
+        ),
+        # v2_practice_section: simple "A Practice" header + practice content.
+        # Falls back to teacher_practice list (which the v1 path builds).
+        "v2_practice_section": (
+            (lambda body: (
+                f'    <!-- V2 PRACTICE SECTION -->\n'
+                f'    <div id="sec-v2-practice" class="block-sage">\n'
+                f'      <div class="block-header">{_esc(v2_practice_section_header)}</div>\n'
+                f'      {_block_paras(_split_into_paragraphs(body))}\n'
+                f'    </div>\n'
+            ) if body else "")(
+                (slots.get("practice") or slots.get("practice_announce") or "").strip()
+                or "\n\n".join(teacher_practice or [])
+            )
+        ),
     }
 
     _article_sections_html = "".join(
@@ -1353,7 +1623,7 @@ def assemble_v52(article_json: dict, metadata: dict | None = None, *, standalone
 {_layout_css}
 {_root_open}'''
 
-    return _body_open + \
+    _rendered = _body_open + \
         f'''
 <!-- (mock-up pillar nav + authority block removed per operator 2026-05-14:
      "Planet / Mind / Work & Future / ... MIND · Hard News + Insight + Action ..."
@@ -1366,8 +1636,16 @@ def assemble_v52(article_json: dict, metadata: dict | None = None, *, standalone
 {_dock_sidebar_html}
   <div class="article-body">
     <!-- HEADLINE -->
-    <div class="headline-layer-1">{_esc(h1)}.</div>
-    <h1 class="headline-layer-2">{_esc(h2)}</h1>
+{("    <!-- V2 TITLE BLOCK (operator 2026-05-19) -->" + chr(10) +
+  "    <!-- H1 suppressed in body: WP renders it as post title; rendering -->" + chr(10) +
+  "    <!-- it here would duplicate the headline on the published page.   -->" + chr(10) +
+  f'    <h2 class="v2-headline-subhead">{_esc(h2)}</h2>' + chr(10) +
+  f'    <div class="v2-headline-dek-1">{_esc(v2_gen_z_dek)}</div>' + chr(10) +
+  f'    <div class="v2-headline-dek-2">{_esc(v2_teacher_dek)}</div>' + chr(10)
+  ) if template == "hard_news_v2" else (
+  f'    <div class="headline-layer-1">{_esc(h1)}.</div>' + chr(10) +
+  f'    <h1 class="headline-layer-2">{_esc(h2)}</h1>' + chr(10)
+)}
     <!-- HERO IMAGE -->
     <div class="hero-image-wrapper">
       {_hero_img_tag(hero_url, hero_alt)}
@@ -1391,10 +1669,14 @@ def assemble_v52(article_json: dict, metadata: dict | None = None, *, standalone
     <div class="ai-disclosure">
       Pearl Prime Enlightened Intelligence and AI was used in sourcing and summarizing news in this article.
     </div>
+    <!-- Operator 2026-05-19: independent-nonprofit disclaimer relocated here from the SDG sidebar card. -->
+    <div class="independent-disclaimer" style="font-family: var(--font-sans); font-size: 11px; color: var(--text-muted); margin-top: 8px; padding-top: 8px; border-top: 1px solid rgba(0,0,0,0.06); font-style: italic;">
+      Pearl News is an independent nonprofit. We are not affiliated with the United Nations.
+    </div>
   </div>
-  <!-- ─── SIDEBAR ─── -->
+  <!-- ─── SIDEBAR (restored to PR #853 structure 2026-05-19) ─── -->
   <div class="sidebar">
-    <!-- GUIDED EXERCISE -->
+    <!-- GUIDED EXERCISE — interactive timer (PR #853 anchor; ALWAYS rendered) -->
     <div class="sidebar-card exercise-card" id="exerciseCard">
       <h3>Practice · {_esc(teacher["practice_name"])} · {_esc(teacher["practice_duration"])}</h3>
       <p style="color: rgba(255,255,255,0.65); font-size: 13px;">{_esc(teacher["practice_description"])}</p>
@@ -1408,7 +1690,23 @@ def assemble_v52(article_json: dict, metadata: dict | None = None, *, standalone
 {step_dots}
       </div>
     </div>
-    <!-- CTA -->
+{((lambda app_url, app_name: (
+      "    <!-- CTA — mini-app launcher matched by reaction_id (operator 2026-05-19) -->" + chr(10) +
+      '    <div class="sidebar-card cta-card">' + chr(10) +
+      '      <h3>Free Practice Tool</h3>' + chr(10) +
+      (f'      <div class="cta-title">{_esc(app_name)}</div>' + chr(10) if app_name else '      <div class="cta-title">Read The Full Practice</div>' + chr(10)) +
+      f'      <div class="cta-body">{_esc((slots.get("practice") or slots.get("practice_announce") or "").strip()[:200])}</div>' + chr(10) +
+      (f'      <a href="{_esc(app_url)}" target="_blank" rel="noopener" class="cta-primary">Launch {_esc(app_name)} ↗</a>' + chr(10) if app_url else "") +
+      '      <a href="#sec-v2-practice" class="cta-secondary">Read the practice in this article ↓</a>' + chr(10) +
+      '    </div>' + chr(10)
+    ))(
+      ("https://pearlnewsuna.org/apps/" + _mini_app_for_reaction(meta.get("reaction_id") or article_json.get("reaction_id"))[0])
+        if (_mini_app_for_reaction(meta.get("reaction_id") or article_json.get("reaction_id"))[0]) else "",
+      (lambda fn: fn.replace(".html", "").split("_", 1)[1].replace("_", " ").title() if fn else "")(
+        _mini_app_for_reaction(meta.get("reaction_id") or article_json.get("reaction_id"))[0] or ""
+      ),
+    )
+  ) if template == "hard_news_v2" else f"""    <!-- CTA — legacy hard_news_spiritual_response path -->
     <div class="sidebar-card cta-card">
       <h3>Free Tools</h3>
       <div class="cta-title">{_esc(teacher["cta_regulation_text"])}</div>
@@ -1416,27 +1714,34 @@ def assemble_v52(article_json: dict, metadata: dict | None = None, *, standalone
       <a href="https://phoenixprotocolbooks.com/free/regulation-tool-breath-v1" class="cta-primary">{_esc(teacher["cta_practice_label"])}</a>
       <a href="https://phoenixprotocolbooks.com/free/companion-core-v2" class="cta-secondary">Get The Companion Freebie Pack</a>
       <div class="cta-micro-action">{_esc(teacher["micro_action"])}</div>
-    </div>
-    <!-- SDG DETAIL -->
+    </div>"""}
+    <!-- SDG DETAIL (operator 2026-05-19: 3 bullets; disclaimer moved to article bottom) -->
     <div class="sidebar-card">
       <h3>SDG Connection</h3>
-      <p><span class="sdg-badge">SDG {_esc(sdg_num)} · {_esc(sdg["name"])} · Target {_esc(sdg["target"])}</span></p>
-      <p style="margin-top: 10px;">{_esc(sdg_content)}</p>
-      <p class="disclaimer">Pearl News is an independent nonprofit. We are not affiliated with the United Nations.</p>
-    </div>
+      <p><span class="sdg-badge">SDG {_esc(sdg_num)} · {_esc(sdg["name"])} · Target {_esc(sdg_target)}</span></p>
+{((lambda blts: (
+        '      <ul class="sdg-bullets" style="margin-top:12px;padding-left:18px;list-style:disc;">' + chr(10) +
+        "".join(f'        <li style="margin-bottom:8px;font-family:var(--font-sans);font-size:13px;color:var(--text-secondary);">{_esc(b)}</li>' + chr(10) for b in blts) +
+        '      </ul>' + chr(10)
+    ) if blts else f'      <p style="margin-top: 10px;">{_esc(sdg_content)}</p>' + chr(10)
+  )(_load_sdg_bullets().get(str(sdg_num), {}).get("bullets") or []))}    </div>
     <!-- POLL -->
-    <div class="sidebar-card">
+    <!-- POLL (operator 2026-05-19: now interactive + feeds EI v2 reader-signal log) -->
+    <div class="sidebar-card pn-poll-card" data-pn-article-id="{_esc(meta.get("id") or article_json.get("id") or article_json.get("slug") or "pn-article")}">
       <h3>Hot Take Poll</h3>
       <p style="margin-bottom: 12px; font-family: var(--font-sans); font-size: 13px; color: var(--text-secondary);">{_esc(poll_question)}</p>
-      {"".join(f'<div class="poll-option"><span>{_esc(opt)}</span></div>' + chr(10) + "      " for opt in poll_options)}
-      <p style="font-size: 11px; color: var(--text-muted); margin-top: 8px; font-family: var(--font-sans);">Results after you vote. Responses feed into Pearl News reporting and UNA-USA policy briefs.</p>
+      <div class="pn-poll-options">
+        {"".join(f'<button type="button" class="pn-poll-option" data-pn-value="{_esc(opt)}"><span class="pn-poll-label">{_esc(opt)}</span><span class="pn-poll-bar"></span><span class="pn-poll-count">0%</span></button>' + chr(10) + "        " for opt in poll_options)}
+      </div>
+      <p class="pn-poll-status" style="font-size: 11px; color: var(--text-muted); margin-top: 8px; font-family: var(--font-sans);">Results after you vote. Responses feed into Pearl News reporting and UNA-USA policy briefs.</p>
     </div>
-    <!-- CO-CREATION -->
-    <div class="sidebar-card">
+    <!-- CO-CREATION (operator 2026-05-19: Submit button + reader_signal POST) -->
+    <div class="sidebar-card pn-take-card" data-pn-article-id="{_esc(meta.get("id") or article_json.get("id") or article_json.get("slug") or "pn-article")}">
       <h3>Your Take → Editorial Input</h3>
       <p style="margin-bottom: 12px; font-size: 13px;">{_esc(cocreation)}</p>
-      <textarea class="cocreation-input" placeholder="Type here..."></textarea>
-      <p style="font-size: 11px; color: var(--text-muted); margin-top: 8px; font-family: var(--font-sans);">Your take is editorial input — not a comment. It becomes source material.</p>
+      <textarea class="pn-take-input cocreation-input" placeholder="Name one specific moment from your daily life…"></textarea>
+      <button type="button" class="pn-take-submit" style="display:block;width:100%;padding:10px;margin-top:8px;background:var(--un-blue-dark);color:white;border:none;border-radius:6px;font-family:var(--font-sans);font-size:13px;font-weight:600;cursor:pointer;">Submit Take →</button>
+      <p class="pn-take-status" style="font-size: 11px; color: var(--text-muted); margin-top: 8px; font-family: var(--font-sans);">Your take is editorial input — not a comment. It becomes source material.</p>
     </div>
   </div>
 </div>
@@ -1518,8 +1823,117 @@ function toggleExercise() {{
     advanceStep();
   }} else if (paused) {{ resumeExercise(); }} else {{ pauseExercise(); }}
 }}
+
+/* ─── PEARL_NEWS READER SIGNAL (operator restore 2026-05-19) ───────────────
+ * Poll vote + Take submission. Both POST to /wp-json/pearl-news/v1/signal
+ * (a Pearl_News WP REST endpoint that's implemented separately as part of
+ * EI v2 ingest). Results are also cached in localStorage so a returning
+ * reader sees their own vote tallied. If the endpoint is unreachable,
+ * fall back to localStorage-only + mailto: editorial as a safety net so
+ * the operator never loses a reader's input.
+ */
+(function pnReaderSignal() {{
+  const ENDPOINT = '/wp-json/pearl-news/v1/signal';
+  const MAILTO_FALLBACK = 'editorial@pearlnewsuna.org';
+
+  function lsKey(scope, articleId) {{ return 'pn_' + scope + '_' + articleId; }}
+  function readLS(key) {{ try {{ return JSON.parse(localStorage.getItem(key) || 'null'); }} catch (_) {{ return null; }} }}
+  function writeLS(key, val) {{ try {{ localStorage.setItem(key, JSON.stringify(val)); }} catch (_) {{ /* private mode */ }} }}
+
+  function postSignal(payload) {{
+    return fetch(ENDPOINT, {{
+      method: 'POST', headers: {{'Content-Type': 'application/json'}},
+      body: JSON.stringify(payload), credentials: 'omit', keepalive: true,
+    }}).then(r => r.ok ? r.json() : Promise.reject(r.status))
+      .catch(err => ({{_error: err, _local_only: true}}));
+  }}
+
+  /* ── POLL: clickable options, localStorage tally, server POST ── */
+  document.querySelectorAll('.pn-poll-card').forEach(function (card) {{
+    const articleId = card.getAttribute('data-pn-article-id');
+    const tallyKey  = lsKey('poll_tally', articleId);
+    const voteKey   = lsKey('poll_vote', articleId);
+    const status    = card.querySelector('.pn-poll-status');
+    const options   = card.querySelectorAll('.pn-poll-option');
+    let tally   = readLS(tallyKey) || {{}};
+    let myVote  = readLS(voteKey);
+
+    function render() {{
+      const total = Object.values(tally).reduce((a, b) => a + b, 0) || 0;
+      options.forEach(function (btn) {{
+        const v = btn.getAttribute('data-pn-value');
+        const count = tally[v] || 0;
+        const pct = total ? Math.round((count / total) * 100) : 0;
+        const bar = btn.querySelector('.pn-poll-bar');
+        const cnt = btn.querySelector('.pn-poll-count');
+        if (bar) bar.style.width = pct + '%';
+        if (cnt) cnt.textContent = (total ? pct + '%' : '');
+        btn.classList.toggle('pn-poll-voted', v === myVote);
+      }});
+      if (myVote) {{
+        status.textContent = 'You voted: "' + myVote + '". Responses feed Pearl News reporting and UNA-USA briefs.';
+      }}
+    }}
+
+    options.forEach(function (btn) {{
+      btn.addEventListener('click', function () {{
+        const value = btn.getAttribute('data-pn-value');
+        if (myVote && tally[myVote]) tally[myVote] = Math.max(0, tally[myVote] - 1);
+        tally[value] = (tally[value] || 0) + 1;
+        myVote = value;
+        writeLS(tallyKey, tally);
+        writeLS(voteKey, myVote);
+        render();
+        postSignal({{kind: 'poll_vote', article_id: articleId, value: value, ts: new Date().toISOString()}});
+      }});
+    }});
+    render();
+  }});
+
+  /* ── TAKE: Submit button → server POST, localStorage backup, mailto fallback ── */
+  document.querySelectorAll('.pn-take-card').forEach(function (card) {{
+    const articleId = card.getAttribute('data-pn-article-id');
+    const input     = card.querySelector('.pn-take-input');
+    const submit    = card.querySelector('.pn-take-submit');
+    const status    = card.querySelector('.pn-take-status');
+    const takeKey   = lsKey('take_draft', articleId);
+
+    /* Restore draft on load */
+    const draft = readLS(takeKey);
+    if (draft && input && !input.value) input.value = draft;
+    if (input) input.addEventListener('input', function () {{ writeLS(takeKey, input.value); }});
+
+    if (submit) {{
+      submit.addEventListener('click', function () {{
+        const text = (input && input.value || '').trim();
+        if (!text) {{ status.textContent = 'Type something before submitting.'; status.style.color = 'var(--accent-red, #b91c1c)'; return; }}
+        submit.disabled = true; submit.textContent = 'Submitting…';
+        postSignal({{kind: 'take', article_id: articleId, text: text, ts: new Date().toISOString()}}).then(function (resp) {{
+          if (resp && resp._error) {{
+            /* Fallback: open mailto so the operator never loses a take */
+            const subject = encodeURIComponent('Pearl News take — ' + articleId);
+            const body    = encodeURIComponent(text + '\\n\\n— Submitted from ' + window.location.href);
+            window.location.href = 'mailto:' + MAILTO_FALLBACK + '?subject=' + subject + '&body=' + body;
+            status.textContent = 'Server unreachable — opened email fallback. Send it to confirm.';
+            submit.disabled = false; submit.textContent = 'Submit Take →';
+          }} else {{
+            status.textContent = 'Submitted. Your take is now part of the editorial signal pool.';
+            status.style.color = 'var(--un-blue-dark)';
+            submit.textContent = 'Submitted ✓';
+            try {{ localStorage.removeItem(takeKey); }} catch (_) {{}}
+          }}
+        }});
+      }});
+    }}
+  }});
+}})();
 </script>
 ''' + ('</div><!-- /.pn-article-root -->\n</body>\n</html>' if standalone else '</div><!-- /.pn-article-root -->')
+
+    # wpautop-proof every inline <script> so WordPress's wpautop filter cannot
+    # break the JS (handoff 2026-06-07 §5.3 / §9.1). Renderer-level fix that
+    # replaces the per-post wpautop_proof_script() workaround.
+    return _wpautop_proof_scripts(_rendered)
 
 
 # ── CSS BLOCK (extracted from v5.2 gold standard — identical across all articles) ──
@@ -1570,6 +1984,19 @@ CSS_BLOCK = '''<style>
   .article-body { max-width: 640px; padding-top: 40px; }
   .headline-layer-1 { font-family: var(--font-serif); font-size: 32px; font-weight: 700; color: var(--text-primary); letter-spacing: 0.2px; margin-bottom: 8px; line-height: 1.25; }
   .headline-layer-2 { font-family: var(--font-sans); font-size: 20px; line-height: 1.4; font-weight: 500; color: var(--un-blue-dark); margin-bottom: 32px; }
+  /* hard_news_v2 title block (operator 2026-05-19): subhead is BLACK +4pt; */
+  /* dek-1 is BLUE +4pt; dek-2 is italic. The H1 is suppressed in the body  */
+  /* because WP renders it as the post-page title via the theme.            */
+  .v2-headline-subhead { color: #000; font-size: 24px; font-weight: 600; margin-bottom: 10px; line-height: 1.35; }
+  .v2-headline-dek-1 { font-family: var(--font-sans); color: var(--un-blue-dark); font-size: 20px; font-weight: 500; line-height: 1.4; margin-bottom: 6px; }
+  .v2-headline-dek-2 { font-family: var(--font-serif); font-style: italic; font-size: 18px; line-height: 1.45; color: var(--text-secondary); margin-bottom: 32px; }
+  /* v2 sidebar practice card — replaces the v1 cta-card/exercise-card pair. */
+  /* Preview of the article's practice + button anchoring to in-article block. */
+  .v2-practice-card { background: linear-gradient(135deg, var(--un-blue-deep), var(--un-blue-dark)); color: white; }
+  .v2-practice-card h3 { color: rgba(255,255,255,0.65); font-family: var(--font-sans); font-size: 11px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 14px; font-weight: 700; }
+  .v2-practice-preview { color: rgba(255,255,255,0.92); font-family: var(--font-serif); font-size: 14px; line-height: 1.5; margin-bottom: 16px; }
+  .v2-practice-card .cta-primary { display: block; width: 100%; padding: 12px; background: white; border: none; border-radius: 8px; color: var(--un-blue-deep); font-family: var(--font-sans); font-size: 14px; font-weight: 600; text-align: center; text-decoration: none; cursor: pointer; }
+  .v2-practice-card .cta-primary:hover { background: var(--un-blue-light); }
   .hero-image-wrapper { margin-bottom: 8px; }
   .hero-image { width: 100%; border-radius: 8px; aspect-ratio: 16/9; object-fit: cover; background: var(--un-blue-light); }
   .hero-fallback { width: 100%; aspect-ratio: 16/9; border-radius: 8px; background: linear-gradient(135deg, var(--un-blue-deep) 0%, #B91C1C 50%, var(--accent-gold) 100%); display: flex; flex-direction: column; justify-content: center; align-items: center; color: white; }
@@ -1622,6 +2049,17 @@ CSS_BLOCK = '''<style>
   .disclaimer { font-size: 11px; color: var(--text-muted); margin-top: 10px; font-style: italic; }
   .poll-option { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; background: white; border: 1px solid var(--border-light); border-radius: 8px; margin-bottom: 8px; cursor: pointer; transition: all 0.2s; font-family: var(--font-sans); font-size: 13px; color: var(--text-secondary); }
   .poll-option:hover { border-color: var(--un-blue); color: var(--un-blue); }
+  /* pn-poll-option (operator 2026-05-19 interactive build) */
+  .pn-poll-options { display: flex; flex-direction: column; gap: 8px; }
+  .pn-poll-option { position: relative; overflow: hidden; display: flex; justify-content: space-between; align-items: center; width: 100%; padding: 12px 16px; background: white; border: 1px solid var(--border-light); border-radius: 8px; cursor: pointer; transition: all 0.2s; font-family: var(--font-sans); font-size: 13px; color: var(--text-secondary); text-align: left; }
+  .pn-poll-option:hover { border-color: var(--un-blue); color: var(--un-blue); }
+  .pn-poll-option .pn-poll-bar { position: absolute; left: 0; top: 0; bottom: 0; width: 0; background: var(--un-blue-ghost, rgba(60,114,206,0.10)); transition: width 0.3s ease; z-index: 0; pointer-events: none; }
+  .pn-poll-option .pn-poll-label, .pn-poll-option .pn-poll-count { position: relative; z-index: 1; }
+  .pn-poll-option .pn-poll-count { font-size: 12px; font-weight: 600; color: var(--text-muted); min-width: 36px; text-align: right; }
+  .pn-poll-option.pn-poll-voted { border-color: var(--un-blue-dark); color: var(--un-blue-dark); font-weight: 600; }
+  .pn-poll-option.pn-poll-voted .pn-poll-bar { background: rgba(60,114,206,0.18); }
+  .pn-take-submit:hover { background: var(--un-blue) !important; }
+  .pn-take-submit:disabled { opacity: 0.6; cursor: wait; }
   .cocreation-input { background: white; border: 1px solid var(--border-light); border-radius: 8px; padding: 14px; min-height: 70px; color: var(--text-muted); font-size: 14px; font-family: var(--font-sans); width: 100%; resize: vertical; outline: none; transition: border-color 0.2s; }
   .cocreation-input:focus { border-color: var(--un-blue); }
   .cta-card { background: linear-gradient(135deg, var(--un-blue-deep) 0%, var(--un-blue-dark) 100%); color: white; border: none; }

@@ -4,14 +4,23 @@
 #
 # Each platform profile specifies preferred knob values that maximize
 # algorithmic discoverability and listener retention on that platform.
+#
+# 2026-06-13 (Pearl_Research) — ROUTING CORRECTION. The audiobook-surface
+# preferred_runtimes were authored on the OLD wrong "standard_book = 55 min" label
+# and routed 2.3–2.5 hr books to Audible/Spotify while stating ideal_runtime_hours: 5.
+# PR #1550 corrected the label (standard_book → 147 min / 2.45 hr); this file was never
+# reconciled. Re-routed so each surface gets a runtime that REACHES its stated ideal:
+# only deep_book_4h (3.3 hr, T6) + deep_book_6h (5.8 hr, T7) clear the Audible 3-hr floor.
+# Tier→platform cross-walk + sources: artifacts/research/duration_per_platform_20260613/
+# {DURATION_PER_PLATFORM_PLAN,DURATION_GAP_VERIFICATION}.md. DO-NOT-MERGE pending operator review.
 
 schema_version: "1.0"
-last_updated: "2026-04-04"
+last_updated: "2026-06-13"   # was 2026-04-04 (Pearl_Research routing correction)
 
 platform_profiles:
   # ── Western Audiobook Platforms ──────────────────────────────────────
   audible:
-    preferred_runtimes: [standard_book, extended_book_2h]
+    preferred_runtimes: [deep_book_6h, deep_book_4h]  # was [standard_book, extended_book_2h] (2.45h/2.3h, BELOW the 3h floor); only these reach ideal_runtime_hours:5 [A4][A6]
     preferred_formats: [F006, F003, F004, F009]
     preferred_structures: [promise_engine, gladwell_spiral, brene_brown, van_der_kolk]
     preferred_journey_shapes: [recognition_to_agency, linear_rise]
@@ -26,12 +35,12 @@ platform_profiles:
     notes: "50% market share. Sales velocity + completion rate drive ranking."
 
   spotify:
-    preferred_runtimes: [short_book_30, standard_book, micro_book_20]
+    preferred_runtimes: [deep_book_4h, deep_book_6h, standard_book]  # was [short_book_30, standard_book, micro_book_20] (28–45 min, far below 4–6h); standard_book ONLY as a podcast-season source, not a standalone audiobook [S4][S6]
     preferred_formats: [F003, F006, F015]
     preferred_structures: [atomic, myth_killer, permission_slip, case_file]
     preferred_journey_shapes: [crisis_landing, scaffold_deepen]
     max_runtime_hours: 6
-    ideal_runtime_hours: 3  # shorter, casual listeners
+    ideal_runtime_hours: 4  # was 3 — bias 4–6h lower-end for Spotify's casual 18–34 audience; 15hr/mo at normal speed favors tryable-but-still-full [S1][S3][S6]
     chapter_duration_min: 10
     chapter_duration_max: 20
     completion_target: 0.70
@@ -41,7 +50,7 @@ platform_profiles:
     notes: "Graph neural net cross-domain from music/podcast. AudioBoost for cold-start."
 
   apple_books:
-    preferred_runtimes: [standard_book, extended_book_2h]
+    preferred_runtimes: [deep_book_6h, deep_book_4h, standard_book]  # was [standard_book, extended_book_2h]; pay-per-sale so length=value not payout, but full AI-narrated audiobook wants the fuller tiers [P1][P5]
     preferred_formats: [F006, F004, F009]
     preferred_structures: [promise_engine, gladwell_spiral, zoom_lens]
     preferred_journey_shapes: [recognition_to_agency, wave_three_peaks]
@@ -50,27 +59,29 @@ platform_profiles:
     completion_target: 0.65
     opening_investment: high
     anti_spam_strictness: moderate
-    notes: "Editorial curation + algorithm. Metadata accuracy critical."
+    digital_narration: english_only  # Apple Digital Narration = free AI, ENGLISH ONLY, self-development genre-eligible; CJK NOT AI-narrated [P1][P6]
+    notes: "Editorial curation + flat 70% per-sale (length=price-justification, NOT a read-through payout lever). Asia storefront ≈ Japan only (no KR/zh). Metadata accuracy critical."
 
   google_play:
-    preferred_runtimes: [standard_book, short_book_30]
+    preferred_runtimes: [deep_book_6h, deep_book_4h, standard_book]  # was [standard_book, short_book_30]; full ebook + auto-narrated audiobook want the fuller tiers [P2][P4]
     preferred_formats: [F006, F003]
     preferred_structures: [promise_engine, atomic, gladwell_spiral]
     max_runtime_hours: 6
     anti_spam_strictness: strictest  # rejects identical ISBNs
-    notes: "Popularity + downloads. Strictest anti-duplicate among Western platforms."
+    auto_narration_languages: [en, es, fr, de, hi, pt-BR]  # Google auto-narration is NOT available for ja/ko/zh — CJK audiobooks human/other-pipeline only [P2][P3]
+    notes: "70% ebook / 52% auto-narrated audiobook, flat per-sale. Reaches JP/KR/HK/TW EBOOKS (broader Asia ebook reach than Apple). Popularity + downloads; strictest anti-duplicate."
 
   kobo:
-    preferred_runtimes: [standard_book, extended_book_2h]
+    preferred_runtimes: [deep_book_6h, deep_book_4h]  # was [standard_book, extended_book_2h]; Kobo Plus = subscription read-through, so length×completion is a payout lever (like KU/Audible)
     preferred_formats: [F006, F004]
     preferred_structures: [promise_engine, brene_brown, van_der_kolk]
     completion_target: 0.65
-    notes: "Kobo Plus subscription. Editorial + engagement signals."
+    notes: "Kobo Plus subscription (read-through). Editorial + engagement signals. Strong JP market."
 
   findaway:
-    preferred_runtimes: [standard_book, short_book_30]
-    preferred_formats: [F006, F003, F015]
-    notes: "Distribution aggregator. Serves Apple, Kobo, Spotify, libraries."
+    preferred_runtimes: [deep_book_6h, deep_book_4h]  # was [standard_book, short_book_30]
+    preferred_formats: [F006, F004, F009]
+    notes: "STALE: Findaway Voices CEASED 2025-08-01 → succeeded by INaudio (wide distro) + Spotify for Authors (direct Spotify). Update the distribution wiring before relying on this profile. [A8][S4]"
 
   # ── Chinese Platforms ────────────────────────────────────────────────
   ximalaya:

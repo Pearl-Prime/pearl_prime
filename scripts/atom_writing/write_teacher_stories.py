@@ -47,7 +47,7 @@ logger = logging.getLogger("teacher_writer")
 TEACHER_BANK_DIR = REPO_ROOT / "SOURCE_OF_TRUTH" / "teacher_banks"
 
 ALL_TEACHERS = [
-    "junko", "maat", "miki", "master_sha", "master_wu",
+    "junko", "miyuki", "maat", "miki", "master_sha", "master_wu",
     "joshin", "master_feung", "omote", "pamela_fellows", "ra", "sai_ma",
 ]
 

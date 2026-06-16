@@ -45,21 +45,36 @@ logger = logging.getLogger(__name__)
 REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 REGISTRY_ROOT = REPO_ROOT / "registry"
 TEACHER_BANKS_ROOT = REPO_ROOT / "SOURCE_OF_TRUTH" / "teacher_banks"
+COMPOSITE_DOCTRINE_ROOT = REPO_ROOT / "SOURCE_OF_TRUTH" / "composite_doctrine"
 ATOMS_ROOT = REPO_ROOT / "atoms"
 
 # Section types that get overlaid in teacher mode (everything except SCENE and REFLECTION)
 _TEACHER_OVERLAY_TYPES = frozenset({
-    "TEACHER_DOCTRINE", "HOOK", "EXERCISE", "INTEGRATION",
-    "PIVOT", "PERMISSION", "TAKEAWAY", "THREAD",
+    "TEACHER_DOCTRINE", "COMPRESSION", "COMPOSITE_TEACHER_DOCTRINE", "HOOK", "EXERCISE",
+    "INTEGRATION", "PIVOT", "PERMISSION", "TAKEAWAY", "THREAD",
 })
 # Section types that get overlaid in regular/persona mode
 _PERSONA_OVERLAY_TYPES = frozenset({"HOOK", "SCENE", "STORY"})
-# Mapping from registry section type to teacher atom directory name
-# TEACHING is the on-disk teacher-bank section type name for some teachers
-# (e.g., ahjan); aliased to TEACHER_DOCTRINE so slot lookup reaches it.
-# Per F2 in atom_usage_audit_2026-05-06.md.
+# Mapping from registry section type to teacher atom directory name.
+#
+# TEACHER_DOCTRINE lookup chain (first non-empty pool wins, per
+# TEACHER-POOL-SEMANTICS-01):
+#   1. TEACHER_DOCTRINE/ — operator-canonical location for explicit doctrine
+#      atoms (e.g. Pearl_Writer #4's OPD-109 Phase 2 expansion in PR #1230
+#      added 10 ahjan TEACHER_DOCTRINE atoms here).
+#   2. COMPRESSION/ — legacy location for compact doctrine-shaped atoms.
+#   3. REFLECTION/ — secondary fallback (some teachers store doctrine here).
+#   4. TEACHING/ — on-disk teacher-bank slot name some teachers used before
+#      the TEACHER_DOCTRINE alias existed; preserved for backward compat.
+# Per F2 in atom_usage_audit_2026-05-06.md, and PR fixing the resolver bug
+# that omitted TEACHER_DOCTRINE/ from the lookup chain entirely (Pearl_Writer
+# #4 had to dual-locate atoms in TEACHER_DOCTRINE/ + COMPRESSION/ as a hack).
 _TEACHER_TYPE_MAP = {
-    "TEACHER_DOCTRINE": ["COMPRESSION", "REFLECTION", "TEACHING"],
+    "TEACHER_DOCTRINE": ["TEACHER_DOCTRINE", "COMPRESSION", "REFLECTION", "TEACHING"],
+    "COMPRESSION": ["TEACHER_DOCTRINE", "COMPRESSION", "REFLECTION", "TEACHING"],
+    "COMPOSITE_TEACHER_DOCTRINE": [
+        "TEACHER_DOCTRINE", "COMPRESSION", "REFLECTION", "TEACHING",
+    ],
     "HOOK": ["HOOK"],
     "EXERCISE": ["EXERCISE"],
     "INTEGRATION": ["INTEGRATION"],
@@ -67,6 +82,15 @@ _TEACHER_TYPE_MAP = {
     "PERMISSION": ["PERMISSION"],
     "TAKEAWAY": ["TAKEAWAY"],
     "THREAD": ["THREAD"],
+}
+
+# Regular-mode composite pools (SOURCE_OF_TRUTH/composite_doctrine/<topic_id>/).
+_COMPOSITE_TYPE_MAP = {
+    "TEACHER_DOCTRINE": ["COMPOSITE_TEACHER_DOCTRINE"],
+    "COMPRESSION": ["COMPOSITE_TEACHER_DOCTRINE"],
+    "COMPOSITE_TEACHER_DOCTRINE": ["COMPOSITE_TEACHER_DOCTRINE"],
+    "REFLECTION": ["COMPOSITE_TEACHER_REFLECTION"],
+    "COMPOSITE_TEACHER_REFLECTION": ["COMPOSITE_TEACHER_REFLECTION"],
 }
 
 try:
@@ -180,7 +204,46 @@ def _load_teacher_atoms(teacher_id: str) -> dict[str, list[dict]]:
 # CANONICAL.txt parser (persona atoms)
 # ---------------------------------------------------------------------------
 
-def _parse_canonical_txt(path: Path) -> list[dict]:
+# DEFECT 7 (composer-guard lane, fail-closed backstop): 546/3,521 primary
+# CANONICAL.txt banks ship malformed block headers — every even-numbered block
+# loses its "## " prefix and is absorbed into the prior atom body, leaking raw
+# atom-id labels ("INTEGRATION v06", "RECOGNITION v04") verbatim into reader
+# prose. The content-repair lane prepends "## " to those lines; this guard makes
+# the parser ALSO recognize a *bare* block header — a standalone "<TOKEN> vNN"
+# line whose next non-empty line is "---" — so even an un-repaired atom still
+# parses into the correct SEPARATE blocks instead of one merged body.
+#
+# Token set is the EXACT enumerated list from the fix-spec's header-repair regex
+# (COMPOSER_FRONTIER_FIX_SPEC_20260614.md DEFECT 7) so the guard recognizes the
+# same headers the repair script would write.
+import re as _re
+
+_BARE_BLOCK_HEADER_TOKENS = frozenset({
+    "HOOK", "SCENE", "STORY", "REFLECTION", "PIVOT", "EXERCISE", "INTEGRATION",
+    "THREAD", "TAKEAWAY", "PERMISSION", "COMPRESSION", "RECOGNITION",
+    "MECHANISM_PROOF", "TURNING_POINT", "EMBODIMENT", "COST_REVEAL", "RECKONING",
+})
+# A standalone bare header: <UPPER_TOKEN> v<digits>, nothing else on the line.
+_BARE_BLOCK_HEADER_RE = _re.compile(r"^([A-Z][A-Z_]*)\s+v\d+$")
+
+
+def _is_bare_block_header(stripped: str, next_nonempty: str) -> bool:
+    """True if ``stripped`` is a bare (no-"## ") block header for a known token.
+
+    The next non-empty line must be the ``---`` metadata/body delimiter — this is
+    the same structural signature the content-repair lane keys on, and it prevents
+    a grammatical mid-atom phrase (which is never followed by a lone ``---``) from
+    being mistaken for a header.
+    """
+    if next_nonempty.strip() != "---":
+        return False
+    m = _BARE_BLOCK_HEADER_RE.match(stripped)
+    if not m:
+        return False
+    return m.group(1) in _BARE_BLOCK_HEADER_TOKENS
+
+
+def _parse_canonical_txt(path: Path, *, slot_type: Optional[str] = None) -> list[dict]:
     """Parse atoms/persona/topic/TYPE/CANONICAL.txt into list of atom dicts.
 
     Format:
@@ -190,25 +253,61 @@ def _parse_canonical_txt(path: Path) -> list[dict]:
         ---
         prose body
         ---
+
+    Also tolerant of MALFORMED banks where the "## " prefix is missing from a
+    block header (DEFECT 7 data corruption): a standalone ``TYPE vNN`` line whose
+    next non-empty line is ``---`` is recognized as a bare block header and starts
+    a new block, so the un-repaired atom-id label never gets absorbed into the
+    prior block's body and leaked into reader prose.
     """
+    from phoenix_v4.planning.scene_atom_header_parser import attach_scene_metadata
+
     if not path.exists():
         return []
     text = path.read_text(encoding="utf-8")
+    raw_lines = text.splitlines()
     blocks: list[dict] = []
     current_id = ""
+    current_header = ""
     in_body = False
     body_lines: list[str] = []
     delimiter_count = 0
+    st_upper = (slot_type or "").strip().upper()
 
-    for line in text.splitlines():
+    def _flush_block() -> None:
+        nonlocal current_id, body_lines
+        if not current_id or not body_lines:
+            return
+        content = "\n".join(body_lines).strip()
+        if not content:
+            return
+        atom = {"atom_id": current_id, "content": content, "metadata": {}}
+        if st_upper == "SCENE" or current_id.upper().startswith("SCENE "):
+            atom = attach_scene_metadata(atom, f"## {current_id}")
+        blocks.append(atom)
+
+    def _next_nonempty(start_idx: int) -> str:
+        for j in range(start_idx + 1, len(raw_lines)):
+            if raw_lines[j].strip():
+                return raw_lines[j]
+        return ""
+
+    for i, line in enumerate(raw_lines):
         stripped = line.strip()
         if stripped.startswith("## "):
-            # Save previous block
-            if current_id and body_lines:
-                content = "\n".join(body_lines).strip()
-                if content:
-                    blocks.append({"atom_id": current_id, "content": content})
+            _flush_block()
+            current_header = stripped
             current_id = stripped.replace("## ", "").strip()
+            body_lines = []
+            in_body = False
+            delimiter_count = 0
+        elif _is_bare_block_header(stripped, _next_nonempty(i)):
+            # Malformed bank: header line lost its "## " prefix. Treat exactly
+            # like a "## " header so the raw atom-id label cannot be absorbed
+            # into the prior block body.
+            _flush_block()
+            current_header = stripped
+            current_id = stripped
             body_lines = []
             in_body = False
             delimiter_count = 0
@@ -219,19 +318,53 @@ def _parse_canonical_txt(path: Path) -> list[dict]:
         elif in_body:
             body_lines.append(line)
 
-    # Last block
-    if current_id and body_lines:
-        content = "\n".join(body_lines).strip()
-        if content:
-            blocks.append({"atom_id": current_id, "content": content})
-
+    _flush_block()
     return blocks
+
+
+def _load_composite_doctrine_atoms(
+    topic_id: str,
+    repo_root: Optional[Path] = None,
+) -> dict[str, list[dict]]:
+    """Load topic-scoped composite teacher doctrine/reflection from CANONICAL.txt."""
+    topic = (topic_id or "").strip()
+    if not topic:
+        return {}
+    root = (repo_root or REPO_ROOT) / "SOURCE_OF_TRUTH" / "composite_doctrine" / topic
+    atoms: dict[str, list[dict]] = {}
+    doctrine_blocks = _parse_canonical_txt(root / "CANONICAL.txt")
+    if doctrine_blocks:
+        atoms["COMPOSITE_TEACHER_DOCTRINE"] = doctrine_blocks
+    reflection_blocks = _parse_canonical_txt(root / "REFLECTION" / "CANONICAL.txt")
+    if reflection_blocks:
+        atoms["COMPOSITE_TEACHER_REFLECTION"] = reflection_blocks
+    if atoms:
+        logger.info(
+            "Loaded composite doctrine types %s for topic '%s'",
+            list(atoms.keys()),
+            topic,
+        )
+    return atoms
+
+
+def _pick_composite_pool(
+    composite_atoms: dict[str, list[dict]],
+    slot_type: str,
+) -> list[dict]:
+    """First non-empty composite pool for a beatmap/registry slot type."""
+    st = slot_type.strip().upper()
+    for key in _COMPOSITE_TYPE_MAP.get(st, [st]):
+        pool = composite_atoms.get(key, [])
+        if pool:
+            return pool
+    return []
 
 
 _KNOWN_SLOT_DIRS = frozenset({
     "HOOK", "SCENE", "STORY", "REFLECTION", "EXERCISE", "INTEGRATION",
     "TEACHER_DOCTRINE", "COMPRESSION", "PERMISSION", "PIVOT",
     "TAKEAWAY", "THREAD",
+    "ANGLE_DEFINITION", "ANGLE_CALLBACK",
 })
 
 
@@ -294,7 +427,7 @@ def _load_persona_atoms(
         if not canonical.exists():
             continue
         slot_type_upper = sub.name.upper()
-        parsed = _parse_canonical_txt(canonical)
+        parsed = _parse_canonical_txt(canonical, slot_type=slot_type_upper)
         if not parsed:
             continue
         if slot_type_upper in _KNOWN_SLOT_DIRS:
@@ -467,11 +600,19 @@ def resolve_book(
             # render output deterministic given (seed, ch_key, sec_key) and
             # preserves render-cache stability. Switching to union-pool semantics
             # would change seed→atom mapping and require a regeneration pass on
-            # any cached/shipped books. Content gaps that surface in this code
-            # path (e.g., ahjan TEACHING atoms unreachable when COMPRESSION pool
-            # is non-empty) are routed to Pearl_Editor + Pearl_Writer content
-            # migration ws's (e.g., ws_ahjan_teaching_atoms_migration_20260506),
-            # not to a code-side semantics flip.
+            # any cached/shipped books.
+            #
+            # For TEACHER_DOCTRINE the chain is now:
+            #   TEACHER_DOCTRINE → COMPRESSION → REFLECTION → TEACHING
+            # so teachers with an explicit TEACHER_DOCTRINE/ directory win
+            # over the legacy COMPRESSION/REFLECTION/TEACHING fallback.
+            # Teachers without TEACHER_DOCTRINE/ on disk still resolve via the
+            # legacy chain — backward-compatible.
+            # Content gaps that surface in this code path (e.g., teachers
+            # whose doctrine lives only under TEACHING/) are routed to
+            # Pearl_Editor + Pearl_Writer content migration ws's (e.g.,
+            # ws_ahjan_teaching_atoms_migration_20260506), not to a code-side
+            # semantics flip.
             if teacher_atoms and sec_type in _TEACHER_OVERLAY_TYPES:
                 atom_pool: list[dict] = []
                 for dir_name in _TEACHER_TYPE_MAP.get(sec_type, [sec_type]):

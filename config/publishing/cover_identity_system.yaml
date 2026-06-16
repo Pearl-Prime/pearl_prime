@@ -297,11 +297,14 @@ authors:
     motif_focus: [single_ink_stroke]
     type_quirk: "vertical author column on right edge"
 
-  junko:
+  miyuki:  # per OPD-111 — inherits zen_clarity brand from junko
     brand_id: zen_clarity
     signature_color: "#F2C14E"
     motif_focus: [knot]
     type_quirk: "title tracking +6%, author tracking +12%"
+
+  # Junko awaits new cosmic-coded brand_id in follow-up commission (Phase 5+)
+  # per OPD-111 §7.C item 1. Block removed here pending new brand commission.
 
   maat:
     brand_id: truth_compass
@@ -419,8 +422,8 @@ books:
     this_book_register: "the room after the door has closed, before the next thought"
     series: null
 
-  junko:
-    author_id: junko
+  miyuki:  # per OPD-111 — "The Loop Breaker" is Japanese contemplative/wabi-sabi register
+    author_id: miyuki
     title: "The Loop Breaker"
     subtitle: "How to Stop Overthinking and Quiet Your Racing Mind"
     topic: overthinking

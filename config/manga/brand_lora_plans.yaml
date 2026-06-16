@@ -33,6 +33,7 @@ brand_suffixes:
   body_memory: bm
   solar_return: so
   devotion_path: dp
+  heart_transmission: ht   # OPD-111 §7.C — Junko cosmic-channeling brand
 
 # Per-teacher character LoRA (face/body consistency across all visual media)
 character_loras:
@@ -48,13 +49,13 @@ character_loras:
     style_ref: stillness_press  # inherits brand art style
     notes: "South Asian male, warm expression, contemplative bearing; forest-refuge scenes use same face with earth-tone wardrobe"
 
-  joshin:
-    trigger_word: "joshin_cc"
+  kenjin:
+    trigger_word: "kenjin_cc"
     reference_images_needed: [front_portrait, three_quarter_view, profile_view, expression_sheet]
     training_steps: 1500
     ip_adapter_weight: 0.83
     style_ref: cognitive_clarity
-    notes: "Japanese-American female, precise gaze, zen authority"
+    notes: "Japanese-American male, austere bearing, roshi authority (Soto Zen)"
 
   pamela_fellows:
     trigger_word: "pamela_sw"
@@ -89,12 +90,26 @@ character_loras:
     notes: "Egyptian-coded female, regal bearing, shadow work intensity"
 
   junko:
-    trigger_word: "junko_rc"
+    # Per OPD-111 §7.C — Junko's cosmic-channeling brand is heart_transmission.
+    # Existing junko_rc trigger was wabi-sabi-coded — that visual register now
+    # belongs to miyuki below. Junko's visual register: luminous robes, light
+    # particles, hands raised receptively, soft golden-rose/blue palette,
+    # NO enso, NO ink-brush, NO kitchen-table setting. LoRA training itself
+    # is a Phase 5 deferred Pearl Star ComfyUI commission (operator-attended).
+    trigger_word: "junko_ht"
+    reference_images_needed: [front_portrait, three_quarter_view, profile_view, expression_sheet]
+    training_steps: 1500
+    ip_adapter_weight: 0.82
+    style_ref: heart_transmission
+    notes: "Japanese female channeler, luminous robes, light particles, receptive presence; LoRA assets AWAIT Phase 5 cosmic re-render commission"
+
+  miyuki:  # per OPD-111 — inherits former junko wabi-sabi visual register
+    trigger_word: "miyuki_rc"
     reference_images_needed: [front_portrait, three_quarter_view, profile_view, expression_sheet]
     training_steps: 1500
     ip_adapter_weight: 0.82
     style_ref: relational_calm
-    notes: "Japanese female, wabi-sabi simplicity, radical acceptance presence"
+    notes: "Japanese female, late 40s, Kyoto-coded, wabi-sabi simplicity, quiet steady presence, kitchen-table teacher register"
 
   master_wu:
     trigger_word: "wu_wc"
@@ -218,6 +233,17 @@ brand_style_loras:
     training_images: 20
     training_steps: 2000
     notes: "Flowing ornamental warmth with devotional motifs"
+
+  heart_transmission:
+    # OPD-111 §7.C — Junko's cosmic-channeling brand. Visual register: luminous
+    # gold-rose, soft cosmic blue, warm celestial light; soft halos, ascending
+    # light particles, hands raised receptively, open palms, starlight wash.
+    # Explicitly distinct from relational_calm wabi-sabi register (Miyuki).
+    # Asset curation + training itself is Phase 5 deferred Pearl Star ComfyUI commission.
+    trigger_word: "style_ht"
+    training_images: 20
+    training_steps: 2000
+    notes: "Luminous cosmic transmission, gold-rose and celestial blue, soft halos and light particles, transmissive receptive presence; AWAITS Phase 5 re-render commission"
 
   # ── Standard brands (style LoRAs only — no teacher character LoRAs) ──
   stabilizer: { trigger_word: "style_stab", training_images: 20, training_steps: 2000, notes: "Clinical harbor, slate/sky blue gradient" }

@@ -8,6 +8,7 @@ import pytest
 from phoenix_v4.rendering import teacher_wrapper
 from phoenix_v4.rendering.teacher_wrapper import (
     apply_wrapper,
+    join_wrapped,
     resolve_wrapper,
 )
 
@@ -109,3 +110,77 @@ def test_conclusion_wrapper_goes_to_suffix():
     assert suffix and not prefix, (
         f"conclusion should produce suffix only, got prefix={prefix!r} suffix={suffix!r}"
     )
+
+
+# ── join_wrapped: doctrine-intro stitch (follow-up to PR #1508) ──────────────
+
+
+def test_join_wrapped_inline_for_ellipsis_prefix():
+    """A continuation lead-in (intro wrapper, ends in '...') flows INLINE into the
+    body's opening sentence — no paragraph break orphaning the '...is...' lead-in."""
+    out = join_wrapped(
+        "What Ahjan keeps pointing toward is...",
+        "Every person carries the capacity for awakening. The work is to remove what covers it.",
+        "",
+    )
+    assert out == (
+        "What Ahjan keeps pointing toward is... "
+        "Every person carries the capacity for awakening. The work is to remove what covers it."
+    )
+    assert "\n\n" not in out
+    # The defining regression: an ellipsis lead-in must NOT sit above a blank line.
+    assert not re.search(r"\.\.\.\s*\n\n", out)
+
+
+def test_join_wrapped_inline_for_unicode_ellipsis_prefix():
+    """Unicode '…' lead-ins are treated the same as ASCII '...'."""
+    out = join_wrapped("For Ahjan, the work begins in the body…", "The body keeps the score.", "")
+    assert out == "For Ahjan, the work begins in the body… The body keeps the score."
+    assert "\n\n" not in out
+
+
+def test_join_wrapped_paragraph_for_label_prefix():
+    """A label-style prefix (exercise wrapper, no trailing ellipsis) keeps its own
+    paragraph — it should not run on into the body."""
+    out = join_wrapped("A practice from Ahjan: centering", "Find a quiet place and sit.", "")
+    assert out == "A practice from Ahjan: centering\n\nFind a quiet place and sit."
+
+
+def test_join_wrapped_suffix_is_closing_paragraph():
+    """Conclusion suffixes are appended as their own closing paragraph."""
+    out = join_wrapped("", "The doctrine body sits here.", "As Ahjan reminds us, forest is not a destination...")
+    assert out == "The doctrine body sits here.\n\nAs Ahjan reminds us, forest is not a destination..."
+
+
+def test_apply_wrapper_intro_does_not_dangle():
+    """End-to-end: a resolved intro lead-in for a named teacher joins inline, never
+    leaving a dangling '...' above a paragraph break (the TEACHER_DOCTRINE_INTRO bleed)."""
+    body = (
+        "Every person carries the capacity for awakening. This capacity is not earned "
+        "or given by another. The work is simply to remove what covers it."
+    )
+    spine_context = {
+        "teacher_id": "ahjan",
+        "tradition": "Theravada forest",
+        "tradition_short": "forest",
+        "teaching_lineage": "contemplative forest",
+    }
+    prefix, suffix = resolve_wrapper(
+        teacher_id="ahjan",
+        section_type="HOOK",
+        seed="tw_inline_test",
+        spine_context=spine_context,
+    )
+    out = apply_wrapper(
+        body,
+        teacher_id="ahjan",
+        section_type="HOOK",
+        seed="tw_inline_test",
+        spine_context=spine_context,
+    )
+    # HOOK → intro_wrapper → prefix only; every intro variant ends in an ellipsis.
+    assert prefix and not suffix
+    if prefix.rstrip().endswith("...") or prefix.rstrip().endswith("…"):
+        assert not re.search(r"\.\.\.\s*\n\n", out), "intro lead-in dangles above a paragraph break"
+        assert f"{prefix.rstrip()} " in out, "intro lead-in should join inline with a single space"
+    assert body.split(".")[0] in out  # doctrine body preserved verbatim

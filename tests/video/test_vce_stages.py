@@ -159,7 +159,7 @@ def test_pipeline_test_vce_001():
     r = subprocess.run(
         [PY, str(VID / "run_pipeline.py"), "--plan-id", "test-vce-001", "--fixtures-dir", str(FIX),
          "--format", "short", "--platforms", "youtube,tiktok", "--languages", "en,zh-CN", "--force",
-         "--no-job-check"],
+         "--no-job-check", "--skip-render"],
         cwd=REPO_ROOT,
         capture_output=True,
         text=True,

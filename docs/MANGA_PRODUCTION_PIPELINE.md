@@ -1,5 +1,7 @@
 # Manga production pipeline
 
+> **Routing (2026-05-29):** Use this doc for **`scripts/run_manga_pipeline.py`** smoke/weekly paths and `run_manga_chapter.py` backends. For **registry jobs + ITE**, use [MANGA_PIPELINE_COMPLETE_GUIDE.md](./MANGA_PIPELINE_COMPLETE_GUIDE.md). For **series setup + canonical DAG**, use [MANGA_PIPELINE_ONBOARDING.md](./MANGA_PIPELINE_ONBOARDING.md). **Render authority:** V5.1 — [docs/specs/MANGA_V5_LAYERED_ARCHITECTURE.md](./specs/MANGA_V5_LAYERED_ARCHITECTURE.md) (V4 paths below are legacy).
+
 ## Entry points
 
 | Step | Command / module |

@@ -28,6 +28,13 @@ from phoenix_v4.rendering.book_renderer import (
 # Slightly tweaked from the real Tanya/spiral leak (~210 chars / ~33 words) so
 # it clears both gates (>=120 chars AND >=30 words) and exercises the safety
 # net the way the production canary did.
+#
+# OPD-109 Phase 3 (2026-05-19): the calibration upgraded atom-sized paragraphs
+# (20-200 words) from keep=1 to keep=2 by default — the 53-word paragraph below
+# now falls into the atom bucket. Tests asserting the legacy keep=1 cap pass
+# the explicit `keep=1` kwarg OR set `PHOENIX_ATOM_PARAGRAPH_KEEP=1` so the
+# regression-protection intent is preserved. The default-behavior tests assert
+# the new keep=2 cap.
 _REPEATED_PARAGRAPH = (
     "Tanya delivers a campaign that underperforms expectations and the "
     "underperformance triggers a spiral about being replaced by someone "
@@ -71,16 +78,39 @@ def _build_book(repeats: int = 16, chapters: int = 12) -> str:
 
 
 def test_dedupes_long_repeat_to_default_keep_count() -> None:
+    """OPD-109 Phase 3: atom-sized paragraphs default to keep=2.
+
+    The 53-word `_REPEATED_PARAGRAPH` falls into the atom bucket (20-200 words),
+    so the default keep cap is 2. 14 occurrences are elided from the 16
+    spawned by the fixture.
+    """
     book = _build_book(repeats=16)
     assert book.count(_REPEATED_PARAGRAPH) == 16
 
     deduped, notes = _dedup_paragraphs_book_wide(book)
 
-    # Default keep is 1 (matches `_dedup_repeated_blocks` first-occurrence
-    # convention). 15 occurrences must be elided; test spec's cap of 2 is
-    # satisfied as a strict upper bound.
+    assert deduped.count(_REPEATED_PARAGRAPH) == 2
+    assert len(notes) == 14
+    for note in notes:
+        assert "book_wide_paragraph_dedupe" in note
+
+
+def test_dedupes_long_repeat_to_legacy_keep_one_under_explicit_override(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Legacy `keep=1` cap is still reachable via the env override.
+
+    `PHOENIX_ATOM_PARAGRAPH_KEEP=1` disables the OPD-109 Phase 3 atom bucket,
+    restoring the pre-Phase-3 single-occurrence cap. Regression protection
+    for production canaries that opt back in.
+    """
+    monkeypatch.setenv("PHOENIX_ATOM_PARAGRAPH_KEEP", "1")
+    book = _build_book(repeats=16)
+    assert book.count(_REPEATED_PARAGRAPH) == 16
+
+    deduped, notes = _dedup_paragraphs_book_wide(book)
+
     assert deduped.count(_REPEATED_PARAGRAPH) == 1
-    assert deduped.count(_REPEATED_PARAGRAPH) <= 2
     assert len(notes) == 15
     for note in notes:
         assert "book_wide_paragraph_dedupe" in note
@@ -114,16 +144,18 @@ def test_unique_paragraphs_preserved() -> None:
 
 
 def test_logs_elision_exactly_once_per_fingerprint(caplog: pytest.LogCaptureFixture) -> None:
+    """OPD-109 Phase 3: the log line now reports `kept_cap_upper_bound` (the
+    maximum keep across the per-paragraph buckets) so the operator can tell
+    whether the atom-bucket cap or the base cap drove the strip.
+    """
     book = _build_book(repeats=16)
     with caplog.at_level(logging.INFO, logger="phoenix_v4.rendering.book_renderer"):
         _dedup_paragraphs_book_wide(book)
-    # One log line per offending fingerprint (we have exactly one repeated
-    # paragraph in this fixture).
     matching = [r for r in caplog.records if "book-wide paragraph elision" in r.getMessage()]
     assert len(matching) == 1
     msg = matching[0].getMessage()
     assert "appeared 16 times" in msg
-    assert "kept 1" in msg
+    assert "kept_cap_upper_bound 2" in msg
 
 
 def test_keep_knob_override_via_kwarg() -> None:
@@ -171,9 +203,17 @@ def test_no_repeats_returns_text_unchanged_modulo_normalization() -> None:
     assert "Para B" in deduped
 
 
-def test_casing_and_whitespace_preserved_in_kept_paragraph() -> None:
-    # Two paragraphs that are byte-identical fingerprint after normalization
-    # but the kept (first) one has unusual casing/whitespace we should preserve.
+def test_casing_and_whitespace_preserved_in_kept_paragraph(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Casing/whitespace preservation regression test.
+
+    OPD-109 Phase 3: the 40-word `p1`/`p2` pair falls into the atom bucket,
+    where the default keep cap is 2 (both would survive). Restore the legacy
+    keep=1 contract for this test so the kept-verbatim assertion still bites
+    on the first occurrence's casing.
+    """
+    monkeypatch.setenv("PHOENIX_ATOM_PARAGRAPH_KEEP", "1")
     p1 = (
         "  TANYA   DELIVERS  a campaign   that underperforms expectations and "
         "the underperformance triggers a spiral about being replaced by "
@@ -202,28 +242,29 @@ def test_casing_and_whitespace_preserved_in_kept_paragraph() -> None:
 
 
 def test_clean_for_delivery_invokes_book_wide_dedupe() -> None:
+    """OPD-109 Phase 3: clean_for_delivery still routes through book-wide
+    dedup; the atom-sized `_REPEATED_PARAGRAPH` now lands at 2 occurrences
+    (atom-bucket keep=2) instead of 1.
+    """
     book = _build_book(repeats=16)
     gov: dict = {}
     out = clean_for_delivery(book, governance_report=gov)
-    # The book-wide pass is a safety net that runs AFTER the chapter-scoped
-    # `_dedup_repeated_blocks` (which already collapses intra-chapter repeats
-    # to one). What matters is that the final output has only 1 occurrence
-    # AND that the governance report records the elisions that this pass
-    # contributed beyond what intra-chapter dedupe did.
-    assert out.count(_REPEATED_PARAGRAPH) == 1
+    assert out.count(_REPEATED_PARAGRAPH) == 2
     assert "whole_book_dedupe_notes" in gov
     notes = gov["whole_book_dedupe_notes"]
     # Must be non-empty: chapter-scoped dedupe leaves at least one occurrence
     # per chapter standing (12 chapters in fixture), so the book-wide pass
-    # must elide >= 11 of them. Exact count depends on how the fixture
-    # distributes repeats across chapters.
+    # must elide >= 10 of them after the atom-bucket retention.
     assert len(notes) >= 1
     for note in notes:
         assert "book_wide_paragraph_dedupe" in note
 
 
 def test_clean_for_delivery_no_governance_report_does_not_crash() -> None:
+    """Smoke: clean_for_delivery without a governance report must not raise.
+
+    OPD-109 Phase 3: with atom-bucket keep=2, the final count is 2 (not 1).
+    """
     book = _build_book(repeats=16)
-    # Must not raise when governance_report is None.
     out = clean_for_delivery(book)
-    assert out.count(_REPEATED_PARAGRAPH) == 1
+    assert out.count(_REPEATED_PARAGRAPH) == 2

@@ -1,0 +1,15 @@
+# Archetype exceptions — per-archetype overrides for the rare cases where
+# the (base → framing → subject → genre) chain doesn't fit.
+# Per MANGA_LAYER_RENDER_CONTRACT_SPEC.md §5.6.
+
+schema_version: "1.0.0"
+type: "archetype_exception"
+exceptions:
+
+  window_light_threshold:
+    base: subject_contract.character_silhouette_back
+    genre: healing
+    overrides:
+      subject_must_not_touch_edge: false
+      placement_pinned: [5, 30, 45, 95]
+    rationale: "Composition signature — left-bleed silhouette against window light; intentional edge contact"

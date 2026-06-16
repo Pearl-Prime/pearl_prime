@@ -3,6 +3,8 @@ SUPERSEDED 2026-05-07 by MANGA-LAYERED-PIPELINE-V2-01
 cap entry in docs/PEARL_ARCHITECT_STATE.md (PR #924 merge
 SHA ec46a72238). This stub is preserved for archaeology.
 Authoritative V2 scope: see cap entry.
+Manga RENDER gold template: V5.1 only — docs/specs/MANGA_V5_LAYERED_ARCHITECTURE.md
+(does not replace V2 individuation; both apply).
 ---
 
 # Manga Layered Pipeline V2 — Implementation Pointer (2026-05-07)

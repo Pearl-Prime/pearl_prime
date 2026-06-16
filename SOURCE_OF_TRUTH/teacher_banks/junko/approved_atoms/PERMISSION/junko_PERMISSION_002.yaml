@@ -1,7 +1,9 @@
 atom_id: junko_PERMISSION_002
-band: universal
-body: You do not have to process everything before you act. Some things are understood only through the doing.
+band: 2
+body: It is permitted to receive what you cannot explain. The explanation is a slower process than the receiving.
 teacher:
   teacher_id: junko
-  source_refs: []
-  synthesis_method: doctrine_grounded
+  source_refs:
+  - teachers/junko/junko_doctrine_notes.rtf
+  - teachers/junko/junko_yt.rtf
+  synthesis_method: doctrine_grounded_v1

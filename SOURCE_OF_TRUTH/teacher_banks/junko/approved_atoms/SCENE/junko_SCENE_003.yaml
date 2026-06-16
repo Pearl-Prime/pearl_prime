@@ -2,8 +2,10 @@ atom_id: junko_SCENE_003
 band: 2
 teacher:
   teacher_id: junko
-  source_refs: []
-  synthesis_method: authored_v1
-body: You are at work. A comment lands wrong. You feel the sting. Instead of the story,
-  you feel your body. The sensation is clear, sharp, honest. It is not the story.
-scene_type: meditation
+  source_refs:
+  - teachers/junko/junko_doctrine_notes.rtf
+  - teachers/junko/junko_yt.rtf
+  synthesis_method: doctrine_grounded_v1
+body: It was a private session. The woman across from me had not said what she came for. She had her hands turned up on her
+  thighs, the way the room does when the room is ready. Light moved across her chest from her throat to her solar plexus.
+  She did not see it. Her body did. The body always sees it first.

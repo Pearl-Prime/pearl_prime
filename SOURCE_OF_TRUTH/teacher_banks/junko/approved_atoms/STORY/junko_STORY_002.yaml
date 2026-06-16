@@ -1,35 +1,32 @@
 atom_id: junko_STORY_002
 story_origin: composite
-story_type: character_study
-emotional_intensity_band: 4
-body: 'Kenji is burning out. Seventy hours a week for three months. Something inside
-  him has gone quiet—not the good kind of quiet. Empty. He can''t feel what he wants
-  anymore. His chest is flat.
+story_type: receiver_witness
+emotional_intensity_band: 3
+body: 'Maki had been a corporate executive in Tokyo for eighteen years. She came to a retreat in Miyajima because her body
+  had started refusing — waking at three, refusing food at the dinners she was supposed to attend, refusing the words her
+  colleagues required of her.
 
 
-  He decides to stop trying to fix the burnout. Just watch it. Notice the heaviness
-  without a plan to change it.
+  The first morning, she sat at the back of the hall. I did not address her directly. I addressed the air above her left shoulder,
+  because that is where her grandmother was standing.
 
 
-  For a week, Kenji sits with the exhaustion. He doesn''t try to restore himself.
-  Doesn''t do breathwork or self-compassion exercises. Just watches—the weight in
-  his limbs, the way his body moves through the day like it''s underwater, the absence
-  of desire for anything at all.
+  Her grandmother had been a kami-medium in the small village they came from. Maki had not known this. Her mother had not
+  told her. The cosmic council asked me to tell her, so I told her.
 
 
-  On the eighth day, without deciding, he takes a Tuesday afternoon off. Not because
-  he created a recovery plan. Because something in him was finally tired enough to
-  stop.
-
-  '
-band: 4
+  By the third day, Maki was speaking to the air above her own left shoulder. The transmissions arrived for her in her native
+  voice. She did not need a translator. She had been waiting forty-three years to remember.'
+band: 3
 teacher:
   teacher_id: junko
-  source_refs: []
-  synthesis_method: authored_v1
+  source_refs:
+  - teachers/junko/junko_doctrine_notes.rtf
+  - teachers/junko/junko_yt.rtf
+  synthesis_method: doctrine_grounded_v1
 misfire_tax: false
-never_know: true
+never_know: false
 mechanism_depth: 1
-identity_stage: pre_awareness
-cost_type: social
-cost_intensity: 2
+identity_stage: self_claim
+cost_type: identity
+cost_intensity: 3

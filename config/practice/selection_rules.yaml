@@ -1,8 +1,12 @@
 # config/practice/selection_rules.yaml
 # Deterministic practice selection for EXERCISE backstop and slot_07_practice.
 # No distribution/mix percentages here; those come in a later config.
+#
+# v2 (2026-06-10, cap entry EXERCISE-COMPONENT-SCHEMA-LIFT-01): adds
+# component_variant_by_format mapping so each runtime format selects
+# components.<slot>.full vs .lean based on word/duration budget.
 
-version: 1
+version: 2
 
 defaults:
   duration_seconds:
@@ -56,3 +60,46 @@ mix_policies:
 angle_affinity:
   enabled: false
   mapping: {}
+
+# v2: per-format component variant selection (full vs lean)
+# Authority: cap entry EXERCISE-COMPONENT-SCHEMA-LIFT-01
+# Spec: specs/PRACTICE_ITEM_SCHEMA.md §2.5
+#
+# Rule: a runtime format reads components.<slot>.full if its duration_minutes ≥ 120
+#       AND the format isn't a compact_* variant; else reads components.<slot>.lean.
+#
+# Rationale: "lean" was authored to fit tight word budgets (intro 8-15 words vs full 40-70).
+# "full" requires breathing room — formats below 2h have too little word budget per chapter
+# to carry the full 5-component shape AND the other 9 grid slots (HOOK/STORY/REFL/INTEG/etc).
+component_variant_by_format:
+  enabled: true
+  default_variant: lean   # if format is not in the explicit map below, default to lean
+  variant_by_format:
+    # full — long-form formats with ≥120 duration_minutes + non-compact spine
+    extended_book_2h: full
+    deep_book_4h: full
+    deep_book_6h: full
+    # lean — short-form, compact, and group-A formats (tight word budget per chapter)
+    micro_book_15: lean
+    micro_book_20: lean
+    short_book_30: lean
+    standard_book: lean
+    compact_book_5ch_15min: lean
+    compact_book_5ch_20min: lean
+    compact_book_8ch_30min: lean
+    five_min_practice: lean
+    pocket_guide: lean
+    ten_things_to_do: lean
+    symptom_to_action_atlas: lean
+    daily_text_audio_companion: lean
+    crisis_cards: lean
+    weekly_challenge_pack: lean
+    faq_audiobook: lean
+    myth_vs_mechanism: lean
+    protocol_library: lean
+  # Fallback policy when the practice item has only one variant authored
+  # (e.g. legacy v1 manual entries or partial v2 items)
+  missing_variant_fallback:
+    full_requested_lean_only: lean   # if format wants full but only lean exists, use lean
+    lean_requested_full_only: full   # if format wants lean but only full exists, use full
+    both_missing: text               # if neither variant present, fall back to flat `text` field

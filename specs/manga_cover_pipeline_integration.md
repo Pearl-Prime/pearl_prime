@@ -1,6 +1,8 @@
 # Manga Cover Pipeline Integration Spec
 
-**Status:** DRAFT — Pearl_Research + Pearl_Architect  
+> **ASPIRATIONAL (2026-05-29):** Cover engine suite (`specs/manga_cover_*.md`) — minimal runtime wiring per [docs/MANGA_PIPELINE_AUDIT_2026-04-26.md](../docs/MANGA_PIPELINE_AUDIT_2026-04-26.md). Book covers use `config/authoring/author_cover_art_registry.yaml` (book axis); manga per-book covers = Pearl Star FLUX + PIL per COVER-REGISTRY-01. Indexed under "Manga cover + visual QC specs" in [docs/DOCS_INDEX.md](../docs/DOCS_INDEX.md).
+
+**Status:** DRAFT — Pearl_Research + Pearl_Architect (ASPIRATIONAL — see banner)  
 **Date:** 2026-04-18  
 **Scope:** Integration of FLUX-based manga cover generation into the Phoenix Omega
 production pipeline — pipeline stage definition, function API, CLI integration,

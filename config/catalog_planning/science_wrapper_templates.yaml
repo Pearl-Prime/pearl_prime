@@ -1,0 +1,132 @@
+# Science Wrapper Templates
+# Slot variables: {RESEARCHER}, {FIELD}, {FIELD_SHORT}, {STUDY},
+#                 {FINDING}, {MECHANISM}
+# Authority: docs/PEARL_PRIME_BESTSELLER_WRITING_OVERLAY_SPEC.md
+#            "Voice Architecture: One Author + Wrappers";
+#            cap BESTSELLER-FIT-PLAN-VOICE-DOCTRINE-V1-01.
+# Used by: content atom science-framing injection (Phase-2 resolver; sibling of
+#          phoenix_v4/rendering/teacher_wrapper.py). This file is a TEMPLATE
+#          config (data, not code) and is shipped in Phase 1; the resolver that
+#          consumes it is a Phase-2 build (ws_pearl_dev_science_wrapper_resolver_20260612).
+#
+# Doctrine (mirrors teacher_wrapper): the ONE author REFERENCES research; the
+# author never speaks AS the researcher. Science framing is third-person-citing,
+# never first-person-as-scientist. The author-I that wraps a FINDING stays the
+# orchestrating narrator of OPD-20260606-005 — it points at the study, it does
+# not become the lab. Per the ratified voice-zone table, science framing is
+# applied INSIDE the slot whose zone already governs (e.g. a FINDING cited in a
+# REFLECTION stays authorial-I; a FINDING that opens a STORY stays third-person
+# omniscient). The wrapper supplies attribution, never a new speaker.
+
+# ── Named mode ──────────────────────────────────────────────────────────────
+# Researcher / study is named explicitly. Use when the brand strategy and the
+# claim's provenance support named attribution (a real, citable study).
+# Anti-fabrication: named mode requires a real {STUDY} + {RESEARCHER}; if either
+# is unknown, fall back to generalized mode. Never invent a researcher or study.
+
+named:
+  intro_wrapper:
+    pattern: "According to {RESEARCHER}, {FIELD_SHORT} research shows {FINDING}..."
+    variants:
+      - "In {RESEARCHER}'s {STUDY}, the data point to one thing..."
+      - "Drawing on {RESEARCHER}'s work in {FIELD}, we now know that..."
+      - "{RESEARCHER} found something the body already suspected..."
+      - "What {RESEARCHER}'s {STUDY} measured was precise: {FINDING}..."
+      - "Where {RESEARCHER}'s reading of {FIELD_SHORT} departs from intuition is here..."
+      - "Across {RESEARCHER}'s {FIELD} research, the through-line is {MECHANISM}..."
+    slot_requirements: [RESEARCHER, FINDING]
+
+  exercise_wrapper:
+    pattern: "A practice grounded in {RESEARCHER}'s {STUDY}"
+    variants:
+      - "A practice the research behind {RESEARCHER}'s {STUDY} supports"
+      - "{RESEARCHER}'s finding, turned into something you can do"
+    slot_requirements: [RESEARCHER, STUDY]
+
+  conclusion_wrapper:
+    pattern: "As {RESEARCHER}'s {STUDY} suggests, {MECHANISM} is not the whole story..."
+    variants:
+      - "{RESEARCHER}'s work in {FIELD_SHORT} points toward a single, usable truth..."
+      - "The {FIELD_SHORT} evidence, as {RESEARCHER} frames it, invites..."
+    slot_requirements: [RESEARCHER, FIELD_SHORT, MECHANISM]
+
+# ── Generalized mode ─────────────────────────────────────────────────────────
+# No named researcher / study. Use the field and the converged finding.
+# Preferred for most science-framed output (provenance is a body of work, not
+# one citable paper).
+#
+# Anti-patterns (never use in generalized mode):
+#   ✗ "Dr. X proved…"
+#   ✗ "A study I read once…"
+#   ✗ "Scientists have definitively shown…" (overclaim)
+#
+# Required replacements:
+#   ✓ "Research in [Field] consistently finds…"
+#   ✓ "The [Field] evidence points toward…"
+#   ✓ "Across studies, [Field] keeps showing…"
+
+generalized:
+  intro_wrapper:
+    pattern: "Research in {FIELD} consistently finds {FINDING}..."
+    variants:
+      - "The {FIELD} evidence points toward {MECHANISM}..."
+      - "Within {FIELD_SHORT}, the data have long pointed to one thing..."
+      - "Across studies, {FIELD_SHORT} keeps showing {FINDING}..."
+      - "Rooted in {FIELD} research, this holds that {MECHANISM}..."
+    slot_requirements: [FIELD]
+
+  exercise_wrapper:
+    pattern: "A practice grounded in {FIELD} research"
+    variants:
+      - "Drawn from {FIELD_SHORT} findings: {FINDING}"
+      - "The {FIELD} approach, turned into a single small action"
+      - "A {FIELD_SHORT} technique the evidence supports"
+    slot_requirements: [FIELD]
+
+  conclusion_wrapper:
+    pattern: "What the {FIELD} research keeps returning to is {MECHANISM}..."
+    variants:
+      - "At the heart of {FIELD_SHORT} is a simple, repeatable finding..."
+      - "{FIELD} does not promise certainty — only a direction worth trusting..."
+      - "What the {FIELD_SHORT} evidence points toward is {FINDING}..."
+    slot_requirements: [FIELD, FIELD_SHORT, MECHANISM]
+
+# ── Composite mode ───────────────────────────────────────────────────────────
+# No specific researcher, no single field. Draws from converging evidence across
+# disciplines. Use for universal / cross-disciplinary books.
+
+composite:
+  intro_wrapper:
+    pattern: "Across disciplines, the research converges on one finding..."
+    variants:
+      - "Whether in neuroscience, psychology, or physiology, the evidence agrees..."
+      - "From multiple fields of study, this mechanism keeps surfacing..."
+      - "The research, the ancient practices, and the lived experience all point here..."
+    slot_requirements: []
+
+  exercise_wrapper:
+    pattern: "A practice supported across several fields of research"
+    variants:
+      - "A practice the converging evidence supports"
+      - "An exercise drawn from contemplative and clinical research alike"
+    slot_requirements: []
+
+  conclusion_wrapper:
+    pattern: "What the evidence across fields converges on is this..."
+    variants:
+      - "Across disciplines and decades, the finding is the same..."
+      - "Whether measured in the lab or felt in the body, the direction holds..."
+    slot_requirements: []
+
+# ── Slot registry ────────────────────────────────────────────────────────────
+# Maps a science-anchor id → default slot values for named mode.
+# Populated from the catalog row / atom CANONICAL.txt at generation time.
+# Override per-book in catalog row or atom CANONICAL.txt.
+# Anti-fabrication: slot_defaults are FIELD-level only; named {RESEARCHER}/{STUDY}
+# must be supplied per-book from a real citation, never defaulted.
+
+slot_defaults:
+  FIELD: "affective neuroscience and stress physiology"
+  FIELD_SHORT: "stress-physiology"
+  MECHANISM: "the body's threat-and-safety response"
+  FINDING: "naming a feeling reduces its physiological charge"

@@ -1,9 +1,10 @@
 # Locale Voice Routing — TTS provider chain per locale.
-# CJK: CosyVoice2 (Pearl Star) → Edge-TTS → ElevenLabs
-# EN/EU: ElevenLabs → Edge-TTS
+# CJK:   CosyVoice2 (Pearl Star) → Edge-TTS → ElevenLabs
+# en-US: CosyVoice2 (Pearl Star) → Edge-TTS → ElevenLabs  ($0-first; ElevenLabs demoted to last-resort)
+# EU:    ElevenLabs → Edge-TTS   (hu-HU hard-pinned to ElevenLabs; see hard_rules)
 # Authority: docs/VOICE_PERSONA_TOPIC_RESEARCH.md
 schema_version: 1
-last_updated: "2026-04-08"
+last_updated: "2026-06-12"
 
 cjk_locales:
   ja-JP:
@@ -44,8 +45,10 @@ cjk_locales:
 
 en_eu_locales:
   en-US:
-    provider_chain: [elevenlabs, edge_tts]
+    provider_chain: [cosyvoice2, edge_tts, elevenlabs]
+    cosyvoice2_language: "en"
     edge_tts_default: "en-US-JennyNeural"
+    notes: "$0-first (roadmap B.4 P1). CosyVoice2 primary, Edge-TTS fallback, ElevenLabs last-resort only. Matches CJK chains."
 
   de-DE:
     provider_chain: [elevenlabs, edge_tts]
@@ -103,7 +106,9 @@ hard_rules:
   - locale: zh-HK
     rule: "cosyvoice2_language MUST be 'yue' (Cantonese). NEVER 'zh' (Mandarin)."
   - locale: hu-HU
-    rule: "ElevenLabs mandatory. No Google Neural2 exists for Hungarian."
+    rule: "ElevenLabs mandatory. No Google Neural2 exists for Hungarian. Do NOT flip to CosyVoice2-first."
   - locale: zh-CN
     rule: "MCN distribution required. Findaway cannot reach mainland China."
-  - rule: "ElevenLabs stays available as fallback for ALL locales."
+  - locale: en-US
+    rule: "$0-first (roadmap B.4 P1): provider_chain MUST be cosyvoice2-first. ElevenLabs is last-resort fallback only, NEVER primary. Paid-first path is retired."
+  - rule: "ElevenLabs stays available as final-fallback for ALL locales, but is NEVER the primary engine for CJK or en-US."

@@ -67,18 +67,24 @@ jobs:
             echo "Issue #$EXISTING already open for week $WEEK — skipping." >> $GITHUB_STEP_SUMMARY
             exit 0
           fi
+          {
+            echo "## Stale Branch Prune Candidates"
+            echo ""
+            cat artifacts/stale_branches.md
+            echo ""
+            echo "---"
+            echo "**Workflow run:** ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+            echo ""
+            echo "> ⚠️ **Do NOT auto-delete.** Operator reviews this list and prunes manually via \`git push origin --delete <branch>\`."
+            echo "> Check each branch for any open PRs or unpushed work before deleting."
+            echo ""
+            echo "**Recovery is always possible** — the daily auto-cleanup workflow (\`cleanup-stale-worktrees.yml\`) tag-archives every branch before deletion. Restore any \`archive/<branch>-<date>\` with:"
+            echo '```bash'
+            echo "git fetch origin --tags"
+            echo "git checkout -b recovered/<name> archive/<branch>-<date>"
+            echo '```'
+          } > /tmp/issue_body.md
           gh issue create \
             --title "Branch hygiene — stale branch prune candidates ($(date -u +%Y-%m-%d), W$WEEK)" \
-            --body "$(cat <<BODY
-## Stale Branch Prune Candidates
-
-$(cat artifacts/stale_branches.md)
-
----
-**Workflow run:** ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
-
-> ⚠️ **Do NOT auto-delete.** Operator reviews this list and prunes manually via \`git push origin --delete <branch>\`.
-> Check each branch for any open PRs or unpushed work before deleting.
-BODY
-)" \
+            --body-file /tmp/issue_body.md \
             --label maintenance

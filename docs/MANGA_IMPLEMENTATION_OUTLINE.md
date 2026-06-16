@@ -5,9 +5,15 @@ Use this as the operational bridge between the spec suite and real code.
 
 **Authority:** [specs/AI_MANGA_PIPELINE_SUMMARY.md](/Users/ahjan/phoenix_omega/specs/AI_MANGA_PIPELINE_SUMMARY.md)
 
+**Render (current):** [docs/specs/MANGA_V5_LAYERED_ARCHITECTURE.md](/Users/ahjan/phoenix_omega/docs/specs/MANGA_V5_LAYERED_ARCHITECTURE.md) (V5.1) + [docs/MANGA_V5_CATALOG_ROLLOUT_PLAN.md](/Users/ahjan/phoenix_omega/docs/MANGA_V5_CATALOG_ROLLOUT_PLAN.md) (scale milestones; continuity-state generator = non-negotiable unlock).
+
+**Catalog SSOT (live):** `config/source_of_truth/manga_series_plans/` (**1,350** series, 5 locales) + `config/source_of_truth/manga_book_plans/` (**18,900** episodes). Phase 2X executed — see [specs/MANGA_CATALOG_RECONCILIATION_SPEC.md](/Users/ahjan/phoenix_omega/specs/MANGA_CATALOG_RECONCILIATION_SPEC.md). **Do not replan:** Layer 1 fan-out cells 444/444 (PR #1355); generate per [docs/GLOBAL_CATALOG_FANOUT_EXECUTION_PLAN.md](/Users/ahjan/phoenix_omega/docs/GLOBAL_CATALOG_FANOUT_EXECUTION_PLAN.md).
+
+**CLI routing:** [docs/MANGA_PIPELINE_ONBOARDING.md](/Users/ahjan/phoenix_omega/docs/MANGA_PIPELINE_ONBOARDING.md) (chapter DAG) · [docs/MANGA_PRODUCTION_PIPELINE.md](/Users/ahjan/phoenix_omega/docs/MANGA_PRODUCTION_PIPELINE.md) (smoke/weekly) · [docs/MANGA_PIPELINE_COMPLETE_GUIDE.md](/Users/ahjan/phoenix_omega/docs/MANGA_PIPELINE_COMPLETE_GUIDE.md) (registry/ITE).
+
 ## Series catalog band (6–18)
 
-`config/manga/manga_brand_series_plan.yaml` encodes **simultaneous** pacing via `active_series_target`, `max_active_series`, and `new_series_per_year`. For long-run portfolio depth, `global_defaults.target_series_catalog_min` / `target_series_catalog_max` (owner band **6–18** series per teacher brand over planning horizons) document the approved range; `scripts/manga/validate_manga_series_catalog_bounds.py` checks that per-brand caps stay consistent with that ceiling.
+`config/manga/manga_brand_series_plan.yaml` encodes **simultaneous** pacing via `active_series_target`, `max_active_series`, and `new_series_per_year` (**legacy 13/37 teacher-mode file** — do not use for 37-brand SSOT; use `config/manga/canonical_brand_list.yaml` + `config/source_of_truth/manga_series_plans/`). For long-run portfolio depth, `global_defaults.target_series_catalog_min` / `target_series_catalog_max` (owner band **6–18** series per teacher brand over planning horizons) document the approved range; `scripts/manga/validate_manga_series_catalog_bounds.py` checks that per-brand caps stay consistent with that ceiling.
 
 ## System Shape
 

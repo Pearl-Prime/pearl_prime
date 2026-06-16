@@ -119,6 +119,66 @@ def test_bridge_memory_blocks_repeated_exact_phrase() -> None:
     assert memory.phrase_used_book(first["text"])
 
 
+def test_within_slot_bridge_no_cross_chapter_repeat_on_degenerate_pairs() -> None:
+    """LEVER-B: a within-slot bridge must not recur across chapters when fresh
+    variants remain -- even at the degenerate atom_pair pattern that previously
+    pinned every call to one shape bucket.
+
+    Before the fix, ``shape_idx = atom_pair_index % len(shape_names)`` sent every
+    atom_pair divisible by len(shape_names) to ``shape_names[0]`` in EVERY chapter,
+    so the same STORY bridge text ('Same body. Different door.') recurred 8x
+    book-wide in deep_book_6h. Folding chapter_index into the bucket choice + a
+    hard book-level no-repeat preference must yield distinct texts here.
+    """
+    state = cc.WithinSlotRotationState()
+    # All atom_pairs are multiples of 3 (== len(STORY shape buckets)) so the OLD
+    # code returned shape_names[0] for every one of them.
+    degenerate = [(1, 9), (2, 21), (4, 3), (5, 30), (8, 3), (9, 9), (10, 12), (11, 36)]
+    outs = []
+    for ch, ap in degenerate:
+        out = cc._bridge_within_slot(
+            prev_atom="The body keeps the score in real time and never lies.",
+            next_atom="She froze at her desk and the cursor blinked back at her.",
+            slot_type="STORY",
+            atom_pair_index=ap,
+            chapter_index=ch,
+            rotation_state=state,
+        )
+        assert out  # bridge never goes silent
+        outs.append(out)
+    # No exact text may repeat across these chapters while the STORY pool
+    # (49 distinct variants across 3 shape buckets) has fresh entries.
+    assert len(set(outs)) == len(outs), f"cross-chapter repeat: {outs}"
+
+
+def test_within_slot_legacy_seed_only_path_is_deterministic() -> None:
+    """Backward-compat: with no rotation state the within-slot selector stays a
+    pure deterministic seed-only pick (the LEVER-B pool-widening only engages
+    when a rotation state is present)."""
+    prev = cc._WITHIN_SLOT_ROTATION_TLS
+    cc._WITHIN_SLOT_ROTATION_TLS = None
+    try:
+        a = cc._bridge_within_slot(
+            prev_atom="a body sentence long enough to survive cleaning",
+            next_atom="She froze at the desk and the cursor blinked at her.",
+            slot_type="STORY",
+            atom_pair_index=0,
+            chapter_index=3,
+            rotation_state=None,
+        )
+        b = cc._bridge_within_slot(
+            prev_atom="a body sentence long enough to survive cleaning",
+            next_atom="She froze at the desk and the cursor blinked at her.",
+            slot_type="STORY",
+            atom_pair_index=0,
+            chapter_index=3,
+            rotation_state=None,
+        )
+        assert a and a == b
+    finally:
+        cc._WITHIN_SLOT_ROTATION_TLS = prev
+
+
 def test_bridge_memory_limits_same_stem_density() -> None:
     memory = cc.BridgeMemory()
     memory.register(
@@ -226,3 +286,123 @@ def test_compose_chapter_prose_still_returns_valid_output() -> None:
         bridge_memory=cc.BridgeMemory(),
     )
     assert isinstance(out, str) and len(out) > 80
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# DEFERRED-LANE bridge_bank (2026-06-15): the data-driven 'Ahead of you:' thread
+# bank was starved (served 0x in the pilot books) because the shared book-level
+# BridgeMemory was saturated with the synthetic "variant-N" disambiguator stem and
+# the structural-root hard-cap, so every thread_fallback candidate scored -10_000
+# and the selector fell through to the hardcoded literal pool.
+# ─────────────────────────────────────────────────────────────────────────────
+
+
+def test_synthetic_variant_stems_are_dropped_at_collection() -> None:
+    # The bank carries a synthetic "variant-N" stem alongside each real semantic stem.
+    # It must NOT survive into the candidate dict (otherwise it poisons shared memory).
+    cands = cc._collect_bridge_candidates(
+        bridge_type="thread_fallback",
+        emotional_job="recognition",
+        chapter_position="early",
+    )
+    assert cands, "thread_fallback recognition bank should have candidates"
+    for c in cands:
+        assert not any(
+            cc._SYNTHETIC_VARIANT_STEM_RE.match(s) for s in c["stems"]
+        ), f"synthetic variant stem leaked into {c['stems']!r}"
+    # Real semantic stems are still present (dedup signal preserved).
+    assert any(c["stems"] for c in cands), "real semantic stems must survive"
+
+
+def test_synthetic_variant_stem_does_not_block_fresh_candidate() -> None:
+    # Registering "variant-1" (as an earlier slot of any bridge type would) must NOT
+    # veto a thread candidate that only shares that synthetic token.
+    memory = cc.BridgeMemory()
+    memory.register(
+        chapter_index=0,
+        phrase="some earlier bridge",
+        shape="direct_assertion",
+        stems=["variant-1"],  # synthetic token registered by an earlier slot
+        roots=["recognition"],
+        family_key="after_opening|recognition",
+    )
+    fresh = {
+        "text": "Ahead of you: a genuinely fresh thread-forward sentence.",
+        "shape": "question_turn",
+        "stems": ["ask useful next question"],  # real stem, never used
+        "roots": ["recognition"],
+        "scene_bias": [],
+        "position_bias": "any",
+    }
+    score = cc._score_bridge_candidate(
+        fresh,
+        chapter_index=1,
+        total_chapters=12,
+        bridge_memory=memory,
+        bridge_family="thread_fallback|recognition",
+        topic_keywords={"pattern"},
+    )
+    assert score > -9999.0, "fresh candidate must not be vetoed by a synthetic stem"
+
+
+def test_data_driven_thread_bank_actually_serves_across_book() -> None:
+    # Regression guard for the starvation: across a 12-chapter book sharing one
+    # BridgeMemory (as a real render does), the data-driven 'Ahead of you:' bank
+    # must serve at least a few chapters rather than falling 100% to the literal pool.
+    memory = cc.BridgeMemory()
+    roles = [
+        "recognition", "destabilization", "reframe", "stabilization",
+        "integration", "recognition", "mechanism", "reframe",
+        "integration", "stabilization", "recognition", "integration",
+    ]
+    served = 0
+    for ci in range(12):
+        thread = cc._fallback_thread(
+            "seeing the pattern before defending it",
+            chapter_index=ci,
+            total_chapters=12,
+            emotional_job=roles[ci],
+            bridge_memory=memory,
+            book_seed="book-A",
+            persona_id="p",
+            topic_id="anxiety",
+        )
+        if thread.startswith("Ahead of you:"):
+            served += 1
+    assert served >= 2, f"data-driven thread bank served only {served}/12 (starved)"
+
+
+def test_thread_bank_preserves_book_distinct_dedup() -> None:
+    # #1589 guard: even with the bank serving, no exact thread phrase repeats within
+    # a book, and two books (different seeds) diverge.
+    def run(seed: str) -> list[str]:
+        memory = cc.BridgeMemory()
+        roles = [
+            "recognition", "destabilization", "reframe", "stabilization",
+            "integration", "recognition", "mechanism", "reframe",
+            "integration", "stabilization", "recognition",
+        ]
+        out = []
+        for ci in range(11):  # exclude final chapter (returns "")
+            out.append(
+                cc._fallback_thread(
+                    "seeing the pattern before defending it",
+                    chapter_index=ci,
+                    total_chapters=12,
+                    emotional_job=roles[ci],
+                    bridge_memory=memory,
+                    book_seed=seed,
+                    persona_id="p",
+                    topic_id="anxiety",
+                )
+            )
+        return out
+
+    a = run("book-A")
+    b = run("book-B")
+    # No exact repeat within a book (book-distinct dedup intact).
+    assert len(set(a)) == len(a), "thread phrase repeated within a single book"
+    # Determinism for a fixed seed.
+    assert run("book-A") == a
+    # Two different books diverge (cross-book divergence preserved).
+    assert sum(1 for x, y in zip(a, b) if x == y) < len(a)

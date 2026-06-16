@@ -397,4 +397,17 @@ Pearl_Int coordinates with sister agents:
 - Check `.env` and `.env.example` for current state
 - Run the integration health check
 - Ask the user before writing any credential
+
+---
+
+## Service-specific runbooks (READ BEFORE touching that service)
+
+When a task involves any of these, read the dedicated runbook FIRST — they contain known traps that have wasted hours of agent time.
+
+- **Cloudflare Pages deploys** (brand-wizard-app / phoenix-command / brand-admin-onboarding): `skills/pearl-int/references/cloudflare_pages_deploy.md`. **TL;DR: do NOT run `wrangler pages deploy` from a laptop. Use the GitHub Actions workflow — push to main → workflow auto-fires → live in ~3 min.** Pages projects live in a Cloudflare account this email cannot access via local OAuth; only the CI's repo secret can deploy.
+- **Pearl Star image rendering** (FLUX panels / Qwen-Image): `skills/pearl-int/references/manga_render_path_decision.md` + `skills/pearl-int/references/pearl_star_node_inventory.md`. H1=A config mandatory; schnell BANNED for manga panels.
+- **R2 sync** (artifacts upload): `scripts/artifacts/setup_r2.sh` + `scripts/artifacts/r2_sync.py`. Keychain entries `R2_ACCESS_KEY_ID` / `R2_SECRET_ACCESS_KEY` / `R2_ACCOUNT_ID` / `R2_BUCKET`.
+- **Workers AI** (CLOUDFLARE_AI_API_TOKEN, different scope from Pages): `docs/VIDEO_CLOUDFLARE_FLUX_CREDENTIALS.md`.
+
+If you find a NEW trap, add a runbook here. Future Pearl_Int sessions read this list first.
 - Stop and verify rather than improvising

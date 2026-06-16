@@ -207,13 +207,15 @@ stillness_press:
       cover_style: "Parchment, forest green accents, hand-drawn botanical border"
 
 # ═══════════════════════════════════════════════════════════════════════════
-#  02. CLEAR SEEING BOOKS — Joshin (Zen inquiry, dropping the story)
+#  02. CLEAR SEEING BOOKS — Kenjin Roshi (Soto Zen inquiry, dropping the story)
+#      OPD-105: brand wholesale-migrated joshin (Shingon) -> kenjin (Soto Zen).
+#      The 6 authors below retain their Zen-coded bios per OPD-105 operator decision #5.
 #      Brand palette: near-black #1A1A2E + white #FFFFFF + steel #718096
 #      6 authors
 # ═══════════════════════════════════════════════════════════════════════════
 
 clear_seeing_books:
-  teacher: joshin
+  teacher: kenjin
   author_count: 6
 
   authors:
@@ -434,7 +436,7 @@ felt_sense_publishing:
 # Full expansion deferred to next sprint — skeleton provided.
 
 root_and_meridian_press:
-  teacher: master_feung
+  teacher: master_wu
   author_count: 7
   voice_palette: [N2lVS1w4EtoT3dr4eOWO, pNInz6obpgDQGcFmaJgB, 21m00Tcm4TlvDq8ikWAM, zcAOhNBS3c14rBihAFp1, piTKgcLEGmPE4e6mEKli, SOYHLrjzK2X1ezoPC6cr, LcfcDJNUP1GQjkzn1xUU]
   topic_spread: [burnout, somatic_healing, sleep_anxiety, depression, self_worth, boundaries, anxiety]
@@ -455,14 +457,14 @@ feather_and_scale_press:
   notes: "Egyptian wisdom. Authors blend shadow work, ancestral themes. Mix of warm + authoritative voices."
 
 bare_form_books:
-  teacher: junko
+  teacher: miyuki  # per OPD-111 — Japanese contemplative (lay-secular)
   author_count: 5
   voice_palette: [XrExE9yKIg1WjnnlVkGX, N2lVS1w4EtoT3dr4eOWO, LcfcDJNUP1GQjkzn1xUU, ODq5zmih8GrVes37Dizd, 21m00Tcm4TlvDq8ikWAM]
   topic_spread: [self_worth, social_anxiety, boundaries, grief, compassion_fatigue]
-  notes: "Wabi-sabi Zen. Authors spare and precise. Covers nearly empty. Smallest author count — quality over quantity."
+  notes: "Wabi-sabi. Authors spare and precise. Covers nearly empty. Smallest author count — quality over quantity."
 
 iron_gate_press:
-  teacher: master_wu
+  teacher: master_feung
   author_count: 7
   voice_palette: [SOYHLrjzK2X1ezoPC6cr, pNInz6obpgDQGcFmaJgB, VR6AewLTigWG4xSOukaG, wViXBPUzp2ZZixB1xQuM, TxGEqnHWrfWFTfGW9XjX, onwK4e9ZLuTAKqWW03F9, IKne3meq5aSn9XLyUdCD]
   topic_spread: [anxiety, burnout, courage, imposter_syndrome, financial_anxiety, boundaries, self_worth]

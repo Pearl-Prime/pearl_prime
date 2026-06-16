@@ -1,9 +1,10 @@
 atom_id: junko_REFLECTION_002
 band: 2
+body: I notice I cannot always remember what I transmitted. The mind is not the recorder. The receiver remembers what they
+  need. I remember the room.
 teacher:
   teacher_id: junko
-  source_refs: []
-  synthesis_method: authored_v1
-body: "The 'defect' you believe you have\u2014is it true, or is it just a story you\
-  \ accepted?"
-reflection_type: inquiry
+  source_refs:
+  - teachers/junko/junko_doctrine_notes.rtf
+  - teachers/junko/junko_yt.rtf
+  synthesis_method: doctrine_grounded_v1

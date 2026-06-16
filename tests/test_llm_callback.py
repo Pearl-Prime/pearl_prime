@@ -17,7 +17,14 @@ from phoenix_v4.quality.ei_v2.llm_callback import (
 )
 from phoenix_v4.quality.ei_v2.safety_classifier import SAFETY_LLM_CATEGORIES, classify_safety
 
-from tests.test_ei_v2 import SAMPLE_STORY_SAFE
+try:
+    # Repo root as import root (clean CI) resolves `tests` as a namespace package.
+    # pytest's prepend mode (no tests/__init__.py) or a stray installed `tests`
+    # package shadows that, so fall back to the sibling module's basename —
+    # pytest puts tests/ on sys.path during collection either way.
+    from tests.test_ei_v2 import SAMPLE_STORY_SAFE
+except ImportError:
+    from test_ei_v2 import SAMPLE_STORY_SAFE
 
 
 class _MockTextCb:

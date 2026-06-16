@@ -1,8 +1,9 @@
 atom_id: junko_TAKEAWAY_011
-slot_type: TAKEAWAY
+band: 2
+body: The work that is yours will find you. You do not need to invent it. You only need to listen.
 teacher:
   teacher_id: junko
-  source_refs: []
-  synthesis_method: doctrine_grounded
-body: |
-  The pattern is not your identity. It is a signal worth reading.
+  source_refs:
+  - teachers/junko/junko_doctrine_notes.rtf
+  - teachers/junko/junko_yt.rtf
+  synthesis_method: doctrine_grounded_v1

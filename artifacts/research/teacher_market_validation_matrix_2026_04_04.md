@@ -1,5 +1,14 @@
 # Teacher Market Validation Matrix
 
+> **2026-05-18 update (OPD-20260518-105):** Joshin re-classified to Shingon
+> (Kōyasan Shingon-shū) per the doctrinal-misclassification correction. The
+> Zen-language sections of this document now apply to **Kenjin Roshi** (Sōtō
+> Zen, new teacher), not Joshin. Cognitive Clarity / Clear Seeing Books brand
+> wholesale-migrated from Joshin to Kenjin. See
+> [`docs/migrations/JOSHIN_SHINGON_KENJIN_ZEN_MIGRATION_PLAN_2026-05-18.md`](../../docs/migrations/JOSHIN_SHINGON_KENJIN_ZEN_MIGRATION_PLAN_2026-05-18.md)
+> for the full migration plan and the four phase PRs (#1207, #1208, #1209, this PR).
+
+
 **Pearl_Research validation report — 2026-04-04**
 **Scope:** 13 teachers validated against APAC, EU, and US wellness markets.
 **Sources:** SOURCE_OF_TRUTH/teacher_banks/ doctrine files, config/catalog_planning/ scoring configs, Rakuten AI market research (2026-03-23), LOCALE_CATALOG_MARKETING_PLAN.md, locale_registry.yaml, competitive_intel_apac_audio.yaml, web research (April 2026).

@@ -202,6 +202,43 @@ characters:
         student_2: {provider: cosyvoice2, reference_id: cn_f_gentle_01}
         inner_monologue: {provider: cosyvoice2, reference_id: cn_f_bright_01, prosody_override: {rate: 0.85, pitch: -3}}
 
+  # 07b — Miyuki (Kyoto lay-contemplative; OPD-111)
+  miyuki:
+    display_name: Miyuki
+    style_archetype: quiet_contemplative
+    manga_personality: quiet steady presence, mature warm, kitchen-table teacher register, lay-secular Japanese contemplative
+    voice_slots:
+      ja-JP:
+        narrator: {provider: cosyvoice2, reference_id: ja_f_mature_warm_01, edge_fallback: ja-JP-NanamiNeural}
+        teacher_character: {provider: cosyvoice2, reference_id: ja_f_mature_warm_01, notes: "Kyoto lay teacher, quiet warm mature; wabi-sabi register"}
+        student_1: {provider: cosyvoice2, reference_id: ja_m_warm_01}
+        student_2: {provider: cosyvoice2, reference_id: ja_f_gentle_01}
+        inner_monologue: {provider: cosyvoice2, reference_id: ja_f_mature_warm_01, prosody_override: {rate: 0.85, pitch: -2}}
+      ko-KR:
+        narrator: {provider: cosyvoice2, reference_id: ko_f_mature_warm_01, edge_fallback: ko-KR-SunHiNeural}
+        teacher_character: {provider: cosyvoice2, reference_id: ko_f_mature_warm_01}
+        student_1: {provider: cosyvoice2, reference_id: ko_m_warm_01}
+        student_2: {provider: cosyvoice2, reference_id: ko_f_gentle_01}
+        inner_monologue: {provider: cosyvoice2, reference_id: ko_f_mature_warm_01, prosody_override: {rate: 0.85, pitch: -2}}
+      zh-TW:
+        narrator: {provider: cosyvoice2, reference_id: tw_f_mature_warm_01, edge_fallback: zh-TW-HsiaoChenNeural}
+        teacher_character: {provider: cosyvoice2, reference_id: tw_f_mature_warm_01}
+        student_1: {provider: cosyvoice2, reference_id: tw_m_warm_01}
+        student_2: {provider: cosyvoice2, reference_id: tw_f_gentle_01}
+        inner_monologue: {provider: cosyvoice2, reference_id: tw_f_mature_warm_01, prosody_override: {rate: 0.85, pitch: -2}}
+      zh-CN:
+        narrator: {provider: cosyvoice2, reference_id: cn_f_mature_warm_01, edge_fallback: zh-CN-XiaoxiaoNeural}
+        teacher_character: {provider: cosyvoice2, reference_id: cn_f_mature_warm_01}
+        student_1: {provider: cosyvoice2, reference_id: cn_m_warm_01}
+        student_2: {provider: cosyvoice2, reference_id: cn_f_gentle_01}
+        inner_monologue: {provider: cosyvoice2, reference_id: cn_f_mature_warm_01, prosody_override: {rate: 0.85, pitch: -2}}
+      en-US:
+        narrator: {provider: cosyvoice2, reference_id: en_f_mature_warm_01, edge_fallback: en-US-AriaNeural}
+        teacher_character: {provider: cosyvoice2, reference_id: en_f_mature_warm_01}
+        student_1: {provider: cosyvoice2, reference_id: en_m_warm_01}
+        student_2: {provider: cosyvoice2, reference_id: en_f_gentle_01}
+        inner_monologue: {provider: cosyvoice2, reference_id: en_f_mature_warm_01, prosody_override: {rate: 0.85, pitch: -2}}
+
   # 08 — Miki (gentle nurturer)
   miki:
     display_name: Miki

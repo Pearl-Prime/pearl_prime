@@ -19,6 +19,17 @@ PROMPTS_PATH = REPO / "config/manga/teacher_character_prompts.yaml"
 # Owner exception: Adi Da teacher-mode manga brand exists only on Taiwan (zh-TW).
 TAIWAN_ONLY_MANGA_TEACHERS = frozenset({"adi_da"})
 
+# Owner exception (2026-05-20): registry-only teachers retained for doctrine/voice
+# usage but NOT assigned as manga brand primaries. These teachers were migrated
+# off brand primary status by recent OPDs but remain canonical:
+#   - junko: PR #1221 (OPD-111 Phase 4) catalog migrated to miyuki; junko stays
+#     in registry as the canonical channeling/light-language teacher
+#   - joshin: PR #1208 (OPD-105 Phase 2) Cognitive Clarity catalog migrated to
+#     kenjin; joshin stays in registry for cross-references / doctrine
+# A teacher being in the registry but not a manga brand primary is now a valid
+# architectural state. Add new entries here when migrations create more.
+REGISTRY_ONLY_NON_BRAND_TEACHERS = frozenset({"junko", "joshin"})
+
 
 def _load(path: Path) -> dict:
     return yaml.safe_load(path.read_text(encoding="utf-8"))
@@ -51,7 +62,20 @@ def test_manga_brand_teachers_cover_registry_with_taiwan_only_allowlist() -> Non
         if block.get("primary_lane") == "taiwan":
             taiwan_primary_slugs.append(str(slug))
 
-    assert teachers_in_plan == reg_ids
+    # Post-OPD-105/OPD-111 architecture: registry is a SUPERSET of brand plan
+    # teachers. Some teachers (REGISTRY_ONLY_NON_BRAND_TEACHERS) remain in the
+    # registry for doctrine/voice purposes after being migrated off brand
+    # primary status. Brand plan teachers must all exist in the registry.
+    assert teachers_in_plan <= reg_ids, (
+        f"manga brand plan references teachers not in registry: "
+        f"{sorted(teachers_in_plan - reg_ids)!r}"
+    )
+    assert reg_ids - teachers_in_plan == REGISTRY_ONLY_NON_BRAND_TEACHERS, (
+        f"registry vs brand-plan delta drifted from expected "
+        f"REGISTRY_ONLY_NON_BRAND_TEACHERS: "
+        f"expected={sorted(REGISTRY_ONLY_NON_BRAND_TEACHERS)!r} "
+        f"actual={sorted(reg_ids - teachers_in_plan)!r}"
+    )
     assert taiwan_primary_slugs == ["bright_presence_tw"]
     assert brand_blocks["bright_presence_tw"]["teacher"] == "adi_da"
 
@@ -60,7 +84,12 @@ def test_manga_brand_teachers_cover_registry_with_taiwan_only_allowlist() -> Non
         for b in brand_blocks.values()
         if isinstance(b, dict) and b.get("primary_lane") != "taiwan"
     }
-    assert reg_ids - global_primary_teachers == TAIWAN_ONLY_MANGA_TEACHERS
+    # Same architectural shift: registry-only-non-brand teachers + Taiwan-only
+    # teacher land outside the global-primary set. Test that the residual matches
+    # exactly the union (catches drift in either direction).
+    assert reg_ids - global_primary_teachers == (
+        TAIWAN_ONLY_MANGA_TEACHERS | REGISTRY_ONLY_NON_BRAND_TEACHERS
+    )
 
 
 def test_no_duplicate_teacher_per_lane_assignments() -> None:

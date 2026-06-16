@@ -40,11 +40,11 @@ teacher_brand_channel_map:
     audiobook_style: warm
     topics: [qi_cultivation, stability, foundation, chronic_stress]
 
-  joshin:
+  kenjin:
     brands: [cognitive_clarity]
     primary_channels: [ch_003, ch_005]
     audiobook_style: default
-    topics: [zen, direct_pointing, sitting, koans]
+    topics: [zen, direct_pointing, sitting, koans]  # OPD-105: joshin -> kenjin (Soto Zen owns these topics)
 
   miki:
     brands: [cognitive_clarity]
@@ -52,7 +52,13 @@ teacher_brand_channel_map:
     audiobook_style: cool
     topics: [gen_z_grounding, digital_presence, identity, anxiety]
 
-  junko:
+  junko:  # per OPD-111 — channeling/cosmic register (kept; cosmic topics covered)
+    brands: [stillness_press]
+    primary_channels: [ch_015, ch_020]
+    audiobook_style: luminous
+    topics: [awakening, soul_remembrance, cosmic_guidance]  # cosmic-coded per doctrine
+
+  miyuki:  # per OPD-111 — Japanese contemplative (carries former contemplative topics)
     brands: [stillness_press]
     primary_channels: [ch_015, ch_020]
     audiobook_style: warm

@@ -3,6 +3,8 @@
 
 **SpiritualTech Systems · Genre Agent Spec v1.1**
 
+> **Catalog/taxonomy authority (provenance, 2026-05-29):** the canonical *catalog* genre taxonomy is `config/manga/canonical_genre_list.yaml` (25 genres) + `docs/GENRE_PORTFOLIO_PLAN.md` (15 strategic shells, market-research-grounded). The genre set referenced in *this* craft-workflow spec is a teaching-embed / reader-wound axis — NOT the brand/series catalog taxonomy; do not treat it as the canonical genre list. Empirical basis: `artifacts/research/popular_genre_ranking_2026-05-02.md` + `artifacts/research/genre_bestseller_dossiers/`.
+
 ---
 
 ## Overview

@@ -168,7 +168,7 @@ TASKS: list[dict[str, Any]] = [
         "name": "teacher_stories",
         "description": "Write teacher STORY atoms up to 20 total per teacher",
         "teachers": [
-            "junko", "maat", "miki", "master_sha", "master_wu",
+            "junko", "miyuki", "maat", "miki", "master_sha", "master_wu",
             "joshin", "master_feung", "omote", "pamela_fellows", "ra", "sai_ma",
         ],
         "target_per_teacher": 20,

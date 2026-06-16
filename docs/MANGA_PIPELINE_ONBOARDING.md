@@ -2,7 +2,20 @@
 
 **Purpose:** Get new developers and agents running the manga pipeline end-to-end.
 **Authority:** `specs/AI_MANGA_PIPELINE_SUMMARY.md` (chapter pipeline), `specs/MANGA_CATALOG_RECONCILIATION_SPEC.md` (catalog/portfolio governance), `docs/MANGA_IMPLEMENTATION_OUTLINE.md`
-**Last updated:** 2026-04-26 (Phase 2X.6)
+**Render authority (current):** `docs/specs/MANGA_V5_LAYERED_ARCHITECTURE.md` (V5.1 Qwen-Image-Layered — AUTHORITY 2026-05-20, supersedes V4 L0+L2) + `docs/MANGA_V5_CATALOG_ROLLOUT_PLAN.md` (rollout/milestones) + `docs/specs/MANGA_CONTINUITY_STATE_SPEC.md`. Any render guidance below that predates 2026-05-20 reflects V4 — defer to the V5 docs.
+**Catalog / fan-out:** Layer 1 planning is banked (444/444, PR #1355) — verify, do not rebuild. Execution: [docs/GLOBAL_CATALOG_FANOUT_EXECUTION_PLAN.md](./GLOBAL_CATALOG_FANOUT_EXECUTION_PLAN.md).
+**Last updated:** 2026-05-29 (SSOT counts + V5.1 + entry-point routing); Phase 2X.6 catalog base 2026-04-26.
+
+---
+
+## CLI entry points (read this before picking a script)
+
+| Goal | Doc | Primary entry |
+|------|-----|----------------|
+| Registry job + ITE stages | [MANGA_PIPELINE_COMPLETE_GUIDE.md](./MANGA_PIPELINE_COMPLETE_GUIDE.md) | `scripts/pipeline/create_job.py` → `run_chapter_production.py` |
+| Smoke / weekly / full book export | [MANGA_PRODUCTION_PIPELINE.md](./MANGA_PRODUCTION_PIPELINE.md) | `scripts/run_manga_pipeline.py`, `scripts/weekly_manga_rollout.py` |
+| Chapter DAG + series setup (this doc) | here | `scripts/manga/run_manga_chapter.py`, `run_series_setup.py` |
+| V5.1 panel render (Pearl Star) | [docs/specs/MANGA_V5_LAYERED_ARCHITECTURE.md](./specs/MANGA_V5_LAYERED_ARCHITECTURE.md) | `scripts/manga/render_v5_episode.py` + rollout plan |
 
 ---
 
@@ -15,11 +28,12 @@ The catalog/portfolio side of this pipeline was reconciled in Phase 2X. Read `sp
 | Strategic genre allow-list | `docs/GENRE_PORTFOLIO_PLAN.md` (CANONICAL) | 15 strategic shells — drives series_plan `genre.enum` |
 | Per-locale catalog plans | `docs/CJK_CATALOG_PLAN.md`, `docs/US_CATALOG_PLAN.md` (CANONICAL) | Locale-specific format mix + platform routing |
 | Mode strategy (mode definitions) | `docs/MANGA_MODE_STRATEGY.md` (CANONICAL) | Migrated from docx; 9 tables / 68 rows of mode rules |
-| Brand portfolio (37 brands) | `docs/GENRE_PORTFOLIO_PLAN.md` § brand table | 3 flagship × 16 + 16 core × 9 + 18 niche × 5 = 1,410 series |
+| Brand portfolio (37 brands) | `config/manga/canonical_brand_list.yaml` + `docs/GENRE_PORTFOLIO_PLAN.md` | 37 manga-canon brands (Path X; not `config/brand_registry.yaml`) |
 | Catalog plan generator | `scripts/manga/generate_catalog_plan_from_strategic.py` | Brand-metadata × pure-market-share weighting (4-leg) |
 | Catalog plan output (auto-gen) | `artifacts/manga/MANGA_FULL_CATALOG_PLAN.md` | **AUTO-GENERATED — do NOT hand-edit.** Re-run the generator after editing strategic-tier inputs. |
-| Series plan YAMLs | `config/source_of_truth/manga_series_plans/{locale}/` | 1,410 YAMLs across 5 locales |
-| Book plan YAMLs | `config/source_of_truth/manga_book_plans/{series_id}/ep_NN.yaml` | 19,740 YAMLs (one per book/episode) |
+| Series plan YAMLs | `config/source_of_truth/manga_series_plans/{locale}/` | **1,350** YAMLs across 5 locales (EXECUTED #696/#727; pre-exec projection was 1,410) |
+| Book plan YAMLs | `config/source_of_truth/manga_book_plans/{series_id}/ep_NN.yaml` | **18,900** YAMLs (one per book/episode) |
+| Series titles at plan stage | `title` / `localized_titles` in series_plan YAMLs | **1,349/1,350 = `TBD`** (expected); filled during generation, not a planning gap |
 | Series plan generator | `scripts/manga/generate_series_plans_from_catalog.py` | Consumes catalog plan + format_routing.yaml |
 | Atomic regen entry | `scripts/manga/run_2x4_atomic_regen.py` | PRESERVE map honors production-active series |
 
@@ -52,7 +66,7 @@ The catalog/portfolio side of this pipeline was reconciled in Phase 2X. Read `sp
 
 ### Brand vs teacher (OQ-3 resolution)
 
-- **Brand is the catalog allocation unit** (37 brands × tier-specific series counts = 1,410 series).
+- **Brand is the catalog allocation unit** (37 brands; live SSOT = **1,350** series plans across 5 locales).
 - **Teacher is a body attribute** carried in `teacher_id` (nullable). A brand can have multiple authors/teachers attached at the body level; series identity is brand-first.
 - **Anti-homogeneity** is now enforced via the per-brand %-allocation in `GENRE_PORTFOLIO_PLAN.md`, not via a separate brand-DNA enforcement layer (`MANGA_BRAND_DNA_ANTI_SPAM_SPEC.md` was reframed in Phase 2X.5 to point at the strategic plan rather than implement its own mechanism).
 

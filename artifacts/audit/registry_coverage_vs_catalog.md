@@ -1,5 +1,9 @@
 # Registry Coverage vs Catalog Demand
 
+> **DEPRECATED 2026-06-06** — superseded by [`docs/PEARL_PRIME_ATOM_100PCT_COVERAGE_SSOT.md`](../../docs/PEARL_PRIME_ATOM_100PCT_COVERAGE_SSOT.md) **§5** (topic enumeration), **§8** (current coverage breakdown), and **§9** (gap matrix). This doc is retained as historical lineage per [`AGENT_FILE_PERSISTENCE_PROTOCOL.md`](../../docs/AGENT_FILE_PERSISTENCE_PROTOCOL.md). Catalog-demand gating per `CATALOG-800-PER-BRAND-01` flows through SSOT §16 acceptance criteria.
+
+---
+
 **Date:** 2026-04-10
 **Project:** proj_state_convergence_20260328
 **Scope:** registry/*.yaml × atoms/{persona}/{topic} × SOURCE_OF_TRUTH/teacher_banks/{teacher}/approved_atoms

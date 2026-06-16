@@ -189,11 +189,11 @@ TEACHER_BOOKS = {
         ),
     },
     "relational_calm": {
-        "teacher_id":   "junko",
+        "teacher_id":   "miyuki",  # per OPD-111
         "title":        "The Empty Cup",
         "subtitle":     "Radical acceptance in relationships",
         "series":       "Bare Form Books Podcast",
-        "author":       "Junko",
+        "author":       "Miyuki",
         "topic":        "overthinking",
         "locale":       "ja-JP",
         "flux_prompt":  (

@@ -137,7 +137,7 @@ def test_book_genre_map_covers_inventory(cookbook):
         "sai_ma_grief",
         "maat_boundaries",
         "adi_da_self_worth",
-        "junko_overthinking",
+        "miyuki_overthinking",  # per OPD-111 — was junko_overthinking
         "miki_imposter_syndrome",
         "ra_imposter_syndrome",
         "master_feung_burnout",

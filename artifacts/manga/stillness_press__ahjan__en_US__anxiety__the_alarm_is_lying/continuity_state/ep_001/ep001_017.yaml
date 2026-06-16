@@ -1,0 +1,31 @@
+schema_version: 1.0.0
+panel_id: ep001_017
+inherits_from: ep001_016
+beat_type: micro
+archetype: chest_breath_micro
+scene_state:
+  scene_id: conference_room_flashback
+  temporal: midday
+  light_rig_id: K_flashback_cool_grey_blue
+character_state:
+  mira_aoki:
+    character_design_hash: axes_only_PENDING_compute
+    pose_id: chest_breath_micro
+    expression_dial: 0.9
+    emotional: anxious
+    gaze_direction: off_frame_down
+    hand_state: tucked_self_soothing
+    breath_phase: quickening
+prop_state:
+  conference_table: present
+relational_field:
+  active_entities:
+  - id: mira_aoki
+    on_frame: true
+    role: subject
+  shared_attention_anchor: null
+  emotional_tension_vector:
+    direction: steady
+    magnitude_delta_from_prev: 0.0
+continuity_invariants:
+- dial +0.1 from prev (0.8 -> 0.9) within micro bound; under-table tension peak

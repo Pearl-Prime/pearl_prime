@@ -74,13 +74,20 @@ _METADATA_LINE_RE = re.compile(
     r"^\s*"
     r"(family|voice_mode|mode|reframe_type|mechanism_emphasis|"
     r"weight|carry_line|atom_id|BAND|MECHANISM_DEPTH|"
-    r"COST_TYPE|COST_INTENSITY|IDENTITY_STAGE)"
+    r"COST_TYPE|COST_INTENSITY|IDENTITY_STAGE|"
+    r"fingerprint|char_count|paragraph_count|sentence_count)"
     r"\s*:",
     re.IGNORECASE,
 )
 
 # Inline block headers like [family: F4 voice_mode: guide mechanism_emphasis: automatic]
 _METADATA_BLOCK_RE = re.compile(r"^\[.*?(family|voice_mode|mode|reframe_type).*?\]", re.IGNORECASE)
+
+# Angle-journey planner-template placeholders (config/planning/angle_journey_fallback.yaml)
+# leak when per-angle ANGLE_DEFINITION / ANGLE_CALLBACK atoms are uncommissioned. Each renders
+# as a blank-line-delimited block led by a bracketed "[Angle journey — …]" marker; the leader
+# and its interpolated follow-on lines (e.g. "Phase: …. Prior layer: …") are all scaffolding.
+_ANGLE_JOURNEY_PLACEHOLDER_RE = re.compile(r"^\s*\[Angle journey\b", re.IGNORECASE)
 
 # Title-page lines like "Topic: anxiety" or "Persona: gen_z_professionals"
 _TITLE_META_RE = re.compile(r"^(Topic|Persona)\s*:", re.IGNORECASE)
@@ -105,6 +112,15 @@ _ASSEMBLY_SLOT_HEADING_LINE_RE = re.compile(
     r"^#{1,3}\s+(HOOK|STORY|SCENE)(?:\s+v\d+)?(?:\s+.*)?$"
 )
 
+# DEFECT 7 (composer-guard lane, fail-closed backstop): bare (no-"## ") atom-id
+# labels — e.g. "INTEGRATION v06", "RECOGNITION v04" — leak verbatim into reader
+# prose when a malformed CANONICAL.txt header is absorbed into the prior atom
+# body. The "## "-prefixed scrubbers above never match these, so they slip
+# through. This pattern matches a standalone all-caps (+ underscore) atom-id
+# label followed by " vNN" and nothing else, so no raw atom-id label reaches
+# reader prose. Whole-line match only — natural prose is never of this form.
+_BARE_ATOM_ID_LINE_RE = re.compile(r"^[A-Z_]+ v\d+$")
+
 # Python dict blobs accidentally pasted into prose (pipeline/debug).
 _INTRO_DICT_OPEN_RE = re.compile(r"\{(?:'intro'|\"intro\"):")
 
@@ -124,7 +140,16 @@ _STORY_SIMPLE_LEAK = re.compile(
 
 
 def _scrub_inline_leaked_slot_markers(line: str) -> str:
-    """Remove concatenated assembly markers (## HOOK v01 --- ---) while keeping prose."""
+    """Remove concatenated assembly markers (## HOOK v01 --- ---) while keeping prose.
+
+    DEFECT 7 composer-guard: do NOT early-return when "##" is absent — a bare
+    standalone atom-id label ("INTEGRATION v06") carries no "##" yet must still be
+    scrubbed so it never reaches reader prose. A whole stripped line that is just a
+    bare atom-id label collapses to the empty string.
+    """
+    # Bare-atom-id backstop runs first and is "##"-independent.
+    if _BARE_ATOM_ID_LINE_RE.match(line.strip()):
+        return ""
     if "##" not in line:
         return line
     s = line
@@ -284,10 +309,30 @@ def _strip_scaffolding_lines(text: str) -> str:
             or _CHAPTER_RE.match(stripped)
             or _ASSEMBLY_SLOT_HEADING_LINE_RE.match(stripped)
             or _SECTION_VARIANT_RE.match(stripped)
+            or _BARE_ATOM_ID_LINE_RE.match(stripped)
         ):
             continue
         out.append(stripped)
     return "\n".join(out)
+
+
+def _strip_angle_journey_placeholders(text: str) -> str:
+    """Drop blank-line-delimited paragraphs led by an '[Angle journey — …]' placeholder marker.
+
+    These blocks come from config/planning/angle_journey_fallback.yaml when the per-angle
+    ANGLE_DEFINITION / ANGLE_CALLBACK atoms have not been authored. The whole paragraph —
+    bracketed leader plus interpolated follow-on lines such as "This book follows the … lens:"
+    or "Phase: …. Prior layer: …" — is planner scaffolding, never reader-facing prose, so the
+    entire block is removed (a line-level strip would orphan the follow-on lines).
+    """
+    paragraphs = re.split(r"\n\s*\n", text)
+    kept: list[str] = []
+    for para in paragraphs:
+        first_nonempty = next((ln for ln in para.splitlines() if ln.strip()), "")
+        if _ANGLE_JOURNEY_PLACEHOLDER_RE.match(first_nonempty):
+            continue
+        kept.append(para)
+    return "\n\n".join(kept)
 
 
 def _dedup_repeated_blocks(
@@ -379,6 +424,97 @@ def _book_wide_dedupe_keep_default() -> int:
         return 1
 
 
+# OPD-109 Phase 3: atom-sized paragraphs (20-200 words) are allowed to repeat
+# up to `_atom_paragraph_keep_default()` times across the book. Longer paragraphs
+# (>200 words) remain `keep=1` because they typically indicate template/scaffold
+# leakage that should not appear twice. This is conservative: with the OPD-109
+# selector rotation, atom collisions are already rare, but when they do occur
+# (16-30 atom EXERCISE pool, 12 chapters × 2 EXERCISE slots = 24 slot picks)
+# stripping ALL duplicates wipes ~275 paragraphs from the rendered book.
+#
+# Calibration vs `repeated_phrase_violations` (8-word phrase cap = 12 book-wide):
+# an 80-word atom paragraph contains ~70 unique 4-grams. Allowing 2 occurrences
+# doubles the 4-gram count to ~140 occurrences per atom-phrase. Even if all
+# four atoms share a stem like "for four counts", that's 8 occurrences — well
+# under the 12-book cap. See OPD-109 Phase 3 validation render notes.
+_ATOM_PARA_MIN_WORDS = 20  # below this: short transitions, already exempt
+_ATOM_PARA_MAX_WORDS = 200  # above this: likely template/scaffold; keep=1
+
+
+def _atom_paragraph_keep_default() -> int:
+    """Default keep-cap for atom-sized paragraphs (20-200 words).
+
+    Overridable via `PHOENIX_ATOM_PARAGRAPH_KEEP` for tests. Defaults to 2
+    (allow each atom-paragraph to appear twice book-wide).
+    """
+    try:
+        return max(1, int(_os.environ.get("PHOENIX_ATOM_PARAGRAPH_KEEP", "2") or "2"))
+    except (TypeError, ValueError):
+        return 2
+
+
+def _keep_cap_for_paragraph(paragraph: str, *, base_keep: int) -> int:
+    """Return the keep cap to apply to `paragraph` under the OPD-109 Phase 3 rule.
+
+    - Paragraphs in the atom-sized range (20-200 words) → atom-paragraph keep
+      (defaults to 2; env override `PHOENIX_ATOM_PARAGRAPH_KEEP`).
+    - Paragraphs longer than 200 words → `base_keep` (defaults to 1).
+    """
+    wc = len(paragraph.split())
+    if _ATOM_PARA_MIN_WORDS <= wc <= _ATOM_PARA_MAX_WORDS:
+        return max(base_keep, _atom_paragraph_keep_default())
+    return base_keep
+
+
+# ── F1-signature cross-chapter dedupe (ws_f1_signature_dedup_20260616) ──────────
+# register_gate's F1 detector flags any paragraph of >=3 sentences that recurs
+# across chapters with >= 0.55 Jaccard word-set overlap. The book-wide dedupe below
+# only participates paragraphs of >= `min_words` (30) words / >= `min_chars` (120)
+# chars, so SHORT multi-sentence "signature" re-stamps — a HOOK/EXERCISE/doctrine
+# atom re-injected by the depth pass (e.g. "The task is open. You have been looking
+# at it for forty minutes. This is not laziness. …" = 24 words / 4 sentences) — fall
+# THROUGH the word floor AND vary by a trailing clause (so the exact-fingerprint
+# dedupe also misses them). They survive into prose and fire a large F1 cluster
+# (deep_book_6h: "task is open" x13, "Now, I want you to notice" x12). This pass
+# catches that class with the SAME signal F1 uses (>=3 sentences, Jaccard >= 0.55),
+# keep=1, scoped to short dense paragraphs (< _F1_SIG_MAX_WORDS words) so bulk
+# SCENE/STORY content paragraphs are never touched. Toggle off with
+# PHOENIX_F1_SIGNATURE_DEDUPE=0. Root-cause (depth re-stamp not rotating) is the
+# enrichment_select follow-on; this is the delivery-layer backstop.
+_F1_SIG_MIN_SENTENCES = 3
+_F1_SIG_MIN_CHARS = 90
+_F1_SIG_MAX_WORDS = 45
+_F1_SIG_SIM = 0.55  # == register_gate.F1_SIMILARITY_THRESHOLD
+_F1_SIG_SENT_RE = re.compile(r"(?<=[.!?])\s+")
+_F1_SIG_TOKEN_RE = re.compile(r"[A-Za-z']+")
+
+
+def _f1_signature_dedup_enabled() -> bool:
+    return (_os.environ.get("PHOENIX_F1_SIGNATURE_DEDUPE", "1") or "1") != "0"
+
+
+def _f1_sig_sentence_count(p: str) -> int:
+    return len([s for s in _F1_SIG_SENT_RE.split(p.strip()) if s.strip()])
+
+
+def _f1_sig_word_set(p: str) -> frozenset:
+    return frozenset(_F1_SIG_TOKEN_RE.findall(p.lower()))
+
+
+def _f1_sig_is_signature(p: str, wc: int, cc: int) -> bool:
+    """A short, dense, multi-sentence paragraph that fires F1 when re-stamped but
+    escapes the word-floor book-wide dedupe (hooks, exercises, doctrines)."""
+    return (wc < _F1_SIG_MAX_WORDS and cc >= _F1_SIG_MIN_CHARS
+            and _f1_sig_sentence_count(p) >= _F1_SIG_MIN_SENTENCES)
+
+
+def _f1_sig_jaccard(a: frozenset, b: frozenset) -> float:
+    if not a or not b:
+        return 0.0
+    u = len(a | b)
+    return (len(a & b) / u) if u else 0.0
+
+
 def _dedup_paragraphs_book_wide(
     text: str,
     min_words: int = 30,
@@ -393,6 +529,11 @@ def _dedup_paragraphs_book_wide(
     blob) can paste the same atom into every chapter and the chapter-scoped
     `_dedup_repeated_blocks` resets at each `Chapter N` heading.
 
+    OPD-109 Phase 3: atom-sized paragraphs (20-200 words) are allowed up to
+    `_atom_paragraph_keep_default()` occurrences. The base `keep` parameter
+    still applies to longer paragraphs (templates/scaffold) so the dedup-leak
+    safety net for those long blocks is unchanged.
+
     Args:
         text: full manuscript text (chapter-separated, blank-line paragraphs).
         min_words: paragraphs shorter than this (word count) are exempt — short
@@ -400,8 +541,10 @@ def _dedup_paragraphs_book_wide(
         min_chars: paragraphs shorter than this (character count) are also exempt.
             Both gates apply; a paragraph must clear BOTH to participate.
         keep: max occurrences of any given normalized paragraph to retain. Defaults
-            to `_book_wide_dedupe_keep_default()` (env-override of "1"). All occurrences
-            after the Nth are elided.
+            to `_book_wide_dedupe_keep_default()` (env-override of "1"). This is
+            the BASE keep; atom-sized paragraphs additionally honor the larger
+            `_atom_paragraph_keep_default()`. All occurrences after the per-bucket
+            cap are elided.
 
     Returns:
         (deduped_text, notes) — notes is one entry per elided occurrence.
@@ -421,6 +564,8 @@ def _dedup_paragraphs_book_wide(
     seen: dict[str, int] = {}
     kept: list[str] = []
     counts_first_seen: dict[str, str] = {}
+    sig_seen: list[frozenset] = []  # F1-signature word-sets kept so far (keep=1)
+    short_bridge_seen: set[str] = set()  # terse multi-sentence re-stamps (keep=1)
 
     for para in re.split(r"\n{2,}", text):
         stripped = para.strip()
@@ -432,14 +577,52 @@ def _dedup_paragraphs_book_wide(
             continue
         wc = len(stripped.split())
         cc = len(stripped)
+        # F1-signature class: short, dense, multi-sentence re-stamp (HOOK/EXERCISE/
+        # doctrine) that escapes the word floor below but fires a large F1 cluster.
+        # Fuzzy (Jaccard >= 0.55) keep=1, mirroring the register_gate F1 detector,
+        # so trailing-clause variants collapse too. Checked BEFORE the word floor.
+        if _f1_signature_dedup_enabled() and _f1_sig_is_signature(stripped, wc, cc):
+            ws = _f1_sig_word_set(stripped)
+            if any(_f1_sig_jaccard(ws, prev) >= _F1_SIG_SIM for prev in sig_seen):
+                notes.append(
+                    f"book_wide_f1_signature_dedupe: removed re-stamp {stripped[:80]!r}"
+                )
+                continue
+            sig_seen.append(ws)
+            kept.append(stripped)
+            continue
+        # Terse multi-sentence re-stamp = a formulaic within-slot transition bridge
+        # ("Same body. Different door. Watch what changes." = 46 chars / 3 sentences).
+        # >=3 sentences packed into < _F1_SIG_MIN_CHARS chars is formulaic, NOT narrative
+        # (real prose paragraphs of 3+ sentences are far longer), so an EXACT cross-chapter
+        # repeat is a spurious bridge re-stamp, not an authored refrain. The within-slot
+        # bridge bank has only ~49 STORY variants for ~276 insertions in a deep book, so
+        # by pigeonhole each variant recurs ~5-6x even with a perfectly uniform selector —
+        # this is the delivery-layer backstop for that capacity limit. EXACT keep=1
+        # (these are < _F1_SIG_MIN_CHARS so the fuzzy signature pass above skips them).
+        # Toggle with PHOENIX_F1_SIGNATURE_DEDUPE=0.
+        if (_f1_signature_dedup_enabled()
+                and wc < _F1_SIG_MAX_WORDS and cc < _F1_SIG_MIN_CHARS
+                and _f1_sig_sentence_count(stripped) >= _F1_SIG_MIN_SENTENCES):
+            sfp = re.sub(r"\s+", " ", re.sub(r"[^\w\s]+", "", stripped.lower())).strip()
+            if sfp in short_bridge_seen:
+                notes.append(
+                    f"book_wide_short_bridge_dedupe: removed re-stamp {stripped[:60]!r}"
+                )
+                continue
+            short_bridge_seen.add(sfp)
+            kept.append(stripped)
+            continue
         if wc < min_words or cc < min_chars:
             # Short paragraphs are exempt — transitional lines, beats, dialogue
             # tags must be free to repeat across chapters.
             kept.append(stripped)
             continue
+        # OPD-109 Phase 3: per-paragraph keep cap based on size bucket.
+        effective_keep = _keep_cap_for_paragraph(stripped, base_keep=keep)
         fp = re.sub(r"\s+", " ", re.sub(r"[^\w\s]+", "", stripped.lower())).strip()
         seen[fp] = seen.get(fp, 0) + 1
-        if seen[fp] <= keep:
+        if seen[fp] <= effective_keep:
             kept.append(stripped)
             counts_first_seen.setdefault(fp, stripped[:80])
         else:
@@ -450,15 +633,19 @@ def _dedup_paragraphs_book_wide(
 
     # One log line per elided fingerprint with its total occurrence count so
     # production has telemetry on how often the safety-net actually fires.
+    # OPD-109 Phase 3: the kept threshold can be either `keep` (base) or
+    # `_atom_paragraph_keep_default()` (atom-sized bucket); the log line reports
+    # the larger of the two so the operator sees the actual cap applied.
     if notes:
-        elided_fps = {fp: count for fp, count in seen.items() if count > keep}
+        elided_max_keep = max(keep, _atom_paragraph_keep_default())
+        elided_fps = {fp: count for fp, count in seen.items() if count > elided_max_keep}
         for fp, count in elided_fps.items():
             fp_hash = hashlib.sha1(fp.encode("utf-8")).hexdigest()[:10]
             logger.info(
-                "[dedup] book-wide paragraph elision: %s appeared %d times, kept %d",
+                "[dedup] book-wide paragraph elision: %s appeared %d times, kept_cap_upper_bound %d",
                 fp_hash,
                 count,
-                keep,
+                elided_max_keep,
             )
 
     return "\n\n".join(kept), notes
@@ -557,7 +744,8 @@ def clean_for_delivery(
 
     Order of operations:
       1. Resolve known loc-var placeholders with universal or location-aware fallbacks.
-      2. Strip pipeline metadata lines and markdown scaffolding.
+      2. Strip pipeline metadata lines (incl. atom fingerprint blocks), angle-journey
+         planner-template placeholder blocks, and markdown scaffolding.
       3. Remove repeated long paragraphs (same normalized fingerprint), unless the plan's
          runtime format word minimum would be violated (then pre-dedup text is kept).
       4. Strip any residual {Placeholder} tokens (e.g. story-atom fiction
@@ -569,6 +757,7 @@ def clean_for_delivery(
     """
     text = _resolve_loc_var_fallbacks(text, plan=plan)
     text = _strip_scaffolding_lines(text)
+    text = _strip_angle_journey_placeholders(text)
     text = re.sub(r"\s*\{['\"][^'\"]+['\"]\s*:\s*", " ", text)
     text = re.sub(r"\s*\[\s*\{\s*['\"][^'\"]+['\"]\s*:\s*", " ", text)
     text = _dedup_repeated_blocks(text, word_floor=_delivery_word_floor_from_plan(plan))
@@ -621,6 +810,7 @@ def delivery_contract_gate(text: str, source_hint: str = "output") -> None:
       - Markdown dividers: ---
       - Chapter scaffold markers: ===...=== CHAPTER
       - Assembly section headers: ## HOOK / ## STORY / ## SCENE (case-sensitive slot tokens) / ## MECHANISM_DEPTH / …
+      - Bare atom-id labels: standalone ``<UPPER_TOKEN> vNN`` lines (e.g. ``INTEGRATION v06``) leaked from malformed CANONICAL.txt headers
       - Python intro-dict blobs: ``{'intro':`` / ``{\"intro\":``
     """
     violations: list[str] = []
@@ -644,6 +834,12 @@ def delivery_contract_gate(text: str, source_hint: str = "output") -> None:
         if _SECTION_VARIANT_RE.match(stripped):
             violations.append(
                 f"  line {lineno}: assembly section header leaked {stripped[:50]!r}"
+            )
+        if _BARE_ATOM_ID_LINE_RE.match(stripped):
+            # DEFECT 7 fail-closed backstop: a bare atom-id label
+            # ("INTEGRATION v06") leaked from a malformed CANONICAL.txt header.
+            violations.append(
+                f"  line {lineno}: bare atom-id label leaked {stripped[:50]!r}"
             )
         if _INTRO_DICT_OPEN_RE.search(line):
             violations.append(
