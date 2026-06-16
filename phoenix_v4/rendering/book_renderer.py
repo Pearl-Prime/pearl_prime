@@ -466,6 +466,55 @@ def _keep_cap_for_paragraph(paragraph: str, *, base_keep: int) -> int:
     return base_keep
 
 
+# ── F1-signature cross-chapter dedupe (ws_f1_signature_dedup_20260616) ──────────
+# register_gate's F1 detector flags any paragraph of >=3 sentences that recurs
+# across chapters with >= 0.55 Jaccard word-set overlap. The book-wide dedupe below
+# only participates paragraphs of >= `min_words` (30) words / >= `min_chars` (120)
+# chars, so SHORT multi-sentence "signature" re-stamps — a HOOK/EXERCISE/doctrine
+# atom re-injected by the depth pass (e.g. "The task is open. You have been looking
+# at it for forty minutes. This is not laziness. …" = 24 words / 4 sentences) — fall
+# THROUGH the word floor AND vary by a trailing clause (so the exact-fingerprint
+# dedupe also misses them). They survive into prose and fire a large F1 cluster
+# (deep_book_6h: "task is open" x13, "Now, I want you to notice" x12). This pass
+# catches that class with the SAME signal F1 uses (>=3 sentences, Jaccard >= 0.55),
+# keep=1, scoped to short dense paragraphs (< _F1_SIG_MAX_WORDS words) so bulk
+# SCENE/STORY content paragraphs are never touched. Toggle off with
+# PHOENIX_F1_SIGNATURE_DEDUPE=0. Root-cause (depth re-stamp not rotating) is the
+# enrichment_select follow-on; this is the delivery-layer backstop.
+_F1_SIG_MIN_SENTENCES = 3
+_F1_SIG_MIN_CHARS = 90
+_F1_SIG_MAX_WORDS = 45
+_F1_SIG_SIM = 0.55  # == register_gate.F1_SIMILARITY_THRESHOLD
+_F1_SIG_SENT_RE = re.compile(r"(?<=[.!?])\s+")
+_F1_SIG_TOKEN_RE = re.compile(r"[A-Za-z']+")
+
+
+def _f1_signature_dedup_enabled() -> bool:
+    return (_os.environ.get("PHOENIX_F1_SIGNATURE_DEDUPE", "1") or "1") != "0"
+
+
+def _f1_sig_sentence_count(p: str) -> int:
+    return len([s for s in _F1_SIG_SENT_RE.split(p.strip()) if s.strip()])
+
+
+def _f1_sig_word_set(p: str) -> frozenset:
+    return frozenset(_F1_SIG_TOKEN_RE.findall(p.lower()))
+
+
+def _f1_sig_is_signature(p: str, wc: int, cc: int) -> bool:
+    """A short, dense, multi-sentence paragraph that fires F1 when re-stamped but
+    escapes the word-floor book-wide dedupe (hooks, exercises, doctrines)."""
+    return (wc < _F1_SIG_MAX_WORDS and cc >= _F1_SIG_MIN_CHARS
+            and _f1_sig_sentence_count(p) >= _F1_SIG_MIN_SENTENCES)
+
+
+def _f1_sig_jaccard(a: frozenset, b: frozenset) -> float:
+    if not a or not b:
+        return 0.0
+    u = len(a | b)
+    return (len(a & b) / u) if u else 0.0
+
+
 def _dedup_paragraphs_book_wide(
     text: str,
     min_words: int = 30,
@@ -515,6 +564,7 @@ def _dedup_paragraphs_book_wide(
     seen: dict[str, int] = {}
     kept: list[str] = []
     counts_first_seen: dict[str, str] = {}
+    sig_seen: list[frozenset] = []  # F1-signature word-sets kept so far (keep=1)
 
     for para in re.split(r"\n{2,}", text):
         stripped = para.strip()
@@ -526,6 +576,20 @@ def _dedup_paragraphs_book_wide(
             continue
         wc = len(stripped.split())
         cc = len(stripped)
+        # F1-signature class: short, dense, multi-sentence re-stamp (HOOK/EXERCISE/
+        # doctrine) that escapes the word floor below but fires a large F1 cluster.
+        # Fuzzy (Jaccard >= 0.55) keep=1, mirroring the register_gate F1 detector,
+        # so trailing-clause variants collapse too. Checked BEFORE the word floor.
+        if _f1_signature_dedup_enabled() and _f1_sig_is_signature(stripped, wc, cc):
+            ws = _f1_sig_word_set(stripped)
+            if any(_f1_sig_jaccard(ws, prev) >= _F1_SIG_SIM for prev in sig_seen):
+                notes.append(
+                    f"book_wide_f1_signature_dedupe: removed re-stamp {stripped[:80]!r}"
+                )
+                continue
+            sig_seen.append(ws)
+            kept.append(stripped)
+            continue
         if wc < min_words or cc < min_chars:
             # Short paragraphs are exempt — transitional lines, beats, dialogue
             # tags must be free to repeat across chapters.
