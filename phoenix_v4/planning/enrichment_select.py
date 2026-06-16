@@ -20,6 +20,7 @@ from __future__ import annotations
 import hashlib
 import json
 import logging
+import os
 import re
 from collections import defaultdict
 from dataclasses import asdict, dataclass, field
@@ -1189,6 +1190,156 @@ def _norm_ws(text: str) -> str:
 
 def _wc(text: str) -> int:
     return len((text or "").split())
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Cross-chapter fuzzy depth-dedup (ws_f1_depth_dedup_20260615, task_48b619ed)
+# ─────────────────────────────────────────────────────────────────────────────
+# The depth pass (apply_depth_pass) re-reads atom CANONICAL blocks per chapter.
+# The legacy dedup kept a PER-CHAPTER set of exact ``_norm_ws(body)`` strings, so
+# (a) it never saw what an earlier chapter already used, and (b) even within a
+# book-wide set the exact match was defeated by per-chapter trailing-clause
+# variation (e.g. the composer appends a different one-line tail to the same HOOK
+# atom in each chapter). Result: the SAME atom body (HOOK v02 "The task is open",
+# EXERCISE/doctrine blocks) was re-injected across all 12 chapters, producing the
+# bulk of the full-12 F1 mass (⑤ leverB attribution: 223/224 deep-tier clusters).
+#
+# ``_SeenBodies`` replaces that set with a BOOK-WIDE registry that is still
+# set-compatible (``x in reg`` exact membership + ``reg.add(x)`` are unchanged, so
+# every existing call-site and test keeps working) but additionally exposes
+# ``seen_similar(text)`` — a Jaccard word-set overlap check that MIRRORS the
+# register-gate F1 detector (``_word_set`` + ``_cosine_jaccard`` at
+# ``phoenix_v4/quality/register_gate.py``). A depth candidate whose body is
+# ≥ threshold-similar to one already used book-wide is rejected, so the selector
+# rotates to an unused sibling ARC block / variant instead of re-stamping the same
+# one. Bodies below ``min_words`` are exempt (short transitions may legitimately
+# repeat — matches F1's ≥3-sentence floor and the renderer's min_words exemption).
+#
+# The fuzzy layer is feature-flagged via env ``PHOENIX_DEPTH_DEDUP_FUZZY`` (default
+# on); set "0" to fall back to pure exact-match behavior (the pre-fix baseline).
+_DEPTH_DEDUP_SIM_THRESHOLD = 0.55   # = register_gate F1_SIMILARITY_THRESHOLD
+_DEPTH_DEDUP_MIN_WORDS = 30         # paragraph-class bodies only; short beats exempt
+_DEPTH_DEDUP_TOKEN_RE = re.compile(r"[A-Za-z']+")
+
+
+def _depth_dedup_fuzzy_enabled() -> bool:
+    return (os.environ.get("PHOENIX_DEPTH_DEDUP_FUZZY", "1") or "1") != "0"
+
+
+def _depth_dedup_threshold() -> float:
+    """Similarity threshold for the cross-chapter fuzzy depth-dedup.
+
+    Defaults to ``_DEPTH_DEDUP_SIM_THRESHOLD`` (0.55 = register-gate F1) and is
+    tunable via ``PHOENIX_DEPTH_DEDUP_THRESHOLD`` for calibration sweeps. Higher
+    values dedup only near-identical re-injections (true HOOK/EXERCISE re-stamps,
+    Jaccard ~0.85+) and leave merely-thematically-adjacent atoms in place, which
+    reduces rotation churn on short tiers.
+    """
+    raw = os.environ.get("PHOENIX_DEPTH_DEDUP_THRESHOLD")
+    if raw:
+        try:
+            return max(0.0, min(1.0, float(raw)))
+        except (TypeError, ValueError):
+            pass
+    return _DEPTH_DEDUP_SIM_THRESHOLD
+
+
+def _depth_tokens(text: str) -> List[str]:
+    """Lowercased alpha-token list — identical tokenization to register_gate._word_set
+    so the dedup operates on exactly the tokens the F1 detector would cluster."""
+    return _DEPTH_DEDUP_TOKEN_RE.findall((text or "").lower())
+
+
+def _depth_word_set(text: str) -> frozenset:
+    return frozenset(_depth_tokens(text))
+
+
+def _depth_jaccard(a: frozenset, b: frozenset) -> float:
+    if not a or not b:
+        return 0.0
+    union = len(a | b)
+    return (len(a & b) / union) if union else 0.0
+
+
+class _SeenBodies:
+    """Book-wide registry of used depth-atom bodies.
+
+    Backward-compatible with the plain ``set`` it replaces:
+      * ``_norm_ws(body) in reg``  → exact-string membership (unchanged)
+      * ``reg.add(_norm_ws(body))`` → record exact string (unchanged)
+    Plus a fuzzy layer for cross-chapter near-duplicate suppression:
+      * ``reg.note(raw_body)``      → record the body's word-set for fuzzy checks
+      * ``reg.seen_similar(raw_body)`` → True if ≥ threshold-similar to a prior body
+
+    ``add`` also notes the word-set, so the existing call-sites that register a
+    used body via ``add(_norm_ws(content))`` automatically populate the fuzzy
+    index too — no extra wiring needed at those sites.
+    """
+
+    __slots__ = ("_exact", "_sets", "_threshold", "_min_words", "_fuzzy")
+
+    def __init__(self, threshold: Optional[float] = None,
+                 min_words: int = _DEPTH_DEDUP_MIN_WORDS,
+                 fuzzy: Optional[bool] = None) -> None:
+        self._exact: set = set()
+        self._sets: List[frozenset] = []
+        self._threshold = _depth_dedup_threshold() if threshold is None else threshold
+        self._min_words = min_words
+        self._fuzzy = _depth_dedup_fuzzy_enabled() if fuzzy is None else fuzzy
+
+    # --- set-compatible surface (used by legacy call-sites/tests) ---
+    def __contains__(self, key: str) -> bool:
+        return key in self._exact
+
+    def add(self, key: str) -> None:
+        self._exact.add(key)
+        self.note(key)
+
+    def __len__(self) -> int:  # pragma: no cover - convenience
+        return len(self._exact)
+
+    # --- fuzzy surface ---
+    def note(self, raw_body: str) -> None:
+        """Record a body's word-set so later candidates can be fuzzy-compared.
+
+        Bodies whose TOTAL token count is below ``min_words`` are not indexed —
+        short transitions are allowed to repeat. The Jaccard set itself is what's
+        stored (deduped tokens) but the size gate is on the raw token count so a
+        normal 3-sentence atom paragraph (~30+ words, ~25 unique) still qualifies.
+        """
+        if not self._fuzzy:
+            return
+        toks = _depth_tokens(raw_body)
+        if len(toks) >= self._min_words:
+            self._sets.append(frozenset(toks))
+
+    def seen_similar(self, raw_body: str) -> bool:
+        """True if ``raw_body`` is ≥ threshold-similar (Jaccard) to any noted body.
+
+        Short bodies (< min_words TOTAL tokens) are never considered duplicates
+        so legitimate short transitions keep repeating.
+        """
+        if not self._fuzzy:
+            return False
+        toks = _depth_tokens(raw_body)
+        if len(toks) < self._min_words:
+            return False
+        ws = frozenset(toks)
+        thr = self._threshold
+        for prev in self._sets:
+            if _depth_jaccard(ws, prev) >= thr:
+                return True
+        return False
+
+
+def _seen_similar(book_seen_bodies: Any, raw_body: str) -> bool:
+    """Duck-typed fuzzy check that tolerates a plain ``set`` (legacy callers).
+
+    Returns False when ``book_seen_bodies`` has no fuzzy layer (e.g. a bare set
+    passed by an old test), so those paths keep their exact-only semantics.
+    """
+    fn = getattr(book_seen_bodies, "seen_similar", None)
+    return bool(fn(raw_body)) if callable(fn) else False
 
 
 def _personas_with_topic(topic: str, repo_root: Path) -> List[str]:
@@ -2659,6 +2810,7 @@ def _pick_canonical_block_per_section(
     seed: str,
     slot_label: str,
     source_path: Path,
+    reject: Optional[Any] = None,
 ) -> Optional[Dict[str, str]]:
     """Select a single ARC block from a CANONICAL.txt body per (chapter, section).
 
@@ -2670,6 +2822,16 @@ def _pick_canonical_block_per_section(
     slot {slot_label}``. When the file is single-block we just paste it
     silently; when the file has 0 ARC blocks (plain-prose CANONICAL.txt) we
     emit a WARNING so the degraded fallback is visible.
+
+    ``reject``: optional ``predicate(text) -> bool`` (ws_f1_depth_dedup). When
+    supplied and the deterministically-picked block's body is rejected (already
+    used book-wide / fuzzy-duplicate), the picker ROTATES deterministically
+    through the remaining same-arc candidates to find an unused sibling block
+    (multi-block files like HOOK carry dozens of blocks of headroom). If every
+    same-arc candidate is rejected, returns the original deterministic pick so
+    the slot is still filled (completeness over strict no-repeat) — the rare
+    forced-repeat is then caught by the downstream renderer dedupe. ``reject`` is
+    not applied to single-block files (no sibling to rotate to).
     """
     if not raw_text:
         return None
@@ -2706,7 +2868,18 @@ def _pick_canonical_block_per_section(
         f"{book_seed}:enrichment_per_section:{source_path.parent.name}:"
         f"{arc_pos}:phase{phase}:{chapter_index}:{section_index}:{slot_label}"
     )
-    pick = candidates[_deterministic_index(pick_seed, len(candidates))]
+    start = _deterministic_index(pick_seed, len(candidates))
+    pick = candidates[start]
+    if callable(reject):
+        # Rotate deterministically (wrap-around) past rejected siblings so the
+        # same atom is not re-stamped across chapters; keep the first acceptable
+        # block. Falls back to the original pick if all siblings are rejected.
+        n = len(candidates)
+        for i in range(n):
+            cand = candidates[(start + i) % n]
+            if not reject(cand["text"]):
+                pick = cand
+                break
     logger.info(
         "[enrichment_per_section] selected ARC %s %s for chapter %s "
         "section %s slot %s from %s",
@@ -2776,8 +2949,11 @@ def _select_prose_chunk_unique(
     target = 150
     for i in range(len(paras)):
         para = paras[(start_idx + i) % len(paras)]
-        if _norm_ws(para) in book_seen_bodies:
-            continue  # skip paragraphs already used (base or prior depth)
+        # Skip paragraphs already used (base or prior depth) — exact match, plus
+        # (ws_f1_depth_dedup) cross-chapter fuzzy near-duplicates when the
+        # registry carries a fuzzy layer.
+        if _norm_ws(para) in book_seen_bodies or _seen_similar(book_seen_bodies, para):
+            continue
         collected.append(para)
         if sum(len(p.split()) for p in collected) >= target:
             break
@@ -2820,6 +2996,15 @@ def _load_depth_content(
     source_type = source.get("type")
     persona_id = (persona_id or "").strip()
 
+    # ws_f1_depth_dedup: a body is "already used" if it is an EXACT prior body OR
+    # (when book_seen_bodies carries a fuzzy layer) ≥ Jaccard-threshold similar to
+    # one used earlier in the book. Mirrors the register-gate F1 detector so the
+    # selector rotates off bodies that would otherwise form an F1 cluster.
+    def _already_used(body: str) -> bool:
+        if book_seen_bodies is None:
+            return False
+        return _norm_ws(body) in book_seen_bodies or _seen_similar(book_seen_bodies, body)
+
     if source_type == "teacher_atom":
         if not teacher_id:
             return None
@@ -2845,22 +3030,38 @@ def _load_depth_content(
             # required here — but per-section variation in the index is still
             # the right behavior. INFO telemetry mirrors the persona_atom path
             # so audit is consistent.
-            idx = _deterministic_index(
+            start = _deterministic_index(
                 f"{seed}:teacher:{slot_type}:ch{chapter_number}:sec{section_index}",
                 len(atoms),
             )
-            atom_path = atoms[idx]
-            atom_data = _load_yaml(atom_path)
-            content = str(atom_data.get("body") or atom_data.get("content") or "").strip()
-            if content and len(content.split()) > 20:
-                if book_seen_bodies is not None and _norm_ws(content) in book_seen_bodies:
-                    continue  # already used in another chapter — skip to next slot_type
-                logger.info(
-                    "[enrichment_per_section] selected teacher_atom %s for chapter %s "
-                    "section %s slot %s from %s",
-                    atom_path.stem, chapter_number, section_index, slot_type, atom_path,
-                )
-                return content
+            # ws_f1_depth_dedup: rotate deterministically across this slot_type's
+            # atom files so a teacher atom already used in an earlier chapter is
+            # not re-stamped; keep the first unused body. Falls back to the
+            # original pick if every atom here is used (caller then tries the
+            # next slot_type / source).
+            chosen: Optional[str] = None
+            fallback: Optional[Tuple[Path, str]] = None
+            for off in range(len(atoms)):
+                atom_path = atoms[(start + off) % len(atoms)]
+                atom_data = _load_yaml(atom_path)
+                content = str(atom_data.get("body") or atom_data.get("content") or "").strip()
+                if not (content and len(content.split()) > 20):
+                    continue
+                if fallback is None:
+                    fallback = (atom_path, content)
+                if not _already_used(content):
+                    chosen = content
+                    logger.info(
+                        "[enrichment_per_section] selected teacher_atom %s for chapter %s "
+                        "section %s slot %s from %s",
+                        atom_path.stem, chapter_number, section_index, slot_type, atom_path,
+                    )
+                    break
+            if chosen is not None:
+                return chosen
+            # Every atom in this slot_type is already used — try the next
+            # slot_type rather than forcing a duplicate here.
+            continue
         return None
 
     if source_type == "persona_atom":
@@ -2892,11 +3093,12 @@ def _load_depth_content(
                 seed=f"{seed}:depth_pa:{slot_type}",
                 slot_label=f"depth_pa:{slot_type}",
                 source_path=canonical,
+                reject=_already_used,  # ws_f1_depth_dedup: rotate off used siblings
             )
             if block is not None:
                 btext = block["text"]
-                if book_seen_bodies is not None and _norm_ws(btext) in book_seen_bodies:
-                    continue  # already used — skip to next slot_type
+                if _already_used(btext):
+                    continue  # all siblings used — skip to next slot_type
                 return btext
             # Plain-prose CANONICAL.txt without ARC headers — fall back to the
             # legacy prose-chunk path so we never go silent (a WARNING was
@@ -2908,7 +3110,7 @@ def _load_depth_content(
                 book_seen_bodies,
             )
             if chunk:
-                if book_seen_bodies is not None and _norm_ws(chunk) in book_seen_bodies:
+                if _already_used(chunk):
                     continue
                 return chunk
         topic_dir = repo_root / "atoms" / persona_id / topic
@@ -2935,10 +3137,11 @@ def _load_depth_content(
                     seed=f"{seed}:depth_eng:{engine_dir.name}",
                     slot_label=f"depth_eng:{engine_dir.name}",
                     source_path=canonical,
+                    reject=_already_used,  # ws_f1_depth_dedup: rotate off used siblings
                 )
                 if block is not None:
                     btext = block["text"]
-                    if book_seen_bodies is not None and _norm_ws(btext) in book_seen_bodies:
+                    if _already_used(btext):
                         continue
                     return btext
                 # Plain-prose engine CANONICAL.txt — degraded fallback.
@@ -2949,7 +3152,7 @@ def _load_depth_content(
                     book_seen_bodies,
                 )
                 if chunk:
-                    if book_seen_bodies is not None and _norm_ws(chunk) in book_seen_bodies:
+                    if _already_used(chunk):
                         continue
                     return chunk
         return None
@@ -2987,6 +3190,10 @@ def _load_depth_content(
                 )
                 continue
             variants = sec_data.get("variants", [])
+            # ws_f1_depth_dedup: collect all preference-matching variant bodies,
+            # then prefer one NOT already used book-wide; fall back to the first
+            # match so the slot is still filled.
+            reg_first: Optional[str] = None
             for pref in variant_preference:
                 pref_l = pref.lower()
                 for v in variants:
@@ -3000,7 +3207,12 @@ def _load_depth_content(
                         if _REGISTRY_PLACEHOLDER_RE.match(content):
                             continue
                         if content and len(content.split()) > 20:
-                            return content
+                            if reg_first is None:
+                                reg_first = content
+                            if not _already_used(content):
+                                return content
+            if reg_first is not None:
+                return reg_first
         return None
 
     if source_type == "component_template":
@@ -3013,13 +3225,27 @@ def _load_depth_content(
         items = templates.get(pool, [])
         if not items:
             return None
-        idx = _deterministic_index(f"{seed}:template:{pool}", len(items))
-        item = items[idx]
-        if isinstance(item, str):
-            return item.strip()
-        if isinstance(item, dict):
-            return str(item.get("text") or item.get("content") or "").strip() or None
-        return None
+
+        def _item_text(it: Any) -> Optional[str]:
+            if isinstance(it, str):
+                return it.strip() or None
+            if isinstance(it, dict):
+                return str(it.get("text") or it.get("content") or "").strip() or None
+            return None
+
+        # ws_f1_depth_dedup: rotate across the pool from the deterministic start
+        # so a template body used in an earlier chapter is not re-stamped.
+        start = _deterministic_index(f"{seed}:template:{pool}", len(items))
+        first: Optional[str] = None
+        for off in range(len(items)):
+            txt = _item_text(items[(start + off) % len(items)])
+            if not txt:
+                continue
+            if first is None:
+                first = txt
+            if not _already_used(txt):
+                return txt
+        return first
 
     if source_type == "phoenix_standard":
         rel = source.get("source_path", "")
@@ -3033,8 +3259,16 @@ def _load_depth_content(
         # Include chapter_number in seed so different chapters pick different blocks
         # from the pool (integration_landing has 7 blocks; 12 chapters → some repeats
         # but cross-chapter dedup is better than all chapters getting block 0).
-        idx = _deterministic_index(f"{seed}:phoenix:{chapter_number}", len(blocks))
-        return blocks[idx]
+        # ws_f1_depth_dedup: rotate across blocks to prefer an unused one.
+        start = _deterministic_index(f"{seed}:phoenix:{chapter_number}", len(blocks))
+        first = None
+        for off in range(len(blocks)):
+            blk = blocks[(start + off) % len(blocks)]
+            if first is None:
+                first = blk
+            if not _already_used(blk):
+                return blk
+        return first
 
     if source_type == "exercise_atom":
         rel = source.get("source_path", "")
@@ -3044,9 +3278,20 @@ def _load_depth_content(
         atoms = sorted(path.glob("*.yaml"))
         if not atoms:
             return None
-        idx = _deterministic_index(f"{seed}:exercise", len(atoms))
-        atom_data = _load_yaml(atoms[idx])
-        return str(atom_data.get("body") or atom_data.get("content") or "").strip() or None
+        # ws_f1_depth_dedup: rotate across exercise atoms so the same EXERCISE
+        # body ("Just thirty seconds…") is not re-injected across all chapters.
+        start = _deterministic_index(f"{seed}:exercise", len(atoms))
+        first = None
+        for off in range(len(atoms)):
+            atom_data = _load_yaml(atoms[(start + off) % len(atoms)])
+            body = str(atom_data.get("body") or atom_data.get("content") or "").strip()
+            if not body:
+                continue
+            if first is None:
+                first = body
+            if not _already_used(body):
+                return body
+        return first
 
     if source_type == "practice_library":
         try:
@@ -3076,8 +3321,16 @@ def _load_depth_content(
         pool = long_strings or strings
         if not pool:
             return None
-        idx = _deterministic_index(f"{seed}:exercise_bridge", len(pool))
-        return pool[idx]
+        # ws_f1_depth_dedup: rotate across the bridge-template pool.
+        start = _deterministic_index(f"{seed}:exercise_bridge", len(pool))
+        first = None
+        for off in range(len(pool)):
+            cand = pool[(start + off) % len(pool)]
+            if first is None:
+                first = cand
+            if not _already_used(cand):
+                return cand
+        return first
 
     return None
 
@@ -3287,13 +3540,43 @@ def apply_depth_pass(
     depth_budget_starvation: List[Dict[str, Any]] = []
     audit_list: List[Dict[str, Any]] = enriched_book.enrichment_audit["depth_modules_added"]
 
-    # Per-chapter paragraph dedup: each chapter keeps its own set of used paragraph
-    # bodies (across all depth rounds + passes). This prevents the same source
-    # paragraph from appearing multiple times in the SAME chapter (which causes
-    # scene anchor density violations when the same phrase repeats in many paragraphs).
-    # Different chapters CAN reuse the same source paragraphs — cross-chapter
-    # duplicates are handled by _dedup_repeated_blocks in clean_for_delivery.
-    _chapter_seen_bodies: Dict[int, set] = {}
+    # BOOK-WIDE paragraph dedup (ws_f1_depth_dedup_20260615): one registry shared
+    # across ALL chapters + depth rounds + passes. This is the F1 fix.
+    #
+    # Previously this was a PER-CHAPTER set ({chapter.number: set()}), so the depth
+    # selector never saw that an earlier chapter had already injected a given atom
+    # body — the same HOOK/EXERCISE/doctrine block was re-stamped in all 12 chapters
+    # (⑤ leverB attribution: 223/224 deep-tier F1 clusters originate here). The old
+    # comment claimed "cross-chapter duplicates are handled by _dedup_repeated_blocks
+    # in clean_for_delivery", but that downstream pass is chapter-scoped + exact-match
+    # and is defeated by the per-chapter trailing-clause variation the composer adds,
+    # so the duplicates survive into the rendered book and fire F1.
+    #
+    # _SeenBodies is book-wide AND fuzzy: a candidate body that is ≥ Jaccard-threshold
+    # similar (mirrors the register-gate F1 detector) to one already used anywhere in
+    # the book is rejected, so the selector rotates to an unused sibling ARC block /
+    # variant (HOOK has 88 blocks of headroom) — book completeness is preserved by
+    # filling with DIFFERENT content, not by dropping the slot. Intra-chapter
+    # repetition is still suppressed as a side effect (a body used in this chapter is
+    # in the same book-wide registry). Short bodies stay exempt (see _SeenBodies).
+    _book_seen_bodies = _SeenBodies()
+
+    # Pre-seed the registry with the bodies select_enrichment already placed in every
+    # chapter (HOOK / STORY / base slots). Without this, the depth rotation could
+    # pick a sibling block that is itself near-duplicate to a BASE paragraph (which
+    # the depth pass never registered), trading a depth re-injection for a fresh
+    # base↔depth F1 pair. Seeding the existing content first makes the depth pass
+    # avoid colliding with what is already in the book — paragraph-level so multi-atom
+    # slots are each compared. Only the fuzzy index is seeded (note, not add): exact
+    # base strings must stay selectable by depth where intended; we only steer the
+    # rotation away from near-duplicates.
+    for _ch in enriched_book.chapters:
+        for _slot in _ch.slots:
+            body = _slot.content or ""
+            for _para in re.split(r"\n{2,}", body):
+                _para = _para.strip()
+                if _para:
+                    _book_seen_bodies.note(_para)
 
     for _depth_round in range(depth_rounds):
 
@@ -3365,7 +3648,7 @@ def apply_depth_pass(
                 pass_label=f"p1r{_depth_round}",
                 audit_list=audit_list,
                 deficit_floor=deficit_floor,
-                book_seen_bodies=_chapter_seen_bodies.setdefault(chapter.number, set()),
+                book_seen_bodies=_book_seen_bodies,
                 locale=locale,
             )
             reservation_used += added
@@ -3434,7 +3717,7 @@ def apply_depth_pass(
                 pass_label=f"p2r{_depth_round}",
                 audit_list=audit_list,
                 deficit_floor=deficit_floor,
-                book_seen_bodies=_chapter_seen_bodies.setdefault(chapter.number, set()),
+                book_seen_bodies=_book_seen_bodies,
                 locale=locale,
             )
             depth_words_added_by_chapter[chapter.number] += added
