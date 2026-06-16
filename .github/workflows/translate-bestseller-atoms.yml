@@ -7,7 +7,11 @@
 name: Translate bestseller atoms (CJK6)
 
 concurrency:
-  group: translate-bestseller-${{ github.event.inputs.persona }}-${{ github.event.inputs.locale }}
+  # github.event.inputs is unavailable on non-dispatch events (e.g. a push that
+  # touches this file), which fails workflow startup ('workflow file issue', 0
+  # jobs). Gate the input read on the event name; fall back to the always-
+  # resolvable run id (also keeps the group unique per dispatch).
+  group: translate-bestseller-${{ github.event_name == 'workflow_dispatch' && format('{0}-{1}', github.event.inputs.persona, github.event.inputs.locale) || github.run_id }}
   cancel-in-progress: false
 
 on:
