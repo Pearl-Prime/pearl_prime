@@ -1,19 +1,16 @@
 # Atoms parse-sweep guard — fails a PR the instant a clean atoms/**/CANONICAL.txt is
 # mangled into the #1590 metadata-less "## <LABEL> vNN" over-match (-> NO_STORY_POOL).
 #
-# WHY A DEDICATED CHECK: the guard already existed (#1623) but ran only inside "Core tests"
-# (a non-required check), so #1623 self-merged a residual that left the guard RED. This
-# surfaces the sweep as its own named, path-scoped check on every atoms-touching PR, so the
-# signal is visible and an owner can promote it to a required check via the branch ruleset.
+# REQUIRED CHECK (Protect main ruleset). The pull_request trigger is intentionally NOT
+# path-filtered: a required status check must report on EVERY PR to main, or GitHub blocks
+# the merge waiting for a status that never arrives (path-filter + required = deadlock). The
+# sweep is cheap (~1 min) and passes trivially when no atoms changed. Do NOT re-add a paths:
+# filter to pull_request, and do NOT remove `name: parse-sweep` (the required-check context
+# and config/governance/required_checks.yaml both pin that exact name).
 name: Atoms parse sweep
 on:
   pull_request:
-    paths:
-      - 'atoms/**'
-      - 'scripts/ci/check_canonical_atom_parse_sweep.py'
-      - 'scripts/ci/check_canonical_atom_parse_sweep_baseline.txt'
-      - 'phoenix_v4/planning/assembly_compiler.py'
-      - '.github/workflows/atoms-parse-sweep.yml'
+    branches: [main]
   push:
     branches: [main]
     paths:
@@ -23,6 +20,7 @@ on:
       - 'phoenix_v4/planning/assembly_compiler.py'
 jobs:
   parse-sweep:
+    name: parse-sweep
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

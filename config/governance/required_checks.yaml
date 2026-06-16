@@ -18,6 +18,7 @@ required_checks:
   - "Release gates"
   - "EI V2 gates"
   - "Verify governance"
+  - "parse-sweep"
 
 # At least one of these must be required on main. Prefer non-path-filtered workflows.
 always_required:
