@@ -21,6 +21,7 @@ from __future__ import annotations
 import argparse
 import csv
 import json
+import shutil
 import sys
 from dataclasses import dataclass
 from datetime import date, datetime, timedelta, timezone
@@ -149,8 +150,15 @@ def _rel(repo_root: Path, path: Path) -> str:
         return path.as_posix()
 
 
-def _teacher_ids_for_brand(repo_root: Path, brand_id: str) -> list[str]:
-    path = repo_root / "config" / "brand_registry.yaml"
+def _normalize_teacher_list(raw: object) -> list[str]:
+    if isinstance(raw, str) and raw.strip():
+        return [raw.strip()]
+    if isinstance(raw, list):
+        return [str(t).strip() for t in raw if t]
+    return []
+
+
+def _teachers_from_matrix_yaml(path: Path, brand_id: str) -> list[str]:
     if not path.is_file():
         return []
     data = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
@@ -158,12 +166,76 @@ def _teacher_ids_for_brand(repo_root: Path, brand_id: str) -> list[str]:
     meta = brands.get(brand_id) if isinstance(brands, dict) else None
     if not isinstance(meta, dict):
         return []
-    teachers = meta.get("teacher_ids") or meta.get("teachers") or []
-    if isinstance(teachers, str):
-        return [teachers]
-    if isinstance(teachers, list):
-        return [str(t) for t in teachers if t]
-    return []
+    out = _normalize_teacher_list(meta.get("teachers"))
+    primary = meta.get("primary_teacher")
+    if isinstance(primary, str) and primary.strip() and primary.strip() not in out:
+        out.insert(0, primary.strip())
+    return out
+
+
+def _teacher_ids_for_brand(repo_root: Path, brand_id: str) -> list[str]:
+    """Teachers for a brand: brand_registry, then catalog planning matrices."""
+    seen: set[str] = set()
+    ordered: list[str] = []
+
+    def _add(items: Iterable[str]) -> None:
+        for tid in items:
+            if tid and tid not in seen:
+                seen.add(tid)
+                ordered.append(tid)
+
+    reg_path = repo_root / "config" / "brand_registry.yaml"
+    if reg_path.is_file():
+        data = yaml.safe_load(reg_path.read_text(encoding="utf-8")) or {}
+        brands = data.get("brands") or {}
+        meta = brands.get(brand_id) if isinstance(brands, dict) else None
+        if isinstance(meta, dict):
+            _add(_normalize_teacher_list(meta.get("teacher_ids") or meta.get("teachers")))
+            primary = meta.get("primary_teacher")
+            if isinstance(primary, str):
+                _add([primary.strip()])
+
+    catalog = repo_root / "config" / "catalog_planning"
+    _add(_teachers_from_matrix_yaml(catalog / "brand_teacher_matrix.yaml", brand_id))
+    _add(_teachers_from_matrix_yaml(catalog / "brand_teacher_matrix_zh.yaml", brand_id))
+    return ordered
+
+
+def _pearl_slice_dest_name(rel_src: str) -> str:
+    prefix = "artifacts/pearl_news/published/"
+    if rel_src.startswith(prefix):
+        return rel_src[len(prefix) :]
+    return Path(rel_src).name
+
+
+def materialize_pearl_news_slice(
+    repo_root: Path,
+    brand_id: str,
+    *,
+    week_iso: str,
+    index: _ArtifactIndex,
+) -> list[str]:
+    """Copy this brand's Pearl_News articles into weekly_packages/<brand>/<week>/pearl_news/."""
+    root = repo_root.resolve()
+    dest_root = root / "artifacts" / "weekly_packages" / brand_id / week_iso / "pearl_news"
+    rel_srcs: list[str] = []
+    for tid in _teacher_ids_for_brand(root, brand_id):
+        rel_srcs.extend(index.pearl_news_files.get(tid, []))
+
+    out: list[str] = []
+    seen_dest: set[str] = set()
+    for rel in sorted(set(rel_srcs)):
+        src = root / rel
+        if not src.is_file():
+            continue
+        dest = dest_root / _pearl_slice_dest_name(rel)
+        dest.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(src, dest)
+        rel_dest = _rel(root, dest)
+        if rel_dest not in seen_dest:
+            seen_dest.add(rel_dest)
+            out.append(rel_dest)
+    return out
 
 
 @dataclass
@@ -191,9 +263,16 @@ class _ArtifactIndex:
                     continue
                 if not (mon <= day <= sun):
                     continue
-                for p in sorted(day_dir.rglob("*")):
-                    if p.is_file():
-                        pearl.setdefault("_week", []).append(_rel(root, p))
+                for slot_dir in sorted(day_dir.iterdir()):
+                    if not slot_dir.is_dir():
+                        continue
+                    for teacher_dir in sorted(slot_dir.iterdir()):
+                        if not teacher_dir.is_dir():
+                            continue
+                        tid = teacher_dir.name
+                        for p in sorted(teacher_dir.rglob("*")):
+                            if p.is_file():
+                                pearl.setdefault(tid, []).append(_rel(root, p))
 
         manga: dict[str, list[str]] = {}
         manga_root = root / "artifacts" / "manga"
@@ -271,7 +350,9 @@ def discover_deliverable_files(
 
     elif deliverable_type == "pearl_news":
         idx = index or _ArtifactIndex.build(root, week_monday)
-        found.extend(idx.pearl_news_files.get("_week", []))
+        found.extend(
+            materialize_pearl_news_slice(root, brand_id, week_iso=week_iso, index=idx)
+        )
 
     elif deliverable_type == "podcast":
         pod = pkg / "podcast"
@@ -360,6 +441,9 @@ def build_tsv_rows(
         )
         for dtype in DELIVERABLE_TYPES:
             block = manifest["deliverables"][dtype]
+            last_updated = generated_at
+            if dtype == "pearl_news" and block["status"] == "pending":
+                last_updated = week_monday.isoformat()
             rows.append(
                 TsvRow(
                     brand_id=bid,
@@ -367,7 +451,7 @@ def build_tsv_rows(
                     deliverable_type=dtype,
                     status=block["status"],
                     download_url="",
-                    last_updated=generated_at,
+                    last_updated=last_updated,
                 )
             )
     return rows
