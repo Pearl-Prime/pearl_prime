@@ -32,7 +32,7 @@ def test_brand_index_returns_three_axes_with_expected_keys():
     assert isinstance(out["book"], list)
     assert isinstance(out["manga"], list)
     assert isinstance(out["music"], list)
-    assert set(out["counts"].keys()) == {"book", "manga", "music", "total"}
+    assert set(out["counts"].keys()) == {"book", "manga", "music", "unified", "total"}
     assert out["counts"]["total"] == out["counts"]["book"] + out["counts"]["manga"] + out["counts"]["music"]
 
 
