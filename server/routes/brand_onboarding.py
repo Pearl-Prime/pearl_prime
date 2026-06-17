@@ -36,6 +36,11 @@ router = APIRouter(prefix="/api/v1/onboarding", tags=["onboarding"])
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 UNIFIED_REGISTRY = REPO_ROOT / "config" / "brand_management" / "global_brand_registry_unified.yaml"
+# Generated SSOT the wizard's client matcher (brand-wizard-app/src/brandMatch.js) reads:
+# per brand_id it carries arch (archetype base), lane, and buildable (catalog-bearing?).
+# A brand is "catalog-bearing" iff its entry here has buildable != false — the SAME signal
+# the client matcher gates on (brandMatch.js: `b.buildable !== false`), so server == client.
+BRANDS_INDEX_JSON = REPO_ROOT / "brand-wizard-app" / "public" / "brand_admin_brands.json"
 ONBOARDING_DIR = REPO_ROOT / "artifacts" / "onboarding"
 SUBMISSIONS_DIR = ONBOARDING_DIR / "submissions"
 LOG_TSV = ONBOARDING_DIR / "submissions_log.tsv"
@@ -67,6 +72,59 @@ def _valid_brand_ids() -> set[str]:
         return set()
 
 
+def _brands_index() -> Dict[str, dict]:
+    """The generated brand_id -> {arch, lane, buildable, ...} map (same SSOT the client matcher uses).
+
+    Fail-open: returns {} if the file is missing/unparseable, so the buildability gate and the
+    archetype fallback simply no-op in stripped-down envs (mirrors _valid_brand_ids' tolerance).
+    """
+    try:
+        import json
+        data = json.loads(BRANDS_INDEX_JSON.read_text(encoding="utf-8")) or {}
+        return data if isinstance(data, dict) else {}
+    except Exception as e:
+        logger.warning("brands index unavailable for buildability gate: %s", e)
+        return {}
+
+
+def _is_catalog_bearing(brand_id: str, index: Dict[str, dict]) -> bool:
+    """A brand is catalog-bearing iff its index entry has buildable != false.
+
+    Unknown brand_id (no entry) → True (fail-open; the registry-membership check already ran).
+    """
+    entry = index.get(brand_id)
+    if not isinstance(entry, dict):
+        return True
+    return entry.get("buildable") is not False
+
+
+def _resolve_archetype_to_brand(token: str, lane: Optional[str], index: Dict[str, dict]) -> Optional[str]:
+    """Fallback: resolve a bare archetype base (e.g. 'stillness_press') to a concrete,
+    catalog-bearing brand_id, preferring the requested lane.
+
+    Returns None if no catalog-bearing brand carries that archetype. Used only when the posted
+    brand_id is not itself a direct registry key (so an archetype-only input still lands a signup
+    on a real, buildable brand instead of 422-failing).
+    """
+    if not token or not index:
+        return None
+    want_lane = (lane or "").strip()
+    matches = [
+        (bid, entry) for bid, entry in index.items()
+        if isinstance(entry, dict)
+        and entry.get("arch") == token
+        and entry.get("buildable") is not False
+    ]
+    if not matches:
+        return None
+    # Prefer an exact lane match, then fall back to the first catalog-bearing brand (sorted = stable).
+    if want_lane:
+        for bid, entry in sorted(matches):
+            if (entry.get("lane") or "") == want_lane:
+                return bid
+    return sorted(matches)[0][0]
+
+
 def _email_slug(email: str) -> str:
     return re.sub(r"[^a-z0-9]+", "_", (email or "anon").lower()).strip("_")[:48] or "anon"
 
@@ -89,8 +147,21 @@ def submit_onboarding(req: OnboardingSubmission) -> dict:
     if not _BRAND_RE.fullmatch(brand_id):
         raise HTTPException(status_code=422, detail="invalid brand_id")
     valid = _valid_brand_ids()
+    index = _brands_index()
+    # Archetype -> brand fallback: if the posted brand_id is NOT a concrete registry key, treat it
+    # as a bare archetype base and resolve it to a real, catalog-bearing brand (preferring req.lane).
+    # This keeps an archetype-only input from 422-failing; it lands on a buildable brand instead.
     if valid and brand_id not in valid:
-        raise HTTPException(status_code=422, detail=f"brand_id not in unified registry: {brand_id}")
+        resolved = _resolve_archetype_to_brand(brand_id, req.lane, index)
+        if resolved:
+            logger.info("onboarding: archetype %r resolved to brand %s (lane=%s)", brand_id, resolved, req.lane)
+            brand_id = resolved
+        else:
+            raise HTTPException(status_code=422, detail=f"brand_id not in unified registry: {brand_id}")
+    # Catalog-bearing gate: never assign a signup to a brand that ships 0 items (buildable == false),
+    # even on a direct POST. Same signal the client matcher gates on (brandMatch.js buildable != false).
+    if not _is_catalog_bearing(brand_id, index):
+        raise HTTPException(status_code=422, detail=f"brand_not_buildable: {brand_id}")
     if len(req.wizard_yaml) > 200_000:
         raise HTTPException(status_code=422, detail="wizard_yaml too large")
     email = (req.brand_email or "").strip()
