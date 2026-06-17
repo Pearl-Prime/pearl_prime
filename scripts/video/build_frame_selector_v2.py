@@ -459,7 +459,7 @@ function updateCounter() {{
 
 function renderPath(fname, st) {{
   if (!fname) return '';
-  return (st === 'manga') ? ('manga_frames/manga_' + fname) : ('frames/' + fname);
+  return (st === 'manga') ? ('manga_frames/manga_' + fname.replace(/\.jpe?g$/i, '.png')) : ('frames/' + fname);
 }}
 
 function rows() {{ return Array.from(document.querySelectorAll('.beat-row')); }}
