@@ -1,0 +1,223 @@
+# ────────────────────────────────────────────────────────────────────────────
+# V2 character_design — 12-axis individuation block
+# Schema: config/manga/character_design_template.yaml
+# Authority spec: docs/CHARACTER_INDIVIDUATION_PIPELINE_SPEC_2026-05-02.md
+# Allowed values + solver rules: config/manga/character_design_axes.yaml
+# Drafted: 2026-06-12 (pearl_program_orchestrator_autofill, from brand_lora_plans.yaml junko block)
+# Solver status: pending (constraint_solver to run before any render)
+# OPERATOR REVIEW REQUIRED — best-guess defaults flagged inline with # OPERATOR-CONFIRM.
+# ────────────────────────────────────────────────────────────────────────────
+
+character_design:
+  series_id: heart_transmission_en_01   # OPERATOR-CONFIRM: no series profile exists yet for heart_transmission; series_id is a placeholder pending the en_US series file
+  brand_id: heart_transmission
+  locale: en_US                          # OPERATOR-CONFIRM: locale not stated in brand_lora; assumed en_US (CORE-12 default lead locale)
+  market_demo: josei                     # OPERATOR-CONFIRM: brand_lora states no market_demo; josei inferred (adult Japanese-female spiritual lead, mirrors gold template register)
+  genre_family: healing
+  subgenre: cosmic_channeling_spiritual  # OPERATOR-CONFIRM: subgenre inferred from brand_lora "cosmic-channeling brand"; confirm exact subgenre label
+  character_id: junko
+  character_role: protagonist            # OPERATOR-CONFIRM: teacher-author lead assumed protagonist (CORE-12 single-teacher series pattern)
+  drafted_by: pearl_program_orchestrator_autofill
+  drafted_at: "2026-06-12"
+  source_descriptions:
+    - "brand_lora_plans.yaml junko.notes: 'Japanese female channeler, luminous robes, light particles, receptive presence; LoRA assets AWAIT Phase 5 cosmic re-render commission'"
+    - "brand_lora_plans.yaml junko comment (OPD-111 §7.C): 'Junko's visual register: luminous robes, light particles, hands raised receptively, soft golden-rose/blue palette, NO enso, NO ink-brush, NO kitchen-table setting'"
+    - "brand_lora_plans.yaml junko: trigger_word 'junko_ht', style_ref 'heart_transmission', ip_adapter_weight 0.82, training_steps 1500"
+    - "brand_lora_plans.yaml junko: 'LoRA training itself is a Phase 5 deferred Pearl Star ComfyUI commission (operator-attended)'"
+
+  axes:
+
+    # AXIS 1 — face_shape
+    # Channeler/cosmic-mystic register → elongated (CLAMP-style stylized, xxxHolic
+    # Yuko adult). Deliberately FAR from Mira's soft_round and from same-brand-
+    # adjacent Japanese-female teachers (Miki Gen-Z, Miyuki wabi-sabi). Elongated
+    # carries the serene, otherworldly, vertically-composed channeler silhouette.
+    face_shape:
+      value: elongated                   # OPERATOR-CONFIRM: face_shape not in brand_lora; elongated chosen to encode otherworldly channeler register + maximize distance from Mira (soft_round)
+      lockout: yes
+      mangaka_tradition: "CLAMP-style elongated (xxxHolic Yuko adult) — shojo-stylized, ethereal vertical composition for the channeler register"
+
+    # AXIS 2 — eye_geometry
+    # Medium-to-large upturned almond, double-lid, moderate lash — luminous,
+    # receptive, slightly distant gaze. NOT extra_large + heavy_decorative
+    # (forbidden_combinations shojo_eye_in_josei). Distinct from Mira's medium
+    # standard-spaced minimal-lash josei-realist eye.
+    eye_geometry:
+      size: large                        # OPERATOR-CONFIRM: large (not extra_large — stays inside josei forbidden_combination) chosen for luminous receptive gaze
+      shape: upturned                    # OPERATOR-CONFIRM: upturned almond distinguishes from Mira's neutral almond
+      spacing: wide                      # OPERATOR-CONFIRM: wide spacing reads serene/open vs Mira's standard
+      lid_fold: double                   # consistent with Japanese-coded ethnicity (brand_lora "Japanese female")
+      eyelash_density: moderate          # OPERATOR-CONFIRM: moderate (NOT heavy_decorative — would trip shojo_eye_in_josei forbidden rule)
+      lockout: yes
+      note: "double_lid + warm_light skin (axis 10) consistent with brand_lora 'Japanese female'; size:large + eyelash:moderate deliberately held below the josei forbidden ceiling (extra_large + heavy_decorative)"
+
+    # AXIS 3 — nose_construction
+    # Straight medium bridge, narrow tip, implied nostrils — refined ethereal
+    # register. Distinct from Mira's short rounded implied nose.
+    nose_construction:
+      bridge_angle: straight             # OPERATOR-CONFIRM: nose not in brand_lora; straight medium chosen for refined channeler register
+      bridge_length: medium              # OPERATOR-CONFIRM: medium (vs Mira short) lengthens the ethereal face
+      tip_shape: narrow                  # OPERATOR-CONFIRM: narrow (vs Mira rounded) for refinement
+      nostril_visibility: implied        # soft-shojo register; not drawn (seinen) or prominent (gekiga)
+      lockout: yes
+
+    # AXIS 4 — mouth_jaw
+    # Serene neutral_soft resting mouth, narrow jaw, soft_pointed chin, thin-upper/
+    # full-lower (canonical josei). Forbidden bow_mouth (josei anti-pattern).
+    # Resting expression reads as gentle composure / receptive stillness.
+    mouth_jaw:
+      resting_expression: neutral_soft   # OPERATOR-CONFIRM: serene composure inferred from "receptive presence"; confirm vs slight_smile
+      jaw_width: narrow                  # OPERATOR-CONFIRM: narrow jaw for ethereal register
+      chin_shape: soft_pointed           # OPERATOR-CONFIRM: soft_pointed; note this matches Mira — acceptable since it is a low-leverage sub-attr and the high-leverage axes diverge hard
+      lip_shape: thin_upper_full_lower   # canonical josei (forbidden: bow_mouth)
+      lockout: yes
+
+    # AXIS 5 — hair
+    # LONG straight black with silver/white streak at the temples + a flowing
+    # crown — the channeler silhouette. The silver streak is an age + cosmic-
+    # conduit signal. DELIBERATELY FAR from Mira (brown, side-part, wavy, waist)
+    # and from Miki/Miyuki. Center-parted, floor-adjacent, catches light particles.
+    hair:
+      length: floor_length               # OPERATOR-CONFIRM: floor_length chosen for dramatic channeler silhouette (vs Mira long_to_waist); confirm length register is on-brand
+      parting: center                    # OPERATOR-CONFIRM: center part (vs Mira side_left) for symmetric ceremonial composition
+      fringe_style: curtain              # OPERATOR-CONFIRM: curtain fringe (vs Mira side_swept) frames the face symmetrically
+      texture: straight                  # OPERATOR-CONFIRM: straight (vs Mira slight_wave) for the falling-light-curtain look
+      color_signal: black                # consistent with brand_lora "Japanese female"; distinct from Mira's brown
+      signature_shape_note: "long straight black hair with a silver streak at the temples; in channeling beats the hair lifts subtly as if charged, and light particles (the brand's signature visual) collect along the strands — the silver streak is the recurring close-up ID and doubles as the cosmic-conduit signal"
+      lockout: yes
+
+    # AXIS 6 — build
+    # Per template default — silhouette less individuating than face; solver does
+    # not lock hard. Tall-implied + slender to support the vertical ethereal
+    # composition of the luminous-robe wardrobe.
+    build:
+      height_implied: tall               # OPERATOR-CONFIRM: tall-implied chosen for vertical ethereal composition; low-leverage, lockout off
+      frame_density: small
+      shoulder_ratio: narrow
+      lockout: no
+
+    # AXIS 7 — wardrobe_register
+    # The luminous flowing robe IS the brand_lora-named signature visual. Fantasy/
+    # ceremonial register, contemporary-timeless. NO enso, NO ink-brush, NO
+    # kitchen-table (brand_lora explicit negatives). Light particles integrate
+    # with the robe hem and raised sleeves. Far from Mira's contemporary office knit.
+    wardrobe_register:
+      era_signal: fantasy_setting        # OPERATOR-CONFIRM: brand_lora says "luminous robes" — mapped to fantasy_setting (timeless ceremonial), NOT contemporary_2020s
+      personality_encoding:
+        - luminous_flowing_robe          # brand_lora named signature: "luminous robes"
+        - wide_draping_sleeves           # supports "hands raised receptively" silhouette
+        - soft_light_emitting_hem        # brand_lora "light particles" integrated at the hem
+        - barefoot_or_simple_sandal      # OPERATOR-CONFIRM: footwear not stated; simple/barefoot inferred for ethereal register
+      formality: ceremonial
+      lockout: yes
+
+    # AXIS 8 — posture_default
+    # Hands raised receptively (brand_lora named pose), open and serene. Upright,
+    # symmetric — the receptive-channel stance. Distinct from Mira's contained
+    # forward-lean. Solver leaves posture free per template default.
+    posture_default:
+      energy: neutral                    # OPERATOR-CONFIRM: serene-receptive maps to neutral/contained; chose neutral for open upright channel stance
+      symmetry: symmetric                # receptive hands-raised stance is symmetric (vs Mira slight_left_lean)
+      lockout: no
+
+    # AXIS 9 — age_signaling
+    # A cosmic channeler reads as a mature, serene, slightly-ageless figure.
+    # Late_40s with faint smile lines + the silver-streak temple cue — old enough
+    # for gravitas, ageless enough for the otherworldly register. DELIBERATELY FAR
+    # from Mira (early_30s) and from Miki (Gen-Z 20s). Adjacent to but distinct
+    # from Miyuki (late_40s wabi-sabi) via the cosmic/luminous register, not age.
+    age_signaling:
+      apparent_age_decade: late_40s      # OPERATOR-CONFIRM: brand_lora gives no age; late_40s inferred for channeler gravitas + max distance from Mira early_30s. Confirm vs 50s.
+      visible_age_cues:
+        - faint_smile_lines              # OPERATOR-CONFIRM: gentle serene maturity
+        - grey_at_temples                # ties to the hair silver-streak ID; cosmic-conduit + age signal
+        - no_full_crow_feet              # held youthful/ageless per otherworldly register
+        - luminous_unblemished_skin
+      lockout: yes
+
+    # AXIS 10 — skin_treatment
+    # Clean, warm_light, with an implied inner glow in channeling beats. Solver
+    # leaves free per template default (low leverage in color, render handles glow).
+    skin_treatment:
+      texture: clean
+      tone: warm_light                   # OPERATOR-CONFIRM: warm_light consistent with "Japanese female"; confirm vs pale_warm for the luminous register
+      lockout: no
+
+    # AXIS 11 — accessories
+    # UNIQUE high-leverage signature_item (NOT Mira's jade pendant): a small
+    # luminous orb / cupped light held between the receptively-raised hands — the
+    # literal "light particles" of the brand made into a held object and the
+    # somatic focal point of every channeling beat. This is the reader-memory ID.
+    accessories:
+      glasses: none
+      jewelry: signature_piece
+      signature_item: "a cupped luminous light-orb held between the raised palms — a soft golden-rose sphere of gathered light particles (the brand_lora 'light particles' signature rendered as a held focal object); it brightens at the emotional peak of each channeling beat and is the single element the reader's eye returns to — DISTINCT from Mira's jade pendant"  # OPERATOR-CONFIRM: orb form-factor is a best-guess realization of brand_lora "light particles"; confirm orb vs ambient-particles-only
+      secondary_signature_item: "a thin circlet or forehead light-mark at the brow — faint third-eye luminance that appears only mid-channel"  # OPERATOR-CONFIRM: secondary cue invented; confirm or drop
+      lockout: yes
+
+    # AXIS 12 — color_signal
+    # Soft golden-rose primary + luminous blue accent — DIRECTLY from brand_lora
+    # "soft golden-rose/blue palette". (dusty_rose primary, indigo accent are the
+    # nearest allowed tokens.) DELIBERATELY FAR from Mira's warm_cream/jade. In
+    # B&W, Junko is the HIGHEST-luminance figure (light source), the inverse of
+    # Mira's mid-grey-anchored register.
+    color_signal:
+      palette_primary: dusty_rose        # nearest allowed token to brand_lora "golden-rose"; OPERATOR-CONFIRM exact token (no 'golden_rose' value in allowed list)
+      palette_accent: indigo             # nearest allowed token to brand_lora "blue"
+      palette_secondary: lavender        # OPERATOR-CONFIRM: secondary not in brand_lora; lavender bridges the rose/blue luminance
+      bw_register_note: "inverse of Mira: Junko renders as the HIGHEST-luminance figure in a panel (she is a light source) — near-white robe value with a soft glow halo; the light-orb is the single bright bloom the eye returns to. Never mid-grey-anchored."
+      lockout: yes
+
+  # ── Solver metadata ─────────────────────────────────────────────────────
+  solver:
+    individuation_axes_locked: 9
+    # LOCKED (lockout: yes): face_shape, eye_geometry, nose_construction,
+    # mouth_jaw, hair, wardrobe_register, age_signaling, accessories, color_signal
+    # (build, posture_default, skin_treatment intentionally lockout: no per template defaults)
+    last_validated: pending
+    collision_check_passed: pending
+    operator_confirmation: required
+    collision_check_against:
+      brand_scope: heart_transmission
+      # No same-brand peer in CORE-12 (junko is the sole heart_transmission lead) →
+      # same-brand 5-axis threshold has no comparand. Cross-brand 7-axis risk vs
+      # other Japanese-female leads (Miki, Miyuki) mitigated by face_shape (elongated),
+      # hair (floor black + silver streak), age (late_40s), wardrobe (ceremonial robe),
+      # color (rose/indigo) all diverging hard from each.
+      collisions_detected: []
+
+  # ── Render metadata ─────────────────────────────────────────────────────
+  render:
+    # Per-archetype routing; engine_router.py dispatches per archetype.
+    # Authority: docs/specs/MANGA_V3_3_MODEL_ROUTING_SPEC.md
+    engine_routing_strategy: per_archetype
+    engine_routing_authority: docs/specs/MANGA_V3_3_MODEL_ROUTING_SPEC.md
+    engines_in_play:
+      - flux_schnell      # simple objects, backgrounds, light-particle fields, decompression archetypes
+      - flux_dev          # mid-shots, hands (raised-palm channeling pose), character-in-scene
+      - qwen_image_pulid  # face close-ups (identity-critical channeler gaze)
+    secondary_face_lock: pulid_flux_facenet
+    lora_required: false
+    lora_skip_reason: "brand_lora_plans.yaml states junko LoRA assets AWAIT a Phase 5 deferred Pearl Star ComfyUI cosmic re-render commission (operator-attended) — not yet available. Per spec §2.4, named recurring cast use PuLID-FLUX-FaceNet face-lock from the canonical reference sheet until the LoRA is commissioned; LoRA is deferred, not skipped."
+    lora_trigger_word_when_ready: "junko_ht"   # from brand_lora_plans.yaml, for Phase-5 wiring
+    prompt_axis_priority:
+      positive_prompt_axes:
+        - face_shape
+        - eye_geometry
+        - hair
+        - wardrobe_register
+        - age_signaling
+        - accessories
+        - color_signal
+      negative_prompt_axes:
+        - mouth_jaw
+      solver_only_axes:
+        - skin_treatment
+        - posture_default
+        - build
+        - nose_construction
+    last_render_date: pending
+    render_artifact_path: pending
+    reference_sheet_path: pending
+    # Phase C (reference sheet via Qwen+PuLID) will populate:
+    # artifacts/manga/character_references/heart_transmission/junko/{front,three_quarter,profile,expression_sheet}.png

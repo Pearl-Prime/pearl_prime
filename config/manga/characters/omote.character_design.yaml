@@ -1,0 +1,195 @@
+character_design:
+  series_id: body_memory_en_01            # OPERATOR-CONFIRM: no series profile exists for omote yet; placeholder series_id guessed (mirror of stillness_en_01 naming) — confirm the real series_id / locale before solver run
+  brand_id: body_memory
+  locale: en_US                           # OPERATOR-CONFIRM: brand_lora_plans gives no locale for omote; guessed en_US to parallel the stillness_en_01 gold template — confirm intended launch locale (ja_JP plausible given Noh-influenced Japanese-male source)
+  market_demo: seinen                     # OPERATOR-CONFIRM: brand_lora states "Japanese male" but not market_demo; derived seinen from male adult + somatic-grief register (NOT Mira's josei) — this also maximizes axis distance from Mira and clears all josei forbidden_combinations
+  genre_family: healing                   # OPERATOR-CONFIRM: derived from body_memory somatic-grief therapeutic register (parallels stillness healing family); confirm against config/manga/canonical_genre_list.yaml
+  subgenre: somatic_grief_arc             # OPERATOR-CONFIRM: no chapter_script/series profile to source a subgenre; guessed from brand notes "grief held in body" — confirm canonical subgenre slug
+  character_id: omote
+  character_role: protagonist             # OPERATOR-CONFIRM: omote is the brand teacher-character; assumed protagonist of the series lead role (mirrors Mira) — confirm if omote is teacher-frame narrator vs in-story protagonist
+  drafted_by: pearl_program_orchestrator_autofill
+  drafted_at: "2026-06-12"
+  source_descriptions:
+    - "brand_lora_plans.yaml character_loras.omote.notes: 'Japanese male, Noh-influenced bearing, grief held in body'"
+    - "brand_lora_plans.yaml character_loras.omote: trigger_word 'omote_bm', style_ref body_memory, ip_adapter_weight 0.83, reference_images_needed [front_portrait, three_quarter_view, profile_view, expression_sheet]"
+    - "brand_lora_plans.yaml brand_style_loras.body_memory.notes: 'Textured aged paper with Noh theater weight' (trigger_word style_bm)"
+
+  axes:
+
+    # AXIS 1 — face_shape
+    # angular_long (Inoue Vagabond sumi-brush seinen) carries the "Noh theater
+    # weight" + grief-bearing masculine gravity from brand_lora. DELIBERATELY far
+    # from Mira's soft_round (the gold-template josei iyashikei face).
+    face_shape:
+      value: angular_long                 # OPERATOR-CONFIRM: ethnicity/gender (Japanese male) is sourced; the specific angular_long face geometry is a craft guess to match Noh-weight gravity — confirm vs a softer oval if a gentler grief register is wanted
+      lockout: yes
+      mangaka_tradition: "Inoue Vagabond-style angular (Musashi adult) — sumi-brush seinen; long face, angular jaw, sharp cheekbones, ink-wash gravity matching the body_memory 'Noh theater weight' brand style"
+
+    # AXIS 2 — eye_geometry
+    # Small + hooded + single-lid + minimal lashes = Asano/seinen restrained
+    # register. Hooded lids read as grief held quietly behind the eyes.
+    # OPPOSITE of Mira's medium / almond / double-lid / minimal.
+    eye_geometry:
+      size: small                         # OPERATOR-CONFIRM: seinen-restrained small-eye guess; brand_lora gives no eye spec
+      shape: hooded                       # OPERATOR-CONFIRM: hooded chosen to carry "grief held in body" interiority; confirm vs downturned (more overt sorrow) or almond (neutral)
+      spacing: standard                   # OPERATOR-CONFIRM: default standard spacing guessed
+      lid_fold: single                    # OPERATOR-CONFIRM: single lid guessed for East-Asian-male seinen register (vs Mira's double); confirm
+      eyelash_density: minimal            # OPERATOR-CONFIRM: minimal lashes (seinen) guessed
+      lockout: yes
+      note: "small + hooded + single_lid + minimal lashes = Asano-late-period seinen-male register; with warm_medium skin (axis 10) signals the Japanese male of brand_lora without locking ethnicity tighter than needed"
+
+    # AXIS 3 — nose_construction
+    # Prominent / straight / longer bridge with drawn nostrils — seinen renders
+    # the nose where Mira's iyashikei register only implies it.
+    nose_construction:
+      bridge_angle: straight              # OPERATOR-CONFIRM: straight bridge guessed (vs aquiline for sharper gravity)
+      bridge_length: medium               # OPERATOR-CONFIRM: medium length guessed
+      tip_shape: narrow                   # OPERATOR-CONFIRM: narrow tip guessed for angular-seinen face
+      nostril_visibility: drawn           # OPERATOR-CONFIRM: drawn (seinen) chosen to separate from Mira's 'implied'; brand_lora is silent
+      lockout: yes
+
+    # AXIS 4 — mouth_jaw
+    # neutral_firm resting (held composure over grief), wide squared jaw — the
+    # Noh-mask stillness. Far from Mira's neutral_soft + narrow jaw.
+    mouth_jaw:
+      resting_expression: neutral_firm    # OPERATOR-CONFIRM: neutral_firm guessed (composed grief) vs Mira's neutral_soft
+      jaw_width: wide                     # OPERATOR-CONFIRM: wide jaw guessed for masculine Noh-weight gravity
+      chin_shape: square                  # OPERATOR-CONFIRM: square chin guessed (vs soft_pointed)
+      lip_shape: thin_both                # OPERATOR-CONFIRM: thin_both guessed for restrained seinen-male mouth (NOT bow_mouth; allowed for seinen)
+      lockout: yes
+
+    # AXIS 5 — hair
+    # mid_back length tied back, swept off the face, dark_brown_with_grey via
+    # grey_at_temples — Noh-master gravity. OPPOSITE of Mira's long side-part
+    # wavy BROWN. The grey reinforces the 50s age signal.
+    hair:
+      length: mid_back                    # OPERATOR-CONFIRM: longer tied-back master's hair guessed from Noh bearing; confirm vs very_short (austere) if a shorn register is preferred
+      parting: no_part_swept_back         # OPERATOR-CONFIRM: swept-back (off the face) guessed vs Mira's side_left
+      fringe_style: no_fringe             # OPERATOR-CONFIRM: no_fringe guessed (forehead exposed for gravitas)
+      texture: straight                   # OPERATOR-CONFIRM: straight guessed (vs Mira's slight_wave)
+      color_signal: grey_at_temples       # OPERATOR-CONFIRM: grey_at_temples guessed to encode the 50s grief-elder read; confirm vs black if younger
+      signature_shape_note: "long iron-grey hair drawn back and bound low at the nape in a Noh-actor knot; a few strands loosen during the heaviest grief beats — the only visible break in his composure"
+      lockout: yes
+
+    # AXIS 6 — build
+    # Tall, average-to-broad frame; per axes-file leverage build is low and
+    # lockout default no. Left UNLOCKED.
+    build:
+      height_implied: tall                # OPERATOR-CONFIRM: tall guessed for stage-presence; not locked
+      frame_density: average              # OPERATOR-CONFIRM: average frame guessed
+      shoulder_ratio: broad               # OPERATOR-CONFIRM: broad shoulders guessed for masculine bearing
+      lockout: no
+
+    # AXIS 7 — wardrobe_register
+    # Contemporary somatic-practitioner-meets-Noh: dark layered practice garments
+    # with a traditional textile note. Distinct from Mira's cream-knit office
+    # wardrobe.
+    wardrobe_register:
+      era_signal: contemporary_2020s      # OPERATOR-CONFIRM: contemporary guessed (somatic-teacher present day); confirm vs meiji_taisho/postwar_showa if a period-Noh setting is intended
+      personality_encoding:
+        - dark_indigo_layered_practice_jacket   # OPERATOR-CONFIRM: somatic-movement-teacher garment guessed from "grief held in body" embodiment register
+        - loose_charcoal_hakama_style_trousers  # OPERATOR-CONFIRM: hakama-adjacent trousers guessed to carry the Noh lineage signal
+        - unbleached_linen_inner_layer
+        - bare_feet_or_tabi_socks               # OPERATOR-CONFIRM: barefoot/tabi guessed (somatic floor-work + Noh stage); confirm
+      formality: casual                   # OPERATOR-CONFIRM: casual practice-wear guessed (vs Mira's business_casual)
+      lockout: yes
+
+    # AXIS 8 — posture_default
+    # Grounded, weighted, centered (Noh suriashi / hara-centered stillness).
+    # Leverage low; lockout no.
+    posture_default:
+      energy: contained                   # OPERATOR-CONFIRM: contained/grounded guessed; not locked
+      symmetry: symmetric                 # OPERATOR-CONFIRM: centered symmetric stance guessed (vs Mira's slight_left_lean)
+      lockout: no
+
+    # AXIS 9 — age_signaling
+    # 50s grief-elder. Visible age cues (this is where a grief-holding Noh master
+    # reads OLD). DELIBERATELY far from Mira's early_30s youthful-skin read.
+    age_signaling:
+      apparent_age_decade: 50s            # OPERATOR-CONFIRM: 50s guessed from "grief held in body" + Noh-master gravity; brand_lora gives no age — confirm exact decade (40s if a mid-life register is wanted)
+      visible_age_cues:
+        - deep_nasolabial_fold            # OPERATOR-CONFIRM: grief-weathered cues guessed
+        - grey_at_temples
+        - slight_under_eye_shadow
+        - weathered_brow_at_rest
+      lockout: yes
+
+    # AXIS 10 — skin_treatment
+    # Weathered, warm_medium tone. Leverage low in B&W; lockout no.
+    skin_treatment:
+      texture: weathered                  # OPERATOR-CONFIRM: weathered guessed for grief-elder face; not locked
+      tone: warm_medium                   # OPERATOR-CONFIRM: warm_medium (Japanese male) guessed; consistent with eye_geometry note
+      lockout: no
+
+    # AXIS 11 — accessories
+    # THE NOH HALF-MASK is the highest-leverage, UNIQUE signature item — derived
+    # directly from brand_lora's "Noh-influenced bearing" AND the teacher_id
+    # 'omote' itself (ko-omote = the canonical Noh young-woman half-mask; here
+    # carried, never worn full, as the somatic-grief through-line object he holds
+    # when working with a held emotion). NOT Mira's jade pendant.
+    accessories:
+      glasses: none                       # OPERATOR-CONFIRM: no glasses guessed
+      jewelry: signature_piece
+      signature_item: "a pale ko-omote Noh half-mask carried at the hip on a cord of plaited silk — his somatic through-line object; he sets it face-up between himself and the body he is working with when a held grief surfaces. The lacquer catches different light in each scene (parallel to how Mira's pendant catches light, but a wholly distinct object)"   # OPERATOR-CONFIRM: the Noh mask as carried prop is a craft invention from 'Noh-influenced bearing' + the name 'omote' — confirm this is on-brand for body_memory and not culturally over-literal
+      secondary_signature_item: "a folded square of unbleached muslin he lays on the floor before bodywork — the 'aged paper' brand-style motif made tactile"
+      lockout: yes
+
+    # AXIS 12 — color_signal
+    # muted_brown primary + ochre accent = the body_memory 'textured aged paper'
+    # register; charcoal secondary = Noh-stage weight. In B&W he is the
+    # HIGH-CONTRAST anchor (inverse of Mira, who is deliberately mid-grey/low-
+    # contrast) — the pale mask becomes the single bright dot against him.
+    color_signal:
+      palette_primary: muted_brown        # OPERATOR-CONFIRM: muted_brown (aged-paper) guessed from brand style notes
+      palette_accent: ochre               # OPERATOR-CONFIRM: ochre accent guessed (aged-paper warmth); distinct from Mira's jade_green
+      palette_secondary: charcoal         # OPERATOR-CONFIRM: charcoal secondary guessed (Noh-stage weight)
+      bw_register_note: "omote renders HIGH-CONTRAST and dark-anchored (inverse of Mira's deliberate mid-grey low-contrast). His dark indigo/charcoal garments read near-black; the pale ko-omote mask is the single high-value bright accent the eye returns to per panel"
+      lockout: yes
+
+  # ── Solver metadata ─────────────────────────────────────────────────────
+  solver:
+    individuation_axes_locked: 9
+    # face_shape, eye_geometry, nose_construction, mouth_jaw, hair,
+    # wardrobe_register, age_signaling, accessories, color_signal
+    # (build, posture_default, skin_treatment intentionally `lockout: no` per axes-file defaults)
+    last_validated: pending
+    collision_check_passed: pending
+    operator_confirmation: required
+    collision_check_against:
+      brand_scope: body_memory
+      collisions_detected: []
+      cross_brand_reference_checked:
+        - "mira_aoki (stillness_en_01): 0 locked-axis collisions — angular_long vs soft_round face, small/hooded/single vs medium/almond/double eyes, mid_back/swept-back/grey vs long/side-part/brown hair, 50s vs early_30s, Noh-mask vs jade-pendant, muted_brown/ochre vs warm_cream/jade, seinen vs josei. Far below the 7-cross-brand threshold."
+
+  # ── Render metadata ─────────────────────────────────────────────────────
+  render:
+    engine_routing_strategy: per_archetype
+    engine_routing_authority: docs/specs/MANGA_V3_3_MODEL_ROUTING_SPEC.md
+    engines_in_play:
+      - flux_schnell      # simple objects, backgrounds, decompression archetypes
+      - flux_dev          # mid-shots, hands, the carried Noh mask prop, character-in-scene
+      - qwen_image_pulid  # face close-ups (identity-critical)
+    secondary_face_lock: pulid_flux_facenet
+    lora_required: false
+    lora_skip_reason: "Named recurring teacher-cast uses PuLID-FLUX-FaceNet face-lock (ip_adapter_weight 0.83 per brand_lora_plans.yaml character_loras.omote); a dedicated omote_bm character LoRA is DEFERRED — the brand_lora plan defines the LoRA as a Pearl Star ComfyUI training commission (reference sheet must be generated first), so face consistency rides on PuLID-FaceNet until that commission ships, matching the spec §2.4 12+-chapter LoRA threshold"
+    prompt_axis_priority:
+      positive_prompt_axes:
+        - face_shape
+        - eye_geometry
+        - hair
+        - wardrobe_register
+        - age_signaling
+        - accessories
+        - color_signal
+      negative_prompt_axes:
+        - mouth_jaw
+      solver_only_axes:
+        - skin_treatment
+        - posture_default
+        - build
+        - nose_construction
+    last_render_date: pending
+    render_artifact_path: pending
+    reference_sheet_path: pending
+    # Will be populated by Phase C (reference sheet generation via Qwen+PuLID):
+    # artifacts/manga/character_references/body_memory/omote/{front,three_quarter,profile,expression_sheet}.png

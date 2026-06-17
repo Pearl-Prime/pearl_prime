@@ -1,0 +1,165 @@
+character_design:
+  series_id: solar_return_quiet_embers
+  brand_id: solar_return
+  locale: en_US
+  market_demo: josei            # OPERATOR-CONFIRM: solar_return has TWO lanes — josei/healing (catalog series_01 solar_return_quiet_embers, Ra = mentor) and shonen/fantasy isekai (brands/solar_return_isekai.yaml). This design anchors the josei/healing teacher-character to mirror Mira's slot; confirm intended lane.
+  genre_family: healing
+  subgenre: cozy_restoration_witness_arc   # OPERATOR-CONFIRM: derived from series_01 emotional_engine cozy_restoration + archetype "witness" framing; no explicit subgenre string exists.
+  character_id: ra
+  character_role: teacher_mentor   # OPERATOR-CONFIRM: in catalog series_01 Ra is the MENTOR to protagonist Sora, NOT the protagonist. Mira (gold template) is a protagonist. Confirm Ra authored as recurring teacher-mentor.
+  drafted_by: pearl_program_orchestrator_autofill
+  drafted_at: "2026-06-12"
+  source_descriptions:
+    - "brand_lora_plans.yaml character_loras.ra: trigger_word ra_so, style_ref solar_return, ip_adapter_weight 0.80, notes: 'Ambiguous ethnicity, post-burnout rebirth energy, ember warmth'"
+    - "brand_style_loras.solar_return: 'Geometric cosmic soot and ember palette'; brand_illustration_styles.yaml solar_return 'Ember Abstraction': seinen manga, clean geometric linework, high contrast, soot black and ember orange palette (#1A1410 soot / #EA580C ember / #F97316 accent), cosmic geometry backgrounds, 'Planetes meets Knights of Sidonia'"
+    - "teacher_character_prompts.yaml ra positive: 'eyes are vast looking through you not at you ... star field reflection in eyes light geometry ... expression is absolute stillness the witness observing without judgment ... deep indigo wash ... otherworldly yet grounded'; style_archetype dark_psychological"
+    - "teacher_brand_archetypes.yaml SOLAR RETURN (Ra): tradition 'Nondual witnessing awareness — I AM consciousness inquiry, witness practice, costume-dropping'; persona burnout_survivor_rebuilding, age_range [30,50]. GUARDRAIL (lines 281-283): 'Ra Netjer tradition (the name does not establish doctrine). Egyptian / African spiritual framing is explicitly prohibited.'"
+
+  axes:
+
+    # AXIS 1 — face_shape (distinct from Mira soft_round)
+    face_shape:
+      value: angular_long   # OPERATOR-CONFIRM: derived from seinen/dark_psychological "witness" register; alt elongated.
+      lockout: yes
+      mangaka_tradition: "Inoue Vagabond-style angular (Musashi adult) — sumi-brush seinen; pared, contour-led witness face"
+
+    # AXIS 2 — eye_geometry (THE signature: vast cosmic gaze; distinct from Mira medium almond)
+    eye_geometry:
+      size: large
+      shape: round
+      spacing: wide
+      lid_fold: single   # OPERATOR-CONFIRM: guessed — single-lid chosen to avoid coding East-Asian double-lid given "ambiguous ethnicity"; alt none_visible.
+      eyelash_density: minimal
+      lockout: yes
+      note: "the 'vast, looking-through-you' cosmic gaze with star-field catch-light inside the iris is the highest-leverage individuation signal; deliberately far from Mira's medium/almond/standard/double."
+
+    # AXIS 3 — nose_construction (seinen-drawn, not Mira's implied)
+    nose_construction:
+      bridge_angle: straight   # OPERATOR-CONFIRM: aquiline avoided on purpose (would read Egyptian/regal — prohibited, and collides with Maat).
+      bridge_length: medium
+      tip_shape: narrow
+      nostril_visibility: drawn
+      lockout: yes
+
+    # AXIS 4 — mouth_jaw (neutral_firm witness vs Mira neutral_soft; bow_mouth forbidden for josei, avoided)
+    mouth_jaw:
+      resting_expression: neutral_firm
+      jaw_width: medium   # OPERATOR-CONFIRM: if gender resolves male, wide/square may suit; medium keeps gender ambiguous.
+      chin_shape: soft_pointed
+      lip_shape: thin_both
+      lockout: yes
+
+    # AXIS 5 — hair (near-shaved ash-grey; maximal inverse of Mira's long brown wave)
+    hair:
+      length: very_short
+      parting: no_part_swept_back
+      fringe_style: no_fringe
+      texture: straight
+      color_signal: grey_at_temples   # OPERATOR-CONFIRM: ash-grey chosen for 40s burnout-survivor read; brand_lora gives no hair color. white_signaled would push elder (conflicts age_range [30,50]).
+      signature_shape_note: "near-shaved ash-grey crop — the 'burned to the foundation' silhouette; bare temples leave the vast eyes and high contour fully exposed. Inverse of Mira's long flowing brown wave."
+      lockout: yes
+
+    # AXIS 6 — build (free per template)
+    build:
+      height_implied: tall   # OPERATOR-CONFIRM: guessed; reduce to average if the figure should not tower.
+      frame_density: small
+      shoulder_ratio: average
+      lockout: no
+
+    # AXIS 7 — wardrobe_register ("minimal clothing detail, focus on presence"; NO Egyptian/regal dress; distinct from Mira cream-knit)
+    wardrobe_register:
+      era_signal: contemporary_2020s   # OPERATOR-CONFIRM: archetype is modern burnout-survivor; confirm vs era-neutral monastic layer.
+      personality_encoding:
+        - charcoal_unstructured_overlayer
+        - soot_toned_simple_inner_tee
+        - no_pattern_no_ornament
+      formality: casual   # OPERATOR-CONFIRM: 'casual' honors "minimal clothing detail/focus on presence"; alt ceremonial robe — but no Egyptian regalia.
+      lockout: yes
+
+    # AXIS 8 — posture_default ("absolute stillness"; contained+symmetric vs Mira slight_left_lean; free per template)
+    posture_default:
+      energy: contained
+      symmetry: symmetric
+      lockout: no
+
+    # AXIS 9 — age_signaling (late_40s per archetype [30,50]; distinct decade from Mira early_30s)
+    age_signaling:
+      apparent_age_decade: late_40s   # OPERATOR-CONFIRM: series_01 "retired master carpenter" reads 60s+ elder; archetype age_range is [30,50]. late_40s splits toward doctrine-authoritative archetype.
+      visible_age_cues:
+        - grey_at_temples
+        - slight_under_eye_shadow
+        - early_nasolabial_fold
+        - weathered_skin_quality
+      lockout: yes
+
+    # AXIS 10 — skin_treatment (weathered; tone deliberately AMBIGUOUS per brand_lora; free per template)
+    skin_treatment:
+      texture: weathered
+      tone: warm_medium   # OPERATOR-CONFIRM: brand_lora demands "ambiguous ethnicity." warm_medium is a neutral placeholder; MUST NOT drift Egyptian/African-coded (explicit prohibition).
+      lockout: no
+      ambiguity_note: "ethnicity intentionally non-specific per brand_lora; render must NOT introduce Egyptian or African visual coding (archetypes lines 281-283; that lane belongs to Maat/heart_balance)."
+
+    # AXIS 11 — accessories (UNIQUE signature — NOT Mira's jade pendant)
+    accessories:
+      glasses: none
+      jewelry: signature_piece
+      signature_item: "a single live ember cupped in a small blackened iron dish (palm censer) — the only warm light Ra carries; the 'ember warmth' of brand_lora and the visual of 'the witness that watched the burning and was not consumed.' Ra steadies it the way Mira touches her pendant. UNIQUE — explicitly NOT a jade pendant."   # OPERATOR-CONFIRM: invented to satisfy 'unique, not jade' from brand_lora ember warmth; confirm vs alt (coal on blackened cord / single plane-shaving).
+      secondary_signature_item: "a worn carpenter's marking line (sumitsubo ink-pot + cord) — nods to series_01 'master carpenter' framing without Egyptian coding"   # OPERATOR-CONFIRM: derived from carpenter framing; drop if elder-carpenter framing rejected.
+      lockout: yes
+
+    # AXIS 12 — color_signal (Ember Abstraction soot+ember+indigo; inverse of Mira warm_cream/jade)
+    color_signal:
+      palette_primary: charcoal      # soot black #1A1410 (nearest allowed value)
+      palette_accent: ochre          # ember orange #EA580C/#F97316 (nearest allowed value)
+      palette_secondary: indigo      # deep indigo cosmic wash per base prompt
+      bw_register_note: "Ra renders HIGH-contrast — near-black soot mass with the single ember as the hottest point in the frame. Deliberate inverse of Mira's mid-grey-anchored register; guarantees panel-level separation even in monochrome."
+      lockout: yes
+
+  # ── Solver metadata ─────────────────────────────────────────────────────
+  solver:
+    individuation_axes_locked: 9
+    # Locked: face_shape, eye_geometry, nose_construction, mouth_jaw, hair,
+    # wardrobe_register, age_signaling, accessories, color_signal.
+    # Free (lockout: no): build, posture_default, skin_treatment (template defaults).
+    last_validated: pending
+    collision_check_passed: pending
+    operator_confirmation: required
+    collision_check_against:
+      brand_scope: solar_return
+      cross_brand_scope: CORE-12
+      collisions_detected: []
+      kin_separation_note: "Nearest CORE-12 collision risks = other contemplative-male/elder teachers (master_feung Chinese qigong elder, master_wu Chinese martial, master_sha Chinese healing, omote Japanese Noh grief, ahjan South Asian male). Ra separates on color_signal (soot+ember+indigo unique), eye_geometry (vast cosmic round-wide unique), accessories (ember-in-iron-dish unique), ambiguous non-East-Asian ethnicity. Separates from Maat (Egyptian-coded female, heart_balance) by the anti-Egyptian guardrail + non-regal wardrobe."
+
+  # ── Render metadata ─────────────────────────────────────────────────────
+  render:
+    engine_routing_strategy: per_archetype
+    engine_routing_authority: docs/specs/MANGA_V3_3_MODEL_ROUTING_SPEC.md   # OPERATOR-CONFIRM: this path is MISSING on disk (gold-template Mira profile cites the same dead path). Mirrored verbatim for structural consistency; repoint to live routing spec (e.g. docs/specs/MANGA_LAYER_RENDER_CONTRACT_SPEC.md) before render.
+    engines_in_play:
+      - flux_schnell      # cosmic-geometry backgrounds, simple objects, decompression
+      - flux_dev          # mid-shots, hands (ember dish), character-in-scene
+      - qwen_image_pulid  # face close-ups (identity-critical — the vast cosmic gaze)
+    secondary_face_lock: pulid_flux_facenet
+    lora_required: false
+    lora_skip_reason: "Recurring named cast — per Known-Good Anchors, ai-toolkit LoRA is reserved for the 12-14 named cast; most recurring cast use PuLID-FLUX-FaceNet, LoRA deferred. brand_lora_plans.yaml lists ra_so but training is an unrun Pearl Star ComfyUI commission; PuLID-FLUX-FaceNet from the canonical 4-view sheet suffices until trained."
+    prompt_axis_priority:
+      positive_prompt_axes:
+        - eye_geometry
+        - face_shape
+        - hair
+        - color_signal
+        - accessories
+        - age_signaling
+        - wardrobe_register
+      negative_prompt_axes:
+        - mouth_jaw
+      solver_only_axes:
+        - skin_treatment
+        - posture_default
+        - build
+        - nose_construction
+    style_anchor_prompt_fragment: "seinen manga, clean geometric linework, high contrast, soot black and ember orange palette, cosmic geometry / deep indigo wash background, Planetes meets Knights of Sidonia — per brand_illustration_styles.yaml 'Ember Abstraction'"
+    style_negative_fragment: "warm cozy, pastel, cute, organic shapes, fantasy medieval, Egyptian, ankh, hieroglyph, pharaonic regalia, chibi, ornate"
+    last_render_date: pending
+    render_artifact_path: pending
+    reference_sheet_path: pending
+    # Phase C 4-view target: artifacts/manga/character_references/solar_return/ra/{front,three_quarter,profile,expression_sheet}.png

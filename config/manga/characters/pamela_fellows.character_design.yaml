@@ -1,0 +1,195 @@
+character_design:
+  series_id: somatic_wisdom_en_01   # OPERATOR-CONFIRM: series_id placeholder — no series profile exists yet for somatic_wisdom; confirm canonical id/locale slug
+  brand_id: somatic_wisdom
+  locale: en_US                     # OPERATOR-CONFIRM: locale not in brand_lora_plans; somatic_wisdom teacher (Caucasian female, clinical warmth) presumed en_US primary
+  market_demo: josei                # OPERATOR-CONFIRM: market_demo not stated in brand_lora_plans; josei assumed to mirror the CORE-12 healing-manga register (Mira/stillness_en_01)
+  genre_family: healing             # OPERATOR-CONFIRM: genre_family not stated in brand_lora_plans; healing assumed (somatic/clinical-warmth subject matter)
+  subgenre: somatic_grounding_arc   # OPERATOR-CONFIRM: subgenre invented to fit "somatic awareness posture"; confirm canonical subgenre label
+  character_id: pamela_fellows      # brand_lora_plans gives no character name for this teacher; teacher_id used as character_id per instruction
+  character_role: protagonist       # OPERATOR-CONFIRM: teacher-character assumed series protagonist (teacher-mode lead), mirroring Mira's role
+  drafted_by: pearl_program_orchestrator_autofill
+  drafted_at: "2026-06-12"
+  source_descriptions:
+    - "brand_lora_plans.yaml character_loras.pamela_fellows.notes: 'Caucasian female, clinical warmth, somatic awareness posture'"
+    - "brand_lora_plans.yaml character_loras.pamela_fellows: trigger_word 'pamela_sw', ip_adapter_weight 0.88, style_ref somatic_wisdom, training_steps 1800"
+    - "brand_lora_plans.yaml brand_style_loras.somatic_wisdom.notes: 'Clean modern clinical warmth' (trigger_word 'style_sw')"
+
+  axes:
+
+    # AXIS 1 — face_shape
+    # Derived from brand_lora ethnicity (Caucasian female) + "clinical warmth".
+    # OVAL (not Mira's soft_round) gives a mature, composed clinician read with a
+    # defined jawline that carries authority without gekiga angularity. This is the
+    # primary separation from Mira (soft_round) and from any soft-round same-brand kin.
+    face_shape:
+      value: oval   # OPERATOR-CONFIRM: oval chosen over soft_round/elongated to read mature-clinician; confirm vs a softer register if Pamela is meant warmer than authoritative
+      lockout: yes
+      mangaka_tradition: "Adachi-style oval (Touch, Cross Game) — neutral-mature default, here pushed toward composed-clinician with a defined jaw"
+
+    # AXIS 2 — eye_geometry
+    # Caucasian-coded + mature clinical observer: medium, slightly HOODED, SINGLE-to-
+    # creased Western lid, level (not tareme/upturned) — a steady diagnostic gaze.
+    # Deliberately NOT Mira's almond + double-lid + minimal-lash East-Asian-coded set.
+    # Stays inside josei forbidden_combinations (no extra_large + heavy_decorative).
+    eye_geometry:
+      size: medium
+      shape: hooded                 # OPERATOR-CONFIRM: hooded chosen for a steady, attentive clinical gaze; downturned is the softer-warmer alternative
+      spacing: standard
+      lid_fold: double              # Western crease; distinct from Mira's East-Asian double-lid read via shape:hooded + skin tone
+      eyelash_density: moderate
+      lockout: yes
+      note: "hooded + pale_warm skin (axis 10) reads Caucasian female, mid-career clinician; level steady gaze encodes 'clinical warmth' — attentive, not sentimental"
+
+    # AXIS 3 — nose_construction
+    # Caucasian-coded straight medium bridge, slightly more defined than Mira's
+    # iyashikei 'implied' short rounded nose. Drawn-but-restrained (clean clinical
+    # line art per somatic_wisdom 'clean modern' style).
+    nose_construction:
+      bridge_angle: straight
+      bridge_length: medium         # OPERATOR-CONFIRM: medium (vs Mira's short) to lengthen the Caucasian-coded profile; confirm acceptable in clean line-art register
+      tip_shape: narrow
+      nostril_visibility: drawn      # clean modern clinical line, not iyashikei 'implied'
+      lockout: yes
+
+    # AXIS 4 — mouth_jaw
+    # Resting neutral_firm (composed clinician) vs Mira's neutral_soft. Medium jaw,
+    # rounded chin keeps warmth. thin_upper_full_lower = canonical josei lip. Forbidden
+    # bow_mouth avoided per solver_rules.bow_mouth_in_josei.
+    mouth_jaw:
+      resting_expression: neutral_firm   # OPERATOR-CONFIRM: neutral_firm encodes composed authority; neutral_soft if Pamela should read gentler than Mira-adjacent
+      jaw_width: medium
+      chin_shape: rounded
+      lip_shape: thin_upper_full_lower
+      lockout: yes
+
+    # AXIS 5 — hair
+    # Highest-leverage silhouette separation from Mira (long_to_waist brown side-part wavy).
+    # Pamela: SHOULDER-length, CENTER-parted, STRAIGHT, DARK_BLONDE with grey at temples
+    # — a grounded mid-40s clinician silhouette. Short-to-shoulder + grey-temple is a
+    # completely different reader-memory shape than Mira's long brown waves.
+    hair:
+      length: shoulder              # OPERATOR-CONFIRM: shoulder-length chosen for grounded-clinician silhouette; chin_bob is the crisper alternative if a sharper read is wanted
+      parting: center
+      fringe_style: curtain
+      texture: straight
+      color_signal: dark_blonde     # OPERATOR-CONFIRM: dark_blonde (Caucasian-coded) with grey_at_temples cue (axis 9); confirm vs brown/grey_at_temples base
+      signature_shape_note: "shoulder-length straight hair tucked behind one ear when she demonstrates a somatic cue; grey at the temples is left visible, never colored over — the 'experienced practitioner' silhouette signal"
+      lockout: yes
+
+    # AXIS 6 — build
+    # lockout: no per template default (build is low-leverage, solver-free).
+    # Grounded/centered somatic-practitioner stance implies average-to-grounded frame.
+    build:
+      height_implied: average
+      frame_density: average        # OPERATOR-CONFIRM: average grounded build assumed from 'somatic awareness posture'; not individuating, solver-free
+      shoulder_ratio: average
+      lockout: no
+
+    # AXIS 7 — wardrobe_register
+    # 'Clean modern clinical warmth' → contemporary, soft-professional somatic-practitioner
+    # attire: linen tunic / wrap layers, comfortable wide-leg trousers, flat practice shoes.
+    # business_casual-soft, NOT Mira's cream-knit-sweater knowledge-worker layering.
+    wardrobe_register:
+      era_signal: contemporary_2020s
+      personality_encoding:
+        - soft_linen_wrap_tunic        # somatic-practice studio layer — clinical warmth, movement-friendly
+        - wide_leg_drawstring_trousers # OPERATOR-CONFIRM: practitioner movement wardrobe assumed; confirm vs a more clinical/structured look
+        - flat_leather_practice_shoe
+        - structured_cardigan_for_sessions
+      formality: business_casual
+      lockout: yes
+
+    # AXIS 8 — posture_default
+    # brand_lora explicitly states 'somatic awareness posture' — so posture is on-brand,
+    # but per template posture_default stays lockout: no (varies across panels).
+    posture_default:
+      energy: contained             # grounded, centered — 'somatic awareness posture' (the one brand_lora-stated cue)
+      symmetry: symmetric           # balanced, centered weight — a somatic-practitioner tell
+      lockout: no
+
+    # AXIS 9 — age_signaling
+    # Derived from 'clinical warmth' authority register: MID-40s (vs Mira's early_30s) —
+    # an experienced practitioner. Visible smile lines + grey at temples = earned-trust cues.
+    age_signaling:
+      apparent_age_decade: 40s      # OPERATOR-CONFIRM: mid-40s inferred from clinician authority; brand_lora gives no age — confirm exact decade
+      visible_age_cues:
+        - smile_lines_visible       # warmth that has been practiced for years
+        - grey_at_temples           # ties to hair axis; experienced-practitioner signal
+        - no_full_crow_feet
+        - slight_nasolabial_softening   # OPERATOR-CONFIRM: mid-40s skin cue; remove if a younger read is intended
+      lockout: yes
+
+    # AXIS 10 — skin_treatment
+    # lockout: no per template default. Caucasian-coded warm-light/pale-warm tone.
+    skin_treatment:
+      texture: clean
+      tone: pale_warm               # OPERATOR-CONFIRM: pale_warm (Caucasian-coded) vs warm_light; either is consistent with brand_lora 'Caucasian female'
+      lockout: no
+
+    # AXIS 11 — accessories
+    # UNIQUE high-leverage signature — explicitly NOT Mira's jade pendant.
+    # Pamela's signature: READING GLASSES on a beaded cord + a worn somatic-practice
+    # field notebook she annotates between cues. The glasses-on-cord is the single
+    # strongest reader-memory ID and is unique across the roster.
+    accessories:
+      glasses: half_rim             # OPERATOR-CONFIRM: half_rim reading glasses worn on a beaded cord; confirm frame style
+      jewelry: minimal
+      signature_item: "half-rim reading glasses on a beaded cord around the neck — pushed up to read a client's body, let drop to make eye contact; the cord and the gesture are the recurring through-line (NOT a pendant)"
+      secondary_signature_item: "worn cloth-bound somatic-practice notebook with a soft pencil tucked in the spine — she annotates a felt sense mid-session"   # OPERATOR-CONFIRM: secondary prop invented to support 'clinical' read
+      lockout: yes
+
+    # AXIS 12 — color_signal
+    # Derived from somatic_wisdom 'clean modern clinical warmth' — a SLATE + TERRACOTTA
+    # clinical-warm palette, deliberately distinct from Mira's warm_cream/jade_green.
+    # Slate = the clinical/clean axis; terracotta = the warmth axis; sage tertiary.
+    color_signal:
+      palette_primary: slate        # OPERATOR-CONFIRM: slate primary for the 'clinical/clean' read; confirm vs a warmer primary
+      palette_accent: terracotta    # the 'warmth' half of 'clinical warmth'; unique vs Mira's jade_green
+      palette_secondary: sage_green
+      bw_register_note: "Pamela renders mid-to-slightly-high grey — her slate layers read as clean mid-grey planes; the terracotta accent (a scarf or the notebook cloth) is the single warm darker note. More structured value blocking than Mira's soft mid-grey wash, signalling the clinical register"
+      lockout: yes
+
+  # ── Solver metadata ─────────────────────────────────────────────────────
+  solver:
+    individuation_axes_locked: 9
+    # Locked: face_shape, eye_geometry, nose_construction, mouth_jaw, hair,
+    # wardrobe_register, age_signaling, accessories, color_signal.
+    # Free (lockout: no) per template defaults: build, posture_default, skin_treatment.
+    last_validated: pending
+    collision_check_passed: pending
+    operator_confirmation: required
+    collision_check_against:
+      brand_scope: somatic_wisdom
+      cross_brand_scope: CORE-12
+      collisions_detected: []
+
+  # ── Render metadata ─────────────────────────────────────────────────────
+  render:
+    engine_routing_strategy: per_archetype
+    engine_routing_authority: docs/specs/MANGA_V3_3_MODEL_ROUTING_SPEC.md
+    engines_in_play:
+      - flux_schnell        # simple objects, backgrounds, decompression archetypes
+      - flux_dev            # mid-shots, hands, character-in-scene
+      - qwen_image_pulid    # face close-ups (identity-critical)
+    secondary_face_lock: pulid_flux_facenet
+    lora_required: false
+    lora_skip_reason: "Named recurring teacher-cast use PuLID-FLUX-FaceNet for face-lock; dedicated character LoRA (pamela_sw, ip_adapter_weight 0.88, training_steps 1800 per brand_lora_plans) is DEFERRED to a Pearl Star ComfyUI commission and is not required for individuation — the prompt-stack design above is the distinctness lever. Wire the LoRA only once operator commissions training assets."
+    prompt_axis_priority:
+      positive_prompt_axes:
+        - face_shape
+        - eye_geometry
+        - hair
+        - wardrobe_register
+        - age_signaling
+        - accessories
+        - color_signal
+      negative_prompt_axes:
+        - mouth_jaw
+      solver_only_axes:
+        - skin_treatment
+        - posture_default
+        - build
+        - nose_construction
+    last_render_date: pending
+    render_artifact_path: pending
+    reference_sheet_path: pending
