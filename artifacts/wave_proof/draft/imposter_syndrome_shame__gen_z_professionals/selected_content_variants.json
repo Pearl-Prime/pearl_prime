@@ -1,0 +1,2524 @@
+{
+  "schema_version": 1,
+  "stage": "selected_content_variants",
+  "topic": "imposter_syndrome",
+  "persona_id": "gen_z_professionals",
+  "teacher_id": "",
+  "runtime_format": "standard_book",
+  "chapters": [
+    {
+      "number": 1,
+      "slots": [
+        {
+          "slot_type": "HOOK",
+          "variant_id": "ch01_sec01_hook_f4",
+          "atom_id": "HOOK v29",
+          "source": "persona_atom+registry",
+          "source_id": "HOOK v29+ch01_sec01_hook_f4",
+          "target_words": 100,
+          "actual_words": 29,
+          "enrichment_applied": [
+            "persona_alarm_behavior"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "ANGLE_DEFINITION",
+          "variant_id": "",
+          "atom_id": "angle_def_tpl:IMPOSTERS_PERFORMANCE",
+          "source": "angle_template",
+          "source_id": "angle_def_tpl:IMPOSTERS_PERFORMANCE",
+          "target_words": 1125,
+          "actual_words": 47,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "TURNING_POINT v04",
+          "source": "persona_atom",
+          "source_id": "TURNING_POINT v04",
+          "target_words": 148,
+          "actual_words": 144,
+          "enrichment_applied": [
+            "story_vividness"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "REFLECTION",
+          "variant_id": "ch01_sec05_reflection_f2",
+          "atom_id": "REFLECTION v27",
+          "source": "persona_atom+registry",
+          "source_id": "REFLECTION v27+ch01_sec05_reflection_f2",
+          "target_words": 108,
+          "actual_words": 185,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "EXERCISE",
+          "variant_id": "",
+          "atom_id": "practice_library",
+          "source": "practice_library",
+          "source_id": "practice_library",
+          "target_words": 160,
+          "actual_words": 148,
+          "enrichment_applied": [
+            "somatic_exercise"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "EMBODIMENT v02",
+          "source": "persona_atom",
+          "source_id": "EMBODIMENT v02",
+          "target_words": 142,
+          "actual_words": 67,
+          "enrichment_applied": [
+            "story_vividness"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "TEACHER_DOCTRINE",
+          "variant_id": "ch01_sec06_teacherdoctrine_d04",
+          "atom_id": "TEACHER_DOCTRINE v05",
+          "source": "persona_atom+registry",
+          "source_id": "TEACHER_DOCTRINE v05+ch01_sec06_teacherdoctrine_d04",
+          "target_words": 131,
+          "actual_words": 233,
+          "enrichment_applied": [
+            "teacher_voice"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "REFLECTION",
+          "variant_id": "ch01_sec07_reflection_f3",
+          "atom_id": "REFLECTION v01",
+          "source": "persona_atom+registry",
+          "source_id": "REFLECTION v01+ch01_sec07_reflection_f3",
+          "target_words": 108,
+          "actual_words": 201,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "EXERCISE",
+          "variant_id": "",
+          "atom_id": "practice_library",
+          "source": "practice_library",
+          "source_id": "practice_library",
+          "target_words": 173,
+          "actual_words": 148,
+          "enrichment_applied": [
+            "somatic_exercise"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "EMBODIMENT v05",
+          "source": "persona_atom",
+          "source_id": "EMBODIMENT v05",
+          "target_words": 131,
+          "actual_words": 114,
+          "enrichment_applied": [
+            "story_vividness"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "INTEGRATION",
+          "variant_id": "ch01_sec09_integration_f3",
+          "atom_id": "INTEGRATION v17",
+          "source": "persona_atom+registry",
+          "source_id": "INTEGRATION v17+ch01_sec09_integration_f3",
+          "target_words": 91,
+          "actual_words": 103,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "DEPTH_RECOGNITION_DEPTH",
+          "variant_id": "",
+          "atom_id": "",
+          "source": "depth_module:recognition_depth:persona_atom",
+          "source_id": "depth_recognition_depth_1_p1r0",
+          "target_words": 400,
+          "actual_words": 175,
+          "enrichment_applied": [
+            "recognition_depth"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "DEPTH_RECOGNITION_DEPTH",
+          "variant_id": "",
+          "atom_id": "",
+          "source": "depth_module:recognition_depth:registry_variant",
+          "source_id": "depth_recognition_depth_1_p1r0",
+          "target_words": 283,
+          "actual_words": 31,
+          "enrichment_applied": [
+            "recognition_depth"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "DEPTH_STORY_SCENE",
+          "variant_id": "",
+          "atom_id": "",
+          "source": "depth_module:story_scene:registry_variant",
+          "source_id": "depth_story_scene_1_p1r0",
+          "target_words": 252,
+          "actual_words": 28,
+          "enrichment_applied": [
+            "story_scene"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "DEPTH_RECOGNITION_DEPTH",
+          "variant_id": "",
+          "atom_id": "",
+          "source": "depth_module:recognition_depth:persona_atom",
+          "source_id": "depth_recognition_depth_1_p2r0",
+          "target_words": 400,
+          "actual_words": 160,
+          "enrichment_applied": [
+            "recognition_depth"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "DEPTH_RECOGNITION_DEPTH",
+          "variant_id": "",
+          "atom_id": "",
+          "source": "depth_module:recognition_depth:registry_variant",
+          "source_id": "depth_recognition_depth_1_p2r0",
+          "target_words": 400,
+          "actual_words": 32,
+          "enrichment_applied": [
+            "recognition_depth"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "DEPTH_STORY_SCENE",
+          "variant_id": "",
+          "atom_id": "",
+          "source": "depth_module:story_scene:registry_variant",
+          "source_id": "depth_story_scene_1_p2r0",
+          "target_words": 500,
+          "actual_words": 31,
+          "enrichment_applied": [
+            "story_scene"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "DEPTH_PERSONA_SPECIFICITY",
+          "variant_id": "",
+          "atom_id": "",
+          "source": "depth_module:persona_specificity:persona_atom",
+          "source_id": "depth_persona_specificity_1_p2r0",
+          "target_words": 300,
+          "actual_words": 165,
+          "enrichment_applied": [
+            "persona_specificity"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "slots": [
+        {
+          "slot_type": "HOOK",
+          "variant_id": "ch02_sec01_hook_f1",
+          "atom_id": "HOOK v03",
+          "source": "persona_atom+registry",
+          "source_id": "HOOK v03+ch02_sec01_hook_f1",
+          "target_words": 100,
+          "actual_words": 32,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "ANGLE_CALLBACK",
+          "variant_id": "",
+          "atom_id": "angle_cb_tpl:IMPOSTERS_PERFORMANCE:L1",
+          "source": "angle_template",
+          "source_id": "angle_cb_tpl:IMPOSTERS_PERFORMANCE:L1",
+          "target_words": 280,
+          "actual_words": 26,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {
+            "angle_layer": 1
+          }
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "RECOGNITION v11",
+          "source": "persona_atom",
+          "source_id": "RECOGNITION v11+stack1",
+          "target_words": 148,
+          "actual_words": 176,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "REFLECTION",
+          "variant_id": "ch02_sec03_reflection_f2",
+          "atom_id": "REFLECTION v04",
+          "source": "persona_atom+registry",
+          "source_id": "REFLECTION v04+ch02_sec03_reflection_f2",
+          "target_words": 108,
+          "actual_words": 172,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "EXERCISE",
+          "variant_id": "",
+          "atom_id": "practice_library",
+          "source": "practice_library",
+          "source_id": "practice_library",
+          "target_words": 160,
+          "actual_words": 224,
+          "enrichment_applied": [
+            "somatic_exercise"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "STORY v05",
+          "source": "persona_atom",
+          "source_id": "STORY v05+stack1",
+          "target_words": 142,
+          "actual_words": 179,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "TEACHER_DOCTRINE",
+          "variant_id": "",
+          "atom_id": "TEACHER_DOCTRINE v03",
+          "source": "persona_atom",
+          "source_id": "TEACHER_DOCTRINE v03",
+          "target_words": 131,
+          "actual_words": 187,
+          "enrichment_applied": [
+            "teacher_voice"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "REFLECTION",
+          "variant_id": "ch02_sec04_reflection_f3",
+          "atom_id": "REFLECTION v12",
+          "source": "persona_atom+registry",
+          "source_id": "REFLECTION v12+ch02_sec04_reflection_f3",
+          "target_words": 108,
+          "actual_words": 176,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "EXERCISE",
+          "variant_id": "",
+          "atom_id": "practice_library",
+          "source": "practice_library",
+          "source_id": "practice_library",
+          "target_words": 173,
+          "actual_words": 224,
+          "enrichment_applied": [
+            "somatic_exercise"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "RECOGNITION v06",
+          "source": "persona_atom",
+          "source_id": "RECOGNITION v06+stack1",
+          "target_words": 131,
+          "actual_words": 143,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "INTEGRATION",
+          "variant_id": "ch02_sec09_integration_f1",
+          "atom_id": "INTEGRATION v15",
+          "source": "persona_atom+registry",
+          "source_id": "INTEGRATION v15+ch02_sec09_integration_f1",
+          "target_words": 91,
+          "actual_words": 125,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "slots": [
+        {
+          "slot_type": "HOOK",
+          "variant_id": "ch03_sec01_hook_f2",
+          "atom_id": "HOOK v02",
+          "source": "persona_atom+registry",
+          "source_id": "HOOK v02+ch03_sec01_hook_f2",
+          "target_words": 100,
+          "actual_words": 28,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "ANGLE_CALLBACK",
+          "variant_id": "",
+          "atom_id": "angle_cb_tpl:IMPOSTERS_PERFORMANCE:L2",
+          "source": "angle_template",
+          "source_id": "angle_cb_tpl:IMPOSTERS_PERFORMANCE:L2",
+          "target_words": 280,
+          "actual_words": 25,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {
+            "angle_layer": 2
+          }
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "RECOGNITION v12",
+          "source": "persona_atom",
+          "source_id": "RECOGNITION v12+stack1",
+          "target_words": 148,
+          "actual_words": 178,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "REFLECTION",
+          "variant_id": "ch03_sec03_reflection_f3",
+          "atom_id": "REFLECTION v14",
+          "source": "persona_atom+registry",
+          "source_id": "REFLECTION v14+ch03_sec03_reflection_f3",
+          "target_words": 108,
+          "actual_words": 160,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "EXERCISE",
+          "variant_id": "",
+          "atom_id": "practice_library",
+          "source": "practice_library",
+          "source_id": "practice_library",
+          "target_words": 160,
+          "actual_words": 155,
+          "enrichment_applied": [
+            "somatic_exercise"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "RECOGNITION v03",
+          "source": "persona_atom",
+          "source_id": "RECOGNITION v03",
+          "target_words": 142,
+          "actual_words": 157,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "TEACHER_DOCTRINE",
+          "variant_id": "",
+          "atom_id": "TEACHER_DOCTRINE v04",
+          "source": "persona_atom",
+          "source_id": "TEACHER_DOCTRINE v04",
+          "target_words": 131,
+          "actual_words": 175,
+          "enrichment_applied": [
+            "teacher_voice"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "REFLECTION",
+          "variant_id": "ch03_sec04_reflection_f1",
+          "atom_id": "REFLECTION v13",
+          "source": "persona_atom+registry",
+          "source_id": "REFLECTION v13+ch03_sec04_reflection_f1",
+          "target_words": 108,
+          "actual_words": 152,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "EXERCISE",
+          "variant_id": "",
+          "atom_id": "practice_library",
+          "source": "practice_library",
+          "source_id": "practice_library",
+          "target_words": 173,
+          "actual_words": 155,
+          "enrichment_applied": [
+            "somatic_exercise"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "EMBODIMENT v03",
+          "source": "persona_atom",
+          "source_id": "EMBODIMENT v03",
+          "target_words": 131,
+          "actual_words": 148,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "INTEGRATION",
+          "variant_id": "ch03_sec08_integration_f1",
+          "atom_id": "INTEGRATION v18",
+          "source": "persona_atom+registry",
+          "source_id": "INTEGRATION v18+ch03_sec08_integration_f1",
+          "target_words": 91,
+          "actual_words": 116,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "DEPTH_RECOGNITION_DEPTH",
+          "variant_id": "",
+          "atom_id": "",
+          "source": "depth_module:recognition_depth:registry_variant",
+          "source_id": "depth_recognition_depth_3_p1r0",
+          "target_words": 123,
+          "actual_words": 32,
+          "enrichment_applied": [
+            "recognition_depth"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "DEPTH_RECOGNITION_DEPTH",
+          "variant_id": "",
+          "atom_id": "",
+          "source": "depth_module:recognition_depth:registry_variant",
+          "source_id": "depth_recognition_depth_3_p2r0",
+          "target_words": 214,
+          "actual_words": 31,
+          "enrichment_applied": [
+            "recognition_depth"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "DEPTH_STORY_SCENE",
+          "variant_id": "",
+          "atom_id": "",
+          "source": "depth_module:story_scene:registry_variant",
+          "source_id": "depth_story_scene_3_p2r0",
+          "target_words": 183,
+          "actual_words": 31,
+          "enrichment_applied": [
+            "story_scene"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "slots": [
+        {
+          "slot_type": "HOOK",
+          "variant_id": "ch04_sec01_hook_f2",
+          "atom_id": "HOOK v01",
+          "source": "persona_atom+registry",
+          "source_id": "HOOK v01+ch04_sec01_hook_f2",
+          "target_words": 100,
+          "actual_words": 71,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "ANGLE_CALLBACK",
+          "variant_id": "",
+          "atom_id": "angle_cb_tpl:IMPOSTERS_PERFORMANCE:L2",
+          "source": "angle_template",
+          "source_id": "angle_cb_tpl:IMPOSTERS_PERFORMANCE:L2",
+          "target_words": 280,
+          "actual_words": 25,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {
+            "angle_layer": 2
+          }
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "EMBODIMENT v01",
+          "source": "persona_atom",
+          "source_id": "EMBODIMENT v01",
+          "target_words": 148,
+          "actual_words": 180,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "REFLECTION",
+          "variant_id": "ch04_sec03_reflection_f3",
+          "atom_id": "REFLECTION v18",
+          "source": "persona_atom+registry",
+          "source_id": "REFLECTION v18+ch04_sec03_reflection_f3",
+          "target_words": 108,
+          "actual_words": 197,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "EXERCISE",
+          "variant_id": "",
+          "atom_id": "practice_library",
+          "source": "practice_library",
+          "source_id": "practice_library",
+          "target_words": 160,
+          "actual_words": 154,
+          "enrichment_applied": [
+            "somatic_exercise"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "TURNING_POINT v01",
+          "source": "persona_atom",
+          "source_id": "TURNING_POINT v01",
+          "target_words": 142,
+          "actual_words": 187,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "TEACHER_DOCTRINE",
+          "variant_id": "",
+          "atom_id": "TEACHER_DOCTRINE v01",
+          "source": "persona_atom",
+          "source_id": "TEACHER_DOCTRINE v01",
+          "target_words": 131,
+          "actual_words": 203,
+          "enrichment_applied": [
+            "teacher_voice"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "REFLECTION",
+          "variant_id": "ch04_sec04_reflection_f1",
+          "atom_id": "REFLECTION v28",
+          "source": "persona_atom+registry",
+          "source_id": "REFLECTION v28+ch04_sec04_reflection_f1",
+          "target_words": 108,
+          "actual_words": 171,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "EXERCISE",
+          "variant_id": "",
+          "atom_id": "practice_library",
+          "source": "practice_library",
+          "source_id": "practice_library",
+          "target_words": 173,
+          "actual_words": 154,
+          "enrichment_applied": [
+            "somatic_exercise"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "TURNING_POINT v07",
+          "source": "persona_atom",
+          "source_id": "TURNING_POINT v07",
+          "target_words": 131,
+          "actual_words": 116,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "INTEGRATION",
+          "variant_id": "ch04_sec07_integration_f3",
+          "atom_id": "INTEGRATION v19",
+          "source": "persona_atom+registry",
+          "source_id": "INTEGRATION v19+ch04_sec07_integration_f3",
+          "target_words": 91,
+          "actual_words": 119,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "slots": [
+        {
+          "slot_type": "HOOK",
+          "variant_id": "ch05_sec01_hook_f2",
+          "atom_id": "HOOK v04",
+          "source": "persona_atom+registry",
+          "source_id": "HOOK v04+ch05_sec01_hook_f2",
+          "target_words": 100,
+          "actual_words": 31,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "ANGLE_CALLBACK",
+          "variant_id": "",
+          "atom_id": "angle_cb_tpl:IMPOSTERS_PERFORMANCE:L2",
+          "source": "angle_template",
+          "source_id": "angle_cb_tpl:IMPOSTERS_PERFORMANCE:L2",
+          "target_words": 280,
+          "actual_words": 25,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {
+            "angle_layer": 2
+          }
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "RECOGNITION v07",
+          "source": "persona_atom",
+          "source_id": "RECOGNITION v07+stack2",
+          "target_words": 148,
+          "actual_words": 187,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "REFLECTION",
+          "variant_id": "ch05_sec03_reflection_f3",
+          "atom_id": "REFLECTION v05",
+          "source": "persona_atom+registry",
+          "source_id": "REFLECTION v05+ch05_sec03_reflection_f3",
+          "target_words": 108,
+          "actual_words": 157,
+          "enrichment_applied": [
+            "teacher_voice"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "EXERCISE",
+          "variant_id": "",
+          "atom_id": "practice_library",
+          "source": "practice_library",
+          "source_id": "practice_library",
+          "target_words": 160,
+          "actual_words": 147,
+          "enrichment_applied": [
+            "somatic_exercise"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "STORY v08",
+          "source": "persona_atom",
+          "source_id": "STORY v08+stack2",
+          "target_words": 142,
+          "actual_words": 254,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "TEACHER_DOCTRINE",
+          "variant_id": "",
+          "atom_id": "TEACHER_DOCTRINE v02",
+          "source": "persona_atom",
+          "source_id": "TEACHER_DOCTRINE v02",
+          "target_words": 131,
+          "actual_words": 195,
+          "enrichment_applied": [
+            "teacher_voice"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "REFLECTION",
+          "variant_id": "ch05_sec04_reflection_f2",
+          "atom_id": "REFLECTION v29",
+          "source": "persona_atom+registry",
+          "source_id": "REFLECTION v29+ch05_sec04_reflection_f2",
+          "target_words": 108,
+          "actual_words": 153,
+          "enrichment_applied": [
+            "teacher_voice"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "EXERCISE",
+          "variant_id": "",
+          "atom_id": "practice_library",
+          "source": "practice_library",
+          "source_id": "practice_library",
+          "target_words": 173,
+          "actual_words": 147,
+          "enrichment_applied": [
+            "somatic_exercise"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "RECOGNITION v13",
+          "source": "persona_atom",
+          "source_id": "RECOGNITION v13+stack1",
+          "target_words": 131,
+          "actual_words": 209,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "INTEGRATION",
+          "variant_id": "ch05_sec07_integration_f3",
+          "atom_id": "INTEGRATION v06",
+          "source": "persona_atom+registry",
+          "source_id": "INTEGRATION v06+ch05_sec07_integration_f3",
+          "target_words": 91,
+          "actual_words": 118,
+          "enrichment_applied": [
+            "teacher_voice"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        }
+      ]
+    },
+    {
+      "number": 6,
+      "slots": [
+        {
+          "slot_type": "HOOK",
+          "variant_id": "ch06_sec01_hook_f2",
+          "atom_id": "HOOK v05",
+          "source": "persona_atom+registry",
+          "source_id": "HOOK v05+ch06_sec01_hook_f2",
+          "target_words": 100,
+          "actual_words": 30,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "ANGLE_CALLBACK",
+          "variant_id": "",
+          "atom_id": "angle_cb_tpl:IMPOSTERS_PERFORMANCE:L3",
+          "source": "angle_template",
+          "source_id": "angle_cb_tpl:IMPOSTERS_PERFORMANCE:L3",
+          "target_words": 280,
+          "actual_words": 25,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {
+            "angle_layer": 3
+          }
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "RECOGNITION v14",
+          "source": "persona_atom",
+          "source_id": "RECOGNITION v14+stack2",
+          "target_words": 148,
+          "actual_words": 178,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "REFLECTION",
+          "variant_id": "ch06_sec03_reflection_f1",
+          "atom_id": "REFLECTION v10",
+          "source": "persona_atom+registry",
+          "source_id": "REFLECTION v10+ch06_sec03_reflection_f1",
+          "target_words": 108,
+          "actual_words": 200,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "EXERCISE",
+          "variant_id": "",
+          "atom_id": "practice_library",
+          "source": "practice_library",
+          "source_id": "practice_library",
+          "target_words": 160,
+          "actual_words": 154,
+          "enrichment_applied": [
+            "somatic_exercise"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "MECHANISM_PROOF v02",
+          "source": "persona_atom",
+          "source_id": "MECHANISM_PROOF v02",
+          "target_words": 142,
+          "actual_words": 109,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "TEACHER_DOCTRINE",
+          "variant_id": "",
+          "atom_id": "TEACHER_DOCTRINE v01",
+          "source": "persona_atom",
+          "source_id": "TEACHER_DOCTRINE v01",
+          "target_words": 131,
+          "actual_words": 203,
+          "enrichment_applied": [
+            "teacher_voice"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "REFLECTION",
+          "variant_id": "ch06_sec04_reflection_f3",
+          "atom_id": "REFLECTION v25",
+          "source": "persona_atom+registry",
+          "source_id": "REFLECTION v25+ch06_sec04_reflection_f3",
+          "target_words": 108,
+          "actual_words": 203,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "EXERCISE",
+          "variant_id": "",
+          "atom_id": "practice_library",
+          "source": "practice_library",
+          "source_id": "practice_library",
+          "target_words": 173,
+          "actual_words": 154,
+          "enrichment_applied": [
+            "somatic_exercise"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "MECHANISM_PROOF v03",
+          "source": "persona_atom",
+          "source_id": "MECHANISM_PROOF v03",
+          "target_words": 131,
+          "actual_words": 165,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "INTEGRATION",
+          "variant_id": "ch06_sec07_integration_f3",
+          "atom_id": "INTEGRATION v08",
+          "source": "persona_atom+registry",
+          "source_id": "INTEGRATION v08+ch06_sec07_integration_f3",
+          "target_words": 91,
+          "actual_words": 117,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        }
+      ]
+    },
+    {
+      "number": 7,
+      "slots": [
+        {
+          "slot_type": "HOOK",
+          "variant_id": "ch07_sec01_hook_f2",
+          "atom_id": "HOOK v06",
+          "source": "persona_atom+registry",
+          "source_id": "HOOK v06+ch07_sec01_hook_f2",
+          "target_words": 100,
+          "actual_words": 26,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "ANGLE_CALLBACK",
+          "variant_id": "",
+          "atom_id": "angle_cb_tpl:IMPOSTERS_PERFORMANCE:L3",
+          "source": "angle_template",
+          "source_id": "angle_cb_tpl:IMPOSTERS_PERFORMANCE:L3",
+          "target_words": 280,
+          "actual_words": 25,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {
+            "angle_layer": 3
+          }
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "TURNING_POINT v05",
+          "source": "persona_atom",
+          "source_id": "TURNING_POINT v05",
+          "target_words": 148,
+          "actual_words": 85,
+          "enrichment_applied": [
+            "story_vividness"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "REFLECTION",
+          "variant_id": "ch07_sec06_reflection_f3",
+          "atom_id": "REFLECTION v30",
+          "source": "persona_atom+registry",
+          "source_id": "REFLECTION v30+ch07_sec06_reflection_f3",
+          "target_words": 108,
+          "actual_words": 163,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "EXERCISE",
+          "variant_id": "",
+          "atom_id": "practice_library",
+          "source": "practice_library",
+          "source_id": "practice_library",
+          "target_words": 160,
+          "actual_words": 141,
+          "enrichment_applied": [
+            "somatic_exercise"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "EMBODIMENT v04",
+          "source": "persona_atom",
+          "source_id": "EMBODIMENT v04",
+          "target_words": 142,
+          "actual_words": 76,
+          "enrichment_applied": [
+            "story_vividness"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "TEACHER_DOCTRINE",
+          "variant_id": "",
+          "atom_id": "TEACHER_DOCTRINE v03",
+          "source": "persona_atom",
+          "source_id": "TEACHER_DOCTRINE v03",
+          "target_words": 131,
+          "actual_words": 187,
+          "enrichment_applied": [
+            "teacher_voice"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "REFLECTION",
+          "variant_id": "",
+          "atom_id": "REFLECTION v23",
+          "source": "persona_atom",
+          "source_id": "REFLECTION v23",
+          "target_words": 108,
+          "actual_words": 101,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "EXERCISE",
+          "variant_id": "",
+          "atom_id": "practice_library",
+          "source": "practice_library",
+          "source_id": "practice_library",
+          "target_words": 173,
+          "actual_words": 141,
+          "enrichment_applied": [
+            "somatic_exercise"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "RECOGNITION v17",
+          "source": "persona_atom",
+          "source_id": "RECOGNITION v17+stack3",
+          "target_words": 131,
+          "actual_words": 229,
+          "enrichment_applied": [
+            "story_vividness"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "INTEGRATION",
+          "variant_id": "ch07_sec07_integration_f3",
+          "atom_id": "INTEGRATION v16",
+          "source": "persona_atom+registry",
+          "source_id": "INTEGRATION v16+ch07_sec07_integration_f3",
+          "target_words": 91,
+          "actual_words": 113,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "DEPTH_MECHANISM_DEPTH",
+          "variant_id": "",
+          "atom_id": "",
+          "source": "depth_module:mechanism_depth:registry_variant",
+          "source_id": "depth_mechanism_depth_7_p1r0",
+          "target_words": 285,
+          "actual_words": 46,
+          "enrichment_applied": [
+            "mechanism_depth"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "DEPTH_CONSEQUENCE_EXPOSURE",
+          "variant_id": "",
+          "atom_id": "",
+          "source": "depth_module:consequence_exposure:registry_variant",
+          "source_id": "depth_consequence_exposure_7_p1r0",
+          "target_words": 239,
+          "actual_words": 46,
+          "enrichment_applied": [
+            "consequence_exposure"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "DEPTH_BRIDGE_TRANSITION",
+          "variant_id": "",
+          "atom_id": "",
+          "source": "depth_module:bridge_transition:exercise_bridge",
+          "source_id": "depth_bridge_transition_7_p1r0",
+          "target_words": 120,
+          "actual_words": 29,
+          "enrichment_applied": [
+            "bridge_transition"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "DEPTH_MECHANISM_DEPTH",
+          "variant_id": "",
+          "atom_id": "",
+          "source": "depth_module:mechanism_depth:registry_variant",
+          "source_id": "depth_mechanism_depth_7_p2r0",
+          "target_words": 600,
+          "actual_words": 46,
+          "enrichment_applied": [
+            "mechanism_depth"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "DEPTH_CONSEQUENCE_EXPOSURE",
+          "variant_id": "",
+          "atom_id": "",
+          "source": "depth_module:consequence_exposure:registry_variant",
+          "source_id": "depth_consequence_exposure_7_p2r0",
+          "target_words": 400,
+          "actual_words": 46,
+          "enrichment_applied": [
+            "consequence_exposure"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "DEPTH_BRIDGE_TRANSITION",
+          "variant_id": "",
+          "atom_id": "",
+          "source": "depth_module:bridge_transition:exercise_bridge",
+          "source_id": "depth_bridge_transition_7_p2r0",
+          "target_words": 120,
+          "actual_words": 37,
+          "enrichment_applied": [
+            "bridge_transition"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        }
+      ]
+    },
+    {
+      "number": 8,
+      "slots": [
+        {
+          "slot_type": "HOOK",
+          "variant_id": "ch08_sec01_hook_f3",
+          "atom_id": "HOOK v26",
+          "source": "persona_atom+registry",
+          "source_id": "HOOK v26+ch08_sec01_hook_f3",
+          "target_words": 100,
+          "actual_words": 28,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "ANGLE_CALLBACK",
+          "variant_id": "",
+          "atom_id": "angle_cb_tpl:IMPOSTERS_PERFORMANCE:L4",
+          "source": "angle_template",
+          "source_id": "angle_cb_tpl:IMPOSTERS_PERFORMANCE:L4",
+          "target_words": 280,
+          "actual_words": 25,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {
+            "angle_layer": 4
+          }
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "EMBODIMENT v07",
+          "source": "persona_atom",
+          "source_id": "EMBODIMENT v07",
+          "target_words": 148,
+          "actual_words": 115,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "REFLECTION",
+          "variant_id": "ch08_sec06_reflection_f3",
+          "atom_id": "REFLECTION v03",
+          "source": "persona_atom+registry",
+          "source_id": "REFLECTION v03+ch08_sec06_reflection_f3",
+          "target_words": 108,
+          "actual_words": 182,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "EXERCISE",
+          "variant_id": "",
+          "atom_id": "practice_library",
+          "source": "practice_library",
+          "source_id": "practice_library",
+          "target_words": 160,
+          "actual_words": 150,
+          "enrichment_applied": [
+            "somatic_exercise"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "RECOGNITION v05",
+          "source": "persona_atom",
+          "source_id": "RECOGNITION v05",
+          "target_words": 142,
+          "actual_words": 126,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "TEACHER_DOCTRINE",
+          "variant_id": "",
+          "atom_id": "TEACHER_DOCTRINE v04",
+          "source": "persona_atom",
+          "source_id": "TEACHER_DOCTRINE v04",
+          "target_words": 131,
+          "actual_words": 175,
+          "enrichment_applied": [
+            "teacher_voice"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "REFLECTION",
+          "variant_id": "",
+          "atom_id": "REFLECTION v11",
+          "source": "persona_atom",
+          "source_id": "REFLECTION v11",
+          "target_words": 108,
+          "actual_words": 137,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "EXERCISE",
+          "variant_id": "",
+          "atom_id": "practice_library",
+          "source": "practice_library",
+          "source_id": "practice_library",
+          "target_words": 173,
+          "actual_words": 150,
+          "enrichment_applied": [
+            "somatic_exercise"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "STORY v01",
+          "source": "persona_atom",
+          "source_id": "STORY v01",
+          "target_words": 131,
+          "actual_words": 67,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "INTEGRATION",
+          "variant_id": "ch08_sec07_integration_f3",
+          "atom_id": "INTEGRATION v09",
+          "source": "persona_atom+registry",
+          "source_id": "INTEGRATION v09+ch08_sec07_integration_f3",
+          "target_words": 91,
+          "actual_words": 118,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "DEPTH_MECHANISM_DEPTH",
+          "variant_id": "",
+          "atom_id": "",
+          "source": "depth_module:mechanism_depth:registry_variant",
+          "source_id": "depth_mechanism_depth_8_p1r0",
+          "target_words": 299,
+          "actual_words": 46,
+          "enrichment_applied": [
+            "mechanism_depth"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "DEPTH_CONSEQUENCE_EXPOSURE",
+          "variant_id": "",
+          "atom_id": "",
+          "source": "depth_module:consequence_exposure:registry_variant",
+          "source_id": "depth_consequence_exposure_8_p1r0",
+          "target_words": 253,
+          "actual_words": 46,
+          "enrichment_applied": [
+            "consequence_exposure"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "DEPTH_BRIDGE_TRANSITION",
+          "variant_id": "",
+          "atom_id": "",
+          "source": "depth_module:bridge_transition:exercise_bridge",
+          "source_id": "depth_bridge_transition_8_p1r0",
+          "target_words": 120,
+          "actual_words": 28,
+          "enrichment_applied": [
+            "bridge_transition"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "DEPTH_MECHANISM_DEPTH",
+          "variant_id": "",
+          "atom_id": "",
+          "source": "depth_module:mechanism_depth:registry_variant",
+          "source_id": "depth_mechanism_depth_8_p2r0",
+          "target_words": 600,
+          "actual_words": 46,
+          "enrichment_applied": [
+            "mechanism_depth"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "DEPTH_CONSEQUENCE_EXPOSURE",
+          "variant_id": "",
+          "atom_id": "",
+          "source": "depth_module:consequence_exposure:registry_variant",
+          "source_id": "depth_consequence_exposure_8_p2r0",
+          "target_words": 400,
+          "actual_words": 46,
+          "enrichment_applied": [
+            "consequence_exposure"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "DEPTH_BRIDGE_TRANSITION",
+          "variant_id": "",
+          "atom_id": "",
+          "source": "depth_module:bridge_transition:exercise_bridge",
+          "source_id": "depth_bridge_transition_8_p2r0",
+          "target_words": 120,
+          "actual_words": 33,
+          "enrichment_applied": [
+            "bridge_transition"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        }
+      ]
+    },
+    {
+      "number": 9,
+      "slots": [
+        {
+          "slot_type": "HOOK",
+          "variant_id": "ch09_sec01_hook_f3",
+          "atom_id": "HOOK v07",
+          "source": "persona_atom+registry",
+          "source_id": "HOOK v07+ch09_sec01_hook_f3",
+          "target_words": 100,
+          "actual_words": 26,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "ANGLE_CALLBACK",
+          "variant_id": "",
+          "atom_id": "angle_cb_tpl:IMPOSTERS_PERFORMANCE:L4",
+          "source": "angle_template",
+          "source_id": "angle_cb_tpl:IMPOSTERS_PERFORMANCE:L4",
+          "target_words": 280,
+          "actual_words": 25,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {
+            "angle_layer": 4
+          }
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "STORY v02",
+          "source": "persona_atom",
+          "source_id": "STORY v02",
+          "target_words": 148,
+          "actual_words": 52,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "REFLECTION",
+          "variant_id": "ch09_sec03_reflection_f3",
+          "atom_id": "REFLECTION v19",
+          "source": "persona_atom+registry",
+          "source_id": "REFLECTION v19+ch09_sec03_reflection_f3",
+          "target_words": 108,
+          "actual_words": 183,
+          "enrichment_applied": [
+            "teacher_voice"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "EXERCISE",
+          "variant_id": "",
+          "atom_id": "practice_library",
+          "source": "practice_library",
+          "source_id": "practice_library",
+          "target_words": 160,
+          "actual_words": 141,
+          "enrichment_applied": [
+            "somatic_exercise"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "STORY v13",
+          "source": "persona_atom",
+          "source_id": "STORY v13",
+          "target_words": 142,
+          "actual_words": 45,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "TEACHER_DOCTRINE",
+          "variant_id": "",
+          "atom_id": "TEACHER_DOCTRINE v05",
+          "source": "persona_atom",
+          "source_id": "TEACHER_DOCTRINE v05",
+          "target_words": 131,
+          "actual_words": 205,
+          "enrichment_applied": [
+            "teacher_voice"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "REFLECTION",
+          "variant_id": "ch09_sec04_reflection_f3",
+          "atom_id": "REFLECTION v15",
+          "source": "persona_atom+registry",
+          "source_id": "REFLECTION v15+ch09_sec04_reflection_f3",
+          "target_words": 108,
+          "actual_words": 152,
+          "enrichment_applied": [
+            "teacher_voice"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "EXERCISE",
+          "variant_id": "",
+          "atom_id": "practice_library",
+          "source": "practice_library",
+          "source_id": "practice_library",
+          "target_words": 173,
+          "actual_words": 141,
+          "enrichment_applied": [
+            "somatic_exercise"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "TURNING_POINT v06",
+          "source": "persona_atom",
+          "source_id": "TURNING_POINT v06",
+          "target_words": 131,
+          "actual_words": 118,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "INTEGRATION",
+          "variant_id": "ch09_sec07_integration_f1",
+          "atom_id": "INTEGRATION v11",
+          "source": "persona_atom+registry",
+          "source_id": "INTEGRATION v11+ch09_sec07_integration_f1",
+          "target_words": 91,
+          "actual_words": 116,
+          "enrichment_applied": [
+            "teacher_voice"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "EXERCISE",
+          "variant_id": "",
+          "atom_id": "",
+          "source": "depth_module:practice_scaffold:phoenix_standard",
+          "source_id": "depth_practice_scaffold_9_p1r0",
+          "target_words": 368,
+          "actual_words": 51,
+          "enrichment_applied": [
+            "practice_scaffold"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "EXERCISE",
+          "variant_id": "",
+          "atom_id": "",
+          "source": "depth_module:practice_scaffold:phoenix_standard",
+          "source_id": "depth_practice_scaffold_9_p1r0",
+          "target_words": 317,
+          "actual_words": 59,
+          "enrichment_applied": [
+            "practice_scaffold"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "DEPTH_INTEGRATION_LANDING",
+          "variant_id": "",
+          "atom_id": "",
+          "source": "depth_module:integration_landing:phoenix_standard",
+          "source_id": "depth_integration_landing_9_p1r0",
+          "target_words": 150,
+          "actual_words": 49,
+          "enrichment_applied": [
+            "integration_landing"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "EXERCISE",
+          "variant_id": "",
+          "atom_id": "",
+          "source": "depth_module:practice_scaffold:phoenix_standard",
+          "source_id": "depth_practice_scaffold_9_p2r0",
+          "target_words": 400,
+          "actual_words": 42,
+          "enrichment_applied": [
+            "practice_scaffold"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "EXERCISE",
+          "variant_id": "",
+          "atom_id": "",
+          "source": "depth_module:practice_scaffold:phoenix_standard",
+          "source_id": "depth_practice_scaffold_9_p2r0",
+          "target_words": 400,
+          "actual_words": 50,
+          "enrichment_applied": [
+            "practice_scaffold"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "DEPTH_INTEGRATION_LANDING",
+          "variant_id": "",
+          "atom_id": "",
+          "source": "depth_module:integration_landing:phoenix_standard",
+          "source_id": "depth_integration_landing_9_p2r0",
+          "target_words": 150,
+          "actual_words": 56,
+          "enrichment_applied": [
+            "integration_landing"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        }
+      ]
+    },
+    {
+      "number": 10,
+      "slots": [
+        {
+          "slot_type": "HOOK",
+          "variant_id": "ch10_sec01_hook_f5",
+          "atom_id": "HOOK v23",
+          "source": "persona_atom+registry",
+          "source_id": "HOOK v23+ch10_sec01_hook_f5",
+          "target_words": 100,
+          "actual_words": 27,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "ANGLE_CALLBACK",
+          "variant_id": "",
+          "atom_id": "angle_cb_tpl:IMPOSTERS_PERFORMANCE:L4",
+          "source": "angle_template",
+          "source_id": "angle_cb_tpl:IMPOSTERS_PERFORMANCE:L4",
+          "target_words": 280,
+          "actual_words": 25,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {
+            "angle_layer": 4
+          }
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "MECHANISM_PROOF v04",
+          "source": "persona_atom",
+          "source_id": "MECHANISM_PROOF v04",
+          "target_words": 148,
+          "actual_words": 79,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "REFLECTION",
+          "variant_id": "ch10_sec03_reflection_f3",
+          "atom_id": "REFLECTION v20",
+          "source": "persona_atom+registry",
+          "source_id": "REFLECTION v20+ch10_sec03_reflection_f3",
+          "target_words": 108,
+          "actual_words": 176,
+          "enrichment_applied": [
+            "teacher_voice"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "EXERCISE",
+          "variant_id": "",
+          "atom_id": "practice_library",
+          "source": "practice_library",
+          "source_id": "practice_library",
+          "target_words": 160,
+          "actual_words": 135,
+          "enrichment_applied": [
+            "somatic_exercise"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "RECOGNITION v01",
+          "source": "persona_atom",
+          "source_id": "RECOGNITION v01",
+          "target_words": 142,
+          "actual_words": 128,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "TEACHER_DOCTRINE",
+          "variant_id": "",
+          "atom_id": "TEACHER_DOCTRINE v02",
+          "source": "persona_atom",
+          "source_id": "TEACHER_DOCTRINE v02",
+          "target_words": 131,
+          "actual_words": 195,
+          "enrichment_applied": [
+            "teacher_voice"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "REFLECTION",
+          "variant_id": "ch10_sec04_reflection_f1",
+          "atom_id": "REFLECTION v16",
+          "source": "persona_atom+registry",
+          "source_id": "REFLECTION v16+ch10_sec04_reflection_f1",
+          "target_words": 108,
+          "actual_words": 149,
+          "enrichment_applied": [
+            "teacher_voice"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "EXERCISE",
+          "variant_id": "",
+          "atom_id": "practice_library",
+          "source": "practice_library",
+          "source_id": "practice_library",
+          "target_words": 173,
+          "actual_words": 135,
+          "enrichment_applied": [
+            "somatic_exercise"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "RECOGNITION v08",
+          "source": "persona_atom",
+          "source_id": "RECOGNITION v08+stack3",
+          "target_words": 131,
+          "actual_words": 119,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "INTEGRATION",
+          "variant_id": "ch10_sec07_integration_f3",
+          "atom_id": "INTEGRATION v13",
+          "source": "persona_atom+registry",
+          "source_id": "INTEGRATION v13+ch10_sec07_integration_f3",
+          "target_words": 91,
+          "actual_words": 116,
+          "enrichment_applied": [
+            "teacher_voice"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "EXERCISE",
+          "variant_id": "",
+          "atom_id": "",
+          "source": "depth_module:practice_scaffold:phoenix_standard",
+          "source_id": "depth_practice_scaffold_10_p1r0",
+          "target_words": 288,
+          "actual_words": 39,
+          "enrichment_applied": [
+            "practice_scaffold"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "EXERCISE",
+          "variant_id": "",
+          "atom_id": "",
+          "source": "depth_module:practice_scaffold:phoenix_standard",
+          "source_id": "depth_practice_scaffold_10_p1r0",
+          "target_words": 249,
+          "actual_words": 55,
+          "enrichment_applied": [
+            "practice_scaffold"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "DEPTH_INTEGRATION_LANDING",
+          "variant_id": "",
+          "atom_id": "",
+          "source": "depth_module:integration_landing:phoenix_standard",
+          "source_id": "depth_integration_landing_10_p1r0",
+          "target_words": 150,
+          "actual_words": 54,
+          "enrichment_applied": [
+            "integration_landing"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "EXERCISE",
+          "variant_id": "",
+          "atom_id": "",
+          "source": "depth_module:practice_scaffold:phoenix_standard",
+          "source_id": "depth_practice_scaffold_10_p2r0",
+          "target_words": 400,
+          "actual_words": 81,
+          "enrichment_applied": [
+            "practice_scaffold"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "EXERCISE",
+          "variant_id": "",
+          "atom_id": "",
+          "source": "depth_module:practice_scaffold:phoenix_standard",
+          "source_id": "depth_practice_scaffold_10_p2r0",
+          "target_words": 400,
+          "actual_words": 56,
+          "enrichment_applied": [
+            "practice_scaffold"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "DEPTH_INTEGRATION_LANDING",
+          "variant_id": "",
+          "atom_id": "",
+          "source": "depth_module:integration_landing:phoenix_standard",
+          "source_id": "depth_integration_landing_10_p2r0",
+          "target_words": 150,
+          "actual_words": 55,
+          "enrichment_applied": [
+            "integration_landing"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        }
+      ]
+    },
+    {
+      "number": 11,
+      "slots": [
+        {
+          "slot_type": "HOOK",
+          "variant_id": "ch11_sec01_hook_f2",
+          "atom_id": "HOOK v16",
+          "source": "persona_atom+registry",
+          "source_id": "HOOK v16+ch11_sec01_hook_f2",
+          "target_words": 100,
+          "actual_words": 23,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "ANGLE_CALLBACK",
+          "variant_id": "",
+          "atom_id": "angle_cb_tpl:IMPOSTERS_PERFORMANCE:L5",
+          "source": "angle_template",
+          "source_id": "angle_cb_tpl:IMPOSTERS_PERFORMANCE:L5",
+          "target_words": 280,
+          "actual_words": 25,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {
+            "angle_layer": 5
+          }
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "RECOGNITION v09",
+          "source": "persona_atom",
+          "source_id": "RECOGNITION v09+stack3",
+          "target_words": 148,
+          "actual_words": 115,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "REFLECTION",
+          "variant_id": "ch11_sec03_reflection_f1",
+          "atom_id": "REFLECTION v02",
+          "source": "persona_atom+registry",
+          "source_id": "REFLECTION v02+ch11_sec03_reflection_f1",
+          "target_words": 108,
+          "actual_words": 200,
+          "enrichment_applied": [
+            "teacher_voice"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "EXERCISE",
+          "variant_id": "",
+          "atom_id": "practice_library",
+          "source": "practice_library",
+          "source_id": "practice_library",
+          "target_words": 160,
+          "actual_words": 133,
+          "enrichment_applied": [
+            "somatic_exercise"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "RECOGNITION v10",
+          "source": "persona_atom",
+          "source_id": "RECOGNITION v10+stack3",
+          "target_words": 142,
+          "actual_words": 148,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "TEACHER_DOCTRINE",
+          "variant_id": "",
+          "atom_id": "TEACHER_DOCTRINE v02",
+          "source": "persona_atom",
+          "source_id": "TEACHER_DOCTRINE v02",
+          "target_words": 131,
+          "actual_words": 195,
+          "enrichment_applied": [
+            "teacher_voice"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "REFLECTION",
+          "variant_id": "ch11_sec04_reflection_f1",
+          "atom_id": "REFLECTION v26",
+          "source": "persona_atom+registry",
+          "source_id": "REFLECTION v26+ch11_sec04_reflection_f1",
+          "target_words": 108,
+          "actual_words": 198,
+          "enrichment_applied": [
+            "teacher_voice"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "EXERCISE",
+          "variant_id": "",
+          "atom_id": "practice_library",
+          "source": "practice_library",
+          "source_id": "practice_library",
+          "target_words": 173,
+          "actual_words": 133,
+          "enrichment_applied": [
+            "somatic_exercise"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "STORY v06",
+          "source": "persona_atom",
+          "source_id": "STORY v06",
+          "target_words": 131,
+          "actual_words": 56,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "INTEGRATION",
+          "variant_id": "ch11_sec07_integration_f2",
+          "atom_id": "INTEGRATION v20",
+          "source": "persona_atom+registry",
+          "source_id": "INTEGRATION v20+ch11_sec07_integration_f2",
+          "target_words": 91,
+          "actual_words": 116,
+          "enrichment_applied": [
+            "teacher_voice"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "EXERCISE",
+          "variant_id": "",
+          "atom_id": "",
+          "source": "depth_module:practice_scaffold:phoenix_standard",
+          "source_id": "depth_practice_scaffold_11_p1r0",
+          "target_words": 230,
+          "actual_words": 48,
+          "enrichment_applied": [
+            "practice_scaffold"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "EXERCISE",
+          "variant_id": "",
+          "atom_id": "",
+          "source": "depth_module:practice_scaffold:phoenix_standard",
+          "source_id": "depth_practice_scaffold_11_p1r0",
+          "target_words": 182,
+          "actual_words": 56,
+          "enrichment_applied": [
+            "practice_scaffold"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "DEPTH_INTEGRATION_LANDING",
+          "variant_id": "",
+          "atom_id": "",
+          "source": "depth_module:integration_landing:phoenix_standard",
+          "source_id": "depth_integration_landing_11_p1r0",
+          "target_words": 126,
+          "actual_words": 53,
+          "enrichment_applied": [
+            "integration_landing"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "EXERCISE",
+          "variant_id": "",
+          "atom_id": "",
+          "source": "depth_module:practice_scaffold:phoenix_standard",
+          "source_id": "depth_practice_scaffold_11_p2r0",
+          "target_words": 400,
+          "actual_words": 36,
+          "enrichment_applied": [
+            "practice_scaffold"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "EXERCISE",
+          "variant_id": "",
+          "atom_id": "",
+          "source": "depth_module:practice_scaffold:phoenix_standard",
+          "source_id": "depth_practice_scaffold_11_p2r0",
+          "target_words": 400,
+          "actual_words": 49,
+          "enrichment_applied": [
+            "practice_scaffold"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "DEPTH_INTEGRATION_LANDING",
+          "variant_id": "",
+          "atom_id": "",
+          "source": "depth_module:integration_landing:phoenix_standard",
+          "source_id": "depth_integration_landing_11_p2r0",
+          "target_words": 150,
+          "actual_words": 55,
+          "enrichment_applied": [
+            "integration_landing"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        }
+      ]
+    },
+    {
+      "number": 12,
+      "slots": [
+        {
+          "slot_type": "HOOK",
+          "variant_id": "ch12_sec01_hook_f5",
+          "atom_id": "HOOK v08",
+          "source": "persona_atom+registry",
+          "source_id": "HOOK v08+ch12_sec01_hook_f5",
+          "target_words": 100,
+          "actual_words": 32,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "ANGLE_CALLBACK",
+          "variant_id": "",
+          "atom_id": "angle_cb_tpl:IMPOSTERS_PERFORMANCE:L5",
+          "source": "angle_template",
+          "source_id": "angle_cb_tpl:IMPOSTERS_PERFORMANCE:L5",
+          "target_words": 280,
+          "actual_words": 25,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {
+            "angle_layer": 5
+          }
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "STORY v07",
+          "source": "persona_atom",
+          "source_id": "STORY v07+stack2",
+          "target_words": 148,
+          "actual_words": 252,
+          "enrichment_applied": [
+            "story_vividness"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "REFLECTION",
+          "variant_id": "ch12_sec03_reflection_f1",
+          "atom_id": "REFLECTION v17",
+          "source": "persona_atom+registry",
+          "source_id": "REFLECTION v17+ch12_sec03_reflection_f1",
+          "target_words": 108,
+          "actual_words": 202,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "EXERCISE",
+          "variant_id": "",
+          "atom_id": "practice_library",
+          "source": "practice_library",
+          "source_id": "practice_library",
+          "target_words": 160,
+          "actual_words": 162,
+          "enrichment_applied": [
+            "somatic_exercise"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "RECOGNITION v15",
+          "source": "persona_atom",
+          "source_id": "RECOGNITION v15+stack2",
+          "target_words": 142,
+          "actual_words": 149,
+          "enrichment_applied": [
+            "story_vividness"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "TEACHER_DOCTRINE",
+          "variant_id": "",
+          "atom_id": "TEACHER_DOCTRINE v05",
+          "source": "persona_atom",
+          "source_id": "TEACHER_DOCTRINE v05",
+          "target_words": 131,
+          "actual_words": 205,
+          "enrichment_applied": [
+            "teacher_voice"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "REFLECTION",
+          "variant_id": "ch12_sec04_reflection_f1",
+          "atom_id": "REFLECTION v21",
+          "source": "persona_atom+registry",
+          "source_id": "REFLECTION v21+ch12_sec04_reflection_f1",
+          "target_words": 108,
+          "actual_words": 154,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "EXERCISE",
+          "variant_id": "",
+          "atom_id": "practice_library",
+          "source": "practice_library",
+          "source_id": "practice_library",
+          "target_words": 173,
+          "actual_words": 162,
+          "enrichment_applied": [
+            "somatic_exercise"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "STORY",
+          "variant_id": "",
+          "atom_id": "RECOGNITION v16",
+          "source": "persona_atom",
+          "source_id": "RECOGNITION v16+stack1",
+          "target_words": 131,
+          "actual_words": 156,
+          "enrichment_applied": [
+            "story_vividness"
+          ],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        },
+        {
+          "slot_type": "INTEGRATION",
+          "variant_id": "ch12_sec07_integration_f2",
+          "atom_id": "INTEGRATION v14",
+          "source": "persona_atom+registry",
+          "source_id": "INTEGRATION v14+ch12_sec07_integration_f2",
+          "target_words": 91,
+          "actual_words": 116,
+          "enrichment_applied": [],
+          "exercise_phase": null,
+          "journey_exercise_id": null,
+          "match_scores": {}
+        }
+      ]
+    }
+  ]
+}

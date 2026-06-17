@@ -1,0 +1,202 @@
+{
+  "status": "WARN",
+  "release_band": "Hold",
+  "fail_reasons": [],
+  "hold_reasons": [
+    "repeated phrase density above book cap"
+  ],
+  "metrics": {
+    "runtime_format_id": "standard_book",
+    "word_count": 18146,
+    "word_range": [
+      9000,
+      22000
+    ],
+    "chapter_count": 12,
+    "flow_profile": "standard",
+    "flow_failures": [],
+    "artifact_hits": [],
+    "repeated_phrase_violations": [
+      {
+        "phrase": "moves through the room",
+        "count": 18,
+        "chapter": null,
+        "matched_allowlist_entry": null,
+        "cap_applied": 12,
+        "rule_fired": "book_wide_cap",
+        "rule": "book_wide_cap"
+      },
+      {
+        "phrase": "going to do a",
+        "count": 16,
+        "chapter": null,
+        "matched_allowlist_entry": null,
+        "cap_applied": 12,
+        "rule_fired": "book_wide_cap",
+        "rule": "book_wide_cap"
+      },
+      {
+        "phrase": "is the part still",
+        "count": 13,
+        "chapter": null,
+        "matched_allowlist_entry": null,
+        "cap_applied": 12,
+        "rule_fired": "book_wide_cap",
+        "rule": "book_wide_cap"
+      },
+      {
+        "phrase": "is the part still bracing",
+        "count": 13,
+        "chapter": null,
+        "matched_allowlist_entry": null,
+        "cap_applied": 12,
+        "rule_fired": "book_wide_cap",
+        "rule": "book_wide_cap"
+      },
+      {
+        "phrase": "pressure under the sternum",
+        "count": 13,
+        "chapter": null,
+        "matched_allowlist_entry": null,
+        "cap_applied": 12,
+        "rule_fired": "book_wide_cap",
+        "rule": "book_wide_cap"
+      },
+      {
+        "phrase": "pressure under the sternum that",
+        "count": 13,
+        "chapter": null,
+        "matched_allowlist_entry": null,
+        "cap_applied": 12,
+        "rule_fired": "book_wide_cap",
+        "rule": "book_wide_cap"
+      },
+      {
+        "phrase": "pressure under the sternum that is",
+        "count": 13,
+        "chapter": null,
+        "matched_allowlist_entry": null,
+        "cap_applied": 12,
+        "rule_fired": "book_wide_cap",
+        "rule": "book_wide_cap"
+      },
+      {
+        "phrase": "start with the pressure",
+        "count": 13,
+        "chapter": null,
+        "matched_allowlist_entry": null,
+        "cap_applied": 12,
+        "rule_fired": "book_wide_cap",
+        "rule": "book_wide_cap"
+      },
+      {
+        "phrase": "start with the pressure under",
+        "count": 13,
+        "chapter": null,
+        "matched_allowlist_entry": null,
+        "cap_applied": 12,
+        "rule_fired": "book_wide_cap",
+        "rule": "book_wide_cap"
+      },
+      {
+        "phrase": "start with the pressure under the",
+        "count": 13,
+        "chapter": null,
+        "matched_allowlist_entry": null,
+        "cap_applied": 12,
+        "rule_fired": "book_wide_cap",
+        "rule": "book_wide_cap"
+      },
+      {
+        "phrase": "sternum that is the",
+        "count": 13,
+        "chapter": null,
+        "matched_allowlist_entry": null,
+        "cap_applied": 12,
+        "rule_fired": "book_wide_cap",
+        "rule": "book_wide_cap"
+      },
+      {
+        "phrase": "sternum that is the part",
+        "count": 13,
+        "chapter": null,
+        "matched_allowlist_entry": null,
+        "cap_applied": 12,
+        "rule_fired": "book_wide_cap",
+        "rule": "book_wide_cap"
+      },
+      {
+        "phrase": "sternum that is the part still",
+        "count": 13,
+        "chapter": null,
+        "matched_allowlist_entry": null,
+        "cap_applied": 12,
+        "rule_fired": "book_wide_cap",
+        "rule": "book_wide_cap"
+      },
+      {
+        "phrase": "the part still bracing",
+        "count": 13,
+        "chapter": null,
+        "matched_allowlist_entry": null,
+        "cap_applied": 12,
+        "rule_fired": "book_wide_cap",
+        "rule": "book_wide_cap"
+      },
+      {
+        "phrase": "the pressure under the",
+        "count": 13,
+        "chapter": null,
+        "matched_allowlist_entry": null,
+        "cap_applied": 12,
+        "rule_fired": "book_wide_cap",
+        "rule": "book_wide_cap"
+      },
+      {
+        "phrase": "the pressure under the sternum",
+        "count": 13,
+        "chapter": null,
+        "matched_allowlist_entry": null,
+        "cap_applied": 12,
+        "rule_fired": "book_wide_cap",
+        "rule": "book_wide_cap"
+      },
+      {
+        "phrase": "the pressure under the sternum that",
+        "count": 13,
+        "chapter": null,
+        "matched_allowlist_entry": null,
+        "cap_applied": 12,
+        "rule_fired": "book_wide_cap",
+        "rule": "book_wide_cap"
+      },
+      {
+        "phrase": "the sternum that is",
+        "count": 13,
+        "chapter": null,
+        "matched_allowlist_entry": null,
+        "cap_applied": 12,
+        "rule_fired": "book_wide_cap",
+        "rule": "book_wide_cap"
+      },
+      {
+        "phrase": "the sternum that is the",
+        "count": 13,
+        "chapter": null,
+        "matched_allowlist_entry": null,
+        "cap_applied": 12,
+        "rule_fired": "book_wide_cap",
+        "rule": "book_wide_cap"
+      },
+      {
+        "phrase": "the sternum that is the part",
+        "count": 13,
+        "chapter": null,
+        "matched_allowlist_entry": null,
+        "cap_applied": 12,
+        "rule_fired": "book_wide_cap",
+        "rule": "book_wide_cap"
+      }
+    ]
+  }
+}
