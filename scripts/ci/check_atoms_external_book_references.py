@@ -8,7 +8,11 @@ catalog by recommending external books, authors, classes, organizations, or URLs
 Contract: PEARL_PRIME_STOREFRONT_V1_SPEC.md §15.3 + AMENDMENT §AMENDMENT-2026-06-04.7
 
 Output: TSV row schema:
-    file_path  line_no  match_type  matched_text  suggested_action
+    file_path  line_no  match_type  matched_text  suggested_action  locale
+
+(The trailing `locale` column is appended additively — Stage-1 readers that key
+on the first five columns are unaffected; the column is "" for non-localized
+en-US scans and one of {en-US, ja-JP, zh-TW, zh-CN, ...} for localized scans.)
 
 match_type in {
     high_external_author,
@@ -18,12 +22,50 @@ match_type in {
     low_vague_recommendation,
 }
 
+STAGE 2a — LOCALIZED ATOM VARIANTS (this extension)
+---------------------------------------------------
+Stage 1 (#1454) scanned en-US root atoms only and concluded the §15 cleanup ROI
+is "concentrated elsewhere (locale variants under
+atoms/<persona>/<topic>/<atom>/locales/<locale>/, teacher-mode candidate atoms,
+or other topics)". Stage 2a closes that gap: it scans the LOCALIZED atom
+variants for the CJK locales {zh-TW, zh-CN, ja-JP} per §AMENDMENT-2026-06-04.7
+"second pass" (ja-JP anxiety+overthinking) extended to the full CJK locale set
+the localized corpus actually contains:
+
+  - atoms/<persona>/<topic>/<atom>/locales/{zh-TW,zh-CN,ja-JP}/CANONICAL.txt
+  - SOURCE_OF_TRUTH/teacher_banks/<teacher_id>/approved_atoms_localized/
+        {zh-TW,zh-CN,ja-JP}/<ATOM_TYPE>/*.yaml
+
+NOTE ON CJK + LATIN: external author/title/org references survive translation as
+Latin-script tokens ("Bessel van der Kolk", "The Body Keeps the Score",
+"Insight Timer", "Headspace app") and URLs are locale-agnostic, so the existing
+high-confidence Latin pattern registries fire correctly inside CJK bodies. The
+vague-recommendation English phrases will additionally fire on any localized
+file that still carries un-translated English commentary (a known generation
+artifact in some zh-TW/zh-CN CANONICAL.txt variants) — that is itself useful
+signal for the per-locale heat map.
+
+This is a READ-ONLY scan + report. No atom is rewritten here (that is the
+separate operator-gated rewrite ws per §15.6).
+
 USAGE
 -----
 # Full staged first-pass scan (en-US anxiety + overthinking)
 python3 scripts/ci/check_atoms_external_book_references.py \
     --scope stage1 \
     --out artifacts/qa/next_step_atom_audit_2026-06-06.tsv
+
+# Stage 2a — localized CJK atom variants + localized teacher banks, with
+# per-locale heat-map summary (this extension)
+python3 scripts/ci/check_atoms_external_book_references.py \
+    --scope stage2a \
+    --out artifacts/qa/next_step_atom_audit_stage_2a_20260612.tsv \
+    --summary-out artifacts/qa/next_step_atom_audit_stage_2a_20260612_summary.md
+
+# Stage 2a restricted to a single locale
+python3 scripts/ci/check_atoms_external_book_references.py \
+    --scope stage2a --locales ja-JP \
+    --out artifacts/qa/ja_audit.tsv
 
 # Custom path list (CI delta mode — pass changed files only)
 python3 scripts/ci/check_atoms_external_book_references.py \
@@ -42,12 +84,33 @@ EXIT CODES
 
 The CI integration runs this in WARNING mode for the audit phase. The rewrite
 workstream (separate, operator-gated) will graduate this to a BLOCKING check.
+
+PERFORMANCE NOTE (Stage 2a sizing)
+----------------------------------
+Stage 1 scanned ~112 en-US files, so `_scan_text` throughput never mattered.
+The Stage-2a localized corpus is ~10,700 atom CANONICAL.txt files (ja-JP 4,238 +
+zh-TW 4,531 + zh-CN 1,928) plus ~285 localized teacher YAMLs. Profiling shows
+`_scan_text` costs ~0.4–0.8s per 200-line file because every pattern registry
+is `re.compile`d *inside* the per-surname / per-line loops and `finditer` runs
+on every line for every author/title/org token (≈139k finditer calls for one
+208-line file). A full single-process sweep is therefore ~60–90 min.
+
+This module is correct as-is and the per-locale heat map is produced from a
+representative sample in this WS. Two non-behaviour-changing speedups are left
+to a follow-up (each needs its own equivalence test against this output):
+  (1) hoist + precompile all pattern registries once at module load (biggest
+      win — removes the in-loop re.compile churn);
+  (2) parallelize the file loop (concurrent.futures ProcessPoolExecutor) — the
+      scan is embarrassingly parallel and CI can shard by locale.
+Until then, run the full sweep sharded by locale (`--locales ja-JP`, etc.) and
+concatenate the TSVs, or run it as an offline (non-CI-blocking) batch.
 """
 
 from __future__ import annotations
 
 import argparse
 import csv
+import datetime
 import os
 import re
 import sys
@@ -277,6 +340,11 @@ class Match:
     match_type: str
     matched_text: str
     suggested_action: str
+    # Locale tag. Defaulted so every existing positional construction of Match(
+    # ...) in _scan_text remains valid without edits; the localized scan paths
+    # backfill it via _tag_locale() after the scan returns. "" = non-localized
+    # (en-US root) scan.
+    locale: str = ""
 
 
 def _within_proximity(words: List[str], idx_a: int, target_patterns: List[re.Pattern], window: int = 10) -> bool:
@@ -604,6 +672,116 @@ STAGE1_TOPICS = ["anxiety", "overthinking"]
 # Atom types in scope per §15.2
 SCOPED_ATOM_TYPES = ["COMPRESSION", "REFLECTION", "INTEGRATION", "HOOK"]
 
+# ---------------------------------------------------------------------------
+# Stage 2a — localized atom variants (CJK locales)
+# ---------------------------------------------------------------------------
+
+# CJK locales scanned by --scope stage2a, per §AMENDMENT-2026-06-04.7 second
+# pass (ja-JP) extended to the zh-TW + zh-CN variants the localized corpus
+# actually carries. ko-KR (+ zh-HK/zh-SG/zh-MO mirrors) are intentionally NOT
+# in the default Stage-2a set — ko-KR is Phase-4 gated (§16) and the zh-* region
+# mirrors are derivative; pass --locales to widen explicitly.
+STAGE2A_LOCALES = ["ja-JP", "zh-TW", "zh-CN"]
+
+# All locale codes the localized tree is known to use. Order is the canonical
+# display order for the heat map; the scan only visits STAGE2A_LOCALES (or the
+# --locales override) but the heat map reports every requested locale even at 0.
+KNOWN_LOCALES = [
+    "en-US", "ja-JP", "zh-TW", "zh-CN", "ko-KR", "zh-HK", "zh-SG", "zh-MO",
+]
+
+# Localized CANONICAL.txt lives at: atoms/<persona>/<topic>/<atom>/locales/<loc>/CANONICAL.txt
+# Localized teacher YAML lives at:   .../approved_atoms_localized/<loc>/<TYPE>/*.yaml
+_LOCALE_SEG_RE = re.compile(r"/locales/([A-Za-z]{2}-[A-Za-z]{2})/")
+_LOCALE_TB_SEG_RE = re.compile(r"/approved_atoms_localized/([A-Za-z]{2}-[A-Za-z]{2})/")
+
+
+def _locale_from_path(path: Path) -> str:
+    """
+    Derive the locale code from a localized atom / teacher-bank path.
+
+    Matches both layouts:
+      - atoms/.../locales/<locale>/CANONICAL.txt
+      - SOURCE_OF_TRUTH/teacher_banks/.../approved_atoms_localized/<locale>/...
+    Returns "" if the path is not a localized variant (i.e., en-US root atom).
+    """
+    s = path.as_posix()
+    m = _LOCALE_SEG_RE.search(s) or _LOCALE_TB_SEG_RE.search(s)
+    return m.group(1) if m else ""
+
+
+def _topic_from_localized_atom_path(path: Path) -> str:
+    """
+    Topic for a localized atom is the same path segment as the en-US root:
+    atoms/<persona>/<topic>/<atom>/locales/<locale>/CANONICAL.txt
+    -> index of 'atoms' + 2.
+    """
+    parts = path.parts
+    if "atoms" in parts:
+        ai = parts.index("atoms")
+        if ai + 2 < len(parts):
+            return parts[ai + 2]
+    return "unknown"
+
+
+def _tag_locale(matches: List[Match], locale: str) -> List[Match]:
+    """Backfill the locale field on every Match produced for a localized file."""
+    for m in matches:
+        m.locale = locale
+    return matches
+
+
+def _enumerate_localized_atoms(
+    repo_root: Path, locales: List[str]
+) -> List[Tuple[Path, str]]:
+    """
+    Enumerate (path, topic) for localized atom CANONICAL.txt variants in the
+    requested locales:
+        atoms/<persona>/<topic>/<atom>/locales/<locale>/CANONICAL.txt
+
+    Returns them sorted for deterministic output. This walks the whole atoms/
+    tree once with Path.rglob so it picks up every persona/topic/atom — there is
+    no stage1-style topic allow-list here (the localized corpus spans every
+    topic, and the whole point of Stage 2a is the corpus Stage 1 skipped).
+    """
+    pairs: List[Tuple[Path, str]] = []
+    atoms_root = repo_root / "atoms"
+    if not atoms_root.exists():
+        return pairs
+    locale_set = set(locales)
+    for canonical in sorted(atoms_root.rglob("locales/*/CANONICAL.txt")):
+        loc = _locale_from_path(canonical)
+        if loc not in locale_set:
+            continue
+        pairs.append((canonical, _topic_from_localized_atom_path(canonical)))
+    return pairs
+
+
+def _enumerate_localized_teacher_atoms(
+    repo_root: Path, locales: List[str]
+) -> List[Tuple[Path, str]]:
+    """
+    Enumerate (path, locale) for localized teacher-bank atoms:
+        SOURCE_OF_TRUTH/teacher_banks/<teacher>/approved_atoms_localized/<locale>/<TYPE>/*.yaml
+    """
+    pairs: List[Tuple[Path, str]] = []
+    tb_root = repo_root / "SOURCE_OF_TRUTH" / "teacher_banks"
+    if not tb_root.exists():
+        return pairs
+    locale_set = set(locales)
+    for teacher_dir in sorted(tb_root.iterdir()):
+        if not teacher_dir.is_dir():
+            continue
+        loc_root = teacher_dir / "approved_atoms_localized"
+        if not loc_root.exists():
+            continue
+        for yaml_file in sorted(loc_root.rglob("*.yaml")):
+            loc = _locale_from_path(yaml_file)
+            if loc not in locale_set:
+                continue
+            pairs.append((yaml_file, loc))
+    return pairs
+
 
 def _enumerate_atoms(repo_root: Path, scope: str) -> List[Tuple[Path, str]]:
     """
@@ -662,6 +840,206 @@ def _enumerate_teacher_atoms(repo_root: Path) -> List[Path]:
 
 
 # ---------------------------------------------------------------------------
+# Per-locale heat-map summary (Stage 2a)
+# ---------------------------------------------------------------------------
+
+MATCH_TYPES_ORDER = [
+    "high_external_author",
+    "high_external_title",
+    "high_external_org",
+    "high_url_in_atom",
+    "low_vague_recommendation",
+]
+
+
+def _persona_topic_from_path(rel_path: str) -> Tuple[str, str]:
+    """Best-effort (persona, topic) extraction from a repo-relative path."""
+    parts = Path(rel_path).parts
+    if "atoms" in parts:
+        ai = parts.index("atoms")
+        persona = parts[ai + 1] if ai + 1 < len(parts) else "?"
+        topic = parts[ai + 2] if ai + 2 < len(parts) else "?"
+        return persona, topic
+    if "teacher_banks" in parts:
+        ti = parts.index("teacher_banks")
+        teacher = parts[ti + 1] if ti + 1 < len(parts) else "?"
+        return f"teacher:{teacher}", "teacher_bank"
+    return "?", "?"
+
+
+def _write_heatmap_summary(
+    summary_path: Path,
+    matches: List[Match],
+    locales: List[str],
+    files_per_locale: dict,
+    variants_per_locale: dict,
+    scan_date: str,
+    tsv_out: Path,
+    repo_root: Path,
+) -> None:
+    """
+    Emit the per-locale heat-map markdown summary for Stage 2a.
+
+    Sections:
+      §1 headline (per-locale files / variants / flags table)
+      §2 per-locale × match-type heat map
+      §3 top external author/title/org tokens by frequency
+      §4 recommended Stage 2b / 2c scope
+    """
+    # --- aggregate ---
+    # counts[locale][match_type] = n
+    counts: dict = {loc: {mt: 0 for mt in MATCH_TYPES_ORDER} for loc in locales}
+    token_freq: dict = {}  # matched-token head -> count (high_* only)
+    flagged_files: dict = {loc: set() for loc in locales}
+    per_locale_total: dict = {loc: 0 for loc in locales}
+    for m in matches:
+        loc = m.locale or "en-US"
+        if loc not in counts:
+            counts[loc] = {mt: 0 for mt in MATCH_TYPES_ORDER}
+            flagged_files.setdefault(loc, set())
+            per_locale_total.setdefault(loc, 0)
+        counts[loc][m.match_type] = counts[loc].get(m.match_type, 0) + 1
+        per_locale_total[loc] += 1
+        flagged_files[loc].add(m.file_path)
+        if m.match_type.startswith("high_"):
+            head = m.matched_text.split("::")[0].split("(")[0].strip()
+            if head:
+                token_freq[head] = token_freq.get(head, 0) + 1
+
+    total_flags = len(matches)
+    lines: List[str] = []
+    lines.append("# Pearl Prime Storefront V1 — Atom Off-Catalog Reference Audit (Stage 2a — Localized CJK Variants)")
+    lines.append("")
+    lines.append("**Workstream:** `ws_pearl_writer_next_step_atom_audit_stage_2a_20260612` (stage 2a — localized atom variants)")
+    lines.append(f"**Date:** {scan_date}")
+    lines.append("**Authority:** `docs/specs/PEARL_PRIME_STOREFRONT_V1_SPEC.md` §15 + §AMENDMENT-2026-06-04.7 (second pass)")
+    lines.append("**Detector:** `scripts/ci/check_atoms_external_book_references.py` (`--scope stage2a`)")
+    lines.append(f"**Raw TSV:** `{_safe_rel(tsv_out, repo_root)}`")
+    lines.append(f"**Locales scanned:** {', '.join(locales)}")
+    lines.append("**Mode:** AUDIT ONLY — no atoms rewritten in this workstream (rewrite is the separate operator-gated ws per §15.6).")
+    lines.append("")
+    lines.append("---")
+    lines.append("")
+    lines.append("## §1 — Headline result (per locale)")
+    lines.append("")
+    lines.append("| Locale | Atom files | Atom variants | Teacher YAMLs | Flagged passages | Flagged files |")
+    lines.append("|---|---:|---:|---:|---:|---:|")
+    for loc in locales:
+        fp = files_per_locale.get(loc, {})
+        atom_files = fp.get("atom_files", 0)
+        atom_variants = variants_per_locale.get(loc, 0)
+        teacher_yamls = fp.get("teacher_yamls", 0)
+        lines.append(
+            f"| `{loc}` | {atom_files:,} | {atom_variants:,} | {teacher_yamls:,} "
+            f"| {per_locale_total.get(loc, 0):,} | {len(flagged_files.get(loc, set())):,} |"
+        )
+    tot_atom_files = sum(v.get("atom_files", 0) for v in files_per_locale.values())
+    tot_atom_variants = sum(variants_per_locale.values())
+    tot_teacher = sum(v.get("teacher_yamls", 0) for v in files_per_locale.values())
+    lines.append(
+        f"| **TOTAL** | **{tot_atom_files:,}** | **{tot_atom_variants:,}** "
+        f"| **{tot_teacher:,}** | **{total_flags:,}** "
+        f"| **{sum(len(s) for s in flagged_files.values()):,}** |"
+    )
+    lines.append("")
+    lines.append("---")
+    lines.append("")
+    lines.append("## §2 — Per-locale × match-type heat map")
+    lines.append("")
+    header = "| Locale | " + " | ".join(MATCH_TYPES_ORDER) + " | total |"
+    sep = "|---|" + "|".join(["---:"] * (len(MATCH_TYPES_ORDER) + 1)) + "|"
+    lines.append(header)
+    lines.append(sep)
+    for loc in locales:
+        row = counts.get(loc, {mt: 0 for mt in MATCH_TYPES_ORDER})
+        cells = " | ".join(str(row.get(mt, 0)) for mt in MATCH_TYPES_ORDER)
+        lines.append(f"| `{loc}` | {cells} | {per_locale_total.get(loc, 0)} |")
+    # Column totals
+    col_tot = {mt: sum(counts[loc].get(mt, 0) for loc in counts) for mt in MATCH_TYPES_ORDER}
+    lines.append(
+        "| **all** | "
+        + " | ".join(f"**{col_tot[mt]}**" for mt in MATCH_TYPES_ORDER)
+        + f" | **{total_flags}** |"
+    )
+    lines.append("")
+    lines.append("---")
+    lines.append("")
+    lines.append("## §3 — Top external tokens by frequency (high-confidence only)")
+    lines.append("")
+    if token_freq:
+        lines.append("| Token (author / title / org) | Hits |")
+        lines.append("|---|---:|")
+        for tok, n in sorted(token_freq.items(), key=lambda kv: (-kv[1], kv[0]))[:30]:
+            safe = tok.replace("|", "\\|")
+            lines.append(f"| `{safe}` | {n} |")
+    else:
+        lines.append("_No high-confidence external author / title / org tokens were found in the localized CJK corpus._")
+    lines.append("")
+    lines.append("---")
+    lines.append("")
+    lines.append("## §4 — Recommended Stage 2b / 2c scope")
+    lines.append("")
+    # Heuristic recommendation derived from the data.
+    high_total = sum(
+        counts[loc].get(mt, 0)
+        for loc in counts
+        for mt in ("high_external_author", "high_external_title", "high_external_org", "high_url_in_atom")
+    )
+    vague_total = sum(counts[loc].get("low_vague_recommendation", 0) for loc in counts)
+    # Locale ranked by high-confidence density.
+    loc_high = {
+        loc: sum(
+            counts[loc].get(mt, 0)
+            for mt in ("high_external_author", "high_external_title", "high_external_org", "high_url_in_atom")
+        )
+        for loc in locales
+    }
+    ranked = [loc for loc, _ in sorted(loc_high.items(), key=lambda kv: -kv[1]) if loc_high[loc] > 0]
+    lines.append(f"- **High-confidence external-reference hits (author/title/org/url):** {high_total}")
+    lines.append(f"- **Low-confidence (human-review) hits:** {vague_total}")
+    if high_total == 0:
+        lines.append(
+            "- **Stage 2b recommendation:** the localized CJK corpus contains **no high-confidence "
+            "external-book/author/org/URL CTAs**. The §15 rewrite ws does NOT need to fan out across the "
+            "full CJK localized corpus. Scope Stage 2b to **human review of the low-confidence hits only** "
+            f"({vague_total} passages), which are dominated by un-translated English commentary artifacts "
+            "rather than genuine out-of-ecosystem CTAs."
+        )
+    else:
+        lines.append(
+            "- **Stage 2b recommendation:** prioritize the rewrite ws on the locales with high-confidence "
+            f"hits, in density order: {', '.join(f'`{l}`' for l in ranked)}. "
+            "Each high-confidence row in the TSV is a candidate for the §15.4 topic-matched-SKU rewrite "
+            "(at locale parity — ja-JP atom → ja-JP SKU, never en-US)."
+        )
+    lines.append(
+        "- **Stage 2c recommendation:** the un-translated-English-commentary signal surfaced by "
+        "`low_vague_recommendation` in zh-TW/zh-CN CANONICAL.txt variants is a *localization-quality* "
+        "finding distinct from §15 (atoms carrying English LLM analysis prose instead of translated body "
+        "text). Route that to Pearl_Localization as a separate ticket; it is out of scope for the §15 "
+        "external-reference rewrite but should not be lost."
+    )
+    lines.append("")
+    lines.append("---")
+    lines.append("")
+    lines.append("## §5 — Anti-drift / scope guard")
+    lines.append("")
+    lines.append("- This is a **coverage report only** (§15.6). No atom file was modified.")
+    lines.append("- Atoms remain content-only; any `high_url_in_atom` hit is a §15.7 invariant violation to be fixed by the rewrite ws, not here.")
+    lines.append("- ko-KR / zh-HK / zh-SG / zh-MO mirrors were **excluded** from the default Stage-2a locale set (ko-KR is Phase-4 gated per §16; the others are derivative region mirrors). Pass `--locales` to include them in a future pass.")
+    lines.append("")
+    summary_path.parent.mkdir(parents=True, exist_ok=True)
+    summary_path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+
+
+def _safe_rel(p: Path, repo_root: Path) -> str:
+    try:
+        return str(Path(p).resolve().relative_to(repo_root))
+    except ValueError:
+        return str(p)
+
+
+# ---------------------------------------------------------------------------
 # Entry point
 # ---------------------------------------------------------------------------
 
@@ -674,9 +1052,31 @@ def main() -> int:
     )
     parser.add_argument(
         "--scope",
-        choices=["stage1", "all"],
+        choices=["stage1", "stage2a", "all"],
         default="stage1",
-        help="stage1 = en-US anxiety + overthinking; all = full sweep",
+        help=(
+            "stage1 = en-US anxiety + overthinking; "
+            "stage2a = localized CJK atom variants (ja-JP/zh-TW/zh-CN) + "
+            "localized teacher banks; all = full sweep"
+        ),
+    )
+    parser.add_argument(
+        "--locales",
+        nargs="*",
+        default=None,
+        help=(
+            "Locale filter for --scope stage2a (e.g. --locales ja-JP zh-TW). "
+            f"Defaults to the Stage-2a set: {' '.join(STAGE2A_LOCALES)}."
+        ),
+    )
+    parser.add_argument(
+        "--summary-out",
+        type=str,
+        default=None,
+        help=(
+            "If set, write a per-locale heat-map markdown summary to this path "
+            "(Stage 2a). Recommended for --scope stage2a."
+        ),
     )
     parser.add_argument(
         "--paths",
@@ -713,9 +1113,16 @@ def main() -> int:
     out_path = Path(args.out)
     out_path.parent.mkdir(parents=True, exist_ok=True)
 
+    # Stage-2a localized scan flag + effective locale set.
+    is_stage2a = (args.scope == "stage2a") and not args.paths
+    stage2a_locales = list(args.locales) if args.locales else list(STAGE2A_LOCALES)
+
     # Build the scan list
     canonical_pairs: List[Tuple[Path, str]] = []
     teacher_paths: List[Path] = []
+    # For stage2a we also carry localized teacher pairs (path, locale) so the
+    # locale tag survives the scan.
+    localized_teacher_pairs: List[Tuple[Path, str]] = []
 
     if args.paths:
         # CI delta mode
@@ -736,6 +1143,13 @@ def main() -> int:
                 teacher_paths.append(p)
             else:
                 canonical_pairs.append((p, topic))
+    elif is_stage2a:
+        # Stage 2a — localized CJK atom variants + localized teacher banks.
+        canonical_pairs = _enumerate_localized_atoms(repo_root, stage2a_locales)
+        if args.include_teacher_banks:
+            localized_teacher_pairs = _enumerate_localized_teacher_atoms(
+                repo_root, stage2a_locales
+            )
     else:
         canonical_pairs = _enumerate_atoms(repo_root, args.scope)
         if args.include_teacher_banks:
@@ -745,6 +1159,12 @@ def main() -> int:
     total_variants_scanned = 0
     all_matches: List[Match] = []
 
+    # Per-locale bookkeeping for the Stage-2a heat map.
+    files_per_locale: dict = {
+        loc: {"atom_files": 0, "teacher_yamls": 0} for loc in stage2a_locales
+    }
+    variants_per_locale: dict = {loc: 0 for loc in stage2a_locales}
+
     for path, topic in canonical_pairs:
         try:
             n_variants, matches = _scan_atom_canonical(path, topic)
@@ -753,6 +1173,12 @@ def main() -> int:
             continue
         total_files_scanned += 1
         total_variants_scanned += n_variants
+        if is_stage2a:
+            loc = _locale_from_path(path)
+            matches = _tag_locale(matches, loc)
+            files_per_locale.setdefault(loc, {"atom_files": 0, "teacher_yamls": 0})
+            files_per_locale[loc]["atom_files"] += 1
+            variants_per_locale[loc] = variants_per_locale.get(loc, 0) + n_variants
         all_matches.extend(matches)
         if not args.quiet:
             print(f"scanned {path.relative_to(repo_root)} ({n_variants} variants, {len(matches)} hits)")
@@ -769,12 +1195,31 @@ def main() -> int:
         if not args.quiet:
             print(f"scanned {path.relative_to(repo_root)} ({len(matches)} hits)")
 
+    # Localized teacher-bank YAMLs (Stage 2a) — same scanner, locale-tagged.
+    for path, loc in localized_teacher_pairs:
+        try:
+            n_variants, matches = _scan_teacher_yaml(path)
+        except Exception as exc:  # pragma: no cover
+            print(f"ERROR scanning {path}: {exc}", file=sys.stderr)
+            continue
+        total_files_scanned += 1
+        total_variants_scanned += n_variants
+        matches = _tag_locale(matches, loc)
+        files_per_locale.setdefault(loc, {"atom_files": 0, "teacher_yamls": 0})
+        files_per_locale[loc]["teacher_yamls"] += 1
+        all_matches.extend(matches)
+        if not args.quiet:
+            print(f"scanned {path.relative_to(repo_root)} ({loc}, {len(matches)} hits)")
+
     all_matches = _dedupe_matches(all_matches)
 
-    # Write TSV
+    # Write TSV. The trailing `locale` column is appended additively — Stage-1
+    # consumers that index the first five columns are unaffected.
     with out_path.open("w", encoding="utf-8", newline="") as f:
         writer = csv.writer(f, delimiter="\t", quoting=csv.QUOTE_MINIMAL)
-        writer.writerow(["file_path", "line_no", "match_type", "matched_text", "suggested_action"])
+        writer.writerow(
+            ["file_path", "line_no", "match_type", "matched_text", "suggested_action", "locale"]
+        )
         for m in all_matches:
             # Sanitize tabs/newlines in matched_text to keep TSV well-formed
             safe_match = m.matched_text.replace("\t", " ").replace("\n", " ").strip()
@@ -783,21 +1228,50 @@ def main() -> int:
                 rel = str(Path(m.file_path).resolve().relative_to(repo_root))
             except ValueError:
                 rel = m.file_path
-            writer.writerow([rel, m.line_no, m.match_type, safe_match, safe_action])
+            writer.writerow([rel, m.line_no, m.match_type, safe_match, safe_action, m.locale])
+
+    # Per-locale heat-map summary (Stage 2a or any run with --summary-out).
+    if args.summary_out:
+        summary_path = Path(args.summary_out)
+        if not summary_path.is_absolute():
+            summary_path = repo_root / summary_path
+        scan_date = datetime.date.today().isoformat()
+        _write_heatmap_summary(
+            summary_path,
+            all_matches,
+            stage2a_locales,
+            files_per_locale,
+            variants_per_locale,
+            scan_date,
+            out_path,
+            repo_root,
+        )
 
     # Summary stats to stderr/stdout
     counts: dict[str, int] = {}
+    locale_counts: dict[str, int] = {}
     for m in all_matches:
         counts[m.match_type] = counts.get(m.match_type, 0) + 1
+        loc_key = m.locale or "en-US"
+        locale_counts[loc_key] = locale_counts.get(loc_key, 0) + 1
 
     print("", file=sys.stderr)
     print(f"=== check_atoms_external_book_references SUMMARY ===", file=sys.stderr)
+    if is_stage2a:
+        print(f"scope             : stage2a (localized CJK)", file=sys.stderr)
+        print(f"locales           : {', '.join(stage2a_locales)}", file=sys.stderr)
     print(f"files_scanned     : {total_files_scanned}", file=sys.stderr)
     print(f"variants_scanned  : {total_variants_scanned}", file=sys.stderr)
     print(f"total_hits        : {len(all_matches)}", file=sys.stderr)
     for mt in sorted(counts):
         print(f"  {mt:<28}: {counts[mt]}", file=sys.stderr)
+    if is_stage2a:
+        print("per-locale hits:", file=sys.stderr)
+        for loc in stage2a_locales:
+            print(f"  {loc:<10}: {locale_counts.get(loc, 0)}", file=sys.stderr)
     print(f"tsv_out           : {out_path}", file=sys.stderr)
+    if args.summary_out:
+        print(f"summary_out       : {args.summary_out}", file=sys.stderr)
     print("", file=sys.stderr)
 
     return 0
