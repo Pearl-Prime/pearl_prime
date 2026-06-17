@@ -1,72 +1,61 @@
-series_plan_schema: "1.0.0"
-created_at: "2026-04-24"
+series_plan_schema: 1.0.0
+created_at: '2026-04-24'
 locale: en_US
 book_id_prefix: somatic_wisdom__pamela_fellows__entrepreneurs__self_worth
-
 brand: somatic_wisdom
 teacher: pamela_fellows
 persona: entrepreneurs
 topic: self_worth
-
 teacher_topic_score: 0.85
 teacher_persona_score: 0.65
 composite_fit: 0.75
-
 arc:
   installment_1:
-    book_id: somatic_wisdom__pamela_fellows__entrepreneurs__self_worth__false_alarm
-    engine: false_alarm
-    master_arc: config/source_of_truth/master_arcs/entrepreneurs__self_worth__false_alarm__F006.yaml
+    book_id: somatic_wisdom__pamela_fellows__entrepreneurs__self_worth__shame
+    engine: shame
+    master_arc: config/source_of_truth/master_arcs/entrepreneurs__self_worth__shame__F006.yaml
     duration: standard_book_60min
   installment_2:
-    book_id: somatic_wisdom__pamela_fellows__entrepreneurs__self_worth__overwhelm
-    engine: overwhelm
-    master_arc: config/source_of_truth/master_arcs/entrepreneurs__self_worth__overwhelm__F006.yaml
+    book_id: somatic_wisdom__pamela_fellows__entrepreneurs__self_worth__comparison
+    engine: comparison
+    master_arc: config/source_of_truth/master_arcs/entrepreneurs__self_worth__comparison__F006.yaml
     duration: standard_book_60min
-  installment_3:
-    book_id: somatic_wisdom__pamela_fellows__entrepreneurs__self_worth__spiral
-    engine: spiral
-    master_arc: config/source_of_truth/master_arcs/entrepreneurs__self_worth__spiral__F006.yaml
-    duration: standard_book_60min
-
-reader_promise_family: >
+reader_promise_family: |
   3 books across engines of self_worth via the soft-clinical josei, warm without sentiment voice.
-
 bestseller_hook_family: recognition_descent
 emotional_engine: self_worth_recognition
-
 comp_series:
-  - "The Gifts of Imperfection (Brown)"
-  - "Radical Acceptance (Brach)"
-  - "The Mountain Is You (Wiest)"
-
+- The Gifts of Imperfection (Brown)
+- Radical Acceptance (Brach)
+- The Mountain Is You (Wiest)
 platform_strategy:
-  primary: [kdp_ebook, audible]
-  secondary: [apple_books, google_play, spotify_audiobooks]
+  primary:
+  - kdp_ebook
+  - audible
+  secondary:
+  - apple_books
+  - google_play
+  - spotify_audiobooks
   launch_platform: kdp_ebook
   cadence:
     release_spacing_days: 14
     max_books_per_brand_per_month: 2
-
 reader_avatar:
-  age: "28–45"
-  where_they_are: >
+  age: 28–45
+  where_they_are: |
     3am at their desk. Dashboard open, bank account in another tab.
-  what_they_need: >
+  what_they_need: |
     Knows what it feels like to be responsible for outcome outside your control.
-  what_they_avoid: >
+  what_they_avoid: |
     Hustle-culture. Morning routines.
-
 series_voice_markers:
-  register: "soft-clinical josei, warm without sentiment"
-  sentence_rhythm: "measured, body-paced, sensation-anchored"
-  metaphor_family: "body weather, tides, seasonal bodies"
+  register: soft-clinical josei, warm without sentiment
+  sentence_rhythm: measured, body-paced, sensation-anchored
+  metaphor_family: body weather, tides, seasonal bodies
   second_person_default: true
-
 main_character_name: Sasha
-main_character_role: "founder of a small company"
+main_character_role: founder of a small company
 main_character_image_path: null
 main_character_lora_id: sasha_sw_us
 main_character_trigger_word: sasha_sw_us
-
 plan_source_path: config/manga/manga_brand_series_plan.yaml
