@@ -29,6 +29,15 @@
 | TAKEAWAY | 20 | Extended slot |
 | THREAD | 20 | Extended slot |
 | PERMISSION | 20 | Extended slot |
+| TEACHER_DOCTRINE | 8 | Band-1 doctrine overlay (doctrine_grounded) |
+
+**TEACHER_DOCTRINE** atoms (`approved_atoms/TEACHER_DOCTRINE/`) are band-1, full-section
+doctrine atoms (one per main teaching atom + a no-bypassing boundary atom), authored
+`synthesis_method: doctrine_grounded` from `doctrine/doctrine.yaml` and
+`doctrine/main_teaching_atoms.yaml`. They follow the same on-disk convention as the
+ahjan teacher-bank doctrine atoms. The retired QUOTE slot (per QUOTE-ATOM-ROUTING-01 /
+PR #915, "retire-as-orphan") is intentionally absent — teacher-voice doctrinal content
+is routed to TEACHER_DOCTRINE, not a QUOTE slot.
 
 ## Localization status
 
