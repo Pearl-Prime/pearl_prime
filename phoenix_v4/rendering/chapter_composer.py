@@ -77,6 +77,7 @@ _WITHIN_SLOT_ROTATION_TLS: "WithinSlotRotationState | None" = None
 _MECHANISM_THESIS_CACHE: dict[str, Any] | None = None
 _EXERCISE_WRAPPER_CACHE: dict[str, Any] | None = None
 _BRIDGE_TRANSITION_CACHE: dict[str, Any] | None = None
+_BRIDGE_DIRECTION_SUBSTRINGS_CACHE: dict[tuple[str, str], str] | None = None
 _WITHIN_SLOT_BRIDGE_CACHE: dict[str, Any] | None = None
 _CHAPTER_THESIS_BANK_CACHE: dict | None = None
 _MECHANISM_THESIS_PATH = Path(__file__).resolve().parents[2] / "config" / "rendering" / "mechanism_thesis_families.yaml"
@@ -114,6 +115,28 @@ _ROOT_CAP_4_CHAPTER_WINDOW = {
 # Does NOT touch #1589's book-distinct dedup, which keys on exact phrase_used_book + the real
 # semantic stems/roots/shapes — none of which are the synthetic variant token.
 _SYNTHETIC_VARIANT_STEM_RE = re.compile(r"^variant-\d+$")
+
+# A1 scene_anchor fix (Phase B 2026-06-16): every entry inside one
+# (bridge_type, emotional_job) block of bridge_transition_families.yaml carries the
+# SAME embedded chapter-direction substring (e.g. all 20 `recognition` entries contain
+# "seeing the pattern before defending it"). BridgeMemory already dedups by exact
+# phrase/shape/stem/family/root, so the selector freely picks several *different-shaped*
+# bridges that all carry the identical direction substring within one chapter. The
+# scene_anchor_density gate (config/quality/scene_anchor_density_config.yaml, cap=3)
+# counts that shared >=4-word substring across paragraphs and FAILs at >3 paragraphs —
+# the dominant root for scene_anchor_density failures on the courage proof (6/12 chapters).
+# Fix: track the direction substring per chapter in BridgeMemory and VETO a bank candidate
+# once its direction substring has already landed in `_DIRECTION_CAP_PER_CHAPTER` paragraphs
+# of the current chapter. When the bank is vetoed the selector returns None and the caller
+# falls through to its legacy (direction-free) option pool, so the chapter's transitions vary
+# instead of re-stamping one direction. Set to 2 to leave headroom under the gate's cap of 3
+# (a non-bank paragraph occasionally echoes the substring; 2 bank carriers + <=1 other <= 3).
+# This NEVER weakens a gate — it varies the OUTPUT so the gate passes honestly.
+_DIRECTION_CAP_PER_CHAPTER = 2
+# A direction substring is the longest shared word n-gram across a block's entries; only
+# n-grams of at least this many words count (matches the scene_anchor gate's >=4-word window).
+_DIRECTION_MIN_WORDS = 4
+_DIRECTION_MAX_WORDS = 8
 
 def _pick_variant(options: list[str], *seed_parts: str) -> str:
     if not options:
@@ -213,6 +236,75 @@ def _load_bridge_transition_families() -> dict[str, Any]:
         loaded = {}
     _BRIDGE_TRANSITION_CACHE = loaded if isinstance(loaded, dict) else {}
     return _BRIDGE_TRANSITION_CACHE
+
+
+def _longest_shared_ngram(texts: list[str]) -> str:
+    """Return the longest word n-gram (>=_DIRECTION_MIN_WORDS words) present in EVERY text.
+
+    Used to extract the chapter-direction substring shared by all entries of one
+    (bridge_type, emotional_job) block. Deterministic; returns "" when no qualifying
+    shared n-gram exists. Comparison is on lowercased alphabetic word tokens so trivial
+    punctuation/casing differences in the YAML do not defeat the match.
+    """
+    if not texts:
+        return ""
+    tokenized: list[list[str]] = [re.findall(r"[a-z']+", t.lower()) for t in texts]
+    if any(not toks for toks in tokenized):
+        return ""
+    # Candidate n-grams come from the SHORTEST entry (an n-gram common to all must fit it).
+    base = min(tokenized, key=len)
+    others = [set() for _ in tokenized]
+    # Build per-text n-gram sets lazily only for the lengths we test, longest first.
+    best = ""
+    for n in range(min(_DIRECTION_MAX_WORDS, len(base)), _DIRECTION_MIN_WORDS - 1, -1):
+        # n-gram sets for every text at this length
+        sets = []
+        for toks in tokenized:
+            sets.append({" ".join(toks[i:i + n]) for i in range(len(toks) - n + 1)})
+        # candidates that appear in the base AND in every other text
+        for i in range(len(base) - n + 1):
+            cand = " ".join(base[i:i + n])
+            if all(cand in s for s in sets):
+                return cand  # longest-first → first hit is the longest shared n-gram
+    return best
+
+
+def _bridge_direction_substrings() -> dict[tuple[str, str], str]:
+    """Map each (bridge_type, emotional_job) block to its shared chapter-direction substring.
+
+    Cached after first call. The substring is the longest >=4-word n-gram present in every
+    entry's text inside that block (see _longest_shared_ngram). Empty string when a block has
+    no qualifying shared substring (then no direction cap applies to that block).
+
+    A1 scene_anchor fix (Phase B 2026-06-16).
+    """
+    global _BRIDGE_DIRECTION_SUBSTRINGS_CACHE
+    if _BRIDGE_DIRECTION_SUBSTRINGS_CACHE is not None:
+        return _BRIDGE_DIRECTION_SUBSTRINGS_CACHE
+    payload = _load_bridge_transition_families()
+    out: dict[tuple[str, str], str] = {}
+    bridge_types = payload.get("bridge_types") if isinstance(payload, dict) else None
+    if isinstance(bridge_types, dict):
+        for btype, jobs in bridge_types.items():
+            if not isinstance(jobs, dict):
+                continue
+            for job, shapes in jobs.items():
+                if not isinstance(shapes, dict):
+                    continue
+                texts: list[str] = []
+                for _shape, entries in shapes.items():
+                    if not isinstance(entries, list):
+                        continue
+                    for entry in entries:
+                        if isinstance(entry, dict):
+                            t = str(entry.get("text") or "").strip()
+                            if t:
+                                texts.append(t)
+                direction = _longest_shared_ngram(texts)
+                if direction:
+                    out[(str(btype), str(job))] = direction
+    _BRIDGE_DIRECTION_SUBSTRINGS_CACHE = out
+    return _BRIDGE_DIRECTION_SUBSTRINGS_CACHE
 
 
 def _load_within_slot_bridge_families() -> dict[str, Any]:
@@ -483,12 +575,22 @@ class BridgeMemory:
     shape_usage_by_chapter: dict[int, dict[str, int]] = field(default_factory=dict)
     family_usage_by_chapter: dict[int, dict[str, int]] = field(default_factory=dict)
     last_shape_by_chapter: dict[int, str] = field(default_factory=dict)
+    # A1 scene_anchor fix: per-chapter count of how many bank bridges carrying a given
+    # chapter-direction substring have already landed in that chapter.
+    direction_usage_by_chapter: dict[int, dict[str, int]] = field(default_factory=dict)
 
     def phrase_used_book(self, phrase: str) -> bool:
         return phrase.strip().lower() in self.used_phrases_book
 
     def phrase_used_chapter(self, chapter_index: int, phrase: str) -> bool:
         return phrase.strip().lower() in self.used_phrases_by_chapter.get(chapter_index, set())
+
+    def direction_count_chapter(self, chapter_index: int, direction: str) -> int:
+        """How many bank bridges carrying ``direction`` already used in this chapter."""
+        key = direction.strip().lower()
+        if not key:
+            return 0
+        return self.direction_usage_by_chapter.get(chapter_index, {}).get(key, 0)
 
     def recent_stem_count(self, stem: str, chapter_index: int, window: int = 3) -> int:
         return _recent_count(self.stem_usage_by_chapter, stem.strip().lower(), chapter_index, window)
@@ -511,6 +613,7 @@ class BridgeMemory:
         stems: list[str],
         roots: list[str],
         family_key: str,
+        direction: str = "",
     ) -> None:
         p = phrase.strip().lower()
         if not p:
@@ -537,6 +640,10 @@ class BridgeMemory:
             k = root.strip().lower()
             if k:
                 root_map[k] = root_map.get(k, 0) + 1
+        d_key = direction.strip().lower()
+        if d_key:
+            d_map = self.direction_usage_by_chapter.setdefault(chapter_index, {})
+            d_map[d_key] = d_map.get(d_key, 0) + 1
 
 
 @dataclass
@@ -639,11 +746,20 @@ def _score_bridge_candidate(
     bridge_memory: BridgeMemory,
     bridge_family: str,
     topic_keywords: set[str],
+    direction: str = "",
 ) -> float:
     text = str(candidate.get("text") or "").strip()
     shape = str(candidate.get("shape") or "").strip().lower()
     stems = [str(s).strip().lower() for s in candidate.get("stems", [])]
     roots = [str(r).strip().lower() for r in candidate.get("roots", [])]
+    # A1 scene_anchor fix: VETO once this block's shared chapter-direction substring has
+    # already landed in `_DIRECTION_CAP_PER_CHAPTER` paragraphs of this chapter. Every entry
+    # in the block carries the same direction substring, so this steers the selector to a
+    # different job's bank or (when none qualifies) the legacy direction-free fallback,
+    # keeping the per-chapter paragraph count of any single direction substring under the
+    # scene_anchor_density cap. Checked BEFORE phrase/shape vetoes so it is unconditional.
+    if direction and bridge_memory.direction_count_chapter(chapter_index, direction) >= _DIRECTION_CAP_PER_CHAPTER:
+        return -10_000.0
     # Hard anti-reuse signals (preserve #1589's book-distinct dedup): exact phrase reuse,
     # same shape back-to-back in a chapter, and recent reuse of a real *semantic* stem.
     if bridge_memory.phrase_used_book(text) or bridge_memory.phrase_used_chapter(chapter_index, text):
@@ -708,6 +824,10 @@ def _select_bridge_candidate(
         return None
     topic_keywords = set(re.findall(r"[a-z]+", (context_text or "").lower()))
     family = f"{bridge_type}|{emotional_job}"
+    # A1 scene_anchor fix: the chapter-direction substring shared by every entry of this
+    # (bridge_type, emotional_job) block. Empty when the block has no qualifying shared
+    # >=4-word n-gram (then the direction cap is inert for this block).
+    direction = _bridge_direction_substrings().get((bridge_type, emotional_job), "")
     best: dict[str, Any] | None = None
     best_score = -10_000.0
     for candidate in candidates:
@@ -718,6 +838,7 @@ def _select_bridge_candidate(
             bridge_memory=bridge_memory,
             bridge_family=family,
             topic_keywords=topic_keywords,
+            direction=direction,
         )
         if score > best_score:
             best, best_score = candidate, score
@@ -739,6 +860,7 @@ def _select_bridge_candidate(
         stems=[str(s) for s in best.get("stems", [])],
         roots=[str(r) for r in best.get("roots", [])],
         family_key=family,
+        direction=direction,
     )
     return best
 
