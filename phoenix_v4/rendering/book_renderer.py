@@ -486,6 +486,13 @@ def _keep_cap_for_paragraph(paragraph: str, *, base_keep: int) -> int:
 _F1_SIG_MIN_SENTENCES = 3
 _F1_SIG_MIN_CHARS = 90
 _F1_SIG_MAX_WORDS = 45
+# Lower char floor for the terse-bridge (short_bridge) exact-keep=1 pass below.
+# A >=3-sentence re-stamp must also clear this floor to be treated as a formulaic
+# within-slot bridge. The real residual bridge cluster ("Same body. Different door.
+# Watch what changes." = 46 chars) sits above it; genuinely tiny authored refrains
+# ("Stay here. Breathe. Let it land." = 32 chars) sit below it and stay free to
+# repeat. Without this floor the short-bridge pass over-collapses such refrains.
+_F1_SIG_BRIDGE_MIN_CHARS = 40
 _F1_SIG_SIM = 0.55  # == register_gate.F1_SIMILARITY_THRESHOLD
 _F1_SIG_SENT_RE = re.compile(r"(?<=[.!?])\s+")
 _F1_SIG_TOKEN_RE = re.compile(r"[A-Za-z']+")
@@ -595,16 +602,20 @@ def _dedup_paragraphs_book_wide(
             continue
         # Terse multi-sentence re-stamp = a formulaic within-slot transition bridge
         # ("Same body. Different door. Watch what changes." = 46 chars / 3 sentences).
-        # >=3 sentences packed into < _F1_SIG_MIN_CHARS chars is formulaic, NOT narrative
-        # (real prose paragraphs of 3+ sentences are far longer), so an EXACT cross-chapter
-        # repeat is a spurious bridge re-stamp, not an authored refrain. The within-slot
-        # bridge bank has only ~49 STORY variants for ~276 insertions in a deep book, so
-        # by pigeonhole each variant recurs ~5-6x even with a perfectly uniform selector —
-        # this is the delivery-layer backstop for that capacity limit. EXACT keep=1
-        # (these are < _F1_SIG_MIN_CHARS so the fuzzy signature pass above skips them).
-        # Toggle with PHOENIX_F1_SIGNATURE_DEDUPE=0.
+        # >=3 sentences packed into [_F1_SIG_BRIDGE_MIN_CHARS, _F1_SIG_MIN_CHARS) chars is
+        # formulaic, NOT narrative (real prose paragraphs of 3+ sentences are far longer),
+        # so an EXACT cross-chapter repeat is a spurious bridge re-stamp, not an authored
+        # refrain. The within-slot bridge bank has only ~49 STORY variants for ~276
+        # insertions in a deep book, so by pigeonhole each variant recurs ~5-6x even with a
+        # perfectly uniform selector — this is the delivery-layer backstop for that capacity
+        # limit. EXACT keep=1 (these are < _F1_SIG_MIN_CHARS so the fuzzy signature pass
+        # above skips them). The lower floor (_F1_SIG_BRIDGE_MIN_CHARS) exempts genuinely
+        # tiny authored refrains ("Stay here. Breathe. Let it land." = 32 chars), which are
+        # intentional beats free to repeat, not formulaic bridges. Toggle off with
+        # PHOENIX_F1_SIGNATURE_DEDUPE=0.
         if (_f1_signature_dedup_enabled()
-                and wc < _F1_SIG_MAX_WORDS and cc < _F1_SIG_MIN_CHARS
+                and wc < _F1_SIG_MAX_WORDS
+                and _F1_SIG_BRIDGE_MIN_CHARS <= cc < _F1_SIG_MIN_CHARS
                 and _f1_sig_sentence_count(stripped) >= _F1_SIG_MIN_SENTENCES):
             sfp = re.sub(r"\s+", " ", re.sub(r"[^\w\s]+", "", stripped.lower())).strip()
             if sfp in short_bridge_seen:
