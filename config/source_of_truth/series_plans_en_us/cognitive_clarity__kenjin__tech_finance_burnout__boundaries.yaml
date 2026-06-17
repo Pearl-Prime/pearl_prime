@@ -1,72 +1,66 @@
-series_plan_schema: "1.0.0"
-created_at: "2026-04-24"
+series_plan_schema: 1.0.0
+created_at: '2026-04-24'
 locale: en_US
 book_id_prefix: cognitive_clarity__kenjin__tech_finance_burnout__boundaries
-
 brand: cognitive_clarity
 teacher: kenjin
 persona: tech_finance_burnout
 topic: boundaries
-
 teacher_topic_score: 0.85
 teacher_persona_score: 0.9
 composite_fit: 0.88
-
 arc:
   installment_1:
+    book_id: cognitive_clarity__kenjin__tech_finance_burnout__boundaries__shame
+    engine: shame
+    master_arc: config/source_of_truth/master_arcs/tech_finance_burnout__boundaries__shame__F006.yaml
+    duration: standard_book_60min
+  installment_2:
+    book_id: cognitive_clarity__kenjin__tech_finance_burnout__boundaries__comparison
+    engine: comparison
+    master_arc: config/source_of_truth/master_arcs/tech_finance_burnout__boundaries__comparison__F006.yaml
+    duration: standard_book_60min
+  installment_3:
     book_id: cognitive_clarity__kenjin__tech_finance_burnout__boundaries__false_alarm
     engine: false_alarm
     master_arc: config/source_of_truth/master_arcs/tech_finance_burnout__boundaries__false_alarm__F006.yaml
     duration: standard_book_60min
-  installment_2:
-    book_id: cognitive_clarity__kenjin__tech_finance_burnout__boundaries__overwhelm
-    engine: overwhelm
-    master_arc: config/source_of_truth/master_arcs/tech_finance_burnout__boundaries__overwhelm__F006.yaml
-    duration: standard_book_60min
-  installment_3:
-    book_id: cognitive_clarity__kenjin__tech_finance_burnout__boundaries__spiral
-    engine: spiral
-    master_arc: config/source_of_truth/master_arcs/tech_finance_burnout__boundaries__spiral__F006.yaml
-    duration: standard_book_60min
-
-reader_promise_family: >
+reader_promise_family: |
   3 books across engines of boundaries via the zen-ink, direct-pointing, cognitive disruption voice.
-
 bestseller_hook_family: recognition_descent
 emotional_engine: boundaries_recognition
-
 comp_series:
-  - "Set Boundaries, Find Peace (Tawwab)"
-  - "Boundaries (Cloud & Townsend)"
-  - "The Book of Boundaries (Hartwig)"
-
+- Set Boundaries, Find Peace (Tawwab)
+- Boundaries (Cloud & Townsend)
+- The Book of Boundaries (Hartwig)
 platform_strategy:
-  primary: [kdp_ebook, audible]
-  secondary: [apple_books, google_play, spotify_audiobooks]
+  primary:
+  - kdp_ebook
+  - audible
+  secondary:
+  - apple_books
+  - google_play
+  - spotify_audiobooks
   launch_platform: kdp_ebook
   cadence:
     release_spacing_days: 14
     max_books_per_brand_per_month: 2
-
 reader_avatar:
-  age: "28–44"
-  where_they_are: >
+  age: 28–44
+  where_they_are: |
     Slack still open. Two monitors. Second cold coffee.
-  what_they_need: >
+  what_they_need: |
     Acknowledges compensation is good AND body paying a price.
-  what_they_avoid: >
+  what_they_avoid: |
     Quit-your-job narrative.
-
 series_voice_markers:
-  register: "zen-ink, direct-pointing, cognitive disruption"
-  sentence_rhythm: "short, unadorned, paradoxical turns"
-  metaphor_family: "enso, empty cup, cracked vessel"
+  register: zen-ink, direct-pointing, cognitive disruption
+  sentence_rhythm: short, unadorned, paradoxical turns
+  metaphor_family: enso, empty cup, cracked vessel
   second_person_default: true
-
 main_character_name: Magnus
-main_character_role: "senior engineer / PM at public tech company"
+main_character_role: senior engineer / PM at public tech company
 main_character_image_path: null
 main_character_lora_id: magnus_cc_us
 main_character_trigger_word: magnus_cc_us
-
 plan_source_path: config/manga/manga_brand_series_plan.yaml
