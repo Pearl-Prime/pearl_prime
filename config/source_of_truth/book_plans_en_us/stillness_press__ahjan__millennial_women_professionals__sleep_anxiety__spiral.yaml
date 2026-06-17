@@ -1,76 +1,62 @@
-book_plan_schema: "1.0.0"
-created_at: "2026-04-24"
+book_plan_schema: 1.0.0
+created_at: '2026-04-24'
 book_id: stillness_press__ahjan__millennial_women_professionals__sleep_anxiety__spiral
 series_plan: config/source_of_truth/series_plans_en_us/stillness_press__ahjan__millennial_women_professionals__sleep_anxiety.yaml
-
-installment_number: 3
+installment_number: 2
 engine: spiral
 duration: standard_book_60min
 runtime_format_id: standard_book_60min
 structural_format_id: F006
-
 target_word_range:
-  - 9000
-  - 12000
+- 9000
+- 12000
 target_audio_minutes: 70
-
-title: "The Thought That Keeps Tightening: A Sleep Anxiety Book"
-subtitle: "For Millennial Women at Work: Working with the spiral that won't let go"
-cover_tagline: "You can't stop thinking about what might happen."
-
+title: Escaping the Mental Loop
+subtitle: A Step-by-Step Method to Interrupt Spiraling Thoughts Before They Take Over
+cover_tagline: You can't stop thinking about what might happen.
 description:
-  short_blurb: >
-    You can't stop thinking about what might happen. actually sleep without dreading bedtime.
+  short_blurb: You can't stop thinking about what might happen. actually sleep without dreading bedtime.
   long_description: |
     You can't stop thinking about what might happen.
-    
-    This book is for senior manager in mid-size company, primary household planners who I'm exhausted but I can't sleep. It doesn't promise to make the feeling stop. It names what's happening in language you can use the next time it happens.
-    
-    Chapter by chapter, you'll work with why the mind loops back to the same thought and how to break the tightening. Not through exposure or worksheets or morning routines — through recognition, descent, and integration. The practice the book asks for can happen on a subway, between meetings, or at 3am.
-    
-    You'll walk away knowing what your body is doing and why it makes sense. Not fixed. Not healed in any final sense. But no longer alone with the pattern.
-    
-    Book 3 of the Stillness Press sleep anxiety series.
 
+    This book is for senior manager in mid-size company, primary household planners who I'm exhausted but I can't sleep. It doesn't promise to make the feeling stop. It names what's happening in language you can use the next time it happens.
+
+    Chapter by chapter, you'll work with why the mind loops back to the same thought and how to break the tightening. Not through exposure or worksheets or morning routines — through recognition, descent, and integration. The practice the book asks for can happen on a subway, between meetings, or at 3am.
+
+    You'll walk away knowing what your body is doing and why it makes sense. Not fixed. Not healed in any final sense. But no longer alone with the pattern.
+
+    Book 2 of the Stillness Press sleep anxiety series.
 keywords:
   primary:
-    - "insomnia book"
-    - "can't sleep"
-    - "3am anxiety"
-    - "sleep anxiety"
-    - "racing thoughts at night"
-    - "how to sleep"
-    - "sleep without pills"
+  - insomnia book
+  - can't sleep
+  - 3am anxiety
+  - sleep anxiety
+  - racing thoughts at night
+  - how to sleep
+  - sleep without pills
   secondary:
-    - "millennial women professionals"
-    - "spiral sleep anxiety"
-    - "the thought that keeps tightening"
-
+  - millennial women professionals
+  - spiral sleep anxiety
 bisac_codes:
-  - SEL027000
-  - SOC028000
-  - SEL045000
-
+- SEL027000
+- SOC028000
+- SEL045000
 target_price:
   ebook_usd: 4.99
   audible_usd: 9.99
   paperback_usd: 12.99
-
 author_positioning:
   teacher: ahjan
   brand: stillness_press
-
 comp_titles:
-  - "Why We Sleep (Matthew Walker) — science foundation"
-  - "The Sleep Book (Guy Meadows) — ACT-based surrender framing"
-  - "Say Good Night to Insomnia (Gregg Jacobs) — CBT-I adjacent"
-
+- Why We Sleep (Matthew Walker) — science foundation
+- The Sleep Book (Guy Meadows) — ACT-based surrender framing
+- Say Good Night to Insomnia (Gregg Jacobs) — CBT-I adjacent
 main_character_name: Sarah
 main_character_lora_id: sarah_sp_us
-
 confidence:
-  pricing: low   # Phase A decision 3 — ratification deferred to Phase F
-  title: medium  # Generated from engine framing; refine per series
-  comps: high    # From series_plan verified comps
-
+  pricing: low
+  title: medium
+  comps: high
 plan_source_path: config/manga/manga_brand_series_plan.yaml

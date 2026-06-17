@@ -1,130 +1,88 @@
-series_plan_schema: "1.0.0"
-created_at: "2026-04-24"
+series_plan_schema: 1.0.0
+created_at: '2026-04-24'
 locale: en_US
 book_id_prefix: stillness_press__ahjan__gen_z_professionals__anxiety
-
 brand: stillness_press
 teacher: ahjan
 persona: gen_z_professionals
 topic: anxiety
-
-# ── Arc: 7 books across the engine/angle spectrum ──────────────────────────
-# Each arc book uses a different narrative engine (shame, overwhelm, spiral, etc.)
-# Readers can start anywhere; the series shape is hub-and-spoke, not linear.
-# All books share the same protagonist register and teacher voice.
-
 arc:
   installment_1:
     book_id: stillness_press__ahjan__gen_z_professionals__anxiety__false_alarm
     engine: false_alarm
     master_arc: config/source_of_truth/master_arcs/gen_z_professionals__anxiety__false_alarm__F006.yaml
     duration: standard_book_60min
-    focus: "Recognition — the anxious signal that isn't danger"
-    reader_before: "I'm losing my mind — my body keeps bracing for things that don't happen."
-    reader_after:  "My body is scanning for a danger that isn't there. I can notice that without fixing it."
-
   installment_2:
-    book_id: stillness_press__ahjan__gen_z_professionals__anxiety__overwhelm
-    engine: overwhelm
-    master_arc: config/source_of_truth/master_arcs/gen_z_professionals__anxiety__overwhelm__F006.yaml
-    duration: standard_book_60min
-    focus: "Mechanism — how inputs accumulate past capacity"
-
-  installment_3:
     book_id: stillness_press__ahjan__gen_z_professionals__anxiety__spiral
     engine: spiral
     master_arc: config/source_of_truth/master_arcs/gen_z_professionals__anxiety__spiral__F006.yaml
     duration: standard_book_60min
-    focus: "Mechanism — the thought loop that tightens itself"
-
+  installment_3:
+    book_id: stillness_press__ahjan__gen_z_professionals__anxiety__watcher
+    engine: watcher
+    master_arc: config/source_of_truth/master_arcs/gen_z_professionals__anxiety__watcher__F006.yaml
+    duration: standard_book_60min
   installment_4:
+    book_id: stillness_press__ahjan__gen_z_professionals__anxiety__overwhelm
+    engine: overwhelm
+    master_arc: config/source_of_truth/master_arcs/gen_z_professionals__anxiety__overwhelm__F006.yaml
+    duration: standard_book_60min
+  installment_5:
     book_id: stillness_press__ahjan__gen_z_professionals__anxiety__shame
     engine: shame
     master_arc: config/source_of_truth/master_arcs/gen_z_professionals__anxiety__shame__F006.yaml
     duration: standard_book_60min
-    focus: "Integration — the part you don't want anyone to see"
-
-  installment_5:
-    book_id: stillness_press__ahjan__gen_z_professionals__anxiety__grief
-    engine: grief
-    master_arc: config/source_of_truth/master_arcs/gen_z_professionals__anxiety__grief__F006.yaml
-    duration: standard_book_60min
-    focus: "Integration — what's missing underneath the anxiety"
-
   installment_6:
     book_id: stillness_press__ahjan__gen_z_professionals__anxiety__comparison
     engine: comparison
     master_arc: config/source_of_truth/master_arcs/gen_z_professionals__anxiety__comparison__F006.yaml
     duration: standard_book_60min
-    focus: "Integration — the comparison engine and what it costs"
-
   installment_7:
-    book_id: stillness_press__ahjan__gen_z_professionals__anxiety__watcher
-    engine: watcher
-    master_arc: config/source_of_truth/master_arcs/gen_z_professionals__anxiety__watcher__F006.yaml
+    book_id: stillness_press__ahjan__gen_z_professionals__anxiety__grief
+    engine: grief
+    master_arc: config/source_of_truth/master_arcs/gen_z_professionals__anxiety__grief__F006.yaml
     duration: standard_book_60min
-    focus: "Integration — learning to notice without intervening"
-
-# ── Reader promise (series-level, not book-level) ──────────────────────────
-reader_promise_family: >
-  You'll learn to recognize what your anxious body is doing without needing
-  to make it stop. Seven different shapes of the same underlying capacity:
-  noticing-without-fixing.
-
+reader_promise_family: |
+  You'll learn to recognize what your anxious body is doing without needing to make it stop. Seven different shapes of the same underlying capacity: noticing-without-fixing.
 bestseller_hook_family: recognition_descent
 emotional_engine: anxious_recognition
-
-# ── Comp series (real books in the space) ──────────────────────────────────
 comp_series:
-  - "Unwinding Anxiety (Judson Brewer) — mechanism + noticing register"
-  - "When Things Fall Apart (Pema Chödrön) — surrender + non-reactivity register"
-  - "The Happiness Trap (Russ Harris) — ACT informal voice"
-
-# ── Platform strategy (aligned to duration economics) ──────────────────────
+- Unwinding Anxiety (Judson Brewer) — mechanism + noticing register
+- When Things Fall Apart (Pema Chödrön) — surrender + non-reactivity register
+- The Happiness Trap (Russ Harris) — ACT informal voice
 platform_strategy:
-  primary: [kdp_ebook, audible]
-  secondary: [apple_books, google_play, spotify_audiobooks]
-  launch_platform: kdp_ebook   # 70% royalty bracket, single-file upload
+  primary:
+  - kdp_ebook
+  - audible
+  secondary:
+  - apple_books
+  - google_play
+  - spotify_audiobooks
+  launch_platform: kdp_ebook
   cadence:
-    release_spacing_days: 14   # one installment every 2 weeks = ~3.5 months full arc
+    release_spacing_days: 14
     max_books_per_brand_per_month: 2
-
-# ── Reader avatar (who this is for — specific, not demographic) ────────────
 reader_avatar:
-  age: "22–29"
-  where_they_are: >
-    Lives alone or with roommates in a city. First real job (or between them).
-    Wakes up to a racing mind. Already tried breathing apps — they didn't stick.
-    Reads first thing in morning, last thing at night.
-  what_they_need: >
-    Someone who doesn't promise the anxiety will stop. Someone who makes
-    sense of what the body is doing in a way that's neither medical nor spiritual.
-  what_they_avoid: >
-    Productivity framing. "Hack your anxiety." Toxic positivity.
-    Prescriptive 5-step plans.
-
-# ── Series voice markers (distinguish this series from same-brand siblings) ─
+  age: 22–29
+  where_they_are: |
+    Lives alone or with roommates in a city. First real job (or between them). Wakes up to a racing mind. Already tried breathing apps — they didn't stick. Reads first thing in morning, last thing at night.
+  what_they_need: |
+    Someone who doesn't promise the anxiety will stop. Someone who makes sense of what the body is doing in a way that's neither medical nor spiritual.
+  what_they_avoid: |
+    Productivity framing. "Hack your anxiety." Toxic positivity. Prescriptive 5-step plans.
 series_voice_markers:
-  register: "intimate, conversational, no management-speak"
-  sentence_rhythm: "short sentences dominant, occasional long contemplative stretches"
-  metaphor_family: "body, nature, weather — never productivity, mechanical, military"
-  second_person_default: true  # "you" not "the reader"
+  register: intimate, conversational, no management-speak
+  sentence_rhythm: short sentences dominant, occasional long contemplative stretches
+  metaphor_family: body, nature, weather — never productivity, mechanical, military
+  second_person_default: true
   taboo:
-    - "No 'rewire your brain' language"
-    - "No morning-routine prescriptions"
-    - "No references to therapy as solution (it is ONE path among many)"
-    - "No religious framing"
-
-# ── Main character ─────────────────────────────────────────────────────────
-# Series protagonist — appears in scenes across all 7 books.
-# The teacher (ahjan) is the doctrine voice; this character is the reader-proxy.
+  - No 'rewire your brain' language
+  - No morning-routine prescriptions
+  - No references to therapy as solution (it is ONE path among many)
+  - No religious framing
 main_character_name: Hana
-main_character_role: "copywriter between contracts"
-main_character_image_path: null            # populated post-protagonist-LoRA pipeline
+main_character_role: copywriter between contracts
+main_character_image_path: null
 main_character_lora_id: hana_sp_us
 main_character_trigger_word: hana_sp_us
-
-# ── Bridge to master arc ───────────────────────────────────────────────────
-# Each installment's master_arc YAML provides the chapter structure + beatmap.
-# series_plan provides the top-of-book framing + cross-installment continuity.
 plan_source_path: config/manga/manga_brand_series_plan.yaml

@@ -245,9 +245,13 @@ brand_template_preferences:
     subtitle_strategy: { none_pct: 0.15, short_pct: 0.35, long_pct: 0.50 }
     content_mix: { persona_direct: 0.15, topic_direct: 0.45, metaphor: 0.25, location: 0.15 }
 
+  # cognitive_clarity (Kenjin) — evidence/method register. Engine-bearing metaphor lead
+  # (distinct per engine) + method title; science-backed topic-forward subtitles.
+  # short_method dropped from the subtitle set: it repeats {PrimaryKeyword} already in
+  # the method title and dedup-strips to a dangling "A Practical System for".
   cognitive_clarity:
-    title: [method_title, guide_title]
-    subtitle: [short_method, science_backed, numbered_steps, mechanism_reveal]
+    title: [metaphor_title, method_title]
+    subtitle: [science_backed, numbered_steps, mechanism_reveal, invisible_script]
     subtitle_strategy: { none_pct: 0.10, short_pct: 0.20, long_pct: 0.70 }
     content_mix: { persona_direct: 0.10, topic_direct: 0.55, metaphor: 0.25, location: 0.10 }
 
@@ -273,6 +277,52 @@ brand_template_preferences:
     subtitle: [profession_specific, identity_shift, generation_voice]
     subtitle_strategy: { none_pct: 0.05, short_pct: 0.15, long_pct: 0.80 }
     content_mix: { persona_direct: 0.55, topic_direct: 0.30, metaphor: 0.15, location: 0.00 }
+
+  # ─── EN_US_CATALOG_ENGINE_REPOINT_V1_SPEC §5: the other 5 en_US brands ───
+  # Each brand has a DISTINCT (subtitle_strategy + content_mix) profile so the same
+  # topic produces structurally different titles/subtitles per brand (anti-spam §16).
+  # NONE clone devotion_path's mix; each is tuned to the brand's voice register.
+
+  # somatic_wisdom (Pamela Fellows) — soft-clinical josei, body-paced, sensation-anchored.
+  # Body-first metaphor lean; persona rarely named (the body is the subject, not the role).
+  somatic_wisdom:
+    title: [metaphor_title, journey_title]
+    subtitle: [short_body, body_first, somatic_anchor, engine_hook]
+    subtitle_strategy: { none_pct: 0.20, short_pct: 0.45, long_pct: 0.35 }
+    content_mix: { persona_direct: 0.05, topic_direct: 0.35, metaphor: 0.55, location: 0.05 }
+
+  # digital_ground (Miki) — grounded, modern, real-talk for a wired generation.
+  # Engine-bearing journey lead (distinct per engine) + scenario; persona AND topic
+  # forward in the subtitle (names who + what plainly).
+  digital_ground:
+    title: [journey_title, scenario_promise]
+    subtitle: [short_persona, generation_voice, practical_tools, mechanism_reveal]
+    subtitle_strategy: { none_pct: 0.15, short_pct: 0.30, long_pct: 0.55 }
+    content_mix: { persona_direct: 0.40, topic_direct: 0.35, metaphor: 0.15, location: 0.10 }
+
+  # sleep_restoration (Master Sha) — nocturnal, gentle, restorative.
+  # Evocative journey titles; metaphor-heavy; higher none_pct for punchy bedside titles.
+  sleep_restoration:
+    title: [journey_title, metaphor_title]
+    subtitle: [short_gentle, short_permission, somatic_anchor, gentle_promise]
+    subtitle_strategy: { none_pct: 0.35, short_pct: 0.40, long_pct: 0.25 }
+    content_mix: { persona_direct: 0.05, topic_direct: 0.20, metaphor: 0.70, location: 0.05 }
+
+  # solar_return (Ra) — mythic renewal, empowering rebirth arc.
+  # Journey + outcome titles; balanced metaphor + persona (the reader is the hero).
+  solar_return:
+    title: [journey_title, outcome_focused]
+    subtitle: [short_promise, identity_shift, permission_grant, gentle_promise]
+    subtitle_strategy: { none_pct: 0.25, short_pct: 0.30, long_pct: 0.45 }
+    content_mix: { persona_direct: 0.30, topic_direct: 0.20, metaphor: 0.45, location: 0.05 }
+
+  # heart_balance (Maat) — tender, relational, weighing the heart.
+  # Journey + persona-targeted titles; persona named + metaphor (relationship-forward).
+  heart_balance:
+    title: [journey_title, persona_targeted]
+    subtitle: [short_persona, gentle_promise, identity_shift, permission_grant]
+    subtitle_strategy: { none_pct: 0.15, short_pct: 0.35, long_pct: 0.50 }
+    content_mix: { persona_direct: 0.35, topic_direct: 0.15, metaphor: 0.40, location: 0.10 }
 
   default:
     title: [scenario_direct, outcome_focused]

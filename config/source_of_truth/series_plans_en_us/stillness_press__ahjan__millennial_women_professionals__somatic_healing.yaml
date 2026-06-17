@@ -1,100 +1,66 @@
-series_plan_schema: "1.0.0"
-created_at: "2026-04-24"
+series_plan_schema: 1.0.0
+created_at: '2026-04-24'
 locale: en_US
 book_id_prefix: stillness_press__ahjan__millennial_women_professionals__somatic_healing
-
 brand: stillness_press
 teacher: ahjan
 persona: millennial_women_professionals
 topic: somatic_healing
-
-# ── Fit signals (from teacher_topic_persona_scores.yaml) ──
-teacher_topic_score: 0.5   # ahjan × somatic_healing = medium
-teacher_persona_score: 0.8   # ahjan × millennial_women_professionals = strong
-composite_fit: 0.65   # medium overall
-
-# ── Arc: 7 books across engines ──
+teacher_topic_score: 0.5
+teacher_persona_score: 0.8
+composite_fit: 0.65
 arc:
   installment_1:
-    book_id: stillness_press__ahjan__millennial_women_professionals__somatic_healing__false_alarm
-    engine: false_alarm
-    master_arc: config/source_of_truth/master_arcs/millennial_women_professionals__somatic_healing__false_alarm__F006.yaml
+    book_id: stillness_press__ahjan__millennial_women_professionals__somatic_healing__watcher
+    engine: watcher
+    master_arc: config/source_of_truth/master_arcs/millennial_women_professionals__somatic_healing__watcher__F006.yaml
     duration: standard_book_60min
   installment_2:
     book_id: stillness_press__ahjan__millennial_women_professionals__somatic_healing__overwhelm
     engine: overwhelm
     master_arc: config/source_of_truth/master_arcs/millennial_women_professionals__somatic_healing__overwhelm__F006.yaml
     duration: standard_book_60min
-  installment_3:
-    book_id: stillness_press__ahjan__millennial_women_professionals__somatic_healing__spiral
-    engine: spiral
-    master_arc: config/source_of_truth/master_arcs/millennial_women_professionals__somatic_healing__spiral__F006.yaml
-    duration: standard_book_60min
-  installment_4:
-    book_id: stillness_press__ahjan__millennial_women_professionals__somatic_healing__shame
-    engine: shame
-    master_arc: config/source_of_truth/master_arcs/millennial_women_professionals__somatic_healing__shame__F006.yaml
-    duration: standard_book_60min
-  installment_5:
-    book_id: stillness_press__ahjan__millennial_women_professionals__somatic_healing__grief
-    engine: grief
-    master_arc: config/source_of_truth/master_arcs/millennial_women_professionals__somatic_healing__grief__F006.yaml
-    duration: standard_book_60min
-  installment_6:
-    book_id: stillness_press__ahjan__millennial_women_professionals__somatic_healing__comparison
-    engine: comparison
-    master_arc: config/source_of_truth/master_arcs/millennial_women_professionals__somatic_healing__comparison__F006.yaml
-    duration: standard_book_60min
-  installment_7:
-    book_id: stillness_press__ahjan__millennial_women_professionals__somatic_healing__watcher
-    engine: watcher
-    master_arc: config/source_of_truth/master_arcs/millennial_women_professionals__somatic_healing__watcher__F006.yaml
-    duration: standard_book_60min
-
-reader_promise_family: >
-  You'll learn to come back into a body that learned to ignore itself. 7 books across engines of the
-  same underlying capacity — each one enters the work from a different angle.
-
+reader_promise_family: |
+  You'll learn to come back into a body that learned to ignore itself. 7 books across engines of the same underlying capacity — each one enters the work from a different angle.
 bestseller_hook_family: recognition_descent
 emotional_engine: somatic_healing_recognition
-
 comp_series:
-  - "The Body Keeps the Score (Bessel van der Kolk) — trauma-body foundational"
-  - "Waking the Tiger (Peter Levine) — somatic experiencing"
-  - "My Grandmother's Hands (Resmaa Menakem) — racialized somatic voice"
-
+- The Body Keeps the Score (Bessel van der Kolk) — trauma-body foundational
+- Waking the Tiger (Peter Levine) — somatic experiencing
+- My Grandmother's Hands (Resmaa Menakem) — racialized somatic voice
 platform_strategy:
-  primary: [kdp_ebook, audible]
-  secondary: [apple_books, google_play, spotify_audiobooks]
+  primary:
+  - kdp_ebook
+  - audible
+  secondary:
+  - apple_books
+  - google_play
+  - spotify_audiobooks
   launch_platform: kdp_ebook
   cadence:
     release_spacing_days: 14
     max_books_per_brand_per_month: 2
-
 reader_avatar:
-  age: "32–42"
-  where_they_are: >
+  age: 32–42
+  where_they_are: |
     Text from mom, text from boss, calendar full. Saturday morning, partner still asleep, she's been awake an hour.
-  what_they_need: >
+  what_they_need: |
     Someone who sees the emotional labor without calling it a superpower or a wound.
-  what_they_avoid: >
+  what_they_avoid: |
     Lean-in reframing. Self-care Sunday aesthetic. 'You're doing so much' without offering anything.
-
 series_voice_markers:
-  register: "intimate, persona-specific, no management-speak"
-  sentence_rhythm: "somatic-pacing — sentences match breath"
-  metaphor_family: "body sensations, weather-of-the-body, nature — never productivity, mechanical, military"
+  register: intimate, persona-specific, no management-speak
+  sentence_rhythm: somatic-pacing — sentences match breath
+  metaphor_family: body sensations, weather-of-the-body, nature — never productivity, mechanical, military
   second_person_default: true
   taboo:
-    - "No rewire-your-brain language"
-    - "No morning-routine prescriptions"
-    - "No therapy-as-solution closing"
-    - "No religious framing"
-
+  - No rewire-your-brain language
+  - No morning-routine prescriptions
+  - No therapy-as-solution closing
+  - No religious framing
 main_character_name: Emma
-main_character_role: "senior manager in mid-size company, primary household planner"
+main_character_role: senior manager in mid-size company, primary household planner
 main_character_image_path: null
 main_character_lora_id: emma_sp_us
 main_character_trigger_word: emma_sp_us
-
 plan_source_path: config/manga/manga_brand_series_plan.yaml

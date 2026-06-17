@@ -1,19 +1,14 @@
-series_plan_schema: "1.0.0"
-created_at: "2026-04-24"
+series_plan_schema: 1.0.0
+created_at: '2026-04-24'
 locale: en_US
 book_id_prefix: stillness_press__ahjan__first_responders__sleep_anxiety
-
 brand: stillness_press
 teacher: ahjan
 persona: first_responders
 topic: sleep_anxiety
-
-# ── Fit signals (from teacher_topic_persona_scores.yaml) ──
-teacher_topic_score: 0.5   # ahjan × sleep_anxiety = medium
-teacher_persona_score: 0.5   # ahjan × first_responders = medium
-composite_fit: 0.50   # medium overall
-
-# ── Arc: 3 books across engines ──
+teacher_topic_score: 0.5
+teacher_persona_score: 0.5
+composite_fit: 0.5
 arc:
   installment_1:
     book_id: stillness_press__ahjan__first_responders__sleep_anxiety__false_alarm
@@ -21,60 +16,56 @@ arc:
     master_arc: config/source_of_truth/master_arcs/first_responders__sleep_anxiety__false_alarm__F006.yaml
     duration: standard_book_60min
   installment_2:
-    book_id: stillness_press__ahjan__first_responders__sleep_anxiety__overwhelm
-    engine: overwhelm
-    master_arc: config/source_of_truth/master_arcs/first_responders__sleep_anxiety__overwhelm__F006.yaml
-    duration: standard_book_60min
-  installment_3:
     book_id: stillness_press__ahjan__first_responders__sleep_anxiety__spiral
     engine: spiral
     master_arc: config/source_of_truth/master_arcs/first_responders__sleep_anxiety__spiral__F006.yaml
     duration: standard_book_60min
-
-reader_promise_family: >
-  You'll learn to understand what your body is doing at 3am without needing to force sleep. 3 books across engines of the
-  same underlying capacity — each one enters the work from a different angle.
-
+  installment_3:
+    book_id: stillness_press__ahjan__first_responders__sleep_anxiety__overwhelm
+    engine: overwhelm
+    master_arc: config/source_of_truth/master_arcs/first_responders__sleep_anxiety__overwhelm__F006.yaml
+    duration: standard_book_60min
+reader_promise_family: |
+  You'll learn to understand what your body is doing at 3am without needing to force sleep. 3 books across engines of the same underlying capacity — each one enters the work from a different angle.
 bestseller_hook_family: recognition_descent
 emotional_engine: sleep_anxiety_recognition
-
 comp_series:
-  - "Why We Sleep (Matthew Walker) — science foundation"
-  - "The Sleep Book (Guy Meadows) — ACT-based surrender framing"
-  - "Say Good Night to Insomnia (Gregg Jacobs) — CBT-I adjacent"
-
+- Why We Sleep (Matthew Walker) — science foundation
+- The Sleep Book (Guy Meadows) — ACT-based surrender framing
+- Say Good Night to Insomnia (Gregg Jacobs) — CBT-I adjacent
 platform_strategy:
-  primary: [kdp_ebook, audible]
-  secondary: [apple_books, google_play, spotify_audiobooks]
+  primary:
+  - kdp_ebook
+  - audible
+  secondary:
+  - apple_books
+  - google_play
+  - spotify_audiobooks
   launch_platform: kdp_ebook
   cadence:
     release_spacing_days: 14
     max_books_per_brand_per_month: 2
-
 reader_avatar:
-  age: "26–48"
-  where_they_are: >
+  age: 26–48
+  where_they_are: |
     Off-shift but still scanning. Eating dinner while their phone buzzes somewhere else in the house.
-  what_they_need: >
+  what_they_need: |
     A voice that doesn't require them to explain what they've seen. Register that matches 'on duty'.
-  what_they_avoid: >
+  what_they_avoid: |
     Self-care language. 'Talk to someone.' Anything that treats them as fragile.
-
 series_voice_markers:
-  register: "intimate, persona-specific, no management-speak"
-  sentence_rhythm: "longer, unhurried sentences — no punchy copy"
-  metaphor_family: "night, water, animals settling — never productivity, mechanical, military"
+  register: intimate, persona-specific, no management-speak
+  sentence_rhythm: longer, unhurried sentences — no punchy copy
+  metaphor_family: night, water, animals settling — never productivity, mechanical, military
   second_person_default: true
   taboo:
-    - "No rewire-your-brain language"
-    - "No morning-routine prescriptions"
-    - "No therapy-as-solution closing"
-    - "No religious framing"
-
+  - No rewire-your-brain language
+  - No morning-routine prescriptions
+  - No therapy-as-solution closing
+  - No religious framing
 main_character_name: Diana
-main_character_role: "paramedic, 8 years in urban EMS"
+main_character_role: paramedic, 8 years in urban EMS
 main_character_image_path: null
 main_character_lora_id: diana_sp_us
 main_character_trigger_word: diana_sp_us
-
 plan_source_path: config/manga/manga_brand_series_plan.yaml
