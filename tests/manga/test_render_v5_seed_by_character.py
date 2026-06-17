@@ -10,6 +10,13 @@ pathway. These are pure-function tests — no ComfyUI, no GPU, deterministic.
 """
 from __future__ import annotations
 
+import pytest
+
+# render_v5_episode → render_v4_episode → validate_layer imports numpy at module
+# load; skip the whole module when numpy is absent (e.g. the Core-tests env) so
+# collection doesn't hard-error. The seed logic itself needs no numpy.
+pytest.importorskip("numpy")  # skip entire module if numpy not in test env
+
 from scripts.manga.render_v5_episode import (
     DEFAULT_SEED_BASE,
     _resolve_archetype_subject_state,
