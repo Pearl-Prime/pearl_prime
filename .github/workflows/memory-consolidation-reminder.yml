@@ -1,0 +1,129 @@
+name: Memory consolidation reminder
+
+# P0-6 (docs/specs/AGENT_SYSTEM_IMPROVEMENT_V2_SPEC.md): periodic cadence that drives
+# the existing `consolidate-memory` skill against the Claude Code auto-memory
+# (MEMORY.md), to challenge/merge stale entries and prevent a wrong lesson ossifying.
+#
+# WHY THIS WORKFLOW ONLY OPENS A REMINDER (does not run the skill):
+#   * `consolidate-memory` is a Tier-1, operator-present Claude Code skill. It reads
+#     and rewrites ~/.claude/projects/<slug>/memory/MEMORY.md — a per-operator,
+#     per-machine file that does NOT exist on a GitHub Actions runner.
+#   * Running any reflective-merge LLM pass unattended in CI would also violate the
+#     CLAUDE.md LLM Tier policy (English reflective prose = Tier-1 Claude session,
+#     never a CI/paid call). So CI is the wrong place to execute consolidation.
+#   * Therefore the cadence MECHANISM is a scheduled nudge: this workflow opens (or
+#     refreshes, once per quarter) a single operator-action issue. Pearl_PM then runs
+#     the `consolidate-memory` skill inside a Claude Code session, following
+#     docs/MEMORY_CONSOLIDATION_CADENCE_RUNBOOK.md.
+#
+# This mirrors the repo's established reminder-issue pattern
+# (.github/workflows/manga-stash-reminder.yml and the issue logic in
+# .github/workflows/branch-hygiene-sweep.yml): scheduled cron + dedup'd
+# gh issue create + operator-action-required label. No new mechanism is invented.
+
+on:
+  workflow_dispatch: {}
+  schedule:
+    # Quarterly: 09:00 UTC on the 1st of Jan / Apr / Jul / Oct. The Claude Code
+    # auto-memory accumulates slowly (a few topic files per month), so a quarterly
+    # challenge/merge pass is the right cadence — frequent enough to catch a wrong
+    # lesson before it compounds, rare enough not to nag. Tune the cron here if the
+    # operator wants monthly instead.
+    - cron: "0 9 1 1,4,7,10 *"
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  remind:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Compile pre-flight helper (smoke)
+        # Sanity-check the read-only freshness helper still imports/compiles. We
+        # cannot run a real freshness scan here (the operator's memory dir is not on
+        # the runner), but compiling guards against shipping a broken helper that the
+        # operator would hit locally.
+        run: |
+          python3 -m py_compile scripts/memory/memory_cadence_preflight.py
+          echo "## Pre-flight helper compiles" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Open / refresh consolidate-memory reminder issue
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          # Dedup per quarter so reruns / both triggers don't stack duplicate issues
+          # (same approach branch-hygiene-sweep uses per ISO week).
+          YEAR=$(date -u +%Y)
+          MONTH=$(date -u +%m)
+          case "$MONTH" in
+            01|02|03) Q=Q1 ;;
+            04|05|06) Q=Q2 ;;
+            07|08|09) Q=Q3 ;;
+            *)        Q=Q4 ;;
+          esac
+          TAG="${YEAR}-${Q}"
+
+          EXISTING=$(gh issue list \
+            --label operator-action-required --state open \
+            --search "consolidate-memory cadence" --json number,title \
+            --jq ".[] | select(.title | contains(\"$TAG\")) | .number" \
+            2>/dev/null | head -n1 || echo "")
+          if [ -n "$EXISTING" ]; then
+            echo "Reminder issue #$EXISTING already open for $TAG — skipping." \
+              >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+
+          {
+            echo "## Quarterly memory-consolidation cadence ($TAG)"
+            echo ""
+            echo "Per **P0-6** of \`docs/specs/AGENT_SYSTEM_IMPROVEMENT_V2_SPEC.md\`,"
+            echo "run a reflective challenge/merge pass over the Claude Code auto-memory"
+            echo "(\`MEMORY.md\`) so a stale or wrong lesson does not ossify."
+            echo ""
+            echo "### Operator steps (Pearl_PM, in a Claude Code session)"
+            echo ""
+            echo "1. (optional) Pre-flight freshness snapshot — read-only, no LLM call:"
+            echo '   ```bash'
+            echo "   python3 scripts/memory/memory_cadence_preflight.py --stale-days 45"
+            echo '   ```'
+            echo "   It lists the oldest topic files and any index drift to focus on."
+            echo ""
+            echo "2. Run the **existing** consolidate-memory skill in the session:"
+            echo '   ```'
+            echo "   Skill consolidate-memory"
+            echo '   ```'
+            echo "   (the packaged \`anthropic-skills:consolidate-memory\` skill — do NOT"
+            echo "   reimplement it). It merges duplicates, fixes stale facts, prunes the"
+            echo "   index, and challenges entries that may encode a wrong lesson."
+            echo ""
+            echo "3. Review its proposed edits, accept the good ones, and close this issue"
+            echo "   with a one-line note of what was merged/pruned."
+            echo ""
+            echo "> ℹ️ This runs in an operator-present Claude Code session (Tier-1), NOT"
+            echo "> in CI: the memory file is local to the operator's machine and reflective"
+            echo "> consolidation must not run unattended (CLAUDE.md LLM Tier policy)."
+            echo ""
+            echo "Runbook: \`docs/MEMORY_CONSOLIDATION_CADENCE_RUNBOOK.md\`"
+            echo ""
+            echo "---"
+            echo "Workflow run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          } > /tmp/mem_issue_body.md
+
+          gh issue create \
+            --title "Operator: run consolidate-memory cadence on MEMORY.md ($TAG)" \
+            --body-file /tmp/mem_issue_body.md \
+            --label operator-action-required \
+            --label maintenance \
+            || true
+          echo "## consolidate-memory reminder issued ($TAG)" >> "$GITHUB_STEP_SUMMARY"
