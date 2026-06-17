@@ -368,8 +368,8 @@ function feedFor(pkt, p){ return pkt[p.feed] || []; }
 // ── Downloads ──────────────────────────────────────────────────────────────
 function dl(name, text, mime) {
   const a = document.createElement("a");
-  a.href = URL.createObjectURL(new Blob([text], {type: mime || "text/plain"}));
-  a.download = name; a.click();
+  const _u = URL.createObjectURL(new Blob([text], {type: mime || "text/plain"})); a.href = _u;
+  a.download = name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(function(){ URL.revokeObjectURL(_u); }, 1000);
 }
 function row(arr, sep){ return arr.map(v => sep === "\t" ? String(v) : `"${String(v).replace(/"/g,'""')}"`).join(sep || ","); }
 function buildMetadataFile(p, week, pkt) {
