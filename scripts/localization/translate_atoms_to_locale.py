@@ -52,17 +52,41 @@ SYSTEM_PROMPTS = {
 }
 
 
-def _translate_text(text: str, locale: str, ollama_url: str, model: str) -> str | None:
-    """Translate text via Ollama."""
-    system = SYSTEM_PROMPTS.get(locale, SYSTEM_PROMPTS.get("zh-TW", "Translate to the target language."))
+# Atoms store multiple variants in one file, each introduced by a `## ` header
+# (e.g. "## HOOK v01", "## HOOK v02"). The pre-fix code truncated the whole
+# concatenated atom at 8000 chars before translating, silently dropping every
+# variant past the cutoff (e.g. a 32-variant REFLECTION atom kept only 4).
+# We now chunk per variant: split on `## ` headers, translate each segment
+# independently (no input truncation), then reassemble — and assert the output
+# variant count matches the input so variant loss fails loudly instead of
+# shipping a corrupted, half-translated atom.
+_VARIANT_SPLIT_RE = re.compile(r"(?m)^(?=##\s)")
 
-    prompt = f"{system}\n\n{text[:8000]}"
 
+def _split_variants(text: str) -> list[str]:
+    """Split atom text into segments at each `## ` variant header.
+
+    Any preamble before the first `## ` header is kept as its own leading
+    segment so nothing is lost. Each `## ...` variant becomes one segment
+    (header + its body). Returns the original text as a single segment when no
+    `## ` headers are present (e.g. teacher-bank bodies).
+    """
+    parts = [p for p in _VARIANT_SPLIT_RE.split(text) if p.strip()]
+    return parts if parts else [text]
+
+
+def _count_variant_headers(text: str) -> int:
+    """Count `## ` variant headers in a block of atom text."""
+    return sum(1 for line in text.splitlines() if line.lstrip().startswith("## "))
+
+
+def _ollama_generate(prompt: str, ollama_url: str, model: str, num_predict: int) -> str | None:
+    """Single Ollama /api/generate call. Returns cleaned reply or None."""
     payload = json.dumps({
         "model": model,
         "prompt": prompt,
         "stream": False,
-        "options": {"temperature": 0.25, "num_predict": 8000},
+        "options": {"temperature": 0.25, "num_predict": num_predict},
     }).encode("utf-8")
 
     try:
@@ -80,6 +104,49 @@ def _translate_text(text: str, locale: str, ollama_url: str, model: str) -> str 
     except Exception as e:
         print(f"    ERROR: {e}")
         return None
+
+
+def _translate_text(text: str, locale: str, ollama_url: str, model: str) -> str | None:
+    """Translate atom text via Ollama, chunking per `## ` variant.
+
+    Each variant is translated independently so no variant is truncated, then
+    the translations are rejoined. The output variant count must equal the
+    input variant count; on mismatch (variant loss/merge) we return None so the
+    caller skips writing the file and the atom is retried, rather than shipping
+    a silently corrupted translation.
+    """
+    system = SYSTEM_PROMPTS.get(locale, SYSTEM_PROMPTS.get("zh-TW", "Translate to the target language."))
+
+    segments = _split_variants(text)
+    in_variants = _count_variant_headers(text)
+
+    translated_segments: list[str] = []
+    for seg in segments:
+        # Size the output budget from the segment length (CJK can expand vs
+        # English); never let num_predict cap an individual variant. No input
+        # truncation — the longest single atom variant in the catalog is well
+        # under the old 8000-char limit, so per-variant chunking removes the
+        # truncation entirely.
+        num_predict = max(2048, min(len(seg) * 4, 16000))
+        prompt = f"{system}\n\n{seg}"
+        out = _ollama_generate(prompt, ollama_url, model, num_predict)
+        if out is None:
+            print(f"    ERROR: variant translation returned empty ({len(seg)} chars)")
+            return None
+        translated_segments.append(out.strip())
+
+    combined = "\n\n".join(translated_segments).strip()
+
+    # Count guard: variant loss must fail loudly, not ship corrupted output.
+    out_variants = _count_variant_headers(combined)
+    if out_variants != in_variants:
+        print(
+            f"    ERROR: variant count mismatch (in={in_variants} out={out_variants}); "
+            f"dropping translation to avoid silent loss"
+        )
+        return None
+
+    return combined if len(combined) > 10 else None
 
 
 def translate_persona_atoms(
