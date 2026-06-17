@@ -256,6 +256,20 @@ _F2B_PHRASAL_VERB_ENDINGS = frozenset({
     ("give", "in"), ("gives", "in"), ("gave", "in"), ("giving", "in"),
     ("cared", "for"), ("care", "for"), ("cares", "for"), ("caring", "for"),
     ("provided", "for"), ("accounted", "for"),
+    # 2026-06-17 (Blocker 3, F2 false-positive hardening): motion/arrival phrasal verbs whose
+    # particle legitimately ends a sentence. QA sweep T1 false-HARD_FAILed on the authored SCENE
+    # line "He hears the first bus pulling in." — "pulling in" is a phrasal verb (a bus pulls in),
+    # not a dropped template slot. These are content lines from SCENE/HOOK atoms, never artifacts.
+    ("pulling", "in"), ("pull", "in"), ("pulls", "in"), ("pulled", "in"),
+    ("rolling", "in"), ("roll", "in"), ("rolls", "in"), ("rolled", "in"),
+    ("coming", "in"), ("come", "in"), ("comes", "in"), ("came", "in"),
+    ("drifting", "in"), ("drift", "in"), ("drifts", "in"), ("drifted", "in"),
+    ("filtering", "in"), ("filter", "in"), ("filters", "in"), ("filtered", "in"),
+    ("settling", "in"), ("settle", "in"), ("settles", "in"), ("settled", "in"),
+    ("pulling", "up"), ("pulls", "up"), ("pulled", "up"),
+    ("looking", "up"), ("looks", "up"), ("looked", "up"),
+    ("breathing", "out"), ("breathe", "out"), ("breathes", "out"), ("breathed", "out"),
+    ("letting", "go"), ("lets", "go"), ("let", "go"),
 })
 
 # Stranding licensors: their presence anywhere in the sentence indicates the final
@@ -296,6 +310,13 @@ _F2B_COPULA_PREDICATE_RE = re.compile(
 _F2D_TITLE_LOWERCASE_JOINERS = frozenset({
     "a", "an", "the", "and", "or", "but", "of", "to", "in", "on", "for",
     "with", "as", "at", "by", "from", "into", "over", "under",
+    # 2026-06-17 (Blocker 3, F2 false-positive hardening): "vs" / "v" is a legitimate lowercase
+    # heading joiner. QA sweep X2 false-HARD_FAILed on the chapter working title
+    # "Performing vs Connecting" because "vs" was not recognized, so the Title-Case heading
+    # exemption (_is_titlecase_heading) rejected it. (Only the period-free forms are listed; the
+    # heading validator's token regex rejects a trailing period regardless.) Genuine leaked
+    # component labels ("INTEGRATION v06") carry a digit and still HARD_FAIL.
+    "vs", "v",
 })
 
 

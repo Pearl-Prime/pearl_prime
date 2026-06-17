@@ -435,7 +435,7 @@ def _load_runtime_word_ceiling(runtime_fmt: str, repo_root: Path) -> int | None:
     return None
 
 
-def _clamp_book_to_word_ceiling(prose: str, ceiling: int) -> tuple[str, int, int]:
+def _clamp_book_to_word_ceiling(prose: str, ceiling: int, *, reserve: int = 0) -> tuple[str, int, int]:
     """Trim a spine-rendered book so its TOTAL word count (incl. front-matter) ≤ ceiling.
 
     Render-accounting fix (DEFERRED-LANE word_budget 2026-06-15): the spine path fills
@@ -453,12 +453,20 @@ def _clamp_book_to_word_ceiling(prose: str, ceiling: int) -> tuple[str, int, int
       - whole paragraphs where possible (only the final kept paragraph of an
         over-budget chapter is word-sliced).
 
+    ``reserve`` (Blocker 1, 2026-06-17): clamp to ``ceiling - reserve`` instead of ``ceiling``
+    so a small word budget remains for the post-clamp ``ensure_chapter_flow_cues`` pass, whose
+    guarantee sentences would otherwise push the book back over the ceiling. The book_pass
+    word_budget gate uses a RANGE (floor..ceiling) so trimming a few dozen words below the
+    ceiling stays comfortably within band.
+
     Returns (clamped_prose, pre_words, post_words). No-ops (returns input) when the
-    book is already within the ceiling or has no parseable chapters.
+    book is already within the effective ceiling or has no parseable chapters.
     """
     pre_words = len(prose.split())
-    if ceiling <= 0 or pre_words <= ceiling:
+    effective_ceiling = max(1, ceiling - max(0, reserve)) if ceiling > 0 else ceiling
+    if ceiling <= 0 or pre_words <= effective_ceiling:
         return prose, pre_words, pre_words
+    ceiling = effective_ceiling
     chapters = _extract_registry_chapters(prose)
     if not chapters:
         return prose, pre_words, pre_words
@@ -635,6 +643,160 @@ def _scene_anchor_density_violations(prose: str, cap: int) -> list[dict]:
     return violations
 
 
+def _reduce_scene_anchor_density(prose: str, cap: int, *, max_passes: int = 4) -> tuple[str, list[str]]:
+    """Generalized scene_anchor density reducer (Blocker 2 / A1-generalize, 2026-06-17).
+
+    The composer's ``_DIRECTION_CAP_PER_CHAPTER`` caps only the bridge-bank chapter-direction
+    substring, and ``dedupe_scene_furniture_book`` caps only a closed allowlist of furniture
+    signatures. Neither catches the general case the gate measures: ANY 4–8 word n-gram that
+    lands in MORE than ``cap`` paragraphs of one chapter (QA sweep examples: a HOOK somatic
+    lead-in ``"as you prepare to"`` ×5 in one chapter; SCENE furniture variants not in the
+    allowlist such as ``"light over the window"`` / ``"moves through the room"``).
+
+    This pass mirrors the gate's own detector (``_scene_anchor_density_violations``) exactly,
+    then deterministically removes the SURPLUS occurrences past the cap by dropping the minimal
+    *whole sentence* that carries the offending phrase from each surplus paragraph — the same
+    sentence-granularity strategy proven safe in ``dedupe_scene_furniture_book`` (dropping a bare
+    substring shears sentences and orphans byte-identical tails; dropping a whole sentence cannot).
+    It keeps the first ``cap`` paragraphs untouched, so the legitimate motif still appears up to
+    the gate's allowance; only the boilerplate over-repetition is trimmed.
+
+    The pass NEVER weakens the gate or its cap — it strengthens the OUTPUT so the gate passes.
+    It re-runs until the gate reports no violations or ``max_passes`` is reached (the gate itself
+    remains the final arbiter at the call site). Deterministic: surplus selection is purely
+    positional (later paragraphs lose the phrase), no randomization.
+
+    Returns ``(reduced_prose, notes)``.
+    """
+    if cap <= 0 or not prose or not prose.strip():
+        return prose, []
+
+    notes: list[str] = []
+    work = prose
+    phrase_re = re.compile(r"\b[\w']+\b")
+    # Sentence splitter consistent with the rest of the renderer (terminator-preserving handled
+    # by rebuilding from spans; here we split into sentence strings for membership testing).
+    sent_split_re = re.compile(r"(?<=[.!?])\s+")
+
+    for _pass in range(max_passes):
+        violations = _scene_anchor_density_violations(work, cap)
+        if not violations:
+            break
+
+        chapters = _extract_registry_chapters(work)
+        if not chapters:
+            break
+        # Map chapter number (1-indexed, as the gate reports) → offending phrases for that chapter.
+        offenders_by_chapter: dict[int, list[str]] = {}
+        for v in violations:
+            ch_num = int(v.get("chapter", 0))
+            phrases = [str(o.get("phrase", "")) for o in v.get("offenders", []) if o.get("phrase")]
+            if ch_num and phrases:
+                # Process longest phrases first so collapsing a long motif also clears its
+                # shorter overlapping sub-n-grams in one drop.
+                offenders_by_chapter[ch_num] = sorted(phrases, key=lambda s: (-len(s.split()), s))
+
+        changed = False
+        new_chapters: list[str] = []
+        for ch_idx, chapter in enumerate(chapters, start=1):
+            phrases = offenders_by_chapter.get(ch_idx)
+            if not phrases:
+                new_chapters.append(chapter)
+                continue
+            paras = re.split(r"\n\s*\n", chapter)
+            for phrase in phrases:
+                p_low = phrase.lower()
+                # Which paragraphs contain the phrase (as a contiguous lowercase n-gram)?
+                hit_para_idxs: list[int] = []
+                for p_idx, para in enumerate(paras):
+                    words = [w.lower() for w in phrase_re.findall(para)]
+                    n = len(p_low.split())
+                    joined = " ".join(words)
+                    if p_low in joined and n >= 1:
+                        # Confirm as a word-boundary n-gram, not a coincidental substring.
+                        target = p_low
+                        if any(
+                            " ".join(words[i:i + n]) == target
+                            for i in range(0, max(0, len(words) - n + 1))
+                        ):
+                            hit_para_idxs.append(p_idx)
+                if len(hit_para_idxs) <= cap:
+                    continue
+                # Keep the first `cap` paragraphs; trim the phrase-bearing sentence from the rest.
+                for p_idx in hit_para_idxs[cap:]:
+                    para = paras[p_idx]
+                    sents = sent_split_re.split(para)
+                    kept_sents = []
+                    dropped_one = False
+                    for s in sents:
+                        s_words = [w.lower() for w in phrase_re.findall(s)]
+                        n = len(p_low.split())
+                        if not dropped_one and any(
+                            " ".join(s_words[i:i + n]) == p_low
+                            for i in range(0, max(0, len(s_words) - n + 1))
+                        ):
+                            dropped_one = True
+                            changed = True
+                            continue
+                        kept_sents.append(s)
+                    paras[p_idx] = " ".join(kept_sents).strip()
+                notes.append(
+                    f"ch{ch_idx}: trimmed {len(hit_para_idxs) - cap} surplus occurrence(s) of {phrase!r}"
+                )
+            # Drop any paragraph emptied by trimming; preserve heading paragraph (index 0).
+            rebuilt = [p for i, p in enumerate(paras) if p.strip() or i == 0]
+            new_chapters.append("\n\n".join(rebuilt))
+
+        if not changed:
+            break
+        work = "\n\n".join(new_chapters)
+
+    return work, notes
+
+
+def _resolve_angle_journey_id(angle_id: str, topic_id: str) -> tuple[str, str]:
+    """Resolve a catalog angle identifier to a registry angle key for the angle-journey patch.
+
+    Blocker 4 (angle_journey 0% coverage, 2026-06-17). The angle-journey machinery
+    (``patch_beatmap_angle_journey`` → ``merge_angle_journey``) is keyed by the UPPERCASE
+    journey-concept ids declared under ``config/angles/angle_registry.yaml::angles`` (e.g.
+    ``INVISIBLE_THRESHOLD``, 5-layer progression). The spine pipeline, however, received the raw
+    catalog ANGLE slug from ``book_spec_for_compiler['angle_id']`` (e.g. ``false_alarm``), which is
+    NOT a registry key. ``merge_angle_journey('false_alarm')`` returned an empty layer_progression,
+    so ``apply_angle_journey_slots`` injected ZERO ANGLE_DEFINITION/ANGLE_CALLBACK slots and the
+    ``angle_journey_coherence`` gate saw 0% of chapters carrying angle slots (book_pass FAIL).
+
+    The registry already ships the correct mapping in
+    ``catalog_planner_resolution.topic_angle_map`` (topic → concept id), the same SSOT
+    ``CatalogPlanner._derive_angle`` and the catalog generator use. This resolves through it:
+
+      1. If ``angle_id`` is already a declared registry key → use it unchanged.
+      2. Else if ``topic_angle_map[topic_id]`` maps to a declared registry key → use that.
+      3. Else → return ``angle_id`` unchanged (the patch will no-op as before; never invents).
+
+    Returns ``(resolved_angle_id, source_tag)``. Deterministic; no randomization, no I/O beyond
+    the cached registry load.
+    """
+    aid = (angle_id or "").strip()
+    tid = (topic_id or "").strip()
+    if not aid:
+        return aid, "empty"
+    try:
+        from phoenix_v4.planning.angle_resolver import load_angle_registry
+
+        reg = load_angle_registry()
+    except Exception:
+        return aid, "registry_load_failed"
+    angles_root = reg.get("angles") or {}
+    if aid in angles_root:
+        return aid, "already_registry_key"
+    topic_map = (reg.get("catalog_planner_resolution") or {}).get("topic_angle_map") or {}
+    mapped = topic_map.get(tid)
+    if mapped and str(mapped) in angles_root:
+        return str(mapped), "topic_angle_map"
+    return aid, "unresolved_catalog_slug"
+
+
 def _resolved_runtime_format_id(args: argparse.Namespace, format_plan_dict: dict) -> str:
     """Unify CLI / plan runtime id. Stage-2 ``to_compiler_input()`` uses ``format_runtime_id``; some paths use ``runtime_format_id``."""
     cli = (getattr(args, "runtime_format", None) or "").strip()
@@ -674,6 +836,7 @@ def _run_spine_pipeline_mode(
     from phoenix_v4.rendering.book_renderer import (
         chapter_flow_gate_report,
         clean_for_delivery,
+        ensure_chapter_flow_cues,
         strengthen_rendered_spine_manuscript,
     )
     from phoenix_v4.rendering.golden_chapter_synthesis import dedupe_scene_furniture_book
@@ -764,7 +927,19 @@ def _run_spine_pipeline_mode(
     fmt_spec = load_format_spec(runtime_fmt, repo_root)
     beatmap = compile_beatmap(shaped_spine, engines_data, fmt_spec, repo_root)
 
-    _spine_angle_id = str(book_spec_for_compiler.get("angle_id") or "").strip()
+    # Blocker 4 (angle_journey 0% coverage, 2026-06-17): resolve the raw catalog angle slug
+    # (e.g. "false_alarm") to its registry journey-concept key (e.g. "INVISIBLE_THRESHOLD" via
+    # catalog_planner_resolution.topic_angle_map) BEFORE the angle-journey patch + gate, so the
+    # 5-layer progression is found and ANGLE_DEFINITION/ANGLE_CALLBACK slots are actually injected
+    # (≥80% chapters). Without this the slug missed the registry → 0 angle slots → book_pass FAIL.
+    _spine_angle_raw = str(book_spec_for_compiler.get("angle_id") or "").strip()
+    _spine_angle_id, _spine_angle_src = _resolve_angle_journey_id(_spine_angle_raw, topic_id)
+    if _spine_angle_id != _spine_angle_raw:
+        print(
+            f"Angle journey resolution: {_spine_angle_raw!r} → {_spine_angle_id!r} "
+            f"(source={_spine_angle_src}, topic={topic_id}).",
+            file=sys.stderr,
+        )
     _angle_layer_by_ch: dict[int, int] = {}
     _angle_journey_warnings: list[str] = []
     if _spine_angle_id:
@@ -981,16 +1156,26 @@ def _run_spine_pipeline_mode(
     # it always applies in spine mode and trims the book back to cap_word_target (22000 for
     # standard_book) so render accounting matches the gate. Trims only — never pads.
     _runtime_word_ceiling = _load_runtime_word_ceiling(runtime_fmt, repo_root)
+    # Blocker 1 (2026-06-17): reserve a small word budget under the ceiling for the post-clamp
+    # ensure_chapter_flow_cues pass so its (short) clear-point/transition guarantee sentences do
+    # not push the book back over the ceiling. Bounded so it never trims the book more than ~10%.
+    _cue_reserve = min(_n_chapters * 30, max(0, (_runtime_word_ceiling or 0) // 10))
     if _runtime_word_ceiling:
         prose, _pre_clamp_words, _post_clamp_words = _clamp_book_to_word_ceiling(
-            prose, _runtime_word_ceiling
+            prose, _runtime_word_ceiling, reserve=_cue_reserve
         )
         if _post_clamp_words < _pre_clamp_words:
             print(
                 f"Book word ceiling clamp applied: {_pre_clamp_words} → {_post_clamp_words} words "
-                f"(ceiling {_runtime_word_ceiling}w, runtime={runtime_fmt})",
+                f"(ceiling {_runtime_word_ceiling}w, reserve {_cue_reserve}w, runtime={runtime_fmt})",
                 file=sys.stderr,
             )
+    # Blocker 1 (2026-06-17): FINAL chapter_flow cue pass — runs AFTER all truncation (clamp +
+    # per-chapter cap) so the appended clear-point / transition guarantee sentences cannot be
+    # clamped away. Word-bounded (see ensure_chapter_flow_cues); only fixes the same fixable
+    # errors (MISSING_CLEAR_POINT / WEAK_TRANSITIONS) the in-render glue pass targets. The
+    # chapter_flow gate below remains the arbiter; this only strengthens the OUTPUT.
+    prose = ensure_chapter_flow_cues(prose, flow_profile=_flow_profile, seed=seed)
     # Default cap is sourced from config/quality/scene_anchor_density_config.yaml.
     # Authored plans (config/plans/*.yaml) may override per-chapter via
     # scene_plan.scene_anchor_cap; the min() across chapters means any chapter that
@@ -1002,6 +1187,21 @@ def _run_spine_pipeline_mode(
         int((ch.scene_plan or {}).get("scene_anchor_cap", _scene_anchor_default_cap))
         for ch in book_plan.chapters
     )
+    # Blocker 2 (A1-generalize, 2026-06-17): reduce any 4–8 word n-gram that exceeds the
+    # per-chapter scene_anchor cap BEFORE the gate runs. Generalizes _DIRECTION_CAP_PER_CHAPTER
+    # (bridge-bank directions only) and dedupe_scene_furniture_book (closed allowlist only) to
+    # the full set the gate measures — HOOK lead-ins, un-allowlisted furniture variants, topic
+    # restatements. Strengthens output only; the gate + its cap are unchanged and still decide.
+    prose, _scene_anchor_reduce_notes = _reduce_scene_anchor_density(prose, scene_anchor_cap)
+    if _scene_anchor_reduce_notes:
+        _governance_report.setdefault("scene_anchor_density_reduce_notes", []).extend(
+            _scene_anchor_reduce_notes
+        )
+        print(
+            f"Scene anchor density reducer: trimmed {len(_scene_anchor_reduce_notes)} "
+            f"over-cap phrase occurrence group(s) (cap {scene_anchor_cap}/chapter).",
+            file=sys.stderr,
+        )
     scene_anchor_violations = _scene_anchor_density_violations(prose, scene_anchor_cap)
     scene_anchor_report_path = render_dir / "scene_anchor_density_report.json"
     if scene_anchor_violations:
@@ -1448,7 +1648,10 @@ def _run_spine_pipeline_mode(
                     evaluate_angle_journey_coherence,
                 )
 
-                _spine_angle = str(book_spec_for_compiler.get("angle_id") or "").strip()
+                # Blocker 4 (2026-06-17): use the registry-resolved angle id (see the patch site
+                # above) so the gate's merge_angle_journey() finds the same 5-layer progression /
+                # named_object the slots were injected from — not the raw catalog slug.
+                _spine_angle = _spine_angle_id
                 _angle_layers = dict(
                     (enriched.spine_context or {}).get("angle_layer_by_chapter") or {}
                 )

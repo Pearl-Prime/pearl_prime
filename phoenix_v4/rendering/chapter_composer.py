@@ -2612,8 +2612,14 @@ def _strengthen_opening_chapter_flow(
 ) -> list[str]:
     """Guarantee a detectable clear-point (Ch1) and transition floor (Ch2).
 
-    Only mutates chapters 0 and 1. Returns ``parts`` (possibly with 1-2 appended
-    sentences). Deterministic given (book_seed, chapter_index, thesis).
+    Only mutates chapters 0 and 1 on the legacy/registry compose path. Returns ``parts``
+    (possibly with 1-2 appended sentences). Deterministic given (book_seed, chapter_index,
+    thesis).
+
+    NOTE (Blocker 1, 2026-06-17): the spine pipeline strengthens chapter_flow for ALL
+    chapters via ``book_renderer.strengthen_chapter_flow_for_delivery`` (the cue-aware glue
+    selector), not through this function. The late-chapter MISSING_CLEAR_POINT /
+    WEAK_TRANSITIONS fix therefore lives there; this opening-only helper is unchanged.
     """
     if chapter_index > 1:
         return parts
