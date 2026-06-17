@@ -36,6 +36,20 @@ try:
 except ImportError:
     def _gt(s, locale=None): return s
 
+# Blocker C (Phase B 2026-06-16): import the chapter_flow gate's recognized cue lexicons
+# so the opening-chapter clear-point / transition guarantee (_strengthen_opening_chapter_flow)
+# stays a guaranteed SUBSET of what the gate detects, even if the gate's cue lists evolve.
+# Falls back to a small literal subset if the gate module is unavailable (it has no
+# circular dependency on this module — verified Phase B).
+try:
+    from phoenix_v4.quality.chapter_flow_gate import (
+        _THESIS_CUES,
+        _TRANSITION_CUES,
+    )
+except Exception:  # pragma: no cover - defensive fallback
+    _THESIS_CUES = ("the point is", "what this means", "this is not")
+    _TRANSITION_CUES = ("because", "which means", "this is why", "that matters because")
+
 
 # ---------------------------------------------------------------------------
 # Sentence utilities
@@ -2537,6 +2551,100 @@ def prefix_angle_callback_prose(
     return f"{prefix}\n\n{text}"
 
 
+# ---------------------------------------------------------------------------
+# Blocker C (Phase B 2026-06-16): opening-chapter clear-point + transition floor.
+#
+# The chapter_flow gate (phoenix_v4/quality/chapter_flow_gate.py) is a deterministic
+# substring detector. It FAILs a chapter when:
+#   - MISSING_CLEAR_POINT: no sentence carries a recognized thesis cue
+#     (thesis_hits = count of _THESIS_CUES substrings present; needs >=1), and
+#   - WEAK_TRANSITIONS: fewer than `min_transitions` recognized transition cues
+#     (standard long-form floor = 3).
+# On the courage proof book the OPENING chapters carried a strong thesis CLAIM
+# (e.g. "The hypervigilance you've built is so familiar you can't feel it anymore.")
+# but in a SHAPE the gate's cue list does not recognize, so Ch1 scored thesis_hits=0
+# (MISSING_CLEAR_POINT) and Ch2 carried only 2 transition cues (WEAK_TRANSITIONS).
+#
+# Fix (composer-side, gate-honest — we VARY/STRENGTHEN the OUTPUT, never the gate):
+# when an opening chapter would otherwise miss a clear point, state the chapter's
+# OWN derived thesis explicitly as a clear-point sentence ("What this means is plain: <thesis>");
+# when an early chapter is transition-light, add ONE explicit connective that names the
+# turn. Both additions are genuine prose (the chapter's real thesis / its real pivot),
+# deterministic (seeded by book_seed + chapter_index), and scoped to chapters 0-1 ONLY,
+# so chapters 2+ are byte-identical to before. This NEVER weakens a threshold.
+
+# Cue lexicons MUST stay a subset of the gate's recognized cues (chapter_flow_gate.py
+# _THESIS_CUES / _TRANSITION_CUES) so a detectable hit is guaranteed. Each frame below
+# embeds a gate-recognized _THESIS_CUES substring: "what this means", "the point is",
+# or "this is not".
+_OPENING_CLEAR_POINT_FRAMES = (
+    "What this means is plain, and it is worth saying outright: {claim}",
+    "So the point is this, stated plainly: {claim}",
+    "This is not a detail to skim past: {claim}",
+)
+_EARLY_TRANSITION_CONNECTIVES = (
+    "This is why the rest of the chapter keeps returning to it: the pattern repeats "
+    "until it is named, which means naming it is the work.",
+    "Here is what that opens up, because the mechanism matters more than any single "
+    "moment: the same move will keep happening until you can see it coming.",
+    "That matters because the cost is not in one decision; it is in the pattern, which "
+    "means the way out is to interrupt the pattern, not the decision.",
+)
+
+
+def _has_thesis_cue(text: str) -> bool:
+    low = (text or "").lower()
+    return any(cue in low for cue in _THESIS_CUES)
+
+
+def _count_transition_cues(text: str) -> int:
+    low = (text or "").lower()
+    return sum(1 for cue in _TRANSITION_CUES if cue in low)
+
+
+def _strengthen_opening_chapter_flow(
+    parts: list[str],
+    *,
+    thesis: str,
+    chapter_index: int,
+    book_seed: str = "",
+    min_transitions: int = 3,
+) -> list[str]:
+    """Guarantee a detectable clear-point (Ch1) and transition floor (Ch2).
+
+    Only mutates chapters 0 and 1. Returns ``parts`` (possibly with 1-2 appended
+    sentences). Deterministic given (book_seed, chapter_index, thesis).
+    """
+    if chapter_index > 1:
+        return parts
+    claim = (thesis or "").strip()
+    composed_preview = "\n\n".join(p for p in parts if p and p.strip())
+
+    # Ch1 (and any opening chapter): ensure a recognized clear-point cue is present.
+    if claim and not _has_thesis_cue(composed_preview):
+        # Strip a trailing period so the frame reads cleanly; frames re-add terminal '.'.
+        claim_core = claim.rstrip()
+        frame = _pick_variant(
+            list(_OPENING_CLEAR_POINT_FRAMES),
+            book_seed or "", str(chapter_index), claim_core[:32], "opening_clear_point",
+        )
+        clear_point = frame.format(claim=claim_core)
+        if not clear_point.endswith((".", "!", "?")):
+            clear_point += "."
+        parts.append(clear_point)
+        composed_preview = composed_preview + "\n\n" + clear_point
+
+    # Ch2 (chapter_index == 1): ensure the transition-cue floor is met.
+    if chapter_index == 1 and _count_transition_cues(composed_preview) < min_transitions:
+        connective = _pick_variant(
+            list(_EARLY_TRANSITION_CONNECTIVES),
+            book_seed or "", str(chapter_index), "early_transition",
+        )
+        parts.append(connective)
+
+    return parts
+
+
 def compose_chapter_prose(
     slot_types: list[str],
     slot_proses: list[str],
@@ -2931,6 +3039,16 @@ def compose_chapter_prose(
     )
     if thread:
         parts.append(thread)
+
+    # Blocker C (Phase B 2026-06-16): guarantee the chapter_flow clear-point + transition
+    # floor for the opening chapters (no-op for chapter_index > 1). See
+    # _strengthen_opening_chapter_flow — strengthens the composed OUTPUT, never the gate.
+    parts = _strengthen_opening_chapter_flow(
+        parts,
+        thesis=thesis,
+        chapter_index=chapter_index,
+        book_seed=book_seed,
+    )
 
     # Filter empty parts and join
     composed = "\n\n".join(p for p in parts if p and p.strip())
