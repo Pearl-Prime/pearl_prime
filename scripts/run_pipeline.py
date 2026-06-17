@@ -989,6 +989,9 @@ def _run_spine_pipeline_mode(
                 "frame": _frame,
                 "book_frame": _book_frame,
                 "book_plan_id": book_plan.plan_id,
+                # F-COHERENCE: carry the plan's bound engine so enrichment routes atoms by
+                # (topic, engine) — see enrichment_select.select_enrichment / _load_persona_atoms.
+                "engine": str(book_spec_for_compiler.get("engine") or "").strip(),
                 "atom_slot_specs": atom_slot_specs,
                 "chapter_selector_targets": _chapter_selector_targets,
                 "angle_id": _spine_angle_id,
@@ -2442,6 +2445,9 @@ def main() -> int:
         arc_topic=getattr(arc, "topic", None),
     )
     book_spec_for_compiler = {**book_spec.to_dict(), "topic_id": canonical_topic, "persona_id": canonical_persona}
+    # F-COHERENCE: surface the arc's bound engine so the spine path can route atoms by
+    # (topic, engine). Explicit so it holds regardless of BookSpec.to_dict() contents.
+    book_spec_for_compiler["engine"] = getattr(arc, "engine", "") or book_spec_for_compiler.get("engine", "")
     if getattr(args, "chapter_architecture_version", None) is not None:
         book_spec_for_compiler["chapter_architecture_version"] = int(args.chapter_architecture_version)
 

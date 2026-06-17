@@ -5,15 +5,21 @@ import re
 from phoenix_v4.rendering import golden_chapter_synthesis as gcs
 from phoenix_v4.rendering.golden_chapter_synthesis import (
     EnvironmentPhraseMemory,
+    _PLACEHOLDER_FILL_POOLS,
     _load_environment_fallback_families,
     _resolve_location_placeholders,
 )
 
 
-def _single_family_used(memory: EnvironmentPhraseMemory, chapter_index: int = 0) -> str:
-    used = memory.family_usage_by_chapter.get(chapter_index, {})
-    assert used
-    return max(used.items(), key=lambda kv: kv[1])[0]
+def _has_pool_fill(out: str, placeholder: str) -> bool:
+    """True iff the resolved text contains one of the clean fills for ``placeholder``.
+
+    F-COHERENCE: the SCENE placeholders now resolve to clean bare-noun fills (article +
+    capitalization repaired at the seam) instead of the old atmospheric-family phrases that
+    produced garbled prose. See DEVOTION_PATH_TOPIC_ENGINE_RECONCILIATION_V1_SPEC §6.
+    """
+    low = out.lower()
+    return any(fill in low for fill in _PLACEHOLDER_FILL_POOLS[placeholder])
 
 
 def test_weather_detail_varies_with_context() -> None:
@@ -49,37 +55,35 @@ def test_phrase_not_reused_within_twelve_chapters() -> None:
         seen.add(phrase)
 
 
-def test_desk_context_biases_object_or_light() -> None:
-    memory = EnvironmentPhraseMemory()
-    _resolve_location_placeholders(
-        "Your desk, keyboard, monitor, and cursor are in front of you. {weather_detail}",
-        phrase_memory=memory,
+def test_weather_detail_resolves_to_clean_light_noun() -> None:
+    # F-COHERENCE: weather_detail resolves to a clean light/weather noun, sentence-initial
+    # capitalized + articled, with no leftover braces or seam artifacts.
+    out = _resolve_location_placeholders(
+        "Your desk, keyboard, monitor, and cursor are in front of you. {weather_detail} fills the room.",
         chapter_index=1,
     )
-    fam = _single_family_used(memory, 1)
-    assert fam in {"object_grounding", "light_ambient"}
+    assert "{" not in out
+    assert _has_pool_fill(out, "{weather_detail}")
+    assert " ." not in out and "  " not in out
 
 
-def test_hallway_context_biases_interior_building() -> None:
-    memory = EnvironmentPhraseMemory()
-    _resolve_location_placeholders(
-        "In the hallway near the elevator and office carpet, {weather_detail}",
-        phrase_memory=memory,
+def test_street_name_resolves_to_clean_street_noun() -> None:
+    out = _resolve_location_placeholders(
+        "In the hallway near the elevator and office carpet, {street_name} is visible.",
         chapter_index=6,
     )
-    fam = _single_family_used(memory, 6)
-    assert fam == "interior_building"
+    assert "{" not in out
+    assert _has_pool_fill(out, "{street_name}")
+    assert "the street" not in out.lower()
 
 
-def test_window_context_biases_window_or_outside() -> None:
-    memory = EnvironmentPhraseMemory()
-    _resolve_location_placeholders(
-        "By the window glass looking outside, {street_name}",
-        phrase_memory=memory,
+def test_window_context_street_resolves_cleanly() -> None:
+    out = _resolve_location_placeholders(
+        "By the window glass looking outside, {street_name} is full of people.",
         chapter_index=4,
     )
-    fam = _single_family_used(memory, 4)
-    assert fam in {"window_reference", "outside_sound"}
+    assert "{" not in out
+    assert _has_pool_fill(out, "{street_name}")
 
 
 def test_environment_phrase_memory_blocks_exact_repeats() -> None:
@@ -111,15 +115,17 @@ def test_environment_phrase_memory_limits_family_density() -> None:
         assert window_total <= 2
 
 
-def test_chapter_phase_awareness_changes_family_distribution() -> None:
+def test_fills_vary_across_chapters() -> None:
+    # Book-wide anti-reuse (carried on the phrase memory) keeps fills varied across chapters.
     memory = EnvironmentPhraseMemory()
-    _resolve_location_placeholders("Desk and threshold cues. {weather_detail}", phrase_memory=memory, chapter_index=1)
-    _resolve_location_placeholders("Body contact and room sound. {weather_detail}", phrase_memory=memory, chapter_index=8)
-    _resolve_location_placeholders("Quiet integration by the glass. {weather_detail}", phrase_memory=memory, chapter_index=11)
-    fam1 = _single_family_used(memory, 1)
-    fam8 = _single_family_used(memory, 8)
-    fam12 = _single_family_used(memory, 11)
-    assert len({fam1, fam8, fam12}) >= 2
+    outs = [
+        _resolve_location_placeholders(
+            "Cues here. {weather_detail}.", phrase_memory=memory, chapter_index=i
+        )
+        for i in (1, 8, 11)
+    ]
+    assert len(set(outs)) >= 2
+    assert all("{" not in o for o in outs)
 
 
 def test_broken_merge_phrase_resolves_cleanly() -> None:

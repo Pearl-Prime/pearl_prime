@@ -1799,18 +1799,28 @@ def select_enrichment(
     )
     pid = (persona_id or "").strip()
     locale = request.locale
+    # F-COHERENCE (DEVOTION_PATH_TOPIC_ENGINE_RECONCILIATION_V1_SPEC §6): route atom
+    # selection by the plan's bound engine — (topic, engine), not topic alone. The engine
+    # arrives via spine_context (run_pipeline sets it from arc.engine). It (a) filters the
+    # STORY engine-bank pool to that engine in _load_persona_atoms and (b) is folded into
+    # the selection seed so every (topic, engine) draws its own deterministic pick from the
+    # shared topic-level pools (HOOK/SCENE/REFLECTION/…). Without it, engine-LEGAL siblings
+    # (e.g. burnout__overwhelm vs burnout__grief) rendered byte-identical prose.
+    engine = str((request.spine_context or {}).get("engine") or "").strip()
+    if engine:
+        seed = f"{seed}:engine:{engine}"
     rf_bm = (bm.runtime_format or "").strip()
     if rf_bm == "deep_book_6h" and pid:
         persona_atoms = _merged_persona_atoms_deep_6h(pid, topic, root, locale=locale)
         # Supplement with remaining slot types (REFLECTION, EXERCISE, etc.) from the
         # primary persona. _merged_persona_atoms_deep_6h only merges HOOK/SCENE/STORY;
         # beatmap slots like the second REFLECTION (slot_index=6) need persona atoms too.
-        _primary_atoms = _load_persona_atoms(pid, topic, locale=locale)
+        _primary_atoms = _load_persona_atoms(pid, topic, locale=locale, engine=engine)
         for _st, _atoms in _primary_atoms.items():
             if _st not in persona_atoms and _atoms:
                 persona_atoms[_st] = _atoms
     elif pid:
-        persona_atoms = _load_persona_atoms(pid, topic, locale=locale)
+        persona_atoms = _load_persona_atoms(pid, topic, locale=locale, engine=engine)
     else:
         persona_atoms = {}
 

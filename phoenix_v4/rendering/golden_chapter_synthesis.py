@@ -76,6 +76,35 @@ _PLACEHOLDER_FAMILY_MAP: dict[str, tuple[str, ...]] = {
     "{street_name}": ("outside_sound", "window_reference"),
     "{transit_line}": ("motion_transit",),
 }
+# F-COHERENCE SCENE repair (DEVOTION_PATH_TOPIC_ENGINE_RECONCILIATION_V1_SPEC §6).
+# The 3 SCENE placeholders are mid-sentence BARE-NOUN location slots — the atom template
+# supplies the surrounding grammar, e.g. "{weather_detail} on the windshield.",
+# "{street_name} is visible forty floors down.", "on the {transit_line}". The old
+# atmospheric-family bank filled them with full sentences (shape=sentence/object_led/
+# motion_led) and with machine-garbled phrases ("Soft an engine note from outside",
+# "...holds steady moves through the room"), so injecting at the slot produced orphan
+# fragments ("...moves through the room. on the windshield.") and doubled verbs. We now
+# fill each slot with a clean bare common noun and repair the seam (article +
+# capitalization) — grammatical in every observed template context.
+_PLACEHOLDER_FILL_POOLS: dict[str, tuple[str, ...]] = {
+    "{weather_detail}": (
+        "light", "gray light", "pale light", "cold light", "flat daylight",
+        "morning light", "afternoon light", "dim light", "thin light",
+        "low light", "soft light", "muted light",
+    ),
+    # No bare "street" — the literal "the street" is too generic (and a long-standing
+    # contract; see tests/test_environment_fallback.py::test_street_name_never_raw_the_street).
+    "{street_name}": (
+        "avenue", "block", "intersection", "boulevard", "cross street",
+        "side street", "road", "plaza", "sidewalk", "city block", "corner", "crosswalk",
+    ),
+    # No bare "train" — keep the line/car specific (contract:
+    # tests/test_environment_fallback.py::test_transit_line_never_bare_train).
+    "{transit_line}": (
+        "subway", "subway car", "carriage", "metro", "express", "local",
+        "downtown line", "uptown line", "commuter rail", "shuttle", "tram", "monorail",
+    ),
+}
 _CONTEXT_FAMILY_HINTS: tuple[tuple[tuple[str, ...], tuple[str, ...]], ...] = (
     (("desk", "keyboard", "screen", "monitor", "cursor"), ("object_grounding", "light_ambient")),
     (("window", "glass", "outside"), ("window_reference", "outside_sound")),
@@ -410,44 +439,65 @@ def _resolve_location_placeholders(
     phrase_memory: EnvironmentPhraseMemory | None = None,
     chapter_index: int = 0,
 ) -> str:
-    """Fill location placeholders with ambient family phrases and anti-reuse memory."""
+    """Fill SCENE location placeholders with clean bare-noun fills + grammatical seam repair.
+
+    The 3 placeholders ({weather_detail}/{street_name}/{transit_line}) are mid-sentence
+    bare-noun slots; the atom template supplies the surrounding grammar. Each is filled with a
+    clean common noun chosen deterministically (context-hashed, no immediate repeat for the
+    same placeholder type), and the seam gets the article / capitalization it needs. This
+    replaces the old atmospheric-family bank, which injected full sentences and machine-garbled
+    phrases into these slots and produced orphan fragments + doubled verbs (F-COHERENCE; see
+    DEVOTION_PATH_TOPIC_ENGINE_RECONCILIATION_V1_SPEC §6). ``phrase_memory``/``chapter_index``
+    are retained for signature/caller compatibility; cross-atom variety comes from context
+    hashing. The legacy family selector (_choose_environment_entry et al.) is left in place but
+    no longer drives these placeholders.
+    """
     t = text or ""
     if not t:
         return t
     chapter_index = max(0, int(chapter_index))
-    families_payload = _load_environment_fallback_families().get("families", {})
-    if not isinstance(families_payload, dict):
-        families_payload = _DEFAULT_ENV_FALLBACKS["families"]
-    memory = phrase_memory or EnvironmentPhraseMemory()
     t = _BROKEN_STREET_MERGE_RE.sub("{street_name}", t)
-    paragraph_index = 0
 
+    # Book-wide anti-reuse carried on the phrase memory (keyed per placeholder type) so the
+    # same fill is not repeated across atoms/chapters; a fresh memory when none was passed.
+    memory = phrase_memory or EnvironmentPhraseMemory()
+    used_book = memory.used_phrases_book
+    occ = 0
     while True:
         match = _FALLBACK_PLACEHOLDER_RE.search(t)
         if not match:
             break
-        start = max(0, match.start() - 220)
-        end = min(len(t), match.end() + 220)
-        context = t[start:end]
-        paragraph_index = context.count("\n\n")
-        family_candidates = _PLACEHOLDER_FAMILY_MAP.get(match.group(0), ("object_grounding",))
-        chosen = _choose_environment_entry(
-            families_payload=families_payload,
-            family_candidates=family_candidates,
-            context_text=context,
-            chapter_index=chapter_index,
-            paragraph_index=paragraph_index,
-            memory=memory,
-        )
-        memory.register(
-            chapter_index=chapter_index,
-            paragraph_index=paragraph_index,
-            family=str(chosen["family"]),
-            shape=str(chosen["shape"]),
-            phrase=str(chosen["text"]),
-            roots=[str(r) for r in chosen.get("roots", [])],
-        )
-        t = t[: match.start()] + str(chosen["text"]) + t[match.end() :]
+        ph = match.group(0)
+        pool = _PLACEHOLDER_FILL_POOLS.get(ph) or ("the moment",)
+        # Deterministic, context-varied pick; skip a fill already used for this placeholder
+        # type so "{weather_detail} outside. {weather_detail} outside." varies.
+        left_ctx = t[max(0, match.start() - 60): match.start()]
+        seed_src = f"{chapter_index}|{ph}|{occ}|{left_ctx}"
+        idx = int(hashlib.sha256(seed_src.encode("utf-8")).hexdigest(), 16) % len(pool)
+        fill = pool[idx]
+        for _ in range(len(pool)):
+            if f"{ph}|{fill}" not in used_book:
+                break
+            idx = (idx + 1) % len(pool)
+            fill = pool[idx]
+        used_book.add(f"{ph}|{fill}")
+        occ += 1
+
+        # Seam repair: supply "the " unless the template already has a determiner, and
+        # capitalize when the slot opens a sentence.
+        j = match.start()
+        while j > 0 and t[j - 1] in " \t":
+            j -= 1
+        k = j
+        while k > 0 and t[k - 1].isalpha():
+            k -= 1
+        prev_word = t[k:j].lower()
+        sentence_initial = (j == 0) or (t[j - 1] in ".!?\n\r")
+        if prev_word not in ("the", "a", "an"):
+            fill = "the " + fill
+        if sentence_initial:
+            fill = fill[:1].upper() + fill[1:]
+        t = t[: match.start()] + fill + t[match.end():]
 
     for pattern, repl in _BROKEN_MERGE_REPAIRS:
         t = pattern.sub(repl, t)

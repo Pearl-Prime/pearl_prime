@@ -387,6 +387,7 @@ def _load_persona_atoms(
     persona_id: str,
     topic_id: str,
     locale: Optional[str] = None,
+    engine: Optional[str] = None,
 ) -> dict[str, list[dict]]:
     """Load persona-specific atoms from atoms/{persona}/{topic}/{type}/CANONICAL.txt.
 
@@ -394,12 +395,23 @@ def _load_persona_atoms(
 
     Engine-bank atoms (atoms/{persona}/{topic}/{engine}/CANONICAL.txt with named-character
     content) are PREPENDED to atoms["STORY"] before generic atoms/{persona}/{topic}/STORY/
-    CANONICAL.txt content. Selection in enrichment_select._try_persona_content uses a
-    seeded-pseudorandom index over the merged pool (not pure list order), but because
-    engine atoms typically outnumber generic STORY atoms ~7:1 (7 engines × ~20-50 variants
-    vs ~20 generic), the probabilistic bias still favors named-character engine content
-    for all 14 personas with engine-dir coverage. Closes the engine-bank-to-grid wiring
-    chain started by PR #669 (which changed SOMATIC_10_SLOT_GRID sec 2/5/9 to STORY).
+    CANONICAL.txt content.
+
+    F-COHERENCE (DEVOTION_PATH_TOPIC_ENGINE_RECONCILIATION_V1_SPEC §6): when ``engine`` is
+    supplied (the plan's bound engine, e.g. ``overwhelm`` vs ``grief``), the STORY pool is
+    routed to **that engine only** — i.e. keyed on (topic, engine), not topic alone. Without
+    this, every engine dir was merged into one bucket, so two engine-LEGAL plans with the
+    same persona+topic (e.g. burnout__overwhelm vs burnout__grief) drew the identical merged
+    pool and, under the same seed, rendered byte-identical prose (the re-point #1682 was
+    legal-but-cosmetic). Routing by engine also stops a single book from mixing named-character
+    stories drawn from a forbidden sibling engine.
+
+    Backward-compatible: when ``engine`` is None/empty, OR the requested engine has no dir on
+    disk for this (persona, topic), the previous all-engines-merged behavior is preserved so
+    STORY never silently empties. Each engine atom is tagged with its ``engine`` for trace.
+    Selection in enrichment_select._try_persona_content uses a seeded-pseudorandom index over
+    the resulting pool. Closes the engine-bank-to-grid wiring chain started by PR #669 (which
+    changed SOMATIC_10_SLOT_GRID sec 2/5/9 to STORY).
 
     Engine dirs are detected by exclusion against _KNOWN_SLOT_DIRS — this fixes the prior
     bug where midlife_women's UPPERCASE engine names (COMPARISON, GRIEF, OVERWHELM, SHAME)
@@ -415,7 +427,9 @@ def _load_persona_atoms(
         return {}
 
     atoms: dict[str, list[dict]] = {}
-    engine_story_atoms: list[dict] = []
+    # Engine-bank STORY atoms collected per engine name (lowercased) so we can route by
+    # the plan's bound engine (F-COHERENCE) instead of merging every engine together.
+    engine_atoms_by_name: dict[str, list[dict]] = {}
 
     for sub in persona_root.iterdir():
         if not sub.is_dir():
@@ -434,16 +448,34 @@ def _load_persona_atoms(
             atoms[slot_type_upper] = parsed
         else:
             # Engine dir (e.g. overwhelm, grief, shame, OVERWHELM, EMBODIMENT_V01_*) —
-            # collect into a single bucket and prepend to STORY at the end.
-            engine_story_atoms.extend(parsed)
+            # bucket per engine so the plan engine can route STORY by (topic, engine).
+            engine_name = sub.name.lower()
+            for _a in parsed:
+                # Tag with engine for downstream trace / selection (idempotent).
+                if isinstance(_a, dict):
+                    _a.setdefault("engine", engine_name)
+            engine_atoms_by_name.setdefault(engine_name, []).extend(parsed)
+
+    # Route the engine-bank STORY pool to the requested engine when present (F-COHERENCE).
+    # Fall back to all-engines-merged when no engine is requested or the engine dir is
+    # absent, so STORY never empties (backward-compatible).
+    requested_engine = (engine or "").strip().lower()
+    if requested_engine and engine_atoms_by_name.get(requested_engine):
+        engine_story_atoms = list(engine_atoms_by_name[requested_engine])
+        engine_route = requested_engine
+    else:
+        engine_story_atoms = [a for pool in engine_atoms_by_name.values() for a in pool]
+        engine_route = "ALL" if not requested_engine else f"{requested_engine}->ALL(missing)"
 
     if engine_story_atoms:
         atoms["STORY"] = engine_story_atoms + atoms.get("STORY", [])
 
     if atoms:
         logger.info(
-            "Loaded %d persona atom types for '%s/%s' locale=%s (engine-bank STORY atoms: %d)",
-            len(atoms), persona_id, topic_id, locale or "en-US", len(engine_story_atoms),
+            "Loaded %d persona atom types for '%s/%s' locale=%s engine=%s "
+            "(engine-bank STORY atoms: %d; available engines: %s)",
+            len(atoms), persona_id, topic_id, locale or "en-US", engine_route,
+            len(engine_story_atoms), ",".join(sorted(engine_atoms_by_name)) or "none",
         )
     return atoms
 
