@@ -1,72 +1,66 @@
-series_plan_schema: "1.0.0"
-created_at: "2026-04-24"
+series_plan_schema: 1.0.0
+created_at: '2026-04-24'
 locale: en_US
 book_id_prefix: digital_ground__miki__gen_alpha_students__financial_anxiety
-
 brand: digital_ground
 teacher: miki
 persona: gen_alpha_students
 topic: financial_anxiety
-
 teacher_topic_score: 0.9
 teacher_persona_score: 0.85
 composite_fit: 0.88
-
 arc:
   installment_1:
-    book_id: digital_ground__miki__gen_alpha_students__financial_anxiety__false_alarm
-    engine: false_alarm
-    master_arc: config/source_of_truth/master_arcs/gen_alpha_students__financial_anxiety__false_alarm__F006.yaml
-    duration: standard_book_60min
-  installment_2:
     book_id: digital_ground__miki__gen_alpha_students__financial_anxiety__overwhelm
     engine: overwhelm
     master_arc: config/source_of_truth/master_arcs/gen_alpha_students__financial_anxiety__overwhelm__F006.yaml
     duration: standard_book_60min
-  installment_3:
+  installment_2:
     book_id: digital_ground__miki__gen_alpha_students__financial_anxiety__spiral
     engine: spiral
     master_arc: config/source_of_truth/master_arcs/gen_alpha_students__financial_anxiety__spiral__F006.yaml
     duration: standard_book_60min
-
-reader_promise_family: >
+  installment_3:
+    book_id: digital_ground__miki__gen_alpha_students__financial_anxiety__shame
+    engine: shame
+    master_arc: config/source_of_truth/master_arcs/gen_alpha_students__financial_anxiety__shame__F006.yaml
+    duration: standard_book_60min
+reader_promise_family: |
   3 books across engines of financial_anxiety via the gen-z native, screen-literate, ironic without cynical voice.
-
 bestseller_hook_family: recognition_descent
 emotional_engine: financial_anxiety_recognition
-
 comp_series:
-  - "Mind Over Money (Klontz)"
-  - "Your Money or Your Life (Robin/Dominguez)"
-  - "The Soul of Money (Twist)"
-
+- Mind Over Money (Klontz)
+- Your Money or Your Life (Robin/Dominguez)
+- The Soul of Money (Twist)
 platform_strategy:
-  primary: [kdp_ebook, audible]
-  secondary: [apple_books, google_play, spotify_audiobooks]
+  primary:
+  - kdp_ebook
+  - audible
+  secondary:
+  - apple_books
+  - google_play
+  - spotify_audiobooks
   launch_platform: kdp_ebook
   cadence:
     release_spacing_days: 14
     max_books_per_brand_per_month: 2
-
 reader_avatar:
-  age: "11–17"
-  where_they_are: >
+  age: 11–17
+  where_they_are: |
     Between classes, bathroom stall, phone glowing.
-  what_they_need: >
+  what_they_need: |
     Words that feel like their own language.
-  what_they_avoid: >
+  what_they_avoid: |
     Adult register. Worksheets.
-
 series_voice_markers:
-  register: "gen-z native, screen-literate, ironic without cynical"
-  sentence_rhythm: "short, direct, screen-paced"
-  metaphor_family: "interface, signal, glow"
+  register: gen-z native, screen-literate, ironic without cynical
+  sentence_rhythm: short, direct, screen-paced
+  metaphor_family: interface, signal, glow
   second_person_default: true
-
 main_character_name: Finch
-main_character_role: "high school student"
+main_character_role: high school student
 main_character_image_path: null
 main_character_lora_id: finch_dg_us
 main_character_trigger_word: finch_dg_us
-
 plan_source_path: config/manga/manga_brand_series_plan.yaml
