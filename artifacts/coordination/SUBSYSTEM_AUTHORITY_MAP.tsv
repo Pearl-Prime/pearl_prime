@@ -5,7 +5,7 @@ teacher_mode	docs/SYSTEMS_V4.md;specs/PHOENIX_V4_5_WRITER_SPEC.md	SOURCE_OF_TRUT
 manga_pipeline	specs/AI_MANGA_PIPELINE_SUMMARY.md;docs/MANGA_IMPLEMENTATION_OUTLINE.md	config/manga/gate_registry.yaml;schemas/manga/	Pearl_Dev	active
 pearl_news	docs/PEARL_NEWS_WRITER_SPEC.md;docs/research/PEARL_NEWS_QWEN_DEEP_RESEARCH_ENGINE.md	pearl_news/config/;pearl_news/prompts/	Pearl_News	active
 translation	config/localization/quality_contracts/README.md;docs/DOCS_INDEX.md	config/localization/locale_registry.yaml;config/localization/quality_contracts/	Pearl_Localization	active
-video_pipeline	config/video/;scripts/video/README.md	config/video/render_params.yaml;config/video/upload_config.yaml;config/video/audiobook_style.yaml;config/video/format_specs.yaml;config/release_velocity/video_cadence.yaml	Pearl_Video	active
+video_pipeline	config/video/;scripts/video/README.md;docs/specs/PEARL_VIDEO_BEAT_DRIVEN_NARRATIVE_PIPELINE_V1_SPEC.md;docs/specs/PEARL_VIDEO_FRAME_SELECTOR_BEST_OF_V1_SPEC.md	config/video/render_params.yaml;config/video/upload_config.yaml;config/video/audiobook_style.yaml;config/video/format_specs.yaml;config/release_velocity/video_cadence.yaml	Pearl_Video	active
 ei_v2	phoenix_v4/quality/ei_v2/;docs/DOCS_INDEX.md	config/quality/ei_v2_config.yaml	Pearl_Research	active
 trend_feeds	docs/TREND_FEED_INTEGRATION_STRATEGY.md;scripts/feeds/	config/trend_keywords/;scripts/feeds/budget_guard.py	Pearl_Int	active
 recommendations	config/recommender/;docs/DOCS_INDEX.md	config/recommender/scoring_weights.yaml;config/recommender/hard_gates.yaml	Pearl_PM	backlog
