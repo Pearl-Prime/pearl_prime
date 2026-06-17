@@ -78,7 +78,7 @@ registry_id: music_brand_registry
 owner: pearl_brand
 archetype: music_mode
 id_space_start: 38
-last_updated: 2026-05-09
+last_updated: 2026-06-12
 
 path_x_boundary:
   description: |
@@ -124,3 +124,24 @@ music_brands:
       Schema-only template entry (inactive). Replaced/joined by real musician
       brands once the wizard + survey-save flow lands under the separate ws rows
       noted in this file's header. DO NOT use as a canonical brand binding.
+
+  # Ahjan — ZEROTH / REFERENCE music-mode kit (first real entry).
+  #   Cap:   MUSIC-ONBOARDING-SONG-KIT-V1-01 (docs/PEARL_ARCHITECT_STATE.md)
+  #   Spec:  docs/specs/MUSIC_ONBOARDING_SONG_KIT_V1_SPEC.md §4 (Ahjan first/reference kit)
+  #   Bank:  SOURCE_OF_TRUTH/musician_banks/ahjan/ (profile/themes/voice_profile + 6 slot pools)
+  #   Seed:  SOURCE_OF_TRUTH/teacher_banks/ahjan/ corpus (reuse-not-greenfield; spec §4.2)
+  # brand_id slug per Q2 (<musician_handle>_music). status=active per Q4 (survey YAML present
+  # on disk — survey_yaml_pointer resolves; NO silent-mint, anti-drift invariant #2). This is the
+  # internal gold reference; it does NOT collapse V2's open Q-MM-V2-FIRST-REAL-MUSICIAN-01
+  # (operator-only Q-MSK-AHJAN-VS-V2-FIRST-01; spec §4.3).
+  - brand_id: ahjan_music
+    musician_handle: ahjan
+    archetype: meditative_ambient_healer
+    mode: music
+    status: active
+    survey_yaml_pointer: artifacts/musician_survey/ahjan_survey.yaml
+    created: 2026-06-12
+    notes: |
+      Zeroth/reference song-kit seeded from the operator's own teaching corpus
+      (teacher_banks/ahjan/). Gold exemplar of the survey -> 6-pool flow. Reference
+      kit only; distinct from V2's open first-real-external-musician question.

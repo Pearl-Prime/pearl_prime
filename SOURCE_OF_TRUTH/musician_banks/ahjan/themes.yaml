@@ -1,0 +1,22 @@
+# Ahjan music-mode bank — themes.yaml (REFERENCE kit, V1).
+# Shape matches survey_derivation.survey_to_themes_yaml() over ../../survey/ahjan_survey.yaml.
+# Mirrors test_artist_alpha/themes.yaml with REAL Ahjan corpus content.
+#
+# Family mapping (config/music/song_kit_topic_families.yaml — additive grouping, spec §2):
+#   - presence_and_stillness   (overthinking, sleep_anxiety)  <- "presence", "noticing without correcting"
+#   - recovery_and_repair      (burnout, compassion_fatigue)  <- "the cost of bracing"
+#   - quiet_courage            (courage, boundaries)          <- "standing down", "beginning again"
+#   - hope_and_renewal         (depression)                   <- "suffering as information, not punishment"
+#   These are CONSUMED labels; this file does NOT mint topic_ids (anti-drift).
+primary_themes:
+  - presence (returning to the body that is already here)
+  - the cost of bracing (a war that is not happening)
+  - noticing without correcting
+  - beginning again (beginner-mind is not failure)
+  - suffering as information, not punishment
+avoided_themes:
+  - spiritual triumph / catharsis as the goal
+  - manifesting outcomes / guaranteed results
+  - music as karma-fuel (love-loss, rage, conquest) — Dharma not karma
+  - devotional dogma without lived practice
+listener_hope_one: That you can stand down for one breath — the war is not happening right now.
