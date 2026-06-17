@@ -82,6 +82,12 @@ assignments:
     default_author: null
     # No default: use --author explicitly or teacher-only book.
 
+  # ─── BRAND: devotion_path (teacher: sai_ma) — imprint "Open Vessel Press" ───
+  # Teacher-bylined devotional brand: byline "Sai Maa" (the teacher). Resolved when --teacher sai_ma
+  # routes brand_id -> devotion_path (resolve_brand_for_teacher). author entry: config/author_registry.yaml.
+  - brand_id: devotion_path
+    default_author: sai_ma
+
   # Example: assign default author per brand when books are author-bound
   # - brand_id: brand_zen_daily
   #   default_author: luna_hart

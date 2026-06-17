@@ -41,6 +41,37 @@ def _default_brand() -> str:
     return "phoenix"
 
 
+def resolve_brand_for_teacher(
+    teacher_id: str,
+    matrix_path: Optional[Path] = None,
+) -> Optional[str]:
+    """Return the home brand_id for an explicit teacher (brand whose primary_teacher == teacher_id).
+
+    Teacher Mode is 1-teacher-per-brand (teacher_brand_lane_assignments.yaml), so when the caller
+    passes --teacher explicitly the book belongs to that teacher's brand — e.g. sai_ma -> devotion_path
+    (imprint "Open Vessel Press", author "Sai Maa"). Without this, brand falls to the topic/persona
+    default and a teacher's books mis-resolve to another brand's imprint/author. Returns None when the
+    teacher has no home brand in brand_teacher_matrix.yaml.
+    """
+    if not teacher_id:
+        return None
+    path = matrix_path or BRAND_TEACHER_MATRIX_PATH
+    if not path.exists():
+        return None
+    try:
+        import yaml
+        data = yaml.safe_load(path.read_text()) or {}
+        brands = data.get("brands") or {}
+        if not isinstance(brands, dict):
+            return None
+        for brand_id, meta in brands.items():
+            if isinstance(meta, dict) and (meta.get("primary_teacher") or "") == teacher_id:
+                return str(brand_id)
+    except Exception:
+        return None
+    return None
+
+
 def resolve_teacher_brand(
     topic_id: str = "",
     persona_id: str = "",

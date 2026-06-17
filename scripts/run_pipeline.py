@@ -2321,6 +2321,14 @@ def main() -> int:
     )
     teacher_id = requested_teacher or "default_teacher"
     brand_id = resolved_brand
+    # Teacher Mode: an explicit --teacher routes to that teacher's home brand (brand follows teacher),
+    # so e.g. --teacher sai_ma -> devotion_path (imprint "Open Vessel Press", author "Sai Maa") instead
+    # of the topic/persona default. 1-teacher-per-brand per teacher_brand_lane_assignments.yaml.
+    if requested_teacher:
+        from phoenix_v4.planning.teacher_brand_resolver import resolve_brand_for_teacher
+        _home_brand = resolve_brand_for_teacher(requested_teacher)
+        if _home_brand:
+            brand_id = _home_brand
     if teacher_id and teacher_id != "default_teacher":
         from phoenix_v4.planning.teacher_matrix import load_teacher_matrix, validate_teacher_assignment
         matrix = load_teacher_matrix()

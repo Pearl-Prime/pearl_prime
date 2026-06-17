@@ -151,6 +151,19 @@ authors:
     assets_path: assets/authors/iris_tam
     status: draft
 
+  # ─── BRAND: devotion_path (teacher: sai_ma) — imprint "Open Vessel Press" ───
+  # Teacher-bylined devotional brand: the byline IS the teacher (real teacher, Jagadguru / Vishnuswami
+  # lineage). Grounded in SOURCE_OF_TRUTH/teacher_banks/sai_ma/doctrine/doctrine.yaml. status: draft —
+  # OPERATOR REVIEW required to confirm biographical/lineage claims before ship.
+  sai_ma:
+    pen_name: "Sai Maa"
+    brand_id: devotion_path
+    persona_ids: []
+    topic_ids: []
+    positioning_profile: devotional_companion
+    assets_path: assets/authors/sai_ma
+    status: draft
+
 # Resolution rule (Option B): Author registry is for pre-intro/asset resolution only.
 # Atoms remain persona/topic keyed. No author_id on atoms; no author-scoped atom pool.
 # When --author is set: use this registry only to resolve bio, why_this_book, authority_position,
