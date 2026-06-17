@@ -1,0 +1,38 @@
+# requirements-eval.txt — Phoenix Omega agent-eval harness (self-hosted, local-judge).
+#
+# Phase-2 of PRJ-AGENT-SYSTEM-IMPROVEMENT-V2 / ws_agent_eval_harness_deepeval_agentevals_20260612.
+# Authority: docs/specs/AGENT_SYSTEM_IMPROVEMENT_V2_SPEC.md §3.2 (ratified default eval stack)
+#            + §6 (Tier-2: local Gemma/Qwen judge via Ollama, ZERO paid LLM API).
+#
+# DO NOT install the full set unattended just to satisfy CI. The DRY-RUN /
+# --check path of scripts/eval/skill_eval_runner.py needs only `pyyaml` (already
+# pinned in the repo-root requirements.txt). The heavier deps below (deepeval /
+# agentevals / openai client) are required ONLY for the --judge (live) path,
+# which talks to a LOCAL Ollama endpoint, never a cloud API.
+#
+# Install (operator-present or self-hosted CI runner):
+#   pip install -r scripts/eval/requirements-eval.txt
+#
+# TIER-2 NOTE: `openai` here is the OpenAI-compatible CLIENT library only; it is
+# pointed at the local Ollama endpoint (GEMMA_BASE_URL / QWEN_BASE_URL), exactly
+# as already sanctioned in config/governance/banned_llm_patterns.yaml
+# (openai_api_cloud rule, line_allow_substrings: ollama / 11434 / *_BASE_URL).
+# It is NEVER used against api.openai.com.
+
+# --- Required for ALL modes (dry-run, --check, judged) ---
+pyyaml>=5.0            # case-dataset + judge-config parsing (also pinned in repo-root requirements.txt)
+
+# --- Ratified primary eval stack (§3.2) — needed for --judge ---
+deepeval>=1.0.0       # Apache-2.0; 50+ metrics (answer_relevancy, faithfulness, ...)
+agentevals>=0.0.5     # MIT; ready-made plan/tool-path trajectory evaluators
+
+# --- Local-judge client (Tier-2; Ollama OpenAI-compatible endpoint ONLY) ---
+openai>=1.0           # client lib targeting local Ollama (GEMMA_BASE_URL/QWEN_BASE_URL); NOT cloud
+
+# --- Domain companions (NOT primary; install per-subsystem where they fit, §3.2) ---
+# ragas>=0.1.0        # Apache-2.0; reference-free claim-level faithfulness (ei_v2 / pearl_news)
+# unbabel-comet>=2.0  # CometKiwi reference-free MT quality estimation (translation subsystem)
+#
+# NOTE: ragas/CometKiwi are commented out deliberately — they are domain
+# instruments layered on top per subsystem, not part of the P0-2 baseline. Enable
+# them in the owning subsystem's own eval lane, still on the local judge.

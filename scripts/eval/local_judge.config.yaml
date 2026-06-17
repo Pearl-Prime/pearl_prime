@@ -1,0 +1,69 @@
+# local_judge.config.yaml — LLM-as-judge backend config for the eval harness.
+#
+# Phase-2 of PRJ-AGENT-SYSTEM-IMPROVEMENT-V2 / ws_agent_eval_harness_deepeval_agentevals_20260612.
+# Authority: docs/specs/AGENT_SYSTEM_IMPROVEMENT_V2_SPEC.md §3.2 (DeepEval + agentevals,
+# LOCAL Gemma/Qwen judge) and §6 (Tier-2 compliance, zero paid-LLM-API).
+#
+# TIER-2 / Anti-paid-API contract (CLAUDE.md + .github/workflows/llm-policy-enforcement.yml):
+#   * The judge is a LOCAL Ollama OpenAI-compatible endpoint on Pearl Star.
+#   * English judging  -> Gemma  (GEMMA_BASE_URL, e.g. gemma3:27b)
+#   * CJK6 judging      -> Qwen   (QWEN_BASE_URL,  e.g. qwen2.5:14b)
+#   * NEVER api.openai.com / anthropic.com / DashScope cloud / Together / Replicate / etc.
+#   * skill_eval_runner.py hard-refuses any base_url containing a known cloud host.
+#
+# The runner reads the base URL from the env var named in `judge.base_url_env`
+# FIRST (canonical single source of truth), and only falls back to
+# `judge.base_url_fallback` if that env var is unset. Resolve env from Keychain:
+#   eval "$(python3 scripts/ci/load_integration_env_from_keychain.py)"
+
+version: 1
+
+judge:
+  # Default judge = English (Gemma). A CJK6 case dataset may request the Qwen
+  # endpoint by setting `judge_lang: cjk` in its file (handled per-dataset).
+  provider: ollama                 # local Ollama only; do not change to a cloud provider
+  base_url_env: GEMMA_BASE_URL     # canonical env var (two-tier migration handoff)
+  # Fallback ONLY used if the env var is unset. Canonical Pearl Star Ollama
+  # OpenAI-compatible endpoint (LAN). Tailscale variant:
+  #   http://pearlstar.tail7fd910.ts.net:11434/v1
+  base_url_fallback: "http://192.168.1.101:11434/v1"
+  model: gemma3:27b                # English Tier-2 judge model on Pearl Star
+  temperature: 0.0                 # deterministic grading
+  request_timeout_seconds: 60
+  reachability_probe_timeout_seconds: 5
+
+# CJK6 (zh/ja/ko/...) judging routes to Qwen on the same Ollama host.
+judge_cjk:
+  provider: ollama
+  base_url_env: QWEN_BASE_URL
+  base_url_fallback: "http://192.168.1.101:11434/v1"
+  model: qwen2.5:14b               # CJK6 Tier-2 judge model on Pearl Star
+  temperature: 0.0
+
+# DeepEval / agentevals integration knobs (consumed when the libraries are
+# installed AND --judge is passed; ignored in dry-run). These libraries are
+# pointed at the SAME local Ollama judge above — never a hosted judge.
+harness:
+  deepeval:
+    enabled_metrics:               # subset of DeepEval's 50+ metrics for skills
+      - answer_relevancy
+      - faithfulness
+    # DeepEval's LLM-judge must be the local Ollama model, set via its
+    # `deepeval set-local-model` / DeepEvalBaseLLM wrapper (see README.md).
+    judge_backend: local-ollama
+  agentevals:
+    # MIT trajectory evaluators (plan / tool-path). Used for the agent-trajectory
+    # task benchmarks; judge backend is the same local Ollama model.
+    trajectory_match_mode: superset
+    judge_backend: local-ollama
+
+# Scoring policy applied by the runner.
+scoring:
+  trigger:
+    # dry-run heuristic threshold; overridable via --threshold.
+    dry_run_overlap_threshold: 0.20
+  task:
+    # In dry-run, task scores are recorded as null (un-graded). A live judged run
+    # grades each 0.0..1.0 against the dataset rubric.
+    min: 0.0
+    max: 1.0
