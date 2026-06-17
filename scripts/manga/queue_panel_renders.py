@@ -194,6 +194,18 @@ def main() -> int:
     ap.add_argument("--comfy-url", default=DEFAULT_COMFY_URL, help=f"ComfyUI URL (default: {DEFAULT_COMFY_URL})")
     ap.add_argument("--only-panel", default=None, help="Render only this panel_id (smoke test)")
     ap.add_argument("--seed-base", type=int, default=DEFAULT_SEED, help=f"Seed base (panel index added; default: {DEFAULT_SEED})")
+    ap.add_argument(
+        "--seed-by-character",
+        action="store_true",
+        help=(
+            "Seed each panel from its character_id (seed_base + sum(ord(c) for c in "
+            "character_id)) for cross-panel consistency, falling back to index jitter "
+            "when a panel carries no character_id. NOTE: today's panel_prompts.json "
+            "schema does NOT emit character_id, so on this legacy path the flag is a "
+            "no-op until the upstream prompt emitter adds it — the canonical V5 path "
+            "(render_v5_episode.py) is where per-character seeding is live."
+        ),
+    )
     ap.add_argument("--skip-existing", action="store_true", help="Skip panels whose output PNG already exists")
     ap.add_argument("--dry-run", action="store_true", help="Validate prompts; do not call ComfyUI")
     # V2 Phase B.7 extensions: workflow override + reference-image conditioning.
@@ -276,7 +288,17 @@ def main() -> int:
             print(f"  SKIP {pid} (already exists)", file=sys.stderr)
             skipped += 1
             continue
-        seed = args.seed_base + i
+        # Seed selection. Default = index jitter (seed_base + i). --seed-by-character
+        # derives a per-character seed (matching reference_sheet_generator.py:251 and
+        # render_v5_episode.py) so a character holds consistent across panels. This
+        # legacy panel_prompts.json schema does not currently carry character_id, so
+        # the per-character branch only engages if a future emitter adds the field;
+        # otherwise it falls back to index jitter (honest no-op — flagged in --help).
+        char_id = panel.get("character_id") if args.seed_by_character else None
+        if char_id:
+            seed = args.seed_base + sum(ord(c) for c in str(char_id))
+        else:
+            seed = args.seed_base + i
         success, msg = queue_one_panel(args.comfy_url, workflow_template, panel, seed, out_path)
         prefix = "OK  " if success else "FAIL"
         print(f"  {prefix} {msg}", file=sys.stderr)

@@ -385,6 +385,35 @@ def recompose_layers(layer_paths: list[Path], out_path: Path) -> Path:
 # ─────────────────────────────────────────────────────────────────────────────
 
 
+def compute_panel_seed(
+    seed_base: int,
+    panel_index: int,
+    character_id: Optional[str],
+    seed_by_character: bool,
+) -> int:
+    """Resolve the ComfyUI seed for one panel.
+
+    Two modes:
+      • index-jitter (default / legacy): ``seed_base + panel_index * 1009`` — a
+        distinct seed per panel. Good for variety, BAD for cross-panel character
+        consistency: the SAME character drifts from panel to panel.
+      • per-character (``seed_by_character=True``): ``seed_base + sum(ord(c) for c
+        in character_id)`` — the SAME character resolves to the SAME seed across
+        every panel it appears in, holding it visually consistent. This mirrors the
+        reference-sheet formula (reference_sheet_generator.py:251,
+        ``DEFAULT_SEED_BASE + sum(ord(c) for c in teacher_id)``) so panels seed-lock
+        to the character's reference sheet. INTERIM consistency win — composes with
+        (does NOT replace) the deferred PuLID reference-image pathway (Phase C).
+
+    Per-character mode falls back to index-jitter when a panel has no on-frame
+    character (environmental / off-frame archetypes), so scene-only panels still get
+    a deterministic, varied seed.
+    """
+    if seed_by_character and character_id:
+        return seed_base + sum(ord(c) for c in character_id)
+    return seed_base + (panel_index * 1009)
+
+
 def _resolve_archetype_subject_state(
     panel: dict, arch_ctx: dict
 ) -> tuple[Optional[str], Optional[dict]]:
@@ -655,6 +684,7 @@ def process_panel(
     seed_base: int,
     skip_existing: bool,
     dry_run: bool,
+    seed_by_character: bool = False,
 ) -> dict:
     """Render one panel through the V5 pipeline. Returns per-panel summary dict."""
     pid = panel["panel_id"]
@@ -724,7 +754,24 @@ def process_panel(
         return summary
 
     # ── dispatch ────────────────────────────────────────────────────────
-    seed = seed_base + (panel_index * 1009)  # deterministic per-panel seed jitter
+    # Seed selection. Default = per-panel index jitter (variety). Opt-in
+    # --seed-by-character derives the seed from the on-frame character_id so the
+    # SAME character holds consistent across panels (interim cross-panel
+    # consistency before PuLID; composes with — does not replace — Phase C).
+    seed_character_id = None
+    if seed_by_character:
+        seed_character_id, _ = _resolve_archetype_subject_state(panel, arch_ctx)
+    seed = compute_panel_seed(
+        seed_base, panel_index, seed_character_id, seed_by_character
+    )
+    seed_mode = (
+        f"char:{seed_character_id}"
+        if (seed_by_character and seed_character_id)
+        else "index-jitter"
+    )
+    print(
+        f"            seed {seed} ({seed_mode})"
+    )
     print(
         f"  [{panel_index}/{panel_total}] {pid} ({archetype}, {layer_type_used}, "
         f"{expected_layers}L, seed={seed}) dispatching..."
@@ -866,6 +913,7 @@ def run_episode(
     skip_existing: bool,
     dry_run: bool,
     seed_base: int,
+    seed_by_character: bool = False,
 ) -> dict:
     configs = v4.load_configs(profile_id)
     panel_states = v4.load_panel_states(artifacts_series_id, episode_id)
@@ -912,6 +960,7 @@ def run_episode(
     print(f"  skip_existing:      {skip_existing}")
     print(f"  dry_run:            {dry_run}")
     print(f"  seed_base:          {seed_base}")
+    print(f"  seed_by_character:  {seed_by_character}")
     print(f"  dispatcher_version: {DISPATCHER_VERSION}")
     print(f"  workflow_version:   {WORKFLOW_VERSION}")
     print()
@@ -934,6 +983,7 @@ def run_episode(
                 seed_base=seed_base,
                 skip_existing=skip_existing,
                 dry_run=dry_run,
+                seed_by_character=seed_by_character,
             )
         )
 
@@ -1077,6 +1127,17 @@ def main(argv: Optional[list[str]] = None) -> int:
         help=f"Seed base; per-panel seed = seed_base + panel_index*1009 "
              f"(default: {DEFAULT_SEED_BASE})",
     )
+    ap.add_argument(
+        "--seed-by-character",
+        action="store_true",
+        help=(
+            "Derive each panel's seed from its on-frame character_id "
+            "(seed_base + sum(ord(c) for c in character_id)) instead of panel-index "
+            "jitter, so a character renders consistently across panels (interim "
+            "cross-panel consistency before PuLID; panels with no character fall back "
+            "to index jitter)."
+        ),
+    )
     args = ap.parse_args(argv)
 
     # --series-id is an alias for --artifacts-series-id (task spec mentioned --series-id)
@@ -1093,6 +1154,7 @@ def main(argv: Optional[list[str]] = None) -> int:
         skip_existing=args.skip_existing,
         dry_run=args.dry_run,
         seed_base=args.seed_base,
+        seed_by_character=args.seed_by_character,
     )
     if "error" in result:
         return 2
