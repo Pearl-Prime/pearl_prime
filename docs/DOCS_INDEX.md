@@ -2,7 +2,8 @@
 
 **Purpose:** Canonical index for documentation authority and navigation.  
 **Missing-file policy:** Only existing files are linked; planned or missing files are listed as backlog items (plain text or `path` with ⚠️ *file not present*).  
-**Last updated:** 2026-05-29
+**Last updated:** 2026-06-17
+**Update notes (2026-06-17):** frontier refresh (audit #1678) — added Pearl Prime storefront V1, 100→1000 bestseller build program, devotion_path topic-engine reconciliation, video beat-driven + frame-selector best-of specs, brand-registry 37×14 reconciliation, music-mode V1/V2 specs; re-added 1,000-book build program + Wave 1 + beat-driven narrative entries (CURRENT per audit, previously unmerged); marked YT-Starseed-v1, Angle-Registry-V1, and Chinese-Writer v1.0/v2.0 as superseded → successors. Currency judged by audit classification (authority-membership + headers + code-refs), NOT git-log date (mega-commit 30bd4dd6af reset 468/518 doc dates — false signal).
 **Update notes (2026-05-29):** manga SSOT counts, V5.1 render row, CLI routing, aspirational cover/QC row.
 
 **For developers: start here.** This index is your map. Use the **task table** below for "where to go" by task. **GitHub (PRs, merges, two repos, runners):** go to [GitHub Operations Framework](#github-operations-framework) and [docs/GITHUB_OPERATIONS_FRAMEWORK.md](./GITHUB_OPERATIONS_FRAMEWORK.md) — repo map, workflow matrix, canonical ownership, PR flow, merge to main, Qwen-Agent push/runner, recovery. **No-failure standard:** [docs/GITHUB_NO_FAILURE_FRAMEWORK.md](./GITHUB_NO_FAILURE_FRAMEWORK.md). **Tests / CI:** [Test suite (document all)](#test-suite-document-all). **Domain work:** use the task table and the "(document all)" subsections per domain.
@@ -35,6 +36,11 @@
 | **Audit Pearl Prime salvage vs `main`** | [docs/PEARL_PRIME_SALVAGE_AUDIT_2026_03_29.md](./PEARL_PRIME_SALVAGE_AUDIT_2026_03_29.md) — maps salvage-only material, unmerged branches, `origin/main` state, and the PR sequence to recover Pearl Prime runtime truth. |
 | **Recover Pearl Prime runtime onto `main`** | [docs/PEARL_PRIME_MAIN_RECOVERY_DEV_SPEC.md](./PEARL_PRIME_MAIN_RECOVERY_DEV_SPEC.md) — execution-ready dev spec for clean PRs (identity/location, composition/editorial, docs) from the convergence branch. |
 | **Bestseller writing overlay (Pearl Prime)** | [docs/PEARL_PRIME_BESTSELLER_WRITING_OVERLAY_SPEC.md](./PEARL_PRIME_BESTSELLER_WRITING_OVERLAY_SPEC.md) — writer overlay for hooks, aha, integration, thread, scene specificity, anti-generic rules on top of the canonical writer spec. |
+| **Run Pearl Prime 1,000-book build program** | [docs/specs/PEARL_PRIME_1000_BOOK_BUILD_PROGRAM_V1_SPEC.md](./specs/PEARL_PRIME_1000_BOOK_BUILD_PROGRAM_V1_SPEC.md) — program spec for scaling Pearl Prime from strong clusters toward 1,000 cohesive books. |
+| **Scale Pearl Prime 100→1000 (bestseller build program)** | [docs/specs/PEARL_PRIME_100_TO_1000_BESTSELLER_BUILD_PROGRAM.md](./specs/PEARL_PRIME_100_TO_1000_BESTSELLER_BUILD_PROGRAM.md) — current frontier program: from the first proven 100 bestseller-grade books to 1,000, with build slate, gates, and promotion rules. |
+| **Execute Pearl Prime Wave 1 (first 25 books)** | [docs/specs/PEARL_PRIME_WAVE_1_EXECUTION_SPEC.md](./specs/PEARL_PRIME_WAVE_1_EXECUTION_SPEC.md) — first-wave execution plan using the current top-25 buildable books, subwave gates, and promotion/block rules. |
+| **Build the Pearl Prime storefront (V1)** | [docs/specs/PEARL_PRIME_STOREFRONT_V1_SPEC.md](./specs/PEARL_PRIME_STOREFRONT_V1_SPEC.md) — **CANONICAL** storefront spec (Snipcart + Cloudflare D1/R2): SKU model, checkout, fulfillment; 6 smoke combos = the real launch gate. Code gap = `scripts/storefront/project_skus.py`. (Supersedes the earlier `specs/PEARL_PRIME_STOREFRONT_SPEC.md` draft — the "nothing works" trap.) |
+| **Reconcile devotion_path topic engine** | [docs/specs/DEVOTION_PATH_TOPIC_ENGINE_RECONCILIATION_V1_SPEC.md](./specs/DEVOTION_PATH_TOPIC_ENGINE_RECONCILIATION_V1_SPEC.md) — Option-A′ re-point of devotion_path plans off forbidden anxiety engines onto the full 85 legal cells; assembly co-gated on F-COHERENCE + atom-parse repair. |
 | **Repair Pearl Prime source banks (atoms, teachers, locations)** | [docs/SOURCE_BANK_REPAIR_DEV_SPEC.md](./SOURCE_BANK_REPAIR_DEV_SPEC.md) — follow-up lane after recovery PRs: audit, PR slices, acceptance criteria for hollow atoms, teacher slot coverage, location profiles (spec only; no runtime). |
 | **Research audit (citation gaps + unimplemented research)** | [artifacts/research/RESEARCH_AUDIT_2026_03_30.md](../artifacts/research/RESEARCH_AUDIT_2026_03_30.md) — Section A uncited claims; Section B orphaned/partial/pipeline backlog. |
 | **Wire research into config (PR slices, EI v2 KB)** | [docs/RESEARCH_INTEGRATION_DEV_SPEC.md](./RESEARCH_INTEGRATION_DEV_SPEC.md) — Pearl_PM / Pearl_GitHub: PR-RI-001–006, PR-RI-KB, partial marketing extraction, workstreams. |
@@ -197,6 +203,11 @@ Catalog-facing recommendation engine that decides which books Phoenix should cre
 - [docs/PEARL_PRIME_RELEASE_CONTRACT.md](./PEARL_PRIME_RELEASE_CONTRACT.md) — Repo-owned release contract for the main Pearl Prime pipeline; authoritative evidence bundle and non-authoritative external signals
 - [docs/PEARL_PRIME_WHOLE_WORKFLOW_HARDENING_SPEC.md](./PEARL_PRIME_WHOLE_WORKFLOW_HARDENING_SPEC.md) — Pearl Prime whole-pipeline hardening contract (teacher-mode, topic/location, editorial, output contract)
 - [docs/PEARL_PRIME_BESTSELLER_WRITING_OVERLAY_SPEC.md](./PEARL_PRIME_BESTSELLER_WRITING_OVERLAY_SPEC.md) — Bestseller craft overlay on top of PHOENIX_V4_5_WRITER_SPEC
+- [docs/specs/PEARL_PRIME_1000_BOOK_BUILD_PROGRAM_V1_SPEC.md](./specs/PEARL_PRIME_1000_BOOK_BUILD_PROGRAM_V1_SPEC.md) — Scaling program spec: focus → repair → deepen → validate → scale
+- [docs/specs/PEARL_PRIME_100_TO_1000_BESTSELLER_BUILD_PROGRAM.md](./specs/PEARL_PRIME_100_TO_1000_BESTSELLER_BUILD_PROGRAM.md) — Frontier build program: from the first 100 bestseller-grade books to 1,000 (build slate, gates, promotion rules)
+- [docs/specs/PEARL_PRIME_WAVE_1_EXECUTION_SPEC.md](./specs/PEARL_PRIME_WAVE_1_EXECUTION_SPEC.md) — Wave 1 execution contract for the first 25 books from the current strongest build slate
+- [docs/specs/PEARL_PRIME_STOREFRONT_V1_SPEC.md](./specs/PEARL_PRIME_STOREFRONT_V1_SPEC.md) — **CANONICAL** storefront V1 (Snipcart + Cloudflare D1/R2); SKU model, checkout, fulfillment; launch gate = 6 smoke combos. Supersedes the `specs/PEARL_PRIME_STOREFRONT_SPEC.md` draft.
+- [docs/specs/DEVOTION_PATH_TOPIC_ENGINE_RECONCILIATION_V1_SPEC.md](./specs/DEVOTION_PATH_TOPIC_ENGINE_RECONCILIATION_V1_SPEC.md) — devotion_path re-point onto the full 85 legal cells (Option A′); assembly co-gated on F-COHERENCE + atom-parse repair
 - [docs/PEARL_PRIME_SALVAGE_AUDIT_2026_03_29.md](./PEARL_PRIME_SALVAGE_AUDIT_2026_03_29.md) — Salvage vs `main` audit and recovery PR sequencing
 - [docs/PEARL_PRIME_MAIN_RECOVERY_DEV_SPEC.md](./PEARL_PRIME_MAIN_RECOVERY_DEV_SPEC.md) — Main recovery dev spec (PR 1–3 execution contract)
 - [docs/SOURCE_BANK_REPAIR_DEV_SPEC.md](./SOURCE_BANK_REPAIR_DEV_SPEC.md) — Pearl Prime **follow-up lane:** source-bank debt audit, prioritized repair plan, PR slices (atoms, teacher banks, location YAML); spec-only deliverable
@@ -245,6 +256,10 @@ Metadata-driven visual storytelling engine: script segments → Shot Planner →
 | **FLUX credentials** | [docs/VIDEO_CLOUDFLARE_FLUX_CREDENTIALS.md](./VIDEO_CLOUDFLARE_FLUX_CREDENTIALS.md) — Cloudflare account/token setup for run_flux_generate.py; env or key file |
 | **Video color master system** | [docs/video-color-master-system.html](./video-color-master-system.html) — Canonical palette: 4 bands (Hook, Cool/Calm, Warm/Rise, Neutral/Root), per-topic hex, text-on-color previews, Shnell seed/guidance, per-band never rules; source for brand_style_tokens.yaml |
 | **Video image master prompt spec** | [docs/VIDEO_IMAGE_MASTER_PROMPT_SPEC.md](./VIDEO_IMAGE_MASTER_PROMPT_SPEC.md) — Template (foreground → Background: → Overall lighting: 9:16), anxiety/cool_calm example, Cloudflare FLUX API, run_flux_generate.py |
+| **Beat-driven narrative pipeline (v3.1+)** | [docs/specs/PEARL_VIDEO_BEAT_DRIVEN_NARRATIVE_PIPELINE_V1_SPEC.md](./specs/PEARL_VIDEO_BEAT_DRIVEN_NARRATIVE_PIPELINE_V1_SPEC.md) — Per-beat prompt synthesis (Tier-1 Claude Code), whisper word-level audio alignment, beat→audio snap, render+manifest+mix. For named-entity-rich spiritual narrative video where image-bank lookup fails. Coexists with `VIDEO_PIPELINE_SPEC.md` (11-stage = high-volume templated; beat-driven = high-specificity narrative). |
+| **Beat-driven run_pipeline wiring (follow-on)** | [docs/specs/PEARL_VIDEO_BEAT_DRIVEN_RUN_PIPELINE_WIRING_FOLLOWON.md](./specs/PEARL_VIDEO_BEAT_DRIVEN_RUN_PIPELINE_WIRING_FOLLOWON.md) — wires the beat-driven path into `run_pipeline` orchestration (follow-on to the narrative spec above). |
+| **Frame-selector best-of (v1)** | [docs/specs/PEARL_VIDEO_FRAME_SELECTOR_BEST_OF_V1_SPEC.md](./specs/PEARL_VIDEO_FRAME_SELECTOR_BEST_OF_V1_SPEC.md) — section-model frame picker (1 section = 1 picture, 0.5–3.0s, frame + REGULAR/MANGA render); export schema = builder↔assembler contract (`section,…,chosen_frame,chosen_style,chosen_render`). Builder + spec MERGED #1662; `assemble_mixed.py` is the downstream mixed assembler (#1663). GOTCHA: manga JS keeps `.jpg` but renders are `.png`. |
+| **YT Starseed ahjan_update v1 (SUPERSEDED → v3.1 beat-driven)** | [docs/specs/PEARL_VIDEO_YT_STARSEED_AHJAN_UPDATE_V1_SPEC.md](./specs/PEARL_VIDEO_YT_STARSEED_AHJAN_UPDATE_V1_SPEC.md) — Historical record of the 10s section-anchor cadence. Operator-resolved decisions still hold (1920×1080, likeness guardrails, palette LOCK). Successor: `PEARL_VIDEO_BEAT_DRIVEN_NARRATIVE_PIPELINE_V1_SPEC.md`. |
 
 ---
 
@@ -464,6 +479,7 @@ Pearl News is 100% at **code/tests** when classifier, selector, quality gates, a
 - [config/catalog_planning/teacher_brand_author_roster.yaml](../config/catalog_planning/teacher_brand_author_roster.yaml) — 91 authors: voices, bios, topics, cover art (4 brands expanded, 9 skeleton)
 - [config/release_velocity/video_cadence.yaml](../config/release_velocity/video_cadence.yaml) — Upload pacing per platform
 - [config/catalog_planning/audiobook_video_catalog.yaml](../config/catalog_planning/audiobook_video_catalog.yaml) — Video derivatives + revenue projections
+- [specs/BRAND_REGISTRY_RECONCILIATION_37x14_SPEC.md](../specs/BRAND_REGISTRY_RECONCILIATION_37x14_SPEC.md) — Brand-registry unification to 39×14 (canonical-37 names win; corp = imprint name; +adi_da/joshin = 39; 14th lane = pt_BR). Manga = per-lane % (`lane_content_mix`). Build via `build_unified_brand_registry.py`; the deep-25 `global_brand_registry` is stale. Corp names = `brand_display_names.yaml` keyed by base id.
 
 ---
 
@@ -773,6 +789,16 @@ Seven-change book quality overhaul addressing root causes: arc second-half repet
 
 **Dev wires:** `allowed_slots`, `slot_templates`, `arc_loader.py`, `chapter_flow_gate.py`, chapter planner structure-assignment step.
 **Writing content:** fully documented in `CHAPTER_THESIS_BANK.md` and `BESTSELLER_STRUCTURES.md`; new slot spec in Writer Spec §4.3a/4.7/4.7a/4.8.
+
+### Music mode (document all)
+
+Music as a brand-integrated content mode that rides the existing pipeline (Pearl_Editor owns `musician_banks`); per-platform rollout into Pearl Prime (~800 high-confidence configs). No music-file distribution.
+
+| Spec | Purpose |
+|------|---------|
+| [docs/specs/MUSIC_MODE_V2_PRODUCTION_READINESS_SPEC.md](./specs/MUSIC_MODE_V2_PRODUCTION_READINESS_SPEC.md) | Music-mode V2 production-readiness: data-driven mix, persona reuse-vs-composite, first-person `music_wrapper`, volume → Pearl-Prime + per-platform rollout |
+| [docs/specs/MUSIC_MODE_BRAND_INTEGRATION_V1_SPEC.md](./specs/MUSIC_MODE_BRAND_INTEGRATION_V1_SPEC.md) | How music mode integrates per brand lane (`lane_content_mix`) |
+| [docs/specs/MUSIC_MODE_FREEBIE_FUNNEL_V1_SPEC.md](./specs/MUSIC_MODE_FREEBIE_FUNNEL_V1_SPEC.md) | Music-mode freebie funnel integration |
 
 ### Qwen-Only Audiobook Pipeline (document all)
 
@@ -2066,6 +2092,34 @@ All `.md` files under `specs/` confirmed present on disk. Additional `.txt` and 
 | [specs/TEACHER_PORTFOLIO_PLANNING_SPEC.md](../specs/TEACHER_PORTFOLIO_PLANNING_SPEC.md) | Teacher portfolio planning: topic/persona coverage targets |
 | [specs/V4_6_BINGE_OPTIMIZATION_LAYER.md](../specs/V4_6_BINGE_OPTIMIZATION_LAYER.md) | V4.6 binge optimization: serialized listening, continuity |
 | [specs/WRITER_DEV_SPEC_PHASE_2.md](../specs/WRITER_DEV_SPEC_PHASE_2.md) | Writer dev spec phase 2 |
+| [specs/BRAND_REGISTRY_RECONCILIATION_37x14_SPEC.md](../specs/BRAND_REGISTRY_RECONCILIATION_37x14_SPEC.md) | Brand-registry unification to 39×14 (canonical-37 names win; +adi_da/joshin; 14th lane pt_BR); build via `build_unified_brand_registry.py` |
+
+**Frontier specs under `docs/specs/` (current — added 2026-06-17):**
+
+| Spec | Purpose |
+|------|---------|
+| [docs/specs/PEARL_PRIME_STOREFRONT_V1_SPEC.md](./specs/PEARL_PRIME_STOREFRONT_V1_SPEC.md) | **CANONICAL** Pearl Prime storefront V1 (Snipcart + Cloudflare D1/R2); launch gate = 6 smoke combos; code gap = `scripts/storefront/project_skus.py`. Supersedes `specs/PEARL_PRIME_STOREFRONT_SPEC.md` (superseded draft, not on `main`). |
+| [docs/specs/PEARL_PRIME_100_TO_1000_BESTSELLER_BUILD_PROGRAM.md](./specs/PEARL_PRIME_100_TO_1000_BESTSELLER_BUILD_PROGRAM.md) | Frontier build program: first 100 bestseller-grade books → 1,000 (build slate, gates, promotion rules) |
+| [docs/specs/PEARL_PRIME_1000_BOOK_BUILD_PROGRAM_V1_SPEC.md](./specs/PEARL_PRIME_1000_BOOK_BUILD_PROGRAM_V1_SPEC.md) | Scaling program spec: focus → repair → deepen → validate → scale |
+| [docs/specs/PEARL_PRIME_WAVE_1_EXECUTION_SPEC.md](./specs/PEARL_PRIME_WAVE_1_EXECUTION_SPEC.md) | Wave 1 execution contract (first 25 books), subwave gates, promotion/block rules |
+| [docs/specs/DEVOTION_PATH_TOPIC_ENGINE_RECONCILIATION_V1_SPEC.md](./specs/DEVOTION_PATH_TOPIC_ENGINE_RECONCILIATION_V1_SPEC.md) | devotion_path re-point onto full 85 legal cells (Option A′); co-gated on F-COHERENCE + atom-parse repair |
+| [docs/specs/PEARL_VIDEO_BEAT_DRIVEN_NARRATIVE_PIPELINE_V1_SPEC.md](./specs/PEARL_VIDEO_BEAT_DRIVEN_NARRATIVE_PIPELINE_V1_SPEC.md) | Beat-driven narrative video (per-beat prompt synthesis, whisper alignment); coexists with `VIDEO_PIPELINE_SPEC.md` |
+| [docs/specs/PEARL_VIDEO_BEAT_DRIVEN_RUN_PIPELINE_WIRING_FOLLOWON.md](./specs/PEARL_VIDEO_BEAT_DRIVEN_RUN_PIPELINE_WIRING_FOLLOWON.md) | Wires the beat-driven path into `run_pipeline` orchestration |
+| [docs/specs/PEARL_VIDEO_FRAME_SELECTOR_BEST_OF_V1_SPEC.md](./specs/PEARL_VIDEO_FRAME_SELECTOR_BEST_OF_V1_SPEC.md) | Section-model frame picker (1 section = 1 picture); export schema = builder↔assembler contract; pairs with `assemble_mixed.py` (#1663) |
+| [docs/specs/MUSIC_MODE_V2_PRODUCTION_READINESS_SPEC.md](./specs/MUSIC_MODE_V2_PRODUCTION_READINESS_SPEC.md) | Music-mode V2 production readiness (data-driven mix, first-person `music_wrapper`, per-platform rollout) |
+| [docs/specs/MUSIC_MODE_BRAND_INTEGRATION_V1_SPEC.md](./specs/MUSIC_MODE_BRAND_INTEGRATION_V1_SPEC.md) | Music-mode per-brand-lane integration (`lane_content_mix`) |
+| [docs/specs/MUSIC_MODE_FREEBIE_FUNNEL_V1_SPEC.md](./specs/MUSIC_MODE_FREEBIE_FUNNEL_V1_SPEC.md) | Music-mode freebie funnel integration |
+| [docs/specs/PEARL_VIDEO_YT_STARSEED_AHJAN_UPDATE_V1_SPEC.md](./specs/PEARL_VIDEO_YT_STARSEED_AHJAN_UPDATE_V1_SPEC.md) | **SUPERSEDED** → `PEARL_VIDEO_BEAT_DRIVEN_NARRATIVE_PIPELINE_V1_SPEC.md` (historical 10s section-anchor cadence; operator decisions still hold) |
+
+**Superseded specs — use the successor (per audit #1678; predecessors retained on disk, do NOT delete here — cleanup is a separate lane):**
+
+| Superseded (do not use) | Successor (canonical) |
+|-------------------------|-----------------------|
+| `docs/specs/ANGLE_REGISTRY_SSOT_V1_SPEC.md` | [docs/specs/ANGLE_REGISTRY_SSOT_V2_SPEC.md](./specs/ANGLE_REGISTRY_SSOT_V2_SPEC.md) |
+| `specs/PHOENIX_V4_5_CHINESE_WRITER_SPEC_v1.0.md` | [specs/PHOENIX_V4_5_CHINESE_WRITER_SPEC_v2.5.md](../specs/PHOENIX_V4_5_CHINESE_WRITER_SPEC_v2.5.md) |
+| `specs/PHOENIX_V4_5_CHINESE_WRITER_SPEC_v2.0.md` | [specs/PHOENIX_V4_5_CHINESE_WRITER_SPEC_v2.5.md](../specs/PHOENIX_V4_5_CHINESE_WRITER_SPEC_v2.5.md) |
+| `specs/PEARL_PRIME_STOREFRONT_SPEC.md` (the "nothing works" draft; not present on `main`) | [docs/specs/PEARL_PRIME_STOREFRONT_V1_SPEC.md](./specs/PEARL_PRIME_STOREFRONT_V1_SPEC.md) |
+| `docs/specs/PEARL_VIDEO_YT_STARSEED_AHJAN_UPDATE_V1_SPEC.md` | [docs/specs/PEARL_VIDEO_BEAT_DRIVEN_NARRATIVE_PIPELINE_V1_SPEC.md](./specs/PEARL_VIDEO_BEAT_DRIVEN_NARRATIVE_PIPELINE_V1_SPEC.md) |
 
 **Additional specs files (non-.md or unusual filename — present on disk, plain-text references):**
 
