@@ -225,6 +225,70 @@ class PersonaPoolRotationState:
 
 
 # ---------------------------------------------------------------------------
+# ws_enrichment_primary_dedup_20260616: thread the book-wide _SeenBodies
+# registry into PRIMARY HOOK/SCENE/STORY selection.
+#
+# Until now the book-wide ``_SeenBodies`` dedup (defined further below) was
+# consulted ONLY by the depth/delivery passes (``_pick_canonical_block_per_section``
+# / ``_select_prose_chunk_unique``). The PRIMARY persona pick in
+# ``select_enrichment`` used ``PersonaPoolRotationState.pick_index`` alone, which
+# spreads picks by *usage count* but is blind to body *content* — each chapter is
+# a fresh slot whose usage count is anchored independently, so the SAME atom body
+# could be chosen as the primary for the same slot-type across multiple
+# chapters/clusters, re-stamping a HOOK/SCENE/STORY body book-wide. That is a
+# large share of the deep-tier F1 repetition (~93). This helper makes the primary
+# pick dedup-aware by reusing the EXISTING ``least_used_order`` ranking and the
+# EXISTING ``_SeenBodies`` exact+fuzzy membership — no new registry, no new
+# similarity logic.
+def _pick_primary_index_unseen(
+    rotation: "PersonaPoolRotationState",
+    pool: List[Dict[str, Any]],
+    seed_key: str,
+    label: str,
+    seen_bodies: Any,
+) -> int:
+    """Least-used index whose body has NOT been used book-wide.
+
+    Walks ``rotation.least_used_order(...)`` (least-used-first, deterministic SHA
+    tiebreak — identical ordering convention to the expansion paths) and returns
+    the first index whose ``content`` is neither an exact nor a fuzzy match to a
+    body already noted in ``seen_bodies``. If every candidate is already seen (or
+    ``seen_bodies`` is falsy / the pool is exhausted), falls back to the plain
+    ``pick_index`` anchor — so behavior is unchanged when no unused body exists,
+    and both determinism and the never-empty contract are preserved.
+    """
+    if not pool:
+        return 0
+    if not seen_bodies:
+        return rotation.pick_index(pool, seed_key)
+    order = rotation.least_used_order(pool, seed_key, label)
+    for i in order:
+        body = str(pool[i].get("content") or "")
+        if not body.strip():
+            continue
+        norm = _norm_ws(body)
+        if norm in seen_bodies or _seen_similar(seen_bodies, body):
+            continue
+        return i
+    # Every candidate already used book-wide → keep the deterministic anchor.
+    return rotation.pick_index(pool, seed_key)
+
+
+def _note_primary_body(seen_bodies: Any, body: str) -> None:
+    """Record a chosen PRIMARY body in the book-wide registry (exact + fuzzy).
+
+    Mirrors the depth-pass call-sites: ``add(_norm_ws(body))`` records the exact
+    normalized string and (via ``_SeenBodies.add``) auto-notes the fuzzy word-set.
+    Tolerates a plain ``set`` (records exact only) and a None registry (no-op).
+    """
+    if seen_bodies is None or not body or not body.strip():
+        return
+    add = getattr(seen_bodies, "add", None)
+    if callable(add):
+        add(_norm_ws(body))
+
+
+# ---------------------------------------------------------------------------
 # OPD-114 Phase B: scene-depth ladder (one anchor archetype per chapter)
 # ---------------------------------------------------------------------------
 
@@ -1888,6 +1952,14 @@ def select_enrichment(
     # across all 96 SCENE-class slots. See `PersonaPoolRotationState` doc above.
     _persona_rotation = PersonaPoolRotationState()
     _scene_arch_rotation = SceneArchetypeRotationState()
+    # ws_enrichment_primary_dedup_20260616: book-wide registry of PRIMARY bodies
+    # already stamped into a slot, so the same HOOK/SCENE/STORY/EXERCISE body is
+    # not re-picked as the primary across chapters/clusters. Same _SeenBodies
+    # registry the depth/delivery passes already use (exact + fuzzy Jaccard);
+    # gated by the same PHOENIX_DEPTH_DEDUP_FUZZY flag. The least-used rotation
+    # still drives ordering — this only skips already-used bodies within that
+    # order, falling back to the deterministic anchor when none are unused.
+    _book_seen_bodies = _SeenBodies()
     _scene_ladder_done: set[int] = set()
     _chapter_story_depths_raw = list(_spine.get("chapter_story_depths") or [])
     _planner_warnings_mut: List[str] = list(_spine.get("chapter_planner_warnings") or [])
@@ -1989,6 +2061,10 @@ def select_enrichment(
                     source_id = _sched_slot.source
                     atom_id = _sched_slot.source
                     audit_counts["slots_from_persona"] += 1  # story atoms count as persona-class
+                    # ws_enrichment_primary_dedup_20260616: register the story-plan
+                    # SCENE/STORY body so the persona waterfall below won't re-pick a
+                    # near-duplicate primary in a later chapter.
+                    _note_primary_body(_book_seen_bodies, content)
 
             # --- PR #612 + OPD-107: additive is the ONLY mode. Two code paths:
             #   EXERCISE slots: teacher → persona (practice-shaped only) → practice_library → FAIL
@@ -2078,8 +2154,15 @@ def select_enrichment(
                             # the teacher pool misses; rotation spreads picks
                             # across the 16-30 atom pool typical for gen_z
                             # professionals/anxiety EXERCISE.
-                            _ap_idx = _persona_rotation.pick_index(
-                                _persona_ex_pool, f"{seed_key}:persona_ex"
+                            # ws_enrichment_primary_dedup_20260616: dedup-aware
+                            # primary pick — skip EXERCISE bodies already stamped
+                            # book-wide (short/practice bodies are exempt via the
+                            # _SeenBodies min_words floor; full pick is preserved
+                            # when no unused body exists).
+                            _ap_idx = _pick_primary_index_unseen(
+                                _persona_rotation, _persona_ex_pool,
+                                f"{seed_key}:persona_ex", "persona_ex",
+                                _book_seen_bodies,
                             )
                             _ap_atom = _persona_ex_pool[_ap_idx]
                             _ap_content = str(_ap_atom.get("content") or "").strip()
@@ -2090,6 +2173,7 @@ def select_enrichment(
                                 _add_ids.append(_ap_aid)
                                 audit_counts["slots_from_persona"] += 1
                                 _persona_rotation.register(_ap_aid)
+                                _note_primary_body(_book_seen_bodies, _ap_content)
                     if not _add_pieces:
                         # Final EXERCISE fallback: practice_library (unchanged path).
                         _apl = _try_practice_library(chapter_index0, topic, persona_id, seed)
@@ -2152,9 +2236,10 @@ def select_enrichment(
                             )
                             _scene_ladder_done.add(chapter_index0)
                             if _ladder:
-                                _add_pieces.append(
-                                    "\n\n".join(a.content for a in _ladder if a.content)
+                                _ladder_body = "\n\n".join(
+                                    a.content for a in _ladder if a.content
                                 )
+                                _add_pieces.append(_ladder_body)
                                 _add_sources.append("persona_atom")
                                 _ladder_ids = [a.atom_id for a in _ladder if a.atom_id]
                                 _add_ids.append("+".join(_ladder_ids) or "scene_ladder")
@@ -2166,11 +2251,26 @@ def select_enrichment(
                                 for a in _ladder:
                                     if a.atom_id:
                                         _persona_rotation.register(a.atom_id)
+                                # ws_enrichment_primary_dedup_20260616: note the
+                                # whole SCENE-ladder body so a later chapter's SCENE
+                                # primary won't re-pick a near-duplicate.
+                                _note_primary_body(_book_seen_bodies, _ladder_body)
                         else:
                             # OPD-109 Phase 3: rotation-aware least-used pick. Falls
                             # back to hash-anchor (`_deterministic_index`) for the
                             # tiebreak so seed-determinism is preserved.
-                            _ap_idx = _persona_rotation.pick_index(_ap_pool, f"{seed_key}:persona")
+                            # ws_enrichment_primary_dedup_20260616: dedup-aware
+                            # primary pick for HOOK/SCENE/STORY — within the same
+                            # least-used order, skip a body already stamped book-wide
+                            # so the identical primary isn't re-injected across
+                            # chapters/clusters (the deep-tier F1 ~93 driver). The
+                            # least-used anchor is preserved when no unused body
+                            # exists, keeping determinism + the never-empty contract.
+                            _ap_idx = _pick_primary_index_unseen(
+                                _persona_rotation, _ap_pool,
+                                f"{seed_key}:persona", "persona",
+                                _book_seen_bodies,
+                            )
                             _ap_atom = _ap_pool[_ap_idx]
                             _ap_content = str(_ap_atom.get("content") or "").strip()
                             if _ap_content:
@@ -2182,6 +2282,7 @@ def select_enrichment(
                                 persona_expand_pool = _ap_pool
                                 persona_primary_idx = _ap_idx
                                 _persona_rotation.register(_ap_aid)
+                                _note_primary_body(_book_seen_bodies, _ap_content)
 
                     # 2) registry (baseline)
                     _ar_hit = _try_registry_variant(reg_lists, stype, reg_counters, seed_key)
