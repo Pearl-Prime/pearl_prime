@@ -6,6 +6,7 @@ pytest-timeout>=2.0
 jsonschema>=4.0
 feedparser>=6.0
 Pillow>=9.0
+numpy>=1.23  # validate_layer safe-zone pixel math (manga render lane); imported transitively by core pytest
 ebooklib>=0.18
 fastapi>=0.100.0
 httpx>=0.24.0
