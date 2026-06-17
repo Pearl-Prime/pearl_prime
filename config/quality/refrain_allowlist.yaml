@@ -450,3 +450,103 @@ entries:
     todo: null
     overlay_rule: none
     overlay_param: {}
+
+  - phrase: "the automatic response"
+    classification: topic_named_mechanism
+    cap_book_wide: 84
+    cap_per_chapter: 8
+    spec_citation: "docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md#phrase-density"
+    rationale: "Central named mechanism: 'the automatic response is/to'. Topic's defining concept (false_alarm/courage), authored across 78 REFLECTION/CANONICAL variants. ~6x/ch in 12-ch book. A2 Phase B 2026-06-16: per-phrase cap for topic's named mechanism (operator/brief-sanctioned legitimate topic vocabulary; global book_wide_cap unchanged)."
+    todo: null
+    overlay_rule: none
+    overlay_param: {}
+
+  - phrase: "automatic response is"
+    classification: topic_named_mechanism
+    cap_book_wide: 84
+    cap_per_chapter: 8
+    spec_citation: "docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md#phrase-density"
+    rationale: "Fragment of central named mechanism 'the automatic response is to'. Same mechanism noun-phrase. A2 Phase B 2026-06-16: per-phrase cap for topic's named mechanism (operator/brief-sanctioned legitimate topic vocabulary; global book_wide_cap unchanged)."
+    todo: null
+    overlay_rule: none
+    overlay_param: {}
+
+  - phrase: "the automatic calculation"
+    classification: topic_named_mechanism
+    cap_book_wide: 84
+    cap_per_chapter: 8
+    spec_citation: "docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md#phrase-density"
+    rationale: "Variant of the central named mechanism ('the automatic calculation is: ...'). Same false_alarm cost-prediction concept. A2 Phase B 2026-06-16: per-phrase cap for topic's named mechanism (operator/brief-sanctioned legitimate topic vocabulary; global book_wide_cap unchanged)."
+    todo: null
+    overlay_rule: none
+    overlay_param: {}
+
+  - phrase: "the organizational cost"
+    classification: topic_named_mechanism
+    cap_book_wide: 84
+    cap_per_chapter: 8
+    spec_citation: "docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md#phrase-density"
+    rationale: "Central named mechanism: 'the organizational cost calculation'. Topic's defining concept; authored REFLECTION vocabulary. A2 Phase B 2026-06-16: per-phrase cap for topic's named mechanism (operator/brief-sanctioned legitimate topic vocabulary; global book_wide_cap unchanged)."
+    todo: null
+    overlay_rule: none
+    overlay_param: {}
+
+  - phrase: "organizational cost calculation"
+    classification: topic_named_mechanism
+    cap_book_wide: 84
+    cap_per_chapter: 8
+    spec_citation: "docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md#phrase-density"
+    rationale: "Fragment of central named mechanism 'organizational cost calculation is'. Same concept. A2 Phase B 2026-06-16: per-phrase cap for topic's named mechanism (operator/brief-sanctioned legitimate topic vocabulary; global book_wide_cap unchanged)."
+    todo: null
+    overlay_rule: none
+    overlay_param: {}
+
+  - phrase: "that the organizational cost"
+    classification: topic_named_mechanism
+    cap_book_wide: 84
+    cap_per_chapter: 8
+    spec_citation: "docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md#phrase-density"
+    rationale: "Sentence-lead fragment of the central named mechanism. Same concept. A2 Phase B 2026-06-16: per-phrase cap for topic's named mechanism (operator/brief-sanctioned legitimate topic vocabulary; global book_wide_cap unchanged)."
+    todo: null
+    overlay_rule: none
+    overlay_param: {}
+
+  - phrase: "the performance review cycle"
+    classification: topic_named_mechanism
+    cap_book_wide: 84
+    cap_per_chapter: 8
+    spec_citation: "docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md#phrase-density"
+    rationale: "Named institutional structure recurring as the concrete antagonist in corporate_managers/courage; authored REFLECTION topic vocabulary. A2 Phase B 2026-06-16: per-phrase cap for topic's named mechanism (operator/brief-sanctioned legitimate topic vocabulary; global book_wide_cap unchanged)."
+    todo: null
+    overlay_rule: none
+    overlay_param: {}
+
+  - phrase: "the structure has made"
+    classification: topic_named_mechanism
+    cap_book_wide: 84
+    cap_per_chapter: 8
+    spec_citation: "docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md#phrase-density"
+    rationale: "Authored REFLECTION mechanism-frame ('The structure has made this costly/true'); topic argument prose, present in courage/anxiety/boundaries REFLECTION CANONICAL atoms. A2 Phase B 2026-06-16: per-phrase cap for topic's named mechanism (operator/brief-sanctioned legitimate topic vocabulary; global book_wide_cap unchanged)."
+    todo: null
+    overlay_rule: none
+    overlay_param: {}
+
+  - phrase: "now we're going to"
+    classification: functional_cue
+    cap_book_wide: 24
+    cap_per_chapter: 2
+    spec_citation: "docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md#phrase-density"
+    rationale: "OPD-113 spec-mandated explicit exercise-introduction cue ('Now we're going to do an exercise'). Functional pedagogical signal fired ~1x per chapter by design (practice_library_loader._introduction_for_type / component_assembler); NOT a defect and NOT topic vocab — sanctioned recurring functional text. A2 Phase B 2026-06-16: per-phrase cap for spec-mandated functional cue (global book_wide_cap unchanged)."
+    todo: null
+    overlay_rule: none
+    overlay_param: {}
+
+  - phrase: "we're going to do"
+    classification: functional_cue
+    cap_book_wide: 24
+    cap_per_chapter: 2
+    spec_citation: "docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md#phrase-density"
+    rationale: "OPD-113 exercise-intro cue fragment ('...going to do a practice/breath practice'). Same spec-mandated functional signal. A2 Phase B 2026-06-16: per-phrase cap for spec-mandated functional cue (global book_wide_cap unchanged)."
+    todo: null
+    overlay_rule: none
+    overlay_param: {}
