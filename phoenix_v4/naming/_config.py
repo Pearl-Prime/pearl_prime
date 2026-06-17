@@ -49,6 +49,10 @@ def load_persona_flavor() -> dict[str, Any]:
     return load_yaml(OMEGA_TITLE_ENTROPY / "persona_title_flavor.yaml")
 
 
+def load_location_phrases() -> dict[str, Any]:
+    return load_yaml(OMEGA_TITLE_ENTROPY / "location_phrases.yaml")
+
+
 def load_title_stems() -> list[str]:
     data = load_yaml(OMEGA_TITLE_ENTROPY / "title_stems.yaml")
     return list(data.get("stems") or [])

@@ -251,6 +251,29 @@ brand_template_preferences:
     subtitle_strategy: { none_pct: 0.10, short_pct: 0.20, long_pct: 0.70 }
     content_mix: { persona_direct: 0.10, topic_direct: 0.55, metaphor: 0.25, location: 0.10 }
 
+  # ─── Devotion / Contemplative cluster ───
+  # Open Vessel Press ("Waystream Sanctuary", teacher sai_ma). Per
+  # persona_in_titles_strategy_research.md: creative/emotional MAIN title
+  # (EngineAngle) + persona-targeted SUBTITLE that NAMES the persona AND carries
+  # the topic keyword. subtitle_strategy heavily favors `long` so MOST books get a
+  # full persona+keyword subtitle. content_mix favors persona_direct.
+  # Preferred subtitle templates are the persona_direct LONG variants that both
+  # NAME the persona AND FILL {PrimaryKeyword}, and that read cleanly with any
+  # keyword shape — noun ("imposter syndrome") or gerund ("building courage"):
+  #   profession_specific  "A Field Guide for {Persona} Navigating {Keyword}"
+  #   identity_shift       "How {Persona} Are Rewriting the Rules of {Keyword}"
+  #   generation_voice     "A Real Talk Guide to {Keyword} for {Persona}"
+  # The topic_direct "Your {Keyword}" templates (invisible_script / mechanism_reveal)
+  # are deliberately NOT preferred: they drop the persona and mangle gerund keywords
+  # ("Your Building Courage"). They still surface in the alternate editorial
+  # candidates (9-12) via the global pool. Location weight = 0 (devotion books have
+  # no location); {N}/{FormatUnit} numbered templates are omitted.
+  devotion_path:
+    title: [metaphor_title, journey_title]
+    subtitle: [profession_specific, identity_shift, generation_voice]
+    subtitle_strategy: { none_pct: 0.05, short_pct: 0.15, long_pct: 0.80 }
+    content_mix: { persona_direct: 0.55, topic_direct: 0.30, metaphor: 0.15, location: 0.00 }
+
   default:
     title: [scenario_direct, outcome_focused]
     subtitle: [short_method, three_part, how_to_stack]

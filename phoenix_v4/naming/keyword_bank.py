@@ -79,6 +79,25 @@ def get_engine_subtitle_hook(engine_id: str) -> str:
     return cfg.get("subtitle_hook", "")
 
 
+def get_engine_angle_pool(engine_id: str) -> list[str]:
+    """Return the full reader-facing angle pool for an engine:
+    [primary_phrase, *alt_phrases]. Used by the generator to rotate creative
+    titles deterministically per book seed instead of always using the single
+    primary_phrase. Returns [] if the engine has no configured angle entry."""
+    angles = _load_engine_angles()
+    cfg = angles.get(engine_id)
+    if not cfg:
+        return []
+    pool: list[str] = []
+    primary = cfg.get("primary_phrase")
+    if primary:
+        pool.append(primary)
+    for alt in (cfg.get("alt_phrases") or []):
+        if alt and alt not in pool:
+            pool.append(alt)
+    return pool
+
+
 def get_keywords(
     series_id: str,
     angle_id: str,

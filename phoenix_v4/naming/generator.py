@@ -204,6 +204,13 @@ def generate_candidates(
     primary = (keywords.get("primary") or topic_id.replace("_", " ")).title()
     secondary = keywords.get("secondary") or []
     engine_angle = keywords.get("engine_angle") or angle_id.replace("_", " ").title()
+    # Rotate the engine angle deterministically across the {primary_phrase, *alt_phrases}
+    # pool keyed by this book's seed, so creative ({EngineAngle}) titles vary per book
+    # instead of every book on an engine collapsing to the single primary_phrase.
+    # Falls back to the resolved engine_angle when no angle pool exists.
+    angle_pool = keyword_bank.get_engine_angle_pool(angle_id) if hasattr(keyword_bank, "get_engine_angle_pool") else []
+    if angle_pool:
+        engine_angle = angle_pool[seed_int % len(angle_pool)]
     scenario_phrase = engine_angle
 
     # Engine subtitle hook from engine_title_angles.yaml
@@ -338,11 +345,20 @@ def generate_candidates(
         if len(candidates) >= 12:
             break
 
-        # Pick title template: brand-preferred first
+        # Pick title template: brand-preferred first.
+        # The brand's declared `title:` list is authoritative — falling back to
+        # the full template set let keyword-in-title skeletons (e.g.
+        # "{PrimaryKeyword} for {PersonaDescription}") leak in and, because the
+        # scorer rewards primary-in-title (0.50) over primary-in-subtitle (0.30),
+        # those outscored the brand's creative/emotional titles. Per
+        # persona_in_titles_strategy_research.md the keyword belongs in the
+        # SUBTITLE and the title stays creative, so draw the fallback from the
+        # brand's preferred titles plus any location-injected title colors.
         if attempt < len(preferred_title) * 4:
             tn = preferred_title[attempt % len(preferred_title)]
         else:
-            tn = rng.choice(title_names)
+            fallback_titles = list(preferred_title) + [k for k in title_names if k.startswith("loc_color_")]
+            tn = rng.choice(fallback_titles or title_names)
 
         t_tpl = title_tpl.get(tn, "{PrimaryKeyword}")
         title_text = fill(t_tpl)
