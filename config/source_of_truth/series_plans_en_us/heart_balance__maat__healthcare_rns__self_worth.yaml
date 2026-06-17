@@ -1,72 +1,61 @@
-series_plan_schema: "1.0.0"
-created_at: "2026-04-24"
+series_plan_schema: 1.0.0
+created_at: '2026-04-24'
 locale: en_US
 book_id_prefix: heart_balance__maat__healthcare_rns__self_worth
-
 brand: heart_balance
 teacher: maat
 persona: healthcare_rns
 topic: self_worth
-
 teacher_topic_score: 0.9
 teacher_persona_score: 0.85
 composite_fit: 0.88
-
 arc:
   installment_1:
-    book_id: heart_balance__maat__healthcare_rns__self_worth__false_alarm
-    engine: false_alarm
-    master_arc: config/source_of_truth/master_arcs/healthcare_rns__self_worth__false_alarm__F006.yaml
+    book_id: heart_balance__maat__healthcare_rns__self_worth__shame
+    engine: shame
+    master_arc: config/source_of_truth/master_arcs/healthcare_rns__self_worth__shame__F006.yaml
     duration: standard_book_60min
   installment_2:
-    book_id: heart_balance__maat__healthcare_rns__self_worth__overwhelm
-    engine: overwhelm
-    master_arc: config/source_of_truth/master_arcs/healthcare_rns__self_worth__overwhelm__F006.yaml
+    book_id: heart_balance__maat__healthcare_rns__self_worth__comparison
+    engine: comparison
+    master_arc: config/source_of_truth/master_arcs/healthcare_rns__self_worth__comparison__F006.yaml
     duration: standard_book_60min
-  installment_3:
-    book_id: heart_balance__maat__healthcare_rns__self_worth__spiral
-    engine: spiral
-    master_arc: config/source_of_truth/master_arcs/healthcare_rns__self_worth__spiral__F006.yaml
-    duration: standard_book_60min
-
-reader_promise_family: >
+reader_promise_family: |
   3 books across engines of self_worth via the mythological-sincere, shojo+ dignity voice.
-
 bestseller_hook_family: recognition_descent
 emotional_engine: self_worth_recognition
-
 comp_series:
-  - "The Gifts of Imperfection (Brown)"
-  - "Radical Acceptance (Brach)"
-  - "The Mountain Is You (Wiest)"
-
+- The Gifts of Imperfection (Brown)
+- Radical Acceptance (Brach)
+- The Mountain Is You (Wiest)
 platform_strategy:
-  primary: [kdp_ebook, audible]
-  secondary: [apple_books, google_play, spotify_audiobooks]
+  primary:
+  - kdp_ebook
+  - audible
+  secondary:
+  - apple_books
+  - google_play
+  - spotify_audiobooks
   launch_platform: kdp_ebook
   cadence:
     release_spacing_days: 14
     max_books_per_brand_per_month: 2
-
 reader_avatar:
-  age: "28–45"
-  where_they_are: >
+  age: 28–45
+  where_they_are: |
     Off-shift but on call in body. Just finished nights.
-  what_they_need: >
+  what_they_need: |
     Names what nursing does to a nervous system.
-  what_they_avoid: >
+  what_they_avoid: |
     Bubble baths. Hero narratives.
-
 series_voice_markers:
-  register: "mythological-sincere, shojo+ dignity"
-  sentence_rhythm: "balanced, heraldic, architectural"
-  metaphor_family: "scales, gold leaf, star maps"
+  register: mythological-sincere, shojo+ dignity
+  sentence_rhythm: balanced, heraldic, architectural
+  metaphor_family: scales, gold leaf, star maps
   second_person_default: true
-
 main_character_name: Ilana
-main_character_role: "floor RN in a hospital unit"
+main_character_role: floor RN in a hospital unit
 main_character_image_path: null
 main_character_lora_id: ilana_hb_us
 main_character_trigger_word: ilana_hb_us
-
 plan_source_path: config/manga/manga_brand_series_plan.yaml
