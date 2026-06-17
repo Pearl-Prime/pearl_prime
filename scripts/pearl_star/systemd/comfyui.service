@@ -1,0 +1,35 @@
+# Pearl Star Job Queue V1 — ComfyUI service (hardens manual-start)
+#
+# Install to: /etc/systemd/system/comfyui.service
+# Then:       sudo systemctl daemon-reload && sudo systemctl enable --now comfyui
+#
+# Spec: PEARL_STAR_JOB_QUEUE_V1_SPEC.md §4.6 ("comfyui.service (NEW — hardens
+#       ComfyUI manual-start)"), §4.4 (ComfyUI-Persistent-Queue overlay). This
+#       brings ComfyUI up at boot so the t2i worker has a render backend after a
+#       reboot (spec §13 criterion 1 reboot-resume).
+#
+# OPERATOR: confirm the three paths below match this box BEFORE enabling:
+#   - User / WorkingDirectory: the account + checkout that owns ComfyUI
+#     (dispatcher convention: ~/phoenix_server/ComfyUI, user ahjan108)
+#   - ExecStart python: ComfyUI's own venv interpreter
+#   - --listen 127.0.0.1 --port 8188 keeps it localhost-only (spec §2 constraint 4)
+[Unit]
+Description=ComfyUI (Pearl Star image-gen backend)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=ahjan108
+Group=ahjan108
+WorkingDirectory=/home/ahjan108/phoenix_server/ComfyUI
+Environment=PYTHONUNBUFFERED=1
+# Localhost-only bind (Tailscale/LAN producers reach it via SSH tunnel; spec §2).
+ExecStart=/home/ahjan108/phoenix_server/ComfyUI/venv/bin/python main.py --listen 127.0.0.1 --port 8188
+Restart=always
+RestartSec=10s
+# ComfyUI model load can be slow on a cold cache.
+TimeoutStartSec=180
+
+[Install]
+WantedBy=multi-user.target

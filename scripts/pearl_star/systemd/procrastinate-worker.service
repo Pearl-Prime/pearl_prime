@@ -1,0 +1,60 @@
+# Pearl Star Job Queue V1 — Procrastinate worker (Phase A: t2i flux-schnell)
+#
+# Install to: /etc/systemd/system/procrastinate-worker.service
+# Then:       sudo systemctl daemon-reload && sudo systemctl enable --now procrastinate-worker
+#
+# Spec: PEARL_STAR_JOB_QUEUE_V1_SPEC.md §4.6 (WantedBy=multi-user.target,
+#       auto-resume after reboot), §4.7 (GPU-lock = --concurrency 1 on t2i),
+#       §8 step 7 (Phase A dogfoods the t2i flux-schnell queue).
+#
+# Phase A runs ONE worker on the t2i queue at concurrency=1. Phase B (Pearl_Dev)
+# adds llm/tts/orch workers — copy this unit per queue or use a templated
+# procrastinate-worker@.service then. The pause sentinel (pscli pause) is
+# honored via the ExecStartPre guard + the worker's own --wait loop: when the
+# sentinel exists the wrapper holds before exec, so `pscli pause/resume` halts
+# and restarts dispatch (spec §13 criterion 5).
+[Unit]
+Description=Pearl Star Procrastinate worker (t2i flux-schnell)
+After=network-online.target postgresql@17-main.service comfyui.service
+Wants=network-online.target postgresql@17-main.service
+# Don't fetch jobs until the broker is actually accepting connections.
+Requires=postgresql@17-main.service
+
+[Service]
+Type=simple
+User=pearl-star
+Group=pearl-star
+WorkingDirectory=/opt/pearl-star/app
+
+# Queue runtime config (mirrors install/00_config.sh). EnvironmentFile lets the
+# operator drop the DSN + tunables without editing this unit. The installer
+# writes /etc/pearl-star/queue.env from 00_config.sh values.
+EnvironmentFile=/etc/pearl-star/queue.env
+Environment=PROCRASTINATE_APP=app.app:app
+Environment=PYTHONPATH=/opt/pearl-star/app
+Environment=PYTHONUNBUFFERED=1
+
+# Hold here while the operator has paused dispatch (pscli pause). Resumes the
+# instant the sentinel is removed (pscli resume). Cheap poll; no busy spin.
+ExecStartPre=/bin/sh -c 'while [ -f "${PS_LIB_DIR:-/var/lib/pearl-star}/queue.paused" ]; do sleep 3; done'
+
+# t2i is GPU-heavy => concurrency 1 (spec §4.7 shared GPU-lock).
+ExecStart=/opt/pearl-star/venv/bin/python -m procrastinate \
+    --app app.app:app worker --queues t2i --concurrency 1 --name t2i
+
+# Reboot-resume: always come back; pending jobs auto-dispatch (spec §4.6).
+Restart=always
+RestartSec=5s
+
+# Graceful stop: SIGTERM lets Procrastinate finish the in-flight job (acks-when-done),
+# then SIGKILL after the watchdog grace. Matches spec §5.2 kill semantics.
+KillSignal=SIGTERM
+TimeoutStopSec=30
+
+# Light hardening (the worker needs GPU + ComfyUI socket + output dir).
+NoNewPrivileges=true
+ProtectSystem=full
+ReadWritePaths=/var/lib/pearl-star /var/log/pearl-star /run/pearl-star
+
+[Install]
+WantedBy=multi-user.target
