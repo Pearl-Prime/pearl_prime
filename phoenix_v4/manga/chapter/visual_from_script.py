@@ -42,6 +42,7 @@ don't pass brand/genre, and no hard dependency on the individuation catalog.
 
 from __future__ import annotations
 
+import dataclasses
 import logging
 from typing import Any, Mapping
 
@@ -50,6 +51,18 @@ from phoenix_v4.manga.ite_pipeline import ite_prompt_suffix
 from phoenix_v4.manga.visual_prompt_compiler import VisualPromptRequest, compile_visual_prompt
 
 logger = logging.getLogger(__name__)
+
+# Which scene-aware request fields the compiler accepts. PR #1728 added optional
+# ``action`` + ``camera`` to ``VisualPromptRequest`` so the authored scene beat +
+# camera shot-type LEAD the positive prompt (FLUX weights leading tokens most),
+# making each panel render its own beat instead of one scene-agnostic style
+# portrait. We forward those fields **only when the dataclass supports them**, so
+# this v1/v2 caller is merge-order-independent with #1728: byte-identical to the
+# legacy output until #1728 lands, scene-aware the instant it does. The camera →
+# shot-type mapping + scene-lead composition live in the compiler (the canonical
+# owner) — this caller forwards the raw authored strings and never forks a table.
+_REQUEST_FIELDS = frozenset(f.name for f in dataclasses.fields(VisualPromptRequest))
+_REQUEST_SUPPORTS_SCENE = {"action", "camera"} <= _REQUEST_FIELDS
 
 # Rough mood → engine mapping for kernel defaults (VISUAL_AGENT will refine).
 _MOOD_TO_ENGINE: dict[str, str] = {
@@ -84,6 +97,7 @@ def _panel_to_request(
     teacher_id: str,
 ) -> VisualPromptRequest:
     action = str(panel.get("action") or "")
+    camera = str(panel.get("camera") or "")
     dialogue = panel.get("dialogue")
     if isinstance(dialogue, list) and dialogue:
         atom_text = " ".join(str(x) for x in dialogue[:5])
@@ -96,7 +110,7 @@ def _panel_to_request(
     pexpr = panel.get("panel_expression")
     if not isinstance(pexpr, str) and pexpr is not None:
         pexpr = str(pexpr)
-    return VisualPromptRequest(
+    kwargs: dict[str, Any] = dict(
         atom_type="STORY",
         atom_text=atom_text[:4000],
         style_id=style_id,
@@ -107,6 +121,13 @@ def _panel_to_request(
         engine_type=engine_type,
         panel_expression=pexpr,
     )
+    # Forward the authored scene beat + camera so the compiler can lead the
+    # positive prompt with this panel's own scene (PR #1728). Gated on dataclass
+    # support so the legacy assembly stays byte-identical until #1728 merges.
+    if _REQUEST_SUPPORTS_SCENE:
+        kwargs["action"] = action
+        kwargs["camera"] = camera
+    return VisualPromptRequest(**kwargs)
 
 
 def _resolve_engine_selection(
