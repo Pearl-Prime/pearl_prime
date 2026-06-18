@@ -62,3 +62,32 @@ GUARDRAILS honored: no paid API (Tier-1 Claude authored the prose in-session; pa
 REMAINS (full-catalog scale): this is ep_001 of the lead series. Scale to the weekly cadence — devotion_path runs 3 series (grief/compassion/courage) at weekly chapters (devotion_en_02 Amara / _03 Kenji / _04 Lin), then the other 12 teacher brands' manga lanes. The renderer here is a deterministic local PIL stand-in for the iyashikei look; swap to the Pearl Star FLUX queue (or ComfyUI) for photoreal panels when a GPU slot is free — same DAG, same gate, same packaging.
 
 - 2026-06-18 — Devotion manga ep_001 (webtoon + PDF) live in Director UI → SHA ad868fd66643941b9c0b7125b3562c34efd19991 (PR #1722)
+
+## Update 4 — 2026-06-18 (release-cadence FIX: Devotion 80 e-books re-sliced into a capped ramp)
+**Pearl_Marketing — the 80 Devotion / Open Vessel Press e-book EPUBs were all dumped into a single week (2026-W25), bypassing the release-cadence scheduler; the Brand Director UI showed ~80 books for one week, violating the per-platform-per-week caps + new-brand ramp.**
+
+ROOT CAUSE: `gen_brand_deliveries.py` mirrors whatever `weekly_packages/<brand>/<week>/<platform>/` holds, with NO cadence validation. Wave-2 (Update 3) wrote all 80 EPUBs into `2026-W25/amazon_kdp/`, so the feed (`brand_deliveries/devotion_path.json`) listed 80 in one week and the dashboard's `latest_week` block showed all 80.
+
+SSOT cadence (unchanged — these are the existing caps, not new numbers):
+- `config/release_velocity/safe_velocity.yaml` — Google Play Books `new_imprint` per_week = [10, 20] → **cap_max = 20/wk** for the EN lane.
+- `config/release_velocity/velocity_ramp.yaml` — new-imprint ramp: 1-2/wk early → grow → hold at cap.
+- EN lane (`config/release_velocity/lanes.yaml`) caps against Google Play only.
+
+PER-WEEK SCHEDULE APPLIED (consecutive ISO weeks from the current week 2026-W25; amazon_kdp; every week ≤ cap_max 20; total = 80):
+```
+W25=2  W26=2  W27=3  W28=3  W29=4  W30=5  W31=6
+W32=7  W33=8  W34=10 W35=12 W36=14 W37=4
+```
+(W25's existing manga deliveries — webtoon ×1, kdp ×1 from Update 3 — preserved untouched.)
+
+ENFORCEMENT WIRING (so this cannot regress):
+- NEW `scripts/release/cadence_reslice_deliveries.py` — reads cap_max from `safe_velocity.yaml` (same resolution as `generate_weekly_schedule.py`), builds the monotonic new-imprint ramp onto consecutive ISO weeks, and physically re-slices an over-stuffed `weekly_packages/<brand>/<week>/<platform>/` folder. Deterministic (sorted by file); FAILS if any week would exceed cap_max.
+- `scripts/onboarding/gen_brand_deliveries.py` is now cadence-aware: before publishing it validates every week's per-platform count against `safe_velocity` cap_max and **refuses (exit 1)** on overflow, pointing at the re-slicer (operator override: `GEN_BRAND_DELIVERIES_ALLOW_OVERFLOW=1`). It also resolves `latest_week` to the **current** ISO week when the brand has a packet that week, so a ramped backlog shows the cadenced count (≈1-2) instead of the largest/last future week. amazon_kdp / webtoon / kdp (not in safe_velocity) are capped against the conservative EN-lane Google ceiling.
+
+VERIFIED:
+- `brand_deliveries/devotion_path.json`: 13 weeks W25..W37, every amazon_kdp week ≤ 20, total 80, `latest_week = 2026-W25` (count 2).
+- Guard proven: re-stuffing all 80 into W25 makes `gen_brand_deliveries.py` exit 1 with `devotion_path 2026-W25 amazon_kdp: 80 > cap_max 20`.
+- Dashboard (in-browser, `?brand=devotion_path_en_us`): "✅ Your real production files — 2026-W25" shows **2** EPUB downloads, not 80.
+- All 80 EPUB blobs are content-identical to origin/main (relocated only; Rule-0 clean: moves + adds + edits, 0 mass-deletions).
+
+FOLLOW-UP SWEEP (flagged): this same un-cadenced-dump bug applies to ANY brand whose deliveries are built directly into one week. Today only `devotion_path` was over-cap; `stillness_press` is fine. The `gen_brand_deliveries.py` guard now catches future dumps for all brands, but any pre-existing single-week piles should be swept with the re-slicer.
