@@ -5,7 +5,7 @@
 
 version: 1.1
 registry_type: brand_archetype
-total_brands: 24
+total_brands: 25
 
 global_constraints:
   max_mid_form_ratio: 0.25
@@ -841,3 +841,17 @@ brand_archetypes:
       micro_sessions: [4.99, 6.99]
       deep_dives: [19.99, 27.99]
       discount_ratio: 0.20
+
+  # Added 2026-06-18: way_stream_sanctuary — composite (no-teacher) NEW signup
+  # (intake way_stream_sanctuary_brand-config.yaml, 2026-06-15). Phase-0 registration per
+  # docs/specs/WAYSTREAM_80BOOK_CATALOG_RUN_V1_SPEC.md; catalog/marketing fields are Phase-1.
+  - brand_id: way_stream_sanctuary
+    admin_id: "25"
+    gtm_identity:
+      persona: spiritual_returner
+      age_range: [45, 58]
+      primary_moment: late_night_overthinking
+      emotional_job: find meaning without religion
+      functional_job: quiet the 2am overthinking mind
+    emotional_vocabulary:
+      allowed_tokens: ["meaning", "stillness", "clarity", "grounded", "presence"]

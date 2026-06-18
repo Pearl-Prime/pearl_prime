@@ -1,9 +1,9 @@
 schema_version: '2.0'
 generated_by: build_unified_brand_registry.py
 spec: specs/BRAND_REGISTRY_RECONCILIATION_37x14_SPEC.md
-total_brand_archetypes: 39
+total_brand_archetypes: 40
 total_lanes: 14
-total_brands: 546
+total_brands: 560
 inactive_archetypes:
 - cognitive_clarity
 thin_archetypes_topics_from_manga_only:
@@ -21,6 +21,7 @@ thin_archetypes_topics_from_manga_only:
 - spiritual_ground
 - stoic_edge
 - trauma_path
+- way_stream_sanctuary
 lanes:
 - en_US
 - zh_TW
@@ -1104,6 +1105,27 @@ brands:
     lifecycle: active
     _deep_ported: true
     _manga_axis: legacy_builder
+  way_stream_sanctuary_en_us:
+    brand_id: way_stream_sanctuary_en_us
+    lane_id: en_US
+    locale: en-US
+    lane_manga_pct: 0.2
+    brand_archetype_id: way_stream_sanctuary
+    display_name: Waystream Sanctuary
+    publication_corp: Waystream Sanctuary
+    teacher_id: null
+    teacher_mode: false
+    tradition: ''
+    brand_focus: quiet the 2am overthinking mind; find meaning without religion
+    primary_topics: &id118 []
+    primary_personas: &id119
+    - spiritual_returner
+    content_families: &id120 []
+    mission: To elevate people, especially the youth, helping them with their life
+      challenges and aspirations.
+    lifecycle: active
+    _deep_ported: false
+    _manga_axis: way_stream_sanctuary
   stillness_press_zh_tw:
     brand_id: stillness_press_zh_tw
     lane_id: zh_TW
@@ -1887,6 +1909,26 @@ brands:
     lifecycle: active
     _deep_ported: true
     _manga_axis: legacy_builder
+  way_stream_sanctuary_zh_tw:
+    brand_id: way_stream_sanctuary_zh_tw
+    lane_id: zh_TW
+    locale: zh-TW
+    lane_manga_pct: 0.55
+    brand_archetype_id: way_stream_sanctuary
+    display_name: Waystream Sanctuary
+    publication_corp: Waystream Sanctuary
+    teacher_id: null
+    teacher_mode: false
+    tradition: ''
+    brand_focus: quiet the 2am overthinking mind; find meaning without religion
+    primary_topics: *id118
+    primary_personas: *id119
+    content_families: *id120
+    mission: To elevate people, especially the youth, helping them with their life
+      challenges and aspirations.
+    lifecycle: active
+    _deep_ported: false
+    _manga_axis: way_stream_sanctuary
   stillness_press_zh_hk:
     brand_id: stillness_press_zh_hk
     lane_id: zh_HK
@@ -2670,6 +2712,26 @@ brands:
     lifecycle: active
     _deep_ported: true
     _manga_axis: legacy_builder
+  way_stream_sanctuary_zh_hk:
+    brand_id: way_stream_sanctuary_zh_hk
+    lane_id: zh_HK
+    locale: zh-HK
+    lane_manga_pct: 0.15
+    brand_archetype_id: way_stream_sanctuary
+    display_name: Waystream Sanctuary
+    publication_corp: Waystream Sanctuary
+    teacher_id: null
+    teacher_mode: false
+    tradition: ''
+    brand_focus: quiet the 2am overthinking mind; find meaning without religion
+    primary_topics: *id118
+    primary_personas: *id119
+    content_families: *id120
+    mission: To elevate people, especially the youth, helping them with their life
+      challenges and aspirations.
+    lifecycle: active
+    _deep_ported: false
+    _manga_axis: way_stream_sanctuary
   stillness_press_zh_cn:
     brand_id: stillness_press_zh_cn
     lane_id: zh_CN
@@ -3453,6 +3515,26 @@ brands:
     lifecycle: active
     _deep_ported: true
     _manga_axis: legacy_builder
+  way_stream_sanctuary_zh_cn:
+    brand_id: way_stream_sanctuary_zh_cn
+    lane_id: zh_CN
+    locale: zh-CN
+    lane_manga_pct: 0.0
+    brand_archetype_id: way_stream_sanctuary
+    display_name: Waystream Sanctuary
+    publication_corp: Waystream Sanctuary
+    teacher_id: null
+    teacher_mode: false
+    tradition: ''
+    brand_focus: quiet the 2am overthinking mind; find meaning without religion
+    primary_topics: *id118
+    primary_personas: *id119
+    content_families: *id120
+    mission: To elevate people, especially the youth, helping them with their life
+      challenges and aspirations.
+    lifecycle: active
+    _deep_ported: false
+    _manga_axis: way_stream_sanctuary
   stillness_press_zh_sg:
     brand_id: stillness_press_zh_sg
     lane_id: zh_SG
@@ -4236,6 +4318,26 @@ brands:
     lifecycle: active
     _deep_ported: true
     _manga_axis: legacy_builder
+  way_stream_sanctuary_zh_sg:
+    brand_id: way_stream_sanctuary_zh_sg
+    lane_id: zh_SG
+    locale: zh-SG
+    lane_manga_pct: 0.15
+    brand_archetype_id: way_stream_sanctuary
+    display_name: Waystream Sanctuary
+    publication_corp: Waystream Sanctuary
+    teacher_id: null
+    teacher_mode: false
+    tradition: ''
+    brand_focus: quiet the 2am overthinking mind; find meaning without religion
+    primary_topics: *id118
+    primary_personas: *id119
+    content_families: *id120
+    mission: To elevate people, especially the youth, helping them with their life
+      challenges and aspirations.
+    lifecycle: active
+    _deep_ported: false
+    _manga_axis: way_stream_sanctuary
   stillness_press_ja_jp:
     brand_id: stillness_press_ja_jp
     lane_id: ja_JP
@@ -5019,6 +5121,26 @@ brands:
     lifecycle: active
     _deep_ported: true
     _manga_axis: legacy_builder
+  way_stream_sanctuary_ja_jp:
+    brand_id: way_stream_sanctuary_ja_jp
+    lane_id: ja_JP
+    locale: ja-JP
+    lane_manga_pct: 0.7
+    brand_archetype_id: way_stream_sanctuary
+    display_name: Waystream Sanctuary
+    publication_corp: Waystream Sanctuary
+    teacher_id: null
+    teacher_mode: false
+    tradition: ''
+    brand_focus: quiet the 2am overthinking mind; find meaning without religion
+    primary_topics: *id118
+    primary_personas: *id119
+    content_families: *id120
+    mission: To elevate people, especially the youth, helping them with their life
+      challenges and aspirations.
+    lifecycle: active
+    _deep_ported: false
+    _manga_axis: way_stream_sanctuary
   stillness_press_ko_kr:
     brand_id: stillness_press_ko_kr
     lane_id: ko_KR
@@ -5802,6 +5924,26 @@ brands:
     lifecycle: active
     _deep_ported: true
     _manga_axis: legacy_builder
+  way_stream_sanctuary_ko_kr:
+    brand_id: way_stream_sanctuary_ko_kr
+    lane_id: ko_KR
+    locale: ko-KR
+    lane_manga_pct: 0.6
+    brand_archetype_id: way_stream_sanctuary
+    display_name: Waystream Sanctuary
+    publication_corp: Waystream Sanctuary
+    teacher_id: null
+    teacher_mode: false
+    tradition: ''
+    brand_focus: quiet the 2am overthinking mind; find meaning without religion
+    primary_topics: *id118
+    primary_personas: *id119
+    content_families: *id120
+    mission: To elevate people, especially the youth, helping them with their life
+      challenges and aspirations.
+    lifecycle: active
+    _deep_ported: false
+    _manga_axis: way_stream_sanctuary
   stillness_press_es_us:
     brand_id: stillness_press_es_us
     lane_id: es_US
@@ -6585,6 +6727,26 @@ brands:
     lifecycle: active
     _deep_ported: true
     _manga_axis: legacy_builder
+  way_stream_sanctuary_es_us:
+    brand_id: way_stream_sanctuary_es_us
+    lane_id: es_US
+    locale: es-US
+    lane_manga_pct: 0.15
+    brand_archetype_id: way_stream_sanctuary
+    display_name: Waystream Sanctuary
+    publication_corp: Waystream Sanctuary
+    teacher_id: null
+    teacher_mode: false
+    tradition: ''
+    brand_focus: quiet the 2am overthinking mind; find meaning without religion
+    primary_topics: *id118
+    primary_personas: *id119
+    content_families: *id120
+    mission: To elevate people, especially the youth, helping them with their life
+      challenges and aspirations.
+    lifecycle: active
+    _deep_ported: false
+    _manga_axis: way_stream_sanctuary
   stillness_press_es_es:
     brand_id: stillness_press_es_es
     lane_id: es_ES
@@ -7368,6 +7530,26 @@ brands:
     lifecycle: active
     _deep_ported: true
     _manga_axis: legacy_builder
+  way_stream_sanctuary_es_es:
+    brand_id: way_stream_sanctuary_es_es
+    lane_id: es_ES
+    locale: es-ES
+    lane_manga_pct: 0.2
+    brand_archetype_id: way_stream_sanctuary
+    display_name: Waystream Sanctuary
+    publication_corp: Waystream Sanctuary
+    teacher_id: null
+    teacher_mode: false
+    tradition: ''
+    brand_focus: quiet the 2am overthinking mind; find meaning without religion
+    primary_topics: *id118
+    primary_personas: *id119
+    content_families: *id120
+    mission: To elevate people, especially the youth, helping them with their life
+      challenges and aspirations.
+    lifecycle: active
+    _deep_ported: false
+    _manga_axis: way_stream_sanctuary
   stillness_press_fr_fr:
     brand_id: stillness_press_fr_fr
     lane_id: fr_FR
@@ -8151,6 +8333,26 @@ brands:
     lifecycle: active
     _deep_ported: true
     _manga_axis: legacy_builder
+  way_stream_sanctuary_fr_fr:
+    brand_id: way_stream_sanctuary_fr_fr
+    lane_id: fr_FR
+    locale: fr-FR
+    lane_manga_pct: 0.3
+    brand_archetype_id: way_stream_sanctuary
+    display_name: Waystream Sanctuary
+    publication_corp: Waystream Sanctuary
+    teacher_id: null
+    teacher_mode: false
+    tradition: ''
+    brand_focus: quiet the 2am overthinking mind; find meaning without religion
+    primary_topics: *id118
+    primary_personas: *id119
+    content_families: *id120
+    mission: To elevate people, especially the youth, helping them with their life
+      challenges and aspirations.
+    lifecycle: active
+    _deep_ported: false
+    _manga_axis: way_stream_sanctuary
   stillness_press_de_de:
     brand_id: stillness_press_de_de
     lane_id: de_DE
@@ -8934,6 +9136,26 @@ brands:
     lifecycle: active
     _deep_ported: true
     _manga_axis: legacy_builder
+  way_stream_sanctuary_de_de:
+    brand_id: way_stream_sanctuary_de_de
+    lane_id: de_DE
+    locale: de-DE
+    lane_manga_pct: 0.2
+    brand_archetype_id: way_stream_sanctuary
+    display_name: Waystream Sanctuary
+    publication_corp: Waystream Sanctuary
+    teacher_id: null
+    teacher_mode: false
+    tradition: ''
+    brand_focus: quiet the 2am overthinking mind; find meaning without religion
+    primary_topics: *id118
+    primary_personas: *id119
+    content_families: *id120
+    mission: To elevate people, especially the youth, helping them with their life
+      challenges and aspirations.
+    lifecycle: active
+    _deep_ported: false
+    _manga_axis: way_stream_sanctuary
   stillness_press_it_it:
     brand_id: stillness_press_it_it
     lane_id: it_IT
@@ -9717,6 +9939,26 @@ brands:
     lifecycle: active
     _deep_ported: true
     _manga_axis: legacy_builder
+  way_stream_sanctuary_it_it:
+    brand_id: way_stream_sanctuary_it_it
+    lane_id: it_IT
+    locale: it-IT
+    lane_manga_pct: 0.15
+    brand_archetype_id: way_stream_sanctuary
+    display_name: Waystream Sanctuary
+    publication_corp: Waystream Sanctuary
+    teacher_id: null
+    teacher_mode: false
+    tradition: ''
+    brand_focus: quiet the 2am overthinking mind; find meaning without religion
+    primary_topics: *id118
+    primary_personas: *id119
+    content_families: *id120
+    mission: To elevate people, especially the youth, helping them with their life
+      challenges and aspirations.
+    lifecycle: active
+    _deep_ported: false
+    _manga_axis: way_stream_sanctuary
   stillness_press_hu_hu:
     brand_id: stillness_press_hu_hu
     lane_id: hu_HU
@@ -10500,6 +10742,26 @@ brands:
     lifecycle: active
     _deep_ported: true
     _manga_axis: legacy_builder
+  way_stream_sanctuary_hu_hu:
+    brand_id: way_stream_sanctuary_hu_hu
+    lane_id: hu_HU
+    locale: hu-HU
+    lane_manga_pct: 0.15
+    brand_archetype_id: way_stream_sanctuary
+    display_name: Waystream Sanctuary
+    publication_corp: Waystream Sanctuary
+    teacher_id: null
+    teacher_mode: false
+    tradition: ''
+    brand_focus: quiet the 2am overthinking mind; find meaning without religion
+    primary_topics: *id118
+    primary_personas: *id119
+    content_families: *id120
+    mission: To elevate people, especially the youth, helping them with their life
+      challenges and aspirations.
+    lifecycle: active
+    _deep_ported: false
+    _manga_axis: way_stream_sanctuary
   stillness_press_pt_br:
     brand_id: stillness_press_pt_br
     lane_id: pt_BR
@@ -11283,3 +11545,23 @@ brands:
     lifecycle: active
     _deep_ported: true
     _manga_axis: legacy_builder
+  way_stream_sanctuary_pt_br:
+    brand_id: way_stream_sanctuary_pt_br
+    lane_id: pt_BR
+    locale: pt-BR
+    lane_manga_pct: 0.26
+    brand_archetype_id: way_stream_sanctuary
+    display_name: Waystream Sanctuary
+    publication_corp: Waystream Sanctuary
+    teacher_id: null
+    teacher_mode: false
+    tradition: ''
+    brand_focus: quiet the 2am overthinking mind; find meaning without religion
+    primary_topics: *id118
+    primary_personas: *id119
+    content_families: *id120
+    mission: To elevate people, especially the youth, helping them with their life
+      challenges and aspirations.
+    lifecycle: active
+    _deep_ported: false
+    _manga_axis: way_stream_sanctuary
