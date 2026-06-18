@@ -163,3 +163,51 @@ gates:
     stage_owner: chapter_qc
     severity: BLOCKER
     description: No forbidden therapeutic terms in dialogue or captions (ITE T-04 cross-check).
+
+  # ── Bestseller story-substance gates (chapter_qc — HARD_FAIL) ─────
+  # Emitted by phoenix_v4/manga/qc/bestseller_gate.py and enforced in
+  # phoenix_v4/manga/runner/chapter_runner.py::_stage_qc, which raises
+  # BestsellerGateError (HARD_FAIL) on any BLOCKER finding here in the production
+  # quality profile (set MANGA_QC_NONBLOCKING=1 to downgrade to advisory for
+  # CI/triage). Listed per specs/AI_MANGA_PIPELINE_SUMMARY.md section 8 — the gate
+  # registry is the single source of truth; any gate_id not listed is not enforced.
+  - gate_id: MANGA.BESTSELLER.SUBSTANCE
+    stage_owner: chapter_qc
+    severity: BLOCKER
+    description: Chapter has authored story body, not a canned skeleton — enough panels and pages, no unfilled stub or placeholder markers (TODO, TBD, FIXME, HOOK, unfilled template slots), no verbatim-repeated or low-variety templated panels, and a non-empty close.
+
+  - gate_id: MANGA.BESTSELLER.HEALING_REGISTER
+    stage_owner: chapter_qc
+    severity: BLOCKER
+    description: Healing/iyashikei-profile chapters avoid the craft-bible section 6 cardinal sins — no emotional labeling in caption or narration, no cliffhanger or question endings, and no villain/threat/battle language that breaks the healing contract.
+
+  # ── Craft register gates (chapter_qc) ─────────────────────────────
+  # Native severity MAJOR, but bestseller_gate.evaluate_bestseller_gate runs each
+  # of these and PROMOTES its finding to BLOCKER in the production profile, so they
+  # too can HARD_FAIL the chapter pipeline. Listed here so every gate_id the
+  # bestseller gate can emit is known to the registry (SSOT). Emitters:
+  # hook_gate.py / pacing_gates.py / restraint_gate.py / yearning_gate.py.
+  - gate_id: MANGA.CHAPTER.HOOK
+    stage_owner: chapter_qc
+    severity: MAJOR
+    description: Chapter-end final panel/note signals the profile's chapter_hook_family. Promoted to BLOCKER by the bestseller gate in production.
+
+  - gate_id: MANGA.SILENCE.DENSITY
+    stage_owner: chapter_qc
+    severity: MAJOR
+    description: Silent-panel ratio is within the profile's silent_panel_ratio target plus/minus 0.15. Promoted to BLOCKER by the bestseller gate in production.
+
+  - gate_id: MANGA.GENRE.AUTHENTICITY
+    stage_owner: chapter_qc
+    severity: MAJOR
+    description: Words-per-page is within the profile's genre band (explicit pacing words_per_page_band, or words_per_page_target plus/minus 30%). Promoted to BLOCKER by the bestseller gate in production.
+
+  - gate_id: MANGA.RESTRAINT.EXPOSITION
+    stage_owner: chapter_qc
+    severity: MAJOR
+    description: Josei/shojo/romance chapters keep explicit emotional narration at or below 25% of panels — emotion is shown (gesture/silence/action), not labeled. Promoted to BLOCKER by the bestseller gate in production.
+
+  - gate_id: MANGA.YEARNING.PACING
+    stage_owner: chapter_qc
+    severity: MAJOR
+    description: Longing/romance chapters defer resolution — resolution language stays at or below 15% of panels (no premature confession, kiss, or closure), sustaining yearning. Promoted to BLOCKER by the bestseller gate in production.
