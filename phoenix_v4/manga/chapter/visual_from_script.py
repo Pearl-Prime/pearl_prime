@@ -22,7 +22,20 @@ the inputs aren't available):
      into the negative. This is what pushes same-brand characters off the
      "average-face attractor" toward solver-distinct renders.
 
-If either layer can't resolve its inputs, the panel falls back to the existing
+  3. Genre drawing tradition — when a ``genre_id`` is known, the per-genre
+     drawing-tradition cookbook (``config/manga/drawing_tradition_per_genre.yaml``
+     + ``cross_genre_blending_rules.yaml``) contributes render-ready
+     tradition tokens (line / ink / palette / mangaka-anchor or the curated
+     ``H_token_mapping`` string) to **every** panel's positive prompt and its
+     anti-drift list to the negative. Unlike layer 2 this is **decoupled from
+     character individuation**: a Devotion/healing chapter gets iyashikei
+     (soft line, gentle screentone, contemplative) tokens even when no
+     ``character_design`` resolves. Previously these tokens only rode in as a
+     side-effect of layer 2, so genre-correctness silently dropped whenever a
+     series had no character design — the "healing rendered like the wrong
+     tradition" failure (mirror of "horror rendered like slice-of-life").
+
+If a layer can't resolve its inputs, the panel falls back to the existing
 ``compile_visual_prompt`` output unchanged — no behavior change for callers that
 don't pass brand/genre, and no hard dependency on the individuation catalog.
 """
@@ -32,6 +45,7 @@ from __future__ import annotations
 import logging
 from typing import Any, Mapping
 
+from phoenix_v4.manga.genre_tradition import genre_tradition_tokens
 from phoenix_v4.manga.ite_pipeline import ite_prompt_suffix
 from phoenix_v4.manga.visual_prompt_compiler import VisualPromptRequest, compile_visual_prompt
 
@@ -222,6 +236,33 @@ def _blend_individuation_tokens(
     return out_pos, out_neg, True
 
 
+def _fold_genre_tradition(
+    *,
+    base_positive: str,
+    base_negative: str,
+    positive_tokens: list[str],
+    negative_tokens: list[str],
+) -> tuple[str, str]:
+    """Fold pre-resolved genre drawing-tradition tokens into one panel prompt.
+
+    De-duped against the existing prompt (case-insensitive substring) so
+    re-runs and overlap with the base archetype don't double-append. Pure
+    string composition — no I/O — so the caller resolves tokens once per
+    chapter and reuses them across panels.
+    """
+    out_pos = base_positive
+    for tok in positive_tokens:
+        t = (tok or "").strip()
+        if t and t.lower() not in out_pos.lower():
+            out_pos = f"{out_pos.rstrip('. ')}. {t}".strip(". ")
+    out_neg = base_negative
+    for tok in negative_tokens:
+        t = (tok or "").strip()
+        if t and t.lower() not in out_neg.lower():
+            out_neg = f"{out_neg.rstrip(', ')}, {t}".strip(", ")
+    return out_pos, out_neg
+
+
 def compile_panel_prompts_from_chapter_script(
     chapter_script: Mapping[str, Any],
     *,
@@ -264,6 +305,19 @@ def compile_panel_prompts_from_chapter_script(
         builder_base = _ENGINE_TO_BUILDER_BASE.get(str(routing.get("engine") or ""), "flux_schnell")
         builder_config = _build_individuation_config(builder_base)
 
+    # ── 2b. Resolve genre drawing-tradition tokens (fail-open; DECOUPLED from
+    # character individuation). Whenever a genre is known, every panel carries
+    # the per-genre tradition (line/ink/palette/mangaka or curated H_token_mapping)
+    # — so e.g. Devotion → iyashikei even with no character_design. Resolved once
+    # per chapter; the routed engine (else flux_schnell) selects the token variant.
+    tradition_base = _ENGINE_TO_BUILDER_BASE.get(
+        str((routing or {}).get("engine") or ""), "flux_schnell"
+    )
+    genre_pos_tokens, genre_neg_tokens = genre_tradition_tokens(
+        genre_id, secondary_genre=secondary_genre, base_model=tradition_base,
+    )
+    genre_tradition_engaged = bool(genre_pos_tokens or genre_neg_tokens)
+
     individuation_engaged_any = False
 
     panels_out: list[dict[str, Any]] = []
@@ -299,6 +353,19 @@ def compile_panel_prompts_from_chapter_script(
             built["negative"] = new_neg
             individuation_engaged_any = individuation_engaged_any or panel_individuated
 
+        # ── Fold genre drawing-tradition tokens into THIS panel (decoupled from
+        # individuation; applies whenever a genre resolved). De-duped against the
+        # base archetype + any individuation tokens already folded above. ──
+        if genre_tradition_engaged:
+            g_pos, g_neg = _fold_genre_tradition(
+                base_positive=str(built["positive"]),
+                base_negative=str(built["negative"]),
+                positive_tokens=genre_pos_tokens,
+                negative_tokens=genre_neg_tokens,
+            )
+            built["positive"] = g_pos
+            built["negative"] = g_neg
+
         comp = built.get("composition_notes", "")
         if isinstance(comp, str):
             comp_notes: dict[str, Any] = {"summary": comp}
@@ -330,6 +397,7 @@ def compile_panel_prompts_from_chapter_script(
                 "sampler": routing.get("sampler"),
                 "reference_enabled": routing.get("reference_enabled"),
                 "individuation_engaged": panel_individuated,
+                "genre_tradition_engaged": genre_tradition_engaged,
             }
         panels_out.append(panel_doc)
 
@@ -355,5 +423,6 @@ def compile_panel_prompts_from_chapter_script(
             "fallback_used": routing.get("fallback_used"),
             "fallback_reason": routing.get("fallback_reason"),
             "individuation_engaged": individuation_engaged_any,
+            "genre_tradition_engaged": genre_tradition_engaged,
         }
     return out
