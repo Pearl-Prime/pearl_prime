@@ -1,0 +1,153 @@
+# Devotion Path manga — series profile (character_design instance)
+#
+# Brand:  devotion_path (Open Vessel Press) — teacher: Sai Ma
+# Series topic: COURAGE (healing register) — courage as quiet inner work, not
+#   battle. A man recovering from injury and fear, relearning steadiness.
+# Genre register (LOCKED): HEALING / IYASHIKEI / devotional-emotional-drama.
+#   Explicitly NOT shonen/battle: courage here is interior (facing shame, the
+#   false-alarm of the nervous system, the spiral), rendered through stillness.
+#
+# Schema: config/manga/character_design_template.yaml (v1.0)
+# Vocabulary + solver rules: config/manga/character_design_axes.yaml
+
+series_id: devotion_en_03
+brand_id: devotion_path
+locale: en_US
+genre_family: healing
+subgenre: iyashikei_courage_inner_work_arc
+teacher: sai_ma
+
+character_design:
+  series_id: devotion_en_03
+  brand_id: devotion_path
+  locale: en_US
+  market_demo: seinen                       # adult-male healing register (not battle-seinen)
+  genre_family: healing
+  subgenre: iyashikei_courage_inner_work_arc
+  character_id: kenji_morrow
+  character_role: protagonist
+  drafted_by: pearl_editor
+  drafted_at: "2026-06-17"
+  source_descriptions:
+    - "devotion_path topic: courage -> false_alarm / shame / spiral; a tradesman recovering from a workplace injury, learning that courage is steadiness, not force"
+    - "register: healing/iyashikei. Adult-male (seinen) restraint — realistic, low-decoration line; the supernatural-healing thread is a felt steadiness he can't yet name"
+
+  axes:
+
+    # AXIS 1 — face_shape
+    # Angular_long — the one strongly masculine, lived-in face in the cast.
+    # Distinct from oval (Sai Ma), heart_shaped (Amara), soft_round (Lin).
+    face_shape:
+      value: angular_long
+      lockout: yes
+      mangaka_tradition: "Inoue/Taniguchi seinen-realist angular (lived-in, restrained)"
+
+    # AXIS 2 — eye_geometry
+    # Small upturned, narrow spacing, double-lid, minimal lashes — guarded but
+    # not cold; seinen-realist restraint (NOT gekiga austerity, NOT shojo).
+    eye_geometry:
+      size: small
+      shape: upturned
+      spacing: narrow
+      lid_fold: double
+      eyelash_density: minimal
+      lockout: yes
+      note: "small + minimal lashes = seinen-mature realism; the courage arc softens the guarded set over the series without changing the geometry"
+
+    # AXIS 3 — nose_construction
+    # Aquiline, long, drawn nostrils — the most rendered nose in the cast,
+    # appropriate to the seinen-realist register.
+    nose_construction:
+      bridge_angle: aquiline
+      bridge_length: long
+      tip_shape: narrow
+      nostril_visibility: drawn
+      lockout: yes
+
+    # AXIS 4 — mouth_jaw
+    # Neutral_firm resting + wide square jaw — the held-steady set of someone
+    # bracing against fear. thin_both lips (restrained, masculine).
+    mouth_jaw:
+      resting_expression: neutral_firm
+      jaw_width: wide
+      chin_shape: square
+      lip_shape: thin_both
+      lockout: yes
+
+    # AXIS 5 — hair
+    # Very short, swept back, no fringe, straight, black — the cropped,
+    # low-maintenance silhouette of a working man.
+    hair:
+      length: very_short
+      parting: no_part_swept_back
+      fringe_style: no_fringe
+      texture: straight
+      color_signal: black
+      signature_shape_note: "cropped close; he runs a hand back over it when a wave of fear passes — a tell the reader learns to read"
+      lockout: yes
+
+    # AXIS 6 — build (lockout off per template default)
+    # Broader frame than the rest, but solver leaves build free.
+    build:
+      height_implied: tall
+      frame_density: athletic
+      shoulder_ratio: broad
+      lockout: no
+
+    # AXIS 7 — wardrobe_register
+    wardrobe_register:
+      era_signal: contemporary_2020s
+      personality_encoding:
+        - faded_canvas_work_jacket
+        - plain_henley_shirt
+        - scuffed_work_boots
+      formality: business_casual
+      lockout: yes
+
+    # AXIS 8 — posture_default (lockout off per template default)
+    posture_default:
+      energy: contained
+      symmetry: slight_right_lean             # favours the recovering side
+      lockout: no
+
+    # AXIS 9 — age_signaling
+    age_signaling:
+      apparent_age_decade: late_20s
+      visible_age_cues:
+        - no_smile_lines_visible
+        - faint_brow_tension
+        - healed_scar_at_brow                 # from the injury he is recovering from
+      lockout: yes
+
+    # AXIS 10 — skin_treatment (lockout off per template default)
+    skin_treatment:
+      texture: weathered                      # outdoor-work weathering
+      tone: warm_medium
+      lockout: no
+
+    # AXIS 11 — accessories
+    # Hand-carved walking stick — his recovery aid and, over the arc, the
+    # object he learns to set down. Distinct, high-leverage signature.
+    accessories:
+      glasses: none
+      jewelry: minimal                        # a single plain band; nothing decorative
+      signature_item: "hand-carved wooden walking stick he uses after the injury — by the final volume he carries it instead of leaning on it"
+      lockout: yes
+
+    # AXIS 12 — color_signal
+    # Slate + ochre — cool steadiness warmed by earth; muted, grounded.
+    color_signal:
+      palette_primary: slate
+      palette_accent: ochre
+      palette_secondary: charcoal
+      bw_register_note: "Kenji reads as a darker mid-value with high local contrast at the jaw; the pale walking-stick is his single light accent"
+      lockout: yes
+
+  # ── Solver metadata ─────────────────────────────────────────────────────
+  solver:
+    individuation_axes_locked: 9
+    last_validated: "2026-06-17"
+    collision_check_passed: passed
+    collision_check_against:
+      brand_scope: devotion_path
+      collisions_detected: []

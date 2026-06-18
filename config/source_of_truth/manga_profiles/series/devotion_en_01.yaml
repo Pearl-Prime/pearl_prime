@@ -1,0 +1,165 @@
+# Devotion Path manga — series profile (character_design instance)
+#
+# Brand:  devotion_path (Open Vessel Press) — teacher: Sai Ma
+# Genre register (LOCKED): HEALING / IYASHIKEI / devotional-emotional-drama +
+#   supernatural-healing (grief / compassion / courage-as-inner-work).
+#   NOT shonen/battle. The manga_brand_series_plan.yaml devotion_path row reads
+#   `genre: shonen`; that is the catalog-allocation lane label and is overridden
+#   here by the operator-LOCKED healing register for the manga visual line.
+#
+# Closes the Lane-D character_design data gap: prior to this file the
+# config/source_of_truth/manga_profiles/series/ catalog carried exactly one
+# `character_design:` block (stillness_en_01 / mira_aoki), so the individuation
+# constraint solver had nothing cross-series to individuate against.
+#
+# Schema: config/manga/character_design_template.yaml (v1.0)
+# Vocabulary + solver rules: config/manga/character_design_axes.yaml
+# Solver: scripts/manga/character_individuation/constraint_solver.py
+#   (same-brand collision threshold = 5 matching locked axes;
+#    cross-brand = 7; lockout minimum = 9 of 12 axes)
+
+series_id: devotion_en_01
+brand_id: devotion_path
+locale: en_US
+genre_family: healing
+subgenre: iyashikei_devotional_teacher_arc
+teacher: sai_ma
+
+character_design:
+  series_id: devotion_en_01
+  brand_id: devotion_path
+  locale: en_US
+  market_demo: josei
+  genre_family: healing
+  subgenre: iyashikei_devotional_teacher_arc
+  character_id: sai_ma
+  character_role: teacher_guide          # recurring devotional mentor across the brand's series
+  drafted_by: pearl_editor
+  drafted_at: "2026-06-17"
+  source_descriptions:
+    - "brand teacher: Sai Ma (Open Vessel Press) — devotion / compassion / grief-as-inner-work register"
+    - "role: elder guide who appears across the Devotion series; holds the healing/iyashikei tone; supernatural-healing presence rendered through stillness, not spectacle"
+
+  axes:
+
+    # AXIS 1 — face_shape
+    # Oval — the calm, neutral elder face. Distinct from the rest of the
+    # Devotion cast (heart_shaped Amara / angular_long Kenji / soft_round Lin).
+    face_shape:
+      value: oval
+      lockout: yes
+      mangaka_tradition: "Ashinano/Taniguchi iyashikei elder (low-contour, contemplative oval)"
+
+    # AXIS 2 — eye_geometry
+    # Medium downturned (tareme-soft) single-lid, wide-set, minimal lashes —
+    # gentle, attentive, unhurried. Reads as kind-elder, not austere-gekiga.
+    eye_geometry:
+      size: medium
+      shape: downturned
+      spacing: wide
+      lid_fold: single
+      eyelash_density: minimal
+      lockout: yes
+      note: "downturned + wide spacing signals open, receptive listening — the teacher who holds space"
+
+    # AXIS 3 — nose_construction
+    nose_construction:
+      bridge_angle: straight
+      bridge_length: medium
+      tip_shape: rounded
+      nostril_visibility: implied        # iyashikei register
+      lockout: yes
+
+    # AXIS 4 — mouth_jaw
+    # Resting slight_smile — the settled warmth of someone at ease. Full_both
+    # lips (not the thin josei-realist default) read softer, older, kinder.
+    mouth_jaw:
+      resting_expression: slight_smile
+      jaw_width: medium
+      chin_shape: rounded
+      lip_shape: full_both
+      lockout: yes
+
+    # AXIS 5 — hair
+    # Mid-back, centre-parted, no fringe, greying at the temples — the elder
+    # silhouette. Slight wave keeps it from reading severe.
+    hair:
+      length: mid_back
+      parting: center
+      fringe_style: no_fringe
+      texture: slight_wave
+      color_signal: grey_at_temples
+      signature_shape_note: "silver strands at the temple catch lamplight in close-ups; the rest pulled loosely back — a settled, unfussed silhouette"
+      lockout: yes
+
+    # AXIS 6 — build (lockout off per template default)
+    build:
+      height_implied: average
+      frame_density: average
+      shoulder_ratio: average
+      lockout: no
+
+    # AXIS 7 — wardrobe_register
+    # Devotional ceremonial robes — meiji_taisho period-coded textile, the
+    # timeless/placeless register appropriate to a supernatural-healing teacher.
+    wardrobe_register:
+      era_signal: meiji_taisho
+      personality_encoding:
+        - indigo_dyed_layered_robe         # the teacher's habitual robe
+        - linen_wrap_sash
+        - worn_prayer_shawl_over_shoulders
+      formality: ceremonial
+      lockout: yes
+
+    # AXIS 8 — posture_default (lockout off per template default)
+    posture_default:
+      energy: contained
+      symmetry: symmetric
+      lockout: no
+
+    # AXIS 9 — age_signaling
+    # 60s elder — the only senior figure in the cast; high-leverage distinctness.
+    age_signaling:
+      apparent_age_decade: 60s
+      visible_age_cues:
+        - smile_lines_visible
+        - full_crow_feet
+        - grey_at_temples
+        - jowl_softening
+      lockout: yes
+
+    # AXIS 10 — skin_treatment (lockout off per template default)
+    skin_treatment:
+      texture: weathered                   # gently weathered elder skin
+      tone: warm_medium
+      lockout: no
+
+    # AXIS 11 — accessories
+    # Sandalwood prayer beads — the teacher's signature devotional object,
+    # the highest-leverage individuation signal for this character.
+    accessories:
+      glasses: none
+      jewelry: signature_piece
+      signature_item: "sandalwood prayer beads (108 beads) worn at the right wrist — the teacher tells them slowly when holding silence with a student"
+      lockout: yes
+
+    # AXIS 12 — color_signal
+    # Warm earthen ochre + cream — grounded, devotional warmth. In B&W the
+    # teacher reads as a stable mid-to-light value, an anchor in the panel.
+    color_signal:
+      palette_primary: ochre
+      palette_accent: cream
+      palette_secondary: slate
+      bw_register_note: "Sai Ma reads as a calm mid-light value; the prayer beads are the single dark accent at the wrist that the eye returns to"
+      lockout: yes
+
+  # ── Solver metadata ─────────────────────────────────────────────────────
+  solver:
+    individuation_axes_locked: 9
+    # face_shape, eye_geometry, nose_construction, mouth_jaw, hair,
+    # wardrobe_register, age_signaling, accessories, color_signal
+    last_validated: "2026-06-17"
+    collision_check_passed: passed
+    collision_check_against:
+      brand_scope: devotion_path
+      collisions_detected: []

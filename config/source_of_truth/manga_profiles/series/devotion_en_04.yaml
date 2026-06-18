@@ -1,0 +1,154 @@
+# Devotion Path manga — series profile (character_design instance)
+#
+# Brand:  devotion_path (Open Vessel Press) — teacher: Sai Ma
+# Series topic: IMPOSTER_SYNDROME / comparison + shame (healing register) —
+#   a young seeker learning self-compassion; the inner critic quieted, not beaten.
+# Genre register (LOCKED): HEALING / IYASHIKEI / devotional-emotional-drama.
+#
+# Schema: config/manga/character_design_template.yaml (v1.0)
+# Vocabulary + solver rules: config/manga/character_design_axes.yaml
+
+series_id: devotion_en_04
+brand_id: devotion_path
+locale: en_US
+genre_family: healing
+subgenre: iyashikei_self_compassion_arc
+teacher: sai_ma
+
+character_design:
+  series_id: devotion_en_04
+  brand_id: devotion_path
+  locale: en_US
+  market_demo: josei
+  genre_family: healing
+  subgenre: iyashikei_self_compassion_arc
+  character_id: lin_castellano
+  character_role: protagonist
+  drafted_by: pearl_editor
+  drafted_at: "2026-06-17"
+  source_descriptions:
+    - "devotion_path topic: imposter_syndrome -> comparison / shame; a young apprentice/student convinced she does not belong, learning self-compassion under the teacher's guidance"
+    - "register: healing/iyashikei devotional-emotional-drama; youngest of the cast; the supernatural-healing thread is a quiet sense of being held that grows as the shame loosens"
+
+  axes:
+
+    # AXIS 1 — face_shape
+    # Soft_round — youthful, open. Note: shares soft_round with the cross-brand
+    # anchor mira_aoki (stillness_press), but every other locked axis differs,
+    # so cross-brand match stays at 1 (threshold 7). Within Devotion, distinct
+    # from oval / heart_shaped / angular_long.
+    face_shape:
+      value: soft_round
+      lockout: yes
+      mangaka_tradition: "Azuma-soft round youthful (open, low-contour)"
+
+    # AXIS 2 — eye_geometry
+    # Medium ROUND double-lid, standard spacing, dense lashes — bright, anxious,
+    # young. Dense (not heavy_decorative) at size medium (not extra_large) stays
+    # the right side of the josei forbidden-combination line.
+    eye_geometry:
+      size: medium
+      shape: round
+      spacing: standard
+      lid_fold: double
+      eyelash_density: dense
+      lockout: yes
+      note: "round + dense reads young and searching; deliberately medium (not extra_large) to avoid the shojo_eye_in_josei forbidden combination"
+
+    # AXIS 3 — nose_construction
+    nose_construction:
+      bridge_angle: slight_downturn
+      bridge_length: medium
+      tip_shape: wide
+      nostril_visibility: implied
+      lockout: yes
+
+    # AXIS 4 — mouth_jaw
+    # parted_lips resting (the slightly-unguarded, about-to-apologise set of
+    # someone bracing for judgement). full_both lips, rounded chin — youthful.
+    mouth_jaw:
+      resting_expression: parted_lips
+      jaw_width: medium
+      chin_shape: rounded
+      lip_shape: full_both
+      lockout: yes
+
+    # AXIS 5 — hair
+    # Chin-length blunt bob, side-left part, straight, dark blonde — the
+    # neatest, most contained silhouette in the cast (she over-manages herself).
+    hair:
+      length: chin_bob
+      parting: side_left
+      fringe_style: straight_blunt
+      texture: straight
+      color_signal: dark_blonde
+      signature_shape_note: "a precise blunt bob she keeps tucking even when it isn't loose — a self-soothing over-management tell that eases as her self-compassion grows"
+      lockout: yes
+
+    # AXIS 6 — build (lockout off per template default)
+    build:
+      height_implied: short
+      frame_density: small
+      shoulder_ratio: narrow
+      lockout: no
+
+    # AXIS 7 — wardrobe_register
+    # 2000s_2010s thrifted register — the youngest, least-moneyed character;
+    # distinct era_signal from the contemporary_2020s and meiji_taisho cast.
+    wardrobe_register:
+      era_signal: 2000s_2010s
+      personality_encoding:
+        - thrifted_corduroy_jacket
+        - striped_long_sleeve_tee
+        - worn_canvas_sneakers
+      formality: casual
+      lockout: yes
+
+    # AXIS 8 — posture_default (lockout off per template default)
+    posture_default:
+      energy: collapsed                        # self-minimising, shoulders drawn in
+      symmetry: slumped
+      lockout: no
+
+    # AXIS 9 — age_signaling
+    # early_20s — youngest of the cast; high-leverage age distinctness.
+    age_signaling:
+      apparent_age_decade: early_20s
+      visible_age_cues:
+        - no_smile_lines_visible
+        - youthful_skin_overall
+        - faint_freckle_dusting
+      lockout: yes
+
+    # AXIS 10 — skin_treatment (lockout off per template default)
+    skin_treatment:
+      texture: slight_freckles
+      tone: warm_light
+      lockout: no
+
+    # AXIS 11 — accessories
+    # Round thick-frame glasses + a dog-eared notebook she clutches — her
+    # armour and her self-doubt made visible. Distinct from beads/locket/stick.
+    accessories:
+      glasses: round_thick_frame
+      jewelry: none
+      signature_item: "a dog-eared spiral notebook she clutches to her chest, crammed with self-corrections; by the end she writes a kind line to herself in it"
+      lockout: yes
+
+    # AXIS 12 — color_signal
+    # Lavender + cream — soft, tender, slightly cool youth.
+    color_signal:
+      palette_primary: lavender
+      palette_accent: cream
+      palette_secondary: sage_green
+      bw_register_note: "Lin reads as a light, low-contrast value (she tries to take up little space); the thick glasses-frame is her single dark accent at the face"
+      lockout: yes
+
+  # ── Solver metadata ─────────────────────────────────────────────────────
+  solver:
+    individuation_axes_locked: 9
+    last_validated: "2026-06-17"
+    collision_check_passed: passed
+    collision_check_against:
+      brand_scope: devotion_path
+      collisions_detected: []
