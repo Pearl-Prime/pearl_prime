@@ -33,8 +33,8 @@ genre_strategy_counts:
   shonen: 5
   shojo: 5
   seinen: 5
+  iyashikei: 4       # Healing register (Devotion lane); iyashikei_strategies.yaml authored 2026-06-17
   # Reserved for future expansion — set to 0 until strategy files are authored:
-  iyashikei: 0       # Existing partial genre in story_architect.py — migrate to this system
   josei: 0           # Adult women's manga — related to shōjo but distinct register
   kodomomuke: 0      # Children's manga — simplest EI engagement; not yet designed
   isekai: 0          # Transported-to-another-world — hybrid genre; unique to manga
@@ -70,6 +70,15 @@ combinations_per_genre:
     layer_count: 5
     combinations_per_strategy: 243
     total_combinations: 1215
+
+  iyashikei:
+    strategies: 4
+    layer_variants_per_layer: 3
+    layer_count: 5
+    # 3^5 = 243 layer combinations × 4 strategies = 972 per genre
+    combinations_per_strategy: 243    # 3^5
+    total_combinations: 972           # 4 × 243
+    note: "Healing register (Devotion lane). Before series_id + arc_id + persona variation."
 
 # ─────────────────────────────────────────────────────────────────────────────
 # LAYER VARIANT INDEXES
@@ -184,6 +193,35 @@ layer_variant_index:
       layer_3: [crime_weight_voice, defense_erosion, other_voice_included]
       layer_4: [past_weight_present_light, crime_flashback_restrained, consequence_architecture]
       layer_5: [weight_bearing_pace, linear_descent_pace, present_faster]
+
+  iyashikei:  # Healing register (Devotion lane) — see iyashikei_strategies.yaml
+    strategy_01:  # Seasonal Return
+      layer_1: [seasonal_standard, seasonal_minimal, seasonal_two_seasons]
+      layer_2: [grief_received, compassion_offered, courage_as_inner_work]
+      layer_3: [observational_sparse, near_wordless, companion_carries]
+      layer_4: [airy_irregular_grid, single_object_meditation, landscape_led]
+      layer_5: [weather_to_baseline]
+
+    strategy_02:  # The Visiting Presence (supernatural-healing)
+      layer_1: [presence_standard, presence_minimal, presence_recurring]
+      layer_2: [grief_witnessed, compassion_offered, courage_as_inner_work]
+      layer_3: [keeper_observational, near_wordless, child_and_keeper]
+      layer_4: [luminous_sparse, single_object_meditation, landscape_led]
+      layer_5: [weather_to_baseline]
+
+    strategy_03:  # The Open Hand (compassion)
+      layer_1: [open_hand_standard, open_hand_minimal, open_hand_returning_guest]
+      layer_2: [compassion_offered, grief_received, courage_as_inner_work]
+      layer_3: [patient_sparse, near_wordless, guest_carries]
+      layer_4: [warm_irregular_grid, single_object_meditation, landscape_led]
+      layer_5: [weather_to_baseline]
+
+    strategy_04:  # The Quiet Crossing (courage-as-inner-work)
+      layer_1: [crossing_standard, crossing_minimal, crossing_with_witness]
+      layer_2: [courage_as_inner_work, grief_received, compassion_offered]
+      layer_3: [interior_sparse, near_wordless, spoken_to_the_room]
+      layer_4: [interior_irregular_grid, single_object_meditation, light-across-the-room]
+      layer_5: [weather_to_baseline]
 
 # ─────────────────────────────────────────────────────────────────────────────
 # ANTI-PATTERN RULES (CONSOLIDATED)
@@ -640,7 +678,8 @@ integration_notes:
     shonen_genre_id: "shonen"  # existing genre_id string unchanged
     seinen_genre_id: "seinen"  # existing genre_id string unchanged
     iyashikei_migration: >
-      iyashikei is not yet in this strategy system (0 strategies).
-      Until iyashikei_strategies.yaml is authored, continue using the
-      existing _BEAT_TEMPLATES for iyashikei. Once authored, migrate
-      using the same pattern as shonen/seinen.
+      iyashikei_strategies.yaml is authored (4 strategies, healing register —
+      the Devotion lane). story_architect now derives iyashikei chapters from
+      these rich strategies via story_strategy_loader; the legacy
+      _BEAT_TEMPLATES remain only as the deterministic fallback when no
+      strategy file is present for a genre.

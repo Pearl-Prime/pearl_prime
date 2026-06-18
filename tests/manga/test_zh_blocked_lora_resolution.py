@@ -39,11 +39,20 @@ def test_zh_locales_have_zero_blocked_lora_rows(gmc):
 
 
 def test_en_us_ja_jp_readiness_breakdown_unchanged(gmc):
-    """Regression guard: LoRA resolution must not alter en/ja row statuses."""
+    """Regression guard: LoRA resolution must not alter en/ja blocked_character_lora counts.
+
+    The ``ready`` totals were updated 2026-06-17 when the Devotion (devotion_path /
+    Open Vessel Press / Sai Ma) manga genre register was reframed from shonen/battle to
+    HEALING / IYASHIKEI in config/manga/brand_genre_allocation.yaml. That reframe changed
+    devotion_path's genre mix (battle/cultivation/fantasy -> healing/supernatural_everyday/
+    slice_of_life/essay/memoir/family/historical/romance), shifting the ready row count by
+    1 (en_US) / 2 (ja_JP). All 12 devotion_path rows remain ``ready`` in both locales; the
+    ``blocked_character_lora`` invariant this guard exists for is unchanged (15 / 13).
+    """
     inputs = gmc.load_inputs()
     expected = {
-        "en_US": {"ready": 155, "blocked_character_lora": 15},
-        "ja_JP": {"ready": 153, "blocked_character_lora": 13},
+        "en_US": {"ready": 154, "blocked_character_lora": 15},
+        "ja_JP": {"ready": 151, "blocked_character_lora": 13},
     }
     for locale, want in expected.items():
         _rows, breakdown = gmc.build_rows_for_locale(locale, inputs)

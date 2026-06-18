@@ -81,24 +81,115 @@ def _stage_transmission(workspace: Path) -> None:
     validate_instance(_load_json(p), "story_architecture_handoff")
 
 
-def _stage_writer(workspace: Path, chapter_number: int) -> None:
-    cr = _load_json(workspace / manga_paths.CHAPTER_REQUEST)
-    validate_instance(cr, "chapter_request")
+def _resolve_writer_mode(workspace: Path) -> str:
+    """Resolve the chapter writer mode: chapter_request > env > 'stub' (CI-safe default).
+
+    Modes:
+      - 'claude': Tier-1 Claude Chapter Writer — the PRODUCTION path. The
+        operator-present Tier-1 author (Claude Code / Pearl_Writer) drops a validated
+        chapter script pair at ``chapter_script_authored.json`` (or ``MANGA_AUTHORED_SCRIPT``);
+        _stage_writer validates + installs it via the LLM-client writer. No paid API is
+        called in-process. When mode is 'claude' and no authored pair exists, the stage
+        FAILS LOUDLY rather than silently shipping canned stub dialogue.
+      - 'stub' (default): deterministic ``writer_stub`` — CI / replay smoke tests.
+
+    Production runs set ``writer_mode: claude`` in chapter_request.json (or
+    ``MANGA_WRITER_MODE=claude``). The default stays 'stub' so the replay-driven test
+    suite and unattended smoke pipelines keep working unchanged. Independent of mode,
+    an authored script pair on disk always activates the Tier-1 path (see _stage_writer).
+    """
+    cr_path = workspace / manga_paths.CHAPTER_REQUEST
+    if cr_path.is_file():
+        try:
+            cr = json.loads(cr_path.read_text(encoding="utf-8"))
+            wm = str(cr.get("writer_mode") or "").strip()
+            if wm:
+                return wm
+        except Exception:
+            pass
+    import os
+    return os.environ.get("MANGA_WRITER_MODE", "stub").strip() or "stub"
+
+
+def _authored_script_path(workspace: Path) -> Path | None:
+    """Locate a Tier-1-authored chapter script pair, if present."""
+    import os
+    env_p = os.environ.get("MANGA_AUTHORED_SCRIPT")
+    candidates = []
+    if env_p:
+        candidates.append(Path(env_p))
+    candidates.append(workspace / "chapter_script_authored.json")
+    for p in candidates:
+        if p.is_file():
+            return p
+    return None
+
+
+def _install_authored_script(workspace: Path, authored: Path, cr: dict) -> None:
+    """Validate + normalize a Tier-1-authored chapter script pair via the LLM-client writer."""
+    from phoenix_v4.manga.chapter.writer import write_chapter_script_pair
+    from phoenix_v4.manga.llm.client import ReplayLLMClient
+
     story = _load_json(workspace / manga_paths.STORY_ARCHITECTURE_HANDOFF)
     validate_instance(story, "story_architecture_handoff")
-    writer, internal = build_chapter_script_pair_from_handoff(
+    client = ReplayLLMClient.from_json_file(authored)
+    writer, internal = write_chapter_script_pair(
+        client,
         story,
-        chapter_number=chapter_number,
+        chapter_number=int(cr.get("chapter_number") or 1),
         series_id=str(cr["series_id"]),
         chapter_id=str(cr["chapter_id"]),
+        prompt_version="tier1_claude_authored_v1",
     )
-    validate_instance(writer, "chapter_script_writer_handoff")
-    validate_instance(internal, "chapter_script_internal_record")
     (workspace / manga_paths.CHAPTER_SCRIPT_WRITER_HANDOFF).write_text(
         json.dumps(writer, indent=2) + "\n", encoding="utf-8"
     )
     (workspace / manga_paths.CHAPTER_SCRIPT_INTERNAL_RECORD).write_text(
         json.dumps(internal, indent=2) + "\n", encoding="utf-8"
+    )
+
+
+def _stage_writer(workspace: Path, chapter_number: int) -> None:
+    cr = _load_json(workspace / manga_paths.CHAPTER_REQUEST)
+    validate_instance(cr, "chapter_request")
+    cr.setdefault("chapter_number", chapter_number)
+
+    mode = _resolve_writer_mode(workspace)
+    authored = _authored_script_path(workspace)
+
+    # Tier-1 Claude path: if an operator-authored script pair is present, install it.
+    if authored is not None:
+        _install_authored_script(workspace, authored, cr)
+        return
+
+    if mode == "stub":
+        story = _load_json(workspace / manga_paths.STORY_ARCHITECTURE_HANDOFF)
+        validate_instance(story, "story_architecture_handoff")
+        writer, internal = build_chapter_script_pair_from_handoff(
+            story,
+            chapter_number=chapter_number,
+            series_id=str(cr["series_id"]),
+            chapter_id=str(cr["chapter_id"]),
+        )
+        validate_instance(writer, "chapter_script_writer_handoff")
+        validate_instance(internal, "chapter_script_internal_record")
+        (workspace / manga_paths.CHAPTER_SCRIPT_WRITER_HANDOFF).write_text(
+            json.dumps(writer, indent=2) + "\n", encoding="utf-8"
+        )
+        (workspace / manga_paths.CHAPTER_SCRIPT_INTERNAL_RECORD).write_text(
+            json.dumps(internal, indent=2) + "\n", encoding="utf-8"
+        )
+        return
+
+    # Production 'claude' mode with no authored pair available: fail loudly rather
+    # than silently shipping canned writer_stub dialogue as if it were Tier-1 prose.
+    raise RuntimeError(
+        "Chapter writer mode is 'claude' (Tier-1, production) but no authored chapter "
+        "script pair was found. Have the Tier-1 Claude Chapter Writer (operator-present "
+        "Claude Code / Pearl_Writer) author the chapter and drop the validated pair at "
+        f"{workspace / 'chapter_script_authored.json'} (or set MANGA_AUTHORED_SCRIPT), "
+        "or run with writer_mode='stub' (chapter_request.json) / MANGA_WRITER_MODE=stub "
+        "for CI smoke tests. English manga authoring is Tier-1 Claude, never a paid API."
     )
 
 
@@ -468,7 +559,36 @@ def _resolve_manga_profile(
         return None
 
 
-def _stage_qc(workspace: Path, *, brand_id: str | None = None, genre_id: str | None = None) -> None:
+def _resolve_quality_profile(
+    workspace: Path, quality_profile: str | None
+) -> str:
+    """Resolve the effective quality profile: explicit arg > chapter_request > env > 'production'.
+
+    'draft' disables the blocking bestseller gate (for CI / replay smoke tests);
+    'production' (the default) HARD_FAILs sub-bar chapters before render.
+    """
+    if quality_profile:
+        return quality_profile
+    cr_path = workspace / manga_paths.CHAPTER_REQUEST
+    if cr_path.is_file():
+        try:
+            cr = json.loads(cr_path.read_text(encoding="utf-8"))
+            qp = str(cr.get("quality_profile") or "").strip()
+            if qp:
+                return qp
+        except Exception:
+            pass
+    import os
+    return os.environ.get("MANGA_QUALITY_PROFILE", "production").strip() or "production"
+
+
+def _stage_qc(
+    workspace: Path,
+    *,
+    brand_id: str | None = None,
+    genre_id: str | None = None,
+    quality_profile: str | None = None,
+) -> None:
     manga_profile = _resolve_manga_profile(workspace, brand_id=brand_id, genre_id=genre_id)
     rq = build_revision_queue_for_chapter(workspace, manga_profile=manga_profile)
     (workspace / manga_paths.REVISION_QUEUE).write_text(
@@ -480,6 +600,40 @@ def _stage_qc(workspace: Path, *, brand_id: str | None = None, genre_id: str | N
             for x in rq.get("issues") or []
         )
         logger.warning("chapter_clearance is hold: %s", detail)
+
+    # ── BLOCKING bestseller gate (manga sibling of the book register gate) ──
+    # Reads the chapter script + profile, runs the craft + story-substance gates,
+    # writes a verdict, and HARD_FAILs (raises) in the 'production' profile when a
+    # sub-bar chapter would otherwise render. 'draft' downgrades to a warning.
+    from phoenix_v4.manga.qc.bestseller_gate import (
+        BestsellerGateError,
+        evaluate_bestseller_gate,
+    )
+
+    effective_profile = _resolve_quality_profile(workspace, quality_profile)
+    script_p = workspace / manga_paths.CHAPTER_SCRIPT_WRITER_HANDOFF
+    chapter_script: dict[str, Any] = {}
+    if script_p.is_file():
+        try:
+            chapter_script = json.loads(script_p.read_text(encoding="utf-8"))
+        except Exception as exc:
+            logger.warning("bestseller gate: could not read chapter script: %s", exc)
+
+    verdict = evaluate_bestseller_gate(chapter_script, manga_profile)
+    (workspace / "bestseller_gate_verdict.json").write_text(
+        json.dumps({"quality_profile": effective_profile, **verdict}, indent=2) + "\n",
+        encoding="utf-8",
+    )
+
+    if verdict.get("clearance") == "hard_fail":
+        blockers = verdict.get("blockers") or []
+        if effective_profile == "draft":
+            logger.warning(
+                "bestseller gate would HARD_FAIL (%d blocker(s)) — downgraded in 'draft' profile",
+                len(blockers),
+            )
+        else:
+            raise BestsellerGateError(blockers)
 
 
 def _stage_memory(workspace: Path) -> None:
@@ -531,8 +685,14 @@ def run_chapter_dag(
     sdf_stub: bool = True,
     brand_id: str | None = None,
     genre_id: str | None = None,
+    quality_profile: str | None = None,
 ) -> list[str]:
-    """Execute DAG stages (skipping those already ``passed``). Returns stages executed."""
+    """Execute DAG stages (skipping those already ``passed``). Returns stages executed.
+
+    ``quality_profile`` ("production" default | "draft") controls the blocking
+    bestseller gate in the QC stage. "draft" downgrades a sub-bar chapter to a
+    warning (for CI / replay smoke tests); "production" HARD_FAILs it.
+    """
     ws = Path(workspace).resolve()
     order = _slice_run_order(from_stage, to_stage)
     ran: list[str] = []
@@ -558,7 +718,9 @@ def run_chapter_dag(
         sid.ITE_COLOR_ARC: lambda: _stage_ite_color_arc(ws),
         sid.ITE_FRACTAL: lambda: _stage_ite_fractal(ws),
         sid.ITE_QC: lambda: _stage_ite_qc(ws),
-        sid.CHAPTER_QC: lambda: _stage_qc(ws, brand_id=brand_id, genre_id=genre_id),
+        sid.CHAPTER_QC: lambda: _stage_qc(
+            ws, brand_id=brand_id, genre_id=genre_id, quality_profile=quality_profile
+        ),
         sid.SERIES_MEMORY_MERGE: lambda: _stage_memory(ws),
     }
 

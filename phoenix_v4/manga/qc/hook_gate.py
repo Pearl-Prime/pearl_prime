@@ -32,25 +32,21 @@ def check_chapter_hook(
     profile: MangaProfile,
 ) -> dict[str, Any] | None:
     """Return an issue dict if the chapter-end hook doesn't match the profile, else None."""
-    chapters = chapter_script.get("chapters") or []
-    if not chapters:
-        return None
-    last_chapter = chapters[-1] if isinstance(chapters[-1], dict) else {}
-    pages = last_chapter.get("pages") or []
-    if not pages:
-        return None
-    last_page = pages[-1] if isinstance(pages[-1], dict) else {}
-    panels = last_page.get("panels") or []
-    if not panels:
-        return None
-    last_panel = panels[-1] if isinstance(panels[-1], dict) else {}
+    from phoenix_v4.manga.qc._script_shape import last_page as _last_page
+    from phoenix_v4.manga.qc._script_shape import last_panel as _last_panel
+    from phoenix_v4.manga.qc._script_shape import panel_text as _panel_text
 
-    # Collect text from last panel + any final narration
+    last_page = _last_page(chapter_script)
+    last_panel = _last_panel(chapter_script)
+    if last_page is None or last_panel is None:
+        return None
+
+    # Collect text from last panel + any final narration (works on both
+    # flat ``pages[]`` and wrapped ``chapters[].pages[]`` shapes).
     check_text = " ".join([
-        str(last_panel.get("narration") or ""),
-        str(last_panel.get("caption") or ""),
-        " ".join(str(d) for d in (last_panel.get("dialogue") or [])),
+        _panel_text(last_panel),
         str(last_page.get("chapter_end_note") or ""),
+        str(chapter_script.get("chapter_end_hook") or ""),
     ]).lower()
 
     hook_family = profile.chapter_hook_family

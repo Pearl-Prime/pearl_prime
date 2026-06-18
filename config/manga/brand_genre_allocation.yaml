@@ -79,7 +79,7 @@ brand_tentpole:
   sleep_restoration:  healing
   body_memory:        romance
   solar_return:       fantasy_adventure
-  devotion_path:      battle
+  devotion_path:      healing   # LOCKED: Open Vessel Press / Sai Ma — HEALING / iyashikei, NOT battle
 
 # ── en_US matrix (12 teacher brands × non-zero genre cells) ─────────────────
 # Per plan §2.1. Locale bias: ebook-primary; demo-bound JP genres suppressed.
@@ -224,18 +224,17 @@ allocations:
       mecha: 2
       supernatural_everyday: 2
     devotion_path:
-      battle: 25
-      fantasy_adventure: 13
-      battle_internal: 12
-      cultivation: 10
-      essay: 9
-      romance: 7
-      historical: 6
-      dark_fantasy: 5
-      family: 5
-      memoir: 3
-      supernatural_everyday: 3
-      mystery: 2
+      # LOCKED HEALING / IYASHIKEI register (Open Vessel Press / Sai Ma). Tentpole
+      # = healing; supernatural_everyday carries the supernatural-healing flavor.
+      # No battle / cultivation / dark_fantasy — that breaks the devotional contract.
+      healing: 40
+      supernatural_everyday: 15
+      slice_of_life: 12
+      essay: 10
+      memoir: 8
+      family: 6
+      historical: 5
+      romance: 4
 
   # ── ja_JP matrix (12 teacher brands × non-zero genre cells) ──────────────
   # Per plan §2.2. Locale bias: manga-primary; demo-bound genres lift.
@@ -377,18 +376,16 @@ allocations:
       sci_fi_cyberpunk: 2
       supernatural_everyday: 1
     devotion_path:
-      battle: 30
-      fantasy_adventure: 14
-      battle_internal: 12
-      cultivation: 10
-      historical: 8
-      romance: 6
-      dark_fantasy: 5
-      essay: 5
+      # LOCKED HEALING / IYASHIKEI register. JP is the native iyashikei market —
+      # healing tentpole runs highest; supernatural-healing (Mushishi-lineage) strong.
+      healing: 42
+      supernatural_everyday: 16
+      slice_of_life: 14
+      essay: 8
+      historical: 6
+      memoir: 6
       family: 4
-      memoir: 2
-      supernatural_everyday: 2
-      mystery: 2
+      romance: 4
 
   # ── zh_TW matrix ─────────────────────────────────────────────────────────
   # 19 brands = 12 teacher brands + 6 zh-specific (teacher_mode=false in catalog)
@@ -547,19 +544,15 @@ allocations:
       mecha: 3
       supernatural_everyday: 2
     devotion_path:
-      battle: 22
-      fantasy_adventure: 13
-      battle_internal: 12
-      cultivation: 12
+      # LOCKED HEALING / IYASHIKEI register (zh_TW).
+      healing: 38
+      supernatural_everyday: 15
+      slice_of_life: 12
+      essay: 10
       historical: 8
-      essay: 7
-      romance: 6
-      dark_fantasy: 5
-      family: 5
-      memoir: 3
-      supernatural_everyday: 3
-      mystery: 2
-      comedy: 2
+      memoir: 7
+      family: 6
+      romance: 4
     # ── 6 zh-specific standard brands (teacher_mode=false; ahjan-anchored) ──
     sleep_repair_tw:
       healing: 50
@@ -819,18 +812,15 @@ allocations:
       mecha: 2
       supernatural_everyday: 2
     devotion_path:
-      battle: 25
-      fantasy_adventure: 13
-      cultivation: 13
-      battle_internal: 12
+      # LOCKED HEALING / IYASHIKEI register (zh_CN).
+      healing: 38
+      supernatural_everyday: 15
+      slice_of_life: 12
+      essay: 10
       historical: 8
-      romance: 7
-      dark_fantasy: 5
-      family: 5
-      essay: 4
-      memoir: 3
-      supernatural_everyday: 3
-      mystery: 2
+      memoir: 7
+      family: 6
+      romance: 4
     # ── 6 zh-specific standard brands (teacher_mode=false; ahjan-anchored) ──
     sleep_repair_cn:
       healing: 50

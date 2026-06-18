@@ -223,11 +223,14 @@ brands:
     notes: ADHD · Focus · Shonen
 
   devotion_path_shonen:
+    # LOCKED register (2026-06-17): Open Vessel Press / Sai Ma is HEALING / IYASHIKEI
+    # (devotional-emotional-drama + supernatural-healing). NOT shonen / battle.
+    # Brand-id key retained for path/artifact stability; the register is healing.
     tier: niche
-    demographic: shonen
-    primary_topic: courage
-    secondary_topics: [self_worth, grief]
-    notes: Spiritual · Courage · Shonen
+    demographic: josei              # iyashikei skews adult; shonen is wrong for this register
+    primary_topic: grief            # the second-cup arc — loss received, not resolved
+    secondary_topics: [compassion, courage]   # courage = courage-as-inner-work
+    notes: Grief · Compassion · Healing / Iyashikei
 
   stoic_edge_battle:
     tier: niche

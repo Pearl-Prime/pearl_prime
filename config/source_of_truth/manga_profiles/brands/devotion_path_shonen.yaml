@@ -1,36 +1,48 @@
 manga_profile_schema_version: "1.0.0"
 status: active
 created_at: "2026-04-20"
+last_updated: "2026-06-17"
 profile_type: brand_genre_lane
 # Profile type: brand-genre lane template. All series within this brand+genre
 # lane use this profile. Per-series variation comes from seed selection.
+#
+# LOCKED register (2026-06-17): Open Vessel Press / Sai Ma manga is
+# HEALING / IYASHIKEI — devotional-emotional-drama + supernatural-healing
+# (grief, compassion, courage-as-inner-work). NOT shonen / battle. This profile
+# drives the BLOCKING bestseller gate's healing-register checks. Story engine:
+# config/source_of_truth/manga_story_strategies/iyashikei_strategies.yaml
+# Craft authority: docs/research/manga_craft/iyashikei_minimalism.md
+#
+# (Filename retained as devotion_path_shonen.yaml for path stability; the
+#  content is the healing lane. title_id reflects the corrected register.)
 
-title_id: devotion_path_shonen
+title_id: devotion_path_healing
 brand_id: devotion_path
 teacher: sai_ma
 
-market_demo: shonen
-genre_family: supernatural_everyday
-subgenre: "devotion_compassion_surrender"
+market_demo: josei            # iyashikei skews adult; shonen/battle is forbidden here
+genre_family: healing         # supernatural-healing flavor lives in the strategy variants
+subgenre: "devotion_grief_compassion_courage_as_inner_work"
 
 emotional_engine: tenderness
-reader_promise: "You will feel what devotion actually is — not performance, but opening."
+reader_promise: "You will feel what devotion actually is — not performance, but the quiet courage of turning toward a feeling and letting it be received."
 
-serialization_engine: ensemble_progression
-chapter_hook_family: vow
+serialization_engine: reflective_progression
+chapter_hook_family: loss_echo   # weather/season-first, anti-cliffhanger (craft §3)
 
-visual_grammar: fantasy_ornate
-line_weight_profile: medium
-black_fill_ratio: 0.15
-screentone_profile: decorative
+visual_grammar: healing_iyashikei
+line_weight_profile: light       # heavy contour reads as aggressive (craft §2)
+black_fill_ratio: 0.15           # deliberately airy; heavy black reads as threat
+screentone_profile: minimal      # atmosphere tones, not shadow
 
 pacing:
-  words_per_page_target: 85
-  silent_panel_ratio: 0.20
-  reaction_shot_frequency: medium
-  spread_frequency: rare
+  words_per_page_target: 32        # craft band 18-45 (low)
+  words_per_page_band: [18, 45]    # iyashikei craft band — natural variance too wide for a fixed tolerance
+  silent_panel_ratio: 0.40         # craft floor 0.35
+  reaction_shot_frequency: low     # human faces low; environmental reactions high
+  spread_frequency: rare           # spreads are landscapes, never drama
 
-narration_tolerance: generous
+narration_tolerance: low         # emotional labeling is the cardinal sin (craft §4, §6.2)
 adaptation_targets:
   - print
   - webtoon

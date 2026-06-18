@@ -124,6 +124,166 @@ def _generate_default_chapters(
     return chapters
 
 
+# ── Strategy-driven chapter generation (rich engine) ─────────────────────────
+# Maps a profile/genre id onto a story-strategy genre family that has an
+# authored ``*_strategies.yaml`` under config/source_of_truth/manga_story_strategies/.
+# The Devotion lane (genre_family supernatural_everyday / healing) resolves to the
+# HEALING / iyashikei register — NOT shonen / battle.
+_STRATEGY_GENRE_ALIASES: dict[str, str] = {
+    "iyashikei": "iyashikei",
+    "healing": "iyashikei",
+    "healing_iyashikei": "iyashikei",
+    "supernatural_everyday": "iyashikei",  # Devotion lane (supernatural-healing)
+    "slice_of_life": "iyashikei",
+    "shonen": "shonen",
+    "shojo": "shojo",
+    "shoujo": "shojo",
+    "seinen": "seinen",
+}
+
+# Character-name pools per strategy genre. Healing register uses gentle,
+# place-rooted names — never the legacy Kai/Ren/Hana battle defaults.
+_STRATEGY_CHARACTERS: dict[str, dict[str, list[str]]] = {
+    "iyashikei": {
+        "protagonist": ["Asa", "Mira", "Yui", "Nao", "Sora"],
+        "companion": ["the visitor", "the old keeper", "the child", "a stranger from the road", "Ren"],
+        "setting": [
+            "a quiet mountain village",
+            "the garden behind the old house",
+            "the empty beach at low tide",
+            "a canal town at the turning of the season",
+            "the tea house at the edge of the forest",
+        ],
+    },
+}
+
+
+def _strategy_chapter_titles(genre: str) -> list[str]:
+    if genre == "iyashikei":
+        return ["First Light", "The Visitor", "One Degree Deeper"]
+    return ["Awakening", "Struggle", "Resolution"]
+
+
+def _hook_from_pacing(layer_5: Any, chapter_idx: int, fallback: str) -> str:
+    """Pull a per-chapter end hook from a selected layer_5 pacing skeleton."""
+    if not isinstance(layer_5, dict):
+        return fallback
+    hooks = layer_5.get("end_of_chapter_hooks")
+    if isinstance(hooks, dict) and hooks:
+        vals = list(hooks.values())
+        return str(vals[chapter_idx % len(vals)])
+    return fallback
+
+
+def _generate_strategy_chapters(
+    series_id: str,
+    arc_id: str,
+    genre_id: str,
+) -> list[dict[str, Any]] | None:
+    """Derive a 3-chapter arc from the rich manga_story_strategies for *genre_id*.
+
+    Returns ``None`` when no strategy file exists for the (aliased) genre, so the
+    caller can fall back to the deterministic ``_BEAT_TEMPLATES`` path. Each
+    chapter re-selects a strategy + layer variants with a chapter-scoped seed, so
+    the three chapters differ while staying deterministic for a given
+    (series_id, arc_id, genre_id).
+    """
+    strat_genre = _STRATEGY_GENRE_ALIASES.get(
+        genre_id.lower().replace("-", "_").replace(" ", "_")
+    )
+    if not strat_genre:
+        return None
+
+    try:
+        from phoenix_v4.manga.story_strategy_loader import (
+            load_story_strategy,
+            select_layer_variants,
+        )
+    except ImportError:
+        return None
+
+    # Confirm a strategy file actually exists for this genre (loader returns {} otherwise).
+    probe = load_story_strategy(strat_genre, series_id=series_id, arc_id=arc_id)
+    if not probe or not probe.get("strategy"):
+        return None
+
+    chars = _STRATEGY_CHARACTERS.get(strat_genre, {})
+    name_seed = f"{series_id}:{arc_id}:{strat_genre}"
+    protag_pool = chars.get("protagonist") or ["the protagonist"]
+    comp_pool = chars.get("companion") or ["the visitor"]
+    setting_pool = chars.get("setting") or ["the place"]
+    protagonist = protag_pool[_deterministic_int(name_seed + ":protag", len(protag_pool))]
+    companion = comp_pool[_deterministic_int(name_seed + ":comp", len(comp_pool))]
+    setting = setting_pool[_deterministic_int(name_seed + ":setting", len(setting_pool))]
+
+    titles = _strategy_chapter_titles(strat_genre)
+    fallback_hooks = ["small_wonder_close", "loss_echo_close", "small_wonder_close"]
+
+    chapters: list[dict[str, Any]] = []
+    for ch_idx in range(3):
+        ch_num = ch_idx + 1
+        # Chapter-scoped arc so the three chapters select distinct strategies/variants.
+        ch_arc = f"{arc_id}:ch{ch_num}"
+        sd = load_story_strategy(strat_genre, series_id=series_id, arc_id=ch_arc)
+        strategy = sd.get("strategy") or {}
+        variants = select_layer_variants(sd, series_id=series_id, arc_id=ch_arc, genre=strat_genre)
+
+        # Layer 1 plot skeleton — prefer the selected variant's beat list, else the
+        # strategy's base layer_1_plot_skeleton.
+        layer_1 = variants.get("layer_1")
+        skeleton = None
+        if isinstance(layer_1, dict) and layer_1.get("beats"):
+            skeleton = layer_1
+        if skeleton is None:
+            skeleton = strategy.get("layer_1_plot_skeleton") or {}
+        raw_beats = skeleton.get("beats") or []
+
+        beats: list[dict[str, Any]] = []
+        for bi, rb in enumerate(raw_beats):
+            text = str(rb.get("text") or "").strip()
+            text = (
+                text.replace("{protagonist}", protagonist)
+                .replace("{companion}", companion)
+                .replace("{rival}", companion)  # healing register has no rival
+                .replace("{setting}", setting)
+            )
+            # Collapse the YAML folded-scalar whitespace into clean prose.
+            text = " ".join(text.split())
+            beats.append({
+                "beat_index": bi,
+                "beat_text": text,
+                "is_carrier_beat": bool(rb.get("is_carrier", False)),
+                "camera_hint": str(rb.get("camera_hint") or "medium"),
+                "mood_hint": str(rb.get("mood_hint") or "calm"),
+            })
+
+        if not beats:
+            return None  # malformed strategy — fall back to defaults
+
+        end_hook = _hook_from_pacing(
+            variants.get("layer_5") or strategy.get("layer_5_pacing_skeleton"),
+            ch_idx,
+            fallback_hooks[ch_idx % len(fallback_hooks)],
+        )
+
+        chapters.append({
+            "chapter_number": ch_num,
+            "chapter_title": titles[ch_idx % len(titles)],
+            "mini_arc_stage": ["setup", "rising", "climax"][ch_idx],
+            "plot_beats": beats,
+            "chapter_end_hook": end_hook,
+            "turning_point": f"ch{ch_num}_turn" if ch_idx < 2 else None,
+            "silence_beats_allocated": sum(
+                1 for b in beats if b["mood_hint"] in ("stillness", "calm")
+            ),
+            "villain_presence": "absent",  # healing register: no villain, ever
+            "story_strategy_id": sd.get("strategy_id"),
+            "story_strategy_genre": strat_genre,
+        })
+
+    return chapters
+
+
 def build_story_architecture_internal(
     *,
     series_id: str,
@@ -140,15 +300,28 @@ def build_story_architecture_internal(
 
     Writer handoff strips beats to ``beat_index`` + ``beat_text`` only
     (see ``transmission.story_architecture_internal_to_handoff``).
+
+    Generation strategy (when *chapters* is ``None``):
+      1. Try the RICH engine — derive chapters from the authored
+         ``config/source_of_truth/manga_story_strategies/{genre}_strategies.yaml``
+         via ``story_strategy_loader`` (243+ combos per strategy). The Devotion
+         lane resolves to the HEALING / iyashikei register.
+      2. Fall back to the deterministic ``_BEAT_TEMPLATES`` only when no strategy
+         file exists for the (aliased) genre — preserves legacy/CI behavior.
     """
+    note = "chunk_b_deterministic"
     if chapters is None:
-        chapters = _generate_default_chapters(series_id, arc_id, genre_id)
+        chapters = _generate_strategy_chapters(series_id, arc_id, genre_id)
+        if chapters is not None:
+            note = "strategy_driven"
+        else:
+            chapters = _generate_default_chapters(series_id, arc_id, genre_id)
     return {
         "schema_version": schema_version,
         "artifact_type": "story_architecture_internal",
         "series_id": series_id,
         "arc_id": arc_id,
         "chapters": chapters,
-        "transmission_audit": {"note": "chunk_b_deterministic"},
+        "transmission_audit": {"note": note},
         "constraint_checks": {"passed": True},
     }

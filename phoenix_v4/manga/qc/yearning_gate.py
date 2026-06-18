@@ -72,24 +72,34 @@ def check_yearning_pacing(
     sustain_count = 0
     total_panels = 0
 
-    for ch in (chapter_script.get("chapters") or []):
-        for page in (ch.get("pages") or []):
-            for panel in (page.get("panels") or []):
-                total_panels += 1
-                narration = str(panel.get("narration") or "")
-                caption = str(panel.get("caption") or "")
-                dialogue_items = panel.get("dialogue") or []
-                dialogue = " ".join(str(d) for d in dialogue_items)
-                description = str(panel.get("panel_description") or panel.get("description") or "")
+    from phoenix_v4.manga.qc._script_shape import iter_panels
 
-                full_text = f"{narration} {caption} {dialogue}"
-                all_text = f"{description} {full_text}".lower()
+    def _dialogue_str(items: Any) -> str:
+        if not isinstance(items, list):
+            return str(items or "")
+        out: list[str] = []
+        for d in items:
+            if isinstance(d, dict):
+                out.append(str(d.get("text") or ""))
+            elif d is not None:
+                out.append(str(d))
+        return " ".join(out)
 
-                if _RESOLUTION_RE.search(full_text):
-                    resolution_count += 1
+    for panel in iter_panels(chapter_script):
+        total_panels += 1
+        narration = str(panel.get("narration") or "")
+        caption = str(panel.get("caption") or "")
+        dialogue = _dialogue_str(panel.get("dialogue"))
+        description = str(panel.get("panel_description") or panel.get("description") or panel.get("action") or "")
 
-                if any(sig in all_text for sig in _SUSTAIN_SIGNALS):
-                    sustain_count += 1
+        full_text = f"{narration} {caption} {dialogue}"
+        all_text = f"{description} {full_text}".lower()
+
+        if _RESOLUTION_RE.search(full_text):
+            resolution_count += 1
+
+        if any(sig in all_text for sig in _SUSTAIN_SIGNALS):
+            sustain_count += 1
 
     if total_panels == 0:
         return None

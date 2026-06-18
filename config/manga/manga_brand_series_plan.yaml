@@ -353,7 +353,12 @@ brands:
   devotion_path:
     teacher: sai_ma
     primary_lane: english_global
-    genre: shonen              # devotion/discipline maps to shonen perseverance arc
+    # LOCKED register: Open Vessel Press / Sai Ma manga is HEALING / IYASHIKEI —
+    # devotional-emotional-drama + supernatural-healing (grief, compassion,
+    # courage-as-inner-work). NOT shonen / battle. Devotion is the courage of
+    # turning toward a feeling and receiving it, not a perseverance/fight arc.
+    # Story engine: config/source_of_truth/manga_story_strategies/iyashikei_strategies.yaml
+    genre: iyashikei
     active_series_target: 3
     new_series_per_year: 4
     chapters_per_series_per_month: 3
@@ -361,9 +366,9 @@ brands:
     volumes_per_year_target: 6
 
     topic_allocation:
-      courage: 1 series
-      imposter_syndrome: 1 series
-      burnout: 1 series
+      grief: 1 series           # the second-cup arc — loss received, not resolved
+      compassion: 1 series      # receiving a hurting other into baseline
+      courage: 1 series         # courage-as-inner-work — turning toward the avoided feeling
 
     webtoon_format:
       enabled: true
