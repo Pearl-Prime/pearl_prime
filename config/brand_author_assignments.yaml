@@ -82,6 +82,108 @@ assignments:
     default_author: null
     # No default: use --author explicitly or teacher-only book.
 
+  # ─── BRAND: clear_seeing_books ───
+  - brand_id: clear_seeing_books
+    topic_ids: [overthinking]
+    default_author: ada_park
+  - brand_id: clear_seeing_books
+    topic_ids: [anxiety]
+    default_author: ada_park
+  - brand_id: clear_seeing_books
+    topic_ids: [self_worth]
+    default_author: joel_crane
+  - brand_id: clear_seeing_books
+    topic_ids: [boundaries]
+    default_author: joel_crane
+  - brand_id: clear_seeing_books
+    topic_ids: [social_anxiety]
+    default_author: hana_lee
+  - brand_id: clear_seeing_books
+    topic_ids: [imposter_syndrome]
+    default_author: hana_lee
+  - brand_id: clear_seeing_books
+    topic_ids: [burnout]
+    default_author: marcus_stone
+  - brand_id: clear_seeing_books
+    topic_ids: [depression]
+    default_author: marcus_stone
+  - brand_id: clear_seeing_books
+    topic_ids: [grief]
+    default_author: yuki_tanabe
+  - brand_id: clear_seeing_books
+    topic_ids: [courage]
+    default_author: yuki_tanabe
+  - brand_id: clear_seeing_books
+    topic_ids: [financial_stress]
+    default_author: elliot_vane
+  - brand_id: clear_seeing_books
+    topic_ids: [sleep_anxiety]
+    default_author: elliot_vane
+  - brand_id: clear_seeing_books
+    default_author: ada_park   # brand default + pool; listed LAST so it can't shadow the topic rows
+    author_pool:
+      - { author_id: ada_park, voice_lock: 21m00Tcm4TlvDq8ikWAM, tier: 1 }
+      - { author_id: joel_crane, voice_lock: N2lVS1w4EtoT3dr4eOWO, tier: 1 }
+      - { author_id: hana_lee, voice_lock: cgSgspJ2msm6, tier: 2 }
+      - { author_id: marcus_stone, voice_lock: pNInz6obpgDQGcFmaJgB, tier: 1 }
+      - { author_id: yuki_tanabe, voice_lock: XrExE9yKIg1WjnnlVkGX, tier: 2 }
+      - { author_id: elliot_vane, voice_lock: wViXBPUzp2ZZixB1xQuM, tier: 2 }
+
+  # ─── BRAND: felt_sense_publishing ───
+  - brand_id: felt_sense_publishing
+    topic_ids: [anxiety]
+    default_author: claire_ashford
+  - brand_id: felt_sense_publishing
+    topic_ids: [somatic_healing]
+    default_author: ben_archer
+  - brand_id: felt_sense_publishing
+    topic_ids: [burnout]
+    default_author: james_fielding
+  - brand_id: felt_sense_publishing
+    topic_ids: [imposter_syndrome]
+    default_author: james_fielding
+  - brand_id: felt_sense_publishing
+    topic_ids: [grief]
+    default_author: vera_osei
+  - brand_id: felt_sense_publishing
+    topic_ids: [self_worth]
+    default_author: vera_osei
+  - brand_id: felt_sense_publishing
+    topic_ids: [social_anxiety]
+    default_author: alex_navarro
+  - brand_id: felt_sense_publishing
+    topic_ids: [overthinking]
+    default_author: alex_navarro
+  - brand_id: felt_sense_publishing
+    topic_ids: [boundaries]
+    default_author: helen_cross
+  - brand_id: felt_sense_publishing
+    topic_ids: [compassion_fatigue]
+    default_author: helen_cross
+  - brand_id: felt_sense_publishing
+    topic_ids: [depression]
+    default_author: omar_brooks
+  - brand_id: felt_sense_publishing
+    topic_ids: [courage]
+    default_author: omar_brooks
+  - brand_id: felt_sense_publishing
+    topic_ids: [financial_anxiety]
+    default_author: suki_moreno
+  - brand_id: felt_sense_publishing
+    topic_ids: [sleep_anxiety]
+    default_author: suki_moreno
+  - brand_id: felt_sense_publishing
+    default_author: claire_ashford   # brand default + pool; listed LAST so it can't shadow the topic rows
+    author_pool:
+      - { author_id: claire_ashford, voice_lock: XB0fDUnXU5powFXDhCwa, tier: 1 }
+      - { author_id: james_fielding, voice_lock: ZQe5CZNOzWyzPSCn5a3c, tier: 1 }
+      - { author_id: vera_osei, voice_lock: pMsXgVXv3BLzUgSXRplE, tier: 1 }
+      - { author_id: alex_navarro, voice_lock: TxGEqnHWrfWFTfGW9XjX, tier: 2 }
+      - { author_id: helen_cross, voice_lock: z9fAnlkpzviPz146aGWa, tier: 2 }
+      - { author_id: omar_brooks, voice_lock: Yko7PKHZNXotIFUBG7I9, tier: 2 }
+      - { author_id: suki_moreno, voice_lock: piTKgcLEGmPE4e6mEKli, tier: 2 }
+      - { author_id: ben_archer, voice_lock: IKne3meq5aSn9XLyUdCD, tier: 1 }
+
   # ─── BRAND: devotion_path (teacher: sai_ma) — imprint "Open Vessel Press" ───
   # Teacher-bylined devotional brand: byline "Sai Maa" (the teacher). Resolved when --teacher sai_ma
   # routes brand_id -> devotion_path (resolve_brand_for_teacher). author entry: config/author_registry.yaml.
