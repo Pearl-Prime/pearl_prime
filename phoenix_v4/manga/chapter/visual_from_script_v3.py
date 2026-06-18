@@ -93,6 +93,40 @@ _BASE_NEGATIVE = (
     "uncanny valley face"
 )
 
+# Camera family -> shot-type phrase. The writer handoff authors a ``camera`` per
+# panel (establishing-wide, close-up, ...); FLUX weights leading tokens most, so
+# the authored scene action + this shot phrase lead the prompt before the style
+# tail. Mirrors scripts/manga/render_devotion_panels_gpu.py::_SHOT_PHRASE.
+_CAMERA_SHOT_PHRASE: dict[str, str] = {
+    "establishing-wide": "wide establishing shot, full environment, scenery",
+    "wide": "wide shot, full scene",
+    "medium": "medium shot",
+    "over-shoulder": "over-the-shoulder shot",
+    "close-up": "close-up",
+    "insert": "close insert detail",
+    "environmental-insert": "environmental insert, scenery detail",
+}
+
+# Cameras the renderer treats as pure scenery (no figure).
+_SCENERY_CAMERAS = {"environmental-insert"}
+_SCENERY_POSITIVE = "no people, empty of figures"
+_SCENERY_NEGATIVE = "person, people, face, portrait, character, human figure, crowd"
+
+
+def _shot_phrase(camera: str) -> str:
+    return _CAMERA_SHOT_PHRASE.get(str(camera or "").strip().lower(), "")
+
+
+def _panel_scene(panel: Mapping[str, Any]) -> str:
+    """The authored scene text for a panel.
+
+    v3 chapter scripts (PR #651) author the visual under ``scene``; the chapter
+    *writer handoff* the GPU renderer consumes authors it under ``action`` (with
+    a sibling ``camera``). Accept either so the authored beat — not a generic
+    fallback — reaches FLUX. ``scene`` wins when both are present.
+    """
+    return str(panel.get("scene") or panel.get("action") or "").strip()
+
 
 def _character_lock_in(chapter_script: Mapping[str, Any]) -> str:
     """Compose a character-consistency clause from main_characters[]."""
@@ -141,10 +175,20 @@ def _build_panel_prompt(
     character_lock_in: str,
     flashback_palette: str | None = None,
 ) -> tuple[str, str]:
-    """Return (positive_prompt, negative_prompt) for one panel."""
-    scene = str(panel.get("scene") or "").strip()
+    """Return (positive_prompt, negative_prompt) for one panel.
+
+    The authored scene (``scene`` or, in the writer handoff, ``action``) leads
+    the prompt, followed by the camera shot-type, palette + character lock-in,
+    composition cue, and finally the style tail. Leading with the per-panel beat
+    is what stops every panel collapsing onto the same scene-agnostic portrait.
+    """
+    scene = _panel_scene(panel)
     if not scene:
         scene = "quiet panel, ambient establishing shot"
+
+    camera = str(panel.get("camera") or "")
+    shot = _shot_phrase(camera)
+    is_scenery = camera.strip().lower() in _SCENERY_CAMERAS
 
     # Detect flashback palette swap (panel.intent or palette field on panel)
     intent = str(panel.get("intent") or "").lower()
@@ -164,10 +208,17 @@ def _build_panel_prompt(
     composition = beat_to_composition.get(str(panel.get("beat_type") or ""), "")
 
     parts: list[str] = []
+    # Authored beat leads. The camera shot-type rides immediately behind it so
+    # FLUX frames this panel's beat rather than defaulting to a centred portrait.
+    parts.append(scene)
+    if shot:
+        parts.append(shot)
+    if is_scenery:
+        parts.append(_SCENERY_POSITIVE)
     if active_palette:
         parts.append(active_palette)
-    parts.append(scene)
-    if character_lock_in:
+    # A scenery insert is empty of figures — don't pin the cast onto it.
+    if character_lock_in and not is_scenery:
         parts.append(character_lock_in)
     if composition:
         parts.append(composition)
@@ -175,7 +226,10 @@ def _build_panel_prompt(
     parts.append(style_anchor.get("tail", ""))
 
     positive = ", ".join(p.strip() for p in parts if p and p.strip())
-    return positive, _BASE_NEGATIVE
+    negative = _BASE_NEGATIVE
+    if is_scenery:
+        negative = f"{negative}, {_SCENERY_NEGATIVE}"
+    return positive, negative
 
 
 def compile_v3_panel_prompts(
