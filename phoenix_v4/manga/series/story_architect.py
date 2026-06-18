@@ -159,9 +159,51 @@ _STRATEGY_CHARACTERS: dict[str, dict[str, list[str]]] = {
 
 
 def _strategy_chapter_titles(genre: str) -> list[str]:
+    """Deterministic fallback titles when a chapter's selected strategy carries
+    no usable ``name`` (e.g. a malformed strategy file). The production path
+    prefers the strategy-driven title from :func:`_chapter_title_from_strategy`."""
     if genre == "iyashikei":
         return ["First Light", "The Visitor", "One Degree Deeper"]
     return ["Awakening", "Struggle", "Resolution"]
+
+
+def _title_case_label(raw: str) -> str:
+    """'single_object_meditation' -> 'Single Object Meditation'."""
+    words = [w for w in str(raw).replace("-", "_").split("_") if w]
+    return " ".join(w[:1].upper() + w[1:] for w in words)
+
+
+def _chapter_title_from_strategy(
+    strategy: dict[str, Any],
+    layer_1: Any,
+    fallback: str,
+) -> str:
+    """Derive a per-chapter title from the SAME strategy data that drives the
+    beats — so the title is strategy-selected, not a hard-coded constant.
+
+    Each chapter re-selects a strategy (4 per family, e.g. iyashikei: "Seasonal
+    Return", "The Visiting Presence", "The Open Hand", "The Quiet Crossing") plus
+    a layer-1 plot variant (e.g. "grief_received", "single_object_meditation").
+    The selected strategy ``name`` is the natural chapter title; when a distinct
+    plot variant is present we append it as a subtitle so the three chapters read
+    as distinct movements rather than repeating the strategy name. Falls back to
+    *fallback* (a deterministic constant) when no usable name exists.
+    """
+    name = ""
+    if isinstance(strategy, dict):
+        name = str(strategy.get("name") or "").strip()
+    if not name:
+        return fallback
+
+    variant = ""
+    if isinstance(layer_1, dict):
+        variant = str(layer_1.get("variant_label") or "").strip()
+    # A bare "<family>_standard"/"_default" variant is the baseline — no subtitle.
+    if variant and not any(
+        variant.endswith(sfx) for sfx in ("_standard", "_default", "_base")
+    ):
+        return f"{name}: {_title_case_label(variant)}"
+    return name
 
 
 def _hook_from_pacing(layer_5: Any, chapter_idx: int, fallback: str) -> str:
@@ -266,9 +308,13 @@ def _generate_strategy_chapters(
             fallback_hooks[ch_idx % len(fallback_hooks)],
         )
 
+        chapter_title = _chapter_title_from_strategy(
+            strategy, layer_1, titles[ch_idx % len(titles)]
+        )
+
         chapters.append({
             "chapter_number": ch_num,
-            "chapter_title": titles[ch_idx % len(titles)],
+            "chapter_title": chapter_title,
             "mini_arc_stage": ["setup", "rising", "climax"][ch_idx],
             "plot_beats": beats,
             "chapter_end_hook": end_hook,
