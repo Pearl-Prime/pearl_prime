@@ -27,3 +27,8 @@
 - 2026-06-17 — #1710 bubbles → 7b53c2ff84
 - 2026-06-17 — #1708 render/individuation/license → 3261dcabb9
 - (continuation lanes appended on merge)
+
+## Update 2026-06-18 (operator-away autonomous run)
+- **E-BOOK deliveries LIVE** — #1718 -> 288e22cb8f: 80 Devotion (Open Vessel Press / Sai Maa) EPUBs + brand_deliveries/devotion_path.json on main -> CF Pages auto-deploy -> brand admin can download the new books from the Director UI "real production files" (verified locally HTTP 200 / application/epub+zip). Decoupled from manga Wave-2 to ship now. NOTE: EPUBs are no-cover (valid readable books; cover uploaded separately at KDP per the dashboard steps) — FLUX covers are a Wave-2 enhancement.
+- **Manga continuation** (wf_ab54eaa7): #1715 bestseller story engine + blocking gate; #1714 genre drawing-traditions wired into the production prompt compiler; #1713 Devotion healing cast designs. SHIPPED as do-NOT-merge PRs; merge gated on the workflow's adversarial verify + Pearl_PM/Architect/Marketing/drift oversight verdicts.
+- **Next (auto)**: on wf_ab54eaa7 completion -> merge verified continuation lanes (act on any drift-watcher blocking finding first) -> fire Wave-2 (render Devotion healing manga -> webtoon/PDF -> deliveries -> Director UI).
