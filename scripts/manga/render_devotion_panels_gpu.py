@@ -15,6 +15,21 @@ stage, style_id=cozy_iyashikei, with the iyashikei art direction, drawing
 traditions and individuation tags baked in) is submitted straight to the live
 Pearl Star ComfyUI server, which renders it on the RTX GPU.
 
+Scene-aware prompts come from the compiler, NOT this renderer
+--------------------------------------------------------------
+This renderer used to re-compose ``{authored_scene}, {shot_phrase} | {style_tail}``
+per panel (``_compose_positive`` + a camera->shot-type table) because the
+``chapter_visual`` compiler emitted ONE scene-agnostic iyashikei style block for
+every panel. PR #1728 (compiler v3) + #1732 (v1/v2 caller) moved scene-awareness
+into the compiler itself: a regenerated ``panel_prompts.json`` now leads each
+``prompt`` with the authored scene beat + camera shot-type and already carries the
+scenery "no people" steer in both ``prompt`` and ``negative_prompt``. So this
+renderer now consumes ``panel["prompt"]`` / ``panel["negative_prompt"]``
+VERBATIM — the duplicate composition layer is retired (proof:
+artifacts/qa/scene_aware_compiler_proof_20260618/, 22/22 distinct, no fidelity
+regression vs the old workaround). The authored ``camera`` is still read from the
+writer handoff for one purpose only: per-camera canvas sizing (``_DIMS``).
+
 Backend / licence (locked decisions — docs/sessions/AUTONOMOUS_MANGA_RUN_2026-06-17.md
 D3, CLAUDE.md tier policy):
   * Model = ``flux1-schnell-fp8.safetensors`` — FLUX.1-schnell, Apache-2.0,
@@ -64,6 +79,8 @@ MIN_PNG_BYTES = 10_000      # a real FLUX panel is hundreds of KB; smaller = err
 
 # Per-camera canvas (px) — identical to render_devotion_panels_local.py _DIMS so
 # the layout/compose engines see unchanged aspect ratios. All multiples of 16.
+# This is canvas SIZING, not prompt composition: the authored camera selects the
+# render dimensions; the scene/shot text now lives in the compiled prompt itself.
 _DIMS = {
     "establishing-wide": (1024, 576),
     "wide": (1024, 576),
@@ -77,64 +94,13 @@ _DEFAULT_DIM = (768, 768)
 
 # Appended to every panel negative so the ART carries NO text — bubbles/captions
 # are composited later by the lettering/bubble stages (two-stage rule). Mirrors
-# flux_txt2img_manga.json + flux_schnell_worker._flux_schnell_graph.
+# flux_txt2img_manga.json + flux_schnell_worker._flux_schnell_graph. This is a
+# render-backend constraint (FLUX must not draw text), NOT scene composition, so
+# it stays here even though the compiler also bans generic "text" in its negative.
 _NEG_TEXT_SUFFIX = (
     "text, words, letters, captions, watermark, signature, writing, "
     "typography, font, lettering, logos, subtitles, speech bubble"
 )
-
-# Camera family -> shot-type phrase that leads the composed prompt (FLUX weights
-# leading tokens most). Mirrors the camera semantics the PIL stand-in encoded via
-# its per-camera dims + figure scale.
-_SHOT_PHRASE = {
-    "establishing-wide": "wide establishing shot, full environment, scenery",
-    "wide": "wide shot, full scene",
-    "medium": "medium shot",
-    "over-shoulder": "over-the-shoulder shot",
-    "close-up": "close-up",
-    "insert": "close insert detail",
-    "environmental-insert": "environmental insert, scenery detail",
-}
-# Cameras the PIL stand-in renders as pure scenery (no figure). Force "no people"
-# so FLUX paints the authored environment, not a default portrait.
-_SCENERY_CAMERAS = {"environmental-insert"}
-_SCENERY_NEG = "person, people, face, portrait, character, human figure, crowd"
-
-
-def _clean_action(action: str, limit: int = 340) -> str:
-    """Collapse whitespace + cap length of the authored scene direction."""
-    a = " ".join(str(action or "").split()).strip()
-    # Drop the production aside some beats carry so it does not become art.
-    a = a.replace("Final panel:", "").strip()
-    return a[:limit].rsplit(" ", 1)[0] if len(a) > limit else a
-
-
-def _style_tail(compiled_prompt: str) -> str:
-    """The compiled iyashikei art-direction tail, minus its generic camera noise.
-
-    Keeps the style / drawing-tradition / individuation / ITE tokens the task
-    points at, but strips the ``mixed: close-up, medium, wide`` aside so it does
-    not fight the panel's actual shot-type phrase.
-    """
-    return compiled_prompt.replace("mixed: close-up, medium, wide, ", "").strip()
-
-
-def _compose_positive(compiled_prompt: str, camera: str, action: str) -> str:
-    """Scene (authored) leads; compiled iyashikei art-direction tails."""
-    cam = str(camera or "").strip().lower()
-    scene = _clean_action(action)
-    shot = _SHOT_PHRASE.get(cam, "medium shot")
-    lead = f"{scene}, {shot}" if scene else shot
-    if cam in _SCENERY_CAMERAS:
-        lead = f"{lead}, no people, empty of figures"
-    return f"{lead} | {_style_tail(compiled_prompt)}"
-
-
-def _compose_negative(panel_negative: str, camera: str) -> str:
-    neg = (panel_negative or "").strip()
-    if str(camera or "").strip().lower() in _SCENERY_CAMERAS:
-        neg = f"{neg}, {_SCENERY_NEG}" if neg else _SCENERY_NEG
-    return neg
 
 
 def _flux_schnell_graph(prompt: str, negative: str, width: int, height: int, seed: int) -> dict:
@@ -181,13 +147,16 @@ def _camera_dims(camera: str) -> tuple[int, int]:
     return _DIMS.get(str(camera or "").strip().lower(), _DEFAULT_DIM)
 
 
-def _render_one(comfy_url: str, panel: dict, camera: str, action: str, seed: int) -> bytes:
-    """Submit one panel to ComfyUI, poll, return the PNG bytes. Raises on failure."""
-    compiled = (panel.get("prompt") or panel.get("flux_prompt") or "").strip()
-    if not compiled:
+def _render_one(comfy_url: str, panel: dict, camera: str, seed: int) -> bytes:
+    """Submit one panel to ComfyUI, poll, return the PNG bytes. Raises on failure.
+
+    The positive/negative prompts are consumed VERBATIM from the compiled panel
+    (scene-aware as of #1728/#1732); the authored camera only sizes the canvas.
+    """
+    positive = (panel.get("prompt") or panel.get("flux_prompt") or "").strip()
+    if not positive:
         raise ValueError(f"{panel.get('panel_id')}: empty compiled prompt")
-    positive = _compose_positive(compiled, camera, action)
-    negative = _compose_negative(panel.get("negative_prompt") or "", camera)
+    negative = (panel.get("negative_prompt") or "").strip()
     w, h = _camera_dims(camera)
     graph = _flux_schnell_graph(positive, negative, w, h, seed)
 
@@ -224,12 +193,12 @@ def _render_one(comfy_url: str, panel: dict, camera: str, action: str, seed: int
     raise TimeoutError(f"{panel.get('panel_id')}: poll timeout after {POLL_TIMEOUT_S:.0f}s")
 
 
-def render_panel(comfy_url: str, panel: dict, camera: str, action: str, seed: int, out_path: Path) -> tuple[int, int]:
+def render_panel(comfy_url: str, panel: dict, camera: str, seed: int, out_path: Path) -> tuple[int, int]:
     """Render one panel with bounded retries; write PNG; return (w, h)."""
     last_err = ""
     for attempt in range(PANEL_RETRIES + 1):
         try:
-            png = _render_one(comfy_url, panel, camera, action, seed)
+            png = _render_one(comfy_url, panel, camera, seed)
             out_path.parent.mkdir(parents=True, exist_ok=True)
             out_path.write_bytes(png)
             # width/height straight from the IHDR we just wrote
@@ -243,21 +212,22 @@ def render_panel(comfy_url: str, panel: dict, camera: str, action: str, seed: in
     raise RuntimeError(f"{panel.get('panel_id')}: failed after {PANEL_RETRIES + 1} attempts — {last_err}")
 
 
-def _authored_panels(ws: Path) -> dict[str, tuple[str, str]]:
-    """panel_id -> (camera, action), read from the writer handoff.
+def _authored_cameras(ws: Path) -> dict[str, str]:
+    """panel_id -> authored camera, read from the writer handoff.
 
-    The compiled panel_prompts.json prompt is a scene-AGNOSTIC iyashikei style
-    block (identical across panels); the authored ``action`` is where each beat's
-    scene lives. We compose the two — exactly the data split the PIL stand-in used.
+    Used for ONE thing only: per-camera canvas sizing (``_camera_dims`` / _DIMS).
+    The scene/shot text now lives in the compiled panel prompt itself (#1728/#1732),
+    so the renderer no longer re-derives a shot phrase from the camera — it just
+    sizes the canvas to match the authored shot family.
     """
     script_path = ws / "chapter_script_writer_handoff.json"
-    out: dict[str, tuple[str, str]] = {}
+    out: dict[str, str] = {}
     if script_path.is_file():
         script = json.loads(script_path.read_text())
         for page in script.get("pages") or []:
             for panel in page.get("panels") or []:
                 pid = str(panel.get("panel_id"))
-                out[pid] = (str(panel.get("camera") or ""), str(panel.get("action") or ""))
+                out[pid] = str(panel.get("camera") or "")
     return out
 
 
@@ -288,7 +258,7 @@ def main() -> int:
     if not panels:
         print(f"no panels in {pp_path}", file=sys.stderr)
         return 1
-    authored = _authored_panels(ws)
+    cameras = _authored_cameras(ws)
 
     if args.only_panel:
         panels = [p for p in panels if str(p.get("panel_id")) == args.only_panel]
@@ -304,15 +274,15 @@ def main() -> int:
     ok = fail = skipped = 0
     for i, panel in enumerate(panels):
         pid = str(panel.get("panel_id"))
-        camera, action = authored.get(pid, ("", ""))
+        camera = cameras.get(pid, "")
         w, h = _camera_dims(camera)
         seed = args.seed_base + i
         out_path = out_dir / f"{pid}.png"
         rel_map[pid] = str(Path(args.out_subdir) / f"{pid}.png")
 
         if args.dry_run:
-            scene = _clean_action(action)[:60]
-            print(f"  [dry] {pid:8s} {camera or '-':18s} {w}x{h} seed={seed} scene='{scene}'", file=sys.stderr)
+            prompt = str(panel.get("prompt") or panel.get("flux_prompt") or "")
+            print(f"  [dry] {pid:8s} {camera or '-':18s} {w}x{h} seed={seed} prompt='{prompt[:60]}'", file=sys.stderr)
             continue
         if args.skip_existing and out_path.is_file() and out_path.stat().st_size > MIN_PNG_BYTES:
             print(f"  SKIP {pid} (exists)", file=sys.stderr)
@@ -320,7 +290,7 @@ def main() -> int:
             continue
         t0 = time.time()
         try:
-            rw, rh = render_panel(comfy_url, panel, camera, action, seed, out_path)
+            rw, rh = render_panel(comfy_url, panel, camera, seed, out_path)
             dt = time.time() - t0
             print(f"  OK   {pid:8s} {rw}x{rh} {out_path.stat().st_size // 1024}KB {dt:4.1f}s ({i + 1}/{len(panels)})", file=sys.stderr)
             ok += 1
