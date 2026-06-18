@@ -29,7 +29,7 @@ fonts:
       - "Hiragana"
       - "Katakana"
       - "Kanji (Joyo + Jinmeiyo)"
-    status: pending
+    status: installed
     notes: |
       Japanese dialogue body font. Industry-standard for AI-rendered manga
       (cited by Comic C'moA + Bookwalker creator guides). Pair with Klee One
@@ -47,7 +47,7 @@ fonts:
     path: source_han_sans_tc.otf
     fallback_for_glyphs:
       - "Traditional Chinese (Big5 + CNS 11643)"
-    status: pending
+    status: installed
     notes: |
       Taiwan + Hong Kong publication standard. Higher-stroke-count glyphs
       need this; SC variants drop them.
@@ -64,7 +64,7 @@ fonts:
     path: source_han_sans_sc.otf
     fallback_for_glyphs:
       - "Simplified Chinese (GB18030)"
-    status: pending
+    status: installed
     notes: |
       Required for zh_CN catalog plans. Note: Bilibili Comics + Kuaikan
       partnerships are still gated (per PR #631), so this font is needed
@@ -83,7 +83,7 @@ fonts:
     fallback_for_glyphs:
       - "Hangul Syllables"
       - "Hangul Jamo"
-    status: pending
+    status: installed
     notes: |
       Reserved for future ko_KR catalog plans (current MANGA_FULL_CATALOG_PLAN
       doesn't include ko_KR, but Naver Webtoon Korea connector is on the
@@ -99,7 +99,7 @@ fonts:
     locale_targets: [ja_JP]
     roles: [display, handwritten_feel, narration]
     path: ttf/KleeOne-Regular.ttf
-    status: pending
+    status: installed
     notes: |
       Handwritten brush-stroke feel. Iyashikei + josei essay manga signature
       look. Avoid for action / shonen — too soft.
@@ -113,7 +113,7 @@ fonts:
     locale_targets: [zh_TW, zh_CN]
     roles: [display, handwritten_feel]
     path: ttf/LXGWWenKai-Regular.ttf
-    status: pending
+    status: installed
     notes: |
       Klee-derivative for Chinese. Same handwritten feel as Klee One JP but
       covers TC + SC glyph sets. Use for iyashikei + healing zh_TW/zh_CN.
@@ -157,7 +157,7 @@ fonts:
     locale_targets: [en_US]
     roles: [display, sfx_secondary]
     path: ttf/Bangers-Regular.ttf
-    status: pending
+    status: installed
 
   - id: patrick_hand_handwritten
     family: Patrick Hand
@@ -167,17 +167,38 @@ fonts:
     locale_targets: [en_US]
     roles: [handwritten_feel, note]
     path: ttf/PatrickHand-Regular.ttf
-    status: pending
+    status: installed
 
   - id: architects_daughter_note
     family: Architects Daughter
     weights: [Regular]
     license: OFL
-    source_url: "https://fonts.google.com/specimen/Architects+Daughter"
+    source_url: "https://fonts.google.com/ofl/architectsdaughter"
     locale_targets: [en_US]
     roles: [handwritten_feel, note]
     path: ttf/ArchitectsDaughter-Regular.ttf
-    status: pending
+    status: installed
+
+  # ── BUNDLED OFL SUBSTITUTE for Anime Ace (Blambot can't be auto-fetched) ──
+  - id: comic_neue_dialogue
+    family: Comic Neue
+    weights: [Regular, Bold]
+    license: OFL
+    source_url: "https://fonts.google.com/specimen/Comic+Neue"
+    locale_targets: [en_US]
+    roles: [body, dialogue]
+    path: ttf/ComicNeue-Regular.ttf
+    status: installed
+    substitute_for: anime_ace_dialogue
+    notes: |
+      OFL-licensed, freely redistributable manga-style dialogue face.
+      Registered as the en_US body/dialogue font because Anime Ace 2.0
+      (Blambot) is behind an interactive cart and cannot be fetched by
+      install_manga_fonts.sh. Without a redistributable dialogue font the
+      en_US bubble renderer falls back to ImageFont.load_default() (the
+      ugly bitmap) on any clean box. The renderer prefers Anime Ace when
+      present (status->installed) and uses Comic Neue otherwise, so
+      production NEVER hits the default bitmap font.
 
   - id: noto_sans_jp_body
     family: Noto Sans JP
@@ -187,7 +208,7 @@ fonts:
     locale_targets: [ja_JP]
     roles: [body, fallback]
     path: ttf/NotoSansJP-Regular.otf
-    status: pending
+    status: installed
     notes: |
       Fallback for Source Han Sans JP. Adobe and Google ship the same
       typeface under two names (Source Han Sans JP = Noto Sans CJK JP);
@@ -198,10 +219,16 @@ fonts:
 # registered before greenlighting render.
 locale_coverage_required:
   en_US:
-    body: anime_ace_dialogue
-    sfx: badaboom_sfx
+    # Anime Ace (preferred) + Badaboom are Blambot fonts that cannot be
+    # auto-fetched; coverage points at the always-present OFL substitutes
+    # (Comic Neue dialogue, Bangers SFX) so en_US NEVER hits load_default().
+    # The renderer upgrades to Anime Ace / Badaboom automatically if present.
+    body: comic_neue_dialogue
+    dialogue: comic_neue_dialogue
+    sfx: bangers_display
     display: bangers_display
     handwritten: patrick_hand_handwritten
+    handwritten_secondary: architects_daughter_note
   ja_JP:
     body: source_han_sans_jp
     handwritten: klee_one_jp

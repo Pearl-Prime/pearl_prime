@@ -100,25 +100,41 @@ download_if_missing "${TTF_DIR}/PatrickHand-Regular.ttf" \
   patrick_hand_handwritten
 
 download_if_missing "${TTF_DIR}/ArchitectsDaughter-Regular.ttf" \
-  "https://github.com/google/fonts/raw/main/apache/architectsdaughter/ArchitectsDaughter-Regular.ttf" \
+  "https://github.com/google/fonts/raw/main/ofl/architectsdaughter/ArchitectsDaughter-Regular.ttf" \
   architects_daughter_note
 
 download_if_missing "${TTF_DIR}/NotoSansJP-Regular.otf" \
   "https://github.com/notofonts/noto-cjk/raw/main/Sans/OTF/Japanese/NotoSansCJKjp-Regular.otf" \
   noto_sans_jp_body
 
-# ── Anime Ace 2.0 + Badaboom (Blambot) ──────────────────────────────────
-# Blambot's free fonts are hosted on their site. Direct download URLs are
-# not stable; users must download manually and place at the expected paths.
-# Print instructions instead of fetching.
+# ── Comic Neue — bundled OFL substitute for Anime Ace 2.0 (Blambot) ──────
+# Blambot's Anime Ace cannot be fetched non-interactively, so en_US dialogue
+# would otherwise fall back to ImageFont.load_default() (ugly bitmap) on a
+# clean box. Comic Neue is an OFL-licensed, redistributable manga-style
+# dialogue face registered as the en_US body/dialogue fallback in
+# FONT_REGISTRY.yaml so production NEVER hits the default bitmap font.
+download_if_missing "${TTF_DIR}/ComicNeue-Regular.ttf" \
+  "https://github.com/google/fonts/raw/main/ofl/comicneue/ComicNeue-Regular.ttf" \
+  comic_neue_dialogue
+download_if_missing "${TTF_DIR}/ComicNeue-Bold.ttf" \
+  "https://github.com/google/fonts/raw/main/ofl/comicneue/ComicNeue-Bold.ttf" \
+  comic_neue_dialogue_bold
+
+# ── Anime Ace 2.0 + Badaboom (Blambot) — OPTIONAL upgrade ───────────────
+# Blambot's free fonts are hosted on their site behind an interactive cart;
+# direct download URLs are not stable, so they cannot be fetched here.
+# These are an OPTIONAL aesthetic upgrade — the OFL substitutes already
+# registered (Comic Neue for dialogue, Bangers for SFX) guarantee a real
+# font is always available. Install Blambot fonts only if you want the
+# canonical look; the registry will prefer them automatically when present.
 echo ""
-echo "── Manual download required ──"
-echo "Anime Ace 2.0 BB:"
+echo "── Optional manual upgrade (OFL substitutes already cover these) ──"
+echo "Anime Ace 2.0 BB (preferred en_US dialogue; substitute = Comic Neue):"
 echo "  1. https://blambot.com/products/anime-ace-2-0-bb"
 echo "  2. Click 'Add to cart' (free), checkout, get download link"
 echo "  3. Place AnimeAce2.0BB.ttf at: ${TTF_DIR}/AnimeAce2.0BB.ttf"
 echo ""
-echo "Badaboom BB:"
+echo "Badaboom BB (preferred en_US SFX; substitute = Bangers):"
 echo "  1. https://blambot.com/products/badaboom-bb"
 echo "  2. Same checkout flow"
 echo "  3. Place BadaboomBB.ttf at: ${TTF_DIR}/BadaboomBB.ttf"

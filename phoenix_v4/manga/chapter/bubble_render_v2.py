@@ -37,7 +37,72 @@ from phoenix_v4.manga.chapter.furigana_renderer import (
 from phoenix_v4.manga.chapter.svg_bubble_library import bubble_svg, svg_to_pil_rgba
 from phoenix_v4.manga.chapter.tail_geometry import resolve_mouth_pixel
 
-_FONT_CACHE_V2: dict[tuple[str, str, bool, int], Any] = {}
+_FONT_CACHE_V2: dict[tuple[str, str, str, bool, int], Any] = {}
+
+# ── Genre bubble-style register (config/manga/genre_bubble_styles.yaml) ──────
+_GENRE_STYLE_MAP_CACHE: dict[str, Any] | None = None
+
+
+def _load_genre_style_map() -> dict[str, Any]:
+    """Read config/manga/genre_bubble_styles.yaml. Returns {} if missing.
+
+    Cached after first read. The map provides per-genre bubble shape, font
+    role, and tail defaults so each genre's dialogue has a distinct resting
+    look (soft iyashikei vs punchy shonen) on top of the intensity layer.
+    """
+    global _GENRE_STYLE_MAP_CACHE
+    if _GENRE_STYLE_MAP_CACHE is not None:
+        return _GENRE_STYLE_MAP_CACHE
+    repo_root = Path(__file__).resolve().parents[3]
+    cfg_path = repo_root / "config" / "manga" / "genre_bubble_styles.yaml"
+    data: dict[str, Any] = {}
+    if cfg_path.exists():
+        try:
+            import yaml  # type: ignore
+
+            data = yaml.safe_load(cfg_path.read_text(encoding="utf-8")) or {}
+        except Exception:
+            data = {}
+    _GENRE_STYLE_MAP_CACHE = data
+    return data
+
+
+def _resolve_genre_style(
+    bubble_style_config: Mapping[str, Any] | None,
+) -> dict[str, Any] | None:
+    """Resolve the active genre's bubble-style dict from bubble_style_config.
+
+    bubble_style_config may carry ``genre`` (a register/tradition name such as
+    ``iyashikei`` / ``shonen`` / ``seinen`` / ``shoujo``, or a canonical genre
+    id like ``healing``) and optionally a preloaded ``genre_styles`` map. When
+    ``genre_styles`` is absent the map is loaded from disk. Returns the
+    resolved style dict (after following ``alias_of``) or None when no genre is
+    set / no match is found (renderer then keeps intensity defaults).
+    """
+    if not bubble_style_config:
+        return None
+    genre = bubble_style_config.get("genre")
+    if not genre:
+        return None
+    genre = str(genre).strip().lower()
+
+    style_map = bubble_style_config.get("genre_styles")
+    if not isinstance(style_map, Mapping):
+        style_map = _load_genre_style_map()
+    genres = (style_map or {}).get("genres") or {}
+
+    seen: set[str] = set()
+    entry = genres.get(genre)
+    # Follow alias_of chains (bounded) to the concrete register.
+    while isinstance(entry, Mapping) and entry.get("alias_of") and genre not in seen:
+        seen.add(genre)
+        genre = str(entry["alias_of"]).strip().lower()
+        entry = genres.get(genre)
+    if isinstance(entry, Mapping):
+        return dict(entry)
+    # Fall back to the map's default register if defined.
+    default = (style_map or {}).get("default")
+    return dict(default) if isinstance(default, Mapping) else None
 
 
 def _load_pil_font(path: Path, size: int) -> Any:
@@ -46,23 +111,38 @@ def _load_pil_font(path: Path, size: int) -> Any:
     return ImageFont.truetype(str(path), size=size)
 
 
-def _get_font_v2(locale: str, intensity: str, bold: bool) -> Any:
-    """Prefer FONT_REGISTRY body font for CJK; fall back to v1 discovery."""
+def _get_font_v2(
+    locale: str, intensity: str, bold: bool, *, font_role: str = "body"
+) -> Any:
+    """Return a REAL FreeTypeFont via FONT_REGISTRY for ALL locales.
+
+    Resolves ``locale_coverage_required[locale].<font_role>`` (e.g. ``body``
+    for clean dialogue, ``handwritten`` for the gentle iyashikei/shoujo face)
+    through ``select_font_path_for_locale`` for every locale — not just CJK.
+    This guarantees en_US dialogue uses the registered manga dialogue face
+    (Comic Neue / Anime Ace) instead of whatever the directory glob happens to
+    sort first, and never falls back to the load_default() bitmap when the
+    registry has a present font. Only if the registry has no present font for
+    the locale/role do we fall back to v1 discovery.
+    """
     size = br._FONT_SIZES.get(intensity, 14)  # type: ignore[attr-defined]
     if bold:
         size = min(size + 2, 28)
-    key = (locale, intensity, bold, size)
+    key = (locale, intensity, font_role, bold, size)
     if key in _FONT_CACHE_V2:
         return _FONT_CACHE_V2[key]
 
     font = None
-    if is_cjk_locale(locale):
+    # Registry-first for ALL locales (CJK and Latin alike).
+    p = select_font_path_for_locale(locale, role=font_role)
+    if (p is None or not p.is_file()) and font_role != "body":
+        # Requested role not present -> try the locale's body font.
         p = select_font_path_for_locale(locale, role="body")
-        if p and p.is_file():
-            try:
-                font = _load_pil_font(p, size)
-            except Exception:
-                font = None
+    if p and p.is_file():
+        try:
+            font = _load_pil_font(p, size)
+        except Exception:
+            font = None
     if font is None:
         font = br._get_font(intensity, bold=bold)  # type: ignore[attr-defined]
 
@@ -78,6 +158,80 @@ def _effective_bubble_style(line: Mapping[str, Any]) -> str:
     return style
 
 
+def _line_used_intensity_default(line: Mapping[str, Any]) -> tuple[bool, bool]:
+    """Whether this line's bubble_style / tail_style are the *intensity default*.
+
+    Returns ``(style_is_default, tail_is_default)``. When True the genre
+    register is allowed to override that field; when False the author set an
+    explicit per-line value in the chapter_script and it is preserved.
+
+    Compares against ``lettering_from_script``'s intensity->default maps so the
+    detection stays in lockstep with how lettering_from_script derives the
+    defaults.
+    """
+    try:
+        from phoenix_v4.manga.chapter.lettering_from_script import (
+            _INTENSITY_TO_BUBBLE,
+            _INTENSITY_TO_TAIL,
+        )
+    except Exception:  # pragma: no cover - defensive
+        return (True, True)
+    intensity = str(line.get("intensity") or "normal").lower()
+    cur_style = str(line.get("bubble_style") or "round_normal")
+    cur_tail = str(line.get("tail_style") or "pointer")
+    style_default = _INTENSITY_TO_BUBBLE.get(intensity, "round_normal")
+    tail_default = _INTENSITY_TO_TAIL.get(intensity, "pointer")
+    return (cur_style == style_default, cur_tail == tail_default)
+
+
+def _apply_genre_to_line(
+    line: Mapping[str, Any],
+    base_bubble_style: str,
+    base_tail_style: str,
+    genre_style: Mapping[str, Any] | None,
+) -> tuple[str, str, str]:
+    """Fold the genre register into a line's bubble shape / tail / font role.
+
+    Precedence (per config/manga/genre_bubble_styles.yaml):
+      1. Explicit per-line author override -> preserved.
+      2. Genre register default -> applied when the line used the intensity
+         default AND a demonic/supernatural bubble is not forcing a shape.
+      3. Intensity default -> unchanged.
+
+    Returns ``(bubble_style, tail_style, font_role)``.
+    """
+    font_role = "body"
+    if not genre_style:
+        return base_bubble_style, base_tail_style, font_role
+
+    g_style = genre_style.get("bubble_style")
+    g_tail = genre_style.get("tail_style")
+    g_font_role = genre_style.get("font_role")
+    if isinstance(g_font_role, str) and g_font_role.strip():
+        font_role = g_font_role.strip()
+
+    # A supernatural/demonic bubble forces wavy_supernatural; never override it.
+    dem = line.get("demonic_bubble")
+    demonic = isinstance(dem, Mapping) and dem.get("enabled") is True
+
+    style_is_default, tail_is_default = _line_used_intensity_default(line)
+
+    bubble_style = base_bubble_style
+    if (
+        not demonic
+        and style_is_default
+        and isinstance(g_style, str)
+        and g_style.strip()
+    ):
+        bubble_style = g_style.strip()
+
+    tail_style = base_tail_style
+    if tail_is_default and isinstance(g_tail, str) and g_tail.strip():
+        tail_style = g_tail.strip()
+
+    return bubble_style, tail_style, font_role
+
+
 def _bubble_fill_for_style(style: str) -> tuple[int, int, int, int]:
     if style == "shojo_soft":
         return (255, 245, 250, 220)
@@ -90,7 +244,36 @@ def _bubble_fill_for_style(style: str) -> tuple[int, int, int, int]:
     return (255, 255, 255, 230)
 
 
+def _as_rgba(val: Any) -> tuple[int, int, int, int] | None:
+    """Coerce a 4-element list/tuple from the genre config into an RGBA tuple."""
+    if isinstance(val, (list, tuple)) and len(val) == 4:
+        try:
+            r, g, b, a = (int(val[0]), int(val[1]), int(val[2]), int(val[3]))
+        except (TypeError, ValueError):
+            return None
+        return (
+            max(0, min(255, r)),
+            max(0, min(255, g)),
+            max(0, min(255, b)),
+            max(0, min(255, a)),
+        )
+    return None
+
+
+def _bubble_fill_with_genre(
+    style: str, line: Mapping[str, Any]
+) -> tuple[int, int, int, int]:
+    """Bubble fill, honoring a genre ``_genre_fill_tint`` override when set."""
+    override = _as_rgba(line.get("_genre_fill_tint"))
+    if override is not None:
+        return override
+    return _bubble_fill_for_style(style)
+
+
 def _stroke_for_style(style: str, line: Mapping[str, Any]) -> tuple[int, int, int, int]:
+    override = _as_rgba(line.get("_genre_stroke_tint"))
+    if override is not None:
+        return override
     dem = line.get("demonic_bubble")
     if isinstance(dem, Mapping) and dem.get("enabled") is True:
         return (90, 0, 120, 255)
@@ -114,7 +297,7 @@ def _draw_bubble_body(
 ) -> None:
     x1, y1, x2, y2 = bubble_bbox
     w, h = max(8, x2 - x1), max(8, y2 - y1)
-    fill = _bubble_fill_for_style(style)
+    fill = _bubble_fill_with_genre(style, line)
     stroke = _stroke_for_style(style, line)
     svg = bubble_svg(style, w, h, fill_rgba=fill, stroke_rgba=stroke)
     ras = svg_to_pil_rgba(svg, width=w, height=h)
@@ -124,7 +307,19 @@ def _draw_bubble_body(
 
     drawer = br._BUBBLE_DRAWERS.get(style, br._draw_round_bubble)  # type: ignore[attr-defined]
     if style == "shojo_soft":
-        drawer(draw, bubble_bbox, fill=fill)
+        # Soft pillowy rounded-rect — the gentle healing/iyashikei/shoujo look.
+        # Drawn directly here (not the ellipse drawer) so the soft shape renders
+        # even when cairosvg is absent and the SVG raster path is unavailable.
+        x1, y1, x2, y2 = bubble_bbox
+        radius = max(int(min(x2 - x1, y2 - y1) * 0.46), 8)
+        soft_stroke = (stroke[0], stroke[1], stroke[2], stroke[3])
+        try:
+            draw.rounded_rectangle(
+                [x1, y1, x2, y2], radius=radius,
+                fill=fill, outline=soft_stroke, width=2,
+            )
+        except (AttributeError, TypeError):  # very old Pillow — fall back to oval
+            drawer(draw, bubble_bbox, fill=fill)
     elif style == "electronic_sharp":
         drawer(draw, bubble_bbox, fill=fill, outline=(stroke[0], stroke[1], stroke[2], stroke[3]))
     elif style == "whisper_dashed":
@@ -334,11 +529,19 @@ def render_bubbles_onto_panel_v2(
     layout_records: list[dict[str, Any]] = []
     manifest_entries: list[dict[str, Any]] = []
 
+    # Resolve the genre register once for this panel (soft iyashikei vs punchy
+    # shonen). None when no genre is set -> intensity defaults are used.
+    genre_style = _resolve_genre_style(bubble_style_config)
+    caption_font_role = "body"
+    if genre_style and isinstance(genre_style.get("font_role"), str):
+        # Captions follow the genre's lettering face (gentle for healing).
+        caption_font_role = str(genre_style["font_role"]).strip() or "body"
+
     zone_seq = br._default_zone_sequence()  # type: ignore[attr-defined]
     zone_idx = 0
 
     if narrator_caption:
-        cap_font = _get_font_v2(locale, "calm", False)
+        cap_font = _get_font_v2(locale, "calm", False, font_role=caption_font_role)
         cap_lines = br._wrap_text(narrator_caption, cap_font, draw, int(pw * 0.9))  # type: ignore[attr-defined]
         _, line_h = br._text_bbox(cap_lines[0] if cap_lines else "M", cap_font, draw)  # type: ignore[attr-defined]
         cap_h = (len(cap_lines) * (line_h + 2)) + br._V_PAD * 2  # type: ignore[attr-defined]
@@ -368,6 +571,22 @@ def render_bubbles_onto_panel_v2(
         tail_style: str = str(line.get("tail_style") or "pointer")
         vertical_kanji = bool(line.get("vertical_kanji"))
 
+        # Fold the genre register in: distinct resting bubble shape + lettering
+        # face + tail per genre (e.g. iyashikei -> soft shojo_soft + handwritten
+        # + soft tail; shonen -> crisp round_normal + body + pointer). Explicit
+        # per-line author overrides and intensity-driven emphasis are preserved.
+        bubble_style, tail_style, font_role = _apply_genre_to_line(
+            line, bubble_style, tail_style, genre_style
+        )
+        # Carry genre fill/stroke tints onto a line copy for the bubble body so
+        # iyashikei's warm off-white reads distinct from shonen's crisp white.
+        line_for_body: dict[str, Any] = dict(line)
+        if genre_style:
+            if genre_style.get("fill_tint") is not None:
+                line_for_body["_genre_fill_tint"] = genre_style["fill_tint"]
+            if genre_style.get("stroke_tint") is not None:
+                line_for_body["_genre_stroke_tint"] = genre_style["stroke_tint"]
+
         furigana_segments = normalize_furigana_segments(line)
         if furigana_segments and locale != "ja_JP":
             furigana_segments = []
@@ -376,7 +595,7 @@ def render_bubbles_onto_panel_v2(
             line, locale=locale, default_locale=default_locale
         ) == "bold_action"
         italic = intensity == "internal"
-        font = _get_font_v2(locale, intensity, bold=bold)
+        font = _get_font_v2(locale, intensity, bold=bold, font_role=font_role)
         _ = italic  # italic emphasis — future OT feature
 
         layout_mode = "horiz"
@@ -400,7 +619,7 @@ def render_bubbles_onto_panel_v2(
             tiers = ["screaming", "shouting", "excited", "normal", "calm", "whisper"]
             cur = tiers.index(intensity) if intensity in tiers else 3
             intensity = tiers[min(cur + 1, len(tiers) - 1)]
-            font = _get_font_v2(locale, intensity, bold=False)
+            font = _get_font_v2(locale, intensity, bold=False, font_role=font_role)
         else:
             layout_records.append({
                 "type": "skipped",
@@ -409,9 +628,11 @@ def render_bubbles_onto_panel_v2(
             })
             continue
 
-        _draw_bubble_body(overlay, draw, bubble_bbox, bubble_style, line)
+        _draw_bubble_body(overlay, draw, bubble_bbox, bubble_style, line_for_body)
 
-        if tail_style == "pointer":
+        # "pointer" = sharp mouth-targeted tail; "soft" = gentle iyashikei/shoujo
+        # tail (same mouth targeting, genre fill). "none" draws no tail.
+        if tail_style in ("pointer", "soft"):
             mouth = resolve_mouth_pixel(
                 panel_w=pw,
                 panel_h=ph,
@@ -419,7 +640,7 @@ def render_bubbles_onto_panel_v2(
                 panel_lettering=lettering_panel,
                 panel_rgba=img,
             )
-            bubble_fill = _bubble_fill_for_style(bubble_style)
+            bubble_fill = _bubble_fill_with_genre(bubble_style, line_for_body)
             br._draw_tail_pointer(  # type: ignore[attr-defined]
                 draw, bubble_bbox, mouth, fill=bubble_fill
             )
@@ -513,6 +734,8 @@ def render_bubbles_onto_panel_v2(
             "speaker": line.get("speaker"),
             "text": text_stripped,
             "bubble_style": bubble_style,
+            "tail_style": tail_style,
+            "font_role": font_role,
             "intensity": intensity,
             "position_hint": position_hint,
             "bbox": bubble_bbox,
@@ -522,10 +745,12 @@ def render_bubbles_onto_panel_v2(
 
         zone_idx += 1
 
+    # SFX uses the punchy display face (Bangers en_US) when the registry has it.
+    sfx_font_role = "display"
     for sfx_text in sfx:
         if not sfx_text:
             continue
-        sfx_font = _get_font_v2(locale, "screaming", bold=True)
+        sfx_font = _get_font_v2(locale, "screaming", bold=True, font_role=sfx_font_role)
         sfx_idx = sfx.index(sfx_text)
         sfx_x = int(pw * (0.30 + sfx_idx * 0.15) % pw)
         sfx_y = int(ph * 0.40)
@@ -559,6 +784,7 @@ def render_bubbles_onto_panel_v2(
         "panel_stem": panel_image_path.stem,
         "out_path": str(out_path),
         "bubble_render_version": 2,
+        "genre": (bubble_style_config or {}).get("genre"),
         "text_manifest_path": str(manifest_out_path) if emit_text_manifest else None,
         "bubbles": layout_records,
         "coverage_ratio": round(final_cov, 4),

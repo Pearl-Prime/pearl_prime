@@ -201,18 +201,49 @@ def _stage_lettering(workspace: Path) -> None:
     )
 
 
+def _resolve_chapter_genre(workspace: Path) -> str | None:
+    """Best-effort genre register for this chapter (for bubble styling).
+
+    Order: series/genre_blueprint.json `genre_id` -> chapter_request
+    `genre_family`/`genre_id`. Returns None when no genre is known (renderer
+    then uses neutral intensity-driven bubbles).
+    """
+    gb_path = workspace / manga_paths.GENRE_BLUEPRINT
+    if gb_path.is_file():
+        try:
+            gid = str((_load_json(gb_path).get("genre_id") or "")).strip()
+            if gid:
+                return gid
+        except Exception:
+            pass
+    cr_path = workspace / manga_paths.CHAPTER_REQUEST
+    if cr_path.is_file():
+        try:
+            cr = _load_json(cr_path)
+            gid = str((cr.get("genre_family") or cr.get("genre_id") or "")).strip()
+            if gid:
+                return gid
+        except Exception:
+            pass
+    return None
+
+
 def _stage_bubble_render(workspace: Path) -> None:
-    from phoenix_v4.manga.chapter.bubble_render import render_bubbles_on_panels
+    # V2 renderer: SVG bubble hulls + CJK shaping + furigana + real mouth-target
+    # tails + genre-specific bubble styling (shape/font/tail per genre).
+    from phoenix_v4.manga.chapter.bubble_render_v2 import render_bubbles_on_panels_v2
 
     script = _load_json(workspace / manga_paths.CHAPTER_SCRIPT_WRITER_HANDOFF)
     lettering = _load_json(workspace / manga_paths.LETTERING_SPEC)
     manifest = _load_json(workspace / manga_paths.PANEL_IMAGES_MANIFEST)
     out_dir = workspace / manga_paths.BUBBLED_PANELS_DIR
-    updated = render_bubbles_on_panels(
+    genre = _resolve_chapter_genre(workspace)
+    bubble_style_config = {"genre": genre} if genre else None
+    updated = render_bubbles_on_panels_v2(
         chapter_script=script,
         lettering_spec=lettering,
         panel_images_manifest=manifest,
-        bubble_style_config=None,
+        bubble_style_config=bubble_style_config,
         out_dir=out_dir,
     )
     (workspace / manga_paths.PANEL_IMAGES_MANIFEST).write_text(

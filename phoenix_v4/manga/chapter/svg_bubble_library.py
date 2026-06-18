@@ -56,10 +56,22 @@ def bubble_svg(
     cw, ch = w / 2, h / 2
     rx, ry = max(w / 2 - 4, 8), max(h / 2 - 4, 8)
 
-    if style_id in ("round_normal", "shojo_soft"):
+    if style_id == "round_normal":
         body = (
             f'<ellipse cx="{cw:.1f}" cy="{ch:.1f}" rx="{rx:.1f}" ry="{ry:.1f}" '
             f'fill="{fill}" stroke="{stroke}" stroke-width="{stroke_width}"/>'
+        )
+    elif style_id == "shojo_soft":
+        # Pillowy rounded "squircle" — the gentle healing/iyashikei/shoujo look,
+        # visibly softer and rounder than the crisp round_normal oval. Large
+        # corner radius + thinner stroke read as warm and hand-drawn.
+        sx, sy = max(w - 6, 8), max(h - 6, 8)
+        corner = max(min(sx, sy) * 0.48, 8)
+        soft_stroke = max(stroke_width - 0.4, 1.0)
+        body = (
+            f'<rect x="3" y="3" width="{sx:.1f}" height="{sy:.1f}" '
+            f'rx="{corner:.1f}" ry="{corner:.1f}" '
+            f'fill="{fill}" stroke="{stroke}" stroke-width="{soft_stroke:.2f}"/>'
         )
     elif style_id == "square_narration":
         body = (
