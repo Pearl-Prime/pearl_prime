@@ -45,3 +45,20 @@
 
 **E-book covers:** background agent rendering 80 FLUX covers (two-stage) -> rebuild EPUBs with covers -> redeliver (in flight).
 **Wave 2:** background agent rendering Devotion healing manga -> frames+bubbles+individuation+traditions -> webtoon strips + manga PDFs -> weekly_packages -> gen_brand_deliveries -> Director UI (in flight).
+
+## Update 3 — 2026-06-18 (Wave-2 LANDED: Devotion manga ep_001 live in the Director UI)
+**Pearl_Prime — full manga pipeline proven end-to-end on origin/main, then deployed.**
+
+PRODUCED (devotion_en_01 · ch_1 / ep_001, "First Light" — the visiting-presence / hardness-softened-by-witnessing arc):
+- **Tier-1 Claude-authored chapter SCRIPT** (NOT the stub): real iyashikei healing prose for Amara (hospice nurse who keeps people at arm's length; the engine's "Asa" — sets out the second cup, then remembers) + Sai Ma (elder teacher-guide, the visiting presence who lets the silence sit). Rendered the merged `iyashikei_strategies.yaml` beats (#1715), hook family `loss_echo`. Installed via `chapter_script_authored.json` + `writer_mode=claude`.
+- **PASSED the BLOCKING bestseller gate** under the devotion_path healing profile, `quality_profile=production`: `bestseller_gate_verdict.json` clearance=**pass**, 0 blockers — substance + healing cardinal sins (no labeling/cliffhanger/threat) + craft gates (hook `loss_echo`, silent-panel ratio 0.32 vs target 0.40±0.15, words-per-page in iyashikei band, restraint, yearning) all clear. Full DAG green through `series_memory_merge` (all 14 stages passed).
+- **Rendered 22 panels** in the iyashikei healing register (soft line, gentle screentone, warm ochre/cream/slate per the cast color_signals, generous Ma; individuated cast tints) → genre speech bubbles (`shojo_soft`, handwritten font #1710) → **FRAME-engine pages** (drawn frames + gutters, healing layout #1709) → **10-page composite**.
+- **Two deliverables, both < 1 MB (un-LFS, serve real bytes on CF Pages):** webtoon vertical strip `devotion_en_01_ep_001_webtoon.png` (800×25149, palette, 473 KB) + manga book `devotion_en_01_ep_001_manga.pdf` (10 pp, 775 KB). Packaged into `artifacts/weekly_packages/devotion_path/2026-W25/{webtoon,kdp}/` → `gen_brand_deliveries.py` → `brand_deliveries/devotion_path.json` (manga ADDED alongside the 80 e-book EPUBs; no deletions).
+- **Director UI: a first-class Webtoon · Manga PLATFORM card** added to `brand_handoff_dashboard.html` (PLATFORMS_US + JP, `feed:"manga"`, Webtoon Canvas/LINE/Piccoma + KDP upload steps), mirroring the e-book cards. VERIFIED in-browser (preview server): the card renders, and the devotion feed lists the webtoon .png + manga .pdf (HTTP 200), a composed page shows real drawn frames + genre bubbles + healing-register art + individuated cast.
+- **Engine fix (correctness):** `chapter_qc.py` `_panel_is_silent` now mirrors the lettering builder (caption/narration/SFX-bearing panels are NOT silent), so caption-heavy iyashikei chapters no longer spuriously trip `LETTERING_MISMATCH` (`chapter_clearance` now correctly `pass`).
+
+GUARDRAILS honored: no paid API (Tier-1 Claude authored the prose in-session; panels rendered locally with PIL — Pearl Star FLUX queue was operator-gated / held by the e-book-cover sibling on its concurrency=1 slot, ComfyUI not stood up); healing register gate-enforced; Rule-0 clean (0 file deletions); branched off origin/main in a clean sparse worktree (not the diverged session branch).
+
+REMAINS (full-catalog scale): this is ep_001 of the lead series. Scale to the weekly cadence — devotion_path runs 3 series (grief/compassion/courage) at weekly chapters (devotion_en_02 Amara / _03 Kenji / _04 Lin), then the other 12 teacher brands' manga lanes. The renderer here is a deterministic local PIL stand-in for the iyashikei look; swap to the Pearl Star FLUX queue (or ComfyUI) for photoreal panels when a GPU slot is free — same DAG, same gate, same packaging.
+
+- 2026-06-18 — Devotion manga ep_001 (webtoon + PDF) live in Director UI → SHA __MERGE_SHA__ (PR __PR__)

@@ -23,17 +23,45 @@ def _lettering_by_panel(lettering: Mapping[str, Any]) -> dict[str, bool]:
     return out
 
 
-def _panel_has_no_dialogue_text(panel: Mapping[str, Any]) -> bool:
-    """True when the panel has no dialogue lines with text (expects silence_confirmed True)."""
+def _panel_is_silent(panel: Mapping[str, Any]) -> bool:
+    """True when the panel carries no written content at all (true silence).
+
+    Mirrors the lettering builder's ``silence_confirmed`` definition
+    (``lettering_from_script.build_lettering_spec_from_chapter_script``): a panel
+    is silent only when it has no dialogue text AND no narrator caption/narration
+    AND no SFX. A caption-only panel is NOT silent — its caption must be lettered
+    — so the lettering-silence cross-check must agree, or caption-bearing
+    iyashikei panels (the Devotion/Open Vessel healing register leans on
+    observational captions) spuriously trip ``LETTERING_MISMATCH``.
+    """
+    # Dialogue with text → not silent (handles legacy str list + v2 dict list).
     dialogue = panel.get("dialogue")
-    if not isinstance(dialogue, list):
-        return True
-    for x in dialogue:
-        if isinstance(x, str) and x.strip():
-            return False
-        if x is not None and not isinstance(x, str) and str(x).strip():
-            return False
+    if isinstance(dialogue, list):
+        for x in dialogue:
+            if isinstance(x, str):
+                if x.strip():
+                    return False
+            elif isinstance(x, Mapping):
+                if str(x.get("text") or "").strip():
+                    return False
+            elif x is not None and str(x).strip():
+                return False
+    # Narrator caption / narration → not silent (needs a caption box).
+    if str(panel.get("narrator_caption") or panel.get("caption") or "").strip():
+        return False
+    if str(panel.get("narration") or "").strip():
+        return False
+    # SFX → not silent.
+    sfx = panel.get("sfx")
+    if isinstance(sfx, list) and any(str(s or "").strip() for s in sfx):
+        return False
+    if isinstance(sfx, str) and sfx.strip():
+        return False
     return True
+
+
+# Back-compat alias (older name referred only to dialogue).
+_panel_has_no_dialogue_text = _panel_is_silent
 
 
 def build_revision_queue_for_chapter(
@@ -123,7 +151,7 @@ def build_revision_queue_for_chapter(
                 pid = str(panel.get("panel_id") or "")
                 if not pid:
                     continue
-                silent_panel = _panel_has_no_dialogue_text(panel)
+                silent_panel = _panel_is_silent(panel)
                 got = by_letter.get(pid)
                 if got is not None and bool(got) != bool(silent_panel):
                     issues.append(
