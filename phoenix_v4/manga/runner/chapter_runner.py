@@ -109,9 +109,23 @@ def _stage_visual(
     style_id: str,
     teacher_id: str,
     sdf_stub: bool,
+    brand_id: str | None = None,
+    genre_id: str | None = None,
 ) -> None:
     raw = _load_json(workspace / manga_paths.CHAPTER_SCRIPT_WRITER_HANDOFF)
     cr = _load_json(workspace / manga_paths.CHAPTER_REQUEST)
+    # Resolve render-routing inputs: explicit caller params win, else chapter_request,
+    # else the MangaProfile (brand-genre lane template). All optional — when none
+    # resolve, compile_panel_prompts_from_chapter_script keeps the legacy backend path.
+    r_brand = brand_id or (str(cr.get("brand_id")) if cr.get("brand_id") else None)
+    r_genre = genre_id or (str(cr.get("genre_family")) if cr.get("genre_family") else None)
+    r_market_demo = str(cr.get("market_demo")) if cr.get("market_demo") else None
+    r_secondary = str(cr.get("secondary_genre")) if cr.get("secondary_genre") else None
+    r_color_mode = str(cr.get("color_mode") or "bw")
+    profile = _resolve_manga_profile(workspace, brand_id=r_brand, genre_id=r_genre)
+    if profile is not None:
+        r_genre = r_genre or getattr(profile, "genre_family", None)
+        r_market_demo = r_market_demo or getattr(profile, "market_demo", None)
     doc = compile_panel_prompts_from_chapter_script(
         raw,
         series_id=str(cr.get("series_id") or raw.get("series_id") or ""),
@@ -119,6 +133,11 @@ def _stage_visual(
         config_hash=config_hash,
         style_id=style_id,
         teacher_id=teacher_id,
+        brand_id=r_brand,
+        genre_id=r_genre,
+        secondary_genre=r_secondary,
+        market_demo=r_market_demo,
+        color_mode=r_color_mode,
     )
     if sdf_stub:
         from phoenix_v4.manga.sdf.stub import attach_sdf_stub_conditioning
@@ -527,6 +546,8 @@ def run_chapter_dag(
             style_id=style_id,
             teacher_id=teacher_id,
             sdf_stub=sdf_stub,
+            brand_id=brand_id,
+            genre_id=genre_id,
         ),
         sid.CHAPTER_IMAGE_GEN: lambda: _stage_image_gen(ws, image_backend),
         sid.CHAPTER_LETTERING: lambda: _stage_lettering(ws),
