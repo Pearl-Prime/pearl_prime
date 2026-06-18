@@ -220,7 +220,12 @@ def _stage_bubble_render(workspace: Path) -> None:
     )
 
 
-def _stage_layout(workspace: Path) -> None:
+def _stage_layout(
+    workspace: Path,
+    *,
+    brand_id: str | None = None,
+    genre_id: str | None = None,
+) -> None:
     from phoenix_v4.manga.chapter.page_compose import compose_final_page_pngs
 
     script = _load_json(workspace / manga_paths.CHAPTER_SCRIPT_WRITER_HANDOFF)
@@ -232,8 +237,22 @@ def _stage_layout(workspace: Path) -> None:
         out.mkdir(parents=True, exist_ok=True)
         logger.info("No ok panels in manifest — skipping page composition (noop/dry_run mode)")
         return
+    # Resolve genre + reading direction for the frame engine. Explicit params
+    # win; otherwise read chapter_request.json (genre_family / reading_direction).
+    genre = genre_id
+    reading_direction: str | None = None
+    cr_path = workspace / manga_paths.CHAPTER_REQUEST
+    if cr_path.is_file():
+        try:
+            cr = json.loads(cr_path.read_text(encoding="utf-8"))
+            genre = genre or (str(cr.get("genre_family") or "") or None)
+            reading_direction = str(cr.get("reading_direction") or "") or None
+        except Exception:
+            pass
     out = workspace / manga_paths.FINAL_PAGE_COMPOSITE_DIR
-    compose_final_page_pngs(script, manifest, out)
+    compose_final_page_pngs(
+        script, manifest, out, genre=genre, reading_direction=reading_direction
+    )
 
 
 def _ite_dir(workspace: Path) -> Path:
@@ -481,7 +500,7 @@ def run_chapter_dag(
         sid.CHAPTER_IMAGE_GEN: lambda: _stage_image_gen(ws, image_backend),
         sid.CHAPTER_LETTERING: lambda: _stage_lettering(ws),
         sid.CHAPTER_BUBBLE_RENDER: lambda: _stage_bubble_render(ws),
-        sid.CHAPTER_LAYOUT: lambda: _stage_layout(ws),
+        sid.CHAPTER_LAYOUT: lambda: _stage_layout(ws, brand_id=brand_id, genre_id=genre_id),
         sid.ITE_BREATH: lambda: _stage_ite_breath(ws),
         sid.ITE_GUTTER: lambda: _stage_ite_gutter(ws),
         sid.ITE_COLOR_ARC: lambda: _stage_ite_color_arc(ws),

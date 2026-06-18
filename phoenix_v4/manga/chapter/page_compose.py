@@ -1,4 +1,16 @@
-"""Lay out panel PNGs into per-page composites (horizontal strips)."""
+"""Lay out panel PNGs into per-page composites.
+
+Historically this composed a single edge-to-edge *horizontal strip* per page and
+ignored ``config/manga/panel_layout_templates/*.yaml`` entirely. It now delegates
+to the FRAME engine (``phoenix_v4/manga/chapter/page_frame.py``): named
+multi-panel grid templates + a PIL frame/gutter renderer that draws panel borders,
+lays inter-panel gutters, fits each panel into its cell by aspect, and supports
+RTL page-turn order. The healing/iyashikei register (Devotion brand / Open Vessel
+Press / Sai Ma) gets a calmer layout family with wider gutters and more whitespace.
+
+The public contract is unchanged: ``compose_final_page_pngs(chapter_script,
+panel_images_manifest, out_dir) -> list[Path]`` writing ``page_001.png`` ….
+"""
 
 from __future__ import annotations
 
@@ -18,21 +30,17 @@ def _paths_by_panel_id(manifest: Mapping[str, Any]) -> dict[str, Path]:
     return out
 
 
-def compose_final_page_pngs(
+def _compose_legacy_strip(
     chapter_script: Mapping[str, Any],
     panel_images_manifest: Mapping[str, Any],
     out_dir: Path,
 ) -> list[Path]:
-    """Write ``page_001.png``, … under ``out_dir`` (one row per page, left-to-right).
+    """Legacy horizontal-strip composer (pre-frame-engine fallback).
 
-    Requires Pillow. All panels on a page must be ``ok`` in the manifest with paths.
+    Retained as a safety net for environments where the frame template library
+    is unavailable. One row per page, left-to-right, edge-to-edge.
     """
-    try:
-        from PIL import Image
-    except ImportError as e:
-        raise RuntimeError(
-            "compose_final_page_pngs requires Pillow; pip install Pillow"
-        ) from e
+    from PIL import Image
 
     by_id = _paths_by_panel_id(panel_images_manifest)
     out_dir = Path(out_dir).resolve()
@@ -81,3 +89,51 @@ def compose_final_page_pngs(
                 im.close()
 
     return written
+
+
+def compose_final_page_pngs(
+    chapter_script: Mapping[str, Any],
+    panel_images_manifest: Mapping[str, Any],
+    out_dir: Path,
+    *,
+    genre: str | None = None,
+    reading_direction: str | None = None,
+) -> list[Path]:
+    """Write framed ``page_001.png``, … under ``out_dir``.
+
+    Composes each page into a framed multi-panel grid (borders + gutters) chosen
+    by (panel_count, page_type, genre) via the frame engine. Requires Pillow.
+
+    ``genre`` / ``reading_direction`` are optional overrides; when omitted they
+    are read from the chapter script (or each page's ``page_type`` /
+    ``reading_direction``). Falls back to the legacy horizontal-strip composer
+    only if the frame template library cannot be loaded.
+    """
+    try:
+        from PIL import Image  # noqa: F401
+    except ImportError as e:
+        raise RuntimeError(
+            "compose_final_page_pngs requires Pillow; pip install Pillow"
+        ) from e
+
+    try:
+        from phoenix_v4.manga.chapter.page_frame import (
+            PageFrameError,
+            compose_framed_page_pngs,
+            load_grid_library,
+        )
+
+        load_grid_library()  # raises PageFrameError if library missing/invalid
+    except Exception:
+        return _compose_legacy_strip(chapter_script, panel_images_manifest, out_dir)
+
+    try:
+        return compose_framed_page_pngs(
+            chapter_script,
+            panel_images_manifest,
+            out_dir,
+            genre=genre,
+            reading_direction=reading_direction,
+        )
+    except PageFrameError:
+        return _compose_legacy_strip(chapter_script, panel_images_manifest, out_dir)

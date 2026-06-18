@@ -40,6 +40,8 @@ from typing import Any, Mapping
 DEFAULT_STRIP_WIDTH_PX = 800           # WEBTOON Canvas standard
 DEFAULT_MAX_SEGMENT_PX = 1280          # WEBTOON Canvas auto-slice point
 DEFAULT_JPEG_QUALITY = 92              # PR #631 §2.4 — quality 92 sRGB
+DEFAULT_PANEL_BORDER_PX = 6            # frame stroke per panel (0 = borderless)
+DEFAULT_PANEL_BORDER_RGB = (0, 0, 0)   # MANGA_LAYOUT_AGENT_SPEC §4.4 black ink
 WEBTOON_CANVAS_MAX_IMAGES = 100
 WEBTOON_CANVAS_MAX_TOTAL_BYTES = 20 * 1024 * 1024
 WEBTOON_CANVAS_MAX_PER_IMAGE_BYTES = 2 * 1024 * 1024  # per-image cap
@@ -97,6 +99,27 @@ def _resize_to_width(im: Any, target_w: int):
         return im
     new_h = max(1, int(round(im.height * target_w / im.width)))
     return im.resize((target_w, new_h), Image.Resampling.LANCZOS)
+
+
+def _draw_panel_border(im: Any, stroke: int, rgb: tuple[int, int, int]) -> Any:
+    """Draw an inset rectangular border around ``im`` (in place) and return it.
+
+    Webtoon panels stack with beat-type gutters between them; a per-panel stroke
+    gives each beat a visible frame (the vertical-scroll analogue of page-manga
+    panel borders, MANGA_LAYOUT_AGENT_SPEC §4.4). ``stroke <= 0`` is a no-op.
+    """
+    if stroke <= 0:
+        return im
+    from PIL import ImageDraw  # type: ignore
+
+    draw = ImageDraw.Draw(im)
+    off = stroke // 2
+    draw.rectangle(
+        [off, off, im.width - 1 - off, im.height - 1 - off],
+        outline=rgb,
+        width=stroke,
+    )
+    return im
 
 
 def _slice_at_gutter_midpoints(
@@ -177,6 +200,9 @@ def compose_episode_strips(
     jpeg_quality: int = DEFAULT_JPEG_QUALITY,
     background_color: tuple[int, int, int] = (255, 255, 255),
     episode_id: str = "ep_001",
+    draw_panel_borders: bool = True,
+    panel_border_px: int = DEFAULT_PANEL_BORDER_PX,
+    panel_border_rgb: tuple[int, int, int] = DEFAULT_PANEL_BORDER_RGB,
 ) -> dict[str, Any]:
     """Compose a single webtoon episode from per-panel images.
 
@@ -260,6 +286,8 @@ def compose_episode_strips(
             with Image.open(src_path) as src_im:
                 im = src_im.convert("RGB").copy()
             im = _resize_to_width(im, strip_width)
+            if draw_panel_borders and panel_border_px > 0:
+                im = _draw_panel_border(im, panel_border_px, panel_border_rgb)
             loaded_panels.append(im)
             closers.append(im)
 
