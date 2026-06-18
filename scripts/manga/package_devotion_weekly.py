@@ -25,6 +25,71 @@ from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[2]
 
+# Director deliveries are committed as PLAIN git blobs (.gitattributes:
+# `brand-wizard-app/public/deliveries/** -filter -diff -merge` — CF Pages can't
+# pull LFS), so each must stay under the no-binary-blobs CI cap (1 MB, exactly
+# 1048576 B; .github/workflows/no-binary-blobs.yml). gen_brand_deliveries.py
+# copies these files VERBATIM into public/deliveries/, so they must be born small.
+# Target a hair under 1 MB for headroom (quantize/encode size is not exact).
+TARGET_BYTES = 990_000
+
+
+def _save_webtoon_under_target(canvas, out_png: Path, target: int = TARGET_BYTES) -> tuple[int, int]:
+    """Save the tall webtoon strip as a <1 MB plain-blob PNG.
+
+    Iyashikei art is soft, low-hue pastel — it survives adaptive-palette
+    quantization gracefully. We keep a smooth 96-colour palette and shrink the
+    reading width only as far as needed to clear the cap (maximising the width a
+    reader actually sees). Full-res panel art stays in the workspace for QA.
+    """
+    from PIL import Image
+
+    out_png.parent.mkdir(parents=True, exist_ok=True)
+    W, H = canvas.size
+    for width in range(min(W, 720), 320, -12):
+        scale = width / W
+        im = canvas if width == W else canvas.resize((width, max(1, int(H * scale))), Image.LANCZOS)
+        q = im.quantize(colors=96, method=Image.FASTOCTREE, dither=Image.Dither.NONE)
+        q.save(out_png, format="PNG", optimize=True)
+        if out_png.stat().st_size <= target:
+            return q.size
+    # Floor: smallest tried width already written; report it.
+    return q.size
+
+
+def _save_pdf_under_target(pages: list[Path], out_pdf: Path, target: int = TARGET_BYTES) -> int:
+    """Assemble page PNGs into a <1 MB manga PDF via img2pdf (lossless JPEG embed).
+
+    PIL's PDF writer flate-encodes raw pixels (JPEG quality is ignored), so for a
+    photoreal chapter it can't hit the cap. img2pdf embeds the JPEG DCT stream
+    directly — best quality-per-byte. Search highest (scale, quality) that fits.
+    """
+    from io import BytesIO
+
+    import img2pdf
+    from PIL import Image
+
+    out_pdf.parent.mkdir(parents=True, exist_ok=True)
+    ladder = [(0.72, 68), (0.68, 66), (0.64, 64), (0.60, 64),
+              (0.58, 62), (0.55, 60), (0.50, 58), (0.45, 55)]
+    last = b""
+    for scale, quality in ladder:
+        jpgs: list[bytes] = []
+        for p in pages:
+            im = Image.open(p).convert("RGB")
+            if scale < 1.0:
+                im = im.resize((max(1, int(im.width * scale)), max(1, int(im.height * scale))), Image.LANCZOS)
+            bio = BytesIO()
+            im.save(bio, format="JPEG", quality=quality, optimize=True)
+            jpgs.append(bio.getvalue())
+            im.close()
+        last = img2pdf.convert(jpgs)
+        if len(last) <= target:
+            out_pdf.write_bytes(last)
+            return len(pages)
+    out_pdf.write_bytes(last)  # floor: smallest tried, still write it
+    return len(pages)
+
 
 def build_webtoon_strip_png(ws: Path, out_png: Path) -> tuple[int, int]:
     """Stack bubbled panels into one tall 800px-wide webtoon strip PNG."""
@@ -76,58 +141,19 @@ def build_webtoon_strip_png(ws: Path, out_png: Path) -> tuple[int, int]:
     canvas = Image.new("RGB", (w, total_h), (255, 252, 246))  # cream paper
     for y, im in imgs:
         canvas.paste(im, (0, y))
-    out_png.parent.mkdir(parents=True, exist_ok=True)
-    # The iyashikei art is flat-colored with big quiet gutters → a palette (P-mode)
-    # PNG compresses an order of magnitude smaller than RGB while staying a REAL,
-    # directly-servable PNG (NOT LFS). Required: deliverables must be < 1 MB so they
-    # commit as plain git blobs (.gitattributes -filter) and serve real bytes on
-    # Cloudflare Pages, which does not pull LFS (see .gitattributes teacher_pics note).
-    out = canvas.convert("P", palette=Image.ADAPTIVE, colors=256)
-    out.save(out_png, format="PNG", optimize=True)
-    if out_png.stat().st_size > 1_000_000:
-        # Fall back to fewer colors if still over the 1 MB no-binary-blobs cap.
-        canvas.convert("P", palette=Image.ADAPTIVE, colors=64).save(
-            out_png, format="PNG", optimize=True
-        )
+    saved_w, saved_h = _save_webtoon_under_target(canvas, out_png)
     for _, im in imgs:
         im.close()
     canvas.close()
-    return w, total_h
+    return saved_w, saved_h
 
 
-def build_manga_pdf(ws: Path, out_pdf: Path, *, max_bytes: int = 1_000_000) -> int:
-    """Assemble FRAME-composed page PNGs into a single manga PDF (print order).
-
-    JPEG-compresses the page rasters inside the PDF and steps quality/scale down
-    until the file is < ``max_bytes`` (the no-binary-blobs 1 MB cap), so the PDF
-    commits as a plain git blob and serves real bytes on Cloudflare Pages (which
-    does not pull LFS). Reading-clear at tablet size; this is the review/preview
-    edition, not the press master.
-    """
-    from PIL import Image
-
-    page_paths = sorted((ws / "final_page_composite").glob("page_*.png"))
-    if not page_paths:
+def build_manga_pdf(ws: Path, out_pdf: Path) -> int:
+    """Assemble FRAME-composed page PNGs into a single <1 MB manga PDF (print order)."""
+    pages = sorted((ws / "final_page_composite").glob("page_*.png"))
+    if not pages:
         raise SystemExit("no composed pages for PDF")
-    out_pdf.parent.mkdir(parents=True, exist_ok=True)
-
-    for scale, quality in ((1.0, 70), (0.8, 65), (0.66, 60), (0.5, 55)):
-        imgs = []
-        for p in page_paths:
-            im = Image.open(p).convert("RGB")
-            if scale < 1.0:
-                im = im.resize((max(1, int(im.width * scale)), max(1, int(im.height * scale))),
-                               Image.Resampling.LANCZOS)
-            imgs.append(im)
-        imgs[0].save(
-            out_pdf, format="PDF", save_all=True, append_images=imgs[1:],
-            resolution=150.0, quality=quality,
-        )
-        for im in imgs:
-            im.close()
-        if out_pdf.stat().st_size <= max_bytes:
-            break
-    return len(page_paths)
+    return _save_pdf_under_target(pages, out_pdf)
 
 
 def main() -> int:
