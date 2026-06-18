@@ -61,4 +61,4 @@ GUARDRAILS honored: no paid API (Tier-1 Claude authored the prose in-session; pa
 
 REMAINS (full-catalog scale): this is ep_001 of the lead series. Scale to the weekly cadence — devotion_path runs 3 series (grief/compassion/courage) at weekly chapters (devotion_en_02 Amara / _03 Kenji / _04 Lin), then the other 12 teacher brands' manga lanes. The renderer here is a deterministic local PIL stand-in for the iyashikei look; swap to the Pearl Star FLUX queue (or ComfyUI) for photoreal panels when a GPU slot is free — same DAG, same gate, same packaging.
 
-- 2026-06-18 — Devotion manga ep_001 (webtoon + PDF) live in Director UI → SHA __MERGE_SHA__ (PR __PR__)
+- 2026-06-18 — Devotion manga ep_001 (webtoon + PDF) live in Director UI → SHA ad868fd66643941b9c0b7125b3562c34efd19991 (PR #1722)
