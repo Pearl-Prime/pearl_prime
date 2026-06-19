@@ -64,3 +64,18 @@ banned_patterns:
     regex: 'mistralai\.client\.MistralClient'
     reason: "Mistral API is paid."
     exempt_paths: []
+  workflow_paid_key_injection:
+    # Closes the gap where the audit only matched Python SDK call sites, not
+    # GitHub Actions env injections of banned paid keys (CLAUDE.md LLM Tier Policy).
+    # Tier-1 uses the Claude Code subscription CLI (no key); Tier-2 uses local
+    # Gemma/Qwen on Pearl Star. Enforced key set = unambiguously paid, zero
+    # legitimate workflow use. DashScope/Qwen (Tier-2) and Together (present in
+    # translate-bestseller-atoms.yml, pending separate review) are intentionally
+    # NOT listed here.
+    regex: '(CLAUDE_API_KEY|ANTHROPIC_API_KEY|OPENAI_API_KEY|GOOGLE_API_KEY|GEMINI_API_KEY|PERPLEXITY_API_KEY|COHERE_API_KEY|MISTRAL_API_KEY|REPLICATE_API_TOKEN)\s*:\s*\$\{\{'
+    reason: "Paid-LLM API key injected into a GitHub Actions workflow env. Banned paid keys must not be wired into .github/workflows/** (Tier-1 = Claude Code subscription CLI, no key; Tier-2 = local Gemma/Qwen). DashScope/Qwen Tier-2 keys are intentionally not listed."
+    exempt_paths:
+      # TEMP: manga-operator-setup-verify.yml verifies CLAUDE_API_KEY|ANTHROPIC_API_KEY
+      # presence on a 6h cron (behavioral change held for operator decision, STEP 2).
+      # Remove this exemption when that presence-check is dropped.
+      - ".github/workflows/manga-operator-setup-verify.yml"
