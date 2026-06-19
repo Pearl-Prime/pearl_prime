@@ -48,8 +48,6 @@ jobs:
           SENDGRID_API_KEY: ${{ secrets.SENDGRID_API_KEY }}
           RUNCOMFY_API_KEY: ${{ secrets.RUNCOMFY_API_KEY }}
           RUNCOMFY_TOKEN: ${{ secrets.RUNCOMFY_TOKEN }}
-          CLAUDE_API_KEY: ${{ secrets.CLAUDE_API_KEY }}
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: |
           set -euo pipefail
           MISSING=""
@@ -59,7 +57,6 @@ jobs:
           [ -z "${R2_BUCKET}" ] && MISSING="$MISSING R2_BUCKET"
           [ -z "${SENDGRID_API_KEY}" ] && MISSING="$MISSING SENDGRID_API_KEY"
           if [ -z "${RUNCOMFY_API_KEY}${RUNCOMFY_TOKEN}" ]; then MISSING="$MISSING RUNCOMFY_API_KEY|RUNCOMFY_TOKEN"; fi
-          if [ -z "${CLAUDE_API_KEY}${ANTHROPIC_API_KEY}" ]; then MISSING="$MISSING CLAUDE_API_KEY|ANTHROPIC_API_KEY"; fi
           echo "## Secrets" >> "$GITHUB_STEP_SUMMARY"
           if [ -n "$MISSING" ]; then
             echo "MISSING:$MISSING" >> "$GITHUB_STEP_SUMMARY"

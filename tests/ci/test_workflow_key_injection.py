@@ -102,12 +102,3 @@ def test_clean_workflow_not_flagged(monkeypatch, tmp_path):
     _seed(tmp_path, {"clean.yml": _env_step("R2_ACCESS_KEY_ID")})
     _, summary = _run(monkeypatch, tmp_path)
     assert summary["violation_count"] == 0
-
-
-def test_setup_verify_temporarily_exempt(monkeypatch, tmp_path):
-    # TEMP: manga-operator-setup-verify.yml is exempt pending the STEP 2
-    # behavioral decision. Drop this test together with the exempt_paths entry
-    # once that presence-check is removed.
-    _seed(tmp_path, {"manga-operator-setup-verify.yml": _env_step("CLAUDE_API_KEY")})
-    _, summary = _run(monkeypatch, tmp_path)
-    assert summary["violation_count"] == 0
