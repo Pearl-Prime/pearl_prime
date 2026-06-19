@@ -17,6 +17,11 @@ genre_family: healing
 subgenre: iyashikei_courage_inner_work_arc
 teacher: sai_ma
 
+# Marketing fields (Lane-D character_design profiles lacked these; required by
+# tests/test_manga_catalog_extractor.py::test_all_series_have_required_marketing_fields).
+marketing_angle: "Courage drawn as inner work, not spectacle — a healing series where the bravest thing on the page is staying with what hurts. For readers who find loud stories exhausting."
+launch_priority: P2
+
 character_design:
   series_id: devotion_en_03
   brand_id: devotion_path

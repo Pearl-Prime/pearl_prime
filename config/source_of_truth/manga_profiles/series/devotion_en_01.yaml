@@ -25,6 +25,11 @@ genre_family: healing
 subgenre: iyashikei_devotional_teacher_arc
 teacher: sai_ma
 
+# Marketing fields (Lane-D character_design profiles lacked these; required by
+# tests/test_manga_catalog_extractor.py::test_all_series_have_required_marketing_fields).
+marketing_angle: "Healing-manga (iyashikei): an elder teacher meets grief with presence, not answers — for readers tired of 'just move on' who want to see what turning toward a feeling actually looks like."
+launch_priority: P1
+
 character_design:
   series_id: devotion_en_01
   brand_id: devotion_path

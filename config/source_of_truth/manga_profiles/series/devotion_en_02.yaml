@@ -15,6 +15,11 @@ genre_family: healing
 subgenre: iyashikei_grief_caregiver_arc
 teacher: sai_ma
 
+# Marketing fields (Lane-D character_design profiles lacked these; required by
+# tests/test_manga_catalog_extractor.py::test_all_series_have_required_marketing_fields).
+marketing_angle: "The quiet work of compassion after years of keeping an invisible ledger you never agreed to hold — a devotional slow-burn where the teacher holds space instead of fixing."
+launch_priority: P2
+
 character_design:
   series_id: devotion_en_02
   brand_id: devotion_path
