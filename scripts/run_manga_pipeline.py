@@ -248,16 +248,27 @@ def run_one_book(
         auto_generate_author=False,
     )
 
+    # Resolve the brand's teacher so the render embeds the right teacher
+    # (sai_ma for devotion_path, etc.) instead of the global 'ahjan' default;
+    # stamp brand/genre/topic so the bubble genre register + manga profile
+    # resolve for this render path.
+    from phoenix_v4.planning.teacher_brand_resolver import resolve_teacher_for_brand
+    teacher_id = resolve_teacher_for_brand(brand_id) or "ahjan"
+
     chapter_request = {
         "schema_version": "1.0.0",
         "artifact_type": "chapter_request",
         "series_id": series_id,
         "chapter_id": chapter_id,
         "arc_id": arc_id,
+        "brand_id": brand_id,
+        "genre_family": genre,
+        "topic": topic_id,
+        "teacher_id": teacher_id,
     }
     (ws / "chapter_request.json").write_text(json.dumps(chapter_request, indent=2) + "\n", encoding="utf-8")
 
-    run_chapter_dag(ws, image_backend=NoopImageBackend(), to_stage=sid.CHAPTER_VISUAL, config_hash=snap)
+    run_chapter_dag(ws, image_backend=NoopImageBackend(), to_stage=sid.CHAPTER_VISUAL, config_hash=snap, teacher_id=teacher_id)
 
     panel_prompts_path = ws / "panel_prompts.json"
     if not panel_prompts_path.is_file():
@@ -285,7 +296,7 @@ def run_one_book(
     else:
         raise ValueError(f"Unknown backend {backend!r}")
 
-    run_chapter_dag(ws, image_backend=image_backend, from_stage=sid.CHAPTER_IMAGE_GEN, config_hash=snap)
+    run_chapter_dag(ws, image_backend=image_backend, from_stage=sid.CHAPTER_IMAGE_GEN, config_hash=snap, teacher_id=teacher_id)
 
     exports: dict[str, str] = {}
     if render_book:

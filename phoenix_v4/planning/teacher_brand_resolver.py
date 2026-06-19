@@ -72,6 +72,35 @@ def resolve_brand_for_teacher(
     return None
 
 
+def resolve_teacher_for_brand(
+    brand_id: str,
+    matrix_path: Optional[Path] = None,
+) -> Optional[str]:
+    """Return a brand's ``primary_teacher`` from brand_teacher_matrix.yaml.
+
+    Inverse of :func:`resolve_brand_for_teacher`. Teacher Mode is
+    1-teacher-per-brand, so a render for ``devotion_path`` resolves to
+    ``sai_ma`` instead of the global ``ahjan`` default. Returns ``None`` when
+    the brand is absent from the matrix (caller keeps its own fallback).
+    """
+    if not brand_id:
+        return None
+    path = matrix_path or BRAND_TEACHER_MATRIX_PATH
+    if not path.exists():
+        return None
+    try:
+        import yaml
+        data = yaml.safe_load(path.read_text()) or {}
+        brands = data.get("brands") or {}
+        meta = brands.get(brand_id) if isinstance(brands, dict) else None
+        if isinstance(meta, dict):
+            teacher = meta.get("primary_teacher")
+            return str(teacher) if teacher else None
+    except Exception:
+        return None
+    return None
+
+
 def resolve_teacher_brand(
     topic_id: str = "",
     persona_id: str = "",
