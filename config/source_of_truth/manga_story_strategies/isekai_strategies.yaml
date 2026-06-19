@@ -1,0 +1,409 @@
+schema_version: 1.0.0
+genre: isekai
+strategy_count: 5
+selection_algorithm: sha256_hash_seeded
+topic_strategy_map:
+  impostor_syndrome: strategy_01
+  belonging: strategy_02
+  starting_over: strategy_03
+  self_worth: strategy_04
+  second_chance: strategy_05
+character_pool:
+  protagonist:
+  - Aoi
+  - Rin
+  - Haruki
+  - Mei
+  - Sora
+  companion:
+  - a hooded archivist who remembers every failed summoning
+  - a retired knight-captain who speaks more to the trees than to people
+  - a soft-spoken guild healer with old burn scars on her hands
+  - a wandering cartographer who has named more worlds than people
+  - an elderly innkeeper-mage who pours tea before answering any question
+  setting:
+  - a moss-choked summoning hall beneath a collapsed cathedral
+  - a borderland village built into the ribs of a sleeping titan
+  - a floating archive-island tethered to the sky by chains of light
+  - a frontier trading-post at the edge of the unmapped wastes
+  - a lantern-lit canal town where the water runs uphill at dusk
+strategies:
+  strategy_01:
+    name: The Wrong Name in the Circle
+    archetype_template: summoned_as_the_wrong_one
+    description: 'Impostor syndrome carried by the isekai trope of a botched summoning: the ritual called
+      for a legendary hero and got an ordinary person instead. The arc resolves not by revealing {protagonist}
+      was secretly chosen, but by {protagonist} acting in ways the ''real'' hero never could — redefining
+      the role around who actually showed up.'
+    layer_1_plot_skeleton:
+      variant_label: strategy_01_standard
+      beat_count: 8
+      beats:
+      - beat: 1
+        text: The summoning glyph blazes gold, the whole hall holding its breath for a hero of prophecy.
+          The light fades, and {protagonist} is standing in the circle in yesterday's clothes, blinking
+          at a hundred disappointed faces.
+        camera_hint: wide_establishing
+        mood_hint: exposure
+        is_carrier: false
+      - beat: 2
+        text: A scribe checks the ancient scroll twice, then a third time, lips thinning. '{protagonist}...
+          the runes say the strongest soul of the age. There has to be a mistake.'
+        camera_hint: over_the_shoulder
+        mood_hint: doubt
+        is_carrier: false
+      - beat: 3
+        text: '{protagonist} memorizes the hero''s expected stats and recites them at the war table, mimicking
+          a confidence they do not feel. Every night they lie awake certain the circle will be re-cast
+          and the right person will arrive to replace them.'
+        camera_hint: medium_two_shot
+        mood_hint: pretending
+        is_carrier: false
+      - beat: 4
+        text: On the wall outside {setting}, a child is trapped where no hero's sword would help. {protagonist}
+          drops the borrowed posture entirely and simply climbs, hands raw, doing the unheroic thing nobody
+          scripted.
+        camera_hint: low_angle_action
+        mood_hint: instinct
+        is_carrier: true
+      - beat: 5
+        text: Afterward {companion} finds {protagonist} staring at the summoning scroll, and gently turns
+          it over so the runes face the floor. 'You keep reading it for permission. The circle does not
+          get a vote on what you just did.'
+        camera_hint: close_up
+        mood_hint: reframing
+        is_carrier: true
+      - beat: 6
+        text: '{protagonist} says nothing. They look at their own scraped hands for a long moment, then
+          set the scroll down — face-down — and leave it there.'
+        camera_hint: extreme_close_up
+        mood_hint: stillness
+        is_carrier: true
+      - beat: 7
+        text: The next council expects the legend's tactics; {protagonist} offers their own clumsy, human
+          plan instead, and does not apologize for it. A grizzled commander, surprised, nods.
+        camera_hint: medium_shot
+        mood_hint: claiming
+        is_carrier: true
+      - beat: 8
+        text: Weeks later a new scribe asks whether the summoning was an error. {protagonist} laughs —
+          easily now — and answers, 'The circle called for the strongest soul. It got the one who stayed.'
+        camera_hint: warm_two_shot
+        mood_hint: ease
+        is_carrier: false
+    layer_5_pacing_skeleton:
+      end_of_chapter_hooks:
+        ch1: The face-down scroll begins to glow again at midnight — but this time the runes are rewriting
+          themselves.
+        ch2: A second summoning is announced in the capital, and the council wants {protagonist} present
+          to 'verify the real hero.'
+        ch3: '{companion} quietly pockets a torn corner of the original scroll, saying only, ''There is
+          something here they did not want you to read.'''
+  strategy_02:
+    name: A World That Was Not Asking For Me
+    archetype_template: stranger_in_a_world_not_yours
+    description: Belonging carried by the isekai ache of being a stranger in a world with its own rules,
+      language, and grief. The arc turns when {protagonist} stops trying to earn a place by becoming like
+      the locals and instead belongs by tending something the world had forgotten — home as a thing you
+      build, not a club you pass into.
+    layer_1_plot_skeleton:
+      variant_label: strategy_02_standard
+      beat_count: 8
+      beats:
+      - beat: 1
+        text: '{protagonist} mispronounces the greeting again and the market goes quiet, then loud, the
+          laughter not unkind but not theirs to share. Everyone here has a place at a table; {protagonist}
+          eats standing, at the edge of {setting}.'
+        camera_hint: wide_establishing
+        mood_hint: outsider
+        is_carrier: false
+      - beat: 2
+        text: They study the local customs like an exam — the bows, the festival songs, the right way
+          to fold a letter — performing belonging so precisely that it satisfies no one, least of all
+          themselves.
+        camera_hint: montage_medium
+        mood_hint: straining
+        is_carrier: false
+      - beat: 3
+        text: '''You wear our manners like borrowed armor,'' {companion} observes, not cruelly, watching
+          {protagonist} rehearse a phrase. ''It fits no one when it fits too well.'''
+        camera_hint: close_up
+        mood_hint: noticing
+        is_carrier: false
+      - beat: 4
+        text: Behind the inn sits a derelict garden-shrine no local has time for — a small dead thing
+          the whole village walks past. {protagonist}, who belongs to nothing here, starts clearing the
+          weeds simply because someone should.
+        camera_hint: high_angle
+        mood_hint: tending
+        is_carrier: true
+      - beat: 5
+        text: Days pass. {protagonist} kneels in the cleared earth at dusk, hands in foreign soil, and
+          for the first time does not feel like a guest — feels like someone a small corner of this world
+          now depends on.
+        camera_hint: close_up
+        mood_hint: stillness
+        is_carrier: true
+      - beat: 6
+        text: An old woman leaves a cup of tea by the shrine gate without a word and walks on. {companion}
+          murmurs, 'They did not let you in. You made a door and held it open.'
+        camera_hint: two_shot_profile
+        mood_hint: dawning
+        is_carrier: true
+      - beat: 7
+        text: When the festival comes, {protagonist} still fumbles the song — but they fumble it from
+          inside the circle now, a villager beside them laughing and correcting the words, hand on their
+          shoulder.
+        camera_hint: warm_group_shot
+        mood_hint: woven_in
+        is_carrier: true
+      - beat: 8
+        text: '{protagonist} looks back at the shrine, alive with lantern-light, and realizes home was
+          never a place that matched them — it was the place they had started to keep.'
+        camera_hint: wide_golden_hour
+        mood_hint: belonging
+        is_carrier: false
+    layer_5_pacing_skeleton:
+      end_of_chapter_hooks:
+        ch1: The restored shrine answers a prayer no one expected, and pilgrims begin arriving at {setting}
+          asking for the foreign keeper.
+        ch2: The old woman who left the tea reveals she was once a stranger here too — and leaves {protagonist}
+          a key.
+        ch3: 'A summons arrives from {protagonist}''s original world: a way home has been found, just
+          as they finally have something to lose.'
+  strategy_03:
+    name: The Body I Woke Up In
+    archetype_template: reincarnated_second_life
+    description: Starting over carried by the isekai premise of a second life — {protagonist} dies or
+      vanishes from the old world and wakes in a new one, a clean slate that is equal parts grief and
+      freedom. The turn lands when {protagonist} stops trying to rebuild the exact life they lost and
+      lets the new life be genuinely new.
+    layer_1_plot_skeleton:
+      variant_label: strategy_03_standard
+      beat_count: 8
+      beats:
+      - beat: 1
+        text: '{protagonist} wakes on cold stone in {setting} with a stranger''s reflection in a rain
+          puddle and no clear memory of how the old life ended — only that it did. Everything they were
+          is suddenly past tense.'
+        camera_hint: low_angle_waking
+        mood_hint: disorientation
+        is_carrier: false
+      - beat: 2
+        text: They try to reconstruct the old routine inside the new world — same trade, same habits,
+          same careful walls — as if grief could be outrun by recreating the floor plan of a life that
+          no longer exists.
+        camera_hint: montage_medium
+        mood_hint: clinging
+        is_carrier: false
+      - beat: 3
+        text: 'Every copy comes out wrong: the tools are different, the streets refuse the old map, and
+          {protagonist} grows bitter that the new life will not behave like the old one.'
+        camera_hint: medium_shot
+        mood_hint: frustration
+        is_carrier: false
+      - beat: 4
+        text: '{companion} finds {protagonist} forcing an old key into a new lock. ''You are trying to
+          live twice in the same shape. The first life is over. This one has not decided what it is yet
+          — and neither have you.'''
+        camera_hint: close_up
+        mood_hint: reframing
+        is_carrier: true
+      - beat: 5
+        text: '{protagonist} sits down in the middle of the unfamiliar street and stops trying to make
+          it familiar. They simply breathe, and let it be a place they have never been.'
+        camera_hint: wide_overhead
+        mood_hint: stillness
+        is_carrier: true
+      - beat: 6
+        text: For the first time they walk a road for no reason but to see where it goes, and take an
+          apprenticeship they would never have chosen before. The grief stays — but it stops steering.
+        camera_hint: tracking_walk
+        mood_hint: opening
+        is_carrier: true
+      - beat: 7
+        text: They keep one small token of the old life in a pocket, no longer as an anchor dragging behind
+          but as a thing carried lightly forward. {companion} simply nods.
+        camera_hint: extreme_close_up
+        mood_hint: integration
+        is_carrier: true
+      - beat: 8
+        text: Standing where the rain puddle once showed a stranger, {protagonist} meets their new reflection
+          and, for the first time, recognizes it.
+        camera_hint: mirror_close_up
+        mood_hint: arrival
+        is_carrier: false
+    layer_5_pacing_skeleton:
+      end_of_chapter_hooks:
+        ch1: The token from the old life reacts to something in this world — proof the two are connected
+          in a way {protagonist} never suspected.
+        ch2: The apprenticeship {protagonist} took on a whim turns out to be exactly the skill this world
+          will soon desperately need.
+        ch3: A figure in the crowd calls {protagonist} by their OLD name — someone else made the same
+          crossing.
+  strategy_04:
+    name: Summoned for the Crown, Needed for the Hands
+    archetype_template: needed_for_who_you_are
+    description: Self-worth carried by the isekai hook of being summoned for a title, a power, or a prophesied
+      role. The world wants the Hero, the Crown, the Legendary Class — but the turn comes when {protagonist}
+      discovers they are needed for the actual person they are, not the label stamped on them at arrival,
+      and lets that be enough.
+    layer_1_plot_skeleton:
+      variant_label: strategy_04_standard
+      beat_count: 8
+      beats:
+      - beat: 1
+        text: The kingdom summons {protagonist} with full ceremony for their rare Class — and from the
+          first hour, no one says {protagonist}'s name, only the title. They are introduced to {setting}
+          as a function, not a person.
+        camera_hint: wide_establishing
+        mood_hint: objectified
+        is_carrier: false
+      - beat: 2
+        text: '{protagonist} pours everything into being the asset they were called for — leveling the
+          gift, maximizing the role — convinced their worth is the number on the appraisal and nothing
+          else.'
+        camera_hint: montage_action
+        mood_hint: performing
+        is_carrier: false
+      - beat: 3
+        text: When the Class fails to solve a crisis, panic ripples through the court and {protagonist}
+          feels themselves becoming worthless in real time, a tool that stopped working.
+        camera_hint: close_up
+        mood_hint: dread
+        is_carrier: false
+      - beat: 4
+        text: That night a frightened stable-girl seeks {protagonist} out — not for the power, but because
+          {protagonist} once listened to her when the nobles would not. She does not even know the title.
+          She knows the person.
+        camera_hint: intimate_two_shot
+        mood_hint: seen
+        is_carrier: true
+      - beat: 5
+        text: '{protagonist} sits with that, the appraisal-scroll forgotten in their lap, and lets a quiet
+          truth land: someone needed THEM tonight, and the Class had nothing to do with it.'
+        camera_hint: extreme_close_up
+        mood_hint: stillness
+        is_carrier: true
+      - beat: 6
+        text: '{companion} sets down tea and says only, ''They summoned a Class. The girl came back for
+          a person. One of those can be replaced.'''
+        camera_hint: close_up
+        mood_hint: anchoring
+        is_carrier: true
+      - beat: 7
+        text: At the next council {protagonist} declines to be paraded as a weapon and instead does the
+          small, unglamorous, deeply human work no prophecy named — and finds it is the work that actually
+          holds the village together.
+        camera_hint: medium_group_shot
+        mood_hint: grounding
+        is_carrier: true
+      - beat: 8
+        text: When a herald announces the title, {protagonist} answers with their own name first — steady,
+          unhurried — and the room, for once, learns it.
+        camera_hint: warm_medium_shot
+        mood_hint: worth
+        is_carrier: false
+    layer_5_pacing_skeleton:
+      end_of_chapter_hooks:
+        ch1: The stable-girl turns out to be the one person who can vouch for {protagonist} when the court
+          moves to strip the title entirely.
+        ch2: '{protagonist}''s ''useless'' human work quietly solves the crisis the Class could not —
+          and no one understands how.'
+        ch3: A rival summon arrives with a stronger Class, and the court must choose between the better
+          tool and the trusted person.
+  strategy_05:
+    name: The Loop That Finally Let Me Turn Left
+    archetype_template: regression_redo_the_failed_path
+    description: Second chance carried by the isekai regression/time-loop device — distinct from a clean
+      slate. {protagonist} is thrown back to re-live a path they already failed, the same world and the
+      same people, with the chance to make the one different choice. The turn is the moment {protagonist}
+      stops trying to perfectly redo the past and instead forgives the version of themselves that got
+      it wrong.
+    layer_1_plot_skeleton:
+      variant_label: strategy_05_standard
+      beat_count: 8
+      beats:
+      - beat: 1
+        text: '{protagonist} dies — or thinks they do — and opens their eyes back at the very crossroads
+          in {setting} where it all went wrong, the same morning, the same fatal choice waiting. They
+          have been here before. They know exactly how it ends.'
+        camera_hint: low_angle_waking
+        mood_hint: deja_vu
+        is_carrier: false
+      - beat: 2
+        text: Armed with foreknowledge, {protagonist} tries to run the path flawlessly this time — every
+          word rehearsed, every mistake pre-corrected — treating the second chance like a test they must
+          finally ace.
+        camera_hint: montage_tense
+        mood_hint: controlling
+        is_carrier: false
+      - beat: 3
+        text: But the world will not be perfectly scripted; a small thing goes wrong despite all the planning,
+          and {protagonist} spirals, raging at their past self for a failure they have already paid for
+          once.
+        camera_hint: close_up
+        mood_hint: self_blame
+        is_carrier: false
+      - beat: 4
+        text: '{companion}, who cannot know about the loop, finds {protagonist} shaking and says the unplanned
+          thing: ''You are fighting someone who is not here. Whoever wronged you — you have already outlived
+          them.'''
+        camera_hint: close_up
+        mood_hint: reframing
+        is_carrier: true
+      - beat: 5
+        text: '{protagonist} stands at the crossroads, foreknowledge useless in their hands, and for one
+          long breath stops trying to fix the past at all. They just let the old self be forgiven.'
+        camera_hint: wide_at_the_crossroads
+        mood_hint: stillness
+        is_carrier: true
+      - beat: 6
+        text: Then, lighter, {protagonist} does not perfectly redo the old path — they choose a genuinely
+          new turning the first life was too afraid to take, not to erase the failure but because they
+          are finally free of it.
+        camera_hint: tracking_decisive
+        mood_hint: release
+        is_carrier: true
+      - beat: 7
+        text: The familiar disaster simply... does not come. {protagonist} realizes the loop was never
+          asking for a flawless replay; it was waiting for them to stop punishing the person they used
+          to be.
+        camera_hint: medium_shot
+        mood_hint: integration
+        is_carrier: true
+      - beat: 8
+        text: Walking the unfamiliar road past where the old ending would have been, {protagonist} glances
+          back at the crossroads once — without flinching — and keeps going.
+        camera_hint: wide_receding
+        mood_hint: peace
+        is_carrier: false
+    layer_5_pacing_skeleton:
+      end_of_chapter_hooks:
+        ch1: The new road {protagonist} chose leads somewhere the old timeline never existed to reach
+          — and someone is waiting there who 'remembers' a {protagonist} who never came.
+        ch2: '{companion} says the same reframing line again, word for word, days later — and has no memory
+          of saying it the first time.'
+        ch3: The disaster that 'did not come' was load-bearing for the whole world's fate, and its absence
+          has consequences no foreknowledge can predict.
+anti_pattern_rules:
+- forbidden_combination:
+  - strategy_01
+  - the summoning circle declares {protagonist} is actually the true chosen hero after all
+  reason: Impostor syndrome resolves by the protagonist redefining what 'the right person' means through
+    their own actions, NOT by a deus-ex-machina revelation that they were secretly worthy all along. A
+    title handed back by the device reinstates the very external-validation trap the arc is supposed to
+    dissolve.
+- forbidden_combination:
+  - any strategy
+  - the companion delivers a monologue that names the lesson (e.g. 'you see, you were enough the whole
+    time')
+  reason: Breaks the golden rule. The psychological turn must be carried by the genre device (a stuttering
+    summon, a map redrawn, a loop that finally breaks) and shown through action or silence. A companion
+    speech that explains the moral converts commercial manga into self-help and kills the embedding.
+- forbidden_combination:
+  - strategy_03
+  - strategy_05
+  reason: starting_over (clean-slate second LIFE, leave the old self behind) and second_chance (a REGRESSION/loop
+    that re-runs the same failed path) are mechanically distinct devices and must never collapse into
+    one arc — doing so makes the bank read as a single repeated premise rather than two different turns.

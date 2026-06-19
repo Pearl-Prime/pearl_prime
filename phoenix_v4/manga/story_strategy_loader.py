@@ -105,6 +105,37 @@ def resolve_topic_strategy(genre: str, topic: str) -> str | None:
     return None
 
 
+def strategy_bank_exists(genre: str) -> bool:
+    """True when a ``{genre}_strategies.yaml`` exists for the normalised genre.
+
+    Lets an exact-name genre be self-describing — a bank file makes the genre
+    valid without an explicit alias entry, so adding a genre is one YAML.
+    """
+    root = _repo_root()
+    p = (
+        root / "config" / "source_of_truth" / "manga_story_strategies"
+        / f"{_normalise_genre(genre)}_strategies.yaml"
+    )
+    return p.is_file()
+
+
+def load_character_pool(genre: str) -> dict[str, list[str]]:
+    """Return a genre bank's ``character_pool`` (protagonist/companion/setting).
+
+    Keeps each ``{genre}_strategies.yaml`` self-contained: story_architect reads
+    the cast from the bank instead of a hard-coded table. Returns {} when absent.
+    """
+    data = _load_strategies_yaml(_normalise_genre(genre))
+    cp = data.get("character_pool")
+    if isinstance(cp, dict):
+        return {
+            "protagonist": list(cp.get("protagonist") or []),
+            "companion": list(cp.get("companion") or []),
+            "setting": list(cp.get("setting") or []),
+        }
+    return {}
+
+
 def load_story_strategy(
     genre: str,
     *,

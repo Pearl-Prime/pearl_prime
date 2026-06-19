@@ -140,6 +140,35 @@ _STRATEGY_GENRE_ALIASES: dict[str, str] = {
     "shoujo": "shojo",
     "seinen": "seinen",
     "mecha": "mecha",
+    "psychological_horror": "psychological_horror",
+    "horror": "psychological_horror",
+    "psych_horror": "psychological_horror",
+    "dark_fantasy": "dark_fantasy",
+    "isekai": "isekai",
+    "psychological_thriller": "psychological_thriller",
+    "psych_thriller": "psychological_thriller",
+    "thriller": "psychological_thriller",
+    "romance_josei_drama": "romance_josei_drama",
+    "romance": "romance_josei_drama",
+    "josei": "romance_josei_drama",
+    "romance_drama": "romance_josei_drama",
+    "sci_fi_cyberpunk": "sci_fi_cyberpunk",
+    "scifi": "sci_fi_cyberpunk",
+    "cyberpunk": "sci_fi_cyberpunk",
+    "sci_fi": "sci_fi_cyberpunk",
+    "action_battle": "action_battle",
+    "battle": "action_battle",
+    "action": "action_battle",
+    "sports_competition": "sports_competition",
+    "sports": "sports_competition",
+    "supernatural_mystery": "supernatural_mystery",
+    "mystery": "supernatural_mystery",
+    "supernatural": "supernatural_mystery",
+    "historical_period": "historical_period",
+    "historical": "historical_period",
+    "period": "historical_period",
+    "workplace_drama": "workplace_drama",
+    "workplace": "workplace_drama",
 }
 
 # Character-name pools per strategy genre. Healing register uses gentle,
@@ -246,9 +275,14 @@ def _generate_strategy_chapters(
     the three chapters differ while staying deterministic for a given
     (series_id, arc_id, genre_id).
     """
-    strat_genre = _STRATEGY_GENRE_ALIASES.get(
-        genre_id.lower().replace("-", "_").replace(" ", "_")
-    )
+    norm_genre = genre_id.lower().replace("-", "_").replace(" ", "_")
+    strat_genre = _STRATEGY_GENRE_ALIASES.get(norm_genre)
+    if not strat_genre:
+        # Exact-name genres are self-describing: a {genre}_strategies.yaml makes
+        # the genre valid without an explicit alias (scales to all genres).
+        from phoenix_v4.manga.story_strategy_loader import strategy_bank_exists
+        if strategy_bank_exists(norm_genre):
+            strat_genre = norm_genre
     if not strat_genre:
         return None
 
@@ -265,7 +299,11 @@ def _generate_strategy_chapters(
     if not probe or not probe.get("strategy"):
         return None
 
-    chars = _STRATEGY_CHARACTERS.get(strat_genre, {})
+    chars = _STRATEGY_CHARACTERS.get(strat_genre)
+    if not chars:
+        # Self-contained genre banks carry their own cast (character_pool).
+        from phoenix_v4.manga.story_strategy_loader import load_character_pool
+        chars = load_character_pool(strat_genre)
     name_seed = f"{series_id}:{arc_id}:{strat_genre}"
     protag_pool = chars.get("protagonist") or ["the protagonist"]
     comp_pool = chars.get("companion") or ["the visitor"]
