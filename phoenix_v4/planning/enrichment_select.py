@@ -751,6 +751,7 @@ def _try_composite_content(
     topic_id: str = "",
     persona_id: str = "",
     book_frame: str = "somatic_first",
+    seen_bodies: Any = None,
 ) -> Optional[Tuple[str, str, int, Dict[str, Any]]]:
     """Regular mode: topic composite doctrine/reflection before persona pool."""
     pool = _pick_composite_pool(composite_atoms, slot_type)
@@ -767,7 +768,32 @@ def _try_composite_content(
     ]
     if not pool:
         return None
-    idx = _deterministic_index(f"{seed_key}:composite", len(pool))
+    # Dedup-aware pick: deterministic anchor, then walk forward skipping bodies
+    # already used book-wide — reuses the SAME _SeenBodies exact+fuzzy membership
+    # as the persona path (no parallel dedup). Falls back to the anchor when every
+    # block is already seen, preserving determinism + the never-empty contract.
+    # Without this, two chapters whose seed_keys collide to the same index
+    # re-drew the SAME section_06 block (the repeated-phrase Hold residual).
+    anchor = _deterministic_index(f"{seed_key}:composite", len(pool))
+    idx = anchor
+    if seen_bodies:
+        n = len(pool)
+        _found = False
+        for _step in range(n):
+            _j = (anchor + _step) % n
+            _body = str(pool[_j].get("content") or "")
+            if not _body.strip():
+                continue
+            if _norm_ws(_body) in seen_bodies or _seen_similar(seen_bodies, _body):
+                continue
+            idx = _j
+            _found = True
+            break
+        if not _found:
+            # Pool exhausted book-wide (more composite slots than distinct blocks)
+            # → return None so the caller defers to the persona pool rather than
+            # re-drawing an already-used block (which trips repeated-phrase density).
+            return None
     atom = pool[idx]
     content = str(atom.get("content") or "").strip()
     if not content:
@@ -2194,11 +2220,13 @@ def select_enrichment(
                             topic_id=topic,
                             persona_id=persona_id,
                             book_frame=_frame,
+                            seen_bodies=_book_seen_bodies,
                         )
                         if _cx_hit:
                             _add_pieces.append(_cx_hit[0])
                             _add_sources.append("composite_doctrine")
                             _add_ids.append(_cx_hit[1])
+                            _note_primary_body(_book_seen_bodies, _cx_hit[0])
                             _composite_filled = True
                             audit_counts["slots_from_composite"] = (
                                 audit_counts.get("slots_from_composite", 0) + 1
