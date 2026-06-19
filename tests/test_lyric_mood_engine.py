@@ -4,6 +4,15 @@ Offline-first: every test runs with the deterministic template fallback (no LLM,
 no network) unless it explicitly injects a fake Tier-1 callable. This file lives
 under ``tests/`` which is globally exempt from the paid-LLM audit, and it imports
 no LLM client of any kind.
+
+Offline is enforced explicitly: every ``generate_kit`` call below either injects a
+fake Tier-1 ``pearl_writer_fn`` or passes ``router=TierRouter(allow_tier2_router=False)``.
+The disabled router still RESOLVES to the real tier (e.g. Gemma ``T2_GEMMA_UNATTENDED``
+for unattended English, so the provenance assertions still hold) but its ``draft()``
+returns ``None`` instead of calling ``phoenix_v4.llm.router.route_llm`` — a live Ollama
+network call to Pearl Star (``192.168.1.101``). Do NOT drop ``allow_tier2_router=False``:
+the production default is ``True``, so a router-less ``generate_kit`` would make that LAN
+call on every pool, hanging ~120s per call when Pearl Star is unreachable.
 """
 from __future__ import annotations
 
@@ -60,7 +69,9 @@ def _ctx(**overrides):
 # Offline / deterministic behavior (the CI-critical contract)
 # ---------------------------------------------------------------------------
 def test_with_lyrics_offline_fills_all_six_pools():
-    kit = generate_kit(_ctx(), fork="with-lyrics")  # router=None → fallback
+    kit = generate_kit(
+        _ctx(), fork="with-lyrics", router=TierRouter(allow_tier2_router=False)
+    )
     assert kit.fork == "with-lyrics"
     assert set(kit.atoms.keys()) == set(ALL_POOLS)
     # Kit-level tier_used records the RESOLVED tier (what was selected/attempted).
@@ -73,7 +84,9 @@ def test_with_lyrics_offline_fills_all_six_pools():
 
 
 def test_no_lyrics_offline_fills_only_reflection_pools_and_mood_text():
-    kit = generate_kit(_ctx(), fork="no-lyrics")
+    kit = generate_kit(
+        _ctx(), fork="no-lyrics", router=TierRouter(allow_tier2_router=False)
+    )
     assert set(kit.atoms.keys()) == set(REFLECTION_POOLS)
     # No lyric pools on the no-lyrics fork.
     assert not (set(kit.atoms.keys()) & set(LYRIC_POOLS))
@@ -83,7 +96,9 @@ def test_no_lyrics_offline_fills_only_reflection_pools_and_mood_text():
 
 
 def test_spec_739_floor_every_pool_has_at_least_three_variants():
-    kit = generate_kit(_ctx(), fork="with-lyrics")
+    kit = generate_kit(
+        _ctx(), fork="with-lyrics", router=TierRouter(allow_tier2_router=False)
+    )
     for pool, atom in kit.atoms.items():
         assert atom.variant_count >= SPEC_739_FLOOR, f"{pool}: {atom.variant_count}"
         assert atom.meets_spec_739, pool
@@ -93,11 +108,17 @@ def test_spec_739_floor_every_pool_has_at_least_three_variants():
 
 def test_variants_per_pool_respects_ceiling_and_floor():
     # Above ceiling clamps to 5.
-    kit_hi = generate_kit(_ctx(), fork="with-lyrics", variants_per_pool=99)
+    kit_hi = generate_kit(
+        _ctx(), fork="with-lyrics", router=TierRouter(allow_tier2_router=False),
+        variants_per_pool=99,
+    )
     for atom in kit_hi.atoms.values():
         assert atom.variant_count <= SPEC_739_CEILING
     # Below floor lifts to 3.
-    kit_lo = generate_kit(_ctx(), fork="with-lyrics", variants_per_pool=1)
+    kit_lo = generate_kit(
+        _ctx(), fork="with-lyrics", router=TierRouter(allow_tier2_router=False),
+        variants_per_pool=1,
+    )
     for atom in kit_lo.atoms.values():
         assert atom.variant_count >= SPEC_739_FLOOR
 
@@ -106,7 +127,9 @@ def test_variants_per_pool_respects_ceiling_and_floor():
 # Atom shape parity with on-main (atom_id + variants[].body) + template vars
 # ---------------------------------------------------------------------------
 def test_atom_yaml_shape_matches_on_main():
-    kit = generate_kit(_ctx(), fork="with-lyrics")
+    kit = generate_kit(
+        _ctx(), fork="with-lyrics", router=TierRouter(allow_tier2_router=False)
+    )
     atom = kit.atoms["LYRIC_OPENING"]
     d = atom.to_atom_yaml_dict()
     assert set(d.keys()) == {"atom_id", "variants"}
@@ -117,7 +140,9 @@ def test_atom_yaml_shape_matches_on_main():
 
 
 def test_atom_id_follows_on_main_convention():
-    kit = generate_kit(_ctx(), fork="with-lyrics")
+    kit = generate_kit(
+        _ctx(), fork="with-lyrics", router=TierRouter(allow_tier2_router=False)
+    )
     assert kit.atoms["LYRIC_OPENING"].atom_id == "test_artist_alpha_LYRIC_OPENING_01"
     assert kit.atoms["MUSIC_REFLECTION_CLOSING"].atom_id == (
         "test_artist_alpha_MUSIC_REFLECTION_CLOSING_01"
@@ -131,7 +156,9 @@ def test_template_vars_only_uses_established_placeholders():
         "musician_name", "topic_anchor", "theme", "genre",
         "persona_anchor", "healing_intent",
     }
-    kit = generate_kit(_ctx(), fork="with-lyrics")
+    kit = generate_kit(
+        _ctx(), fork="with-lyrics", router=TierRouter(allow_tier2_router=False)
+    )
     seen = set()
     for atom in kit.atoms.values():
         for v in atom.variants:
@@ -142,14 +169,19 @@ def test_template_vars_only_uses_established_placeholders():
 
 def test_lyric_pool_bodies_do_not_use_healing_intent_var():
     # healing_intent is a reflection-pool var; lyric fallbacks should not need it.
-    kit = generate_kit(_ctx(), fork="with-lyrics")
+    kit = generate_kit(
+        _ctx(), fork="with-lyrics", router=TierRouter(allow_tier2_router=False)
+    )
     for pool in LYRIC_POOLS:
         for v in kit.atoms[pool].variants:
             assert "{{healing_intent}}" not in v["body"], pool
 
 
 def test_variants_are_deduped_within_pool():
-    kit = generate_kit(_ctx(), fork="with-lyrics", variants_per_pool=SPEC_739_CEILING)
+    kit = generate_kit(
+        _ctx(), fork="with-lyrics", router=TierRouter(allow_tier2_router=False),
+        variants_per_pool=SPEC_739_CEILING,
+    )
     for pool, atom in kit.atoms.items():
         bodies = [v["body"].strip().lower() for v in atom.variants]
         assert len(bodies) == len(set(bodies)), f"dupes in {pool}"
