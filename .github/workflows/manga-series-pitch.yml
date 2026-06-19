@@ -31,10 +31,7 @@ jobs:
           python-version: '3.11'
       - run: pip install -q pyyaml
       - name: Generate series identity YAML
-        env:
-          CLAUDE_API_KEY: ${{ secrets.CLAUDE_API_KEY }}
         run: |
-          if [ -n "${CLAUDE_API_KEY:-}" ]; then echo "::add-mask::$CLAUDE_API_KEY"; fi
           python3 scripts/manga/manga_series_pitch.py \
             --brand "${{ inputs.brand }}" \
             --topic "${{ inputs.topic }}" \

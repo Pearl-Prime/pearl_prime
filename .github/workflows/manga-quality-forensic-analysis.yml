@@ -24,8 +24,6 @@ jobs:
         with:
           python-version: '3.11'
       - name: Run workstream stub
-        env:
-          CLAUDE_API_KEY: ${{ secrets.CLAUDE_API_KEY }}
         run: |
           mkdir -p "artifacts/analysis/matrix/${{ matrix.stream }}"
           echo "# ${{ matrix.stream }}" > "artifacts/analysis/matrix/${{ matrix.stream }}/notes.md"
@@ -61,10 +59,7 @@ jobs:
           path: artifacts/analysis/matrix_dl
           merge-multiple: true
       - name: Consolidate + sprint script
-        env:
-          CLAUDE_API_KEY: ${{ secrets.CLAUDE_API_KEY }}
         run: |
-          if [ -n "${CLAUDE_API_KEY:-}" ]; then echo "::add-mask::$CLAUDE_API_KEY"; fi
           python3 scripts/manga/forensic_quality_sprint.py
           if [ -d artifacts/analysis/matrix_dl ]; then
             rsync -a artifacts/analysis/matrix_dl/ artifacts/analysis/ || cp -R artifacts/analysis/matrix_dl/* artifacts/analysis/ 2>/dev/null || true
