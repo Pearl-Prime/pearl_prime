@@ -8,7 +8,10 @@ Resolution order (first hit wins):
     2. ``panel["character_head_bboxes"][speaker]`` — fractional head box
        (mouth = horizontal center, ~top 15% of box height from top edge)
     3. Optional MediaPipe face detection (lazy import; skipped if unavailable)
-    4. ``position_hint`` zone heuristic (same mapping as bubble_render v1)
+    4. ``position_hint`` zone heuristic — a *face-band* estimate (see
+       ``_hint_to_mouth``): the tail reaches toward the upper portion of the
+       speaker's zone where a manga figure's head sits, NOT the panel midline
+       (the old midline fallback landed tails on torsos / knees).
 
 No hard dependency on YOLOv8/MediaPipe — Pearl Star and CI stay green when
 those wheels are absent.
@@ -16,25 +19,46 @@ those wheels are absent.
 from __future__ import annotations
 
 import math
+from pathlib import Path
 from typing import Any, Mapping
 
 BBoxPx = tuple[int, int, int, int]  # x1, y1, x2, y2
 
 
+# Per-zone face-band fallback target (normalized x, y).
+#
+# Why these numbers: when a dialogue line's only positional signal is its
+# bubble *zone*, the speaking figure is conventionally framed so their head/face
+# sits toward the upper part of that zone (manga composes the bubble above and
+# to the speaker's outer side, tail pointing DOWN-IN toward the face). The prior
+# mapping put every target at y≈0.45–0.60 (panel midline = torso/waist), so the
+# tail visibly pointed at a body or "the knees". These y-values sit in the
+# head/upper-chest band (0.30–0.46) so the bare-zone fallback already lands near
+# a face. x stays on the speaker's side. Authors who supply ``mouth_anchor`` or
+# ``character_head_bboxes`` override this entirely (see ``resolve_mouth_pixel``).
+_ZONE_FACE_TARGET: dict[str, tuple[float, float]] = {
+    "top_left": (0.22, 0.34),
+    "top_right": (0.78, 0.34),
+    "top_center": (0.50, 0.36),
+    "bottom_left": (0.22, 0.62),
+    "bottom_right": (0.78, 0.62),
+    "bottom_center": (0.50, 0.64),
+    "center_left": (0.20, 0.44),
+    "center_right": (0.80, 0.44),
+}
+
+
 def _hint_to_mouth(position_hint: str | None, pw: int, ph: int) -> tuple[int, int]:
-    """Fallback mouth estimate from zone hint (mirrors bubble_render v1)."""
+    """Face-band mouth estimate from a bubble zone hint.
+
+    Targets the head/upper-chest band of the speaker's zone (not the panel
+    midline) so a tail drawn toward it lands on a face rather than a torso.
+    Bottom-row zones intentionally sit lower (the figure is lower in frame) but
+    still above the panel floor.
+    """
     hint = position_hint or "top_right"
-    mapping = {
-        "top_left": (int(pw * 0.20), int(ph * 0.55)),
-        "top_right": (int(pw * 0.80), int(ph * 0.55)),
-        "top_center": (int(pw * 0.50), int(ph * 0.60)),
-        "bottom_left": (int(pw * 0.20), int(ph * 0.45)),
-        "bottom_right": (int(pw * 0.80), int(ph * 0.45)),
-        "bottom_center": (int(pw * 0.50), int(ph * 0.40)),
-        "center_left": (int(pw * 0.15), int(ph * 0.50)),
-        "center_right": (int(pw * 0.85), int(ph * 0.50)),
-    }
-    return mapping.get(hint, (pw // 2, ph // 2))
+    fx, fy = _ZONE_FACE_TARGET.get(hint, (0.5, 0.4))
+    return int(pw * fx), int(ph * fy)
 
 
 def mouth_from_head_bbox_fraction(
@@ -54,6 +78,66 @@ def mouth_from_head_bbox_fraction(
     return cx, max(0, min(ph - 1, my))
 
 
+# ── Anime/manga face detection (optional: cv2 + bundled cascade) ─────────────
+# lbpcascade_animeface (nagadomi, MIT) detects stylised faces that the stock
+# OpenCV real-face Haar cascades miss (and which they false-positive on, e.g. a
+# framed portrait on the wall). Used to anchor a bubble tail at the speaker's
+# ACTUAL face when the zone heuristic would otherwise point the tail at empty
+# background. Fully optional: when cv2 or the cascade is absent, detection
+# returns [] and callers fall back to the head-box / zone heuristic — so Pearl
+# Star and CI stay green without the wheel.
+_ANIME_CASCADE_PATH = Path(__file__).resolve().parents[1] / "assets" / "lbpcascade_animeface.xml"
+_ANIME_CASCADE_CACHE: Any = None  # None = unprobed, False = unavailable, else classifier
+
+
+def _get_anime_cascade() -> Any:
+    global _ANIME_CASCADE_CACHE
+    if _ANIME_CASCADE_CACHE is not None:
+        return _ANIME_CASCADE_CACHE or None
+    try:
+        import cv2  # type: ignore
+
+        if _ANIME_CASCADE_PATH.is_file():
+            cc = cv2.CascadeClassifier(str(_ANIME_CASCADE_PATH))
+            _ANIME_CASCADE_CACHE = cc if not cc.empty() else False
+        else:
+            _ANIME_CASCADE_CACHE = False
+    except Exception:
+        _ANIME_CASCADE_CACHE = False
+    return _ANIME_CASCADE_CACHE or None
+
+
+def detect_anime_face_boxes(panel_rgba: Any) -> list[BBoxPx]:
+    """Detect stylised face boxes (pixel coords) on a panel. [] when unavailable."""
+    cc = _get_anime_cascade()
+    if cc is None or panel_rgba is None:
+        return []
+    try:
+        import cv2  # type: ignore
+        import numpy as np  # type: ignore
+
+        img = panel_rgba.convert("RGB") if hasattr(panel_rgba, "convert") else None
+        if img is None:
+            return []
+        w, h = img.size
+        gray = cv2.cvtColor(np.asarray(img), cv2.COLOR_RGB2GRAY)
+        found = cc.detectMultiScale(
+            gray,
+            scaleFactor=1.05,
+            minNeighbors=3,
+            minSize=(max(12, int(w * 0.05)), max(12, int(h * 0.05))),
+        )
+        return [(int(x), int(y), int(x + bw), int(y + bh)) for (x, y, bw, bh) in found]
+    except Exception:
+        return []
+
+
+def mouth_from_face_box(box: BBoxPx) -> tuple[int, int]:
+    """Mouth point of a detected face box: horizontal centre, lower third."""
+    x1, y1, x2, y2 = box
+    return (x1 + x2) // 2, int(y1 + (y2 - y1) * 0.72)
+
+
 def resolve_mouth_pixel(
     *,
     panel_w: int,
@@ -61,11 +145,18 @@ def resolve_mouth_pixel(
     line: Mapping[str, Any],
     panel_lettering: Mapping[str, Any] | None = None,
     panel_rgba: Any | None = None,
+    detected_faces: list[BBoxPx] | None = None,
 ) -> tuple[int, int]:
-    """Pick the tail target mouth coordinate in panel pixel space."""
+    """Pick the tail target mouth coordinate in panel pixel space.
+
+    Resolution order: explicit ``mouth_anchor`` → nearest detected anime face →
+    authored/derived head box → MediaPipe → zone face-band. ``detected_faces``
+    may be passed in to avoid re-detecting once per dialogue line.
+    """
     pw, ph = panel_w, panel_h
     panel_lettering = panel_lettering or {}
 
+    # 1. Explicit author anchor wins outright.
     anchor = line.get("mouth_anchor")
     if isinstance(anchor, Mapping):
         try:
@@ -77,18 +168,45 @@ def resolve_mouth_pixel(
 
     speaker = str(line.get("speaker") or "")
     boxes = panel_lettering.get("character_head_bboxes") or {}
-    if speaker and speaker in boxes and isinstance(boxes[speaker], Mapping):
+    head_box = boxes.get(speaker) if isinstance(boxes, Mapping) else None
+
+    # Speaker locator = head-box mouth if known, else the zone face-band. Used to
+    # pick the nearest detected face and as the final fallback.
+    locator = _hint_to_mouth(str(line.get("position_hint") or ""), pw, ph)
+    if isinstance(head_box, Mapping):
         try:
-            return mouth_from_head_bbox_fraction(boxes[speaker], pw, ph)
+            locator = mouth_from_head_bbox_fraction(head_box, pw, ph)
         except (KeyError, TypeError, ValueError):
             pass
 
+    # 2. Anime-face detection → anchor at the speaker's ACTUAL face. Pick the
+    # face nearest the locator ("nearest-character"); only trust it when it sits
+    # near the speaker's expected zone, so a stray detection elsewhere (or a
+    # background portrait) cannot hijack the tail.
+    faces = detected_faces
+    if faces is None and panel_rgba is not None:
+        faces = detect_anime_face_boxes(panel_rgba)
+    if faces:
+        mouths = [mouth_from_face_box(b) for b in faces]
+        best = min(mouths, key=lambda m: (m[0] - locator[0]) ** 2 + (m[1] - locator[1]) ** 2)
+        if math.hypot(best[0] - locator[0], best[1] - locator[1]) <= 0.33 * math.hypot(pw, ph):
+            return best
+
+    # 3. Authored / derived head box.
+    if isinstance(head_box, Mapping):
+        try:
+            return mouth_from_head_bbox_fraction(head_box, pw, ph)
+        except (KeyError, TypeError, ValueError):
+            pass
+
+    # 4. MediaPipe real-face detection (no-op when the wheel is absent).
     if panel_rgba is not None:
         detected = mouth_from_mediapipe_face(panel_rgba)
         if detected is not None:
             return detected
 
-    return _hint_to_mouth(str(line.get("position_hint") or ""), pw, ph)
+    # 5. Zone face-band heuristic.
+    return locator
 
 
 def mouth_from_mediapipe_face(panel_rgba: Any) -> tuple[int, int] | None:

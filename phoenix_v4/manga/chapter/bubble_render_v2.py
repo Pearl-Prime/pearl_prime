@@ -35,7 +35,10 @@ from phoenix_v4.manga.chapter.furigana_renderer import (
     render_furigana_line,
 )
 from phoenix_v4.manga.chapter.svg_bubble_library import bubble_svg, svg_to_pil_rgba
-from phoenix_v4.manga.chapter.tail_geometry import resolve_mouth_pixel
+from phoenix_v4.manga.chapter.tail_geometry import (
+    detect_anime_face_boxes,
+    resolve_mouth_pixel,
+)
 
 _FONT_CACHE_V2: dict[tuple[str, str, str, bool, int], Any] = {}
 
@@ -522,6 +525,9 @@ def render_bubbles_onto_panel_v2(
         img = base_img.convert("RGBA")
 
     pw, ph = img.size
+    # Detect faces ONCE per panel (not per dialogue line) so tails anchor at the
+    # speaker's actual face. No-op (→ zone fallback) when cv2/cascade absent.
+    detected_faces = detect_anime_face_boxes(img)
     overlay = Image.new("RGBA", (pw, ph), (0, 0, 0, 0))
     draw = ImageDraw.Draw(overlay)
 
@@ -639,6 +645,7 @@ def render_bubbles_onto_panel_v2(
                 line=line,
                 panel_lettering=lettering_panel,
                 panel_rgba=img,
+                detected_faces=detected_faces,
             )
             bubble_fill = _bubble_fill_with_genre(bubble_style, line_for_body)
             br._draw_tail_pointer(  # type: ignore[attr-defined]
