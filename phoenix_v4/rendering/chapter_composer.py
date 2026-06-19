@@ -2255,6 +2255,90 @@ def _fallback_thread(
     )
 
 
+# Body-part-keyed exercise-opener variants. Each part carries several DISTINCT
+# secular openers; _exercise_setup_sentence rotates them through the memory-aware
+# selector so body-heavy books (anxiety/depression) no longer repeat one hardcoded
+# line per chapter (the prior single-string-per-part design tripped the
+# repeated-phrase density gate ~once/chapter). Every variant stays secular
+# (somatic / nervous-system register) — no spiritual or teacher framing.
+_BODY_PART_OPENERS: dict[str, tuple[tuple[str, ...], tuple[str, ...]]] = {
+    "sternum": (
+        ("sternum", "chest"),
+        (
+            "Start with the pressure under the sternum. That is the part still bracing.",
+            "Notice the chest — the held breath sitting just behind the ribs. Begin there.",
+            "Bring your attention to the band of tightness across the chest that pulled snug while you read.",
+            "Find the center of the chest where the weight settled, and let that be the first thing you tend.",
+            "Begin at the breastbone. Let whatever is clenched there loosen by a single degree.",
+            "Let the chest be the entry point — the place that braced before the rest of you caught up.",
+        ),
+    ),
+    "jaw": (
+        ("jaw",),
+        (
+            "Start with the jaw that tightened while the story was unfolding.",
+            "Notice the jaw — how it set itself without instruction. Let it come unclenched.",
+            "Bring attention to the hinge of the jaw, the muscle that has been holding all morning.",
+            "Find the place where your back teeth meet, and let that contact soften.",
+            "Begin at the jaw. Ease it open the way you would a door that sticks.",
+        ),
+    ),
+    "throat": (
+        ("throat",),
+        (
+            "Start with the throat that keeps rehearsing and swallowing the same sentence.",
+            "Notice the throat — the narrow place where the words got stuck. Let it open.",
+            "Bring attention to the throat, tight from everything said and unsaid.",
+            "Find the constriction at the throat and give it one slow, deliberate swallow.",
+            "Begin at the throat, the gate that closes when there is too much to hold.",
+        ),
+    ),
+    "shoulder": (
+        ("shoulder", "shoulders"),
+        (
+            "Start with the shoulders that lifted before you even noticed the cost.",
+            "Notice how the shoulders crept toward the ears. Let them drop on the next exhale.",
+            "Bring attention to the shoulders, carrying a load you never agreed to lift.",
+            "Find the ridge of tension across the shoulders and let it slope back down.",
+            "Begin at the shoulders — set down whatever they have been bracing to hold.",
+        ),
+    ),
+    "hand": (
+        ("hand", "thumb", "trackpad"),
+        (
+            "Start with the hand that hovered instead of moving. That freeze is the entry point.",
+            "Notice the hands — clenched, or poised over a task they never started. Let them rest.",
+            "Bring attention to the palms, the fingers that curled without being told.",
+            "Find the hand still half-formed into a fist, and let it open, slowly.",
+            "Begin with the hands. Feel their weight, unhurried, doing nothing for a moment.",
+        ),
+    ),
+    "breath": (
+        ("breath", "breathe"),
+        (
+            "Start with the breath that shortened when the chapter turned.",
+            "Notice the breath — high and shallow, parked up in the chest. Let it drop lower.",
+            "Bring attention to the breath you have been half-holding. Let the next one finish.",
+            "Find the rhythm of the breath, even if it is quick, and let it lengthen on its own.",
+            "Begin with one full exhale, longer than the inhale before it.",
+        ),
+    ),
+}
+
+_SETUP_FALLBACK_OPENERS: tuple[str, ...] = (
+    "Start with the place in your body that lifted while you were listening. That is where the practice begins.",
+    "Start where you feel the most tension right now. Not where you think the tension should be — where it actually is.",
+    "Begin with whatever your body is holding. You do not need to name it. Just locate it.",
+    "Find the part of you that tightened during this chapter. That is your entry point.",
+    "Notice where your body is bracing. Start there. Not with the thought — with the sensation.",
+    "Scan from your scalp to your feet. The first place that speaks up is where you begin.",
+    "Start with the part of you that wanted to look away during the last section.",
+    "Place one hand where the tension is loudest. That contact is the first move.",
+    "Begin where the weight settled. You will know the spot before you can explain it.",
+    "Start with the simplest true thing your body is telling you right now.",
+)
+
+
 def _exercise_setup_sentence(
     reflection: str,
     story: str,
@@ -2264,18 +2348,21 @@ def _exercise_setup_sentence(
     exercise_memory: ExerciseWrapperMemory | None = None,
 ) -> str:
     seed = f"{reflection} {story}".lower()
-    if "sternum" in seed or "chest" in seed:
-        return "Start with the pressure under the sternum. That is the part still bracing."
-    if "jaw" in seed:
-        return "Start with the jaw that tightened while the story was unfolding."
-    if "throat" in seed:
-        return "Start with the throat that keeps rehearsing and swallowing the same sentence."
-    if "shoulder" in seed or "shoulders" in seed:
-        return "Start with the shoulders that lifted before you even noticed the cost."
-    if "hand" in seed or "thumb" in seed or "trackpad" in seed:
-        return "Start with the hand that hovered instead of moving. That freeze is the entry point."
-    if "breath" in seed or "breathe" in seed:
-        return "Start with the breath that shortened when the chapter turned."
+    # Rotate distinct secular openers per body part via the memory-aware selector
+    # (was: one hardcoded line per part, no rotation -> the same opener repeated
+    # ~once/chapter in body-heavy books and tripped repeated-phrase density).
+    for _part, (_keywords, _variants) in _BODY_PART_OPENERS.items():
+        if any(_kw in seed for _kw in _keywords):
+            _picked = _select_exercise_candidate(
+                [{"text": _v} for _v in _variants],
+                chapter_index=_CHAPTER_INDEX_TLS,
+                memory=exercise_memory,
+                family_key=f"setup_sentence|bodypart|{_part}",
+            )
+            if _picked:
+                _txt = str(_picked.get("text", "")).strip()
+                return _gt(_txt, locale=_LOCALE_TLS) if _LOCALE_TLS else _txt
+            break  # all variants for this part used this book -> fall through to job path
     job = _normalize_emotional_job(emotional_job)
     if job:
         candidates = _resolve_practice_candidates(
@@ -2294,19 +2381,16 @@ def _exercise_setup_sentence(
             if _LOCALE_TLS:
                 return _gt(text, locale=_LOCALE_TLS)
             return text
-    setup_fallbacks = [
-        "Start with the place in your body that lifted while you were listening. That is where the practice begins.",
-        "Start where you feel the most tension right now. Not where you think the tension should be — where it actually is.",
-        "Begin with whatever your body is holding. You do not need to name it. Just locate it.",
-        "Find the part of you that tightened during this chapter. That is your entry point.",
-        "Notice where your body is bracing. Start there. Not with the thought — with the sensation.",
-        "Scan from your scalp to your feet. The first place that speaks up is where you begin.",
-        "Start with the part of you that wanted to look away during the last section.",
-        "Place one hand where the tension is loudest. That contact is the first move.",
-        "Begin where the weight settled. You will know the spot before you can explain it.",
-        "Start with the simplest true thing your body is telling you right now.",
-    ]
-    return setup_fallbacks[hash(f"{reflection}{story}") % len(setup_fallbacks)]
+    _fallback_picked = _select_exercise_candidate(
+        [{"text": _v} for _v in _SETUP_FALLBACK_OPENERS],
+        chapter_index=_CHAPTER_INDEX_TLS,
+        memory=exercise_memory,
+        family_key="setup_sentence|fallback",
+    )
+    if _fallback_picked:
+        _txt = str(_fallback_picked.get("text", "")).strip()
+        return _gt(_txt, locale=_LOCALE_TLS) if _LOCALE_TLS else _txt
+    return _SETUP_FALLBACK_OPENERS[hash(f"{reflection}{story}") % len(_SETUP_FALLBACK_OPENERS)]
 
 
 def _shape_integration(integration: str) -> str:

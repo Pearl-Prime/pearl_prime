@@ -262,8 +262,10 @@ def get_exercise_for_chapter(
         return None
 
     logger.warning(
-        "EXERCISE FALLBACK: Using library_34 for chapter %d topic %s persona %s. "
-        "No registry or teacher exercise was available for this slot — add EXERCISE coverage upstream if this is unexpected.",
+        "EXERCISE: chapter %d (topic %s, persona %s) drew from the shared practice_library "
+        "(repeat-avoided across the book) — no per-cell registry/teacher EXERCISE atom for this "
+        "slot. Fine for draft; production gate EXERCISE-BANK-RESOLUTION-01 wants per-cell coverage. "
+        "(This is the 311-exercise practice_library, NOT a thin 'library_34' fallback.)",
         chapter_index,
         topic_id or "(unknown)",
         persona_id or "(unknown)",
