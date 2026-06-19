@@ -139,6 +139,7 @@ _STRATEGY_GENRE_ALIASES: dict[str, str] = {
     "shojo": "shojo",
     "shoujo": "shojo",
     "seinen": "seinen",
+    "mecha": "mecha",
 }
 
 # Character-name pools per strategy genre. Healing register uses gentle,
@@ -153,6 +154,20 @@ _STRATEGY_CHARACTERS: dict[str, dict[str, list[str]]] = {
             "the empty beach at low tide",
             "a canal town at the turning of the season",
             "the tea house at the edge of the forest",
+        ],
+    },
+    "mecha": {
+        "protagonist": ["Rei", "Kade", "Ash", "Yuna", "Iko"],
+        "companion": [
+            "the hangar chief", "the old mechanic", "Master Wu",
+            "the wing commander", "the deck engineer",
+        ],
+        "setting": [
+            "the carrier hangar before a drop",
+            "the cockpit on the launch rail",
+            "the maintenance bay at night",
+            "the drop-zone under a bruised sky",
+            "the reactor deck between sorties",
         ],
     },
 }
@@ -221,6 +236,7 @@ def _generate_strategy_chapters(
     series_id: str,
     arc_id: str,
     genre_id: str,
+    topic: str = "",
 ) -> list[dict[str, Any]] | None:
     """Derive a 3-chapter arc from the rich manga_story_strategies for *genre_id*.
 
@@ -261,12 +277,28 @@ def _generate_strategy_chapters(
     titles = _strategy_chapter_titles(strat_genre)
     fallback_hooks = ["small_wonder_close", "loss_echo_close", "small_wonder_close"]
 
+    # Topic embed: pin the device-strategy the genre maps this topic to (e.g.
+    # mecha + burnout -> failing-chassis) for the CARRIER chapter, so the episode
+    # opens on the right inner-state arc rather than a hash-random one.
+    pinned_sid: str | None = None
+    if topic:
+        try:
+            from phoenix_v4.manga.story_strategy_loader import resolve_topic_strategy
+            pinned_sid = resolve_topic_strategy(strat_genre, topic)
+        except Exception:
+            pinned_sid = None
+
     chapters: list[dict[str, Any]] = []
     for ch_idx in range(3):
         ch_num = ch_idx + 1
         # Chapter-scoped arc so the three chapters select distinct strategies/variants.
         ch_arc = f"{arc_id}:ch{ch_num}"
-        sd = load_story_strategy(strat_genre, series_id=series_id, arc_id=ch_arc)
+        if pinned_sid and ch_idx == 0:
+            sd = load_story_strategy(
+                strat_genre, strategy_id=pinned_sid, series_id=series_id, arc_id=ch_arc
+            )
+        else:
+            sd = load_story_strategy(strat_genre, series_id=series_id, arc_id=ch_arc)
         strategy = sd.get("strategy") or {}
         variants = select_layer_variants(sd, series_id=series_id, arc_id=ch_arc, genre=strat_genre)
 
@@ -337,6 +369,7 @@ def build_story_architecture_internal(
     schema_version: str = "1.0.0",
     chapters: list[dict[str, Any]] | None = None,
     genre_id: str = "shonen",
+    topic: str = "",
 ) -> dict[str, Any]:
     """Build ``story_architecture_internal`` with optional carrier metadata on beats.
 
@@ -357,7 +390,7 @@ def build_story_architecture_internal(
     """
     note = "chunk_b_deterministic"
     if chapters is None:
-        chapters = _generate_strategy_chapters(series_id, arc_id, genre_id)
+        chapters = _generate_strategy_chapters(series_id, arc_id, genre_id, topic)
         if chapters is not None:
             note = "strategy_driven"
         else:

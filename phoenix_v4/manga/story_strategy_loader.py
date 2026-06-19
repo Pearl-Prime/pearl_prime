@@ -88,6 +88,23 @@ def list_available_genres() -> list[str]:
     ]
 
 
+def resolve_topic_strategy(genre: str, topic: str) -> str | None:
+    """Return the strategy_id a genre maps a topic to (``topic_strategy_map``).
+
+    Lets the embedding map drive which device carries an inner state — e.g.
+    mecha + ``burnout`` -> the failing-chassis strategy. Returns ``None`` when
+    the genre/topic pairing is unmapped (caller falls back to hash selection).
+    """
+    if not topic:
+        return None
+    data = _load_strategies_yaml(_normalise_genre(genre))
+    mapping = data.get("topic_strategy_map") or {}
+    if isinstance(mapping, dict):
+        sid = mapping.get(topic) or mapping.get(_normalise_genre(topic))
+        return str(sid) if sid else None
+    return None
+
+
 def load_story_strategy(
     genre: str,
     *,

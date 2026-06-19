@@ -44,7 +44,7 @@ def build_series_artifact_bundle(
     genre = build_genre_blueprint(genre_id=genre_id, schema_version=schema_version)
     internal = build_story_architecture_internal(
         series_id=series_id, arc_id=arc_id, schema_version=schema_version,
-        genre_id=genre_id,
+        genre_id=genre_id, topic=topic,
     )
     handoff = story_architecture_internal_to_handoff(internal)
     assets = build_asset_registry(schema_version=schema_version)
