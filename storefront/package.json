@@ -2,17 +2,18 @@
   "name": "pearl-prime-storefront",
   "version": "0.0.1",
   "private": true,
-  "description": "Pearl Prime Storefront V1 — Cloudflare Pages + Workers + D1 + R2 + KV marketplace for Pearl Prime catalog SKUs. Infrastructure scaffold only (Pearl_Int ws). Application code lands via subsequent Pearl_Dev ws gated on this PR + UI mockup approval.",
+  "description": "Pearl Prime Storefront V1 — Cloudflare Pages + Workers + D1 + R2 + KV marketplace for Pearl Prime catalog SKUs. No-build static frontend (public/) + Pages Functions API (functions/) over D1/R2/KV. Catalog projected from the Pearl Prime catalog CSVs by scripts/storefront/project_skus.py.",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview",
-    "typecheck": "tsc --noEmit"
+    "dev": "wrangler pages dev public",
+    "deploy": "wrangler pages deploy public --project-name=pearl-prime-storefront",
+    "seed": "python3 ../scripts/storefront/project_skus.py --locales en-US,ja-JP --product-types book,audiobook,manga --out-sql seeds/skus.sql"
   },
   "devDependencies": {
+    "@cloudflare/workers-types": "^4.20260620.1",
     "typescript": "^5.4.0",
-    "vite": "^5.2.0"
+    "vite": "^5.2.0",
+    "wrangler": "^4.103.0"
   },
   "license": "MIT",
   "repository": {

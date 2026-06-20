@@ -30,3 +30,8 @@ yarn-error.log*
 
 # Snipcart local sandbox keys (never commit) — load from Keychain instead
 .snipcart-local.json
+
+# Generated SKU projection / D1 seed (regenerate via scripts/storefront/project_skus.py — too large to commit)
+/seeds/*.sql
+/src/data/
+/public/data/catalog.*.json
