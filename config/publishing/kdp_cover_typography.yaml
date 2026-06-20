@@ -370,3 +370,233 @@ genres:
       hex_palette_fallback:
       - '#FBF1DE'
       - '#7C2D12'
+
+  # ── Waystream composite secular topics (clone of boundaries typography) ──
+  depression:
+    title_zone:
+      position: center
+      anchor: centered
+      max_width_pct: 88
+      max_height_pct: 32
+      vertical_offset_pct: 22
+    title_style:
+      font_family: sans_serif
+      font_weight: extra_bold
+      size_px_at_1600x2560: 340
+      tracking_pct: -2
+      case: upper
+      color: auto
+      shadow:
+        offset_px:
+        - 0
+        - 4
+        blur_px: 14
+        color_alpha: 0.3
+    subtitle_style:
+      font_family: sans_serif
+      font_weight: regular
+      size_px_at_1600x2560: 96
+      tracking_pct: 4
+      case: title
+      color: auto
+      shadow:
+        offset_px:
+        - 0
+        - 2
+        blur_px: 8
+        color_alpha: 0.3
+    palette_hints:
+      prefer_light_text_if_dark_zone: false
+      hex_palette_fallback:
+      - '#FBF3E4'
+      - '#B7472A'
+  social_anxiety:
+    title_zone:
+      position: center
+      anchor: centered
+      max_width_pct: 88
+      max_height_pct: 32
+      vertical_offset_pct: 22
+    title_style:
+      font_family: sans_serif
+      font_weight: extra_bold
+      size_px_at_1600x2560: 340
+      tracking_pct: -2
+      case: upper
+      color: auto
+      shadow:
+        offset_px:
+        - 0
+        - 4
+        blur_px: 14
+        color_alpha: 0.3
+    subtitle_style:
+      font_family: sans_serif
+      font_weight: regular
+      size_px_at_1600x2560: 96
+      tracking_pct: 4
+      case: title
+      color: auto
+      shadow:
+        offset_px:
+        - 0
+        - 2
+        blur_px: 8
+        color_alpha: 0.3
+    palette_hints:
+      prefer_light_text_if_dark_zone: false
+      hex_palette_fallback:
+      - '#FBF3E4'
+      - '#B7472A'
+  somatic_healing:
+    title_zone:
+      position: center
+      anchor: centered
+      max_width_pct: 88
+      max_height_pct: 32
+      vertical_offset_pct: 22
+    title_style:
+      font_family: sans_serif
+      font_weight: extra_bold
+      size_px_at_1600x2560: 340
+      tracking_pct: -2
+      case: upper
+      color: auto
+      shadow:
+        offset_px:
+        - 0
+        - 4
+        blur_px: 14
+        color_alpha: 0.3
+    subtitle_style:
+      font_family: sans_serif
+      font_weight: regular
+      size_px_at_1600x2560: 96
+      tracking_pct: 4
+      case: title
+      color: auto
+      shadow:
+        offset_px:
+        - 0
+        - 2
+        blur_px: 8
+        color_alpha: 0.3
+    palette_hints:
+      prefer_light_text_if_dark_zone: false
+      hex_palette_fallback:
+      - '#FBF3E4'
+      - '#B7472A'
+  compassion_fatigue:
+    title_zone:
+      position: center
+      anchor: centered
+      max_width_pct: 88
+      max_height_pct: 32
+      vertical_offset_pct: 22
+    title_style:
+      font_family: sans_serif
+      font_weight: extra_bold
+      size_px_at_1600x2560: 340
+      tracking_pct: -2
+      case: upper
+      color: auto
+      shadow:
+        offset_px:
+        - 0
+        - 4
+        blur_px: 14
+        color_alpha: 0.3
+    subtitle_style:
+      font_family: sans_serif
+      font_weight: regular
+      size_px_at_1600x2560: 96
+      tracking_pct: 4
+      case: title
+      color: auto
+      shadow:
+        offset_px:
+        - 0
+        - 2
+        blur_px: 8
+        color_alpha: 0.3
+    palette_hints:
+      prefer_light_text_if_dark_zone: false
+      hex_palette_fallback:
+      - '#FBF3E4'
+      - '#B7472A'
+  financial_anxiety:
+    title_zone:
+      position: center
+      anchor: centered
+      max_width_pct: 88
+      max_height_pct: 32
+      vertical_offset_pct: 22
+    title_style:
+      font_family: sans_serif
+      font_weight: extra_bold
+      size_px_at_1600x2560: 340
+      tracking_pct: -2
+      case: upper
+      color: auto
+      shadow:
+        offset_px:
+        - 0
+        - 4
+        blur_px: 14
+        color_alpha: 0.3
+    subtitle_style:
+      font_family: sans_serif
+      font_weight: regular
+      size_px_at_1600x2560: 96
+      tracking_pct: 4
+      case: title
+      color: auto
+      shadow:
+        offset_px:
+        - 0
+        - 2
+        blur_px: 8
+        color_alpha: 0.3
+    palette_hints:
+      prefer_light_text_if_dark_zone: false
+      hex_palette_fallback:
+      - '#FBF3E4'
+      - '#B7472A'
+  financial_stress:
+    title_zone:
+      position: center
+      anchor: centered
+      max_width_pct: 88
+      max_height_pct: 32
+      vertical_offset_pct: 22
+    title_style:
+      font_family: sans_serif
+      font_weight: extra_bold
+      size_px_at_1600x2560: 340
+      tracking_pct: -2
+      case: upper
+      color: auto
+      shadow:
+        offset_px:
+        - 0
+        - 4
+        blur_px: 14
+        color_alpha: 0.3
+    subtitle_style:
+      font_family: sans_serif
+      font_weight: regular
+      size_px_at_1600x2560: 96
+      tracking_pct: 4
+      case: title
+      color: auto
+      shadow:
+        offset_px:
+        - 0
+        - 2
+        blur_px: 8
+        color_alpha: 0.3
+    palette_hints:
+      prefer_light_text_if_dark_zone: false
+      hex_palette_fallback:
+      - '#FBF3E4'
+      - '#B7472A'

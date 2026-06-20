@@ -81,6 +81,11 @@ TOPIC_SYMBOL = {
     "courage": "upslope",
     "loss": "slash",
     "depression": "downslope",
+    "social_anxiety": "twin_rings",      # you vs the room
+    "somatic_healing": "breath",         # return to the body
+    "compassion_fatigue": "downslope",   # the well running dry
+    "financial_anxiety": "spark_trio",   # money worry, racing
+    "financial_stress": "downslope",     # the weight of pressure
 }
 _FALLBACK_MOTIFS = ["twin_rings", "divider", "whole_circle", "breath",
                     "spark_trio", "upslope"]
