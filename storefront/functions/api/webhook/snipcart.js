@@ -3,12 +3,28 @@
 // order.refunded  -> flip status + revoke entitlements (§10.6).
 // Idempotent via webhook_event_log.
 //
-// SECURITY TODO (operator-gated): verify the X-Snipcart-RequestToken header against
-// the Snipcart validation API using SNIPCART_WEBHOOK_SECRET before trusting the body.
 import { json, bad, getDB, nowSec, sha256Hex } from "../../_lib.js";
+
+// Verify the webhook is genuinely from Snipcart: the X-Snipcart-RequestToken must
+// validate against Snipcart's API. If no secret is configured yet (pre-provision),
+// skip with a warning so local/test flows still work; once SNIPCART_WEBHOOK_SECRET
+// is set the webhook hard-rejects forged calls.
+async function snipcartAuthOk(request, env) {
+  const secret = env && env.SNIPCART_WEBHOOK_SECRET;
+  const token = request.headers.get("x-snipcart-requesttoken");
+  if (!secret) { console.warn("SNIPCART_WEBHOOK_SECRET unset — skipping webhook validation (pre-provision)"); return true; }
+  if (!token) return false;
+  try {
+    const r = await fetch(`https://app.snipcart.com/api/requestvalidation/${encodeURIComponent(token)}`, {
+      headers: { Accept: "application/json", Authorization: secret },
+    });
+    return r.ok;
+  } catch (_) { return false; }
+}
 
 export async function onRequestPost({ request, env }) {
   try {
+    if (!(await snipcartAuthOk(request, env))) return bad(401, "invalid Snipcart request token");
     const db = getDB(env);
     const event = await request.json().catch(() => ({}));
     const kind = event.eventName || event.event || "";

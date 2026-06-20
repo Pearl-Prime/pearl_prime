@@ -11,10 +11,12 @@ const $app = document.getElementById("app");
 const state = { locale: (window.PP_CONFIG && window.PP_CONFIG.locale) || "en-US" };
 const ACTIVE_LOCALES = ["en-US", "ja-JP"]; // Phase A; zh-TW/zh-CN/ko-KR = Phase B/C
 let brandsCache = [];
+let brandMap = {}; // {locale: {brand_id: localized label}} from ./app/brands.json
 let currentStars = 5;
 
 const truncate = (s, n) => (s.length > n ? s.slice(0, n - 1) + "…" : s);
-const brandLabel = (s) => s.brand_label || prettyBrand(s.brand_id); // localized name w/ fallback
+const brandName = (locale, id) => (brandMap[locale] && brandMap[locale][id]) || null;
+const brandLabel = (s) => brandName(s.locale, s.brand_id) || s.brand_label || prettyBrand(s.brand_id);
 
 const HERO = {
   "en-US": { eyebrow: "Pearl Prime · A quieter shelf", h1: `Calm-tech books, audiobooks &amp; manga for a <em>noisy world</em>.`, p: "Anxiety, focus, sleep, burnout — practical companions that talk to you like an adult who happens to be struggling." },
@@ -70,7 +72,7 @@ function header() {
 
 function chipRail() {
   const chips = brandsCache.slice(0, 14).map((b) =>
-    `<a class="pp-chip" href="#/search?brand=${encodeURIComponent(b)}">${escapeHtml(prettyBrand(b))}</a>`).join("");
+    `<a class="pp-chip" href="#/search?brand=${encodeURIComponent(b)}">${escapeHtml(brandName(state.locale, b) || prettyBrand(b))}</a>`).join("");
   return `<div class="pp-chip-rail">${chips}</div>`;
 }
 
@@ -341,10 +343,14 @@ async function loadBrands() {
   brandsCache = [...new Set(items.map((s) => s.brand_id))].sort();
 }
 
+async function loadBrandMap() {
+  try { const r = await fetch("./app/brands.json"); if (r.ok) brandMap = await r.json(); } catch (_) {}
+}
 async function init() {
   cart.initCart();
   attachEvents();
   document.documentElement.lang = state.locale;
+  await loadBrandMap();
   await loadBrands();
   await route();
 }

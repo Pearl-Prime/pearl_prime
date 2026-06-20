@@ -17,8 +17,8 @@ export async function onRequestGet({ request, env }) {
     ).bind(emailHash).all();
     const items = (rs.results || []).map((row) => ({
       ...row,
-      // Signed R2 URL (60-min TTL) is minted on demand once the ASSETS bucket is bound.
-      download_path: `/api/account/library/${encodeURIComponent(row.sku_id)}/url?email=${encodeURIComponent(email)}`,
+      // Entitlement-gated download (Worker re-checks ownership, then streams from R2).
+      download_path: `/api/download/${encodeURIComponent(row.sku_id)}?email=${encodeURIComponent(email)}`,
     }));
     return json({ items });
   } catch (e) { return bad(500, String(e && e.message || e)); }

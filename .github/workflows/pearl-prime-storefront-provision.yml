@@ -1,0 +1,73 @@
+# Pearl Prime Storefront — Provision + Seed Cloudflare resources (operator-run).
+#
+# One-time (idempotent) creation of D1 / R2 / KV under account b80152c3... + a D1
+# seed. The deploy workflow already creates the Pages PROJECT; this adds the data
+# bindings, which need a CLOUDFLARE_API_TOKEN scoped beyond Pages (D1 Edit, R2 Edit,
+# Workers KV Edit). If the token is Pages-only the create steps will report a
+# permission error in the run summary — broaden the token and re-run.
+#
+# After it runs: copy the printed [[d1_databases]] / [[kv_namespaces]] binding IDs
+# into storefront/wrangler.toml (uncomment), commit → the deploy binds them.
+#
+# GH-Actions only — never run wrangler from a laptop (cloudflare_pages_deploy.md Traps 1-4).
+
+name: Pearl Prime Storefront — Provision (CF resources)
+
+on:
+  workflow_dispatch:
+    inputs:
+      seed_d1:
+        description: "Apply migration + SKU seed to the remote D1 after provisioning"
+        type: boolean
+        default: true
+
+permissions:
+  contents: read
+
+jobs:
+  provision:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install wrangler + PyYAML
+        run: |
+          npm i -g wrangler@4
+          pip install pyyaml
+
+      - name: Provision (idempotent; prints capability + binding IDs)
+        run: |
+          set +e
+          S="$GITHUB_STEP_SUMMARY"
+          echo "## Provision results — copy any printed binding IDs into storefront/wrangler.toml" >> "$S"
+          for cmd in \
+            "pages project create pearl-prime-storefront --production-branch=main" \
+            "d1 create pearl_prime_storefront" \
+            "r2 bucket create pearl-prime-storefront-assets" \
+            "kv namespace create pearl_prime_storefront_session_cart"; do
+            echo "" >> "$S"; echo "### wrangler $cmd" >> "$S"; echo '```' >> "$S"
+            wrangler $cmd 2>&1 | tee -a "$S"
+            echo '```' >> "$S"
+          done
+          echo "Provision step complete (see summary for IDs / permission errors)."
+
+      - name: Seed D1 (migration + SKU projection)
+        if: ${{ inputs.seed_d1 }}
+        run: |
+          set +e
+          cd storefront
+          npm run seed 2>&1 | tail -4
+          echo "--- applying migration to remote D1 ---"
+          wrangler d1 execute pearl_prime_storefront --remote --file=migrations/0001_init.sql 2>&1 | tail -6
+          echo "--- applying SKU seed to remote D1 ---"
+          wrangler d1 execute pearl_prime_storefront --remote --file=seeds/skus.sql 2>&1 | tail -6
+          echo "Seed step complete."
