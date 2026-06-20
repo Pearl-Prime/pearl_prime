@@ -1,0 +1,69 @@
+series_plan_schema: 1.0.0
+locale: en_US
+book_id_prefix: adhd_forge__house__gen_alpha_students__overthinking
+brand: adhd_forge
+teacher: null
+persona: gen_alpha_students
+topic: overthinking
+byline_author: mae_meridian
+arc:
+  installment_1:
+    book_id: adhd_forge__house__gen_alpha_students__overthinking__false_alarm
+    engine: false_alarm
+    master_arc: config/source_of_truth/master_arcs/gen_alpha_students__overthinking__false_alarm__F006.yaml
+    duration: standard_book_60min
+  installment_2:
+    book_id: adhd_forge__house__gen_alpha_students__overthinking__spiral
+    engine: spiral
+    master_arc: config/source_of_truth/master_arcs/gen_alpha_students__overthinking__spiral__F006.yaml
+    duration: standard_book_60min
+  installment_3:
+    book_id: adhd_forge__house__gen_alpha_students__overthinking__watcher
+    engine: watcher
+    master_arc: config/source_of_truth/master_arcs/gen_alpha_students__overthinking__watcher__F006.yaml
+    duration: standard_book_60min
+reader_promise_family: >
+  Three books, three different ways your brain takes one ordinary moment and
+  turns it into a whole night of replays. You won't learn to switch it off —
+  you'll learn to clock what it's actually doing the second it starts, so the
+  loop loses its grip before it runs the whole show. Same overthinking, three
+  fresh angles, in words that sound like a friend who's been there at 2am too,
+  not a worksheet.
+bestseller_hook_family: recognition_loop_release
+emotional_engine: overthinking_recognition
+comp_series:
+- "The Anxiety Survival Guide for Teens (Jennifer Shannon) — names the loop for young readers without lecturing"
+- "Detox Your Thoughts (Andrea Bonior) — catching the thinking trap as it happens"
+- "Unfu*k Yourself (Gary John Bishop) — blunt, in-your-corner real-talk"
+platform_strategy:
+  primary:
+  - kdp_ebook
+  - audible
+  secondary:
+  - apple_books
+  - google_play
+  - spotify_audiobooks
+  launch_platform: kdp_ebook
+  cadence:
+    release_spacing_days: 14
+    max_books_per_brand_per_month: 2
+reader_avatar:
+  age: "14–19"
+  where_they_are: >
+    It's 1am, the group chat went quiet an hour ago, and they're still staring at
+    one message they sent — rereading it, hearing how it could've landed wrong,
+    replaying the whole exchange like a clip they can't stop scrubbing back.
+  what_they_need: >
+    Someone who talks to them like a person, not a case study — who treats the
+    overthinking brain as loud and tired rather than broken, and never makes them
+    feel like a problem to be fixed.
+  what_they_avoid: >
+    Anything that sounds like a counselor's office or a worksheet. 'Just stop
+    overthinking.' Toxic-positivity advice. Being talked down to like they don't
+    already know their own head.
+series_voice_markers:
+  register: "warm, real-talk, friend-at-1am; plainspoken and a little wry, never clinical or chipper"
+  sentence_rhythm: "short, punchy lines that match a racing head; a few longer ones that slow down and land"
+  metaphor_family: "phones and screens, smoke detectors, group chats, looping clips, late-night rooms — never therapy-office or machinery"
+  second_person_default: true
+_needs_authoring: false

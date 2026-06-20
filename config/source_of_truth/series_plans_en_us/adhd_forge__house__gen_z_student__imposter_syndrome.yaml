@@ -1,0 +1,91 @@
+series_plan_schema: 1.0.0
+locale: en_US
+book_id_prefix: adhd_forge__house__gen_z_student__imposter_syndrome
+brand: adhd_forge
+teacher: null
+persona: gen_z_student
+topic: imposter_syndrome
+byline_author: esme_thorne
+arc:
+  installment_1:
+    book_id: adhd_forge__house__gen_z_student__imposter_syndrome__false_alarm
+    engine: false_alarm
+    master_arc: config/source_of_truth/master_arcs/gen_z_student__imposter_syndrome__false_alarm__F006.yaml
+    duration: standard_book_60min
+  installment_2:
+    book_id: adhd_forge__house__gen_z_student__imposter_syndrome__overwhelm
+    engine: overwhelm
+    master_arc: config/source_of_truth/master_arcs/gen_z_student__imposter_syndrome__overwhelm__F006.yaml
+    duration: standard_book_60min
+  installment_3:
+    book_id: adhd_forge__house__gen_z_student__imposter_syndrome__spiral
+    engine: spiral
+    master_arc: config/source_of_truth/master_arcs/gen_z_student__imposter_syndrome__spiral__F006.yaml
+    duration: standard_book_60min
+  installment_4:
+    book_id: adhd_forge__house__gen_z_student__imposter_syndrome__shame
+    engine: shame
+    master_arc: config/source_of_truth/master_arcs/gen_z_student__imposter_syndrome__shame__F006.yaml
+    duration: standard_book_60min
+  installment_5:
+    book_id: adhd_forge__house__gen_z_student__imposter_syndrome__grief
+    engine: grief
+    master_arc: config/source_of_truth/master_arcs/gen_z_student__imposter_syndrome__grief__F006.yaml
+    duration: standard_book_60min
+  installment_6:
+    book_id: adhd_forge__house__gen_z_student__imposter_syndrome__comparison
+    engine: comparison
+    master_arc: config/source_of_truth/master_arcs/gen_z_student__imposter_syndrome__comparison__F006.yaml
+    duration: standard_book_60min
+  installment_7:
+    book_id: adhd_forge__house__gen_z_student__imposter_syndrome__watcher
+    engine: watcher
+    master_arc: config/source_of_truth/master_arcs/gen_z_student__imposter_syndrome__watcher__F006.yaml
+    duration: standard_book_60min
+reader_promise_family: >
+  You got in. You're doing the work. And some part of you is still bracing for the
+  email that says it was all a mistake. This series doesn't argue you out of that
+  feeling — it teaches you to recognize what your fast, easily-flooded brain is
+  actually doing when the fraud-alarm goes off. Seven books, seven different ways
+  the same feeling shows up between lectures, deadlines, group chats, and 2am.
+  Each one meets it from a new angle, in language you can actually use the next
+  time the floor drops out.
+bestseller_hook_family: recognition_descent
+emotional_engine: imposter_syndrome_recognition
+comp_series:
+- "The Comparison Cure (Lucy Sheridan) — naming the comparing mind without shame"
+- "How to Keep House While Drowning (KC Davis) — gentle, function-first, anti-shame"
+- "Permission to Feel (Marc Brackett) — naming the feeling as the first real skill"
+platform_strategy:
+  primary:
+  - kdp_ebook
+  - audible
+  secondary:
+  - apple_books
+  - google_play
+  - spotify_audiobooks
+  launch_platform: kdp_ebook
+  cadence:
+    release_spacing_days: 14
+    max_books_per_brand_per_month: 2
+reader_avatar:
+  age: "18–26"
+  where_they_are: >
+    It's 1:40am, three tabs of unstarted reading open, the seminar where they said
+    nothing replaying on loop, and a group chat full of people who somehow seem to
+    have it together — and the quiet certainty that everyone will eventually figure
+    out they don't belong here.
+  what_they_need: >
+    Someone close to their own age who gets the ADHD-shaped version of this — the
+    flooding, the freeze, the scramble — and names it straight, without turning it
+    into a diagnosis, a hack, or a lecture about discipline.
+  what_they_avoid: >
+    Clinical checklists and "just plan your time better" advice. Anything that
+    treats the way their brain works as a character flaw, or repackages belonging
+    as one more thing to optimize.
+series_voice_markers:
+  register: "close, real-talk, peer-level; the voice of a slightly-older friend who's been exactly here, never a counselor or a coach"
+  sentence_rhythm: "short and quick, the rhythm of a racing brain catching itself; occasional long line that slows down and lands soft"
+  metaphor_family: "campus, screens and group chats, the body's static and flood, weather and tide — never machinery, military, or hustle-grind"
+  second_person_default: true
+_needs_authoring: false

@@ -1,0 +1,56 @@
+series_plan_schema: 1.0.0
+locale: en_US
+book_id_prefix: adhd_forge__house__gen_z_professionals__overthinking
+brand: adhd_forge
+teacher: null
+persona: gen_z_professionals
+topic: overthinking
+byline_author: mae_meridian
+arc:
+  installment_1:
+    book_id: adhd_forge__house__gen_z_professionals__overthinking__false_alarm
+    engine: false_alarm
+    master_arc: config/source_of_truth/master_arcs/gen_z_professionals__overthinking__false_alarm__F006.yaml
+    duration: standard_book_60min
+  installment_2:
+    book_id: adhd_forge__house__gen_z_professionals__overthinking__spiral
+    engine: spiral
+    master_arc: config/source_of_truth/master_arcs/gen_z_professionals__overthinking__spiral__F006.yaml
+    duration: standard_book_60min
+  installment_3:
+    book_id: adhd_forge__house__gen_z_professionals__overthinking__watcher
+    engine: watcher
+    master_arc: config/source_of_truth/master_arcs/gen_z_professionals__overthinking__watcher__F006.yaml
+    duration: standard_book_60min
+reader_promise_family: >
+  You'll learn to recognize what your fast, loud, never-off mind is actually doing
+  when it overthinks — not as a flaw to fix or a habit to break, but as a pattern
+  you can finally see clearly. Three books, three different doorways into the same
+  loop. Each one meets the overthinking from a new angle, in plain language you can
+  actually use the next time your head won't shut up.
+bestseller_hook_family: recognition_loop
+emotional_engine: overthinking_recognition
+comp_series:
+- "Unwinding Anxiety (Judson Brewer) — mechanism plus noticing, not white-knuckle willpower"
+- "How to Keep House While Drowning (KC Davis) — warm, shame-free, neurodivergent-fluent"
+- "Chatter (Ethan Kross) — the inner voice as a thing you can study, not obey"
+reader_avatar:
+  age: "24–34"
+  where_they_are: >
+    It's 11:40pm, three tabs of a Slack message half-typed and deleted, replaying
+    one thing they said in the standup eight hours ago — phone bright, brain brighter,
+    completely sure they're the only one who can't just let it go.
+  what_they_need: >
+    Someone who talks to them like a smart friend who gets it — who treats the racing,
+    looping mind as wired the way it's wired, not broken, and names the loop without
+    handing them another self-improvement checklist to fail at.
+  what_they_avoid: >
+    Clinical language and diagnosis-speak. 'Just be present' mindfulness platitudes.
+    Productivity-bro routines. Anything that makes managing their own head feel like
+    one more job they're behind on.
+series_voice_markers:
+  register: "real-talk, warm, a little dry; a smart friend who's been in the loop too, never a therapist or a coach"
+  sentence_rhythm: "short, punchy, conversational; fragments allowed; the rhythm of texting someone you trust at midnight"
+  metaphor_family: "tabs, signal/static, the loop, the feed, weather in the head, the body — never clinical, never corporate, never battle"
+  second_person_default: true
+_needs_authoring: false
