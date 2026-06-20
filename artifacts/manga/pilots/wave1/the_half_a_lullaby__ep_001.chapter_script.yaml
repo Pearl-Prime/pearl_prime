@@ -1,0 +1,114 @@
+# PILOT (wave1) — MUSIC-MODE manga (Tier-1 authored). One mode only: MUSIC. No teacher, no doctrine.
+# Genre: supernatural_mystery. Wrapper (per MANGA_MODE_WRAPPER_DESIGN.md / GENRE_VESSEL_SKETCHES.md):
+# music-vessel = THE SONG ONLY THE HAUNTED CAN HEAR. The dead leave a half-finished melody; laying a
+# spirit to rest = finishing its song. The grief-arc (held -> released) is carried ENTIRELY by the
+# phantom phrase recurring, completing, and at last going quiet. The reader is made to FEEL, never
+# taught. Nothing is explained. (Render gated.)
+
+schema_version: 1.0.0
+artifact_type: chapter_script_writer_handoff
+series_id: music_mode__en_US__supernatural_mystery__series01
+catalog_title: "The Half a Lullaby"
+chapter_id: ep_001
+title: "The Half a Lullaby — Episode 1: The Note It Could Not Reach"
+mode: music                           # XOR — never teacher
+manga_author: Mizu Eveningtide        # MUSICIAN-archetype EI author (NOT a teacher)
+musician_id: mizu_eveningtide
+teacher_id: null                      # none — music-mode carries no doctrine
+genre: supernatural_mystery
+felt_topic: grief                     # interior, FELT through sound — never named, never taught
+locale: en_US
+available_locales: [en_US, ja_JP, zh_CN, zh_TW, ko_KR]
+
+# Music-mode 3-beat skeleton (the phantom melody carries the arc — open / mid / close):
+mode_beats:
+  opening_motif: page_2   (the sound enters — a half-finished lullaby no one living is humming)
+  mid_recurrence: page_4  (bestseller beat — forcing the ghost out fails; the motif RETURNS, and she answers it instead of fighting it)
+  closing_resolution: page_6  (the held, unfinished note finally completes — and the song goes quiet, at peace)
+
+main_characters:
+  - id: suzu
+    name: Suzu
+    role: >-
+      protagonist — a young house-clearer hired to rid an old seaside home of whatever
+      lingers. She came to make the haunting STOP. (Unstated, never taught: a body holding a
+      grief it won't let finish; here it is carried by a SOUND, not a lesson.)
+    visual_anchor: travel coat damp with sea-mist; salt-knotted hair; a faded ribbon on her wrist she touches without thinking; eyes that look like they haven't finished crying something.
+  - id: the_presence
+    name: The Presence                # the haunting — and the MUSIC-VESSEL itself
+    role: >-
+      not a monster; a grief left mid-phrase. It does not speak or attack. It only HUMS — the
+      same few notes of a lullaby, over and over, always stopping one note short of resolving.
+      It is not asking to be banished. It is asking to be finished.
+    visual_anchor: never fully seen — a cold draft, a music-box that turns on its own, a child's shadow at the edge of a doorway, lamplight that flickers in time with the notes.
+  - id: the_music_box
+    name: The Music Box               # the object that carries the phantom phrase
+    role: a small broken music box in the nursery; its comb is missing one tooth, so it always plays the lullaby with the final note silent.
+
+scene_palette:
+  primary: storm-grey seaside dusk + cold candle amber
+  secondary: drowned blue (the haunting; the held, unfinished note)
+  accent: warm lamp-gold (the moment the song completes; release)
+  resolution_palette: clear dawn over a calm sea (page 6 only)
+
+pages:
+  # ── The problem: she comes to make it STOP (no music answered yet) ─────────
+  - page_id: ep001_p01
+    panels:
+      - {panel_id: ep001_001, beat_type: establishing, intent: "GENRE SHELL — supernatural mystery; a haunted seaside house",
+         scene: "A tall old house alone above a grey churning sea, shutters banging, mist crawling up the cliff. Inside, dust-sheeted furniture and a staircase that disappears into dark. Sound design: wind, a far-off arrhythmic creak. Lonely, charged, waiting."}
+      - {panel_id: ep001_002, beat_type: character, intent: "the one who came to silence, not to listen",
+         scene: "SUZU enters with salt and wards and a clearer's case, all business, jaw set. She means to drive the lingering thing OUT. She touches the faded ribbon on her wrist once, without noticing, and gets to work sealing the doors."}
+      - {panel_id: ep001_003, beat_type: failure, intent: "forcing it out fails (grief, shown not named)",
+         scene: "Suzu lays the wards and commands the presence to leave — sharp, forceful, a banishing. The house answers with a cold gust that snuffs every candle at once and slams the nursery door. The wards smolder uselessly. Whatever this is, it will not be forced out. It is not finished here."}
+
+  # ── OPENING MOTIF: the phantom phrase enters ───────────────────────────────
+  - page_id: ep001_p02
+    panels:
+      - {panel_id: ep001_004, beat_type: quiet, intent: "alone in the dark; the house goes still",
+         scene: "Candles relit, low. Suzu sits on the nursery floor, back against an old crib, case open beside her, catching her breath. The storm quiets for a moment. She is very alone, and the ribbon on her wrist catches the candlelight."}
+      - {panel_id: ep001_005, beat_type: opening_motif, intent: "MUSIC-VESSEL enters — the half-finished lullaby; felt, never explained",
+         scene: "The broken music box on the shelf turns on its own. From it, thin and cold, a LULLABY — a few simple notes Suzu somehow half-knows, the way you half-know a song sung over you before you had words. It climbs toward its last note — and stops. Silent where the final note should be. It plays again. Stops again. Always one note short. Render it as a soft hand-lettered sound-motif rising through the panel (not narration — a sound): a line of melody that reaches up and cuts off, unresolved, aching."}
+      - {panel_id: ep001_006, beat_type: response, intent: "the sound reaches the part of her that's also unfinished",
+         scene: "Suzu goes still. Her hand rises, without her deciding, to the ribbon on her wrist. Her eyes sting. She doesn't understand why a broken lullaby should hurt this exact way — but her body does. She doesn't seal it away. She just listens, breath shaky, to the note it cannot reach. Almost silent: the box, and her held breath."}
+
+  # ── Escalation: she tries to force it out one more time ────────────────────
+  - page_id: ep001_p03
+    panels:
+      - {panel_id: ep001_007, beat_type: action, intent: "stakes — the genre's engine",
+         scene: "Midnight. The haunting swells — doors banging in sequence, the child's shadow flickering down the hall, the music box now playing everywhere at once, the unfinished phrase echoing through the whole house, louder, more desperate, still cutting off. The cold deepens. Suzu's lamplight gutters in time with the notes."}
+      - {panel_id: ep001_008, beat_type: crisis, intent: "under pressure she reverts to banishing — the grief peaks",
+         scene: "Overwhelmed, Suzu does what she was trained to do — raises the salt, shouts the banishing again, tries to MAKE it stop. The house shudders, the phantom phrase screeching up toward its missing note and breaking off in something like a sob. Forcing it only makes the cut-off worse. She is failing, and the house is keening the same broken half-phrase over and over, and neither of them can stop."}
+
+  # ── MID RECURRENCE (bestseller beat): the motif returns, transformed ───────
+  - page_id: ep001_p04
+    panels:
+      - {panel_id: ep001_009, beat_type: turn, intent: "she stops forcing — and answers the sound, not the threat",
+         scene: "Salt slipping from her fingers, out of moves, Suzu stops fighting. She closes her eyes. And instead of banishing, she does the only thing left — as the lullaby climbs again toward its missing note, she opens her mouth and HUMS the note it cannot reach. She finishes the phrase. Her own voice, into the dark."}
+      - {panel_id: ep001_010, beat_type: mid_recurrence, intent: "BESTSELLER BEAT — the motif RETURNS, and for the first time COMPLETES",
+         scene: "The instant her hummed note lands, the whole house stops shaking. The phantom lullaby plays once more — and this time it does not cut off. Her voice carries it across the silent gap, and the melody RESOLVES — the full phrase, whole at last, after who knows how long. Render the sound-motif filling the panel, the broken line finally closing into a complete, warm arc of melody. The lamplight steadies to gold. The presence does not flee. It is heard."}
+      - {panel_id: ep001_011, beat_type: flow, intent: "from forcing to release — felt, never explained",
+         scene: "The cold lifts. The child's shadow in the doorway is, for a moment, just a child — calm now, the song finished over it the way it always needed to be. Suzu, tears running freely, keeps humming softly, her hand pressed to the ribbon on her wrist. No banishing words. No explanation. Just the completed lullaby, and two who were stuck mid-phrase finally allowed to finish it together."}
+
+  # ── CLOSING RESOLUTION: the held note releases ─────────────────────────────
+  - page_id: ep001_p05
+    panels:
+      - {panel_id: ep001_012, beat_type: aftermath, intent: "the haunting passes; quiet returns",
+         scene: "The house is warm and still for the first time. The doors stand open and gentle. The music box winds down on its own — and on its last turn, it plays the lullaby all the way through, complete, no missing note. Then it falls quiet."}
+      - {panel_id: ep001_013, beat_type: closing_resolution, intent: "the motif resolves the way a held breath does",
+         scene: "Suzu sits in the calm nursery, the presence gone — not driven out, but laid to rest, finished. She hums the last bar of the lullaby once more to herself, soft and whole, and lets it go. The note she held for the whole house — and, somehow, for herself — finally completes and releases. Render the sound-motif settling, the final note coming gently to rest."}
+  - page_id: ep001_p06
+    panels:
+      - {panel_id: ep001_014, beat_type: image, intent: "release — carried entirely by sound",
+         scene: "Dawn, clear and pale over a calm sea, the storm spent. Suzu steps out onto the cliff path, lighter, the house quiet behind her. She unties the faded ribbon from her wrist and lets the wind take it out over the water — the held thing finally finished, let go, set down."}
+      - {panel_id: ep001_015, beat_type: close, intent: "MUSIC close — no moral, just the feeling that has changed",
+         scene: "Final panel, pulled wide and still. The small clearer on the bright cliff, the calm sea, the silent house. Closing music-caption, the musician's sign-off — a last whole bar of the lullaby, complete at last, and beneath it, small: '— and the song that could not end, ended, and let them both go.'"}
+
+wrapper_note: >-
+  Music-mode only. There is NO medium, NO elder, NO teaching line — the arc (grief held -> grief
+  released) is carried entirely by the phantom lullaby, the supernatural-mystery genre's native
+  music-vessel: a melody that recurs always one note short, RETURNS at the pivot when Suzu answers
+  instead of banishes, and at last COMPLETES and goes quiet. The reader is made to feel, not
+  instructed. If this were teacher-mode it would have a medium-elder who reads the cold and SAYS the
+  doctrine (the body's signal arrives before the apparition); here the dead just leave a song to be
+  finished. Interior topic (grief) never named on the page.

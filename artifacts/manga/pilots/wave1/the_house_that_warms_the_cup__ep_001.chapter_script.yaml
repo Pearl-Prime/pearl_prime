@@ -1,0 +1,113 @@
+# PILOT (wave1) — TEACHER-MODE manga (Tier-1 authored). One mode only: TEACHER. No music.
+# Genre: iyashikei. Wrapper (per MANGA_MODE_WRAPPER_DESIGN.md / GENRE_VESSEL_SKETCHES.md):
+# iyashikei teacher-vessel = THE TEA-HOUSE HANDS. An old keeper who never gives advice; she
+# only makes tea a certain way, and the doctrine is the ritual. ahjan's body_first_not_mind
+# is EARNED by WATCHING hands, never heard as words. Reader contract: taught. (Render gated.)
+
+schema_version: 1.0.0
+artifact_type: chapter_script_writer_handoff
+series_id: stillness_press__en_US__iyashikei__series01
+catalog_title: "The House That Warms the Cup"
+chapter_id: ep_001
+title: "The House That Warms the Cup — Episode 1: The Guest Who Could Not Stay Still"
+mode: teacher                         # XOR — never music
+manga_author: Yuki Slowlight          # teacher-archetype EI author (ahjan lineage)
+teacher_id: ahjan
+teacher_doctrine_anchor: body_first_not_mind
+brand_id: stillness_press
+genre: iyashikei
+topic: sleep                          # interior — never named on the page
+locale: en_US
+available_locales: [en_US, ja_JP, zh_CN, zh_TW, ko_KR]
+
+# Teacher-mode 3-beat skeleton (doctrine earned by WATCHING, not inserted):
+mode_beats:
+  wound: page_1-2     (the doctrine's ABSENCE — a guest who races the kettle, who cannot land)
+  turn:  page_4-5     (the teaching LANDS by watching the hands — warm the cup before the leaves)
+  renewal: page_6     (begin again — the guest sleeps; the ritual is hers now)
+
+main_characters:
+  - id: nao
+    name: Nao
+    role: >-
+      protagonist — a traveler who arrived three nights ago and has not slept. Walks the
+      veranda at all hours, helps too fast, finishes others' sentences. (Unstated: a body
+      that has forgotten how to be off-shift; never named on the page.)
+    visual_anchor: rumpled city coat kept on indoors; dark half-moons under the eyes; hands that always need a task; a train ticket folded and refolded into a soft grey square.
+  - id: okami
+    name: The Okami                   # iyashikei TEACHER-VESSEL — the tea-house hands
+    role: >-
+      the keeper of the mountain tea-house. The doctrine, as a pair of hands. Gives no
+      advice and asks no questions; she simply makes tea slowly, the same exact way, and
+      lets it be watched. body-first lives in her wrists, never in a line of wisdom.
+    visual_anchor: indigo apron worn pale at the pockets; silver hair in a low knot; unhurried, deliberate hands; a single chipped celadon cup she always warms first.
+  - id: the_kettle
+    name: The Old Kettle              # the recurring object — the ritual's heartbeat (an object, not a music-vessel)
+    role: a heavy iron kettle that takes its own slow time to come to the boil; it will not be rushed, and the whole house keeps its unhurried tempo.
+
+scene_palette:
+  primary: lamplit tatami amber + tea-smoke grey
+  secondary: cold blue pre-dawn through the shoji (the hours Nao cannot sleep)
+  accent: celadon green (the warmed cup; the first real morning)
+  turn_palette: low gold hearth-glow on two pairs of hands (pages 4-5)
+
+pages:
+  # ── WOUND: the guest who races the kettle, who cannot land ──────────────────
+  - page_id: ep001_p01
+    panels:
+      - {panel_id: ep001_001, beat_type: establishing, intent: "GENRE SHELL — iyashikei calm as a place the guest can't enter",
+         scene: "A small wooden tea-house on a misted mountain shoulder, lamps warm in the blue dusk, a thread of smoke rising perfectly straight. Everything here is slow. Inside, one figure paces the veranda, the only fast thing in the frame."}
+      - {panel_id: ep001_002, beat_type: character, intent: "the one who cannot be off-shift (doctrine's ABSENCE)",
+         scene: "NAO, coat still on indoors, refolds the soft grey train ticket, glances at a wall clock with no hands, straightens an already-straight cushion. Eyes ringed dark. The room is restful; Nao is not in it."}
+      - {panel_id: ep001_003, beat_type: spatial, intent: "racing the ritual — forcing speed onto a slow thing",
+         scene: "The OKAMI sets the old iron kettle on the coals. Nao darts in: 'I'll watch it — it'll go faster if—' and hovers over the kettle, willing it to boil. The kettle sits, supremely unbothered, in no hurry to heat."}
+  - page_id: ep001_p02
+    panels:
+      - {panel_id: ep001_004, beat_type: action, intent: "the body that has forgotten the off-switch",
+         scene: "Night deepens. Others sleep; we see Nao through three shoji panels at three hours — still up, sweeping a clean floor, wiping a dry counter, ticket in the apron now, helping helping helping. The mountain is silent. Nao's hands will not stop."}
+      - {panel_id: ep001_005, beat_type: collapse, intent: "the cost of never landing — wired past tiredness",
+         scene: "Pre-dawn, cold blue. Nao finally sits at the low table, but bolt upright, jaw tight, eyes wide open and burning. So tired the edges of the panel blur — and still, the body won't tip over into rest. It has forgotten the way down."}
+      - {panel_id: ep001_006, beat_type: quiet, intent: "the teacher offers no words — only a place to watch",
+         scene: "The Okami says nothing about any of it. She simply sets a second cushion at the table, across from her own place by the hearth, and begins — slowly — to lay out the tea things. An invitation made of motion, not speech."}
+
+  # ── The hands (teacher-vessel) — the ritual, watched ───────────────────────
+  - page_id: ep001_p03
+    panels:
+      - {panel_id: ep001_007, beat_type: character, intent: "the doctrine lives in the wrists, not a line",
+         scene: "Close on the OKAMI's hands at the hearth. She lifts the chipped celadon cup — and instead of reaching for the leaves, she pours the first hot water into the empty cup, swirls it once, warming the clay. She is in no hurry. Nao, across the table, watches, foot still jiggling."}
+      - {panel_id: ep001_008, beat_type: detail, intent: "warm the cup before the leaves — the body before the task (SHOWN, not told)",
+         scene: "She pours that first warming water away. Only now do the leaves go in. Steam climbs. She does not watch the clock; she watches the steam — waits for it to stop racing upward and begin to curl. Her shoulders are low. Her breath is slow. None of this is explained."}
+      - {panel_id: ep001_009, beat_type: response, intent: "the guest's body starts to copy what the mind hasn't understood",
+         scene: "Nao opens her mouth to ask why warm an empty cup — and stops. Without noticing, her own jiggling foot has gone still, matched to the rhythm of the pour. She is leaning in, watching the steam too. The question goes unasked."}
+
+  # ── TURN: the teaching lands through watching the hands ─────────────────────
+  - page_id: ep001_p04
+    panels:
+      - {panel_id: ep001_010, beat_type: revelation, intent: "BODY_FIRST_NOT_MIND — the cup, warmed first, holds the heat",
+         scene: "The Okami fills the warmed celadon cup and slides it across to Nao. Two hands receive it. Because the clay was warmed first, the tea inside stays hot, steady, unhurried — it does not shock, it does not cool fast. The warmth goes into Nao's cold hands and up her arms. She feels it before she thinks it."}
+      - {panel_id: ep001_011, beat_type: choice, intent: "the first unforced act — she lets the kettle take its time",
+         scene: "The old kettle, refilled, at last begins its low rolling boil. Nao's reflex is to jump up and lift it off. She half-rises. Then she watches the Okami, who does not move, who simply lets the kettle reach its own readiness in its own time. Nao, unsure, sits back down. She lets it be. She does nothing. It is the hardest thing she's done all night."}
+  - page_id: ep001_p05
+    panels:
+      - {panel_id: ep001_012, beat_type: turn, intent: "she stops racing the ritual and lets the body lead (warm first, then act)",
+         scene: "Wordless sequence: Nao, copying the hands she watched, warms her own empty cup before the second steeping. Swirl. Pour away. Her movements slow to the kettle's tempo. She is not being efficient. For the first time in days, she is just here, doing one warm thing at a time."}
+      - {panel_id: ep001_013, beat_type: release, intent: "the body finally allowed to find the way down",
+         scene: "The warmth, the slow hands, the unhurried tempo of the whole room — Nao's wide burning eyes soften. Her shoulders drop the rest of the way. A long exhale she didn't know she was holding. The grey train ticket slips, forgotten, from the apron pocket to the tatami."}
+      - {panel_id: ep001_014, beat_type: transformation, intent: "the off-switch was never missing — it was waiting to be watched into",
+         scene: "Nao's head tips, at last, toward her own shoulder. Her hands, for once, lie open and still around the warm cup. Behind the shoji, the cold blue is thinning. The Okami, without a word, draws a folded quilt up over the sleeping guest's shoulders and warms the next empty cup for no one but the morning."}
+
+  # ── RENEWAL: begin again ───────────────────────────────────────────────────
+  - page_id: ep001_p06
+    panels:
+      - {panel_id: ep001_015, beat_type: resolution, intent: "not fixed — finally landed",
+         scene: "Full warm dawn, celadon-gold across the tatami. Nao asleep at the low table, coat finally off and folded under her head, the chipped cup empty beside her open hand. The first guest to ever sleep in this house. The kettle, off the coals now, ticks as it cools."}
+      - {panel_id: ep001_016, beat_type: close, intent: "TEACHER close — body-first as a thing learned by watching, never a moral",
+         scene: "Final panel. Morning. Nao, rested, ties on a borrowed indigo apron and reaches for the chipped celadon cup. She warms the empty cup first — the way she watched — before she touches the leaves. No one taught her in words. Her hands simply know it now. Small caption, the Okami's hands, like a closing breath: 'Warm the cup. Then the rest can begin.'"}
+
+wrapper_note: >-
+  Teacher-mode only. The doctrine (body before task; let the slow thing be slow) is never a
+  self-help line; it is dramatized through the iyashikei vessel — a pair of hands making tea
+  a certain way, learned by WATCHING, not hearing. No musician, no song, no sound-motif carries
+  the arc. If this were music-mode it would have NO hands-as-teacher and NO ritual-doctrine — a
+  recurring chime/melody would carry the same sleep-arc wordlessly (see the_chime_that_keeps_the_season,
+  not authored here). Interior topic (sleep / a body that can't go off-shift) never named on the page.

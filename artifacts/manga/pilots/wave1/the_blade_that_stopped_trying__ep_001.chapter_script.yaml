@@ -1,0 +1,116 @@
+# PILOT (wave1) — TEACHER-MODE manga (Tier-1 authored). One mode only: TEACHER. No music.
+# Genre: action_battle. Wrapper (per MANGA_MODE_WRAPPER_DESIGN.md / GENRE_VESSEL_SKETCHES.md):
+# action teacher-vessel = THE SENSEI OF THE SETTLED STRIKE. The hardest blow comes from a quiet
+# body, not a braced one. The student loses every bout they FORCE and wins the one they FLOW —
+# doctrine earned in DEFEAT. ahjan's body_first_not_mind lineage; never spoken as advice (the
+# strike lands a beat before any line names it). Reader contract: taught. (Render gated.)
+
+schema_version: 1.0.0
+artifact_type: chapter_script_writer_handoff
+series_id: stillness_press__en_US__action_battle__series01
+catalog_title: "The Blade That Stopped Trying"
+chapter_id: ep_001
+title: "The Blade That Stopped Trying — Episode 1: The Strike You Cannot Force"
+mode: teacher                         # XOR — never music
+manga_author: Kaito Stillwater         # teacher-archetype EI author (ahjan lineage)
+teacher_id: ahjan
+teacher_doctrine_anchor: body_first_not_mind
+brand_id: stillness_press
+genre: action_battle
+topic: courage                        # interior — never named on the page
+locale: en_US
+available_locales: [en_US, ja_JP, zh_CN, zh_TW, ko_KR]
+
+# Teacher-mode 3-beat skeleton (doctrine earned in DEFEAT, then flow — not inserted):
+mode_beats:
+  wound: page_1-2     (the doctrine's ABSENCE — the student forces every strike and loses every bout)
+  turn:  page_4-5     (the teaching LANDS in the duel — the settled body strikes truer than the braced one)
+  renewal: page_6     (begin again — courage is not the brace; it's the body that trusts itself)
+
+main_characters:
+  - id: jun
+    name: Jun
+    role: >-
+      protagonist — a fierce young swordfighter who powers through everything by sheer will,
+      muscling every cut, and keeps losing to opponents she's faster than. (Unstated: courage
+      confused with bracing; the body clenched so hard it can't move true. Never named on the page.)
+    visual_anchor: wiry frame coiled tight as a spring; jaw locked, shoulders up by the ears mid-fight; a notched practice blade gripped white; bandaged knuckles from over-training.
+  - id: sensei
+    name: The Sensei                   # action TEACHER-VESSEL — the settled strike
+    role: >-
+      the old master of the dojo, the doctrine as a fighter. Strikes from total stillness;
+      his hardest blow looks effortless. Never gives Jun a pep-talk; he simply DEFEATS her
+      from ease, again and again, until the body understands. Force-loses, flow-wins lives in
+      his blade, never in advice.
+    visual_anchor: plain grey gi, relaxed stance, hands loose, breath visibly slow; a wooden bokken he barely seems to swing; eyes calm even mid-clash.
+  - id: the_mirror_bout
+    name: The Sparring Circle          # the recurring arena — where forcing is exposed
+    role: the worn dojo sparring ring; through the chapter it is the place Jun's force is repeatedly, patiently undone.
+
+scene_palette:
+  primary: dawn dojo — pale wood, long shadows, dust in light-shafts
+  secondary: hot red-orange (Jun's forced exertion; the braced strike)
+  accent: cool steel-blue + white (the settled strike; the quiet that wins)
+  turn_palette: clean white morning light on a still body (pages 4-5)
+
+pages:
+  # ── WOUND: every forced strike loses ───────────────────────────────────────
+  - page_id: ep001_p01
+    panels:
+      - {panel_id: ep001_001, beat_type: establishing, intent: "GENRE SHELL — action dojo; the arena of the strike",
+         scene: "A mountain dojo at dawn, wooden floor scarred by ten thousand bouts, dust hanging in shafts of pale light, the sparring circle worn into the boards. Charged, disciplined, ready for battle."}
+      - {panel_id: ep001_002, beat_type: character, intent: "courage-as-brace (doctrine's ABSENCE)",
+         scene: "JUN explodes across the ring at a training dummy — a flurry of furious cuts, shoulders up at her ears, jaw clamped, every muscle screaming. Hot red exertion lines. Fast, powerful, and somehow always a half-beat off. She hits hard and true-looking, and yet the strikes never quite land where she aims."}
+      - {panel_id: ep001_003, beat_type: spatial, intent: "the harder she tries, the worse it gets",
+         scene: "Close: white-knuckled grip, locked wrist, the blade actually fighting her own braced arm. The tighter she squeezes for power, the more the cut wobbles. She grits her teeth and squeezes HARDER — and the strike goes wider still."}
+  - page_id: ep001_p02
+    panels:
+      - {panel_id: ep001_004, beat_type: action, intent: "the duel — force meets ease",
+         scene: "Jun challenges THE SENSEI in the circle. She comes in like a storm — full power, full speed, everything she has. He stands almost completely still, breath slow, blade low. Her hot-red flurry crashes toward his cool stillness."}
+      - {panel_id: ep001_005, beat_type: collapse, intent: "forcing loses — the braced body is read and undone",
+         scene: "One unhurried motion: the Sensei steps inside her forced swing — because a braced strike telegraphs, commits, can't change — and taps the bokken to her chest. She's beaten before her own cut finishes. She lands hard on the boards, stunned, blade skittering. She was faster. She still lost. She has no idea why."}
+      - {panel_id: ep001_006, beat_type: quiet, intent: "the teacher gives no pep-talk — only the demonstration repeated",
+         scene: "Jun, furious, demands the secret, the technique, the trick. The Sensei offers no wisdom. He simply lowers his blade, breathes once — slow, his whole body settling like water finding level — and gestures: again. He will teach her with his body, not his mouth."}
+
+  # ── The Sensei (teacher-vessel) — the settled strike, shown ────────────────
+  - page_id: ep001_p03
+    panels:
+      - {panel_id: ep001_007, beat_type: action, intent: "she's beaten again — but now she's watching HOW",
+         scene: "Second bout. Same result — she forces, he flows, she's tapped out in one move and hits the floor. But this time, on the way down, she SEES it: his shoulders never rose, his grip stayed loose, his breath never caught. His power came from a body that wasn't fighting itself."}
+      - {panel_id: ep001_008, beat_type: detail, intent: "the settled body strikes truer (SHOWN on the master)",
+         scene: "Close on the SENSEI in the instant of his counter: loose hand, dropped shoulders, slow breath — and from that stillness the bokken moves faster and truer than all of Jun's fury. The hardest strike from the quietest body. None of it is explained. Jun stares from the floor, the contradiction cracking her open."}
+      - {panel_id: ep001_009, beat_type: response, intent: "the student starts to feel her own brace as the problem",
+         scene: "Jun, breathing hard on the boards, becomes aware — for the first time — of her own clamped jaw, her own shoulders jammed up, her own grip crushing the hilt. She's been fighting her own body this whole time. She loosens her grip, just slightly. The blade sits differently in her hand. She doesn't have words for it yet."}
+
+  # ── TURN: the teaching lands — the settled strike ──────────────────────────
+  - page_id: ep001_p04
+    panels:
+      - {panel_id: ep001_010, beat_type: revelation, intent: "BODY_FIRST_NOT_MIND — drop the brace, the body knows the cut",
+         scene: "Final bout. Jun, instead of winding up tighter, does the opposite — she exhales, drops her shoulders, lets her grip go soft, lets her jaw unclench. Clean white light. She stops trying to force the strike. She lets her body, finally unbraced, simply be ready. The Sensei, across the ring, sees it and almost smiles."}
+      - {panel_id: ep001_011, beat_type: choice, intent: "the first unforced strike — courage as trust, not tension",
+         scene: "The Sensei comes in. And Jun does not lunge to overpower him. She waits in her settled body — terrifying, to not brace — and at the last instant her arm moves on its own, loose and true, the strike flowing out of stillness before her mind decides to throw it. The body strikes a full beat before the thought. No line names it. It just lands."}
+  - page_id: ep001_p05
+    panels:
+      - {panel_id: ep001_012, beat_type: turn, intent: "flow wins — the relaxed strike lands where force never could",
+         scene: "The settled strike connects — clean, precise, effortless, the bokken stopping a hair from the Sensei's gi. The first time she's touched him. It came not from more power but from less fighting. Cool steel-blue lines, no hot red. She is stunned by how easy true was."}
+      - {panel_id: ep001_013, beat_type: release, intent: "courage reframed — the body trusted instead of clenched",
+         scene: "Jun lowers the blade, chest heaving, but her shoulders stay DOWN now. The fear she always braced against — she walked straight into the strike without armoring, and survived, and won. Her bandaged hand, for once, lies open and loose at her side."}
+      - {panel_id: ep001_014, beat_type: transformation, intent: "the brace was never the courage — it was the thing in the way",
+         scene: "Wide: master and student facing each other across the worn circle, both still, both breathing slow, blades lowered. Dust turning gold in the light. Jun gets it now in her body — the bravest thing was to stop forcing. The Sensei has said almost nothing all morning."}
+
+  # ── RENEWAL: begin again ───────────────────────────────────────────────────
+  - page_id: ep001_p06
+    panels:
+      - {panel_id: ep001_015, beat_type: resolution, intent: "not fixed — finally flowing",
+         scene: "Full morning gold in the dojo. Jun alone in the circle now, practicing slow — each cut flowing out of a settled, unbraced body, shoulders low, breath even. The notched blade moves like it finally belongs to her. The hot red is gone."}
+      - {panel_id: ep001_016, beat_type: close, intent: "TEACHER close — courage as the unforced body, never a moral",
+         scene: "Final panel. A new challenger steps into the circle to face Jun. Before she raises her blade, Jun does the one thing she learned: she exhales, drops her shoulders, lets the grip go soft — settling first, fighting second. She learned it by losing, not by being told. Small caption, the Sensei's voice, like a closing breath: 'The strike was never in the arm. Stop forcing — and let the body answer.'"}
+
+wrapper_note: >-
+  Teacher-mode only. The doctrine (the settled body strikes truer than the braced one; lose by
+  forcing, win by flowing) is never a self-help line — it is dramatized through the action_battle
+  vessel: a sensei who DEFEATS Jun from ease until her body understands, with the true strike landing
+  a full beat before any line names it. Courage is shown as the unforced body, never preached. No
+  musician, no song, no sound-motif. If this were music-mode it would have NO sensei and NO doctrine —
+  the fighter's own pulse (ragged when forcing, steady when settled) would score the turn wordlessly.
+  Interior topic (courage / bracing mistaken for strength) never named on the page.

@@ -1,0 +1,115 @@
+# PILOT (wave1) — MUSIC-MODE manga (Tier-1 authored). One mode only: MUSIC. No teacher, no doctrine.
+# Genre: sci_fi_cyberpunk. Wrapper (per MANGA_MODE_WRAPPER_DESIGN.md / GENRE_VESSEL_SKETCHES.md):
+# music-vessel = THE PIRATE FREQUENCY, THE SOUL IN THE HUM. A filtered-out signal the city scrubbed;
+# re-finding it is re-finding the body the upgrades muted. The settling is FELT as the static parting
+# to let one warm analog tone through. The reader is made to FEEL, never taught. Nothing is explained.
+# (Render gated.)
+
+schema_version: 1.0.0
+artifact_type: chapter_script_writer_handoff
+series_id: music_mode__en_US__sci_fi_cyberpunk__series01
+catalog_title: "The Frequency They Filtered Out"
+chapter_id: ep_001
+title: "The Frequency They Filtered Out — Episode 1: The Tone Beneath the Static"
+mode: music                           # XOR — never teacher
+manga_author: Neon Aoki              # MUSICIAN-archetype EI author (NOT a teacher)
+musician_id: neon_aoki
+teacher_id: null                      # none — music-mode carries no doctrine
+genre: sci_fi_cyberpunk
+felt_topic: overthinking              # interior, FELT through sound — never named, never taught
+locale: en_US
+available_locales: [en_US, ja_JP, zh_CN, zh_TW, ko_KR]
+
+# Music-mode 3-beat skeleton (the pirate frequency carries the arc — open / mid / close):
+mode_beats:
+  opening_motif: page_2   (the sound enters — one warm analog tone bleeding through the city's scrubbed feed)
+  mid_recurrence: page_4  (bestseller beat — drowning the noise with MORE processing fails; the tone RETURNS and she tunes to it instead of overriding)
+  closing_resolution: page_6  (the static parts; the one warm tone holds clear — her own breath/body, unmuted)
+
+main_characters:
+  - id: vex
+    name: Vex
+    role: >-
+      protagonist — a top-tier netrunner whose neural augments optimize, predict, and never
+      stop calculating; she hasn't heard silence in years. Loops every choice ten thousand
+      times. (Unstated, never taught: a mind that won't stop running because the body got muted;
+      here it is carried by a TONE, not a lesson.)
+    visual_anchor: chrome jack ports along the jaw; HUD reflections crawling across her eyes; fingers always twitching through invisible menus; a heartbeat readout she's stopped feeling, only reading.
+  - id: the_signal
+    name: The Signal                   # the pirate frequency — the MUSIC-VESSEL itself
+    role: >-
+      not a person; an old analog tone the city's noise-filters scrub from every feed. One warm
+      sustained note, organic and un-optimized, surfacing in dead channels and broken speakers.
+      It is not a message to decode. It is the sound under all the processing — and it sounds, somehow, like a slow breath.
+    visual_anchor: never seen, only heard — rendered as a hand-lettered tone-motif, a single warm analog waveform threading up through harsh digital static; old speakers that hum when she passes; the HUD glitching warm-gold for a beat.
+  - id: the_overclock
+    name: The Overclock               # the recurring stakes — the city's processing she's drowning in
+    role: the relentless data-storm of the net; through the chapter it is the noise she keeps trying to out-process instead of quiet.
+
+scene_palette:
+  primary: cyberpunk night — wet neon, holo-glare, black rain
+  secondary: harsh digital cyan-magenta (the overclocked feed; the static)
+  accent: warm analog gold-amber (the pirate tone; the body, unmuted)
+  resolution_palette: pre-dawn grey, neon off, real sky (page 6 only)
+
+pages:
+  # ── The problem: she out-processes the noise and drowns ────────────────────
+  - page_id: ep001_p01
+    panels:
+      - {panel_id: ep001_001, beat_type: establishing, intent: "GENRE SHELL — cyberpunk city; the always-on feed",
+         scene: "A vertical neon megacity in black rain, holo-ads screaming, data-streams crawling up every surface. No silence anywhere. Sound design: a dense wall of digital chatter, notification pings, processing whine. Overwhelming, sleepless, electric."}
+      - {panel_id: ep001_002, beat_type: character, intent: "the mind that won't stop calculating",
+         scene: "VEX jacked into a back-alley terminal, HUD menus cascading across her eyes, fingers twitching through ten parallel calculations. She's reading her own heartbeat off a readout instead of feeling it. She hasn't heard her own thoughts under the processing in years, and she's stopped noticing the difference."}
+      - {panel_id: ep001_003, beat_type: failure, intent: "more processing makes it worse (overthinking, shown not named)",
+         scene: "A job goes sideways — a security spike floods her feed. Vex responds the only way she knows: she OVERCLOCKS, spins up more processes, tries to out-calculate the chaos. The HUD multiplies into a blizzard of harsh cyan-magenta static, predictions stacking on predictions, until she can't act at all, frozen, drowning in her own noise. She rips the jack out, gasping, head splitting."}
+
+  # ── OPENING MOTIF: the pirate tone enters ──────────────────────────────────
+  - page_id: ep001_p02
+    panels:
+      - {panel_id: ep001_004, beat_type: quiet, intent: "off the grid for a moment; the feed drops out",
+         scene: "A dead spot under the freeway — an old maintenance alcove the city's signals don't reach. Vex slumps against cracked concrete, augments quiet for once, HUD dimmed to almost nothing. The roar of the feed is, for the first time in forever, gone."}
+      - {panel_id: ep001_005, beat_type: opening_motif, intent: "MUSIC-VESSEL enters — one warm analog tone under the static; felt, never explained",
+         scene: "From a busted speaker grille in the wall, under the last hiss of dead-channel static, a SOUND — one warm, sustained, analog tone. Un-optimized, organic, ancient. It rises and holds, simple and round, the kind of sound the city scrubs out of everything. Vex's breath catches, because some buried part of her knows it — it sounds like a slow exhale, like a body she half-remembers having. Render it as a hand-lettered tone-motif: a single warm gold waveform threading up through the harsh static, holding, unhurried."}
+      - {panel_id: ep001_006, beat_type: response, intent: "the tone reaches the body the upgrades muted",
+         scene: "Vex goes still. Without a menu, without deciding, her twitching fingers stop — and her own chest rises and falls, slow, matching the held tone. For one breath she isn't reading her heartbeat off a readout; she's feeling it. She doesn't analyze the signal. She just lets the one warm tone be there. Almost silent: the analog note, and her own real breath."}
+
+  # ── Escalation: back in the storm, she over-processes again ────────────────
+  - page_id: ep001_p03
+    panels:
+      - {panel_id: ep001_007, beat_type: action, intent: "stakes — the genre's engine",
+         scene: "Klaxons in the feed. A corporate ICE-wall slams down — Vex is locked in a hostile system, a hunter-program closing on her position, seconds to break out or get fried. She jacks back in hard, the full data-storm crashing over her at once."}
+      - {panel_id: ep001_008, beat_type: crisis, intent: "under pressure she over-clocks again — the overthinking peaks",
+         scene: "Cornered, Vex panics and does it again — overclocks everything, spins up every process, tries to out-think the hunter with brute calculation. The static blizzard whites out her whole HUD, predictions screaming over predictions, total noise, no clarity. She's locked up, frozen at the exact moment she needs to move. The hunter-program closes in."}
+
+  # ── MID RECURRENCE (bestseller beat): the tone returns, transformed ────────
+  - page_id: ep001_p04
+    panels:
+      - {panel_id: ep001_009, beat_type: turn, intent: "she stops over-processing — and tunes to the TONE, not the storm",
+         scene: "About to be caught, out of compute, Vex does the unthinkable for a runner — she stops spinning up processes. She closes her eyes inside the system, and instead of out-calculating, she reaches for the one thing under all of it: the warm analog tone from the dead spot. She tunes to it. She lets her own slow breath find it again."}
+      - {panel_id: ep001_010, beat_type: mid_recurrence, intent: "BESTSELLER BEAT — the tone RETURNS, and the static PARTS around it",
+         scene: "The instant she tunes to the tone, the screaming static doesn't get fought — it PARTS. The blizzard of cyan-magenta noise opens, and through it threads the warm gold waveform from page 2, clear and strong, and in its clarity the one move she needs is suddenly, simply, obvious. Render the tone-motif cutting cleanly through the static, the harsh digital noise bending away from the single warm analog line. She doesn't out-think the system. She quiets, and the answer is just there."}
+      - {panel_id: ep001_011, beat_type: flow, intent: "from over-processing to clarity — felt, never explained",
+         scene: "Vex moves — one clean, unhurried action through the gap the tone opened — slips the hunter, drops the ICE-wall, breaks free. No frantic blizzard of menus, just one sure motion riding the warm clear signal. Her breathing is slow. She isn't calculating. For the first time in years, she's just doing the next thing, in time with that one held tone."}
+
+  # ── CLOSING RESOLUTION: the static parts for good ──────────────────────────
+  - page_id: ep001_p05
+    panels:
+      - {panel_id: ep001_012, beat_type: aftermath, intent: "the threat passes; the noise drops",
+         scene: "Out. Vex slumps back in the real world, jack popped, HUD powering down to dark. The city still roars outside — but inside her augments, for once, she lets the processes spin all the way down instead of stacking new ones. Quiet, chosen."}
+      - {panel_id: ep001_013, beat_type: closing_resolution, intent: "the tone resolves into her own steady breath",
+         scene: "Vex sits in the dead alcove again, the busted speaker still threading its one warm tone. She breathes with it, slow — and the tone settles, thinning until it's not coming from the speaker at all but from her own steady, unmuted body, her own breath the warm analog line now. Render the tone-motif settling, the warm waveform coming gently to rest in time with her breathing."}
+  - page_id: ep001_p06
+    panels:
+      - {panel_id: ep001_014, beat_type: image, intent: "the body re-found — carried entirely by sound",
+         scene: "Pre-dawn. Vex up on a rooftop, the neon finally dimming, a real grey sky behind the towers for once. She powers her HUD all the way OFF — voluntarily blind to the feed — and just stands, breathing the cold air, feeling her own heartbeat without reading it. The static gone."}
+      - {panel_id: ep001_015, beat_type: close, intent: "MUSIC close — no moral, just the feeling that has changed",
+         scene: "Final panel, pulled wide and still. The small runner on the high roof, the muted city, the pale real dawn. Closing music-caption, the musician's sign-off — a last warm analog tone holding clear, and beneath it, small: '— and under all the noise they sold her, the one true tone had been her own breath the whole time.'"}
+
+wrapper_note: >-
+  Music-mode only. There is NO AI-mentor, NO wetware-elder, NO teaching line — the arc (overthinking
+  noise -> embodied clarity) is carried entirely by the pirate frequency, the cyberpunk genre's native
+  music-vessel: one warm analog tone the city scrubs, surfacing in a dead spot, RETURNING at the pivot
+  when Vex stops out-processing and tunes to it, and at last settling into her own unmuted breath. The
+  reader is made to feel, not instructed. If this were teacher-mode it would have an old hacker who SAYS
+  the doctrine (the meat knows what the augments override); here the signal just bleeds through and the
+  body remembers. Interior topic (overthinking / a mind that won't stop) never named on the page.
