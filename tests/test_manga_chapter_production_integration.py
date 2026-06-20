@@ -149,5 +149,21 @@ def test_chapter_production_replay_to_page_png(tmp_path: Path) -> None:
     assert page_png.is_file()
     from PIL import Image
 
+    # PR #1709 replaced the legacy edge-to-edge strip composer (which tiled the
+    # two 1x1 replay stubs into a 2x1 PNG) with the FRAME engine: every page is
+    # now a full framed manga page (panel borders + gutters) sized from the grid
+    # library's page_defaults (default 2:3 portrait, 2400px long edge -> 1600x2400).
+    # Derive the expected size from those defaults so this tracks the engine
+    # contract instead of going stale on a config tweak.
+    from phoenix_v4.manga.chapter.page_frame import (
+        _page_pixel_size,
+        load_grid_library,
+    )
+
+    _page_defaults = load_grid_library().get("page_defaults") or {}
+    expected_size = _page_pixel_size(
+        str(_page_defaults.get("page_aspect", "2:3")),
+        int(_page_defaults.get("long_edge_px", 2400)),
+    )
     with Image.open(page_png) as im:
-        assert im.size == (2, 1)
+        assert im.size == expected_size

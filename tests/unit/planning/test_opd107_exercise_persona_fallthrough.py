@@ -239,8 +239,12 @@ def patch_atom_loaders(monkeypatch):
             real = real_load_teacher(tid) or {}
             return _wrap_teacher_bank_with_exercise_override(real, teacher_exercise)
 
-        def fake_load_persona(pid, topic, locale=None):
-            real = real_load_persona(pid, topic, locale=locale) or {}
+        # engine= added by #1701 (engine-aware atom routing): mirror the real
+        # _load_persona_atoms(persona_id, topic_id, locale=None, engine=None)
+        # signature and forward engine through so the EXERCISE-override wrapper
+        # sits on top of the same engine-aware base pool production loads.
+        def fake_load_persona(pid, topic, locale=None, engine=None):
+            real = real_load_persona(pid, topic, locale=locale, engine=engine) or {}
             return _wrap_persona_bank_with_exercise_override(real, persona_exercise)
 
         def fake_practice_library(chapter_index, topic_id, persona_id, seed):  # noqa: ARG001

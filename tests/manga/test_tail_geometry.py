@@ -20,9 +20,26 @@ from phoenix_v4.manga.chapter.tail_geometry import (  # type: ignore
 
 
 def test_hint_corners_round_trip_coordinates():
+    # The bare zone fallback targets the speaker's FACE band (upper part of the
+    # zone), not the panel midline — a tail to y=0.55*ph landed on the torso /
+    # knees (the operator's "tail points at the knees" bug). top_right now
+    # resolves to the head/upper-chest band (y≈0.34) on the speaker's side.
     mouth = _hint_to_mouth("top_right", 1000, 800)
-    assert mouth[1] == int(800 * 0.55)
-    assert mouth[0] >= 750
+    assert mouth[0] >= 750  # speaker's (right) side
+    assert mouth[1] == int(800 * 0.34)  # face band, well above the midline
+    assert mouth[1] < int(800 * 0.45)
+
+
+def test_hint_fallback_never_targets_panel_midline():
+    # Regression guard for the "tail to the torso/knees" bug across all zones:
+    # no zone fallback may land on or below the vertical midline of the panel.
+    ph = 1000
+    for zone in (
+        "top_left", "top_right", "top_center",
+        "center_left", "center_right",
+    ):
+        _, my = _hint_to_mouth(zone, 1000, ph)
+        assert my < ph * 0.5, f"{zone} fallback {my} is at/below midline (torso)"
 
 
 def test_mouth_anchor_fraction_positions():
