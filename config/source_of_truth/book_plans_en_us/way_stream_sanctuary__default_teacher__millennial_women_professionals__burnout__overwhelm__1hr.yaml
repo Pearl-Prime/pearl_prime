@@ -1,0 +1,60 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__millennial_women_professionals__burnout__overwhelm__1hr
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__millennial_women_professionals__burnout__1hr.yaml
+store_series:
+  id: way_stream_sanctuary__millennial_women_professionals__steady_ground__1hr
+  name: Steady Ground — for Professional Women (One-Hour)
+installment_number: 2
+engine: overwhelm
+duration: one_hour_book
+runtime_format_id: one_hour_book
+structural_format_id: F006
+target_word_range:
+- 8000
+- 10000
+target_audio_minutes: 60
+title: 'After the Flame: When Everything Is Too Much'
+subtitle: A One-Hour Burnout Reset for Professional Women
+cover_tagline: A One-Hour Burnout Reset for Professional Women
+description:
+  short_blurb: A One-Hour Burnout Reset for Professional Women The one-hour edition.
+  long_description: 'After the Flame: When Everything Is Too Much
+
+
+    The one-hour edition: the core of the burnout work for professional women, in
+    a single sitting. Recognition, descent, integration — no filler. Book 2 of the
+    one-hour Professional Women burnout series.'
+keywords:
+  primary:
+  - burnout recovery
+  - work burnout
+  - exhaustion
+  - chronic stress
+  - nervous system recovery
+  secondary:
+  - professional women
+  - burnout for professional women
+  - one hour
+bisac_codes:
+- SEL027000
+- BUS041000
+- SEL016000
+target_price:
+  ebook_usd: 3.99
+  audible_usd: 6.99
+  paperback_usd: 9.99
+author_positioning:
+  teacher: default_teacher
+  brand: way_stream_sanctuary
+comp_titles:
+- Burnout (Nagoski)
+- Laziness Does Not Exist (Price)
+- Do Nothing (Headlee)
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv

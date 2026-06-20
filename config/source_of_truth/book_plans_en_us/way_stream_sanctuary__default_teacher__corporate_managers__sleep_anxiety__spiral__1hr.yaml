@@ -1,0 +1,60 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__corporate_managers__sleep_anxiety__spiral__1hr
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__corporate_managers__sleep_anxiety__1hr.yaml
+store_series:
+  id: way_stream_sanctuary__corporate_managers__restless_mind__1hr
+  name: Quiet the Restless Mind — for Managers (One-Hour)
+installment_number: 3
+engine: spiral
+duration: one_hour_book
+runtime_format_id: one_hour_book
+structural_format_id: F006
+target_word_range:
+- 8000
+- 10000
+target_audio_minutes: 60
+title: 'The 3am Mind: Escaping the Mental Loop'
+subtitle: A One-Hour Sleep Reset for Managers
+cover_tagline: A One-Hour Sleep Reset for Managers
+description:
+  short_blurb: A One-Hour Sleep Reset for Managers The one-hour edition.
+  long_description: 'The 3am Mind: Escaping the Mental Loop
+
+
+    The one-hour edition: the core of the sleep anxiety work for managers, in a single
+    sitting. Recognition, descent, integration — no filler. Book 3 of the one-hour
+    Managers sleep anxiety series.'
+keywords:
+  primary:
+  - insomnia help
+  - sleep anxiety
+  - racing thoughts at night
+  - bedtime anxiety
+  - can't sleep
+  secondary:
+  - managers
+  - sleep anxiety for managers
+  - one hour
+bisac_codes:
+- SEL027000
+- HEA046000
+- PSY022000
+target_price:
+  ebook_usd: 3.99
+  audible_usd: 6.99
+  paperback_usd: 9.99
+author_positioning:
+  teacher: default_teacher
+  brand: way_stream_sanctuary
+comp_titles:
+- Say Good Night to Insomnia (Jacobs)
+- The Sleep Solution (Winter)
+- Why We Sleep (Walker)
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv

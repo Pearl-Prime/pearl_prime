@@ -1,0 +1,61 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__gen_x_sandwich__anxiety__overwhelm__1hr
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__gen_x_sandwich__anxiety__1hr.yaml
+store_series:
+  id: way_stream_sanctuary__gen_x_sandwich__calm_alarm__1hr
+  name: Calm the Alarm — for the Sandwich Generation (One-Hour)
+installment_number: 4
+engine: overwhelm
+duration: one_hour_book
+runtime_format_id: one_hour_book
+structural_format_id: F006
+target_word_range:
+- 8000
+- 10000
+target_audio_minutes: 60
+title: 'The Alarm Is Lying: When Everything Is Too Much'
+subtitle: A One-Hour Anxiety Reset for the Sandwich Generation
+cover_tagline: A One-Hour Anxiety Reset for the Sandwich Generation
+description:
+  short_blurb: A One-Hour Anxiety Reset for the Sandwich Generation The one-hour edition.
+  long_description: 'The Alarm Is Lying: When Everything Is Too Much
+
+
+    The one-hour edition: the core of the anxiety work for the sandwich generation,
+    in a single sitting. Recognition, descent, integration — no filler. Book 4 of
+    the one-hour the Sandwich Generation anxiety series.'
+keywords:
+  primary:
+  - anxiety relief
+  - anxiety help
+  - calm anxiety
+  - overcoming anxiety
+  - nervous system regulation
+  - panic relief
+  secondary:
+  - the sandwich generation
+  - anxiety for the sandwich generation
+  - one hour
+bisac_codes:
+- SEL027000
+- SEL024000
+- PSY022000
+target_price:
+  ebook_usd: 3.99
+  audible_usd: 6.99
+  paperback_usd: 9.99
+author_positioning:
+  teacher: default_teacher
+  brand: way_stream_sanctuary
+comp_titles:
+- Dare (McDonagh)
+- The Anxiety and Phobia Workbook (Bourne)
+- Unwinding Anxiety (Brewer)
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv

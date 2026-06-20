@@ -1,0 +1,61 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__first_responders__anxiety__watcher__1hr
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__first_responders__anxiety__1hr.yaml
+store_series:
+  id: way_stream_sanctuary__first_responders__calm_alarm__1hr
+  name: Calm the Alarm — for First Responders (One-Hour)
+installment_number: 7
+engine: watcher
+duration: one_hour_book
+runtime_format_id: one_hour_book
+structural_format_id: F006
+target_word_range:
+- 8000
+- 10000
+target_audio_minutes: 60
+title: 'The Alarm Is Lying: The Observer''s Mind'
+subtitle: A One-Hour Anxiety Reset for First Responders
+cover_tagline: A One-Hour Anxiety Reset for First Responders
+description:
+  short_blurb: A One-Hour Anxiety Reset for First Responders The one-hour edition.
+  long_description: 'The Alarm Is Lying: The Observer''s Mind
+
+
+    The one-hour edition: the core of the anxiety work for first responders, in a
+    single sitting. Recognition, descent, integration — no filler. Book 7 of the one-hour
+    First Responders anxiety series.'
+keywords:
+  primary:
+  - anxiety relief
+  - anxiety help
+  - calm anxiety
+  - overcoming anxiety
+  - nervous system regulation
+  - panic relief
+  secondary:
+  - first responders
+  - anxiety for first responders
+  - one hour
+bisac_codes:
+- SEL027000
+- SEL024000
+- PSY022000
+target_price:
+  ebook_usd: 3.99
+  audible_usd: 6.99
+  paperback_usd: 9.99
+author_positioning:
+  teacher: default_teacher
+  brand: way_stream_sanctuary
+comp_titles:
+- Dare (McDonagh)
+- The Anxiety and Phobia Workbook (Bourne)
+- Unwinding Anxiety (Brewer)
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv

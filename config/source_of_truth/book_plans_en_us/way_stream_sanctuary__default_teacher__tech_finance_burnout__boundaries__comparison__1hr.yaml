@@ -1,0 +1,62 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__tech_finance_burnout__boundaries__comparison__1hr
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__tech_finance_burnout__boundaries__1hr.yaml
+store_series:
+  id: way_stream_sanctuary__tech_finance_burnout__worth_limits__1hr
+  name: Worth & Limits — for Tech & Finance Professionals (One-Hour)
+installment_number: 1
+engine: comparison
+duration: one_hour_book
+runtime_format_id: one_hour_book
+structural_format_id: F006
+target_word_range:
+- 8000
+- 10000
+target_audio_minutes: 60
+title: 'The Line You Never Drew: When Other People''s Success Feels Like Your Failure'
+subtitle: A One-Hour Boundaries Reset for Tech & Finance Professionals
+cover_tagline: A One-Hour Boundaries Reset for Tech & Finance Professionals
+description:
+  short_blurb: A One-Hour Boundaries Reset for Tech & Finance Professionals The one-hour
+    edition.
+  long_description: 'The Line You Never Drew: When Other People''s Success Feels Like
+    Your Failure
+
+
+    The one-hour edition: the core of the boundaries work for tech & finance professionals,
+    in a single sitting. Recognition, descent, integration — no filler. Book 1 of
+    the one-hour Tech & Finance Professionals boundaries series.'
+keywords:
+  primary:
+  - setting boundaries
+  - how to say no
+  - people pleasing
+  - healthy boundaries
+  - stop people pleasing
+  secondary:
+  - tech & finance professionals
+  - boundaries for tech & finance professionals
+  - one hour
+bisac_codes:
+- SEL031000
+- SEL024000
+- FAM000000
+target_price:
+  ebook_usd: 3.99
+  audible_usd: 6.99
+  paperback_usd: 9.99
+author_positioning:
+  teacher: default_teacher
+  brand: way_stream_sanctuary
+comp_titles:
+- Set Boundaries Find Peace (Tawwab)
+- Boundaries (Cloud & Townsend)
+- The Disease to Please (Braiker)
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv

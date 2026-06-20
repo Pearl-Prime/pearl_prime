@@ -1,0 +1,62 @@
+series_plan_schema: 1.0.0
+created_at: '2026-06-20'
+locale: en_US
+book_id_prefix: way_stream_sanctuary__default_teacher__corporate_managers__courage__1hr
+brand: way_stream_sanctuary
+teacher: default_teacher
+persona: corporate_managers
+topic: courage
+teacher_topic_score: null
+teacher_persona_score: null
+composite_fit: 0.7
+arc:
+  installment_1:
+    book_id: way_stream_sanctuary__default_teacher__corporate_managers__courage__false_alarm__1hr
+    engine: false_alarm
+    master_arc: config/source_of_truth/master_arcs/corporate_managers__courage__false_alarm__F006.yaml
+    duration: one_hour_book
+  installment_2:
+    book_id: way_stream_sanctuary__default_teacher__corporate_managers__courage__shame__1hr
+    engine: shame
+    master_arc: config/source_of_truth/master_arcs/corporate_managers__courage__shame__F006.yaml
+    duration: one_hour_book
+  installment_3:
+    book_id: way_stream_sanctuary__default_teacher__corporate_managers__courage__spiral__1hr
+    engine: spiral
+    master_arc: config/source_of_truth/master_arcs/corporate_managers__courage__spiral__F006.yaml
+    duration: one_hour_book
+reader_promise_family: One-hour editions across the engines of courage for Managers.
+bestseller_hook_family: recognition_descent
+emotional_engine: courage_recognition
+comp_series:
+- Daring Greatly (Brown)
+- Feel the Fear and Do It Anyway (Jeffers)
+- The Gifts of Imperfection (Brown)
+platform_strategy:
+  primary:
+  - kdp_ebook
+  - audible
+  secondary:
+  - apple_books
+  - google_play
+  - spotify_audiobooks
+  launch_platform: kdp_ebook
+  cadence:
+    release_spacing_days: 14
+    max_books_per_brand_per_month: 2
+reader_avatar:
+  age: any
+  where_they_are: short on time, needs the essentials fast
+  what_they_need: The core of courage work in one sitting.
+  what_they_avoid: Filler.
+series_voice_markers:
+  register: grounded, secular, somatic — plain and warm
+  sentence_rhythm: calm, unhurried
+  metaphor_family: body, breath, weather, ground
+  second_person_default: true
+main_character_name: null
+main_character_role: null
+main_character_image_path: null
+main_character_lora_id: null
+main_character_trigger_word: null
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv

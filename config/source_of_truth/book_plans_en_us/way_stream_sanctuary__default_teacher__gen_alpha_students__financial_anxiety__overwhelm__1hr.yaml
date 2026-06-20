@@ -1,0 +1,60 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__gen_alpha_students__financial_anxiety__overwhelm__1hr
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__gen_alpha_students__financial_anxiety__1hr.yaml
+store_series:
+  id: way_stream_sanctuary__gen_alpha_students__steady_ground__1hr
+  name: Steady Ground — for Students (One-Hour)
+installment_number: 1
+engine: overwhelm
+duration: one_hour_book
+runtime_format_id: one_hour_book
+structural_format_id: F006
+target_word_range:
+- 8000
+- 10000
+target_audio_minutes: 60
+title: 'The Number in Your Head: The Shutdown Point'
+subtitle: A One-Hour Money Anxiety Reset for Students
+cover_tagline: A One-Hour Money Anxiety Reset for Students
+description:
+  short_blurb: A One-Hour Money Anxiety Reset for Students The one-hour edition.
+  long_description: 'The Number in Your Head: The Shutdown Point
+
+
+    The one-hour edition: the core of the money anxiety work for students, in a single
+    sitting. Recognition, descent, integration — no filler. Book 1 of the one-hour
+    Students money anxiety series.'
+keywords:
+  primary:
+  - money anxiety
+  - financial anxiety
+  - money stress
+  - worry about money
+  - financial stress relief
+  secondary:
+  - students
+  - money anxiety for students
+  - one hour
+bisac_codes:
+- SEL027000
+- BUS050000
+- PSY022000
+target_price:
+  ebook_usd: 3.99
+  audible_usd: 6.99
+  paperback_usd: 9.99
+author_positioning:
+  teacher: default_teacher
+  brand: way_stream_sanctuary
+comp_titles:
+- The Psychology of Money (Housel)
+- Your Money or Your Life (Robin)
+- I Will Teach You to Be Rich (Sethi)
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
