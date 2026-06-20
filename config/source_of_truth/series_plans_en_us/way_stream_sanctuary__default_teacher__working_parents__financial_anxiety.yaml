@@ -1,0 +1,64 @@
+series_plan_schema: 1.0.0
+created_at: '2026-06-20'
+locale: en_US
+book_id_prefix: way_stream_sanctuary__default_teacher__working_parents__financial_anxiety
+brand: way_stream_sanctuary
+teacher: default_teacher
+persona: working_parents
+topic: financial_anxiety
+teacher_topic_score: null
+teacher_persona_score: null
+composite_fit: 0.7
+arc:
+  installment_1:
+    book_id: way_stream_sanctuary__default_teacher__working_parents__financial_anxiety__overwhelm
+    engine: overwhelm
+    master_arc: config/source_of_truth/master_arcs/working_parents__financial_anxiety__overwhelm__F006.yaml
+    duration: standard_book_60min
+  installment_2:
+    book_id: way_stream_sanctuary__default_teacher__working_parents__financial_anxiety__shame
+    engine: shame
+    master_arc: config/source_of_truth/master_arcs/working_parents__financial_anxiety__shame__F006.yaml
+    duration: standard_book_60min
+  installment_3:
+    book_id: way_stream_sanctuary__default_teacher__working_parents__financial_anxiety__spiral
+    engine: spiral
+    master_arc: config/source_of_truth/master_arcs/working_parents__financial_anxiety__spiral__F006.yaml
+    duration: standard_book_60min
+reader_promise_family: 3 books across the engines of money anxiety for Working Parents,
+  in a grounded secular voice.
+bestseller_hook_family: recognition_descent
+emotional_engine: financial_anxiety_recognition
+comp_series:
+- The Psychology of Money (Housel)
+- Your Money or Your Life (Robin)
+- I Will Teach You to Be Rich (Sethi)
+platform_strategy:
+  primary:
+  - kdp_ebook
+  - audible
+  secondary:
+  - apple_books
+  - google_play
+  - spotify_audiobooks
+  launch_platform: kdp_ebook
+  cadence:
+    release_spacing_days: 14
+    max_books_per_brand_per_month: 2
+reader_avatar:
+  age: 30–48
+  where_they_are: a working parent with no minute that's their own
+  what_they_need: Language for what money anxiety is doing in the body, without being
+    pathologized.
+  what_they_avoid: Toxic positivity and one-size-fits-all routines.
+series_voice_markers:
+  register: grounded, secular, somatic — plain and warm
+  sentence_rhythm: calm, unhurried
+  metaphor_family: body, breath, weather, ground
+  second_person_default: true
+main_character_name: null
+main_character_role: null
+main_character_image_path: null
+main_character_lora_id: null
+main_character_trigger_word: null
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv

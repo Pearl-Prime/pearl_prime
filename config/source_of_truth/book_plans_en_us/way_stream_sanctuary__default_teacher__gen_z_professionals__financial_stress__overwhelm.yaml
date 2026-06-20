@@ -1,0 +1,63 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__gen_z_professionals__financial_stress__overwhelm
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__gen_z_professionals__financial_stress.yaml
+store_series:
+  id: way_stream_sanctuary__gen_z_professionals__money_fears
+  name: Money Without Panic — for Young Professionals
+installment_number: 1
+engine: overwhelm
+duration: standard_book_60min
+runtime_format_id: standard_book_60min
+structural_format_id: F006
+target_word_range:
+- 9000
+- 12000
+target_audio_minutes: 70
+title: 'The Paycheck Pressure: Drowning in Demands'
+subtitle: How Young Professionals Are Rewriting the Rules of Financial Stress Management
+cover_tagline: How Young Professionals Are Rewriting the Rules of Financial Stress
+  Management
+description:
+  short_blurb: How Young Professionals Are Rewriting the Rules of Financial Stress
+    Management A grounded, secular guide to financial stress for young professionals.
+  long_description: 'The Paycheck Pressure: Drowning in Demands
+
+
+    For early in a demanding career, phone always buzzing. This book names what financial
+    stress is doing in your body in language you can use — through recognition, descent,
+    and integration, not worksheets or forced positivity. Book 1 of the Young Professionals
+    financial stress series.'
+keywords:
+  primary:
+  - financial stress
+  - money problems
+  - paycheck to paycheck
+  - financial pressure
+  - money worries
+  - financial overwhelm
+  secondary:
+  - young professionals
+  - financial stress for young professionals
+bisac_codes:
+- BUS050000
+- SEL027000
+- SEL016000
+target_price:
+  ebook_usd: 4.99
+  audible_usd: 9.99
+  paperback_usd: 12.99
+author_positioning:
+  teacher: default_teacher
+  brand: way_stream_sanctuary
+comp_titles:
+- The Psychology of Money (Housel)
+- Broke Millennial (Lowry)
+- Your Money or Your Life (Robin)
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv

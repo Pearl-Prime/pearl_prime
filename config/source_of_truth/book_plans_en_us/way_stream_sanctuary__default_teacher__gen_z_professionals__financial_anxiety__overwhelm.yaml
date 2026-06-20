@@ -1,0 +1,62 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__gen_z_professionals__financial_anxiety__overwhelm
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__gen_z_professionals__financial_anxiety.yaml
+store_series:
+  id: way_stream_sanctuary__gen_z_professionals__money_fears
+  name: Money Without Panic — for Young Professionals
+installment_number: 1
+engine: overwhelm
+duration: standard_book_60min
+runtime_format_id: standard_book_60min
+structural_format_id: F006
+target_word_range:
+- 9000
+- 12000
+target_audio_minutes: 70
+title: 'The Number in Your Head: Drowning in Demands'
+subtitle: How Young Professionals Are Rewriting the Rules of Financial Anxiety
+cover_tagline: How Young Professionals Are Rewriting the Rules of Financial Anxiety
+description:
+  short_blurb: How Young Professionals Are Rewriting the Rules of Financial Anxiety
+    A grounded, secular guide to money anxiety for young professionals.
+  long_description: 'The Number in Your Head: Drowning in Demands
+
+
+    For early in a demanding career, phone always buzzing. This book names what money
+    anxiety is doing in your body in language you can use — through recognition, descent,
+    and integration, not worksheets or forced positivity. Book 1 of the Young Professionals
+    money anxiety series.'
+keywords:
+  primary:
+  - money anxiety
+  - financial anxiety
+  - money stress
+  - worry about money
+  - financial stress relief
+  - money fears
+  secondary:
+  - young professionals
+  - money anxiety for young professionals
+bisac_codes:
+- SEL027000
+- BUS050000
+- PSY022000
+target_price:
+  ebook_usd: 4.99
+  audible_usd: 9.99
+  paperback_usd: 12.99
+author_positioning:
+  teacher: default_teacher
+  brand: way_stream_sanctuary
+comp_titles:
+- The Psychology of Money (Housel)
+- Your Money or Your Life (Robin)
+- I Will Teach You to Be Rich (Sethi)
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv

@@ -1,0 +1,62 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__gen_alpha_students__somatic_healing__overwhelm
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__gen_alpha_students__somatic_healing.yaml
+store_series:
+  id: way_stream_sanctuary__gen_alpha_students__through_loss
+  name: Through the Low Places — for Students
+installment_number: 1
+engine: overwhelm
+duration: standard_book_60min
+runtime_format_id: standard_book_60min
+structural_format_id: F006
+target_word_range:
+- 9000
+- 12000
+target_audio_minutes: 70
+title: 'What the Body Remembers: The Shutdown Point'
+subtitle: A Real Talk Guide to Somatic Healing for Students
+cover_tagline: A Real Talk Guide to Somatic Healing for Students
+description:
+  short_blurb: A Real Talk Guide to Somatic Healing for Students A grounded, secular
+    guide to somatic healing for students.
+  long_description: 'What the Body Remembers: The Shutdown Point
+
+
+    For a student under academic and social pressure. This book names what somatic
+    healing is doing in your body in language you can use — through recognition, descent,
+    and integration, not worksheets or forced positivity. Book 1 of the Students somatic
+    healing series.'
+keywords:
+  primary:
+  - somatic healing
+  - body based healing
+  - nervous system regulation
+  - trauma in the body
+  - somatic therapy
+  - felt sense
+  secondary:
+  - students
+  - somatic healing for students
+bisac_codes:
+- SEL027000
+- PSY022000
+- HEA046000
+target_price:
+  ebook_usd: 4.99
+  audible_usd: 9.99
+  paperback_usd: 12.99
+author_positioning:
+  teacher: default_teacher
+  brand: way_stream_sanctuary
+comp_titles:
+- The Body Keeps the Score (van der Kolk)
+- Waking the Tiger (Levine)
+- Anchored (Dana)
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv

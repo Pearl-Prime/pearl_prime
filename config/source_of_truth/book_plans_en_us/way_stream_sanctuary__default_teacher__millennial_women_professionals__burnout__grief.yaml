@@ -1,0 +1,62 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__millennial_women_professionals__burnout__grief
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__millennial_women_professionals__burnout.yaml
+store_series:
+  id: way_stream_sanctuary__millennial_women_professionals__depletion
+  name: Refill the Empty Well — for Professional Women
+installment_number: 1
+engine: grief
+duration: standard_book_60min
+runtime_format_id: standard_book_60min
+structural_format_id: F006
+target_word_range:
+- 9000
+- 12000
+target_audio_minutes: 70
+title: 'After the Flame: When Loss Reshapes Everything'
+subtitle: A Field Guide for Professional Women Navigating Burnout Recovery
+cover_tagline: A Field Guide for Professional Women Navigating Burnout Recovery
+description:
+  short_blurb: A Field Guide for Professional Women Navigating Burnout Recovery A
+    grounded, secular guide to burnout for professional women.
+  long_description: 'After the Flame: When Loss Reshapes Everything
+
+
+    For a professional woman holding more than she can say. This book names what burnout
+    is doing in your body in language you can use — through recognition, descent,
+    and integration, not worksheets or forced positivity. Book 1 of the Professional
+    Women burnout series.'
+keywords:
+  primary:
+  - burnout recovery
+  - work burnout
+  - exhaustion
+  - chronic stress
+  - nervous system recovery
+  - burnout help
+  secondary:
+  - professional women
+  - burnout for professional women
+bisac_codes:
+- SEL027000
+- BUS041000
+- SEL016000
+target_price:
+  ebook_usd: 4.99
+  audible_usd: 9.99
+  paperback_usd: 12.99
+author_positioning:
+  teacher: default_teacher
+  brand: way_stream_sanctuary
+comp_titles:
+- Burnout (Nagoski)
+- Laziness Does Not Exist (Price)
+- Do Nothing (Headlee)
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv

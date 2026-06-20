@@ -1,0 +1,63 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__tech_finance_burnout__depression__overwhelm
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__tech_finance_burnout__depression.yaml
+store_series:
+  id: way_stream_sanctuary__tech_finance_burnout__through_loss
+  name: Through the Low Places — for Tech & Finance Professionals
+installment_number: 2
+engine: overwhelm
+duration: standard_book_60min
+runtime_format_id: standard_book_60min
+structural_format_id: F006
+target_word_range:
+- 9000
+- 12000
+target_audio_minutes: 70
+title: 'The Weight Without a Name: The Shutdown Point'
+subtitle: A Field Guide for Tech and Finance Professionals Navigating Overcoming Depression
+cover_tagline: A Field Guide for Tech and Finance Professionals Navigating Overcoming
+  Depression
+description:
+  short_blurb: A Field Guide for Tech and Finance Professionals Navigating Overcoming
+    Depression A grounded, secular guide to depression for tech & finance professionals.
+  long_description: 'The Weight Without a Name: The Shutdown Point
+
+
+    For a tech or finance professional running on empty. This book names what depression
+    is doing in your body in language you can use — through recognition, descent,
+    and integration, not worksheets or forced positivity. Book 2 of the Tech & Finance
+    Professionals depression series.'
+keywords:
+  primary:
+  - overcoming depression
+  - depression help
+  - low mood
+  - feeling empty
+  - depression self help
+  - getting out of a funk
+  secondary:
+  - tech & finance professionals
+  - depression for tech & finance professionals
+bisac_codes:
+- SEL027000
+- PSY022000
+- SEL024000
+target_price:
+  ebook_usd: 4.99
+  audible_usd: 9.99
+  paperback_usd: 12.99
+author_positioning:
+  teacher: default_teacher
+  brand: way_stream_sanctuary
+comp_titles:
+- Feeling Good (Burns)
+- Lost Connections (Hari)
+- The Upward Spiral (Korb)
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
