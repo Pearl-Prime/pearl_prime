@@ -176,3 +176,145 @@ authors:
 # - If caller passes --author <author_id>, validate against this registry and set brand_id, persona_ids, topic_ids from here.
 # - Resolve author assets (bio, why_this_book, audiobook_pre_intro, authority_position) from assets/authors/<author_id>/ or deli/ paths.
 # - Do not filter or key atom pools by author_id; use existing persona/topic pools only.
+
+  # ── Waystream Sanctuary pen-name pool (composite — no teacher; PR adds 20) ──
+  mara_okonkwo:
+    pen_name: "Mara Okonkwo"
+    brand_id: way_stream_sanctuary
+    persona_ids: [corporate_managers]
+    topic_ids: [anxiety, sleep_anxiety, overthinking, social_anxiety, courage]
+    positioning_profile: somatic_companion
+    assets_path: assets/authors/mara_okonkwo
+  theo_castellan:
+    pen_name: "Theo Castellan"
+    brand_id: way_stream_sanctuary
+    persona_ids: [corporate_managers]
+    topic_ids: [self_worth, imposter_syndrome, boundaries, depression, grief, somatic_healing, burnout, compassion_fatigue, financial_anxiety, financial_stress]
+    positioning_profile: somatic_companion
+    assets_path: assets/authors/theo_castellan
+  devon_hale:
+    pen_name: "Devon Hale"
+    brand_id: way_stream_sanctuary
+    persona_ids: [entrepreneurs]
+    topic_ids: [anxiety, sleep_anxiety, overthinking, social_anxiety, courage]
+    positioning_profile: somatic_companion
+    assets_path: assets/authors/devon_hale
+  priya_raman:
+    pen_name: "Priya Raman"
+    brand_id: way_stream_sanctuary
+    persona_ids: [entrepreneurs]
+    topic_ids: [self_worth, imposter_syndrome, boundaries, depression, grief, somatic_healing, burnout, compassion_fatigue, financial_anxiety, financial_stress]
+    positioning_profile: somatic_companion
+    assets_path: assets/authors/priya_raman
+  cole_bennett:
+    pen_name: "Cole Bennett"
+    brand_id: way_stream_sanctuary
+    persona_ids: [first_responders]
+    topic_ids: [anxiety, sleep_anxiety, overthinking, social_anxiety, courage]
+    positioning_profile: somatic_companion
+    assets_path: assets/authors/cole_bennett
+  marcus_reed:
+    pen_name: "Marcus Reed"
+    brand_id: way_stream_sanctuary
+    persona_ids: [first_responders]
+    topic_ids: [self_worth, imposter_syndrome, boundaries, depression, grief, somatic_healing, burnout, compassion_fatigue, financial_anxiety, financial_stress]
+    positioning_profile: somatic_companion
+    assets_path: assets/authors/marcus_reed
+  nina_vazquez:
+    pen_name: "Nina Vazquez"
+    brand_id: way_stream_sanctuary
+    persona_ids: [gen_alpha_students]
+    topic_ids: [anxiety, sleep_anxiety, overthinking, social_anxiety, courage]
+    positioning_profile: somatic_companion
+    assets_path: assets/authors/nina_vazquez
+  jonah_kim:
+    pen_name: "Jonah Kim"
+    brand_id: way_stream_sanctuary
+    persona_ids: [gen_alpha_students]
+    topic_ids: [self_worth, imposter_syndrome, boundaries, depression, grief, somatic_healing, burnout, compassion_fatigue, financial_anxiety, financial_stress]
+    positioning_profile: somatic_companion
+    assets_path: assets/authors/jonah_kim
+  elena_petrova:
+    pen_name: "Elena Petrova"
+    brand_id: way_stream_sanctuary
+    persona_ids: [gen_x_sandwich]
+    topic_ids: [anxiety, sleep_anxiety, overthinking, social_anxiety, courage]
+    positioning_profile: somatic_companion
+    assets_path: assets/authors/elena_petrova
+  sam_meridian:
+    pen_name: "Sam Meridian"
+    brand_id: way_stream_sanctuary
+    persona_ids: [gen_x_sandwich]
+    topic_ids: [self_worth, imposter_syndrome, boundaries, depression, grief, somatic_healing, burnout, compassion_fatigue, financial_anxiety, financial_stress]
+    positioning_profile: somatic_companion
+    assets_path: assets/authors/sam_meridian
+  ravi_chandra:
+    pen_name: "Ravi Chandra"
+    brand_id: way_stream_sanctuary
+    persona_ids: [gen_z_professionals]
+    topic_ids: [anxiety, sleep_anxiety, overthinking, social_anxiety, courage]
+    positioning_profile: somatic_companion
+    assets_path: assets/authors/ravi_chandra
+  wren_adler:
+    pen_name: "Wren Adler"
+    brand_id: way_stream_sanctuary
+    persona_ids: [gen_z_professionals]
+    topic_ids: [self_worth, imposter_syndrome, boundaries, depression, grief, somatic_healing, burnout, compassion_fatigue, financial_anxiety, financial_stress]
+    positioning_profile: somatic_companion
+    assets_path: assets/authors/wren_adler
+  lena_frost:
+    pen_name: "Lena Frost"
+    brand_id: way_stream_sanctuary
+    persona_ids: [healthcare_rns]
+    topic_ids: [anxiety, sleep_anxiety, overthinking, social_anxiety, courage]
+    positioning_profile: somatic_companion
+    assets_path: assets/authors/lena_frost
+  oscar_bello:
+    pen_name: "Oscar Bello"
+    brand_id: way_stream_sanctuary
+    persona_ids: [healthcare_rns]
+    topic_ids: [self_worth, imposter_syndrome, boundaries, depression, grief, somatic_healing, burnout, compassion_fatigue, financial_anxiety, financial_stress]
+    positioning_profile: somatic_companion
+    assets_path: assets/authors/oscar_bello
+  sofia_marchetti:
+    pen_name: "Sofia Marchetti"
+    brand_id: way_stream_sanctuary
+    persona_ids: [millennial_women_professionals]
+    topic_ids: [anxiety, sleep_anxiety, overthinking, social_anxiety, courage]
+    positioning_profile: somatic_companion
+    assets_path: assets/authors/sofia_marchetti
+  grace_adeyemi:
+    pen_name: "Grace Adeyemi"
+    brand_id: way_stream_sanctuary
+    persona_ids: [millennial_women_professionals]
+    topic_ids: [self_worth, imposter_syndrome, boundaries, depression, grief, somatic_healing, burnout, compassion_fatigue, financial_anxiety, financial_stress]
+    positioning_profile: somatic_companion
+    assets_path: assets/authors/grace_adeyemi
+  daniel_cho:
+    pen_name: "Daniel Cho"
+    brand_id: way_stream_sanctuary
+    persona_ids: [tech_finance_burnout]
+    topic_ids: [anxiety, sleep_anxiety, overthinking, social_anxiety, courage]
+    positioning_profile: somatic_companion
+    assets_path: assets/authors/daniel_cho
+  ana_reyes:
+    pen_name: "Ana Reyes"
+    brand_id: way_stream_sanctuary
+    persona_ids: [tech_finance_burnout]
+    topic_ids: [self_worth, imposter_syndrome, boundaries, depression, grief, somatic_healing, burnout, compassion_fatigue, financial_anxiety, financial_stress]
+    positioning_profile: somatic_companion
+    assets_path: assets/authors/ana_reyes
+  tomas_vidal:
+    pen_name: "Tomas Vidal"
+    brand_id: way_stream_sanctuary
+    persona_ids: [working_parents]
+    topic_ids: [anxiety, sleep_anxiety, overthinking, social_anxiety, courage]
+    positioning_profile: somatic_companion
+    assets_path: assets/authors/tomas_vidal
+  hannah_stern:
+    pen_name: "Hannah Stern"
+    brand_id: way_stream_sanctuary
+    persona_ids: [working_parents]
+    topic_ids: [self_worth, imposter_syndrome, boundaries, depression, grief, somatic_healing, burnout, compassion_fatigue, financial_anxiety, financial_stress]
+    positioning_profile: somatic_companion
+    assets_path: assets/authors/hannah_stern
