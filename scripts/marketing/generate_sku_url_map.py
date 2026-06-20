@@ -16,7 +16,9 @@ schema that the catalog projector will eventually produce.
 
 Source files:
 - artifacts/catalog/pearl_prime_book_script_catalogs/{en_US,ja_JP,zh_CN,zh_TW}_catalog.csv (book + audiobook SKUs)
-- artifacts/catalog/manga/{en_US,ja_JP,zh_CN,zh_TW}_manga_catalog.csv (manga SKUs)
+- artifacts/catalog/manga/{en_US,zh_CN,zh_TW}_manga_catalog.csv (manga SKUs)
+- artifacts/catalog/manga/ssot_rollup/ja_JP_manga_catalog_ssot.csv (ja_JP manga SKUs,
+  reconciled to the live 270-series SSOT; see MANGA_CATALOG_RECONCILIATION_SPEC.md)
 
 Usage:
     python3 scripts/marketing/generate_sku_url_map.py \
@@ -44,7 +46,12 @@ BOOK_CATALOGS = [
 
 MANGA_CATALOGS = [
     "artifacts/catalog/manga/en_US_manga_catalog.csv",
-    "artifacts/catalog/manga/ja_JP_manga_catalog.csv",
+    # ja_JP is reconciled to the live 270-series SSOT (multi-genre) via the SSOT
+    # rollup — NOT the legacy artifacts/catalog/manga/ja_JP_manga_catalog.csv, which
+    # is the un-reconciled `healing`-era allocation-matrix output the reconciliation
+    # spec explicitly left un-touched. See specs/MANGA_CATALOG_RECONCILIATION_SPEC.md
+    # (✅ EXECUTED) and scripts/catalog/rollup_manga_catalog_from_ssot.py.
+    "artifacts/catalog/manga/ssot_rollup/ja_JP_manga_catalog_ssot.csv",
     "artifacts/catalog/manga/zh_CN_manga_catalog.csv",
     "artifacts/catalog/manga/zh_TW_manga_catalog.csv",
 ]
@@ -114,7 +121,11 @@ def _build_manga_entries() -> list[dict]:
             for row in reader:
                 csv_locale = row["locale"]
                 url_locale = _norm_locale(csv_locale)
-                brand_id = row["brand"]
+                # Legacy allocation-matrix catalogs use `brand`; the SSOT rollup
+                # (rollup_manga_catalog_from_ssot.py) uses `brand_id`. Accept either.
+                brand_id = row.get("brand") or row.get("brand_id")
+                if not brand_id:
+                    raise KeyError(f"manga row missing brand/brand_id in {rel}: {row}")
                 inner_key = row["series_id"]
                 entries.append(
                     {
@@ -155,7 +166,8 @@ def main() -> int:
         "#\n"
         "# Source CSVs:\n"
         "#   - artifacts/catalog/pearl_prime_book_script_catalogs/{en_US,ja_JP,zh_CN,zh_TW}_catalog.csv\n"
-        "#   - artifacts/catalog/manga/{en_US,ja_JP,zh_CN,zh_TW}_manga_catalog.csv\n"
+        "#   - artifacts/catalog/manga/{en_US,zh_CN,zh_TW}_manga_catalog.csv\n"
+        "#   - artifacts/catalog/manga/ssot_rollup/ja_JP_manga_catalog_ssot.csv (ja_JP, reconciled to 270-series SSOT)\n"
         "#\n"
         "# Each book SKU emits BOTH a book row AND an audiobook row (audiobook shares\n"
         "# the parent book's inner_key per §2.5).\n"
