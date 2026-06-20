@@ -1,0 +1,60 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__corporate_managers__anxiety__comparison
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__corporate_managers__anxiety.yaml
+installment_number: 1
+engine: comparison
+duration: standard_book_60min
+runtime_format_id: standard_book_60min
+structural_format_id: F006
+target_word_range:
+- 9000
+- 12000
+target_audio_minutes: 70
+title: 'The Alarm Is Lying: Measuring Yourself Against Everyone'
+subtitle: A Real Talk Guide to Anxiety Relief for Managers
+cover_tagline: A Real Talk Guide to Anxiety Relief for Managers
+description:
+  short_blurb: A Real Talk Guide to Anxiety Relief for Managers A grounded, secular
+    guide to anxiety for managers.
+  long_description: 'The Alarm Is Lying: Measuring Yourself Against Everyone
+
+
+    For a mid-level manager between back-to-back meetings. This book doesn''t promise
+    to make anxiety stop — it names what''s happening in your body in language you
+    can use the next time it happens. Through recognition, descent, and integration,
+    not worksheets or forced positivity. Book 1 of the Managers anxiety series.'
+keywords:
+  primary:
+  - anxiety relief
+  - anxiety help
+  - calm anxiety
+  - overcoming anxiety
+  - nervous system regulation
+  - panic relief
+  - anxiety workbook
+  secondary:
+  - managers
+  - anxiety for managers
+bisac_codes:
+- SEL027000
+- SEL024000
+- PSY022000
+target_price:
+  ebook_usd: 4.99
+  audible_usd: 9.99
+  paperback_usd: 12.99
+author_positioning:
+  teacher: default_teacher
+  brand: way_stream_sanctuary
+comp_titles:
+- Dare (Barry McDonagh)
+- The Anxiety and Phobia Workbook (Bourne)
+- Unwinding Anxiety (Judson Brewer)
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
