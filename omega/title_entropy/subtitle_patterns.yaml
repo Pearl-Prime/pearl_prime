@@ -21,6 +21,10 @@ title_templates:
   # --- Grammar Family C: Metaphorical / evocative (Sounds True style) ---
   metaphor_title: "{EngineAngle}"
   journey_title: "{EngineAngle}: {PromiseClause}"
+  # Topic-anchored evocative: the curated series title (or topic keyword) LEADS so
+  # the book is never off-topic, with the engine angle as the rotating creative half.
+  series_metaphor: "{SeriesTitle}: {EngineAngle}"
+  topic_metaphor: "{PrimaryKeyword}: {EngineAngle}"
 
   # --- Grammar Family D: Scientific / method (workbook style) ---
   method_title: "The {PrimaryKeyword} Method"
@@ -289,7 +293,7 @@ brand_template_preferences:
   # Composite: no Sai Maa, no teacher. Distinct (strategy+mix) profile vs devotion_path
   # per anti-spam §16 (long-only + persona_direct 0.65 ≠ devotion's 0.80/0.55).
   way_stream_sanctuary:
-    title: [metaphor_title, journey_title]
+    title: [series_metaphor, topic_metaphor]
     subtitle: [generation_voice, profession_specific, identity_shift]
     subtitle_strategy: { none_pct: 0.0, short_pct: 0.0, long_pct: 1.0 }
     content_mix: { persona_direct: 0.65, topic_direct: 0.25, metaphor: 0.10, location: 0.00 }

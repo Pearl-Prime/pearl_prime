@@ -134,13 +134,20 @@ def get_keywords(
         else:
             angle_phrase = angle_id.replace("_", " ")
 
-    if not series_cfg:
-        return {"primary": angle_phrase, "secondary": [], "engine_angle": angle_phrase}
+    # Topic-true keyword fallback: when no series entry resolves, use the TOPIC
+    # (not the engine angle) so {PrimaryKeyword} names the book's actual subject.
+    # Using the engine angle here is what made titles/subtitles wear another
+    # topic's phrasing (a Boundaries book reading "When Your Mind Screams Danger").
+    topic_kw = (topic_id or "").replace("_", " ").strip()
 
+    if not series_cfg:
+        return {"primary": topic_kw or angle_phrase, "secondary": [], "engine_angle": angle_phrase, "series_title": ""}
+
+    series_title = series_cfg.get("series_title") or ""
     search_keywords = list(series_cfg.get("search_keywords") or [])
     if not search_keywords:
-        return {"primary": angle_phrase, "secondary": [], "engine_angle": angle_phrase}
+        return {"primary": topic_kw or angle_phrase, "secondary": [], "engine_angle": angle_phrase, "series_title": series_title}
 
     primary = f"{search_keywords[0]}".strip()
     secondary = search_keywords[1:] if len(search_keywords) > 1 else []
-    return {"primary": primary, "secondary": secondary, "engine_angle": angle_phrase}
+    return {"primary": primary, "secondary": secondary, "engine_angle": angle_phrase, "series_title": series_title}

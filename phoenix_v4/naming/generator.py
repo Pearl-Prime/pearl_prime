@@ -202,6 +202,9 @@ def generate_candidates(
 
     keywords = keyword_bank.get_keywords(series_id, angle_id, topic_id, engine_id=angle_id)
     primary = (keywords.get("primary") or topic_id.replace("_", " ")).title()
+    # Curated reader-facing series title (e.g. "The Alarm Is Lying"); falls back to
+    # the topic keyword so {SeriesTitle} is always topic-true, never an engine angle.
+    series_title_val = keywords.get("series_title") or primary
     secondary = keywords.get("secondary") or []
     engine_angle = keywords.get("engine_angle") or angle_id.replace("_", " ").title()
     # Rotate the engine angle deterministically across the {primary_phrase, *alt_phrases}
@@ -282,6 +285,7 @@ def generate_candidates(
     def fill(s: str) -> str:
         return (s or "") \
             .replace("{PrimaryKeyword}", primary) \
+            .replace("{SeriesTitle}", series_title_val) \
             .replace("{ScenarioPhrase}", scenario_phrase) \
             .replace("{EngineAngle}", engine_angle) \
             .replace("{EngineSubtitleHook}", engine_subtitle_hook or f"A Deeper Look at {engine_angle}") \
