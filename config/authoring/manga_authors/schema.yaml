@@ -53,6 +53,24 @@ field_constraints:
       - manhwa_psychological
       - webtoon_romance
       - isekai
+      # -- reconciled genre shells appended 2026-06-20: mirror
+      #    schemas/manga/series_plan.schema.json (v2.1) per
+      #    MANGA_CATALOG_RECONCILIATION_SPEC §4.1; mecha per OQ-1 / D-9 --
+      - dark_fantasy
+      - psychological_horror
+      - supernatural_mystery
+      - sci_fi_cyberpunk
+      - psychological_thriller
+      - romance_josei_drama
+      - workplace_drama
+      - action_battle
+      - sports_competition
+      - historical_period
+      - cultivation_martial
+      - school_coming_of_age
+      - mecha
+      - manhwa
+      - josei_essay_manga
   ei_disclosure_text:
     min_length: 20
     must_contain_concept: "created by AI / enlightened intelligence"
