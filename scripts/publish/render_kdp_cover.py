@@ -74,6 +74,12 @@ from typing import Any
 import yaml
 from PIL import Image, ImageDraw, ImageFilter, ImageFont
 
+try:  # sibling module; works as `scripts.publish` package or loose script
+    from scripts.publish import abstract_cover_art
+except ImportError:  # pragma: no cover
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    import abstract_cover_art
+
 REPO_ROOT = Path(__file__).resolve().parents[2]
 
 CANVAS_W = 1600
@@ -678,9 +684,18 @@ def _legacy_apply_backdrop_block(*_args: Any, **_kwargs: Any) -> None:  # pragma
 def _build_canvas_with_imagery(
     template: dict[str, Any],
     illustration_path: Path | None,
+    *,
+    genre: str | None = None,
+    author_seed: str | None = None,
+    brand_id: str | None = None,
 ) -> tuple[Image.Image, dict[str, Any]]:
-    """Create the 1600x2560 RGBA canvas — flat primary palette color +
-    optional imagery patch composited at the template's imagery_zone.
+    """Create the 1600x2560 RGBA canvas.
+
+    * Type-dominant genres (``imagery_zone: null``) get a generative abstract
+      background — a per-author gradient + minimal topic symbol — instead of a
+      flat color, so no cover ships as plain-color-plus-text and every author
+      carries a distinct, stable fingerprint (anti-spam).
+    * Image-bearing genres keep the flat primary + FLUX imagery patch.
 
     Returns (canvas, imagery_meta).
     """
@@ -701,6 +716,24 @@ def _build_canvas_with_imagery(
                 "Genre is type-dominant; ignoring illustration_path=%s",
                 illustration_path,
             )
+        # Abstract gradient + fingerprint symbol replaces the flat fill. Never
+        # let cover decoration crash a render — fall back to the flat canvas.
+        try:
+            pal = template.get("palette", {})
+            abstract_bg, abstract_meta = abstract_cover_art.build_background(
+                genre or "",
+                primary_hex=primary_hex,
+                secondary_hex=(pal.get("secondary") or {}).get("hex"),
+                accent_hex=(pal.get("accent") or {}).get("hex"),
+                author_id=author_seed,
+                brand_id=brand_id,
+                symbol_zone=template.get("symbol_zone"),
+                title_zone=template.get("title_zone"),
+            )
+            canvas = abstract_bg
+            imagery_meta.update(abstract_meta)
+        except Exception as exc:  # noqa: BLE001
+            logger.warning("abstract background failed (%s); using flat fill", exc)
         return canvas, imagery_meta
 
     if illustration_path is None or not Path(illustration_path).exists():
@@ -808,6 +841,18 @@ def _draw_block_in_zone(
     else:
         fill_rgb = _hex_to_rgb(color_spec)
 
+    # Global legibility: light/white text gets a black stroke so it stays
+    # readable over any background (operator rule 2026-06-19). Dark-on-light
+    # text is already legible and is left unstroked. An explicit per-style
+    # outline always wins.
+    style_for_draw = typography_style
+    if "outline" not in typography_style and _luminance_rgb(fill_rgb) > 0.5:
+        role_px = {"title": 6, "subtitle": 4, "author": 3}.get(role, 4)
+        style_for_draw = {
+            **typography_style,
+            "outline": {"width_px": role_px, "color": "#0D0D0D"},
+        }
+
     tracking_px = int(round(size_used * typography_style.get("tracking_pct", 0) / 100))
     line_h = int(size_used * line_h_factor)
 
@@ -824,7 +869,7 @@ def _draw_block_in_zone(
 
     _draw_text_with_shadow(
         canvas, lines, font, fill_rgb,
-        typography_style,
+        style_for_draw,
         box=(x0, draw_y0, x1, y1),
         anchor="centered",
         line_height_px=line_h,
@@ -966,6 +1011,33 @@ def _apply_identity_overrides(
     return meta
 
 
+def _apply_abstract_text_styling(
+    genre_typography: dict[str, Any],
+    typography_cfg: dict[str, Any],
+    abstract_meta: dict[str, Any],
+) -> None:
+    """Force the abstract background's recommended text color (and a black
+    stroke for light text) onto title/subtitle/author styles so a gradient
+    cover reads consistently regardless of the underlying palette."""
+    text_hex = abstract_meta["text_hex"]
+    stroke_hex = abstract_meta.get("stroke_hex", "#0D0D0D")
+    is_light = _luminance_rgb(_hex_to_rgb(text_hex)) > 0.5
+    defaults = typography_cfg.get("defaults", {})
+    base_author = (genre_typography.get("author_style")
+                   or defaults.get("default_author_style") or {})
+    title_family = abstract_meta.get("title_family")
+    role_px = {"title_style": 7, "subtitle_style": 5, "author_style": 4}
+    for key, px in role_px.items():
+        src = base_author if key == "author_style" else genre_typography.get(key)
+        style = dict(src or {})
+        style["color"] = text_hex
+        if key == "title_style" and title_family:
+            style["font_family"] = title_family
+        if is_light and "outline" not in style:
+            style["outline"] = {"width_px": px, "color": stroke_hex}
+        genre_typography[key] = style
+
+
 # ─── MAIN RENDER ──────────────────────────────────────────────────────
 
 
@@ -1055,10 +1127,28 @@ def render_kdp_cover(
 
     type_dominant = bool(template.get("type_dominant", False))
 
-    # 1. Build canvas (flat primary + optional imagery patch).
-    canvas, imagery_meta = _build_canvas_with_imagery(template, illustration_path)
+    # Fingerprint seed: prefer identity ids, else fall back to the byline so
+    # the same author renders stably and different authors diverge (anti-spam).
+    fp_author = identity_meta.get("author_id") or (
+        author.strip().lower().replace(" ", "_")
+        if author and author.strip() else None
+    )
+    fp_brand = identity_meta.get("brand_id")
+
+    # 1. Build canvas (abstract gradient+symbol for type-dominant genres, else
+    #    flat primary + optional imagery patch).
+    canvas, imagery_meta = _build_canvas_with_imagery(
+        template, illustration_path,
+        genre=genre, author_seed=fp_author, brand_id=fp_brand,
+    )
     primary_hex = template["palette"]["primary"]["hex"]
     bg_rgb = _hex_to_rgb(primary_hex)
+
+    # Abstract backgrounds carry a recommended contrast-aware text color
+    # (premium cream on the deep gradient, deep ink on a light field) applied
+    # across title/subtitle/author with a black stroke for light text.
+    if imagery_meta.get("abstract_background") and imagery_meta.get("text_hex"):
+        _apply_abstract_text_styling(genre_typography, typography_cfg, imagery_meta)
 
     # 1b. Title-zone gradient overlay (full-bleed mode only). Applied AFTER
     # imagery composite so it darkens the title zone for white outlined text

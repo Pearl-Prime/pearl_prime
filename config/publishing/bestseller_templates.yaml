@@ -112,17 +112,18 @@ templates:
   boundaries:
     primary_archetype: "Type-takeover-on-warm-flat"
     imagery_zone:    null
-    title_zone:      {x_pct: [8, 92],  y_pct: [15, 70]}
-    subtitle_zone:   {x_pct: [12, 88], y_pct: [72, 78]}
+    title_zone:      {x_pct: [8, 92],  y_pct: [11, 40]}
+    subtitle_zone:   {x_pct: [12, 88], y_pct: [42, 50]}
     author_zone:     {x_pct: [25, 75], y_pct: [88, 94]}
     accent_zone:     {x_pct: [20, 80], y_pct: [82, 83]}
+    symbol_zone:     {x_pct: [30, 70], y_pct: [55, 80]}
     overlap_rule:    "no_overlap"
     palette_count:   2
     palette:
       primary:   {hex: "#D67054", role: "background_field"}
       secondary: {hex: "#F5EFE3", role: "type_fill"}
       accent:    {hex: "#1E3A8A", role: "single_word_accent"}
-    type_size_ratios: {title: 28, subtitle: 3.5, author: 2.5}
+    type_size_ratios: {title: 18, subtitle: 4, author: 2.5}
     type_dominant:   true
     flux_aspect:     null
     flux_subject:    null
@@ -130,10 +131,11 @@ templates:
   self_worth:
     primary_archetype: "Type-on-warm-earth"
     imagery_zone:    null
-    title_zone:      {x_pct: [10, 90], y_pct: [18, 52]}
-    subtitle_zone:   {x_pct: [18, 82], y_pct: [53, 59]}
-    author_zone:     {x_pct: [20, 80], y_pct: [82, 90]}
+    title_zone:      {x_pct: [10, 90], y_pct: [12, 40]}
+    subtitle_zone:   {x_pct: [18, 82], y_pct: [42, 50]}
+    author_zone:     {x_pct: [20, 80], y_pct: [88, 94]}
     accent_zone:     {x_pct: [46, 54], y_pct: [70, 71]}
+    symbol_zone:     {x_pct: [35, 65], y_pct: [56, 80]}
     overlap_rule:    "no_overlap"
     palette_count:   3
     palette:
@@ -166,17 +168,18 @@ templates:
   imposter_syndrome:
     primary_archetype: "Hot-color-flat-and-bold-script-mix"
     imagery_zone:    null
-    title_zone:      {x_pct: [6, 94],  y_pct: [14, 70]}
-    subtitle_zone:   {x_pct: [15, 85], y_pct: [72, 78]}
-    author_zone:     {x_pct: [25, 75], y_pct: [87, 93]}
+    title_zone:      {x_pct: [6, 94],  y_pct: [11, 41]}
+    subtitle_zone:   {x_pct: [15, 85], y_pct: [43, 51]}
+    author_zone:     {x_pct: [25, 75], y_pct: [88, 94]}
     accent_zone:     {x_pct: [20, 80], y_pct: [80, 84]}
+    symbol_zone:     {x_pct: [32, 68], y_pct: [57, 80]}
     overlap_rule:    "no_overlap"
     palette_count:   3
     palette:
       primary:   {hex: "#FF6B6B", role: "background_field"}
       secondary: {hex: "#FFF6E5", role: "type_fill"}
       accent:    {hex: "#D4A934", role: "italic_accent_word"}
-    type_size_ratios: {title: 24, subtitle: 4, author: 2.8}
+    type_size_ratios: {title: 18, subtitle: 4, author: 2.8}
     type_dominant:   true
     flux_aspect:     null
     flux_subject:    null
