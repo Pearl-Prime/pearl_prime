@@ -373,7 +373,7 @@ function buildCatalog() {
   if (REAL_CATALOG && REAL_CATALOG.length) {
     return REAL_CATALOG.map((b, i) => ({
       title: b.title, subtitle: b.subtitle || "", desc: b.desc || "", angle: b.angle || "",
-      longDesc: b.long_desc || b.desc || "", author: b.author || "",
+      longDesc: b.long_desc || b.desc || "", author: b.author || "", cover: b.cover || "",
       isbn: b.isbn || "PENDING", price: b.price || priceFor(i), audioP: b.audioPrice || audioPrice(),
       keywords: (b.keywords && b.keywords.length) ? b.keywords : CAT.keywords,
       cats: (b.bisac && b.bisac.length) ? b.bisac : CAT.cats,
@@ -545,7 +545,7 @@ function renderCatalog() {
   document.getElementById("catalog-count").textContent = T.catalogCount(cat.length);
   document.getElementById("catalog-grid").innerHTML = cat.map(b => `
     <div class="book-card">
-      <div class="book-cover" style="background:linear-gradient(150deg,hsl(${b.hue} 55% 28%),hsl(${(b.hue+30)%360} 60% 16%))">${esc(b.title)}</div>
+      <div class="book-cover" style="background:linear-gradient(150deg,hsl(${b.hue} 55% 28%),hsl(${(b.hue+30)%360} 60% 16%))">${b.cover ? `<img src="${esc(b.cover)}" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block" onerror="this.style.display='none'">` : esc(b.title)}</div>
       <div class="book-body">
         <div class="book-title">${esc(b.title)}</div>
         ${b.subtitle ? `<div class="book-sub">${esc(b.subtitle)}</div>` : ""}

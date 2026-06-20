@@ -39,12 +39,14 @@ def book_from_plan(d: dict, stem: str) -> dict:
     price = d.get("target_price") or {}
     kw = ((d.get("keywords") or {}).get("primary") or [])[:7]
     ap = d.get("author_positioning") or {}
+    brand_prefix = stem.split("__")[0]
     return {
         "title": (d.get("title") or "").strip(),
         "subtitle": (d.get("subtitle") or "").strip(),
         "desc": blurb.strip(),                                  # short blurb (list/cover)
         "long_desc": long_desc.strip(),                         # full store description
         "angle": (d.get("cover_tagline") or "").strip(),        # the marketing hook
+        "cover": f"assets/covers/{brand_prefix}/{stem}.png",    # rendered cover (brand_covers); dashboard falls back on 404
         "author": humanize(ap.get("teacher")),                  # narrating teacher (empty for composite)
         "keywords": [str(k) for k in kw],
         "bisac": [str(c) for c in (d.get("bisac_codes") or [])][:3],
