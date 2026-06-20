@@ -1,0 +1,63 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__tech_finance_burnout__overthinking__watcher
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__tech_finance_burnout__overthinking.yaml
+store_series:
+  id: way_stream_sanctuary__tech_finance_burnout__restless_mind
+  name: Quiet the Restless Mind — for Tech & Finance Professionals
+installment_number: 3
+engine: watcher
+duration: standard_book_60min
+runtime_format_id: standard_book_60min
+structural_format_id: F006
+target_word_range:
+- 9000
+- 12000
+target_audio_minutes: 70
+title: 'The Thought That Won''t Leave: The Space Between You and Your Anxiety'
+subtitle: A Field Guide for Tech and Finance Professionals Navigating Stop Overthinking
+cover_tagline: A Field Guide for Tech and Finance Professionals Navigating Stop Overthinking
+description:
+  short_blurb: A Field Guide for Tech and Finance Professionals Navigating Stop Overthinking
+    A grounded, secular guide to overthinking for tech & finance professionals.
+  long_description: 'The Thought That Won''t Leave: The Space Between You and Your
+    Anxiety
+
+
+    For a tech or finance professional running on empty. This book names what overthinking
+    is doing in your body in language you can use — through recognition, descent,
+    and integration, not worksheets or forced positivity. Book 3 of the Tech & Finance
+    Professionals overthinking series.'
+keywords:
+  primary:
+  - stop overthinking
+  - overthinking help
+  - rumination
+  - racing thoughts
+  - quiet the mind
+  - analysis paralysis
+  secondary:
+  - tech & finance professionals
+  - overthinking for tech & finance professionals
+bisac_codes:
+- SEL027000
+- SEL024000
+- PSY022000
+target_price:
+  ebook_usd: 4.99
+  audible_usd: 9.99
+  paperback_usd: 12.99
+author_positioning:
+  teacher: default_teacher
+  brand: way_stream_sanctuary
+comp_titles:
+- Don't Believe Everything You Think (Nguyen)
+- Stop Overthinking (Hollins)
+- The Worry Trick (Carbonell)
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv

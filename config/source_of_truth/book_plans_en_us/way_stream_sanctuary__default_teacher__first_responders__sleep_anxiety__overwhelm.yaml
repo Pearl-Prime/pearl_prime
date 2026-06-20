@@ -1,0 +1,62 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__first_responders__sleep_anxiety__overwhelm
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__first_responders__sleep_anxiety.yaml
+store_series:
+  id: way_stream_sanctuary__first_responders__restless_mind
+  name: Quiet the Restless Mind — for First Responders
+installment_number: 2
+engine: overwhelm
+duration: standard_book_60min
+runtime_format_id: standard_book_60min
+structural_format_id: F006
+target_word_range:
+- 9000
+- 12000
+target_audio_minutes: 70
+title: 'The 3am Mind: When Everything Is Too Much'
+subtitle: A Real Talk Guide to Sleep Anxiety for First Responders
+cover_tagline: A Real Talk Guide to Sleep Anxiety for First Responders
+description:
+  short_blurb: A Real Talk Guide to Sleep Anxiety for First Responders A grounded,
+    secular guide to sleep anxiety for first responders.
+  long_description: 'The 3am Mind: When Everything Is Too Much
+
+
+    For a first responder in the quiet after a call. This book names what sleep anxiety
+    is doing in your body in language you can use — through recognition, descent,
+    and integration, not worksheets or forced positivity. Book 2 of the First Responders
+    sleep anxiety series.'
+keywords:
+  primary:
+  - insomnia help
+  - sleep anxiety
+  - can't sleep anxiety
+  - racing thoughts at night
+  - bedtime anxiety
+  - sleep without medication
+  secondary:
+  - first responders
+  - sleep anxiety for first responders
+bisac_codes:
+- SEL027000
+- HEA046000
+- PSY022000
+target_price:
+  ebook_usd: 4.99
+  audible_usd: 9.99
+  paperback_usd: 12.99
+author_positioning:
+  teacher: default_teacher
+  brand: way_stream_sanctuary
+comp_titles:
+- Say Good Night to Insomnia (Jacobs)
+- The Sleep Solution (Winter)
+- Why We Sleep (Walker)
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv

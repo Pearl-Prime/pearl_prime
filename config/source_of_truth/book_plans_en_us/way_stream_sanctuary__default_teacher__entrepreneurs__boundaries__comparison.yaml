@@ -1,0 +1,62 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__entrepreneurs__boundaries__comparison
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__entrepreneurs__boundaries.yaml
+store_series:
+  id: way_stream_sanctuary__entrepreneurs__worth_limits
+  name: Worth & Limits — for Founders
+installment_number: 1
+engine: comparison
+duration: standard_book_60min
+runtime_format_id: standard_book_60min
+structural_format_id: F006
+target_word_range:
+- 9000
+- 12000
+target_audio_minutes: 70
+title: 'The Line You Never Drew: Beyond the Highlight Reel'
+subtitle: A Real Talk Guide to Setting Boundaries for Founders
+cover_tagline: A Real Talk Guide to Setting Boundaries for Founders
+description:
+  short_blurb: A Real Talk Guide to Setting Boundaries for Founders A grounded, secular
+    guide to boundaries for founders.
+  long_description: 'The Line You Never Drew: Beyond the Highlight Reel
+
+
+    For a founder carrying a young company alone. This book names what boundaries
+    is doing in your body in language you can use — through recognition, descent,
+    and integration, not worksheets or forced positivity. Book 1 of the Founders boundaries
+    series.'
+keywords:
+  primary:
+  - setting boundaries
+  - how to say no
+  - people pleasing
+  - healthy boundaries
+  - stop people pleasing
+  - boundaries
+  secondary:
+  - founders
+  - boundaries for founders
+bisac_codes:
+- SEL031000
+- SEL024000
+- FAM000000
+target_price:
+  ebook_usd: 4.99
+  audible_usd: 9.99
+  paperback_usd: 12.99
+author_positioning:
+  teacher: default_teacher
+  brand: way_stream_sanctuary
+comp_titles:
+- Set Boundaries Find Peace (Tawwab)
+- Boundaries (Cloud & Townsend)
+- The Disease to Please (Braiker)
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv

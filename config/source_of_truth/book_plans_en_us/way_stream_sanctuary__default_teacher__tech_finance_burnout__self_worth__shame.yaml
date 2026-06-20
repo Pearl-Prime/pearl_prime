@@ -1,0 +1,64 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__tech_finance_burnout__self_worth__shame
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__tech_finance_burnout__self_worth.yaml
+store_series:
+  id: way_stream_sanctuary__tech_finance_burnout__worth_limits
+  name: Worth & Limits — for Tech & Finance Professionals
+installment_number: 2
+engine: shame
+duration: standard_book_60min
+runtime_format_id: standard_book_60min
+structural_format_id: F006
+target_word_range:
+- 9000
+- 12000
+target_audio_minutes: 70
+title: 'The Voice That Says Not Enough: Carrying What You Can''t Say'
+subtitle: How Tech and Finance Professionals Are Rewriting the Rules of Building Self
+  Worth
+cover_tagline: How Tech and Finance Professionals Are Rewriting the Rules of Building
+  Self Worth
+description:
+  short_blurb: How Tech and Finance Professionals Are Rewriting the Rules of Building
+    Self Worth A grounded, secular guide to self-worth for tech & finance professionals.
+  long_description: 'The Voice That Says Not Enough: Carrying What You Can''t Say
+
+
+    For a tech or finance professional running on empty. This book names what self-worth
+    is doing in your body in language you can use — through recognition, descent,
+    and integration, not worksheets or forced positivity. Book 2 of the Tech & Finance
+    Professionals self-worth series.'
+keywords:
+  primary:
+  - self worth
+  - self esteem
+  - self doubt
+  - feeling not enough
+  - self acceptance
+  - inner critic
+  secondary:
+  - tech & finance professionals
+  - self-worth for tech & finance professionals
+bisac_codes:
+- SEL023000
+- SEL031000
+- PSY022000
+target_price:
+  ebook_usd: 4.99
+  audible_usd: 9.99
+  paperback_usd: 12.99
+author_positioning:
+  teacher: default_teacher
+  brand: way_stream_sanctuary
+comp_titles:
+- The Gifts of Imperfection (Brown)
+- Radical Acceptance (Brach)
+- You Are a Badass (Sincero)
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv

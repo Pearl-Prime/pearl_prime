@@ -1,0 +1,62 @@
+book_plan_schema: 1.0.0
+created_at: '2026-06-20'
+book_id: way_stream_sanctuary__default_teacher__gen_x_sandwich__imposter_syndrome__shame
+series_plan: config/source_of_truth/series_plans_en_us/way_stream_sanctuary__default_teacher__gen_x_sandwich__imposter_syndrome.yaml
+store_series:
+  id: way_stream_sanctuary__gen_x_sandwich__worth_limits
+  name: Worth & Limits — for the Sandwich Generation
+installment_number: 2
+engine: shame
+duration: standard_book_60min
+runtime_format_id: standard_book_60min
+structural_format_id: F006
+target_word_range:
+- 9000
+- 12000
+target_audio_minutes: 70
+title: 'The Seat You Earned: Carrying What You Can''t Say'
+subtitle: A Field Guide for the Sandwich Generation Navigating Imposter Syndrome
+cover_tagline: A Field Guide for the Sandwich Generation Navigating Imposter Syndrome
+description:
+  short_blurb: A Field Guide for the Sandwich Generation Navigating Imposter Syndrome
+    A grounded, secular guide to imposter syndrome for the sandwich generation.
+  long_description: 'The Seat You Earned: Carrying What You Can''t Say
+
+
+    For caring for aging parents and growing kids at once. This book names what imposter
+    syndrome is doing in your body in language you can use — through recognition,
+    descent, and integration, not worksheets or forced positivity. Book 2 of the the
+    Sandwich Generation imposter syndrome series.'
+keywords:
+  primary:
+  - imposter syndrome
+  - feeling like a fraud
+  - self doubt at work
+  - confidence at work
+  - perfectionism
+  - imposter syndrome help
+  secondary:
+  - the sandwich generation
+  - imposter syndrome for the sandwich generation
+bisac_codes:
+- SEL027000
+- BUS041000
+- SEL031000
+target_price:
+  ebook_usd: 4.99
+  audible_usd: 9.99
+  paperback_usd: 12.99
+author_positioning:
+  teacher: default_teacher
+  brand: way_stream_sanctuary
+comp_titles:
+- The Secret Thoughts of Successful Women (Young)
+- Daring Greatly (Brown)
+- Mindset (Dweck)
+main_character_name: null
+main_character_lora_id: null
+confidence:
+  pricing: low
+  title: medium
+  comps: medium
+plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
