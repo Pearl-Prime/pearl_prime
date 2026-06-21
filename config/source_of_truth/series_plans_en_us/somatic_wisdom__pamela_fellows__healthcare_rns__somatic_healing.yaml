@@ -1,33 +1,34 @@
 series_plan_schema: 1.0.0
-created_at: '2026-04-24'
 locale: en_US
 book_id_prefix: somatic_wisdom__pamela_fellows__healthcare_rns__somatic_healing
 brand: somatic_wisdom
 teacher: pamela_fellows
 persona: healthcare_rns
 topic: somatic_healing
-teacher_topic_score: 0.95
-teacher_persona_score: 0.9
-composite_fit: 0.93
+byline_author: theo_underhill
 arc:
   installment_1:
-    book_id: somatic_wisdom__pamela_fellows__healthcare_rns__somatic_healing__watcher
-    engine: watcher
-    master_arc: config/source_of_truth/master_arcs/healthcare_rns__somatic_healing__watcher__F006.yaml
-    duration: standard_book_60min
-  installment_2:
     book_id: somatic_wisdom__pamela_fellows__healthcare_rns__somatic_healing__overwhelm
     engine: overwhelm
     master_arc: config/source_of_truth/master_arcs/healthcare_rns__somatic_healing__overwhelm__F006.yaml
     duration: standard_book_60min
-reader_promise_family: |
-  7 books across engines of somatic_healing via the soft-clinical josei, warm without sentiment voice.
-bestseller_hook_family: recognition_descent
+  installment_2:
+    book_id: somatic_wisdom__pamela_fellows__healthcare_rns__somatic_healing__watcher
+    engine: watcher
+    master_arc: config/source_of_truth/master_arcs/healthcare_rns__somatic_healing__watcher__F006.yaml
+    duration: standard_book_60min
+reader_promise_family: A felt-sense companion for nurses whose bodies have been holding
+  what the shift wouldn't let them feel — naming what the nervous system is doing,
+  in language you can use mid-shift, without one more protocol to push through.
+bestseller_hook_family: ''
 emotional_engine: somatic_healing_recognition
 comp_series:
-- The Body Keeps the Score (van der Kolk)
-- Waking the Tiger (Levine)
-- My Grandmother's Hands (Menakem)
+- The Body Keeps the Score (Bessel van der Kolk) — the foundational trauma-and-the-body
+  text these readers already trust
+- 'Burnout: The Secret to Unlocking the Stress Cycle (Emily and Amelia Nagoski) —
+  names the unfinished stress response living in caregivers'' bodies'
+- Set Boundaries, Find Peace (Nedra Glover Tawwab) — same trusted-companion register
+  for depleted helpers who give everything away
 platform_strategy:
   primary:
   - kdp_ebook
@@ -41,21 +42,25 @@ platform_strategy:
     release_spacing_days: 14
     max_books_per_brand_per_month: 2
 reader_avatar:
-  age: 28–45
-  where_they_are: |
-    Off-shift but on call in body. Just finished nights.
-  what_they_need: |
-    Names what nursing does to a nervous system.
-  what_they_avoid: |
-    Bubble baths. Hero narratives.
+  age: 28-52
+  where_they_are: It's the drive home after a twelve-hour shift, hands still smelling
+    of sanitizer, and you realize you've been gripping the wheel at a red light for
+    no reason — heart going, jaw set, scanning the dark road like the next emergency
+    is already coming.
+  what_they_need: To understand that the bracing, the held breath, the body that won't
+    stand down is not weakness or burnout failure — it is a nervous system that learned
+    to survive the floor, and it can be met gently rather than overridden.
+  what_they_avoid: Push-through fixes, 'self-care' that's one more task, cold clinical
+    protocols they already run on patients all day, and any practice that floods or
+    retraumatizes instead of settling them.
 series_voice_markers:
-  register: soft-clinical josei, warm without sentiment
-  sentence_rhythm: measured, body-paced, sensation-anchored
-  metaphor_family: body weather, tides, seasonal bodies
-  second_person_default: true
-main_character_name: Beatrix
-main_character_role: floor RN in a hospital unit
-main_character_image_path: null
-main_character_lora_id: beatrix_sw_us
-main_character_trigger_word: beatrix_sw_us
-plan_source_path: config/manga/manga_brand_series_plan.yaml
+  register: embodied, grounded, gently somatic and trauma-informed; the voice of a
+    fellow nurse who finally sat down, speaking from the body and to the body — never
+    clinical, never hustle, never 'mind over matter'
+  sentence_rhythm: unhurried and breath-paced; short grounding sentences set against
+    longer descending ones, with deliberate pauses that let a feeling land before
+    the next line arrives
+  metaphor_family: the body's felt sense, breath and grounding, tension held and released,
+    the nervous system settling like weather passing, the ground holding you up, warmth
+    returning to a place that has been braced for a long time
+_needs_authoring: false

@@ -1,8 +1,7 @@
 book_plan_schema: 1.0.0
-created_at: '2026-04-24'
 book_id: somatic_wisdom__pamela_fellows__millennial_women_professionals__somatic_healing__watcher
 series_plan: config/source_of_truth/series_plans_en_us/somatic_wisdom__pamela_fellows__millennial_women_professionals__somatic_healing.yaml
-installment_number: 1
+installment_number: 2
 engine: watcher
 duration: standard_book_60min
 runtime_format_id: standard_book_60min
@@ -11,37 +10,76 @@ target_word_range:
 - 9000
 - 12000
 target_audio_minutes: 70
-title: The Witnessing Practice
-subtitle: Body-Based Practices for Somatic Healing and Nervous System Reset
-cover_tagline: You're here, but you're also somewhere behind yourself.
+title: The Part of You That Never Stands Down
+subtitle: For the woman whose mind never goes off duty — scanning every room, every
+  tone, every face for a threat that doesn't come
+cover_tagline: You've been on watch so long you forgot there was anything else to
+  be.
 description:
-  short_blurb: You're here, but you're also somewhere behind yourself. That's not enough anymore. release what's been held in my body for years.
-  long_description: |
-    You're here, but you're also somewhere behind yourself.
+  short_blurb: You read the room before you enter it. You catch the shift in someone's
+    voice before they finish the sentence. You can't remember the last time your guard
+    was fully down. This is a book for the woman whose body never stops scanning —
+    and a gentle way to let the watcher, finally, sit down.
+  long_description: 'You notice everything. The slight change in your manager''s tone
+    on the call. The text that took an hour too long to come back. The expression
+    that crossed someone''s face for half a second before they smoothed it over. You
+    catch it all, instantly, before you''ve even decided to look — and your body responds
+    before your mind can ask whether there was anything to respond to. Shoulders up.
+    Breath shallow. A quiet engine running underneath the day that never quite turns
+    off.
 
-    This book is for senior manager + primary household planners who my body holds things my mind has been trying to forget. It doesn't promise to make the feeling stop. It names what's happening in language you can use the next time it happens.
 
-    Chapter by chapter, you'll work with the distance that opens between you and your own experience, and why it formed. Not through exposure or worksheets or morning routines — through recognition, descent, and integration. The practice the book asks for can happen on a subway, between meetings, or at 3am.
+    This book is for you: the one who is always a little bit braced, always reading
+    the room, always half a step ahead of a danger that, most of the time, never arrives.
+    You might call it being perceptive, being prepared, being good at your job. And
+    it is those things. It is also a nervous system that learned, somewhere along
+    the way, that safety meant never being caught off guard — and never got the message
+    that it''s allowed to stand down.
 
-    You'll walk away knowing what your body is doing and why it makes sense. Not fixed. Not healed in any final sense. But no longer alone with the pattern.
 
-    Book 1 of the Somatic Wisdom somatic healing series.
+    You''ll come to recognize the watcher not as anxiety to be argued with, but as
+    an old form of protection that is still on duty long after the shift should have
+    ended. You''ll learn what hypervigilance feels like from the inside — the scanning,
+    the bracing, the way rest itself can feel unsafe because letting your guard down
+    once cost you something. You''ll find small, body-first ways to signal to your
+    system that this room, right now, is not the room it''s still watching for. Not
+    to switch off your awareness. To let it soften when it can.
+
+
+    This book will not promise to make you stop noticing, or hand you a technique
+    to override the alarm. There is nothing here that bypasses what your body knows
+    or forces calm onto a system that doesn''t yet believe it''s safe. What''s offered
+    instead is recognition — the deep relief of understanding why you are the way
+    you are, and that it was never paranoia, never too much, never a flaw. It was
+    a body keeping you safe the only way it knew how.
+
+
+    The watcher in you is not your enemy. It has been working a very long shift, alone,
+    with no relief. It doesn''t need to be silenced. It needs to be thanked, and slowly,
+    gently, shown that it''s finally allowed to rest.
+
+
+    You don''t have to be on guard to be okay. You''re allowed to put the watch down.
+
+
+    Book 2 of the Felt Sense Publishing somatic healing series.'
 keywords:
   primary:
-  - somatic therapy
-  - body keeps the score
-  - trauma-informed
-  - nervous system healing
-  - embodiment practice
-  - polyvagal
-  - felt sense
+  - hypervigilance recovery
+  - somatic therapy nervous system
+  - the body keeps the score
+  - trauma-informed healing
+  - polyvagal theory exercises
+  - feeling safe in your body
+  - always on alert anxiety
   secondary:
-  - millennial women professionals
-  - watcher somatic healing
+  - somatic healing for women
+  - trauma hypervigilance help
+  - nervous system safety
 bisac_codes:
 - SEL027000
-- SOC028000
-- SEL045000
+- PSY022040
+- SEL036000
 target_price:
   ebook_usd: 4.99
   audible_usd: 9.99
@@ -49,14 +87,12 @@ target_price:
 author_positioning:
   teacher: pamela_fellows
   brand: somatic_wisdom
+  byline_author: theo_underhill
 comp_titles:
-- The Body Keeps the Score (van der Kolk)
-- Waking the Tiger (Levine)
-- My Grandmother's Hands (Menakem)
-main_character_name: Noor
-main_character_lora_id: noor_sw_us
-confidence:
-  pricing: low
-  title: medium
-  comps: high
-plan_source_path: config/manga/manga_brand_series_plan.yaml
+- The Body Keeps the Score (Bessel van der Kolk) — explains the hypervigilant, always-scanning
+  system these readers live in
+- My Grandmother's Hands (Resmaa Menakem) — body-first, non-clinical work with a nervous
+  system braced for threat
+- Accessing the Healing Power of the Vagus Nerve (Stanley Rosenberg) — gentle somatic
+  tools to signal safety and let the guard down
+_needs_authoring: false

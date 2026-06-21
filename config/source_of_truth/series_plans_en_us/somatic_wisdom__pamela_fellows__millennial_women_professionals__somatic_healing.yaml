@@ -1,33 +1,34 @@
 series_plan_schema: 1.0.0
-created_at: '2026-04-24'
 locale: en_US
 book_id_prefix: somatic_wisdom__pamela_fellows__millennial_women_professionals__somatic_healing
 brand: somatic_wisdom
 teacher: pamela_fellows
 persona: millennial_women_professionals
 topic: somatic_healing
-teacher_topic_score: 0.95
-teacher_persona_score: 0.9
-composite_fit: 0.93
+byline_author: theo_underhill
 arc:
   installment_1:
-    book_id: somatic_wisdom__pamela_fellows__millennial_women_professionals__somatic_healing__watcher
-    engine: watcher
-    master_arc: config/source_of_truth/master_arcs/millennial_women_professionals__somatic_healing__watcher__F006.yaml
-    duration: standard_book_60min
-  installment_2:
     book_id: somatic_wisdom__pamela_fellows__millennial_women_professionals__somatic_healing__overwhelm
     engine: overwhelm
     master_arc: config/source_of_truth/master_arcs/millennial_women_professionals__somatic_healing__overwhelm__F006.yaml
     duration: standard_book_60min
-reader_promise_family: |
-  7 books across engines of somatic_healing via the soft-clinical josei, warm without sentiment voice.
-bestseller_hook_family: recognition_descent
+  installment_2:
+    book_id: somatic_wisdom__pamela_fellows__millennial_women_professionals__somatic_healing__watcher
+    engine: watcher
+    master_arc: config/source_of_truth/master_arcs/millennial_women_professionals__somatic_healing__watcher__F006.yaml
+    duration: standard_book_60min
+reader_promise_family: You will learn to feel what your body has been holding, and
+  to let it move through you — without forcing, fixing, or overriding the very system
+  trying to protect you. Recognition before resolution; safety before change.
+bestseller_hook_family: ''
 emotional_engine: somatic_healing_recognition
 comp_series:
-- The Body Keeps the Score (van der Kolk)
-- Waking the Tiger (Levine)
-- My Grandmother's Hands (Menakem)
+- The Body Keeps the Score (Bessel van der Kolk) — the canonical trauma-and-the-body
+  reference these readers already trust
+- Waking the Tiger (Peter Levine) — somatic experiencing as gentle, nervous-system-honoring
+  release rather than re-exposure
+- My Grandmother's Hands (Resmaa Menakem) — embodied, trauma-informed healing written
+  in warm, non-clinical, body-first language
 platform_strategy:
   primary:
   - kdp_ebook
@@ -41,21 +42,25 @@ platform_strategy:
     release_spacing_days: 14
     max_books_per_brand_per_month: 2
 reader_avatar:
-  age: 32–42
-  where_they_are: |
-    Text from mom, text from boss, calendar full.
-  what_they_need: |
-    Sees the emotional labor without calling it a superpower or wound.
-  what_they_avoid: |
-    Lean-in. Self-care Sunday.
+  age: early-to-late thirties
+  where_they_are: It's 6:40pm and she's still at her desk with her shoulders up around
+    her ears, jaw tight, a low hum of dread she can't trace to anything specific;
+    she gets home, finally sits down, and her body still won't let go — like it's
+    bracing for a hit that already landed years ago.
+  what_they_need: to understand what her body is doing and why it makes sense; small,
+    portable ways to come back into her body between meetings, on the train, at 3am;
+    permission to stop treating her own nervous system as a problem to be solved
+  what_they_avoid: push-through advice, 'mind over matter', cold clinical worksheets,
+    breathwork bootcamps, anything that asks her to white-knuckle through or relive
+    the worst of it to 'process' it
 series_voice_markers:
-  register: soft-clinical josei, warm without sentiment
-  sentence_rhythm: measured, body-paced, sensation-anchored
-  metaphor_family: body weather, tides, seasonal bodies
-  second_person_default: true
-main_character_name: Noor
-main_character_role: senior manager + primary household planner
-main_character_image_path: null
-main_character_lora_id: noor_sw_us
-main_character_trigger_word: noor_sw_us
-plan_source_path: config/manga/manga_brand_series_plan.yaml
+  register: embodied, grounded, gently somatic; a felt-sense guide who speaks from
+    and to the body, trauma-informed, never clinical and never hustle — the voice
+    of someone who has sat with their own held tension and stopped fighting it
+  sentence_rhythm: unhurried, breath-paced; short grounding sentences that let you
+    land, then a longer one that widens out; frequent second-person address; pauses
+    you can feel
+  metaphor_family: the body's felt sense, breath and grounding, tension held and released,
+    the nervous system settling like weather clearing, the ground beneath you, warmth
+    returning to a braced place
+_needs_authoring: false

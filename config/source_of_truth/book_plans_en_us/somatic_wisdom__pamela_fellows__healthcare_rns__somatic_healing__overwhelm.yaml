@@ -1,8 +1,7 @@
 book_plan_schema: 1.0.0
-created_at: '2026-04-24'
 book_id: somatic_wisdom__pamela_fellows__healthcare_rns__somatic_healing__overwhelm
 series_plan: config/source_of_truth/series_plans_en_us/somatic_wisdom__pamela_fellows__healthcare_rns__somatic_healing.yaml
-installment_number: 2
+installment_number: 1
 engine: overwhelm
 duration: standard_book_60min
 runtime_format_id: standard_book_60min
@@ -11,37 +10,77 @@ target_word_range:
 - 9000
 - 12000
 target_audio_minutes: 70
-title: Drowning in Demands
-subtitle: ''
-cover_tagline: You have more on your plate than fits in your hours.
+title: Too Much, All at Once
+subtitle: For the nurse whose body is still running the floor at home — when the flood
+  comes in and there's no quiet left to feel it
+cover_tagline: It all came in at once, and your body never got to put it down.
 description:
-  short_blurb: You have more on your plate than fits in your hours. release what's been held in my body for years.
-  long_description: |
-    You have more on your plate than fits in your hours.
+  short_blurb: Some days the alarms, the charts, the families, and the codes all arrive
+    faster than your body can hold them, and the flood doesn't drain when your shift
+    ends. This is a book for the nurse whose nervous system is still carrying too
+    much. It is written to help you set the weight down a little at a time, without
+    one more thing to push through.
+  long_description: 'It comes in all at once. Three call lights, a rapid response
+    down the hall, a family at the desk, the pump beeping, and somewhere underneath
+    it the thing you didn''t get to feel about the patient in 6 — and your body simply
+    makes room by going numb, by speeding up, by clamping down on the breath so you
+    can keep moving.
 
-    This book is for floor RN in a hospital units who my body holds things my mind has been trying to forget. It doesn't promise to make the feeling stop. It names what's happening in language you can use the next time it happens.
 
-    Chapter by chapter, you'll work with how input accumulates past capacity and what happens in your body when it does. Not through exposure or worksheets or morning routines — through recognition, descent, and integration. The practice the book asks for can happen on a subway, between meetings, or at 3am.
+    Then you go home. And it''s still in there.
 
-    You'll walk away knowing what your body is doing and why it makes sense. Not fixed. Not healed in any final sense. But no longer alone with the pattern.
 
-    Book 2 of the Somatic Wisdom somatic healing series.
+    This book is for the floor nurse whose body has been holding too much for too
+    long — the one who can manage a crashing patient with steady hands but can''t
+    fall asleep, can''t finish a sentence at dinner, can''t tell anymore where the
+    shift ends and she begins. If your nervous system has started treating ordinary
+    life like a unit that''s always one admission from collapse, you are not broken.
+    You are flooded. There is a difference, and it matters.
+
+
+    Gently, you''ll come to recognize what overwhelm actually is in the body — not
+    a character flaw, not poor coping, but a system that took on more than it could
+    metabolize and never got the quiet to finish. You''ll feel where the flood lives
+    in you: the held breath, the braced shoulders, the hum that won''t switch off.
+    You''ll learn what it means to let a little of it move through and drain, the
+    way weather passes over and clears, instead of damming it behind one more push.
+
+
+    Nothing here asks you to power through. There are no morning routines to optimize,
+    no protocols to run on yourself, no intensity that floods you all over again.
+    The practices are small enough for a supply closet, a parking lot, the three minutes
+    before report — small enough for a body that already gives all day.
+
+
+    This book will not promise to make the overwhelm stop. It will not hand you a
+    fix or a finish line where you are finally healed and efficient. What it offers
+    is slower and more honest: the felt understanding of what your body is carrying
+    and why it makes such complete sense — so the flood has somewhere to go besides
+    your chest, and the ground can take some of the weight you''ve been holding alone.
+
+
+    You are allowed to set some of it down. You don''t have to carry the whole shift
+    home.
+
+
+    Book 1 of the Felt Sense Publishing somatic healing series.'
 keywords:
   primary:
-  - somatic therapy
-  - body keeps the score
-  - trauma-informed
-  - nervous system healing
-  - embodiment practice
-  - polyvagal
-  - felt sense
+  - somatic therapy for overwhelm
+  - nervous system regulation for nurses
+  - the body keeps the score
+  - trauma-informed healing for healthcare workers
+  - polyvagal exercises for stress
+  - feeling overwhelmed all the time
+  - nurse burnout recovery
   secondary:
-  - healthcare rns
-  - overwhelm somatic healing
+  - somatic healing for caregivers
+  - calming an overwhelmed nervous system
+  - felt sense practice
 bisac_codes:
-- MED058000
 - SEL027000
-- MED003000
+- MED058000
+- PSY022000
 target_price:
   ebook_usd: 4.99
   audible_usd: 9.99
@@ -49,14 +88,12 @@ target_price:
 author_positioning:
   teacher: pamela_fellows
   brand: somatic_wisdom
+  byline_author: theo_underhill
 comp_titles:
-- The Body Keeps the Score (van der Kolk)
-- Waking the Tiger (Levine)
-- My Grandmother's Hands (Menakem)
-main_character_name: Beatrix
-main_character_lora_id: beatrix_sw_us
-confidence:
-  pricing: low
-  title: medium
-  comps: high
-plan_source_path: config/manga/manga_brand_series_plan.yaml
+- The Body Keeps the Score (Bessel van der Kolk) — why overwhelming experience gets
+  stored in the body and how it surfaces later
+- 'Burnout: The Secret to Unlocking the Stress Cycle (Emily and Amelia Nagoski) —
+  completing the stress response that caregivers leave unfinished'
+- 'Anchored: How to Befriend Your Nervous System Using Polyvagal Theory (Deb Dana)
+  — accessible somatic regulation for a system stuck in too-much'
+_needs_authoring: false

@@ -1,0 +1,96 @@
+series_plan_schema: 1.0.0
+locale: en_US
+book_id_prefix: somatic_wisdom__pamela_fellows__millennial_women_professionals__anxiety
+brand: somatic_wisdom
+teacher: pamela_fellows
+persona: millennial_women_professionals
+topic: anxiety
+byline_author: dora_devlin
+arc:
+  installment_1:
+    book_id: somatic_wisdom__pamela_fellows__millennial_women_professionals__anxiety__false_alarm
+    engine: false_alarm
+    master_arc: config/source_of_truth/master_arcs/millennial_women_professionals__anxiety__false_alarm__F006.yaml
+    duration: standard_book_60min
+  installment_2:
+    book_id: somatic_wisdom__pamela_fellows__millennial_women_professionals__anxiety__overwhelm
+    engine: overwhelm
+    master_arc: config/source_of_truth/master_arcs/millennial_women_professionals__anxiety__overwhelm__F006.yaml
+    duration: standard_book_60min
+  installment_3:
+    book_id: somatic_wisdom__pamela_fellows__millennial_women_professionals__anxiety__spiral
+    engine: spiral
+    master_arc: config/source_of_truth/master_arcs/millennial_women_professionals__anxiety__spiral__F006.yaml
+    duration: standard_book_60min
+  installment_4:
+    book_id: somatic_wisdom__pamela_fellows__millennial_women_professionals__anxiety__shame
+    engine: shame
+    master_arc: config/source_of_truth/master_arcs/millennial_women_professionals__anxiety__shame__F006.yaml
+    duration: standard_book_60min
+  installment_5:
+    book_id: somatic_wisdom__pamela_fellows__millennial_women_professionals__anxiety__grief
+    engine: grief
+    master_arc: config/source_of_truth/master_arcs/millennial_women_professionals__anxiety__grief__F006.yaml
+    duration: standard_book_60min
+  installment_6:
+    book_id: somatic_wisdom__pamela_fellows__millennial_women_professionals__anxiety__comparison
+    engine: comparison
+    master_arc: config/source_of_truth/master_arcs/millennial_women_professionals__anxiety__comparison__F006.yaml
+    duration: standard_book_60min
+  installment_7:
+    book_id: somatic_wisdom__pamela_fellows__millennial_women_professionals__anxiety__watcher
+    engine: watcher
+    master_arc: config/source_of_truth/master_arcs/millennial_women_professionals__anxiety__watcher__F006.yaml
+    duration: standard_book_60min
+reader_promise_family: You will learn to listen to your anxious body instead of overriding
+  it — to feel the alarm, the flood, the spiral, the shame, the grief, the comparison,
+  and the endless watching as messages from a nervous system trying to keep you safe,
+  not as flaws to fix. Nothing here pushes through. Everything here helps you come
+  back to the ground beneath you.
+bestseller_hook_family: ''
+emotional_engine: anxiety_recognition
+comp_series:
+- The Body Keeps the Score (Bessel van der Kolk) — the foundational case that anxiety
+  lives in the body and heals through the body, not around it
+- 'Burnout: The Secret to Unlocking the Stress Cycle (Emily & Amelia Nagoski) — written
+  for depleted professional women who need to complete the stress response somatically,
+  not just understand it'
+- 'Anchored: How to Befriend Your Nervous System Using Polyvagal Theory (Deb Dana)
+  — a warm, practical, body-first companion for learning to feel safe again instead
+  of overriding the alarm'
+platform_strategy:
+  primary:
+  - kdp_ebook
+  - audible
+  secondary:
+  - apple_books
+  - google_play
+  - spotify_audiobooks
+  launch_platform: kdp_ebook
+  cadence:
+    release_spacing_days: 14
+    max_books_per_brand_per_month: 2
+reader_avatar:
+  age: early 30s to early 40s
+  where_they_are: It's a Tuesday night and she's still at her desk with three tabs
+    of unsent emails open, jaw tight, shoulders up near her ears, telling herself
+    she'll relax once this one last thing is handled — except there is always one
+    last thing, and her chest has been bracing since the morning standup for a danger
+    she can't actually name.
+  what_they_need: A way to feel safe in her own body again that doesn't ask her to
+    perform calm, hit a metric, or out-discipline her own nervous system — slow, somatic,
+    trauma-informed, the felt sense of the ground coming back under her.
+  what_they_avoid: Hustle-coded 'mind over matter' fixes, cold clinical protocols,
+    optimization language, anyone who tells her to just breathe and push through,
+    and anything that reawakens the intensity instead of softening it.
+series_voice_markers:
+  register: embodied, grounded, gently somatic and trauma-informed; the voice of a
+    felt-sense guide who speaks from and to the body — a hand on the back, not a clipboard;
+    never clinical, never hustle, never pushing through
+  sentence_rhythm: slow and settling, with deliberate pauses; short declarative sentences
+    that let the body catch up, opening into one longer breath-shaped line and returning
+    to stillness — paced like an exhale
+  metaphor_family: the body's felt sense; breath and grounding; tension held and released;
+    the nervous system settling like weather after a storm; the ground beneath you;
+    warmth returning to a place that has been braced for a long time
+_needs_authoring: false
