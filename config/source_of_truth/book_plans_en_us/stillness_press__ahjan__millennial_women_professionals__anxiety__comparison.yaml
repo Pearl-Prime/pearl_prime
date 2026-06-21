@@ -1,5 +1,4 @@
 book_plan_schema: 1.0.0
-created_at: '2026-04-24'
 book_id: stillness_press__ahjan__millennial_women_professionals__anxiety__comparison
 series_plan: config/source_of_truth/series_plans_en_us/stillness_press__ahjan__millennial_women_professionals__anxiety.yaml
 installment_number: 6
@@ -11,37 +10,87 @@ target_word_range:
 - 9000
 - 12000
 target_audio_minutes: 70
-title: The Comparison Habit
-subtitle: ''
-cover_tagline: However well you do, someone is always further ahead.
+title: Everyone Else Looks So Calm
+subtitle: For the woman measuring her racing insides against everyone who seems to
+  have it handled — and always, somehow, coming up short
+cover_tagline: You're comparing your inside to their outside, and calling the gap
+  proof you're behind.
 description:
-  short_blurb: However well you do, someone is always further ahead. You know how that feels. understand why this keeps happening to me.
-  long_description: |
-    However well you do, someone is always further ahead.
+  short_blurb: Everyone around you seems to have it figured out — steady, unbothered,
+    ahead — while you hold together a calm you don't feel. This is a quiet hour for
+    the woman who measures herself against everyone else and always comes up short,
+    written by someone who knows that exact ache. Nothing here will help you win the
+    comparison. That's the point.
+  long_description: 'She seems so calm. They all do, somehow — the colleague who speaks
+    without her heart pounding, the friend whose life looks settled, the woman across
+    the room who appears to be carrying none of what you''re carrying. And in the
+    gap between how steady they look and how fast your insides are moving, a verdict
+    forms: everyone else figured something out that you missed. You''re behind. You''re
+    the only one still struggling to hold it together.
 
-    This book is for senior manager in mid-size company, primary household planners who the body is doing something and I don't understand why. It doesn't promise to make the feeling stop. It names what's happening in language you can use the next time it happens.
 
-    Chapter by chapter, you'll work with the reflex that measures your worth against others, and what it costs to keep score. Not through exposure or worksheets or morning routines — through recognition, descent, and integration. The practice the book asks for can happen on a subway, between meetings, or at 3am.
+    This book is for you — the one who reads every room for how she measures up, who
+    takes other people''s surfaces as if they were the whole truth, whose anxiety
+    has learned to speak the language of comparison and always returns the same judgment:
+    not enough, not yet, not like them. The comparison isn''t vanity. It''s a frightened
+    mind trying to locate itself, checking the others to find out whether it''s safe,
+    and finding only more reasons to brace.
 
-    You'll walk away knowing what your body is doing and why it makes sense. Not fixed. Not healed in any final sense. But no longer alone with the pattern.
 
-    Book 6 of the Stillness Press anxiety series.
+    In these pages you''ll come to recognize the trap for what it is: not an accurate
+    measurement, but the oldest trick anxiety knows — comparing your inside to everyone
+    else''s outside and calling the difference a deficit. You''ll learn how the calm
+    you envy is mostly a surface you can''t see beneath, how the people who look like
+    they have it handled are quietly carrying their own alarms, and how the eye you
+    keep turning on yourself was never able to see the whole truth of anyone. You''ll
+    see how comparison promises relief and delivers only the next person to fall short
+    against.
+
+
+    This is not a self-esteem program or a stop-comparing technique. There''s nothing
+    here to optimize, no gratitude practice to perform until you feel better than
+    the others. You will not be told to simply value yourself more, as if that were
+    a switch you''ve been too lazy to flip. You''ll be kept company instead — by someone
+    who spent years certain everyone else had it figured out, and found that the ache
+    eased not when she finally measured up, but when she set the measuring down.
+
+
+    We''ll move slowly, because comparison runs on the speed of the scroll and the
+    glance, and stillness is what it can''t survive. You''ll spend time in the moment
+    the measuring starts and learn to feel it without obeying its verdict. You''ll
+    discover what it''s like to sit in a room full of people and let them be exactly
+    as calm or as struggling as they are, without turning any of it into a measure
+    of your own worth.
+
+
+    Nothing here will help you win the comparison. That''s the point. You were never
+    behind in a race no one else was actually running. The unease can quiet — not
+    because you finally came out ahead, but because you stopped measuring your insides
+    against a surface that was never the whole story.
+
+
+    You are allowed to stop measuring. Let that be where we begin.
+
+
+    Book 6 of the Stillness Press anxiety series.'
 keywords:
   primary:
-  - anxiety book
-  - generalized anxiety
-  - somatic anxiety
-  - anxious nervous system
-  - stop worrying
-  - anxiety relief
-  - anxiety without medication
+  - how to stop comparing yourself to others
+  - comparison anxiety help
+  - everyone else seems happier
+  - feeling behind in life
+  - social comparison and self worth
+  - comparing myself to others women
+  - stop feeling not good enough
   secondary:
-  - millennial women professionals
-  - comparison anxiety
+  - anxiety self help book
+  - self worth for women
+  - quiet the inner critic
 bisac_codes:
-- SEL027000
-- SOC028000
-- SEL045000
+- SEL036000
+- SEL024000
+- SEL031000
+- SEL023000
 target_price:
   ebook_usd: 4.99
   audible_usd: 9.99
@@ -49,14 +98,9 @@ target_price:
 author_positioning:
   teacher: ahjan
   brand: stillness_press
+  byline_author: lena_thorne
 comp_titles:
-- Unwinding Anxiety (Judson Brewer) — mechanism + noticing register
-- When Things Fall Apart (Pema Chödrön) — surrender register
-- The Happiness Trap (Russ Harris) — ACT informal voice
-main_character_name: Priya
-main_character_lora_id: priya_sp_us
-confidence:
-  pricing: low
-  title: medium
-  comps: high
-plan_source_path: config/manga/manga_brand_series_plan.yaml
+- The Gifts of Imperfection (Brené Brown)
+- Daring Greatly (Brené Brown)
+- Big Magic (Elizabeth Gilbert)
+_needs_authoring: false

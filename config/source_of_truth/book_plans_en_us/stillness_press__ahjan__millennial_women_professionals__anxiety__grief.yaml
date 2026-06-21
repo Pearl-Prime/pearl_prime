@@ -1,8 +1,7 @@
 book_plan_schema: 1.0.0
-created_at: '2026-04-24'
 book_id: stillness_press__ahjan__millennial_women_professionals__anxiety__grief
 series_plan: config/source_of_truth/series_plans_en_us/stillness_press__ahjan__millennial_women_professionals__anxiety.yaml
-installment_number: 7
+installment_number: 5
 engine: grief
 duration: standard_book_60min
 runtime_format_id: standard_book_60min
@@ -11,37 +10,87 @@ target_word_range:
 - 9000
 - 12000
 target_audio_minutes: 70
-title: The Grief That Doesn't Leave
-subtitle: ''
-cover_tagline: Something in you is gone, and no one named it a loss.
+title: What You Carry After Letting Go
+subtitle: For the woman whose anxiety is really an unfinished goodbye — to a person,
+  a future, or a version of herself she never got to grieve
+cover_tagline: Some of what you call anxiety is grief that was never given a place
+  to land.
 description:
-  short_blurb: Something in you is gone, and no one named it a loss. understand why this keeps happening to me.
-  long_description: |
-    Something in you is gone, and no one named it a loss.
+  short_blurb: Some of the unease you carry isn't fear of what's coming — it's mourning
+    for what's already gone, a loss you were too busy or too capable to grieve. This
+    is a soft hour for the woman whose anxiety is really an unfinished goodbye, written
+    by someone who has carried the same. It won't ask you to get over it. It will
+    help you finally set it down.
+  long_description: 'Not all of it is fear of the future. Some of the tightness you
+    carry is older than that — it''s the weight of something that already happened
+    and was never fully felt. A person who left. A future you''d planned on that quietly
+    stopped being possible. A version of yourself you outgrew, or lost, and never
+    paused to mourn because there was always the next thing to handle. The anxiety
+    hums on top of it like a cover over a sound you couldn''t afford to hear.
 
-    This book is for senior manager in mid-size company, primary household planners who the body is doing something and I don't understand why. It doesn't promise to make the feeling stop. It names what's happening in language you can use the next time it happens.
 
-    Chapter by chapter, you'll work with the quiet grief of a self that's been spent, and how absence keeps making itself present. Not through exposure or worksheets or morning routines — through recognition, descent, and integration. The practice the book asks for can happen on a subway, between meetings, or at 3am.
+    This book is for you — the one who kept functioning through the loss, who was
+    praised for how well she was handling it, who never got the time or the permission
+    to actually grieve, so the grief went underground and came back wearing anxiety''s
+    face. Because grief that has nowhere to go doesn''t disappear. It becomes a low,
+    constant bracing. It becomes the feeling that something is missing that you can''t
+    quite name.
 
-    You'll walk away knowing what your body is doing and why it makes sense. Not fixed. Not healed in any final sense. But no longer alone with the pattern.
 
-    Book 7 of the Stillness Press anxiety series.
+    In these pages you''ll come to recognize how much of your unease is mourning in
+    disguise: not danger ahead, but loss behind, asking finally to be felt. You''ll
+    learn the difference between the anxiety that scans the future and the grief that
+    aches for what''s already gone. You''ll see how staying busy became a way to outrun
+    the goodbye, how letting go was something you were told to do quickly and got
+    wrong by doing fast, and how some things have to be released slowly, the way a
+    held breath has to be let out before the next one can come.
+
+
+    This is not a five-stages framework or a method for closure. There''s nothing
+    here to optimize, no timeline to hit, no getting-over-it to achieve. You will
+    not be told that grief is something to process efficiently and move past. You''ll
+    be kept company instead — by someone who carried an unfinished goodbye long enough
+    to mistake it for anxiety, and found that the ache eased not when she fixed it,
+    but when she finally let it have its place.
+
+
+    We''ll move slowly, at the pace grief actually moves, which is the pace of weather
+    and tides and not of schedules. You''ll spend time with what was lost, near enough
+    to honor it, and discover that letting go is not the same as forgetting and never
+    required you to stop loving what''s gone. You''ll feel what it''s like to release
+    something — not because you''re done with it, but because carrying it braced was
+    never the same as keeping it.
+
+
+    Nothing here will ask you to move on, find the silver lining, or be grateful before
+    you''re ready. It asks only that you let the goodbye finally land. The ache can
+    settle. Not because the loss stopped mattering, but because you let it be felt
+    instead of fought.
+
+
+    You are allowed to grieve what no one else thought you''d lost. Let that be where
+    we start.
+
+
+    Book 5 of the Stillness Press anxiety series.'
 keywords:
   primary:
-  - anxiety book
-  - generalized anxiety
-  - somatic anxiety
-  - anxious nervous system
-  - stop worrying
-  - anxiety relief
-  - anxiety without medication
+  - grief and anxiety help
+  - anxiety after loss
+  - unprocessed grief symptoms
+  - letting go of what you lost
+  - mourning a future that didn't happen
+  - grief self help for women
+  - high functioning grief
   secondary:
-  - millennial women professionals
-  - grief anxiety
+  - anxiety self help
+  - coping with loss gently
+  - emotional release and calm
 bisac_codes:
-- SEL027000
-- SOC028000
-- SEL045000
+- SEL036000
+- SEL024000
+- SEL031000
+- SEL010000
 target_price:
   ebook_usd: 4.99
   audible_usd: 9.99
@@ -49,14 +98,9 @@ target_price:
 author_positioning:
   teacher: ahjan
   brand: stillness_press
+  byline_author: lena_thorne
 comp_titles:
-- Unwinding Anxiety (Judson Brewer) — mechanism + noticing register
-- When Things Fall Apart (Pema Chödrön) — surrender register
-- The Happiness Trap (Russ Harris) — ACT informal voice
-main_character_name: Priya
-main_character_lora_id: priya_sp_us
-confidence:
-  pricing: low
-  title: medium
-  comps: high
-plan_source_path: config/manga/manga_brand_series_plan.yaml
+- It's OK That You're Not OK (Megan Devine)
+- The Wild Edge of Sorrow (Francis Weller)
+- Bittersweet (Susan Cain)
+_needs_authoring: false

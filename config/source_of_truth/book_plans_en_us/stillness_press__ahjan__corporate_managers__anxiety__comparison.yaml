@@ -1,5 +1,4 @@
 book_plan_schema: 1.0.0
-created_at: '2026-04-24'
 book_id: stillness_press__ahjan__corporate_managers__anxiety__comparison
 series_plan: config/source_of_truth/series_plans_en_us/stillness_press__ahjan__corporate_managers__anxiety.yaml
 installment_number: 6
@@ -11,37 +10,83 @@ target_word_range:
 - 9000
 - 12000
 target_audio_minutes: 70
-title: 'The Comparison Habit: A Path Back to Stillness'
-subtitle: ''
-cover_tagline: However well you do, someone is always further ahead.
+title: Everyone Else Looks Like They Have It Handled
+subtitle: For the manager measuring their own anxious insides against every calmer,
+  more composed face at the leadership table — and always coming up short
+cover_tagline: They all seem so composed. You're sure you're the only one barely holding
+  on.
 description:
-  short_blurb: However well you do, someone is always further ahead. You know how that feels. understand why this keeps happening to me.
-  long_description: |
-    However well you do, someone is always further ahead.
+  short_blurb: You look around the leadership table and everyone seems composed, certain,
+    ahead of you — and you're sure you're the only one quietly coming apart. This
+    is a book for the manager who measures their insides against everyone else's outsides
+    and always loses. It won't help you win the comparison, and that is precisely
+    the point.
+  long_description: 'You scan the room and you take the measurement before you''ve
+    even decided to. The peer who speaks with such easy certainty. The colleague who
+    got the title younger. The one who looks rested, composed, untroubled, like leadership
+    simply fits them — while you sit there sure you''re the only one at the table
+    quietly coming apart at the seams.
 
-    This book is for mid-level manager running a cross-functional teams who the body is doing something and I don't understand why. It doesn't promise to make the feeling stop. It names what's happening in language you can use the next time it happens.
 
-    Chapter by chapter, you'll work with the reflex that measures your worth against others, and what it costs to keep score. Not through exposure or worksheets or morning routines — through recognition, descent, and integration. The practice the book asks for can happen on a subway, between meetings, or at 3am.
+    This is comparison. The constant, exhausting practice of measuring your inside
+    against everyone else''s outside, and always, somehow, coming up short.
 
-    You'll walk away knowing what your body is doing and why it makes sense. Not fixed. Not healed in any final sense. But no longer alone with the pattern.
 
-    Book 6 of the Stillness Press anxiety series.
+    This book is for the manager who can''t stop scoring themselves against the room.
+    You see everyone else''s composure and assume it goes all the way down. You see
+    their wins and not their 3am. And against that polished, partial picture, your
+    own anxious, uncertain, doing-your-best self never measures up — because you''re
+    comparing the full mess of your interior to the clean surface of theirs. You feel
+    it as the deflation after the meeting, the quiet tally of who''s ahead, the certainty
+    that everyone else got an instruction manual you somehow missed.
+
+
+    Here you''ll come to recognize comparison for the trap it is — how it runs on
+    incomplete information by design, how it turns colleagues into measuring sticks
+    and your own life into a verdict, how the calm you envy in others is, more often
+    than not, a surface exactly like the one you present to them. You''ll learn why
+    winning the comparison never satisfies, because the measuring itself is the wound.
+    And you''ll feel what it is to set the ruler down — to let other people simply
+    be, without making them the scale you''re weighed against — and to come back,
+    finally, to your own ground.
+
+
+    This book will not help you come out ahead. It will not teach you to compare up
+    more strategically or to win the silent contest you''ve been running for years.
+    There is no version of being better than everyone that ends the ache, because
+    the ache was never about your ranking — it was about the measuring. Comparison
+    is not a competition to finally win; it''s a habit to lay down, and it deserves
+    to be released rather than mastered.
+
+
+    The relief isn''t in finally measuring up. It''s in stepping off the scale altogether
+    and discovering you were never required to stand on it. That is the quiet turn
+    this book is here to offer you.
+
+
+    You are allowed to stop scoring yourself against the room. You are allowed to
+    be exactly where you are, unranked, unmeasured, and enough.
+
+
+    Book 6 of the Stillness Press anxiety series.'
 keywords:
   primary:
-  - anxiety book
-  - generalized anxiety
-  - somatic anxiety
-  - anxious nervous system
-  - stop worrying
-  - anxiety relief
-  - anxiety without medication
-  secondary:
-  - corporate managers
   - comparison anxiety
+  - stop comparing yourself to others
+  - social comparison stress
+  - feeling behind in life
+  - self worth and comparison
+  - anxiety not good enough
+  - comparison and self esteem
+  secondary:
+  - comparison at work
+  - leadership comparison anxiety
+  - envy and anxiety help
 bisac_codes:
-- SEL027000
-- BUS041000
-- SEL016000
+- SEL036000
+- SEL024000
+- SEL031000
+- SEL023000
 target_price:
   ebook_usd: 4.99
   audible_usd: 9.99
@@ -49,14 +94,12 @@ target_price:
 author_positioning:
   teacher: ahjan
   brand: stillness_press
+  byline_author: lena_thorne
 comp_titles:
-- Unwinding Anxiety (Judson Brewer) — mechanism + noticing register
-- When Things Fall Apart (Pema Chödrön) — surrender register
-- The Happiness Trap (Russ Harris) — ACT informal voice
-main_character_name: Adam
-main_character_lora_id: adam_sp_us
-confidence:
-  pricing: low
-  title: medium
-  comps: high
-plan_source_path: config/manga/manga_brand_series_plan.yaml
+- The Comparison Cure (Lucy Sheridan) — built entirely around breaking the habit of
+  measuring yourself against others
+- The Gifts of Imperfection (Brené Brown) — on worthiness apart from how you stack
+  up to everyone else
+- Big Magic (Elizabeth Gilbert) — on releasing the contest and returning to your own
+  ground
+_needs_authoring: false

@@ -1,5 +1,4 @@
 book_plan_schema: 1.0.0
-created_at: '2026-04-24'
 book_id: stillness_press__ahjan__millennial_women_professionals__anxiety__false_alarm
 series_plan: config/source_of_truth/series_plans_en_us/stillness_press__ahjan__millennial_women_professionals__anxiety.yaml
 installment_number: 1
@@ -11,37 +10,81 @@ target_word_range:
 - 9000
 - 12000
 target_audio_minutes: 70
-title: 'Misreading the Danger Signal: Finding Peace in the Middle of It All'
-subtitle: ''
-cover_tagline: You've been bracing for something you can't name.
+title: The Alarm That Won't Turn Off
+subtitle: For the high-functioning woman whose body braces for danger that never comes
+  — and who can't remember the last time she felt safe in her own chest
+cover_tagline: Nothing is wrong. So why won't your body believe it?
 description:
-  short_blurb: You've been bracing for something you can't name. understand why this keeps happening to me.
-  long_description: |
-    You've been bracing for something you can't name.
+  short_blurb: You're safe, by every measure that matters — and still something inside
+    you is braced, scanning, waiting for the floor to drop. This is a quiet hour for
+    the woman whose alarm system fires on a clear day, written by someone who knows
+    that feeling from the inside. It won't try to silence the alarm by force. It will
+    help it finally understand that it can settle.
+  long_description: 'It usually starts in the body before it reaches your thoughts.
+    A tightness behind the sternum. A held breath you didn''t decide to hold. The
+    sense that something is about to go wrong, even when you scan the whole room and
+    find nothing there. You check the calendar, the inbox, the faces around the table.
+    Nothing. And still the alarm keeps ringing.
 
-    This book is for senior manager in mid-size company, primary household planners who the body is doing something and I don't understand why. It doesn't promise to make the feeling stop. It names what's happening in language you can use the next time it happens.
 
-    Chapter by chapter, you'll work with the body's false-alarm system and why it keeps firing. Not through exposure or worksheets or morning routines — through recognition, descent, and integration. The practice the book asks for can happen on a subway, between meetings, or at 3am.
+    This book is for you — the one who looks composed and competent, who handles more
+    than most people will ever see, and who lives with a nervous system that treats
+    an ordinary Tuesday like a threat. You are not anxious because you''re weak. You
+    are anxious because somewhere along the way your body learned that staying braced
+    was how you stayed safe. It has simply never been told the danger passed.
 
-    You'll walk away knowing what your body is doing and why it makes sense. Not fixed. Not healed in any final sense. But no longer alone with the pattern.
 
-    Book 1 of the Stillness Press anxiety series.
+    In these pages you''ll come to recognize the false alarm for what it is: not a
+    warning to obey, not a fact to act on, but a signal misfiring in a system that
+    loves you and is trying, clumsily, to protect you. You''ll learn the difference
+    between the body''s first ring and the story your mind builds on top of it. You''ll
+    meet the bracing as something that once made sense — and discover that you can
+    let it soften without forcing it, the way water finds its level when you finally
+    stop stirring it.
+
+
+    This is not a method. There is no morning routine to perfect here, no breathing
+    streak to maintain, nothing to optimize. You will not be told that your fear is
+    a mindset problem you should have solved by now. You''ll simply be kept company
+    by someone who has sat in the same braced silence and found a way to let the body
+    exhale.
+
+
+    We''ll move slowly, because slow is the only speed that ever convinced a frightened
+    body of anything. You''ll spend time with the moment the alarm rings and learn
+    to stay there without flinching or fixing. You''ll feel what it''s like to let
+    safety arrive in its own time instead of performing calm for an audience that
+    isn''t there.
+
+
+    Nothing here asks you to be less alert, less caring, or less capable. It asks
+    only that you stop treating your own nervous system as the enemy. The alarm can
+    quiet. Not because you wrestled it into silence, but because you finally let it
+    see that you''re already standing on solid ground.
+
+
+    You are allowed to feel safe before you''ve earned it. Let that be where we begin.
+
+
+    Book 1 of the Stillness Press anxiety series.'
 keywords:
   primary:
-  - anxiety book
-  - generalized anxiety
-  - somatic anxiety
-  - anxious nervous system
-  - stop worrying
-  - anxiety relief
-  - anxiety without medication
+  - anxiety relief for women
+  - calm the nervous system
+  - high functioning anxiety
+  - how to stop feeling anxious for no reason
+  - anxiety in the body physical symptoms
+  - feeling on edge all the time
+  - nervous system regulation book
   secondary:
-  - millennial women professionals
-  - false alarm anxiety
+  - anxiety self help
+  - books for anxious overachievers
+  - fight or flight calm down
 bisac_codes:
-- SEL027000
-- SOC028000
-- SEL045000
+- SEL036000
+- SEL024000
+- SEL031000
+- SEL001000
 target_price:
   ebook_usd: 4.99
   audible_usd: 9.99
@@ -49,14 +92,9 @@ target_price:
 author_positioning:
   teacher: ahjan
   brand: stillness_press
+  byline_author: lena_thorne
 comp_titles:
-- Unwinding Anxiety (Judson Brewer) — mechanism + noticing register
-- When Things Fall Apart (Pema Chödrön) — surrender register
-- The Happiness Trap (Russ Harris) — ACT informal voice
-main_character_name: Priya
-main_character_lora_id: priya_sp_us
-confidence:
-  pricing: low
-  title: medium
-  comps: high
-plan_source_path: config/manga/manga_brand_series_plan.yaml
+- The Body Keeps the Score (Bessel van der Kolk)
+- Unwinding Anxiety (Judson Brewer)
+- Burnout (Emily Nagoski and Amelia Nagoski)
+_needs_authoring: false

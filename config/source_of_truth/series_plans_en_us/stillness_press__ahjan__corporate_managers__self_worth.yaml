@@ -1,0 +1,69 @@
+series_plan_schema: 1.0.0
+locale: en_US
+book_id_prefix: stillness_press__ahjan__corporate_managers__self_worth
+brand: stillness_press
+teacher: ahjan
+persona: corporate_managers
+topic: self_worth
+byline_author: mira_santos
+arc:
+  installment_1:
+    book_id: stillness_press__ahjan__corporate_managers__self_worth__shame
+    engine: shame
+    master_arc: config/source_of_truth/master_arcs/corporate_managers__self_worth__shame__F006.yaml
+    duration: standard_book_60min
+  installment_2:
+    book_id: stillness_press__ahjan__corporate_managers__self_worth__comparison
+    engine: comparison
+    master_arc: config/source_of_truth/master_arcs/corporate_managers__self_worth__comparison__F006.yaml
+    duration: standard_book_60min
+reader_promise_family: For the high-performing manager who has spent years proving
+  they are enough — a quiet, unhurried place to set the proving down and discover
+  that your worth was never on the line. No optimizing, no fixing, no becoming a better
+  version of yourself. Just the slow recognition that the person doing all that work
+  is already whole.
+bestseller_hook_family: ''
+emotional_engine: self_worth_recognition
+comp_series:
+- The Untethered Soul (Michael A. Singer) — for the reader who wants to loosen identification
+  with the inner critic rather than coach it into compliance
+- Radical Acceptance (Tara Brach) — same shame-to-self-compassion arc, contemplative
+  rather than tactical, written for people who overwork to feel acceptable
+- The Gifts of Imperfection (Brené Brown) — for high-achievers ready to trade 'good
+  enough yet?' for plain worthiness, minus the worksheet culture
+platform_strategy:
+  primary:
+  - kdp_ebook
+  - audible
+  secondary:
+  - apple_books
+  - google_play
+  - spotify_audiobooks
+  launch_platform: kdp_ebook
+  cadence:
+    release_spacing_days: 14
+    max_books_per_brand_per_month: 2
+reader_avatar:
+  age: 35 to 52
+  where_they_are: It is 9:40pm and the team has gone home. You're still at your desk
+    re-reading an email you already sent, certain you missed something, certain someone
+    will finally notice that you're not as capable as they think. The office is dark
+    except for your monitor. You did good work today and you cannot feel any of it.
+  what_they_need: To learn that the relentless self-measurement is not the price of
+    being good at their job, and that they can lead, deliver, and matter without first
+    earning the right to exist. A voice that treats their worth as already settled
+    rather than something to be performance-managed into being.
+  what_they_avoid: Hustle-culture self-improvement, 'optimize your mindset' coaching,
+    just-meditate platitudes, toxic positivity, gratitude-journal homework, and anything
+    that quietly turns calm into one more KPI they're failing to hit.
+series_voice_markers:
+  register: contemplative, spacious, grounded; an unhurried presence who has sat in
+    this exact place themselves — the over-functioning manager who finally stopped
+    proving — never clinical, never a coach, never hustle
+  sentence_rhythm: unhurried and breath-paced; short declarative sentences that land
+    and leave room, occasionally opening into one longer flowing line before settling
+    back; built to be read slowly at the end of a long day, with silences left intact
+  metaphor_family: stillness, breath, settling water, open ground, light through a
+    window, the pause between two thoughts; never productivity, machinery, military,
+    scorecards, or biohacking
+_needs_authoring: false

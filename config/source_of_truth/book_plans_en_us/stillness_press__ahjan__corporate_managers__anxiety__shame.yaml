@@ -1,8 +1,7 @@
 book_plan_schema: 1.0.0
-created_at: '2026-04-24'
 book_id: stillness_press__ahjan__corporate_managers__anxiety__shame
 series_plan: config/source_of_truth/series_plans_en_us/stillness_press__ahjan__corporate_managers__anxiety.yaml
-installment_number: 5
+installment_number: 4
 engine: shame
 duration: standard_book_60min
 runtime_format_id: standard_book_60min
@@ -11,37 +10,85 @@ target_word_range:
 - 9000
 - 12000
 target_audio_minutes: 70
-title: 'The Hidden Weight of Shame: You Were Never Broken'
-subtitle: ''
-cover_tagline: You're sure that if they really saw you, it would be over.
+title: The Fraud You're Sure You Are
+subtitle: For the manager certain they don't belong in the room — when the anxiety
+  is really a hidden belief that something is wrong with you
+cover_tagline: You're not afraid of the work. You're afraid they'll find out about
+  you.
 description:
-  short_blurb: You're sure that if they really saw you, it would be over. understand why this keeps happening to me.
-  long_description: |
-    You're sure that if they really saw you, it would be over.
+  short_blurb: 'Underneath the long hours and the over-preparing is a quieter fear:
+    that you don''t actually belong here, and one day they''ll see it. This is a book
+    for the manager whose anxiety is really shame in a suit — the buried belief in
+    a personal defect, covered by relentless work. It won''t tell you to think positive.
+    It will gently separate what you do from the verdict you''ve passed on who you
+    are.'
+  long_description: 'You over-prepare for the meeting nobody else prepares for. You
+    answer the email at 10pm so no one can say you were slow. You take the feedback
+    like a blow to the body, not the work. And underneath all of it runs a current
+    you rarely say out loud: that you don''t really belong in this role, that you''ve
+    somehow fooled everyone, and that it''s only a matter of time before they see
+    what you see.
 
-    This book is for mid-level manager running a cross-functional teams who the body is doing something and I don't understand why. It doesn't promise to make the feeling stop. It names what's happening in language you can use the next time it happens.
 
-    Chapter by chapter, you'll work with the exposure-fear that keeps you bracing to be found out, and why it runs so deep. Not through exposure or worksheets or morning routines — through recognition, descent, and integration. The practice the book asks for can happen on a subway, between meetings, or at 3am.
+    This is not anxiety about the work. This is shame — the buried belief that something
+    is wrong with you — wearing the work as its cover.
 
-    You'll walk away knowing what your body is doing and why it makes sense. Not fixed. Not healed in any final sense. But no longer alone with the pattern.
 
-    Book 5 of the Stillness Press anxiety series.
+    This book is for the manager who looks, from the outside, entirely competent,
+    and who privately suspects it''s all a performance one slip from collapse. You''re
+    not afraid of the deadline. You''re afraid of being found out. So you overwork,
+    because the work is the thing that keeps the defect hidden, and exhaustion feels
+    safer than exposure. You feel it as the flinch when your name is mentioned, the
+    certainty that the praise was a mistake, the way one piece of criticism can outweigh
+    a year of doing well.
+
+
+    Here you''ll come to recognize shame''s quiet architecture — how it convinces
+    you the problem isn''t your work but you, how it turns achievement into mere evidence-gathering
+    against an exposure that never comes, how it hides so well behind competence that
+    no one, including you, calls it by its name. You''ll learn the difference between
+    making a mistake and being one. And you''ll feel what it is to let yourself be
+    ordinary in the room — not the fraud, not the prodigy, just a person doing the
+    work — and to notice the ground is still there under you.
+
+
+    This book will not coach you into confidence or hand you affirmations to recite
+    until you believe them. It will not optimize your self-talk or turn your worth
+    into a project to complete. There is no version of you that finally earns the
+    right to belong by working hard enough — that bargain was rigged from the start.
+    The shame is not a truth about you to overcome through performance; it''s an old
+    verdict that was never accurate, and it deserves to be seen rather than outrun.
+
+
+    What it offers is something quieter than confidence: the slow, steadying separation
+    of what you do from who you are. When the defect you''ve been hiding turns out
+    not to exist, there is nothing left to cover. And the hours you spent covering
+    it come back to you.
+
+
+    You are allowed to belong here without first becoming flawless. You are allowed
+    to be seen and stay in the room.
+
+
+    Book 4 of the Stillness Press anxiety series.'
 keywords:
   primary:
-  - anxiety book
-  - generalized anxiety
-  - somatic anxiety
-  - anxious nervous system
-  - stop worrying
-  - anxiety relief
-  - anxiety without medication
+  - imposter syndrome help
+  - imposter syndrome at work
+  - shame and anxiety
+  - feeling like a fraud
+  - anxiety self worth
+  - overcome imposter syndrome
+  - fear of being found out
   secondary:
-  - corporate managers
-  - shame anxiety
+  - imposter syndrome managers
+  - high achiever anxiety
+  - shame self help
 bisac_codes:
-- SEL027000
-- BUS041000
-- SEL016000
+- SEL036000
+- SEL024000
+- SEL031000
+- SEL023000
 target_price:
   ebook_usd: 4.99
   audible_usd: 9.99
@@ -49,14 +96,12 @@ target_price:
 author_positioning:
   teacher: ahjan
   brand: stillness_press
+  byline_author: lena_thorne
 comp_titles:
-- Unwinding Anxiety (Judson Brewer) — mechanism + noticing register
-- When Things Fall Apart (Pema Chödrön) — surrender register
-- The Happiness Trap (Russ Harris) — ACT informal voice
-main_character_name: Adam
-main_character_lora_id: adam_sp_us
-confidence:
-  pricing: low
-  title: medium
-  comps: high
-plan_source_path: config/manga/manga_brand_series_plan.yaml
+- The Gifts of Imperfection (Brené Brown) — on shame, worthiness, and letting go of
+  who you think you're supposed to be
+- The Secret Thoughts of Successful Women (and Men) (Valerie Young) — the definitive
+  work on impostor feelings in capable professionals
+- Radical Acceptance (Tara Brach) — meets the buried belief of personal defect with
+  self-compassion rather than fixing
+_needs_authoring: false

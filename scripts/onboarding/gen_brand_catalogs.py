@@ -16,6 +16,7 @@ keep their placeholder catalog until localized plans exist.
 Run:  python3 scripts/onboarding/gen_brand_catalogs.py
 """
 from __future__ import annotations
+import argparse
 import json
 from collections import defaultdict
 from pathlib import Path
@@ -47,7 +48,7 @@ def book_from_plan(d: dict, stem: str) -> dict:
         "long_desc": long_desc.strip(),                         # full store description
         "angle": (d.get("cover_tagline") or "").strip(),        # the marketing hook
         "cover": f"assets/covers/{brand_prefix}/{stem}.png",    # rendered cover (brand_covers); dashboard falls back on 404
-        "author": humanize(ap.get("teacher")),                  # narrating teacher (empty for composite)
+        "author": humanize(ap.get("byline_author")),            # public byline = pen name (matches cover; never the teacher / Sai Maa)
         "keywords": [str(k) for k in kw],
         "bisac": [str(c) for c in (d.get("bisac_codes") or [])][:3],
         "price": str(price.get("ebook_usd") or "4.99"),
@@ -61,12 +62,16 @@ def book_from_plan(d: dict, stem: str) -> dict:
 
 
 def main() -> None:
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--brand", default=None, help="only (re)generate this brand's catalog JSON")
+    args = ap.parse_args()
     if not SRC.exists():
         raise SystemExit(f"book plans dir not found: {SRC}")
     OUTDIR.mkdir(parents=True, exist_ok=True)
     by_brand: dict[str, list] = defaultdict(list)
     skipped = 0
-    for f in sorted(SRC.glob("*.yaml")):
+    glob_pat = f"{args.brand}__*.yaml" if args.brand else "*.yaml"
+    for f in sorted(SRC.glob(glob_pat)):
         try:
             d = yaml.safe_load(f.read_text(encoding="utf-8")) or {}
         except Exception:
@@ -74,6 +79,9 @@ def main() -> None:
             continue
         if not isinstance(d, dict) or not d.get("title"):
             skipped += 1
+            continue
+        if d.get("_needs_authoring") is not False:
+            skipped += 1  # authored-only: skip skeletons (true) + legacy orphans (field absent)
             continue
         brand = (d.get("author_positioning") or {}).get("brand") or f.name.split("__")[0]
         by_brand[brand].append(book_from_plan(d, f.stem))

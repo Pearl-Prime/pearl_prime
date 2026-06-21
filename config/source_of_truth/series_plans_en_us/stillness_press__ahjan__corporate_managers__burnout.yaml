@@ -1,0 +1,71 @@
+series_plan_schema: 1.0.0
+locale: en_US
+book_id_prefix: stillness_press__ahjan__corporate_managers__burnout
+brand: stillness_press
+teacher: ahjan
+persona: corporate_managers
+topic: burnout
+byline_author: daniel_voss
+arc:
+  installment_1:
+    book_id: stillness_press__ahjan__corporate_managers__burnout__overwhelm
+    engine: overwhelm
+    master_arc: config/source_of_truth/master_arcs/corporate_managers__burnout__overwhelm__F006.yaml
+    duration: standard_book_60min
+  installment_2:
+    book_id: stillness_press__ahjan__corporate_managers__burnout__grief
+    engine: grief
+    master_arc: config/source_of_truth/master_arcs/corporate_managers__burnout__grief__F006.yaml
+    duration: standard_book_60min
+  installment_3:
+    book_id: stillness_press__ahjan__corporate_managers__burnout__watcher
+    engine: watcher
+    master_arc: config/source_of_truth/master_arcs/corporate_managers__burnout__watcher__F006.yaml
+    duration: standard_book_60min
+reader_promise_family: A quiet, unhurried place to recognize burnout for what it is
+  — not a performance problem to fix, but a depletion to be met honestly — so the
+  manager carrying everyone can finally set something down.
+bestseller_hook_family: ''
+emotional_engine: burnout_recognition
+comp_series:
+- 'Burnout: The Secret to Unlocking the Stress Cycle (Emily Nagoski & Amelia Nagoski)
+  — names depletion as a physiological state to be completed, not a willpower failure'
+- How to Do Nothing (Jenny Odell) — a contemplative case against the attention economy
+  that refuses to turn rest into another productivity hack
+- 'Wintering: The Power of Rest and Retreat in Difficult Times (Katherine May) — honors
+  fallow, depleted seasons as necessary rather than problems to be optimized away'
+platform_strategy:
+  primary:
+  - kdp_ebook
+  - audible
+  secondary:
+  - apple_books
+  - google_play
+  - spotify_audiobooks
+  launch_platform: kdp_ebook
+  cadence:
+    release_spacing_days: 14
+    max_books_per_brand_per_month: 2
+reader_avatar:
+  age: 38-52
+  where_they_are: It's 9:40 on a Tuesday night. The laptop is still open on the kitchen
+    table, the team's Slack has finally gone quiet, and you're staring at a half-finished
+    email you've rewritten four times. Everyone got what they needed from you today.
+    There is nothing left for you, and tomorrow it starts again.
+  what_they_need: To hear, without judgment, that the exhaustion is real and earned
+    — and to be shown a way back to themselves that doesn't require becoming a better,
+    faster, more optimized version of the person who burned out in the first place.
+  what_they_avoid: Hustle-culture reframes, 'just set boundaries' platitudes, productivity
+    systems dressed up as self-care, toxic positivity, and any book that turns recovery
+    into one more metric to hit.
+series_voice_markers:
+  register: Contemplative, spacious, grounded — the voice of someone who has sat in
+    this depletion themselves and is speaking to you across a quiet table. Never a
+    coach, never a clinician, never selling you a system.
+  sentence_rhythm: Unhurried and breath-paced. Short declarative lines that land and
+    then leave room, with the occasional longer settling sentence that lets the thought
+    come to rest rather than rushing on to the next point.
+  metaphor_family: Stillness, breath, settling water, open ground, light through a
+    window, the pause between, the field after the harvest. Never machinery, military,
+    sport, or optimization.
+_needs_authoring: false

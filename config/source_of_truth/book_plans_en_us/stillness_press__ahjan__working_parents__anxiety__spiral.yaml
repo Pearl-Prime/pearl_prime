@@ -1,8 +1,7 @@
 book_plan_schema: 1.0.0
-created_at: '2026-04-24'
 book_id: stillness_press__ahjan__working_parents__anxiety__spiral
 series_plan: config/source_of_truth/series_plans_en_us/stillness_press__ahjan__working_parents__anxiety.yaml
-installment_number: 2
+installment_number: 3
 engine: spiral
 duration: standard_book_60min
 runtime_format_id: standard_book_60min
@@ -11,37 +10,80 @@ target_word_range:
 - 9000
 - 12000
 target_audio_minutes: 70
-title: Escaping the Mental Loop
-subtitle: A Nervous System Approach to Speak Up and Feeling Safe in Your Body
-cover_tagline: You can't stop thinking about what might happen.
+title: One Worry Becomes a Thousand
+subtitle: For the parent lying awake while a single thought multiplies in the dark
+  — stepping out of the spiral that feeds itself
+cover_tagline: The thought isn't the problem. The pull is.
 description:
-  short_blurb: You can't stop thinking about what might happen. understand why this keeps happening to me.
-  long_description: |
-    You can't stop thinking about what might happen.
+  short_blurb: It starts with one small worry — a cough, a comment, a number in your
+    account — and by the time you notice, it has split into a hundred worse ones,
+    each pulling you further down. This book is for the mind that turns a single thought
+    into a sleepless night. Not to argue with the thoughts, but to step back from
+    the pull.
+  long_description: 'It begins so quietly you don''t even see it start. One thought.
+    A small one. Did the teacher seem off at pickup. Was that cough nothing. Can we
+    actually afford this. And then, before you''ve decided anything, that single thought
+    has divided — into the next, and the next, each one a little darker, each one
+    pulling the floor down a little further, until you are lying in the dark at 2am
+    running a catastrophe that hasn''t happened and probably won''t, unable to find
+    the thread that brought you here.
 
-    This book is for working parent of two kids under 8s who the body is doing something and I don't understand why. It doesn't promise to make the feeling stop. It names what's happening in language you can use the next time it happens.
 
-    Chapter by chapter, you'll work with why the mind loops back to the same thought and how to break the tightening. Not through exposure or worksheets or morning routines — through recognition, descent, and integration. The practice the book asks for can happen on a subway, between meetings, or at 3am.
+    This is the spiral. It is rumination doing what rumination does: taking one ordinary
+    worry and feeding it, turning it over, multiplying it, convincing you that if
+    you just think hard enough you''ll think your way to safety. You never do. The
+    spiral isn''t trying to solve anything. It''s a loop that mistakes motion for
+    progress, and for a parent — whose worries are always about the people they''d
+    die for — it can run all night.
 
-    You'll walk away knowing what your body is doing and why it makes sense. Not fixed. Not healed in any final sense. But no longer alone with the pattern.
 
-    Book 2 of the Stillness Press anxiety series.
+    This book is for you: the one whose mind won''t power down, the one who has narrated
+    entire imagined disasters into the ceiling. The one who wakes at the same hour
+    every night to the same churning. You are not crazy and you are not catastrophizing
+    on purpose. You have a mind that loves fiercely and confuses worry with protection
+    — as if the worrying itself were keeping anyone safe.
+
+
+    Slowly, you''ll come to recognize the spiral the moment it begins, before it has
+    you. You''ll learn the felt difference between thinking about a problem and being
+    pulled under by it. You''ll learn that you do not have to answer every thought,
+    finish every imagined scenario, or win the argument the spiral keeps starting.
+    You''ll practice letting the churning water go still — not by forcing it, but
+    by stepping back far enough to watch one thought arise and pass without grabbing
+    the next.
+
+
+    This book will not promise to stop your thoughts or hand you a technique to control
+    your mind. It won''t pretend you can optimize your way to a quiet head, or shame
+    you for lying awake. The thoughts will keep coming; that''s what minds do. What
+    can change is whether you follow them down. You can notice the first link of the
+    chain and simply decline the second.
+
+
+    The worry is not a command. The pull is not the truth. And in the space where
+    you stop chasing the next thought, there is a stillness that was there the whole
+    time, waiting underneath the noise.
+
+
+    Book 3 of the Stillness Press anxiety series.'
 keywords:
   primary:
-  - anxiety book
-  - generalized anxiety
-  - somatic anxiety
-  - anxious nervous system
-  - stop worrying
-  - anxiety relief
-  - anxiety without medication
+  - how to stop overthinking
+  - anxiety racing thoughts at night
+  - stop ruminating anxiety
+  - can't sleep mind won't stop
+  - overthinking parent anxiety
+  - anxiety spiral help
+  - quiet a racing mind
   secondary:
-  - working parents
-  - spiral anxiety
+  - intrusive worry thoughts
+  - overthinking books self help
+  - calm anxious mind at night
 bisac_codes:
-- FAM034000
-- SEL027000
-- FAM013000
+- SEL036000
+- SEL024000
+- SEL031000
+- SEL009000
 target_price:
   ebook_usd: 4.99
   audible_usd: 9.99
@@ -49,14 +91,12 @@ target_price:
 author_positioning:
   teacher: ahjan
   brand: stillness_press
+  byline_author: lena_thorne
 comp_titles:
-- Unwinding Anxiety (Judson Brewer) — mechanism + noticing register
-- When Things Fall Apart (Pema Chödrön) — surrender register
-- The Happiness Trap (Russ Harris) — ACT informal voice
-main_character_name: Claire
-main_character_lora_id: claire_sp_us
-confidence:
-  pricing: low
-  title: medium
-  comps: high
-plan_source_path: config/manga/manga_brand_series_plan.yaml
+- Don't Believe Everything You Think (Joseph Nguyen) — targets the same rumination,
+  where this book stays in the parent's lived 2am
+- Unwinding Anxiety (Judson Brewer) — maps the worry loop scientifically; this title
+  offers the quieter, felt companion
+- Stop Overthinking (Nick Trenton) — same reader who can't shut the mind off, with
+  stillness in place of tactics
+_needs_authoring: false

@@ -1,8 +1,7 @@
 book_plan_schema: 1.0.0
-created_at: '2026-04-24'
 book_id: stillness_press__ahjan__working_parents__anxiety__overwhelm
 series_plan: config/source_of_truth/series_plans_en_us/stillness_press__ahjan__working_parents__anxiety.yaml
-installment_number: 4
+installment_number: 2
 engine: overwhelm
 duration: standard_book_60min
 runtime_format_id: standard_book_60min
@@ -11,37 +10,80 @@ target_word_range:
 - 9000
 - 12000
 target_audio_minutes: 70
-title: 'When Everything Is Too Much: When the Noise Inside Finally Quiets'
-subtitle: A Nervous System Approach to Break Free and Feeling Safe in Your Body
-cover_tagline: You have more on your plate than fits in your hours.
+title: One Square Foot of Quiet
+subtitle: For the parent buried when everything lands at once — finding a single patch
+  of still water on a day that has long since exceeded you
+cover_tagline: When there is no room left to think, you can still find room to breathe.
 description:
-  short_blurb: You have more on your plate than fits in your hours. understand why this keeps happening to me.
-  long_description: |
-    You have more on your plate than fits in your hours.
+  short_blurb: The emails, the pickup, the unanswered text, the lunch you forgot to
+    pack, the meeting that ran long, the small voice asking for you right now — all
+    of it arriving at once, with no space in between. This book is for the days the
+    flood comes in over your head. It won't help you carry more. It will help you
+    find the one square foot of ground that is still yours.
+  long_description: 'There is a particular moment a working parent knows too well.
+    It is the moment when everything arrives at the same time. The phone is ringing
+    and the timer is going off and someone is crying and the inbox has a red number
+    you can''t look at and dinner is not started and you are standing in the middle
+    of your own kitchen with your hands slightly open, unable to choose what to do
+    first because all of it is first.
 
-    This book is for working parent of two kids under 8s who the body is doing something and I don't understand why. It doesn't promise to make the feeling stop. It names what's happening in language you can use the next time it happens.
 
-    Chapter by chapter, you'll work with how input accumulates past capacity and what happens in your body when it does. Not through exposure or worksheets or morning routines — through recognition, descent, and integration. The practice the book asks for can happen on a subway, between meetings, or at 3am.
+    This is overwhelm. Not laziness, not poor planning, not a failure of willpower
+    — simply more than one person can hold, arriving faster than one person can sort
+    it. The flood comes in, and the part of you that thinks clearly goes quiet under
+    the water.
 
-    You'll walk away knowing what your body is doing and why it makes sense. Not fixed. Not healed in any final sense. But no longer alone with the pattern.
 
-    Book 4 of the Stillness Press anxiety series.
+    This book is for you: the one running the whole operation, the one everyone reaches
+    for, the one whose capacity was exceeded hours ago and who is still, somehow,
+    going. The one who lies down at night with a mind that won''t stop listing. You
+    are not weak for feeling buried. You are a finite person who has been handed an
+    infinite amount, and the wonder is not that you feel overwhelmed — it''s that
+    you''ve carried it this long.
+
+
+    Without asking you to do more, you''ll come to recognize the difference between
+    the flood itself and the panic about the flood. You''ll learn to feel the moment
+    capacity tips over, and to find — even there, even then — one square foot of stillness
+    that the day cannot take from you. You''ll practice letting the hundred things
+    blur back into one breath, one object, one next small step, the way muddy water
+    clears only when you stop stirring it.
+
+
+    This book will not promise to empty your plate or hand you a system to manage
+    it all. It will not turn rest into a productivity hack or make calm one more task
+    you''re behind on. The amount is real, and most of it isn''t yours to fix tonight.
+    What can change is your relationship to the flood — whether you go under fighting
+    it, or learn to stand quietly in the middle of it and breathe.
+
+
+    You do not have to get on top of everything to be allowed a moment of peace. You
+    can set the whole impossible pile down, just for the length of one breath, and
+    pick up only what is actually in front of you.
+
+
+    Start there. One square foot. One breath. That is enough.
+
+
+    Book 2 of the Stillness Press anxiety series.'
 keywords:
   primary:
-  - anxiety book
-  - generalized anxiety
-  - somatic anxiety
-  - anxious nervous system
-  - stop worrying
-  - anxiety relief
-  - anxiety without medication
+  - overwhelmed mom anxiety
+  - how to deal with overwhelm
+  - anxiety relief for busy parents
+  - feeling overwhelmed all the time
+  - calm for working parents
+  - mental overload help
+  - too much to do anxiety
   secondary:
-  - working parents
-  - overwhelm anxiety
+  - working mom burnout book
+  - stress relief for parents
+  - how to feel calm when busy
 bisac_codes:
-- FAM034000
-- SEL027000
-- FAM013000
+- SEL036000
+- SEL024000
+- SEL031000
+- FAM032000
 target_price:
   ebook_usd: 4.99
   audible_usd: 9.99
@@ -49,14 +91,12 @@ target_price:
 author_positioning:
   teacher: ahjan
   brand: stillness_press
+  byline_author: lena_thorne
 comp_titles:
-- Unwinding Anxiety (Judson Brewer) — mechanism + noticing register
-- When Things Fall Apart (Pema Chödrön) — surrender register
-- The Happiness Trap (Russ Harris) — ACT informal voice
-main_character_name: Claire
-main_character_lora_id: claire_sp_us
-confidence:
-  pricing: low
-  title: medium
-  comps: high
-plan_source_path: config/manga/manga_brand_series_plan.yaml
+- 'Burnout: The Secret to Unlocking the Stress Cycle (Emily & Amelia Nagoski) — speaks
+  to the flooded caregiver, with science where this book offers stillness'
+- Drop the Ball (Tiffany Dufu) — meets the over-extended working mother, practical
+  where this title is contemplative
+- Real Self-Care (Pooja Lakshmin) — refuses the optimization trap as this series does,
+  aimed at the parent at capacity
+_needs_authoring: false

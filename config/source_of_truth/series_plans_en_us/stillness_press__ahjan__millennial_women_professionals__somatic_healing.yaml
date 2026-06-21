@@ -1,33 +1,36 @@
 series_plan_schema: 1.0.0
-created_at: '2026-04-24'
 locale: en_US
 book_id_prefix: stillness_press__ahjan__millennial_women_professionals__somatic_healing
 brand: stillness_press
 teacher: ahjan
 persona: millennial_women_professionals
 topic: somatic_healing
-teacher_topic_score: 0.5
-teacher_persona_score: 0.8
-composite_fit: 0.65
+byline_author: sam_meridian
 arc:
   installment_1:
-    book_id: stillness_press__ahjan__millennial_women_professionals__somatic_healing__watcher
-    engine: watcher
-    master_arc: config/source_of_truth/master_arcs/millennial_women_professionals__somatic_healing__watcher__F006.yaml
-    duration: standard_book_60min
-  installment_2:
     book_id: stillness_press__ahjan__millennial_women_professionals__somatic_healing__overwhelm
     engine: overwhelm
     master_arc: config/source_of_truth/master_arcs/millennial_women_professionals__somatic_healing__overwhelm__F006.yaml
     duration: standard_book_60min
-reader_promise_family: |
-  You'll learn to come back into a body that learned to ignore itself. 7 books across engines of the same underlying capacity — each one enters the work from a different angle.
-bestseller_hook_family: recognition_descent
+  installment_2:
+    book_id: stillness_press__ahjan__millennial_women_professionals__somatic_healing__watcher
+    engine: watcher
+    master_arc: config/source_of_truth/master_arcs/millennial_women_professionals__somatic_healing__watcher__F006.yaml
+    duration: standard_book_60min
+reader_promise_family: 'You will learn to recognize what your body has been doing
+  all along — not to fix it, optimize it, or finally get on top of it, but to stop
+  being a stranger to your own nervous system. Each book is a doorway into the same
+  quiet truth: the body has been keeping a record, and you can learn to read it without
+  forcing it to stop.'
+bestseller_hook_family: ''
 emotional_engine: somatic_healing_recognition
 comp_series:
-- The Body Keeps the Score (Bessel van der Kolk) — trauma-body foundational
-- Waking the Tiger (Peter Levine) — somatic experiencing
-- My Grandmother's Hands (Resmaa Menakem) — racialized somatic voice
+- The Body Keeps the Score (Bessel van der Kolk) — the foundational body-holds-trauma
+  frame these readers already half-know
+- 'Burnout: The Secret to Unlocking the Stress Cycle (Emily & Amelia Nagoski) — completing
+  the stress response in the body, written for high-functioning women'
+- When the Body Says No (Gabor Maté) — the cost of being the one who holds it all
+  together, named with compassion rather than blame
 platform_strategy:
   primary:
   - kdp_ebook
@@ -41,26 +44,31 @@ platform_strategy:
     release_spacing_days: 14
     max_books_per_brand_per_month: 2
 reader_avatar:
-  age: 32–42
-  where_they_are: |
-    Text from mom, text from boss, calendar full. Saturday morning, partner still asleep, she's been awake an hour.
-  what_they_need: |
-    Someone who sees the emotional labor without calling it a superpower or a wound.
-  what_they_avoid: |
-    Lean-in reframing. Self-care Sunday aesthetic. 'You're doing so much' without offering anything.
+  age: 31 to 42
+  where_they_are: It's a Tuesday and she's the one everyone counts on. A senior manager
+    at a mid-size company, the person who remembers the dentist appointments and the
+    quarterly deadlines both. She looks composed in the meeting, answers the Slack
+    message at 9:40pm, and then sits in the parked car in the garage for a minute
+    longer than she needs to, hand on her chest, not sure why her body feels like
+    it's still bracing.
+  what_they_need: Language for what is happening inside her that isn't 'just stress'
+    and isn't a diagnosis to manage — a way to be with the held tension, the bracing,
+    the loops, that doesn't ask her to perform calm or add one more practice to a
+    life already full. She needs to feel accompanied, not coached.
+  what_they_avoid: Hustle-culture reframes, 'optimize your mindset' productivity gloss,
+    just-breathe platitudes, toxic positivity, and any book that turns healing into
+    one more standard she's failing to meet. She is allergic to the word 'should'
+    and to anyone who has clearly never sat in the feeling themselves.
 series_voice_markers:
-  register: intimate, persona-specific, no management-speak
-  sentence_rhythm: somatic-pacing — sentences match breath
-  metaphor_family: body sensations, weather-of-the-body, nature — never productivity, mechanical, military
-  second_person_default: true
-  taboo:
-  - No rewire-your-brain language
-  - No morning-routine prescriptions
-  - No therapy-as-solution closing
-  - No religious framing
-main_character_name: Emma
-main_character_role: senior manager in mid-size company, primary household planner
-main_character_image_path: null
-main_character_lora_id: emma_sp_us
-main_character_trigger_word: emma_sp_us
-plan_source_path: config/manga/manga_brand_series_plan.yaml
+  register: Contemplative, spacious, grounded — the unhurried voice of someone who
+    has sat in this himself and isn't in a rush to get you out of it. Never clinical,
+    never a coach, never hustle. Present, like someone sitting beside you who has
+    nowhere else to be.
+  sentence_rhythm: Long settling sentences that open out, then a short one that lands
+    and lets the silence in. Cadence built to be read slowly — on a train, between
+    meetings, at 3am. Plenty of pauses. Nothing hurried.
+  metaphor_family: Stillness and breath; settling water and silt sinking to the bottom
+    of a glass; open ground; light coming slow through a window; the pause between
+    an inhale and the next breath. Never machinery, never optimization, never the
+    body as a system to debug.
+_needs_authoring: false

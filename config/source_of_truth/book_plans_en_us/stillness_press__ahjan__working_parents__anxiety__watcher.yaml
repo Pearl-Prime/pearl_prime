@@ -1,8 +1,7 @@
 book_plan_schema: 1.0.0
-created_at: '2026-04-24'
 book_id: stillness_press__ahjan__working_parents__anxiety__watcher
 series_plan: config/source_of_truth/series_plans_en_us/stillness_press__ahjan__working_parents__anxiety.yaml
-installment_number: 3
+installment_number: 7
 engine: watcher
 duration: standard_book_60min
 runtime_format_id: standard_book_60min
@@ -11,37 +10,81 @@ target_word_range:
 - 9000
 - 12000
 target_audio_minutes: 70
-title: Stepping Back from the Storm
-subtitle: A Nervous System Approach to How To Calm and Feeling Safe in Your Body
-cover_tagline: You're here, but you're also somewhere behind yourself.
+title: Counting Heads in the Dark
+subtitle: For the parent whose mind never stops scanning for the next thing that could
+  hurt them — learning, at last, to let the watch set itself down
+cover_tagline: You can put the watch down. Nothing falls apart when you do.
 description:
-  short_blurb: You're here, but you're also somewhere behind yourself. That's not enough anymore. understand why this keeps happening to me.
-  long_description: |
-    You're here, but you're also somewhere behind yourself.
+  short_blurb: Some part of you is always on. Scanning the room, counting the kids,
+    listening past the silence, monitoring everyone's mood, bracing for the thing
+    that might go wrong. This book is for the parent whose mind never clocks out.
+    It will show you that the watch can be set down — and that nothing falls apart
+    when it is.
+  long_description: 'There is a part of you that never stops watching. It counts the
+    children in the back seat at every light. It reads the room the second you walk
+    in. It listens past the quiet for the cry that means something''s wrong, tracks
+    everyone''s mood, scans the horizon for the threat it''s certain is coming. Even
+    in the rare still moment, even on the good days, it stays at its post — alert,
+    vigilant, never quite off duty. You can''t remember the last time you were fully
+    off the clock.
 
-    This book is for working parent of two kids under 8s who the body is doing something and I don't understand why. It doesn't promise to make the feeling stop. It names what's happening in language you can use the next time it happens.
 
-    Chapter by chapter, you'll work with the distance that opens between you and your own experience, and why it formed. Not through exposure or worksheets or morning routines — through recognition, descent, and integration. The practice the book asks for can happen on a subway, between meetings, or at 3am.
+    This is the watcher: the hypervigilant mind doing what it believes is its sacred
+    job, standing guard over the people you love against dangers that, overwhelmingly,
+    never arrive. It was forged by love and by the real weight of being responsible
+    for small, fragile lives. But somewhere it stopped being a tool you pick up when
+    needed and became a post you can never leave — and a sentry that never sleeps
+    doesn''t keep you safer. It just keeps you exhausted.
 
-    You'll walk away knowing what your body is doing and why it makes sense. Not fixed. Not healed in any final sense. But no longer alone with the pattern.
 
-    Book 3 of the Stillness Press anxiety series.
+    This book is for you: the one who can''t relax even when everything is fine, the
+    one who feels uneasy precisely because nothing is wrong yet. The one who has confused
+    vigilance with love, as if lowering your guard for a moment would be a kind of
+    abandonment. You are not paranoid and you are not over-reacting. You have a watchful,
+    devoted mind that has been standing guard so long it has forgotten it''s allowed
+    to rest.
+
+
+    Slowly, you''ll come to recognize the watcher and feel how its scanning lives
+    in the body — the eyes that won''t soften, the breath held high, the shoulders
+    that never fully come down. You''ll learn the difference between true attention,
+    which rises when it''s needed, and chronic vigilance, which never stands down
+    at all. You''ll learn, in small and safe increments, what it is to let the guard
+    rest for a breath — to discover that the room stays standing, the children keep
+    breathing, the world holds, even when you are not personally watching it. Like
+    light filling a room you''d kept dark, asking nothing of you.
+
+
+    This book will not promise to make you stop caring, or hand you a system to perfectly
+    manage every risk. It won''t optimize your vigilance or shame the part of you
+    that learned to stay alert. That part was trying to protect everything you love.
+    There is no flaw here to fix — only a tired sentry who deserves to be relieved.
+
+
+    You are allowed to stand down. Not forever, not carelessly — just enough to breathe.
+    And in the stillness where the watching finally rests, you may find that what
+    you were guarding was safe all along.
+
+
+    Book 7 of the Stillness Press anxiety series.'
 keywords:
   primary:
-  - anxiety book
-  - generalized anxiety
-  - somatic anxiety
-  - anxious nervous system
-  - stop worrying
-  - anxiety relief
-  - anxiety without medication
+  - hypervigilance anxiety
+  - can't relax even when nothing is wrong
+  - always on alert anxiety
+  - anxious parent always watching
+  - how to stop being hypervigilant
+  - anxiety always waiting for something bad
+  - overprotective anxious parent help
   secondary:
-  - working parents
-  - watcher anxiety
+  - nervous system stuck on high alert
+  - anxiety can't switch off
+  - feeling on guard all the time
 bisac_codes:
-- FAM034000
-- SEL027000
-- FAM013000
+- SEL036000
+- SEL024000
+- SEL031000
+- SEL038000
 target_price:
   ebook_usd: 4.99
   audible_usd: 9.99
@@ -49,14 +92,12 @@ target_price:
 author_positioning:
   teacher: ahjan
   brand: stillness_press
+  byline_author: lena_thorne
 comp_titles:
-- Unwinding Anxiety (Judson Brewer) — mechanism + noticing register
-- When Things Fall Apart (Pema Chödrön) — surrender register
-- The Happiness Trap (Russ Harris) — ACT informal voice
-main_character_name: Claire
-main_character_lora_id: claire_sp_us
-confidence:
-  pricing: low
-  title: medium
-  comps: high
-plan_source_path: config/manga/manga_brand_series_plan.yaml
+- The Body Keeps the Score (Bessel van der Kolk) — maps the hypervigilant nervous
+  system, where this book stays at the parent's bedside
+- Anchored (Deb Dana) — applies polyvagal calm to the on-guard system, gentler and
+  parent-focused here
+- Set Boundaries, Find Peace (Nedra Glover Tawwab) — eases the over-responsible mind
+  that can't stand down, quieter in this title
+_needs_authoring: false

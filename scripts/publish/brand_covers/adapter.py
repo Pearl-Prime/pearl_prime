@@ -32,6 +32,8 @@ def rows_for_brand(brand_id: str, book_plans_dir: Path = BOOK_PLANS):
     rows = []
     for p in sorted(book_plans_dir.glob(f"{brand_id}__*.yaml")):
         d = yaml.safe_load(p.read_text()) or {}
+        if d.get("_needs_authoring") is not False:
+            continue  # authored-only: skip skeletons (true) + legacy orphans (field absent)
         bid = d.get("book_id", p.stem)
         _, persona, topic, engine = parse_book_id(bid)
         aid = resolve_author_from_brand(brand_id=brand_id, topic_id=topic, persona_id=persona,

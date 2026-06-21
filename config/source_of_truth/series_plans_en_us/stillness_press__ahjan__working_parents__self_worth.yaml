@@ -1,0 +1,67 @@
+series_plan_schema: 1.0.0
+locale: en_US
+book_id_prefix: stillness_press__ahjan__working_parents__self_worth
+brand: stillness_press
+teacher: ahjan
+persona: working_parents
+topic: self_worth
+byline_author: mira_santos
+arc:
+  installment_1:
+    book_id: stillness_press__ahjan__working_parents__self_worth__shame
+    engine: shame
+    master_arc: config/source_of_truth/master_arcs/working_parents__self_worth__shame__F006.yaml
+    duration: standard_book_60min
+  installment_2:
+    book_id: stillness_press__ahjan__working_parents__self_worth__comparison
+    engine: comparison
+    master_arc: config/source_of_truth/master_arcs/working_parents__self_worth__comparison__F006.yaml
+    duration: standard_book_60min
+reader_promise_family: A quiet, unhurried place to set down the belief that your worth
+  has to be earned -- written for the parent who is doing enough, and has been all
+  along, even on the days that don't feel like it.
+bestseller_hook_family: ''
+emotional_engine: self_worth_recognition
+comp_series:
+- Self-Compassion (Kristin Neff) -- the closest peer on meeting your own harshness
+  with warmth instead of correction, written for tired adults rather than clinicians.
+- The Gifts of Imperfection (Brene Brown) -- names the worthiness wound directly and
+  gives parents permission to be enough as they are.
+- Real Love (Sharon Salzberg) -- a spacious, contemplative path back to your own worth
+  that never turns calm into another task to perfect.
+platform_strategy:
+  primary:
+  - kdp_ebook
+  - audible
+  secondary:
+  - apple_books
+  - google_play
+  - spotify_audiobooks
+  launch_platform: kdp_ebook
+  cadence:
+    release_spacing_days: 14
+    max_books_per_brand_per_month: 2
+reader_avatar:
+  age: 32-46
+  where_they_are: 'It''s 9:40pm. The kids are finally down, the dishwasher is running,
+    and you''re standing in the kitchen in the dark, scrolling one more time -- not
+    for anything in particular, just to not be alone with the day. Somewhere underneath
+    the tiredness is a question you don''t say out loud: is this all I am, and is
+    it even enough?'
+  what_they_need: To be met, not coached. To hear that the relentless feeling of falling
+    short is a story they learned, not a fact about who they are -- and to feel their
+    worth settle without having to fix one more thing first.
+  what_they_avoid: Hustle-culture pep talks, 'optimize your morning routine' advice,
+    self-care reframed as one more to-do, toxic positivity, and anything that quietly
+    suggests they'd be enough if they just tried a little harder.
+series_voice_markers:
+  register: contemplative, spacious, grounded -- the voice of someone who has sat
+    with this exact ache themselves and is in no hurry to talk you out of it; never
+    clinical, never a coach, never hustle
+  sentence_rhythm: unhurried and breath-paced; short declarative lines that land and
+    then leave room, set against longer settling sentences; pauses honored, never
+    crowded
+  metaphor_family: stillness and breath; settling water and silt; open ground; light
+    coming through a window; the pause between one thing and the next -- never machinery,
+    productivity, scoreboards, or self-improvement
+_needs_authoring: false

@@ -1,0 +1,79 @@
+series_plan_schema: 1.0.0
+locale: en_US
+book_id_prefix: stillness_press__ahjan__working_parents__burnout
+brand: stillness_press
+teacher: ahjan
+persona: working_parents
+topic: burnout
+byline_author: daniel_voss
+arc:
+  installment_1:
+    book_id: stillness_press__ahjan__working_parents__burnout__overwhelm
+    engine: overwhelm
+    master_arc: config/source_of_truth/master_arcs/working_parents__burnout__overwhelm__F006.yaml
+    duration: standard_book_60min
+  installment_2:
+    book_id: stillness_press__ahjan__working_parents__burnout__grief
+    engine: grief
+    master_arc: config/source_of_truth/master_arcs/working_parents__burnout__grief__F006.yaml
+    duration: standard_book_60min
+  installment_3:
+    book_id: stillness_press__ahjan__working_parents__burnout__watcher
+    engine: watcher
+    master_arc: config/source_of_truth/master_arcs/working_parents__burnout__watcher__F006.yaml
+    duration: standard_book_60min
+reader_promise_family: You will be met where you actually are — depleted, still showing
+  up, with nothing left over — and offered not a harder way to cope but permission
+  to set something down. No optimizing, no system, no becoming the calmer parent by
+  trying harder. Just the quiet recognition that what you're carrying is too heavy
+  for anyone, and the slow return of room to breathe in the middle of a life that
+  won't pause.
+bestseller_hook_family: ''
+emotional_engine: burnout_recognition
+comp_series:
+- 'Burnout: The Secret to Unlocking the Stress Cycle (Emily Nagoski & Amelia Nagoski)
+  — names burnout as an unfinished stress cycle, not a personal failing, for readers
+  carrying too much'
+- The Book You Wish Your Parents Had Read (Philippa Perry) — speaks to depleted, well-meaning
+  parents with warmth instead of one more standard to fail
+- How to Keep House While Drowning (KC Davis) — releases overwhelmed caregivers from
+  moral judgment about not keeping up, replacing shame with gentleness
+platform_strategy:
+  primary:
+  - kdp_ebook
+  - audible
+  secondary:
+  - apple_books
+  - google_play
+  - spotify_audiobooks
+  launch_platform: kdp_ebook
+  cadence:
+    release_spacing_days: 14
+    max_books_per_brand_per_month: 2
+reader_avatar:
+  age: 32-46
+  where_they_are: It's 9:40pm. The kids are finally down, the dishwasher is running,
+    and you're sitting on the edge of the bed with your phone in your hand, not even
+    reading it — just staring at the unanswered work message you'll have to deal with
+    before 8am. You meant to have something left over by now, for yourself, for your
+    partner. There's nothing. There hasn't been in a long time.
+  what_they_need: To hear that they are not failing at parenting or at work, that
+    the exhaustion is not a character flaw, and that running on empty for years is
+    a matter of capacity exceeded — not a deficit of love, discipline, or grit. They
+    need permission to stop earning rest, and a way to find a little room without
+    first clearing the impossible backlog of their life.
+  what_they_avoid: Hustle-culture morning routines, 'optimize your family systems,'
+    productivity-parenting hacks, just-meditate platitudes, toxic positivity about
+    gratitude, and anything that turns recovering from burnout into one more thing
+    they're behind on and failing to do well.
+series_voice_markers:
+  register: contemplative, spacious, grounded; an unhurried presence who has sat in
+    this same depletion and is speaking quietly across the kitchen table, not from
+    a stage or a clinic — never a coach, never a guru, never hustle
+  sentence_rhythm: long, settling sentences that arrive at rest, broken by short plain
+    ones that land like an exhale; the cadence of someone who has slowed down on purpose
+    and is making room for the reader to slow down too
+  metaphor_family: stillness, breath, settling water, open ground, light through a
+    window at the end of the day, the pause between one demand and the next — never
+    machinery, calendars, throughput, or biohacking
+_needs_authoring: false

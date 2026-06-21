@@ -1,8 +1,7 @@
 book_plan_schema: 1.0.0
-created_at: '2026-04-24'
 book_id: stillness_press__ahjan__corporate_managers__anxiety__overwhelm
 series_plan: config/source_of_truth/series_plans_en_us/stillness_press__ahjan__corporate_managers__anxiety.yaml
-installment_number: 4
+installment_number: 2
 engine: overwhelm
 duration: standard_book_60min
 runtime_format_id: standard_book_60min
@@ -11,37 +10,81 @@ target_word_range:
 - 9000
 - 12000
 target_audio_minutes: 70
-title: 'The Overwhelm Response: A Path Back to Stillness'
-subtitle: ''
-cover_tagline: You have more on your plate than fits in your hours.
+title: Too Much, All at Once
+subtitle: For the manager whose plate overflowed hours ago — when the messages, the
+  deadlines and the people who need you all arrive together and leave no room left
+  to think
+cover_tagline: It isn't that you can't cope. It's that nothing has stopped arriving.
 description:
-  short_blurb: You have more on your plate than fits in your hours. understand why this keeps happening to me.
-  long_description: |
-    You have more on your plate than fits in your hours.
+  short_blurb: The messages, the deadlines, the decisions, the people who need you
+    — they all arrive at once, and somewhere in the flood there stops being room to
+    think. This is a book for the capable manager who is drowning not in incompetence
+    but in sheer volume. It won't hand you a productivity system. It will show you
+    how to find ground when everything is coming in at the same time.
+  long_description: 'There''s a particular moment you know well. The messages are
+    stacking, three people are waiting on you, two deadlines have collapsed into the
+    same afternoon, and your own mind has gone strangely loud and useless all at once.
+    It isn''t that you can''t do the work. It''s that everything arrived together,
+    and there is no longer any room left in you to think.
 
-    This book is for mid-level manager running a cross-functional teams who the body is doing something and I don't understand why. It doesn't promise to make the feeling stop. It names what's happening in language you can use the next time it happens.
 
-    Chapter by chapter, you'll work with how input accumulates past capacity and what happens in your body when it does. Not through exposure or worksheets or morning routines — through recognition, descent, and integration. The practice the book asks for can happen on a subway, between meetings, or at 3am.
+    This is overwhelm — not weakness, not a failure of organization, but capacity
+    exceeded. The flood.
 
-    You'll walk away knowing what your body is doing and why it makes sense. Not fixed. Not healed in any final sense. But no longer alone with the pattern.
 
-    Book 4 of the Stillness Press anxiety series.
+    This book is for the manager who is competent and capable and still, most days,
+    underwater. You''re the one everything routes through, the one who absorbs the
+    demands of the people above and the people below, until the inflow outpaces anything
+    a human being could process. You feel it as a tightening, a blankness, a low static
+    hum where clear thought used to be. You''re not failing to keep up. You''re being
+    asked to hold more than fits.
+
+
+    Here you''ll come to recognize overwhelm as its own distinct thing — separate
+    from the dread that comes before, separate from the rumination that comes after.
+    You''ll see how the flood convinces you that everything is equally urgent and
+    must be held all at once, and how that very belief is what drowns you. You''ll
+    learn what it means to let things arrive without taking them all in at the same
+    moment, to find one square foot of ground to stand on when the water is at your
+    chest, and to let the surface settle enough that you can see what''s actually
+    beneath it.
+
+
+    This book will not promise to help you get on top of it all. There is no system
+    here to optimize your way out, no inbox-zero salvation, no method to perfect so
+    the flood never comes again. The volume is real and most of it is not yours to
+    fix. Overwhelm is not a personal shortcoming to correct — it''s what happens when
+    too much arrives at once, and it deserves room to settle rather than another technique
+    to fight it.
+
+
+    What it offers is the smaller, truer thing: a way to stop trying to hold the whole
+    flood at once. Because the moment you set down everything-at-the-same-time, the
+    water lowers. Not all of it. Enough to breathe. Enough to think again.
+
+
+    You are allowed to take it one arrival at a time. You are allowed to let the surface
+    go still before you decide anything at all.
+
+
+    Book 2 of the Stillness Press anxiety series.'
 keywords:
   primary:
-  - anxiety book
-  - generalized anxiety
-  - somatic anxiety
-  - anxious nervous system
-  - stop worrying
-  - anxiety relief
-  - anxiety without medication
+  - overwhelm relief
+  - feeling overwhelmed at work
+  - anxiety and overwhelm
+  - too much to do anxiety
+  - mental overload help
+  - calm down when overwhelmed
+  - stress overwhelm management
   secondary:
-  - corporate managers
-  - overwhelm anxiety
+  - overwhelmed manager
+  - work stress burnout prevention
+  - anxiety from too much
 bisac_codes:
-- SEL027000
-- BUS041000
-- SEL016000
+- SEL036000
+- SEL024000
+- SEL031000
 target_price:
   ebook_usd: 4.99
   audible_usd: 9.99
@@ -49,14 +92,13 @@ target_price:
 author_positioning:
   teacher: ahjan
   brand: stillness_press
+  byline_author: lena_thorne
 comp_titles:
-- Unwinding Anxiety (Judson Brewer) — mechanism + noticing register
-- When Things Fall Apart (Pema Chödrön) — surrender register
-- The Happiness Trap (Russ Harris) — ACT informal voice
-main_character_name: Adam
-main_character_lora_id: adam_sp_us
-confidence:
-  pricing: low
-  title: medium
-  comps: high
-plan_source_path: config/manga/manga_brand_series_plan.yaml
+- 'Burnout: The Secret to Unlocking the Stress Cycle (Emily Nagoski and Amelia Nagoski)
+  — on capacity exceeded and completing the stress response, for people carrying too
+  much'
+- 'Four Thousand Weeks: Time Management for Mortals (Oliver Burkeman) — releases the
+  fantasy of getting on top of it all that fuels overwhelm'
+- The Art of Noticing (Rob Walker) — restores attention and spaciousness to a mind
+  flooded by input
+_needs_authoring: false

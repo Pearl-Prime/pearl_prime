@@ -1,8 +1,7 @@
 book_plan_schema: 1.0.0
-created_at: '2026-04-24'
 book_id: stillness_press__ahjan__millennial_women_professionals__anxiety__watcher
 series_plan: config/source_of_truth/series_plans_en_us/stillness_press__ahjan__millennial_women_professionals__anxiety.yaml
-installment_number: 3
+installment_number: 7
 engine: watcher
 duration: standard_book_60min
 runtime_format_id: standard_book_60min
@@ -11,37 +10,86 @@ target_word_range:
 - 9000
 - 12000
 target_audio_minutes: 70
-title: Watching Your Thoughts Without Drowning
-subtitle: ''
-cover_tagline: You're here, but you're also somewhere behind yourself.
+title: The Part of You That Never Rests
+subtitle: For the woman whose mind never quite settles — reading every face, every
+  email, every silence for the threat that never arrives
+cover_tagline: It thinks it's keeping you safe. It's the reason you've never felt
+  safe.
 description:
-  short_blurb: You're here, but you're also somewhere behind yourself. That's not enough anymore. understand why this keeps happening to me.
-  long_description: |
-    You're here, but you're also somewhere behind yourself.
+  short_blurb: There's a part of you that never settles — reading the room, re-checking
+    the message, searching every silence for the danger it's sure is coming. This
+    is a still hour for the woman whose watchfulness never sleeps, written by someone
+    who knows what it costs. It won't ask you to fight the watcher. It will help it
+    learn, at last, that it's allowed to rest.
+  long_description: 'There''s a part of you that is always on. It reads the room before
+    you''ve sat down. It re-reads the message you already sent, hunting for the wrong
+    word. It registers the slight change in a colleague''s tone, the email that hasn''t
+    been answered, the silence that might mean something. It is awake when the rest
+    of you longs to rest, certain that if it ever stops scanning, the thing it''s
+    been watching for will finally arrive. It has not let itself settle in years.
 
-    This book is for senior manager in mid-size company, primary household planners who the body is doing something and I don't understand why. It doesn't promise to make the feeling stop. It names what's happening in language you can use the next time it happens.
 
-    Chapter by chapter, you'll work with the distance that opens between you and your own experience, and why it formed. Not through exposure or worksheets or morning routines — through recognition, descent, and integration. The practice the book asks for can happen on a subway, between meetings, or at 3am.
+    This book is for you — the one whose mind never quite quiets, who mistakes hypervigilance
+    for responsibility, who feels safest when she''s watching and most exposed when
+    she''s asked to simply be. The watcher isn''t a flaw in your character. It''s
+    a part of you that took on the task of keeping you safe, probably long ago, and
+    has never once been told it can ease. It scans because it loves you. It''s just
+    been watching so long it''s forgotten there''s no longer anything coming.
 
-    You'll walk away knowing what your body is doing and why it makes sense. Not fixed. Not healed in any final sense. But no longer alone with the pattern.
 
-    Book 3 of the Stillness Press anxiety series.
+    In these pages you''ll come to recognize the watcher for what it is: not wisdom,
+    not preparedness, but exhaustion dressed as protection — a part of you still bracing
+    against a storm that already passed over and moved on. You''ll learn the difference
+    between awareness, which rests when it can, and hypervigilance, which never does.
+    You''ll see how the scanning promises safety and delivers only the next thing
+    to scan, how watching everything is its own quiet form of bracing, and how the
+    things the watcher fears are almost never the ones that come.
+
+
+    This is not a method for controlling your attention or a vigilance you can optimize.
+    There''s nothing here to track, monitor, or perfect. You will not be told to simply
+    stop being so alert, as if that were a habit you could drop on command. You''ll
+    be kept company instead — by someone who lived for years with a mind that never
+    quieted, and found that the watcher didn''t need to be defeated. It needed to
+    be told, gently and more than once, that it was finally allowed to rest.
+
+
+    We''ll move slowly, because a part of you that has braced for years doesn''t ease
+    on command — only into a safety it can actually feel. You''ll spend time with
+    the watcher, close enough to thank it, and discover the relief that comes not
+    from silencing it but from letting it lay down a weight it has carried far too
+    long. You''ll feel what it''s like to let your attention settle like light filling
+    a quiet room, with nothing to hold and nowhere it has to be.
+
+
+    Nothing here will ask you to stop caring or to look away from what matters. It
+    asks only that you let the part of you that never rests learn that it can. The
+    watching can quiet. Not because you forced your mind to look away, but because
+    you finally let it believe the danger has passed.
+
+
+    You are allowed to let it rest. Let that be where we begin.
+
+
+    Book 7 of the Stillness Press anxiety series.'
 keywords:
   primary:
-  - anxiety book
-  - generalized anxiety
-  - somatic anxiety
-  - anxious nervous system
-  - stop worrying
-  - anxiety relief
-  - anxiety without medication
+  - hypervigilance anxiety help
+  - mind won't shut off
+  - always on alert can't relax
+  - scanning for threats anxiety
+  - can't switch off after work
+  - anxiety constantly on edge
+  - how to relax a vigilant mind
   secondary:
-  - millennial women professionals
-  - watcher anxiety
+  - anxiety self help for women
+  - nervous system safety
+  - racing mind at rest
 bisac_codes:
-- SEL027000
-- SOC028000
-- SEL045000
+- SEL036000
+- SEL024000
+- SEL031000
+- SEL001000
 target_price:
   ebook_usd: 4.99
   audible_usd: 9.99
@@ -49,14 +97,9 @@ target_price:
 author_positioning:
   teacher: ahjan
   brand: stillness_press
+  byline_author: lena_thorne
 comp_titles:
-- Unwinding Anxiety (Judson Brewer) — mechanism + noticing register
-- When Things Fall Apart (Pema Chödrön) — surrender register
-- The Happiness Trap (Russ Harris) — ACT informal voice
-main_character_name: Priya
-main_character_lora_id: priya_sp_us
-confidence:
-  pricing: low
-  title: medium
-  comps: high
-plan_source_path: config/manga/manga_brand_series_plan.yaml
+- The Body Keeps the Score (Bessel van der Kolk)
+- Anxious for Nothing (Max Lucado)
+- Unwinding Anxiety (Judson Brewer)
+_needs_authoring: false

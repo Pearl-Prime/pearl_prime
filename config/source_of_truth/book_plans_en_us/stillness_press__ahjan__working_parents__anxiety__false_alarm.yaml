@@ -1,5 +1,4 @@
 book_plan_schema: 1.0.0
-created_at: '2026-04-24'
 book_id: stillness_press__ahjan__working_parents__anxiety__false_alarm
 series_plan: config/source_of_truth/series_plans_en_us/stillness_press__ahjan__working_parents__anxiety.yaml
 installment_number: 1
@@ -11,37 +10,76 @@ target_word_range:
 - 9000
 - 12000
 target_audio_minutes: 70
-title: 'Misreading the Danger Signal: When the Noise Inside Finally Quiets'
-subtitle: A Nervous System Approach to Sleep Better and Feeling Safe in Your Body
-cover_tagline: You've been bracing for something you can't name.
+title: The Body Keeps Bracing
+subtitle: For the parent whose alarm goes off all day for a danger that never comes
+  — learning to recognize the false alarm, and let the body finally stand down
+cover_tagline: Nothing is wrong. So why won't your body believe it?
 description:
-  short_blurb: You've been bracing for something you can't name. understand why this keeps happening to me.
-  long_description: |
-    You've been bracing for something you can't name.
+  short_blurb: 'You are buckling a car seat, answering an email, packing a lunch —
+    and underneath all of it, your body is braced as if something is about to go terribly
+    wrong. This is the false alarm: a nervous system that loves your children so much
+    it can''t tell the difference between a real threat and a Tuesday. Here is a gentler
+    way to live inside it.'
+  long_description: 'It comes over you in the middle of the most ordinary moment.
+    You''re at the kitchen sink, or strapping a toddler into the stroller, or scanning
+    the calendar for the third time, and your chest tightens, your shoulders climb,
+    your breath goes shallow and high. Something is wrong. You''re sure of it. You
+    just can''t find what.
 
-    This book is for working parent of two kids under 8s who the body is doing something and I don't understand why. It doesn't promise to make the feeling stop. It names what's happening in language you can use the next time it happens.
 
-    Chapter by chapter, you'll work with the body's false-alarm system and why it keeps firing. Not through exposure or worksheets or morning routines — through recognition, descent, and integration. The practice the book asks for can happen on a subway, between meetings, or at 3am.
+    This is the false alarm. It is the oldest, most protective part of you firing
+    as if there were a fire — pumping you full of readiness for a danger that, when
+    you finally look, simply isn''t there. For a parent, that alarm is wired to everything
+    you love most, which is exactly why it never seems to switch off.
 
-    You'll walk away knowing what your body is doing and why it makes sense. Not fixed. Not healed in any final sense. But no longer alone with the pattern.
 
-    Book 1 of the Stillness Press anxiety series.
+    This book is for you: the mother, the father, the one who is somehow both exhausted
+    and wide awake. The one who has googled symptoms at midnight. The one who braces
+    at the school gate, at the doctor''s voicemail, at the silence from the other
+    room that lasts a half-second too long. You are not broken, and you are not weak.
+    You have a finely tuned instrument that was built to keep your children alive,
+    and right now it is set far too sensitive — going off for shadows, for maybes,
+    for nothing.
+
+
+    Gently, without rushing, you''ll come to recognize the alarm for what it is. You''ll
+    feel how it announces itself in the body before the mind ever finds a reason.
+    You''ll learn to notice the bracing in your jaw and your hands and your held breath,
+    and to meet it not as an emergency to solve but as a frightened part of you to
+    sit beside. You''ll learn what it feels like to let your shoulders come down a
+    single inch, like water finding its level again.
+
+
+    This book will not promise to silence the alarm forever. It won''t hand you a
+    protocol to optimize your nervous system, or turn calm into one more thing you''re
+    failing to achieve before bedtime. There is no fixing here, because you were never
+    broken. There is only the slow, real work of learning that not every alarm means
+    fire — and that you are allowed to stop bracing, even while the day is still unfinished.
+
+
+    You can love them with everything you have and still let your body rest. Both
+    can be true. Let this be the place you begin to believe it.
+
+
+    Book 1 of the Stillness Press anxiety series.'
 keywords:
   primary:
-  - anxiety book
-  - generalized anxiety
-  - somatic anxiety
-  - anxious nervous system
-  - stop worrying
-  - anxiety relief
-  - anxiety without medication
+  - anxiety relief for parents
+  - calm anxious nervous system
+  - physical symptoms of anxiety
+  - how to stop feeling on edge
+  - anxiety books for working moms
+  - nervous system regulation for beginners
+  - constant feeling something is wrong
   secondary:
-  - working parents
-  - false alarm anxiety
+  - fight or flight anxiety
+  - anxiety self help no medication
+  - calm down techniques for parents
 bisac_codes:
+- SEL036000
+- SEL024000
+- SEL031000
 - FAM034000
-- SEL027000
-- FAM013000
 target_price:
   ebook_usd: 4.99
   audible_usd: 9.99
@@ -49,14 +87,13 @@ target_price:
 author_positioning:
   teacher: ahjan
   brand: stillness_press
+  byline_author: lena_thorne
 comp_titles:
-- Unwinding Anxiety (Judson Brewer) — mechanism + noticing register
-- When Things Fall Apart (Pema Chödrön) — surrender register
-- The Happiness Trap (Russ Harris) — ACT informal voice
-main_character_name: Claire
-main_character_lora_id: claire_sp_us
-confidence:
-  pricing: low
-  title: medium
-  comps: high
-plan_source_path: config/manga/manga_brand_series_plan.yaml
+- The Anxiety and Phobia Workbook (Edmund Bourne) — the trusted clinical reference,
+  where this book offers the felt, parent-sized companion to it
+- When the Body Says No (Gabor Mate) — names the body's stress response, but this
+  title meets the bracing parent in the moment rather than the diagnosis
+- 'Burnout: The Secret to Unlocking the Stress Cycle (Emily & Amelia Nagoski) — same
+  overworked nervous system, warmer and quieter here, aimed squarely at the bracing
+  parent'
+_needs_authoring: false
