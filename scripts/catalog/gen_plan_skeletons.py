@@ -33,6 +33,20 @@ ENGINE_ORDER = ["false_alarm", "overwhelm", "spiral", "shame", "grief", "compari
 INTENTS = ["scenario_specific", "solution_seeking", "identity_based", "crisis", "informational"]
 
 
+# Topic -> default BISAC codes. Anxiety-family topics lead with SEL036000 (SELF-HELP /
+# Anxieties & Phobias) and never SEL045000 (SELF-HELP / Journaling), which is a format
+# shelf not a topic shelf. Mirrors the corpus-correct anxiety triple (+ SEL024000
+# Stress Management, SEL031000 Personal Growth). Pearl_Writer/Pearl_Editor inherit this
+# floor during authoring and may refine; unmapped topics stay empty for the author layer.
+_ANXIETY_FAMILY = {"anxiety", "sleep_anxiety", "social_anxiety", "financial_anxiety", "overthinking"}
+_TOPIC_BISAC = {t: ["SEL036000", "SEL024000", "SEL031000"] for t in _ANXIETY_FAMILY}
+
+
+def topic_bisac(topic: str) -> list:
+    """Deterministic BISAC floor for a topic (empty list if unmapped)."""
+    return list(_TOPIC_BISAC.get(topic, []))
+
+
 def _h(s: str) -> int:
     return int(hashlib.sha1(s.encode()).hexdigest()[:8], 16)
 
@@ -124,7 +138,7 @@ def main():
                 "title": title, "subtitle": subtitle, "cover_tagline": "",
                 "description": {"short_blurb": "", "long_description": ""},
                 "keywords": {"primary": [], "secondary": []},
-                "bisac_codes": [],
+                "bisac_codes": topic_bisac(topic),
                 "target_price": {"ebook_usd": 4.99, "audible_usd": 9.99, "paperback_usd": 12.99},
                 "author_positioning": {"teacher": (None if teacher == "house" else teacher),
                                        "brand": args.brand, "byline_author": author},
