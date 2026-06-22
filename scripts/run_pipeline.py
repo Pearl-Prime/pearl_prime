@@ -1240,6 +1240,24 @@ def _run_spine_pipeline_mode(
             ),
             encoding="utf-8",
         )
+    # Book-audit craft strengthen (2026-06-21): dwell beats (F13), practice-density cap
+    # (F7), transformation-arc landings, and terminal-sentence integrity — runs AFTER
+    # scene-anchor reducer so injected dwell beats are not trimmed as over-cap phrases.
+    # Strengthens OUTPUT only; register gate thresholds untouched.
+    from phoenix_v4.rendering.register_output_strengthen import strengthen_register_craft_output
+
+    prose = strengthen_register_craft_output(prose, seed=seed or book_plan.plan_id)
+    # Post-strengthen flow cue pass: register craft strengthen can strip thesis /
+    # actionable cues (e.g. F7 deprescription); re-run the word-bounded guarantee
+    # pass so chapter_flow is scored on the final manuscript.
+    prose = ensure_chapter_flow_cues(
+        prose, flow_profile=_flow_profile, seed=f"{seed}:post_strengthen"
+    )
+    # Flow-cue guarantee lines can re-introduce F7 prescribed-action false positives
+    # (imperative + timing substrings). Final cap before gates — thresholds untouched.
+    from phoenix_v4.rendering.register_output_strengthen import cap_prescribed_action_density as _final_cap_f7
+
+    prose = _final_cap_f7(prose, max_per_chapter=1)
     word_count = len(prose.split())
     _quality_gate_failures: list[str] = []
     _chapter_flow_status = "SKIPPED"

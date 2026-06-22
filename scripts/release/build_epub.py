@@ -113,7 +113,7 @@ def parse_book_text(text: str) -> list[dict[str, str]]:
     current_body: list[str] = []
 
     chapter_re = re.compile(
-        r"^(CHAPTER \d+|第[一二三四五六七八九十\d]+章|"
+        r"^(CHAPTER \d+|Chapter \d+|第[一二三四五六七八九十\d]+章|"
         r"A NOTE ON THE TEACHINGS|教[导導]缘起|"
         r"WHERE TO GO DEEPER|深入修[行炼練]|"
         r"[A-Z][A-Z\s:—\-]{8,}$)",
@@ -250,6 +250,8 @@ def build_epub(
     output_path: Path,
     topic: str = "",
     raw_cover: bool = False,
+    description: str = "",
+    disclosure: str = "",
 ) -> Path:
     """Build a KDP-ready EPUB 3 from a book text file."""
     text = input_path.read_text(encoding="utf-8")
@@ -268,16 +270,21 @@ def build_epub(
     book.add_author(author)
 
     book.add_metadata("DC", "publisher", publisher)
-    book.add_metadata("DC", "description",
+    desc = description.strip() or (
         f"{subtitle}. A therapeutic book by {author}, published by {publisher}. "
-        f"Part of the Phoenix Omega series.")
+        f"Part of the Phoenix Omega series."
+    )
+    book.add_metadata("DC", "description", desc)
     book.add_metadata("DC", "subject", topic.replace("_", " ").title())
     book.add_metadata("DC", "date", datetime.now(timezone.utc).strftime("%Y-%m-%d"))
 
-    # AI disclosure (required by KDP and Apple Books)
-    book.add_metadata("DC", "rights",
-        "Text generated with AI assistance (Claude by Anthropic). "
-        "All content reviewed and curated by human editors.")
+    ei_disclosure = disclosure.strip() or (
+        "This book was created with AI assistance as part of the Phoenix Omega "
+        "therapeutic content system. All content has been reviewed and curated "
+        "by human editors. This work is intended for informational purposes "
+        "and is not a substitute for professional mental health care."
+    )
+    book.add_metadata("DC", "rights", ei_disclosure)
 
     # ── Cover (embedded; storefront upload still uses separate file in distributor UI / our PNG exports) ──
     if cover_path and cover_path.exists():
@@ -302,10 +309,7 @@ def build_epub(
     <p style="text-align:center; margin-top:2em;">By {author}</p>
     <p class="publisher">{publisher}</p>
     <p class="ai-disclosure">
-        This book was created with AI assistance as part of the Phoenix Omega
-        therapeutic content system. All content has been reviewed and curated
-        by human editors. This work is intended for informational purposes
-        and is not a substitute for professional mental health care.
+        {ei_disclosure}
     </p>
     </body></html>
     """
@@ -427,6 +431,8 @@ def main():
         action="store_true",
         help="Embed the source cover file as-is (skip 1600×2560 letterbox normalization)",
     )
+    parser.add_argument("--description", default="", help="DC description metadata")
+    parser.add_argument("--disclosure", default="", help="Title-page EI disclosure (not AI boilerplate)")
 
     args = parser.parse_args()
 
@@ -451,6 +457,8 @@ def main():
         output_path=args.output or Path(f"{args.input.stem}.epub"),
         topic=args.topic,
         raw_cover=args.raw_cover,
+        description=args.description,
+        disclosure=args.disclosure,
     )
 
 
