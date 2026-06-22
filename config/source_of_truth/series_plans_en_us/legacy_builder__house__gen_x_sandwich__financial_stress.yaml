@@ -1,0 +1,80 @@
+series_plan_schema: 1.0.0
+locale: en_US
+book_id_prefix: legacy_builder__house__gen_x_sandwich__financial_stress
+brand: legacy_builder
+teacher: null
+persona: gen_x_sandwich
+topic: financial_stress
+byline_author: juno_okafor
+arc:
+  installment_1:
+    book_id: legacy_builder__house__gen_x_sandwich__financial_stress__overwhelm
+    engine: overwhelm
+    master_arc: config/source_of_truth/master_arcs/gen_x_sandwich__financial_stress__overwhelm__F006.yaml
+    duration: standard_book_60min
+  installment_2:
+    book_id: legacy_builder__house__gen_x_sandwich__financial_stress__spiral
+    engine: spiral
+    master_arc: config/source_of_truth/master_arcs/gen_x_sandwich__financial_stress__spiral__F006.yaml
+    duration: standard_book_60min
+  installment_3:
+    book_id: legacy_builder__house__gen_x_sandwich__financial_stress__shame
+    engine: shame
+    master_arc: config/source_of_truth/master_arcs/gen_x_sandwich__financial_stress__shame__F006.yaml
+    duration: standard_book_60min
+reader_promise_family: For the generation holding up two others at once — aging parents
+  on one side, kids on the other, and a bank balance that never quite covers both.
+  This series doesn't promise to fix your money. It promises to sit with you in the
+  math at midnight and help you recognize that a life under this much financial pressure
+  is still a life worth building — and that the foundation you're laying, mostly unseen,
+  is realer than any number.
+bestseller_hook_family: ''
+emotional_engine: financial_stress_recognition
+comp_series:
+- The Second Mountain (David Brooks) — the namesake idea that a meaningful life is
+  built on commitment and care, not the first mountain of acquisition
+- Your Money or Your Life (Vicki Robin & Joe Dominguez) — reframes money as life energy
+  rather than a scoreboard, the same refusal to measure a life in dollars
+- The Soul of Money (Lynne Twist) — money as relationship and meaning rather than
+  scarcity and shame, written in a warm, reflective register close to ours
+platform_strategy:
+  primary:
+  - kdp_ebook
+  - audible
+  secondary:
+  - apple_books
+  - google_play
+  - spotify_audiobooks
+  launch_platform: kdp_ebook
+  cadence:
+    release_spacing_days: 14
+    max_books_per_brand_per_month: 2
+reader_avatar:
+  age: 47-58, Generation X, often the family's quiet financial shock absorber
+  where_they_are: It's a Tuesday night, past eleven. The dishwasher is running. You've
+    got a spreadsheet open in one tab and your mother's pharmacy portal in another,
+    and your kid just texted about the deposit for next semester. You do the subtraction
+    one more time, the way you've done it a hundred times, as if this time the numbers
+    might come out different. They don't. You close the laptop and sit in the kitchen
+    with the hum of the fridge, doing the arithmetic of a life you can't seem to get
+    ahead of.
+  what_they_need: to be seen as more than a wallet with a pulse; to feel the difference
+    between a hard season and a failed life; to lay down, for one honest hour, the
+    belief that the squeeze is proof of their own inadequacy; to remember that the
+    things they're holding up are worth holding
+  what_they_avoid: get-rich-quick energy, budgeting apps that gamify their dread,
+    'build generational wealth' sermons, net-worth-as-self-worth, anyone who's never
+    been the one the whole family quietly depends on telling them to 'just cut the
+    lattes'
+series_voice_markers:
+  register: reflective, steady, grown-up; the voice of someone a few years further
+    up the same slope who turns around to talk to you — never a financial guru, never
+    a cheerleader, never a clinician
+  sentence_rhythm: plainspoken and unhurried, with room to breathe; short declaratives
+    that land like a hand on the shoulder, then a longer line that lets the feeling
+    settle; questions that don't demand an answer
+  metaphor_family: the second mountain and the view from later in the climb; the deeper
+    foundation poured under a house you can't see; planting trees whose shade you
+    won't sit in; the long arc of a life measured in what outlasts you, never in machinery,
+    metrics, or the market
+_needs_authoring: false
