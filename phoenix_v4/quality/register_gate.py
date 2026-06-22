@@ -976,6 +976,8 @@ _F12_COMMON_MASTER_COMPOUNDS = frozenset({
     "master bedroom", "master plan", "master key", "master copy", "master switch",
     "master class", "master list", "master record", "master password", "master suite",
     "master bath", "master bathroom", "master degree", "master file", "master volume",
+    "master this", "master that", "master the", "master your", "master a", "master an",
+    "master it", "master one",
 })
 
 F12_RAW_TEACHER_RE = re.compile(
