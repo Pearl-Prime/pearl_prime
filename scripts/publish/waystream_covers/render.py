@@ -2,7 +2,7 @@
 
   python3 -m scripts.publish.waystream_covers.render --proof
   python3 -m scripts.publish.waystream_covers.render --variation "Cole Bennett" anxiety
-  python3 -m scripts.publish.waystream_covers.render --all          # 800 (needs pools)
+  python3 -m scripts.publish.waystream_covers.render --sync-catalog --all --deploy
   python3 -m scripts.publish.waystream_covers.render --book <book_id>
 """
 from __future__ import annotations
@@ -16,9 +16,8 @@ from . import templates as T
 from .fonts import get_font
 
 OUT = A.ROOT / "artifacts/waystream/covers"
+SERVED = A.SERVED_COVERS
 
-# proof plan: (author_display, topic, target_installment) — one per family x track,
-# spread across topics + book numbers 1..7.
 PROOF_PLAN = [
     ("Lena Frost", "anxiety", 1),          ("Sam Meridian", "grief", 7),
     ("Daniel Cho", "sleep_anxiety", 3),    ("Jonah Kim", "boundaries", 5),
@@ -102,7 +101,6 @@ def cmd_variation(cfg, catalog, author, topic):
     by_series = collections.defaultdict(list)
     for r in pool:
         by_series[r["series_id"]].append(r)
-    # pick the single series with the most installments -> clean 1..N count demo
     best = max(by_series.values(), key=len) if by_series else []
     rows = sorted(best, key=lambda r: int(r["installment"]))
     items = []
@@ -115,35 +113,62 @@ def cmd_variation(cfg, catalog, author, topic):
     return sheet
 
 
+def cmd_all(cfg, catalog, deploy=False, contact=False, allow_fallback=True):
+    import collections
+    out_root = SERVED if deploy else OUT / "all"
+    out_root.mkdir(parents=True, exist_ok=True)
+    fam = collections.Counter()
+    for i, row in enumerate(catalog):
+        out = out_root / f'{row["book_id"]}.png'
+        it = render_row(cfg, row, out, allow_fallback)
+        fam[it["family"]] += 1
+        if (i + 1) % 50 == 0:
+            print(f"  {i+1}/{len(catalog)}", flush=True)
+    print("DONE", dict(fam), f"-> {out_root}")
+    if contact:
+        sample = []
+        for author, topic, inst in PROOF_PLAN:
+            row = find_row(catalog, author, topic, inst)
+            if row:
+                sample.append({"out": out_root / f'{row["book_id"]}.png', "family": "",
+                               "author": author, "topic": topic, "book_num": inst, "pool_src": ""})
+        if sample:
+            sheet = contact_sheet(sample, OUT / "resync_contact_sheet.png", cols=4,
+                                  title="WAYSTREAM — plan-keyed resync (16-book proof sample)")
+            print(f"CONTACT SHEET: {sheet}")
+    return out_root
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--proof", action="store_true")
     ap.add_argument("--variation", nargs=2, metavar=("AUTHOR", "TOPIC"))
     ap.add_argument("--book", metavar="BOOK_ID")
     ap.add_argument("--all", action="store_true")
+    ap.add_argument("--deploy", action="store_true", help="write covers to served dashboard path (plan book_id filenames)")
+    ap.add_argument("--sync-catalog", action="store_true", help="rebuild catalog CSV from book plans before render")
+    ap.add_argument("--contact", action="store_true", help="with --all: also emit contact sheet of rendered set")
     ap.add_argument("--no-fallback", action="store_true", help="skip covers whose author has no real pool")
     args = ap.parse_args()
     cfg = A.load_cfg()
-    catalog = A.load_catalog()
+    if args.sync_catalog:
+        catalog = A.sync_catalog_from_plans()
+        print(f"synced catalog: {len(catalog)} rows -> {A.CATALOG}")
+    else:
+        catalog = A.load_catalog()
 
     if args.book:
         row = next((r for r in catalog if r["book_id"] == args.book), None)
         if not row:
             print("book_id not found"); return
-        it = render_row(cfg, row, OUT / "single" / f"{args.book}.png", not args.no_fallback)
+        dest = (SERVED if args.deploy else OUT / "single") / f"{args.book}.png"
+        it = render_row(cfg, row, dest, not args.no_fallback)
         print(it["out"]); return
     if args.variation:
         cmd_variation(cfg, catalog, *args.variation); return
     if args.all:
-        import collections
-        fam = collections.Counter()
-        for i, row in enumerate(catalog):
-            it = render_row(cfg, row, OUT / "all" / f'{row["book_id"]}.png', not args.no_fallback)
-            fam[it["family"]] += 1
-            if (i + 1) % 50 == 0:
-                print(f"  {i+1}/{len(catalog)}")
-        print("DONE", dict(fam)); return
-    # default: proof
+        cmd_all(cfg, catalog, deploy=args.deploy, contact=args.contact,
+                allow_fallback=not args.no_fallback); return
     cmd_proof(cfg, catalog)
 
 
