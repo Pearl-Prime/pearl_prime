@@ -16,15 +16,53 @@ target_word_range:
 target_audio_minutes: 60
 title: 'The Thought That Won''t Leave: Misreading the Danger Signal'
 subtitle: A One-Hour Overthinking Reset for Nurses
-cover_tagline: A One-Hour Overthinking Reset for Nurses
+cover_tagline: The thought feels like a warning. It's just a thought that got loud.
 description:
-  short_blurb: A One-Hour Overthinking Reset for Nurses The one-hour edition.
-  long_description: 'The Thought That Won''t Leave: Misreading the Danger Signal
+  short_blurb: You replayed the shift the whole drive home, certain you missed something.
+    This hour is for the nurse whose mind treats every nagging thought like a code,
+    and who's exhausted from answering an alarm that isn't ringing. It won't tell
+    you the thought is wrong. It'll show you it isn't an emergency.
+  long_description: 'You''re three exits from home and your brain says: did you double-check
+    that drip? You know you did. You charted it. But the thought has a pull to it
+    now, the same pull as a real catch — that cold drop in the chest that means go
+    back, check again. So you sit in it. You run the whole patient again at a red
+    light, and again in the driveway, and the dread doesn''t lift just because you
+    can''t find the error.
 
 
-    The one-hour edition: the core of the overthinking work for nurses, in a single
-    sitting. Recognition, descent, integration — no filler. Book 1 of the one-hour
-    Nurses overthinking series.'
+    This hour is for the nurse whose mind has learned to treat a passing thought like
+    a clinical warning. You''re trained to take signals seriously; it''s why you''re
+    good. But somewhere along the way the wiring stopped knowing the difference between
+    a thought that needs action and a thought that just feels urgent. The dread tastes
+    identical either way — same flood, same certainty that something is wrong — so
+    you keep answering, because answering is what''s kept people safe.
+
+
+    First you''ll name it for what it is: not a missed catch, not a premonition, just
+    a thought that got loud and borrowed the feeling of an emergency. Then, instead
+    of arguing with it or driving back or checking one more time, you''ll go down
+    into it. You''ll let the false alarm sound all the way through without dispatching
+    yourself to it. You''ll feel the pull crest — that physical yank toward the phone,
+    the chart, the reassurance — and, for once, not move. That''s the part nobody
+    teaches: the alarm can ring and you can stay seated. The body can scream danger
+    over an empty hallway, and you can let it scream until it tires itself out.
+
+
+    What you''ll find on the other side isn''t certainty. It''s a small, real gap
+    between the thought and the lunge to fix it — the half-second where you get to
+    choose instead of obey. The thought still comes. You just stop treating every
+    one like a patient crashing in front of you.
+
+
+    This book will not promise you a quiet mind, or a trick to shut the thoughts off,
+    or a way to finally be sure you didn''t miss anything. There''s no checklist here,
+    no breathing protocol to run at the bedside, no version of you that stops caring
+    about the work. You''ll still be the nurse who catches things, who double-takes
+    the number that''s a little off. You''ll just stop bleeding out over the ones
+    that aren''t real.
+
+
+    The thought is allowed to come. You are allowed to not chase it.'
 keywords:
   primary:
   - stop overthinking
@@ -37,6 +75,7 @@ keywords:
   - overthinking for nurses
   - one hour
 bisac_codes:
+- SEL036000
 - SEL027000
 - SEL024000
 - PSY022000
@@ -45,12 +84,16 @@ target_price:
   audible_usd: 6.99
   paperback_usd: 9.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: lena_frost
 comp_titles:
-- Don't Believe Everything You Think (Nguyen)
-- Stop Overthinking (Hollins)
-- The Worry Trick (Carbonell)
+- Unwinding Anxiety (Judson Brewer) — names the urge-loop and teaches you to ride
+  it out instead of obeying it
+- The Anxiety Toolkit (Alice Boyd) — practical, no-woo work for over-responsible minds
+  that read every signal as urgent
+- When Panic Attacks (David D. Burns) — secular, blunt approach to thoughts that masquerade
+  as real danger
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -58,3 +101,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

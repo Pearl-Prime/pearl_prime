@@ -16,15 +16,53 @@ target_word_range:
 target_audio_minutes: 60
 title: 'The Weight Without a Name: The Observer''s Mind'
 subtitle: A One-Hour Depression Reset for Students
-cover_tagline: A One-Hour Depression Reset for Students
+cover_tagline: The part of you that watches you all day and never clocks out.
 description:
-  short_blurb: A One-Hour Depression Reset for Students The one-hour edition.
-  long_description: 'The Weight Without a Name: The Observer''s Mind
+  short_blurb: There's a voice narrating everything you do, scanning for what's wrong
+    before it can happen. This hour is for the student whose mind never stands down.
+    It won't tell you to think positive. It will show you what the watcher is actually
+    doing, and how to let it rest.
+  long_description: 'You walk into a room and a part of you is already running the
+    tape. How do I look, who noticed, what did I just say, was that weird. You reread
+    the text before you send it, then after you send it, then again. There''s a narrator
+    in your head that watches every move you make and every move everyone else makes,
+    scanning all day for the thing that might go wrong. It does not clock out. Even
+    lying in bed, it''s still on, replaying the day frame by frame.
 
 
-    The one-hour edition: the core of the depression work for students, in a single
-    sitting. Recognition, descent, integration — no filler. Book 3 of the one-hour
-    Students depression series.'
+    This hour is for the student with the observer''s mind, the one that never stands
+    down. The hypervigilance that disguises itself as being careful, being self-aware,
+    being on top of things. It feels like it''s keeping you safe. Mostly it''s just
+    keeping you exhausted.
+
+
+    Jonah Kim writes plainly for the part of you that''s always watching, and gives
+    you words you can use mid-spiral. First, recognition: the watcher showed up for
+    a reason, usually to protect you from being caught off guard, and noticing it
+    is not the same as shutting it off. Then the descent: instead of fighting the
+    surveillance or trying to think your way calm, you turn and look at the watcher
+    itself. You feel how tired the constant scanning actually is, in your body, without
+    needing it to stop right away. You stop running from your own attention and let
+    it settle.
+
+
+    This book will not tell you to think positive or replace bad thoughts with good
+    ones. No affirmations, no gratitude list, no reframing your way out. It will not
+    promise to quiet your mind forever. A vigilant mind is not a defect you need to
+    optimize away, and you do not have to win against your own thoughts to get a break
+    from them.
+
+
+    What you get is a clear way to see the watcher for what it is, and a way to let
+    it loosen its grip without forcing it. You''ll stop mistaking constant self-monitoring
+    for being a good, careful person. You''ll stop treating your own mind like something
+    you have to manage every second.
+
+
+    One hour. The narrator won''t be gone by the end of it. But you''ll know it''s
+    there, you''ll know why, and you''ll have felt what it''s like to let it rest
+    for a minute. The watcher can stand down. You''re allowed to stop guarding, and
+    you''re allowed to be off duty.'
 keywords:
   primary:
   - overcoming depression
@@ -45,12 +83,16 @@ target_price:
   audible_usd: 6.99
   paperback_usd: 9.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: jonah_kim
 comp_titles:
-- Feeling Good (Burns)
-- Lost Connections (Hari)
-- The Upward Spiral (Korb)
+- Unwinding Anxiety (Judson Brewer) — maps the hypervigilant loop without affirmations
+  or positive thinking
+- Don't Believe Everything You Think (Joseph Nguyen) — turns toward the watching mind
+  instead of fighting it
+- Chatter (Ethan Kross) — secular, science-based look at the inner voice that never
+  clocks out
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -58,3 +100,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

@@ -16,15 +16,52 @@ target_word_range:
 target_audio_minutes: 60
 title: 'Grief: Living with What You''ve Lost'
 subtitle: A One-Hour Grief Reset for Students
-cover_tagline: A One-Hour Grief Reset for Students
+cover_tagline: You lost someone, and everyone wants you back to normal already.
 description:
-  short_blurb: A One-Hour Grief Reset for Students The one-hour edition.
-  long_description: 'Grief: Living with What You''ve Lost
+  short_blurb: Something or someone is gone, and the world expected you to move on
+    weeks ago. This hour is for the student living with a loss that hasn't gotten
+    smaller. It won't tell you they're in a better place. It will give you room to
+    live with what's missing.
+  long_description: 'It happened, and for a while everyone was kind about it. Then
+    the texts stopped, the world moved on, and you were left holding something that
+    did not get smaller just because people stopped asking. You lost someone, or something
+    that mattered as much as a someone, and now you''re supposed to be back to normal,
+    back in class, back to fine. You''re not. You go through the day with a gap where
+    they used to be, and you''ve gotten good at hiding it.
 
 
-    The one-hour edition: the core of the grief work for students, in a single sitting.
-    Recognition, descent, integration — no filler. Book 1 of the one-hour Students
-    grief series.'
+    This hour is for the student living with real loss. Not the metaphor kind, the
+    actual kind, where a person or a relationship or a whole life you had is just
+    gone and isn''t coming back. The kind where you laugh at something and then remember,
+    and the floor drops out again, right in the middle of a normal day.
+
+
+    Jonah Kim writes the way someone talks when they''ve stopped trying to make grief
+    sound okay. First, recognition: what you''re carrying is loss, and it''s allowed
+    to be exactly this big, and naming it does not mean getting over it. Then the
+    descent: instead of packing the grief away so other people can be comfortable,
+    you go down into it on purpose. You let the missing be there, in your chest, in
+    your hands, without rushing to the part where it''s supposed to make sense. You
+    stop performing recovery and let yourself actually miss them.
+
+
+    This book will not tell you they''re in a better place. It will not say everything
+    happens for a reason or that time heals all wounds or that you''re so strong for
+    handling it well. It will not hand you stages to get through on a schedule. Loss
+    does not need to be turned into growth before you''re allowed to feel it, and
+    you do not owe anyone a version of you that''s already moved on.
+
+
+    What you get is plain language for what''s actually true right now, words you
+    can hold onto when the grief hits you in the hallway or at 2am. You''ll stop apologizing
+    for still being sad. You''ll stop measuring your grief against how long people
+    think it should last.
+
+
+    One hour. The loss will still be real when it ends. Nothing here makes it smaller.
+    But you''ll have let yourself live with it honestly for a little while, instead
+    of hiding it. You''re allowed to still be grieving, and you''re allowed to carry
+    what''s missing without a deadline.'
 keywords:
   primary:
   - grief
@@ -45,12 +82,16 @@ target_price:
   audible_usd: 6.99
   paperback_usd: 9.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: jonah_kim
 comp_titles:
-- It's OK That You're Not OK (Devine)
-- Option B (Sandberg)
-- The Year of Magical Thinking (Didion)
+- It's OK That You're Not OK (Megan Devine) — refuses the silver lining and the grief-on-a-schedule
+  myth
+- The Year of Magical Thinking (Joan Didion) — unsentimental, clear-eyed account of
+  living with real loss
+- Bittersweet (Susan Cain) — makes room for sorrow as something to live with, not
+  fix
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -58,3 +99,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

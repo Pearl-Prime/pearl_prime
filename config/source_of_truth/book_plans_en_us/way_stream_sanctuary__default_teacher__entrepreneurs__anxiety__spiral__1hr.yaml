@@ -16,15 +16,58 @@ target_word_range:
 target_audio_minutes: 60
 title: 'The Alarm Is Lying: Breaking the Thought Loop'
 subtitle: A One-Hour Anxiety Reset for Founders
-cover_tagline: A One-Hour Anxiety Reset for Founders
+cover_tagline: One unread Slack at midnight became the end of the company. Again.
 description:
-  short_blurb: A One-Hour Anxiety Reset for Founders The one-hour edition.
-  long_description: 'The Alarm Is Lying: Breaking the Thought Loop
+  short_blurb: One worried thought hooks the next, and twenty minutes later you've
+    mentally lost the company, the house, and the respect of everyone you know — over
+    an email that hasn't even bounced. This is a one-hour reset for founders whose
+    minds turn a single 'what if' into a thousand. It won't stop the thoughts. It'll
+    cut the chain.
+  long_description: 'It starts with one thread. A customer goes quiet. A metric dips.
+    An investor''s reply is one word shorter than usual. And your mind grabs it and
+    runs: if they churn, then the numbers slip, then the round falls through, then
+    the team finds out, then you''re laying people off, then you''re the founder who
+    blew it, then — and it''s 1 a.m. and you''ve mentally buried the entire company
+    over a Slack message you haven''t even answered yet. Each thought is the hook
+    for the next one. That''s the spiral: one thought becoming a thousand.
 
 
-    The one-hour edition: the core of the anxiety work for founders, in a single sitting.
-    Recognition, descent, integration — no filler. Book 6 of the one-hour Founders
-    anxiety series.'
+    This book is for founders whose brains are pattern-matching machines that turn
+    on them at night. You don''t just worry — you build cathedrals of consequence
+    out of a single data point. The story feels like analysis, like diligence, like
+    you''re being responsible by playing out every disaster. But you''re not solving
+    anything. You''re feeding a chain reaction and calling it thinking.
+
+
+    Waystream works in three movements, and this hour runs all three on the spiral
+    itself. Recognition: you''ll learn to catch the spiral early, to feel the click
+    of one thought hooking into the next before the whole chain is running. Descent:
+    instead of arguing each catastrophe down one by one or riding the thoughts to
+    their bitter end, you drop beneath the content, underneath the words, into what''s
+    actually driving the chain. Integration: you come back able to watch a worried
+    thought arrive without automatically grabbing the next link.
+
+
+    This is real talk for people whose own minds become the threat after dark. The
+    alarm dressing the spiral up as careful planning is lying. The spiral isn''t foresight.
+    It''s the same fear, looping, wearing a hundred different faces. Playing out the
+    worst case for the fortieth time is not preparation, and it never once made the
+    email reply faster.
+
+
+    What this will not do: it will not give you a thought-stopping technique to slam
+    the brakes, or a worksheet to debate your catastrophes into submission. There''s
+    no positive-thinking swap here, no mantra to drown the noise, no pretending you
+    can simply decide to stop. The spiral doesn''t end because you won the argument
+    with it. It loosens when you stop grabbing the next link in the chain.
+
+
+    In about an hour you''ll have plain language for what the spiral actually is,
+    and a way to break the chain instead of riding it to 3 a.m. The thoughts will
+    still come. You don''t have to follow every one to its imagined ending. You''re
+    allowed to notice the spiral starting, name it, and let the next thought go by
+    untaken. The worst case in your head is not a forecast. It''s just the loop, and
+    you don''t have to ride it down tonight.'
 keywords:
   primary:
   - anxiety relief
@@ -38,6 +81,7 @@ keywords:
   - anxiety for founders
   - one hour
 bisac_codes:
+- SEL036000
 - SEL027000
 - SEL024000
 - PSY022000
@@ -46,12 +90,16 @@ target_price:
   audible_usd: 6.99
   paperback_usd: 9.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: devon_hale
 comp_titles:
-- Dare (McDonagh)
-- The Anxiety and Phobia Workbook (Bourne)
-- Unwinding Anxiety (Brewer)
+- Chatter (Ethan Kross) — secular science of runaway inner monologue and how to break
+  it
+- Unwinding Anxiety (Judson Brewer) — maps the worry-loop as a habit and how to interrupt
+  it
+- Don't Believe Everything You Think (Joseph Nguyen) — argues the spiral is thought-as-habit,
+  not truth
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -59,3 +107,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

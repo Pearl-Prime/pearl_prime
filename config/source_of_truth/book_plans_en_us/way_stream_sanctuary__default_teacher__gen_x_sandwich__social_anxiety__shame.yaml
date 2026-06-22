@@ -16,17 +16,57 @@ target_word_range:
 target_audio_minutes: 70
 title: 'Social Anxiety: Carrying What You Can''t Say'
 subtitle: A Field Guide for the Sandwich Generation Navigating Social Anxiety
-cover_tagline: A Field Guide for the Sandwich Generation Navigating Social Anxiety
+cover_tagline: The fear isn't that they'll judge you. It's that they'd be right.
 description:
-  short_blurb: A Field Guide for the Sandwich Generation Navigating Social Anxiety
-    A grounded, secular guide to social anxiety for the sandwich generation.
-  long_description: 'Social Anxiety: Carrying What You Can''t Say
+  short_blurb: 'Under your social anxiety is a sentence you''d never say out loud:
+    that if people really saw you — how thin you''re stretched, how much you''re failing
+    at — they''d confirm what you already believe about yourself. This book is about
+    the shame beneath the anxiety, the buried conviction that something is wrong with
+    you. It teaches you to be seen anyway.'
+  long_description: 'It''s not the small talk that undoes you. It''s the certainty
+    underneath it — that if this person looks closely, they''ll see what you see when
+    you''re honest: someone barely keeping two generations afloat, dropping things,
+    snapping at the kids, dreading the next call about your father. So you manage
+    how you come across. You perform fine. And every social moment becomes a job of
+    hiding the self you''re sure would disappoint them.
 
 
-    For caring for aging parents and growing kids at once. This book names what social
-    anxiety is doing in your body in language you can use — through recognition, descent,
-    and integration, not worksheets or forced positivity. Book 3 of the the Sandwich
-    Generation social anxiety series.'
+    This book is for you — the one caring for aging parents and growing kids at once,
+    the one whose social anxiety isn''t really about strangers but about exposure.
+    The fear isn''t that they''ll think badly of you. It''s that they''d be agreeing
+    with a verdict you reached about yourself a long time ago.
+
+
+    Shame is the precise engine here, and it''s the deepest root of social anxiety.
+    Plain nervousness fears a bad impression. Shame fears a true one — it whispers
+    that you are the problem, and that being seen clearly means being found out. That
+    belief is what makes a simple conversation feel like a tribunal, and it''s why
+    you''d rather not be seen at all.
+
+
+    You get free of it in three moves. Recognition: you learn to catch shame as the
+    specific thing driving the avoidance, and to name it instead of mistaking it for
+    the truth about you. Descent: you go down into the buried belief — not to expose
+    it and brace for the worst, but to look at it directly and find out it isn''t
+    the sentence you assumed. Integration: you come back able to be seen as you are,
+    stretched and imperfect and human, without treating someone''s gaze as a verdict.
+
+
+    This book will not make you charming. It won''t promise the anxiety lifts once
+    you understand its root, and it won''t tell you that you''ll someday love being
+    the center of attention. The fear of being found out may always flicker. What
+    changes is that it stops running the show. You stop confusing being seen with
+    being judged, and being human with being wrong.
+
+
+    No confidence hacks. No social scripts. No fake positivity. Just an honest look
+    at the shame underneath the anxiety and what it takes to let yourself be seen
+    — by the right person, as the real thing.
+
+
+    You are not a secret that has to be kept. You''re a person carrying too much,
+    afraid the carrying disqualifies you. It doesn''t. You''re allowed to be seen
+    exactly as you are.'
 keywords:
   primary:
   - social anxiety
@@ -39,6 +79,7 @@ keywords:
   - the sandwich generation
   - social anxiety for the sandwich generation
 bisac_codes:
+- SEL036000
 - SEL027000
 - SEL031000
 - PSY022000
@@ -47,12 +88,16 @@ target_price:
   audible_usd: 9.99
   paperback_usd: 12.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: elena_petrova
 comp_titles:
-- How to Be Yourself (Hendriksen)
-- The Social Anxiety Workbook (Antony)
-- Quiet (Cain)
+- I Thought It Was Just Me (Brené Brown) — secular map of shame and the fear of being
+  found out.
+- How to Be Yourself (Ellen Hendriksen) — clinician's take on social anxiety and the
+  dread of being seen.
+- Untamed (Glennon Doyle) — permission to stop performing an acceptable self and be
+  seen as you are.
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -60,3 +105,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

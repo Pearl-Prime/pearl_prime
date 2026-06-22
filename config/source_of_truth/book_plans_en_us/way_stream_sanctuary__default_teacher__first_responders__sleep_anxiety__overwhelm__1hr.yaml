@@ -16,15 +16,57 @@ target_word_range:
 target_audio_minutes: 60
 title: 'The 3am Mind: When Everything Is Too Much'
 subtitle: A One-Hour Sleep Reset for First Responders
-cover_tagline: A One-Hour Sleep Reset for First Responders
+cover_tagline: Too many shifts, too many calls, all of it landing at once — at midnight.
 description:
-  short_blurb: A One-Hour Sleep Reset for First Responders The one-hour edition.
-  long_description: 'The 3am Mind: When Everything Is Too Much
+  short_blurb: The whole weight of the job waits until you lie down, then drops on
+    you all at once. This is the one-hour sleep reset for the first responder who
+    can't sleep because everything is too much. Not a way to do more. A way to stop
+    carrying all of it in a single moment so your body can finally let go.
+  long_description: 'All day you handle it. Call after call, hour after hour, you
+    stay functional because you have to. Then the lights go out and it all arrives
+    at once — every shift this week, the one that went bad, the thing at home you
+    haven''t dealt with, the next set you''re already dreading — landing on your chest
+    in the dark like the whole load was just waiting for you to stop moving. It''s
+    too much, and you can''t sleep under the weight of it.
 
 
-    The one-hour edition: the core of the sleep anxiety work for first responders,
-    in a single sitting. Recognition, descent, integration — no filler. Book 2 of
-    the one-hour First Responders sleep anxiety series.'
+    This book is for you — the responder running on a deficit, holding more than any
+    body is built to hold, whose mind picks bedtime to total it all up. The one who
+    isn''t anxious about one thing but flattened by everything at once.
+
+
+    First, recognition: overwhelm is not a sign you''re weak or falling behind. It''s
+    what happens when a finite nervous system is asked to carry an infinite job, and
+    the bill comes due the second you go horizontal. You are not failing to cope.
+    You are out of room. There''s a difference between a person who can''t handle
+    it and a person who has simply been handed too much, and feeling that difference
+    is where this starts.
+
+
+    Then the descent. You stop trying to sort it, plan it, or shrink the list — that''s
+    just carrying the same load from a different angle. Instead you go down into the
+    actual sensation of too-much in the body: the pressure on the sternum, the heaviness
+    in the limbs, the wired-and-tired hum that won''t switch off. You let yourself
+    feel the full weight without having to do a single thing about it tonight. You''re
+    not solving the load. You''re setting it down by letting yourself feel how much
+    it actually is. The body can''t release what the mind insists on holding — so,
+    just for now, you stop holding.
+
+
+    Integration is what carries into the next overloaded week: knowing the difference
+    between a problem and a capacity, and letting your body off the hook at night
+    even when the job isn''t done, because the job is never done.
+
+
+    This will not promise you an empty plate, a system to handle it all, or a you
+    who absorbs more without cost. You can''t optimize your way out of a load this
+    size — and you were never supposed to carry it without it costing you something.
+    What it offers is permission to stop carrying everything in one moment so sleep
+    has room to come.
+
+
+    You don''t have to hold all of it tonight. You can set it down and still be doing
+    your job. One hour. Read it when it''s all too much.'
 keywords:
   primary:
   - insomnia help
@@ -37,6 +79,7 @@ keywords:
   - sleep anxiety for first responders
   - one hour
 bisac_codes:
+- SEL036000
 - SEL027000
 - HEA046000
 - PSY022000
@@ -45,12 +88,16 @@ target_price:
   audible_usd: 6.99
   paperback_usd: 9.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: cole_bennett
 comp_titles:
-- Say Good Night to Insomnia (Jacobs)
-- The Sleep Solution (Winter)
-- Why We Sleep (Walker)
+- Burnout (Emily & Amelia Nagoski) — completing the stress cycle when the load never
+  lets up
+- The Body Keeps the Score (Bessel van der Kolk) — why an overloaded body won't stand
+  down at night
+- Why Zebras Don't Get Ulcers (Robert Sapolsky) — what chronic, unrelenting stress
+  does to a body
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -58,3 +105,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

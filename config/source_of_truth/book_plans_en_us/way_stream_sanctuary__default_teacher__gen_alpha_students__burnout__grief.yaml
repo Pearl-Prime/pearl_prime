@@ -16,17 +16,54 @@ target_word_range:
 target_audio_minutes: 70
 title: 'After the Flame: Living with What You''ve Lost'
 subtitle: A Real Talk Guide to Burnout Recovery for Students
-cover_tagline: A Real Talk Guide to Burnout Recovery for Students
+cover_tagline: Burnout isn't a phase you snap out of. Something's gone, and nobody
+  told you to grieve it.
 description:
-  short_blurb: A Real Talk Guide to Burnout Recovery for Students A grounded, secular
-    guide to burnout for students.
-  long_description: 'After the Flame: Living with What You''ve Lost
+  short_blurb: 'You used to care about school. You used to have a thing that lit you
+    up. Now you''re going through the motions and you can''t find the kid who used
+    to be in there. This book sits with the part of burnout nobody names out loud:
+    you''ve actually lost something, and you''re allowed to grieve it instead of grinding
+    past it.'
+  long_description: 'It happens quietly. One semester you cared about a grade. You
+    had a class that was yours, a thing you''d stay up for because you wanted to,
+    not because it was due. Then somewhere in the all-nighters and the group chats
+    that never stop and the third year of being told this one counts for college,
+    the spark went out. Now you open the laptop and feel nothing. You scroll instead
+    of starting. And the worst part is you can''t even remember being the kind of
+    person who used to get excited about any of it.
 
 
-    For a student under academic and social pressure. This book names what burnout
-    is doing in your body in language you can use — through recognition, descent,
-    and integration, not worksheets or forced positivity. Book 1 of the Students burnout
-    series.'
+    This book is for the student who''s burned out and secretly grieving — even if
+    you''d never call it that. You''re not lazy. You''re not broken. You lost something
+    real: the version of you who cared, the energy that used to come for free, maybe
+    a subject or a dream you''ve quietly stopped letting yourself want. Nobody handed
+    you a way to mourn that, so you''ve been carrying it around as guilt instead,
+    wondering what''s wrong with you.
+
+
+    The first thing this book does is give the feeling its actual name. Not ''I need
+    to lock in,'' not ''I''m being dramatic,'' but the truth your body already knows:
+    something is gone, and you''re allowed to be sad about it. From there we stop
+    running. Instead of outrunning the flatness with one more productivity hack, you''ll
+    go toward it — learning what burnout grief actually feels like from the inside,
+    why every attempt to push through has only dug the hole deeper, and how to quit
+    punishing yourself for not being who you were at fourteen. Only then does the
+    climb back start: not back into the old you, but into someone who can finally
+    tell resting apart from quitting, and who can care about things again without
+    setting yourself on fire to prove you still can.
+
+
+    This is not a comeback story. It will not teach you to bounce back, optimize your
+    recovery, or flip your burnout into a glow-up. There''s no morning routine in
+    here, no five-step system, no ''you''ve got this'' pep talk that makes your skin
+    crawl. Some of what you lost isn''t coming back, and pretending otherwise is a
+    big part of why you''re this tired.
+
+
+    What you get instead is language for the empty feeling and permission to stop
+    reading it as a personal flaw. You can grieve who you used to be. You can let
+    that version go before you have any idea who you turn into next. The flame went
+    out — and you''re still sitting here, still reading. That''s enough to begin with.'
 keywords:
   primary:
   - burnout recovery
@@ -47,12 +84,16 @@ target_price:
   audible_usd: 9.99
   paperback_usd: 12.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: jonah_kim
 comp_titles:
-- Burnout (Nagoski)
-- Laziness Does Not Exist (Price)
-- Do Nothing (Headlee)
+- 'Burnout: The Secret to Unlocking the Stress Cycle (Emily Nagoski & Amelia Nagoski)
+  — names burnout as a body-level state you complete, not a willpower failure'
+- It's OK That You're Not OK (Megan Devine) — gives permission to grieve a loss instead
+  of rushing to fix or 'move on'
+- How to Do Nothing (Jenny Odell) — secular case for stepping out of the attention/productivity
+  grind without guilt
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -60,3 +101,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

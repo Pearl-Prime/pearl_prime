@@ -16,15 +16,54 @@ target_word_range:
 target_audio_minutes: 60
 title: 'The Alarm Is Lying: The False Alarm Response'
 subtitle: A One-Hour Anxiety Reset for Working Parents
-cover_tagline: A One-Hour Anxiety Reset for Working Parents
+cover_tagline: Your body is screaming danger. The kids are asleep down the hall.
 description:
-  short_blurb: A One-Hour Anxiety Reset for Working Parents The one-hour edition.
-  long_description: 'The Alarm Is Lying: The False Alarm Response
+  short_blurb: 'The heart pounds, the breath goes shallow, the dread floods in — and
+    nothing is actually wrong. Everyone''s safe, the bills are paid, the house is
+    quiet. But your body didn''t get the memo. This is an hour with the false alarm:
+    the panic that fires when there''s no fire, and how to stop treating every spike
+    of fear as proof that something terrible is coming.'
+  long_description: 'You''re sitting in the school pickup line and your chest seizes
+    for no reason. Or you wake at 4am with your heart hammering, certain something
+    is wrong, and you lie there scanning the house, the finances, your kid''s cough
+    — and find nothing. Everyone is safe. Everyone is asleep. And still the alarm
+    is blaring through your body like the building is on fire.
 
 
-    The one-hour edition: the core of the anxiety work for working parents, in a single
-    sitting. Recognition, descent, integration — no filler. Book 2 of the one-hour
-    Working Parents anxiety series.'
+    This book is for the working parent whose nervous system has its hand permanently
+    near the panic button. Who feels the surge of dread in the grocery store, in the
+    meeting, in the car at a red light, and can''t find a single real threat to pin
+    it on. Who has started to fear the fear itself — the racing heart, the tunnel
+    vision, the certainty that this time it''s not nothing.
+
+
+    Here''s what no one tells you: the alarm doesn''t mean what it says it means.
+    A false alarm in the body feels identical to a real one — the same flood of adrenaline
+    whether there''s a bear in the room or a thought in your head. We''re going to
+    learn the difference from the inside. Not by arguing with the fear, not by breathing
+    it away on command, but by going down into the sensation itself and discovering
+    it can''t actually hurt you. The pounding heart is a muscle doing its job. The
+    dread is a signal that misfired, not a prophecy.
+
+
+    We''ll name it as it happens, in the specific moments of your day — the after-school
+    chaos, the 4am wake-up, the work email that lands like a threat. Then we descend:
+    into the body, into the rising panic, learning to stay with it long enough to
+    watch it crest and fall on its own. Because it always falls on its own. That''s
+    the part the alarm never lets you find out.
+
+
+    This won''t promise the panic will never come again. It won''t give you a breathing
+    technique to deploy like a fire extinguisher or a morning routine to armor you
+    against the day. What it offers is something steadier: the felt knowledge that
+    a false alarm is survivable, that you don''t have to flee it or fix it, that your
+    body can sound the siren and you can stay in the room.
+
+
+    The danger your body keeps announcing isn''t there. It hasn''t been there for
+    a long time. An hour from now, the next surge of fear will still feel real — but
+    you''ll know, in your bones, that feeling real and being true are not the same
+    thing. And you''ll stay.'
 keywords:
   primary:
   - anxiety relief
@@ -38,6 +77,7 @@ keywords:
   - anxiety for working parents
   - one hour
 bisac_codes:
+- SEL036000
 - SEL027000
 - SEL024000
 - PSY022000
@@ -46,12 +86,16 @@ target_price:
   audible_usd: 6.99
   paperback_usd: 9.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: tomas_vidal
 comp_titles:
-- Dare (McDonagh)
-- The Anxiety and Phobia Workbook (Bourne)
-- Unwinding Anxiety (Brewer)
+- Dare (Barry McDonagh) — the standard secular method for facing panic and false-alarm
+  anxiety without fleeing it
+- When Panic Attacks (David D. Burns) — cognitive tools for recognizing the body's
+  misfired threat signals
+- Hope and Help for Your Nerves (Claire Weekes) — the classic on letting the false
+  alarm rise and pass instead of fighting it
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -59,3 +103,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

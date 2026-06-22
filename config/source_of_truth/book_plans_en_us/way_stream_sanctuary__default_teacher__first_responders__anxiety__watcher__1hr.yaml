@@ -16,15 +16,53 @@ target_word_range:
 target_audio_minutes: 60
 title: 'The Alarm Is Lying: The Observer''s Mind'
 subtitle: A One-Hour Anxiety Reset for First Responders
-cover_tagline: A One-Hour Anxiety Reset for First Responders
+cover_tagline: You scan every room for the exit and the threat. It kept you alive
+  on shift. It won't switch off at home.
 description:
-  short_blurb: A One-Hour Anxiety Reset for First Responders The one-hour edition.
-  long_description: 'The Alarm Is Lying: The Observer''s Mind
+  short_blurb: Part of you never comes off the clock — always scanning, always reading
+    the exits, always braced for what's coming. This is the one-hour read for the
+    first responder whose mind won't stand down. The hypervigilance that keeps you
+    sharp on a call is the same thing wrecking your sleep.
+  long_description: 'You walk into a restaurant and you''ve already clocked the exits,
+    sized up the guy by the door, picked the seat with your back to the wall. You
+    hear a sound at home and your whole body is up and reading it before you''ve decided
+    to move. Some part of you never comes off shift — it''s always scanning, always
+    running threat assessment on a quiet street, always one move ahead of a danger
+    that, off duty, almost never comes. On a call that watcher is a gift. It reads
+    the scene, catches the detail, keeps you and your partner alive. The problem is
+    it doesn''t know how to stand down, and so it runs you ragged in a world that
+    isn''t actually trying to hurt you.
 
 
-    The one-hour edition: the core of the anxiety work for first responders, in a
-    single sitting. Recognition, descent, integration — no filler. Book 7 of the one-hour
-    First Responders anxiety series.'
+    This book is for the first responder whose hypervigilance followed them home:
+    the cop who can''t sit with his back to a door, the medic still scanning for the
+    next deterioration, the firefighter whose sleep is one long shift waiting for
+    the tone, the dispatcher braced for the call that goes wrong. The watcher mind
+    feels like safety. It feels non-negotiable — let your guard down and that''s when
+    it gets you. But the lie is in the ''always.'' The vigilance that''s precise and
+    lifesaving on scene becomes a tax you pay every hour you''re not on one, in lost
+    sleep, in a body that never unclenches, in a presence that''s never quite in the
+    room with the people you love.
+
+
+    In a single sitting we name it: a watcher that''s a survival tool stuck in the
+    on position. Then we go down into the bracing itself — not to shut the watcher
+    off, because you''d never want it gone, but to feel what''s underneath the constant
+    scanning. Usually it''s a body that''s seen what can happen and refuses to be
+    caught off guard again. You''ll let the vigilance be there without obeying its
+    every alert. And you come back able to let the watcher rest when there''s nothing
+    to watch — and trust it to wake when there is.
+
+
+    This won''t promise you a switched-off mind or tell you to let your guard all
+    the way down. Your alertness is a real skill; the goal isn''t to lose it, it''s
+    to stop paying for it around the clock. No drills, no routines — just the difference
+    between guarding a scene and guarding a Tuesday night on your own couch.
+
+
+    The alarm is lying when it insists you have to watch everything, always, or it
+    gets you. You can be off duty. The watcher can rest. You''re allowed to be in
+    the room you''re actually in.'
 keywords:
   primary:
   - anxiety relief
@@ -38,6 +76,7 @@ keywords:
   - anxiety for first responders
   - one hour
 bisac_codes:
+- SEL036000
 - SEL027000
 - SEL024000
 - PSY022000
@@ -46,12 +85,16 @@ target_price:
   audible_usd: 6.99
   paperback_usd: 9.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: cole_bennett
 comp_titles:
-- Dare (McDonagh)
-- The Anxiety and Phobia Workbook (Bourne)
-- Unwinding Anxiety (Brewer)
+- The Body Keeps the Score (Bessel van der Kolk) — why a survival-trained body stays
+  braced long after the threat
+- Widen the Window (Elizabeth Stanley) — regulating a nervous system stuck in constant
+  high alert
+- Waking the Tiger (Peter Levine) — letting the body discharge vigilance it never
+  got to release
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -59,3 +102,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

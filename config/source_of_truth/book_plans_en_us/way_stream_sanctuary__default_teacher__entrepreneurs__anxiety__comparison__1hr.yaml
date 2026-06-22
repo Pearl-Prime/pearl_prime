@@ -16,15 +16,58 @@ target_word_range:
 target_audio_minutes: 60
 title: 'The Alarm Is Lying: Beyond the Highlight Reel'
 subtitle: A One-Hour Anxiety Reset for Founders
-cover_tagline: A One-Hour Anxiety Reset for Founders
+cover_tagline: Their highlight reel is not your scoreboard.
 description:
-  short_blurb: A One-Hour Anxiety Reset for Founders The one-hour edition.
-  long_description: 'The Alarm Is Lying: Beyond the Highlight Reel
+  short_blurb: You opened the app to check one thing and now you feel two years behind
+    a person you've never met. This is a one-hour reset for founders who keep measuring
+    a private, half-built company against everyone else's launch posts. It won't make
+    you stop noticing the competition. It'll change what that noticing does to you.
+  long_description: 'You see the funding announcement before your coffee is cold.
+    Someone in your cohort just closed a round, shipped the thing you''ve been stuck
+    on for months, got the press hit, hit the number. And something in your chest
+    drops. Not curiosity. Not even envy, exactly. A cold, fast verdict: they''re winning
+    and you''re not, and everyone can probably tell.
 
 
-    The one-hour edition: the core of the anxiety work for founders, in a single sitting.
-    Recognition, descent, integration — no filler. Book 1 of the one-hour Founders
-    anxiety series.'
+    This book is for founders who run their company with one eye on the scoreboard
+    nobody agreed to keep. You compare your messy Tuesday to their announcement day.
+    You compare your real burn rate to their press release. You compare the inside
+    of your head to the outside of theirs, and you lose every time, because that''s
+    a rigged comparison and you set the odds yourself. You don''t even decide to do
+    it. You open one app to answer one message, and twenty seconds later you''re standing
+    in someone else''s launch, measuring your whole company against a single post
+    they spent a week polishing.
+
+
+    Waystream is built on three moves, and this hour walks you through all three for
+    the specific ache of comparison. Recognition: you''ll learn to catch the exact
+    instant the measuring starts, the body-level lurch before the story arrives. Descent:
+    instead of arguing with it or doom-scrolling to confirm the verdict, you go down
+    into what the comparison is actually pointing at, what you wanted, what you''re
+    afraid you can''t have, what you''ve stopped letting yourself name. Integration:
+    you come back able to see another founder''s win as information, not as a ruling
+    on your worth.
+
+
+    This is real talk for people who live inside other people''s success metrics.
+    The alarm screaming that you''re behind is reading a highlight reel and calling
+    it the full tape. It''s lying. Not because everyone secretly fails, but because
+    a curated outside was never a fair read on your actual inside.
+
+
+    What this will not do: it will not turn you into someone who doesn''t notice.
+    It won''t hand you a gratitude list to recite over the sting, or tell you to mute
+    everyone and call it growth. There''s no morning routine here, no positive-thinking
+    fix, no pretending the market isn''t competitive. The comparison reflex isn''t
+    a character flaw to delete. It''s a signal to read more honestly.
+
+
+    In about an hour you''ll have plain language for what happens in your body when
+    the feed does its thing, and a way to stand in it without it deciding who you
+    are. The other founder''s round closing has nothing to do with the value of what
+    you''re building. You''re allowed to want what they have and keep building your
+    own thing anyway. You''re allowed to look at the scoreboard, feel the drop, and
+    stay in your own work without flinching.'
 keywords:
   primary:
   - anxiety relief
@@ -38,6 +81,7 @@ keywords:
   - anxiety for founders
   - one hour
 bisac_codes:
+- SEL036000
 - SEL027000
 - SEL024000
 - PSY022000
@@ -46,12 +90,15 @@ target_price:
   audible_usd: 6.99
   paperback_usd: 9.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: devon_hale
 comp_titles:
-- Dare (McDonagh)
-- The Anxiety and Phobia Workbook (Bourne)
-- Unwinding Anxiety (Brewer)
+- Daring Greatly (Brené Brown) — names how comparison and scarcity erode self-worth
+- The Subtle Art of Not Giving a F*ck (Mark Manson) — blunt secular case for choosing
+  which scoreboards matter
+- Mindset (Carol Dweck) — reframes others' success as information rather than a verdict
+  on you
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -59,3 +106,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

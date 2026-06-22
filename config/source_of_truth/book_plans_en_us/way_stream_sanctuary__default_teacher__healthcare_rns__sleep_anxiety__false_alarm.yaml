@@ -16,17 +16,54 @@ target_word_range:
 target_audio_minutes: 70
 title: 'The 3am Mind: Misreading the Danger Signal'
 subtitle: A Real Talk Guide to Sleep Anxiety for Nurses
-cover_tagline: A Real Talk Guide to Sleep Anxiety for Nurses
+cover_tagline: Lights out, body safe, alarm still ringing.
 description:
-  short_blurb: A Real Talk Guide to Sleep Anxiety for Nurses A grounded, secular guide
-    to sleep anxiety for nurses.
-  long_description: 'The 3am Mind: Misreading the Danger Signal
+  short_blurb: You're finally horizontal after a brutal shift, and the second your
+    head hits the pillow your body acts like something's wrong. This is a real-talk
+    guide for nurses on sleep anxiety — why your nervous system reads bedtime as a
+    danger signal, and how to stop obeying an alarm that has nothing to warn you about.
+  long_description: 'You''re in bed. The shift is over. Tomorrow you''re off, or you''re
+    on too soon, and either way your body needs this. And the moment the lights go
+    out, something kicks in — a low hum of alert, a heart rate that won''t come down,
+    a sense that you should be doing something even though there''s nothing to do
+    but sleep.
 
 
-    For a nurse at the end of a twelve-hour shift. This book names what sleep anxiety
-    is doing in your body in language you can use — through recognition, descent,
-    and integration, not worksheets or forced positivity. Book 1 of the Nurses sleep
-    anxiety series.'
+    This book is for the nurse whose body forgot how to stand down. You spend your
+    working hours in a state of readiness — listening for the call bell, bracing for
+    the rapid response, sleeping in stolen twenty-minute pieces on nights when you
+    can sleep at all. Your nervous system has learned that rest is dangerous, that
+    the quiet is when things go wrong, that lying still means you''ll miss something.
+    So bedtime itself becomes a trigger. The alarm fires not because there''s a threat,
+    but because lying down is the cue.
+
+
+    The recognition: this is a false alarm. The dread you feel at the edge of sleep
+    is the same surge you''d feel over a deteriorating patient — except there''s no
+    patient, no monitor, no emergency. Just you, safe, and a body that can''t tell
+    the difference yet. The alarm is real and the danger is not, and once you stop
+    treating the feeling as proof that something''s wrong, bedtime stops being a fight.
+
+
+    We go down into the moment it fires, not around it. You''ll learn to feel the
+    false alarm at the threshold of sleep — the chest tightening, the mind starting
+    to scan, the urge to get up and check something — and name it for what it is:
+    the signal misreading the situation. You stop fighting for sleep, which only confirms
+    to your body that something''s at stake. That''s the descent. The integration
+    is quieter than you''d expect: the alarm still goes off some nights, but it stops
+    meaning you have to stay awake to answer it.
+
+
+    This won''t hand you eight uninterrupted hours. It''s not sleep hygiene, not a
+    wind-down routine, not a checklist of screens off and chamomile down. It won''t
+    optimize your rest or promise you''ll wake up restored. This is about recognizing
+    one specific misfire — the danger signal at bedtime — so you stop guarding against
+    a threat that isn''t in the room.
+
+
+    You''ve spent your nights keeping watch over people who couldn''t keep watch over
+    themselves. You''re allowed to lie down and let the alarm ring without standing
+    post. Nothing is coming. You can rest.'
 keywords:
   primary:
   - insomnia help
@@ -39,6 +76,7 @@ keywords:
   - nurses
   - sleep anxiety for nurses
 bisac_codes:
+- SEL036000
 - SEL027000
 - HEA046000
 - PSY022000
@@ -47,12 +85,16 @@ target_price:
   audible_usd: 9.99
   paperback_usd: 12.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: lena_frost
 comp_titles:
-- Say Good Night to Insomnia (Jacobs)
-- The Sleep Solution (Winter)
-- Why We Sleep (Walker)
+- Say Good Night to Insomnia (Gregg Jacobs) — reframes the anxious arousal that keeps
+  the body from letting go at bedtime
+- Dare (Barry McDonagh) — shows how allowing the alarm, rather than fighting it, defuses
+  it
+- Why We Sleep (Matthew Walker) — explains how a body stuck in alert can't access
+  the rest it needs
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -60,3 +102,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

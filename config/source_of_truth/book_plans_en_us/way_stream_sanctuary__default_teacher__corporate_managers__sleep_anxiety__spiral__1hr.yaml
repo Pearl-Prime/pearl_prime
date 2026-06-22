@@ -16,15 +16,56 @@ target_word_range:
 target_audio_minutes: 60
 title: 'The 3am Mind: Escaping the Mental Loop'
 subtitle: A One-Hour Sleep Reset for Managers
-cover_tagline: A One-Hour Sleep Reset for Managers
+cover_tagline: One thought at 2am, and you're awake until five.
 description:
-  short_blurb: A One-Hour Sleep Reset for Managers The one-hour edition.
-  long_description: 'The 3am Mind: Escaping the Mental Loop
+  short_blurb: One small worry surfaces in the night and by 4am it's grown into your
+    whole career, your whole competence, your whole self. This is a one-hour reset
+    for managers whose minds spiral the moment the lights go out.
+  long_description: 'It''s a little after 2am and a single thought has wormed in.
+    Maybe it''s the email you should have answered before you left. By 2:15 it''s
+    the email, and what the silence on it might mean, and what your manager is probably
+    thinking, and whether you''re actually any good at this job, and what happens
+    to everything if you''re not. You didn''t choose to follow that chain. You just
+    woke up, caught one stray thought, and the spiral did the rest — each link handing
+    off to the next while the clock crept toward dawn and the hours left to sleep
+    quietly drained away.
 
 
-    The one-hour edition: the core of the sleep anxiety work for managers, in a single
-    sitting. Recognition, descent, integration — no filler. Book 3 of the one-hour
-    Managers sleep anxiety series.'
+    This book is for the manager whose mind spirals in the dark. You spend your days
+    thinking carefully, weighing outcomes, staying ahead of problems before they reach
+    anyone else — and at night that same engine turns over with nothing to steer it
+    and nowhere to go. One ambiguous comment from a stakeholder becomes a verdict
+    on your competence. One open question becomes a full forecast of everything going
+    wrong. It feels like you''re working something out, like the spinning is productive.
+    You''re not, and it isn''t. You''re descending a staircase with no bottom step,
+    trading the sleep you''ll need to actually handle any of it tomorrow for the illusion
+    of handling it now.
+
+
+    In one hour, you''ll learn to catch the night spiral at the link — the exact handoff
+    where one 2am thought becomes the next. We''ll name that move so you can spot
+    it as it happens, instead of surfacing at 4am already three flights down. Then
+    you''ll do the thing that runs against every instinct: stop trying to think it
+    through to the end, because the end keeps moving. Instead you''ll go down into
+    the spiral on purpose, feel its pull in your body without grabbing for the next
+    thought, and let its momentum die out on its own. That''s the descent. What comes
+    back isn''t a resolved worry — it''s a mind that has stopped mistaking 4am spinning
+    for problem-solving, and, often enough, the sleep that follows once it does.
+
+
+    This will not give you a thought-stopping script, a worry journal for your nightstand,
+    or a promise that your mind will go quiet on command. There is no nightly mental
+    routine to optimize your way into. Your spiraling is not a discipline failure
+    to correct before tomorrow.
+
+
+    What you''ll have instead is something to do when the next 2am thought tries to
+    multiply: notice the very first handoff and decline it. The email can wait. The
+    verdict can wait. One thought can stay one thought, even at 4am, and you don''t
+    have to follow it down into the dark.
+
+
+    You are allowed to catch a thought in the dark and let it stay just one thought.'
 keywords:
   primary:
   - insomnia help
@@ -37,6 +78,7 @@ keywords:
   - sleep anxiety for managers
   - one hour
 bisac_codes:
+- SEL036000
 - SEL027000
 - HEA046000
 - PSY022000
@@ -45,12 +87,14 @@ target_price:
   audible_usd: 6.99
   paperback_usd: 9.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: mara_okonkwo
 comp_titles:
-- Say Good Night to Insomnia (Jacobs)
-- The Sleep Solution (Winter)
-- Why We Sleep (Walker)
+- Chatter (Ethan Kross) — the runaway inner voice and how to step out of its loop
+- Hello Sleep (Jade Wu) — secular help for the spiraling, sleepless 3am mind
+- Don't Believe Everything You Think (Joseph Nguyen) — separating one night-thought
+  from the spiral it sets off
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -58,3 +102,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

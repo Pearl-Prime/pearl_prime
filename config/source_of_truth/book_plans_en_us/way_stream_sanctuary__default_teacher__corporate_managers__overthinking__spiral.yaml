@@ -16,17 +16,55 @@ target_word_range:
 target_audio_minutes: 70
 title: 'The Thought That Won''t Leave: Escaping the Mental Loop'
 subtitle: A Real Talk Guide to Stop Overthinking for Managers
-cover_tagline: A Real Talk Guide to Stop Overthinking for Managers
+cover_tagline: One stray thought at your desk, and forty minutes later you're three
+  reorgs deep into a future that hasn't happened.
 description:
-  short_blurb: A Real Talk Guide to Stop Overthinking for Managers A grounded, secular
-    guide to overthinking for managers.
-  long_description: 'The Thought That Won''t Leave: Escaping the Mental Loop
+  short_blurb: The spiral doesn't start big. It starts with one thought that splits
+    into a thousand while you stare at the same paragraph. This book shows managers
+    how to recognize the loop the moment it begins — and step out of it without pretending
+    the thought never came.
+  long_description: 'It begins with something small. A comment in a meeting. A number
+    that was slightly off. A look on someone''s face. By the time you notice, you''re
+    forty minutes gone — you''ve mentally rewritten the project, prepped a defense
+    for a conversation no one has asked for, and arrived at a conclusion about your
+    own competence that has nothing to do with the original thought. The document
+    on your screen hasn''t moved. The loop has run you again.
 
 
-    For a mid-level manager between back-to-back meetings. This book names what overthinking
-    is doing in your body in language you can use — through recognition, descent,
-    and integration, not worksheets or forced positivity. Book 2 of the Managers overthinking
-    series.'
+    This book is for the manager whose mind is a search engine that won''t stop returning
+    results. The one who can hold a whole team''s logistics in their head all day
+    and still get devoured at 9pm by a single sentence they said in standup. You are
+    not undisciplined. You are caught in a spiral — where one thought generates the
+    next, and the next, faster than you can catch them, each one feeling urgent and
+    true.
+
+
+    You''ll start by learning to NAME the spiral as a spiral — not as thinking, not
+    as planning, not as "being responsible." There''s a specific moment when productive
+    thought tips into a loop, and you''ll learn to feel it happen. Then you''ll go
+    DOWN into it: not to win the argument inside your head, not to think the thought
+    all the way to the end (it doesn''t have an end — that''s the trap), but to feel
+    what''s underneath the spinning. The spiral promises that if you just complete
+    one more lap, you''ll finally land somewhere safe. You won''t. And once you stop
+    believing that promise, the laps lose their grip. You come back able to watch
+    the first thought arrive without grabbing the second.
+
+
+    This is unsentimental, secular, real talk. It will not promise you a still mind
+    or a five-step system to shut overthinking off like a switch. No worksheets. No
+    "just be present." The loop may still try to start. What changes is that you can
+    see it forming and decline the invitation — at your desk, in the car, at 2am —
+    instead of disappearing into it for the hundredth time.
+
+
+    For the manager who confuses rumination with diligence, who treats every spiral
+    as a meeting they''re obligated to attend, this names exactly what''s happening
+    in language you can use mid-loop. The point is not to stop having thoughts. The
+    point is to stop chasing every one to the bottom of a well that has no bottom.
+
+
+    You are allowed to let a thought arrive and pass without following it. The loop
+    is not your job. You can set it down.'
 keywords:
   primary:
   - stop overthinking
@@ -39,6 +77,7 @@ keywords:
   - managers
   - overthinking for managers
 bisac_codes:
+- SEL036000
 - SEL027000
 - SEL024000
 - PSY022000
@@ -47,12 +86,16 @@ target_price:
   audible_usd: 9.99
   paperback_usd: 12.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: mara_okonkwo
 comp_titles:
-- Don't Believe Everything You Think (Nguyen)
-- Stop Overthinking (Hollins)
-- The Worry Trick (Carbonell)
+- Don't Believe Everything You Think (Joseph Nguyen) — argues the spiral is thinking-about-thinking,
+  not a problem to solve
+- Chatter (Ethan Kross) — the science of the inner voice that loops, and how to create
+  distance from it
+- Unwinding Anxiety (Judson Brewer) — maps the rumination habit loop and how to step
+  out without forcing it
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -60,3 +103,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

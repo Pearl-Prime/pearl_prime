@@ -16,16 +16,55 @@ target_word_range:
 target_audio_minutes: 60
 title: 'The Thought That Won''t Leave: Watching Your Thoughts Without Drowning'
 subtitle: A One-Hour Overthinking Reset for Nurses
-cover_tagline: A One-Hour Overthinking Reset for Nurses
+cover_tagline: Your shift ended hours ago. The part of you that scans the room never
+  got the memo.
 description:
-  short_blurb: A One-Hour Overthinking Reset for Nurses The one-hour edition.
-  long_description: 'The Thought That Won''t Leave: Watching Your Thoughts Without
-    Drowning
+  short_blurb: You're off the clock, on your own couch, and still half-monitoring
+    — still scanning for the thing about to go wrong. This hour is for the nurse whose
+    vigilant mind never stands down. It won't make you stop noticing. It'll show you
+    how to watch your thoughts without getting pulled under by every one.
+  long_description: 'You clocked out. You''re home. Nobody is crashing, no monitor
+    is pinging, no one needs you for the next ten hours. And yet some part of you
+    is still up in the tower, sweeping the room, waiting for the thing. You catch
+    yourself bracing at the sound of your own phone. You half-listen to your family
+    the way you half-listen for a change in a patient''s breathing — present, but
+    with one channel always tuned to the worst case, always running the what-if underneath
+    the conversation.
 
 
-    The one-hour edition: the core of the overthinking work for nurses, in a single
-    sitting. Recognition, descent, integration — no filler. Book 3 of the one-hour
-    Nurses overthinking series.'
+    This hour is for the nurse whose hypervigilance doesn''t clock out when you do.
+    On the floor, that watcher keeps people alive — it catches the subtle decline,
+    the off number, the look that means something''s wrong before the alarm agrees.
+    The problem isn''t the watching. The problem is that it never stands down, so
+    you''re scanning an empty apartment for emergencies that aren''t coming, reading
+    threat into a quiet evening, and slowly drowning in your own monitoring.
+
+
+    You''ll start by recognizing the watcher as a part of you, not the whole of you
+    — the vigilant channel that''s stuck in the on position. Then you''ll go down
+    into it instead of trying to shut it off. You''ll learn to sit a little behind
+    the thoughts and watch them pass without climbing onto each one. A worry surfaces;
+    you see it; you don''t get dispatched to it. Another comes; same thing. You''re
+    not silencing the watcher or telling it it''s wrong. You''re stepping back far
+    enough that its constant reporting stops being a riptide that drags you under
+    and becomes weather you can stand and observe.
+
+
+    What you come back with isn''t an off switch. It''s distance. The scanning can
+    run and you don''t have to be inside it. The thoughts can keep arriving and you
+    can let most of them go by unhandled — the way you''d let a stable patient''s
+    normal vitals scroll past without acting on a single one.
+
+
+    This book will not promise you a mind that finally relaxes, or a way to stop noticing
+    what''s wrong, or a technique to deaden the part of you that stays alert. There''s
+    no off button being sold here, no demand that you care less or notice less. You''ll
+    still be the one who sees it first, the one they trust to catch it. You''ll just
+    stop going under every time you do.
+
+
+    You''re allowed to watch a thought and let it pass. You don''t have to follow
+    every one into the water.'
 keywords:
   primary:
   - stop overthinking
@@ -38,6 +77,7 @@ keywords:
   - overthinking for nurses
   - one hour
 bisac_codes:
+- SEL036000
 - SEL027000
 - SEL024000
 - PSY022000
@@ -46,12 +86,16 @@ target_price:
   audible_usd: 6.99
   paperback_usd: 9.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: lena_frost
 comp_titles:
-- Don't Believe Everything You Think (Nguyen)
-- Stop Overthinking (Hollins)
-- The Worry Trick (Carbonell)
+- The Untethered Soul (Michael A. Singer) — secular practice of watching the inner
+  voice instead of being run by it
+- Hardwiring Happiness (Rick Hanson) — neuroscience of a brain stuck on threat-scanning
+  and how to ease it off
+- Burnout (Emily & Amelia Nagoski) — names the never-off vigilance of caregiving work
+  and how to complete the stress cycle
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -59,3 +103,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

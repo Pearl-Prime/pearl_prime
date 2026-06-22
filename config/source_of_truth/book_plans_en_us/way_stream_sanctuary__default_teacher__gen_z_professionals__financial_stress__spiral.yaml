@@ -16,17 +16,58 @@ target_word_range:
 target_audio_minutes: 70
 title: 'The Paycheck Pressure: Escaping the Mental Loop'
 subtitle: A Field Guide for Young Professionals Navigating Financial Stress Management
-cover_tagline: A Field Guide for Young Professionals Navigating Financial Stress Management
+cover_tagline: One unexpected expense, and your mind has already built the whole worst-case
+  in HD.
 description:
-  short_blurb: A Field Guide for Young Professionals Navigating Financial Stress Management
-    A grounded, secular guide to financial stress for young professionals.
-  long_description: 'The Paycheck Pressure: Escaping the Mental Loop
+  short_blurb: 'A surprise charge hits and your brain doesn''t stop at the charge
+    — it sprints to ruin, vividly, in seconds. This is a book about the financial-stress
+    spiral: how one expense becomes a thousand worst-case thoughts. It won''t quiet
+    the mind. It will show you the hook, so you can step off before the loop takes
+    the night.'
+  long_description: 'The car needs a repair you didn''t plan for. Or the medical bill
+    comes in fatter than the estimate, or a paycheck lands light, and your mind refuses
+    to deal with the actual number in front of it — instead it bolts. Inside of a
+    few seconds you''ve run the entire sequence: this charge, then next month, then
+    the month after that, then the version where the whole thing unravels and you''re
+    on the phone with your parents, packing boxes, conceding that you couldn''t make
+    it work. It has the texture of thinking it through. It isn''t. It''s an avalanche,
+    and one unplanned line item just kicked the whole slope loose.
 
 
-    For early in a demanding career, phone always buzzing. This book names what financial
-    stress is doing in your body in language you can use — through recognition, descent,
-    and integration, not worksheets or forced positivity. Book 3 of the Young Professionals
-    financial stress series.'
+    This is for the worker whose money strain detonates into runaway thinking. If
+    a single surprise expense can eat an entire night, if you''ve stayed up stacking
+    imaginary disasters on top of a real but survivable problem until the pile blots
+    out the original bill, if the border between planning and panicking has gone completely
+    dark for you, this is about the machinery that turns one stressful event into
+    a thousand worst-case frames and then dresses the whole stampede up as being prepared.
+    Catastrophizing is a brilliant mimic of prudence. It feels conscientious, even
+    responsible. Mostly it just bills you in full, in advance, for ruin that rarely
+    shows up to collect.
+
+
+    Wren Adler traces the runaway without lowering herself to debate it — you already
+    know the real expense is survivable, and the avalanche has no interest in your
+    evidence. First, recognition: finding the trigger, the first thought that tips
+    the first stone, and learning what the launch feels like in your chest before
+    the whole hillside is moving. Then the descent — not forcing the thoughts down,
+    not faking composure, but stepping deliberately into the slide to learn its pattern:
+    that it always gathers speed, always ends at total collapse, always reads as an
+    emergency and almost never turns out to be one. Then integration: returning able
+    to name ''this is the avalanche again'' and decline to chase the next worst frame
+    down the mountain.
+
+
+    This book will not promise a serene mind or a switch that cuts the thoughts dead.
+    Unexpected expenses will keep arriving; that''s simply the deal with being alive
+    and holding a bank account. What changes is that one surprise charge stops devouring
+    whole nights. You learn to step out of the slide near the top instead of riding
+    it all the way to the valley floor.
+
+
+    You don''t owe every catastrophe a full dress rehearsal. You can recognize the
+    slide for what it is and step off the slope — the real bill will still be there
+    in the morning, and it will still be far smaller than the one your mind built
+    overnight.'
 keywords:
   primary:
   - financial stress
@@ -47,12 +88,16 @@ target_price:
   audible_usd: 9.99
   paperback_usd: 12.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: wren_adler
 comp_titles:
-- The Psychology of Money (Housel)
-- Broke Millennial (Lowry)
-- Your Money or Your Life (Robin)
+- Unwinding Anxiety (Judson Brewer) — maps how to interrupt an anxious loop before
+  it accelerates
+- Don't Believe Everything You Think (Joseph Nguyen) — secular method for stepping
+  out of runaway thought
+- The Psychology of Money (Morgan Housel) — frames financial catastrophizing as a
+  cost paid in advance
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -60,3 +105,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

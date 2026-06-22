@@ -16,17 +16,56 @@ target_word_range:
 target_audio_minutes: 70
 title: 'The 3am Mind: When Everything Is Too Much'
 subtitle: A Real Talk Guide to Sleep Anxiety for Managers
-cover_tagline: A Real Talk Guide to Sleep Anxiety for Managers
+cover_tagline: You can't sleep because the whole list is in bed with you, all of it,
+  all at once.
 description:
-  short_blurb: A Real Talk Guide to Sleep Anxiety for Managers A grounded, secular
-    guide to sleep anxiety for managers.
-  long_description: 'The 3am Mind: When Everything Is Too Much
+  short_blurb: You lie down and everything you're carrying arrives at the same time
+    — every deadline, every person, every decision, stacked on your chest in the dark.
+    This book is for managers drowning in too-much at midnight. It won't help you
+    do more. It'll help you stop trying to hold it all at once.
+  long_description: 'The lights are off and it all shows up at once. The deadline
+    and the underperformer and the reorg and the thing you said to your VP and the
+    dentist appointment you keep not making — not one at a time, but all of it, simultaneously,
+    pressing down on you in the dark. Your chest is tight. There''s too much, and
+    lying still gives every piece of it a clear runway straight at you. You can''t
+    sleep because you can''t put any of it down, and you can''t put it down because
+    it all feels equally urgent at midnight.
 
 
-    For a mid-level manager between back-to-back meetings. This book names what sleep
-    anxiety is doing in your body in language you can use — through recognition, descent,
-    and integration, not worksheets or forced positivity. Book 2 of the Managers sleep
-    anxiety series.'
+    This book is for the manager who carries an entire team''s worth of open loops
+    to bed. The one who holds it together all day by sheer load-bearing capacity and
+    then gets flattened the moment they stop moving. You are not disorganized. You
+    are overwhelmed — genuinely carrying too much at once — and the night is when
+    the weight you''ve been outrunning finally catches you.
+
+
+    You''ll start by learning to NAME it as overwhelm, not as a to-do list that needs
+    sorting at 1am. Overwhelm isn''t the items; it''s the experience of everything
+    arriving at the same time with no space between any of it. Then you''ll go DOWN
+    into the too-much instead of trying to triage your way out of it in the dark —
+    because you can''t out-organize overwhelm at midnight, and every attempt just
+    confirms how much there is. You''ll learn what it feels like to stop holding all
+    of it at once: not by finishing anything, not by making the list shorter, but
+    by setting the whole weight down for the night and letting it be too much without
+    you carrying it. That''s the turn. You come back able to lie in the load without
+    being crushed by it.
+
+
+    This is grounded, secular, real talk. It will not promise you an empty plate or
+    a system that makes the overwhelm go away. No time-management hacks, no "brain
+    dump and you''ll feel better," no pretending the load isn''t real. The plate may
+    still be full tomorrow. What changes is that you stop trying to carry tomorrow''s
+    full plate at midnight, when carrying it does nothing but keep you awake.
+
+
+    For the manager who confuses lying awake under the weight with somehow handling
+    it, this names the overwhelm exactly and hands you language you can use the next
+    time the whole list climbs into bed with you.
+
+
+    You are allowed to set it all down for the night. The load will still be there
+    in the morning, and you''ll pick it up then — rested, one piece at a time. Right
+    now, you can stop holding it.'
 keywords:
   primary:
   - insomnia help
@@ -39,6 +78,7 @@ keywords:
   - managers
   - sleep anxiety for managers
 bisac_codes:
+- SEL036000
 - SEL027000
 - HEA046000
 - PSY022000
@@ -47,12 +87,16 @@ target_price:
   audible_usd: 9.99
   paperback_usd: 12.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: mara_okonkwo
 comp_titles:
-- Say Good Night to Insomnia (Jacobs)
-- The Sleep Solution (Winter)
-- Why We Sleep (Walker)
+- Burnout (Emily & Amelia Nagoski) — names the overwhelm cycle and completing it,
+  distinct from clearing the task list
+- Four Thousand Weeks (Oliver Burkeman) — the secular case for stopping the attempt
+  to hold and finish everything
+- Getting Things Done (David Allen) — the open-loops insight that explains why the
+  unheld list ambushes you at night
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -60,3 +104,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

@@ -16,15 +16,57 @@ target_word_range:
 target_audio_minutes: 60
 title: 'The 3am Mind: Escaping the Mental Loop'
 subtitle: A One-Hour Sleep Reset for Nurses
-cover_tagline: A One-Hour Sleep Reset for Nurses
+cover_tagline: The lights go off and your mind opens the night's first file.
 description:
-  short_blurb: A One-Hour Sleep Reset for Nurses The one-hour edition.
-  long_description: 'The 3am Mind: Escaping the Mental Loop
+  short_blurb: The second your head hits the pillow, the replays start — one shift
+    moment, then the next, then your whole life by 3am. This hour is for the nurse
+    whose mind treats bedtime as the start of the spiral. It won't shut the thoughts
+    off. It'll show you where the loop begins and how to step off it.
+  long_description: 'The lights go off and your mind clocks back in. It opens with
+    one moment from the shift — usually the worst one, or some small one your brain
+    decided to chew on — and from there it just keeps recruiting. The patient hands
+    off to last week''s patient, which hands off to a thing you said years ago you
+    thought you were done carrying. By the time the clock reads 3am you''re somehow
+    auditing your whole worth as a nurse and as a person, and you couldn''t say how
+    you got from one chart note to here.
 
 
-    The one-hour edition: the core of the sleep anxiety work for nurses, in a single
-    sitting. Recognition, descent, integration — no filler. Book 3 of the one-hour
-    Nurses sleep anxiety series.'
+    This hour is for the nurse for whom bed is where the thinking finally catches
+    up. All day the floor won''t let you spiral — there''s always the next call light,
+    the next task pulling you forward. So the replays queue up and wait, and the instant
+    you go horizontal and still, they all clock in for the night shift you didn''t
+    schedule. This isn''t insomnia the way the pamphlets mean it. It''s a fast, trained
+    mind that got held at bay for twelve hours and now has a dark, empty room to run
+    laps in.
+
+
+    So instead of clamping down on the thoughts or begging them to stop, you''ll do
+    the one thing the night keeps asking for and you keep refusing: you''ll lie still
+    and let the replay run without joining it. You''ll notice the reel start — the
+    same shift, the same face, the same line of dialogue — and you''ll stop being
+    its editor. You don''t rewind it, you don''t improve your performance in it, you
+    don''t draft the apology or the comeback. You just let the scene play to its end
+    in the dark and watch it dissolve, because a memory you stop re-cutting eventually
+    runs out of tape.
+
+
+    What loosens isn''t the arrival of the thoughts. It''s the grip of the deadline
+    you''ve been putting on them — the sense that the shift needs a verdict before
+    you''re allowed to sleep. It doesn''t. The shift is already over; nothing you
+    rule on at 3am revises a single thing that happened. Lying there awake while the
+    replays lose their charge is not the same as failing to sleep, and the moment
+    you stop scoring the night as pass or fail, your body stops bracing for the grade.
+
+
+    This book will not promise you sleep, or a flawless wind-down, or a way to make
+    the replays never queue up at lights-out again. There''s no ritual here to run,
+    no checklist that walks you down into rest. Your mind will still be quick, and
+    the dark will still invite it to perform. You''ll just stop letting the day''s
+    reel hold you hostage till dawn, stop standing trial all night for a shift that
+    already closed.
+
+
+    The thoughts are allowed to come. You don''t have to follow them till morning.'
 keywords:
   primary:
   - insomnia help
@@ -37,6 +79,7 @@ keywords:
   - sleep anxiety for nurses
   - one hour
 bisac_codes:
+- SEL036000
 - SEL027000
 - HEA046000
 - PSY022000
@@ -45,12 +88,16 @@ target_price:
   audible_usd: 6.99
   paperback_usd: 9.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: lena_frost
 comp_titles:
-- Say Good Night to Insomnia (Jacobs)
-- The Sleep Solution (Winter)
-- Why We Sleep (Walker)
+- Hello Sleep (Jade Wu) — meets the racing bedtime mind without selling another rigid
+  wind-down routine
+- Chatter (Ethan Kross) — the science of the looping inner voice and concrete ways
+  to break the chain
+- Quiet Your Mind & Get to Sleep (Colleen Carney) — secular CBT-I approach built for
+  the thought-spiral at lights-out
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -58,3 +105,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

@@ -16,15 +16,54 @@ target_word_range:
 target_audio_minutes: 60
 title: 'The Weight Without a Name: The Shutdown Point'
 subtitle: A One-Hour Depression Reset for Students
-cover_tagline: A One-Hour Depression Reset for Students
+cover_tagline: When everything is due at once and your brain just goes dark.
 description:
-  short_blurb: A One-Hour Depression Reset for Students The one-hour edition.
-  long_description: 'The Weight Without a Name: The Shutdown Point
+  short_blurb: There's a point where it's all too much and you don't speed up, you
+    shut down. This hour is for the student who freezes when the to-do list gets long
+    enough. It won't hand you a planner. It will explain why you stop, and what to
+    do when it happens.
+  long_description: 'You know the exact moment. The assignments stack up, the messages
+    keep coming, three people need something from you, and instead of getting faster
+    you go completely still. Tabs open, cursor blinking, nothing done. Lying on the
+    bed staring at the ceiling while the deadlines stack higher and the hours disappear.
+    From the outside it looks like you don''t care, like you''re slacking off on purpose.
+    Inside, it''s the exact opposite. It''s so much that your system just reached
+    over and pulled the plug.
 
 
-    The one-hour edition: the core of the depression work for students, in a single
-    sitting. Recognition, descent, integration — no filler. Book 2 of the one-hour
-    Students depression series.'
+    This hour is for the student who hits the shutdown point. Not the kind of stress
+    that makes you hustle, the kind that makes you disappear. You''re not lazy. You''re
+    not behind because you don''t care, you''re behind because caring this much about
+    everything at once is more than any nervous system was built to hold. You hit
+    a wall where there was too much at once, and your body chose off instead of on.
+
+
+    Jonah Kim writes for the moment the lights go out in your head, in language you''ll
+    actually use. First, recognition: the shutdown is not a character flaw, it''s
+    what overwhelm does when there''s no room left. Naming it is not the same as clearing
+    your list. Then the descent: instead of screaming at yourself to just start, you
+    go toward the frozen feeling on purpose. You let it be exactly as much as it is,
+    without dividing it into a hundred tasks, without the voice that says everyone
+    else can handle this so what''s wrong with you. You stop fighting the freeze and
+    let yourself actually be in it.
+
+
+    This book will not give you a productivity system. No time-blocking, no five-step
+    morning routine, no app that finally fixes you. It will not tell you to break
+    it into small chunks and power through. Being overwhelmed is not a scheduling
+    problem you failed to solve, and you do not have to earn rest by finishing first.
+
+
+    What you get is a clear way to recognize the shutdown the moment it starts, and
+    a way to be with it that doesn''t require you to perform your way out. You''ll
+    stop reading your freeze as proof that something is wrong with you. You''ll stop
+    treating the off-switch like a betrayal of everyone counting on you.
+
+
+    One hour. By the end, your list will still be there. The difference is you won''t
+    be at war with your own body for going quiet when it got to be too much. The shutdown
+    isn''t the enemy. You''re allowed to stop, and you''re allowed to come back on
+    your own time.'
 keywords:
   primary:
   - overcoming depression
@@ -45,12 +84,16 @@ target_price:
   audible_usd: 6.99
   paperback_usd: 9.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: jonah_kim
 comp_titles:
-- Feeling Good (Burns)
-- Lost Connections (Hari)
-- The Upward Spiral (Korb)
+- Burnout (Emily and Amelia Nagoski) — explains the body's shutdown under overload
+  without a productivity lecture
+- How to Keep House While Drowning (KC Davis) — meets paralysis with zero shame and
+  no morning routine
+- Set Boundaries, Find Peace (Nedra Glover Tawwab) — names too-much-at-once as real,
+  not a personal failing
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -58,3 +101,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

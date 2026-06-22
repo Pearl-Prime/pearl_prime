@@ -16,15 +16,61 @@ target_word_range:
 target_audio_minutes: 60
 title: 'The Alarm Is Lying: The Observer''s Mind'
 subtitle: A One-Hour Anxiety Reset for Students
-cover_tagline: A One-Hour Anxiety Reset for Students
+cover_tagline: Always scanning, always reading the room, never once allowed to stand
+  down.
 description:
-  short_blurb: A One-Hour Anxiety Reset for Students The one-hour edition.
-  long_description: 'The Alarm Is Lying: The Observer''s Mind
+  short_blurb: Part of you is always watching, reading every face, tracking every
+    shift in the room, never off duty. This one-hour read is for students stuck in
+    hypervigilance, the mind that can't stop monitoring for what might go wrong. It
+    won't tell you to relax. It'll show you what the watcher is, why it won't rest,
+    and how to let it.
+  long_description: 'There''s a part of you that never clocks out. It reads the room
+    the instant you walk in. It tracks the teacher''s mood, who just went quiet, whether
+    your friend''s last reply was a little short, what that look across the table
+    actually meant, what might be about to go wrong. Even when nothing whatsoever
+    is happening, it is scanning, running threat checks on a completely ordinary day.
+    You''re so used to the hum of it that you barely register it anymore, right up
+    until you notice you can''t remember the last time your mind actually stood down
+    and let you just be somewhere.
 
 
-    The one-hour edition: the core of the anxiety work for students, in a single sitting.
-    Recognition, descent, integration — no filler. Book 7 of the one-hour Students
-    anxiety series.'
+    This is for the student whose attention is permanently on watch. Who walks into
+    class already monitoring the exits and the faces. Who replays conversations afterward,
+    hunting line by line for the thing you got wrong. Who is tired in a way that sleep
+    never seems to touch, because some part of you refuses to fully rest. Who has
+    been told to stop overthinking it, when the truth is it isn''t really thinking
+    at all, it''s standing guard.
+
+
+    So let''s give it its real name. The watcher is not paranoia, and it is not a
+    flaw in you. It is an alarm system that learned, at some point you may not even
+    remember, that staying alert was what kept you safe, and it has flatly refused
+    to power down ever since. It is not your enemy. It is loyal, almost painfully
+    so. It is simply stuck in the on position. The first move is to recognize the
+    watcher for what it is, the ceaseless scanning, the low background brace, the
+    on-guard hum you''ve quietly mistaken for your actual personality, and to start
+    seeing it as one part of you doing a hard job, not the whole of who you are.
+
+
+    Then, instead of trying to force it quiet or shame it into shutting up, you go
+    down into what it''s guarding so carefully. You meet the fear underneath the vigilance,
+    the thing it has been bracing against this entire time, and you let yourself feel
+    that instead of outrunning it one more day, because the watcher only ever stands
+    down once it genuinely trusts that you can handle whatever it''s been protecting
+    you from. And you come back able to sit in a room without first inspecting every
+    inch of it for the catch.
+
+
+    This hour will not promise to switch the watcher off. It has been on a long time,
+    and it will not go silent on command. It won''t teach you to suppress it, white-knuckle
+    it into control, or optimize yourself into some state of permanent calm. There
+    is nothing to fix here, only a guard that has been working a double shift for
+    years. What changes is that you stop being run by the scanning and start being
+    able to set it down, even briefly, even just for a while.
+
+
+    You are not too alert, too sensitive, or too much. You''re allowed to lower your
+    guard, even a few inches, and still be completely safe.'
 keywords:
   primary:
   - anxiety relief
@@ -38,6 +84,7 @@ keywords:
   - anxiety for students
   - one hour
 bisac_codes:
+- SEL036000
 - SEL027000
 - SEL024000
 - PSY022000
@@ -46,12 +93,16 @@ target_price:
   audible_usd: 6.99
   paperback_usd: 9.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: nina_vazquez
 comp_titles:
-- Dare (McDonagh)
-- The Anxiety and Phobia Workbook (Bourne)
-- Unwinding Anxiety (Brewer)
+- The Body Keeps the Score (Bessel van der Kolk) — secular account of why the alert
+  system won't stand down
+- Set Boundaries, Find Peace (Nedra Glover Tawwab) — secular work on the always-on,
+  over-monitoring mind
+- Why Has Nobody Told Me This Before? (Julie Smith) — plain-language tools for a hypervigilant
+  mind
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -59,3 +110,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

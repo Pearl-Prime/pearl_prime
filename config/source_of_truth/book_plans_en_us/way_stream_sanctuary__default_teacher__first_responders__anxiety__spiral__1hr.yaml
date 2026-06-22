@@ -16,15 +16,51 @@ target_word_range:
 target_audio_minutes: 60
 title: 'The Alarm Is Lying: The Overthinking Spiral'
 subtitle: A One-Hour Anxiety Reset for First Responders
-cover_tagline: A One-Hour Anxiety Reset for First Responders
+cover_tagline: You ran the call clean. So why are you running it again at 3am, finding
+  the version where it went wrong?
 description:
-  short_blurb: A One-Hour Anxiety Reset for First Responders The one-hour edition.
-  long_description: 'The Alarm Is Lying: The Overthinking Spiral
+  short_blurb: One thought about the call becomes a hundred, then a thousand, until
+    you're convinced you missed something that was never there. This is the one-hour
+    read for the first responder whose mind won't stop replaying it. You can't out-think
+    a spiral. This is what to do instead.
+  long_description: 'The shift''s over. The call went fine — clean, by the book, the
+    patient made it or the scene cleared. And now it''s 3am and you''re wide awake
+    running it again, except this time your mind is hunting for the frame where you
+    got it wrong. Did you miss it. Should you have caught it. What if next time. One
+    thought becomes ten, ten becomes a hundred, and somewhere in there the spiral
+    stops being about that call and becomes about whether you''re even cut out for
+    this. By morning you''re wrung out from a disaster that only happened in your
+    head.
 
 
-    The one-hour edition: the core of the anxiety work for first responders, in a
-    single sitting. Recognition, descent, integration — no filler. Book 6 of the one-hour
-    First Responders anxiety series.'
+    This book is for the responder whose brain treats every run like a case to be
+    reopened — the medic second-guessing a judgment call, the cop replaying the split-second
+    decision, the dispatcher hearing the voice on the line long after the unit cleared.
+    The spinning feels like diligence. It feels like the responsible thing, like if
+    you just analyze it hard enough you''ll be safe next time, like the looping is
+    the price of being good at this. But that''s the lie. The loop isn''t reviewing
+    the call. It''s manufacturing emergencies out of a quiet room, and your body believes
+    every one of them, dumping the same adrenaline a real scene would.
+
+
+    In a single sitting we name what''s actually happening: one thought, multiplying,
+    mistaken for thinking. Then — and this is the part that''s hard for people built
+    to act — we stop trying to solve it. You cannot win an argument with a spiral,
+    because the spiral''s whole job is to generate the next worry the second you answer
+    the last. So instead you go down into it and watch it churn without grabbing the
+    next thought and the next. You feel the pull of the loop without getting dragged
+    another lap. And you come back knowing the difference between thinking something
+    through and being chewed by it.
+
+
+    This won''t promise you a quiet mind or a trick to shut the loop off on command.
+    Trying to force the spiral to stop is just one more lap. It won''t hand you a
+    thought-record worksheet to fill out at the kitchen table at 3am, either.
+
+
+    The alarm is lying when it swears that one more pass through the call will finally
+    make you safe. It won''t. The call is over. You did it. The only emergency left
+    is the one your mind keeps re-toning — and you''re allowed to stop answering it.'
 keywords:
   primary:
   - anxiety relief
@@ -38,6 +74,7 @@ keywords:
   - anxiety for first responders
   - one hour
 bisac_codes:
+- SEL036000
 - SEL027000
 - SEL024000
 - PSY022000
@@ -46,12 +83,16 @@ target_price:
   audible_usd: 6.99
   paperback_usd: 9.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: cole_bennett
 comp_titles:
-- Dare (McDonagh)
-- The Anxiety and Phobia Workbook (Bourne)
-- Unwinding Anxiety (Brewer)
+- Unwinding Anxiety (Judson Brewer) — the brain mechanics that turn worry into a self-feeding
+  loop
+- Don't Believe Everything You Think (Joseph Nguyen) — loosening the grip of the thought
+  that won't let go
+- The Worry Trick (David Carbonell) — why arguing with anxious thoughts feeds them
+  instead of ending them
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -59,3 +100,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

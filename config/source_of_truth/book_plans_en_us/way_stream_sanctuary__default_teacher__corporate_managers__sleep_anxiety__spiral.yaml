@@ -16,17 +16,53 @@ target_word_range:
 target_audio_minutes: 70
 title: 'The 3am Mind: Escaping the Mental Loop'
 subtitle: A Real Talk Guide to Sleep Anxiety for Managers
-cover_tagline: A Real Talk Guide to Sleep Anxiety for Managers
+cover_tagline: You closed your eyes an hour ago. One thought has been multiplying
+  ever since.
 description:
-  short_blurb: A Real Talk Guide to Sleep Anxiety for Managers A grounded, secular
-    guide to sleep anxiety for managers.
-  long_description: 'The 3am Mind: Escaping the Mental Loop
+  short_blurb: You're horizontal, you're tired, and your mind has chosen this exact
+    moment to take one worry and spin it into a thousand. This book shows managers
+    how to catch the nighttime spiral as it starts — and step out of the loop instead
+    of chasing it until dawn.
+  long_description: 'You went to bed an hour ago. Then one thought arrived — a conversation,
+    a number, a what-if — and it didn''t stay one thought. It split. Now you''re following
+    a chain that started with a single Slack message and has somehow arrived at whether
+    you''re cut out for this job at all, each link pulling the next, your mind moving
+    fast and certain in the dark while your body lies there exhausted and wide awake.
+    You keep thinking you''re almost at the answer. You never are. The spiral doesn''t
+    resolve — it just keeps going until the sky gets light.
 
 
-    For a mid-level manager between back-to-back meetings. This book names what sleep
-    anxiety is doing in your body in language you can use — through recognition, descent,
-    and integration, not worksheets or forced positivity. Book 3 of the Managers sleep
-    anxiety series.'
+    This book is for the manager whose mind picks bedtime to run its loops. The one
+    who can compartmentalize all day and then loses two hours every night to a single
+    thought that fractured into a thousand. You are not choosing this. You''re caught
+    in a spiral — where one thought generates the next faster than you can catch them,
+    and the stillness of the night gives it nothing to compete with.
+
+
+    You''ll begin by learning to NAME the spiral the moment it starts, before it''s
+    twenty links deep — to feel the specific instant where a thought tips into a loop.
+    Then you''ll go DOWN into it: not to think the worry all the way through to safety
+    (it has no end — chasing it to the bottom is the trap), but to feel what''s actually
+    driving the spin underneath the content. The nighttime spiral runs on a promise
+    that one more lap will finally let you rest. It won''t. Once you stop believing
+    that, the laps lose their pull. You come back able to notice the first thought
+    arrive at 1am and decline to grab the second.
+
+
+    This is unsentimental, secular real talk. It will not promise you a quiet mind
+    at night or a trick to shut the loop off on command. No counting sheep, no "just
+    stop thinking," no breathing gimmick sold as a cure. The spiral may still try
+    to start when your head hits the pillow. What changes is that you can catch it
+    forming and step out — instead of vanishing into it until your alarm goes off.
+
+
+    For the manager who mistakes the 1am spiral for problem-solving, who treats every
+    nighttime loop as a meeting they have to sit through, this names exactly what''s
+    happening in words you can use horizontal, in the dark, mid-spin.
+
+
+    You are allowed to let a thought arrive at night and not follow it anywhere. The
+    loop is not solving anything. You can stop chasing it and let yourself rest.'
 keywords:
   primary:
   - insomnia help
@@ -39,6 +75,7 @@ keywords:
   - managers
   - sleep anxiety for managers
 bisac_codes:
+- SEL036000
 - SEL027000
 - HEA046000
 - PSY022000
@@ -47,12 +84,16 @@ target_price:
   audible_usd: 9.99
   paperback_usd: 12.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: mara_okonkwo
 comp_titles:
-- Say Good Night to Insomnia (Jacobs)
-- The Sleep Solution (Winter)
-- Why We Sleep (Walker)
+- Hello Sleep (Jade Wu) — addresses the racing nighttime mind without rigid rules
+  or forced relaxation
+- Chatter (Ethan Kross) — the science of the looping inner voice and creating distance
+  from it at 1am
+- Don't Believe Everything You Think (Joseph Nguyen) — the case that the nighttime
+  spiral is thinking-about-thinking, not a real problem
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -60,3 +101,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

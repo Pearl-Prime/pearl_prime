@@ -16,17 +16,54 @@ target_word_range:
 target_audio_minutes: 70
 title: 'Social Anxiety: The False Alarm Response'
 subtitle: A Real Talk Guide to Social Anxiety for Tech and Finance Professionals
-cover_tagline: A Real Talk Guide to Social Anxiety for Tech and Finance Professionals
+cover_tagline: Walking into the all-hands shouldn't feel like a threat. Your body
+  didn't get the memo.
 description:
-  short_blurb: A Real Talk Guide to Social Anxiety for Tech and Finance Professionals
-    A grounded, secular guide to social anxiety for tech & finance professionals.
-  long_description: 'Social Anxiety: The False Alarm Response
+  short_blurb: Before the networking event, before the on-camera all-hands, before
+    you walk into the open-plan floor, your body sounds an alarm meant for actual
+    danger. This is a plain look at the false alarm under social anxiety, and why
+    your nervous system reads a room full of colleagues as a room full of threats.
+    No exposure homework framed as punishment, no fake-it confidence, just an honest
+    map of the alarm and how to be in your body while it rings.
+  long_description: 'The calendar invite alone does it. Team offsite. Client dinner.
+    Camera-on all-hands where you might get called on. Hours before, your body starts
+    bracing: the low hum of dread, the rehearsing, the stomach that knows something''s
+    coming. By the time you''re in the room you''re managing your own heartbeat instead
+    of the conversation, scanning faces for the verdict you''re sure is forming.
 
 
-    For a tech or finance professional running on empty. This book names what social
-    anxiety is doing in your body in language you can use — through recognition, descent,
-    and integration, not worksheets or forced positivity. Book 2 of the Tech & Finance
-    Professionals social anxiety series.'
+    This book is for the person who can present a board deck and still dread the small
+    talk before it. Tech and finance put you in high-exposure social rooms constantly,
+    the open floor where everyone can see your screen, the offsite, the drinks where
+    deals get made, and your nervous system has decided those rooms are dangerous.
+    That''s the false alarm: a threat response with no actual threat. The same machinery
+    that once kept your ancestors alive now fires when you walk past the VP''s desk.
+    It is not reading the situation. It is reacting to it as if your life were on
+    the line.
+
+
+    First you''ll learn to recognize the alarm as an alarm rather than as accurate
+    information about the room. The dread is not proof that something bad is about
+    to happen. Then, instead of white-knuckling through it or numbing it with a drink,
+    you''ll go down into it. You''ll feel where the alarm lands, what it does to your
+    breath and your hands and your attention, how it spikes and, when you stop fighting
+    it, eases. Not suppressed. Felt all the way through, until you can stand in a
+    crowded room and let your nervous system be loud without it hijacking you. You
+    come back able to stay present in the conversation while the alarm runs its course
+    underneath.
+
+
+    This is not exposure therapy dressed up as homework you''re failing, and it is
+    not a confidence act. It won''t teach you to fake ease, work the room like a closer,
+    or never feel the dread again. It will not promise to optimize your nervous system
+    into something that loves the offsite. What it offers is smaller and sturdier:
+    knowing what the false alarm is, so the next crowded room has less power to decide
+    how the night goes for you.
+
+
+    The dread before the room isn''t a forecast. It''s an old alarm misfiring at people
+    who aren''t a threat. You don''t have to fix the alarm to walk in. You''re allowed
+    to feel it fire, know it for what it is, and stay in your own body anyway.'
 keywords:
   primary:
   - social anxiety
@@ -39,6 +76,7 @@ keywords:
   - tech & finance professionals
   - social anxiety for tech & finance professionals
 bisac_codes:
+- SEL036000
 - SEL027000
 - SEL031000
 - PSY022000
@@ -47,12 +85,16 @@ target_price:
   audible_usd: 9.99
   paperback_usd: 12.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: daniel_cho
 comp_titles:
-- How to Be Yourself (Hendriksen)
-- The Social Anxiety Workbook (Antony)
-- Quiet (Cain)
+- Dare (Barry McDonagh) — secular method for letting anxiety surges peak and pass
+  instead of fighting them
+- The Body Keeps the Score (Bessel van der Kolk) — grounding for why the body sounds
+  alarms the mind can't argue with
+- How to Be Yourself (Ellen Hendriksen) — clinical, non-spiritual work specifically
+  on social anxiety
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -60,3 +102,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

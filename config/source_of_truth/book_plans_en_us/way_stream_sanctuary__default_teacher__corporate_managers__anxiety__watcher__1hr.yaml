@@ -16,15 +16,61 @@ target_word_range:
 target_audio_minutes: 60
 title: 'The Alarm Is Lying: The Space Between You and Your Anxiety'
 subtitle: A One-Hour Anxiety Reset for Managers
-cover_tagline: A One-Hour Anxiety Reset for Managers
+cover_tagline: Some part of you is always scanning the room. It never clocks out.
 description:
-  short_blurb: A One-Hour Anxiety Reset for Managers The one-hour edition.
-  long_description: 'The Alarm Is Lying: The Space Between You and Your Anxiety
+  short_blurb: You read every face, track every tone, brace for the next problem before
+    it lands — and the watcher in your head never stands down. This is a one-hour
+    reset for the manager who can't stop monitoring. It won't switch the vigilance
+    off. It'll show you you're not the same thing as the watching.
+  long_description: 'The meeting''s going fine and you''re still scanning. Who went
+    quiet. What that pause meant. Whether the VP''s shorter reply is a problem. You
+    read the room so well it''s become a job nobody assigned and nobody ends, a watcher
+    in the back of your head that monitors threat-levels even when you''re trying
+    to sleep.
 
 
-    The one-hour edition: the core of the anxiety work for managers, in a single sitting.
-    Recognition, descent, integration — no filler. Book 7 of the one-hour Managers
-    anxiety series.'
+    This book is for the manager whose vigilance never clocks out. It made you good
+    at this, catching the issue early, sensing the morale dip, staying three moves
+    ahead. But the same radar that protects your team has turned on you, scanning
+    relentlessly, bracing for the next thing, never granting the all-clear. You can''t
+    relax in a room because some part of you is always on duty, and you''ve half-forgotten
+    there''s a you separate from the watching.
+
+
+    And nobody tells you to stand down, because the watching is the part of you that
+    gets praised. Catching the problem before it lands is most of what management
+    is, so the radar gets reinforced every single day, and the cost shows up only
+    off the clock: the dinner you''re half-present for, the weekend you spend mentally
+    re-running a Friday exchange, the low hum of threat-assessment that follows you
+    home and treats your own living room like a room that needs reading. The skill
+    never learned there''s a place it''s supposed to stop.
+
+
+    The next hour is about that separation. First, recognition: you learn to notice
+    the watcher itself, the hypervigilant narration running underneath your day, and
+    to see it as something you have rather than something you are. Then descent. Instead
+    of trying to force the watcher off-duty or shame yourself for not relaxing, you
+    go down into the part of you that''s underneath it, the one that was here before
+    the scanning started and doesn''t need to monitor anything. Then integration:
+    you come back to the same rooms and the same faces still able to read them sharply,
+    but with space between you and the watcher, so its alarm is information, not a
+    command.
+
+
+    This will not promise the vigilance turns off. It won''t optimize your situational
+    awareness or hand you a mindfulness drill that finally lets you stand down on
+    schedule. There''s no worksheet, no "just be present." The watcher has kept you
+    safe for a long time and won''t disappear because you asked nicely.
+
+
+    What it offers is room: the space between you and the watching, where its constant
+    alarm stops being the whole of your experience. You can stay perceptive and stop
+    being on permanent guard. You can let the watcher do its work without becoming
+    nothing but its work.
+
+
+    You are not the part of you that never stops scanning. There''s room behind it,
+    and you''re allowed to rest there. Start by finding the space.'
 keywords:
   primary:
   - anxiety relief
@@ -38,6 +84,7 @@ keywords:
   - anxiety for managers
   - one hour
 bisac_codes:
+- SEL036000
 - SEL027000
 - SEL024000
 - PSY022000
@@ -46,12 +93,16 @@ target_price:
   audible_usd: 6.99
   paperback_usd: 9.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: mara_okonkwo
 comp_titles:
-- Dare (McDonagh)
-- The Anxiety and Phobia Workbook (Bourne)
-- Unwinding Anxiety (Brewer)
+- The Body Keeps the Score (Bessel van der Kolk) — secular account of a nervous system
+  stuck in hypervigilance
+- Wherever You Go, There You Are (Jon Kabat-Zinn) — non-religious awareness practice
+  for stepping back from the watching mind
+- Anchored (Deb Dana) — polyvagal-based, body-first work on a system that won't signal
+  safety
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -59,3 +110,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

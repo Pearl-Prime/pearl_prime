@@ -16,17 +16,57 @@ target_word_range:
 target_audio_minutes: 70
 title: 'The 3am Mind: The Shutdown Point'
 subtitle: A Field Guide for Nurses Navigating Sleep Anxiety
-cover_tagline: A Field Guide for Nurses Navigating Sleep Anxiety
+cover_tagline: Too much for too long, and now even sleep is one more thing.
 description:
-  short_blurb: A Field Guide for Nurses Navigating Sleep Anxiety A grounded, secular
-    guide to sleep anxiety for nurses.
-  long_description: 'The 3am Mind: The Shutdown Point
+  short_blurb: After enough back-to-backs, the exhaustion stops feeling like tiredness
+    and starts feeling like a wall. This is a field guide for nurses on the kind of
+    sleep anxiety that comes from sheer overload — when there's so much on you that
+    your system shuts down instead of resting, and rest itself becomes one more demand
+    you can't meet.
+  long_description: 'There''s a specific kind of tired that sleep doesn''t touch.
+    You''ve worked too many shifts too close together. You''ve held too much — too
+    many patients, too many alarms, too many families, too many decisions that mattered.
+    And now you''re in bed and you can''t sleep, not because your mind is racing,
+    but because there''s simply too much, and your whole system has hit a point where
+    it can''t process any more of anything. Including rest.
 
 
-    For a nurse at the end of a twelve-hour shift. This book names what sleep anxiety
-    is doing in your body in language you can use — through recognition, descent,
-    and integration, not worksheets or forced positivity. Book 2 of the Nurses sleep
-    anxiety series.'
+    This book is for the nurse who is past tired and into overload. Overwhelm isn''t
+    weakness and it isn''t a time-management problem you can route around with a better
+    schedule. It''s what happens when the load exceeds the capacity, shift after shift,
+    until the body stops being able to take in even the good thing it needs. You lie
+    down to sleep and it feels like one more task on a list that''s already too long.
+    The exhaustion is real, but the rest won''t come, because you''ve reached the
+    shutdown point.
+
+
+    The recognition: this is too much at once, and that is a real condition with a
+    real cause — not a flaw in your resilience. When you''re this overloaded, the
+    answer is not to do more, push harder, or ''just relax,'' because relaxing is
+    itself more input your system can''t take. Naming the overwhelm for what it is
+    — capacity exceeded, not character failed — is where the pressure starts to ease.
+
+
+    We go down into the overload instead of trying to power through it. You''ll learn
+    to recognize the shutdown point in your own body — the flatness, the can''t-even,
+    the way sleep feels like effort — and stop adding to the pile, including stopping
+    the demand that you should be sleeping by now. You let the system be as overloaded
+    as it is, without fighting it. That''s the descent. The integration is not a sudden
+    capacity to handle everything; it''s knowing where your shutdown point is and
+    stopping before it owns the night.
+
+
+    This won''t give you more bandwidth or teach you to carry more. It''s not a productivity
+    system, not a self-care regimen, not a list of boundaries to draw between med
+    passes. It will not make the workload smaller or promise you''ll bounce back by
+    morning. This is about recognizing the overwhelm clearly enough that you stop
+    treating rest as one more thing you''re failing to do.
+
+
+    You''ve absorbed more than any one person should, and you did it for people who
+    needed you. You''re allowed to be at capacity. You don''t have to perform rest
+    on top of everything else. Putting it down is allowed, even when it''s only for
+    the night.'
 keywords:
   primary:
   - insomnia help
@@ -39,6 +79,7 @@ keywords:
   - nurses
   - sleep anxiety for nurses
 bisac_codes:
+- SEL036000
 - SEL027000
 - HEA046000
 - PSY022000
@@ -47,12 +88,16 @@ target_price:
   audible_usd: 9.99
   paperback_usd: 12.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: lena_frost
 comp_titles:
-- Say Good Night to Insomnia (Jacobs)
-- The Sleep Solution (Winter)
-- Why We Sleep (Walker)
+- Burnout (Emily & Amelia Nagoski) — names overwhelm as a completed-stress-cycle problem,
+  not a willpower one
+- Do Nothing (Celeste Headlee) — challenges the compulsion to treat rest as another
+  task to achieve
+- Real Self-Care (Pooja Lakshmin) — written by a physician, rejects optimization in
+  favor of naming what's actually too much
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -60,3 +105,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

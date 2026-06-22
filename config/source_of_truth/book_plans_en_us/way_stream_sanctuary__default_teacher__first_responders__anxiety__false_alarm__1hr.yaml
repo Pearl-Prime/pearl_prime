@@ -16,15 +16,50 @@ target_word_range:
 target_audio_minutes: 60
 title: 'The Alarm Is Lying: When Fear Lies to You'
 subtitle: A One-Hour Anxiety Reset for First Responders
-cover_tagline: A One-Hour Anxiety Reset for First Responders
+cover_tagline: Your body can't tell the call from the quiet. This is how you teach
+  it the difference.
 description:
-  short_blurb: A One-Hour Anxiety Reset for First Responders The one-hour edition.
-  long_description: 'The Alarm Is Lying: When Fear Lies to You
+  short_blurb: Your nervous system spent years learning that the tone could drop any
+    second, so now it never fully stands down — even off shift, even asleep. This
+    is the one-hour read for the first responder whose alarm keeps firing when there's
+    nothing to run to. No fixing it. Just learning what it actually is.
+  long_description: 'You''re off duty. You''re on the couch, or in your own bed, or
+    sitting in a parking lot with the engine off. And your chest is tight, your jaw
+    is set, your heart is moving like the tones just dropped — except nothing dropped.
+    There''s no call. There''s no scene. There''s just you, lit up like the worst
+    night of the month, with absolutely nowhere to put it.
 
 
-    The one-hour edition: the core of the anxiety work for first responders, in a
-    single sitting. Recognition, descent, integration — no filler. Book 2 of the one-hour
-    First Responders anxiety series.'
+    This book is for the firefighter, the medic, the cop, the dispatcher whose body
+    learned a long time ago that the next emergency could land in any given second
+    — so it stopped standing down. You trained your alarm to be perfect at the job.
+    The problem is it can''t tell the difference anymore between a real call and a
+    Tuesday afternoon. It fires on both. That''s not weakness and it''s not damage.
+    It''s a smoke detector that''s been screaming so long it forgot what smoke was.
+
+
+    In one sitting, we name it: this is a false alarm, a body convinced of a danger
+    that isn''t in the room. Then we go down into it instead of fighting it — because
+    you already know fighting your own physiology is a losing call. We don''t talk
+    you out of the feeling or reason with it; we get underneath it. You''ll feel the
+    surge for what it actually is: a tight chest, a jacked heart rate, a jaw locked
+    for a fight that isn''t coming — a wave of sensation with no scene attached, something
+    that crests and passes the same way every bad call eventually clears, whether
+    or not you do anything about it. And you come back able to stand in the middle
+    of it without dispatching yourself to an emergency that was never toned out.
+
+
+    This will not promise you a flat line. You don''t want one — a responder who feels
+    nothing is a danger to everyone. It won''t hand you a breathing drill to do at
+    red lights or tell you to optimize your stress response like it''s a piece of
+    apparatus. It just teaches you to read your own alarm the way you read everyone
+    else''s: clearly, without panicking, knowing the difference between a tone and
+    a threat.
+
+
+    The alarm is lying. Not about everything — about this. Your body is screaming
+    danger into a room where there is none. You are allowed to hear it, know it for
+    what it is, and stay exactly where you are.'
 keywords:
   primary:
   - anxiety relief
@@ -38,6 +73,7 @@ keywords:
   - anxiety for first responders
   - one hour
 bisac_codes:
+- SEL036000
 - SEL027000
 - SEL024000
 - PSY022000
@@ -46,12 +82,16 @@ target_price:
   audible_usd: 6.99
   paperback_usd: 9.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: cole_bennett
 comp_titles:
-- Dare (McDonagh)
-- The Anxiety and Phobia Workbook (Bourne)
-- Unwinding Anxiety (Brewer)
+- Dare (Barry McDonagh) — meet the panic surge head-on instead of bracing against
+  it
+- Unwinding Anxiety (Judson Brewer) — see the anxious loop as a trained habit you
+  can unlearn
+- The Body Keeps the Score (Bessel van der Kolk) — why a body that's seen too much
+  stays on alert long after the scene clears
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -59,3 +99,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

@@ -16,15 +16,60 @@ target_word_range:
 target_audio_minutes: 60
 title: 'The Alarm Is Lying: The False Alarm Response'
 subtitle: A One-Hour Anxiety Reset for Young Professionals
-cover_tagline: A One-Hour Anxiety Reset for Young Professionals
+cover_tagline: Your body thinks this Slack message is a tiger. It isn't.
 description:
-  short_blurb: A One-Hour Anxiety Reset for Young Professionals The one-hour edition.
-  long_description: 'The Alarm Is Lying: The False Alarm Response
+  short_blurb: Your heart is pounding, your hands are cold, and the actual threat
+    is a calendar invite with no agenda. This is a one-hour reset for young professionals
+    whose anxiety fires when nothing is actually wrong. It won't talk you out of the
+    feeling. It'll show you why your alarm keeps going off, and how to ride it down
+    instead of fighting it.
+  long_description: 'A notification slides in. Your manager wants fifteen minutes,
+    no subject line. Instantly your heart is going, your breath gets shallow, your
+    mind is already drafting the worst version of the conversation. By the time you
+    find out it''s nothing, you''ve burned an hour of your nervous system on a meeting
+    about parking.
 
 
-    The one-hour edition: the core of the anxiety work for young professionals, in
-    a single sitting. Recognition, descent, integration — no filler. Book 2 of the
-    one-hour Young Professionals anxiety series.'
+    This is for you if your body keeps sounding the alarm when there''s no fire. The
+    one who feels the full physical weight of danger over an unread email, a typo
+    you just sent to the whole channel, a "can we talk?" with no context attached.
+    You know, intellectually, that you''re probably fine. Your hands are cold anyway.
+    The fear is completely real in your body. The threat is not.
+
+
+    Here''s what''s actually happening. Your alarm system is old, fast, and not very
+    smart. It can''t tell the difference between a predator and a performance review,
+    so it fires the identical surge for both: adrenaline, a pounding chest, that cold
+    drop in the gut. This isn''t a sign you''re broken or weak or bad at your job.
+    It''s a sign the alarm is doing exactly what it evolved to do, just badly calibrated
+    for an inbox. The problem isn''t the fear. The problem is that the alarm keeps
+    lying, and it''s convincing because it speaks in physical sensation, which feels
+    truer than any thought.
+
+
+    So you learn to catch it the second it starts and call it by name: this is a false
+    alarm, my body is reacting, I am not in danger. Then, rather than bracing against
+    the surge or trying to think your way calm, you let the wave do what waves do.
+    You stop feeding it worst-case stories and let it crest. You feel the racing settle
+    on its own, the way it always would if you got out of its way. And slowly you
+    come to know, in your body and not just your head, that a spike of fear is not
+    evidence that something is wrong.
+
+
+    This book will not promise the surge never returns. It will. Your alarm isn''t
+    going anywhere, and a high-pressure job will keep tripping it. It won''t hand
+    you a breathing hack as a cure or try to convince you anxiety is secretly a gift.
+    There''s no routine that disconnects wiring this deep.
+
+
+    What it gives you is the ability to recognize a false alarm while it''s still
+    happening, so the meeting-with-no-agenda stops costing you an hour of dread before
+    you even know the topic.
+
+
+    The surge will come. It will also pass, every single time, with or without your
+    help. You''re allowed to stop treating every alarm like the building is on fire,
+    because most of the time it''s a calendar invite.'
 keywords:
   primary:
   - anxiety relief
@@ -38,6 +83,7 @@ keywords:
   - anxiety for young professionals
   - one hour
 bisac_codes:
+- SEL036000
 - SEL027000
 - SEL024000
 - PSY022000
@@ -46,12 +92,16 @@ target_price:
   audible_usd: 6.99
   paperback_usd: 9.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: ravi_chandra
 comp_titles:
-- Dare (McDonagh)
-- The Anxiety and Phobia Workbook (Bourne)
-- Unwinding Anxiety (Brewer)
+- Dare (Barry McDonagh) — practical, secular method for riding out the physical panic
+  surge
+- When Panic Attacks (David D. Burns) — evidence-based, no-woo take on false-alarm
+  anxiety
+- Unwinding Anxiety (Judson Brewer) — neuroscience of the anxiety loop for a general
+  reader
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -59,3 +109,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

@@ -16,15 +16,59 @@ target_word_range:
 target_audio_minutes: 60
 title: 'The Alarm Is Lying: Beyond the Highlight Reel'
 subtitle: A One-Hour Anxiety Reset for Students
-cover_tagline: A One-Hour Anxiety Reset for Students
+cover_tagline: Everyone's posting their wins. You're watching it happen and feeling
+  like you're behind.
 description:
-  short_blurb: A One-Hour Anxiety Reset for Students The one-hour edition.
-  long_description: 'The Alarm Is Lying: Beyond the Highlight Reel
+  short_blurb: You scroll, and somehow everyone your age is smarter, further ahead,
+    more put-together than you. This is a one-hour read for students who measure themselves
+    against the highlight reel and lose every time. It won't tell you to log off and
+    feel grateful. It'll show you what comparison actually is, and how to stand in
+    your own life again.
+  long_description: 'You open your phone to check one thing, and twenty minutes later
+    you''re staring at someone your age who already has the grades, the offers, the
+    friend group, the whole thing apparently handled. Your chest tightens. You feel
+    behind in a race nobody ever told you you''d entered. By the time you set the
+    phone face-down, your own life looks two sizes smaller than it did before you
+    picked it up, and you can''t even point to what changed.
 
 
-    The one-hour edition: the core of the anxiety work for students, in a single sitting.
-    Recognition, descent, integration — no filler. Book 1 of the one-hour Students
-    anxiety series.'
+    This is for the student who knows, intellectually, that everyone online is performing,
+    and believes them anyway. Who scrolls the group chat, clocks who got into where,
+    and quietly runs the math on what that says about you. Who reads a stranger''s
+    good day and somehow files it as evidence against your whole life. Who has lost
+    the line between what''s actually happening and the highlight reel built to look
+    effortless.
+
+
+    So let''s be straight about what comparison actually is. It is not information
+    about how you''re doing. It''s your threat system grabbing one edited frame of
+    someone else''s day and ranking the entirety of you against it, a fight rigged
+    before it starts. The first move is to catch the exact second it fires: the scroll,
+    the small sink in your stomach, the story that spins up about how you''re falling
+    behind. You learn to clock it in real time and name it for what it is, a comparison
+    reflex, not a verdict.
+
+
+    Then comes the part most advice skips. Instead of trying to fix the feeling by
+    grinding harder or posting your own win to even the score, you turn and go toward
+    it. You let yourself feel the full weight of the smallness, the envy you''re not
+    supposed to admit to, the quiet fear that everyone else got an instruction manual
+    you missed. And you find that the feeling, met head-on, doesn''t level you. It
+    crests, it moves, it passes. You come back up able to look at someone else''s
+    good news without it deleting your own.
+
+
+    Here''s what this hour will not do. It will not promise you''ll stop comparing,
+    because you won''t; the reflex is older than your phone. It won''t tell you to
+    delete the apps, romanticize your grind, or be grateful on command. There is no
+    glow-up arc here, no productivity hack that finally makes you feel like enough.
+    The feed will keep scrolling exactly as it does now. What changes is that it stops
+    getting to set the terms for how you feel about your one actual, unedited life.
+
+
+    You''re allowed to be exactly where you are without it being a verdict on you.
+    Your timeline is not behind. It is not late. It is simply, stubbornly, yours,
+    and it was never supposed to match anyone else''s.'
 keywords:
   primary:
   - anxiety relief
@@ -38,6 +82,7 @@ keywords:
   - anxiety for students
   - one hour
 bisac_codes:
+- SEL036000
 - SEL027000
 - SEL024000
 - PSY022000
@@ -46,12 +91,16 @@ target_price:
   audible_usd: 6.99
   paperback_usd: 9.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: nina_vazquez
 comp_titles:
-- Dare (McDonagh)
-- The Anxiety and Phobia Workbook (Bourne)
-- Unwinding Anxiety (Brewer)
+- How to Do the Work (Nicole LePera) — names the patterns running you so you can step
+  out of them
+- The Comparison Cure (Lisa Cypers Kamen) — secular, practical work on the comparison
+  trap itself
+- Maybe You Should Talk to Someone (Lori Gottlieb) — honest, unsentimental look at
+  the stories we tell about ourselves
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -59,3 +108,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

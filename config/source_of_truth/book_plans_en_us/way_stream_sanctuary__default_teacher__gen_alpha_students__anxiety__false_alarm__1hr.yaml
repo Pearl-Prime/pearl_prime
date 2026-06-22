@@ -16,15 +16,58 @@ target_word_range:
 target_audio_minutes: 60
 title: 'The Alarm Is Lying: The False Alarm Response'
 subtitle: A One-Hour Anxiety Reset for Students
-cover_tagline: A One-Hour Anxiety Reset for Students
+cover_tagline: Your body thinks you're in danger. You're just sitting in fourth period.
 description:
-  short_blurb: A One-Hour Anxiety Reset for Students The one-hour edition.
-  long_description: 'The Alarm Is Lying: The False Alarm Response
+  short_blurb: Racing heart, can't breathe, hands shaking, and nothing is actually
+    wrong. This one-hour read is for students whose bodies hit the panic button over
+    a test, a presentation, or nothing at all. It won't tell you to calm down. It'll
+    show you what the alarm is, why it keeps misfiring, and how to ride it out without
+    it running your life.
+  long_description: 'The teacher says the test is next period, and something in your
+    body throws a switch you didn''t touch. Your heart slams. Your hands go cold.
+    You can''t pull a full breath, and now you''re certain everyone around you can
+    see exactly what''s happening to you. Part of your brain knows the truth, that
+    you''re safe, sitting in an ordinary classroom on an ordinary Tuesday. Your body
+    has not received that memo. It is bracing as if a predator just walked through
+    the door.
 
 
-    The one-hour edition: the core of the anxiety work for students, in a single sitting.
-    Recognition, descent, integration — no filler. Book 2 of the one-hour Students
-    anxiety series.'
+    This is for the student whose alarm goes off over things that cannot actually
+    hurt you. A hand raised in your direction. A timer on a quiz. The walk into a
+    loud cafeteria. A notification sitting unopened on the lock screen. The one who
+    has been told to relax so many times that not being able to has started to feel
+    like its own private failure, one more thing wrong with you.
+
+
+    So here''s the truth nobody quite explains. That panic is not a sign something
+    is broken in you. It is your body''s alarm, the identical system that would save
+    your life if a car came at you on the crosswalk, doing its job at a moment when
+    there is no car. A false alarm: real sensations, genuine and physical and awful,
+    attached to zero real danger. The first move is to recognize it while it''s happening,
+    the surge, the tunnel vision, the absolute certainty that this is the moment it
+    all goes wrong, and to call it by its name instead of fighting it like an enemy.
+
+
+    Then you do the part that actually works, which turns out to be the opposite of
+    fighting. You let the wave rise. You feel your heart pound and you don''t try
+    to outrun it, because the alarm always, every single time, tires itself out once
+    you stop feeding it more fear as fuel. You stop bracing against the feeling and
+    let it move through you on its own clock. And you come out the far side knowing,
+    in your body and not just as a fact in your head, that the thing you were sure
+    you couldn''t survive is a thing you just survived.
+
+
+    This hour will not promise to shut the panic off forever. Your alarm is built
+    in, and an alarm that works is not a defect to be repaired. It won''t teach you
+    to white-knuckle it down, breathe it perfectly away, or engineer yourself into
+    a person who never feels it. What it does is take the fear out of the fear, so
+    a false alarm stays a false alarm instead of becoming the whole thing your day
+    gets quietly organized around avoiding.
+
+
+    You are not too sensitive. You are not malfunctioning. Your alarm is loud because
+    it is working, and you are allowed to let it ring without handing it the keys
+    to what you do next.'
 keywords:
   primary:
   - anxiety relief
@@ -38,6 +81,7 @@ keywords:
   - anxiety for students
   - one hour
 bisac_codes:
+- SEL036000
 - SEL027000
 - SEL024000
 - PSY022000
@@ -46,12 +90,15 @@ target_price:
   audible_usd: 6.99
   paperback_usd: 9.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: nina_vazquez
 comp_titles:
-- Dare (McDonagh)
-- The Anxiety and Phobia Workbook (Bourne)
-- Unwinding Anxiety (Brewer)
+- When Panic Attacks (David D. Burns) — secular, body-first approach to false-alarm
+  panic
+- Dare (Barry McDonagh) — the let-the-wave-pass method for anxiety and panic, no woo
+- Unwinding Anxiety (Judson Brewer) — explains the brain's alarm loop in plain, usable
+  terms
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -59,3 +106,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

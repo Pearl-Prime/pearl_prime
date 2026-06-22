@@ -16,19 +16,53 @@ target_word_range:
 target_audio_minutes: 70
 title: 'Social Anxiety: When Other People''s Success Feels Like Your Failure'
 subtitle: A Field Guide for Tech and Finance Professionals Navigating Social Anxiety
-cover_tagline: A Field Guide for Tech and Finance Professionals Navigating Social
-  Anxiety
+cover_tagline: Their promotion isn't a verdict on you. Your gut disagrees.
 description:
-  short_blurb: A Field Guide for Tech and Finance Professionals Navigating Social
-    Anxiety A grounded, secular guide to social anxiety for tech & finance professionals.
-  long_description: 'Social Anxiety: When Other People''s Success Feels Like Your
-    Failure
+  short_blurb: A peer's launch, a former classmate's funding round, a colleague's
+    number on the leaderboard, and something in you reads it as proof you're behind.
+    This is an honest look at the comparison that turns other people's wins into your
+    private failures, and how to stop bleeding out every time someone else does well.
+    No gratitude lists, no 'stay in your lane,' just real company with the part of
+    you that's always measuring.
+  long_description: 'Someone you came up with just announced the thing. The round
+    closed, the promo landed, the post is doing numbers. You''re happy for them for
+    about a second and a half, and then the floor tilts and a cold little voice says:
+    so that''s where you should be by now. The rest of the day you carry their good
+    news like it was a memo about your own inadequacy.
 
 
-    For a tech or finance professional running on empty. This book names what social
-    anxiety is doing in your body in language you can use — through recognition, descent,
-    and integration, not worksheets or forced positivity. Book 1 of the Tech & Finance
-    Professionals social anxiety series.'
+    This book is for the person whose industry runs on the scoreboard. Tech and finance
+    hand you a leaderboard for everything: comp, title, exits, headcount, the size
+    of the deal, the prestige of the logo. So comparison isn''t a character flaw you
+    can will away; it''s the water you swim in, and your nervous system has learned
+    to treat every peer''s win as data about your worth. You can be doing genuinely
+    well and still feel like you''re losing, because there is always someone one rung
+    up to lose to.
+
+
+    First you''ll recognize what''s actually happening: that gut-drop when someone
+    succeeds is comparison firing, and comparison is a feeling, not a measurement.
+    Their promotion is not a ruling on your life. Then, instead of managing it with
+    gratitude journals or telling yourself to stay in your lane, you''ll go down into
+    the drop itself. You''ll feel where the envy and the not-enough actually live
+    in the body, the specific ache of it, without rushing to fix it or shame yourself
+    for having it. This is the part no productivity system reaches. You cannot out-achieve
+    comparison; there''s always a higher rung. You can only stop letting the scoreboard
+    narrate your value.
+
+
+    This is not a book that will tell you comparison is the thief of joy and leave
+    it there, or hand you a list to be grateful for so you''ll stop noticing. It won''t
+    coach you to mute everyone you envy or pretend you don''t want the things they
+    got. It will not optimize you into someone serenely above it all. What it offers
+    is steadier ground: a way to feel the drop without being run by it, so someone
+    else''s good news stops costing you your whole afternoon.
+
+
+    The ache when they win isn''t telling you the truth about where you stand. It''s
+    an old reflex measuring you against a ruler that was never going to stop moving.
+    You''re allowed to feel the comparison, recognize it for what it is, and let their
+    win just be their win.'
 keywords:
   primary:
   - social anxiety
@@ -41,6 +75,7 @@ keywords:
   - tech & finance professionals
   - social anxiety for tech & finance professionals
 bisac_codes:
+- SEL036000
 - SEL027000
 - SEL031000
 - PSY022000
@@ -49,12 +84,15 @@ target_price:
   audible_usd: 9.99
   paperback_usd: 12.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: daniel_cho
 comp_titles:
-- How to Be Yourself (Hendriksen)
-- The Social Anxiety Workbook (Antony)
-- Quiet (Cain)
+- The Comparison Cure (Lisa Cypers Kamen) — secular, practical work on chronic measuring-up
+- The Gifts of Imperfection (Brené Brown) — research on worthiness untethered from
+  achievement
+- Burnout (Emily & Amelia Nagoski) — names the never-enough treadmill and the body's
+  part in it
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -62,3 +100,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

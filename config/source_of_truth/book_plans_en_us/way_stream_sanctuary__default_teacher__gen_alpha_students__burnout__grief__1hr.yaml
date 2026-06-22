@@ -16,15 +16,53 @@ target_word_range:
 target_audio_minutes: 60
 title: 'After the Flame: Living with What You''ve Lost'
 subtitle: A One-Hour Burnout Reset for Students
-cover_tagline: A One-Hour Burnout Reset for Students
+cover_tagline: You didn't just get tired. Something got taken from you.
 description:
-  short_blurb: A One-Hour Burnout Reset for Students The one-hour edition.
-  long_description: 'After the Flame: Living with What You''ve Lost
+  short_blurb: Burnout isn't only exhaustion — it's loss. The version of you that
+    used to care, that used to want things, that used to find school exciting instead
+    of survivable, is gone, and nobody told you that you were allowed to grieve it.
+    This is a one-hour read for the student who burned all the way down and is now
+    living with the wreckage.
+  long_description: 'You used to be the kid who cared. The one who actually liked
+    a subject, who had a thing, who didn''t have to fake the energy in the morning.
+    And then somewhere in the assignments and the grades and the constant low hum
+    of keeping up, that kid went quiet — and you can''t find your way back to them.
+    People keep telling you you''re just burnt out, like it''s a battery thing, like
+    a long weekend will fix it. But you already know it''s bigger than tired. Something
+    is actually gone.
 
 
-    The one-hour edition: the core of the burnout work for students, in a single sitting.
-    Recognition, descent, integration — no filler. Book 1 of the one-hour Students
-    burnout series.'
+    What nobody named for you is that this is a loss. Not a slump, not a motivation
+    problem — a real one. You look at old work, old plans, the person you were back
+    in September, and you feel the distance the way you''d feel a death. And because
+    no one told you you were allowed to mourn a version of yourself, you''ve been
+    carrying it as a private failure instead.
+
+
+    Jonah Kim wrote this for the student who got hollowed out, not just worn down.
+    He isn''t here to relight your fire or sell you a comeback. The whole point is
+    the opposite: a loss this size doesn''t get optimized away, it gets grieved, and
+    grieving it is how you stop bleeding energy into pretending it isn''t there. So
+    you let yourself see exactly what went missing and call it by its real name. You
+    sit in how heavy that actually is, instead of stacking productivity on top of
+    it — because the pretending it''s light is half of what wore you down in the first
+    place. And from there, slowly, you come back. Not as the old you. As someone who
+    knows what they lost and can finally stop performing the ghost of it.
+
+
+    You won''t find morning routines in here, or habit trackers, or a five-step system
+    to get your spark back, or a speech about how this all made you stronger. The
+    book will not tell you the burnout was secretly a gift, and it won''t promise
+    the old you is on their way home. What it gives you instead is permission to admit
+    that something real ended, and language to carry that without it crushing you
+    in the middle of fourth period.
+
+
+    You''re allowed to grieve who you used to be. You don''t have to spin it, hide
+    it, or have a recovery arc ready for whoever asks how you''re doing. You''re allowed
+    to just be a person who lost something and is still here. In about an hour, you
+    can set down the apology you''ve been making for the loss — and stand, finally,
+    on the ground that''s actually left.'
 keywords:
   primary:
   - burnout recovery
@@ -45,12 +83,16 @@ target_price:
   audible_usd: 6.99
   paperback_usd: 9.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: jonah_kim
 comp_titles:
-- Burnout (Nagoski)
-- Laziness Does Not Exist (Price)
-- Do Nothing (Headlee)
+- The Body Keeps the Score (Bessel van der Kolk) — names how depletion lives in the
+  body, not just the schedule
+- It's OK That You're Not OK (Megan Devine) — grief that refuses to be fixed or rushed,
+  exactly the posture this book takes
+- How to Do Nothing (Jenny Odell) — pushes back on optimize-yourself culture for a
+  generation worn down by it
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -58,3 +100,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

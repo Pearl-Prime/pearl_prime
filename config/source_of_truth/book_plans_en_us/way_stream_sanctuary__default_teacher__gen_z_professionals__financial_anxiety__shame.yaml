@@ -16,17 +16,55 @@ target_word_range:
 target_audio_minutes: 70
 title: 'The Number in Your Head: The Shame Response'
 subtitle: A Field Guide for Young Professionals Navigating Financial Anxiety
-cover_tagline: A Field Guide for Young Professionals Navigating Financial Anxiety
+cover_tagline: The quiet certainty that everyone else figured out money and you're
+  the only one faking it.
 description:
-  short_blurb: A Field Guide for Young Professionals Navigating Financial Anxiety
-    A grounded, secular guide to money anxiety for young professionals.
-  long_description: 'The Number in Your Head: The Shame Response
+  short_blurb: 'Underneath your money anxiety is a sentence you''d never say out loud:
+    there is something wrong with me. This is a field guide to the buried belief that
+    your bank balance is a verdict on your worth. It won''t talk you out of the shame.
+    It will get underneath it, in plain language, so it stops running the show.'
+  long_description: 'You make decent money now — or decent enough — and you still
+    feel like a fraud about it. A coworker mentions their savings rate and your stomach
+    drops. Your parents ask how you''re doing financially and you lie a little, smooth
+    it over, change the subject. You see the number in your account and it doesn''t
+    read as a number; it reads as a grade, and the grade is on you, the whole of you,
+    who you are. That''s not anxiety about money anymore. That''s shame, wearing money
+    as a costume.
 
 
-    For early in a demanding career, phone always buzzing. This book names what money
-    anxiety is doing in your body in language you can use — through recognition, descent,
-    and integration, not worksheets or forced positivity. Book 2 of the Young Professionals
-    money anxiety series.'
+    This part is for anyone who has quietly concluded that being behind financially
+    means being defective as a person. If you flinch when money comes up, if you''ve
+    never said the real figure out loud to a single person, if you treat every small
+    misstep — the overdraft, the impulse buy, the months you didn''t save — as one
+    more piece of evidence for a case you''ve been building against yourself, this
+    names the thing actually running the show. Shame is the buried belief that something
+    is wrong with you, and money is one of its favorite hiding places, because the
+    culture hands you a thousand ways to keep score and never once mentions that the
+    scoreboard was rigged before you were old enough to play.
+
+
+    Wren Adler writes about this the way you''d want a blunt, kind friend to: no pep
+    talk, no affirmations taped to a mirror. First, recognition — catching the exact
+    moment a money fact flips into a statement about your worth, learning to hear
+    the difference between ''I have $400'' and ''I am the kind of person who only
+    has $400.'' Then the descent: not arguing with the shame, not out-earning it,
+    not drowning it in productivity, but going down to where it actually lives and
+    seeing what it''s made of — old messages, other people''s voices, a measuring
+    stick you never agreed to be measured by. Then integration: surfacing able to
+    hold a hard money truth as plain information instead of a personal indictment.
+
+
+    This book will not promise that the shame lifts the day you hit a savings goal.
+    It won''t tell you that the right milestone, the right title, the right number
+    finally makes you enough. Shame doesn''t respond to net worth; people who''ve
+    cleared every debt they had still flinch at the question. What changes here is
+    the flinch itself — the gap between a number and a verdict gets wide enough that
+    you can finally stand inside it and breathe.
+
+
+    You are not behind as a human being. You were never behind as a human being. Your
+    balance was a fact about your month, never a measure of whether you''re allowed
+    to take up room in the world.'
 keywords:
   primary:
   - money anxiety
@@ -39,6 +77,7 @@ keywords:
   - young professionals
   - money anxiety for young professionals
 bisac_codes:
+- SEL036000
 - SEL027000
 - BUS050000
 - PSY022000
@@ -47,12 +86,15 @@ target_price:
   audible_usd: 9.99
   paperback_usd: 12.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: wren_adler
 comp_titles:
-- The Psychology of Money (Housel)
-- Your Money or Your Life (Robin)
-- I Will Teach You to Be Rich (Sethi)
+- Daring Greatly (Brené Brown) — the definitive secular map of how shame operates
+  and loosens
+- The Psychology of Money (Morgan Housel) — separates money behavior from money morality
+- Maybe You Should Talk to Someone (Lori Gottlieb) — models facing a buried self-belief
+  in plain, secular terms
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -60,3 +102,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

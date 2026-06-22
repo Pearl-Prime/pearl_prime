@@ -16,16 +16,57 @@ target_word_range:
 target_audio_minutes: 60
 title: 'The Alarm Is Lying: The Space Between You and Your Anxiety'
 subtitle: A One-Hour Anxiety Reset for Tech & Finance Professionals
-cover_tagline: A One-Hour Anxiety Reset for Tech & Finance Professionals
+cover_tagline: Part of you is always on call, scanning for the next threat, never
+  off.
 description:
-  short_blurb: A One-Hour Anxiety Reset for Tech & Finance Professionals The one-hour
-    edition.
-  long_description: 'The Alarm Is Lying: The Space Between You and Your Anxiety
+  short_blurb: There's a part of you that never stands down — always monitoring, always
+    braced, on guard even when nothing's wrong. This is a one-hour reset for tech
+    and finance professionals run by a mind that's permanently on watch. It helps
+    you find the space between you and the hypervigilance so the watcher doesn't have
+    to be all of you.
+  long_description: 'Even on a quiet weekend, part of you is on call. Scanning. Bracing
+    for the message that hasn''t come, the alert that hasn''t fired, the thing that
+    might go wrong. You can''t fully land in a conversation, a dinner, a day off,
+    because some part of you stays posted at the perimeter, watching for the threat.
+    It never stands down. You''ve forgotten what it''s like to be fully off duty,
+    because you never actually are.
 
 
-    The one-hour edition: the core of the anxiety work for tech & finance professionals,
-    in a single sitting. Recognition, descent, integration — no filler. Book 7 of
-    the one-hour Tech & Finance Professionals anxiety series.'
+    This is for the on-call engineer whose body never leaves the pager even when the
+    laptop''s shut. The trader monitoring the after-hours tape in their head through
+    dinner. The PM scanning every channel for the fire before it starts. The person
+    whose hypervigilance got rewarded so consistently — caught the outage, saw the
+    risk first, never blindsided — that it became the whole operating system, always
+    on, always watching, never resting.
+
+
+    Here''s the thing the constant watching hides: the watcher feels like you, but
+    it isn''t all of you. It''s one part — a vigilant, exhausted part that took over
+    because at some point staying alert felt like staying safe. And because you''ve
+    been fused to it for years, you''ve never felt the gap between the part that''s
+    scanning and the part of you that could simply rest. That gap is the whole thing.
+    The space between you and your anxiety is where you actually get to stand down.
+
+
+    This book won''t tell you to relax and be present and the vigilance will melt.
+    It won''t hand you a mindfulness routine to bolt onto a nervous system that treats
+    stillness as danger. It won''t promise the watcher switches off — it''s kept you
+    sharp for years and it isn''t quitting. What it does is help you recognize the
+    watcher as a part rather than the whole, go down beneath it to the steadier ground
+    it''s been guarding, and come back able to let it keep watch without it being
+    all you are.
+
+
+    In about an hour you''ll have language for the part that never rests: what keeps
+    it posted, what it''s protecting, and what to do the next time you realize you''ve
+    been braced for hours over nothing. Not a command to drop your guard. A way to
+    find the space behind the watching, where you were never the alarm in the first
+    place.
+
+
+    The watcher is not all of you. There''s a part of you it''s been guarding this
+    whole time — steadier, already here, never on duty. You''re allowed to go and
+    stand there. You don''t have to be on call to be safe.'
 keywords:
   primary:
   - anxiety relief
@@ -39,6 +80,7 @@ keywords:
   - anxiety for tech & finance professionals
   - one hour
 bisac_codes:
+- SEL036000
 - SEL027000
 - SEL024000
 - PSY022000
@@ -47,12 +89,16 @@ target_price:
   audible_usd: 6.99
   paperback_usd: 9.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: daniel_cho
 comp_titles:
-- Dare (McDonagh)
-- The Anxiety and Phobia Workbook (Bourne)
-- Unwinding Anxiety (Brewer)
+- No Bad Parts (Richard Schwartz) — secular Internal Family Systems framing of a hypervigilant
+  protector part
+- Wherever You Go, There You Are (Jon Kabat-Zinn) — finding the still space behind
+  a mind that never stops scanning
+- The Body Keeps the Score (Bessel van der Kolk) — why a nervous system stays permanently
+  braced and on watch
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -60,3 +106,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

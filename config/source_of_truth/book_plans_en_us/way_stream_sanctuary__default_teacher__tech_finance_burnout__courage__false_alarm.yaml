@@ -16,17 +16,52 @@ target_word_range:
 target_audio_minutes: 70
 title: 'The Thing You Won''t Say: The False Alarm Response'
 subtitle: A Real Talk Guide to Building Courage for Tech and Finance Professionals
-cover_tagline: A Real Talk Guide to Building Courage for Tech and Finance Professionals
+cover_tagline: Your body thinks the standup is a tiger. It isn't.
 description:
-  short_blurb: A Real Talk Guide to Building Courage for Tech and Finance Professionals
-    A grounded, secular guide to courage for tech & finance professionals.
-  long_description: 'The Thing You Won''t Say: The False Alarm Response
+  short_blurb: There's a thing you keep not saying in the meeting, and your body treats
+    saying it like stepping off a ledge. This is a plain-language look at the false
+    alarm that fires the second before you'd speak up, and why your nervous system
+    can't tell a code review from a real threat. No scripts to memorize, no confidence
+    hacks, just an honest map of what's actually happening in your chest.
+  long_description: 'You have the point. It''s a good point. The meeting moves toward
+    the moment where you''d make it, and something in your body braces like a door
+    slamming. Throat tightens, heart kicks, the room goes a little loud. By the time
+    you''ve talked yourself into it, the topic''s gone and someone else got the credit.
+    Then you spend the walk home replaying the silence.
 
 
-    For a tech or finance professional running on empty. This book names what courage
-    is doing in your body in language you can use — through recognition, descent,
-    and integration, not worksheets or forced positivity. Book 1 of the Tech & Finance
-    Professionals courage series.'
+    This book is for the engineer, the analyst, the PM who is demonstrably competent
+    on paper and still goes quiet at the exact moment it counts. You ship hard things.
+    You can read a system under load. And yet the second before you''d disagree with
+    a senior, or flag the risk everyone''s ignoring, your body files it under danger
+    and floods you. That''s the false alarm: an alarm with no fire. Your nervous system
+    was built for a different kind of room, and it cannot tell the difference between
+    a predator and a Slack thread with your director on it.
+
+
+    First you''ll learn to recognize the alarm as an alarm instead of as the truth.
+    The racing heart is not evidence that speaking is unsafe. Then, instead of trying
+    to muscle past it or breathe it away, you''ll go down into it. You''ll feel where
+    it lives, what it does to your hands and your voice, how it crests and, left alone,
+    actually falls. Not managed. Felt all the way through, until it stops running
+    the meeting for you. You come back able to stay in your body while the alarm does
+    its thing in the background, present enough to take the half-second that used
+    to swallow you.
+
+
+    This is not a confidence course. It will not hand you power poses, a pre-meeting
+    pump-up, or seventeen scripts to memorize. It won''t promise you''ll never freeze
+    again or turn you into the loudest voice in the room. The goal isn''t to optimize
+    you into someone who performs fearlessness. It''s smaller and more durable: to
+    know what''s happening in your nervous system so the next false alarm has less
+    authority over your mouth. The point was never to feel nothing in the meeting.
+    It was to stop handing the meeting to whatever your chest is doing.
+
+
+    The thing you won''t say isn''t stuck because you''re weak or unprepared. It''s
+    stuck behind an old reflex that mistook a meeting for a threat. You can learn
+    the difference. You''re allowed to feel the alarm fire, recognize it for what
+    it is, and speak anyway.'
 keywords:
   primary:
   - building courage
@@ -47,12 +82,16 @@ target_price:
   audible_usd: 9.99
   paperback_usd: 12.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: daniel_cho
 comp_titles:
-- Daring Greatly (Brown)
-- Feel the Fear and Do It Anyway (Jeffers)
-- The Gifts of Imperfection (Brown)
+- Burnout (Emily & Amelia Nagoski) — names the stress cycle the body completes whether
+  or not the threat was real
+- The Body Keeps the Score (Bessel van der Kolk) — secular grounding for why the nervous
+  system overrides the thinking mind
+- Dare (Barry McDonagh) — practical, non-spiritual approach to riding anxiety surges
+  instead of fighting them
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -60,3 +99,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false
