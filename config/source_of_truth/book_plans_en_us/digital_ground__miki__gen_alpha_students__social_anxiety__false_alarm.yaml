@@ -1,5 +1,4 @@
 book_plan_schema: 1.0.0
-created_at: '2026-04-24'
 book_id: digital_ground__miki__gen_alpha_students__social_anxiety__false_alarm
 series_plan: config/source_of_truth/series_plans_en_us/digital_ground__miki__gen_alpha_students__social_anxiety.yaml
 installment_number: 1
@@ -11,37 +10,76 @@ target_word_range:
 - 9000
 - 12000
 target_audio_minutes: 70
-title: 'Misreading the Danger Signal: How to Stop Freezing and Speak Up with Confidence'
-subtitle: Practical Tools for Students Who Dread Under Pressure
-cover_tagline: You've been bracing for something you can't name.
+title: Nothing Even Happened
+subtitle: For the high schooler whose body sounds the alarm before a single word is
+  said — the dread outside the classroom door, the brace before you've even sat down
+cover_tagline: Your heart is racing for a door you haven't opened yet.
 description:
-  short_blurb: You've been bracing for something you can't name. be around people without the constant scanning.
-  long_description: |
-    You've been bracing for something you can't name.
+  short_blurb: You feel the dread before you've even walked in. Heart going, hands
+    cold, that full-body brace — like something terrible is about to happen, except
+    nothing is. This is a book for the version of you that gets the danger signal
+    in a room where there's no danger at all.
+  long_description: 'You''re standing outside the classroom and your body already
+    knows. Heart fast. Palms cold. That bracing in your chest like you''re about to
+    be hit — except you''re just about to walk in and sit down. Nobody''s said anything
+    to you. Nothing has even happened yet. And still, the alarm is screaming.
 
-    This book is for high school students who I want to connect but being around people is agony. It doesn't promise to make the feeling stop. It names what's happening in language you can use the next time it happens.
 
-    Chapter by chapter, you'll work with the body's false-alarm system and why it keeps firing. Not through exposure or worksheets or morning routines — through recognition, descent, and integration. The practice the book asks for can happen on a subway, between meetings, or at 3am.
+    This book is for the high schooler whose nervous system fires before the moment
+    does. The one who''s already rehearsing the worst thing in the bathroom mirror.
+    The one who reads the group chat eleven times before typing and then deletes it.
+    You''re not weak and you''re not dramatic. You''re carrying an alarm system that''s
+    doing exactly what it was built to do — it''s just pointed at the wrong thing.
+    It thinks a room full of your classmates is a room full of teeth.
 
-    You'll walk away knowing what your body is doing and why it makes sense. Not fixed. Not healed in any final sense. But no longer alone with the pattern.
 
-    Book 1 of the Digital Ground social anxiety series.
+    You''ll come to recognize the alarm for what it is. The way the false danger feels
+    identical to real danger from the inside. The bracing before the party, the spiral
+    before the presentation, the way one unanswered text becomes proof that everyone''s
+    done with you. You''ll learn what your body is actually doing in those seconds
+    — not so you can hate it, but so you can finally tell the difference between a
+    threat and a feeling. Between the alarm and the thing it''s warning you about,
+    which most of the time was never there.
+
+
+    This won''t make the feeling stop. It can''t, and anything that promises it can
+    is lying to you. There''s no breathing trick here that turns you into someone
+    who walks into rooms easy. There''s no glow-up, no confidence hack, no version
+    of you that you have to become before lunch. Nobody is going to tell you to just
+    put yourself out there.
+
+
+    What''s here instead is recognition. The next time your body sounds the alarm
+    over nothing, you''ll know what it''s doing. You''ll know it''s old, and loud,
+    and trying to protect you, and wrong. You''ll feel the heart and the cold hands
+    and the bracing, and you''ll have a name for all of it. You''ll still feel it.
+    But you won''t be alone inside it, and you won''t believe it the way you used
+    to.
+
+
+    You were never broken. The alarm just got loud before you were ready, and nobody
+    told you that''s what it was.
+
+
+    Book 1 of the Present Tense Books social anxiety series.'
 keywords:
   primary:
-  - social anxiety
-  - shyness book
-  - social phobia
-  - networking anxiety
-  - introvert guide
-  - meeting anxiety
-  - public speaking fear
+  - social anxiety in teens
+  - anxiety book for teenagers
+  - fear of being around people
+  - panic before social situations
+  - high school anxiety help
+  - social anxiety self help
+  - nervous system anxiety teens
   secondary:
-  - gen alpha students
-  - false alarm social anxiety
+  - fight or flight anxiety
+  - anticipatory anxiety teens
+  - gen z anxiety book
 bisac_codes:
-- YAN000000
-- YAN046000
-- JNF053030
+- SEL036000
+- SEL024000
+- SEL031000
+- YAN051040
 target_price:
   ebook_usd: 4.99
   audible_usd: 9.99
@@ -49,14 +87,12 @@ target_price:
 author_positioning:
   teacher: miki
   brand: digital_ground
+  byline_author: adam_kim
 comp_titles:
-- How to Be Yourself (Hendriksen)
-- Untamed (Doyle)
-- Self-Compassion (Neff)
-main_character_name: Sage
-main_character_lora_id: sage_dg_us
-confidence:
-  pricing: low
-  title: medium
-  comps: high
-plan_source_path: config/manga/manga_brand_series_plan.yaml
+- The Anxiety Survival Guide for Teens (Jennifer Shannon) — names the false-alarm
+  brain in language high schoolers can use
+- How to Be Yourself (Ellen Hendriksen) — treats social anxiety as a misfiring system,
+  not a defect
+- Unwinding Anxiety (Judson Brewer) — maps the alarm-then-spiral loop without shaming
+  the reader for having it
+_needs_authoring: false

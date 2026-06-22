@@ -1,8 +1,7 @@
 book_plan_schema: 1.0.0
-created_at: '2026-04-24'
 book_id: digital_ground__miki__gen_z_student__imposter_syndrome__shame
 series_plan: config/source_of_truth/series_plans_en_us/digital_ground__miki__gen_z_student__imposter_syndrome.yaml
-installment_number: 1
+installment_number: 4
 engine: shame
 duration: standard_book_60min
 runtime_format_id: standard_book_60min
@@ -11,36 +10,74 @@ target_word_range:
 - 9000
 - 12000
 target_audio_minutes: 70
-title: 'The Shame Response: How to Calm Your Mind and Show Up Fully'
-subtitle: What Your Imposter Syndrome Is Really Telling You — and What to Do About It
-cover_tagline: You're sure that if they really saw you, it would be over.
+title: The Defect You're Sure They'll Find
+subtitle: For the student grinding to cover a flaw that was never there — when imposter
+  syndrome isn't fear of failing but the buried belief that something is wrong with
+  you
+cover_tagline: You're not afraid of being caught out. You're afraid of being seen.
 description:
-  short_blurb: You're sure that if they really saw you, it would be over. stop feeling like a fraud at work.
-  long_description: |
-    You're sure that if they really saw you, it would be over.
+  short_blurb: It isn't really that you might fail. It's the quiet certainty that
+    if anyone saw the real you, they'd know something was wrong. This is a book about
+    the shame underneath imposter syndrome — the defect you've been overworking to
+    hide — and the slow relief of finding out it was never there.
+  long_description: 'It''s not actually the deadline. It''s not the grade, or the
+    presentation, or the fear of getting it wrong. Underneath all of that, in a place
+    you don''t say out loud, there''s a quieter belief: that something is wrong with
+    you. That you''re not just unprepared — you''re defective, and the work, the achieving,
+    the trying-twice-as-hard, has all been a way of covering it so no one finds out.
 
-    This book is for university undergrads who I'm going to be found out. It doesn't promise to make the feeling stop. It names what's happening in language you can use the next time it happens.
 
-    Chapter by chapter, you'll work with the exposure-fear that keeps you bracing to be found out, and why it runs so deep. Not through exposure or worksheets or morning routines — through recognition, descent, and integration. The practice the book asks for can happen on a subway, between meetings, or at 3am.
+    That''s shame, and it''s the engine underneath the whole thing. Not the fear that
+    you''ll fail at the task, but the certainty that you are the failure, and that
+    being truly seen would confirm it. So you overwork. You hide the struggle. You
+    perform the version of yourself you think is acceptable and you brace, always,
+    against anyone getting close enough to see the rest.
 
-    You'll walk away knowing what your body is doing and why it makes sense. Not fixed. Not healed in any final sense. But no longer alone with the pattern.
 
-    Book 1 of the Digital Ground imposter syndrome series.
+    This book is for you — the student who looks fine and feels like a fraud all the
+    way down. The one who can''t accept the compliment because they know what''s underneath.
+    The one exhausted from covering, from the gap between the self you show in the
+    seminar and the self you''re sure is the truth. You''re not actually defective.
+    You learned, somewhere, to believe you were.
+
+
+    You''ll come to recognize shame as separate from you — a belief you absorbed,
+    not a fact about who you are. You''ll learn the difference between guilt, which
+    says you did a bad thing, and shame, which says you are a bad thing, and why one
+    can be repaired and the other just makes you hide. You''ll find what it''s like
+    to set the performance down, even for a minute, and let yourself be in the room
+    as you are.
+
+
+    This won''t fix you, because there is nothing in you to fix. It won''t hand you
+    self-esteem or teach you to love yourself in five steps. The whole premise — that
+    you''re broken and need repairing — is the thing this book is here to question.
+
+
+    What''s true is that the defect you''ve been hiding was never there to begin with.
+    You don''t have to earn your way out of being wrong, because you were never wrong.
+    And you''re allowed to stop covering, put the phone down, and let someone see
+    you without the alarm going off.
+
+
+    Book 4 of the Present Tense Books imposter syndrome series.'
 keywords:
   primary:
-  - imposter syndrome
-  - self-doubt at work
-  - career confidence
-  - professional anxiety
+  - imposter syndrome shame
+  - feeling not good enough
+  - self worth students
+  - shame and anxiety
   - feeling like a fraud
-  - workplace impostor
+  - low self esteem college
+  - anxiety for students
   secondary:
-  - gen z student
-  - shame imposter syndrome
+  - overcoming shame
+  - self acceptance young adults
+  - perfectionism students
 bisac_codes:
-- SEL027000
-- YAN046000
-- EDU048000
+- SEL036000
+- SEL024000
+- SEL031000
 target_price:
   ebook_usd: 4.99
   audible_usd: 9.99
@@ -48,14 +85,11 @@ target_price:
 author_positioning:
   teacher: miki
   brand: digital_ground
+  byline_author: mira_nolan
 comp_titles:
-- The Secret Thoughts of Successful Women (Young)
-- Playing Big (Mohr)
-- Daring Greatly (Brown)
-main_character_name: Elliott
-main_character_lora_id: elliott_dg_us
-confidence:
-  pricing: low
-  title: medium
-  comps: high
-plan_source_path: config/manga/manga_brand_series_plan.yaml
+- The Gifts of Imperfection (Brené Brown) — shame resilience and worth without the
+  cover-up
+- The Self-Esteem Workbook for Teens (Lisa M. Schab) — worth that isn't earned by
+  performing
+- The Imposter Cure (Jessamy Hibberd) — the buried belief beneath the overworking
+_needs_authoring: false

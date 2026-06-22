@@ -1,5 +1,4 @@
 book_plan_schema: 1.0.0
-created_at: '2026-04-24'
 book_id: digital_ground__miki__gen_alpha_students__imposter_syndrome__comparison
 series_plan: config/source_of_truth/series_plans_en_us/digital_ground__miki__gen_alpha_students__imposter_syndrome.yaml
 installment_number: 2
@@ -11,36 +10,86 @@ target_word_range:
 - 9000
 - 12000
 target_audio_minutes: 70
-title: 'When Other People''s Success Feels Like Your Failure: How to Stop Freezing and Speak Up with Confidence'
-subtitle: Practical Tools for Students Who Panic Under Pressure
-cover_tagline: However well you do, someone is always further ahead.
+title: Everyone My Age Already Figured It Out
+subtitle: For the student doing fine on paper who measures every day against a feed
+  full of people who look like they were born sure of themselves
+cover_tagline: You're holding your behind-the-scenes up against everyone's highlight
+  reel.
 description:
-  short_blurb: However well you do, someone is always further ahead. stop feeling like a fraud at work.
-  long_description: |
-    However well you do, someone is always further ahead.
+  short_blurb: 'You open the app and there it is again: someone your age who already
+    knows what they''re doing, already got in, already seems sure. You close it feeling
+    like you''re running late on a race nobody started. This book won''t help you
+    win the comparison — that''s the whole point.'
+  long_description: 'You open the app to escape the feeling, and the feeling is right
+    there waiting for you.
 
-    This book is for high school students who I'm going to be found out. It doesn't promise to make the feeling stop. It names what's happening in language you can use the next time it happens.
 
-    Chapter by chapter, you'll work with the reflex that measures your worth against others, and what it costs to keep score. Not through exposure or worksheets or morning routines — through recognition, descent, and integration. The practice the book asks for can happen on a subway, between meetings, or at 3am.
+    Someone your age announcing the internship. Someone''s little ''I can''t believe
+    this is my life'' caption. Someone who, at seventeen, already moves through the
+    world like they were handed the instructions you never got. You weren''t even
+    looking for it. You just wanted to not think for a second, and instead you''re
+    doing the math again — where you should be by now, how far behind you''ve fallen,
+    how everyone else apparently got the memo.
 
-    You'll walk away knowing what your body is doing and why it makes sense. Not fixed. Not healed in any final sense. But no longer alone with the pattern.
 
-    Book 2 of the Digital Ground imposter syndrome series.
+    This book is for you — the student who''s actually doing okay, and can''t feel
+    it, because okay isn''t the bar. The bar is everyone else, all at once, at their
+    absolute best, on a screen built to show you nothing but their best. You''re not
+    lazy and you''re not failing. You''ve just pointed a sharp, sensitive instrument
+    at the wrong target: yourself, held up against a feed.
+
+
+    Comparison is its own doorway into imposter syndrome. It isn''t the shame that
+    hides or the spiral that loops or the alarm that fires for no reason. It''s the
+    ruler — the constant, quiet measuring that always, somehow, comes back with the
+    same answer: not enough, not yet, not like them.
+
+
+    Chapter by chapter, you''ll come to recognize the measuring as it''s happening
+    — the specific moment your stomach drops at a stranger''s good news. You''ll see
+    what it costs to live as a number that''s always lower than someone else''s. You''ll
+    learn why the comparison is rigged: that you are seeing edited, posted, best-case
+    fragments and weighing your whole unedited inside against them. You''ll work with
+    your body, in the room, phone face-down, in the actual moment the scroll turns
+    on you — not through deleting the app forever, not through a gratitude list, not
+    through becoming impressive enough to finally win.
+
+
+    This book will not help you come out ahead. It will not optimize your life so
+    the comparison finally lands in your favor. It will not turn you into someone
+    who posts the caption other people ache over. There''s no fix here, because the
+    comparison was never a problem to solve — it was a habit of pointing the instrument
+    at yourself, and instruments can be set down.
+
+
+    Nothing here will help you win. That''s the point. What it offers instead: you
+    get to come back to your own life, the one happening off-screen, at its own pace,
+    on no one''s timeline but yours. Not measured. Not ranked. Not behind. Just here,
+    where you actually are.
+
+
+    You''re allowed to stop running a race nobody else is actually in.
+
+
+    Book 2 of the Present Tense Books imposter syndrome series.'
 keywords:
   primary:
   - imposter syndrome
-  - self-doubt at work
-  - career confidence
-  - professional anxiety
-  - feeling like a fraud
-  - workplace impostor
+  - comparison and social media
+  - feeling behind in life
+  - social comparison anxiety
+  - self doubt teens
+  - social media self esteem
+  - everyone else has it figured out
   secondary:
-  - gen alpha students
-  - comparison imposter syndrome
+  - gen z mental health
+  - imposter syndrome students
+  - stop comparing yourself
 bisac_codes:
-- YAN000000
-- YAN046000
-- JNF053030
+- SEL036000
+- SEL024000
+- SEL031000
+- YAN051200
 target_price:
   ebook_usd: 4.99
   audible_usd: 9.99
@@ -48,14 +97,12 @@ target_price:
 author_positioning:
   teacher: miki
   brand: digital_ground
+  byline_author: mira_nolan
 comp_titles:
-- The Secret Thoughts of Successful Women (Young)
-- Playing Big (Mohr)
-- Daring Greatly (Brown)
-main_character_name: Phoenix
-main_character_lora_id: phoenix_dg_us
-confidence:
-  pricing: low
-  title: medium
-  comps: high
-plan_source_path: config/manga/manga_brand_series_plan.yaml
+- The Comparison Cure (Lucy Sheridan) — built entirely around the compare-and-despair
+  habit social feeds create
+- Daring Greatly (Brené Brown) — the cost of measuring your worth against everyone
+  else's curated front
+- How to Do Nothing (Jenny Odell) — reclaiming attention and your own pace from a
+  feed engineered to rank you
+_needs_authoring: false

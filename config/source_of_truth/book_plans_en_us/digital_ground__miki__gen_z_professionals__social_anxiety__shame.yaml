@@ -1,5 +1,4 @@
 book_plan_schema: 1.0.0
-created_at: '2026-04-24'
 book_id: digital_ground__miki__gen_z_professionals__social_anxiety__shame
 series_plan: config/source_of_truth/series_plans_en_us/digital_ground__miki__gen_z_professionals__social_anxiety.yaml
 installment_number: 2
@@ -11,37 +10,78 @@ target_word_range:
 - 9000
 - 12000
 target_audio_minutes: 70
-title: 'What Shame Does to You: How to Stop Freezing and Speak Up with Confidence'
-subtitle: For Young Professionals
-cover_tagline: You're sure that if they really saw you, it would be over.
+title: The Thing You Think Is Wrong With You
+subtitle: Why the awkwardness feels like proof of a defect — and what loosens when
+  you stop hiding a flaw that was never there
+cover_tagline: You're not bad at people. You just decided you were.
 description:
-  short_blurb: You're sure that if they really saw you, it would be over. be around people without the constant scanning.
-  long_description: |
-    You're sure that if they really saw you, it would be over.
+  short_blurb: Somewhere along the way you concluded that the awkwardness wasn't a
+    feeling — it was evidence. Proof of some flaw you have to cover, over-prepare
+    around, apologize for in advance. This is a book about the quiet shame underneath
+    social anxiety, and what loosens when you stop treating yourself as the problem.
+  long_description: 'You replay it that night — the thing you said, the beat too long
+    before you said it, the face you think someone made. By morning it has hardened
+    into something larger than a moment. It''s become proof. Evidence of a flaw you''ve
+    been managing your whole life: that you are, at some level you don''t say out
+    loud, just bad at this. Bad at people. Wrong in a way everyone else got the manual
+    for.
 
-    This book is for early-career creative / knowledge workers who I want to connect but being around people is agony. It doesn't promise to make the feeling stop. It names what's happening in language you can use the next time it happens.
 
-    Chapter by chapter, you'll work with the exposure-fear that keeps you bracing to be found out, and why it runs so deep. Not through exposure or worksheets or morning routines — through recognition, descent, and integration. The practice the book asks for can happen on a subway, between meetings, or at 3am.
+    This book is for you — the one who over-prepares for a coffee chat, drafts the
+    Slack message four times, rehearses the casual hello, and still walks away certain
+    you blew it. You''ve built an entire operating system around hiding a defect you''re
+    sure you have. The exhausting part isn''t the anxiety. It''s the second thing
+    underneath it: the belief that the anxiety means something is wrong with you,
+    specifically, and that if anyone saw the real volume of effort it takes you to
+    seem normal, they''d finally know.
 
-    You'll walk away knowing what your body is doing and why it makes sense. Not fixed. Not healed in any final sense. But no longer alone with the pattern.
 
-    Book 2 of the Digital Ground social anxiety series.
+    What you''ll come to recognize is that the shame is older than the situations
+    it attaches to, and it''s lying. The thing you think is wrong with you isn''t
+    a flaw — it''s a feeling that learned to disguise itself as a fact about your
+    character. You''ll start to catch the move: the way a single awkward moment gets
+    promoted into a verdict on your whole self. You''ll meet the part of you that
+    has been overworking to cover a hole that was never actually there. And you''ll
+    find the doorway out is not becoming someone else — it''s stopping the apology
+    you''ve been making for existing as you are.
+
+
+    This is not a confidence makeover. No scripts, no ''fake it till you make it,''
+    no morning routine that turns you into the version of yourself you think people
+    would prefer. Nothing here will optimize your personality or rebrand you as effortlessly
+    social. We are not going to fix you, because the premise that you''re broken is
+    the actual problem — and chasing the fix is how the shame keeps you.
+
+
+    What this book offers instead is the slow, specific relief of recognizing the
+    difference between having a hard feeling and being a bad person. A way to name
+    the shame in the moment it tries to pass itself off as truth. Not so you can finally
+    earn your place in the room. So you can stop auditioning for it.
+
+
+    There is nothing wrong with you. There is something hurting in you. Those are
+    not the same, and you''re allowed to learn the difference.
+
+
+    Book 2 of the Present Tense Books social anxiety series.'
 keywords:
   primary:
   - social anxiety
+  - shame and self worth
+  - feeling not good enough
+  - social anxiety and self esteem
+  - fear of judgment
+  - self compassion for anxiety
   - shyness book
-  - social phobia
-  - networking anxiety
-  - introvert guide
-  - meeting anxiety
-  - public speaking fear
   secondary:
   - gen z professionals
-  - shame social anxiety
+  - toxic shame
+  - social anxiety at work
 bisac_codes:
-- SEL027000
-- SEL045000
-- PSY036000
+- SEL036000
+- SEL024000
+- SEL031000
+- SEL023000
 target_price:
   ebook_usd: 4.99
   audible_usd: 9.99
@@ -49,14 +89,12 @@ target_price:
 author_positioning:
   teacher: miki
   brand: digital_ground
+  byline_author: adam_kim
 comp_titles:
-- How to Be Yourself (Hendriksen)
-- Untamed (Doyle)
-- Self-Compassion (Neff)
-main_character_name: Robin
-main_character_lora_id: robin_dg_us
-confidence:
-  pricing: low
-  title: medium
-  comps: high
-plan_source_path: config/manga/manga_brand_series_plan.yaml
+- Self-Compassion (Kristin Neff) — reframes the inner verdict from defect to wound,
+  in warm non-clinical language.
+- Daring Greatly (Brené Brown) — the definitive trade book on shame and the cost of
+  hiding it.
+- How to Be Yourself (Ellen Hendriksen) — social-anxiety-specific and built to dissolve
+  the 'something's wrong with me' story.
+_needs_authoring: false
