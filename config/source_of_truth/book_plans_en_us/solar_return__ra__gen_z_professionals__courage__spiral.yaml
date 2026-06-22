@@ -1,5 +1,4 @@
 book_plan_schema: 1.0.0
-created_at: '2026-04-24'
 book_id: solar_return__ra__gen_z_professionals__courage__spiral
 series_plan: config/source_of_truth/series_plans_en_us/solar_return__ra__gen_z_professionals__courage.yaml
 installment_number: 2
@@ -11,37 +10,75 @@ target_word_range:
 - 9000
 - 12000
 target_audio_minutes: 70
-title: 'The Rumination Trap: How to Stop Freezing and Speak Up with Confidence'
-subtitle: A Gentle Approach to Building Courage That Meets You Where You Are
-cover_tagline: You can't stop thinking about what might happen.
+title: The Send Button and the Stories You Tell
+subtitle: For the young professional who rehearses every disaster before hitting reply
+cover_tagline: You haven't sent it yet, but you've already lived every way it goes
+  wrong.
 description:
-  short_blurb: You can't stop thinking about what might happen. stop waiting and start the thing I keep delaying.
-  long_description: |
-    You can't stop thinking about what might happen.
+  short_blurb: 'You sit down to do one brave thing and your mind runs the tape: if
+    you say it wrong, they''ll think less of you, and then the project, and then your
+    reputation, and then your whole career. By the time the spiral ends you''re too
+    exhausted to act. This is a book about the thought that becomes a thousand thoughts
+    — and how to step before the spiral finishes its sentence.'
+  long_description: 'It starts with one small risk. Ask the question in the meeting.
+    And before you''ve even opened your mouth, your mind is three towns over: if it
+    lands wrong, they''ll think you don''t belong here, and if they think that, they''ll
+    start watching your work, and if they watch your work, they''ll find the thing
+    you''re afraid is true, and then —
 
-    This book is for early-career creative / knowledge workers who I know what I need to do but I can't make myself do it. It doesn't promise to make the feeling stop. It names what's happening in language you can use the next time it happens.
 
-    Chapter by chapter, you'll work with why the mind loops back to the same thought and how to break the tightening. Not through exposure or worksheets or morning routines — through recognition, descent, and integration. The practice the book asks for can happen on a subway, between meetings, or at 3am.
+    You never asked the question. The spiral asked it for you, and answered with every
+    ending where you lose.
 
-    You'll walk away knowing what your body is doing and why it makes sense. Not fixed. Not healed in any final sense. But no longer alone with the pattern.
 
-    Book 2 of the Solar Return courage series.
+    This book is for the early-career creative or knowledge worker whose courage drowns
+    in rehearsal. You don''t freeze because you''re lazy or unwilling. You freeze
+    because by the time you''ve imagined all the ways the brave thing could go wrong,
+    you''re too wrung out to do it. One unsent message can cost you a whole night.
+    You call it overthinking. It feels more like being held hostage by your own foresight.
+
+
+    Here you''ll come to recognize the spiral as what it is: a single fear that learned
+    to multiply, a mind so good at spotting danger that it manufactures it when none
+    arrives. You''ll see how each loop feeds the next, how the descent disguises itself
+    as being careful, being responsible, being smart. You''ll learn where the spiral
+    starts in the body, the moment it could still be interrupted, and how the bravest
+    act is often the smallest — moving once, before the mind has finished its catalogue
+    of ruin.
+
+
+    This book will not teach you to think positive or to stop the thoughts. The thoughts
+    are not the enemy and you cannot out-argue them; spiral logic always wins the
+    argument, because it never has to be true to be loud. There''s nothing here to
+    optimize, no mindset to install, no final calm to achieve. The point is not to
+    win the spiral. The point is to stop waiting for it to release you, and to take
+    the step while it''s still spinning.
+
+
+    So here is your permission: you do not have to think your way to ready. You are
+    allowed to act before the loop is done, with the worst-case worlds still playing.
+    One move — one real, small move into the actual world — does what a thousand rehearsals
+    never can. It ends the spiral by leaving it behind.
+
+
+    Book 2 of the Ember & Ash Publishing courage series.'
 keywords:
   primary:
-  - courage book
-  - overcome fear
-  - take action
-  - brave self
-  - courage to change
-  - facing fear
-  - fear of failure
+  - stop overthinking everything
+  - how to stop ruminating
+  - courage to take action
+  - overthinking at work
+  - analysis paralysis help
+  - quiet the mind worry
+  - fear of making the wrong decision
   secondary:
-  - gen z professionals
-  - spiral courage
+  - young professionals self help
+  - overthinking and anxiety book
+  - courage in your twenties
 bisac_codes:
-- SEL027000
-- SEL045000
-- PSY036000
+- SEL036000
+- SEL024000
+- SEL031000
 target_price:
   ebook_usd: 4.99
   audible_usd: 9.99
@@ -49,14 +86,12 @@ target_price:
 author_positioning:
   teacher: ra
   brand: solar_return
+  byline_author: zane_vazquez
 comp_titles:
-- Daring Greatly (Brené Brown)
-- Big Magic (Gilbert)
-- The War of Art (Pressfield)
-main_character_name: Devon
-main_character_lora_id: devon_so_us
-confidence:
-  pricing: low
-  title: medium
-  comps: high
-plan_source_path: config/manga/manga_brand_series_plan.yaml
+- Don't Believe Everything You Think (Joseph Nguyen) — directly targets the runaway
+  thought-chain that keeps brave action stuck
+- The Courage to Be Disliked (Ichiro Kishimi & Fumitake Koga) — loosens the grip of
+  imagined judgment that fuels the spiral
+- Rewire Your Anxious Brain (Catherine M. Pittman & Elizabeth M. Karle) — explains
+  the rumination loop without making the reader feel broken for being in it
+_needs_authoring: false

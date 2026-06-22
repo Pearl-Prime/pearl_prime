@@ -1,5 +1,4 @@
 book_plan_schema: 1.0.0
-created_at: '2026-04-24'
 book_id: solar_return__ra__gen_z_professionals__courage__false_alarm
 series_plan: config/source_of_truth/series_plans_en_us/solar_return__ra__gen_z_professionals__courage.yaml
 installment_number: 1
@@ -11,37 +10,76 @@ target_word_range:
 - 9000
 - 12000
 target_audio_minutes: 70
-title: 'When Fear Lies to You: A Clear Path from Overwhelm to Calm'
-subtitle: How Young Professionals Are Rewriting the Rules of Building Courage
-cover_tagline: You've been bracing for something you can't name.
+title: It Only Feels Like a Cliff
+subtitle: For the early-career heart that braces for danger every time it's about
+  to be brave — when sending one email feels like stepping off an edge
+cover_tagline: Your body is sounding the alarm. There is no fire.
 description:
-  short_blurb: You've been bracing for something you can't name. stop waiting and start the thing I keep delaying.
-  long_description: |
-    You've been bracing for something you can't name.
+  short_blurb: You're about to do the brave thing — hit send, raise your hand, post
+    the work — and your whole body floods like you're in danger. You're not. This
+    is a book about the alarm that fires when there's nothing actually wrong, and
+    how to take the step anyway, while your hands are still shaking.
+  long_description: 'Your thumb is over the button. The message is fine — you''ve
+    checked it nine times. But your heart is going like you''re about to walk into
+    traffic, and some old part of you is certain that if you press send, something
+    terrible happens.
 
-    This book is for early-career creative / knowledge workers who I know what I need to do but I can't make myself do it. It doesn't promise to make the feeling stop. It names what's happening in language you can use the next time it happens.
 
-    Chapter by chapter, you'll work with the body's false-alarm system and why it keeps firing. Not through exposure or worksheets or morning routines — through recognition, descent, and integration. The practice the book asks for can happen on a subway, between meetings, or at 3am.
+    It won''t. It only feels like a cliff.
 
-    You'll walk away knowing what your body is doing and why it makes sense. Not fixed. Not healed in any final sense. But no longer alone with the pattern.
 
-    Book 1 of the Solar Return courage series.
+    This book is for the early-career creative or knowledge worker whose body treats
+    every brave move like a threat to survival. You ask for the raise and your chest
+    seizes. You pitch the idea and your voice goes thin. You apply for the thing you
+    actually want and your stomach drops as if you''ve already been caught doing something
+    wrong. You''ve started to believe you''re just not built for this — that braver
+    people don''t feel the dread you feel.
+
+
+    They do. You''ve just never been told what the dread actually is.
+
+
+    Here you''ll come to recognize the false alarm for what it is: an old warning
+    system doing its job too well, firing full-blast at an email when it was built
+    for actual danger. You''ll learn the difference between a body that is in trouble
+    and a body that is only bracing. You''ll feel where the alarm lives, what sets
+    it off, and how it tries to keep you small in the name of keeping you safe. And
+    you''ll find the one thing this brand believes more than any other — that courage
+    was never the absence of the alarm. It''s the step you take while it''s still
+    ringing.
+
+
+    This book will not make the fear stop. It won''t optimize your nervous system
+    or hand you a morning routine that finally fixes you. There is nothing here to
+    fix. The alarm is not a defect; it''s a smoke detector that loves you and can''t
+    tell toast from a house fire. You don''t need to silence it. You need to stop
+    letting it have the final word.
+
+
+    So here is your permission: you are allowed to be terrified and do it anyway.
+    You are allowed to send the email with cold hands. The shaking is not a sign you''re
+    failing. It''s the sign you''re standing at an edge that matters — and the smallest
+    step, taken before you feel ready, is still the whole of courage.
+
+
+    Book 1 of the Ember & Ash Publishing courage series.'
 keywords:
   primary:
-  - courage book
-  - overcome fear
-  - take action
-  - brave self
-  - courage to change
-  - facing fear
-  - fear of failure
+  - courage to take action
+  - overcoming fear of failure
+  - fear of taking risks
+  - build confidence at work
+  - do it scared
+  - calm before big decisions
+  - fear of starting
   secondary:
-  - gen z professionals
-  - false alarm courage
+  - young professionals self help
+  - facing fear book
+  - courage in your twenties
 bisac_codes:
-- SEL027000
-- SEL045000
-- PSY036000
+- SEL036000
+- SEL024000
+- SEL031000
 target_price:
   ebook_usd: 4.99
   audible_usd: 9.99
@@ -49,14 +87,12 @@ target_price:
 author_positioning:
   teacher: ra
   brand: solar_return
+  byline_author: zane_vazquez
 comp_titles:
-- Daring Greatly (Brené Brown)
-- Big Magic (Gilbert)
-- The War of Art (Pressfield)
-main_character_name: Devon
-main_character_lora_id: devon_so_us
-confidence:
-  pricing: low
-  title: medium
-  comps: high
-plan_source_path: config/manga/manga_brand_series_plan.yaml
+- Daring Greatly (Brené Brown) — reframes the dread of being seen as the price of
+  brave work, not a sign to retreat
+- The Courage to Be Disliked (Ichiro Kishimi & Fumitake Koga) — gives early-career
+  readers a way past the freeze of fearing others' judgment
+- When Panic Attacks (David D. Burns) — names the bodily false alarm without pathologizing
+  the person feeling it
+_needs_authoring: false

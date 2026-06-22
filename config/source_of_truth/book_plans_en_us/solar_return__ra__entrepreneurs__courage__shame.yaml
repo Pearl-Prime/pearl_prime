@@ -1,5 +1,4 @@
 book_plan_schema: 1.0.0
-created_at: '2026-04-24'
 book_id: solar_return__ra__entrepreneurs__courage__shame
 series_plan: config/source_of_truth/series_plans_en_us/solar_return__ra__entrepreneurs__courage.yaml
 installment_number: 3
@@ -11,37 +10,82 @@ target_word_range:
 - 9000
 - 12000
 target_audio_minutes: 70
-title: 'The Hidden Weight of Shame: Practical Relief for a Restless Mind'
-subtitle: ''
-cover_tagline: You're sure that if they really saw you, it would be over.
+title: The Fraud Who Built a Company
+subtitle: For the founder certain they're one mistake from being found out — meeting
+  the hidden belief that you have to be brave for two
+cover_tagline: You're not afraid of the work. You're afraid they'll see who's doing
+  it.
 description:
-  short_blurb: You're sure that if they really saw you, it would be over. stop waiting and start the thing I keep delaying.
-  long_description: |
-    You're sure that if they really saw you, it would be over.
+  short_blurb: Some part of you is sure that if anyone looked closely enough, they'd
+    see you don't belong here. This is for the founder who overworks to cover a defect
+    they can't name — who reads every brave act as a chance to finally be exposed.
+    You'll learn where that belief came from, why courage feels so costly when something
+    underneath says you're not enough, and how to act without first earning the right.
+  long_description: 'There''s a version of the story you never tell. In it, you''re
+    not a founder — you''re someone who has fooled a room full of smart people, and
+    any day now the right question will expose you for good.
 
-    This book is for founder of a small companys who I know what I need to do but I can't make myself do it. It doesn't promise to make the feeling stop. It names what's happening in language you can use the next time it happens.
 
-    Chapter by chapter, you'll work with the exposure-fear that keeps you bracing to be found out, and why it runs so deep. Not through exposure or worksheets or morning routines — through recognition, descent, and integration. The practice the book asks for can happen on a subway, between meetings, or at 3am.
+    You know the feeling. The win that should land lands hollow, because you''re already
+    braced for the moment they find out. The opportunity you don''t pursue, because
+    pursuing it means being seen, and being seen means being caught. The exhausting
+    hours you put in not to build something great but to cover the gap where you''re
+    certain something is missing in you. This is shame — not the feeling that you
+    did something wrong, but the buried belief that something is wrong with you, and
+    that courage is a privilege you have to earn before you''re allowed any.
 
-    You'll walk away knowing what your body is doing and why it makes sense. Not fixed. Not healed in any final sense. But no longer alone with the pattern.
 
-    Book 3 of the Solar Return courage series.
+    This book is for the founder who hides. The one who built a company and still
+    feels like a fraud running it. The one for whom every brave act — the pitch, the
+    price raise, the hard ask — doubles as an audition for exposure. You are not actually
+    a fraud, and you are not uniquely broken. You are carrying an old, quiet conviction
+    that you are not enough as you are, and you have been outworking it instead of
+    meeting it.
+
+
+    Chapter by chapter, you''ll come to recognize the hidden belief by name and trace
+    where it learned to live in you. You''ll feel the particular weight of having
+    to be brave for two — to summon courage and first prove you deserve to have it.
+    You''ll understand why shame makes every visible act feel dangerous, and how the
+    hiding costs you far more than the exposure ever would. And you''ll meet the cliff-edge
+    question that runs through this whole series: what is one thing you can do before
+    you feel ready? Here it means: before you feel worthy. You don''t have to earn
+    the step.
+
+
+    This book will not give you a confidence makeover or a list of affirmations to
+    repeat until you believe you''re enough. It will not declare you healed of the
+    feeling that you''re a fraud. It promises no permanent arrival at self-worth.
+    What it offers is gentler and truer: the recognition that the defect you''ve been
+    hiding was never really there, and that you can act — visibly, bravely, imperfectly
+    — without first passing a test you''ve been failing on purpose your whole life.
+
+
+    You were never the fraud. You were the one who cared so much about being found
+    out that you forgot you were the real thing all along.
+
+
+    Come out of hiding by inches. The fire under the ash was always yours.
+
+
+    Book 3 of the Ember & Ash Publishing courage series.'
 keywords:
   primary:
-  - courage book
-  - overcome fear
-  - take action
-  - brave self
-  - courage to change
-  - facing fear
-  - fear of failure
+  - imposter syndrome
+  - courage for entrepreneurs
+  - feeling like a fraud at work
+  - overcoming shame and self-doubt
+  - founder self-worth
+  - fear of being exposed
+  - not feeling good enough
   secondary:
-  - entrepreneurs
-  - shame courage
+  - imposter syndrome entrepreneurs
+  - healing shame book
+  - self-doubt in business
 bisac_codes:
-- BUS025000
-- SEL027000
-- BUS081000
+- SEL031000
+- BUS046000
+- SEL016000
 target_price:
   ebook_usd: 4.99
   audible_usd: 9.99
@@ -49,14 +93,12 @@ target_price:
 author_positioning:
   teacher: ra
   brand: solar_return
+  byline_author: zane_vazquez
 comp_titles:
-- Daring Greatly (Brené Brown)
-- Big Magic (Gilbert)
-- The War of Art (Pressfield)
-main_character_name: Rohan
-main_character_lora_id: rohan_so_us
-confidence:
-  pricing: low
-  title: medium
-  comps: high
-plan_source_path: config/manga/manga_brand_series_plan.yaml
+- The Gifts of Imperfection (Brené Brown) — meets shame and the not-enough belief
+  with worthiness rather than performance
+- The Mountain Is You (Brianna Wiest) — names the self-sabotage that hides a buried
+  sense of unworthiness
+- Playing Big (Tara Mohr) — speaks to the capable person convinced they'll be found
+  out the moment they step forward
+_needs_authoring: false

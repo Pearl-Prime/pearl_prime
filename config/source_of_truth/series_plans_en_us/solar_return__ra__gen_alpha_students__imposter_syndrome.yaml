@@ -1,0 +1,77 @@
+series_plan_schema: 1.0.0
+locale: en_US
+book_id_prefix: solar_return__ra__gen_alpha_students__imposter_syndrome
+brand: solar_return
+teacher: ra
+persona: gen_alpha_students
+topic: imposter_syndrome
+byline_author: tara_oakes
+arc:
+  installment_1:
+    book_id: solar_return__ra__gen_alpha_students__imposter_syndrome__shame
+    engine: shame
+    master_arc: config/source_of_truth/master_arcs/gen_alpha_students__imposter_syndrome__shame__F006.yaml
+    duration: standard_book_60min
+  installment_2:
+    book_id: solar_return__ra__gen_alpha_students__imposter_syndrome__comparison
+    engine: comparison
+    master_arc: config/source_of_truth/master_arcs/gen_alpha_students__imposter_syndrome__comparison__F006.yaml
+    duration: standard_book_60min
+reader_promise_family: For the student who is quietly certain they don't belong here
+  — that the grades are luck, the praise is a misread, and any day now someone will
+  notice. These books don't hype you up or hand you a fix. They sit beside the part
+  of you that feels like a fraud and, without forcing anything, let a little warmth
+  back into it — until belonging stops being something you have to earn at full volume.
+bestseller_hook_family: ''
+emotional_engine: imposter_syndrome_recognition
+comp_series:
+- The Subtle Art series / Mark Manson (Mark Manson) — plainspoken anti-hype self-help
+  that refuses to cheerlead, which is the exact register Gen Alpha students trust
+- Unfuck Yourself series (Gary John Bishop) — direct, warm-but-fierce talk to the
+  inner critic without grindset gloss, a kindred 'voice in the room' tone
+- The Body Keeps the Score and its readalikes (Bessel van der Kolk) — the somatic,
+  you-are-not-broken lineage these books draw on for the felt, body-first treatment
+  of shame
+platform_strategy:
+  primary:
+  - kdp_ebook
+  - audible
+  secondary:
+  - apple_books
+  - google_play
+  - spotify_audiobooks
+  launch_platform: kdp_ebook
+  cadence:
+    release_spacing_days: 14
+    max_books_per_brand_per_month: 2
+reader_avatar:
+  age: '16 to 22 — older Gen Alpha and the seam where it meets Gen Z: late high school,
+    AP and IB classes, college applications, first or second year of university'
+  where_they_are: 'It''s almost 1am and the assignment is finished — actually good,
+    maybe their best — but they''re rereading the rubric a fourth time, certain they''ve
+    missed the obvious thing everyone else saw instantly. A group chat is lit up with
+    people who ''barely studied.'' Their phone glows with someone''s acceptance post.
+    They got in too, and still the thought won''t leave: they let me in by mistake,
+    and the moment I open my mouth in seminar they''ll all know.'
+  what_they_need: To be met as already enough — not coached, not optimized, not told
+    to fake confidence until it's real. A voice that names the fraud-feeling out loud
+    so it stops running in the dark, and lets them believe the work was theirs and
+    the seat is theirs, without having to prove it one more time.
+  what_they_avoid: Rah-rah 'you've got this' motivation, grindset and hustle TikToks,
+    'just manifest your A,' productivity-bro optimization, toxic positivity, and any
+    adult who turns their fear into a five-step morning routine. Anything performative
+    that mistakes noise for warmth.
+series_voice_markers:
+  register: warm, emboldening, quietly fierce — the voice of someone a few years ahead
+    who has felt exactly this and pulls up a chair instead of a whiteboard; affirming
+    without hype, tending the ember rather than pushing the student; never clinical,
+    never a coach, never hustle
+  sentence_rhythm: second person throughout; mostly short, breath-paced sentences
+    that land softly, opened up by the occasional longer line that lets a feeling
+    unfold; plainspoken, contemporary, unhurried — built to be read at 1am, not performed
+    at a pep rally
+  metaphor_family: ember and ash, banked fire and slow rekindling, dawn and first
+    light, warmth returning to cold hands, thresholds and the doorway you're standing
+    in, the turning of the year, what survives the burn and grows back green — never
+    machinery, military, productivity, or biohacking
+_needs_authoring: false
