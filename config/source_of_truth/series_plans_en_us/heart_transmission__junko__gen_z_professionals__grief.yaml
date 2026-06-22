@@ -1,0 +1,71 @@
+series_plan_schema: 1.0.0
+locale: en_US
+book_id_prefix: heart_transmission__junko__gen_z_professionals__grief
+brand: heart_transmission
+teacher: junko
+persona: gen_z_professionals
+topic: grief
+byline_author: bea_voss
+arc:
+  installment_1:
+    book_id: heart_transmission__junko__gen_z_professionals__grief__grief
+    engine: grief
+    master_arc: config/source_of_truth/master_arcs/gen_z_professionals__grief__grief__F006.yaml
+    duration: standard_book_60min
+  installment_2:
+    book_id: heart_transmission__junko__gen_z_professionals__grief__watcher
+    engine: watcher
+    master_arc: config/source_of_truth/master_arcs/gen_z_professionals__grief__watcher__F006.yaml
+    duration: standard_book_60min
+reader_promise_family: You will not be asked to be done with what you've lost. Here,
+  grief is met the way one heart meets another in a quiet room — without a timeline,
+  without a fix, without being told to bounce back. Just a steady presence beside
+  you while you carry what you carry, and the slow permission to let your hands open
+  when they're ready.
+bestseller_hook_family: ''
+emotional_engine: grief_recognition
+comp_series:
+- The Grief Series / It's OK That You're Not OK (Megan Devine) — refuses the fix-it
+  model of grief and sits with loss honestly, the same permission this series offers
+  a younger reader
+- How to Carry What Can't Be Fixed (Megan Devine) — a companion-not-coach voice for
+  the unfixable, mirroring this series' refusal of timelines and stages
+- The Year of Magical Thinking (Joan Didion) — interior, unflinching first-person
+  witness to loss that treats grief as something lived rather than solved
+platform_strategy:
+  primary:
+  - kdp_ebook
+  - audible
+  secondary:
+  - apple_books
+  - google_play
+  - spotify_audiobooks
+  launch_platform: kdp_ebook
+  cadence:
+    release_spacing_days: 14
+    max_books_per_brand_per_month: 2
+reader_avatar:
+  age: 23 to 31
+  where_they_are: It's a Tuesday and you're back at your desk three weeks after the
+    funeral, replying to a Slack thread with a thumbs-up emoji while something in
+    your chest stays very still. Everyone has stopped asking how you're doing. The
+    casserole stage is over. You've used up the bereavement days HR allotted, and
+    now you're supposed to be a person again — answering, performing, smiling on the
+    standup camera — while you carry a hole nobody can see.
+  what_they_need: To be told that what they're feeling is grief, that it has no deadline,
+    and that they are allowed to keep loving someone who is gone. A voice close enough
+    to sit with the absence instead of trying to talk them out of it.
+  what_they_avoid: Five-stage frameworks that promise a finish line, 'everything happens
+    for a reason' platitudes, productivity-flavored healing, toxic positivity, and
+    anyone who treats their loss as a problem to optimize away.
+series_voice_markers:
+  register: intimate, heart-to-heart, quietly luminous; the unhurried voice of someone
+    who has sat with loss and pulled a chair close to yours, never a clinician and
+    never a coach
+  sentence_rhythm: unhurried and breath-paced; short sentences that land like a hand
+    on the shoulder, opening into longer ones that hold a single image — then a pause,
+    the way a room goes quiet after someone leaves it
+  metaphor_family: the open hand, warmth passed between two people, light carried
+    hand to hand, the empty chair, what remains in a room after a presence is gone,
+    breath shared in a quiet space — never machinery, military, or productivity
+_needs_authoring: false

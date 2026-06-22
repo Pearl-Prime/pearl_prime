@@ -1,0 +1,76 @@
+series_plan_schema: 1.0.0
+locale: en_US
+book_id_prefix: heart_transmission__junko__gen_z_professionals__courage
+brand: heart_transmission
+teacher: junko
+persona: gen_z_professionals
+topic: courage
+byline_author: jonah_pryce
+arc:
+  installment_1:
+    book_id: heart_transmission__junko__gen_z_professionals__courage__false_alarm
+    engine: false_alarm
+    master_arc: config/source_of_truth/master_arcs/gen_z_professionals__courage__false_alarm__F006.yaml
+    duration: standard_book_60min
+  installment_2:
+    book_id: heart_transmission__junko__gen_z_professionals__courage__spiral
+    engine: spiral
+    master_arc: config/source_of_truth/master_arcs/gen_z_professionals__courage__spiral__F006.yaml
+    duration: standard_book_60min
+  installment_3:
+    book_id: heart_transmission__junko__gen_z_professionals__courage__shame
+    engine: shame
+    master_arc: config/source_of_truth/master_arcs/gen_z_professionals__courage__shame__F006.yaml
+    duration: standard_book_60min
+reader_promise_family: You don't have to feel fearless to do the brave thing. Courage
+  isn't the absence of fear — it's the heart staying open while it's afraid. This
+  series meets you in the exact moment your nerve fails and shows you that what you
+  call cowardice is just a frightened part of you waiting to be met with warmth instead
+  of force.
+bestseller_hook_family: ''
+emotional_engine: courage_recognition
+comp_series:
+- The Gifts of Imperfection (Brené Brown) — meets the reader's fear and shame with
+  warmth instead of correction, the same heart-to-heart register
+- Radical Acceptance (Tara Brach) — pairs unflinching tenderness toward frightened
+  parts of the self with permission rather than fixing
+- Untamed (Glennon Doyle) — speaks straight to a young person's nerve in an intimate,
+  unguarded voice that refuses hustle and performance
+platform_strategy:
+  primary:
+  - kdp_ebook
+  - audible
+  secondary:
+  - apple_books
+  - google_play
+  - spotify_audiobooks
+  launch_platform: kdp_ebook
+  cadence:
+    release_spacing_days: 14
+    max_books_per_brand_per_month: 2
+reader_avatar:
+  age: early-to-mid twenties; first or second real job out of school
+  where_they_are: It's 8:52am and you're sitting in your car in the parking garage,
+    hand on the door handle, watching coworkers walk in like it's nothing. You rehearsed
+    what you'd say in the meeting all weekend. Now your chest is tight and you're
+    telling yourself you'll speak up next time — the same next time you promised last
+    week.
+  what_they_need: permission to be afraid and act anyway; a warm, non-shaming way
+    to understand the part of them that freezes, hedges, and stays small; proof that
+    courage is something quietly built, not a personality trait other people were
+    born with
+  what_they_avoid: alpha-grindset bravado, 'just be confident' platitudes, fake-it-til-you-make-it
+    performance, anything that treats their fear as a flaw to crush rather than a
+    frightened part of them to understand
+series_voice_markers:
+  register: intimate, heart-to-heart, quietly luminous — wisdom passed directly from
+    one heart to another, as if spoken close in a room with the door shut; warm and
+    unhurried; never clinical, never preachy, never hustle
+  sentence_rhythm: mostly short, breath-paced sentences that land softly, then occasionally
+    open into one longer line that holds the reader; plain words; second person throughout;
+    pauses where a kinder voice would pause
+  metaphor_family: the heart and what passes between two of them, light passed hand
+    to hand, the warmth of presence, the unguarded moment, what is transmitted without
+    words, the open hand, breath shared in a quiet room — never machinery, military,
+    productivity, or biohacking
+_needs_authoring: false

@@ -1,0 +1,79 @@
+series_plan_schema: 1.0.0
+locale: en_US
+book_id_prefix: heart_transmission__junko__working_parents__courage
+brand: heart_transmission
+teacher: junko
+persona: working_parents
+topic: courage
+byline_author: jonah_pryce
+arc:
+  installment_1:
+    book_id: heart_transmission__junko__working_parents__courage__false_alarm
+    engine: false_alarm
+    master_arc: config/source_of_truth/master_arcs/working_parents__courage__false_alarm__F006.yaml
+    duration: standard_book_60min
+  installment_2:
+    book_id: heart_transmission__junko__working_parents__courage__spiral
+    engine: spiral
+    master_arc: config/source_of_truth/master_arcs/working_parents__courage__spiral__F006.yaml
+    duration: standard_book_60min
+  installment_3:
+    book_id: heart_transmission__junko__working_parents__courage__shame
+    engine: shame
+    master_arc: config/source_of_truth/master_arcs/working_parents__courage__shame__F006.yaml
+    duration: standard_book_60min
+reader_promise_family: 'For the working parent who keeps waiting to feel ready: a
+  hand held out in the dark that tells you the bracing, the racing, and the hiding
+  are not proof you lack courage — they are the very edge where courage begins. We
+  will not make the fear go away. We will sit close to it with you until you can take
+  the one small step you have been postponing, and find you were braver than you knew.'
+bestseller_hook_family: ''
+emotional_engine: courage_recognition
+comp_series:
+- The Let Them Theory / The High 5 Habit (Mel Robbins) — same reader reaching for
+  the courage to act before they feel ready, but warmer and less performance-driven
+- The Gifts of Imperfection series (Brené Brown) — shares the courage-and-vulnerability
+  core and the permission to be seen as you are, rendered here for the specific overload
+  of parenting
+- Burnout & related Nagoski work (Emily & Amelia Nagoski) — speaks to the same depleted,
+  over-functioning reader, but turned toward courage and the body's alarm rather than
+  stress cycles alone
+platform_strategy:
+  primary:
+  - kdp_ebook
+  - audible
+  secondary:
+  - apple_books
+  - google_play
+  - spotify_audiobooks
+  launch_platform: kdp_ebook
+  cadence:
+    release_spacing_days: 14
+    max_books_per_brand_per_month: 2
+reader_avatar:
+  age: 30s to mid-40s
+  where_they_are: It's 9:40pm. The dishes are done, the kids are finally down, and
+    you're sitting on the edge of the bed with your phone in your hand, rehearsing
+    the conversation you've needed to have for weeks — with your manager, your partner,
+    your own mother. You type it. You delete it. Your heart is going like you're about
+    to step off something. Tomorrow, you tell yourself. When things are calmer. When
+    you feel ready.
+  what_they_need: To be told, gently and without a single hack, that the pounding
+    heart is not a stop sign — that you can act while afraid, that one true small
+    step counts more than the brave version you keep waiting to become, and that needing
+    courage does not mean you are failing at this.
+  what_they_avoid: Pep talks. 'Just be confident' advice. Fearless-leader posturing
+    and motivational shouting. Anything that treats their fear as a flaw to fix or
+    their tender, overloaded heart as a performance to optimize.
+series_voice_markers:
+  register: intimate, heart-to-heart, quietly luminous — the voice of someone who
+    has sat on that same edge of the bed and is speaking to you close, warm and unhurried;
+    never clinical, never a coach barking from the sideline
+  sentence_rhythm: unhurried and breath-paced; short, steadying sentences set beside
+    longer ones that open like a held door; turns on a soft second-person address
+    and lands often on a single quiet line
+  metaphor_family: the edge and the one small step before you feel ready; a hand held
+    out and taken in the dark; light passed from one palm to another; the unguarded
+    moment; the warmth of presence in a quiet room; the open hand — never machinery,
+    military, drill, or productivity
+_needs_authoring: false

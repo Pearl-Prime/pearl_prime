@@ -1,0 +1,68 @@
+series_plan_schema: 1.0.0
+locale: en_US
+book_id_prefix: heart_transmission__junko__gen_z_professionals__self_worth
+brand: heart_transmission
+teacher: junko
+persona: gen_z_professionals
+topic: self_worth
+byline_author: silas_bramble
+arc:
+  installment_1:
+    book_id: heart_transmission__junko__gen_z_professionals__self_worth__shame
+    engine: shame
+    master_arc: config/source_of_truth/master_arcs/gen_z_professionals__self_worth__shame__F006.yaml
+    duration: standard_book_60min
+  installment_2:
+    book_id: heart_transmission__junko__gen_z_professionals__self_worth__comparison
+    engine: comparison
+    master_arc: config/source_of_truth/master_arcs/gen_z_professionals__self_worth__comparison__F006.yaml
+    duration: standard_book_60min
+reader_promise_family: You will not be coached into worthiness or taught to earn it.
+  You'll be sat with, close, until you remember it was never in question — that the
+  value you've been trying to prove was already yours, quietly, the whole time.
+bestseller_hook_family: ''
+emotional_engine: self_worth_recognition
+comp_series:
+- The Gifts of Imperfection (Brené Brown) — the foundational text on worthiness over
+  performance, written warm rather than clinical, for the same reader who overworks
+  to hide a felt defect
+- Radical Acceptance (Tara Brach) — meets self-judgment with tenderness instead of
+  technique, the closest cousin in register to this series' heart-to-heart voice
+- How to Do the Work (Nicole LePera) — the Gen Z self-worth shelf-mate this reader
+  already owns, sharing the early-career audience while this series trades its program
+  for presence
+platform_strategy:
+  primary:
+  - kdp_ebook
+  - audible
+  secondary:
+  - apple_books
+  - google_play
+  - spotify_audiobooks
+  launch_platform: kdp_ebook
+  cadence:
+    release_spacing_days: 14
+    max_books_per_brand_per_month: 2
+reader_avatar:
+  age: early-to-mid twenties, two or three years into the first real job
+  where_they_are: It's a Tuesday night and you're still at your laptop, rereading
+    the Slack message you sent four hours ago, certain you sounded stupid. Everyone
+    replied with a thumbs-up. You believe none of them. The work is fine. You are
+    sure, somewhere under the ribs, that you are not.
+  what_they_need: to feel, even once, that their worth doesn't depend on the next
+    review, the next launch, the next person's approval — and to be met there gently,
+    not corrected
+  what_they_avoid: self-help that turns the heart into a project — confidence drills,
+    worthiness checklists, 'just believe in yourself' affirmations, and any voice
+    that performs healing instead of offering it
+series_voice_markers:
+  register: intimate, heart-to-heart, quietly luminous; the warmth of someone sitting
+    close in a softly lit room, speaking to you and only you — never the brightness
+    of a stage, never the cool of a clinic
+  sentence_rhythm: unhurried and breath-paced; short tender lines that land and rest,
+    opening into one longer sentence when something needs to be held, then returning
+    to quiet
+  metaphor_family: the heart and what passes between two of them — light handed from
+    one palm to another, a held gaze in an unguarded moment, warmth shared in a quiet
+    room, the open hand, what is transmitted without a single word
+_needs_authoring: false

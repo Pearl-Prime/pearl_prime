@@ -1,0 +1,71 @@
+series_plan_schema: 1.0.0
+locale: en_US
+book_id_prefix: heart_transmission__junko__gen_z_professionals__overthinking
+brand: heart_transmission
+teacher: junko
+persona: gen_z_professionals
+topic: overthinking
+byline_author: otis_iverson
+arc:
+  installment_1:
+    book_id: heart_transmission__junko__gen_z_professionals__overthinking__false_alarm
+    engine: false_alarm
+    master_arc: config/source_of_truth/master_arcs/gen_z_professionals__overthinking__false_alarm__F006.yaml
+    duration: standard_book_60min
+  installment_2:
+    book_id: heart_transmission__junko__gen_z_professionals__overthinking__spiral
+    engine: spiral
+    master_arc: config/source_of_truth/master_arcs/gen_z_professionals__overthinking__spiral__F006.yaml
+    duration: standard_book_60min
+  installment_3:
+    book_id: heart_transmission__junko__gen_z_professionals__overthinking__watcher
+    engine: watcher
+    master_arc: config/source_of_truth/master_arcs/gen_z_professionals__overthinking__watcher__F006.yaml
+    duration: standard_book_60min
+reader_promise_family: You don't have to think your way to safety. There is a quieter
+  way to meet a busy mind — not by silencing it, but by sitting close to it until
+  it softens. Wisdom passed gently from one heart to another, for the young professional
+  whose mind never clocks out.
+bestseller_hook_family: ''
+emotional_engine: overthinking_recognition
+comp_series:
+- Unwinding Anxiety (Judson Brewer) — gently retrains the worry habit without shaming
+  the worrier, the same met-not-managed spirit
+- The Untethered Soul (Michael A. Singer) — teaches you to sit beside the inner voice
+  instead of obeying it, in a warm contemplative register
+- How to Do Nothing (Jenny Odell) — speaks to a young, over-optimized generation about
+  reclaiming attention from the grind, without hustle
+platform_strategy:
+  primary:
+  - kdp_ebook
+  - audible
+  secondary:
+  - apple_books
+  - google_play
+  - spotify_audiobooks
+  launch_platform: kdp_ebook
+  cadence:
+    release_spacing_days: 14
+    max_books_per_brand_per_month: 2
+reader_avatar:
+  age: early-to-mid twenties, three years into a first real career
+  where_they_are: It's 11:47pm on a Tuesday and you're rereading a Slack message you
+    already sent, hunting for the tone that might have ruined everything. The laptop
+    is closed but your mind has it open. Tomorrow's standup is replaying before it
+    has even happened.
+  what_they_need: permission to stop interrogating themselves, and a warmer relationship
+    with the part of them that won't stop checking — to feel met instead of managed
+  what_they_avoid: cold technique, 'just stop thinking' advice, productivity-coded
+    mindfulness, performative calm, and anyone who treats a tender mind like a bug
+    to patch
+series_voice_markers:
+  register: intimate, heart-to-heart, quietly luminous; the voice of someone who has
+    sat where you're sitting and stayed in the room with you — warm, unhurried, never
+    clinical, never preachy, never hustle
+  sentence_rhythm: short lines that land softly, then a longer breath that opens;
+    the cadence of someone speaking close in a quiet room, leaving space between thoughts
+    the way you'd leave space for someone to cry
+  metaphor_family: the heart and what passes between two of them, light passed hand
+    to hand, the warmth of presence, the unguarded moment, an open palm, breath shared
+    in a still room — never machinery, military, productivity, or biohacking
+_needs_authoring: false
