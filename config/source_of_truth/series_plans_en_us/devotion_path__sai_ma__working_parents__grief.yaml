@@ -1,0 +1,71 @@
+series_plan_schema: 1.0.0
+locale: en_US
+book_id_prefix: devotion_path__sai_ma__working_parents__grief
+brand: devotion_path
+teacher: sai_ma
+persona: working_parents
+topic: grief
+byline_author: theo_estes
+arc:
+  installment_1:
+    book_id: devotion_path__sai_ma__working_parents__grief__grief
+    engine: grief
+    master_arc: config/source_of_truth/master_arcs/working_parents__grief__grief__F006.yaml
+    duration: standard_book_60min
+  installment_2:
+    book_id: devotion_path__sai_ma__working_parents__grief__watcher
+    engine: watcher
+    master_arc: config/source_of_truth/master_arcs/working_parents__grief__watcher__F006.yaml
+    duration: standard_book_60min
+reader_promise_family: You do not have to be done grieving to be held. This series
+  sits beside the working parent carrying loss through school runs and staff meetings,
+  and asks nothing of you but to set the cup down for a moment. No timeline, no closure,
+  no gratitude demanded before its time — only the slow grace of being poured out
+  and, in the dark, quietly refilled.
+bestseller_hook_family: ''
+emotional_engine: grief_recognition
+comp_series:
+- It's OK That You're Not OK (Megan Devine) — refuses the closure script and meets
+  grief as something to be tended, not cured, in the same unhurried register
+- The Wild Edge of Sorrow (Francis Weller) — frames grief as sacred and communal rather
+  than a private failure, sharing this series' reverent-without-dogma posture
+- Bittersweet (Susan Cain) — honors longing and loss as a doorway to meaning for readers
+  who reject toxic positivity, a close tonal sibling for the devotional reader
+platform_strategy:
+  primary:
+  - kdp_ebook
+  - audible
+  secondary:
+  - apple_books
+  - google_play
+  - spotify_audiobooks
+  launch_platform: kdp_ebook
+  cadence:
+    release_spacing_days: 14
+    max_books_per_brand_per_month: 2
+reader_avatar:
+  age: 34-50
+  where_they_are: It is 7:14 on a Tuesday morning and you are buttering toast that
+    no one will finish, and the grief arrives the way it always does now — sideways,
+    between the lunchbox and the car keys. You smile at your child. You answer the
+    email. You carry it all day in a body that no one at work knows is broken open,
+    and you do not have ten minutes alone until the house is finally dark.
+  what_they_need: To be met exactly where they are — mid-task, mid-loss, mid-love
+    — without being told to heal faster, find the lesson, or perform okayness for
+    the people who depend on them. A voice that lets the grief be love with nowhere
+    to go, and lets that be enough for tonight.
+  what_they_avoid: Spiritual bypassing, 'everything happens for a reason,' religious
+    dogma, toxic positivity, five-step closure plans, anyone who rushes grief or asks
+    for gratitude before its time, and any book that treats a grieving parent as a
+    problem to be optimized.
+series_voice_markers:
+  register: tender, devotional, spacious; reverent without dogma; the voice of someone
+    who has sat in the same dark kitchen and is not afraid of your grief
+  sentence_rhythm: unhurried and breath-paced; short declaratives that land like a
+    hand on the shoulder, opening into longer lines that hold the ache, then resting
+    again in white space — never clipped, never rushed
+  metaphor_family: the open vessel, the cup emptied and refilled in the dark, grief
+    as love with nowhere to go, hands that finally open, the well that fills when
+    no one is watching, the sacred ordinary of buttered toast and bedtime, being held
+    and poured out and held again
+_needs_authoring: false

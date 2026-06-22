@@ -1,0 +1,82 @@
+series_plan_schema: 1.0.0
+locale: en_US
+book_id_prefix: devotion_path__sai_ma__healthcare_rns__boundaries
+brand: devotion_path
+teacher: sai_ma
+persona: healthcare_rns
+topic: boundaries
+byline_author: dora_alder
+arc:
+  installment_1:
+    book_id: devotion_path__sai_ma__healthcare_rns__boundaries__false_alarm
+    engine: false_alarm
+    master_arc: config/source_of_truth/master_arcs/healthcare_rns__boundaries__false_alarm__F006.yaml
+    duration: standard_book_60min
+  installment_2:
+    book_id: devotion_path__sai_ma__healthcare_rns__boundaries__shame
+    engine: shame
+    master_arc: config/source_of_truth/master_arcs/healthcare_rns__boundaries__shame__F006.yaml
+    duration: standard_book_60min
+  installment_3:
+    book_id: devotion_path__sai_ma__healthcare_rns__boundaries__comparison
+    engine: comparison
+    master_arc: config/source_of_truth/master_arcs/healthcare_rns__boundaries__comparison__F006.yaml
+    duration: standard_book_60min
+reader_promise_family: 'For the nurse who has poured herself out for everyone but
+  herself: a tender, unhurried companion that treats your boundarylessness not as
+  a flaw to fix but as a wound to be held. No scripts to memorize, no assertiveness
+  drills, no being told to ''just say no.'' Only the slow grace of learning that you
+  are an open vessel meant to be refilled, not a well that owes the world every last
+  drop.'
+bestseller_hook_family: ''
+emotional_engine: boundaries_recognition
+comp_series:
+- The Untethered Soul series (Michael A. Singer) — devotional, spacious interiority
+  that meets the reader in surrender rather than strategy
+- Radical Acceptance and the wider Tara Brach catalog — holds woundedness with reverence
+  instead of rushing to fix it
+- The Book of Boundaries (Melissa Urban) and adjacent over-giver self-help — boundary-centered
+  work, but here softened into a tender, non-prescriptive register
+platform_strategy:
+  primary:
+  - kdp_ebook
+  - audible
+  secondary:
+  - apple_books
+  - google_play
+  - spotify_audiobooks
+  launch_platform: kdp_ebook
+  cadence:
+    release_spacing_days: 14
+    max_books_per_brand_per_month: 2
+reader_avatar:
+  age: 28 to 52, a registered nurse, often the one everyone leans on at home too
+  where_they_are: 'It is 7:14pm, your shift ended at 7, and you are still charting
+    at the nurses'' station because a colleague asked you to cover one more thing
+    and you heard yourself say yes before you even felt your own exhaustion. Your
+    feet ache. Your phone has three texts asking when you''ll be home. You haven''t
+    eaten. And somewhere underneath it all is a quiet, frightening thought you push
+    back down: if I ever stopped giving, would there be anything left of me at all?'
+  what_they_need: Permission to draw a line without bracing for punishment; to feel
+    the cost of years of overgiving without being shamed for it; to discover that
+    a boundary is not a wall against love but the shape that lets love stay; to be
+    met as a person and not a function.
+  what_they_avoid: Corporate 'self-care' that adds one more task; assertiveness scripts
+    that feel like armor; spiritual bypassing and 'everything happens for a reason';
+    toxic positivity; anything that frames her depletion as a personal failing or
+    rushes her toward gratitude before she's allowed to grieve what the giving has
+    cost.
+series_voice_markers:
+  register: tender, devotional, spacious; a voice of sacred surrender and being held;
+    reverent without dogma; sits inside a nurse's specific exhaustion without diagnosing
+    it; never clinical, never preachy, never hustle
+  sentence_rhythm: unhurried and breathing; short declarative lines that land like
+    a hand on the shoulder, opening into longer, flowing sentences that pour and refill;
+    pauses where grief lives; cadence that slows the reader's pulse rather than quickening
+    it
+  metaphor_family: the open vessel emptied and refilled; the door and the threshold
+    you keep crossing for everyone but yourself; hands that finally open; the cup
+    poured out; the well that refills only in the dark; grief as love with nowhere
+    left to go; the line drawn not as a wall but as the banks that let the river be
+    a river
+_needs_authoring: false

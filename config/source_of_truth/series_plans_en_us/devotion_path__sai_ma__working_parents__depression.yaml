@@ -1,0 +1,75 @@
+series_plan_schema: 1.0.0
+locale: en_US
+book_id_prefix: devotion_path__sai_ma__working_parents__depression
+brand: devotion_path
+teacher: sai_ma
+persona: working_parents
+topic: depression
+byline_author: suki_lowell
+arc:
+  installment_1:
+    book_id: devotion_path__sai_ma__working_parents__depression__overwhelm
+    engine: overwhelm
+    master_arc: config/source_of_truth/master_arcs/working_parents__depression__overwhelm__F006.yaml
+    duration: standard_book_60min
+  installment_2:
+    book_id: devotion_path__sai_ma__working_parents__depression__grief
+    engine: grief
+    master_arc: config/source_of_truth/master_arcs/working_parents__depression__grief__F006.yaml
+    duration: standard_book_60min
+  installment_3:
+    book_id: devotion_path__sai_ma__working_parents__depression__watcher
+    engine: watcher
+    master_arc: config/source_of_truth/master_arcs/working_parents__depression__watcher__F006.yaml
+    duration: standard_book_60min
+reader_promise_family: You will not be rushed, fixed, or asked to be grateful before
+  your time. You will be met in the depletion exactly as you are — a working parent
+  carrying a depression no one around you can see — and held there, gently, until
+  something in you remembers it is allowed to open and be refilled.
+bestseller_hook_family: ''
+emotional_engine: depression_recognition
+comp_series:
+- The Body Keeps the Score companion readers (Bessel van der Kolk) — why depletion
+  lives in the body, met without clinical distance
+- How to Keep House While Drowning (KC Davis) — care tasks reframed with radical gentleness
+  for the parent who has nothing left
+- When Things Fall Apart and the Pema Chödrön shelf (Pema Chödrön) — staying tenderly
+  with what hurts instead of fixing or fleeing it
+platform_strategy:
+  primary:
+  - kdp_ebook
+  - audible
+  secondary:
+  - apple_books
+  - google_play
+  - spotify_audiobooks
+  launch_platform: kdp_ebook
+  cadence:
+    release_spacing_days: 14
+    max_books_per_brand_per_month: 2
+reader_avatar:
+  age: 30s to mid-40s
+  where_they_are: It is 9:47pm. The kids are finally down, the dishwasher is humming,
+    and you are sitting on the edge of the bed with one shoe still on, staring at
+    the ceiling, unable to make yourself stand up and finish the night — flat, hollowed
+    out, going through the motions of a life you love and cannot feel.
+  what_they_need: To be told, by a voice that isn't trying to cheer them up, that
+    the numbness is not a character flaw and the love did not leave — and to be given
+    permission to set the weight down for one honest minute without it meaning they've
+    failed their family.
+  what_they_avoid: Spiritual bypassing, 'everything happens for a reason,' gratitude
+    lists demanded too soon, hustle-culture self-improvement, clinical detachment,
+    and any voice that mistakes their exhaustion for ingratitude or their flatness
+    for not caring enough.
+series_voice_markers:
+  register: tender, devotional, spacious; reverent without dogma; the voice of someone
+    who sits beside you in the dark kitchen and does not flinch at the flatness or
+    rush the grief — never clinical, never preachy, never hustle
+  sentence_rhythm: slow, breathing sentences with room between them; short declaratives
+    that land like a hand on the shoulder, then a longer line that opens out; pauses
+    where a fix would normally go
+  metaphor_family: the open vessel and the cup emptied; being held, poured out, and
+    refilled in the dark; grief as love with nowhere to go; the well that fills again
+    when no one is watching; the sacred ordinary of a child's hand, a warm mug, an
+    unmade bed; hands that finally open
+_needs_authoring: false

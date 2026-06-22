@@ -1,0 +1,78 @@
+series_plan_schema: 1.0.0
+locale: en_US
+book_id_prefix: devotion_path__sai_ma__healthcare_rns__compassion_fatigue
+brand: devotion_path
+teacher: sai_ma
+persona: healthcare_rns
+topic: compassion_fatigue
+byline_author: quinn_bennett
+arc:
+  installment_1:
+    book_id: devotion_path__sai_ma__healthcare_rns__compassion_fatigue__overwhelm
+    engine: overwhelm
+    master_arc: config/source_of_truth/master_arcs/healthcare_rns__compassion_fatigue__overwhelm__F006.yaml
+    duration: standard_book_60min
+  installment_2:
+    book_id: devotion_path__sai_ma__healthcare_rns__compassion_fatigue__grief
+    engine: grief
+    master_arc: config/source_of_truth/master_arcs/healthcare_rns__compassion_fatigue__grief__F006.yaml
+    duration: standard_book_60min
+  installment_3:
+    book_id: devotion_path__sai_ma__healthcare_rns__compassion_fatigue__watcher
+    engine: watcher
+    master_arc: config/source_of_truth/master_arcs/healthcare_rns__compassion_fatigue__watcher__F006.yaml
+    duration: standard_book_60min
+reader_promise_family: You do not have to stop caring to stop drowning in it. This
+  series sits beside the nurse whose compassion has been poured out faster than anyone
+  ever refilled it — and offers not a fix or a hack, but a way to be held while the
+  well slowly fills again in the dark.
+bestseller_hook_family: ''
+emotional_engine: compassion_fatigue_recognition
+comp_series:
+- The Heart of Caring (collected nurse essays) — When Breath Becomes Air-adjacent
+  reflective writing that honors the spiritual weight of bedside work without prescribing
+  optimization
+- How to Keep House While Drowning (KC Davis) — same permission-first, shame-dissolving
+  register for people running on empty
+- It's OK That You're Not OK (Megan Devine) — the gold standard for refusing to rush
+  grief or demand premature gratitude, which this series extends to caregivers
+platform_strategy:
+  primary:
+  - kdp_ebook
+  - audible
+  secondary:
+  - apple_books
+  - google_play
+  - spotify_audiobooks
+  launch_platform: kdp_ebook
+  cadence:
+    release_spacing_days: 14
+    max_books_per_brand_per_month: 2
+reader_avatar:
+  age: 28-52, a registered nurse with anywhere from three to twenty-five years at
+    the bedside
+  where_they_are: It is the end of a twelve-hour shift that became fourteen. She is
+    sitting in her car in the hospital parking garage with the engine off, badge still
+    clipped to her scrubs, and she cannot make herself drive home yet — because the
+    moment she pulls out, she becomes a person again, and she is not sure there is
+    anyone left inside.
+  what_they_need: To hear that the numbness is not a character flaw but the cost of
+    caring without refill; to be allowed to grieve patients she was never given time
+    to grieve; to feel held without being told to be grateful or resilient; permission
+    to have needs of her own.
+  what_they_avoid: Spiritual bypassing, 'everything happens for a reason,' resilience-training
+    that blames her for breaking, gratitude journaling demanded before the grief is
+    even named, toxic positivity, religious dogma, and anyone who tells her self-care
+    is a bubble bath.
+series_voice_markers:
+  register: tender, devotional, spacious; reverent without dogma; the voice of someone
+    who has knelt at the same bedsides and will sit in the dark with you rather than
+    rush you toward the light; never clinical, never preachy, never hustle
+  sentence_rhythm: unhurried and breath-paced; short declarative lines that land like
+    a hand on the shoulder, opening into longer flowing clauses when naming what was
+    lost; pauses honored, white space trusted, never crowded
+  metaphor_family: the open vessel and the empty cup; the well that refills only in
+    the dark; grief as love with nowhere left to go; hands that finally open; being
+    poured out and slowly, mercifully refilled; the sacred ordinary of a quiet room
+    after the code
+_needs_authoring: false

@@ -1,0 +1,81 @@
+series_plan_schema: 1.0.0
+locale: en_US
+book_id_prefix: devotion_path__sai_ma__working_parents__boundaries
+brand: devotion_path
+teacher: sai_ma
+persona: working_parents
+topic: boundaries
+byline_author: dora_alder
+arc:
+  installment_1:
+    book_id: devotion_path__sai_ma__working_parents__boundaries__false_alarm
+    engine: false_alarm
+    master_arc: config/source_of_truth/master_arcs/working_parents__boundaries__false_alarm__F006.yaml
+    duration: standard_book_60min
+  installment_2:
+    book_id: devotion_path__sai_ma__working_parents__boundaries__shame
+    engine: shame
+    master_arc: config/source_of_truth/master_arcs/working_parents__boundaries__shame__F006.yaml
+    duration: standard_book_60min
+  installment_3:
+    book_id: devotion_path__sai_ma__working_parents__boundaries__comparison
+    engine: comparison
+    master_arc: config/source_of_truth/master_arcs/working_parents__boundaries__comparison__F006.yaml
+    duration: standard_book_60min
+reader_promise_family: For the working parent whose cup is poured out for everyone
+  but themselves, this series does not teach you to wall people off or harden your
+  heart. It walks beside you as you learn that a boundary is not a rejection but an
+  act of devotion — to your children, to the work, and at last to the self you keep
+  leaving for last. No scripts to memorize, no guilt to muscle through. Just permission
+  to keep something back, and the quiet faith that the people you love can be held
+  by hands that have first been allowed to rest.
+bestseller_hook_family: ''
+emotional_engine: boundaries_recognition
+comp_series:
+- The Book of Boundaries (Melissa Urban) — the genre-defining bestseller on boundaries
+  as self-respect, but secular and prescriptive where this series is devotional and
+  spacious
+- Set Boundaries, Find Peace (Nedra Glover Tawwab) — the clinical-warm bestseller
+  readers reach for first; this series offers the same permission without the therapy-room
+  register
+- Good Boundaries and Goodbyes (Lysa TerKeurst) — the faith-adjacent boundaries bestseller
+  for tender readers; shares the reverent tone but this series carries no church and
+  no doctrine
+platform_strategy:
+  primary:
+  - kdp_ebook
+  - audible
+  secondary:
+  - apple_books
+  - google_play
+  - spotify_audiobooks
+  launch_platform: kdp_ebook
+  cadence:
+    release_spacing_days: 14
+    max_books_per_brand_per_month: 2
+reader_avatar:
+  age: 32-48
+  where_they_are: It is 9:40pm. The kids are finally down, the work laptop is still
+    open on the kitchen counter, and a Slack message just lit up the dark room. Your
+    body flinches toward it before your mind can decide. You have given all day —
+    to the children, to the manager, to the other parents in the group chat — and
+    there is nothing left in the cup, yet your hand is already reaching to pour again.
+  what_they_need: To believe, in their bones, that saying no to one more thing is
+    not abandonment — that the line they are so afraid to draw is what makes the love
+    sustainable. To feel held long enough to stop bracing. To learn that protecting
+    their own depletion is itself a way of caring for everyone who depends on them.
+  what_they_avoid: Boundary 'scripts' and assertiveness drills that make them sound
+    like a stranger. Productivity framing that treats their exhaustion as a scheduling
+    problem. Anything that shames them for having given too much, demands they feel
+    grateful for the privilege of being needed, or implies a good parent never reaches
+    their limit.
+series_voice_markers:
+  register: tender, devotional, spacious; reverent without dogma; the voice of someone
+    who has sat in the same dark kitchen and is not in a hurry to fix you
+  sentence_rhythm: long held breaths that open out, then a single short line that
+    lands like a hand on the shoulder; cadenced and unhurried, never clipped, never
+    clinical
+  metaphor_family: the open vessel and the cup poured out; the door and the threshold;
+    the line drawn in love; hands that finally open; the well that refills only in
+    the dark; being held before being asked to hold
+_needs_authoring: false

@@ -1,0 +1,74 @@
+series_plan_schema: 1.0.0
+locale: en_US
+book_id_prefix: devotion_path__sai_ma__healthcare_rns__depression
+brand: devotion_path
+teacher: sai_ma
+persona: healthcare_rns
+topic: depression
+byline_author: suki_lowell
+arc:
+  installment_1:
+    book_id: devotion_path__sai_ma__healthcare_rns__depression__overwhelm
+    engine: overwhelm
+    master_arc: config/source_of_truth/master_arcs/healthcare_rns__depression__overwhelm__F006.yaml
+    duration: standard_book_60min
+  installment_2:
+    book_id: devotion_path__sai_ma__healthcare_rns__depression__grief
+    engine: grief
+    master_arc: config/source_of_truth/master_arcs/healthcare_rns__depression__grief__F006.yaml
+    duration: standard_book_60min
+  installment_3:
+    book_id: devotion_path__sai_ma__healthcare_rns__depression__watcher
+    engine: watcher
+    master_arc: config/source_of_truth/master_arcs/healthcare_rns__depression__watcher__F006.yaml
+    duration: standard_book_60min
+reader_promise_family: You will be met in the depletion, not rushed out of it. No
+  one here will tell you to be grateful, to bounce back, or to find the lesson. This
+  is a place to set the cup down — to be the one who is held instead of the one who
+  holds — until the well begins, quietly, to refill.
+bestseller_hook_family: ''
+emotional_engine: depression_recognition
+comp_series:
+- Wintering by Katherine May — honors fallow, depleted seasons instead of rushing
+  past them, the way this series honors the emptied nurse
+- The Book of Joy by the Dalai Lama and Desmond Tutu — reverent, non-dogmatic spiritual
+  companionship that sits with suffering rather than fixing it
+- Tattoos on the Heart by Gregory Boyle — tender devotional witness to broken-open
+  people that never demands they perform their healing
+platform_strategy:
+  primary:
+  - kdp_ebook
+  - audible
+  secondary:
+  - apple_books
+  - google_play
+  - spotify_audiobooks
+  launch_platform: kdp_ebook
+  cadence:
+    release_spacing_days: 14
+    max_books_per_brand_per_month: 2
+reader_avatar:
+  age: 30s to 50s
+  where_they_are: Sitting in the car in the hospital parking garage after a twelve-hour
+    shift, engine off, badge still clipped to your scrubs, unable to make yourself
+    walk to the elevator or turn the key. You held a stranger's hand while she died
+    at 4am and charted it like weather. There is nothing left to pour, and you have
+    to do it all again in nine hours.
+  what_they_need: Permission to be empty without it being a crisis. To grieve what
+    this work has quietly taken. To be cared for in the same tender way you care for
+    everyone else — and to believe, slowly, that the well can refill in the dark.
+  what_they_avoid: Spiritual bypassing and 'everything happens for a reason'; resilience
+    pep talks and self-care checklists that become one more shift; anyone who rushes
+    grief, shames the broken-open, or asks for gratitude before its time; religious
+    dogma and toxic positivity.
+series_voice_markers:
+  register: tender, devotional, spacious; reverent without dogma; the voice of someone
+    who has knelt beside the same beds you have and is now kneeling beside you — never
+    clinical, never preachy, never hustle
+  sentence_rhythm: unhurried and breath-paced; short consecrating sentences set against
+    longer ones that pool and hold; the cadence of someone sitting with you in silence
+    rather than filling it
+  metaphor_family: the open vessel; being poured out and held and refilled; grief
+    as love with nowhere to go; the emptied cup; the well that refills in the dark;
+    the sacred ordinary of the night shift; hands that finally open
+_needs_authoring: false

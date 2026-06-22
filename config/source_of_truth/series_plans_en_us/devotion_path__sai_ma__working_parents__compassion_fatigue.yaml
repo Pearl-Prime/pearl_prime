@@ -1,0 +1,76 @@
+series_plan_schema: 1.0.0
+locale: en_US
+book_id_prefix: devotion_path__sai_ma__working_parents__compassion_fatigue
+brand: devotion_path
+teacher: sai_ma
+persona: working_parents
+topic: compassion_fatigue
+byline_author: quinn_bennett
+arc:
+  installment_1:
+    book_id: devotion_path__sai_ma__working_parents__compassion_fatigue__overwhelm
+    engine: overwhelm
+    master_arc: config/source_of_truth/master_arcs/working_parents__compassion_fatigue__overwhelm__F006.yaml
+    duration: standard_book_60min
+  installment_2:
+    book_id: devotion_path__sai_ma__working_parents__compassion_fatigue__grief
+    engine: grief
+    master_arc: config/source_of_truth/master_arcs/working_parents__compassion_fatigue__grief__F006.yaml
+    duration: standard_book_60min
+  installment_3:
+    book_id: devotion_path__sai_ma__working_parents__compassion_fatigue__watcher
+    engine: watcher
+    master_arc: config/source_of_truth/master_arcs/working_parents__compassion_fatigue__watcher__F006.yaml
+    duration: standard_book_60min
+reader_promise_family: You will not be asked to give more, fix faster, or be grateful
+  before you're ready. Here you are met as the emptied vessel you've become from caring
+  for everyone — and held long enough to feel the well in you begin, quietly, to refill.
+bestseller_hook_family: ''
+emotional_engine: compassion_fatigue_recognition
+comp_series:
+- When Things Fall Apart (Pema Chödrön) — meets the reader in depletion without rushing
+  them toward repair, the same permission-to-be-broken-open tone.
+- Sacred Rest (Saundra Dalton-Smith) — names caregiver burnout in restorative, non-clinical
+  language for people who give for a living.
+- 'Burnout: The Secret to Unlocking the Stress Cycle (Emily & Amelia Nagoski) — speaks
+  directly to the over-extended caregiver, validating depletion before offering any
+  way through.'
+platform_strategy:
+  primary:
+  - kdp_ebook
+  - audible
+  secondary:
+  - apple_books
+  - google_play
+  - spotify_audiobooks
+  launch_platform: kdp_ebook
+  cadence:
+    release_spacing_days: 14
+    max_books_per_brand_per_month: 2
+reader_avatar:
+  age: 32-49
+  where_they_are: It's the end of another day. The kids are finally down, the dishes
+    are still in the sink, a work message is blinking on your phone, and you are sitting
+    on the edge of the bed with your shoes still on, unable to move and unable to
+    feel much of anything. You gave all day — to the children, to the job, to the
+    parent who called — and there is nothing left over for you. You don't even know
+    what you'd do with it if there were.
+  what_they_need: To be told that the numbness isn't a moral failing. To have someone
+    name the specific exhaustion of loving people for a living and at home, with no
+    margin left. To be allowed to be empty without being rushed to fill back up, and
+    to find that being held is itself a kind of refilling.
+  what_they_avoid: Self-care checklists, 'pour from a full cup' platitudes that ignore
+    that no one is pouring back, gratitude lectures, spiritual bypassing, 'everything
+    happens for a reason,' anything that frames their depletion as a mindset problem
+    or asks them to hustle their way back to wholeness.
+series_voice_markers:
+  register: tender, devotional, spacious; a voice of sacred surrender and being held;
+    reverent without dogma; sits with depletion and grief rather than rushing them;
+    never clinical, never preachy, never hustle
+  sentence_rhythm: unhurried and breathing; short declarative lines that land like
+    a hand set gently on the shoulder, opening into longer, pooling sentences; pauses
+    honored, white space trusted, nothing crowded
+  metaphor_family: the open vessel; the cup emptied and the well that refills in the
+    dark; being held, poured out, and slowly poured back into; grief as love with
+    nowhere to go; hands that finally open; the sacred ordinary of a kitchen at midnight
+_needs_authoring: false
