@@ -16,16 +16,57 @@ target_word_range:
 target_audio_minutes: 60
 title: 'The 3am Mind: The Shutdown Point'
 subtitle: A One-Hour Sleep Reset for Tech & Finance Professionals
-cover_tagline: A One-Hour Sleep Reset for Tech & Finance Professionals
+cover_tagline: You carried all of it all day. At 3am the system finally crashed.
 description:
-  short_blurb: A One-Hour Sleep Reset for Tech & Finance Professionals The one-hour
-    edition.
-  long_description: 'The 3am Mind: The Shutdown Point
+  short_blurb: You held the whole load — the deploys, the deadlines, the thread of
+    everything — and powered through. Now it's the middle of the night and all of
+    it has landed on your chest at once. This is a one-hour reset for the tech and
+    finance professional who hit the shutdown point. It won't add one more thing to
+    do. It'll show you what to do when there's too much to even begin.
+  long_description: 'You made it through the day by not stopping. You held the deploy
+    and the deadline and the quarter and the thread of a dozen things that all needed
+    you, and you kept moving because that''s the job and stopping wasn''t an option.
+    Then the lights went out, the noise dropped, and in the stillness the entire weight
+    of it arrived at once — every open loop, every unfinished thing, the sheer volume
+    of what you''re carrying, all landing on your chest in the dark. Not one problem.
+    All of them. Together. Now.
 
 
-    The one-hour edition: the core of the sleep anxiety work for tech & finance professionals,
-    in a single sitting. Recognition, descent, integration — no filler. Book 2 of
-    the one-hour Tech & Finance Professionals sleep anxiety series.'
+    This book is for you: the person running at capacity in tech or finance, where
+    the load never actually clears, it just queues — and whose mind chose 3am, the
+    one moment you finally went still, to dump the whole backlog. You''re not awake
+    because of a single worry. You''re awake because there is too much, it all feels
+    urgent and unsortable, and your system has hit the point where it can''t hold
+    the queue and can''t process it either. That''s the shutdown point. It feels like
+    drowning in your own to-do list with the lights off.
+
+
+    Overwhelm isn''t weakness and it isn''t poor planning. It''s a real ceiling —
+    the moment input exceeds what any nervous system can hold, and the holding itself
+    becomes the crisis. In one hour, Daniel Cho meets you there. Recognition: you''ll
+    learn to feel overwhelm as a state of too-much, not a true measure of what you
+    have to handle tonight. Descent: instead of trying to triage the pile in your
+    head at 3am — sorting, ranking, solving, which only adds load — you''ll learn
+    to stop carrying it for a moment and go down into what''s underneath the weight.
+    Integration: you come back able to set the whole pile down without first finishing
+    it.
+
+
+    This is direct, secular writing in plain language. No prioritization framework.
+    No brain-dump exercise to do before bed. No "break it into small steps" when the
+    problem is that you cannot even look at it. No forced calm, no optimizing your
+    night. It will not promise to clear your plate, and it won''t pretend the load
+    isn''t real — it is. What it offers is the one thing the pile can''t give you:
+    permission to put it down while it''s still unfinished, because you are not a
+    server that has to flush the queue before it rests.
+
+
+    You are not broken for breaking under it. There is genuinely too much, and you
+    can learn to set it down anyway — in the dark, tonight, without solving a thing.
+    The shutdown point isn''t a sign something is wrong with you. It''s the honest
+    sound of a system at capacity. Read this once. The next time it all lands at once,
+    you''ll know what to do with too-much. You''re allowed to stop carrying it before
+    it''s done.'
 keywords:
   primary:
   - insomnia help
@@ -38,6 +79,7 @@ keywords:
   - sleep anxiety for tech & finance professionals
   - one hour
 bisac_codes:
+- SEL036000
 - SEL027000
 - HEA046000
 - PSY022000
@@ -46,12 +88,16 @@ target_price:
   audible_usd: 6.99
   paperback_usd: 9.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: daniel_cho
 comp_titles:
-- Say Good Night to Insomnia (Jacobs)
-- The Sleep Solution (Winter)
-- Why We Sleep (Walker)
+- Burnout (Emily & Amelia Nagoski) — names the body's overload response and how to
+  actually complete the stress cycle
+- Why We Sleep (Matthew Walker) — reframes rest as non-negotiable recovery, not a
+  reward you earn by finishing
+- Say Good Night to Insomnia (Gregg D. Jacobs) — quiets the nighttime overwhelm that
+  keeps a tired mind switched on
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -59,3 +105,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

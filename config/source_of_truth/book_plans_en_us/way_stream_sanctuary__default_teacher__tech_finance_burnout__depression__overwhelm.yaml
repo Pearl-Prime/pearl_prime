@@ -16,18 +16,51 @@ target_word_range:
 target_audio_minutes: 70
 title: 'The Weight Without a Name: The Shutdown Point'
 subtitle: A Field Guide for Tech and Finance Professionals Navigating Overcoming Depression
-cover_tagline: A Field Guide for Tech and Finance Professionals Navigating Overcoming
-  Depression
+cover_tagline: When 'too much' tips into nothing at all.
 description:
-  short_blurb: A Field Guide for Tech and Finance Professionals Navigating Overcoming
-    Depression A grounded, secular guide to depression for tech & finance professionals.
-  long_description: 'The Weight Without a Name: The Shutdown Point
+  short_blurb: There's a point where the load stops feeling like pressure and starts
+    feeling like static — and then you just go dark. This is for the moment your nervous
+    system pulls the breaker while your calendar keeps filling. Not motivation. A
+    field guide to the shutdown itself.
+  long_description: 'You know the exact moment. The queue is full, three threads need
+    you now, someone just dropped a ''quick question'' that isn''t quick, and instead
+    of spiking into adrenaline you go flat. The screen stops making sense. You read
+    the same Jira ticket four times. You''re not panicking — you''re somewhere worse,
+    somewhere blank, watching your own hands not move while the pings stack up. People
+    call it lazy or checked-out. It isn''t. It''s a shutdown, and it has a logic.
 
 
-    For a tech or finance professional running on empty. This book names what depression
-    is doing in your body in language you can use — through recognition, descent,
-    and integration, not worksheets or forced positivity. Book 2 of the Tech & Finance
-    Professionals depression series.'
+    This is for the tech and finance professional who has hit the point where overwhelm
+    stops being a feeling and becomes a system event. The trader whose brain whites
+    out at the open. The engineer who freezes mid-deploy. The person who looks at
+    a full plate and, instead of eating, simply leaves the table. You''ve spent years
+    being measured on throughput, so the shutdown feels like a personal failure —
+    a bug in you. It isn''t a bug. It''s a circuit breaker, and breakers trip for
+    a reason: to stop the thing behind them from burning down.
+
+
+    We start by naming the shutdown point — the precise place where ''a lot'' becomes
+    ''too much'' and the lights go out. Then we go down into it instead of slapping
+    it awake. Most advice tries to drag you back to productivity by force: push through,
+    time-block harder, just start. This book does the opposite. It teaches you to
+    recognize the early signal in your body — the tightening, the narrowing, the moment
+    the words on the screen stop landing — to stop treating the dark as an enemy,
+    and to let the breaker do its job without shame piling on top of the freeze. You
+    come back able to meet the overload as information rather than as proof you''re
+    broken.
+
+
+    This book will not promise you a frictionless, always-on version of yourself.
+    It won''t optimize your task list or sell you a focus protocol. There is no trick
+    here that lets you absorb infinite load — because that capacity was never real,
+    and chasing it is what tripped the breaker in the first place.
+
+
+    What it offers instead is honest, usable language for what''s actually happening
+    when you go blank — words you can reach for the next time the static rolls in,
+    so you stop fighting your own wiring. You don''t have to earn the right to stop.
+    The shutdown isn''t you failing. It''s you, at your limit, finally telling the
+    truth. You''re allowed to listen.'
 keywords:
   primary:
   - overcoming depression
@@ -48,12 +81,16 @@ target_price:
   audible_usd: 9.99
   paperback_usd: 12.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: ana_reyes
 comp_titles:
-- Feeling Good (Burns)
-- Lost Connections (Hari)
-- The Upward Spiral (Korb)
+- Burnout (Emily Nagoski & Amelia Nagoski) — the body's stress response and what happens
+  when it can't complete
+- Why Has Nobody Told Me This Before? (Julie Smith) — plain tools for the moment the
+  nervous system tips over
+- Do Nothing (Celeste Headlee) — unwinding the throughput-equals-worth wiring that
+  drives the overload
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -61,3 +98,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

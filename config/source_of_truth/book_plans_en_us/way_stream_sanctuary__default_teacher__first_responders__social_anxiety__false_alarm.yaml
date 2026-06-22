@@ -16,17 +16,51 @@ target_word_range:
 target_audio_minutes: 70
 title: 'Social Anxiety: When Fear Lies to You'
 subtitle: How First Responders Are Rewriting the Rules of Social Anxiety
-cover_tagline: How First Responders Are Rewriting the Rules of Social Anxiety
+cover_tagline: Your threat radar saved lives on shift. Now it's flagging a hallway
+  full of coworkers.
 description:
-  short_blurb: How First Responders Are Rewriting the Rules of Social Anxiety A grounded,
-    secular guide to social anxiety for first responders.
-  long_description: 'Social Anxiety: When Fear Lies to You
+  short_blurb: You're trained to feel the spike and move toward it. But the same alarm
+    that keeps you alive on a call is firing in the briefing room, the group text,
+    the crowded shift change — over people, not danger. This is for the first responder
+    whose body reads a social situation like a scene.
+  long_description: 'The radar is the job. You walk into a scene already scanning
+    — exits, threats, who''s a problem — and your body spikes the second something''s
+    off. It''s kept you alive. Then the call ends, and the exact same alarm goes off
+    walking into the briefing room: heart climbing, throat tight, the urge to find
+    the exit. Except the ''threat'' is a room full of your own coworkers. There''s
+    nothing to scan for. Your body didn''t get the memo.
 
 
-    For a first responder in the quiet after a call. This book names what social anxiety
-    is doing in your body in language you can use — through recognition, descent,
-    and integration, not worksheets or forced positivity. Book 2 of the First Responders
-    social anxiety series.'
+    This book is for first responders whose social anxiety is a false alarm — a threat-detection
+    system that can''t tell a hostile scene from a crowded shift change. The cop whose
+    chest locks up at the station Christmas party but never on a felony stop. The
+    medic who can talk a stranger through the worst moment of their life and goes
+    silent in the group chat. The dispatcher dreading the all-hands more than the
+    calls. Your alarm isn''t malfunctioning. It''s doing exactly what it was trained
+    to do, in a room where the only thing on fire is your own nervous system.
+
+
+    We are not going to teach you to relax in social situations, because ''just relax''
+    has never once worked on a body in alarm. Recognition first: you learn to feel
+    the difference between a real threat-spike and a social false alarm — the felt-sense
+    of a scene versus the felt-sense of a coffee line — before your body fully commits
+    to the wrong one. Then descent. Instead of overriding the spike the way you do
+    on shift, or bailing on the room, you go down into the alarm and let it run its
+    course with no real danger to feed it. That''s how it discharges — not by force,
+    but by finishing. Then integration: you come back able to stay in the room while
+    your system settles, instead of leaving the second it lights up.
+
+
+    This is not exposure-therapy-by-willpower and it won''t optimize you into a social
+    natural. It will not promise to shut the alarm off, make you love the all-hands,
+    or turn you into the one working the room. The radar is part of you, and you wouldn''t
+    trade it on a call. What changes is that it stops emptying every room that isn''t
+    actually dangerous.
+
+
+    You''ve proven a hundred times that you can move toward the spike instead of away
+    from it. A room full of coworkers is not a scene. The alarm can ring. You''re
+    allowed to stay anyway.'
 keywords:
   primary:
   - social anxiety
@@ -39,6 +73,7 @@ keywords:
   - first responders
   - social anxiety for first responders
 bisac_codes:
+- SEL036000
 - SEL027000
 - SEL031000
 - PSY022000
@@ -47,12 +82,15 @@ target_price:
   audible_usd: 9.99
   paperback_usd: 12.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: cole_bennett
 comp_titles:
-- How to Be Yourself (Hendriksen)
-- The Social Anxiety Workbook (Antony)
-- Quiet (Cain)
+- How to Be Yourself (Ellen Hendriksen) — social anxiety as a miscalibrated threat
+  alarm
+- When Panic Attacks (David D. Burns) — reading the false alarm for what it is
+- Hardwiring Happiness (Rick Hanson) — why a trained brain over-reads threat, and
+  how it settles
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -60,3 +98,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

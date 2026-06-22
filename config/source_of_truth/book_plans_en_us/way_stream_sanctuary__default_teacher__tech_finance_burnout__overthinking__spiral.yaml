@@ -16,18 +16,56 @@ target_word_range:
 target_audio_minutes: 70
 title: 'The Thought That Won''t Leave: When One Thought Becomes a Thousand'
 subtitle: How Tech and Finance Professionals Are Rewriting the Rules of Stop Overthinking
-cover_tagline: How Tech and Finance Professionals Are Rewriting the Rules of Stop
-  Overthinking
+cover_tagline: One unread message, and forty minutes later you've rehearsed your own
+  resignation.
 description:
-  short_blurb: How Tech and Finance Professionals Are Rewriting the Rules of Stop
-    Overthinking A grounded, secular guide to overthinking for tech & finance professionals.
-  long_description: 'The Thought That Won''t Leave: When One Thought Becomes a Thousand
+  short_blurb: 'You start with a single thought — a comment in standup, a number that''s
+    slightly off — and somehow you end up three layers deep, modeling worst cases
+    that haven''t happened. This is a direct, no-nonsense look at the spiral: how
+    one thought recruits a thousand, and why your problem-solving brain is so good
+    at it. Not a thought-stopping trick. A way to recognize the descent while you''re
+    still in it.'
+  long_description: 'It always starts small. A teammate says "can we talk later" with
+    no context. A metric ticks the wrong direction. A reply takes four hours longer
+    than it should. And your mind — the same one that traces a production failure
+    back through six services without breaking a sweat — turns that one input into
+    a branching tree of everything it could mean. By the time you look up, you''ve
+    war-gamed getting managed out, the runway, the conversation with your partner.
+    None of it happened. All of it felt real.
 
 
-    For a tech or finance professional running on empty. This book names what overthinking
-    is doing in your body in language you can use — through recognition, descent,
-    and integration, not worksheets or forced positivity. Book 2 of the Tech & Finance
-    Professionals overthinking series.'
+    This book is for tech and finance people whose greatest professional asset is
+    also the thing keeping them up: the ability to follow a thread all the way down.
+    You don''t overthink because you''re irrational. You overthink because thinking
+    has solved almost every hard problem you''ve ever faced. So when the spiral starts,
+    your instinct is to think harder — to run one more scenario, find the answer,
+    close the loop. But this loop doesn''t close. The more compute you throw at it,
+    the more branches it grows.
+
+
+    You''ll learn to catch the spiral at the entry point — the specific moment one
+    thought hands off to the next, the hand-off you usually miss because it feels
+    like just thinking. That''s recognition. Then comes the harder move: going down
+    into the spiral without trying to solve it. Not distracting yourself, not disputing
+    each thought like a debate you can win. Sitting in the descent long enough to
+    feel that the urgency is the symptom, not the signal. And then coming back up
+    — not with the spiral gone, but with a different relationship to it. You stop
+    mistaking the volume of thought for the importance of the threat.
+
+
+    This book will not give you a five-step technique to stop the spiral on command.
+    It will not teach you to control your thoughts, because you can''t, and the trying
+    is half the trap. There''s no reframe to memorize and nothing to optimize. Your
+    mind is going to keep generating scenarios — that''s what it''s for. What changes
+    is whether you have to chase every one of them to the bottom.
+
+
+    Written for people who can hold a complex system in their head and have never
+    once been able to do the same for their own runaway mind.
+
+
+    The next thought is already loading. You don''t have to follow it down. You''re
+    allowed to let it sit there, unanswered, and walk away.'
 keywords:
   primary:
   - stop overthinking
@@ -40,6 +78,7 @@ keywords:
   - tech & finance professionals
   - overthinking for tech & finance professionals
 bisac_codes:
+- SEL036000
 - SEL027000
 - SEL024000
 - PSY022000
@@ -48,12 +87,16 @@ target_price:
   audible_usd: 9.99
   paperback_usd: 12.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: daniel_cho
 comp_titles:
-- Don't Believe Everything You Think (Nguyen)
-- Stop Overthinking (Hollins)
-- The Worry Trick (Carbonell)
+- Chatter (Ethan Kross) — the science of the inner voice that loops, and why arguing
+  with it backfires
+- Unwinding Anxiety (Judson Brewer) — maps the worry-habit loop and why more thinking
+  feeds it
+- Rewire Your Anxious Brain (Catherine Pittman & Elizabeth Karle) — secular, mechanism-level
+  account of the runaway thought cascade
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -61,3 +104,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

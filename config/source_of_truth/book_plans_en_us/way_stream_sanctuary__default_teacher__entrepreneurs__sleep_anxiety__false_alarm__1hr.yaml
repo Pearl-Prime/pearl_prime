@@ -16,15 +16,56 @@ target_word_range:
 target_audio_minutes: 60
 title: 'The 3am Mind: The False Alarm Response'
 subtitle: A One-Hour Sleep Reset for Founders
-cover_tagline: A One-Hour Sleep Reset for Founders
+cover_tagline: It's 3am. Nothing is wrong. Your body is convinced something is.
 description:
-  short_blurb: A One-Hour Sleep Reset for Founders The one-hour edition.
-  long_description: 'The 3am Mind: The False Alarm Response
+  short_blurb: You wake at 3am with your heart already pounding, certain something
+    is wrong, even though the house is dark and silent and nothing has happened. There's
+    no threat — just a nervous system firing an alarm into an empty room. This is
+    a one-hour reset for the founder whose body sounds the siren in the middle of
+    the night.
+  long_description: 'It''s 3am and you''re awake, and you''re awake the way prey is
+    awake — heart going, body braced, scanning the dark for the thing that''s wrong.
+    Except nothing is wrong. The house is quiet. No one needs you. There''s no fire,
+    no call, no emergency. Just your body, mid-siren, certain of a danger it can''t
+    name, in a room where nothing is happening at all.
 
 
-    The one-hour edition: the core of the sleep anxiety work for founders, in a single
-    sitting. Recognition, descent, integration — no filler. Book 1 of the one-hour
-    Founders sleep anxiety series.'
+    This book is for the founder who keeps getting woken by a false alarm. You don''t
+    lie awake because there''s a genuine threat in the night. You lie awake because
+    the part of your brain that handles danger doesn''t sleep when you do — and somewhere
+    in the dark it pulls the cord, and your whole body lurches up to meet a predator
+    that was never there. By the time your thinking mind catches up, you''re already
+    wired, already gone, already doing 3am math on a runway.
+
+
+    First, you''ll learn to name it in the dark, before the story takes hold: this
+    is the alarm, not the emergency. The pounding is real. The catastrophe it''s insisting
+    on is not. In the middle of the night, with no one to reassure you, that distinction
+    is the only solid ground there is — and you can learn to find it half-asleep.
+
+
+    Then you go down into the alarm instead of bolting from it. Not by forcing yourself
+    back to sleep, not by running a wind-down protocol you''ll resent — but by lying
+    still and actually feeling the false alarm move through you, watching it do the
+    only thing alarms do when no real danger comes: peak, and ebb. You stop bracing
+    against the night. You stop treating a 3am surge as proof that the sky is falling.
+
+
+    You come back able to meet the dark differently. The alarm may still wake you
+    — old wiring keeps its own hours. But you''ll know it for what it is the moment
+    your eyes open: a body crying wolf, not a wolf. And a false alarm you can recognize
+    is a false alarm you can lie down inside of, and let pass.
+
+
+    This won''t guarantee you eight unbroken hours, and it won''t turn your sleep
+    into a metric you hack. There''s no perfect routine, no breathing trick that ends
+    night-waking forever. The alarm will sometimes ring. You''ll just stop leaping
+    up to fight a danger that isn''t in the room.
+
+
+    One hour. Plain, secular language for the next time you wake at 3am with your
+    heart already racing. Read it before bed, or in the dark when it happens — and
+    let the alarm ring without rising to it.'
 keywords:
   primary:
   - insomnia help
@@ -37,6 +78,7 @@ keywords:
   - sleep anxiety for founders
   - one hour
 bisac_codes:
+- SEL036000
 - SEL027000
 - HEA046000
 - PSY022000
@@ -45,12 +87,16 @@ target_price:
   audible_usd: 6.99
   paperback_usd: 9.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: devon_hale
 comp_titles:
-- Say Good Night to Insomnia (Jacobs)
-- The Sleep Solution (Winter)
-- Why We Sleep (Walker)
+- Why We Sleep (Matthew Walker) — secular, science-grounded understanding of what
+  the night-waking body is actually doing
+- Dare (Barry McDonagh) — meeting the 3am anxiety surge as a false alarm to be allowed
+  rather than fought
+- Hello Sleep (Jade Wu) — evidence-based, no-routine approach to making peace with
+  being awake in the night
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -58,3 +104,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

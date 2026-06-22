@@ -16,17 +16,55 @@ target_word_range:
 target_audio_minutes: 70
 title: 'The Thought That Won''t Leave: The False Alarm Response'
 subtitle: A Real Talk Guide to Stop Overthinking for Tech and Finance Professionals
-cover_tagline: A Real Talk Guide to Stop Overthinking for Tech and Finance Professionals
+cover_tagline: Your nervous system is treating a Slack message like a predator. It
+  isn't one.
 description:
-  short_blurb: A Real Talk Guide to Stop Overthinking for Tech and Finance Professionals
-    A grounded, secular guide to overthinking for tech & finance professionals.
-  long_description: 'The Thought That Won''t Leave: The False Alarm Response
+  short_blurb: 'You ran the numbers, shipped the work, said the right thing in the
+    meeting — and your body is still bracing like something is about to go wrong.
+    This is a plain-language guide to the false alarm: the moment your threat response
+    fires over a thought that has no teeth. No breathing app, no reframe, no fix.
+    Just a way to recognize what''s actually happening so you stop fighting your own
+    wiring.'
+  long_description: 'It''s 9:14pm. The deploy went clean, the deck is approved, the
+    quarter is fine. And you''re sitting there with your jaw tight and your chest
+    doing that thing, replaying one sentence from a 1:1 that ended six hours ago.
+    Nothing is wrong. Your body did not get the memo.
 
 
-    For a tech or finance professional running on empty. This book names what overthinking
-    is doing in your body in language you can use — through recognition, descent,
-    and integration, not worksheets or forced positivity. Book 1 of the Tech & Finance
-    Professionals overthinking series.'
+    This book is for the engineer, the analyst, the PM, the person who reads risk
+    for a living and can''t stop running it on themselves. You are good at spotting
+    what could go wrong — it''s literally the job. The problem is the same machinery
+    that catches the bug at 2am also fires when there is no bug. That''s the false
+    alarm: a threat response with nothing on the other end of it. Not weakness. Not
+    a character flaw. A smoke detector that goes off when you make toast.
+
+
+    First you learn to recognize it in real time — the specific bodily tells that
+    mean alarm, not danger, so you can name it the next time your heart rate climbs
+    over an unread email. You stop reaching for your phone to re-read the message
+    one more time, because you can feel that the checking is the alarm talking, not
+    new information. Then you go down into it instead of trying to talk yourself out
+    of it. Not to fix the feeling. To stop adding a second layer of panic on top of
+    the first one — the meta-loop where you''re anxious about being anxious, debugging
+    your own dread like it''s a ticket you can close. You can''t close it. You can
+    stop treating it as an emergency. And then you come back up, still wired the way
+    you''re wired, but no longer at war with the alarm every time it sounds.
+
+
+    This will not promise you a calm mind. It will not optimize your stress, hack
+    your cortisol, or turn your hypervigilance into a productivity feature. There
+    is no morning routine here and no part where you decide to think positive. Your
+    nervous system was built to keep you alive, and it is doing that job a little
+    too well. You don''t need to override it. You need to stop believing it every
+    single time.
+
+
+    Written in plain, direct language for people who are tired of being told to just
+    relax — by someone who knows the difference between a real fire and a hot kitchen.
+
+
+    The thought won''t leave. That was never the part that needed fixing. What changes
+    is what it costs you when it shows up.'
 keywords:
   primary:
   - stop overthinking
@@ -39,6 +77,7 @@ keywords:
   - tech & finance professionals
   - overthinking for tech & finance professionals
 bisac_codes:
+- SEL036000
 - SEL027000
 - SEL024000
 - PSY022000
@@ -47,12 +86,16 @@ target_price:
   audible_usd: 9.99
   paperback_usd: 12.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: daniel_cho
 comp_titles:
-- Don't Believe Everything You Think (Nguyen)
-- Stop Overthinking (Hollins)
-- The Worry Trick (Carbonell)
+- Burnout (Emily Nagoski & Amelia Nagoski) — names the stress cycle in the body rather
+  than the head, no positivity required
+- When the Body Says No (Gabor Maté) — connects chronic threat-response to high-functioning,
+  hard-driving lives
+- Unwinding Anxiety (Judson Brewer) — secular, mechanism-first take on why the anxious
+  brain keeps firing
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -60,3 +103,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

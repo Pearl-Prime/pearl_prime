@@ -16,17 +16,53 @@ target_word_range:
 target_audio_minutes: 70
 title: 'The Weight Without a Name: The Shutdown Point'
 subtitle: A Field Guide for Nurses Navigating Overcoming Depression
-cover_tagline: A Field Guide for Nurses Navigating Overcoming Depression
+cover_tagline: You don't crash loudly. You just go offline mid-shift.
 description:
-  short_blurb: A Field Guide for Nurses Navigating Overcoming Depression A grounded,
-    secular guide to depression for nurses.
-  long_description: 'The Weight Without a Name: The Shutdown Point
+  short_blurb: There's a point in a hard run where the inputs stop adding up and you
+    go flat — not panicked, just gone, running the motions on autopilot. This is a
+    book for nurses about the shutdown that masquerades as depression. It won't hand
+    you a coping skill. It'll show you what's actually happening when too much arrives
+    at once.
+  long_description: 'Four call lights, two new admits, a doctor on the phone, a family
+    in the hallway, and a med that''s overdue — and somewhere in the middle of it
+    your face goes still and a part of you steps three feet back and watches your
+    own hands work. You''re not crying. You''re not yelling. You''ve gone offline.
+    The shift keeps running on muscle memory while the rest of you waits somewhere
+    far away for it to be over.
 
 
-    For a nurse at the end of a twelve-hour shift. This book names what depression
-    is doing in your body in language you can use — through recognition, descent,
-    and integration, not worksheets or forced positivity. Book 2 of the Nurses depression
-    series.'
+    This book is for the nurse who has confused that shutdown with depression. They
+    feel the same from the inside — the flatness, the distance, the way nothing reaches
+    you — but they are not the same thing. One is grief settling in for the long haul.
+    The other is your nervous system pulling the breaker because too much arrived
+    at once and there was no version of you that could hold all of it. You didn''t
+    get sad. You got overwhelmed past the point where the lights stay on.
+
+
+    Oscar Bello has sat with enough nurses, as a hospital chaplain, to write this
+    as a field guide to the shutdown point rather than a pep talk — where it is, what
+    trips it, and what is actually happening in your body when you hit it. The arc
+    is honest. Recognition: learning to feel the moment you go offline instead of
+    only noticing it later, in the lot, when you can''t account for the last hour.
+    Descent: going down into the shutdown rather than slapping a coping skill over
+    it or powering through to the next task. Integration: coming back up with your
+    own breaker in view, so the flat isn''t a place you disappear into without consent.
+
+
+    This book will not give you a five-minute reset to do at the nurses'' station.
+    It will not tell you to prioritize, delegate, and self-care your way out of a
+    unit that is structurally short-staffed. It will not pretend the overwhelm is
+    a personal failing you could optimize away if you were just more organized. You
+    are not disorganized. You are a person whose system has a ceiling, and you have
+    been living above it for years.
+
+
+    What it offers is plain, usable language for the shutdown — words you can put
+    on it the next time the inputs stop adding up and you feel yourself start to go.
+    Naming it is not the same as fixing it, and this book promises no fix. But the
+    difference between disappearing and watching yourself begin to disappear is the
+    whole difference. You are allowed to notice the breaker before it flips. You are
+    allowed to come back online on purpose.'
 keywords:
   primary:
   - overcoming depression
@@ -47,12 +83,16 @@ target_price:
   audible_usd: 9.99
   paperback_usd: 12.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: oscar_bello
 comp_titles:
-- Feeling Good (Burns)
-- Lost Connections (Hari)
-- The Upward Spiral (Korb)
+- 'Burnout: The Secret to Unlocking the Stress Cycle (Emily & Amelia Nagoski) — explains
+  the physiological stress response behind shutdown, not just the feeling'
+- Why Zebras Don't Get Ulcers (Robert Sapolsky) — the science of a nervous system
+  stuck in overload
+- Set Boundaries, Find Peace (Nedra Glover Tawwab) — naming your real capacity without
+  calling it weakness
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -60,3 +100,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

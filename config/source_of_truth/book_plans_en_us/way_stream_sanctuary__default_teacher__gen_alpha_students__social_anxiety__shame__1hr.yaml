@@ -16,15 +16,56 @@ target_word_range:
 target_audio_minutes: 60
 title: 'Social Anxiety: Carrying What You Can''t Say'
 subtitle: A One-Hour Social Anxiety Reset for Students
-cover_tagline: A One-Hour Social Anxiety Reset for Students
+cover_tagline: You don't just dread the social moment. You're sure it confirms what's
+  wrong with you.
 description:
-  short_blurb: A One-Hour Social Anxiety Reset for Students The one-hour edition.
-  long_description: 'Social Anxiety: Carrying What You Can''t Say
+  short_blurb: It's not only that talking to people is hard — it's that every awkward
+    pause feels like proof that you're fundamentally bad at being a person. This is
+    a one-hour, unsentimental look at the shame underneath social anxiety, written
+    for students who carry the silence and a verdict to go with it.
+  long_description: 'You replay it for hours. The conversation where you said the
+    wrong thing. The moment you went quiet and couldn''t find words. The time you
+    laughed a beat too late. To anyone else it was nothing. To you it''s evidence
+    — one more entry in a long, private case file proving that there''s something
+    off about you, something everyone else can sense, something that makes you bad
+    at the basic thing of being around people.
 
 
-    The one-hour edition: the core of the social anxiety work for students, in a single
-    sitting. Recognition, descent, integration — no filler. Book 3 of the one-hour
-    Students social anxiety series.'
+    This book is for the student whose social anxiety is wired to shame. It''s not
+    just the fear of an awkward moment — it''s the belief that the awkwardness reveals
+    a truth about you. That you''re too weird, too quiet, too much, not enough. That
+    if people really got close, they''d find out what you already ''know.'' So you
+    stay on the edges, you say less, you don''t get close — and every time you do,
+    the shame quietly counts it as confirmation. The silence protects you and convicts
+    you at the same time.
+
+
+    In one hour, we do this without flinching. First, recognize it — learn to separate
+    ''that was an awkward moment'' from ''that proves I''m broken,'' because shame
+    collapses the two and you''ve been living inside the collapse. Second, go down
+    into it — turn toward the verdict itself, look at where it came from and how it
+    survives, and notice that it only ever uses your own footage, edited by the harshest
+    possible critic. Third, come back — not having become a smooth, effortless social
+    person, but having stopped accepting that your worst social moments are the truth
+    about who you are.
+
+
+    This will not promise that small talk gets easy or that you''ll stop replaying
+    things at night. Some awkwardness is just being human. This is not about fixing
+    you, because the awkward moments were never the problem — the verdict you attached
+    to them was. There are no social-skills drills here, no ''fake it till you make
+    it,'' no pretending you feel confident when shame is running the tape.
+
+
+    What shifts is the conviction. Shame has been treating one quiet moment, one fumbled
+    sentence, as proof of a permanent flaw. It isn''t proof. It''s a feeling that
+    learned to deliver a verdict.
+
+
+    You are not bad at being a person. You''re a person who got handed a harsh judge
+    and started believing the sentence. You''re allowed to have an awkward moment
+    and let it just be a moment. You can stop carrying the case file. It was never
+    a fair trial.'
 keywords:
   primary:
   - social anxiety
@@ -37,6 +78,7 @@ keywords:
   - social anxiety for students
   - one hour
 bisac_codes:
+- SEL036000
 - SEL027000
 - SEL031000
 - PSY022000
@@ -45,12 +87,16 @@ target_price:
   audible_usd: 6.99
   paperback_usd: 9.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: nina_vazquez
 comp_titles:
-- How to Be Yourself (Hendriksen)
-- The Social Anxiety Workbook (Antony)
-- Quiet (Cain)
+- I Thought It Was Just Me (But It Isn't) (Brené Brown) — secular dismantling of shame
+  and the conviction that you're the broken one
+- How to Be Yourself (Ellen Hendriksen) — a clinical psychologist's no-woo guide to
+  social anxiety and the inner critic
+- Permission to Feel (Marc Brackett) — naming and disarming hard emotions, written
+  with students in mind
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -58,3 +104,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

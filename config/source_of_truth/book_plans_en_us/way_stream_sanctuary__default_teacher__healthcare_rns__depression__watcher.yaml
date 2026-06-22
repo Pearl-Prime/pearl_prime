@@ -16,17 +16,54 @@ target_word_range:
 target_audio_minutes: 70
 title: 'The Weight Without a Name: Watching Your Thoughts Without Drowning'
 subtitle: How Nurses Are Rewriting the Rules of Overcoming Depression
-cover_tagline: How Nurses Are Rewriting the Rules of Overcoming Depression
+cover_tagline: The shift ended hours ago. Your head is still on the unit.
 description:
-  short_blurb: How Nurses Are Rewriting the Rules of Overcoming Depression A grounded,
-    secular guide to depression for nurses.
-  long_description: 'The Weight Without a Name: Watching Your Thoughts Without Drowning
+  short_blurb: Part of you never clocks out — it keeps scanning for the thing you
+    missed, the order you forgot, the patient who looked off. This is a book for nurses
+    about the hypervigilant mind that won't stand down, and how it feeds the flatness
+    underneath. It won't teach you to silence your thoughts. It'll teach you to stop
+    drowning in them.
+  long_description: 'It''s 2 a.m. and you''re awake again, replaying the handoff.
+    Did you mention the new bruising? Did you actually push that med or just chart
+    that you did? The shift ended nine hours ago and your mind is still standing at
+    the bedside, scanning, checking, certain you missed something. You can''t prove
+    you didn''t. So it keeps watching.
 
 
-    For a nurse at the end of a twelve-hour shift. This book names what depression
-    is doing in your body in language you can use — through recognition, descent,
-    and integration, not worksheets or forced positivity. Book 3 of the Nurses depression
-    series.'
+    This book is for the nurse whose mind never stands down — the one who runs a background
+    scan on every patient, every order, every subtle change in color, long after the
+    floor is someone else''s problem. That vigilance is not a flaw. It is exactly
+    what makes you good. It catches the deterioration nobody else sees. But it was
+    built for a twelve-hour shift, and yours never turns off, and underneath all that
+    watching is a flatness that has started to feel like depression because the watcher
+    has been running so long it''s worn a groove.
+
+
+    A hospital chaplain who has spent years beside the depleted, Oscar Bello writes
+    about watching your thoughts without drowning in them — not silencing them. Recognition:
+    seeing the difference between the vigilance that keeps patients alive and the
+    same machinery turned loose on your own mind at 2 a.m., where it has nothing to
+    catch and nothing to do but spin. Descent: going down into the watching instead
+    of fighting it, instead of trying to think your way to the off-switch, instead
+    of one more mental chart review that never resolves. Integration: coming back
+    able to let the thoughts move through without standing guard over every one —
+    present on shift, off-duty when you''re off.
+
+
+    This book will not teach you to clear your mind. It will not tell you to breathe
+    the hypervigilance away or that you''d sleep fine if you just stopped looking
+    at your phone. It will not treat your scanning mind as a defect to debug. There
+    is no fixing here, no protocol to run on your own head the way the watcher already
+    does. The watcher cannot be argued into silence; it''s been trying to argue itself
+    quiet for years.
+
+
+    What it offers is plain language for the thing your mind does when the shift won''t
+    end — words you can use the next time you''re lying awake at 2 a.m. building a
+    case against yourself. You learned to watch everything because watching saves
+    lives. You are allowed to stop standing over your own thoughts like they''re a
+    patient who might crash. You are allowed to let them pass. You are allowed to
+    clock out of your own head.'
 keywords:
   primary:
   - overcoming depression
@@ -47,12 +84,16 @@ target_price:
   audible_usd: 9.99
   paperback_usd: 12.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: oscar_bello
 comp_titles:
-- Feeling Good (Burns)
-- Lost Connections (Hari)
-- The Upward Spiral (Korb)
+- Unwinding Anxiety (Judson Brewer) — the habit-loop science of a mind that can't
+  stop checking
+- The Untethered Soul (Michael Singer) — observing your thoughts without being dragged
+  under by them
+- Chatter (Ethan Kross) — why the inner voice spirals at 2 a.m. and how to step back
+  from it
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -60,3 +101,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

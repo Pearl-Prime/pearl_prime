@@ -16,17 +16,53 @@ target_word_range:
 target_audio_minutes: 70
 title: 'The Thing You Won''t Say: The Overthinking Spiral'
 subtitle: A Real Talk Guide to Building Courage for First Responders
-cover_tagline: A Real Talk Guide to Building Courage for First Responders
+cover_tagline: 'Off shift, the loop starts: what you said, what you didn''t, what
+  it all means about you.'
 description:
-  short_blurb: A Real Talk Guide to Building Courage for First Responders A grounded,
-    secular guide to courage for first responders.
-  long_description: 'The Thing You Won''t Say: The Overthinking Spiral
+  short_blurb: On a call your mind is a clean instrument — one thought, one action,
+    no noise. Then the shift ends and a single thought about a conversation breeds
+    a thousand more. This is for the first responder whose overthinking only shows
+    up when the real emergency is over.
+  long_description: 'On scene, your head is quiet in the way that matters. One input,
+    one decision, move. It''s the thing you''re best at — the noise drops away and
+    you just work. Then you clock out, and the same mind that ran clean under pressure
+    turns on a single thread: that thing you said in the truck, the look your sergeant
+    gave you, the conversation you''ve been meaning to have. One thought. By midnight
+    it''s a thousand, and not one of them is helping.
 
 
-    For a first responder in the quiet after a call. This book names what courage
-    is doing in your body in language you can use — through recognition, descent,
-    and integration, not worksheets or forced positivity. Book 3 of the First Responders
-    courage series.'
+    This book is for first responders who can run a mass-casualty scene but can''t
+    run their own brain at 1 a.m. The dispatcher replaying a six-word exchange from
+    a shift two days ago. The firefighter who''s rehearsed the same hard conversation
+    forty times and still hasn''t had it. The cop lying awake building the worst-case
+    version of a thing that hasn''t happened and probably won''t. You''re not anxious
+    because you''re weak. You''re spiraling because the same threat-scanning engine
+    that keeps you alive on a call has nothing to scan when the call is over — so
+    it turns inward and eats you.
+
+
+    We''re not going to teach you to ''stop thinking,'' because you''ve already tried
+    that and it doesn''t work — the harder you push the loop away, the faster it comes
+    back. Recognition first: you learn to catch the exact moment a real consideration
+    tips over into a spiral — the difference between thinking something through once
+    and thinking it to death. Then descent. Instead of fighting the loop or following
+    it, you go down to the feeling it''s circling — the thing underneath all that
+    thinking that the thinking is there to avoid. Spirals are almost never about the
+    thought. They''re a way of not feeling something. Then integration: you come back
+    able to let a thought arrive and leave without escorting it around the block a
+    hundred times.
+
+
+    This is not a productivity hack and it will not optimize your mind. It won''t
+    promise you a quiet head, a cleared inbox of worries, or a technique to shut the
+    loop off on command. The loop isn''t a bug — it''s that good engine of yours,
+    idling with nowhere to go. What changes is that you stop mistaking the spinning
+    for solving.
+
+
+    The thing you won''t say isn''t trapped in the spiral. It''s underneath it — and
+    the spiral is how you keep not saying it. You ran toward the fire. You can stop
+    running from a feeling. Let the thought land. You don''t have to chase it.'
 keywords:
   primary:
   - building courage
@@ -47,12 +83,15 @@ target_price:
   audible_usd: 9.99
   paperback_usd: 12.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: cole_bennett
 comp_titles:
-- Daring Greatly (Brown)
-- Feel the Fear and Do It Anyway (Jeffers)
-- The Gifts of Imperfection (Brown)
+- Chatter (Ethan Kross) — the science of the inner loop and how to step out of it
+- Unwinding Anxiety (Judson Brewer) — the spiral as a habit loop, not a character
+  flaw
+- The Worry Trick (David A. Carbonell) — how the brain tricks you into worst-case
+  loops with no real danger present
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -60,3 +99,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

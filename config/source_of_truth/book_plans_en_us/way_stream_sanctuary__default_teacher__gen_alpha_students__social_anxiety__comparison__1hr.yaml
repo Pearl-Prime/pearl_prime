@@ -16,15 +16,56 @@ target_word_range:
 target_audio_minutes: 60
 title: 'Social Anxiety: Beyond the Highlight Reel'
 subtitle: A One-Hour Social Anxiety Reset for Students
-cover_tagline: A One-Hour Social Anxiety Reset for Students
+cover_tagline: Everyone else got the manual on how to be a person. You're sure of
+  it.
 description:
-  short_blurb: A One-Hour Social Anxiety Reset for Students The one-hour edition.
-  long_description: 'Social Anxiety: Beyond the Highlight Reel
+  short_blurb: Everyone else seems to know how to talk, where to sit, what to post,
+    how to just be normal — and you're the only one running the numbers on whether
+    you measure up. This is a one-hour look at the comparison engine behind social
+    anxiety, written for students who feel like they're failing a test no one else
+    is even taking.
+  long_description: 'You walk into the lunchroom and immediately you''re doing math.
+    Who''s sitting where. Who''s funnier, easier, more wanted. Who has it figured
+    out. You scroll before bed and everyone looks effortless — better skin, better
+    friends, better at being a person — and you end up feeling like you got handed
+    a body and a personality and somehow missed the instructions everyone else got.
+    The gap between you and them feels like proof of something.
 
 
-    The one-hour edition: the core of the social anxiety work for students, in a single
-    sitting. Recognition, descent, integration — no filler. Book 1 of the one-hour
-    Students social anxiety series.'
+    This book is for the student whose social anxiety runs on comparison — where being
+    around people isn''t just nerve-wracking, it''s a constant, exhausting scoreboard.
+    You don''t just talk to someone; you grade how it went. You don''t just exist
+    in a room; you rank yourself in it. And the worst part is the scoreboard is rigged:
+    you compare your inside — every awkward thought, every cringe replay — against
+    everyone else''s outside, the highlight reel they''ve curated for you to see.
+
+
+    In one hour, we take this apart. First, recognize it — catch the exact moment
+    the measuring starts, the way your eyes go straight to who''s doing better, so
+    you can name the comparison instead of believing its verdict. Second, go down
+    into it — get under the ranking to what it''s actually protecting you from, and
+    see clearly that you are comparing edited footage to your raw, uncut, behind-the-scenes
+    self, which is a game you can only ever lose. Third, come back — not by deciding
+    you''re better than everyone, but by stepping off the scoreboard entirely, because
+    it was never measuring anything real.
+
+
+    This will not promise that you''ll stop noticing other people or that you''ll
+    feel like the most confident person in the room. You''ll still see the highlight
+    reels. This book will not tell you to just delete the apps and love yourself,
+    because the comparison lives in your head, not your phone. There are no comparison
+    detoxes, no fake confidence, no pretending you don''t care what people think.
+
+
+    What shifts is whether the gap means anything. Right now it feels like evidence
+    that you''re behind. By the end of this hour, it can be what it actually is: a
+    trick of the angle, a reel against a life.
+
+
+    Everyone in that lunchroom is running their own quiet math. The effortless ones
+    included. You''re not behind — you''re just the only person whose inside you can
+    see. You''re allowed to stop grading yourself against a highlight reel. You don''t
+    have to win a contest nobody real is keeping score of.'
 keywords:
   primary:
   - social anxiety
@@ -37,6 +78,7 @@ keywords:
   - social anxiety for students
   - one hour
 bisac_codes:
+- SEL036000
 - SEL027000
 - SEL031000
 - PSY022000
@@ -45,12 +87,16 @@ target_price:
   audible_usd: 6.99
   paperback_usd: 9.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: nina_vazquez
 comp_titles:
-- How to Be Yourself (Hendriksen)
-- The Social Anxiety Workbook (Antony)
-- Quiet (Cain)
+- The Comparison Cure (Lisa Cypers Kamen) — secular, practical work on breaking the
+  compare-and-despair habit
+- The Confidence Code for Girls (Katty Kay & Claire Shipman) — young-reader take on
+  social comparison and curated highlight reels
+- How to Do Nothing (Jenny Odell) — reclaiming your attention from the relentless
+  scoreboard of online life
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -58,3 +104,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

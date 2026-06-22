@@ -16,17 +16,58 @@ target_word_range:
 target_audio_minutes: 70
 title: 'The Weight Without a Name: The Observer''s Mind'
 subtitle: A Real Talk Guide to Overcoming Depression for First Responders
-cover_tagline: A Real Talk Guide to Overcoming Depression for First Responders
+cover_tagline: Off duty doesn't mean off. You're still scanning the room, and the
+  scanning is wearing you down.
 description:
-  short_blurb: A Real Talk Guide to Overcoming Depression for First Responders A grounded,
-    secular guide to depression for first responders.
-  long_description: 'The Weight Without a Name: The Observer''s Mind
+  short_blurb: For the first responder whose depression lives behind a mind that never
+    stops watching for threats, for exits, for the thing about to go wrong. This is
+    a plain-spoken book about the hypervigilance you can't switch off and the gray
+    exhaustion underneath it. There's no 'just relax' here. There's an honest look
+    at the part of you that's still on shift, even when you're home.
+  long_description: 'You clock out, but you don''t actually clock out. You take the
+    chair that faces the door without thinking about it. You read the parking lot
+    before you read the menu. A sound in the night and you''re awake and already half-deciding
+    what you''d do about it. Everyone around you calls this being good at your job.
+    Nobody mentions what it costs to never, not once, get to fully stand down, or
+    how all that endless watching quietly curdles into something gray and heavy that
+    you''ve started calling depression because you don''t have a better word for it.
 
 
-    For a first responder in the quiet after a call. This book names what depression
-    is doing in your body in language you can use — through recognition, descent,
-    and integration, not worksheets or forced positivity. Book 3 of the First Responders
-    depression series.'
+    This book is for the officer, the paramedic, the firefighter, the dispatcher whose
+    mind has turned into a sentry that won''t accept relief. The watcher kept you
+    alive on shift. It clocked the body language a half-second before the call went
+    sideways, registered the shift in a room before the room itself changed. That
+    part of you is good at its job. The trouble is it doesn''t believe the shift is
+    ever over. It runs at home, in bed, at your kid''s game, in the grocery line,
+    and the constant low-grade scanning has slowly hollowed something out in the middle
+    of you.
+
+
+    Marcus Reed writes for the kind of person who has built a career out of staying
+    ready and is only now realizing that ready and exhausted have quietly become the
+    same condition. The recognition comes first, the plain fact that this depression
+    is not laziness and it is not a character flaw. It is what''s left over when a
+    mind has stood guard for years with no relief in sight. Then the descent. Instead
+    of fighting the vigilance, you go down underneath it to find what it has been
+    guarding against. The call that taught it the world is not safe. The loss it is
+    still braced for. The part of you that has been on post so long it forgot there
+    was ever a version of you that was simply off duty. Integration is not shutting
+    the watcher off, which you couldn''t do anyway. It is letting it know, at last,
+    that it can set its weight down for a while, because you made it home.
+
+
+    This will not tell you to just relax. You already know that command means nothing
+    to a nervous system trained on real danger. It will not hand you a breathing drill
+    that switches off instinct, and it will not pretend the vigilance was the problem
+    rather than the unrelenting price you''ve paid to keep it running. There is no
+    trick that turns a sentry back into a civilian overnight.
+
+
+    What there is instead is language for the watching, so the next time you catch
+    yourself scanning a room you actually love being in, you can name it and let the
+    guard down one notch on purpose. You have stood post long enough. You are allowed
+    to be somewhere that doesn''t need you on alert. Standing down for an hour is
+    not dropping your guard. It is remembering you have a whole life behind the perimeter.'
 keywords:
   primary:
   - overcoming depression
@@ -47,12 +88,13 @@ target_price:
   audible_usd: 9.99
   paperback_usd: 12.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: marcus_reed
 comp_titles:
-- Feeling Good (Burns)
-- Lost Connections (Hari)
-- The Upward Spiral (Korb)
+- The Body Keeps the Score by Bessel van der Kolk
+- Widen the Window by Elizabeth Stanley
+- Why Zebras Don't Get Ulcers by Robert Sapolsky
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -60,3 +102,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

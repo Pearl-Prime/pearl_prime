@@ -16,16 +16,61 @@ target_word_range:
 target_audio_minutes: 60
 title: 'The Thought That Won''t Leave: The False Alarm Response'
 subtitle: A One-Hour Overthinking Reset for Tech & Finance Professionals
-cover_tagline: A One-Hour Overthinking Reset for Tech & Finance Professionals
+cover_tagline: The meeting ended fine. Your head didn't get the memo.
 description:
-  short_blurb: A One-Hour Overthinking Reset for Tech & Finance Professionals The
-    one-hour edition.
-  long_description: 'The Thought That Won''t Leave: The False Alarm Response
+  short_blurb: You closed the laptop, but one moment from the day is still running
+    on a loop — replaying a comment, a tone, a face you can't read. This is a one-hour
+    reset for the tech and finance mind that treats a Slack thread like a threat.
+    It doesn't teach you to stop thinking. It teaches you to recognize when your alarm
+    is firing at nothing.
+  long_description: 'The standup ended an hour ago. The deal closed. The review was,
+    by every measurable signal, fine. And yet here you are — re-running the one sentence
+    you said, the half-second pause before someone replied, the message that got a
+    thumbs-up instead of a real answer. Your chest is tight over something that already
+    went well.
 
 
-    The one-hour edition: the core of the overthinking work for tech & finance professionals,
-    in a single sitting. Recognition, descent, integration — no filler. Book 1 of
-    the one-hour Tech & Finance Professionals overthinking series.'
+    This book is for you: the engineer, the analyst, the operator whose job is to
+    catch the thing before it breaks, and whose mind never learned to tell the difference
+    between a real risk and a finished one. You read threat into a read receipt. You
+    ship the work and then audit yourself for hours. The same pattern-matching that
+    makes you good at the job is the thing keeping you up.
+
+
+    Here is the part nobody names: the day went well, and that is exactly why it won''t
+    let go. If the review had actually gone badly, you''d have something to do — a
+    fix, an apology, a plan. Instead it went fine, so there''s no action to take and
+    nowhere for the energy to go, and your mind keeps re-opening the file looking
+    for the problem it''s sure it missed. You scroll back up the thread. You re-read
+    the message you already sent. You hunt for the tone you might have gotten wrong.
+    It isn''t weakness and it isn''t vanity — it''s a system that can''t mark something
+    closed until it has found the threat, running a search on a folder that is already
+    empty.
+
+
+    What you''re feeling isn''t a character flaw or a discipline problem. It''s a
+    false alarm — a body alarm built for actual danger, firing over a calendar invite.
+    In the next hour, Daniel Cho walks you through three moves. Recognition: you''ll
+    learn to catch the exact moment the alarm trips, the physical tell before the
+    story starts. Descent: instead of arguing the thought down or out-logicking it
+    — which you''ve tried, which doesn''t work — you''ll go toward the feeling underneath
+    it, the one the loop is built to keep you from. Integration: you come back able
+    to feel the alarm and not obey it.
+
+
+    This is direct, secular, real-talk writing. No morning routine. No breathwork
+    protocol to optimize. No gratitude list, no "just don''t think about it," no reframing
+    your way to calm. It will not promise to shut your mind off — a sharp, fast mind
+    is not a bug to be patched, and this book won''t treat it like one. What it offers
+    is something quieter and more useful: the difference between a thought you have
+    and an emergency you''re obligated to solve.
+
+
+    You don''t need to be fixed. You need to stop responding to a false alarm like
+    it''s a fire. The thought that won''t leave isn''t a sign something is wrong with
+    you — it''s a signal that misfired. Read this once, tonight, and the next time
+    it fires, you''ll know it for what it is. You''re allowed to let the alarm ring
+    and stay exactly where you are.'
 keywords:
   primary:
   - stop overthinking
@@ -38,6 +83,7 @@ keywords:
   - overthinking for tech & finance professionals
   - one hour
 bisac_codes:
+- SEL036000
 - SEL027000
 - SEL024000
 - PSY022000
@@ -46,12 +92,16 @@ target_price:
   audible_usd: 6.99
   paperback_usd: 9.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: daniel_cho
 comp_titles:
-- Don't Believe Everything You Think (Nguyen)
-- Stop Overthinking (Hollins)
-- The Worry Trick (Carbonell)
+- Don't Believe Everything You Think (Joseph Nguyen) — names the gap between a thought
+  and the truth it pretends to be
+- The Worry Trick (David A. Carbonell) — exposes how anxiety bluffs you into treating
+  safe as dangerous
+- Stop Overthinking (Nick Trenton) — practical, no-fluff handling of the loop for
+  high-pressure minds
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -59,3 +109,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

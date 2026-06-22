@@ -16,17 +16,56 @@ target_word_range:
 target_audio_minutes: 70
 title: 'The 3am Mind: When Fear Lies to You'
 subtitle: A Real Talk Guide to Sleep Anxiety for the Sandwich Generation
-cover_tagline: A Real Talk Guide to Sleep Anxiety for the Sandwich Generation
+cover_tagline: Your body is convinced something terrible is happening. It's 3am. Nothing
+  is happening. That's the whole problem.
 description:
-  short_blurb: A Real Talk Guide to Sleep Anxiety for the Sandwich Generation A grounded,
-    secular guide to sleep anxiety for the sandwich generation.
-  long_description: 'The 3am Mind: When Fear Lies to You
+  short_blurb: You wake at 3am with your heart already pounding, certain something
+    is wrong, and you lie there scanning for the threat. There isn't one. This book
+    is for the Gen X caregiver whose nights have turned into false alarms, and it
+    teaches you to recognize the fear that lies instead of obeying it until dawn.
+  long_description: 'You wake up and you''re already afraid. Not groggy — afraid.
+    Your heart is going before your eyes are open, your body braced like something
+    is wrong in the house. So you listen. You check the silence for your parent''s
+    breathing, your kid''s door, your own dread. And there''s nothing. The house is
+    fine. Everyone is asleep. It''s 3am and your nervous system has sounded a full
+    alarm over absolutely nothing, and now you''re awake with all of it.
 
 
-    For caring for aging parents and growing kids at once. This book names what sleep
-    anxiety is doing in your body in language you can use — through recognition, descent,
-    and integration, not worksheets or forced positivity. Book 1 of the the Sandwich
-    Generation sleep anxiety series.'
+    This book is for the person in the middle — the one whose days are spent managing
+    a parent''s decline and a child''s needs, and whose nights have become the time
+    the body finally presents the bill. You''re not an insomniac in the ordinary sense.
+    You''re a caregiver whose threat system won''t power down, firing in the dark
+    over dangers that aren''t in the room.
+
+
+    What you need to understand is that 3am fear is a false alarm, and it''s a particular
+    kind of liar. In daylight your mind has tasks, people, motion — context that tells
+    the alarm to stand down. At 3am there''s none of that. There''s just your body''s
+    raw threat response with nothing to anchor it, so it grabs the nearest worry and
+    convinces you it''s urgent. The pounding heart isn''t evidence that something''s
+    wrong. It''s just the alarm, ringing in an empty house, and the more you treat
+    it as a signal to scan and brace, the longer it rings.
+
+
+    So we name it, right there in the dark — this is the false alarm, not a real one.
+    Then, instead of fighting to get back to sleep or arguing with the fear, we go
+    down into the body itself. Not to fix it. To feel the surge for what it is: a
+    system that spent all day holding everyone together and is now discharging in
+    the only quiet it gets. When you stop treating the alarm as a threat and start
+    meeting it as exhaustion wearing fear''s clothes, it has somewhere to go besides
+    keeping you awake.
+
+
+    This is not a sleep-hygiene book. There''s no routine here, no wind-down checklist,
+    no promise that you''ll never wake at 3am again. Some nights you will. The people
+    you love are genuinely fragile and your body knows it. What this book gives you
+    instead is the ability to wake into fear and recognize it as a false alarm — so
+    the waking doesn''t have to become three hours of bracing for nothing.
+
+
+    You are allowed to wake with your heart pounding and not treat it as proof of
+    danger. You are allowed to name it, lie in your own dark house, and let the false
+    alarm ring itself out. The fear woke you. It doesn''t get to keep you.'
 keywords:
   primary:
   - insomnia help
@@ -39,6 +78,7 @@ keywords:
   - the sandwich generation
   - sleep anxiety for the sandwich generation
 bisac_codes:
+- SEL036000
 - SEL027000
 - HEA046000
 - PSY022000
@@ -47,12 +87,16 @@ target_price:
   audible_usd: 9.99
   paperback_usd: 12.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: elena_petrova
 comp_titles:
-- Say Good Night to Insomnia (Jacobs)
-- The Sleep Solution (Winter)
-- Why We Sleep (Walker)
+- Why We Sleep (Matthew Walker) — secular, science-grounded account of what's actually
+  happening when anxiety hijacks the night
+- Dare (Barry McDonagh) — teaches the false-alarm model of nighttime panic and how
+  to stop fueling it
+- Hello Sleep (Jade Wu) — reframes 3am waking without rigid sleep-hygiene rules, treating
+  the anxiety rather than the schedule
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -60,3 +104,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

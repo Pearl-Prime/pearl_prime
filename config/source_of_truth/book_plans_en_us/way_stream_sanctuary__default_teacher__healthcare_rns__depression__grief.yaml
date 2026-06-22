@@ -16,17 +16,51 @@ target_word_range:
 target_audio_minutes: 70
 title: 'The Weight Without a Name: The Weight You Carry'
 subtitle: How Nurses Are Rewriting the Rules of Overcoming Depression
-cover_tagline: How Nurses Are Rewriting the Rules of Overcoming Depression
+cover_tagline: You stopped feeling it on purpose. Now it won't come back.
 description:
-  short_blurb: How Nurses Are Rewriting the Rules of Overcoming Depression A grounded,
-    secular guide to depression for nurses.
-  long_description: 'The Weight Without a Name: The Weight You Carry
+  short_blurb: You learned to set the heaviness down to get through the shift — and
+    somewhere along the way you set down everything else too. This is a book for nurses
+    about the flat, grey weight that has no name and won't lift on command. It doesn't
+    ask you to fix it. It asks you to stop pretending it isn't there.
+  long_description: 'You clock out, you walk to your car, and you sit there in the
+    lot with the engine off because you can''t remember why you were going home. The
+    shift is over. The flat feeling isn''t. You used to call it tired. Tired goes
+    away after sleep. This doesn''t.
 
 
-    For a nurse at the end of a twelve-hour shift. This book names what depression
-    is doing in your body in language you can use — through recognition, descent,
-    and integration, not worksheets or forced positivity. Book 1 of the Nurses depression
-    series.'
+    This book is for the nurse who has gotten very good at not feeling things during
+    a code, during a family conversation, during the bad ones — and who is starting
+    to notice that the off-switch is stuck. You set the heaviness down to keep working.
+    You did it so well, so many times, that you set down the rest of you along with
+    it. Now the colors are gone and you can''t find the dial that turns them back
+    on.
+
+
+    Oscar Bello, a hospital chaplain who has spent years sitting with depleted nurses,
+    writes this without promising you''ll be overcoming depression by Tuesday. He
+    works in three honest moves. First, recognition: naming the specific weight you''ve
+    been calling burnout, exhaustion, or just-a-rough-stretch — because it is grief,
+    and it has been accumulating one patient at a time. Second, descent: going down
+    into it instead of managing it, instead of scheduling it around your next four-on.
+    You will not be asked to journal it away or find the silver lining in a child
+    who didn''t make it. Third, integration: coming back up able to feel the shift
+    again — not lighter, exactly, but no longer numb to your own life.
+
+
+    This book will not give you a morning routine. It will not tell you to be grateful
+    you have a calling. It will not promise that the heaviness lifts if you breathe
+    correctly, hydrate, or think positive on your commute. Depression in nurses is
+    not a willpower problem and this book refuses to treat it like one. There is no
+    optimization here, no protocol to run on yourself the way you run them on everyone
+    else.
+
+
+    What it offers instead is plain language for what is actually happening in your
+    body and your days, language you can use the next time the lot goes quiet and
+    the engine stays off. You learned to go numb to survive the work. You are allowed
+    to come back. You are allowed to feel the weight you''ve been carrying without
+    a name — and you are allowed to put some of it down on purpose, the way you should
+    have been able to all along.'
 keywords:
   primary:
   - overcoming depression
@@ -47,12 +81,16 @@ target_price:
   audible_usd: 9.99
   paperback_usd: 12.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: oscar_bello
 comp_titles:
-- Feeling Good (Burns)
-- Lost Connections (Hari)
-- The Upward Spiral (Korb)
+- The Body Keeps the Score (Bessel van der Kolk) — names how unprocessed trauma lives
+  in the body, not just the mind
+- Maybe You Should Talk to Someone (Lori Gottlieb) — a clinician's honest look at
+  carrying others' pain while quietly carrying your own
+- How to Carry What Can't Be Fixed (Megan Devine) — grief work that refuses to rush
+  you toward closure or a positive spin
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -60,3 +98,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

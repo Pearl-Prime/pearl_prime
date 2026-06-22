@@ -16,17 +16,59 @@ target_word_range:
 target_audio_minutes: 70
 title: 'The Weight Without a Name: When Everything Is Too Much'
 subtitle: A Real Talk Guide to Overcoming Depression for First Responders
-cover_tagline: A Real Talk Guide to Overcoming Depression for First Responders
+cover_tagline: It's not one big thing. It's the four hundredth small thing, and you've
+  got nothing left to meet it with.
 description:
-  short_blurb: A Real Talk Guide to Overcoming Depression for First Responders A grounded,
-    secular guide to depression for first responders.
-  long_description: 'The Weight Without a Name: When Everything Is Too Much
+  short_blurb: 'For first responders whose depression shows up as everything-at-once:
+    the inbox, the kids, the next shift, the weight you can''t name, all landing in
+    the same second. This is a real-talk book about what to do when the volume is
+    too high and you''ve stopped being able to sort it. No life-hacks. Just a way
+    to stand inside the flood without going under.'
+  long_description: 'You can run a multi-casualty scene. You can stand in the middle
+    of strangers having the worst day of their lives and stay calm enough to make
+    the calls that decide who gets seen first. So explain to yourself why standing
+    in your own kitchen, with the dishwasher beeping and three texts unanswered and
+    a shift starting in six hours, makes you want to slide down the cabinet and sit
+    on the floor and not get back up.
 
 
-    For a first responder in the quiet after a call. This book names what depression
-    is doing in your body in language you can use — through recognition, descent,
-    and integration, not worksheets or forced positivity. Book 2 of the First Responders
-    depression series.'
+    This is for the first responder who has started to notice that the depression
+    isn''t a quiet gray anymore. It''s a roar. Too much, all at once, all the time.
+    The job and the overtime and the marriage you keep meaning to repair and the body
+    that aches in places it didn''t used to and the calls you never processed, all
+    of it stacked up and arriving at the same volume. On scene you can sort it. You
+    triage by instinct, worst first, and the noise organizes itself into a sequence
+    you can move through. At home the dial is gone. Everything is urgent and nothing
+    is, and there is no order to impose, so the whole pile just sits on your chest
+    at once.
+
+
+    Marcus Reed does not do pep talks. He writes for people who triage for a living
+    and have somehow wound up unable to triage their own lives. The recognition comes
+    first, the part where you stop reading this as personal failure, as you being
+    bad at the ordinary business of being a person, and start seeing it for what it
+    is: a nervous system that has been redlined for years and never once got the order
+    to stand down. Then the descent. Instead of grabbing for control, you go down
+    underneath the overwhelm and feel what''s actually holding it up. Exhaustion you''ve
+    been overriding since the academy. Grief you filed away. A body that has been
+    on alert so long it has genuinely forgotten what off feels like. Then integration,
+    which here means learning to stand inside the flood without needing to drain it
+    in one heroic move. One real thing at a time. The floor is allowed to hold you
+    for a minute while you find it.
+
+
+    This book will not optimize your morning. It will not hand you a five-step system
+    for managing your life into submission, because the problem was never your system.
+    The problem is that you''ve been carrying a load no system was ever built to carry.
+    There is no hack that turns too-much into just-right.
+
+
+    What it offers is language for the roar, so the next time everything lands at
+    the same second you can name it, overwhelm and not collapse, and put your hand
+    on the one thing in front of you instead of all of it. You spend your whole career
+    bringing order to other people''s worst moments. You are allowed to stop here
+    and let a little order come back to yours. Putting it down for a second is not
+    quitting. It is how you stay in this without it taking you apart.'
 keywords:
   primary:
   - overcoming depression
@@ -47,12 +89,13 @@ target_price:
   audible_usd: 9.99
   paperback_usd: 12.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: marcus_reed
 comp_titles:
-- Feeling Good (Burns)
-- Lost Connections (Hari)
-- The Upward Spiral (Korb)
+- Burnout by Emily Nagoski and Amelia Nagoski
+- Why Zebras Don't Get Ulcers by Robert Sapolsky
+- First, We Make the Beast Beautiful by Sarah Wilson
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -60,3 +103,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

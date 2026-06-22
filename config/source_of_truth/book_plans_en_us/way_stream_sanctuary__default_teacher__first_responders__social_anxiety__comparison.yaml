@@ -16,17 +16,52 @@ target_word_range:
 target_audio_minutes: 70
 title: 'Social Anxiety: Measuring Yourself Against Everyone'
 subtitle: How First Responders Are Rewriting the Rules of Social Anxiety
-cover_tagline: How First Responders Are Rewriting the Rules of Social Anxiety
+cover_tagline: In a crisis you're the calmest one in the room. In the break room you're
+  sure you're the weakest.
 description:
-  short_blurb: How First Responders Are Rewriting the Rules of Social Anxiety A grounded,
-    secular guide to social anxiety for first responders.
-  long_description: 'Social Anxiety: Measuring Yourself Against Everyone
+  short_blurb: You can command a scene full of strangers without a flicker. So why
+    does the station kitchen, the briefing, the after-shift beer leave you measuring
+    yourself against everyone and coming up short? This is for the first responder
+    whose social anxiety only shows up off the clock.
+  long_description: 'Put you in a burning building, a domestic call, a code in the
+    back of a rig, and you''re decisive. People follow you. Then the emergency ends,
+    everybody''s standing around the station kitchen, and something flips. You''re
+    scanning the room — who''s funnier, who''s tighter with the crew, who looks like
+    they belong here more than you do. You handle other people''s worst days for a
+    living and you can''t handle a coffee break without taking inventory of every
+    way you fall short.
 
 
-    For a first responder in the quiet after a call. This book names what social anxiety
-    is doing in your body in language you can use — through recognition, descent,
-    and integration, not worksheets or forced positivity. Book 1 of the First Responders
-    social anxiety series.'
+    This book is for first responders whose social anxiety runs on comparison. The
+    rookie certain everyone on the crew is more squared-away than they are. The veteran
+    who''s good at the job and convinced he''s bad at being a person. The medic measuring
+    her every word in the break room against some standard nobody else seems to be
+    straining for. You''re not insecure because you''re soft — you work in a culture
+    that runs on competence, hierarchy, and never showing the gap. So the gap goes
+    underground, and you measure it in private, constantly, against everyone.
+
+
+    We''re not going to build your confidence with affirmations, because the problem
+    was never that you don''t believe in yourself enough. Recognition first: you learn
+    to catch the measuring in the act — the instant your attention leaves the actual
+    conversation and goes to the scoreboard. Then descent. Instead of trying to win
+    the comparison or talk yourself out of it, you go down underneath it to what the
+    measuring is protecting you from — the thing you''re afraid is true about you,
+    the reason you keep checking the score. Comparison is never about them. It''s
+    a way of not feeling something about yourself. Then integration: you come back
+    able to be in the room as a person instead of an entry on a leaderboard.
+
+
+    This is not a charisma course and it won''t optimize you into the most magnetic
+    one at the table. It will not promise to make you stop noticing other people,
+    win you the crew''s approval, or turn the break room into something you crush.
+    The instinct to measure is wired deep, especially in a paramilitary culture. What
+    changes is that the scoreboard stops running the conversation.
+
+
+    You already know how to walk into the worst room of someone''s life and be steady.
+    The station kitchen is not the worst room. You don''t have to win it. You just
+    have to be in it — and you''re allowed to stop keeping score.'
 keywords:
   primary:
   - social anxiety
@@ -39,6 +74,7 @@ keywords:
   - first responders
   - social anxiety for first responders
 bisac_codes:
+- SEL036000
 - SEL027000
 - SEL031000
 - PSY022000
@@ -47,12 +83,16 @@ target_price:
   audible_usd: 9.99
   paperback_usd: 12.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: cole_bennett
 comp_titles:
-- How to Be Yourself (Hendriksen)
-- The Social Anxiety Workbook (Antony)
-- Quiet (Cain)
+- The Gifts of Imperfection (Brené Brown) — trading the scoreboard for showing up
+  as you are
+- How to Be Yourself (Ellen Hendriksen) — a clinician on social anxiety as self-monitoring,
+  not a flaw
+- The Comparison Cure (Lucy Sheridan) — naming the measuring and stepping off the
+  scale
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -60,3 +100,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

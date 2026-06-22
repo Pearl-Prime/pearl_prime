@@ -16,16 +16,52 @@ target_word_range:
 target_audio_minutes: 60
 title: 'The 3am Mind: The False Alarm Response'
 subtitle: A One-Hour Sleep Reset for Tech & Finance Professionals
-cover_tagline: A One-Hour Sleep Reset for Tech & Finance Professionals
+cover_tagline: Nothing is wrong. Your body is wide awake anyway.
 description:
-  short_blurb: A One-Hour Sleep Reset for Tech & Finance Professionals The one-hour
-    edition.
-  long_description: 'The 3am Mind: The False Alarm Response
+  short_blurb: It's 3am. There's no emergency, no deadline tonight, nothing you can
+    act on — and your body is on full alert like there is. This is a one-hour reset
+    for the tech and finance professional whose nervous system won't power down. It
+    won't hand you a sleep routine. It'll show you why the alarm is firing when there's
+    no fire.
+  long_description: 'It''s a little after 3am. The room is dark, the house is quiet,
+    there is nothing happening and nothing you could do about it if there were. And
+    your body did not get the message. Heart a touch too fast, mind clicked on, a
+    low hum of alert running through you as if something needs handling right now.
+    Nothing is wrong. You are wired anyway.
 
 
-    The one-hour edition: the core of the sleep anxiety work for tech & finance professionals,
-    in a single sitting. Recognition, descent, integration — no filler. Book 1 of
-    the one-hour Tech & Finance Professionals sleep anxiety series.'
+    This book is for you: the engineer, the trader, the operator who spends all day
+    in a state of readiness — markets moving, systems paging, the next thing always
+    one notification away — and whose nervous system has forgotten how to stand down
+    when the day is finally over. You''re not lying awake solving a specific problem.
+    You''re lying awake because your body is still braced for one. The on-switch that
+    makes you good at your job at 2pm is stuck on at 3am.
+
+
+    What''s keeping you up isn''t a real threat. It''s a false alarm — an ancient
+    survival system built for danger, firing into an empty room. In the next hour,
+    Daniel Cho takes you through it, in a single sitting, in the dark if that''s where
+    you are. Recognition: you''ll learn to feel the alarm as an alarm — a physical
+    state, not a verdict on tomorrow. Descent: instead of fighting to force sleep
+    or arguing yourself calm, which only confirms the emergency, you''ll learn to
+    turn toward the activation and let it be there without obeying it. Integration:
+    you come back able to lie awake without the lying-awake becoming its own crisis.
+
+
+    This is grounded, secular, real-talk writing. No sleep-hygiene checklist. No wind-down
+    routine to execute perfectly. No counting, no app, no blue-light sermon, no forcing
+    calm through sheer will. It will not promise to knock you out by a certain page
+    — sleep isn''t a task you can grind, and this book refuses to make your bed one
+    more place you''re failing a metric. What it offers is the thing underneath the
+    panic: the difference between a body on alert and an actual reason to be.
+
+
+    You are not broken for being awake. Your alarm is loud and it is firing at nothing,
+    and you can learn to recognize the difference from inside the dark. The 3am mind
+    isn''t a sign something is wrong with you — it''s a signal that misfired, in a
+    body that hasn''t been told the day is done. Read this once. The next time you
+    surface at 3am, you''ll know the alarm for what it is. You''re allowed to be awake
+    and let your body come down on its own.'
 keywords:
   primary:
   - insomnia help
@@ -38,6 +74,7 @@ keywords:
   - sleep anxiety for tech & finance professionals
   - one hour
 bisac_codes:
+- SEL036000
 - SEL027000
 - HEA046000
 - PSY022000
@@ -46,12 +83,16 @@ target_price:
   audible_usd: 6.99
   paperback_usd: 9.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: daniel_cho
 comp_titles:
-- Say Good Night to Insomnia (Jacobs)
-- The Sleep Solution (Winter)
-- Why We Sleep (Walker)
+- Say Good Night to Insomnia (Gregg D. Jacobs) — drains the nighttime panic that makes
+  wakefulness worse
+- The Sleep Solution (W. Chris Winter) — demystifies why a healthy body wakes at 3am
+  with no real cause
+- Hello Sleep (Jade Wu) — undoes the effort and dread that turn one bad night into
+  a pattern
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -59,3 +100,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

@@ -16,17 +16,51 @@ target_word_range:
 target_audio_minutes: 70
 title: 'The Thing You Won''t Say: The Hidden Weight of Shame'
 subtitle: How First Responders Are Rewriting the Rules of Building Courage
-cover_tagline: How First Responders Are Rewriting the Rules of Building Courage
+cover_tagline: The call you can't shake isn't the one that went wrong. It's the one
+  where you think you did.
 description:
-  short_blurb: How First Responders Are Rewriting the Rules of Building Courage A
-    grounded, secular guide to courage for first responders.
-  long_description: 'The Thing You Won''t Say: The Hidden Weight of Shame
+  short_blurb: There's a thing you carry that you've never said out loud — the call,
+    the freeze, the second you'll never get back. You've decided it means something
+    about you. This is for the first responder living under a verdict no one handed
+    down but you.
+  long_description: 'Everyone debriefed the call. The reports got filed, the chaplain
+    came by, somebody said you did everything right. And you still drive home with
+    it sitting on your chest — the moment you froze, the patient you lost, the thing
+    you didn''t do fast enough — and underneath the replay is a quieter, older sentence:
+    something is wrong with me. You haven''t said it to anyone. You''ve barely said
+    it to yourself. But it runs everything.
 
 
-    For a first responder in the quiet after a call. This book names what courage
-    is doing in your body in language you can use — through recognition, descent,
-    and integration, not worksheets or forced positivity. Book 2 of the First Responders
-    courage series.'
+    This book is for first responders carrying shame they''ve mistaken for facts.
+    Not guilt — guilt says I did a bad thing. Shame says I am the bad thing, and it
+    doesn''t take days off. It''s the cop who''s sure he''s a fraud in his own uniform.
+    The medic certain that if anyone really knew what happened that night, they''d
+    know what she is. The weight you carry into every shift and never set down, because
+    setting it down would mean looking at it.
+
+
+    So we look at it. Recognition first: you learn to hear the difference between
+    a real accounting of what happened and the verdict you bolted onto it — the facts
+    of the call versus the story ''this is who you are.'' Then descent. You stop managing
+    the shame, stop outrunning it with more shifts and more overtime, and you go down
+    into the actual moment instead of the conclusion you drew from it. That''s where
+    it loses its grip — not in the replay, but in the thing under the replay you''ve
+    never let yourself feel all the way through. Then integration: you come back up
+    still carrying the memory, but no longer carrying the sentence. The call is yours.
+    The verdict was never true.
+
+
+    This is not absolution and it''s not a pep talk. It will not tell you the call
+    didn''t matter, that you should forgive yourself and move on, or that you can
+    think your way out of what you feel in your gut at 3 a.m. The weight is real.
+    What''s not real is the conclusion that you''re broken, defective, less-than —
+    that something in you is the problem. That''s the part we set down.
+
+
+    You''ve spent years certain that the worst thing about you is the thing you won''t
+    say. Here''s the quiet truth waiting on the other side of saying it: it was never
+    the worst thing about you. It was just the heaviest. You''re allowed to put it
+    down.'
 keywords:
   primary:
   - building courage
@@ -47,12 +81,16 @@ target_price:
   audible_usd: 9.99
   paperback_usd: 12.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: cole_bennett
 comp_titles:
-- Daring Greatly (Brown)
-- Feel the Fear and Do It Anyway (Jeffers)
-- The Gifts of Imperfection (Brown)
+- I Thought It Was Just Me (Brené Brown) — separating who you are from what happened
+  to you
+- The Body Keeps the Score (Bessel van der Kolk) — why trauma lodges as a verdict
+  about the self
+- The Imposter Cure (Jessamy Hibberd) — a clinical, no-woo route out of the 'something's
+  wrong with me' belief
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -60,3 +98,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

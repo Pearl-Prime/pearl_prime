@@ -16,16 +16,54 @@ target_word_range:
 target_audio_minutes: 60
 title: 'The Weight Without a Name: Living with What You''ve Lost'
 subtitle: A One-Hour Depression Reset for Tech & Finance Professionals
-cover_tagline: A One-Hour Depression Reset for Tech & Finance Professionals
+cover_tagline: The numbers are fine. You are not. Start there.
 description:
-  short_blurb: A One-Hour Depression Reset for Tech & Finance Professionals The one-hour
-    edition.
-  long_description: 'The Weight Without a Name: Living with What You''ve Lost
+  short_blurb: For the high performer who can still hit every deadline but feels nothing
+    when they do. This is a one-hour reckoning with the flat, grey weight that no
+    promotion fixes — the grief of a self you've quietly lost. No optimization. Just
+    honest words for what's actually happening.
+  long_description: 'You closed the quarter. You shipped the thing. You got the message
+    that said great work, and you felt nothing — not relief, not pride, not even tired
+    in a way that means anything. Just a grey flatness that follows you from the standup
+    to the parking garage to the bed you don''t want to get out of. From the outside
+    you are performing. From the inside, something has gone missing, and you can''t
+    name it, which is why it''s so heavy.
 
 
-    The one-hour edition: the core of the depression work for tech & finance professionals,
-    in a single sitting. Recognition, descent, integration — no filler. Book 1 of
-    the one-hour Tech & Finance Professionals depression series.'
+    This hour is for you: the engineer, the analyst, the operator, the one who built
+    an entire identity on being the person who doesn''t break. The one who''s started
+    running the math on your own life — how many years of this, what it was supposed
+    to add up to — and come up short. You''re not failing. You''re grieving. You''ve
+    lost a version of yourself you never got to say goodbye to: the one who used to
+    care about this, who had a Sunday, who didn''t measure every hour against what
+    it returned.
+
+
+    Ana Reyes won''t tell you to be grateful or to optimize your recovery like it''s
+    a sprint. This is recognition first — putting a true word on the weight so it
+    stops being a vague personal failing and becomes a thing you can actually look
+    at. Then descent: going down into the loss instead of out-working it, instead
+    of treating the flatness as a bug to patch before Monday. Then integration — not
+    fixed, not back to your old throughput, but no longer at war with what you feel.
+    You come back changed, carrying it differently.
+
+
+    This will not give you a morning routine or five habits of resilient leaders.
+    It will not promise that you''ll feel motivated again by Tuesday or that your
+    numbers will recover. There is no worksheet. There is nothing here to complete.
+    The flatness is not a deficiency in your discipline, and you cannot grind your
+    way out of grief — that''s the one thing the market never taught you.
+
+
+    What you''ll find instead are plain words for the exact thing happening in your
+    body and your mind: the heaviness, the static, the strange distance from your
+    own life. Words you can reach for the next time the great-work message lands and
+    the nothing rises up to meet it.
+
+
+    You are allowed to have lost something real. You''re allowed to stop pretending
+    the weight isn''t there just because no one on the org chart can see it. Sit down.
+    You don''t have to carry this like it''s another deliverable.'
 keywords:
   primary:
   - overcoming depression
@@ -46,12 +84,16 @@ target_price:
   audible_usd: 6.99
   paperback_usd: 9.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: ana_reyes
 comp_titles:
-- Feeling Good (Burns)
-- Lost Connections (Hari)
-- The Upward Spiral (Korb)
+- The Midnight Library (Matt Haig) — a flat, joyless life reckoned with one honest
+  hour at a time
+- Maybe You Should Talk to Someone (Lori Gottlieb) — high-functioning people quietly
+  falling apart and finally naming it
+- Burnout (Emily Nagoski & Amelia Nagoski) — completing the stress cycle instead of
+  grinding through it
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -59,3 +101,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

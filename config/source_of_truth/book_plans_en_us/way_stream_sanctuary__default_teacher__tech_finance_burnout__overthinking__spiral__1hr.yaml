@@ -16,16 +16,53 @@ target_word_range:
 target_audio_minutes: 60
 title: 'The Thought That Won''t Leave: When One Thought Becomes a Thousand'
 subtitle: A One-Hour Overthinking Reset for Tech & Finance Professionals
-cover_tagline: A One-Hour Overthinking Reset for Tech & Finance Professionals
+cover_tagline: One comment. One bug. One number. By midnight it's everything.
 description:
-  short_blurb: A One-Hour Overthinking Reset for Tech & Finance Professionals The
-    one-hour edition.
-  long_description: 'The Thought That Won''t Leave: When One Thought Becomes a Thousand
+  short_blurb: It starts with a single thread — a line in a review, a flag on a model,
+    a thing someone almost said. An hour later your whole career is on trial in your
+    head. This is a one-hour reset for the tech and finance mind that compounds a
+    small worry into a catastrophe. It won't help you think faster. It'll help you
+    stop the multiplication.
+  long_description: 'It always starts small. One comment in the PR. One number that
+    came in under. One Slack message left on read. A single, ordinary thread — and
+    then your mind does the thing it''s brilliant and merciless at: it follows the
+    chain. If this, then that. If that, then the next thing. If they noticed this,
+    what else have they noticed. Twenty minutes later you''re not worried about a
+    comment anymore; you''re worried about whether you''re good at any of this, whether
+    they''re already talking, whether the whole thing is about to come apart.
 
 
-    The one-hour edition: the core of the overthinking work for tech & finance professionals,
-    in a single sitting. Recognition, descent, integration — no filler. Book 2 of
-    the one-hour Tech & Finance Professionals overthinking series.'
+    This book is for you: the person whose job rewards thinking three steps ahead,
+    who runs scenarios for a living, and whose greatest professional strength turns
+    predatory the moment it points inward. You don''t have one anxious thought. You
+    have a cascade — each one logically hooked to the last, every link feeling like
+    evidence. By the time you surface, the original spark is long gone and you''re
+    somewhere catastrophic with no idea how you got there.
+
+
+    The spiral is not you being dramatic. It''s a real mechanism: a mind that mistakes
+    momentum for truth, that treats the next worried thought as proof the last one
+    was right. In one hour, Daniel Cho takes you through it. Recognition: you''ll
+    learn to feel the exact moment the chain starts pulling — the first link, before
+    the speed. Descent: instead of trying to out-argue every branch, which only feeds
+    it, you''ll learn to stop following and drop into what the spiral is racing away
+    from. Integration: you come back able to watch a thought arrive without grabbing
+    the next one.
+
+
+    This is grounded, secular writing in plain language. No worksheet. No thought-record
+    table to fill out at 1am. No forcing the positive, no "interrupt the pattern"
+    tricks that just become one more thing to do perfectly. It will not promise a
+    quiet mind, and it won''t pretend your speed is the problem — your speed is an
+    asset that has, for now, no brakes. This gives you the brakes: the moment of choice
+    between the first thought and the thousandth.
+
+
+    You are not broken for spiraling. You are running a fast process with no exit
+    condition, and you can learn where the exit is. One thought does not have to become
+    a thousand. The loop ends not when you finally think the right thing, but when
+    you stop chasing the next one. Read this once. Then, the next time it starts pulling,
+    you''ll feel the first link — and you''re allowed to simply not take the second.'
 keywords:
   primary:
   - stop overthinking
@@ -38,6 +75,7 @@ keywords:
   - overthinking for tech & finance professionals
   - one hour
 bisac_codes:
+- SEL036000
 - SEL027000
 - SEL024000
 - PSY022000
@@ -46,12 +84,16 @@ target_price:
   audible_usd: 6.99
   paperback_usd: 9.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: daniel_cho
 comp_titles:
-- Don't Believe Everything You Think (Nguyen)
-- Stop Overthinking (Hollins)
-- The Worry Trick (Carbonell)
+- Stop Overthinking (Nick Trenton) — targets rumination and the runaway worry-chain
+  head-on
+- Don't Believe Everything You Think (Joseph Nguyen) — cuts the thread between a passing
+  thought and the story it spins
+- Rewire Your Anxious Brain (Catherine M. Pittman) — explains the mechanism that turns
+  one worry into a cascade
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -59,3 +101,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

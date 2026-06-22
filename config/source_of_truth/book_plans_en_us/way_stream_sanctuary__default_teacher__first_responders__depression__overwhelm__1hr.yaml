@@ -16,15 +16,54 @@ target_word_range:
 target_audio_minutes: 60
 title: 'The Weight Without a Name: When Everything Is Too Much'
 subtitle: A One-Hour Depression Reset for First Responders
-cover_tagline: A One-Hour Depression Reset for First Responders
+cover_tagline: It's not one call. It's all of them at once, with nowhere to put any
+  of it.
 description:
-  short_blurb: A One-Hour Depression Reset for First Responders The one-hour edition.
-  long_description: 'The Weight Without a Name: When Everything Is Too Much
+  short_blurb: Too many scenes, too many shifts, too much absorbed and never set down
+    — and now even the simple stuff feels like more than you can carry. This is an
+    hour for the first responder who isn't broken, just buried, and needs somewhere
+    to set the load down before the next tone drops.
+  long_description: 'You''re sitting in the rig in the bay, or in the cruiser in a
+    lot, or at the kitchen table after a shift, and you can''t make yourself move.
+    Not because you''re lazy. Because everything is too much at once — the calls stacking
+    up in your head, the overtime, the stuff at home you keep meaning to deal with,
+    the next tone you know is coming. Your chest is tight and your jaw is set and
+    you feel like if one more thing lands on you the whole stack comes down.
 
 
-    The one-hour edition: the core of the depression work for first responders, in
-    a single sitting. Recognition, descent, integration — no filler. Book 2 of the
-    one-hour First Responders depression series.'
+    This hour is for first responders living in overwhelm. The kind that comes from
+    running call after call with no decompression between them. The medic clearing
+    one scene while the next is already toned out. The cop whose caseload and court
+    dates and home life have all merged into one undifferentiated wall of too-much.
+    The dispatcher juggling six emergencies at once and then expected to drive home
+    and be normal. You''re good in the chaos on scene — that''s the cruel part. You
+    can run a mass casualty and freeze in your own driveway. The overwhelm isn''t
+    a failure of the skills that make you good at this. It''s the bill for using them
+    without rest.
+
+
+    We''re not going to organize your life. No priority matrix, no time-blocking,
+    no productivity system to make you a more efficient machine — you don''t need
+    to be more efficient, you need to stop drowning. First we name it: this is overwhelm,
+    the nervous system of someone who''s run too many calls with no room between them.
+    Then we go down into it — not to solve the pile, but to feel the actual ground
+    underneath it, the part of you that exists separate from the load. You learn to
+    find that ground in the bay, in the lot, in the ninety seconds before you walk
+    in your own front door.
+
+
+    This book will not promise the pile gets smaller. The job is the job; the calls
+    keep coming. It will not optimize you. It will not tell you that you''re handling
+    it wrong. What it does is separate you from the weight long enough to breathe
+    — so the next thing that lands has somewhere to land that isn''t directly on your
+    chest.
+
+
+    You carry impossible loads for strangers on the worst day of their lives, and
+    you do it without flinching. For one hour, you get to stop carrying. Not forever.
+    Just long enough to remember there''s a floor under all of it, and you''re standing
+    on it. Set it down. It''ll still be there in an hour, and so will you — a little
+    steadier.'
 keywords:
   primary:
   - overcoming depression
@@ -45,12 +84,16 @@ target_price:
   audible_usd: 6.99
   paperback_usd: 9.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: marcus_reed
 comp_titles:
-- Feeling Good (Burns)
-- Lost Connections (Hari)
-- The Upward Spiral (Korb)
+- Burnout (Emily Nagoski & Amelia Nagoski) — completing the stress cycle for people
+  whose work never lets them decompress
+- Why Zebras Don't Get Ulcers (Robert Sapolsky) — what chronic, back-to-back stress
+  actually does to the body that absorbs it
+- Do Nothing (Celeste Headlee) — permission to stop performing relentless capacity
+  and let the load down
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -58,3 +101,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false
