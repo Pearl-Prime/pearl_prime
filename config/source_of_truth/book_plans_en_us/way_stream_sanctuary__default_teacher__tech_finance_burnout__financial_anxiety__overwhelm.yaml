@@ -16,18 +16,54 @@ target_word_range:
 target_audio_minutes: 70
 title: 'The Number in Your Head: The Shutdown Point'
 subtitle: A Field Guide for Tech and Finance Professionals Navigating Financial Anxiety
-cover_tagline: A Field Guide for Tech and Finance Professionals Navigating Financial
-  Anxiety
+cover_tagline: You make good money and still feel like the floor could drop.
 description:
-  short_blurb: A Field Guide for Tech and Finance Professionals Navigating Financial
-    Anxiety A grounded, secular guide to money anxiety for tech & finance professionals.
-  long_description: 'The Number in Your Head: The Shutdown Point
+  short_blurb: The brokerage app is up, the deposits are landing, and somewhere underneath
+    all of it sits a number that decides whether you can breathe. This is a field
+    guide for the engineer, the analyst, the operator who looks fine on paper and
+    feels maxed out anyway. It will not optimize your anxiety. It will teach you to
+    recognize the moment your system overloads and what to do when there's too much
+    to hold.
+  long_description: 'It usually hits between Slack pings. A market headline, a vesting
+    date, a number you half-remember from your statement, and suddenly your chest
+    is tight and you cannot tell whether you''re worried about money or just out of
+    capacity. You earn more than most people you grew up with. That fact does not
+    slow the spin. If anything, it sharpens it, because if you''re anxious on this
+    salary, what does that say about you?
 
 
-    For a tech or finance professional running on empty. This book names what money
-    anxiety is doing in your body in language you can use — through recognition, descent,
-    and integration, not worksheets or forced positivity. Book 1 of the Tech & Finance
-    Professionals money anxiety series.'
+    This book is for the people who run on financial inputs all day and then carry
+    one more number home: the software engineer watching their equity tick, the trader
+    who can price risk for clients but not for their own life, the finance professional
+    who has the spreadsheet and still feels underwater. You are not bad with money.
+    You are overwhelmed by it, which is a different thing, and the strategies you''ve
+    tried treat the wrong problem.
+
+
+    Waystream calls overwhelm what it is: too many open tabs in a nervous system that
+    was never meant to hold this much at once. The work here is not to optimize. It''s
+    to recognize the exact moment your bandwidth maxes out -- the point where one
+    more input makes everything go gray and your hand reaches for the app you''ve
+    already checked four times. We name that shutdown point in plain language you
+    can use the next time you feel it land. Then we go down into it instead of trying
+    to fix it: what''s actually loaded, what you''ve been carrying that was never
+    yours to hold alone, what your body is asking for when it tells you to flee the
+    dashboard. You come back not with fewer worries but with a different relationship
+    to the load -- able to feel the surge without being run by it.
+
+
+    This is not a budgeting book. There is no spreadsheet that ends the anxiety, no
+    morning routine, no reframe that turns dread into gratitude on command. It will
+    not promise you a number that finally feels like enough -- because the relief
+    you''re after was never on the other side of more. It''s on the other side of
+    being able to stay in your own body when the surge comes.
+
+
+    Work from the assumption that the panic is intelligent. It''s flagging an overload,
+    not a character defect. You''re allowed to have built a life that pays well and
+    still feel maxed out. You''re allowed to put the phone down with the number unresolved.
+    You''re allowed to stop treating your own nervous system like a system outage
+    you have to triage at 11pm.'
 keywords:
   primary:
   - money anxiety
@@ -40,6 +76,7 @@ keywords:
   - tech & finance professionals
   - money anxiety for tech & finance professionals
 bisac_codes:
+- SEL036000
 - SEL027000
 - BUS050000
 - PSY022000
@@ -48,12 +85,16 @@ target_price:
   audible_usd: 9.99
   paperback_usd: 12.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: ana_reyes
 comp_titles:
-- The Psychology of Money (Housel)
-- Your Money or Your Life (Robin)
-- I Will Teach You to Be Rich (Sethi)
+- Burnout (Emily Nagoski & Amelia Nagoski) — names the stress cycle in the body rather
+  than scolding you for feeling it
+- The Psychology of Money (Morgan Housel) — separates financial behavior from financial
+  math, which is the whole problem here
+- Why Has Nobody Told Me This Before? (Julie Smith) — plain-language nervous-system
+  tools without the wellness gloss
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -61,3 +102,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

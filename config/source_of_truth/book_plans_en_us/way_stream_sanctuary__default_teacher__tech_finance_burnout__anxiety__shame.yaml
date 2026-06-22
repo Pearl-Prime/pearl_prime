@@ -13,19 +13,55 @@ target_word_range:
 target_audio_minutes: 70
 title: 'The Alarm Is Lying: Carrying What You Can''t Say'
 subtitle: How Tech and Finance Professionals Are Rewriting the Rules of Anxiety Relief
-cover_tagline: How Tech and Finance Professionals Are Rewriting the Rules of Anxiety
-  Relief
+cover_tagline: The fear isn't that you'll fail. It's that they'll find out you were
+  never enough.
 description:
-  short_blurb: How Tech and Finance Professionals Are Rewriting the Rules of Anxiety
-    Relief A grounded, secular guide to anxiety for tech & finance professionals.
-  long_description: 'The Alarm Is Lying: Carrying What You Can''t Say
+  short_blurb: 'Behind the performance reviews and the closed deals sits a quieter
+    belief: that something is wrong with you, and one day the room will see it. This
+    is a book about the shame underneath high-functioning anxiety — the thing you
+    can''t say out loud. It won''t tell you you''re amazing. It''ll let you stop hiding.'
+  long_description: 'It''s not the work that scares you. You can do the work. It''s
+    the meeting where you''ll be exposed, the question you won''t be able to answer,
+    the moment someone finally clocks that you''ve been faking your way through and
+    you were never as capable as the title suggests. You over-prepare, over-deliver,
+    stay late not to excel but to cover — because underneath all of it is a belief
+    you''d never say out loud: that something is fundamentally wrong with you, and
+    your whole job is keeping it hidden.
 
 
-    For a tech or finance professional running on empty. This book doesn''t promise
-    to make anxiety stop — it names what''s happening in your body in language you
-    can use the next time it happens. Through recognition, descent, and integration,
-    not worksheets or forced positivity. Book 5 of the Tech & Finance Professionals
-    anxiety series.'
+    This book is for the tech and finance professionals who look like they have it
+    handled and are privately braced to be found out. The high performer running on
+    dread. The one whose anxiety isn''t really about the deadline — it''s about what
+    the deadline might reveal. You carry something you can''t say, and carrying it
+    in silence is its own full-time job. Every clean deliverable buys you one more
+    day of cover, and the relief never lasts past the next assignment, because the
+    deliverable was never really the point.
+
+
+    Waystream doesn''t tell you to think more positively about yourself. First you
+    name it: this is shame, not modesty, not ''high standards'' — a buried verdict
+    that something is wrong with you, hardened into a way of working. Then you go
+    down into it instead of out-performing it for one more quarter. You look at the
+    belief directly — where it came from, whose voice it actually is, what it''s cost
+    you to keep proving it wrong. That''s the descent, and it''s the part the achievement
+    was built to help you avoid. What comes back is not a person brimming with confidence.
+    It''s a person who can be seen without bracing to be exposed.
+
+
+    This is not a book of affirmations. It will not tell you you''re brilliant, that
+    impostor syndrome is a myth, or that the right self-talk dissolves the feeling.
+    The shame is not erased by being told it''s wrong. It''s loosened by being looked
+    at — named in plain words instead of buried under one more flawless deliverable.
+
+
+    No positivity. No ''fake it till you make it.'' No morning mantra. Just honest
+    language for the thing you''ve never said, so you can stop running a career as
+    an elaborate cover story.
+
+
+    There is nothing wrong with you that needs hiding. You are allowed to be seen
+    — not the performance, you — and discover the room doesn''t fall away. The thing
+    you can''t say loses its grip the moment it''s finally said.'
 keywords:
   primary:
   - anxiety relief
@@ -39,6 +75,7 @@ keywords:
   - tech & finance professionals
   - anxiety for tech & finance professionals
 bisac_codes:
+- SEL036000
 - SEL027000
 - SEL024000
 - PSY022000
@@ -47,12 +84,16 @@ target_price:
   audible_usd: 9.99
   paperback_usd: 12.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: daniel_cho
 comp_titles:
-- Dare (Barry McDonagh)
-- The Anxiety and Phobia Workbook (Bourne)
-- Unwinding Anxiety (Judson Brewer)
+- The Gifts of Imperfection (Brené Brown) — the definitive secular work on shame and
+  being seen
+- The Secret Thoughts of Successful Women & Men (Valerie Young) — names the impostor
+  belief driving high performers' dread
+- Radical Acceptance (Tara Brach) — meeting the 'something is wrong with me' verdict
+  directly, without spiritual jargon
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -60,3 +101,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

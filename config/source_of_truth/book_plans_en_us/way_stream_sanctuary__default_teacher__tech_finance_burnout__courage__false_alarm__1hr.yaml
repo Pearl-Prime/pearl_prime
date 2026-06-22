@@ -16,16 +16,57 @@ target_word_range:
 target_audio_minutes: 60
 title: 'The Thing You Won''t Say: The False Alarm Response'
 subtitle: A One-Hour Courage Reset for Tech & Finance Professionals
-cover_tagline: A One-Hour Courage Reset for Tech & Finance Professionals
+cover_tagline: Your body thinks disagreeing in a meeting is a threat to your life.
+  It isn't.
 description:
-  short_blurb: A One-Hour Courage Reset for Tech & Finance Professionals The one-hour
-    edition.
-  long_description: 'The Thing You Won''t Say: The False Alarm Response
+  short_blurb: You had the better answer. You knew the estimate was wrong, the architecture
+    was a mistake, the deal terms were off. And you sat there, heart slamming, and
+    said nothing. This is a one-hour, no-nonsense look at the false alarm that fires
+    the second speaking up might cost you something.
+  long_description: 'The room goes quiet, the lead asks if anyone disagrees, and you
+    feel it before you decide anything: the heat in your face, the heartbeat in your
+    ears, the sudden certainty that whatever you were about to say is wrong. So you
+    nod. You let it pass. You tell yourself you''ll send a Slack later. You don''t.
 
 
-    The one-hour edition: the core of the courage work for tech & finance professionals,
-    in a single sitting. Recognition, descent, integration — no filler. Book 1 of
-    the one-hour Tech & Finance Professionals courage series.'
+    This hour is for the engineer, the PM, the analyst, the banker who keeps the most
+    useful thing in the room locked behind their teeth. You are not a coward. Your
+    nervous system is running a threat program that cannot tell the difference between
+    a saber-tooth and a senior director, and right now it treats one careful sentence
+    in a planning meeting as a danger to your survival.
+
+
+    First we name it plainly. The pounding, the dry mouth, the going-blank — that
+    is a false alarm, a smoke detector screaming at toast. It is not evidence that
+    you are wrong, unqualified, or about to be exposed. It is just the alarm, and
+    an alarm is not a verdict.
+
+
+    Then we go down into it instead of fixing it. You''ll learn to feel the spike
+    land and stay in your seat without obeying it — to let the body finish its loud,
+    harmless thing while you keep your eyes open and your point intact. We''ll sit
+    with the exact moment it peaks, the one your whole system has been treating as
+    proof you should stay quiet, and we''ll let it crest and fall without acting on
+    it. Not breathing exercises. Not power poses. Just the willingness to be there
+    while it happens and not call it the truth.
+
+
+    You come back able to tell the alarm from the actual stakes. The meeting was never
+    going to kill you. The disagreement was never the threat your body insisted it
+    was, and once you''ve felt that in your own chest a single time, the room stops
+    looking like a place where speaking gets you hurt.
+
+
+    This will not make the fear go away. It will not turn you into the loudest person
+    in standup or hand you a script for radical candor. There is no optimization here,
+    no 30-day plan, no becoming someone bolder. What changes is that the alarm stops
+    getting the final vote on what comes out of your mouth.
+
+
+    The next time the room goes quiet and your chest goes tight, you''ll know exactly
+    what''s happening in your body — and you''ll know it''s safe to say the thing
+    anyway. You''re allowed to speak before the fear gives you permission. It never
+    will.'
 keywords:
   primary:
   - building courage
@@ -46,12 +87,15 @@ target_price:
   audible_usd: 6.99
   paperback_usd: 9.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: daniel_cho
 comp_titles:
-- Daring Greatly (Brown)
-- Feel the Fear and Do It Anyway (Jeffers)
-- The Gifts of Imperfection (Brown)
+- Dare to Lead (Brené Brown) — courage at work as a practice, not a personality trait
+- The Confidence Gap (Russ Harris) — act with the fear present instead of waiting
+  for it to leave
+- When Panic Attacks (David D. Burns) — names the false-alarm physiology behind everyday
+  dread
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -59,3 +103,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

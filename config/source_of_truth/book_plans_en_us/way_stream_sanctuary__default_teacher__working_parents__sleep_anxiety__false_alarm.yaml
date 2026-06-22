@@ -16,17 +16,55 @@ target_word_range:
 target_audio_minutes: 70
 title: 'The 3am Mind: The False Alarm Response'
 subtitle: A Real Talk Guide to Sleep Anxiety for Working Parents
-cover_tagline: A Real Talk Guide to Sleep Anxiety for Working Parents
+cover_tagline: It's 3am, the house is silent, and your body is convinced something
+  is wrong.
 description:
-  short_blurb: A Real Talk Guide to Sleep Anxiety for Working Parents A grounded,
-    secular guide to sleep anxiety for working parents.
-  long_description: 'The 3am Mind: The False Alarm Response
+  short_blurb: You wake at 3am with your heart already pounding before a single thought
+    has formed, certain something is wrong when nothing is. This is the false alarm,
+    your body's danger signal firing into the dark. This book helps you recognize
+    it so the middle of the night stops feeling like an emergency.
+  long_description: 'It''s 3am. The house is dark, everyone is asleep, and you''re
+    wide awake with your heart going like you just heard a noise downstairs, except
+    there was no noise. There''s no emergency. The kids are in their beds. Tomorrow''s
+    problems are still hours away. But your body woke up sounding the alarm anyway,
+    and now you''re lying there flooded with a dread that arrived before any actual
+    thought did, scanning the dark for the thing that''s wrong when nothing is wrong
+    at all.
 
 
-    For a working parent with no minute that''s their own. This book names what sleep
-    anxiety is doing in your body in language you can use — through recognition, descent,
-    and integration, not worksheets or forced positivity. Book 1 of the Working Parents
-    sleep anxiety series.'
+    This is for the working parent who keeps getting jolted awake by an alarm with
+    no fire behind it. You who surface at 3am already braced, already certain, already
+    running through the catastrophe even though you can''t name it yet. You who lies
+    there doing the math on how few hours are left before the alarm goes off and the
+    whole relentless day begins. You''re not failing at sleep. Your body''s danger
+    system is firing in the one stretch of dark you finally had to yourself, and no
+    one ever explained that the feeling can be that loud and still be false.
+
+
+    So let''s call it what it is: this is the false alarm, the body''s threat response
+    going off when there is no threat, and the dark just makes it louder. Then, instead
+    of wrestling your way back to sleep, we sink into the feeling on purpose, because
+    you already know that the harder you chase sleep at 3am, the more awake you become.
+    You''ll learn what the false alarm feels like in your body before your mind dresses
+    it up in worries, why the silence and the hour amplify it, and how trying to solve
+    the imaginary problem only convinces your body the alarm was right. We don''t
+    fix the fear. We don''t hand you a sleep hack that fails the moment you''re actually
+    scared. We let the alarm ring without obeying it, until your nervous system slowly
+    learns that 3am is not a crisis. That''s what changes: not guaranteed sleep, but
+    a body that stops treating darkness as danger.
+
+
+    This is honest, plain-spoken company for the loneliest hour, written for a parent
+    running on too little rest already. No sleep-hygiene checklist. No breathing routine
+    that turns into one more thing to fail at. Just the truth about what''s happening
+    in your body and a way to meet it in the dark.
+
+
+    Nobody''s promising you eight unbroken hours or a mind that never wakes you again.
+    It will not optimize your sleep. What it leaves you with is recognition, so the
+    next 3am alarm finds you knowing exactly what it is. You''ll still wake. Your
+    heart will still pound. But you''ll be the parent who knows the difference between
+    danger and a false alarm in the dark. You''re allowed to lie there awake and unafraid.'
 keywords:
   primary:
   - insomnia help
@@ -39,6 +77,7 @@ keywords:
   - working parents
   - sleep anxiety for working parents
 bisac_codes:
+- SEL036000
 - SEL027000
 - HEA046000
 - PSY022000
@@ -47,12 +86,16 @@ target_price:
   audible_usd: 9.99
   paperback_usd: 12.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: tomas_vidal
 comp_titles:
-- Say Good Night to Insomnia (Jacobs)
-- The Sleep Solution (Winter)
-- Why We Sleep (Walker)
+- Say Good Night to Insomnia (Gregg Jacobs) — secular, body-based approach to nighttime
+  arousal and waking
+- The Anxiety and Phobia Workbook (Edmund Bourne) — maps the physical false-alarm
+  response in plain terms
+- Why We Sleep (Matthew Walker) — demystifies night wakings so they stop feeling like
+  emergencies
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -60,3 +103,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

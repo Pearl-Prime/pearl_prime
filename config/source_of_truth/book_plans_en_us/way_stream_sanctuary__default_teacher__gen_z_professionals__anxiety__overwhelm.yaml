@@ -13,18 +13,52 @@ target_word_range:
 target_audio_minutes: 70
 title: 'The Alarm Is Lying: Drowning in Demands'
 subtitle: How Young Professionals Are Rewriting the Rules of Anxiety Relief
-cover_tagline: How Young Professionals Are Rewriting the Rules of Anxiety Relief
+cover_tagline: It's not that you're bad at this. It's that twelve things are on fire
+  and you only have two hands.
 description:
-  short_blurb: How Young Professionals Are Rewriting the Rules of Anxiety Relief A
-    grounded, secular guide to anxiety for young professionals.
-  long_description: 'The Alarm Is Lying: Drowning in Demands
+  short_blurb: Every channel is pinging, every task is urgent, and you've been at
+    capacity for so long you forgot capacity has a limit. This isn't a focus problem
+    you can productivity-hack your way out of. This book helps you recognize true
+    overwhelm and come back down from it, without one more system to maintain.
+  long_description: 'Your screen has nineteen tabs. Three apps are notifying you right
+    now. There''s a thing due today you haven''t started, a message you''ve left on
+    read for two days because answering it means opening a door you can''t handle,
+    and a meeting in eight minutes you''re not ready for. You''re not lazy and you''re
+    not behind because you''re bad at this. You are simply taking on more than any
+    nervous system can hold, and your body has started to seize up under the weight
+    of all of it at once.
 
 
-    For early in a demanding career, phone always buzzing. This book doesn''t promise
-    to make anxiety stop — it names what''s happening in your body in language you
-    can use the next time it happens. Through recognition, descent, and integration,
-    not worksheets or forced positivity. Book 4 of the Young Professionals anxiety
-    series.'
+    This book is for the young professional drowning in demands. The one early in
+    a career who said yes to everything to prove themselves and now can''t find the
+    bottom of the pile. Who feels the panic rise not from one big thing but from the
+    sheer number of things, all live, all at once. Who has tried every app and method
+    and still ends most days frayed and behind. If you''re at capacity and past it,
+    with a body that locks up when the inputs won''t stop, this is written for your
+    actual life.
+
+
+    First, recognition: you''ll learn the difference between busy and genuinely overwhelmed
+    — the specific moment your system tips from working hard to shutting down. Then
+    you go down into it instead of trying to muscle through. You''ll turn toward the
+    overwhelm rather than adding one more coping technique on top of it, and you''ll
+    find what''s underneath the can''t-stop: often the fear of what it would mean
+    to not be able to do it all. This is the descent, and it''s where the grip actually
+    loosens. You come back able to feel the pile without becoming it.
+
+
+    What this book refuses to do: it will not hand you a new productivity system,
+    a prioritization matrix, or a morning routine that promises to make it all manageable.
+    There''s no optimization here, no hack that lets you hold more. The demands will
+    pile up again — that''s the nature of the work you''re in. What changes is that
+    you''ll recognize the moment of overwhelm for what it is, and stop treating your
+    limit like a personal failing.
+
+
+    You are allowed to be at capacity. You''re allowed to not answer the message,
+    not finish the list, not hold it all — and to let that be okay instead of an emergency.
+    You don''t need a better system. You need to know the difference between a hard
+    day and a body sounding an alarm, and you''re about to.'
 keywords:
   primary:
   - anxiety relief
@@ -38,6 +72,7 @@ keywords:
   - young professionals
   - anxiety for young professionals
 bisac_codes:
+- SEL036000
 - SEL027000
 - SEL024000
 - PSY022000
@@ -46,12 +81,16 @@ target_price:
   audible_usd: 9.99
   paperback_usd: 12.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: ravi_chandra
 comp_titles:
-- Dare (Barry McDonagh)
-- The Anxiety and Phobia Workbook (Bourne)
-- Unwinding Anxiety (Judson Brewer)
+- Four Thousand Weeks (Oliver Burkeman) — argues against optimizing your way out of
+  finite limits
+- Burnout (Emily Nagoski & Amelia Nagoski) — secular framework for a stress-saturated
+  nervous system
+- How to Keep House While Drowning (KC Davis) — compassionate, no-shame take on being
+  past capacity
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -59,3 +98,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

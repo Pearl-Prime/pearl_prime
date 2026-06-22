@@ -16,15 +16,53 @@ target_word_range:
 target_audio_minutes: 60
 title: 'The 3am Mind: Drowning in Demands'
 subtitle: A One-Hour Sleep Reset for Working Parents
-cover_tagline: A One-Hour Sleep Reset for Working Parents
+cover_tagline: You lay down to sleep and the whole list lay down with you.
 description:
-  short_blurb: A One-Hour Sleep Reset for Working Parents The one-hour edition.
-  long_description: 'The 3am Mind: Drowning in Demands
+  short_blurb: The day finally ends, you close your eyes, and everything you didn't
+    get to floods in at once. For the working parent drowning in demands the moment
+    the lights go out, this is a one-hour reset for the night the to-do list won't
+    let you sleep.
+  long_description: 'You did everything you could today and it still wasn''t enough,
+    and now it''s midnight and you''re horizontal and the whole undone list has climbed
+    into bed with you. The forms. The lunches. The thing at work. The text you forgot
+    to send. The dentist you keep meaning to call. It all arrives at once, in the
+    dark, with nothing to do about any of it until morning, and you lie there flooded,
+    too tired to sleep and too overwhelmed to rest.
 
 
-    The one-hour edition: the core of the sleep anxiety work for working parents,
-    in a single sitting. Recognition, descent, integration — no filler. Book 2 of
-    the one-hour Working Parents sleep anxiety series.'
+    This book is for the working parent who is carrying too much, and feels it most
+    acutely at the exact moment they''re supposed to put it down. The demands don''t
+    stop at bedtime. They just lose their order and pile up all together, undifferentiated
+    and enormous, until you can''t tell the urgent from the trivial because they''re
+    all pressing on your chest with the same weight. You''re not bad at managing your
+    life. There is genuinely too much of it.
+
+
+    We are not going to hand you a better system, because the problem isn''t your
+    system, it''s the sheer volume, and one more app won''t carry it for you. What
+    you''ll learn instead is what overwhelm actually is: not a thousand separate problems
+    but one flood, experienced all at once, in a body with no room left. You''ll learn
+    to recognize the flood as it arrives, to name it instead of drowning in it silently,
+    and then to go down into it rather than thrashing against the whole list at midnight.
+    The descent isn''t sorting the tasks. It''s finding the floor underneath them.
+
+
+    No morning routines. No worksheets to triage your life at 11pm. This book will
+    not promise that the demands shrink or that you''ll wake with a clear head and
+    an empty inbox, because the load is real and it''ll be there tomorrow. What changes
+    is that you stop trying to hold all of it at once in the one place you''re meant
+    to set it down. You can carry a lot. You cannot carry it horizontally, in the
+    dark, all at the same time.
+
+
+    The overwhelm is not a character flaw or proof you''re failing your family. It''s
+    too much arriving at once in a body that''s done for the day. You don''t get free
+    of it by hoisting it higher. You let the floor hold what you can''t. The next
+    time the whole list lies down with you, you''ll know how to let it go until morning.
+
+
+    One hour. Read it the next time bedtime turns into a flood. You''re allowed to
+    put it down now.'
 keywords:
   primary:
   - insomnia help
@@ -37,6 +75,7 @@ keywords:
   - sleep anxiety for working parents
   - one hour
 bisac_codes:
+- SEL036000
 - SEL027000
 - HEA046000
 - PSY022000
@@ -45,12 +84,15 @@ target_price:
   audible_usd: 6.99
   paperback_usd: 9.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: tomas_vidal
 comp_titles:
-- Say Good Night to Insomnia (Jacobs)
-- The Sleep Solution (Winter)
-- Why We Sleep (Walker)
+- Burnout (Emily Nagoski & Amelia Nagoski) — the overwhelm of doing-it-all and how
+  the body discharges it
+- Fair Play (Eve Rodsky) — naming the invisible mental load working parents carry
+- How to Keep House While Drowning (KC Davis) — compassion for the impossible volume
+  of care work
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -58,3 +100,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

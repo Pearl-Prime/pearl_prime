@@ -13,17 +13,60 @@ target_word_range:
 target_audio_minutes: 70
 title: 'The Alarm Is Lying: Misreading the Danger Signal'
 subtitle: A Real Talk Guide to Anxiety Relief for Nurses
-cover_tagline: A Real Talk Guide to Anxiety Relief for Nurses
+cover_tagline: Your body is screaming danger. The monitor says you're fine.
 description:
-  short_blurb: A Real Talk Guide to Anxiety Relief for Nurses A grounded, secular
-    guide to anxiety for nurses.
-  long_description: 'The Alarm Is Lying: Misreading the Danger Signal
+  short_blurb: 'Your heart is pounding, your hands are cold, your gut says something
+    is catastrophically wrong — and nothing is actually happening. This is a real-talk
+    guide for nurses about the false alarm: the body''s emergency response firing
+    with no emergency attached. No breathing gimmicks, no ''just relax'' — just a
+    clear way to read the signal for what it is.'
+  long_description: 'You know what a real emergency looks like. You''ve run toward
+    them for years. So it lands as a special kind of cruel when your own body throws
+    the full alarm — racing heart, tight chest, that electric flood of dread — while
+    you''re just standing at the nurses'' station, or lying in bed at 2 a.m., and
+    nothing is actually wrong. No code. No patient crashing. No call light. Just you,
+    and a body utterly convinced you''re about to die.
 
 
-    For a nurse at the end of a twelve-hour shift. This book doesn''t promise to make
-    anxiety stop — it names what''s happening in your body in language you can use
-    the next time it happens. Through recognition, descent, and integration, not worksheets
-    or forced positivity. Book 2 of the Nurses anxiety series.'
+    This book is for the nurse whose own nervous system has started crying wolf. The
+    one who can assess a deteriorating patient without her hands shaking, then can''t
+    talk herself down off the same ledge an hour later. The one who''s been told to
+    breathe, to hydrate, to sleep more — as if she hasn''t already tried every one
+    of those on four hours of rest between shifts.
+
+
+    Lena Frost names the thing without flinching: this is a false alarm. Your danger
+    signal is firing with no danger attached. The sensations are real — the pounding,
+    the dread, the bone-deep certainty that this time it really is a heart attack
+    — but the threat they keep announcing simply isn''t in the room. That isn''t weakness,
+    and it isn''t a flaw in your character. It''s a smoke detector shrieking because
+    you made toast, not because the house is burning down.
+
+
+    The path here isn''t a clever trick for switching the alarm off. It starts with
+    recognition: learning, in your own body, the difference between the signal and
+    the situation — between what you feel and what is true. Then descent: turning
+    toward the sensations instead of bracing against them, letting the wave crest
+    and break the way you''ve watched a hundred sets of vitals climb and then settle.
+    Then integration: walking back onto the floor knowing that a loud body is not
+    a true verdict, that you can feel the surge at full volume and still read the
+    data clearly underneath it.
+
+
+    This won''t pretend the false alarms will never come again, or hand you a five-minute
+    fix to optimize them away. There''s no forced calm in these pages. What it gives
+    you is the one thing that genuinely changes the moment when you''re in it — the
+    ability to recognize a misread danger signal while it''s happening, and stop treating
+    every spike as the real thing.
+
+
+    It''s an honest, jargon-free account of why a perfectly healthy body sounds the
+    emergency bell for no reason at all — and how to stop being terrorized by your
+    own wiring.
+
+
+    You''re allowed to hear the alarm, name it for the false signal it is, and keep
+    going anyway.'
 keywords:
   primary:
   - anxiety relief
@@ -37,6 +80,7 @@ keywords:
   - nurses
   - anxiety for nurses
 bisac_codes:
+- SEL036000
 - SEL027000
 - SEL024000
 - PSY022000
@@ -45,12 +89,16 @@ target_price:
   audible_usd: 9.99
   paperback_usd: 12.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: lena_frost
 comp_titles:
-- Dare (Barry McDonagh)
-- The Anxiety and Phobia Workbook (Bourne)
-- Unwinding Anxiety (Judson Brewer)
+- Dare (Barry McDonagh) — secular, no-nonsense method for facing panic sensations
+  instead of fleeing them
+- Unwinding Anxiety (Judson Brewer) — neuroscientist's plain-English account of how
+  the anxiety loop misfires
+- Hope and Help for Your Nerves (Claire Weekes) — the classic, gentle case for letting
+  a false-alarm body settle on its own
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -58,3 +106,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

@@ -13,19 +13,57 @@ target_word_range:
 target_audio_minutes: 70
 title: 'The Alarm Is Lying: When One Thought Becomes a Thousand'
 subtitle: How Tech and Finance Professionals Are Rewriting the Rules of Anxiety Relief
-cover_tagline: How Tech and Finance Professionals Are Rewriting the Rules of Anxiety
-  Relief
+cover_tagline: One Slack message at 11pm. By midnight you've imagined getting fired,
+  going broke, and dying alone.
 description:
-  short_blurb: How Tech and Finance Professionals Are Rewriting the Rules of Anxiety
-    Relief A grounded, secular guide to anxiety for tech & finance professionals.
-  long_description: 'The Alarm Is Lying: When One Thought Becomes a Thousand
+  short_blurb: 'A single ''can we talk tomorrow?'' lands, and your mind builds an
+    entire catastrophe out of it before you''ve even put the phone down. This is a
+    book about the spiral: how one thought becomes a thousand. It won''t teach you
+    to think positive. It''ll show you how to step off the chain.'
+  long_description: 'It starts with one thing. A terse message from your manager.
+    A number that came in light. A ''we should chat.'' And before you''ve finished
+    reading it, your mind is off — if this, then that, then the bad review, then the
+    PIP, then no job, then no runway, then everything you built gone. By the time
+    you look up it''s an hour later and you''ve lived through six disasters that haven''t
+    happened, each one feeling as real as the last.
 
 
-    For a tech or finance professional running on empty. This book doesn''t promise
-    to make anxiety stop — it names what''s happening in your body in language you
-    can use the next time it happens. Through recognition, descent, and integration,
-    not worksheets or forced positivity. Book 6 of the Tech & Finance Professionals
-    anxiety series.'
+    This book is for the people whose brains are wired to model worst cases for a
+    living — the engineer who war-games every failure mode, the trader who prices
+    in the tail risk, the analyst paid to see what could go wrong. The same mind that
+    makes you good at the job turns one ambiguous Slack into a thousand-step catastrophe
+    at midnight. It''s not irrational. It''s a powerful pattern-matching engine that
+    doesn''t know when to stop.
+
+
+    Waystream doesn''t hand you positive thoughts to drown out the loop. First you
+    name it: this is a spiral — one thought reproducing into a thousand, each link
+    forged by the last, none of it information about what''s actually true. Then you
+    go down into it instead of trying to think your way to the bottom. You watch how
+    the chain builds, where the first link hooks in, what the spiral is so afraid
+    of that it would rather rehearse the disaster than sit with not knowing. That''s
+    the descent, and it''s not about winning the argument with your thoughts — it''s
+    about stepping off the chain entirely. What comes back is not a person who only
+    thinks calm thoughts. It''s a person who can watch the spiral start and not get
+    on it.
+
+
+    This is not a book about thinking positive. It will not tell you to replace the
+    bad thought with a good one, to ''just stop overthinking,'' or to reframe your
+    way out — because the spiral is faster than your reframes and it always has been.
+    The point isn''t better thoughts. It''s a different relationship to the thinking
+    itself.
+
+
+    No positivity. No thought-stopping tricks that snap back the second you blink.
+    Just plain language for how the chain actually forms, so the next time one message
+    detonates at 11pm, you can feel the spiral starting before it takes the whole
+    night.
+
+
+    You don''t have to follow every thought to the end of the world. The chain is
+    fast, and it is convincing, and you are allowed to put it down before you reach
+    the last link.'
 keywords:
   primary:
   - anxiety relief
@@ -39,6 +77,7 @@ keywords:
   - tech & finance professionals
   - anxiety for tech & finance professionals
 bisac_codes:
+- SEL036000
 - SEL027000
 - SEL024000
 - PSY022000
@@ -47,12 +86,16 @@ target_price:
   audible_usd: 9.99
   paperback_usd: 12.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: daniel_cho
 comp_titles:
-- Dare (Barry McDonagh)
-- The Anxiety and Phobia Workbook (Bourne)
-- Unwinding Anxiety (Judson Brewer)
+- Don't Believe Everything You Think (Joseph Nguyen) — secular, direct case for stepping
+  off the thought-chain
+- Rewire Your Anxious Brain (Catherine Pittman) — the neuroscience of the spiral and
+  why reframing alone fails
+- The Worry Trick (David Carbonell) — names exactly how one worry recruits a thousand,
+  with no positivity gloss
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -60,3 +103,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

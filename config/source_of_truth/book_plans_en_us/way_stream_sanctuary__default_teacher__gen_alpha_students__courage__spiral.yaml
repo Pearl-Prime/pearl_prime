@@ -16,17 +16,58 @@ target_word_range:
 target_audio_minutes: 70
 title: 'The Thing You Won''t Say: When One Thought Becomes a Thousand'
 subtitle: A Real Talk Guide to Building Courage for Students
-cover_tagline: A Real Talk Guide to Building Courage for Students
+cover_tagline: One small worry, and forty minutes later you've imagined the whole
+  disaster in 4K.
 description:
-  short_blurb: A Real Talk Guide to Building Courage for Students A grounded, secular
-    guide to courage for students.
-  long_description: 'The Thing You Won''t Say: When One Thought Becomes a Thousand
+  short_blurb: 'It starts with one thought — what if I mess up — and somehow ends
+    with you replaying a catastrophe that hasn''t happened and probably won''t. This
+    is a guide to the spiral: how a single thought multiplies into a thousand, why
+    your brain does it, and how to come back from the loop without pretending the
+    first thought never landed.'
+  long_description: 'It almost never starts big. It starts with one thought. What
+    if I say it wrong. And if you''d caught it right there, fine — but you didn''t,
+    because nobody does. So the thought had a thought. And that one had three more.
+    Twenty minutes later you''re lying there running a full movie of everyone laughing,
+    the teacher''s face, the group chat afterward, a disaster that hasn''t happened
+    and probably never will. One worry became a thousand, and you''re exhausted by
+    a thing that only occurred inside your own head.
 
 
-    For a student under academic and social pressure. This book names what courage
-    is doing in your body in language you can use — through recognition, descent,
-    and integration, not worksheets or forced positivity. Book 3 of the Students courage
-    series.'
+    This book is for the student whose brain does this on a loop. The one who can''t
+    just be nervous about the presentation — who has to pre-live every possible humiliation
+    in vivid detail first. Whose courage drowns not in one big fear but in the sheer
+    volume of the spiral.
+
+
+    Here''s the part that actually helps: the spiral is not you thinking. It feels
+    like thinking — it uses your voice, your logic, your worst-case imagination —
+    but it''s a loop, and loops don''t solve anything, they just run. Your brain spirals
+    because it''s trying to protect you by rehearsing every threat in advance. It
+    thinks if it can just imagine the disaster hard enough, you''ll be ready. It''s
+    wrong, but it''s not malfunctioning. It''s doing too much of a normal thing.
+
+
+    We''ll name exactly what the spiral feels like from inside it, so you can catch
+    it earlier — that specific moment when one thought hands off to the next. Then
+    we''ll go down into a spiral instead of fighting to shut it off, because trying
+    to force the thoughts to stop is just another thought, and it feeds the loop.
+    You learn to watch the multiplication happen without climbing aboard every car
+    of the train. And we''ll talk about what shifts when you stop treating every spiraled
+    thought as information you have to act on.
+
+
+    This book won''t give you a clear, quiet mind or promise the thoughts will stop
+    coming. They won''t. There''s no trick that empties your head, and anyone selling
+    you one is lying. The spiral will still start. What changes is that you stop confusing
+    the loop for the truth, and you stop having to follow it all the way down before
+    you remember you can step off.
+
+
+    The first thought is going to land — that part you don''t control. The thousand
+    that follow it are optional, and you''re allowed to not take that ride. You can
+    let the spiral spin and still set the phone down, close your eyes, and let it
+    run itself out without you. You don''t have to win against your own brain. You
+    just have to stop boarding the train.'
 keywords:
   primary:
   - building courage
@@ -47,12 +88,16 @@ target_price:
   audible_usd: 9.99
   paperback_usd: 12.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: nina_vazquez
 comp_titles:
-- Daring Greatly (Brown)
-- Feel the Fear and Do It Anyway (Jeffers)
-- The Gifts of Imperfection (Brown)
+- Don't Believe Everything You Think (Joseph Nguyen) — shows that the spiral of thoughts
+  isn't the same as truth
+- Rewire Your Anxious Brain (Catherine Pittman) — explains why the brain loops worst-case
+  scenarios on repeat
+- Unwinding Anxiety (Judson Brewer) — maps the worry loop and how to step out of it
+  instead of forcing it off
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -60,3 +105,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

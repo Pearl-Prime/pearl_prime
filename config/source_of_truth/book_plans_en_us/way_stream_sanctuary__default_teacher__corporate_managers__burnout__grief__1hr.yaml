@@ -16,15 +16,50 @@ target_word_range:
 target_audio_minutes: 60
 title: 'After the Flame: After the Loss'
 subtitle: A One-Hour Burnout Reset for Managers
-cover_tagline: A One-Hour Burnout Reset for Managers
+cover_tagline: You didn't fail. Something ended. Those aren't the same thing.
 description:
-  short_blurb: A One-Hour Burnout Reset for Managers The one-hour edition.
-  long_description: 'After the Flame: After the Loss
+  short_blurb: For the manager who is technically still functioning but feels like
+    something inside has gone quiet. This is a one-hour reckoning with the version
+    of you that the job used up, and an honest look at what it costs to keep pretending
+    you're fine. Not a comeback plan. A reckoning.
+  long_description: 'You answered every message. You held the team together through
+    the reorg, the layoffs, the quarter that wouldn''t end. And somewhere in there,
+    the part of you that used to care about this work just went out, like a pilot
+    light you didn''t notice until the cold set in. You''re still showing up. You''re
+    still competent. But you''re grieving someone, and that someone is you.
 
 
-    The one-hour edition: the core of the burnout work for managers, in a single sitting.
-    Recognition, descent, integration — no filler. Book 1 of the one-hour Managers
-    burnout series.'
+    If you''re in a manager''s seat, you''ve probably been handed every recharge tip
+    there is, and none of them touch this. That''s because you are not depleted like
+    a battery. You lost something real: the belief that effort would be enough, the
+    manager you were before this job hollowed you out, the easy energy you used to
+    bring to a Monday. Burnout for people who carry teams is rarely a clean breakdown.
+    It''s a slow loss nobody held a funeral for, mourned in the gaps between meetings,
+    where no one thinks to look.
+
+
+    The arc here is simple and it is not a fix. First you name it: not stress, not
+    exhaustion, grief. You let yourself say the thing you''ve been swallowing in one-on-ones
+    and skip-levels: I miss who I was, and I''m not sure that person is coming back.
+    Then you go down into it instead of scheduling around it. You stop treating the
+    heaviness as a problem to optimize and start treating it as information. You let
+    the loss be a loss. And then you come back up, not restored to who you were, but
+    clearer about who you are now and what you''ll no longer hand over to a job that
+    would take all of it if you let it.
+
+
+    What you won''t find here is a promise that you''ll love the work again. No routine,
+    no reset protocol, no seven habits of resilient leaders. Nobody is going to tell
+    you to reframe your way out of something that is real. What this hour offers instead
+    is the one thing nobody at work will give you: permission to admit that something
+    ended, and that you''re allowed to mourn it without it meaning you''re broken
+    or weak or done.
+
+
+    You carry a team. For one hour, let the book carry you through the part you''ve
+    been carrying alone. You don''t have to bounce back. You''re allowed to just be
+    here, in the quiet, with what this cost you. That''s not giving up. That''s finally
+    telling the truth.'
 keywords:
   primary:
   - burnout recovery
@@ -45,12 +80,16 @@ target_price:
   audible_usd: 6.99
   paperback_usd: 9.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: theo_castellan
 comp_titles:
-- Burnout (Nagoski)
-- Laziness Does Not Exist (Price)
-- Do Nothing (Headlee)
+- 'Burnout: The Secret to Unlocking the Stress Cycle (Emily Nagoski & Amelia Nagoski)
+  — names burnout as an unfinished cycle, not a character flaw'
+- It's OK That You're Not OK (Megan Devine) — refuses the fix-it script and lets grief
+  be grief
+- The Body Keeps the Score (Bessel van der Kolk) — shows how sustained strain lives
+  in the body, not just the mind
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -58,3 +97,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

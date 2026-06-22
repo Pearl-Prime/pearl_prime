@@ -16,15 +16,60 @@ target_word_range:
 target_audio_minutes: 60
 title: 'The Alarm Is Lying: Misreading the Danger Signal'
 subtitle: A One-Hour Anxiety Reset for Nurses
-cover_tagline: A One-Hour Anxiety Reset for Nurses
+cover_tagline: Your body is coding. The patient is fine. So are you.
 description:
-  short_blurb: A One-Hour Anxiety Reset for Nurses The one-hour edition.
-  long_description: 'The Alarm Is Lying: Misreading the Danger Signal
+  short_blurb: Your heart is pounding, your hands have gone cold, and your brain is
+    screaming that something is wrong — except the monitor is green and the shift
+    is quiet. This is the one-hour reset for the nurse whose own alarm keeps firing
+    with no real danger behind it. Learn, in a single sitting, to read the signal
+    without obeying it.
+  long_description: 'You feel it before you can explain it. Your heart kicks into
+    a rhythm you''d flag on a patient, your hands go cold, and your whole body insists
+    something is about to go very wrong. You scan the unit. Monitors green. Pumps
+    quiet. The patient you were sure was crashing is asleep and satting fine. There
+    is no emergency in the room. There is only your own alarm, going off, with nothing
+    to point at.
 
 
-    The one-hour edition: the core of the anxiety work for nurses, in a single sitting.
-    Recognition, descent, integration — no filler. Book 2 of the one-hour Nurses anxiety
-    series.'
+    That''s a false alarm — and you, of all people, know the difference between a
+    real one and a nuisance one. You silence overzealous monitors all shift. But this
+    one is inside you, and it doesn''t have a button. What follows is a single sitting
+    on how to read it the way you read a strip: fast, in real time, without obeying
+    it.
+
+
+    First, the recognition. That surge of dread is your body''s smoke detector, not
+    your clinical judgment. After enough real codes, enough times being the one whose
+    gut was right, your nervous system has decided that firing early is safer than
+    staying quiet. So it fires at burnt toast. The feeling is identical to the feeling
+    you get when something actually is wrong — that''s exactly why it''s so convincing.
+    But a sensation is not an assessment. Dread is not a finding.
+
+
+    Then the descent. You don''t argue the alarm down, and you don''t distract your
+    way past it — you''ve tried both, mid-shift, and it only gets louder. Instead
+    you turn toward it. You locate where it lives in your body, you let it rise to
+    its peak, and you stay with it long enough to learn its actual shape. So that
+    the next time it goes off — at the bedside, in the parking garage, at 3 a.m. at
+    home — you can recognize it while it''s happening: false alarm, no danger, body
+    doing its overcautious job. You let it sound. You don''t run the code it''s calling.
+
+
+    What comes back is not a calm career. The job is still the job; some shifts really
+    are emergencies. What comes back is the gap between the alarm and your hands —
+    the half-second of space where you used to have none. You feel the surge, and
+    you don''t have to act on it.
+
+
+    No promises here that your fear switches off — that would be a lie, and you''d
+    see through it. There''s no breathing exercise that retires a false alarm for
+    good. The goal is not a body that never sounds. The goal is a nurse who can hear
+    it ring and not mistake the ringing for the fire.
+
+
+    Your body learned this firing pattern protecting other people. It''s allowed to
+    learn that it''s safe to stand down. Give it this hour, and you can start teaching
+    it.'
 keywords:
   primary:
   - anxiety relief
@@ -38,6 +83,7 @@ keywords:
   - anxiety for nurses
   - one hour
 bisac_codes:
+- SEL036000
 - SEL027000
 - SEL024000
 - PSY022000
@@ -46,12 +92,16 @@ target_price:
   audible_usd: 6.99
   paperback_usd: 9.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: lena_frost
 comp_titles:
-- Dare (McDonagh)
-- The Anxiety and Phobia Workbook (Bourne)
-- Unwinding Anxiety (Brewer)
+- Hope and Help for Your Nerves (Claire Weekes) — the classic on facing the body's
+  false alarm by floating, not fighting
+- When the Body Says No (Gabor Maté) — why caregivers' stress physiology turns on
+  them
+- Unwinding Anxiety (Judson Brewer) — secular, mechanism-level look at the anxiety
+  loop and its bodily triggers
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -59,3 +109,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

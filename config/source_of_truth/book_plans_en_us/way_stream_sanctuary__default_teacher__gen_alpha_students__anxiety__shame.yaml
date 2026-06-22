@@ -13,17 +13,53 @@ target_word_range:
 target_audio_minutes: 70
 title: 'The Alarm Is Lying: Carrying What You Can''t Say'
 subtitle: A Field Guide for Students Navigating Anxiety Relief
-cover_tagline: A Field Guide for Students Navigating Anxiety Relief
+cover_tagline: The quiet belief that something's wrong with you. It isn't. Read this.
 description:
-  short_blurb: A Field Guide for Students Navigating Anxiety Relief A grounded, secular
-    guide to anxiety for students.
-  long_description: 'The Alarm Is Lying: Carrying What You Can''t Say
+  short_blurb: 'Underneath the anxiety is a feeling you''ve probably never said out
+    loud: that something is fundamentally wrong with you, and if people really knew
+    you, they''d see it too. This is a direct, gentle guide to the shame you''ve been
+    carrying in silence.'
+  long_description: 'It''s the thing you don''t say. Not even to your closest friend,
+    maybe not even fully to yourself. The quiet, certain belief that you''re somehow
+    wrong — broken in a way other people aren''t, faking being okay, and one slip
+    away from everyone finding out. The anxiety you feel on top of it is loud. But
+    this, underneath, is silent. That''s how shame works.
 
 
-    For a student under academic and social pressure. This book doesn''t promise to
-    make anxiety stop — it names what''s happening in your body in language you can
-    use the next time it happens. Through recognition, descent, and integration, not
-    worksheets or forced positivity. Book 5 of the Students anxiety series.'
+    This book is for the student carrying that buried belief. The one who performs
+    fine and feels fraudulent. The one who reads criticism as confirmation of something
+    they already suspected about themselves. The one who''s never told a single person
+    the actual thought, because saying it out loud would make it real.
+
+
+    Nina Vazquez goes straight at it: shame isn''t a fact about you, even though it
+    dresses up exactly like one. It''s a feeling — one that got installed, usually
+    young, usually from something that was never yours to carry — and it survives
+    precisely because you never say it. Unspoken, it grows. It convinces you that
+    the problem is who you are, when the real problem is a belief you absorbed and
+    never got to examine in the light.
+
+
+    We name it — the specific shape of your shame, the thing you can''t say, said
+    plainly at last. Then we go down into it, which is terrifying, because shame''s
+    whole strategy is to keep you from looking directly at it. We look anyway. You''ll
+    learn the difference between guilt (I did something bad) and shame (I am bad),
+    why the second one lies, and what happens when a buried belief finally gets spoken
+    instead of fed in the dark. You come back from this not suddenly loving yourself
+    on command, but no longer mistaking a feeling for the truth about who you are.
+
+
+    This is not a book that promises affirmations, self-love hacks, or a mirror you
+    stare into telling yourself you''re enough. It won''t tell you to just be confident.
+    It won''t pretend the shame is silly when it''s been one of the most powerful
+    forces in your life. It won''t optimize your self-esteem.
+
+
+    What it will do is put words to the thing you''ve never been able to say — so
+    that the next time the belief whispers that something''s wrong with you, you can
+    recognize the whisper for what it is: an old feeling, not a verdict. You are allowed
+    to say the unsayable thing. The moment you do, it stops being the truth and starts
+    being just a sentence you can finally set down.'
 keywords:
   primary:
   - anxiety relief
@@ -37,6 +73,7 @@ keywords:
   - students
   - anxiety for students
 bisac_codes:
+- SEL036000
 - SEL027000
 - SEL024000
 - PSY022000
@@ -45,12 +82,16 @@ target_price:
   audible_usd: 9.99
   paperback_usd: 12.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: nina_vazquez
 comp_titles:
-- Dare (Barry McDonagh)
-- The Anxiety and Phobia Workbook (Bourne)
-- Unwinding Anxiety (Judson Brewer)
+- The Gifts of Imperfection (Brené Brown) — the definitive secular work on shame and
+  where it comes from
+- What Happened to You? (Bruce Perry & Oprah Winfrey) — why "what's wrong with me"
+  is the wrong question
+- Maybe You Should Talk to Someone (Lori Gottlieb) — honest about the stories of unworthiness
+  we never voice
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -58,3 +99,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

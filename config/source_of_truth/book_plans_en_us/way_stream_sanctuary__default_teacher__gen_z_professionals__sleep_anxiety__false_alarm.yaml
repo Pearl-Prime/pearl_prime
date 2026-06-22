@@ -16,17 +16,55 @@ target_word_range:
 target_audio_minutes: 70
 title: 'The 3am Mind: The False Alarm Response'
 subtitle: A Field Guide for Young Professionals Navigating Sleep Anxiety
-cover_tagline: A Field Guide for Young Professionals Navigating Sleep Anxiety
+cover_tagline: Your body sounds the alarm the second the lights go off. Nothing is
+  wrong.
 description:
-  short_blurb: A Field Guide for Young Professionals Navigating Sleep Anxiety A grounded,
-    secular guide to sleep anxiety for young professionals.
-  long_description: 'The 3am Mind: The False Alarm Response
+  short_blurb: You're shattered all day, then the moment your head hits the pillow
+    your body floods with adrenaline like something's about to happen. This is a field
+    guide to the false alarm that fires at night — when there is no danger, only the
+    dark and a mind that won't believe it's safe.
+  long_description: 'You were wrecked at your desk all afternoon. You got into bed
+    practically begging to pass out. And then — lights off, room finally quiet — your
+    heart picks up, your thoughts sharpen, and your whole body braces like someone
+    just walked into the room. No one walked in. It''s past midnight, you''re alone
+    in your own bed, and your nervous system has chosen this exact moment, of all
+    moments, to sound the alarm.
 
 
-    For early in a demanding career, phone always buzzing. This book names what sleep
-    anxiety is doing in your body in language you can use — through recognition, descent,
-    and integration, not worksheets or forced positivity. Book 1 of the Young Professionals
-    sleep anxiety series.'
+    This book is for the young professional whose body treats falling asleep like
+    dropping its guard in hostile territory. You''re not bad at sleeping and you don''t
+    need another lecture on screens. You''re carrying an alarm system that fires hardest
+    precisely when you most need it to stand down — pumping wakeful adrenaline, racing
+    your heart, lighting up your mind the instant the day''s distractions fall away
+    and there''s nothing left to drown it out. The alarm is real. The danger it''s
+    screaming about is not. At 1 a.m., that distinction is not academic; it''s the
+    difference between a hard night and a war.
+
+
+    Because the cruel twist is that the fight is what keeps you up. Trying to force
+    calm, willing yourself under, monitoring the clock to see how bad tomorrow will
+    be — every one of those moves quietly confirms to your body that something really
+    is wrong here. So the work runs the other way. First you learn to recognize the
+    nighttime surge for what it is: a false alarm with no actual emergency behind
+    it, just darkness, quiet, and a body convinced that going under is unsafe. Then,
+    instead of bracing against the spike, you practice letting it move through you
+    without treating being awake as a crisis to solve. Strange as it sounds, the aim
+    is to lie in the dark wide awake and not be at war with it — because the war was
+    always the thing standing between you and sleep.
+
+
+    This is plain, secular, no-nonsense writing for the real 2 a.m. you''re living
+    through, not a tidy theory of rest. No sleep-hygiene checklist you''ve already
+    memorized and failed. No "wind-down routine." No promise you''ll drop off in eight
+    minutes flat every night for the rest of your life.
+
+
+    What it won''t do is sell you sleep as one more productivity input to optimize,
+    or hand you a trick to knock yourself out on command — chasing flawless sleep
+    is a real part of what''s keeping you awake. What it offers is quieter and more
+    durable: the ability to name the nighttime alarm as false, let your body sound
+    it in the dark, and stop making one wakeful night mean something is wrong with
+    you. You''re allowed to be awake and not afraid of it.'
 keywords:
   primary:
   - insomnia help
@@ -39,6 +77,7 @@ keywords:
   - young professionals
   - sleep anxiety for young professionals
 bisac_codes:
+- SEL036000
 - SEL027000
 - HEA046000
 - PSY022000
@@ -47,12 +86,16 @@ target_price:
   audible_usd: 9.99
   paperback_usd: 12.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: ravi_chandra
 comp_titles:
-- Say Good Night to Insomnia (Jacobs)
-- The Sleep Solution (Winter)
-- Why We Sleep (Walker)
+- Why We Sleep (Matthew Walker) — what's actually happening in the body around sleep,
+  minus the panic
+- Unwinding Anxiety (Judson Brewer) — how the anxiety-around-sleep loop forms and
+  how to interrupt it
+- Hello Sleep (Jade Wu) — a science-based, anti-perfectionist approach to nights your
+  body won't shut off
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -60,3 +103,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

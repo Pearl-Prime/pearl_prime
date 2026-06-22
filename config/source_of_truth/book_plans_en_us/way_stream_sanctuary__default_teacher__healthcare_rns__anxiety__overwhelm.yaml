@@ -13,17 +13,62 @@ target_word_range:
 target_audio_minutes: 70
 title: 'The Alarm Is Lying: The Shutdown Point'
 subtitle: A Field Guide for Nurses Navigating Anxiety Relief
-cover_tagline: A Field Guide for Nurses Navigating Anxiety Relief
+cover_tagline: Four patients, three call bells, a new admit — and the moment your
+  brain just quits.
 description:
-  short_blurb: A Field Guide for Nurses Navigating Anxiety Relief A grounded, secular
-    guide to anxiety for nurses.
-  long_description: 'The Alarm Is Lying: The Shutdown Point
+  short_blurb: 'There''s a point where it stops being busy and becomes too much all
+    at once — and your mind goes blank, your body locks up, and you can''t move. This
+    is a grounded, secular guide for nurses about the shutdown point: what overwhelm
+    actually is, and how to come back from it mid-shift. No time-management hacks,
+    no ''just prioritize'' — real talk about hitting the wall.'
+  long_description: 'It isn''t the workload by itself. It''s the exact moment the
+    workload becomes a wall. Four patients, a new admit rolling through the doors,
+    three call bells going at once, a doctor holding on the phone, a family waiting
+    at the desk — and somewhere in the middle of all of it, your brain simply stops.
+    You stare at the screen. The tasks blur together into one solid, immovable mass.
+    You know you have to move and you cannot make yourself begin. That is the shutdown
+    point, and you''ve stood inside it more times than you''d admit.
 
 
-    For a nurse at the end of a twelve-hour shift. This book doesn''t promise to make
-    anxiety stop — it names what''s happening in your body in language you can use
-    the next time it happens. Through recognition, descent, and integration, not worksheets
-    or forced positivity. Book 4 of the Nurses anxiety series.'
+    This book is for the nurse who''s hit that wall and then been told she just needs
+    to manage her time a little better. The one who can shoulder an impossible assignment
+    right up until, with no warning, she can''t — and then turns the freeze into one
+    more piece of evidence that she''s failing. The one who is worn down not by the
+    sheer number of things but by all of them landing in the same instant, with no
+    gap anywhere to catch her breath.
+
+
+    Lena Frost lays it out without dressing it up: when everything arrives at once,
+    your system doesn''t get lazy — it gets flooded, and a flooded system shuts down
+    on purpose, to protect itself. The alarm is lying when it brands that shutdown
+    a personal failing. Overwhelm is not weakness. It''s a breaker tripping because
+    far too much current was forced through the circuit at the same time.
+
+
+    The path here is not a productivity system. It starts with recognition: learning
+    to feel the flood rising before it drops you — the early, bodily signs that you''ve
+    already crossed past your real capacity. Then descent: going down into the overwhelm
+    rather than fighting to power straight through it, letting the surge be exactly
+    what it is so that it can finally crest and pass, the way you''d let a patient
+    stabilize before you push the next intervention. Then integration: coming back
+    online, and back to the floor, without the wave of shame that usually arrives
+    right behind the freeze.
+
+
+    This won''t promise to lighten your assignment or fix your unit''s staffing grid.
+    It won''t optimize you into a nurse who never once hits the wall. You won''t find
+    color-coded systems in here, no ''eat the frog,'' no hustle dressed up as self-care.
+    What it offers is a way to meet the shutdown point with recognition instead of
+    self-attack — so that it costs you a little less every single time it comes.
+
+
+    It''s an honest, plainly told look at what is actually happening when too much
+    hits at once, and how to come back from that blank, locked-up moment without turning
+    it into a verdict on your competence.
+
+
+    The alarm is lying. Hitting the wall doesn''t mean you aren''t enough. It means
+    you''re human, running a job built for three of you.'
 keywords:
   primary:
   - anxiety relief
@@ -37,6 +82,7 @@ keywords:
   - nurses
   - anxiety for nurses
 bisac_codes:
+- SEL036000
 - SEL027000
 - SEL024000
 - PSY022000
@@ -45,12 +91,16 @@ target_price:
   audible_usd: 9.99
   paperback_usd: 12.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: lena_frost
 comp_titles:
-- Dare (Barry McDonagh)
-- The Anxiety and Phobia Workbook (Bourne)
-- Unwinding Anxiety (Judson Brewer)
+- Burnout (Emily & Amelia Nagoski) — secular, science-backed account of completing
+  the stress cycle when it floods you
+- Why Has Nobody Told Me This Before? (Julie Smith) — clinical psychologist's plain
+  tools for moments of overload
+- Set Boundaries, Find Peace (Nedra Tawwab) — practical, no-woo case for protecting
+  capacity before it collapses
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -58,3 +108,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

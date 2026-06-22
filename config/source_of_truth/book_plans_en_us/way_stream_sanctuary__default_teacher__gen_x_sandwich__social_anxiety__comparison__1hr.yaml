@@ -16,16 +16,59 @@ target_word_range:
 target_audio_minutes: 60
 title: 'Social Anxiety: Measuring Yourself Against Everyone'
 subtitle: A One-Hour Social Anxiety Reset for the Sandwich Generation
-cover_tagline: A One-Hour Social Anxiety Reset for the Sandwich Generation
+cover_tagline: Everyone else seems to be handling their parents, their kids, and a
+  personality. You're just trying to survive the group chat.
 description:
-  short_blurb: A One-Hour Social Anxiety Reset for the Sandwich Generation The one-hour
-    edition.
-  long_description: 'Social Anxiety: Measuring Yourself Against Everyone
+  short_blurb: 'You walk into the room — the family gathering, the parent group, the
+    work thing — already measuring: who''s more put-together, more at ease, more themselves,
+    while you''re managing two generations and barely holding a sentence. This is
+    an hour about the comparison reflex that runs the whole time you''re being seen,
+    and how to come back into your own skin.'
+  long_description: 'You can feel it the second you walk in. Within ten seconds you''ve
+    scanned the whole room and quietly sorted yourself to the bottom — she''s so easy
+    with people, he''s so settled, they''ve clearly got their lives together — while
+    you''re standing there running tomorrow''s pharmacy run in your head and wondering
+    why talking to actual humans feels like a test you forgot to study for. By the
+    time someone says hello you''ve already lost.
 
 
-    The one-hour edition: the core of the social anxiety work for the sandwich generation,
-    in a single sitting. Recognition, descent, integration — no filler. Book 1 of
-    the one-hour the Sandwich Generation social anxiety series.'
+    This hour is for the one in the sandwich who measures themselves against everyone,
+    constantly, and never more loudly than in a room full of people. You''re stretched
+    thin between aging parents and growing kids, and when you finally make it out
+    to something social — a dinner, a school thing, a gathering you said yes to months
+    ago — you don''t get to just be there. You''re tracking everyone else''s ease,
+    their confidence, their seemingly uncomplicated lives, and using all of it as
+    a ruler that only ever measures you short. The comparing doesn''t rest. It narrates
+    the whole evening, and it makes being seen feel less like connection and more
+    like an audit you''re failing in real time.
+
+
+    Elena Petrova names the reflex precisely, in language you can catch yourself using
+    mid-room instead of only recognizing on the drive home. Recognition: the comparison
+    isn''t information about your worth, however factual it feels — it''s an old scanning
+    habit that fires hardest exactly when you''re most exposed, handing you a rigged
+    measurement every time and calling it the truth. Then the descent. Not "just stop
+    comparing," not a gratitude reframe pasted over the top, but going down into what
+    the measuring is actually protecting you from. The fear underneath the ranking:
+    of being the one who''s behind, who''s too much, who doesn''t quite belong here.
+    You sit with that fear instead of outrunning it with one more comparison. And
+    you come back able to stand in a room without auditing yourself against every
+    person in it.
+
+
+    This is not a book about building unshakable confidence or curating an impressive
+    highlight reel of your own to match theirs. It won''t promise you''ll stop noticing
+    other people or finally walk in feeling like the most together person at the table.
+    There is no comparison-proof self to optimize toward and arrive at. The reflex
+    may fire again the next time you walk into a room full of strangers — that''s
+    a nervous habit, not a character flaw. What changes is that you stop handing it
+    the verdict.
+
+
+    You are allowed to be exactly as you are in the room — stretched thin, half-distracted,
+    carrying things nobody can see, real — without ranking yourself against a single
+    person there. The measuring will keep offering you a number, every time you walk
+    in. You don''t have to take it, and you don''t have to believe it when you do.'
 keywords:
   primary:
   - social anxiety
@@ -38,6 +81,7 @@ keywords:
   - social anxiety for the sandwich generation
   - one hour
 bisac_codes:
+- SEL036000
 - SEL027000
 - SEL031000
 - PSY022000
@@ -46,12 +90,16 @@ target_price:
   audible_usd: 6.99
   paperback_usd: 9.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: elena_petrova
 comp_titles:
-- How to Be Yourself (Hendriksen)
-- The Social Anxiety Workbook (Antony)
-- Quiet (Cain)
+- The Comparison Cure (Lisa Cypers Kamen) — secular, practical work on breaking the
+  habit of measuring yourself against others
+- Daring Greatly (Brené Brown) — on the cost of comparison and the courage to be seen
+  without armor
+- How to Be Yourself (Ellen Hendriksen) — clinical, warm guidance on social anxiety
+  and the self-monitoring that feeds it
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -59,3 +107,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

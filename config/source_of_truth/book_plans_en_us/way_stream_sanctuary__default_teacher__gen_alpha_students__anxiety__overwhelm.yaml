@@ -13,17 +13,53 @@ target_word_range:
 target_audio_minutes: 70
 title: 'The Alarm Is Lying: The Shutdown Point'
 subtitle: A Real Talk Guide to Anxiety Relief for Students
-cover_tagline: A Real Talk Guide to Anxiety Relief for Students
+cover_tagline: Too much, all at once, and then you just shut down. That's the point.
 description:
-  short_blurb: A Real Talk Guide to Anxiety Relief for Students A grounded, secular
-    guide to anxiety for students.
-  long_description: 'The Alarm Is Lying: The Shutdown Point
+  short_blurb: There's a moment when it's all too much — too many assignments, messages,
+    expectations, deadlines stacked on top of each other — and instead of speeding
+    up, you freeze. This is a real-talk guide to the shutdown that happens when your
+    whole system hits its limit.
+  long_description: 'You know the moment. The tabs are stacked, the deadlines collided,
+    three people need things from you, and your brain just — stops. You stare at your
+    phone. You can''t pick where to start, so you start nowhere. You look lazy, maybe
+    even to yourself, but inside it''s the opposite of lazy. It''s a system that took
+    on too much and tripped its own breaker.
 
 
-    For a student under academic and social pressure. This book doesn''t promise to
-    make anxiety stop — it names what''s happening in your body in language you can
-    use the next time it happens. Through recognition, descent, and integration, not
-    worksheets or forced positivity. Book 4 of the Students anxiety series.'
+    This book is for the student who shuts down under overwhelm. The one who has so
+    much to do that they end up doing nothing, then drowns in guilt about the nothing.
+    The one whose to-do list became a threat. The one who''s been called unmotivated
+    when the truth is they''re maxed out and frozen solid.
+
+
+    Nina Vazquez names the thing teachers and parents miss: the shutdown isn''t weakness
+    or avoidance. It''s what a nervous system does when the demands coming in exceed
+    what it can process at once. Past a certain point, your brain stops trying to
+    handle it and starts trying to protect you from it. The freeze is a circuit breaker,
+    not a character flaw.
+
+
+    We name it — the exact tipping point where "a lot" becomes "too much" and your
+    system goes dark, so you can see it coming instead of getting buried by it. Then
+    we go down into the overwhelm instead of white-knuckling through it, because forcing
+    yourself harder is what blew the breaker in the first place. You''ll learn what
+    shutdown actually is, why it''s not the same as quitting, and what it looks like
+    to meet a maxed-out system with something other than more pressure. You come back
+    from this able to recognize your own limit before you slam into it — and to treat
+    hitting it as information, not failure.
+
+
+    This is not a book that promises a productivity system, a planner, or a way to
+    do it all without cracking. It won''t tell you to wake up at 5 a.m. or to just
+    break it into smaller steps as if you hadn''t thought of that. It won''t optimize
+    you into a machine that never overloads. Those machines don''t exist.
+
+
+    What it will do is give you plain language for what happens when you''ve taken
+    on more than you can carry and your body pulls the plug — language you can reach
+    for the next time you''re frozen and hating yourself for it. You are allowed to
+    be at capacity. The shutdown isn''t proof you''re failing. It''s proof you reached
+    your edge, and your edge was always going to be real.'
 keywords:
   primary:
   - anxiety relief
@@ -37,6 +73,7 @@ keywords:
   - students
   - anxiety for students
 bisac_codes:
+- SEL036000
 - SEL027000
 - SEL024000
 - PSY022000
@@ -45,12 +82,16 @@ target_price:
   audible_usd: 9.99
   paperback_usd: 12.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: nina_vazquez
 comp_titles:
-- Dare (Barry McDonagh)
-- The Anxiety and Phobia Workbook (Bourne)
-- Unwinding Anxiety (Judson Brewer)
+- Burnout (Emily & Amelia Nagoski) — explains the body's stress-cycle and shutdown
+  without hustle culture
+- How to Keep House While Drowning (KC Davis) — compassionate, anti-shame take on
+  being overwhelmed
+- Laziness Does Not Exist (Devon Price) — reframes the freeze as a limit, not a moral
+  failing
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -58,3 +99,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

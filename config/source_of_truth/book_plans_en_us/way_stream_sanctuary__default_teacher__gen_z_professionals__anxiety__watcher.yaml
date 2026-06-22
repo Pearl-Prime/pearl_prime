@@ -13,18 +13,54 @@ target_word_range:
 target_audio_minutes: 70
 title: 'The Alarm Is Lying: The Witnessing Practice'
 subtitle: A Real Talk Guide to Anxiety Relief for Young Professionals
-cover_tagline: A Real Talk Guide to Anxiety Relief for Young Professionals
+cover_tagline: You're always scanning, always bracing, always one step ahead of a
+  threat that never comes. You can't remember the last time you stood down.
 description:
-  short_blurb: A Real Talk Guide to Anxiety Relief for Young Professionals A grounded,
-    secular guide to anxiety for young professionals.
-  long_description: 'The Alarm Is Lying: The Witnessing Practice
+  short_blurb: Part of you never goes off duty — always reading the room, monitoring
+    tone, watching for the thing about to go wrong. That hypervigilance kept you safe
+    once, but now it just keeps you exhausted. This book teaches you to notice the
+    watcher, and to let it finally rest, without pretending the world is suddenly
+    safe.
+  long_description: 'You walk into the office already reading it — who''s in a mood,
+    whose door is closed, what the silence on the thread might mean. You monitor your
+    manager''s tone for the smallest shift. You catch problems before they''re problems.
+    You''re good at it, genuinely, and it is quietly wearing you into the ground,
+    because some part of you has not stood down in longer than you can remember. The
+    watcher in you is always on, scanning for a threat that mostly never arrives.
 
 
-    For early in a demanding career, phone always buzzing. This book doesn''t promise
-    to make anxiety stop — it names what''s happening in your body in language you
-    can use the next time it happens. Through recognition, descent, and integration,
-    not worksheets or forced positivity. Book 7 of the Young Professionals anxiety
-    series.'
+    This book is for the young professional running on hypervigilance. The one who
+    is exquisitely tuned to the emotional weather of a workplace, who reads every
+    room, who can''t relax because relaxing feels like dropping your guard. Early
+    in a career, often the one who learned long ago that staying alert was how you
+    stayed safe — and now can''t turn it off even when nothing''s wrong. If you''re
+    exhausted from a mind that never clocks out, that treats a calm Tuesday as the
+    moment before something breaks, this was written for exactly you.
+
+
+    First, recognition: you''ll learn to notice the watcher itself — to catch the
+    part of you that''s perpetually scanning and see it clearly, instead of being
+    so fused with it you mistake it for just how you are. Then you go down into it,
+    gently, without trying to force it offline. You''ll meet the vigilance with some
+    understanding of why it''s there, what it was protecting, what it learned. This
+    is the descent — not switching the watcher off but letting it know it can rest
+    — and it''s what actually loosens the bracing. You come back able to be alert
+    when it matters and let go when it doesn''t.
+
+
+    What this book will not do: it will not tell you to just relax, trust that everything''s
+    fine, or pretend your environment is safer than it is. There''s no technique that
+    switches off a nervous system overnight, no positivity that talks the watcher
+    into standing down. The vigilance will return — it''s been on duty a long time.
+    What''s different is that you''ll recognize it as a part of you doing a job, not
+    the whole truth of who you are.
+
+
+    You are allowed to stop scanning. You''re allowed to let the watcher rest without
+    deciding the world is safe — just safe enough, right now, for this one moment.
+    You don''t have to stay braced for a lifetime. You''re about to meet the part
+    of you that never stood down, and offer it, finally, somewhere to set the weight
+    down.'
 keywords:
   primary:
   - anxiety relief
@@ -38,6 +74,7 @@ keywords:
   - young professionals
   - anxiety for young professionals
 bisac_codes:
+- SEL036000
 - SEL027000
 - SEL024000
 - PSY022000
@@ -46,12 +83,16 @@ target_price:
   audible_usd: 9.99
   paperback_usd: 12.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: ravi_chandra
 comp_titles:
-- Dare (Barry McDonagh)
-- The Anxiety and Phobia Workbook (Bourne)
-- Unwinding Anxiety (Judson Brewer)
+- The Body Keeps the Score (Bessel van der Kolk) — secular account of a nervous system
+  stuck on high alert
+- Anchored (Deb Dana) — accessible polyvagal guide to a hypervigilant body standing
+  down
+- Set Boundaries, Find Peace (Nedra Glover Tawwab) — for the over-attuned person who
+  can't stop monitoring others
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -59,3 +100,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

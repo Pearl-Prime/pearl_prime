@@ -16,17 +16,58 @@ target_word_range:
 target_audio_minutes: 70
 title: 'Social Anxiety: The False Alarm Response'
 subtitle: How Students Are Rewriting the Rules of Social Anxiety
-cover_tagline: How Students Are Rewriting the Rules of Social Anxiety
+cover_tagline: Your body reacts to the lunchroom like it's a threat. It's just a room
+  with people in it.
 description:
-  short_blurb: How Students Are Rewriting the Rules of Social Anxiety A grounded,
-    secular guide to social anxiety for students.
-  long_description: 'Social Anxiety: The False Alarm Response
+  short_blurb: 'Walking into a full cafeteria, a group of people you have to talk
+    to, a party — and your body floods with the same alarm it would use for actual
+    danger. This is a plain-language guide to the false alarm behind social anxiety:
+    why a room full of people sets off your threat system, and how to keep moving
+    through your life while it blares.'
+  long_description: 'The door to the cafeteria, or the party, or the group you have
+    to go talk to. You haven''t done anything yet and your body''s already gone into
+    full alert — heart hammering, stomach dropping, that prickling urge to turn around
+    and leave. It''s just people. You know it''s just people. But your body is reacting
+    like you''re walking toward something that could hurt you, and no amount of knowing
+    better seems to turn it off.
 
 
-    For a student under academic and social pressure. This book names what social
-    anxiety is doing in your body in language you can use — through recognition, descent,
-    and integration, not worksheets or forced positivity. Book 2 of the Students social
-    anxiety series.'
+    This book is for the student whose social life keeps getting ambushed by their
+    own nervous system. The one who wants to walk in, sit down, join the conversation
+    — and gets met instead with a wave of physical panic that arrives before any actual
+    thing goes wrong. Where the dread shows up in your chest and your hands, not your
+    reasoning.
+
+
+    Here''s what changes everything once you understand it: that flood isn''t a sign
+    that something''s wrong with you or that the situation is genuinely dangerous.
+    It''s your body''s threat system — ancient, fast, built to keep you alive — misreading
+    a room full of faces as a room full of risks. To a brain wired for survival, being
+    watched and judged registers as a real threat, because for most of human history
+    social rejection actually could get you killed. Your alarm didn''t get the update
+    that it''s just lunch. So it treats the cafeteria like a cliff edge.
+
+
+    We''ll name exactly what the false alarm feels like as it hits — the specific
+    sequence in your body — so you can recognize it instead of being blindsided. Then
+    we''ll go down into one of those moments instead of bracing against it, not to
+    make it stop but to feel the alarm crest and pass and notice you''re still standing.
+    You learn to read the panic as a loud, outdated signal rather than a command to
+    flee. And we''ll talk about what opens up when your racing body stops being the
+    thing that decides where you''re allowed to go.
+
+
+    This book will not make you calm in crowds or promise the dread will vanish. It
+    won''t. There''s no breathing exercise that deletes a threat response this old,
+    and anyone guaranteeing you''ll feel relaxed walking into the room is lying. The
+    alarm will still fire. What changes is that you stop obeying it automatically
+    — you stop letting a false alarm run your social life.
+
+
+    You can be flooded with panic and still walk into the room. You don''t have to
+    feel ready, and you don''t have to wait for the fear to lift first — it won''t,
+    and you don''t need it to. The alarm is loud, but it isn''t in charge. You are
+    allowed to walk in anyway.'
 keywords:
   primary:
   - social anxiety
@@ -39,6 +80,7 @@ keywords:
   - students
   - social anxiety for students
 bisac_codes:
+- SEL036000
 - SEL027000
 - SEL031000
 - PSY022000
@@ -47,12 +89,16 @@ target_price:
   audible_usd: 9.99
   paperback_usd: 12.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: nina_vazquez
 comp_titles:
-- How to Be Yourself (Hendriksen)
-- The Social Anxiety Workbook (Antony)
-- Quiet (Cain)
+- Dare (Barry McDonagh) — treats the social panic surge as a false alarm you stop
+  feeding
+- How to Be Yourself (Ellen Hendriksen) — explains why the brain reads being watched
+  as genuine danger
+- The Anxiety Survival Guide for Teens (Jennifer Shannon) — names the fight-or-flight
+  response that fires in social settings
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -60,3 +106,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

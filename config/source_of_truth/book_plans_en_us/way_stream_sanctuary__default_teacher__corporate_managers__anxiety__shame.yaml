@@ -13,17 +13,58 @@ target_word_range:
 target_audio_minutes: 70
 title: 'The Alarm Is Lying: Carrying What You Can''t Say'
 subtitle: A Real Talk Guide to Anxiety Relief for Managers
-cover_tagline: A Real Talk Guide to Anxiety Relief for Managers
+cover_tagline: You run a team while privately certain that if they really saw you,
+  it would all fall apart.
 description:
-  short_blurb: A Real Talk Guide to Anxiety Relief for Managers A grounded, secular
-    guide to anxiety for managers.
-  long_description: 'The Alarm Is Lying: Carrying What You Can''t Say
+  short_blurb: Beneath the competent manager is a quiet conviction that you're a fraud,
+    that something is wrong with you, that you can't say out loud. This is a direct,
+    secular look at the shame anxiety has been guarding — and what happens when you
+    stop hiding it from yourself.
+  long_description: 'You lead the meeting, you make the call, you hold it together
+    — and underneath it runs a sentence you''d never say to anyone: if they knew what
+    I''m actually like, this would be over. Not a passing doubt. A baseline. You manage
+    other people from inside a quiet certainty that you''re the problem, and the anxiety
+    is the alarm standing guard over a thing you can''t let anyone see.
 
 
-    For a mid-level manager between back-to-back meetings. This book doesn''t promise
-    to make anxiety stop — it names what''s happening in your body in language you
-    can use the next time it happens. Through recognition, descent, and integration,
-    not worksheets or forced positivity. Book 5 of the Managers anxiety series.'
+    This book is for the manager carrying shame in a suit. From the outside you''re
+    solid. Inside, you flinch at praise because they''ve got you wrong, you over-prepare
+    so no one catches the fraud, you replay the one comment that confirmed what you
+    already believed about yourself. The dread isn''t really about the work. It''s
+    about being found out — and the work is just where the fear of exposure shows
+    up.
+
+
+    Recognition is the first and hardest turn: a lot of what you''ve been calling
+    anxiety is shame in disguise. That buried belief — that something is fundamentally
+    wrong with you — is doing the driving, and the worry is just the noise it makes.
+    You''ll learn to name the belief instead of obeying it. Not to argue with it.
+    To finally say it plainly to yourself, which is the one thing shame cannot survive.
+
+
+    Then the descent. The reflex is to bury it deeper — perform harder, hide better,
+    make sure no one ever gets close enough to see. Here you go down into it instead:
+    you let the buried belief surface and you look at it directly, in the light, without
+    rushing to fix or disprove it. Shame lives on being unspeakable. You take away
+    its oxygen by speaking it — to yourself first, on the page, with no audience to
+    perform for. That''s the work. Not winning the argument. Ending the hiding.
+
+
+    Integration is leading without the secret running underneath. You stop managing
+    your team and policing your own exposure at the same time. The belief that you''re
+    fundamentally wrong loosens — not because you proved it false, but because you
+    stopped agreeing to keep it in the dark. You let yourself be seen, starting with
+    you, and the alarm that was guarding the secret has less to guard.
+
+
+    This book will not declare you fixed. It won''t hand you affirmations, won''t
+    optimize your self-esteem, and won''t pretend the shame was secretly a strength.
+    There''s no positivity drill here. What changes is that you stop carrying what
+    you can''t say — because you finally said it.
+
+
+    You were never supposed to lead while hiding from yourself. You''re allowed to
+    be seen and stay standing.'
 keywords:
   primary:
   - anxiety relief
@@ -37,6 +78,7 @@ keywords:
   - managers
   - anxiety for managers
 bisac_codes:
+- SEL036000
 - SEL027000
 - SEL024000
 - PSY022000
@@ -45,12 +87,16 @@ target_price:
   audible_usd: 9.99
   paperback_usd: 12.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: mara_okonkwo
 comp_titles:
-- Dare (Barry McDonagh)
-- The Anxiety and Phobia Workbook (Bourne)
-- Unwinding Anxiety (Judson Brewer)
+- The Gifts of Imperfection (Brené Brown) — secular, research-based work on shame
+  and worthiness
+- Self-Compassion (Kristin Neff) — meeting the inner critic without affirmations or
+  woo
+- The Mountain Is You (Brianna Wiest) — confronting buried self-belief that drives
+  self-sabotage
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -58,3 +104,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

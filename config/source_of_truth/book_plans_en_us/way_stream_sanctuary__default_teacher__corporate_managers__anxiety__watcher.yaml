@@ -13,17 +13,61 @@ target_word_range:
 target_audio_minutes: 70
 title: 'The Alarm Is Lying: The Space Between You and Your Anxiety'
 subtitle: A Real Talk Guide to Anxiety Relief for Managers
-cover_tagline: A Real Talk Guide to Anxiety Relief for Managers
+cover_tagline: You scan every face in the room for the bad news before it's news.
+  The watching never clocks out.
 description:
-  short_blurb: A Real Talk Guide to Anxiety Relief for Managers A grounded, secular
-    guide to anxiety for managers.
-  long_description: 'The Alarm Is Lying: The Space Between You and Your Anxiety
+  short_blurb: Part of you is always on duty — reading faces, bracing for the problem,
+    watching for the threat that may never come. This is a grounded guide for managers
+    on the hypervigilant mind that won't stand down, and the space you can find between
+    you and the watching.
+  long_description: 'There''s a part of you that never goes off shift. It reads your
+    boss''s face for bad news before the meeting starts. It scans the team for the
+    problem nobody''s named yet. It braces, mid-conversation, for the thing that might
+    go wrong — and even at home, even on the weekend, it''s still up there on the
+    tower, scanning a horizon that''s mostly empty. You''re not in danger. You''re
+    just never not watching.
 
 
-    For a mid-level manager between back-to-back meetings. This book doesn''t promise
-    to make anxiety stop — it names what''s happening in your body in language you
-    can use the next time it happens. Through recognition, descent, and integration,
-    not worksheets or forced positivity. Book 7 of the Managers anxiety series.'
+    This book is for the manager whose mind won''t stand down. Hypervigilance got
+    you here — catching issues early, reading the room, staying three steps ahead.
+    But the watcher doesn''t know how to stop. It treats a quiet Tuesday like a lull
+    before something, every ambiguous signal like an incoming threat. You''re exhausted
+    in a specific way: not from the work, but from the surveillance that runs underneath
+    all of it.
+
+
+    Recognition comes first, and it''s subtle: you are not the watcher. The hypervigilant
+    scanning feels like just-you, like clear-eyed competence, like the only responsible
+    way to lead. But it''s a part of you doing a job — guarding against threat — and
+    it has confused its job with your whole identity. You''ll learn to notice the
+    watching as something happening, not something you are. Naming that opens a gap
+    that wasn''t there before.
+
+
+    Then the descent. The reflex is to either obey the watcher — scan harder, prepare
+    for everything — or fight it, which just makes it scan for the fight. Here you
+    do neither. You go down into the watching itself and find the small space between
+    you and it: the part that notices the vigilance is not the vigilance. You let
+    the watcher keep watching without being run by it. You don''t fire the guard.
+    You stop living inside the guard tower.
+
+
+    Integration is leading from that space. The watcher still scans — it''s good at
+    its job and you don''t need it gone — but there''s now a little daylight between
+    you and the alert. You can let the team have a normal day without bracing it for
+    catastrophe. You can be off the tower and still be a good manager. The vigilance
+    becomes one part of you, not the whole sky.
+
+
+    This book will not switch the watcher off. It won''t hand you a way to relax on
+    command, won''t optimize your awareness, and won''t pretend the hypervigilance
+    was a superpower you should be grateful for. There''s no off-switch and no forced
+    calm. What changes is the space — between you and the watching — and from inside
+    that space, the alarm finally has room to ease.
+
+
+    You were never only the part that stands guard. You''re allowed to step back from
+    the watch and still be safe.'
 keywords:
   primary:
   - anxiety relief
@@ -37,6 +81,7 @@ keywords:
   - managers
   - anxiety for managers
 bisac_codes:
+- SEL036000
 - SEL027000
 - SEL024000
 - PSY022000
@@ -45,12 +90,16 @@ target_price:
   audible_usd: 9.99
   paperback_usd: 12.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: mara_okonkwo
 comp_titles:
-- Dare (Barry McDonagh)
-- The Anxiety and Phobia Workbook (Bourne)
-- Unwinding Anxiety (Judson Brewer)
+- Hardwiring Happiness (Rick Hanson) — secular neuroscience of a brain stuck scanning
+  for threat
+- Why Zebras Don't Get Ulcers (Robert Sapolsky) — the science of a stress system stuck
+  on alert
+- You Are Not Your Brain (Jeffrey Schwartz) — separating the self from the hypervigilant
+  mind
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -58,3 +107,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

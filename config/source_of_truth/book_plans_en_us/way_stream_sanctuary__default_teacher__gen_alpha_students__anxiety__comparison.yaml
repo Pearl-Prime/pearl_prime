@@ -13,17 +13,53 @@ target_word_range:
 target_audio_minutes: 70
 title: 'The Alarm Is Lying: Beyond the Highlight Reel'
 subtitle: How Students Are Rewriting the Rules of Anxiety Relief
-cover_tagline: How Students Are Rewriting the Rules of Anxiety Relief
+cover_tagline: Everyone else has it together. That's the lie. Here's the truth.
 description:
-  short_blurb: How Students Are Rewriting the Rules of Anxiety Relief A grounded,
-    secular guide to anxiety for students.
-  long_description: 'The Alarm Is Lying: Beyond the Highlight Reel
+  short_blurb: You scroll, and within seconds you're behind. Behind on grades, looks,
+    friends, a whole life everyone else seems to already have figured out. This is
+    a straight-talk guide to the anxiety that comes from measuring yourself against
+    a feed that was built to make you feel like you're losing.
+  long_description: 'It''s the feeling that hits between classes, or at midnight,
+    or the second your thumb stops moving: everyone else is ahead of you. Their grades,
+    their bodies, their group chats, their college lists, their seemingly effortless
+    lives. You didn''t decide to compare yourself. It just happened, automatically,
+    a hundred times before lunch.
 
 
-    For a student under academic and social pressure. This book doesn''t promise to
-    make anxiety stop — it names what''s happening in your body in language you can
-    use the next time it happens. Through recognition, descent, and integration, not
-    worksheets or forced positivity. Book 1 of the Students anxiety series.'
+    This book is for the student whose anxiety runs on comparison. The one who can
+    name three people who are better at the thing they care about and zero people
+    who are worse. The one who knows, logically, that a feed is a highlight reel,
+    and still feels gut-punched by it anyway. The one who walks out of a good day
+    feeling behind because of fifteen seconds of someone else''s.
+
+
+    Here''s what Nina Vazquez wants you to see first: the alarm going off in your
+    chest when you compare isn''t proof you''re behind. It''s proof your brain is
+    scanning for rank, the way it was built to, in an environment that hands it ten
+    thousand people to measure against instead of the thirty it was designed for.
+    That''s not a flaw in you. That''s a mismatch between an old instinct and a feed
+    engineered to keep it firing.
+
+
+    We''re going to name it — the exact moment the measuring starts, what it feels
+    like in your body, the stories it tells you about your worth. Then we go down
+    into it instead of scrolling past it or hyping yourself out of it. You''ll learn
+    what''s actually underneath the comparison, what it''s trying to protect, and
+    why "just stop comparing yourself" has never once worked for you. You come back
+    from this not with a thicker skin, but with the ability to notice the measuring
+    as it happens and not get swept downstream by it.
+
+
+    This is not a book that promises you''ll stop caring what other people think.
+    You''re human; you will care. It won''t optimize your mindset or hand you a morning
+    routine or tell you to log off and remember your own worth. It won''t pretend
+    the comparison is irrational when the pressure you''re under is real.
+
+
+    What it will do is hand you plain words for what happens inside you when the feed
+    makes you feel small — words you can use the next time it happens, at 11 p.m.,
+    alone, thumb hovering. You are allowed to put the measuring stick down. Not forever,
+    not perfectly. Just the next time you catch yourself holding it.'
 keywords:
   primary:
   - anxiety relief
@@ -37,6 +73,7 @@ keywords:
   - students
   - anxiety for students
 bisac_codes:
+- SEL036000
 - SEL027000
 - SEL024000
 - PSY022000
@@ -45,12 +82,16 @@ target_price:
   audible_usd: 9.99
   paperback_usd: 12.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: nina_vazquez
 comp_titles:
-- Dare (Barry McDonagh)
-- The Anxiety and Phobia Workbook (Bourne)
-- Unwinding Anxiety (Judson Brewer)
+- How to Do the Work (Nicole LePera) — names the automatic patterns running underneath
+  your reactions
+- The Anxiety Toolkit (Alice Boyes) — practical, non-preachy framing of where anxiety
+  actually comes from
+- Maybe You Should Talk to Someone (Lori Gottlieb) — secular, honest look at the stories
+  we tell about ourselves
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -58,3 +99,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

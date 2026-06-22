@@ -16,17 +16,52 @@ target_word_range:
 target_audio_minutes: 70
 title: 'The Thought That Won''t Leave: The False Alarm Response'
 subtitle: A Field Guide for Young Professionals Navigating Stop Overthinking
-cover_tagline: A Field Guide for Young Professionals Navigating Stop Overthinking
+cover_tagline: Your body thinks that unread Slack message is a predator. It isn't.
 description:
-  short_blurb: A Field Guide for Young Professionals Navigating Stop Overthinking
-    A grounded, secular guide to overthinking for young professionals.
-  long_description: 'The Thought That Won''t Leave: The False Alarm Response
+  short_blurb: You replay the meeting, reread the message, and brace for a disaster
+    that never comes. This is a plain-language field guide to the false alarm that
+    fires in your body when there is no real danger — and what changes when you stop
+    treating every spike of dread as a warning you have to obey.
+  long_description: 'It''s 6:40 p.m. You closed your laptop twenty minutes ago, but
+    your chest is still tight over one sentence you typed in a thread today. You''re
+    scanning it for tone. You''re half-drafting the apology you might need to send.
+    Nothing happened. Your body is acting like something did, and it has been acting
+    like that since the message went out.
 
 
-    For early in a demanding career, phone always buzzing. This book names what overthinking
-    is doing in your body in language you can use — through recognition, descent,
-    and integration, not worksheets or forced positivity. Book 1 of the Young Professionals
-    overthinking series.'
+    This book is for the early-career professional whose mind treats a delayed reply,
+    an ambiguous "can we talk?", or a slightly-off performance review like a threat
+    to survival. You are not dramatic and you are not broken. You''re carrying a nervous
+    system that pulls the alarm — the flood of adrenaline, the looping thoughts, that
+    sick lurch in the gut — over things that genuinely cannot hurt you. The alarm
+    is real. The thing it''s warning you about is not. That gap is the whole problem,
+    and it''s also the way out.
+
+
+    So the first move is learning to catch the alarm in the act: to feel, in real
+    time, the difference between "my job is actually on fire" and "my body just confused
+    a Slack notification for a predator." Most of the work happens there, in the noticing.
+    From there you stop trying to argue the fear down or talk yourself calm — that
+    never works and you know it — and instead you practice staying inside your own
+    body while the alarm runs its course, so it stops driving from the back seat.
+    What you''re after isn''t a fear-proof life. It''s the moment you feel the spike,
+    recognize it for what it is, and don''t reorganize your whole evening around obeying
+    it. The thought still shows up. It just stops being an emergency you have to act
+    on.
+
+
+    This is written in plain, secular, real-talk language — a field guide for the
+    actual next time your phone buzzes and your stomach drops. No worksheets. No 5
+    a.m. routine. No "just think positive," because you''ve tried that and it lands
+    as an insult. And no promise that the dread will never visit again, because that
+    promise is a lie and chasing it is half of what''s exhausting you.
+
+
+    What it won''t do is sell you a way to optimize the fear out of existence or turn
+    you into someone who never reacts. That person doesn''t exist. What it offers
+    instead is smaller and far more usable: the ability to name a false alarm as a
+    false alarm, let your body sound it, and keep living while it rings. You''re allowed
+    to feel the spike and not believe it. You''re allowed to let it ring and not run.'
 keywords:
   primary:
   - stop overthinking
@@ -39,6 +74,7 @@ keywords:
   - young professionals
   - overthinking for young professionals
 bisac_codes:
+- SEL036000
 - SEL027000
 - SEL024000
 - PSY022000
@@ -47,12 +83,16 @@ target_price:
   audible_usd: 9.99
   paperback_usd: 12.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: ravi_chandra
 comp_titles:
-- Don't Believe Everything You Think (Nguyen)
-- Stop Overthinking (Hollins)
-- The Worry Trick (Carbonell)
+- Unwinding Anxiety (Judson Brewer) — maps the worry loop in the brain and how to
+  interrupt it without willpower
+- Burnout (Emily Nagoski & Amelia Nagoski) — names how a stress response runs to completion
+  in the body, not just the head
+- Why Zebras Don't Get Ulcers (Robert Sapolsky) — the science of a survival alarm
+  firing over modern, non-survival threats
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -60,3 +100,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

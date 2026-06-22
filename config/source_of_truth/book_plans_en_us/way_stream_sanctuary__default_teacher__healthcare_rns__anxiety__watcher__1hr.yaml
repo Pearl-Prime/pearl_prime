@@ -16,15 +16,61 @@ target_word_range:
 target_audio_minutes: 60
 title: 'The Alarm Is Lying: Watching Your Thoughts Without Drowning'
 subtitle: A One-Hour Anxiety Reset for Nurses
-cover_tagline: A One-Hour Anxiety Reset for Nurses
+cover_tagline: You scan every room for what's about to go wrong. Off the clock, the
+  scanner never powers down.
 description:
-  short_blurb: A One-Hour Anxiety Reset for Nurses The one-hour edition.
-  long_description: 'The Alarm Is Lying: Watching Your Thoughts Without Drowning
+  short_blurb: You read every face, every monitor, every subtle change before anyone
+    else does — and then you go home and your mind keeps scanning the people you love.
+    This is the one-hour reset for the nurse whose hypervigilance never clocks out.
+    Read it in a single sitting and learn to watch your own thoughts without being
+    pulled under by them.
+  long_description: 'You see it before anyone else does. The subtle change in color,
+    the shift in a rhythm, the face that''s a degree more anxious than it was an hour
+    ago — you catch it early, every time, and patients are alive because you do. That
+    instinct is the best of you. But then your shift ends, and the scanner doesn''t
+    power down. You''re at the dinner table reading your kid''s face for the thing
+    that''s wrong. You''re tracking your partner''s cough. Off the clock, the watching
+    just turns on the people you love.
 
 
-    The one-hour edition: the core of the anxiety work for nurses, in a single sitting.
-    Recognition, descent, integration — no filler. Book 7 of the one-hour Nurses anxiety
-    series.'
+    That''s the watcher, and if it never clocks out, you''re who this was written
+    for. Not a command to relax — you''d ignore that, correctly. One sitting on how
+    to watch your own thoughts without being dragged under by them.
+
+
+    The recognition first: the hypervigilance that makes you a good nurse is not the
+    same thing as your judgment, even though it''s wearing your judgment''s clothes.
+    On the unit, scanning for the early sign is the job, and you''re excellent at
+    it. But the reflex doesn''t know where the unit ends. It''s worn a groove so deep
+    that every quiet moment reads as the moment before something goes wrong, and so
+    your rest isn''t rest — you come home tired and stay tired, because some part
+    of you never actually went off duty. The scanning feels like vigilance, like love,
+    like the price of being good at this. It isn''t. It''s a survival reflex stuck
+    in the on position.
+
+
+    Then the descent. You don''t fight the watcher — it''s been trying to keep everyone
+    alive, and attacking it only makes it grip harder. Instead you turn toward it
+    and learn the one move it never learned: to watch the watching. To notice the
+    scanning thought as a thought, name it, and let it pass through without chasing
+    it down the hall. Underneath the vigilance is exhaustion, and underneath the exhaustion
+    is a fear it''s been carrying alone — that if it stops watching, something will
+    happen, and it''ll be on you. You stay with that fear instead of obeying it. From
+    there, slowly, the watcher learns it''s allowed to set the scope down for a moment
+    without anyone coding.
+
+
+    You don''t get a switched-off mind back. You''ll still catch the early sign on
+    shift; that''s a gift, keep it. What returns is the difference between watching
+    and being consumed by it — being alert when you''re on, and actually off when
+    you''re off.
+
+
+    Nobody is going to tell you everything will be fine. Some of it won''t be, and
+    the watcher knows that better than anyone. The goal is not to stop noticing. The
+    goal is to let the part of you that never powers down finally rest — without believing
+    rest is the same as abandoning your post. Take this hour, and you can let it stand
+    down.'
 keywords:
   primary:
   - anxiety relief
@@ -38,6 +84,7 @@ keywords:
   - anxiety for nurses
   - one hour
 bisac_codes:
+- SEL036000
 - SEL027000
 - SEL024000
 - PSY022000
@@ -46,12 +93,16 @@ target_price:
   audible_usd: 6.99
   paperback_usd: 9.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: lena_frost
 comp_titles:
-- Dare (McDonagh)
-- The Anxiety and Phobia Workbook (Bourne)
-- Unwinding Anxiety (Brewer)
+- Chatter (Ethan Kross) — secular cognitive science on the inner voice and how to
+  step back from it
+- Wherever You Go, There You Are (Jon Kabat-Zinn) — observing the mind without forcing
+  it quiet
+- Rewire Your Anxious Brain (Catherine Pittman) — the science of hypervigilance and
+  how to loosen its grip
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -59,3 +110,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

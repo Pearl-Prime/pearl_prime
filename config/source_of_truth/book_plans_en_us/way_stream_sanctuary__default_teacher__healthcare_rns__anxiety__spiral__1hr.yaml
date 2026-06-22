@@ -16,15 +16,63 @@ target_word_range:
 target_audio_minutes: 60
 title: 'The Alarm Is Lying: Escaping the Mental Loop'
 subtitle: A One-Hour Anxiety Reset for Nurses
-cover_tagline: A One-Hour Anxiety Reset for Nurses
+cover_tagline: Did I document that? Did I document that? Did I— it's 2 a.m. and you're
+  still on the same thought.
 description:
-  short_blurb: A One-Hour Anxiety Reset for Nurses The one-hour edition.
-  long_description: 'The Alarm Is Lying: Escaping the Mental Loop
+  short_blurb: One small worry walks in and twenty minutes later your mind has built
+    a disaster out of nothing. This is the one-hour reset for the nurse whose brain
+    turns a single thought into a thousand on the drive home. Read it in a single
+    sitting and learn how to step out of the loop without arguing your way through
+    it.
+  long_description: 'It''s the drive home, and it starts with almost nothing. Did
+    I document that wound check? The thought walks in, and by the next red light you''ve
+    reopened the chart in your head, decided you didn''t, decided it''ll be flagged,
+    decided you''ll be called in, decided this is the one that ends your license.
+    One small worry, and twenty minutes later your mind has built an entire disaster
+    out of a thing that is probably fine. You get home wrung out, having survived
+    a catastrophe that only happened inside your own skull.
 
 
-    The one-hour edition: the core of the anxiety work for nurses, in a single sitting.
-    Recognition, descent, integration — no filler. Book 6 of the one-hour Nurses anxiety
-    series.'
+    That''s the spiral, and if your brain does this — turns one thought into a thousand
+    on the drive home, in the shower, at 2 a.m. — this short one is for you. Not a
+    worksheet. One sitting that shows you how to step out of the loop without having
+    to win an argument with it.
+
+
+    The recognition first: the spiral is not thinking. It''s the impression of thinking.
+    Real problem-solving has an exit — you reach an answer and you stop. The spiral
+    never reaches one, because reaching one would mean it has to end, and ending is
+    the single thing it refuses to do. Every loop makes the same promise: think it
+    through one more time and you''ll finally feel safe. You never do. The next loop
+    is already loaded before this one finishes. It feels like diligence. It''s the
+    same fear, photocopying itself.
+
+
+    Then the descent — which sounds wrong, because everything in you wants up and
+    out of the loop, away from the feeling. But you don''t escape a spiral by climbing;
+    you escape it by getting underneath it, to the one raw thing it''s built on top
+    of. Every thousand-thought chain sits on a single feeling — usually fear, sometimes
+    helplessness, sometimes the plain dread of having someone''s life in your hands.
+    When you go down and actually feel that one thing, instead of generating a thousand
+    thoughts to avoid feeling it, the spiral runs out of fuel. It was never about
+    the documentation. The documentation was how you kept from landing on the fear.
+
+
+    A quiet mind is not what comes back. Someone will still hand you a first thought;
+    you''ll still wonder if you charted it. What returns is the catch — the early
+    moment, before the loop has speed, where you can feel it starting and decline
+    to pick up the second thought.
+
+
+    Nobody here is promising to stop your thoughts. Thought-stopping doesn''t work,
+    and you''d see through it the way you see through a placebo. The goal is not a
+    brain that never spirals after a hard shift. The goal is to stop mistaking the
+    spiral for solving, and to find the one real feeling under the thousand invented
+    ones.
+
+
+    The spiral feels like you''re being responsible. You''re not. You''re scared,
+    and that''s allowed to be enough. One hour, and you can learn to step off.'
 keywords:
   primary:
   - anxiety relief
@@ -38,6 +86,7 @@ keywords:
   - anxiety for nurses
   - one hour
 bisac_codes:
+- SEL036000
 - SEL027000
 - SEL024000
 - PSY022000
@@ -46,12 +95,16 @@ target_price:
   audible_usd: 6.99
   paperback_usd: 9.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: lena_frost
 comp_titles:
-- Dare (McDonagh)
-- The Anxiety and Phobia Workbook (Bourne)
-- Unwinding Anxiety (Brewer)
+- Unwinding Anxiety (Judson Brewer) — the secular neuroscience of the worry loop and
+  how to interrupt it
+- Rewire Your Anxious Brain (Catherine Pittman) — how rumination circuits fire and
+  how to step out
+- The Worry Trick (David Carbonell) — why fighting the spiral feeds it, and what to
+  do instead
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -59,3 +112,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

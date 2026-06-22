@@ -13,17 +13,60 @@ target_word_range:
 target_audio_minutes: 70
 title: 'The Alarm Is Lying: The Grief That Doesn''t Leave'
 subtitle: How First Responders Are Rewriting the Rules of Anxiety Relief
-cover_tagline: How First Responders Are Rewriting the Rules of Anxiety Relief
+cover_tagline: You carry names you never knew. The job never gives you anywhere to
+  put them.
 description:
-  short_blurb: How First Responders Are Rewriting the Rules of Anxiety Relief A grounded,
-    secular guide to anxiety for first responders.
-  long_description: 'The Alarm Is Lying: The Grief That Doesn''t Leave
+  short_blurb: The ones you couldn't save. The partner who didn't make it home. The
+    version of you that started this job. This is an unsentimental book about the
+    grief first responders carry with no funeral, no closure, and no time to feel
+    it. No stages to complete. Just an honest place to set down what you've been holding.
+  long_description: 'There''s a call you still see. A face, a name, a date you didn''t
+    ask to memorize. You went back in service twenty minutes later and you''ve been
+    carrying it ever since, with nowhere to set it down. That''s grief, even if nobody
+    around you ever called it that.
 
 
-    For a first responder in the quiet after a call. This book doesn''t promise to
-    make anxiety stop — it names what''s happening in your body in language you can
-    use the next time it happens. Through recognition, descent, and integration, not
-    worksheets or forced positivity. Book 3 of the First Responders anxiety series.'
+    This book is for the first responder who has stacked up losses the job never gave
+    you room to mourn. The patients who didn''t make it. The colleague whose locker
+    got cleaned out between shifts. The marriage, the sleep, the easygoing version
+    of yourself who walked in on day one and somehow never walked back out. You were
+    trained to clear the scene and take the next one, and grief doesn''t run on that
+    schedule, so it just settled in behind everything else, quiet and heavy and patient.
+
+
+    There''s no plain way around this, so the book doesn''t try for one. It starts
+    by giving the weight its real name. Not weakness, not burnout, not a bad attitude
+    you need to adjust, but actual loss, the kind that has always deserved the word
+    you were never given time to use. Naming it honestly is the first thing that loosens
+    it, because a loss you won''t call a loss can only be managed, never met.
+
+
+    From there it stops asking you to stay busy enough to outrun the ache, and lets
+    you turn toward it instead. The specific one. The face you''ve been stepping around
+    for years. You go in close enough to actually feel it, which is the part the job
+    trained out of you, and you find that the feeling you''ve been bracing against
+    is grief doing what grief is supposed to do, not proof that you''re coming apart.
+    And then you come back up still carrying them, because you will, but carrying
+    them differently, the weight settled and shared out instead of clenched.
+
+
+    What you won''t find here is closure, or five tidy stages, or a promise that the
+    grief resolves if you just follow the steps in order. Some of what you carry,
+    you carry for good; pretending otherwise is its own kind of insult to it. What
+    it offers instead is the difference between a weight that crushes you because
+    you''re fighting it the whole way and a weight you''ve finally learned how to
+    actually hold.
+
+
+    The loss was real. Pretending it wasn''t is what''s been quietly costing you,
+    in your sleep, your temper, your distance from the people still here. You''re
+    allowed to grieve the ones you couldn''t save, on a job that never once paused
+    to let you. You can set it down in here, for as long as you need, and pick it
+    back up changed.
+
+
+    You don''t have to keep carrying them braced and alone. You''re allowed to put
+    your arms down.'
 keywords:
   primary:
   - anxiety relief
@@ -37,6 +80,7 @@ keywords:
   - first responders
   - anxiety for first responders
 bisac_codes:
+- SEL036000
 - SEL027000
 - SEL024000
 - PSY022000
@@ -45,12 +89,16 @@ target_price:
   audible_usd: 9.99
   paperback_usd: 12.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: cole_bennett
 comp_titles:
-- Dare (Barry McDonagh)
-- The Anxiety and Phobia Workbook (Bourne)
-- Unwinding Anxiety (Judson Brewer)
+- It's OK That You're Not OK (Megan Devine) — rejects 'stages' and closure and makes
+  room for grief that doesn't resolve
+- On Grief and Grieving (Elisabeth Kübler-Ross & David Kessler) — a grounded companion
+  for loss the job never paused for
+- The Body Keeps the Score (Bessel van der Kolk) — on how unprocessed loss and trauma
+  lodge in the body and stay
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -58,3 +106,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

@@ -16,17 +16,54 @@ target_word_range:
 target_audio_minutes: 70
 title: 'The Thought That Won''t Leave: Escaping the Mental Loop'
 subtitle: A Field Guide for Young Professionals Navigating Stop Overthinking
-cover_tagline: A Field Guide for Young Professionals Navigating Stop Overthinking
+cover_tagline: It started as one thought. It's 1 a.m. and now it's your entire life.
 description:
-  short_blurb: A Field Guide for Young Professionals Navigating Stop Overthinking
-    A grounded, secular guide to overthinking for young professionals.
-  long_description: 'The Thought That Won''t Leave: Escaping the Mental Loop
+  short_blurb: 'One small worry — a typo, a curt reply, a thing you said in standup
+    — splits into a thousand and pulls your whole future down with it. This is a field
+    guide to the spiral: how a single thought becomes a mental loop, and how to step
+    off it without pretending you can just stop thinking.'
+  long_description: 'You said one slightly-wrong thing in standup. By the time you''re
+    on the train home, that one thing has metastasized: they think I''m incompetent,
+    this is why I''ll never get promoted, maybe I''m not cut out for this, maybe I''ve
+    been faking the whole time and they''re about to find out. Forty minutes ago it
+    was a sentence. Now it''s a verdict on your entire worth, delivered by you, against
+    you.
 
 
-    For early in a demanding career, phone always buzzing. This book names what overthinking
-    is doing in your body in language you can use — through recognition, descent,
-    and integration, not worksheets or forced positivity. Book 2 of the Young Professionals
-    overthinking series.'
+    This is the spiral, and this book is for the young professional who knows it from
+    the inside — who can take one ambiguous moment at work and, within minutes, free-fall
+    through every catastrophe attached to it. You''re not doing this because you''re
+    weak-minded or because you can''t "control your thoughts." You''re caught in a
+    loop, and a loop has a particular cruelty: each thought hands off to a worse one,
+    and the sheer speed of the hand-offs is what convinces you the conclusion must
+    be true. Nothing that arrives that fast feels optional.
+
+
+    So the work starts upstream, at the catch — learning to feel the exact moment
+    the loop hooks you, the split-second jump from "well, that was awkward" to "and
+    therefore my life is over." Naming it while it''s happening, instead of two hours
+    and one wrecked evening later, changes everything about what comes next. And what
+    comes next is counterintuitive: you stop sprinting away from the spiral, because
+    fighting a loop only feeds it speed. You learn to let the thoughts keep coming
+    without chasing each one to its terrible end, to feel the pull of the next link
+    and simply not grab it. Do that enough times and you can watch the loop spin without
+    being flung off it. The thoughts don''t stop. You stop being the thing they drag
+    down the stairs.
+
+
+    This is plain, secular, no-nonsense writing, built for the real 1 a.m. version
+    of you that your brain ambushes. No worksheets. No gratitude journal. No "clear
+    your mind," because no one in history has cleared their mind and you''re tired
+    of being told it''s your fault you can''t. No promise of a single uninterrupted
+    calm thought from here to morning.
+
+
+    What it won''t do is hand you a trick to switch your brain off or a hack to never
+    spiral again. The goal was never a quiet, optimized mind that runs on rails. The
+    goal is to recognize the loop for what it actually is — a loop, not a prophecy
+    — and to step off it with your evening, and your sense of yourself, still intact.
+    You don''t have to follow the thought all the way down. You can let it spin and
+    stay exactly where you are.'
 keywords:
   primary:
   - stop overthinking
@@ -39,6 +76,7 @@ keywords:
   - young professionals
   - overthinking for young professionals
 bisac_codes:
+- SEL036000
 - SEL027000
 - SEL024000
 - PSY022000
@@ -47,12 +85,16 @@ target_price:
   audible_usd: 9.99
   paperback_usd: 12.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: ravi_chandra
 comp_titles:
-- Don't Believe Everything You Think (Nguyen)
-- Stop Overthinking (Hollins)
-- The Worry Trick (Carbonell)
+- Chatter (Ethan Kross) — the science of the inner voice that loops, and concrete
+  ways to break the cycle
+- Unwinding Anxiety (Judson Brewer) — how worry becomes a self-reinforcing loop and
+  how to interrupt the habit
+- The Happiness Trap (Russ Harris) — why fighting your thoughts feeds them, and what
+  to do instead
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -60,3 +102,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

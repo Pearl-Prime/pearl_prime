@@ -13,17 +13,58 @@ target_word_range:
 target_audio_minutes: 70
 title: 'The Alarm Is Lying: When Everything Is Too Much'
 subtitle: A Real Talk Guide to Anxiety Relief for Managers
-cover_tagline: A Real Talk Guide to Anxiety Relief for Managers
+cover_tagline: It's not that there's a lot to do. It's that it's all arriving at once,
+  and you can't put any of it down.
 description:
-  short_blurb: A Real Talk Guide to Anxiety Relief for Managers A grounded, secular
-    guide to anxiety for managers.
-  long_description: 'The Alarm Is Lying: When Everything Is Too Much
+  short_blurb: Twelve open tabs, a buzzing phone, three people waiting on you, and
+    a brain that's gone white. This is a grounded guide for managers on what to do
+    when everything lands at once — not a productivity system, a way back into your
+    own body when the load won't stop.
+  long_description: 'It''s not one big thing. It''s everything, all at the same time.
+    The Slack pings while the call runs while two people stand at your desk while
+    the deadline you forgot surfaces in your gut. Your brain doesn''t pick a problem
+    — it just floods, goes loud and blank at once, and you sit there capable of nothing
+    while the most capable thing about you is supposed to be handling exactly this.
 
 
-    For a mid-level manager between back-to-back meetings. This book doesn''t promise
-    to make anxiety stop — it names what''s happening in your body in language you
-    can use the next time it happens. Through recognition, descent, and integration,
-    not worksheets or forced positivity. Book 4 of the Managers anxiety series.'
+    This book is for the manager drowning in simultaneity. You''re not lazy and you''re
+    not bad at your job — you''re the funnel everything pours through, and there''s
+    no valve. The requests stack, the contexts switch, the mental tabs multiply until
+    the system that''s supposed to triage them just seizes. Overwhelm isn''t too much
+    work. It''s too much at once, with nowhere to set it down.
+
+
+    Recognition comes first: this is overload, not incompetence. The blank, frozen,
+    slightly sick feeling is your system hitting its ceiling — a real limit, not a
+    character flaw. You''ll learn to catch the moment the flood starts and name it
+    for what it is, in words you can reach for mid-meltdown: too much is arriving,
+    and my body has tipped over, and that is a state, not a failure.
+
+
+    Then the descent. The reflex is to claw for control — make another list, work
+    faster, white-knuckle through. Here you go the other way: you stop, you let the
+    whole overwhelming mass be as big as it is, and you come back to one thing that''s
+    actually in front of you right now. Not to conquer the pile. To stop pretending
+    you can hold all of it in your head at once, because you can''t, and the trying
+    is the injury. You let the load be heavy and you set most of it down.
+
+
+    Integration is a different relationship to the flood. You feel it coming and you
+    don''t panic at the panic. You let the too-much be too-much and you reach for
+    the single next real thing instead of all of it. The overwhelm still arrives —
+    the job is genuinely a lot — but it stops taking you out at the knees, because
+    you''ve stopped trying to carry the entire pile in one breath.
+
+
+    This book will not make you more productive. It won''t hand you a system, a planner,
+    or a morning routine that inbox-zeroes your nervous system. It won''t pretend
+    the load is secretly manageable if you''d just optimize harder. What changes is
+    that you stop holding all of it at once — and the flood loses its power to flatten
+    you.
+
+
+    You were never built to carry everything in a single instant. You''re allowed
+    to put most of it down and pick up one thing.'
 keywords:
   primary:
   - anxiety relief
@@ -37,6 +78,7 @@ keywords:
   - managers
   - anxiety for managers
 bisac_codes:
+- SEL036000
 - SEL027000
 - SEL024000
 - PSY022000
@@ -45,12 +87,15 @@ target_price:
   audible_usd: 9.99
   paperback_usd: 12.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: mara_okonkwo
 comp_titles:
-- Dare (Barry McDonagh)
-- The Anxiety and Phobia Workbook (Bourne)
-- Unwinding Anxiety (Judson Brewer)
+- Four Thousand Weeks (Oliver Burkeman) — secular reckoning with finite capacity over
+  doing it all
+- Burnout (Emily & Amelia Nagoski) — completing the stress cycle in the body, not
+  optimizing the load
+- Essentialism (Greg McKeown) — less but better when everything demands you at once
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -58,3 +103,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

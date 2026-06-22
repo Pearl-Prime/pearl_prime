@@ -13,18 +13,59 @@ target_word_range:
 target_audio_minutes: 70
 title: 'The Alarm Is Lying: When Everything Is Too Much'
 subtitle: A Field Guide for Professional Women Navigating Anxiety Relief
-cover_tagline: A Field Guide for Professional Women Navigating Anxiety Relief
+cover_tagline: Forty tabs open, all of them urgent. The alarm says drowning. You are
+  not drowning.
 description:
-  short_blurb: A Field Guide for Professional Women Navigating Anxiety Relief A grounded,
-    secular guide to anxiety for professional women.
-  long_description: 'The Alarm Is Lying: When Everything Is Too Much
+  short_blurb: Everything is due, everyone needs you, and your brain has stopped being
+    able to pick a single thing to start. This is a field guide for professional women
+    drowning in too much at once. It won't hand you a productivity system. It will
+    show you what to do when the system itself is the problem.
+  long_description: 'You sit down to work and your mind is a browser with forty tabs
+    open, every one of them flashing for attention. The deck, the inbox, the text
+    you forgot to answer, the thing your boss mentioned, the appointment you need
+    to move, the person who is waiting on you. You cannot pick one. You toggle between
+    all of them and complete none of them and the not-finishing makes the pile feel
+    even bigger. By noon you are exhausted and you have technically done nothing.
 
 
-    For a professional woman holding more than she can say. This book doesn''t promise
-    to make anxiety stop — it names what''s happening in your body in language you
-    can use the next time it happens. Through recognition, descent, and integration,
-    not worksheets or forced positivity. Book 4 of the Professional Women anxiety
-    series.'
+    This book is for the professional woman who is carrying too much and has run out
+    of room to put any of it down. You are the one people rely on. You said yes to
+    most of it because saying yes is who you are. And now the volume has crossed a
+    line where it stopped being a workload and became a flood — and your body responded
+    the only way it knows how, by sounding the alarm.
+
+
+    Here is the plain version: overwhelm is not a character flaw or a time-management
+    failure. It is what happens when the demands exceed the capacity, and your nervous
+    system reads "too much" as "danger." That tight, scattered, can''t-think feeling
+    is the alarm going off. And the alarm is lying — not about the size of the pile,
+    but about what it means. You are not drowning. You are flooded, and flooded is
+    survivable.
+
+
+    The movement here is recognition, descent, and integration. First you catch the
+    exact moment overwhelm tips from busy into frozen — the body sensation, the mental
+    static, the urge to do everything and therefore nothing. Then, instead of reaching
+    for another app or a color-coded system you will abandon by Friday, you go down
+    into it. You stop trying to hold all of it in your head at once and let the flood
+    be a flood, which is the only way it ever drains. You come back able to do the
+    next single thing.
+
+
+    This book will not promise to make you infinitely productive. It will not optimize
+    you into a woman who can carry unlimited load without strain. You are not a server
+    with more capacity to provision; you are a person with limits, and the limits
+    are not the malfunction — ignoring them is. What changes is that "too much" stops
+    meaning "emergency," and you get to come back to one thing at a time.
+
+
+    No planner. No miracle morning. No hustle dressed up as self-care. Just real language
+    for what is happening in your body when everything lands at once, so you can name
+    it and find the ground again.
+
+
+    You do not have to hold all of it right now. Set it down. Pick up the one thing
+    in front of you. That is enough.'
 keywords:
   primary:
   - anxiety relief
@@ -38,6 +79,7 @@ keywords:
   - professional women
   - anxiety for professional women
 bisac_codes:
+- SEL036000
 - SEL027000
 - SEL024000
 - PSY022000
@@ -46,12 +88,16 @@ target_price:
   audible_usd: 9.99
   paperback_usd: 12.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: sofia_marchetti
 comp_titles:
-- Dare (Barry McDonagh)
-- The Anxiety and Phobia Workbook (Bourne)
-- Unwinding Anxiety (Judson Brewer)
+- Four Thousand Weeks (Oliver Burkeman) — secular case for accepting finitude instead
+  of optimizing your way out of overload
+- Essentialism (Greg McKeown) — disciplined, non-spiritual method for when the demands
+  have outrun your capacity
+- How to Keep House While Drowning (KC Davis) — gentle, shame-free approach to functioning
+  when capacity is gone
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -59,3 +105,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

@@ -16,15 +16,59 @@ target_word_range:
 target_audio_minutes: 60
 title: 'The Alarm Is Lying: The Weight You Carry'
 subtitle: A One-Hour Anxiety Reset for Nurses
-cover_tagline: A One-Hour Anxiety Reset for Nurses
+cover_tagline: You charted the time of death and went straight to your next patient.
+  It's still in you.
 description:
-  short_blurb: A One-Hour Anxiety Reset for Nurses The one-hour edition.
-  long_description: 'The Alarm Is Lying: The Weight You Carry
+  short_blurb: You've watched people die and kept moving, because there was a call
+    light and a med pass and no room to stop. This is the one-hour reset for the nurse
+    carrying losses she was never given time to feel. Read it in a single sitting
+    and set the weight down — not to forget, but to finally let it move.
+  long_description: 'You charted the time of death, called the attending, helped the
+    family to the door, and then someone handed you a phone with a call light on it
+    and you went. That''s the part no one outside this work understands. The loss
+    doesn''t get a pause. There''s a room to turn over and a med pass that''s late,
+    so you fold it down small and keep moving, and you''ve been doing that for years.
 
 
-    The one-hour edition: the core of the anxiety work for nurses, in a single sitting.
-    Recognition, descent, integration — no filler. Book 3 of the one-hour Nurses anxiety
-    series.'
+    This is for you, and it asks for one sitting — long enough to finally let something
+    move that you were never given room to feel. Because a lot of what you''ve been
+    calling stress, or burnout, or just being tired, is grief that never had anywhere
+    to go.
+
+
+    The recognition comes first. The body grieves whether or not the schedule allows
+    it. Every patient you couldn''t save, every family you stood with, every death
+    you absorbed and then immediately stepped past — none of that disappeared because
+    you didn''t have time for it. It went into the same place everything goes when
+    there''s no room: down, and in, where it sits as a weight you can''t quite name.
+    You''ve been treating the weight as a personal failing. It''s not. It''s accumulated
+    loss with no exit.
+
+
+    Then the descent, because grief does not want to be managed — it wants to be felt,
+    and it has been waiting a long time. You stop bracing against it. You let one
+    of them come back: a name, a face, a room. Not to fix it, not to reach some tidy
+    acceptance by the end of the hour, but because the only way the weight gets lighter
+    is by being set down fully, once, instead of carried clenched through a thousand
+    shifts. You let it be as big as it actually was. You stop apologizing for feeling
+    something about people who died on your watch.
+
+
+    What returns is not relief, exactly. It''s room. The grief takes the space it
+    needed all along, and having been felt, it stops leaking out sideways — into the
+    snap at your charge nurse, the dread before every shift, the flatness you can''t
+    explain to anyone at home.
+
+
+    This book will not promise closure. It won''t walk you through stages or tell
+    you the ache resolves if you process it correctly. Some of these losses don''t
+    resolve; you carry them, but you can carry them differently. The goal is not to
+    be done grieving the people you couldn''t keep.
+
+
+    The goal is to stop calling your grief a malfunction. It''s the most human thing
+    left in you after everything this job asks. For one hour, you''re allowed to feel
+    it.'
 keywords:
   primary:
   - anxiety relief
@@ -38,6 +82,7 @@ keywords:
   - anxiety for nurses
   - one hour
 bisac_codes:
+- SEL036000
 - SEL027000
 - SEL024000
 - PSY022000
@@ -46,12 +91,16 @@ target_price:
   audible_usd: 6.99
   paperback_usd: 9.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: lena_frost
 comp_titles:
-- Dare (McDonagh)
-- The Anxiety and Phobia Workbook (Bourne)
-- Unwinding Anxiety (Brewer)
+- It's OK That You're Not OK (Megan Devine) — secular permission to grieve without
+  fixing or timelines
+- The Body Keeps the Score (Bessel van der Kolk) — how unprocessed loss and trauma
+  lodge in the body
+- Bearing the Unbearable (Joanne Cacciatore) — sitting with grief that doesn't resolve,
+  for those surrounded by death
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -59,3 +108,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

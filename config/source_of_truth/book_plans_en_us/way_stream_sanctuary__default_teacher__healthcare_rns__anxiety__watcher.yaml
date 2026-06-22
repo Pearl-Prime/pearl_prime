@@ -13,17 +13,61 @@ target_word_range:
 target_audio_minutes: 70
 title: 'The Alarm Is Lying: Watching Your Thoughts Without Drowning'
 subtitle: How Nurses Are Rewriting the Rules of Anxiety Relief
-cover_tagline: How Nurses Are Rewriting the Rules of Anxiety Relief
+cover_tagline: Even off the clock, part of you is still scanning the monitor. It never
+  clocks out.
 description:
-  short_blurb: How Nurses Are Rewriting the Rules of Anxiety Relief A grounded, secular
-    guide to anxiety for nurses.
-  long_description: 'The Alarm Is Lying: Watching Your Thoughts Without Drowning
+  short_blurb: 'Years of catching the subtle decline before the crash trained a part
+    of your mind to never, ever stand down. This is a grounded, secular guide for
+    nurses about the watcher: the hypervigilant mind that keeps scanning for danger
+    long after the shift ends. No ''just be present'' clichés — a real way to watch
+    your thoughts without drowning in them.'
+  long_description: 'It''s the thing that made you a good nurse. The part of you that
+    scans the room on the way in, reads the monitor a beat before it alarms, catches
+    the subtle change three hours ahead of the crash — that vigilance has saved lives,
+    more than once, and you know it. The trouble is that it doesn''t clock out when
+    you do. You leave the floor and it keeps right on scanning. You lie down and it''s
+    still sweeping the horizon for the next thing about to go wrong. The watcher never
+    stands down, and somewhere along the way it started quietly exhausting you.
 
 
-    For a nurse at the end of a twelve-hour shift. This book doesn''t promise to make
-    anxiety stop — it names what''s happening in your body in language you can use
-    the next time it happens. Through recognition, descent, and integration, not worksheets
-    or forced positivity. Book 7 of the Nurses anxiety series.'
+    This book is for the nurse whose mind has been locked on high alert for so long
+    she''s genuinely forgotten what ''off'' even feels like. The one who can''t sit
+    in her own living room without her attention prowling the perimeter for threats.
+    The one who''s been told to ''just be present'' and ''live in the moment'' by
+    people who have never once had to catch a patient slipping away in silence.
+
+
+    Lena Frost is straight with you about it: that relentless watching was trained
+    into you for entirely good reasons, but the alarm is lying when it insists you
+    can never, ever lower your guard. Hypervigilance is a survival skill jammed in
+    the on position — a watcher that learned the world is dangerous and now refuses
+    to be talked out of the lesson. You don''t fix that by ordering yourself to relax,
+    which only hands the watcher one more thing to monitor and grade.
+
+
+    The path here is not a command to stop watching. It opens with recognition: noticing
+    the watcher itself — the part of you that is always, always scanning — instead
+    of being completely fused with it. Then descent: going down into the hypervigilance
+    rather than wrestling it, learning to observe your own racing, guarding mind without
+    being dragged under by every threat it throws up onto the screen. Then integration:
+    coming back able to watch your own thoughts the way you''d watch a stable monitor
+    — fully aware, reading every number, and no longer drowning in any of them.
+
+
+    This won''t promise to switch the watcher off, or empty your mind into blank serenity.
+    It won''t optimize you into a placid person who never clocks the exits in a new
+    room. There''s no ''just be present'' in here, no instruction to clear your head
+    and feel nothing. What it offers is the one move that actually helps: seeing the
+    hypervigilant mind as something you have, not something you are — and learning,
+    finally, to stop going down with it.
+
+
+    It''s a plain, jargon-free account of the mind that never stops standing guard,
+    and how to keep watch without going under.
+
+
+    The alarm is lying. You are allowed to lower your guard and still be safe. The
+    watching can stay — you just no longer have to drown in it.'
 keywords:
   primary:
   - anxiety relief
@@ -37,6 +81,7 @@ keywords:
   - nurses
   - anxiety for nurses
 bisac_codes:
+- SEL036000
 - SEL027000
 - SEL024000
 - PSY022000
@@ -45,12 +90,16 @@ target_price:
   audible_usd: 9.99
   paperback_usd: 12.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: lena_frost
 comp_titles:
-- Dare (Barry McDonagh)
-- The Anxiety and Phobia Workbook (Bourne)
-- Unwinding Anxiety (Judson Brewer)
+- You Are Not Your Brain (Jeffrey Schwartz) — secular, clinically grounded method
+  for stepping back from a relentless, alarm-driven mind
+- Why Has Nobody Told Me This Before? (Julie Smith) — clinical psychologist's plain
+  tools for stepping back from hypervigilant thoughts
+- Full Catastrophe Living (Jon Kabat-Zinn) — grounded, evidence-based work on relating
+  to a racing mind without forcing calm
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -58,3 +107,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

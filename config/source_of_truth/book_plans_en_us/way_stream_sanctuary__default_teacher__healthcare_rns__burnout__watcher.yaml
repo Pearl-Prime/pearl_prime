@@ -16,17 +16,57 @@ target_word_range:
 target_audio_minutes: 70
 title: 'After the Flame: Watching Your Thoughts Without Drowning'
 subtitle: How Nurses Are Rewriting the Rules of Burnout Recovery
-cover_tagline: How Nurses Are Rewriting the Rules of Burnout Recovery
+cover_tagline: The shift ends. The hypervigilance doesn't. This is the mind that won't
+  clock out.
 description:
-  short_blurb: How Nurses Are Rewriting the Rules of Burnout Recovery A grounded,
-    secular guide to burnout for nurses.
-  long_description: 'After the Flame: Watching Your Thoughts Without Drowning
+  short_blurb: You left work hours ago, but your mind is still scanning — replaying
+    the handoff, second-guessing a dose, bracing for the call that says you missed
+    something. This is a grounded, secular book about the watchful, never-off nurse
+    brain that burnout leaves running long after you've gone home.
+  long_description: 'You''re lying in bed at 2 a.m. and your brain is back on the
+    unit. Did you chart that PRN? Was that patient''s color off, or were you imagining
+    it? Did the night nurse catch what you flagged in report? The shift ended six
+    hours ago and the watcher in your head is still making rounds, still scanning
+    for the thing that''s about to go wrong, still certain that if it lets its guard
+    down for one second, someone gets hurt and it''s your name in the chart.
 
 
-    For a nurse at the end of a twelve-hour shift. This book names what burnout is
-    doing in your body in language you can use — through recognition, descent, and
-    integration, not worksheets or forced positivity. Book 3 of the Nurses burnout
-    series.'
+    This book is for the nurse whose hypervigilance has outlived the shift. The one
+    who can''t fall asleep without rehearsing tomorrow, who checks and re-checks and
+    then checks again, who carries the weight of every near-miss like it''s still
+    live and unresolved. The watchfulness that once made you a sharp, safe nurse has
+    quietly metastasized into a mind that never, ever stands down — at dinner, on
+    days off, in the middle of your own kid''s sentence — and that around-the-clock
+    scanning is its own slow kind of burnout, the kind that doesn''t show up until
+    you''re already running on empty.
+
+
+    What''s happening is this: the part of you that watches for danger learned, correctly,
+    that vigilance keeps patients alive. It got rewarded every time it caught something.
+    So it never turned off. The trouble is it can''t tell the difference between "I''m
+    at the bedside" and "I''m trying to sleep" — it treats your whole life like one
+    long shift you''re personally responsible for. We''re going to name the watcher
+    and get specific about it: what it does, when it kicks in, what exactly it''s
+    so afraid will happen if it blinks. Then, instead of trying to shut it up or argue
+    it down — which only convinces it the danger is real — we go toward it. We sit
+    with the watching mind and let it run without letting it run you. You stop drowning
+    in the thoughts and you stop white-knuckling against them; you learn there''s
+    a third option. You come back able to be in the same room as your own hypervigilance
+    without it being the boss of your nights.
+
+
+    This book will not teach you to clear your mind, or meditate the anxiety away,
+    or stop caring whether your patients are safe. It will not promise you''ll sleep
+    through the night by Thursday. No thought-stopping tricks, no positive affirmations
+    to drown out the scanning, no pretending the stakes of your job aren''t real,
+    because they are.
+
+
+    What it offers is the difference between watching your thoughts and being dragged
+    under by them — a way to let the vigilant mind keep its watch without you having
+    to live inside the watchtower it built. You learned to stay this alert because
+    lives genuinely depended on it. You''re allowed to teach the watcher that, right
+    now, tonight, it''s off the clock.'
 keywords:
   primary:
   - burnout recovery
@@ -47,12 +87,15 @@ target_price:
   audible_usd: 9.99
   paperback_usd: 12.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: oscar_bello
 comp_titles:
-- Burnout (Nagoski)
-- Laziness Does Not Exist (Price)
-- Do Nothing (Headlee)
+- Burnout (Nagoski & Nagoski) — why a stressed nervous system stays switched on after
+  the trigger's gone
+- Unwinding Anxiety (Brewer) — the secular mechanics of a worried, hypervigilant brain
+- When the Body Says No (Maté) — the cost of carrying chronic alertness in caregiving
+  bodies
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -60,3 +103,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

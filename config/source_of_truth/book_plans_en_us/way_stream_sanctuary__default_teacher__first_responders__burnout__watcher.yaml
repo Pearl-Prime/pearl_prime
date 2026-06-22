@@ -16,17 +16,51 @@ target_word_range:
 target_audio_minutes: 70
 title: 'After the Flame: The Observer''s Mind'
 subtitle: A Real Talk Guide to Burnout Recovery for First Responders
-cover_tagline: A Real Talk Guide to Burnout Recovery for First Responders
+cover_tagline: You scan every room you walk into. Even your own living room.
 description:
-  short_blurb: A Real Talk Guide to Burnout Recovery for First Responders A grounded,
-    secular guide to burnout for first responders.
-  long_description: 'After the Flame: The Observer''s Mind
+  short_blurb: The hypervigilance that keeps you alive on scene followed you home
+    and won't clock out. This is a book for first responders whose mind never fully
+    stands down. It won't tell you to just relax.
+  long_description: 'You walk into a restaurant and you''ve already clocked the exits,
+    the guy by the door, the hands you can''t see. You sit with your back to the wall,
+    every time, without deciding to. You wake at three in the morning listening hard
+    to a house that is perfectly quiet. Your partner says you seem far away even when
+    you''re right next to them, and they''re right, because part of you is still running
+    threat assessment on an ordinary Tuesday night with nothing wrong anywhere. The
+    watcher in your head was trained on the job, and it was trained well. It just
+    never learned how to turn off.
 
 
-    For a first responder in the quiet after a call. This book names what burnout
-    is doing in your body in language you can use — through recognition, descent,
-    and integration, not worksheets or forced positivity. Book 3 of the First Responders
-    burnout series.'
+    This is for the cop, the firefighter, the paramedic, the corrections officer whose
+    nervous system got rewired by years of needing to see the danger first, before
+    anyone else, because seeing it late got people hurt. On shift, that vigilance
+    is a gift, and it''s kept you and strangers and your crew alive more times than
+    you''ve counted. Off shift, it''s a tax you pay by the hour, the bone-deep tiredness
+    of always scanning, the inability to be soft, the strange sense that you''re watching
+    your own life from a few feet behind your own eyes instead of living inside it.
+
+
+    This book names the watcher for what it is: not paranoia, not a character flaw,
+    not something broken in you, but a survival system stuck in the on position long
+    after the threat has passed. Then it goes down into how that actually feels from
+    the inside, the way you observe your own dinner, your own kid''s game, your own
+    marriage, always a little outside the frame, narrating instead of being there.
+    We don''t try to delete the watcher. It earned its place and it will not go quietly,
+    and honestly you wouldn''t want it gone on shift. Instead we get curious about
+    it. We learn its language and ask what it''s still trying to protect you from
+    now that the call is over.
+
+
+    This will not promise to switch your vigilance off like a light. It won''t sell
+    you a single meditation that finally lets you stop scanning, or a routine that
+    optimizes your way back to calm by Friday. There is no fixing a system that did
+    exactly what it was built to do. What''s here is a way to live alongside the watcher,
+    to let it stand down for a few minutes at a time without feeling like you''ve
+    dropped your guard and put everyone at risk.
+
+
+    You''re allowed to set the watch down sometimes. The room is safe. You can come
+    back inside your own life now.'
 keywords:
   primary:
   - burnout recovery
@@ -47,12 +81,16 @@ target_price:
   audible_usd: 9.99
   paperback_usd: 12.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: marcus_reed
 comp_titles:
-- Burnout (Nagoski)
-- Laziness Does Not Exist (Price)
-- Do Nothing (Headlee)
+- The Body Keeps the Score (Bessel van der Kolk) - how a hypervigilant nervous system
+  gets wired and how it slowly unwinds
+- Widen the Window (Elizabeth Stanley) - building the capacity to stand down after
+  a body's been trained for constant threat
+- On Combat (Dave Grossman) - the physiology of the responder's alertness and the
+  real cost of never switching it off
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -60,3 +98,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

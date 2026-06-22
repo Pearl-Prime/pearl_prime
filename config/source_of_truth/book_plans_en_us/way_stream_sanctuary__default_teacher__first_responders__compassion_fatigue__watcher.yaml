@@ -16,17 +16,53 @@ target_word_range:
 target_audio_minutes: 70
 title: 'The Cost of Caring: The Observer''s Mind'
 subtitle: A Real Talk Guide to Compassion Fatigue for First Responders
-cover_tagline: A Real Talk Guide to Compassion Fatigue for First Responders
+cover_tagline: You read everyone else's pain in a glance. You stopped being able to
+  read your own.
 description:
-  short_blurb: A Real Talk Guide to Compassion Fatigue for First Responders A grounded,
-    secular guide to compassion fatigue for first responders.
-  long_description: 'The Cost of Caring: The Observer''s Mind
+  short_blurb: Years of scanning strangers for what's wrong turned the lens permanently
+    outward, always watching them, never checking in on you. This is a book for first
+    responders who monitor everyone but themselves. It won't tell you to just feel
+    your feelings.
+  long_description: 'You can walk into a room and read it in two seconds. Who''s hurt,
+    who''s hiding it, who''s about to lose it, what''s wrong before anyone says a
+    word. You''ve spent a whole career training that lens on other people, scanning
+    patients and victims and bystanders for the danger and the distress, staying one
+    read ahead so you can help before it gets worse. It has made you good at what
+    you do. It has also turned the lens so far outward that when someone asks how
+    you''re actually doing, you go quiet, because you genuinely do not know. You watch
+    everyone. You stopped watching yourself a long time ago.
 
 
-    For a first responder in the quiet after a call. This book names what compassion
-    fatigue is doing in your body in language you can use — through recognition, descent,
-    and integration, not worksheets or forced positivity. Book 3 of the First Responders
-    compassion fatigue series.'
+    This is for the medic, the cop, the nurse, the firefighter, the crisis responder
+    whose attention got permanently pointed at everyone else''s insides. Compassion
+    fatigue, for you, does not show up as not caring, which is what makes it so hard
+    to spot. It shows up as a watcher that only faces one direction, endlessly tracking
+    other people''s states while your own runs in the background, unmonitored, no
+    gauge on it, until the day it crashes without warning. You''ll catch a stranger''s
+    micro-expression across a parking lot and completely miss that you haven''t eaten
+    since the start of your shift, haven''t slept right in weeks, haven''t felt anything
+    but braced in longer than that.
+
+
+    This book names that outward-locked watcher for exactly what it is: a finely tuned
+    instrument aimed everywhere except home. Then we go down into it, slowly and gently,
+    because turning a lens around after years of pointing it one way is disorienting,
+    and the inside is dark from disuse and you may not like the first things you find
+    there. We do not try to shut the watcher off. It''s part of how you keep people
+    alive, and it isn''t the enemy. We just begin, a little at a time, to let it look
+    inward too, to notice your own state with the same skill you hand to strangers
+    for free.
+
+
+    This will not promise to make you suddenly fluent in your own feelings, or hand
+    you a daily check-in routine that optimizes your self-awareness in a week. There
+    is no fixing a lens that did its job too well for too long. What''s here is the
+    slow, real work of facing the watcher back toward you, a few minutes at a time,
+    without losing the gift of how clearly you see.
+
+
+    You spend all day knowing how everyone else is doing. You''re allowed to turn
+    around and finally find out how you are.'
 keywords:
   primary:
   - compassion fatigue
@@ -47,12 +83,16 @@ target_price:
   audible_usd: 9.99
   paperback_usd: 12.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: marcus_reed
 comp_titles:
-- Trauma Stewardship (van Dernoot Lipsky)
-- Burnout (Nagoski)
-- The Compassion Fatigue Workbook (Mathieu)
+- Trauma Stewardship (Laura van Dernoot Lipsky) - staying aware of yourself while
+  professionally absorbing others' pain
+- The Body Keeps the Score (Bessel van der Kolk) - reconnecting with internal signals
+  after years of facing outward
+- Widen the Window (Elizabeth Stanley) - turning a threat-scanning mind back toward
+  its own state without losing its edge
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -60,3 +100,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

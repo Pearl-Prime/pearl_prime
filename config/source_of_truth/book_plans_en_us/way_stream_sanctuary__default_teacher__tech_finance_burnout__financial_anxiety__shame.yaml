@@ -17,18 +17,52 @@ target_audio_minutes: 70
 title: 'The Number in Your Head: Carrying What You Can''t Say'
 subtitle: How Tech and Finance Professionals Are Rewriting the Rules of Financial
   Anxiety
-cover_tagline: How Tech and Finance Professionals Are Rewriting the Rules of Financial
-  Anxiety
+cover_tagline: The number you'd never say out loud is the one running your life.
 description:
-  short_blurb: How Tech and Finance Professionals Are Rewriting the Rules of Financial
-    Anxiety A grounded, secular guide to money anxiety for tech & finance professionals.
-  long_description: 'The Number in Your Head: Carrying What You Can''t Say
+  short_blurb: 'Everyone assumes you''re set. The comp is real, the title is good,
+    and underneath it sits a belief you''ve never said to anyone: that you''re one
+    bad quarter from being found out. This is for tech and finance professionals carrying
+    a private verdict about money and themselves. It won''t talk you out of the shame.
+    It will help you set down what you''ve been carrying alone.'
+  long_description: 'There''s a number you would not say out loud. Not your salary
+    -- you''d share that under pressure. The other one: the debt nobody knows about,
+    the savings that should be bigger by now, the help you took and never mentioned,
+    the spending you hide even from yourself. You work in an industry that treats
+    money fluency as a personality trait, and somewhere along the way the gap between
+    how competent you look and how exposed you feel turned into a quiet, constant
+    verdict. Something must be wrong with me.
 
 
-    For a tech or finance professional running on empty. This book names what money
-    anxiety is doing in your body in language you can use — through recognition, descent,
-    and integration, not worksheets or forced positivity. Book 2 of the Tech & Finance
-    Professionals money anxiety series.'
+    This book is for the engineer who maxes the 401(k) and still feels like a fraud,
+    the analyst who advises on capital all day and dreads their own statements, the
+    well-paid professional who smiles through comp talk while a small voice says you
+    don''t actually have it together. The shame doesn''t care what you earn. It attached
+    to a belief about you long before the paycheck, and money just became the place
+    it lives.
+
+
+    Waystream treats shame as the thing you''ve been carrying that you can''t say
+    -- a weight that gets heavier precisely because it stays unspoken. We''re not
+    going to argue you out of it with affirmations or net-worth math. We''re going
+    to recognize it first: the heat in your face when a friend asks how you''re doing
+    financially, the way you change the subject, the deals you make with yourself
+    in the dark. Then we go down into it -- not to wallow, but because shame loses
+    its grip the moment it''s named in plain words instead of left to rot in the silence.
+    You''ll see where the verdict came from, whose voice it actually is, and what
+    it''s been costing you to keep performing fine. You come back able to hold the
+    truth about your money without it being a referendum on your worth.
+
+
+    This is not a get-out-of-debt plan or a confidence-hacking system. It will not
+    promise that the right financial move finally makes you feel clean, because the
+    shame was never really about the money. It will not perform positivity at you.
+    What it offers is harder and more durable: permission to stop carrying the secret
+    as proof of a defect.
+
+
+    You are allowed to have a messy financial truth and an intact sense of self. You
+    are allowed to say the unsayable number to one safe person and survive it. You''re
+    allowed to stop treating a private balance as a private indictment.'
 keywords:
   primary:
   - money anxiety
@@ -41,6 +75,7 @@ keywords:
   - tech & finance professionals
   - money anxiety for tech & finance professionals
 bisac_codes:
+- SEL036000
 - SEL027000
 - BUS050000
 - PSY022000
@@ -49,12 +84,16 @@ target_price:
   audible_usd: 9.99
   paperback_usd: 12.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: ana_reyes
 comp_titles:
-- The Psychology of Money (Housel)
-- Your Money or Your Life (Robin)
-- I Will Teach You to Be Rich (Sethi)
+- Daring Greatly (Brené Brown) — the definitive secular map of shame and what speaking
+  it does
+- The Psychology of Money (Morgan Housel) — reframes money behavior as story and emotion,
+  not character
+- Maybe You Should Talk to Someone (Lori Gottlieb) — models naming the unsayable thing
+  without spiritual framing
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -62,3 +101,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

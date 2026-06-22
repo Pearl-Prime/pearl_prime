@@ -16,15 +16,55 @@ target_word_range:
 target_audio_minutes: 60
 title: 'The 3am Mind: Drowning in Demands'
 subtitle: A One-Hour Sleep Reset for Young Professionals
-cover_tagline: A One-Hour Sleep Reset for Young Professionals
+cover_tagline: Everything you have to do arrives at once, in the dark, the moment
+  you close your eyes.
 description:
-  short_blurb: A One-Hour Sleep Reset for Young Professionals The one-hour edition.
-  long_description: 'The 3am Mind: Drowning in Demands
+  short_blurb: 'The day''s pile of demands doesn''t disappear at bedtime — it shows
+    up all at once the second you lie down. This is the one-hour edition of the sleep
+    work for young professionals: how to recognize the overwhelm flooding you in the
+    dark, drop underneath it, and stop drowning in a to-do list you can''t act on
+    until morning.'
+  long_description: 'You lie down. You close your eyes. And it all arrives at once
+    — the deliverable due Thursday, the text you didn''t answer, rent, the thing your
+    manager said, the side project, the friend you''ve been ghosting, the future you
+    have no plan for. Not one at a time. All of it, together, in the dark, the moment
+    you finally stop moving. There''s nothing you can do about any of it right now,
+    which is exactly when your mind decides to bring you the whole pile.
 
 
-    The one-hour edition: the core of the sleep anxiety work for young professionals,
-    in a single sitting. Recognition, descent, integration — no filler. Book 2 of
-    the one-hour Young Professionals sleep anxiety series.'
+    This is for the young professional whose nights are flooded by everything at once.
+    You''re at the stage where the demands are real and endless — a job that never
+    quite ends, a life you''re supposed to be building, no slack in the system — and
+    bedtime is the first moment all day that your mind has space to dump the entire
+    load on you. It''s not that you''re disorganized. It''s that too much is arriving
+    at the exact moment you can act on none of it, and the volume alone is enough
+    to drown you.
+
+
+    This is the one-hour edition. One sitting, no filler, and it is not a fix. The
+    arc: first, recognition — you learn to feel overwhelm as overwhelm, a flood of
+    too-much-at-once, instead of mistaking it for a real and urgent crisis you must
+    solve before dawn. Then, descent: instead of trying to mentally sort the pile
+    at 1am or shove it away, you go down underneath the flood to the pressure driving
+    it and let yourself feel the weight without picking it all up. Then you come back,
+    not with an empty mind, but able to let the pile be a pile until morning, when
+    you can actually touch it.
+
+
+    This book will not promise you a clear head at midnight. It will not give you
+    a brain-dump worksheet, a five-step nightly system, or a reason to be grateful
+    you''re so busy. It will not tell you to organize your way out — the problem was
+    never your planner. The overwhelm is allowed to show up. What changes is that
+    you stop trying to carry the whole next day in the middle of the night.
+
+
+    Written in plain, no-nonsense language by Ravi Chandra, this is for the version
+    of you lying awake while your entire workload, social life, and unwritten future
+    land on your chest at once. You''ll learn what overwhelm actually is, and you''ll
+    have a way through it the next time everything arrives in the dark.
+
+
+    It''s all still there in the morning. You don''t have to hold it now.'
 keywords:
   primary:
   - insomnia help
@@ -37,6 +77,7 @@ keywords:
   - sleep anxiety for young professionals
   - one hour
 bisac_codes:
+- SEL036000
 - SEL027000
 - HEA046000
 - PSY022000
@@ -45,12 +86,16 @@ target_price:
   audible_usd: 6.99
   paperback_usd: 9.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: ravi_chandra
 comp_titles:
-- Say Good Night to Insomnia (Jacobs)
-- The Sleep Solution (Winter)
-- Why We Sleep (Walker)
+- Four Thousand Weeks (Oliver Burkeman) — secular reckoning with the impossibility
+  of doing it all
+- Burnout (Emily & Amelia Nagoski) — names how relentless demand floods the body and
+  how to discharge it
+- Laziness Does Not Exist (Devon Price) — dismantles the hustle frame behind the always-on
+  overwhelm
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -58,3 +103,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false
