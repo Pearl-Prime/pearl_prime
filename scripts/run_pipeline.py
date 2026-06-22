@@ -1258,6 +1258,16 @@ def _run_spine_pipeline_mode(
     from phoenix_v4.rendering.register_output_strengthen import cap_prescribed_action_density as _final_cap_f7
 
     prose = _final_cap_f7(prose, max_per_chapter=1)
+    # F1/F4 dedupe must run AFTER flow-cue injection (same stage ordering as F7 cap).
+    from phoenix_v4.rendering.register_output_strengthen import (
+        dedupe_register_f1_paragraphs as _final_f1_dedupe,
+        ensure_unique_chapter_closings as _final_f4_closings,
+    )
+
+    prose, _f1_dedupe_final = _final_f1_dedupe(prose)
+    if _f1_dedupe_final:
+        _governance_report.setdefault("register_f1_dedupe_notes", []).extend(_f1_dedupe_final)
+    prose = _final_f4_closings(prose, seed=f"{seed}:final_close")
     word_count = len(prose.split())
     _quality_gate_failures: list[str] = []
     _chapter_flow_status = "SKIPPED"

@@ -94,6 +94,24 @@ _RECOGNITION_LANDINGS: tuple[str, ...] = (
 _RELIEF_LANDINGS: tuple[str, ...] = (
     "It makes sense that your body learned this response. No wonder it still shows up.",
     "Of course the alarm kept running — the system was doing its job.",
+    "The nervous system was answering an old question with a new volume of work.",
+    "Your body did what it was trained to do — that is not a moral verdict.",
+)
+
+# F4 closing-line rotation pool (secular; ≥20 chars; distinct last sentences).
+_CLOSING_LINE_ALTERNATES: tuple[str, ...] = (
+    "Of course the alarm kept running — the system was doing its job.",
+    "It makes sense that your body learned this response. No wonder it still shows up.",
+    "The signal was loud because the stakes felt real, not because you were failing.",
+    "Your body did what it was trained to do — that is not a moral verdict.",
+    "Naming the pattern is already a form of relief.",
+    "You can let the next instruction wait while this lands in the body.",
+    "The weight is real; so is your capacity to name it without fixing everything tonight.",
+    "Something in you already knows how to pause when the signal rises.",
+    "The practice here is to choose honesty over performance.",
+    "A single breath can be the whole intervention.",
+    "What showed up is data, not a moral score.",
+    "Steadiness is built in ordinary moments like this one.",
 )
 _REFRAME_LANDINGS: tuple[str, ...] = (
     "The truth is, the alarm was never proof that you were failing.",
@@ -382,18 +400,31 @@ def balance_transformation_arc_landings(prose: str, *, seed: str = "arc") -> str
         return prose
     n = len(chapters)
     out: list[tuple[int, str]] = []
+    used_landings: set[str] = set()
+
+    def _pick_unused(pool: tuple[str, ...], key: str) -> str:
+        for offset in range(len(pool)):
+            choice = _pick(pool, f"{key}:{offset}")
+            norm = re.sub(r"\s+", " ", choice.lower()).strip()
+            if norm not in used_landings:
+                used_landings.add(norm)
+                return choice
+        choice = _pick(pool, key)
+        used_landings.add(re.sub(r"\s+", " ", choice.lower()).strip())
+        return choice
+
     for i, (num, body) in enumerate(chapters):
         extras: list[str] = []
         pos = i + 1
         if pos in (2, 3, 4) and not _chapter_has_pattern(body, (r"you know this feeling", r"if you")):
-            extras.append(_pick(_RECOGNITION_LANDINGS, f"{seed}:rec:{num}"))
+            extras.append(_pick_unused(_RECOGNITION_LANDINGS, f"{seed}:rec:{num}"))
         if pos in (5, 6, 7) and not _chapter_has_pattern(body, (r"it makes sense", r"no wonder")):
-            extras.append(_pick(_RELIEF_LANDINGS, f"{seed}:rel:{num}"))
+            extras.append(_pick_unused(_RELIEF_LANDINGS, f"{seed}:rel:{num}"))
         if pos >= n - 1:
             if not _chapter_has_pattern(body, (r"you are not broken", r"you're becoming", r"from now on", r"maybe you")):
-                extras.append(_pick(_IDENTITY_LANDINGS, f"{seed}:id:{num}"))
+                extras.append(_pick_unused(_IDENTITY_LANDINGS, f"{seed}:id:{num}"))
             if not _chapter_has_pattern(body, (r"the truth is", r"it's not that", r"actually")):
-                extras.append(_pick(_REFRAME_LANDINGS, f"{seed}:rf:{num}"))
+                extras.append(_pick_unused(_REFRAME_LANDINGS, f"{seed}:rf:{num}"))
         body = _vary_repeated_bridge_tails(body, chapter_index=num, seed=seed)
         if extras:
             body = body + "\n\n" + "\n\n".join(extras)
@@ -437,6 +468,100 @@ def repair_f13_dwell_contract(prose: str, *, seed: str = "f13") -> str:
     return _join_book(front, out)
 
 
+def ensure_unique_chapter_closings(prose: str, *, seed: str = "f4") -> str:
+    """Rotate duplicate chapter closing sentences so register F4 stays clear."""
+    front, chapters = _split_book(prose)
+    if not chapters:
+        return prose
+    used_closings: dict[str, int] = {}
+    out: list[tuple[int, str]] = []
+    for num, body in chapters:
+        paras = [p for p in re.split(r"\n\s*\n", body) if p.strip()]
+        if not paras:
+            out.append((num, body))
+            continue
+        last_para = paras[-1]
+        sents = [s.strip() for s in _SENT_SPLIT_RE.split(last_para) if s.strip()]
+        if not sents:
+            out.append((num, body))
+            continue
+        closing = sents[-1]
+        if len(closing) < 20:
+            out.append((num, body))
+            continue
+        norm = re.sub(r"\s+", " ", closing.lower()).strip()
+        if norm in used_closings:
+            for offset in range(len(_CLOSING_LINE_ALTERNATES)):
+                alt = _pick(_CLOSING_LINE_ALTERNATES, f"{seed}:close:{num}:{offset}")
+                alt_norm = re.sub(r"\s+", " ", alt.lower()).strip()
+                if alt_norm not in used_closings and alt_norm != norm:
+                    sents[-1] = alt
+                    paras[-1] = " ".join(sents)
+                    body = "\n\n".join(paras)
+                    closing = alt
+                    norm = alt_norm
+                    break
+        used_closings[norm] = num
+        out.append((num, body))
+    return _join_book(front, out)
+
+
+def dedupe_register_f1_paragraphs(prose: str) -> tuple[str, list[str]]:
+    """Remove 2nd+ F1-eligible paragraph cluster members (mirrors register_gate F1)."""
+    from phoenix_v4.quality.register_gate import (
+        F1_MIN_PARA_SENTENCES,
+        F1_SIMILARITY_THRESHOLD,
+        _cosine_jaccard,
+        _split_paragraphs,
+        _split_sentences,
+        _word_set,
+    )
+
+    front, chapters = _split_book(prose)
+    if not chapters:
+        return prose, []
+    eligible: list[tuple[int, int, str, frozenset]] = []
+    for num, body in chapters:
+        for pi, para in enumerate(_split_paragraphs(body)):
+            if len(_split_sentences(para)) < F1_MIN_PARA_SENTENCES:
+                continue
+            eligible.append((num, pi, para, frozenset(_word_set(para))))
+
+    remove: set[tuple[int, int]] = set()
+    seen_idx: set[int] = set()
+    notes: list[str] = []
+    for i, (ch_i, pi_i, text_i, set_i) in enumerate(eligible):
+        if i in seen_idx:
+            continue
+        cluster = [i]
+        for j in range(i + 1, len(eligible)):
+            if j in seen_idx:
+                continue
+            ch_j, pi_j, text_j, set_j = eligible[j]
+            if _cosine_jaccard(set_i, set_j) >= F1_SIMILARITY_THRESHOLD:
+                cluster.append(j)
+                seen_idx.add(j)
+        if len(cluster) >= 2:
+            seen_idx.add(i)
+            for k in cluster[1:]:
+                ch_k, pi_k, text_k, _ = eligible[k]
+                remove.add((ch_k, pi_k))
+                notes.append(
+                    f"register_f1_dedupe: removed ch{ch_k} p{pi_k} "
+                    f"(cluster with ch{eligible[cluster[0]][0]}): {text_k[:60]!r}"
+                )
+
+    if not remove:
+        return prose, notes
+
+    out: list[tuple[int, str]] = []
+    for num, body in chapters:
+        paras = _split_paragraphs(body)
+        kept = [p for pi, p in enumerate(paras) if (num, pi) not in remove]
+        out.append((num, "\n\n".join(kept).strip()))
+    return _join_book(front, out), notes
+
+
 def strengthen_register_craft_output(
     prose: str,
     *,
@@ -453,5 +578,7 @@ def strengthen_register_craft_output(
     work = ensure_dwell_beats(work, seed=f"{seed}:final")
     work = cap_prescribed_action_density(work, max_per_chapter=max_prescribed_per_chapter)
     work = repair_f13_dwell_contract(work, seed=seed)
+    work, _f1_notes = dedupe_register_f1_paragraphs(work)
+    work = ensure_unique_chapter_closings(work, seed=seed)
     work = ensure_book_terminal_integrity(work)
     return work
