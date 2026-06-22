@@ -123,6 +123,7 @@ def _write_digest(
 def run_weekly_manga_rollout(
     *,
     dry_run: bool,
+    replay_fallback: bool,
     single_book: bool,
     single_brand: str | None,
     single_topic: str | None,
@@ -133,6 +134,8 @@ def run_weekly_manga_rollout(
     lane = ((cfg.get("WEEKLY_ROLLOUT_CONFIG") or {}).get("manga_lane") or {})
     min_cov = int(lane.get("require_image_bank_coverage") or cfg.get("defaults", {}).get("min_panel_images") or 56)
     backend_default = str(lane.get("image_backend") or "replay")
+    if replay_fallback:
+        backend_default = "replay"
     signed_ttl = int(
         (cfg.get("defaults") or {}).get("signed_url_expiry_seconds")
         or lane.get("signed_url_expiry_seconds")
@@ -156,6 +159,8 @@ def run_weekly_manga_rollout(
     summary: dict[str, Any] = {
         "date": date_slug,
         "dry_run": dry_run,
+        "replay_fallback": replay_fallback,
+        "degraded": "pearl_star_offline" if replay_fallback else None,
         "brands": {},
     }
 
@@ -263,6 +268,11 @@ def run_weekly_manga_rollout(
 def main() -> int:
     ap = argparse.ArgumentParser(description="Weekly manga rollout (R2 + digest fragments)")
     ap.add_argument("--dry-run", action="store_true", help="No R2 upload; presigned placeholders only")
+    ap.add_argument(
+        "--replay-fallback",
+        action="store_true",
+        help="Force replay image backend + degraded digest when Pearl Star offline (Hybrid C GHA path)",
+    )
     ap.add_argument("--single-book", action="store_true", help="Only process one brand/topic/genre")
     ap.add_argument("--brand", default=None)
     ap.add_argument("--topic", default=None)
@@ -282,6 +292,7 @@ def main() -> int:
     try:
         run_weekly_manga_rollout(
             dry_run=args.dry_run,
+            replay_fallback=args.replay_fallback,
             single_book=args.single_book,
             single_brand=args.brand,
             single_topic=args.topic,

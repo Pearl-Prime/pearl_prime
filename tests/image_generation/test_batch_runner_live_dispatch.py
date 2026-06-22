@@ -11,6 +11,7 @@ from scripts.image_generation import batch_runner
 def _state(
     *,
     flux_schnell_present: bool = True,
+    flux_dev_present: bool = True,
     animagine_xl_present: bool = True,
     qwen_unified_ckpt_present: bool = False,
     qwen_transformer_shard_count: int = 9,
@@ -18,6 +19,7 @@ def _state(
 ) -> batch_runner.PearlStarModelState:
     return batch_runner.PearlStarModelState(
         flux_schnell_present=flux_schnell_present,
+        flux_dev_present=flux_dev_present,
         animagine_xl_present=animagine_xl_present,
         qwen_unified_ckpt_present=qwen_unified_ckpt_present,
         qwen_transformer_shard_count=qwen_transformer_shard_count,
@@ -30,9 +32,9 @@ def test_resolve_dispatch_flux_pearl() -> None:
     assert batch_runner.resolve_dispatch_path(b, _state()) == "pearl_star"
 
 
-def test_resolve_dispatch_flux_runcomfy_when_missing() -> None:
+def test_resolve_dispatch_flux_blocked_when_dev_missing() -> None:
     b = {"dispatch_path": "auto", "workflow_template": "flux_txt2img_manga.json"}
-    assert batch_runner.resolve_dispatch_path(b, _state(flux_schnell_present=False)) == "runcomfy"
+    assert batch_runner.resolve_dispatch_path(b, _state(flux_dev_present=False)) == "blocked"
 
 
 def test_resolve_dispatch_animagine_pearl_when_ckpt() -> None:
@@ -40,25 +42,30 @@ def test_resolve_dispatch_animagine_pearl_when_ckpt() -> None:
     assert batch_runner.resolve_dispatch_path(b, _state()) == "pearl_star"
 
 
-def test_resolve_dispatch_animagine_runcomfy_when_missing() -> None:
+def test_resolve_dispatch_animagine_blocked_when_missing() -> None:
     b = {"dispatch_path": "auto", "workflow_template": "animagine_xl_txt2img_manga.json"}
-    assert batch_runner.resolve_dispatch_path(b, _state(animagine_xl_present=False)) == "runcomfy"
+    assert batch_runner.resolve_dispatch_path(b, _state(animagine_xl_present=False)) == "blocked"
 
 
-def test_resolve_dispatch_qwen_pearl_only_with_unified_ckpt() -> None:
+def test_resolve_dispatch_qwen_pearl_with_unified_or_shards() -> None:
     b = {"dispatch_path": "auto", "workflow_template": "qwen_image_txt2img_manga.json"}
     assert batch_runner.resolve_dispatch_path(b, _state(qwen_unified_ckpt_present=True)) == "pearl_star"
-    assert batch_runner.resolve_dispatch_path(b, _state(qwen_unified_ckpt_present=False)) == "runcomfy"
+    assert batch_runner.resolve_dispatch_path(
+        b, _state(qwen_unified_ckpt_present=False, qwen_transformer_shard_count=9)
+    ) == "pearl_star"
+    assert batch_runner.resolve_dispatch_path(
+        b, _state(qwen_unified_ckpt_present=False, qwen_transformer_shard_count=3)
+    ) == "blocked"
 
 
-def test_resolve_dispatch_explicit_run_comfy_alias() -> None:
+def test_resolve_dispatch_explicit_run_comfy_maps_pearl_star() -> None:
     b = {"dispatch_path": "run_comfy", "workflow_template": "flux_txt2img_manga.json"}
-    assert batch_runner.resolve_dispatch_path(b, None) == "runcomfy"
+    assert batch_runner.resolve_dispatch_path(b, None) == "pearl_star"
 
 
-def test_resolve_auto_none_state_routes_runcomfy() -> None:
+def test_resolve_auto_none_state_routes_pearl_star() -> None:
     b = {"dispatch_path": "auto", "workflow_template": "flux_txt2img_manga.json"}
-    assert batch_runner.resolve_dispatch_path(b, None) == "runcomfy"
+    assert batch_runner.resolve_dispatch_path(b, None) == "pearl_star"
 
 
 def test_run_live_activation_happy_path_pearl(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
@@ -98,7 +105,8 @@ def test_run_live_activation_happy_path_pearl(monkeypatch: pytest.MonkeyPatch, t
     assert cells[0]["status"] == "succeeded"
 
 
-def test_run_live_activation_skips_runcomfy_on_cost_cap(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
+def test_run_live_activation_runcomfy_alias_routes_pearl(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
+    """Legacy runcomfy dispatch_path is remapped to pearl_star (RunComfy decommissioned)."""
     out = tmp_path / "smoke"
     batches = [
         {
@@ -110,8 +118,15 @@ def test_run_live_activation_skips_runcomfy_on_cost_cap(monkeypatch: pytest.Monk
             "positive_prompt": "x",
         },
     ]
+    captured: dict[str, object] = {}
+
+    def fake_dispatch(batch: dict, *, dry_run: bool, **kwargs: object) -> dict:
+        captured["path"] = batch["dispatch_path"]
+        return {"dispatch_path": batch["dispatch_path"], "status": "succeeded", "dry_run": False}
+
     monkeypatch.setattr(batch_runner, "ensure_pearl_comfyui", lambda ssh_host: None)
     monkeypatch.setattr(batch_runner, "probe_pearl_star_models", lambda ssh_host: _state())
+    monkeypatch.setattr(batch_runner, "dispatch", fake_dispatch)
     monkeypatch.setattr(
         batch_runner,
         "runcomfy_cost_check",
@@ -123,8 +138,8 @@ def test_run_live_activation_skips_runcomfy_on_cost_cap(monkeypatch: pytest.Monk
         skip_comfy_ping=True,
     )
     cells = [r for r in res if not r.get("fault_tolerance_summary")]
-    assert cells[0].get("skipped") is True
-    assert cells[0].get("reason") == "runcomfy_cost_cooldown"
+    assert captured["path"] == "pearl_star"
+    assert cells[0]["status"] == "succeeded"
 
 
 def test_run_live_activation_routing_animagine_to_pearl(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:

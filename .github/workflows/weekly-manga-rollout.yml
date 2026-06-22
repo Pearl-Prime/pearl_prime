@@ -1,4 +1,5 @@
 # Production weekly manga lane. Cron Monday 14:00 UTC (~6am PT) + manual dry_run.
+# Hybrid C (MANGA_PRODUCTION_OPERATIONAL_V1_SPEC): GHA triggers/digest; Pearl Star queue = render.
 name: Weekly Manga Rollout
 
 on:
@@ -11,22 +12,58 @@ on:
         required: false
         default: 'false'
 
+permissions:
+  contents: read
+  actions: read
+
 jobs:
   wait_runner:
     runs-on: ubuntu-latest
-    timeout-minutes: 35
+    timeout-minutes: 5
+    outputs:
+      runner_online: ${{ steps.runner.outputs.online }}
+      comfy_ok: ${{ steps.comfy.outputs.ok }}
     steps:
       - uses: actions/checkout@v4
-      - name: Wait up to 30m for pearl-star-gpu
+
+      - name: Quick runner check (120s max — not 1800s)
+        id: runner
+        continue-on-error: true
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
-          MAX_WAIT_S: '1800'
-          INTERVAL_S: '30'
-        run: python3 scripts/ci/wait_for_self_hosted_runner.py
+          MAX_WAIT_S: '120'
+          INTERVAL_S: '15'
+        run: |
+          set -euo pipefail
+          if python3 scripts/ci/wait_for_self_hosted_runner.py; then
+            echo "online=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "online=false" >> "$GITHUB_OUTPUT"
+          fi
 
-  manga_rollout:
+      - name: ComfyUI reachability (G1)
+        id: comfy
+        continue-on-error: true
+        env:
+          COMFYUI_URL: ${{ secrets.COMFYUI_URL }}
+          PEARL_STAR_IP: ${{ secrets.PEARL_STAR_IP }}
+        run: |
+          set -euo pipefail
+          BASE="${COMFYUI_URL:-}"
+          if [ -z "$BASE" ] && [ -n "${PEARL_STAR_IP:-}" ]; then BASE="http://${PEARL_STAR_IP}:8188"; fi
+          if [ -z "$BASE" ]; then echo "ok=false"; echo "ok=false" >> "$GITHUB_OUTPUT"; exit 0; fi
+          if curl -sfS -m 8 "${BASE%/}/system_stats" | head -c 200 | grep -q devices; then
+            echo "ok=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "ok=false" >> "$GITHUB_OUTPUT"
+          fi
+
+  manga_rollout_gpu:
     needs: [wait_runner]
+    if: >-
+      needs.wait_runner.outputs.runner_online == 'true' &&
+      needs.wait_runner.outputs.comfy_ok == 'true'
     runs-on: [self-hosted, pearl-star-gpu]
     timeout-minutes: 720
     steps:
@@ -54,14 +91,66 @@ jobs:
           CF_R2_ACCESS_KEY: ${{ secrets.CF_R2_ACCESS_KEY }}
           CF_R2_SECRET_KEY: ${{ secrets.CF_R2_SECRET_KEY }}
           SENDGRID_API_KEY: ${{ secrets.SENDGRID_API_KEY }}
-          RUNCOMFY_TOKEN: ${{ secrets.RUNCOMFY_TOKEN }}
         run: |
           set -euo pipefail
-          for x in "$R2_ACCESS_KEY_ID" "$R2_SECRET_ACCESS_KEY" "$R2_ACCOUNT_ID" "$CF_R2_ACCESS_KEY" "$CF_R2_SECRET_KEY" "$SENDGRID_API_KEY" "$RUNCOMFY_TOKEN"; do
+          for x in "$R2_ACCESS_KEY_ID" "$R2_SECRET_ACCESS_KEY" "$R2_ACCOUNT_ID" "$CF_R2_ACCESS_KEY" "$CF_R2_SECRET_KEY" "$SENDGRID_API_KEY"; do
             if [ -n "$x" ]; then echo "::add-mask::$x"; fi
           done
 
-      - name: Run weekly rollout
+      - name: Run weekly rollout (GPU / queue path)
+        env:
+          PYTHONPATH: .
+          COMFYUI_URL: ${{ secrets.COMFYUI_URL }}
+          PEARL_STAR_IP: ${{ secrets.PEARL_STAR_IP }}
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          R2_ACCOUNT_ID: ${{ secrets.R2_ACCOUNT_ID }}
+          R2_BUCKET: ${{ secrets.R2_BUCKET }}
+          CF_R2_ACCESS_KEY: ${{ secrets.CF_R2_ACCESS_KEY }}
+          CF_R2_SECRET_KEY: ${{ secrets.CF_R2_SECRET_KEY }}
+          SENDGRID_API_KEY: ${{ secrets.SENDGRID_API_KEY }}
+          WEEKLY_ROLLOUT_OPERATOR_EMAIL: ${{ vars.WEEKLY_ROLLOUT_OPERATOR_EMAIL }}
+        run: |
+          set -euo pipefail
+          FLAGS=""
+          DRY="${{ github.event.inputs.dry_run }}"
+          if [ "$GITHUB_EVENT_NAME" = "workflow_dispatch" ] && [ "$DRY" = "true" ]; then
+            FLAGS="--dry-run"
+          fi
+          python3 scripts/weekly_manga_rollout.py $FLAGS 2>&1 | tee rollout.log
+
+      - name: Upload run log + digest draft
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: weekly-manga-rollout-gpu-${{ github.run_id }}
+          path: |
+            rollout.log
+            artifacts/weekly_digests/
+            artifacts/weekly_manga_runs/
+          retention-days: 90
+          if-no-files-found: ignore
+
+  manga_rollout_replay_digest:
+    needs: [wait_runner]
+    if: >-
+      always() && (
+        needs.wait_runner.outputs.runner_online != 'true' ||
+        needs.wait_runner.outputs.comfy_ok != 'true'
+      )
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt -r requirements-test.txt
+
+      - name: Replay fallback digest (Pearl Star offline)
         env:
           PYTHONPATH: .
           R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
@@ -71,35 +160,40 @@ jobs:
           CF_R2_ACCESS_KEY: ${{ secrets.CF_R2_ACCESS_KEY }}
           CF_R2_SECRET_KEY: ${{ secrets.CF_R2_SECRET_KEY }}
           SENDGRID_API_KEY: ${{ secrets.SENDGRID_API_KEY }}
-          RUNCOMFY_TOKEN: ${{ secrets.RUNCOMFY_TOKEN }}
           WEEKLY_ROLLOUT_OPERATOR_EMAIL: ${{ vars.WEEKLY_ROLLOUT_OPERATOR_EMAIL }}
         run: |
           set -euo pipefail
-          FLAGS=""
+          FLAGS="--replay-fallback"
           DRY="${{ github.event.inputs.dry_run }}"
           if [ "$GITHUB_EVENT_NAME" = "workflow_dispatch" ] && [ "$DRY" = "true" ]; then
-            FLAGS="--dry-run"
-          fi
-          if [ "$GITHUB_EVENT_NAME" = "schedule" ]; then
-            FLAGS=""
+            FLAGS="$FLAGS --dry-run"
           fi
           python3 scripts/weekly_manga_rollout.py $FLAGS 2>&1 | tee rollout.log
+          echo "degraded: pearl_star_offline" >> rollout.log
 
-      - name: Upload run log + digest draft
+      - name: Upload replay digest artifacts
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: weekly-manga-rollout-${{ github.run_id }}
+          name: weekly-manga-rollout-replay-${{ github.run_id }}
           path: |
             rollout.log
             artifacts/weekly_digests/
-            artifacts/weekly_manga_runs/
           retention-days: 90
           if-no-files-found: ignore
 
-      - name: Summary
-        if: always()
+  summary:
+    needs: [wait_runner, manga_rollout_gpu, manga_rollout_replay_digest]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Workflow summary
         run: |
           echo "## Weekly Manga Rollout — Run ${{ github.run_id }}" >> "$GITHUB_STEP_SUMMARY"
-          echo "" >> "$GITHUB_STEP_SUMMARY"
-          tail -50 rollout.log >> "$GITHUB_STEP_SUMMARY" || true
+          echo "- runner_online: ${{ needs.wait_runner.outputs.runner_online }}" >> "$GITHUB_STEP_SUMMARY"
+          echo "- comfy_ok: ${{ needs.wait_runner.outputs.comfy_ok }}" >> "$GITHUB_STEP_SUMMARY"
+          if [ "${{ needs.wait_runner.outputs.runner_online }}" != "true" ] || [ "${{ needs.wait_runner.outputs.comfy_ok }}" != "true" ]; then
+            echo "- path: **replay-fallback** (degraded: pearl_star_offline)" >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "- path: **gpu/queue**" >> "$GITHUB_STEP_SUMMARY"
+          fi

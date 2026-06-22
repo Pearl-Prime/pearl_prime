@@ -40,7 +40,9 @@ if str(REPO_ROOT) not in sys.path:
 RUNCOMFY_SPEND_TSV = REPO_ROOT / "artifacts" / "qa" / "runcomfy_monthly_spend.tsv"
 DISPATCH_LOG_TSV = REPO_ROOT / "artifacts" / "qa" / "image_batch_dispatch_log.tsv"
 
-_COOLDOWN_USD = 10.0  # RunComfy $10/mo soft cap — restored after deprecation-burn closure (SWEEP-TAIL 2026-06-13)
+_COOLDOWN_USD = 10.0  # RunComfy $10/mo soft cap — legacy; RunComfy decommissioned 2026-06-13
+
+QWEN_TRANSFORMER_SHARDS_COMPLETE = 9
 
 
 @dataclass
@@ -48,10 +50,19 @@ class PearlStarModelState:
     """Pearl Star ComfyUI model presence snapshot (from a read-only SSH probe)."""
 
     flux_schnell_present: bool
+    flux_dev_present: bool
     animagine_xl_present: bool
     qwen_unified_ckpt_present: bool
     qwen_transformer_shard_count: int
     probe_stdout: str
+
+    @property
+    def qwen_shards_complete(self) -> bool:
+        return self.qwen_transformer_shard_count >= QWEN_TRANSFORMER_SHARDS_COMPLETE
+
+    @property
+    def qwen_image_ready(self) -> bool:
+        return self.qwen_unified_ckpt_present or self.qwen_shards_complete
 
 
 def probe_pearl_star_models(ssh_host: str = "pearl_star", *, timeout_s: int = 90) -> PearlStarModelState | None:
@@ -75,7 +86,8 @@ def probe_pearl_star_models(ssh_host: str = "pearl_star", *, timeout_s: int = 90
         return None
     text = r.stdout
     low = text.lower()
-    flux = "flux1-schnell-fp8" in low
+    flux_schnell = "flux1-schnell-fp8" in low
+    flux_dev = "flux1-dev-fp8" in low
     animagine = "animagine_xl_4_0.safetensors" in low or "animagine-xl-4.0" in low
     qwen_ckpt = "qwen_image_2.0" in low
     shards = 0
@@ -87,7 +99,8 @@ def probe_pearl_star_models(ssh_host: str = "pearl_star", *, timeout_s: int = 90
                 shards = int(line)
                 break
     return PearlStarModelState(
-        flux_schnell_present=flux,
+        flux_schnell_present=flux_schnell,
+        flux_dev_present=flux_dev,
         animagine_xl_present=animagine,
         qwen_unified_ckpt_present=qwen_ckpt,
         qwen_transformer_shard_count=shards,
@@ -99,24 +112,76 @@ def resolve_dispatch_path(
     batch: Mapping[str, Any],
     state: PearlStarModelState | None,
 ) -> str:
-    """IMG-RENDER-DUAL-PATH routing: ``flux_*`` Pearl primary; ``animagine_*`` if ckpt; ``qwen_*`` if unified ckpt."""
+    """Pearl Star sole path (RunComfy decommissioned 2026-06-13)."""
     raw = str(batch.get("dispatch_path", "auto")).strip().lower()
     if raw not in ("", "auto"):
-        return "runcomfy" if raw in ("run_comfy",) else raw
+        if raw in ("run_comfy", "runcomfy"):
+            return "pearl_star"
+        return raw
 
     if state is None:
-        return "runcomfy"
+        return "pearl_star"
 
     wf = str(
         batch.get("workflow_template") or batch.get("workflow_path") or "flux_txt2img_manga.json",
     ).strip().lower()
     if wf.startswith("flux_"):
-        return "pearl_star" if state.flux_schnell_present else "runcomfy"
+        if "schnell" in wf:
+            return "pearl_star" if state.flux_schnell_present else "blocked"
+        return "pearl_star" if state.flux_dev_present else "blocked"
     if wf.startswith("animagine_"):
-        return "pearl_star" if state.animagine_xl_present else "runcomfy"
+        return "pearl_star" if state.animagine_xl_present else "blocked"
     if wf.startswith("qwen_image_"):
-        return "pearl_star" if state.qwen_unified_ckpt_present else "runcomfy"
+        return "pearl_star" if state.qwen_image_ready else "blocked"
     return "pearl_star"
+
+
+def model_readiness_report(state: PearlStarModelState | None, *, comfy_ok: bool = False) -> dict[str, Any]:
+    """G1 + model probe for MANGA_PRODUCTION_OPERATIONAL_V1_SPEC §4."""
+    if state is None:
+        return {
+            "ready": False,
+            "comfy_ok": comfy_ok,
+            "reason": "pearl_star_ssh_probe_failed",
+        }
+    manga_h1a = state.flux_dev_present
+    qwen = state.qwen_image_ready
+    ready = comfy_ok and manga_h1a and qwen
+    return {
+        "ready": ready,
+        "comfy_ok": comfy_ok,
+        "flux_dev_present": state.flux_dev_present,
+        "flux_schnell_present": state.flux_schnell_present,
+        "qwen_unified_ckpt_present": state.qwen_unified_ckpt_present,
+        "qwen_transformer_shard_count": state.qwen_transformer_shard_count,
+        "qwen_shards_complete": state.qwen_shards_complete,
+        "qwen_image_ready": qwen,
+        "manga_h1a_ready": manga_h1a,
+    }
+
+
+def probe_comfy_url_from_env() -> tuple[bool, str]:
+    import os
+    import urllib.error
+    import urllib.request
+
+    base = (os.environ.get("COMFYUI_URL") or "").strip()
+    if not base and os.environ.get("PEARL_STAR_IP"):
+        base = f"http://{os.environ['PEARL_STAR_IP'].strip()}:8188"
+    if not base:
+        return False, "COMFYUI_URL not set"
+    url = f"{base.rstrip('/')}/system_stats"
+    try:
+        with urllib.request.urlopen(url, timeout=8.0) as resp:
+            body = resp.read(8192).decode("utf-8", errors="replace")
+        if resp.status != 200:
+            return False, url
+        data = json.loads(body)
+        devices = data.get("devices")
+        ok = isinstance(devices, list) and len(devices) > 0
+        return ok, url
+    except (urllib.error.URLError, OSError, json.JSONDecodeError) as e:
+        return False, f"{url}: {e}"
 
 
 def apply_dispatch_routing(batch: Mapping[str, Any], state: PearlStarModelState | None) -> dict[str, Any]:
@@ -770,9 +835,14 @@ def run_live_activation(
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
+        "--probe-only",
+        action="store_true",
+        help="Print Pearl Star model + ComfyUI readiness JSON (MANGA_PRODUCTION_OPERATIONAL_V1_SPEC §4)",
+    )
+    parser.add_argument(
         "--plan",
-        required=True,
         type=Path,
+        default=None,
         help="Path to markdown containing ```batch fenced blocks",
     )
     parser.add_argument(
@@ -820,6 +890,15 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
     if args.dry_run and (args.live or args.activate):
         parser.error("--dry-run is mutually exclusive with --live / --activate")
+    if args.probe_only:
+        comfy_ok, comfy_msg = probe_comfy_url_from_env()
+        state = probe_pearl_star_models(args.ssh_host)
+        report = model_readiness_report(state, comfy_ok=comfy_ok)
+        report["comfy_probe"] = comfy_msg
+        print(json.dumps(report, indent=2))
+        return 0 if report.get("ready") else 1
+    if not args.plan:
+        parser.error("--plan is required unless --probe-only")
     activate = bool(args.live or args.activate)
     dry_run = not activate
     plan_path = args.plan

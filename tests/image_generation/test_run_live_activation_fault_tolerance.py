@@ -24,6 +24,7 @@ from scripts.image_generation import batch_runner
 def _state() -> batch_runner.PearlStarModelState:
     return batch_runner.PearlStarModelState(
         flux_schnell_present=True,
+        flux_dev_present=True,
         animagine_xl_present=True,
         qwen_unified_ckpt_present=False,
         qwen_transformer_shard_count=9,
