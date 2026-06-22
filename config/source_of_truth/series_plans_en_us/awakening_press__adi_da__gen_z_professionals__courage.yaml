@@ -1,0 +1,80 @@
+series_plan_schema: 1.0.0
+locale: en_US
+book_id_prefix: awakening_press__adi_da__gen_z_professionals__courage
+brand: awakening_press
+teacher: adi_da
+persona: gen_z_professionals
+topic: courage
+byline_author: zane_ibrahim
+arc:
+  installment_1:
+    book_id: awakening_press__adi_da__gen_z_professionals__courage__false_alarm
+    engine: false_alarm
+    master_arc: config/source_of_truth/master_arcs/gen_z_professionals__courage__false_alarm__F006.yaml
+    duration: standard_book_60min
+  installment_2:
+    book_id: awakening_press__adi_da__gen_z_professionals__courage__spiral
+    engine: spiral
+    master_arc: config/source_of_truth/master_arcs/gen_z_professionals__courage__spiral__F006.yaml
+    duration: standard_book_60min
+  installment_3:
+    book_id: awakening_press__adi_da__gen_z_professionals__courage__shame
+    engine: shame
+    master_arc: config/source_of_truth/master_arcs/gen_z_professionals__courage__shame__F006.yaml
+    duration: standard_book_60min
+reader_promise_family: Courage isn't a thing you build, manufacture, or grind your
+  way into. It's what's already steady underneath the fear — the open sky the weather
+  keeps moving across. This series doesn't hand you a louder voice or a thicker skin.
+  It walks you back to the ground you forgot you were standing on, and shows you that
+  the part of you watching the fear was never afraid.
+bestseller_hook_family: ''
+emotional_engine: courage_recognition
+comp_series:
+- The Power of Now / A New Earth (Eckhart Tolle) — the same loosening of identification
+  with the anxious, thinking mind, in plainspoken non-dogmatic prose
+- Untamed / Get Untamed (Glennon Doyle) — intimate, second-person courage that refuses
+  performance and hustle, written for a younger reader finding her own voice
+- Radical Acceptance / True Refuge (Tara Brach) — the spacious, compassionate turn
+  toward fear instead of fixing it, treating the body's alarm as something to be met,
+  not conquered
+platform_strategy:
+  primary:
+  - kdp_ebook
+  - audible
+  secondary:
+  - apple_books
+  - google_play
+  - spotify_audiobooks
+  launch_platform: kdp_ebook
+  cadence:
+    release_spacing_days: 14
+    max_books_per_brand_per_month: 2
+reader_avatar:
+  age: early-to-mid twenties
+  where_they_are: It's 11pm on a Sunday and the laptop is still open. The Slack notification
+    badge sits at the corner of the screen like a held breath. You've rewritten the
+    same two-sentence message four times — to a manager, a recruiter, a person you
+    respect — and your thumb is hovering over send, and your chest has done the thing
+    again where it tightens for no reason you can name. The room is quiet. You are
+    not in danger. Your body has not gotten the memo.
+  what_they_need: to stop confusing the fear in their body with the truth about who
+    they are; to find the steady, unbothered awareness underneath the racing — the
+    part of them that was never the anxious one — and to act from there instead of
+    waiting to feel brave first
+  what_they_avoid: anything that sounds like a LinkedIn post, hustle-culture courage,
+    'just believe in yourself,' fake confidence drills, gurus, manifestation language,
+    and being told their very real fear is just a mindset problem they're failing
+    to fix
+series_voice_markers:
+  register: spacious, awakening, quietly radical; intimate not lofty; the voice of
+    someone a few years ahead of you who has stopped performing and will tell you
+    the truth without selling you anything; reverent without dogma, never clinical,
+    never preachy, never hustle
+  sentence_rhythm: short declaratives that land and leave room; a long, unhurried
+    sentence that opens space, then a short one that sets it down; pauses used like
+    breath; never breathless, never listicle-staccato
+  metaphor_family: waking from a dream you didn't know you were in; the open sky behind
+    the weather; the light that was already in the room; loosening the grip of a story;
+    what you are underneath the noise; coming home to ground that was never lost —
+    never machinery, military, productivity, or biohacking
+_needs_authoring: false

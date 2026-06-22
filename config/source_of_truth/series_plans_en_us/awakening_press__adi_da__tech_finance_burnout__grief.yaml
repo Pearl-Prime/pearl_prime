@@ -1,0 +1,68 @@
+series_plan_schema: 1.0.0
+locale: en_US
+book_id_prefix: awakening_press__adi_da__tech_finance_burnout__grief
+brand: awakening_press
+teacher: adi_da
+persona: tech_finance_burnout
+topic: grief
+byline_author: wren_nolan
+arc:
+  installment_1:
+    book_id: awakening_press__adi_da__tech_finance_burnout__grief__grief
+    engine: grief
+    master_arc: config/source_of_truth/master_arcs/tech_finance_burnout__grief__grief__F006.yaml
+    duration: standard_book_60min
+  installment_2:
+    book_id: awakening_press__adi_da__tech_finance_burnout__grief__watcher
+    engine: watcher
+    master_arc: config/source_of_truth/master_arcs/tech_finance_burnout__grief__watcher__F006.yaml
+    duration: standard_book_60min
+reader_promise_family: 'For the high-performing mind that tried to manage its way
+  through loss: a spacious, unhurried companion that lets grief be grief — not a problem
+  to optimize, not a project to close out, but a doorway back to what in you was never
+  lost.'
+bestseller_hook_family: ''
+emotional_engine: grief_recognition
+comp_series:
+- The Grief Recovery Handbook series (John W. James & Russell Friedman) — because
+  it meets bereavement head-on without flinching, the way these books do, but ours
+  speaks to the over-functioning professional in particular.
+- The Pema Chodron canon, beginning with When Things Fall Apart (Pema Chodron) — because
+  it treats the collapse of certainty as an opening rather than a failure, the same
+  quietly radical posture our series takes.
+- The Untethered Soul and The Surrender Experiment (Michael A. Singer) — because they
+  point past the busy, monitoring self to the awareness underneath it, which is exactly
+  the doorway this series walks the reader through.
+platform_strategy:
+  primary:
+  - kdp_ebook
+  - audible
+  secondary:
+  - apple_books
+  - google_play
+  - spotify_audiobooks
+  launch_platform: kdp_ebook
+  cadence:
+    release_spacing_days: 14
+    max_books_per_brand_per_month: 2
+reader_avatar:
+  age: 32-52
+  where_they_are: It's a Tuesday night and the laptop is still open. You closed the
+    deal, shipped the release, answered the thread — and there's a grief sitting in
+    the room with you that none of it touched. You keep reaching for the next task
+    because the task has a finish line and this doesn't.
+  what_they_need: Permission to stop solving the loss. To feel it without converting
+    it into a deliverable, and to discover that beneath the ache there is something
+    steady that the loss could not take.
+  what_they_avoid: Five-stages frameworks, grief 'hacks,' toxic positivity, anything
+    that treats mourning as a backlog to clear or a KPI to recover, and any guru who
+    promises to make it stop.
+series_voice_markers:
+  register: spacious, awakening, quietly radical; reverent without dogma; intimate,
+    like someone sitting beside you in a dim room, never a clinician and never a coach
+  sentence_rhythm: long open breaths broken by short true ones; lots of white space;
+    the cadence of someone who is not in a hurry and is not going to rush you either
+  metaphor_family: waking from a dream, the sky behind the weather, what remains when
+    the story falls quiet, the light that was on the whole time, coming home to what
+    was never lost — never machinery, dashboards, or optimization
+_needs_authoring: false

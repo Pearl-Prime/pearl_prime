@@ -1,0 +1,69 @@
+series_plan_schema: 1.0.0
+locale: en_US
+book_id_prefix: awakening_press__adi_da__entrepreneurs__self_worth
+brand: awakening_press
+teacher: adi_da
+persona: entrepreneurs
+topic: self_worth
+byline_author: faye_gowan
+arc:
+  installment_1:
+    book_id: awakening_press__adi_da__entrepreneurs__self_worth__shame
+    engine: shame
+    master_arc: config/source_of_truth/master_arcs/entrepreneurs__self_worth__shame__F006.yaml
+    duration: standard_book_60min
+  installment_2:
+    book_id: awakening_press__adi_da__entrepreneurs__self_worth__comparison
+    engine: comparison
+    master_arc: config/source_of_truth/master_arcs/entrepreneurs__self_worth__comparison__F006.yaml
+    duration: standard_book_60min
+reader_promise_family: 'For the founder who built something real and still feels like
+  a fraud inside it — a series that stops trying to make you enough and instead points
+  past the verdict to the one who was never on trial. No fix, no optimization, no
+  finally-beating-them: just the quiet recognition that your worth was never something
+  to earn, win, or rank.'
+bestseller_hook_family: ''
+emotional_engine: self_worth_recognition
+comp_series:
+- The Untethered Soul series (Michael A. Singer) — the same pointing past the anxious,
+  self-monitoring self to the awareness watching it, in plainspoken non-dogmatic prose
+- The Power of Now / A New Earth (Eckhart Tolle) — loosening identification with the
+  ego-story rather than improving it, which is exactly this series' move on self-worth
+- Radical Acceptance / books by Tara Brach — meeting shame and unworthiness with presence
+  instead of fixing them, intimate and reverent without spiritual bypassing
+platform_strategy:
+  primary:
+  - kdp_ebook
+  - audible
+  secondary:
+  - apple_books
+  - google_play
+  - spotify_audiobooks
+  launch_platform: kdp_ebook
+  cadence:
+    release_spacing_days: 14
+    max_books_per_brand_per_month: 2
+reader_avatar:
+  age: 32-48
+  where_they_are: It's almost midnight; the team has gone home, the dashboard is up
+    on one screen and a competitor's funding announcement on the other, and they're
+    sitting in the glow telling themselves that none of what they built actually counts
+    — that they're getting away with something and everyone else got a manual they
+    never received.
+  what_they_need: To set down the armor of competence and discover that the awareness
+    underneath the achievement was never the defect, never behind, and never on the
+    leaderboard — a worth no win can grant and no comparison can take.
+  what_they_avoid: Spiritual bypassing, guru-speak and 'raise your vibration' cliches,
+    toxic positivity, hustle-culture mindset hacks, and anything that turns self-worth
+    into one more milestone to chase or competitor to out-perform.
+series_voice_markers:
+  register: spacious, awakening, quietly radical; intimate not lofty, reverent without
+    dogma; the voice of someone who has sat in the same midnight glow, never a clinician
+    and never a coach selling a system
+  sentence_rhythm: long unhurried sentences that open a space, then a short plain
+    line that lands the truth; gentle direct address, repetition used like breath,
+    never clipped or punchy in the productivity sense
+  metaphor_family: waking from a dream, the open sky behind the weather, the story
+    printed across awareness, the armor set down, the leaderboard that was never real,
+    coming home to what was never lost — never machinery, military, or biohacking
+_needs_authoring: false
