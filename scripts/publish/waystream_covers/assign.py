@@ -21,6 +21,8 @@ from .templates import Spec
 ROOT = Path(__file__).resolve().parents[3]
 CFG = ROOT / "config/publishing/waystream_cover_system.yaml"
 CATALOG = ROOT / "artifacts/waystream/waystream_800book_catalog_plan.csv"
+PLANS_DIR = ROOT / "config/source_of_truth/book_plans_en_us"
+SERVED_COVERS = ROOT / "brand-wizard-app/public/assets/covers/way_stream_sanctuary"
 POOLS = ROOT / "artifacts/waystream/author_pools"
 
 TRACK_FALLBACK_POOL = {"activation": "lena_frost", "ground": "theo_castellan"}
@@ -32,8 +34,69 @@ def load_cfg(path: Path = CFG) -> dict:
 
 
 def load_catalog(path: Path = CATALOG) -> list[dict]:
+    if not path.is_file():
+        return []
     with open(path) as f:
         return list(csv.DictReader(f))
+
+
+def _author_display(cfg: dict, byline_slug: str) -> str:
+    card = cfg["authors"].get(byline_slug) or {}
+    return card.get("display") or byline_slug.replace("_", " ").title()
+
+
+def _cluster_from_plan(plan: dict) -> str:
+    ss = plan.get("store_series") or {}
+    name = (ss.get("name") or "").strip()
+    return name.split(" — ")[0].strip() if name else ""
+
+
+def row_from_plan(cfg: dict, plan: dict, stem: str, legacy: dict | None = None) -> dict:
+    """Build a catalog row keyed by plan book_id (source of truth for titles)."""
+    parts = stem.split("__")
+    ap = plan.get("author_positioning") or {}
+    byline = (ap.get("byline_author") or "").strip()
+    row = dict(legacy or {})
+    row.update({
+        "book_id": plan["book_id"],
+        "title": (plan.get("title") or "").strip(),
+        "subtitle": (plan.get("subtitle") or "").strip(),
+        "author": _author_display(cfg, byline),
+        "installment": str(plan.get("installment_number") or row.get("installment") or ""),
+        "topic": plan.get("topic") or (parts[3] if len(parts) > 3 else row.get("topic", "")),
+        "engine": plan.get("engine") or (parts[4].removesuffix("__1hr") if len(parts) > 4 else row.get("engine", "")),
+        "persona": plan.get("persona") or (parts[2] if len(parts) > 2 else row.get("persona", "")),
+        "cluster": _cluster_from_plan(plan) or row.get("cluster", ""),
+    })
+    return row
+
+
+def sync_catalog_from_plans(
+    brand: str = "way_stream_sanctuary",
+    out_path: Path = CATALOG,
+    cfg: dict | None = None,
+) -> list[dict]:
+    """Regenerate cover catalog CSV from book plans (plan book_id = row book_id)."""
+    cfg = cfg or load_cfg()
+    legacy_by_title = {r["title"]: r for r in load_catalog()}
+    rows: list[dict] = []
+    for f in sorted(PLANS_DIR.glob(f"{brand}__*.yaml")):
+        plan = yaml.safe_load(f.read_text(encoding="utf-8")) or {}
+        if plan.get("_needs_authoring") is not False or not plan.get("title"):
+            continue
+        title = (plan.get("title") or "").strip()
+        legacy = legacy_by_title.get(title)
+        rows.append(row_from_plan(cfg, plan, f.stem, legacy))
+    if not rows:
+        raise SystemExit(f"no authored plans for brand {brand}")
+    rows.sort(key=lambda r: (r.get("persona", ""), r.get("topic", ""), r.get("engine", ""), int(r.get("installment") or 0)))
+    fieldnames = list(rows[0].keys())
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    with open(out_path, "w", newline="", encoding="utf-8") as f:
+        w = csv.DictWriter(f, fieldnames=fieldnames, extrasaction="ignore")
+        w.writeheader()
+        w.writerows(rows)
+    return rows
 
 
 def slug(name: str) -> str:
