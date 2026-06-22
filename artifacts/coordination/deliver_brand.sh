@@ -41,12 +41,15 @@ print(f"VERIFY {brand}: authored={len(books)} distinct={len(set(titles))} dupes=
 assert not dupes and not rem and not nob, "VERIFY FAILED"
 PY
 
-# 3. render covers + contact (zero-GPU)
-PYTHONPATH=. python3 -m scripts.publish.brand_covers.render_brand --brand "$BRAND" --all 2>&1 | tail -1
-PYTHONPATH=. python3 -m scripts.publish.brand_covers.render_brand --brand "$BRAND" --contact 2>&1 | tail -1
-
-# 4. deploy authored covers to served path
-PYTHONPATH=. python3 - "$BRAND" <<'PY'
+# Waystream: subtitle uniqueness + plan-keyed cover resync
+if [ "$BRAND" = "way_stream_sanctuary" ]; then
+  PYTHONPATH=. python3 scripts/ci/check_waystream_catalog_uniqueness.py
+  PYTHONPATH=. python3 -m scripts.publish.waystream_covers.render --sync-catalog --all --deploy --contact 2>&1 | tail -3
+  PYTHONPATH=. python3 scripts/publish/waystream_covers/verify_resync.py
+else
+  PYTHONPATH=. python3 -m scripts.publish.brand_covers.render_brand --brand "$BRAND" --all 2>&1 | tail -1
+  PYTHONPATH=. python3 -m scripts.publish.brand_covers.render_brand --brand "$BRAND" --contact 2>&1 | tail -1
+  PYTHONPATH=. python3 - "$BRAND" <<'PY'
 import glob, yaml, shutil, sys
 from pathlib import Path
 brand=sys.argv[1]
@@ -55,6 +58,7 @@ ids=[yaml.safe_load(open(f))["book_id"] for f in glob.glob(f"config/source_of_tr
 n=sum(1 for b in ids if (src/f"{b}.png").exists() and (shutil.copy2(src/f"{b}.png", dst/f"{b}.png") or True))
 print(f"deployed {n}/{len(ids)} covers")
 PY
+fi
 
 # 5. regenerate authored-only dashboard
 PYTHONPATH=. python3 scripts/onboarding/gen_brand_catalogs.py --brand "$BRAND" 2>&1 | tail -1
