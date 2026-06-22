@@ -1,3 +1,6 @@
+> ⛔ SUPERSEDED 2026-06-22 @ origin/main 39e653c4fb6d65910ae97152b28fdadefec449d5 — current truth: docs/PROGRAM_STATE.md
+> ⚠️ **STALE NARRATIVE:** The "Phase B Glue-Bank Repairs to unblock Wave 1" theory has been overturned by pilot findings. The real frontier is composer scaffolding + truncator (#1796/#1812) and cadence/false-positive blockers (F6/F12).
+
 # PEARL_PRIME_WAVE_1_EXECUTION_SPEC
 
 **Status:** v1 — first-wave execution spec for the strongest current 25-book Pearl Prime slate

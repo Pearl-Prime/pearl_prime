@@ -1,3 +1,6 @@
+> ⛔ SUPERSEDED 2026-06-22 @ origin/main 39e653c4fb6d65910ae97152b28fdadefec449d5 — current truth: docs/PROGRAM_STATE.md
+> ⚠️ **STALE NARRATIVE:** The "Phase B Glue-Bank Repairs" priority is historical. Pilot findings shift the focus to composer scaffolding, truncator, and cadence/gate blockers.
+
 # PEARL_PRIME_100_TO_1000_BESTSELLER_BUILD_PROGRAM
 
 **Status:** v1 — program operating-system + materialized deliverables for the focus → repair → deepen → validate → scale path toward 1,000 cohesive Pearl Prime books.

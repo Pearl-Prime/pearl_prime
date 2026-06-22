@@ -1,3 +1,5 @@
+> ⛔ For current program STATE → docs/PROGRAM_STATE.md. This file remains the authoritative architecture CAP REGISTRY.
+
 # Pearl_Architect State
 
 Last verified: 2026-05-10  

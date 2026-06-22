@@ -1,5 +1,7 @@
 # Phoenix Docs Index
 
+**START HERE:** [docs/PROGRAM_STATE.md](./PROGRAM_STATE.md) — current verified state (SSOT).
+
 **Purpose:** Canonical index for documentation authority and navigation.  
 **Missing-file policy:** Only existing files are linked; planned or missing files are listed as backlog items (plain text or `path` with ⚠️ *file not present*).  
 **Last updated:** 2026-06-17
