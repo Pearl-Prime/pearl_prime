@@ -1,0 +1,70 @@
+series_plan_schema: 1.0.0
+locale: en_US
+book_id_prefix: sleep_restoration__master_sha__gen_x_sandwich__self_worth
+brand: sleep_restoration
+teacher: master_sha
+persona: gen_x_sandwich
+topic: self_worth
+byline_author: vera_bramble
+arc:
+  installment_1:
+    book_id: sleep_restoration__master_sha__gen_x_sandwich__self_worth__shame
+    engine: shame
+    master_arc: config/source_of_truth/master_arcs/gen_x_sandwich__self_worth__shame__F006.yaml
+    duration: standard_book_60min
+  installment_2:
+    book_id: sleep_restoration__master_sha__gen_x_sandwich__self_worth__comparison
+    engine: comparison
+    master_arc: config/source_of_truth/master_arcs/gen_x_sandwich__self_worth__comparison__F006.yaml
+    duration: standard_book_60min
+reader_promise_family: For the generation caught in the middle — aging parents on
+  one side, children who still need you on the other — who lie awake at the end of
+  impossible days wondering whether they're enough. These books don't hand you a fix
+  or a productivity hack for your own worth. They sit with you in the dark and let
+  you set the load down long enough to remember you were never the problem.
+bestseller_hook_family: ''
+emotional_engine: self_worth_recognition
+comp_series:
+- The Untethered Soul series (Michael A. Singer) — interior, permission-giving spiritual
+  non-fiction for readers exhausted by their own self-judgment
+- 'Burnout: The Secret to Unlocking the Stress Cycle (Emily & Amelia Nagoski) — names
+  the specific depletion of women carrying everyone, without a hustle fix'
+- The Gifts of Imperfection (Brené Brown) — worthiness-as-it-is rather than worthiness-as-earned,
+  in a warm non-clinical voice
+platform_strategy:
+  primary:
+  - kdp_ebook
+  - audible
+  secondary:
+  - apple_books
+  - google_play
+  - spotify_audiobooks
+  launch_platform: kdp_ebook
+  cadence:
+    release_spacing_days: 14
+    max_books_per_brand_per_month: 2
+reader_avatar:
+  age: mid-40s to late 50s
+  where_they_are: It's 1am and the house is finally quiet. You answered your mother's
+    third call about the pills, signed the permission slip, paid the bill that wasn't
+    supposed to come this month, and somewhere in there you ate standing up over the
+    sink. Now you're lying in the dark doing the only math you ever do for yourself
+    — the running tally of where you fell short today — and it never once comes out
+    in your favor.
+  what_they_need: to be told, by a voice that isn't trying to fix or motivate them,
+    that their worth was never the thing they had to earn between everyone else's
+    needs — and to feel the bone-deep relief of setting that ledger down for one night
+  what_they_avoid: push-through toughness, 'you've got this' cheerleading, self-care
+    framed as one more task, hustle-coded self-improvement, and anything that treats
+    their exhaustion or their grief as a weakness to be managed
+series_voice_markers:
+  register: steady, nocturnal, quietly architectural — the voice of someone who has
+    sat up through the heavy hours too and isn't going to rush you; holds without
+    fixing, never clinical, never a coach
+  sentence_rhythm: long settling sentences that let a weight come to rest, broken
+    by short flat ones that land like a hand on the shoulder; patient, unhurried,
+    built to be read at 1am
+  metaphor_family: the dark room and the long night, foundations and what bears weight,
+    a load finally set down, the body settling toward rest, the load-bearing wall
+    that has held more than anyone checked on, the quiet hours before dawn
+_needs_authoring: false

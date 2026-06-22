@@ -1,8 +1,7 @@
 book_plan_schema: 1.0.0
-created_at: '2026-04-24'
 book_id: sleep_restoration__master_sha__healthcare_rns__somatic_healing__watcher
 series_plan: config/source_of_truth/series_plans_en_us/sleep_restoration__master_sha__healthcare_rns__somatic_healing.yaml
-installment_number: 1
+installment_number: 2
 engine: watcher
 duration: standard_book_60min
 runtime_format_id: standard_book_60min
@@ -11,37 +10,79 @@ target_word_range:
 - 9000
 - 12000
 target_audio_minutes: 70
-title: 'The Observer''s Mind: How to Stop Freezing and Speak Up with Confidence'
-subtitle: ''
-cover_tagline: You're here, but you're also somewhere behind yourself.
+title: The Body That Won't Trust a Quiet House
+subtitle: For the nurse whose vigilance keeps patients alive and then follows her
+  home — a body braced at 3 a.m. over rooms where nothing, tonight, is wrong
+cover_tagline: The shift ended hours ago. Something in you is still on watch.
 description:
-  short_blurb: You're here, but you're also somewhere behind yourself. That's not enough anymore. release what's been held in my body for years.
-  long_description: |
-    You're here, but you're also somewhere behind yourself.
+  short_blurb: You're home. The lights are off. And some part of you is still reading
+    the room for the thing that's about to go wrong. The scanning that keeps your
+    patients alive doesn't switch off when you walk out the doors — it turns inward,
+    onto your own body, your own night. This is a book for the watcher in you that
+    has forgotten how to stand down.
+  long_description: 'There''s a part of you that never sleeps. It learned, somewhere
+    in your first hard years on the floor, that catching the change early is the whole
+    job — the subtle shift in color, the number trending the wrong way, the quiet
+    before the crash. So it watches. It reads every room. It catches everything.
 
-    This book is for floor RN in a hospital units who my body holds things my mind has been trying to forget. It doesn't promise to make the feeling stop. It names what's happening in language you can use the next time it happens.
 
-    Chapter by chapter, you'll work with the distance that opens between you and your own experience, and why it formed. Not through exposure or worksheets or morning routines — through recognition, descent, and integration. The practice the book asks for can happen on a subway, between meetings, or at 3am.
+    And then your shift ends, and it doesn''t.
 
-    You'll walk away knowing what your body is doing and why it makes sense. Not fixed. Not healed in any final sense. But no longer alone with the pattern.
 
-    Book 1 of the Sleep Restoration somatic healing series.
+    Now you''re home in the dark, lying still, and the watcher is still on duty —
+    only there are no monitors here, no patients, so it turns the scanning onto you.
+    It tracks your own heartbeat and finds it too fast. It listens to the house. It
+    rehearses what could go wrong tomorrow. It mistakes your own settling body for
+    a warning sign and braces all over again. You are exhausted and you are wide awake,
+    because some part of you is convinced that the moment you stop watching is the
+    moment something slips.
+
+
+    This is a book for the floor nurse whose hypervigilance has become the background
+    hum of her whole life — at the bedside where it belongs, and at 3am where it does
+    not. It''s for the one who can''t lower her guard even when there is nothing left
+    to guard, who monitors threats that never come, who has forgotten what it feels
+    like to be off the clock inside her own skin.
+
+
+    You''ll come to recognize the watcher as something that was built to keep people
+    alive — yours and theirs — and that does not know, on its own, how to step down.
+    You''ll feel where it lives in the body: the held breath, the eyes that won''t
+    soften, the alertness sitting just behind the sternum. And slowly, in the dark
+    room where you are actually safe, you''ll learn what it is to let that part of
+    you set its watch down for a few minutes at a time — to let the floor hold what
+    you''ve been holding, and trust that nothing crashes when you do.
+
+
+    This book will not make you less careful at work. It will not optimize your sleep
+    or train your vigilance into a skill. It won''t tell you to simply relax, as if
+    the watching were a habit and not a thing your body learned to survive. It asks
+    only that you let the guard come down a little, here, where no one is coding,
+    where the night can hold the watch for a while instead of you.
+
+
+    You are allowed to stop scanning. Not forever. Just for now, in the dark, where
+    it is finally safe to close your eyes.
+
+
+    Book 2 of the Night Architecture Books somatic healing series.'
 keywords:
   primary:
-  - somatic therapy
-  - body keeps the score
-  - trauma-informed
-  - nervous system healing
-  - embodiment practice
-  - polyvagal
-  - felt sense
+  - hypervigilance recovery
+  - somatic therapy for nurses
+  - nervous system on high alert
+  - can't turn my mind off at night
+  - trauma-informed nervous system healing
+  - feeling unsafe in your own body
+  - burnout in healthcare workers
   secondary:
-  - healthcare rns
-  - watcher somatic healing
+  - polyvagal theory self-help
+  - release stored stress in the body
+  - caregiver hypervigilance book
 bisac_codes:
 - MED058000
 - SEL027000
-- MED003000
+- SEL036000
 target_price:
   ebook_usd: 4.99
   audible_usd: 9.99
@@ -49,14 +90,12 @@ target_price:
 author_positioning:
   teacher: master_sha
   brand: sleep_restoration
+  byline_author: ruth_tam
 comp_titles:
-- The Body Keeps the Score (van der Kolk)
-- Waking the Tiger (Levine)
-- My Grandmother's Hands (Menakem)
-main_character_name: Nadia
-main_character_lora_id: nadia_sr_us
-confidence:
-  pricing: low
-  title: medium
-  comps: high
-plan_source_path: config/manga/manga_brand_series_plan.yaml
+- The Body Keeps the Score (Bessel van der Kolk) — the definitive account of a nervous
+  system stuck on high alert
+- When the Body Says No (Gabor Maté) — on what relentless self-suppression and vigilance
+  cost the caregiver's body
+- Trauma and Recovery (Judith Herman) — names the hypervigilance that outlives the
+  threat that built it
+_needs_authoring: false

@@ -1,0 +1,71 @@
+series_plan_schema: 1.0.0
+locale: en_US
+book_id_prefix: sleep_restoration__master_sha__gen_x_sandwich__grief
+brand: sleep_restoration
+teacher: master_sha
+persona: gen_x_sandwich
+topic: grief
+byline_author: ivo_iverson
+arc:
+  installment_1:
+    book_id: sleep_restoration__master_sha__gen_x_sandwich__grief__grief
+    engine: grief
+    master_arc: config/source_of_truth/master_arcs/gen_x_sandwich__grief__grief__F006.yaml
+    duration: standard_book_60min
+  installment_2:
+    book_id: sleep_restoration__master_sha__gen_x_sandwich__grief__watcher
+    engine: watcher
+    master_arc: config/source_of_truth/master_arcs/gen_x_sandwich__grief__watcher__F006.yaml
+    duration: standard_book_60min
+reader_promise_family: A steady nocturnal companion for the sandwich generation carrying
+  grief through the long nights — these books sit with you in the dark, name the loss
+  exactly, and let you set it down without rushing it, without fixing it, and without
+  asking you to be strong.
+bestseller_hook_family: ''
+emotional_engine: grief_recognition
+comp_series:
+- It's OK That You're Not OK (Megan Devine) — refuses to rush or fix grief and meets
+  the bereaved exactly where they are, the same promise this series makes at night.
+- The Grief Recovery Handbook (John W. James & Russell Friedman) — practical, permission-giving
+  companionship through loss for ordinary overwhelmed people rather than clinical
+  theory.
+- 'Burnout: The Secret to Unlocking the Stress Cycle (Emily Nagoski & Amelia Nagoski)
+  — speaks straight to depleted midlife caregivers about a nervous system stuck in
+  the on position, which is the watcher''s exact problem.'
+platform_strategy:
+  primary:
+  - kdp_ebook
+  - audible
+  secondary:
+  - apple_books
+  - google_play
+  - spotify_audiobooks
+  launch_platform: kdp_ebook
+  cadence:
+    release_spacing_days: 14
+    max_books_per_brand_per_month: 2
+reader_avatar:
+  age: 45-58
+  where_they_are: It's past midnight. The house is finally quiet — the kids asleep
+    down the hall, the dishes done, the parent who needed you either gone now or fading
+    in a room across town. You're lying in the dark with your eyes open, too tired
+    to sleep and too full to rest, replaying the last conversation, the thing you
+    should have said, the load you've been carrying for so long you forgot you set
+    it down anywhere else.
+  what_they_need: Permission to grieve on their own clock, in the only hours they
+    have to themselves; a voice that holds the weight without trying to lift it off
+    them; practices that help the body settle toward rest instead of bracing all night.
+  what_they_avoid: Push-through toughness, 'stay strong for everyone' platitudes,
+    sleep-hacking and optimization, toxic positivity, and anything that treats grief
+    or exhaustion as a problem to solve quickly so they can get back to being useful.
+series_voice_markers:
+  register: Steady, nocturnal, quietly architectural — a calm presence who sits with
+    you through the heavy hours, holds without fixing, never clinical, never a coach,
+    never hustle.
+  sentence_rhythm: Unhurried and load-bearing; short declaratives that land like a
+    hand on the shoulder, set against longer sentences that breathe out slowly, mirroring
+    a body settling toward rest.
+  metaphor_family: Night and the dark room, foundations and what bears weight, a load
+    finally set down, the body settling toward rest, the quiet hours before dawn,
+    the structure that holds you while you let go.
+_needs_authoring: false

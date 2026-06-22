@@ -1,33 +1,36 @@
 series_plan_schema: 1.0.0
-created_at: '2026-04-24'
 locale: en_US
 book_id_prefix: sleep_restoration__master_sha__first_responders__somatic_healing
 brand: sleep_restoration
 teacher: master_sha
 persona: first_responders
 topic: somatic_healing
-teacher_topic_score: 0.85
-teacher_persona_score: 0.9
-composite_fit: 0.88
+byline_author: ruth_tam
 arc:
   installment_1:
-    book_id: sleep_restoration__master_sha__first_responders__somatic_healing__watcher
-    engine: watcher
-    master_arc: config/source_of_truth/master_arcs/first_responders__somatic_healing__watcher__F006.yaml
-    duration: standard_book_60min
-  installment_2:
     book_id: sleep_restoration__master_sha__first_responders__somatic_healing__overwhelm
     engine: overwhelm
     master_arc: config/source_of_truth/master_arcs/first_responders__somatic_healing__overwhelm__F006.yaml
     duration: standard_book_60min
-reader_promise_family: |
-  7 books across engines of somatic_healing via the hushed, night-paced, luminous voice.
-bestseller_hook_family: recognition_descent
+  installment_2:
+    book_id: sleep_restoration__master_sha__first_responders__somatic_healing__watcher
+    engine: watcher
+    master_arc: config/source_of_truth/master_arcs/first_responders__somatic_healing__watcher__F006.yaml
+    duration: standard_book_60min
+reader_promise_family: For the first responder whose body never fully clocks out —
+  a steady, nocturnal companion that sits with what your nervous system has been holding
+  since the last bad call, names it in language you can carry into the next shift,
+  and asks nothing of you but to set the weight down for one honest hour. No toughening,
+  no fixing, no rushing the grief out of you.
+bestseller_hook_family: ''
 emotional_engine: somatic_healing_recognition
 comp_series:
-- The Body Keeps the Score (van der Kolk)
-- Waking the Tiger (Levine)
-- My Grandmother's Hands (Menakem)
+- The Body Keeps the Score companion readers (van der Kolk-adjacent) — readers who
+  want the somatic frame in a quieter, more personal register
+- First, We Make the Beast Beautiful series-adjacent titles (Sarah Wilson) — anxiety
+  memoir that sits beside the reader instead of prescribing
+- When the Body Says No / trauma-and-the-nervous-system companion books (Gabor Maté-adjacent)
+  — readers drawn to held bodies and unprocessed loss, not protocols
 platform_strategy:
   primary:
   - kdp_ebook
@@ -41,21 +44,28 @@ platform_strategy:
     release_spacing_days: 14
     max_books_per_brand_per_month: 2
 reader_avatar:
-  age: 26–48
-  where_they_are: |
-    Off-shift but still scanning. Phone buzzes somewhere else.
-  what_they_need: |
-    Voice that doesn't require them to explain what they've seen.
-  what_they_avoid: |
-    Self-care language.
+  age: 28-52
+  where_they_are: It is 3am after a back-to-back run of calls and you are lying flat
+    in a dark room, off-shift, supposedly resting — but your jaw is set, your shoulders
+    are still up around your ears, and your body is scanning the ceiling like a radio
+    that won't switch off. You did the job. You're home. And still something in you
+    is braced for the tones to drop.
+  what_they_need: To understand that the bracing, the looping, the held breath are
+    not weakness or damage but a nervous system that learned to survive — and to be
+    met by a voice that holds that without trying to talk them out of it or hand them
+    another protocol to run.
+  what_they_avoid: Push-through toughness, 'stay strong for the crew' platitudes,
+    sleep-hacking and optimization, toxic positivity, anything clinical that turns
+    their body into a problem to be solved, and anything that rushes them past the
+    grief they haven't had time to feel.
 series_voice_markers:
-  register: hushed, night-paced, luminous
-  sentence_rhythm: long unhurried sentences, no punchy copy
-  metaphor_family: starfield, dim glow, water settling
-  second_person_default: true
-main_character_name: Kenji
-main_character_role: paramedic / firefighter / EMS
-main_character_image_path: null
-main_character_lora_id: kenji_sr_us
-main_character_trigger_word: kenji_sr_us
-plan_source_path: config/manga/manga_brand_series_plan.yaml
+  register: steady, nocturnal, quietly architectural — a calm presence who sits with
+    you through the heavy hours after a shift; holds without fixing; never clinical,
+    never a coach, never hustle
+  sentence_rhythm: unhurried and plainspoken; short declaratives that land like a
+    hand set on a shoulder, opening into longer settling lines that give the body
+    room to exhale; second person throughout
+  metaphor_family: night and the dark room, foundations and what bears weight, a load
+    finally set down, the body settling toward rest, the long hours before dawn, the
+    structure that holds you while you let go
+_needs_authoring: false

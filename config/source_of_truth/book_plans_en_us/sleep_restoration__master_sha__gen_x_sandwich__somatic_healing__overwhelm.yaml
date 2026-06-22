@@ -1,8 +1,7 @@
 book_plan_schema: 1.0.0
-created_at: '2026-04-24'
 book_id: sleep_restoration__master_sha__gen_x_sandwich__somatic_healing__overwhelm
 series_plan: config/source_of_truth/series_plans_en_us/sleep_restoration__master_sha__gen_x_sandwich__somatic_healing.yaml
-installment_number: 2
+installment_number: 1
 engine: overwhelm
 duration: standard_book_60min
 runtime_format_id: standard_book_60min
@@ -11,37 +10,77 @@ target_word_range:
 - 9000
 - 12000
 target_audio_minutes: 70
-title: 'The Shutdown Point: Practical Relief for a Restless Mind'
-subtitle: You Were Never Broken
-cover_tagline: You have more on your plate than fits in your hours.
+title: The Weight You Never Set Down
+subtitle: For the one holding a job, their kids, and their aging parents at once —
+  when the whole day lands in your chest at 3am and there is no room left to hold
+  it
+cover_tagline: Everything arrived at once, and you never got to put any of it down.
 description:
-  short_blurb: You have more on your plate than fits in your hours. release what's been held in my body for years.
-  long_description: |
-    You have more on your plate than fits in your hours.
+  short_blurb: Some nights the day doesn't end when the lights go out — it just moves
+    into your chest and stays there. This is a book for the body that took on everyone's
+    weight and was never given a moment to set it down. It will not teach you to carry
+    more efficiently. It will sit with you while the load gets heavy enough to name.
+  long_description: 'It comes in all at once. The text from the care home, the email
+    you can''t unsee, the kid who slammed the door, the thing you forgot, the thing
+    you can''t forget. By the time the house goes quiet there is no quiet left in
+    you — just a body that has been holding too much for too long, with nowhere to
+    set any of it down.
 
-    This book is for manager + parent + caregiver to aging parents who my body holds things my mind has been trying to forget. It doesn't promise to make the feeling stop. It names what's happening in language you can use the next time it happens.
 
-    Chapter by chapter, you'll work with how input accumulates past capacity and what happens in your body when it does. Not through exposure or worksheets or morning routines — through recognition, descent, and integration. The practice the book asks for can happen on a subway, between meetings, or at 3am.
+    This book is for the one in the middle. You manage people at work and you manage
+    a household and you manage a parent who is disappearing a little more each month,
+    and somewhere underneath all of it is a nervous system that stopped being able
+    to tell the difference between a hard day and an emergency. You don''t need more
+    on your plate. You need someone to understand why the plate feels like it''s pressing
+    on your sternum at 3am.
 
-    You'll walk away knowing what your body is doing and why it makes sense. Not fixed. Not healed in any final sense. But no longer alone with the pattern.
 
-    Book 2 of the Sleep Restoration somatic healing series.
+    In these pages you''ll come to recognize what overwhelm actually is in the body
+    — not a failure of organization, not weakness, but a system that exceeded its
+    capacity a long time ago and kept going anyway. You''ll see why the flood arrives
+    hardest in the dark, after you''ve finally stopped moving. You''ll learn what
+    your shoulders, your jaw, your shallow breath have been doing on your behalf,
+    and why they make sense. And you''ll find, slowly, what it feels like to let one
+    thing be heavy at a time instead of all of it at once.
+
+
+    This book will not promise to make the feeling stop. It will not optimize you,
+    streamline your morning, or hand you a protocol to execute before dawn. There
+    is no productivity here, no pushing through, no being told to be grateful while
+    you''re drowning. The practice it asks for is small enough to happen on a stairwell,
+    between two meetings, or lying flat at 3am with your eyes open.
+
+
+    What it offers instead is recognition. A way to understand what your body is carrying
+    and why it learned to never put it down. A descent, gentle and unhurried, into
+    what''s underneath the noise — and a way back up that doesn''t ask you to be fixed
+    first.
+
+
+    You are not behind. You are not failing at a life everyone else seems to manage.
+    You are a person who has been holding more than any one body was built to hold,
+    and no one ever told you that you were allowed to feel its weight. Tonight, you
+    can.
+
+
+    Book 1 of the Night Architecture Books somatic healing series.'
 keywords:
   primary:
-  - somatic therapy
+  - somatic therapy for stress
+  - nervous system regulation
   - body keeps the score
-  - trauma-informed
-  - nervous system healing
-  - embodiment practice
-  - polyvagal
-  - felt sense
+  - overwhelm and burnout recovery
+  - sandwich generation caregiver stress
+  - trauma stored in the body
+  - polyvagal exercises
   secondary:
-  - gen x sandwich
-  - overwhelm somatic healing
+  - caregiver burnout midlife
+  - somatic healing for overwhelm
+  - calm an overwhelmed nervous system
 bisac_codes:
-- FAM051000
 - SEL027000
-- FAM058000
+- PSY022040
+- FAM051000
 target_price:
   ebook_usd: 4.99
   audible_usd: 9.99
@@ -49,14 +88,12 @@ target_price:
 author_positioning:
   teacher: master_sha
   brand: sleep_restoration
+  byline_author: ruth_tam
 comp_titles:
-- The Body Keeps the Score (van der Kolk)
-- Waking the Tiger (Levine)
-- My Grandmother's Hands (Menakem)
-main_character_name: Gerard
-main_character_lora_id: gerard_sr_us
-confidence:
-  pricing: low
-  title: medium
-  comps: high
-plan_source_path: config/manga/manga_brand_series_plan.yaml
+- The Body Keeps the Score (Bessel van der Kolk) — the body holds what the mind can't,
+  written for the person carrying it
+- Burnout (Emily and Amelia Nagoski) — names the unfinished stress flooding a depleted
+  system
+- Waking the Tiger (Peter Levine) — how a flooded nervous system discharges what overwhelmed
+  it
+_needs_authoring: false

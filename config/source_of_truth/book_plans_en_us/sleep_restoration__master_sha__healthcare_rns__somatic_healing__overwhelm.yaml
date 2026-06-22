@@ -1,8 +1,7 @@
 book_plan_schema: 1.0.0
-created_at: '2026-04-24'
 book_id: sleep_restoration__master_sha__healthcare_rns__somatic_healing__overwhelm
 series_plan: config/source_of_truth/series_plans_en_us/sleep_restoration__master_sha__healthcare_rns__somatic_healing.yaml
-installment_number: 2
+installment_number: 1
 engine: overwhelm
 duration: standard_book_60min
 runtime_format_id: standard_book_60min
@@ -11,37 +10,77 @@ target_word_range:
 - 9000
 - 12000
 target_audio_minutes: 70
-title: 'The Shutdown Point: A Clear Path from Overwhelm to Calm'
-subtitle: ''
-cover_tagline: You have more on your plate than fits in your hours.
+title: Nothing Left to Hold It With
+subtitle: Coming home full to the brim — for the floor nurse whose body absorbed a
+  whole shift it never got to feel, and now has no room left to set any of it down
+cover_tagline: You carried all of it. You just never got to set it down.
 description:
-  short_blurb: You have more on your plate than fits in your hours. release what's been held in my body for years.
-  long_description: |
-    You have more on your plate than fits in your hours.
+  short_blurb: By the time you get home, there's no room left in you. The shift poured
+    in faster than you could feel it, and now it's all still here — in your chest,
+    your shoulders, the breath that won't go all the way down. This is a book for
+    the body that took on more than any body should, and was never given anywhere
+    to put it.
+  long_description: 'You don''t remember the moment it became too much, because there
+    wasn''t one. It just kept arriving. The admit, then the rapid response, then the
+    family in the hallway, then the call light, then the next, and the next, until
+    somewhere in the middle of it you stopped catching up and started just absorbing
+    — taking it into the body because there was nowhere else for it to go.
 
-    This book is for floor RN in a hospital units who my body holds things my mind has been trying to forget. It doesn't promise to make the feeling stop. It names what's happening in language you can use the next time it happens.
 
-    Chapter by chapter, you'll work with how input accumulates past capacity and what happens in your body when it does. Not through exposure or worksheets or morning routines — through recognition, descent, and integration. The practice the book asks for can happen on a subway, between meetings, or at 3am.
+    Now it''s the small hours and you''re finally still, and you can feel how full
+    you are. Not in your mind. In your chest, behind your eyes, in the shoulders that
+    won''t come down from your ears. The flood hasn''t drained. It''s just gone quiet
+    inside you, waiting.
 
-    You'll walk away knowing what your body is doing and why it makes sense. Not fixed. Not healed in any final sense. But no longer alone with the pattern.
 
-    Book 2 of the Sleep Restoration somatic healing series.
+    This is a book for the floor nurse whose capacity was exceeded a long time ago
+    and who kept going anyway, because the unit doesn''t pause so you can feel things.
+    It''s for the one who comes home and finds there''s no room left — no room to
+    feel the day, no room to be touched, no room even to rest, because every space
+    inside is already holding something.
+
+
+    You''ll come to recognize the overwhelm not as weakness but as arithmetic: more
+    came in than any nervous system can metabolize in a shift, and the body did the
+    only thing it could — it held. You''ll feel where it''s been holding. You''ll
+    learn what it is to let a single held thing move down through you and out into
+    the floor, in the dark, while no one needs anything from you. Not the whole flood
+    at once. Just one thing, and then the room it leaves behind.
+
+
+    This book will not teach you to carry more. It will not make you resilient or
+    efficient or unshakeable on the floor. It won''t hand you a routine to do at 5am
+    before your shift. It asks for almost nothing — only that you stop, in the heavy
+    hours, and let your body finally be as full as it has been, and then a little
+    less full.
+
+
+    Nothing here rushes you. Nothing treats your exhaustion as a problem in your attitude.
+    There is no finish line where you are fixed.
+
+
+    You were never too sensitive. You were just never given anywhere to put it down.
+    You can start setting it down now.
+
+
+    Book 1 of the Night Architecture Books somatic healing series.'
 keywords:
   primary:
-  - somatic therapy
+  - somatic therapy for nurses
+  - nervous system overwhelm
   - body keeps the score
-  - trauma-informed
-  - nervous system healing
-  - embodiment practice
-  - polyvagal
-  - felt sense
+  - burnout recovery for healthcare workers
+  - nervous system regulation
+  - release stored stress in the body
+  - emotional overwhelm recovery
   secondary:
-  - healthcare rns
-  - overwhelm somatic healing
+  - trauma-informed self-help
+  - polyvagal nervous system healing
+  - caregiver burnout book
 bisac_codes:
 - MED058000
 - SEL027000
-- MED003000
+- SEL036000
 target_price:
   ebook_usd: 4.99
   audible_usd: 9.99
@@ -49,14 +88,12 @@ target_price:
 author_positioning:
   teacher: master_sha
   brand: sleep_restoration
+  byline_author: ruth_tam
 comp_titles:
-- The Body Keeps the Score (van der Kolk)
-- Waking the Tiger (Levine)
-- My Grandmother's Hands (Menakem)
-main_character_name: Nadia
-main_character_lora_id: nadia_sr_us
-confidence:
-  pricing: low
-  title: medium
-  comps: high
-plan_source_path: config/manga/manga_brand_series_plan.yaml
+- The Body Keeps the Score (Bessel van der Kolk) — the foundational case for why overwhelm
+  lodges in the body, not the mind
+- 'Burnout: The Secret to Unlocking the Stress Cycle (Emily & Amelia Nagoski) — on
+  the unfinished stress that floods and stays in caregivers'
+- Set Boundaries, Find Peace (Nedra Glover Tawwab) — for the over-giver whose capacity
+  has quietly been exceeded for years
+_needs_authoring: false

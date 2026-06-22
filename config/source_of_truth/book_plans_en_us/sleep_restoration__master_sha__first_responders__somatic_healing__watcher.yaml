@@ -1,8 +1,7 @@
 book_plan_schema: 1.0.0
-created_at: '2026-04-24'
 book_id: sleep_restoration__master_sha__first_responders__somatic_healing__watcher
 series_plan: config/source_of_truth/series_plans_en_us/sleep_restoration__master_sha__first_responders__somatic_healing.yaml
-installment_number: 1
+installment_number: 2
 engine: watcher
 duration: standard_book_60min
 runtime_format_id: standard_book_60min
@@ -11,33 +10,67 @@ target_word_range:
 - 9000
 - 12000
 target_audio_minutes: 70
-title: 'The Observer''s Mind: How to Stop Freezing and Speak Up with Confidence'
-subtitle: A Path Back to Stillness
-cover_tagline: You're here, but you're also somewhere behind yourself.
+title: Still On Duty in the Dark
+subtitle: For the first responder whose mind never stands down — when the scanning,
+  listening, threat-checking part of you keeps working a shift that ended hours ago
+cover_tagline: You're off the clock. Some part of you refuses to believe it.
 description:
-  short_blurb: You're here, but you're also somewhere behind yourself. That's not enough anymore. release what's been held in my body for years.
-  long_description: |
-    You're here, but you're also somewhere behind yourself.
+  short_blurb: The tones haven't dropped. Nothing is wrong. And still you're listening
+    — to the hallway, to your own pulse, to a danger that never comes. This book doesn't
+    tell the watcher to relax. It sits beside it in the dark and shows it, slowly,
+    that the shift is over.
+  long_description: 'It''s the middle of the night and you are wide awake, listening.
+    Not to anything. To everything. The settle of the house, a car three streets over,
+    the rhythm of your own heart — your body is sweeping the room for a threat it
+    can''t find because there isn''t one. You are home. The doors are locked. You
+    are safe. And the part of you that scanned every scene for the thing that could
+    go wrong is still on duty, still standing post, refusing to be relieved.
 
-    This book is for paramedic / firefighter / EMSs who my body holds things my mind has been trying to forget. It doesn't promise to make the feeling stop. It names what's happening in language you can use the next time it happens.
 
-    Chapter by chapter, you'll work with the distance that opens between you and your own experience, and why it formed. Not through exposure or worksheets or morning routines — through recognition, descent, and integration. The practice the book asks for can happen on a subway, between meetings, or at 3am.
+    This book is for the paramedic, the firefighter, the EMT — anyone whose nervous
+    system learned that staying alert kept people alive, and then was never told the
+    shift had ended. The one who lies down to rest and instead keeps watch. The one
+    who can read a room in two seconds and can''t, for the life of them, read it as
+    safe. If hypervigilance has become the floor you live on instead of a tool you
+    pick up and set down, you''ll recognize yourself in these pages.
 
-    You'll walk away knowing what your body is doing and why it makes sense. Not fixed. Not healed in any final sense. But no longer alone with the pattern.
 
-    Book 1 of the Sleep Restoration somatic healing series.
+    Chapter by chapter, you''ll come to understand the watcher for what it is: not
+    paranoia, not a malfunction, but the most loyal part of you, doing the only job
+    it was ever given. You''ll see why it won''t switch off when you tell it to, why
+    the quiet hours somehow feel the least safe, and how the body — met gently, never
+    forced — can learn that the danger has passed and the post can finally be left.
+    The practice is small and portable. It belongs in the rig, in the bunk room, in
+    the dark before sleep.
+
+
+    This book will not make you hypervigilant about being hypervigilant. It offers
+    no protocol to run, no drill to master, no way to win against your own watchfulness
+    — because the watcher was never the enemy. There is nothing here to fix, only
+    something faithful to thank, and slowly, to let rest.
+
+
+    What you''ll find instead is a steady presence sitting with you through the long
+    hours — the scanning named, the vigilance honored, and permission to let the watch
+    be held by something other than you for one honest night. You don''t have to keep
+    the whole house safe alone. You''re allowed to be the one who is kept, for a change,
+    while the dark does you no harm.
+
+
+    Book 2 of the Night Architecture Books somatic healing series.'
 keywords:
   primary:
-  - somatic therapy
-  - body keeps the score
-  - trauma-informed
+  - hypervigilance and ptsd
+  - somatic therapy for trauma
+  - first responder ptsd recovery
   - nervous system healing
-  - embodiment practice
-  - polyvagal
-  - felt sense
+  - can't turn my mind off at night
+  - the body keeps the score
+  - polyvagal theory
   secondary:
-  - first responders
-  - watcher somatic healing
+  - always on alert anxiety
+  - trauma recovery for firefighters
+  - felt sense embodiment
 bisac_codes:
 - SEL036000
 - SEL027000
@@ -49,14 +82,12 @@ target_price:
 author_positioning:
   teacher: master_sha
   brand: sleep_restoration
+  byline_author: ruth_tam
 comp_titles:
-- The Body Keeps the Score (van der Kolk)
-- Waking the Tiger (Levine)
-- My Grandmother's Hands (Menakem)
-main_character_name: Kenji
-main_character_lora_id: kenji_sr_us
-confidence:
-  pricing: low
-  title: medium
-  comps: high
-plan_source_path: config/manga/manga_brand_series_plan.yaml
+- The Body Keeps the Score (Bessel van der Kolk) — the foundational map of a nervous
+  system stuck in threat-detection
+- Accessing the Healing Power of the Vagus Nerve (Stanley Rosenberg) — the somatic
+  case for how the body learns it is safe again
+- My Grandmother's Hands (Resmaa Menakem) — trauma settled in the body, met with patience
+  rather than protocol
+_needs_authoring: false

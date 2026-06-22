@@ -1,33 +1,37 @@
 series_plan_schema: 1.0.0
-created_at: '2026-04-24'
 locale: en_US
 book_id_prefix: sleep_restoration__master_sha__gen_x_sandwich__somatic_healing
 brand: sleep_restoration
 teacher: master_sha
 persona: gen_x_sandwich
 topic: somatic_healing
-teacher_topic_score: 0.85
-teacher_persona_score: 0.85
-composite_fit: 0.85
+byline_author: ruth_tam
 arc:
   installment_1:
-    book_id: sleep_restoration__master_sha__gen_x_sandwich__somatic_healing__watcher
-    engine: watcher
-    master_arc: config/source_of_truth/master_arcs/gen_x_sandwich__somatic_healing__watcher__F006.yaml
-    duration: standard_book_60min
-  installment_2:
     book_id: sleep_restoration__master_sha__gen_x_sandwich__somatic_healing__overwhelm
     engine: overwhelm
     master_arc: config/source_of_truth/master_arcs/gen_x_sandwich__somatic_healing__overwhelm__F006.yaml
     duration: standard_book_60min
-reader_promise_family: |
-  7 books across engines of somatic_healing via the hushed, night-paced, luminous voice.
-bestseller_hook_family: recognition_descent
+  installment_2:
+    book_id: sleep_restoration__master_sha__gen_x_sandwich__somatic_healing__watcher
+    engine: watcher
+    master_arc: config/source_of_truth/master_arcs/gen_x_sandwich__somatic_healing__watcher__F006.yaml
+    duration: standard_book_60min
+reader_promise_family: For the generation holding a job, their own kids, and their
+  failing parents all at once — books that sit with the body that has been bracing
+  for years and never got to set the weight down. Not a fix, not a protocol. A steady
+  presence in the dark hours that names what your nervous system is carrying, in language
+  you can use the next time it grips you.
+bestseller_hook_family: ''
 emotional_engine: somatic_healing_recognition
 comp_series:
-- The Body Keeps the Score (van der Kolk)
-- Waking the Tiger (Levine)
-- My Grandmother's Hands (Menakem)
+- The Body Keeps the Score (Bessel van der Kolk) — the field-defining map of how unprocessed
+  experience lives in the body, written for the lay reader carrying it
+- 'Burnout: The Secret to Unlocking the Stress Cycle (Emily and Amelia Nagoski) —
+  names the unfinished stress held in a depleted nervous system, for people too tired
+  to be told to try harder'
+- When the Body Says No (Gabor Maté) — the cost of a lifetime of holding it together
+  for everyone else, in compassionate non-clinical prose
 platform_strategy:
   primary:
   - kdp_ebook
@@ -41,21 +45,25 @@ platform_strategy:
     release_spacing_days: 14
     max_books_per_brand_per_month: 2
 reader_avatar:
-  age: 47–62
-  where_they_are: |
-    After a phone call with mom's doctor. Kid's tuition bill on counter.
-  what_they_need: |
-    Acknowledges compression of being responsible for generations.
-  what_they_avoid: |
-    Mindfulness-for-beginners.
+  age: 47 to 58
+  where_they_are: It is 2:40am and you are lying on your back, eyes open, jaw tight,
+    doing the math again — the parent who needs more care than you can give, the teenager
+    who stopped talking to you, the work you brought home in your shoulders. The house
+    is finally quiet. Your body is not.
+  what_they_need: To understand what the tightness and the bracing actually are, why
+    a body that has carried everyone else's weight learned to never let go, and how
+    to let it begin to settle without being told to relax, breathe, or push through.
+  what_they_avoid: Stay-strong platitudes, sleep hacks, morning routines, breath-counting
+    apps, anything that treats their exhaustion as a discipline problem or rushes
+    them past what they are actually carrying.
 series_voice_markers:
-  register: hushed, night-paced, luminous
-  sentence_rhythm: long unhurried sentences, no punchy copy
-  metaphor_family: starfield, dim glow, water settling
-  second_person_default: true
-main_character_name: Gerard
-main_character_role: manager + parent + caregiver to aging parent
-main_character_image_path: null
-main_character_lora_id: gerard_sr_us
-main_character_trigger_word: gerard_sr_us
-plan_source_path: config/manga/manga_brand_series_plan.yaml
+  register: steady, nocturnal, quietly architectural — a calm presence who sits with
+    you through the heavy hours; holds without fixing, never clinical, never a coach,
+    never hustle
+  sentence_rhythm: unhurried and plainspoken; short declaratives that land like a
+    weight set down, then a longer line that lets the dark settle; second person throughout,
+    the voice of someone awake in the next room
+  metaphor_family: night and the dark room, foundations and what bears weight, a load
+    finally set down, the body settling toward rest, the quiet hours before dawn,
+    the structure that holds you while you let go
+_needs_authoring: false

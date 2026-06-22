@@ -1,0 +1,75 @@
+series_plan_schema: 1.0.0
+locale: en_US
+book_id_prefix: sleep_restoration__master_sha__healthcare_rns__courage
+brand: sleep_restoration
+teacher: master_sha
+persona: healthcare_rns
+topic: courage
+byline_author: silas_voss
+arc:
+  installment_1:
+    book_id: sleep_restoration__master_sha__healthcare_rns__courage__false_alarm
+    engine: false_alarm
+    master_arc: config/source_of_truth/master_arcs/healthcare_rns__courage__false_alarm__F006.yaml
+    duration: standard_book_60min
+  installment_2:
+    book_id: sleep_restoration__master_sha__healthcare_rns__courage__spiral
+    engine: spiral
+    master_arc: config/source_of_truth/master_arcs/healthcare_rns__courage__spiral__F006.yaml
+    duration: standard_book_60min
+  installment_3:
+    book_id: sleep_restoration__master_sha__healthcare_rns__courage__shame
+    engine: shame
+    master_arc: config/source_of_truth/master_arcs/healthcare_rns__courage__shame__F006.yaml
+    duration: standard_book_60min
+reader_promise_family: 'A steady presence for nurses who hold everyone else together:
+  permission to feel the fear under the competence, to set the weight down at the
+  end of a shift, and to find the quiet kind of courage that does not require you
+  to be unbreakable.'
+bestseller_hook_family: ''
+emotional_engine: courage_recognition
+comp_series:
+- 'Burnout (Emily and Amelia Nagoski) — why: speaks to depleted caregivers about completing
+  the stress cycle, but Night Architecture trades its science-explainer tone for a
+  quieter, sit-with-you-in-the-dark voice'
+- 'When the Body Says No (Gabor Mate) — why: validates that swallowed stress and unfelt
+  emotion lodge in the body, a truth nurses live, told here as nightfall comfort rather
+  than clinical case study'
+- 'The Body Keeps the Score (Bessel van der Kolk) — why: names how the nervous system
+  holds what the mind cannot, reframed for the night-shift reader who needs permission,
+  not a trauma textbook'
+platform_strategy:
+  primary:
+  - kdp_ebook
+  - audible
+  secondary:
+  - apple_books
+  - google_play
+  - spotify_audiobooks
+  launch_platform: kdp_ebook
+  cadence:
+    release_spacing_days: 14
+    max_books_per_brand_per_month: 2
+reader_avatar:
+  age: 29-52
+  where_they_are: It is 4am and you have just come off a twelve-hour shift, sitting
+    in your car in the hospital parking structure with the engine off, hands still
+    not quite steady, unable to go inside and unable to cry, replaying the patient
+    in bay four while everyone at work thinks you are the calm one.
+  what_they_need: To know that the bracing, the numbness, and the dread are not flaws
+    in you but the cost of staying steady for years, and that real courage is letting
+    yourself feel again without it ending you.
+  what_they_avoid: Push-through toughness, resilience pep-talks, self-care-Sunday
+    platitudes, anything that calls their exhaustion a mindset problem or rushes them
+    past grief, and any book that treats feeling as a weakness to be managed.
+series_voice_markers:
+  register: steady, nocturnal, quietly architectural; the voice of someone who sits
+    with you in the dark hours and holds without fixing, never clinical, never a coach,
+    never hustle
+  sentence_rhythm: calm and load-bearing; mostly short, settled sentences with an
+    occasional long one that lowers you gently, like weight easing onto a floor that
+    can hold it; deliberate pauses, nothing rushed
+  metaphor_family: night and the dark room, foundations and what bears weight, a load
+    finally set down, the body settling toward rest, the quiet hours before dawn,
+    the structure that holds you while you let go
+_needs_authoring: false
