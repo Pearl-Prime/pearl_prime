@@ -1,0 +1,74 @@
+series_plan_schema: 1.0.0
+locale: en_US
+book_id_prefix: resilient_parent__house__working_parents__compassion_fatigue
+brand: resilient_parent
+teacher: null
+persona: working_parents
+topic: compassion_fatigue
+byline_author: opal_janssen
+arc:
+  installment_1:
+    book_id: resilient_parent__house__working_parents__compassion_fatigue__overwhelm
+    engine: overwhelm
+    master_arc: config/source_of_truth/master_arcs/working_parents__compassion_fatigue__overwhelm__F006.yaml
+    duration: standard_book_60min
+  installment_2:
+    book_id: resilient_parent__house__working_parents__compassion_fatigue__grief
+    engine: grief
+    master_arc: config/source_of_truth/master_arcs/working_parents__compassion_fatigue__grief__F006.yaml
+    duration: standard_book_60min
+  installment_3:
+    book_id: resilient_parent__house__working_parents__compassion_fatigue__watcher
+    engine: watcher
+    master_arc: config/source_of_truth/master_arcs/working_parents__compassion_fatigue__watcher__F006.yaml
+    duration: standard_book_60min
+reader_promise_family: 'For the working parent who pours out care all day and has
+  nothing left for themselves: not one more task, not a fix, not a finish line — just
+  a few stolen minutes that are honestly yours, and the quiet recognition that what
+  you''re carrying has a name.'
+bestseller_hook_family: ''
+emotional_engine: compassion_fatigue_recognition
+comp_series:
+- 'Burnout: The Secret to Unlocking the Stress Cycle (Emily & Amelia Nagoski) — names
+  depletion in caregivers without shaming them, and refuses the optimization trap'
+- How to Keep House While Drowning (KC Davis) — meets the exhausted, care-saturated
+  parent exactly where they are with radical gentleness, not productivity
+- The Book You Wish Your Parents Had Read (Philippa Perry) — warm, plainspoken, deeply
+  human writing for parents that trusts the reader instead of lecturing them
+platform_strategy:
+  primary:
+  - kdp_ebook
+  - audible
+  secondary:
+  - apple_books
+  - google_play
+  - spotify_audiobooks
+  launch_platform: kdp_ebook
+  cadence:
+    release_spacing_days: 14
+    max_books_per_brand_per_month: 2
+reader_avatar:
+  age: 30s to mid-40s
+  where_they_are: It's 9:40pm. The kids are finally down, the dishwasher is humming,
+    and you're sitting on the closed lid of the toilet — the only door in the house
+    with a lock — not hiding exactly, just stealing ninety seconds before someone
+    calls your name again. You gave all day. You have nothing left and bedtime asks
+    for more.
+  what_they_need: To hear that the numbness isn't a character flaw, that running dry
+    from caring too much is a real and named thing, and to be handed something small
+    enough to hold in the few minutes they actually get — not a regimen, just permission
+    and a place to set the load down.
+  what_they_avoid: Perfect-parent pressure, 'self-care Sunday' commercialism, hustle-culture
+    optimization, toxic positivity, and any book that asks an already-depleted person
+    to add one more thing to the list.
+series_voice_markers:
+  register: warm, tender, knowing; the voice of someone who has sat on that same locked-bathroom
+    floor — gentle and real, never saccharine, never clinical, never preachy, never
+    hustle
+  sentence_rhythm: short, breath-shaped sentences that land like the pause in the
+    car before you go inside; plainspoken, unhurried, willing to stop mid-thought
+    and just sit with you
+  metaphor_family: the stolen moment, the few minutes that are yours, the quiet after
+    bedtime, the pause in the car before going in, the breath caught between demands,
+    the small still pocket in a full day, what you reclaim without anyone noticing
+_needs_authoring: false
