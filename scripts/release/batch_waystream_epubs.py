@@ -2,7 +2,8 @@
 """Batch Waystream Sanctuary EPUB production (pilot → full 800, resumable).
 
 Per plan book_id:
-  1. run_pipeline.py --pipeline-mode spine --render-book
+  0. create_job.py (ebook) + acknowledge_guide.py in workspace
+  1. run_pipeline.py --pipeline-mode spine --render-book --workspace <dir>
   2. build_epub.py with plan metadata + plan-keyed cover
 
 Outputs: artifacts/weekly_packages/way_stream_sanctuary/{week}/amazon_kdp/{book_id}.epub
@@ -18,6 +19,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import subprocess
 import sys
 from datetime import date
@@ -90,6 +92,64 @@ def _rendered_txt(book_id: str) -> Path | None:
     return txts[0] if txts else None
 
 
+def _pipeline_env() -> dict[str, str]:
+    return {**os.environ, "PYTHONPATH": str(REPO)}
+
+
+def _ensure_ebook_job(render_dir: Path, plan: dict, arc: Path) -> tuple[bool, str]:
+    """Create job.json and acknowledge guide (required by run_pipeline gate)."""
+    jf = render_dir / "job.json"
+    parts = plan["book_id"].split("__")
+    persona = parts[2]
+    topic = plan.get("topic") or parts[3]
+    env = _pipeline_env()
+    if not jf.is_file():
+        cmd = [
+            sys.executable,
+            str(REPO / "scripts/pipeline/create_job.py"),
+            "--pipeline",
+            "ebook",
+            "--workspace",
+            str(render_dir),
+            "--brand",
+            BRAND,
+            "--locale",
+            "en-US",
+            "--topic",
+            topic,
+            "--persona",
+            persona,
+            "--arc",
+            str(arc),
+            "--teacher",
+            "default_teacher",
+        ]
+        r = subprocess.run(cmd, cwd=str(REPO), env=env, capture_output=True, text=True, timeout=120)
+        if r.returncode != 0:
+            return False, (r.stderr or r.stdout)[-500:]
+    need_ack = True
+    if jf.is_file():
+        job = json.loads(jf.read_text(encoding="utf-8"))
+        need_ack = not job.get("guide_acknowledged")
+    if need_ack:
+        r2 = subprocess.run(
+            [
+                sys.executable,
+                str(REPO / "scripts/pipeline/acknowledge_guide.py"),
+                "--workspace",
+                str(render_dir),
+            ],
+            cwd=str(REPO),
+            env=env,
+            capture_output=True,
+            text=True,
+            timeout=120,
+        )
+        if r2.returncode != 0:
+            return False, (r2.stderr or r2.stdout)[-500:]
+    return True, "ok"
+
+
 def run_one(plan: dict, week: str, dry_run: bool, force: bool) -> dict:
     bid = plan["book_id"]
     out_epub = REPO / "artifacts/weekly_packages" / BRAND / week / "amazon_kdp" / f"{bid}.epub"
@@ -112,6 +172,9 @@ def run_one(plan: dict, week: str, dry_run: bool, force: bool) -> dict:
         }
 
     render_dir.mkdir(parents=True, exist_ok=True)
+    ok_job, job_err = _ensure_ebook_job(render_dir, plan, arc)
+    if not ok_job:
+        return {"book_id": bid, "status": "job_setup_fail", "error": job_err}
     cmd = [
         sys.executable, str(REPO / "scripts/run_pipeline.py"),
         "--topic", topic,
@@ -123,11 +186,12 @@ def run_one(plan: dict, week: str, dry_run: bool, force: bool) -> dict:
         "--runtime-format", runtime,
         "--render-book",
         "--render-dir", str(render_dir),
+        "--workspace", str(render_dir),
         "--out", str(plan_json),
         "--quality-profile", "production",
         "--seed", bid,
     ]
-    r = subprocess.run(cmd, cwd=str(REPO), env={**dict(__import__("os").environ), "PYTHONPATH": str(REPO)},
+    r = subprocess.run(cmd, cwd=str(REPO), env=_pipeline_env(),
                        capture_output=True, text=True, timeout=7200)
     if r.returncode != 0:
         return {"book_id": bid, "status": "pipeline_fail", "error": (r.stderr or r.stdout)[-500:]}
