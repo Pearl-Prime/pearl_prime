@@ -270,6 +270,7 @@ _F2B_PHRASAL_VERB_ENDINGS = frozenset({
     ("looking", "up"), ("looks", "up"), ("looked", "up"),
     ("breathing", "out"), ("breathe", "out"), ("breathes", "out"), ("breathed", "out"),
     ("letting", "go"), ("lets", "go"), ("let", "go"),
+    ("walking", "in"), ("walk", "in"), ("walks", "in"), ("walked", "in"),
 })
 
 # Stranding licensors: their presence anywhere in the sentence indicates the final
@@ -970,6 +971,15 @@ def load_hook_atoms_from_paths(paths: list[Path]) -> list[tuple[str, str]]:
 # generalized-mode anti-patterns banned by teacher_wrapper_templates.yaml
 # ("Master X says…", "I came across this teacher", "According to [named
 # individual]…"). These are register entries that bypassed the wrapper.
+# Common English compounds where "master" is not a teacher honorific (F12 precision).
+_F12_COMMON_MASTER_COMPOUNDS = frozenset({
+    "master bedroom", "master plan", "master key", "master copy", "master switch",
+    "master class", "master list", "master record", "master password", "master suite",
+    "master bath", "master bathroom", "master degree", "master file", "master volume",
+    "master this", "master that", "master the", "master your", "master a", "master an",
+    "master it", "master one",
+})
+
 F12_RAW_TEACHER_RE = re.compile(
     r"\b("
     r"Master\s+[A-Z][a-z]+(?:\s+(?:says|teaches|taught|said|tells|reminds|reminds us|teaches us))?"
@@ -1065,6 +1075,8 @@ def _detect_f12_unwrapped_voice_shift(
                     continue
                 flagged_spans.append(span)
                 marker = m.group(0)
+                if marker.lower() in _F12_COMMON_MASTER_COMPOUNDS:
+                    continue
                 lo = max(0, m.start() - F12_WINDOW_CHARS)
                 hi = min(len(ch_text), m.end() + F12_WINDOW_CHARS)
                 window = ch_text[lo:hi]

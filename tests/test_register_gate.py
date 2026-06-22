@@ -558,6 +558,7 @@ from phoenix_v4.quality.register_gate import (  # noqa: E402
         "The system was on.",
         "Before you noticed it, the alarm was already on.",
         "The light is still on.",
+        "You review for eleven minutes before walking in.",
     ],
 )
 def test_f2b_excludes_grammatical_stranded_prepositions(sentence: str) -> None:
@@ -641,4 +642,16 @@ def test_f2e_excludes_colon_introducing_a_list_or_content() -> None:
     findings2 = _detect_f2_broken_fragments(_split_chapters_for_test(prose_body))
     assert not any(f.evidence.get("rule") == "F2.E_colon_no_content" for f in findings2), (
         "F2.E false-positived on a colon introducing a following content paragraph"
+    )
+
+
+def test_f12_excludes_master_bedroom_compound_noun() -> None:
+    """'master bedroom' is a common English compound, not a teacher honorific."""
+    body = (
+        "Chapter 1\n\nYou wake at 3:47 a.m. in the dark of the master bedroom. "
+        "Your spouse's breathing is steady.\n"
+    )
+    result = evaluate_register(body)
+    assert not any(f.failure_id == "F12" for f in result.findings), (
+        "F12 must not flag 'master bedroom' as an un-wrapped teacher voice-shift"
     )

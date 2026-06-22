@@ -1240,6 +1240,71 @@ def _run_spine_pipeline_mode(
             ),
             encoding="utf-8",
         )
+    # Book-audit craft strengthen (2026-06-21): dwell beats (F13), practice-density cap
+    # (F7), transformation-arc landings, and terminal-sentence integrity — runs AFTER
+    # scene-anchor reducer so injected dwell beats are not trimmed as over-cap phrases.
+    # Strengthens OUTPUT only; register gate thresholds untouched.
+    from phoenix_v4.rendering.register_output_strengthen import strengthen_register_craft_output
+
+    prose = strengthen_register_craft_output(prose, seed=seed or book_plan.plan_id)
+    # Post-strengthen flow cue pass: register craft strengthen can strip thesis /
+    # actionable cues (e.g. F7 deprescription); re-run the word-bounded guarantee
+    # pass so chapter_flow is scored on the final manuscript.
+    prose = ensure_chapter_flow_cues(
+        prose, flow_profile=_flow_profile, seed=f"{seed}:post_strengthen"
+    )
+    # Flow-cue guarantee lines can re-introduce F7 prescribed-action false positives
+    # (imperative + timing substrings). Final cap before gates — thresholds untouched.
+    from phoenix_v4.rendering.register_output_strengthen import (
+        cap_prescribed_action_density as _final_cap_f7,
+        _exercise_contract_by_chapter,
+    )
+
+    _f7_caps = _exercise_contract_by_chapter(_governance_report)
+    _f7_max_by_chapter = {
+        ch: min(contract, 1) if contract > 0 else 0 for ch, contract in _f7_caps.items()
+    }
+    prose = _final_cap_f7(prose, max_per_chapter=1, max_by_chapter=_f7_max_by_chapter)
+    # F1/F4 dedupe must run AFTER flow-cue injection (same stage ordering as F7 cap).
+    from phoenix_v4.rendering.register_output_strengthen import (
+        dedupe_register_f1_paragraphs as _final_f1_dedupe,
+        ensure_unique_chapter_closings as _final_f4_closings,
+        remove_sub_four_word_orphan_paragraphs as _final_orphan_strip,
+    )
+
+    prose, _f1_dedupe_final = _final_f1_dedupe(prose)
+    if _f1_dedupe_final:
+        _governance_report.setdefault("register_f1_dedupe_notes", []).extend(_f1_dedupe_final)
+    prose = _final_f4_closings(prose, seed=f"{seed}:final_close")
+    prose = _final_orphan_strip(prose)
+    from phoenix_v4.rendering.register_output_strengthen import (
+        repair_f13_dwell_contract as _final_f13_repair,
+        verify_f7_exercise_preservation,
+    )
+
+    prose = _final_f13_repair(prose, seed=f"{seed}:post_flow_f13")
+    # Post-F13 flow-cue pass: dwell-beat / deprescribe inserts run after the first
+    # flow guarantee; re-run so chapter_flow is scored on the final manuscript.
+    prose = ensure_chapter_flow_cues(
+        prose, flow_profile=_flow_profile, seed=f"{seed}:post_f13_flow"
+    )
+    prose = _final_cap_f7(prose, max_per_chapter=1, max_by_chapter=_f7_max_by_chapter)
+    prose = _final_f13_repair(prose, seed=f"{seed}:post_f13_flow_recheck")
+
+    _f7_preservation_violations = verify_f7_exercise_preservation(
+        prose,
+        governance_report=_governance_report,
+        max_prescribed_per_chapter=1,
+    )
+    if _f7_preservation_violations:
+        _governance_report.setdefault(
+            "f7_exercise_preservation_violations", []
+        ).extend(_f7_preservation_violations)
+        print(
+            "F7 exercise-preservation check: "
+            + "; ".join(_f7_preservation_violations),
+            file=sys.stderr,
+        )
     word_count = len(prose.split())
     _quality_gate_failures: list[str] = []
     _chapter_flow_status = "SKIPPED"
@@ -1254,6 +1319,9 @@ def _run_spine_pipeline_mode(
     _memorable_total_chapters = 0
     _transform_status = "SKIPPED"
     _book_pass_status = "SKIPPED"
+    _register_status = "SKIPPED"
+    _register_verdict = ""
+    _register_f_counts: dict[str, int] = {}
 
     def _write_gate_report(report_name: str, payload: dict) -> Path:
         report_path = render_dir / report_name
@@ -1293,6 +1361,51 @@ def _run_spine_pipeline_mode(
             _write_gate_report(
                 _chapter_flow_report_name,
                 {"status": "SKIPPED", "reason": f"chapter_flow gate error: {_e}"},
+            )
+
+        try:
+            from phoenix_v4.quality.register_gate import evaluate_register
+
+            _reg_result = evaluate_register(
+                prose,
+                teacher_id=teacher_for_enrich or "",
+                persona_id=persona_id,
+                topic_id=topic_id,
+                quality_profile=quality_profile,
+            )
+            _register_verdict = _reg_result.verdict
+            _register_f_counts = {}
+            for _f in _reg_result.findings:
+                _register_f_counts[_f.failure_id] = _register_f_counts.get(_f.failure_id, 0) + 1
+            _register_status = (
+                "PASS"
+                if _register_verdict in ("PASS", "ADVISORY")
+                else ("WARN" if _register_verdict == "WARN" else "FAIL")
+            )
+            _register_path = _write_gate_report(
+                "register_gate_report.json",
+                {
+                    **_reg_result.to_json(),
+                    "status": _register_status,
+                    "failure_counts_by_id": _register_f_counts,
+                },
+            )
+            print(
+                f"Register gate: {_register_verdict} "
+                f"(F2={_register_f_counts.get('F2', 0)}, "
+                f"F6={_register_f_counts.get('F6', 0)}, "
+                f"F12={_register_f_counts.get('F12', 0)}). "
+                f"Report: {_register_path}",
+                file=sys.stderr,
+            )
+            if gates_hard and _register_verdict not in ("PASS", "ADVISORY"):
+                _quality_gate_failures.append("register_gate")
+        except Exception as _e:
+            _register_status = "SKIPPED"
+            print(f"Register gate error (non-blocking): {_e}", file=sys.stderr)
+            _write_gate_report(
+                "register_gate_report.json",
+                {"status": "SKIPPED", "reason": f"register_gate error: {_e}"},
             )
 
         try:
@@ -1924,6 +2037,12 @@ def _run_spine_pipeline_mode(
                 "chapter_flow": {
                     "status": _chapter_flow_status,
                     "report": _chapter_flow_report_name,
+                },
+                "register_gate": {
+                    "status": _register_status,
+                    "verdict": _register_verdict,
+                    "failure_counts_by_id": _register_f_counts,
+                    "report": "register_gate_report.json",
                 },
                 "bestseller_craft": {
                     "status": _craft_status,

@@ -1360,6 +1360,11 @@ _TRANSITION_GUARANTEE_LINES = (
     "Here is why that holds: the body learned this before you did, which means it can be re-learned through repetition, not insight alone.",
     "That is the mechanism, because the appraisal comes before the feeling, which means the leverage sits upstream of the emotion.",
 )
+_ACTIONABLE_GUARANTEE_LINES = (
+    "Pause here and notice what shifted, even slightly, while this lands.",
+    "Choose one small next step you can practice when the day ends.",
+    "Breathe out slowly and name what you are feeling without fixing it yet.",
+)
 
 
 def _has_cue(text: str, cues: tuple[str, ...]) -> bool:
@@ -1551,6 +1556,13 @@ def ensure_chapter_flow_cues(
                 if "MISSING_CLEAR_POINT" in errs and not _has_cue(chapter_body, _THESIS_CUES):
                     appended.append(
                         _CLEAR_POINT_GUARANTEE_LINES[digest[0] % len(_CLEAR_POINT_GUARANTEE_LINES)]
+                    )
+                if "NO_ACTIONABLE_STEP" in errs and not re.search(
+                    r"\b(breathe|pause|exhale|inhale|write|name|notice|choose|practice)\b",
+                    chapter_body.lower(),
+                ):
+                    appended.append(
+                        _ACTIONABLE_GUARANTEE_LINES[digest[2] % len(_ACTIONABLE_GUARANTEE_LINES)]
                     )
                 if "WEAK_TRANSITIONS" in errs:
                     _guard = 0
