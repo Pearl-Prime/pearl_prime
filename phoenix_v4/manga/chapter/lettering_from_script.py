@@ -5,6 +5,14 @@ Schema version history
 v1.0.0 — silence_confirmed only (legacy)
 v2.0.0 — adds dialogue_lines, sfx, narrator_caption, estimated_bubble_coverage
 
+Bubble-tail targeting (V2 render): each lettering panel also carries
+``character_head_bboxes`` — a fractional (0–1) head box per speaker derived
+from that speaker's bubble zone — so ``tail_geometry.resolve_mouth_pixel``
+points the tail at the speaker's face instead of the panel midline. A line the
+author tagged with an explicit ``mouth_anchor`` (or ``character_position``) is
+passed through verbatim and wins over the zone-derived box. Without this the
+renderer fell through to the bare zone heuristic and tails landed on torsos.
+
 Backward compatibility: v1 consumers only read ``silence_confirmed``, which
 is present in both versions.  v2 consumers read the full dialogue_lines list.
 """
@@ -58,6 +66,50 @@ _VALID_POSITIONS = frozenset({
     "bottom_left", "bottom_right", "bottom_center",
     "center_left", "center_right",
 })
+
+# ── Bubble zone → fractional speaker head box (0–1) ─────────────────
+# When a dialogue line's only positional signal is its bubble zone, assume the
+# speaker is framed beneath/beside that bubble with their HEAD in the upper part
+# of the zone's column. ``tail_geometry`` reads the mouth as the horizontal
+# center, ~top 15% of this box — so the tail reaches a face, not a torso. These
+# boxes are deliberately small and head-high (the prior midline fallback put the
+# target at y≈0.55, i.e. the waist → "tail points at the knees"). Authors can
+# override per-line with an explicit ``mouth_anchor`` / ``character_position``.
+_ZONE_HEAD_BOX: dict[str, dict[str, float]] = {
+    "top_left":      {"x1": 0.10, "y1": 0.26, "x2": 0.34, "y2": 0.50},
+    "top_right":     {"x1": 0.66, "y1": 0.26, "x2": 0.90, "y2": 0.50},
+    "top_center":    {"x1": 0.38, "y1": 0.28, "x2": 0.62, "y2": 0.52},
+    "bottom_left":   {"x1": 0.10, "y1": 0.52, "x2": 0.34, "y2": 0.76},
+    "bottom_right":  {"x1": 0.66, "y1": 0.52, "x2": 0.90, "y2": 0.76},
+    "bottom_center": {"x1": 0.38, "y1": 0.54, "x2": 0.62, "y2": 0.78},
+    "center_left":   {"x1": 0.08, "y1": 0.36, "x2": 0.32, "y2": 0.58},
+    "center_right":  {"x1": 0.68, "y1": 0.36, "x2": 0.92, "y2": 0.58},
+}
+
+
+def _derive_character_head_bboxes(
+    dialogue_lines: list[dict[str, Any]],
+) -> dict[str, dict[str, float]]:
+    """Build a per-speaker fractional head box from each line's bubble zone.
+
+    One box per distinct speaker (first occurrence wins, so a speaker who
+    appears twice keeps their first zone). Lines that already carry an explicit
+    ``mouth_anchor`` are skipped here — the renderer reads that anchor directly
+    and does not need a derived box. Returns ``{}`` when nothing is derivable,
+    in which case the renderer keeps its in-built zone fallback.
+    """
+    boxes: dict[str, dict[str, float]] = {}
+    for line in dialogue_lines:
+        if line.get("mouth_anchor"):
+            continue  # explicit anchor wins; no box needed
+        speaker = str(line.get("speaker") or "").strip()
+        if not speaker or speaker in boxes:
+            continue
+        hint = str(line.get("position_hint") or "").strip()
+        box = _ZONE_HEAD_BOX.get(hint)
+        if box is not None:
+            boxes[speaker] = dict(box)
+    return boxes
 
 
 def _panel_has_dialogue_text(panel: Mapping[str, Any]) -> bool:
@@ -184,6 +236,15 @@ def _extract_dialogue_lines(
             fol = item.get("font_override_by_locale")
             if isinstance(fol, dict):
                 line["font_override_by_locale"] = dict(fol)
+            # Pass author-supplied tail targeting through to the renderer. An
+            # explicit normalized mouth_anchor {x,y} wins over any zone-derived
+            # head box (tail_geometry checks mouth_anchor first).
+            ma = item.get("mouth_anchor")
+            if isinstance(ma, Mapping) and "x" in ma and "y" in ma:
+                try:
+                    line["mouth_anchor"] = {"x": float(ma["x"]), "y": float(ma["y"])}
+                except (TypeError, ValueError):
+                    pass
             lines.append(line)
 
     return lines
@@ -276,10 +337,21 @@ def build_lettering_spec_from_chapter_script(
 
         if schema_version != "1.0.0":
             # v2 fields
-            entry["dialogue_lines"] = _extract_dialogue_lines(panel, idx) if has_dlg else []
+            dlg_lines = _extract_dialogue_lines(panel, idx) if has_dlg else []
+            entry["dialogue_lines"] = dlg_lines
             entry["sfx"] = sfx
             entry["narrator_caption"] = caption
             entry["estimated_bubble_coverage"] = None
+            # Tail targeting: prefer author-supplied head boxes on the panel;
+            # otherwise derive a per-speaker head box from each line's bubble
+            # zone so V2 tails point at faces, not the panel midline.
+            authored_boxes = panel.get("character_head_bboxes")
+            if isinstance(authored_boxes, Mapping) and authored_boxes:
+                entry["character_head_bboxes"] = dict(authored_boxes)
+            else:
+                derived = _derive_character_head_bboxes(dlg_lines)
+                if derived:
+                    entry["character_head_bboxes"] = derived
 
         lettering_panels.append(entry)
 
