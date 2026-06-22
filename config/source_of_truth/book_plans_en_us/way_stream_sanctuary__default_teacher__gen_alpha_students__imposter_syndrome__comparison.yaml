@@ -16,17 +16,56 @@ target_word_range:
 target_audio_minutes: 70
 title: 'The Seat You Earned: Beyond the Highlight Reel'
 subtitle: How Students Are Rewriting the Rules of Imposter Syndrome
-cover_tagline: How Students Are Rewriting the Rules of Imposter Syndrome
+cover_tagline: Everyone in the room looks like they belong. So do you. They're just
+  better at the highlight reel.
 description:
-  short_blurb: How Students Are Rewriting the Rules of Imposter Syndrome A grounded,
-    secular guide to imposter syndrome for students.
-  long_description: 'The Seat You Earned: Beyond the Highlight Reel
+  short_blurb: You got in, you made the team, you earned the grade, and still some
+    part of you is convinced you fooled everyone, especially when you look around
+    at the people who seem to actually belong. This is a book for students about how
+    comparison fuels impostor syndrome, and how to stop using everyone else's confidence
+    as evidence against yourself. There is no fake-it-til-you-make-it advice here,
+    just the plain fact of the seat that was already yours.
+  long_description: 'You''re in the room you worked to get into, and instead of relief
+    there''s a low hum of dread. You look around at the other students, the ones who
+    raise their hands like it costs nothing, who seem to have read everything, who
+    carry themselves like they were born belonging here, and the math runs itself:
+    they''re the real ones, and you snuck in through a side door. Any minute now someone
+    is going to do the paperwork and figure out you don''t actually deserve the seat.
 
 
-    For a student under academic and social pressure. This book names what imposter
-    syndrome is doing in your body in language you can use — through recognition,
-    descent, and integration, not worksheets or forced positivity. Book 1 of the Students
-    imposter syndrome series.'
+    This book is for the student who earned their spot and can''t feel it, because
+    they''re too busy measuring themselves against everyone who looks more legit.
+    The one who got the acceptance, the role, the score, and immediately filed it
+    under luck, mistake, or fluke, while deciding everyone else clearly belongs by
+    right. If you''ve ever sat in a class or a team or a program convinced you''re
+    the single fraud surrounded by the genuinely qualified, this was written for you.
+    You''re comparing your inside to their outside, the doubt you feel against the
+    calm they perform, and then calling that rigged gap your proof.
+
+
+    Here is the work. First we name it: the problem isn''t that you don''t belong,
+    it''s that you''ve built a scoreboard out of other people''s confidence and quietly
+    ranked yourself dead last. Then we go down into the comparison itself, the highlight
+    reel of everyone who looks certain, and we get honest about everything you can''t
+    see from where you''re sitting, the shaking behind their raised hands, the rehearsed
+    calm, the fact that a good half of them are running the exact same fraud script
+    about you. We sit with how isolating it is to believe you''re the only impostor
+    in a room full of people who feel like impostors. And then you come back able
+    to hold your own seat without checking it against everyone else''s performance.
+
+
+    This book will not teach you to fake confidence until it magically becomes real.
+    It won''t promise the doubt vanishes the day you stop comparing, or that you''ll
+    suddenly feel like the most qualified person in the room. The highlight reel was
+    never the truth, and neither is the fantasy where you finally feel totally sure
+    of yourself.
+
+
+    What it offers is simpler and steadier than that. The seat is yours. You earned
+    it with the work nobody watched, the hours that don''t make it onto anyone''s
+    feed. You do not have to feel more impressive than the people around you in order
+    to deserve to stay in the room. You already deserve it. Put down the ruler. The
+    seat was always yours, whether or not it ever feels like it.'
 keywords:
   primary:
   - imposter syndrome
@@ -47,12 +86,16 @@ target_price:
   audible_usd: 9.99
   paperback_usd: 12.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: jonah_kim
 comp_titles:
-- The Secret Thoughts of Successful Women (Young)
-- Daring Greatly (Brown)
-- Mindset (Dweck)
+- The Secret Thoughts of Successful Women (Valerie Young) — the foundational secular
+  book on impostor syndrome
+- The Comparison Cure (Lucy Sheridan) — breaking the habit of measuring yourself against
+  everyone else
+- Mindset (Carol Dweck) — why ability is grown, not a fixed thing you either have
+  or fake
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -60,3 +103,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

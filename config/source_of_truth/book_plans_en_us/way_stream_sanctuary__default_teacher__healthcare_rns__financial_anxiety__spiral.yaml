@@ -16,17 +16,52 @@ target_word_range:
 target_audio_minutes: 70
 title: 'The Number in Your Head: Escaping the Mental Loop'
 subtitle: A Real Talk Guide to Financial Anxiety for Nurses
-cover_tagline: A Real Talk Guide to Financial Anxiety for Nurses
+cover_tagline: It's 3 a.m. One thought about the rent just became a thousand thoughts
+  about your whole life.
 description:
-  short_blurb: A Real Talk Guide to Financial Anxiety for Nurses A grounded, secular
-    guide to money anxiety for nurses.
-  long_description: 'The Number in Your Head: Escaping the Mental Loop
+  short_blurb: 'For the nurse who lies awake after a shift while a single money worry
+    multiplies into catastrophe — lose the apartment, can''t make the payment, what
+    if you get sick too. This is a real-talk guide to the financial spiral: how one
+    thought becomes a thousand, and how to step out of the loop without pretending
+    you''re fine.'
+  long_description: 'You know the loop. It starts small — a glance at the schedule,
+    a number that''s a little short this month. And then it''s moving: if this month
+    is short then next month is shorter, and if the car goes you can''t get to work,
+    and if you can''t get to work you lose the job, and if you lose the job, and if
+    you get sick like the patient in 4, and on, and on, faster than you can stop it.
+    It''s the middle of the night and your heart is going and you have to be back
+    on the floor in five hours and your mind is running a worst-case scenario it built
+    out of one real worry.
 
 
-    For a nurse at the end of a twelve-hour shift. This book names what money anxiety
-    is doing in your body in language you can use — through recognition, descent,
-    and integration, not worksheets or forced positivity. Book 3 of the Nurses money
-    anxiety series.'
+    This book is for nurses whose money anxiety isn''t a feeling so much as a velocity.
+    You''re trained to think three steps ahead — to anticipate the crash before the
+    monitor alarms. That instinct keeps your patients alive. At 3 a.m., turned on
+    your own bank account, it builds disasters that haven''t happened and may never
+    happen, and it does it with the full conviction of clinical reasoning. That''s
+    the spiral. One thought becomes a thousand, and the thousand feel like facts.
+
+
+    We start by naming the loop — catching the exact moment the single worry splits
+    and starts multiplying, the bodily tell that you''ve left the real problem and
+    entered the simulation. Then we go down into it instead of trying to outrun it,
+    because you can''t think your way out of a thinking problem and the reassurance
+    never holds. We''ll look at what the spiral is actually doing — trying to keep
+    you safe by living every catastrophe in advance — and what happens when you stop
+    feeding it the next link. You''ll learn to tell the one true thing from the thousand
+    invented ones. And you come back able to find the floor under the loop, even at
+    3 a.m.
+
+
+    This is not a calm-your-mind program and it won''t promise the spiral disappears.
+    The worry that started it might be real and the night shift isn''t going anywhere.
+    What it gives you is the difference between a problem you can hold and a runaway
+    you''re trapped inside — and a way to step out without lying to yourself that
+    everything''s okay.
+
+
+    You do not have to follow the thought all the way down. You can stop at the first
+    true one. The thousand can wait, and most of them will never come.'
 keywords:
   primary:
   - money anxiety
@@ -39,6 +74,7 @@ keywords:
   - nurses
   - money anxiety for nurses
 bisac_codes:
+- SEL036000
 - SEL027000
 - BUS050000
 - PSY022000
@@ -47,12 +83,16 @@ target_price:
   audible_usd: 9.99
   paperback_usd: 12.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: oscar_bello
 comp_titles:
-- The Psychology of Money (Housel)
-- Your Money or Your Life (Robin)
-- I Will Teach You to Be Rich (Sethi)
+- Don't Believe Everything You Think (Joseph Nguyen) — secular take on how thought-loops
+  generate suffering and how to step out
+- Unwinding Anxiety (Judson Brewer) — maps the mechanism of anxious loops without
+  spiritual framing
+- Your Money or Your Life (Vicki Robin & Joe Dominguez) — grounds runaway money fear
+  in concrete present-tense reality
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -60,3 +100,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

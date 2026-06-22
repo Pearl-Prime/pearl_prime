@@ -16,15 +16,60 @@ target_word_range:
 target_audio_minutes: 60
 title: 'The Thought That Won''t Leave: When One Thought Becomes a Thousand'
 subtitle: A One-Hour Overthinking Reset for Students
-cover_tagline: A One-Hour Overthinking Reset for Students
+cover_tagline: One thought. Then a thousand. Here's where it stops.
 description:
-  short_blurb: A One-Hour Overthinking Reset for Students The one-hour edition.
-  long_description: 'The Thought That Won''t Leave: When One Thought Becomes a Thousand
+  short_blurb: It starts with a single thought and ten minutes later you've imagined
+    failing the class, disappointing everyone, and ruining your whole life. This one-hour
+    reset shows you how the spiral actually works and how to step off it without forcing
+    yourself to think positive. No mantras, no journaling homework, just a clear look
+    at the machine and where its off-ramp is.
+  long_description: 'It always starts small. One thought. Maybe I shouldn''t have
+    said that. And then the next one clicks on, and the next, faster and faster, until
+    you''re lying there at 11pm absolutely certain you''re going to fail, everyone
+    secretly can''t stand you, and nothing is ever going to work out. Five minutes
+    ago you were fine. Now you''ve lived through four disasters that haven''t happened.
 
 
-    The one-hour edition: the core of the overthinking work for students, in a single
-    sitting. Recognition, descent, integration — no filler. Book 2 of the one-hour
-    Students overthinking series.'
+    This book is for the student whose mind takes one ordinary thought and turns it
+    into a thousand, who can go from a single missed homework question to my whole
+    future is over without taking a breath. You''re not overreacting on purpose. Your
+    brain found a thread and started pulling, and once it''s pulling, it feels impossible
+    to let go.
+
+
+    In one hour, Nina Vazquez shows you the spiral from the inside so you can finally
+    see how it runs. Recognition first: you''ll learn to catch the click, that exact
+    tiny moment when one thought hands off to the next and the speed picks up. Most
+    people never notice the click. Once you can feel it, you''ve found the only place
+    the spiral can actually be interrupted. Then descent: you stop trying to win the
+    argument with your own brain, you stop trying to think your way out, and instead
+    you go down underneath the thoughts to the feeling that''s actually driving all
+    of them. The spiral isn''t about the thoughts. It never was. It''s a feeling looking
+    for a story, and there are infinite stories. Then integration: you come back up
+    knowing the difference between a thought you''re having and a fact about your
+    life, and you''ve watched the whole thing slow down on its own.
+
+
+    This is straight talk, not a planner. There''s no list of affirmations to repeat
+    in the mirror, no command to just think positive, because trying to argue a spiral
+    usually just feeds it more material. There''s no promise that your mind will go
+    quiet forever, because a busy mind isn''t a broken one. What changes is that you
+    stop treating every fast scary thought like breaking news, and you learn you can
+    let the thoughts keep coming and still not chase a single one.
+
+
+    You''ll learn why thinking harder makes the spiral worse. You''ll learn how to
+    tell future-disaster fiction from your actual life right now. And you''ll learn
+    that you can be in the middle of a thousand thoughts and still put your feet on
+    the floor.
+
+
+    The next time one thought tries to become a thousand, you''ll know exactly what''s
+    happening, and knowing is the first thing that takes the speed away.
+
+
+    You don''t have to follow the thought. You''re allowed to let it go all the way
+    and just watch it pass. That''s where it stops.'
 keywords:
   primary:
   - stop overthinking
@@ -37,6 +82,7 @@ keywords:
   - overthinking for students
   - one hour
 bisac_codes:
+- SEL036000
 - SEL027000
 - SEL024000
 - PSY022000
@@ -45,12 +91,16 @@ target_price:
   audible_usd: 6.99
   paperback_usd: 9.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: nina_vazquez
 comp_titles:
-- Don't Believe Everything You Think (Nguyen)
-- Stop Overthinking (Hollins)
-- The Worry Trick (Carbonell)
+- Chatter (Ethan Kross) — the science of the inner voice and how to quiet a runaway
+  mental loop
+- Don't Believe Everything You Think (Joseph Nguyen) — separating a thought from a
+  fact to break the spiral
+- Rewire Your Anxious Brain (Catherine Pittman) — how the brain manufactures worry
+  chains and how to interrupt them
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -58,3 +108,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

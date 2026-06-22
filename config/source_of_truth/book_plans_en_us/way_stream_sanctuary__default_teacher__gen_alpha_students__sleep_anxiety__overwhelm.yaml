@@ -16,17 +16,54 @@ target_word_range:
 target_audio_minutes: 70
 title: 'The 3am Mind: The Shutdown Point'
 subtitle: A Real Talk Guide to Sleep Anxiety for Students
-cover_tagline: A Real Talk Guide to Sleep Anxiety for Students
+cover_tagline: Too much day, no off switch. By night your system just crashes.
 description:
-  short_blurb: A Real Talk Guide to Sleep Anxiety for Students A grounded, secular
-    guide to sleep anxiety for students.
-  long_description: 'The 3am Mind: The Shutdown Point
+  short_blurb: Some nights it's not one worry, it's all of it at once, the whole day
+    piling on at the exact moment you're supposed to rest. Your system hits its limit
+    and shuts down instead of softening into sleep. Here's how to meet the overwhelm
+    without trying to clear the whole pile first.
+  long_description: 'It''s not a single thought keeping you up. It''s everything.
+    The test and the text and the thing you forgot and the conversation you never
+    finished and the tomorrow you''re already dreading, all of it crashing in at once
+    the second you lie down and the distractions run out. It''s too much. Your chest
+    goes tight, your brain feels jammed, and instead of drifting off you hit a kind
+    of shutdown, frozen and overloaded and somehow still wide awake inside it. The
+    day asked too much of you, and now bedtime is the one stuck paying the bill.
 
 
-    For a student under academic and social pressure. This book names what sleep anxiety
-    is doing in your body in language you can use — through recognition, descent,
-    and integration, not worksheets or forced positivity. Book 2 of the Students sleep
-    anxiety series.'
+    This book is for the student who carries the entire day to bed, every open tab
+    of it. The one whose mind doesn''t spiral on one thing so much as drown in all
+    things at once. The one who''s so overloaded by lights-out that sleep feels like
+    one more demand on a list they already couldn''t finish. The one who lies there
+    maxed-out, too full to think and too wired to rest. If your sleep anxiety is the
+    feeling of too much hitting you all at once, this book is yours.
+
+
+    Nina Vazquez names it precisely: overwhelm, and the shutdown point your system
+    slams into when the load finally maxes out. You can''t sleep because there''s
+    no room left in you, every channel full, every input still blinking. First you
+    learn to recognize the exact moment you tip from busy into overloaded, the point
+    where it stops being a list of thoughts and becomes one solid wall. Then you go
+    down into it instead of fighting it, because trying to sort and solve the whole
+    pile before you''re allowed to sleep just throws more onto the pile. You stop
+    reaching for an off switch that was never there and let the overwhelm be as big
+    as it actually is, without managing it, without shrinking it. That''s the descent,
+    and it''s hard, letting yourself feel completely maxed-out without scrambling
+    to fix it or earn your way out. You come back changed, finally knowing you don''t
+    have to clear the whole load to be allowed to lie down and rest.
+
+
+    This book will not promise you an empty mind or a perfectly handled life where
+    nothing ever piles up. It won''t optimize your days into something so tidy that
+    overwhelm never comes knocking. You''re a student with a full, loud, demanding
+    life and a real limit, the same as everyone who''s honest about it. What shifts
+    is that you stop treating the pile as a thing you must finish before you''ve earned
+    permission to sleep, and you learn to lie down inside the too-much and let it
+    hold you instead of crush you.
+
+
+    You don''t have to carry all of it tonight. You''re allowed to set the day down
+    unfinished and rest.'
 keywords:
   primary:
   - insomnia help
@@ -39,6 +76,7 @@ keywords:
   - students
   - sleep anxiety for students
 bisac_codes:
+- SEL036000
 - SEL027000
 - HEA046000
 - PSY022000
@@ -47,12 +85,13 @@ target_price:
   audible_usd: 9.99
   paperback_usd: 12.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: nina_vazquez
 comp_titles:
-- Say Good Night to Insomnia (Jacobs)
-- The Sleep Solution (Winter)
-- Why We Sleep (Walker)
+- Burnout (Emily and Amelia Nagoski)
+- Why Has Nobody Told Me This Before? (Julie Smith)
+- Say Good Night to Insomnia (Gregg Jacobs)
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -60,3 +99,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

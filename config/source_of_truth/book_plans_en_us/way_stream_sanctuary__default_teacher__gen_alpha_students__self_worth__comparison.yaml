@@ -16,17 +16,58 @@ target_word_range:
 target_audio_minutes: 70
 title: 'The Voice That Says Not Enough: Beyond the Highlight Reel'
 subtitle: How Students Are Rewriting the Rules of Building Self Worth
-cover_tagline: How Students Are Rewriting the Rules of Building Self Worth
+cover_tagline: The voice says you're not enough. It's just doing math against everyone
+  else's edit.
 description:
-  short_blurb: How Students Are Rewriting the Rules of Building Self Worth A grounded,
-    secular guide to self-worth for students.
-  long_description: 'The Voice That Says Not Enough: Beyond the Highlight Reel
+  short_blurb: There's a voice in your head that says not enough, and it gets loudest
+    when you're scrolling, ranking yourself against people who look smarter, prettier,
+    or further ahead. This is a book for students about how comparison feeds that
+    voice, and how to stop letting strangers' highlight reels set the price of your
+    worth. There are no affirmations and no toxic positivity here, just the work of
+    turning down the volume on a voice that was never telling you the truth.
+  long_description: 'It''s a voice, and it has a favorite word: not enough. Not smart
+    enough, not interesting enough, not far enough along. And it gets loudest in the
+    quiet scroll before sleep, when you''re stacking yourself against everyone who
+    looks like they''re winning, the classmate with the effortless grades, the person
+    online with the life you''re sure you''ll never have. By the time you finally
+    put the phone down, the voice has its receipts laid out. You''re behind. You''re
+    less. You''re not enough, and now you''ve got the screenshots to prove it.
 
 
-    For a student under academic and social pressure. This book names what self-worth
-    is doing in your body in language you can use — through recognition, descent,
-    and integration, not worksheets or forced positivity. Book 1 of the Students self-worth
-    series.'
+    This book is for the student who lets comparison set the price of their worth,
+    and the price only ever climbs. The one who can''t watch someone else win without
+    it instantly becoming evidence of their own lack, who measures their entire value
+    against a feed full of carefully edited best-takes. If the not-enough voice runs
+    your whole day, if you''ve decided your worth is a ranking and you''re somehow
+    always losing, if comparing yourself to other people has gotten so automatic you
+    don''t even catch yourself doing it anymore, this was written for you. The voice
+    is not honest. It''s just very good at math, and it only ever feeds itself the
+    numbers that make you come out behind.
+
+
+    So we get to work. First we name it: the voice that says not enough is not reporting
+    the truth about your worth, it''s running a comparison engine that can never land
+    in your favor, because you''re always racing against an edit. Then we go down
+    into it, into what comparison actually is under the hood, your unfiltered insides
+    held up against everyone else''s filtered outsides, and why that''s a rigged game
+    you were never built to win. We sit with how genuinely exhausting it is to live
+    every day on a scoreboard you never agreed to step onto. And then you come back
+    up able to hear the voice without automatically believing it, because you can
+    finally see exactly where it''s getting its numbers.
+
+
+    This book will not hand you affirmations to repeat into a mirror. It won''t promise
+    the voice goes silent, or that you''ll wake up one morning loving yourself, or
+    that you''ll stop noticing what other people have and you don''t. That is not
+    how any of this works, and pretending otherwise is just one more edit dressed
+    up as help.
+
+
+    What it offers instead is this: your worth was never up for comparison in the
+    first place. It is not a ranking. It is not measured against the feed, against
+    the curve, against anyone. The voice that says not enough is just an old habit
+    running bad math on rigged numbers, and you do not have to take its word for anything
+    anymore. You were always enough. The scoreboard was the lie, start to finish.'
 keywords:
   primary:
   - self worth
@@ -47,12 +88,14 @@ target_price:
   audible_usd: 9.99
   paperback_usd: 12.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: jonah_kim
 comp_titles:
-- The Gifts of Imperfection (Brown)
-- Radical Acceptance (Brach)
-- You Are a Badass (Sincero)
+- The Comparison Cure (Lucy Sheridan) — secular, practical guide to ending the comparison
+  habit
+- Chatter (Ethan Kross) — the science of the inner voice and how to quiet it
+- Mindset (Carol Dweck) — replacing fixed self-judgment with a growth view of yourself
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -60,3 +103,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

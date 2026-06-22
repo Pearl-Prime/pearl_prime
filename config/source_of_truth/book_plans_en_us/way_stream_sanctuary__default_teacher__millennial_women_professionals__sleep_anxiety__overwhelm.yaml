@@ -16,17 +16,56 @@ target_word_range:
 target_audio_minutes: 70
 title: 'The 3am Mind: When Everything Is Too Much'
 subtitle: A Field Guide for Professional Women Navigating Sleep Anxiety
-cover_tagline: A Field Guide for Professional Women Navigating Sleep Anxiety
+cover_tagline: The whole next day lands on you the second the lights go off.
 description:
-  short_blurb: A Field Guide for Professional Women Navigating Sleep Anxiety A grounded,
-    secular guide to sleep anxiety for professional women.
-  long_description: 'The 3am Mind: When Everything Is Too Much
+  short_blurb: You lie down and the entire to-do list arrives at once — every deadline,
+    every unanswered message, every thing you're behind on, all of it stacked on your
+    chest in the dark. This is a book about the overwhelm that ambushes you precisely
+    when you're trying to rest.
+  long_description: 'The lights go off and it all arrives at once. Tomorrow''s meetings,
+    the thing you forgot to send, the project that''s quietly slipping, the text you
+    still haven''t answered, the low and total certainty that you are behind on everything,
+    everywhere — it lands on your chest in a single load the moment your head hits
+    the pillow. There is too much. It has all chosen 11pm to demand handling at the
+    same time. And you cannot rest underneath the weight of it.
 
 
-    For a professional woman holding more than she can say. This book names what sleep
-    anxiety is doing in your body in language you can use — through recognition, descent,
-    and integration, not worksheets or forced positivity. Book 2 of the Professional
-    Women sleep anxiety series.'
+    This is for the professional woman who feels buried the instant she stops moving
+    — the one who stays a single step ahead of the flood all day long and gets caught
+    by it at night, when there is no task left to do, only the crushing arithmetic
+    of how much there is. You are not disorganized. You are not weak, and you are
+    not bad at this. There is genuinely a lot on you, and your mind has chosen the
+    worst possible hour to set every piece of it down on your sternum at once.
+
+
+    First you learn to name the overwhelm as overwhelm — not as a true and urgent
+    accounting of all the ways you are failing, but as everything hitting you in a
+    single heap because it is arriving simultaneously instead of one item at a time.
+    Then, instead of trying to mentally sort the pile at midnight (which only ever
+    makes it taller), you go down into the raw feeling of too-much itself. You stop
+    trying to carry the entire next day while lying flat in the dark. You let the
+    weight be as heavy as it is without hoisting it onto your shoulders. And the pile,
+    left untouched, finally stops growing — because the thing feeding it, all along,
+    was you reaching up to manage it.
+
+
+    This book will not promise to clear your plate, or to optimize your time, or to
+    give you a bedtime system that empties your mind onto a list so you can sleep.
+    It will not make you a woman with less on her shoulders. What changes is that
+    the weight stops crushing you the moment you lie down — you stop trying to lift
+    tomorrow tonight, with no daylight and no help.
+
+
+    Written in direct, no-nonsense language you can use the next time the whole list
+    lands on you at once. No brain-dump worksheets. No brisk advice to simply prioritize.
+    Just an honest field guide to the overwhelm that finds you in the dark and a way
+    to lie down underneath it without trying to hold the ceiling up.
+
+
+    It is allowed to be too much. That is not a problem you have to solve before you''re
+    permitted to rest. You can let the entire weight of tomorrow sit there in the
+    dark, unlifted, and sleep anyway — because the pile will still be there in the
+    morning, and so, finally rested, will you.'
 keywords:
   primary:
   - insomnia help
@@ -39,6 +78,7 @@ keywords:
   - professional women
   - sleep anxiety for professional women
 bisac_codes:
+- SEL036000
 - SEL027000
 - HEA046000
 - PSY022000
@@ -47,12 +87,16 @@ target_price:
   audible_usd: 9.99
   paperback_usd: 12.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: sofia_marchetti
 comp_titles:
-- Say Good Night to Insomnia (Jacobs)
-- The Sleep Solution (Winter)
-- Why We Sleep (Walker)
+- Burnout (Emily Nagoski & Amelia Nagoski) — names the cumulative load that crushes
+  you when you finally stop
+- Four Thousand Weeks (Oliver Burkeman) — frees you from the belief you can get on
+  top of everything
+- How to Keep House While Drowning (KC Davis) — meets the overwhelmed mind with relief
+  instead of more tasks
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -60,3 +104,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

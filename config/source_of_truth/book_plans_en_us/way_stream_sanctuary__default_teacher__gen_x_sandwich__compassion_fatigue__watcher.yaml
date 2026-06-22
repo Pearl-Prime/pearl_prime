@@ -16,17 +16,60 @@ target_word_range:
 target_audio_minutes: 70
 title: 'The Cost of Caring: Watching Your Thoughts Without Drowning'
 subtitle: A Real Talk Guide to Compassion Fatigue for the Sandwich Generation
-cover_tagline: A Real Talk Guide to Compassion Fatigue for the Sandwich Generation
+cover_tagline: You can't stop monitoring everyone you love, and it's bleeding you
+  dry.
 description:
-  short_blurb: A Real Talk Guide to Compassion Fatigue for the Sandwich Generation
-    A grounded, secular guide to compassion fatigue for the sandwich generation.
-  long_description: 'The Cost of Caring: Watching Your Thoughts Without Drowning
+  short_blurb: Compassion fatigue isn't only about giving too much — it's about a
+    mind that never stops watching everyone you're responsible for. This is a grounded,
+    secular book about the hypervigilant caregiver brain, and how to put it off duty
+    without abandoning the people you love. Real talk for those who scan for everyone's
+    pain until there's nothing left of their own attention.
+  long_description: 'You''re at dinner but you''re not really there. Half of you is
+    reading your father''s face for the next decline, the other half is scanning your
+    kid for the thing they''re not saying, and a third part you didn''t know you had
+    is already bracing for tomorrow''s phone call. You can''t remember the last time
+    your attention was just yours — fully in one place, off duty, not monitoring anyone.
 
 
-    For caring for aging parents and growing kids at once. This book names what compassion
-    fatigue is doing in your body in language you can use — through recognition, descent,
-    and integration, not worksheets or forced positivity. Book 3 of the the Sandwich
-    Generation compassion fatigue series.'
+    That''s the watcher inside compassion fatigue: a mind locked into surveillance
+    of everyone you''re responsible for. When you''re holding aging parents and growing
+    kids at once, you learned to track them constantly, because catching the early
+    sign is how you keep them safe. But the watching never clocks out now. It runs
+    in the background of every meal, every conversation, every supposed moment of
+    rest, quietly draining you through a thousand small alerts a day.
+
+
+    Picture the person whose mind is always half-elsewhere, always assessing how everyone
+    else is doing, who can''t read their own book without an ear cocked for someone
+    else''s need — whose empathy has curdled into a permanent threat-scan. That''s
+    the person this book is speaking to, and you may recognize yourself in them.
+
+
+    It won''t tell you to be present or just let go. The watching doesn''t obey commands;
+    it only digs in deeper when you order it to stop. What helps instead is seeing
+    the hypervigilant monitoring as something your mind is doing out of love and fear,
+    not as the simple truth that everyone needs constant guarding. Spotting that gap
+    is where the loosening begins.
+
+
+    Then the descent. You''ll get better at noticing the scanning without automatically
+    obeying it, letting your attention rest on one thing — even yourself — without
+    the panic that you''ve dropped your guard. You''ll feel what drives the watching,
+    usually the terror of missing the thing that matters, and discover that you can
+    love people without surveilling them every waking minute. Slowly, you can be with
+    them instead of monitoring them.
+
+
+    This is not a promise of a mind that stops caring. Some of your watchfulness is
+    hard-won knowledge, and the stakes are real. What the book offers is the difference
+    between attention that loves and attention that depletes — the ability to take
+    your mind off the wall when it''s safe to, so your own life stops happening in
+    your peripheral vision.
+
+
+    You do not have to track everyone you love every second to be enough for them.
+    You are allowed to bring your full attention home, to yourself, for stretches
+    at a time. The watching can rest, and you get to be the one who finally lets it.'
 keywords:
   primary:
   - compassion fatigue
@@ -47,12 +90,16 @@ target_price:
   audible_usd: 9.99
   paperback_usd: 12.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: sam_meridian
 comp_titles:
-- Trauma Stewardship (van Dernoot Lipsky)
-- Burnout (Nagoski)
-- The Compassion Fatigue Workbook (Mathieu)
+- Trauma Stewardship (Laura van Dernoot Lipsky) — addresses the chronic hypervigilance
+  of caregiving directly
+- Unwinding Anxiety (Judson Brewer) — shows how to step out of a compulsive monitoring
+  loop
+- Why Zebras Don't Get Ulcers (Robert Sapolsky) — explains the toll of a body and
+  mind that never leave high alert
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -60,3 +107,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

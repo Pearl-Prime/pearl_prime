@@ -16,17 +16,58 @@ target_word_range:
 target_audio_minutes: 70
 title: 'The Seat You Earned: Carrying What You Can''t Say'
 subtitle: A Field Guide for Students Navigating Imposter Syndrome
-cover_tagline: A Field Guide for Students Navigating Imposter Syndrome
+cover_tagline: The fear of being exposed isn't about the work. It's an old belief
+  that you're not really enough.
 description:
-  short_blurb: A Field Guide for Students Navigating Imposter Syndrome A grounded,
-    secular guide to imposter syndrome for students.
-  long_description: 'The Seat You Earned: Carrying What You Can''t Say
+  short_blurb: Impostor syndrome doesn't feel like nerves, it feels like a secret,
+    the buried certainty that if anyone ever saw the real you, they'd know you don't
+    belong. This is a book for students about the shame underneath the impostor feeling,
+    the belief that you're fundamentally not enough no matter what you achieve. We
+    are not going to pump you up. We are going to name the thing you've been hiding
+    and help you set it down for good.
+  long_description: 'It''s not nervousness. Nerves come and go. This is quieter and
+    far heavier, a secret you carry into every classroom and tryout and application:
+    the flat certainty that you are not really enough, that everything you''ve achieved
+    is a costume, and that one day the costume slips and everyone finally sees the
+    real you underneath, the one who was never good enough to be in the room in the
+    first place.
 
 
-    For a student under academic and social pressure. This book names what imposter
-    syndrome is doing in your body in language you can use — through recognition,
-    descent, and integration, not worksheets or forced positivity. Book 2 of the Students
-    imposter syndrome series.'
+    This book is for the student whose impostor syndrome isn''t really about confidence,
+    it''s about shame. The one who could collect every award on offer and still feel
+    like a fraud, because the problem was never the resume. It was a belief planted
+    long ago that something about you is fundamentally lacking, something no achievement
+    reaches. If you''ve ever gotten the exact thing you wanted and felt nothing but
+    the fear of being found out, if praise makes you flinch because they clearly don''t
+    know the real you, if you''re worn down from guarding a self you''re convinced
+    is unworthy, you are in the right place. That belief is not a fact about you.
+    Someone or something taught it to you, and you''ve been carrying it like gospel
+    ever since.
+
+
+    We will not pump you full of affirmations, because the problem isn''t that you
+    forgot you''re great. The problem is a buried story that says you''re not enough,
+    and you cannot out-achieve a story by stacking trophies on top of it. So we name
+    it plainly: this is shame, the quiet conviction that something is wrong with you,
+    wearing impostor syndrome as a disguise. Then we go down into it, all the way
+    to where it started, the moment you decided your worth had to be earned and re-earned
+    and could vanish the instant you slipped. We don''t sprint past that moment, because
+    understanding it is how you loosen its grip. And then you come back up no longer
+    hauling the secret, because you''ve finally seen it for what it actually is, an
+    old belief, not a verdict that was ever handed down about you.
+
+
+    This book won''t promise you''ll feel like enough by the final page, or that one
+    more achievement will finally fill the hole that achievement keeps failing to
+    fill. It will not optimize the fear cleanly away. That was never the point, and
+    it was never possible.
+
+
+    The point is that you stop hiding. You realize the thing you''ve been so terrified
+    people will discover, that you''re not enough, was a lie you were handed young
+    and have been loyally protecting ever since. You can set it down. You earned your
+    seat with the real you, the one under the costume, not the costume itself. The
+    real you was always enough to be here, exactly as you are.'
 keywords:
   primary:
   - imposter syndrome
@@ -47,12 +88,16 @@ target_price:
   audible_usd: 9.99
   paperback_usd: 12.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: jonah_kim
 comp_titles:
-- The Secret Thoughts of Successful Women (Young)
-- Daring Greatly (Brown)
-- Mindset (Dweck)
+- Daring Greatly (Brené Brown) — the core secular work on shame, worthiness, and being
+  seen
+- The Secret Thoughts of Successful Women (Valerie Young) — naming the impostor feeling
+  for what it is
+- The Gifts of Imperfection (Brené Brown) — letting go of who you think you're supposed
+  to be
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -60,3 +105,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

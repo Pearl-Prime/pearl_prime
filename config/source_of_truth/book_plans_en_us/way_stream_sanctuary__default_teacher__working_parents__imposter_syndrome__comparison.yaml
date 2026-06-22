@@ -16,17 +16,58 @@ target_word_range:
 target_audio_minutes: 70
 title: 'The Seat You Earned: The Comparison Trap'
 subtitle: A Field Guide for Working Parents Navigating Imposter Syndrome
-cover_tagline: A Field Guide for Working Parents Navigating Imposter Syndrome
+cover_tagline: Everyone in the meeting seems to belong. You're the only one waiting
+  to be found out.
 description:
-  short_blurb: A Field Guide for Working Parents Navigating Imposter Syndrome A grounded,
-    secular guide to imposter syndrome for working parents.
-  long_description: 'The Seat You Earned: The Comparison Trap
+  short_blurb: 'You earned the role, the promotion, the seat at the table, and you
+    spend every meeting convinced you''re the least qualified person there. This is
+    a book about the comparison that fuels imposter syndrome: measuring your private
+    doubt against everyone else''s public ease. It won''t hand you confidence. It
+    will show you the rigged math you keep running.'
+  long_description: 'The meeting starts and you scan the room. She speaks like she''s
+    never doubted a thing in her life. He drops the data point you were going to make,
+    but smoother, like it cost him nothing. You sit there cross-referencing your shaky
+    insides against their composed outsides and arriving, again, at the same verdict:
+    everyone here belongs and you somehow slipped through the cracks. Meanwhile your
+    kid has texted twice and you haven''t answered, which somehow proves you''re failing
+    at that too, on both fronts at once.
 
 
-    For a working parent with no minute that''s their own. This book names what imposter
-    syndrome is doing in your body in language you can use — through recognition,
-    descent, and integration, not worksheets or forced positivity. Book 1 of the Working
-    Parents imposter syndrome series.'
+    This book is for the working parent who earned the seat and cannot stop comparing
+    their way back out of it. You came back from leave half a step behind and never
+    once felt caught up. You watch colleagues who aren''t splitting their attention
+    between a deadline and a daycare pickup, who aren''t running the afternoon logistics
+    in the back of their head during the strategy review, and you read their apparent
+    ease as proof of your own inadequacy. The comparison runs constantly, a background
+    process you can''t quit, and it always, always rules against you.
+
+
+    We name the trap first. Imposter syndrome isn''t a fair assessment of your competence;
+    it''s a comparison engine fed deliberately bad inputs, your full unedited interior
+    doubt stacked against the curated calm everyone else is performing just as hard
+    as you are. Then we go down into where the measuring started, the long habit of
+    locating your worth in the gap between you and the next person, a habit so old
+    you''ve never tried life without it. We stay there until you can feel the difference
+    between what you actually did and the ranking your mind slapped on top of it.
+    And then we come back up able to sit in a room without auto-sorting yourself to
+    dead last before anyone has said a word.
+
+
+    This is not a confidence-building book. It will not teach you to feel as composed
+    as the colleague you envy, or to win the comparison by finally being the most
+    impressive person at the table. There is no version where you out-credential the
+    doubt into silence. The change is quieter and sturdier: you stop running the rigged
+    math, so the seat you earned stops feeling borrowed and starts feeling like a
+    chair you''re allowed to sit in.
+
+
+    Written in plain, grounded language for the meeting where the old ranking kicks
+    in and your kid''s unanswered text is burning a hole in your pocket. No power
+    poses, no mantras, no faking it till you make it.
+
+
+    You are not an imposter. You''re comparing your behind-the-scenes to everyone
+    else''s press release. You already belong in the seat. Stop auditing the receipt.'
 keywords:
   primary:
   - imposter syndrome
@@ -47,12 +88,16 @@ target_price:
   audible_usd: 9.99
   paperback_usd: 12.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: hannah_stern
 comp_titles:
-- The Secret Thoughts of Successful Women (Young)
-- Daring Greatly (Brown)
-- Mindset (Dweck)
+- The Confidence Code (Kay & Shipman) — the research on competence vs. the feeling
+  of it
+- Daring Greatly (Brené Brown) — why exposure feels like fraud and what to do with
+  it
+- Playing Big (Tara Mohr) — the inner-critic and comparison loop, in secular practical
+  terms
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -60,3 +105,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

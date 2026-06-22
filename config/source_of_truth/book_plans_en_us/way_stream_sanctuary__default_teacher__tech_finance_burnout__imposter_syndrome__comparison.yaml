@@ -16,19 +16,58 @@ target_word_range:
 target_audio_minutes: 70
 title: 'The Seat You Earned: When Other People''s Success Feels Like Your Failure'
 subtitle: A Field Guide for Tech and Finance Professionals Navigating Imposter Syndrome
-cover_tagline: A Field Guide for Tech and Finance Professionals Navigating Imposter
-  Syndrome
+cover_tagline: Everyone else looks certain because you can't see their inbox at 2am.
 description:
-  short_blurb: A Field Guide for Tech and Finance Professionals Navigating Imposter
-    Syndrome A grounded, secular guide to imposter syndrome for tech & finance professionals.
-  long_description: 'The Seat You Earned: When Other People''s Success Feels Like
-    Your Failure
+  short_blurb: You scan the room in the meeting and conclude that everyone belongs
+    except you — because they look sure and you feel like a fraud. In tech and finance,
+    imposter syndrome runs on comparison. This is a book about the measuring that
+    keeps you feeling unqualified for a seat you earned.
+  long_description: 'You''re in the review, and the person across the table speaks
+    with the kind of certainty you''ve never once felt about your own work. So you
+    do the math you always do: they belong here, and you snuck in. Their confidence
+    becomes evidence against you. By the time it''s your turn to talk, you''ve already
+    filed yourself under fraud.
 
 
-    For a tech or finance professional running on empty. This book names what imposter
-    syndrome is doing in your body in language you can use — through recognition,
-    descent, and integration, not worksheets or forced positivity. Book 1 of the Tech
-    & Finance Professionals imposter syndrome series.'
+    This book is for the people in tech and finance who feel like imposters — and
+    who built that feeling almost entirely out of comparison. The engineer certain
+    everyone else understands the system design they''re nodding along to. The analyst
+    who reads a peer''s polished model and concludes they themselves are faking it.
+    The one who looks around a room full of people performing certainty and decides
+    they''re the only one improvising.
+
+
+    Ana Reyes names the actual mechanism, because it isn''t a lack of skill. It''s
+    comparison. Imposter syndrome is what happens when you measure your unedited inside
+    — the doubt, the second-guessing, the 2am Stack Overflow tab — against everyone
+    else''s edited outside. You''re comparing your bloopers to their highlight reel
+    and calling the gap a verdict on whether you belong. The math is rigged from the
+    start, and you run it a dozen times a day without noticing.
+
+
+    The book goes down into that, instead of trying to argue you out of it with your
+    own resume. You''ll sit in the exact moment the comparison fires — the colleague
+    who sounds so sure, the LinkedIn post about the promotion, the peer who "just
+    gets it." You''ll feel what it does: the instant shrink, the certainty that everyone
+    is qualified but you. Staying in that moment, watching the comparison happen in
+    real time, is the work. Not collecting more proof. Feeling how the fraud feeling
+    is manufactured.
+
+
+    Then you come back up able to tell your inside from their outside. You''ll learn
+    that the certainty you''re comparing against is mostly performance — that the
+    person who intimidates you is running their own quiet audit. You''ll catch the
+    comparison earlier, before it hardens into "I don''t belong here." You''ll start
+    to occupy the seat you actually earned.
+
+
+    This will not promise you unshakable confidence or a way to feel qualified on
+    demand. It won''t hand you a list of accomplishments to recite when the doubt
+    hits. There''s no power pose. There is only the real work of noticing when you''re
+    measuring your raw footage against everyone else''s final cut — and stopping.
+
+
+    You earned the seat. The fraud feeling is just the comparison talking.'
 keywords:
   primary:
   - imposter syndrome
@@ -49,12 +88,15 @@ target_price:
   audible_usd: 9.99
   paperback_usd: 12.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: ana_reyes
 comp_titles:
-- The Secret Thoughts of Successful Women (Young)
-- Daring Greatly (Brown)
-- Mindset (Dweck)
+- The Secret Thoughts of Successful Women (Valerie Young) — the foundational secular
+  book on imposter syndrome's patterns
+- The Gifts of Imperfection (Brené Brown) — dismantles the comparison that fuels feeling
+  like a fraud
+- Mindset (Carol Dweck) — reframes others' apparent ease as effort you can't see
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -62,3 +104,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

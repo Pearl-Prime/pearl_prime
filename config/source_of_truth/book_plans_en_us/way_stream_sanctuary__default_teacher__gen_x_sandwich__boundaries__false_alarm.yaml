@@ -16,17 +16,55 @@ target_word_range:
 target_audio_minutes: 70
 title: 'The Line You Never Drew: When Fear Lies to You'
 subtitle: A Real Talk Guide to Setting Boundaries for the Sandwich Generation
-cover_tagline: A Real Talk Guide to Setting Boundaries for the Sandwich Generation
+cover_tagline: Your body says danger. Saying no is not danger.
 description:
-  short_blurb: A Real Talk Guide to Setting Boundaries for the Sandwich Generation
-    A grounded, secular guide to boundaries for the sandwich generation.
-  long_description: 'The Line You Never Drew: When Fear Lies to You
+  short_blurb: The second you go to say no, your chest tightens and your stomach drops
+    like something terrible is about to happen. Nothing is. This is a book about the
+    false alarm your body fires every time you try to draw a line, and how to tell
+    a real threat from an old reflex.
+  long_description: 'You know the feeling. Your mother asks for one more thing. Your
+    boss drops it on you at 4:45. Your kid needs the ride you swore you couldn''t
+    do. And before you even open your mouth, your body has already answered — heart
+    going, face hot, that drop in the gut like you''re standing at the edge of something.
+    So you say yes. Again. Because the alarm felt like truth.
 
 
-    For caring for aging parents and growing kids at once. This book names what boundaries
-    is doing in your body in language you can use — through recognition, descent,
-    and integration, not worksheets or forced positivity. Book 2 of the the Sandwich
-    Generation boundaries series.'
+    It wasn''t. It was a false alarm. Your nervous system flagged "saying no to someone
+    I love" as a threat to survival, and it''s wrong, and it''s been wrong for years.
+
+
+    This book is for you — the one holding a family together from the middle, parents
+    leaning on you, kids depending on you, no slack anywhere in the line. You''ve
+    been told you have a boundary problem. You don''t. You have a body that confuses
+    other people''s disappointment with danger, and it fires every time you reach
+    for the word no.
+
+
+    First you learn to recognize the alarm for what it is: not a warning, just a smoke
+    detector going off because someone made toast. You''ll learn the exact physical
+    tells — the tight chest, the rehearsed apology, the yes that leaves your mouth
+    before your brain arrives. Then you descend, instead of fixing. You don''t talk
+    yourself out of the fear or breathe it away. You go down into it and feel what''s
+    actually there: not danger, but the very old belief that if you stop carrying
+    everyone, you''ll lose them. You stay with that. And you come back changed — the
+    alarm still sounds, but you can finally tell it apart from a real fire.
+
+
+    No scripts. No worksheets. No "just feel the fear and do it anyway" that ignores
+    why the fear is screaming in the first place. This will not promise to make the
+    alarm stop — your body learned this protection a long time ago and it doesn''t
+    unlearn on a deadline. It will not turn you into someone who says no without a
+    flicker.
+
+
+    What it gives you is the ability to name what''s happening — "that''s the false
+    alarm, not a real threat" — in the moment, in plain words, while it''s still firing.
+    That''s the whole shift. The alarm rings, and you no longer mistake it for the
+    truth.
+
+
+    The danger was never real. You''re allowed to feel the fear and stay exactly where
+    you are.'
 keywords:
   primary:
   - setting boundaries
@@ -47,12 +85,16 @@ target_price:
   audible_usd: 9.99
   paperback_usd: 12.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: sam_meridian
 comp_titles:
-- Set Boundaries Find Peace (Tawwab)
-- Boundaries (Cloud & Townsend)
-- The Disease to Please (Braiker)
+- The Body Keeps the Score (Bessel van der Kolk) — secular account of how the body
+  fires threat responses that no longer match reality.
+- Set Boundaries, Find Peace (Nedra Glover Tawwab) — practical, non-spiritual guide
+  to the guilt and fear that make 'no' feel dangerous.
+- Why Zebras Don't Get Ulcers (Robert Sapolsky) — explains why a stress response built
+  for real predators misfires over everyday social pressure.
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -60,3 +102,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

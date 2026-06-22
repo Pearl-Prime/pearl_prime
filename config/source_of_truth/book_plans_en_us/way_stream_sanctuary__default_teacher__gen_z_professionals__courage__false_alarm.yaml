@@ -16,17 +16,54 @@ target_word_range:
 target_audio_minutes: 70
 title: 'The Thing You Won''t Say: The False Alarm Response'
 subtitle: A Field Guide for Young Professionals Navigating Building Courage
-cover_tagline: A Field Guide for Young Professionals Navigating Building Courage
+cover_tagline: Your body thinks the Slack message is a bear. It isn't.
 description:
-  short_blurb: A Field Guide for Young Professionals Navigating Building Courage A
-    grounded, secular guide to courage for young professionals.
-  long_description: 'The Thing You Won''t Say: The False Alarm Response
+  short_blurb: 'There''s a thing you keep not saying — in the meeting, in the one-on-one,
+    in the group chat — and your body treats saying it like stepping off a cliff.
+    This is a grounded, secular guide to the false-alarm response: the racing heart
+    and dry mouth that fire when there''s no actual danger, only a hard sentence.
+    It won''t make you fearless. It''ll make the alarm legible enough to move anyway.'
+  long_description: 'You typed the message. You deleted it. You typed it again. Your
+    thumb is over send and your heart is going like you''re about to be fired, except
+    all you''re doing is telling your manager you can''t take on the third project.
+    That''s the thing you won''t say. And your body has decided it''s a threat.
 
 
-    For early in a demanding career, phone always buzzing. This book names what courage
-    is doing in your body in language you can use — through recognition, descent,
-    and integration, not worksheets or forced positivity. Book 1 of the Young Professionals
-    courage series.'
+    This book is for you — early in a career that already asks a lot, where every
+    unsent message and unspoken boundary stacks up into a low hum you carry home.
+    The promotion you didn''t ask for. The credit you let someone else take. The ''actually,
+    I disagree'' that dissolved in your mouth at the all-hands. You''re not a coward.
+    Your alarm system is just doing exactly what it''s built to do, at exactly the
+    wrong moment.
+
+
+    Here''s what''s actually happening: the false alarm is your nervous system mistaking
+    a social risk for a physical one. The same circuitry that should fire for a real
+    bear is firing for a hard conversation — same flood of adrenaline, same narrowed
+    vision, same urge to bolt — except there''s no bear, only a sentence you''re afraid
+    to say. Recognition comes first: learning to feel the surge and name it as alarm,
+    not truth. The pounding isn''t information about how dangerous the moment is.
+    It''s just the volume knob, stuck on high. Then descent — instead of white-knuckling
+    past the fear or talking yourself out of it, you go down into the sensation and
+    let it be loud without letting it drive. You stop arguing with your own pulse
+    and notice it''s already cresting, already starting to fall, the way every wave
+    does if you don''t fight it. And then integration: you come back able to say the
+    thing not because the fear left, but because you finally know what it is — an
+    old reflex, not a verdict on whether you''re allowed to speak.
+
+
+    Written in plain language you can actually use the next time your chest tightens
+    before you speak, this is real talk, not a pep rally. Ravi Chandra writes the
+    way a steady colleague talks you down in the stairwell before you walk back in.
+
+
+    This book will not promise you confidence. It won''t optimize you, hand you a
+    morning routine, or teach you to ''crush'' anything. There is no worksheet where
+    fear used to be. The false alarm may go off for the rest of your life. What changes
+    is that you stop obeying it.
+
+
+    Say the thing while your hands still shake. That was always allowed.'
 keywords:
   primary:
   - building courage
@@ -47,12 +84,15 @@ target_price:
   audible_usd: 9.99
   paperback_usd: 12.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: ravi_chandra
 comp_titles:
-- Daring Greatly (Brown)
-- Feel the Fear and Do It Anyway (Jeffers)
-- The Gifts of Imperfection (Brown)
+- Feel the Fear and Do It Anyway (Susan Jeffers) — names fear as a permanent companion,
+  not a problem to delete
+- When the Body Says No (Gabor Maté) — the body keeps the score of what you won't
+  say
+- Daring Greatly (Brené Brown) — courage as showing up before you feel ready
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -60,3 +100,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

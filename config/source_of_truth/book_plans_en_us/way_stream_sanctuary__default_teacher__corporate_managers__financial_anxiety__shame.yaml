@@ -16,17 +16,57 @@ target_word_range:
 target_audio_minutes: 70
 title: 'The Number in Your Head: Carrying What You Can''t Say'
 subtitle: A Real Talk Guide to Financial Anxiety for Managers
-cover_tagline: A Real Talk Guide to Financial Anxiety for Managers
+cover_tagline: You approve everyone's expenses and can't tell a soul about your own
+  balance.
 description:
-  short_blurb: A Real Talk Guide to Financial Anxiety for Managers A grounded, secular
-    guide to money anxiety for managers.
-  long_description: 'The Number in Your Head: Carrying What You Can''t Say
+  short_blurb: 'Underneath the financial anxiety is a quieter belief: that a person
+    at your level, with your salary, should not be this scared about money, and the
+    fact that you are means something is wrong with you. This book is about that buried
+    belief and the silence it forces. No confession exercise, no net-worth reveal,
+    no shame about the shame.'
+  long_description: 'Someone on your team asks you to push for their raise, and you
+    say all the right things, and underneath the conversation a cold fact surfaces:
+    you don''t actually know whether you could last three months without a paycheck.
+    You''re the manager. You''re the one who''s supposed to have this handled. The
+    distance between how solid it looks from the outside and how thin it feels from
+    where you sit has a particular taste, and that taste is shame.
 
 
-    For a mid-level manager between back-to-back meetings. This book names what money
-    anxiety is doing in your body in language you can use — through recognition, descent,
-    and integration, not worksheets or forced positivity. Book 2 of the Managers money
-    anxiety series.'
+    This book is for the corporate manager carrying money fear they can''t say out
+    loud, and it''s aimed at the secrecy more than the fear. The even tone you keep
+    in the one-on-one. The quick subject change when a peer brings up their portfolio.
+    The quiet preference to be seen as almost anything other than a person at your
+    title who is scared about money. Somewhere you don''t look directly, you''ve ruled
+    that the fear is evidence of a defect, so you keep it sealed, and the sealing
+    quietly costs you more than the fear ever did.
+
+
+    Waystream has no confession booth and no catharsis on offer. It names the mechanism
+    plainly. Shame is the claim that the problem isn''t your circumstances, it''s
+    you, and it stays alive only while it goes unsaid and unlooked-at. The work begins
+    by surfacing the exact sentence you''ve been carrying, usually a version of "someone
+    like me shouldn''t be like this," and reading it back in full. Then you turn toward
+    it instead of away, not to sink into it but to hold it in ordinary daylight long
+    enough to see what it actually is: a belief you absorbed, not a verdict that was
+    handed down. That turning-toward is quieter than you would expect, and it''s the
+    entire move. You come up able to set the real facts of your money beside the real
+    facts of your worth without letting the first bleed into the second.
+
+
+    This book will not repair your finances and it will not stage a tearful unburdening.
+    It won''t claim that confessing to enough people dissolves the shame. It will
+    not shame you for the shame, or hint that a more evolved person would be past
+    this. You don''t have to perform vulnerability to get anything from it.
+
+
+    What you''ll walk out with is language for the thing you''ve kept silent, and
+    a way to put down the belief that being afraid makes you a fraud. Direct and secular.
+    Written for someone who has been competent in public and alone with this for a
+    very long time.
+
+
+    The number on the statement is not a measurement of you. The fear is not a flaw
+    in your character. The first person you can stop hiding it from is yourself.'
 keywords:
   primary:
   - money anxiety
@@ -39,6 +79,7 @@ keywords:
   - managers
   - money anxiety for managers
 bisac_codes:
+- SEL036000
 - SEL027000
 - BUS050000
 - PSY022000
@@ -47,12 +88,16 @@ target_price:
   audible_usd: 9.99
   paperback_usd: 12.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: theo_castellan
 comp_titles:
-- The Psychology of Money (Housel)
-- Your Money or Your Life (Robin)
-- I Will Teach You to Be Rich (Sethi)
+- Daring Greatly (Brené Brown) — the secular anatomy of shame and the cost of hiding
+  what we think disqualifies us
+- The Psychology of Money (Morgan Housel) — separates financial reality from the identity
+  and ego we attach to it
+- Maybe You Should Talk to Someone (Lori Gottlieb) — permission to examine a buried
+  belief without performing the breakthrough
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -60,3 +105,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

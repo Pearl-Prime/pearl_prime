@@ -16,17 +16,51 @@ target_word_range:
 target_audio_minutes: 70
 title: 'The Number in Your Head: The Shutdown Point'
 subtitle: A Field Guide for Nurses Navigating Financial Anxiety
-cover_tagline: A Field Guide for Nurses Navigating Financial Anxiety
+cover_tagline: When the bills and the bank balance both arrive at once, and your brain
+  just stops.
 description:
-  short_blurb: A Field Guide for Nurses Navigating Financial Anxiety A grounded, secular
-    guide to money anxiety for nurses.
-  long_description: 'The Number in Your Head: The Shutdown Point
+  short_blurb: You can run a code without your hands shaking, but the second you open
+    your banking app something in you locks up. This is a plain-language field guide
+    for nurses whose money panic isn't about the math — it's about everything hitting
+    at once until the whole system shuts down. No budgets, no shame, just a way to
+    recognize the shutdown the moment it starts.
+  long_description: 'It usually happens after a long stretch on the floor. You finally
+    sit down, you open the app to check the balance, and there it is — the rent, the
+    student loan, the car, the thing your kid needs, the shift you picked up that
+    still isn''t enough — all of it landing in the same half-second. And instead of
+    doing anything, you go blank. You close the app. You tell yourself you''ll deal
+    with it tomorrow. Tomorrow comes and you do it again.
 
 
-    For a nurse at the end of a twelve-hour shift. This book names what money anxiety
-    is doing in your body in language you can use — through recognition, descent,
-    and integration, not worksheets or forced positivity. Book 1 of the Nurses money
-    anxiety series.'
+    This book is for the nurse who can hold a dying patient''s family together and
+    still cannot make herself look at her own checking account. Not because you''re
+    irresponsible — you triage other people''s emergencies for a living. It''s because
+    money doesn''t arrive as one problem. It arrives as forty problems stacked on
+    top of each other, and your nervous system does the only thing it knows how to
+    do when the load is too high: it pulls the plug. That''s the shutdown point. It''s
+    not weakness. It''s overwhelm, and it has a mechanism.
+
+
+    We''re going to name it first — what the stack actually feels like in your chest
+    and your hands, the exact moment the lights go out behind your eyes. Then we go
+    down into it instead of fixing it, because the fixing is part of what''s drowning
+    you. You don''t need another spreadsheet at 2 a.m. after a double. You need to
+    see that the overwhelm is one feeling wearing forty faces, and that you can put
+    forty things down and pick up one. We''ll work with what it''s like to face a
+    single number when your body is braced for all of them. And you''ll come back
+    able to catch the shutdown before it closes you down — to feel it starting and
+    stay in the room.
+
+
+    This is not a budgeting book. It will not promise that you''ll feel calm about
+    money or that you''ll finally get organized or optimized or ahead. Your schedule
+    is brutal and your pay doesn''t match what you carry, and no book fixes that.
+    What it can do is give you back the thirty seconds between opening the app and
+    going numb — so the choice is yours again.
+
+
+    You are allowed to look at one thing. You are allowed to put the rest down. You
+    don''t have to feel the whole weight to begin.'
 keywords:
   primary:
   - money anxiety
@@ -39,6 +73,7 @@ keywords:
   - nurses
   - money anxiety for nurses
 bisac_codes:
+- SEL036000
 - SEL027000
 - BUS050000
 - PSY022000
@@ -47,12 +82,16 @@ target_price:
   audible_usd: 9.99
   paperback_usd: 12.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: oscar_bello
 comp_titles:
-- The Psychology of Money (Housel)
-- Your Money or Your Life (Robin)
-- I Will Teach You to Be Rich (Sethi)
+- 'Burnout: The Secret to Unlocking the Stress Cycle (Emily Nagoski & Amelia Nagoski)
+  — names the body''s overload response in plain terms for people who care for others'
+- Your Money or Your Life (Vicki Robin & Joe Dominguez) — reframes money as a felt
+  relationship rather than a math problem
+- How to Keep House While Drowning (KC Davis) — gentle, shame-free approach to the
+  tasks you freeze on when overwhelmed
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -60,3 +99,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

@@ -16,17 +16,57 @@ target_word_range:
 target_audio_minutes: 70
 title: 'Social Anxiety: The Shame Response'
 subtitle: A Field Guide for Young Professionals Navigating Social Anxiety
-cover_tagline: A Field Guide for Young Professionals Navigating Social Anxiety
+cover_tagline: After the meeting, the highlight reel of everything you got wrong starts
+  to play.
 description:
-  short_blurb: A Field Guide for Young Professionals Navigating Social Anxiety A grounded,
-    secular guide to social anxiety for young professionals.
-  long_description: 'Social Anxiety: The Shame Response
+  short_blurb: 'It''s not just nerves before the room — it''s the conviction underneath
+    that something about you is fundamentally off, and that people can tell. This
+    is a secular guide to the shame response inside social anxiety: the buried belief
+    that you''re the awkward one, the too-much one, the one who doesn''t quite pass
+    — and how it narrates your whole working life. It won''t tell you you''re fine.
+    It''ll show you the belief was never the truth.'
+  long_description: 'The meeting ends and the replay begins. Not the content — your
+    performance. The thing you said that landed weird. The laugh that came a beat
+    too late. The way your voice did the thing. You scroll back through it for hours,
+    and underneath every cringe is a single quiet verdict you''ve believed so long
+    it feels like fact: there''s something wrong with me, and they saw it.
 
 
-    For early in a demanding career, phone always buzzing. This book names what social
-    anxiety is doing in your body in language you can use — through recognition, descent,
-    and integration, not worksheets or forced positivity. Book 3 of the Young Professionals
-    social anxiety series.'
+    This is for you, early in your career, where social anxiety isn''t only the racing
+    heart in the moment — it''s the shame that runs before and after, the sense that
+    you''re a flawed social object other people have to tolerate. You over-prepare
+    for casual chats. You apologize for taking up time. You replay interactions for
+    evidence of the defect you''re sure you have. Social anxiety is loud in the room;
+    shame is the belief that makes the room dangerous in the first place — the conviction
+    that if people really saw you, they''d confirm what you already think.
+
+
+    Shame hides because it doesn''t feel like a feeling. It feels like the truth about
+    who you are. That''s why it''s the hardest engine and the one underneath so much
+    social fear. Recognition is catching the verdict in the act — the self-edit, the
+    cringe-replay, the certainty that you''re the problem — and seeing it as a belief
+    running you, not a fact describing you. Descent is the turn: instead of managing
+    your image, performing ''normal,'' or arguing yourself out of it, you go down
+    into the shame itself and meet the part of you that decided long ago you didn''t
+    quite pass as a person. Not to drown in it. To stop fleeing it. Integration is
+    what remains when you''ve felt it through — the room gets less dangerous not because
+    you got more impressive, but because your worth stopped depending on the verdict.
+
+
+    Written in language you can reach for the next time the post-meeting replay starts,
+    this is direct and warm without being soft. Ravi Chandra doesn''t reassure you
+    that you''re likable. He walks you under the belief that you aren''t.
+
+
+    This book will not hand you social confidence or a script for passing as effortless.
+    It won''t reframe you into someone smoother or feed you affirmations to drown
+    the replay. There''s nothing to fix, because the belief that you''re broken is
+    exactly what we''re walking into. The shame may not lift entirely. But it can
+    stop being the lens you see every interaction through.
+
+
+    You were never the awkward thing other people endure. You were a person, the whole
+    time, in every room.'
 keywords:
   primary:
   - social anxiety
@@ -39,6 +79,7 @@ keywords:
   - young professionals
   - social anxiety for young professionals
 bisac_codes:
+- SEL036000
 - SEL027000
 - SEL031000
 - PSY022000
@@ -47,12 +88,16 @@ target_price:
   audible_usd: 9.99
   paperback_usd: 12.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: ravi_chandra
 comp_titles:
-- How to Be Yourself (Hendriksen)
-- The Social Anxiety Workbook (Antony)
-- Quiet (Cain)
+- I Thought It Was Just Me (But It Isn't) (Brené Brown) — shame as the hidden driver
+  beneath social fear
+- How to Be Yourself (Ellen Hendriksen) — quiets the inner critic certain you're being
+  judged and found lacking
+- The Gifts of Imperfection (Brené Brown) — worth that doesn't hinge on how the room
+  received you
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -60,3 +105,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

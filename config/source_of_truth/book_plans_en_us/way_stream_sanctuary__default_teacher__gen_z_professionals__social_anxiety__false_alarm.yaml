@@ -16,17 +16,57 @@ target_word_range:
 target_audio_minutes: 70
 title: 'Social Anxiety: The False Alarm Response'
 subtitle: A Field Guide for Young Professionals Navigating Social Anxiety
-cover_tagline: A Field Guide for Young Professionals Navigating Social Anxiety
+cover_tagline: It's just a meeting. Tell that to your heart rate.
 description:
-  short_blurb: A Field Guide for Young Professionals Navigating Social Anxiety A grounded,
-    secular guide to social anxiety for young professionals.
-  long_description: 'Social Anxiety: The False Alarm Response
+  short_blurb: 'Before you speak in the meeting, your body acts like it''s facing
+    real danger — pounding chest, hot face, hands you have to hide. This is a grounded,
+    secular guide to the false-alarm response inside social anxiety: a nervous system
+    that fires the full threat reaction over a roomful of coworkers who are mostly
+    thinking about lunch. It won''t make the alarm stop. It''ll make it something
+    you can move through instead of around.'
+  long_description: 'The host says ''let''s go around and introduce ourselves,'' and
+    you stop hearing anything else, because now you''re counting people, calculating
+    when your turn lands, and your heart is slamming like there''s an actual predator
+    in the conference room. There isn''t. There''s a project team and a plate of bagels.
+    But your body has sounded the alarm anyway, and it does not believe you when you
+    say it''s fine.
 
 
-    For early in a demanding career, phone always buzzing. This book names what social
-    anxiety is doing in your body in language you can use — through recognition, descent,
-    and integration, not worksheets or forced positivity. Book 2 of the Young Professionals
-    social anxiety series.'
+    This book is for you, early in your career, where the job itself is manageable
+    but the social surface of it — speaking up, video calls where you can see your
+    own face, the offsite, the ''quick chat'' that wasn''t quick — sets off a physical
+    reaction wildly out of scale with the threat. Sweating before a status update.
+    A voice that shakes for no reason you can point to. The certainty that everyone
+    can see it. Social anxiety convinces you something is wrong with you. What''s
+    actually happening is a false alarm: your nervous system mistaking the risk of
+    being judged for the risk of being harmed, and firing the same ancient circuitry
+    either way.
+
+
+    The alarm isn''t a malfunction in you. It''s an old survival system that never
+    updated its definition of danger to exclude ''people might think I''m awkward.''
+    Recognition is feeling the surge and naming it as alarm rather than evidence —
+    your pulse is loud, but it isn''t telling the truth about the room. Descent is
+    the move almost no one teaches: instead of fighting the symptoms, hiding the shaking
+    hands, or talking yourself out of the fear, you go down into the sensation and
+    let it be as big as it wants without obeying it. You stop treating your own racing
+    heart as a command. Integration is what comes after — staying in the conversation,
+    voice unsteady, while the alarm rings, because you finally know it''s an alarm
+    and not a sentence.
+
+
+    Written in plain words you can use the next moment your face goes hot before you
+    speak, this is steady and unsentimental. Ravi Chandra writes like someone who
+    knows exactly what it is to talk while your whole body insists you flee.
+
+
+    This book will not promise to calm you down or make you smooth. It won''t hand
+    you breathing hacks marketed as cures, a morning routine, or a way to ''fake confidence
+    till it''s real.'' There''s nothing to fix, because the alarm isn''t a flaw. It
+    may go off for years. What changes is that you stop running every time it does.
+
+
+    Let your hands shake and stay in the room. That counts as brave.'
 keywords:
   primary:
   - social anxiety
@@ -39,6 +79,7 @@ keywords:
   - young professionals
   - social anxiety for young professionals
 bisac_codes:
+- SEL036000
 - SEL027000
 - SEL031000
 - PSY022000
@@ -47,12 +88,16 @@ target_price:
   audible_usd: 9.99
   paperback_usd: 12.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: ravi_chandra
 comp_titles:
-- How to Be Yourself (Hendriksen)
-- The Social Anxiety Workbook (Antony)
-- Quiet (Cain)
+- Rewire Your Anxious Brain (Catherine Pittman & Elizabeth Karle) — the amygdala's
+  false alarm in plain, secular terms
+- The Social Anxiety Workbook (Martin Antony & Richard Swinson) — evidence-based,
+  no-woo account of the threat response
+- Feel the Fear and Do It Anyway (Susan Jeffers) — acting alongside the alarm rather
+  than waiting for it to quiet
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -60,3 +105,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false
