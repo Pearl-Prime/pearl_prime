@@ -1,0 +1,67 @@
+series_plan_schema: 1.0.0
+locale: en_US
+book_id_prefix: relationship_clarity__house__working_parents__grief
+brand: relationship_clarity
+teacher: null
+persona: working_parents
+topic: grief
+byline_author: kira_raman
+arc:
+  installment_1:
+    book_id: relationship_clarity__house__working_parents__grief__grief
+    engine: grief
+    master_arc: config/source_of_truth/master_arcs/working_parents__grief__grief__F006.yaml
+    duration: standard_book_60min
+  installment_2:
+    book_id: relationship_clarity__house__working_parents__grief__watcher
+    engine: watcher
+    master_arc: config/source_of_truth/master_arcs/working_parents__grief__watcher__F006.yaml
+    duration: standard_book_60min
+reader_promise_family: A warm, unhurried place to sit with a loss that doesn't fit
+  your schedule — where grief is not a task to finish but a guest to make room for,
+  and where being a parent who is still grieving is allowed to be both true at once.
+bestseller_hook_family: ''
+emotional_engine: grief_recognition
+comp_series:
+- It's OK That You're Not OK (Megan Devine) — refuses the fix-it script and sits with
+  grief honestly, exactly the register this series lives in
+- The Year of Magical Thinking (Joan Didion) — the unsparing, plainspoken interior
+  of loss that keeps moving even when the world doesn't pause
+- Bittersweet (Susan Cain) — makes room for longing and sorrow as part of a full life
+  rather than a problem to be solved
+platform_strategy:
+  primary:
+  - kdp_ebook
+  - audible
+  secondary:
+  - apple_books
+  - google_play
+  - spotify_audiobooks
+  launch_platform: kdp_ebook
+  cadence:
+    release_spacing_days: 14
+    max_books_per_brand_per_month: 2
+reader_avatar:
+  age: 34-48
+  where_they_are: It's 9:40pm. The kids are finally down, the dishwasher is running,
+    and you are standing in the kitchen in the dark with a dish towel in your hand,
+    realizing you forgot to feel anything about the person you lost all day — and
+    now that the house is quiet, it's all arriving at once, and you have to be up
+    in nine hours.
+  what_they_need: Permission to grieve in the margins of a life that won't pause for
+    it; language for the loss they keep folding around their kids; and the relief
+    of being met honestly instead of fixed.
+  what_they_avoid: Stage-of-grief checklists, 'everything happens for a reason' comfort,
+    productivity framing of healing, and anything that asks them to perform being
+    okay for the people who depend on them.
+series_voice_markers:
+  register: warm, honest, relational; the calm of two chairs facing each other; gentle
+    and direct about the conversation you keep avoiding, never clinical, never preachy,
+    never hustle
+  sentence_rhythm: plainspoken and unhurried; short declaratives that land like a
+    hand on the shoulder, opening into longer sentences that follow a feeling all
+    the way down; pauses where a kinder book would rush to reassure
+  metaphor_family: two chairs facing each other, the empty chair at the table, the
+    conversation you keep putting off, the door left ajar, what goes unsaid between
+    people who love each other, sitting with someone instead of fixing them
+_needs_authoring: false
