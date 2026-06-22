@@ -1268,6 +1268,22 @@ def _run_spine_pipeline_mode(
     if _f1_dedupe_final:
         _governance_report.setdefault("register_f1_dedupe_notes", []).extend(_f1_dedupe_final)
     prose = _final_f4_closings(prose, seed=f"{seed}:final_close")
+    from phoenix_v4.rendering.register_output_strengthen import verify_f7_exercise_preservation
+
+    _f7_preservation_violations = verify_f7_exercise_preservation(
+        prose,
+        governance_report=_governance_report,
+        max_prescribed_per_chapter=1,
+    )
+    if _f7_preservation_violations:
+        _governance_report.setdefault(
+            "f7_exercise_preservation_violations", []
+        ).extend(_f7_preservation_violations)
+        print(
+            "F7 exercise-preservation check: "
+            + "; ".join(_f7_preservation_violations),
+            file=sys.stderr,
+        )
     word_count = len(prose.split())
     _quality_gate_failures: list[str] = []
     _chapter_flow_status = "SKIPPED"

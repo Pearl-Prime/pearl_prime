@@ -47,10 +47,8 @@ _DWELL_BEAT_POOL: tuple[str, ...] = (
 
 # Varied softenings when F7 prescribed-action density is capped — purely declarative
 # (no F7 imperative verbs, no timing-cue substrings like for/before/ten/second).
-_DEPRESCRIBE_ALTERNATIVES: tuple[str, ...] = (
-    "Something in you already knows how to pause when the signal rises.",
+_DEPRESCRIBE_ALTERNATIVES_RAW: tuple[str, ...] = (
     "A single breath can be the whole intervention.",
-    "The practice here is to choose honesty over performance.",
     "What showed up is data, not a moral score.",
     "Honesty matters more than optimization here.",
     "The signal is clear even when the story is noisy.",
@@ -59,8 +57,7 @@ _DEPRESCRIBE_ALTERNATIVES: tuple[str, ...] = (
     "The body keeps score even when the calendar does not.",
     "Clarity arrives when the story stops outrunning the facts.",
     "You are allowed to be human inside a demanding role.",
-    "Rest is not a reward you earn after depletion.",
-    "The alarm is loud because the stakes feel real.",
+    "The alarm is loud because the stakes are real.",
     "Small honesty beats heroic pretending most days.",
     "Steadiness is built in ordinary moments like this one.",
     "The weight is real; so is your capacity to name it.",
@@ -72,7 +69,21 @@ _DEPRESCRIBE_ALTERNATIVES: tuple[str, ...] = (
     "Presence is a skill, not a personality trait.",
     "What you track starts to change once it is visible.",
     "The system was doing its best with old instructions.",
+    "The story can wait while the body catches up.",
+    "Difficulty here is information, not indictment.",
+    "The calendar will keep moving; you get to choose your pace.",
+    "Nothing about this moment requires perfection.",
 )
+
+
+def _f7_safe_deprescribe_alternatives() -> tuple[str, ...]:
+    safe = tuple(line for line in _DEPRESCRIBE_ALTERNATIVES_RAW if not _is_prescribed_action(line))
+    if not safe:
+        raise RuntimeError("no F7-safe deprescribe alternatives configured")
+    return safe
+
+
+_DEPRESCRIBE_ALTERNATIVES: tuple[str, ...] = _f7_safe_deprescribe_alternatives()
 
 # Micro-sentences inserted to break repeating pedagogical-cadence 4-grams (F6).
 _CADENCE_MICRO_BREAKERS: tuple[str, ...] = (
@@ -227,11 +238,63 @@ def cap_prescribed_action_density(prose: str, *, max_per_chapter: int = 2) -> st
             if _is_prescribed_action(p):
                 kept_prescribed += 1
                 if kept_prescribed > max_per_chapter:
-                    new_paras.append(_deprescribe_paragraph(p, seed=f"deprescribe:{num}:{p_idx}"))
+                    softened = _deprescribe_paragraph(p, seed=f"deprescribe:{num}:{p_idx}")
+                    if _is_prescribed_action(softened):
+                        continue
+                    new_paras.append(softened)
                     continue
             new_paras.append(p)
         out.append((num, "\n\n".join(new_paras).strip()))
     return _join_book(front, out)
+
+
+def _exercise_contract_by_chapter(governance_report: dict) -> dict[int, int]:
+    """Map chapter number → contract_max_exercises from compose governance."""
+    out: dict[int, int] = {}
+    for entry in governance_report.get("exercise_slots_dropped") or []:
+        ch = int(entry["chapter"])
+        cap = int(entry.get("contract_max_exercises", 2))
+        if ch not in out:
+            out[ch] = cap
+        else:
+            out[ch] = min(out[ch], cap)
+    return out
+
+
+def verify_f7_exercise_preservation(
+    prose: str,
+    *,
+    governance_report: dict | None = None,
+    max_prescribed_per_chapter: int = 1,
+) -> list[str]:
+    """Return violations when F7 prescribed-action count breaches exercise contract."""
+    from phoenix_v4.quality.register_gate import _split_paragraphs
+
+    contracts = _exercise_contract_by_chapter(governance_report or {})
+    violations: list[str] = []
+    for num, body in _split_chapters(prose):
+        count = sum(1 for p in _split_paragraphs(body) if _is_prescribed_action(p))
+        if count > max_prescribed_per_chapter:
+            violations.append(
+                f"ch{num}: prescribed={count} exceeds F7 cap {max_prescribed_per_chapter}"
+            )
+        contract = contracts.get(num)
+        if contract is None:
+            continue
+        if contract == 0 and count > 0:
+            violations.append(
+                f"ch{num}: contract_max_exercises=0 but prescribed={count}"
+            )
+        elif count > contract:
+            violations.append(
+                f"ch{num}: prescribed={count} exceeds contract_max_exercises={contract}"
+            )
+        elif contract > 0 and count < contract:
+            violations.append(
+                f"ch{num}: prescribed={count} below contract_max_exercises={contract} "
+                "(exercise may have been stripped)"
+            )
+    return violations
 
 
 def _inject_dwell_beats_in_body(body: str, *, chapter_index: int, seed: str) -> str:

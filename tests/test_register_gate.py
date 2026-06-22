@@ -558,6 +558,7 @@ from phoenix_v4.quality.register_gate import (  # noqa: E402
         "The system was on.",
         "Before you noticed it, the alarm was already on.",
         "The light is still on.",
+        "You review for eleven minutes before walking in.",
     ],
 )
 def test_f2b_excludes_grammatical_stranded_prepositions(sentence: str) -> None:

@@ -7,6 +7,8 @@ from phoenix_v4.rendering.register_output_strengthen import (
     ensure_book_terminal_integrity,
     ensure_dwell_beats,
     ensure_unique_chapter_closings,
+    verify_f7_exercise_preservation,
+    _DEPRESCRIBE_ALTERNATIVES,
 )
 from phoenix_v4.quality.register_gate import (
     _detect_f4_closing_line_repeats,
@@ -59,6 +61,35 @@ def test_cap_prescribed_action_density():
     ch_text = out.split("Chapter 1", 1)[1]
     count = sum(1 for p in ch_text.split("\n\n") if _is_prescribed_action(p))
     assert count <= 2
+
+
+def test_deprescribe_alternatives_are_f7_safe():
+    assert _DEPRESCRIBE_ALTERNATIVES
+    for line in _DEPRESCRIBE_ALTERNATIVES:
+        assert not _is_prescribed_action(line), line
+
+
+def test_verify_f7_exercise_preservation_zero_contract():
+    chapter = "Chapter 1\n\nNotice your breath for five seconds. Step one."
+    gov = {
+        "exercise_slots_dropped": [
+            {"chapter": 1, "contract_max_exercises": 0},
+        ]
+    }
+    violations = verify_f7_exercise_preservation(chapter, governance_report=gov)
+    assert violations
+    assert any("contract_max_exercises=0" in v for v in violations)
+
+
+def test_verify_f7_exercise_preservation_stripped_exercise():
+    chapter = "Chapter 2\n\nPlain narrative without prescribed steps."
+    gov = {
+        "exercise_slots_dropped": [
+            {"chapter": 2, "contract_max_exercises": 1},
+        ]
+    }
+    violations = verify_f7_exercise_preservation(chapter, governance_report=gov)
+    assert any("below contract_max_exercises" in v for v in violations)
 
 
 def test_dedupe_register_f1_paragraphs():

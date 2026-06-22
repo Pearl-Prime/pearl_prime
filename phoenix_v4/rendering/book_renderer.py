@@ -1557,6 +1557,13 @@ def ensure_chapter_flow_cues(
                     appended.append(
                         _CLEAR_POINT_GUARANTEE_LINES[digest[0] % len(_CLEAR_POINT_GUARANTEE_LINES)]
                     )
+                if "NO_ACTIONABLE_STEP" in errs and not re.search(
+                    r"\b(breathe|pause|exhale|inhale|write|name|notice|choose|practice)\b",
+                    chapter_body.lower(),
+                ):
+                    appended.append(
+                        _ACTIONABLE_GUARANTEE_LINES[digest[2] % len(_ACTIONABLE_GUARANTEE_LINES)]
+                    )
                 if "WEAK_TRANSITIONS" in errs:
                     _guard = 0
                     while (
