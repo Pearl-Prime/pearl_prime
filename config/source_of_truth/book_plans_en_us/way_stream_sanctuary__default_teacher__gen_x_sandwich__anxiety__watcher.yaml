@@ -13,18 +13,53 @@ target_word_range:
 target_audio_minutes: 70
 title: 'The Alarm Is Lying: Watching Your Thoughts Without Drowning'
 subtitle: A Real Talk Guide to Anxiety Relief for the Sandwich Generation
-cover_tagline: A Real Talk Guide to Anxiety Relief for the Sandwich Generation
+cover_tagline: You're scanning for the next emergency even when there isn't one.
 description:
-  short_blurb: A Real Talk Guide to Anxiety Relief for the Sandwich Generation A grounded,
-    secular guide to anxiety for the sandwich generation.
-  long_description: 'The Alarm Is Lying: Watching Your Thoughts Without Drowning
+  short_blurb: Part of you never fully sits down, always half-listening for the fall,
+    the phone, the thing about to go wrong. This is a secular, real-talk guide to
+    the watcher, the hypervigilant mind that never stands down, for people who got
+    that way for good reasons. It won't tell you to let your guard down. It'll show
+    you how to stop drowning in your own watching.
+  long_description: 'There''s a part of you that never quite goes off duty. Even in
+    a good moment, even on a rare quiet evening, some background process is running,
+    scanning. Listening for your mother''s footsteps on the stairs you''re afraid
+    she''ll fall down. Half-waiting for the school to call, the doctor to call, the
+    other shoe to drop. You watch your own anxious thoughts too, monitoring your mood,
+    checking whether you''re okay, which is just one more thing to surveil. The watcher
+    never stands down. And the watching itself has become exhausting in a way that''s
+    hard to explain to anyone who isn''t doing it.
 
 
-    For caring for aging parents and growing kids at once. This book doesn''t promise
-    to make anxiety stop — it names what''s happening in your body in language you
-    can use the next time it happens. Through recognition, descent, and integration,
-    not worksheets or forced positivity. Book 7 of the the Sandwich Generation anxiety
-    series.'
+    This book is for the Sandwich Generation, who came by hypervigilance honestly.
+    When you''re responsible for people who actually do fall, who actually do get
+    the scary diagnosis, who actually do need you to catch the thing before it becomes
+    a crisis, your nervous system learns that vigilance equals safety. Letting your
+    guard down starts to feel like negligence. So you watch, and watch, and the watching
+    never gets to stop, and you''re drowning in it.
+
+
+    We move through it in three turns. Recognition: you learn to notice the watcher
+    itself, to feel the difference between useful attention and the compulsive scanning
+    that just burns you down, and to name it, this is the watcher, not a real threat.
+    Then descent: instead of trying to force the vigilance off, which only makes a
+    watcher more anxious, you learn to let the watching be there without being pulled
+    under by it, to observe your thoughts without drowning in the observing. The hypervigilance
+    isn''t the enemy. It''s a guard that forgot it''s allowed to sit. And then you
+    come back up, still alert when alertness is called for, but no longer standing
+    watch over a quiet house at the cost of your own nervous system.
+
+
+    This will not tell you to simply let your guard down and trust that everything''s
+    fine, because your watcher knows that''s not always true and won''t believe you.
+    It will not promise to make you stop scanning. What it offers is the difference
+    between watching and drowning, so your attention is there for the real moments
+    and not spent guarding against every imagined one.
+
+
+    The watcher is trying to keep everyone safe, including you. It just never learned
+    that it''s allowed to rest. You don''t have to drown in your own vigilance to
+    prove you care. You''re allowed to let the guard sit down for a while. The stairs
+    will still be there.'
 keywords:
   primary:
   - anxiety relief
@@ -38,6 +73,7 @@ keywords:
   - the sandwich generation
   - anxiety for the sandwich generation
 bisac_codes:
+- SEL036000
 - SEL027000
 - SEL024000
 - PSY022000
@@ -46,12 +82,16 @@ target_price:
   audible_usd: 9.99
   paperback_usd: 12.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: elena_petrova
 comp_titles:
-- Dare (Barry McDonagh)
-- The Anxiety and Phobia Workbook (Bourne)
-- Unwinding Anxiety (Judson Brewer)
+- The Untethered Soul (Michael A. Singer) — secular framing of observing your thoughts
+  without being consumed by them
+- Why Zebras Don't Get Ulcers (Robert Sapolsky) — the science of why chronic vigilance
+  wears the body down
+- Wherever You Go, There You Are (Jon Kabat-Zinn) — secular mindfulness for watching
+  the mind without drowning in it
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -59,3 +99,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

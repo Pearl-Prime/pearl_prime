@@ -13,18 +13,53 @@ target_word_range:
 target_audio_minutes: 70
 title: 'The Alarm Is Lying: Escaping the Mental Loop'
 subtitle: A Field Guide for the Sandwich Generation Navigating Anxiety Relief
-cover_tagline: A Field Guide for the Sandwich Generation Navigating Anxiety Relief
+cover_tagline: One worry at 2am becomes a thousand by 2:40. Here's the off-ramp.
 description:
-  short_blurb: A Field Guide for the Sandwich Generation Navigating Anxiety Relief
-    A grounded, secular guide to anxiety for the sandwich generation.
-  long_description: 'The Alarm Is Lying: Escaping the Mental Loop
+  short_blurb: It starts with a single thought about your dad's next scan, and forty
+    minutes later you've buried both parents, lost the house, and failed your kids,
+    all without leaving the bed. This is a secular, grounded guide to the spiral,
+    the way one worry multiplies into a thousand, for people with real reasons to
+    lie awake. It won't tell you to think positive. It'll show you where the loop
+    actually breaks.
+  long_description: 'You know exactly where it starts. One thought. The scan results,
+    the tone in your son''s voice, the bill you haven''t opened. And then the thought
+    has a baby, and that one has a baby, and inside of an hour you''ve followed the
+    chain all the way down: your dad''s diagnosis becomes his decline becomes the
+    funeral becomes you alone becomes your kids resenting you becomes a life in ruins,
+    and you are lying perfectly still in the dark while your mind torches everything
+    you love. That''s the spiral. One worry, then a thousand, none of them happening,
+    all of them felt.
 
 
-    For caring for aging parents and growing kids at once. This book doesn''t promise
-    to make anxiety stop — it names what''s happening in your body in language you
-    can use the next time it happens. Through recognition, descent, and integration,
-    not worksheets or forced positivity. Book 6 of the the Sandwich Generation anxiety
-    series.'
+    This book is for the Sandwich Generation, who spiral with a vengeance because
+    you genuinely have more loose threads than most people. Aging parents are a hundred
+    open questions. Kids are a hundred more. The mind, lying awake, grabs a thread
+    and pulls, and there''s always more thread to pull. The spiral isn''t a sign you''re
+    irrational. It''s a sign you have a great deal that is genuinely uncertain and
+    a brain trying to solve all of it at 2am, which is the one thing a brain absolutely
+    cannot do.
+
+
+    We work it in three turns. Recognition: you learn to catch the spiral in its first
+    three seconds, at the first link, before the chain gets long enough to feel like
+    prophecy, and to name it, this is the loop, not the future. Then descent: instead
+    of trying to think your way to the bottom of the spiral, which has no bottom,
+    you drop out of the thinking and back into the body, because the spiral only runs
+    on fuel you''re feeding it from the neck up. And then you come back, not with
+    the problems solved, but with the loop broken, which is the only thing actually
+    available to you at that hour.
+
+
+    This will not teach you to think positive or replace the bad thoughts with good
+    ones, because you''re too smart to believe the good ones at 2am. It will not promise
+    the spiral never spins up again. What it offers is the off-ramp, the specific
+    place the loop can be interrupted, so the worry that''s real gets the daylight
+    it deserves and the thousand imaginary ones don''t get your night.
+
+
+    The spiral is lying. Not the first worry, maybe, but the nine hundred and ninety-nine
+    that follow it. You don''t have to ride it all the way down. You''re allowed to
+    get off the loop and go back to sleep.'
 keywords:
   primary:
   - anxiety relief
@@ -38,6 +73,7 @@ keywords:
   - the sandwich generation
   - anxiety for the sandwich generation
 bisac_codes:
+- SEL036000
 - SEL027000
 - SEL024000
 - PSY022000
@@ -46,12 +82,16 @@ target_price:
   audible_usd: 9.99
   paperback_usd: 12.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: elena_petrova
 comp_titles:
-- Dare (Barry McDonagh)
-- The Anxiety and Phobia Workbook (Bourne)
-- Unwinding Anxiety (Judson Brewer)
+- Unwinding Anxiety (Judson Brewer) — a clinician's secular map of the worry loop
+  and exactly where it breaks
+- Don't Believe Everything You Think (Joseph Nguyen) — plainspoken on catching the
+  thought-chain before it runs away
+- Rewire Your Anxious Brain (Catherine Pittman) — secular neuroscience of the rumination
+  spiral and how to interrupt it
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -59,3 +99,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

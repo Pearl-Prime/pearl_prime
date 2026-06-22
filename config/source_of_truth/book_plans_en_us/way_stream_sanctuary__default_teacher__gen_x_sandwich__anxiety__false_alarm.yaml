@@ -13,18 +13,52 @@ target_word_range:
 target_audio_minutes: 70
 title: 'The Alarm Is Lying: When Fear Lies to You'
 subtitle: A Real Talk Guide to Anxiety Relief for the Sandwich Generation
-cover_tagline: A Real Talk Guide to Anxiety Relief for the Sandwich Generation
+cover_tagline: Racing heart, no actual emergency. Your body got the signal wrong.
 description:
-  short_blurb: A Real Talk Guide to Anxiety Relief for the Sandwich Generation A grounded,
-    secular guide to anxiety for the sandwich generation.
-  long_description: 'The Alarm Is Lying: When Fear Lies to You
+  short_blurb: Your chest tightens, your thoughts sharpen, your whole system braces,
+    and then you look around and nothing is actually on fire. This is a grounded,
+    secular guide to the false alarm, the body's danger signal firing when there's
+    no danger, written for people holding two generations at once. It won't tell you
+    to calm down. It'll tell you the truth about what's happening.
+  long_description: 'You know the exact feeling. The phone buzzes with your mom''s
+    number and before you''ve even answered, your heart is going, your stomach drops,
+    your hands go cold. Or it''s 3am and you''re wide awake, every system in your
+    body braced for an emergency that isn''t there. The alarm went off. And the cruel
+    part is, nothing is actually happening. Everyone''s asleep. The house is fine.
+    Your body just lied to you, and now you''re up for an hour paying for a crisis
+    that never came.
 
 
-    For caring for aging parents and growing kids at once. This book doesn''t promise
-    to make anxiety stop — it names what''s happening in your body in language you
-    can use the next time it happens. Through recognition, descent, and integration,
-    not worksheets or forced positivity. Book 2 of the the Sandwich Generation anxiety
-    series.'
+    This book is for the Sandwich Generation, the people whose phones really do ring
+    with bad news sometimes, who have genuine emergencies often enough that the body
+    stopped being able to tell the difference. When you spend years on call for aging
+    parents and growing kids, your alarm system gets trigger-happy. It starts firing
+    at the sound of a notification, at a tone in someone''s voice, at nothing at all.
+    That''s not weakness. That''s a smoke detector that''s been going off so long
+    it now reacts to toast, to steam, to the memory of smoke from a year ago.
+
+
+    We work it in three movements. Recognition: you learn the difference between a
+    real threat and a false alarm in your body, the actual physical tells, so you
+    can name it in the moment, this is the alarm, not the danger. Then descent: instead
+    of fighting the feeling or white-knuckling through it, you go down into it and
+    let it move, because a false alarm fought is a false alarm extended, and the surge
+    always passes faster when you stop bracing against it. And finally you come back
+    up, not cured, but with the wiring a little less raw, the signal a little easier
+    to read, the gap between buzz and panic a little wider than it was.
+
+
+    This is not a breathing-exercise listicle and it will not promise to make the
+    anxiety stop. Your life genuinely contains real alarms, and pretending otherwise
+    would be a lie you''d see through immediately. What it gives you is the ability
+    to tell the two apart, so the false ones stop stealing the hours and the sleep
+    and the joy that the real ones already take enough of.
+
+
+    The alarm is lying. Not always, but often, and you can learn to hear the difference.
+    Your body has been trying to protect you this whole time, standing guard through
+    years that earned the vigilance. It''s just been bad at the math. You''re allowed
+    to thank it and put it down.'
 keywords:
   primary:
   - anxiety relief
@@ -38,6 +72,7 @@ keywords:
   - the sandwich generation
   - anxiety for the sandwich generation
 bisac_codes:
+- SEL036000
 - SEL027000
 - SEL024000
 - PSY022000
@@ -46,12 +81,16 @@ target_price:
   audible_usd: 9.99
   paperback_usd: 12.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: elena_petrova
 comp_titles:
-- Dare (Barry McDonagh)
-- The Anxiety and Phobia Workbook (Bourne)
-- Unwinding Anxiety (Judson Brewer)
+- When the Body Says No (Gabor Maté) — secular account of how chronic stress and caretaking
+  dysregulate the body's alarm
+- Hardwiring Happiness (Rick Hanson) — plain-language neuroscience of why the brain
+  over-fires threat signals and how to settle it
+- Unwinding Anxiety (Judson Brewer) — a clinician's secular map of the anxiety loop
+  and how to read the false alarm
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -59,3 +98,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false
