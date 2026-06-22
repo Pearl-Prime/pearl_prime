@@ -399,15 +399,15 @@
     })();
   </script>
 </head>
-<body>
+<body data-ghl-webhook="">
 <div class="page-wrap">
 
   <div class="wordmark">Phoenix Omega — Inner Light Press</div>
 
   <h1>The Thought Sorter</h1>
-  <p class="subtitle">Eight questions. One clear signal. What your loop actually needs.</p>
+  <p class="subtitle">I sorted my brain loops in 2 minutes — this is the exact sorter I use. Eight questions. One clear signal. What your loop actually needs.</p>
 
-  <div class="capture-card" id="capture-section">
+  <div class="capture-card" id="capture-section" style="display:none;">
     <h2>Access the Free Assessment</h2>
     <p>Two minutes. No account. Your result loads in your browser.</p>
     <form id="capture-form">
@@ -419,7 +419,22 @@
     </form>
   </div>
 
-  <div id="tool-section">
+  <div id="tool-section" class="visible" style="display:block;">
+    <div id="email-gate-section" class="card phoenix-email-gate" style="display:none;">
+      <h2 style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;margin-bottom:8px;">Get your result + next practice</h2>
+      <p style="color:#8B8A82;font-size:14px;margin-bottom:20px;">One email. No spam. Then your personalized result unlocks.</p>
+      <div class="form-group">
+        <label for="gate-name">First name</label>
+        <input type="text" id="gate-name" placeholder="Your name">
+      </div>
+      <div class="form-group">
+        <label for="gate-email">Email</label>
+        <input type="email" id="gate-email" placeholder="your@email.com">
+      </div>
+      <p id="gate-error" class="error-msg" style="display:none;">Please enter a valid email.</p>
+      <button class="btn" type="button" onclick="submitEmailGate()">Show My Result</button>
+    </div>
+
     <div class="progress-track">
       <div class="progress-fill" id="progress-fill"></div>
     </div>
@@ -435,6 +450,7 @@
       <button class="btn-restart" onclick="restartQuiz()">Start over</button>
     </div>
   </div>
+      <div id="somatic-result-link"></div>
 
   <div class="cta-banner">
     <p>Want the full system?</p>
@@ -604,7 +620,7 @@
 
     const next = fromIndex + 1;
     if (next >= questions.length) {
-      showResult();
+      requestResults();
       return;
     }
 
@@ -628,6 +644,21 @@
   function updateProgress(qIndex) {
     const pct = Math.round((qIndex / questions.length) * 100);
     document.getElementById('progress-fill').style.width = pct + '%';
+  }
+
+  function revealPendingResult() {
+    showResult();
+    if (window.PhoenixFunnel) {
+      PhoenixFunnel.injectSomaticResultLink('somatic-result-link', 'ex02_box_breathing.html', 'Try the box-breath reset I use when loops won\'t stop');
+    }
+  }
+
+  function requestResults() {
+    if (window.PhoenixLead && PhoenixLead.shouldShowEmailGate()) {
+      document.getElementById('email-gate-section').style.display = 'block';
+      return;
+    }
+    revealPendingResult();
   }
 
   function showResult() {
@@ -683,6 +714,27 @@
     currentQ = 0;
     renderQuestions();
   }
+
+  renderQuestions();
+</script>
+<link rel="stylesheet" href="/free/js/phoenix_tool.css">
+<script src="/free/js/phoenix_lead.js"></script>
+<script src="/free/js/phoenix_funnel.js"></script>
+
+<!-- PHOENIX_FLAGSHIP_BOOTSTRAP -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  if (!window.PhoenixFunnel) return;
+  PhoenixFunnel.initSkipFormIfCaptured('capture-section', 'tool-section', function() {
+    if (typeof renderQuestions === 'function') renderQuestions();
+  });
+  PhoenixFunnel.bindEmailBeforeResult({
+    topic: 'overthinking',
+    funnelSlug: 'overthinking-thought-sorter',
+    quizId: 'thought_sorter_assessment',
+    onSuccess: function() { if (typeof revealPendingResult === 'function') revealPendingResult(); }
+  });
+});
 </script>
 </body>
 </html>

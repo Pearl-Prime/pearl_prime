@@ -85,13 +85,13 @@
     })();
   </script>
 </head>
-<body>
+<body data-ghl-webhook="">
   <div class="container">
     <div class="brand-tag">Phoenix Omega — Inner Light Press</div>
     <h1>Your bank account is one thing. Your nervous system is another.</h1>
-    <p class="subhead">10 questions to understand the pattern, not just the balance.</p>
+    <p class="subhead">Your bank balance isn't the whole story — this 10-question check is what I use. 10 questions to understand the pattern, not just the balance.</p>
 
-    <div id="form-section" class="card">
+    <div id="form-section" class="card" style="display:none;">
       <p style="font-size:15px; color:#8B8A82; margin-bottom:24px;">Get your results plus the full Money Check-In framework.</p>
       <div class="form-group">
         <label class="field-label" for="name">First name</label>
@@ -105,7 +105,22 @@
       <button class="btn" onclick="submitForm()">Access The Money Check-In</button>
     </div>
 
-    <div id="tool-section">
+    <div id="tool-section" class="visible" style="display:block;">
+    <div id="email-gate-section" class="card phoenix-email-gate" style="display:none;">
+      <h2 style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;margin-bottom:8px;">Get your result + next practice</h2>
+      <p style="color:#8B8A82;font-size:14px;margin-bottom:20px;">One email. No spam. Then your personalized result unlocks.</p>
+      <div class="form-group">
+        <label for="gate-name">First name</label>
+        <input type="text" id="gate-name" placeholder="Your name">
+      </div>
+      <div class="form-group">
+        <label for="gate-email">Email</label>
+        <input type="email" id="gate-email" placeholder="your@email.com">
+      </div>
+      <p id="gate-error" class="error-msg" style="display:none;">Please enter a valid email.</p>
+      <button class="btn" type="button" onclick="submitEmailGate()">Show My Result</button>
+    </div>
+
       <div class="card">
         <div class="section-title">The Money Check-In</div>
         <p style="font-size:14px; color:#8B8A82; margin-bottom:24px;">Answer honestly. The pattern only shows up if you let it.</p>
@@ -128,6 +143,7 @@
           <textarea placeholder="The story usually sounds like..."></textarea>
         </div>
       </div>
+        <div id="somatic-result-link"></div>
 
       <div class="cta-banner">
         <div class="cta-label">Want the full system?</div>
@@ -203,6 +219,26 @@ document.getElementById('form-section').style.display = 'none';
       buildQuestions();
     }
 
+    let pendingScore = null;
+
+    function revealPendingResult() {
+      const total = pendingScore;
+      document.getElementById('questions-block').style.display = 'none';
+      document.getElementById('submit-block').style.display = 'none';
+      document.getElementById('email-gate-section').style.display = 'none';
+      document.getElementById('results-block').style.display = 'block';
+      document.getElementById('result-score').textContent = total;
+      const msgs = [
+        "Your money relationship is relatively stable. The check-in is good practice.",
+        "You're carrying a real money anxiety load. It's running in the background more than you realize.",
+        "Money anxiety is a significant strain on your daily experience. The pattern is learnable and changeable."
+      ];
+      document.getElementById('result-message').textContent = total <= 10 ? msgs[0] : total <= 20 ? msgs[1] : msgs[2];
+      if (window.PhoenixFunnel) {
+        PhoenixFunnel.injectSomaticResultLink('somatic-result-link', 'ex04_extended_exhale.html', 'Try the extended-exhale reset I use when money panic hits');
+      }
+    }
+
     function scoreAudit() {
       let total = 0;
       for (let i = 0; i < questions.length; i++) {
@@ -213,17 +249,35 @@ document.getElementById('form-section').style.display = 'none';
         }
         total += parseInt(checked.value);
       }
-      document.getElementById('questions-block').style.display = 'none';
-      document.getElementById('submit-block').style.display = 'none';
-      document.getElementById('results-block').style.display = 'block';
-      document.getElementById('result-score').textContent = total;
-      const msgs = [
-        "Your money relationship is relatively stable. The check-in is good practice.",
-        "You're carrying a real money anxiety load. It's running in the background more than you realize.",
-        "Money anxiety is a significant strain on your daily experience. The pattern is learnable and changeable."
-      ];
-      document.getElementById('result-message').textContent = total <= 10 ? msgs[0] : total <= 20 ? msgs[1] : msgs[2];
+      pendingScore = total;
+      if (window.PhoenixLead && PhoenixLead.shouldShowEmailGate()) {
+        document.getElementById('email-gate-section').style.display = 'block';
+        return;
+      }
+      revealPendingResult();
     }
+
+    buildQuestions();
   </script>
+
+<link rel="stylesheet" href="/free/js/phoenix_tool.css">
+<script src="/free/js/phoenix_lead.js"></script>
+<script src="/free/js/phoenix_funnel.js"></script>
+
+<!-- PHOENIX_FLAGSHIP_BOOTSTRAP -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  if (!window.PhoenixFunnel) return;
+  PhoenixFunnel.initSkipFormIfCaptured('form-section', 'tool-section', function() {
+    if (typeof buildQuestions === 'function') buildQuestions();
+  });
+  PhoenixFunnel.bindEmailBeforeResult({
+    topic: 'financial_anxiety',
+    funnelSlug: 'financial-anxiety-check-in',
+    quizId: 'financial_checkin',
+    onSuccess: function() { if (typeof revealPendingResult === 'function') revealPendingResult(); }
+  });
+});
+</script>
 </body>
 </html>

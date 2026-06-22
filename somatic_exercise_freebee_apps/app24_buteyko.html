@@ -93,5 +93,17 @@ function reset(){state='idle';round=0;scores=[];phase='';goBtn.textContent='Star
 goBtn.onclick=()=>{if(state==='idle')startProto()};tapBtn.onclick=tapHold;rstBtn.onclick=reset;document.getElementById('agBtn').onclick=()=>{reset();startProto()};
 document.getElementById('sndBtn').onclick=()=>{au.init();document.getElementById('sndBtn').textContent=au.toggle()?'🔔':'🔇'};
 </script>
+
+<!-- phoenix-lead-footer -->
+<link rel="stylesheet" href="/free/js/phoenix_tool.css">
+<script src="/free/js/phoenix_lead.js"></script>
+<script>
+  if (window.PhoenixLead) {
+    PhoenixLead.initToolPage({
+      footerCta: "This reset works for me every time. The full system is in the book — try it and see."
+    });
+  }
+</script>
+
 </body>
 </html>

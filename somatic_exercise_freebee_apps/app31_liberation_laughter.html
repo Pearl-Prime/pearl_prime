@@ -70,4 +70,16 @@ function reset(){state='idle';pa=false;pO=0;tb=0;particles=[];bpm=120;goBtn.text
 function toggleP(){if(!pa){pa=true;pT2=performance.now();goBtn.textContent='Resume';goBtn.classList.add('pri')}else{pO+=performance.now()-pT2;pa=false;goBtn.textContent='Pause';goBtn.classList.remove('pri');tick()}}
 goBtn.onclick=()=>{if(state==='idle')start();else if(state==='active')toggleP()};rstBtn.onclick=reset;document.getElementById('agBtn').onclick=()=>{reset();start()};
 document.getElementById('sndBtn').onclick=()=>{au.init();document.getElementById('sndBtn').textContent=au.toggle()?'🔔':'🔇'};
-</script></body></html>
+</script>
+<!-- phoenix-lead-footer -->
+<link rel="stylesheet" href="/free/js/phoenix_tool.css">
+<script src="/free/js/phoenix_lead.js"></script>
+<script>
+  if (window.PhoenixLead) {
+    PhoenixLead.initToolPage({
+      footerCta: "This reset works for me every time. The full system is in the book — try it and see."
+    });
+  }
+</script>
+
+</body></html>

@@ -1,0 +1,41 @@
+# Author voice for freebie surfaces — Gen Z, first-person, compliant.
+# Authority: freebie build plan (interactive first, capture once).
+# Consumed by: landing pages, phoenix_lead.js hooks, email copy packs.
+
+schema_version: 1
+
+claim_pattern: >-
+  This {claim} works for me every time. I bet it can help you too — try it and see.
+
+forbidden_patterns:
+  - "guaranteed to work for you"
+  - "will fix your"
+  - "100% success rate for everyone"
+  - "cure"
+
+tone:
+  register: gen_z_direct
+  person: first_person_author
+  energy: progress_bar_pace
+
+topic_hooks:
+  sleep_anxiety: "3 things I do before bed that get me restful sleep basically every night"
+  burnout: "The 5-minute check that told me I was running on fumes (not 'just tired')"
+  overthinking: "I sorted my brain loops in 2 minutes — this is the exact sorter I use"
+  compassion_fatigue: "10 questions that showed me I had nothing left to give (and what to do next)"
+  boundaries: "The scripts I actually say out loud when my body panics on 'no'"
+  anxiety: "90-second reset that shuts off my alarm system — works for me every time"
+  financial_anxiety: "Your bank balance isn't the whole story — this 10-question check is what I use"
+  courage: "The thing I've been avoiding — mapped in 6 steps. This is my protocol"
+  grief: "The letter I write when words won't come — no right way, just honest"
+  depression: "Micro-actions when everything is heavy — I start at zero effort"
+  self_worth: "Proof the voice is wrong — the inventory I actually fill out"
+  imposter_syndrome: "The evidence log I keep when my brain says 'fraud'"
+  social_anxiety: "What I run before, during, and after the thing I'm dreading"
+  financial_stress: "5 prompts that showed me the stress wasn't really about money"
+  somatic_healing: "4 minutes standing up — your body has been trying to tell you something"
+
+footer_cta_template: >-
+  This reset works for me every time. The full system is in the book — I bet it can help you too.
+
+result_disclaimer: "Your score reflects your answers today — not a diagnosis."

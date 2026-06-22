@@ -94,5 +94,17 @@ function toggleP(){if(!pa){pa=true;pT2=performance.now();goBtn.textContent='Resu
 goBtn.onclick=()=>{if(state==='idle')start();else if(state==='active')toggleP()};rstBtn.onclick=reset;document.getElementById('agBtn').onclick=()=>{reset();start()};
 document.getElementById('sndBtn').onclick=()=>{au.init();document.getElementById('sndBtn').textContent=au.toggle()?'🔔':'🔇'};
 </script>
+
+<!-- phoenix-lead-footer -->
+<link rel="stylesheet" href="/free/js/phoenix_tool.css">
+<script src="/free/js/phoenix_lead.js"></script>
+<script>
+  if (window.PhoenixLead) {
+    PhoenixLead.initToolPage({
+      footerCta: "This reset works for me every time. The full system is in the book — try it and see."
+    });
+  }
+</script>
+
 </body>
 </html>
