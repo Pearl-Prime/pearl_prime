@@ -1,0 +1,71 @@
+series_plan_schema: 1.0.0
+locale: en_US
+book_id_prefix: confidence_core__house__gen_alpha_students__self_worth
+brand: confidence_core
+teacher: null
+persona: gen_alpha_students
+topic: self_worth
+byline_author: yara_hale
+arc:
+  installment_1:
+    book_id: confidence_core__house__gen_alpha_students__self_worth__shame
+    engine: shame
+    master_arc: config/source_of_truth/master_arcs/gen_alpha_students__self_worth__shame__F006.yaml
+    duration: standard_book_60min
+  installment_2:
+    book_id: confidence_core__house__gen_alpha_students__self_worth__comparison
+    engine: comparison
+    master_arc: config/source_of_truth/master_arcs/gen_alpha_students__self_worth__comparison__F006.yaml
+    duration: standard_book_60min
+reader_promise_family: 'You will learn to stand in the doorway of who you are becoming
+  and recognize that your worth was never the thing being graded. Each book meets
+  a student at the exact moment they decide something is wrong with them, and walks
+  them back to the truth: you are not your worst day, your worst grade, or the version
+  of you that everyone else seems to be winning at.'
+bestseller_hook_family: ''
+emotional_engine: self_worth_recognition
+comp_series:
+- The Self-Esteem Workbook for Teens (Lisa M. Schab) — plainspoken, non-clinical self-worth
+  tools written directly for a young reader, not for the adult in the room
+- You Are a Champion (Marcus Rashford) — a warm, encouraging voice that talks to kids
+  as whole people about worth and self-belief without hustle or hype
+- What Do You Say? (Rosalind Wiseman & Charlie Kuhn) — meets middle and high schoolers
+  in their real social world of comparison, shame, and saying the wrong thing, with
+  respect instead of lecture
+platform_strategy:
+  primary:
+  - kdp_ebook
+  - audible
+  secondary:
+  - apple_books
+  - google_play
+  - spotify_audiobooks
+  launch_platform: kdp_ebook
+  cadence:
+    release_spacing_days: 14
+    max_books_per_brand_per_month: 2
+reader_avatar:
+  age: 11 to 17, middle and high school students of Gen Alpha
+  where_they_are: It's almost midnight and the group chat is still going, the test
+    is in the morning, and they're lying in bed scrolling through everyone else's
+    highlight reel, replaying the one thing they said in class today that came out
+    wrong, certain that everyone noticed and that it means something about who they
+    really are.
+  what_they_need: To hear, in plain language and without being talked down to, that
+    their worth is not a score; that the feeling of being not enough is a feeling
+    and not a fact; and that they are allowed to cross over into a steadier version
+    of themselves without first fixing everything that feels broken.
+  what_they_avoid: Adults who lecture, motivational-poster slogans, 'just believe
+    in yourself' pep talks, anything that sounds like a teacher or a brand trying
+    to be relatable, and the fake-it-til-you-make-it hype that tells them to perform
+    a confidence they don't feel.
+series_voice_markers:
+  register: encouraging, clear, steady; warm and direct without flattering; speaks
+    to a young person as a whole person, never clinical, never preachy, never hype;
+    the voice of someone a few steps ahead at the doorway, holding it open
+  sentence_rhythm: short, grounded sentences with room to breathe; plain words a fourteen-year-old
+    uses; occasional one-line turns that land like a held breath before stepping through
+  metaphor_family: the threshold and the doorway; crossing from one room into the
+    next; the first step over a line on the floor; who you become on the other side;
+    standing in the doorway before you walk through; the held breath before entering
+_needs_authoring: false

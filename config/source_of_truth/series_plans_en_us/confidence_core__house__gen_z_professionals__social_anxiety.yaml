@@ -1,0 +1,77 @@
+series_plan_schema: 1.0.0
+locale: en_US
+book_id_prefix: confidence_core__house__gen_z_professionals__social_anxiety
+brand: confidence_core
+teacher: null
+persona: gen_z_professionals
+topic: social_anxiety
+byline_author: noor_marsh
+arc:
+  installment_1:
+    book_id: confidence_core__house__gen_z_professionals__social_anxiety__false_alarm
+    engine: false_alarm
+    master_arc: config/source_of_truth/master_arcs/gen_z_professionals__social_anxiety__false_alarm__F006.yaml
+    duration: standard_book_60min
+  installment_2:
+    book_id: confidence_core__house__gen_z_professionals__social_anxiety__shame
+    engine: shame
+    master_arc: config/source_of_truth/master_arcs/gen_z_professionals__social_anxiety__shame__F006.yaml
+    duration: standard_book_60min
+  installment_3:
+    book_id: confidence_core__house__gen_z_professionals__social_anxiety__comparison
+    engine: comparison
+    master_arc: config/source_of_truth/master_arcs/gen_z_professionals__social_anxiety__comparison__F006.yaml
+    duration: standard_book_60min
+reader_promise_family: You will learn to stand in the doorway of a room, a meeting,
+  a conversation, and walk through it as yourself — not by silencing the fear, but
+  by no longer letting it decide who you get to be. No performance, no fixing, no
+  becoming someone louder. Just a steadier way to cross from the person who hides
+  to the person who arrives.
+bestseller_hook_family: ''
+emotional_engine: social_anxiety_recognition
+comp_series:
+- Unfuck Yourself series (Gary John Bishop) — direct, no-flattery self-talk for people
+  tired of being talked at; matches the steady, warm-but-honest register without the
+  hustle.
+- The Highly Sensitive Person companion works (Elaine N. Aron) — reframes quiet, scanning
+  sensitivity as a way of being rather than a defect to fix, the same anti-optimization
+  stance.
+- How to Be Yourself (Ellen Hendriksen) — social anxiety treated with compassion and
+  specificity instead of 'just be confident' cliches, the closest tonal sibling for
+  this persona.
+platform_strategy:
+  primary:
+  - kdp_ebook
+  - audible
+  secondary:
+  - apple_books
+  - google_play
+  - spotify_audiobooks
+  launch_platform: kdp_ebook
+  cadence:
+    release_spacing_days: 14
+    max_books_per_brand_per_month: 2
+reader_avatar:
+  age: 22 to 29
+  where_they_are: Standing in the office kitchen with a mug they don't want, rehearsing
+    a sentence they may never say, while two coworkers laugh about something they
+    didn't catch — and the Slack message they sent an hour ago still has no reply,
+    so they've reread it nine times looking for the mistake.
+  what_they_need: To understand that the bracing, the rehearsing, the replaying, the
+    comparing, and the quiet certainty that they're somehow doing personhood wrong
+    are all one system — a social alarm that learned to overfire — and that they can
+    meet a room without first defeating that alarm.
+  what_they_avoid: Fake-it-til-you-make-it hype, networking-guru scripts, 'just put
+    yourself out there' advice, boss-babe confidence cliches, toxic positivity, and
+    any book that treats their quiet as a defect to be optimized into someone louder.
+series_voice_markers:
+  register: encouraging, clear, steady; warm and direct; meets you at the threshold
+    of who you are becoming and believes in you without flattering; never clinical,
+    never preachy, never hustle
+  sentence_rhythm: plainspoken and grounded, with short declaratives that land like
+    a hand on the shoulder, opening into one longer breath when naming what you've
+    carried — then settling back to simple, so nothing feels performed
+  metaphor_family: the threshold and the doorway; crossing from one room to the next;
+    the first step over a line; the held breath before entering; who you become on
+    the other side of a door you've been standing in front of for years
+_needs_authoring: false
