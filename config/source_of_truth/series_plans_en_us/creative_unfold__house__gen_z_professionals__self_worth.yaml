@@ -1,0 +1,69 @@
+series_plan_schema: 1.0.0
+locale: en_US
+book_id_prefix: creative_unfold__house__gen_z_professionals__self_worth
+brand: creative_unfold
+teacher: null
+persona: gen_z_professionals
+topic: self_worth
+byline_author: brid_thorne
+arc:
+  installment_1:
+    book_id: creative_unfold__house__gen_z_professionals__self_worth__shame
+    engine: shame
+    master_arc: config/source_of_truth/master_arcs/gen_z_professionals__self_worth__shame__F006.yaml
+    duration: standard_book_60min
+  installment_2:
+    book_id: creative_unfold__house__gen_z_professionals__self_worth__comparison
+    engine: comparison
+    master_arc: config/source_of_truth/master_arcs/gen_z_professionals__self_worth__comparison__F006.yaml
+    duration: standard_book_60min
+reader_promise_family: You are not a project to be finished or a brand to be optimized.
+  Underneath the version of you that performs being fine, there is a person who was
+  always allowed to be unfinished — and these books help you find your way back to
+  them, one honest mark at a time.
+bestseller_hook_family: ''
+emotional_engine: self_worth_recognition
+comp_series:
+- The Lazy Genius (Kendra Adachi) — warm, permission-giving anti-optimization voice
+  for an overextended generation
+- How to Do the Work (Nicole LePera) — interior, self-compassionate reframing of the
+  beliefs running underneath the performance
+- Real Self-Care (Pooja Lakshmin) — names the hustle-culture trap of treating your
+  worth as output and refuses to sell another fix
+platform_strategy:
+  primary:
+  - kdp_ebook
+  - audible
+  secondary:
+  - apple_books
+  - google_play
+  - spotify_audiobooks
+  launch_platform: kdp_ebook
+  cadence:
+    release_spacing_days: 14
+    max_books_per_brand_per_month: 2
+reader_avatar:
+  age: 23 to 31
+  where_they_are: It's 9:40pm and you're still at your laptop in a studio apartment,
+    a half-eaten dinner going cold, refreshing the Slack channel where someone two
+    years younger just got praised. Your camera was off all day in meetings so no
+    one could see your face do the thing it does. Everyone in the glass conference
+    room this afternoon looked like they belonged there. You laughed at the right
+    moments. You went home and felt like a fraud who got away with it again.
+  what_they_need: To stop treating their own worth as a deliverable — to feel, even
+    for one quiet evening, that they are enough before they produce anything, and
+    that the self they hide might be the only part worth keeping.
+  what_they_avoid: '''Unleash your inner genius'' hype, LinkedIn-flavored confidence
+    hacks, hustle-culture self-improvement, toxic positivity that tells them to just
+    be grateful, and any book that turns their becoming into another KPI to hit.'
+series_voice_markers:
+  register: open, warm, encouraging, and unflinchingly honest; the voice of an older
+    friend who's done the same job and survived it, sitting across from you with the
+    laptops closed — never clinical, never preachy, never selling a hustle
+  sentence_rhythm: conversational and uneven on purpose; short declaratives that land
+    like a first brushstroke, then longer breathing lines that let a feeling open;
+    questions left genuinely open instead of answered for you
+  metaphor_family: the blank canvas and the first mark, the empty page, the draft
+    you are allowed to ruin, color returning to something that went grey, the unfinished
+    and the becoming, what wants to be made through you when you stop performing
+_needs_authoring: false

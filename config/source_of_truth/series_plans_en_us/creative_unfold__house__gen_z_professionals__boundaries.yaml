@@ -1,0 +1,70 @@
+series_plan_schema: 1.0.0
+locale: en_US
+book_id_prefix: creative_unfold__house__gen_z_professionals__boundaries
+brand: creative_unfold
+teacher: null
+persona: gen_z_professionals
+topic: boundaries
+byline_author: tomas_castellan
+arc:
+  installment_1:
+    book_id: creative_unfold__house__gen_z_professionals__boundaries__false_alarm
+    engine: false_alarm
+    master_arc: config/source_of_truth/master_arcs/gen_z_professionals__boundaries__false_alarm__F006.yaml
+    duration: standard_book_60min
+  installment_2:
+    book_id: creative_unfold__house__gen_z_professionals__boundaries__shame
+    engine: shame
+    master_arc: config/source_of_truth/master_arcs/gen_z_professionals__boundaries__shame__F006.yaml
+    duration: standard_book_60min
+  installment_3:
+    book_id: creative_unfold__house__gen_z_professionals__boundaries__comparison
+    engine: comparison
+    master_arc: config/source_of_truth/master_arcs/gen_z_professionals__boundaries__comparison__F006.yaml
+    duration: standard_book_60min
+reader_promise_family: You get to draw the line that protects the part of you that's
+  still becoming — without apologizing for the space it takes, and without turning
+  your worth into something you have to earn back every shift.
+bestseller_hook_family: ''
+emotional_engine: boundaries_recognition
+comp_series:
+- Set Boundaries, Find Peace series (Nedra Glover Tawwab) — the gold standard for
+  boundary work that names the guilt instead of shaming it away
+- Burnout (Emily & Amelia Nagoski) — speaks to the exhausted twenty-something whose
+  body keeps the score the calendar won't
+- Year of Yes (Shonda Rhimes) — the lived-experience, non-clinical voice of someone
+  learning to say the word in real time
+platform_strategy:
+  primary:
+  - kdp_ebook
+  - audible
+  secondary:
+  - apple_books
+  - google_play
+  - spotify_audiobooks
+  launch_platform: kdp_ebook
+  cadence:
+    release_spacing_days: 14
+    max_books_per_brand_per_month: 2
+reader_avatar:
+  age: early-to-mid twenties
+  where_they_are: It's 9:47pm and the message you wrote eleven minutes ago is still
+    sitting in the draft box — 'Hey, I actually can't pick that up this weekend' —
+    and your thumb is hovering, and you've already rewritten it four times to sound
+    less like you mean it.
+  what_they_need: permission to let 'no' be a complete sentence, and a way to feel
+    the difference between guilt and danger before it runs the whole decision
+  what_they_avoid: boss-energy boundary scripts, 'protect your peace' merch, hustle-culture
+    self-optimization, and anyone who makes saying no sound easy when it has never
+    once been easy
+series_voice_markers:
+  register: open, warm, plainspoken, creative; the voice of a slightly-older friend
+    who also freezes when the group chat lights up — never a manager, never a coach,
+    never clinical
+  sentence_rhythm: short declaratives that land, then a longer breath that turns the
+    knife gently; the rhythm of someone thinking out loud in the next room, not reciting
+    a framework
+  metaphor_family: the blank canvas and the first mark, the empty page, the line you
+    draw to decide what the picture is, white space as a choice not a failure, the
+    draft you're allowed to ruin, color returning to a life you'd let go grey
+_needs_authoring: false
