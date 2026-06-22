@@ -1,0 +1,75 @@
+series_plan_schema: 1.0.0
+locale: en_US
+book_id_prefix: stabilizer__house__tech_finance_burnout__somatic_healing
+brand: stabilizer
+teacher: null
+persona: tech_finance_burnout
+topic: somatic_healing
+byline_author: priya_beck
+arc:
+  installment_1:
+    book_id: stabilizer__house__tech_finance_burnout__somatic_healing__overwhelm
+    engine: overwhelm
+    master_arc: config/source_of_truth/master_arcs/tech_finance_burnout__somatic_healing__overwhelm__F006.yaml
+    duration: standard_book_60min
+  installment_2:
+    book_id: stabilizer__house__tech_finance_burnout__somatic_healing__watcher
+    engine: watcher
+    master_arc: config/source_of_truth/master_arcs/tech_finance_burnout__somatic_healing__watcher__F006.yaml
+    duration: standard_book_60min
+reader_promise_family: For the high-performer whose body never got the memo that the
+  danger passed — a steady harbor where you stop bracing, stop scanning, and let the
+  nervous system you've overridden for years finally come back to ground. No optimization,
+  no powering through. Just the felt work of becoming someone the storm can't capsize.
+bestseller_hook_family: ''
+emotional_engine: somatic_healing_recognition
+comp_series:
+- The Body Keeps the Score (Bessel van der Kolk) — the foundational text on how trauma
+  and chronic stress live in the body, written for the reader who's ready to stop
+  thinking their way out
+- 'Burnout: The Secret to Unlocking the Stress Cycle (Emily & Amelia Nagoski) — names
+  the unfinished stress response stuck in the body and gives it somewhere to go, for
+  the depleted high-achiever'
+- 'Anchored: How to Befriend Your Nervous System Using Polyvagal Theory (Deb Dana)
+  — warm, practical nervous-system regulation that meets the body where it is rather
+  than demanding it perform calm'
+platform_strategy:
+  primary:
+  - kdp_ebook
+  - audible
+  secondary:
+  - apple_books
+  - google_play
+  - spotify_audiobooks
+  launch_platform: kdp_ebook
+  cadence:
+    release_spacing_days: 14
+    max_books_per_brand_per_month: 2
+reader_avatar:
+  age: 30s to mid-40s
+  where_they_are: It's 11:40pm and the laptop is finally closed, but your jaw is still
+    clenched and your shoulders are still up by your ears. The day ended hours ago
+    and your body didn't get the message. You're successful on paper — the title,
+    the comp, the calm Slack replies — and underneath it your chest is tight, your
+    stomach is in a fist, and you can't remember the last time you felt your own feet
+    on the floor.
+  what_they_need: To understand that the tension, the bracing, the can't-sit-still
+    is the body keeping score of years lived in fight-or-flight — and that the way
+    out is downward, into the body, not another mental strategy. They need permission
+    to stop performing calm and start actually feeling safe, one small somatic signal
+    at a time.
+  what_they_avoid: White-knuckle resilience, 'just push through,' biohacking your
+    nervous system like a system to optimize, performative wellness, toxic positivity,
+    and any advice that treats a depleted body as a productivity problem to solve.
+series_voice_markers:
+  register: steadying, warm, plainspoken; the voice of someone who has sat where you're
+    sitting and isn't in a hurry — a hand on the shoulder, never a clinician's clipboard
+    and never a coach's whistle
+  sentence_rhythm: calm and unhurried, with the cadence of slow breath; longer settling
+    sentences that let you exhale, broken by short anchoring lines that land like
+    a boat touching the dock
+  metaphor_family: the harbor and the anchor line — the breakwater that takes the
+    swell so you don't, still water on the inside, the boat that stops pitching, the
+    cleat that holds, the steady horizon, solid ground under a body that's been at
+    sea
+_needs_authoring: false

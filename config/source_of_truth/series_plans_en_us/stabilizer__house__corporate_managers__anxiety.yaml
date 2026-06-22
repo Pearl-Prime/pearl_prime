@@ -1,0 +1,98 @@
+series_plan_schema: 1.0.0
+locale: en_US
+book_id_prefix: stabilizer__house__corporate_managers__anxiety
+brand: stabilizer
+teacher: null
+persona: corporate_managers
+topic: anxiety
+byline_author: yara_fenwick
+arc:
+  installment_1:
+    book_id: stabilizer__house__corporate_managers__anxiety__false_alarm
+    engine: false_alarm
+    master_arc: config/source_of_truth/master_arcs/corporate_managers__anxiety__false_alarm__F006.yaml
+    duration: standard_book_60min
+  installment_2:
+    book_id: stabilizer__house__corporate_managers__anxiety__overwhelm
+    engine: overwhelm
+    master_arc: config/source_of_truth/master_arcs/corporate_managers__anxiety__overwhelm__F006.yaml
+    duration: standard_book_60min
+  installment_3:
+    book_id: stabilizer__house__corporate_managers__anxiety__spiral
+    engine: spiral
+    master_arc: config/source_of_truth/master_arcs/corporate_managers__anxiety__spiral__F009.yaml
+    duration: standard_book_60min
+  installment_4:
+    book_id: stabilizer__house__corporate_managers__anxiety__shame
+    engine: shame
+    master_arc: config/source_of_truth/master_arcs/corporate_managers__anxiety__shame__F006.yaml
+    duration: standard_book_60min
+  installment_5:
+    book_id: stabilizer__house__corporate_managers__anxiety__grief
+    engine: grief
+    master_arc: config/source_of_truth/master_arcs/corporate_managers__anxiety__grief__F006.yaml
+    duration: standard_book_60min
+  installment_6:
+    book_id: stabilizer__house__corporate_managers__anxiety__comparison
+    engine: comparison
+    master_arc: config/source_of_truth/master_arcs/corporate_managers__anxiety__comparison__F006.yaml
+    duration: standard_book_60min
+  installment_7:
+    book_id: stabilizer__house__corporate_managers__anxiety__watcher
+    engine: watcher
+    master_arc: config/source_of_truth/master_arcs/corporate_managers__anxiety__watcher__F006.yaml
+    duration: standard_book_60min
+reader_promise_family: 'For the manager everyone leans on and no one steadies: a harbor
+  for the anxious mind that has to keep deciding, keep delivering, keep holding the
+  team together. Not another system to optimize yourself with — a place to stop pitching
+  in the swell and feel the ground hold, so you can lead from steadiness instead of
+  bracing.'
+bestseller_hook_family: ''
+emotional_engine: anxiety_recognition
+comp_series:
+- Unwinding Anxiety (Judson Brewer) — names the anxiety loop and how it feeds itself,
+  for the high-functioning reader who can't think their way out
+- Burnout (Emily & Amelia Nagoski) — speaks to depleted high-responsibility people
+  and completing the stress cycle, not powering through it
+- The Anxiety Toolkit (Alice Boyes) — practical and warm for the capable over-thinker
+  who looks fine on the outside and is bracing on the inside
+platform_strategy:
+  primary:
+  - kdp_ebook
+  - audible
+  secondary:
+  - apple_books
+  - google_play
+  - spotify_audiobooks
+  launch_platform: kdp_ebook
+  cadence:
+    release_spacing_days: 14
+    max_books_per_brand_per_month: 2
+reader_avatar:
+  age: 35-52
+  where_they_are: It's 6:40am and you're already awake before the alarm, running the
+    standup in your head before it happens — who's behind, what the VP will ask, the
+    one number you can't make land. Your inbox has forty-one unread and you haven't
+    opened your eyes. You're the one the team comes to when they're rattled, and you've
+    gotten very good at looking like the calm one. Nobody knows your chest has been
+    tight since Tuesday.
+  what_they_need: To feel steady underneath the responsibility instead of white-knuckling
+    it; to understand what their anxiety is actually doing without being told to 'manage'
+    it like a project; permission to stop performing calm and actually find some;
+    a way to lead a team without the cost being their own nervous system.
+  what_they_avoid: Hustle-coded resilience, 'just push through,' productivity hacks
+    aimed at their nervous system, performative calm and toxic positivity, anything
+    corporate-wellness-flavored that adds one more KPI to a person already over capacity,
+    advice that leaves a depleted leader more adrift than before.
+series_voice_markers:
+  register: steadying, calm, anchoring; warm and plain, the voice of someone who has
+    sat in the same swell and isn't going to lie to you about it; never clinical,
+    never preachy, never hustle; speaks to a competent adult who is tired, not a patient
+    to be fixed
+  sentence_rhythm: measured and grounded; longer settling sentences that let the breath
+    out, broken by a short flat true one that lands like an anchor catching; never
+    breathless, never listicle-staccato; the rhythm of water steadying inside a breakwater
+  metaphor_family: the harbor and the anchor line; still water inside the breakwater;
+    the boat that stops pitching; ground that holds in a storm; the steady horizon;
+    what keeps you from drifting — never machinery, military, productivity, or biohacking
+_needs_authoring: false
