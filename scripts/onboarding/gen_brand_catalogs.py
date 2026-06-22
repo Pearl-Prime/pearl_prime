@@ -18,7 +18,7 @@ Run:  python3 scripts/onboarding/gen_brand_catalogs.py
 from __future__ import annotations
 import argparse
 import json
-from collections import defaultdict
+from collections import defaultdict, Counter
 from pathlib import Path
 
 import yaml
@@ -41,13 +41,16 @@ def book_from_plan(d: dict, stem: str) -> dict:
     kw = ((d.get("keywords") or {}).get("primary") or [])[:7]
     ap = d.get("author_positioning") or {}
     brand_prefix = stem.split("__")[0]
+    book_id = (d.get("book_id") or stem).strip()
     return {
+        "book_id": book_id,
+        "file_stem": book_id,
         "title": (d.get("title") or "").strip(),
         "subtitle": (d.get("subtitle") or "").strip(),
         "desc": blurb.strip(),                                  # short blurb (list/cover)
         "long_desc": long_desc.strip(),                         # full store description
         "angle": (d.get("cover_tagline") or "").strip(),        # the marketing hook
-        "cover": f"assets/covers/{brand_prefix}/{stem}.png",    # rendered cover (brand_covers); dashboard falls back on 404
+        "cover": f"assets/covers/{brand_prefix}/{book_id}.png",
         "author": humanize(ap.get("byline_author")),            # public byline = pen name (matches cover; never the teacher / Sai Maa)
         "keywords": [str(k) for k in kw],
         "bisac": [str(c) for c in (d.get("bisac_codes") or [])][:3],
@@ -90,6 +93,14 @@ def main() -> None:
     # (the subtitle carries the persona), so a title sort clusters duplicates into
     # one week. This interleaving keeps each weekly window varied + deterministic.
     for brand, books in sorted(by_brand.items()):
+        titles = [b["title"] for b in books]
+        subtitles = [b["subtitle"] for b in books]
+        dup_t = {t: c for t, c in Counter(titles).items() if c > 1}
+        dup_s = {t: c for t, c in Counter(subtitles).items() if c > 1}
+        if brand == "way_stream_sanctuary" and (dup_t or dup_s):
+            raise SystemExit(
+                f"UNIQUENESS GUARD {brand}: duplicate titles={dup_t or 0} subtitles={dup_s or 0}"
+            )
         books.sort(key=lambda b: (b["persona"], b["topic"], b["engine"], b["title"]))
         out = {"brand": brand, "count": len(books), "books": books}
         (OUTDIR / f"{brand}.json").write_text(

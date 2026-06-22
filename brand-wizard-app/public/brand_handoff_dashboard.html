@@ -412,28 +412,29 @@ function buildMetadataFile(p, week, pkt) {
   const items = feedFor(pkt, p), pc = `price_${CURRENCY}`;
   const langTag = CURRENCY === "jpy" ? "ja-JP" : "en-US", pub = BRAND.label;
   const au = b => b.author || pub;                 // narrating teacher, else the imprint (composite)
-  const ef = b => `${slug(b.title)}.epub`, cf = b => `${slug(b.title)}.jpg`;
+  const stem = b => b.file_stem || b.book_id || slug(b.title);
+  const ef = b => `${stem(b)}.epub`, cf = b => `${stem(b)}.jpg`;
   if (p.dlType === "gp_booklist") {
     // Google Play Books bulk book-list (tab-delimited flat file) — full metadata.
     const head = ["identifier","title","subtitle","contributor","description","language",pc,"publisher","bisac_1","bisac_2","bisac_3","maturity_rating","content_file","cover_file"];
-    const rows = items.map(b => [b.isbn||"PENDING", b.title, b.subtitle, au(b), b.longDesc||b.desc, langTag, b.price, pub, ...pad(b.cats,3), "EVERYONE", ef(b), `${slug(b.title)}_frontcover.jpg`]);
+    const rows = items.map(b => [b.isbn||"PENDING", b.title, b.subtitle, au(b), b.longDesc||b.desc, langTag, b.price, pub, ...pad(b.cats,3), "EVERYONE", ef(b), `${stem(b)}_frontcover.jpg`]);
     return {name:`google_play_booklist__${BRAND.id}__${week}.txt`, text:[head, ...rows].map(r => row(r,"\t")).join("\n"), mime:"text/plain"};
   }
   if (p.dlType === "kdp_csv") {
     // Amazon KDP — the fields a director copy-pastes into the Kindle eBook form.
     const head = ["title","subtitle","author","publisher","description","language","keyword_1","keyword_2","keyword_3","keyword_4","keyword_5","keyword_6","keyword_7","category_1","category_2","category_3",pc,"ai_text","ai_images","ai_translation","manuscript_file","cover_file"];
-    const rows = items.map(b => [b.title, b.subtitle||b.angle, au(b), pub, b.longDesc||b.desc, langTag, ...pad(b.keywords,7), ...pad(b.cats,3), b.price, "Yes","Yes","No", ef(b), cf(b)]);
+    const rows = items.map(b => [b.title, b.subtitle, au(b), pub, b.longDesc||b.desc, langTag, ...pad(b.keywords,7), ...pad(b.cats,3), b.price, "Yes","Yes","No", ef(b), cf(b)]);
     return {name:`kdp_metadata__${BRAND.id}__${week}.csv`, text:[head, ...rows].map(r => row(r)).join("\n"), mime:"text/csv"};
   }
   if (p.dlType === "ebook_csv") {
     // Apple Books / Rakuten Kobo — web-form fields + the files to attach.
     const head = ["title","subtitle","author","publisher","description","language","category",pc,"isbn","epub_file","sample_file","cover_file"];
-    const rows = items.map(b => [b.title, b.subtitle, au(b), pub, b.longDesc||b.desc, langTag, (b.cats&&b.cats[0])||CAT.cats[0], b.price, b.isbn||"PENDING", ef(b), `${slug(b.title)}_sample.epub`, cf(b)]);
+    const rows = items.map(b => [b.title, b.subtitle, au(b), pub, b.longDesc||b.desc, langTag, (b.cats&&b.cats[0])||CAT.cats[0], b.price, b.isbn||"PENDING", ef(b), `${stem(b)}_sample.epub`, cf(b)]);
     return {name:`${p.id}_metadata__${BRAND.id}__${week}.csv`, text:[head, ...rows].map(r => row(r)).join("\n"), mime:"text/csv"};
   }
   if (p.dlType === "audiobook_csv") {
     const head = ["title","author","narrator","publisher","isbn","description","category",pc,"digital_voice","audio_files","cover_file"];
-    const rows = items.map(b => [b.title, au(b), LANG==="ja"?"AI音声":"Digital voice (AI)", pub, b.isbn||"PENDING", b.longDesc||b.desc, (b.cats&&b.cats[0])||CAT.cats[0], b.audioP||audioPrice(), "Yes", `${slug(b.title)}/01_opening.mp3; ${slug(b.title)}/chapters/*.mp3; ${slug(b.title)}/99_closing.mp3; ${slug(b.title)}/retail_sample.mp3`, `${slug(b.title)}_cover.jpg`]);
+    const rows = items.map(b => [b.title, au(b), LANG==="ja"?"AI音声":"Digital voice (AI)", pub, b.isbn||"PENDING", b.longDesc||b.desc, (b.cats&&b.cats[0])||CAT.cats[0], b.audioP||audioPrice(), "Yes", `${stem(b)}/01_opening.mp3; ${stem(b)}/chapters/*.mp3; ${stem(b)}/99_closing.mp3; ${stem(b)}/retail_sample.mp3`, `${stem(b)}_cover.jpg`]);
     return {name:`${p.id}_audiobooks__${BRAND.id}__${week}.csv`, text:[head, ...rows].map(r => row(r)).join("\n"), mime:"text/csv"};
   }
   if (p.dlType === "podcast_csv") {
