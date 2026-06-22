@@ -1,4 +1,4 @@
-> ⛔ SUPERSEDED 2026-06-22 @ origin/main 39e653c4fb6d65910ae97152b28fdadefec449d5 — current truth: docs/PROGRAM_STATE.md
+> ⛔ For current program STATE → docs/PROGRAM_STATE.md. This file remains the authoritative architecture CAP REGISTRY.
 
 # Pearl_Architect State
 
