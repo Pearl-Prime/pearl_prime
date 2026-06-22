@@ -58,7 +58,13 @@ from scripts.image_generation.manga_teacher_batch import _build_workflow
 from scripts.image_generation.runcomfy_batch import load_workflow
 
 WORKFLOW_PATH = REPO_ROOT / "scripts" / "image_generation" / "comfyui_workflows" / "flux_txt2img_manga.json"
-DEFAULT_COMFY_URL = os.environ.get("COMFYUI_URL", "http://192.168.1.112:8188")
+
+
+def _default_comfy_url() -> str:
+    url = (os.environ.get("COMFYUI_URL") or "").strip()
+    if not url and os.environ.get("PEARL_STAR_IP"):
+        url = f"http://{os.environ['PEARL_STAR_IP'].strip()}:8188"
+    return url
 DEFAULT_STEPS = 22  # FLUX-schnell-fp8 sweet spot for manga panels
 DEFAULT_GUIDANCE = 3.8
 DEFAULT_SEED = 42
@@ -191,7 +197,7 @@ def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--panel-prompts", required=True, help="Path to panel_prompts.json")
     ap.add_argument("--output-dir", default=None, help="Output dir (default: artifacts/manga/<series>/panels/<chapter>/)")
-    ap.add_argument("--comfy-url", default=DEFAULT_COMFY_URL, help=f"ComfyUI URL (default: {DEFAULT_COMFY_URL})")
+    ap.add_argument("--comfy-url", default=None, help="ComfyUI URL (default: COMFYUI_URL from env)")
     ap.add_argument("--only-panel", default=None, help="Render only this panel_id (smoke test)")
     ap.add_argument("--seed-base", type=int, default=DEFAULT_SEED, help=f"Seed base (panel index added; default: {DEFAULT_SEED})")
     ap.add_argument(
@@ -208,6 +214,12 @@ def main() -> int:
     )
     ap.add_argument("--skip-existing", action="store_true", help="Skip panels whose output PNG already exists")
     ap.add_argument("--dry-run", action="store_true", help="Validate prompts; do not call ComfyUI")
+    ap.add_argument(
+        "--via-queue",
+        action="store_true",
+        help="Enqueue panels on Pearl Star Procrastinate (canonical per MANGA_PRODUCTION_OPERATIONAL_V1_SPEC)",
+    )
+    ap.add_argument("--ssh-host", default="pearl_star", help="SSH host for --via-queue when PS_QUEUE_DSN unset")
     # V2 Phase B.7 extensions: workflow override + reference-image conditioning.
     # Back-compat: when neither --workflow-path nor --reference-image is set,
     # the existing FLUX-schnell-no-PuLID path runs unchanged (brand-2 V1 ship).
@@ -220,6 +232,13 @@ def main() -> int:
                          "in the workflow JSON LoadImage node). Implies --workflow-path the "
                          "matching PuLID variant if not explicitly set.")
     args = ap.parse_args()
+    comfy_url = (args.comfy_url or _default_comfy_url()).strip()
+    if not args.dry_run and not args.via_queue and not comfy_url:
+        print(
+            "ERROR: COMFYUI_URL not set. Load Keychain env or pass --comfy-url / use --via-queue.",
+            file=sys.stderr,
+        )
+        return 1
 
     pp_path = Path(args.panel_prompts).resolve()
     if not pp_path.is_file():
@@ -247,7 +266,10 @@ def main() -> int:
 
     print(f"queue: {len(panels)} panel(s) · series={series_id} · chapter={chapter_id}", file=sys.stderr)
     print(f"output dir: {out_dir}", file=sys.stderr)
-    print(f"comfy URL: {args.comfy_url}", file=sys.stderr)
+    if args.via_queue:
+        print("mode: via-queue (Pearl Star Procrastinate)", file=sys.stderr)
+    else:
+        print(f"comfy URL: {comfy_url}", file=sys.stderr)
 
     if args.dry_run:
         for i, p in enumerate(panels):
@@ -267,16 +289,28 @@ def main() -> int:
     if not workflow_path.is_file():
         print(f"ERROR: workflow template missing: {workflow_path}", file=sys.stderr)
         return 1
-    workflow_template = load_workflow(workflow_path)
-    if args.reference_image:
-        # Inject reference image filename into LoadImage node's {{reference_image}} placeholder
-        for node in workflow_template.values():
-            if isinstance(node, dict):
-                inputs = node.get("inputs") or {}
-                img = inputs.get("image")
-                if isinstance(img, str) and "{{reference_image}}" in img:
-                    inputs["image"] = args.reference_image
-        print(f"reference image: {args.reference_image} (must be in ComfyUI input/ dir)", file=sys.stderr)
+    workflow_template = None
+    if not args.via_queue:
+        workflow_template = load_workflow(workflow_path)
+        if args.reference_image:
+            for node in workflow_template.values():
+                if isinstance(node, dict):
+                    inputs = node.get("inputs") or {}
+                    img = inputs.get("image")
+                    if isinstance(img, str) and "{{reference_image}}" in img:
+                        inputs["image"] = args.reference_image
+            print(
+                f"reference image: {args.reference_image} (must be in ComfyUI input/ dir)",
+                file=sys.stderr,
+            )
+    elif args.reference_image:
+        print(
+            "WARN: --reference-image ignored in --via-queue mode (PuLID queue path not wired)",
+            file=sys.stderr,
+        )
+
+    if args.via_queue:
+        from scripts.manga.pearl_star_t2i_enqueue import enqueue_panel_job, pick_task_for_workflow
 
     ok = 0
     fail = 0
@@ -288,18 +322,32 @@ def main() -> int:
             print(f"  SKIP {pid} (already exists)", file=sys.stderr)
             skipped += 1
             continue
-        # Seed selection. Default = index jitter (seed_base + i). --seed-by-character
-        # derives a per-character seed (matching reference_sheet_generator.py:251 and
-        # render_v5_episode.py) so a character holds consistent across panels. This
-        # legacy panel_prompts.json schema does not currently carry character_id, so
-        # the per-character branch only engages if a future emitter adds the field;
-        # otherwise it falls back to index jitter (honest no-op — flagged in --help).
         char_id = panel.get("character_id") if args.seed_by_character else None
         if char_id:
             seed = args.seed_base + sum(ord(c) for c in str(char_id))
         else:
             seed = args.seed_base + i
-        success, msg = queue_one_panel(args.comfy_url, workflow_template, panel, seed, out_path)
+
+        if args.via_queue:
+            task_name = pick_task_for_workflow(workflow_path.name)
+            try:
+                res = enqueue_panel_job(
+                    task=task_name,
+                    prompt=panel.get("prompt") or panel.get("flux_prompt") or "",
+                    negative=panel.get("negative_prompt", ""),
+                    seed=seed,
+                    panel_id=pid,
+                    output_basename=pid,
+                    ssh_host=args.ssh_host,
+                )
+                print(f"  QUEUE {pid} job_id={res.get('job_id')} via={res.get('via')}", file=sys.stderr)
+                ok += 1
+            except Exception as e:
+                print(f"  FAIL {pid}: enqueue — {e}", file=sys.stderr)
+                fail += 1
+            continue
+
+        success, msg = queue_one_panel(comfy_url, workflow_template, panel, seed, out_path)
         prefix = "OK  " if success else "FAIL"
         print(f"  {prefix} {msg}", file=sys.stderr)
         if success:

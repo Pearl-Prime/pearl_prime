@@ -1,23 +1,38 @@
 {
     "_meta": {
         "name": "Phoenix Omega — Qwen-Image txt2img (manga panel; CJK + character work)",
-        "description": "Qwen-Image base (Apache 2.0; weakest 'average face' attractor per artifacts/research/average_face_problem_eval_2026-05-02.md). Primary base for character-distinctness work AND speech-bubble text rendering on JP/CN locales (Qwen2.5-VL text encoder is bidirectional T5-family; responds to natural-language prose, not danbooru tags). Reference image input via PuLID slot if engine_router has it; else pure-text mode. 1080x1920 webtoon vertical default.",
-        "version": "1.0.0",
+        "description": "Qwen-Image split-files loader (UNETLoader + CLIPLoader + VAELoader) with optional PuLID face-lock. Shard-complete Pearl Star installs use split loaders per pearl_star_node_inventory.md §Qwen; unified checkpoint path is legacy.",
+        "version": "1.1.0",
         "phase": "V2-B-base-Qwen",
-        "license_notes": "Qwen-Image Apache 2.0; Qwen2.5-VL Apache 2.0",
-        "reference_image_path": "Optional; PulidFluxFaceNetLoader works on Qwen via the same node pack; leave empty for pure-text mode"
+        "license_notes": "Qwen-Image Apache 2.0; Qwen2.5-VL Apache 2.0"
     },
     "1": {
-        "class_type": "CheckpointLoaderSimple",
-        "inputs": {"ckpt_name": "qwen_image_2.0.safetensors"}
+        "class_type": "UNETLoader",
+        "inputs": {
+            "unet_name": "qwen_image_fp8_e4m3fn.safetensors",
+            "weight_dtype": "fp8_e4m3fn"
+        }
+    },
+    "8": {
+        "class_type": "CLIPLoader",
+        "inputs": {
+            "clip_name": "qwen_2.5_vl_7b_fp8_scaled.safetensors",
+            "type": "qwen_image"
+        }
+    },
+    "9": {
+        "class_type": "VAELoader",
+        "inputs": {
+            "vae_name": "split_files/vae/qwen_image_vae.safetensors"
+        }
     },
     "2": {
         "class_type": "CLIPTextEncode",
-        "inputs": {"text": "{{positive_prompt}}", "clip": ["1", 1]}
+        "inputs": {"text": "{{positive_prompt}}", "clip": ["8", 0]}
     },
     "3": {
         "class_type": "CLIPTextEncode",
-        "inputs": {"text": "{{negative_prompt}}, text, words, letters, captions, watermark, signature, signs, writing, typography, text characters, font, lettering, logos, subtitles, calligraphy, chinese characters, japanese characters, kanji, hiragana, katakana, hangul", "clip": ["1", 1]}
+        "inputs": {"text": "{{negative_prompt}}, text, words, letters, captions, watermark, signature, signs, writing, typography, text characters, font, lettering, logos, subtitles, calligraphy, chinese characters, japanese characters, kanji, hiragana, katakana, hangul", "clip": ["8", 0]}
     },
     "4": {
         "class_type": "EmptyLatentImage",
@@ -60,7 +75,7 @@
     },
     "6": {
         "class_type": "VAEDecode",
-        "inputs": {"samples": ["5", 0], "vae": ["1", 2]}
+        "inputs": {"samples": ["5", 0], "vae": ["9", 0]}
     },
     "7": {
         "class_type": "SaveImage",

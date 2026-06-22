@@ -20,6 +20,7 @@ jobs:
 
       - name: pearl-star-gpu runner status
         id: runner
+        continue-on-error: true
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
@@ -32,8 +33,16 @@ jobs:
           else
             echo "pearl_star_gpu_runner_status=offline_or_missing" >> "$GITHUB_OUTPUT"
             echo "## Runner" >> "$GITHUB_STEP_SUMMARY"
-            echo "- \`pearl-star-gpu\` status: **offline_or_missing**" >> "$GITHUB_STEP_SUMMARY"
-            exit 1
+            echo "- \`pearl-star-gpu\` status: **offline_or_missing** (weekly lane uses replay-fallback)" >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: Queue health (optional SSH)
+        continue-on-error: true
+        run: |
+          if ssh -o BatchMode=yes -o ConnectTimeout=8 pearl_star 'pscli status' 2>/dev/null; then
+            echo "- Pearl Star queue: **reachable**" >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "- Pearl Star queue: _not probed or unreachable_" >> "$GITHUB_STEP_SUMMARY"
           fi
 
       - name: Required secrets (presence only; values masked)
@@ -46,8 +55,6 @@ jobs:
           CF_R2_ACCESS_KEY: ${{ secrets.CF_R2_ACCESS_KEY }}
           CF_R2_SECRET_KEY: ${{ secrets.CF_R2_SECRET_KEY }}
           SENDGRID_API_KEY: ${{ secrets.SENDGRID_API_KEY }}
-          RUNCOMFY_API_KEY: ${{ secrets.RUNCOMFY_API_KEY }}
-          RUNCOMFY_TOKEN: ${{ secrets.RUNCOMFY_TOKEN }}
         run: |
           set -euo pipefail
           MISSING=""
@@ -56,7 +63,6 @@ jobs:
           if [ -z "${R2_SECRET_ACCESS_KEY}${CF_R2_SECRET_KEY}" ]; then MISSING="$MISSING R2_SECRET_ACCESS_KEY|CF_R2_SECRET_KEY"; fi
           [ -z "${R2_BUCKET}" ] && MISSING="$MISSING R2_BUCKET"
           [ -z "${SENDGRID_API_KEY}" ] && MISSING="$MISSING SENDGRID_API_KEY"
-          if [ -z "${RUNCOMFY_API_KEY}${RUNCOMFY_TOKEN}" ]; then MISSING="$MISSING RUNCOMFY_API_KEY|RUNCOMFY_TOKEN"; fi
           echo "## Secrets" >> "$GITHUB_STEP_SUMMARY"
           if [ -n "$MISSING" ]; then
             echo "MISSING:$MISSING" >> "$GITHUB_STEP_SUMMARY"

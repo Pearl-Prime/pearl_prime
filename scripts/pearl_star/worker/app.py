@@ -56,5 +56,14 @@ app = App(connector=PsycopgConnector(conninfo=_DSN))
 # worker module attaches its @app.task to this app. Kept import-late to avoid a
 # circular import (the worker imports `app` from here).
 from flux_schnell_worker import t2i_flux_schnell  # noqa: E402,F401  (registers task)
+from flux_dev_manga_worker import t2i_flux_dev_h1a  # noqa: E402,F401
+from qwen_manga_worker import t2i_qwen_image  # noqa: E402,F401
 
-__all__ = ["app", "QUEUES", "RETRY_BUDGET", "t2i_flux_schnell"]
+__all__ = [
+    "app",
+    "QUEUES",
+    "RETRY_BUDGET",
+    "t2i_flux_schnell",
+    "t2i_flux_dev_h1a",
+    "t2i_qwen_image",
+]

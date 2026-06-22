@@ -319,6 +319,22 @@ def cmd_vram_snapshot(_args) -> int:
     return 0
 
 
+def cmd_enqueue(args) -> int:
+    """Defer one t2i panel job (wraps scripts/manga/defer_panel_job_cli.py)."""
+    repo = Path(__file__).resolve().parents[3]
+    defer = repo / "scripts" / "manga" / "defer_panel_job_cli.py"
+    payload = args.payload
+    if payload.startswith("@"):
+        payload = Path(payload[1:]).read_text(encoding="utf-8")
+    cmd = ["python3", str(defer), "--task", args.task, "--payload", payload]
+    r = subprocess.run(cmd, capture_output=True, text=True, timeout=60)
+    if r.returncode != 0:
+        print(r.stderr or r.stdout, file=sys.stderr)
+        return r.returncode
+    print(r.stdout.strip())
+    return 0
+
+
 def cmd_unload_comfyui(_args) -> int:
     import requests
     try:
@@ -346,6 +362,10 @@ def build_parser() -> argparse.ArgumentParser:
     pa = sub.add_parser("archive"); pa.add_argument("job_id"); pa.set_defaults(fn=cmd_archive)
     sub.add_parser("vram-snapshot").set_defaults(fn=cmd_vram_snapshot)
     sub.add_parser("unload-comfyui").set_defaults(fn=cmd_unload_comfyui)
+    eq = sub.add_parser("enqueue", help="Defer one t2i panel job to Procrastinate")
+    eq.add_argument("--task", required=True, choices=["t2i_flux_dev_h1a", "t2i_qwen_image", "t2i_flux_schnell"])
+    eq.add_argument("--payload", required=True, help='JSON object or @file.json with task kwargs')
+    eq.set_defaults(fn=cmd_enqueue)
     return p
 
 
