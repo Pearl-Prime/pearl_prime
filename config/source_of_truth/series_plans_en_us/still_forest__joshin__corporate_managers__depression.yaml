@@ -1,0 +1,75 @@
+series_plan_schema: 1.0.0
+locale: en_US
+book_id_prefix: still_forest__joshin__corporate_managers__depression
+brand: still_forest
+teacher: joshin
+persona: corporate_managers
+topic: depression
+byline_author: marcus_harlow
+arc:
+  installment_1:
+    book_id: still_forest__joshin__corporate_managers__depression__overwhelm
+    engine: overwhelm
+    master_arc: config/source_of_truth/master_arcs/corporate_managers__depression__overwhelm__F006.yaml
+    duration: standard_book_60min
+  installment_2:
+    book_id: still_forest__joshin__corporate_managers__depression__grief
+    engine: grief
+    master_arc: config/source_of_truth/master_arcs/corporate_managers__depression__grief__F006.yaml
+    duration: standard_book_60min
+  installment_3:
+    book_id: still_forest__joshin__corporate_managers__depression__watcher
+    engine: watcher
+    master_arc: config/source_of_truth/master_arcs/corporate_managers__depression__watcher__F006.yaml
+    duration: standard_book_60min
+reader_promise_family: 'For the manager who holds everyone else together and goes
+  home hollow: a forest-quiet companion that doesn''t try to fix your depression or
+  optimize you out of it, but walks slowly enough to let you be witnessed in it —
+  until the weight is named, the load is set down, and something in you can finally
+  go still.'
+bestseller_hook_family: ''
+emotional_engine: depression_recognition
+comp_series:
+- The Power of Now series (Eckhart Tolle) — quiet, present-tense companioning of a
+  suffering mind without a fix-it agenda
+- When Things Fall Apart and related works (Pema Chödrön) — sitting with difficulty
+  and groundlessness instead of escaping it
+- The Comfort Book / Reasons to Stay Alive lineage (Matt Haig) — plainspoken, deeply
+  human company for the depressed mind that refuses toxic positivity
+platform_strategy:
+  primary:
+  - kdp_ebook
+  - audible
+  secondary:
+  - apple_books
+  - google_play
+  - spotify_audiobooks
+  launch_platform: kdp_ebook
+  cadence:
+    release_spacing_days: 14
+    max_books_per_brand_per_month: 2
+reader_avatar:
+  age: 38-55
+  where_they_are: It's 9:40pm. The laptop is still open on the kitchen counter, the
+    team is finally quiet on Slack, and you are lying on top of the covers in your
+    work clothes, staring at the ceiling. You ran every meeting today. You were the
+    steady one. And now there is nothing left — not sadness exactly, just a grey weight
+    on your chest and the certainty that tomorrow you have to do it all again.
+  what_they_need: To be met, not managed — to hear someone name the flat grey weight
+    they carry without turning it into a problem to solve; permission to stop performing
+    fine; one honest, unhurried place where being depressed isn't a performance review.
+  what_they_avoid: Self-optimization and life-hacks, 'just be grateful' positivity,
+    productivity dashboards for the soul, performative mindfulness, anything that
+    treats a flattened mind as a sprint to win or a metric to move.
+series_voice_markers:
+  register: still, deep, woodland-quiet; the unhurried calm of a forest interior;
+    plainspoken and spacious, never clinical, never preachy, never hustle; a voice
+    that sits with you on the forest floor rather than coaching you off it
+  sentence_rhythm: slow and breathing, with long unhurried sentences that open into
+    clearings and short ones that land like a single footstep; pauses left deliberately
+    empty so silence can do the work; never urgent, never a to-do list
+  metaphor_family: the still forest and its deep quiet — old trees and patient roots,
+    light filtering down through the canopy, the path that slows your pace, the pool
+    that goes clear only when it stops being stirred, the forest floor that holds
+    without judgment whatever finally falls
+_needs_authoring: false

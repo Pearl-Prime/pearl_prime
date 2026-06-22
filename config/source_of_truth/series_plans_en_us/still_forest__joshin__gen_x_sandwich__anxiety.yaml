@@ -1,0 +1,106 @@
+series_plan_schema: 1.0.0
+locale: en_US
+book_id_prefix: still_forest__joshin__gen_x_sandwich__anxiety
+brand: still_forest
+teacher: joshin
+persona: gen_x_sandwich
+topic: anxiety
+byline_author: ruth_reed
+arc:
+  installment_1:
+    book_id: still_forest__joshin__gen_x_sandwich__anxiety__false_alarm
+    engine: false_alarm
+    master_arc: config/source_of_truth/master_arcs/gen_x_sandwich__anxiety__false_alarm__F006.yaml
+    duration: standard_book_60min
+  installment_2:
+    book_id: still_forest__joshin__gen_x_sandwich__anxiety__overwhelm
+    engine: overwhelm
+    master_arc: config/source_of_truth/master_arcs/gen_x_sandwich__anxiety__overwhelm__F006.yaml
+    duration: standard_book_60min
+  installment_3:
+    book_id: still_forest__joshin__gen_x_sandwich__anxiety__spiral
+    engine: spiral
+    master_arc: config/source_of_truth/master_arcs/gen_x_sandwich__anxiety__spiral__F006.yaml
+    duration: standard_book_60min
+  installment_4:
+    book_id: still_forest__joshin__gen_x_sandwich__anxiety__shame
+    engine: shame
+    master_arc: config/source_of_truth/master_arcs/gen_x_sandwich__anxiety__shame__F006.yaml
+    duration: standard_book_60min
+  installment_5:
+    book_id: still_forest__joshin__gen_x_sandwich__anxiety__grief
+    engine: grief
+    master_arc: config/source_of_truth/master_arcs/gen_x_sandwich__anxiety__grief__F006.yaml
+    duration: standard_book_60min
+  installment_6:
+    book_id: still_forest__joshin__gen_x_sandwich__anxiety__comparison
+    engine: comparison
+    master_arc: config/source_of_truth/master_arcs/gen_x_sandwich__anxiety__comparison__F006.yaml
+    duration: standard_book_60min
+  installment_7:
+    book_id: still_forest__joshin__gen_x_sandwich__anxiety__watcher
+    engine: watcher
+    master_arc: config/source_of_truth/master_arcs/gen_x_sandwich__anxiety__watcher__F006.yaml
+    duration: standard_book_60min
+reader_promise_family: Not one more system for managing your anxiety, but a quiet
+  permission to stop managing it. This series doesn't hand you a faster way through
+  the day. It leads you off the path and into the trees, where the alarm in your chest
+  can finally be heard instead of silenced, where the racing mind is met by a stillness
+  older than worry. Each book is a clearing in the same forest, entered from a different
+  direction, written for the person in the middle of a generation who carries everyone
+  but is held by no one.
+bestseller_hook_family: ''
+emotional_engine: anxiety_recognition
+comp_series:
+- Don't Believe Everything You Think (Joseph Nguyen) — names the thinking-about-thinking
+  that feeds anxiety and offers stillness rather than another technique, the same
+  off-the-treadmill promise.
+- The Untethered Soul (Michael A. Singer) — invites the reader to step back and watch
+  the anxious mind instead of obeying it, sharing this series' quiet, witnessing register.
+- When Things Fall Apart (Pema Chödrön) — meets fear and groundlessness with gentleness
+  instead of a fix, the same refusal to hurry a frightened heart toward calm.
+platform_strategy:
+  primary:
+  - kdp_ebook
+  - audible
+  secondary:
+  - apple_books
+  - google_play
+  - spotify_audiobooks
+  launch_platform: kdp_ebook
+  cadence:
+    release_spacing_days: 14
+    max_books_per_brand_per_month: 2
+reader_avatar:
+  age: 47 to 58, the sandwich generation, caught between aging parents and children
+    who still need them
+  where_they_are: It is 6:40 on a weekday evening. You are standing at the kitchen
+    counter with your mother's pill organizer in one hand and your phone in the other,
+    a text from your kid's school still unread, dinner not started, and a low electric
+    hum running under your ribs that has not switched off since you woke. Everyone
+    in this house needs something from you, and the one thing you cannot find anywhere
+    is the off switch for the part of you that is bracing for the next thing to go
+    wrong.
+  what_they_need: To stop being the steady one for a single hour and let something
+    larger hold them; to learn that the anxiety is not a character flaw to be fixed
+    but an exhausted alarm asking to be heard; to find a calm that does not require
+    them to be more efficient, more positive, or more in control.
+  what_they_avoid: Self-optimization and life-hacking, quick-calm tricks, ten-minute
+    morning routines, performative mindfulness, hustle culture wearing a wellness
+    costume, and the relentless cheerfulness of anyone who tells them to just breathe
+    and choose joy while their actual life is on fire.
+series_voice_markers:
+  register: Still, deep, and woodland-quiet — the calm of a forest interior. Unhurried
+    and spacious, it lets silence do the work and never rushes a mind that is already
+    running. Never clinical, never preachy, never selling a shortcut. The voice of
+    someone who has sat with you in the trees and is in no hurry to leave.
+  sentence_rhythm: Long, slowing sentences that lengthen the reader's breath, set
+    against short ones that land like a single footstep on soft ground. Pauses are
+    built in. The cadence asks you to read slower than you want to, the way a forest
+    path asks you to walk slower than the street did.
+  metaphor_family: 'The still forest and its deep quiet: old trees and patient roots,
+    light filtering down through the canopy, the path that slows you, the pool that
+    goes clear the moment it stops being stirred, the forest floor that holds without
+    judgment everything that falls. Never machinery, never the body as a system to
+    optimize, never the language of performance.'
+_needs_authoring: false
