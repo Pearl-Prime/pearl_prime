@@ -1,5 +1,4 @@
 book_plan_schema: 1.0.0
-created_at: '2026-04-24'
 book_id: heart_balance__maat__gen_z_professionals__self_worth__shame
 series_plan: config/source_of_truth/series_plans_en_us/heart_balance__maat__gen_z_professionals__self_worth.yaml
 installment_number: 1
@@ -11,37 +10,78 @@ target_word_range:
 - 9000
 - 12000
 target_audio_minutes: 70
-title: 'The Shame Response: A Clear Path from Overwhelm to Calm'
-subtitle: How Young Professionals Are Rewriting the Rules of Building Self Worth
-cover_tagline: You're sure that if they really saw you, it would be over.
+title: The Thing You Overwork to Hide
+subtitle: For the fast-replying, over-preparing early-career mind whose real fear
+  isn't missing the deadline — it's being found out as not enough
+cover_tagline: You're not afraid of the deadline. You're afraid of what missing it
+  would say about you.
 description:
-  short_blurb: You're sure that if they really saw you, it would be over. stop measuring my worth by outcomes.
-  long_description: |
-    You're sure that if they really saw you, it would be over.
+  short_blurb: You learned somewhere that there is something wrong with you, and you've
+    spent every working year since then covering it with output. This book doesn't
+    argue you out of that belief. It helps you finally see the weight you've been
+    carrying, and set it down.
+  long_description: 'It''s late, and you''re polishing something no one asked you
+    to polish. Not because it needs it. Because if it isn''t perfect, someone might
+    see the thing underneath — the quiet, certain belief that something about you
+    is wrong, and that the work is the only thing keeping it hidden.
 
-    This book is for early-career creative / knowledge workers who I always end up back at 'I'm not enough'. It doesn't promise to make the feeling stop. It names what's happening in language you can use the next time it happens.
 
-    Chapter by chapter, you'll work with the exposure-fear that keeps you bracing to be found out, and why it runs so deep. Not through exposure or worksheets or morning routines — through recognition, descent, and integration. The practice the book asks for can happen on a subway, between meetings, or at 3am.
+    This book is for the early-career creative and knowledge worker who looks, from
+    the outside, like they''re doing fine. You answer fast. You over-prepare. You
+    apologize before anyone''s upset. And underneath all of it runs a sentence you''d
+    never say out loud: if they really knew me, they''d know I''m not enough.
 
-    You'll walk away knowing what your body is doing and why it makes sense. Not fixed. Not healed in any final sense. But no longer alone with the pattern.
 
-    Book 1 of the Heart Balance self worth series.
+    That sentence has a name. It''s shame — not the loud, dramatic kind, but the low
+    background hum that turns every piece of work into evidence and every rest into
+    risk. You''ll come to recognize how it operates: how it taught you to pile on
+    accomplishment until the weight of what you''d done could hide the weight of what
+    you feared you were. How it whispers that the next achievement will finally settle
+    the question of your worth, and how the question never actually settles. How you''ve
+    been weighing your whole self on a scale where only output counts, and wondering
+    why you always come up light.
+
+
+    You''ll learn to see the cover for what it is, and to feel — maybe for the first
+    time — what''s been hiding beneath it. Not a defect. A person who decided, very
+    young, that they had to earn the right to take up room.
+
+
+    This book will not fix you, because you are not broken. It won''t hand you affirmations
+    to repeat in the mirror, or a morning routine, or a tidier way to perform being
+    okay. It won''t even promise the belief will disappear. What it offers is recognition:
+    the strange relief of finally naming the weight you''ve been carrying, and discovering
+    you can set part of it down without the whole structure collapsing.
+
+
+    The heart, in the old image, is weighed against a feather. Not against your résumé.
+    Not against the colleague who seems to have it together. Just a feather. You''ve
+    been adding stones to your own side for years, sure that''s what made you worth
+    something. This is permission to stop.
+
+
+    You don''t have to earn your way out of this one. You only have to look at it
+    honestly, and let it be lighter than you were taught.
+
+
+    Book 1 of the Feather & Scale Press self worth series.'
 keywords:
   primary:
-  - self-worth
-  - self-esteem book
-  - enough
-  - self-compassion
+  - self worth book
+  - shame and self esteem
+  - feeling not good enough
+  - overcoming perfectionism
+  - self compassion for high achievers
   - inner critic
-  - worthiness
-  - self-acceptance
+  - worthiness and self acceptance
   secondary:
-  - gen z professionals
-  - shame self worth
+  - gen z mental health
+  - impostor syndrome at work
+  - self worth not based on achievement
 bisac_codes:
 - SEL027000
-- SEL045000
-- PSY036000
+- SEL031000
+- PSY023000
 target_price:
   ebook_usd: 4.99
   audible_usd: 9.99
@@ -49,14 +89,12 @@ target_price:
 author_positioning:
   teacher: maat
   brand: heart_balance
+  byline_author: yara_tam
 comp_titles:
-- The Gifts of Imperfection (Brown)
-- Radical Acceptance (Brach)
-- The Mountain Is You (Wiest)
-main_character_name: Xiomara
-main_character_lora_id: xiomara_hb_us
-confidence:
-  pricing: low
-  title: medium
-  comps: high
-plan_source_path: config/manga/manga_brand_series_plan.yaml
+- The Gifts of Imperfection (Brené Brown) — naming shame and the exhausting work of
+  hiding it, for readers who overfunction
+- Radical Acceptance (Tara Brach) — meeting the 'something is wrong with me' belief
+  with recognition instead of repair
+- The Mountain Is You (Brianna Wiest) — self-sabotage and self-worth written for a
+  younger, striving readership
+_needs_authoring: false

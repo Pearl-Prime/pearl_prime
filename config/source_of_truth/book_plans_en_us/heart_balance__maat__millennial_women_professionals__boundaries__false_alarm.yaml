@@ -1,8 +1,7 @@
 book_plan_schema: 1.0.0
-created_at: '2026-04-24'
 book_id: heart_balance__maat__millennial_women_professionals__boundaries__false_alarm
 series_plan: config/source_of_truth/series_plans_en_us/heart_balance__maat__millennial_women_professionals__boundaries.yaml
-installment_number: 3
+installment_number: 1
 engine: false_alarm
 duration: standard_book_60min
 runtime_format_id: standard_book_60min
@@ -11,37 +10,74 @@ target_word_range:
 - 9000
 - 12000
 target_audio_minutes: 70
-title: 'Misreading the Danger Signal: How to Stop Freezing and Speak Up with Confidence'
-subtitle: A Gentle Approach to Setting Boundaries That Meets You Where You Are
-cover_tagline: You've been bracing for something you can't name.
+title: The Yes Before You Decide
+subtitle: For the woman whose body agrees before her mind does — when refusing someone
+  feels like danger, not a choice
+cover_tagline: Your mouth said yes before you knew you'd been asked.
 description:
-  short_blurb: You've been bracing for something you can't name. stop saying yes when I mean no.
-  long_description: |
-    You've been bracing for something you can't name.
+  short_blurb: There is a half-second between the request and your answer where something
+    in you flinches, and the yes is out before you ever chose it. This is a book about
+    that flinch — the alarm that fires when no real threat is there, only a person
+    who wants something from you. It won't teach you to refuse faster. It will help
+    you understand why your body treats a boundary like a threat to survive.
+  long_description: 'Someone asks you for something — to stay late, to host, to take
+    this on too — and before you''ve weighed a single thing, you hear yourself say
+    yes. Not a thought-out yes. A reflex. A bracing. By the time your mind catches
+    up, the word is already in the air and your chest has gone tight around it.
 
-    This book is for senior manager + primary household planners who I can't say no and I don't know why I can't. It doesn't promise to make the feeling stop. It names what's happening in language you can use the next time it happens.
 
-    Chapter by chapter, you'll work with the body's false-alarm system and why it keeps firing. Not through exposure or worksheets or morning routines — through recognition, descent, and integration. The practice the book asks for can happen on a subway, between meetings, or at 3am.
+    This book is for the woman who manages a team all day and runs the household at
+    night, who knows on paper exactly what a healthy boundary is, and who still cannot
+    understand why the word ''no'' arrives in her body like a fire alarm. You are
+    not weak. You are not a pushover. You have a finely tuned alarm system that has
+    learned to read an ordinary request — a favor, an ask, a small disappointment
+    to someone — as something you must not let happen.
 
-    You'll walk away knowing what your body is doing and why it makes sense. Not fixed. Not healed in any final sense. But no longer alone with the pattern.
 
-    Book 3 of the Heart Balance boundaries series.
+    With the feather on one side of the scale and your whole life on the other, you
+    will come to recognize how the false alarm works. How the dread arrives before
+    the danger does, because there is no danger — only your nervous system bracing
+    for a rupture that was real once and isn''t anymore. You''ll see why your body
+    confuses someone''s momentary displeasure with a threat to your belonging, and
+    why holding a line can make your hands shake when nothing is actually at stake.
+    You''ll learn to feel the difference between an alarm and an emergency.
+
+
+    This book will not hand you a script. It will not promise that no will ever feel
+    easy, or that you''ll stop flinching by Friday. There is no technique here for
+    overriding yourself faster. What there is, instead, is recognition — language
+    for what''s happening in the half-second you''ve never been able to explain, so
+    that the next time the alarm fires, you are not alone inside it.
+
+
+    Nothing here asks you to become someone who doesn''t care. The caring is not the
+    problem. The alarm is not a defect to delete; it''s a guard that has been standing
+    watch too long at a door no one is trying to break down. You are allowed to thank
+    it and still not obey it.
+
+
+    You don''t have to earn the right to take up the space you take up. You don''t
+    have to be in danger to deserve a ''no.''
+
+
+    Book 1 of the Feather & Scale Press boundaries series.'
 keywords:
   primary:
-  - boundaries book
-  - healthy boundaries
-  - saying no
-  - codependency
-  - people pleasing
-  - relational boundaries
-  - boundary setting
+  - people pleasing recovery
+  - how to say no without guilt
+  - boundaries for women
+  - fear of saying no
+  - codependency and people pleasing
+  - setting boundaries at work
+  - nervous system and boundaries
   secondary:
-  - millennial women professionals
-  - false alarm boundaries
+  - boundaries for working moms
+  - stop being a people pleaser
+  - fawn response healing
 bisac_codes:
 - SEL027000
+- SEL037000
 - SOC028000
-- SEL045000
 target_price:
   ebook_usd: 4.99
   audible_usd: 9.99
@@ -49,14 +85,12 @@ target_price:
 author_positioning:
   teacher: maat
   brand: heart_balance
+  byline_author: theo_bello
 comp_titles:
-- Set Boundaries, Find Peace (Tawwab)
-- Boundaries (Cloud & Townsend)
-- The Book of Boundaries (Hartwig)
-main_character_name: Eliana
-main_character_lora_id: eliana_hb_us
-confidence:
-  pricing: low
-  title: medium
-  comps: high
-plan_source_path: config/manga/manga_brand_series_plan.yaml
+- Set Boundaries, Find Peace (Nedra Glover Tawwab) — the relational-boundaries anchor,
+  where this book stays with the body's alarm instead of the scripts
+- The Book of Boundaries (Melissa Urban) — gives the words; this book is for the woman
+  who can't make her mouth form them
+- Burnout (Emily & Amelia Nagoski) — names what chronic over-giving does to the female
+  nervous system, the exact alarm this book sits inside
+_needs_authoring: false

@@ -1,0 +1,84 @@
+series_plan_schema: 1.0.0
+locale: en_US
+book_id_prefix: heart_balance__maat__millennial_women_professionals__financial_stress
+brand: heart_balance
+teacher: maat
+persona: millennial_women_professionals
+topic: financial_stress
+byline_author: ravi_iverson
+arc:
+  installment_1:
+    book_id: heart_balance__maat__millennial_women_professionals__financial_stress__overwhelm
+    engine: overwhelm
+    master_arc: config/source_of_truth/master_arcs/millennial_women_professionals__financial_stress__overwhelm__F006.yaml
+    duration: standard_book_60min
+  installment_2:
+    book_id: heart_balance__maat__millennial_women_professionals__financial_stress__spiral
+    engine: spiral
+    master_arc: config/source_of_truth/master_arcs/millennial_women_professionals__financial_stress__spiral__F006.yaml
+    duration: standard_book_60min
+  installment_3:
+    book_id: heart_balance__maat__millennial_women_professionals__financial_stress__shame
+    engine: shame
+    master_arc: config/source_of_truth/master_arcs/millennial_women_professionals__financial_stress__shame__F006.yaml
+    duration: standard_book_60min
+reader_promise_family: A heart-centered way to carry money fear without letting it
+  decide your worth — for the woman who has already done everything right and still
+  lies awake doing the math. No budgeting cure, no manifestation, no shame. Just a
+  fair, steady look at what financial stress is really costing you, and permission
+  to set part of it down.
+bestseller_hook_family: ''
+emotional_engine: financial_stress_recognition
+comp_series:
+- The Financial Diet (Chelsea Fagan) — meets the same money-anxious millennial woman,
+  but where TFD gives practical scripts, this series tends the emotional weight underneath
+  them.
+- Good Vibes, Good Life (Vex King) — shares the gentle self-worth register, but trades
+  manifestation for an honest reckoning with real financial pressure.
+- Burnout (Emily & Amelia Nagoski) — same compassionate, body-aware treatment of chronic
+  stress in high-functioning women, narrowed here to the specific dread of money.
+platform_strategy:
+  primary:
+  - kdp_ebook
+  - audible
+  secondary:
+  - apple_books
+  - google_play
+  - spotify_audiobooks
+  launch_platform: kdp_ebook
+  cadence:
+    release_spacing_days: 14
+    max_books_per_brand_per_month: 2
+reader_avatar:
+  age: late twenties to late thirties
+  where_they_are: It's 11:40 on a weeknight. She closed the banking app twenty minutes
+    ago and opened it again, as if the number might have changed. The student loan,
+    the rent that went up, the friend's wedding she said yes to, the salary that looked
+    like enough until it wasn't. On paper she is fine — a job, a title, a degree everyone
+    congratulated her for. In her chest it does not feel fine. She is doing the arithmetic
+    of her life in the dark and coming up short, and she cannot tell anyone, because
+    everyone her age seems to have it handled.
+  what_they_need: To be met as someone competent and frightened at the same time —
+    to have the real cost of money stress named without being told to just make a
+    spreadsheet, hustle harder, or be grateful. She needs a way to weigh her life
+    that doesn't put her whole worth on one side of the scale. She needs to stop bracing,
+    even for an hour.
+  what_they_avoid: Budgeting-guru cheerfulness, side-hustle gospel, 'just stop buying
+    coffee' condescension, manifest-your-abundance magical thinking, and anything
+    that treats her fear as a personal failing rather than a fair response to a genuinely
+    hard arithmetic.
+series_voice_markers:
+  register: 'Balanced, warm, and clear-eyed — the voice of someone who has sat with
+    the same midnight numbers and refuses to either panic you or lie to you. It weighs
+    things fairly: it admits the money is genuinely tight and insists you are more
+    than the tightness. Never clinical, never a budgeting lecture, never hustle, never
+    toxic positivity.'
+  sentence_rhythm: Mostly short, steady declaratives that let a hard fact land, opened
+    up now and then by one longer, breath-held sentence that follows the worry where
+    it goes. Plain words. The pacing of someone setting a heavy thing down slowly
+    so it doesn't break.
+  metaphor_family: The feather and the scale — the heart weighed against a feather,
+    weight and balance, what you give and what you keep, the fulcrum that holds, the
+    ledger that was never meant to measure a person. Money imagery stays grounded
+    and human; never machinery, military, productivity, or biohacking.
+_needs_authoring: false

@@ -1,14 +1,11 @@
 series_plan_schema: 1.0.0
-created_at: '2026-04-24'
 locale: en_US
 book_id_prefix: heart_balance__maat__millennial_women_professionals__self_worth
 brand: heart_balance
 teacher: maat
 persona: millennial_women_professionals
 topic: self_worth
-teacher_topic_score: 0.9
-teacher_persona_score: 0.85
-composite_fit: 0.88
+byline_author: yara_tam
 arc:
   installment_1:
     book_id: heart_balance__maat__millennial_women_professionals__self_worth__shame
@@ -20,14 +17,19 @@ arc:
     engine: comparison
     master_arc: config/source_of_truth/master_arcs/millennial_women_professionals__self_worth__comparison__F006.yaml
     duration: standard_book_60min
-reader_promise_family: |
-  3 books across engines of self_worth via the mythological-sincere, shojo+ dignity voice.
-bestseller_hook_family: recognition_descent
+reader_promise_family: We will not hand you a louder voice telling you you're enough.
+  We'll sit with the quiet belief underneath the achieving — the one that says you're
+  not — and weigh it honestly, the way a heart is weighed against a feather, until
+  you can feel for yourself how little it actually holds.
+bestseller_hook_family: ''
 emotional_engine: self_worth_recognition
 comp_series:
-- The Gifts of Imperfection (Brown)
-- Radical Acceptance (Brach)
-- The Mountain Is You (Wiest)
+- The Gifts of Imperfection (Brené Brown) — the foundational text for readers ready
+  to examine worthiness instead of chasing it, in a warm rather than clinical register.
+- Radical Acceptance (Tara Brach) — for readers who want the felt, body-aware approach
+  to the belief that something is wrong with them, not just a cognitive reframe.
+- The Mountain Is You (Brianna Wiest) — for the high-functioning achiever who senses
+  her own striving is self-sabotage dressed as discipline and wants it named precisely.
 platform_strategy:
   primary:
   - kdp_ebook
@@ -41,21 +43,26 @@ platform_strategy:
     release_spacing_days: 14
     max_books_per_brand_per_month: 2
 reader_avatar:
-  age: 32–42
-  where_they_are: |
-    Text from mom, text from boss, calendar full.
-  what_they_need: |
-    Sees the emotional labor without calling it a superpower or wound.
-  what_they_avoid: |
-    Lean-in. Self-care Sunday.
+  age: late twenties to early forties
+  where_they_are: It's 9:40pm and she's still at her laptop, refining a deck that
+    was already good two hours ago, because good has never once felt like enough.
+    The dishes are done, the team is asleep, and the only sound is the small voice
+    that says if she stops now, someone will finally see she's been faking it.
+  what_they_need: To recognize that the relentless proving is not ambition — it's
+    a defense against a verdict she passed on herself a long time ago, and to learn
+    she can set the instrument down without losing who she is.
+  what_they_avoid: Pep talks, affirmations she doesn't believe, 'just love yourself'
+    advice, anything that mistakes her self-worth wound for a confidence gap, and
+    any book that treats slowing down as laziness rather than the hardest thing she'll
+    do.
 series_voice_markers:
-  register: mythological-sincere, shojo+ dignity
-  sentence_rhythm: balanced, heraldic, architectural
-  metaphor_family: scales, gold leaf, star maps
-  second_person_default: true
-main_character_name: Lyra
-main_character_role: senior manager + primary household planner
-main_character_image_path: null
-main_character_lora_id: lyra_hb_us
-main_character_trigger_word: lyra_hb_us
-plan_source_path: config/manga/manga_brand_series_plan.yaml
+  register: balanced, warm, discerning — a heart-centered voice that weighs worth
+    and limits fairly; gentle but clear-eyed, never clinical, never preachy, never
+    hustle
+  sentence_rhythm: measured and unhurried, with a fulcrum in the middle — a longer
+    observing clause that tips into a short, plain landing; pauses where a kinder
+    friend would pause, never rushed toward reassurance
+  metaphor_family: the feather and the scale, weight and balance, the heart weighed
+    against a feather, equilibrium and the steady center, what you give and what you
+    keep, the fulcrum that holds
+_needs_authoring: false

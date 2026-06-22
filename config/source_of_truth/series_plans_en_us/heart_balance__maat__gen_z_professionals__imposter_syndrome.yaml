@@ -1,0 +1,74 @@
+series_plan_schema: 1.0.0
+locale: en_US
+book_id_prefix: heart_balance__maat__gen_z_professionals__imposter_syndrome
+brand: heart_balance
+teacher: maat
+persona: gen_z_professionals
+topic: imposter_syndrome
+byline_author: kira_bramble
+arc:
+  installment_1:
+    book_id: heart_balance__maat__gen_z_professionals__imposter_syndrome__shame
+    engine: shame
+    master_arc: config/source_of_truth/master_arcs/gen_z_professionals__imposter_syndrome__shame__F006.yaml
+    duration: standard_book_60min
+  installment_2:
+    book_id: heart_balance__maat__gen_z_professionals__imposter_syndrome__comparison
+    engine: comparison
+    master_arc: config/source_of_truth/master_arcs/gen_z_professionals__imposter_syndrome__comparison__F006.yaml
+    duration: standard_book_60min
+reader_promise_family: You will be met where the self-doubt actually lives — weighed
+  fairly, not fixed or cheered up. This series treats imposter syndrome not as a flaw
+  to delete but as a heart that has been carrying too much credit for the bad and
+  too little for the good. We help you set the weights back to true.
+bestseller_hook_family: ''
+emotional_engine: imposter_syndrome_recognition
+comp_series:
+- The Imposter Cure (Jessamy Hibberd) — clinical-but-warm series on naming the fraud
+  feeling without shaming the sufferer.
+- How to Do the Work (Nicole LePera) — interior, self-witnessing tone that treats
+  hidden beliefs as the real work, which this audience already reads.
+- Burnout (Emily & Amelia Nagoski) — companionable, evidence-soft voice for overworked
+  young professionals who distrust hustle advice.
+platform_strategy:
+  primary:
+  - kdp_ebook
+  - audible
+  secondary:
+  - apple_books
+  - google_play
+  - spotify_audiobooks
+  launch_platform: kdp_ebook
+  cadence:
+    release_spacing_days: 14
+    max_books_per_brand_per_month: 2
+reader_avatar:
+  age: 23-28
+  where_they_are: 'It''s 9:14 on a Tuesday and the Slack notification just landed
+    — a manager has tagged you in a thread, ''quick question.'' Before you''ve even
+    read it, your chest has gone tight and your mind has already written the ending:
+    this is the message where they realize you don''t actually know what you''re doing.
+    You''re two years into the job everyone congratulated you for. You reread your
+    own sent emails for typos that would expose you. You keep a private tally of every
+    time you guessed and got lucky.'
+  what_they_need: To stop treating every win as a fluke and every gap as proof of
+    fraud. To feel the difference between being new and being a liar. A way to set
+    down the over-correction without being told to 'just be confident' — language
+    that honors how heavy the hiding has been.
+  what_they_avoid: Hustle-culture self-improvement, LinkedIn affirmations, 'fake it
+    till you make it,' anyone who says imposter syndrome is a sign you're destined
+    for greatness, and any book that turns their pain into a productivity hack or
+    a personal brand.
+series_voice_markers:
+  register: balanced, warm, discerning — a heart-centered voice about worth and limits;
+    gentle but clear-eyed, never clinical, never preachy, never hustle. It weighs
+    both sides of you fairly and refuses to flatter or scold.
+  sentence_rhythm: Plainspoken and unhurried, with short declaratives that land like
+    a hand set flat on a table. Longer reflective sentences open the door; a brief
+    one closes it. Second person throughout, addressed to one reader at a desk, not
+    a room.
+  metaphor_family: the feather and the scale, weight and balance, the heart weighed
+    against a feather, the fulcrum that holds, what you give and what you keep, the
+    threshold and the doorway you keep standing in — never machinery, military, productivity,
+    or biohacking.
+_needs_authoring: false
