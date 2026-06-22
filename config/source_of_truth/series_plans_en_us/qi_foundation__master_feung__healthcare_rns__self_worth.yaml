@@ -1,0 +1,72 @@
+series_plan_schema: 1.0.0
+locale: en_US
+book_id_prefix: qi_foundation__master_feung__healthcare_rns__self_worth
+brand: qi_foundation
+teacher: master_feung
+persona: healthcare_rns
+topic: self_worth
+byline_author: tara_ibrahim
+arc:
+  installment_1:
+    book_id: qi_foundation__master_feung__healthcare_rns__self_worth__shame
+    engine: shame
+    master_arc: config/source_of_truth/master_arcs/healthcare_rns__self_worth__shame__F006.yaml
+    duration: standard_book_60min
+  installment_2:
+    book_id: qi_foundation__master_feung__healthcare_rns__self_worth__comparison
+    engine: comparison
+    master_arc: config/source_of_truth/master_arcs/healthcare_rns__self_worth__comparison__F006.yaml
+    duration: standard_book_60min
+reader_promise_family: For the nurse who has spent a career proving she's worth keeping,
+  a quiet return to the worth that was never in question — work that meets you in
+  the armor, in the comparison, in the buried verdict that something is wrong with
+  you, and lets the ground hold what your performance has been holding.
+bestseller_hook_family: ''
+emotional_engine: self_worth_recognition
+comp_series:
+- The Body Keeps the Score (Bessel van der Kolk) — the foundational text on how survival
+  lives in the body, which our somatic, root-level approach extends into self-worth.
+- 'Burnout: The Secret to Unlocking the Stress Cycle (Emily & Amelia Nagoski) — names
+  the over-functioning of caregiving women without shaming it, the same compassion
+  our series carries onto the nursing floor.'
+- The Gifts of Imperfection (Brené Brown) — meets shame and worthiness head-on with
+  warmth instead of a fix, a kinship in register to what we offer the helping professions.
+platform_strategy:
+  primary:
+  - kdp_ebook
+  - audible
+  secondary:
+  - apple_books
+  - google_play
+  - spotify_audiobooks
+  launch_platform: kdp_ebook
+  cadence:
+    release_spacing_days: 14
+    max_books_per_brand_per_month: 2
+reader_avatar:
+  age: 31 to 52
+  where_they_are: It's the end of a twelve-hour shift and she's still in the med room,
+    charting a patient who already went home, double-checking a number she already
+    triple-checked, because if she leaves and something is wrong it will be her name
+    on it. The unit has emptied out. Through the glass she can see the charge nurse
+    laughing at the desk, easy, finished, and she cannot remember the last time anything
+    felt finished.
+  what_they_need: To recognize that the over-functioning, the armor, the constant
+    measuring against the nurse who seems to have it together is not who she is but
+    what she built to survive — and to feel, in the body, that her worth was never
+    the thing on trial.
+  what_they_avoid: Anything that tells her to optimize her resilience, hustle her
+    healing, or perform gratitude; bootstrap positivity that just adds another standard
+    to fail; advice that drains the root to keep the surface running.
+series_voice_markers:
+  register: grounded, restorative, quietly vital; the voice of someone who has worked
+    the floor and stopped pretending, speaking to you in the break room after everyone's
+    gone — never clinical, never preachy, never hustle
+  sentence_rhythm: unhurried and breath-led; short declaratives that land like a hand
+    on the shoulder, opening into longer lines that follow the body down to the root
+    before settling
+  metaphor_family: roots and meridians, deep ground and rising sap, the well that
+    refills from below, breath reaching the lowest part of the lungs, the blockage
+    that finally clears and lets something flow again, vitality restored from the
+    root upward
+_needs_authoring: false

@@ -1,0 +1,75 @@
+series_plan_schema: 1.0.0
+locale: en_US
+book_id_prefix: qi_foundation__master_feung__working_parents__courage
+brand: qi_foundation
+teacher: master_feung
+persona: working_parents
+topic: courage
+byline_author: zane_underhill
+arc:
+  installment_1:
+    book_id: qi_foundation__master_feung__working_parents__courage__false_alarm
+    engine: false_alarm
+    master_arc: config/source_of_truth/master_arcs/working_parents__courage__false_alarm__F006.yaml
+    duration: standard_book_60min
+  installment_2:
+    book_id: qi_foundation__master_feung__working_parents__courage__spiral
+    engine: spiral
+    master_arc: config/source_of_truth/master_arcs/working_parents__courage__spiral__F006.yaml
+    duration: standard_book_60min
+  installment_3:
+    book_id: qi_foundation__master_feung__working_parents__courage__shame
+    engine: shame
+    master_arc: config/source_of_truth/master_arcs/working_parents__courage__shame__F006.yaml
+    duration: standard_book_60min
+reader_promise_family: 'Courage, for the parent who is afraid and shows up anyway:
+  not the absence of fear, but the slow return of deep ground beneath your feet —
+  the well that refills from below, even on the days you give from empty.'
+bestseller_hook_family: ''
+emotional_engine: courage_recognition
+comp_series:
+- Good Inside (Becky Kennedy) — meets the same overwhelmed parent with warmth instead
+  of optimization, naming the inner experience before the behavior
+- The Book of Boundaries (Melissa Urban) — speaks to the exhausted caregiver in plain,
+  permission-giving language without hustle or shame
+- 'Burnout: The Secret to Unlocking the Stress Cycle (Emily & Amelia Nagoski) — body-first,
+  anti-toxic-positivity, written for people running on empty who are tired of being
+  told to push harder'
+platform_strategy:
+  primary:
+  - kdp_ebook
+  - audible
+  secondary:
+  - apple_books
+  - google_play
+  - spotify_audiobooks
+  launch_platform: kdp_ebook
+  cadence:
+    release_spacing_days: 14
+    max_books_per_brand_per_month: 2
+reader_avatar:
+  age: 30s to mid-40s
+  where_they_are: It is 6:14am. The lunch is half-made, one kid won't put shoes on,
+    and you are already rehearsing the meeting you're late for — and underneath all
+    of it runs a thin, constant current of fear that you are getting this wrong in
+    some way you won't see until it's too late. You haven't sat down since you stood
+    up. You won't until long after they're asleep.
+  what_they_need: To understand that the courage parenting asks of them is not a feeling
+    they're missing but a ground they can return to — and that the fear is not proof
+    they're failing, only proof they're carrying something that matters.
+  what_they_avoid: Energy-drink hustle and 'optimize your morning routine' advice;
+    biohacking and performative wellness; toxic positivity that tells them to be grateful
+    and present while they're running on three hours of sleep; anything that asks
+    them to drain themselves further to look like they're coping.
+series_voice_markers:
+  register: grounded, restorative, quietly vital; warm and unhurried, the voice of
+    someone who has knelt on the same kitchen floor at the same hour — never clinical,
+    never preachy, never hustle
+  sentence_rhythm: long settling sentences that let the breath reach bottom, broken
+    by short ones that land like a hand on the back; patient, never rushed, the pace
+    of sap rising rather than a clock
+  metaphor_family: roots and meridians, deep ground and rising sap, the well that
+    refills from below, breath reaching the lowest part of the lungs, vitality returning
+    to a body that has been giving from the surface, what flows again when a long-held
+    bracing finally lets go
+_needs_authoring: false
