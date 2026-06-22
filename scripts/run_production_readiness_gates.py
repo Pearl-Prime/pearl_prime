@@ -435,8 +435,32 @@ def main() -> int:
     else:
         gate("19. Pearl News sidebar parity", True, "gate script not present; skip", skip=True)
 
+    # --- 20. Waystream catalog uniqueness (800 distinct titles + subtitles) ---
+    waystream_gate = REPO_ROOT / "scripts" / "ci" / "check_waystream_catalog_uniqueness.py"
+    if waystream_gate.exists():
+        try:
+            env = os.environ.copy()
+            env["PYTHONPATH"] = str(REPO_ROOT)
+            r = subprocess.run(
+                [sys.executable, str(waystream_gate)],
+                cwd=str(REPO_ROOT),
+                env=env,
+                capture_output=True,
+                text=True,
+                timeout=360,
+            )
+            ws_ok = r.returncode == 0
+            ws_detail = (r.stdout or r.stderr or "").strip().splitlines()[-1] if (r.stdout or r.stderr) else "check_waystream_catalog_uniqueness"
+        except Exception as e:
+            ws_ok = False
+            ws_detail = str(e)
+        if not gate("20. Waystream catalog uniqueness (800 titles/subs/pairs)", ws_ok, ws_detail):
+            failed += 1
+    else:
+        gate("20. Waystream catalog uniqueness", True, "gate script not present; skip", skip=True)
+
     # --- Report ---
-    print("V4.5 Production Readiness — 19 conditions\n")
+    print("V4.5 Production Readiness — 20 conditions\n")
     for name, status, detail in RESULTS:
         sym = "✓" if status == "PASS" else ("○" if status == "SKIP" else "✗")
         print(f"  {sym} {status:4}  {name}")
