@@ -219,25 +219,35 @@ def _deprescribe_paragraph(para: str, *, seed: str) -> str:
     """Soften a prescribed-action paragraph so F7 no longer counts it."""
     softened = _TIMING_STEP_STRIP_RE.sub("", para)
     words = re.findall(r"[A-Za-z]+", softened.lower())
-    if any(w in F7_IMPERATIVE_VERBS for w in words):
+    if (
+        any(w in F7_IMPERATIVE_VERBS for w in words)
+        or len(words) < 4
+        or _is_prescribed_action(softened)
+    ):
         return _pick(_DEPRESCRIBE_ALTERNATIVES, seed)
-    return softened.strip() or para
+    return softened.strip() or _pick(_DEPRESCRIBE_ALTERNATIVES, seed)
 
 
-def cap_prescribed_action_density(prose: str, *, max_per_chapter: int = 2) -> str:
+def cap_prescribed_action_density(
+    prose: str,
+    *,
+    max_per_chapter: int = 2,
+    max_by_chapter: dict[int, int] | None = None,
+) -> str:
     """Cap F7 prescribed-action paragraphs per chapter by softening surplus copies."""
     front, chapters = _split_book(prose)
     if not chapters:
         return prose
     out: list[tuple[int, str]] = []
     for num, body in chapters:
+        chapter_cap = (max_by_chapter or {}).get(num, max_per_chapter)
         paras = [p for p in re.split(r"\n\s*\n", body) if p.strip()]
         kept_prescribed = 0
         new_paras: list[str] = []
         for p_idx, p in enumerate(paras):
             if _is_prescribed_action(p):
                 kept_prescribed += 1
-                if kept_prescribed > max_per_chapter:
+                if kept_prescribed > chapter_cap:
                     softened = _deprescribe_paragraph(p, seed=f"deprescribe:{num}:{p_idx}")
                     if _is_prescribed_action(softened):
                         continue
@@ -625,6 +635,26 @@ def dedupe_register_f1_paragraphs(prose: str) -> tuple[str, list[str]]:
     return _join_book(front, out), notes
 
 
+def remove_sub_four_word_orphan_paragraphs(prose: str) -> str:
+    """Drop sub-4-word orphan paragraphs that would F2.D HARD_FAIL."""
+    from phoenix_v4.quality.register_gate import _is_titlecase_heading
+
+    front, chapters = _split_book(prose)
+    if not chapters:
+        return prose
+    out: list[tuple[int, str]] = []
+    for num, body in chapters:
+        paras = [p for p in re.split(r"\n\s*\n", body) if p.strip()]
+        kept: list[str] = []
+        for p in paras:
+            words = re.findall(r"[A-Za-z]+", p)
+            if len(words) < 4 and not _is_titlecase_heading(p.strip()):
+                continue
+            kept.append(p)
+        out.append((num, "\n\n".join(kept).strip()))
+    return _join_book(front, out)
+
+
 def strengthen_register_craft_output(
     prose: str,
     *,
@@ -643,5 +673,6 @@ def strengthen_register_craft_output(
     work = repair_f13_dwell_contract(work, seed=seed)
     work, _f1_notes = dedupe_register_f1_paragraphs(work)
     work = ensure_unique_chapter_closings(work, seed=seed)
+    work = remove_sub_four_word_orphan_paragraphs(work)
     work = ensure_book_terminal_integrity(work)
     return work
