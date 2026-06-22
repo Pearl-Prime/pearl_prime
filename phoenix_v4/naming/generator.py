@@ -216,8 +216,9 @@ def generate_candidates(
         engine_angle = angle_pool[seed_int % len(angle_pool)]
     scenario_phrase = engine_angle
 
-    # Engine subtitle hook from engine_title_angles.yaml
+    # Engine subtitle hook + short phrase from engine_title_angles.yaml
     engine_subtitle_hook = keyword_bank.get_engine_subtitle_hook(angle_id)
+    engine_short_phrase = keyword_bank.get_engine_angle_phrase(angle_id, seed_int)
 
     patterns = load_subtitle_patterns()
     title_tpl = (patterns.get("title_templates") or {}).copy()
@@ -280,7 +281,12 @@ def generate_candidates(
             rng.shuffle(loc_subtitle_scenes)
 
     n_sessions = 8
-    format_unit = "sessions"
+    series_l = (series_id or "").lower()
+    bid_l = (bid or "").lower()
+    if "1hr" in series_l or "one_hour" in series_l or bid_l.endswith("1hr") or bid_l.endswith("__1hr"):
+        format_unit = "One-Hour"
+    else:
+        format_unit = "sessions"
 
     def fill(s: str) -> str:
         return (s or "") \
@@ -289,6 +295,7 @@ def generate_candidates(
             .replace("{ScenarioPhrase}", scenario_phrase) \
             .replace("{EngineAngle}", engine_angle) \
             .replace("{EngineSubtitleHook}", engine_subtitle_hook or f"A Deeper Look at {engine_angle}") \
+            .replace("{EngineShortPhrase}", engine_short_phrase or engine_angle) \
             .replace("{PersonaDescription}", persona_desc) \
             .replace("{PromiseClause}", promise_clause) \
             .replace("{DistressVerb}", distress_verb) \

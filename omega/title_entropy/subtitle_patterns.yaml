@@ -72,6 +72,15 @@ subtitle_templates:
   location_grounded:  { text: "A Guide for {PersonaDescription} in {Location} Navigating {PrimaryKeyword}", length: long, content: location }
   engine_hook:        { text: "{EngineSubtitleHook}", length: long, content: metaphor }
 
+  # ─── Engine-bearing subtitles (Waystream + distinctness regen) ───
+  # Each template injects {EngineSubtitleHook} and/or {EngineShortPhrase} so
+  # books sharing persona×topic×format but differing by engine get unique subs.
+  engine_persona_hook:  { text: "{EngineSubtitleHook} for {PersonaDescription}", length: long, content: persona_direct }
+  engine_topic_persona: { text: "{EngineShortPhrase} — {PrimaryKeyword} for {PersonaDescription}", length: long, content: persona_direct }
+  engine_voice:         { text: "A Real Talk Guide to {PrimaryKeyword}: {EngineSubtitleHook}", length: long, content: persona_direct }
+  engine_field_guide:   { text: "A Field Guide to {EngineShortPhrase} for {PersonaDescription}", length: long, content: persona_direct }
+  engine_reset:         { text: "A {FormatUnit} Reset Through {EngineShortPhrase} for {PersonaDescription}", length: long, content: persona_direct }
+
 # ─── BRAND PREFERENCES ────────────────────────────────────────────────────
 # Each brand has:
 #   title: preferred title template IDs
@@ -283,18 +292,11 @@ brand_template_preferences:
     content_mix: { persona_direct: 0.55, topic_direct: 0.30, metaphor: 0.15, location: 0.00 }
 
   # ─── Waystream Sanctuary (composite, NO teacher — secular imprint) ───
-  # Per WAYSTREAM_80BOOK_CATALOG_RUN_V1_SPEC + naming research
-  # (artifacts/research/waystream_catalog_v2_naming_and_series_spec.md): EVERY
-  # subtitle must NAME the persona AND carry the topic keyword. subtitle_strategy is
-  # LONG-ONLY (none_pct/short_pct = 0) so a thin "For {Persona}" tagline or empty
-  # subtitle is structurally impossible — the failure the operator rejected. Uses the
-  # three proven persona_direct LONG templates (generation_voice leads: it embeds the
-  # exact-match "{Keyword} for {Persona}" query the research prioritizes for indexing).
-  # Composite: no Sai Maa, no teacher. Distinct (strategy+mix) profile vs devotion_path
-  # per anti-spam §16 (long-only + persona_direct 0.65 ≠ devotion's 0.80/0.55).
+  # Engine-bearing templates first so each (persona, topic, engine, format) cell
+  # gets a distinct subtitle string (800/800 anti-spam). LONG-ONLY strategy.
   way_stream_sanctuary:
-    title: [series_metaphor, topic_metaphor]
-    subtitle: [generation_voice, profession_specific, identity_shift]
+    title: [series_metaphor, topic_metaphor, persona_targeted]
+    subtitle: [engine_persona_hook, engine_topic_persona, engine_voice, engine_field_guide, engine_reset, generation_voice, profession_specific, identity_shift]
     subtitle_strategy: { none_pct: 0.0, short_pct: 0.0, long_pct: 1.0 }
     content_mix: { persona_direct: 0.65, topic_direct: 0.25, metaphor: 0.10, location: 0.00 }
 
