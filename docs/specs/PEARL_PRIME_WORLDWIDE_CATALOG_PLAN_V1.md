@@ -1,4 +1,6 @@
 
+> ⛔ SUPERSEDED 2026-06-22 @ origin/main 39e653c4fb6d65910ae97152b28fdadefec449d5 — current truth: docs/PROGRAM_STATE.md
+
 # Pearl Prime Worldwide Catalog Plan — V1 (Phase 2)
 
 **Project ID:** PRJ-WORLDWIDE-CATALOG-GO-LIVE-V1 (Phase 2 strategic deliverable)  

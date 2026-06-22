@@ -1,3 +1,5 @@
+> ⛔ SUPERSEDED 2026-06-22 @ origin/main 39e653c4fb6d65910ae97152b28fdadefec449d5 — current truth: docs/PROGRAM_STATE.md
+
 # PEARL_PRIME_1000_BOOK_BUILD_PROGRAM_V1_SPEC
 
 > ⚠️ **SUPERSEDED (2026-06-15)** — the authoritative program spec is now `docs/specs/PEARL_PRIME_100_TO_1000_BESTSELLER_BUILD_PROGRAM.md` (PR #1583), which adopted + extended this V1. Retained for history only — **build off the newer program spec, not this one.**

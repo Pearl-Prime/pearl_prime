@@ -39,17 +39,18 @@ Diagnostics: `python3 scripts/ci/load_integration_env_from_keychain.py --count` 
 
 Read these files in order before doing any git or GitHub work:
 
-1. `ps.txt`
-2. `docs/PEARL_GITHUB_ONBOARDING.md`
-3. `skills/pearl-github/SKILL.md`
-4. `skills/pearl-github/references/git_system.md`
-5. `skills/pearl-github/references/repo_memory.md`
-6. `docs/GITHUB_OPERATIONS_FRAMEWORK.md`
-7. `docs/GITHUB_GOVERNANCE.md`
-8. `docs/BRANCH_PROTECTION_REQUIREMENTS.md`
-9. `docs/GITHUB_GOVERNANCE_INCIDENT_RUNBOOK.md`
-10. `docs/DOCS_INDEX.md`
-11. `docs/AGENT_FILE_PERSISTENCE_PROTOCOL.md`
+1. `docs/PROGRAM_STATE.md`
+2. `ps.txt`
+3. `docs/PEARL_GITHUB_ONBOARDING.md`
+4. `skills/pearl-github/SKILL.md`
+5. `skills/pearl-github/references/git_system.md`
+6. `skills/pearl-github/references/repo_memory.md`
+7. `docs/GITHUB_OPERATIONS_FRAMEWORK.md`
+8. `docs/GITHUB_GOVERNANCE.md`
+9. `docs/BRANCH_PROTECTION_REQUIREMENTS.md`
+10. `docs/GITHUB_GOVERNANCE_INCIDENT_RUNBOOK.md`
+11. `docs/DOCS_INDEX.md`
+12. `docs/AGENT_FILE_PERSISTENCE_PROTOCOL.md`
 
 ## Pearl_GitHub Scope
 

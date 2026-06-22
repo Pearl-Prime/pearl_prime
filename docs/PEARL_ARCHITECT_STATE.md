@@ -1,3 +1,5 @@
+> ⛔ SUPERSEDED 2026-06-22 @ origin/main 39e653c4fb6d65910ae97152b28fdadefec449d5 — current truth: docs/PROGRAM_STATE.md
+
 # Pearl_Architect State
 
 Last verified: 2026-05-10  
