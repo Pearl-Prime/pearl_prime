@@ -7,6 +7,7 @@
 | Step | Command / module |
 |------|------------------|
 | Single book (QA / operator) | `PYTHONPATH=. python3 scripts/run_manga_pipeline.py --brand stillness_press --topic burnout --persona gen_z_professionals --genre shonen --render-book --output-dir artifacts/manga_smoke/` |
+| **Distribution exports** (post-compose pages) | `PYTHONPATH=. python3 scripts/manga/run_manga_pipeline.py --title-id stillness_press_anxiety_vol1 --page-dir /path/to/page_###.png --formats epub3,cbz,webtoon` |
 | Chapter-only (advanced) | `PYTHONPATH=. python3 scripts/manga/run_manga_chapter.py --workspace … --backend replay\|runcomfy\|noop` |
 | Weekly lane | `PYTHONPATH=. python3 scripts/weekly_manga_rollout.py` (`--dry-run`, `--single-book --brand … --topic … --genre …`) |
 
@@ -19,6 +20,19 @@
    - **`comfyui`:** `phoenix_v4.manga.image_backend.ComfyUIBackend` — requires `COMFYUI_URL` or `PEARL_STAR_IP` and reachable `/system_stats`.
    - **`runcomfy`:** Cloud RunComfy (`RUNCOMFY_API_KEY`, deployment id).
 4. **Exports** — `artifacts/.../exports/` receives `*.pdf`, `*.cbz`, minimal `*.epub` when `--render-book` is set (Pillow required for PDF).
+
+## Distribution pipeline (profile-driven)
+
+After compose, **`scripts/manga/run_manga_pipeline.py`** builds platform exports from `page_###.png` + `load_series_profile()` + `config/manga/format_adaptation_grammars.yaml` (no hardcoded dimensions):
+
+| Format | Script | Notes |
+|--------|--------|-------|
+| EPUB3 (fixed-layout) | `build_epub3.py` | Apple Books; reading direction from print grammar |
+| Print PDF | `build_print_pdf.py` | Bleed canvas from print grammar + brand color palette sidecar |
+| CBZ + ComicInfo | `build_cbz.py` | GlobalComix; comp titles in sidecar JSON |
+| Webtoon strips | `reformat_webtoon.py` | 800px width from webtoon grammar; requires `webtoon` in `adaptation_targets` |
+
+Dry-run: `--dry-run` loads profile and scans pages without writing. Upload checklist: `generate_upload_checklist.py` (invoked by orchestrator).
 
 ## Image bank gate
 

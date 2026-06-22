@@ -77,3 +77,25 @@ def test_invalid_enum_raises():
     with pytest.raises(ValueError, match="invalid market_demo"):
         load_profile(path)
     path.unlink(missing_ok=True)
+
+
+def test_load_series_profile_merged_stillness():
+    from phoenix_v4.manga.series.profile_loader import load_series_profile
+
+    d = load_series_profile("stillness_press_anxiety_vol1")
+    assert d["title_id"] == "stillness_press_anxiety_vol1"
+    assert d["brand_id"] == "stillness_press"
+    assert d["teacher"] == "ahjan"
+    assert d["series_title"] == "What the Body Holds"
+    assert "print" in (d.get("adaptation_targets") or [])
+    assert len(d.get("_profile_sources") or []) >= 2
+
+
+def test_load_series_profile_standalone_brand_lane_title():
+    from phoenix_v4.manga.series.profile_loader import load_series_profile
+
+    d = load_series_profile("cognitive_clarity_seinen")
+    assert d["title_id"] == "cognitive_clarity_seinen"
+    assert d["brand_id"] == "cognitive_clarity"
+    assert d["teacher"] == "kenjin"
+    assert len(d.get("_profile_sources") or []) == 1

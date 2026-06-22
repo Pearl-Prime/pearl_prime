@@ -235,3 +235,70 @@ def find_profile_for_series(series_id: str, profiles_dir: Path | None = None) ->
             except Exception:
                 continue
     return None
+
+
+def _deep_merge(base: dict[str, Any], overlay: dict[str, Any]) -> dict[str, Any]:
+    out = dict(base)
+    for key, val in overlay.items():
+        if key in out and isinstance(out[key], dict) and isinstance(val, dict):
+            out[key] = _deep_merge(out[key], val)
+        else:
+            out[key] = val
+    return out
+
+
+def _brand_lane_for(brand_id: str, genre_family: str, profiles_root: Path) -> Path | None:
+    brands_dir = profiles_root / "brands"
+    if not brands_dir.is_dir():
+        return None
+    for p in sorted(brands_dir.glob("*.yaml")):
+        try:
+            data = yaml.safe_load(p.read_text(encoding="utf-8")) or {}
+        except Exception:
+            continue
+        if (
+            str(data.get("brand_id") or "") == brand_id
+            and str(data.get("genre_family") or "") == genre_family
+        ):
+            return p
+    return None
+
+
+def load_series_profile(title_id: str, root: Path | None = None) -> dict[str, Any]:
+    """Load merged series profile: series YAML deep-merged over brand-genre lane."""
+    repo = root or repo_root()
+    profiles_root = repo / "config" / "source_of_truth" / "manga_profiles"
+    series_path = profiles_root / "series" / f"{title_id}.yaml"
+    sources: list[str] = []
+
+    if series_path.is_file():
+        series = yaml.safe_load(series_path.read_text(encoding="utf-8")) or {}
+        sources.append(str(series_path.relative_to(repo)))
+        brand_id = str(series.get("brand_id") or "")
+        genre_family = str(series.get("genre_family") or "")
+        lane_path = _brand_lane_for(brand_id, genre_family, profiles_root)
+        if lane_path is not None:
+            lane = yaml.safe_load(lane_path.read_text(encoding="utf-8")) or {}
+            sources.insert(0, str(lane_path.relative_to(repo)))
+            merged = _deep_merge(lane, series)
+        else:
+            merged = dict(series)
+        merged["_profile_sources"] = sources
+        return merged
+
+    brands_dir = profiles_root / "brands"
+    if brands_dir.is_dir():
+        for p in sorted(brands_dir.glob("*.yaml")):
+            try:
+                data = yaml.safe_load(p.read_text(encoding="utf-8")) or {}
+            except Exception:
+                continue
+            if str(data.get("title_id") or "") == title_id:
+                out = dict(data)
+                out["_profile_sources"] = [str(p.relative_to(repo))]
+                return out
+
+    raise FileNotFoundError(
+        f"No series profile for title_id={title_id!r} "
+        f"(checked {series_path} and brand lanes)"
+    )

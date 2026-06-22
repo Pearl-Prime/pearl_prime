@@ -56,9 +56,10 @@ jobs:
           CF_R2_SECRET_KEY: ${{ secrets.CF_R2_SECRET_KEY }}
         run: |
           mkdir -p artifacts/manga
-          PYTHONPATH=. python3 scripts/manga/run_manga_pipeline.py \
+          PYTHONPATH=. python3 scripts/run_manga_pipeline.py \
             --brand "$BRAND" --topic "$TOPIC" --genre "$GENRE" \
-            --chapters "$CHAPTER_COUNT" \
+            --persona gen_z_professionals \
+            --render-book \
             --output-dir artifacts/manga 2>&1 | tee artifacts/manga/stdout.txt
 
       - name: Summarize
