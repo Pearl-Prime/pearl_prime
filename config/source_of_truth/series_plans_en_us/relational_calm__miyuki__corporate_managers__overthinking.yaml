@@ -1,0 +1,69 @@
+series_plan_schema: 1.0.0
+locale: en_US
+book_id_prefix: relational_calm__miyuki__corporate_managers__overthinking
+brand: relational_calm
+teacher: miyuki
+persona: corporate_managers
+topic: overthinking
+byline_author: rowan_marsh
+arc:
+  installment_1:
+    book_id: relational_calm__miyuki__corporate_managers__overthinking__false_alarm
+    engine: false_alarm
+    master_arc: config/source_of_truth/master_arcs/corporate_managers__overthinking__false_alarm__F006.yaml
+    duration: standard_book_60min
+  installment_2:
+    book_id: relational_calm__miyuki__corporate_managers__overthinking__spiral
+    engine: spiral
+    master_arc: config/source_of_truth/master_arcs/corporate_managers__overthinking__spiral__F006.yaml
+    duration: standard_book_60min
+  installment_3:
+    book_id: relational_calm__miyuki__corporate_managers__overthinking__watcher
+    engine: watcher
+    master_arc: config/source_of_truth/master_arcs/corporate_managers__overthinking__watcher__F006.yaml
+    duration: standard_book_60min
+reader_promise_family: A quiet, unadorned companion for the manager whose mind won't
+  stop turning a meeting over at midnight — no system to install, no calm to perform,
+  just permission to set the thought down and let the room go quiet.
+bestseller_hook_family: ''
+emotional_engine: overthinking_recognition
+comp_series:
+- Don't Believe Everything You Think (Joseph Nguyen) — strips overthinking down to
+  a single recognizable mechanism instead of a toolkit
+- The Untethered Soul (Michael A. Singer) — quiet, spacious voice that teaches the
+  reader to step back from the inner narrator rather than argue with it
+- Stop Overthinking (Nick Trenton) — names the exact rumination loop a busy professional
+  lives in, plainspoken and without hustle
+platform_strategy:
+  primary:
+  - kdp_ebook
+  - audible
+  secondary:
+  - apple_books
+  - google_play
+  - spotify_audiobooks
+  launch_platform: kdp_ebook
+  cadence:
+    release_spacing_days: 14
+    max_books_per_brand_per_month: 2
+reader_avatar:
+  age: 35-52
+  where_they_are: It's 11:40pm. The house is finally still. You replayed the one-on-one
+    from this afternoon four times on the drive home, and now you're lying in the
+    dark rewriting the email you already sent, certain there was a better word, certain
+    someone read your silence as a verdict.
+  what_they_need: To recognize that the relentless turning-over is a tired alarm doing
+    its job, not the truth about who they are — and to be allowed to stop managing
+    the thought the way they manage everyone else.
+  what_they_avoid: Productivity frameworks, 'communication hacks', mindfulness as
+    one more KPI, performative composure, and any book that asks an already-crowded
+    mind to do more.
+series_voice_markers:
+  register: spare, clear, unadorned — a quiet presence in the room with you, gentle
+    and direct, never clinical, never preachy, never hustle
+  sentence_rhythm: short declaratives that land and leave space; the pause after a
+    sentence does as much work as the sentence; nothing crowded, nothing rushed
+  metaphor_family: bare form and empty space — the room with nothing extra in it,
+    the stillness between two people, the unsaid that settles, clean light, the breath
+    in a quiet room, what remains when the clutter falls away
+_needs_authoring: false

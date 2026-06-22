@@ -1,0 +1,96 @@
+series_plan_schema: 1.0.0
+locale: en_US
+book_id_prefix: relational_calm__miyuki__corporate_managers__anxiety
+brand: relational_calm
+teacher: miyuki
+persona: corporate_managers
+topic: anxiety
+byline_author: maya_meridian
+arc:
+  installment_1:
+    book_id: relational_calm__miyuki__corporate_managers__anxiety__false_alarm
+    engine: false_alarm
+    master_arc: config/source_of_truth/master_arcs/corporate_managers__anxiety__false_alarm__F006.yaml
+    duration: standard_book_60min
+  installment_2:
+    book_id: relational_calm__miyuki__corporate_managers__anxiety__overwhelm
+    engine: overwhelm
+    master_arc: config/source_of_truth/master_arcs/corporate_managers__anxiety__overwhelm__F006.yaml
+    duration: standard_book_60min
+  installment_3:
+    book_id: relational_calm__miyuki__corporate_managers__anxiety__spiral
+    engine: spiral
+    master_arc: config/source_of_truth/master_arcs/corporate_managers__anxiety__spiral__F009.yaml
+    duration: standard_book_60min
+  installment_4:
+    book_id: relational_calm__miyuki__corporate_managers__anxiety__shame
+    engine: shame
+    master_arc: config/source_of_truth/master_arcs/corporate_managers__anxiety__shame__F006.yaml
+    duration: standard_book_60min
+  installment_5:
+    book_id: relational_calm__miyuki__corporate_managers__anxiety__grief
+    engine: grief
+    master_arc: config/source_of_truth/master_arcs/corporate_managers__anxiety__grief__F006.yaml
+    duration: standard_book_60min
+  installment_6:
+    book_id: relational_calm__miyuki__corporate_managers__anxiety__comparison
+    engine: comparison
+    master_arc: config/source_of_truth/master_arcs/corporate_managers__anxiety__comparison__F006.yaml
+    duration: standard_book_60min
+  installment_7:
+    book_id: relational_calm__miyuki__corporate_managers__anxiety__watcher
+    engine: watcher
+    master_arc: config/source_of_truth/master_arcs/corporate_managers__anxiety__watcher__F006.yaml
+    duration: standard_book_60min
+reader_promise_family: A quiet room for the manager whose body is always braced. Not
+  one tool to calm down faster, not one more thing to optimize. Just the bare truth
+  of what anxiety is doing under the competence you perform all day, said plainly,
+  with nothing extra added to an already-crowded mind.
+bestseller_hook_family: ''
+emotional_engine: anxiety_recognition
+comp_series:
+- Unwinding Anxiety (Judson Brewer) — meets the anxious, habit-looping mind with calm
+  clarity instead of more pressure
+- 'Burnout: The Secret to Unlocking the Stress Cycle (Emily & Amelia Nagoski) — names
+  the body''s stress state in high-functioning people who keep performing through
+  it'
+- When the Body Says No (Gabor Maté) — takes the cost of held-in stress seriously
+  without blaming the person carrying it
+platform_strategy:
+  primary:
+  - kdp_ebook
+  - audible
+  secondary:
+  - apple_books
+  - google_play
+  - spotify_audiobooks
+  launch_platform: kdp_ebook
+  cadence:
+    release_spacing_days: 14
+    max_books_per_brand_per_month: 2
+reader_avatar:
+  age: 35 to 52
+  where_they_are: It's 6:40am. The team won't be online for two hours, but you're
+    already at the kitchen table with your laptop and a cooling coffee, scrolling
+    the channel for anything that broke overnight. Your shoulders are up near your
+    ears. Nothing has happened yet. Something always feels like it's about to.
+  what_they_need: To understand that the dread, the scanning, the racing mind, and
+    the buried sense that they're getting away with something are all one thing wearing
+    different masks — and to be met by a voice that strips the situation bare instead
+    of handing them another system to run.
+  what_they_avoid: Productivity hacks, 'communication frameworks', breathing apps
+    with streaks, leadership-performance content, toxic positivity, and anyone who
+    tells a tired manager to simply mindset their way out of it. Anything that adds
+    more noise to a mind that is already too full.
+series_voice_markers:
+  register: spare, clear, unadorned; a quiet presence in the room with you, not a
+    clinician and not a coach; gentle and direct; says only what is needed and then
+    stops
+  sentence_rhythm: short declaratives that land and leave space; an occasional longer
+    line that opens, then a clean close; silence used on purpose; never breathless,
+    never a list of hacks
+  metaphor_family: bare form and empty space — the meeting room after everyone leaves,
+    the unsaid that settles, clean light through a window, the breath in a quiet office,
+    the desk cleared of everything but one thing, what remains when the noise falls
+    away
+_needs_authoring: false
