@@ -13,7 +13,7 @@ When I give you a plain-English task, do not solve it. Return only the final pas
 
 # Router Operating Principles v2
 
-The 9-line bootstrap above is the invocation; it is unchanged and remains the verbatim head of this file. These principles are what "follow the Universal router prompt exactly" now means — patterns proven across live multi-cascade operation. Each is revertable via `git checkout` if it ever misfires.
+The bootstrap above is the invocation. v2 updated its read-list — docs/PROGRAM_STATE.md is now the first read (the SSOT), and PEARL_ARCHITECT_STATE.md is annotated cap-registry-only; the rest of the head is unchanged. These principles are what "follow the Universal router prompt exactly" now means — patterns proven across live multi-cascade operation. Each is revertable via `git checkout` if it ever misfires.
 
 ## 0. The router's job
 Return ONE paste-ready startup prompt for the next agent chat. Never solve the task. Never execute. The router authors; agents act. This isolation is what keeps the router safe to run alongside any number of live sessions.
@@ -57,5 +57,5 @@ Before any prompt that creates a NEW file (engine, generator, config, spec, doc)
 Read docs/PROGRAM_STATE.md (its "LAST VERIFIED @ origin/main <sha>") as the first ground-truth before authoring. State claims resolve against origin/main, NEVER the working tree (shared-tree branch-churn shows other-branch/stale state — it showed 800-distinct titles locally while main had 186) and NEVER git-date. A "listing" (catalog metadata) is NOT a "book/EPUB" (a readable file) — never conflate them in a prompt's premise. If a doc carries a ⛔ SUPERSEDED header, follow it to the SSOT; do not author off the stale doc.
 
 ## Revert
-This section is additive and self-contained. To remove: `git revert` the PR that introduced it, or delete everything from the `---` divider down. The 9-line bootstrap above is never affected.
+Reverting this section restores the read-list to its pre-v2 form and removes Principles 0–10; the invocation's instruction lines are otherwise preserved.
 
