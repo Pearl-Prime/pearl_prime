@@ -7,6 +7,7 @@ from phoenix_v4.rendering.register_output_strengthen import (
     ensure_book_terminal_integrity,
     ensure_dwell_beats,
     ensure_unique_chapter_closings,
+    repair_f13_dwell_contract,
     verify_f7_exercise_preservation,
     _DEPRESCRIBE_ALTERNATIVES,
 )
@@ -15,6 +16,7 @@ from phoenix_v4.quality.register_gate import (
     _detect_f13_dwell_starvation,
     _detect_f6_cadence_repetition,
     _detect_f1_templated_paragraphs,
+    _f13_is_insight,
     _is_prescribed_action,
     _split_chapters,
 )
@@ -67,6 +69,18 @@ def test_deprescribe_alternatives_are_f7_safe():
     assert _DEPRESCRIBE_ALTERNATIVES
     for line in _DEPRESCRIBE_ALTERNATIVES:
         assert not _is_prescribed_action(line), line
+        assert not _f13_is_insight(line), line
+
+
+def test_repair_f13_dwell_contract_breaks_insight_run():
+    body = (
+        "The mechanism is simple. Which means the body moves first. "
+        "The cost is already on the table."
+    )
+    chapter = f"Chapter 3\n\n{body}"
+    assert _detect_f13_dwell_starvation(_split_chapters(chapter))
+    out = repair_f13_dwell_contract(chapter, seed="test")
+    assert not _detect_f13_dwell_starvation(_split_chapters(out))
 
 
 def test_verify_f7_exercise_preservation_zero_contract():

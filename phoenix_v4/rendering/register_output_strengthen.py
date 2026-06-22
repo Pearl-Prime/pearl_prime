@@ -77,7 +77,11 @@ _DEPRESCRIBE_ALTERNATIVES_RAW: tuple[str, ...] = (
 
 
 def _f7_safe_deprescribe_alternatives() -> tuple[str, ...]:
-    safe = tuple(line for line in _DEPRESCRIBE_ALTERNATIVES_RAW if not _is_prescribed_action(line))
+    safe = tuple(
+        line
+        for line in _DEPRESCRIBE_ALTERNATIVES_RAW
+        if not _is_prescribed_action(line) and not _f13_is_insight(line)
+    )
     if not safe:
         raise RuntimeError("no F7-safe deprescribe alternatives configured")
     return safe

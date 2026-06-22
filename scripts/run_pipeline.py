@@ -1277,7 +1277,19 @@ def _run_spine_pipeline_mode(
         _governance_report.setdefault("register_f1_dedupe_notes", []).extend(_f1_dedupe_final)
     prose = _final_f4_closings(prose, seed=f"{seed}:final_close")
     prose = _final_orphan_strip(prose)
-    from phoenix_v4.rendering.register_output_strengthen import verify_f7_exercise_preservation
+    from phoenix_v4.rendering.register_output_strengthen import (
+        repair_f13_dwell_contract as _final_f13_repair,
+        verify_f7_exercise_preservation,
+    )
+
+    prose = _final_f13_repair(prose, seed=f"{seed}:post_flow_f13")
+    # Post-F13 flow-cue pass: dwell-beat / deprescribe inserts run after the first
+    # flow guarantee; re-run so chapter_flow is scored on the final manuscript.
+    prose = ensure_chapter_flow_cues(
+        prose, flow_profile=_flow_profile, seed=f"{seed}:post_f13_flow"
+    )
+    prose = _final_cap_f7(prose, max_per_chapter=1, max_by_chapter=_f7_max_by_chapter)
+    prose = _final_f13_repair(prose, seed=f"{seed}:post_f13_flow_recheck")
 
     _f7_preservation_violations = verify_f7_exercise_preservation(
         prose,
