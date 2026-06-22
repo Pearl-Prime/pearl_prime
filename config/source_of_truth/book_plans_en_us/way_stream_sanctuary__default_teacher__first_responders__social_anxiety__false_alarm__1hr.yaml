@@ -16,15 +16,58 @@ target_word_range:
 target_audio_minutes: 60
 title: 'Social Anxiety: When Fear Lies to You'
 subtitle: A One-Hour Social Anxiety Reset for First Responders
-cover_tagline: A One-Hour Social Anxiety Reset for First Responders
+cover_tagline: No threat in the room. Your body is treating it like a scene anyway.
 description:
-  short_blurb: A One-Hour Social Anxiety Reset for First Responders The one-hour edition.
-  long_description: 'Social Anxiety: When Fear Lies to You
+  short_blurb: You walk into the briefing, the family gathering, the call-room full
+    of people, and your system spikes like you're entering a hot scene, except the
+    only thing here is other humans. This is the hour for the alarm that fires around
+    people for no reason you can name. You won't silence it here, but you will understand
+    why it keeps going off.
+  long_description: 'It''s not a fire. It''s not a wreck. It''s a room. A shift change,
+    a training, a table of relatives asking how you''re holding up. And your body
+    floods anyway, heart up, throat tight, the same surge you get rolling up on a
+    bad one, except there''s no scene here. Just people. And some part of you is braced
+    like the threat is already in the room.
 
 
-    The one-hour edition: the core of the social anxiety work for first responders,
-    in a single sitting. Recognition, descent, integration — no filler. Book 2 of
-    the one-hour First Responders social anxiety series.'
+    This book is for the first responder whose alarm goes off around other people.
+    The one who can command a chaotic scene but feels their chest seize walking into
+    the day room. The one who''d rather take the worst call of the week than make
+    small talk at the department function. The one whose nervous system, trained to
+    detect danger faster than thought, has started flagging ordinary human contact
+    as a threat to brace against.
+
+
+    That''s a false alarm, pointed at people instead of fire. Your threat-detection
+    system is elite, it has to be, but it can''t always tell the difference between
+    a real danger and a roomful of eyes, between a scene that needs you and a conversation
+    that just feels like one. So it does what it''s built to do. It floods you, it
+    puts you on a hair trigger, it makes a quiet room feel like something you have
+    to survive. You learned to trust that alarm with your life. Nobody warned you
+    it would fire in the break room.
+
+
+    This is a one-hour reset, and it moves in three passes. First you name it, plainly,
+    so you stop reading your own body''s spike as proof that you''re failing at the
+    easy part of being human. Then you go down into it, not to shut it off, but to
+    feel what it''s guarding and why it learned to treat connection like a scene.
+    Then you come back, with the alarm still in you but no longer deciding which rooms
+    you''re allowed to be in.
+
+
+    This hour will not tell you the fear is irrational, because it isn''t, it''s a
+    real system misfiring at the wrong target. It will not hand you a script to push
+    through the panic. It will not promise the spike stops coming. The alarm is part
+    of how you''re wired, and that wiring keeps you and others alive. The goal was
+    never to disconnect it. The goal is to know it well enough that it stops running
+    you out of every room with people in it.
+
+
+    You don''t have to become a social person. You don''t have to love the function
+    or work the room. But you can stop bracing for a danger that''s just other human
+    beings, and you can start to feel the difference between your body sounding the
+    alarm and you actually being in danger. That difference is everything. Once you
+    have it, the room stops being a scene.'
 keywords:
   primary:
   - social anxiety
@@ -37,6 +80,7 @@ keywords:
   - social anxiety for first responders
   - one hour
 bisac_codes:
+- SEL036000
 - SEL027000
 - SEL031000
 - PSY022000
@@ -45,12 +89,16 @@ target_price:
   audible_usd: 6.99
   paperback_usd: 9.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: cole_bennett
 comp_titles:
-- How to Be Yourself (Hendriksen)
-- The Social Anxiety Workbook (Antony)
-- Quiet (Cain)
+- The Body Keeps the Score (Bessel van der Kolk) — the leading secular account of
+  a threat system that fires when there's no real danger present
+- How to Be Yourself (Ellen Hendriksen) — a clinical, non-spiritual guide to social
+  anxiety as a false-alarm fear response around people
+- Why Zebras Don't Get Ulcers (Robert Sapolsky) — the plain biology of a survival
+  alarm misfiring in non-life-threatening situations
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -58,3 +106,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false

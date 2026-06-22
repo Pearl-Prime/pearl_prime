@@ -16,15 +16,56 @@ target_word_range:
 target_audio_minutes: 60
 title: 'Social Anxiety: Measuring Yourself Against Everyone'
 subtitle: A One-Hour Social Anxiety Reset for First Responders
-cover_tagline: A One-Hour Social Anxiety Reset for First Responders
+cover_tagline: The whole crew looks fine. You're sure you're the only one who isn't.
 description:
-  short_blurb: A One-Hour Social Anxiety Reset for First Responders The one-hour edition.
-  long_description: 'Social Anxiety: Measuring Yourself Against Everyone
+  short_blurb: You scan the room the way you scan a scene, except the only thing you're
+    sizing up is yourself against everyone who looks calmer, steadier, more cut out
+    for this than you. This is the hour to step out of the measuring. You won't win
+    the comparison here; you'll see the rigged game underneath it instead.
+  long_description: 'You''re at the station, in the briefing, at the bar after a bad
+    one, and you''re doing the math without meaning to. Everyone else looks fine.
+    Steady hands, easy laugh, nothing rattling them. And there you are, certain you''re
+    the only one white-knuckling it, the only one who got shaken, the weak link nobody''s
+    clocked yet. You measure, and you always come up short.
 
 
-    The one-hour edition: the core of the social anxiety work for first responders,
-    in a single sitting. Recognition, descent, integration — no filler. Book 1 of
-    the one-hour First Responders social anxiety series.'
+    This book is for the first responder who turns every room into a ranking. The
+    rookie sure the veterans were never scared. The veteran sure the new ones are
+    tougher than they ever were. The one who watches a colleague shrug off a call
+    that''s still sitting in their own chest and concludes the difference is a defect
+    in them. The one who can read a scene cold but can''t stop reading the room for
+    proof they don''t belong.
+
+
+    Comparison is the engine here, and in this culture it runs nonstop. You work in
+    a world that prizes being unbothered, that treats composure as the whole measure
+    of the person, so you scan for who''s handling it and you rank yourself against
+    the calmest face in the room. But you''re comparing your insides, every tremor
+    and doubt you can feel from the inside, to their outsides, the performance they''ve
+    practiced as hard as you''ve practiced yours. It is the most unfair fight there
+    is, and you''ve been losing it on purpose without knowing.
+
+
+    This is a one-hour reset, and it doesn''t work by helping you win. First you name
+    the comparison, see exactly when and how you do it, so it stops running in the
+    background unchallenged. Then you go down into it, into the fear underneath, the
+    one that says if you''re not the steadiest then you''re the failure, the one that
+    makes the measuring feel like survival. Then you come back, not by deciding you''re
+    better than the crew, but by stepping off the scale entirely.
+
+
+    This hour will not coach you to come out on top of the comparison. It will not
+    tell you you''re secretly the strongest one there, because that''s just the same
+    game with you winning. It will not promise you''ll stop noticing how others seem.
+    What it will do is show you that the calm faces you''re ranking yourself against
+    are faces, and that the steadiness you can''t see in yourself is invisible to
+    everyone measuring themselves against you.
+
+
+    You are allowed to be shaken and still be good at this. The crew that looks unbothered
+    is bothered too; they''re just not showing you, same as you''re not showing them.
+    You can put the scale down. The job was never to be the calmest person in the
+    room. It was to do the work, and you already do.'
 keywords:
   primary:
   - social anxiety
@@ -37,6 +78,7 @@ keywords:
   - social anxiety for first responders
   - one hour
 bisac_codes:
+- SEL036000
 - SEL027000
 - SEL031000
 - PSY022000
@@ -45,12 +87,16 @@ target_price:
   audible_usd: 6.99
   paperback_usd: 9.99
 author_positioning:
-  teacher: default_teacher
+  teacher: null
   brand: way_stream_sanctuary
+  byline_author: cole_bennett
 comp_titles:
-- How to Be Yourself (Hendriksen)
-- The Social Anxiety Workbook (Antony)
-- Quiet (Cain)
+- The Gifts of Imperfection (Brené Brown) — secular work on dropping the comparison-and-worthiness
+  trap that drives social anxiety
+- How to Be Yourself (Ellen Hendriksen) — a clinical psychologist's direct, non-spiritual
+  guide to the social-comparison core of anxiety
+- Daring Greatly (Brené Brown) — names comparing your insides to others' outsides
+  as the engine of not-enoughness
 main_character_name: null
 main_character_lora_id: null
 confidence:
@@ -58,3 +104,4 @@ confidence:
   title: medium
   comps: medium
 plan_source_path: artifacts/waystream/waystream_800book_catalog_plan.csv
+_needs_authoring: false
