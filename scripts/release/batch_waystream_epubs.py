@@ -37,6 +37,15 @@ STATE = REPO / "artifacts/waystream/batch_epub_state.json"
 PILOT_N = 18
 IMPRINT = "Waystream Sanctuary"
 
+_RUNTIME_ALIASES = {
+    "standard_book_60min": "standard_book",
+}
+
+
+def _resolve_runtime(plan: dict) -> str:
+    raw = (plan.get("runtime_format_id") or plan.get("duration") or "standard_book").strip()
+    return _RUNTIME_ALIASES.get(raw, raw)
+
 
 def _iso_week() -> str:
     iso = date.today().isocalendar()
@@ -159,7 +168,7 @@ def run_one(plan: dict, week: str, dry_run: bool, force: bool) -> dict:
     persona = parts[2]
     topic = plan.get("topic") or parts[3]
     engine = plan.get("engine") or parts[4].removesuffix("__1hr")
-    runtime = plan.get("runtime_format_id") or "one_hour_book"
+    runtime = _resolve_runtime(plan)
     arc = _arc_for_book(plan)
     render_dir = RENDERED / bid
     plan_json = render_dir / "plan.json"
