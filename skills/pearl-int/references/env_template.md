@@ -61,6 +61,12 @@ TWILIO_PHONE_NUMBER=
 # ── SENDGRID ───────────────────────────────────────────────
 SENDGRID_API_KEY=
 
+# ── GOHIGHLEVEL (GHL) ─────────────────────────────────────
+GHL_API_KEY=
+GHL_LOCATION_ID=
+GHL_CONTACTS_URL=https://services.leadconnectorhq.com/contacts/
+PHOENIX_GHL_FUNNEL_WEBHOOK=
+
 # ── SLACK ──────────────────────────────────────────────────
 SLACK_BOT_TOKEN=
 SLACK_SIGNING_SECRET=

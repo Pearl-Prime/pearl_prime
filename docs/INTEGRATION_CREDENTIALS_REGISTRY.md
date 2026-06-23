@@ -241,6 +241,21 @@ than copy-pasting, so a future endpoint rotation is picked up automatically.
 | **Status** | Placeholder — needs live GHL account |
 | **Detailed docs** | [funnel/burnout_reset/GHL_HANDBOFF.md](../funnel/burnout_reset/GHL_HANDBOFF.md), [funnel/README.md](../funnel/README.md) |
 
+### 8b. GoHighLevel (GHL) — Freebie inbound webhook
+
+| Field | Value |
+|-------|-------|
+| **Env vars** | `PHOENIX_GHL_FUNNEL_WEBHOOK` |
+| **Consumed by** | `brand-wizard-app/public/free/js/phoenix_lead.js`, `scripts/freebies/inject_ghl_webhook.py`, `.github/workflows/freebie-policy.yml` |
+| **GitHub secrets** | `PHOENIX_GHL_FUNNEL_WEBHOOK` (optional; CI live-push skips when unset) |
+| **Keychain** | `phoenix-omega` service, account `PHOENIX_GHL_FUNNEL_WEBHOOK` |
+| **Local fallback** | `config/local/ghl_funnel_webhook.url` (gitignored; dev inject only) |
+| **How to obtain** | GHL → Automation → Inbound Webhook trigger → copy URL |
+| **Required vs optional** | Required for production lead capture on flagship freebie landings |
+| **Status** | Pending operator — Keychain + Actions secret unset (2026-06-23) |
+| **Setup** | `./scripts/freebies/setup_ghl_webhook.sh '<url>'` or Pearl_Int runbook |
+| **Detailed docs** | [docs/GHL_ADMIN_HANDOFF_FREEBIE_CAPTURE.md](../GHL_ADMIN_HANDOFF_FREEBIE_CAPTURE.md) (forward to GHL admin), [skills/pearl-int/references/ghl_freebie_inbound_webhook.md](../skills/pearl-int/references/ghl_freebie_inbound_webhook.md), [config/freebies/ghl_funnel_capture.yaml](../config/freebies/ghl_funnel_capture.yaml) |
+
 ### 9. Plaid — Payouts banking
 
 | Field | Value |

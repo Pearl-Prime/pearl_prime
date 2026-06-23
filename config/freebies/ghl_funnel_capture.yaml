@@ -14,6 +14,7 @@ custom_fields:
     Do not use string ids like "topic" on Contacts API — use UUID custom field ids.
   operator_sets_in: GHL Automation → Inbound Webhook → field mapping
 # Deploy: inject URL from env or set in GHL → Automation → Inbound Webhook.
+# Operator: forward docs/GHL_ADMIN_HANDOFF_FREEBIE_CAPTURE.md to GHL admin; they return the URL.
 # Payload fields: config/freebies/quiz_segment_map.yaml §webhook.payload_fields
 
 merge_tags:
