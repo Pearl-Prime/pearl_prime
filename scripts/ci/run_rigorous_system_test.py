@@ -30,17 +30,25 @@ def main() -> int:
         action="store_true",
         help="Skip 100%% atoms coverage pytest (STORY backfill in progress)",
     )
+    ap.add_argument(
+        "--skip-systems-test",
+        action="store_true",
+        help="Skip systems test phases 1-7 (release-gates push lane; full run on schedule/dispatch)",
+    )
     args = ap.parse_args()
 
     failed = 0
 
     # 1. Systems test (phases 1-7)
-    rc = run(
-        [sys.executable, "scripts/systems_test/run_systems_test.py", "--all", "--strict"],
-        "Systems test (phases 1-7)",
-    )
-    if rc != 0:
-        failed += 1
+    if args.skip_systems_test:
+        print("\n--- Systems test (phases 1-7) (skipped: --skip-systems-test) ---")
+    else:
+        rc = run(
+            [sys.executable, "scripts/systems_test/run_systems_test.py", "--all", "--strict"],
+            "Systems test (phases 1-7)",
+        )
+        if rc != 0:
+            failed += 1
 
     # 2. Variation report (if index exists)
     report_script = REPO_ROOT / "scripts" / "ci" / "report_variation_knobs.py"
