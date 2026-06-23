@@ -89,5 +89,17 @@ document.getElementById('sndBtn').onclick=()=>{au.init();document.getElementById
 document.getElementById('bu').onclick=()=>{bpm=Math.min(160,bpm+10);bv.textContent=bpm};
 document.getElementById('bd').onclick=()=>{bpm=Math.max(40,bpm-10);bv.textContent=bpm};
 </script>
+
+<!-- phoenix-lead-footer -->
+<link rel="stylesheet" href="/free/js/phoenix_tool.css">
+<script src="/free/js/phoenix_lead.js"></script>
+<script>
+  if (window.PhoenixLead) {
+    PhoenixLead.initToolPage({
+      footerCta: "This reset works for me every time. The full system is in the book — try it and see."
+    });
+  }
+</script>
+
 </body>
 </html>

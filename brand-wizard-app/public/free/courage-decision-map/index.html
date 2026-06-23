@@ -352,15 +352,15 @@
     })();
   </script>
 </head>
-<body>
+<body data-ghl-webhook="">
 <div class="page-wrap">
 
   <div class="wordmark">Phoenix Omega — Inner Light Press</div>
 
   <h1>The Decision Map</h1>
-  <p class="subtitle">Six steps. The thing you've been avoiding. A first action with a date.</p>
+  <p class="subtitle">The thing I've been avoiding — mapped in 6 steps. This is my protocol. Six steps. The thing you've been avoiding. A first action with a date.</p>
 
-  <div class="capture-card" id="capture-section">
+  <div class="capture-card" id="capture-section" style="display:none;">
     <h2>Access the Free Decision Map</h2>
     <p>Your answers stay in your browser. Nothing is stored or sent.</p>
     <form id="capture-form">
@@ -372,7 +372,22 @@
     </form>
   </div>
 
-  <div id="tool-section">
+  <div id="tool-section" class="visible" style="display:block;">
+    <div id="email-gate-section" class="card phoenix-email-gate" style="display:none;">
+      <h2 style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;margin-bottom:8px;">Get your result + next practice</h2>
+      <p style="color:#8B8A82;font-size:14px;margin-bottom:20px;">One email. No spam. Then your personalized result unlocks.</p>
+      <div class="form-group">
+        <label for="gate-name">First name</label>
+        <input type="text" id="gate-name" placeholder="Your name">
+      </div>
+      <div class="form-group">
+        <label for="gate-email">Email</label>
+        <input type="email" id="gate-email" placeholder="your@email.com">
+      </div>
+      <p id="gate-error" class="error-msg" style="display:none;">Please enter a valid email.</p>
+      <button class="btn" type="button" onclick="submitEmailGate()">Show My Result</button>
+    </div>
+
 
     <div class="step-progress" id="step-progress">
       <div class="step-pip active" id="pip-1"></div>
@@ -460,6 +475,7 @@
     </div>
 
   </div>
+      <div id="somatic-result-link"></div>
 
   <div class="cta-banner">
     <p>Want the full system?</p>
@@ -490,6 +506,21 @@
   let currentStep = 1;
   const totalSteps = 6;
 
+  function revealPendingResult() {
+    document.getElementById('completion-card').classList.add('visible');
+    if (window.PhoenixFunnel) {
+      PhoenixFunnel.injectSomaticResultLink('somatic-result-link', 'ex15_intention_quadrant.html', 'Try the intention quadrant I use before hard decisions');
+    }
+  }
+
+  function completeMap() {
+    if (window.PhoenixLead && PhoenixLead.shouldShowEmailGate()) {
+      document.getElementById('email-gate-section').style.display = 'block';
+      return;
+    }
+    revealPendingResult();
+  }
+
   function advance(fromStep) {
     // Mark current pip done
     document.getElementById('pip-' + fromStep).classList.remove('active');
@@ -497,7 +528,7 @@
     document.getElementById('step-' + fromStep).classList.remove('visible');
 
     if (fromStep >= totalSteps) {
-      document.getElementById('completion-card').classList.add('visible');
+      completeMap();
       return;
     }
 
@@ -507,6 +538,24 @@
     document.getElementById('step-' + next).classList.add('visible');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
+</script>
+
+<link rel="stylesheet" href="/free/js/phoenix_tool.css">
+<script src="/free/js/phoenix_lead.js"></script>
+<script src="/free/js/phoenix_funnel.js"></script>
+
+<!-- PHOENIX_FLAGSHIP_BOOTSTRAP -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  if (!window.PhoenixFunnel) return;
+  PhoenixFunnel.initSkipFormIfCaptured('capture-section', 'tool-section', function() {});
+  PhoenixFunnel.bindEmailBeforeResult({
+    topic: 'courage',
+    funnelSlug: 'courage-decision-map',
+    quizId: 'decision_resistance_map',
+    onSuccess: function() { if (typeof revealPendingResult === 'function') revealPendingResult(); }
+  });
+});
 </script>
 </body>
 </html>

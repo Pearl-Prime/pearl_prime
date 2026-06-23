@@ -339,30 +339,15 @@
     })();
   </script>
 </head>
-<body>
+<body data-ghl-webhook="">
   <div class="container">
     <div class="brand-tag">Phoenix Omega — Inner Light Press</div>
 
-    <h1>Find out where your capacity went.</h1>
-    <p class="subhead">10 questions. 2 minutes. No judgment.</p>
+    <h1>10 questions that showed me I had nothing left to give.</h1>
+    <p class="subhead">2 minutes. No judgment. I bet this can help you see where your capacity went too.</p>
 
-    <!-- EMAIL CAPTURE -->
-    <div id="form-section" class="card">
-      <p style="font-size:15px; color:#8B8A82; margin-bottom:24px;">Get your results plus the full Capacity Audit framework.</p>
-      <div class="form-group">
-        <label for="name">First name</label>
-        <input type="text" id="name" placeholder="Your name">
-      </div>
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input type="email" id="email" placeholder="your@email.com">
-      </div>
-      <p id="form-error" class="error-msg">Please enter your name and a valid email.</p>
-      <button class="btn" onclick="submitForm()">Access The Capacity Audit</button>
-    </div>
-
-    <!-- TOOL SECTION -->
-    <div id="tool-section">
+    <!-- TOOL SECTION (quiz first; email before result) -->
+    <div id="tool-section" style="display:block;">
       <div class="card">
         <div class="section-title">The Capacity Audit</div>
         <p style="font-size:14px; color:#8B8A82; margin-bottom:24px;">Rate each statement honestly. There are no right answers.</p>
@@ -374,8 +359,22 @@
 
         <div id="submit-block" style="margin-top:28px;">
           <p id="audit-error" class="error-msg" style="display:none; margin-bottom:12px;">Please answer all 10 questions to see your results.</p>
-          <button class="btn" onclick="scoreAudit()">See My Results</button>
+          <button class="btn" onclick="requestResults()">See My Results</button>
         </div>
+      </div>
+
+      <div id="email-gate-section" class="card phoenix-email-gate" style="display:none;">
+        <p style="font-size:15px; color:#8B8A82; margin-bottom:16px;">Where should we send your score? One email — we won't ask again on the next tool.</p>
+        <div class="form-group">
+          <label for="gate-name">First name</label>
+          <input type="text" id="gate-name" placeholder="Your name">
+        </div>
+        <div class="form-group">
+          <label for="gate-email">Email</label>
+          <input type="email" id="gate-email" placeholder="your@email.com">
+        </div>
+        <p id="gate-error" class="error-msg">Please enter a valid email.</p>
+        <button class="btn" onclick="submitEmailGate()">Show My Results</button>
       </div>
 
       <div id="results-block" style="display:none;">
@@ -383,6 +382,7 @@
           <div class="result-score" id="result-score">0</div>
           <div class="result-label">out of 30</div>
           <div class="result-message" id="result-message"></div>
+          <div id="somatic-result-link"></div>
         </div>
 
         <div class="card">
@@ -405,7 +405,15 @@
     <footer>A free tool from Phoenix Omega — Inner Light Press</footer>
   </div>
 
+  <link rel="stylesheet" href="/free/js/phoenix_tool.css">
+  <script src="/free/js/phoenix_lead.js"></script>
+  <script src="/free/js/phoenix_funnel.js"></script>
   <script>
+    const FUNNEL_SLUG = 'compassion-fatigue-audit';
+    const TOPIC = 'compassion_fatigue';
+    let pendingScore = null;
+    let pendingScoreBand = 'medium';
+
     const questions = [
       "I feel drained after spending time with people I care about.",
       "I think about other people's problems when I'm trying to rest.",
@@ -449,57 +457,78 @@
       document.getElementById('progress').style.width = `${(answered / questions.length) * 100}%`;
     }
 
-    function submitForm() {
-      const name = document.getElementById('name').value.trim();
-      const email = document.getElementById('email').value.trim();
-      const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!name || !emailRe.test(email)) {
-        document.getElementById('form-error').style.display = 'block';
-        return;
-      }
-            // GA4 lead_submit
-      if (typeof gtag === 'function') {
-        gtag('event', 'lead_submit', {
-          event_category: 'funnel',
-          event_label: 'compassion-fatigue-audit',
-          topic: 'compassion_fatigue',
-          value: 0
-        });
-      }
-document.getElementById('form-section').style.display = 'none';
-      document.getElementById('tool-section').style.display = 'block';
-      buildQuestions();
-    }
-
-    function scoreAudit() {
+    function computeScore() {
       let total = 0;
-      let unanswered = false;
       for (let i = 0; i < questions.length; i++) {
         const checked = document.querySelector(`input[name="q${i}"]:checked`);
-        if (!checked) { unanswered = true; break; }
-        total += parseInt(checked.value);
+        if (!checked) return null;
+        total += parseInt(checked.value, 10);
       }
+      return total;
+    }
 
-      if (unanswered) {
-        const errEl = document.getElementById('audit-error');
-        errEl.style.display = 'block';
-        return;
-      }
-
+    function revealResults(total) {
       document.getElementById('questions-block').style.display = 'none';
       document.getElementById('submit-block').style.display = 'none';
+      document.getElementById('email-gate-section').style.display = 'none';
       document.getElementById('results-block').style.display = 'block';
       document.getElementById('result-score').textContent = total;
-
       let message;
       if (total <= 10) {
         message = "Your capacity is holding. The audit is a check-in to keep it that way.";
+        pendingScoreBand = 'low';
       } else if (total <= 20) {
         message = "Your capacity is under real strain. Something needs to change before it runs out.";
+        pendingScoreBand = 'medium';
       } else {
         message = "You're running on empty. This is your nervous system asking for something.";
+        pendingScoreBand = 'high';
       }
       document.getElementById('result-message').textContent = message;
+      if (window.PhoenixFunnel) {
+        PhoenixFunnel.injectSomaticResultLink(
+          'somatic-result-link',
+          'app22_tonglen.html',
+          'Try the 3-minute practice I use when capacity is gone'
+        );
+      }
+    }
+
+    function requestResults() {
+      const total = computeScore();
+      if (total === null) {
+        document.getElementById('audit-error').style.display = 'block';
+        return;
+      }
+      pendingScore = total;
+      if (window.PhoenixLead && PhoenixLead.shouldShowEmailGate()) {
+        document.getElementById('email-gate-section').style.display = 'block';
+        return;
+      }
+      revealResults(total);
+    }
+
+    function submitEmailGate() {
+      const name = document.getElementById('gate-name').value.trim();
+      const email = document.getElementById('gate-email').value.trim();
+      if (!window.PhoenixLead || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        document.getElementById('gate-error').style.display = 'block';
+        return;
+      }
+      PhoenixLead.captureLead({
+        email: email,
+        first_name: name,
+        topic: TOPIC,
+        funnel_slug: FUNNEL_SLUG,
+        quiz_id: 'capacity_assessment',
+        score: pendingScore,
+        score_band: pendingScoreBand,
+        tags: ['quiz_compassion_fatigue', 'severity_' + pendingScoreBand]
+      }).then(function () {
+        revealResults(pendingScore);
+      }).catch(function () {
+        document.getElementById('gate-error').style.display = 'block';
+      });
     }
 
     buildQuestions();

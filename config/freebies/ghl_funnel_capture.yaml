@@ -1,0 +1,21 @@
+# GHL inbound webhook for interactive TOF lead capture (phoenix_lead.js).
+# Authority: freebie build plan — single capture at result gate.
+
+schema_version: 1
+
+webhook_env: PHOENIX_GHL_FUNNEL_WEBHOOK
+
+# Flagship landings read data-ghl-webhook on <body>.
+# Deploy: inject URL from env or set in GHL → Automation → Inbound Webhook.
+# Payload fields: config/freebies/quiz_segment_map.yaml §webhook.payload_fields
+
+merge_tags:
+  contact_id: "{contact_id}"
+  second_tool_link: "{base_url}/somatic_exercise_freebee_apps/{e2_somatic_app}?unlock=1&cid={contact_id}"
+
+flagship_pages:
+  - brand-wizard-app/public/free/compassion-fatigue-audit/index.html
+  - brand-wizard-app/public/free/overthinking-thought-sorter/index.html
+  - brand-wizard-app/public/free/financial-anxiety-check-in/index.html
+  - brand-wizard-app/public/free/courage-decision-map/index.html
+  - brand-wizard-app/public/free/anxiety-nervous-system-reset/index.html

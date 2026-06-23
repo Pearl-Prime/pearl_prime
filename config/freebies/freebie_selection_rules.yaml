@@ -51,6 +51,13 @@ persona_priorities:
 # Slug formula: {topic}-{persona}-{primary_freebie} (e.g. burnout-gen_z_professional-breath_reset)
 # Primary freebie = first in bundle (deterministic sort by freebie_id).
 
+# Workbook types — post-purchase / buyer tag only (nurture_asset_mix.yaml)
+workbook_buyer_only_types:
+  - companion_workbook_pdf
+  - journal_pdf
+  - thirty_day_tracker_pdf
+  - environment_guide_pdf
+
 # --- Phase 3 (scale hardening) ---
 anti_cluster:
   identical_bundle_ratio_max: 0.40

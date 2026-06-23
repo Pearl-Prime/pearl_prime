@@ -20,6 +20,13 @@ except ImportError:
 REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 CONFIG_FREEBIES = REPO_ROOT / "config" / "freebies"
 
+WORKBOOK_BUYER_ONLY_TYPES = frozenset({
+    "companion_workbook_pdf",
+    "journal_pdf",
+    "thirty_day_tracker_pdf",
+    "environment_guide_pdf",
+})
+
 FREEBIE_TYPES = [
     "companion_workbook_pdf",
     "somatic_html_tool",
@@ -38,6 +45,42 @@ FREEBIE_TYPES = [
     "resistance_mapping_html",
     "accountability_partner_pdf",
 ]
+
+
+def _is_buyer_context(book_spec: Any, series_context: Optional[dict[str, Any]]) -> bool:
+    """Workbooks attach only when buyer tag / post-purchase context is explicit."""
+    if isinstance(series_context, dict) and series_context.get("buyer_tag"):
+        return True
+    if isinstance(series_context, dict) and series_context.get("post_purchase"):
+        return True
+    tags = _get(book_spec, "contact_tags") or _get(book_spec, "tags") or []
+    if isinstance(tags, list) and "buyer" in tags:
+        return True
+    if _get(book_spec, "buyer") is True:
+        return True
+    return False
+
+
+def _freebie_type(freebies_map: dict[str, Any], freebie_id: str) -> str:
+    fb = freebies_map.get(freebie_id) or {}
+    return str(fb.get("type") or "")
+
+
+def _workbook_buyer_only_types(rules: dict) -> frozenset[str]:
+    raw = rules.get("workbook_buyer_only_types") or list(WORKBOOK_BUYER_ONLY_TYPES)
+    return frozenset(str(t) for t in raw)
+
+
+def _filter_workbooks_unless_buyer(
+    bundle: list[str],
+    freebies_map: dict[str, Any],
+    rules: dict,
+    buyer: bool,
+) -> list[str]:
+    if buyer:
+        return bundle
+    blocked = _workbook_buyer_only_types(rules)
+    return [fid for fid in bundle if _freebie_type(freebies_map, fid) not in blocked]
 
 
 def _load_yaml(p: Path) -> dict:
@@ -163,11 +206,14 @@ def get_freebie_bundle_with_formats(
     book_spec: Any,
     format_plan: dict[str, Any],
     compiled: Any,
+    series_context: Optional[dict[str, Any]] = None,
 ) -> list[dict[str, Any]]:
     """
-    Return list of {freebie_id, formats} for each freebie in bundle.
+    Return list of {freebie_id, formats, email_slot?, requires_buyer_tag?} for each freebie in bundle.
     Formats come from registry output_formats; filtered by book context (e.g. no epub for somatic/assessment).
     """
+    from phoenix_v4.planning.freebie_email_slots import enrich_bundle_with_slots
+
     result: list[dict[str, Any]] = []
     for freebie_id in bundle:
         fb = freebies_map.get(freebie_id) or {}
@@ -182,7 +228,8 @@ def get_freebie_bundle_with_formats(
         if "somatic" in freebie_type or "assessment" in freebie_type:
             formats = [f for f in formats if f != "epub"]
         result.append({"freebie_id": freebie_id, "formats": formats})
-    return result
+    buyer = _is_buyer_context(book_spec, series_context)
+    return enrich_bundle_with_slots(result, freebies_map, buyer=buyer)
 
 
 def plan_freebies(
@@ -259,11 +306,12 @@ def plan_freebies(
         return True
 
     bundle: list[str] = []
+    buyer_ctx = _is_buyer_context(book_spec, series_context)
 
-    # Rule 1 — Companion (duration >= 60)
+    # Rule 1 — Companion workbook (duration >= 60) — buyer / post-purchase only per nurture_asset_mix
     companion_rule = rules.get("companion_rule") or {}
     min_dur = companion_rule.get("min_duration_minutes", 60)
-    if duration_min >= min_dur:
+    if buyer_ctx and duration_min >= min_dur:
         ft = companion_rule.get("freebie_type", "companion_workbook_pdf")
         for fid, fb in freebies_map.items():
             if fb.get("type") != ft or not compatible(fb):
@@ -335,6 +383,7 @@ def plan_freebies(
                 extra_id = min(extra_candidates, key=lambda item: (_usage(item[0]), item[0]))[0]
                 bundle.append(extra_id)
 
+    bundle = _filter_workbooks_unless_buyer(bundle, freebies_map, rules, buyer_ctx)
     bundle = sorted(bundle)
 
     primary_id = bundle[0] if bundle else None

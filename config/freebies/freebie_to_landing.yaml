@@ -1,18 +1,9 @@
-# Maps freebie_id (from freebie_registry) to exercise landing page id (from exercises_landing.json).
-# Used by generate_html_freebie: when writing public/free/{slug}/index.html, if primary freebie
-# is mapped here, the page redirects to /breathwork/lp-{landing_id}.html for email capture.
-# Add more entries as you add somatic freebies to the registry.
+# Maps freebie_id / somatic app ids to landing paths.
+# somatic_apps: catalog id -> file (E1/E2 email link generation).
+# funnel_slug_routes: unchanged SEO slugs.
 
 breath_timer_v1: cyclic_sighing
 breath_reset_structured_v1: box_breathing
-
-# Placeholders for future per-exercise freebies (uncomment when added to freebie_registry):
-# cyclic_sighing_v1: cyclic_sighing
-# box_breathing_v1: box_breathing
-# 478_breathing_v1: 478_breathing
-
-# Funnel freebie slug → landing path mapping (all 15 active topics)
-# Last updated: 2026-04-10
 funnel_slug_routes:
   anxiety-nervous-system-reset: /free/anxiety-nervous-system-reset/
   burnout-energy-audit: /free/burnout-energy-audit/
@@ -29,3 +20,199 @@ funnel_slug_routes:
   financial-stress-audit: /free/financial-stress-audit/
   somatic-body-scan: /free/somatic-body-scan/
   grief-letter-template: /free/grief-letter-template/
+somatic_apps:
+  478_breathing:
+    file: ex01_478_breathing.html
+    url: /somatic_exercise_freebee_apps/ex01_478_breathing.html
+    e1_eligible: true
+    e2_eligible: true
+  box_breathing:
+    file: ex02_box_breathing.html
+    url: /somatic_exercise_freebee_apps/ex02_box_breathing.html
+    e1_eligible: true
+    e2_eligible: true
+  coherence_breathing:
+    file: ex03_coherence_breathing.html
+    url: /somatic_exercise_freebee_apps/ex03_coherence_breathing.html
+    e1_eligible: true
+    e2_eligible: true
+  three_part_breath:
+    file: app21_three_part_breath.html
+    url: /somatic_exercise_freebee_apps/app21_three_part_breath.html
+    e1_eligible: true
+    e2_eligible: true
+  tonglen:
+    file: app22_tonglen.html
+    url: /somatic_exercise_freebee_apps/app22_tonglen.html
+    e1_eligible: true
+    e2_eligible: true
+  breath_of_fire:
+    file: app23_breath_of_fire.html
+    url: /somatic_exercise_freebee_apps/app23_breath_of_fire.html
+    e1_eligible: true
+    e2_eligible: true
+  buteyko:
+    file: app24_buteyko.html
+    url: /somatic_exercise_freebee_apps/app24_buteyko.html
+    e1_eligible: true
+    e2_eligible: true
+  cyclic_hyperventilation:
+    file: app25_cyclic_hyperventilation.html
+    url: /somatic_exercise_freebee_apps/app25_cyclic_hyperventilation.html
+    e1_eligible: true
+    e2_eligible: true
+  cyclic_sighing:
+    file: app26_cyclic_sighing.html
+    url: /somatic_exercise_freebee_apps/app26_cyclic_sighing.html
+    e1_eligible: true
+    e2_eligible: true
+  hrv_coherence:
+    file: app27_hrv_coherence.html
+    url: /somatic_exercise_freebee_apps/app27_hrv_coherence.html
+    e1_eligible: true
+    e2_eligible: true
+  holotropic:
+    file: app28_holotropic.html
+    url: /somatic_exercise_freebee_apps/app28_holotropic.html
+    e1_eligible: true
+    e2_eligible: true
+  kapalabhati:
+    file: app29_kapalabhati.html
+    url: /somatic_exercise_freebee_apps/app29_kapalabhati.html
+    e1_eligible: true
+    e2_eligible: true
+  laughing_buddha:
+    file: app30_laughing_buddha.html
+    url: /somatic_exercise_freebee_apps/app30_laughing_buddha.html
+    e1_eligible: true
+    e2_eligible: true
+  liberation_laughter:
+    file: app31_liberation_laughter.html
+    url: /somatic_exercise_freebee_apps/app31_liberation_laughter.html
+    e1_eligible: true
+    e2_eligible: true
+  monster_breath:
+    file: app32_monster_breath.html
+    url: /somatic_exercise_freebee_apps/app32_monster_breath.html
+    e1_eligible: true
+    e2_eligible: true
+  moon_breath:
+    file: app33_moon_breath.html
+    url: /somatic_exercise_freebee_apps/app33_moon_breath.html
+    e1_eligible: true
+    e2_eligible: true
+  phoenix_breath:
+    file: app34_phoenix_breath.html
+    url: /somatic_exercise_freebee_apps/app34_phoenix_breath.html
+    e1_eligible: true
+    e2_eligible: true
+  rebirth_breathwork:
+    file: app35_rebirth_breathwork.html
+    url: /somatic_exercise_freebee_apps/app35_rebirth_breathwork.html
+    e1_eligible: true
+    e2_eligible: true
+  tummo:
+    file: app36_tummo.html
+    url: /somatic_exercise_freebee_apps/app36_tummo.html
+    e1_eligible: true
+    e2_eligible: true
+  wim_hof:
+    file: app37_wim_hof.html
+    url: /somatic_exercise_freebee_apps/app37_wim_hof.html
+    e1_eligible: true
+    e2_eligible: true
+  breath_walk:
+    file: app38_breath_walk.html
+    url: /somatic_exercise_freebee_apps/app38_breath_walk.html
+    e1_eligible: true
+    e2_eligible: true
+  wim_hof_cold:
+    file: app39_wim_hof_cold.html
+    url: /somatic_exercise_freebee_apps/app39_wim_hof_cold.html
+    e1_eligible: true
+    e2_eligible: true
+  extended_exhale:
+    file: ex04_extended_exhale.html
+    url: /somatic_exercise_freebee_apps/ex04_extended_exhale.html
+    e1_eligible: true
+    e2_eligible: true
+  alternate_nostril:
+    file: ex05_alternate_nostril.html
+    url: /somatic_exercise_freebee_apps/ex05_alternate_nostril.html
+    e1_eligible: true
+    e2_eligible: true
+  rectangle_breathing:
+    file: ex06_rectangle_breathing.html
+    url: /somatic_exercise_freebee_apps/ex06_rectangle_breathing.html
+    e1_eligible: true
+    e2_eligible: true
+  resonance_breathing:
+    file: ex07_resonance_breathing.html
+    url: /somatic_exercise_freebee_apps/ex07_resonance_breathing.html
+    e1_eligible: true
+    e2_eligible: true
+  sama_vritti:
+    file: ex08_sama_vritti.html
+    url: /somatic_exercise_freebee_apps/ex08_sama_vritti.html
+    e1_eligible: true
+    e2_eligible: true
+  triangle_breathing:
+    file: ex09_triangle_breathing.html
+    url: /somatic_exercise_freebee_apps/ex09_triangle_breathing.html
+    e1_eligible: true
+    e2_eligible: true
+  ujjayi_ocean:
+    file: ex10_ujjayi_ocean.html
+    url: /somatic_exercise_freebee_apps/ex10_ujjayi_ocean.html
+    e1_eligible: true
+    e2_eligible: true
+  reverse_breathing:
+    file: ex11_reverse_breathing.html
+    url: /somatic_exercise_freebee_apps/ex11_reverse_breathing.html
+    e1_eligible: true
+    e2_eligible: true
+  bee_breath:
+    file: ex12_bee_breath.html
+    url: /somatic_exercise_freebee_apps/ex12_bee_breath.html
+    e1_eligible: true
+    e2_eligible: true
+  body_scan:
+    file: ex13_body_scan.html
+    url: /somatic_exercise_freebee_apps/ex13_body_scan.html
+    e1_eligible: true
+    e2_eligible: true
+  grounding_54321:
+    file: ex14_grounding_54321.html
+    url: /somatic_exercise_freebee_apps/ex14_grounding_54321.html
+    e1_eligible: true
+    e2_eligible: true
+  intention_quadrant:
+    file: ex15_intention_quadrant.html
+    url: /somatic_exercise_freebee_apps/ex15_intention_quadrant.html
+    e1_eligible: true
+    e2_eligible: true
+  phoenix_flame:
+    file: ex16_phoenix_flame.html
+    url: /somatic_exercise_freebee_apps/ex16_phoenix_flame.html
+    e1_eligible: true
+    e2_eligible: true
+  lions_breath:
+    file: ex17_lions_breath.html
+    url: /somatic_exercise_freebee_apps/ex17_lions_breath.html
+    e1_eligible: true
+    e2_eligible: true
+  loving_kindness:
+    file: ex18_loving_kindness.html
+    url: /somatic_exercise_freebee_apps/ex18_loving_kindness.html
+    e1_eligible: true
+    e2_eligible: true
+  progressive_relaxation:
+    file: ex19_progressive_relaxation.html
+    url: /somatic_exercise_freebee_apps/ex19_progressive_relaxation.html
+    e1_eligible: true
+    e2_eligible: true
+  physiological_sigh:
+    file: ex20_physiological_sigh.html
+    url: /somatic_exercise_freebee_apps/ex20_physiological_sigh.html
+    e1_eligible: true
+    e2_eligible: true
