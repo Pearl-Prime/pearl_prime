@@ -1322,6 +1322,15 @@ def _run_spine_pipeline_mode(
         prose = _final_f4_closings(prose, seed=f"{seed}:floor_final_close")
         prose = _final_orphan_strip(prose)
 
+    # Floor / flow passes after post_f13_flow_recheck can re-break register (F13/F4).
+    prose = _final_f13_repair(prose, seed=f"{seed}:pre_gate_f13")
+    prose = _final_f4_closings(prose, seed=f"{seed}:pre_gate_f4")
+    prose = ensure_chapter_flow_cues(
+        prose, flow_profile=_flow_profile, seed=f"{seed}:pre_gate_flow"
+    )
+    prose = _final_f13_repair(prose, seed=f"{seed}:pre_gate_f13_recheck")
+    prose = _final_orphan_strip(prose)
+
     _f7_preservation_violations = verify_f7_exercise_preservation(
         prose,
         governance_report=_governance_report,
