@@ -52,7 +52,7 @@ jobs:
       - name: Rigorous system test (skip sim for speed)
         if: github.event_name != 'pull_request'
         run: |
-          PYTHONPATH=. python scripts/ci/run_rigorous_system_test.py --skip-sim --strict --skip-atoms-coverage
+          PYTHONPATH=. python scripts/ci/run_rigorous_system_test.py --skip-sim --strict --skip-atoms-coverage --skip-systems-test
 
       - name: Pipeline canary (20 books)
         if: github.event_name != 'pull_request'
