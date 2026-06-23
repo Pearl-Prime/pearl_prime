@@ -73,7 +73,8 @@ REGISTRY: list[tuple[str, str, bool, str]] = [
     # --- Funnel ---
     ("GoHighLevel", "GHL_API_KEY", False, "Funnel CRM"),
     ("GoHighLevel", "GHL_LOCATION_ID", False, "GHL location"),
-    ("GoHighLevel", "GHL_CONTACTS_URL", False, "GHL contacts / webhook URL"),
+    ("GoHighLevel", "GHL_CONTACTS_URL", False, "GHL Contacts API URL (server-side funnel app)"),
+    ("GoHighLevel", "PHOENIX_GHL_FUNNEL_WEBHOOK", False, "GHL inbound webhook URL for phoenix_lead.js static capture"),
     ("SMTP", "SMTP_HOST", False, "Funnel email host"),
     ("SMTP", "SMTP_PORT", False, "Funnel email port"),
     ("SMTP", "SMTP_USER", False, "Funnel email user"),

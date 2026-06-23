@@ -45,6 +45,15 @@ def _inject_body(path: Path, webhook: str) -> bool:
 
 
 def main() -> int:
+    import argparse
+
+    parser = argparse.ArgumentParser(description="Inject GHL webhook URL into flagship landings")
+    parser.add_argument(
+        "--require-env",
+        action="store_true",
+        help="Exit 1 if PHOENIX_GHL_FUNNEL_WEBHOOK is unset (production deploy gate)",
+    )
+    args = parser.parse_args()
     cfg = _load_yaml(CONFIG)
     env_name = cfg.get("webhook_env") or "PHOENIX_GHL_FUNNEL_WEBHOOK"
     webhook = os.environ.get(env_name, "")
@@ -60,6 +69,8 @@ def main() -> int:
             print(f"patched {rel}")
     if not webhook:
         print(f"note: {env_name} unset — body attr left empty (capture skips until deploy)")
+        if args.require_env:
+            return 1
     return 0
 
 
