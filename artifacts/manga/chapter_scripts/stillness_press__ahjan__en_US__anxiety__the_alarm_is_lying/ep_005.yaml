@@ -1,0 +1,455 @@
+# ═══════════════════════════════════════════════════════════════════════════
+# CHAPTER SCRIPT — The Alarm Is Lying — Episode 5
+# ═══════════════════════════════════════════════════════════════════════════
+# Series:        stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying
+# Episode:       ep_005 — "Friday, 12:08 PM"
+# Author (EI):   Hana Tidecalm
+# Teacher:       ahjan (Buddhist contemporary; alarm-systems / pause)
+# Engine:        false_alarm
+# Genre:         iyashikei
+# Style:         cozy_iyashikei
+#
+# Continuity from ep_004:
+#   One week since the insomnia night. The practice has settled into the
+#   background. Today Mira has lunch with a coworker (Yara) who notices
+#   something has shifted in her. New angle: the practice becomes
+#   VISIBLE to someone else without Mira advertising it.
+#
+# Episode arc — the practice becomes social:
+#   safety opening (office kitchenette, ritual lunch prep) → small ramp
+#   (Yara arrives, "you seem different") → ground (Mira deflects, then
+#   admits a sliver) → climax (Yara shares her own anxiety; Mira holds
+#   space without fixing) → Long Drop (walk back to desk together,
+#   shared silence) → completion (Mira at her desk, the practice
+#   continues, no fanfare)
+#
+# SCROLL THERAPEUTIC TEST:
+#   1. Safety cue inside first 800 px ........ ✓ panel 1 (office plant + warm Friday light)
+#   2. ≥3 oscillations activation/ground ...... ✓ 4 oscillations
+#   3. Activation:Ground ≤ 1:2.5 .............. ✓ ~8 activation / ~22 ground panels
+#   4. Closes with completion ................. ✓ panels 28-30 settle
+#   5. HRV-style end-state delta .............. (Phase 2)
+#
+# CRAFT FORMULAS (NEW: relational beat focus):
+#   Tea Beat absent at open (Friday lunch, not tea ritual)
+#   Anchor Panel — office windowsill plant (panels 1, 6, 30 — NEW recurring object)
+#   Awe-Pullback (panel 15 — restaurant window onto street, similar but tighter than ep_003's pullback)
+#   Pendulation Pair (4-6 ↔ 7-8, 11-13 ↔ 14-16, 18-20 ↔ 21-23)
+#   Long Drop (panel 25 — walking-back wide silent, two-person)
+#   Continuity callback: jade pendant touch (panel 12); succulent now in
+#   Mira's office cubicle (panel 1, 30) — she brought a cutting from home
+#
+# DOCTRINAL ANCHOR:
+#   The practice becomes social — and Mira does not preach. She holds
+#   space when Yara opens up. The teaching survives contact with another
+#   human without becoming explanation. This is iyashikei + contemplative
+#   convention: the practice transmits through presence, not instruction.
+#
+# ═══════════════════════════════════════════════════════════════════════════
+
+schema_version: "1.0.0"
+artifact_type: chapter_script_writer_handoff
+schema_authority: schemas/manga/chapter_script_writer_handoff.schema.json
+
+series_id: stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying
+chapter_id: ep_005
+title: "The Alarm Is Lying — Episode 5: Friday, 12:08 PM"
+manga_author: Hana Tidecalm
+teacher_id: ahjan
+brand_id: stillness_press
+engine: false_alarm
+locale: en_US
+default_locale: en_US
+available_locales: [en_US]
+
+main_characters:
+  - id: mira
+    name: Mira Aoki
+    age: 33
+    role: protagonist (UX researcher; mid-career; quietly anxious)
+    visual_anchor: "long brown hair, cream sweater + grey trousers (office Friday), jade pendant visible"
+  - id: yara
+    name: Yara Lin
+    age: 31
+    role: "Mira's colleague (data analyst, two desks over; warm but a little high-energy; speaks 6-7 lines; not antagonist; admits her own anxiety in the climax)"
+    visual_anchor: "shoulder-length wavy black hair, round tortoiseshell glasses, soft red-orange wool cardigan over a white shirt, small gold hoops"
+
+scene_palette:
+  primary: warm Friday office gold + cream
+  secondary: pale sage (the office plant) + soft red-orange (Yara's cardigan accent)
+  accent: jade green (Mira's pendant + cubicle succulent cutting)
+  restaurant_palette: warm cafe amber + window-light blue
+  walk_back_palette: late-afternoon Friday gold + city silhouette
+
+# ═══════════════════════════════════════════════════════════════════════════
+# PAGES (30 panels)
+# ═══════════════════════════════════════════════════════════════════════════
+
+pages:
+  - page_id: ep_005_p01
+    panels:
+
+      # ── OPENING — office cubicle, Friday rhythm ────────────────────────
+      - panel_id: ep005_001
+        scene: |
+          Close-up — a small succulent in a clay pot on a corner of an office
+          desk, beside a closed laptop. The same jade green as Mira's pendant.
+          Friday-noon sunlight through office blinds, striped warm gold
+          across the leaves. A coffee mug nearby, empty.
+        beat_type: ~
+        intent: "ANCHOR PANEL — the succulent cutting Mira brought from home; SAFETY CUE first 800 px"
+        silence_confirmed: true
+
+      - panel_id: ep005_002
+        scene: |
+          Wider — Mira at her desk, mid-task. Cream sweater, grey trousers,
+          jade pendant. Her hands typing slowly. The office around her —
+          standard open-plan, soft hum of activity.
+        beat_type: micro
+        narrator_caption_by_locale:
+          en_US: "Friday. Twelve oh eight."
+
+      - panel_id: ep005_003
+        scene: |
+          Close — Mira's phone buzzes face-up on the desk. The notification:
+          "Yara — lunch? :)"
+        beat_type: spatial
+        intent: "Trigger — anticipated, warm"
+
+      # ── ACTIVATION 1 — small pre-lunch flutter ─────────────────────────
+      - panel_id: ep005_004
+        scene: |
+          Close on Mira's face — half-smile, but a small flicker. Lunch with
+          a friend should be easy. The body responds with a small flutter
+          anyway.
+        beat_type: micro
+        intent: "Activation 1 — relational, mild, recognized fast now"
+        sfx_by_locale:
+          en_US: ["..."]
+
+      - panel_id: ep005_005
+        scene: |
+          Mira typing her reply: "yes — meet you at the door in 5"
+        beat_type: micro
+
+      # ── GROUND 1 — pendulation: the cubicle plant ──────────────────────
+      - panel_id: ep005_006
+        scene: |
+          Mira's gaze drifts to the succulent on her desk. A small smile.
+          The recognition: I brought this here on purpose.
+        beat_type: micro
+        intent: "ANCHOR — the practice is portable"
+
+      - panel_id: ep005_007
+        scene: |
+          Close — Mira's hand briefly touches the jade pendant. Then she
+          stands, slides her arms into her jacket.
+        beat_type: micro
+        intent: "Standard pre-departure pendant touch"
+
+      # ── MEETING YARA — office lobby ────────────────────────────────────
+      - panel_id: ep005_008
+        scene: |
+          Wide — office lobby, glass doors. Yara waiting near the entrance —
+          warm red-orange wool cardigan, round tortoiseshell glasses, hair
+          tucked behind one ear. She waves as Mira approaches.
+        beat_type: standard
+        dialogue_lines:
+          - speaker: yara
+            text_by_locale:
+              en_US: "I am STARVING. Tell me you want the udon place."
+            intensity: warm
+            bubble_style: round_normal
+            tail_style: pointer
+            position_hint: top_right
+
+      - panel_id: ep005_009
+        scene: |
+          Mid-shot — Mira laughing, small. Genuine. The two of them through
+          the glass doors, out into the Friday street.
+        beat_type: micro
+        dialogue_lines:
+          - speaker: mira
+            text_by_locale:
+              en_US: "Always the udon place."
+            intensity: warm
+            bubble_style: round_normal
+            tail_style: pointer
+            position_hint: bottom_left
+
+      # ── RESTAURANT — easy start ────────────────────────────────────────
+      - panel_id: ep005_010
+        scene: |
+          Cut to the udon place. Small neighborhood restaurant, wooden
+          counter, hanging lanterns, warm amber light. A few other office
+          workers at adjacent tables. Mira and Yara settling into a window
+          booth, menus open.
+        beat_type: standard
+        intent: "Scene transition — office → restaurant"
+
+      - panel_id: ep005_011
+        scene: |
+          Yara, glasses pushed up — looking at Mira over them. A small pause
+          before she speaks.
+        beat_type: micro
+        intent: "Beat — Yara has been watching Mira"
+
+      # ── ACTIVATION 2 — Yara notices ────────────────────────────────────
+      - panel_id: ep005_012
+        scene: |
+          Close on Yara, glasses settled, leaning forward slightly. Tone soft.
+        beat_type: micro
+        dialogue_lines:
+          - speaker: yara
+            text_by_locale:
+              en_US: "Okay. So. You seem different lately."
+            intensity: gentle
+            bubble_style: round_normal
+            tail_style: pointer
+            position_hint: top_left
+
+      - panel_id: ep005_013
+        scene: |
+          Close on Mira's face — a small flicker, micro-tightening at the
+          jaw. Being SEEN is its own activation.
+        beat_type: micro
+        intent: "Activation 2 — visibility-anxiety; being noticed"
+        sfx_by_locale:
+          en_US: ["thud-thud..."]
+
+      - panel_id: ep005_014
+        scene: |
+          Mira's hand finds the jade pendant. Two fingers. A short exhale.
+          The eyes settle.
+        beat_type: micro
+        intent: "Pendulation — anchor touch"
+
+      # ── AWE-PULLBACK — restaurant window onto street ───────────────────
+      - panel_id: ep005_015
+        scene: |
+          Wide pullback through the restaurant window. From outside-looking-in:
+          the small restaurant inside a Friday lunch-rush street. Office
+          workers walking past, a food cart, late-spring sky. The booth
+          where Mira and Yara sit is a small composition. Intentionally
+          over-wide.
+        beat_type: miyazaki_ma
+        intent: "AWE-PULLBACK — the conversation held within the city's rhythm"
+
+      # ── GROUND 2 — Mira admits a sliver ────────────────────────────────
+      - panel_id: ep005_016
+        scene: |
+          Back to medium — Mira inside, looking up at Yara now. The
+          armor is lower than usual.
+        beat_type: micro
+        dialogue_lines:
+          - speaker: mira
+            text_by_locale:
+              en_US: "I have been — practicing something. With my body. I don't really know how to talk about it yet."
+            intensity: tender
+            bubble_style: round_normal
+            tail_style: pointer
+            position_hint: bottom_right
+
+      - panel_id: ep005_017
+        scene: |
+          Close on Yara — listening. Glasses catching the window light.
+          No tilt of the head, no eager-fixer face. Just attention.
+        beat_type: micro
+        intent: "Witness — Yara holds space; reader feels the safety"
+
+      # ── ACTIVATION 3 — Yara opens up too ───────────────────────────────
+      - panel_id: ep005_018
+        scene: |
+          Yara takes off her glasses, sets them on the table. Rubs the
+          bridge of her nose.
+        beat_type: micro
+        intent: "Beat — Yara about to disclose something of her own"
+
+      - panel_id: ep005_019
+        scene: |
+          Close — Yara's eyes, without glasses. A little more tired-looking
+          than before. The Friday face she usually keeps put together.
+        beat_type: micro
+        dialogue_lines:
+          - speaker: yara
+            text_by_locale:
+              en_US: "I have panic attacks in the bathroom at work. Have for like… two years."
+            intensity: vulnerable
+            bubble_style: round_normal
+            tail_style: pointer
+            position_hint: top_center
+
+      - panel_id: ep005_020
+        scene: |
+          Close on Mira's face. The reflex to FIX rises — visible in the
+          micro-shift toward leaning forward. Then it settles. She does
+          not lean forward. She does not fix.
+        beat_type: micro
+        intent: "Activation 3 — Mira's old reflex to caretake, met with the practice"
+
+      # ── GROUND 3 — Mira holds space, doesn't preach ────────────────────
+      - panel_id: ep005_021
+        scene: |
+          Mira's hand slides across the table to rest near Yara's, not on
+          top, just close. The booth's wood grain visible between them.
+        beat_type: micro
+        intent: "Witness echo — same gesture as ep_003 mother used"
+
+      - panel_id: ep005_022
+        scene: |
+          Mira's face. Small, steady. Eyes wet but not spilling.
+        beat_type: micro
+        dialogue_lines:
+          - speaker: mira
+            text_by_locale:
+              en_US: "Yeah."
+            intensity: tender
+            bubble_style: round_normal
+            tail_style: pointer
+            position_hint: bottom_right
+
+      - panel_id: ep005_023
+        scene: |
+          Just the table now — both pairs of hands close, the menus, the
+          glasses-on-the-side. A short silence. The restaurant hum continues.
+        beat_type: spatial
+        intent: "Silence held — the practice transmitting without instruction"
+        silence_confirmed: true
+
+      # ── COMPLETION WITHIN — meal arrives, life continues ──────────────
+      - panel_id: ep005_024
+        scene: |
+          A server places two bowls of udon on the table. Steam rising.
+          The moment shifts — not broken, just naturalized.
+        beat_type: standard
+        intent: "Sensory anchor — food as completion-within-climax"
+
+      # ── LONG DROP — walking back, two-person silent ───────────────────
+      - panel_id: ep005_025
+        scene: |
+          Wide silent panel. Mira and Yara walking back toward the office
+          building, side by side on a Friday sidewalk. Late afternoon
+          light, golden. Their bags on shoulders. Mira's hands in jacket
+          pockets, Yara's swinging at her side. NO TEXT, NO CAPTION,
+          NO SFX. The shared quiet IS the panel.
+        beat_type: long_drop
+        intent: "LONG DROP — two-person silence after disclosure"
+        silence_confirmed: true
+        dialogue_lines: []
+
+      - panel_id: ep005_026
+        scene: |
+          Mid-shot — at the office building's glass doors. Yara turns to
+          Mira, small smile. No big closing line.
+        beat_type: micro
+        dialogue_lines:
+          - speaker: yara
+            text_by_locale:
+              en_US: "Same time next Friday?"
+            intensity: warm
+            bubble_style: round_normal
+            tail_style: pointer
+            position_hint: top_right
+
+      - panel_id: ep005_027
+        scene: |
+          Mira nodding. Small smile back.
+        beat_type: micro
+        dialogue_lines:
+          - speaker: mira
+            text_by_locale:
+              en_US: "Same time."
+            intensity: warm
+            bubble_style: round_normal
+            tail_style: pointer
+            position_hint: bottom_left
+
+      # ── COMPLETION — back at the desk, practice continues ─────────────
+      - panel_id: ep005_028
+        scene: |
+          Cut back to Mira at her desk. Friday afternoon. The succulent in
+          its corner pot, the closed coffee mug from the morning. She is
+          opening the laptop again. The office light has shifted to a
+          warmer angle.
+        beat_type: standard
+        intent: "Scene transition — return to work register"
+
+      - panel_id: ep005_029
+        scene: |
+          Close — Mira's hand on the laptop, eyes scanning the screen. Just
+          working. The pendant catches the light briefly at her neckline.
+        beat_type: micro
+
+      - panel_id: ep005_030
+        scene: |
+          Final panel — wide of the desk. The succulent in its corner pot
+          catching the late-Friday light. Mira working in the background,
+          a small posture, calm. The coffee mug, the laptop, the plant.
+          Caption strip below.
+        beat_type: micro
+        narrator_caption_by_locale:
+          en_US: "The practice goes where I go."
+        dialogue_lines: []
+
+# ═══════════════════════════════════════════════════════════════════════════
+# WRITER NOTES
+# ═══════════════════════════════════════════════════════════════════════════
+notes:
+  arc_position: |
+    Episode 5 of 10. The practice becomes social. Mira does not preach,
+    does not over-explain, does not project. Yara's disclosure mirrors
+    Mira's earlier interior state (panic attacks in the bathroom — the
+    private place; what Mira used to do). The teaching transmits through
+    presence, not instruction. Iyashikei doctrinal note: this is not
+    "Mira saves Yara." Mira just holds space, and Yara was already going
+    to disclose because the conditions were right.
+  pacing_vs_prior: |
+    30 panels — same as ep_003. Roughly 8 activation / 22 ground (well
+    within the 1:2.5 cap). Most of the runtime is the lunch scene
+    inside the restaurant — sustained mid-distance with the Awe-Pullback
+    at panel 15 providing scale-reset.
+  continuity_callbacks: |
+    - Jade pendant (panel 7, 14, 29) — touch sequence as practice marker
+    - Succulent — NEW in office: Mira brought a cutting from her home
+      windowsill. The reader sees that the practice has migrated visibly.
+      First on the desk (panel 1, 28, 30); the implied origin is the
+      ep_003 windowsill plant.
+    - Tea kettle — DOES NOT appear (Friday lunch register; not a tea
+      episode). The bookend convention bends here intentionally to
+      avoid formulaic repetition.
+    - Smoke detector image — DOES NOT appear; the caption "It is not
+      danger" not invoked. The practice is now invisible from outside.
+    - Cream sweater — same character lock-in
+  yara_handling: |
+    Six lines total. Yara is fully a person, not a foil. Her disclosure
+    is real (panic attacks in the bathroom for two years) — a strong
+    iyashikei choice: another person carrying something just as heavy,
+    revealed without ceremony. The episode does NOT solve Yara's
+    panic attacks. It only shows that two people can know each other's
+    inside without trying to fix.
+  long_drop_position: |
+    Panel 25 — two-person walking silence. Different from prior Long
+    Drops (kitchen solo, rooftop solo, park bench solo, window seat
+    solo). The shared silence is the new beat: the practice has become
+    something that can be witnessed by another without being verbalized.
+  doctrinal_anchor_ahjan: |
+    The teaching transmits through presence. Mira does not say "you
+    should try noticing the alarm." She holds Yara's disclosure. This
+    is the doctrinal claim of ahjan's framework — not a technique to
+    teach others, just a posture other people can borrow from being
+    near it. Pure iyashikei: small shifts, no Big Revelation, no
+    Mira-as-teacher trope.
+  translation_handoff: |
+    Same as prior episodes — text_by_locale dicts populated for en_US
+    only. Run scripts/manga/translate_chapter_script.py for ja_JP /
+    zh_TW / zh_CN. New locked phrase: "The practice goes where I go."
+
+# ═══════════════════════════════════════════════════════════════════════════
+# DOWNSTREAM CONSUMPTION
+# ═══════════════════════════════════════════════════════════════════════════
+# 1. visual_from_script_v3 → FLUX prompts (PR #655)
+# 2. lettering_from_script → v3 lettering_spec
+# 3. bubble_render with locale → per-market bubbles (PR #648)
+# 4. webtoon_compose → vertical strip (PR #650)
+# 5. r2_push_helper.push_book_render() (PR #637)
+# 6. webtoon_canvas_upload package (PR #630)
