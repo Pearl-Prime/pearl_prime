@@ -4,12 +4,17 @@ on:
   pull_request:
     paths:
       - 'config/marketing/**'
+      - 'phoenix_v4/marketing/**'
+      - 'phoenix_v4/qa/validate_marketing_feed.py'
+      - 'scripts/marketing/build_marketing_feed.py'
+      - 'scripts/marketing/build_funnel_book_url_index.py'
       - '.github/workflows/marketing-config-gate.yml'
   push:
     branches:
       - main
     paths:
       - 'config/marketing/**'
+      - 'phoenix_v4/marketing/**'
 
 jobs:
   validate-marketing-config:
@@ -29,9 +34,11 @@ jobs:
           python -m pip install --upgrade pip
           pip install pyyaml
 
-      - name: Run marketing config validation
+      - name: Validate feed schema
         run: |
           PYTHONPATH=. python -m phoenix_v4.qa.validate_marketing_config
+          PYTHONPATH=. python -m phoenix_v4.qa.validate_marketing_feed --sample-feed
+          python3 scripts/marketing/build_funnel_book_url_index.py --check
 
       - name: Report validation results
         if: always()

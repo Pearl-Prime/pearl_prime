@@ -32,6 +32,10 @@ else
   echo "MISS local webhook file ($LOCAL)"
 fi
 
+echo "--- marketing feed build ---"
+PYTHONPATH=. python3 scripts/marketing/build_marketing_feed.py --brand-id stillness_press --topic anxiety --topic compassion_fatigue 2>/dev/null && \
+  echo "OK  sample marketing_feed.json built" || echo "WARN marketing feed build failed"
+
 echo "--- smoke (no live POST unless webhook set) ---"
 python3 scripts/freebies/inject_ghl_webhook.py || true
 python3 scripts/freebies/verify_ghl_webhook_push.py || true

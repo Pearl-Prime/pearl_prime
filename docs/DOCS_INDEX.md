@@ -1546,7 +1546,11 @@ Landing page (6 sections), form capture, 4–5 email Proof-Loop sequence (Brevo 
 |------|----------|
 | **GO/NO-GO & handoff** | [funnel/burnout_reset/GO_NO_GO.md](../funnel/burnout_reset/GO_NO_GO.md) — Go/no-go checklist; handoff table; three things from Nihala; copywriter/operator tasks; CAN-SPAM physical address. |
 | **GHL handoff** | [funnel/burnout_reset/GHL_HANDBOFF.md](../funnel/burnout_reset/GHL_HANDBOFF.md) — API key, Location ID, payload table, custom field UUIDs (GHL uses UUIDs not strings), who sends email (ghl vs smtp). |
-| **GHL admin handoff (freebie quizzes)** | [docs/GHL_ADMIN_HANDOFF_FREEBIE_CAPTURE.md](./GHL_ADMIN_HANDOFF_FREEBIE_CAPTURE.md) — **Forward to GHL admin** — inbound webhook checklist; they return one URL. Index: [docs/handoffs/README.md](./handoffs/README.md). |
+| **GHL admin handoff (freebie quizzes)** | [docs/GHL_ADMIN_HANDOFF_FREEBIE_CAPTURE.md](./GHL_ADMIN_HANDOFF_FREEBIE_CAPTURE.md) — quiz webhook appendix |
+| **GHL admin start (full package)** | [docs/ghl/GHL_ADMIN_START_HERE.md](./ghl/GHL_ADMIN_START_HERE.md) — **forward to GHL admin first** |
+| **GHL integration guide** | [docs/GHL_INTEGRATION_GUIDE.md](./GHL_INTEGRATION_GUIDE.md) — feed v3, merge tags, setup |
+| **Proof Loop workflow template** | [docs/ghl/PROOF_LOOP_WORKFLOW_TEMPLATE.md](./ghl/PROOF_LOOP_WORKFLOW_TEMPLATE.md) — WF1–WF4 import |
+| **Funnel email automation map** | [docs/FUNNEL_EMAIL_AUTOMATION_MAP.md](./FUNNEL_EMAIL_AUTOMATION_MAP.md) — tier bundles, slots, variants |
 | **Funnel README** | [funnel/README.md](../funnel/README.md) — Run locally, config layout, email_mode, unsubscribe, book routing, deploy. |
 | **App** | [funnel/burnout_reset/app.py](../funnel/burnout_reset/app.py) — Flask: landing, POST /submit, /unsubscribe, /books/<slug>; SQLite leads; email_mode ghl or smtp; E1 send + E2–E5 schedule (APScheduler jobstore). |
 | **Templates** | [funnel/burnout_reset/templates/](../funnel/burnout_reset/templates/) — burnout_reset.html (6 sections, authority placeholder), thank_you.html, unsubscribed.html, book_intent.html (GA4 + redirect). |

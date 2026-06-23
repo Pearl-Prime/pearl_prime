@@ -189,6 +189,13 @@ def main() -> int:
 
     print(f"OK: wrote {out_path}")
     print(f"     {len(entries)} SKU rows")
+
+    import subprocess
+
+    idx_script = REPO_ROOT / "scripts/marketing/build_funnel_book_url_index.py"
+    if idx_script.exists():
+        subprocess.run([sys.executable, str(idx_script)], check=False, cwd=REPO_ROOT)
+
     return 0
 
 

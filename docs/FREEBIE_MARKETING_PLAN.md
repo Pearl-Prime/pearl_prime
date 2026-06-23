@@ -76,8 +76,10 @@ The funnel must **demonstrate the mechanism twice** before the offer.
 ## GHL (GoHighLevel)
 
 - **Role:** Single CRM for contacts. Funnel app pushes each lead to GHL Contacts API (create/update).
-- **Setup:** API Key 2.0 + Location ID in env; see `funnel/burnout_reset/GHL_HANDBOFF.md` for payload and tags.
-- **Automations:** Operator can add GHL workflows on “contact created” (e.g. tags, internal follow-up). MVP does not use GHL to send the 5-email sequence.
+- **Operator handoff:** Forward [docs/ghl/GHL_ADMIN_START_HERE.md](./ghl/GHL_ADMIN_START_HERE.md) + [GHL_INTEGRATION_GUIDE.md](./GHL_INTEGRATION_GUIDE.md) + [ghl/PROOF_LOOP_WORKFLOW_TEMPLATE.md](./ghl/PROOF_LOOP_WORKFLOW_TEMPLATE.md) to GHL admin — see [docs/handoffs/OPERATOR_GHL_FREEBIE.md](./handoffs/OPERATOR_GHL_FREEBIE.md).
+- **Email automation map:** [FUNNEL_EMAIL_AUTOMATION_MAP.md](./FUNNEL_EMAIL_AUTOMATION_MAP.md) — tier bundles, WF1–WF4, timing (E3 +72h, E4 +120h).
+- **Setup (legacy app):** API Key 2.0 + Location ID in env; see `funnel/burnout_reset/GHL_HANDBOFF.md` for payload and tags.
+- **Automations:** GHL sends Proof Loop E1–E5 from weekly `marketing_feed.json`; quiz pages use inbound webhook (`PHOENIX_GHL_FUNNEL_WEBHOOK`).
 
 ---
 

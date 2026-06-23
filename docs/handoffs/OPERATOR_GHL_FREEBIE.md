@@ -1,20 +1,55 @@
-# Operator — GHL freebie capture (30 seconds)
+# Operator — GHL handoff (you do not touch GHL)
 
-You do **not** log into GoHighLevel.
+## Forward these 3 files to your GHL admin
 
-1. Email your GHL admin this file: **[GHL_ADMIN_HANDOFF_FREEBIE_CAPTURE.md](../GHL_ADMIN_HANDOFF_FREEBIE_CAPTURE.md)**  
-   (Copy the email block at the top of that doc.)
+1. **[ghl/GHL_ADMIN_START_HERE.md](../ghl/GHL_ADMIN_START_HERE.md)** — whole story + checklist  
+2. **[GHL_INTEGRATION_GUIDE.md](../GHL_INTEGRATION_GUIDE.md)** — feed format + merge tags  
+3. **[ghl/PROOF_LOOP_WORKFLOW_TEMPLATE.md](../ghl/PROOF_LOOP_WORKFLOW_TEMPLATE.md)** — import WF1–WF4  
 
-2. They send back **one line**:
-   ```
-   PHOENIX_GHL_FUNNEL_WEBHOOK=https://services.leadconnectorhq.com/hooks/...
-   ```
+**Also attach** (quiz webhook only): [GHL_ADMIN_HANDOFF_FREEBIE_CAPTURE.md](../GHL_ADMIN_HANDOFF_FREEBIE_CAPTURE.md)
 
-3. Paste that line to your dev agent or run:
-   ```bash
-   ./scripts/freebies/setup_ghl_webhook.sh '<paste-url-here>'
-   ```
+Optional reference for them: [FUNNEL_EMAIL_AUTOMATION_MAP.md](../FUNNEL_EMAIL_AUTOMATION_MAP.md)
 
-Done. Quiz pages start capturing leads after deploy.
+---
 
-**Burnout funnel (different setup):** [funnel/burnout_reset/GHL_HANDBOFF.md](../../funnel/burnout_reset/GHL_HANDBOFF.md)
+## What you wait for back
+
+```
+PHOENIX_GHL_FUNNEL_WEBHOOK=https://services.leadconnectorhq.com/hooks/...
+Feed URL confirmed: https://.../marketing_feed.json
+Sub-account: ...
+Workflows published: yes
+Test contact: yes
+```
+
+Paste the webhook line to your dev agent or run:
+
+```bash
+./scripts/freebies/setup_ghl_webhook.sh '<webhook-url>'
+./scripts/marketing/setup_ghl_feed_stack.sh stillness_press en_US
+```
+
+Feed URL shape (after R2 + CDN live):
+
+```text
+https://<cdn>/pearl-prime-content/{brand_id}/{locale}/{week}/marketing_feed.json
+```
+
+Build locally: `python3 scripts/marketing/build_marketing_feed.py --brand-id stillness_press`
+
+---
+
+## What Phoenix does (you don't)
+
+- Publishes new `marketing_feed.json` every **Monday**
+- Hosts quiz + free tool landing pages
+- Builds email copy and shop links into the feed
+
+## What GHL admin does (they do)
+
+- One-time: import workflows, paste feed URL, map 3 fields, quiz webhook
+- Weekly: **nothing**
+
+---
+
+**Burnout funnel (separate):** [funnel/burnout_reset/GHL_HANDBOFF.md](../../funnel/burnout_reset/GHL_HANDBOFF.md)

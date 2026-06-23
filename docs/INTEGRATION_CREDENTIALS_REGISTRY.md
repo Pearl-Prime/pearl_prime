@@ -256,6 +256,18 @@ than copy-pasting, so a future endpoint rotation is picked up automatically.
 | **Setup** | `./scripts/freebies/setup_ghl_webhook.sh '<url>'` or Pearl_Int runbook |
 | **Detailed docs** | [docs/GHL_ADMIN_HANDOFF_FREEBIE_CAPTURE.md](../GHL_ADMIN_HANDOFF_FREEBIE_CAPTURE.md) (forward to GHL admin), [skills/pearl-int/references/ghl_freebie_inbound_webhook.md](../skills/pearl-int/references/ghl_freebie_inbound_webhook.md), [config/freebies/ghl_funnel_capture.yaml](../config/freebies/ghl_funnel_capture.yaml) |
 
+### 8c. Pearl Prime Content — GHL weekly feed (R2)
+
+| Field | Value |
+|-------|-------|
+| **Env vars** | `PEARL_PRIME_CONTENT_R2_BUCKET` (default `pearl-prime-content`), `PEARL_PRIME_CONTENT_CDN_URL`, `R2_ACCOUNT_ID`, `R2_ACCESS_KEY_ID`, `R2_SECRET_ACCESS_KEY` |
+| **Consumed by** | `scripts/marketing/publish_marketing_feed_r2.py`, `.github/workflows/weekly-marketing-feed-publish.yml` |
+| **GitHub secrets** | `PEARL_PRIME_CONTENT_R2_BUCKET`, `PEARL_PRIME_CONTENT_CDN_URL` + R2 trio |
+| **Object path** | `pearl-prime-content/{brand_id}/{locale}/{week}/marketing_feed.json` |
+| **Builder** | `scripts/marketing/build_marketing_feed.py` |
+| **Status** | Builder + weekly workflow in repo; R2 bucket + CDN URL pending operator |
+| **Detailed docs** | [docs/GHL_INTEGRATION_GUIDE.md](../GHL_INTEGRATION_GUIDE.md), [docs/ghl/GHL_ADMIN_START_HERE.md](../ghl/GHL_ADMIN_START_HERE.md) |
+
 ### 9. Plaid — Payouts banking
 
 | Field | Value |

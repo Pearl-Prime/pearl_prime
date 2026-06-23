@@ -42,15 +42,58 @@ topics:
     primary_archetype_id: capacity_assessment
     e2_somatic_app: ex02_box_breathing.html
     funnel_slug: burnout-energy-audit
-    notes: scorecard TOF; workbook post-purchase only
+    notes: scorecard TOF; workbook post-purchase only (Q-FRB-07 phase 2 flip)
+  self_worth:
+    primary_archetype_id: worth_inventory
+    e2_archetype_id: breath_timer_interactive
+    e2_somatic_app: ex02_box_breathing.html
+    funnel_slug: self-worth-inventory
+  imposter_syndrome:
+    primary_archetype_id: evidence_log
+    e2_archetype_id: breath_reset_structured
+    e2_somatic_app: ex04_extended_exhale.html
+    funnel_slug: imposter-evidence-log
+  boundaries:
+    primary_archetype_id: script_practice
+    e2_archetype_id: breath_timer_interactive
+    e2_somatic_app: ex02_box_breathing.html
+    funnel_slug: boundaries-script-kit
+  depression:
+    primary_archetype_id: micro_action_kit
+    e2_archetype_id: breath_reset_structured
+    e2_somatic_app: ex13_body_scan.html
+    funnel_slug: depression-momentum-kit
+    funnel_variant: B
+  social_anxiety:
+    primary_archetype_id: pre_event_protocol
+    e2_archetype_id: five_senses_grounding
+    e2_somatic_app: ex14_grounding_54321.html
+    funnel_slug: social-anxiety-toolkit
+  financial_stress:
+    primary_archetype_id: financial_stress_audit
+    e2_archetype_id: breath_reset_structured
+    e2_somatic_app: ex04_extended_exhale.html
+    funnel_slug: financial-stress-audit
+  somatic_healing:
+    primary_archetype_id: body_scan_timer
+    e2_archetype_id: breath_timer_interactive
+    e2_somatic_app: ex13_body_scan.html
+    funnel_slug: somatic-body-scan
+    funnel_variant: B
+  grief:
+    primary_archetype_id: grief_letter_template
+    e2_archetype_id: breath_reset_structured
+    e2_somatic_app: ex13_body_scan.html
+    funnel_slug: grief-letter-template
+    funnel_variant: B
 
 email_slot_by_type:
   somatic_html_tool: e1
   assessment_html: e1
   guided_audio: bonus_pre_story
   checklist_pdf: bonus_pre_story
-  identity_sheet_pdf: bonus_post_series
-  conversation_scripts_pdf: bonus_post_series
+  identity_sheet_pdf: post_e5
+  conversation_scripts_pdf: post_e5
   companion_workbook_pdf: post_purchase
   journal_pdf: post_purchase
   thirty_day_tracker_pdf: post_purchase

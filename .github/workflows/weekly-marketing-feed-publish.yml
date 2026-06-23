@@ -1,0 +1,58 @@
+name: Weekly Marketing Feed Publish
+
+on:
+  schedule:
+    # Monday 06:00 UTC — matches GHL_INTEGRATION_GUIDE poll schedule
+    - cron: '0 6 * * 1'
+  workflow_dispatch:
+    inputs:
+      brand_id:
+        description: Brand id
+        required: true
+        default: stillness_press
+      locale:
+        description: Locale tag
+        required: true
+        default: en_US
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install deps
+        run: pip install pyyaml boto3
+
+      - name: Build marketing feed
+        run: |
+          PYTHONPATH=. python3 scripts/marketing/build_marketing_feed.py \
+            --brand-id "${{ github.event.inputs.brand_id || 'stillness_press' }}" \
+            --locale "${{ github.event.inputs.locale || 'en_US' }}"
+
+      - name: Validate feed schema
+        run: PYTHONPATH=. python3 -m phoenix_v4.qa.validate_marketing_feed --sample-feed
+
+      - name: Publish to R2 (when creds present)
+        env:
+          R2_ACCOUNT_ID: ${{ secrets.R2_ACCOUNT_ID }}
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          PEARL_PRIME_CONTENT_R2_BUCKET: ${{ secrets.PEARL_PRIME_CONTENT_R2_BUCKET }}
+          PEARL_PRIME_CONTENT_CDN_URL: ${{ secrets.PEARL_PRIME_CONTENT_CDN_URL }}
+        run: |
+          if [[ -z "${R2_ACCESS_KEY_ID:-}" ]]; then
+            echo "SKIP R2 publish — R2 creds not configured"
+            python3 scripts/marketing/publish_marketing_feed_r2.py \
+              --brand-id "${{ github.event.inputs.brand_id || 'stillness_press' }}" \
+              --locale "${{ github.event.inputs.locale || 'en_US' }}" \
+              --dry-run
+            exit 0
+          fi
+          python3 scripts/marketing/publish_marketing_feed_r2.py \
+            --brand-id "${{ github.event.inputs.brand_id || 'stillness_press' }}" \
+            --locale "${{ github.event.inputs.locale || 'en_US' }}"

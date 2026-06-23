@@ -1,7 +1,8 @@
 # GHL Admin Handoff — Freebie Quiz Lead Capture
 
-**Forward this entire document to your GoHighLevel administrator.**  
-You do not need to log into GHL or run any scripts. Your GHL admin does the setup and sends back **one URL**.
+> **Part of the GHL package.** Admin should read [ghl/GHL_ADMIN_START_HERE.md](./ghl/GHL_ADMIN_START_HERE.md) first. This doc is **only** the quiz inbound webhook (5 flagship pages).
+
+**Forward this entire document to your GoHighLevel administrator.**
 
 ---
 

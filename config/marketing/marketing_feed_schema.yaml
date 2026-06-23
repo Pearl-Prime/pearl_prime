@@ -1,0 +1,61 @@
+# marketing_feed.json — schema v3
+# Authority: docs/GHL_INTEGRATION_GUIDE.md, docs/FUNNEL_EMAIL_AUTOMATION_MAP.md
+# Builder: scripts/marketing/build_marketing_feed.py
+
+schema_version: 3
+
+required_top_level:
+  - schema_version
+  - brand_id
+  - locale
+  - week
+  - items
+
+item_required_for_ghl:
+  - id
+  - cta_url
+  - pricing          # free | paid
+  - content_type
+
+item_recommended:
+  - email_slot         # e1 | e2 | bonus_pre_story | e3 | e4 | e5 | post_e5
+  - title
+  - topic
+  - archetype_id
+  - funnel_variant     # tight | welcome_depth
+  - persona_id         # feed-level default persona for shop URLs
+
+required_top_level_recommended:
+  - persona_id
+
+pricing_enum: [free, paid]
+
+content_type_enum:
+  - somatic_exercise
+  - guided_audio
+  - assessment_html
+  - story
+  - book_offer
+  - series_offer
+  - checklist_pdf
+  - companion_workbook_pdf
+
+email_slot_enum:
+  - e1
+  - e2
+  - bonus_pre_story
+  - e3
+  - e4
+  - e5
+  - post_e5
+
+example_item:
+  id: brand__topic__e1_tool
+  content_type: somatic_exercise
+  pricing: free
+  cta_url: https://example.pages.dev/free/anxiety-nervous-system-reset/
+  title: Nervous System Reset
+  email_slot: e1
+  topic: anxiety
+  archetype_id: breath_timer_interactive
+  funnel_variant: tight
