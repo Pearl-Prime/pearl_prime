@@ -1329,6 +1329,7 @@ def _run_spine_pipeline_mode(
         prose, flow_profile=_flow_profile, seed=f"{seed}:pre_gate_flow"
     )
     prose = _final_f13_repair(prose, seed=f"{seed}:pre_gate_f13_recheck")
+    prose = _final_cap_f7(prose, max_per_chapter=1, max_by_chapter=_f7_max_by_chapter)
     prose = _final_orphan_strip(prose)
 
     _f7_preservation_violations = verify_f7_exercise_preservation(

@@ -16,18 +16,13 @@ STATE = REPO / "artifacts/waystream/batch_epub_state.json"
 
 
 def _fail_ids() -> set[str]:
-    if STATE.is_file():
-        data = json.loads(STATE.read_text(encoding="utf-8"))
-        ids = {
-            r["book_id"]
-            for r in data.get("results", [])
-            if r.get("status") not in ("ok", "skip_exists", "dry_run")
-        }
-        if ids:
-            return ids
+    if not STATE.is_file():
+        return set()
+    data = json.loads(STATE.read_text(encoding="utf-8"))
     return {
-        "way_stream_sanctuary__default_teacher__corporate_managers__anxiety__false_alarm__1hr",
-        "way_stream_sanctuary__default_teacher__corporate_managers__anxiety__spiral",
+        r["book_id"]
+        for r in data.get("results", [])
+        if r.get("status") not in ("ok", "skip_exists", "dry_run")
     }
 
 
