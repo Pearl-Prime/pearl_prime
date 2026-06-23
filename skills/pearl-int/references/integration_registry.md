@@ -112,7 +112,24 @@ Each integration entry:
 - **Validation:** `GET /v1/messages` with `x-api-key` header
 - **Status:** pending
 
-### OpenAI
+### GoHighLevel (GHL) — Burnout funnel + freebie capture
+- **Service:** CRM — Contacts API (burnout funnel) + Inbound Webhook (static freebie TOF)
+- **Portal:** https://app.gohighlevel.com/ (API keys: Settings → API)
+- **Status:** `pending` — no Keychain values for freebie webhook or Contacts API on this machine (2026-06-23)
+- **Variables:**
+  - `GHL_API_KEY`, `GHL_LOCATION_ID`, `GHL_CONTACTS_URL` — `funnel/burnout_reset/app.py`
+  - `PHOENIX_GHL_FUNNEL_WEBHOOK` — `phoenix_lead.js` / flagship landings / CI `freebie-policy.yml`
+- **Token Type:** API Key 2.0 (Bearer) + inbound webhook URL (opaque HTTPS endpoint)
+- **Lifespan:** Until revoked / workflow deleted
+- **Validation:**
+  - Contacts: `POST $GHL_CONTACTS_URL` with `Version: 2021-07-28` header (burnout handoff)
+  - Freebie: `python3 scripts/freebies/verify_ghl_webhook_push.py`
+- **Operator runbook:** [`ghl_freebie_inbound_webhook.md`](./ghl_freebie_inbound_webhook.md)
+- **Setup script:** `scripts/freebies/setup_ghl_webhook.sh`
+- **Last Validated:** 2026-06-23 (smokes pass; live webhook SKIP — env unset)
+- **Notes:** GitHub secret `PHOENIX_GHL_FUNNEL_WEBHOOK` not provisioned. Custom field mapping must use GHL UUIDs per `GHL_HANDBOFF.md`.
+
+---
 - **Portal:** https://platform.openai.com/api-keys
 - **Variables:** `OPENAI_API_KEY`
 - **Token Type:** API key (prefix: `sk-`)

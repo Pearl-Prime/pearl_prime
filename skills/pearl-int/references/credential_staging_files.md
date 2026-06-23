@@ -16,6 +16,7 @@ that operators may use as a transient hand-off to Pearl_Int:
 | `docs/cloudflare_credentials.txt` | Cloudflare + R2 (alt) |
 | `.claude/cloudflare_credentials.txt` | Cloudflare + R2 (alt) |
 | `docs/11.txt`                     | ElevenLabs          |
+| `config/local/ghl_funnel_webhook.url` | GHL freebie inbound webhook (one-line URL) |
 | `cloudflare_workers_ai.txt`       | Workers AI          |
 
 These files MUST stay gitignored. Pearl_Int reads them; it never commits
