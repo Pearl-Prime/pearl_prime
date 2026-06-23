@@ -1,0 +1,115 @@
+# PILOT (wave1) — MUSIC-MODE manga (Tier-1 authored). One mode only: MUSIC. No teacher, no doctrine.
+# Genre: school_coming_of_age. Wrapper (per MANGA_MODE_WRAPPER_DESIGN.md / GENRE_VESSEL_SKETCHES.md):
+# music-vessel = THE SONG THE YEAR IS SET TO. One club tune, picked up in spring, mastered by winter;
+# growing up is FELT as the song maturing in the characters' hands. The reader is made to FEEL, never
+# taught. Nothing is explained. (Render gated.)
+
+schema_version: 1.0.0
+artifact_type: chapter_script_writer_handoff
+series_id: music_mode__en_US__school_coming_of_age__series01
+catalog_title: "The Song the Year Was Set To"
+chapter_id: ep_001
+title: "The Song the Year Was Set To — Episode 1: The Part She Couldn't Play Out Loud"
+mode: music                           # XOR — never teacher
+manga_author: Sora Vesper             # MUSICIAN-archetype EI author (NOT a teacher)
+musician_id: sora_vesper
+teacher_id: null                      # none — music-mode carries no doctrine
+genre: school_coming_of_age
+felt_topic: social_anxiety            # interior, FELT through sound — never named, never taught
+locale: en_US
+available_locales: [en_US, ja_JP, zh_CN, zh_TW, ko_KR]
+
+# Music-mode 3-beat skeleton (the club tune carries the arc — open / mid / close):
+mode_beats:
+  opening_motif: page_2   (the sound enters — a simple club tune handed out the first day of the year)
+  mid_recurrence: page_4  (bestseller beat — forcing herself to be heard chokes the part; she stops performing and plays it to the QUIET room, and the tune fills out)
+  closing_resolution: page_6  (the song, grown up over the year, plays whole and unforced — and so has she)
+
+main_characters:
+  - id: mio
+    name: Mio
+    role: >-
+      protagonist — a first-year who joined the light-music club and can play her part
+      flawlessly alone, but freezes when anyone might hear, going silent in every group
+      rehearsal. (Unstated, never taught: a self that goes mute when watched; here it is
+      carried by a SONG, not a lesson.)
+    visual_anchor: too-new club pin still shiny on her blazer; a flute case she clutches like a shield; bangs she hides behind; sheet music edges worn soft from solo practice no one's heard.
+  - id: the_year_song
+    name: The Year Song                # the club tune — the MUSIC-VESSEL itself
+    role: >-
+      not a person; the simple piece the club picks the first day to play at the winter showcase.
+      It begins thin and tentative, a beginner's tune. Over the year it's meant to fill out, grow
+      warm and whole. It is not a lesson. It is the sound the whole year is set to — and Mio's part
+      is the one phrase the song needs and keeps not getting.
+    visual_anchor: never seen, only heard — rendered as a hand-lettered melody-motif; thin and halting when forced, full and warm when free; threaded through the club room, the hallways, the seasons changing outside the windows.
+  - id: the_empty_phrase
+    name: The Missing Phrase           # the recurring gap — Mio's silent part in the group
+    role: the place in the year-song where Mio's flute line should come in; through the chapter it is the held silence the whole tune is waiting on.
+
+scene_palette:
+  primary: school spring — green light through windows, chalk dust, warm afternoons
+  secondary: cold grey of the spotlight she freezes in (forcing herself to be heard)
+  accent: warm late-gold (the tune filling out; being heard, unforced)
+  resolution_palette: winter-evening warm stage light (page 6 only)
+
+pages:
+  # ── The problem: she forces herself to be heard and chokes ─────────────────
+  - page_id: ep001_p01
+    panels:
+      - {panel_id: ep001_001, beat_type: establishing, intent: "GENRE SHELL — school coming-of-age; the club room, the start of a year",
+         scene: "A sunlit school music room the first week of the new year, cherry light through tall windows, instruments and second-hand amps, a banner: WINTER SHOWCASE. Hopeful, a little awkward, full of beginnings. The light-music club gathers."}
+      - {panel_id: ep001_002, beat_type: character, intent: "the one who goes mute when watched",
+         scene: "MIO, club pin shiny-new, clutches her flute case to her chest behind her bangs. The others chatter easily. She has practiced for this for months — alone. The moment anyone looks her way to play, her chest locks and her breath thins."}
+      - {panel_id: ep001_003, beat_type: failure, intent: "forcing herself to be heard chokes the part (social anxiety, shown not named)",
+         scene: "First group run-through of the year-song. It comes around to Mio's phrase — the line the whole tune needs. Every eye turns to her. She FORCES it, tries to push the sound out under the stares — and it comes thin, cracked, barely there, then dies. Cold grey spotlight. The phrase falls into silence. The song stops, waiting on a part that didn't come. She hides further behind her bangs."}
+
+  # ── OPENING MOTIF: the year-song enters ────────────────────────────────────
+  - page_id: ep001_p02
+    panels:
+      - {panel_id: ep001_004, beat_type: quiet, intent: "alone in the empty club room after; the noise drops away",
+         scene: "After hours. The club room empty, gold-green dusk through the windows, chairs stacked. Mio sits alone, flute finally to her lips, no one watching. She breathes. The pressure is gone."}
+      - {panel_id: ep001_005, beat_type: opening_motif, intent: "MUSIC-VESSEL enters — the year-song, played free when unwatched; felt, never explained",
+         scene: "Alone, Mio plays her phrase — and it's beautiful: full, warm, sure, the line the song was missing, pouring out effortless now that no one's looking. The whole year-song seems to breathe around it. Render it as a hand-lettered melody-motif rising warm and whole through the panel (not narration — a sound): the simple club tune, complete, with her phrase finally in it. This is the song the year is set to, and she can play it — just not yet where it counts."}
+      - {panel_id: ep001_006, beat_type: response, intent: "the song reaches the self that goes quiet when seen",
+         scene: "Mio lowers the flute, surprised by her own sound, the warm phrase still hanging in the empty room. Her shoulders, alone, are down. She doesn't tell herself anything about confidence; her body just plays free when it isn't being watched. The shiny club pin catches the last light. Almost silent: the held last note, and the empty room."}
+
+  # ── Escalation: the rehearsal, she forces it again ─────────────────────────
+  - page_id: ep001_p03
+    panels:
+      - {panel_id: ep001_007, beat_type: action, intent: "stakes — the genre's engine, the seasons turning",
+         scene: "Time passes in a strip — summer cicadas, autumn leaves past the windows — the club tightening the year-song toward the showcase, the tune growing fuller every month. But every group rehearsal hits the same wall: Mio's phrase, the gap, the waiting silence. The showcase looms. The song is almost whole — except for her."}
+      - {panel_id: ep001_008, beat_type: crisis, intent: "under pressure she forces it again — the social fear peaks",
+         scene: "Winter. Dress rehearsal on the real stage, full club, the showcase days away. Mio's phrase comes around. She tries to FORCE it out for the watching room — pushes, strains, performs — and it cracks and dies again, thinner than ever under the bright cold spotlight. She's going to leave the year-song with a hole in it on the night. Her eyes sting behind her bangs."}
+
+  # ── MID RECURRENCE (bestseller beat): the song fills out ───────────────────
+  - page_id: ep001_p04
+    panels:
+      - {panel_id: ep001_009, beat_type: turn, intent: "she stops performing — and plays it to the QUIET, not the crowd",
+         scene: "On showcase night, in the wings, terrified, Mio is about to choke again. Then she stops trying to be HEARD. She closes her eyes, and instead of performing for the watching hall, she does the only thing that ever let the sound out — she plays it the way she did alone in the empty room, just for the quiet, just for the song. She lifts the flute not to impress anyone, but to finish the phrase the year's been waiting on."}
+      - {panel_id: ep001_010, beat_type: mid_recurrence, intent: "BESTSELLER BEAT — the year-song RETURNS, and her phrase finally lands IN it",
+         scene: "Her phrase comes — and this time, played free instead of forced, it pours out full and warm, exactly like the empty-room version, dropping perfectly into the gap the year-song has held open all year. Render the melody-motif swelling to fill the panel, the thin cracked attempts from before resolving into the whole warm line, the club's tune at last complete with her part inside it. The song isn't waiting anymore. It's whole. And the hall hears it."}
+      - {panel_id: ep001_011, beat_type: flow, intent: "from forcing to free — felt, never explained",
+         scene: "Mio plays the rest of the showcase carried by the song, not the stares — the whole club's tune blooming around her phrase, full and warm and grown-up, a year's worth of becoming in the sound. She's not performing for the room. She's inside the song, where it was always safe. The cold spotlight has gone warm gold."}
+
+  # ── CLOSING RESOLUTION: the song, grown up, plays whole ────────────────────
+  - page_id: ep001_p05
+    panels:
+      - {panel_id: ep001_012, beat_type: aftermath, intent: "the showcase ends; the song settles",
+         scene: "The last note of the year-song rings out over the hall, whole and warm, and lands into applause. But the panel holds quiet on Mio — flute lowered, breath even, the warm phrase still glowing in the air. The club around her, beaming. The song made it. So did she."}
+      - {panel_id: ep001_013, beat_type: closing_resolution, intent: "the motif resolves — the tune grown up over the year",
+         scene: "Backstage, the year-song still humming in everyone, Mio hums her own phrase softly to herself — not the thin spring version, the full warm winter one. The same tune from the first day of the year, grown all the way up in her hands. Render the melody-motif settling, the matured year-song coming gently to rest."}
+  - page_id: ep001_p06
+    panels:
+      - {panel_id: ep001_014, beat_type: image, intent: "growing up — carried entirely by sound",
+         scene: "Winter evening after, warm stage lights low. Mio walks out of the hall with the club, flute case loose at her side now instead of clutched to her chest, laughing at something, bangs pushed back from her face. The new-year pin, not shiny anymore — worn in, hers."}
+      - {panel_id: ep001_015, beat_type: close, intent: "MUSIC close — no moral, just the feeling that has changed",
+         scene: "Final panel, pulled wide and still. The small player and her club under the soft winter lights, a whole year behind them. Closing music-caption, the musician's sign-off — a last full warm bar of the year-song, and beneath it, small: '— and the tune that began so thin in spring had grown all the way up, and so, without noticing, had she.'"}
+
+wrapper_note: >-
+  Music-mode only. There is NO teacher, NO senpai-mentor, NO teaching line — the arc (going mute when
+  watched -> being heard, free) is carried entirely by the year-song, the school genre's native
+  music-vessel: a simple club tune handed out in spring that begins thin, holds a gap open for Mio's
+  phrase all year, RETURNS at the showcase when she plays it free instead of forced, and by winter is
+  whole and grown-up. The reader is made to feel, not instructed. If this were teacher-mode it would
+  have a senpai whose quiet accurate attention MODELS the doctrine (being seen accurately settles the
+  self); here the song just matures in her hands. Interior topic (social anxiety) never named on the page.

@@ -1,0 +1,114 @@
+# PILOT (wave1) — TEACHER-MODE manga (Tier-1 authored). One mode only: TEACHER. No music.
+# Genre: psychological_thriller. Wrapper (per MANGA_MODE_WRAPPER_DESIGN.md / GENRE_VESSEL_SKETCHES.md):
+# thriller teacher-vessel = THE DETECTIVE WHO READS BODIES. A mentor closes cases by the jaw,
+# the held breath — "the body confesses before the mouth." The protege learns their own panic is
+# DATA, not malfunction. ahjan's body_first_not_mind is EARNED through detection, never spoken as
+# advice. Reader contract: taught. (Render gated.)
+
+schema_version: 1.0.0
+artifact_type: chapter_script_writer_handoff
+series_id: stillness_press__en_US__psychological_thriller__series01
+catalog_title: "The Room Reads You Back"
+chapter_id: ep_001
+title: "The Room Reads You Back — Episode 1: The Tell You Were Hiding From Yourself"
+mode: teacher                         # XOR — never music
+manga_author: Rei Calderwood          # teacher-archetype EI author (ahjan lineage)
+teacher_id: ahjan
+teacher_doctrine_anchor: body_first_not_mind
+brand_id: stillness_press
+genre: psychological_thriller
+topic: hypervigilance                 # interior — never named on the page
+locale: en_US
+available_locales: [en_US, ja_JP, zh_CN, zh_TW, ko_KR]
+
+# Teacher-mode 3-beat skeleton (doctrine earned through DETECTION, not inserted):
+mode_beats:
+  wound: page_1-2     (the doctrine's ABSENCE — the protege treats her own alarm as a defect to override)
+  turn:  page_4-5     (the teaching LANDS in the interrogation — she reads her OWN body as the truest tell)
+  renewal: page_6     (begin again — she closes the case by trusting the signal she used to fight)
+
+main_characters:
+  - id: mara
+    name: Mara Quist
+    role: >-
+      protagonist — a brilliant young investigator who solves on pure logic and distrusts
+      everything her body does. Reads it as static to be muscled past. (Unstated: a nervous
+      system stuck on high alert, read as a flaw; never named on the page.)
+    visual_anchor: sharp grey coat buttoned to the throat; jaw permanently set; bitten thumbnail; a notebook gripped white-knuckled; eyes that scan exits before faces.
+  - id: voss
+    name: Detective Voss               # thriller TEACHER-VESSEL — reads bodies
+    role: >-
+      the senior detective, the doctrine as a person. Closes cases nobody else can by
+      watching the body, not the words. Never lectures Mara; only points at what a body
+      already said. "The body confesses before the mouth" lives in how he works, not in advice.
+    visual_anchor: rumpled tan coat, unhurried eyes that rest on hands and throats rather than faces; a coffee he never finishes; perfectly still in a room full of motion.
+  - id: the_suspect
+    name: Hadley                       # the case — a calm liar whose body won't keep the lie
+    role: a poised, articulate suspect whose words are airtight and whose body, all the while, is quietly telling a different story.
+
+scene_palette:
+  primary: precinct night — sodium glare, slatted-blind shadow, wet-window black
+  secondary: interrogation white-grey (the forced clarity Mara trusts)
+  accent: warm desk-lamp amber (the one soft light; where the truth is actually read)
+  turn_palette: low amber on Mara's own hands and chest (pages 4-5)
+
+pages:
+  # ── WOUND: the protege overrides her own alarm ─────────────────────────────
+  - page_id: ep001_p01
+    panels:
+      - {panel_id: ep001_001, beat_type: establishing, intent: "GENRE SHELL — thriller precinct; the world of reading people",
+         scene: "A rain-streaked precinct at 2 a.m., blinds cutting the sodium light into bars across the floor. A pinned evidence wall, red string, a single interrogation room glowing white at the far end. Tense, exact, watchful."}
+      - {panel_id: ep001_002, beat_type: character, intent: "logic over body — distrust of her own signal (doctrine's ABSENCE)",
+         scene: "MARA, coat buttoned to the throat, runs the case on the whiteboard in fast clean lines. Her free hand, unnoticed, is pressed hard against her own sternum — heart hammering. She notices it, frowns, drops the hand, mutters: 'Not now.' She is annoyed at her own chest."}
+      - {panel_id: ep001_003, beat_type: spatial, intent: "she reads everyone but herself — alarm treated as malfunction",
+         scene: "Through the one-way glass: the suspect HADLEY, calm and articulate. Mara studies him coldly, logging contradictions. Meanwhile her own jaw is clamped, her own breath shallow and high — and she muscles past all of it, swallowing the feeling like a glitch to be cleared."}
+  - page_id: ep001_p02
+    panels:
+      - {panel_id: ep001_004, beat_type: action, intent: "the first interrogation — logic vs a perfect liar",
+         scene: "Mara enters the white room and goes at Hadley with airtight logic — timelines, inconsistencies, pressure. Hadley answers smoothly, unshaken, every word clean. The harder Mara pushes with the mind, the more composed he becomes. She is losing, and she can feel it, and she hates that she can feel it."}
+      - {panel_id: ep001_005, beat_type: collapse, intent: "overriding the alarm makes her miss everything",
+         scene: "Mara's own panic spikes — ears ringing, vision tunneling on her notes. She fights it down hard, and in fighting it she stops seeing the room at all. Hadley walks his story out unchallenged. The interview ends with nothing. She storms out, furious at her body for 'sabotaging' her."}
+      - {panel_id: ep001_006, beat_type: quiet, intent: "the teacher gives no advice — only an observation",
+         scene: "In the dim bullpen, VOSS is in the corner, perfectly still, coffee going cold. He doesn't tell her she failed. He says, mild, eyes not on her face but on her clenched hand: 'Your hand's been over your heart since you walked in. You keep telling it to be quiet.' Then, nothing more. He just lets that sit."}
+
+  # ── Voss (teacher-vessel) — the body confesses, demonstrated ───────────────
+  - page_id: ep001_p03
+    panels:
+      - {panel_id: ep001_007, beat_type: dialogue, intent: "DOCTRINE-AS-METHOD — read the body, not the words",
+         scene: "Voss pulls up the interrogation footage. He doesn't play the audio. He mutes Hadley entirely and watches only the body. VOSS: 'Words are the suspect's lawyer. The body is the witness. Watch the witness.'"}
+      - {panel_id: ep001_008, beat_type: revelation, intent: "the body confesses before the mouth (SHOWN on the suspect first)",
+         scene: "On the muted screen: every time Hadley says one specific name, his throat moves a half-second before he speaks — a swallow, a flinch in the jaw, gone in an instant. Smooth words, but the body keeps flinching at the same word. VOSS, quiet: 'There. His mouth lied for an hour. His throat told the truth every time.' Mara stares, the case cracking open in front of her."}
+      - {panel_id: ep001_009, beat_type: response, intent: "the protege starts to turn the method inward — without realizing",
+         scene: "Mara watches it loop, and her own hand drifts — again — to her own sternum, her own heart still going. This time she doesn't yank it away. She looks down at her own hand as if it were footage. The thought, half-formed: if his body knew first... what has mine been trying to tell me?"}
+
+  # ── TURN: the teaching lands — she reads her own body ──────────────────────
+  - page_id: ep001_p04
+    panels:
+      - {panel_id: ep001_010, beat_type: revelation, intent: "BODY_FIRST_NOT_MIND — her alarm is DATA, not a defect",
+         scene: "Second interrogation. Hadley, smooth as ever. But now Mara stops trying to silence her own chest — and instead reads it like an instrument. When Hadley mentions an alibi, her own heart suddenly slams, an alarm spiking in her body before her mind knows why. She holds still and listens to it. VOSS, behind the glass, watching her finally use it. The amber lamp on her hands."}
+      - {panel_id: ep001_011, beat_type: choice, intent: "the first time she trusts the signal instead of fighting it",
+         scene: "Mara doesn't argue logic. She follows the spike. She goes back, gently, to the exact word her own body alarmed on — the alibi's location. Not because the timeline said so. Because her body flinched there first, the way Hadley's throat did. She trusts the flinch. She asks one quiet question about that one place."}
+  - page_id: ep001_p05
+    panels:
+      - {panel_id: ep001_012, beat_type: turn, intent: "the body's alarm, read instead of overridden, breaks the case",
+         scene: "At the quiet question, Hadley's smooth mask holds — but his throat moves, that same half-second swallow, the exact tell from the footage. Mara, calm now, doesn't pounce. She just lets the silence stretch, watching the witness, not the lawyer. Her own steady heartbeat is her metronome now, not her enemy."}
+      - {panel_id: ep001_013, beat_type: release, intent: "hypervigilance, reframed — the alarm was always information",
+         scene: "Hadley breaks — not from logic, from being seen. The confession comes. And Mara, in the moment of the win, notices her own panic has gone quiet — not because she crushed it, but because she finally listened to it and it had nothing left to shout. Her hand, on her chest, rises and falls, slow."}
+      - {panel_id: ep001_014, beat_type: transformation, intent: "the alarm system was never the malfunction — it was the instrument",
+         scene: "Wide: the case wall, red string now resolving into one clean line. Mara unbuttons the throat of her coat for the first time — a body no longer braced. Voss, already gathering his cold coffee to leave, gives the smallest nod, having said almost nothing all night."}
+
+  # ── RENEWAL: begin again ───────────────────────────────────────────────────
+  - page_id: ep001_p06
+    panels:
+      - {panel_id: ep001_015, beat_type: resolution, intent: "not fixed — finally trusted",
+         scene: "Dawn grey at the precinct windows. Mara at her desk, the notebook now loose in an open hand, not white-knuckled. The whiteboard logic is there — but beside it, she's drawn a small simple thing: a hand over a heart. Her own new instrument, noted like evidence."}
+      - {panel_id: ep001_016, beat_type: close, intent: "TEACHER close — body-first as method, never a moral",
+         scene: "Final panel. A new case file lands on Mara's desk. She opens it, and before she reads a single word, she goes still and checks in with her own chest — reading the witness first. A small caption, Voss's voice, like a closing line of a method: 'Read the body. It confessed before anyone said a word — yours too.'"}
+
+wrapper_note: >-
+  Teacher-mode only. The doctrine (the body's signal is data, not malfunction; it knows before the
+  mind) is never a self-help line — it is dramatized through the thriller vessel: a detective's
+  body-reading METHOD that Mara first sees used on a suspect, then turns inward and EARNS in the
+  interrogation. No musician, no song, no sound-motif. If this were music-mode it would have NO Voss
+  and NO doctrine — a recurring two-note motif arriving one beat before each reveal would carry the
+  same arc wordlessly. Interior topic (hypervigilance / a nervous system on high alert) never named.

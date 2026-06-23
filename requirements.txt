@@ -12,6 +12,9 @@ jsonschema>=4.0
 # Tests
 pytest>=7.0
 
+# Manga distribution pipeline (EPUB/PDF/CBZ/webtoon exports)
+Pillow>=9.0
+
 # Podcast pipeline (R2, Edge-TTS fallback, ID3)
 boto3>=1.28
 mutagen>=1.47

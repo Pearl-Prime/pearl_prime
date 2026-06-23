@@ -1,0 +1,24 @@
+artifact_path	branch_or_worktree	sha_or_pr	production_stage	salvage_action	notes
+artifacts/manga/pilots/wave1/README.md	agent/manga-story-wave1-20260620	7628bd76d56d	SCRIPTED	merged_gold_master	8 genre×mode ep_001 gold-reference pilots
+artifacts/manga/pilots/wave1/the_beat_beneath_the_lane__ep_001.chapter_script.yaml	agent/manga-story-wave1-20260620	7628bd76d56d	SCRIPTED	merged_gold_master	sports_competition pilot
+artifacts/manga/pilots/wave1/the_blade_that_stopped_trying__ep_001.chapter_script.yaml	agent/manga-story-wave1-20260620	7628bd76d56d	SCRIPTED	merged_gold_master	action_battle pilot
+artifacts/manga/pilots/wave1/the_frequency_they_filtered_out__ep_001.chapter_script.yaml	agent/manga-story-wave1-20260620	7628bd76d56d	SCRIPTED	merged_gold_master	sci_fi_cyberpunk pilot
+artifacts/manga/pilots/wave1/the_half_a_lullaby__ep_001.chapter_script.yaml	agent/manga-story-wave1-20260620	7628bd76d56d	SCRIPTED	merged_gold_master	iyashikei pilot
+artifacts/manga/pilots/wave1/the_house_that_warms_the_cup__ep_001.chapter_script.yaml	agent/manga-story-wave1-20260620	7628bd76d56d	SCRIPTED	merged_gold_master	slice_of_life pilot
+artifacts/manga/pilots/wave1/the_room_reads_you_back__ep_001.chapter_script.yaml	agent/manga-story-wave1-20260620	7628bd76d56d	SCRIPTED	merged_gold_master	psychological_thriller pilot
+artifacts/manga/pilots/wave1/the_song_the_year_was_set_to__ep_001.chapter_script.yaml	agent/manga-story-wave1-20260620	7628bd76d56d	SCRIPTED	merged_gold_master	historical_period pilot
+artifacts/manga/pilots/wave1/the_weight_she_set_down__ep_001.chapter_script.yaml	agent/manga-story-wave1-20260620	7628bd76d56d	SCRIPTED	merged_gold_master	dark_fantasy pilot
+scripts/manga/run_manga_pipeline.py	agent/manga-distribution-v1	a94b4810a7	PIPELINE	merged_gold_master	profile-driven distribution entry
+scripts/manga/build_epub3.py	agent/manga-distribution-v1	a94b4810a7	PIPELINE	merged_gold_master	EPUB3 builder
+scripts/manga/build_print_pdf.py	agent/manga-distribution-v1	a94b4810a7	PIPELINE	merged_gold_master	print PDF builder
+scripts/manga/build_cbz.py	agent/manga-distribution-v1	a94b4810a7	PIPELINE	merged_gold_master	CBZ builder
+scripts/manga/reformat_webtoon.py	agent/manga-distribution-v1	a94b4810a7	PIPELINE	merged_gold_master	webtoon reformat
+phoenix_v4/manga/distribution/	agent/manga-distribution-v1	a94b4810a7	PIPELINE	merged_gold_master	distribution package
+phoenix_v4/manga/compositor/	agent/manga-distribution-v1	a94b4810a7	PIPELINE	merged_gold_master	panel detector compositor
+artifacts/manga/stillness_press__ahjan__/composed_v3_qwen/	agent/v31-stillness-en-01-ship	d282e921dcd9	RENDERED	open_pr_1236	304 JPG composed segments; 10 episodes
+scripts/manga/build_lettering_spec_v3.py	agent/v31-stillness-en-01-ship	d282e921dcd9	PIPELINE	open_pr_1236	lettering spec builder v3
+scripts/manga/run_bubble_compose_v31.py	agent/v31-stillness-en-01-ship	d282e921dcd9	PIPELINE	open_pr_1236	bubble compose v3.1
+artifacts/manga/stillness_press__ahjan__/composed_v4_qwen/ep_001/	origin/main	06d588fb9047	RENDERED	on_main	82 PNG panels ep_001
+artifacts/manga/stillness_press__ahjan__/panels/	operator_clone	untracked	RENDERED	pending_commit	5 PNG ep_002 in-progress 2026-06-23
+config/source_of_truth/manga_series_plans/ja_JP/	origin/main	06d588fb9047	TITLED	on_main	273 series plans
+docs/MANGA_RECOVERY_AUDIT.md	agent/manga-gold-master-recovery-20260623	(this PR)	AUDIT	merged_gold_master	scorched-earth audit deliverable

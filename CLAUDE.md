@@ -89,7 +89,12 @@ git rev-list --left-right --count origin/main...HEAD
 PYTHONPATH=. python3 scripts/git/push_guard.py
 scripts/ci/preflight_push.sh
 bash scripts/git/health_check.sh
+PYTHONPATH=. python3 scripts/ci/check_rap_compliance.py
 ```
+
+**RAP (Robust Agent Protocol):** Before any Pearl Star GPU/LLM work (>10s), read
+`docs/ROBUST_AGENT_PROTOCOL.md`. Queue-first dispatch via `pscli` is mandatory;
+`check_rap_compliance.py` warns on direct ComfyUI/Ollama bypass patterns.
 
 ## Automated PR Governance (Pearl_PM + Pearl_Architect gate)
 
