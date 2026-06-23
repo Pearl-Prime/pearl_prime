@@ -271,6 +271,7 @@ _F2B_PHRASAL_VERB_ENDINGS = frozenset({
     ("breathing", "out"), ("breathe", "out"), ("breathes", "out"), ("breathed", "out"),
     ("letting", "go"), ("lets", "go"), ("let", "go"),
     ("walking", "in"), ("walk", "in"), ("walks", "in"), ("walked", "in"),
+    ("walking", "on"), ("walk", "on"), ("walks", "on"), ("walked", "on"),
 })
 
 # Stranding licensors: their presence anywhere in the sentence indicates the final
