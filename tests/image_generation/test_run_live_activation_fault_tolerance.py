@@ -260,17 +260,20 @@ def test_cap_exhausted_skip_then_runtime_message_non_retryable(
 ) -> None:
     """Two complementary cap behaviors:
 
-    1. RunComfy cooldown TSV/billing flips ``cost_check`` → batch is skipped
-       up-front (existing behavior; never hits dispatch_with_retries).
+    1. ``dispatch_path: runcomfy`` is remapped to ``pearl_star`` (RunComfy
+       decommissioned); cooldown does not suppress the batch — it still dispatches
+       on Pearl Star.
     2. If a dispatcher itself raises a cap message (e.g. RunComfy returns
        'cumulative_month_spend_usd >= $10'), the wrapper classifies it as
        non_retryable and writes a sidecar row.
     """
     _stub_environment(monkeypatch, cooldown=True)
     out = tmp_path / "out"
+    captured: dict[str, object] = {}
 
-    def fake_dispatch(*_a: Any, **_kw: Any) -> dict[str, Any]:  # pragma: no cover
-        raise AssertionError("dispatch must not run when cost cooldown active")
+    def fake_dispatch(batch: dict, *, dry_run: bool, **_: Any) -> dict[str, Any]:
+        captured["path"] = batch["dispatch_path"]
+        return {"dispatch_path": batch["dispatch_path"], "status": "succeeded", "dry_run": False}
 
     monkeypatch.setattr(batch_runner, "dispatch", fake_dispatch)
 
@@ -282,8 +285,8 @@ def test_cap_exhausted_skip_then_runtime_message_non_retryable(
         run_id="run_cap_skip",
     )
     cells = [r for r in res if not r.get("fault_tolerance_summary")]
-    assert cells[0].get("skipped") is True
-    assert cells[0].get("reason") == "runcomfy_cost_cooldown"
+    assert captured["path"] == "pearl_star"
+    assert cells[0]["status"] == "succeeded"
 
     # Now exercise dispatcher-raised cap message.
     _stub_environment(monkeypatch, cooldown=False)

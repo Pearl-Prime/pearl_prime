@@ -186,7 +186,6 @@ def probe_comfy_url_from_env() -> tuple[bool, str]:
 
 def apply_dispatch_routing(batch: Mapping[str, Any], state: PearlStarModelState | None) -> dict[str, Any]:
     out = dict(batch)
-    out["_requested_dispatch_path"] = batch.get("dispatch_path")
     out["dispatch_path"] = resolve_dispatch_path(batch, state)
     return out
 
@@ -720,12 +719,9 @@ def run_live_activation(
     failed: list[dict[str, Any]] = []
 
     for batch in ordered:
-        requested = str(
-            batch.get("_requested_dispatch_path") or batch.get("dispatch_path", "")
-        ).strip().lower()
         path = str(batch.get("dispatch_path", "")).strip().lower()
         cost = cost_fn()
-        if requested in ("runcomfy", "run_comfy") and _should_skip_runcomfy(cost):
+        if path in ("runcomfy", "run_comfy") and _should_skip_runcomfy(cost):
             row = {
                 "batch_id": batch.get("batch_id"),
                 "dispatch_path": "runcomfy",
