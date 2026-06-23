@@ -25,6 +25,11 @@ def main() -> int:
     ap = argparse.ArgumentParser(description="Run rigorous system test")
     ap.add_argument("--skip-sim", action="store_true", help="Skip 10k simulation (faster)")
     ap.add_argument("--strict", action="store_true", help="Exit 1 if any step fails")
+    ap.add_argument(
+        "--skip-atoms-coverage",
+        action="store_true",
+        help="Skip 100%% atoms coverage pytest (STORY backfill in progress)",
+    )
     args = ap.parse_args()
 
     failed = 0
@@ -48,12 +53,15 @@ def main() -> int:
         print("\n--- Variation report (skip: index not found) ---")
 
     # 3. Atoms coverage (slow but critical)
-    rc = run(
-        [sys.executable, "-m", "pytest", "tests/test_atoms_coverage_100_percent.py", "-v", "--tb=short"],
-        "Atoms coverage 100%",
-    )
-    if rc != 0:
-        failed += 1
+    if args.skip_atoms_coverage:
+        print("\n--- Atoms coverage 100% (skipped: --skip-atoms-coverage) ---")
+    else:
+        rc = run(
+            [sys.executable, "-m", "pytest", "tests/test_atoms_coverage_100_percent.py", "-v", "--tb=short"],
+            "Atoms coverage 100%",
+        )
+        if rc != 0:
+            failed += 1
 
     # 4. 10k simulation (optional)
     if not args.skip_sim:

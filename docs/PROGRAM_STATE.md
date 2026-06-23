@@ -1,6 +1,6 @@
 # Program State — Single Source of Truth
 
-**LAST VERIFIED:** 2026-06-22 @ `origin/main` `39e653c4fb6d65910ae97152b28fdadefec449d5`
+**LAST VERIFIED:** 2026-06-23 @ `origin/main` `fc478a2979`
 
 > **RULE:** Verify against `origin/main`, never git date. This is the entry point — if another doc disagrees with this, this wins or that doc is stale.
 
@@ -24,8 +24,8 @@
 - **Details:** Focused on F6 (cadence) and F12 (false-positive) blockers. This is the current frontier for trade-pub quality.
 
 ### Manga ja_JP
-- **Status:** **TITLED**
-- **Details:** 273 `series_plans_ja_JP` on `main`. Titled and teacher-anchored (19%).
+- **Status:** **TITLED + PILOT PRODUCED**
+- **Details:** 273 `series_plans_ja_JP` on `main`. Pilot production: 304 composed v3 segments (PR #1236), 8 wave1 ep_001 scripts + distribution pipeline (PR #1860), ep_003–010 scripts (PR #1189). Audit: `docs/MANGA_RECOVERY_AUDIT.md`.
 
 ### Storefront
 - **Status:** **LIVE**

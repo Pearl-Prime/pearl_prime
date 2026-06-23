@@ -26,6 +26,13 @@ sys.path.insert(0, str(REPO_ROOT))
 
 from scripts.publish import render_kdp_cover as rkc  # noqa: E402
 
+PRODUCTION_GENRES = frozenset({
+    "anxiety", "self_worth", "overthinking", "boundaries",
+    "burnout", "grief", "courage", "imposter_syndrome", "sleep_anxiety",
+    "depression", "social_anxiety", "somatic_healing", "compassion_fatigue",
+    "financial_anxiety", "financial_stress",
+})
+
 
 # ─── FIXTURES ─────────────────────────────────────────────────────────
 
@@ -61,14 +68,8 @@ def test_typography_yaml_loads_with_all_production_genres() -> None:
     cfg = rkc.load_typography_config()
     assert "genres" in cfg
     assert "defaults" in cfg
-    expected = {
-        "anxiety", "self_worth", "overthinking", "boundaries",
-        "burnout", "grief", "courage", "imposter_syndrome", "sleep_anxiety",
-        "depression", "social_anxiety", "somatic_healing", "compassion_fatigue",
-        "financial_anxiety", "financial_stress",
-    }
-    assert set(cfg["genres"].keys()) == expected, (
-        f"Expected exactly the {len(expected)} production genres, got {set(cfg['genres'].keys())}"
+    assert set(cfg["genres"].keys()) == PRODUCTION_GENRES, (
+        f"Expected exactly the {len(PRODUCTION_GENRES)} production genres, got {set(cfg['genres'].keys())}"
     )
 
 
@@ -387,10 +388,6 @@ def test_no_more_matte_layer(dark_illustration: Path, tmp_path: Path) -> None:
 
 
 def test_loads_templates_config() -> None:
-    """The templates YAML must declare exactly the 9 production genres."""
+    """The templates YAML must declare exactly the production genres."""
     cfg = rkc.load_templates_config()
-    expected = {
-        "anxiety", "self_worth", "overthinking", "boundaries",
-        "burnout", "grief", "courage", "imposter_syndrome", "sleep_anxiety",
-    }
-    assert set(cfg["templates"].keys()) == expected
+    assert set(cfg["templates"].keys()) == PRODUCTION_GENRES
