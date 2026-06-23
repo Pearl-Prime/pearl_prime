@@ -53,10 +53,25 @@ def main() -> int:
         action="store_true",
         help="Exit 1 if PHOENIX_GHL_FUNNEL_WEBHOOK is unset (production deploy gate)",
     )
+    parser.add_argument(
+        "--webhook-file",
+        default=str(REPO / "config/local/ghl_funnel_webhook.url"),
+        help="Fallback file with inbound webhook URL (one line, gitignored)",
+    )
     args = parser.parse_args()
     cfg = _load_yaml(CONFIG)
     env_name = cfg.get("webhook_env") or "PHOENIX_GHL_FUNNEL_WEBHOOK"
-    webhook = os.environ.get(env_name, "")
+    env_webhook = os.environ.get(env_name, "").strip()
+    webhook = env_webhook
+    if not webhook and not args.require_env:
+        wf = Path(args.webhook_file)
+        if wf.is_file():
+            lines = [
+                ln.strip()
+                for ln in wf.read_text(encoding="utf-8").splitlines()
+                if ln.strip()
+            ]
+            webhook = lines[0] if lines else ""
     pages = cfg.get("flagship_pages") or []
     n = 0
     for rel in pages:
@@ -69,7 +84,7 @@ def main() -> int:
             print(f"patched {rel}")
     if not webhook:
         print(f"note: {env_name} unset — body attr left empty (capture skips until deploy)")
-        if args.require_env:
+        if args.require_env and not env_webhook:
             return 1
     return 0
 
