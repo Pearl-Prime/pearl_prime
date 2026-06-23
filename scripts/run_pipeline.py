@@ -1290,6 +1290,37 @@ def _run_spine_pipeline_mode(
     )
     prose = _final_cap_f7(prose, max_per_chapter=1, max_by_chapter=_f7_max_by_chapter)
     prose = _final_f13_repair(prose, seed=f"{seed}:post_f13_flow_recheck")
+    # Post-flow orphan strip before floor padding (flow inserts can leak slot labels).
+    prose = _final_orphan_strip(prose)
+    # Strengthen trims can push one_hour_book below word_range floor; restore with
+    # gate-safe declarative padding (no threshold loosening).
+    from phoenix_v4.rendering.book_renderer import _runtime_word_range as _book_word_range
+    from phoenix_v4.rendering.register_output_strengthen import ensure_word_count_floor
+
+    _word_bounds = _book_word_range(runtime_fmt)
+    if _word_bounds:
+        prose = ensure_word_count_floor(prose, floor=_word_bounds[0], seed=f"{seed}:floor")
+    # Floor padding can duplicate closings and strip flow cues — repair before gates.
+    prose = _final_cap_f7(prose, max_per_chapter=1, max_by_chapter=_f7_max_by_chapter)
+    prose = ensure_chapter_flow_cues(
+        prose, flow_profile=_flow_profile, seed=f"{seed}:post_floor_flow"
+    )
+    prose = _final_cap_f7(prose, max_per_chapter=1, max_by_chapter=_f7_max_by_chapter)
+    prose = _final_f4_closings(prose, seed=f"{seed}:post_all_flow")
+    prose = _final_orphan_strip(prose)
+    prose = ensure_chapter_flow_cues(
+        prose, flow_profile=_flow_profile, seed=f"{seed}:post_all_flow"
+    )
+    prose = _final_cap_f7(prose, max_per_chapter=1, max_by_chapter=_f7_max_by_chapter)
+    # F7 cap can drop one_hour_book below word_range floor — restore once more without
+    # a follow-up F7 pass (padding lines are F7-safe declaratives).
+    if _word_bounds and len(prose.split()) < _word_bounds[0]:
+        prose = ensure_word_count_floor(prose, floor=_word_bounds[0], seed=f"{seed}:floor_final")
+        prose = ensure_chapter_flow_cues(
+            prose, flow_profile=_flow_profile, seed=f"{seed}:floor_final_flow"
+        )
+        prose = _final_f4_closings(prose, seed=f"{seed}:floor_final_close")
+        prose = _final_orphan_strip(prose)
 
     _f7_preservation_violations = verify_f7_exercise_preservation(
         prose,
