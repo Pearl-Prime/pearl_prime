@@ -57,16 +57,18 @@ def test_library_imports_cleanly() -> None:
     assert rkc.CANVAS_H == 2560
 
 
-def test_typography_yaml_loads_with_all_nine_genres() -> None:
+def test_typography_yaml_loads_with_all_production_genres() -> None:
     cfg = rkc.load_typography_config()
     assert "genres" in cfg
     assert "defaults" in cfg
     expected = {
         "anxiety", "self_worth", "overthinking", "boundaries",
         "burnout", "grief", "courage", "imposter_syndrome", "sleep_anxiety",
+        "depression", "social_anxiety", "somatic_healing", "compassion_fatigue",
+        "financial_anxiety", "financial_stress",
     }
     assert set(cfg["genres"].keys()) == expected, (
-        f"Expected exactly the 9 production genres, got {set(cfg['genres'].keys())}"
+        f"Expected exactly the {len(expected)} production genres, got {set(cfg['genres'].keys())}"
     )
 
 
