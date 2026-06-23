@@ -47,3 +47,11 @@ jobs:
 
       - name: Freebie capture smoke
         run: python3 scripts/freebies/smoke_freebie_capture.py
+
+      - name: CID bypass wiring
+        run: python3 scripts/freebies/verify_cid_bypass.py
+
+      - name: GHL webhook live push (skip if env unset)
+        run: python3 scripts/freebies/verify_ghl_webhook_push.py
+        env:
+          PHOENIX_GHL_FUNNEL_WEBHOOK: ${{ secrets.PHOENIX_GHL_FUNNEL_WEBHOOK }}

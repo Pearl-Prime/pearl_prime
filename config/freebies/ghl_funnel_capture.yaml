@@ -5,7 +5,14 @@ schema_version: 1
 
 webhook_env: PHOENIX_GHL_FUNNEL_WEBHOOK
 
-# Flagship landings read data-ghl-webhook on <body>.
+# GHL custom field IDs are UUIDs from Settings → Custom Fields (see funnel/burnout_reset/GHL_HANDBOFF.md).
+# Map inbound webhook workflow to these payload keys from quiz_segment_map.yaml:
+# email, first_name, quiz_id, topic, score, score_band, funnel_slug, tags
+custom_fields:
+  note: >-
+    Inbound webhook workflows should map JSON payload fields to GHL contact + tags.
+    Do not use string ids like "topic" on Contacts API — use UUID custom field ids.
+  operator_sets_in: GHL Automation → Inbound Webhook → field mapping
 # Deploy: inject URL from env or set in GHL → Automation → Inbound Webhook.
 # Payload fields: config/freebies/quiz_segment_map.yaml §webhook.payload_fields
 
