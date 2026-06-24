@@ -1,18 +1,5 @@
 {
   "version": 1,
-  "include": ["/*"],
-  "exclude": [
-    "/assets/icons.css",
-    "/assets/icons.js",
-    "/assets/i18n.js",
-    "/assets/*",
-    "/onboarding/*",
-    "/config/*",
-    "/*.html",
-    "/*.mp3",
-    "/*.png",
-    "/*.jpg",
-    "/*.css",
-    "/*.js"
-  ]
+  "include": ["/download/*"],
+  "exclude": []
 }
