@@ -4,12 +4,17 @@
 The Brand Director dashboard reads brand-wizard-app/public/brand_deliveries/
 way_stream_sanctuary.json (NOT storefront/public/...).
 
+Default: proxy URLs (/download/<book_id>?week=...) — served by Cloudflare Pages
+Function with R2 binding (no presigned URL expiry). Use --use-presign for legacy.
+
 Usage:
-  eval "$(python3 scripts/ci/load_integration_env_from_keychain.py)"
   python3 scripts/marketing/rebuild_waystream_feed_from_r2.py \\
     --manifest artifacts/waystream/r2_delivery_manifest.json \\
-    --output brand-wizard-app/public/brand_deliveries/way_stream_sanctuary.json \\
-    --presigned-ttl 7776000
+    --output brand-wizard-app/public/brand_deliveries/way_stream_sanctuary.json
+
+  # Legacy presigned URLs (7-day TTL, requires R2 creds):
+  eval "$(python3 scripts/ci/load_integration_env_from_keychain.py)"
+  python3 scripts/marketing/rebuild_waystream_feed_from_r2.py --use-presign
 """
 from __future__ import annotations
 
@@ -125,6 +130,16 @@ def _presign_url(client: Any, bucket: str, key: str, ttl: int) -> str:
     )
 
 
+def _proxy_url(book_id: str, week: str, proxy_base: str) -> str:
+    path = f"/download/{book_id}?week={week}"
+    base = proxy_base.rstrip("/")
+    return f"{base}{path}" if base else path
+
+
+def _proxy_url_ok(url: str) -> bool:
+    return url.startswith("/download/") and "?week=" in url and "way_stream_sanctuary__" in url
+
+
 def _manifest_rows(manifest: dict[str, Any]) -> list[dict[str, Any]]:
     rows: list[dict[str, Any]] = []
     seen: dict[str, dict[str, Any]] = {}
@@ -148,6 +163,8 @@ def _entry_from_obj(
     client: Any | None,
     refresh_presign: bool,
     presigned_ttl: int,
+    use_proxy: bool,
+    proxy_base: str,
 ) -> dict[str, Any]:
     week = str(obj.get("week") or "")
     platform = str(obj.get("platform") or "amazon_kdp")
@@ -159,13 +176,18 @@ def _entry_from_obj(
         platform = platform or parsed["platform"]
         file_name = file_name or parsed["file"]
 
-    url = str(obj.get("url") or "")
-    if refresh_presign:
+    book_id = str(obj.get("book_id") or file_name.replace(".epub", ""))
+
+    if use_proxy:
+        url = _proxy_url(book_id, week, proxy_base)
+    elif refresh_presign:
         if not client:
             raise SystemExit("--refresh-presign requires R2 credentials")
         if not key:
             raise SystemExit(f"missing key for presign refresh: {file_name}")
         url = _presign_url(client, bucket, key, presigned_ttl)
+    else:
+        url = str(obj.get("url") or "")
 
     size = int(obj.get("size") or 0)
     return {
@@ -182,6 +204,8 @@ def build_feed(
     existing: dict[str, Any],
     refresh_presign: bool,
     presigned_ttl: int,
+    use_proxy: bool,
+    proxy_base: str,
 ) -> tuple[dict[str, Any], list[dict[str, Any]]]:
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
     brand = str(manifest.get("brand") or existing.get("brand") or DEFAULT_BRAND)
@@ -209,6 +233,8 @@ def build_feed(
             client=client,
             refresh_presign=refresh_presign,
             presigned_ttl=presigned_ttl,
+            use_proxy=use_proxy,
+            proxy_base=proxy_base,
         )
         week = str(obj.get("week") or _parse_r2_key(str(obj.get("key") or ""))["week"])
         platform = str(obj.get("platform") or "amazon_kdp")
@@ -260,24 +286,42 @@ def _url_reachable(url: str) -> bool:
         return False
 
 
-def _verify(feed: dict[str, Any], manifest_count: int, *, skip_sample: bool = False) -> int:
+def _verify(
+    feed: dict[str, Any],
+    manifest_count: int,
+    *,
+    skip_sample: bool = False,
+    use_proxy: bool = False,
+    proxy_base: str = "",
+) -> int:
     amazon = _collect_amazon_entries(feed)
     r2_true = sum(1 for e in amazon if e.get("r2") is True)
     weeks = feed.get("weeks") or {}
     sample_pool = [e["url"] for e in amazon if e.get("url")]
     sample_n = min(5, len(sample_pool))
     ok = 0
-    if sample_pool:
-        for url in random.sample(sample_pool, sample_n):
-            if _url_reachable(url):
-                ok += 1
+    if sample_pool and not skip_sample:
+        if use_proxy:
+            for url in random.sample(sample_pool, sample_n):
+                if _proxy_url_ok(url):
+                    ok += 1
+        else:
+            check_urls = sample_pool
+            if proxy_base:
+                check_urls = [f"{proxy_base.rstrip('/')}{u}" for u in sample_pool if u.startswith("/")]
+            for url in random.sample(check_urls or sample_pool, sample_n):
+                if _url_reachable(url):
+                    ok += 1
 
     print(f"manifest_objects={manifest_count}")
     print(f"feed_amazon_kdp={len(amazon)}")
     print(f"r2_true={r2_true}")
     print(f"weeks={len(weeks)}")
     print(f"latest_week={feed.get('latest_week')}")
-    print(f"sample_url_http_200={ok}/{sample_n}")
+    if use_proxy:
+        print(f"sample_url_proxy_format={ok}/{sample_n}")
+    else:
+        print(f"sample_url_http_200={ok}/{sample_n}")
 
     if len(amazon) != manifest_count:
         print(
@@ -289,8 +333,10 @@ def _verify(feed: dict[str, Any], manifest_count: int, *, skip_sample: bool = Fa
         print(f"ERROR: r2_true {r2_true} != manifest {manifest_count}", file=sys.stderr)
         return 1
     if sample_n and ok < sample_n and not skip_sample:
-        print(f"ERROR: sample URL check {ok}/{sample_n} failed", file=sys.stderr)
-        print("HINT: rerun with --refresh-presign (required when manifest URLs are stale)", file=sys.stderr)
+        label = "sample_url_proxy_format" if use_proxy else "sample_url_http_200"
+        print(f"ERROR: {label} {ok}/{sample_n} failed", file=sys.stderr)
+        if not use_proxy:
+            print("HINT: rerun with --refresh-presign (required when manifest URLs are stale)", file=sys.stderr)
         return 1
     return 0
 
@@ -299,11 +345,21 @@ def main() -> int:
     ap = argparse.ArgumentParser(description="Rebuild way_stream_sanctuary feed from R2 manifest")
     ap.add_argument("--manifest", type=Path, default=DEFAULT_MANIFEST)
     ap.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
-    ap.add_argument("--presigned-ttl", type=int, default=7_776_000, help="90 days")
+    ap.add_argument("--presigned-ttl", type=int, default=604_800, help="Presign TTL seconds (max 7d)")
+    ap.add_argument(
+        "--use-presign",
+        action="store_true",
+        help="Emit presigned R2 URLs instead of /download proxy paths",
+    )
+    ap.add_argument(
+        "--proxy-base",
+        default=os.environ.get("WAYSTREAM_PROXY_BASE", "").strip(),
+        help="Optional absolute origin for proxy URLs (default: site-relative /download/...)",
+    )
     ap.add_argument(
         "--refresh-presign",
         action="store_true",
-        help="Regenerate presigned URLs via boto3 (requires R2 creds)",
+        help="Regenerate presigned URLs via boto3 (requires R2 creds; implies --use-presign)",
     )
     ap.add_argument("--dry-run", action="store_true", help="Build + verify only; do not write output")
     args = ap.parse_args()
@@ -313,15 +369,24 @@ def main() -> int:
         return 1
 
     existing = _load_existing(args.output)
-    refresh_presign = args.refresh_presign or not args.dry_run
+    use_proxy = not args.use_presign and not args.refresh_presign
+    refresh_presign = args.refresh_presign or (not args.dry_run and not use_proxy)
     feed, rows = build_feed(
         args.manifest,
         existing=existing,
         refresh_presign=refresh_presign,
         presigned_ttl=args.presigned_ttl,
+        use_proxy=use_proxy,
+        proxy_base=args.proxy_base,
     )
 
-    rc = _verify(feed, len(rows), skip_sample=args.dry_run and not args.refresh_presign)
+    rc = _verify(
+        feed,
+        len(rows),
+        skip_sample=args.dry_run and not args.refresh_presign and not use_proxy,
+        use_proxy=use_proxy,
+        proxy_base=args.proxy_base,
+    )
     if rc != 0:
         return rc
 

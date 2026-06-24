@@ -81,12 +81,21 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: brand-wizard-app
     steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            brand-wizard-app/functions
+            brand-wizard-app/wrangler.toml
+
       - name: Download build artifact
         uses: actions/download-artifact@v4
         with:
           name: brand-admin-onboarding-dist
-          path: dist
+          path: brand-wizard-app/dist
 
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3
@@ -94,3 +103,4 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           command: pages deploy dist --project-name=brand-admin-onboarding
+          workingDirectory: brand-wizard-app

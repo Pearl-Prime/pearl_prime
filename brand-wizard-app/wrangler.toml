@@ -22,6 +22,9 @@
 
 name = "brand-admin-onboarding"
 compatibility_date = "2026-04-05"
+pages_build_output_dir = "dist"
 
-[site]
-bucket = "./dist"
+# Waystream EPUB downloads — brand/way_stream_sanctuary/deliveries/... in phoenix-omega-artifacts
+[[r2_buckets]]
+binding = "R2_BUCKET"
+bucket_name = "phoenix-omega-artifacts"
