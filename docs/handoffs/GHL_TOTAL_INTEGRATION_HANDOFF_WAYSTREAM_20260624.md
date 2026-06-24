@@ -91,7 +91,7 @@ python3 scripts/marketing/build_marketing_feed.py --brand-id way_stream_sanctuar
 
 | Item | Waystream rule |
 |------|----------------|
-| E1 `cta_url` | `https://brand-admin-onboarding.pages.dev/free/way_stream_sanctuary/{slug}/` |
+| E1 `cta_url` | `https://phoenix-brand-admin.pages.dev/free/way_stream_sanctuary/{slug}/` |
 | E4 book offers | `/download/...` proxy URLs (not pearlprime.shop) |
 | Grief topic | Template only — no book CTA |
 | Branding | No Stillness Press, Sai Maa, or `_ahjan` references |
@@ -101,7 +101,7 @@ python3 scripts/marketing/build_marketing_feed.py --brand-id way_stream_sanctuar
 
 ## Funnel capture (Part B) — 15 interactive pages
 
-**Base URL:** `https://brand-admin-onboarding.pages.dev/free/way_stream_sanctuary/`
+**Base URL:** `https://phoenix-brand-admin.pages.dev/free/way_stream_sanctuary/`
 
 | Topic | Slug | Example URL |
 |-------|------|-------------|

@@ -151,7 +151,7 @@ curl -s "<feed-url>" | python3 -c "import json,sys; d=json.load(sys.stdin); prin
 
 **Trigger:** merge to `main` touching `brand-wizard-app/**`  
 **Workflow:** `.github/workflows/brand-admin-onboarding-pages.yml`  
-**Live host:** `https://brand-admin-onboarding.pages.dev`
+**Live host:** `https://phoenix-brand-admin.pages.dev`
 
 | Brand | Funnel base |
 |-------|-------------|
@@ -163,10 +163,10 @@ curl -s "<feed-url>" | python3 -c "import json,sys; d=json.load(sys.stdin); prin
 
 ```bash
 # Devotion — expect Open Vessel Press + pearlprime.shop CTA
-curl -s "https://brand-admin-onboarding.pages.dev/free/devotion_path/anxiety-nervous-system-reset/" | rg "data-brand-id|Open Vessel|pearlprime"
+curl -s "https://phoenix-brand-admin.pages.dev/free/devotion_path/anxiety-nervous-system-reset/" | rg "data-brand-id|Open Vessel|pearlprime"
 
 # Waystream — expect Waystream branding + /download/ CTA (not pearlprime)
-curl -s "https://brand-admin-onboarding.pages.dev/free/way_stream_sanctuary/burnout-energy-audit/" | rg "data-brand-id|Waystream|/download/"
+curl -s "https://phoenix-brand-admin.pages.dev/free/way_stream_sanctuary/burnout-energy-audit/" | rg "data-brand-id|Waystream|/download/"
 ```
 
 Pages ship with `data-ghl-webhook=""` until Phase 5.
@@ -176,7 +176,7 @@ Pages ship with `data-ghl-webhook=""` until Phase 5.
 | Symptom | Cause | Fix |
 |---------|-------|-----|
 | Auth error `10000` | `CLOUDFLARE_API_TOKEN` scoped to personal account or `cfut_` Workers token | Custom token on **b80152c3** with Pages → Edit; `gh secret set CLOUDFLARE_API_TOKEN` |
-| Project not found `8000007` | Token account ≠ `CLOUDFLARE_ACCOUNT_ID` | Both must target **b80152c3** where `brand-admin-onboarding` lives |
+| Project not found `8000007` | Token account ≠ `CLOUDFLARE_ACCOUNT_ID` | Both must target operator account `626d6eb8…` where `phoenix-brand-admin` lives |
 | R2 secret sync fails | Non-fatal (`continue-on-error` since #1898) | Ignore if deploy passes |
 
 Last green deploy: PR #1892 (2026-06-24 16:07 UTC). Failures began after `CLOUDFLARE_API_TOKEN` GitHub secret rotation (~18:04 UTC).

@@ -93,7 +93,7 @@ python3 scripts/marketing/build_marketing_feed.py --brand-id devotion_path --loc
 
 | Item | Devotion Path rule |
 |------|-------------------|
-| E1 `cta_url` | `https://brand-admin-onboarding.pages.dev/free/devotion_path/{slug}/` |
+| E1 `cta_url` | `https://phoenix-brand-admin.pages.dev/free/devotion_path/{slug}/` |
 | E4 book offers | `pearlprime.shop` (Sai Maa teacher SKUs) |
 | Grief topic | Template only — no book CTA |
 | `schema_version` | 3 |
@@ -113,7 +113,7 @@ python3 scripts/marketing/build_marketing_feed.py --brand-id devotion_path --loc
 
 ## Funnel capture (Part B) — 15 interactive pages
 
-**Base URL:** `https://brand-admin-onboarding.pages.dev/free/devotion_path/`
+**Base URL:** `https://phoenix-brand-admin.pages.dev/free/devotion_path/`
 
 | Topic | Slug | Example URL |
 |-------|------|-------------|

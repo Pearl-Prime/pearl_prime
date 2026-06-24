@@ -28,7 +28,7 @@ CONFIG_FUNNEL = REPO_ROOT / "config" / "funnel"
 CONFIG_FREEBIES = REPO_ROOT / "config" / "freebies"
 
 DEFAULT_SHOP_BASE = "https://pearlprime.shop"
-DEFAULT_LANDING_BASE = "https://brand-admin-onboarding.pages.dev"
+DEFAULT_LANDING_BASE = "https://phoenix-brand-admin.pages.dev"
 DEFAULT_PERSONA = "corporate_managers"
 DEFAULT_TIER = "better"
 
