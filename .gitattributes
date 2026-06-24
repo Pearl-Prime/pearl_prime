@@ -101,3 +101,6 @@ artifacts/catalog/brand1_deep/**/*.epub -filter -diff -merge -text
 # ~131-byte LFS pointer instead of a plain blob. This broad pattern covers the
 # whole deliveries tree.
 brand-wizard-app/public/deliveries/** -filter -diff -merge -text
+
+# Dashboard cover thumbs: small JPEGs for CF Pages (full covers stay gitignored).
+brand-wizard-app/public/assets/cover_thumbs/** -filter -diff -merge -text

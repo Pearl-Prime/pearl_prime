@@ -50,7 +50,7 @@ def book_from_plan(d: dict, stem: str) -> dict:
         "desc": blurb.strip(),                                  # short blurb (list/cover)
         "long_desc": long_desc.strip(),                         # full store description
         "angle": (d.get("cover_tagline") or "").strip(),        # the marketing hook
-        "cover": f"assets/covers/{brand_prefix}/{book_id}.png",
+        "cover": f"assets/cover_thumbs/{brand_prefix}/{book_id}.jpg",
         "author": humanize(ap.get("byline_author")),            # public byline = pen name (matches cover; never the teacher / Sai Maa)
         "keywords": [str(k) for k in kw],
         "bisac": [str(c) for c in (d.get("bisac_codes") or [])][:3],
