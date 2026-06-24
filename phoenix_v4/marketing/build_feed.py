@@ -233,7 +233,8 @@ def build_topic_items(
             )
         )
 
-    if series.get("series_id"):
+    series_id = series.get("series_id") or entry_book.get("series_id")
+    if series_id:
         series_url = resolve_series_shop_url(
             topic_id,
             persona_id,

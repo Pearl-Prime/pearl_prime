@@ -138,6 +138,20 @@ Schema authority: [config/marketing/marketing_feed_schema.yaml](../config/market
 | `title` | Recommended | Subject / preview text |
 | `body` | Optional | HTML or plain snippet |
 | `topic` | Recommended | Segmentation |
+| `archetype_id` | Recommended | WF variant rules |
+| `funnel_variant` | Optional | `tight` or `welcome_depth` |
+
+**Not in the feed** (webhook capture only): `quiz_id`, `funnel_slug`, `score`, `score_band` — see [GHL_ADMIN_HANDOFF_FREEBIE_CAPTURE.md](./GHL_ADMIN_HANDOFF_FREEBIE_CAPTURE.md).
+
+### 3.2a Topic coverage
+
+The builder reads all topics from `config/funnel/freebie_to_book_map.yaml` (15 topics for Stillness Press). No `--topic` flags required for the full wave:
+
+```bash
+PYTHONPATH=. python3 scripts/marketing/build_marketing_feed.py --brand-id stillness_press --locale en_US
+```
+
+Expect **~109 items**: 15× E1, 15× E2, 15× E3, 15× E4, 15× E5, plus `bonus_pre_story` (Variant B topics) and `post_e5` tier bonuses.
 
 ### 3.3 content_type values
 

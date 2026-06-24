@@ -1,12 +1,18 @@
 # Operator — GHL handoff (you do not touch GHL)
 
-## Forward these 3 files to your GHL admin
+## Complete package (recommended)
 
-1. **[ghl/GHL_ADMIN_START_HERE.md](../ghl/GHL_ADMIN_START_HERE.md)** — whole story + checklist  
+Forward the **total integration handoff** — covers feed (E1–E5) **and** 15-page webhook:
+
+- **[GHL_TOTAL_INTEGRATION_HANDOFF_20260623.md](./GHL_TOTAL_INTEGRATION_HANDOFF_20260623.md)** — cover sheet + checklist + 15-topic table
+- **[GHL_ADMIN_FORWARD_EMAIL_20260623.txt](./GHL_ADMIN_FORWARD_EMAIL_20260623.txt)** — copy/paste email to GHL admin
+
+Attach these **4 files** (listed inside the total handoff):
+
+1. **[ghl/GHL_ADMIN_START_HERE.md](../ghl/GHL_ADMIN_START_HERE.md)** — whole story + 6-step checklist  
 2. **[GHL_INTEGRATION_GUIDE.md](../GHL_INTEGRATION_GUIDE.md)** — feed format + merge tags  
 3. **[ghl/PROOF_LOOP_WORKFLOW_TEMPLATE.md](../ghl/PROOF_LOOP_WORKFLOW_TEMPLATE.md)** — import WF1–WF4  
-
-**Also attach** (funnel webhook): [GHL_ADMIN_HANDOFF_FREEBIE_CAPTURE.md](../GHL_ADMIN_HANDOFF_FREEBIE_CAPTURE.md) — **15 interactive funnel pages**, one inbound webhook
+4. **[GHL_ADMIN_HANDOFF_FREEBIE_CAPTURE.md](../GHL_ADMIN_HANDOFF_FREEBIE_CAPTURE.md)** — 15 funnel pages, inbound webhook  
 
 Optional reference for them: [FUNNEL_EMAIL_AUTOMATION_MAP.md](../FUNNEL_EMAIL_AUTOMATION_MAP.md)
 
@@ -35,7 +41,11 @@ Feed URL shape (after R2 + CDN live):
 https://<cdn>/pearl-prime-content/{brand_id}/{locale}/{week}/marketing_feed.json
 ```
 
-Build locally: `python3 scripts/marketing/build_marketing_feed.py --brand-id stillness_press`
+Build locally (auto-discovers all **15 topics** — no `--topic` flags):
+
+```bash
+python3 scripts/marketing/build_marketing_feed.py --brand-id stillness_press --locale en_US
+```
 
 ---
 
@@ -47,7 +57,7 @@ Build locally: `python3 scripts/marketing/build_marketing_feed.py --brand-id sti
 
 ## What GHL admin does (they do)
 
-- One-time: import workflows, paste feed URL, map 3 fields, quiz webhook
+- One-time: import workflows, paste feed URL, map 3 fields, funnel webhook
 - Weekly: **nothing**
 
 ---

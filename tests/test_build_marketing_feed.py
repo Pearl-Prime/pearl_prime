@@ -81,3 +81,39 @@ def test_feed_metadata_slot_rules():
 
     bad = {"content_type": "guided_audio", "email_slot": "e1", "pricing": "free"}
     assert validate_slot_rules(bad)
+
+
+def test_all_fifteen_topics_have_e1_and_e5():
+    from collections import defaultdict
+
+    from phoenix_v4.marketing.build_feed import build_marketing_feed, validate_feed
+
+    feed = build_marketing_feed(brand_id="stillness_press", locale="en_US")
+    errors = validate_feed(feed)
+    assert not errors, errors
+
+    by_topic: dict[str, set[str]] = defaultdict(set)
+    for item in feed["items"]:
+        by_topic[item["topic"]].add(item["email_slot"])
+
+    expected_topics = {
+        "anxiety",
+        "boundaries",
+        "burnout",
+        "compassion_fatigue",
+        "courage",
+        "depression",
+        "financial_anxiety",
+        "financial_stress",
+        "grief",
+        "imposter_syndrome",
+        "overthinking",
+        "self_worth",
+        "sleep_anxiety",
+        "social_anxiety",
+        "somatic_healing",
+    }
+    assert set(by_topic) == expected_topics
+    for topic in expected_topics:
+        assert "e1" in by_topic[topic], topic
+        assert "e5" in by_topic[topic], topic

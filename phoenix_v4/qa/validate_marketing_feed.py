@@ -83,7 +83,7 @@ def main() -> int:
                 / "stillness_press"
                 / "en_US"
                 / feed["week"]
-                / "marketing_feed.json"
+                / "marketing_feed.sample.json"
             )
             sample.parent.mkdir(parents=True, exist_ok=True)
             sample.write_text(json.dumps(feed, indent=2) + "\n", encoding="utf-8")

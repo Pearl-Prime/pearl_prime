@@ -1,6 +1,7 @@
 # GHL — Freebie inbound webhook (phoenix_lead.js)
 
-> **GHL administrator (non-technical):** forward **[docs/GHL_ADMIN_HANDOFF_FREEBIE_CAPTURE.md](../../docs/GHL_ADMIN_HANDOFF_FREEBIE_CAPTURE.md)** — checklist + sample JSON; they return one webhook URL.  
+> **Complete GHL package (feed + 15-page webhook):** [docs/handoffs/GHL_TOTAL_INTEGRATION_HANDOFF_20260623.md](../../docs/handoffs/GHL_TOTAL_INTEGRATION_HANDOFF_20260623.md)  
+> **GHL administrator (webhook only):** [docs/GHL_ADMIN_HANDOFF_FREEBIE_CAPTURE.md](../../docs/GHL_ADMIN_HANDOFF_FREEBIE_CAPTURE.md)  
 > **Canonical env names:** `docs/INTEGRATION_CREDENTIALS_REGISTRY.md` §8b.
 
 ## What this wires

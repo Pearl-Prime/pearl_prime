@@ -1,15 +1,21 @@
 # Handoffs — operator → external admin
 
-## GHL (give admin docs #1–#3)
+## GHL — complete package (feed + 15-page webhook)
 
-| # | Document | Audience |
-|---|----------|----------|
-| 1 | [ghl/GHL_ADMIN_START_HERE.md](../ghl/GHL_ADMIN_START_HERE.md) | **GHL admin** — read first |
-| 2 | [GHL_INTEGRATION_GUIDE.md](../GHL_INTEGRATION_GUIDE.md) | GHL admin — feed + fields |
-| 3 | [ghl/PROOF_LOOP_WORKFLOW_TEMPLATE.md](../ghl/PROOF_LOOP_WORKFLOW_TEMPLATE.md) | GHL admin — WF1–WF4 |
-| 4 | [GHL_ADMIN_HANDOFF_FREEBIE_CAPTURE.md](../GHL_ADMIN_HANDOFF_FREEBIE_CAPTURE.md) | GHL admin — quiz webhook appendix |
+| Document | Audience |
+|----------|----------|
+| **[GHL_TOTAL_INTEGRATION_HANDOFF_20260623.md](./GHL_TOTAL_INTEGRATION_HANDOFF_20260623.md)** | **Operator → GHL admin** — start here |
+| [GHL_ADMIN_FORWARD_EMAIL_20260623.txt](./GHL_ADMIN_FORWARD_EMAIL_20260623.txt) | Copy/paste forward email |
+| [OPERATOR_GHL_FREEBIE.md](./OPERATOR_GHL_FREEBIE.md) | Operator steps + what to collect back |
 
-**You (operator):** [OPERATOR_GHL_FREEBIE.md](./OPERATOR_GHL_FREEBIE.md) — forward list + what to collect back.
+**Attach for GHL admin (4 docs):**
+
+| # | Document |
+|---|----------|
+| 1 | [ghl/GHL_ADMIN_START_HERE.md](../ghl/GHL_ADMIN_START_HERE.md) |
+| 2 | [GHL_INTEGRATION_GUIDE.md](../GHL_INTEGRATION_GUIDE.md) |
+| 3 | [ghl/PROOF_LOOP_WORKFLOW_TEMPLATE.md](../ghl/PROOF_LOOP_WORKFLOW_TEMPLATE.md) |
+| 4 | [GHL_ADMIN_HANDOFF_FREEBIE_CAPTURE.md](../GHL_ADMIN_HANDOFF_FREEBIE_CAPTURE.md) |
 
 ## Other
 

@@ -143,15 +143,17 @@ Full checklist: [GHL_ADMIN_HANDOFF_FREEBIE_CAPTURE.md](../GHL_ADMIN_HANDOFF_FREE
 
 ---
 
-## Docs package (give admin #1–#3)
+## Docs package (give admin #1–#4)
 
 | # | Document | Purpose |
 |---|----------|---------|
 | **1** | **This file** | Story + one-time checklist + weekly “do nothing” |
 | **2** | [GHL_INTEGRATION_GUIDE.md](../GHL_INTEGRATION_GUIDE.md) | Feed format, merge tags, custom fields, diagrams |
 | **3** | [PROOF_LOOP_WORKFLOW_TEMPLATE.md](./PROOF_LOOP_WORKFLOW_TEMPLATE.md) | Import WF1–WF4; timing; variant branch |
-| 4 | [GHL_ADMIN_HANDOFF_FREEBIE_CAPTURE.md](../GHL_ADMIN_HANDOFF_FREEBIE_CAPTURE.md) | Quiz webhook only |
+| **4** | [GHL_ADMIN_HANDOFF_FREEBIE_CAPTURE.md](../GHL_ADMIN_HANDOFF_FREEBIE_CAPTURE.md) | 15 funnel pages — inbound webhook |
 | 5 | [FUNNEL_EMAIL_AUTOMATION_MAP.md](../FUNNEL_EMAIL_AUTOMATION_MAP.md) | Optional — tier bundles & extra sequences |
+
+**Operator cover sheet:** [handoffs/GHL_TOTAL_INTEGRATION_HANDOFF_20260623.md](../handoffs/GHL_TOTAL_INTEGRATION_HANDOFF_20260623.md)
 
 **Not for day-to-day admin:** [48_SOCIAL_GHL_BRAND_ADMIN_SPEC.md](../48_SOCIAL_GHL_BRAND_ADMIN_SPEC.md) (full 48 Social context).
 
