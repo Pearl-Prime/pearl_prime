@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Ensure flagship landings have data-ghl-webhook on <body> for phoenix_lead.js."""
+"""Ensure funnel landings have data-ghl-webhook on <body> for phoenix_lead.js."""
 from __future__ import annotations
 
 import os
@@ -8,6 +8,8 @@ from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[2]
 CONFIG = REPO / "config/freebies/ghl_funnel_capture.yaml"
+REGISTRY = REPO / "config/marketing/brand_marketing_registry.yaml"
+FREE_ROOT = REPO / "brand-wizard-app/public/free"
 
 
 def _load_yaml(p: Path) -> dict:
@@ -58,14 +60,31 @@ def _page_paths(cfg: dict) -> list[str]:
     return pages
 
 
+def _brand_page_paths(brand_id: str) -> tuple[str, list[Path]]:
+    registry = _load_yaml(REGISTRY)
+    profile = (registry.get("brands") or {}).get(brand_id) or {}
+    env_name = str(profile.get("webhook_env") or "PHOENIX_GHL_FUNNEL_WEBHOOK")
+    prefix = profile.get("funnel_path_prefix")
+    if prefix:
+        root = FREE_ROOT / str(prefix)
+        paths = sorted(root.glob("*/index.html"))
+        return env_name, paths
+    cfg = _load_yaml(CONFIG)
+    return env_name, [REPO / rel for rel in _page_paths(cfg)]
+
+
 def main() -> int:
     import argparse
 
     parser = argparse.ArgumentParser(description="Inject GHL webhook URL into funnel landings")
     parser.add_argument(
+        "--brand-id",
+        help="Brand id from brand_marketing_registry.yaml (e.g. devotion_path)",
+    )
+    parser.add_argument(
         "--require-env",
         action="store_true",
-        help="Exit 1 if PHOENIX_GHL_FUNNEL_WEBHOOK is unset (production deploy gate)",
+        help="Exit 1 if webhook env var is unset (production deploy gate)",
     )
     parser.add_argument(
         "--webhook-file",
@@ -73,8 +92,14 @@ def main() -> int:
         help="Fallback file with inbound webhook URL (one line, gitignored)",
     )
     args = parser.parse_args()
-    cfg = _load_yaml(CONFIG)
-    env_name = cfg.get("webhook_env") or "PHOENIX_GHL_FUNNEL_WEBHOOK"
+
+    if args.brand_id:
+        env_name, page_paths = _brand_page_paths(args.brand_id)
+    else:
+        cfg = _load_yaml(CONFIG)
+        env_name = cfg.get("webhook_env") or "PHOENIX_GHL_FUNNEL_WEBHOOK"
+        page_paths = [REPO / rel for rel in _page_paths(cfg)]
+
     env_webhook = os.environ.get(env_name, "").strip()
     webhook = env_webhook
     if not webhook and not args.require_env:
@@ -86,13 +111,13 @@ def main() -> int:
                 if ln.strip()
             ]
             webhook = lines[0] if lines else ""
-    pages = _page_paths(cfg)
+
     n = 0
-    for rel in pages:
-        path = REPO / rel
+    for path in page_paths:
         if not path.exists():
             print(f"missing: {path}")
             continue
+        rel = path.relative_to(REPO)
         if _inject_body(path, webhook):
             n += 1
             print(f"patched {rel}")
@@ -100,6 +125,7 @@ def main() -> int:
         print(f"note: {env_name} unset — body attr left empty (capture skips until deploy)")
         if args.require_env and not env_webhook:
             return 1
+    print(f"done: {n} page(s), env={env_name}")
     return 0
 
 

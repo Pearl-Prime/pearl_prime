@@ -169,7 +169,9 @@ curl -s "https://brand-admin-onboarding.pages.dev/free/devotion_path/anxiety-ner
 curl -s "https://brand-admin-onboarding.pages.dev/free/way_stream_sanctuary/burnout-energy-audit/" | rg "data-brand-id|Waystream|/download/"
 ```
 
-Pages ship with `data-ghl-webhook=""` until Phase 4.
+Pages ship with `data-ghl-webhook=""` until Phase 5.
+
+**Deploy note (2026-06-24):** Post-#1897 deploy failed when R2 secret sync hit a Cloudflare API auth error before `pages deploy` ran. Fixed with `continue-on-error` on secret sync; re-trigger via merge or `workflow_dispatch`.
 
 ---
 
@@ -220,23 +222,9 @@ Uses `PHOENIX_GHL_FUNNEL_WEBHOOK` + `config/freebies/ghl_funnel_capture.yaml` (1
 
 ```bash
 URL='https://services.leadconnectorhq.com/hooks/...'
-ENV_NAME=PHOENIX_GHL_FUNNEL_WEBHOOK_DEVOTION   # or _WAYSTREAM
-PREFIX=devotion_path                            # or way_stream_sanctuary
-
-security add-generic-password -s phoenix-omega -a "$ENV_NAME" -w "$URL" -U
-export "$ENV_NAME"="$URL"
-python3 - <<PY
-import os, re
-from pathlib import Path
-url = os.environ["$ENV_NAME"]
-root = Path("brand-wizard-app/public/free/$PREFIX")
-for p in sorted(root.glob("*/index.html")):
-    text = p.read_text(encoding="utf-8")
-    patched = re.sub(r'data-ghl-webhook="[^"]*"', f'data-ghl-webhook="{url}"', text, count=1)
-    if patched != text:
-        p.write_text(patched, encoding="utf-8")
-        print("patched", p)
-PY
+security add-generic-password -s phoenix-omega -a PHOENIX_GHL_FUNNEL_WEBHOOK_DEVOTION -w "$URL" -U   # or _WAYSTREAM
+export PHOENIX_GHL_FUNNEL_WEBHOOK_DEVOTION="$URL"
+python3 scripts/freebies/inject_ghl_webhook.py --brand-id devotion_path --require-env
 ```
 
 Commit patched HTML → merge to `main` → CF Pages redeploy (~2 min).

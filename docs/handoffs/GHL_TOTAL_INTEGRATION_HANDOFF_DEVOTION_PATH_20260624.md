@@ -130,18 +130,7 @@ All pages include: `data-brand-id="devotion_path"`, `data-topic`, `data-funnel-s
 URL='https://services.leadconnectorhq.com/hooks/...'
 security add-generic-password -s phoenix-omega -a PHOENIX_GHL_FUNNEL_WEBHOOK_DEVOTION -w "$URL" -U
 export PHOENIX_GHL_FUNNEL_WEBHOOK_DEVOTION="$URL"
-python3 - <<'PY'
-import os, re
-from pathlib import Path
-url = os.environ["PHOENIX_GHL_FUNNEL_WEBHOOK_DEVOTION"]
-root = Path("brand-wizard-app/public/free/devotion_path")
-for p in sorted(root.glob("*/index.html")):
-    text = p.read_text(encoding="utf-8")
-    patched = re.sub(r'data-ghl-webhook="[^"]*"', f'data-ghl-webhook="{url}"', text, count=1)
-    if patched != text:
-        p.write_text(patched, encoding="utf-8")
-        print("patched", p)
-PY
+python3 scripts/freebies/inject_ghl_webhook.py --brand-id devotion_path --require-env
 # Redeploy brand-admin-onboarding Pages (merge to main or CF dashboard)
 ```
 

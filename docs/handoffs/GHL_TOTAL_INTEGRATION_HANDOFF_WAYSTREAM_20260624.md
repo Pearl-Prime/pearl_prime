@@ -118,18 +118,7 @@ All pages include: `data-brand-id="way_stream_sanctuary"`, `data-topic`, `data-f
 URL='https://services.leadconnectorhq.com/hooks/...'
 security add-generic-password -s phoenix-omega -a PHOENIX_GHL_FUNNEL_WEBHOOK_WAYSTREAM -w "$URL" -U
 export PHOENIX_GHL_FUNNEL_WEBHOOK_WAYSTREAM="$URL"
-python3 - <<'PY'
-import os, re
-from pathlib import Path
-url = os.environ["PHOENIX_GHL_FUNNEL_WEBHOOK_WAYSTREAM"]
-root = Path("brand-wizard-app/public/free/way_stream_sanctuary")
-for p in sorted(root.glob("*/index.html")):
-    text = p.read_text(encoding="utf-8")
-    patched = re.sub(r'data-ghl-webhook="[^"]*"', f'data-ghl-webhook="{url}"', text, count=1)
-    if patched != text:
-        p.write_text(patched, encoding="utf-8")
-        print("patched", p)
-PY
+python3 scripts/freebies/inject_ghl_webhook.py --brand-id way_stream_sanctuary --require-env
 # Redeploy brand-admin-onboarding Pages (merge to main or CF dashboard)
 ```
 
