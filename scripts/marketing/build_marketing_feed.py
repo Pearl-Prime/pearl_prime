@@ -10,7 +10,24 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(REPO_ROOT))
 
+from phoenix_v4.marketing.brand_profile import get_brand_profile  # noqa: E402
 from phoenix_v4.marketing.build_feed import build_marketing_feed, validate_feed  # noqa: E402
+
+
+def _apply_brand_profile(args: argparse.Namespace) -> None:
+    try:
+        profile = get_brand_profile(args.brand_id)
+    except KeyError:
+        return
+    if args.persona_id == "corporate_managers" and profile.get("default_persona"):
+        args.persona_id = str(profile["default_persona"])
+    if not args.landing_base and profile.get("landing_base"):
+        args.landing_base = str(profile["landing_base"])
+    if not args.shop_base or args.shop_base == "https://pearlprime.shop":
+        if profile.get("shop_base"):
+            args.shop_base = str(profile["shop_base"])
+    prefix = profile.get("funnel_path_prefix")
+    args.funnel_path_prefix = str(prefix) if prefix else None
 
 
 def main() -> int:
@@ -28,8 +45,13 @@ def main() -> int:
     )
     ap.add_argument("--shop-base", default="https://pearlprime.shop")
     ap.add_argument("--landing-base", default=None)
+    ap.add_argument("--funnel-path-prefix", default=None, help="Override brand funnel URL prefix")
+    ap.add_argument("--no-profile", action="store_true", help="Skip brand_marketing_registry.yaml")
     ap.add_argument("--validate-only", action="store_true", help="Validate existing --out file")
     args = ap.parse_args()
+    args.funnel_path_prefix = args.funnel_path_prefix or None
+    if not args.no_profile:
+        _apply_brand_profile(args)
 
     if args.validate_only:
         out = args.out
@@ -53,6 +75,7 @@ def main() -> int:
         shop_base=args.shop_base,
         persona_id=args.persona_id,
         landing_base=args.landing_base or "https://brand-admin-onboarding.pages.dev",
+        funnel_path_prefix=args.funnel_path_prefix,
     )
     errors = validate_feed(feed)
     if errors:

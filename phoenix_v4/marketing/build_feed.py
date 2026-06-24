@@ -127,6 +127,7 @@ def build_topic_items(
     include_paid: bool = True,
     locale: str = "en_US",
     url_index: dict[str, Any] | None = None,
+    funnel_path_prefix: str | None = None,
 ) -> list[dict[str, Any]]:
     freebie = topic_cfg.get("freebie") or {}
     entry_book = topic_cfg.get("entry_book") or {}
@@ -137,6 +138,8 @@ def build_topic_items(
     freebie_type = str(freebie.get("type") or "interactive_html_tool")
     e1_content = content_type_for_freebie(freebie_type)
     landing_path = str(freebie.get("landing_path") or f"/free/{slug}/")
+    if funnel_path_prefix:
+        landing_path = f"/free/{funnel_path_prefix}/{slug}/"
     tof_url = _landing_url(landing_base, landing_path)
     e2_app = arch.get("e2_somatic_app") or "ex02_box_breathing.html"
     e2_url = _e2_url(landing_base, e2_app)
@@ -292,6 +295,7 @@ def build_marketing_feed(
     landing_base: str = DEFAULT_LANDING_BASE,
     shop_base: str = DEFAULT_SHOP_BASE,
     persona_id: str = DEFAULT_PERSONA,
+    funnel_path_prefix: str | None = None,
 ) -> dict[str, Any]:
     funnel_map = _load_yaml(CONFIG_FUNNEL / "freebie_to_book_map.yaml")
     map_base = str(funnel_map.get("base_url") or landing_base)
@@ -315,6 +319,7 @@ def build_marketing_feed(
                 shop_base=shop_base,
                 locale=locale,
                 url_index=url_index,
+                funnel_path_prefix=funnel_path_prefix,
             )
         )
 

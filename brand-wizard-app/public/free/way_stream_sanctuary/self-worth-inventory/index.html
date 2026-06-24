@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The Worth Inventory | Waystream Sanctuary</title>
+  <meta name="description" content="A 3-part written exercise for locating your value outside of what you produce. Free from Waystream Sanctuary.">
+  <meta property="og:title" content="The Worth Inventory — Free Interactive Workbook">
+  <meta property="og:description" content="Three parts. Eight prompts. A different way of seeing yourself. Free from Waystream Sanctuary — Inner Light Press.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0A0A0F;
+      --surface: #13131A;
+      --accent: #3B82F6;
+      --text: #F0EFE8;
+      --secondary: #8B8A82;
+      --border: rgba(240,239,232,0.08);
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    .page-wrap {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 48px 20px 80px;
+    }
+
+    .wordmark {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 13px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--secondary);
+      margin-bottom: 48px;
+    }
+
+    h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 6vw, 3rem);
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+
+    .subtitle {
+      color: var(--secondary);
+      font-size: 15px;
+      margin-bottom: 40px;
+    }
+
+    .capture-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 32px 28px;
+      margin-bottom: 40px;
+    }
+
+    .capture-card h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .capture-card p {
+      color: var(--secondary);
+      font-size: 14px;
+      margin-bottom: 24px;
+    }
+
+    .form-row { display: flex; flex-direction: column; gap: 12px; }
+
+    input[type="text"], input[type="email"] {
+      background: rgba(240,239,232,0.05);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      padding: 14px 16px;
+      width: 100%;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    input::placeholder { color: var(--secondary); }
+    input:focus { border-color: var(--accent); }
+
+    .btn-primary {
+      background: var(--accent);
+      border: none;
+      border-radius: 8px;
+      color: #fff;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 500;
+      padding: 14px 24px;
+      width: 100%;
+      transition: opacity 0.2s;
+    }
+
+    .btn-primary:hover { opacity: 0.88; }
+
+    #tool-section { display: none; }
+    #tool-section.visible { display: block; }
+
+    /* PROGRESS INDICATOR */
+    .progress-bar {
+      display: flex;
+      gap: 0;
+      margin-bottom: 40px;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+
+    .progress-step {
+      flex: 1;
+      padding: 12px 8px;
+      text-align: center;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--secondary);
+      background: var(--surface);
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+      border-right: 1px solid var(--border);
+    }
+
+    .progress-step:last-child { border-right: none; }
+    .progress-step.active { background: var(--accent); color: #fff; }
+    .progress-step.completed { background: rgba(59,130,246,0.15); color: var(--accent); }
+
+    /* PART SECTIONS */
+    .part-section { display: none; }
+    .part-section.active { display: block; }
+
+    .part-header {
+      margin-bottom: 24px;
+    }
+
+    .part-label {
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+
+    .part-header h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      line-height: 1.3;
+    }
+
+    .prompt-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 24px;
+      margin-bottom: 16px;
+    }
+
+    .prompt-num {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--secondary);
+      margin-bottom: 8px;
+    }
+
+    .prompt-q {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 14px;
+      line-height: 1.4;
+    }
+
+    textarea {
+      background: rgba(240,239,232,0.04);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      line-height: 1.6;
+      padding: 12px 14px;
+      resize: vertical;
+      width: 100%;
+      min-height: 90px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    textarea::placeholder { color: var(--secondary); }
+    textarea:focus { border-color: var(--accent); }
+
+    .nav-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 28px;
+      gap: 12px;
+    }
+
+    .btn-nav {
+      background: transparent;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--secondary);
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      padding: 11px 22px;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .btn-nav:hover { border-color: var(--text); color: var(--text); }
+
+    .btn-next {
+      background: var(--accent);
+      border: 1px solid var(--accent);
+      border-radius: 8px;
+      color: #fff;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 11px 28px;
+      transition: opacity 0.2s;
+    }
+
+    .btn-next:hover { opacity: 0.88; }
+
+    .cta-banner {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-top: 2px solid var(--accent);
+      border-radius: 12px;
+      padding: 32px 28px;
+      margin-top: 64px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .cta-banner p {
+      font-size: 14px;
+      color: var(--secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: 500;
+    }
+
+    .cta-banner h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      line-height: 1.3;
+    }
+
+    .btn-cta {
+      display: inline-block;
+      background: var(--accent);
+      border: none;
+      border-radius: 8px;
+      color: #fff;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 13px 24px;
+      text-decoration: none;
+      transition: opacity 0.2s;
+      align-self: flex-start;
+    }
+
+    .btn-cta:hover { opacity: 0.88; }
+
+    footer {
+      margin-top: 48px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      font-size: 12px;
+      color: var(--secondary);
+      text-align: center;
+    }
+  </style>
+  <!-- GA4 — owner: replace G-PLACEHOLDER with real measurement ID from Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PLACEHOLDER"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-PLACEHOLDER');
+    // Capture UTM params for attribution
+    (function(){
+      var params = new URLSearchParams(window.location.search);
+      var utm = {};
+      ['utm_source','utm_medium','utm_campaign','utm_content','utm_term'].forEach(function(k){
+        if(params.get(k)) utm[k] = params.get(k);
+      });
+      if(Object.keys(utm).length) sessionStorage.setItem('funnel_utm', JSON.stringify(utm));
+    })();
+  </script>
+</head>
+<body data-brand-id="way_stream_sanctuary" data-topic="self_worth" data-funnel-slug="self-worth-inventory" data-ghl-webhook="">
+<div class="page-wrap">
+
+  <div class="wordmark">Waystream Sanctuary — Inner Light Press</div>
+
+  <h1>The Worth Inventory</h1>
+  <p class="subtitle">Three parts. A different lens for looking at yourself.</p>
+
+  <div class="capture-card" id="capture-section">
+    <h2>Access the Free Workbook</h2>
+    <p>Your answers stay in your browser. Nothing is stored or sent.</p>
+    <form id="capture-form">
+      <div class="form-row">
+        <input type="text" placeholder="First name" autocomplete="given-name">
+        <input type="email" placeholder="Email address" required autocomplete="email">
+        <button type="submit" class="btn-primary">Access Free Worth Inventory</button>
+      </div>
+    </form>
+  </div>
+
+  <div id="tool-section">
+
+    <!-- Progress -->
+    <div class="progress-bar">
+      <div class="progress-step active" id="step-tab-1" onclick="goTo(1)">Part 1</div>
+      <div class="progress-step" id="step-tab-2" onclick="goTo(2)">Part 2</div>
+      <div class="progress-step" id="step-tab-3" onclick="goTo(3)">Part 3</div>
+    </div>
+
+    <!-- PART 1 -->
+    <div class="part-section active" id="part-1">
+      <div class="part-header">
+        <div class="part-label">Part 1 of 3</div>
+        <h2>List 3 things about yourself that have nothing to do with what you produce, achieve, or do for others.</h2>
+      </div>
+
+      <div class="prompt-card">
+        <div class="prompt-num">01</div>
+        <div class="prompt-q">The first thing.</div>
+        <textarea placeholder="Write what comes up..."></textarea>
+      </div>
+
+      <div class="prompt-card">
+        <div class="prompt-num">02</div>
+        <div class="prompt-q">The second thing.</div>
+        <textarea placeholder="Write what comes up..."></textarea>
+      </div>
+
+      <div class="prompt-card">
+        <div class="prompt-num">03</div>
+        <div class="prompt-q">The third thing.</div>
+        <textarea placeholder="Write what comes up..."></textarea>
+      </div>
+
+      <div class="nav-row">
+        <span></span>
+        <button class="btn-next" onclick="goTo(2)">Next: Part 2 &rarr;</button>
+      </div>
+    </div>
+
+    <!-- PART 2 -->
+    <div class="part-section" id="part-2">
+      <div class="part-header">
+        <div class="part-label">Part 2 of 3</div>
+        <h2>List 3 ways you've shown up for someone this year that cost you something.</h2>
+      </div>
+
+      <div class="prompt-card">
+        <div class="prompt-num">01</div>
+        <div class="prompt-q">The first time.</div>
+        <textarea placeholder="Write what comes up..."></textarea>
+      </div>
+
+      <div class="prompt-card">
+        <div class="prompt-num">02</div>
+        <div class="prompt-q">The second time.</div>
+        <textarea placeholder="Write what comes up..."></textarea>
+      </div>
+
+      <div class="prompt-card">
+        <div class="prompt-num">03</div>
+        <div class="prompt-q">The third time.</div>
+        <textarea placeholder="Write what comes up..."></textarea>
+      </div>
+
+      <div class="nav-row">
+        <button class="btn-nav" onclick="goTo(1)">&larr; Back</button>
+        <button class="btn-next" onclick="goTo(3)">Next: Part 3 &rarr;</button>
+      </div>
+    </div>
+
+    <!-- PART 3 -->
+    <div class="part-section" id="part-3">
+      <div class="part-header">
+        <div class="part-label">Part 3 of 3</div>
+        <h2>The harder questions.</h2>
+      </div>
+
+      <div class="prompt-card">
+        <div class="prompt-num">01</div>
+        <div class="prompt-q">What would you tell a friend who believed the same things about themselves that you believe about you?</div>
+        <textarea placeholder="Write what comes up..."></textarea>
+      </div>
+
+      <div class="prompt-card">
+        <div class="prompt-num">02</div>
+        <div class="prompt-q">What's one thing you know is true about you that the comparison voice can't touch?</div>
+        <textarea placeholder="Write what comes up..."></textarea>
+      </div>
+
+      <div class="nav-row">
+        <button class="btn-nav" onclick="goTo(2)">&larr; Back</button>
+        <span style="font-size:13px;color:var(--secondary);">Inventory complete.</span>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="cta-banner">
+    <p>Want the full system?</p>
+    <h3>The Enough Series: Worthy Without Proof — $0.99</h3>
+    <a class="btn-cta" href="https://brand-admin-onboarding.pages.dev/download/way_stream_sanctuary__default_teacher__corporate_managers__self_worth__comparison" rel="noopener">Get Book 1 for $0.99</a>
+  </div>
+
+  <footer>A free tool from Waystream Sanctuary — Inner Light Press</footer>
+</div>
+
+<script>
+  document.getElementById('capture-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    var nameEl = document.querySelector('#capture-form input[type="text"]');
+    var emailEl = document.querySelector('#capture-form input[type="email"]');
+    var name = nameEl ? nameEl.value.trim() : '';
+    var email = emailEl ? emailEl.value.trim() : '';
+    function revealTool() {
+      document.getElementById('capture-section').style.display = 'none';
+      document.getElementById('tool-section').classList.add('visible');
+    }
+    if (!window.PhoenixLead) {
+      revealTool();
+      return;
+    }
+    PhoenixLead.captureLead({
+      email: email,
+      first_name: name,
+      topic: 'self_worth',
+      funnel_slug: 'self-worth-inventory',
+      quiz_id: 'worth_inventory',
+      score: null,
+      score_band: null,
+      tags: ['source_freebie_quiz', 'quiz_self_worth', 'freebie_captured']
+    }).then(revealTool).catch(revealTool);
+  });
+
+  let currentPart = 1;
+
+  function goTo(n) {
+    document.getElementById('part-' + currentPart).classList.remove('active');
+    document.getElementById('step-tab-' + currentPart).classList.remove('active');
+    if (currentPart < n) {
+      document.getElementById('step-tab-' + currentPart).classList.add('completed');
+    } else {
+      document.getElementById('step-tab-' + currentPart).classList.remove('completed');
+    }
+
+    currentPart = n;
+    document.getElementById('part-' + currentPart).classList.add('active');
+    document.getElementById('step-tab-' + currentPart).classList.add('active');
+    document.getElementById('step-tab-' + currentPart).classList.remove('completed');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+
+<link rel="stylesheet" href="/free/js/phoenix_tool.css">
+<script src="/free/js/phoenix_lead.js"></script>
+<script src="/free/js/phoenix_funnel.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  if (!window.PhoenixFunnel) return;
+  PhoenixFunnel.initSkipFormIfCaptured('capture-section', 'tool-section', function() {});
+});
+</script>
+
+</body>
+</html>

@@ -1,6 +1,24 @@
 # Operator — GHL handoff (you do not touch GHL)
 
-## Complete package (recommended)
+## Per-brand packages (2026-06-24)
+
+| Brand | Total handoff | Forward email | Feed items (2026-W26) |
+|-------|---------------|---------------|------------------------|
+| **Stillness Press** | [GHL_TOTAL_INTEGRATION_HANDOFF_20260623.md](./GHL_TOTAL_INTEGRATION_HANDOFF_20260623.md) | [GHL_ADMIN_FORWARD_EMAIL_20260623.txt](./GHL_ADMIN_FORWARD_EMAIL_20260623.txt) | ~109 |
+| **Open Vessel Press (Devotion Path)** | [GHL_TOTAL_INTEGRATION_HANDOFF_DEVOTION_PATH_20260624.md](./GHL_TOTAL_INTEGRATION_HANDOFF_DEVOTION_PATH_20260624.md) | [GHL_ADMIN_FORWARD_EMAIL_DEVOTION_PATH_20260624.txt](./GHL_ADMIN_FORWARD_EMAIL_DEVOTION_PATH_20260624.txt) | 120 |
+| **Waystream Sanctuary** | [GHL_TOTAL_INTEGRATION_HANDOFF_WAYSTREAM_20260624.md](./GHL_TOTAL_INTEGRATION_HANDOFF_WAYSTREAM_20260624.md) | [GHL_ADMIN_FORWARD_EMAIL_WAYSTREAM_20260624.txt](./GHL_ADMIN_FORWARD_EMAIL_WAYSTREAM_20260624.txt) | 109 |
+
+Each brand uses a **separate GHL sub-account** and **separate inbound webhook** env var:
+
+| Brand | Webhook env var | Funnel base path |
+|-------|-----------------|------------------|
+| Stillness Press | `PHOENIX_GHL_FUNNEL_WEBHOOK_STILLNESS` | `/free/{slug}/` |
+| Devotion Path | `PHOENIX_GHL_FUNNEL_WEBHOOK_DEVOTION` | `/free/devotion_path/{slug}/` |
+| Waystream Sanctuary | `PHOENIX_GHL_FUNNEL_WEBHOOK_WAYSTREAM` | `/free/way_stream_sanctuary/{slug}/` |
+
+---
+
+## Complete package — Stillness Press (recommended template)
 
 Forward the **total integration handoff** — covers feed (E1–E5) **and** 15-page webhook:
 

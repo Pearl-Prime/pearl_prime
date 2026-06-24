@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The Decision Map | Waystream Sanctuary</title>
+  <meta name="description" content="A 6-step protocol for the decision you've been avoiding. Free from Waystream Sanctuary.">
+  <meta property="og:title" content="The Decision Map — Free 6-Step Protocol">
+  <meta property="og:description" content="Six steps. The thing you've been avoiding. A first action with a date. Free from Waystream Sanctuary — Inner Light Press.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0A0A0F;
+      --surface: #13131A;
+      --accent: #3B82F6;
+      --text: #F0EFE8;
+      --secondary: #8B8A82;
+      --border: rgba(240,239,232,0.08);
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    .page-wrap {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 48px 20px 80px;
+    }
+
+    .wordmark {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 13px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--secondary);
+      margin-bottom: 48px;
+    }
+
+    h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 6vw, 3rem);
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+
+    .subtitle {
+      color: var(--secondary);
+      font-size: 15px;
+      margin-bottom: 40px;
+    }
+
+    .capture-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 32px 28px;
+      margin-bottom: 40px;
+    }
+
+    .capture-card h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .capture-card p { color: var(--secondary); font-size: 14px; margin-bottom: 24px; }
+
+    .form-row { display: flex; flex-direction: column; gap: 12px; }
+
+    input[type="text"], input[type="email"], input[type="date"] {
+      background: rgba(240,239,232,0.05);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      padding: 14px 16px;
+      width: 100%;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    input::placeholder { color: var(--secondary); }
+    input:focus { border-color: var(--accent); }
+
+    input[type="date"]::-webkit-calendar-picker-indicator {
+      filter: invert(0.6);
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      border: none;
+      border-radius: 8px;
+      color: #fff;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 500;
+      padding: 14px 24px;
+      width: 100%;
+      transition: opacity 0.2s;
+    }
+
+    .btn-primary:hover { opacity: 0.88; }
+
+    #tool-section { display: none; }
+    #tool-section.visible { display: block; }
+
+    /* STEP PROGRESS */
+    .step-progress {
+      display: flex;
+      gap: 4px;
+      margin-bottom: 36px;
+    }
+
+    .step-pip {
+      height: 3px;
+      flex: 1;
+      border-radius: 2px;
+      background: var(--border);
+      transition: background 0.3s;
+    }
+
+    .step-pip.active { background: var(--accent); }
+    .step-pip.done { background: rgba(59,130,246,0.45); }
+
+    /* STEP CARDS */
+    .step-card {
+      display: none;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px 24px;
+      margin-bottom: 16px;
+    }
+
+    .step-card.visible { display: block; }
+
+    .step-meta {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 500;
+      margin-bottom: 10px;
+    }
+
+    .step-question {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 18px;
+      line-height: 1.35;
+    }
+
+    textarea {
+      background: rgba(240,239,232,0.04);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      line-height: 1.6;
+      padding: 12px 14px;
+      resize: vertical;
+      width: 100%;
+      min-height: 100px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    textarea::placeholder { color: var(--secondary); }
+    textarea:focus { border-color: var(--accent); }
+
+    /* Slider */
+    .slider-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    input[type="range"] {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+      height: 4px;
+      border-radius: 2px;
+      background: var(--border);
+      outline: none;
+      cursor: pointer;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--accent);
+      cursor: pointer;
+      border: 2px solid #fff;
+      box-shadow: 0 0 6px rgba(59,130,246,0.4);
+    }
+
+    .slider-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      color: var(--secondary);
+    }
+
+    .slider-val {
+      text-align: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .step-nav {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 20px;
+    }
+
+    .btn-next {
+      background: var(--accent);
+      border: none;
+      border-radius: 8px;
+      color: #fff;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 12px 28px;
+      transition: opacity 0.2s;
+    }
+
+    .btn-next:hover { opacity: 0.88; }
+
+    .date-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .date-row textarea { flex: 1; min-width: 200px; min-height: 80px; }
+    .date-row input[type="date"] { flex: 0 0 180px; align-self: flex-start; }
+
+    /* COMPLETION */
+    .completion-card {
+      display: none;
+      background: var(--surface);
+      border: 1px solid rgba(59,130,246,0.3);
+      border-radius: 12px;
+      padding: 36px 28px;
+      text-align: center;
+    }
+
+    .completion-card.visible { display: block; }
+
+    .completion-card p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.35rem;
+      font-weight: 600;
+      line-height: 1.5;
+      color: var(--text);
+    }
+
+    .cta-banner {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-top: 2px solid var(--accent);
+      border-radius: 12px;
+      padding: 32px 28px;
+      margin-top: 64px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .cta-banner p {
+      font-size: 14px;
+      color: var(--secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: 500;
+    }
+
+    .cta-banner h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      line-height: 1.3;
+    }
+
+    .btn-cta {
+      display: inline-block;
+      background: var(--accent);
+      border: none;
+      border-radius: 8px;
+      color: #fff;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 13px 24px;
+      text-decoration: none;
+      transition: opacity 0.2s;
+      align-self: flex-start;
+    }
+
+    .btn-cta:hover { opacity: 0.88; }
+
+    footer {
+      margin-top: 48px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      font-size: 12px;
+      color: var(--secondary);
+      text-align: center;
+    }
+  </style>
+  <!-- GA4 — owner: replace G-PLACEHOLDER with real measurement ID from Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PLACEHOLDER"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-PLACEHOLDER');
+    // Capture UTM params for attribution
+    (function(){
+      var params = new URLSearchParams(window.location.search);
+      var utm = {};
+      ['utm_source','utm_medium','utm_campaign','utm_content','utm_term'].forEach(function(k){
+        if(params.get(k)) utm[k] = params.get(k);
+      });
+      if(Object.keys(utm).length) sessionStorage.setItem('funnel_utm', JSON.stringify(utm));
+    })();
+  </script>
+</head>
+<body data-brand-id="way_stream_sanctuary" data-topic="courage" data-funnel-slug="courage-decision-map" data-ghl-webhook="">
+<div class="page-wrap">
+
+  <div class="wordmark">Waystream Sanctuary — Inner Light Press</div>
+
+  <h1>The Decision Map</h1>
+  <p class="subtitle">The thing I've been avoiding — mapped in 6 steps. This is my protocol. Six steps. The thing you've been avoiding. A first action with a date.</p>
+
+  <div class="capture-card" id="capture-section" style="display:none;">
+    <h2>Access the Free Decision Map</h2>
+    <p>Your answers stay in your browser. Nothing is stored or sent.</p>
+    <form id="capture-form">
+      <div class="form-row">
+        <input type="text" placeholder="First name" autocomplete="given-name">
+        <input type="email" placeholder="Email address" required autocomplete="email">
+        <button type="submit" class="btn-primary">Access Free Decision Map</button>
+      </div>
+    </form>
+  </div>
+
+  <div id="tool-section" class="visible" style="display:block;">
+    <div id="email-gate-section" class="card phoenix-email-gate" style="display:none;">
+      <h2 style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;margin-bottom:8px;">Get your result + next practice</h2>
+      <p style="color:#8B8A82;font-size:14px;margin-bottom:20px;">One email. No spam. Then your personalized result unlocks.</p>
+      <div class="form-group">
+        <label for="gate-name">First name</label>
+        <input type="text" id="gate-name" placeholder="Your name">
+      </div>
+      <div class="form-group">
+        <label for="gate-email">Email</label>
+        <input type="email" id="gate-email" placeholder="your@email.com">
+      </div>
+      <p id="gate-error" class="error-msg" style="display:none;">Please enter a valid email.</p>
+      <button class="btn" type="button" onclick="submitEmailGate()">Show My Result</button>
+    </div>
+
+
+    <div class="step-progress" id="step-progress">
+      <div class="step-pip active" id="pip-1"></div>
+      <div class="step-pip" id="pip-2"></div>
+      <div class="step-pip" id="pip-3"></div>
+      <div class="step-pip" id="pip-4"></div>
+      <div class="step-pip" id="pip-5"></div>
+      <div class="step-pip" id="pip-6"></div>
+    </div>
+
+    <!-- Step 1 -->
+    <div class="step-card visible" id="step-1">
+      <div class="step-meta">Step 1 of 6</div>
+      <div class="step-question">Name the thing you're avoiding.</div>
+      <textarea id="ans-1" placeholder="Write it plainly. No softening."></textarea>
+      <div class="step-nav">
+        <button class="btn-next" onclick="advance(1)">Next &rarr;</button>
+      </div>
+    </div>
+
+    <!-- Step 2 -->
+    <div class="step-card" id="step-2">
+      <div class="step-meta">Step 2 of 6</div>
+      <div class="step-question">What is the actual worst outcome?</div>
+      <textarea id="ans-2" placeholder="Be specific. Vague dread is harder to work with than named fear."></textarea>
+      <div class="step-nav">
+        <button class="btn-next" onclick="advance(2)">Next &rarr;</button>
+      </div>
+    </div>
+
+    <!-- Step 3 -->
+    <div class="step-card" id="step-3">
+      <div class="step-meta">Step 3 of 6</div>
+      <div class="step-question">How likely is that outcome, really?</div>
+      <div class="slider-wrap">
+        <div class="slider-val" id="slider-display">50%</div>
+        <input type="range" id="likelihood-slider" min="0" max="100" value="50" oninput="document.getElementById('slider-display').textContent = this.value + '%'">
+        <div class="slider-labels">
+          <span>Very unlikely</span>
+          <span>Possible</span>
+          <span>Likely</span>
+        </div>
+      </div>
+      <div class="step-nav" style="margin-top:24px;">
+        <button class="btn-next" onclick="advance(3)">Next &rarr;</button>
+      </div>
+    </div>
+
+    <!-- Step 4 -->
+    <div class="step-card" id="step-4">
+      <div class="step-meta">Step 4 of 6</div>
+      <div class="step-question">What's the cost of NOT doing it — in 6 months?</div>
+      <textarea id="ans-4" placeholder="What stays the same? What gets harder?"></textarea>
+      <div class="step-nav">
+        <button class="btn-next" onclick="advance(4)">Next &rarr;</button>
+      </div>
+    </div>
+
+    <!-- Step 5 -->
+    <div class="step-card" id="step-5">
+      <div class="step-meta">Step 5 of 6</div>
+      <div class="step-question">What is one small version of this you could do this week?</div>
+      <textarea id="ans-5" placeholder="Smaller than you think. The smallest possible version."></textarea>
+      <div class="step-nav">
+        <button class="btn-next" onclick="advance(5)">Next &rarr;</button>
+      </div>
+    </div>
+
+    <!-- Step 6 -->
+    <div class="step-card" id="step-6">
+      <div class="step-meta">Step 6 of 6</div>
+      <div class="step-question">Write the exact first action. Time it. Date it.</div>
+      <div class="date-row">
+        <textarea id="ans-6" placeholder="The exact action. Not a plan — the first move."></textarea>
+        <input type="date" id="action-date">
+      </div>
+      <div class="step-nav">
+        <button class="btn-next" onclick="advance(6)">Complete the Map &rarr;</button>
+      </div>
+    </div>
+
+    <!-- Completion -->
+    <div class="completion-card" id="completion-card">
+      <p>"The map is drawn. The only step left is the first one."</p>
+    </div>
+
+  </div>
+      <div id="somatic-result-link"></div>
+
+  <div class="cta-banner">
+    <p>Want the full system?</p>
+    <h3>Fear to Fire Collection: Jump Scared — $0.99</h3>
+    <a class="btn-cta" href="https://brand-admin-onboarding.pages.dev/download/way_stream_sanctuary__default_teacher__corporate_managers__courage__false_alarm" rel="noopener">Get Book 1 for $0.99</a>
+  </div>
+
+  <footer>A free tool from Waystream Sanctuary — Inner Light Press</footer>
+</div>
+
+<script>
+  document.getElementById('capture-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    // GA4 lead_submit
+    if (typeof gtag === 'function') {
+      gtag('event', 'lead_submit', {
+        event_category: 'funnel',
+        event_label: 'courage-decision-map',
+        topic: 'courage',
+        value: 0
+      });
+    }
+
+    document.getElementById('capture-section').style.display = 'none';
+    document.getElementById('tool-section').classList.add('visible');
+  });
+
+  let currentStep = 1;
+  const totalSteps = 6;
+
+  function revealPendingResult() {
+    document.getElementById('completion-card').classList.add('visible');
+    if (window.PhoenixFunnel) {
+      PhoenixFunnel.injectSomaticResultLink('somatic-result-link', 'ex15_intention_quadrant.html', 'Try the intention quadrant I use before hard decisions');
+    }
+  }
+
+  function completeMap() {
+    if (window.PhoenixLead && PhoenixLead.shouldShowEmailGate()) {
+      document.getElementById('email-gate-section').style.display = 'block';
+      return;
+    }
+    revealPendingResult();
+  }
+
+  function advance(fromStep) {
+    // Mark current pip done
+    document.getElementById('pip-' + fromStep).classList.remove('active');
+    document.getElementById('pip-' + fromStep).classList.add('done');
+    document.getElementById('step-' + fromStep).classList.remove('visible');
+
+    if (fromStep >= totalSteps) {
+      completeMap();
+      return;
+    }
+
+    const next = fromStep + 1;
+    currentStep = next;
+    document.getElementById('pip-' + next).classList.add('active');
+    document.getElementById('step-' + next).classList.add('visible');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+
+<link rel="stylesheet" href="/free/js/phoenix_tool.css">
+<script src="/free/js/phoenix_lead.js"></script>
+<script src="/free/js/phoenix_funnel.js"></script>
+
+<!-- PHOENIX_FLAGSHIP_BOOTSTRAP -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  if (!window.PhoenixFunnel) return;
+  PhoenixFunnel.initSkipFormIfCaptured('capture-section', 'tool-section', function() {});
+  PhoenixFunnel.bindEmailBeforeResult({
+    topic: 'courage',
+    funnelSlug: 'courage-decision-map',
+    quizId: 'decision_resistance_map',
+    onSuccess: function() { if (typeof revealPendingResult === 'function') revealPendingResult(); }
+  });
+});
+</script>
+</body>
+</html>

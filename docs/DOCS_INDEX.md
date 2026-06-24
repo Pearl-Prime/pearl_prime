@@ -1549,6 +1549,11 @@ Landing page (6 sections), form capture, 4–5 email Proof-Loop sequence (Brevo 
 | **GHL handoff** | [funnel/burnout_reset/GHL_HANDBOFF.md](../funnel/burnout_reset/GHL_HANDBOFF.md) — API key, Location ID, payload table, custom field UUIDs (GHL uses UUIDs not strings), who sends email (ghl vs smtp). |
 | **GHL admin handoff (freebie quizzes)** | [docs/GHL_ADMIN_HANDOFF_FREEBIE_CAPTURE.md](./GHL_ADMIN_HANDOFF_FREEBIE_CAPTURE.md) — quiz webhook appendix |
 | **GHL admin start (full package)** | [docs/ghl/GHL_ADMIN_START_HERE.md](./ghl/GHL_ADMIN_START_HERE.md) — **forward to GHL admin first** |
+| **GHL operator handoff (per brand)** | [docs/handoffs/OPERATOR_GHL_FREEBIE.md](./handoffs/OPERATOR_GHL_FREEBIE.md) — Stillness / Devotion Path / Waystream packages |
+| **GHL multi-brand funnel workflow** | [docs/handoffs/GHL_MULTI_BRAND_FUNNEL_WORKFLOW.md](./handoffs/GHL_MULTI_BRAND_FUNNEL_WORKFLOW.md) — engineering → R2 → CF Pages → GHL → weekly ops |
+| **GHL total handoff — Stillness** | [docs/handoffs/GHL_TOTAL_INTEGRATION_HANDOFF_20260623.md](./handoffs/GHL_TOTAL_INTEGRATION_HANDOFF_20260623.md) |
+| **GHL total handoff — Devotion Path** | [docs/handoffs/GHL_TOTAL_INTEGRATION_HANDOFF_DEVOTION_PATH_20260624.md](./handoffs/GHL_TOTAL_INTEGRATION_HANDOFF_DEVOTION_PATH_20260624.md) |
+| **GHL total handoff — Waystream** | [docs/handoffs/GHL_TOTAL_INTEGRATION_HANDOFF_WAYSTREAM_20260624.md](./handoffs/GHL_TOTAL_INTEGRATION_HANDOFF_WAYSTREAM_20260624.md) |
 | **GHL integration guide** | [docs/GHL_INTEGRATION_GUIDE.md](./GHL_INTEGRATION_GUIDE.md) — feed v3, merge tags, setup |
 | **Proof Loop workflow template** | [docs/ghl/PROOF_LOOP_WORKFLOW_TEMPLATE.md](./ghl/PROOF_LOOP_WORKFLOW_TEMPLATE.md) — WF1–WF4 import |
 | **Funnel email automation map** | [docs/FUNNEL_EMAIL_AUTOMATION_MAP.md](./FUNNEL_EMAIL_AUTOMATION_MAP.md) — tier bundles, slots, variants |

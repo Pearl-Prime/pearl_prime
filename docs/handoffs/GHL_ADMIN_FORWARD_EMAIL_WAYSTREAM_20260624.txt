@@ -1,0 +1,62 @@
+Subject: GHL setup — Waystream Sanctuary — feed + 15 free tools
+
+Hi,
+
+One-time GHL setup for **Waystream Sanctuary** — no teacher byline, persona **corporate managers**. Book offers use our **download proxy** (not pearlprime.shop teacher SKUs).
+
+---
+
+## 1) Weekly email feed (Proof Loop E1–E5)
+
+- Import workflows **WF1–WF4** (steps in attached PROOF_LOOP_WORKFLOW_TEMPLATE.md)
+- Paste this feed URL (same path every Monday; Phoenix replaces the JSON each week):
+
+```
+https://pub-4bac5d0b30be4b16824cd1eaa84ae9f5.r2.dev/pearl-prime-content/way_stream_sanctuary/en_US/{week}/marketing_feed.json
+```
+
+Example this week (2026-W26):
+
+```
+https://pub-4bac5d0b30be4b16824cd1eaa84ae9f5.r2.dev/pearl-prime-content/way_stream_sanctuary/en_US/2026-W26/marketing_feed.json
+```
+
+- Map **3 fields** on each feed item: `cta_url`, `pricing`, `content_type`
+- Full schema and merge tags: attached GHL_INTEGRATION_GUIDE.md
+
+**Feed notes (Waystream):**
+- E1 funnel URLs use brand-prefixed paths: `/free/way_stream_sanctuary/{slug}/`
+- E4 paid offers use `/download/...` proxy URLs (not pearlprime.shop)
+- Grief topic is template-only (no book CTA in feed)
+- No Stillness Press, Sai Maa, or `_ahjan` branding in Waystream pages or feed copy
+
+---
+
+## 2) Funnel capture (15 interactive pages)
+
+- Base path: `https://brand-admin-onboarding.pages.dev/free/way_stream_sanctuary/`
+- Create **one Inbound Webhook** workflow for all 15 quiz/tool landings
+- Map JSON fields per attached GHL_ADMIN_HANDOFF_FREEBIE_CAPTURE.md
+
+---
+
+## Attachments (4)
+
+1. ghl/GHL_ADMIN_START_HERE.md
+2. GHL_INTEGRATION_GUIDE.md
+3. ghl/PROOF_LOOP_WORKFLOW_TEMPLATE.md
+4. GHL_ADMIN_HANDOFF_FREEBIE_CAPTURE.md
+
+---
+
+## Please reply with
+
+```
+PHOENIX_GHL_FUNNEL_WEBHOOK_WAYSTREAM=https://services.leadconnectorhq.com/hooks/...
+Feed URL confirmed: yes
+Sub-account name:
+Workflows published: yes/no
+Test contact created: yes/no
+```
+
+Thanks!

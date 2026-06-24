@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Social Energy Toolkit — Open Vessel Press</title>
+  <meta name="description" content="Three tools for the before, during, and after. Your alarm system is miscalibrated. Here's the recalibration.">
+  <meta property="og:title" content="The Social Energy Toolkit — Open Vessel Press">
+  <meta property="og:description" content="Pre/during/post social event protocol. Your alarm system is miscalibrated. Here's the recalibration.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #0A0A0F;
+      color: #F0EFE8;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 48px 20px 60px;
+    }
+
+    .brand-tag {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #8B8A82;
+      margin-bottom: 32px;
+    }
+
+    h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(34px, 6vw, 50px);
+      font-weight: 500;
+      line-height: 1.15;
+      color: #F0EFE8;
+      margin-bottom: 16px;
+    }
+
+    .subhead {
+      color: #8B8A82;
+      font-size: 16px;
+      margin-bottom: 40px;
+    }
+
+    .card {
+      background: #13131A;
+      border-radius: 12px;
+      padding: 32px;
+      margin-bottom: 24px;
+    }
+
+    .form-group { margin-bottom: 20px; }
+
+    label.field-label {
+      display: block;
+      font-size: 14px;
+      color: #8B8A82;
+      margin-bottom: 8px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    textarea {
+      width: 100%;
+      background: #1A1A24;
+      border: 1px solid #2A2A3A;
+      color: #F0EFE8;
+      border-radius: 8px;
+      padding: 12px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    input:focus, textarea:focus { border-color: #3B82F6; }
+    textarea { resize: vertical; min-height: 100px; }
+
+    .btn {
+      background: #3B82F6;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 12px 24px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.2s;
+      width: 100%;
+    }
+    .btn:hover { background: #2563EB; }
+
+    #tool-section { display: none; }
+
+    /* Tabs */
+    .tab-nav {
+      display: flex;
+      gap: 4px;
+      background: #0A0A0F;
+      border-radius: 10px;
+      padding: 4px;
+      margin-bottom: 28px;
+    }
+
+    .tab-btn {
+      flex: 1;
+      background: transparent;
+      border: none;
+      color: #8B8A82;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      padding: 10px 8px;
+      border-radius: 7px;
+      cursor: pointer;
+      transition: all 0.2s;
+      letter-spacing: 0.03em;
+    }
+
+    .tab-btn.active {
+      background: #13131A;
+      color: #F0EFE8;
+    }
+
+    .tab-btn:hover:not(.active) { color: #F0EFE8; }
+
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    /* Checklist */
+    .checklist-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 14px 0;
+      border-bottom: 1px solid #1E1E28;
+      cursor: pointer;
+    }
+
+    .checklist-item:last-child { border-bottom: none; }
+
+    .check-box {
+      width: 20px;
+      height: 20px;
+      min-width: 20px;
+      border: 1px solid #2A2A3A;
+      border-radius: 4px;
+      background: #1A1A24;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 2px;
+      transition: all 0.2s;
+    }
+
+    .check-box.checked {
+      background: #3B82F6;
+      border-color: #3B82F6;
+    }
+
+    .check-box.checked::after {
+      content: '';
+      width: 10px;
+      height: 6px;
+      border-left: 2px solid white;
+      border-bottom: 2px solid white;
+      transform: rotate(-45deg) translateY(-1px);
+    }
+
+    .checklist-text {
+      font-size: 15px;
+      color: #F0EFE8;
+      transition: color 0.2s;
+    }
+
+    .checklist-item.done .checklist-text {
+      color: #8B8A82;
+      text-decoration: line-through;
+    }
+
+    /* Tool cards */
+    .tool-card {
+      background: #1A1A24;
+      border: 1px solid #2A2A3A;
+      border-radius: 10px;
+      padding: 22px;
+      margin-bottom: 14px;
+    }
+
+    .tool-card:last-child { margin-bottom: 0; }
+
+    .tool-name {
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #3B82F6;
+      margin-bottom: 10px;
+    }
+
+    .tool-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px;
+      font-weight: 500;
+      color: #F0EFE8;
+      margin-bottom: 12px;
+    }
+
+    .tool-steps {
+      font-size: 15px;
+      color: #8B8A82;
+      line-height: 1.7;
+    }
+
+    .debrief-prompt {
+      margin-bottom: 22px;
+    }
+
+    .debrief-prompt p {
+      font-size: 15px;
+      color: #F0EFE8;
+      margin-bottom: 10px;
+    }
+
+    .debrief-note {
+      font-size: 13px;
+      color: #8B8A82;
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid #1E1E28;
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 500;
+      margin-bottom: 6px;
+    }
+
+    .section-subtitle {
+      font-size: 13px;
+      color: #8B8A82;
+      margin-bottom: 24px;
+    }
+
+    .cta-banner {
+      background: linear-gradient(135deg, #13131A 0%, #1A1A2E 100%);
+      border: 1px solid #2A2A3A;
+      border-radius: 12px;
+      padding: 32px;
+      margin-top: 40px;
+      text-align: center;
+    }
+
+    .cta-label {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #8B8A82;
+      margin-bottom: 12px;
+    }
+
+    .cta-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 26px;
+      font-weight: 500;
+      color: #F0EFE8;
+      margin-bottom: 8px;
+      line-height: 1.3;
+    }
+
+    .cta-subtitle {
+      color: #8B8A82;
+      font-size: 14px;
+      margin-bottom: 24px;
+    }
+
+    .cta-btn {
+      display: inline-block;
+      background: #3B82F6;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 12px 32px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.2s;
+      text-decoration: none;
+    }
+
+    .cta-btn:hover { background: #2563EB; }
+
+    footer {
+      margin-top: 48px;
+      padding-top: 24px;
+      border-top: 1px solid #1E1E28;
+      text-align: center;
+      font-size: 13px;
+      color: #8B8A82;
+    }
+
+    .error-msg {
+      color: #EF4444;
+      font-size: 13px;
+      margin-top: 8px;
+      display: none;
+    }
+  </style>
+  <!-- GA4 — owner: replace G-PLACEHOLDER with real measurement ID from Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PLACEHOLDER"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-PLACEHOLDER');
+    // Capture UTM params for attribution
+    (function(){
+      var params = new URLSearchParams(window.location.search);
+      var utm = {};
+      ['utm_source','utm_medium','utm_campaign','utm_content','utm_term'].forEach(function(k){
+        if(params.get(k)) utm[k] = params.get(k);
+      });
+      if(Object.keys(utm).length) sessionStorage.setItem('funnel_utm', JSON.stringify(utm));
+    })();
+  </script>
+</head>
+<body data-brand-id="devotion_path" data-topic="social_anxiety" data-funnel-slug="social-anxiety-toolkit" data-ghl-webhook="">
+  <div class="container">
+    <div class="brand-tag">Open Vessel Press — Inner Light Press</div>
+
+    <h1>Three tools for the before, during, and after.</h1>
+    <p class="subhead">Your alarm system is miscalibrated. Here's the recalibration.</p>
+
+    <!-- EMAIL CAPTURE -->
+    <div id="form-section" class="card">
+      <p style="font-size:15px; color:#8B8A82; margin-bottom:24px;">Get the full Social Energy Toolkit — three tools for every stage of a social event.</p>
+      <div class="form-group">
+        <label class="field-label" for="name">First name</label>
+        <input type="text" id="name" placeholder="Your name">
+      </div>
+      <div class="form-group">
+        <label class="field-label" for="email">Email</label>
+        <input type="email" id="email" placeholder="your@email.com">
+      </div>
+      <p id="form-error" class="error-msg">Please enter your name and a valid email.</p>
+      <button class="btn" onclick="submitForm()">Access The Social Energy Toolkit</button>
+    </div>
+
+    <!-- TOOL SECTION -->
+    <div id="tool-section">
+      <div class="card">
+        <div class="tab-nav">
+          <button class="tab-btn active" onclick="switchTab('before', this)">Before</button>
+          <button class="tab-btn" onclick="switchTab('during', this)">During</button>
+          <button class="tab-btn" onclick="switchTab('after', this)">After</button>
+        </div>
+
+        <!-- TAB: BEFORE -->
+        <div id="tab-before" class="tab-panel active">
+          <div class="section-title">Pre-Event Protocol</div>
+          <div class="section-subtitle">Run through this before you walk in.</div>
+          <div id="checklist">
+            <div class="checklist-item" onclick="toggleCheck(this)">
+              <div class="check-box"></div>
+              <div class="checklist-text">Set a clear exit time in your head (even if you don't use it)</div>
+            </div>
+            <div class="checklist-item" onclick="toggleCheck(this)">
+              <div class="check-box"></div>
+              <div class="checklist-text">Name one thing you're genuinely curious about tonight</div>
+            </div>
+            <div class="checklist-item" onclick="toggleCheck(this)">
+              <div class="check-box"></div>
+              <div class="checklist-text">3 slow breaths — exhale longer than inhale</div>
+            </div>
+            <div class="checklist-item" onclick="toggleCheck(this)">
+              <div class="check-box"></div>
+              <div class="checklist-text">Remind yourself: most people are thinking about themselves, not you</div>
+            </div>
+            <div class="checklist-item" onclick="toggleCheck(this)">
+              <div class="check-box"></div>
+              <div class="checklist-text">Set a low-stakes intention: "I will have one real conversation"</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB: DURING -->
+        <div id="tab-during" class="tab-panel">
+          <div class="section-title">In-the-Moment Tools</div>
+          <div class="section-subtitle">When the alarm fires, reach for one of these.</div>
+
+          <div class="tool-card">
+            <div class="tool-name">Tool A</div>
+            <div class="tool-title">The Alarm Check</div>
+            <div class="tool-steps">Name it: "My alarm fired."<br>Ask: Is there an actual threat?<br>Usually no.<br>Breathe.</div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-name">Tool B</div>
+            <div class="tool-title">The Exit Breath</div>
+            <div class="tool-steps">Step away. Outside, bathroom, anywhere.<br>4 counts in, 6 counts out.<br>Return when ready.</div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-name">Tool C</div>
+            <div class="tool-title">The One Person</div>
+            <div class="tool-steps">Find one person. Have one real exchange.<br>One is enough.<br>You don't need the whole room.</div>
+          </div>
+        </div>
+
+        <!-- TAB: AFTER -->
+        <div id="tab-after" class="tab-panel">
+          <div class="section-title">Post-Event Debrief</div>
+          <div class="section-subtitle">This is where the recalibration actually happens.</div>
+
+          <div class="debrief-prompt">
+            <p>What actually happened vs. what you feared would happen?</p>
+            <textarea placeholder="Write both sides honestly..."></textarea>
+          </div>
+
+          <div class="debrief-prompt">
+            <p>Name one moment that went better than expected.</p>
+            <textarea placeholder="Even something small counts..."></textarea>
+          </div>
+
+          <div class="debrief-note">
+            The debrief retrains the alarm by giving it accurate data.
+          </div>
+        </div>
+      </div>
+
+      <div class="cta-banner">
+        <div class="cta-label">Want the full system?</div>
+        <div class="cta-title">The Brave Room Series:<br>Brave Enough to Show Up</div>
+        <div class="cta-subtitle">Get Book 1 for $0.99</div>
+        <a href="https://pearlprime.shop/en-US/book/devotion_path/social_anxiety_working_parents_sai_ma" rel="noopener" class="cta-btn">Get the Book — $0.99</a>
+      </div>
+    </div>
+
+    <footer>A free tool from Open Vessel Press — Inner Light Press</footer>
+  </div>
+
+  <script>
+    function submitForm() {
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!name || !emailRe.test(email)) {
+        document.getElementById('form-error').style.display = 'block';
+        return;
+      }
+      function revealTool() {
+        document.getElementById('form-section').style.display = 'none';
+        document.getElementById('tool-section').style.display = 'block';
+      }
+      if (!window.PhoenixLead) {
+        revealTool();
+        return;
+      }
+      PhoenixLead.captureLead({
+        email: email,
+        first_name: name,
+        topic: 'social_anxiety',
+        funnel_slug: 'social-anxiety-toolkit',
+        quiz_id: 'pre_event_protocol',
+        score: null,
+        score_band: null,
+        tags: ['source_freebie_quiz', 'quiz_social_anxiety', 'freebie_captured']
+      }).then(revealTool).catch(revealTool);
+    }
+
+    function switchTab(tabId, btn) {
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById('tab-' + tabId).classList.add('active');
+      btn.classList.add('active');
+    }
+
+    function toggleCheck(item) {
+      item.classList.toggle('done');
+      item.querySelector('.check-box').classList.toggle('checked');
+    }
+  </script>
+<link rel="stylesheet" href="/free/js/phoenix_tool.css">
+<script src="/free/js/phoenix_lead.js"></script>
+<script src="/free/js/phoenix_funnel.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  if (!window.PhoenixFunnel) return;
+  PhoenixFunnel.initSkipFormIfCaptured('form-section', 'tool-section', function() {});
+});
+</script>
+</body>
+</html>

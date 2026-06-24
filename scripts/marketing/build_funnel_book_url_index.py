@@ -46,6 +46,48 @@ def _book_url(locale: str, brand: str, inner_key: str, product_type: str) -> str
     return f"https://{STOREFRONT_BASE}/{url_locale}/{product_type}/{brand}/{inner_key}"
 
 
+def _merge_brand_catalog_urls(
+    loc_topics: dict,
+    *,
+    brand_id: str,
+    locale: str,
+    funnel_topics: set[str],
+    landing_base: str = "https://brand-admin-onboarding.pages.dev",
+) -> None:
+    """Add topic×persona URLs from brand-wizard catalog JSON (e.g. way_stream_sanctuary)."""
+    catalog_path = REPO_ROOT / f"brand-wizard-app/public/brand_catalogs/{brand_id}.json"
+    if not catalog_path.exists():
+        return
+    data = json.loads(catalog_path.read_text(encoding="utf-8"))
+    books = data.get("books") or []
+    seen: set[tuple[str, str]] = set()
+    for book in books:
+        book_id = str(book.get("book_id") or book.get("file_stem") or "")
+        if not book_id or book_id.endswith("__1hr"):
+            continue
+        parts = book_id.split("__")
+        if len(parts) < 5:
+            continue
+        persona = parts[2]
+        topic = parts[3]
+        if topic not in funnel_topics:
+            continue
+        key = (topic, persona)
+        if key in seen:
+            continue
+        seen.add(key)
+        entry = {
+            "brand_id": brand_id,
+            "teacher_id": parts[1] if parts[1] != "default_teacher" else "",
+            "inner_key": book_id,
+            "title": str(book.get("title") or ""),
+            "book_url": f"{landing_base.rstrip('/')}/download/{book_id}",
+            "audiobook_url": None,
+            "sku_id": book_id,
+        }
+        loc_topics.setdefault(topic, {}).setdefault(persona, {})[brand_id] = entry
+
+
 def build_index(locales: list[str] | None = None) -> dict:
     funnel_topics = _load_yaml_topics()
     locales_out: dict = {}
@@ -88,6 +130,14 @@ def build_index(locales: list[str] | None = None) -> dict:
                 "sku_id": f"book_{loc}_{brand}_{ik}",
             }
             loc_topics.setdefault(topic, {}).setdefault(persona, {})[brand] = entry
+
+        if loc == "en_US":
+            _merge_brand_catalog_urls(
+                loc_topics,
+                brand_id="way_stream_sanctuary",
+                locale=loc,
+                funnel_topics=funnel_topics,
+            )
 
         locales_out[loc] = loc_topics
 
