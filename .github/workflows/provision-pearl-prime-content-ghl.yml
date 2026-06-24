@@ -46,11 +46,15 @@ jobs:
 
       - name: Create bucket + public r2.dev URL
         run: |
-          set +e
+          set -euo pipefail
           BUCKET="pearl-prime-content"
           wrangler r2 bucket list | grep -q "^${BUCKET}$" || wrangler r2 bucket create "${BUCKET}"
           wrangler r2 bucket dev-url enable "${BUCKET}" 2>/dev/null || true
-          CDN="$(wrangler r2 bucket dev-url get "${BUCKET}" 2>/dev/null | grep -Eo 'https://[^ ]+' | tail -1)"
+          CDN="$(wrangler r2 bucket dev-url get "${BUCKET}" 2>/dev/null | grep -Eo 'https://pub-[a-f0-9]+\.r2\.dev' | tail -1)"
+          if [[ -z "${CDN}" ]]; then
+            echo "ERROR: no pub-*.r2.dev URL — token needs R2 Edit permissions" >&2
+            exit 1
+          fi
           echo "CDN_BASE=${CDN}" >> "$GITHUB_ENV"
           echo "## R2 bucket: ${BUCKET}" >> "$GITHUB_STEP_SUMMARY"
           echo "CDN base: **${CDN}**" >> "$GITHUB_STEP_SUMMARY"
@@ -69,7 +73,7 @@ jobs:
           FEED="artifacts/marketing_feed/${BRAND}/${LOCALE}/$(ls artifacts/marketing_feed/${BRAND}/${LOCALE})/marketing_feed.json"
           WEEK="$(basename "$(dirname "$FEED")")"
           OBJ_KEY="pearl-prime-content/${BRAND}/${LOCALE}/${WEEK}/marketing_feed.json"
-          wrangler r2 object put "pearl-prime-content/${OBJ_KEY}" --file "$FEED" --content-type application/json
+          wrangler r2 object put "pearl-prime-content/${OBJ_KEY}" --file "$FEED" --content-type application/json --remote
           echo "FEED_KEY=${OBJ_KEY}" >> "$GITHUB_ENV"
           echo "Week: ${WEEK}" >> "$GITHUB_STEP_SUMMARY"
 

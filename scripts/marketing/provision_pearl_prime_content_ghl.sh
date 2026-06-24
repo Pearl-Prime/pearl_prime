@@ -31,8 +31,14 @@ fi
 echo "--- public r2.dev URL ---"
 set +e
 $WR r2 bucket dev-url enable "${BUCKET}" 2>/dev/null
-CDN_BASE="$($WR r2 bucket dev-url get "${BUCKET}" 2>/dev/null | grep -Eo 'https://[^ ]+' | tail -1)"
+CDN_BASE="$($WR r2 bucket dev-url get "${BUCKET}" 2>/dev/null | grep -Eo 'https://pub-[a-f0-9]+\.r2\.dev' | tail -1)"
 set -e
+
+if [[ -z "${CDN_BASE}" || ! "${CDN_BASE}" =~ ^https://pub-[a-f0-9]+\.r2\.dev$ ]]; then
+  echo "ERROR: could not resolve pub-*.r2.dev CDN URL for bucket ${BUCKET}" >&2
+  echo "Check CLOUDFLARE_API_TOKEN has Account → R2 → Edit permissions." >&2
+  exit 1
+fi
 
 if [[ -n "${CDN_BASE}" ]]; then
   echo "CDN base: ${CDN_BASE}"
@@ -51,7 +57,7 @@ WEEK="$(basename "${FEED_DIR%/}")"
 OBJ_KEY="pearl-prime-content/${BRAND}/${LOCALE}/${WEEK}/marketing_feed.json"
 
 echo "--- upload ${FEED} ---"
-$WR r2 object put "${BUCKET}/${OBJ_KEY}" --file "${FEED}" --content-type application/json
+$WR r2 object put "${BUCKET}/${OBJ_KEY}" --file "${FEED}" --content-type application/json --remote
 
 if [[ -n "${CDN_BASE}" ]]; then
   PUBLIC="${CDN_BASE}/${OBJ_KEY}"
