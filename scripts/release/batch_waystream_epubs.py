@@ -14,6 +14,8 @@ Outputs: artifacts/weekly_packages/way_stream_sanctuary/{week}/amazon_kdp/{book_
   PYTHONPATH=. python3 scripts/release/cadence_reslice_deliveries.py \\
       --brand-dir artifacts/weekly_packages/way_stream_sanctuary --from-week 2026-W26 --platform amazon_kdp --lane en
   PYTHONPATH=. python3 scripts/onboarding/gen_brand_deliveries.py
+  PYTHONPATH=. python3 scripts/storefront/project_waystream_skus.py
+  PYTHONPATH=. python3 scripts/release/finish_waystream_handoff.py   # all-in-one post-batch
 """
 from __future__ import annotations
 
@@ -22,6 +24,7 @@ import json
 import os
 import subprocess
 import sys
+from concurrent.futures import ProcessPoolExecutor, as_completed
 from datetime import date
 from pathlib import Path
 
@@ -36,6 +39,8 @@ RENDERED = REPO / "artifacts/rendered/waystream_batch"
 STATE = REPO / "artifacts/waystream/batch_epub_state.json"
 PILOT_N = 18
 IMPRINT = "Waystream Sanctuary"
+PIPELINE_TIMEOUT_SEC = int(os.environ.get("WAYSTREAM_PIPELINE_TIMEOUT_SEC", "300"))
+DEFAULT_WORKERS = min(8, os.cpu_count() or 4)
 
 _RUNTIME_ALIASES = {
     "standard_book_60min": "standard_book",
@@ -201,7 +206,7 @@ def run_one(plan: dict, week: str, dry_run: bool, force: bool) -> dict:
         "--seed", bid,
     ]
     r = subprocess.run(cmd, cwd=str(REPO), env=_pipeline_env(),
-                       capture_output=True, text=True, timeout=7200)
+                       capture_output=True, text=True, timeout=PIPELINE_TIMEOUT_SEC)
     if r.returncode != 0:
         return {"book_id": bid, "status": "pipeline_fail", "error": (r.stderr or r.stdout)[-500:]}
 
@@ -234,6 +239,11 @@ def run_one(plan: dict, week: str, dry_run: bool, force: bool) -> dict:
     return {"book_id": bid, "status": "ok", "path": str(out_epub), "size": out_epub.stat().st_size}
 
 
+def _run_one_job(job: tuple[dict, str, bool, bool]) -> dict:
+    plan, week, dry_run, force = job
+    return run_one(plan, week, dry_run, force)
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--pilot", action="store_true", help=f"first {PILOT_N} books only")
@@ -243,6 +253,12 @@ def main() -> int:
     ap.add_argument("--force", action="store_true", help="rebuild even if EPUB exists")
     ap.add_argument("--week", default=None, help="ISO week folder (default: current week)")
     ap.add_argument("--offset", type=int, default=0)
+    ap.add_argument(
+        "--workers",
+        type=int,
+        default=int(os.environ.get("WAYSTREAM_BATCH_WORKERS", str(DEFAULT_WORKERS))),
+        help=f"parallel workers (default {DEFAULT_WORKERS})",
+    )
     args = ap.parse_args()
     if not args.pilot and not args.all:
         ap.error("specify --pilot or --all")
@@ -250,15 +266,45 @@ def main() -> int:
     limit = PILOT_N if args.pilot else None
     books = load_books(limit=limit, offset=args.offset)
     week = args.week or _iso_week()
-    results = []
+    jobs: list[tuple[dict, str, bool, bool]] = []
     for _, plan in books:
-        results.append(run_one(plan, week, args.dry_run, force=args.force))
+        if args.resume:
+            out_epub = REPO / "artifacts/weekly_packages" / BRAND / week / "amazon_kdp" / f"{plan['book_id']}.epub"
+            if out_epub.is_file() and not args.force:
+                continue
+        jobs.append((plan, week, args.dry_run, args.force))
+
+    results: list[dict] = []
+    workers = max(1, args.workers)
+    print(f"batch: week={week} pending={len(jobs)} workers={workers}", flush=True)
+    if workers == 1:
+        for job in jobs:
+            results.append(_run_one_job(job))
+    else:
+        with ProcessPoolExecutor(max_workers=workers) as pool:
+            futs = {pool.submit(_run_one_job, j): j[0]["book_id"] for j in jobs}
+            for fut in as_completed(futs):
+                bid = futs[fut]
+                try:
+                    results.append(fut.result())
+                except Exception as exc:
+                    results.append({"book_id": bid, "status": "worker_fail", "error": str(exc)[-500:]})
 
     STATE.parent.mkdir(parents=True, exist_ok=True)
-    STATE.write_text(json.dumps({"week": week, "results": results}, indent=2), encoding="utf-8")
-    ok = sum(1 for r in results if r["status"] in ("ok", "skip_exists", "dry_run"))
-    fail = [r for r in results if r["status"] not in ("ok", "skip_exists", "dry_run")]
-    print(f"batch: n={len(results)} ok={ok} fail={len(fail)} week={week}")
+    merged = results
+    if args.resume and STATE.is_file():
+        try:
+            prev = json.loads(STATE.read_text(encoding="utf-8"))
+            by_id = {r["book_id"]: r for r in prev.get("results", []) if r.get("book_id")}
+            for r in results:
+                by_id[r["book_id"]] = r
+            merged = list(by_id.values())
+        except (json.JSONDecodeError, OSError):
+            merged = results
+    STATE.write_text(json.dumps({"week": week, "results": merged}, indent=2), encoding="utf-8")
+    ok = sum(1 for r in merged if r["status"] in ("ok", "skip_exists", "dry_run"))
+    fail = [r for r in merged if r["status"] not in ("ok", "skip_exists", "dry_run")]
+    print(f"batch: n={len(merged)} ok={ok} fail={len(fail)} week={week}")
     for r in fail[:10]:
         print(f"  FAIL {r['book_id']}: {r.get('error') or r['status']}")
     return 1 if fail else 0

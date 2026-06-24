@@ -1,0 +1,43 @@
+# Upload Waystream EPUBs (>1 MB) to R2 and refresh presigned URLs in the delivery feed.
+# EPUBs are built locally (not in git — no-binary-blobs cap). After batch + handoff:
+#   1. artifacts/weekly_packages/way_stream_sanctuary/ populated on runner artifact OR
+#      operator syncs weekly_packages before dispatch.
+#   2. workflow_dispatch with synced tree checked out (manual path for now).
+name: Waystream deliveries R2 upload
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install boto3
+        run: pip install boto3 pyyaml
+
+      - name: Upload EPUBs to R2 and patch delivery feed
+        env:
+          R2_ACCOUNT_ID: ${{ secrets.R2_ACCOUNT_ID }}
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          R2_BUCKET: ${{ secrets.R2_BUCKET }}
+          PYTHONPATH: .
+        run: |
+          if [ ! -d artifacts/weekly_packages/way_stream_sanctuary ]; then
+            echo "No weekly_packages tree on runner — sync artifacts before dispatch."
+            exit 1
+          fi
+          PYTHONPATH=. python3 scripts/onboarding/gen_brand_deliveries.py || \
+            GEN_BRAND_DELIVERIES_ALLOW_OVERFLOW=1 PYTHONPATH=. python3 scripts/onboarding/gen_brand_deliveries.py
+          PYTHONPATH=. python3 scripts/release/upload_waystream_deliveries_r2.py
+          PYTHONPATH=. python3 scripts/storefront/project_waystream_skus.py

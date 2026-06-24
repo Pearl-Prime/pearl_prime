@@ -32,6 +32,9 @@ SAFE_VELOCITY = REPO / "config" / "release_velocity" / "safe_velocity.yaml"
 
 CONTENT_EXT = {".epub", ".pdf", ".mp3", ".m4b", ".png", ".cue", ".md"}  # real content; skip .zip + README.txt
 MAX_BYTES = 25 * 1024 * 1024  # keep the static deploy lean
+# Repo CI (no-binary-blobs.yml) rejects new binary blobs > 1 MB. Oversize EPUBs are
+# uploaded to R2 by scripts/release/upload_waystream_deliveries_r2.py instead.
+GIT_PUBLISH_MAX = 1_048_576
 
 # ── Release-cadence guard (SSOT: config/release_velocity/safe_velocity.yaml) ──
 # A brand's books must NOT all dump into one week. This builder mirrors whatever
@@ -154,6 +157,9 @@ def main() -> None:
             for plat, files in plats.items():
                 for entry in files:
                     src = Path(entry.pop("src"))
+                    if src.stat().st_size > GIT_PUBLISH_MAX:
+                        # Feed entry stays; R2 upload patches url for large EPUBs.
+                        continue
                     dest = DELIV / base / week / plat / entry["file"]
                     dest.parent.mkdir(parents=True, exist_ok=True)
                     shutil.copy2(src, dest)

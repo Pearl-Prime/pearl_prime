@@ -32,7 +32,7 @@ def main() -> int:
     if STATE.is_file():
         week = json.loads(STATE.read_text(encoding="utf-8")).get("week") or week
 
-    books = load_books(limit=PILOT_N)
+    books = load_books()
     results = []
     for _, plan in books:
         if plan["book_id"] not in fail_ids:

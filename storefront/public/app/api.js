@@ -7,9 +7,26 @@ const _samples = {};
 
 async function sample(locale = "en-US") {
   if (!_samples[locale]) {
+    let base = [];
     let r = null;
     try { r = await fetch(`./app/sample_catalog.${locale}.json`); } catch (_) { r = null; }
-    _samples[locale] = (r && r.ok) ? await r.json() : [];
+    if (r && r.ok) base = await r.json();
+    // Waystream Sanctuary wave (800-book imprint) — merged when the handoff feed exists.
+    if (locale === "en-US") {
+      try {
+        const wr = await fetch("./app/sample_catalog.way_stream_sanctuary.en-US.json");
+        if (wr && wr.ok) {
+          const extra = await wr.json();
+          if (Array.isArray(extra) && extra.length) {
+            const seen = new Set(base.map((s) => s.sku_id));
+            for (const row of extra) {
+              if (!seen.has(row.sku_id)) base.push(row);
+            }
+          }
+        }
+      } catch (_) { /* optional feed */ }
+    }
+    _samples[locale] = base;
   }
   return _samples[locale];
 }
