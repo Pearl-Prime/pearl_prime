@@ -3,7 +3,7 @@
 // phoenix-omega-artifacts lives on the operator R2 account while Pages deploys to
 // the b80152c3 GitHub Actions account.
 
-import { AwsClient } from "https://esm.sh/aws4fetch@1.0.20";
+import { AwsClient } from "../_lib/aws4fetch.js";
 
 const BRAND = "way_stream_sanctuary";
 const BOOK_ID_RE = /^way_stream_sanctuary__[a-z0-9_]+$/i;
