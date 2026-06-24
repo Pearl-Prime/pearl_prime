@@ -171,7 +171,14 @@ curl -s "https://brand-admin-onboarding.pages.dev/free/way_stream_sanctuary/burn
 
 Pages ship with `data-ghl-webhook=""` until Phase 5.
 
-**Deploy note (2026-06-24):** Post-#1897 deploy failed when R2 secret sync hit a Cloudflare API auth error before `pages deploy` ran. Fixed with `continue-on-error` on secret sync; re-trigger via merge or `workflow_dispatch`.
+**Deploy note (2026-06-24):** Post-#1897 deploy failed with Cloudflare API auth error `10000` — `CLOUDFLARE_API_TOKEN` resolved to operator personal account, not `b80152c3`. Workflow now prefers `CLOUDFLARE_API_TOKEN_PAGES`. Sync from Keychain:
+
+```bash
+eval "$(python3 scripts/ci/load_integration_env_from_keychain.py)"
+gh secret set CLOUDFLARE_API_TOKEN_PAGES --body "$CLOUDFLARE_API_TOKEN_PAGES"
+```
+
+Re-run **Brand admin onboarding (Pages)** via `workflow_dispatch` or merge a workflow-path change.
 
 ---
 

@@ -1,9 +1,10 @@
 # Cloudflare Pages: brand-wizard-app + synced onboarding JSON + spine HTML (copied in prebuild).
 #
 # Required repo secrets (Settings → Secrets and variables → Actions):
-#   CLOUDFLARE_API_TOKEN — Cloudflare dashboard → Manage Account → API Tokens → Create Token.
-#     Use a custom token with: Account → Cloudflare Pages → Edit (minimum for `wrangler pages deploy`).
-#   CLOUDFLARE_ACCOUNT_ID — Dashboard → any zone → Overview → Account ID (right sidebar).
+#   CLOUDFLARE_API_TOKEN_PAGES — preferred: Custom token, Account → Cloudflare Pages → Edit,
+#     scoped to account b80152c319f941e6e92f928e2617a3d5 (no cfut_ Workers Builds prefix).
+#   CLOUDFLARE_API_TOKEN — fallback if PAGES token unset (must include Pages → Edit on b80152c3).
+#   CLOUDFLARE_ACCOUNT_ID — b80152c319f941e6e92f928e2617a3d5 (NOT the operator personal account).
 #
 # Cloudflare Pages project: create once named exactly `brand-admin-onboarding` (must match --project-name below).
 # After first deploy, confirm the live hostname under Pages → project → Domains (often https://brand-admin-onboarding.pages.dev).
@@ -101,7 +102,7 @@ jobs:
         continue-on-error: true
         shell: bash
         env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN_PAGES || secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
           R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
@@ -120,7 +121,7 @@ jobs:
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3
         with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN_PAGES || secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           command: pages deploy dist --project-name=brand-admin-onboarding --commit-dirty=true
           workingDirectory: brand-wizard-app
