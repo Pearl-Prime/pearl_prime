@@ -78,7 +78,10 @@
     .history-go { font-size: 0.72rem; color: var(--amber2); }
     .catalog-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1.1rem; }
     .book-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; }
-    .book-cover { height: 150px; display: flex; align-items: center; justify-content: center; text-align: center; padding: 14px; font-weight: 700; font-size: 0.95rem; color: #fff; line-height: 1.3; text-shadow: 0 1px 4px rgba(0,0,0,0.5); }
+    .book-cover { display: flex; align-items: center; justify-content: center; text-align: center; font-weight: 700; font-size: 0.95rem; color: #fff; line-height: 1.3; text-shadow: 0 1px 4px rgba(0,0,0,0.5); }
+    .book-cover--text { min-height: 150px; padding: 14px; }
+    .book-cover--img { aspect-ratio: 5 / 8; padding: 0; background: #0a0a0f; overflow: hidden; }
+    .book-cover--img img { width: 100%; height: 100%; object-fit: contain; display: block; }
     .book-body { padding: 12px 14px; flex: 1; display: flex; flex-direction: column; gap: 6px; }
     .book-title { font-size: 0.85rem; font-weight: 600; }
     .book-sub { font-size: 0.68rem; color: var(--muted); font-style: italic; }
@@ -546,7 +549,7 @@ function renderCatalog() {
   document.getElementById("catalog-count").textContent = T.catalogCount(cat.length);
   document.getElementById("catalog-grid").innerHTML = cat.map(b => `
     <div class="book-card">
-      <div class="book-cover" style="background:linear-gradient(150deg,hsl(${b.hue} 55% 28%),hsl(${(b.hue+30)%360} 60% 16%))">${b.cover ? `<img src="${esc(b.cover)}" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block" onerror="this.style.display='none'">` : esc(b.title)}</div>
+      <div class="book-cover ${b.cover ? "book-cover--img" : "book-cover--text"}"${b.cover ? "" : ` style="background:linear-gradient(150deg,hsl(${b.hue} 55% 28%),hsl(${(b.hue+30)%360} 60% 16%))"`}>${b.cover ? `<img src="${esc(b.cover)}" alt="${esc(b.title)}" loading="lazy" onerror="const p=this.parentElement;p.classList.remove('book-cover--img');p.classList.add('book-cover--text');p.style.background='linear-gradient(150deg,hsl(${b.hue} 55% 28%),hsl(${(b.hue+30)%360} 60% 16%))';p.textContent=this.alt;this.remove();">` : esc(b.title)}</div>
       <div class="book-body">
         <div class="book-title">${esc(b.title)}</div>
         ${b.subtitle ? `<div class="book-sub">${esc(b.subtitle)}</div>` : ""}
