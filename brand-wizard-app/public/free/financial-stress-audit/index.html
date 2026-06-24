@@ -73,7 +73,7 @@
     })();
   </script>
 </head>
-<body>
+<body data-ghl-webhook="">
   <div class="container">
     <div class="brand-tag">Phoenix Omega — Inner Light Press</div>
     <h1>The stress about money is rarely just about money.</h1>
@@ -156,18 +156,34 @@
         document.getElementById('form-error').style.display = 'block';
         return;
       }
-            // GA4 lead_submit
-      if (typeof gtag === 'function') {
-        gtag('event', 'lead_submit', {
-          event_category: 'funnel',
-          event_label: 'financial-stress-audit',
-          topic: 'financial_stress',
-          value: 0
-        });
+      function revealTool() {
+        document.getElementById('form-section').style.display = 'none';
+        document.getElementById('tool-section').style.display = 'block';
       }
-document.getElementById('form-section').style.display = 'none';
-      document.getElementById('tool-section').style.display = 'block';
+      if (!window.PhoenixLead) {
+        revealTool();
+        return;
+      }
+      PhoenixLead.captureLead({
+        email: email,
+        first_name: name,
+        topic: 'financial_stress',
+        funnel_slug: 'financial-stress-audit',
+        quiz_id: 'financial_stress_audit',
+        score: null,
+        score_band: null,
+        tags: ['source_freebie_quiz', 'quiz_financial_stress', 'freebie_captured']
+      }).then(revealTool).catch(revealTool);
     }
   </script>
+<link rel="stylesheet" href="/free/js/phoenix_tool.css">
+<script src="/free/js/phoenix_lead.js"></script>
+<script src="/free/js/phoenix_funnel.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  if (!window.PhoenixFunnel) return;
+  PhoenixFunnel.initSkipFormIfCaptured('form-section', 'tool-section', function() {});
+});
+</script>
 </body>
 </html>

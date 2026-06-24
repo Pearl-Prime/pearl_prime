@@ -15,6 +15,44 @@ def _fail(msg: str) -> None:
     sys.exit(1)
 
 
+def _load_funnel_slugs() -> list[str]:
+    import yaml
+
+    cfg_path = REPO / "config/freebies/ghl_funnel_capture.yaml"
+    cfg = yaml.safe_load(cfg_path.read_text(encoding="utf-8")) or {}
+    slugs: list[str] = []
+    for entry in cfg.get("funnel_pages") or []:
+        if isinstance(entry, dict) and entry.get("funnel_slug"):
+            slugs.append(str(entry["funnel_slug"]))
+    if not slugs:
+        slugs = [
+            "compassion-fatigue-audit",
+            "overthinking-thought-sorter",
+            "financial-anxiety-check-in",
+            "courage-decision-map",
+            "anxiety-nervous-system-reset",
+        ]
+    return slugs
+
+
+def _assert_funnel_wiring(slug: str) -> None:
+    path = REPO / "brand-wizard-app/public/free" / slug / "index.html"
+    if not path.is_file():
+        _fail(f"missing landing page: {slug}")
+    text = path.read_text(encoding="utf-8")
+    if "phoenix_lead.js" not in text:
+        _fail(f"{slug} missing phoenix_lead.js")
+    if "data-ghl-webhook" not in text:
+        _fail(f"{slug} missing data-ghl-webhook on body")
+    wired = (
+        "PhoenixLead.captureLead" in text
+        or "PhoenixFunnel.bindEmailBeforeResult" in text
+        or "submitEmailGate" in text
+    )
+    if not wired:
+        _fail(f"{slug} missing captureLead / bindEmailBeforeResult wiring")
+
+
 def main() -> int:
     # JS assets
     for rel in (
@@ -41,21 +79,12 @@ def main() -> int:
     if missing_app:
         _fail(f"somatic apps missing footer: {missing_app[:3]}")
 
-    # Flagships
-    flagships = [
-        "compassion-fatigue-audit",
-        "overthinking-thought-sorter",
-        "financial-anxiety-check-in",
-        "courage-decision-map",
-        "anxiety-nervous-system-reset",
-    ]
-    for slug in flagships:
-        path = REPO / "brand-wizard-app/public/free" / slug / "index.html"
-        text = path.read_text(encoding="utf-8")
-        if "phoenix_lead.js" not in text:
-            _fail(f"{slug} missing phoenix_lead.js")
-        if "data-ghl-webhook" not in text:
-            _fail(f"{slug} missing data-ghl-webhook on body")
+    # All 15 funnel landings — GHL wiring
+    slugs = _load_funnel_slugs()
+    if len(slugs) != 15:
+        _fail(f"expected 15 funnel_pages in ghl_funnel_capture.yaml, found {len(slugs)}")
+    for slug in slugs:
+        _assert_funnel_wiring(slug)
 
     # E2 unlock URLs in templates (top 5)
     for topic in ("anxiety", "compassion_fatigue", "overthinking", "financial_anxiety", "courage"):
@@ -75,7 +104,7 @@ def main() -> int:
         if r.returncode != 0:
             _fail(f"command failed: {' '.join(cmd)}")
 
-    print("OK: freebie capture smoke passed")
+    print(f"OK: freebie capture smoke passed ({len(slugs)}/15 funnel landings GHL-wired)")
     return 0
 
 

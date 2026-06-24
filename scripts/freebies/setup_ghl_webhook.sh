@@ -27,4 +27,4 @@ export PHOENIX_GHL_FUNNEL_WEBHOOK="$URL"
 
 python3 scripts/freebies/inject_ghl_webhook.py --require-env
 python3 scripts/freebies/verify_ghl_webhook_push.py
-echo "GHL webhook provisioned and injected into flagship landings."
+echo "GHL webhook provisioned and injected into all funnel landing pages (see config/freebies/ghl_funnel_capture.yaml)."

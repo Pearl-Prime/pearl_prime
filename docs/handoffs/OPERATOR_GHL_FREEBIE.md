@@ -6,7 +6,7 @@
 2. **[GHL_INTEGRATION_GUIDE.md](../GHL_INTEGRATION_GUIDE.md)** — feed format + merge tags  
 3. **[ghl/PROOF_LOOP_WORKFLOW_TEMPLATE.md](../ghl/PROOF_LOOP_WORKFLOW_TEMPLATE.md)** — import WF1–WF4  
 
-**Also attach** (quiz webhook only): [GHL_ADMIN_HANDOFF_FREEBIE_CAPTURE.md](../GHL_ADMIN_HANDOFF_FREEBIE_CAPTURE.md)
+**Also attach** (funnel webhook): [GHL_ADMIN_HANDOFF_FREEBIE_CAPTURE.md](../GHL_ADMIN_HANDOFF_FREEBIE_CAPTURE.md) — **15 interactive funnel pages**, one inbound webhook
 
 Optional reference for them: [FUNNEL_EMAIL_AUTOMATION_MAP.md](../FUNNEL_EMAIL_AUTOMATION_MAP.md)
 

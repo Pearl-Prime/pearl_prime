@@ -201,7 +201,7 @@
     })();
   </script>
 </head>
-<body>
+<body data-ghl-webhook="">
   <div class="container">
     <div class="brand-tag">Phoenix Omega — Inner Light Press</div>
     <h1>Some things only make sense on paper.</h1>
@@ -321,17 +321,24 @@
         document.getElementById('form-error').style.display = 'block';
         return;
       }
-            // GA4 lead_submit
-      if (typeof gtag === 'function') {
-        gtag('event', 'lead_submit', {
-          event_category: 'funnel',
-          event_label: 'grief-letter-template',
-          topic: 'grief',
-          value: 0
-        });
+      function revealTool() {
+        document.getElementById('form-section').style.display = 'none';
+        document.getElementById('tool-section').style.display = 'block';
       }
-document.getElementById('form-section').style.display = 'none';
-      document.getElementById('tool-section').style.display = 'block';
+      if (!window.PhoenixLead) {
+        revealTool();
+        return;
+      }
+      PhoenixLead.captureLead({
+        email: email,
+        first_name: name,
+        topic: 'grief',
+        funnel_slug: 'grief-letter-template',
+        quiz_id: 'grief_letter_template',
+        score: null,
+        score_band: null,
+        tags: ['source_freebie_quiz', 'quiz_grief', 'freebie_captured']
+      }).then(revealTool).catch(revealTool);
     }
 
     function nextSection(idx) {
@@ -376,5 +383,14 @@ document.getElementById('form-section').style.display = 'none';
       document.getElementById('letter-complete').scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   </script>
+<link rel="stylesheet" href="/free/js/phoenix_tool.css">
+<script src="/free/js/phoenix_lead.js"></script>
+<script src="/free/js/phoenix_funnel.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  if (!window.PhoenixFunnel) return;
+  PhoenixFunnel.initSkipFormIfCaptured('form-section', 'tool-section', function() {});
+});
+</script>
 </body>
 </html>

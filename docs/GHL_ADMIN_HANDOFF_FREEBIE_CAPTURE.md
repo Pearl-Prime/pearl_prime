@@ -1,6 +1,6 @@
-# GHL Admin Handoff — Freebie Quiz Lead Capture
+# GHL Admin Handoff — Interactive Funnel Lead Capture
 
-> **Part of the GHL package.** Admin should read [ghl/GHL_ADMIN_START_HERE.md](./ghl/GHL_ADMIN_START_HERE.md) first. This doc is **only** the quiz inbound webhook (5 flagship pages).
+> **Part of the GHL package.** Admin should read [ghl/GHL_ADMIN_START_HERE.md](./ghl/GHL_ADMIN_START_HERE.md) first. This doc is the **inbound webhook** for all **15 interactive funnel pages** (quizzes, timers, audits, script kits, templates).
 
 **Forward this entire document to your GoHighLevel administrator.**
 
@@ -8,9 +8,9 @@
 
 ## Email you can copy/paste to your GHL admin
 
-**Subject:** GHL setup — inbound webhook for free quiz lead capture
+**Subject:** GHL setup — inbound webhook for interactive funnel lead capture
 
-Hi — we need a simple **Inbound Webhook** workflow in GoHighLevel for our free quiz landing pages. When someone completes a quiz and enters their email, our site sends a JSON payload to your webhook. You create the workflow, map the fields, and send us back the webhook URL.
+Hi — we need a simple **Inbound Webhook** workflow in GoHighLevel for our **15 free interactive funnel pages**. When someone completes a tool (quiz, breath timer, audit, script kit, etc.) and enters their email, our site sends a JSON payload to your webhook. You create the workflow, map the fields, and send us back the webhook URL.
 
 **What we need back from you:** the full Inbound Webhook URL (starts with `https://services.leadconnectorhq.com/hooks/...`).
 
@@ -22,10 +22,12 @@ Thanks!
 
 ## What this is (plain English)
 
-- **5 live quiz pages** on our website (compassion fatigue, overthinking, financial anxiety, courage, anxiety).
-- User takes quiz → enters name + email → our page **POSTs JSON** to your GHL Inbound Webhook.
-- GHL should **create or update a contact**, **apply tags**, and optionally store quiz answers in **custom fields**.
+- **15 live interactive funnel pages** on our website — breath timers, scored assessments, reflection audits, script kits, letter templates, and more (see table below).
+- User completes the tool → enters name + email at the capture gate → our page **POSTs JSON** to your GHL Inbound Webhook.
+- GHL should **create or update a contact**, **apply tags**, and optionally store answers in **custom fields**.
 - No API key needed for this path — **webhook URL only**.
+
+**Not all pages are scored quizzes.** Reflection prompts and somatic timers may send `score: null` and `score_band: null` — map those fields as optional.
 
 **Separate project (not this handoff):** the Burnout Reset funnel app uses the GHL Contacts API (`GHL_API_KEY` + `GHL_LOCATION_ID`). See `funnel/burnout_reset/GHL_HANDBOFF.md` if you also own that funnel.
 
@@ -38,7 +40,7 @@ Thanks!
 1. Log in: https://app.gohighlevel.com/
 2. Open the correct **sub-account / location** (where marketing contacts should live).
 3. Go to **Automation** → **Workflows** → **Create workflow**.
-4. Name it something like: `Freebie Quiz — Inbound Capture`.
+4. Name it something like: `Interactive Funnel — Inbound Capture`.
 5. **Trigger:** choose **Inbound Webhook**.
 6. **Copy the webhook URL** GHL shows you — this is what you send back to us.  
    Example shape: `https://services.leadconnectorhq.com/hooks/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX`
@@ -55,8 +57,8 @@ Our site sends **JSON** (`Content-Type: application/json`). In the webhook trigg
 | `quiz_id` | Custom field | Recommended | e.g. `capacity_assessment`, `breath_timer` |
 | `topic` | Custom field | Recommended | e.g. `compassion_fatigue`, `anxiety` |
 | `funnel_slug` | Custom field | Optional | URL slug, e.g. `compassion-fatigue-audit` |
-| `score` | Custom field | Optional | Numeric quiz score |
-| `score_band` | Custom field | Optional | `low`, `medium`, or `high` |
+| `score` | Custom field | Optional | Numeric quiz score; **null** on reflection/somatic pages |
+| `score_band` | Custom field | Optional | `low`, `medium`, or `high`; **null** when not scored |
 | `answers_json` | Custom field | Optional | Stringified quiz answers (if present) |
 | `tags` | Tags | Recommended | Array of tag strings — see § Tags below |
 
@@ -66,15 +68,13 @@ Our site sends **JSON** (`Content-Type: application/json`). In the webhook trigg
 
 The payload may include a `tags` array. Add a workflow step to **add tags** from the webhook payload (or map known tags manually).
 
-**Tags you will see on flagship quizzes:**
+**Tags you will see:**
 
-| Page | Example tags |
-|------|----------------|
-| Compassion fatigue audit | `quiz_compassion_fatigue`, `severity_low` / `severity_medium` / `severity_high` |
-| Anxiety nervous system reset | `quiz_anxiety` |
-| Overthinking / financial / courage | topic-specific tags as configured on each page |
-
-**Suggested extra tags (optional):** `source_freebie_quiz`, `funnel_interactive`
+| Pattern | When |
+|---------|------|
+| `source_freebie_quiz`, `freebie_captured` | All 15 funnel pages |
+| `quiz_{topic}` | e.g. `quiz_anxiety`, `quiz_burnout`, `quiz_grief` |
+| `severity_low` / `severity_medium` / `severity_high` | Scored assessments only |
 
 ### D. Publish and test
 
@@ -89,7 +89,9 @@ After contact is created, you may attach your existing **email/SMS automations**
 
 ---
 
-## Sample JSON payload (what hits your webhook)
+## Sample JSON payloads (what hits your webhook)
+
+**Scored assessment** (compassion fatigue audit):
 
 ```json
 {
@@ -101,7 +103,39 @@ After contact is created, you may attach your existing **email/SMS automations**
   "score": 12,
   "score_band": "medium",
   "answers_json": null,
-  "tags": ["quiz_compassion_fatigue", "severity_medium"]
+  "tags": ["source_freebie_quiz", "quiz_compassion_fatigue", "freebie_captured", "severity_medium"]
+}
+```
+
+**Somatic timer** (anxiety nervous system reset):
+
+```json
+{
+  "email": "jane@example.com",
+  "first_name": "Jane",
+  "quiz_id": "breath_timer_interactive",
+  "topic": "anxiety",
+  "funnel_slug": "anxiety-nervous-system-reset",
+  "score": null,
+  "score_band": null,
+  "answers_json": null,
+  "tags": ["quiz_anxiety"]
+}
+```
+
+**Reflection audit** (burnout energy audit — no numeric score):
+
+```json
+{
+  "email": "jane@example.com",
+  "first_name": "Jane",
+  "quiz_id": "capacity_assessment",
+  "topic": "burnout",
+  "funnel_slug": "burnout-energy-audit",
+  "score": null,
+  "score_band": null,
+  "answers_json": null,
+  "tags": ["source_freebie_quiz", "quiz_burnout", "freebie_captured"]
 }
 ```
 
@@ -110,17 +144,27 @@ After contact is created, you may attach your existing **email/SMS automations**
 
 ---
 
-## Five flagship pages (for your reference)
+## Fifteen funnel capture pages (for your reference)
 
-| Quiz / topic | `topic` value | `funnel_slug` |
-|--------------|---------------|---------------|
-| Compassion fatigue audit | `compassion_fatigue` | `compassion-fatigue-audit` |
-| Overthinking thought sorter | `overthinking` | `overthinking-thought-sorter` |
-| Financial anxiety check-in | `financial_anxiety` | `financial-anxiety-check-in` |
-| Courage decision map | `courage` | `courage-decision-map` |
-| Anxiety nervous system reset | `anxiety` | `anxiety-nervous-system-reset` |
+| Topic | `topic` | `funnel_slug` | `quiz_id` (archetype) | `capture_type` |
+|-------|---------|---------------|----------------------|----------------|
+| Anxiety | `anxiety` | `anxiety-nervous-system-reset` | `breath_timer_interactive` | somatic |
+| Compassion fatigue | `compassion_fatigue` | `compassion-fatigue-audit` | `capacity_assessment` | assessment |
+| Overthinking | `overthinking` | `overthinking-thought-sorter` | `thought_sorter_assessment` | assessment |
+| Financial anxiety | `financial_anxiety` | `financial-anxiety-check-in` | `financial_checkin` | assessment |
+| Courage | `courage` | `courage-decision-map` | `decision_resistance_map` | assessment |
+| Burnout | `burnout` | `burnout-energy-audit` | `capacity_assessment` | assessment (reflection) |
+| Self-worth | `self_worth` | `self-worth-inventory` | `worth_inventory` | assessment |
+| Imposter syndrome | `imposter_syndrome` | `imposter-evidence-log` | `evidence_log` | assessment |
+| Boundaries | `boundaries` | `boundaries-script-kit` | `script_practice` | script |
+| Depression | `depression` | `depression-momentum-kit` | `micro_action_kit` | kit |
+| Social anxiety | `social_anxiety` | `social-anxiety-toolkit` | `pre_event_protocol` | kit |
+| Financial stress | `financial_stress` | `financial-stress-audit` | `financial_stress_audit` | assessment (reflection) |
+| Sleep anxiety | `sleep_anxiety` | `sleep-anxiety-wind-down` | `wind_down_breath` | somatic |
+| Somatic healing | `somatic_healing` | `somatic-body-scan` | `body_scan_timer` | somatic |
+| Grief | `grief` | `grief-letter-template` | `grief_letter_template` | template |
 
-Site paths live under `/free/<funnel-slug>/` on our Cloudflare Pages domain (brand wizard app).
+Site paths live under `/free/<funnel-slug>/` on our Cloudflare Pages domain (brand wizard app). Authority: `config/freebies/ghl_funnel_capture.yaml`.
 
 ---
 
@@ -143,7 +187,7 @@ Optional: confirm workflow name, location/sub-account name, and that a test cont
 (You do not do this — for transparency only.)
 
 1. Store the URL in secure credential storage (Keychain + GitHub secret).
-2. Inject the URL into the 5 flagship HTML pages (`data-ghl-webhook` on `<body>`).
+2. Inject the URL into all **15 funnel HTML pages** (`data-ghl-webhook` on `<body>`).
 3. Run automated smoke tests.
 4. Deploy static pages via GitHub → Cloudflare Pages.
 
@@ -166,7 +210,7 @@ Script reference: `scripts/freebies/setup_ghl_webhook.sh` (dev/operator machine)
 ## Technical references (dev team)
 
 - Payload contract: `config/freebies/quiz_segment_map.yaml`
-- Flagship list: `config/freebies/ghl_funnel_capture.yaml`
+- Funnel page list: `config/freebies/ghl_funnel_capture.yaml` (`funnel_pages`, 15 entries)
 - Pearl_Int runbook: `skills/pearl-int/references/ghl_freebie_inbound_webhook.md`
 - Credentials registry: `docs/INTEGRATION_CREDENTIALS_REGISTRY.md` §8b
 

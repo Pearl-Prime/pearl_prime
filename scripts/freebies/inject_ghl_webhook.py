@@ -44,10 +44,24 @@ def _inject_body(path: Path, webhook: str) -> bool:
     return False
 
 
+def _page_paths(cfg: dict) -> list[str]:
+    pages: list[str] = []
+    for entry in cfg.get("funnel_pages") or []:
+        if isinstance(entry, dict):
+            rel = entry.get("path") or ""
+        else:
+            rel = str(entry)
+        if rel:
+            pages.append(rel)
+    if not pages:
+        pages = list(cfg.get("flagship_pages") or [])
+    return pages
+
+
 def main() -> int:
     import argparse
 
-    parser = argparse.ArgumentParser(description="Inject GHL webhook URL into flagship landings")
+    parser = argparse.ArgumentParser(description="Inject GHL webhook URL into funnel landings")
     parser.add_argument(
         "--require-env",
         action="store_true",
@@ -72,7 +86,7 @@ def main() -> int:
                 if ln.strip()
             ]
             webhook = lines[0] if lines else ""
-    pages = cfg.get("flagship_pages") or []
+    pages = _page_paths(cfg)
     n = 0
     for rel in pages:
         path = REPO / rel

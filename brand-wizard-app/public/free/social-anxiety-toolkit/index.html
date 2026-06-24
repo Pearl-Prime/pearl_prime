@@ -336,7 +336,7 @@
     })();
   </script>
 </head>
-<body>
+<body data-ghl-webhook="">
   <div class="container">
     <div class="brand-tag">Phoenix Omega — Inner Light Press</div>
 
@@ -460,17 +460,24 @@
         document.getElementById('form-error').style.display = 'block';
         return;
       }
-            // GA4 lead_submit
-      if (typeof gtag === 'function') {
-        gtag('event', 'lead_submit', {
-          event_category: 'funnel',
-          event_label: 'social-anxiety-toolkit',
-          topic: 'social_anxiety',
-          value: 0
-        });
+      function revealTool() {
+        document.getElementById('form-section').style.display = 'none';
+        document.getElementById('tool-section').style.display = 'block';
       }
-document.getElementById('form-section').style.display = 'none';
-      document.getElementById('tool-section').style.display = 'block';
+      if (!window.PhoenixLead) {
+        revealTool();
+        return;
+      }
+      PhoenixLead.captureLead({
+        email: email,
+        first_name: name,
+        topic: 'social_anxiety',
+        funnel_slug: 'social-anxiety-toolkit',
+        quiz_id: 'pre_event_protocol',
+        score: null,
+        score_band: null,
+        tags: ['source_freebie_quiz', 'quiz_social_anxiety', 'freebie_captured']
+      }).then(revealTool).catch(revealTool);
     }
 
     function switchTab(tabId, btn) {
@@ -485,5 +492,14 @@ document.getElementById('form-section').style.display = 'none';
       item.querySelector('.check-box').classList.toggle('checked');
     }
   </script>
+<link rel="stylesheet" href="/free/js/phoenix_tool.css">
+<script src="/free/js/phoenix_lead.js"></script>
+<script src="/free/js/phoenix_funnel.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  if (!window.PhoenixFunnel) return;
+  PhoenixFunnel.initSkipFormIfCaptured('form-section', 'tool-section', function() {});
+});
+</script>
 </body>
 </html>

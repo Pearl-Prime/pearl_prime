@@ -122,7 +122,7 @@
     })();
   </script>
 </head>
-<body>
+<body data-ghl-webhook="">
   <div class="container">
     <div class="brand-tag">Phoenix Omega — Inner Light Press</div>
     <h1>Your body has been trying to tell you something.</h1>
@@ -206,18 +206,25 @@
         document.getElementById('form-error').style.display = 'block';
         return;
       }
-            // GA4 lead_submit
-      if (typeof gtag === 'function') {
-        gtag('event', 'lead_submit', {
-          event_category: 'funnel',
-          event_label: 'somatic-body-scan',
-          topic: 'somatic_healing',
-          value: 0
-        });
+      function revealTool() {
+        document.getElementById('form-section').style.display = 'none';
+        document.getElementById('tool-section').style.display = 'block';
+        renderZone(0);
       }
-document.getElementById('form-section').style.display = 'none';
-      document.getElementById('tool-section').style.display = 'block';
-      renderZone(0);
+      if (!window.PhoenixLead) {
+        revealTool();
+        return;
+      }
+      PhoenixLead.captureLead({
+        email: email,
+        first_name: name,
+        topic: 'somatic_healing',
+        funnel_slug: 'somatic-body-scan',
+        quiz_id: 'body_scan_timer',
+        score: null,
+        score_band: null,
+        tags: ['source_freebie_quiz', 'quiz_somatic_healing', 'freebie_captured']
+      }).then(revealTool).catch(revealTool);
     }
 
     function renderZone(idx) {
@@ -309,5 +316,16 @@ document.getElementById('form-section').style.display = 'none';
       `;
     }
   </script>
+<link rel="stylesheet" href="/free/js/phoenix_tool.css">
+<script src="/free/js/phoenix_lead.js"></script>
+<script src="/free/js/phoenix_funnel.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  if (!window.PhoenixFunnel) return;
+  PhoenixFunnel.initSkipFormIfCaptured('form-section', 'tool-section', function() {
+    if (typeof renderZone === 'function') renderZone(0);
+  });
+});
+</script>
 </body>
 </html>

@@ -319,7 +319,7 @@
     })();
   </script>
 </head>
-<body>
+<body data-ghl-webhook="">
   <div class="container">
     <div class="brand-tag">Phoenix Omega — Inner Light Press</div>
 
@@ -404,18 +404,25 @@
         document.getElementById('form-error').style.display = 'block';
         return;
       }
-            // GA4 lead_submit
-      if (typeof gtag === 'function') {
-        gtag('event', 'lead_submit', {
-          event_category: 'funnel',
-          event_label: 'sleep-anxiety-wind-down',
-          topic: 'sleep_anxiety',
-          value: 0
-        });
+      function revealTool() {
+        document.getElementById('form-section').style.display = 'none';
+        document.getElementById('tool-section').style.display = 'block';
+        renderPhase(0);
       }
-document.getElementById('form-section').style.display = 'none';
-      document.getElementById('tool-section').style.display = 'block';
-      renderPhase(0);
+      if (!window.PhoenixLead) {
+        revealTool();
+        return;
+      }
+      PhoenixLead.captureLead({
+        email: email,
+        first_name: name,
+        topic: 'sleep_anxiety',
+        funnel_slug: 'sleep-anxiety-wind-down',
+        quiz_id: 'wind_down_breath',
+        score: null,
+        score_band: null,
+        tags: ['source_freebie_quiz', 'quiz_sleep_anxiety', 'freebie_captured']
+      }).then(revealTool).catch(revealTool);
     }
 
     function renderPhase(idx) {
@@ -522,5 +529,16 @@ document.getElementById('form-section').style.display = 'none';
       `;
     }
   </script>
+<link rel="stylesheet" href="/free/js/phoenix_tool.css">
+<script src="/free/js/phoenix_lead.js"></script>
+<script src="/free/js/phoenix_funnel.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  if (!window.PhoenixFunnel) return;
+  PhoenixFunnel.initSkipFormIfCaptured('form-section', 'tool-section', function() {
+    if (typeof renderPhase === 'function') renderPhase(0);
+  });
+});
+</script>
 </body>
 </html>

@@ -33,7 +33,7 @@
 | 2 | **Import workflows** WF1–WF4 from [PROOF_LOOP_WORKFLOW_TEMPLATE.md](./PROOF_LOOP_WORKFLOW_TEMPLATE.md). | ~45 min |
 | 3 | **Paste the weekly feed URL** we give you (one URL per brand × locale). | 2 min |
 | 4 | **Map 3 fields** on each feed item: `cta_url`, `pricing` (free/paid), `content_type`. | 10 min |
-| 5 | **Quiz capture webhook** (5 flagship quiz pages) — [separate checklist](../GHL_ADMIN_HANDOFF_FREEBIE_CAPTURE.md); send us back one URL. | ~20 min |
+| 5 | **Funnel capture webhook** (15 interactive funnel pages) — [separate checklist](../GHL_ADMIN_HANDOFF_FREEBIE_CAPTURE.md); send us back one URL. | ~20 min |
 | 6 | (Optional) **Burnout funnel app** — Contacts API if engineering enables `funnel/burnout_reset/` — [GHL_HANDBOFF.md](../../funnel/burnout_reset/GHL_HANDBOFF.md). | Dev-led |
 
 **Send back to project owner:**
@@ -119,9 +119,9 @@ Slot timing detail: [FUNNEL_EMAIL_AUTOMATION_MAP.md](../FUNNEL_EMAIL_AUTOMATION_
 
 ---
 
-## Quiz pages (inbound webhook — separate from feed)
+## Funnel capture pages (inbound webhook — separate from feed)
 
-Five interactive quizzes POST JSON when someone submits email. No API key — **inbound webhook URL only**.
+**15 interactive funnel pages** (quizzes, breath timers, audits, script kits, templates) POST JSON when someone submits email at the capture gate. No API key — **inbound webhook URL only**.
 
 Full checklist: [GHL_ADMIN_HANDOFF_FREEBIE_CAPTURE.md](../GHL_ADMIN_HANDOFF_FREEBIE_CAPTURE.md).
 

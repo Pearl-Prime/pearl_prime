@@ -324,7 +324,7 @@
     })();
   </script>
 </head>
-<body>
+<body data-ghl-webhook="">
 <div class="page-wrap">
 
   <div class="wordmark">Phoenix Omega — Inner Light Press</div>
@@ -454,18 +454,28 @@
 <script>
   document.getElementById('capture-form').addEventListener('submit', function(e) {
     e.preventDefault();
-    // GA4 lead_submit
-    if (typeof gtag === 'function') {
-      gtag('event', 'lead_submit', {
-        event_category: 'funnel',
-        event_label: 'self-worth-inventory',
-        topic: 'self_worth',
-        value: 0
-      });
+    var nameEl = document.querySelector('#capture-form input[type="text"]');
+    var emailEl = document.querySelector('#capture-form input[type="email"]');
+    var name = nameEl ? nameEl.value.trim() : '';
+    var email = emailEl ? emailEl.value.trim() : '';
+    function revealTool() {
+      document.getElementById('capture-section').style.display = 'none';
+      document.getElementById('tool-section').classList.add('visible');
     }
-
-    document.getElementById('capture-section').style.display = 'none';
-    document.getElementById('tool-section').classList.add('visible');
+    if (!window.PhoenixLead) {
+      revealTool();
+      return;
+    }
+    PhoenixLead.captureLead({
+      email: email,
+      first_name: name,
+      topic: 'self_worth',
+      funnel_slug: 'self-worth-inventory',
+      quiz_id: 'worth_inventory',
+      score: null,
+      score_band: null,
+      tags: ['source_freebie_quiz', 'quiz_self_worth', 'freebie_captured']
+    }).then(revealTool).catch(revealTool);
   });
 
   let currentPart = 1;
@@ -486,5 +496,16 @@
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 </script>
+
+<link rel="stylesheet" href="/free/js/phoenix_tool.css">
+<script src="/free/js/phoenix_lead.js"></script>
+<script src="/free/js/phoenix_funnel.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  if (!window.PhoenixFunnel) return;
+  PhoenixFunnel.initSkipFormIfCaptured('capture-section', 'tool-section', function() {});
+});
+</script>
+
 </body>
 </html>

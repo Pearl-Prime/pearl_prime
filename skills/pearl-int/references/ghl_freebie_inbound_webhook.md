@@ -5,7 +5,7 @@
 
 ## What this wires
 
-Static flagship landings under `brand-wizard-app/public/free/` POST quiz capture to a **GHL Inbound Webhook** URL via `phoenix_lead.js`. Until `PHOENIX_GHL_FUNNEL_WEBHOOK` is set, capture **skips gracefully** (no crash).
+Static funnel landings under `brand-wizard-app/public/free/` (15 pages) POST capture to a **GHL Inbound Webhook** URL via `phoenix_lead.js`. Until `PHOENIX_GHL_FUNNEL_WEBHOOK` is set, capture **skips gracefully** (no crash).
 
 ## Operator portal flow (you paste; Pearl_Int stores + validates)
 
@@ -23,7 +23,7 @@ Static flagship landings under `brand-wizard-app/public/free/` POST quiz capture
 ./scripts/freebies/setup_ghl_webhook.sh '<inbound-webhook-url>'
 ```
 
-That script writes Keychain (`phoenix-omega` / `PHOENIX_GHL_FUNNEL_WEBHOOK`), optional `config/local/ghl_funnel_webhook.url`, injects `data-ghl-webhook` on 5 flagship `<body>` tags, and runs `verify_ghl_webhook_push.py`.
+That script writes Keychain (`phoenix-omega` / `PHOENIX_GHL_FUNNEL_WEBHOOK`), optional `config/local/ghl_funnel_webhook.url`, injects `data-ghl-webhook` on all **15 funnel** `<body>` tags, and runs `verify_ghl_webhook_push.py`.
 
 ## GitHub Actions (CI live-push step)
 
