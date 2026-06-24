@@ -108,9 +108,10 @@ def main() -> int:
         print("Install boto3 for R2 upload", file=sys.stderr)
         return 1
 
+    endpoint = (os.environ.get("R2_ENDPOINT") or "").strip() or f"https://{account}.r2.cloudflarestorage.com"
     client = boto3.client(
         "s3",
-        endpoint_url=f"https://{account}.r2.cloudflarestorage.com",
+        endpoint_url=endpoint,
         aws_access_key_id=key_id,
         aws_secret_access_key=secret,
         config=Config(signature_version="s3v4"),
