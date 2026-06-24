@@ -171,14 +171,22 @@ curl -s "https://brand-admin-onboarding.pages.dev/free/way_stream_sanctuary/burn
 
 Pages ship with `data-ghl-webhook=""` until Phase 5.
 
-**Deploy note (2026-06-24):** Post-#1897 deploy failed with Cloudflare API auth error `10000` — `CLOUDFLARE_API_TOKEN` resolved to operator personal account, not `b80152c3`. Workflow now prefers `CLOUDFLARE_API_TOKEN_PAGES`. Sync from Keychain:
+### 3.2 Deploy troubleshooting (2026-06-24)
 
-```bash
-eval "$(python3 scripts/ci/load_integration_env_from_keychain.py)"
-gh secret set CLOUDFLARE_API_TOKEN_PAGES --body "$CLOUDFLARE_API_TOKEN_PAGES"
-```
+| Symptom | Cause | Fix |
+|---------|-------|-----|
+| Auth error `10000` | `CLOUDFLARE_API_TOKEN` scoped to personal account or `cfut_` Workers token | Custom token on **b80152c3** with Pages → Edit; `gh secret set CLOUDFLARE_API_TOKEN` |
+| Project not found `8000007` | Token account ≠ `CLOUDFLARE_ACCOUNT_ID` | Both must target **b80152c3** where `brand-admin-onboarding` lives |
+| R2 secret sync fails | Non-fatal (`continue-on-error` since #1898) | Ignore if deploy passes |
 
-Re-run **Brand admin onboarding (Pages)** via `workflow_dispatch` or merge a workflow-path change.
+Last green deploy: PR #1892 (2026-06-24 16:07 UTC). Failures began after `CLOUDFLARE_API_TOKEN` GitHub secret rotation (~18:04 UTC).
+
+**Operator unblock:**
+
+1. Create Custom API token on account `b80152c319f941e6e92f928e2617a3d5` → **Pages → Edit** (no `cfut_` prefix).
+2. `gh secret set CLOUDFLARE_API_TOKEN --body '<token>'`
+3. Actions → **Brand admin onboarding (Pages)** → **Run workflow**.
+4. Do **not** sync Keychain `CLOUDFLARE_API_TOKEN_PAGES` to GitHub — see `skills/pearl-int/references/cloudflare_pages_deploy.md` Trap 4.
 
 ---
 
@@ -285,8 +293,25 @@ Stub generator: `python3 scripts/marketing/gen_brand_marketing_registry.py --fil
 
 ---
 
-## Reference PR
+## Closeout checklist (Devotion + Waystream pilot)
+
+| Step | Status | Evidence |
+|------|--------|----------|
+| PR #1897 merged (30 pages + feeds + registry) | Done | `main` @ `0eae208eb7` |
+| PR #1898 merged (deploy continue-on-error + `--brand-id` inject) | Done | `a804a6c888` |
+| CDN feeds live (3 brands, 2026-W26) | Done | devotion 120 · waystream 109 · stillness 109 |
+| GHL handoff docs + workflow doc | Done | `docs/handoffs/GHL_MULTI_BRAND_FUNNEL_WORKFLOW.md` |
+| Tests (`test_brand_marketing_registry` + `test_build_marketing_feed`) | Done | 12 passed |
+| CF Pages deploy (30 brand-prefixed paths live) | **Blocked** | Restore `CLOUDFLARE_API_TOKEN` → §3.2 |
+| GHL admin (WF1–WF4 + webhooks per brand) | Pending | Forward emails in `docs/handoffs/` |
+| Webhook inject + redeploy | Pending | `inject_ghl_webhook.py --brand-id <id>` after admin reply |
+
+---
+
+## Reference PRs
 
 - **#1897** — Devotion Path + Waystream: 30 funnel pages, feeds, registry, tests
+- **#1898** — Deploy continue-on-error; `inject_ghl_webhook.py --brand-id`
+- **#1900** — Pages token fallback (optional `CLOUDFLARE_API_TOKEN_PAGES` GitHub secret)
 
 **Version:** 2026-06-24

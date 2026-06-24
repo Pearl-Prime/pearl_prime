@@ -1,10 +1,12 @@
 # Cloudflare Pages: brand-wizard-app + synced onboarding JSON + spine HTML (copied in prebuild).
 #
 # Required repo secrets (Settings → Secrets and variables → Actions):
-#   CLOUDFLARE_API_TOKEN_PAGES — preferred: Custom token, Account → Cloudflare Pages → Edit,
-#     scoped to account b80152c319f941e6e92f928e2617a3d5 (no cfut_ Workers Builds prefix).
-#   CLOUDFLARE_API_TOKEN — fallback if PAGES token unset (must include Pages → Edit on b80152c3).
-#   CLOUDFLARE_ACCOUNT_ID — b80152c319f941e6e92f928e2617a3d5 (NOT the operator personal account).
+#   CLOUDFLARE_API_TOKEN — Custom token (NOT cfut_ Workers Builds prefix) on account
+#     b80152c319f941e6e92f928e2617a3d5 with Account → Cloudflare Pages → Edit.
+#     This token is GitHub-only; do NOT sync from Keychain cfut_ tokens (see
+#     skills/pearl-int/references/cloudflare_pages_deploy.md Trap 4).
+#   CLOUDFLARE_ACCOUNT_ID — b80152c319f941e6e92f928e2617a3d5
+#   CLOUDFLARE_API_TOKEN_PAGES — optional override if set in GitHub (same scope as above).
 #
 # Cloudflare Pages project: create once named exactly `brand-admin-onboarding` (must match --project-name below).
 # After first deploy, confirm the live hostname under Pages → project → Domains (often https://brand-admin-onboarding.pages.dev).
