@@ -1,11 +1,32 @@
 // Cloudflare Pages Function: on-demand R2 EPUB download proxy (Waystream).
-// Feed entries use /download/<book_id>?week=<iso-week> — no presigned URL expiry.
+// Uses S3-compatible API credentials (cross-account) — not an R2 binding, because
+// phoenix-omega-artifacts lives on the operator R2 account while Pages deploys to
+// the b80152c3 GitHub Actions account.
+
+import { AwsClient } from "https://esm.sh/aws4fetch@1.0.20";
 
 const BRAND = "way_stream_sanctuary";
 const BOOK_ID_RE = /^way_stream_sanctuary__[a-z0-9_]+$/i;
 const WEEK_RE = /^\d{4}-W\d{2}$/;
+const DEFAULT_BUCKET = "phoenix-omega-artifacts";
+
+function r2ObjectUrl(env, key) {
+  const bucket = (env.R2_BUCKET || DEFAULT_BUCKET).trim();
+  const endpoint = (env.R2_ENDPOINT || "").trim()
+    || `https://${String(env.R2_ACCOUNT_ID || "").trim()}.r2.cloudflarestorage.com`;
+  return `${endpoint.replace(/\/$/, "")}/${bucket}/${key}`;
+}
 
 export async function onRequest(context) {
+  const { env } = context;
+  const accessKeyId = String(env.R2_ACCESS_KEY_ID || "").trim();
+  const secretAccessKey = String(env.R2_SECRET_ACCESS_KEY || "").trim();
+  const accountId = String(env.R2_ACCOUNT_ID || "").trim();
+
+  if (!accessKeyId || !secretAccessKey || !accountId) {
+    return new Response("R2 credentials not configured", { status: 503 });
+  }
+
   const { book_id: rawId } = context.params;
   const book_id = decodeURIComponent(String(rawId || "")).replace(/\.epub$/i, "");
 
@@ -20,20 +41,27 @@ export async function onRequest(context) {
   }
 
   const key = `brand/${BRAND}/deliveries/${week}/amazon_kdp/${book_id}.epub`;
-
-  if (!context.env.R2_BUCKET) {
-    return new Response("R2 binding not configured", { status: 503 });
-  }
+  const objectUrl = r2ObjectUrl(env, key);
 
   try {
-    const object = await context.env.R2_BUCKET.get(key);
-    if (!object) {
+    const aws = new AwsClient({
+      accessKeyId,
+      secretAccessKey,
+      region: "auto",
+      service: "s3",
+    });
+    const signed = await aws.sign(objectUrl);
+    const object = await fetch(signed);
+
+    if (object.status === 404) {
       return new Response("Book not found", { status: 404 });
+    }
+    if (!object.ok) {
+      return new Response("Download failed", { status: 502 });
     }
 
     const headers = new Headers();
-    object.writeHttpMetadata(headers);
-    headers.set("Content-Type", "application/epub+zip");
+    headers.set("Content-Type", object.headers.get("Content-Type") || "application/epub+zip");
     headers.set("Content-Disposition", `attachment; filename="${book_id}.epub"`);
     headers.set("Cache-Control", "public, max-age=3600");
 

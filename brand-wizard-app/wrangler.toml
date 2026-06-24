@@ -24,7 +24,9 @@ name = "brand-admin-onboarding"
 compatibility_date = "2026-04-05"
 pages_build_output_dir = "dist"
 
-# Waystream EPUB downloads — brand/way_stream_sanctuary/deliveries/... in phoenix-omega-artifacts
-[[r2_buckets]]
-binding = "R2_BUCKET"
-bucket_name = "phoenix-omega-artifacts"
+# Waystream download proxy reads R2 via S3 API secrets (R2_ACCOUNT_ID, R2_ACCESS_KEY_ID,
+# R2_SECRET_ACCESS_KEY, optional R2_ENDPOINT) synced in brand-admin-onboarding-pages.yml.
+# Do NOT add [[r2_buckets]] here — phoenix-omega-artifacts is on the operator R2 account,
+# not the b80152c3 Pages deploy account; wrangler deploy fails if the bucket is missing.
+[vars]
+R2_BUCKET = "phoenix-omega-artifacts"
