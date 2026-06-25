@@ -1,3 +1,5 @@
+> ⛔ SUPERSEDED 2026-06-25 @ origin/main 196d0540ec746ae0905fb0a23a253cd578266f23 — current manga architecture: docs/specs/MANGA_V5_LAYERED_ARCHITECTURE.md. This file is a frozen historical archive of the V4 migration plan; do not treat as active guidance.
+
 # Manga V4 Migration Plan — Historical Archive
 
 **Status:** HISTORICAL ARCHIVE (v1.0.0 — frozen 2026-05-20; Phase D scripts superseded by the forthcoming V5 orchestrator per `MANGA_V5_LAYERED_ARCHITECTURE.md` once it lands via PR #1258)
