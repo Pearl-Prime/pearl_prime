@@ -21,11 +21,16 @@
   PR #1913). **Total buildable: 12,138.**
 
 ### Waystream titles / cover↔title
-- **Status:** **OPEN (duplication live on main)**
-- **Details:** Waystream titles are **186 distinct / 800**, subtitles **398 / 800** on main — a prior dedup
-  **stranded** on an unmerged branch. Fix = the amended SEO/title-repoint plan (hard-gate distinct titles + unique
-  (title,subtitle) pairs; persona-scenario form over the colliding `Topic:{angle}`; **re-composite covers** keyed by
-  plan book_id — covers are two-stage PIL-over-FLUX, so re-titling is **zero-GPU**). Run on Sonnet; land on main.
+- **Status:** **DONE (deduped + hard-gated on main)**
+- **Details:** Waystream is **800 distinct titles / 800 distinct subtitles / 800 distinct (title,subtitle) pairs** on
+  `main` (verified from `config/source_of_truth/book_plans_en_us/way_stream_sanctuary__*.yaml` → catalog CSV/JSON →
+  covers). The previously-stranded dedup landed; the prior "186/800" figure was stale SSOT carryover. A **hard-gate**
+  now blocks regression: `scripts/ci/check_waystream_catalog_uniqueness.py` (asserts 800 distinct titles + subtitles +
+  pairs against the plan SSOT, with a dry-run achievability path for template-only PRs) is wired as **gate #20** in
+  `scripts/run_production_readiness_gates.py`. **Covers are 100% resynced** to current titles — verified by
+  `scripts/publish/waystream_covers/verify_resync.py` (`plans=800 csv=800 covers=800 dashboard=800`, 0 structural
+  errors, `--ocr` confirms cover text matches title); covers are gitignored local artifacts (slug-keyed, two-stage
+  PIL-over-FLUX), not committed. Localization can inherit clean titles.
 
 ### Production-Gate / Real-EPUBs
 - **Status:** **IN PROGRESS — first pilot gate-passed LOCALLY, not yet durable**
@@ -51,8 +56,9 @@
   attach. Funnel is live on free content + listings; paid lights up as real EPUBs attach.
 
 ### Localization
-- **Status:** **NEXT (0%)** — hold until Waystream titles are distinct (so 13 locales inherit clean titles, not
-  multiplied duplication). Planning established; execution not started.
+- **Status:** **NEXT (0%)** — Waystream titles are now distinct + hard-gated on `main` (see above), so the prior
+  blocker is cleared; 13 locales can inherit clean titles without multiplied duplication. Planning established;
+  execution not started.
 
 ### Manga ja_JP
 - **Status:** **TITLED + PILOT PRODUCED**
