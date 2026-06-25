@@ -1,20 +1,53 @@
-# Upload Waystream EPUBs (>1 MB) to R2 and refresh presigned URLs in the delivery feed.
-# EPUBs are built locally (not in git — no-binary-blobs cap). After batch + handoff:
-#   1. artifacts/weekly_packages/way_stream_sanctuary/ populated on runner artifact OR
-#      operator syncs weekly_packages before dispatch.
-#   2. workflow_dispatch with synced tree checked out (manual path for now).
+# Waystream delivery chain — batch EPUB build → R2 upload (+ full-tree handoff).
+#
+# WHY CI: the EPUB→R2 attach cannot run on the operator box — its only Python is
+# Xcode's LibreSSL 2.8.3, which fails the TLS handshake to Cloudflare R2
+# (SSLV3_ALERT_HANDSHAKE_FAILURE). This job runs on ubuntu-latest / py3.11
+# (TLS-capable) over the public S3 API, so it is the correct home for the attach.
+#
+# EPUBs are NOT committable (>1 MB no-binary-blobs cap; ~54 MB/batch). They are
+# built fresh on the runner from the FULL catalog SSOT
+# (config/source_of_truth/book_plans_en_us), uploaded to R2, and only the
+# regenerated JSON feeds (brand_deliveries + storefront SKUs) are committed back.
+#
+# ── FULL-TREE SAFETY (the destructive-shrink guard) ──────────────────────────
+# gen_brand_deliveries.py and project_waystream_skus.py mirror WHATEVER EPUBs are
+# present under artifacts/weekly_packages/. They do NOT read the catalog SSOT for
+# the feed — so running them after a PARTIAL build writes a PARTIAL feed. A prior
+# local run after an 18-book pilot build shrank the committed feed (SKUs 153→18,
+# deliveries 48wk→1). To prevent any recurrence:
+#
+#   * pilot mode (DEFAULT, 18 books): builds 18 EPUBs, uploads them to R2, and
+#     ONLY patches presigned URLs onto the EXISTING committed feed for those 18.
+#     It does NOT run gen_brand_deliveries / project_waystream_skus and does NOT
+#     commit the feed back. Smoke-validation only — structurally cannot shrink.
+#
+#   * all mode (~800 books): builds the FULL set so weekly_packages/ holds the
+#     entire catalog, THEN runs the full handoff (regen feed + SKUs from the now-
+#     complete tree) + R2 upload, and commits the regenerated feed + SKUs back.
+#     Full-tree safe because the build populated the whole tree before regen.
+#
+# Operator: review this workflow before the FIRST dispatch. Start with pilot.
 name: Waystream deliveries R2 upload
 
 on:
   workflow_dispatch:
+    inputs:
+      pilot_or_all:
+        description: "Build scope: pilot (18, safe smoke) or all (~800, full regen + commit)"
+        type: choice
+        default: pilot
+        options:
+          - pilot
+          - all
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
-  upload:
+  delivery-chain:
     runs-on: ubuntu-latest
-    timeout-minutes: 120
+    timeout-minutes: 350
     steps:
       - uses: actions/checkout@v4
 
@@ -22,10 +55,30 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Install boto3
+      - name: Install deps
         run: pip install boto3 pyyaml
 
-      - name: Upload EPUBs to R2 and patch delivery feed
+      - name: Batch-build Waystream EPUBs (${{ inputs.pilot_or_all }})
+        env:
+          PYTHONPATH: .
+        run: |
+          if [ "${{ inputs.pilot_or_all }}" = "all" ]; then
+            python3 scripts/release/batch_waystream_epubs.py --all --resume
+          else
+            python3 scripts/release/batch_waystream_epubs.py --pilot --resume
+          fi
+
+      - name: Verify EPUBs were built on the runner
+        run: |
+          n=$(find artifacts/weekly_packages/way_stream_sanctuary -name '*.epub' 2>/dev/null | wc -l | tr -d ' ')
+          echo "EPUBs on runner: $n"
+          if [ "$n" -eq 0 ]; then
+            echo "::error::No EPUBs produced — aborting before R2/handoff."
+            exit 1
+          fi
+
+      - name: "all: full handoff (regen feed + SKUs from full tree) + R2 upload"
+        if: ${{ inputs.pilot_or_all == 'all' }}
         env:
           R2_ACCOUNT_ID: ${{ secrets.R2_ACCOUNT_ID }}
           R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
@@ -33,11 +86,30 @@ jobs:
           R2_BUCKET: ${{ secrets.R2_BUCKET }}
           PYTHONPATH: .
         run: |
-          if [ ! -d artifacts/weekly_packages/way_stream_sanctuary ]; then
-            echo "No weekly_packages tree on runner — sync artifacts before dispatch."
-            exit 1
+          python3 scripts/release/finish_waystream_handoff.py
+
+      - name: "pilot: R2 upload only (patch URLs onto existing feed — no regen)"
+        if: ${{ inputs.pilot_or_all != 'all' }}
+        env:
+          R2_ACCOUNT_ID: ${{ secrets.R2_ACCOUNT_ID }}
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          R2_BUCKET: ${{ secrets.R2_BUCKET }}
+          PYTHONPATH: .
+        run: |
+          python3 scripts/release/upload_waystream_deliveries_r2.py
+
+      - name: Commit regenerated feed + SKUs (all mode only — EPUBs stay off git)
+        if: ${{ inputs.pilot_or_all == 'all' }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add brand-wizard-app/public/brand_deliveries/way_stream_sanctuary.json \
+                  storefront/public/app/sample_catalog.way_stream_sanctuary.en-US.json \
+                  artifacts/waystream/r2_delivery_manifest.json || true
+          if git diff --cached --quiet; then
+            echo "No feed/SKU changes to commit."
+          else
+            git commit -m "chore(waystream): refresh delivery feed + SKUs after CI R2 upload [skip ci]"
+            git push
           fi
-          PYTHONPATH=. python3 scripts/onboarding/gen_brand_deliveries.py || \
-            GEN_BRAND_DELIVERIES_ALLOW_OVERFLOW=1 PYTHONPATH=. python3 scripts/onboarding/gen_brand_deliveries.py
-          PYTHONPATH=. python3 scripts/release/upload_waystream_deliveries_r2.py
-          PYTHONPATH=. python3 scripts/storefront/project_waystream_skus.py
