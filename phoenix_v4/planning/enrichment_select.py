@@ -606,6 +606,13 @@ class EnrichedBook:
     locale: Optional[str] = None
 
 
+# Non-null sentinel teacher_id used ONLY to drive generalized-mode wrapper framing
+# for composite (no-teacher) brand doctrine. It deliberately has NO teacher_registry
+# entry, so resolve_wrapper resolves no TEACHER_NAME and selects generalized mode
+# (teacher_wrapper.py:216-219). It is never used for teacher-bank atom loading.
+_GENERALIZED_WRAPPER_SENTINEL = "__generalized__"
+
+
 def _norm_teacher_id(teacher_id: Optional[str]) -> Optional[str]:
     if not teacher_id:
         return None
@@ -2223,9 +2230,30 @@ def select_enrichment(
                             seen_bodies=_book_seen_bodies,
                         )
                         if _cx_hit:
-                            _add_pieces.append(_cx_hit[0])
+                            # Composite brands have no named teacher, so the doctrine body
+                            # must carry GENERALIZED-mode attribution ("The contemplative
+                            # tradition teaches...") rather than ship un-wrapped. We route
+                            # through apply_wrapper with a non-null sentinel teacher_id that
+                            # has no teacher_registry entry: resolve_wrapper then finds no
+                            # TEACHER_NAME slot and selects generalized mode (teacher_wrapper
+                            # .py:216-219), filling {TRADITION} from spine_context or the
+                            # template slot_defaults. Teacher brands never reach this block
+                            # (it is gated `if not tid`), so named framing is unaffected.
+                            from phoenix_v4.rendering.teacher_wrapper import (
+                                apply_wrapper as _aw_composite,
+                            )
+                            _cx_body = _aw_composite(
+                                _cx_hit[0],
+                                teacher_id=_GENERALIZED_WRAPPER_SENTINEL,
+                                section_type=stype,
+                                seed=f"{seed_key}:composite",
+                                spine_context=plan_context,
+                            )
+                            _add_pieces.append(_cx_body)
                             _add_sources.append("composite_doctrine")
                             _add_ids.append(_cx_hit[1])
+                            # Dedup keys on the RAW doctrine body (not the rotating wrapper
+                            # stem) so two sections sharing the same doctrine are still caught.
                             _note_primary_body(_book_seen_bodies, _cx_hit[0])
                             _composite_filled = True
                             audit_counts["slots_from_composite"] = (

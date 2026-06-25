@@ -178,6 +178,65 @@ def test_empty_composite_falls_back_to_persona_pool(
     assert "composite_doctrine" not in slot.source
 
 
+def test_composite_doctrine_gets_generalized_wrapper_not_named(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Composite (no-teacher) brand doctrine must ship with GENERALIZED-mode
+    attribution ("...tradition teaches...") and never a named teacher voice.
+
+    Regression for the silent-un-wrapped composite path: the body was appended
+    raw, so a composite-brand book carried doctrine with no voice attribution.
+    The fix wraps it via apply_wrapper(__generalized__) so resolve_wrapper selects
+    generalized mode (no TEACHER_NAME) and fills {TRADITION} from spine_context /
+    template slot_defaults.
+    """
+    topic = "anxiety"
+    _write_canonical(
+        tmp_path / "SOURCE_OF_TRUTH" / "composite_doctrine" / topic / "CANONICAL.txt",
+        "Notice the alarm before you argue with it.",
+    )
+    monkeypatch.setattr(es, "load_registry", lambda _t: {"sections": {}})
+    monkeypatch.setattr(
+        es,
+        "_load_persona_atoms",
+        lambda *_a, **_k: _persona_compression_pool("P one.", "P two.", "P three."),
+    )
+
+    req = EnrichmentRequest(
+        topic_id=topic,
+        persona_id="gen_z_professionals",
+        teacher_id=None,
+        beatmap=_minimal_beatmap("COMPRESSION"),
+        seed="composite_wrap_seed",
+        publishable_book=False,
+        spine_context={"tradition": "Taoist", "tradition_short": "Taoist"},
+    )
+    book = select_enrichment(req, repo_root=tmp_path)
+    slot = book.chapters[0].slots[0]
+
+    # Raw doctrine body still present...
+    assert "Notice the alarm" in slot.content
+    assert "composite_doctrine" in slot.source
+    # ...now carrying generalized-mode framing (a "tradition/lineage/approach" stem)
+    # that satisfies register_gate F12_WRAPPER_ATTRIBUTION_RE.
+    import re as _re
+
+    assert _re.search(
+        r"\b(?:tradition|lineage|approach)\b"
+        r"|\bAccording to Taoist\b"
+        r"|\bRooted in\b"
+        r"|\bWithin the Taoist\b",
+        slot.content,
+        _re.IGNORECASE,
+    ), f"no generalized wrapper signature: {slot.content!r}"
+    # The generalized stem must precede the raw doctrine body (it is a prefix).
+    assert slot.content.index("Notice the alarm") > 0
+    # No named-teacher leak and no unresolved slot tokens.
+    for _name in ("Master Wu", "Ahjan", "Lena Thorne", "Sai Maa"):
+        assert _name not in slot.content
+    assert "{" not in slot.content and "}" not in slot.content
+
+
 def test_pick_composite_pool_maps_compression_to_doctrine() -> None:
     atoms = {
         "COMPOSITE_TEACHER_DOCTRINE": [_atom("c1", "body")],
