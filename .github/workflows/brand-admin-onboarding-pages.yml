@@ -5,7 +5,7 @@
 #   CLOUDFLARE_API_TOKEN_PAGES — Account → Cloudflare Pages → Edit (deploy only)
 #   CLOUDFLARE_API_TOKEN — R2 / feed workflows (do not use for Pages deploy)
 #
-# Cloudflare Pages project: `phoenix-brand-admin` → https://phoenix-brand-admin.pages.dev
+# Cloudflare Pages project: `brand-admin-onboarding` → https://brand-admin-onboarding.pages.dev
 #
 # If either secret is missing, the deploy job fails after a successful build — add both before expecting green deploys.
 name: Brand admin onboarding (Pages)
@@ -112,7 +112,7 @@ jobs:
           for name in R2_ACCESS_KEY_ID R2_SECRET_ACCESS_KEY R2_ACCOUNT_ID R2_ENDPOINT; do
             value="${!name:-}"
             if [ -n "$value" ]; then
-              printf '%s' "$value" | npx wrangler pages secret put "$name" --project-name=phoenix-brand-admin
+              printf '%s' "$value" | npx wrangler pages secret put "$name" --project-name=brand-admin-onboarding
             fi
           done
 
@@ -121,5 +121,5 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN_PAGES || secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy dist --project-name=phoenix-brand-admin --commit-dirty=true
+          command: pages deploy dist --project-name=brand-admin-onboarding --commit-dirty=true
           workingDirectory: brand-wizard-app
