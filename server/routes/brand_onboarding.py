@@ -45,6 +45,11 @@ ONBOARDING_DIR = REPO_ROOT / "artifacts" / "onboarding"
 SUBMISSIONS_DIR = ONBOARDING_DIR / "submissions"
 LOG_TSV = ONBOARDING_DIR / "submissions_log.tsv"
 ASSIGNMENTS_YAML = ONBOARDING_DIR / "roster_assignments.yaml"
+# Teacher 1:1 exclusivity ledger (gitignored, alongside the other onboarding overlays).
+# A teacher brand is a real person's voice — only ONE admin may claim it. Keyed by
+# "<lane>__<teacher_tid>" so the claim survives even if the same teacher slug appears in
+# multiple lanes (each lane is its own brand). The committed roster is never mutated.
+TEACHER_CLAIMS_YAML = ONBOARDING_DIR / "teacher_claims.yaml"
 
 _BRAND_RE = re.compile(r"^[a-z0-9][a-z0-9_]{0,127}$")
 _EMAIL_RE = re.compile(r"^[^@\s]+@[^@\s]+\.[^@\s]+$")
@@ -96,6 +101,63 @@ def _is_catalog_bearing(brand_id: str, index: Dict[str, dict]) -> bool:
     if not isinstance(entry, dict):
         return True
     return entry.get("buildable") is not False
+
+
+def _teacher_identity(brand_id: str, index: Dict[str, dict]) -> Optional[tuple[str, str]]:
+    """If brand_id is a teacher brand, return (lane, teacher_tid); else None.
+
+    Derived server-side from the SAME index the client matcher reads — the server is
+    authoritative, so the client does not need to send is_teacher/teacher_tid (and an
+    older/forged client cannot bypass the 1:1 rule). Unknown brand -> None (no claim).
+    """
+    entry = index.get(brand_id)
+    if not isinstance(entry, dict) or not entry.get("is_teacher"):
+        return None
+    tid = str(entry.get("tid") or "").strip()
+    lane = str(entry.get("lane") or "").strip()
+    if not tid:
+        return None
+    return (lane or "unknown_lane", tid)
+
+
+def _teacher_claims() -> Dict[str, dict]:
+    """Load the gitignored teacher-claim ledger ({claims: {"<lane>__<tid>": {...}}}).
+
+    FAIL-OPEN by contract: any read/parse error returns {} so a legitimate sign-up is
+    never blocked on a missing/corrupt ledger — the caller treats {} as "no prior claim".
+    """
+    try:
+        import yaml
+        if not TEACHER_CLAIMS_YAML.exists():
+            return {}
+        data = yaml.safe_load(TEACHER_CLAIMS_YAML.read_text(encoding="utf-8")) or {}
+        claims = data.get("claims") if isinstance(data, dict) else None
+        return claims if isinstance(claims, dict) else {}
+    except Exception as e:
+        logger.error("teacher-claim ledger unreadable (fail-open, allowing submit): %s", e)
+        return {}
+
+
+def _record_teacher_claim(key: str, brand_id: str, email: str, ts: str) -> None:
+    """Upsert a teacher claim. Best-effort: a write failure must not break the submit
+    (the submission itself is already persisted by the caller); log and move on."""
+    try:
+        import yaml
+        overlay: Dict[str, dict] = {}
+        if TEACHER_CLAIMS_YAML.exists():
+            try:
+                overlay = yaml.safe_load(TEACHER_CLAIMS_YAML.read_text(encoding="utf-8")) or {}
+            except Exception:
+                overlay = {}
+        if not isinstance(overlay, dict):
+            overlay = {}
+        overlay.setdefault("claims", {})
+        overlay["claims"][key] = {
+            "brand_id": brand_id, "email": email or None, "ts": ts,
+        }
+        _atomic_write(TEACHER_CLAIMS_YAML, yaml.safe_dump(overlay, sort_keys=False, allow_unicode=True))
+    except Exception as e:
+        logger.error("failed to record teacher claim %s for %s: %s", key, brand_id, e)
 
 
 def _resolve_archetype_to_brand(token: str, lane: Optional[str], index: Dict[str, dict]) -> Optional[str]:
@@ -179,6 +241,28 @@ def submit_onboarding(req: OnboardingSubmission) -> dict:
     contact = req.contact or {}
     name = " ".join(x for x in [contact.get("first_name"), contact.get("last_name")] if x).strip()
 
+    # 0. TEACHER 1:1 EXCLUSIVITY — a teacher brand is a real person's voice; only ONE admin
+    # may claim it. The teacher identity (lane, tid) is derived server-side from the brands
+    # index (authoritative; the client need not send it). If a claim already exists for this
+    # teacher, return 409 — the client auto-falls back to a composite brand. FAIL-OPEN: any
+    # ledger-read error allows the submit (never block a legitimate sign-up on infra errors).
+    teacher = _teacher_identity(brand_id, index)
+    teacher_claim_key: Optional[str] = None
+    if teacher is not None:
+        t_lane, t_tid = teacher
+        teacher_claim_key = f"{t_lane}__{t_tid}"
+        existing = _teacher_claims().get(teacher_claim_key)
+        if isinstance(existing, dict) and existing.get("brand_id"):
+            existing_email = (existing.get("email") or "").strip().lower()
+            # Idempotent re-submit by the SAME admin -> not a conflict; fall through and re-log.
+            if not (email and existing_email and email.lower() == existing_email):
+                logger.info("teacher already claimed: key=%s brand=%s by=%s",
+                            teacher_claim_key, existing.get("brand_id"), existing_email or "?")
+                raise HTTPException(
+                    status_code=409,
+                    detail={"error": "teacher_claimed", "brand_id": existing.get("brand_id")},
+                )
+
     # 1. LOG — write the full submission YAML (gitignored)
     sub_path = SUBMISSIONS_DIR / day / f"{brand_id}__{_email_slug(email)}.yaml"
     record = {
@@ -210,6 +294,11 @@ def submit_onboarding(req: OnboardingSubmission) -> dict:
         "assigned_via": "brand_onboarding_wizard",
     }
     _atomic_write(ASSIGNMENTS_YAML, yaml.safe_dump(overlay, sort_keys=False, allow_unicode=True))
+
+    # 4. CLAIM — record the teacher claim AFTER the submission is durably persisted, so the
+    # 1:1 lock reflects a real, logged sign-up. No-op for composite brands (teacher is None).
+    if teacher_claim_key is not None:
+        _record_teacher_claim(teacher_claim_key, brand_id, email, ts)
 
     logger.info("onboarding submit: brand=%s assigned=%s", brand_id, bool(name or email))
     return {
