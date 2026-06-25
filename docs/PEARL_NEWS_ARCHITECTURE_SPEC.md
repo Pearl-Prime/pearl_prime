@@ -127,8 +127,9 @@ Supported posting features:
 ## 6. Workflow plan
 
 Production workflows in `phoenix_omega`:
-- [`pearl_news_scheduled.yml`](../.github/workflows/pearl_news_scheduled.yml)
-- [`pearl_news_manual_expand.yml`](../.github/workflows/pearl_news_manual_expand.yml)
+- [`pearl-news-daily.yml`](../.github/workflows/pearl-news-daily.yml) — twice-daily publish (10 teachers/cycle)
+- [`pearl-news-fill-qwen.yml`](../.github/workflows/pearl-news-fill-qwen.yml) — slot fill on self-hosted runner
+- [`pearl-news-assemble.yml`](../.github/workflows/pearl-news-assemble.yml) — assemble from filled slots
 
 Operational pattern:
 - Scheduled run: publish-grade generation (`--expand --strict-publish-grade`) with repair attempts and hard-fail on unresolved gate failures.

@@ -21,8 +21,8 @@ Usage:
 
 Required env vars:
   WORDPRESS_SITE_URL, WORDPRESS_USERNAME, WORDPRESS_APP_PASSWORD
-  ANTHROPIC_API_KEY  (English articles via Claude)
-  QWEN_BASE_URL      (CJK articles; default http://192.168.1.112:11434/v1)
+  GEMMA_BASE_URL     (English articles via Pearl Star Gemma — Tier 2)
+  QWEN_BASE_URL      (CJK articles; default http://pearlstar.tail7fd910.ts.net:11434/v1)
 """
 from __future__ import annotations
 

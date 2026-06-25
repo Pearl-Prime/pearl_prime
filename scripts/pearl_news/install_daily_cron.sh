@@ -6,7 +6,7 @@
 # direct access to Pearl Star for CJK article generation.
 #
 # Prerequisites:
-#   - All WordPress + Anthropic + Qwen env vars exported in your shell profile
+#   - WordPress + Pearl Star LLM env vars exported in your shell profile
 #     (or loaded via: eval "$(python3 scripts/ci/load_integration_env_from_keychain.py)")
 #   - pip install -r requirements.txt
 #

@@ -3,11 +3,12 @@ name: Pearl News daily publish
 # 6 AM Taiwan (UTC+8) = 22:00 UTC previous day → morning cycle
 # 6 PM Taiwan (UTC+8) = 10:00 UTC              → evening cycle
 #
-# NOTE: QWEN_BASE_URL must be set to Pearl Star's address.
-# If Pearl Star (192.168.1.112) is on a local network unreachable from
-# GitHub Actions runners, CJK articles will fail on GitHub Actions —
-# use install_daily_cron.sh on the local machine instead for CJK.
-# English-only runs will work fine from GitHub Actions.
+# REQUIRES self-hosted runner `pearl-star` (Tailscale) — Pearl Star Ollama is NOT
+# reachable from GitHub-hosted runners. Secrets must point at Pearl Star Ollama:
+#   GEMMA_BASE_URL=http://pearlstar.tail7fd910.ts.net:11434/v1
+#   QWEN_BASE_URL=http://pearlstar.tail7fd910.ts.net:11434/v1
+# Wire from Keychain: bash scripts/pearl_news/wire_github_secrets.sh
+# Local fallback (no GHA): bash scripts/pearl_news/install_daily_cron.sh
 
 on:
   schedule:
@@ -36,19 +37,21 @@ on:
 jobs:
   publish-articles:
     name: Publish Pearl News articles (${{ github.event.inputs.cycle || 'scheduled' }})
-    runs-on: ubuntu-latest
-    timeout-minutes: 60
+    # pearl-star runner has Tailscale; required to reach Pearl Star Ollama (Tier 2).
+    runs-on: [self-hosted, pearl-star]
+    timeout-minutes: 90
 
     env:
       WORDPRESS_SITE_URL: ${{ secrets.WORDPRESS_SITE_URL }}
       WORDPRESS_USERNAME: ${{ secrets.WORDPRESS_USERNAME }}
       WORDPRESS_APP_PASSWORD: ${{ secrets.WORDPRESS_APP_PASSWORD }}
       # Tier 2 routing: Gemma (EN) + Qwen (CJK) on Pearl Star via Ollama.
-      # No paid API keys — use self-hosted runner or set BASE_URLs to Pearl Star.
+      # No paid API keys — BASE_URLs must be Pearl Star Ollama, not DashScope cloud.
       GEMMA_BASE_URL: ${{ secrets.GEMMA_BASE_URL }}
-      GEMMA_MODEL: gemma2:9b
+      GEMMA_MODEL: gemma3:27b
       QWEN_BASE_URL: ${{ secrets.QWEN_BASE_URL }}
       QWEN_MODEL: qwen2.5:14b
+      QWEN_API_KEY: ollama
       PYTHONPATH: .
 
     steps:
@@ -63,6 +66,9 @@ jobs:
 
       - name: Install dependencies
         run: pip install -r requirements.txt
+
+      - name: Preflight Pearl Star LLM + WordPress secrets
+        run: bash scripts/pearl_news/preflight_daily_publish.sh
 
       # ───────────────────────────────────────────────────────────────────
       # Pearl News sidebar parity gate (BLOCKS publish on parity-fail).
