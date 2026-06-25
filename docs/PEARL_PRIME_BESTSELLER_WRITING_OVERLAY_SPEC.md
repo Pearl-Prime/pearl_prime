@@ -738,4 +738,78 @@ development iteration.
 
 ---
 
+## Added from PEARL_PRIME_ONE_PATH_LOCKDOWN_V1_SPEC — 2026-06-25
+
+The ONE-PATH lockdown proposal (`docs/specs/PEARL_PRIME_ONE_PATH_LOCKDOWN_V1_SPEC.md`,
+2026-06-06, originally a cap-entry PROPOSAL) is consolidated here. Its operator
+directive — *"the best way for pearl prime … drop the weaker stuff so that no agent
+gets the option of doing it lesser"* — is the binding intent behind the canonical CLI
+documented at the top of `scripts/run_pipeline.py`. The proposal's runtime-assert
+matrix is retained below as the **canonical-path reference** (values are doctrine;
+each named gate is the enforcement point — some are live today, some remain proposed
+and are tracked against their workstreams, not re-decided here).
+
+**The canonical Pearl Prime path (one value per dimension; no fallback, no default-on-miss):**
+
+| # | Dimension | Canonical value |
+|---:|---|---|
+| D1 | `arc.chapter_count` | 12 (F006 12-chapter shape; matches 12-spine 1:1) |
+| D2 | `chapter.section_count` | 10 (`SOMATIC_10_SLOT_GRID`; no tapering) |
+| D3 | `section_02.atom_type` | STORY (not SCENE; PR-669 forward) |
+| D4 | `section.variant_floor` | ≥3 enforced at runtime |
+| D5 | `section.variant_ceiling` | ≤5 (3 fine; 4–5 bonus; warn-only over) |
+| D6 | `quality_profile` (catalog) | production ONLY for `ref_*_v1` / `cat_*` book-plan ids |
+| D7 | `exercise_resolution` | strict-canonical; persona-keyed OR teacher-bank EXERCISE; NO practice_library fall-through under production |
+| D8 | `persona_keyed_atoms.required` | 16 slot-type dirs per persona×topic; NO generic teacher-bank fallback |
+| D9 | `teacher_pool_semantics` | first-match deterministic (already enforced) |
+| D10 | `hook_opening` | scene-first; F11 detector WARN→BLOCK |
+| D11 | `audiobook_wpm.midpoint` | 130–200 inclusive per format |
+| D12 | `voice_braid` | slot-zoned (see "Voice Architecture: One Author + Wrappers" above) |
+| D13 | `character_transform.required` | every named character shows on-page transformation |
+| D14 | `pronoun_continuity` | `character_roster.yaml` pronoun field binding; no mid-book slippage |
+| D15 | `signal_amp_framing` | ≥1 explicit "signal vs amplification" beat per chapter on the 5 introspective engines |
+| D16 | `placeholder_leakage` | zero placeholder/fingerprint/lonely-promise tokens in book.txt |
+| D17 | `decorative_metaphor_cap` | whitelist-bounded (signature_phrases.yaml); off-list phrase 1 use total |
+| D18 | `chapter_repetition_gate` | inter-chapter cosine similarity < 0.85 (local embeddings; no paid API) |
+| D19 | `signature_phrases.whitelist` | ≤5 phrases per book |
+| D20 | `ahjan_voice.specificity` | TEACHER_DOCTRINE cites named contemplative sources; generic aphorism rejected |
+
+Gold reference combo (the canonical output-shape ground truth): brand `stillness_press`,
+persona `gen_z_professionals`, topic `anxiety`, engine `spiral`, teacher `ahjan`, arc
+`gen_z_professionals__anxiety__spiral__F006.yaml` (chapter_count 12), profile
+`production`, flags `--exercise-journeys --pipeline-mode spine`. Any catalog run that
+does not match this profile is, by definition, a lesser configuration. Per-dimension
+assert-point locations + the hard-deletion manifest live in the (now-superseded) source
+spec's git history if needed.
+
+## Added from PEARL_PRIME_HOLISTIC_CHAPTER_ARCHITECTURE_SPEC — 2026-06-25
+
+The Holistic Chapter Architecture v2 doctrine
+(`docs/specs/PEARL_PRIME_HOLISTIC_CHAPTER_ARCHITECTURE_SPEC.md`, 2026-05-20) is
+consolidated here. Its core craft insight upgrades §4's chapter-level contract: **a
+chapter is a narrative unit with a dominant role, not a uniform 10-slot fill.** Each
+chapter develops 1–2 narrative tasks across sustained paragraphs from a smaller, longer
+atom set — the opposite of filling every slot from ~117-word atoms (which reads as a
+checklist). The 8 canonical chapter roles (extending miki's WITNESS/COSTUME/SEEING/LIGHT
+up to `deep_book_6h`):
+
+| Role | Hook word | Chapter task |
+|---|---|---|
+| WITNESS | Recognition | Opens with a present-tense vignette establishing the felt experience; one anonymous protagonist, no exercise, no named cast. |
+| COSTUME | Story+reflection | Named character carrying ONE sustained story-arc ≥1,000 words; teacher voice woven into the story, not isolated in a TEACHER_DOCTRINE slot. |
+| SEEING | Exercise | One sustained 5-part exercise (intro/description/guidance/aha/integration) occupying the bulk of the chapter. |
+| LIGHT | Compression+permission | Distills to a compressed thesis + explicit permissions (5–8 "you are allowed to ___"). |
+| ENGINE | Mechanism reveal | The angle's named object (e.g. "The Alarm") gets a deep teaching block. |
+| TEST | Practice under pressure | The SEEING practice tested under real conditions (interview, hard conversation, sleepless night). |
+| NAMING | Identity shift | Reader names what they carry — identity-naming, not behavior-naming. |
+| THRESHOLD | Closing+doorway | Hands the practice off into life; the deep-runtime equivalent of LIGHT's closing. |
+
+Per-runtime chapter→role assignment is data, not prose: it lives in
+`config/catalog_planning/chapter_role_assignment.yaml` (consumed by
+`phoenix_v4/planning/chapter_planner.py` before slot-row construction). v2 coexists with
+the v1 slot-fill pipeline via opt-in; it does not replace the 11 `VALID_SLOT_TYPES` —
+it sets each chapter's *dominant* role so atom selection concentrates rather than spreads.
+
+---
+
 *End of spec. This document is indexed in `docs/DOCS_INDEX.md`.*

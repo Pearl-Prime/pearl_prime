@@ -30,10 +30,12 @@
 - **Details:** Book assembly is **deterministic atom-composition** (no LLM at build; thin pools must raise
   `InsufficientVariantsError` → fix by adding atoms, never LLM-expand — verify `pearl_writer_expand.py` is NOT on the
   spine/production path). First Waystream pilot (`corporate_managers × burnout × overwhelm`) reached **register PASS /
-  BUILD_EXIT=0** via `cc4056b259` (F6/F7/F13) + `4474753be9` (F1/F4). ⚠ **`4474753be9` is STRANDED — local-only, NOT
-  on origin. Push it (engine PR off main; the fixes are generic, all brands benefit) or the first EPUB can't be
-  reproduced.** Residual F-classes for the next cells: F2 (phrasal-verb precision), F7 (composer-output cap).
-  **0 catalog EPUBs are assembled/sellable yet.**
+  BUILD_EXIT=0** via the F6/F7/F13 + F1/F4 register strengthening, **now LIVE on `main` as `8e21b6ce1c`**
+  (`dedupe_register_f1_paragraphs` + `ensure_unique_chapter_closings` present, with more F4 passes than the old local
+  branch). ✅ **The previously-stranded `4474753be9` is fully SUPERSEDED — its F1/F4 fix re-landed cleanly as
+  `8e21b6ce1c`; do NOT cherry-pick the local commit (it predates newer F7 work and would regress main).** Residual
+  F-classes for the next cells: F2 (phrasal-verb precision), F7 (composer-output cap). **0 catalog EPUBs are
+  assembled/sellable yet.**
 
 ### GHL marketing feed
 - **Status:** **LIVE**
@@ -51,6 +53,17 @@
 - **Details:** 273 `series_plans_ja_JP` on `main`. Pilot: 304 composed v3 segments (#1236), wave1 ep_001 + pipeline
   (#1860), ep_003–010 scripts (#1189). Unattended-render frontier = the Pearl Star queue (ratified canonical for
   renders; the GitHub Actions self-hosted runner is fragile — 403 + 1800s timeouts). Audit: `docs/MANGA_RECOVERY_AUDIT.md`.
+
+### Pearl Prime — Canonical CLI + Spec Surface
+- **Status:** **CONSOLIDATED (2026-06-25)**
+- **Details:** Single craft + runtime authority = `docs/PEARL_PRIME_BESTSELLER_WRITING_OVERLAY_SPEC.md`. Canonical
+  release build = `scripts/run_pipeline.py --pipeline-mode spine --quality-profile production --exercise-journeys
+  --render-book` (documented at top of `run_pipeline.py`; argparse defaults stay `--pipeline-mode registry`,
+  `--quality-profile production`; **spine is NOT the default** — Pearl Prime callers pass it explicitly). HOLISTIC
+  chapter-architecture v2 (8-role doctrine) + ONE-PATH LOCKDOWN (D1–D20 canonical-path matrix + gold-reference combo)
+  are folded into the OVERLAY under dated "Added from" sections; both source specs ⛔ SUPERSEDED. `evaluate_register →
+  register_gate_report.json` wiring active; `pearl_writer_expand.py` confirmed NOT on the spine+production path
+  (`section_packet_composer.expand_thin_sections` default-False, unwired to any CLI flag).
 
 ### Storefront
 - **Status:** **LIVE** — renders sample/listing data; real downloadable files = 0 (gated on assembled EPUBs + the

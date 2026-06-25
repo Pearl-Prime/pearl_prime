@@ -4,6 +4,34 @@ Full pipeline: Stage 1 (catalog) -> Stage 2 (format selector) -> Stage 3 (assemb
 Usage:
   python3 scripts/run_pipeline.py --topic self_worth --persona nyc_executives --arc config/source_of_truth/master_arcs/nyc_executives__self_worth__shame__F006.yaml --out artifacts/out.plan.json
   python3 scripts/run_pipeline.py --input example_input.yaml --arc path/to/arc.yaml --out out.plan.json
+
+CANONICAL PEARL PRIME CLI (authority: docs/PEARL_PRIME_BESTSELLER_WRITING_OVERLAY_SPEC.md).
+The OVERLAY spec is the single craft + runtime authority for Pearl Prime bestseller
+books. For a RELEASE-grade build, every quality gate must pass:
+
+  PYTHONPATH=. python3 scripts/run_pipeline.py \
+    --topic <topic> --persona <persona> \
+    --arc <arc.yaml> --pipeline-mode spine \
+    --runtime-format <format> \
+    --quality-profile production \
+    --exercise-journeys \
+    --no-job-check --render-book \
+    --render-dir <out_dir>
+
+Profile semantics (argparse defaults below): --pipeline-mode default is `registry`
+(fast section-registry path); Pearl Prime bestseller builds MUST pass
+`--pipeline-mode spine`. --quality-profile default is `production` (all gates run; any
+failure exits 1). Use `flagship` to verify only the three load-bearing structural
+gates (chapter_flow, book_quality_gate, scene_anti_genericity); `draft`/`debug` for
+iteration only. `--exercise-journeys` attaches the multi-part EXERCISE journeys and is
+part of the canonical production invocation.
+
+NOTE: the spine+production path renders deterministically from the atom banks +
+register_output_strengthen post-passes (F1/F4/F6/F7/F13). It does NOT invoke
+phoenix_v4/rendering/pearl_writer_expand.py — thin-section LLM expansion is gated
+behind section_packet_composer's `expand_thin_sections` flag (default False) and is
+NOT wired to any run_pipeline CLI flag. Do not enable it on the spine+production
+release path without an explicit spec amendment.
 """
 from __future__ import annotations
 

@@ -1,6 +1,13 @@
+> ⛔ SUPERSEDED 2026-06-25 — craft doctrine consolidated into the canonical
+> `docs/PEARL_PRIME_BESTSELLER_WRITING_OVERLAY_SPEC.md` (§ "Added from
+> PEARL_PRIME_HOLISTIC_CHAPTER_ARCHITECTURE_SPEC — 2026-06-25"). The 8-role
+> chapter-architecture doctrine now lives in the OVERLAY. Retained for history +
+> the per-runtime `chapter_role_assignment.yaml` derivation detail. Build off the
+> OVERLAY, not this file.
+
 # PEARL_PRIME_HOLISTIC_CHAPTER_ARCHITECTURE — Chapter as narrative unit, not slot-grid
 
-**Status:** v2 — chapter architecture upgrade. Coexists with v1 (existing slot-fill pipeline) via opt-in.
+**Status:** SUPERSEDED 2026-06-25 (consolidated into OVERLAY). Was: v2 — chapter architecture upgrade, coexisting with v1 via opt-in.
 **Effective:** 2026-05-20
 **Authority:** `docs/PEARL_ARCHITECT_STATE.md`
 **Operator diagnosis source:** OPDs 129–133 (2026-05-20 — Holistic Chapter Architecture diagnosis)

@@ -1,6 +1,15 @@
+> ⛔ SUPERSEDED 2026-06-25 — the canonical-path reference (the D1–D20 one-value-per-
+> dimension matrix + gold-reference combo) is consolidated into the canonical
+> `docs/PEARL_PRIME_BESTSELLER_WRITING_OVERLAY_SPEC.md` (§ "Added from
+> PEARL_PRIME_ONE_PATH_LOCKDOWN_V1_SPEC — 2026-06-25"). This file remains the
+> historical source for per-dimension assert-point locations + the hard-deletion
+> manifest. The dimension VALUES are doctrine; individual runtime gates remain
+> tracked against their own workstreams (some live, some still proposed) and are
+> NOT re-ratified by consolidation. Build off the OVERLAY, not this file.
+
 # Pearl Prime — ONE-PATH Lockdown V1 (Spec)
 
-**Status:** **PROPOSAL — awaiting Pearl_Architect cap-entry ratification + operator answers to §10 Q-OP-***
+**Status:** SUPERSEDED 2026-06-25 (canonical-path reference consolidated into OVERLAY). Was: PROPOSAL — awaiting Pearl_Architect cap-entry ratification + operator answers to §10 Q-OP-*
 **Date:** 2026-06-06
 **Authority order:** Subordinate to [`specs/PHOENIX_ARC_FIRST_CANONICAL_SPEC.md`](../../specs/PHOENIX_ARC_FIRST_CANONICAL_SPEC.md) (§2 arc-blueprint contract) and [`specs/PHOENIX_V4_5_WRITER_SPEC.md`](../../specs/PHOENIX_V4_5_WRITER_SPEC.md) (§4 atom contracts; §3 TTS prose law). **Supersedes** the partial constraints in [`docs/PEARL_PRIME_BESTSELLER_WRITING_OVERLAY_SPEC.md`](../PEARL_PRIME_BESTSELLER_WRITING_OVERLAY_SPEC.md) by promoting its rubric scoring to runtime gates, and [`docs/PEARL_PRIME_CRAFT_DEPTH_OVERLAY_PROPOSAL_2026-06-06.md`](../PEARL_PRIME_CRAFT_DEPTH_OVERLAY_PROPOSAL_2026-06-06.md) by making its G1-G6 + C1-C5 mandatory instead of advisory.
 **Audience:** Pearl_Architect (decision); Pearl_Dev (runtime gates); Pearl_Editor + Pearl_Writer (atom + content backfill); Pearl_PM (sequencing).
