@@ -3,12 +3,8 @@ name: Pearl News daily publish
 # 6 AM Taiwan (UTC+8) = 22:00 UTC previous day → morning cycle
 # 6 PM Taiwan (UTC+8) = 10:00 UTC              → evening cycle
 #
-# REQUIRES self-hosted runner `pearl-star` (Tailscale) — Pearl Star Ollama is NOT
-# reachable from GitHub-hosted runners. Secrets must point at Pearl Star Ollama:
-#   GEMMA_BASE_URL=http://pearlstar.tail7fd910.ts.net:11434/v1
-#   QWEN_BASE_URL=http://pearlstar.tail7fd910.ts.net:11434/v1
-# Wire from Keychain: bash scripts/pearl_news/wire_github_secrets.sh
-# Local fallback (no GHA): bash scripts/pearl_news/install_daily_cron.sh
+# REQUIRES self-hosted runner `pearl-star` — Ollama runs on the same host (loopback).
+# Local Mac cron fallback: bash scripts/pearl_news/install_daily_cron.sh
 
 on:
   schedule:
@@ -45,11 +41,11 @@ jobs:
       WORDPRESS_SITE_URL: ${{ secrets.WORDPRESS_SITE_URL }}
       WORDPRESS_USERNAME: ${{ secrets.WORDPRESS_USERNAME }}
       WORDPRESS_APP_PASSWORD: ${{ secrets.WORDPRESS_APP_PASSWORD }}
-      # Tier 2 routing: Gemma (EN) + Qwen (CJK) on Pearl Star via Ollama.
-      # No paid API keys — BASE_URLs must be Pearl Star Ollama, not DashScope cloud.
-      GEMMA_BASE_URL: ${{ secrets.GEMMA_BASE_URL }}
+      # Tier 2 routing: Gemma (EN) + Qwen (CJK) on local Ollama (pearl-star runner).
+      # Hardcoded loopback — runner and Ollama share the same host; avoids secret newline issues.
+      GEMMA_BASE_URL: http://127.0.0.1:11434/v1
       GEMMA_MODEL: gemma3:27b
-      QWEN_BASE_URL: ${{ secrets.QWEN_BASE_URL }}
+      QWEN_BASE_URL: http://127.0.0.1:11434/v1
       QWEN_MODEL: qwen2.5:14b
       QWEN_API_KEY: ollama
       PYTHONPATH: .
