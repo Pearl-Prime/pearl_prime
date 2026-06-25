@@ -58,6 +58,22 @@ PLATFORM_CAP_KEY = {
 _DEFAULT_CAP_PLATFORM = ("google_play_books", "new_imprint")
 # Escape hatch for legitimate operator-approved bulk weeks (off by default).
 ALLOW_OVERFLOW = os.environ.get("GEN_BRAND_DELIVERIES_ALLOW_OVERFLOW") == "1"
+# Shrink-guard: this builder is a FULL REGEN keyed on the EPUBs physically present in
+# weekly_packages — it is NOT additive. Running it with only a partial local subset
+# (e.g. an 18-EPUB pilot when main carries a 48-week / 153-SKU feed) silently rewrites
+# the tracked feed down to that subset (a destructive regression that already happened).
+# Refuse to overwrite a tracked feed with FEWER file entries than it currently holds,
+# unless explicitly overridden. Only run the unguarded regen in the full-tree CI context.
+ALLOW_SHRINK = os.environ.get("GEN_BRAND_DELIVERIES_ALLOW_SHRINK") == "1"
+
+
+def _feed_file_count(feed: dict) -> int:
+    """Total delivery file entries across all weeks/platforms in a feed dict."""
+    return sum(
+        len(files or [])
+        for plats in (feed.get("weeks") or {}).values()
+        for files in plats.values()
+    )
 
 
 def _cap_max_for_platform(plat: str, safe: dict) -> int | None:
@@ -169,7 +185,23 @@ def main() -> None:
         # brand has a packet this week, so a ramped backlog shows the cadenced count
         # (e.g. ~1-2) rather than the largest/last future week.
         feed["latest_week"] = cur_week if cur_week in feed["weeks"] else weeks_sorted[-1]
-        (FEED / f"{base}.json").write_text(
+        out_path = FEED / f"{base}.json"
+        new_count = _feed_file_count(feed)
+        if out_path.is_file() and not ALLOW_SHRINK:
+            try:
+                prev = json.loads(out_path.read_text(encoding="utf-8"))
+                prev_count = _feed_file_count(prev)
+            except (json.JSONDecodeError, OSError):
+                prev_count = 0
+            if new_count < prev_count:
+                raise SystemExit(
+                    f"SHRINK-GUARD: {base}.json would drop from {prev_count} -> {new_count} file "
+                    f"entries. This is a FULL REGEN keyed on EPUBs present under "
+                    f"artifacts/weekly_packages/{base}/ — you are almost certainly running it "
+                    f"locally with only a partial subset (build the full tree first, or run in "
+                    f"the full-tree CI context). To intentionally shrink, set "
+                    f"GEN_BRAND_DELIVERIES_ALLOW_SHRINK=1.")
+        out_path.write_text(
             json.dumps(feed, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
         plats = sorted({p for w in feed["weeks"].values() for p in w})
         print(f"  {base}: latest_week={feed['latest_week']} weeks={weeks_sorted} platforms={plats}")

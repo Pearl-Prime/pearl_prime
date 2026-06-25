@@ -12,6 +12,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import re
 from pathlib import Path
 
@@ -142,6 +143,11 @@ def main() -> int:
         help="write [] when deliveries feed is missing (for dry checks)",
     )
     ap.add_argument("--out", type=Path, default=OUT)
+    ap.add_argument(
+        "--allow-shrink",
+        action="store_true",
+        help="permit overwriting the catalog with fewer SKUs than it currently has",
+    )
     args = ap.parse_args()
     try:
         rows = project(require_deliveries=not args.allow_empty)
@@ -150,6 +156,25 @@ def main() -> int:
             rows = []
         else:
             raise exc
+    # Shrink-guard: this is a FULL REGEN of the sample catalog, keyed on the books present
+    # in the (just-regenerated) delivery feed. Running it after a partial local build silently
+    # rewrites the tracked catalog down to that subset (153 -> 18 already happened once).
+    # Refuse to overwrite a tracked catalog with fewer SKUs unless explicitly overridden;
+    # only run the unguarded regen in the full-tree CI context.
+    allow_shrink = args.allow_shrink or os.environ.get("WAYSTREAM_SKUS_ALLOW_SHRINK") == "1"
+    if args.out.is_file() and not allow_shrink and not args.allow_empty:
+        try:
+            prev = json.loads(args.out.read_text(encoding="utf-8"))
+            prev_count = len(prev) if isinstance(prev, list) else 0
+        except (json.JSONDecodeError, OSError):
+            prev_count = 0
+        if len(rows) < prev_count:
+            raise SystemExit(
+                f"SHRINK-GUARD: {args.out.name} would drop from {prev_count} -> {len(rows)} SKUs. "
+                f"This is a FULL REGEN keyed on the delivery feed — you are almost certainly "
+                f"running it after a partial local build (build the full tree first, or run in "
+                f"the full-tree CI context). To intentionally shrink, set "
+                f"WAYSTREAM_SKUS_ALLOW_SHRINK=1.")
     args.out.parent.mkdir(parents=True, exist_ok=True)
     args.out.write_text(json.dumps(rows, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(f"wrote {len(rows)} waystream SKUs -> {args.out.relative_to(REPO)}")
