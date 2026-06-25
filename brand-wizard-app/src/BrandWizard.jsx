@@ -2822,6 +2822,7 @@ function Step10Blueprint_UNUSED({ state }) {
 }
 
 function Step11Launch({ state, update, i18n = {} }) {
+  const { t } = useTranslation();
   const { tArchetypes: _A = ARCHETYPES, tPersonas: _P = PERSONAS, tMoments: _M = MOMENTS, tVisualStyles: _V = VISUAL_STYLES, tSelectionFeedback: _SF = SELECTION_FEEDBACK } = i18n;
   const handleField = (field, val) => update({ contact: { ...state.contact, [field]: val } });
   const c = state.contact || {};
@@ -2844,14 +2845,44 @@ function Step11Launch({ state, update, i18n = {} }) {
   };
 
   const handleLaunch = async () => {
-    setYamlOutput(generateYAML(state));
+    const wizardYaml = generateYAML(state);
+    setYamlOutput(wizardYaml);
     setSubmitted(true);
+    let m = null;
     try {
       const r = await fetch("brand_admin_brands.json", { cache: "no-store" });
       const brands = r.ok ? await r.json() : {};
-      const m = matchBrand(state, brands, readTeacherMode());
+      m = matchBrand(state, brands, readTeacherMode());
+      // localStorage stays as a client-side convenience (Brand Director reads it).
       if (m) { setMatched(m); try { localStorage.setItem("phoenix_pending_brand", JSON.stringify(m)); } catch (_) {} }
     } catch (_) {}
+    // Durable server-side record: POST the signup to the Cloudflare Pages Function,
+    // which proxies to FastAPI POST /api/v1/onboarding/submit (logs + roster assignment).
+    // Best-effort: a failure here must NOT break the success screen (localStorage already
+    // holds the match); the Function degrades gracefully when no backend is configured.
+    if (m) {
+      const c = state.contact || {};
+      try {
+        await fetch("api/onboarding/submit", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            brand_id: m.brand_id,
+            lane: m.lane,
+            publication_corp: m.publication_corp,
+            brand_email: (c.email || "").trim() || null,
+            contact: {
+              first_name: c.firstName || "",
+              last_name: c.lastName || "",
+              phone: ((c.phoneCode || "+1") + " " + (c.phone || "")).trim(),
+            },
+            wizard_yaml: wizardYaml,
+            match_score: typeof m.score === "number" ? m.score : null,
+            match_basis: m.basis || null,
+          }),
+        });
+      } catch (_) {}
+    }
   };
 
   if (submitted) {

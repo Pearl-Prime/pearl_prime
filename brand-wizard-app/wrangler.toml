@@ -28,5 +28,14 @@ pages_build_output_dir = "dist"
 # R2_SECRET_ACCESS_KEY, optional R2_ENDPOINT) synced in brand-admin-onboarding-pages.yml.
 # Do NOT add [[r2_buckets]] here — phoenix-omega-artifacts is on the operator R2 account,
 # not the b80152c3 Pages deploy account; wrangler deploy fails if the bucket is missing.
+#
+# Onboarding signup proxy (functions/api/onboarding/submit.js) forwards the wizard signup
+# POST to the FastAPI backend at POST /api/v1/onboarding/submit. The backend base URL is a
+# DEPLOY-TIME binding, NOT hardcoded — set it in Cloudflare Pages -> brand-admin-onboarding
+# -> Settings -> Environment variables (or via `wrangler pages secret put`):
+#   ONBOARDING_API_BASE   e.g. "https://api.pearlprime.internal"  (scheme+host, no path)
+#   ONBOARDING_API_TOKEN  optional — sent as `Authorization: Bearer <token>` if set.
+# Until ONBOARDING_API_BASE is set, the Function returns 503 "unconfigured" and the wizard
+# retains the signup client-side (localStorage) — no crash, no silent data loss.
 [vars]
 R2_BUCKET = "phoenix-omega-artifacts"
