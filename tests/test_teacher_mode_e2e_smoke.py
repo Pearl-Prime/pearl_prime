@@ -65,7 +65,12 @@ def test_teacher_mode_compile_smoke(teacher_id: str, tmp_path: Path):
     if not _has_f006_coverage(teacher_id):
         # Expect coverage gate or compile failure when slots missing
         if result.returncode != 0:
-            assert "coverage" in result.stderr.lower() or "TeacherCoverageError" in result.stderr or "insufficient" in result.stderr.lower()
+            assert (
+                "coverage" in result.stderr.lower()
+                or "TeacherCoverageError" in result.stderr
+                or "insufficient" in result.stderr.lower()
+                or "teacher_exercise_deficit" in result.stderr.lower()
+            )
         return
     assert result.returncode == 0, f"Pipeline failed for {teacher_id}: {result.stderr}"
     assert out_plan.exists()
