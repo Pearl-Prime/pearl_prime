@@ -26,7 +26,7 @@ def defer_task(task: str, payload: dict[str, Any]) -> int:
         raise ValueError(f"unknown task {task!r}; expected one of {sorted(TASK_NAMES)}")
     if str(WORKER_DIR) not in sys.path:
         sys.path.insert(0, str(WORKER_DIR))
-    os.environ.setdefault("PROCRASTINATE_APP", "app.app:app")
+    os.environ.setdefault("PROCRASTINATE_APP", "app.app")
     from app import app  # noqa: WPS433
 
     with app.open():

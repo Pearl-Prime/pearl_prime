@@ -11,7 +11,7 @@ Gated on Phase 1 sentinel ``SMOKE_OK_ja_jp_stillness.flag``. Refuses to start
 if ``SMOKE_FAILED.flag`` exists or ``SMOKE_OK`` doesn't.
 
 Per-chapter loop:
-  1. queue_panel_renders.py (H1=A workflow, --skip-existing)
+  1. queue_panel_renders.py (H1=A workflow, --skip-existing, --via-queue)
   2. bubble_render for locale=ja_JP
   3. Daily progress TSV append at
      ``artifacts/manga/bulk_render_progress_ja_jp_<date>.tsv``
@@ -94,6 +94,7 @@ def render_chapter(series_id: str, chapter_id: str, *, dry_run: bool, max_retrie
         "--output-dir", str(out_dir),
         "--workflow-path", str(H1A_WORKFLOW),
         "--skip-existing",
+        "--via-queue",
     ]
     for attempt in range(max_retries):
         log(f"  render attempt {attempt + 1}/{max_retries}: {chapter_id}")

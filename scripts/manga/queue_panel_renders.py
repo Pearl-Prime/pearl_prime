@@ -43,6 +43,8 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import shlex
+import subprocess
 import sys
 import time
 import urllib.error
@@ -73,6 +75,53 @@ POLL_INTERVAL_SEC = 2.0
 # on a shared GPU can hit 4-7 min on contested VRAM; bump to 15 min and let the
 # orchestrator override via env if needed. 5 min was the schnell-era default.
 POLL_TIMEOUT_SEC = float(os.environ.get("QUEUE_POLL_TIMEOUT_SEC", "900"))  # 15 min per panel
+
+
+def _wait_for_panel_outputs(
+    pending: list[tuple[str, Path, str, str]],
+    *,
+    timeout_per_panel: float,
+    ssh_host: str,
+) -> tuple[int, int]:
+    """Poll until each enqueued panel PNG exists (local or Pearl Star via SSH)."""
+    ok = 0
+    fail = 0
+    for panel_id, out_path, via, dest_path in pending:
+        deadline = time.time() + timeout_per_panel
+        while time.time() < deadline:
+            if out_path.is_file() and out_path.stat().st_size > 1024:
+                ok += 1
+                print(f"  OK   {panel_id}: wrote {out_path.name} (queue)", file=sys.stderr)
+                break
+            if via.startswith("ssh:") and dest_path:
+                probe = subprocess.run(
+                    [
+                        "ssh", "-o", "BatchMode=yes", ssh_host,
+                        f"test -s {shlex.quote(dest_path)}",
+                    ],
+                    capture_output=True,
+                    timeout=30,
+                )
+                if probe.returncode == 0:
+                    if not out_path.is_file():
+                        subprocess.run(
+                            ["scp", "-o", "BatchMode=yes", f"{ssh_host}:{dest_path}", str(out_path)],
+                            capture_output=True,
+                            timeout=120,
+                        )
+                    if out_path.is_file() and out_path.stat().st_size > 1024:
+                        ok += 1
+                        print(f"  OK   {panel_id}: fetched {out_path.name} from Pearl Star", file=sys.stderr)
+                        break
+            time.sleep(POLL_INTERVAL_SEC)
+        else:
+            fail += 1
+            print(
+                f"  FAIL {panel_id}: queue wait timeout after {timeout_per_panel}s "
+                f"(expected {out_path})",
+                file=sys.stderr,
+            )
+    return ok, fail
 
 
 def _post_json(url: str, payload: dict) -> dict:
@@ -310,11 +359,16 @@ def main() -> int:
         )
 
     if args.via_queue:
-        from scripts.manga.pearl_star_t2i_enqueue import enqueue_panel_job, pick_task_for_workflow
+        from scripts.manga.pearl_star_t2i_enqueue import (
+            enqueue_panel_job,
+            pearl_star_dest_path,
+            pick_task_for_workflow,
+        )
 
     ok = 0
     fail = 0
     skipped = 0
+    queue_pending: list[tuple[str, Path, str, str]] = []
     for i, panel in enumerate(panels):
         pid = panel.get("panel_id", f"p{i:03d}")
         out_path = out_dir / f"{pid}.png"
@@ -331,6 +385,7 @@ def main() -> int:
         if args.via_queue:
             task_name = pick_task_for_workflow(workflow_path.name)
             try:
+                dest = pearl_star_dest_path(out_path)
                 res = enqueue_panel_job(
                     task=task_name,
                     prompt=panel.get("prompt") or panel.get("flux_prompt") or "",
@@ -338,10 +393,11 @@ def main() -> int:
                     seed=seed,
                     panel_id=pid,
                     output_basename=pid,
+                    dest_path=dest,
                     ssh_host=args.ssh_host,
                 )
                 print(f"  QUEUE {pid} job_id={res.get('job_id')} via={res.get('via')}", file=sys.stderr)
-                ok += 1
+                queue_pending.append((pid, out_path, str(res.get("via", "")), dest))
             except Exception as e:
                 print(f"  FAIL {pid}: enqueue — {e}", file=sys.stderr)
                 fail += 1
@@ -354,6 +410,16 @@ def main() -> int:
             ok += 1
         else:
             fail += 1
+
+    if args.via_queue and queue_pending:
+        print(f"waiting: {len(queue_pending)} queued panel(s)…", file=sys.stderr)
+        wait_ok, wait_fail = _wait_for_panel_outputs(
+            queue_pending,
+            timeout_per_panel=POLL_TIMEOUT_SEC,
+            ssh_host=args.ssh_host,
+        )
+        ok += wait_ok
+        fail += wait_fail
 
     print(f"\nresult: {ok} ok · {fail} failed · {skipped} skipped (of {len(panels)} total)", file=sys.stderr)
     if fail == 0:

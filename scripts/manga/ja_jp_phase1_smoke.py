@@ -8,8 +8,7 @@ which today means ep_001 + ep_002 (whichever have ja_JP populated post Phase 0).
 
 Steps per chapter:
   1. Call ``scripts/manga/queue_panel_renders.py`` with ``--workflow-path`` pointing
-     at the H1=A canonical workflow (``flux_txt2img_manga.json`` — corrected in
-     this PR to dev / 28 / cfg 3.5 / dpmpp_2m / karras).
+     at the H1=A canonical workflow and ``--via-queue`` (Pearl Star Procrastinate).
   2. Run ``phoenix_v4.manga.chapter.bubble_render.render_bubbles_on_panels`` for
      locale=ja_JP.
   3. Auto-validate (no operator gate): panel count matches en_US panel_prompts,
@@ -131,6 +130,7 @@ def render_chapter_panels(series_id: str, chapter_id: str, *, dry_run: bool) -> 
         "--workflow-path",
         str(H1A_WORKFLOW),
         "--skip-existing",
+        "--via-queue",
     ]
     log(f"render: {' '.join(cmd[1:])}")
     if dry_run:

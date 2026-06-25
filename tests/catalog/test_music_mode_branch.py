@@ -93,3 +93,17 @@ def test_generate_for_brand_path_x_matches_produce_wave():
     a = planner.generate_for_brand(brand_id, n, seed=seed, repo_root=REPO_ROOT)
     b = planner.produce_wave(n, seed=seed, brand_id=brand_id, teacher_mode=False)
     assert [x.to_dict() for x in a] == [x.to_dict() for x in b]
+
+
+def test_generate_for_brand_topics_match_master_arc_inventory():
+    planner = CatalogPlanner()
+    specs = planner.generate_for_brand("stillness_press", 16, seed="arc_alignment", repo_root=REPO_ROOT)
+    arc_pairs = set()
+    for path in (REPO_ROOT / "config" / "source_of_truth" / "master_arcs").glob("*.yaml"):
+        parts = path.stem.split("__")
+        if len(parts) < 4:
+            continue
+        arc_pairs.add(("__".join(parts[:-3]), parts[-3]))
+
+    missing = [(s.persona_id, s.topic_id) for s in specs if (s.persona_id, s.topic_id) not in arc_pairs]
+    assert not missing, f"generate_for_brand produced non-arc-backed pairs: {missing[:5]}"

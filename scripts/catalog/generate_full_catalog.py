@@ -38,6 +38,8 @@ from typing import Any, Optional
 # Path resolution
 # ---------------------------------------------------------------------------
 REPO_ROOT = Path(__file__).resolve().parents[2]
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
 # In a git worktree the config files may live in the main checkout.
 # Detect and use the main repo root as fallback for reading configs.
 _MAIN_REPO = Path("/Users/ahjan/phoenix_omega")

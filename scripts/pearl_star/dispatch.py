@@ -40,6 +40,21 @@ from typing import Any
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 DEFER_CLI = REPO_ROOT / "scripts" / "manga" / "defer_panel_job_cli.py"
+# Procrastinate is NOT installed on Pearl Star's system python3; the defer CLI
+# must run under the on-box venv python (or an env override). System python3 is
+# the fallback only when neither is present (e.g. local dev with DSN set).
+DEFAULT_PS_PY = Path("/opt/pearl-star/venv/bin/python")
+
+
+def queue_python() -> str:
+    """Python interpreter that has procrastinate (Pearl Star venv, or env override)."""
+    for key in ("PS_PY", "PS_QUEUE_PYTHON"):
+        v = os.environ.get(key, "").strip()
+        if v:
+            return v
+    if DEFAULT_PS_PY.is_file():
+        return str(DEFAULT_PS_PY)
+    return "python3"
 
 # Canonical workload queues (spec §3 / §4.1). GPU-heavy queues run
 # concurrency=1 to realize the shared GPU-lock (spec §4.7).
@@ -142,8 +157,9 @@ def _run_defer_cli(
 ) -> dict[str, Any]:
     payload_json = json.dumps(payload)
     repo = os.environ.get("PS_PHOENIX_REPO", str(REPO_ROOT))
+    py = queue_python()
     if local:
-        cmd = ["python3", str(DEFER_CLI), "--task", task, "--payload", payload_json]
+        cmd = [py, str(DEFER_CLI), "--task", task, "--payload", payload_json]
         proc = subprocess.run(
             cmd, capture_output=True, text=True, timeout=60, env=os.environ.copy()
         )
@@ -151,7 +167,7 @@ def _run_defer_cli(
         inner = json.dumps(payload_json)
         remote = (
             f"cd {repo} && set -a && . /etc/pearl-star/queue.env 2>/dev/null; set +a && "
-            f"python3 scripts/manga/defer_panel_job_cli.py --task {task} --payload {inner}"
+            f"{py} scripts/manga/defer_panel_job_cli.py --task {task} --payload {inner}"
         )
         proc = subprocess.run(
             ["ssh", "-o", "BatchMode=yes", ssh_host, remote],

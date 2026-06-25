@@ -30,6 +30,7 @@ CONFIG_CATALOG = REPO_ROOT / "config" / "catalog_planning"
 CONFIG_LOCALIZATION = REPO_ROOT / "config" / "localization"
 CONFIG_AUTHORING = REPO_ROOT / "config" / "authoring"
 CONFIG_ANGLES = REPO_ROOT / "config" / "angles"
+MASTER_ARCS_ROOT = REPO_ROOT / "config" / "source_of_truth" / "master_arcs"
 RENDER_LOCATION_PROFILES = CONFIG_LOCALIZATION / "render_location_profiles.yaml"
 
 _LOG = logging.getLogger(__name__)
@@ -286,6 +287,7 @@ class CatalogPlanner:
         self._angle_registry_path = angle_registry_path or _angle_registry_default_path()
         self._angle_registry_data: Optional[dict] = None
         self._last_angle_resolution_meta: dict[str, Any] = {}
+        self._arc_personas_by_topic: Optional[dict[str, list[str]]] = None
 
     @staticmethod
     def _load_yaml(p: Path) -> dict:
@@ -318,9 +320,43 @@ class CatalogPlanner:
         self._angle_registry_data = self._load_yaml(self._angle_registry_path)
         return self._angle_registry_data
 
+    def _load_arc_personas_by_topic(self) -> dict[str, list[str]]:
+        if self._arc_personas_by_topic is not None:
+            return self._arc_personas_by_topic
+        by_topic: dict[str, set[str]] = {}
+        if MASTER_ARCS_ROOT.exists():
+            for arc_path in MASTER_ARCS_ROOT.glob("*.yaml"):
+                parts = arc_path.stem.split("__")
+                if len(parts) < 4:
+                    continue
+                topic_id = parts[-3]
+                persona_id = "__".join(parts[:-3])
+                by_topic.setdefault(topic_id, set()).add(persona_id)
+        self._arc_personas_by_topic = {
+            topic_id: sorted(personas)
+            for topic_id, personas in by_topic.items()
+        }
+        return self._arc_personas_by_topic
+
     def last_angle_resolution_meta(self) -> dict[str, Any]:
         """Metadata from the most recent ``_derive_angle`` call (empty if derive was not used)."""
         return dict(self._last_angle_resolution_meta)
+
+    def _resolve_persona_for_topic(
+        self,
+        topic_id: str,
+        preferred_personas: list[str],
+        offset: int,
+    ) -> str:
+        available = self._load_arc_personas_by_topic().get(topic_id) or []
+        for persona_id in preferred_personas:
+            if persona_id in available:
+                return persona_id
+        if available:
+            return available[offset % len(available)]
+        if preferred_personas:
+            return preferred_personas[offset % len(preferred_personas)]
+        return "nyc_exec"
 
     def _resolve_author_positioning(
         self,
@@ -585,14 +621,57 @@ class CatalogPlanner:
         return fallback
 
     def _topic_to_domain(self, topic_id: str) -> str:
-        """Map topic_id to domain_id. Inverse of _domain_to_topic."""
+        """Map topic_id to domain_id. Inverse of _domain_to_topic / _series_to_topic."""
         m = {
+            "anxiety": "anxiety_cluster",
             "relationship_anxiety": "anxiety_cluster",
+            "social_anxiety": "anxiety_cluster",
+            "sleep_anxiety": "anxiety_cluster",
             "grief": "grief_cluster",
             "shame": "shame_cluster",
-            "self_worth": "shame_cluster",
+            "overthinking": "cognitive_cluster",
+            "burnout": "energy_cluster",
+            "compassion_fatigue": "energy_cluster",
+            "boundaries": "relational_cluster",
+            "depression": "mood_cluster",
+            "self_worth": "identity_cluster",
+            "imposter_syndrome": "identity_cluster",
+            "financial_anxiety": "practical_cluster",
+            "financial_stress": "practical_cluster",
+            "courage": "growth_cluster",
+            "somatic_healing": "body_cluster",
         }
         return m.get(topic_id, "default_domain")
+
+    def _series_to_topic(self, series_id: str, domain_id: str) -> str:
+        """Resolve a compileable topic_id for a planned series row."""
+        explicit = {
+            "social_anxiety_arc": "social_anxiety",
+            "panic_response_arc": "anxiety",
+            "acute_loss_arc": "grief",
+            "ambiguous_loss_arc": "grief",
+            "social_shame_arc": "imposter_syndrome",
+            "body_shame_arc": "self_worth",
+        }
+        if series_id in explicit:
+            return explicit[series_id]
+        if series_id in {
+            "anxiety",
+            "overthinking",
+            "burnout",
+            "boundaries",
+            "depression",
+            "self_worth",
+            "imposter_syndrome",
+            "financial_anxiety",
+            "financial_stress",
+            "sleep_anxiety",
+            "compassion_fatigue",
+            "courage",
+            "somatic_healing",
+        }:
+            return series_id
+        return self._domain_to_topic(domain_id)
 
     def produce_wave(
         self,
@@ -628,11 +707,13 @@ class CatalogPlanner:
             a_idx = (int.from_bytes(h[4:8], "big") + i) % len(angles)
             angle_id = angles[a_idx]
             domain_id = s.get("domain") or "default_domain"
+            topic_id = self._series_to_topic(series_id, domain_id)
             persona_affinity = s.get("persona_affinity") or {}
-            high = persona_affinity.get("high") or ["nyc_exec"]
-            persona_id = high[i % len(high)]
-            topic_id = self._domain_to_topic(domain_id)
-            inst = (i // (len(angles) * max(len(high), 1))) + 1
+            preferred_personas = list(dict.fromkeys((persona_affinity.get("high") or []) + (persona_affinity.get("medium") or [])))
+            if not preferred_personas:
+                preferred_personas = ["nyc_exec"]
+            persona_id = self._resolve_persona_for_topic(topic_id, preferred_personas, i)
+            inst = (i // (len(angles) * max(len(preferred_personas), 1))) + 1
             spec_seed = hashlib.sha256(f"{seed}:{i}:{series_id}:{angle_id}".encode()).hexdigest()[:24]
             positioning = self._resolve_author_positioning(None, brand_id, None)
             wave_heat = trend_heat_for_topic_id(topic_id, trend_payload)
@@ -697,11 +778,19 @@ class CatalogPlanner:
     def _domain_to_topic(self, domain_id: str) -> str:
         """Map domain to a topic slug used by Stage 2 / atoms."""
         m = {
-            "anxiety_cluster": "relationship_anxiety",
+            "anxiety_cluster": "anxiety",
             "grief_cluster": "grief",
-            "shame_cluster": "shame",
+            "shame_cluster": "self_worth",
+            "cognitive_cluster": "overthinking",
+            "energy_cluster": "burnout",
+            "relational_cluster": "boundaries",
+            "mood_cluster": "depression",
+            "identity_cluster": "self_worth",
+            "practical_cluster": "financial_anxiety",
+            "growth_cluster": "courage",
+            "body_cluster": "somatic_healing",
         }
-        return m.get(domain_id, "relationship_anxiety")
+        return m.get(domain_id, "anxiety")
 
 
 def book_spec_digest(spec: BookSpec) -> str:

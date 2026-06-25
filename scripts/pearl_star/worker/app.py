@@ -50,7 +50,7 @@ RETRY_BUDGET = {
     "orch": {"attempts": 4, "backoff_s": [30, 60, 120]},    # 3 retries
 }
 
-app = App(connector=PsycopgConnector(conninfo=_DSN))
+app = App(connector=PsycopgConnector(conninfo=_DSN, kwargs={}))
 
 # Phase A registers exactly one task family: flux-schnell t2i. Importing the
 # worker module attaches its @app.task to this app. Kept import-late to avoid a

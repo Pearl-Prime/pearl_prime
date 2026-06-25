@@ -105,11 +105,22 @@ class _Heartbeat:
     The watchdog reads `elapsed_s` vs `stall_warn_at_s` / `stall_kill_at_s`.
     """
 
-    def __init__(self, job_id: Any, prompt_id: str | None = None) -> None:
+    def __init__(
+        self,
+        job_id: Any,
+        prompt_id: str | None = None,
+        *,
+        expected_total_s: float = EXPECTED_TOTAL_S,
+        stall_warn_at_s: float = STALL_WARN_S,
+        stall_kill_at_s: float = STALL_KILL_S,
+    ) -> None:
         self.worker_id = _worker_id()
         self.job_id = str(job_id)
         self.prompt_id = prompt_id
         self.phase = "starting"
+        self._expected_total_s = expected_total_s
+        self._stall_warn_at_s = stall_warn_at_s
+        self._stall_kill_at_s = stall_kill_at_s
         self._start = time.monotonic()
         self._stop = threading.Event()
         self._thread = threading.Thread(target=self._loop, daemon=True)
@@ -156,9 +167,9 @@ class _Heartbeat:
             "job_id": self.job_id,
             "phase": self.phase,
             "elapsed_s": elapsed,
-            "expected_total_s": EXPECTED_TOTAL_S,
-            "stall_warn_at_s": STALL_WARN_S,
-            "stall_kill_at_s": STALL_KILL_S,
+            "expected_total_s": self._expected_total_s,
+            "stall_warn_at_s": self._stall_warn_at_s,
+            "stall_kill_at_s": self._stall_kill_at_s,
             "comfyui_prompt_id": self.prompt_id,
         }
         rec.update(self._vram())
@@ -258,10 +269,15 @@ def t2i_flux_schnell(
         OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
         src = COMFY_OUTPUT / filename
         dst = OUTPUT_DIR / filename
-        if src.exists():
-            shutil.copyfile(src, dst)
-        else:
-            # ComfyUI on the same host; if SaveImage wrote elsewhere, fetch via /view.
+        copied = False
+        try:
+            if src.is_file():
+                shutil.copyfile(src, dst)
+                copied = True
+        except PermissionError:
+            copied = False
+        if not copied:
+            # ComfyUI output may live under the operator home; fetch via /view.
             v = requests.get(f"{COMFY_URL}/view",
                              params={"filename": filename, "type": "output"}, timeout=30)
             v.raise_for_status()

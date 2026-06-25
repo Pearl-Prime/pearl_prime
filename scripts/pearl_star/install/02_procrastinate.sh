@@ -51,6 +51,8 @@ ps_say "Deploying queue python sources to ${PS_HOME}/app"
 sudo install -d -m 0755 "${PS_HOME}/app"
 sudo install -m 0644 "${REPO_ROOT}/scripts/pearl_star/worker/app.py"                  "${PS_HOME}/app/app.py"
 sudo install -m 0644 "${REPO_ROOT}/scripts/pearl_star/worker/flux_schnell_worker.py"  "${PS_HOME}/app/flux_schnell_worker.py"
+sudo install -m 0644 "${REPO_ROOT}/scripts/pearl_star/worker/flux_dev_manga_worker.py" "${PS_HOME}/app/flux_dev_manga_worker.py"
+sudo install -m 0644 "${REPO_ROOT}/scripts/pearl_star/worker/qwen_manga_worker.py"    "${PS_HOME}/app/qwen_manga_worker.py"
 sudo install -m 0755 "${REPO_ROOT}/scripts/pearl_star/bin/watchdog.py"                "${PS_HOME}/app/watchdog.py"
 sudo install -m 0755 "${REPO_ROOT}/scripts/pearl_star/bin/monitor.py"                 "${PS_HOME}/app/monitor.py"
 sudo install -m 0755 "${REPO_ROOT}/scripts/pearl_star/bin/pscli"                      /usr/local/bin/pscli
