@@ -508,11 +508,58 @@ Smoke test combined: enqueue 100 jobs across t2i / llm / tts / orch → simulate
 
 ---
 
-## §16 Spec status + revision history
+## §16 Current State (deployed — 2026-06-25)
+
+The Phase-A install kit (PR #1692) + Q-PSQ batch ratification (PR #1506, cap entry
+`PEARL-STAR-JOB-QUEUE-V1-01` ACTIVE) are merged. The queue runs on Pearl Star today.
+
+**Deployed runtime (observed 2026-06-25):**
+
+| Property | Value | Source |
+|---|---|---|
+| Worker | `procrastinate-worker` (systemd) on the `t2i` queue | `scripts/pearl_star/systemd/procrastinate-worker.service` |
+| Concurrency | **1** on `t2i` / `llm` (GPU-lock, spec §4.7); 4 on `tts`, 2 on `orch` | `scripts/pearl_star/worker/app.py::QUEUES` |
+| Canonical manga task | `t2i_flux_dev_h1a` (flux-dev-fp8, H1=A) — `flux_dev_manga_worker` | `worker/app.py`, §3.1 |
+| Registered t2i tasks | `t2i_flux_schnell`, `t2i_flux_dev_h1a`, `t2i_qwen_image` | `worker/app.py` |
+| Stall thresholds (manga t2i) | warn **120 s** / kill **180 s** (3× expected; heartbeat-silent > 90 s ⇒ immediate kill) | §3.1, §5.2 |
+
+**Known fix (2026-06-25):** the `_extracted_beatsheet.yaml` panel-load path was
+corrected so the worker loads all panels of a beatsheet rather than the first.
+warrior_calm + stillness batches were queued after the fix.
+
+**Canonical dispatch surface:** all production callers enqueue through
+`scripts/pearl_star/dispatch.py::dispatch_gpu_job(job_class, payload, task=..., priority=5)`
+(RAP queue-first; spec §4.2). It delegates to `scripts/manga/defer_panel_job_cli.py`
+locally (when `PS_QUEUE_DSN` is set) or over SSH to `pearl_star` otherwise.
+`scripts/manga/pearl_star_t2i_enqueue.py` and `queue_panel_renders.py --via-queue`
+route through it. Direct ComfyUI `/prompt` HTTP from production code is a RAP
+violation — see `scripts/ci/check_rap_compliance.py`.
+
+**Standard monitor commands (operator, read-only):**
+
+```bash
+pscli status                 # queue depth + active workers + recent stalls + dead-letter (< 2 s)
+pscli list --workload t2i --status pending
+pscli inspect <job_id>       # full job + heartbeat history + retries
+pscli vram-snapshot          # nvidia-smi diff vs last call
+pscli pause / pscli resume   # halt / restart dispatch (current jobs complete)
+pscli drain                  # accept no new + finish current (pre-reboot)
+```
+
+The operator-env install lives at `scripts/pearl_star/install/` (`00_config.sh`
+builds the DSN; `01_postgres17.sh` provisions Postgres). The install needs
+**interactive sudo on Pearl Star** and is therefore an operator step — it is not
+run unattended by an agent.
+
+---
+
+## §17 Spec status + revision history
 
 | Version | Date | Author | Status | Change |
 |---|---|---|---|---|
 | 1.0 | 2026-06-11 | Pearl_Research | PROPOSAL | Initial authorship; awaiting Pearl_Architect ratification |
+| 1.0 | 2026-06-11 | Pearl_Architect | ACTIVE | Ratified (cap `PEARL-STAR-JOB-QUEUE-V1-01`, PR #1506) |
+| 1.1 | 2026-06-25 | Pearl_Dev | ACTIVE | Added §16 Current State (deployed runtime, canonical dispatch helper, monitor commands, beatsheet fix note) |
 
 ---
 

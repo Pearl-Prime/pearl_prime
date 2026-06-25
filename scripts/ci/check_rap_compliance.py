@@ -37,6 +37,11 @@ _QUEUE_FIRST_SCRIPTS = (
     REPO_ROOT / "scripts" / "manga" / "queue_panel_renders.py",
 )
 
+# The canonical dispatch surface every production GPU/LLM caller should import
+# (RAP queue-first). Its presence + queue routing is a regression guard so the
+# helper can't silently regress into a direct-ComfyUI bypass.
+_DISPATCH_HELPER = REPO_ROOT / "scripts" / "pearl_star" / "dispatch.py"
+
 
 def _warn(msg: str) -> None:
     print(f"{_GH_WARN_PREFIX}{msg}", file=sys.stderr)
@@ -113,6 +118,28 @@ def _scan_queue_first_script_help() -> list[str]:
     return violations
 
 
+def _scan_dispatch_helper() -> list[str]:
+    """Ensure the canonical dispatch helper exists and routes via the queue.
+
+    The helper must defer through ``defer_panel_job_cli.py`` (Procrastinate),
+    never POST ``/prompt`` itself — that would turn the sanctioned surface into
+    a direct ComfyUI bypass.
+    """
+    violations: list[str] = []
+    path = _DISPATCH_HELPER
+    if not path.is_file():
+        violations.append("scripts/pearl_star/dispatch.py missing (canonical RAP dispatch helper)")
+        return violations
+    text = path.read_text(encoding="utf-8", errors="replace")
+    if "defer_panel_job_cli.py" not in text:
+        violations.append("dispatch.py no longer routes through defer_panel_job_cli.py (queue bypass)")
+    # Flag an actual direct ComfyUI HTTP call (urllib/requests to /prompt), not
+    # a mere mention of the endpoint in prose.
+    if re.search(r"(urllib|requests)[^\n]*/prompt", text):
+        violations.append("dispatch.py issues a direct ComfyUI /prompt HTTP call (must stay queue-first)")
+    return violations
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description="RAP compliance warnings for Pearl Star dispatch")
     ap.add_argument("--strict", action="store_true", help="Exit 1 when violations found")
@@ -122,6 +149,7 @@ def main() -> int:
     violations: list[str] = []
     violations.extend(_check_pscli_status())
     violations.extend(_scan_queue_first_script_help())
+    violations.extend(_scan_dispatch_helper())
     if not args.skip_process_scan:
         violations.extend(_scan_process_table())
 

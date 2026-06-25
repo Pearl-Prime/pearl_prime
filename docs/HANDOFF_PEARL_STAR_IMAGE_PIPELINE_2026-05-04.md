@@ -1,5 +1,15 @@
 # HANDOFF — Pearl Star Image Pipeline + Manga Author/Cover Art Canonical (2026-05-04)
 
+> **⚠ SUPERSEDED (2026-06-25) — direct-ComfyUI dispatch only.** The "auto-route
+> every image request straight through Pearl Star ComfyUI `/prompt`" model below
+> is superseded by the **Pearl Star Job Queue V1** (queue-first dispatch). Use
+> `docs/specs/PEARL_STAR_JOB_QUEUE_V1_SPEC.md` (§16 Current State) +
+> `scripts/pearl_star/dispatch.py::dispatch_gpu_job` for all production GPU/LLM
+> work. Direct ComfyUI HTTP from production code is now a RAP violation
+> (`scripts/ci/check_rap_compliance.py`). This doc is retained as historical
+> context (377-image render run, catalog dashboard) only.
+
+
 **Session date:** 2026-05-04
 **Operator:** Nihala (Ma'at)
 **Branch:** `agent/kind-swanson-c0deed` (worktree)
