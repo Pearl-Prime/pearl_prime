@@ -39,6 +39,19 @@ profiles:
       - slang
       - self_doubt_language
 
+  devotional_companion:
+    authority_type: lived_spiritual_practice
+    trust_anchor_style: companion
+    vulnerability_band: moderate
+    allowed_language:
+      - sacred_presence
+      - grace_and_surrender
+      - gentle_uncertainty
+    forbidden_language:
+      - diagnostic_labels
+      - command_language
+      - academic_citation
+
 # Optional: default positioning when BookSpec has no author_id (e.g. teacher-only books).
 # Keys are brand_id; value is profile key from profiles above.
 default_by_brand: {}
