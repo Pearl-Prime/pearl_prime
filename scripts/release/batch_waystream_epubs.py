@@ -228,10 +228,15 @@ def run_one(plan: dict, week: str, dry_run: bool, force: bool) -> dict:
         "--subtitle", plan.get("subtitle") or "",
         "--author", author,
         "--publisher", IMPRINT,
-        "--cover", str(cover) if cover.is_file() else "",
         "--output", str(out_epub),
         "--topic", topic,
     ]
+    # Only pass --cover when a cover PNG actually exists. Waystream covers are a
+    # separate gated (look-approval) render lane and are not committed to the
+    # repo, so in CI the file is absent → build a coverless EPUB instead of
+    # passing an empty string (which argparse rejects: "expected one argument").
+    if cover.is_file():
+        epub_cmd += ["--cover", str(cover)]
     epub_cmd = [c for c in epub_cmd if c]
     r2 = subprocess.run(epub_cmd, cwd=str(REPO), capture_output=True, text=True, timeout=600)
     if r2.returncode != 0:
