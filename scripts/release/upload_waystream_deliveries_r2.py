@@ -36,24 +36,11 @@ def _r2_client():
     account = os.environ.get("R2_ACCOUNT_ID", "").strip()
     key_id = (os.environ.get("R2_ACCESS_KEY_ID") or os.environ.get("CF_R2_ACCESS_KEY") or "").strip()
     secret = (os.environ.get("R2_SECRET_ACCESS_KEY") or os.environ.get("CF_R2_SECRET_KEY") or "").strip()
-    # R2_ENDPOINT takes precedence over the account-id host format. The
-    # phoenix-omega-artifacts bucket is EU-jurisdiction, so its real S3 host is
-    # NOT https://<R2_ACCOUNT_ID>.r2.cloudflarestorage.com (Cloudflare prints the
-    # correct host on the R2 API-token result page). Rebuilding the host from the
-    # account id yields the wrong SNI, which the single-label wildcard cert
-    # *.r2.cloudflarestorage.com does NOT cover -> SSLV3_ALERT_HANDSHAKE_FAILURE.
-    # Mirrors scripts/artifacts/r2_sync.py + the brand-wizard R2 Functions, which
-    # both prefer R2_ENDPOINT. (Prior misdiagnosis blamed LibreSSL; it reproduces
-    # on ubuntu-latest OpenSSL 3.x because the host, not the TLS stack, is wrong.)
-    endpoint = _normalize_endpoint(os.environ.get("R2_ENDPOINT", "")) or (
-        f"https://{account}.r2.cloudflarestorage.com" if account else ""
-    )
-    if not all([endpoint, key_id, secret]):
-        raise SystemExit(
-            "Missing R2 creds: need R2_ACCESS_KEY_ID + R2_SECRET_ACCESS_KEY and "
-            "either R2_ENDPOINT or R2_ACCOUNT_ID"
-        )
-    _assert_single_label_r2_host(endpoint)
+    if not all([account, key_id, secret]):
+        raise SystemExit("Missing R2_ACCOUNT_ID / R2_ACCESS_KEY_ID / R2_SECRET_ACCESS_KEY")
+    endpoint = (os.environ.get("R2_ENDPOINT") or "").strip()
+    if not endpoint:
+        endpoint = f"https://{account}.r2.cloudflarestorage.com"
     return boto3.client(
         "s3",
         endpoint_url=endpoint,
@@ -62,52 +49,6 @@ def _r2_client():
         config=Config(signature_version="s3v4"),
         region_name="auto",
     )
-
-
-def _normalize_endpoint(raw: str) -> str:
-    """Strip whitespace + trailing slash/path from an R2_ENDPOINT secret.
-
-    Tolerates a stray trailing slash or an accidental bucket path appended to the
-    secret value; returns "" when unset so the caller falls back to the account-id
-    host format.
-    """
-    raw = (raw or "").strip()
-    if not raw:
-        return ""
-    if not raw.startswith(("http://", "https://")):
-        raw = "https://" + raw
-    from urllib.parse import urlparse
-
-    parsed = urlparse(raw)
-    host = (parsed.netloc or "").strip()
-    if not host:
-        raise SystemExit(f"R2_ENDPOINT is malformed (no host): {raw!r}")
-    return f"{parsed.scheme}://{host}"
-
-
-def _assert_single_label_r2_host(endpoint: str) -> None:
-    """Guard: the SNI label preceding .r2.cloudflarestorage.com must be single.
-
-    A multi-label host (e.g. a stray dot or a full URL stuffed into
-    R2_ACCOUNT_ID) is not covered by the *.r2.cloudflarestorage.com wildcard cert
-    and fails the TLS handshake. Non-r2 hosts (custom CDN/test) are left alone.
-    """
-    from urllib.parse import urlparse
-
-    host = (urlparse(endpoint).netloc or "").strip()
-    suffix = ".r2.cloudflarestorage.com"
-    if not host.endswith(suffix):
-        return
-    label = host[: -len(suffix)]
-    if "." in label or not label:
-        raise SystemExit(
-            f"R2 endpoint host {host!r} has a multi-label SNI before {suffix} — "
-            "the *.r2.cloudflarestorage.com wildcard cert will NOT cover it "
-            "(SSLV3_ALERT_HANDSHAKE_FAILURE). Fix R2_ENDPOINT/R2_ACCOUNT_ID: "
-            "R2_ACCOUNT_ID must be a bare account id (no dots/scheme/path) and "
-            "R2_ENDPOINT must be the exact host Cloudflare prints on the R2 "
-            "API-token page (e.g. https://<hash>.r2.cloudflarestorage.com)."
-        )
 
 
 def _bucket() -> str:
