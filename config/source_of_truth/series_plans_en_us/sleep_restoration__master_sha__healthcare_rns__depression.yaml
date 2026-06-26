@@ -1,43 +1,31 @@
 series_plan_schema: 1.0.0
+created_at: '2026-06-26'
 locale: en_US
 book_id_prefix: sleep_restoration__master_sha__healthcare_rns__depression
 brand: sleep_restoration
 teacher: master_sha
 persona: healthcare_rns
 topic: depression
-byline_author: elena_bello
 arc:
   installment_1:
     book_id: sleep_restoration__master_sha__healthcare_rns__depression__overwhelm
     engine: overwhelm
-    master_arc: config/source_of_truth/master_arcs/healthcare_rns__depression__overwhelm__F006.yaml
     duration: standard_book_60min
+    master_arc: config/source_of_truth/master_arcs/healthcare_rns__depression__overwhelm__F006.yaml
   installment_2:
     book_id: sleep_restoration__master_sha__healthcare_rns__depression__grief
     engine: grief
-    master_arc: config/source_of_truth/master_arcs/healthcare_rns__depression__grief__F006.yaml
     duration: standard_book_60min
+    master_arc: config/source_of_truth/master_arcs/healthcare_rns__depression__grief__F006.yaml
   installment_3:
     book_id: sleep_restoration__master_sha__healthcare_rns__depression__watcher
     engine: watcher
-    master_arc: config/source_of_truth/master_arcs/healthcare_rns__depression__watcher__F006.yaml
     duration: standard_book_60min
-reader_promise_family: 'For the nurse who holds everyone else through the night and
-  has nothing left for the weight she carries home: a steady, nocturnal companion
-  that sits with depression in the dark instead of trying to fix it — naming the flood,
-  the unmourned losses, and the mind that never clocks out, and giving you permission
-  to set the load down.'
+    master_arc: config/source_of_truth/master_arcs/healthcare_rns__depression__watcher__F006.yaml
+reader_promise_family: ''
 bestseller_hook_family: ''
 emotional_engine: depression_recognition
-comp_series:
-- Good Inside / How to Keep House While Drowning (KC Davis) — the same permission-not-pressure
-  tone for people drowning under invisible weight, refusing the productivity frame.
-- 'The Body Keeps the Score companion-readers like ''Burnout: The Secret to Unlocking
-  the Stress Cycle'' (Emily & Amelia Nagoski) — names the body''s accumulated load
-  in helpers and caregivers without shaming them.'
-- Reasons to Stay Alive / Notes on a Nervous Planet (Matt Haig) — intimate, plainspoken,
-  lived-from-inside depression writing that sits beside the reader instead of instructing
-  them.
+comp_series: []
 platform_strategy:
   primary:
   - kdp_ebook
@@ -51,32 +39,14 @@ platform_strategy:
     release_spacing_days: 14
     max_books_per_brand_per_month: 2
 reader_avatar:
-  age: 32-55
-  where_they_are: It's 4am after a long shift. The house is dark, the scrubs are in
-    a pile by the door, and you are lying on top of the covers because getting under
-    them feels like too much. You held three families together tonight. You charted,
-    you reassured, you caught what the resident missed. And now, in the quiet, there
-    is a heaviness pressing on your chest that has no name and no order to write for
-    it — and a small, scared thought that maybe this is just who you are now.
-  what_they_need: To be met without being assessed. To hear that the flatness and
-    the heaviness are not a character flaw or a failure of resilience, but weight
-    that was never set down. To be allowed to grieve the losses no one let you grieve,
-    and to stop monitoring your own mind like a patient on a telemetry strip. A voice
-    that holds the heavy hours with her instead of handing her a protocol.
-  what_they_avoid: Resilience lectures and 'self-care' that's really one more task.
-    Push-through toughness, 'you've got this' platitudes, and anyone who treats her
-    exhaustion as a mindset problem. Toxic positivity. Anything that rushes her grief,
-    optimizes her recovery, or treats rest and feeling as weakness she should have
-    managed better.
+  age: ''
+  where_they_are: ''
+  what_they_need: ''
+  what_they_avoid: ''
 series_voice_markers:
-  register: Steady, nocturnal, quietly architectural — a calm presence who sits with
-    you through the heavy hours, holds without fixing, and never once reaches for
-    the chart. Never clinical, never a coach, never hustle.
-  sentence_rhythm: Unhurried and grounded. Short declaratives that let weight land,
-    opening into longer settling lines, then returning to a single quiet sentence
-    — the cadence of someone speaking softly in a dark room so as not to startle you.
-  metaphor_family: Night and the dark room; foundations and load-bearing walls; a
-    heavy thing finally set down; the body settling toward rest; the long quiet hours
-    before dawn; the structure that holds you while you let go. Never productivity,
-    machinery, military, or biohacking.
-_needs_authoring: false
+  register: ''
+  sentence_rhythm: ''
+  metaphor_family: ''
+  second_person_default: true
+plan_source_path: /tmp/catalog_sleep_restoration/sleep_restoration.csv
+_needs_authoring: true

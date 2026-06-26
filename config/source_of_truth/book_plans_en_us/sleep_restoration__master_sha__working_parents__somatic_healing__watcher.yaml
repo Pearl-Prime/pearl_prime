@@ -1,8 +1,8 @@
 book_plan_schema: 1.0.0
-created_at: '2026-04-24'
+created_at: '2026-06-26'
 book_id: sleep_restoration__master_sha__working_parents__somatic_healing__watcher
-series_plan: config/source_of_truth/series_plans_en_us/sleep_restoration__master_sha__working_parents__somatic_healing.yaml
-installment_number: 1
+series_plan: /tmp/catalog_sleep_restoration/series/sleep_restoration__master_sha__working_parents__somatic_healing.yaml
+installment_number: 2
 engine: watcher
 duration: standard_book_60min
 runtime_format_id: standard_book_60min
@@ -11,37 +11,16 @@ target_word_range:
 - 9000
 - 12000
 target_audio_minutes: 70
-title: 'Stepping Back from the Storm: How to Calm Your Mind and Show Up Fully'
-subtitle: A Nervous System Approach to Find Calm and Feeling Safe in Your Body
-cover_tagline: You're here, but you're also somewhere behind yourself.
+title: 'Somatic Healing: Watcher'
+subtitle: A guide for Working Parents
+cover_tagline: ''
 description:
-  short_blurb: You're here, but you're also somewhere behind yourself. That's not enough anymore. release what's been held in my body for years.
-  long_description: |
-    You're here, but you're also somewhere behind yourself.
-
-    This book is for working parent of young kidss who my body holds things my mind has been trying to forget. It doesn't promise to make the feeling stop. It names what's happening in language you can use the next time it happens.
-
-    Chapter by chapter, you'll work with the distance that opens between you and your own experience, and why it formed. Not through exposure or worksheets or morning routines — through recognition, descent, and integration. The practice the book asks for can happen on a subway, between meetings, or at 3am.
-
-    You'll walk away knowing what your body is doing and why it makes sense. Not fixed. Not healed in any final sense. But no longer alone with the pattern.
-
-    Book 1 of the Sleep Restoration somatic healing series.
+  short_blurb: ''
+  long_description: ''
 keywords:
-  primary:
-  - somatic therapy
-  - body keeps the score
-  - trauma-informed
-  - nervous system healing
-  - embodiment practice
-  - polyvagal
-  - felt sense
-  secondary:
-  - working parents
-  - watcher somatic healing
-bisac_codes:
-- FAM034000
-- SEL027000
-- FAM013000
+  primary: []
+  secondary: []
+bisac_codes: []
 target_price:
   ebook_usd: 4.99
   audible_usd: 9.99
@@ -49,14 +28,7 @@ target_price:
 author_positioning:
   teacher: master_sha
   brand: sleep_restoration
-comp_titles:
-- The Body Keeps the Score (van der Kolk)
-- Waking the Tiger (Levine)
-- My Grandmother's Hands (Menakem)
-main_character_name: Rosalind
-main_character_lora_id: rosalind_sr_us
-confidence:
-  pricing: low
-  title: medium
-  comps: high
-plan_source_path: config/manga/manga_brand_series_plan.yaml
+  byline_author: ruth_tam
+comp_titles: []
+plan_source_path: /tmp/catalog_sleep_restoration/sleep_restoration.csv
+_needs_authoring: true
