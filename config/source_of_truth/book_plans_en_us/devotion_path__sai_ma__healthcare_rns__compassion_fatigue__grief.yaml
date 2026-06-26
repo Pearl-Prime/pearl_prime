@@ -1,7 +1,8 @@
 book_plan_schema: 1.0.0
+created_at: '2026-06-26'
 book_id: devotion_path__sai_ma__healthcare_rns__compassion_fatigue__grief
-series_plan: config/source_of_truth/series_plans_en_us/devotion_path__sai_ma__healthcare_rns__compassion_fatigue.yaml
-installment_number: 2
+series_plan: /tmp/catalog_devotion_path/series/devotion_path__sai_ma__healthcare_rns__compassion_fatigue.yaml
+installment_number: 5
 engine: grief
 duration: standard_book_60min
 runtime_format_id: standard_book_60min
@@ -10,71 +11,16 @@ target_word_range:
 - 9000
 - 12000
 target_audio_minutes: 70
-title: The Patients I Was Never Given Time to Mourn
-subtitle: For the nurse carrying years of unwept losses — the deaths you charted and
-  kept moving through, the goodbyes the next admission interrupted
-cover_tagline: You wiped your eyes in the supply closet and went back in. You never
-  came back out for them.
+title: 'Compassion Fatigue: Grief'
+subtitle: A guide for Healthcare Rns
+cover_tagline: ''
 description:
-  short_blurb: Every nurse carries a quiet ledger of the ones who didn't make it —
-    and almost none of those losses were ever grieved, because the next patient was
-    already waiting. This is a tender companion for the unwept grief that compassion
-    fatigue is so often made of. It will not rush you. It will finally let you stop.
-  long_description: 'You remember the room number. You remember the family''s faces
-    and the exact thing you said, or wished you''d said. You remember pronouncing
-    the time, or standing just outside the door when someone else did. And then you
-    remember what happened next: you cleaned up, you charted it, and you walked into
-    the next room and smiled, because that patient was still alive and needed you
-    whole. The grief had nowhere to go. So it went nowhere. It is still there.
-
-
-    This book is for the registered nurse carrying a ledger of losses no one ever
-    gave her time to mourn. The ones you held as they went. The ones whose families
-    you couldn''t save from the news. The slow declines you watched over weeks and
-    were never allowed to call what they were — your own quiet heartbreak, arriving
-    on schedule, between vitals. Compassion fatigue is so often this: not a lack of
-    feeling, but years of feeling that was never let out. Grief is love with nowhere
-    left to go, and you have been storing it in your body since your first shift.
-
-
-    Here you will come to recognize what you have been carrying. How the deaths you
-    ''handled fine'' did not disappear; they settled. How the hardness you feel toward
-    your own patients now is not coldness but a heart that has run out of room to
-    break again. How no one taught you that you were allowed to grieve people who
-    were not yours — and how that permission, finally given, is the beginning of the
-    well filling back up. You will sit with this whole series'' quiet question: what
-    do you need, before you can give?
-
-
-    This book will not tell you everything happened for a reason. It will not ask
-    you to find the gift in the loss, to be grateful you were there, or to heal on
-    any schedule but your own. It offers no closure-on-demand and no spiritual bypass,
-    because grief that is rushed only goes underground. There is no fixing here. There
-    is only the mercy of finally being allowed to mourn.
-
-
-    You are allowed to cry for them now, all of them, years late. They were worth
-    it. So are you.
-
-
-    Book 2 of the Open Vessel Press compassion fatigue series.'
+  short_blurb: ''
+  long_description: ''
 keywords:
-  primary:
-  - grief for nurses
-  - compassion fatigue nurses
-  - nurse patient loss grief
-  - healthcare worker grief support
-  - caregiver grief and loss
-  - unprocessed grief healthcare
-  - books for grieving nurses
-  secondary:
-  - nurse compassion fatigue book
-  - moral injury nursing
-  - death and dying caregivers
-bisac_codes:
-- SEL010000
-- FAM014000
-- MED058150
+  primary: []
+  secondary: []
+bisac_codes: []
 target_price:
   ebook_usd: 4.99
   audible_usd: 9.99
@@ -83,11 +29,6 @@ author_positioning:
   teacher: sai_ma
   brand: devotion_path
   byline_author: quinn_bennett
-comp_titles:
-- It's OK That You're Not OK (Megan Devine) — refuses to rush grief or demand premature
-  gratitude, exactly this book's stance
-- Bearing the Unbearable (Joanne Cacciatore) — sits reverently with loss that the
-  world wants survivors to move past
-- When Breath Becomes Air (Paul Kalanithi) — honors the spiritual weight clinicians
-  carry at the bedside without sentimentality
-_needs_authoring: false
+comp_titles: []
+plan_source_path: /tmp/catalog_devotion_path/devotion_path.csv
+_needs_authoring: true

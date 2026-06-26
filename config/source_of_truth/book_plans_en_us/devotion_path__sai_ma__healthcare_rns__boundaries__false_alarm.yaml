@@ -1,6 +1,7 @@
 book_plan_schema: 1.0.0
+created_at: '2026-06-26'
 book_id: devotion_path__sai_ma__healthcare_rns__boundaries__false_alarm
-series_plan: config/source_of_truth/series_plans_en_us/devotion_path__sai_ma__healthcare_rns__boundaries.yaml
+series_plan: /tmp/catalog_devotion_path/series/devotion_path__sai_ma__healthcare_rns__boundaries.yaml
 installment_number: 1
 engine: false_alarm
 duration: standard_book_60min
@@ -10,71 +11,16 @@ target_word_range:
 - 9000
 - 12000
 target_audio_minutes: 70
-title: The Yes That Leaves Before You Do
-subtitle: For the nurse who agrees before she feels her own exhaustion — when the
-  body braces for danger every time you reach for the word no
-cover_tagline: Your mouth said yes before your body could ask you anything.
+title: 'Boundaries: False Alarm'
+subtitle: A guide for Healthcare Rns
+cover_tagline: ''
 description:
-  short_blurb: You say yes before you even know you've said it, because somewhere
-    your body learned that the smallest no is a threat. This is a tender book for
-    the nurse whose alarm system fires at the thought of one boundary, one disappointed
-    face, one moment of being too much. It will not teach you to say no faster. It
-    will help you feel safe enough to find out what you actually wanted.
-  long_description: 'It is the end of your shift and someone asks for one more thing.
-    You hear yourself say yes before you feel anything at all — before the ache in
-    your feet reaches you, before you notice you haven''t eaten, before any part of
-    you gets a vote. The yes leaves your mouth and goes ahead of you, and you follow
-    it out the door the way you always do.
-
-
-    This is a book for the nurse whose body sounds the alarm before her mind can speak.
-    For the one who feels her chest tighten at the thought of saying no, as if a boundary
-    were a danger to survive rather than a line to draw. You have learned, somewhere,
-    that other people''s needs are emergencies and your own are negotiable. So you
-    brace. You scan the room. You agree before the threat can land.
-
-
-    Here you will come to recognize that alarm for what it is. You''ll feel how the
-    body fires when there is no real danger — only a disappointed face, only a shift
-    left uncovered, only the unbearable possibility of being too much. You''ll meet
-    the false alarm gently, without trying to silence it, and you''ll begin to ask
-    the question it never let you reach: where do you draw the line? Not as a wall
-    against the people you love, but as the banks that let a river stay a river instead
-    of flooding everything in its path.
-
-
-    This book will not hand you a script. It will not teach you to say no in three
-    confident steps or to armor yourself against the people who lean on you. It promises
-    no fix, no faster reflex, no version of you that never flinches. The bracing is
-    not a malfunction to correct. It is a story your body has been telling for years,
-    and it deserves to be heard before it is asked to quiet.
-
-
-    What it offers instead is room. Room to feel the cost of every reflexive yes.
-    Room to stand at the threshold and not cross it for once. Room to discover that
-    you are an open vessel meant to be poured out and refilled, not a well the whole
-    ward can draw from until it runs dry. You are allowed to find out what you wanted
-    before you answer.
-
-
-    Book 1 of the Open Vessel Press boundaries series.'
+  short_blurb: ''
+  long_description: ''
 keywords:
-  primary:
-  - boundaries for nurses
-  - people pleasing recovery
-  - how to stop saying yes
-  - nervous system and boundaries
-  - self-care for healthcare workers
-  - fawn response healing
-  - boundaries for caregivers
-  secondary:
-  - saying no without guilt
-  - overgiving and burnout
-  - highly sensitive caregiver
-bisac_codes:
-- SEL031000
-- SEL027000
-- SEL040000
+  primary: []
+  secondary: []
+bisac_codes: []
 target_price:
   ebook_usd: 4.99
   audible_usd: 9.99
@@ -83,11 +29,6 @@ author_positioning:
   teacher: sai_ma
   brand: devotion_path
   byline_author: dora_alder
-comp_titles:
-- The Book of Boundaries (Melissa Urban) — the go-to boundary handbook for chronic
-  over-givers, here met with more tenderness than tactics
-- Set Boundaries, Find Peace (Nedra Glover Tawwab) — boundary work for people whose
-  yes is automatic and whose no feels dangerous
-- 'Burnout: The Secret to Unlocking the Stress Cycle (Emily and Amelia Nagoski) —
-  speaks directly to the depleted caregiver''s overfiring body'
-_needs_authoring: false
+comp_titles: []
+plan_source_path: /tmp/catalog_devotion_path/devotion_path.csv
+_needs_authoring: true

@@ -1,7 +1,8 @@
 book_plan_schema: 1.0.0
+created_at: '2026-06-26'
 book_id: devotion_path__sai_ma__healthcare_rns__depression__watcher
-series_plan: config/source_of_truth/series_plans_en_us/devotion_path__sai_ma__healthcare_rns__depression.yaml
-installment_number: 3
+series_plan: /tmp/catalog_devotion_path/series/devotion_path__sai_ma__healthcare_rns__depression.yaml
+installment_number: 5
 engine: watcher
 duration: standard_book_60min
 runtime_format_id: standard_book_60min
@@ -10,76 +11,16 @@ target_word_range:
 - 9000
 - 12000
 target_audio_minutes: 70
-title: The Part of You That Won't Let You Rest
-subtitle: When the mind that catches every patient's decline turns inward at 3am and
-  will not stop monitoring your own dimming, calling exhaustion a failing chart
-cover_tagline: Even your exhaustion is on a watch you never clock out of.
+title: 'Depression: Watcher'
+subtitle: A guide for Healthcare Rns
+cover_tagline: ''
 description:
-  short_blurb: You read your own decline the way you read a monitor — noting the numbness,
-    ranking the days, scanning yourself for proof you are slipping. This is for the
-    nurse whose depression comes with a watcher who never goes off duty. It will not
-    give you a better way to assess yourself. It will help you, at last, lay the watch
-    down.
-  long_description: 'It never clocks out. Even now, reading this, some part of you
-    is taking your own vitals — noting how little you feel, how long it has been,
-    how far from fine you have drifted. It is the same precision that keeps your patients
-    alive, turned inward and left running through the night: the watcher who scans,
-    ranks, and charts your own dimming, and will not let you simply rest inside it.
-    You finish the shift and lie down and the monitoring continues. How bad is it
-    tonight. Is this the day it tips. You have made yourself the patient you can never
-    stop checking.
-
-
-    This book is for the nurse whose depression comes with a vigilance that will not
-    stand down. You were trained to catch the subtle decline before it becomes a code,
-    and you are good at it — so good that you cannot stop watching yourself the way
-    you watch a failing chart. The exhaustion of it is its own grief: never off duty,
-    never held, always the one assessing and never the one assessed with any mercy.
-    The watching does not keep you safe. It keeps you from the rest that might actually
-    let the well refill.
-
-
-    Gently, without asking you to stop being careful, you will come to recognize the
-    watcher for what it is: how it learned, in years of catching what others missed,
-    that vigilance was love; how it turned that love on you and forgot to ever stand
-    down; how reading your own numbness as data is one more shift you never leave.
-    You will be invited to do what the watcher cannot imagine — to be tended without
-    first being assessed. To let someone else hold the watch for the length of these
-    pages. To rest in the dark without scanning it for threat, and to trust that you
-    do not have to monitor yourself into being well.
-
-
-    This book will not give you a better self-assessment, a mood tracker, or a sharper
-    way to catch yourself slipping. It will not optimize your vigilance or promise
-    that if you watch correctly you will finally be safe. There is no fix here, because
-    the watching was never the cure — only the cost. Nothing in these pages will help
-    you monitor yourself more.
-
-
-    You are allowed to go off duty inside your own mind. You are allowed to set the
-    watch down, even now, and let yourself be held by something that is not keeping
-    score. The well does not refill under surveillance. It refills when, at last,
-    you stop standing guard over the dark.
-
-
-    Book 3 of the Open Vessel Press depression series.'
+  short_blurb: ''
+  long_description: ''
 keywords:
-  primary:
-  - depression and overthinking nurses
-  - hypervigilance and depression
-  - constantly monitoring my mood depression
-  - mental exhaustion healthcare workers
-  - can't switch off my mind depression
-  - depression self help for caregivers
-  - spiritual help for a tired mind
-  secondary:
-  - nurse mental health burnout
-  - letting go of control depression
-  - rest and recovery for caregivers
-bisac_codes:
-- SEL036000
-- SEL024000
-- PSY022040
+  primary: []
+  secondary: []
+bisac_codes: []
 target_price:
   ebook_usd: 4.99
   audible_usd: 9.99
@@ -88,11 +29,6 @@ author_positioning:
   teacher: sai_ma
   brand: devotion_path
   byline_author: suki_lowell
-comp_titles:
-- Why Has Nobody Told Me This Before? by Julie Smith — meets the self-monitoring mind
-  with warmth instead of more analysis
-- Burnout by Emily Nagoski and Amelia Nagoski — names the never-off-duty exhaustion
-  of women who care for a living
-- Radical Acceptance by Tara Brach — invites the vigilant, self-judging mind to be
-  held rather than perpetually assessed
-_needs_authoring: false
+comp_titles: []
+plan_source_path: /tmp/catalog_devotion_path/devotion_path.csv
+_needs_authoring: true

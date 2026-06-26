@@ -1,7 +1,8 @@
 book_plan_schema: 1.0.0
+created_at: '2026-06-26'
 book_id: devotion_path__sai_ma__healthcare_rns__depression__grief
-series_plan: config/source_of_truth/series_plans_en_us/devotion_path__sai_ma__healthcare_rns__depression.yaml
-installment_number: 2
+series_plan: /tmp/catalog_devotion_path/series/devotion_path__sai_ma__healthcare_rns__depression.yaml
+installment_number: 3
 engine: grief
 duration: standard_book_60min
 runtime_format_id: standard_book_60min
@@ -10,74 +11,16 @@ target_word_range:
 - 9000
 - 12000
 target_audio_minutes: 70
-title: Love With Nowhere to Go
-subtitle: When the patients you couldn't save and the ones you released have settled
-  into your chest as years of unwept loss that everyone keeps calling depression
-cover_tagline: What you call depression may be all the grief you were never given
-  time to feel.
+title: 'Depression: Grief'
+subtitle: A guide for Healthcare Rns
+cover_tagline: ''
 description:
-  short_blurb: You held their hands as they left, charted the time, and moved to the
-    next room. The grief never had anywhere to go, so it stayed. This is for the nurse
-    whose depression is really a decade of ungrieved loss — and a tender invitation
-    to finally let it move through you.
-  long_description: 'You remember the room. Maybe the name, maybe only the hands,
-    or the family in the hallway you had to be steady for. You did what the work asks:
-    you held the leaving, you charted the time, and you walked to the next call light
-    because someone there needed you too. There was never a place to put what just
-    happened. So it stayed. And it kept staying, shift after shift, year after year,
-    until the weight in your chest stopped feeling like one loss and started feeling
-    like the way you simply are now.
-
-
-    This book is for the nurse whose depression is really grief that was never allowed
-    to move. You have presided over more endings than most people witness in a lifetime,
-    and you were never given the silence to mourn even one. The flatness you feel
-    is not coldness — it is love with nowhere to go, pressed down so you could keep
-    working, until pressing it down became the only way you know how to live. You
-    are not depressed because something is wrong with you. You are grieving, alone,
-    in a body that was never given permission to.
-
-
-    Without hurrying you toward acceptance or asking you to find meaning in any of
-    it, you will come to recognize how the losses accumulated: the patients you couldn''t
-    save and the ones you released and the version of yourself who used to feel things;
-    how ''I''m used to it'' became the lie that let you go back in; how grief that
-    cannot move turns into the gray weather you mistake for who you are. You will
-    be invited to let it move at last — not to get over anyone, but to grieve them,
-    finally, in the tender company of a voice that will not flinch from your sorrow
-    or rush you out of it.
-
-
-    This book will not tell you they are in a better place, or that everything happened
-    for a reason, or that time heals. It will not hand you stages to complete or a
-    timeline to hit. There is no fix for grief, because grief is not a problem — it
-    is the last, sacred form your love takes for the people you could not keep. Nothing
-    here will make it smaller.
-
-
-    You are allowed to mourn what this work has cost you. You are allowed to set the
-    weight down for the length of these pages and let yourself be held while it moves.
-    Grief is love with nowhere to go. Here, at last, it has somewhere.
-
-
-    Book 2 of the Open Vessel Press depression series.'
+  short_blurb: ''
+  long_description: ''
 keywords:
-  primary:
-  - grief and depression
-  - unresolved grief caregivers
-  - depression in nurses and healthcare workers
-  - complicated grief healing book
-  - patient loss nurse grief
-  - grief that feels like depression
-  - spiritual book on grief and loss
-  secondary:
-  - compassion fatigue and grief
-  - letting go of loss
-  - healing accumulated grief
-bisac_codes:
-- SEL036000
-- SEL010000
-- PSY022040
+  primary: []
+  secondary: []
+bisac_codes: []
 target_price:
   ebook_usd: 4.99
   audible_usd: 9.99
@@ -86,11 +29,6 @@ author_positioning:
   teacher: sai_ma
   brand: devotion_path
   byline_author: suki_lowell
-comp_titles:
-- It's OK That You're Not OK by Megan Devine — refuses to rush or fix grief, the exact
-  permission this book extends to the nurse
-- The Wild Edge of Sorrow by Francis Weller — frames unwept grief as sacred and communal,
-  mirroring this book's devotional witness
-- On Grief and Grieving by Elisabeth Kübler-Ross and David Kessler — the canonical
-  companion for those carrying loss, broadened here beyond stages
-_needs_authoring: false
+comp_titles: []
+plan_source_path: /tmp/catalog_devotion_path/devotion_path.csv
+_needs_authoring: true

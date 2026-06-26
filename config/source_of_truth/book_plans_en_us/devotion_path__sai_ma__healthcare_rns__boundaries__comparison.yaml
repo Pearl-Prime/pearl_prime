@@ -1,7 +1,8 @@
 book_plan_schema: 1.0.0
+created_at: '2026-06-26'
 book_id: devotion_path__sai_ma__healthcare_rns__boundaries__comparison
-series_plan: config/source_of_truth/series_plans_en_us/devotion_path__sai_ma__healthcare_rns__boundaries.yaml
-installment_number: 3
+series_plan: /tmp/catalog_devotion_path/series/devotion_path__sai_ma__healthcare_rns__boundaries.yaml
+installment_number: 4
 engine: comparison
 duration: standard_book_60min
 runtime_format_id: standard_book_60min
@@ -10,73 +11,16 @@ target_word_range:
 - 9000
 - 12000
 target_audio_minutes: 70
-title: Everyone Else Seems to Hold the Line
-subtitle: For the nurse who watches her colleagues say no with ease — and measures
-  her own bending against everyone who looks unbreakable
-cover_tagline: They left at seven. You're still here, wondering what they know that
-  you don't.
+title: 'Boundaries: Comparison'
+subtitle: A guide for Healthcare Rns
+cover_tagline: ''
 description:
-  short_blurb: 'Other nurses seem to leave on time, say no without apology, and go
-    home whole — and you measure yourself against them and always come up short. This
-    is a tender book for the one who watches everyone else hold a line she can''t.
-    It won''t help you win the comparison. It will help you stop pointing a caregiver''s
-    whole heart at the wrong target: yourself.'
-  long_description: 'The other nurse hands off her patients, signs out, and walks
-    to her car at 7:02 without a backward glance. She says no to the extra shift like
-    it costs her nothing. She seems to go home whole. And you — still charting, still
-    saying yes, still here — watch her and feel the old verdict settle in: everyone
-    else has figured out something you can''t seem to learn.
-
-
-    This is a book for the nurse who measures herself against everyone who looks unbreakable.
-    For the one who scans the break room and finds herself the only one bending, the
-    only one who can''t hold the line, the only one whose giving has no off switch.
-    You compare your raw, overflowing insides to their composed outsides, and the
-    math always comes out the same way: they are doing it right, and you are too soft,
-    too much, too slow to learn.
-
-
-    Here you will come to recognize the comparison for what it is. You''ll feel how
-    it takes a heart built for devotion and turns it into a measuring stick, always
-    pointed back at you. You''ll see that you have no idea what their lines cost them,
-    what they''ve hardened to be able to leave at seven, what they carry home that
-    they''ll never let the break room see. And you''ll arrive, gently, at the only
-    question that was ever yours to answer: not how do they do it, but where do you
-    draw the line — yours, in your own hands, for your own life.
-
-
-    This book will not help you win the comparison. That is the whole point. It will
-    not teach you to leave faster, harden quicker, or become the unbothered nurse
-    you''ve decided everyone else already is. It promises no fix, no transformation
-    into someone who never bends. There is no contest here to come first in, only
-    a person to come home to.
-
-
-    What it offers instead is the slow grace of turning the instrument around. You
-    have spent years pointing a caregiver''s whole attention outward, then inward
-    as judgment. Here you are allowed to set the measuring down. You are an open vessel,
-    not a vessel held up against every other cup on the shelf and found too full or
-    too empty. You are allowed to stop keeping score and simply be refilled.
-
-
-    Book 3 of the Open Vessel Press boundaries series.'
+  short_blurb: ''
+  long_description: ''
 keywords:
-  primary:
-  - boundaries for nurses
-  - comparison and self-worth
-  - stop comparing yourself to others
-  - self-care for healthcare workers
-  - people pleasing recovery
-  - nurse burnout and boundaries
-  - feeling not good enough at work
-  secondary:
-  - saying no without guilt
-  - comparison trap healing
-  - caregiver self-compassion
-bisac_codes:
-- SEL031000
-- SEL027000
-- SEL036000
+  primary: []
+  secondary: []
+bisac_codes: []
 target_price:
   ebook_usd: 4.99
   audible_usd: 9.99
@@ -85,11 +29,6 @@ author_positioning:
   teacher: sai_ma
   brand: devotion_path
   byline_author: dora_alder
-comp_titles:
-- The Gifts of Imperfection (Brené Brown) — dismantles the comparison-and-worthiness
-  trap that drives chronic over-givers
-- Set Boundaries, Find Peace (Nedra Glover Tawwab) — reframes boundary struggles away
-  from 'everyone else can do this' self-judgment
-- Real Self-Care (Pooja Lakshmin) — speaks to caregivers measuring themselves against
-  an impossible standard of effortless competence
-_needs_authoring: false
+comp_titles: []
+plan_source_path: /tmp/catalog_devotion_path/devotion_path.csv
+_needs_authoring: true
