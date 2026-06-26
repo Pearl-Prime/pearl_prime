@@ -1,39 +1,41 @@
 series_plan_schema: 1.0.0
+created_at: '2026-06-26'
 locale: en_US
 book_id_prefix: heart_balance__maat__gen_z_professionals__financial_stress
 brand: heart_balance
 teacher: maat
 persona: gen_z_professionals
 topic: financial_stress
-byline_author: ravi_iverson
 arc:
   installment_1:
     book_id: heart_balance__maat__gen_z_professionals__financial_stress__overwhelm
     engine: overwhelm
-    master_arc: config/source_of_truth/master_arcs/gen_z_professionals__financial_stress__overwhelm__F006.yaml
     duration: standard_book_60min
+    master_arc: config/source_of_truth/master_arcs/gen_z_professionals__financial_stress__overwhelm__F006.yaml
   installment_2:
+    book_id: heart_balance__maat__gen_z_professionals__financial_stress__overwhelm__1hr
+    engine: overwhelm
+    duration: one_hour_book
+    master_arc: config/source_of_truth/master_arcs/gen_z_professionals__financial_stress__overwhelm__F006.yaml
+  installment_3:
     book_id: heart_balance__maat__gen_z_professionals__financial_stress__spiral
     engine: spiral
-    master_arc: config/source_of_truth/master_arcs/gen_z_professionals__financial_stress__spiral__F006.yaml
     duration: standard_book_60min
-  installment_3:
+    master_arc: config/source_of_truth/master_arcs/gen_z_professionals__financial_stress__spiral__F006.yaml
+  installment_4:
+    book_id: heart_balance__maat__gen_z_professionals__financial_stress__spiral__1hr
+    engine: spiral
+    duration: one_hour_book
+    master_arc: config/source_of_truth/master_arcs/gen_z_professionals__financial_stress__spiral__F006.yaml
+  installment_5:
     book_id: heart_balance__maat__gen_z_professionals__financial_stress__shame
     engine: shame
-    master_arc: config/source_of_truth/master_arcs/gen_z_professionals__financial_stress__shame__F006.yaml
     duration: standard_book_60min
-reader_promise_family: A heart-centered way to carry money fear without letting it
-  decide your worth — weighing the real weight of financial stress against the feather
-  of who you are, so the number stops being the verdict.
+    master_arc: config/source_of_truth/master_arcs/gen_z_professionals__financial_stress__shame__F006.yaml
+reader_promise_family: ''
 bestseller_hook_family: ''
 emotional_engine: financial_stress_recognition
-comp_series:
-- Good Vibes, Good Life series (Vex King) — accessible, worth-first self-help for
-  a young audience that refuses hustle framing
-- The Financial Diet (Chelsea Fagan) — money writing for young adults that names the
-  emotional weight, not just the spreadsheet
-- The Book of Boundaries adjacent work (Melissa Urban) — clear-eyed, compassionate
-  limit-setting that honors the real cost of holding a line
+comp_series: []
 platform_strategy:
   primary:
   - kdp_ebook
@@ -47,26 +49,14 @@ platform_strategy:
     release_spacing_days: 14
     max_books_per_brand_per_month: 2
 reader_avatar:
-  age: early-to-mid twenties, first real salary or first stretch of gig income
-  where_they_are: It's a Tuesday night and you've just opened the banking app for
-    the fourth time, as if the balance might have changed since the last refresh.
-    Rent clears Friday, the student loan auto-pays Monday, and the math doesn't leave
-    room to breathe. Your friends are posting trips you can't afford and you're doing
-    the silent arithmetic of how long you could last if one thing went wrong.
-  what_they_need: to separate the genuine pressure of being underpaid and overcharged
-    from the private verdict that they are bad with money, behind, or fundamentally
-    not enough — and to find a steadier center that the next paycheck can't move
-  what_they_avoid: budgeting-guru hustle, shame-coded 'cut the lattes' lectures, toxic
-    abundance-mindset platitudes, and any advice that pretends the rent isn't actually
-    high
+  age: ''
+  where_they_are: ''
+  what_they_need: ''
+  what_they_avoid: ''
 series_voice_markers:
-  register: balanced, warm, discerning — a heart-centered voice about money and worth
-    that weighs the real cost fairly; gentle but clear-eyed, never clinical, never
-    a finance bro, never preachy
-  sentence_rhythm: measured and even, like a scale settling; short declaratives for
-    the hard truths, longer steadying lines for the turn — pauses where a breath belongs,
-    never urgent
-  metaphor_family: the feather and the scale, weight and balance, the heart weighed
-    against a feather, the fulcrum that holds, what you owe and what you're worth
-    kept on separate pans
-_needs_authoring: false
+  register: ''
+  sentence_rhythm: ''
+  metaphor_family: ''
+  second_person_default: true
+plan_source_path: /tmp/catalog_heart_balance/heart_balance.csv
+_needs_authoring: true

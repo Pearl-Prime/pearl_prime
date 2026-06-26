@@ -1,38 +1,40 @@
 series_plan_schema: 1.0.0
-created_at: '2026-04-24'
+created_at: '2026-06-26'
 locale: en_US
 book_id_prefix: heart_balance__maat__gen_z_professionals__compassion_fatigue
 brand: heart_balance
 teacher: maat
 persona: gen_z_professionals
 topic: compassion_fatigue
-teacher_topic_score: 0.85
-teacher_persona_score: 0.7
-composite_fit: 0.77
 arc:
   installment_1:
     book_id: heart_balance__maat__gen_z_professionals__compassion_fatigue__overwhelm
     engine: overwhelm
-    master_arc: config/source_of_truth/master_arcs/gen_z_professionals__compassion_fatigue__overwhelm__F006.yaml
     duration: standard_book_60min
+    master_arc: config/source_of_truth/master_arcs/gen_z_professionals__compassion_fatigue__overwhelm__F006.yaml
   installment_2:
-    book_id: heart_balance__maat__gen_z_professionals__compassion_fatigue__watcher
-    engine: watcher
-    master_arc: config/source_of_truth/master_arcs/gen_z_professionals__compassion_fatigue__watcher__F006.yaml
+    book_id: heart_balance__maat__gen_z_professionals__compassion_fatigue__shame
+    engine: shame
     duration: standard_book_60min
   installment_3:
     book_id: heart_balance__maat__gen_z_professionals__compassion_fatigue__grief
     engine: grief
-    master_arc: config/source_of_truth/master_arcs/gen_z_professionals__compassion_fatigue__grief__F006.yaml
     duration: standard_book_60min
-reader_promise_family: |
-  3 books across engines of compassion_fatigue via the mythological-sincere, shojo+ dignity voice.
-bestseller_hook_family: recognition_descent
+    master_arc: config/source_of_truth/master_arcs/gen_z_professionals__compassion_fatigue__grief__F006.yaml
+  installment_4:
+    book_id: heart_balance__maat__gen_z_professionals__compassion_fatigue__watcher
+    engine: watcher
+    duration: standard_book_60min
+    master_arc: config/source_of_truth/master_arcs/gen_z_professionals__compassion_fatigue__watcher__F006.yaml
+  installment_5:
+    book_id: heart_balance__maat__gen_z_professionals__compassion_fatigue__watcher__1hr
+    engine: watcher
+    duration: one_hour_book
+    master_arc: config/source_of_truth/master_arcs/gen_z_professionals__compassion_fatigue__watcher__F006.yaml
+reader_promise_family: ''
+bestseller_hook_family: ''
 emotional_engine: compassion_fatigue_recognition
-comp_series:
-- Trauma Stewardship (Lipsky)
-- The Compassion Fatigue Workbook (Mathieu)
-- Strong Like Water (Kolber)
+comp_series: []
 platform_strategy:
   primary:
   - kdp_ebook
@@ -46,21 +48,14 @@ platform_strategy:
     release_spacing_days: 14
     max_books_per_brand_per_month: 2
 reader_avatar:
-  age: 22–29
-  where_they_are: |
-    First real job. Wakes to racing mind. Apps didn't stick.
-  what_they_need: |
-    Doesn't promise the anxiety will stop.
-  what_they_avoid: |
-    Productivity framing. Toxic positivity.
+  age: ''
+  where_they_are: ''
+  what_they_need: ''
+  what_they_avoid: ''
 series_voice_markers:
-  register: mythological-sincere, shojo+ dignity
-  sentence_rhythm: balanced, heraldic, architectural
-  metaphor_family: scales, gold leaf, star maps
+  register: ''
+  sentence_rhythm: ''
+  metaphor_family: ''
   second_person_default: true
-main_character_name: Juniper
-main_character_role: early-career creative / knowledge worker
-main_character_image_path: null
-main_character_lora_id: juniper_hb_us
-main_character_trigger_word: juniper_hb_us
-plan_source_path: config/manga/manga_brand_series_plan.yaml
+plan_source_path: /tmp/catalog_heart_balance/heart_balance.csv
+_needs_authoring: true

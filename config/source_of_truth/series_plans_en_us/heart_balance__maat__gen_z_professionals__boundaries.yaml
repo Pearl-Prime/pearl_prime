@@ -1,42 +1,40 @@
 series_plan_schema: 1.0.0
+created_at: '2026-06-26'
 locale: en_US
 book_id_prefix: heart_balance__maat__gen_z_professionals__boundaries
 brand: heart_balance
 teacher: maat
 persona: gen_z_professionals
 topic: boundaries
-byline_author: theo_bello
 arc:
   installment_1:
     book_id: heart_balance__maat__gen_z_professionals__boundaries__false_alarm
     engine: false_alarm
-    master_arc: config/source_of_truth/master_arcs/gen_z_professionals__boundaries__false_alarm__F006.yaml
     duration: standard_book_60min
+    master_arc: config/source_of_truth/master_arcs/gen_z_professionals__boundaries__false_alarm__F006.yaml
   installment_2:
+    book_id: heart_balance__maat__gen_z_professionals__boundaries__false_alarm__1hr
+    engine: false_alarm
+    duration: one_hour_book
+    master_arc: config/source_of_truth/master_arcs/gen_z_professionals__boundaries__false_alarm__F006.yaml
+  installment_3:
+    book_id: heart_balance__maat__gen_z_professionals__boundaries__overwhelm
+    engine: overwhelm
+    duration: standard_book_60min
+  installment_4:
     book_id: heart_balance__maat__gen_z_professionals__boundaries__shame
     engine: shame
-    master_arc: config/source_of_truth/master_arcs/gen_z_professionals__boundaries__shame__F006.yaml
     duration: standard_book_60min
-  installment_3:
+    master_arc: config/source_of_truth/master_arcs/gen_z_professionals__boundaries__shame__F006.yaml
+  installment_5:
     book_id: heart_balance__maat__gen_z_professionals__boundaries__comparison
     engine: comparison
-    master_arc: config/source_of_truth/master_arcs/gen_z_professionals__boundaries__comparison__F006.yaml
     duration: standard_book_60min
-reader_promise_family: A heart-centered way to understand why drawing a line costs
-  you so much — and to weigh what you give against what you keep, without being told
-  to just say no, harden up, or stop caring.
+    master_arc: config/source_of_truth/master_arcs/gen_z_professionals__boundaries__comparison__F006.yaml
+reader_promise_family: ''
 bestseller_hook_family: ''
 emotional_engine: boundaries_recognition
-comp_series:
-- Set Boundaries, Find Peace (Nedra Glover Tawwab) — names the relational cost of
-  limits without shaming the people-pleaser, the same fair-weighing spirit this series
-  carries.
-- The Book of Boundaries (Melissa Urban) — script-rich and direct about saying no,
-  where this series sits one layer beneath the script, in the body that flinches before
-  the words come.
-- How to Do the Work (Nicole LePera) — somatic, self-recognition-first healing for
-  a young audience, matching this series' move from insight to felt change rather
-  than worksheets.
+comp_series: []
 platform_strategy:
   primary:
   - kdp_ebook
@@ -50,23 +48,14 @@ platform_strategy:
     release_spacing_days: 14
     max_books_per_brand_per_month: 2
 reader_avatar:
-  age: early-to-mid twenties
-  where_they_are: Slack is open in one tab, a half-typed reply that starts with 'No
-    worries, happy to—' in another, and it's 11:40pm; they meant to log off two hours
-    ago, the cursor still blinking after the word they can't bring themselves to delete.
-  what_they_need: Language for what happens in their body when they betray their own
-    limit — and permission to believe a line is allowed to cost something and still
-    be worth drawing.
-  what_they_avoid: People-pleasing platitudes, 'just say no' as if it were one syllable,
-    girlboss boundary scripts, and anything that frames a limit as a power move while
-    skipping the grief of disappointing someone they love.
+  age: ''
+  where_they_are: ''
+  what_they_need: ''
+  what_they_avoid: ''
 series_voice_markers:
-  register: balanced, warm, discerning — a heart-centered voice that weighs things
-    fairly; gentle but clear-eyed, never clinical, never preachy, never hustle
-  sentence_rhythm: measured and even, like a scale finding level; short declaratives
-    that land, then a longer breath that holds the weight; pauses where the reader
-    needs to feel the cost before moving on
-  metaphor_family: the feather and the scale, the heart weighed against a feather,
-    weight and balance, the fulcrum that holds, the door and the threshold, what you
-    give and what you keep
-_needs_authoring: false
+  register: ''
+  sentence_rhythm: ''
+  metaphor_family: ''
+  second_person_default: true
+plan_source_path: /tmp/catalog_heart_balance/heart_balance.csv
+_needs_authoring: true
