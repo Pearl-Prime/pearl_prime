@@ -1,6 +1,7 @@
 book_plan_schema: 1.0.0
+created_at: '2026-06-26'
 book_id: sleep_restoration__master_sha__healthcare_rns__grief__grief
-series_plan: config/source_of_truth/series_plans_en_us/sleep_restoration__master_sha__healthcare_rns__grief.yaml
+series_plan: /tmp/catalog_sleep_restoration/series/sleep_restoration__master_sha__healthcare_rns__grief.yaml
 installment_number: 1
 engine: grief
 duration: standard_book_60min
@@ -10,77 +11,16 @@ target_word_range:
 - 9000
 - 12000
 target_audio_minutes: 70
-title: The Bed You Made for Someone Who Is Gone
-subtitle: For the nurse who carries every loss home in her body — a place to set down
-  the grief the shift never let you stop for
-cover_tagline: You stripped the bed and remade it before your shift was even over.
-  No one gave you a minute to grieve.
+title: 'Grief: Grief'
+subtitle: A guide for Healthcare Rns
+cover_tagline: ''
 description:
-  short_blurb: You have lost more people than anyone outside the unit will ever understand,
-    and you were never once given the time to feel it. This is a book for the nurse
-    who carries every empty bed home in her body — a quiet companion through the long
-    nights, where the grief you were trained to set aside is finally allowed to be
-    set down instead.
-  long_description: 'It happens again on the night off you fought to protect. The
-    house is quiet, the shift is hours behind you, and still you are awake at 3am
-    with the weight of someone who is gone. Maybe it was this week. Maybe it was years
-    ago and it has simply never had anywhere to land. You can still see the empty
-    bed you stripped and remade before the shift was even over, the family in the
-    hallway, the chart you closed with steady hands while something inside you did
-    not move at all.
-
-
-    This book is for the nurse who has lost more people than anyone outside the unit
-    will ever understand — and who was never once given the time to feel it. You learned
-    to hand off the body and pick up the next set of vitals. You learned to grieve
-    in the supply closet for ninety seconds, or not at all. You went home and made
-    dinner and answered the texts and nobody knew you were carrying a death in your
-    chest. Grief did not skip you. It just had nowhere to go, so it went underneath,
-    into the part of you that lies awake when the house finally goes still.
-
-
-    In these pages you will come to recognize the particular shape of a grief that
-    was never allowed to stop. The losses you stacked without mourning. The names
-    you still remember and the ones you have made yourself forget. The strange guilt
-    of being the one who lived, who clocked out, who got to go home. The way the body
-    holds what the schedule would not let you put down — and how the dark is where
-    it finally asks to be felt.
-
-
-    This is not a book that will help you process faster or get back to full capacity
-    by Monday. It will not hand you a resilience plan or tell you that your patients
-    would want you to be strong. It will not rush you, because grief that is rushed
-    only goes deeper underground. There is nothing here to fix, and nothing in you
-    that needs fixing.
-
-
-    What there is, instead, is room. A steady presence through the heavy hours. Permission
-    to set the weight down — not to forget what it cost you, but to stop carrying
-    all of it alone in the dark. The empty chair can stay empty and you can still
-    rest.
-
-
-    You held it together for everyone. Tonight, you don''t have to.
-
-
-    Book 1 of the Night Architecture Books grief series.'
+  short_blurb: ''
+  long_description: ''
 keywords:
-  primary:
-  - grief books for nurses
-  - healthcare worker grief and loss
-  - nurse burnout and grief
-  - grief support for caregivers
-  - coping with patient death
-  - can't sleep after losing someone
-  - unprocessed grief help
-  secondary:
-  - compassion fatigue nurses
-  - night shift grief insomnia
-  - letting go of loss book
-bisac_codes:
-- SEL010000
-- FAM014000
-- PSY045050
+  primary: []
+  secondary: []
+bisac_codes: []
 target_price:
   ebook_usd: 4.99
   audible_usd: 9.99
@@ -89,11 +29,6 @@ author_positioning:
   teacher: master_sha
   brand: sleep_restoration
   byline_author: ivo_iverson
-comp_titles:
-- It's OK That You're Not OK (Megan Devine) — refuses to rush or fix grief, the same
-  permission this book extends to nurses
-- The Grieving Brain (Mary-Frances O'Connor) — names how the body carries loss, mirroring
-  the somatic grief nurses hold home
-- What Doesn't Kill Us Makes Us (Stephen Joseph) — meets the cost of caregiving without
-  resilience-coaching or platitudes
-_needs_authoring: false
+comp_titles: []
+plan_source_path: /tmp/catalog_sleep_restoration/sleep_restoration.csv
+_needs_authoring: true

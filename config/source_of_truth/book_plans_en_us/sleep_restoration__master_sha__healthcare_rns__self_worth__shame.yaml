@@ -1,6 +1,7 @@
 book_plan_schema: 1.0.0
+created_at: '2026-06-26'
 book_id: sleep_restoration__master_sha__healthcare_rns__self_worth__shame
-series_plan: config/source_of_truth/series_plans_en_us/sleep_restoration__master_sha__healthcare_rns__self_worth.yaml
+series_plan: /tmp/catalog_sleep_restoration/series/sleep_restoration__master_sha__healthcare_rns__self_worth.yaml
 installment_number: 1
 engine: shame
 duration: standard_book_60min
@@ -10,73 +11,16 @@ target_word_range:
 - 9000
 - 12000
 target_audio_minutes: 70
-title: The Armor You Wear Off the Floor
-subtitle: For the nurse who holds it together for everyone and carries the quiet certainty
-  she is not enough — letting the weight of the shift down in the dark
-cover_tagline: You took off your scrubs hours ago. You are still wearing the armor.
+title: 'Self Worth: Shame'
+subtitle: A guide for Healthcare Rns
+cover_tagline: ''
 description:
-  short_blurb: You are the one who stays calm when the room goes loud, who catches
-    what others miss, who never lets them see you waver. Underneath the competence
-    lives a belief you have never said out loud — that if anyone really saw you, they
-    would find you lacking. This is the book for the part of you that keeps the armor
-    on long after the shift ends, and for the night you finally take it off.
-  long_description: 'You learned, somewhere along the way, that being good was the
-    price of being safe. So you became excellent. You are the steady one when the
-    monitor alarms, the one who stays late to finish the chart right, the one who
-    walks into the room and lets nothing show. From the outside, you are unshakeable.
-    Inside, there is a quieter truth you have never spoken: a low, constant sense
-    that it is not quite enough — that you are not quite enough — and that one missed
-    catch, one wrong word, one bad shift would prove it.
-
-
-    This is a book for the nurse who wears competence like armor. For the one who
-    replays the handoff at 2am, certain she said the wrong thing. For the one who
-    cannot accept the compliment but remembers every correction by heart. You are
-    not broken and you are not failing. You learned early to cover a wound you did
-    not choose, and you have been holding the plating up ever since — through every
-    shift, into every night, long after the scrubs come off.
-
-
-    In these pages you will come to recognize the shape of it. How the armor went
-    on, and what it has cost to never set it down. How the question underneath — who
-    are you trying to impress? — has run quietly behind years of effort. You will
-    see the hidden belief for what it is: not a verdict about your worth, but an old
-    strategy that kept a younger you safe, and is now keeping you awake. You will
-    feel what it is like to let the body come down off the floor, plate by plate,
-    in the dark where no one is watching and nothing has to be earned.
-
-
-    This book will not coach you to be more resilient. It will not hand you a self-care
-    checklist or ask you to push through. It will not promise that one more reframe
-    will finally make you feel worthy, because your worth was never the thing in question.
-    There is no patient to save here. There is no shift to survive. There is only
-    you, in the quiet hours, and a voice in the next room reminding you that you were
-    enough before any of it — before the first chart, before the first save, before
-    you ever put the armor on.
-
-
-    Let it down. You are allowed to be a person and not a function. You are allowed
-    to rest without having earned it. You are allowed, here, to be seen exactly as
-    you are.
-
-
-    Book 1 of the Night Architecture Books self worth series.'
+  short_blurb: ''
+  long_description: ''
 keywords:
-  primary:
-  - self worth for nurses
-  - shame and not feeling good enough
-  - nurse burnout and self esteem
-  - healing shame in high achievers
-  - feeling like an impostor at work
-  - letting go of perfectionism
-  - books for exhausted nurses
-  secondary:
-  - self compassion for caregivers
-  - you are enough self worth book
-  - calming the mind after a hard shift
-bisac_codes:
-- SEL031000
-- SEL023000
+  primary: []
+  secondary: []
+bisac_codes: []
 target_price:
   ebook_usd: 4.99
   audible_usd: 9.99
@@ -85,11 +29,6 @@ author_positioning:
   teacher: master_sha
   brand: sleep_restoration
   byline_author: vera_bramble
-comp_titles:
-- The Gifts of Imperfection (Brene Brown) — the worthiness-not-earned message for
-  the high-achiever who hides her not-enough underneath competence.
-- 'Burnout: The Secret to Unlocking the Stress Cycle (Emily & Amelia Nagoski) — names
-  the cost caregiving takes on the body and gives permission to stop powering through.'
-- How to Be Yourself (Ellen Hendriksen) — gentle, evidence-aware help for the part
-  that is certain it will be found lacking if truly seen.
-_needs_authoring: false
+comp_titles: []
+plan_source_path: /tmp/catalog_sleep_restoration/sleep_restoration.csv
+_needs_authoring: true

@@ -1,7 +1,8 @@
 book_plan_schema: 1.0.0
+created_at: '2026-06-26'
 book_id: sleep_restoration__master_sha__healthcare_rns__grief__watcher
-series_plan: config/source_of_truth/series_plans_en_us/sleep_restoration__master_sha__healthcare_rns__grief.yaml
-installment_number: 2
+series_plan: /tmp/catalog_sleep_restoration/series/sleep_restoration__master_sha__healthcare_rns__grief.yaml
+installment_number: 3
 engine: watcher
 duration: standard_book_60min
 runtime_format_id: standard_book_60min
@@ -10,78 +11,16 @@ target_word_range:
 - 9000
 - 12000
 target_audio_minutes: 70
-title: Grief Keeps You at the Bedside All Night
-subtitle: For the nurse mourning in the dark with a body that never left the floor
-  — still half-listening for an alarm, still bracing for a room that is already empty
-cover_tagline: Your shift ended hours ago. Your body is still listening for the alarm.
+title: 'Grief: Watcher'
+subtitle: A guide for Healthcare Rns
+cover_tagline: ''
 description:
-  short_blurb: You can leave the unit, but the unit doesn't leave you — your mind
-    keeps scanning the dark for a crisis that already happened or will never come.
-    This is a book for the nurse whose vigilance won't switch off long enough to grieve,
-    and who lies awake monitoring a loss the way she once monitored a bedside. It
-    is a quiet companion for the watcher who never gets to stand down.
-  long_description: 'The shift ended hours ago. The drive home is over, the scrubs
-    are in the wash, and still some part of you is on the floor — listening for the
-    alarm, watching the numbers, bracing for the moment everything turns. You lie
-    in the dark and your mind walks the unit. Did you miss something. Should you have
-    caught it sooner. You replay the code, the call you made, the face of the one
-    you couldn''t bring back, as if watching it closely enough now could change how
-    it ended.
-
-
-    This book is for the nurse whose mind never clocks out. Years of training taught
-    your nervous system that vigilance keeps people alive — that to stop scanning
-    is to let someone slip. So you don''t stop. Not at the bedside, not in the car,
-    not at 3am when the house is quiet and there is nothing left to monitor but a
-    grief you keep circling instead of feeling. The watching has become its own kind
-    of mourning: a way to stay close to what you lost without ever having to set it
-    down.
-
-
-    In these pages you will come to recognize the hypervigilant mind for what it is
-    — not a flaw, but a survival skill that followed you home and forgot how to go
-    off duty. You''ll see how the scanning that saved patients now stands guard over
-    your grief, monitoring a loss that no amount of attention can revise. You''ll
-    meet the exhaustion underneath the alertness, the part of you that is so tired
-    of watching, and the quiet truth your body has been bracing against: that the
-    worst has already happened, and you survived it, and there is nothing left tonight
-    to catch.
-
-
-    This is not a book about discipline or sleep training. It will not teach you to
-    shut your mind off on command or hand you a wind-down routine to optimize. It
-    will not tell you that your vigilance is broken. It won''t rush your grief toward
-    resolution, because a watcher cannot be ordered to stand down — only shown that
-    the danger has passed.
-
-
-    What it offers instead is the slow permission to lower the guard. A steady presence
-    in the hours when the scanning is loudest. Room to grieve what you''ve been guarding
-    instead of watching it from a distance. The monitors can go quiet. You are allowed
-    to stop listening for the alarm.
-
-
-    The night does not need you on duty. You can rest now.
-
-
-    Book 2 of the Night Architecture Books grief series.'
+  short_blurb: ''
+  long_description: ''
 keywords:
-  primary:
-  - hypervigilance help for nurses
-  - can't turn my mind off at night
-  - nurse grief and trauma
-  - healthcare worker can't sleep
-  - racing mind after work insomnia
-  - grief and overthinking at night
-  - first responder hypervigilance
-  secondary:
-  - compassion fatigue and grief
-  - nervous system regulation for caregivers
-  - letting go of patient loss
-bisac_codes:
-- SEL010000
-- FAM014000
-- PSY022040
+  primary: []
+  secondary: []
+bisac_codes: []
 target_price:
   ebook_usd: 4.99
   audible_usd: 9.99
@@ -90,11 +29,6 @@ author_positioning:
   teacher: master_sha
   brand: sleep_restoration
   byline_author: ivo_iverson
-comp_titles:
-- The Grieving Brain (Mary-Frances O'Connor) — explains the mind that keeps circling
-  a loss it cannot revise, the watcher's exact trap
-- Trauma Stewardship (Laura van Dernoot Lipsky) — names the cost of carrying others'
-  crises home without coaching or platitudes
-- When Things Fall Apart (Pema Chödrön) — a steady voice that sits with the unsettled
-  mind instead of ordering it to stop
-_needs_authoring: false
+comp_titles: []
+plan_source_path: /tmp/catalog_sleep_restoration/sleep_restoration.csv
+_needs_authoring: true

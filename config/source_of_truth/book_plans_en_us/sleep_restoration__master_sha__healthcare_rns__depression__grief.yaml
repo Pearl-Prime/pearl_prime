@@ -1,6 +1,7 @@
 book_plan_schema: 1.0.0
+created_at: '2026-06-26'
 book_id: sleep_restoration__master_sha__healthcare_rns__depression__grief
-series_plan: config/source_of_truth/series_plans_en_us/sleep_restoration__master_sha__healthcare_rns__depression.yaml
+series_plan: /tmp/catalog_sleep_restoration/series/sleep_restoration__master_sha__healthcare_rns__depression.yaml
 installment_number: 2
 engine: grief
 duration: standard_book_60min
@@ -10,76 +11,16 @@ target_word_range:
 - 9000
 - 12000
 target_audio_minutes: 70
-title: All the Losses You Never Got to Mourn
-subtitle: For the nurse who walked out of every room and kept moving — when depression
-  is grief that was never given anywhere to go
-cover_tagline: You carried them all. No one ever told you that you were allowed to
-  grieve.
+title: 'Depression: Grief'
+subtitle: A guide for Healthcare Rns
+cover_tagline: ''
 description:
-  short_blurb: You learned to lose someone at 3am and be ready for the next admission
-    by 3:15. This is a book for the nurse whose depression turns out to be grief —
-    years of it, unmourned, set down nowhere. It won't rush you through it. It will
-    make room, in the quiet, for what you were never given time to feel.
-  long_description: 'There''s a particular kind of heaviness that comes from never
-    being allowed to stop. You lose a patient and you keep moving. You hold a family
-    in the worst hour of their lives, and then you wash your hands and walk into the
-    next room and begin again. You got good at it — too good. And somewhere along
-    the way, all the goodbyes you never finished saying settled into your body and
-    called themselves depression.
-
-
-    This book is for you: the nurse who has grieved more deaths than most people will
-    witness in a lifetime, and was never once given a place to put any of it. The
-    one who feels flat, or far away, or strangely emptied out, and can''t point to
-    a single reason — because the reasons are too many to count and too old to name.
-    If the sadness in you has no clear edges, this is why.
-
-
-    In these pages you''ll come to recognize how often depression is grief with nowhere
-    to go. You''ll see the losses you stacked and stepped over: the patients, yes,
-    but also the version of yourself who started this work, the time you didn''t get,
-    the parts of your life that quietly closed while you were holding everyone else''s
-    open. You''ll feel how the body keeps what the schedule wouldn''t let you feel.
-    And you''ll begin to understand that letting go isn''t forgetting — it''s finally
-    setting something down that you''ve carried so long you forgot it was heavy.
-
-
-    This is not a five-stages framework or a timeline to complete. It will not hurry
-    your grief, repackage it as growth, or hand you a brighter perspective you didn''t
-    ask for. There is no ''everything happens for a reason'' here. Nothing in this
-    book asks you to be okay.
-
-
-    It asks only that you let the losses be real. That you let the night be long enough
-    to hold them. That you stop walking, for the length of these pages, and let yourself
-    feel what you stepped over so you could keep showing up for everyone else.
-
-
-    You are not cold and you are not broken. You are someone who was handed an unbearable
-    amount of loss and given no room to mourn it. The heaviness is not a defect. It''s
-    grief that has been waiting, patiently, for you to come back for it.
-
-
-    Come back for it here. The dark will hold what you set down.
-
-
-    Book 2 of the Night Architecture Books depression series.'
+  short_blurb: ''
+  long_description: ''
 keywords:
-  primary:
-  - grief and depression book
-  - unresolved grief self help
-  - depression in nurses and healthcare workers
-  - grief from losing patients
-  - complicated grief book
-  - depression and emotional numbness
-  - letting go of grief and loss
-  secondary:
-  - caregiver grief support
-  - moving on after loss book
-  - compassion fatigue and grief
-bisac_codes:
-- SEL011000
-- SEL010000
+  primary: []
+  secondary: []
+bisac_codes: []
 target_price:
   ebook_usd: 4.99
   audible_usd: 9.99
@@ -88,11 +29,6 @@ author_positioning:
   teacher: master_sha
   brand: sleep_restoration
   byline_author: elena_bello
-comp_titles:
-- It's OK That You're Not OK (Megan Devine) — refuses to rush grief or fix it, sits
-  with loss the way this book does.
-- Reasons to Stay Alive (Matt Haig) — intimate, lived-from-inside depression writing
-  that names heaviness without instructing.
-- Bearing the Unbearable (Joanne Cacciatore) — tender, non-clinical companionship
-  through grief that was never given room.
-_needs_authoring: false
+comp_titles: []
+plan_source_path: /tmp/catalog_sleep_restoration/sleep_restoration.csv
+_needs_authoring: true

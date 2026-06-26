@@ -1,6 +1,7 @@
 book_plan_schema: 1.0.0
+created_at: '2026-06-26'
 book_id: sleep_restoration__master_sha__healthcare_rns__courage__false_alarm
-series_plan: config/source_of_truth/series_plans_en_us/sleep_restoration__master_sha__healthcare_rns__courage.yaml
+series_plan: /tmp/catalog_sleep_restoration/series/sleep_restoration__master_sha__healthcare_rns__courage.yaml
 installment_number: 1
 engine: false_alarm
 duration: standard_book_60min
@@ -10,74 +11,16 @@ target_word_range:
 - 9000
 - 12000
 target_audio_minutes: 70
-title: The Body Braced for a Code That Never Comes
-subtitle: For the nurse whose alarm never switches off — steady on the floor, but
-  lying awake at 3am bracing for a danger that isn't in the room
-cover_tagline: Off the clock, and still standing watch over an empty room.
+title: 'Courage: False Alarm'
+subtitle: A guide for Healthcare Rns
+cover_tagline: ''
 description:
-  short_blurb: You learned to brace because bracing kept people alive. But now the
-    shift is over, the room is dark, and your body is still waiting for the alarm
-    to sound. This is a steady, unhurried look at what it costs to live ready for
-    an emergency that is no longer coming, and what it takes to finally let your guard
-    down.
-  long_description: 'It is the middle of the night and your body is doing the thing
-    it always does. Heart a little too fast. Jaw set. Ears half-listening for a monitor
-    that isn''t there. The shift ended hours ago, but no one told the part of you
-    that stands watch. You are home, in the dark, safe by every measure that matters
-    — and still braced for the code that never comes.
-
-
-    This book is for the nurse whose alarm system never learned how to switch off.
-    The one who is unshakable at the bedside and wide awake at 3am. You have spent
-    years training your body to fire first and feel later, to catch the fall before
-    it happens, to be ready. That readiness saved people. It is also the reason rest
-    feels like a danger you can''t afford.
-
-
-    Here you will come to recognize the false alarm for what it is. The dread that
-    arrives without a reason. The flinch at a quiet phone. The way your chest tightens
-    in a calm room because calm itself has started to feel like the moment before
-    something breaks. You will see how courage, for you, was quietly redefined as
-    never letting your guard down — and how much that definition has cost you.
-
-
-    This is not a book that will teach you to power through, regulate faster, or talk
-    yourself out of what your body already knows. There is no fix here, and no one
-    is going to call your exhaustion a mindset problem. What there is, instead, is
-    a steady voice in the next room and the slow, structural work of teaching a braced
-    body that the emergency is over. That the floor beneath you will hold. That you
-    are allowed to set the watch down.
-
-
-    Real courage, it turns out, is not staying ready forever. It is letting yourself
-    be unguarded in a safe and ordinary dark, and trusting that you will survive the
-    feeling that rushes in when you finally stop bracing.
-
-
-    You kept everyone else alive. You are allowed to be off duty now. The night is
-    wide and quiet, and for once there is nothing in it that needs you. Let the room
-    be dark. Let the watch end. Let the weight you have carried all shift settle onto
-    a floor that was built to hold it, and rest.
-
-
-    Book 1 of the Night Architecture Books Courage series.'
+  short_blurb: ''
+  long_description: ''
 keywords:
-  primary:
-  - anxiety relief for nurses
-  - hypervigilance at night
-  - nervous system regulation for healthcare workers
-  - can't relax after work
-  - always on alert anxiety
-  - calm a racing mind at night
-  - nurse burnout and anxiety
-  secondary:
-  - healthcare worker stress book
-  - feeling on edge for no reason
-bisac_codes:
-- SEL036000
-- SEL024000
-- SEL031000
-- PSY022000
+  primary: []
+  secondary: []
+bisac_codes: []
 target_price:
   ebook_usd: 4.99
   audible_usd: 9.99
@@ -86,11 +29,6 @@ author_positioning:
   teacher: master_sha
   brand: sleep_restoration
   byline_author: silas_voss
-comp_titles:
-- Burnout (Emily and Amelia Nagoski) — speaks directly to depleted caregivers stuck
-  in an unfinished stress response
-- The Body Keeps the Score (Bessel van der Kolk) — names how the nervous system stays
-  braced long after the danger passes
-- Unwinding Anxiety (Judson Brewer) — gentle, habit-loop approach to a body trained
-  to fire its alarm on cue
-_needs_authoring: false
+comp_titles: []
+plan_source_path: /tmp/catalog_sleep_restoration/sleep_restoration.csv
+_needs_authoring: true
