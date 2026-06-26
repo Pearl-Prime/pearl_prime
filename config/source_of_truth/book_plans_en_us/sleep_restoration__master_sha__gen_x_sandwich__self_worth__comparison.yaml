@@ -1,6 +1,7 @@
 book_plan_schema: 1.0.0
+created_at: '2026-06-26'
 book_id: sleep_restoration__master_sha__gen_x_sandwich__self_worth__comparison
-series_plan: config/source_of_truth/series_plans_en_us/sleep_restoration__master_sha__gen_x_sandwich__self_worth.yaml
+series_plan: /tmp/catalog_sleep_restoration/series/sleep_restoration__master_sha__gen_x_sandwich__self_worth.yaml
 installment_number: 2
 engine: comparison
 duration: standard_book_60min
@@ -10,77 +11,16 @@ target_word_range:
 - 9000
 - 12000
 target_audio_minutes: 70
-title: Everyone Else Looks Like They've Got It Handled
-subtitle: For the one in the middle who measures a falling-apart life against everyone
-  who seems to be coping just fine
-cover_tagline: They all look like they're managing. You're the only one who knows
-  you're not.
+title: 'Self Worth: Comparison'
+subtitle: A guide for Gen X Sandwich
+cover_tagline: ''
 description:
-  short_blurb: Everyone your age seems to be holding it together — aging parents and
-    growing kids and careers, all of it, somehow gracefully. You are the only one
-    who feels like they are drowning. This is a book for the mind that measures its
-    hardest, most depleted self against everyone else's surface and always comes up
-    short. It will not help you catch up, because the race was never real. It will
-    only show you the rigged instrument you have been pointing at yourself in the
-    dark.
-  long_description: 'It''s late, and you''re scrolling, or just lying there comparing
-    — your sister who manages your mother''s care without ever seeming to fray, the
-    friend whose parents are fine and whose kids are thriving, the coworker a few
-    years older who somehow did all of this and still looks rested. Everyone your
-    age appears to have figured out the thing you can''t: how to be squeezed from
-    both sides and still come out poised. You''re the only one falling apart. You''re
-    sure of it.
-
-
-    This book is for the one in the middle who has turned comparison into a nightly
-    ritual. You hold up your most depleted, most invisible self — the version of you
-    no one sees, the one running on fumes at 1am — against the calm, edited surface
-    of everyone else''s life, and you lose every single time. You don''t compare your
-    behind-the-scenes to their behind-the-scenes. You compare it to their highlight
-    reel, and then you call the gap a verdict on your worth.
-
-
-    Here, in the quiet, you''ll come to recognize what you''ve actually been doing.
-    You''ll see that you''ve pointed a high-precision instrument — your sharp, attentive,
-    caring mind — at the one target it can never measure fairly: yourself, in the
-    dark, on your worst night, against the daylight version of everyone else. You''ll
-    notice how comparison feeds on incomplete information and calls it truth. You''ll
-    see how the people who look like they''re coping are very likely lying awake doing
-    this exact math about you.
-
-
-    This is not a book that will help you win the comparison. That''s the point. It
-    will not give you a system for finally catching up, will not optimize you into
-    the person you think everyone else already is, will not coach you toward a more
-    impressive life. There is no leaderboard, and you were never behind on it. It
-    will not rush you, and it will not tell you to count your blessings and toughen
-    up.
-
-
-    What it offers instead is a way to set the measuring down. To let the comparison
-    run out of fuel. To stay in your own dark room, with your own real and unedited
-    life, and feel — maybe for the first time in a long time — that your worth was
-    never something the comparison could decide. You can stop running a race that
-    no one else even knows they''re in.
-
-
-    Book 2 of the Night Architecture Books self-worth series.'
+  short_blurb: ''
+  long_description: ''
 keywords:
-  primary:
-  - comparison and self worth
-  - stop comparing yourself to others
-  - sandwich generation overwhelm
-  - self worth for women in midlife
-  - feeling behind in life
-  - caregiver guilt and comparison
-  - social media comparison and self esteem
-  secondary:
-  - books on comparison trap
-  - midlife self esteem
-  - enough as you are
-bisac_codes:
-- SEL031000
-- SEL023000
+  primary: []
+  secondary: []
+bisac_codes: []
 target_price:
   ebook_usd: 4.99
   audible_usd: 9.99
@@ -89,11 +29,6 @@ author_positioning:
   teacher: master_sha
   brand: sleep_restoration
   byline_author: vera_bramble
-comp_titles:
-- The Comparison Cure (Lucy Sheridan) — names the daily habit of measuring against
-  everyone else and its cost to self-worth
-- Daring Greatly (Brené Brown) — worthiness over the curated, never-enough performance
-  of having it together
-- Real Self-Care (Pooja Lakshmin) — for depleted caregivers, rejecting the optimized-self
-  fix in favor of genuine worth
-_needs_authoring: false
+comp_titles: []
+plan_source_path: /tmp/catalog_sleep_restoration/sleep_restoration.csv
+_needs_authoring: true

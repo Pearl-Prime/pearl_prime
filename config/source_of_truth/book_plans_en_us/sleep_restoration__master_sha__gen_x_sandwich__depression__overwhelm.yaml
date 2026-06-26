@@ -1,6 +1,7 @@
 book_plan_schema: 1.0.0
+created_at: '2026-06-26'
 book_id: sleep_restoration__master_sha__gen_x_sandwich__depression__overwhelm
-series_plan: config/source_of_truth/series_plans_en_us/sleep_restoration__master_sha__gen_x_sandwich__depression.yaml
+series_plan: /tmp/catalog_sleep_restoration/series/sleep_restoration__master_sha__gen_x_sandwich__depression.yaml
 installment_number: 1
 engine: overwhelm
 duration: standard_book_60min
@@ -10,72 +11,16 @@ target_word_range:
 - 9000
 - 12000
 target_audio_minutes: 70
-title: The Night Everyone Needed Something
-subtitle: For the one in the middle — carrying aging parents, grown kids, and a flatness
-  you can't name — when there's no room left to feel your own life
-cover_tagline: Everyone got a piece of you today. There was none left for the dark.
+title: 'Depression: Overwhelm'
+subtitle: A guide for Gen X Sandwich
+cover_tagline: ''
 description:
-  short_blurb: You are the one who holds it all together — the appointments, the money,
-    the worry that runs in two directions at once. This is for the night when the
-    weight finally arrives all at the same time, and the flatness underneath it turns
-    out to have a name. It will not ask you to carry more. It will help you set some
-    of it down.
-  long_description: 'By the time the house goes quiet, you''ve already spent yourself
-    a dozen times over. Your mother''s prescriptions, your father''s stubbornness
-    about the stairs, the kid who calls when something breaks and never just to talk.
-    You answered all of it. You always do. And now you''re lying in the dark with
-    the weight of two generations on your chest, too flattened to sleep, doing the
-    arithmetic of everyone who depends on you and finding no line for yourself.
-
-
-    This book is for the one in the middle. For the daughter who became the parent
-    and the parent who can''t stop being the child''s safety net. For the person everyone
-    calls capable, who hasn''t felt a thing they could name in months — not sad, exactly,
-    just heavy, just gray, just full to the brim with other people''s needs and somehow
-    empty underneath.
-
-
-    You''ll come to recognize how overwhelm and depression braid together in a life
-    like yours. How too much arriving at once — the calls, the bills, the slow loss
-    of a parent who is still alive — doesn''t just exhaust you; it presses the color
-    out of everything until feeling itself seems like one more task you don''t have
-    the capacity for. You''ll see why the flatness isn''t weakness or failure. It''s
-    what a load-bearing wall does when it has held the roof up alone for too long.
-    A wall under that much load doesn''t crack all at once; it goes quiet first, and
-    the quiet is what you''ve been calling fine. You''ll learn what it is to let the
-    weight come down in the dark, one thing at a time, in a room where for once nobody
-    needs you to be strong. Not all of it tonight. Just enough to breathe under.
-
-
-    This is not a plan to optimize your nights or hack your way back to function.
-    It will not hand you a morning routine or tell you to be grateful for the people
-    wearing you thin. There is no fixing here, and nothing to push through. The heaviness
-    you carry is real, and earned, and it does not have to be solved before you''re
-    allowed to rest.
-
-
-    You are allowed to be a person who needs holding, too. Even you. Even now. Set
-    it down. The dark will hold what you cannot.
-
-
-    Book 1 of the Night Architecture Books depression series.'
+  short_blurb: ''
+  long_description: ''
 keywords:
-  primary:
-  - depression help for caregivers
-  - sandwich generation stress and burnout
-  - emotional exhaustion caregiver
-  - feeling numb and overwhelmed depression
-  - caring for aging parents depression
-  - midlife depression women
-  - too much to handle overwhelmed mom
-  secondary:
-  - high functioning depression
-  - burnout recovery midlife
-  - caregiver mental health book
-bisac_codes:
-- SEL036000
-- SEL024000
-- FAM015000
+  primary: []
+  secondary: []
+bisac_codes: []
 target_price:
   ebook_usd: 4.99
   audible_usd: 9.99
@@ -84,11 +29,6 @@ author_positioning:
   teacher: master_sha
   brand: sleep_restoration
   byline_author: elena_bello
-comp_titles:
-- The Body Keeps the Score (Bessel van der Kolk) — names how chronic overload lives
-  in the body, not just the mood
-- 'Burnout: The Secret to Unlocking the Stress Cycle (Emily Nagoski & Amelia Nagoski)
-  — speaks to the depleted caregiver carrying everyone else'
-- 'Feeling Good: The New Mood Therapy (David D. Burns) — a trusted companion for the
-  gray flatness of depression'
-_needs_authoring: false
+comp_titles: []
+plan_source_path: /tmp/catalog_sleep_restoration/sleep_restoration.csv
+_needs_authoring: true

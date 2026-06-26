@@ -1,7 +1,8 @@
 book_plan_schema: 1.0.0
+created_at: '2026-06-26'
 book_id: sleep_restoration__master_sha__gen_x_sandwich__depression__grief
-series_plan: config/source_of_truth/series_plans_en_us/sleep_restoration__master_sha__gen_x_sandwich__depression.yaml
-installment_number: 2
+series_plan: /tmp/catalog_sleep_restoration/series/sleep_restoration__master_sha__gen_x_sandwich__depression.yaml
+installment_number: 3
 engine: grief
 duration: standard_book_60min
 runtime_format_id: standard_book_60min
@@ -10,70 +11,16 @@ target_word_range:
 - 9000
 - 12000
 target_audio_minutes: 70
-title: Losing Her While She's Still Here
-subtitle: For the one grieving a parent who hasn't gone yet, a self they used to be,
-  and the life they set down to hold everyone else
-cover_tagline: Some things you're allowed to mourn before they're gone.
+title: 'Depression: Grief'
+subtitle: A guide for Gen X Sandwich
+cover_tagline: ''
 description:
-  short_blurb: Nobody told you that you'd start grieving while they were still in
-    the next room. This is for the slow losses no one sends a card for — the parent
-    fading by degrees, the version of you that had energy and plans, the life quietly
-    set aside. It won't rush you through any of it. It will sit with you while you
-    let it ache.
-  long_description: 'It doesn''t look like grief, so you don''t call it that. Your
-    mother is still here — you saw her this afternoon. But the woman who raised you
-    is going somewhere you can''t follow, a little more each month, and you are mourning
-    her across the dinner table while you cut up her food. There''s no funeral for
-    this. No casserole arrives. So you carry it alone, into the dark, where it sits
-    on your chest like something with weight.
-
-
-    This book is for the one in the middle, grieving in every direction at once. For
-    the person watching a parent disappear by inches while still parenting their own
-    kids. For whoever set their own life quietly down — the plans, the friendships,
-    the self who used to laugh easily — and never got to say goodbye to her. For the
-    griever no one recognizes, because the loss hasn''t finished happening yet.
-
-
-    You''ll come to recognize how grief and depression bleed into one another when
-    the losses won''t resolve. How mourning something that is still partly here —
-    a parent, a marriage, the body you used to have, the future you assumed — leaves
-    you nowhere to put the sorrow, so it settles into a flatness that looks like depression
-    and feels like drowning slowly. You''ll see why this counts as real grief even
-    though nothing has technically ended. You''ll learn what it is to let a loss be
-    a loss in the quiet hours — to stop bracing against the ache and let it move through
-    you in the one room where you don''t have to hold it together for anyone.
-
-
-    This will not hurry you toward acceptance or hand you stages to march through.
-    It will not tell you to cherish every moment or find the silver lining in your
-    own depletion. There is no timeline here, and no closure to perform. What you''re
-    losing is real, and the grief is allowed to take as long as it takes.
-
-
-    You don''t have to be done. You don''t have to be okay with it. You only have
-    to set it down for tonight and let yourself feel the size of what''s leaving.
-    The dark keeps no schedule. Grieve at the pace grief asks for.
-
-
-    Book 2 of the Night Architecture Books depression series.'
+  short_blurb: ''
+  long_description: ''
 keywords:
-  primary:
-  - anticipatory grief aging parent
-  - grieving a parent with dementia
-  - ambiguous loss caregiver
-  - depression and grief midlife
-  - mourning the loss of self caregiver
-  - grief support for adult children
-  - sandwich generation grief and loss
-  secondary:
-  - letting go of a parent slowly
-  - complicated grief help
-  - caregiver depression and sadness
-bisac_codes:
-- SEL036000
-- SEL024000
-- FAM014000
+  primary: []
+  secondary: []
+bisac_codes: []
 target_price:
   ebook_usd: 4.99
   audible_usd: 9.99
@@ -82,11 +29,6 @@ author_positioning:
   teacher: master_sha
   brand: sleep_restoration
   byline_author: elena_bello
-comp_titles:
-- It's OK That You're Not OK (Megan Devine) — refuses to rush grief or demand you
-  fix it
-- The Year of Magical Thinking (Joan Didion) — sits inside loss without flinching
-  or tidying it
-- When Things Fall Apart (Pema Chödrön) — stays with you in the breaking instead of
-  hurrying you past it
-_needs_authoring: false
+comp_titles: []
+plan_source_path: /tmp/catalog_sleep_restoration/sleep_restoration.csv
+_needs_authoring: true

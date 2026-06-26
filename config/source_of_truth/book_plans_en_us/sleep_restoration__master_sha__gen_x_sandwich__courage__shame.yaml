@@ -1,7 +1,8 @@
 book_plan_schema: 1.0.0
+created_at: '2026-06-26'
 book_id: sleep_restoration__master_sha__gen_x_sandwich__courage__shame
-series_plan: config/source_of_truth/series_plans_en_us/sleep_restoration__master_sha__gen_x_sandwich__courage.yaml
-installment_number: 3
+series_plan: /tmp/catalog_sleep_restoration/series/sleep_restoration__master_sha__gen_x_sandwich__courage.yaml
+installment_number: 5
 engine: shame
 duration: standard_book_60min
 runtime_format_id: standard_book_60min
@@ -10,73 +11,16 @@ target_word_range:
 - 9000
 - 12000
 target_audio_minutes: 70
-title: The Brave Face You Wear So No One Sees
-subtitle: For the midlife caretaker who holds everyone together while believing something
-  is wrong with them — and the courage of being seen anyway
-cover_tagline: You learned to look unafraid. It cost more than the fear ever would
-  have.
+title: 'Courage: Shame'
+subtitle: A guide for Gen X Sandwich
+cover_tagline: ''
 description:
-  short_blurb: You've spent these years being the strong one, the capable one, the
-    one who has it handled — terrified that if anyone looked closely, they'd see the
-    thing you've always believed is wrong with you. This book is for the brave face
-    worn over a buried shame, and the harder, quieter courage of letting it slip.
-  long_description: 'You''ve gotten good at the brave face. The steady voice on the
-    phone with the care home. The hands that don''t shake when your kid is falling
-    apart. The capability everyone leans on. And underneath it, in the part of you
-    that only comes out when the house is finally dark, a belief you''ve carried so
-    long it feels like a fact: that something is fundamentally wrong with you, and
-    the performance is the only thing keeping anyone from finding out.
-
-
-    This book is for you: the one in the middle, holding a parent and a child and
-    a whole life together, who learned early that being needed was safer than being
-    known. You overwork to cover it. You stay competent so no one looks closer. And
-    you''ve quietly decided that you can''t do the truly brave thing — ask for help,
-    say you''re not okay, let yourself be seen — because if you stop performing, the
-    defect you''ve hidden all these years will finally show.
-
-
-    In the heavy hours, without ever rushing you toward it, this book helps you come
-    to recognize the brave face for what it is. How the mask became your baseline.
-    What the constant performing has cost the part of you that wanted, just once,
-    to be held instead of leaned on. The buried belief underneath the competence —
-    that you are the problem, and hiding it is the price of being allowed to stay.
-    You''ll come to feel the difference between the courage that performs and the
-    courage that lets itself be witnessed, and to understand that the thing you''ve
-    been hiding was never the defect you feared.
-
-
-    This is not a method for fixing what you believe is broken, because it was never
-    broken. It won''t hand you a stronger mask or a way to perform okay-ness more
-    convincingly. Nothing here promises that the shame will vanish on cue. What it
-    offers instead is steadier and far less lonely: the recognition that you can let
-    the brave face slip — say the true, unflattering thing, ask for the hand, be seen
-    mid-fall — before you feel ready, and that being witnessed is not the exposure
-    you dreaded but the thing you''ve gone without for far too long.
-
-
-    You were never the problem you''ve been covering for. Set the mask down. It''s
-    heavier than the truth.
-
-
-    Book 3 of the Night Architecture Books courage series.'
+  short_blurb: ''
+  long_description: ''
 keywords:
-  primary:
-  - overcoming shame and self worth
-  - courage to be vulnerable and seen
-  - feeling not good enough self help
-  - letting go of perfectionism and people pleasing
-  - midlife self doubt and shame
-  - how to ask for help when struggling
-  - healing toxic shame book
-  secondary:
-  - caregiver guilt and self worth
-  - courage to be vulnerable
-  - stop hiding your true self
-bisac_codes:
-- SEL031000
-- SEL024000
-- SEL036000
+  primary: []
+  secondary: []
+bisac_codes: []
 target_price:
   ebook_usd: 4.99
   audible_usd: 9.99
@@ -85,10 +29,6 @@ author_positioning:
   teacher: master_sha
   brand: sleep_restoration
   byline_author: silas_voss
-comp_titles:
-- The Gifts of Imperfection (Brené Brown) — for the reader hiding behind a brave,
-  capable face
-- Radical Acceptance (Tara Brach) — for the one carrying a buried belief that something
-  is wrong with them
-- Self-Compassion (Kristin Neff) — for the caretaker who is kind to everyone but themselves
-_needs_authoring: false
+comp_titles: []
+plan_source_path: /tmp/catalog_sleep_restoration/sleep_restoration.csv
+_needs_authoring: true
