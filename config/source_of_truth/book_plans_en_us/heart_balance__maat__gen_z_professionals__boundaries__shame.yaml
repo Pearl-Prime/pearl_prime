@@ -1,7 +1,8 @@
 book_plan_schema: 1.0.0
+created_at: '2026-06-26'
 book_id: heart_balance__maat__gen_z_professionals__boundaries__shame
-series_plan: config/source_of_truth/series_plans_en_us/heart_balance__maat__gen_z_professionals__boundaries.yaml
-installment_number: 2
+series_plan: /tmp/catalog_heart_balance/series/heart_balance__maat__gen_z_professionals__boundaries.yaml
+installment_number: 4
 engine: shame
 duration: standard_book_60min
 runtime_format_id: standard_book_60min
@@ -10,77 +11,16 @@ target_word_range:
 - 9000
 - 12000
 target_audio_minutes: 70
-title: The Quiet Belief That You're Too Much
-subtitle: For the young professional who overgives to stay likable — and carries a
-  buried certainty that wanting space means something is wrong with them
-cover_tagline: You don't draw the line because, deep down, you're afraid the line
-  proves the worst thing you believe about yourself.
+title: 'Boundaries: Shame'
+subtitle: A guide for Gen Z Professionals
+cover_tagline: ''
 description:
-  short_blurb: 'You say yes again, and somewhere underneath it sits a quiet conviction:
-    that needing room, having limits, taking up space is selfish — that it would reveal
-    something defective in you. This is a book for the over-giver whose boundary problem
-    is really a shame problem. It will not tell you to value yourself more. It will
-    gently show you the belief you''ve been overworking to hide.'
-  long_description: 'You agreed to it again. You heard yourself say ''of course''
-    while a smaller voice inside asked when you''d last had a free evening. And under
-    the tiredness, where you don''t usually look, there''s a belief so old it feels
-    like fact: that if you started saying no, people would finally see it — the selfishness,
-    the too-muchness, the thing about you that has to be managed and hidden and made
-    up for with effort.
-
-
-    This book is for you: the one who gives past empty to stay liked, who treats every
-    limit as evidence of a flaw, who has built a whole career and a whole personality
-    on being easy, helpful, no trouble at all. You think your boundary problem is
-    about skills — the right words, the right tone. It isn''t. It''s about a shame
-    you learned early: that your needs are too much, that wanting space makes you
-    bad, that the only safe version of you is the one who never asks for anything
-    back.
-
-
-    What you''ll come to recognize, chapter by chapter, is how that buried belief
-    runs the show. How over-giving is shame wearing a helpful face. How the dread
-    of being seen as selfish keeps you saying yes to things that quietly cost you
-    everything. How ''I''m fine, really'' became the most expensive sentence you own.
-    This book brings you to your own scale and asks the question shame won''t let
-    you ask: when you weigh your worth honestly, does it actually drop the moment
-    you say no — or have you only been told it does? The feather, after all, was never
-    the lighter thing because it mattered less.
-
-
-    This book will not promise to fix you, because the wound was never that you are
-    broken — it''s that you came to believe you were. It won''t optimize your self-esteem
-    or hand you affirmations to repeat in the mirror. There is no clever reframe that
-    dissolves shame, and this book doesn''t pretend one exists. What it offers is
-    recognition, slow and honest: the ability to feel the old belief surface and name
-    it as a belief, not a verdict — so that the next time you reach for yes to cover
-    the shame, you can see exactly what you''re covering.
-
-
-    You are allowed to need space and still be good. You are allowed to take up room
-    and grieve the version of you that never did. Wanting a limit does not make you
-    too much. It makes you a person — and that was never the defect you feared it
-    was.
-
-
-    Book 2 of the Feather & Scale Press boundaries series.'
+  short_blurb: ''
+  long_description: ''
 keywords:
-  primary:
-  - boundaries and self worth
-  - overcoming shame
-  - people pleasing and shame
-  - self esteem book
-  - feeling like a burden
-  - stop over giving
-  - boundaries for over givers
-  secondary:
-  - gen z self help
-  - shame and boundaries
-  - self worth for young women
-bisac_codes:
-- SEL031000
-- FAM046000
-- PSY036000
+  primary: []
+  secondary: []
+bisac_codes: []
 target_price:
   ebook_usd: 4.99
   audible_usd: 9.99
@@ -89,11 +29,6 @@ author_positioning:
   teacher: maat
   brand: heart_balance
   byline_author: theo_bello
-comp_titles:
-- The Gifts of Imperfection (Brené Brown) — the foundational text on shame and worthiness
-  this book draws from and applies to limits.
-- Set Boundaries, Find Peace (Nedra Glover Tawwab) — pairs the relational boundary
-  work this book locates inside the shame that blocks it.
-- What My Bones Know (Stephanie Foo) — a young, somatic reckoning with self-blame,
-  matching this book's felt, recognition-first approach.
-_needs_authoring: false
+comp_titles: []
+plan_source_path: /tmp/catalog_heart_balance/heart_balance.csv
+_needs_authoring: true

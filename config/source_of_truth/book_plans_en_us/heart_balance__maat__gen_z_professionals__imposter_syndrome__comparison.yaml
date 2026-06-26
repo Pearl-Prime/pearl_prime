@@ -1,7 +1,8 @@
 book_plan_schema: 1.0.0
+created_at: '2026-06-26'
 book_id: heart_balance__maat__gen_z_professionals__imposter_syndrome__comparison
-series_plan: config/source_of_truth/series_plans_en_us/heart_balance__maat__gen_z_professionals__imposter_syndrome.yaml
-installment_number: 2
+series_plan: /tmp/catalog_heart_balance/series/heart_balance__maat__gen_z_professionals__imposter_syndrome.yaml
+installment_number: 9
 engine: comparison
 duration: standard_book_60min
 runtime_format_id: standard_book_60min
@@ -10,77 +11,16 @@ target_word_range:
 - 9000
 - 12000
 target_audio_minutes: 70
-title: Everyone Else Seems to Belong Here
-subtitle: For the two-years-in professional who measures a private sense of fraud
-  against every coworker who looks like they were born already knowing how to do this
-cover_tagline: You're grading yourself against the version of them they let you see.
+title: 'Imposter Syndrome: Comparison'
+subtitle: A guide for Gen Z Professionals
+cover_tagline: ''
 description:
-  short_blurb: Everyone in the meeting seems to already know the answer. Everyone
-    on the team seems to belong here in a way you're still faking. So you measure
-    — your messy inside against their composed outside — and you always come up short.
-    This is a book for the mind that keeps running that comparison. It is a fair reweighing
-    for a heart that has only ever judged itself against everyone else's surface.
-  long_description: 'It happens fastest in the meeting. Someone speaks up with that
-    easy certainty, references a thing you''ve never heard of, and the whole room
-    nods. And quietly, automatically, you do the math: they belong here, and you''re
-    still pretending. You look around the table and everyone seems to have gotten
-    a manual you missed. They network like it''s nothing. They post the promotion.
-    They speak in calls without rehearsing it first in their head the way you do.
-
-
-    This book is for you — the one two or three years into a career everyone called
-    a great start, who spends it scanning the room to see how far behind you are.
-    You measure constantly: your draft against their polished post, your private panic
-    against their easy confidence, your winding path against the straight line everyone
-    else seems to be walking. And the scale always tips the same way. Against you.
-    Every time.
-
-
-    Here is what the comparison has never told you. You are weighing your full interior
-    — every doubt, every 3am replay, every guess you made and got lucky on — against
-    the thin, edited surface other people let you see. It is not a fair weighing,
-    and it was never meant to be one. You''ll come to recognize the exact moment the
-    measuring starts, and the cost of living on that scale: the way it steals every
-    win the instant you have it, the way it turns peers into evidence against you,
-    the way belonging starts to feel like something other people were handed and you
-    have to forge. You''ll learn to feel the difference between learning from someone
-    and disappearing beside them.
-
-
-    This book will not help you win the comparison, and that is the whole point. There
-    is nothing here for getting ahead, no way to finally become the person you keep
-    measuring yourself against. Nothing in these pages will make you the most composed
-    one in the room.
-
-
-    What it will do is lift your hand off the scale. Your worth was never a ranking,
-    and belonging was never a thing the others were given and you were left out of
-    — it was always just a doorway you were already standing inside, too busy comparing
-    to feel the floor under you.
-
-
-    You are allowed to stop measuring. You are allowed to belong here at your own
-    real weight.
-
-
-    Book 2 of the Feather & Scale Press imposter syndrome series.'
+  short_blurb: ''
+  long_description: ''
 keywords:
-  primary:
-  - imposter syndrome book
-  - comparing myself to coworkers
-  - imposter syndrome young professionals
-  - feeling behind in my career
-  - stop comparing yourself to others
-  - imposter syndrome and self doubt at work
-  - everyone is doing better than me
-  secondary:
-  - social comparison anxiety
-  - imposter syndrome early career
-  - feeling like you don't belong at work
-bisac_codes:
-- SEL036000
-- SEL027000
-- PSY051000
+  primary: []
+  secondary: []
+bisac_codes: []
 target_price:
   ebook_usd: 4.99
   audible_usd: 9.99
@@ -89,11 +29,6 @@ author_positioning:
   teacher: maat
   brand: heart_balance
   byline_author: kira_bramble
-comp_titles:
-- The Comparison Cure (Lucy Sheridan) — directly targets the habit of measuring your
-  inside against everyone's outside.
-- The Imposter Cure (Jessamy Hibberd) — gives the fraud feeling a name and dismantles
-  the 'they belong, I don't' verdict.
-- Big Magic (Elizabeth Gilbert) — gently uncouples self-worth from outperforming the
-  people around you.
-_needs_authoring: false
+comp_titles: []
+plan_source_path: /tmp/catalog_heart_balance/heart_balance.csv
+_needs_authoring: true

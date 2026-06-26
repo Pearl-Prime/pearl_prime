@@ -1,6 +1,7 @@
 book_plan_schema: 1.0.0
+created_at: '2026-06-26'
 book_id: heart_balance__maat__gen_z_professionals__self_worth__comparison
-series_plan: config/source_of_truth/series_plans_en_us/heart_balance__maat__gen_z_professionals__self_worth.yaml
+series_plan: /tmp/catalog_heart_balance/series/heart_balance__maat__gen_z_professionals__self_worth.yaml
 installment_number: 2
 engine: comparison
 duration: standard_book_60min
@@ -10,79 +11,16 @@ target_word_range:
 - 9000
 - 12000
 target_audio_minutes: 70
-title: Weighing Your Mess Against Their Polish
-subtitle: For the young professional sure every peer has it sorted while they are
-  still guessing
-cover_tagline: You're not behind. You're holding your insides up against everyone
-  else's outsides.
+title: 'Self Worth: Comparison'
+subtitle: A guide for Gen Z Professionals
+cover_tagline: ''
 description:
-  short_blurb: Every scroll, every launch announcement, every peer who seems calm
-    and certain becomes one more reason you don't measure up. This book won't help
-    you get ahead of them. It helps you take your worth off the scale you keep weighing
-    it on.
-  long_description: 'Someone you graduated with just posted the promotion. Or the
-    launch. Or the apartment with the good light. And before you''ve even finished
-    reading it, your whole sense of yourself has quietly recalculated — and you''ve
-    lost again.
-
-
-    This book is for the early-career creative and knowledge worker whose worth keeps
-    getting decided by comparison. You know, intellectually, that the feed is a highlight
-    reel. It doesn''t matter. The measuring happens faster than thought: their certainty
-    against your doubt, their pace against your pace, their visible wins against everything
-    you can''t see in yourself. And the verdict is always the same — they''ve figured
-    something out, and you''re behind.
-
-
-    You''ll come to recognize the weighing of it. How comparison disguises itself
-    as ambition, so stopping feels like giving up. How you set your private, unfinished,
-    in-progress life on one side of the scale and other people''s edited surfaces
-    on the other, and call the gap a personal failing. How the people who ''look calm
-    and fine'' are running their own version of this, two tabs over, at the same hour.
-    How the scale you''re using was never built to come to rest — there is always
-    someone further along, so the case for your worth can never quite close.
-
-
-    This book will not help you win the comparison. That''s the point. It won''t give
-    you a productivity system to finally pull ahead, or a way to curate a more enviable
-    life, or affirmations about being unique. It won''t pretend the ache of watching
-    everyone pass you isn''t real — it is, and the cost of living inside it is real
-    too.
-
-
-    What it offers instead is a different image of your own value. In the old story,
-    the heart is weighed against a single feather — not against the field, not against
-    the frontrunner, not against the version of you that would exist if you''d just
-    moved faster. Just a feather. Light. Yours. Unranked.
-
-
-    You''ve been loading other people onto your side of the scale and asking it to
-    tell you what you''re worth, in a contest no one can win because no one agreed
-    to enter it. You''re allowed to take them off. You''re allowed to let it settle.
-
-
-    You are not falling behind. You''re just measuring a life from the inside against
-    lives you only see from the outside — and that was never a fair weighing.
-
-
-    Book 2 of the Feather & Scale Press self worth series.'
+  short_blurb: ''
+  long_description: ''
 keywords:
-  primary:
-  - self worth book
-  - comparison and self esteem
-  - feeling behind in life
-  - social media comparison
-  - self compassion young adults
-  - stop comparing yourself to others
-  - worthiness and self acceptance
-  secondary:
-  - gen z mental health
-  - comparison anxiety
-  - self worth not based on achievement
-bisac_codes:
-- SEL027000
-- SEL031000
-- PSY023000
+  primary: []
+  secondary: []
+bisac_codes: []
 target_price:
   ebook_usd: 4.99
   audible_usd: 9.99
@@ -91,11 +29,6 @@ author_positioning:
   teacher: maat
   brand: heart_balance
   byline_author: yara_tam
-comp_titles:
-- The Comparison Cure (Lucy Sheridan) — a whole book aimed at the compare-and-despair
-  habit, same core wound
-- Radical Acceptance (Tara Brach) — releasing the trance of unworthiness rather than
-  out-achieving it
-- Good Vibes, Good Life (Vex King) — self-worth for a Gen Z readership, but ours stays
-  clear-eyed about the cost
-_needs_authoring: false
+comp_titles: []
+plan_source_path: /tmp/catalog_heart_balance/heart_balance.csv
+_needs_authoring: true

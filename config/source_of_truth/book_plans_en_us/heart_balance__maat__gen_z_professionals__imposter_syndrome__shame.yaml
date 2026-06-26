@@ -1,7 +1,8 @@
 book_plan_schema: 1.0.0
+created_at: '2026-06-26'
 book_id: heart_balance__maat__gen_z_professionals__imposter_syndrome__shame
-series_plan: config/source_of_truth/series_plans_en_us/heart_balance__maat__gen_z_professionals__imposter_syndrome.yaml
-installment_number: 1
+series_plan: /tmp/catalog_heart_balance/series/heart_balance__maat__gen_z_professionals__imposter_syndrome.yaml
+installment_number: 5
 engine: shame
 duration: standard_book_60min
 runtime_format_id: standard_book_60min
@@ -10,74 +11,16 @@ target_word_range:
 - 9000
 - 12000
 target_audio_minutes: 70
-title: The Defect You Keep Covering
-subtitle: For the two-years-in professional who's certain something is fundamentally
-  wrong with them, and has been overworking since their first day to make sure no
-  one ever finds it
-cover_tagline: You're not protecting a secret. You're protecting a verdict you've
-  never questioned.
+title: 'Imposter Syndrome: Shame'
+subtitle: A guide for Gen Z Professionals
+cover_tagline: ''
 description:
-  short_blurb: You don't feel like a fraud because you lack skill. You feel like a
-    fraud because somewhere underneath the resume, you decided there is something
-    defective in you, and you've been working overtime to make sure no one ever finds
-    it. This is a quiet book for the part of you that has been hiding in plain sight.
-    It is a fair reweighing of a heart that has only ever been told what it lacks.
-  long_description: 'It usually arrives after a good day. You did the thing — the
-    presentation landed, the manager said nice work, someone junior asked you for
-    advice. And instead of relief, a strange dread sets in, because now there''s further
-    to fall. Now there''s more to protect. You go home and you don''t feel like someone
-    who''s good at their job. You feel like someone who got away with it again.
-
-
-    This book is for you. The one who is two or three years into the role everyone
-    congratulated you for, and still half-believes you tricked your way in. The one
-    who rereads sent emails for the typo that would expose you, who over-prepares
-    for meetings that don''t need it, who has never once let a colleague see you not
-    know. Underneath all of it is not a skills gap. It''s a verdict — an old, quiet
-    belief that something is fundamentally wrong with you, and that the working, the
-    polishing, the covering is the only thing keeping it hidden.
-
-
-    We''re going to look at that verdict together. Not argue with it, not drown it
-    in affirmations — look at it. You''ll come to recognize the mask you put on before
-    you even knew you were wearing one, and the exact cost of keeping it up: the exhaustion,
-    the distance from people who would accept you, the way praise slides off and criticism
-    sticks. You''ll feel the difference between being new at something and being a
-    liar — a difference shame has never let you make. And somewhere in here, gently,
-    the thing you''ve been bracing to hide will get set on the scale at last and weighed
-    honestly, against everything you have also carried and never once counted.
-
-
-    This book will not make you confident, and it will not hand you a louder way to
-    perform. There is no fix here, because you were never broken in the way you think.
-    What there is, instead, is a fair accounting — your real weight set against the
-    feather, not the verdict shame keeps reading back to you as if it were the whole
-    truth.
-
-
-    You are allowed to be a person who is still learning and not a fraud for it. You
-    are allowed to set the cover down and find out that what was underneath it was
-    never the defect you were promised.
-
-
-    Book 1 of the Feather & Scale Press imposter syndrome series.'
+  short_blurb: ''
+  long_description: ''
 keywords:
-  primary:
-  - imposter syndrome book
-  - imposter syndrome at work
-  - feeling like a fraud at my job
-  - overcoming shame and self doubt
-  - imposter syndrome young professionals
-  - not good enough at work anxiety
-  - self worth and self acceptance
-  secondary:
-  - imposter syndrome early career
-  - perfectionism and overworking
-  - fear of being found out at work
-bisac_codes:
-- SEL036000
-- SEL031000
-- PSY051000
+  primary: []
+  secondary: []
+bisac_codes: []
 target_price:
   ebook_usd: 4.99
   audible_usd: 9.99
@@ -86,11 +29,6 @@ author_positioning:
   teacher: maat
   brand: heart_balance
   byline_author: kira_bramble
-comp_titles:
-- The Imposter Cure (Jessamy Hibberd) — names the fraud feeling clinically without
-  ever shaming the reader for having it.
-- The Gifts of Imperfection (Brene Brown) — reframes the hidden 'something wrong with
-  me' belief through worthiness rather than achievement.
-- Daring Greatly (Brene Brown) — confronts the cost of the protective mask and the
-  exhaustion of never being seen unsure.
-_needs_authoring: false
+comp_titles: []
+plan_source_path: /tmp/catalog_heart_balance/heart_balance.csv
+_needs_authoring: true

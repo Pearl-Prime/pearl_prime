@@ -1,7 +1,8 @@
 book_plan_schema: 1.0.0
+created_at: '2026-06-26'
 book_id: heart_balance__maat__gen_z_professionals__financial_stress__spiral
-series_plan: config/source_of_truth/series_plans_en_us/heart_balance__maat__gen_z_professionals__financial_stress.yaml
-installment_number: 2
+series_plan: /tmp/catalog_heart_balance/series/heart_balance__maat__gen_z_professionals__financial_stress.yaml
+installment_number: 3
 engine: spiral
 duration: standard_book_60min
 runtime_format_id: standard_book_60min
@@ -10,79 +11,16 @@ target_word_range:
 - 9000
 - 12000
 target_audio_minutes: 70
-title: It Started With One Bill
-subtitle: How a single late-night charge turns into a thousand imagined futures, and
-  how to step off the loop before 1am writes the ending
-cover_tagline: One number, and suddenly you're broke at forty in a story you can't
-  stop telling.
+title: 'Financial Stress: Spiral'
+subtitle: A guide for Gen Z Professionals
+cover_tagline: ''
 description:
-  short_blurb: It begins with one charge you didn't plan for, and by 1am you've lived
-    out your entire financial ruin in vivid detail. This is a book for the early-career
-    mind that turns a single bill into a thousand disasters — the downward pull of
-    money rumination that feeds on itself. It won't fix your balance, but it will
-    help you see the spiral for the loop it is, and step off.
-  long_description: 'It starts small. One charge you didn''t see coming — a co-pay,
-    a parking ticket, a card that declined at the worst moment. And then your mind
-    does the thing it does. One bill becomes next month''s bill becomes the emergency
-    you can''t cover becomes the version of you at forty who never caught up. By 1am
-    you''ve rehearsed an entire lifetime of ruin from a single number, and you cannot
-    find the thread back out.
-
-
-    This book is for you — the one in your first earning years whose mind, the moment
-    money goes wrong, starts multiplying. Not because you''re irrational, but because
-    you''re awake to a pressure that''s genuinely there, and a mind that''s paying
-    attention can spin a real worry into a thousand imagined ones before you''ve even
-    put the phone down.
-
-
-    What you''ll come to recognize is the architecture of the spiral itself: how one
-    true thought recruits a hundred untrue ones, how the downward pull feels like
-    planning when it''s really just churning, how each loop pretends the next loop
-    will finally solve it. We''ll learn to catch the moment the single bill multiplies
-    — the exact point where a real number becomes an imagined future — and to set
-    just the one real weight on the scale, without all the imagined ones piled on
-    top. The future you keep rehearsing at 1am is not a forecast. It''s a feeling
-    wearing the costume of a fact.
-
-
-    This is not a money plan. It won''t hand you a calculator and call it peace, and
-    it won''t promise that the right amount of thinking will finally make the worry
-    resolve — because the spiral''s whole trick is convincing you that one more loop
-    will do it. The charge is real. The tightness is real. What''s not real is the
-    thousand-step catastrophe your mind built from it in the dark, and you do not
-    have to treat every step of it as something you''re obligated to solve tonight.
-
-
-    What this offers instead is the pause where the loop breaks — the small, steady
-    space where you can hold the one actual thing and let the imagined thousand fall
-    away. Balance isn''t the absence of the worry; it''s refusing to add the weight
-    that isn''t really there yet. You don''t have to follow the thought all the way
-    down. You can stop at the first true one.
-
-
-    You are allowed to leave the spiral unfinished. You are allowed to let the night
-    be just a night.
-
-
-    Book 2 of the Feather & Scale Press Financial Stress series.'
+  short_blurb: ''
+  long_description: ''
 keywords:
-  primary:
-  - money overthinking at night
-  - financial anxiety spiral
-  - cant stop worrying about money
-  - rumination about finances
-  - catastrophizing money problems
-  - racing thoughts about bills
-  - overthinking finances book
-  secondary:
-  - stop financial catastrophizing
-  - money worry insomnia
-  - calm an anxious money mind
-bisac_codes:
-- SEL036000
-- SEL024000
-- PSY022000
+  primary: []
+  secondary: []
+bisac_codes: []
 target_price:
   ebook_usd: 4.99
   audible_usd: 9.99
@@ -91,11 +29,6 @@ author_positioning:
   teacher: maat
   brand: heart_balance
   byline_author: ravi_iverson
-comp_titles:
-- Don't Believe Everything You Think (Joseph Nguyen) — names the loop of rumination
-  and how thoughts stop being orders
-- Unwinding Anxiety (Judson Brewer) — maps the habit loop that feeds a spiral and
-  how to interrupt it
-- Rewire Your Anxious Brain (Catherine Pittman) — explains the runaway worry circuit
-  in plain, usable terms
-_needs_authoring: false
+comp_titles: []
+plan_source_path: /tmp/catalog_heart_balance/heart_balance.csv
+_needs_authoring: true
