@@ -1,40 +1,40 @@
 series_plan_schema: 1.0.0
 created_at: '2026-06-26'
 locale: en_US
-book_id_prefix: devotion_path__sai_ma__working_parents__boundaries
+book_id_prefix: devotion_path__sai_ma__tech_finance_burnout__boundaries
 brand: devotion_path
 teacher: sai_ma
-persona: working_parents
+persona: tech_finance_burnout
 topic: boundaries
 arc:
   installment_1:
-    book_id: devotion_path__sai_ma__working_parents__boundaries__false_alarm
+    book_id: devotion_path__sai_ma__tech_finance_burnout__boundaries__false_alarm
     engine: false_alarm
     duration: standard_book_60min
-    master_arc: config/source_of_truth/master_arcs/working_parents__boundaries__false_alarm__F006.yaml
+    master_arc: config/source_of_truth/master_arcs/tech_finance_burnout__boundaries__false_alarm__F006.yaml
   installment_2:
-    book_id: devotion_path__sai_ma__working_parents__boundaries__overwhelm
+    book_id: devotion_path__sai_ma__tech_finance_burnout__boundaries__overwhelm
     engine: overwhelm
     duration: standard_book_60min
   installment_3:
-    book_id: devotion_path__sai_ma__working_parents__boundaries__overwhelm__1hr
+    book_id: devotion_path__sai_ma__tech_finance_burnout__boundaries__overwhelm__1hr
     engine: overwhelm
     duration: one_hour_book
   installment_4:
-    book_id: devotion_path__sai_ma__working_parents__boundaries__shame
+    book_id: devotion_path__sai_ma__tech_finance_burnout__boundaries__shame
     engine: shame
     duration: standard_book_60min
-    master_arc: config/source_of_truth/master_arcs/working_parents__boundaries__shame__F006.yaml
+    master_arc: config/source_of_truth/master_arcs/tech_finance_burnout__boundaries__shame__F006.yaml
   installment_5:
-    book_id: devotion_path__sai_ma__working_parents__boundaries__comparison
+    book_id: devotion_path__sai_ma__tech_finance_burnout__boundaries__comparison
     engine: comparison
     duration: standard_book_60min
-    master_arc: config/source_of_truth/master_arcs/working_parents__boundaries__comparison__F006.yaml
+    master_arc: config/source_of_truth/master_arcs/tech_finance_burnout__boundaries__comparison__F006.yaml
   installment_6:
-    book_id: devotion_path__sai_ma__working_parents__boundaries__comparison__1hr
+    book_id: devotion_path__sai_ma__tech_finance_burnout__boundaries__comparison__1hr
     engine: comparison
     duration: one_hour_book
-    master_arc: config/source_of_truth/master_arcs/working_parents__boundaries__comparison__F006.yaml
+    master_arc: config/source_of_truth/master_arcs/tech_finance_burnout__boundaries__comparison__F006.yaml
 reader_promise_family: ''
 bestseller_hook_family: ''
 emotional_engine: boundaries_recognition

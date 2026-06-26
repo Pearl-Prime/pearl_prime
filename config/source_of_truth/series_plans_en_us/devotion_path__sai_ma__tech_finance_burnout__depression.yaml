@@ -1,32 +1,32 @@
 series_plan_schema: 1.0.0
 created_at: '2026-06-26'
 locale: en_US
-book_id_prefix: devotion_path__sai_ma__working_parents__depression
+book_id_prefix: devotion_path__sai_ma__tech_finance_burnout__depression
 brand: devotion_path
 teacher: sai_ma
-persona: working_parents
+persona: tech_finance_burnout
 topic: depression
 arc:
   installment_1:
-    book_id: devotion_path__sai_ma__working_parents__depression__overwhelm
+    book_id: devotion_path__sai_ma__tech_finance_burnout__depression__overwhelm
     engine: overwhelm
     duration: standard_book_60min
-    master_arc: config/source_of_truth/master_arcs/working_parents__depression__overwhelm__F006.yaml
+    master_arc: config/source_of_truth/master_arcs/tech_finance_burnout__depression__overwhelm__F006.yaml
   installment_2:
-    book_id: devotion_path__sai_ma__working_parents__depression__overwhelm__1hr
+    book_id: devotion_path__sai_ma__tech_finance_burnout__depression__overwhelm__1hr
     engine: overwhelm
     duration: one_hour_book
-    master_arc: config/source_of_truth/master_arcs/working_parents__depression__overwhelm__F006.yaml
+    master_arc: config/source_of_truth/master_arcs/tech_finance_burnout__depression__overwhelm__F006.yaml
   installment_3:
-    book_id: devotion_path__sai_ma__working_parents__depression__grief
+    book_id: devotion_path__sai_ma__tech_finance_burnout__depression__grief
     engine: grief
     duration: standard_book_60min
-    master_arc: config/source_of_truth/master_arcs/working_parents__depression__grief__F006.yaml
+    master_arc: config/source_of_truth/master_arcs/tech_finance_burnout__depression__grief__F006.yaml
   installment_4:
-    book_id: devotion_path__sai_ma__working_parents__depression__watcher
+    book_id: devotion_path__sai_ma__tech_finance_burnout__depression__watcher
     engine: watcher
     duration: standard_book_60min
-    master_arc: config/source_of_truth/master_arcs/working_parents__depression__watcher__F006.yaml
+    master_arc: config/source_of_truth/master_arcs/tech_finance_burnout__depression__watcher__F006.yaml
 reader_promise_family: ''
 bestseller_hook_family: ''
 emotional_engine: depression_recognition
