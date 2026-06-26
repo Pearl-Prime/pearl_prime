@@ -1,7 +1,8 @@
 book_plan_schema: 1.0.0
+created_at: '2026-06-26'
 book_id: devotion_path__sai_ma__working_parents__boundaries__shame
-series_plan: config/source_of_truth/series_plans_en_us/devotion_path__sai_ma__working_parents__boundaries.yaml
-installment_number: 2
+series_plan: /tmp/catalog_devotion_path/series/devotion_path__sai_ma__working_parents__boundaries.yaml
+installment_number: 4
 engine: shame
 duration: standard_book_60min
 runtime_format_id: standard_book_60min
@@ -10,70 +11,16 @@ target_word_range:
 - 9000
 - 12000
 target_audio_minutes: 70
-title: The Good Parent Never Says No
-subtitle: For the working parent who believes their limits are a defect — overworking
-  love to cover a secret fear that needing less makes them less
-cover_tagline: The line you won't draw is the one you think you don't deserve.
+title: 'Boundaries: Shame'
+subtitle: A guide for Working Parents
+cover_tagline: ''
 description:
-  short_blurb: 'Underneath the yeses is a quieter belief: that a good parent doesn''t
-    have limits, and the fact that you do is something to hide. This is a tender hour
-    for the working parent who overgives to cover a secret shame. You are not defective
-    for having a far edge.'
-  long_description: 'You don''t talk about it, but you carry it everywhere. The sense
-    that your limits are a flaw. That the tiredness you feel and the wanting-to-stop
-    you push down are evidence of something wrong with you — a smallness, a selfishness,
-    a not-enoughness that a better parent simply wouldn''t have. So you say yes again.
-    You stay late, take the call, volunteer for the thing nobody else wanted, and
-    you do it partly out of love and partly to cover the secret: that you have an
-    edge, and you are ashamed of where it falls.
-
-
-    This book is for the working parent who has made overgiving into a hiding place.
-    The one who hears their own need as a verdict. Who believes that to draw a line
-    is to confess a defect, and so keeps the cup tilted past empty rather than let
-    anyone see the bottom of it. You overwork the love to prove the shame wrong, and
-    it never works, because the shame was never about how much you gave.
-
-
-    Here you will come to recognize the belief you''ve been overworking to cover —
-    the buried conviction that needing less would make you more, and that having a
-    limit makes you a lesser parent than the ones who seem to have none. You''ll see
-    how it turned every no into a confession and every act of care into proof you
-    were trying to outrun. Gently, you will begin to separate your worth from your
-    output, to let your far edge be a fact instead of a failure, and to find that
-    the line you were most ashamed of is the one your children most needed you to
-    keep.
-
-
-    This book will not promise to make you tireless or to fix the part of you that
-    has a limit, because that part is not broken. It offers no technique for becoming
-    the parent who never says no — that parent is a ghost, and chasing them is the
-    wound, not the cure. There is no earning your way out of shame by giving more.
-
-
-    You are allowed to have an edge. You are allowed to be a whole person with a far
-    wall, held and loved exactly there. The vessel was never meant to be bottomless;
-    it was meant to be filled and poured and filled again.
-
-
-    Book 2 of the Open Vessel Press boundaries series.'
+  short_blurb: ''
+  long_description: ''
 keywords:
-  primary:
-  - boundaries and shame
-  - parental guilt and boundaries
-  - people pleasing and self worth
-  - working mom guilt
-  - overgiving and burnout
-  - feeling like a bad parent
-  - self worth for parents
-  secondary:
-  - healing shame book
-  - boundaries for caregivers
-  - stop overcommitting
-bisac_codes:
-- SEL031000
-- FAM034000
-- SEL016000
+  primary: []
+  secondary: []
+bisac_codes: []
 target_price:
   ebook_usd: 4.99
   audible_usd: 9.99
@@ -82,11 +29,6 @@ author_positioning:
   teacher: sai_ma
   brand: devotion_path
   byline_author: dora_alder
-comp_titles:
-- The Gifts of Imperfection (Brené Brown) — the foundational bestseller on shame and
-  worthiness; this book brings that work to the parent who hides behind overgiving
-- Set Boundaries, Find Peace (Nedra Glover Tawwab) — connects guilt to boundary failure;
-  this book reads the shame underneath in a softer, devotional voice
-- Good Boundaries and Goodbyes (Lysa TerKeurst) — for tender readers who feel boundaries
-  as betrayal; shares the reverent tone without the doctrine
-_needs_authoring: false
+comp_titles: []
+plan_source_path: /tmp/catalog_devotion_path/devotion_path.csv
+_needs_authoring: true

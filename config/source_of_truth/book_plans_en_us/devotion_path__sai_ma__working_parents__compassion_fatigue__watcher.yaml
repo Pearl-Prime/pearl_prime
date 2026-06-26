@@ -1,7 +1,8 @@
 book_plan_schema: 1.0.0
+created_at: '2026-06-26'
 book_id: devotion_path__sai_ma__working_parents__compassion_fatigue__watcher
-series_plan: config/source_of_truth/series_plans_en_us/devotion_path__sai_ma__working_parents__compassion_fatigue.yaml
-installment_number: 3
+series_plan: /tmp/catalog_devotion_path/series/devotion_path__sai_ma__working_parents__compassion_fatigue.yaml
+installment_number: 7
 engine: watcher
 duration: standard_book_60min
 runtime_format_id: standard_book_60min
@@ -10,77 +11,16 @@ target_word_range:
 - 9000
 - 12000
 target_audio_minutes: 70
-title: Always Half-Listening for Someone Who Needs You
-subtitle: For the working parent whose mind never goes off duty — forever scanning
-  for who needs what next, unable to set the watching down even when everyone is safe
-cover_tagline: Everyone is fine. You are still listening for the next thing to break.
+title: 'Compassion Fatigue: Watcher'
+subtitle: A guide for Working Parents
+cover_tagline: ''
 description:
-  short_blurb: Even when the house is quiet and everyone is safe, some part of you
-    stays on watch — scanning, anticipating, half-listening for the next need before
-    it arrives. This is a tender companion for the working parent whose caregiving
-    mind never clocks off. It will not give you one more thing to monitor. It will
-    gently show you how to set the watching down and let yourself be held.
-  long_description: 'Everyone is safe. The kids are asleep, the inbox can wait, the
-    day is technically over. And still, you are listening. Some part of you never
-    fully sits down — it scans the next morning before it comes, anticipates who will
-    need what, keeps one ear cocked for the cry, the email, the thing about to go
-    wrong. You can''t remember the last time your mind was truly off duty. You''re
-    not sure you''d trust it if it were.
-
-
-    This book is for the working parent who has become the watcher. For the one who
-    carries the invisible ledger of everyone''s needs, who notices the empty milk
-    and the off mood and the looming deadline all at once, who lies awake running
-    tomorrow''s logistics because if you don''t hold it all, who will. You are not
-    anxious for no reason. You have spent years being the one who catches what falls.
-    The watching kept everyone safe. It also never let you rest.
-
-
-    In these pages you''ll come to recognize the hypervigilance you mistook for love.
-    The scanning that never finds peace because there is always one more thing to
-    track. The way you monitor everyone''s wellbeing so closely that you''ve lost
-    the thread of your own. The threats that never come and the bracing that never
-    stops. The exhausting certainty that the moment you set the watch down, something
-    will slip through.
-
-
-    This is not a method. It will not hand you a better system for tracking it all,
-    or one more practice to add to the list you already carry. There is no optimizing
-    the part of you that refuses to clock off. Nothing here will make you more vigilant,
-    more on top of it, more ready. That is the relief of it.
-
-
-    What it offers instead is permission to be off duty. An unhurried hour where nothing
-    needs catching, where you are not the one holding the whole house up — where you
-    can let the watching go slack and discover the world does not fall apart without
-    your scanning. A voice that keeps watch with you for a while, so you don''t have
-    to do it alone, and then quietly invites you to set it down. Here you are not
-    the sentry. You are allowed, for once, to be the one who is held.
-
-
-    You can stop listening for a little while. The people you love are safe. You are
-    allowed to be, too.
-
-
-    Book 3 of the Open Vessel Press compassion fatigue series.'
+  short_blurb: ''
+  long_description: ''
 keywords:
-  primary:
-  - compassion fatigue working parents
-  - mental load working mom
-  - always on alert caregiver burnout
-  - hypervigilant parent can't relax
-  - carrying everyone's needs exhaustion
-  - parental burnout mind won't switch off
-  - invisible labor of caregiving
-  secondary:
-  - caregiver hypervigilance burnout
-  - working parent can't stop worrying
-  - spiritual book for exhausted caregivers
-bisac_codes:
-- FAM034000
-- SEL036000
-- SEL021000
-- SEL049000
+  primary: []
+  secondary: []
+bisac_codes: []
 target_price:
   ebook_usd: 4.99
   audible_usd: 9.99
@@ -89,11 +29,6 @@ author_positioning:
   teacher: sai_ma
   brand: devotion_path
   byline_author: quinn_bennett
-comp_titles:
-- 'Burnout: The Secret to Unlocking the Stress Cycle (Emily Nagoski & Amelia Nagoski)
-  — names the relentless caregiving alertness and the toll of never standing down.'
-- Fair Play (Eve Rodsky) — validates the working parent carrying the whole mental
-  load and watching over everyone at once.
-- Sacred Rest (Saundra Dalton-Smith) — gives the always-on caregiver permission to
-  truly go off duty, in restorative language.
-_needs_authoring: false
+comp_titles: []
+plan_source_path: /tmp/catalog_devotion_path/devotion_path.csv
+_needs_authoring: true

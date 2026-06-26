@@ -1,6 +1,7 @@
 book_plan_schema: 1.0.0
+created_at: '2026-06-26'
 book_id: devotion_path__sai_ma__working_parents__grief__watcher
-series_plan: config/source_of_truth/series_plans_en_us/devotion_path__sai_ma__working_parents__grief.yaml
+series_plan: /tmp/catalog_devotion_path/series/devotion_path__sai_ma__working_parents__grief.yaml
 installment_number: 2
 engine: watcher
 duration: standard_book_60min
@@ -10,74 +11,16 @@ target_word_range:
 - 9000
 - 12000
 target_audio_minutes: 70
-title: Bracing for the Next Phone Call
-subtitle: For the grieving parent whose mind never goes off duty — scanning every
-  quiet moment for the next loss, long after the first one came
-cover_tagline: You keep watch so it can never catch you again. It already did. You
-  are allowed to set the post down.
+title: 'Grief: Watcher'
+subtitle: A guide for Working Parents
+cover_tagline: ''
 description:
-  short_blurb: After the loss, a part of you never stood down. It checks the breathing,
-    refreshes the phone, listens for the wrong kind of silence — certain that vigilance
-    is the price of keeping everyone else safe. This is a gentle companion for the
-    grieving parent whose mind never goes off duty.
-  long_description: 'Since the loss, a part of you has not stood down. It listens
-    at the bedroom door for the rhythm of breathing. It refreshes the phone before
-    the call you dread can come. It scans the staff meeting, the school pickup, the
-    quiet of the house after midnight, certain that if you just stay alert enough,
-    you can keep the rest of them safe. You learned, in one unbearable moment, that
-    the worst can actually happen. Now the watcher in you never sleeps.
-
-
-    This book is for you. For the parent who survived a loss and came out the other
-    side hypervigilant — counting heads, bracing for bad news, unable to fully rest
-    because rest feels like dropping your guard. You are not paranoid and you are
-    not broken. You are a heart that was caught off guard once and swore it never
-    would be again. Underneath all that scanning is the most ordinary, sacred thing:
-    you love them, and you are terrified of losing more.
-
-
-    In these pages you will come to recognize the shapes grief takes when it hides
-    inside vigilance. The dread that floods in before any real danger. The thought
-    that spirals through every worst case at 2 a.m. The quiet shame of being the parent
-    who can never just relax. The comparison to other families who seem so easy, so
-    unguarded. And beneath all of it, the grief you have been too busy standing guard
-    to feel. You will be met in each of these, slowly, with no demand that you lower
-    your watch before you are ready.
-
-
-    This is not a plan to make you vigilant about the right things, or a technique
-    to optimize your peace. There is no exposure ladder here, no reframe that fixes
-    the fear. Nothing here will promise that nothing bad will ever happen again —
-    that promise was never anyone''s to make. Instead, you will be offered something
-    quieter: permission to notice how tired the watcher is, and to discover that you
-    can be held even with your eyes open. The well refills in the dark. So can the
-    part of you that has forgotten how to stop keeping watch.
-
-
-    You do not have to keep the whole world safe tonight. You are allowed to set the
-    post down, just for now, and let yourself be a person who is grieving rather than
-    a sentry who cannot rest. The ones you love are not safer for your exhaustion.
-    Let that be enough for tonight.
-
-
-    Book 2 of the Open Vessel Press grief series.'
+  short_blurb: ''
+  long_description: ''
 keywords:
-  primary:
-  - grief and anxiety
-  - fear of losing a loved one
-  - hypervigilance after loss
-  - grief support for parents
-  - anticipatory grief
-  - coping with loss and fear
-  - grief books for working parents
-  secondary:
-  - fear of death of loved ones
-  - grief and overprotective parenting
-  - worry after losing someone
-bisac_codes:
-- SEL036000
-- SEL010000
-- SEL024000
+  primary: []
+  secondary: []
+bisac_codes: []
 target_price:
   ebook_usd: 4.99
   audible_usd: 9.99
@@ -86,11 +29,6 @@ author_positioning:
   teacher: sai_ma
   brand: devotion_path
   byline_author: theo_estes
-comp_titles:
-- It's OK That You're Not OK (Megan Devine) — validates the unruly aftermath of loss
-  without a fix-it agenda, matching this book's posture toward vigilance
-- The Body Keeps the Score (Bessel van der Kolk) — names how the body stays braced
-  after trauma, the felt mechanism behind the grieving watcher
-- When Things Fall Apart (Pema Chödrön) — offers a gentle, dogma-free way to stop
-  bracing against impermanence, a close devotional sibling
-_needs_authoring: false
+comp_titles: []
+plan_source_path: /tmp/catalog_devotion_path/devotion_path.csv
+_needs_authoring: true

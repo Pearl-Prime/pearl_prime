@@ -1,6 +1,7 @@
 book_plan_schema: 1.0.0
+created_at: '2026-06-26'
 book_id: devotion_path__sai_ma__working_parents__grief__grief
-series_plan: config/source_of_truth/series_plans_en_us/devotion_path__sai_ma__working_parents__grief.yaml
+series_plan: /tmp/catalog_devotion_path/series/devotion_path__sai_ma__working_parents__grief.yaml
 installment_number: 1
 engine: grief
 duration: standard_book_60min
@@ -10,70 +11,16 @@ target_word_range:
 - 9000
 - 12000
 target_audio_minutes: 70
-title: Mourning in the Margins of a Full House
-subtitle: For the parent grieving in stolen moments — between lunchboxes and bedtimes,
-  with no room to fall apart
-cover_tagline: You are not too much. You are only love, with nowhere left to put it.
+title: 'Grief: Grief'
+subtitle: A guide for Working Parents
+cover_tagline: ''
 description:
-  short_blurb: Grief did not wait for a convenient week. It moved into your kitchen,
-    your commute, your child's bedtime, and asked you to keep going anyway. This is
-    a quiet companion for the parent who carries a loss through ordinary days, written
-    for the ache itself — not its cure.
-  long_description: 'It comes for you between the lunchbox and the car keys. You are
-    buttering toast, answering a message, tying a small shoe, and then the loss is
-    simply there again — sideways, uninvited, real. You smile at your child. You carry
-    it into the day in a body no one at work knows is broken open. And you keep going,
-    because that is what a parent does.
-
-
-    This book is for you. For the mother and father who do not get a week to fall
-    apart. For the one who grieves in the parking lot before walking in, who cries
-    in the shower so the children won''t hear, who has been quietly told — in a hundred
-    small ways — that it has been long enough now. It has not been long enough. There
-    is no long enough.
-
-
-    Here, grief is not a problem to be solved. It is love with nowhere to go. Everything
-    you feel is the size of everything you lost, and that is not a malfunction — it
-    is the truest thing about you. In these pages you will come to recognize the way
-    grief moves through a working life: the flood that arrives at the worst possible
-    moment, the thought that loops while you drive, the strange shame of still hurting,
-    the comparison to everyone who seems to have moved on, the part of you that braces
-    for the next blow that never quite comes. You will be met in each of these, gently,
-    without being asked to be anywhere other than where you are.
-
-
-    This is not a recovery plan. There are no stages to complete, no lesson you must
-    extract, no gratitude demanded before its time. Nothing here will get you over
-    it, because you were never meant to get over a love like that. Instead, you will
-    be offered a place to set the cup down — just for a moment, just for tonight —
-    and let yourself be held. The well refills in the dark, when no one is watching.
-    So does the heart.
-
-
-    You do not have to be done. You do not have to be okay for anyone. You are allowed
-    to be a person who loves this much and lost this much and still made the toast.
-    Let that be enough for tonight.
-
-
-    Book 1 of the Open Vessel Press grief series.'
+  short_blurb: ''
+  long_description: ''
 keywords:
-  primary:
-  - grief books for parents
-  - grief and loss
-  - coping with loss of a loved one
-  - grief support for working moms
-  - bereavement books
-  - how to cope with grief while working
-  - grief comfort book
-  secondary:
-  - loss of a parent grief
-  - sudden loss grief support
-  - grieving while parenting
-bisac_codes:
-- SEL010000
-- FAM014000
-- SEL031000
+  primary: []
+  secondary: []
+bisac_codes: []
 target_price:
   ebook_usd: 4.99
   audible_usd: 9.99
@@ -82,11 +29,6 @@ author_positioning:
   teacher: sai_ma
   brand: devotion_path
   byline_author: theo_estes
-comp_titles:
-- It's OK That You're Not OK (Megan Devine) — gives grieving readers permission to
-  hurt without a deadline, the exact promise of this book
-- The Year of Magical Thinking (Joan Didion) — renders the disorienting daily reality
-  of carrying loss, mirroring the working parent's sideways grief
-- Bearing the Unbearable (Joanne Cacciatore) — a tender, dogma-free companion for
-  active mourning that shares this book's devotional register
-_needs_authoring: false
+comp_titles: []
+plan_source_path: /tmp/catalog_devotion_path/devotion_path.csv
+_needs_authoring: true

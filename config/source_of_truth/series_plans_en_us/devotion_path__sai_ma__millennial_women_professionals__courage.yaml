@@ -1,38 +1,41 @@
 series_plan_schema: 1.0.0
-created_at: '2026-04-24'
+created_at: '2026-06-26'
 locale: en_US
 book_id_prefix: devotion_path__sai_ma__millennial_women_professionals__courage
 brand: devotion_path
 teacher: sai_ma
 persona: millennial_women_professionals
 topic: courage
-teacher_topic_score: 0.9
-teacher_persona_score: 0.8
-composite_fit: 0.85
 arc:
   installment_1:
     book_id: devotion_path__sai_ma__millennial_women_professionals__courage__false_alarm
     engine: false_alarm
-    master_arc: config/source_of_truth/master_arcs/millennial_women_professionals__courage__false_alarm__F006.yaml
     duration: standard_book_60min
+    master_arc: config/source_of_truth/master_arcs/millennial_women_professionals__courage__false_alarm__F006.yaml
   installment_2:
+    book_id: devotion_path__sai_ma__millennial_women_professionals__courage__false_alarm__1hr
+    engine: false_alarm
+    duration: one_hour_book
+    master_arc: config/source_of_truth/master_arcs/millennial_women_professionals__courage__false_alarm__F006.yaml
+  installment_3:
     book_id: devotion_path__sai_ma__millennial_women_professionals__courage__spiral
     engine: spiral
-    master_arc: config/source_of_truth/master_arcs/millennial_women_professionals__courage__spiral__F006.yaml
     duration: standard_book_60min
-  installment_3:
+    master_arc: config/source_of_truth/master_arcs/millennial_women_professionals__courage__spiral__F006.yaml
+  installment_4:
     book_id: devotion_path__sai_ma__millennial_women_professionals__courage__shame
     engine: shame
-    master_arc: config/source_of_truth/master_arcs/millennial_women_professionals__courage__shame__F006.yaml
     duration: standard_book_60min
-reader_promise_family: |
-  3 books across engines of courage via the flowing-warmth shonen, devotional earnest voice.
-bestseller_hook_family: recognition_descent
+    master_arc: config/source_of_truth/master_arcs/millennial_women_professionals__courage__shame__F006.yaml
+  installment_5:
+    book_id: devotion_path__sai_ma__millennial_women_professionals__courage__shame__1hr
+    engine: shame
+    duration: one_hour_book
+    master_arc: config/source_of_truth/master_arcs/millennial_women_professionals__courage__shame__F006.yaml
+reader_promise_family: ''
+bestseller_hook_family: ''
 emotional_engine: courage_recognition
-comp_series:
-- Daring Greatly (Brené Brown)
-- Big Magic (Gilbert)
-- The War of Art (Pressfield)
+comp_series: []
 platform_strategy:
   primary:
   - kdp_ebook
@@ -46,21 +49,14 @@ platform_strategy:
     release_spacing_days: 14
     max_books_per_brand_per_month: 2
 reader_avatar:
-  age: 32–42
-  where_they_are: |
-    Text from mom, text from boss, calendar full.
-  what_they_need: |
-    Sees the emotional labor without calling it a superpower or wound.
-  what_they_avoid: |
-    Lean-in. Self-care Sunday.
+  age: ''
+  where_they_are: ''
+  what_they_need: ''
+  what_they_avoid: ''
 series_voice_markers:
-  register: flowing-warmth shonen, devotional earnest
-  sentence_rhythm: ardent but unhurried
-  metaphor_family: flame-as-offering, ornamental borders, hands
+  register: ''
+  sentence_rhythm: ''
+  metaphor_family: ''
   second_person_default: true
-main_character_name: Ligia
-main_character_role: senior manager + primary household planner
-main_character_image_path: null
-main_character_lora_id: ligia_dp_us
-main_character_trigger_word: ligia_dp_us
-plan_source_path: config/manga/manga_brand_series_plan.yaml
+plan_source_path: /tmp/catalog_devotion_path/devotion_path.csv
+_needs_authoring: true

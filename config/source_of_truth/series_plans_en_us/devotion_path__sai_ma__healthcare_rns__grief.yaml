@@ -1,34 +1,31 @@
 series_plan_schema: 1.0.0
+created_at: '2026-06-26'
 locale: en_US
 book_id_prefix: devotion_path__sai_ma__healthcare_rns__grief
 brand: devotion_path
 teacher: sai_ma
 persona: healthcare_rns
 topic: grief
-byline_author: theo_estes
 arc:
   installment_1:
     book_id: devotion_path__sai_ma__healthcare_rns__grief__grief
     engine: grief
-    master_arc: config/source_of_truth/master_arcs/healthcare_rns__grief__grief__F006.yaml
     duration: standard_book_60min
+    master_arc: config/source_of_truth/master_arcs/healthcare_rns__grief__grief__F006.yaml
   installment_2:
     book_id: devotion_path__sai_ma__healthcare_rns__grief__watcher
     engine: watcher
-    master_arc: config/source_of_truth/master_arcs/healthcare_rns__grief__watcher__F006.yaml
     duration: standard_book_60min
-reader_promise_family: For the nurse who has carried more endings than anyone counted
-  — a tender, unhurried place to set down the grief you were never given time to feel,
-  where nothing rushes you and no one asks you to be strong.
+    master_arc: config/source_of_truth/master_arcs/healthcare_rns__grief__watcher__F006.yaml
+  installment_3:
+    book_id: devotion_path__sai_ma__healthcare_rns__grief__watcher__1hr
+    engine: watcher
+    duration: one_hour_book
+    master_arc: config/source_of_truth/master_arcs/healthcare_rns__grief__watcher__F006.yaml
+reader_promise_family: ''
 bestseller_hook_family: ''
 emotional_engine: grief_recognition
-comp_series:
-- It's OK That You're Not OK (Megan Devine) — meets grief without trying to fix or
-  rush it, the same refusal of toxic positivity this series lives by
-- When Breath Becomes Air (Paul Kalanithi) — the interior life of a clinician facing
-  mortality, the lived medical world these readers inhabit
-- How to Carry What Can't Be Fixed (Megan Devine) — a companion for grief that is
-  carried rather than cured, mirroring this series' tender-witness promise
+comp_series: []
 platform_strategy:
   primary:
   - kdp_ebook
@@ -42,29 +39,14 @@ platform_strategy:
     release_spacing_days: 14
     max_books_per_brand_per_month: 2
 reader_avatar:
-  age: 29-55
-  where_they_are: Sitting in her car in the hospital parking garage at the end of
-    a twelve-hour shift, engine off, badge still clipped to her scrubs, hands resting
-    on the wheel — not crying, just empty, because a patient she'd cared for all week
-    died this afternoon and she charted the time and kept going, and now in the dark
-    she finally has nothing left to do.
-  what_they_need: Permission to grieve the losses no one acknowledged, to feel what
-    she pushed past at the bedside, and to be held the way she has spent her whole
-    career holding everyone else.
-  what_they_avoid: Spiritual bypassing, 'they're in a better place,' 'it was their
-    time,' resilience training that asks her to bounce back faster, gratitude journals
-    demanded before the grief has even landed, and anyone who tells her that being
-    a nurse means she should be used to this by now.
+  age: ''
+  where_they_are: ''
+  what_they_need: ''
+  what_they_avoid: ''
 series_voice_markers:
-  register: tender, devotional, spacious — a reverent voice that sits beside the exhausted
-    caregiver in the dark and asks nothing of her; never clinical, never preachy,
-    never a pep talk; the voice of someone who knows what it costs to hold a dying
-    hand and chart the time and walk to the next room
-  sentence_rhythm: unhurried and breath-paced, long tender clauses that open into
-    space, then a short line that lands and lets her rest; pauses where grief needs
-    them, never racing to the comfort
-  metaphor_family: the open vessel poured out and waiting to be refilled, grief as
-    love with nowhere to go, the cup emptied at every bedside, the well that refills
-    only in the dark, the hands that have held so much and may finally open, the empty
-    chair, the sacred ordinary of the night shift
-_needs_authoring: false
+  register: ''
+  sentence_rhythm: ''
+  metaphor_family: ''
+  second_person_default: true
+plan_source_path: /tmp/catalog_devotion_path/devotion_path.csv
+_needs_authoring: true

@@ -1,7 +1,8 @@
 book_plan_schema: 1.0.0
+created_at: '2026-06-26'
 book_id: devotion_path__sai_ma__working_parents__depression__watcher
-series_plan: config/source_of_truth/series_plans_en_us/devotion_path__sai_ma__working_parents__depression.yaml
-installment_number: 3
+series_plan: /tmp/catalog_devotion_path/series/devotion_path__sai_ma__working_parents__depression.yaml
+installment_number: 4
 engine: watcher
 duration: standard_book_60min
 runtime_format_id: standard_book_60min
@@ -10,86 +11,16 @@ target_word_range:
 - 9000
 - 12000
 target_audio_minutes: 70
-title: The Lamp You Leave Burning All Night
-subtitle: For the depleted parent whose mind keeps its vigil long after the house
-  goes dark — watching the children, the marriage, your own dimming self for the next
-  thing about to give way
-cover_tagline: You can be emptied past the bottom of yourself and still keeping watch.
-  The vigil does not end just because there is nothing left to give.
+title: 'Depression: Watcher'
+subtitle: A guide for Working Parents
+cover_tagline: ''
 description:
-  short_blurb: The house is quiet, the children are asleep, and still your mind keeps
-    watch — listening to their breathing, replaying the day, scanning your own flat
-    mood for proof that you are failing them. This is a book for the working parent
-    whose mind cannot rest, even in the depths of depression. It will not teach you
-    to seize control of your thoughts. It will help you understand the weary, watchful
-    part of you that has kept the lamp burning so long, and let it, at last, lay the
-    vigil down and be held.
-  long_description: 'The house has finally gone quiet. The children are asleep, the
-    doors are locked, the day is technically over — and still some part of you keeps
-    watch. It listens for a cough down the hall. It replays the sharp thing you said
-    at the end of the day. It scans your own flat, grey mood the way you would lay
-    a hand on a feverish forehead, searching for proof of how badly you are letting
-    everyone down. You are emptied out past the bottom of yourself, and somewhere
-    inside, a light is still burning that will not let itself go dark.
-
-
-    This book is for you: the working parent whose mind never rests. Depression did
-    not quiet the watching — it turned it inward. The same tenderness that keeps your
-    children safe now keeps you under its gaze, counting every dropped thread, every
-    moment you felt far away, every sign that the numbness inside you might be reaching
-    the people you would give anything to protect. The watching feels like love. It
-    feels like the only thing standing between them and your failure. And it is quietly
-    pouring out the last of what you have.
-
-
-    We will not teach you to seize your thoughts or shame the vigilance into silence.
-    Slowly, instead, we will come to know the part of you that keeps the lamp lit:
-    the one who learned that to be caught unready was not safe. We will see how depression
-    gives that watchful one a cruel new charge — to keep guard over your own unworthiness
-    — and how it tends that fear all night, certain that the moment it softened, everything
-    you love would come apart in the dark.
-
-
-    You will come to recognize that the watching is not keeping anyone safe. It is
-    only keeping you from rest, from presence, from the unguarded tenderness your
-    children reach for. You will learn that the thing the watchful one fears — that
-    you are failing, that you are too empty to be a good parent — is not out there
-    in the dark at all. And you will begin, gently, to let that weary part of you
-    be held: not by force, not by willpower, but by being gathered close enough that
-    something in you believes it is safe to close its eyes.
-
-
-    Nothing here will quiet the watching like a candle pinched out, because a heart
-    that learned to keep vigil does not surrender on command. There is no method for
-    making yourself let go. But there is the slow grace of being watched over for
-    once — of laying your head down in hands that will hold the night so you do not
-    have to — until the part of you that has kept the lamp burning so long can finally
-    rest.
-
-
-    You are allowed to set the watch down. The dark is not waiting to undo you; it
-    is where the well quietly fills again. Let the night keep what you cannot, and
-    let these words keep watch instead.
-
-
-    Book 3 of the Open Vessel Press depression series.'
+  short_blurb: ''
+  long_description: ''
 keywords:
-  primary:
-  - depression and constant worry parent
-  - can't quiet my mind at night depression
-  - racing mind can't relax mom
-  - depression mental exhaustion parent
-  - mind won't shut off depressed parent
-  - depression self help for parents no fix
-  - always watching for the worst parent
-  secondary:
-  - overthinking and depression caregiver
-  - exhausted mind self help depression
-  - depressed parent can't sleep racing thoughts
-bisac_codes:
-- SEL011000
-- FAM034000
-- SEL013000
+  primary: []
+  secondary: []
+bisac_codes: []
 target_price:
   ebook_usd: 4.99
   audible_usd: 9.99
@@ -98,11 +29,6 @@ author_positioning:
   teacher: sai_ma
   brand: devotion_path
   byline_author: suki_lowell
-comp_titles:
-- The Body Keeps the Score (Bessel van der Kolk) — why a nervous system stays braced
-  and what finally lets it soften
-- 'Burnout: The Secret to Unlocking the Stress Cycle (Emily Nagoski and Amelia Nagoski)
-  — the body stuck in alarm long after the threat is gone'
-- Self-Compassion (Kristin Neff) — easing the watchful inner voice through tenderness
-  rather than tighter control
-_needs_authoring: false
+comp_titles: []
+plan_source_path: /tmp/catalog_devotion_path/devotion_path.csv
+_needs_authoring: true
