@@ -1,7 +1,7 @@
 book_plan_schema: 1.0.0
-created_at: '2026-04-24'
+created_at: '2026-06-26'
 book_id: devotion_path__sai_ma__tech_finance_burnout__courage__false_alarm
-series_plan: config/source_of_truth/series_plans_en_us/devotion_path__sai_ma__tech_finance_burnout__courage.yaml
+series_plan: /tmp/catalog_devotion_path/series/devotion_path__sai_ma__tech_finance_burnout__courage.yaml
 installment_number: 1
 engine: false_alarm
 duration: standard_book_60min
@@ -11,38 +11,16 @@ target_word_range:
 - 9000
 - 12000
 target_audio_minutes: 70
-title: Misreading the Danger Signal
-subtitle: How Tech and Finance Professionals Are Rewriting the Rules of Building Courage
-cover_tagline: How to Recognize When Anxiety Is a False Alarm — and What to Do Instead
+title: 'Courage: False Alarm'
+subtitle: A guide for Tech Finance Burnout
+cover_tagline: ''
 description:
-  short_blurb: How to Recognize When Anxiety Is a False Alarm — and What to Do Instead stop waiting and start the thing I keep delaying.
-  long_description: |
-    How to Recognize When Anxiety Is a False Alarm — and What to Do Instead
-
-    This book is for senior engineer / PM at public tech companys who I know what I need to do but I can't make myself do it. It doesn't promise to make the feeling stop. It names what's happening in language you can use the next time it happens.
-
-    Chapter by chapter, you'll work with what when your mind screams danger really means in your body and mind, and how to work with it. Not through exposure or worksheets or morning routines — through recognition, descent, and integration. The practice the book asks for can happen on a subway, between meetings, or at 3am.
-
-    You'll walk away knowing what your body is doing and why it makes sense. Not fixed. Not healed in any final sense. But no longer alone with the pattern.
-
-    Book 1 of the Devotion Path courage series.
+  short_blurb: ''
+  long_description: ''
 keywords:
-  primary:
-  - courage book
-  - overcome fear
-  - take action
-  - brave self
-  - courage to change
-  - facing fear
-  - fear of failure
-  secondary:
-  - tech finance burnout
-  - false alarm courage
-  - when your mind screams danger
-bisac_codes:
-- BUS018000
-- SEL027000
-- SEL045000
+  primary: []
+  secondary: []
+bisac_codes: []
 target_price:
   ebook_usd: 4.99
   audible_usd: 9.99
@@ -50,14 +28,7 @@ target_price:
 author_positioning:
   teacher: sai_ma
   brand: devotion_path
-comp_titles:
-- Daring Greatly (Brené Brown)
-- Big Magic (Gilbert)
-- The War of Art (Pressfield)
-main_character_name: Shiva
-main_character_lora_id: shiva_dp_us
-confidence:
-  pricing: low
-  title: 'medium  # naming-engine generated (#1677); refine per series'
-  comps: high
-plan_source_path: config/manga/manga_brand_series_plan.yaml
+  byline_author: dora_alder
+comp_titles: []
+plan_source_path: /tmp/catalog_devotion_path/devotion_path.csv
+_needs_authoring: true

@@ -1,8 +1,8 @@
 book_plan_schema: 1.0.0
-created_at: '2026-04-24'
+created_at: '2026-06-26'
 book_id: devotion_path__sai_ma__millennial_women_professionals__burnout__watcher
-series_plan: config/source_of_truth/series_plans_en_us/devotion_path__sai_ma__millennial_women_professionals__burnout.yaml
-installment_number: 2
+series_plan: /tmp/catalog_devotion_path/series/devotion_path__sai_ma__millennial_women_professionals__burnout.yaml
+installment_number: 9
 engine: watcher
 duration: standard_book_60min
 runtime_format_id: standard_book_60min
@@ -11,38 +11,16 @@ target_word_range:
 - 9000
 - 12000
 target_audio_minutes: 70
-title: The Observer's Mind
-subtitle: How Professional Women Are Rewriting the Rules of Burnout Recovery
-cover_tagline: How to Create Distance from Anxious Thoughts and Find Clarity
+title: 'Burnout: Watcher'
+subtitle: A guide for Millennial Women Professionals
+cover_tagline: ''
 description:
-  short_blurb: How to Create Distance from Anxious Thoughts and Find Clarity get my energy back without quitting everything.
-  long_description: |
-    How to Create Distance from Anxious Thoughts and Find Clarity
-
-    This book is for senior manager + primary household planners who I have nothing left and I can't stop. It doesn't promise to make the feeling stop. It names what's happening in language you can use the next time it happens.
-
-    Chapter by chapter, you'll work with what the observer's mind really means in your body and mind, and how to work with it. Not through exposure or worksheets or morning routines — through recognition, descent, and integration. The practice the book asks for can happen on a subway, between meetings, or at 3am.
-
-    You'll walk away knowing what your body is doing and why it makes sense. Not fixed. Not healed in any final sense. But no longer alone with the pattern.
-
-    Book 2 of the Devotion Path burnout series.
+  short_blurb: ''
+  long_description: ''
 keywords:
-  primary:
-  - burnout recovery
-  - work burnout
-  - exhaustion book
-  - compassion fatigue
-  - chronic stress
-  - nervous system recovery
-  - burnout help
-  secondary:
-  - millennial women professionals
-  - watcher burnout
-  - the observers mind
-bisac_codes:
-- SEL027000
-- SOC028000
-- SEL045000
+  primary: []
+  secondary: []
+bisac_codes: []
 target_price:
   ebook_usd: 4.99
   audible_usd: 9.99
@@ -50,14 +28,7 @@ target_price:
 author_positioning:
   teacher: sai_ma
   brand: devotion_path
-comp_titles:
-- 'Burnout: Secret to Unlocking Stress Cycle (Nagoski)'
-- Laziness Does Not Exist (Price)
-- Do Nothing (Headlee)
-main_character_name: Lila
-main_character_lora_id: lila_dp_us
-confidence:
-  pricing: low
-  title: 'medium  # naming-engine generated (#1677); refine per series'
-  comps: high
-plan_source_path: config/manga/manga_brand_series_plan.yaml
+  byline_author: dora_alder
+comp_titles: []
+plan_source_path: /tmp/catalog_devotion_path/devotion_path.csv
+_needs_authoring: true
