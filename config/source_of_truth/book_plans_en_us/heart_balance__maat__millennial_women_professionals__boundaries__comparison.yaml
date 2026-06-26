@@ -1,7 +1,8 @@
 book_plan_schema: 1.0.0
+created_at: '2026-06-26'
 book_id: heart_balance__maat__millennial_women_professionals__boundaries__comparison
-series_plan: config/source_of_truth/series_plans_en_us/heart_balance__maat__millennial_women_professionals__boundaries.yaml
-installment_number: 3
+series_plan: /tmp/catalog_heart_balance/series/heart_balance__maat__millennial_women_professionals__boundaries.yaml
+installment_number: 5
 engine: comparison
 duration: standard_book_60min
 runtime_format_id: standard_book_60min
@@ -10,78 +11,16 @@ target_word_range:
 - 9000
 - 12000
 target_audio_minutes: 70
-title: They Make the No Look Weightless
-subtitle: For the woman sure that refusing should cost her as little as it seems to
-  cost everyone else
-cover_tagline: They say no like it's nothing. You say it and bleed.
+title: 'Boundaries: Comparison'
+subtitle: A guide for Millennial Women Professionals
+cover_tagline: ''
 description:
-  short_blurb: Other women seem to set boundaries without apology — a clean no, a
-    calendar that's theirs, a guiltless 'that doesn't work for me' — and you watch
-    them and wonder what's wrong with you that it's never that simple. This is a book
-    about that measuring. It won't help you catch up to them. It will show you that
-    you've been weighing your insides against their outsides, and losing a contest
-    that was never real.
-  long_description: 'You''ve seen her do it. The colleague who declines the meeting
-    without a single ''so sorry.'' The friend who says ''I''m not available that weekend''
-    and just... means it. No spiral, no over-explanation, no replaying it for three
-    days afterward. You watch, and a small cold thought arrives: it''s easy for them.
-    What is wrong with me that it isn''t?
-
-
-    This book is for the woman who holds it together at work and at home and still
-    feels, quietly, like she''s failing at something everyone else figured out — the
-    senior manager and household planner who measures her own clenched, costly, apologetic
-    boundaries against the effortless ones she imagines everyone else is setting.
-    You are not behind. You are doing something genuinely hard that you''ve convinced
-    yourself should be easy, because the people you compare yourself to never let
-    you see their version of hard.
-
-
-    With a feather on one side of the scale, you will come to recognize the particular
-    cruelty of comparison: how you weigh your full interior — every flinch, every
-    guilty rehearsal, every line that cost you a night''s sleep — against a stranger''s
-    polished exterior, and call the gap a personal failing. You''ll see how the calm
-    you envy is mostly invisible labor or a different history, not a superior character.
-    You''ll notice how the measuring itself drains the very steadiness it claims to
-    want, and how ''everyone else'' is a composite of best moments you''ve never had
-    to live inside.
-
-
-    This book will not help you win the comparison. That is the point. It will not
-    hand you a routine that makes your no as frictionless as the ones you imagine,
-    or promise you''ll stop noticing other women by next month. There is no optimization
-    here, no leaderboard to climb. What there is, instead, is recognition — the slow
-    relief of putting down the scale you''ve been using to weigh yourself against
-    people who were never actually competing with you.
-
-
-    You are allowed to find this hard. You are allowed to draw a line that costs you
-    something and not deduct points for the cost. The grief of a boundary is not evidence
-    you''re doing it wrong; it might be evidence you''re doing it at all.
-
-
-    There is no one you have to catch up to. There never was. The scale was only ever
-    meant to measure you against a feather.
-
-
-    Book 3 of the Feather & Scale Press boundaries series.'
+  short_blurb: ''
+  long_description: ''
 keywords:
-  primary:
-  - comparison and self worth
-  - boundaries for women
-  - why is it so hard to say no
-  - people pleasing and comparison
-  - feeling behind everyone else
-  - setting boundaries at work
-  - stop comparing yourself to others
-  secondary:
-  - boundaries for working moms
-  - social comparison anxiety
-  - self compassion for women
-bisac_codes:
-- SEL027000
-- SEL023000
-- SOC028000
+  primary: []
+  secondary: []
+bisac_codes: []
 target_price:
   ebook_usd: 4.99
   audible_usd: 9.99
@@ -90,11 +29,6 @@ author_positioning:
   teacher: maat
   brand: heart_balance
   byline_author: theo_bello
-comp_titles:
-- Set Boundaries, Find Peace (Nedra Glover Tawwab) — the relational-boundaries anchor;
-  this book addresses the woman who feels she's failing at what it teaches
-- The Comparison Cure (Lucy Sheridan) — built entirely on the comparison trap, focused
-  here on the single arena of drawing a line
-- The Book of Boundaries (Melissa Urban) — gives the clean scripts other people seem
-  to use; this is for the reader who can't yet make them her own
-_needs_authoring: false
+comp_titles: []
+plan_source_path: /tmp/catalog_heart_balance/heart_balance.csv
+_needs_authoring: true

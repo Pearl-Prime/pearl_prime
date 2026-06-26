@@ -1,7 +1,8 @@
 book_plan_schema: 1.0.0
+created_at: '2026-06-26'
 book_id: heart_balance__maat__millennial_women_professionals__financial_stress__shame
-series_plan: config/source_of_truth/series_plans_en_us/heart_balance__maat__millennial_women_professionals__financial_stress.yaml
-installment_number: 3
+series_plan: /tmp/catalog_heart_balance/series/heart_balance__maat__millennial_women_professionals__financial_stress.yaml
+installment_number: 4
 engine: shame
 duration: standard_book_60min
 runtime_format_id: standard_book_60min
@@ -10,80 +11,16 @@ target_word_range:
 - 9000
 - 12000
 target_audio_minutes: 70
-title: The Number You Don't Say Out Loud
-subtitle: For the woman who looks like she's doing fine — and hides what she actually
-  owes, earns, and fears she'll never fix
-cover_tagline: The figure you'd never let anyone see — and what it's quietly decided
-  about you.
+title: 'Financial Stress: Shame'
+subtitle: A guide for Millennial Women Professionals
+cover_tagline: ''
 description:
-  short_blurb: There's a number you carry that no one in your life knows — what you
-    actually owe, what you actually have, how far behind you really feel. This is
-    a book for the millennial woman who has turned money stress into a private verdict
-    on her worth, and overworks to keep anyone from finding out. It won't tell you
-    to fix the number. It will help you stop hiding from the one who carries it.
-  long_description: 'There is a number you don''t say out loud. Maybe it''s what you
-    owe. Maybe it''s what you don''t have. Maybe it''s the gap between the life you
-    present and the balance you actually live with. Whatever it is, you''ve never
-    told the whole truth of it to a single person — not your closest friend, not the
-    partner who shares your bed, sometimes not even yourself, all the way. You keep
-    it covered. And somewhere along the way the number stopped being a fact about
-    your finances and became a verdict about you.
-
-
-    This book is for the woman who has quietly decided that the money problem is proof
-    of something wrong with her. Not bad luck. Not a brutal economy. A defect. You
-    look composed — you''ve made sure of that — and underneath the composure you are
-    working overtime to outrun a shame you''d be mortified to name. You give more,
-    charge less, say yes when you mean no, achieve and achieve, all to cover a number
-    you''re certain would make people see what you already believe: that you don''t
-    measure up.
-
-
-    You''ll come to recognize the shame for what it is. How a balance sheet quietly
-    became a measure of your worth, and why the hiding costs more than the number
-    ever could. You''ll see the difference between what you owe and what you are —
-    that an ancient instrument meant to count coins was never built to weigh a human
-    heart. You''ll learn what it feels like to let the number be true without letting
-    it be a judgment, to set your worth on one side of the scale and your debt on
-    the other and watch them refuse to balance, because they were never the same kind
-    of thing. You''ll find that the defect you''ve been covering was never a defect.
-    It was a fair person, in a hard season, carrying a weight alone.
-
-
-    This book will not promise to erase the number or optimize your way to enough.
-    It won''t tell you that money doesn''t matter or that a better mindset would make
-    the shortfall disappear. The pressure is real, and so is the grief of it, and
-    you deserve a book that respects both instead of papering over them.
-
-
-    What it offers is the one thing the hiding has cost you: relief. A way to weigh
-    your worth on its own terms, apart from the ledger. Permission to stop overworking
-    the cover story and let the truth weigh exactly what it weighs — no more, and
-    not a feather more than that.
-
-
-    You are not the number. You never were. Let''s set it down where you can finally
-    look at it without flinching.
-
-
-    Book 3 of the Feather & Scale Press financial stress series.'
+  short_blurb: ''
+  long_description: ''
 keywords:
-  primary:
-  - money shame and self worth
-  - financial shame help
-  - feeling like a failure about money
-  - debt shame anxiety
-  - secret money problems
-  - self worth and finances
-  - embarrassed about money
-  secondary:
-  - overcoming financial shame
-  - money guilt women
-  - hiding debt from others
-bisac_codes:
-- SEL036000
-- SEL031000
-- SEL024000
+  primary: []
+  secondary: []
+bisac_codes: []
 target_price:
   ebook_usd: 4.99
   audible_usd: 9.99
@@ -92,11 +29,6 @@ author_positioning:
   teacher: maat
   brand: heart_balance
   byline_author: ravi_iverson
-comp_titles:
-- The Gifts of Imperfection (Brené Brown) — the definitive work on shame and worthiness,
-  focused here on the specific shame of money.
-- Daring Greatly (Brené Brown) — names the armor we build over not-enough-ness, brought
-  to the hidden ledger of personal finance.
-- We Should All Be Millionaires (Rachel Rodgers) — meets the woman who undercharges
-  and overgives, here at the emotional root rather than the income strategy.
-_needs_authoring: false
+comp_titles: []
+plan_source_path: /tmp/catalog_heart_balance/heart_balance.csv
+_needs_authoring: true

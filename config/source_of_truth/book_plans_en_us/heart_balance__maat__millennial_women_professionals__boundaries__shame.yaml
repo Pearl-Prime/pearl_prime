@@ -1,7 +1,8 @@
 book_plan_schema: 1.0.0
+created_at: '2026-06-26'
 book_id: heart_balance__maat__millennial_women_professionals__boundaries__shame
-series_plan: config/source_of_truth/series_plans_en_us/heart_balance__maat__millennial_women_professionals__boundaries.yaml
-installment_number: 2
+series_plan: /tmp/catalog_heart_balance/series/heart_balance__maat__millennial_women_professionals__boundaries.yaml
+installment_number: 4
 engine: shame
 duration: standard_book_60min
 runtime_format_id: standard_book_60min
@@ -10,75 +11,16 @@ target_word_range:
 - 9000
 - 12000
 target_audio_minutes: 70
-title: The Good One
-subtitle: For the woman who keeps the peace because she's afraid of what she'd be
-  without it — when a boundary feels like proof you're selfish
-cover_tagline: If you stop giving, who will you turn out to be?
+title: 'Boundaries: Shame'
+subtitle: A guide for Millennial Women Professionals
+cover_tagline: ''
 description:
-  short_blurb: 'Underneath every yes you didn''t mean is a quiet belief: that your
-    worth is the giving, and a boundary would expose you as the selfish, too-much,
-    never-enough person you''ve worked your whole life to outrun. This is a book about
-    that belief. It won''t argue you out of the shame. It will help you set it on
-    the scale and see, finally, how little it actually weighs.'
-  long_description: 'You drew a line once — small, reasonable, fair — and the feeling
-    that followed wasn''t relief. It was a flush of something hot and familiar: I''m
-    selfish. I''m difficult. I''m too much. So you took it back, smoothed it over,
-    made yourself easy again, and the feeling went quiet. That''s the trade you''ve
-    been making for years without naming it.
-
-
-    This book is for the woman everyone calls reliable, the one who became ''the good
-    one'' so early she can''t remember choosing it — the senior manager who absorbs
-    the extra work, the daughter and partner and friend who is always fine. Beneath
-    the competence is a belief you rarely say out loud: that there is something wrong
-    with you at the core, and that the giving is how you keep it covered. A boundary
-    doesn''t just feel uncomfortable. It feels like letting the cover slip.
-
-
-    On one side of the scale, a feather. On the other, the whole weight of being good
-    enough — and you have spent your life convinced you don''t measure up unless the
-    scale tips toward everyone else. Here you''ll come to recognize how shame and
-    boundaries are tangled: how ''no'' gets read as ''I am bad,'' how disappointing
-    someone feels like confirming a verdict that was passed on you long ago. You''ll
-    see the difference between guilt, which is about a thing you did, and shame, which
-    whispers that the thing you are is the problem. You''ll learn to hear that whisper
-    without believing it.
-
-
-    This book will not optimize you. It will not promise that one reframe will lift
-    a lifetime of feeling like the defect in the room, or that you''ll wake up Tuesday
-    finally believing you''re allowed to take. There is no fix here, because you were
-    never broken in the way the shame insists. What there is, instead, is recognition
-    — the relief of seeing the belief clearly enough that it stops running the whole
-    show from the dark.
-
-
-    You do not have to keep over-giving to earn a place you already have. Your worth
-    was never the thing you do for people. It is not on the scale at all.
-
-
-    The good one was always allowed to want something. She just never let herself
-    find out.
-
-
-    Book 2 of the Feather & Scale Press boundaries series.'
+  short_blurb: ''
+  long_description: ''
 keywords:
-  primary:
-  - shame and people pleasing
-  - self worth and boundaries
-  - fear of being selfish
-  - boundaries for women
-  - codependency recovery
-  - stop people pleasing book
-  - good girl conditioning
-  secondary:
-  - healing shame
-  - boundaries for working women
-  - self compassion for over givers
-bisac_codes:
-- SEL027000
-- SEL031000
-- SOC028000
+  primary: []
+  secondary: []
+bisac_codes: []
 target_price:
   ebook_usd: 4.99
   audible_usd: 9.99
@@ -87,11 +29,6 @@ author_positioning:
   teacher: maat
   brand: heart_balance
   byline_author: theo_bello
-comp_titles:
-- Set Boundaries, Find Peace (Nedra Glover Tawwab) — the relational-boundaries standard;
-  this book digs beneath to the shame that makes 'no' feel like a confession
-- The Gifts of Imperfection (Brené Brown) — the canonical work on shame and worth,
-  narrowed here to the single act of drawing a line
-- The Book of Boundaries (Melissa Urban) — direct and practical; this is its inner
-  companion for the woman who feels selfish the moment she tries
-_needs_authoring: false
+comp_titles: []
+plan_source_path: /tmp/catalog_heart_balance/heart_balance.csv
+_needs_authoring: true

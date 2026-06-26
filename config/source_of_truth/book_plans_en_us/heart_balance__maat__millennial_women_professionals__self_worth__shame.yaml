@@ -1,6 +1,7 @@
 book_plan_schema: 1.0.0
+created_at: '2026-06-26'
 book_id: heart_balance__maat__millennial_women_professionals__self_worth__shame
-series_plan: config/source_of_truth/series_plans_en_us/heart_balance__maat__millennial_women_professionals__self_worth.yaml
+series_plan: /tmp/catalog_heart_balance/series/heart_balance__maat__millennial_women_professionals__self_worth.yaml
 installment_number: 1
 engine: shame
 duration: standard_book_60min
@@ -10,78 +11,16 @@ target_word_range:
 - 9000
 - 12000
 target_audio_minutes: 70
-title: The Weight You Carry Into Every Room
-subtitle: For the high-achieving woman who is sure that if anyone looked closely,
-  they'd find the flaw she's been overworking to hide
-cover_tagline: You didn't build a career. You built a case for why you're allowed
-  to stay.
+title: 'Self Worth: Shame'
+subtitle: A guide for Millennial Women Professionals
+cover_tagline: ''
 description:
-  short_blurb: Somewhere along the way you decided that something was wrong with you,
-    and you've been outrunning it ever since — through promotions, late nights, and
-    a competence no one can fault. This is a book for the woman who is praised constantly
-    and believed by no part of herself. It will not tell you you're enough; it will
-    help you set down the proof you keep trying to assemble.
-  long_description: 'There is a moment, usually in a glass-walled room full of people
-    who respect you, when you feel it again: the quiet certainty that you don''t actually
-    belong here, and that it''s only a matter of time before someone notices. You
-    smile, you contribute, you are excellent. And underneath the excellence runs a
-    current that never switches off — the sense that you are managing a flaw, covering
-    a defect, holding a shape so no one sees what''s behind it.
-
-
-    This book is for the woman who achieves to survive. The one whose résumé is a
-    case she keeps building, whose standards are merciless, whose late nights aren''t
-    ambition but defense. You don''t think you''re better than everyone. You think
-    you''re worse, and you''ve gotten very good at hiding it. The praise lands on
-    the cover story and never reaches you.
-
-
-    We''re going to look at that weight honestly. Not to make you drop it all at once
-    — it kept you safe, and that deserves respect — but to set it on a scale. To feel
-    how heavy it has actually become, and how much of your life is spent carrying
-    it into every room. You''ll come to recognize the buried belief underneath the
-    overworking: not ''I haven''t done enough'' but ''there is something wrong with
-    me, and effort is how I keep it covered.'' You''ll see why the proving can never
-    finish, why no achievement settles the account, why the verdict you keep appealing
-    was passed by a younger version of you who didn''t have the full picture.
-
-
-    This isn''t exposure therapy or a worksheet or a morning routine. It''s recognition,
-    descent, and the slow work of letting your own weight be held — on a commute,
-    between meetings, in the few honest minutes before sleep. We''ll move through
-    the cost of the cover story, the somatic places shame actually lives, and what
-    it feels like to be seen with nothing held in front of you.
-
-
-    What this book will not do is fix you, because you were never broken. It won''t
-    make you more impressive, tip the scale in your favor, or hand you an affirmation
-    to recite at the mirror. It refuses to win the argument that you''re defective
-    by simply arguing the other side. That argument was always rigged.
-
-
-    What it offers instead is fairer: a place to set the proof down. To stop weighing
-    your whole self against a single old verdict, and discover how little that verdict
-    actually holds when you put it on an honest scale. You don''t have to earn your
-    way out of shame. You have to stop agreeing with it.
-
-
-    Book 1 of the Feather & Scale Press self worth series.'
+  short_blurb: ''
+  long_description: ''
 keywords:
-  primary:
-  - self worth book for women
-  - imposter syndrome women
-  - overcoming shame
-  - feeling not good enough
-  - high achieving women self esteem
-  - self compassion for perfectionists
-  - inner critic
-  secondary:
-  - worthiness
-  - shame and self worth
-  - professional women self acceptance
-bisac_codes:
-- SEL027000
-- SEL031000
+  primary: []
+  secondary: []
+bisac_codes: []
 target_price:
   ebook_usd: 4.99
   audible_usd: 9.99
@@ -90,11 +29,6 @@ author_positioning:
   teacher: maat
   brand: heart_balance
   byline_author: yara_tam
-comp_titles:
-- The Gifts of Imperfection (Brené Brown) — names shame and worthiness directly for
-  the high-functioning reader, in a warm voice.
-- Radical Acceptance (Tara Brach) — the body-aware approach to the felt sense that
-  something is wrong with you.
-- Daring Greatly (Brené Brown) — for readers who hide behind competence to avoid being
-  seen and want that defense understood, not shamed.
-_needs_authoring: false
+comp_titles: []
+plan_source_path: /tmp/catalog_heart_balance/heart_balance.csv
+_needs_authoring: true

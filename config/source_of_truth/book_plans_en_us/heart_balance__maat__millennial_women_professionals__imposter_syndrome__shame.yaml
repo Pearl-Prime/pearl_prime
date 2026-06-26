@@ -1,7 +1,8 @@
 book_plan_schema: 1.0.0
+created_at: '2026-06-26'
 book_id: heart_balance__maat__millennial_women_professionals__imposter_syndrome__shame
-series_plan: config/source_of_truth/series_plans_en_us/heart_balance__maat__millennial_women_professionals__imposter_syndrome.yaml
-installment_number: 1
+series_plan: /tmp/catalog_heart_balance/series/heart_balance__maat__millennial_women_professionals__imposter_syndrome.yaml
+installment_number: 5
 engine: shame
 duration: standard_book_60min
 runtime_format_id: standard_book_60min
@@ -10,77 +11,16 @@ target_word_range:
 - 9000
 - 12000
 target_audio_minutes: 70
-title: Bracing for the Day They See Through You
-subtitle: For the accomplished woman certain her competence is a cover about to slip
-cover_tagline: You didn't fake your way in. You've just never let yourself feel the
-  weight of what you actually carried.
+title: 'Imposter Syndrome: Shame'
+subtitle: A guide for Millennial Women Professionals
+cover_tagline: ''
 description:
-  short_blurb: You got the role, the raise, the responsibility — and somewhere underneath
-    it lives the quiet certainty that you tricked everyone and the day of reckoning
-    is coming. This is a book for the woman who reads her own credentials looking
-    for the lie. It won't tell you to own your power. It will, finally, weigh the
-    truth of you fairly enough that the fraud you're so sure you are can't survive
-    the measuring.
-  long_description: 'It usually arrives in a quiet moment. You''re rereading the offer,
-    the praise, the thank-you note, and instead of pride you feel the floor tilt —
-    a certainty, cold and specific, that you fooled them. That you are not the person
-    they think they hired. That it is only a matter of time before someone looks closely
-    and sees the fraud you''ve been all along.
-
-
-    This book is for the woman who has built a real career on top of that fear and
-    never once let herself stand on it. You are competent — measurably, provably so.
-    And underneath the competence sits a belief you can''t disprove: that something
-    is wrong with you, that the achievements are a costume, that if you ever stopped
-    overworking the whole thing would come apart and they would finally see.
-
-
-    Shame is the weight that bears down here, and it is a particular kind. Not the
-    loud guilt of having done something wrong, but the buried conviction that you
-    are something wrong — a defect you cover with output, with preparation, with being
-    the one who never drops anything. You''ll come to recognize the way you turn every
-    success into evidence of luck, and every mistake into proof of the defect. The
-    way ''they''ll find out'' is never followed by what, exactly, they''ll find. The
-    way you''ve been carrying the heaviest thing in the room and calling yourself
-    weak for it.
-
-
-    In the spirit of Feather & Scale Press, nothing here weighs you against who you
-    should be. It sets the real, documented weight of what you''ve actually done on
-    one side, and the fear that you faked it on the other, and holds them honestly
-    until they balance. That is the whole work. Not to win an argument with the fear.
-    To let your competence and your terror finally occupy the same body without one
-    erasing the other.
-
-
-    This is not a confidence book. It will not coach you to own the room, fake it
-    till you make it, or affirm the doubt away. It makes no promise to fix you, because
-    you are not, in fact, broken — and a book that fixed you would have to agree that
-    you were. What it offers instead is the rarer thing: to be seen as both accomplished
-    and afraid, and treated as neither a fraud nor a failure for being both.
-
-
-    You are allowed to set the secret down on the scale and look at it in the light.
-    You may find it weighs less than the years you spent hiding it.
-
-
-    Book 1 of the Feather & Scale Press imposter syndrome series.'
+  short_blurb: ''
+  long_description: ''
 keywords:
-  primary:
-  - imposter syndrome books for women
-  - imposter syndrome at work
-  - self worth and shame
-  - feeling like a fraud at work
-  - high achieving women self doubt
-  - overcoming shame and self doubt
-  - imposter syndrome professional women
-  secondary:
-  - women in the workplace confidence
-  - fear of being found out at work
-bisac_codes:
-- SEL036000
-- SEL024000
-- SEL031000
+  primary: []
+  secondary: []
+bisac_codes: []
 target_price:
   ebook_usd: 4.99
   audible_usd: 9.99
@@ -89,11 +29,6 @@ author_positioning:
   teacher: maat
   brand: heart_balance
   byline_author: kira_bramble
-comp_titles:
-- The Gifts of Imperfection (Brené Brown) — the foundational text on shame and worthiness
-  this book applies to the corner-office fear of being exposed
-- The Secret Thoughts of Successful Women (Valerie Young) — the definitive imposter-syndrome
-  book for accomplished professionals, focused here through the lens of shame
-- Daring Greatly (Brené Brown) — same insistence that hiding the defect costs more
-  than the defect, pitched to the high-achiever who armors with overwork
-_needs_authoring: false
+comp_titles: []
+plan_source_path: /tmp/catalog_heart_balance/heart_balance.csv
+_needs_authoring: true

@@ -1,7 +1,8 @@
 book_plan_schema: 1.0.0
+created_at: '2026-06-26'
 book_id: heart_balance__maat__millennial_women_professionals__imposter_syndrome__comparison
-series_plan: config/source_of_truth/series_plans_en_us/heart_balance__maat__millennial_women_professionals__imposter_syndrome.yaml
-installment_number: 2
+series_plan: /tmp/catalog_heart_balance/series/heart_balance__maat__millennial_women_professionals__imposter_syndrome.yaml
+installment_number: 9
 engine: comparison
 duration: standard_book_60min
 runtime_format_id: standard_book_60min
@@ -10,80 +11,16 @@ target_word_range:
 - 9000
 - 12000
 target_audio_minutes: 70
-title: The Only One Who Had to Sneak In
-subtitle: For the woman certain every colleague earned the seat she is sure she faked
-  her way into
-cover_tagline: You keep weighing yourself against people you only see from the outside.
-  No wonder the scale never balances.
+title: 'Imposter Syndrome: Comparison'
+subtitle: A guide for Millennial Women Professionals
+cover_tagline: ''
 description:
-  short_blurb: 'You walk into the meeting, the conference, the leadership offsite,
-    and run the same silent audit: everyone here seems to belong, to know, to deserve
-    it — and you snuck in. This is a book for the woman who measures her unfinished
-    inside against everyone else''s polished outside. It won''t help you win the comparison.
-    It will show you that you''ve been weighing two things that were never on the
-    same scale.'
-  long_description: 'You can feel it the moment you walk in. The room is full of people
-    who seem to belong here — easy, credentialed, sure of themselves in a way you
-    have never once felt from the inside. And there you are, running the audit you
-    always run: she''s smarter, he''s more senior, they all clearly deserve to be
-    here, and you got in by some clerical error no one''s noticed yet.
-
-
-    This book is for the woman who is, by every external measure, one of those people
-    in the room — and who has never managed to count herself among them. Your accomplishments
-    are real. So is the gap you feel between yourself and everyone who looks calm
-    and certain and finished. You are comparing your private, unedited interior —
-    the doubt, the scramble, the parts still under construction — against the smooth
-    public surface of people you only ever see from the outside. And you lose every
-    time, because the comparison was never fair to begin with.
-
-
-    Comparison is the weight that tips the scale here, and it never stops dropping
-    into the pan. You''ll come to recognize the way you scan a room for who outranks
-    you and find them instantly. The way another woman''s success registers not as
-    possibility but as proof of your own insufficiency. The way you can hold genuine
-    admiration for a colleague and a quiet certainty that her presence diminishes
-    yours, in the very same breath. The way the measuring never stops, never satisfies,
-    and never once tells you anything true about your own weight.
-
-
-    In the spirit of Feather & Scale Press, this is not about learning to come out
-    ahead. It''s about noticing that you''ve been setting your messy, complete, fully-felt
-    inner life on one pan of the scale and a stranger''s highlight reel on the other
-    — and calling the result a verdict on your worth. The work is to take your worth
-    off that scale entirely. To stop weighing what you are against what they appear
-    to be.
-
-
-    Nothing here will help you win. That is the point. There is no version of the
-    comparison where you finally measure up and the feeling resolves, because the
-    feeling was never about the measurement. This book makes no promise to make you
-    the most confident woman in the room, or to talk you into belonging. It offers
-    instead the quieter relief of stepping off the scale: the recognition that you
-    were never behind, only weighing your worth against the wrong thing.
-
-
-    You are allowed to belong here without proving you outrank anyone. You already
-    weigh enough. You always did.
-
-
-    Book 2 of the Feather & Scale Press imposter syndrome series.'
+  short_blurb: ''
+  long_description: ''
 keywords:
-  primary:
-  - imposter syndrome and comparison
-  - comparing yourself to others at work
-  - imposter syndrome books for women
-  - feeling not good enough at work
-  - self comparison and self worth
-  - imposter syndrome professional women
-  - stop comparing yourself to others
-  secondary:
-  - confidence for women in the workplace
-  - feeling behind in your career
-bisac_codes:
-- SEL036000
-- SEL024000
-- SEL031000
+  primary: []
+  secondary: []
+bisac_codes: []
 target_price:
   ebook_usd: 4.99
   audible_usd: 9.99
@@ -92,11 +29,6 @@ author_positioning:
   teacher: maat
   brand: heart_balance
   byline_author: kira_bramble
-comp_titles:
-- The Comparison Cure (Lucy Sheridan) — the dedicated book on compare-and-despair,
-  brought here to the specific arena of the high-achieving professional woman
-- The Secret Thoughts of Successful Women (Valerie Young) — names the imposter patterns
-  of accomplished women, focused here through relentless social comparison
-- The Let Them Theory (Mel Robbins) — same reader measuring herself against everyone
-  else, met with honest weighing rather than a directive to let go
-_needs_authoring: false
+comp_titles: []
+plan_source_path: /tmp/catalog_heart_balance/heart_balance.csv
+_needs_authoring: true

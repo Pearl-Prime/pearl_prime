@@ -1,6 +1,7 @@
 book_plan_schema: 1.0.0
+created_at: '2026-06-26'
 book_id: heart_balance__maat__millennial_women_professionals__self_worth__comparison
-series_plan: config/source_of_truth/series_plans_en_us/heart_balance__maat__millennial_women_professionals__self_worth.yaml
+series_plan: /tmp/catalog_heart_balance/series/heart_balance__maat__millennial_women_professionals__self_worth.yaml
 installment_number: 2
 engine: comparison
 duration: standard_book_60min
@@ -10,80 +11,16 @@ target_word_range:
 - 9000
 - 12000
 target_audio_minutes: 70
-title: Her Plate Looks Lighter From Across the Room
-subtitle: For the woman weighing her own full load against everyone who seems to carry
-  less
-cover_tagline: You carry one scale everywhere, and you only ever weigh yourself against
-  everyone else.
+title: 'Self Worth: Comparison'
+subtitle: A guide for Millennial Women Professionals
+cover_tagline: ''
 description:
-  short_blurb: Her promotion, her ease in the meeting, the way they all seem so sure
-    — and there you are, doing the silent math that always ends with you behind. This
-    is a book for the woman who measures herself against everyone who looks like they've
-    got it figured out and never once comes out ahead. It won't help you win the comparison.
-    That's the point.
-  long_description: 'You scroll, or you sit in the meeting, or you hear about her
-    new role, and something in you starts running the numbers before you can stop
-    it. She seems so certain. They all seem so settled. And you — capable, accomplished,
-    the one others come to — are doing the quiet arithmetic again, the kind that always
-    lands you a little behind, a little less, not quite there. The scoreboard is invisible
-    to everyone but you, and it never closes.
-
-
-    This book is for the woman who turned a sharp, careful mind into a scale for her
-    own worth, and then set it against the one comparison it can never win: herself,
-    beside everyone who looks calm and finished. You''re not vain. You barely register
-    your wins before the comparison resets the count. You assume the gap is real,
-    that they have something you lack, that everyone else got a manual you missed.
-
-
-    We''re going to set that scale down and look at it. Not the people you measure
-    against — the act of measuring itself. You''ll come to recognize that comparison
-    isn''t information; it''s a defense, an old way of locating yourself by where
-    you rank instead of asking who you are. You''ll see how the weighing is rigged:
-    you put your full inner mess on one side and their visible, edited surface on
-    the other, and call the mismatch proof. You''ll feel where the comparing lives
-    in the body — the bracing, the flush, the subtle collapse — and why it can never
-    deliver the security it promises, because the moment you''re ahead, the scale
-    just finds someone new.
-
-
-    This isn''t a confidence program or a worksheet or a digital-detox plan. It''s
-    recognition, descent, and integration — work that fits in the cracks of a real
-    life: a commute, the walk between buildings, the minute before you open the app
-    again. We''ll move through the cost of the scoreboard, the hidden belief it protects,
-    and what it''s like to stand in a room without ranking yourself in it.
-
-
-    What this book will not do is help you win. It won''t make you more impressive
-    than her, tip the scale your way, or hand you an affirmation about your own specialness
-    — because that''s just the same scale, leaning your direction for an afternoon.
-    The weighing itself is the problem.
-
-
-    What it offers is steadier ground: a way to know your own weight without borrowing
-    a scale from anyone else. To let your worth be a settled thing rather than a verdict
-    re-litigated every time someone else looks like they''ve figured it out. You will
-    not come out ahead. You''ll come out level — and finally able to set the scale
-    down.
-
-
-    Book 2 of the Feather & Scale Press self worth series.'
+  short_blurb: ''
+  long_description: ''
 keywords:
-  primary:
-  - comparison and self worth
-  - stop comparing yourself to others
-  - self worth book for women
-  - social comparison anxiety
-  - self esteem for professional women
-  - feeling behind in life
-  - self compassion book
-  secondary:
-  - worthiness
-  - comparison trap
-  - millennial women self acceptance
-bisac_codes:
-- SEL027000
-- SEL031000
+  primary: []
+  secondary: []
+bisac_codes: []
 target_price:
   ebook_usd: 4.99
   audible_usd: 9.99
@@ -92,11 +29,6 @@ author_positioning:
   teacher: maat
   brand: heart_balance
   byline_author: yara_tam
-comp_titles:
-- The Gifts of Imperfection (Brené Brown) — names worthiness as something you stop
-  earning, not a score you win.
-- The Comparison Cure (Lucy Sheridan) — directly addresses the habit of measuring
-  yourself against everyone else.
-- Radical Acceptance (Tara Brach) — the body-aware path out of locating your worth
-  in where you rank.
-_needs_authoring: false
+comp_titles: []
+plan_source_path: /tmp/catalog_heart_balance/heart_balance.csv
+_needs_authoring: true
