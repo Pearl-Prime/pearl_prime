@@ -163,6 +163,19 @@ runtime_formats:
     # budget yields richer chapters at the ~9000w target. Renumbered 1..8 after subset.
     compact_chapter_subset: [1, 3, 4, 6, 7, 9, 10, 12]
 
+
+  standard_book_60min:
+    chapter_count_default: 10
+    word_range: [9000, 12000]
+    fill_regime: midpoint  # stays at ~10,500w midpoint (9k–12k); avoids standard_book's cap-fill to 22k
+    audiobook_minutes: 70  # DERIVED round(10500/150); word_target=midpoint(9000,12000)=10500
+    ebook_minutes: 46      # DERIVED round(10500/230)
+    compatible_tiers: [A, B]
+    compatible_structural_formats: [F006, F007, F010, F011, F014]
+    # Full 12-chapter spine (no compact_chapter_subset). Narrow 60-70 min / 9k-12k target.
+    # 5,722 book plans declare this runtime_format_id. batch_waystream_epubs.py already
+    # aliases it to standard_book for EPUB release; registered here so load_runtime_format()
+    # does not KeyError during spine builds (fix for QA finding 2026-06-26).
   standard_book:
     duration_minutes: 147  # DEPRECATED — superseded by audiobook_minutes/ebook_minutes (DURATION-DERIVATION-01). Do not hand-edit; readers migrate per follow-up. Overwritten with derived audiobook value (was 55 — the historically wrong label; real audiobook ~143min/2h23m at 150 WPM per PR #1510 audit f27dafdb2).
     chapter_count_default: 10  # AUTO-PLAN-SSOT-01-AMENDMENT Group B: was 12; Python value 10 preserved (most consequential — default canonical book runtime)

@@ -1,7 +1,7 @@
 book_plan_schema: 1.0.0
 created_at: '2026-06-26'
 book_id: gentle_growth__default_teacher__gen_x_sandwich__imposter_syndrome__grief__1hr
-series_plan: /tmp/catalog_gentle_growth/series/gentle_growth__default_teacher__gen_x_sandwich__imposter_syndrome.yaml
+series_plan: config/source_of_truth/series_plans_en_us/gentle_growth__default_teacher__gen_x_sandwich__imposter_syndrome.yaml
 installment_number: 6
 engine: grief
 duration: one_hour_book
@@ -30,5 +30,5 @@ author_positioning:
   brand: gentle_growth
   byline_author: pia_estes
 comp_titles: []
-plan_source_path: /tmp/catalog_gentle_growth/gentle_growth.csv
+plan_source_path: /tmp/gentle_growth_catalog.csv
 _needs_authoring: true
