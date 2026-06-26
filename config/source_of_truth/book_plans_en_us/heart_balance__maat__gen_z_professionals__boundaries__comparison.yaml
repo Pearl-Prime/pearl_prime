@@ -1,7 +1,8 @@
 book_plan_schema: 1.0.0
+created_at: '2026-06-26'
 book_id: heart_balance__maat__gen_z_professionals__boundaries__comparison
-series_plan: config/source_of_truth/series_plans_en_us/heart_balance__maat__gen_z_professionals__boundaries.yaml
-installment_number: 3
+series_plan: /tmp/catalog_heart_balance/series/heart_balance__maat__gen_z_professionals__boundaries.yaml
+installment_number: 5
 engine: comparison
 duration: standard_book_60min
 runtime_format_id: standard_book_60min
@@ -10,78 +11,16 @@ target_word_range:
 - 9000
 - 12000
 target_audio_minutes: 70
-title: Everyone Else Seems to Have No Problem Saying No
-subtitle: For the early-career over-giver who measures their leaky boundaries against
-  everyone who looks effortlessly firm — and always comes up the weak one
-cover_tagline: They make the line look easy, and you make it mean something is wrong
-  with you.
+title: 'Boundaries: Comparison'
+subtitle: A guide for Gen Z Professionals
+cover_tagline: ''
 description:
-  short_blurb: 'You watch a coworker decline a meeting in one sentence, a friend leave
-    the group trip without apologizing for it, and you think: why is this so easy
-    for everyone but me? This is a book for the person who measures their own porous
-    boundaries against everyone who looks effortlessly firm. It will not help you
-    win that comparison. That is the point.'
-  long_description: 'Someone in your feed posts about ''protecting their peace'' and
-    means it. A colleague says ''that doesn''t work for me'' and the world keeps turning.
-    A friend cancels without a paragraph of apology attached. And you sit there with
-    your three drafts and your racing chest, doing the math you always do: everyone
-    else has figured this out, and you''re the one still saying yes to things you
-    resent, still bad at the one thing that seems to come free to everyone around
-    you.
-
-
-    This book is for you: early in your career, quietly keeping score, certain that
-    everyone else got an instruction manual for limits that you somehow missed. You
-    scroll through the calm, firm, well-boundaried people and you don''t see your
-    own private cost-benefit panic reflected back — so you assume it isn''t there.
-    You measure your messy insides against their edited outsides and the scale always
-    tips the same way: them, capable; you, weak. The comparison feels like information.
-    It''s only ever a distortion.
-
-
-    What you''ll come to recognize, chapter by chapter, is the rigged nature of that
-    measurement. How you compare your unspoken dread to other people''s visible composure
-    and call the gap a personal failing. How ''they make it look so easy'' tells you
-    nothing about what it cost them to learn — or whether they''re quietly drowning
-    too. How comparison is a scale with its thumb pressed down, always weighing your
-    whole trembling interior against someone else''s two-second exterior. This book
-    sits you back down at your own fulcrum and asks you to stop weighing yourself
-    against strangers and start weighing what a single honest no would actually cost
-    you, here, in your one real life.
-
-
-    This book will not help you become the most boundaried person in the room. It
-    won''t optimize your limits or turn you into someone who declines without a flicker.
-    There is no winning the comparison, and chasing the win is the trap itself — because
-    the goal was never to out-firm everyone. The goal is to come off the scale entirely.
-    What it offers instead is recognition: the ability to catch yourself mid-measurement
-    and set the comparison down, so the next time someone makes the line look effortless,
-    you don''t hand them your sense of worth to hold.
-
-
-    You are allowed to be learning this slowly. You are allowed to grieve the ease
-    you imagine everyone else was born with — and to stop using it as the ruler for
-    your own days. Nothing here will help you win. That''s the gift.
-
-
-    Book 3 of the Feather & Scale Press boundaries series.'
+  short_blurb: ''
+  long_description: ''
 keywords:
-  primary:
-  - boundaries book
-  - comparing yourself to others
-  - stop comparing yourself
-  - people pleasing recovery
-  - how to say no without guilt
-  - self comparison and self worth
-  - boundaries for young professionals
-  secondary:
-  - gen z self help
-  - comparison and boundaries
-  - social media comparison
-bisac_codes:
-- SEL040000
-- FAM046000
-- SEL031000
+  primary: []
+  secondary: []
+bisac_codes: []
 target_price:
   ebook_usd: 4.99
   audible_usd: 9.99
@@ -90,11 +29,6 @@ author_positioning:
   teacher: maat
   brand: heart_balance
   byline_author: theo_bello
-comp_titles:
-- Set Boundaries, Find Peace (Nedra Glover Tawwab) — anchors the boundary work this
-  book frames through comparison, with the same fair-minded weighing.
-- Daring Greatly (Brené Brown) — on the scarcity and 'never enough' culture that fuels
-  this book's measuring, from a fair-minded voice.
-- The Mountain Is You (Brianna Wiest) — a young, introspective bestseller on self-sabotage
-  and worth that matches this book's reflective register.
-_needs_authoring: false
+comp_titles: []
+plan_source_path: /tmp/catalog_heart_balance/heart_balance.csv
+_needs_authoring: true

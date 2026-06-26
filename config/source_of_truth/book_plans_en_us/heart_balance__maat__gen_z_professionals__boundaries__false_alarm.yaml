@@ -1,6 +1,7 @@
 book_plan_schema: 1.0.0
+created_at: '2026-06-26'
 book_id: heart_balance__maat__gen_z_professionals__boundaries__false_alarm
-series_plan: config/source_of_truth/series_plans_en_us/heart_balance__maat__gen_z_professionals__boundaries.yaml
+series_plan: /tmp/catalog_heart_balance/series/heart_balance__maat__gen_z_professionals__boundaries.yaml
 installment_number: 1
 engine: false_alarm
 duration: standard_book_60min
@@ -10,74 +11,16 @@ target_word_range:
 - 9000
 - 12000
 target_audio_minutes: 70
-title: The Alarm Goes Off Before You Say No
-subtitle: For the early-career people-pleaser whose whole body braces the instant
-  a line needs drawing — and who can't yet name what they're so afraid of losing
-cover_tagline: Your body sounds the alarm, and there's no fire — only a request you're
-  allowed to refuse.
+title: 'Boundaries: False Alarm'
+subtitle: A guide for Gen Z Professionals
+cover_tagline: ''
 description:
-  short_blurb: Before the word 'no' even reaches your mouth, something in your chest
-    tightens and your stomach drops, as if you have already done something wrong.
-    This is a book for the people-pleaser whose alarm fires at the smallest boundary,
-    long before any real danger arrives. It will not teach you a script. It will show
-    you what that alarm is actually guarding.
-  long_description: 'Someone asks for one more thing. You feel it before you think
-    it — the held breath, the heat in your face, the small lurch that says you are
-    about to disappoint someone and the floor might give way. You haven''t said anything
-    yet. You haven''t even decided. But your body has already braced, as if refusing
-    were a kind of falling.
-
-
-    This book is for you: early in your career, capable on the outside, and quietly
-    run by an alarm that goes off every time a limit needs drawing. The colleague
-    who ''just'' needs a favor. The group chat waiting on you. The friend whose ask
-    is small and whose disappointment feels enormous. You''ve learned to read the
-    alarm as proof of danger. It isn''t. It''s an old system firing in a room where
-    nothing is actually on fire.
-
-
-    What you''ll come to recognize, page by page, is the shape of that false alarm.
-    How the body braces before the mind catches up. How the dread you feel is real
-    even when the threat is not. How ''I can''t say no'' is rarely about the other
-    person and almost always about what you believe will happen to you if you do —
-    that you''ll be too much, not enough, suddenly unwanted. The book sits you down
-    at your own scale and asks you to weigh, honestly, what the yes costs you against
-    the disappointment the no would cost someone else. Not to make the no easy. To
-    make it fair.
-
-
-    This book will not promise to switch the alarm off. It won''t optimize your boundaries
-    or hand you five lines to memorize for hard conversations. There is no fixing
-    here, because you are not broken — you are well-defended, by a system that once
-    kept you safe and now goes off at the wrong things. What it offers instead is
-    recognition: the ability to feel the alarm rise and know its name, so the next
-    time your chest tightens before a no, you are no longer alone in the room with
-    it.
-
-
-    You are allowed to feel afraid and still draw the line. You are allowed to grieve
-    the disappointment you cause and not call it back. The line is permitted to cost
-    something — and still be yours to draw.
-
-
-    Book 1 of the Feather & Scale Press boundaries series.'
+  short_blurb: ''
+  long_description: ''
 keywords:
-  primary:
-  - how to set boundaries
-  - people pleasing recovery
-  - fear of saying no
-  - boundaries book for beginners
-  - healthy boundaries in relationships
-  - stop being a people pleaser
-  - boundaries at work
-  secondary:
-  - gen z self help
-  - boundaries for young professionals
-  - anxious people pleaser
-bisac_codes:
-- SEL040000
-- FAM046000
-- SEL031000
+  primary: []
+  secondary: []
+bisac_codes: []
 target_price:
   ebook_usd: 4.99
   audible_usd: 9.99
@@ -86,11 +29,6 @@ author_positioning:
   teacher: maat
   brand: heart_balance
   byline_author: theo_bello
-comp_titles:
-- Set Boundaries, Find Peace (Nedra Glover Tawwab) — the gold standard on limits without
-  shame, sharing this book's fair, non-judgmental weighing.
-- The Disease to Please (Harriet Braiker) — names the people-pleasing pattern at its
-  root, where this book stays in the body that braces first.
-- The Book of Boundaries (Melissa Urban) — direct and script-rich, the practical layer
-  above this book's somatic recognition work.
-_needs_authoring: false
+comp_titles: []
+plan_source_path: /tmp/catalog_heart_balance/heart_balance.csv
+_needs_authoring: true
