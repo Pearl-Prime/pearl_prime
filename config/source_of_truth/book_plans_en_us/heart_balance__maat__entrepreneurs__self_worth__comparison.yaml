@@ -1,8 +1,8 @@
 book_plan_schema: 1.0.0
-created_at: '2026-04-24'
+created_at: '2026-06-26'
 book_id: heart_balance__maat__entrepreneurs__self_worth__comparison
-series_plan: config/source_of_truth/series_plans_en_us/heart_balance__maat__entrepreneurs__self_worth.yaml
-installment_number: 2
+series_plan: /tmp/catalog_heart_balance/series/heart_balance__maat__entrepreneurs__self_worth.yaml
+installment_number: 3
 engine: comparison
 duration: standard_book_60min
 runtime_format_id: standard_book_60min
@@ -11,37 +11,16 @@ target_word_range:
 - 9000
 - 12000
 target_audio_minutes: 70
-title: 'The Comparison Habit: How to Stop Freezing and Speak Up with Confidence'
-subtitle: For Founders
-cover_tagline: However well you do, someone is always further ahead.
+title: 'Self Worth: Comparison'
+subtitle: A guide for Entrepreneurs
+cover_tagline: ''
 description:
-  short_blurb: However well you do, someone is always further ahead. stop measuring my worth by outcomes.
-  long_description: |
-    However well you do, someone is always further ahead.
-
-    This book is for founder of a small companys who I always end up back at 'I'm not enough'. It doesn't promise to make the feeling stop. It names what's happening in language you can use the next time it happens.
-
-    Chapter by chapter, you'll work with the reflex that measures your worth against others, and what it costs to keep score. Not through exposure or worksheets or morning routines — through recognition, descent, and integration. The practice the book asks for can happen on a subway, between meetings, or at 3am.
-
-    You'll walk away knowing what your body is doing and why it makes sense. Not fixed. Not healed in any final sense. But no longer alone with the pattern.
-
-    Book 2 of the Heart Balance self worth series.
+  short_blurb: ''
+  long_description: ''
 keywords:
-  primary:
-  - self-worth
-  - self-esteem book
-  - enough
-  - self-compassion
-  - inner critic
-  - worthiness
-  - self-acceptance
-  secondary:
-  - entrepreneurs
-  - comparison self worth
-bisac_codes:
-- BUS025000
-- SEL027000
-- BUS081000
+  primary: []
+  secondary: []
+bisac_codes: []
 target_price:
   ebook_usd: 4.99
   audible_usd: 9.99
@@ -49,14 +28,7 @@ target_price:
 author_positioning:
   teacher: maat
   brand: heart_balance
-comp_titles:
-- The Gifts of Imperfection (Brown)
-- Radical Acceptance (Brach)
-- The Mountain Is You (Wiest)
-main_character_name: Serafina
-main_character_lora_id: serafina_hb_us
-confidence:
-  pricing: low
-  title: medium
-  comps: high
-plan_source_path: config/manga/manga_brand_series_plan.yaml
+  byline_author: yara_tam
+comp_titles: []
+plan_source_path: /tmp/catalog_heart_balance/heart_balance.csv
+_needs_authoring: true
