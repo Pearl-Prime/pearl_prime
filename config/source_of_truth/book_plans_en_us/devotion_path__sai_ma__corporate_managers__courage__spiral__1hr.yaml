@@ -1,7 +1,7 @@
 book_plan_schema: 1.0.0
 created_at: '2026-06-26'
 book_id: devotion_path__sai_ma__corporate_managers__courage__spiral__1hr
-series_plan: config/source_of_truth/series_plans_en_us/devotion_path__sai_ma__corporate_managers__courage.yaml
+series_plan: /tmp/catalog_devotion_path/series/devotion_path__sai_ma__corporate_managers__courage.yaml
 installment_number: 4
 engine: spiral
 duration: one_hour_book
@@ -30,5 +30,5 @@ author_positioning:
   brand: devotion_path
   byline_author: dora_alder
 comp_titles: []
-plan_source_path: /tmp/devotion_path_catalog.csv
+plan_source_path: /tmp/catalog_devotion_path/devotion_path.csv
 _needs_authoring: true

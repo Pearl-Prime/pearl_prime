@@ -1,8 +1,8 @@
 book_plan_schema: 1.0.0
-created_at: '2026-04-24'
+created_at: '2026-06-26'
 book_id: devotion_path__sai_ma__entrepreneurs__imposter_syndrome__comparison
-series_plan: config/source_of_truth/series_plans_en_us/devotion_path__sai_ma__entrepreneurs__imposter_syndrome.yaml
-installment_number: 2
+series_plan: /tmp/catalog_devotion_path/series/devotion_path__sai_ma__entrepreneurs__imposter_syndrome.yaml
+installment_number: 8
 engine: comparison
 duration: standard_book_60min
 runtime_format_id: standard_book_60min
@@ -11,37 +11,16 @@ target_word_range:
 - 9000
 - 12000
 target_audio_minutes: 70
-title: When Other People's Success Feels Like Your Failure
-subtitle: A Field Guide for Founders Navigating Imposter Syndrome
-cover_tagline: How to Stop Measuring Your Worth Against Others and Build Real Confidence
+title: 'Imposter Syndrome: Comparison'
+subtitle: A guide for Entrepreneurs
+cover_tagline: ''
 description:
-  short_blurb: How to Stop Measuring Your Worth Against Others and Build Real Confidence stop feeling like a fraud at work.
-  long_description: |
-    How to Stop Measuring Your Worth Against Others and Build Real Confidence
-
-    This book is for founder of a small companys who I'm going to be found out. It doesn't promise to make the feeling stop. It names what's happening in language you can use the next time it happens.
-
-    Chapter by chapter, you'll work with what the comparison trap really means in your body and mind, and how to work with it. Not through exposure or worksheets or morning routines — through recognition, descent, and integration. The practice the book asks for can happen on a subway, between meetings, or at 3am.
-
-    You'll walk away knowing what your body is doing and why it makes sense. Not fixed. Not healed in any final sense. But no longer alone with the pattern.
-
-    Book 2 of the Devotion Path imposter syndrome series.
+  short_blurb: ''
+  long_description: ''
 keywords:
-  primary:
-  - imposter syndrome
-  - self-doubt at work
-  - career confidence
-  - professional anxiety
-  - feeling like a fraud
-  - workplace impostor
-  secondary:
-  - entrepreneurs
-  - comparison imposter syndrome
-  - the comparison trap
-bisac_codes:
-- BUS025000
-- SEL027000
-- BUS081000
+  primary: []
+  secondary: []
+bisac_codes: []
 target_price:
   ebook_usd: 4.99
   audible_usd: 9.99
@@ -49,14 +28,7 @@ target_price:
 author_positioning:
   teacher: sai_ma
   brand: devotion_path
-comp_titles:
-- The Secret Thoughts of Successful Women (Young)
-- Playing Big (Mohr)
-- Daring Greatly (Brown)
-main_character_name: Saul
-main_character_lora_id: saul_dp_us
-confidence:
-  pricing: low
-  title: 'medium  # naming-engine generated (#1677); refine per series'
-  comps: high
-plan_source_path: config/manga/manga_brand_series_plan.yaml
+  byline_author: dora_alder
+comp_titles: []
+plan_source_path: /tmp/catalog_devotion_path/devotion_path.csv
+_needs_authoring: true
