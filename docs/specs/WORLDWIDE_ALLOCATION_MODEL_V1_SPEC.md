@@ -139,7 +139,7 @@ The manifest (§5) carries `status: blocked_open_flag` with a `flag` field for a
 
 **R7 — Japan manga-only 37-cell is isolated & unique.** Never reused into any other family/market. (§6)
 
-**R8 — Topic-fit gate precedes localization.** A canonical story is localized into a market only if its topic passes that market's topic-fit (`market_topic_fit.yaml`, §9 — **TBD, Prompt 3**). Topic-fit gaps are the **only** driver of net-new western authoring.
+**R8 — Topic-fit gate precedes localization.** A canonical story is localized into a market only if its topic passes that market's topic-fit (`config/catalog_planning/market_topic_fit.yaml`, §9). Topic-fit gaps are the **only** driver of net-new western authoring.
 
 ---
 
@@ -235,16 +235,16 @@ The **realistic** edition count is lower because not every topic fits every mark
 
 ### 9b. Net-new authoring — REQUIRED only for these three drivers
 
-1. **Topic-fit gaps (TBD — Prompt 3 dependency).** `config/catalog/market_topic_fit.yaml` **does not yet exist** (confirmed absent 2026-06-27). When it lands, net-new authoring for a market = stories needed to cover market-relevant topics that have **no** canonical en_US equivalent.
+1. **Topic-fit gaps.** `config/catalog_planning/market_topic_fit.yaml` (landed 2026-06-27 — where Prompt 3 wrote it). Net-new authoring for a market = stories needed to cover market-relevant topics that have **no** canonical en_US equivalent.
 
-   **Formula (fill when `market_topic_fit.yaml` lands):**
+   **Formula (from `config/catalog_planning/market_topic_fit.yaml`):**
    ```
    net_new_topic_fit = Σ_market  ( brands(market) × personas × formats
                                    × topics_market_only(market) )
    where topics_market_only(market) = topics relevant to market
                                       AND absent from the 17 canonical en_US topics.
    ```
-   Until the file exists: **TBD**. Expectation per the localize-don't-regenerate principle: **small** relative to S (most therapeutic topics are universal; the 17 canonical topics already cover the core).
+   Expectation per the localize-don't-regenerate principle: **small** relative to S (most therapeutic topics are universal; the 17 canonical topics already cover the core).
 
 2. **Manga % slice (per `lane_content_mix`).** Manga editions of canonical stories are **adaptations** (script + art), counted as net-new *production* even when the narrative is a localization. Per-market manga share from `catalog_generation_config.yaml::lane_content_mix` (operative SSOT): e.g. `ja_JP` manga = 0.40+0.20+0.10 = **0.70**; `ko_KR` ≈ 0.60; `zh_TW` ≈ 0.55; `en_US` ≈ 0.20; `fr_FR` ≈ 0.30; `_default` ≈ 0.15.
    ```
@@ -299,4 +299,4 @@ Sequence **Western-first** (Tier-1, attended, higher-revenue, fewest open flags)
 
 ## 12. Downstream
 
-This GATES **Prompt 5** (go-live execution). Prompt 3 must deliver `config/catalog/market_topic_fit.yaml` to close the §9b net-new TBD. The anti-spam gate (§8) must be built before any worldwide upload automation runs.
+This GATES **Prompt 5** (go-live execution). Prompt 3 delivered `config/catalog_planning/market_topic_fit.yaml` (landed 2026-06-27), closing the §9b net-new dependency. The anti-spam gate (§8) must be built before any worldwide upload automation runs. The manga slice of this model is specified in `docs/specs/MANGA_MARKET_INTEGRATION_V1_SPEC.md`.
