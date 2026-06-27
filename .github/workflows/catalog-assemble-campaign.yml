@@ -1,0 +1,227 @@
+# Cloud catalog EPUB assembly campaign — spine render → EPUB → R2 per brand.
+#
+# EPUBs (~1 MB each) NEVER commit to git. Only per-brand assembly manifest JSON
+# (artifacts/catalog/assembly_manifests/{brand}_{locale}.json) commits via plumbing PR.
+#
+# Runs ALONGSIDE catalog-fanout-campaign (localization YAML skeletons) — different
+# pipeline, different output (R2 EPUBs vs git plans). No collision.
+#
+# Default quality_profile=flagship (~90% pass; register advisory). production
+# strict-fails ~33% until assembly-P0 (ARC_POSITION + BookStructurePlan) lands.
+#
+# REQUIRES: CATALOG_PAT (manifest PRs) + R2_* secrets (upload).
+# Operator: pilot one brand with limit=5 before full fan-out. OPD-20260627-001.
+name: Catalog assemble — EPUB campaign
+
+on:
+  workflow_dispatch:
+    inputs:
+      brands:
+        description: "Space-separated brand archetype ids (default = all with pending buildable plans)"
+        required: false
+        default: ""
+        type: string
+      locale:
+        description: "Locale lane id"
+        required: false
+        default: en_US
+        type: string
+      quality_profile:
+        description: "Spine quality profile (flagship recommended for volume ramp)"
+        required: false
+        default: flagship
+        type: choice
+        options:
+          - flagship
+          - production
+          - draft
+      limit:
+        description: "Optional per-brand cap (pilot with 5 first)"
+        required: false
+        default: ""
+        type: string
+
+concurrency:
+  group: catalog-assemble-campaign
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  discover:
+    name: Discover brands with pending assembly
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.list.outputs.matrix }}
+      count: ${{ steps.list.outputs.count }}
+    steps:
+      - name: Guard — CATALOG_PAT must be set
+        env:
+          PAT: ${{ secrets.CATALOG_PAT }}
+        run: |
+          if [ -z "$PAT" ]; then
+            echo "::error::CATALOG_PAT secret is not set. Add a PAT (repo + workflow scope) named CATALOG_PAT, then re-run."
+            exit 1
+          fi
+          echo "CATALOG_PAT present."
+
+      - name: Guard — R2 secrets must be set
+        env:
+          R2_ACCOUNT_ID: ${{ secrets.R2_ACCOUNT_ID }}
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+        run: |
+          if [ -z "$R2_ACCOUNT_ID" ] || [ -z "$R2_ACCESS_KEY_ID" ] || [ -z "$R2_SECRET_ACCESS_KEY" ]; then
+            echo "::error::R2 secrets missing (R2_ACCOUNT_ID, R2_ACCESS_KEY_ID, R2_SECRET_ACCESS_KEY)."
+            exit 1
+          fi
+          echo "R2 secrets present."
+
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install deps
+        run: pip install --quiet pyyaml boto3
+
+      - name: Compute assembly matrix
+        id: list
+        env:
+          BRANDS_INPUT: ${{ github.event.inputs.brands }}
+          LOCALE: ${{ github.event.inputs.locale }}
+          R2_ACCOUNT_ID: ${{ secrets.R2_ACCOUNT_ID }}
+          R2_ENDPOINT: ${{ secrets.R2_ENDPOINT }}
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          R2_BUCKET: ${{ secrets.R2_BUCKET }}
+          PYTHONPATH: ${{ github.workspace }}
+        run: |
+          set -euo pipefail
+          ARGS=(--json-only --locale "${LOCALE:-en_US}")
+          if [ -n "${BRANDS_INPUT:-}" ]; then
+            ARGS+=(--brands "${BRANDS_INPUT}")
+          fi
+          python3 scripts/catalog/discover_assemble_campaign.py "${ARGS[@]}" > /tmp/matrix.json
+          COUNT="$(python3 -c 'import json;print(len(json.load(open("/tmp/matrix.json"))["include"]))')"
+          if [ "$COUNT" = "0" ]; then
+            echo "::warning::no brands with pending assembly — nothing to do."
+          fi
+          {
+            echo "matrix=$(cat /tmp/matrix.json)"
+            echo "count=${COUNT}"
+          } >> "$GITHUB_OUTPUT"
+          echo "Brands to assemble: ${COUNT}"
+          cat /tmp/matrix.json
+
+  assemble:
+    name: ${{ matrix.brand }} (${{ matrix.locale }}) assemble
+    needs: discover
+    if: ${{ needs.discover.outputs.count != '0' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    strategy:
+      max-parallel: 6
+      fail-fast: false
+      matrix: ${{ fromJson(needs.discover.outputs.matrix) }}
+    env:
+      GH_TOKEN: ${{ secrets.CATALOG_PAT }}
+      BRAND: ${{ matrix.brand }}
+      LOCALE: ${{ matrix.locale }}
+      QUALITY_PROFILE: ${{ github.event.inputs.quality_profile || 'flagship' }}
+      LIMIT: ${{ github.event.inputs.limit }}
+      R2_ACCOUNT_ID: ${{ secrets.R2_ACCOUNT_ID }}
+      R2_ENDPOINT: ${{ secrets.R2_ENDPOINT }}
+      R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+      R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+      R2_BUCKET: ${{ secrets.R2_BUCKET }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.CATALOG_PAT }}
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install deps
+        run: pip install --quiet pyyaml boto3 'ebooklib>=0.18'
+
+      - name: Batch assemble EPUBs → R2
+        env:
+          PYTHONPATH: ${{ github.workspace }}
+        run: |
+          set +e
+          ARGS=(--brand "$BRAND" --locale "$LOCALE" --quality-profile "$QUALITY_PROFILE" --resume)
+          if [ -n "${LIMIT:-}" ]; then
+            ARGS+=(--limit "$LIMIT")
+          fi
+          python3 scripts/release/batch_catalog_epubs.py "${ARGS[@]}"
+          rc=$?
+          echo "batch exit code: $rc (per-cell gate rejects tolerated; manifest still written)"
+          MANIFEST="artifacts/catalog/assembly_manifests/${BRAND}_${LOCALE}.json"
+          if [ ! -f "$MANIFEST" ]; then
+            echo "::error::No manifest written for $BRAND — aborting."
+            exit 1
+          fi
+          python3 -c "import json; m=json.load(open('$MANIFEST')); s=m.get('summary',{}); print('summary', s)"
+          exit 0
+
+      - name: Commit manifest via plumbing PR (never EPUB binaries)
+        run: |
+          set -euo pipefail
+          MANIFEST="artifacts/catalog/assembly_manifests/${BRAND}_${LOCALE}.json"
+          if [ ! -f "$MANIFEST" ]; then
+            echo "No manifest — skip PR."
+            exit 0
+          fi
+          git config user.name "Pearl_Catalog (CI)"
+          git config user.email "catalog-ci@users.noreply.github.com"
+          git fetch origin main --quiet
+          BASE_TREE=$(git rev-parse "origin/main^{tree}")
+          BASE_COMMIT=$(git rev-parse origin/main)
+          IDX="/tmp/idx_assemble_${BRAND}_$$"
+          rm -f "$IDX"
+          GIT_INDEX_FILE="$IDX" git read-tree "$BASE_TREE"
+          hash=$(git hash-object -w "$MANIFEST")
+          GIT_INDEX_FILE="$IDX" git update-index --add --cacheinfo "100644,$hash,$MANIFEST"
+          NEW_TREE=$(GIT_INDEX_FILE="$IDX" git write-tree)
+          rm -f "$IDX"
+          if git diff-tree -r --name-status "$BASE_TREE" "$NEW_TREE" | grep -q "^D"; then
+            echo "::error::deletions detected in manifest PR for $BRAND — aborting"
+            exit 1
+          fi
+          if git diff-tree -r --name-status "$BASE_TREE" "$NEW_TREE" | grep -q "\.epub$"; then
+            echo "::error::EPUB binary detected in commit tree — aborting (EPUBs must stay on R2 only)"
+            exit 1
+          fi
+          if [ "$(git diff-tree -r --name-only "$BASE_TREE" "$NEW_TREE" | wc -l | tr -d ' ')" -eq 0 ]; then
+            echo "Manifest unchanged vs origin/main — no PR."
+            exit 0
+          fi
+          COMMIT=$(git commit-tree "$NEW_TREE" -p "$BASE_COMMIT" \
+            -m "chore(catalog): assembly manifest ${BRAND} ${LOCALE} [skip ci]")
+          BRANCH="ci/catalog-assemble-${BRAND}-${GITHUB_RUN_ID}"
+          git push origin "${COMMIT}:refs/heads/${BRANCH}"
+          PR_URL=$(gh pr create --title "chore(catalog): assembly manifest ${BRAND} ${LOCALE}" \
+            --body "Per-brand EPUB assembly manifest (R2 keys + gate verdicts). EPUB binaries on R2 only — **not** in git. Automated by catalog-assemble-campaign.yml. Ref OPD-20260627-001." \
+            --base main --head "$BRANCH")
+          PR=$(echo "$PR_URL" | grep -oE '[0-9]+$')
+          echo "Opened PR #$PR for $BRAND manifest"
+          STATE="pending"
+          for _ in $(seq 1 50); do
+            sleep 30
+            GOV=$(gh pr view "$PR" --json statusCheckRollup --jq '.statusCheckRollup[]|select(.name=="Verify governance")|.conclusion' 2>/dev/null || true)
+            PS=$(gh pr view "$PR" --json statusCheckRollup --jq '.statusCheckRollup[]|select(.name=="parse-sweep")|.conclusion' 2>/dev/null || true)
+            if [ "$GOV" = "SUCCESS" ] && [ "$PS" = "SUCCESS" ]; then STATE="green"; break; fi
+            if [ "$GOV" = "FAILURE" ] || [ "$PS" = "FAILURE" ]; then STATE="failed"; break; fi
+          done
+          if [ "$STATE" != "green" ]; then
+            echo "::warning::PR #$PR not green ($STATE) — leaving open for sweep"
+            exit 0
+          fi
+          gh pr merge "$PR" --squash --delete-branch || true
