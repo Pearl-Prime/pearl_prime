@@ -126,11 +126,17 @@ jobs:
               brands = sorted((b for b in base if have.get(b, 0) < target),
                               key=lambda b: have.get(b, 0))
           print(json.dumps({"brand": brands}))
+          Path("/tmp/locale_slug.txt").write_text(slug)
           PYEOF
+          SLUG="$(cat /tmp/locale_slug.txt)"
+          if [ -z "$SLUG" ]; then
+            echo "::error::locale_slug resolved empty for LOCALE='${LOCALE}' — refusing to emit (would write to book_plans_/)."
+            exit 1
+          fi
           {
             echo "matrix=$(cat /tmp/matrix.json)"
             echo "count=$(python3 -c 'import json;print(len(json.load(open("/tmp/matrix.json"))["brand"]))')"
-            echo "locale_slug=$(python3 -c 'from scripts.catalog.locale_paths import normalize_lane_id, locale_slug; import os; print(locale_slug(normalize_lane_id(os.environ[\"LOCALE\"])))')"
+            echo "locale_slug=${SLUG}"
           } >> "$GITHUB_OUTPUT"
           echo "Brands to process for ${LOCALE}:"
           cat /tmp/matrix.json
@@ -175,6 +181,10 @@ jobs:
         run: |
           set -euo pipefail
           TARGET="${TARGET:-800}"
+          if [ -z "${LOCALE_SLUG}" ]; then
+            echo "::error::LOCALE_SLUG is empty (LOCALE='${LOCALE}') — aborting to avoid writing to config/source_of_truth/book_plans_/."
+            exit 1
+          fi
           BOOK_DIR="config/source_of_truth/book_plans_${LOCALE_SLUG}"
           SERIES_DIR="config/source_of_truth/series_plans_${LOCALE_SLUG}"
           git config user.name "Pearl_Catalog (CI)"
