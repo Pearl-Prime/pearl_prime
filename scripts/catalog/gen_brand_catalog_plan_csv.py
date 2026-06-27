@@ -23,6 +23,7 @@ import yaml
 from phoenix_v4.naming import cli as naming
 from phoenix_v4.planning.author_brand_resolver import resolve_author_from_brand
 from scripts.catalog.gen_plan_skeletons import ASSIGN, ENGINE_ORDER, INTENTS
+from scripts.catalog.locale_paths import normalize_lane_id
 
 ROOT = Path(__file__).resolve().parents[2]
 REG = ROOT / "config/brand_management/global_brand_registry_unified.yaml"
@@ -47,15 +48,16 @@ _BRAND_REC_CACHE: dict[str, dict] = {}
 _AUTHOR_CACHE: dict[tuple[str, str, str], str] = {}
 
 
-def _brand_rec(brand: str) -> dict:
-    if brand in _BRAND_REC_CACHE:
-        return _BRAND_REC_CACHE[brand]
+def _brand_rec(brand: str, lane_id: str) -> dict:
+    key = (brand, lane_id)
+    if key in _BRAND_REC_CACHE:
+        return _BRAND_REC_CACHE[key]
     reg = yaml.safe_load(REG.read_text())["brands"]
     for rec in reg.values():
-        if rec.get("brand_archetype_id") == brand and rec.get("lane_id") == "en_US":
-            _BRAND_REC_CACHE[brand] = rec
+        if rec.get("brand_archetype_id") == brand and rec.get("lane_id") == lane_id:
+            _BRAND_REC_CACHE[key] = rec
             return rec
-    raise SystemExit(f"brand '{brand}' not found in registry (en_US lane)")
+    raise SystemExit(f"brand '{brand}' not found in registry ({lane_id} lane)")
 
 
 def _canonical_personas() -> list[str]:
@@ -130,8 +132,15 @@ def _title_subtitle(
     return f"{topic_l}: {engine_l}", f"A guide for {persona_l}"
 
 
-def generate_rows(brand: str, target: int, *, one_hr_ratio: float = 0.44, use_naming: bool = False) -> list[dict]:
-    rec = _brand_rec(brand)
+def generate_rows(
+    brand: str,
+    target: int,
+    *,
+    lane_id: str = "en_US",
+    one_hr_ratio: float = 0.44,
+    use_naming: bool = False,
+) -> list[dict]:
+    rec = _brand_rec(brand, lane_id)
     teacher = rec.get("teacher_id") or "default_teacher"
     personas, topics = _expand_grid(rec, target)
     rows: list[dict] = []
@@ -173,13 +182,15 @@ def generate_rows(brand: str, target: int, *, one_hr_ratio: float = 0.44, use_na
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--brand", required=True)
+    ap.add_argument("--locale", default="en_US", help="Registry lane_id (e.g. de_DE, ja_JP)")
     ap.add_argument("--target", type=int, default=800)
     ap.add_argument("--out", type=Path, default=None)
     ap.add_argument("--use-naming-engine", action="store_true", help="Slow: call phoenix_v4.naming per row")
     ap.add_argument("--dry-run", action="store_true")
     args = ap.parse_args()
 
-    rows = generate_rows(args.brand, args.target, use_naming=args.use_naming_engine)
+    lane_id = normalize_lane_id(args.locale)
+    rows = generate_rows(args.brand, args.target, lane_id=lane_id, use_naming=args.use_naming_engine)
     print(f"{args.brand}: generated {len(rows)} catalog rows (target {args.target})")
     if rows:
         print(f"  sample: {rows[0]['book_id']}")

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Import Waystream-style catalog plan CSV → book_plans_en_us + series_plans_en_us YAML.
+"""Import Waystream-style catalog plan CSV → book_plans_<locale> + series_plans_<locale> YAML.
 
 CSV columns (header required):
   book_id, title, subtitle, author, installment, topic, engine, persona, cluster
@@ -23,13 +23,8 @@ from pathlib import Path
 
 import yaml
 
-from scripts.catalog.gen_plan_skeletons import (
-    ASSIGN,
-    BOOK_DIR,
-    ENGINE_ORDER,
-    SERIES_DIR,
-    topic_bisac,
-)
+from scripts.catalog.gen_plan_skeletons import ASSIGN, topic_bisac
+from scripts.catalog.locale_paths import normalize_lane_id, plan_dirs
 from phoenix_v4.planning.author_brand_resolver import resolve_author_from_brand
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -37,10 +32,10 @@ ARCS = ROOT / "config/source_of_truth/master_arcs"
 REG = ROOT / "config/brand_management/global_brand_registry_unified.yaml"
 
 
-def _load_brand_teacher(brand_archetype: str) -> str:
+def _load_brand_teacher(brand_archetype: str, lane_id: str) -> str:
     reg = yaml.safe_load(REG.read_text())["brands"]
     for rec in reg.values():
-        if rec.get("brand_archetype_id") == brand_archetype and rec.get("lane_id") == "en_US":
+        if rec.get("brand_archetype_id") == brand_archetype and rec.get("lane_id") == lane_id:
             return rec.get("teacher_id") or "house"
     return "default_teacher"
 
@@ -115,6 +110,7 @@ def _build_series_plan(
     *,
     plan_source: str,
     teacher_raw: str | None,
+    lane_id: str,
 ) -> dict:
     first = _parse_book_id(book_rows[0]["book_id"])
     brand, persona, topic = first["brand"], first["persona"], first["topic"]
@@ -138,7 +134,7 @@ def _build_series_plan(
     return {
         "series_plan_schema": "1.0.0",
         "created_at": str(date.today()),
-        "locale": "en_US",
+        "locale": lane_id,
         "book_id_prefix": series_id,
         "brand": brand,
         "teacher": teacher_yaml,
@@ -215,12 +211,19 @@ def main() -> int:
     ap = argparse.ArgumentParser(description="Catalog plan CSV → book/series plan YAML (Waystream pattern)")
     ap.add_argument("--csv", type=Path, required=True)
     ap.add_argument("--brand", help="Only import rows for this brand archetype id")
+    ap.add_argument("--locale", default="en_US", help="Registry lane_id (e.g. de_DE, ja_JP)")
     ap.add_argument("--dry-run", action="store_true")
     ap.add_argument("--force", action="store_true", help="Overwrite existing YAML files")
     ap.add_argument("--limit", type=int, default=0, help="Max book rows to process")
-    ap.add_argument("--out-books", type=Path, default=BOOK_DIR)
-    ap.add_argument("--out-series", type=Path, default=SERIES_DIR)
+    ap.add_argument("--out-books", type=Path, default=None)
+    ap.add_argument("--out-series", type=Path, default=None)
     args = ap.parse_args()
+    lane_id = normalize_lane_id(args.locale)
+    default_books, default_series = plan_dirs(ROOT, lane_id)
+    if args.out_books is None:
+        args.out_books = default_books
+    if args.out_series is None:
+        args.out_series = default_series
 
     plan_source = str(args.csv.relative_to(ROOT)) if args.csv.is_relative_to(ROOT) else str(args.csv)
     rows = _rows_from_csv(args.csv, args.brand)
@@ -244,7 +247,9 @@ def main() -> int:
         if series_path.exists() and not args.force:
             pass  # still emit books; series no-clobber unless force
         else:
-            sp = _build_series_plan(series_id, book_rows, plan_source=plan_source, teacher_raw=teacher_raw)
+            sp = _build_series_plan(
+                series_id, book_rows, plan_source=plan_source, teacher_raw=teacher_raw, lane_id=lane_id
+            )
             if not args.dry_run:
                 args.out_series.mkdir(parents=True, exist_ok=True)
                 series_path.write_text(yaml.safe_dump(sp, sort_keys=False, allow_unicode=True))
