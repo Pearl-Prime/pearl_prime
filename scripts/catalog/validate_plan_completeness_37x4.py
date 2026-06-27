@@ -17,7 +17,13 @@ This is the SSOT gate that unlocks Layers 2 + 3 per docs/SYSTEMS_STATE_20260527.
 §3. It is planning/data only — it does NOT inspect generated content (book text,
 manga panels, audio), only that a PLAN exists for each cell.
 
-Matrix size: 37 brands x 4 locales x 3 surfaces = 444 cells.
+Matrix size: 37 brands x 4 locales x 3 surfaces = 444 cells, MINUS any
+market-exclusive manga lanes. A brand may declare `manga_locales` in
+canonical_brand_list.yaml to lock its MANGA surface to a subset of launch
+locales; the manga cells outside that subset are not expected and are excluded
+from the matrix (book/podcast surfaces are unaffected). Today only
+bright_presence_tw_seinen is locked (zh_TW-only, OPD-20260627-001), so the
+expected matrix is 444 - 3 = 441 cells.
 
 Emits artifacts/catalog/plan_completeness_37x4_20260527.tsv with one row per
 (brand, locale) carrying manga/book/podcast booleans + per-surface counts.
@@ -62,6 +68,29 @@ def _load_brands() -> list[str]:
     if not brands:
         raise SystemExit(f"[2] no brands in {BRAND_LIST}")
     return brands
+
+
+def _manga_locale_locks() -> dict[str, set[str]]:
+    """Per-brand manga-lane locale restriction from canonical_brand_list.yaml.
+
+    A brand entry may declare an optional ``manga_locales`` list. When present,
+    the brand's MANGA surface is expected ONLY in those launch locales; manga
+    cells outside the set are not part of the matrix. Brands that omit the field
+    default to all LAUNCH_LOCALES (the historical behaviour).
+
+    Authority: brand profile header (e.g. bright_presence_tw_seinen is the
+    Taiwan/zh_TW-exclusive Adi Da manga lane) ratified under OPD-20260627-001;
+    PRs #2215 / #2217 removed the non-zh_TW manga plans.
+    """
+    if not BRAND_LIST.exists():
+        raise SystemExit(f"[2] canonical brand list missing: {BRAND_LIST}")
+    data = yaml.safe_load(BRAND_LIST.read_text(encoding="utf-8")) or {}
+    locks: dict[str, set[str]] = {}
+    for brand, attrs in (data.get("brands") or {}).items():
+        locales = (attrs or {}).get("manga_locales")
+        if locales:
+            locks[brand] = {str(loc).strip() for loc in locales}
+    return locks
 
 
 def _manga_counts() -> dict[tuple[str, str], int]:
@@ -110,20 +139,38 @@ def validate(write: bool = True) -> int:
     manga = _manga_counts()
     book = _surface_counts(EBOOK_TSV, "ebook")
     podcast = _surface_counts(PODCAST_TSV, "podcast")
+    manga_locks = _manga_locale_locks()
 
     out_rows: list[list[str]] = []
     missing: list[str] = []
     cells_covered = 0
-    total_cells = len(brands) * len(LAUNCH_LOCALES) * 3
+    total_cells = 0  # expected cells, net of market-exclusive manga lanes
 
     for brand in brands:
+        lock = manga_locks.get(brand)
         for locale in LAUNCH_LOCALES:
             mc = manga.get((brand, locale), 0)
             bc = book.get((brand, locale), 0)
             pc = podcast.get((brand, locale), 0)
             m_ok, b_ok, p_ok = mc > 0, bc > 0, pc > 0
-            cells_covered += int(m_ok) + int(b_ok) + int(p_ok)
-            complete = m_ok and b_ok and p_ok
+            # manga is only EXPECTED where the brand is not locale-locked out;
+            # book + podcast are always expected for every (brand, locale).
+            manga_expected = lock is None or locale in lock
+            surfaces = (
+                ("manga", manga_expected, m_ok),
+                ("book", True, b_ok),
+                ("podcast", True, p_ok),
+            )
+            miss = []
+            for name, expected, ok in surfaces:
+                if not expected:
+                    continue
+                total_cells += 1
+                if ok:
+                    cells_covered += 1
+                else:
+                    miss.append(name)
+            complete = not miss
             out_rows.append(
                 [
                     brand,
@@ -137,8 +184,7 @@ def validate(write: bool = True) -> int:
                     "COMPLETE" if complete else "MISSING",
                 ]
             )
-            if not complete:
-                miss = [s for s, ok in (("manga", m_ok), ("book", b_ok), ("podcast", p_ok)) if not ok]
+            if miss:
                 missing.append(f"{brand} / {locale}: missing {', '.join(miss)}")
 
     if write:
@@ -171,7 +217,10 @@ def validate(write: bool = True) -> int:
         if len(missing) > 50:
             print(f"  ... and {len(missing) - 50} more", file=sys.stderr)
         return 1
-    print("\nPASS — all 37 brands x 4 locales have manga + book + podcast plans (444/444 cells).")
+    print(
+        f"\nPASS — all 37 brands x 4 locales have their expected manga + book + "
+        f"podcast plans ({cells_covered}/{total_cells} cells)."
+    )
     return 0
 
 

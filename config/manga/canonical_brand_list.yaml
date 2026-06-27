@@ -29,6 +29,12 @@
 #     primary_topic:       single canonical psychological/wellness topic (anchor)
 #     secondary_topics:    list of additional wellness topics carried by the brand
 #     notes:               human-readable one-line summary (from GENRE_PORTFOLIO_PLAN.md ##### header)
+#     manga_locales:       (optional) launch locales where this brand's MANGA lane
+#                          is expected. Omit  = all launch locales (default). Set to
+#                          restrict a market-exclusive brand so the plan-completeness
+#                          gate does not flag its absent non-lane manga plans as gaps
+#                          (e.g. bright_presence_tw_seinen is zh_TW-only per
+#                          OPD-20260627-001). Book/podcast surfaces are unaffected.
 #
 # Demographic taxonomy (manga reader-segment convention):
 #   josei     — adult women
@@ -315,3 +321,7 @@ brands:
     primary_topic: social_anxiety
     secondary_topics: [imposter_syndrome, self_worth]
     notes: Social Anxiety · TW market · Seinen
+    # Taiwan-exclusive manga lane (Adi Da); non-zh_TW manga plans removed under
+    # OPD-20260627-001 (PRs #2215 en_US+ja_JP / #2217 ko_KR+zh_CN). See profile
+    # header config/source_of_truth/manga_profiles/brands/bright_presence_tw_seinen.yaml:7.
+    manga_locales: [zh_TW]

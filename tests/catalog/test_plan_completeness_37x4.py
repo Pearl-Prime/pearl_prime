@@ -61,7 +61,12 @@ def test_podcast_tsv_on_disk_is_current():
 
 
 def test_plan_completeness_validator_passes():
-    """The Layer 1 gate must report 444/444 cells covered (exit 0)."""
+    """The Layer 1 gate must cover every expected cell (exit 0).
+
+    Expected = 37 brands x 4 locales x 3 surfaces (444) MINUS market-exclusive
+    manga lanes declared via `manga_locales` in canonical_brand_list.yaml
+    (bright_presence_tw_seinen is zh_TW-only, OPD-20260627-001 → 441 expected).
+    """
     from scripts.catalog.validate_plan_completeness_37x4 import validate
 
     # Skip if the manga series-plan SSOT is not materialized in this checkout
