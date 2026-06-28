@@ -1359,6 +1359,18 @@ def _run_spine_pipeline_mode(
     prose = _final_f13_repair(prose, seed=f"{seed}:pre_gate_f13_recheck")
     prose = _final_cap_f7(prose, max_per_chapter=1, max_by_chapter=_f7_max_by_chapter)
     prose = _final_orphan_strip(prose)
+    # F6 cadence had no pre-gate repair: the single break inside strengthen_register_craft_output
+    # (above) runs BEFORE the flow-cue / floor / F4 / F13 convergence passes, which re-introduce
+    # repeating sentence-length 4-grams (e.g. [9,9,9,10] ×3 → register F6 FAIL on social_anxiety /
+    # somatic_healing). Add the missing FINAL break here, mirroring the pre-gate F4/F13 repairs. It
+    # only lengthens the 3rd+ occurrence of each repeating cadence (~10-12 words/book), makes closing
+    # lines MORE unique (F4-safe), preserves cue substrings (chapter_flow-safe), and adds no
+    # imperative/timing tokens (F7-safe). Strengthens OUTPUT only; the register gate remains arbiter.
+    from phoenix_v4.rendering.register_output_strengthen import (
+        break_pedagogical_cadence_repetition as _final_f6_break,
+    )
+
+    prose = _final_f6_break(prose, seed=f"{seed}:pre_gate_f6")
 
     _f7_preservation_violations = verify_f7_exercise_preservation(
         prose,
