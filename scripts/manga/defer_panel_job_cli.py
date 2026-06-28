@@ -18,7 +18,12 @@ from typing import Any
 REPO_ROOT = Path(__file__).resolve().parents[2]
 WORKER_DIR = REPO_ROOT / "scripts" / "pearl_star" / "worker"
 
-TASK_NAMES = frozenset({"t2i_flux_dev_h1a", "t2i_qwen_image", "t2i_flux_schnell"})
+TASK_NAMES = frozenset({
+    "t2i_flux_dev_h1a",
+    "t2i_qwen_image",
+    "t2i_flux_schnell",
+    "llm_translate_atoms_batch",
+})
 
 
 def defer_task(task: str, payload: dict[str, Any]) -> int:

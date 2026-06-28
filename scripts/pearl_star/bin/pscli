@@ -407,8 +407,17 @@ def build_parser() -> argparse.ArgumentParser:
     ga.set_defaults(fn=cmd_gpu_acquire)
     sub.add_parser("gpu-release").set_defaults(fn=cmd_gpu_release)
     sub.add_parser("gpu-status").set_defaults(fn=cmd_gpu_status)
-    eq = sub.add_parser("enqueue", help="Defer one t2i panel job to Procrastinate")
-    eq.add_argument("--task", required=True, choices=["t2i_flux_dev_h1a", "t2i_qwen_image", "t2i_flux_schnell"])
+    eq = sub.add_parser("enqueue", help="Defer one queue job to Procrastinate (t2i or llm)")
+    eq.add_argument(
+        "--task",
+        required=True,
+        choices=[
+            "t2i_flux_dev_h1a",
+            "t2i_qwen_image",
+            "t2i_flux_schnell",
+            "llm_translate_atoms_batch",
+        ],
+    )
     eq.add_argument("--payload", required=True, help='JSON object or @file.json with task kwargs')
     eq.set_defaults(fn=cmd_enqueue)
     return p

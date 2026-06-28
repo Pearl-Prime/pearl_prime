@@ -58,6 +58,7 @@ app = App(connector=PsycopgConnector(conninfo=_DSN, kwargs={}))
 from flux_schnell_worker import t2i_flux_schnell  # noqa: E402,F401  (registers task)
 from flux_dev_manga_worker import t2i_flux_dev_h1a  # noqa: E402,F401
 from qwen_manga_worker import t2i_qwen_image  # noqa: E402,F401
+from llm_translate_worker import llm_translate_atoms_batch  # noqa: E402,F401
 
 __all__ = [
     "app",
@@ -66,4 +67,5 @@ __all__ = [
     "t2i_flux_schnell",
     "t2i_flux_dev_h1a",
     "t2i_qwen_image",
+    "llm_translate_atoms_batch",
 ]

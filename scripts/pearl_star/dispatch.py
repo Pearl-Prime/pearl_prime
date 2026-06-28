@@ -68,6 +68,7 @@ KNOWN_TASKS: dict[str, str] = {
     "t2i_flux_schnell": "t2i",
     "t2i_flux_dev_h1a": "t2i",
     "t2i_qwen_image": "t2i",
+    "llm_translate_atoms_batch": "llm",
 }
 
 

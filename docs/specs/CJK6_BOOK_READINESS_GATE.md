@@ -13,7 +13,7 @@ This document defines the finish line for CJK *book assembly* (not translation a
 
 ---
 
-## Gate matrix (2026-06-29 snapshot)
+## Gate matrix (2026-06-29 snapshot — post atomic-land pull batch 1)
 
 | Gate | ja_JP | zh_TW | ko_KR | zh_CN | zh_HK | zh_SG |
 |------|-------|-------|-------|-------|-------|-------|
@@ -34,16 +34,18 @@ This document defines the finish line for CJK *book assembly* (not translation a
 
 **Threshold:** ≥95% to start assembly QA; 100% to ship.
 
-| Locale | On origin/main | Coverage | Pearl Star ceiling | Verdict |
-|--------|----------------|----------|-------------------|---------|
-| ja_JP | 4,298 | **87.6%** | 4,445 (90.5%) | BLOCKED — 360 held-back + 611 to 100% |
-| zh_TW | 4,683 | **95.4%** | 4,896 (99.7%) | **PASS** (start threshold) |
+| Locale | On origin/main (pre-PR) | Coverage | Pearl Star ceiling | Verdict |
+|--------|---------------------------|----------|-------------------|---------|
+| ja_JP | 4,440 (+142 landed batch 1) | **89.1%** | 4,445 | BLOCKED — 5 held-back + re-run in-flight |
+| zh_TW | 4,849 (+166 landed batch 1) | **97.4%** | 4,896 | **PASS** (start threshold) |
 | ko_KR | 227 | **4.6%** | 227 (no pull delta) | BLOCKED — new-translation wave |
 | zh_CN | 1,965 | **40.0%** | 1,965 (no pull delta) | BLOCKED — new-translation wave |
 | zh_HK | 243 | 4.9% | derives zh_TW | BLOCKED — follows zh_TW |
 | zh_SG | 243 | 4.9% | derives zh_CN | BLOCKED — follows zh_CN |
 
-**Closes G1:** Translator fix (prose-only) + Tier-2 re-run of 360 held-back (ja 147 + zh-TW 213) + batched-tar re-pull; then ko (~4,682 atoms) + zh-CN (~2,944 atoms) fresh translation wave on Pearl Star.
+**Closes G1:** Atomic driver (`cjk_translate_and_land.sh`) + queue-routed re-run of held-back + batched-tar re-pull (308 validated in batch 1); then ko (~4,682) + zh-CN (~2,944) fresh wave.
+
+**Process fix (2026-06-29):** `cjk_unpulled_check.py` surfaces stranded PS inventory; translate → validate → pull → PR is one atomic flow (no silent stranding).
 
 ---
 
