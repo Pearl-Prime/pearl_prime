@@ -1350,20 +1350,66 @@ def _normalize_generic_scene_lighting(text: str) -> str:
 # _TRANSITION_CUES substring and reads as ordinary closing prose. Seeded per chapter for variety;
 # never randomization. NOTE: substrings here are validated against the gate's cue lists at import
 # time by _assert_cue_lines_valid() below, so a future cue-list edit cannot silently desync them.
+# F4 closing-line dedup (2026-06-29, quality-lane): these guarantee lines are appended as the
+# LAST sentence of any chapter still failing MISSING_CLEAR_POINT / WEAK_TRANSITIONS / NO_ACTIONABLE_STEP.
+# With only 3 lines per pool, a book of 8–20 chapters re-used the same closing line 3+ times by pigeonhole,
+# tripping register F4 (verbatim closing-line repetition) → HARD register FAIL. Each pool is expanded to
+# ≥16 distinct lines so even a 20-chapter book cannot repeat a closer 3+ times (max ceil(20/16)=2 = WARN
+# at worst). Every clear-point line still embeds a literal _THESIS_CUES substring and every transition
+# line a _TRANSITION_CUES substring (validated at import by _assert_cue_lines_valid); each actionable line
+# carries a gate-recognized imperative verb (breathe/pause/notice/choose/write/name/practice). Selection
+# stays deterministic per (book_seed, chapter_index) — no randomization.
 _CLEAR_POINT_GUARANTEE_LINES = (
     "What this means is straightforward: the pattern is information, not a verdict, and naming it is where change begins.",
     "The point is simple: this response was protective once, and seeing that clearly is what lets you choose differently now.",
     "What this means, stated plainly: the cost lives in the repetition, so interrupting the repetition is the whole move.",
+    "The point is this: the signal was never the enemy; it was an old protection that outlived the danger it was built for.",
+    "What this means in quieter terms: you do not have to win the argument with the feeling, only stop feeding it.",
+    "Here is the principle: what you can name, you can hold, and what you can hold, you can set down.",
+    "The truth is plainer than the fear: the moment passes, and you are still here to notice that it did.",
+    "What remains, once the noise settles, is a choice you could not see while you were bracing for it.",
+    "This is not a test you are failing; it is a system doing exactly what it learned, and learning can be revised.",
+    "What follows from that is small but real: one honest pause is enough to change the next move.",
+    "The point is not to feel nothing — that is not the goal; it is to feel it without being run by it.",
+    "What this means for you is concrete: the work is not to stop the wave but to remember you can swim.",
+    "Said as a principle: attention is the lever, and where it lands is the part you actually get to choose.",
+    "This is not a flaw in you; the response is the data, and the data shows where the old wiring still runs.",
+    "What this means is freeing once it lands: the story is not the fact, and you were never required to believe it.",
+    "The point is steady and simple: you can be afraid and still move, and the moving teaches the fear it was wrong.",
+    "What remains true even on the hard days is this: the practice is the path, walked one breath at a time.",
 )
 _TRANSITION_GUARANTEE_LINES = (
     "This matters because the same signal will keep returning until it is named, which means the naming is the work itself.",
     "Here is why that holds: the body learned this before you did, which means it can be re-learned through repetition, not insight alone.",
     "That is the mechanism, because the appraisal comes before the feeling, which means the leverage sits upstream of the emotion.",
+    "This is why the timing matters, so when you wait the feeling out you teach the body that it crests and falls on its own.",
+    "Watch how the pattern repeats, because once you can see its shape you stop mistaking it for the truth about you.",
+    "Sit with that for a moment, because the discomfort is not damage; it is an old alarm discharging with nowhere left to go.",
+    "Underneath the urgency there is a slower fact, which means you have more time than the panic is willing to admit.",
+    "Here is the thread that connects them: every version of this is the same protection wearing a different face.",
+    "In practice this changes one thing, which means the next time it rises you meet it as weather, not as fate.",
+    "Remember this when it returns, because it will return, and the returning is not failure — it is the repetition that counts.",
+    "You can see it now from the outside, which means it no longer gets to run the show from the inside.",
+    "That matters because the change arrives first as a choice you make, not as a feeling that finally agrees.",
+    "Beneath the story there is a simpler request, which means the work is to answer the need, not argue with the words.",
+    "So when the next wave builds, you already know the move, because you have practiced it here in the quiet.",
+    "What looks like a setback is often the rep that counts, which means the hard days are doing more than the easy ones.",
+    "This is the mechanism in one line: the meaning you assign sets the weather, which means you are not powerless in the storm.",
+    "Across every example one thread holds, because the body keeps the score until the mind helps it close the file.",
 )
 _ACTIONABLE_GUARANTEE_LINES = (
     "Pause here and notice what shifted, even slightly, while this lands.",
     "Choose one small next step you can practice when the day ends.",
     "Breathe out slowly and name what you are feeling without fixing it yet.",
+    "Notice where the breath sits right now, and let it drop one inch lower.",
+    "Write down the single sentence this chapter leaves you with.",
+    "Pause and name the feeling out loud, plainly, without arguing with it.",
+    "Choose one moment today to practice meeting this as it actually is.",
+    "Inhale for four, exhale for six, and notice the body follow the count.",
+    "Name the protection this once offered you before you ask it to step back.",
+    "Practice the smallest version of the change once, just to prove it is possible.",
+    "Pause, place a hand where the tension lives, and breathe into that exact spot.",
+    "Choose to write one honest line about what you noticed, then set the pen down.",
 )
 
 
