@@ -18,7 +18,8 @@ description:
   short_blurb: ''
   long_description: ''
 keywords:
-  primary: []
+  primary:
+  - courage
   secondary: []
 bisac_codes: []
 target_price:
@@ -31,4 +32,8 @@ author_positioning:
   byline_author: rowan_vance
 comp_titles: []
 plan_source_path: /tmp/warrior_calm_catalog.csv
-_needs_authoring: true
+_needs_authoring: false
+confidence:
+  pricing: low
+  title: medium
+  comps: low

@@ -219,11 +219,19 @@ def _validate_epub(epub_path: Path) -> dict:
     ]
     r = subprocess.run(cmd, cwd=str(REPO), env=_pipeline_env(), capture_output=True, text=True, timeout=120)
     try:
-        data = json.loads(r.stdout)
+        parsed = json.loads(r.stdout)
     except json.JSONDecodeError:
-        data = {"verdict": "error", "exit_code": r.returncode, "raw": (r.stderr or r.stdout)[-500:]}
-    data["exit_code"] = r.returncode
-    data["verdict"] = "pass" if r.returncode == 0 else "fail"
+        parsed = {"verdict": "error", "exit_code": r.returncode, "raw": (r.stderr or r.stdout)[-500:]}
+    if isinstance(parsed, list):
+        reports = [x for x in parsed if isinstance(x, dict)]
+        verdict = "pass" if r.returncode == 0 and all(x.get("verdict") == "pass" for x in reports) else "fail"
+        data = {"verdict": verdict, "reports": reports, "exit_code": r.returncode}
+    elif isinstance(parsed, dict):
+        data = parsed
+        data["exit_code"] = r.returncode
+        data["verdict"] = "pass" if r.returncode == 0 else data.get("verdict", "fail")
+    else:
+        data = {"verdict": "error", "exit_code": r.returncode, "raw": str(parsed)[:500]}
     return data
 
 

@@ -72,10 +72,14 @@ jobs:
           R2_ACCOUNT_ID: ${{ secrets.R2_ACCOUNT_ID }}
           R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
           R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          R2_BUCKET: ${{ secrets.R2_BUCKET }}
         run: |
           if [ -z "$R2_ACCOUNT_ID" ] || [ -z "$R2_ACCESS_KEY_ID" ] || [ -z "$R2_SECRET_ACCESS_KEY" ]; then
             echo "::error::R2 secrets missing (R2_ACCOUNT_ID, R2_ACCESS_KEY_ID, R2_SECRET_ACCESS_KEY)."
             exit 1
+          fi
+          if [ -z "${R2_BUCKET:-}" ]; then
+            echo "::warning::R2_BUCKET secret empty — batch script will default to phoenix-omega-artifacts"
           fi
           echo "R2 secrets present."
 
@@ -137,12 +141,20 @@ jobs:
       R2_ENDPOINT: ${{ secrets.R2_ENDPOINT }}
       R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
       R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
-      R2_BUCKET: ${{ secrets.R2_BUCKET }}
+      R2_BUCKET: ${{ secrets.R2_BUCKET || 'phoenix-omega-artifacts' }}
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
           token: ${{ secrets.CATALOG_PAT }}
+
+      - name: Guard — R2 bucket
+        env:
+          R2_BUCKET: ${{ secrets.R2_BUCKET }}
+        run: |
+          if [ -z "${R2_BUCKET:-}" ]; then
+            echo "::warning::R2_BUCKET secret unset — using default phoenix-omega-artifacts"
+          fi
 
       - uses: actions/setup-python@v5
         with:
