@@ -136,6 +136,23 @@ def overmatch_signature_hits(text: str) -> int:
     return hits
 
 
+def _en_source_rel(rel: str) -> str | None:
+    """Map atoms/.../locales/<loc>/CANONICAL.txt → atoms/.../CANONICAL.txt."""
+    parts = Path(rel).parts
+    if "locales" not in parts:
+        return None
+    idx = parts.index("locales")
+    return str(Path(*parts[:idx]) / "CANONICAL.txt")
+
+
+def is_baseline_parse_fail(rel: str, baseline: set[str]) -> bool:
+    """True when strict-parse failure is pre-existing (self or inherited from en source)."""
+    if rel in baseline:
+        return True
+    en = _en_source_rel(rel)
+    return bool(en and en in baseline)
+
+
 def load_baseline() -> set[str]:
     if not BASELINE_PATH.exists():
         return set()
@@ -171,7 +188,7 @@ def sweep() -> dict:
             if is_english_story_pool(f):
                 story_overmatch.append(rel)
 
-    new_parse_fail = sorted(set(parse_fail) - baseline)
+    new_parse_fail = sorted(r for r in set(parse_fail) if not is_baseline_parse_fail(r, baseline))
     new_signature_fail = sorted(set(signature_fail) - baseline)
     # STORY-pool over-match is NOT reduced by the baseline — it is always a NO_STORY_POOL regression.
     story_overmatch = sorted(set(story_overmatch))
