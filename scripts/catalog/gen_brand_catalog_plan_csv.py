@@ -24,6 +24,7 @@ from phoenix_v4.naming import cli as naming
 from phoenix_v4.planning.author_brand_resolver import resolve_author_from_brand
 from scripts.catalog.gen_plan_skeletons import ASSIGN, ENGINE_ORDER, INTENTS
 from scripts.catalog.locale_paths import normalize_lane_id
+from scripts.catalog.market_topic_fit import topics_for_generation
 
 ROOT = Path(__file__).resolve().parents[2]
 REG = ROOT / "config/brand_management/global_brand_registry_unified.yaml"
@@ -104,14 +105,15 @@ def _author_display(brand: str, topic: str, persona: str) -> str:
     return display
 
 
-def _expand_grid(rec: dict, target: int) -> tuple[list[str], list[str]]:
+def _expand_grid(rec: dict, target: int, *, lane_id: str) -> tuple[list[str], list[str]]:
     personas = list(rec.get("primary_personas") or [])
     topics = list(rec.get("primary_topics") or [])
     # Expand to Waystream-scale grid when target exceeds registry footprint
     canon_p = _canonical_personas()
+    fit_topics = topics_for_generation(lane_id, WAYSTREAM_TOPICS)
     if target > len(personas) * len(topics) * 5:
-        personas = canon_p[:10]
-        topics = WAYSTREAM_TOPICS
+        personas = canon_p if len(fit_topics) < len(WAYSTREAM_TOPICS) else canon_p[:10]
+        topics = fit_topics
     return personas, topics
 
 
@@ -142,41 +144,47 @@ def generate_rows(
 ) -> list[dict]:
     rec = _brand_rec(brand, lane_id)
     teacher = rec.get("teacher_id") or "default_teacher"
-    personas, topics = _expand_grid(rec, target)
+    personas, topics = _expand_grid(rec, target, lane_id=lane_id)
     rows: list[dict] = []
     seen: set[str] = set()
 
-    for persona in personas:
-        for topic in topics:
-            engines = _engines_for_topic(topic)
-            series_base = f"{brand}__{teacher}__{persona}__{topic}"
-            installment = 0
-            for engine in engines:
-                for suffix, is_1hr in (("", False), ("__1hr", True)):
-                    book_id = f"{series_base}__{engine}{suffix}"
-                    if book_id in seen:
-                        continue
-                    if is_1hr and (_h(book_id) % 100) > int(one_hr_ratio * 100):
-                        continue
-                    seen.add(book_id)
-                    installment += 1
-                    title, subtitle = _title_subtitle(
-                        brand, topic, persona, engine, book_id, installment, use_naming=use_naming
-                    )
-                    rows.append({
-                        "book_id": book_id,
-                        "title": title,
-                        "subtitle": subtitle,
-                        "author": _author_display(brand, topic, persona),
-                        "installment": installment,
-                        "topic": topic,
-                        "engine": engine,
-                        "persona": persona,
-                        "cluster": "",
-                    })
-                    if len(rows) >= target:
-                        return rows[:target]
-    return rows
+    def _fill(one_hr_ratio: float) -> None:
+        nonlocal rows, seen
+        for persona in personas:
+            for topic in topics:
+                engines = _engines_for_topic(topic)
+                series_base = f"{brand}__{teacher}__{persona}__{topic}"
+                installment = len(rows)
+                for engine in engines:
+                    for suffix, is_1hr in (("", False), ("__1hr", True)):
+                        book_id = f"{series_base}__{engine}{suffix}"
+                        if book_id in seen:
+                            continue
+                        if is_1hr and (_h(book_id) % 100) > int(one_hr_ratio * 100):
+                            continue
+                        seen.add(book_id)
+                        installment += 1
+                        title, subtitle = _title_subtitle(
+                            brand, topic, persona, engine, book_id, installment, use_naming=use_naming
+                        )
+                        rows.append({
+                            "book_id": book_id,
+                            "title": title,
+                            "subtitle": subtitle,
+                            "author": _author_display(brand, topic, persona),
+                            "installment": installment,
+                            "topic": topic,
+                            "engine": engine,
+                            "persona": persona,
+                            "cluster": "",
+                        })
+                        if len(rows) >= target:
+                            return
+
+    _fill(one_hr_ratio)
+    if len(rows) < target and len(topics) < len(WAYSTREAM_TOPICS):
+        _fill(1.0)
+    return rows[:target]
 
 
 def main() -> int:
