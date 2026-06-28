@@ -38,6 +38,7 @@ from typing import Any
 import requests
 
 from app import app  # Procrastinate App (worker/app.py)
+from gpu_heavy_lock import gpu_heavy_lock
 
 # --- config (mirrors install/00_config.sh; env overridable) ----------------
 COMFY_URL = os.environ.get("PS_COMFY_URL", "http://127.0.0.1:8188")
@@ -240,51 +241,61 @@ def t2i_flux_schnell(
             return {"status": "should_have_been_killed"}
 
         # --- normal dispatch -----------------------------------------------
-        hb.set_phase("submitting")
-        graph = _flux_schnell_graph(prompt, negative, width, height, seed)
-        r = requests.post(f"{COMFY_URL}/prompt", json={"prompt": graph}, timeout=30)
-        r.raise_for_status()
-        pr = r.json()
-        if pr.get("error"):
-            raise RuntimeError(f"ComfyUI /prompt error: {pr['error']}")
-        prompt_id = str(pr.get("prompt_id") or "")
-        if not prompt_id:
-            raise RuntimeError(f"no prompt_id in ComfyUI response: {pr}")
-        hb.set_phase("rendering", prompt_id=prompt_id)
+        with gpu_heavy_lock(
+            f"t2i:{job_label}",
+            worker_lane="manga",
+            wait_s=float(os.environ.get("PS_GPU_HEAVY_WAIT_S", "300")),
+        ):
+            hb.set_phase("submitting")
+            graph = _flux_schnell_graph(prompt, negative, width, height, seed)
+            r = requests.post(f"{COMFY_URL}/prompt", json={"prompt": graph}, timeout=30)
+            r.raise_for_status()
+            pr = r.json()
+            if pr.get("error"):
+                raise RuntimeError(f"ComfyUI /prompt error: {pr['error']}")
+            prompt_id = str(pr.get("prompt_id") or "")
+            if not prompt_id:
+                raise RuntimeError(f"no prompt_id in ComfyUI response: {pr}")
+            hb.set_phase("rendering", prompt_id=prompt_id)
 
-        entry = _poll_history(prompt_id)
-        # Find the SaveImage output filename.
-        filename = None
-        for node_out in entry.get("outputs", {}).values():
-            for img in node_out.get("images", []) or []:
-                filename = img.get("filename")
+            entry = _poll_history(prompt_id)
+            filename = None
+            for node_out in entry.get("outputs", {}).values():
+                for img in node_out.get("images", []) or []:
+                    filename = img.get("filename")
+                    if filename:
+                        break
                 if filename:
                     break
-            if filename:
-                break
-        if not filename:
-            raise RuntimeError(f"no SaveImage output for prompt_id={prompt_id}: {entry}")
+            if not filename:
+                raise RuntimeError(f"no SaveImage output for prompt_id={prompt_id}: {entry}")
 
-        hb.set_phase("copying_output", prompt_id=prompt_id)
-        OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-        src = COMFY_OUTPUT / filename
-        dst = OUTPUT_DIR / filename
-        copied = False
-        try:
-            if src.is_file():
-                shutil.copyfile(src, dst)
-                copied = True
-        except PermissionError:
+            hb.set_phase("copying_output", prompt_id=prompt_id)
+            OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+            src = COMFY_OUTPUT / filename
+            dst = OUTPUT_DIR / filename
             copied = False
-        if not copied:
-            # ComfyUI output may live under the operator home; fetch via /view.
-            v = requests.get(f"{COMFY_URL}/view",
-                             params={"filename": filename, "type": "output"}, timeout=30)
-            v.raise_for_status()
-            dst.write_bytes(v.content)
+            try:
+                if src.is_file():
+                    shutil.copyfile(src, dst)
+                    copied = True
+            except PermissionError:
+                copied = False
+            if not copied:
+                v = requests.get(
+                    f"{COMFY_URL}/view",
+                    params={"filename": filename, "type": "output"},
+                    timeout=30,
+                )
+                v.raise_for_status()
+                dst.write_bytes(v.content)
 
-        hb.set_phase("done", prompt_id=prompt_id)
-        return {"status": "COMPLETED", "prompt_id": prompt_id,
-                "output": str(dst), "workload": WORKLOAD}
+            hb.set_phase("done", prompt_id=prompt_id)
+            return {
+                "status": "COMPLETED",
+                "prompt_id": prompt_id,
+                "output": str(dst),
+                "workload": WORKLOAD,
+            }
     finally:
         hb.stop()

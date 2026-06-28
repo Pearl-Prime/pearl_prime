@@ -55,6 +55,7 @@ TimeoutStopSec=30
 NoNewPrivileges=true
 ProtectSystem=full
 ReadWritePaths=/var/lib/pearl-star /var/log/pearl-star /run/pearl-star
+# manga_out lives under /var/lib/pearl-star (included above)
 
 [Install]
 WantedBy=multi-user.target

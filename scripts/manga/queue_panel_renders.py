@@ -44,6 +44,7 @@ import argparse
 import json
 import os
 import shlex
+import shutil
 import subprocess
 import sys
 import time
@@ -88,10 +89,18 @@ def _wait_for_panel_outputs(
     fail = 0
     for panel_id, out_path, via, dest_path in pending:
         deadline = time.time() + timeout_per_panel
+        dest = Path(dest_path) if dest_path else None
         while time.time() < deadline:
             if out_path.is_file() and out_path.stat().st_size > 1024:
                 ok += 1
                 print(f"  OK   {panel_id}: wrote {out_path.name} (queue)", file=sys.stderr)
+                break
+            if dest and dest.is_file() and dest.stat().st_size > 1024:
+                if not out_path.is_file() or out_path.stat().st_size <= 1024:
+                    out_path.parent.mkdir(parents=True, exist_ok=True)
+                    shutil.copyfile(dest, out_path)
+                ok += 1
+                print(f"  OK   {panel_id}: landed {dest.name} → {out_path.name}", file=sys.stderr)
                 break
             if via.startswith("ssh:") and dest_path:
                 probe = subprocess.run(

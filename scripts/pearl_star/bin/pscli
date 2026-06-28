@@ -17,6 +17,9 @@ Commands (spec §7.1):
     pscli archive <job_id>               remove from operator-action surface
     pscli vram-snapshot                  nvidia-smi diff vs last call
     pscli unload-comfyui                 POST /free to ComfyUI
+    pscli gpu-acquire <lane> [--note T]   block t2i until gpu-release (cjk|manga)
+    pscli gpu-release                    clear gpu_lane sentinel
+    pscli gpu-status                     show gpu_lane + flock metadata
 
 Acceptance (spec §13 criterion 5): `status` returns < 2 s; pause/resume halt +
 restart dispatch correctly.
@@ -335,6 +338,42 @@ def cmd_enqueue(args) -> int:
     return 0
 
 
+def _gpu_lock_module():
+    import importlib.util
+    repo = Path(__file__).resolve().parents[3]
+    mod_path = repo / "scripts" / "pearl_star" / "worker" / "gpu_heavy_lock.py"
+    spec = importlib.util.spec_from_file_location("gpu_heavy_lock", mod_path)
+    mod = importlib.util.module_from_spec(spec)
+    assert spec.loader is not None
+    spec.loader.exec_module(mod)
+    return mod
+
+
+def cmd_gpu_acquire(args) -> int:
+    mod = _gpu_lock_module()
+    mod.set_gpu_lane(args.lane, note=args.note or "")
+    print(f"gpu_lane acquired: {args.lane!r} (t2i blocked until gpu-release)")
+    if args.note:
+        print(f"  note: {args.note}")
+    return 0
+
+
+def cmd_gpu_release(_args) -> int:
+    mod = _gpu_lock_module()
+    mod.clear_gpu_lane()
+    print("gpu_lane released — t2i may dispatch when queue unpaused")
+    return 0
+
+
+def cmd_gpu_status(_args) -> int:
+    mod = _gpu_lock_module()
+    lane = mod.read_gpu_lane()
+    flock = mod.read_lock_state()
+    print(f"gpu_lane:   {lane or '(none)'}")
+    print(f"gpu_flock: {flock or '(none)'}")
+    return 0
+
+
 def cmd_unload_comfyui(_args) -> int:
     import requests
     try:
@@ -362,6 +401,12 @@ def build_parser() -> argparse.ArgumentParser:
     pa = sub.add_parser("archive"); pa.add_argument("job_id"); pa.set_defaults(fn=cmd_archive)
     sub.add_parser("vram-snapshot").set_defaults(fn=cmd_vram_snapshot)
     sub.add_parser("unload-comfyui").set_defaults(fn=cmd_unload_comfyui)
+    ga = sub.add_parser("gpu-acquire", help="Reserve GPU for a lane (blocks t2i)")
+    ga.add_argument("lane", help="Lane name, e.g. cjk or manga")
+    ga.add_argument("--note", default="", help="Optional operator note")
+    ga.set_defaults(fn=cmd_gpu_acquire)
+    sub.add_parser("gpu-release").set_defaults(fn=cmd_gpu_release)
+    sub.add_parser("gpu-status").set_defaults(fn=cmd_gpu_status)
     eq = sub.add_parser("enqueue", help="Defer one t2i panel job to Procrastinate")
     eq.add_argument("--task", required=True, choices=["t2i_flux_dev_h1a", "t2i_qwen_image", "t2i_flux_schnell"])
     eq.add_argument("--payload", required=True, help='JSON object or @file.json with task kwargs')

@@ -16,13 +16,10 @@ def queue_dsn_configured() -> bool:
 
 
 def pearl_star_dest_path(out_path: Path) -> str:
-    """Map a local repo output path to the Pearl Star checkout path for queue workers."""
-    repo = Path(os.environ.get("PS_PHOENIX_REPO", str(REPO_ROOT)))
-    try:
-        rel = out_path.resolve().relative_to(REPO_ROOT.resolve())
-        return str((repo / rel).resolve())
-    except ValueError:
-        return str(out_path.resolve())
+    """Map panel output to a pearl-star-writable path on Pearl Star (PS_MANGA_OUT_ROOT)."""
+    from scripts.pearl_star.manga_panel_paths import pearl_star_dest_path as _writable
+
+    return _writable(out_path)
 
 
 def enqueue_panel_job(
