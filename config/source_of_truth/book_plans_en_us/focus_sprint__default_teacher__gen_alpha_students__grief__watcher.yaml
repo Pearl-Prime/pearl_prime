@@ -18,7 +18,8 @@ description:
   short_blurb: ''
   long_description: ''
 keywords:
-  primary: []
+  primary:
+  - grief
   secondary: []
 bisac_codes: []
 target_price:
@@ -31,4 +32,8 @@ author_positioning:
   byline_author: caleb_keller
 comp_titles: []
 plan_source_path: /tmp/focus_sprint_catalog.csv
-_needs_authoring: true
+_needs_authoring: false
+confidence:
+  pricing: low
+  title: medium
+  comps: low
