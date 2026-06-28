@@ -651,11 +651,23 @@ def remove_sub_four_word_orphan_paragraphs(prose: str) -> str:
         paras = [p for p in re.split(r"\n\s*\n", body) if p.strip()]
         kept: list[str] = []
         for p_idx, p in enumerate(paras):
-            words = re.findall(r"[A-Za-z]+", p)
-            if len(words) < 4:
-                # Match register_gate F2.D: only the chapter working title (index 0)
-                # may be a short Title-Case heading; mid-chapter leaks like "Place" drop.
-                if p_idx == 0 and _is_titlecase_heading(p.strip()):
+            s = p.strip()
+            # Mirror register_gate F2.D EXACTLY so the strip removes precisely what the gate
+            # flags. Count words with .split() (whitespace) — NOT re.findall(r"[A-Za-z]+"),
+            # which over-counts contractions/possessives ("let's" -> let + s) and let the real
+            # artifact "Now, let's acknowledge" (3 whitespace-words, 4 alpha-tokens) survive as a
+            # 4-token paragraph -> F2.D HARD_FAIL on compact_book_5ch_15min/burnout. F2.D only
+            # flags a sub-4-word paragraph that does NOT end in terminal punctuation and does not
+            # start with '#'/digit; a Title-Case working title at index 0 is legitimate.
+            wc = len(s.split())
+            if (
+                0 < wc < 4
+                and not s.startswith("#")
+                and s
+                and not s[0].isdigit()
+                and not s.endswith((".", "?", "!"))
+            ):
+                if p_idx == 0 and _is_titlecase_heading(s):
                     kept.append(p)
                 continue
             kept.append(p)
