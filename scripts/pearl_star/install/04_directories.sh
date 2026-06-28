@@ -43,6 +43,7 @@ mk "${PS_LOG_DIR}"         0755
 mk "${PS_HEARTBEAT_FORENSIC}" 0755   # /var/log/pearl-star/heartbeat (60s flush, spec §5.1)
 mk "${PS_LIB_DIR}"         0755
 mk "${PS_OUTPUT_DIR}"      0755      # A1 output lands here (handoff §5.3)
+mk "${PS_MANGA_OUT_ROOT}"  0755      # manga panel PNG land (pearl-star owned; OPD-20260629-003)
 mk "${PS_DLQ_DIR}"         0750      # dead-letter (handoff §5.2)
 mk "${PS_ALERT_DIR}"       0755      # operator alert drops (spec §5.4)
 
@@ -69,6 +70,7 @@ printf '    %s\n' \
   "${PS_HOME}            (venv + app/)" \
   "${PS_LOG_DIR}         (worker/watchdog/monitor logs + heartbeat forensics)" \
   "${PS_OUTPUT_DIR}      (A1 smoke output)" \
+  "${PS_MANGA_OUT_ROOT}   (manga panel PNG output — pearl-star owned)" \
   "${PS_DLQ_DIR}         (dead-letter queue)" \
   "${PS_ALERT_DIR}       (operator alert JSONL drops)" \
   "${PS_HEARTBEAT_DIR}   (tmpfs heartbeats)" \

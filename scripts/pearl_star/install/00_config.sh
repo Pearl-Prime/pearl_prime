@@ -60,6 +60,7 @@ PS_COSYVOICE_URL="${PS_COSYVOICE_URL:-http://127.0.0.1:9880}" # spec §3.2 / §4
 PS_LOG_DIR="${PS_LOG_DIR:-/var/log/pearl-star}"
 PS_LIB_DIR="${PS_LIB_DIR:-/var/lib/pearl-star}"
 PS_OUTPUT_DIR="${PS_OUTPUT_DIR:-/var/lib/pearl-star/output}"     # handoff §5.3 A1
+PS_MANGA_OUT_ROOT="${PS_MANGA_OUT_ROOT:-/var/lib/pearl-star/manga_out}"  # t2i panel PNG land (pearl-star owned)
 PS_DLQ_DIR="${PS_DLQ_DIR:-/var/lib/pearl-star/dlq}"              # handoff §5.2 dead-letter
 PS_RUN_DIR="${PS_RUN_DIR:-/run/pearl-star}"                      # tmpfs heartbeats
 PS_HEARTBEAT_DIR="${PS_HEARTBEAT_DIR:-/run/pearl-star/heartbeat}"           # spec §5.1 (tmpfs)

@@ -42,19 +42,7 @@ fi
 
 set -a && . "${OP_ENV}" && set +a
 echo "=== clearing stale t2i jobs (concurrency=1 blocks smoke) ==="
-"${PS_PY}" - <<'PY'
-import os, psycopg
-dsn = os.environ["PS_QUEUE_DSN"]
-schema = os.environ.get("PS_PG_SCHEMA", "pearl_star_queue")
-with psycopg.connect(dsn) as conn, conn.cursor() as cur:
-    cur.execute(
-        f"UPDATE {schema}.procrastinate_jobs SET status='failed' "
-        "WHERE queue_name='t2i' AND status IN ('todo','doing')"
-    )
-    n = cur.rowcount
-    conn.commit()
-print(f"failed {n} stale t2i job(s)")
-PY
+"${PS_PY}" "${HERE}/reset_zombie_procrastinate_jobs.py" --stale-minutes 30 --queue t2i
 
 SMOKE_PANEL="${SMOKE_PANEL:-ep001_035}"
 OUT="artifacts/manga/panels/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/ep_001/${SMOKE_PANEL}.png"

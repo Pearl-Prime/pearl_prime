@@ -13,7 +13,8 @@ echo "=== expose queue env + worker sync for SSH enqueue ==="
 
 sudo install -d -m 0750 /etc/pearl-star
 # ps_dsn must run as root (reads /opt/pearl-star/.pgpass_queue) — never expand $(ps_dsn) in ahjan108 shell.
-sudo env HERE="${HERE}" PS_GROUP="${PS_GROUP}" bash <<'EOSUDO'
+USER_HOME="${HOME:-/home/${SUDO_USER:-ahjan108}}"
+sudo env HERE="${HERE}" PS_GROUP="${PS_GROUP}" USER_HOME="${USER_HOME}" bash <<'EOSUDO'
 set -euo pipefail
 # shellcheck source=00_config.sh
 . "${HERE}/00_config.sh"
@@ -23,6 +24,8 @@ PS_QUEUE_DSN=${DSN}
 PS_PG_SCHEMA=${PS_PG_SCHEMA}
 PS_COMFY_URL=${PS_COMFY_URL}
 PS_OUTPUT_DIR=${PS_OUTPUT_DIR}
+PS_MANGA_OUT_ROOT=${PS_MANGA_OUT_ROOT}
+PS_PHOENIX_REPO=${USER_HOME}/phoenix_omega
 PS_LIB_DIR=${PS_LIB_DIR}
 PS_LOG_DIR=${PS_LOG_DIR}
 PS_DLQ_DIR=${PS_DLQ_DIR}
@@ -39,7 +42,6 @@ chmod 0640 /etc/pearl-star/queue.env
 chgrp "${PS_GROUP}" /etc/pearl-star/queue.env
 EOSUDO
 
-USER_HOME="${HOME:-/home/${SUDO_USER:-ahjan108}}"
 OP_ENV="${USER_HOME}/phoenix_omega/.pearl_star_queue.env"
 echo "copying queue env → ${OP_ENV}"
 sudo cp /etc/pearl-star/queue.env "${OP_ENV}"
@@ -48,7 +50,7 @@ chmod 600 "${OP_ENV}"
 
 echo "syncing worker modules → ${PS_APP}"
 sudo install -d -m 0755 "${PS_APP}"
-for f in app.py flux_schnell_worker.py flux_dev_manga_worker.py qwen_manga_worker.py; do
+for f in app.py flux_schnell_worker.py flux_dev_manga_worker.py qwen_manga_worker.py gpu_heavy_lock.py; do
   sudo install -m 0644 "${WORKER_SRC}/${f}" "${PS_APP}/${f}"
 done
 for f in watchdog.py monitor.py; do
