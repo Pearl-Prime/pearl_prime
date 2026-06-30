@@ -1,0 +1,100 @@
+{
+  "source": "spine_pipeline",
+  "topic_id": "anxiety",
+  "persona_id": "corporate_managers",
+  "teacher_id": "",
+  "runtime_format": "short_book_30",
+  "book_plan_id": "generated_anxiety_corporate_managers_short_book_30",
+  "quality_profile": "production",
+  "gates_run": true,
+  "gates_hard": true,
+  "gates": {
+    "chapter_flow": {
+      "status": "PASS",
+      "report": "chapter_flow_report.json"
+    },
+    "register_gate": {
+      "status": "PASS",
+      "verdict": "PASS",
+      "failure_counts_by_id": {},
+      "report": "register_gate_report.json"
+    },
+    "bestseller_craft": {
+      "status": "PASS",
+      "overall_score": 0.4912
+    },
+    "ei_v2": {
+      "status": "PASS",
+      "composite": 0.6162,
+      "report": "ei_v2_report.json"
+    },
+    "editorial": {
+      "status": "WARN",
+      "report": "editorial_report.json"
+    },
+    "memorable_lines": {
+      "status": "WARN",
+      "chapters_with_two_or_more_quotable_lines": 2,
+      "chapter_count": 8,
+      "report": "memorable_line_report.json"
+    },
+    "transformation_arc": {
+      "status": "PASS",
+      "report": "transformation_heatmap.json"
+    },
+    "book_pass": {
+      "status": "PASS",
+      "report": "book_pass_report.json"
+    }
+  },
+  "quality_gate_failures": [],
+  "overall_status": "WARN",
+  "book_quality_gate": {
+    "release_band": "Pass",
+    "report_path": "/Users/ahjan/phoenix_omega/artifacts/qa/plan_scale_qa_pilot_20260630/renders/short_book_30__corporate_managers__anxiety/book_quality_report.json",
+    "fail_reasons": [],
+    "hold_reasons": []
+  },
+  "pre_depth_total_words": 4346,
+  "post_depth_total_words": 6983,
+  "frame": "somatic_first",
+  "governance_report": {
+    "exercise_slots_dropped": [],
+    "chapter_contract_warnings": [],
+    "frame_governance_chapters": [],
+    "frame_softened_sentences": [],
+    "frame_stripped_sentences": [],
+    "frame_hard_fail_reasons": [],
+    "recurrence_report": [
+      "removed_extra_occurrences: 'soft daylight along the sill' x6"
+    ],
+    "whole_book_dedupe_notes": [
+      "book_wide_f1_signature_dedupe: removed re-stamp 'Your body needs this one. Not to fix anything. Just to give yourself a different'",
+      "book_wide_f1_signature_dedupe: removed re-stamp 'Before you keep reading. Not to fix anything. Just to give yourself a different '",
+      "book_wide_f1_signature_dedupe: removed re-stamp 'Now, I want you to notice something. Notice what felt true. There is no wrong an'",
+      "book_wide_f1_signature_dedupe: removed re-stamp 'Now, before you move on, play with it again later. Nothing has to change from th'",
+      "book_wide_f1_signature_dedupe: removed re-stamp 'Close the book for this. Not to fix anything. Just to give yourself a different '",
+      "book_wide_f1_signature_dedupe: removed re-stamp 'Now, I want you to notice something. Notice if the next step feels clearer. Ther'",
+      "book_wide_f1_signature_dedupe: removed re-stamp 'Now, before you move on, action does not need to be big. Nothing has to change f'",
+      "book_wide_paragraph_dedupe: removed_extra (occurrence 3) 'The open-plan office hums. Your cubicle is the eighth one. Conversations happen '",
+      "book_wide_paragraph_dedupe: removed_extra (occurrence 4) 'The open-plan office hums. Your cubicle is the eighth one. Conversations happen '",
+      "book_wide_f1_signature_dedupe: removed re-stamp 'Now, I want you to notice something. Notice how the room feels different. Whatev'",
+      "book_wide_f1_signature_dedupe: removed re-stamp \"Your phone buzzes during dinner and your whole body tenses. You're not on-call. \"",
+      "book_wide_paragraph_dedupe: removed_extra (occurrence 5) 'The open-plan office hums. Your cubicle is the eighth one. Conversations happen '",
+      "book_wide_f1_signature_dedupe: removed re-stamp \"The inbox was supposed to be the safe part of the day. But she'd noticed the rea\"",
+      "book_wide_paragraph_dedupe: removed_extra (occurrence 6) 'The open-plan office hums. Your cubicle is the eighth one. Conversations happen '",
+      "book_wide_f1_signature_dedupe: removed re-stamp 'Do this one out loud. Not to fix anything. Just to give yourself a different inp'",
+      "book_wide_f1_signature_dedupe: removed re-stamp 'Now, I want you to notice something. Notice which words landed. Or not. Both are'",
+      "book_wide_f1_signature_dedupe: removed re-stamp 'Now, before you move on, repeat the one that landed. Nothing has to change from '"
+    ]
+  },
+  "exercise_slots_dropped": [],
+  "chapter_contract_warnings": [],
+  "frame_governance_chapters": [],
+  "frame_softened_sentences": [],
+  "frame_stripped_sentences": [],
+  "frame_hard_fail_reasons": [],
+  "recurrence_report": [
+    "removed_extra_occurrences: 'soft daylight along the sill' x6"
+  ]
+}

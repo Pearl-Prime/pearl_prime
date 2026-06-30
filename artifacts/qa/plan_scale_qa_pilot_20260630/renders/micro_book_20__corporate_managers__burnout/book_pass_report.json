@@ -1,0 +1,55 @@
+{
+  "status": "PASS",
+  "source": "spine_pipeline",
+  "checks": {
+    "word_budget": {
+      "status": "PASS",
+      "word_count": 3843,
+      "target_range": [
+        3000,
+        5500
+      ]
+    },
+    "band_distribution": {
+      "status": "PASS",
+      "distinct_roles": [
+        "hidden_belief",
+        "identity_fracture",
+        "integration",
+        "practical_interruption",
+        "recognition",
+        "somatic_legitimacy"
+      ],
+      "distinct_count": 6
+    },
+    "identity_stages": {
+      "status": "PASS",
+      "stages": {
+        "recognition": true,
+        "mechanism": true,
+        "integration": true
+      },
+      "stage_count": 3
+    },
+    "callback_completion": {
+      "status": "PASS"
+    },
+    "angle_journey_coherence": {
+      "status": "PASS",
+      "errors": [],
+      "warnings": [
+        "angle_journey_coherence: SKIPPED (no angle_id or not long-form runtime)"
+      ],
+      "metrics": {
+        "angle_id": "INVISIBLE_COST",
+        "runtime_format": "micro_book_20",
+        "skipped": true
+      }
+    },
+    "atom_metadata_subchecks": {
+      "status": "SKIPPED",
+      "reason": "spine mode has no compiled atom_ids/chapter_slot_sequence metadata gates"
+    }
+  },
+  "failures": []
+}

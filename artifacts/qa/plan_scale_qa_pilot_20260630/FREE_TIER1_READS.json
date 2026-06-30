@@ -1,0 +1,27 @@
+{
+  "judge": "Pearl_Dev+Pearl_Research (free Tier-1, operator-present, no API/key/network)",
+  "method": "Agent read assembled book.txt directly. Full reads: micro_book_15 burnout + micro_book_15 anxiety. Targeted section reads + gate-report cross-check on the remaining 11 assembled cells. No paid LLM, no GPU, no llm_callback.",
+  "shared_findings": {
+    "core_prose_quality": "Paragraph-level prose is genuinely strong: vivid corporate-manager opening scenes, clinically accurate burnout/anxiety framing, warm contemplative voice, real therapeutic value. This is bestseller-adjacent at the paragraph level.",
+    "cohesion_defect": "Between paragraphs, short single-sentence interstitial atoms (scene-anchor / bridge / dwell-beat) are inserted that do NOT connect to the surrounding prose and read as a stream of disconnected fortune-cookie fragments (e.g. 'The story can wait while the body catches up.', 'Quiet the explanation. Watch the small switch flip.', 'The seeing has a downstairs. Step into it.'). Near-identical fragments recur across chapters AND across topics (burnout vs anxiety), which a reader notices as repetition. This is the dominant cohesion/therapeutic-flow weakness and it is topic-agnostic.",
+    "micro_format_truncation": "micro_book_15 specifically ends mid-sentence ('Breathing through the' / 'It') because the runtime word-ceiling clamp trims the final chapter tail. Larger formats end cleanly.",
+    "register_vs_human_gap": "Several cells PASS register_gate yet a human reader sees real cohesion problems (disconnected bridge atoms). register PASS is necessary but NOT sufficient for reader-felt cohesion — a proxy-validity caveat in its own right."
+  },
+  "per_book": [
+    {"cell": "burnout x micro_book_15", "cohesion": "WEAK — strong paragraphs, but dense disconnected bridge fragments + mid-sentence truncation at the end", "therapeutic_value": "HIGH at paragraph level (accurate burnout signature, somatic practices, anti-catastrophizing)", "bestseller_red_flags": ["fortune-cookie fragment flood", "final-sentence truncation"]},
+    {"cell": "anxiety x micro_book_15", "cohesion": "WEAK — same disconnected-bridge pattern as burnout; core prose excellent ('coming home to the person you already are')", "therapeutic_value": "HIGH (homecoming framing, present-self acceptance, somatic regulation)", "bestseller_red_flags": ["same fragment atoms reused from burnout book", "fragments interrupt flow"]},
+    {"cell": "burnout x micro_book_20", "cohesion": "WEAK — same pattern, slightly more room to breathe", "therapeutic_value": "HIGH", "bestseller_red_flags": ["fragment repetition"]},
+    {"cell": "anxiety x micro_book_20", "cohesion": "WEAK", "therapeutic_value": "HIGH", "bestseller_red_flags": ["fragment repetition"]},
+    {"cell": "burnout x short_book_30", "cohesion": "MODERATE — longer chapters dilute the fragment density", "therapeutic_value": "HIGH", "bestseller_red_flags": ["fragment repetition"]},
+    {"cell": "anxiety x short_book_30", "cohesion": "MODERATE", "therapeutic_value": "HIGH", "bestseller_red_flags": ["fragment repetition"]},
+    {"cell": "burnout x standard_book", "cohesion": "MODERATE — clean ending, more developed chapters, fragments still present", "therapeutic_value": "HIGH", "bestseller_red_flags": ["fragment repetition across 12 chapters"]},
+    {"cell": "anxiety x standard_book", "cohesion": "MODERATE", "therapeutic_value": "HIGH", "bestseller_red_flags": ["fragment repetition"]},
+    {"cell": "burnout x extended_book_2h", "cohesion": "WEAK — register F2 HARD_FAIL (1) flags a register/scene-anchor breach a reader would feel as a tonal/closing-line repeat", "therapeutic_value": "HIGH at paragraph level", "bestseller_red_flags": ["F2 register hard-fail", "fragment repetition"]},
+    {"cell": "anxiety x extended_book_2h", "cohesion": "MODERATE", "therapeutic_value": "HIGH", "bestseller_red_flags": ["fragment repetition"]},
+    {"cell": "burnout x deep_book_4h", "cohesion": "MODERATE — long-form, clean ending", "therapeutic_value": "HIGH", "bestseller_red_flags": ["fragment repetition at scale (16->12 ch)"]},
+    {"cell": "anxiety x deep_book_4h", "cohesion": "MODERATE", "therapeutic_value": "HIGH", "bestseller_red_flags": ["fragment repetition"]},
+    {"cell": "anxiety x deep_book_6h", "cohesion": "MODERATE — 52k words, register WARN; fragments dilute but recurrence is visible over 12 long chapters", "therapeutic_value": "HIGH", "bestseller_red_flags": ["fragment repetition across a very long book", "register WARN"]},
+    {"cell": "burnout x deep_book_6h", "cohesion": "N/A — BUILD_FAIL: scene_anchor density cap (>3-word phrase repeats exceed cap 3) halted render before book.txt", "therapeutic_value": "N/A (not assembled)", "bestseller_red_flags": ["scene_anchor density hard-fail blocks the deepest burnout build"]}
+  ],
+  "headline": "Paragraph prose is therapeutically strong and bestseller-adjacent; the assembled-book weakness is COHESION between atoms (disconnected, repeated bridge/scene-anchor fragments), not therapeutic substance. A book can PASS register_gate and still read as cohesion-weak to a human — so plan-cohesion + register PASS together still UNDER-predict reader-felt cohesion."
+}
