@@ -16,15 +16,17 @@ User=pearl-star
 Group=pearl-star
 WorkingDirectory=/opt/pearl-star/app
 EnvironmentFile=/etc/pearl-star/queue.env
-Environment=PROCRASTINATE_APP=app.app:app
+Environment=PROCRASTINATE_APP=app.app
 Environment=PYTHONPATH=/opt/pearl-star/app
 Environment=PYTHONUNBUFFERED=1
 Environment=PS_PHOENIX_REPO=/home/ahjan108/phoenix_omega
 
 ExecStartPre=/bin/sh -c 'while [ -f "${PS_LIB_DIR:-/var/lib/pearl-star}/queue.paused" ]; do sleep 3; done'
 
+# NOTE: --app uses dot-form `app.app` (module.attr), NOT colon-form `app.app:app`.
+# procrastinate mis-parses the `:` and fails to import the app (Pearl Star kit #1692).
 ExecStart=/opt/pearl-star/venv/bin/python -m procrastinate \
-    --app app.app:app worker --queues llm --concurrency 1 --name llm
+    --app app.app worker --queues llm --concurrency 1 --name llm
 
 Restart=always
 RestartSec=5s
