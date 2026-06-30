@@ -26,6 +26,131 @@ TEACHER_BANKS_ROOT = REPO_ROOT / "SOURCE_OF_TRUTH" / "teacher_banks"
 COMPRESSION_ATOMS_ROOT = REPO_ROOT / "SOURCE_OF_TRUTH" / "compression_atoms"
 
 
+# ---------------------------------------------------------------------------
+# THE GATE (loader hardening): drop unfilled atom-stub variants from the pool.
+#
+# Root cause this closes: _parse_block_file_with_prose / _parse_canonical_with_prose
+# parsed EVERY "## <SLOT> vNN" block into the selectable variant pool with NO
+# placeholder filter, so a partially-authored atom (e.g. a HOOK cell with 1 real
+# v01 plus 29 unfilled "[Persona-specific hook for <persona> × <topic>]" variants)
+# leaked its stub label into reader-facing prose. The registry path
+# (enrichment_select._REGISTRY_PLACEHOLDER_RE) and the composer
+# (chapter_composer._is_placeholder_text) already filter; the spine loader did not.
+#
+# We REUSE the registry's existing regex (import it — do NOT redefine the
+# composer-lane pattern here) and mirror chapter_composer._PLACEHOLDER_BRACKET_RE
+# (bracket labels naming hook/persona/placeholder/todo/insert/specific/etc.) plus
+# the bracketed pipeline forms ([Placeholder:|Missing:|Silence:]), a bare
+# "[...]" / "[…]" ellipsis stub, and unresolved template variables
+# ({var} / {{var}} / %(x)s). A whole-block body matching any of these is EXCLUDED
+# from the selectable variant pool — for ALL slot types, not just HOOK.
+#
+# Empty-body blocks were already dropped upstream (the parser's
+# `candidate.startswith("##")` skip), so this filter targets the leaked
+# *bracket-text* / *unresolved-variable* stubs specifically.
+# ---------------------------------------------------------------------------
+
+# Import the EXACT regex the registry path already uses (do NOT touch
+# enrichment_select.py beyond importing this symbol). Fall back to an inline
+# mirror only if the import surface ever changes, so the loader never silently
+# stops filtering.
+try:
+    from phoenix_v4.planning.enrichment_select import (
+        InsufficientVariantsError,
+        _REGISTRY_PLACEHOLDER_RE,
+    )
+except Exception:  # pragma: no cover - defensive fallback
+    class InsufficientVariantsError(RuntimeError):
+        """Fallback mirror of enrichment_select.InsufficientVariantsError."""
+
+    _REGISTRY_PLACEHOLDER_RE = re.compile(
+        r"^\s*\[[^\]]*\b(?:persona-specific|hook for|placeholder|tbd|tktk|todo|draft)\b[^\]]*\]\s*$",
+        re.IGNORECASE,
+    )
+
+# Broader bracket-stub detector (substring, not whole-line). Mirrors
+# chapter_composer._PLACEHOLDER_BRACKET_RE and book_renderer._BRACKET_TEMPLATE_STUB_RE,
+# extended with the editorial verbs "insert" and "specific" called out in the
+# loader-hardening mandate. A whole-block body whose ONLY content is such a token
+# is a stub.
+_LOADER_BRACKET_STUB_RE = re.compile(
+    r"\[[^\]]*\b(?:persona-specific|hook for|placeholder|tbd|tktk|todo|insert|specific|draft)\b[^\]]*\]",
+    re.IGNORECASE,
+)
+_LOADER_PIPELINE_STUB_RE = re.compile(
+    r"\[(?:Placeholder|Missing|Silence)\s*:[^\]]*\]",
+    re.IGNORECASE,
+)
+_LOADER_BARE_BRACKET_STUB_RE = re.compile(r"^\[\s*(?:\.\.\.|…)\s*\]$")
+# Unresolved template variables: {var} / {{var}} / %(x)s. A body that is ONLY an
+# unresolved variable is a stub. (Embedded {street_name} location templates inside
+# real prose are resolved downstream by the renderer and are NOT treated as stubs
+# here — only a body whose entire content is a single bare variable token.)
+_LOADER_BARE_VAR_STUB_RE = re.compile(
+    r"^(?:\{\{[A-Za-z_]\w*\}\}|\{[A-Za-z_]\w*\}|%\([A-Za-z_]\w*\)s)$"
+)
+# Legitimate bracketed prose that must never be treated as a stub (citations,
+# editorial notes). Mirrors book_renderer._LEGIT_BRACKET_TOKEN_RE.
+_LOADER_LEGIT_BRACKET_RE = re.compile(
+    r"^(?:"
+    r"\[sic\]"
+    r"|\[emphasis added\]"
+    r"|\[ibid\.?\]"
+    r"|\[\d+\]"
+    r"|\[[A-Z][A-Za-z]+(?:\s+et\s+al\.?)?,?\s+\d{4}\]"
+    r")$",
+    re.IGNORECASE,
+)
+
+
+def _strip_fence_lines(body: str) -> str:
+    """Strip leading/trailing standalone ``---`` fence lines from a parsed body.
+
+    The block-file split (`\\n---\\s*\\n`) leaves a leading ``---`` on bodies that
+    follow an EMPTY metadata block (``## SLOT vNN`` / ``---`` / (blank) / ``---`` /
+    body). Without this, a real body keeps a junk ``---`` first line and a stub
+    body reads as ``---\\n[Persona-specific hook …]`` — which defeats the
+    whole-line stub regexes. Stripping fence-only lines from both ends fixes the
+    latent fence leak AND lets the stub detector see the true body.
+    """
+    lines = (body or "").splitlines()
+    while lines and lines[0].strip() in ("", "---"):
+        lines.pop(0)
+    while lines and lines[-1].strip() in ("", "---"):
+        lines.pop()
+    return "\n".join(lines).strip()
+
+
+def _is_stub_body(body: str) -> bool:
+    """True iff an atom-variant body is an unfilled stub (must be dropped from the pool).
+
+    A body is a stub when it is empty, or its (stripped) content is a bracketed
+    editorial placeholder / pipeline marker / bare-ellipsis / unresolved-variable
+    token — and NOT one of the allow-listed legitimate bracket forms. Mirrors the
+    registry filter (enrichment_select._REGISTRY_PLACEHOLDER_RE) and the composer /
+    delivery gates so the spine loader, registry, and composer agree on what a stub is.
+    """
+    stripped = (body or "").strip()
+    if not stripped:
+        return True
+    if _LOADER_LEGIT_BRACKET_RE.match(stripped):
+        return False
+    # Whole-line registry stub (the documented [Persona-specific hook for …] vector).
+    if _REGISTRY_PLACEHOLDER_RE.match(stripped):
+        return True
+    # Bare ellipsis / bare unresolved-variable body.
+    if _LOADER_BARE_BRACKET_STUB_RE.match(stripped) or _LOADER_BARE_VAR_STUB_RE.match(stripped):
+        return True
+    # Broader bracket/pipeline stub anywhere in an otherwise-bracket-only body:
+    # treat as a stub only when stripping the matched token(s) leaves no prose,
+    # so real prose that merely *mentions* a bracketed aside is never dropped.
+    residue = _LOADER_BRACKET_STUB_RE.sub("", stripped)
+    residue = _LOADER_PIPELINE_STUB_RE.sub("", residue).strip()
+    if (_LOADER_BRACKET_STUB_RE.search(stripped) or _LOADER_PIPELINE_STUB_RE.search(stripped)) and not residue:
+        return True
+    return False
+
+
 def _load_yaml(p: Path) -> dict:
     if not p.exists() or yaml is None:
         return {}
@@ -154,15 +279,40 @@ def _parse_canonical_with_prose(path: Path, persona: str, topic: str, engine: st
         else:
             raw_slug = re.sub(r"[^A-Za-z0-9]+", "_", raw_role).strip("_").upper() or "LEGACY"
             atom_id = f"{persona}_{topic}_{engine}_{role}_{raw_slug}_v{ver}"
-        out[atom_id] = prose.strip()
+        # THE GATE: drop unfilled STORY stub variants too (all slots, not just HOOK).
+        body = _strip_fence_lines(prose)
+        if _is_stub_body(body):
+            logger.info(
+                "prose_resolver: dropping STORY stub variant %s — unfilled atom; "
+                "not selectable.", atom_id,
+            )
+            continue
+        out[atom_id] = body
     return out
 
 
-def _parse_block_file_with_prose(path: Path, persona: str, topic: str, slot_type: str) -> dict[str, str]:
-    """Parse non-STORY CANONICAL.txt. Format: ## TYPE vNN --- prose --- (or ## TYPE vNN --- metadata --- prose ---). Return atom_id -> prose."""
+def _parse_block_file_with_prose(
+    path: Path,
+    persona: str,
+    topic: str,
+    slot_type: str,
+    *,
+    required: bool = False,
+) -> dict[str, str]:
+    """Parse non-STORY CANONICAL.txt. Format: ## TYPE vNN --- prose --- (or ## TYPE vNN --- metadata --- prose ---). Return atom_id -> prose.
+
+    Unfilled stub variants (see _is_stub_body) are excluded from the returned
+    pool. When ``required`` is True and the file parses to ONE-OR-MORE blocks but
+    every block is a stub (so zero real variants survive), an
+    InsufficientVariantsError is raised — the required slot has no shippable
+    prose and the build must fail loudly so atoms are authored upstream rather
+    than shipping a stub. (A non-existent file returns {} and is the caller's
+    "missing" concern, not a stub concern.)
+    """
     if not path.exists():
         return {}
     text = path.read_text(encoding="utf-8")
+    _saw_any_block = bool(re.search(r"##\s+\S+\s+v\d+", text))
     parts = re.split(r"\n---\s*\n", text)
     out: dict[str, str] = {}
     for i, part in enumerate(parts):
@@ -196,7 +346,29 @@ def _parse_block_file_with_prose(path: Path, persona: str, topic: str, slot_type
 
             if looks_like_metadata and i + 2 < len(parts):
                 candidate = parts[i + 2].strip()
+            # Strip leftover ``---`` fence lines (empty-metadata block artifact)
+            # before stub-detection and storage — fixes a latent fence leak and
+            # lets the stub detector see the true body.
+            candidate = _strip_fence_lines(candidate)
+            # THE GATE: never admit an unfilled stub variant to the selectable
+            # pool. A partially-authored cell (real v01 + stub v02..vNN) now
+            # surfaces ONLY its real variants; a cell with only stubs surfaces
+            # nothing here, and resolve_prose_for_plan raises
+            # InsufficientVariantsError so the build fails loudly (author atoms —
+            # never ship the stub).
+            if _is_stub_body(candidate):
+                logger.info(
+                    "prose_resolver: dropping stub variant %s (%s) — unfilled atom; "
+                    "not selectable.", atom_id, _label,
+                )
+                continue
             out[atom_id] = candidate
+    if required and _saw_any_block and not out:
+        raise InsufficientVariantsError(
+            f"{persona}/{topic}/{slot_type}: required slot has only unfilled stub "
+            f"variants in {path} — zero shippable prose. Author atoms upstream; "
+            "never ship the stub (THE GATE)."
+        )
     return out
 
 

@@ -51,6 +51,37 @@ except ImportError:
     sys.exit(1)
 
 
+# THE GATE (assembly-path stub catch). #3787 added a stub-catch to
+# book_renderer.delivery_contract_gate + book_quality_gate, but build_epub.py —
+# the operator/pathway EPUB packager — never invoked it, so a stub-bearing book
+# text could still be packaged into a shippable EPUB (the flip pilot proved this).
+# We invoke the CANONICAL gate here so any unfilled stub HARD-FAILS emission. No
+# parallel detector; we reuse delivery_contract_gate verbatim.
+#
+# Escape hatch: PHOENIX_EPUB_SKIP_STUB_GATE=1 disables the gate for legacy test
+# fixtures / book texts that intentionally carry forbidden tokens. Default OFF —
+# the gate runs on every build.
+def _run_stub_delivery_gate(text: str, *, source_hint: str) -> None:
+    """Hard-fail EPUB assembly if ``text`` contains an unfilled atom stub.
+
+    Raises book_renderer.DeliveryContractError (which propagates to a non-zero
+    exit through main()/build_all()). The gate is the SAME stub-catch wired by
+    #3787 into the delivery contract, so the spine EPUB-assembly path and the
+    renderer agree on what blocks a ship.
+    """
+    import os
+
+    if os.environ.get("PHOENIX_EPUB_SKIP_STUB_GATE") == "1":
+        logger.warning(
+            "PHOENIX_EPUB_SKIP_STUB_GATE=1 — skipping assembly-path stub gate for %s",
+            source_hint,
+        )
+        return
+    from phoenix_v4.rendering.book_renderer import delivery_contract_gate
+
+    delivery_contract_gate(text, source_hint=source_hint)
+
+
 # ─── BOOK MANIFEST ────────────────────────────────────────────────────
 
 TEACHER_BOOKS = [
@@ -255,6 +286,10 @@ def build_epub(
 ) -> Path:
     """Build a KDP-ready EPUB 3 from a book text file."""
     text = input_path.read_text(encoding="utf-8")
+
+    # THE GATE: hard-fail before EPUB emission on any unfilled atom stub.
+    _run_stub_delivery_gate(text, source_hint=str(input_path))
+
     chapters = parse_book_text(text)
 
     if not chapters:
@@ -441,11 +476,20 @@ def main():
         results = build_all(dry_run=args.dry_run, raw_cover=args.raw_cover)
         ok = sum(1 for r in results if r["status"] == "ok")
         print(f"\n{'DRY-RUN: ' if args.dry_run else ''}{ok}/{len(results)} built")
-        return
+        # THE GATE: a stub (or any) build failure in batch mode must exit
+        # non-zero so CI / the operator pipeline does not treat a stub-blocked
+        # run as a clean ship.
+        errored = [r for r in results if r["status"] == "error"]
+        if errored and not args.dry_run:
+            print(f"FAIL: {len(errored)} book(s) failed the build/stub gate.", file=sys.stderr)
+            return 1
+        return 0
 
     if not args.input:
         parser.error("--input or --batch required")
 
+    # Single build: build_epub() raises DeliveryContractError on a stub, which
+    # propagates here as a non-zero exit (return 1) rather than packaging the EPUB.
     build_epub(
         input_path=args.input,
         title=args.title or "Untitled",
@@ -460,7 +504,8 @@ def main():
         description=args.description,
         disclosure=args.disclosure,
     )
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main() or 0)
