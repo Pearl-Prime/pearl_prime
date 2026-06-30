@@ -1849,3 +1849,181 @@ topics:
           default be secular_to_moderate (current setting), with a persona-driven
           switch? Or should spirituality_level be left as requires_human_decision
           for every somatic_healing catalog entry?
+  mindfulness:
+    primary_mechanism: overwhelm
+    allowed_engines:
+    - overwhelm
+    - shame
+    - comparison
+    knob_defaults:
+      story_density: high
+      exercise_density: low
+      mechanism_depth: high
+      reflection_depth: high
+      pacing_profile: measured
+      emotional_temperature: warm
+      practical_vs_contemplative: contemplative_first
+      teacher_presence: high
+      spirituality_level: secular
+      compression: light
+      narrative_structure: gladwell_spiral
+      runtime_target: standard
+    hard_floors:
+      emotional_temperature: warm
+      story_density: high
+      mechanism_depth: medium
+      pacing_profile: measured
+    hard_ceilings:
+      exercise_density: medium
+      spirituality_level: secular
+      compression: light
+    phase_overrides:
+      early_book:
+        exercise_density: none
+        practical_vs_contemplative: contemplative
+        mechanism_depth: high
+      mid_book:
+        exercise_density: none
+        reflection_depth: high
+        practical_vs_contemplative: contemplative_first
+      late_book:
+        exercise_density: low
+        practical_vs_contemplative: balanced
+    dangerous_combinations: []
+    platform_conflicts:
+    - platform:
+      - ximalaya
+      - kakao_page
+      - naver_audiobook
+      conflict: 'Short episode format cannot sustain 9-chapter recognition-before-practice arc. Spine: "Reframe
+        cannot arrive before ch09 — will register as toxic positivity without full preceding arc."
+
+        '
+      resolution: 'Do not run self_worth in micro format. Minimum standard_book.
+
+        '
+    - platform:
+      - spotify
+      conflict: 'Spotify''s preferred_structures include myth_killer. Self-worth''s scorecard is not a myth
+        — it is a real mechanism that must be examined, not debunked. myth_killer structure breaks the family
+        contract.
+
+        '
+      resolution: 'Use brene_brown or promise_engine on Spotify. Never myth_killer for self_worth.
+
+        '
+    research_citations:
+    - source: docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md
+      finding: '"Brené Brown discloses her own shame research breakdown [as] method. Impersonal clinical
+        writing underperforms intimate disclosure in Goodreads reviews and completion rates."
+
+        '
+      implication: 'teacher_presence: high is validated for the shame engine. narrative_structure: brene_brown
+        is the best-practice model for this topic.
+
+        '
+    - source: config/spines/self_worth_spine.yaml
+      field: tone_and_pacing.action_timing
+      finding: First practice arrives at chapter 9. Before that, only recognition and examination.
+      implication: 'exercise_density: none floor through ch08. Non-negotiable.
+
+        '
+    - source: marketing_deep_research/04_invisible_scripts.yaml
+      finding: '"My worth is tied to my output, which is why I can''t rest without feeling guilty." (millennial_women_professionals
+        persona)
+
+        '
+      implication: 'practical_vs_contemplative: contemplative_first. Reader is in production mode. Any early
+        practical ask reads as another output demand.
+
+        '
+    requires_human_decision: []
+  adhd_focus:
+    primary_mechanism: overwhelm
+    allowed_engines:
+    - overwhelm
+    - shame
+    - comparison
+    knob_defaults:
+      story_density: high
+      exercise_density: medium
+      mechanism_depth: high
+      reflection_depth: high
+      pacing_profile: measured
+      emotional_temperature: warm
+      practical_vs_contemplative: balanced
+      teacher_presence: high
+      spirituality_level: secular
+      compression: light
+      narrative_structure: gladwell_spiral
+      runtime_target: standard
+    hard_floors:
+      emotional_temperature: warm
+      story_density: high
+      mechanism_depth: medium
+      pacing_profile: measured
+    hard_ceilings:
+      exercise_density: medium
+      spirituality_level: secular
+      compression: light
+    phase_overrides:
+      early_book:
+        exercise_density: none
+        practical_vs_contemplative: contemplative
+        mechanism_depth: high
+      mid_book:
+        exercise_density: none
+        reflection_depth: high
+        practical_vs_contemplative: contemplative_first
+      late_book:
+        exercise_density: low
+        practical_vs_contemplative: balanced
+    dangerous_combinations: []
+    platform_conflicts:
+    - platform:
+      - ximalaya
+      - kakao_page
+      - naver_audiobook
+      conflict: 'Short episode format cannot sustain 9-chapter recognition-before-practice arc. Spine: "Reframe
+        cannot arrive before ch09 — will register as toxic positivity without full preceding arc."
+
+        '
+      resolution: 'Do not run self_worth in micro format. Minimum standard_book.
+
+        '
+    - platform:
+      - spotify
+      conflict: 'Spotify''s preferred_structures include myth_killer. Self-worth''s scorecard is not a myth
+        — it is a real mechanism that must be examined, not debunked. myth_killer structure breaks the family
+        contract.
+
+        '
+      resolution: 'Use brene_brown or promise_engine on Spotify. Never myth_killer for self_worth.
+
+        '
+    research_citations:
+    - source: docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md
+      finding: '"Brené Brown discloses her own shame research breakdown [as] method. Impersonal clinical
+        writing underperforms intimate disclosure in Goodreads reviews and completion rates."
+
+        '
+      implication: 'teacher_presence: high is validated for the shame engine. narrative_structure: brene_brown
+        is the best-practice model for this topic.
+
+        '
+    - source: config/spines/self_worth_spine.yaml
+      field: tone_and_pacing.action_timing
+      finding: First practice arrives at chapter 9. Before that, only recognition and examination.
+      implication: 'exercise_density: none floor through ch08. Non-negotiable.
+
+        '
+    - source: marketing_deep_research/04_invisible_scripts.yaml
+      finding: '"My worth is tied to my output, which is why I can''t rest without feeling guilty." (millennial_women_professionals
+        persona)
+
+        '
+      implication: 'practical_vs_contemplative: contemplative_first. Reader is in production mode. Any early
+        practical ask reads as another output demand.
+
+        '
+    requires_human_decision: []
