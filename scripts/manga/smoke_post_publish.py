@@ -12,7 +12,7 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(REPO_ROOT))
 
-from scripts.manga.r2_manga_release import upload_manga_release_dir  # noqa: E402
+from scripts.manga.r2_manga_release import DEFAULT_PRESIGN_SEC, upload_manga_release_dir  # noqa: E402
 
 
 def resolve_exports_dir(out_root: Path) -> Path:
@@ -102,7 +102,7 @@ def main() -> int:
             local_dir=exports,
             brand_id=args.brand,
             date_slug=date_slug,
-            expires_in=604800,
+            expires_in=DEFAULT_PRESIGN_SEC,  # < R2's 1-week ceiling (clamped again in presigned_get_url)
             dry_run=False,
         )
         (REPO_ROOT / "artifacts" / "manga_smoke").mkdir(parents=True, exist_ok=True)

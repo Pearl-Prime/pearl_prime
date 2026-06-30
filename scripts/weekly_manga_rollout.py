@@ -30,7 +30,7 @@ try:
 except ImportError:
     yaml = None  # type: ignore
 
-from scripts.manga.r2_manga_release import upload_manga_release_dir  # noqa: E402
+from scripts.manga.r2_manga_release import DEFAULT_PRESIGN_SEC, upload_manga_release_dir  # noqa: E402
 from scripts.run_manga_pipeline import count_topic_panel_pngs, run_one_book  # noqa: E402
 
 
@@ -139,7 +139,7 @@ def run_weekly_manga_rollout(
     signed_ttl = int(
         (cfg.get("defaults") or {}).get("signed_url_expiry_seconds")
         or lane.get("signed_url_expiry_seconds")
-        or 604800
+        or DEFAULT_PRESIGN_SEC  # 6d; R2 rejects an ExpiresIn >= 604800 (clamped in presigned_get_url)
     )
 
     if backend_default in ("comfyui", "runcomfy"):

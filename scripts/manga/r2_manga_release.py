@@ -8,6 +8,7 @@ Also accepts CF_R2_* aliases used in some operator environments.
 from __future__ import annotations
 
 import os
+import sys
 import time
 from pathlib import Path
 from typing import Any
@@ -20,6 +21,39 @@ except ImportError:
     boto3 = None  # type: ignore
     Config = None  # type: ignore
     ClientError = Exception  # type: ignore
+
+
+# Cloudflare R2 rejects presigned GETs whose X-Amz-Expires is >= 604800 (1 week) with
+# HTTP 400 InvalidArgument "X-Amz-Expires must be less than a week (in seconds)" — exactly
+# one week is rejected; the value must be STRICTLY less. Confirmed empirically 2026-07-01
+# (Waystream flip-assemble R2 pilot, PR #4204; fixed for Waystream in PR #4213, mirrored here).
+#
+# NOTE: the manga weekly/smoke lane emits these presigned URLs straight into digest emails
+# and has NO durable /download proxy that re-signs per request (unlike the storefront route
+# storefront/functions/api/download/[sku].js, which streams from an R2 binding). So these
+# links are a short-lived fallback — they expire in < 1 week and are NOT a permanent path.
+R2_MAX_PRESIGN_SEC = 604_800  # exclusive ceiling; ExpiresIn must be strictly less
+DEFAULT_PRESIGN_SEC = 60 * 60 * 24 * 6  # 6d — safely under the R2 1-week limit
+
+
+def clamp_presign_sec(expires_in: int) -> int:
+    """Clamp a presign TTL to a value R2 will accept (0 < ExpiresIn < 1 week).
+
+    R2 returns HTTP 400 for any ``X-Amz-Expires >= R2_MAX_PRESIGN_SEC``. A caller asking for
+    a week or more is clamped down one second under the ceiling (with a stderr warning)
+    rather than minting URLs that 400 at fetch time; a non-positive value falls back to the
+    safe default. This is the single chokepoint every presign in this module flows through.
+    """
+    if expires_in <= 0:
+        return DEFAULT_PRESIGN_SEC
+    if expires_in >= R2_MAX_PRESIGN_SEC:
+        print(
+            f"WARN: presign expires_in={expires_in} >= R2 max {R2_MAX_PRESIGN_SEC} (1 week); "
+            f"clamping to {R2_MAX_PRESIGN_SEC - 1} (R2 400s on an ExpiresIn of a week or more)",
+            file=sys.stderr,
+        )
+        return R2_MAX_PRESIGN_SEC - 1
+    return expires_in
 
 
 def r2_credentials() -> tuple[str, str, str, str]:
@@ -81,12 +115,12 @@ def presigned_get_url(
     *,
     bucket: str,
     key: str,
-    expires_in: int = 604800,
+    expires_in: int = DEFAULT_PRESIGN_SEC,
 ) -> str:
     return client.generate_presigned_url(
         "get_object",
         Params={"Bucket": bucket, "Key": key},
-        ExpiresIn=expires_in,
+        ExpiresIn=clamp_presign_sec(expires_in),
     )
 
 
@@ -96,7 +130,7 @@ def upload_manga_release_dir(
     brand_id: str,
     date_slug: str,
     key_prefix: str | None = None,
-    expires_in: int = 604800,
+    expires_in: int = DEFAULT_PRESIGN_SEC,
     dry_run: bool = False,
 ) -> dict[str, Any]:
     """Upload PDF/CBZ/EPUB (+ optional logs) under ``{brand}/manga/{date}/``."""
