@@ -7,9 +7,6 @@ banned_patterns:
     regex: 'anthropic\s*\.\s*Anthropic\s*\(|Anthropic\s*\(\s*api_key\s*='
     reason: "Anthropic API is paid. Route via phoenix_v4.llm.router.route_llm (local) or operator Claude Code."
     exempt_paths:
-      # CI quality tools — operator-present, not unattended production
-      - "scripts/ci/llm_cohesive_bestseller_tester.py"
-      - "scripts/ci/llm_bestseller_error_report.py"
       # Legacy slot engine AnthropicBackend — gated by config, not default path
       - "pearl_news/pipeline/slot_expansion_engine.py"
       # Operator tool for teacher content normalization — human-in-the-loop
@@ -18,8 +15,6 @@ banned_patterns:
     regex: '\.messages\.create\s*\('
     reason: "Anthropic messages API is paid."
     exempt_paths:
-      - "scripts/ci/llm_cohesive_bestseller_tester.py"
-      - "scripts/ci/llm_bestseller_error_report.py"
       - "pearl_news/pipeline/slot_expansion_engine.py"
       - "tools/teacher_mining/intake_normalize.py"
   openai_api_cloud:

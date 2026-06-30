@@ -12,6 +12,9 @@ Features:
 - Severity levels: CRITICAL (bestseller fail), HIGH (tier A / phase2/3 fail), MEDIUM/LOW.
 - Health score 0–100; optional baseline comparison for regression.
 - LLM with retry and structured output validation; richer prompt with quality rubrics.
+  LLM backend is FREE local Ollama on Pearl Star via phoenix_v4.llm.router.route_llm
+  (EN -> Gemma, CJK -> Qwen). No paid API, no API key. On Ollama-unreachable the
+  --llm step degrades to a clean skip (reason="ollama_unreachable").
 
 Usage:
   python scripts/ci/llm_cohesive_bestseller_tester.py --read-all
@@ -474,47 +477,51 @@ def _parse_llm_json(text: str) -> dict | None:
 
 
 def call_llm(prompt: str, dry_run: bool, max_retries: int = 2) -> dict:
-    """Call LLM with retry and response validation."""
+    """Call the FREE local-Ollama router with retry and response validation.
+
+    Backend is free local Ollama on Pearl Star via phoenix_v4.llm.router.route_llm
+    (EN -> Gemma, CJK -> Qwen; language auto-detected from the prompt). There is
+    NO paid LLM path and NO API-key read here (CLAUDE.md LLM Tier Policy: paid
+    keys are BANNED + CI-enforced). On any router/Ollama error the call degrades
+    to a clean skip; it NEVER falls back to a paid API.
+    """
     if dry_run:
         return {"llm_skipped": True, "reason": "dry_run"}
-    api_key = os.environ.get("ANTHROPIC_API_KEY") or os.environ.get("OPENAI_API_KEY")
-    if not api_key:
-        return {"llm_skipped": True, "reason": "no_api_key"}
     try:
-        import anthropic
+        from phoenix_v4.llm.router import route_llm
     except ImportError:
-        return {"llm_skipped": True, "reason": "anthropic_not_installed"}
+        return {"llm_skipped": True, "reason": "router_unavailable"}
+    system = (
+        "You are a QA analyst for self-help audiobook pipelines. "
+        "Reply only with valid JSON; no markdown or commentary."
+    )
     last_error: str | None = None
     for attempt in range(max_retries + 1):
         try:
-            client = anthropic.Anthropic(api_key=api_key)
-            msg = client.messages.create(
-                model="claude-sonnet-4-20250514",
+            text = route_llm(
+                prompt=prompt,
+                language="auto",
+                system=system,
                 max_tokens=4096,
-                system="You are a QA analyst for self-help audiobook pipelines. Reply only with valid JSON; no markdown or commentary.",
-                messages=[{"role": "user", "content": prompt}],
                 temperature=0,
             )
-            if msg.content and isinstance(msg.content, list) and len(msg.content) > 0:
-                block = msg.content[0]
-                text = block.text if hasattr(block, "text") else (block.get("text", "") if isinstance(block, dict) else "")
-                if text:
-                    parsed = _parse_llm_json(text)
-                    if parsed and isinstance(parsed, dict):
-                        valid, missing = validate_llm_response(parsed)
-                        if valid:
-                            return parsed
-                        if attempt < max_retries:
-                            time.sleep(1.5)
-                            continue
-                        return {**parsed, "llm_validation_warning": f"missing_keys: {missing}"}
+            if isinstance(text, str) and text:
+                parsed = _parse_llm_json(text)
+                if parsed and isinstance(parsed, dict):
+                    valid, missing = validate_llm_response(parsed)
+                    if valid:
+                        return parsed
+                    if attempt < max_retries:
+                        time.sleep(1.5)
+                        continue
+                    return {**parsed, "llm_validation_warning": f"missing_keys: {missing}"}
         except Exception as e:
             last_error = str(e)
             if attempt < max_retries:
                 time.sleep(2.0)
                 continue
-            return {"llm_skipped": True, "reason": "llm_error", "error": last_error}
-    return {"llm_skipped": True, "reason": "no_response", "error": last_error}
+            return {"llm_skipped": True, "reason": "ollama_unreachable", "error": last_error}
+    return {"llm_skipped": True, "reason": "ollama_unreachable", "error": last_error}
 
 
 def load_baseline(path: Path) -> dict | None:
@@ -562,7 +569,7 @@ def main() -> int:
     ap.add_argument("--ei-v2-path", default="", help="Path to eval_rigorous_report.json")
     ap.add_argument("--run-pearl-10k", action="store_true", help="Run run_simulation_10k.py first")
     ap.add_argument("--run-pearl-timeout", type=int, default=600, help="Timeout (seconds) for run_simulation_10k")
-    ap.add_argument("--llm", action="store_true", help="Call LLM for cohesive bestseller analysis")
+    ap.add_argument("--llm", action="store_true", help="Call free local Ollama (Gemma EN / Qwen CJK via phoenix_v4.llm.router) for cohesive bestseller analysis; skips cleanly if Ollama unreachable")
     ap.add_argument("--dry-run", action="store_true", help="Skip LLM even if --llm")
     ap.add_argument("--out", "-o", default="", help="Output report dir")
     ap.add_argument("--require-100", action="store_true", help="Exit 1 if any bestseller-tier failure")

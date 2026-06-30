@@ -3,6 +3,12 @@
 Read 10k simulation results (or analysis), identify bestseller-related failures,
 and optionally have an LLM classify/summarize bestseller errors. 100% testing: use with
 --min-pass-rate 1.0 in analyze_pearl_prime_sim.py to fail on any failure.
+
+The optional --llm step uses the FREE local Ollama router on Pearl Star
+(phoenix_v4.llm.router.route_llm; EN -> Gemma, CJK -> Qwen). No paid API, no API
+key. If Ollama is unreachable the step degrades to a clean skip
+(reason="ollama_unreachable").
+
 Usage:
   python scripts/ci/llm_bestseller_error_report.py --input artifacts/simulation_10k.json [--llm] [--out PATH]
 """
@@ -10,7 +16,6 @@ from __future__ import annotations
 
 import argparse
 import json
-import os
 import sys
 from pathlib import Path
 
@@ -177,50 +182,50 @@ def build_prompt_for_llm(identified: dict, summary: dict) -> str:
 
 
 def call_llm(prompt: str, dry_run: bool) -> dict:
-    """Optional LLM call to classify bestseller errors. Returns structured dict or empty."""
+    """Optional LLM call to classify bestseller errors via the FREE local router.
+
+    Backend is free local Ollama on Pearl Star via phoenix_v4.llm.router.route_llm
+    (EN -> Gemma, CJK -> Qwen; language auto-detected from the prompt). There is NO
+    paid LLM path and NO API-key read here (CLAUDE.md LLM Tier Policy: paid keys are
+    BANNED + CI-enforced). On any router/Ollama error this degrades to a clean skip;
+    it NEVER falls back to a paid API.
+    """
     if dry_run:
         return {"llm_skipped": True, "reason": "dry_run"}
-    api_key = os.environ.get("ANTHROPIC_API_KEY") or os.environ.get("OPENAI_API_KEY")
-    if not api_key:
-        return {"llm_skipped": True, "reason": "no_api_key"}
     try:
-        import anthropic
+        from phoenix_v4.llm.router import route_llm
     except ImportError:
-        return {"llm_skipped": True, "reason": "anthropic_not_installed"}
+        return {"llm_skipped": True, "reason": "router_unavailable"}
     try:
-        client = anthropic.Anthropic(api_key=api_key)
-        msg = client.messages.create(
-            model="claude-sonnet-4-20250514",
-            max_tokens=4096,
+        text = route_llm(
+            prompt=prompt,
+            language="auto",
             system="You are a QA analyst. Reply only with valid JSON.",
-            messages=[{"role": "user", "content": prompt}],
+            max_tokens=4096,
             temperature=0,
         )
-        if msg.content and isinstance(msg.content, list) and len(msg.content) > 0:
-            block = msg.content[0]
-            text = block.text if hasattr(block, "text") else (block.get("text", "") if isinstance(block, dict) else "")
-            if text:
-                # Extract JSON from markdown code block if present
-                if "```" in text:
-                    for part in text.split("```"):
-                        if part.strip().startswith("json"):
-                            text = part.strip()[4:].strip()
-                            break
-                        try:
-                            return json.loads(part.strip())
-                        except json.JSONDecodeError:
-                            continue
-                return json.loads(text)
+        if isinstance(text, str) and text:
+            # Extract JSON from markdown code block if present
+            if "```" in text:
+                for part in text.split("```"):
+                    if part.strip().startswith("json"):
+                        text = part.strip()[4:].strip()
+                        break
+                    try:
+                        return json.loads(part.strip())
+                    except json.JSONDecodeError:
+                        continue
+            return json.loads(text)
     except Exception as e:
-        return {"llm_skipped": True, "reason": "llm_error", "error": str(e)}
-    return {"llm_skipped": True, "reason": "no_response"}
+        return {"llm_skipped": True, "reason": "ollama_unreachable", "error": str(e)}
+    return {"llm_skipped": True, "reason": "ollama_unreachable"}
 
 
 def main() -> int:
     ap = argparse.ArgumentParser(description="Identify bestseller errors from 10k sim; optional LLM report")
     ap.add_argument("--input", "-i", required=True, help="Simulation JSON (e.g. artifacts/simulation_10k.json)")
     ap.add_argument("--out", "-o", default="", help="Output report dir (default: artifacts/reports)")
-    ap.add_argument("--llm", action="store_true", help="Call LLM to classify and recommend")
+    ap.add_argument("--llm", action="store_true", help="Call free local Ollama (Gemma EN / Qwen CJK via phoenix_v4.llm.router) to classify and recommend; skips cleanly if Ollama unreachable")
     ap.add_argument("--dry-run", action="store_true", help="Skip LLM even if --llm")
     ap.add_argument("--strict", action="store_true", help="Fail if any format/tier has failure rate > 20% (bestseller-risk)")
     args = ap.parse_args()
