@@ -1,4 +1,21 @@
-export default function WizardHandoff() {
+const WIZARD_BY_MARKET = {
+  us: "/wizard.html",
+  jp: "/wizard-ja.html",
+  tw: "/wizard-tw.html",
+  cn: "/wizard-zh.html",
+  kr: "/wizard.html",
+};
+
+export default function WizardHandoff({ market = "us" }) {
+  const wizardPath = WIZARD_BY_MARKET[market] || "/wizard.html";
+  const href = `${wizardPath}?mode=composite&market=${encodeURIComponent(market)}`;
+
+  const persistMarket = () => {
+    try {
+      localStorage.setItem("phoenix_onboarding_market", market);
+    } catch (_) {}
+  };
+
   return (
     <div className="py-32 px-6 text-center">
       <p className="text-xs font-mono tracking-widest uppercase text-amber-600 mb-6">Step 10</p>
@@ -8,7 +25,8 @@ export default function WizardHandoff() {
         It takes about 11 steps and 8 minutes.
       </p>
       <a
-        href="/wizard"
+        href={href}
+        onClick={persistMarket}
         className="inline-block bg-amber-700 hover:bg-amber-600 text-amber-50 text-xs font-mono tracking-widest uppercase px-10 py-4 transition-colors"
       >
         Launch Brand Wizard →

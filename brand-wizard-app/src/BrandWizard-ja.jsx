@@ -4,7 +4,29 @@ import { matchBrand } from "./brandMatch.js";
 import { ChevronRight, ChevronLeft, Eye, Sparkles, BookOpen, Mic, Film, Palette, Heart, Target, Zap, Shield, Sun, Moon, Flame, Feather, Brain, Compass, Star, Check, AlertTriangle, Download, Play, PenTool, Image, Layers, ArrowRight, Users, BarChart3, TrendingUp, Radio, Headphones, Tv, Smartphone, BookMarked, GraduationCap, Clock, Rocket, Award, Crown, Globe, Volume2, Brush, Activity, Search, Hash, Tag, Grip, CircleDot, SlidersHorizontal } from "lucide-react";
 import { OutputProofStrip } from "./onboarding/OutputProofStrip.jsx";
 import { LaneChoiceCard } from "./onboarding/LaneChoiceCard.jsx";
-import { MarketChoiceCard } from "./onboarding/MarketChoiceCard.jsx";
+// ─────────────────────────────────────────────────────────────
+
+/** JA wizard default market; ?market= / phoenix_onboarding_market override onboarding.html handoff. */
+function resolveOnboardingMarket() {
+  const norm = (s) => String(s || "").toLowerCase().replace(/[\s-]+/g, "_");
+  try {
+    const url = new URLSearchParams(window.location.search).get("market");
+    if (url) {
+      const k = norm(url);
+      if (k === "jp" || k === "japan") return "japan";
+      return k;
+    }
+  } catch (_) {}
+  try {
+    const stored = localStorage.getItem("phoenix_onboarding_market");
+    if (stored) {
+      const k = norm(stored);
+      if (k === "jp" || k === "japan") return "japan";
+      return k;
+    }
+  } catch (_) {}
+  return "japan";
+}
 
 // ─────────────────────────────────────────────────────────────
 // PEARL PRIME — BRAND CREATION WIZARD v2.1
@@ -1714,7 +1736,7 @@ function Step6EmotionalOutcomes({ state, update, i18n = {} }) {
 const TOPIC_CATEGORIES = [
   { label: "睡眠と不安", icon: "😰", color: "#6366f1", tags: [
     { id: "anxiety-at-night", label: "夜の不安", angle: "framework", bullet: "就寝前の不安プロトコルを提供——コルチゾールの悪循環が始まる前に遮断する、3つのボディスキャン" },
-    { id: "考えすぎ", label: "考えすぎ", angle: "origin", bullet: "考えすぎのパターンを幼少期の生存戦略へと辿る——脳が危険を察知し続け、それを止められなかった理由" },
+    { id: "overthinking", label: "考えすぎ", angle: "origin", bullet: "考えすぎのパターンを幼少期の生存戦略へと辿る——脳が危険を察知し続け、それを止められなかった理由" },
     { id: "panic-grounding", label: "パニックグラウンディング", angle: "debunk", bullet: "「深呼吸すればいい」という通説を崩す——パニックにはまずソマティック介入、認知的ツールはその後" },
     { id: "sunday-dread", label: "日曜の憂鬱", angle: "leverage", bullet: "日曜の憂鬱を神経系の週次予報として再定義——その憂鬱自体が、変える必要があることへのデータを含んでいる" },
   ]},
@@ -2828,14 +2850,39 @@ function Step11Launch({ state, update, i18n = {} }) {
   };
 
   const handleLaunch = async () => {
-    setYamlOutput(generateYAML(state));
+    const wizardYaml = generateYAML(state);
+    setYamlOutput(wizardYaml);
     setSubmitted(true);
+    let m = null;
     try {
       const r = await fetch("brand_admin_brands.json", { cache: "no-store" });
       const brands = r.ok ? await r.json() : {};
-      const m = matchBrand(state, brands, readTeacherMode());
+      m = matchBrand(state, brands, readTeacherMode());
       if (m) { setMatched(m); try { localStorage.setItem("phoenix_pending_brand", JSON.stringify(m)); } catch (_) {} }
     } catch (_) {}
+    if (m) {
+      const c = state.contact || {};
+      try {
+        await fetch("api/onboarding/submit", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            brand_id: m.brand_id,
+            lane: m.lane,
+            publication_corp: m.publication_corp,
+            brand_email: (c.email || "").trim() || null,
+            contact: {
+              first_name: c.firstName || "",
+              last_name: c.lastName || "",
+              phone: ((c.phoneCode || "+81") + " " + (c.phone || "")).trim(),
+            },
+            wizard_yaml: wizardYaml,
+            match_score: typeof m.score === "number" ? m.score : null,
+            match_basis: m.basis || null,
+          }),
+        });
+      } catch (_) {}
+    }
   };
 
   if (submitted) {
@@ -3263,7 +3310,7 @@ function generateYAML(state) {
   Object.entries(state.voiceSettings || {}).forEach(([k, v]) => { y += `    ${k}: ${v}\n`; });
   y += `\n  visual_style: "${state.visualStyle}"\n  tradition: "${state.tradition}"\n  emotional_outcomes: [${(state.emotions || []).map((e) => `"${e}"`).join(", ")}]\n\n`;
   y += `  content_angles: [${(state.angles || []).map((a) => `"${a}"`).join(", ")}]\n  topic_tags: [${(state.topicTags || []).map((t) => `"${t}"`).join(", ")}]\n\n`;
-  y += `  onboarding_lane: "${state.onboardingLane || "self_help"}"\n  onboarding_market: "${state.onboardingMarket || "us"}"\n`;
+  y += `  onboarding_lane: "${state.onboardingLane || "self_help"}"\n  onboarding_market: "${state.onboardingMarket || "japan"}"\n`;
   y += `  format_focus: "${state.formatFocus || "book"}"\n  channels: [${(state.channels || []).map((c) => `"${c}"`).join(", ")}]\n\n`;
   y += `  revenue_blend:\n    user_topics_weight: 0.30\n    proven_topics_weight: 0.70\n    note: "System blends brand identity with persona-based demand and proven search terms"\n\n`;
 
@@ -3591,8 +3638,8 @@ export default function BrandWizard() {
     voiceSettings: {}, visualStyle: null, emotions: [],
     tradition: "", angles: [], topicTags: [],
     formatFocus: null, channels: [],
-    onboardingLane: "self_help", onboardingMarket: "us",
-    contact: { firstName: "", lastName: "", email: "", phoneCode: "+1", phone: "", line: "", whatsapp: "", wechat: "", messenger: "", preferred: "email" },
+    onboardingLane: "self_help", onboardingMarket: "japan",
+    contact: { firstName: "", lastName: "", email: "", phoneCode: "+81", phone: "", line: "", whatsapp: "", wechat: "", messenger: "", preferred: "email" },
   });
 
   const update = useCallback((patch) => setState((prev) => ({ ...prev, ...patch })), []);
@@ -3612,6 +3659,12 @@ export default function BrandWizard() {
     const urlMode = params.get("mode");
     if (urlTeacher || urlMode === "composite" || urlMode === "music") { setPhase("wizard"); setStep(0); scrollTop(); }
   }, []);
+
+  // Market from onboarding.html handoff (?market= / phoenix_onboarding_market) or JA default.
+  useEffect(() => {
+    const market = resolveOnboardingMarket();
+    if (market) update({ onboardingMarket: market });
+  }, [update]);
 
   // INTRO: 0=welcome, 1=journey → straight to wizard (preview pages removed)
   if (phase === "intro") {
