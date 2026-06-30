@@ -126,6 +126,47 @@ _BARE_ATOM_ID_LINE_RE = re.compile(r"^[A-Z_]+ v\d+$")
 # Python dict blobs accidentally pasted into prose (pipeline/debug).
 _INTRO_DICT_OPEN_RE = re.compile(r"\{(?:'intro'|\"intro\"):")
 
+# Bracketed template stubs (unfilled HOOK/atom editorial markers). Mirrors
+# enrichment_select._REGISTRY_PLACEHOLDER_RE and chapter_composer._PLACEHOLDER_BRACKET_RE.
+_BRACKET_TEMPLATE_STUB_RE = re.compile(
+    r"\[[^\]]*\b(?:persona-specific|hook for|placeholder|tbd|tktk|todo|draft)\b[^\]]*\]",
+    re.IGNORECASE,
+)
+_BRACKET_PIPELINE_STUB_RE = re.compile(
+    r"\[(?:Placeholder|Missing|Silence)\s*:[^\]]*\]",
+    re.IGNORECASE,
+)
+_BARE_BRACKET_ELLIPSIS_STUB_RE = re.compile(r"^\[\s*(?:\.\.\.|…)\s*\]\s*$")
+# Legitimate bracketed prose — must not false-fail (citations, editorial notes).
+_LEGIT_BRACKET_TOKEN_RE = re.compile(
+    r"^(?:"
+    r"\[sic\]"
+    r"|\[emphasis added\]"
+    r"|\[ibid\.?\]"
+    r"|\[\d+\]"
+    r"|\[[A-Z][A-Za-z]+(?:\s+et\s+al\.?)?,?\s+\d{4}\]"
+    r")$",
+    re.IGNORECASE,
+)
+
+
+def _bracket_stub_tokens_in_line(line: str) -> list[str]:
+    """Return bracket tokens on ``line`` that look like unfilled template stubs."""
+    if _BARE_BRACKET_ELLIPSIS_STUB_RE.match(line.strip()):
+        return [line.strip()]
+    hits: list[str] = []
+    seen: set[str] = set()
+    for pattern in (_BRACKET_TEMPLATE_STUB_RE, _BRACKET_PIPELINE_STUB_RE):
+        for match in pattern.finditer(line):
+            token = match.group(0)
+            if _LEGIT_BRACKET_TOKEN_RE.match(token.strip()):
+                continue
+            if token in seen:
+                continue
+            seen.add(token)
+            hits.append(token)
+    return hits
+
 # Spine / template leakage: long lines concatenating many "## HOOK v01 --- --- prose" blocks.
 _HOOK_SCENE_LEAK = re.compile(
     r"#+\s+(?:HOOK|SCENE)\s+v\d+(?:\s+\d+)?\s*(?:---\s*)+",
@@ -825,10 +866,16 @@ def delivery_contract_gate(text: str, source_hint: str = "output") -> None:
       - Assembly section headers: ## HOOK / ## STORY / ## SCENE (case-sensitive slot tokens) / ## MECHANISM_DEPTH / …
       - Bare atom-id labels: standalone ``<UPPER_TOKEN> vNN`` lines (e.g. ``INTEGRATION v06``) leaked from malformed CANONICAL.txt headers
       - Python intro-dict blobs: ``{'intro':`` / ``{\"intro\":``
+      - Bracketed template stubs: ``[Persona-specific hook for …]``, ``[… placeholder …]``,
+        ``[Placeholder: …]``, bare ``[...]`` / ``[…]`` unfilled markers
     """
     violations: list[str] = []
     for lineno, line in enumerate(text.splitlines(), 1):
         stripped = line.strip()
+        for stub_token in _bracket_stub_tokens_in_line(line):
+            violations.append(
+                f"  line {lineno}: bracket template stub leaked {stub_token[:60]!r}"
+            )
         m = re.search(r"\{[^}]+\}", line)
         if m:
             violations.append(f"  line {lineno}: unresolved variable {m.group()!r}")

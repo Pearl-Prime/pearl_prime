@@ -1,5 +1,7 @@
 """Focused tests for clean_for_delivery scaffolding strip + delivery_contract_gate leaks."""
 
+from pathlib import Path
+
 import pytest
 
 from phoenix_v4.rendering.book_renderer import (
@@ -7,6 +9,12 @@ from phoenix_v4.rendering.book_renderer import (
     clean_for_delivery,
     delivery_contract_gate,
 )
+
+FIXTURES = Path(__file__).resolve().parent / "fixtures" / "book_quality_gate"
+
+
+def _read_fixture(name: str) -> str:
+    return (FIXTURES / name).read_text(encoding="utf-8")
 
 
 def test_strip_inline_hook_header_with_dashes() -> None:
@@ -68,3 +76,42 @@ def test_delivery_contract_gate_dict_literal_leak() -> None:
     with pytest.raises(DeliveryContractError) as exc:
         delivery_contract_gate(dirty, source_hint="test")
     assert "intro-dict" in str(exc.value).lower()
+
+
+@pytest.mark.parametrize(
+    "fixture_name",
+    [
+        "reject_stub_gen_z_burnout.txt",
+        "reject_stub_corp_burnout.txt",
+        "reject_stub_corp_financial_anxiety.txt",
+    ],
+)
+def test_delivery_contract_gate_rejects_pilot10_hook_stubs(fixture_name: str) -> None:
+    """Known pilot_10 stub books must hard-fail before delivery."""
+    dirty = _read_fixture(fixture_name)
+    with pytest.raises(DeliveryContractError) as exc:
+        delivery_contract_gate(dirty, source_hint=fixture_name)
+    assert "bracket template stub" in str(exc.value).lower()
+
+
+@pytest.mark.parametrize(
+    "fixture_name",
+    ["pass_clean.txt", "pass_wave_proof_excerpt.txt", "pass_legit_brackets.txt"],
+)
+def test_delivery_contract_gate_passes_clean_and_legit_brackets(fixture_name: str) -> None:
+    cleaned = clean_for_delivery(_read_fixture(fixture_name))
+    delivery_contract_gate(cleaned, source_hint=fixture_name)
+
+
+def test_delivery_contract_gate_rejects_bare_ellipsis_stub() -> None:
+    dirty = "Chapter 1\n\n[...]\n\nReal prose.\n"
+    with pytest.raises(DeliveryContractError) as exc:
+        delivery_contract_gate(dirty, source_hint="test")
+    assert "bracket template stub" in str(exc.value).lower()
+
+
+def test_delivery_contract_gate_rejects_pipeline_placeholder_token() -> None:
+    dirty = "Chapter 1\n\n[Placeholder: HOOK]\n\nReal prose.\n"
+    with pytest.raises(DeliveryContractError) as exc:
+        delivery_contract_gate(dirty, source_hint="test")
+    assert "bracket template stub" in str(exc.value).lower()

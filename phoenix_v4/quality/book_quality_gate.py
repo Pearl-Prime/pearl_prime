@@ -97,6 +97,14 @@ _ARTIFACT_PATTERNS: tuple[tuple[str, re.Pattern[str]], ...] = (
     ("slot_header", re.compile(r"##\s+(HOOK|SCENE|STORY|REFLECTION|PIVOT|EXERCISE|INTEGRATION|THREAD|TAKEAWAY)\b", re.I)),
     ("python_repr", re.compile(r"\{['\"][^'\"]+['\"]\s*:")),
     ("content_gap", re.compile(r"\[CONTENT GAP", re.I)),
+    (
+        "bracket_template_stub",
+        re.compile(
+            r"\[[^\]]*\b(?:persona-specific|hook for|placeholder|tbd|tktk|todo|draft)\b[^\]]*\]",
+            re.I,
+        ),
+    ),
+    ("pipeline_bracket_stub", re.compile(r"\[(?:Placeholder|Missing|Silence)\s*:", re.I)),
 )
 
 
