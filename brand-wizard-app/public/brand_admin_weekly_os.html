@@ -308,9 +308,10 @@ function copyText(text,btn){
     setTimeout(()=>{ btn.textContent='COPY'; btn.classList.remove('copied'); },1500);
   });
 }
+function T(k,fb){return (window.i18n&&typeof window.i18n.t==='function'&&window.i18n.t(k)!==k)?window.i18n.t(k):fb;}
 function prefill(label,val){
   const eid='pf_'+Math.random().toString(36).substr(2,6);
-  return `<div class="prefill"><div class="prefill-label">${label}</div><div class="prefill-row"><div class="prefill-val" id="${eid}">${val}</div><button class="copy-btn" onclick="copyText(document.getElementById('${eid}').textContent,this)">COPY</button></div></div>`;
+  return `<div class="prefill"><div class="prefill-label">${T('pf.'+label,label)}</div><div class="prefill-row"><div class="prefill-val" id="${eid}">${val}</div><button class="copy-btn" onclick="copyText(document.getElementById('${eid}').textContent,this)">${T('wos.copy','COPY')}</button></div></div>`;
 }
 
 // ── Phase calculation ──
@@ -348,10 +349,10 @@ function renderProgress(){
   document.getElementById('pf2').style.width=up+'%';
   // Overall bar
   document.getElementById('bar-fill').style.width=op+'%';
-  document.getElementById('pct-text').textContent=op+'% complete';
+  document.getElementById('pct-text').textContent=op+(window.i18n?window.i18n.t('wos.pctSuffix'):'% complete');
   // Top progress
   const curPhase=sp<100?1:(up<100?2:3);
-  document.getElementById('top-progress').textContent=`Phase ${curPhase} of 3 -- ${op}%`;
+  document.getElementById('top-progress').textContent=(window.i18n?window.i18n.t('wos.phaseOf').replace('{n}',curPhase):'Phase '+curPhase+' of 3')+' -- '+op+'%';
   // Nav pills
   document.querySelectorAll('.nav-pill').forEach(p=>{
     const ph=parseInt(p.dataset.phase);
@@ -379,18 +380,18 @@ function renderPhase1(){
       <div class="check-head" onclick="toggleBody('${cid}')">
         <div class="check-box ${done?'done':''}" onclick="event.stopPropagation();toggleSetup('${st.id}')">${done?'&#10003;':''}</div>
         <div class="check-num">${i+1}</div>
-        <div class="check-label">${st.n}</div>
-        <div class="check-time">${st.t}</div>
+        <div class="check-label" data-i18n="setup.${st.id}">${st.n}</div>
+        <div class="check-time">${st.t.replace('min',(window.i18n?window.i18n.t('wos.min'):'min'))}</div>
         <div class="check-arrow" id="arr_${cid}">&#9662;</div>
       </div>
       <div class="check-body" id="${cid}">
-        <a class="action-btn" href="${st.url}" target="_blank">Open ${st.n} &#8599;</a>`;
+        <a class="action-btn" href="${st.url}" target="_blank">${T('wos.openTmpl','Open {n}').replace('{n}',T('setup.'+st.id,st.n))} &#8599;</a>`;
     // Per-step prefills
     if(st.id==='youtube'){
       h+=prefill('Channel Name',b.d);
       h+=prefill('Description',desc(b));
     } else if(st.id==='kdp'){
-      h+=`<div class="warn"><strong>AI Disclosure required on every upload.</strong> Amazon requires you to declare AI-assisted content.</div>`;
+      h+=`<div class="warn"><strong>${T('wos.kdpWarnStrong','AI Disclosure required on every upload.')}</strong> ${T('wos.kdpWarnRest','Amazon requires you to declare AI-assisted content.')}</div>`;
       h+=prefill('Author / Publisher',b.tm?b.t:b.d);
       h+=prefill('Keywords',keywords(b));
     } else if(st.id==='gplay'){
@@ -412,7 +413,7 @@ function renderPhase1(){
     } else if(st.id==='kobo'){
       h+=prefill('Author Name',b.tm?b.t:b.d);
     }
-    h+=`<div style="margin-top:10px"><label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:.72rem;color:var(--mid)"><input type="checkbox" ${done?'checked':''} onchange="toggleSetup('${st.id}')"> I've completed this step</label></div>`;
+    h+=`<div style="margin-top:10px"><label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:.72rem;color:var(--mid)"><input type="checkbox" ${done?'checked':''} onchange="toggleSetup('${st.id}')"> ${T('wos.stepDone',"I've completed this step")}</label></div>`;
     h+=`</div></div>`;
   });
   el.innerHTML=h;

@@ -25,6 +25,66 @@
 
   // ─── en-US ──────────────────────────────────────────
   I18N["en-US"] = {
+    // brand_admin_weekly_os.html (director ops console) keys
+    "page.title": "Brand Admin -- Pearl Prime",
+    "setup.gmail": "Google Account",
+    "setup.youtube": "YouTube Channel",
+    "setup.kdp": "Amazon KDP",
+    "setup.gplay": "Google Play Books",
+    "setup.apple": "Apple Books",
+    "setup.kobo": "Kobo Writing Life",
+    "setup.tiktok": "TikTok Business",
+    "setup.instagram": "Instagram Business",
+    "setup.webtoon": "WEBTOON Canvas",
+    "setup.d2d": "Draft2Digital",
+    "wos.min": "min",
+    "wos.pctSuffix": "% complete",
+    "wos.phaseOf": "Phase {n} of 3",
+    "wos.copy": "COPY",
+    "wos.openTmpl": "Open {n}",
+    "wos.stepDone": "I've completed this step",
+    "wos.kdpWarnStrong": "AI Disclosure required on every upload.",
+    "wos.kdpWarnRest": "Amazon requires you to declare AI-assisted content.",
+    "pf.Channel Name": "Channel Name",
+    "pf.Description": "Description",
+    "pf.Author / Publisher": "Author / Publisher",
+    "pf.Keywords": "Keywords",
+    "pf.Publisher Name": "Publisher Name",
+    "pf.Display Name": "Display Name",
+    "pf.Bio (150 chars)": "Bio (150 chars)",
+    "pf.Username": "Username",
+    "pf.Creator Nickname": "Creator Nickname",
+    "pf.Series Summary": "Series Summary",
+    "pf.Author / Pen Name": "Author / Pen Name",
+    "pf.Email": "Email",
+    "pf.Publisher": "Publisher",
+    "pf.Author Name": "Author Name",
+    "pf.Author": "Author",
+    "pf.Title Template": "Title Template",
+    "topbar.title": "Brand Admin",
+    "nav.setup": "Setup",
+    "nav.upload": "Upload",
+    "nav.weekly": "Weekly",
+    "phase.setup": "Setup",
+    "phase.firstUpload": "First Upload",
+    "phase.weeklyRhythm": "Weekly Rhythm",
+    "phase1.title": "Phase 1: Setup",
+    "phase1.subtitle": "Create accounts on each platform. Check off when done.",
+    "phase2.title": "Phase 2: First Upload",
+    "phase3.title": "Phase 3: Weekly Rhythm",
+    "picker.title": "Brand Admin",
+    "picker.subtitle": "Select a brand to begin",
+    "quicklinks.heading": "Quick Platform Links",
+    "quicklinks.kdp": "KDP",
+    "quicklinks.googlePlay": "Google Play",
+    "quicklinks.appleBooks": "Apple Books",
+    "quicklinks.youtube": "YouTube",
+    "quicklinks.tiktok": "TikTok",
+    "quicklinks.webtoon": "WEBTOON",
+    "quicklinks.kobo": "Kobo",
+    "quicklinks.d2d": "Draft2Digital",
+    "quicklinks.instagram": "Instagram",
+    "quicklinks.line": "LINE",
     // Nav
     "nav.brand": "Pearl Prime",
     "nav.markets": "Markets",
@@ -142,6 +202,66 @@
 
   // ─── ja-JP ──────────────────────────────────────────
   I18N["ja-JP"] = {
+    // brand_admin_weekly_os.html (director ops console) keys
+    "page.title": "ブランド管理 — Pearl Prime",
+    "setup.gmail": "Google アカウント",
+    "setup.youtube": "YouTube チャンネル",
+    "setup.kdp": "Amazon KDP",
+    "setup.gplay": "Google Play ブックス",
+    "setup.apple": "Apple Books",
+    "setup.kobo": "Kobo Writing Life",
+    "setup.tiktok": "TikTok ビジネス",
+    "setup.instagram": "Instagram ビジネス",
+    "setup.webtoon": "WEBTOON Canvas",
+    "setup.d2d": "Draft2Digital",
+    "wos.min": "分",
+    "wos.pctSuffix": "% 完了",
+    "wos.phaseOf": "フェーズ {n} / 3",
+    "wos.copy": "コピー",
+    "wos.openTmpl": "{n} を開く",
+    "wos.stepDone": "このステップを完了しました",
+    "wos.kdpWarnStrong": "アップロードごとにAI開示が必要です。",
+    "wos.kdpWarnRest": "AmazonはAI支援コンテンツの申告を求めています。",
+    "pf.Channel Name": "チャンネル名",
+    "pf.Description": "説明",
+    "pf.Author / Publisher": "著者 / 出版社",
+    "pf.Keywords": "キーワード",
+    "pf.Publisher Name": "出版社名",
+    "pf.Display Name": "表示名",
+    "pf.Bio (150 chars)": "プロフィール（150文字）",
+    "pf.Username": "ユーザー名",
+    "pf.Creator Nickname": "クリエイター名",
+    "pf.Series Summary": "シリーズ概要",
+    "pf.Author / Pen Name": "著者 / ペンネーム",
+    "pf.Email": "メールアドレス",
+    "pf.Publisher": "出版社",
+    "pf.Author Name": "著者名",
+    "pf.Author": "著者",
+    "pf.Title Template": "タイトルテンプレート",
+    "topbar.title": "ブランド管理",
+    "nav.setup": "セットアップ",
+    "nav.upload": "アップロード",
+    "nav.weekly": "週次",
+    "phase.setup": "セットアップ",
+    "phase.firstUpload": "初回アップロード",
+    "phase.weeklyRhythm": "週次リズム",
+    "phase1.title": "フェーズ1：セットアップ",
+    "phase1.subtitle": "各プラットフォームでアカウントを作成し、完了したらチェックしてください。",
+    "phase2.title": "フェーズ2：初回アップロード",
+    "phase3.title": "フェーズ3：週次リズム",
+    "picker.title": "ブランド管理",
+    "picker.subtitle": "開始するブランドを選択してください",
+    "quicklinks.heading": "クイックリンク",
+    "quicklinks.kdp": "KDP",
+    "quicklinks.googlePlay": "Google Play",
+    "quicklinks.appleBooks": "Apple Books",
+    "quicklinks.youtube": "YouTube",
+    "quicklinks.tiktok": "TikTok",
+    "quicklinks.webtoon": "WEBTOON",
+    "quicklinks.kobo": "Kobo",
+    "quicklinks.d2d": "Draft2Digital",
+    "quicklinks.instagram": "Instagram",
+    "quicklinks.line": "LINE",
     "nav.brand": "Pearl Prime",
     "nav.markets": "\u30DE\u30FC\u30B1\u30C3\u30C8",
     "nav.teachers": "\u6307\u5C0E\u8005",
@@ -1005,6 +1125,14 @@
     // 1. URL param ?lang=ja-JP
     var params = new URLSearchParams(location.search);
     if (params.has("lang")) return matchLocale(params.get("lang"));
+    // 1b. Derive locale from the brand's lane suffix (?brand=..._ja_jp → ja-JP)
+    if (params.has("brand")) {
+      var bm = String(params.get("brand")).toLowerCase().match(/_([a-z]{2})_([a-z]{2})$/);
+      if (bm) {
+        var laneKey = bm[1] + "_" + bm[2].toUpperCase();
+        if (LANE_TO_LOCALE[laneKey]) return LANE_TO_LOCALE[laneKey];
+      }
+    }
     // 2. localStorage (from lane picker)
     var lane = localStorage.getItem("phoenix_lane") || localStorage.getItem("pearl_prime_lane");
     if (lane && LANE_TO_LOCALE[lane]) return LANE_TO_LOCALE[lane];
@@ -1107,9 +1235,32 @@
   /* ══════════════════════════════════════════════════════
      AUTO-INIT
      ══════════════════════════════════════════════════════ */
+  function translateTree(root) {
+    if (!root || !root.querySelectorAll) return;
+    root.querySelectorAll("[data-i18n]").forEach(function (el) {
+      var key = el.getAttribute("data-i18n");
+      var val = t(key);
+      if (!val || val === key) return;
+      var cur = (el.textContent || "").trim();
+      var enVal = (I18N["en-US"] && I18N["en-US"][key]) || "";
+      // Only translate static fallback text; never clobber interpolated/dynamic values.
+      if (cur === "" || cur === key || cur === enVal || cur === val) el.textContent = val;
+    });
+  }
+
   function init() {
     applyTranslations();
     createLanguagePicker();
+    // Re-translate [data-i18n] content rendered by JS after load (phase bodies, etc.)
+    if (typeof MutationObserver !== "undefined" && document.body) {
+      var scheduled = false;
+      new MutationObserver(function () {
+        if (scheduled) return;
+        scheduled = true;
+        var run = function () { scheduled = false; translateTree(document.body); };
+        if (window.requestAnimationFrame) window.requestAnimationFrame(run); else setTimeout(run, 0);
+      }).observe(document.body, { childList: true, subtree: true });
+    }
   }
 
   if (document.readyState === "loading") {
