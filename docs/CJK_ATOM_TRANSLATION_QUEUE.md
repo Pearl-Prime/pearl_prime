@@ -1,23 +1,40 @@
 # CJK Atom Translation Queue
 
 **Owner:** Pearl_PM
-**Last updated:** 2026-04-08
-**Infrastructure:** Qwen3:14b on Pearl Star Ollama (192.168.1.112:11434)
+**Last updated:** 2026-06-29 (OPD-20260629-003 — durable queue worker + held-back recovery)
+**Infrastructure:** qwen2.5:14b on Pearl Star Ollama, dispatched **queue-first** via the
+Procrastinate `llm` queue (`procrastinate-worker-llm` systemd unit, concurrency=1,
+shared GPU `gpu_heavy_lock`). Direct-Ollama translation is deprecated (RAP queue-first).
 
-## Current State
+## Current State (G1/G2 — base = 4,909 en atoms)
 
-| Locale | Atoms | Target | Coverage |
-|--------|-------|--------|----------|
-| en-US (base) | 4,531 | 4,531 | 100% |
-| zh-CN | 147 | 4,531 | 3.2% |
-| zh-TW | 227 | 4,531 | 5.0% |
-| zh-HK | 243 | 4,531 | 5.4% |
-| zh-SG | 243 | 4,531 | 5.4% |
-| ja-JP | 187 | 4,531 | 4.1% |
-| ko-KR | 227 | 4,531 | 5.0% |
-| **Total CJK** | **1,274** | **27,186** | **4.7%** |
+| Locale | Atoms | Target | Coverage | Notes |
+|--------|-------|--------|----------|-------|
+| en-US (base) | 4,909 | 4,909 | 100% | persona + engine atoms |
+| zh-TW | ~4,896 | 4,909 | ~99.7% | at ceiling; #3091 + 52-holdback (#3127) |
+| ja-JP | ~4,445 | 4,909 | ~90.5% | #3091 + holdback; ~464 residual queued (STEP 3) |
+| zh-CN | ~1,965 | 4,909 | ~40.0% | ~2,944 remaining (STEP 3 wave) |
+| ko-KR | 227 | 4,909 | ~4.6% | ~4,682 remaining (STEP 3 wave, P1 of new wave) |
+| zh-HK | 243 | 4,909 | ~5% | not yet scheduled |
+| zh-SG | 243 | 4,909 | ~5% | not yet scheduled |
 
-Gap: ~25,912 atoms across 6 CJK locales.
+**G1 (ja-JP/zh-TW near ceiling): MET.** zh-TW ~99.7%, ja-JP ~90.5%.
+**G2 (queue durability): MET.** Translation routes through `procrastinate-worker-llm`
+(deployed 2026-06-29); job pickup proven end-to-end (job #375 succeeded, 52-atom
+holdback recovered via jobs #376/#377, all pass `validate_cjk_atom.py`).
+
+### STEP 3 new-translation wave (queued, ~24h GPU @ concurrency=1)
+
+| Locale | Atoms missing | Priority |
+|--------|---------------|----------|
+| ko-KR | ~4,682 | 1 |
+| zh-CN | ~2,944 | 2 |
+| ja-JP residual | ~464 | 3 |
+| **Total** | **~8,090** | |
+
+Dispatch each batch atomically (translate → `validate_cjk_atom.py` → tar-pull →
+plumbing-commit off `origin/main`, path-scoped to CJK locale atoms → PR → self-merge
+on green). Never strand translated atoms uncommitted (issue #3046 lesson).
 
 ## Priority Order
 
