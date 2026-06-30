@@ -92,7 +92,7 @@ export default function Index() {
     { id: "marketFit", step: 7,  component: <MarketFit market={market} />, lazy: true },
     { id: "examples",  step: 8,  component: <RealExamples />, lazy: true },
     { id: "teacher",   step: 9,  component: <TeacherExpression /> },
-    { id: "handoff",   step: 10, component: <WizardHandoff /> },
+    { id: "handoff",   step: 10, component: <WizardHandoff market={market} /> },
   ];
 
   const visibleSections = sections.filter(
