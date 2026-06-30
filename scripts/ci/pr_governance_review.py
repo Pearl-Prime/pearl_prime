@@ -13,6 +13,8 @@ Runs on every PR to main. Validates:
    (Layer 3 of the anti-reinvention system; docs/specs/CANONICAL_ARTIFACTS_REGISTRY_SPEC.md)
 8. DURATION: BLOCKs a format_registry.yaml edit that does not co-change the duration
    derivation spec (docs/DURATION_DERIVATION_SPEC.md §6)
+9. SKELETON FREEZE: BLOCKs `feat(catalog): {locale} skeletons {brand} batch {N}` PRs
+   (any locale except CJK ja_/zh_/ko_) while skeleton_freeze.yaml → active: true
 
 Exit 0 = approved. Exit 1 = blocked (with reasons).
 
@@ -134,6 +136,184 @@ def load_canonical_registry():
                     "notes": (row.get("notes") or "").strip(),
                 })
     return rows
+
+
+def load_skeleton_freeze_config():
+    """Load config/governance/skeleton_freeze.yaml → freeze dict or None.
+
+    FAIL-OPEN: returns None if the file is absent, malformed, or PyYAML is missing —
+    a missing marker must never crash PR review.
+    """
+    yaml_path = REPO_ROOT / "config" / "governance" / "skeleton_freeze.yaml"
+    if not yaml_path.exists():
+        return None
+
+    try:
+        import yaml
+    except Exception:
+        return None
+
+    try:
+        with open(yaml_path) as f:
+            data = yaml.safe_load(f) or {}
+    except Exception:
+        return None
+
+    if not isinstance(data, dict):
+        return None
+    return data
+
+
+# Catalog skeleton batch PR title: feat(catalog): es_ES skeletons legacy_builder batch 2
+_SKELETON_BATCH_TITLE_RE = re.compile(
+    r"(?i)^feat\(catalog\):\s+"
+    r"(\S+)\s+"
+    r"skeletons\s+"
+    r"(\S+)\s+"
+    r"batch\s+"
+    r"(\d+)\s*$"
+)
+
+_DEFAULT_CJK_SKELETON_PREFIXES = ("ja_", "zh_", "ko_")
+
+
+def _cjk_skeleton_prefixes(freeze_cfg) -> tuple[str, ...]:
+    if not freeze_cfg:
+        return _DEFAULT_CJK_SKELETON_PREFIXES
+    raw = freeze_cfg.get("excluded_cjk_locale_prefixes") or _DEFAULT_CJK_SKELETON_PREFIXES
+    if not isinstance(raw, (list, tuple)):
+        return _DEFAULT_CJK_SKELETON_PREFIXES
+    out = tuple(str(p).lower() for p in raw if p)
+    return out or _DEFAULT_CJK_SKELETON_PREFIXES
+
+
+def _is_frozen_catalog_skeleton_batch_title(title: str, freeze_cfg) -> bool:
+    """True if title matches the observed skeleton-batch storm pattern, excluding CJK locales."""
+    m = _SKELETON_BATCH_TITLE_RE.match((title or "").strip())
+    if not m:
+        return False
+    locale = m.group(1).lower().replace("-", "_")
+    for prefix in _cjk_skeleton_prefixes(freeze_cfg):
+        if locale.startswith(prefix):
+            return False
+    return True
+
+
+def get_pr_title(pr_number=None) -> str:
+    """Best-effort PR title for governance checks (fail-open → '')."""
+    if pr_number:
+        try:
+            res = subprocess.run(
+                ["gh", "pr", "view", str(pr_number), "--json", "title"],
+                capture_output=True,
+                text=True,
+                cwd=REPO_ROOT,
+            )
+            if res.returncode == 0 and res.stdout.strip():
+                return (json.loads(res.stdout) or {}).get("title") or ""
+        except Exception:
+            pass
+        return ""
+
+    event_path = os.environ.get("GITHUB_EVENT_PATH")
+    if event_path and os.path.isfile(event_path):
+        try:
+            with open(event_path) as f:
+                ev = json.load(f)
+            pr = ev.get("pull_request") or {}
+            title = pr.get("title") or ""
+            if title:
+                return title
+        except Exception:
+            pass
+
+    head_ref = os.environ.get("GITHUB_HEAD_REF") or os.environ.get("GITHUB_REF_NAME")
+    if head_ref:
+        try:
+            res = subprocess.run(
+                ["gh", "pr", "view", head_ref, "--json", "title"],
+                capture_output=True,
+                text=True,
+                cwd=REPO_ROOT,
+            )
+            if res.returncode == 0 and res.stdout.strip():
+                return (json.loads(res.stdout) or {}).get("title") or ""
+        except Exception:
+            pass
+
+    return ""
+
+
+def _is_exempt_skeleton_pr(pr_number, freeze_cfg) -> bool:
+    if not pr_number or not freeze_cfg:
+        return False
+    try:
+        num = int(pr_number)
+    except (TypeError, ValueError):
+        return False
+    exempt = freeze_cfg.get("exempt_pr_numbers") or []
+    try:
+        return num in {int(x) for x in exempt}
+    except (TypeError, ValueError):
+        return num in exempt
+
+
+def check_skeleton_freeze(files, freeze_cfg, pr_title="", pr_number=None):
+    """BLOCK catalog skeleton batch PRs while skeleton_freeze.yaml active (OPD-20260630-001)."""
+    if not freeze_cfg or not freeze_cfg.get("active"):
+        return {
+            "check": "skeleton_freeze",
+            "status": "PASS",
+            "message": "Skeleton freeze inactive — batch merges allowed.",
+            "details": {"active": False},
+        }
+
+    if freeze_cfg.get("operator_override"):
+        return {
+            "check": "skeleton_freeze",
+            "status": "PASS",
+            "message": "Skeleton freeze bypassed via operator_override in skeleton_freeze.yaml.",
+            "details": {"active": True, "operator_override": True},
+        }
+
+    if _is_exempt_skeleton_pr(pr_number, freeze_cfg):
+        return {
+            "check": "skeleton_freeze",
+            "status": "PASS",
+            "message": f"PR #{pr_number} is exempt from skeleton freeze (pre-staged spine).",
+            "details": {"exempt_pr": pr_number},
+        }
+
+    title = (pr_title or "").strip()
+    title_match = _is_frozen_catalog_skeleton_batch_title(title, freeze_cfg)
+
+    if title_match:
+        opd = freeze_cfg.get("opd") or "OPD-20260630-001"
+        lift = freeze_cfg.get("lift_condition") or "first R2 EPUB batch shipped"
+        return {
+            "check": "skeleton_freeze",
+            "status": "BLOCKED",
+            "message": (
+                f"Catalog skeleton batch merge blocked by {opd} (hard freeze). "
+                f"Lift condition: {lift}. Set active: false in "
+                f"config/governance/skeleton_freeze.yaml after the first R2 EPUB batch ships. "
+                f"Pre-staged spine PRs (#3110/#3123/#3127/#3147/#3166) remain exempt. "
+                f"CJK locales (ja_/zh_/ko_) are excluded from this freeze."
+            ),
+            "details": {
+                "opd": opd,
+                "lift_condition": lift,
+                "pr_title": title,
+                "marker": "config/governance/skeleton_freeze.yaml",
+            },
+        }
+
+    return {
+        "check": "skeleton_freeze",
+        "status": "PASS",
+        "message": "Not a catalog skeleton batch PR — freeze inert for this change.",
+        "details": {"active": True, "title_match": False},
+    }
 
 
 def load_reinvention_allowlist():
@@ -816,7 +996,9 @@ def main():
     workstreams = load_active_workstreams()
     registry = load_canonical_registry()
     allowlist = load_reinvention_allowlist()
+    skeleton_freeze = load_skeleton_freeze_config()
     files = get_changed_files(pr_number)
+    pr_title = get_pr_title(pr_number)
 
     if not files:
         if use_json:
@@ -837,6 +1019,7 @@ def main():
         check_workstream_conflict(files, workstreams),
         check_reinvention(files, registry, allowlist, override_text),
         check_duration_derivation(files, override_text),
+        check_skeleton_freeze(files, skeleton_freeze, pr_title, pr_number),
     ]
 
     blocked = [r for r in results if r["status"] == "BLOCKED"]

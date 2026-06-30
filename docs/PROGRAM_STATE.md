@@ -1,6 +1,6 @@
 # Program State — Single Source of Truth
 
-**LAST VERIFIED:** 2026-06-25 @ `origin/main` `233397671e`
+**LAST VERIFIED:** 2026-06-30 @ `origin/main` (Jul 1 runbook + Q-DRIFT-02 reconcile staged PR)
 
 > **RULE:** Verify against `origin/main`, never git date or the working tree (shared-tree branch-churn shows
 > other-branch/stale state). This is the entry point — if another doc disagrees with this, this wins or that doc is stale.
@@ -59,11 +59,14 @@
   has no `active`/`tier` field, so kenjin is a first-class entry = active-by-presence — **operator to confirm**.
 
 ### GHL marketing feed
-- **Status:** **LIVE**
+- **Status:** **LIVE** — **first paid EPUB attached** (PR **#1947**, `89a11d5387`, 2026-06-26)
 - **Details:** `marketing_feed.json` published on brand-admin Pages (public HTTPS) (#1866/#1867/#1875/#1882); R2
   provisioned; 15-topic integration; all 15 funnel landings → GHL capture. Design: paid items gate on **real attached
   asset** (`pending_asset` until then), free items on **asset-exists**; **free-content-first** — paid auto-promotes on
-  attach. Funnel is live on free content + listings; paid lights up as real EPUBs attach.
+  attach. Funnel is live on free content + listings. **First paid attach:** Waystream
+  `corporate_managers × burnout × overwhelm` EPUB in `brand_deliveries/way_stream_sanctuary.json` week 2026-W26
+  (`way_stream_sanctuary__default_teacher__corporate_managers__burnout__overwhelm.epub`, R2-backed download URL) per
+  #1947 — satisfies the GHL paid-slot attach row (OPD-20260630-002 / Q-DRIFT-02).
 
 ### Localization
 - **Status:** **NEXT (0%)** — Waystream titles are now distinct + hard-gated on `main` (see above), so the prior
@@ -77,10 +80,51 @@
   renders; the GitHub Actions self-hosted runner is fragile — 403 + 1800s timeouts). Audit: `docs/MANGA_RECOVERY_AUDIT.md`.
 
 ### Storefront
-- **Status:** **LIVE** — renders sample/listing data; **1 real EPUB now exists** in `artifacts/epubs/way_stream_sanctuary/`
-  (#1923) but is **not yet attached** to the storefront/GHL feed. Remaining downloadable files = 0 until the attach
-  pipeline runs (GHL feed auto-promotes paid items on attach).
+- **Status:** **LIVE (listings)** — **consumer paid-download scale still blocked** on asset depth
+- **Details:** Pearl Prime Storefront renders sample/listing data. **GHL feed attach:** 1 real EPUB attached (#1947 —
+  see GHL row above). **Storefront consumer paid downloads at scale:** still **0 beyond the single attached cell**
+  until the attach pipeline runs for additional titles; Phase A smoke (5 locales × 4 product types) remains **stalled**
+  until real asset depth exists. Do not conflate GHL attach (#1947) with full storefront Phase A go-live.
+
+---
+
+## Jul 1 Execution Runbook (plan-of-record)
+
+**Ratified:** 2026-06-30 (OPD-20260630-001/002/003) · **Evidence:** `artifacts/audit/drift_audit_20260630/DRIFT_MATRIX.md`  
+**Supersedes** session-handoff ordering for merge dispatch — handoff detail remains in
+`docs/sessions/SESSION_HANDOFF_2026-06-29_worldwide_catalog_books_cjk_manga.md` §12 but **this section wins** for
+cold-start execution order after the ~Jul 1 CI/budget reset.
+
+| Step | Action | Notes |
+|------|--------|-------|
+| **0** | **Merge skeleton-freeze PR FIRST** — ensure `config/governance/skeleton_freeze.yaml` → `active: true` | CI enforcement live before any skeleton batch can re-merge |
+| **1** | Merge **#3166** (lean-CI path-filter) | ~83% Actions burn reduction; required before flip campaign |
+| **2** | Merge staged spine on green: **#3123** (content gaps), **#3127** (CJK recovery), **#3147** (CJK hardening); verify #3123 deletions < 50 | Also **#3110** if green (handoff §12) |
+| **2.5** | Merge **delivery-gate stub-catch PR (#3787)** before flip→assemble | So no shipped EPUB carries a `[Persona-specific hook for …]` placeholder — `delivery_contract_gate` hard-fails bracket stubs |
+| **3** | **Lane A:** warrior_calm flip pilot → on clean → full flip → assembly → **first R2 EPUB batch** | Split ~170 flip PRs across Jul+Aug per handoff §8 |
+| **4** | **Lever A:** finish **#3199** arc-gen pilot → engine-keyed pools + batch-2 | Unblocks +462 thin-persona cells |
+| **5** | Merge **#3598** + **#3605** on green | #3605 = plan-scale QA pilot evidence only — **no new QA scaffolding** after (OPD-20260630-003) |
+| **6** | **Hold** new proposed-program specs (music v2, sangha, song-kit, teacher-manga-video, agent-system-v2) until first EPUB batch ships | Spec debt cap — see drift audit H2 |
+| **7** | ~~Q-DRIFT-02 #1947↔SSOT reconcile~~ **DONE** (this runbook PR) | GHL attach row updated above; storefront row split GHL vs Phase A |
+
+**Skeleton freeze lift:** after step 3 ships the first real R2 EPUB assembly batch, set
+`config/governance/skeleton_freeze.yaml` → `active: false` (OPD-20260630-001 lift condition).
+
+### Post-flip quality backlog (Atom Cohesion lane — gated, NOT on the Jul 1 critical path)
+
+Authored 2026-06-30, persisted to `docs/sessions/cohesion_chunk_prompts_20260630/`. Rationale: the plan-scale QA
+sweep found the chapter-thesis bank is keyed `intent → engine` only, so the same load-bearing thesis sentence is
+reused across **128 (persona×topic) cells** — the top remaining quality lever. These fire **after** the flip
+ships the first EPUB batch; they are not Jul 1 critical-path steps.
+
+| Row | Chunk | Fire when | Owner | Prompt |
+|-----|-------|-----------|-------|--------|
+| **Q1** | Thesis de-templating (engine-keyed → topic-keyed) + fill spiral/overwhelm/comparison + pool depth | First R2 EPUB batch shipped (freeze lifted) | Pearl_Editor + Pearl_Writer | `docs/sessions/cohesion_chunk_prompts_20260630/cohesion_chunk_1_thesis_de_templating.md` |
+| **Q2** | Adjacency-aware selector + dwell/integration-pacing craft gate | (a) first EPUB batch shipped **AND** (b) OPD-20260629-002 (#3110/#3123) landed — sequenced **after** Q1 | Pearl_Dev | `docs/sessions/cohesion_chunk_prompts_20260630/cohesion_chunk_2_adjacency_selector.md` |
+
+Q2 is gated behind Q1 (adjacency penalty needs the varied thesis pools) and behind the composer lane landing
+(both touch `enrichment_select.py` / `register_gate.py` — serialize, never parallel-edit).
 
 ---
 *Supersedes all previous status reports and planning baselines (incl. the May 2026 worldwide plan). Latest session
-detail: `docs/sessions/SESSION_HANDOFF_2026-06-24_advisory_router_session.md`.*
+detail: `docs/sessions/SESSION_HANDOFF_2026-06-29_worldwide_catalog_books_cjk_manga.md`.*

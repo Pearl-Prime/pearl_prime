@@ -1,0 +1,28 @@
+# Catalog skeleton batch merge freeze (Q-DRIFT-01 / OPD-20260630-001).
+# Enforced by scripts/ci/pr_governance_review.py → check_skeleton_freeze().
+# Lift: set active: false when the first real R2 EPUB assembly batch ships
+# (or operator_override: true for emergency unblock — requires new OPD row).
+#
+# Matcher: PR title must match feat(catalog): {locale} skeletons {brand} batch {N}.
+# CJK locales (ja_*/zh_*/ko_*) are excluded — manga/CJK lanes stay unblocked.
+# Known limitation: title-only — a renamed or differently formatted PR bypasses the gate
+# (acceptable; matches the observed Jun 27–28 storm pattern).
+
+active: true
+lift_condition: "first R2 EPUB batch shipped"
+opd: OPD-20260630-001
+operator_override: false
+
+# Locale prefixes excluded from the freeze (CJK book lanes — not Western listing batches).
+excluded_cjk_locale_prefixes:
+  - ja_
+  - zh_
+  - ko_
+
+# Pre-staged spine PRs (content/CJK/lean-CI) — never blocked by the skeleton matcher.
+exempt_pr_numbers:
+  - 3110
+  - 3123
+  - 3127
+  - 3147
+  - 3166

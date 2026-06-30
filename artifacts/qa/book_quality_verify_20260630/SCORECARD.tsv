@@ -1,0 +1,22 @@
+persona	topic	duration	book_id	source	bestseller	bestseller_score	cohesive_flow	cohesive_flow_score	engaging	engaging_score	marketing	marketing_delivers	leakage	sellability	ei_composite	evidence_one_line
+corporate_managers	burnout	standard_book	burnout_grief__corporate_managers	wave_proof/draft	CONCERN	0.44	CONCERN	0.82	PASS	0.55	PASS	YES	clean	SELLABLE_WITH_ADVISORY	0.655	Engine-keyed Ch1 thesis identical across engines; uniqueness 0.15
+corporate_managers	burnout	standard_book	burnout_overwhelm__corporate_managers	wave_proof/draft	CONCERN	0.44	CONCERN	0.82	PASS	0.55	PASS	YES	clean	SELLABLE_WITH_ADVISORY	0.655	Cadence refrains repeat; delivers Permission to Pause promise
+corporate_managers	burnout	standard_book	burnout_watcher__corporate_managers	wave_proof/draft	CONCERN	0.45	CONCERN	0.85	PASS	0.55	PASS	YES	clean	SELLABLE_WITH_ADVISORY	0.651	Same engine-keyed opener pattern
+gen_z_professionals	burnout	standard_book	burnout_grief__gen_z_professionals	wave_proof/draft	CONCERN	0.46	CONCERN	0.80	PASS	0.58	PASS	YES	clean	SELLABLE_WITH_ADVISORY	0.660	Delivers Collapse You Earned subtitle keywords
+healthcare_rns	burnout	standard_book	burnout_overwhelm__healthcare_rns	wave_proof/draft	CONCERN	0.42	CONCERN	0.85	PASS	0.55	PASS	YES	clean	SELLABLE_WITH_ADVISORY	0.614	Delivers Running on Fumes promise
+working_parents	burnout	standard_book	burnout_overwhelm__working_parents	wave_proof/draft	CONCERN	0.47	CONCERN	0.83	PASS	0.54	PASS	YES	clean	SELLABLE_WITH_ADVISORY	0.664	Delivers Before You Break promise
+first_responders	burnout	standard_book	burnout_watcher__first_responders	wave_proof/draft	CONCERN	0.45	CONCERN	0.85	PASS	0.55	PASS	YES	clean	SELLABLE_WITH_ADVISORY	0.651	Delivers Before You Break promise
+gen_z_professionals	imposter_syndrome	standard_book	imposter_syndrome_shame__gen_z_professionals	wave_proof/draft	FAIL	0.40	CONCERN	0.80	PASS	0.58	PASS	YES	clean	SELLABLE_WITH_ADVISORY	0.640	Unique Ch1 Fraud Feeling opener; uniqueness still low 0.14
+gen_alpha_students	anxiety	standard_book	01_gen_alpha_students__anxiety	pilot_10/#3605	CONCERN	0.43	CONCERN	0.82	PASS	0.60	PASS	YES	clean	SELLABLE_WITH_ADVISORY	0.654	No placeholder leakage
+gen_z_professionals	burnout	standard_book	02_gen_z_professionals__burnout	pilot_10/#3605	CONCERN	0.42	CONCERN	0.82	PASS	0.54	PASS	YES	FAIL	 BLOCKED_LEAKAGE	0.636	HOOK placeholder stubs ~24x
+corporate_managers	burnout	standard_book	04_corporate_managers__burnout	pilot_10/#3605	FAIL	0.39	CONCERN	0.81	PASS	0.55	PASS	YES	FAIL	BLOCKED_LEAKAGE	0.633	HOOK placeholder + cross-persona contamination
+corporate_managers	financial_anxiety	standard_book	05_corporate_managers__financial_anxiety	pilot_10/#3605	FAIL	0.38	CONCERN	0.84	CONCERN	0.47	PASS	YES	FAIL	BLOCKED_LEAKAGE	0.614	HOOK placeholder stubs ~24x
+educators	anxiety	standard_book	06_educators__anxiety	pilot_10/#3605	CONCERN	0.43	CONCERN	0.83	PASS	0.59	PASS	YES	clean	SELLABLE_WITH_ADVISORY	0.656	Clean render
+gen_alpha_students	boundaries	standard_book	07_gen_alpha_students__boundaries	pilot_10/#3605	CONCERN	0.42	CONCERN	0.85	PASS	0.60	PASS	YES	clean	SELLABLE_WITH_ADVISORY	0.650	Clean render
+gen_x_sandwich	anxiety	standard_book	08_gen_x_sandwich__anxiety	pilot_10/#3605	CONCERN	0.42	CONCERN	0.82	PASS	0.57	PASS	YES	clean	SELLABLE_WITH_ADVISORY	0.650	Clean render
+gen_x_sandwich	boundaries	standard_book	09_gen_x_sandwich__boundaries	pilot_10/#3605	CONCERN	0.42	CONCERN	0.85	PASS	0.58	PASS	YES	clean	SELLABLE_WITH_ADVISORY	0.664	Clean render
+nyc_executives	anxiety	standard_book	10_nyc_executives__anxiety	pilot_10/#3605	FAIL	0.39	CONCERN	0.83	PASS	0.58	PASS	UNKNOWN	clean	SELLABLE_WITH_ADVISORY	0.639	No catalog row for nyc_executives
+corporate_managers	burnout	standard_book	way_stream_sanctuary__corporate_managers__burnout__overwhelm	way_stream_sanctuary	PASS	0.84	PASS	0.93	PASS	0.58	PASS	YES	clean	SELLABLE_AS_IS	0.760	Canonical register-PASS reference
+teacher_mode	anxiety	standard_book	pamela_fellows_anxiety	artifacts/epub	PASS	0.74	PASS	0.72	PASS	0.61	PASS	UNKNOWN	clean	SELLABLE_AS_IS	0.657	Teacher micro-book
+teacher_mode	burnout	standard_book	master_feung_burnout	artifacts/epub	PASS	0.54	FAIL	0.41	FAIL	0.30	PASS	UNKNOWN	clean	BLOCKED_COHESION	0.458	260-word stub
+teacher_mode	courage	standard_book	master_wu_courage	artifacts/epub	PASS	0.55	FAIL	0.42	FAIL	0.31	PASS	UNKNOWN	clean	BLOCKED_COHESION	0.461	303-word stub

@@ -109,6 +109,7 @@ It checks:
 
 The review posts a comment on the PR with a pass/warn/block verdict.
 **PRs with BLOCKED status cannot be merged** (enforced by GitHub ruleset).
+**Western skeleton batch freeze:** when `config/governance/skeleton_freeze.yaml` → `active: true`, `pr_governance_review.py` BLOCKs `feat(catalog): {locale} skeletons {brand} batch {N}` PRs (CJK locales excluded; title-only matcher — see marker doc).
 
 ### Manual pre-merge check (run locally before pushing)
 
