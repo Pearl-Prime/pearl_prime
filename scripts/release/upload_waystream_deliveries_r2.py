@@ -24,7 +24,38 @@ PKG = REPO / "artifacts/weekly_packages" / BRAND
 FEED_PATH = REPO / "brand-wizard-app/public/brand_deliveries" / f"{BRAND}.json"
 MANIFEST = REPO / "artifacts/waystream/r2_delivery_manifest.json"
 KEY_PREFIX = f"brand/{BRAND}/deliveries"
-PRESIGN_SEC = int(os.environ.get("WAYSTREAM_R2_PRESIGN_SEC", str(60 * 60 * 24 * 30)))  # 30d
+
+# Cloudflare R2 rejects presigned GETs with X-Amz-Expires >= 604800 (1 week) — HTTP 400
+# InvalidArgument "X-Amz-Expires must be less than a week (in seconds)". Confirmed
+# empirically 2026-07-01 (flip-assemble R2 pilot, PR #4204): a 30d presign 400'd, a 6d
+# presign returned HTTP 200. Presigned URLs are inherently short-lived; the DURABLE public
+# download path is the /download/<book>?week=... Cloudflare Pages Function, which re-signs
+# the R2 object server-side on every request (brand-wizard-app/functions/download/[book_id].js,
+# emitted by scripts/marketing/rebuild_waystream_feed_from_r2.py in default proxy mode).
+R2_MAX_PRESIGN_SEC = 604_800  # exclusive ceiling; ExpiresIn must be strictly less
+DEFAULT_PRESIGN_SEC = 60 * 60 * 24 * 6  # 6d — safely under the R2 1-week limit
+
+
+def _resolve_presign_sec(env: dict[str, str] | None = None) -> int:
+    """Resolve + validate the presign TTL from WAYSTREAM_R2_PRESIGN_SEC.
+
+    Defaults to 6 days. Raises a clear error if a caller requests >= 1 week, since
+    R2 would otherwise 400 every generated URL at fetch time.
+    """
+    src = os.environ if env is None else env
+    raw = src.get("WAYSTREAM_R2_PRESIGN_SEC")
+    sec = DEFAULT_PRESIGN_SEC if raw is None or not raw.strip() else int(raw)
+    if sec >= R2_MAX_PRESIGN_SEC:
+        raise SystemExit(
+            f"WAYSTREAM_R2_PRESIGN_SEC={sec} is invalid: Cloudflare R2 rejects presigned "
+            f"GETs with X-Amz-Expires >= {R2_MAX_PRESIGN_SEC} (1 week) with HTTP 400 "
+            f'"X-Amz-Expires must be less than a week". Use a value < {R2_MAX_PRESIGN_SEC} '
+            f"(default {DEFAULT_PRESIGN_SEC} = 6d), or rely on the durable /download proxy "
+            "(scripts/marketing/rebuild_waystream_feed_from_r2.py, default proxy mode)."
+        )
+    if sec <= 0:
+        raise SystemExit(f"WAYSTREAM_R2_PRESIGN_SEC={sec} must be a positive integer")
+    return sec
 
 
 def _r2_client():
@@ -102,6 +133,7 @@ def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--dry-run", action="store_true")
     args = ap.parse_args()
+    presign_sec = _resolve_presign_sec()  # fail fast on an out-of-range TTL
     rows = _scan_epubs()
     if not rows:
         print("no EPUBs under weekly_packages — nothing to upload")
@@ -127,7 +159,7 @@ def main() -> int:
             url = client.generate_presigned_url(  # type: ignore[union-attr]
                 "get_object",
                 Params={"Bucket": bucket, "Key": row["key"]},
-                ExpiresIn=PRESIGN_SEC,
+                ExpiresIn=presign_sec,
             )
         url_by_file[row["file"]] = url
         manifest["objects"].append({**row, "url": url})

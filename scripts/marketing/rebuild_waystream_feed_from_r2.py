@@ -35,8 +35,10 @@ DEFAULT_MANIFEST = REPO / "artifacts/waystream/r2_delivery_manifest.json"
 DEFAULT_OUTPUT = REPO / "brand-wizard-app/public/brand_deliveries/way_stream_sanctuary.json"
 DEFAULT_BRAND = "way_stream_sanctuary"
 PRESERVE_PLATFORMS = frozenset({"kdp", "webtoon"})
-# R2/S3 presigned GET max is 7 days; longer ExpiresIn yields HTTP 400.
-MAX_PRESIGN_TTL = 604_800
+# R2/S3 presigned GET expiry must be STRICTLY LESS than 7 days: R2 rejects an
+# X-Amz-Expires >= 604800 with HTTP 400 "must be less than a week (in seconds)".
+# Confirmed empirically 2026-07-01 (PR #4204). Cap one second under the ceiling.
+MAX_PRESIGN_TTL = 604_799
 OK_CONTENT_TYPES = frozenset(
     {"application/epub+zip", "application/octet-stream", "binary/octet-stream"}
 )
@@ -345,7 +347,12 @@ def main() -> int:
     ap = argparse.ArgumentParser(description="Rebuild way_stream_sanctuary feed from R2 manifest")
     ap.add_argument("--manifest", type=Path, default=DEFAULT_MANIFEST)
     ap.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
-    ap.add_argument("--presigned-ttl", type=int, default=604_800, help="Presign TTL seconds (max 7d)")
+    ap.add_argument(
+        "--presigned-ttl",
+        type=int,
+        default=604_799,
+        help="Presign TTL seconds (must be < 604800 / 7d; R2 400s on >= a week)",
+    )
     ap.add_argument(
         "--use-presign",
         action="store_true",
