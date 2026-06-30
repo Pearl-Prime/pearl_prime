@@ -1736,7 +1736,7 @@ function Step6EmotionalOutcomes({ state, update, i18n = {} }) {
 const TOPIC_CATEGORIES = [
   { label: "睡眠と不安", icon: "😰", color: "#6366f1", tags: [
     { id: "anxiety-at-night", label: "夜の不安", angle: "framework", bullet: "就寝前の不安プロトコルを提供——コルチゾールの悪循環が始まる前に遮断する、3つのボディスキャン" },
-    { id: "考えすぎ", label: "考えすぎ", angle: "origin", bullet: "考えすぎのパターンを幼少期の生存戦略へと辿る——脳が危険を察知し続け、それを止められなかった理由" },
+    { id: "overthinking", label: "考えすぎ", angle: "origin", bullet: "考えすぎのパターンを幼少期の生存戦略へと辿る——脳が危険を察知し続け、それを止められなかった理由" },
     { id: "panic-grounding", label: "パニックグラウンディング", angle: "debunk", bullet: "「深呼吸すればいい」という通説を崩す——パニックにはまずソマティック介入、認知的ツールはその後" },
     { id: "sunday-dread", label: "日曜の憂鬱", angle: "leverage", bullet: "日曜の憂鬱を神経系の週次予報として再定義——その憂鬱自体が、変える必要があることへのデータを含んでいる" },
   ]},
