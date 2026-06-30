@@ -145,6 +145,22 @@ failure_classes:
     action: block_merge
     first_seen: "2026-04-18"
 
+  cross_chapter_sentence_repeat:
+    description: "Any normalized 6+ word sentence appearing verbatim in 2+ chapters (named comfort lines, engine theses)"
+    detection: sentence_hash
+    min_words: 6
+    max_chapters_per_sentence: 1
+    scope: all_chapters
+    action: block_merge
+    first_seen: "2026-06-30"
+    notes: >
+      Sentence-granularity backstop below the 50-word block detector. Catches the
+      cohesion repeats that pass every register gate: short therapeutic lines and
+      engine-keyed theses (~6-15 words) that recur across chapters and make the
+      book read interchangeable. Normalized case/punctuation/whitespace.
+      Detector: phoenix_v4/quality/regression_museum/detectors.py
+      :detect_cross_chapter_sentence_repeat.
+
   # ---------------------------------------------------------------------------
   # Pearl News invariant failures — added 2026-04-19
   # Contract: docs/PEARL_NEWS_CONTRACT.md

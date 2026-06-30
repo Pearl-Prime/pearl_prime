@@ -31,6 +31,10 @@ _TIMING_STEP_STRIP_RE = re.compile(
 )
 
 # §7.3 dwell beats — varied lengths to avoid F6 cadence 4-gram repetition.
+# Expanded (2026-06-30) so the book-level no-repeat picker has enough distinct
+# F13-valid beats to cover every chapter without exhausting (audit Q3/D1a). Each
+# entry must satisfy register_gate._f13_is_dwell_beat (body / held-silence /
+# single-consequence vocabulary, ≤40 words) — verified by tests.
 _DWELL_BEAT_POOL: tuple[str, ...] = (
     "Your shoulders drop a half inch.",
     "Read that again. The next sentence can wait.",
@@ -43,6 +47,21 @@ _DWELL_BEAT_POOL: tuple[str, ...] = (
     "Pause.",
     "The room is still here.",
     "You can let the next instruction wait while this lands in the body, not just the mind.",
+    # --- expansion (2026-06-30) ---
+    "Your breath finds a slower floor on its own.",
+    "Feel the weight settle into the chair beneath you.",
+    "Let that land before you read on.",
+    "Sit with this for a moment.",
+    "The next line can wait while your shoulders come down.",
+    "Your throat unclenches by a fraction.",
+    "So the next time the signal rises, your hands already know to soften.",
+    "Let your belly soften where it has been braced.",
+    "Notice the warmth return to your hands.",
+    "Don't move on too fast; let your breath catch up.",
+    "Your ribs widen as the held breath finally leaves.",
+    "And you get to feel your feet on the floor before the next thought.",
+    "The next time this arrives, your jaw remembers it can loosen.",
+    "Rest here while your pulse evens out.",
 )
 
 # Varied softenings when F7 prescribed-action density is capped — purely declarative
@@ -73,6 +92,25 @@ _DEPRESCRIBE_ALTERNATIVES_RAW: tuple[str, ...] = (
     "Difficulty here is information, not indictment.",
     "The calendar will keep moving; you get to choose your pace.",
     "Nothing about this moment requires perfection.",
+    # --- expansion (2026-06-30): book-level no-repeat needs a deeper pool so
+    # comfort lines stop re-stamping 4-8× per book (audit Q3/D1a). Each line is
+    # declarative — no F7 imperative+timing pair, no F13 insight phrasing —
+    # verified by _f7_safe_deprescribe_alternatives at import and by tests.
+    "Compassion is a more accurate instrument than judgment.",
+    "Your effort has been real, even on the days it went unseen.",
+    "Slowness now is not the same as standing still.",
+    "A demanding day does not erase a steady one.",
+    "Tenderness toward yourself counts as competence.",
+    "The hard parts are allowed to simply be hard.",
+    "Your worth was never riding on this single moment.",
+    "Honesty about limits is a quiet kind of strength.",
+    "Some weight is meant to be shared, not shouldered alone.",
+    "An ordinary pace is a sustainable pace.",
+    "You have survived every version of this so far.",
+    "Gentleness here is wiser than another push.",
+    "Enough is a real measurement, even when it feels foreign.",
+    "Your nervous system has earned a softer setting.",
+    "Care given inward is not care taken from anyone else.",
 )
 
 
@@ -127,6 +165,16 @@ _CLOSING_LINE_ALTERNATES: tuple[str, ...] = (
     "A single breath can be the whole intervention.",
     "What showed up is data, not a moral score.",
     "Steadiness is built in ordinary moments like this one.",
+    # --- expansion (2026-06-30): deeper pool so unique-closing rotation has
+    # headroom across a full book (audit Q3/D1a).
+    "You are allowed to close the day before it closes you.",
+    "The pile will still be there tomorrow, and so will you.",
+    "What you carried today, you carried; that is enough.",
+    "Tomorrow does not need you to solve it tonight.",
+    "You can set this down without setting yourself down with it.",
+    "The quiet you are afraid of is also the rest you need.",
+    "Nothing here asks you to be more than human tonight.",
+    "You get to be a work in progress and still be whole.",
 )
 _REFRAME_LANDINGS: tuple[str, ...] = (
     "The truth is, the alarm was never proof that you were failing.",
@@ -166,6 +214,43 @@ def _vary_repeated_bridge_tails(body: str, *, chapter_index: int, seed: str) -> 
 def _pick(pool: tuple[str, ...], seed: str) -> str:
     digest = hashlib.sha256(seed.encode("utf-8")).digest()
     return pool[digest[0] % len(pool)]
+
+
+def _norm_phrase(text: str) -> str:
+    return re.sub(r"\s+", " ", (text or "").lower()).strip()
+
+
+class _BookPhraseLedger:
+    """Book-level no-repeat picker for strengthen pools (audit Q3/D1a).
+
+    Generalizes the per-call `_pick_unused` pattern already used in
+    balance_transformation_arc_landings: deterministic _pick over a pool, but
+    skipping any phrase already stamped anywhere in THIS book. When the pool is
+    exhausted it falls back to the deterministic pick (graceful, never raises) —
+    which is why the deprescribe/closing/dwell pools were also expanded.
+    """
+
+    def __init__(self) -> None:
+        self.used: set[str] = set()
+
+    def seen(self, phrase: str) -> bool:
+        return _norm_phrase(phrase) in self.used
+
+    def mark(self, phrase: str) -> None:
+        norm = _norm_phrase(phrase)
+        if norm:
+            self.used.add(norm)
+
+    def pick_unused(self, pool: tuple[str, ...], key: str) -> str:
+        for offset in range(len(pool)):
+            choice = _pick(pool, f"{key}:{offset}")
+            if not self.seen(choice):
+                self.mark(choice)
+                return choice
+        # Pool exhausted — deterministic fallback, still recorded.
+        choice = _pick(pool, key)
+        self.mark(choice)
+        return choice
 
 
 def _split_book(prose: str) -> tuple[str, list[tuple[int, str]]]:
@@ -219,8 +304,20 @@ def ensure_book_terminal_integrity(prose: str) -> str:
     return prose
 
 
-def _deprescribe_paragraph(para: str, *, seed: str) -> str:
-    """Soften a prescribed-action paragraph so F7 no longer counts it."""
+def _deprescribe_paragraph(
+    para: str, *, seed: str, ledger: "_BookPhraseLedger | None" = None
+) -> str:
+    """Soften a prescribed-action paragraph so F7 no longer counts it.
+
+    When a book-level `ledger` is supplied, a substituted comfort line is chosen
+    book-unique so the same alternative does not re-stamp across chapters
+    (audit Q3/D1a). Falls back to the deterministic pick when no ledger is given.
+    """
+    def _alt(key: str) -> str:
+        if ledger is not None:
+            return ledger.pick_unused(_DEPRESCRIBE_ALTERNATIVES, key)
+        return _pick(_DEPRESCRIBE_ALTERNATIVES, key)
+
     softened = _TIMING_STEP_STRIP_RE.sub("", para)
     words = re.findall(r"[A-Za-z]+", softened.lower())
     if (
@@ -228,8 +325,8 @@ def _deprescribe_paragraph(para: str, *, seed: str) -> str:
         or len(words) < 4
         or _is_prescribed_action(softened)
     ):
-        return _pick(_DEPRESCRIBE_ALTERNATIVES, seed)
-    return softened.strip() or _pick(_DEPRESCRIBE_ALTERNATIVES, seed)
+        return _alt(seed)
+    return softened.strip() or _alt(seed)
 
 
 def cap_prescribed_action_density(
@@ -237,8 +334,13 @@ def cap_prescribed_action_density(
     *,
     max_per_chapter: int = 2,
     max_by_chapter: dict[int, int] | None = None,
+    ledger: "_BookPhraseLedger | None" = None,
 ) -> str:
-    """Cap F7 prescribed-action paragraphs per chapter by softening surplus copies."""
+    """Cap F7 prescribed-action paragraphs per chapter by softening surplus copies.
+
+    Pass a shared `ledger` so the comfort line substituted for a capped action is
+    book-unique (does not re-stamp the same alternative across chapters).
+    """
     front, chapters = _split_book(prose)
     if not chapters:
         return prose
@@ -252,7 +354,9 @@ def cap_prescribed_action_density(
             if _is_prescribed_action(p):
                 kept_prescribed += 1
                 if kept_prescribed > chapter_cap:
-                    softened = _deprescribe_paragraph(p, seed=f"deprescribe:{num}:{p_idx}")
+                    softened = _deprescribe_paragraph(
+                        p, seed=f"deprescribe:{num}:{p_idx}", ledger=ledger
+                    )
                     if _is_prescribed_action(softened):
                         continue
                     new_paras.append(softened)
@@ -311,8 +415,19 @@ def verify_f7_exercise_preservation(
     return violations
 
 
-def _inject_dwell_beats_in_body(body: str, *, chapter_index: int, seed: str) -> str:
-    """Insert dwell beats when consecutive insight sentences would trip F13."""
+def _inject_dwell_beats_in_body(
+    body: str,
+    *,
+    chapter_index: int,
+    seed: str,
+    ledger: "_BookPhraseLedger | None" = None,
+) -> str:
+    """Insert dwell beats when consecutive insight sentences would trip F13.
+
+    With a shared `ledger`, injected dwell beats are book-unique so the same
+    beat does not re-stamp across chapters (audit Q3/D1a). Existing dwell beats
+    already present in the prose are recorded so the picker avoids them too.
+    """
     paras = [p for p in re.split(r"\n\s*\n", body) if p.strip()]
     if not paras:
         return body
@@ -323,15 +438,17 @@ def _inject_dwell_beats_in_body(body: str, *, chapter_index: int, seed: str) -> 
     if not flat:
         return body
 
+    def _dwell(key: str) -> str:
+        if ledger is not None:
+            return ledger.pick_unused(_DWELL_BEAT_POOL, key)
+        return _pick(_DWELL_BEAT_POOL, key)
+
     out_flat: list[str] = []
     insight_run = 0
     for s_idx, sent in enumerate(flat):
         if _f13_is_insight(sent):
             if insight_run >= F13_CONSECUTIVE_INSIGHT_FAIL - 1:
-                dwell = _pick(
-                    _DWELL_BEAT_POOL,
-                    f"{seed}:dwell:{chapter_index}:{s_idx}",
-                )
+                dwell = _dwell(f"{seed}:dwell:{chapter_index}:{s_idx}")
                 out_flat.append(dwell)
                 insight_run = 0
             out_flat.append(sent)
@@ -368,13 +485,23 @@ def _inject_dwell_beats_in_body(body: str, *, chapter_index: int, seed: str) -> 
     return "\n\n".join(rebuilt).strip()
 
 
-def ensure_dwell_beats(prose: str, *, seed: str = "dwell") -> str:
-    """Wire §7.3 dwell contract: real integration beats after insight runs."""
+def ensure_dwell_beats(
+    prose: str, *, seed: str = "dwell", ledger: "_BookPhraseLedger | None" = None
+) -> str:
+    """Wire §7.3 dwell contract: real integration beats after insight runs.
+
+    Pass a shared `ledger` to keep injected dwell beats book-unique.
+    """
     front, chapters = _split_book(prose)
     if not chapters:
         return prose
     out = [
-        (num, _inject_dwell_beats_in_body(body, chapter_index=num, seed=seed))
+        (
+            num,
+            _inject_dwell_beats_in_body(
+                body, chapter_index=num, seed=seed, ledger=ledger
+            ),
+        )
         for num, body in chapters
     ]
     return _join_book(front, out)
@@ -509,14 +636,25 @@ def balance_transformation_arc_landings(prose: str, *, seed: str = "arc") -> str
     return _join_book(front, out)
 
 
-def repair_f13_dwell_contract(prose: str, *, seed: str = "f13") -> str:
-    """Insert validated dwell beats before the 3rd insight in an F13 insight run."""
+def repair_f13_dwell_contract(
+    prose: str, *, seed: str = "f13", ledger: "_BookPhraseLedger | None" = None
+) -> str:
+    """Insert validated dwell beats before the 3rd insight in an F13 insight run.
+
+    Pass a shared `ledger` to keep inserted dwell beats book-unique.
+    """
     valid_dwell = tuple(d for d in _DWELL_BEAT_POOL if _f13_is_dwell_beat(d))
     if not valid_dwell:
         return prose
     front, chapters = _split_book(prose)
     if not chapters:
         return prose
+
+    def _dwell(key: str) -> str:
+        if ledger is not None:
+            return ledger.pick_unused(valid_dwell, key)
+        return _pick(valid_dwell, key)
+
     out: list[tuple[int, str]] = []
     for num, body in chapters:
         paras = [p for p in re.split(r"\n\s*\n", body) if p.strip()]
@@ -532,9 +670,7 @@ def repair_f13_dwell_contract(prose: str, *, seed: str = "f13") -> str:
                     continue
                 if _f13_is_insight(sent):
                     if insight_run >= F13_CONSECUTIVE_INSIGHT_FAIL - 1:
-                        rebuilt.append(
-                            _pick(valid_dwell, f"{seed}:f13:{num}:{p_idx}:{s_idx}")
-                        )
+                        rebuilt.append(_dwell(f"{seed}:f13:{num}:{p_idx}:{s_idx}"))
                         insight_run = 0
                     rebuilt.append(sent)
                     insight_run += 1
@@ -702,16 +838,29 @@ def strengthen_register_craft_output(
     seed: str = "register",
     max_prescribed_per_chapter: int = 1,
 ) -> str:
-    """Run all register-output strengthen passes in craft-safe order."""
+    """Run all register-output strengthen passes in craft-safe order.
+
+    A single book-level phrase ledger is shared across every pass that injects a
+    pool line (deprescribe + dwell), so comfort lines stop re-stamping multiple
+    times per book (audit Q3/D1a). The ledger persists across the repeated
+    deprescribe/dwell passes below — each pass picks lines the book hasn't used.
+    """
+    ledger = _BookPhraseLedger()
     work = balance_transformation_arc_landings(prose, seed=seed)
-    work = ensure_dwell_beats(work, seed=seed)
-    work = cap_prescribed_action_density(work, max_per_chapter=max_prescribed_per_chapter)
-    work = ensure_dwell_beats(work, seed=f"{seed}:recheck")
+    work = ensure_dwell_beats(work, seed=seed, ledger=ledger)
+    work = cap_prescribed_action_density(
+        work, max_per_chapter=max_prescribed_per_chapter, ledger=ledger
+    )
+    work = ensure_dwell_beats(work, seed=f"{seed}:recheck", ledger=ledger)
     work = break_pedagogical_cadence_repetition(work, seed=seed)
-    work = cap_prescribed_action_density(work, max_per_chapter=max_prescribed_per_chapter)
-    work = ensure_dwell_beats(work, seed=f"{seed}:final")
-    work = cap_prescribed_action_density(work, max_per_chapter=max_prescribed_per_chapter)
-    work = repair_f13_dwell_contract(work, seed=seed)
+    work = cap_prescribed_action_density(
+        work, max_per_chapter=max_prescribed_per_chapter, ledger=ledger
+    )
+    work = ensure_dwell_beats(work, seed=f"{seed}:final", ledger=ledger)
+    work = cap_prescribed_action_density(
+        work, max_per_chapter=max_prescribed_per_chapter, ledger=ledger
+    )
+    work = repair_f13_dwell_contract(work, seed=seed, ledger=ledger)
     work, _f1_notes = dedupe_register_f1_paragraphs(work)
     work = ensure_unique_chapter_closings(work, seed=seed)
     work = remove_sub_four_word_orphan_paragraphs(work)

@@ -149,6 +149,7 @@ def test_all_expected_classes_fire(museum_result):
         "doubled_word",
         "off_persona_vocabulary",
         "cross_chapter_verbatim_duplication",
+        "cross_chapter_sentence_repeat",
         "repeated_scene_anchor",
     }
     found_classes = {v.failure_class for v in museum_result["violations"]}
@@ -158,3 +159,38 @@ def test_all_expected_classes_fire(museum_result):
         f"Found: {found_classes}\n"
         f"Summary: {museum_result['summary']}"
     )
+
+
+def test_cross_chapter_sentence_repeat_fires(museum_result):
+    """The 6+ word sentence-granularity detector must flag repeated lines."""
+    classes = {v.failure_class for v in museum_result["violations"]}
+    assert "cross_chapter_sentence_repeat" in classes, (
+        "cross_chapter_sentence_repeat detector did not fire on the known-bad book. "
+        f"Summary: {museum_result['summary']}"
+    )
+
+
+def test_cross_chapter_sentence_repeat_clean_book_passes():
+    """A book with no cross-chapter 6+ word sentence repeats yields no violations."""
+    from phoenix_v4.quality.regression_museum.detectors import (
+        detect_cross_chapter_sentence_repeat,
+    )
+
+    book = {
+        "chapters": [
+            {"index": 1, "text": "The morning light fell across the quiet kitchen table."},
+            {"index": 2, "text": "A different sentence entirely lives inside this second chapter."},
+            {"index": 3, "text": "Short lines pass."},  # < 6 words, ignored
+        ]
+    }
+    assert detect_cross_chapter_sentence_repeat(book) == []
+
+    repeated = {
+        "chapters": [
+            {"index": 1, "text": "This exact sentence appears in more than one chapter."},
+            {"index": 2, "text": "This exact sentence appears in more than one chapter."},
+        ]
+    }
+    violations = detect_cross_chapter_sentence_repeat(repeated)
+    assert len(violations) == 1
+    assert violations[0].failure_class == "cross_chapter_sentence_repeat"

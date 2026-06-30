@@ -1,8 +1,20 @@
 # Chapter Thesis Bank — extracted from docs/CHAPTER_THESIS_BANK.md
 # Keys: chapter_intent (lowercase) → engine_type (lowercase) → thesis sentence
-# 20 intents × 4 engine types (Watcher, False_Alarm, Shame, Grief)
-# Spiral, Overwhelm, Comparison theses TBD (see docs/CHAPTER_THESIS_BANK.md §Engine Types)
-# Last updated: 2026-04-17
+# 20 intents × 7 engine types (Watcher, False_Alarm, Shame, Grief, Overwhelm, Spiral, Comparison)
+#
+# LOOKUP CONTRACT (book_structure_plan._get_thesis_from_bank +
+#                  chapter_composer._derive_thesis):
+#   1. topics[topic_id][intent][engine]   — per-topic override (when authored)
+#   2. intents[intent][engine]            — topic-agnostic BASELINE / fallback
+#   3. (no silent wrong-engine default)   — a missing engine returns "" so the
+#      caller emits an explicit topic/job descriptor instead of a watcher line.
+#
+# All 7 canonical engines (config/topic_engine_bindings.yaml) now have a baseline
+# column for every intent, so overwhelm/spiral/comparison no longer route to the
+# watcher bank. The `topics:` overlay is optional and additive — author entries
+# there only when a topic needs a thesis distinct from the engine baseline.
+# Overwhelm column seeded from Q1_overwhelm_theses asset (2026-06-30).
+# Last updated: 2026-06-30
 
 intents:
   # --- PART I: FIRST HALF (INTENTS 1–9) ---
@@ -12,54 +24,81 @@ intents:
     false_alarm: "The hypervigilance you've built is so familiar you can't feel it anymore."
     shame: "You learned to disappear into usefulness before anyone could find fault."
     grief: "You've been still and small to honor what was lost, and that stillness became your identity."
+    overwhelm: "You keep absorbing more because setting it down feels more dangerous than drowning under it."
+    spiral: "You replay every angle because thinking it through one more time feels safer than letting it rest."
+    comparison: "You measure yourself against everyone in the room because being ordinary feels like being caught."
 
   expose_cost:
     watcher: "Your body is paying the price of the strategy your mind thinks is keeping you safe."
     false_alarm: "The protection you've built is expensive and you're the only one paying."
     shame: "Usefulness is slowly consuming the parts of you that have nothing to offer."
     grief: "Honoring loss through absence means you're also absent from your own life."
+    overwhelm: "The flood never recedes because you've made carrying everything the proof that you're coping."
+    spiral: "The loop costs you the present; you live inside the rehearsal instead of the life."
+    comparison: "Every measurement against others quietly bills you for a self you never get to simply be."
 
   destabilize_strategy:
     watcher: "All your monitoring hasn't actually prevented the collapse you fear."
     false_alarm: "Your preparation has prepared you for nothing that actually happens."
     shame: "Disappearing has never made you safe, only made you disappear."
     grief: "Stillness isn't honoring what was lost; it's letting loss define the rest."
+    overwhelm: "Doing more has never made the wave smaller; it only taught you to hold your breath longer."
+    spiral: "Thinking harder has never closed the loop; it only digs the same groove deeper."
+    comparison: "Winning the comparison never quiets it; the scoreboard just resets with a new rival."
 
   reveal_hidden_belief:
     watcher: "You believe your value lives in your usefulness, nowhere else."
     false_alarm: "You believe the only safety is total knowledge, total control."
     shame: "You believe if anyone saw the real you, you wouldn't be chosen."
     grief: "You believe your love is measured in how much you've been willing to forfeit."
+    overwhelm: "You believe if you push through this one more thing, the pile will finally end."
+    spiral: "You believe that if you think it through enough times, you'll finally find the exit."
+    comparison: "You believe your worth is a ranking, and you can only rest once you're at the top."
 
   confrontation:
     watcher: "You see now that the system you built is turning against you."
     false_alarm: "You can no longer deny that your fear is your own creation."
     shame: "The invisibility you've maintained is a choice, not a destiny."
     grief: "You're aware now that you chose to stop living."
+    overwhelm: "You see now that there is no bottom to the list, and there never was going to be."
+    spiral: "You see now that the loop has no exit inside itself; the way out is to stop circling."
+    comparison: "You see now that the contest is one you invented, and you've been losing on purpose."
 
   somatic_repair:
     watcher: "Your nervous system knows the truth before your mind will admit it."
     false_alarm: "Your body can learn to trust before your thoughts catch up."
     shame: "Feeling is the path back to yourself when thinking got you lost."
     grief: "The body grieves differently than the mind; it holds what can't be said."
+    overwhelm: "Your body has been bracing against a wave that already broke; it can learn to exhale."
+    spiral: "Your body can drop out of the loop your mind keeps running, one slow breath at a time."
+    comparison: "Your body can feel like enough in a room before your mind finishes ranking it."
 
   relational_shift:
     watcher: "Your control strategy makes genuine connection impossible; they feel managed, not met."
     false_alarm: "Your need for reassurance is actually a need to be believed about your fear."
     shame: "You've been relating from a place of apology, and they've learned to accept it."
     grief: "Your withdrawal has convinced people that you prefer to be left alone."
+    overwhelm: "People feel like one more demand on you, so they stop asking, and you carry it alone."
+    spiral: "You take the loop into every conversation, so people meet your worry instead of you."
+    comparison: "You rank the people you love against each other, and they feel the scoreboard between you."
 
   embodied_identity:
     watcher: "You are not the efficient, untiring thing you've been trying to be."
     false_alarm: "You are not your anxiety; you are the one anxiety is happening to."
     shame: "You are not small; you are the one who learned to make yourself small."
     grief: "You are not an absence; you are a person who was living in one."
+    overwhelm: "You are not the container for everything; you are a person never meant to hold it all."
+    spiral: "You are not the loop; you are the one the loop keeps trying to capture."
+    comparison: "You are not your rank; you are the one who exists whether or not anyone is keeping score."
 
   grounded_reframe:
     watcher: "Your body's depletion is not weakness; it's information about what was unsustainable."
     false_alarm: "Your anxiety isn't a character flaw; it's a sensitivity that needs different care."
     shame: "Your need to be seen isn't arrogance; it's necessary to being human."
     grief: "Your pain is evidence of what mattered to you; don't call it weakness."
+    overwhelm: "Overwhelm isn't a failure to cope; it's the honest signal that the load was never sized for one person."
+    spiral: "The spiral isn't proof you're broken; it's a mind trying to solve safety with thought."
+    comparison: "Comparison isn't vanity; it's an old way of checking whether you still belong."
 
   # --- PART II: SECOND HALF (INTENTS 10–20) ---
 
@@ -68,63 +107,121 @@ intents:
     false_alarm: "The anxiety can be present without requiring you to solve it."
     shame: "You can see the impulse to disappear without disappearing."
     grief: "Loss can be real without requiring you to become smaller in response."
+    overwhelm: "You can feel the flood of too-much without acting on every part of it at once."
+    spiral: "You can watch the loop start without climbing on for another revolution."
+    comparison: "You can notice the urge to rank yourself without finishing the measurement."
 
   the_cost_named:
     watcher: "You've lost the ability to rest without guilt, and rest is what you need most."
     false_alarm: "You've lost the capacity to be surprised by joy because you're always braced."
     shame: "You've lost the chance to be ordinary, and ordinariness was where safety was."
     grief: "You've lost the companion who understood your language before any words were spoken."
+    overwhelm: "You've lost the ability to feel finished, because the moment one thing ends three more arrive."
+    spiral: "You've lost the quiet between thoughts, the only place where rest was ever going to live."
+    comparison: "You've lost the ability to enjoy what's yours, because you only see it next to someone else's."
 
   the_oldest_version:
     watcher: "That vigilance came from somewhere real; it was once the smartest thing you could do."
     false_alarm: "Your fear learned in a house where things actually happened without warning."
     shame: "You disappeared because the cost of being seen was higher than the cost of hiding."
     grief: "You learned to be still from someone who needed you to be; stillness was service."
+    overwhelm: "You learned to carry everything where no one else would, and carrying became who you are."
+    spiral: "You learned to loop in a place where staying one step ahead of the danger was survival."
+    comparison: "You learned to measure yourself early, in a place where rank decided who was safe."
 
   the_body_after:
     watcher: "Your body doesn't know what to do with the space where urgency used to be."
     false_alarm: "Calm is unfamiliar to your nervous system; it almost feels like danger."
     shame: "The absence of judgment feels like a trap; you're waiting for the other person to notice you're present."
     grief: "The loosening in your chest will feel like betrayal before it feels like relief."
+    overwhelm: "When the urgency drains away, your body won't trust the quiet; stillness will feel forgotten."
+    spiral: "When the loop finally stops, the silence will feel less like peace and more like a held breath."
+    comparison: "When you stop measuring, the room will feel strangely flat before it feels free."
 
   what_you_protected:
     watcher: "Your vigilance protects everyone around you from ever having to need you."
     false_alarm: "Your fear protects you from the grief underneath—the thing you're actually afraid of."
     shame: "Your invisibility protects you from the possibility of being truly rejected."
     grief: "Your stillness protects others from the burden of your aliveness."
+    overwhelm: "Carrying it all protects everyone from discovering the load was never actually manageable."
+    spiral: "The loop protects you from the helplessness of a problem that thinking can't actually solve."
+    comparison: "Ranking yourself protects you from the harder question of what you'd want if no one were watching."
 
   the_price_of_knowing:
     watcher: "You can no longer unsee that you're building your own collapse through vigilance."
     false_alarm: "Awareness that your fear is self-generated is a burden you can't put down."
     shame: "You've seen yourself disappearing and can't pretend it's necessary anymore."
     grief: "You know now that your stillness is a choice, and that means you can unchosen it."
+    overwhelm: "You can no longer pretend the overwhelm is temporary; you've seen it's the design, not the exception."
+    spiral: "You can no longer believe the next loop will be the one that finally resolves it."
+    comparison: "You can no longer pretend the comparing is harmless once you've felt what it costs you."
 
   moving_without_certainty:
     watcher: "You must stop managing before you feel safe; safety comes after the stopping."
     false_alarm: "You move toward what you need while the terror insists it's not safe yet."
     shame: "You take up space while part of you still insists you shouldn't be visible."
     grief: "You live while grief is still fresh, before it becomes safe to live."
+    overwhelm: "You set something down before you feel ready, because readiness never comes while you're drowning."
+    spiral: "You act before the loop resolves, because the loop was never going to hand you certainty."
+    comparison: "You choose your own direction before you've won the comparison, because winning it was never the point."
 
   the_relational_truth:
     watcher: "They've felt controlled by your management; they've learned to mistrust your care."
     false_alarm: "They've learned that reassuring you is an endless job with no exit."
     shame: "They've experienced your absence and learned not to expect your presence."
     grief: "They've adjusted to you being unavailable, and that adjustment has become permanent."
+    overwhelm: "They've learned not to add to your plate, and in protecting you they've stopped reaching you."
+    spiral: "They've learned to wait out your loops, and waiting has slowly become a kind of distance."
+    comparison: "They've felt themselves measured against others, and the ranking has thinned the trust between you."
 
   the_new_self:
     watcher: "The person who can rest without earning it is already showing up in brief moments."
     false_alarm: "The you that isn't afraid is flickering into existence in moments you're not watching for it."
     shame: "The visible version of you—the one who doesn't apologize for existing—appears when you're not guarding."
     grief: "The person living fully is already present in the moments when pain doesn't silence you."
+    overwhelm: "The you that can let a thing stay undone is already appearing when you don't refill the space."
+    spiral: "The you that can let a thought pass uncaught is already here in the moments you don't chase it."
+    comparison: "The you that can be glad for someone else is already surfacing when you forget to keep score."
 
   carrying_forward:
     watcher: "You'll manage your energy differently now; not because you've stopped caring, but because you've learned to care for yourself."
     false_alarm: "The fear will still arrive, but you'll know it's not the truth, and that changes everything."
     shame: "The impulse to disappear will still be there; you'll choose visibility anyway."
     grief: "The grief doesn't leave; you become someone who can carry it without letting it carry you."
+    overwhelm: "The flood will still come, but you'll know you don't have to catch every drop, and that changes the water."
+    spiral: "The loop will still start, but you'll know you can step off it, and that turns the spiral into a passing weather."
+    comparison: "The urge to compare will still rise, but you'll know your worth isn't on the scoreboard, and that quiets the whole game."
 
   the_open_hand:
     watcher: "You release the need for perfect control and keep the ability to affect your own life."
     false_alarm: "You release the belief that safety requires knowing everything and keep the wisdom you've earned."
     shame: "You release the invisibility and keep the sensitivity that taught you to be careful."
     grief: "You release the paralysis and keep the love that made you still."
+    overwhelm: "You release the need to hold it all and keep the power to choose what actually deserves your hands."
+    spiral: "You release the need to think your way to certainty and keep the clarity that lives outside the loop."
+    comparison: "You release the need to win the comparison and keep the discernment that knows what is actually yours."
+
+# ---------------------------------------------------------------------------
+# topics — OPTIONAL per-topic overrides (precedence #1, before the engine
+# baseline above). Author an entry here only when a topic needs a thesis
+# distinct from the shared engine column. Same shape: topic_id → intent →
+# engine → thesis. Anything absent here falls through to intents[...] above,
+# so partial overlays are safe and never regress untouched topics.
+# ---------------------------------------------------------------------------
+topics:
+  procrastination:
+    establish_mask:
+      spiral: "You keep re-deciding how to start because beginning badly feels worse than not beginning at all."
+      overwhelm: "You keep adding tasks to the front of the line because a started thing can finally be judged."
+    destabilize_strategy:
+      spiral: "Planning the perfect approach has never gotten the thing done; it only postponed the verdict."
+    grounded_reframe:
+      spiral: "Procrastination isn't laziness; it's a nervous system protecting you from a feeling, not a task."
+
+  perfectionism:
+    establish_mask:
+      comparison: "You polish endlessly because a finished thing can be ranked, and an unfinished one is still safe."
+    reveal_hidden_belief:
+      comparison: "You believe one flaw cancels the whole, so you must out-perform every version of yourself."
+    grounded_reframe:
+      comparison: "Perfectionism isn't high standards; it's an old bargain that says flawless is the price of belonging."

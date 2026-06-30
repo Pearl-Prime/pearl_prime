@@ -122,6 +122,58 @@ def detect_verbatim_chapter_block_repeat(book: dict, **_) -> list[Violation]:
     return detect_cross_chapter_verbatim_duplication(book, ngram_size=200)
 
 
+_SENTENCE_SPLIT_RE = re.compile(r"(?<=[.!?])\s+|\n+")
+_WORD_RE = re.compile(r"[a-z0-9']+")
+
+
+def _normalize_sentence(sentence: str) -> tuple[str, int]:
+    """Lower-case, strip punctuation/whitespace; return (normalized, word_count)."""
+    words = _WORD_RE.findall(sentence.lower())
+    return " ".join(words), len(words)
+
+
+def detect_cross_chapter_sentence_repeat(
+    book: dict, min_words: int = 6, max_chapters_per_sentence: int = 1, **_
+) -> list[Violation]:
+    """Flag any normalized sentence of >= min_words that appears in >= 2 chapters.
+
+    Durable backstop for the cohesion repeats that slip past the 50-word block
+    detector and past every register gate (audit lever 4): named comfort lines
+    and engine theses are short (6-15 words) but recur verbatim across chapters.
+    Sentence-granularity, normalized (case/punctuation/whitespace-insensitive),
+    deterministic, no LLM.
+    """
+    sentence_to_chapters: dict[str, set] = collections.defaultdict(set)
+    sentence_sample: dict[str, str] = {}
+    for ch in _chapters(book):
+        text = _chapter_text(ch)
+        idx = ch.get("index", "?")
+        for raw in _SENTENCE_SPLIT_RE.split(text):
+            norm, wc = _normalize_sentence(raw)
+            if wc < min_words:
+                continue
+            sentence_to_chapters[norm].add(idx)
+            if norm not in sentence_sample:
+                sentence_sample[norm] = raw.strip()
+    out: list[Violation] = []
+    for norm, chapters in sentence_to_chapters.items():
+        if len(chapters) > max_chapters_per_sentence:
+            sample = sentence_sample[norm]
+            out.append(Violation(
+                failure_class="cross_chapter_sentence_repeat",
+                severity="block",
+                location=f"chapters:{sorted(chapters)}",
+                evidence=sample[:200] + ("..." if len(sample) > 200 else ""),
+                description=(
+                    f"{min_words}+ word sentence repeated across "
+                    f"{len(chapters)} chapters {sorted(chapters)}"
+                ),
+            ))
+    # Stable ordering for deterministic reports.
+    out.sort(key=lambda v: v.location)
+    return out
+
+
 def detect_off_persona_vocabulary(book: dict, persona: str = "", config: Optional[dict] = None, **_) -> list[Violation]:
     if not config:
         return []

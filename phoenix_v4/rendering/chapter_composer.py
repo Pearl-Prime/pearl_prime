@@ -94,6 +94,7 @@ _BRIDGE_TRANSITION_CACHE: dict[str, Any] | None = None
 _BRIDGE_DIRECTION_SUBSTRINGS_CACHE: dict[tuple[str, str], str] | None = None
 _WITHIN_SLOT_BRIDGE_CACHE: dict[str, Any] | None = None
 _CHAPTER_THESIS_BANK_CACHE: dict | None = None
+_CHAPTER_THESIS_TOPICS_CACHE: dict | None = None
 _MECHANISM_THESIS_PATH = Path(__file__).resolve().parents[2] / "config" / "rendering" / "mechanism_thesis_families.yaml"
 _EXERCISE_WRAPPER_PATH = Path(__file__).resolve().parents[2] / "config" / "rendering" / "exercise_wrapper_families.yaml"
 _BRIDGE_TRANSITION_PATH = Path(__file__).resolve().parents[2] / "config" / "rendering" / "bridge_transition_families.yaml"
@@ -460,6 +461,58 @@ def _load_chapter_thesis_bank() -> dict:
     else:
         _CHAPTER_THESIS_BANK_CACHE = {}
     return _CHAPTER_THESIS_BANK_CACHE
+
+
+def _load_chapter_thesis_topics() -> dict:
+    """Load the optional `topics:` overlay from chapter_thesis_bank.yaml (cached).
+
+    Returns {topic_id: {intent: {engine: thesis}}}. Empty when no overlay is
+    authored; callers fall through to the engine baseline in that case.
+    """
+    global _CHAPTER_THESIS_TOPICS_CACHE
+    if _CHAPTER_THESIS_TOPICS_CACHE is not None:
+        return _CHAPTER_THESIS_TOPICS_CACHE
+    if yaml is None or not _CHAPTER_THESIS_BANK_PATH.exists():
+        _CHAPTER_THESIS_TOPICS_CACHE = {}
+        return _CHAPTER_THESIS_TOPICS_CACHE
+    try:
+        data = yaml.safe_load(_CHAPTER_THESIS_BANK_PATH.read_text(encoding="utf-8")) or {}
+        _CHAPTER_THESIS_TOPICS_CACHE = data.get("topics") or {}
+    except Exception:
+        _CHAPTER_THESIS_TOPICS_CACHE = {}
+    return _CHAPTER_THESIS_TOPICS_CACHE
+
+
+# Canonical engine slug → thesis-bank column. overwhelm/spiral/comparison now
+# have their own columns; somatic/cognitive aliases kept for back-compat.
+_THESIS_ENGINE_COLUMN: dict[str, str] = {
+    "somatic": "watcher",
+    "watcher": "watcher",
+    "false": "false_alarm",
+    "false_alarm": "false_alarm",
+    "alarm": "false_alarm",
+    "shame": "shame",
+    "grief": "grief",
+    "cognitive": "false_alarm",
+    "overwhelm": "overwhelm",
+    "spiral": "spiral",
+    "comparison": "comparison",
+}
+
+
+def _normalize_thesis_engine(engine_type: str) -> str:
+    """Resolve an engine slug to its thesis-bank column (full slug → leading token).
+
+    Unlike the old path, this does NOT collapse unknown canonical engines to
+    "watcher": the three previously-TBD engines resolve to their own columns.
+    Genuinely unrecognised slugs are returned normalized (so a missing-engine
+    lookup yields no thesis and the chain falls through rather than mislabelling).
+    """
+    key = (engine_type or "").lower().replace("-", "_").replace(" ", "_").strip()
+    if key in _THESIS_ENGINE_COLUMN:
+        return _THESIS_ENGINE_COLUMN[key]
+    head = key.split("_")[0]
+    return _THESIS_ENGINE_COLUMN.get(head, key)
 
 
 def _recent_count(store: dict[int, dict[str, int]], key: str, chapter_index: int, window: int) -> int:
@@ -1182,12 +1235,16 @@ def _derive_thesis(
     chapter_intent: str = "",
     engine_type: str = "",
     arc_thesis: str = "",
+    topic_id: str = "",
 ) -> str:
     """Extract a one-line thesis claim from REFLECTION prose.
 
     Derivation chain (highest → lowest priority):
       1. arc_thesis  — arc-provided thesis used directly if present
-      2. chapter_thesis_bank — lookup by (chapter_intent, engine_type)
+      2. chapter_thesis_bank — lookup by (topic_id, chapter_intent, engine_type)
+         with a topic override layer, then the topic-agnostic engine baseline.
+         No silent watcher default — overwhelm/spiral/comparison resolve to
+         their own columns (audit Q1/D2).
       3. mechanism_thesis_families.yaml — lookup by emotional_job
       4. _derive_thesis_legacy — keyword extraction from prose
     """
@@ -1195,15 +1252,20 @@ def _derive_thesis(
     if arc_thesis and arc_thesis.strip():
         return arc_thesis.strip()
 
-    # 2. Chapter Thesis Bank lookup by (chapter_intent, engine_type)
+    # 2. Chapter Thesis Bank lookup by (topic_id, chapter_intent, engine_type)
     if chapter_intent and engine_type:
-        bank = _load_chapter_thesis_bank()
+        bank = _load_chapter_thesis_bank()  # intents block
+        topic_overlay = _load_chapter_thesis_topics()  # topics block
         intent_key = chapter_intent.lower().replace("-", "_").replace(" ", "_")
-        engine_key = engine_type.lower().replace("-", "_").replace(" ", "_")
-        thesis = (bank.get(intent_key) or {}).get(engine_key, "")
+        engine_key = _normalize_thesis_engine(engine_type)
+        # Precedence: topic override → engine baseline.
+        topic_block = ((topic_overlay.get(topic_id) or {}).get(intent_key)) or {}
+        intent_block = bank.get(intent_key) or {}
+        thesis = topic_block.get(engine_key) or intent_block.get(engine_key)
         if thesis:
             return str(thesis).strip()
-        # Try engine aliases (watcher ↔ burnout, false_alarm ↔ anxiety)
+        # Legacy engine aliases (watcher ↔ burnout, false_alarm ↔ anxiety) — kept
+        # so older callers passing burnout/anxiety slugs still resolve.
         engine_aliases = {
             "burnout": "watcher",
             "watcher": "burnout",
@@ -1212,7 +1274,7 @@ def _derive_thesis(
         }
         alt_engine = engine_aliases.get(engine_key, "")
         if alt_engine:
-            thesis = (bank.get(intent_key) or {}).get(alt_engine, "")
+            thesis = topic_block.get(alt_engine) or intent_block.get(alt_engine)
             if thesis:
                 return str(thesis).strip()
 
@@ -2812,6 +2874,7 @@ def compose_chapter_prose(
             chapter_intent=chapter_intent,
             engine_type=engine_type,
             arc_thesis=arc_thesis,
+            topic_id=topic_id,
         )
         if not _is_placeholder_text(reflection_raw)
         else arc_thesis.strip() if arc_thesis and arc_thesis.strip() else ""

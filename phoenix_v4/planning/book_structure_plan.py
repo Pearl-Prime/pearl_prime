@@ -250,6 +250,52 @@ def _regulation_for_intensity(intensity: int) -> str:
     return "low"
 
 
+# Canonical 7-engine map → chapter_thesis_bank.yaml engine columns.
+# overwhelm/spiral/comparison now have their own baseline columns (no longer
+# collapsed to "watcher"). somatic/cognitive aliases preserved for compat.
+_ENGINE_TO_BANK_KEY: dict[str, str] = {
+    "somatic": "watcher",
+    "watcher": "watcher",
+    "false": "false_alarm",
+    "false_alarm": "false_alarm",
+    "alarm": "false_alarm",
+    "shame": "shame",
+    "grief": "grief",
+    "cognitive": "false_alarm",
+    "overwhelm": "overwhelm",
+    "spiral": "spiral",
+    "comparison": "comparison",
+}
+
+# Map emotional_job → ALL of its chapter-intent facets. Listing every facet
+# (not just 2) lets a 12-chapter book rotate across more distinct theses; the
+# 2-cycle here was the within-book repetition source (audit Q1/D2).
+JOB_TO_INTENT: dict[str, list[str]] = {
+    "recognition": ["establish_mask", "expose_cost", "the_oldest_version"],
+    "mechanism": ["destabilize_strategy", "reveal_hidden_belief", "what_you_protected"],
+    "deepening": ["confrontation", "somatic_repair", "the_cost_named", "the_price_of_knowing"],
+    "reframe": ["grounded_reframe", "embodied_identity", "the_body_after"],
+    "practice": ["witness_without_fix", "moving_without_certainty"],
+    "resolution": ["carrying_forward", "the_open_hand", "the_relational_truth"],
+    "integration": ["the_new_self", "carrying_forward", "the_open_hand"],
+}
+
+
+def _bank_engine_key(engine_type: str) -> str:
+    """Resolve an engine slug to its chapter_thesis_bank.yaml column.
+
+    Matches the full slug first (e.g. "false_alarm", "overwhelm"), then the
+    leading token (e.g. "somatic_first" → "somatic"). Unknown engines fall back
+    to "watcher" only as a last resort for genuinely unrecognised slugs — the
+    three previously-TBD canonical engines now resolve to their own columns.
+    """
+    key = (engine_type or "").lower().strip()
+    if key in _ENGINE_TO_BANK_KEY:
+        return _ENGINE_TO_BANK_KEY[key]
+    head = key.split("_")[0]
+    return _ENGINE_TO_BANK_KEY.get(head, "watcher")
+
+
 def _get_thesis_from_bank(
     emotional_job: str,
     engine_type: str,
@@ -257,7 +303,12 @@ def _get_thesis_from_bank(
     topic_id: str,
     repo_root: Path,
 ) -> str:
-    """Load chapter_thesis_bank.yaml and return the best-match thesis."""
+    """Load chapter_thesis_bank.yaml and return the best-match thesis.
+
+    Precedence: topics[topic_id][intent][engine] → intents[intent][engine].
+    No silent watcher default — a missing engine yields an explicit
+    topic/job descriptor so a book is never mislabelled as a watcher book.
+    """
     bank_path = repo_root / "config" / "planning" / "chapter_thesis_bank.yaml"
     if yaml is None or not bank_path.exists():
         return (
@@ -266,44 +317,34 @@ def _get_thesis_from_bank(
         )
     data = yaml.safe_load(bank_path.read_text(encoding="utf-8")) or {}
     intents = data.get("intents") or {}
-    engine_key = engine_type.lower().split("_")[0]  # e.g. "somatic_first" → "somatic"
-    # Map engine keys: somatic → watcher, cognitive → false_alarm, etc.
-    ENGINE_TO_BANK_KEY: dict[str, str] = {
-        "somatic": "watcher",
-        "watcher": "watcher",
-        "false": "false_alarm",
-        "alarm": "false_alarm",
-        "shame": "shame",
-        "grief": "grief",
-        "cognitive": "false_alarm",
-    }
-    bank_engine = ENGINE_TO_BANK_KEY.get(engine_key, "watcher")
+    topics = data.get("topics") or {}
+    bank_engine = _bank_engine_key(engine_type)
 
-    # Map emotional_job → chapter intent key
-    JOB_TO_INTENT: dict[str, list[str]] = {
-        "recognition": ["establish_mask", "expose_cost"],
-        "mechanism": ["destabilize_strategy", "reveal_hidden_belief"],
-        "deepening": ["confrontation", "somatic_repair"],
-        "reframe": ["grounded_reframe", "embodied_identity"],
-        "practice": ["witness_without_fix", "moving_without_certainty"],
-        "resolution": ["carrying_forward", "the_open_hand"],
-        "integration": ["the_new_self", "carrying_forward"],
-    }
-    candidates = JOB_TO_INTENT.get(emotional_job.lower(), ["establish_mask"])
+    # Map emotional_job → chapter intent key. Each job lists ALL of its intent
+    # facets so a 12-chapter book rotates across more theses than a 2-cycle
+    # (within-book repetition is the JOB_TO_INTENT 2-cycle, per audit Q1/D2).
+    candidates = JOB_TO_INTENT.get(emotional_job.lower(), ["establish_mask", "expose_cost"])
     intent_key = candidates[(chapter_number - 1) % len(candidates)]
 
+    # Precedence: topic override → engine baseline. NO silent watcher default —
+    # a missing engine returns an explicit descriptor so a book is never
+    # mislabelled as a watcher book (audit Q1/D2).
+    topic_block = ((topics.get(topic_id) or {}).get(intent_key)) or {}
     intent_block = intents.get(intent_key) or {}
-    thesis = intent_block.get(bank_engine) or intent_block.get("watcher")
+    thesis = topic_block.get(bank_engine) or intent_block.get(bank_engine)
     if thesis:
         return thesis
-    # Final fallback
-    for block in intents.values():
-        t = block.get(bank_engine) or block.get("watcher")
+    # Same engine, different facet within this job (still topic-aware).
+    for alt_intent in candidates:
+        alt_topic = ((topics.get(topic_id) or {}).get(alt_intent)) or {}
+        alt_base = intents.get(alt_intent) or {}
+        t = alt_topic.get(bank_engine) or alt_base.get(bank_engine)
         if t:
             return t
+    # Explicit no-thesis signal (never a wrong-engine watcher line).
     return (
         f"This chapter addresses the {emotional_job} phase of transformation "
-        f"for {topic_id}."
+        f"around {topic_id} through the {bank_engine.replace('_', ' ')} pattern."
     )
 
 
