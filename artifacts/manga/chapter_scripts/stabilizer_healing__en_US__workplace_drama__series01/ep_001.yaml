@@ -1,0 +1,193 @@
+schema_version: 1.0.0
+artifact_type: chapter_script_writer_handoff
+schema_authority: schemas/manga/chapter_script_writer_handoff.schema.json
+series_id: stabilizer_healing__en_US__workplace_drama__series01
+chapter_id: ep_001
+title: 'The Last to Leave the Office — Episode 1: Thursday Review'
+manga_author: Brook Dewpath
+teacher_id: null
+brand_id: stabilizer_healing
+engine: OVERWHELM
+locale: en_US
+default_locale: en_US
+available_locales:
+- en_US
+- ja_JP
+- zh_CN
+- zh_TW
+main_characters:
+- id: june
+  name: June Okada
+  age: 29
+  role: protagonist (operations coordinator — competent, never the loudest in the room; the one who stays to fix the deck)
+  visual_anchor: black bob with a single silver clip, navy blazer, reusable tea tumbler with a dented base; shoes always sensible
+- id: patel
+  name: Director Patel
+  age: 48
+  role: mid-level manager — institution-shaped, not evil; once had ambitions visible in an old photo on her shelf
+  visual_anchor: reading glasses on a chain, cardigan over office dress code, calm voice that makes urgency sound reasonable
+- id: ren
+  name: Ren (peer)
+  age: 30
+  role: same-grade peer — externalizes what June internalizes; leaves at 6:01 PM without guilt
+  visual_anchor: loosened tie, sneakers under desk, perpetual half-grin
+scene_palette:
+  primary: cool fluorescent office grey + PowerPoint blue-white
+  secondary: warm convenience-store orange (after-work decompression only)
+  accent: dented tea tumbler (human marker inside institutional sameness)
+  chibi_insert_palette: high-contrast red/black SD panel (panel 14 only)
+pages:
+- page_id: ep_001_p01
+  panels:
+  - panel_id: ep001_001
+    scene: 'Conference room establishing shot. Calendar on wall: THURSDAY — Q3 REVIEW. Empty chairs except three. Coffee urn steaming. Institutional grid.'
+    beat_type: null
+    intent: DEADLINE HOOK — institutional pressure before personal crisis
+    narrator_caption_by_locale:
+      en_US: The deck was due at noon. It is 4:47 PM.
+  - panel_id: ep001_002
+    scene: 'Medium on June at laptop. Slide 38 of 41. Dark circles understated. Posture correct.'
+    beat_type: micro
+    dialogue_lines:
+    - speaker: patel
+      text_by_locale:
+        en_US: Can we tighten the narrative on slide twelve before tomorrow?
+      intensity: normal
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_right
+  - panel_id: ep001_003
+    scene: 'June''s face. Smiles. Caption underneath contradicts the smile.'
+    beat_type: micro
+    narrator_caption_by_locale:
+      en_US: '"Absolutely," I said [meaning: I have not eaten lunch].'
+    dialogue_lines:
+    - speaker: june
+      text_by_locale:
+        en_US: Absolutely.
+      intensity: normal
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: left
+  - panel_id: ep001_004
+    scene: 'Tight grid of meeting faces — Patel, two VPs, June smallest in frame. Speech bubbles orderly.'
+    beat_type: spatial
+    intent: Corporate dialogue as performance
+  - panel_id: ep001_005
+    scene: 'Close on June''s hand under the table. Knuckles pale on the dented tumbler.'
+    beat_type: micro
+    intent: Burnout somatic — shown, not named
+    silence_confirmed: true
+  - panel_id: ep001_006
+    scene: 'Hallway micro-scene — Ren leans in doorway. Two panels worth of space in one vertical strip.'
+    beat_type: spatial
+    dialogue_lines:
+    - speaker: ren
+      text_by_locale:
+        en_US: You coming to the thing tonight?
+      intensity: normal
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: right
+    - speaker: june
+      text_by_locale:
+        en_US: Can''t. Deck.
+      intensity: normal
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: left
+  - panel_id: ep001_007
+    scene: 'Ren shrugs, already leaving. June still in doorway shadow.'
+    beat_type: micro
+    narrator_caption_by_locale:
+      en_US: Ren treats overtime like weather. I treat it like proof.
+  - panel_id: ep001_008
+    scene: '6:22 PM — open plan. Most desks dark. June alone in a pool of light. Takeout container untouched.'
+    beat_type: spatial
+    intent: Burnout landscape — cathedral of empty cubicles
+  - panel_id: ep001_009
+    scene: 'Email compose window. Subject: Q3 Review — Final. Cursor blinking. To field: twelve names.'
+    beat_type: micro
+    dialogue_lines:
+    - speaker: june_internal
+      text_by_locale:
+        en_US: If I send now, they''ll reply now.
+      intensity: whisper
+      bubble_style: cloud_thought
+      tail_style: dotless
+      position_hint: center
+  - panel_id: ep001_010
+    scene: 'Patel''s desk in background — photo frame visible. Younger Patel in hiking gear, laughing. Present Patel''s cardigan on chair.'
+    beat_type: spatial
+    intent: Boss-as-shaped-by-system glimpse — not villain
+  - panel_id: ep001_011
+    scene: 'June rubs the bridge of her nose. Shoulders inch upward.'
+    beat_type: micro
+    intent: Body cost accumulating
+  - panel_id: ep001_012
+    scene: 'Slack notification stack — three pings. Preview snippets benign: "Quick tweak?" "Flag?" "Thumbs up?"'
+    beat_type: spatial
+  - panel_id: ep001_013
+    scene: 'June stares at the stack. Expression flat.'
+    beat_type: micro
+    silence_confirmed: true
+  - panel_id: ep001_014
+    scene: 'CHIBI INSERT — stylistic break. SD June on a tiny stage with a microphone, death-metal crowd silhouettes. No speech bubbles. One frame only.'
+    beat_type: micro
+    intent: Aggretsuko pressure valve — comedy register discharges dread without resolving it
+  - panel_id: ep001_015
+    scene: 'Return to regular art. June exhales. Opens slide twelve.'
+    beat_type: micro
+    intent: Comedy reconnects to weight — she goes back to work
+  - panel_id: ep001_016
+    scene: '8:11 PM — bathroom mirror. June splashes water. Tie loosened. Silver clip out. Face unfamiliar without office posture.'
+    beat_type: spatial
+    intent: Linguistic/visual decompression — register softens off-site
+  - panel_id: ep001_017
+    scene: 'Elevator doors closing on the office floor reflection. Numbers descend.'
+    beat_type: spatial
+    narrator_caption_by_locale:
+      en_US: The building does not notice who leaves last. It keeps the lights on anyway.
+  - panel_id: ep001_018
+    scene: 'Train platform — wordless wide. June mid-frame small. LED arrivals board. Wind.'
+    beat_type: long_drop
+    silence_confirmed: true
+  - panel_id: ep001_019
+    scene: 'Convenience store entrance warm orange. June buys onigiri and hot tea. Ren texts bubble overlay (phone in hand): "Still at office?"'
+    beat_type: spatial
+    dialogue_lines:
+    - speaker: ren
+      text_by_locale:
+        en_US: Still at office?
+      intensity: normal
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_right
+  - panel_id: ep001_020
+    scene: 'June types while walking. Half-smile that is not happy.'
+    beat_type: micro
+    dialogue_lines:
+    - speaker: june
+      text_by_locale:
+        en_US: Just left.
+      intensity: normal
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: left
+  - panel_id: ep001_021
+    scene: 'Close on phone screen — message sent 8:26 PM. Background art: she is already on the train, not the office.'
+    beat_type: micro
+    intent: Small dishonesty — burnout social performance; topic embedded in the lie, not explained
+  - panel_id: ep001_022
+    scene: 'Train window reflection. June''s face over city lights. Onigiri wrapper in lap.'
+    beat_type: micro
+    narrator_caption_by_locale:
+      en_US: The deck will be fine. I tell myself that on every Thursday.
+  - panel_id: ep001_023
+    scene: 'Final panel — apartment door from inside. Shoes off. Lights still off. June silhouetted in hallway light from the street.'
+    beat_type: spatial
+    intent: END-OF-DAY LANDING — no system reform, no advice, only arrival
+    silence_confirmed: true
+notes:
+  genre_first_bar: 'Workplace contract — meeting hook, caption/smile gap, chibi release, commute landing. No career sermon. Burnout is structural + bodily.'
+  failure_modes_avoided: 'No boss-as-villain; no resolution through system reform; no productivity tips in caption.'
