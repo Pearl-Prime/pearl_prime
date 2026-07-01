@@ -1,0 +1,61 @@
+series_plan_schema: 1.0.0
+created_at: '2026-07-01'
+locale: pt_BR
+book_id_prefix: legacy_builder__default_teacher__gen_x_sandwich__compassion_fatigue
+brand: legacy_builder
+teacher: null
+persona: gen_x_sandwich
+topic: compassion_fatigue
+arc:
+  installment_1:
+    book_id: legacy_builder__default_teacher__gen_x_sandwich__compassion_fatigue__overwhelm
+    engine: overwhelm
+    duration: standard_book_60min
+    master_arc: config/source_of_truth/master_arcs/gen_x_sandwich__compassion_fatigue__overwhelm__F006.yaml
+  installment_2:
+    book_id: legacy_builder__default_teacher__gen_x_sandwich__compassion_fatigue__overwhelm__1hr
+    engine: overwhelm
+    duration: one_hour_book
+    master_arc: config/source_of_truth/master_arcs/gen_x_sandwich__compassion_fatigue__overwhelm__F006.yaml
+  installment_3:
+    book_id: legacy_builder__default_teacher__gen_x_sandwich__compassion_fatigue__shame
+    engine: shame
+    duration: standard_book_60min
+  installment_4:
+    book_id: legacy_builder__default_teacher__gen_x_sandwich__compassion_fatigue__grief
+    engine: grief
+    duration: standard_book_60min
+    master_arc: config/source_of_truth/master_arcs/gen_x_sandwich__compassion_fatigue__grief__F006.yaml
+  installment_5:
+    book_id: legacy_builder__default_teacher__gen_x_sandwich__compassion_fatigue__watcher
+    engine: watcher
+    duration: standard_book_60min
+    master_arc: config/source_of_truth/master_arcs/gen_x_sandwich__compassion_fatigue__watcher__F006.yaml
+reader_promise_family: ''
+bestseller_hook_family: ''
+emotional_engine: compassion_fatigue_recognition
+comp_series: []
+platform_strategy:
+  primary:
+  - kdp_ebook
+  - audible
+  secondary:
+  - apple_books
+  - google_play
+  - spotify_audiobooks
+  launch_platform: kdp_ebook
+  cadence:
+    release_spacing_days: 14
+    max_books_per_brand_per_month: 2
+reader_avatar:
+  age: ''
+  where_they_are: ''
+  what_they_need: ''
+  what_they_avoid: ''
+series_voice_markers:
+  register: ''
+  sentence_rhythm: ''
+  metaphor_family: ''
+  second_person_default: true
+plan_source_path: /tmp/legacy_builder.csv
+_needs_authoring: true
