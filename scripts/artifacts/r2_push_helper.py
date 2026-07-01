@@ -309,7 +309,41 @@ def push_brand_asset(
     )
 
 
-def sign_url(*, key: str, ttl_seconds: int = 3600) -> str:
+# Cloudflare R2 rejects presigned GETs whose X-Amz-Expires is >= 604800 (1 week) with
+# HTTP 400 InvalidArgument "X-Amz-Expires must be less than a week (in seconds)" — exactly
+# one week is rejected; the value must be STRICTLY less. Confirmed empirically 2026-07-01
+# (Waystream flip-assemble R2 pilot, PR #4204; fixed for Waystream in PR #4213, for manga
+# in PR #4226, mirrored here for the shared artifacts sign-url helper).
+#
+# The default ttl here (1h) is already safe, but the CLI exposes ``--ttl`` so a caller can
+# pass a week or more; this is the single chokepoint every signed URL in this module flows
+# through. These links are short-lived review handles, NOT a durable path — there is no
+# /download proxy re-signing per request, so an over-long ttl would only 400 at fetch time.
+R2_MAX_PRESIGN_SEC = 604_800  # exclusive ceiling; ExpiresIn must be strictly less
+DEFAULT_TTL_SECONDS = 3600  # 1h — safely under the R2 1-week limit
+
+
+def clamp_presign_sec(ttl_seconds: int) -> int:
+    """Clamp a presign TTL to a value R2 will accept (0 < ExpiresIn < 1 week).
+
+    R2 returns HTTP 400 for any ``X-Amz-Expires >= R2_MAX_PRESIGN_SEC``. A caller asking for
+    a week or more is clamped down one second under the ceiling (with a stderr warning)
+    rather than minting URLs that 400 at fetch time; a non-positive value falls back to the
+    safe default.
+    """
+    if ttl_seconds <= 0:
+        return DEFAULT_TTL_SECONDS
+    if ttl_seconds >= R2_MAX_PRESIGN_SEC:
+        print(
+            f"WARN: presign ttl_seconds={ttl_seconds} >= R2 max {R2_MAX_PRESIGN_SEC} (1 week); "
+            f"clamping to {R2_MAX_PRESIGN_SEC - 1} (R2 400s on an ExpiresIn of a week or more)",
+            file=sys.stderr,
+        )
+        return R2_MAX_PRESIGN_SEC - 1
+    return ttl_seconds
+
+
+def sign_url(*, key: str, ttl_seconds: int = DEFAULT_TTL_SECONDS) -> str:
     """Generate a time-limited signed URL for one R2 object.
 
     Useful for handing reviewers a public link to a single rendered cover
@@ -320,7 +354,7 @@ def sign_url(*, key: str, ttl_seconds: int = 3600) -> str:
     return client.generate_presigned_url(
         "get_object",
         Params={"Bucket": bucket, "Key": key},
-        ExpiresIn=ttl_seconds,
+        ExpiresIn=clamp_presign_sec(ttl_seconds),
     )
 
 
