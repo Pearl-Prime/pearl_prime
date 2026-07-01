@@ -5,7 +5,19 @@
 Each family is a function(spec, image) -> RGB Image (1600x2560). They share the
 typography/scrim/band helpers below. Per-cover craft stays clean (one focal
 element, <=2 fonts, <=3 colors, one high-contrast topic mark); variation comes
-from which family/fonts/palette an author gets + the per-book symbol set.
+from which family/fonts/palette an author gets + the per-book symbol set + the
+per-author FRAMING fingerprint drawn around the symbols.
+
+TYPE TREATMENT (operator 2026-07-01, second pass):
+  * TITLE is 0.8x its prior size (-20%) — see TITLE_SCALE in fit_title.
+  * SUBTITLE is 2.2x its prior size (SUBTITLE_SCALE), still NOT bold (italic
+    serif) and in the SAME COLOR AS THE TITLE (cohesive). At 2.2x the full
+    catalog subtitle may not fit; when it would truncate/overrun, the parked
+    short_hook is drawn instead (re-enabled per-cell). NEVER an ellipsis: full
+    subtitle where it fits, short hook where it does not.
+  * FRAMING fingerprint (box | strike | double | line_above | line_below) now
+    wraps the SYMBOL glyph cluster (moons/diamonds/topic marks), NOT the
+    subtitle. Per-author treatment assignment is unchanged.
 """
 from __future__ import annotations
 from dataclasses import dataclass
@@ -17,6 +29,15 @@ from . import symbols as S
 
 W, H = 1600, 2560
 M = 132  # base margin
+
+# operator 2026-07-01 (second pass): title -20%, subtitle +120%.
+TITLE_SCALE = 0.8     # title font 0.8x its prior size
+SUBTITLE_SCALE = 2.2  # subtitle font 2.2x its prior (reverted-original) size
+
+
+def _sub_font(serif, base_px):
+    """The subtitle font at the operator's 2.2x scale (italic, never bold)."""
+    return get_font(serif, "italic", max(12, int(round(base_px * SUBTITLE_SCALE))))
 
 
 @dataclass
@@ -38,6 +59,22 @@ class Spec:
     accent: tuple
     seed: int
     family: str = ""
+    # short_hook: the parked thumbnail-safe hook (catalog `short_hook` column).
+    # Used ONLY as a fallback when the FULL subtitle won't fit at the bigger
+    # (2.2x) size without truncation; otherwise the full subtitle is drawn.
+    short_hook: str = ""
+    # ---- per-author cover fingerprint (anti-spam diversity) ----
+    # framing: one of {box, strike, double, line_above, line_below} drawn around
+    # the SYMBOL cluster (operator 2026-07-01: the framing fingerprint frames the
+    # images/symbols, not the subtitle); deterministic per author
+    # (assign.author_fingerprint) so two authors never collide and one author
+    # always looks the same. Pure decoration in the symbol's own color.
+    framing: str = "line_below"
+    # plate: PARKED. The translucent contrast plate was part of the rejected
+    # bigger-subtitle experiment; at the original subtitle size it is not needed.
+    # Kept on the Spec so assign.author_fingerprint stays stable, but the layouts
+    # below never draw it (the cohesive same-color subtitle carries the read).
+    plate: bool = False
 
 
 # ---------------- typography helpers ----------------
@@ -68,6 +105,10 @@ def _line_h(font):
 
 
 def fit_title(draw, text, family, maxw, max_h, start=200, min_px=104, weight="bold", ls=1.06):
+    # operator 2026-07-01: title is 0.8x its prior size (scale the whole search
+    # range, so every family's title shrinks 20% but still fits its budget).
+    start = max(int(round(start * TITLE_SCALE)), int(round(min_px * TITLE_SCALE)) + 6)
+    min_px = max(40, int(round(min_px * TITLE_SCALE)))
     size = start
     while size > min_px:
         f = get_font(family, weight, size)
@@ -103,6 +144,86 @@ def _track(draw, xy, text, font, fill, tracking):
 
 def _track_w(draw, text, font, tracking):
     return sum(draw.textlength(ch, font=font) + tracking for ch in text) - tracking
+
+
+# ---------------- per-author FRAMING fingerprint (frames the SYMBOLS) ----------------
+def _frame_symbols(draw, framing, bbox, color, line_w=7, pad=46):
+    """The per-author FRAMING fingerprint: one of
+    box | strike | double | line_above | line_below, drawn around/through the
+    SYMBOL glyph cluster (operator 2026-07-01: framing frames the images/symbols,
+    not the subtitle). `bbox`=(x0,y0,x1,y1) is the tight symbol-cluster box (from
+    symbols.draw_symbol_set). Pure decoration — never moves the symbols."""
+    x0, y0, x1, y1 = bbox
+    left, right = x0 - pad, x1 + pad
+    top, bot = y0 - pad, y1 + pad
+    cx = (left + right) / 2
+    mid = (top + bot) / 2
+    block_w = right - left
+    if framing == "box":
+        draw.rectangle([left, top, right, bot], outline=color, width=line_w)
+    elif framing == "double":
+        draw.line([(left, top), (right, top)], fill=color, width=line_w)
+        draw.line([(left, top + line_w + 8), (right, top + line_w + 8)], fill=color, width=max(2, line_w - 3))
+        draw.line([(left, bot), (right, bot)], fill=color, width=line_w)
+        draw.line([(left, bot - line_w - 8), (right, bot - line_w - 8)], fill=color, width=max(2, line_w - 3))
+    elif framing == "strike":
+        # short centered rules flanking the cluster (em-dash style), not over it
+        seg = block_w * 0.16
+        draw.line([(left - seg, mid), (left + 6, mid)], fill=color, width=line_w)
+        draw.line([(right - 6, mid), (right + seg, mid)], fill=color, width=line_w)
+    elif framing == "line_above":
+        draw.line([(left, top), (right, top)], fill=color, width=line_w)
+    else:  # line_below (default)
+        draw.line([(left, bot), (right, bot)], fill=color, width=line_w)
+
+
+def _subtitle_lines(dr, spec, font, maxw, max_lines):
+    """Wrap the FULL catalog subtitle at the (2.2x) subtitle font; if it won't
+    fit in `max_lines` without a line overrunning `maxw`, fall back to the parked
+    short_hook (re-enabled per-cell). NEVER truncated/ellipsized: full subtitle
+    where it fits, short hook where it does not. Returns (lines, used_hook)."""
+    def fits(text):
+        if not text:
+            return False
+        lines = _wrap(dr, text, font, maxw)
+        if len(lines) > max_lines:
+            return False
+        return all(dr.textlength(ln, font=font) <= maxw for ln in lines)
+
+    if fits(spec.subtitle):
+        return _wrap(dr, spec.subtitle, font, maxw), False
+    # full subtitle overruns at 2.2x -> fall back to the (authored-or-derived) hook.
+    hook = (spec.short_hook or "").strip()
+    if hook and hook != spec.subtitle.strip():
+        # NEVER truncate (operator: no ellipsis on any cover). The hook is short and
+        # clean (assign.cover_subtitle); draw it wrapped to whatever it needs — it
+        # fits the budget in every catalog case, and even in a degenerate tight cell
+        # we draw the SHORT hook fully rather than an overflowing long subtitle.
+        return _wrap(dr, hook, font, maxw), True
+    # No usable hook AND the full subtitle overruns: draw the full subtitle wrapped
+    # to all lines (no ellipsis). Rare; flagged in the proof. used_hook=False.
+    return _wrap(dr, spec.subtitle, font, maxw), False
+
+
+# proof hook: the last drawn subtitle decision ->
+#   (used_hook: bool, text: str, n_lines: int, overran_budget: bool).
+# Read by the proof/contact-sheet driver to report which cells fell back to the
+# short_hook and which (rare, no-hook) cells overran the line budget with the full
+# subtitle. Purely diagnostic; does not affect rendering.
+LAST_SUBTITLE_DECISION: tuple[bool, str, int, bool] | None = None
+
+
+def _draw_subtitle(dr, spec, font, cx, top_y, maxw, max_lines, color,
+                   ls=1.06, shadow=None, align="center", x_left=None):
+    """Draw the subtitle (full or hook-fallback) in `color` (= the title color),
+    NOT bold. The per-author framing is drawn around the SYMBOLS, not here.
+    Returns the y below the subtitle block."""
+    global LAST_SUBTITLE_DECISION
+    lines, used_hook = _subtitle_lines(dr, spec, font, maxw, max_lines)
+    LAST_SUBTITLE_DECISION = (used_hook, " ".join(lines), len(lines),
+                              (not used_hook) and len(lines) > max_lines)
+    return draw_lines(dr, lines, font, cx, top_y, color, ls=ls, shadow=shadow,
+                      align=align, x_left=x_left)
 
 
 def cover_crop(img, w, h):
@@ -161,10 +282,12 @@ def full_bleed(spec, image):
     tf, lines, _ = fit_title(dr, _case(spec.title, spec.title_case), spec.serif, W - 2 * M, H * 0.30, start=196)
     y = int(H * 0.10)
     y = draw_lines(dr, lines, tf, W // 2, y, P.CREAM, shadow=(3, 4, (0, 0, 0)))
-    sf = get_font(spec.serif, "italic", 58)
-    y = draw_lines(dr, _wrap(dr, spec.subtitle, sf, W - 2 * int(M * 1.25)), sf, W // 2, y + 16, P.lighten(spec.accent, 0.25), shadow=(2, 2, (0, 0, 0)))
+    sf = _sub_font(spec.serif, 58)
+    y = _draw_subtitle(dr, spec, sf, W // 2, y + 16, W - 2 * int(M * 1.25), 2, P.CREAM, shadow=(2, 2, (0, 0, 0)))
     zone = (W * 0.30, H * 0.60, W * 0.70, H * 0.69)
-    S.draw_symbol_set(cover, spec.motif, zone, spec.count, _sym_color(cover, zone, spec), spec.seed, scrim=True)
+    sym_col = _sym_color(cover, zone, spec)
+    sbox = S.draw_symbol_set(cover, spec.motif, zone, spec.count, sym_col, spec.seed, scrim=True)
+    _frame_symbols(dr, spec.framing, sbox, sym_col)
     series_band(dr, spec, W // 2, int(H * 0.805), P.CREAM)
     byline(dr, spec, W // 2, int(H * 0.875), P.CREAM, (204, 200, 192))
     return cover
@@ -178,8 +301,8 @@ def inset_card(spec, image):
     ink = P.best_contrast(spec.field, [P.INK, spec.deep])
     tf, lines, _ = fit_title(dr, _case(spec.title, spec.title_case), spec.serif, W - 2 * M, H * 0.16, start=148)
     y = draw_lines(dr, lines, tf, W // 2, int(H * 0.072), ink)
-    sf = get_font(spec.serif, "italic", 48)
-    draw_lines(dr, _wrap(dr, spec.subtitle, sf, W - 2 * int(M * 1.3)), sf, W // 2, y + 6, P.darken(spec.accent, 0.12))
+    sf = _sub_font(spec.serif, 48)
+    _draw_subtitle(dr, spec, sf, W // 2, y + 6, W - 2 * int(M * 1.3), 2, ink)
     # portrait image card, centered
     ch = int(H * 0.34); cw = int(ch / 1.18)
     cx0, cy0 = (W - cw) // 2, int(H * 0.30)
@@ -192,7 +315,9 @@ def inset_card(spec, image):
     cover.paste(Image.new("RGB", (cw + 2 * b, ch + 2 * b), spec.accent), (cx0 - b, cy0 - b))
     cover.paste(card, (cx0, cy0))
     zone = (W * 0.34, cy0 + ch + int(H * 0.028), W * 0.66, cy0 + ch + int(H * 0.088))
-    S.draw_symbol_set(cover, spec.motif, zone, spec.count, _sym_color(cover, zone, spec), spec.seed)
+    sym_col = _sym_color(cover, zone, spec)
+    sbox = S.draw_symbol_set(cover, spec.motif, zone, spec.count, sym_col, spec.seed)
+    _frame_symbols(dr, spec.framing, sbox, sym_col)
     series_band(dr, spec, W // 2, int(H * 0.80), P.darken(spec.accent, 0.1))
     byline(dr, spec, W // 2, int(H * 0.88), ink, P.mix(spec.field, ink, 0.5))
     return cover
@@ -216,10 +341,12 @@ def panel_bands(spec, image):
     ink = P.best_contrast(spec.field, [P.INK, spec.deep])
     tf, lines, _ = fit_title(dr, _case(spec.title, spec.title_case), spec.serif, W - 2 * M, H * 0.16, start=150)
     y = draw_lines(dr, lines, tf, W // 2, int(H * 0.645), ink)
-    sf = get_font(spec.serif, "italic", 48)
-    draw_lines(dr, _wrap(dr, spec.subtitle, sf, W - 2 * int(M * 1.3)), sf, W // 2, y + 8, P.darken(spec.accent, 0.15))
+    sf = _sub_font(spec.serif, 48)
+    _draw_subtitle(dr, spec, sf, W // 2, y + 8, W - 2 * int(M * 1.3), 2, ink)
     zone = (W * 0.34, H * 0.855, W * 0.66, H * 0.915)
-    S.draw_symbol_set(cover, spec.motif, zone, spec.count, _sym_color(cover, zone, spec), spec.seed)
+    sym_col = _sym_color(cover, zone, spec)
+    sbox = S.draw_symbol_set(cover, spec.motif, zone, spec.count, sym_col, spec.seed)
+    _frame_symbols(dr, spec.framing, sbox, sym_col)
     byline(dr, spec, W // 2, int(H * 0.93), ink, P.mix(spec.field, ink, 0.55))
     return cover
 
@@ -238,10 +365,12 @@ def title_block(spec, image):
     dr.rectangle([bx, by + bh - 6, bx + bw, by + bh], fill=spec.accent)
     tf, lines, _ = fit_title(dr, _case(spec.title, spec.title_case), spec.serif, bw - 90, bh * 0.62, start=150)
     y = draw_lines(dr, lines, tf, W // 2, by + int(bh * 0.13), P.CREAM)
-    sf = get_font(spec.serif, "italic", 46)
-    draw_lines(dr, _wrap(dr, spec.subtitle, sf, bw - 120), sf, W // 2, y + 6, P.lighten(spec.accent, 0.25))
+    sf = _sub_font(spec.serif, 46)
+    _draw_subtitle(dr, spec, sf, W // 2, y + 6, bw - 120, 2, P.CREAM)
     zone = (W * 0.40, by + bh + int(H * 0.02), W * 0.60, by + bh + int(H * 0.075))
-    S.draw_symbol_set(cover, spec.motif, zone, spec.count, _sym_color(cover, zone, spec), spec.seed, scrim=True)
+    sym_col = _sym_color(cover, zone, spec)
+    sbox = S.draw_symbol_set(cover, spec.motif, zone, spec.count, sym_col, spec.seed, scrim=True)
+    _frame_symbols(dr, spec.framing, sbox, sym_col)
     series_band(dr, spec, W // 2, int(H * 0.815), P.CREAM)
     byline(dr, spec, W // 2, int(H * 0.885), P.CREAM, P.lighten(spec.deep, 0.5))
     return cover
@@ -254,12 +383,13 @@ def gradient_solo(spec, image=None):
     dr = ImageDraw.Draw(cover)
     tf, lines, _ = fit_title(dr, _case(spec.title, spec.title_case), spec.serif, W - 2 * M, H * 0.22, start=176)
     y = draw_lines(dr, lines, tf, W // 2, int(H * 0.115), P.CREAM, shadow=(2, 3, P.darken(spec.deep, 0.3)))
-    sf = get_font(spec.serif, "italic", 56)
-    draw_lines(dr, _wrap(dr, spec.subtitle, sf, W - 2 * int(M * 1.25)), sf, W // 2, y + 14, P.lighten(spec.accent, 0.25))
+    sf = _sub_font(spec.serif, 56)
+    _draw_subtitle(dr, spec, sf, W // 2, y + 14, W - 2 * int(M * 1.25), 2, P.CREAM)
     # HERO symbol (the focal element when there is no image)
     zone = (W * 0.24, H * 0.42, W * 0.76, H * 0.56)
     col = _sym_color(cover, zone, spec)
-    S.draw_symbol_set(cover, spec.motif, zone, spec.count, col, spec.seed)
+    sbox = S.draw_symbol_set(cover, spec.motif, zone, spec.count, col, spec.seed)
+    _frame_symbols(dr, spec.framing, sbox, col)
     series_band(dr, spec, W // 2, int(H * 0.78), P.lighten(spec.accent, 0.2))
     byline(dr, spec, W // 2, int(H * 0.875), P.CREAM, P.lighten(spec.deep, 0.5))
     return cover
@@ -275,10 +405,12 @@ def framed(spec, image=None):
     dr.rectangle([inset + 16, inset + 16, W - inset - 16, H - inset - 16], outline=P.mix(spec.accent, spec.field, 0.45), width=2)
     tf, lines, _ = fit_title(dr, _case(spec.title, spec.title_case), spec.serif, W - 2 * (inset + 70), H * 0.22, start=172)
     y = draw_lines(dr, lines, tf, W // 2, int(H * 0.20), ink, tracking=(6 if spec.title_case == "small_caps" else 0))
-    sf = get_font(spec.serif, "italic", 54)
-    draw_lines(dr, _wrap(dr, spec.subtitle, sf, W - 2 * (inset + 110)), sf, W // 2, y + 16, P.darken(spec.accent, 0.12))
+    sf = _sub_font(spec.serif, 54)
+    _draw_subtitle(dr, spec, sf, W // 2, y + 16, W - 2 * (inset + 110), 2, ink)
     zone = (W * 0.30, H * 0.52, W * 0.70, H * 0.62)
-    S.draw_symbol_set(cover, spec.motif, zone, spec.count, _sym_color(cover, zone, spec), spec.seed)
+    sym_col = _sym_color(cover, zone, spec)
+    sbox = S.draw_symbol_set(cover, spec.motif, zone, spec.count, sym_col, spec.seed)
+    _frame_symbols(dr, spec.framing, sbox, sym_col)
     series_band(dr, spec, W // 2, int(H * 0.74), P.darken(spec.accent, 0.1))
     byline(dr, spec, W // 2, int(H * 0.83), ink, P.mix(spec.field, ink, 0.5))
     return cover
@@ -293,11 +425,13 @@ def duotone_split(spec, image=None):
     dr.rectangle([0, split - 6, W, split], fill=spec.accent)
     tf, lines, _ = fit_title(dr, _case(spec.title, spec.title_case), spec.serif, W - 2 * M, H * 0.24, start=182)
     y = draw_lines(dr, lines, tf, W // 2, int(H * 0.13), P.CREAM, shadow=(2, 3, P.darken(spec.deep, 0.3)))
-    sf = get_font(spec.serif, "italic", 54)
-    draw_lines(dr, _wrap(dr, spec.subtitle, sf, W - 2 * int(M * 1.3)), sf, W // 2, y + 12, P.lighten(spec.accent, 0.3))
+    sf = _sub_font(spec.serif, 54)
+    _draw_subtitle(dr, spec, sf, W // 2, y + 12, W - 2 * int(M * 1.3), 2, P.CREAM)
     ink = P.best_contrast(spec.field, [P.INK, spec.deep])
     zone = (W * 0.30, split + int(H * 0.04), W * 0.70, split + int(H * 0.14))
-    S.draw_symbol_set(cover, spec.motif, zone, spec.count, _sym_color(cover, zone, spec), spec.seed)
+    sym_col = _sym_color(cover, zone, spec)
+    sbox = S.draw_symbol_set(cover, spec.motif, zone, spec.count, sym_col, spec.seed)
+    _frame_symbols(dr, spec.framing, sbox, sym_col)
     series_band(dr, spec, W // 2, int(H * 0.82), P.darken(spec.accent, 0.1))
     byline(dr, spec, W // 2, int(H * 0.90), ink, P.mix(spec.field, ink, 0.5))
     return cover
@@ -316,12 +450,13 @@ def stripe_minimal(spec, image=None):
     tf, lines, _ = fit_title(dr, _case(spec.title, spec.title_case), spec.serif, tw, H * 0.30, start=176)
     y = int(H * 0.24)
     y = draw_lines(dr, lines, tf, None, y, ink, align="left", x_left=lx)
-    sf = get_font(spec.serif, "italic", 52)
-    draw_lines(dr, _wrap(dr, spec.subtitle, sf, tw), sf, None, y + 14, P.darken(spec.accent, 0.1), align="left", x_left=lx)
+    sf = _sub_font(spec.serif, 52)
+    _draw_subtitle(dr, spec, sf, None, y + 14, tw, 3, ink, align="left", x_left=lx)
     # symbols climb the stripe (count == book number)
     zone = (sw * 0.16, H * 0.30, sw * 0.84, H * 0.86)
     scol = P.best_contrast(spec.deep, [spec.accent, P.CREAM])
-    S.draw_symbol_set(cover, spec.motif, zone, spec.count, scol, spec.seed, orientation="column")
+    sbox = S.draw_symbol_set(cover, spec.motif, zone, spec.count, scol, spec.seed, orientation="column")
+    _frame_symbols(dr, spec.framing, sbox, scol, pad=24)
     series_band(dr, spec, None, int(H * 0.80), P.darken(spec.accent, 0.1), align="left", x_left=lx)
     byline(dr, spec, None, int(H * 0.88), ink, P.mix(spec.field, ink, 0.5), align="left", x_left=lx)
     return cover

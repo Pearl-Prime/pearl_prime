@@ -11,6 +11,7 @@ at scale time (pools.py).
 from __future__ import annotations
 import csv
 import hashlib
+import re
 from pathlib import Path
 
 import yaml
@@ -57,10 +58,15 @@ def row_from_plan(cfg: dict, plan: dict, stem: str, legacy: dict | None = None) 
     ap = plan.get("author_positioning") or {}
     byline = (ap.get("byline_author") or "").strip()
     row = dict(legacy or {})
+    # short_hook: plan `cover_short_hook` wins; otherwise preserve an existing
+    # CSV hook (legacy merge) so a re-sync never silently drops authored hooks.
+    plan_hook = (plan.get("cover_short_hook") or "").strip()
+    short_hook = plan_hook or (row.get("short_hook") or "").strip()
     row.update({
         "book_id": plan["book_id"],
         "title": (plan.get("title") or "").strip(),
         "subtitle": (plan.get("subtitle") or "").strip(),
+        "short_hook": short_hook,
         "author": _author_display(cfg, byline),
         "installment": str(plan.get("installment_number") or row.get("installment") or ""),
         "topic": plan.get("topic") or (parts[3] if len(parts) > 3 else row.get("topic", "")),
@@ -107,6 +113,111 @@ def seed_of(s: str) -> int:
     return int(hashlib.sha1(s.encode()).hexdigest()[:8], 16)
 
 
+# ---------------------------------------------------------------------------
+# PER-AUTHOR COVER FINGERPRINT (anti-spam diversity).
+# Mirrors scripts/publish/abstract_cover_art.py:fingerprint() — a sha256 of the
+# brand+author id, then per-author bytes drive treatment choices so two authors
+# never collide and one author always looks the same. Here it drives two new
+# axes (on top of the existing family/serif/sans/palette per author):
+#   * framing  — one of {box, strike, double, line_above, line_below} around the
+#                (now much bigger) subtitle.
+#   * plate    — whether the translucent subtitle contrast plate is drawn.
+# Plate is FORCED True whenever the subtitle sits over imagery / a dark gradient
+# (image families + gradient_solo + duotone_split) so the bigger subtitle ALWAYS
+# reads at thumbnail; on the light-paper families it is a deterministic coin-flip
+# (palette contrast + the bigger/bolder subtitle already carry the read there).
+# ---------------------------------------------------------------------------
+FRAMING_TREATMENTS = ["box", "strike", "double", "line_above", "line_below"]
+
+# subtitle-over-dark families: plate is non-negotiable here (legibility wins).
+# These render the subtitle over FLUX imagery / a dark gradient half, so a light
+# subtitle without a plate could wash out -> plate ALWAYS on.
+_DARK_SUBTITLE_FAMILIES = {
+    "full_bleed", "title_block",        # subtitle over FLUX imagery + scrim
+    "gradient_solo", "duotone_split",   # subtitle over a dark gradient half
+}
+# The remaining families (inset_card, panel_bands, framed, stripe_minimal) draw
+# the subtitle as DARK accent text on a LIGHT paper field — already high contrast,
+# so the plate becomes a free uniqueness axis: deterministic coin-flip per author.
+
+
+# A subtitle longer than this can't render at the operator's >=12px cap-height in
+# 3 lines on a 250px thumbnail without overrunning, so it is shortened to a hook.
+# Measured ~14 chars/line at the 12px floor; 3 lines ~= 42 chars. We keep this
+# generous (only the truly overlong, dash-less marketing sentences trim) — the
+# layouts below are sized to hold the full 3-line floor block, so nothing common
+# gets an ellipsis.
+COVER_SUBTITLE_MAX_CHARS = 42
+
+
+def cover_subtitle(subtitle: str, short_hook: str | None = None,
+                   max_chars: int = COVER_SUBTITLE_MAX_CHARS) -> str:
+    """RE-ENABLED (operator 2026-07-01, second pass): spec_from_row calls this to
+    compute the per-cell COVER HOOK that the templates use as the fallback when
+    the FULL catalog subtitle won't fit at the bigger (2.2x) size. Where the full
+    subtitle fits, the templates draw it; only the overrunning cells use this hook.
+
+    The COVER hook = the authored `short_hook` if present, else a SHORT lead
+    phrase derived from the catalog subtitle.
+
+    An authored `short_hook` (catalog `short_hook` column / plan
+    `cover_short_hook`) is governed by docs HOOK_CONTRACT: <=14 ASCII chars,
+    <=2 words (3 only if all <=4 chars), no word >10 chars, Title Case, no
+    trailing punctuation. When a non-empty hook is supplied it is preferred
+    VERBATIM (whitespace-trimmed only) so the operator-authored, thumbnail-safe
+    hook is what gets drawn — it is guaranteed to render at >=12px cap-height
+    with no truncation on every cover family.
+
+    With no authored hook, fall back to deriving a lead phrase from the catalog
+    subtitle (which carries the full SEO/positioning string, e.g.
+    "The Overwhelm Response — Sleep Anxiety for Tech Finance Burnout (When ...)").
+    At a 250px Amazon thumbnail only a short hook renders big enough to read
+    (>=12px cap-height), so the derivation uses, in order: the text before the
+    first em/en dash; minus any trailing "(...)"; then, if still too long, the
+    first clause (before a comma/colon); then a word-boundary trim + ellipsis.
+    The FULL subtitle still lives in the catalog/metadata — this only changes the
+    drawn hook so the bigger subtitle never overruns the symbol/byline."""
+    if short_hook and short_hook.strip():
+        return short_hook.strip()
+    if not subtitle:
+        return subtitle
+    s = subtitle.strip()
+    for sep in (" — ", " – ", " - "):
+        if sep in s:
+            s = s.split(sep, 1)[0].strip()
+            break
+    s = re.sub(r"\s*\([^)]*\)\s*$", "", s).strip()
+    if len(s) <= max_chars:
+        return s or subtitle.strip()
+    # still long -> first clause before a comma / colon
+    for sep in (": ", ", "):
+        if sep in s and len(s.split(sep, 1)[0].strip()) <= max_chars:
+            return s.split(sep, 1)[0].strip()
+    # last resort: trim to <= max_chars at a word boundary + ellipsis
+    words, out = s.split(), ""
+    for w in words:
+        if len((out + " " + w).strip()) > max_chars - 1:
+            break
+        out = (out + " " + w).strip()
+    return (out + "…") if out else s[:max_chars - 1].rstrip() + "…"
+
+
+def author_fingerprint(author_id: str, family: str = "",
+                       brand_id: str = "way_stream_sanctuary") -> dict:
+    """Deterministic per-author cover signature -> {framing, plate}.
+
+    Same author -> same look forever; different authors -> guaranteed-different
+    framing (and varied plate on the light-paper families). `family` lets us
+    force the plate on the subtitle-over-dark families."""
+    h = hashlib.sha256(f"{brand_id}|{author_id}".encode()).digest()
+    framing = FRAMING_TREATMENTS[h[8] % len(FRAMING_TREATMENTS)]
+    if family in _DARK_SUBTITLE_FAMILIES:
+        plate = True                    # darkest fields: always plate
+    else:
+        plate = bool(h[9] & 1)          # light-paper families: deterministic coin-flip
+    return {"framing": framing, "plate": plate}
+
+
 def pool_images(author_id: str) -> list[Path]:
     d = POOLS / author_id
     return sorted(d.glob("*.png")) if d.exists() else []
@@ -130,14 +241,29 @@ def spec_from_row(cfg: dict, row: dict, allow_fallback=True):
         raise KeyError(f"author not in config: {row['author']} -> {aid}")
     inst = int(row["installment"])
     motif = cfg["topic_symbols"].get(row["topic"], {}).get("motif", "ring")
+    fam = card["family"]
+    fp = author_fingerprint(aid, fam, cfg["brand"]["brand_id"])
+    # COVER HOOK (re-enabled per operator 2026-07-01 second pass): the parked
+    # short-hook path is the per-cell fallback for the bigger (2.2x) subtitle.
+    # Prefer the authored `short_hook`; if none, DERIVE a clean lead phrase from
+    # the subtitle via cover_subtitle() (em-dash/paren-stripped, no mid-word cut)
+    # so a too-long no-hook subtitle still falls back to a short, clean hook
+    # instead of overflowing the cover. templates use it only when the FULL
+    # subtitle would not fit at 2.2x; where the full subtitle fits, it is drawn.
+    cover_hook = cover_subtitle(row["subtitle"], (row.get("short_hook") or "").strip())
     spec = Spec(
+        # operator 2026-07-01 (second pass): draw the FULL catalog subtitle at the
+        # bigger (2.2x) size where it fits; templates fall back to `short_hook`
+        # (authored, else derived) per-cell only when it would overrun.
         title=row["title"], subtitle=row["subtitle"],
+        short_hook=cover_hook,
         author_display=row["author"], imprint=cfg["brand"]["imprint"],
         series_name=row["cluster"].strip().upper(), book_num=inst, count=inst,
         topic=row["topic"], motif=motif,
         serif=card["serif"], sans=card["sans"], title_case=card.get("title_case", "sentence"),
         deep=P.hex_rgb(card["deep"]), field=P.hex_rgb(card["field"]), accent=P.hex_rgb(card["accent"]),
-        seed=seed_of(row["book_id"]), family=card["family"],
+        seed=seed_of(row["book_id"]), family=fam,
+        framing=fp["framing"], plate=fp["plate"],
     )
     img_path, pool_src = (None, None)
     if card["family"] in cfg["image_families"]:

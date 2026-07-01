@@ -163,7 +163,11 @@ def pick_symbol_color(img, zone, palette_rgb: dict) -> tuple[int, int, int]:
 
 def draw_symbol_set(img, motif, zone, count, color, seed, orientation="auto", scrim=False):
     """Render `count` motif units into `zone`=(x0,y0,x1,y1) on `img` (mutates).
-    orientation: row | arc | column | auto (row/arc seeded)."""
+    orientation: row | arc | column | auto (row/arc seeded).
+
+    Returns the TIGHT bounding box (x0,y0,x1,y1) of the rendered glyph cluster in
+    `img` (cover) coordinates, so a caller can FRAME the symbols (the per-author
+    framing fingerprint now wraps the symbol cluster, not the subtitle)."""
     x0, y0, x1, y1 = (int(v) for v in zone)
     zw, zh = max(1, x1 - x0), max(1, y1 - y0)
     rnd = random.Random(seed)
@@ -194,13 +198,18 @@ def draw_symbol_set(img, motif, zone, count, color, seed, orientation="auto", sc
     usize = max(24, usize)
     w = max(4, int(usize * 0.07))
     fn = MOTIF_FN.get(motif, _u_ring)
+    # track the tight cluster extent in LAYER (supersampled) coords
+    bx0 = by0 = float("inf"); bx1 = by1 = float("-inf")
     for i, (cx, cy) in enumerate(positions):
         tile = fn(usize, rgba, w)
         if motif == "bars":  # uneven columns: bottom-aligned height jitter
             hf = 0.5 + rnd.random() * 0.5
             nh = max(8, int(usize * hf))
             tile = tile.resize((usize, nh))
-            layer.alpha_composite(tile, (cx - usize // 2, cy + usize // 2 - nh))
+            px, py = cx - usize // 2, cy + usize // 2 - nh
+            layer.alpha_composite(tile, (px, py))
+            bx0 = min(bx0, px); by0 = min(by0, py)
+            bx1 = max(bx1, px + usize); by1 = max(by1, py + nh)
             continue
         if motif in _ASYMM:
             tile = tile.rotate(rnd.uniform(-9, 9), expand=True, resample=Image.BICUBIC)
@@ -209,7 +218,10 @@ def draw_symbol_set(img, motif, zone, count, color, seed, orientation="auto", sc
         if abs(sf - 1.0) > 0.01:
             ns = max(8, int(tile.width * sf))
             tile = tile.resize((ns, ns))
-        layer.alpha_composite(tile, (cx - tile.width // 2, cy - tile.height // 2))
+        px, py = cx - tile.width // 2, cy - tile.height // 2
+        layer.alpha_composite(tile, (px, py))
+        bx0 = min(bx0, px); by0 = min(by0, py)
+        bx1 = max(bx1, px + tile.width); by1 = max(by1, py + tile.height)
 
     small = layer.resize((zw, zh), Image.LANCZOS)
     if scrim:  # soft feathered glow for legibility over imagery (not a hard "button")
@@ -220,3 +232,8 @@ def draw_symbol_set(img, motif, zone, count, color, seed, orientation="auto", sc
         cush = cush.filter(ImageFilter.GaussianBlur(int(zh * 0.24)))
         img.paste(cush, (x0, y0), cush)
     img.paste(small, (x0, y0), small)
+
+    if bx1 < bx0:  # no glyphs drawn (shouldn't happen) -> fall back to the zone
+        return (x0, y0, x1, y1)
+    # map layer-space bbox -> cover-space (downscale by SS, offset by zone origin)
+    return (x0 + bx0 / SS, y0 + by0 / SS, x0 + bx1 / SS, y0 + by1 / SS)
