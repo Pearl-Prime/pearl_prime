@@ -911,11 +911,17 @@ def git_short_sha() -> str:
 # Intended use: regression fix for PR agent/catalog-ready-predicate-fix-20260516,
 # where 20 stillness_press × ja_JP rows were ready against missing arc files.
 
-def fixup_ready_predicate_in_place(csv_path: Path) -> dict[str, int]:
+def fixup_ready_predicate_in_place(csv_path: Path,
+                                   config_root: Path | None = None) -> dict[str, int]:
     """Re-apply ``verify_ready_files_on_disk`` to every row where readiness=ready.
 
     Returns a counter of {status: rows_flipped_to_this_status}. The original
     ``ready`` count + flipped totals == the original ``ready`` count.
+
+    ``config_root`` is an injectable seam forwarded to
+    ``verify_ready_files_on_disk`` so callers (and hermetic tests) can point
+    the on-disk arc/registry/atoms lookup at an explicit root. Defaults to
+    ``None`` → the real ``CONFIG_ROOT``, so production behaviour is unchanged.
     """
     with open(csv_path, "r", encoding="utf-8", newline="") as fh:
         reader = csv.DictReader(fh)
@@ -932,7 +938,7 @@ def fixup_ready_predicate_in_place(csv_path: Path) -> dict[str, int]:
         if not (persona and topic):
             continue
         status, blockers, note = verify_ready_files_on_disk(
-            persona, topic, required_atoms)
+            persona, topic, required_atoms, config_root=config_root)
         if status == "ready":
             continue
         row["readiness_status"] = status

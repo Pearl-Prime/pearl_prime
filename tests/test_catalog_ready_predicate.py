@@ -179,6 +179,19 @@ class TestFixupReadyPredicateInPlace(unittest.TestCase):
 
         with tempfile.TemporaryDirectory() as td:
             csv_path = Path(td) / "x_catalog.csv"
+            # HERMETIC ROOT: build a synthetic config_root whose master_arcs/
+            # and registry/ dirs exist but are EMPTY. The corporate_managers ×
+            # adhd_focus arc is therefore GUARANTEED missing regardless of the
+            # real repo's on-disk arc/registry/LFS state (arc-gen work + CI's
+            # full LFS checkout used to make the real arc present, which made
+            # this test flip nothing → {} and fail only in CI). We inject this
+            # root into fixup_ready_predicate_in_place so the flip is driven by
+            # the temp dir, not live repo data.
+            config_root = Path(td) / "cfg_root"
+            (config_root / "config" / "source_of_truth" / "master_arcs").mkdir(
+                parents=True, exist_ok=True)
+            (config_root / "registry").mkdir(parents=True, exist_ok=True)
+
             # Two rows: one ready against an obviously-missing topic (will flip);
             # one already-blocked (should stay).
             with open(csv_path, "w", encoding="utf-8", newline="") as fh:
@@ -221,10 +234,14 @@ class TestFixupReadyPredicateInPlace(unittest.TestCase):
                     "journey_shape_id": "q", "variation_signature": "def456",
                 })
 
-            flipped = fixup_ready_predicate_in_place(csv_path)
-            # adhd_focus arc is missing in real repo state → flip.
+            flipped = fixup_ready_predicate_in_place(csv_path, config_root=config_root)
+            # adhd_focus arc is guaranteed missing under the empty temp root → flip.
             self.assertIn("blocked_arc_missing", flipped)
             self.assertEqual(flipped["blocked_arc_missing"], 1)
+            # Exactly one status flipped (the ready row); the already-blocked
+            # row was skipped, so no other keys appear. Guards against a
+            # vacuous pass where nothing (or too much) flipped.
+            self.assertEqual(flipped, {"blocked_arc_missing": 1})
 
             with open(csv_path, encoding="utf-8") as fh:
                 rows = list(_csv.DictReader(fh))
