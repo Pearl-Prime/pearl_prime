@@ -1,0 +1,804 @@
+{
+  "verdict": "FAIL",
+  "findings": [
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [1, 2])",
+      "evidence": {
+        "cluster_id": "f1_cluster_000",
+        "instances": [
+          {
+            "chapter": 1,
+            "para_index": 5
+          },
+          {
+            "chapter": 2,
+            "para_index": 5
+          }
+        ],
+        "excerpt": "The desk is clear of ungraded work. It's 10 PM. The train is silent. The street below is empty. You've graded everything..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [1, 8])",
+      "evidence": {
+        "cluster_id": "f1_cluster_001",
+        "instances": [
+          {
+            "chapter": 1,
+            "para_index": 30
+          },
+          {
+            "chapter": 8,
+            "para_index": 20
+          }
+        ],
+        "excerpt": "The parent meeting is scheduled for Friday. It's Monday. The metro noise fills the break room. You're eating a sandwich ..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [1, 12])",
+      "evidence": {
+        "cluster_id": "f1_cluster_002",
+        "instances": [
+          {
+            "chapter": 1,
+            "para_index": 48
+          },
+          {
+            "chapter": 12,
+            "para_index": 28
+          }
+        ],
+        "excerpt": "This is a breath-based practice. You are not trying to breathe perfectly or deeply. You are giving your nervous system a..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [1, 3])",
+      "evidence": {
+        "cluster_id": "f1_cluster_003",
+        "instances": [
+          {
+            "chapter": 1,
+            "para_index": 49
+          },
+          {
+            "chapter": 3,
+            "para_index": 38
+          }
+        ],
+        "excerpt": "Before you keep reading. Not to fix anything. Just to give yourself a different input for a moment."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [2, 12])",
+      "evidence": {
+        "cluster_id": "f1_cluster_004",
+        "instances": [
+          {
+            "chapter": 2,
+            "para_index": 24
+          },
+          {
+            "chapter": 12,
+            "para_index": 19
+          }
+        ],
+        "excerpt": "The admin observation note arrives in your mailbox. Your fingers don't open it. The envelope is thin. The copy room smel..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [2, 12])",
+      "evidence": {
+        "cluster_id": "f1_cluster_005",
+        "instances": [
+          {
+            "chapter": 2,
+            "para_index": 26
+          },
+          {
+            "chapter": 12,
+            "para_index": 21
+          }
+        ],
+        "excerpt": "The hallway is crowded between classes. You're walking toward the bathroom. A student calls your name. Your shoulders ri..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [2, 4])",
+      "evidence": {
+        "cluster_id": "f1_cluster_006",
+        "instances": [
+          {
+            "chapter": 2,
+            "para_index": 40
+          },
+          {
+            "chapter": 4,
+            "para_index": 27
+          }
+        ],
+        "excerpt": "This is Energy Management. Insight without action fades. You do not need to believe that. Just try it."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "FAIL",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 3 (chapters [3, 8, 11])",
+      "evidence": {
+        "cluster_id": "f1_cluster_007",
+        "instances": [
+          {
+            "chapter": 3,
+            "para_index": 40
+          },
+          {
+            "chapter": 8,
+            "para_index": 29
+          },
+          {
+            "chapter": 11,
+            "para_index": 33
+          }
+        ],
+        "excerpt": "This is Inner Wisdom. Let it sit. You do not need to believe that. Just try it."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [4, 10])",
+      "evidence": {
+        "cluster_id": "f1_cluster_008",
+        "instances": [
+          {
+            "chapter": 4,
+            "para_index": 15
+          },
+          {
+            "chapter": 10,
+            "para_index": 14
+          }
+        ],
+        "excerpt": "He told himself the scanning was just how it worked. Everybody at the grading carried it. But that Tuesday, when the les..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [5, 6])",
+      "evidence": {
+        "cluster_id": "f1_cluster_009",
+        "instances": [
+          {
+            "chapter": 5,
+            "para_index": 23
+          },
+          {
+            "chapter": 6,
+            "para_index": 12
+          }
+        ],
+        "excerpt": "The staff room ended and she exhaled for what felt like the first time in hours. Nine seconds later, the scanning loaded..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [5, 11])",
+      "evidence": {
+        "cluster_id": "f1_cluster_010",
+        "instances": [
+          {
+            "chapter": 5,
+            "para_index": 27
+          },
+          {
+            "chapter": 11,
+            "para_index": 9
+          }
+        ],
+        "excerpt": "She woke at 4am again. Not to an alarm \u2014 to the readiness doing its pre-dawn inventory. The lesson plan she hadn't writt..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [6])",
+      "evidence": {
+        "cluster_id": "f1_cluster_011",
+        "instances": [
+          {
+            "chapter": 6,
+            "para_index": 23
+          },
+          {
+            "chapter": 6,
+            "para_index": 36
+          }
+        ],
+        "excerpt": "Every strategy you've used to manage the alarm \u2014 avoiding, preparing, checking, reassurance-seeking \u2014 has kept the alarm..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [7, 12])",
+      "evidence": {
+        "cluster_id": "f1_cluster_012",
+        "instances": [
+          {
+            "chapter": 7,
+            "para_index": 27
+          },
+          {
+            "chapter": 12,
+            "para_index": 32
+          }
+        ],
+        "excerpt": "Now, take a moment and reflect.\nBreathing at an even rhythm may have created a smoother internal tempo. Heart rate varia..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [8, 11])",
+      "evidence": {
+        "cluster_id": "f1_cluster_013",
+        "instances": [
+          {
+            "chapter": 8,
+            "para_index": 14
+          },
+          {
+            "chapter": 11,
+            "para_index": 22
+          }
+        ],
+        "excerpt": "The desk is piled with ungraded tests. You're here at midnight again. The school is utterly silent. The cold light frost..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [8, 11])",
+      "evidence": {
+        "cluster_id": "f1_cluster_014",
+        "instances": [
+          {
+            "chapter": 8,
+            "para_index": 16
+          },
+          {
+            "chapter": 11,
+            "para_index": 23
+          }
+        ],
+        "excerpt": "The hallway before the observation feels different. Students walk quieter. You know this is placebo. The sidewalk is vis..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [9])",
+      "evidence": {
+        "cluster_id": "f1_cluster_015",
+        "instances": [
+          {
+            "chapter": 9,
+            "para_index": 21
+          },
+          {
+            "chapter": 9,
+            "para_index": 34
+          }
+        ],
+        "excerpt": "The alarm does not update through understanding. It updates through experience \u2014 specifically, through the repeated expe..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [10])",
+      "evidence": {
+        "cluster_id": "f1_cluster_016",
+        "instances": [
+          {
+            "chapter": 10,
+            "para_index": 23
+          },
+          {
+            "chapter": 10,
+            "para_index": 33
+          }
+        ],
+        "excerpt": "The alarm will return. Not because you failed, not because you haven't done the work, but because your body remains resp..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [11, 12])",
+      "evidence": {
+        "cluster_id": "f1_cluster_017",
+        "instances": [
+          {
+            "chapter": 11,
+            "para_index": 7
+          },
+          {
+            "chapter": 12,
+            "para_index": 5
+          }
+        ],
+        "excerpt": "The anxiety that accumulates over a career in education has a particular texture. It is not sharp. It is not acute. It i..."
+      }
+    },
+    {
+      "failure_id": "F1",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "templated paragraph cluster size 2 (chapters [11])",
+      "evidence": {
+        "cluster_id": "f1_cluster_018",
+        "instances": [
+          {
+            "chapter": 11,
+            "para_index": 26
+          },
+          {
+            "chapter": 11,
+            "para_index": 37
+          }
+        ],
+        "excerpt": "You are not going to become a person without an alarm. You are going to become a person who knows when the alarm is runn..."
+      }
+    },
+    {
+      "failure_id": "F4",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "closing-line repeated verbatim in 2 chapters: [2, 11]",
+      "evidence": {
+        "chapters": [
+          2,
+          11
+        ],
+        "closing_line": "What remains is the moment after the alarm fires, when your body still wants to obey a prediction."
+      }
+    },
+    {
+      "failure_id": "F4",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "closing-line repeated verbatim in 2 chapters: [3, 9]",
+      "evidence": {
+        "chapters": [
+          3,
+          9
+        ],
+        "closing_line": "It is the first honest place this pattern asks for practice."
+      }
+    },
+    {
+      "failure_id": "F4",
+      "severity": "WARN",
+      "chapter": null,
+      "summary": "closing-line repeated verbatim in 2 chapters: [5, 10]",
+      "evidence": {
+        "chapters": [
+          5,
+          10
+        ],
+        "closing_line": "What remains is the next ordinary moment where the pattern tries to make the decision for you."
+      }
+    },
+    {
+      "failure_id": "F6",
+      "severity": "FAIL",
+      "chapter": null,
+      "summary": "pedagogical-cadence 4-gram repeated 3+ times: 23 distinct repeating cadences",
+      "evidence": {
+        "repeats": [
+          {
+            "cadence": [
+              3,
+              4,
+              5,
+              3
+            ],
+            "count": 3
+          },
+          {
+            "cadence": [
+              3,
+              5,
+              4,
+              4
+            ],
+            "count": 3
+          },
+          {
+            "cadence": [
+              4,
+              4,
+              5,
+              4
+            ],
+            "count": 3
+          },
+          {
+            "cadence": [
+              4,
+              5,
+              4,
+              6
+            ],
+            "count": 5
+          },
+          {
+            "cadence": [
+              5,
+              4,
+              4,
+              4
+            ],
+            "count": 3
+          },
+          {
+            "cadence": [
+              4,
+              4,
+              4,
+              4
+            ],
+            "count": 8
+          },
+          {
+            "cadence": [
+              4,
+              4,
+              4,
+              3
+            ],
+            "count": 5
+          },
+          {
+            "cadence": [
+              5,
+              5,
+              6,
+              7
+            ],
+            "count": 3
+          },
+          {
+            "cadence": [
+              6,
+              7,
+              4,
+              3
+            ],
+            "count": 5
+          },
+          {
+            "cadence": [
+              4,
+              5,
+              4,
+              3
+            ],
+            "count": 3
+          },
+          {
+            "cadence": [
+              5,
+              4,
+              6,
+              7
+            ],
+            "count": 3
+          },
+          {
+            "cadence": [
+              4,
+              3,
+              6,
+              4
+            ],
+            "count": 3
+          },
+          {
+            "cadence": [
+              3,
+              6,
+              4,
+              5
+            ],
+            "count": 3
+          },
+          {
+            "cadence": [
+              6,
+              4,
+              4,
+              4
+            ],
+            "count": 5
+          },
+          {
+            "cadence": [
+              4,
+              4,
+              3,
+              5
+            ],
+            "count": 4
+          },
+          {
+            "cadence": [
+              5,
+              4,
+              3,
+              4
+            ],
+            "count": 3
+          },
+          {
+            "cadence": [
+              4,
+              3,
+              4,
+              5
+            ],
+            "count": 3
+          },
+          {
+            "cadence": [
+              5,
+              5,
+              6,
+              4
+            ],
+            "count": 3
+          },
+          {
+            "cadence": [
+              4,
+              6,
+              3,
+              5
+            ],
+            "count": 3
+          },
+          {
+            "cadence": [
+              6,
+              4,
+              4,
+              6
+            ],
+            "count": 3
+          },
+          {
+            "cadence": [
+              7,
+              4,
+              5,
+              5
+            ],
+            "count": 4
+          },
+          {
+            "cadence": [
+              5,
+              7,
+              4,
+              5
+            ],
+            "count": 3
+          },
+          {
+            "cadence": [
+              6,
+              4,
+              4,
+              3
+            ],
+            "count": 3
+          }
+        ]
+      }
+    },
+    {
+      "failure_id": "F7",
+      "severity": "FAIL",
+      "chapter": 1,
+      "summary": "over-prescribed practice density: 15 distinct prescribed-action paragraphs",
+      "evidence": {
+        "prescribed_action_count": 15
+      }
+    },
+    {
+      "failure_id": "F7",
+      "severity": "FAIL",
+      "chapter": 2,
+      "summary": "over-prescribed practice density: 6 distinct prescribed-action paragraphs",
+      "evidence": {
+        "prescribed_action_count": 6
+      }
+    },
+    {
+      "failure_id": "F7",
+      "severity": "FAIL",
+      "chapter": 3,
+      "summary": "over-prescribed practice density: 5 distinct prescribed-action paragraphs",
+      "evidence": {
+        "prescribed_action_count": 5
+      }
+    },
+    {
+      "failure_id": "F7",
+      "severity": "FAIL",
+      "chapter": 4,
+      "summary": "over-prescribed practice density: 7 distinct prescribed-action paragraphs",
+      "evidence": {
+        "prescribed_action_count": 7
+      }
+    },
+    {
+      "failure_id": "F7",
+      "severity": "FAIL",
+      "chapter": 5,
+      "summary": "over-prescribed practice density: 12 distinct prescribed-action paragraphs",
+      "evidence": {
+        "prescribed_action_count": 12
+      }
+    },
+    {
+      "failure_id": "F7",
+      "severity": "FAIL",
+      "chapter": 6,
+      "summary": "over-prescribed practice density: 4 distinct prescribed-action paragraphs",
+      "evidence": {
+        "prescribed_action_count": 4
+      }
+    },
+    {
+      "failure_id": "F7",
+      "severity": "FAIL",
+      "chapter": 7,
+      "summary": "over-prescribed practice density: 9 distinct prescribed-action paragraphs",
+      "evidence": {
+        "prescribed_action_count": 9
+      }
+    },
+    {
+      "failure_id": "F7",
+      "severity": "FAIL",
+      "chapter": 8,
+      "summary": "over-prescribed practice density: 9 distinct prescribed-action paragraphs",
+      "evidence": {
+        "prescribed_action_count": 9
+      }
+    },
+    {
+      "failure_id": "F7",
+      "severity": "FAIL",
+      "chapter": 9,
+      "summary": "over-prescribed practice density: 10 distinct prescribed-action paragraphs",
+      "evidence": {
+        "prescribed_action_count": 10
+      }
+    },
+    {
+      "failure_id": "F7",
+      "severity": "FAIL",
+      "chapter": 10,
+      "summary": "over-prescribed practice density: 10 distinct prescribed-action paragraphs",
+      "evidence": {
+        "prescribed_action_count": 10
+      }
+    },
+    {
+      "failure_id": "F7",
+      "severity": "FAIL",
+      "chapter": 11,
+      "summary": "over-prescribed practice density: 10 distinct prescribed-action paragraphs",
+      "evidence": {
+        "prescribed_action_count": 10
+      }
+    },
+    {
+      "failure_id": "F7",
+      "severity": "FAIL",
+      "chapter": 12,
+      "summary": "over-prescribed practice density: 8 distinct prescribed-action paragraphs",
+      "evidence": {
+        "prescribed_action_count": 8
+      }
+    },
+    {
+      "failure_id": "F13",
+      "severity": "FAIL",
+      "chapter": 9,
+      "summary": "integration starvation \u2014 3+ consecutive named insights with no dwell beat between them (criterion #13 broken band; \u00a77.3 dwell contract)",
+      "evidence": {
+        "criterion": 13,
+        "consecutive_insights": 3,
+        "threshold": 3,
+        "run_excerpt": [
+          "This is not dread.",
+          "This is the body's honest accounting of what the week will cost.",
+          "The alarm fires early because the cost is real and the body has learned not to be surprised by it."
+        ],
+        "spec_ref": "OVERLAY_SPEC \u00a77.3 / \u00a713 criterion #13"
+      }
+    },
+    {
+      "failure_id": "F13",
+      "severity": "FAIL",
+      "chapter": 10,
+      "summary": "integration starvation \u2014 3+ consecutive named insights with no dwell beat between them (criterion #13 broken band; \u00a77.3 dwell contract)",
+      "evidence": {
+        "criterion": 13,
+        "consecutive_insights": 3,
+        "threshold": 3,
+        "run_excerpt": [
+          "The mechanism is self-evaluation disguised as student evaluation.",
+          "The mechanism is the gap between effort and outcome.",
+          "This is not a motivational failure."
+        ],
+        "spec_ref": "OVERLAY_SPEC \u00a77.3 / \u00a713 criterion #13"
+      }
+    }
+  ],
+  "book_metrics": {
+    "chapter_count": 12,
+    "word_count": 15876,
+    "teacher_id": "",
+    "persona_id": "educators",
+    "topic_id": "anxiety",
+    "quality_profile": "production",
+    "spec_version": "1.0.0",
+    "f8_deferred": "anchor_corpus_required"
+  },
+  "suggested_lanes": [
+    "Pearl_Editor + Pearl_Writer (atom diversification) OR Pearl_Dev (renderer paragraph-template dedupe extension)",
+    "Pearl_Dev (closing-line uniqueness check in composer)",
+    "Pearl_Editor + Pearl_Writer (cadence variety in pedagogical-cadence atoms)",
+    "Pearl_Architect (per-chapter practice-density cap) + Pearl_Editor (atom routing)",
+    "Pearl_Editor + Pearl_Writer (re-pace per \u00a77.3 dwell contract \u2014 insert a dwell beat after each named insight; \u00a713 criterion #13)"
+  ]
+}
