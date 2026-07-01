@@ -422,89 +422,17 @@ def _inject_dwell_beats_in_body(
     seed: str,
     ledger: "_BookPhraseLedger | None" = None,
 ) -> str:
-    """Insert dwell beats when consecutive insight sentences would trip F13.
-
-    With a shared `ledger`, injected dwell beats are book-unique so the same
-    beat does not re-stamp across chapters (audit Q3/D1a). Existing dwell beats
-    already present in the prose are recorded so the picker avoids them too.
-    """
-    paras = [p for p in re.split(r"\n\s*\n", body) if p.strip()]
-    if not paras:
-        return body
-    flat: list[str] = []
-    for para in paras:
-        sents = [s.strip() for s in _SENT_SPLIT_RE.split(para) if s.strip()]
-        flat.extend(sents)
-    if not flat:
-        return body
-
-    def _dwell(key: str) -> str:
-        if ledger is not None:
-            return ledger.pick_unused(_DWELL_BEAT_POOL, key)
-        return _pick(_DWELL_BEAT_POOL, key)
-
-    out_flat: list[str] = []
-    insight_run = 0
-    for s_idx, sent in enumerate(flat):
-        if _f13_is_insight(sent):
-            if insight_run >= F13_CONSECUTIVE_INSIGHT_FAIL - 1:
-                dwell = _dwell(f"{seed}:dwell:{chapter_index}:{s_idx}")
-                out_flat.append(dwell)
-                insight_run = 0
-            out_flat.append(sent)
-            insight_run += 1
-        elif _f13_is_dwell_beat(sent):
-            out_flat.append(sent)
-            insight_run = 0
-        else:
-            out_flat.append(sent)
-
-    # Rebuild paragraphs preserving original sentence counts (+ optional dwell inserts).
-    rebuilt: list[str] = []
-    cursor = 0
-    for para in paras:
-        orig_count = len([s for s in _SENT_SPLIT_RE.split(para) if s.strip()])
-        chunk: list[str] = []
-        while len(chunk) < orig_count and cursor < len(out_flat):
-            chunk.append(out_flat[cursor])
-            cursor += 1
-        while cursor < len(out_flat) and _f13_is_dwell_beat(out_flat[cursor]):
-            if chunk and _f13_is_insight(chunk[-1]):
-                chunk.append(out_flat[cursor])
-                cursor += 1
-            else:
-                break
-        if chunk:
-            rebuilt.append(" ".join(chunk))
-    while cursor < len(out_flat):
-        if rebuilt:
-            rebuilt[-1] = rebuilt[-1] + " " + out_flat[cursor]
-        else:
-            rebuilt.append(out_flat[cursor])
-        cursor += 1
-    return "\n\n".join(rebuilt).strip()
+    """Disabled — canned dwell beats caused meditation-app choppiness (2026-07-01)."""
+    del chapter_index, seed, ledger
+    return body
 
 
 def ensure_dwell_beats(
     prose: str, *, seed: str = "dwell", ledger: "_BookPhraseLedger | None" = None
 ) -> str:
-    """Wire §7.3 dwell contract: real integration beats after insight runs.
-
-    Pass a shared `ledger` to keep injected dwell beats book-unique.
-    """
-    front, chapters = _split_book(prose)
-    if not chapters:
-        return prose
-    out = [
-        (
-            num,
-            _inject_dwell_beats_in_body(
-                body, chapter_index=num, seed=seed, ledger=ledger
-            ),
-        )
-        for num, body in chapters
-    ]
-    return _join_book(front, out)
+    """Disabled — dwell injection removed; F13 is advisory only (2026-07-01)."""
+    del seed, ledger
+    return prose
 
 
 def _chapter_para_sentences(body: str) -> tuple[list[str], list[list[str]]]:
@@ -639,46 +567,9 @@ def balance_transformation_arc_landings(prose: str, *, seed: str = "arc") -> str
 def repair_f13_dwell_contract(
     prose: str, *, seed: str = "f13", ledger: "_BookPhraseLedger | None" = None
 ) -> str:
-    """Insert validated dwell beats before the 3rd insight in an F13 insight run.
-
-    Pass a shared `ledger` to keep inserted dwell beats book-unique.
-    """
-    valid_dwell = tuple(d for d in _DWELL_BEAT_POOL if _f13_is_dwell_beat(d))
-    if not valid_dwell:
-        return prose
-    front, chapters = _split_book(prose)
-    if not chapters:
-        return prose
-
-    def _dwell(key: str) -> str:
-        if ledger is not None:
-            return ledger.pick_unused(valid_dwell, key)
-        return _pick(valid_dwell, key)
-
-    out: list[tuple[int, str]] = []
-    for num, body in chapters:
-        paras = [p for p in re.split(r"\n\s*\n", body) if p.strip()]
-        new_paras: list[str] = []
-        insight_run = 0
-        for p_idx, para in enumerate(paras):
-            sents = [s.strip() for s in _SENT_SPLIT_RE.split(para) if s.strip()]
-            rebuilt: list[str] = []
-            for s_idx, sent in enumerate(sents):
-                if _f13_is_dwell_beat(sent):
-                    insight_run = 0
-                    rebuilt.append(sent)
-                    continue
-                if _f13_is_insight(sent):
-                    if insight_run >= F13_CONSECUTIVE_INSIGHT_FAIL - 1:
-                        rebuilt.append(_dwell(f"{seed}:f13:{num}:{p_idx}:{s_idx}"))
-                        insight_run = 0
-                    rebuilt.append(sent)
-                    insight_run += 1
-                else:
-                    rebuilt.append(sent)
-            new_paras.append(" ".join(rebuilt).strip())
-        out.append((num, "\n\n".join(new_paras).strip()))
-    return _join_book(front, out)
+    """Disabled — dwell injection removed; F13 is advisory only (2026-07-01)."""
+    del seed, ledger
+    return prose
 
 
 def ensure_unique_chapter_closings(prose: str, *, seed: str = "f4") -> str:
@@ -812,24 +703,9 @@ def remove_sub_four_word_orphan_paragraphs(prose: str) -> str:
 
 
 def ensure_word_count_floor(prose: str, *, floor: int, seed: str = "floor") -> str:
-    """Append gate-safe declarative lines until word count meets runtime floor."""
-    if floor <= 0:
-        return prose
-    work = prose
-    pool = _f7_safe_deprescribe_alternatives()
-    inject_idx = 0
-    max_injections = max(300, (floor // 8) + 50)
-    while len(work.split()) < floor and inject_idx < max_injections:
-        front, chapters = _split_book(work)
-        if not chapters:
-            break
-        ch_idx = inject_idx % len(chapters)
-        num, body = chapters[ch_idx]
-        line = _pick(pool, f"{seed}:pad:{inject_idx}")
-        chapters[ch_idx] = (num, f"{body}\n\n{line}".strip())
-        work = _join_book(front, chapters)
-        inject_idx += 1
-    return work
+    """Disabled — word-floor padding caused choppy injected lines (2026-07-01)."""
+    del floor, seed
+    return prose
 
 
 def strengthen_register_craft_output(
@@ -847,16 +723,13 @@ def strengthen_register_craft_output(
     """
     ledger = _BookPhraseLedger()
     work = balance_transformation_arc_landings(prose, seed=seed)
-    work = ensure_dwell_beats(work, seed=seed, ledger=ledger)
     work = cap_prescribed_action_density(
         work, max_per_chapter=max_prescribed_per_chapter, ledger=ledger
     )
-    work = ensure_dwell_beats(work, seed=f"{seed}:recheck", ledger=ledger)
     work = break_pedagogical_cadence_repetition(work, seed=seed)
     work = cap_prescribed_action_density(
         work, max_per_chapter=max_prescribed_per_chapter, ledger=ledger
     )
-    work = ensure_dwell_beats(work, seed=f"{seed}:final", ledger=ledger)
     work = cap_prescribed_action_density(
         work, max_per_chapter=max_prescribed_per_chapter, ledger=ledger
     )

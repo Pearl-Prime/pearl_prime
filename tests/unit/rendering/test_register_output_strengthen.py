@@ -29,15 +29,14 @@ def test_ensure_book_terminal_integrity_truncates_mid_sentence():
     assert "starts" not in fixed.split()[-3:]
 
 
-def test_ensure_dwell_beats_breaks_insight_run():
+def test_ensure_dwell_beats_is_noop():
     body = (
         "The mechanism is simple. Which means the body moves first. "
         "The cost is already on the table."
     )
     chapter = f"Chapter 2\n\n{body}"
     out = ensure_dwell_beats(chapter, seed="test")
-    f13 = _detect_f13_dwell_starvation(_split_chapters(out))
-    assert not f13
+    assert out == chapter
 
 
 def test_break_pedagogical_cadence_clears_f6():
@@ -72,15 +71,14 @@ def test_deprescribe_alternatives_are_f7_safe():
         assert not _f13_is_insight(line), line
 
 
-def test_repair_f13_dwell_contract_breaks_insight_run():
+def test_repair_f13_dwell_contract_is_noop():
     body = (
         "The mechanism is simple. Which means the body moves first. "
         "The cost is already on the table."
     )
     chapter = f"Chapter 3\n\n{body}"
-    assert _detect_f13_dwell_starvation(_split_chapters(chapter))
     out = repair_f13_dwell_contract(chapter, seed="test")
-    assert not _detect_f13_dwell_starvation(_split_chapters(out))
+    assert out == chapter
 
 
 def test_verify_f7_exercise_preservation_zero_contract():

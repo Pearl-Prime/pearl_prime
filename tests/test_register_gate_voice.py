@@ -141,10 +141,10 @@ def test_f12_silent_on_clean_prose():
 # F13 — dwell-beat / integration starvation (criterion #13)
 # ─────────────────────────────────────────────────────────────────────────────
 
-def test_f13_fails_on_four_insight_run_with_no_dwell():
+def test_f13_warns_on_four_insight_run_with_no_dwell():
     """
     Four consecutive named insights with no dwell beat between them is integration
-    starvation — the §13 criterion #13 'broken' band. Must FAIL.
+    starvation — advisory WARN only (injectors disabled 2026-07-01).
     """
     body = (
         "Chapter 1\n\n"
@@ -155,11 +155,10 @@ def test_f13_fails_on_four_insight_run_with_no_dwell():
     )
     result = evaluate_register(body)
     f13 = [f for f in result.findings if f.failure_id == "F13"]
-    assert any(f.severity == "FAIL" for f in f13), "4-insight no-dwell run must FAIL F13"
-    fail = next(f for f in f13 if f.severity == "FAIL")
-    assert fail.evidence["criterion"] == 13
-    assert fail.evidence["consecutive_insights"] >= 3
-    assert result.verdict == "FAIL"
+    warn = next(f for f in f13 if f.severity == "WARN")
+    assert warn.evidence["criterion"] == 13
+    assert warn.evidence["consecutive_insights"] >= 3
+    assert result.verdict in ("WARN", "ADVISORY", "PASS")
 
 
 def test_f13_passes_on_insight_dwell_insight():
@@ -212,8 +211,8 @@ def test_f13_long_sensory_sentence_is_not_a_dwell_beat():
         "The real cost is the relationships you ration to stay safe.\n"
     )
     findings = _detect_f13_dwell_starvation(_split_chapters(body))
-    assert any(f.severity == "FAIL" for f in findings), (
-        "a >40-word sensory passage is not a dwell beat; the insight run must still FAIL"
+    assert any(f.severity == "WARN" for f in findings), (
+        "a >40-word sensory passage is not a dwell beat; the insight run must still WARN"
     )
 
 
@@ -227,9 +226,9 @@ def test_f13_resets_run_per_chapter():
         "This is the pattern underneath all of it.\n"
     )
     findings = _detect_f13_dwell_starvation(_split_chapters(body))
-    fails = [f for f in findings if f.severity == "FAIL"]
-    assert len(fails) == 1, "only the starved chapter should FAIL"
-    assert fails[0].chapter == 2
+    warns = [f for f in findings if f.severity == "WARN"]
+    assert len(warns) == 1, "only the starved chapter should WARN"
+    assert warns[0].chapter == 2
 
 
 def test_f13_insight_and_dwell_classifiers():

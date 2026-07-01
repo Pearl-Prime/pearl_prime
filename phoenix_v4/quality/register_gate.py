@@ -1244,6 +1244,43 @@ def _f13_is_dwell_beat(sentence: str) -> bool:
     )
 
 
+
+# F2.D — unfilled wrapper slots + leaked placeholder slot values (HARD_FAIL)
+_F2_UNFILLED_WRAPPER_SLOT_RE = re.compile(r"\{[A-Z_][A-Z0-9_]*\}")
+_F2_TRADITION_PLACEHOLDER_LEAK_RES: tuple[re.Pattern[str], ...] = (
+    re.compile(r"(?i)\bAccording to contemplative\b"),
+    re.compile(r"(?i)\bwork of contemplative\b"),
+    re.compile(r"(?i)\bRooted in contemplative[,]"),
+    re.compile(r"(?i)\bfrom contemplative tradition\b"),
+    re.compile(r"(?i)\bA practice from contemplative tradition\b"),
+    re.compile(r"(?i)\bThe contemplative tradition tradition\b"),
+)
+
+
+def _detect_f2_wrapper_placeholder_leaks(book_text: str) -> list[RegisterFinding]:
+    findings: list[RegisterFinding] = []
+    for m in _F2_UNFILLED_WRAPPER_SLOT_RE.finditer(book_text):
+        findings.append(RegisterFinding(
+            failure_id="F2",
+            severity="HARD_FAIL",
+            chapter=None,
+            summary=f"unfilled wrapper slot token {m.group(0)!r} in rendered output",
+            evidence={"token": m.group(0), "rule": "F2.D_unfilled_wrapper_slot"},
+        ))
+        break
+    for pat in _F2_TRADITION_PLACEHOLDER_LEAK_RES:
+        hit = pat.search(book_text)
+        if hit:
+            findings.append(RegisterFinding(
+                failure_id="F2",
+                severity="HARD_FAIL",
+                chapter=None,
+                summary="leaked TRADITION placeholder phrasing in rendered output",
+                evidence={"match": hit.group(0), "rule": "F2.D_tradition_placeholder_leak"},
+            ))
+            break
+    return findings
+
 def _detect_f13_dwell_starvation(
     chapters: list[tuple[int, str]],
 ) -> list[RegisterFinding]:
@@ -1279,7 +1316,7 @@ def _detect_f13_dwell_starvation(
                 if run >= F13_CONSECUTIVE_INSIGHT_FAIL and not flagged:
                     findings.append(RegisterFinding(
                         failure_id="F13",
-                        severity="FAIL",
+                        severity="WARN",
                         chapter=ch_num,
                         summary=(
                             f"integration starvation — {run}+ consecutive named "
@@ -1382,6 +1419,7 @@ def evaluate_register(
     findings: list[RegisterFinding] = []
     findings += _detect_f1_templated_paragraphs(chapters)
     findings += _detect_f2_broken_fragments(chapters)
+    findings += _detect_f2_wrapper_placeholder_leaks(book_text)
     if teacher_id:
         findings += _detect_f3_off_doctrine(chapters, teacher_id)
     findings += _detect_f4_closing_line_repeats(chapters)

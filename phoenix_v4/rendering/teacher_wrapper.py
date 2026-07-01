@@ -27,6 +27,15 @@ _registry_cache: Optional[Dict[str, Any]] = None
 
 _SLOT_RE = re.compile(r"\{([A-Z_][A-Z0-9_]*)\}")
 
+# Values that must never substitute a wrapper slot (bare adjectives / vague defaults).
+_PLACEHOLDER_SLOT_VALUES: frozenset[str] = frozenset({
+    "contemplative",  # legacy TRADITION default — grammatically bare adjective
+    "the practice",
+    "mindfulness and somatic",
+})
+
+_TRADITION_BARE_ADJECTIVE = frozenset({"contemplative"})
+
 
 def _load_yaml(p: Path) -> Dict[str, Any]:
     if not p.exists():
@@ -70,6 +79,24 @@ def _section_wrapper_key(section_type: str) -> str:
     return "intro_wrapper"
 
 
+
+def _teacher_wrapper_slots_from_yaml(teacher_id: str) -> Dict[str, str]:
+    """Per-teacher slot overrides from teacher_wrapper_templates.yaml."""
+    templates = _load_templates()
+    block = (templates.get("teacher_wrapper_slots") or {}).get(teacher_id) or {}
+    return {k: str(v).strip() for k, v in block.items() if v}
+
+
+def _slot_value_is_placeholder(key: str, value: str) -> bool:
+    v = str(value or "").strip().lower()
+    if not v:
+        return True
+    if v in _PLACEHOLDER_SLOT_VALUES:
+        return True
+    if key == "TRADITION" and v in _TRADITION_BARE_ADJECTIVE:
+        return True
+    return False
+
 def _teacher_slot_values(
     teacher_id: str,
     spine_context: Optional[Dict[str, Any]],
@@ -109,15 +136,21 @@ def _teacher_slot_values(
     lineage = pick("teaching_lineage", "lineage", "tradition_phrase")
     practice_name = pick("practice_name")
 
+    yaml_slots = _teacher_wrapper_slots_from_yaml(teacher_id)
+
     slots: Dict[str, str] = {}
     if teacher_name:
         slots["TEACHER_NAME"] = teacher_name
-    if tradition:
+    if tradition and not _slot_value_is_placeholder("TRADITION", tradition):
         slots["TRADITION"] = tradition
+    elif yaml_slots.get("TRADITION"):
+        slots["TRADITION"] = yaml_slots["TRADITION"]
     elif slot_defaults.get("TRADITION"):
         slots["TRADITION"] = str(slot_defaults["TRADITION"]).strip()
-    if tradition_short:
+    if tradition_short and not _slot_value_is_placeholder("TRADITION_SHORT", tradition_short):
         slots["TRADITION_SHORT"] = tradition_short
+    elif yaml_slots.get("TRADITION_SHORT"):
+        slots["TRADITION_SHORT"] = yaml_slots["TRADITION_SHORT"]
     elif slot_defaults.get("TRADITION_SHORT"):
         slots["TRADITION_SHORT"] = str(slot_defaults["TRADITION_SHORT"]).strip()
     if lineage:
@@ -152,7 +185,7 @@ def _resolve(pattern: str, slots: Dict[str, str]) -> Optional[str]:
     def sub(m: re.Match[str]) -> str:
         key = m.group(1)
         val = slots.get(key)
-        if not val:
+        if not val or _slot_value_is_placeholder(key, val):
             raise KeyError(key)
         return val
 

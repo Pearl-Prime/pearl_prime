@@ -209,7 +209,7 @@ def test_composite_doctrine_gets_generalized_wrapper_not_named(
         beatmap=_minimal_beatmap("COMPRESSION"),
         seed="composite_wrap_seed",
         publishable_book=False,
-        spine_context={"tradition": "Taoist", "tradition_short": "Taoist"},
+        spine_context={"tradition": "the Taoist tradition", "tradition_short": "Taoist"},
     )
     book = select_enrichment(req, repo_root=tmp_path)
     slot = book.chapters[0].slots[0]

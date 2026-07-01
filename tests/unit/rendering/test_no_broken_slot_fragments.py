@@ -156,7 +156,7 @@ def test_every_wrapper_variant_with_ellipsis_survives() -> None:
         # the ellipsis survives regardless of slot value.
         rendered = variant.replace("{TEACHER_NAME}", "Ahjan")
         rendered = rendered.replace("{TEACHING_LINEAGE}", "mindfulness and somatic")
-        rendered = rendered.replace("{TRADITION}", "contemplative")
+        rendered = rendered.replace("{TRADITION}", "the contemplative tradition")
         rendered = rendered.replace("{TRADITION_SHORT}", "contemplative")
         rendered = rendered.replace("{PRACTICE_NAME}", "the practice")
         assert rendered.endswith("..."), f"sanity: {variant!r} no longer ends in ..."
@@ -262,4 +262,15 @@ def test_f2_detector_passes_when_ellipsis_preserved() -> None:
     f2_findings = [f for f in result.findings if f.failure_id == "F2"]
     assert not f2_findings, (
         f"F2 detector incorrectly fired on clean input: {f2_findings}"
+    )
+
+
+def test_register_gate_hard_fails_tradition_placeholder_leak() -> None:
+    """Bare 'contemplative' as TRADITION substitute must HARD_FAIL the build."""
+    body = "Chapter 1\n\nAccording to contemplative, the path begins.\n"
+    result = evaluate_register(body)
+    assert result.verdict == "HARD_FAIL"
+    assert any(
+        f.failure_id == "F2" and f.severity == "HARD_FAIL"
+        for f in result.findings
     )

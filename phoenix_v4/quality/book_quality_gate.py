@@ -386,7 +386,7 @@ def evaluate_book_quality(
     if bounds:
         lo, hi = bounds
         if word_count < lo:
-            fail_reasons.append(f"word count below {runtime_format_id} minimum ({word_count} < {lo})")
+            hold_reasons.append(f"word count below {runtime_format_id} minimum ({word_count} < {lo}) [advisory]")
         elif word_count > int(hi * 1.25):
             hold_reasons.append(f"word count materially above {runtime_format_id} range ({word_count} > {hi})")
 

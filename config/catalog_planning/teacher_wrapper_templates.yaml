@@ -82,16 +82,16 @@ generalized:
   # form a dangling-preposition (F2.B) or lowercase-fragment (F2.C) artifact. Generalized mode is
   # 65-70% of catalog output, so this is the highest-volume fix.
   intro_wrapper:
-    pattern: "According to {TRADITION}, the path begins with one honest look at what is actually here."
+    pattern: "{TRADITION} teaches that the path begins with one honest look at what is actually here."
     variants:
-      - "The {TRADITION} tradition teaches that change starts with what you can feel right now."
+      - "{TRADITION} teaches that change starts with what you can feel right now."
       - "Within the {TRADITION_SHORT} lineage, practitioners have long known that the body leads."
-      - "I came across the work of {TRADITION} at a time when nothing else was landing."
+      - "I came across this teaching tradition at a time when nothing else was landing."
       - "Rooted in {TRADITION}, this approach holds that presence comes before strategy."
     slot_requirements: [TRADITION]
 
   exercise_wrapper:
-    pattern: "A practice from {TRADITION} tradition"
+    pattern: "A practice drawn from {TRADITION}"
     variants:
       - "Drawn from {TRADITION_SHORT} practice: {PRACTICE_NAME}"
       - "The {TRADITION} approach to {PRACTICE_NAME}"
@@ -99,7 +99,7 @@ generalized:
     slot_requirements: [TRADITION]
 
   conclusion_wrapper:
-    pattern: "The {TRADITION} tradition invites us to return to what is essential."
+    pattern: "{TRADITION} invites us to return to what is essential."
     variants:
       - "At the heart of {TRADITION_SHORT} is a simple, recurring invitation to begin again."
       - "{TRADITION} does not ask for perfection — only honest presence."
@@ -134,13 +134,60 @@ composite:
       - "Whether ancient or modern, the path circles back to the present moment."
     slot_requirements: []
 
+
+# Per-teacher wrapper slot values (from teacher_registry / brand_teacher_matrix).
+# Generalized sentinel (__generalized__) uses slot_defaults above when no row matches.
+teacher_wrapper_slots:
+  ahjan:
+    TRADITION: "the contemplative tradition"
+    TRADITION_SHORT: "contemplative"
+  kenjin:
+    TRADITION: "Sōtō Zen Buddhism"
+    TRADITION_SHORT: "Zen"
+  joshin:
+    TRADITION: "Shingon Esoteric Buddhism"
+    TRADITION_SHORT: "Shingon"
+  miyuki:
+    TRADITION: "Japanese contemplative practice"
+    TRADITION_SHORT: "contemplative"
+  pamela_fellows:
+    TRADITION: "somatic and contemplative practice"
+    TRADITION_SHORT: "somatic"
+  master_wu:
+    TRADITION: "Taoist qi cultivation"
+    TRADITION_SHORT: "Taoist"
+  master_feung:
+    TRADITION: "warrior composure training"
+    TRADITION_SHORT: "warrior"
+  master_sha:
+    TRADITION: "energy medicine and restoration"
+    TRADITION_SHORT: "restoration"
+  sai_ma:
+    TRADITION: "bhakti devotion"
+    TRADITION_SHORT: "devotion"
+  maat:
+    TRADITION: "Maatian balance and truth"
+    TRADITION_SHORT: "balance"
+  miki:
+    TRADITION: "grounded digital-age practice"
+    TRADITION_SHORT: "grounding"
+  omote:
+    TRADITION: "somatic body-memory healing"
+    TRADITION_SHORT: "somatic"
+  ra:
+    TRADITION: "solar-return renewal"
+    TRADITION_SHORT: "renewal"
+  junko:
+    TRADITION: "channeling and light-language practice"
+    TRADITION_SHORT: "devotional"
+
 # ── Slot registry ────────────────────────────────────────────────────────────
 # Maps teacher_id → default slot values for named mode.
 # Populated from brand_teacher_matrix.yaml at generation time.
 # Override per-book in catalog row or atom CANONICAL.txt.
 
 slot_defaults:
-  TRADITION: "contemplative"
+  TRADITION: "the contemplative tradition"
   TRADITION_SHORT: "contemplative"
   TEACHING_LINEAGE: "mindfulness and somatic"
   PRACTICE_NAME: "the practice"
