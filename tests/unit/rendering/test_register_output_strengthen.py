@@ -9,6 +9,7 @@ from phoenix_v4.rendering.register_output_strengthen import (
     ensure_unique_chapter_closings,
     ensure_word_count_floor,
     repair_f13_dwell_contract,
+    spine_deprescribe_inject_enabled,
     verify_f7_exercise_preservation,
     _DEPRESCRIBE_ALTERNATIVES,
 )
@@ -81,6 +82,121 @@ def test_cap_prescribed_action_density():
     ch_text = out.split("Chapter 1", 1)[1]
     count = sum(1 for p in ch_text.split("\n\n") if _is_prescribed_action(p))
     assert count <= 2
+
+
+def test_cap_prescribed_action_density_no_deprescribe_inject_when_disabled():
+    """G1-residual: surplus prescribed-action paras are dropped, not replaced with filler."""
+    paras = []
+    for i in range(5):
+        paras.append(f"Notice your breath for five seconds. Step {i + 1}. Hold.")
+    body = "\n\n".join(paras)
+    chapter = f"Chapter 1\n\n{body}"
+    out = cap_prescribed_action_density(
+        chapter, max_per_chapter=2, inject_deprescribe_alternative=False
+    )
+    ch_text = out.split("Chapter 1", 1)[1]
+    for alt in _DEPRESCRIBE_ALTERNATIVES:
+        assert alt not in ch_text
+    count = sum(1 for p in ch_text.split("\n\n") if _is_prescribed_action(p))
+    assert count <= 2
+
+
+def test_destack_adjacent_inject_paragraphs():
+    from phoenix_v4.rendering.register_output_strengthen import (
+        destack_adjacent_inject_paragraphs,
+    )
+
+    bridge = "The mechanism behind this pattern is small and stubborn."
+    dep = "An ordinary pace is a sustainable pace."
+    body = f"{bridge}\n\n{dep}\n\nSome longer narrative paragraph that should remain."
+    chapter = f"Chapter 1\n\n{body}"
+    out = destack_adjacent_inject_paragraphs(chapter)
+    assert bridge in out
+    assert dep not in out
+    assert "Some longer narrative paragraph" in out
+
+
+def test_spine_deprescribe_inject_disabled_by_default(monkeypatch):
+    monkeypatch.delenv("PHOENIX_SPINE_DEPRESCRIBE", raising=False)
+    assert not spine_deprescribe_inject_enabled()
+    monkeypatch.setenv("PHOENIX_SPINE_DEPRESCRIBE", "1")
+    assert spine_deprescribe_inject_enabled()
+
+
+def test_fold_bridge_forward_into_next_narrative_paragraph():
+    """G1-residual Phase-2: a standalone bridge one-liner is woven into the
+    paragraph it introduces, not left as a free-standing beat."""
+    from phoenix_v4.rendering.register_output_strengthen import (
+        fold_standalone_inject_paragraphs,
+    )
+
+    bridge = "The mechanism behind this pattern is small and stubborn."
+    atom = (
+        "You are not less than you were; you are measuring an empty tank "
+        "against a full one, and the gauge has simply not caught up yet."
+    )
+    chapter = f"Chapter 1\n\n{bridge}\n\n{atom}"
+    out = fold_standalone_inject_paragraphs(chapter)
+    # bridge no longer stands alone; it is prefixed onto the atom paragraph
+    assert f"{bridge} {atom}" in out
+    assert f"{bridge}\n\n{atom}" not in out
+
+
+def test_fold_collapses_consecutive_injects_and_practice_intro():
+    from phoenix_v4.rendering.register_output_strengthen import (
+        fold_standalone_inject_paragraphs,
+        _DEPRESCRIBE_ALTERNATIVES,
+    )
+
+    bridge = "The mechanism behind this pattern is small and stubborn."
+    dep = _DEPRESCRIBE_ALTERNATIVES[0]
+    practice = "Now we're going to do a breath practice."
+    atom = (
+        "The comparison engine runs on incomplete data and treats every "
+        "decision like a permanent threat to your standing and your worth."
+    )
+    chapter = f"Chapter 1\n\n{bridge}\n\n{dep}\n\n{practice}\n\n{atom}"
+    out = fold_standalone_inject_paragraphs(chapter)
+    body = out.split("Chapter 1", 1)[1]
+    # no inject line survives as its own paragraph
+    for line in (bridge, dep, practice):
+        assert f"\n\n{line}\n\n" not in body
+        assert not body.strip().startswith(line + "\n\n")
+    # exactly one narrative paragraph remains (injects collapsed into it)
+    paras = [p for p in body.split("\n\n") if p.strip()]
+    assert len(paras) == 1
+    assert atom in paras[0]
+
+
+def test_fold_marks_bare_section_heading():
+    from phoenix_v4.rendering.register_output_strengthen import (
+        fold_standalone_inject_paragraphs,
+    )
+
+    heading = "This Is Not Tiredness"
+    atom = (
+        "You closed the laptop and the closing did not register as relief, "
+        "because the depletion is not about the hours you worked today."
+    )
+    chapter = f"Chapter 1\n\n{heading}\n\n{atom}"
+    out = fold_standalone_inject_paragraphs(chapter)
+    assert f"## {heading}" in out
+    # a real sentence (ends in punctuation) is never mis-marked as a heading
+    assert "## You closed" not in out
+
+
+def test_fold_disabled_by_env(monkeypatch):
+    from phoenix_v4.rendering.register_output_strengthen import (
+        fold_standalone_inject_paragraphs,
+        inject_fold_enabled,
+    )
+
+    monkeypatch.setenv("PHOENIX_INJECT_FOLD", "0")
+    assert not inject_fold_enabled()
+    bridge = "The mechanism behind this pattern is small and stubborn."
+    atom = "A longer narrative paragraph that clearly should remain in place unchanged here."
+    chapter = f"Chapter 1\n\n{bridge}\n\n{atom}"
+    assert fold_standalone_inject_paragraphs(chapter) == chapter
 
 
 def test_deprescribe_alternatives_are_f7_safe():

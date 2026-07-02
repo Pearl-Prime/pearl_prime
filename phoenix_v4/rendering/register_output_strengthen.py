@@ -7,6 +7,7 @@ contracts pass — without loosening any gate threshold. Deterministic; no LLM A
 from __future__ import annotations
 
 import hashlib
+import os
 import re
 from typing import Callable
 
@@ -126,6 +127,222 @@ def _f7_safe_deprescribe_alternatives() -> tuple[str, ...]:
 
 
 _DEPRESCRIBE_ALTERNATIVES: tuple[str, ...] = _f7_safe_deprescribe_alternatives()
+
+
+def spine_deprescribe_inject_enabled() -> bool:
+    """Kill-switch for the deprescribe one-line injector on the spine path.
+
+    Default OFF on spine (G1-residual, 2026-07-02): surplus prescribed-action
+    paragraphs are dropped, not replaced with standalone comfort one-liners.
+    Set PHOENIX_SPINE_DEPRESCRIBE=1 to re-enable the legacy injector.
+    """
+    return os.environ.get("PHOENIX_SPINE_DEPRESCRIBE", "").strip().lower() in (
+        "1",
+        "true",
+        "on",
+        "yes",
+    )
+
+
+def inject_destack_enabled() -> bool:
+    """Post-render adjacency cap for one-line inject paragraphs (bridges + deprescribe).
+
+    Default ON. Set PHOENIX_INJECT_DESTACK=0 to disable.
+    """
+    flag = os.environ.get("PHOENIX_INJECT_DESTACK", "1").strip().lower()
+    return flag not in ("0", "false", "off", "no")
+
+
+def _load_within_slot_bridge_texts() -> frozenset[str]:
+    from pathlib import Path
+
+    import yaml
+
+    path = (
+        Path(__file__).resolve().parents[2]
+        / "config"
+        / "rendering"
+        / "within_slot_bridge_families.yaml"
+    )
+    if not path.exists():
+        return frozenset()
+    data = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
+    texts: set[str] = set()
+    for family in (data.get("slot_families") or {}).values():
+        if not isinstance(family, dict):
+            continue
+        for entries in family.values():
+            if not isinstance(entries, list):
+                continue
+            for entry in entries:
+                if isinstance(entry, dict):
+                    text = str(entry.get("text") or "").strip()
+                    if text:
+                        texts.add(text)
+    for family in (data.get("story_introduction") or {}).values():
+        if not isinstance(family, list):
+            continue
+        for entry in family:
+            if isinstance(entry, dict):
+                text = str(entry.get("text") or "").strip()
+                if text:
+                    texts.add(text)
+    return frozenset(texts)
+
+
+def destack_adjacent_inject_paragraphs(prose: str) -> str:
+    """Drop a one-line inject paragraph that immediately follows another inject paragraph.
+
+    Covers within-slot bridge YAML lines and deprescribe comfort one-liners so they
+    cannot stack back-to-back (the P2 Phase-1 choppiness pattern).
+    """
+    if not inject_destack_enabled():
+        return prose
+    inject_texts = frozenset(_DEPRESCRIBE_ALTERNATIVES) | _load_within_slot_bridge_texts()
+    front, chapters = _split_book(prose)
+    if not chapters:
+        return prose
+    out: list[tuple[int, str]] = []
+    for num, body in chapters:
+        paras = [p for p in re.split(r"\n\s*\n", body) if p.strip()]
+        kept: list[str] = []
+        prev_inject = False
+        for para in paras:
+            norm = para.strip()
+            is_inject = norm in inject_texts
+            if is_inject and prev_inject:
+                continue
+            kept.append(para)
+            prev_inject = is_inject
+        out.append((num, "\n\n".join(kept).strip()))
+    return _join_book(front, out)
+
+
+# G1-residual Phase-2 (cohesion restore, 2026-07-03): fold standalone one-line
+# inject paragraphs (within-slot bridges + formulaic practice intros) into an
+# adjacent narrative paragraph instead of leaving them as free-standing beats.
+# This is the gate-sanctioned F14 remediation ("fold them into neighbor
+# paragraphs" — register_gate._route_suggested_lanes F14), and it restores the
+# pre-injector composer's "atoms woven into flowing paragraphs" behavior rather
+# than line-stacking one atom per paragraph. Deterministic; no LLM.
+_PRACTICE_INTRO_RE = re.compile(
+    r"(?i)^\s*now,?\s+we(?:'re| are| will)?\s+going to do\b.*$"
+)
+
+
+def inject_fold_enabled() -> bool:
+    """Fold standalone inject one-liners into a neighbor paragraph. Default ON.
+
+    Set PHOENIX_INJECT_FOLD=0 to disable (leaves the g1-residual de-stack only).
+    """
+    flag = os.environ.get("PHOENIX_INJECT_FOLD", "1").strip().lower()
+    return flag not in ("0", "false", "off", "no")
+
+
+def section_heading_mark_enabled() -> bool:
+    """Mark bare Title-Case section-title lines as markdown headings. Default ON.
+
+    A section title rendered as a plain body line is a render defect the F14
+    beat-line detector (correctly) excludes headings from — marking it restores
+    a correct heading, it is NOT a gate lever. PHOENIX_SECTION_HEADING_MARK=0
+    disables.
+    """
+    flag = os.environ.get("PHOENIX_SECTION_HEADING_MARK", "1").strip().lower()
+    return flag not in ("0", "false", "off", "no")
+
+
+def _is_bare_section_heading(para: str) -> bool:
+    """True for a bare (unmarked) Title-Case section-title line.
+
+    Conservative: single physical line, 2-8 words, no terminal sentence
+    punctuation, (nearly) every word capitalized. Excludes atom prose (which
+    ends in .!?) and markdown headings (already start with #).
+    """
+    p = para.strip()
+    if not p or "\n" in p or p.startswith("#"):
+        return False
+    if re.search(r"[.!?;:]$", p):
+        return False
+    words = p.split()
+    if not (1 < len(words) <= 8):
+        return False
+    caps = sum(1 for w in words if w[:1].isupper())
+    return caps >= max(2, len(words) - 1)
+
+
+def fold_standalone_inject_paragraphs(prose: str) -> str:
+    """Weave standalone one-line inject paragraphs into an adjacent narrative one.
+
+    A within-slot bridge / deprescribe comfort line / formulaic practice-intro
+    rendered as its own paragraph is folded FORWARD into the next narrative
+    paragraph (the content it introduces); if none follows before a heading or
+    chapter end, it is folded BACKWARD into the preceding narrative paragraph.
+    Consecutive injects collapse to the first (subsumes the de-stack).
+
+    Genuine Title-Case section headings are preserved (and, when enabled, marked
+    with a leading ``## `` so downstream heading-aware passes and readers see a
+    real heading). Deterministic; no LLM; gate thresholds untouched.
+    """
+    if not inject_fold_enabled():
+        return prose
+    inject_texts = frozenset(_DEPRESCRIBE_ALTERNATIVES) | _load_within_slot_bridge_texts()
+    mark_headings = section_heading_mark_enabled()
+
+    def _is_inject(p: str) -> bool:
+        s = p.strip()
+        if "\n" in s:
+            return False
+        if s in inject_texts:
+            return True
+        return bool(_PRACTICE_INTRO_RE.match(s)) and len(s.split()) <= 11
+
+    front, chapters = _split_book(prose)
+    if not chapters:
+        return prose
+    out: list[tuple[int, str]] = []
+    for num, body in chapters:
+        paras = [p for p in re.split(r"\n\s*\n", body) if p.strip()]
+        result: list[str] = []          # emitted paragraphs
+        result_is_narrative: list[bool] = []
+        pending: str | None = None       # one inject line waiting to fold forward
+        for para in paras:
+            s = para.strip()
+            if _is_inject(s):
+                if pending is None:
+                    pending = s          # hold first; drop any run-mates
+                continue
+            if mark_headings and _is_bare_section_heading(s):
+                # A heading cannot absorb a bridge; attach pending backward first.
+                if pending is not None:
+                    _fold_backward(result, result_is_narrative, pending)
+                    pending = None
+                result.append(f"## {s}")
+                result_is_narrative.append(False)
+                continue
+            # narrative paragraph: fold any pending inject in FRONT of it
+            if pending is not None:
+                s = f"{pending.rstrip()} {s.lstrip()}".strip()
+                pending = None
+            result.append(s)
+            result_is_narrative.append(True)
+        if pending is not None:
+            _fold_backward(result, result_is_narrative, pending)
+        out.append((num, "\n\n".join(result).strip()))
+    return _join_book(front, out)
+
+
+def _fold_backward(
+    result: list[str], is_narrative: list[bool], inject: str
+) -> None:
+    """Append a leftover inject line to the last narrative paragraph, else keep it."""
+    for i in range(len(result) - 1, -1, -1):
+        if is_narrative[i]:
+            result[i] = f"{result[i].rstrip()} {inject.lstrip()}".strip()
+            return
+    # No narrative paragraph to attach to (degenerate chapter) — keep as-is.
+    result.append(inject)
+    is_narrative.append(False)
+
 
 # Micro-sentences inserted to break repeating pedagogical-cadence 4-grams (F6).
 _CADENCE_MICRO_BREAKERS: tuple[str, ...] = (
@@ -335,11 +552,16 @@ def cap_prescribed_action_density(
     max_per_chapter: int = 2,
     max_by_chapter: dict[int, int] | None = None,
     ledger: "_BookPhraseLedger | None" = None,
+    inject_deprescribe_alternative: bool = True,
 ) -> str:
     """Cap F7 prescribed-action paragraphs per chapter by softening surplus copies.
 
     Pass a shared `ledger` so the comfort line substituted for a capped action is
     book-unique (does not re-stamp the same alternative across chapters).
+
+    When ``inject_deprescribe_alternative`` is False (spine default via
+    ``spine_deprescribe_inject_enabled()``), surplus prescribed-action paragraphs
+    are dropped instead of replaced with standalone one-line comfort filler.
     """
     front, chapters = _split_book(prose)
     if not chapters:
@@ -354,6 +576,8 @@ def cap_prescribed_action_density(
             if _is_prescribed_action(p):
                 kept_prescribed += 1
                 if kept_prescribed > chapter_cap:
+                    if not inject_deprescribe_alternative:
+                        continue
                     softened = _deprescribe_paragraph(
                         p, seed=f"deprescribe:{num}:{p_idx}", ledger=ledger
                     )
@@ -713,6 +937,7 @@ def strengthen_register_craft_output(
     *,
     seed: str = "register",
     max_prescribed_per_chapter: int = 1,
+    inject_deprescribe_alternative: bool = True,
 ) -> str:
     """Run all register-output strengthen passes in craft-safe order.
 
@@ -722,17 +947,16 @@ def strengthen_register_craft_output(
     deprescribe/dwell passes below — each pass picks lines the book hasn't used.
     """
     ledger = _BookPhraseLedger()
+    _cap_kw = {
+        "max_per_chapter": max_prescribed_per_chapter,
+        "ledger": ledger,
+        "inject_deprescribe_alternative": inject_deprescribe_alternative,
+    }
     work = balance_transformation_arc_landings(prose, seed=seed)
-    work = cap_prescribed_action_density(
-        work, max_per_chapter=max_prescribed_per_chapter, ledger=ledger
-    )
+    work = cap_prescribed_action_density(work, **_cap_kw)
     work = break_pedagogical_cadence_repetition(work, seed=seed)
-    work = cap_prescribed_action_density(
-        work, max_per_chapter=max_prescribed_per_chapter, ledger=ledger
-    )
-    work = cap_prescribed_action_density(
-        work, max_per_chapter=max_prescribed_per_chapter, ledger=ledger
-    )
+    work = cap_prescribed_action_density(work, **_cap_kw)
+    work = cap_prescribed_action_density(work, **_cap_kw)
     work = repair_f13_dwell_contract(work, seed=seed, ledger=ledger)
     work, _f1_notes = dedupe_register_f1_paragraphs(work)
     work = ensure_unique_chapter_closings(work, seed=seed)

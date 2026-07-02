@@ -1281,9 +1281,29 @@ def _run_spine_pipeline_mode(
     # (F7), transformation-arc landings, and terminal-sentence integrity — runs AFTER
     # scene-anchor reducer so injected dwell beats are not trimmed as over-cap phrases.
     # Strengthens OUTPUT only; register gate thresholds untouched.
-    from phoenix_v4.rendering.register_output_strengthen import strengthen_register_craft_output
+    from phoenix_v4.rendering.register_output_strengthen import (
+        strengthen_register_craft_output,
+        spine_deprescribe_inject_enabled,
+    )
 
-    prose = strengthen_register_craft_output(prose, seed=seed or book_plan.plan_id)
+    _spine_deprescribe_inject_enabled = spine_deprescribe_inject_enabled()
+    if not _spine_deprescribe_inject_enabled:
+        _governance_report.setdefault("spine_deprescribe_signals", []).append(
+            {
+                "action": "injector_disabled",
+                "reason": (
+                    "G1-residual: deprescribe one-line filler disabled on spine; "
+                    "surplus prescribed-action paragraphs dropped, not replaced. "
+                    "PHOENIX_SPINE_DEPRESCRIBE=1 to re-enable."
+                ),
+            }
+        )
+
+    prose = strengthen_register_craft_output(
+        prose,
+        seed=seed or book_plan.plan_id,
+        inject_deprescribe_alternative=_spine_deprescribe_inject_enabled,
+    )
     # Post-strengthen flow cue pass: register craft strengthen can strip thesis /
     # actionable cues (e.g. F7 deprescription); re-run the word-bounded guarantee
     # pass so chapter_flow is scored on the final manuscript.
@@ -1301,7 +1321,12 @@ def _run_spine_pipeline_mode(
     _f7_max_by_chapter = {
         ch: min(contract, 1) if contract > 0 else 0 for ch, contract in _f7_caps.items()
     }
-    prose = _final_cap_f7(prose, max_per_chapter=1, max_by_chapter=_f7_max_by_chapter)
+    _f7_cap_kw = {
+        "max_per_chapter": 1,
+        "max_by_chapter": _f7_max_by_chapter,
+        "inject_deprescribe_alternative": _spine_deprescribe_inject_enabled,
+    }
+    prose = _final_cap_f7(prose, **_f7_cap_kw)
     # F1/F4 dedupe must run AFTER flow-cue injection (same stage ordering as F7 cap).
     from phoenix_v4.rendering.register_output_strengthen import (
         dedupe_register_f1_paragraphs as _final_f1_dedupe,
@@ -1325,7 +1350,7 @@ def _run_spine_pipeline_mode(
     prose = ensure_chapter_flow_cues(
         prose, flow_profile=_flow_profile, seed=f"{seed}:post_f13_flow"
     )
-    prose = _final_cap_f7(prose, max_per_chapter=1, max_by_chapter=_f7_max_by_chapter)
+    prose = _final_cap_f7(prose, **_f7_cap_kw)
     prose = _final_f13_repair(prose, seed=f"{seed}:post_f13_flow_recheck")
     # Post-flow orphan strip before floor padding (flow inserts can leak slot labels).
     prose = _final_orphan_strip(prose)
@@ -1367,17 +1392,17 @@ def _run_spine_pipeline_mode(
                 }
             )
     # Floor padding can duplicate closings and strip flow cues — repair before gates.
-    prose = _final_cap_f7(prose, max_per_chapter=1, max_by_chapter=_f7_max_by_chapter)
+    prose = _final_cap_f7(prose, **_f7_cap_kw)
     prose = ensure_chapter_flow_cues(
         prose, flow_profile=_flow_profile, seed=f"{seed}:post_floor_flow"
     )
-    prose = _final_cap_f7(prose, max_per_chapter=1, max_by_chapter=_f7_max_by_chapter)
+    prose = _final_cap_f7(prose, **_f7_cap_kw)
     prose = _final_f4_closings(prose, seed=f"{seed}:post_all_flow")
     prose = _final_orphan_strip(prose)
     prose = ensure_chapter_flow_cues(
         prose, flow_profile=_flow_profile, seed=f"{seed}:post_all_flow"
     )
-    prose = _final_cap_f7(prose, max_per_chapter=1, max_by_chapter=_f7_max_by_chapter)
+    prose = _final_cap_f7(prose, **_f7_cap_kw)
     # F7 cap can drop one_hour_book below word_range floor. G1: on spine, do NOT re-pad
     # (see the disabled first call site above) — surface the under-length as a thin-pool
     # signal. Only re-pad when the PHOENIX_SPINE_WORD_FLOOR_PAD kill-switch is set.
@@ -1407,8 +1432,27 @@ def _run_spine_pipeline_mode(
         prose, flow_profile=_flow_profile, seed=f"{seed}:pre_gate_flow"
     )
     prose = _final_f13_repair(prose, seed=f"{seed}:pre_gate_f13_recheck")
-    prose = _final_cap_f7(prose, max_per_chapter=1, max_by_chapter=_f7_max_by_chapter)
+    prose = _final_cap_f7(prose, **_f7_cap_kw)
     prose = _final_orphan_strip(prose)
+    from phoenix_v4.rendering.register_output_strengthen import (
+        destack_adjacent_inject_paragraphs as _destack_inject_paras,
+        fold_standalone_inject_paragraphs as _fold_inject_paras,
+    )
+
+    prose = _destack_inject_paras(prose)
+    # G1-residual Phase-2 (cohesion restore): weave any surviving standalone
+    # one-line inject paragraphs (within-slot bridges + formulaic practice
+    # intros) into a neighbor narrative paragraph, and mark bare Title-Case
+    # section titles as real headings. Returns the composer floor to the
+    # pre-injector 0-5% beat-line band (docs/BESTSELLER_QUALITY_ARCHAEOLOGY_
+    # 2026-07-03.md). PHOENIX_INJECT_FOLD=0 / PHOENIX_SECTION_HEADING_MARK=0
+    # disable. Deterministic; no LLM; gate thresholds untouched.
+    prose = _fold_inject_paras(prose)
+    # Folding a practice-intro into the exercise it introduces can tip that
+    # paragraph into F7 prescribed-action classification, so re-cap F7 once more
+    # AFTER the fold (drop-mode on spine — never re-inject filler). Keeps the F7
+    # per-chapter invariant without disturbing the restored 0-5% beat-line floor.
+    prose = _final_cap_f7(prose, **_f7_cap_kw)
     # F6 cadence had no pre-gate repair: the single break inside strengthen_register_craft_output
     # (above) runs BEFORE the flow-cue / floor / F4 / F13 convergence passes, which re-introduce
     # repeating sentence-length 4-grams (e.g. [9,9,9,10] ×3 → register F6 FAIL on social_anxiety /

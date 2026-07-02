@@ -243,3 +243,16 @@ def test_max_extra_chunks_cap_reductions() -> None:
     assert _max_extra_chunks_for_format("standard_book", 320) == 3
     assert _max_extra_chunks_for_format("micro_book_15", 320) == 0
     assert _max_extra_chunks_for_format("short_book_30", 320) == 1
+
+
+def test_within_slot_bridge_destack_skips_adjacent_injects():
+    from phoenix_v4.rendering.register_output_strengthen import (
+        destack_adjacent_inject_paragraphs,
+    )
+
+    bridge = "The mechanism behind this pattern is small and stubborn."
+    dep = "An ordinary pace is a sustainable pace."
+    body = f"{bridge}\n\n{dep}\n\n{'Narrative paragraph content here.' * 3}"
+    out = destack_adjacent_inject_paragraphs(f"Chapter 1\n\n{body}")
+    assert bridge in out
+    assert dep not in out
