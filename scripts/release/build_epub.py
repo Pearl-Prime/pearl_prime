@@ -11,7 +11,8 @@ Usage:
         --input artifacts/pipeline_examples/ahjan/book_ahjan_anxiety_15min.txt \
         --title "The Alarm Is Lying" \
         --subtitle "A Nervous System Guide to Anxiety Recovery" \
-        --author "Ahjan" \
+        --author "Lena Thorne" \
+        --teacher "Ahjan" \
         --publisher "Inner Light Press" \
         --cover artifacts/pipeline_examples/ahjan/cover_ahjan_anxiety.png \
         --output artifacts/epub/ahjan_anxiety.epub
@@ -82,46 +83,167 @@ def _run_stub_delivery_gate(text: str, *, source_hint: str) -> None:
     delivery_contract_gate(text, source_hint=source_hint)
 
 
+# ─── TEACHER-MODE BYLINE RESOLVER (Q-TEACHERMODE-BYLINE-01) ───────────
+#
+# RATIFIED DEFAULT (operator, OPD-20260701-001): teacher-mode books byline a
+# PEN-NAME author drawn from the brand's author pool; the teacher is credited
+# SEPARATELY ("Teaching by <teacher>"). A teacher display name NEVER appears as
+# the EPUB primary creator (dc:creator role=aut) or in --author. This mirrors the
+# Sai-Maa rule ([Sai Maa never author]): every name in
+# config/teachers/teacher_registry.yaml is teacher-mode-only, never a byline.
+#
+# Resolution chain:  book.teacher (teacher_id)
+#   → brand   via config/catalog_planning/teacher_brand_author_roster.yaml (<brand>.teacher)
+#   → pool    of pen-names for that brand, SSOT = config/author_registry.yaml
+#             (authors[].brand_id == brand → pen_name); roster is the fallback
+#             source when the SSOT has no rows for that brand.
+#   → pick    DETERMINISTIC + anti-dup: SHA256(book_id) % len(sorted_pool).
+#             We do NOT call the topic→author router — it collapses to
+#             lena_thorne for every book ([Author system real state]), which
+#             would re-introduce an anti-spam single-byline hazard.
+#
+# If a book's teacher resolves to a brand with NO pen-name pool yet, we RAISE
+# (TeacherBylineError) rather than fall back to the teacher name — a missing pool
+# is a real provisioning gap, never a licence to ship the teacher as author.
+
+REPO_CONFIG = REPO_ROOT / "config"
+_AUTHOR_REGISTRY_PATH = REPO_CONFIG / "author_registry.yaml"
+_TEACHER_ROSTER_PATH = REPO_CONFIG / "catalog_planning" / "teacher_brand_author_roster.yaml"
+_TEACHER_REGISTRY_PATH = REPO_CONFIG / "teachers" / "teacher_registry.yaml"
+
+
+class TeacherBylineError(RuntimeError):
+    """Raised when a teacher-mode book cannot resolve a pen-name byline.
+
+    Never resolves to the teacher's own name — a missing pool is surfaced, not
+    papered over, so no teacher identity can leak into dc:creator.
+    """
+
+
+def _load_yaml(path: Path) -> dict[str, Any]:
+    import yaml  # local import: keeps ebooklib the only hard top-level dep
+
+    with path.open(encoding="utf-8") as fh:
+        return yaml.safe_load(fh) or {}
+
+
+def _brand_for_teacher(teacher_id: str) -> str:
+    """Map a teacher_id → brand_id via the teacher_brand_author_roster."""
+    roster = _load_yaml(_TEACHER_ROSTER_PATH)
+    for brand_id, block in roster.items():
+        if isinstance(block, dict) and block.get("teacher") == teacher_id:
+            return brand_id
+    raise TeacherBylineError(
+        f"No brand maps to teacher '{teacher_id}' in {_TEACHER_ROSTER_PATH.name}"
+    )
+
+
+def _pen_name_pool_for_brand(brand_id: str) -> list[str]:
+    """Resolve the pen-name pool for a brand.
+
+    SSOT first: config/author_registry.yaml (authors[].brand_id == brand →
+    pen_name). Falls back to the roster's <brand>.authors[].display_name when the
+    SSOT carries no rows for the brand yet. Returns a de-duplicated, sorted pool.
+    """
+    pool: list[str] = []
+
+    registry = _load_yaml(_AUTHOR_REGISTRY_PATH)
+    for _aid, meta in (registry.get("authors") or {}).items():
+        if isinstance(meta, dict) and meta.get("brand_id") == brand_id:
+            pen = (meta.get("pen_name") or "").strip()
+            if pen:
+                pool.append(pen)
+
+    if not pool:  # SSOT gap — try the roster's own author list
+        roster = _load_yaml(_TEACHER_ROSTER_PATH)
+        block = roster.get(brand_id) or {}
+        for author in block.get("authors") or []:
+            name = (author.get("display_name") or "").strip()
+            if name:
+                pool.append(name)
+
+    return sorted(set(pool))
+
+
+def resolve_teacher_byline(book: dict[str, Any]) -> tuple[str, str]:
+    """Return (pen_name_author, teacher_display_name) for a teacher-mode book.
+
+    ``pen_name_author`` becomes the EPUB primary creator; ``teacher_display_name``
+    is credited separately. Deterministic + anti-dup selection over the sorted
+    pool by SHA256(book_id). Raises TeacherBylineError if no pool exists.
+    """
+    teacher_id = book["teacher"]
+    teacher_display = _teacher_display_name(teacher_id)
+    brand_id = _brand_for_teacher(teacher_id)
+    pool = _pen_name_pool_for_brand(brand_id)
+    if not pool:
+        raise TeacherBylineError(
+            f"Brand '{brand_id}' (teacher '{teacher_id}') has no pen-name pool in "
+            f"{_AUTHOR_REGISTRY_PATH.name} or {_TEACHER_ROSTER_PATH.name}; cannot "
+            f"byline book '{book['id']}'. Provision the pool — never ship the teacher."
+        )
+    idx = int(hashlib.sha256(book["id"].encode()).hexdigest(), 16) % len(pool)
+    return pool[idx], teacher_display
+
+
+def _teacher_display_name(teacher_id: str) -> str:
+    """Display name for a teacher_id from teacher_registry.yaml (fallback: titled id)."""
+    try:
+        registry = _load_yaml(_TEACHER_REGISTRY_PATH)
+        meta = (registry.get("teachers") or {}).get(teacher_id) or {}
+        name = (meta.get("display_name") or meta.get("formal_name") or "").strip()
+        if name:
+            return name
+    except Exception:  # noqa: BLE001 — display-name lookup is best-effort
+        pass
+    return teacher_id.replace("_", " ").title()
+
+
 # ─── BOOK MANIFEST ────────────────────────────────────────────────────
+#
+# BYLINE NOTE: entries carry ``teacher`` (a teacher_id), NOT ``author``. The
+# byline (dc:creator) is resolved to a brand pen-name at build time via
+# resolve_teacher_byline(); the teacher is credited separately. This is the fix
+# for Q-TEACHERMODE-BYLINE-01 — no teacher name is ever a primary author.
 
 TEACHER_BOOKS = [
-    {"id": "ahjan", "author": "Ahjan", "publisher": "Inner Light Press",
+    {"id": "ahjan", "teacher": "ahjan", "publisher": "Inner Light Press",
      "title": "The Alarm Is Lying", "subtitle": "A Nervous System Guide to Anxiety Recovery",
      "topic": "anxiety", "lang": "en"},
-    {"id": "adi_da", "author": "Adi Da", "publisher": "Awakening Press",
+    {"id": "adi_da", "teacher": "adi_da", "publisher": "Awakening Press",
      "title": "You Were Always Enough", "subtitle": "Rebuilding Self-Esteem and Reclaiming Your Worth",
      "topic": "self_worth", "lang": "en"},
-    {"id": "joshin", "author": "Joshin", "publisher": "Still Forest",
+    {"id": "joshin", "teacher": "joshin", "publisher": "Still Forest",
      "title": "Quiet Enough", "subtitle": "A Zen Guide to Calming Anxiety and Finding Presence",
      "topic": "anxiety", "lang": "en"},
-    {"id": "miyuki", "author": "Miyuki", "publisher": "Zen Clarity",  # per OPD-111 — Loop Breaker is contemplative
+    {"id": "miyuki", "teacher": "miyuki", "publisher": "Zen Clarity",  # per OPD-111 — Loop Breaker is contemplative
      "title": "The Loop Breaker", "subtitle": "How to Stop Overthinking and Quiet Your Racing Mind",
      "topic": "overthinking", "lang": "en"},
-    {"id": "maat", "author": "Ma'at", "publisher": "Truth Compass",
+    {"id": "maat", "teacher": "maat", "publisher": "Truth Compass",
      "title": "The No That Saved Me", "subtitle": "A Practical Guide to Setting Boundaries and Finding Peace",
      "topic": "boundaries", "lang": "en"},
-    {"id": "master_feung", "author": "Master Feung", "publisher": "Vitality Path",
+    {"id": "master_feung", "teacher": "master_feung", "publisher": "Vitality Path",
      "title": "After Burnout", "subtitle": "A Taoist Guide to Energy Recovery",
      "topic": "burnout", "lang": "zh-CN"},
-    {"id": "master_sha", "author": "Master Sha", "publisher": "Soul Repair",
+    {"id": "master_sha", "teacher": "master_sha", "publisher": "Soul Repair",
      "title": "The Weight of Gone", "subtitle": "A Gentle Guide to Grief, Loss, and Healing",
      "topic": "grief", "lang": "en"},
-    {"id": "master_wu", "author": "Master Wu", "publisher": "Mountain Gate Press",
+    {"id": "master_wu", "teacher": "master_wu", "publisher": "Mountain Gate Press",
      "title": "The Way of Courage", "subtitle": "Shaolin Wisdom for Facing Fear",
      "topic": "courage", "lang": "zh-TW"},
-    {"id": "miki", "author": "Miki", "publisher": "Gen Spark",
+    {"id": "miki", "teacher": "miki", "publisher": "Gen Spark",
      "title": "Who Let Me In", "subtitle": "A Guide to Dismantling Imposter Syndrome from the Inside",
      "topic": "imposter_syndrome", "lang": "en"},
-    {"id": "omote", "author": "Omote", "publisher": "Gentle Wave",
+    {"id": "omote", "teacher": "omote", "publisher": "Gentle Wave",
      "title": "Dark Room, Loud Brain", "subtitle": "A Somatic Guide to Beating Sleep Anxiety",
      "topic": "sleep_anxiety", "lang": "en"},
-    {"id": "pamela_fellows", "author": "Pamela Fellows", "publisher": "Body Wisdom",
+    {"id": "pamela_fellows", "teacher": "pamela_fellows", "publisher": "Body Wisdom",
      "title": "Wired for Worry", "subtitle": "Understanding Your Anxiety Response and How to Rewire It",
      "topic": "anxiety", "lang": "en"},
-    {"id": "ra", "author": "Ra", "publisher": "Cosmic Edge",
+    {"id": "ra", "teacher": "ra", "publisher": "Cosmic Edge",
      "title": "The Proof Was Always You", "subtitle": "Overcoming Imposter Syndrome and Owning Your Worth",
      "topic": "imposter_syndrome", "lang": "en"},
-    {"id": "sai_ma", "author": "Sai Maa", "publisher": "Healing Ground Press",
+    {"id": "sai_ma", "teacher": "sai_ma", "publisher": "Healing Ground Press",
      "title": "Still Here Without You", "subtitle": "Finding Your Way Through Grief and Heartbreak",
      "topic": "grief", "lang": "en"},
 ]
@@ -283,8 +405,15 @@ def build_epub(
     raw_cover: bool = False,
     description: str = "",
     disclosure: str = "",
+    teacher: str = "",
 ) -> Path:
-    """Build a KDP-ready EPUB 3 from a book text file."""
+    """Build a KDP-ready EPUB 3 from a book text file.
+
+    ``author`` is the primary creator (dc:creator role=aut) — for teacher-mode
+    books this MUST be a brand pen-name, never a teacher. ``teacher`` (optional)
+    is the teaching credit: emitted as a dc:contributor (role=oth) and a visible
+    "Teaching by <teacher>" line on the title page. See Q-TEACHERMODE-BYLINE-01.
+    """
     text = input_path.read_text(encoding="utf-8")
 
     # THE GATE: hard-fail before EPUB emission on any unfilled atom stub.
@@ -302,12 +431,24 @@ def build_epub(
     book.set_identifier(f"phoenix-omega-{uid}")
     book.set_title(f"{title}: {subtitle}")
     book.set_language(language)
+    # Primary creator (dc:creator role=aut) — a pen-name for teacher-mode books.
     book.add_author(author)
 
+    teacher_credit = teacher.strip()
+    if teacher_credit:
+        # Teacher credited SEPARATELY, never as primary author. dc:contributor
+        # role=oth ("other") carries the teaching-by relationship; ebooklib emits
+        # the opf:role refinement so the pen-name stays the sole aut creator.
+        book.add_metadata(
+            "DC", "contributor", teacher_credit,
+            {"id": "teacher", "{http://www.idpf.org/2007/opf}role": "oth"},
+        )
+
     book.add_metadata("DC", "publisher", publisher)
+    _teaching_by = f" Teaching by {teacher_credit}." if teacher_credit else ""
     desc = description.strip() or (
-        f"{subtitle}. A therapeutic book by {author}, published by {publisher}. "
-        f"Part of the Phoenix Omega series."
+        f"{subtitle}. A therapeutic book by {author}, published by {publisher}."
+        f"{_teaching_by} Part of the Phoenix Omega series."
     )
     book.add_metadata("DC", "description", desc)
     book.add_metadata("DC", "subject", topic.replace("_", " ").title())
@@ -342,6 +483,7 @@ def build_epub(
     <h1>{title}</h1>
     <p style="text-align:center; font-size:1.1em; color:#555;">{subtitle}</p>
     <p style="text-align:center; margin-top:2em;">By {author}</p>
+    {f'<p style="text-align:center; font-size:0.95em; color:#777;">Teaching by {teacher_credit}</p>' if teacher_credit else ''}
     <p class="publisher">{publisher}</p>
     <p class="ai-disclosure">
         {ei_disclosure}
@@ -409,6 +551,17 @@ def build_all(dry_run: bool = False, raw_cover: bool = False) -> list[dict[str, 
         cover_path = examples_dir / tid / f"cover_{tid}_{topic}.png"
         output_path = epub_dir / f"{tid}_{topic}.epub"
 
+        # Resolve the pen-name byline + teacher credit BEFORE any file check, so a
+        # missing pool surfaces as an explicit error rather than a silent skip and
+        # a teacher name can never reach dc:creator.
+        try:
+            pen_author, teacher_display = resolve_teacher_byline(book)
+        except TeacherBylineError as e:
+            logger.error("Byline unresolved: %s — %s", tid, e)
+            print(f"  ✗ [{tid}] {book['title']} — byline: {e}")
+            results.append({"id": tid, "status": "byline_error", "error": str(e)})
+            continue
+
         if not input_path.exists():
             logger.warning("Missing: %s", input_path)
             results.append({"id": tid, "status": "missing_input", "path": str(input_path)})
@@ -416,8 +569,15 @@ def build_all(dry_run: bool = False, raw_cover: bool = False) -> list[dict[str, 
 
         if dry_run:
             has_cover = cover_path.exists()
-            print(f"  [{tid}] {book['title']} → {output_path.name} (cover: {'yes' if has_cover else 'NO'})")
-            results.append({"id": tid, "status": "dry_run", "has_cover": has_cover})
+            print(
+                f"  [{tid}] {book['title']} → {output_path.name} "
+                f"(author: {pen_author}, teaching by: {teacher_display}, "
+                f"cover: {'yes' if has_cover else 'NO'})"
+            )
+            results.append({
+                "id": tid, "status": "dry_run", "has_cover": has_cover,
+                "author": pen_author, "teacher": teacher_display,
+            })
             continue
 
         try:
@@ -425,7 +585,8 @@ def build_all(dry_run: bool = False, raw_cover: bool = False) -> list[dict[str, 
                 input_path=input_path,
                 title=book["title"],
                 subtitle=book["subtitle"],
-                author=book["author"],
+                author=pen_author,
+                teacher=teacher_display,
                 publisher=book["publisher"],
                 language=book["lang"],
                 cover_path=cover_path if cover_path.exists() else None,
@@ -435,7 +596,10 @@ def build_all(dry_run: bool = False, raw_cover: bool = False) -> list[dict[str, 
             )
             size = path.stat().st_size
             print(f"  ✓ [{tid}] {book['title']} → {path.name} ({size:,} bytes)")
-            results.append({"id": tid, "status": "ok", "path": str(path), "size": size})
+            results.append({
+                "id": tid, "status": "ok", "path": str(path), "size": size,
+                "author": pen_author, "teacher": teacher_display,
+            })
         except Exception as e:
             logger.error("Failed: %s — %s", tid, e)
             print(f"  ✗ [{tid}] {book['title']} — {e}")
@@ -453,7 +617,12 @@ def main():
     parser.add_argument("--input", type=Path, help="Input book text file")
     parser.add_argument("--title", help="Book title")
     parser.add_argument("--subtitle", default="", help="Book subtitle")
-    parser.add_argument("--author", help="Author name")
+    parser.add_argument("--author", help="Author name (pen-name; NEVER a teacher name)")
+    parser.add_argument(
+        "--teacher", default="",
+        help="Teaching credit (dc:contributor + 'Teaching by' line); the teacher "
+             "is NEVER the primary author",
+    )
     parser.add_argument("--publisher", default="Phoenix Omega", help="Publisher name")
     parser.add_argument("--cover", type=Path, help="Cover image path")
     parser.add_argument("--output", type=Path, help="Output EPUB path")
@@ -479,9 +648,9 @@ def main():
         # THE GATE: a stub (or any) build failure in batch mode must exit
         # non-zero so CI / the operator pipeline does not treat a stub-blocked
         # run as a clean ship.
-        errored = [r for r in results if r["status"] == "error"]
+        errored = [r for r in results if r["status"] in ("error", "byline_error")]
         if errored and not args.dry_run:
-            print(f"FAIL: {len(errored)} book(s) failed the build/stub gate.", file=sys.stderr)
+            print(f"FAIL: {len(errored)} book(s) failed the build/stub/byline gate.", file=sys.stderr)
             return 1
         return 0
 
@@ -495,6 +664,7 @@ def main():
         title=args.title or "Untitled",
         subtitle=args.subtitle,
         author=args.author or "Unknown",
+        teacher=args.teacher,
         publisher=args.publisher,
         language=args.language,
         cover_path=args.cover,

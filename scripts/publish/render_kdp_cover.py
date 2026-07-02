@@ -1323,6 +1323,27 @@ def _load_teacher_books() -> list[dict[str, Any]]:
     return list(TEACHER_BOOKS)
 
 
+def _resolve_book_byline(book: dict[str, Any]) -> str:
+    """Resolve the cover byline for a teacher-mode book via build_epub's SSOT
+    pen-name resolver.
+
+    TEACHER_BOOKS entries carry ``teacher`` (a teacher_id), NOT a pre-baked
+    ``author`` — the byline (dc:creator on the EPUB, and the byline printed on
+    the cover) is resolved to a brand pen-name at build time by
+    ``build_epub.resolve_teacher_byline`` (Q-TEACHERMODE-BYLINE-01). That
+    resolver RAISES ``TeacherBylineError`` for brands whose pen-name pool is not
+    yet provisioned (11/13 as of 2026-07-02; the mint lane provisions the rest),
+    fail-loud rather than leaking the teacher's own name. The cover batch is a
+    second consumer of that contract, so it must resolve the same way — never
+    read a ``book["author"]`` key that no longer exists.
+    """
+    sys.path.insert(0, str(REPO_ROOT))
+    from scripts.release.build_epub import resolve_teacher_byline  # type: ignore
+
+    pen_author, _teacher_display = resolve_teacher_byline(book)
+    return pen_author
+
+
 def _topic_to_genre(topic: str, known_genres: set[str]) -> str:
     if topic in known_genres:
         return topic
@@ -1333,6 +1354,15 @@ def _run_batch(
     typography_config_path: Path | None = None,
     templates_config_path: Path | None = None,
 ) -> list[dict[str, Any]]:
+    # Import the byline exception from the SSOT so we can skip unprovisioned
+    # brands cleanly instead of crashing the whole batch. TEACHER_BOOKS now
+    # carry ``teacher`` not ``author``; the byline is resolved via
+    # build_epub.resolve_teacher_byline, which RAISES TeacherBylineError for
+    # brands whose pen-name pool is not yet provisioned (by design — fail-loud
+    # over leaking a teacher's name). The cover batch tolerates that per-book.
+    sys.path.insert(0, str(REPO_ROOT))
+    from scripts.release.build_epub import TeacherBylineError  # type: ignore
+
     typography_cfg = load_typography_config(typography_config_path)
     templates_cfg = load_templates_config(templates_config_path)
     known = set(typography_cfg["genres"].keys()) & set(templates_cfg["templates"].keys())
@@ -1344,6 +1374,20 @@ def _run_batch(
         template = templates_cfg["templates"][genre]
         out_dir = REPO_ROOT / "artifacts" / "pipeline_examples" / book_id
         out_path = out_dir / f"cover_{book_id}_FINAL.png"
+
+        # Resolve the pen-name byline BEFORE any file/imagery check so an
+        # unprovisioned brand is reported the same way (skipped, not crashed)
+        # regardless of whether its genre is type-dominant or image-bearing.
+        try:
+            author = _resolve_book_byline(book)
+        except TeacherBylineError as exc:
+            print(f"[skip] {book_id}: no pen-name pool — {exc}", file=sys.stderr)
+            results.append({
+                "book_id": book_id,
+                "status": "skipped_no_byline",
+                "reason": str(exc),
+            })
+            continue
 
         if template.get("type_dominant"):
             illustration: Path | None = None
@@ -1367,7 +1411,7 @@ def _run_batch(
             meta = render_kdp_cover(
                 illustration_path=illustration,
                 title=book["title"],
-                author=book["author"],
+                author=author,
                 subtitle=book.get("subtitle", ""),
                 genre=genre,
                 output_path=out_path,

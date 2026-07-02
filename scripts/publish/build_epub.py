@@ -28,9 +28,14 @@ verbatim. Exit code = backend exit code.
   python3 scripts/publish/build_epub.py \\
       --input artifacts/pipeline_examples/ahjan/book_ahjan_anxiety_15min.txt \\
       --title "The Alarm Is Lying" \\
-      --author "Ahjan" \\
+      --author "Lena Thorne" \\
+      --teacher "Ahjan" \\
       --cover artifacts/pipeline_examples/ahjan/cover_ahjan_anxiety.png \\
       --output artifacts/epub/ahjan_anxiety.epub
+
+  # NOTE: --author is a brand PEN-NAME; the teacher goes in --teacher and is
+  # credited separately ("Teaching by <teacher>"). A teacher name is NEVER the
+  # primary author (Q-TEACHERMODE-BYLINE-01 / OPD-20260701-001).
 
   # Batch build (all 13 teacher books)
   python3 scripts/publish/build_epub.py --batch

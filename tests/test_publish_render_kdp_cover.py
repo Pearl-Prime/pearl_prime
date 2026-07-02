@@ -207,9 +207,29 @@ def test_unknown_genre_refused(dark_illustration: Path,
 
 
 def test_batch_lists_books_without_crash(tmp_path: Path) -> None:
-    """--batch reads TEACHER_BOOKS and processes each. Without v3 imagery
-    on disk, image-bearing books are reported as skipped; type-dominant
-    books succeed."""
+    """--batch reads TEACHER_BOOKS and processes each without crashing.
+
+    TEACHER_BOOKS now carry ``teacher`` (a teacher_id), NOT a pre-baked
+    ``author``. The cover batch resolves the byline via the SSOT resolver
+    (``build_epub.resolve_teacher_byline``), which RAISES ``TeacherBylineError``
+    for brands whose pen-name pool is not yet provisioned. As of 2026-07-02 only
+    2/13 teacher brands are provisioned (stillness_press → ahjan, and
+    body_wisdom → pamela_fellows). Both provisioned brands' books are
+    image-bearing (topic ``anxiety`` → non-type-dominant), so with v3 imagery
+    mocked to None they land as ``skipped_no_illustration`` — critically NOT a
+    hard ``fail`` and NOT ``skipped_no_byline``. The unprovisioned brands are
+    skipped cleanly as ``skipped_no_byline`` (fail-loud byline resolver, caught
+    per-book — never a crash, never a teacher-name leak).
+
+    CONTRACT NOTE: ``'ok'`` (a rendered cover) cannot occur while (a) only these
+    2 brands are provisioned AND (b) both provisioned brands are image-bearing,
+    because the image-bearing path needs v3 imagery on disk (mocked away here).
+    Once the mint lane provisions all 13 pen-name pools — including a
+    type-dominant provisioned brand — this test should re-assert ``'ok'`` in
+    ``statuses``. Until then, the correct contract is: no crash, unprovisioned
+    brands skipped_no_byline, provisioned brands resolve a byline (and here fall
+    through to skipped_no_illustration), and NO book returns ``fail``.
+    """
     with mock.patch.object(rkc, "_find_v3_imagery", return_value=None), \
          mock.patch.object(rkc, "REPO_ROOT", tmp_path):
         # Force the renderer to write outputs into tmp_path so we don't
@@ -218,9 +238,15 @@ def test_batch_lists_books_without_crash(tmp_path: Path) -> None:
     assert isinstance(results, list)
     assert len(results) >= 13, f"Expected >=13 teacher books, got {len(results)}"
     statuses = {r["status"] for r in results}
-    # Type-dominant books succeed; image-bearing skipped.
+    # Unprovisioned brands are skipped cleanly for want of a pen-name pool.
+    assert "skipped_no_byline" in statuses
+    # Provisioned image-bearing brands fall through to the imagery check.
     assert "skipped_no_illustration" in statuses
-    assert "ok" in statuses
+    # The whole point of the graceful-skip fix: an unprovisioned brand must
+    # never crash the batch or hard-fail — no book ends up 'fail'.
+    assert "fail" not in statuses, (
+        f"unprovisioned/teacher-byline books must skip, not fail; got {statuses}"
+    )
 
 
 def test_resize_non_canonical_illustration(tmp_path: Path) -> None:
