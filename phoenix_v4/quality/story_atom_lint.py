@@ -63,6 +63,121 @@ PROPER_NOUN_RE = re.compile(r"\b(?!I\b)[A-Z][a-z]{2,}\b")
 WORD_RE = re.compile(r"\b[\w'']+\b")
 
 # -----------------------------
+# Story-type / origin conformance (docs/STORY_TYPES_AND_STRUCTURES.md §7)
+# Deterministic metadata rules. Only fire when story_type is PRESENT — untagged
+# atoms (e.g. the persona STORY pools until they are tagged) are never flagged
+# by these, so this is additive and does not red-wall the untagged catalog.
+# -----------------------------
+
+VALID_STORY_TYPES = frozenset(
+    {"parable", "direct_teaching", "character_study", "atmospheric", "recognition_exchange"}
+)
+# §1.5: composite origin may not put the teacher in-scene → recognition_exchange forbidden.
+_COMPOSITE_FORBIDDEN_TYPES = frozenset({"recognition_exchange"})
+# §2.2: principle teachers may only use these types.
+_PRINCIPLE_ALLOWED_TYPES = frozenset({"parable", "atmospheric", "direct_teaching"})
+
+
+def check_story_type_conformance(
+    story_type: "str | None",
+    story_origin: "str | None",
+    teacher_is_principle: bool = False,
+) -> List[str]:
+    """§7 conformance flags for a STORY atom's metadata. Empty list = conformant.
+
+    Only evaluates when ``story_type`` is present; an untagged atom returns [].
+    Returned codes are FAIL-severity (schema violations), keyed to the authority.
+    """
+    st = (story_type or "").strip().lower()
+    so = (story_origin or "").strip().lower()
+    if not st:
+        return []  # untagged: conformance is vacuous until Phase-3 tagging
+    flags: List[str] = []
+    if st not in VALID_STORY_TYPES:
+        flags.append("UNKNOWN_STORY_TYPE")
+        return flags  # can't evaluate the rest against an unknown type
+    if so == "composite" and st in _COMPOSITE_FORBIDDEN_TYPES:
+        flags.append("COMPOSITE_FORBIDS_RECOGNITION_EXCHANGE")
+    if st == "recognition_exchange" and so and so != "true_story":
+        flags.append("RECOGNITION_EXCHANGE_REQUIRES_TRUE_STORY")
+    if teacher_is_principle and st not in _PRINCIPLE_ALLOWED_TYPES:
+        flags.append("PRINCIPLE_TEACHER_TYPE_FORBIDDEN")
+    return flags
+
+
+# A named protagonist in this corpus is a capitalized token used as an actor
+# (Name + person-verb): "Priya submits", "Naomi sat", "Marcus scrolls". Bare
+# count_proper_nouns is too crude — it counts sentence-initial "She"/"The" and
+# brand/place capitals (LinkedIn, Slack, Tuesday). This targets a *person* name.
+_NON_NAME_CAPS = frozenset(
+    {
+        "She", "He", "They", "We", "You", "It", "The", "But", "And", "When", "That",
+        "This", "Then", "There", "Her", "His", "Their", "Not", "Now", "One", "Nobody",
+        "Everybody", "Someone", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday",
+        "Saturday", "Sunday",
+    }
+)
+_PERSON_VERBS = (
+    r"sat|stood|walked|ran|drove|said|told|felt|knew|understood|realized|noticed|saw|"
+    r"recognized|looked|turned|picked|checked|opened|closed|scrolled|submits|submitted|"
+    r"opens|opened|closes|whispered|asked|nodded|stopped|remembered|called|texted|smiled|"
+    r"moved|stared|recovered|reached|paused|sits|stands|was|had|has|is|kept|held|shook"
+)
+_NAME_ACTOR_RE = re.compile(
+    r"\b([A-Z][a-z]{2,})\s+(?:had\s+|has\s+|just\s+)?(?:" + _PERSON_VERBS + r")\b"
+)
+
+
+def _has_named_person(text: str) -> bool:
+    for m in _NAME_ACTOR_RE.finditer(text):
+        if m.group(1) not in _NON_NAME_CAPS:
+            return True
+    return False
+
+
+def check_character_study_naming(story_type: "str | None", prose: str) -> "str | None":
+    """§3 rule #1: a character_study needs a NAMED protagonist. WARN-severity.
+
+    Fires for character_study atoms whose protagonist is only a pronoun (no
+    Name-as-actor). Returns a flag code or None.
+    """
+    if (story_type or "").strip().lower() != "character_study":
+        return None
+    if not _has_named_person(normalize_text(prose)):
+        return "CHARACTER_STUDY_UNNAMED"
+    return None
+
+
+def story_type_variety_flag(story_types: List[str]) -> "str | None":
+    """§9 advisory: a compiled book should carry ≥2 distinct story_types. WARN.
+
+    Ignores blank/untagged entries; returns a flag only when ≥1 type is present
+    but fewer than 2 distinct tagged types appear.
+    """
+    distinct = {t.strip().lower() for t in story_types if t and t.strip()}
+    if distinct and len(distinct) < 2:
+        return "LOW_STORY_TYPE_VARIETY"
+    return None
+
+
+def load_principle_teachers(registry_path: "Path | None" = None) -> "set[str]":
+    """Return the set of teacher_ids with teacher_as_principle: true (§2.2)."""
+    path = registry_path or (REPO_ROOT / "config" / "teachers" / "teacher_registry.yaml")
+    try:
+        import yaml  # local import: keep module import-light
+        data = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
+    except Exception:
+        return set()
+    teachers = data.get("teachers", data) if isinstance(data, dict) else {}
+    out: "set[str]" = set()
+    if isinstance(teachers, dict):
+        for tid, cfg in teachers.items():
+            if isinstance(cfg, dict) and cfg.get("teacher_as_principle") is True:
+                out.add(str(tid))
+    return out
+
+
+# -----------------------------
 # Data
 # -----------------------------
 
@@ -187,6 +302,81 @@ def lint_canonical_file(path: Path) -> List[StoryLintResult]:
     ]
 
 
+def _escalate(base: StoryLintResult, extra_flags: List[str], fail_codes: frozenset) -> StoryLintResult:
+    """Merge extra flags into a StoryLintResult and re-derive status.
+
+    A flag in ``fail_codes`` forces FAIL; any other extra flag lifts PASS→WARN.
+    """
+    if not extra_flags:
+        return base
+    flags = list(base.flags) + [f for f in extra_flags if f not in base.flags]
+    status = base.status
+    if any(f in fail_codes for f in extra_flags):
+        status = "FAIL"
+    elif status == "PASS":
+        status = "WARN"
+    return StoryLintResult(
+        path=base.path,
+        story_id=base.story_id,
+        word_count=base.word_count,
+        flags=flags,
+        missing_signals=base.missing_signals,
+        status=status,
+        notes=base.notes,
+        band=base.band,
+    )
+
+
+_CONFORMANCE_FAIL_CODES = frozenset(
+    {
+        "UNKNOWN_STORY_TYPE",
+        "COMPOSITE_FORBIDS_RECOGNITION_EXCHANGE",
+        "RECOGNITION_EXCHANGE_REQUIRES_TRUE_STORY",
+        "PRINCIPLE_TEACHER_TYPE_FORBIDDEN",
+    }
+)
+
+
+def lint_story_atom_yaml(path: Path, principle_teachers: "set[str] | None" = None) -> StoryLintResult:
+    """Lint a teacher-mode STORY atom YAML: 5-element prose lint + §7 conformance + §3 naming.
+
+    Enforces the story_type/origin rules NOW on tagged atoms. An atom with no
+    story_type gets only the base prose lint (conformance/naming no-op).
+    """
+    import yaml
+    data = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
+    if not isinstance(data, dict):
+        raise ValueError("story atom yaml is not a mapping")
+    atom_id = str(data.get("atom_id") or derive_story_id(path))
+    body = str(data.get("body") or "")
+    band = str(data.get("band") or "")
+    story_type = data.get("story_type")
+    story_origin = data.get("story_origin")
+    teacher_id = ""
+    tmeta = data.get("teacher")
+    if isinstance(tmeta, dict):
+        teacher_id = str(tmeta.get("teacher_id") or "")
+    principle = bool(principle_teachers and teacher_id in principle_teachers)
+
+    base = lint_one_prose(body, atom_id, str(path), band=band)
+    extra = check_story_type_conformance(story_type, story_origin, teacher_is_principle=principle)
+    naming = check_character_study_naming(story_type, body)
+    if naming:
+        extra = extra + [naming]
+    return _escalate(base, extra, _CONFORMANCE_FAIL_CODES)
+
+
+def iter_story_atom_yaml(root: Path) -> List[Path]:
+    """Find STORY-atom YAML files (under a STORY/ dir) for conformance linting."""
+    if root.is_file():
+        return [root] if (root.suffix.lower() in (".yaml", ".yml") and "STORY" in root.parts) else []
+    out: List[Path] = []
+    for p in root.rglob("*.y*ml"):
+        if p.is_file() and "STORY" in p.parts:
+            out.append(p)
+    return sorted(out)
+
+
 # -----------------------------
 # CLI
 # -----------------------------
@@ -248,6 +438,27 @@ def main() -> int:
                 )
             )
             continue
+
+    # Teacher-mode STORY atom YAMLs: 5-element lint + §7 story_type conformance.
+    yaml_atoms = iter_story_atom_yaml(root)
+    if yaml_atoms:
+        principle_teachers = load_principle_teachers()
+        for yf in yaml_atoms:
+            try:
+                results.append(lint_story_atom_yaml(yf, principle_teachers=principle_teachers))
+            except Exception as e:
+                results.append(
+                    StoryLintResult(
+                        path=str(yf),
+                        story_id=derive_story_id(yf),
+                        word_count=0,
+                        flags=["READ_ERROR"],
+                        missing_signals=4,
+                        status="FAIL",
+                        notes=[str(e)],
+                        band="",
+                    )
+                )
 
     if not results:
         print("No story files found.", file=sys.stderr)
