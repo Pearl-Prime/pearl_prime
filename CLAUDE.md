@@ -52,6 +52,32 @@ Read these files in order before doing any git or GitHub work:
 11. `docs/DOCS_INDEX.md`
 12. `docs/AGENT_FILE_PERSISTENCE_PROTOCOL.md`
 
+## Bestseller Quality Anti-Drift Doctrine (MANDATORY — Pearl_Prime sessions)
+
+Read `docs/BESTSELLER_DRIFT_ROOT_CAUSE_2026-07-02.md` and
+`docs/PEARL_PRIME_BESTSELLER_ACCEPTANCE_SCORECARD.md` before any Pearl Prime
+bestseller / catalog render work.
+
+1. **gate-PASS ≠ bestseller** — NEVER report a book as bestseller or shippable on
+   `register_gate` PASS alone. Name the acceptance layer every time: `structurally clear`
+   (Layer 1) / `authored candidate` (Layer 2) / `system working` (Layer 3) /
+   `bestseller register` (Layer 4 blind-10). `register_gate` PASS is at most
+   `structurally clear`.
+
+2. **Composer is NOT the flagship-register lever** — the same atoms hand-seamed already
+   read as bestseller. Do NOT re-tune the composer for catalog-scale register; that
+   instinct IS the drift. Flagship register = the **line-edit lane** (Layer 3 ONTGP on
+   canonical flagship cells).
+
+3. **Meta-rule: memory is recall, not enforcement** — every hard-won quality/drift lesson
+   must be promoted to an enforced mechanism: a **CI hard gate** (e.g. F14 beat-line
+   ceiling), a **can't-bypass default** (four-piece chord on production builds), or a
+   **CLAUDE.md rule** — NOT left in memory or tribal docs alone.
+
+Production bestseller builds MUST use the four-piece chord:
+`--pipeline-mode spine --quality-profile production --exercise-journeys`.
+CI blocks incomplete chords in changed production invocations (`check_canonical_pipeline_path.py`).
+
 ## Pearl_GitHub Scope
 
 Pearl_GitHub owns:

@@ -197,6 +197,19 @@ Without (1), the scorecard is theoretical. Without (2) on a cadence, the system 
 
 ---
 
+## Enforcement (2026-07-02)
+
+This scorecard's status language is **binding doctrine** — mirrored in `CLAUDE.md` §
+Bestseller Quality Anti-Drift Doctrine and rooted in
+`docs/BESTSELLER_DRIFT_ROOT_CAUSE_2026-07-02.md`.
+
+- **gate-PASS ≠ bestseller** — `register_gate` PASS names at most `structurally clear`.
+- **Composer ≠ flagship-register lever** — hand-seamed atoms already read bestseller;
+  catalog register gaps are a line-edit lane (Layer 3), not composer retuning.
+- **CI:** F14 beat-line HARD ceiling (#4583); four-piece chord BLOCK on changed
+  production invocations; injector disable (#4566).
+
 ## Change log
 
+- 2026-07-02: enforcement section + cross-link to root-cause retrospective (anti-drift lane).
 - 2026-05-18: initial draft authored as part of closed-loop step (B). Built from operator's described 4-layer structure + the synthesis from `PEARL_PRIME_BOOKS_VISION_AND_DELIVERY_AUDIT.md`. Promote to canonical after first calibration verdict (closed-loop step A) lands.

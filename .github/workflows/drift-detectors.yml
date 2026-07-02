@@ -30,16 +30,16 @@ jobs:
             echo "base=" >> "$GITHUB_OUTPUT"
           fi
 
-      - name: Canonical pipeline path (warn until PR #1379 lands)
+      - name: Canonical pipeline path (four-piece chord — BLOCK)
         env:
-          CANONICAL_PIPELINE_GATE_MODE: warn
+          CANONICAL_PIPELINE_GATE_MODE: fail
         run: |
           BASE="${{ steps.diff_base.outputs.base }}"
           EXTRA=()
           if [ -n "$BASE" ]; then
             EXTRA=(--base "$BASE" --head HEAD)
           fi
-          PYTHONPATH=scripts/ci:. python3 scripts/ci/check_canonical_pipeline_path.py "${EXTRA[@]}" --gate-mode warn
+          PYTHONPATH=scripts/ci:. python3 scripts/ci/check_canonical_pipeline_path.py "${EXTRA[@]}" --gate-mode fail
 
       - name: Duplicate modules (warn)
         run: |

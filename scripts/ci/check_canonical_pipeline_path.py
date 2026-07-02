@@ -28,9 +28,9 @@ Kill-switch: CANONICAL_PIPELINE_CHORD_FULL=0 reverts to spine-flag-only checking
 
 Run:
   PYTHONPATH=. python3 scripts/ci/check_canonical_pipeline_path.py \\
-    --base origin/main --head HEAD --gate-mode warn
+    --base origin/main --head HEAD --gate-mode fail
 
-Exit: 0 pass or pass-with-warnings; 1 fail (when --gate-mode fail and violations).
+Exit: 0 pass; 1 fail when --gate-mode fail and violations (CI default since 2026-07-02).
 """
 from __future__ import annotations
 

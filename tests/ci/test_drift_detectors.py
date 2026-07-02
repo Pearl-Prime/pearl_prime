@@ -102,6 +102,16 @@ def test_canonical_pipeline_fail_spine_only_missing_chord(tmp_path: Path) -> Non
     assert "--exercise-journeys" in r.stderr
 
 
+def test_drift_detectors_workflow_uses_chord_fail_mode() -> None:
+    """G3 enforcement: drift-detectors CI must BLOCK incomplete chords (not warn)."""
+    workflow = (REPO_ROOT / ".github" / "workflows" / "drift-detectors.yml").read_text(
+        encoding="utf-8"
+    )
+    assert "CANONICAL_PIPELINE_GATE_MODE: fail" in workflow
+    assert "--gate-mode fail" in workflow
+    assert "--gate-mode warn" not in workflow
+
+
 def test_canonical_pipeline_chord_kill_switch_reverts_to_spine_only(tmp_path: Path) -> None:
     """G3 kill-switch: CANONICAL_PIPELINE_CHORD_FULL=0 → spine-only PASSES (pre-G3 behavior)."""
     scripts = tmp_path / "scripts" / "prod"
