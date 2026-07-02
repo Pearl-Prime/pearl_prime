@@ -94,13 +94,20 @@ def _run_stub_delivery_gate(text: str, *, source_hint: str) -> None:
 #
 # Resolution chain:  book.teacher (teacher_id)
 #   → brand   via config/catalog_planning/teacher_brand_author_roster.yaml (<brand>.teacher)
-#   → pool    of pen-names for that brand, SSOT = config/author_registry.yaml
-#             (authors[].brand_id == brand → pen_name); roster is the fallback
-#             source when the SSOT has no rows for that brand.
-#   → pick    DETERMINISTIC + anti-dup: SHA256(book_id) % len(sorted_pool).
-#             We do NOT call the topic→author router — it collapses to
-#             lena_thorne for every book ([Author system real state]), which
-#             would re-introduce an anti-spam single-byline hazard.
+#   → pool    of pen-names for that brand. PRIMARY SSOT =
+#             config/brand_author_assignments.yaml (assignments[].author_pool,
+#             author_ids mapped to display names via the roster). Fallbacks:
+#             config/author_registry.yaml (authors[].brand_id → pen_name), then
+#             the roster's own author list. (Q-BYLINE-POOL-SOURCE-01 → RESOLVED.)
+#   → pick    TOPIC-FIT + anti-dup: band-gate on the teacher's topic score
+#             (strong ≥0.7 / medium ≥0.4, config/catalog_planning/
+#             teacher_topic_persona_scores.yaml), build the topic-eligible set
+#             from the assignments' topic-affinity rows (this topic + the
+#             teacher's other same-band topics), then DETERMINISTIC
+#             SHA256(book_id) % len(eligible) so a brand's books distribute
+#             across its pool. We do NOT call the topic→author router — it
+#             collapses to lena_thorne for every book ([Author system real
+#             state]), re-introducing an anti-spam single-byline hazard.
 #
 # If a book's teacher resolves to a brand with NO pen-name pool yet, we RAISE
 # (TeacherBylineError) rather than fall back to the teacher name — a missing pool
@@ -110,6 +117,19 @@ REPO_CONFIG = REPO_ROOT / "config"
 _AUTHOR_REGISTRY_PATH = REPO_CONFIG / "author_registry.yaml"
 _TEACHER_ROSTER_PATH = REPO_CONFIG / "catalog_planning" / "teacher_brand_author_roster.yaml"
 _TEACHER_REGISTRY_PATH = REPO_CONFIG / "teachers" / "teacher_registry.yaml"
+# Multi-author pool SSOT (Q-BYLINE-POOL-SOURCE-01 → RESOLVED). Each row:
+#   {brand_id, default_author, author_pool: [{author_id, voice_lock, tier}]}
+# plus topic-affinity rows {brand_id, topic_ids, default_author} that curate a
+# per-topic author fit. "Pipeline resolves author from this file."
+_BRAND_ASSIGNMENTS_PATH = REPO_CONFIG / "brand_author_assignments.yaml"
+# Teacher-level topic_scores (14 teachers; joshin unscored) — used only to pick
+# the eligibility BAND (strong ≥0.7 / medium ≥0.4) for topic-fit gating. There
+# are NO per-pen-name topic_scores anywhere in the repo, so per-author fit comes
+# from the assignments' own topic-affinity rows, band-gated by the teacher score.
+_TEACHER_TOPIC_SCORES_PATH = REPO_CONFIG / "catalog_planning" / "teacher_topic_persona_scores.yaml"
+
+_STRONG_BAND_MIN = 0.7   # PEN_NAME_AUTHOR_SYSTEM.md §6 — strong topic fit
+_MEDIUM_BAND_MIN = 0.4   # medium topic fit
 
 
 class TeacherBylineError(RuntimeError):
@@ -120,11 +140,25 @@ class TeacherBylineError(RuntimeError):
     """
 
 
+_YAML_CACHE: dict[str, dict[str, Any]] = {}
+
+
 def _load_yaml(path: Path) -> dict[str, Any]:
     import yaml  # local import: keeps ebooklib the only hard top-level dep
 
+    # Cache by (path, mtime) — the byline resolver reads a handful of config
+    # files many times per --batch run; re-parsing them each call is wasteful.
+    try:
+        key = f"{path}:{path.stat().st_mtime_ns}"
+    except OSError:
+        key = str(path)
+    cached = _YAML_CACHE.get(key)
+    if cached is not None:
+        return cached
     with path.open(encoding="utf-8") as fh:
-        return yaml.safe_load(fh) or {}
+        data = yaml.safe_load(fh) or {}
+    _YAML_CACHE[key] = data
+    return data
 
 
 def _brand_for_teacher(teacher_id: str) -> str:
@@ -138,39 +172,152 @@ def _brand_for_teacher(teacher_id: str) -> str:
     )
 
 
-def _pen_name_pool_for_brand(brand_id: str) -> list[str]:
-    """Resolve the pen-name pool for a brand.
+def _author_id_to_display(brand_id: str) -> dict[str, str]:
+    """author_id → display_name for a brand, sourced from the roster's author list.
 
-    SSOT first: config/author_registry.yaml (authors[].brand_id == brand →
-    pen_name). Falls back to the roster's <brand>.authors[].display_name when the
-    SSOT carries no rows for the brand yet. Returns a de-duplicated, sorted pool.
+    The assignments SSOT keys authors by ``author_id``; the byline (dc:creator)
+    needs the human display name. The roster carries both for every provisioned
+    brand, so it is the id→name bridge.
     """
-    pool: list[str] = []
+    out: dict[str, str] = {}
+    roster = _load_yaml(_TEACHER_ROSTER_PATH)
+    block = roster.get(brand_id) or {}
+    for author in block.get("authors") or []:
+        aid = (author.get("author_id") or "").strip()
+        name = (author.get("display_name") or "").strip()
+        if aid and name:
+            out[aid] = name
+    return out
 
-    registry = _load_yaml(_AUTHOR_REGISTRY_PATH)
-    for _aid, meta in (registry.get("authors") or {}).items():
-        if isinstance(meta, dict) and meta.get("brand_id") == brand_id:
-            pen = (meta.get("pen_name") or "").strip()
-            if pen:
-                pool.append(pen)
 
-    if not pool:  # SSOT gap — try the roster's own author list
-        roster = _load_yaml(_TEACHER_ROSTER_PATH)
-        block = roster.get(brand_id) or {}
-        for author in block.get("authors") or []:
-            name = (author.get("display_name") or "").strip()
-            if name:
-                pool.append(name)
+def _assignment_rows_for_brand(brand_id: str) -> list[dict[str, Any]]:
+    data = _load_yaml(_BRAND_ASSIGNMENTS_PATH)
+    return [
+        row
+        for row in (data.get("assignments") or [])
+        if isinstance(row, dict) and row.get("brand_id") == brand_id
+    ]
+
+
+def _brand_author_pool_ids(brand_id: str) -> list[str]:
+    """Ordered author_id pool for a brand from the assignments SSOT (first
+    author_pool row wins). Empty when the brand is not provisioned there."""
+    for row in _assignment_rows_for_brand(brand_id):
+        pool = row.get("author_pool")
+        if pool:
+            return [a["author_id"] for a in pool if a.get("author_id")]
+    return []
+
+
+def _brand_topic_affinities(brand_id: str) -> dict[str, str]:
+    """topic_id → author_id, from the assignments' topic-affinity rows. This is
+    the curated per-author topic fit (the assignments file's own signal)."""
+    aff: dict[str, str] = {}
+    for row in _assignment_rows_for_brand(brand_id):
+        author = row.get("default_author")
+        for topic in row.get("topic_ids") or []:
+            if author:
+                aff.setdefault(topic, author)
+    return aff
+
+
+def _teacher_topic_band(teacher_id: str, topic: str) -> str | None:
+    """Band ('strong'/'medium'/'weak') for a teacher's topic score, or None when
+    the teacher/topic is unscored. Gates topic-fit eligibility only."""
+    try:
+        data = _load_yaml(_TEACHER_TOPIC_SCORES_PATH)
+    except Exception:  # noqa: BLE001 — scores are an optional gating signal
+        return None
+    scores = ((data.get("teachers") or {}).get(teacher_id) or {}).get("topic_scores") or {}
+    val = scores.get(topic)
+    if val is None:
+        return None
+    if val >= _STRONG_BAND_MIN:
+        return "strong"
+    if val >= _MEDIUM_BAND_MIN:
+        return "medium"
+    return "weak"
+
+
+def _pen_name_pool_for_brand(brand_id: str) -> list[str]:
+    """Resolve the full pen-name pool (display names) for a brand.
+
+    Primary SSOT: config/brand_author_assignments.yaml author_pool (author_ids),
+    mapped to display names via the roster. Falls back to author_registry.yaml
+    (authors[].brand_id == brand → pen_name) and then the roster's own author
+    list. Returns a de-duplicated, sorted pool of display names.
+    """
+    id_to_name = _author_id_to_display(brand_id)
+
+    # 1) assignments SSOT — the multi-author pool of record
+    pool = [id_to_name.get(aid, aid) for aid in _brand_author_pool_ids(brand_id)]
+
+    # 2) author_registry.yaml fallback (pen_name by brand_id)
+    if not pool:
+        registry = _load_yaml(_AUTHOR_REGISTRY_PATH)
+        for _aid, meta in (registry.get("authors") or {}).items():
+            if isinstance(meta, dict) and meta.get("brand_id") == brand_id:
+                pen = (meta.get("pen_name") or "").strip()
+                if pen:
+                    pool.append(pen)
+
+    # 3) roster author list fallback (display_name)
+    if not pool:
+        pool = [name for name in id_to_name.values() if name]
 
     return sorted(set(pool))
+
+
+def _topic_fit_pool(book: dict[str, Any], brand_id: str) -> tuple[list[str], str]:
+    """Topic-eligible pen-name display names for a book, plus the band used.
+
+    Selection is topic-fit + anti-dup (Q-BYLINE-POOL-SOURCE-01):
+      * Band gate — the teacher's topic score picks the eligibility band
+        (strong ≥0.7, else medium ≥0.4; Q-TOPICBAND-01).
+      * Eligible set — the assignments' topic-affinity author for THIS topic,
+        UNION the affinity authors of the teacher's OTHER same-band topics. This
+        keeps every candidate on-band for topic fit while spreading a brand's
+        books across its pool instead of collapsing to a single byline.
+      * Fallback — if no topic-affinity data qualifies, the full pool by hash.
+    The dead topic→author router is never consulted.
+    """
+    teacher_id = book["teacher"]
+    topic = book.get("topic") or ""
+    full_pool_ids = _brand_author_pool_ids(brand_id)
+    id_to_name = _author_id_to_display(brand_id)
+    full_pool = _pen_name_pool_for_brand(brand_id)
+    if not full_pool_ids:
+        # No id-keyed pool (registry/roster fallback path) — cannot topic-rank;
+        # spread over the resolved display-name pool.
+        return full_pool, "full_pool"
+
+    aff = _brand_topic_affinities(brand_id)
+    valid_ids = set(full_pool_ids)
+    band = _teacher_topic_band(teacher_id, topic)
+
+    eligible_ids: set[str] = set()
+    if topic in aff and aff[topic] in valid_ids:
+        eligible_ids.add(aff[topic])
+    if band:
+        for a_topic, a_id in aff.items():
+            if a_id in valid_ids and _teacher_topic_band(teacher_id, a_topic) == band:
+                eligible_ids.add(a_id)
+
+    if not eligible_ids:  # no scored/affinity fit — spread across the whole pool
+        return full_pool, "full_pool"
+
+    names = sorted({id_to_name.get(aid, aid) for aid in eligible_ids})
+    return names, (band or "affinity")
 
 
 def resolve_teacher_byline(book: dict[str, Any]) -> tuple[str, str]:
     """Return (pen_name_author, teacher_display_name) for a teacher-mode book.
 
     ``pen_name_author`` becomes the EPUB primary creator; ``teacher_display_name``
-    is credited separately. Deterministic + anti-dup selection over the sorted
-    pool by SHA256(book_id). Raises TeacherBylineError if no pool exists.
+    is credited separately. Selection is topic-fit (band-gated over the
+    assignments' affinity rows) + anti-dup (deterministic SHA256(book_id) index
+    over the topic-eligible set), so a brand's books distribute across its pool.
+    Raises TeacherBylineError if the brand has no pen-name pool at all.
     """
     teacher_id = book["teacher"]
     teacher_display = _teacher_display_name(teacher_id)
@@ -179,11 +326,14 @@ def resolve_teacher_byline(book: dict[str, Any]) -> tuple[str, str]:
     if not pool:
         raise TeacherBylineError(
             f"Brand '{brand_id}' (teacher '{teacher_id}') has no pen-name pool in "
-            f"{_AUTHOR_REGISTRY_PATH.name} or {_TEACHER_ROSTER_PATH.name}; cannot "
-            f"byline book '{book['id']}'. Provision the pool — never ship the teacher."
+            f"{_BRAND_ASSIGNMENTS_PATH.name}, {_AUTHOR_REGISTRY_PATH.name}, or "
+            f"{_TEACHER_ROSTER_PATH.name}; cannot byline book '{book['id']}'. "
+            f"Provision the pool — never ship the teacher."
         )
-    idx = int(hashlib.sha256(book["id"].encode()).hexdigest(), 16) % len(pool)
-    return pool[idx], teacher_display
+    eligible, _band = _topic_fit_pool(book, brand_id)
+    eligible = eligible or pool
+    idx = int(hashlib.sha256(book["id"].encode()).hexdigest(), 16) % len(eligible)
+    return eligible[idx], teacher_display
 
 
 def _teacher_display_name(teacher_id: str) -> str:
@@ -197,7 +347,6 @@ def _teacher_display_name(teacher_id: str) -> str:
     except Exception:  # noqa: BLE001 — display-name lookup is best-effort
         pass
     return teacher_id.replace("_", " ").title()
-
 
 # ─── BOOK MANIFEST ────────────────────────────────────────────────────
 #
