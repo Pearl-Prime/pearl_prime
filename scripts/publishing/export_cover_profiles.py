@@ -1,9 +1,36 @@
 #!/usr/bin/env python3
 """L5 platform cover exporter — non-destructive per-platform adaptation.
 
-Lane 3 of docs/authoring/BOOK_COVER_UNIFIED_RESEARCH_2026-07-01.md §7.
+Lanes 3-4 of docs/authoring/BOOK_COVER_UNIFIED_RESEARCH_2026-07-01.md §7.
 Ratified defaults OPD-20260701-001 (Q-LEVELS-01, Q-PLATFORM-PRIORITY-01,
-Q-PROFILE-MASTER-01). First consumer: Kobo 3:4 (``kobo_ebook``).
+Q-PROFILE-MASTER-01). Lane-3 consumer: Kobo 3:4 (``kobo_ebook``). Lane-4
+consumer: the audiobook SQUARE surface (Google Play audiobook + ACX +
+Findaway), OPD-20260702-002.
+
+LANE 4 — AUDIOBOOK SQUARE (NOT a portrait downscale)
+----------------------------------------------------
+The audiobook 1:1 cover is a SEPARATE square design, not a reflow of the
+portrait master (research §148 "never reuse portrait for square"; ratified
+operator decision 2026-07-01). It is rendered from the AUTHOR_COVER_ART_SPEC
+square 4-slot blueprint (docs/authoring/AUTHOR_COVER_ART_SPEC.md §2/§5/§8):
+
+  * A NATIVE SQUARE base (3000² master) is composed from the SAME deterministic
+    per-author fingerprint primitives the book path already uses
+    (``scripts.publish.abstract_cover_art``) — gradient + vignette + topic
+    symbol — sized square, NOT a cropped portrait. No FLUX re-run.
+  * Slot selection is ``SHA256(author_id + ":" + book_id) % 4`` (spec §5). The
+    slot picks the symbol placement / text zone (symbolic·upper / environmental·
+    upper / abstract·center / human·upper-quarter, spec §3).
+  * Master 3000² → DOWNSCALE per profile: ACX 3000²/2400², Google Play 2400²,
+    Findaway 2400². True square, uniform scale (never stretch), NO borders /
+    letterbox (``borders_allowed:false`` / ``letterbox_allowed:false``).
+  * DISTRIBUTOR variants (ACX / Findaway) are UNBADGED with NO marketing copy
+    (``marketing_copy_allowed:false``): title + author only, no "AUDIOBOOK"
+    badge. A badged MARKETING variant is emitted separately (Q-BADGE-01=YES)
+    and is NEVER uploaded to ACX/Findaway.
+  * §4 WCAG-AA 4.5:1 contrast + §7 pHash guard run on the square exactly as on
+    the portrait. JPG export for ACX/Findaway, quality-stepped ≤ profile
+    ``max_file_mb``.
 
 WHAT THIS IS
 ------------
@@ -66,7 +93,7 @@ import sys
 from pathlib import Path
 from typing import Any
 
-from PIL import Image
+from PIL import Image, ImageDraw
 
 # Repo root on sys.path so the sibling render module imports cleanly whether
 # invoked as a module or a script.
@@ -76,6 +103,7 @@ if str(_REPO_ROOT) not in sys.path:
 
 # IMPORT the render + contrast utilities — do NOT fork them.
 from scripts.publish import render_kdp_cover as rkc  # noqa: E402
+from scripts.publish import abstract_cover_art as aca  # noqa: E402
 from scripts.publishing.load_cover_profiles import (  # noqa: E402
     aspect_matches,
     get_profile,
@@ -99,6 +127,105 @@ def _l4_seed(author_id: str, book_id: str) -> str:
     """SHA256(author_id + ':' + book_id) — the L4 design seed. L5 adds no
     randomness, so the seed is carried unchanged into the export metadata."""
     return hashlib.sha256(f"{author_id}:{book_id}".encode("utf-8")).hexdigest()
+
+
+# ─── AUDIOBOOK SQUARE 4-SLOT (AUTHOR_COVER_ART_SPEC §5 / §3) ──────────
+
+# Deterministic slot selection (spec §5): slot = SHA256(author+":"+book) % 4.
+# Slot 0 symbolic / 1 environmental / 2 abstract / 3 human — each maps to a
+# text/symbol zone (spec §3). Zones are percent-of-canvas so they scale to any
+# square size.
+_SLOT_NAMES = ("symbolic", "environmental", "abstract", "human")
+
+# Spec §3 text/symbol zones (percent of canvas). center=abstract (no focal
+# point); the upper zones keep the title clear of the symbol/human.
+_SLOT_SYMBOL_ZONE = {
+    "symbolic": {"x_pct": [30, 70], "y_pct": [42, 74]},       # central metaphor
+    "environmental": {"x_pct": [22, 78], "y_pct": [50, 82]},  # atmosphere low
+    "abstract": {"x_pct": [20, 80], "y_pct": [30, 80]},       # texture, centered
+    "human": {"x_pct": [28, 72], "y_pct": [55, 88]},          # silhouette low
+}
+_SLOT_TITLE_ZONE = {
+    "symbolic": {"x_pct": [8, 92], "y_pct": [6, 30]},         # upper_third-ish
+    "environmental": {"x_pct": [8, 92], "y_pct": [6, 30]},
+    "abstract": {"x_pct": [8, 92], "y_pct": [8, 34]},
+    "human": {"x_pct": [8, 92], "y_pct": [4, 25]},            # upper_quarter (avoid face)
+}
+
+
+def slot_for(author_id: str, book_id: str) -> int:
+    """Deterministic 4-slot index (AUTHOR_COVER_ART_SPEC §5)."""
+    digest = hashlib.sha256(f"{author_id}:{book_id}".encode("utf-8")).digest()
+    return digest[0] % 4
+
+
+def _render_square_base(
+    *,
+    genre: str,
+    author_id: str,
+    book_id: str,
+    size: int,
+    brand_id: str | None = None,
+) -> tuple[Image.Image, dict[str, Any]]:
+    """Compose a NATIVE SQUARE (size×size) base from the SAME deterministic
+    per-author fingerprint primitives the book path already uses
+    (``abstract_cover_art``) — gradient + vignette + slot-selected topic
+    symbol. This is the square 4-slot base (AUTHOR_COVER_ART_SPEC §2/§5), NOT
+    a cropped portrait: the canvas is 1:1 from the first pixel, so there is no
+    reflow / letterbox / stretch.
+
+    Palette comes from the genre template (imported render config); the
+    fingerprint seed is (author_id, brand_id, genre) so the audiobook square
+    carries the identical author signature as the portrait cover. No FLUX.
+    """
+    templates_cfg = rkc.load_templates_config()
+    if genre not in templates_cfg["templates"]:
+        raise ValueError(f"genre {genre!r} has no template entry")
+    template = templates_cfg["templates"][genre]
+    pal = template.get("palette", {})
+    primary_hex = pal["primary"]["hex"]
+
+    slot = slot_for(author_id, book_id)
+    slot_name = _SLOT_NAMES[slot]
+    symbol_zone = _SLOT_SYMBOL_ZONE[slot_name]
+
+    # Deterministic per-author fingerprint (same seed as the portrait path).
+    fp = aca.fingerprint(
+        author_id, brand_id, genre,
+        primary_hex=primary_hex,
+        secondary_hex=(pal.get("secondary") or {}).get("hex"),
+        accent_hex=(pal.get("accent") or {}).get("hex"),
+    )
+
+    # Native square canvas, supersampled for crisp vector symbols then down.
+    # Cap the working resolution (~3600px) so a 3000² master does not balloon
+    # to a 6000² RGBA canvas — keeps the symbol edges crisp at every profile
+    # size while bounding memory/time (matters at book-catalog scale + CI).
+    _MAX_WORK = 3600
+    ss = max(1, min(aca._SS, _MAX_WORK // max(1, size)))
+    w = h = size * ss
+    canvas = aca._gradient(fp["grad_top"], fp["grad_bottom"], fp["direction"], w, h)
+    aca._vignette(canvas, w, h)
+
+    sym_layer = Image.new("RGBA", (w, h), (0, 0, 0, 0))
+    dr = ImageDraw.Draw(sym_layer)
+    cx, cy, scale = aca._zone_center_scale(symbol_zone, w, h)
+    aca._draw_symbol(dr, fp["motif"], fp["style_var"], cx, cy, scale, fp["accent"])
+    canvas.alpha_composite(sym_layer)
+
+    base = canvas.resize((size, size), Image.Resampling.LANCZOS).convert("RGB")
+    meta = {
+        "square_base": True,
+        "slot": slot,
+        "slot_name": slot_name,
+        "fingerprint_motif": fp["motif"],
+        "fingerprint_style_var": fp["style_var"],
+        "fingerprint_seeded": fp["seeded"],
+        "grad_top_hex": aca._rgb_to_hex(fp["grad_top"]),
+        "grad_bottom_hex": aca._rgb_to_hex(fp["grad_bottom"]),
+        "title_zone_pct": _SLOT_TITLE_ZONE[slot_name],
+    }
+    return base, meta
 
 
 # ─── SIMPLE pHASH (AUTHOR_COVER_ART_SPEC §7 — 16x16 average-hash) ─────
@@ -292,6 +419,100 @@ def _recomposite_text_and_check_wcag(
     return report
 
 
+def _composite_square_text(
+    canvas: Image.Image,
+    *,
+    genre: str,
+    title: str,
+    subtitle: str,
+    author: str,
+    publisher: str | None,
+    slot_name: str,
+    include_subtitle: bool,
+    badge: str | None,
+) -> dict[str, Any]:
+    """Composite title (+ optional subtitle + author + optional badge) onto a
+    NATIVE SQUARE canvas using the slot-selected text zone (AUTHOR_COVER_ART_SPEC
+    §3). Reuses the imported ``render_kdp_cover`` drawing + contrast helpers —
+    no forked drawing code, no reflow.
+
+    ``include_subtitle=False`` (ACX / Findaway: ``marketing_copy_allowed:false``)
+    drops the subtitle entirely — title + author only, per platform art rules.
+    ``badge`` draws an "AUDIOBOOK" callout for the MARKETING variant ONLY; it is
+    None (unbadged) for distributor variants.
+    """
+    typography_cfg = rkc.load_typography_config()
+    templates_cfg = rkc.load_templates_config()
+    template = templates_cfg["templates"][genre]
+    genre_typography = typography_cfg["genres"][genre]
+
+    canvas_w, canvas_h = canvas.size
+    rgba = canvas.convert("RGBA")
+    palette_options = (
+        genre_typography.get("palette_hints", {}).get("hex_palette_fallback")
+        or [template["palette"]["secondary"]["hex"]]
+    )
+    type_dominant = bool(template.get("type_dominant", False))
+    title_zone = _SLOT_TITLE_ZONE[slot_name]
+    report: dict[str, Any] = {}
+
+    def _draw(zone: dict[str, Any], style_key: str, text: str, role: str,
+              min_size: int, size_pct: float) -> None:
+        if not text:
+            return
+        rect = _pct_zone_to_pixels_scaled(zone, canvas_w, canvas_h)
+        zone_lum = rkc._zone_avg_luminance(rgba, rect)
+        bg_rgb_sample = tuple(int(round(zone_lum * 255)) for _ in range(3))
+        initial = int(canvas_h * size_pct / 100.0)
+        style = genre_typography.get(style_key) or typography_cfg.get(
+            "defaults", {}
+        ).get(f"default_{style_key}", {"font_family": "sans_serif"})
+        _size, _lines, fill_rgb = rkc._draw_block_in_zone(
+            rgba, text, style, rect,
+            type_dominant=type_dominant,
+            cfg=typography_cfg,
+            palette_options=palette_options,
+            background_rgb=bg_rgb_sample,
+            initial_size=initial,
+            min_size=min_size,
+            role=role,
+        )
+        if role == "title":
+            fill_lum = rkc._luminance_rgb(fill_rgb)
+            hi, lo = max(zone_lum, fill_lum), min(zone_lum, fill_lum)
+            ratio = (hi + 0.05) / (lo + 0.05)
+            report.update({
+                "wcag_zone_luminance": round(zone_lum, 4),
+                "wcag_text_luminance": round(fill_lum, 4),
+                "wcag_contrast_ratio": round(ratio, 3),
+                "wcag_pass": ratio >= WCAG_AA_RATIO,
+                "wcag_target": WCAG_AA_RATIO,
+            })
+
+    author_label = f"{author}  ·  {publisher}" if publisher else author
+    # Title at the slot zone; author just beneath it; subtitle only when the
+    # profile allows marketing copy.
+    _draw(title_zone, "title_style", title, "title", 72, 7.0)
+    ty = title_zone["y_pct"]
+    author_zone = {"x_pct": [10, 90],
+                   "y_pct": [min(ty[1] + 1, 96), min(ty[1] + 8, 99)]}
+    _draw(author_zone, "author_style", author_label, "author", 22, 3.2)
+    if include_subtitle and subtitle:
+        sub_zone = {"x_pct": [12, 88],
+                    "y_pct": [min(ty[1] + 9, 90), min(ty[1] + 16, 96)]}
+        _draw(sub_zone, "subtitle_style", subtitle, "subtitle", 28, 3.6)
+
+    # Marketing-only "AUDIOBOOK" badge, lower band. Never on distributor art.
+    report["badged"] = False
+    if badge:
+        badge_zone = {"x_pct": [30, 70], "y_pct": [90, 96]}
+        _draw(badge_zone, "author_style", badge, "author", 18, 2.6)
+        report["badged"] = True
+
+    canvas.paste(rgba.convert(canvas.mode))
+    return report
+
+
 # ─── JPEG EXPORT WITH QUALITY STEPPING (AUTHOR_COVER_ART_SPEC §6) ─────
 
 
@@ -458,6 +679,169 @@ def export(
     }
 
 
+# ─── LANE 4: AUDIOBOOK SQUARE (native square, NOT a portrait reflow) ──
+
+# render_masters.square in config/publishing/platform_cover_profiles.yaml.
+SQUARE_MASTER_SIZE = 3000
+
+
+def export_audiobook(
+    book_id: str,
+    author_id: str,
+    profile_key: str,
+    *,
+    genre: str = "anxiety",
+    title: str | None = None,
+    subtitle: str = "",
+    author: str | None = None,
+    publisher: str | None = None,
+    brand_id: str | None = None,
+    marketing_variant: bool = True,
+    out_dir: Path | None = None,
+    profiles_path: Path | None = None,
+    _square_base: Image.Image | None = None,
+    _square_meta: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    """Produce a distributor-ready SQUARE audiobook cover for ``profile_key``.
+
+    Lane 4. The audiobook cover is a SEPARATE 1:1 design (AUTHOR_COVER_ART_SPEC
+    4-slot square blueprint), NOT a downscale of the portrait master. A native
+    3000² square base is composed from the per-author fingerprint, then
+    DOWNSCALED to the profile size (ACX 3000²/2400², Google Play 2400²,
+    Findaway 2400²). Uniform scale — never stretched; true 1:1; no borders /
+    letterbox.
+
+    Distributor profiles (``marketing_copy_allowed:false`` — ACX / Findaway)
+    are UNBADGED with title + author only. When ``marketing_variant`` is True a
+    separate badged "AUDIOBOOK" marketing PNG is also emitted (Q-BADGE-01=YES)
+    — it is NEVER the distributor upload.
+
+    Deterministic: same (author_id, book_id, profile_key) -> byte-identical.
+    No FLUX, no GPU, no paid LLM.
+    """
+    profile = get_profile(profile_key, profiles_path)
+    if profile.get("surface") != "audiobook":
+        raise ValueError(
+            f"{profile_key}: export_audiobook is for surface=audiobook only "
+            f"(got surface={profile.get('surface')!r}); use export() for ebook."
+        )
+    ar = profile.get("aspect_ratio") or {}
+    if ar.get("decimal") != 1.0:
+        raise ValueError(f"{profile_key}: audiobook must be 1:1, got {ar}")
+
+    title = title or book_id.replace("_", " ").title()
+    author = author or author_id.replace("_", " ").title()
+    out_dir = Path(out_dir) if out_dir else (DEFAULT_OUT_ROOT / author_id)
+    out_dir.mkdir(parents=True, exist_ok=True)
+
+    # 1. Native SQUARE master (3000²) — same for every audiobook profile of the
+    #    book, so callers may pass a cached base in. NOT a portrait crop.
+    if _square_base is not None and _square_meta is not None:
+        square_master, sq_meta = _square_base, _square_meta
+    else:
+        square_master, sq_meta = _render_square_base(
+            genre=genre, author_id=author_id, book_id=book_id,
+            size=SQUARE_MASTER_SIZE, brand_id=brand_id,
+        )
+    if square_master.size[0] != square_master.size[1]:
+        raise ValueError("square base is not 1:1")
+    slot_name = sq_meta["slot_name"]
+
+    master_png = out_dir / f"{book_id}_square_master_{SQUARE_MASTER_SIZE}.png"
+    square_master.save(master_png, format="PNG", optimize=True)
+
+    # 2. Target size from the profile; downscale the square master (uniform).
+    rec = profile["size_recommended"]
+    target_w, target_h = int(rec["width"]), int(rec["height"])
+    if target_w != target_h:
+        raise ValueError(f"{profile_key} size_recommended is not square: {rec}")
+    if not aspect_matches(profile, target_w, target_h):
+        raise ValueError(
+            f"{profile_key}: size_recommended {target_w}x{target_h} != declared "
+            f"aspect {profile.get('aspect_ratio')}"
+        )
+
+    marketing_copy_allowed = bool(profile.get("marketing_copy_allowed", False))
+    plat = profile_key
+
+    def _scaled(size: int) -> Image.Image:
+        if size == square_master.size[0]:
+            return square_master.copy()
+        return square_master.resize((size, size), Image.Resampling.LANCZOS)
+
+    outputs: dict[str, Any] = {}
+
+    # 3. DISTRIBUTOR variant — unbadged, no marketing copy when forbidden.
+    dist = _scaled(target_w)
+    wcag = _composite_square_text(
+        dist, genre=genre, title=title, subtitle=subtitle, author=author,
+        publisher=publisher, slot_name=slot_name,
+        include_subtitle=marketing_copy_allowed, badge=None,
+    )
+
+    # No-border / no-letterbox contract (ACX/Findaway/GP all forbid).
+    if not profile.get("borders_allowed", True) or not profile.get(
+        "letterbox_allowed", False
+    ):
+        if _has_letterbox_bars(dist):
+            raise ValueError(
+                f"{profile_key} forbids borders/letterbox but the square asset "
+                f"has uniform edge bars"
+            )
+
+    fmts = [f.lower() for f in profile.get("formats", [])]
+    prefer_jpg = any(f in ("jpg", "jpeg") for f in fmts)
+    suffix = "sq"
+    if prefer_jpg:
+        dist_jpg = out_dir / f"{book_id}_{plat}_{target_w}{suffix}.jpg"
+        outputs["distributor_jpeg"] = _export_jpeg(
+            dist, dist_jpg, float(profile["max_file_mb"])
+        )
+    dist_png = out_dir / f"{book_id}_{plat}_{target_w}{suffix}.png"
+    dist.convert("RGB").save(dist_png, format="PNG", optimize=True)
+    outputs["distributor_png"] = str(dist_png)
+
+    # 4. MARKETING variant (badged) — separate file, never the distributor art.
+    marketing_out: dict[str, Any] | None = None
+    if marketing_variant:
+        mkt = _scaled(target_w)
+        _composite_square_text(
+            mkt, genre=genre, title=title, subtitle=subtitle, author=author,
+            publisher=publisher, slot_name=slot_name,
+            include_subtitle=True, badge="AUDIOBOOK",
+        )
+        mkt_png = out_dir / f"{book_id}_{plat}_{target_w}{suffix}_marketing.png"
+        mkt.convert("RGB").save(mkt_png, format="PNG", optimize=True)
+        marketing_out = {"png": str(mkt_png), "badged": True}
+
+    seed = _l4_seed(author_id, book_id)
+    phash = average_hash(dist)
+
+    return {
+        "book_id": book_id,
+        "author_id": author_id,
+        "profile_key": profile_key,
+        "platform": profile.get("platform"),
+        "surface": "audiobook",
+        "aspect_decimal": 1.0,
+        "recommended_size": [target_w, target_h],
+        "master_size": [SQUARE_MASTER_SIZE, SQUARE_MASTER_SIZE],
+        "square_master_png": str(master_png),
+        "slot": sq_meta["slot"],
+        "slot_name": slot_name,
+        "fingerprint_motif": sq_meta.get("fingerprint_motif"),
+        "outputs": outputs,
+        "marketing_variant": marketing_out,
+        "marketing_copy_allowed": marketing_copy_allowed,
+        "borders_allowed": bool(profile.get("borders_allowed", False)),
+        "letterbox_allowed": bool(profile.get("letterbox_allowed", False)),
+        "wcag": wcag,
+        "l4_seed": seed,
+        "phash": phash,
+        "render_strategy": "native_square_4slot_no_reflow",
+    }
+
+
 # ─── CLI ─────────────────────────────────────────────────────────────
 
 
@@ -476,25 +860,47 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--publisher", default=None)
     p.add_argument("--illustration-path", default=None)
     p.add_argument("--master-path", default=None)
+    p.add_argument("--brand-id", default=None,
+                   help="brand seed for the square fingerprint (audiobook)")
+    p.add_argument("--no-marketing-variant", action="store_true",
+                   help="audiobook: skip the badged marketing PNG")
     p.add_argument("--out-dir", default=None)
     return p
 
 
 def main(argv: list[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
-    result = export(
-        args.book_id,
-        args.author_id,
-        args.profile,
-        genre=args.genre,
-        title=args.title,
-        subtitle=args.subtitle,
-        author=args.author,
-        publisher=args.publisher,
-        illustration_path=Path(args.illustration_path) if args.illustration_path else None,
-        master_path=Path(args.master_path) if args.master_path else None,
-        out_dir=Path(args.out_dir) if args.out_dir else None,
-    )
+    # Route audiobook (square 1:1) profiles to the lane-4 square exporter;
+    # everything else stays on the lane-3 portrait-reflow path.
+    profile = get_profile(args.profile)
+    if profile.get("surface") == "audiobook":
+        result = export_audiobook(
+            args.book_id,
+            args.author_id,
+            args.profile,
+            genre=args.genre,
+            title=args.title,
+            subtitle=args.subtitle,
+            author=args.author,
+            publisher=args.publisher,
+            brand_id=args.brand_id,
+            marketing_variant=not args.no_marketing_variant,
+            out_dir=Path(args.out_dir) if args.out_dir else None,
+        )
+    else:
+        result = export(
+            args.book_id,
+            args.author_id,
+            args.profile,
+            genre=args.genre,
+            title=args.title,
+            subtitle=args.subtitle,
+            author=args.author,
+            publisher=args.publisher,
+            illustration_path=Path(args.illustration_path) if args.illustration_path else None,
+            master_path=Path(args.master_path) if args.master_path else None,
+            out_dir=Path(args.out_dir) if args.out_dir else None,
+        )
     import json
 
     print(json.dumps(result, indent=2))
