@@ -209,26 +209,21 @@ def test_unknown_genre_refused(dark_illustration: Path,
 def test_batch_lists_books_without_crash(tmp_path: Path) -> None:
     """--batch reads TEACHER_BOOKS and processes each without crashing.
 
-    TEACHER_BOOKS now carry ``teacher`` (a teacher_id), NOT a pre-baked
-    ``author``. The cover batch resolves the byline via the SSOT resolver
-    (``build_epub.resolve_teacher_byline``), which RAISES ``TeacherBylineError``
-    for brands whose pen-name pool is not yet provisioned. As of 2026-07-02 only
-    2/13 teacher brands are provisioned (stillness_press → ahjan, and
-    body_wisdom → pamela_fellows). Both provisioned brands' books are
-    image-bearing (topic ``anxiety`` → non-type-dominant), so with v3 imagery
-    mocked to None they land as ``skipped_no_illustration`` — critically NOT a
-    hard ``fail`` and NOT ``skipped_no_byline``. The unprovisioned brands are
-    skipped cleanly as ``skipped_no_byline`` (fail-loud byline resolver, caught
-    per-book — never a crash, never a teacher-name leak).
+    TEACHER_BOOKS carry ``teacher`` (a teacher_id), NOT a pre-baked ``author``.
+    The cover batch resolves the byline via the SSOT resolver
+    (``build_epub.resolve_teacher_byline``). As of 2026-07-02 the mint lane
+    (Q-BYLINE-POOL-SOURCE-02 = A, OPD-20260702-004) provisioned pen-name pools
+    for ALL 13 teacher brands, so NO book is ``skipped_no_byline`` any longer —
+    every book resolves a byline.
 
-    CONTRACT NOTE: ``'ok'`` (a rendered cover) cannot occur while (a) only these
-    2 brands are provisioned AND (b) both provisioned brands are image-bearing,
-    because the image-bearing path needs v3 imagery on disk (mocked away here).
-    Once the mint lane provisions all 13 pen-name pools — including a
-    type-dominant provisioned brand — this test should re-assert ``'ok'`` in
-    ``statuses``. Until then, the correct contract is: no crash, unprovisioned
-    brands skipped_no_byline, provisioned brands resolve a byline (and here fall
-    through to skipped_no_illustration), and NO book returns ``fail``.
+    With all 13 provisioned, each book falls into exactly one of two buckets:
+      * type-dominant genre (self_worth / boundaries / imposter_syndrome — e.g.
+        adi_da, maat, miki, ra) → no illustration needed → renders → ``ok``;
+      * image-bearing genre (anxiety / grief / burnout / overthinking / etc.)
+        → needs v3 imagery, which is mocked to None here → ``skipped_no_illustration``.
+    The contract is now: no crash, at least one ``ok`` (type-dominant renders),
+    ``skipped_no_illustration`` present (image-bearing, mocked imagery), NO
+    ``skipped_no_byline`` (all provisioned), and NO ``fail``.
     """
     with mock.patch.object(rkc, "_find_v3_imagery", return_value=None), \
          mock.patch.object(rkc, "REPO_ROOT", tmp_path):
@@ -238,14 +233,19 @@ def test_batch_lists_books_without_crash(tmp_path: Path) -> None:
     assert isinstance(results, list)
     assert len(results) >= 13, f"Expected >=13 teacher books, got {len(results)}"
     statuses = {r["status"] for r in results}
-    # Unprovisioned brands are skipped cleanly for want of a pen-name pool.
-    assert "skipped_no_byline" in statuses
-    # Provisioned image-bearing brands fall through to the imagery check.
+    # All 13 brands are provisioned — no book can lack a byline anymore.
+    assert "skipped_no_byline" not in statuses, (
+        f"all 13 teacher brands are provisioned; got {statuses}"
+    )
+    # Type-dominant provisioned brands render a cover (no imagery required).
+    assert "ok" in statuses, (
+        f"expected at least one type-dominant book to render 'ok'; got {statuses}"
+    )
+    # Image-bearing provisioned brands fall through to the imagery check.
     assert "skipped_no_illustration" in statuses
-    # The whole point of the graceful-skip fix: an unprovisioned brand must
-    # never crash the batch or hard-fail — no book ends up 'fail'.
+    # An unprovisioned/teacher-byline book must never crash or hard-fail.
     assert "fail" not in statuses, (
-        f"unprovisioned/teacher-byline books must skip, not fail; got {statuses}"
+        f"teacher-byline books must render or skip cleanly, not fail; got {statuses}"
     )
 
 

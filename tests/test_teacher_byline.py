@@ -126,29 +126,25 @@ def test_missing_pool_raises_not_teacher_fallback():
         resolve_teacher_byline(fake)
 
 
-# ─── Q-BYLINE-POOL-SOURCE-01 — pool-source reconciliation + topic-fit ─────
+# ─── Q-BYLINE-POOL-SOURCE-02 — ALL 13 teacher brands provisioned ─────────
 #
-# The 13 teacher-mode books split into two sets on origin/main:
-#   * RESOLVABLE — the teacher's brand has an authored pen-name pool (SSOT =
-#     config/brand_author_assignments.yaml, mapped to display names via the
-#     roster). Only the fully-expanded teacher brands qualify today.
-#   * ESCALATED — the brand is a roster SKELETON (no authored authors anywhere)
-#     or the teacher has no brand mapping at all (adi_da, joshin). Provisioning
-#     these means AUTHORING new pen-name identities, which is out of scope and
-#     explicitly forbidden — so these RAISE TeacherBylineError by design. They
-#     are tracked here as the known gap, NOT as a test failure.
+# RESOLVED 2026-07-02 (OPD-20260702-004, Q-BYLINE-POOL-SOURCE-02 = A): the mint
+# lane (scripts/brand_management/gen_author_rosters.py --mint-teacher-pools)
+# provisioned deterministic synthetic pen-name pools for the 9 former roster-
+# skeleton brands + two new brands for the previously-unmapped real teachers
+# (adi_da → bright_shore_press, joshin → koya_gate_press). So EVERY teacher-mode
+# book now resolves a registry pen-name — there is NO escalation set anymore.
+# The anti-leak invariant is unchanged: a missing pool still RAISES (never the
+# teacher name); it just no longer fires for any real TEACHER_BOOKS entry.
 
-# Teachers whose brand has NO authored pool on origin/main (documented gap).
-# adi_da / joshin: no brand mapping at all. The rest: roster skeleton brands.
-ESCALATED_TEACHERS = {
-    "adi_da", "joshin",            # no brand mapping in the roster
-    "miyuki", "maat", "master_feung", "master_sha", "master_wu",
-    "miki", "omote", "ra", "sai_ma",  # roster skeleton brands (author_count, no authors)
-}
+# No teacher brand is un-provisioned any longer — the escalation set is empty.
+ESCALATED_TEACHERS: set[str] = set()
 
 
 def _partition_books() -> tuple[list[dict], list[dict]]:
-    """Split TEACHER_BOOKS into (resolvable, escalated) by real pool presence."""
+    """Split TEACHER_BOOKS into (resolvable, escalated) by real pool presence.
+
+    Post-mint every book is resolvable; the escalated list is expected empty."""
     resolvable, escalated = [], []
     for book in TEACHER_BOOKS:
         try:
@@ -165,19 +161,27 @@ def _partition_books() -> tuple[list[dict], list[dict]]:
 RESOLVABLE_BOOKS, ESCALATED_BOOKS = _partition_books()
 
 
-def test_every_teacher_book_resolves_or_is_escalated():
-    """No teacher book is in an undefined state: each either resolves to a real
-    pen-name byline or is on the explicit escalation (un-provisioned) list."""
+def test_every_teacher_book_resolves_to_pen_name():
+    """Post-mint: EVERY teacher book resolves to a real pen-name byline (0
+    escalations, 0 teacher-name leaks). This is the Q-BYLINE-POOL-SOURCE-02 = A
+    outcome — the inverse of the old escalation assertions."""
     for book in TEACHER_BOOKS:
-        if book["teacher"] in ESCALATED_TEACHERS:
-            # Escalated: must RAISE (never silently ship a teacher name).
-            with pytest.raises(TeacherBylineError):
-                resolve_teacher_byline(book)
-        else:
-            pen, _teacher = resolve_teacher_byline(book)
-            assert pen and pen not in BANNED_TEACHER_NAMES, (
-                f"{book['id']}: expected a pen-name byline, got '{pen}'"
-            )
+        pen, _teacher = resolve_teacher_byline(book)
+        assert pen and pen not in BANNED_TEACHER_NAMES, (
+            f"{book['id']}: expected a pen-name byline, got '{pen}'"
+        )
+
+
+def test_all_thirteen_teacher_brands_provisioned():
+    """All 13 TEACHER_BOOKS brands carry a non-empty pen-name pool — no brand is
+    a roster skeleton and no teacher is unmapped anymore (13/13 provisioned)."""
+    assert not ESCALATED_BOOKS, (
+        f"expected 0 un-provisioned teacher brands, got {[b['id'] for b in ESCALATED_BOOKS]}"
+    )
+    assert len(RESOLVABLE_BOOKS) == len(TEACHER_BOOKS) >= 13, (
+        f"expected all {len(TEACHER_BOOKS)} teacher books resolvable, "
+        f"got {len(RESOLVABLE_BOOKS)}"
+    )
 
 
 def test_resolvable_set_is_nonempty():
@@ -225,8 +229,10 @@ def test_topic_band_gating_uses_score_bands():
     teacher topic scores (strong ≥0.7). Spot-check a known strong pairing."""
     # ahjan scores anxiety at 0.9 → strong band.
     assert _teacher_topic_band("ahjan", "anxiety") == "strong"
-    # joshin is unscored → None (must not crash the gate).
-    assert _teacher_topic_band("joshin", "anxiety") is None
+    # joshin is now scored by the mint lane (anxiety 0.85 → strong band). A
+    # genuinely unscored teacher still yields None (must not crash the gate).
+    assert _teacher_topic_band("joshin", "anxiety") == "strong"
+    assert _teacher_topic_band("__never_scored__", "anxiety") is None
 
 
 def test_anti_dup_brand_books_spread_across_pool():
@@ -261,10 +267,26 @@ def test_selection_deterministic_and_no_teacher_leak_resolvable():
         assert t1 in BANNED_TEACHER_NAMES, f"{book['id']}: teaching-by '{t1}' unknown"
 
 
-def test_escalated_books_raise_never_fallback_to_teacher():
-    """Every escalated book RAISES rather than falling back to the teacher name.
-    This is the anti-leak invariant for un-provisioned brands."""
-    assert ESCALATED_BOOKS, "expected some un-provisioned teacher brands to escalate"
-    for book in ESCALATED_BOOKS:
-        with pytest.raises(TeacherBylineError):
-            resolve_teacher_byline(book)
+def test_unprovisioned_brand_still_raises_never_teacher_fallback():
+    """The anti-leak invariant is preserved post-mint: a teacher with NO brand
+    mapping / no pool still RAISES rather than falling back to the teacher name.
+    (No real TEACHER_BOOKS entry is un-provisioned anymore — ESCALATED_BOOKS is
+    empty — so this asserts the invariant via a synthetic unmapped teacher.)"""
+    assert not ESCALATED_BOOKS, (
+        f"all teacher brands should be provisioned; got {[b['id'] for b in ESCALATED_BOOKS]}"
+    )
+    synthetic = {"id": "unprovisioned_x", "teacher": "__no_such_teacher__",
+                 "title": "x", "subtitle": "y", "topic": "anxiety", "lang": "en"}
+    with pytest.raises(TeacherBylineError):
+        resolve_teacher_byline(synthetic)
+
+
+def test_no_teacher_registry_name_in_any_resolved_byline():
+    """Belt-and-braces: across ALL 13 teacher books, no resolved byline is any
+    teacher_registry display/formal name (incl. Sai Maa) — the core anti-leak."""
+    for book in TEACHER_BOOKS:
+        pen, _teacher = resolve_teacher_byline(book)
+        assert pen not in BANNED_TEACHER_NAMES, (
+            f"{book['id']}: teacher name '{pen}' leaked as byline"
+        )
+    assert "Sai Maa" in BANNED_TEACHER_NAMES  # guard the guard
