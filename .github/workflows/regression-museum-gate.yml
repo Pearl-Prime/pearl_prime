@@ -10,6 +10,7 @@ on:
       - "phoenix_v4/**"
       - "config/**"
       - "tests/**"
+      # CI-ALLOWLIST: legacy-registry-ok — paths trigger, not a run_pipeline invocation
       - "scripts/run_pipeline.py"
   workflow_dispatch:
     inputs:

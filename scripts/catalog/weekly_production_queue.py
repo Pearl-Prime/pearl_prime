@@ -1360,6 +1360,7 @@ def execute_pipeline(item: dict) -> None:
     books_dir.mkdir(parents=True, exist_ok=True)
     plans_dir.mkdir(parents=True, exist_ok=True)
 
+    # CI-ALLOWLIST: legacy-registry-ok — explicit --quality-profile draft queue, not a bestseller build
     cmd = [
         sys.executable, str(REPO_ROOT / "scripts" / "run_pipeline.py"),
         "--topic", item["topic_id"],

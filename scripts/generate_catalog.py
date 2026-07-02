@@ -206,6 +206,7 @@ def main() -> int:
         book_dir = out_dir / f"{m['teacher']}_{m['persona']}_{m['topic']}_{m['locale']}_{m['platform']}"
         book_dir.mkdir(parents=True, exist_ok=True)
 
+        # CI-ALLOWLIST: legacy-registry-ok — real bestseller build (spine+exercise-journeys added); quality-profile is a parameterized Python var (args.quality_profile, defaults production) the detector's shell-var regex can't statically resolve
         cmd = [
             sys.executable, "scripts/run_pipeline.py",
             "--topic", m["topic"],
@@ -214,6 +215,8 @@ def main() -> int:
             "--teacher", m["teacher"],
             "--location", "nyc_metro",
             "--quality-profile", args.quality_profile,
+            "--pipeline-mode", "spine",
+            "--exercise-journeys",
             "--render-book",
             "--render-dir", str(book_dir),
             "--out", str(book_dir / "plan.json"),

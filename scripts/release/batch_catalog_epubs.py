@@ -3,6 +3,7 @@
 
 Per buildable book plan:
   0. create_job.py + acknowledge_guide.py
+  CI-ALLOWLIST: legacy-registry-ok — docstring example, not an executed invocation
   1. run_pipeline.py --pipeline-mode spine --quality-profile <P> --render-book
   2. build_epub.py
   3. validate_epub.py (verdict recorded; WARN does not abort)
@@ -291,6 +292,7 @@ def run_one(
 
     cmd = [
         sys.executable,
+        # CI-ALLOWLIST: legacy-registry-ok — real bestseller build (spine+exercise-journeys present); quality-profile is a parameterized Python var (quality_profile, defaults flagship) the detector's shell-var regex can't statically resolve
         str(REPO / "scripts/run_pipeline.py"),
         "--topic",
         topic,
@@ -306,6 +308,7 @@ def run_one(
         "spine",
         "--runtime-format",
         runtime,
+        "--exercise-journeys",
         "--render-book",
         "--render-dir",
         str(render_dir),

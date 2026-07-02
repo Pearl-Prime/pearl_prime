@@ -18,6 +18,7 @@ Answers ONE question with evidence before the ~1000-plan sweep is allowed:
 Pipeline per cell (persona × topic × runtime_format):
   1. PLAN          — generate BookStructurePlan (deterministic, no LLM/GPU).
   2. PLAN-COHESION — structural cohesion verdict from the plan alone.
+  CI-ALLOWLIST: legacy-registry-ok — docstring pipeline description, not an executed invocation
   3. ASSEMBLE      — run_pipeline.py --render-book → book.txt + gate reports
                      (register_gate + EI v2 deterministic + book_pass).
   4. EQUIVALENCE   — assembled chapter_count / arc-position order == plan?

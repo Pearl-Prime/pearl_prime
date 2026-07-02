@@ -77,6 +77,13 @@ bestseller / catalog render work.
 Production bestseller builds MUST use the four-piece chord:
 `--pipeline-mode spine --quality-profile production --exercise-journeys`.
 CI blocks incomplete chords in changed production invocations (`check_canonical_pipeline_path.py`).
+This gate is a **required status check** ("Drift detectors") — a chord-incomplete
+production `run_pipeline.py` invocation in a changed file **cannot merge**. If your PR
+touches a run_pipeline invocation that is legitimately NOT a bestseller build (a smoke
+test, a `--quality-profile draft` queue, a QA harness, or a prose/docstring reference —
+not an executed build), mark it with a same-or-preceding-line comment
+`# CI-ALLOWLIST: legacy-registry-ok — <reason>` to exempt that block. Do NOT weaken the
+gate to pass; fix real bestseller builds by adding the missing chord flags.
 
 ## Pearl_GitHub Scope
 

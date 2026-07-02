@@ -142,6 +142,7 @@ def build_package(
         book_dir = books_dir / book_name
         book_dir.mkdir(exist_ok=True)
 
+        # CI-ALLOWLIST: legacy-registry-ok — parameterized builder (quality via --quality-profile, defaults draft), not a fixed bestseller build
         cmd = [
             sys.executable, str(REPO_ROOT / "scripts" / "run_pipeline.py"),
             "--topic", m["topic"],

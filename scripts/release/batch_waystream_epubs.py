@@ -3,6 +3,7 @@
 
 Per plan book_id:
   0. create_job.py (ebook) + acknowledge_guide.py in workspace
+  CI-ALLOWLIST: legacy-registry-ok — docstring example, not an executed invocation
   1. run_pipeline.py --pipeline-mode spine --render-book --workspace <dir>
   2. build_epub.py with plan metadata + plan-keyed cover
 
@@ -198,6 +199,7 @@ def run_one(plan: dict, week: str, dry_run: bool, force: bool) -> dict:
         "--arc", str(arc),
         "--pipeline-mode", "spine",
         "--runtime-format", runtime,
+        "--exercise-journeys",
         "--render-book",
         "--render-dir", str(render_dir),
         "--workspace", str(render_dir),

@@ -45,6 +45,7 @@ jobs:
       - name: Run pipeline
         run: |
           mkdir -p artifacts/smoke
+          # CI-ALLOWLIST: legacy-registry-ok — smoke test, intentionally not the full bestseller chord
           PYTHONPATH=. python3 scripts/run_pipeline.py \
             --topic "${{ inputs.topic }}" --persona "${{ inputs.persona }}" \
             --arc "config/source_of_truth/master_arcs/${{ inputs.arc }}" \

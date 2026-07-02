@@ -75,7 +75,7 @@ jobs:
                 set +e
                 PYTHONPATH=. python3 scripts/run_pipeline.py \
                   --topic "$topic" --persona "$brand" --arc "$ARC_PATH" \
-                  --pipeline-mode spine --runtime-format "$fmt" \
+                  --pipeline-mode spine --exercise-journeys --runtime-format "$fmt" \
                   --no-job-check --render-book --render-dir "$OUT_DIR" \
                   --out "$OUT_DIR/plan.json" \
                   --no-generate-freebies --no-update-freebie-index \

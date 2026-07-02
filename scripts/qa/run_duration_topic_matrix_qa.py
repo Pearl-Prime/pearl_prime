@@ -228,6 +228,7 @@ def _run_pipeline(
     render_dir.mkdir(parents=True, exist_ok=True)
     cmd = [
         sys.executable,
+        # CI-ALLOWLIST: legacy-registry-ok — duration×topic QA matrix harness, not a shipping build
         str(REPO_ROOT / "scripts" / "run_pipeline.py"),
         "--pipeline-mode",
         "spine",
