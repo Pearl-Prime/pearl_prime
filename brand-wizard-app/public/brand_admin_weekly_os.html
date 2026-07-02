@@ -154,13 +154,13 @@ html,body{width:100%;height:100%;font-family:"DM Sans",sans-serif;background:#0e
 <!-- Top Bar -->
 <div id="topbar">
   <h1 data-i18n="topbar.title">Brand Admin</h1>
-  <span class="pill" id="brand-pill">No brand</span>
+  <span class="pill" id="brand-pill" data-i18n="wos.noBrand">No brand</span>
   <div class="nav-pills">
     <button class="nav-pill active" data-phase="1" data-i18n="nav.setup" onclick="showPhase(1)">Setup</button>
     <button class="nav-pill locked" data-phase="2" data-i18n="nav.upload" onclick="showPhase(2)">Upload</button>
     <button class="nav-pill locked" data-phase="3" data-i18n="nav.weekly" onclick="showPhase(3)">Weekly</button>
   </div>
-  <div class="progress-text" id="top-progress">Phase 1 of 3</div>
+  <div class="progress-text" id="top-progress" data-i18n="wos.phaseStatic">Phase 1 of 3</div>
 </div>
 
 <!-- Main Progress -->
@@ -178,7 +178,7 @@ html,body{width:100%;height:100%;font-family:"DM Sans",sans-serif;background:#0e
     <span class="phase-label" id="pl3" data-i18n="phase.weeklyRhythm">Weekly Rhythm</span>
   </div>
   <div class="bar-track"><div class="bar-fill" id="bar-fill" style="width:0"></div></div>
-  <div class="pct-text" id="pct-text">0% complete</div>
+  <div class="pct-text" id="pct-text" data-i18n="wos.pctStatic">0% complete</div>
 </div>
 
 <!-- Brand Picker -->
@@ -216,6 +216,12 @@ html,body{width:100%;height:100%;font-family:"DM Sans",sans-serif;background:#0e
 </div>
 
 <script src="js/toast.js"></script>
+<script>
+// Locale-aware brand focus (JA); data ships English focus for all locale slices.
+var FOCUS_JA = {"Boundaries, self-worth, integrity, truth-based living": "境界線、自己肯定感、誠実さ、真実に根ざした生き方", "Burnout recovery, nervous system regulation": "燃え尽きからの回復、神経系の調整", "Career transitions, feeling unstuck": "キャリアの転機、停滞感からの脱却", "Creative blocks, artistic expression": "創作の行き詰まり、芸術的表現", "Discipline, resilience, courage, mental toughness": "規律、回復力、勇気、精神的な強さ", "Energy management, vitality, life force balance": "エネルギー管理、活力、生命力のバランス", "Executive performance, leadership under pressure": "エグゼクティブの成果、重圧下のリーダーシップ", "Gen Z grounding, identity formation, confidence building": "Z世代の地に足のついた在り方、アイデンティティ形成、自信の育成", "Grief integration, emotional healing, compassion practices": "悲嘆の統合、感情の癒し、慈悲の実践", "Heart-led awakening, cosmic transmission, soul remembrance, frequency-based guidance": "心に導かれる目覚め、宇宙的な伝授、魂の想起、周波数に基づく導き", "Life transitions, legacy, reinvention": "人生の転機、遺産、自己再生", "Meditation, mindfulness, inner peace, spiritual illumination": "瞑想、マインドフルネス、内なる平安、霊的な照らし", "Mental clarity, overthinking relief, contemplative-inspired calm": "思考の明晰さ、考えすぎの緩和、観想に根ざした静けさ", "Nature-based grounding, presence, contemplative stillness": "自然に根ざした落ち着き、今ここへの臨在、観想的な静けさ", "Nervous system regulation, somatic awareness, body-based healing": "神経系の調整、身体感覚への気づき、身体に根ざした癒し", "Neurodivergent focus, ADHD support": "神経多様性への集中支援、ADHDサポート", "Parenting stress, co-regulation": "子育てのストレス、共調整（コ・レギュレーション）", "Peak performance, focus, productivity": "ピークパフォーマンス、集中、生産性", "Purpose, meaning, existential clarity, cosmic perspective": "目的、意味、実存的な明晰さ、宇宙的な視座", "Relationship repair, co-regulation": "関係の修復、共調整（コ・レギュレーション）", "Shingon ritual technology to disrupt mental spirals without negating the mind; interrupt the thought-loop with embodied ritual": "心を否定せずに思考の渦を断つ真言密教の儀礼技法——身体に根ざした儀礼で思考のループを断ち切る", "Sleep anxiety, insomnia, nighttime rest": "睡眠不安、不眠、夜の休息", "Sleep, rest, gentle recovery, soft restoration": "睡眠、休息、穏やかな回復、やさしい立て直し", "Social anxiety, confidence building": "社交不安、自信の育成", "Spiritual awakening, radical self-inquiry, devotional practice": "霊的な目覚め、徹底した自己探究、献身の実践", "Trauma recovery, spiritual healing, soul-level repair": "トラウマからの回復、霊的な癒し、魂レベルの修復", "attention regulation; feel less scattered": "注意の調整——散漫さをやわらげる", "consistent practice; connection to something larger": "継続的な実践——より大きな何かとのつながり", "data-driven habits; optimize and feel good": "データに基づく習慣——最適化し、心地よくある", "emotional regulation; mental toughness": "感情の調整——精神的な強さ", "evidence-based habits; feel in control of aging": "科学的根拠に基づく習慣——加齢を自分でコントロールする感覚", "focus and ship; sustain without burning out": "集中して形にする——燃え尽きずに続ける", "focus and sleep; stop spiraling": "集中と睡眠——思考の渦を止める", "gentle self-inquiry; feel safe exploring": "やさしい自己探究——安心して探究できる", "hormone-aware habits; feel in control of body": "ホルモンに配慮した習慣——身体を自分でコントロールする感覚", "integrate between sessions; feel safe in body": "セッションの合間の統合——身体の中で安心していられる", "morning routine; feel set for the day": "朝のルーティン——一日への準備が整う感覚", "peak performance; confident under pressure": "ピークパフォーマンス——重圧下でも自信を保つ", "quiet the 2am overthinking mind; find meaning without religion": "午前2時の考えすぎる心を静める——宗教によらず意味を見出す", "somatic regulation; reset in the middle of the day": "ソマティックな調整——一日の途中でリセットする"};
+function wosLang(){ try{ var p=new URLSearchParams(location.search).get('lang'); if(p) return p.slice(0,2); var s=localStorage.getItem('pearl_prime_locale'); if(s) return s.slice(0,2); return (navigator.language||'en').slice(0,2); }catch(e){ return 'en'; } }
+function localizeFocus(f){ return (wosLang()==='ja' && FOCUS_JA[f]) ? FOCUS_JA[f] : f; }
+</script>
 <script>
 // ── Brand Data — unified 39×14 from brand_admin_brands.json (gen_brand_admin_brands.py);
 // the const below is a stale fallback if the fetch fails. ──
@@ -722,7 +728,7 @@ function renderPicker(){
   for(const [bid,b] of Object.entries(B)){
     h+=`<div class="brand-card" onclick="selectBrand('${bid}')">
       <h3>${b.d}</h3>
-      <div class="focus">${b.f}</div>
+      <div class="focus">${localizeFocus(b.f)}</div>
       ${b.tm?`<span class="teacher-tag">${b.t}</span>`:''}
     </div>`;
   }

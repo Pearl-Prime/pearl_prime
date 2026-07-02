@@ -3603,7 +3603,7 @@ export default function BrandWizard() {
   const nextStep = () => { if (step < 8) { setStep((s) => s + 1); scrollTop(); } };
   const prevStep = () => { if (step > 0) { setStep((s) => s - 1); scrollTop(); } else { setPhase("intro"); setIntroPage(1); scrollTop(); } };
   const goToHowItWorks = () => { setPhase("intro"); setIntroPage(1); scrollTop(); };
-  const goToTeacherShowcase = () => { window.location.href = "teacher_showcase.html"; };
+  const goToTeacherShowcase = () => { window.location.href = "teacher_showcase-zh.html"; };
 
   // If ?teacher= / ?mode=composite / ?mode=music in URL, skip intro and jump to wizard step 1.
   useEffect(() => {

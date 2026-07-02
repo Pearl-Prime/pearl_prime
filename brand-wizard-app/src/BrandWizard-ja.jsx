@@ -1,5 +1,6 @@
 import { useState, useCallback, useRef, useMemo, useEffect } from "react";
-import { useTranslation } from "./useTranslation.jsx";
+import { useLocale } from "./i18n.jsx";
+import { pickJaI18n, pickJaI18nFields, translateVoiceTone10, useJaWizardTranslation } from "./jaI18nGuard.js";
 import { matchBrand } from "./brandMatch.js";
 import { ChevronRight, ChevronLeft, Eye, Sparkles, BookOpen, Mic, Film, Palette, Heart, Target, Zap, Shield, Sun, Moon, Flame, Feather, Brain, Compass, Star, Check, AlertTriangle, Download, Play, PenTool, Image, Layers, ArrowRight, Users, BarChart3, TrendingUp, Radio, Headphones, Tv, Smartphone, BookMarked, GraduationCap, Clock, Rocket, Award, Crown, Globe, Volume2, Brush, Activity, Search, Hash, Tag, Grip, CircleDot, SlidersHorizontal } from "lucide-react";
 import { OutputProofStrip } from "./onboarding/OutputProofStrip.jsx";
@@ -357,110 +358,110 @@ const VOICE_TONE_10 = {
       position: 1, label: "超優しい",
       technique: "'You might notice...' で始まる — 命令せず、読者と並んで観察するだけ",
       benefits: [
-        "Creates immediate psychological safety — reader's nervous system downregulates on first page",
-        "Disarms shame and self-criticism that blocks receptivity to new ideas",
-        "Readers who've been told 'just try harder' finally feel seen instead of lectured",
-        "Builds trust with trauma-aware audiences who distrust authority-tone content",
-        "Reduces book abandonment — gentle entry keeps anxious readers turning pages",
+        "TODO_JA:voiceToneBenefits.gentleDirect.p1.b0",
+        "TODO_JA:voiceToneBenefits.gentleDirect.p1.b1",
+        "TODO_JA:voiceToneBenefits.gentleDirect.p1.b2",
+        "TODO_JA:voiceToneBenefits.gentleDirect.p1.b3",
+        "TODO_JA:voiceToneBenefits.gentleDirect.p1.b4",
       ],
     },
     {
       position: 2, label: "とても優しい",
       technique: "許可の言語を使う：'It's okay to...'（〜していいんですよ）や'You're allowed to...'（〜が許されています）",
       benefits: [
-        "Gives explicit permission to feel — many readers have never received this",
-        "Counteracts internalized 'suck it up' messaging from family or culture",
-        "Emotionally overwhelmed readers feel validated rather than pathologized",
-        "Creates a sense of being parented well — meeting an unmet developmental need",
-        "Reduces the shame spiral that prevents readers from doing the exercises",
+        "TODO_JA:voiceToneBenefits.gentleDirect.p2.b0",
+        "TODO_JA:voiceToneBenefits.gentleDirect.p2.b1",
+        "TODO_JA:voiceToneBenefits.gentleDirect.p2.b2",
+        "TODO_JA:voiceToneBenefits.gentleDirect.p2.b3",
+        "TODO_JA:voiceToneBenefits.gentleDirect.p2.b4",
       ],
     },
     {
       position: 3, label: "やさしい",
       technique: "エクササイズは指示ではなく招待として提示 — 'If you'd like, try...'（よければ、試してみてください）",
       benefits: [
-        "Respects reader autonomy — they choose to engage rather than being told to",
-        "People with control-related trauma can participate without triggering resistance",
+        "TODO_JA:voiceToneBenefits.gentleDirect.p3.b0",
+        "TODO_JA:voiceToneBenefits.gentleDirect.p3.b1",
         "エクササイズの完了率が高い — 招待は命令より安心感がある",
-        "Builds intrinsic motivation rather than compliance-based engagement",
-        "Reader feels like a collaborator, not a patient — preserves dignity",
+        "TODO_JA:voiceToneBenefits.gentleDirect.p3.b2",
+        "TODO_JA:voiceToneBenefits.gentleDirect.p3.b3",
       ],
     },
     {
       position: 4, label: "ソフト",
       technique: "意図的な間と呼吸を意識したリズムによる、ゆったりとした文章テンポ",
       benefits: [
-        "Reading pace mirrors meditation — the book itself becomes a calming practice",
-        "Anxious readers' heart rate actually slows when prose rhythm is paced",
-        "Creates space for emotional processing between concepts",
+        "TODO_JA:voiceToneBenefits.gentleDirect.p4.b0",
+        "TODO_JA:voiceToneBenefits.gentleDirect.p4.b1",
+        "TODO_JA:voiceToneBenefits.gentleDirect.p4.b2",
         "オーディオブック版はパニック時の落ち着き手段として機能する",
-        "Readers report feeling 'held' by the writing — attachment need met through text",
+        "TODO_JA:voiceToneBenefits.gentleDirect.p4.b3",
       ],
     },
     {
       position: 5, label: "バランス・やさしめ",
       technique: "方向性を示す前に承認する — まず感情を認め、それから道を提示する",
       benefits: [
-        "Mirrors ideal therapeutic rapport — feel understood, then open to change",
-        "Both emotional and logical readers find their entry point",
-        "Prevents the 'this book doesn't get me' abandonment that pure advice triggers",
-        "Creates a rhythm readers can predict and trust across chapters",
-        "Balanced enough for skeptics while warm enough for emotionally-driven readers",
+        "TODO_JA:voiceToneBenefits.gentleDirect.p5.b0",
+        "TODO_JA:voiceToneBenefits.gentleDirect.p5.b1",
+        "TODO_JA:voiceToneBenefits.gentleDirect.p5.b2",
+        "TODO_JA:voiceToneBenefits.gentleDirect.p5.b3",
+        "TODO_JA:voiceToneBenefits.gentleDirect.p5.b4",
       ],
     },
     {
       position: 6, label: "バランス・直接的",
       technique: "温かみを持った明確な真実の表明 — 'Here's what's actually happening'（これが実際に起きていることです）",
       benefits: [
-        "Readers get the 'real talk' they crave without feeling attacked",
-        "Builds authority — readers trust a voice that tells them the truth kindly",
-        "Works for both self-help newcomers and experienced personal-development readers",
-        "Strong TikTok clip potential — direct truth cuts through scroll noise",
-        "Creates quotable moments readers screenshot and share",
+        "TODO_JA:voiceToneBenefits.gentleDirect.p6.b0",
+        "TODO_JA:voiceToneBenefits.gentleDirect.p6.b1",
+        "TODO_JA:voiceToneBenefits.gentleDirect.p6.b2",
+        "TODO_JA:voiceToneBenefits.gentleDirect.p6.b3",
+        "TODO_JA:voiceToneBenefits.gentleDirect.p6.b4",
       ],
     },
     {
       position: 7, label: "ファーム",
       technique: "行動優先の文章構成 — まず何をすべきかを示し、理由はその後で説明する",
       benefits: [
-        "Overwhelmed readers need fewer decisions — clear direction reduces cognitive load",
-        "Performance-oriented readers respond to efficiency and structure",
-        "Higher conversion to action — readers do the exercises, not just read about them",
-        "Creates a sense of being coached by someone who knows what they're doing",
-        "Stronger titles and hooks for ad copy — direct language converts better",
+        "TODO_JA:voiceToneBenefits.gentleDirect.p7.b0",
+        "TODO_JA:voiceToneBenefits.gentleDirect.p7.b1",
+        "TODO_JA:voiceToneBenefits.gentleDirect.p7.b2",
+        "TODO_JA:voiceToneBenefits.gentleDirect.p7.b3",
+        "TODO_JA:voiceToneBenefits.gentleDirect.p7.b4",
       ],
     },
     {
       position: 8, label: "直接的",
       technique: "短くて力強い文章。無駄なし。すべての言葉が役割を果たす。",
       benefits: [
-        "ADHD-friendly — attention captured and held through rhythm and brevity",
-        "Male-skewing audience feels respected — no unnecessary emotional padding",
-        "Social media clips hit harder — short sentences = viral text-on-screen content",
-        "Builds momentum — readers feel they're making progress fast",
-        "Cuts through the 'every self-help book sounds the same' fatigue",
+        "TODO_JA:voiceToneBenefits.gentleDirect.p8.b0",
+        "TODO_JA:voiceToneBenefits.gentleDirect.p8.b1",
+        "TODO_JA:voiceToneBenefits.gentleDirect.p8.b2",
+        "TODO_JA:voiceToneBenefits.gentleDirect.p8.b3",
+        "TODO_JA:voiceToneBenefits.gentleDirect.p8.b4",
       ],
     },
     {
       position: 9, label: "かなり率直",
       technique: "対立的な誠実さ — 'You already know this. You're avoiding it.'（あなたはすでに知っている。避けているだけだ。）",
       benefits: [
-        "Breaks through denial — some readers need to be challenged, not comforted",
-        "High-achiever audience respects the courage to say what others won't",
-        "Creates 'I feel called out' moments that drive word-of-mouth sharing",
-        "Differentiates from the soft-tone self-help market — stands out on shelves",
-        "Builds fierce loyalty — readers who connect with this voice become evangelists",
+        "TODO_JA:voiceToneBenefits.gentleDirect.p9.b0",
+        "TODO_JA:voiceToneBenefits.gentleDirect.p9.b1",
+        "TODO_JA:voiceToneBenefits.gentleDirect.p9.b2",
+        "TODO_JA:voiceToneBenefits.gentleDirect.p9.b3",
+        "TODO_JA:voiceToneBenefits.gentleDirect.p9.b4",
       ],
     },
     {
       position: 10, label: "超率直",
       technique: "命令形と指示 — 'Stop reading. Do this now. Then come back.'（読むのをやめろ。今すぐやれ。それから戻ってこい。）",
       benefits: [
-        "Maximum behavior change — no ambiguity about what the reader should do",
-        "Creates drill-sergeant loyalty in readers who respond to structure",
+        "TODO_JA:voiceToneBenefits.gentleDirect.p10.b0",
+        "TODO_JA:voiceToneBenefits.gentleDirect.p10.b1",
         "オーディオブック版はリアルタイムのコーチングセッションとして機能する",
-        "Content repurposes perfectly into course modules and challenge formats",
-        "Readers complete entire programs — the commanding voice maintains momentum",
+        "TODO_JA:voiceToneBenefits.gentleDirect.p10.b2",
+        "TODO_JA:voiceToneBenefits.gentleDirect.p10.b3",
       ],
     },
   ],
@@ -469,10 +470,10 @@ const VOICE_TONE_10 = {
       position: 1, label: "超シンプル",
       technique: "小学校5年生レベルの読みやすさ — すべての文が完全に明快で専門用語ゼロ",
       benefits: [
-        "Accessible to ESL readers — opens international markets dramatically",
-        "Gen Alpha and young Gen Z can engage without barrier",
-        "Readers in emotional crisis can absorb content when cognition is impaired",
-        "Widest possible market reach — no educational prerequisite",
+        "TODO_JA:voiceToneBenefits.simpleDeep.p1.b0",
+        "TODO_JA:voiceToneBenefits.simpleDeep.p1.b1",
+        "TODO_JA:voiceToneBenefits.simpleDeep.p1.b2",
+        "TODO_JA:voiceToneBenefits.simpleDeep.p1.b3",
         "オーディオブックの理解度が最も高い — 巻き戻す必要がない",
       ],
     },
@@ -480,10 +481,10 @@ const VOICE_TONE_10 = {
       position: 2, label: "とてもシンプル",
       technique: "段落ごとに一つの概念 — 小さく明確なブロックで理解を積み上げる",
       benefits: [
-        "ADHD readers can follow without losing the thread",
-        "Each paragraph is a complete, usable unit — easy to highlight and save",
-        "Works perfectly as TikTok carousel content — one slide per concept",
-        "Readers feel smart and capable rather than intimidated",
+        "TODO_JA:voiceToneBenefits.simpleDeep.p2.b0",
+        "TODO_JA:voiceToneBenefits.simpleDeep.p2.b1",
+        "TODO_JA:voiceToneBenefits.simpleDeep.p2.b2",
+        "TODO_JA:voiceToneBenefits.simpleDeep.p2.b3",
         "エクササイズ完了率が高い — 指示が誤解不可能",
       ],
     },
@@ -491,88 +492,88 @@ const VOICE_TONE_10 = {
       position: 3, label: "シンプル",
       technique: "日常的な比喩 — 'It's like clearing your browser tabs'（ブラウザのタブを閉じるようなもの）",
       benefits: [
-        "Abstract concepts land instantly through familiar reference points",
-        "Readers explain ideas to friends using your metaphors — organic word-of-mouth",
-        "Creates 'aha moments' without requiring background knowledge",
-        "Content is meme-able and shareable on social platforms",
-        "Bridge between clinical concepts and lived experience",
+        "TODO_JA:voiceToneBenefits.simpleDeep.p3.b0",
+        "TODO_JA:voiceToneBenefits.simpleDeep.p3.b1",
+        "TODO_JA:voiceToneBenefits.simpleDeep.p3.b2",
+        "TODO_JA:voiceToneBenefits.simpleDeep.p3.b3",
+        "TODO_JA:voiceToneBenefits.simpleDeep.p3.b4",
       ],
     },
     {
       position: 4, label: "アクセシブル",
       technique: "時折深みを持つ明確な説明 — 章ごとに一つの新しい用語を導入する",
       benefits: [
-        "Readers feel they're learning without being overwhelmed",
-        "Builds vocabulary gradually — reader grows with the book",
-        "Strikes the sweet spot for mainstream self-help audience",
-        "Good for podcast interviews — author can explain simply but show depth",
-        "Creates authority without alienation — reader trusts the writer's knowledge",
+        "TODO_JA:voiceToneBenefits.simpleDeep.p4.b0",
+        "TODO_JA:voiceToneBenefits.simpleDeep.p4.b1",
+        "TODO_JA:voiceToneBenefits.simpleDeep.p4.b2",
+        "TODO_JA:voiceToneBenefits.simpleDeep.p4.b3",
+        "TODO_JA:voiceToneBenefits.simpleDeep.p4.b4",
       ],
     },
     {
       position: 5, label: "バランス型",
       technique: "平易な言葉と豊かな概念の混在 — 'simply put'（簡単に言えば）のような橋渡し表現を使用",
       benefits: [
-        "Serves the widest range of educational backgrounds",
-        "Book clubs can discuss at multiple levels — everyone finds something",
+        "TODO_JA:voiceToneBenefits.simpleDeep.p5.b0",
+        "TODO_JA:voiceToneBenefits.simpleDeep.p5.b1",
         "オーディオブックでの転換がスムーズ — ナレーターが深さの変化を伝えられる",
-        "Strong review potential — readers feel both comforted and challenged",
-        "Longest shelf life — doesn't feel too basic or too academic after rereading",
+        "TODO_JA:voiceToneBenefits.simpleDeep.p5.b2",
+        "TODO_JA:voiceToneBenefits.simpleDeep.p5.b3",
       ],
     },
     {
       position: 6, label: "思慮深い",
       technique: "複数の文で考えを展開 — 洞察に至る前に論点を積み上げる",
       benefits: [
-        "Intellectually curious readers feel respected and engaged",
-        "Creates page-turner quality — readers want to see where the idea goes",
-        "Strong for series — later volumes can deepen without losing the audience",
-        "Generates rich discussion material for therapy and group contexts",
-        "Differentiates from shallow pop-psychology — earns premium pricing",
+        "TODO_JA:voiceToneBenefits.simpleDeep.p6.b0",
+        "TODO_JA:voiceToneBenefits.simpleDeep.p6.b1",
+        "TODO_JA:voiceToneBenefits.simpleDeep.p6.b2",
+        "TODO_JA:voiceToneBenefits.simpleDeep.p6.b3",
+        "TODO_JA:voiceToneBenefits.simpleDeep.p6.b4",
       ],
     },
     {
       position: 7, label: "リッチ",
       technique: "重層的な意味 — 表面的に読んでも成立するが、再読することでより深い意味が現れる",
       benefits: [
-        "Books become reference texts readers return to — longer customer lifetime value",
-        "Creates intellectual community — fans discuss hidden layers online",
+        "TODO_JA:voiceToneBenefits.simpleDeep.p7.b0",
+        "TODO_JA:voiceToneBenefits.simpleDeep.p7.b1",
         "音声版は繰り返し聴くことで報われる — リピートエンゲージメントを促進",
-        "Attracts therapist and counselor audiences who recommend books to clients",
-        "Content supports mastercourse format — enough depth for multi-week study",
+        "TODO_JA:voiceToneBenefits.simpleDeep.p7.b2",
+        "TODO_JA:voiceToneBenefits.simpleDeep.p7.b3",
       ],
     },
     {
       position: 8, label: "深い",
       technique: "哲学と科学を織り交ぜる — 説教せずに研究を引用する",
       benefits: [
-        "Positions author as genuine authority, not just a motivational speaker",
-        "Attracts Gen X wisdom-seeker market — highest-spending demographic",
-        "Strong for keynote and TEDx content — ideas are substantive enough for stage",
-        "Creates books that therapists assign — institutional recommendation pipeline",
-        "Long-tail SEO potential — niche depth owns specific search territories",
+        "TODO_JA:voiceToneBenefits.simpleDeep.p8.b0",
+        "TODO_JA:voiceToneBenefits.simpleDeep.p8.b1",
+        "TODO_JA:voiceToneBenefits.simpleDeep.p8.b2",
+        "TODO_JA:voiceToneBenefits.simpleDeep.p8.b3",
+        "TODO_JA:voiceToneBenefits.simpleDeep.p8.b4",
       ],
     },
     {
       position: 9, label: "かなり深い",
       technique: "学際的な総合 — 神経科学、哲学、実践をつなぎ合わせる",
       benefits: [
-        "Creates 'the book that changed my life' reactions — viral review potential",
-        "Thought-leader positioning — author becomes known for original frameworks",
-        "Academic and clinical citation potential — extends reach beyond consumer market",
+        "TODO_JA:voiceToneBenefits.simpleDeep.p9.b0",
+        "TODO_JA:voiceToneBenefits.simpleDeep.p9.b1",
+        "TODO_JA:voiceToneBenefits.simpleDeep.p9.b2",
         "プレミアムオーディオブック価格に見合う — 長時間音声に十分な内容",
-        "International translation appeal — depth translates better than colloquialisms",
+        "TODO_JA:voiceToneBenefits.simpleDeep.p9.b3",
       ],
     },
     {
       position: 10, label: "超深い",
       technique: "大学院レベルの概念と独自のフレームワーク — 読者に成長を促す",
       benefits: [
-        "Creates intellectual legacy — books referenced for decades",
-        "Attracts high-income, high-education readers with strongest purchasing power",
-        "Supports masterclass and certification program development",
-        "Strong institutional and university adoption potential",
-        "Author platform becomes a school of thought, not just a personal brand",
+        "TODO_JA:voiceToneBenefits.simpleDeep.p10.b0",
+        "TODO_JA:voiceToneBenefits.simpleDeep.p10.b1",
+        "TODO_JA:voiceToneBenefits.simpleDeep.p10.b2",
+        "TODO_JA:voiceToneBenefits.simpleDeep.p10.b3",
+        "TODO_JA:voiceToneBenefits.simpleDeep.p10.b4",
       ],
     },
   ],
@@ -581,10 +582,10 @@ const VOICE_TONE_10 = {
       position: 1, label: "超感情的",
       technique: "章はストーリーから始まる — すべての概念が実体験の語りを通して登場する",
       benefits: [
-        "Mirror neurons activate — reader physically feels what characters feel",
-        "Emotional memory encoding — readers remember content 6x longer than facts alone",
-        "Creates the 'I cried reading this' reviews that drive viral sharing",
-        "Deeply cathartic for readers carrying unprocessed emotion",
+        "TODO_JA:voiceToneBenefits.emotionalLogical.p1.b0",
+        "TODO_JA:voiceToneBenefits.emotionalLogical.p1.b1",
+        "TODO_JA:voiceToneBenefits.emotionalLogical.p1.b2",
+        "TODO_JA:voiceToneBenefits.emotionalLogical.p1.b3",
         "オーディオブック版が伴侶になる — リスナーがナレーターと疑似社会的絆を形成する",
       ],
     },
@@ -592,99 +593,99 @@ const VOICE_TONE_10 = {
       position: 2, label: "とても感情的",
       technique: "文章に高い脆弱性 — 著者自身の傷が文章の中に見える",
       benefits: [
-        "Readers feel less alone — 'someone else has been through this' is profoundly healing",
-        "Dismantles the 'expert on a pedestal' barrier that blocks real connection",
-        "Creates intense word-of-mouth — readers personally recommend to friends in crisis",
-        "Strong podcast interview content — vulnerable stories captivate audiences",
-        "Builds fierce community — readers bond with each other through shared emotional resonance",
+        "TODO_JA:voiceToneBenefits.emotionalLogical.p2.b0",
+        "TODO_JA:voiceToneBenefits.emotionalLogical.p2.b1",
+        "TODO_JA:voiceToneBenefits.emotionalLogical.p2.b2",
+        "TODO_JA:voiceToneBenefits.emotionalLogical.p2.b3",
+        "TODO_JA:voiceToneBenefits.emotionalLogical.p2.b4",
       ],
     },
     {
       position: 3, label: "感情的",
       technique: "エクササイズにはジャーナリングや体感作業が含まれる — 'Notice what arises'（何が湧き上がるかに気づいてください）",
       benefits: [
-        "Develops reader's emotional intelligence — a lifelong skill beyond the book",
-        "Somatic awareness exercises create real physiological change, not just insight",
-        "Especially transformative for men and high-performers who've been cut off from feeling",
-        "Creates a practice the reader continues after the book — ongoing engagement",
-        "Strong workbook companion potential — emotional exercises adapt to journal format",
+        "TODO_JA:voiceToneBenefits.emotionalLogical.p3.b0",
+        "TODO_JA:voiceToneBenefits.emotionalLogical.p3.b1",
+        "TODO_JA:voiceToneBenefits.emotionalLogical.p3.b2",
+        "TODO_JA:voiceToneBenefits.emotionalLogical.p3.b3",
+        "TODO_JA:voiceToneBenefits.emotionalLogical.p3.b4",
       ],
     },
     {
       position: 4, label: "温かみのある",
       technique: "読者を 'you'（あなた）と親密な口調で呼ぶ — 親しい友人からの手紙のように",
       benefits: [
-        "Attachment theory activation — reader feels securely 'held' by the text",
-        "Reduces defensiveness — intimate tone bypasses intellectual resistance",
-        "Highest read-through rates — readers don't want the 'conversation' to end",
+        "TODO_JA:voiceToneBenefits.emotionalLogical.p4.b0",
+        "TODO_JA:voiceToneBenefits.emotionalLogical.p4.b1",
+        "TODO_JA:voiceToneBenefits.emotionalLogical.p4.b2",
         "オーディオブックがプライベートなセラピーセッションのように感じられる — 深い個人的つながり",
-        "Strong for grief and healing topics where clinical distance would feel cold",
+        "TODO_JA:voiceToneBenefits.emotionalLogical.p4.b3",
       ],
     },
     {
       position: 5, label: "バランス型",
       technique: "感情的な導入、論理的な中盤、統合的な結末 — 各章がひとつの旅",
       benefits: [
-        "Both heart and head readers feel served in every chapter",
-        "Creates the most balanced reviews — 'moving AND practical' is the gold standard",
-        "Works across all platforms — emotional hooks for social, logical depth for books",
-        "Couples and friends with different styles can both love the same book",
-        "Strongest cross-demographic appeal — no reader type is excluded",
+        "TODO_JA:voiceToneBenefits.emotionalLogical.p5.b0",
+        "TODO_JA:voiceToneBenefits.emotionalLogical.p5.b1",
+        "TODO_JA:voiceToneBenefits.emotionalLogical.p5.b2",
+        "TODO_JA:voiceToneBenefits.emotionalLogical.p5.b3",
+        "TODO_JA:voiceToneBenefits.emotionalLogical.p5.b4",
       ],
     },
     {
       position: 6, label: "論理的",
       technique: "エビデンスに支えられたストーリーテリング — データを説明するためにストーリーを使う（逆ではない）",
       benefits: [
-        "Skeptical readers stay engaged — their 'prove it' need is met consistently",
-        "Creates authority through substance — reviews mention 'well-researched'",
-        "Strong for B2B and corporate wellness markets where emotions need framing",
-        "Content repurposes into presentations and white papers — business applications",
-        "Attracts healthcare and therapy professionals as audience and referrers",
+        "TODO_JA:voiceToneBenefits.emotionalLogical.p6.b0",
+        "TODO_JA:voiceToneBenefits.emotionalLogical.p6.b1",
+        "TODO_JA:voiceToneBenefits.emotionalLogical.p6.b2",
+        "TODO_JA:voiceToneBenefits.emotionalLogical.p6.b3",
+        "TODO_JA:voiceToneBenefits.emotionalLogical.p6.b4",
       ],
     },
     {
       position: 7, label: "分析的",
       technique: "構造化された論証 — 主張、証拠、示唆、行動",
       benefits: [
-        "Engineering and tech-industry readers finally find self-help they respect",
-        "Creates clear, quotable frameworks that get shared in professional contexts",
-        "Strong LinkedIn and professional social media clip potential",
-        "Supports course and certification format — logical progression is built in",
-        "Higher perceived value — readers feel they're getting tools, not just comfort",
+        "TODO_JA:voiceToneBenefits.emotionalLogical.p7.b0",
+        "TODO_JA:voiceToneBenefits.emotionalLogical.p7.b1",
+        "TODO_JA:voiceToneBenefits.emotionalLogical.p7.b2",
+        "TODO_JA:voiceToneBenefits.emotionalLogical.p7.b3",
+        "TODO_JA:voiceToneBenefits.emotionalLogical.p7.b4",
       ],
     },
     {
       position: 8, label: "論理的",
       technique: "データ主導の章 — 数値・研究・指標がすべての主張の根拠となる",
       benefits: [
-        "Positions brand in the 'evidence-based' category — premium market positioning",
-        "Readers use the data to convince friends and family — built-in evangelism tool",
-        "Strong for corporate book-club adoption — 'this isn't woo-woo' positioning",
-        "Creates excerpt content for health and science publications",
-        "Male-skewing audience finally engages with emotional topics through logic door",
+        "TODO_JA:voiceToneBenefits.emotionalLogical.p8.b0",
+        "TODO_JA:voiceToneBenefits.emotionalLogical.p8.b1",
+        "TODO_JA:voiceToneBenefits.emotionalLogical.p8.b2",
+        "TODO_JA:voiceToneBenefits.emotionalLogical.p8.b3",
+        "TODO_JA:voiceToneBenefits.emotionalLogical.p8.b4",
       ],
     },
     {
       position: 9, label: "かなり論理的",
       technique: "読者を有能な意思決定者として扱う — 知性ある大人として接する",
       benefits: [
-        "Respects reader's intelligence — builds loyalty through trust in their capacity",
-        "Creates 'I recommend this to my smartest friends' word-of-mouth",
-        "Strong for executive and leadership markets where emotional language feels weak",
+        "TODO_JA:voiceToneBenefits.emotionalLogical.p9.b0",
+        "TODO_JA:voiceToneBenefits.emotionalLogical.p9.b1",
+        "TODO_JA:voiceToneBenefits.emotionalLogical.p9.b2",
         "コンテンツが基調講演に転用できる — 論理的構造がステージで映える",
-        "Academic review potential — substantive enough to be cited in research",
+        "TODO_JA:voiceToneBenefits.emotionalLogical.p9.b3",
       ],
     },
     {
       position: 10, label: "超論理的",
       technique: "変革を測定可能な成果を伴う体系的なスキル習得として位置づける",
       benefits: [
-        "Appeals to quantified-self audience — the largest growth segment in wellness",
-        "Creates trackable outcomes readers can measure — drives 5-star reviews",
-        "Strong for app integration — logical frameworks translate to digital tools",
-        "Corporate training and workshop adaptation is seamless",
-        "Readers become practitioners — they teach the system to others, expanding reach",
+        "TODO_JA:voiceToneBenefits.emotionalLogical.p10.b0",
+        "TODO_JA:voiceToneBenefits.emotionalLogical.p10.b1",
+        "TODO_JA:voiceToneBenefits.emotionalLogical.p10.b2",
+        "TODO_JA:voiceToneBenefits.emotionalLogical.p10.b3",
+        "TODO_JA:voiceToneBenefits.emotionalLogical.p10.b4",
       ],
     },
   ],
@@ -693,110 +694,110 @@ const VOICE_TONE_10 = {
       position: 1, label: "超スピリチュアル",
       technique: "伝統、系譜、聖なる師への言及が随所に織り込まれる",
       benefits: [
-        "Readers seeking meaning find it — existential anxiety addressed at the root",
-        "Creates a sense of belonging to something ancient and larger than oneself",
-        "Attracts the highest-spending demographic — Gen X wisdom seekers ($165M/yr)",
-        "Book becomes a spiritual companion — readers keep it on nightstands for years",
-        "Strong retreat and workshop tie-in — spiritual content creates immersive events",
+        "TODO_JA:voiceToneBenefits.spiritualPractical.p1.b0",
+        "TODO_JA:voiceToneBenefits.spiritualPractical.p1.b1",
+        "TODO_JA:voiceToneBenefits.spiritualPractical.p1.b2",
+        "TODO_JA:voiceToneBenefits.spiritualPractical.p1.b3",
+        "TODO_JA:voiceToneBenefits.spiritualPractical.p1.b4",
       ],
     },
     {
       position: 2, label: "とてもスピリチュアル",
       technique: "神聖な言語：'presence'（存在）、'awareness'（気づき）、'witness'（目撃者）、'the great turning'（大いなる転換）",
       benefits: [
-        "Creates transcendent reading experiences — readers report feeling 'transported'",
-        "Poetry of language itself becomes healing — beauty as medicine",
+        "TODO_JA:voiceToneBenefits.spiritualPractical.p2.b0",
+        "TODO_JA:voiceToneBenefits.spiritualPractical.p2.b1",
         "オーディオブック版がガイド付き瞑想として機能する — 二重用途コンテンツ",
-        "Strong international appeal — spiritual language translates across cultures",
-        "Builds devoted following — spiritual readers are the most loyal audience segment",
+        "TODO_JA:voiceToneBenefits.spiritualPractical.p2.b2",
+        "TODO_JA:voiceToneBenefits.spiritualPractical.p2.b3",
       ],
     },
     {
       position: 3, label: "スピリチュアル",
       technique: "エクササイズには瞑想、黙想、沈黙を基盤とした実践が含まれる",
       benefits: [
-        "Develops reader's capacity for stillness — counterbalances digital overstimulation",
-        "Meditation-based exercises create measurable neurological benefits",
-        "Creates daily practice that extends engagement far beyond reading the book",
-        "Strong for Gen Alpha — meditation skills are increasingly taught in schools",
-        "Retreat-center and yoga-studio recommendation pipeline — institutional distribution",
+        "TODO_JA:voiceToneBenefits.spiritualPractical.p3.b0",
+        "TODO_JA:voiceToneBenefits.spiritualPractical.p3.b1",
+        "TODO_JA:voiceToneBenefits.spiritualPractical.p3.b2",
+        "TODO_JA:voiceToneBenefits.spiritualPractical.p3.b3",
+        "TODO_JA:voiceToneBenefits.spiritualPractical.p3.b4",
       ],
     },
     {
       position: 4, label: "意味優先",
       technique: "意味の創造が主要な目標 — 'Why am I here?'（私はなぜここにいるのか？）に正面から向き合う",
       benefits: [
-        "Addresses the deepest human need — purpose and significance",
-        "Readers in midlife transition find the existential grounding they're seeking",
-        "Creates content that feels timeless rather than trend-dependent",
-        "Strong for grief and loss topics — meaning-making is the ultimate healing",
-        "Builds author platform as wisdom figure, not just expert — longer career arc",
+        "TODO_JA:voiceToneBenefits.spiritualPractical.p4.b0",
+        "TODO_JA:voiceToneBenefits.spiritualPractical.p4.b1",
+        "TODO_JA:voiceToneBenefits.spiritualPractical.p4.b2",
+        "TODO_JA:voiceToneBenefits.spiritualPractical.p4.b3",
+        "TODO_JA:voiceToneBenefits.spiritualPractical.p4.b4",
       ],
     },
     {
       position: 5, label: "バランス型",
       technique: "内なる変容を外の行動につなげる — 黙想が実行と出会う",
       benefits: [
-        "Serves both spiritual seekers and practical doers in one book",
-        "Creates the 'woo-meets-science' positioning that dominates bestseller lists",
-        "Both meditation-loving and productivity-loving readers find their entry point",
-        "Strongest word-of-mouth potential — recommended across different friend groups",
-        "Platform flexibility — works for podcasts, courses, retreats, AND workshops",
+        "TODO_JA:voiceToneBenefits.spiritualPractical.p5.b0",
+        "TODO_JA:voiceToneBenefits.spiritualPractical.p5.b1",
+        "TODO_JA:voiceToneBenefits.spiritualPractical.p5.b2",
+        "TODO_JA:voiceToneBenefits.spiritualPractical.p5.b3",
+        "TODO_JA:voiceToneBenefits.spiritualPractical.p5.b4",
       ],
     },
     {
       position: 6, label: "グラウンデッド",
       technique: "精神的な洞察を日常の習慣やルーティンに落とし込む",
       benefits: [
-        "Wisdom becomes usable — reader can start today, not 'when they're ready'",
-        "Appeals to 'spiritual but practical' — the fastest-growing reader segment",
-        "Creates content that works as 7-day challenges and 30-day programs",
-        "Strong for social media — habit content performs exceptionally on all platforms",
-        "Bridges the gap between self-help and spirituality sections in bookstores",
+        "TODO_JA:voiceToneBenefits.spiritualPractical.p6.b0",
+        "TODO_JA:voiceToneBenefits.spiritualPractical.p6.b1",
+        "TODO_JA:voiceToneBenefits.spiritualPractical.p6.b2",
+        "TODO_JA:voiceToneBenefits.spiritualPractical.p6.b3",
+        "TODO_JA:voiceToneBenefits.spiritualPractical.p6.b4",
       ],
     },
     {
       position: 7, label: "実践的",
       technique: "ツール優先の章構成 — テクニックを提示し、使うべき場面を示し、なぜ機能するかを説明する",
       benefits: [
-        "Readers take immediate action — exercises feel doable, not abstract",
-        "Strong for pocket-guide format — tools are reference-able and compact",
-        "Creates the 'I actually did the exercises' reviews that drive sales",
-        "Corporate wellness programs adopt tool-based content more readily",
-        "Higher exercise completion — practical framing reduces resistance",
+        "TODO_JA:voiceToneBenefits.spiritualPractical.p7.b0",
+        "TODO_JA:voiceToneBenefits.spiritualPractical.p7.b1",
+        "TODO_JA:voiceToneBenefits.spiritualPractical.p7.b2",
+        "TODO_JA:voiceToneBenefits.spiritualPractical.p7.b3",
+        "TODO_JA:voiceToneBenefits.spiritualPractical.p7.b4",
       ],
     },
     {
       position: 8, label: "実用的",
       technique: "機能的な言語：'system'（システム）、'protocol'（プロトコル）、'technique'（テクニック）— 伝統への言及はゼロ",
       benefits: [
-        "Opens the secular wellness market — readers who avoid 'spiritual' labels",
-        "Strong for healthcare referrals — clinical professionals recommend secular content",
-        "Creates content that works in corporate and educational institutional settings",
-        "Appeals to science-minded readers who want results without metaphysics",
-        "TikTok and YouTube performance highest — practical content has broadest appeal",
+        "TODO_JA:voiceToneBenefits.spiritualPractical.p8.b0",
+        "TODO_JA:voiceToneBenefits.spiritualPractical.p8.b1",
+        "TODO_JA:voiceToneBenefits.spiritualPractical.p8.b2",
+        "TODO_JA:voiceToneBenefits.spiritualPractical.p8.b3",
+        "TODO_JA:voiceToneBenefits.spiritualPractical.p8.b4",
       ],
     },
     {
       position: 9, label: "かなり実用的",
       technique: "行動変容が主要な目標 — 測定可能な成果を追跡する",
       benefits: [
-        "Readers can prove the book worked — drives reviews with specific results",
-        "Creates before/after narratives perfect for marketing and testimonials",
-        "Strong for employer-sponsored wellness — ROI can be demonstrated",
-        "App and digital product integration natural — tracking is built into the approach",
-        "Health insurance and benefits platform partnerships become possible",
+        "TODO_JA:voiceToneBenefits.spiritualPractical.p9.b0",
+        "TODO_JA:voiceToneBenefits.spiritualPractical.p9.b1",
+        "TODO_JA:voiceToneBenefits.spiritualPractical.p9.b2",
+        "TODO_JA:voiceToneBenefits.spiritualPractical.p9.b3",
+        "TODO_JA:voiceToneBenefits.spiritualPractical.p9.b4",
       ],
     },
     {
       position: 10, label: "超実用的",
       technique: "純粋なプロトコル — 測定可能な成果を伴う実行可能な内容、各章がインストールすべきシステム",
       benefits: [
-        "Maximum behavior change — no ambiguity about what success looks like",
-        "Creates the strongest 'before and after' transformation testimonials",
-        "Enterprise training and certification program ready out of the box",
-        "Quantified results create press and media coverage opportunities",
-        "Reader becomes a practitioner who teaches others — exponential reach",
+        "TODO_JA:voiceToneBenefits.spiritualPractical.p10.b0",
+        "TODO_JA:voiceToneBenefits.spiritualPractical.p10.b1",
+        "TODO_JA:voiceToneBenefits.spiritualPractical.p10.b2",
+        "TODO_JA:voiceToneBenefits.spiritualPractical.p10.b3",
+        "TODO_JA:voiceToneBenefits.spiritualPractical.p10.b4",
       ],
     },
   ],
@@ -807,7 +808,7 @@ const VOICE_TONE_10 = {
 // ═══════════════════════════════════════════════════════════
 
 function StepHero({ eyebrow, title, subtitle, helper }) {
-  const { t } = useTranslation();
+  const { t } = useJaWizardTranslation();
   return (
     <div className="mb-8">
       {eyebrow ? <p className="mb-2 text-[10px] font-bold uppercase tracking-[0.2em] text-violet-600">{t("steps", eyebrow)}</p> : null}
@@ -1124,8 +1125,11 @@ function WhatThisChanges({ items, label }) {
 // PERSONA IMPACT PANEL (Right side)
 // ═══════════════════════════════════════════════════════════
 
-function PersonaImpactPanel({ state, step = 0, i18n = {} }) {
-  const { tArchetypes: _A = ARCHETYPES, tPersonas: _P = PERSONAS, tMoments: _M = MOMENTS, tVisualStyles: _V = VISUAL_STYLES, tProven: _PR = PROVEN, tSelectionFeedback: _SF = SELECTION_FEEDBACK, tEmotionCategories: _EC = EMOTION_CATEGORIES, tAngleFeedback: _AF = ANGLE_FEEDBACK, t: _t = (c, k) => k } = i18n;
+function PersonaImpactPanel({ state, step = 0, i18n }) {
+  const { _A, _P, _M, _V, _PR, _SF, _EC, _AF, _t } = pickJaI18nFields(i18n, {
+    _A: "tArchetypes", _P: "tPersonas", _M: "tMoments", _V: "tVisualStyles", _PR: "tProven",
+    _SF: "tSelectionFeedback", _EC: "tEmotionCategories", _AF: "tAngleFeedback", _t: "t",
+  });
   const arch = _A.find((a) => a.id === state.archetype);
   const persona = _P.find((p) => p.id === state.persona);
   const moment = _M.find((m) => m.id === state.moment);
@@ -1353,8 +1357,8 @@ function PersonaImpactPanel({ state, step = 0, i18n = {} }) {
 // WIZARD STEPS (11 steps)
 // ═══════════════════════════════════════════════════════════
 
-function Step1Archetype({ state, update, i18n = {} }) {
-  const { tArchetypes: _A = ARCHETYPES } = i18n;
+function Step1Archetype({ state, update, i18n }) {
+  const _A = pickJaI18n(i18n, "tArchetypes");
   return (
     <div>
       <StepHero
@@ -1364,7 +1368,7 @@ function Step1Archetype({ state, update, i18n = {} }) {
         helper="各カードには、あなたのブランドが読者を招き入れる世界の短いビジョンが含まれています。"
       />
       <div className="mb-6 rounded-xl border border-indigo-100/80 bg-indigo-50/60 px-4 py-3 backdrop-blur-sm">
-        <p className="text-xs font-medium text-indigo-900">{useTranslation().t("steps", "これはスタジオで最も影響力の大きな選択です——他のすべては、ここで選ぶ感情的な領域の上に構築されます。")}</p>
+        <p className="text-xs font-medium text-indigo-900">{useJaWizardTranslation().t("steps", "これはスタジオで最も影響力の大きな選択です——他のすべては、ここで選ぶ感情的な領域の上に構築されます。")}</p>
       </div>
       <div className="grid grid-cols-1 gap-3">
         {_A.map((arch) => <ArchetypeCard key={arch.id} arch={arch} selected={state.archetype} onClick={(id) => update({ archetype: id })} />)}
@@ -1373,8 +1377,8 @@ function Step1Archetype({ state, update, i18n = {} }) {
   );
 }
 
-function Step2PrimaryReader({ state, update, i18n = {} }) {
-  const { tPersonas: _P = PERSONAS } = i18n;
+function Step2PrimaryReader({ state, update, i18n }) {
+  const _P = pickJaI18n(i18n, "tPersonas");
   // Market/lane step removed 2026-06-03 — locale routing happens server-side.
 
   return (
@@ -1386,7 +1390,7 @@ function Step2PrimaryReader({ state, update, i18n = {} }) {
       />
       <div className="mb-6 rounded-xl border border-blue-100/80 bg-blue-50/50 p-4 backdrop-blur-sm">
         <p className="text-xs leading-relaxed text-blue-900">
-          {useTranslation().t("steps", "すべての人に届き続けます。 まずこの読者に合わせてタイトル、パッケージ、エクササイズを調整し、その後アーキタイプの他のセグメントへと適応させます。")}
+          {useJaWizardTranslation().t("steps", "すべての人に届き続けます。 まずこの読者に合わせてタイトル、パッケージ、エクササイズを調整し、その後アーキタイプの他のセグメントへと適応させます。")}
         </p>
       </div>
       <div className="grid grid-cols-1 gap-2.5">
@@ -1396,8 +1400,8 @@ function Step2PrimaryReader({ state, update, i18n = {} }) {
   );
 }
 
-function Step3TriggerMoment({ state, update, i18n = {} }) {
-  const { tMoments: _M = MOMENTS } = i18n;
+function Step3TriggerMoment({ state, update, i18n }) {
+  const _M = pickJaI18n(i18n, "tMoments");
   return (
     <div>
       <StepHero
@@ -1408,7 +1412,7 @@ function Step3TriggerMoment({ state, update, i18n = {} }) {
       <details open className="mb-5 rounded-xl border border-amber-100/90 bg-amber-50/40 px-4 py-2 text-xs text-amber-900 backdrop-blur-sm open:pb-3">
         <summary className="cursor-pointer font-semibold text-amber-900/90 outline-none">なぜこれが重要なのか</summary>
         <p className="mt-2 leading-relaxed text-amber-900/85">
-          {useTranslation().t("steps", "強いブランドはデモグラフィックだけでなく、瞬間に語りかけます。この選択が最初の一行、表紙の約束、スクロールを止めるフックを方向付けます。")}
+          {useJaWizardTranslation().t("steps", "強いブランドはデモグラフィックだけでなく、瞬間に語りかけます。この選択が最初の一行、表紙の約束、スクロールを止めるフックを方向付けます。")}
         </p>
       </details>
       <div className="grid grid-cols-1 gap-2.5">
@@ -1452,7 +1456,8 @@ function snap5(val) {
   return best;
 }
 
-function Step4VoiceGraphs({ state, update, i18n = {} }) {
+function Step4VoiceGraphs({ state, update, i18n }) {
+  const tVoiceTone = pickJaI18n(i18n, "tVoiceTone");
   const audioRef = useRef(null);
   const audioSrc = VOICE_AUDIO_SRC_JA;
   const playAudio = useCallback((sliderId, position) => {
@@ -1488,7 +1493,7 @@ function Step4VoiceGraphs({ state, update, i18n = {} }) {
           const val = state.voiceSettings?.[s.id] ?? s.default;
           const snapIdx = snap5(val);
           const position = VOICE_5_STOPS[snapIdx];
-          const toneData = VOICE_TONE_10[s.id][position - 1];
+          const toneData = tVoiceTone[s.id][position - 1];
           const GraphComp = graphComponents[idx];
           return (
             <div key={s.id} className="bg-white rounded-2xl border border-gray-200 p-5 shadow-sm">
@@ -1533,7 +1538,8 @@ function Step4VoiceGraphs({ state, update, i18n = {} }) {
   );
 }
 
-function Step5VoiceEffects({ state, update }) {
+function Step5VoiceEffects({ state, update, i18n }) {
+  const tVoiceTone = pickJaI18n(i18n, "tVoiceTone");
   const graphComponents = [PulseWaveGraph, SpectrumBarGraph, EmotionRadarGraph, EnergyGaugeGraph];
   const handleSlider = (id, rawVal) => {
     const idx = snap5(parseInt(rawVal));
@@ -1574,7 +1580,7 @@ function Step5VoiceEffects({ state, update }) {
           const val = state.voiceSettings?.[s.id] ?? s.default;
           const snapIdx = snap5(val);
           const position = VOICE_5_STOPS[snapIdx];
-          const toneData = VOICE_TONE_10[s.id][position - 1];
+          const toneData = tVoiceTone[s.id][position - 1];
           const GraphComp = graphComponents[idx];
 
           return (
@@ -1626,8 +1632,8 @@ function Step5VoiceEffects({ state, update }) {
   );
 }
 
-function Step5VisualStyle({ state, update, i18n = {} }) {
-  const { tVisualStyles: _V = VISUAL_STYLES } = i18n;
+function Step5VisualStyle({ state, update, i18n }) {
+  const _V = pickJaI18n(i18n, "tVisualStyles");
   const handleVisual = (id) => update({ visualStyle: id });
   const handleTradition = (val) => update({ tradition: val });
   const selectedVisual = _V.find((v) => v.id === state.visualStyle);
@@ -1673,8 +1679,8 @@ const EMOTION_CATEGORIES = [
   { name: "今この瞬間にいることと希望", icon: "✨", color: "#7c3aed", items: ["グラウンデッド", "希望が持てる", "今ここにいられる"], impacts: { "グラウンデッド": "読者を体と現在に繋ぎ留め、反芻思考と未来への不安の力を弱める", "希望が持てる": "変化は可能だという信念を再点火する——セルフヘルプにおける最も強力な変革の起点", "今ここにいられる": "読者が後悔や不安の中で生きることをやめ、今ここにいるとはどういうことかを体感する" } },
 ];
 
-function Step6EmotionalOutcomes({ state, update, i18n = {} }) {
-  const { tEmotionCategories: _EC = EMOTION_CATEGORIES } = i18n;
+function Step6EmotionalOutcomes({ state, update, i18n }) {
+  const _EC = pickJaI18n(i18n, "tEmotionCategories");
   const handleEmotion = (emotion, category) => {
     const current = state.emotions || [];
     const categoryEmotions = _EC.find(c => c.name === category)?.items || [];
@@ -1842,8 +1848,8 @@ function calcSynergyScore(voicePositions, angle) {
   return Math.round(100 * (1 - actualDist / maxDist));
 }
 
-function Step7Topics({ state, update, i18n = {} }) {
-  const { tAngleFeedback: _AF = ANGLE_FEEDBACK } = i18n;
+function Step7Topics({ state, update, i18n }) {
+  const _AF = pickJaI18n(i18n, "tAngleFeedback");
   const handleTopicTag = (tagId, categoryLabel) => {
     const current = state.topicTags || [];
     const categoryTagIds = TOPIC_CATEGORIES.find(c => c.label === categoryLabel)?.tags.map(t => t.id) || [];
@@ -1974,8 +1980,8 @@ function Step8MarketIntel({ state }) {
   );
 }
 
-function Step9Formats({ state, update, i18n = {} }) {
-  const { tSelectionFeedback: _SF = SELECTION_FEEDBACK } = i18n;
+function Step9Formats({ state, update, i18n }) {
+  const _SF = pickJaI18n(i18n, "tSelectionFeedback");
   const formatFocus = state.formatFocus || null;
   const channels = state.channels || [];
   const setFocus = (focus) => update({ formatFocus: focus });
@@ -1989,7 +1995,7 @@ function Step9Formats({ state, update, i18n = {} }) {
     { id: "7_day_guide", label: "7日間でやり遂げる方法", icon: Clock, desc: "圧縮した変容プロトコル — 1日1章、明確な日々の行動、早い成功体験", benefit: "構造が圧倒感を軽減します——「気が向いた時に読む」に失敗した読者が、勢いをつける毎日の課題で成功できます" },
     { id: "mastercourse", label: "マスターコースシリーズ", icon: GraduationCap, desc: "段階的に複雑さが増す複数巻の深堀りシリーズ——4〜8冊が互いの上に積み上がる", benefit: "コミットした読者が数ヶ月をかけて深く進みます——各巻が前の巻の上に積み上がり、本当の持続的な変化を駆動する継続的実践を生み出します" },
     { id: "workbook", label: "インタラクティブ・ワークブック", icon: PenTool, desc: "記入欄、トラッキングシート、ガイドされた内省スペースを備えたエクササイズ重視の伴走書", benefit: "書くことは読むこととは異なる脳の経路を活性化します——ワークブックは受動的な消費を能動的な自己発見と統合へと変えます" },
-    { id: "daily_journal", label: "デイリー・ジャーナル", icon: BookMarked, desc: "30-90 day guided journal — one prompt per day with space for writing and reflection", benefit: "毎日のプロンプトが自己認識の筋肉を育てます——読者がページをめくるたびに、自分の内なる世界との継続的な関係が育まれます" },
+    { id: "daily_journal", label: "デイリー・ジャーナル", icon: BookMarked, desc: "TODO_JA:formats.dailyJournalDesc", benefit: "毎日のプロンプトが自己認識の筋肉を育てます——読者がページをめくるたびに、自分の内なる世界との継続的な関係が育まれます" },
   ];
 
   return (
@@ -2057,8 +2063,11 @@ function Step9Formats({ state, update, i18n = {} }) {
   );
 }
 
-function StepBrandReveal({ state, i18n = {} }) {
-  const { tArchetypes: _A = ARCHETYPES, tPersonas: _P = PERSONAS, tMoments: _M = MOMENTS, tVisualStyles: _V = VISUAL_STYLES, tEmotionCategories: _EC = EMOTION_CATEGORIES, tAngleFeedback: _AF = ANGLE_FEEDBACK, tSelectionFeedback: _SF = SELECTION_FEEDBACK, tProven: _PR = PROVEN } = i18n;
+function StepBrandReveal({ state, i18n }) {
+  const { _A, _P, _M, _V, _EC, _AF, _SF, _PR } = pickJaI18nFields(i18n, {
+    _A: "tArchetypes", _P: "tPersonas", _M: "tMoments", _V: "tVisualStyles", _EC: "tEmotionCategories",
+    _AF: "tAngleFeedback", _SF: "tSelectionFeedback", _PR: "tProven",
+  });
   const arch = _A.find((a) => a.id === state.archetype);
   const persona = _P.find((p) => p.id === state.persona);
   const moment = _M.find((m) => m.id === state.moment);
@@ -2095,7 +2104,7 @@ function StepBrandReveal({ state, i18n = {} }) {
 
   // Generate true category statement
   const trueCategory = arch && persona
-    ? `${arch.name} for ${persona.label}${moment ? ` — ${moment.label}の瞬間を捉える` : ""}`
+    ? `${arch.name}（${persona.label}向け）${moment ? ` — ${moment.label}の瞬間を捉える` : ""}`
     : arch ? arch.name : "あなたのブランド";
 
   // Content engine steps derived from voice + angle mix
@@ -2613,10 +2622,10 @@ function Step10Blueprint_UNUSED({ state }) {
   const reachScore = Math.min(Math.round(70 + Math.min((state.channels || []).length * 1.5, 6) + (state.formatFocus ? 4 : 0) + (state.archetype ? 8 : 0)), 95);
 
   const scores = [
-    { label: "市場性", value: marketability, desc: "Alignment with proven market demand" },
-    { label: "若年層へのリーチ", value: youthReach, desc: "Gen Z and Gen Alpha compatibility" },
-    { label: "人生へのインパクト", value: lifeImpact, desc: "Transformation depth for your reader" },
-    { label: "プラットフォームリーチ", value: reachScore, desc: "Multi-channel distribution coverage" },
+    { label: "市場性", value: marketability, desc: "TODO_JA:blueprint.scoreMarketabilityDesc" },
+    { label: "若年層へのリーチ", value: youthReach, desc: "TODO_JA:blueprint.scoreYouthReachDesc" },
+    { label: "人生へのインパクト", value: lifeImpact, desc: "TODO_JA:blueprint.scoreLifeImpactDesc" },
+    { label: "プラットフォームリーチ", value: reachScore, desc: "TODO_JA:blueprint.scorePlatformReachDesc" },
   ];
 
   const brandOneSentence = [
@@ -2639,7 +2648,7 @@ function Step10Blueprint_UNUSED({ state }) {
       <StepHero
         eyebrow="お披露目"
         title="あなたのブランドはこちらです"
-        subtitle="Your choices — distilled first, then grouped so you can read the arc at a glance."
+        subtitle="TODO_JA:blueprint.subtitle"
       />
 
       {brandOneSentence ? (
@@ -2649,18 +2658,18 @@ function Step10Blueprint_UNUSED({ state }) {
       ) : null}
 
       <div className="mb-6 rounded-2xl border border-indigo-100 bg-indigo-50/40 px-4 py-3">
-        <p className="text-[10px] font-bold uppercase tracking-wider text-indigo-800">Audiobook voice — preview</p>
-        <p className="mt-1 text-[11px] text-white">Regulating narrator on the comfort benchmark (registry: <span className="font-mono text-[10px]">cmp_voice_narrator_contrast_v1</span>).</p>
+        <p className="text-[10px] font-bold uppercase tracking-wider text-indigo-800">TODO_JA:blueprint.audiobookVoicePreview</p>
+        <p className="mt-1 text-[11px] text-white">TODO_JA:blueprint.regulatingNarrator (registry: <span className="font-mono text-[10px]">cmp_voice_narrator_contrast_v1</span>).</p>
         <audio className="mt-2 block h-9 w-full max-w-md" controls preload="metadata" src="/onboarding/audio/voice_cmp_comfort_voice_regulating_female.mp3" />
       </div>
 
       <div className="space-y-8">
         <section className="rounded-2xl border border-slate-200/90 bg-slate-50/50 p-4 shadow-sm ring-1 ring-slate-200/70 sm:p-5">
-          <h3 className="mb-4 text-[10px] font-bold uppercase tracking-[0.2em] text-slate-500">1 · Brand identity</h3>
+          <h3 className="mb-4 text-[10px] font-bold uppercase tracking-[0.2em] text-slate-500">TODO_JA:blueprint.sectionBrandIdentity</h3>
           <div className="space-y-3">
             {arch ? (
               <div className={`rounded-2xl border-2 p-5 ${arch.bg} ${arch.border}`}>
-                <div className="text-[10px] font-bold uppercase text-white">Emotional world</div>
+                <div className="text-[10px] font-bold uppercase text-white">TODO_JA:blueprint.emotionalWorld</div>
                 <div className="mt-1 text-xl font-bold text-white">{arch.name}</div>
                 <p className="mt-1 text-sm text-white">{arch.tagline}</p>
               </div>
@@ -2828,8 +2837,10 @@ function Step10Blueprint_UNUSED({ state }) {
   );
 }
 
-function Step11Launch({ state, update, i18n = {} }) {
-  const { tArchetypes: _A = ARCHETYPES, tPersonas: _P = PERSONAS, tMoments: _M = MOMENTS, tVisualStyles: _V = VISUAL_STYLES, tSelectionFeedback: _SF = SELECTION_FEEDBACK } = i18n;
+function Step11Launch({ state, update, i18n }) {
+  const { _A, _P, _M, _V, _SF } = pickJaI18nFields(i18n, {
+    _A: "tArchetypes", _P: "tPersonas", _M: "tMoments", _V: "tVisualStyles", _SF: "tSelectionFeedback",
+  });
   const handleField = (field, val) => update({ contact: { ...state.contact, [field]: val } });
   const c = state.contact || {};
   const isReady = c.firstName?.trim() && c.lastName?.trim() && c.email?.trim() && c.email?.includes("@");
@@ -2895,7 +2906,7 @@ function Step11Launch({ state, update, i18n = {} }) {
       arch && { label: "アーキタイプ", value: arch.name, icon: arch.icon, gradient: arch.gradient, systemEffect: _SF.archetypes[state.archetype]?.systemEffect, emotionalBenefit: _SF.archetypes[state.archetype]?.emotionalBenefit },
       persona && { label: "読者", value: `${persona.emoji} ${persona.label}`, icon: Users, gradient: "from-blue-500 to-cyan-500", systemEffect: _SF.personas[state.persona]?.systemEffect, emotionalBenefit: _SF.personas[state.persona]?.emotionalBenefit },
       moment && { label: "きっかけの瞬間", value: `${moment.emoji} ${moment.label}`, icon: Target, gradient: "from-amber-500 to-orange-500", systemEffect: _SF.moments[state.moment]?.systemEffect, emotionalBenefit: _SF.moments[state.moment]?.emotionalBenefit },
-      Object.keys(state.voiceSettings || {}).length > 0 && { label: "声のトーン", value: `${Object.keys(state.voiceSettings).length} dimensions tuned`, icon: SlidersHorizontal, gradient: "from-indigo-500 to-violet-500", systemEffect: "4つすべての声の次元が、すべての章・オーディオブック・ソーシャル投稿にわたって、散文のリズム、語彙レベル、文章構造、感情温度を調整します", emotionalBenefit: "読者は、自分のために書かれたと感じる声を体験します——彼らが必要とする挑戦と安らぎのちょうどいいブレンド。トーンが彼らの感情的な準備状態に合致しているから、すべての文が届きます。" },
+      Object.keys(state.voiceSettings || {}).length > 0 && { label: "声のトーン", value: `${Object.keys(state.voiceSettings).length} 次元を調整済み`, icon: SlidersHorizontal, gradient: "from-indigo-500 to-violet-500", systemEffect: "4つすべての声の次元が、すべての章・オーディオブック・ソーシャル投稿にわたって、散文のリズム、語彙レベル、文章構造、感情温度を調整します", emotionalBenefit: "読者は、自分のために書かれたと感じる声を体験します——彼らが必要とする挑戦と安らぎのちょうどいいブレンド。トーンが彼らの感情的な準備状態に合致しているから、すべての文が届きます。" },
       visual && { label: "ビジュアルスタイル", value: visual.label, icon: Palette, gradient: "from-rose-500 to-pink-500", systemEffect: _SF.visualStyles[state.visualStyle]?.systemEffect, emotionalBenefit: _SF.visualStyles[state.visualStyle]?.emotionalBenefit },
       (state.emotions || []).length > 0 && { label: "感情的な結果", value: state.emotions.join(", "), icon: Heart, gradient: "from-rose-400 to-red-500", systemEffect: `${state.emotions.length} transformation promises woven into every title, CTA, and marketing message`, emotionalBenefit: "これらの感情が、すべてのコンテンツの北極星になります——読者は一言も読む前から、どんな変容が待っているかを正確に知り、希望が生まれます。" },
       state.tradition && { label: "スピリチュアルの基盤", value: state.tradition, icon: Sun, gradient: "from-amber-400 to-yellow-500", systemEffect: "すべてのコンテンツを通じて、語彙、哲学的な基盤、伝統固有の参照に影響を与えます", emotionalBenefit: "この伝統を持つ読者は、認められ尊重されていると感じます。言語は表面的な流用ではなく、本物の系譜の重みを帯びています。" },
@@ -3108,22 +3119,22 @@ function Step11Launch({ state, update, i18n = {} }) {
       <div
         className="mb-6 flex flex-col items-center gap-2 rounded-xl border border-emerald-100/90 bg-emerald-50/40 px-4 py-3 text-[11px] text-emerald-950/80 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-x-8 sm:gap-y-1"
         role="note"
-        aria-label="Before you activate"
+        aria-label="TODO_JA:launch.beforeYouActivate"
       >
         <span className="inline-flex items-center gap-1.5 font-medium">
-          <Check size={14} className="shrink-0 text-emerald-600" strokeWidth={2.5} /> Brand direction set
+          <Check size={14} className="shrink-0 text-emerald-600" strokeWidth={2.5} /> TODO_JA:launch.brandDirectionSet
         </span>
         <span className="inline-flex items-center gap-1.5 font-medium">
           <Check size={14} className="shrink-0 text-emerald-600" strokeWidth={2.5} /> 読者とマーケットを選択済み
         </span>
         <span className="inline-flex items-center gap-1.5 font-medium">
-          <Check size={14} className="shrink-0 text-emerald-600" strokeWidth={2.5} /> Launch details ready
+          <Check size={14} className="shrink-0 text-emerald-600" strokeWidth={2.5} /> TODO_JA:launch.launchDetailsReady
         </span>
       </div>
 
       <div className="mb-6 space-y-6">
         <section className="rounded-2xl border border-gray-200/90 bg-white/90 p-5 shadow-sm backdrop-blur-sm">
-          <h3 className="mb-4 text-[10px] font-bold uppercase tracking-[0.15em] text-white">1 · Identity &amp; contact</h3>
+          <h3 className="mb-4 text-[10px] font-bold uppercase tracking-[0.15em] text-white">TODO_JA:launch.sectionIdentityContact</h3>
           <div className="grid grid-cols-2 gap-3">
             <div>
               <label className="mb-1 block text-xs font-semibold text-white">名 *</label>
@@ -3352,7 +3363,7 @@ function CompareBlock({ labelA, labelB, contentA, contentB, colorA, colorB }) {
 }
 
 function IntroWelcome({ onNext }) {
-  const { t } = useTranslation();
+  const { t } = useJaWizardTranslation();
   const pillars = [
     { icon: PenTool, label: t("ui", "声"), tint: "from-violet-500 to-indigo-600" },
     { icon: Image, label: t("ui", "ビジュアル"), tint: "from-fuchsia-500 to-pink-600" },
@@ -3404,7 +3415,7 @@ function IntroWelcome({ onNext }) {
 }
 
 function IntroJourney({ onNext, onBack, onChooseTeacher }) {
-  const { t } = useTranslation();
+  const { t } = useJaWizardTranslation();
   const phases = [
     { step: "1", title: t("intro", "基盤"), sub: t("intro", "アーキタイプと読者"), color: "from-indigo-500 to-violet-600" },
     { step: "2", title: t("intro", "声"), sub: t("intro", "トーンとインパクト"), color: "from-violet-500 to-fuchsia-600" },
@@ -3474,14 +3485,14 @@ function ShowcaseProse({ onNext, onBack }) {
     <div className="brand-studio-bg min-h-screen text-white">
       <div className="mx-auto max-w-3xl px-6 py-12">
         <button type="button" onClick={onBack} className="mb-4 flex items-center gap-1 text-xs text-white transition-colors hover:text-white">
-          <ChevronLeft size={14} /> Back
+          <ChevronLeft size={14} /> TODO_JA:ui.back
         </button>
         <div className="brand-studio-panel p-6 sm:p-8">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 text-indigo-600 text-xs font-semibold mb-4"><PenTool size={12} /> ステップ1プレビュー——ライティングボイス</div>
         <h1 className="text-3xl font-black tracking-tight mb-2">同じトピック。まったく異なる声。</h1>
         <p className="text-white mb-8">二つのブランド、一つのトピック——散文とエネルギーの変化を体感してください。</p>
         <CompareBlock labelA="静けさラボ" labelB="クリアマインド・ラボ" colorA="text-indigo-600" colorB="text-amber-600"
-          contentA={<div><div className="flex gap-2 mb-3"><div className="w-14 h-20 rounded-lg shadow-md flex-shrink-0" style={{ background: "linear-gradient(135deg, #6366f1, #818cf8, #e0e7ff)" }} /><div><div className="text-[10px] text-white font-semibold uppercase">静けさラボ</div><div className="text-sm font-bold text-white">身体は深夜2時でも記憶している</div></div></div><p className="text-sm text-white leading-relaxed italic border-l-2 border-indigo-300 pl-3">"Your body remembers what your mind tries to forget. Right now, your shoulders are holding yesterday's argument."</p><div className="mt-3 bg-indigo-50 rounded-lg p-3"><div className="text-[10px] font-bold text-indigo-600 uppercase mb-1">エクササイズ</div><p className="text-xs text-indigo-800">"Inhale for 4 counts. Hold for 7. Exhale slowly for 8."</p></div></div>}
+          contentA={<div><div className="flex gap-2 mb-3"><div className="w-14 h-20 rounded-lg shadow-md flex-shrink-0" style={{ background: "linear-gradient(135deg, #6366f1, #818cf8, #e0e7ff)" }} /><div><div className="text-[10px] text-white font-semibold uppercase">静けさラボ</div><div className="text-sm font-bold text-white">身体は深夜2時でも記憶している</div></div></div><p className="text-sm text-white leading-relaxed italic border-l-2 border-indigo-300 pl-3">TODO_JA:showcase.sampleProseEnA</p><div className="mt-3 bg-indigo-50 rounded-lg p-3"><div className="text-[10px] font-bold text-indigo-600 uppercase mb-1">エクササイズ</div><p className="text-xs text-indigo-800">TODO_JA:showcase.sampleExerciseEnA</p></div></div>}
           contentB={<div><div className="flex gap-2 mb-3"><div className="w-14 h-20 rounded-lg shadow-md flex-shrink-0" style={{ background: "linear-gradient(135deg, #d97706, #f59e0b, #fef3c7)" }} /><div><div className="text-[10px] text-white font-semibold uppercase">クリアマインド・ラボ</div><div className="text-sm font-bold text-white">スマートフォンがあなたの睡眠を奪っている</div></div></div><p className="text-sm text-white leading-relaxed italic border-l-2 border-amber-400 pl-3">"天井を見つめているのは、脳が昨日の言い争いをループ再生しているからです。"</p><div className="mt-3 bg-amber-50 rounded-lg p-3"><div className="text-[10px] font-bold text-amber-600 uppercase mb-1">エクササイズ</div><p className="text-xs text-amber-800">"スマートフォンを別の部屋へ。仰向けに寝る。吸うより長く吐く。90秒。さあ。"</p></div></div>}
         />
         <div className="mt-8 text-center">
@@ -3500,10 +3511,10 @@ function ShowcaseCovers({ onNext, onBack }) {
     <div className="brand-studio-bg min-h-screen text-white">
       <div className="mx-auto max-w-3xl px-6 py-12">
         <button type="button" onClick={onBack} className="mb-4 flex items-center gap-1 text-xs text-white transition-colors hover:text-white">
-          <ChevronLeft size={14} /> Back
+          <ChevronLeft size={14} /> TODO_JA:ui.back
         </button>
         <div className="brand-studio-panel p-6 sm:p-8">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-50 text-rose-600 text-xs font-semibold mb-4"><Image size={12} /> Visual Style Preview</div>
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-50 text-rose-600 text-xs font-semibold mb-4"><Image size={12} /> TODO_JA:showcase.visualStylePreview</div>
         <h1 className="text-3xl font-black tracking-tight mb-2">あなたのビジュアルスタイルがすべてを形作る。</h1>
         <p className="text-white mb-8">一つの選択が表紙とサムネイルに波及します。</p>
         <div className="grid grid-cols-3 gap-4 mb-8">
@@ -3518,7 +3529,7 @@ function ShowcaseCovers({ onNext, onBack }) {
         </div>
         <div className="mt-8 text-center">
           <button type="button" onClick={onNext} className="inline-flex items-center gap-2 rounded-2xl bg-gray-900 px-8 py-3.5 text-sm font-bold text-white transition-all hover:bg-gray-800">
-            See video styles <ChevronRight size={18} />
+            TODO_JA:showcase.seeVideoStyles <ChevronRight size={18} />
           </button>
         </div>
         </div>
@@ -3532,7 +3543,7 @@ function ShowcaseVideo({ onNext, onBack }) {
     <div className="brand-studio-bg min-h-screen text-white">
       <div className="mx-auto max-w-3xl px-6 py-12">
         <button type="button" onClick={onBack} className="mb-4 flex items-center gap-1 text-xs text-white transition-colors hover:text-white">
-          <ChevronLeft size={14} /> Back
+          <ChevronLeft size={14} /> TODO_JA:ui.back
         </button>
         <div className="brand-studio-panel p-6 sm:p-8">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-50 text-amber-600 text-xs font-semibold mb-4"><Film size={12} /> 動画とソーシャルのプレビュー</div>
@@ -3548,7 +3559,7 @@ function ShowcaseVideo({ onNext, onBack }) {
         </div>
         <div className="mt-8 text-center">
           <button type="button" onClick={onNext} className="inline-flex items-center gap-2 rounded-2xl bg-gray-900 px-8 py-3.5 text-sm font-bold text-white transition-all hover:bg-gray-800">
-            See format diversity <ChevronRight size={18} />
+            TODO_JA:showcase.seeFormatDiversity <ChevronRight size={18} />
           </button>
         </div>
         </div>
@@ -3562,7 +3573,7 @@ function ShowcaseFormats({ onNext, onBack }) {
     <div className="brand-studio-bg min-h-screen text-white">
       <div className="mx-auto max-w-3xl px-6 py-12">
         <button type="button" onClick={onBack} className="mb-4 flex items-center gap-1 text-xs text-white transition-colors hover:text-white">
-          <ChevronLeft size={14} /> Back
+          <ChevronLeft size={14} /> TODO_JA:ui.back
         </button>
         <div className="brand-studio-panel p-6 sm:p-8">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 text-emerald-600 text-xs font-semibold mb-4"><Layers size={12} /> Format Diversity</div>
@@ -3595,7 +3606,9 @@ function ShowcaseFormats({ onNext, onBack }) {
 const STEP_LABELS = ["アーキタイプ", "読者", "きっかけの瞬間", "声のトーン", "ビジュアルスタイル", "感情的な結果", "トピック", "あなたのブランド", "ローンチ"];
 
 export default function BrandWizard() {
-  const { t, td, to, tv, locale, isEn } = useTranslation();
+  const { strings } = useLocale();
+  const { t, td, to, tv, locale, isEn } = useJaWizardTranslation();
+  const tVoiceTone = useMemo(() => translateVoiceTone10(strings, VOICE_TONE_10), [strings]);
 
   // ── Translated data constants ──
   const tArchetypes = useMemo(() => td("archetypes", ARCHETYPES, ["name", "tagline", "sampleTitle", "sampleSubtitle", "sampleProse", "sampleExercise", "visionVibe", "tags", "coverStyle", "proseStyle", "videoStyle", "emotions"]), [locale]);
@@ -3650,7 +3663,7 @@ export default function BrandWizard() {
   const nextStep = () => { if (step < 8) { setStep((s) => s + 1); scrollTop(); } };
   const prevStep = () => { if (step > 0) { setStep((s) => s - 1); scrollTop(); } else { setPhase("intro"); setIntroPage(1); scrollTop(); } };
   const goToHowItWorks = () => { setPhase("intro"); setIntroPage(1); scrollTop(); };
-  const goToTeacherShowcase = () => { window.location.href = "teacher_showcase.html"; };
+  const goToTeacherShowcase = () => { window.location.href = "teacher_showcase-ja.html"; };
 
   // If ?teacher= / ?mode=composite / ?mode=music in URL, skip intro and jump to wizard step 1.
   useEffect(() => {
@@ -3680,7 +3693,7 @@ export default function BrandWizard() {
         ? !!state.moment
         : true;
 
-  const i18nData = { tArchetypes, tPersonas, tMoments, tVisualStyles, tEmotionCategories, tAngleFeedback, tSelectionFeedback, tProven, tV4FormatsStructural, t };
+  const i18nData = { tArchetypes, tPersonas, tMoments, tVisualStyles, tEmotionCategories, tAngleFeedback, tSelectionFeedback, tProven, tV4FormatsStructural, tVoiceTone, t };
 
   const steps = [
     <Step1Archetype key={0} state={state} update={update} i18n={i18nData} />,

@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pearl Prime Teacher Showcase — 13 Teachers, 13 Brands</title>
+<title>Pearl Prime ティーチャー・ショーケース — 13名のティーチャー、13の銘柄</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@300;400;500&display=swap');
 
@@ -257,16 +257,16 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
 <!-- Sticky teacher choose bar -->
 <div id="choose-bar">
   <div>
-    <span id="choose-bar-label">Viewing — </span>
+    <span id="choose-bar-label">表示中 — </span>
     <span id="choose-bar-name"></span>
   </div>
-  <button id="choose-bar-btn" onclick="chooseTeacherFromBar()">Choose This Teacher →</button>
+  <button id="choose-bar-btn" onclick="chooseTeacherFromBar()">このティーチャーを選ぶ →</button>
 </div>
 
 <!-- Sidebar -->
 <nav class="sidebar" style="top:0; height:100vh">
   <div class="sidebar-title">Pearl Prime</div>
-  <div class="sidebar-subtitle">United Spiritual Leaders of the Forum</div>
+  <div class="sidebar-subtitle">世界精神指導者フォーラム</div>
     <a href="#ahjan" class="nav-item" data-teacher="ahjan" style="--brand-color:#F5A623">
       <span class="nav-radio" aria-hidden="true"></span>
       <span class="nav-icon"><img src="teacher_pics/ahjan.png" alt="ahjan"></span>
@@ -375,13 +375,13 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
 
 <!-- Main Content -->
 <main class="main" style="padding-top:20px">
-  <h1 class="page-title">Teacher Showcase</h1>
-  <p class="page-subtitle">Media Portfolio Examples</p>
+  <h1 class="page-title">ティーチャー・ショーケース</h1>
+  <p class="page-subtitle">メディア・ポートフォリオの実例</p>
 
   <!-- Composite mode CTA: skip teacher selection entirely -->
   <div id="composite-banner">
-    <div id="composite-banner-text"><span id="composite-banner-hint">Author all books for this brand without a teacher voice</span></div>
-    <button id="composite-banner-btn" onclick="chooseComposite()">Composite mode (no teacher) →</button>
+    <div id="composite-banner-text"><span id="composite-banner-hint">この銘柄の全ての書籍を、教師の声なしで執筆</span></div>
+    <button id="composite-banner-btn" onclick="chooseComposite()">コンポジット（教師なし） →</button>
   </div>
 
   <!-- Teacher Sections -->
@@ -393,43 +393,43 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
         <div>
           <div class="teacher-name">Ahjan Sensei</div>
           <div class="teacher-brand">Stillness Press <span class="brand-jp">内なる光出版</span></div>
-          <div class="teacher-tradition">Contemplative / inner light / karma yoga</div>
-          <div class="teacher-focus">Meditation, mindfulness, inner peace</div>
-          <div class="teacher-stats">🇺🇸 English · somatic_companion · 10,120 words · iyashikei</div>
-                <button class="teacher-select-btn" id="sel-btn-ahjan" data-tname="Ahjan" onclick="chooseTeacher('ahjan', 'Ahjan')">Select Ahjan</button>
+          <div class="teacher-tradition">観想的 / 内なる光 / カルマ・ヨーガ</div>
+          <div class="teacher-focus">瞑想、マインドフルネス、内なる平安</div>
+          <div class="teacher-stats">🇺🇸 英語 · somatic_companion · 10,120語 · 癒し系</div>
+                <button class="teacher-select-btn" id="sel-btn-ahjan" data-tname="Ahjan" onclick="chooseTeacher('ahjan', 'Ahjan')">Ahjanを選ぶ</button>
       </div>
       </div>
 
       <!-- FORMATS ROW (ebook, audiobook, manga, podcast, social) -->
       <div class="section-toggle" onclick="toggleSection('ahjan_formats')">
-        <span class="toggle-arrow open" id="arr_ahjan_formats">▸</span> Formats
+        <span class="toggle-arrow open" id="arr_ahjan_formats">▸</span> フォーマット
       </div>
       <div id="ahjan_formats" class="collapsible" style="display:block">
         <div class="formats-grid">
           <div class="format-card" onclick="toggleSection('ahjan_book')" style="cursor:pointer">
-            <img src="assets/covers/kdp/ahjan_ebook.png" loading="lazy" alt="Ahjan Ebook" onerror="this.style.display='none'">
-            <div class="format-label">Ebook</div>
+            <img src="assets/covers/kdp/ahjan_ebook.png" loading="lazy" alt="Ahjan 電子書籍" onerror="this.style.display='none'">
+            <div class="format-label">電子書籍</div>
             <div class="format-brand">Stillness Press</div>
           </div>
           <div class="format-card podcast-playable" style="cursor:pointer;position:relative" onclick="toggleAudiobook('ahjan')">
-            <img src="assets/covers/kdp/ahjan_audiobook.png" loading="lazy" alt="Ahjan Audiobook" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:4px;margin-bottom:8px">
+            <img src="assets/covers/kdp/ahjan_audiobook.png" loading="lazy" alt="Ahjan オーディオブック" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:4px;margin-bottom:8px">
             <div class="play-overlay" id="play-ab-ahjan" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:44px;height:44px;border-radius:50%;background:rgba(0,0,0,0.6);display:flex;align-items:center;justify-content:center;pointer-events:none">
               <span style="color:white;font-size:1.1rem;margin-left:2px">&#9654;</span>
             </div>
-            <div class="format-label">Audiobook</div>
-            <div class="format-meta">Ch 1 · click to play</div>
+            <div class="format-label">オーディオブック</div>
+            <div class="format-meta">第1章 · タップで再生</div>
             <audio id="audiobook-ahjan" preload="metadata" src="https://pub-7c709cd3f8e6425dbeffaed4ca2cf901.r2.dev/teacher_showcase/audio_remap/ahjan_audiobook_en.mp3"></audio>
           </div>
           <div class="format-card" onclick="cycleManga('ahjan')" style="cursor:pointer">
-            <img id="manga-img-ahjan" src="assets/manga_covers/ahjan_scene.png" loading="lazy" alt="Ahjan Character" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center top;border-radius:4px;margin-bottom:8px">
-            <div class="format-label">Manga</div>
-            <div class="format-meta">Character art</div>
+            <img id="manga-img-ahjan" src="assets/manga_covers/ahjan_scene.png" loading="lazy" alt="Ahjan キャラクター" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center top;border-radius:4px;margin-bottom:8px">
+            <div class="format-label">マンガ</div>
+            <div class="format-meta">キャラクターアート</div>
           </div>
           <div class="format-card podcast-playable"
                style="cursor:pointer; position:relative"
                onclick="togglePodcast('ahjan')">
             <img src="assets/covers/kdp/ahjan_podcast.png"
-                 loading="lazy" alt="Ahjan podcast"
+                 loading="lazy" alt="Ahjan ポッドキャスト"
                  onerror="this.style.display='none'"
                  style="width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:4px; margin-bottom:8px">
             <div class="play-overlay" id="play-ahjan" style="
@@ -440,8 +440,8 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
             ">
               <span style="color:white; font-size:1.1rem; margin-left:2px">&#9654;</span>
             </div>
-            <div class="format-label">Podcast</div>
-            <div class="format-meta">3 min · click to play</div>
+            <div class="format-label">ポッドキャスト</div>
+            <div class="format-meta">3分 · タップで再生</div>
             <audio id="podcast-ahjan" preload="metadata"
                    src="assets/audio/podcast/ahjan_podcast_3min.mp3"></audio>
           </div>
@@ -449,8 +449,8 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
             <video controls preload="metadata" playsinline style="width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:4px;margin-bottom:8px;background:#000">
               <source src="https://pub-7c709cd3f8e6425dbeffaed4ca2cf901.r2.dev/teacher_showcase/teacher_vid_package/ahjan.mp4" type="video/mp4">
             </video>
-            <div class="format-label">Manga Short</div>
-            <div class="format-meta">Vertical · 90s</div>
+            <div class="format-label">マンガショート</div>
+            <div class="format-meta">縦型 · 90秒</div>
           </div>
         </div>
       </div>
@@ -461,27 +461,27 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
 
       <!-- READ BOOK -->
       <div class="section-toggle" onclick="toggleSection('ahjan_book')">
-        <span class="toggle-arrow" id="arr_ahjan_book">▸</span> Read Sample Chapter (~1,437 words)</div>
+        <span class="toggle-arrow" id="arr_ahjan_book">▸</span> サンプル章を読む（約1,437語）</div>
       <div id="ahjan_book" class="collapsible" style="display:none">
         <div class="book-content">
-<h3 class="chapter-heading">Chapter 1 — The Alarm That Won't Stop Ringing</h3>
+<h3 class="chapter-heading">第1章 — 鳴りやまない警報</h3>
 <br>
-<p>Your performance review is next Thursday.</p>
+<p>人事評価は来週の木曜日だ。</p>
 <br>
-<p>You've been preparing since Monday — not the material. You already know the material. You've been preparing your <em>face</em>. Your voice. The version of yourself that walks into that room and doesn't let the alarm show. The preparation nobody sees is the most exhausting part of the week.</p>
+<p>月曜日からずっと準備してきた——資料のことではない。資料はもう頭に入っている。あなたが整えてきたのは、自分の <em>表情</em>だ。声だ。あの部屋に入っても、胸の内の警報を悟らせない自分の姿だ。誰の目にも映らないこの準備こそ、その週でいちばん消耗させるものだ。</p>
 <br>
-<p>Your calendar says: productive. Your body is running something entirely different.</p>
+<p>カレンダーには「生産的」と記されている。だが身体は、まったく別のものを走らせている。</p>
 <br>
-<h4 class="preview-section-heading">The Scan</h4>
+<h4 class="preview-section-heading">走査（スキャン）</h4>
 <br>
-<p>There is a part of you that is always scanning.</p>
+<p>あなたの中には、いつも走査を続けている部分がある。</p>
 <br>
-<p>Not anxiously. Not obviously. Just — scanning. Monitoring the manager's response time. Reading tone in a Slack message. Recalculating whether last Tuesday's comment meant something. You've been doing this so efficiently, for so long, that you've stopped noticing it. You've mistaken it for just being the kind of person you are.</p>
+<p>不安げにではない。目立つ形でもない。ただ——走査している。上司の返信の速さを測る。Slackのメッセージの語調を読む。先週火曜のあの一言に意味があったのかと、何度も計算し直す。あまりに長く、あまりに巧みに続けてきたので、もうそれをしていることに気づかない。「自分はそういう人間なのだ」と取り違えてきた。</p>
 <br>
-<p>It isn't. It's a mechanism. And once you see it clearly, it changes.</p>
+<p>そうではない。それは一つの機構だ。そしてそれをはっきりと見た瞬間、それは変わりはじめる。</p>
 <br>
 <div style="margin-top:32px; padding-top:20px; border-top:1px solid #333; text-align:center;">
-  <a href="./teacher_showcase/ahjan__chapter_1.html" style="color:#F5A623; text-decoration:none; font-family:'DM Sans',sans-serif; font-size:0.95rem; letter-spacing:0.05em; font-weight:500; border-bottom:1px solid #F5A623; padding-bottom:2px;" target="_blank" rel="noopener">Read full chapter →</a>
+  <a href="./teacher_showcase/ahjan__chapter_1.html" style="color:#F5A623; text-decoration:none; font-family:'DM Sans',sans-serif; font-size:0.95rem; letter-spacing:0.05em; font-weight:500; border-bottom:1px solid #F5A623; padding-bottom:2px;" target="_blank" rel="noopener">全章を読む →</a>
 </div>
 </div>
       </div>
@@ -504,43 +504,43 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
         <div>
           <div class="teacher-name">Adi Da</div>
           <div class="teacher-brand">Feather & Scale Press</div>
-          <div class="teacher-tradition">Radical Devotion / self-transcendence</div>
-          <div class="teacher-focus">Self-worth, courage, boundaries</div>
-          <div class="teacher-stats">🇺🇸 English · elder_stabilizer · 14,025 words · seinen</div>
-                <button class="teacher-select-btn" id="sel-btn-adi_da" data-tname="Adi Da" onclick="chooseTeacher('adi_da', 'Adi Da')">Select Adi Da</button>
+          <div class="teacher-tradition">ラディカルな献身 / 自己超越</div>
+          <div class="teacher-focus">自己肯定感、勇気、境界線</div>
+          <div class="teacher-stats">🇺🇸 英語 · elder_stabilizer · 14,025語 · 青年</div>
+                <button class="teacher-select-btn" id="sel-btn-adi_da" data-tname="Adi Da" onclick="chooseTeacher('adi_da', 'Adi Da')">Adi Daを選ぶ</button>
       </div>
       </div>
 
       <!-- FORMATS ROW (ebook, audiobook, manga, podcast, social) -->
       <div class="section-toggle" onclick="toggleSection('adi_da_formats')">
-        <span class="toggle-arrow open" id="arr_adi_da_formats">▸</span> Formats
+        <span class="toggle-arrow open" id="arr_adi_da_formats">▸</span> フォーマット
       </div>
       <div id="adi_da_formats" class="collapsible" style="display:block">
         <div class="formats-grid">
           <div class="format-card" onclick="toggleSection('adi_da_book')" style="cursor:pointer">
-            <img src="assets/covers/kdp/adi_da_ebook.png" loading="lazy" alt="Adi Da Ebook" onerror="this.style.display='none'">
-            <div class="format-label">Ebook</div>
+            <img src="assets/covers/kdp/adi_da_ebook.png" loading="lazy" alt="Adi Da 電子書籍" onerror="this.style.display='none'">
+            <div class="format-label">電子書籍</div>
             <div class="format-brand">Feather & Scale Press</div>
           </div>
           <div class="format-card podcast-playable" style="cursor:pointer;position:relative" onclick="toggleAudiobook('adi_da')">
-            <img src="assets/covers/kdp/adi_da_audiobook.png" loading="lazy" alt="Adi Da Audiobook" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:4px;margin-bottom:8px">
+            <img src="assets/covers/kdp/adi_da_audiobook.png" loading="lazy" alt="Adi Da オーディオブック" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:4px;margin-bottom:8px">
             <div class="play-overlay" id="play-ab-adi_da" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:44px;height:44px;border-radius:50%;background:rgba(0,0,0,0.6);display:flex;align-items:center;justify-content:center;pointer-events:none">
               <span style="color:white;font-size:1.1rem;margin-left:2px">&#9654;</span>
             </div>
-            <div class="format-label">Audiobook</div>
-            <div class="format-meta">Ch 1 · click to play</div>
+            <div class="format-label">オーディオブック</div>
+            <div class="format-meta">第1章 · タップで再生</div>
             <audio id="audiobook-adi_da" preload="metadata" src="assets/audio/audiobook_chapters/adi_da_self_worth_ch1.mp3"></audio>
           </div>
           <div class="format-card" onclick="cycleManga('adi_da')" style="cursor:pointer">
-            <img id="manga-img-adi_da" src="assets/manga_covers/adi_da_scene.png" loading="lazy" alt="Adi Da Character" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center top;border-radius:4px;margin-bottom:8px">
-            <div class="format-label">Manga</div>
-            <div class="format-meta">Character art</div>
+            <img id="manga-img-adi_da" src="assets/manga_covers/adi_da_scene.png" loading="lazy" alt="Adi Da キャラクター" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center top;border-radius:4px;margin-bottom:8px">
+            <div class="format-label">マンガ</div>
+            <div class="format-meta">キャラクターアート</div>
           </div>
           <div class="format-card podcast-playable"
                style="cursor:pointer; position:relative"
                onclick="togglePodcast('adi_da')">
             <img src="assets/covers/kdp/adi_da_podcast.png"
-                 loading="lazy" alt="Adi Da podcast"
+                 loading="lazy" alt="Adi Da ポッドキャスト"
                  onerror="this.style.display='none'"
                  style="width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:4px; margin-bottom:8px">
             <div class="play-overlay" id="play-adi_da" style="
@@ -551,8 +551,8 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
             ">
               <span style="color:white; font-size:1.1rem; margin-left:2px">&#9654;</span>
             </div>
-            <div class="format-label">Podcast</div>
-            <div class="format-meta">3 min · click to play</div>
+            <div class="format-label">ポッドキャスト</div>
+            <div class="format-meta">3分 · タップで再生</div>
             <audio id="podcast-adi_da" preload="metadata"
                    src="assets/audio/podcast/adi_da_podcast_3min.mp3"></audio>
           </div>
@@ -560,8 +560,8 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
             <video controls preload="metadata" playsinline style="width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:4px;margin-bottom:8px;background:#000">
               <source src="https://pub-7c709cd3f8e6425dbeffaed4ca2cf901.r2.dev/teacher_showcase/teacher_vid_package/adi_da.mp4" type="video/mp4">
             </video>
-            <div class="format-label">Manga Short</div>
-            <div class="format-meta">Vertical · 90s</div>
+            <div class="format-label">マンガショート</div>
+            <div class="format-meta">縦型 · 90秒</div>
           </div>
         </div>
       </div>
@@ -574,27 +574,27 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
 
       <!-- READ BOOK -->
       <div class="section-toggle" onclick="toggleSection('adi_da_book')">
-        <span class="toggle-arrow" id="arr_adi_da_book">▸</span> Read Sample Chapter (~2,151 words)</div>
+        <span class="toggle-arrow" id="arr_adi_da_book">▸</span> サンプル章を読む（約2,151語）</div>
       <div id="adi_da_book" class="collapsible" style="display:none">
         <div class="book-content">
-<h3 class="chapter-heading">Chapter 1 — The Alarm That Won't Stop Ringing</h3>
+<h3 class="chapter-heading">第1章 — 鳴りやまない警報</h3>
 <br>
-<p>Your performance review is next Thursday.</p>
+<p>人事評価は来週の木曜日だ。</p>
 <br>
-<p>You have been preparing since Monday — not the material. You already know the material. You have been preparing your <em>face</em>. Your voice. The arrangement of yourself that walks into that room and does not let the contraction show. This preparation, which no one will ever see on the calendar, is the most exhausting thing you will do this week. Notice that. Do not move past it.</p>
+<p>月曜からずっと準備してきた——資料ではない。資料はすでに知り尽くしている。あなたが整えてきたのは、自分の <em>表情</em>だ。声だ。あの部屋に入っても、内側の収縮を悟らせないための自分の整え方だ。カレンダーには決して現れないこの準備こそ、その週にあなたがなす最も消耗させる行いだ。それに気づけ。素通りするな。</p>
 <br>
-<p>Your calendar says: productive. Your body is running something altogether other.</p>
+<p>カレンダーには「生産的」とある。だが身体は、まったく別のものを走らせている。</p>
 <br>
-<h4 class="preview-section-heading">The Scan</h4>
+<h4 class="preview-section-heading">走査（スキャン）</h4>
 <br>
-<p>There is a part of you that is always scanning.</p>
+<p>あなたの中には、いつも走査を続けている部分がある。</p>
 <br>
-<p>Not anxiously. Not theatrically. Just — scanning. Tracking the manager's response time. Reading the temperature of a single word in a Slack message. Recalculating what last Tuesday's comment might still mean. You have done this so efficiently, for so long, that it has stopped registering. You have mistaken it for who you are.</p>
+<p>不安げにでもなく、芝居がかってでもなく。ただ——走査している。上司の返信の速さを追う。Slackの一語の温度を読む。先週火曜のあの言葉が今なお何を意味しうるかを計算し直す。あまりに長く、あまりに効率よく続けてきたので、もはや意識にすら上らない。あなたはそれを「自分そのもの」と取り違えてきた。</p>
 <br>
-<p>It is not who you are. It is a mechanism — a precise, evolutionarily faithful mechanism — and the moment you see it as a mechanism, something shifts. Not the mechanism. You.</p>
+<p>それはあなたそのものではない。それは一つの機構——精緻で、進化に忠実な機構——であり、それを機構として見た瞬間、何かが動く。機構がではない。あなたが、だ。</p>
 <br>
 <div style="margin-top:32px; padding-top:20px; border-top:1px solid #333; text-align:center;">
-  <a href="./teacher_showcase/adi_da__chapter_1.html" style="color:#F5A623; text-decoration:none; font-family:'DM Sans',sans-serif; font-size:0.95rem; letter-spacing:0.05em; font-weight:500; border-bottom:1px solid #F5A623; padding-bottom:2px;" target="_blank" rel="noopener">Read full chapter →</a>
+  <a href="./teacher_showcase/adi_da__chapter_1.html" style="color:#F5A623; text-decoration:none; font-family:'DM Sans',sans-serif; font-size:0.95rem; letter-spacing:0.05em; font-weight:500; border-bottom:1px solid #F5A623; padding-bottom:2px;" target="_blank" rel="noopener">全章を読む →</a>
 </div>
 </div>
       </div>
@@ -624,17 +624,17 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
 
       <!-- FORMATS ROW (ebook, audiobook, manga, podcast, social) -->
       <div class="section-toggle" onclick="toggleSection('master_feung_formats')">
-        <span class="toggle-arrow open" id="arr_master_feung_formats">▸</span> Formats
+        <span class="toggle-arrow open" id="arr_master_feung_formats">▸</span> フォーマット
       </div>
       <div id="master_feung_formats" class="collapsible" style="display:block">
         <div class="formats-grid">
           <div class="format-card" onclick="toggleSection('master_feung_book')" style="cursor:pointer">
-            <img src="https://pub-7c709cd3f8e6425dbeffaed4ca2cf901.r2.dev/teacher_showcase/assets/covers/kdp/master_feung_localized_2026-05-17.png" loading="lazy" alt="Master Feung Ebook" onerror="this.style.display='none'">
+            <img src="https://pub-7c709cd3f8e6425dbeffaed4ca2cf901.r2.dev/teacher_showcase/assets/covers/kdp/master_feung_localized_2026-05-17.png" loading="lazy" alt="Master Feung 電子書籍" onerror="this.style.display='none'">
             <div class="format-label">电子书</div>
             <div class="format-brand">铁门出版</div>
           </div>
           <div class="format-card podcast-playable" style="cursor:pointer;position:relative" onclick="toggleAudiobook('master_feung')">
-            <img src="https://pub-7c709cd3f8e6425dbeffaed4ca2cf901.r2.dev/teacher_showcase/assets/covers/kdp/master_feung_audiobook_localized_2026-05-17.jpg" loading="lazy" alt="Master Feung Audiobook" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:4px;margin-bottom:8px">
+            <img src="https://pub-7c709cd3f8e6425dbeffaed4ca2cf901.r2.dev/teacher_showcase/assets/covers/kdp/master_feung_audiobook_localized_2026-05-17.jpg" loading="lazy" alt="Master Feung オーディオブック" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:4px;margin-bottom:8px">
             <div class="play-overlay" id="play-ab-master_feung" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:44px;height:44px;border-radius:50%;background:rgba(0,0,0,0.6);display:flex;align-items:center;justify-content:center;pointer-events:none">
               <span style="color:white;font-size:1.1rem;margin-left:2px">&#9654;</span>
             </div>
@@ -643,7 +643,7 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
             <audio id="audiobook-master_feung" preload="metadata" src="https://pub-7c709cd3f8e6425dbeffaed4ca2cf901.r2.dev/teacher_showcase/audio_remap/master_feung_audiobook_zh-cn.mp3"></audio>
           </div>
           <div class="format-card" onclick="cycleManga('master_feung')" style="cursor:pointer">
-            <img id="manga-img-master_feung" src="assets/manga_covers/master_feung_scene.png" loading="lazy" alt="Master Feung Character" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center top;border-radius:4px;margin-bottom:8px">
+            <img id="manga-img-master_feung" src="assets/manga_covers/master_feung_scene.png" loading="lazy" alt="Master Feung キャラクター" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center top;border-radius:4px;margin-bottom:8px">
             <div class="format-label">漫画</div>
             <div class="format-meta">角色艺术</div>
           </div>
@@ -651,7 +651,7 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
                style="cursor:pointer; position:relative"
                onclick="togglePodcast('master_feung')">
             <img src="https://pub-7c709cd3f8e6425dbeffaed4ca2cf901.r2.dev/teacher_showcase/assets/covers/kdp/master_feung_podcast_localized_2026-05-17.jpg"
-                 loading="lazy" alt="Master Feung podcast"
+                 loading="lazy" alt="Master Feung ポッドキャスト"
                  onerror="this.style.display='none'"
                  style="width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:4px; margin-bottom:8px">
             <div class="play-overlay" id="play-master_feung" style="
@@ -726,43 +726,43 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
         <div>
           <div class="teacher-name">Her Holiness Sai Maa</div>
           <div class="teacher-brand">Open Vessel Press</div>
-          <div class="teacher-tradition">Vedic Hindu / Shakti / devotional</div>
-          <div class="teacher-focus">Grief, compassion fatigue, depression</div>
+          <div class="teacher-tradition">ヴェーダ・ヒンドゥー / シャクティ / 献身</div>
+          <div class="teacher-focus">悲嘆、共感疲労、抑うつ</div>
           <div class="teacher-stats">🇨🇳 中文 · somatic_companion · 10,004 words · josei</div>
-                <button class="teacher-select-btn" id="sel-btn-sai_ma" data-tname="Sai Ma" onclick="chooseTeacher('sai_ma', 'Sai Ma')">Select Sai Ma</button>
+                <button class="teacher-select-btn" id="sel-btn-sai_ma" data-tname="Sai Ma" onclick="chooseTeacher('sai_ma', 'Sai Ma')">Sai Maを選ぶ</button>
       </div>
       </div>
 
       <!-- FORMATS ROW (ebook, audiobook, manga, podcast, social) -->
       <div class="section-toggle" onclick="toggleSection('sai_ma_formats')">
-        <span class="toggle-arrow open" id="arr_sai_ma_formats">▸</span> Formats
+        <span class="toggle-arrow open" id="arr_sai_ma_formats">▸</span> フォーマット
       </div>
       <div id="sai_ma_formats" class="collapsible" style="display:block">
         <div class="formats-grid">
           <div class="format-card" onclick="toggleSection('sai_ma_book')" style="cursor:pointer">
-            <img src="assets/covers/kdp/sai_ma_ebook.png" loading="lazy" alt="Sai Ma Ebook" onerror="this.style.display='none'">
-            <div class="format-label">Ebook</div>
+            <img src="assets/covers/kdp/sai_ma_ebook.png" loading="lazy" alt="Sai Ma 電子書籍" onerror="this.style.display='none'">
+            <div class="format-label">電子書籍</div>
             <div class="format-brand">Open Vessel Press</div>
           </div>
           <div class="format-card podcast-playable" style="cursor:pointer;position:relative" onclick="toggleAudiobook('sai_ma')">
-            <img src="assets/covers/kdp/sai_ma_audiobook.png" loading="lazy" alt="Sai Ma Audiobook" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:4px;margin-bottom:8px">
+            <img src="assets/covers/kdp/sai_ma_audiobook.png" loading="lazy" alt="Sai Ma オーディオブック" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:4px;margin-bottom:8px">
             <div class="play-overlay" id="play-ab-sai_ma" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:44px;height:44px;border-radius:50%;background:rgba(0,0,0,0.6);display:flex;align-items:center;justify-content:center;pointer-events:none">
               <span style="color:white;font-size:1.1rem;margin-left:2px">&#9654;</span>
             </div>
-            <div class="format-label">Audiobook</div>
-            <div class="format-meta">Ch 1 · click to play</div>
+            <div class="format-label">オーディオブック</div>
+            <div class="format-meta">第1章 · タップで再生</div>
             <audio id="audiobook-sai_ma" preload="metadata" src="assets/audio/audiobook_chapters/sai_ma_grief_ch1.mp3"></audio>
           </div>
           <div class="format-card" onclick="cycleManga('sai_ma')" style="cursor:pointer">
-            <img id="manga-img-sai_ma" src="assets/manga_covers/sai_ma_scene.png" loading="lazy" alt="Sai Ma Character" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center top;border-radius:4px;margin-bottom:8px">
-            <div class="format-label">Manga</div>
-            <div class="format-meta">Character art</div>
+            <img id="manga-img-sai_ma" src="assets/manga_covers/sai_ma_scene.png" loading="lazy" alt="Sai Ma キャラクター" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center top;border-radius:4px;margin-bottom:8px">
+            <div class="format-label">マンガ</div>
+            <div class="format-meta">キャラクターアート</div>
           </div>
           <div class="format-card podcast-playable"
                style="cursor:pointer; position:relative"
                onclick="togglePodcast('sai_ma')">
             <img src="assets/covers/kdp/sai_ma_podcast.png"
-                 loading="lazy" alt="Sai Ma podcast"
+                 loading="lazy" alt="Sai Ma ポッドキャスト"
                  onerror="this.style.display='none'"
                  style="width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:4px; margin-bottom:8px">
             <div class="play-overlay" id="play-sai_ma" style="
@@ -773,8 +773,8 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
             ">
               <span style="color:white; font-size:1.1rem; margin-left:2px">&#9654;</span>
             </div>
-            <div class="format-label">Podcast</div>
-            <div class="format-meta">3 min · click to play</div>
+            <div class="format-label">ポッドキャスト</div>
+            <div class="format-meta">3分 · タップで再生</div>
             <audio id="podcast-sai_ma" preload="metadata"
                    src="assets/audio/podcast/sai_ma_podcast_3min.mp3"></audio>
           </div>
@@ -782,8 +782,8 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
             <video controls preload="metadata" playsinline style="width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:4px;margin-bottom:8px;background:#000">
               <source src="https://pub-7c709cd3f8e6425dbeffaed4ca2cf901.r2.dev/teacher_showcase/teacher_vid_package/sai_ma.mp4" type="video/mp4">
             </video>
-            <div class="format-label">Manga Short</div>
-            <div class="format-meta">Vertical · 90s</div>
+            <div class="format-label">マンガショート</div>
+            <div class="format-meta">縦型 · 90秒</div>
           </div>
         </div>
       </div>
@@ -796,29 +796,29 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
 
       <!-- READ BOOK -->
       <div class="section-toggle" onclick="toggleSection('sai_ma_book')">
-        <span class="toggle-arrow" id="arr_sai_ma_book">▸</span> Read Sample Chapter (~2,021 words)</div>
+        <span class="toggle-arrow" id="arr_sai_ma_book">▸</span> サンプル章を読む（約2,021語）</div>
       <div id="sai_ma_book" class="collapsible" style="display:none">
         <div class="book-content">
-<h3 class="chapter-heading">Chapter 1 — The Alarm That Won't Stop Ringing</h3>
+<h3 class="chapter-heading">第1章 — 鳴りやまない警報</h3>
 <br>
-<p>Your performance review is next Thursday.</p>
+<p>人事評価は来週の木曜日だ。</p>
 <br>
-<p>You've been preparing since Monday — not the material. You already know the material. You've been preparing your <em>face</em>. Your voice. The version of yourself that walks into that room and doesn't let the alarm show. The preparation nobody sees is the most exhausting part of the week.</p>
+<p>月曜日からずっと準備してきた——資料のことではない。資料はもう頭に入っている。あなたが整えてきたのは、自分の <em>表情</em>だ。声だ。あの部屋に入っても、胸の内の警報を悟らせない自分の姿だ。誰の目にも映らないこの準備こそ、その週でいちばん消耗させるものだ。</p>
 <br>
-<p>Your calendar says: productive. Your body is running something entirely different.</p>
+<p>カレンダーには「生産的」と記されている。だが身体は、まったく別のものを走らせている。</p>
 <br>
-<p>And underneath even the body, something is waiting — radiant, unhurried — that has not yet been given permission to speak.</p>
+<p>そして身体のさらに奥で、何かが待っている——輝きに満ち、急ぐことなく——まだ語る許しを与えられていない何かが。</p>
 <br>
-<h4 class="preview-section-heading">The Scan</h4>
+<h4 class="preview-section-heading">走査（スキャン）</h4>
 <br>
-<p>There is a part of you that is always scanning.</p>
+<p>あなたの中には、いつも走査を続けている部分がある。</p>
 <br>
-<p>Not anxiously. Not obviously. Just — scanning. Monitoring the manager's response time. Reading tone in a Slack message. Recalculating whether last Tuesday's comment meant something. You've been doing this so efficiently, for so long, that you've stopped noticing it. You've mistaken it for just being the kind of person you are.</p>
+<p>不安げにではない。目立つ形でもない。ただ——走査している。上司の返信の速さを測る。Slackのメッセージの語調を読む。先週火曜のあの一言に意味があったのかと、何度も計算し直す。あまりに長く、あまりに巧みに続けてきたので、もうそれをしていることに気づかない。「自分はそういう人間なのだ」と取り違えてきた。</p>
 <br>
-<p>It isn't. It is a mechanism running in the foreground while the deeper intelligence in you — what the lineage calls <em>shakti</em> — waits underneath, quiet, fully awake, unwilling to leave you. The scanning is not your essence. The seeing of it is. And the moment seeing begins, the Mother is already in the room.</p>
+<p>そうではない。それは前景で作動する一つの機構にすぎず、その奥ではあなたのより深い知性——系譜が <em>シャクティ</em> と呼ぶもの——が奥で待っている。静かに、完全に目覚めて、あなたを離れようとせずに。走査はあなたの本質ではない。それを見ることこそが本質だ。そして見ることが始まった瞬間、母（マザー）はすでにその部屋にいる。</p>
 <br>
 <div style="margin-top:32px; padding-top:20px; border-top:1px solid #333; text-align:center;">
-  <a href="./teacher_showcase/sai_ma__chapter_1.html" style="color:#F5A623; text-decoration:none; font-family:'DM Sans',sans-serif; font-size:0.95rem; letter-spacing:0.05em; font-weight:500; border-bottom:1px solid #F5A623; padding-bottom:2px;" target="_blank" rel="noopener">Read full chapter →</a>
+  <a href="./teacher_showcase/sai_ma__chapter_1.html" style="color:#F5A623; text-decoration:none; font-family:'DM Sans',sans-serif; font-size:0.95rem; letter-spacing:0.05em; font-weight:500; border-bottom:1px solid #F5A623; padding-bottom:2px;" target="_blank" rel="noopener">全章を読む →</a>
 </div>
 </div>
       </div>
@@ -839,43 +839,43 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
         <div>
           <div class="teacher-name">Ra</div>
           <div class="teacher-brand">Ember & Ash Publishing</div>
-          <div class="teacher-tradition">African Spiritual / solar / ancestral</div>
-          <div class="teacher-focus">Depression, courage, self-worth, grief</div>
-          <div class="teacher-stats">🇺🇸 English · research_guide · 8,894 words · seinen</div>
-                <button class="teacher-select-btn" id="sel-btn-ra" data-tname="Ra" onclick="chooseTeacher('ra', 'Ra')">Select Ra</button>
+          <div class="teacher-tradition">アフリカ精神性 / 太陽 / 祖先</div>
+          <div class="teacher-focus">抑うつ、勇気、自己肯定感、悲嘆</div>
+          <div class="teacher-stats">🇺🇸 英語 · research_guide · 8,894語 · 青年</div>
+                <button class="teacher-select-btn" id="sel-btn-ra" data-tname="Ra" onclick="chooseTeacher('ra', 'Ra')">Raを選ぶ</button>
       </div>
       </div>
 
       <!-- FORMATS ROW (ebook, audiobook, manga, podcast, social) -->
       <div class="section-toggle" onclick="toggleSection('ra_formats')">
-        <span class="toggle-arrow open" id="arr_ra_formats">▸</span> Formats
+        <span class="toggle-arrow open" id="arr_ra_formats">▸</span> フォーマット
       </div>
       <div id="ra_formats" class="collapsible" style="display:block">
         <div class="formats-grid">
           <div class="format-card" onclick="toggleSection('ra_book')" style="cursor:pointer">
-            <img src="assets/covers/kdp/ra_ebook.png" loading="lazy" alt="Ra Ebook" onerror="this.style.display='none'">
-            <div class="format-label">Ebook</div>
+            <img src="assets/covers/kdp/ra_ebook.png" loading="lazy" alt="Ra 電子書籍" onerror="this.style.display='none'">
+            <div class="format-label">電子書籍</div>
             <div class="format-brand">Ember & Ash Publishing</div>
           </div>
           <div class="format-card podcast-playable" style="cursor:pointer;position:relative" onclick="toggleAudiobook('ra')">
-            <img src="assets/covers/kdp/ra_audiobook.png" loading="lazy" alt="Ra Audiobook" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:4px;margin-bottom:8px">
+            <img src="assets/covers/kdp/ra_audiobook.png" loading="lazy" alt="Ra オーディオブック" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:4px;margin-bottom:8px">
             <div class="play-overlay" id="play-ab-ra" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:44px;height:44px;border-radius:50%;background:rgba(0,0,0,0.6);display:flex;align-items:center;justify-content:center;pointer-events:none">
               <span style="color:white;font-size:1.1rem;margin-left:2px">&#9654;</span>
             </div>
-            <div class="format-label">Audiobook</div>
-            <div class="format-meta">Ch 1 · click to play</div>
+            <div class="format-label">オーディオブック</div>
+            <div class="format-meta">第1章 · タップで再生</div>
             <audio id="audiobook-ra" preload="metadata" src="assets/audio/audiobook_chapters/ra_self_worth_ch1.mp3"></audio>
           </div>
           <div class="format-card" onclick="cycleManga('ra')" style="cursor:pointer">
-            <img id="manga-img-ra" src="assets/manga_covers/ra_scene.png" loading="lazy" alt="Ra Character" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center top;border-radius:4px;margin-bottom:8px">
-            <div class="format-label">Manga</div>
-            <div class="format-meta">Character art</div>
+            <img id="manga-img-ra" src="assets/manga_covers/ra_scene.png" loading="lazy" alt="Ra キャラクター" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center top;border-radius:4px;margin-bottom:8px">
+            <div class="format-label">マンガ</div>
+            <div class="format-meta">キャラクターアート</div>
           </div>
           <div class="format-card podcast-playable"
                style="cursor:pointer; position:relative"
                onclick="togglePodcast('ra')">
             <img src="assets/covers/kdp/ra_podcast.png"
-                 loading="lazy" alt="Ra podcast"
+                 loading="lazy" alt="Ra ポッドキャスト"
                  onerror="this.style.display='none'"
                  style="width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:4px; margin-bottom:8px">
             <div class="play-overlay" id="play-ra" style="
@@ -886,8 +886,8 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
             ">
               <span style="color:white; font-size:1.1rem; margin-left:2px">&#9654;</span>
             </div>
-            <div class="format-label">Podcast</div>
-            <div class="format-meta">3 min · click to play</div>
+            <div class="format-label">ポッドキャスト</div>
+            <div class="format-meta">3分 · タップで再生</div>
             <audio id="podcast-ra" preload="metadata"
                    src="assets/audio/podcast/ra_podcast_3min.mp3"></audio>
           </div>
@@ -895,8 +895,8 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
             <video controls preload="metadata" playsinline style="width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:4px;margin-bottom:8px;background:#000">
               <source src="https://pub-7c709cd3f8e6425dbeffaed4ca2cf901.r2.dev/teacher_showcase/teacher_vid_package/ra.mp4" type="video/mp4">
             </video>
-            <div class="format-label">Manga Short</div>
-            <div class="format-meta">Vertical · 90s</div>
+            <div class="format-label">マンガショート</div>
+            <div class="format-meta">縦型 · 90秒</div>
           </div>
         </div>
       </div>
@@ -909,27 +909,27 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
 
       <!-- READ BOOK -->
       <div class="section-toggle" onclick="toggleSection('ra_book')">
-        <span class="toggle-arrow" id="arr_ra_book">▸</span> Read Sample Chapter (~2,106 words)</div>
+        <span class="toggle-arrow" id="arr_ra_book">▸</span> サンプル章を読む（約2,106語）</div>
       <div id="ra_book" class="collapsible" style="display:none">
         <div class="book-content">
-<h3 class="chapter-heading">Chapter 1 — The Alarm That Won't Stop Ringing</h3>
+<h3 class="chapter-heading">第1章 — 鳴りやまない警報</h3>
 <br>
-<p>Notice, before you read another sentence, that something is reading.</p>
+<p>次の一文を読む前に、気づいてほしい——何かが「読んでいる」ということに。</p>
 <br>
-<p>The alarm has been ringing in your chest since Monday — the review is Thursday — and underneath all of that ringing, something is calm enough to register it. Something that has not been recruited into the worry. Read this paragraph and feel for it. Not the ringing. The one who hears the ringing. That one has been here the whole time. It was here before the alarm started. It will be here after the alarm has gone quiet.</p>
+<p>警報は月曜から胸の中で鳴り続けている——評価は木曜だ——そしてその鳴り響きのすべての奥に、それを静かに感知できるだけの落ち着きを持つ何かがある。心配ごとに徴用されていない何かが。この段落を読みながら、それを感じ取ってほしい。鳴り響きではない。その鳴り響きを聴いている者を、だ。その者はずっとここにいた。警報が始まる前からここにいた。警報が静まった後もここにいるだろう。</p>
 <br>
-<p>Your calendar says: productive. Your costume says: composed. The one watching all of it is what we will come back to, again and again, until you can find it without help.</p>
+<p>カレンダーは言う——「生産的」。あなたのまとう装いは言う——「冷静」。そのすべてを見ている者へ、私たちは何度も何度も立ち返る。助けなしにあなた自身がそれを見出せるようになるまで。</p>
 <br>
-<h4 class="preview-section-heading">The Scan</h4>
+<h4 class="preview-section-heading">走査（スキャン）</h4>
 <br>
-<p>There is a part of you that is always scanning.</p>
+<p>あなたの中には、いつも走査を続けている部分がある。</p>
 <br>
-<p>Not anxiously. Not obviously. Just — scanning. Monitoring the manager's response time. Reading tone in a Slack message. Recalculating whether last Tuesday's comment meant something. You've been doing this so efficiently, for so long, that you've stopped noticing it. You've mistaken it for just being the kind of person you are. The scan and the self have fused in your memory. They are not the same thing.</p>
+<p>不安げにではない。目立つ形でもない。ただ——走査している。上司の返信の速さを監視する。Slackのメッセージの語調を読む。先週火曜のあの一言に意味があったのかを計算し直す。あまりに長く、あまりに巧みに続けてきたので、もう気づかない。「自分はそういう人間だ」と取り違えてきた。走査と自己が、記憶の中で融合してしまっている。だが、その二つは同じものではない。</p>
 <br>
-<p>It isn't who you are. It's a mechanism. And the one watching the mechanism is not the mechanism. Notice that distinction. It is small to read and very large to live inside. It is the whole book.</p>
+<p>それはあなたそのものではない。それは一つの機構だ。そしてその機構を見ている者は、機構ではない。この区別に気づいてほしい。読むぶんには小さな違いだが、その内に生きるとなれば途方もなく大きい。それが、この本のすべてだ。</p>
 <br>
 <div style="margin-top:32px; padding-top:20px; border-top:1px solid #333; text-align:center;">
-  <a href="./teacher_showcase/ra__chapter_1.html" style="color:#F5A623; text-decoration:none; font-family:'DM Sans',sans-serif; font-size:0.95rem; letter-spacing:0.05em; font-weight:500; border-bottom:1px solid #F5A623; padding-bottom:2px;" target="_blank" rel="noopener">Read full chapter →</a>
+  <a href="./teacher_showcase/ra__chapter_1.html" style="color:#F5A623; text-decoration:none; font-family:'DM Sans',sans-serif; font-size:0.95rem; letter-spacing:0.05em; font-weight:500; border-bottom:1px solid #F5A623; padding-bottom:2px;" target="_blank" rel="noopener">全章を読む →</a>
 </div>
 </div>
       </div>
@@ -959,17 +959,17 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
 
       <!-- FORMATS ROW (ebook, audiobook, manga, podcast, social) -->
       <div class="section-toggle" onclick="toggleSection('junko_formats')">
-        <span class="toggle-arrow open" id="arr_junko_formats">▸</span> Formats
+        <span class="toggle-arrow open" id="arr_junko_formats">▸</span> フォーマット
       </div>
       <div id="junko_formats" class="collapsible" style="display:block">
         <div class="formats-grid">
           <div class="format-card" onclick="toggleSection('junko_book')" style="cursor:pointer">
-            <img src="https://pub-7c709cd3f8e6425dbeffaed4ca2cf901.r2.dev/teacher_showcase/assets/covers/kdp/junko_localized_2026-05-21.png" loading="lazy" alt="Junko Ebook" onerror="this.style.display='none'">
+            <img src="https://pub-7c709cd3f8e6425dbeffaed4ca2cf901.r2.dev/teacher_showcase/assets/covers/kdp/junko_localized_2026-05-21.png" loading="lazy" alt="Junko 電子書籍" onerror="this.style.display='none'">
             <div class="format-label">電子書籍</div>
             <div class="format-brand">裸形書房</div>
           </div>
           <div class="format-card podcast-playable" style="cursor:pointer;position:relative" onclick="toggleAudiobook('junko')">
-            <img src="https://pub-7c709cd3f8e6425dbeffaed4ca2cf901.r2.dev/teacher_showcase/assets/covers/kdp/junko_audiobook_localized_2026-05-21.jpg" loading="lazy" alt="Junko Audiobook" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:4px;margin-bottom:8px">
+            <img src="https://pub-7c709cd3f8e6425dbeffaed4ca2cf901.r2.dev/teacher_showcase/assets/covers/kdp/junko_audiobook_localized_2026-05-21.jpg" loading="lazy" alt="Junko オーディオブック" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:4px;margin-bottom:8px">
             <div class="play-overlay" id="play-ab-junko" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:44px;height:44px;border-radius:50%;background:rgba(0,0,0,0.6);display:flex;align-items:center;justify-content:center;pointer-events:none">
               <span style="color:white;font-size:1.1rem;margin-left:2px">&#9654;</span>
             </div>
@@ -978,7 +978,7 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
             <audio id="audiobook-junko" preload="metadata" src="assets/audio/audiobook_chapters/miyuki_overthinking_ch1.mp3"></audio>
           </div>
           <div class="format-card" onclick="cycleManga('junko')" style="cursor:pointer">
-            <img id="manga-img-junko" src="assets/manga_covers/miyuki_scene.png" loading="lazy" alt="Junko Character" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center top;border-radius:4px;margin-bottom:8px">
+            <img id="manga-img-junko" src="assets/manga_covers/miyuki_scene.png" loading="lazy" alt="Junko キャラクター" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center top;border-radius:4px;margin-bottom:8px">
             <div class="format-label">漫画</div>
             <div class="format-meta">キャラクターアート</div>
           </div>
@@ -986,7 +986,7 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
                style="cursor:pointer; position:relative"
                onclick="togglePodcast('junko')">
             <img src="https://pub-7c709cd3f8e6425dbeffaed4ca2cf901.r2.dev/teacher_showcase/assets/covers/kdp/junko_podcast_localized_2026-05-21.jpg"
-                 loading="lazy" alt="Junko podcast"
+                 loading="lazy" alt="Junko ポッドキャスト"
                  onerror="this.style.display='none'"
                  style="width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:4px; margin-bottom:8px">
             <div class="play-overlay" id="play-junko" style="
@@ -1082,17 +1082,17 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
 
       <!-- FORMATS ROW (ebook, audiobook, manga, podcast, social) -->
       <div class="section-toggle" onclick="toggleSection('miki_formats')">
-        <span class="toggle-arrow open" id="arr_miki_formats">▸</span> Formats
+        <span class="toggle-arrow open" id="arr_miki_formats">▸</span> フォーマット
       </div>
       <div id="miki_formats" class="collapsible" style="display:block">
         <div class="formats-grid">
           <div class="format-card" onclick="toggleSection('miki_book')" style="cursor:pointer">
-            <img src="https://pub-7c709cd3f8e6425dbeffaed4ca2cf901.r2.dev/teacher_showcase/assets/covers/kdp/miki_starseed_2026-05-21.png" loading="lazy" alt="Miki Ebook" onerror="this.style.display='none'">
+            <img src="https://pub-7c709cd3f8e6425dbeffaed4ca2cf901.r2.dev/teacher_showcase/assets/covers/kdp/miki_starseed_2026-05-21.png" loading="lazy" alt="Miki 電子書籍" onerror="this.style.display='none'">
             <div class="format-label">電子書籍</div>
             <div class="format-brand">今此処文庫</div>
           </div>
           <div class="format-card podcast-playable" style="cursor:pointer;position:relative" onclick="toggleAudiobook('miki')">
-            <img src="https://pub-7c709cd3f8e6425dbeffaed4ca2cf901.r2.dev/teacher_showcase/assets/covers/kdp/miki_audiobook_starseed_2026-05-21.jpg" loading="lazy" alt="Miki Audiobook" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:4px;margin-bottom:8px">
+            <img src="https://pub-7c709cd3f8e6425dbeffaed4ca2cf901.r2.dev/teacher_showcase/assets/covers/kdp/miki_audiobook_starseed_2026-05-21.jpg" loading="lazy" alt="Miki オーディオブック" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:4px;margin-bottom:8px">
             <div class="play-overlay" id="play-ab-miki" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:44px;height:44px;border-radius:50%;background:rgba(0,0,0,0.6);display:flex;align-items:center;justify-content:center;pointer-events:none">
               <span style="color:white;font-size:1.1rem;margin-left:2px">&#9654;</span>
             </div>
@@ -1101,7 +1101,7 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
             <audio id="audiobook-miki" preload="metadata" src="assets/audio/audiobook_chapters/miki_imposter_syndrome_ch1.mp3"></audio>
           </div>
           <div class="format-card" onclick="cycleManga('miki')" style="cursor:pointer">
-            <img id="manga-img-miki" src="assets/manga_covers/miki_scene.png" loading="lazy" alt="Miki Character" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center top;border-radius:4px;margin-bottom:8px">
+            <img id="manga-img-miki" src="assets/manga_covers/miki_scene.png" loading="lazy" alt="Miki キャラクター" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center top;border-radius:4px;margin-bottom:8px">
             <div class="format-label">漫画</div>
             <div class="format-meta">キャラクターアート</div>
           </div>
@@ -1109,7 +1109,7 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
                style="cursor:pointer; position:relative"
                onclick="togglePodcast('miki')">
             <img src="https://pub-7c709cd3f8e6425dbeffaed4ca2cf901.r2.dev/teacher_showcase/assets/covers/kdp/miki_podcast_starseed_2026-05-21.jpg"
-                 loading="lazy" alt="Miki podcast"
+                 loading="lazy" alt="Miki ポッドキャスト"
                  onerror="this.style.display='none'"
                  style="width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:4px; margin-bottom:8px">
             <div class="play-overlay" id="play-miki" style="
@@ -1193,17 +1193,17 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
 
       <!-- FORMATS ROW (ebook, audiobook, manga, podcast, social) -->
       <div class="section-toggle" onclick="toggleSection('master_wu_formats')">
-        <span class="toggle-arrow open" id="arr_master_wu_formats">▸</span> Formats
+        <span class="toggle-arrow open" id="arr_master_wu_formats">▸</span> フォーマット
       </div>
       <div id="master_wu_formats" class="collapsible" style="display:block">
         <div class="formats-grid">
           <div class="format-card" onclick="toggleSection('master_wu_book')" style="cursor:pointer">
-            <img src="https://pub-7c709cd3f8e6425dbeffaed4ca2cf901.r2.dev/teacher_showcase/assets/covers/kdp/master_wu_localized_2026-05-17.png" loading="lazy" alt="Master Wu Ebook" onerror="this.style.display='none'">
+            <img src="https://pub-7c709cd3f8e6425dbeffaed4ca2cf901.r2.dev/teacher_showcase/assets/covers/kdp/master_wu_localized_2026-05-17.png" loading="lazy" alt="Master Wu 電子書籍" onerror="this.style.display='none'">
             <div class="format-label">電子書</div>
             <div class="format-brand">根脈出版</div>
           </div>
           <div class="format-card podcast-playable" style="cursor:pointer;position:relative" onclick="toggleAudiobook('master_wu')">
-            <img src="https://pub-7c709cd3f8e6425dbeffaed4ca2cf901.r2.dev/teacher_showcase/assets/covers/kdp/master_wu_audiobook_localized_2026-05-17.jpg" loading="lazy" alt="Master Wu Audiobook" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:4px;margin-bottom:8px">
+            <img src="https://pub-7c709cd3f8e6425dbeffaed4ca2cf901.r2.dev/teacher_showcase/assets/covers/kdp/master_wu_audiobook_localized_2026-05-17.jpg" loading="lazy" alt="Master Wu オーディオブック" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:4px;margin-bottom:8px">
             <div class="play-overlay" id="play-ab-master_wu" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:44px;height:44px;border-radius:50%;background:rgba(0,0,0,0.6);display:flex;align-items:center;justify-content:center;pointer-events:none">
               <span style="color:white;font-size:1.1rem;margin-left:2px">&#9654;</span>
             </div>
@@ -1212,7 +1212,7 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
             <audio id="audiobook-master_wu" preload="metadata" src="assets/audio/audiobook_chapters/master_wu_courage_ch1.mp3"></audio>
           </div>
           <div class="format-card" onclick="cycleManga('master_wu')" style="cursor:pointer">
-            <img id="manga-img-master_wu" src="assets/manga_covers/master_wu_scene.png" loading="lazy" alt="Master Wu Character" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center top;border-radius:4px;margin-bottom:8px">
+            <img id="manga-img-master_wu" src="assets/manga_covers/master_wu_scene.png" loading="lazy" alt="Master Wu キャラクター" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center top;border-radius:4px;margin-bottom:8px">
             <div class="format-label">漫畫</div>
             <div class="format-meta">角色藝術</div>
           </div>
@@ -1220,7 +1220,7 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
                style="cursor:pointer; position:relative"
                onclick="togglePodcast('master_wu')">
             <img src="https://pub-7c709cd3f8e6425dbeffaed4ca2cf901.r2.dev/teacher_showcase/assets/covers/kdp/master_wu_podcast_localized_2026-05-17.jpg"
-                 loading="lazy" alt="Master Wu podcast"
+                 loading="lazy" alt="Master Wu ポッドキャスト"
                  onerror="this.style.display='none'"
                  style="width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:4px; margin-bottom:8px">
             <div class="play-overlay" id="play-master_wu" style="
@@ -1305,43 +1305,43 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
         <div>
           <div class="teacher-name">Pamela Fellows</div>
           <div class="teacher-brand">Felt Sense Publishing</div>
-          <div class="teacher-tradition">Somatic / polyvagal / nervous system</div>
-          <div class="teacher-focus">Somatic healing, anxiety, burnout</div>
-          <div class="teacher-stats">🇺🇸 English · somatic_companion · 10,487 words · josei</div>
-                <button class="teacher-select-btn" id="sel-btn-pamela_fellows" data-tname="Pamela Fellows" onclick="chooseTeacher('pamela_fellows', 'Pamela Fellows')">Select Pamela Fellows</button>
+          <div class="teacher-tradition">ソマティック / ポリヴェーガル / 神経系</div>
+          <div class="teacher-focus">ソマティック・ヒーリング、不安、燃え尽き</div>
+          <div class="teacher-stats">🇺🇸 英語 · somatic_companion · 10,487語 · 女性</div>
+                <button class="teacher-select-btn" id="sel-btn-pamela_fellows" data-tname="Pamela Fellows" onclick="chooseTeacher('pamela_fellows', 'Pamela Fellows')">Pamela Fellowsを選ぶ</button>
       </div>
       </div>
 
       <!-- FORMATS ROW (ebook, audiobook, manga, podcast, social) -->
       <div class="section-toggle" onclick="toggleSection('pamela_fellows_formats')">
-        <span class="toggle-arrow open" id="arr_pamela_fellows_formats">▸</span> Formats
+        <span class="toggle-arrow open" id="arr_pamela_fellows_formats">▸</span> フォーマット
       </div>
       <div id="pamela_fellows_formats" class="collapsible" style="display:block">
         <div class="formats-grid">
           <div class="format-card" onclick="toggleSection('pamela_fellows_book')" style="cursor:pointer">
-            <img src="assets/covers/kdp/pamela_fellows_ebook.png" loading="lazy" alt="Pamela Fellows Ebook" onerror="this.style.display='none'">
-            <div class="format-label">Ebook</div>
+            <img src="assets/covers/kdp/pamela_fellows_ebook.png" loading="lazy" alt="Pamela Fellows 電子書籍" onerror="this.style.display='none'">
+            <div class="format-label">電子書籍</div>
             <div class="format-brand">Felt Sense Publishing</div>
           </div>
           <div class="format-card podcast-playable" style="cursor:pointer;position:relative" onclick="toggleAudiobook('pamela_fellows')">
-            <img src="assets/covers/kdp/pamela_fellows_audiobook.png" loading="lazy" alt="Pamela Fellows Audiobook" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:4px;margin-bottom:8px">
+            <img src="assets/covers/kdp/pamela_fellows_audiobook.png" loading="lazy" alt="Pamela Fellows オーディオブック" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:4px;margin-bottom:8px">
             <div class="play-overlay" id="play-ab-pamela_fellows" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:44px;height:44px;border-radius:50%;background:rgba(0,0,0,0.6);display:flex;align-items:center;justify-content:center;pointer-events:none">
               <span style="color:white;font-size:1.1rem;margin-left:2px">&#9654;</span>
             </div>
-            <div class="format-label">Audiobook</div>
-            <div class="format-meta">Ch 1 · click to play</div>
+            <div class="format-label">オーディオブック</div>
+            <div class="format-meta">第1章 · タップで再生</div>
             <audio id="audiobook-pamela_fellows" preload="metadata" src="assets/audio/audiobook_chapters/pamela_fellows_burnout_ch1.mp3"></audio>
           </div>
           <div class="format-card" onclick="cycleManga('pamela_fellows')" style="cursor:pointer">
-            <img id="manga-img-pamela_fellows" src="assets/manga_covers/pamela_fellows_scene.png" loading="lazy" alt="Pamela Fellows Character" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center top;border-radius:4px;margin-bottom:8px">
-            <div class="format-label">Manga</div>
-            <div class="format-meta">Character art</div>
+            <img id="manga-img-pamela_fellows" src="assets/manga_covers/pamela_fellows_scene.png" loading="lazy" alt="Pamela Fellows キャラクター" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center top;border-radius:4px;margin-bottom:8px">
+            <div class="format-label">マンガ</div>
+            <div class="format-meta">キャラクターアート</div>
           </div>
           <div class="format-card podcast-playable"
                style="cursor:pointer; position:relative"
                onclick="togglePodcast('pamela_fellows')">
             <img src="assets/covers/kdp/pamela_fellows_podcast.png"
-                 loading="lazy" alt="Pamela Fellows podcast"
+                 loading="lazy" alt="Pamela Fellows ポッドキャスト"
                  onerror="this.style.display='none'"
                  style="width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:4px; margin-bottom:8px">
             <div class="play-overlay" id="play-pamela_fellows" style="
@@ -1352,8 +1352,8 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
             ">
               <span style="color:white; font-size:1.1rem; margin-left:2px">&#9654;</span>
             </div>
-            <div class="format-label">Podcast</div>
-            <div class="format-meta">3 min · click to play</div>
+            <div class="format-label">ポッドキャスト</div>
+            <div class="format-meta">3分 · タップで再生</div>
             <audio id="podcast-pamela_fellows" preload="metadata"
                    src="assets/audio/podcast/pamela_fellows_podcast_3min.mp3"></audio>
           </div>
@@ -1361,8 +1361,8 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
             <video controls preload="metadata" playsinline style="width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:4px;margin-bottom:8px;background:#000">
               <source src="https://pub-7c709cd3f8e6425dbeffaed4ca2cf901.r2.dev/teacher_showcase/teacher_vid_package/pamela_fellows.mp4" type="video/mp4">
             </video>
-            <div class="format-label">Manga Short</div>
-            <div class="format-meta">Vertical · 90s</div>
+            <div class="format-label">マンガショート</div>
+            <div class="format-meta">縦型 · 90秒</div>
           </div>
         </div>
       </div>
@@ -1375,27 +1375,27 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
 
       <!-- READ BOOK -->
       <div class="section-toggle" onclick="toggleSection('pamela_fellows_book')">
-        <span class="toggle-arrow" id="arr_pamela_fellows_book">▸</span> Read Sample Chapter (~2,132 words)</div>
+        <span class="toggle-arrow" id="arr_pamela_fellows_book">▸</span> サンプル章を読む（約2,132語）</div>
       <div id="pamela_fellows_book" class="collapsible" style="display:none">
         <div class="book-content">
-<h3 class="chapter-heading">Chapter 1 — The Alarm That Won't Stop Ringing</h3>
+<h3 class="chapter-heading">第1章 — 鳴りやまない警報</h3>
 <br>
-<p>Your performance review is next Thursday.</p>
+<p>人事評価は来週の木曜日だ。</p>
 <br>
-<p>You've been preparing since Monday — not the material. You already hold the material. You've been preparing your <em>face</em>. Your voice. The version of yourself that will walk into that room and not let the alarm show. The preparation no one sees is the most expensive hour of the week, and it is happening underneath everything else you do.</p>
+<p>月曜からずっと準備してきた——資料のことではない。資料はもうあなたの中にある。あなたが整えてきたのは、自分の <em>表情</em>だ。声だ。あの部屋に入っても警報を悟らせない自分の姿だ。誰にも見えないこの準備こそ、その週でいちばん高くつく一時間であり、あなたのなす他のすべての営みの下で、静かに進行している。</p>
 <br>
-<p>Your calendar says: productive. Your body is running something the calendar cannot read — a quieter, older signal, looking for something the inbox cannot deliver.</p>
+<p>カレンダーには「生産的」とある。だが身体は、カレンダーには読み取れない何かを走らせている——より静かで、より古い信号を。受信箱では決して届けられない何かを、探し求めながら。</p>
 <br>
-<h4 class="preview-section-heading">The Scan</h4>
+<h4 class="preview-section-heading">走査（スキャン）</h4>
 <br>
-<p>There is a part of you that is always scanning.</p>
+<p>あなたの中には、いつも走査を続けている部分がある。</p>
 <br>
-<p>Not anxiously. Not visibly. Just — scanning. Tracking the manager's response time. Reading tone in a Slack message. Recalculating what last Tuesday's comment might have meant. You've been doing this so efficiently, for so long, that you've stopped registering it as a separate thing. You've begun to call it your personality.</p>
+<p>不安げにではない。目に見える形でもない。ただ——走査している。上司の返信の速さを追う。Slackのメッセージの語調を読む。先週火曜のあの一言が何を意味していたのかを計算し直す。あまりに長く、あまりに効率よく続けてきたので、もうそれを別個のものとして意識しなくなっている。あなたはそれを「自分の性格」と呼びはじめている。</p>
 <br>
-<p>It isn't your personality. It's a mechanism. And the moment you see it for what it actually is, something inside it begins to soften.</p>
+<p>それはあなたの性格ではない。それは一つの機構だ。そしてそれを、それがほんとうに何であるかとして見た瞬間、その内側の何かがほどけはじめる。</p>
 <br>
 <div style="margin-top:32px; padding-top:20px; border-top:1px solid #333; text-align:center;">
-  <a href="./teacher_showcase/pamela_fellows__chapter_1.html" style="color:#F5A623; text-decoration:none; font-family:'DM Sans',sans-serif; font-size:0.95rem; letter-spacing:0.05em; font-weight:500; border-bottom:1px solid #F5A623; padding-bottom:2px;" target="_blank" rel="noopener">Read full chapter →</a>
+  <a href="./teacher_showcase/pamela_fellows__chapter_1.html" style="color:#F5A623; text-decoration:none; font-family:'DM Sans',sans-serif; font-size:0.95rem; letter-spacing:0.05em; font-weight:500; border-bottom:1px solid #F5A623; padding-bottom:2px;" target="_blank" rel="noopener">全章を読む →</a>
 </div>
 </div>
       </div>
@@ -1430,12 +1430,12 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
       <div id="joshin_formats" class="collapsible" style="display:block">
         <div class="formats-grid">
           <div class="format-card" onclick="toggleSection('joshin_book')" style="cursor:pointer">
-            <img src="https://pub-7c709cd3f8e6425dbeffaed4ca2cf901.r2.dev/teacher_showcase/assets/covers/kdp/joshin_localized_2026-05-17.png" loading="lazy" alt="Joshin Ebook" onerror="this.style.display='none'">
+            <img src="https://pub-7c709cd3f8e6425dbeffaed4ca2cf901.r2.dev/teacher_showcase/assets/covers/kdp/joshin_localized_2026-05-17.png" loading="lazy" alt="Joshin 電子書籍" onerror="this.style.display='none'">
             <div class="format-label">電子書籍</div>
             <div class="format-brand">明見書房</div>
           </div>
           <div class="format-card podcast-playable" style="cursor:pointer;position:relative" onclick="toggleAudiobook('joshin')">
-            <img src="https://pub-7c709cd3f8e6425dbeffaed4ca2cf901.r2.dev/teacher_showcase/assets/covers/kdp/joshin_audiobook_localized_2026-05-17.jpg" loading="lazy" alt="Joshin Audiobook" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:4px;margin-bottom:8px">
+            <img src="https://pub-7c709cd3f8e6425dbeffaed4ca2cf901.r2.dev/teacher_showcase/assets/covers/kdp/joshin_audiobook_localized_2026-05-17.jpg" loading="lazy" alt="Joshin オーディオブック" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:4px;margin-bottom:8px">
             <div class="play-overlay" id="play-ab-joshin" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:44px;height:44px;border-radius:50%;background:rgba(0,0,0,0.6);display:flex;align-items:center;justify-content:center;pointer-events:none">
               <span style="color:white;font-size:1.1rem;margin-left:2px">&#9654;</span>
             </div>
@@ -1444,7 +1444,7 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
             <audio id="audiobook-joshin" preload="metadata" src="assets/audio/audiobook_chapters/joshin_anxiety_ch1.mp3"></audio>
           </div>
           <div class="format-card" onclick="cycleManga('joshin')" style="cursor:pointer">
-            <img id="manga-img-joshin" src="assets/manga_covers/joshin_symbolic.png" loading="lazy" alt="Joshin Character" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center top;border-radius:4px;margin-bottom:8px">
+            <img id="manga-img-joshin" src="assets/manga_covers/joshin_symbolic.png" loading="lazy" alt="Joshin キャラクター" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center top;border-radius:4px;margin-bottom:8px">
             <div class="format-label">漫画</div>
             <div class="format-meta">キャラクターアート</div>
           </div>
@@ -1452,7 +1452,7 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
                style="cursor:pointer; position:relative"
                onclick="togglePodcast('joshin')">
             <img src="https://pub-7c709cd3f8e6425dbeffaed4ca2cf901.r2.dev/teacher_showcase/assets/covers/kdp/joshin_podcast_localized_2026-05-17.jpg"
-                 loading="lazy" alt="Joshin podcast"
+                 loading="lazy" alt="Joshin ポッドキャスト"
                  onerror="this.style.display='none'"
                  style="width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:4px; margin-bottom:8px">
             <div class="play-overlay" id="play-joshin" style="
@@ -1535,43 +1535,43 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
         <div>
           <div class="teacher-name">Maat</div>
           <div class="teacher-brand">Feather & Scale Press</div>
-          <div class="teacher-tradition">Egyptian Mystery / Ma'at / truth</div>
-          <div class="teacher-focus">Boundaries, self-worth, social anxiety</div>
-          <div class="teacher-stats">🇺🇸 English · research_guide · 10,162 words · seinen</div>
-                <button class="teacher-select-btn" id="sel-btn-maat" data-tname="Maat" onclick="chooseTeacher('maat', 'Maat')">Select Maat</button>
+          <div class="teacher-tradition">エジプト神秘学 / マアト / 真理</div>
+          <div class="teacher-focus">境界線、自己肯定感、社交不安</div>
+          <div class="teacher-stats">🇺🇸 英語 · research_guide · 10,162語 · 青年</div>
+                <button class="teacher-select-btn" id="sel-btn-maat" data-tname="Maat" onclick="chooseTeacher('maat', 'Maat')">Maatを選ぶ</button>
       </div>
       </div>
 
       <!-- FORMATS ROW (ebook, audiobook, manga, podcast, social) -->
       <div class="section-toggle" onclick="toggleSection('maat_formats')">
-        <span class="toggle-arrow open" id="arr_maat_formats">▸</span> Formats
+        <span class="toggle-arrow open" id="arr_maat_formats">▸</span> フォーマット
       </div>
       <div id="maat_formats" class="collapsible" style="display:block">
         <div class="formats-grid">
           <div class="format-card" onclick="toggleSection('maat_book')" style="cursor:pointer">
-            <img src="https://pub-7c709cd3f8e6425dbeffaed4ca2cf901.r2.dev/teacher_showcase/assets/covers/kdp/maat_v1_restore_2026-05-21.png" loading="lazy" alt="Maat Ebook" onerror="this.style.display='none'">
-            <div class="format-label">Ebook</div>
+            <img src="https://pub-7c709cd3f8e6425dbeffaed4ca2cf901.r2.dev/teacher_showcase/assets/covers/kdp/maat_v1_restore_2026-05-21.png" loading="lazy" alt="Maat 電子書籍" onerror="this.style.display='none'">
+            <div class="format-label">電子書籍</div>
             <div class="format-brand">Feather & Scale Press</div>
           </div>
           <div class="format-card podcast-playable" style="cursor:pointer;position:relative" onclick="toggleAudiobook('maat')">
-            <img src="https://pub-7c709cd3f8e6425dbeffaed4ca2cf901.r2.dev/teacher_showcase/assets/covers/kdp/maat_audiobook_v1_restore_2026-05-21.jpg" loading="lazy" alt="Maat Audiobook" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:4px;margin-bottom:8px">
+            <img src="https://pub-7c709cd3f8e6425dbeffaed4ca2cf901.r2.dev/teacher_showcase/assets/covers/kdp/maat_audiobook_v1_restore_2026-05-21.jpg" loading="lazy" alt="Maat オーディオブック" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:4px;margin-bottom:8px">
             <div class="play-overlay" id="play-ab-maat" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:44px;height:44px;border-radius:50%;background:rgba(0,0,0,0.6);display:flex;align-items:center;justify-content:center;pointer-events:none">
               <span style="color:white;font-size:1.1rem;margin-left:2px">&#9654;</span>
             </div>
-            <div class="format-label">Audiobook</div>
-            <div class="format-meta">Ch 1 · click to play</div>
+            <div class="format-label">オーディオブック</div>
+            <div class="format-meta">第1章 · タップで再生</div>
             <audio id="audiobook-maat" preload="metadata" src="assets/audio/audiobook_chapters/maat_boundaries_ch1.mp3"></audio>
           </div>
           <div class="format-card" onclick="cycleManga('maat')" style="cursor:pointer">
-            <img id="manga-img-maat" src="assets/manga_covers/maat_scene.png" loading="lazy" alt="Maat Character" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center top;border-radius:4px;margin-bottom:8px">
-            <div class="format-label">Manga</div>
-            <div class="format-meta">Character art</div>
+            <img id="manga-img-maat" src="assets/manga_covers/maat_scene.png" loading="lazy" alt="Maat キャラクター" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center top;border-radius:4px;margin-bottom:8px">
+            <div class="format-label">マンガ</div>
+            <div class="format-meta">キャラクターアート</div>
           </div>
           <div class="format-card podcast-playable"
                style="cursor:pointer; position:relative"
                onclick="togglePodcast('maat')">
             <img src="https://pub-7c709cd3f8e6425dbeffaed4ca2cf901.r2.dev/teacher_showcase/assets/covers/kdp/maat_podcast_v1_restore_2026-05-21.jpg"
-                 loading="lazy" alt="Maat podcast"
+                 loading="lazy" alt="Maat ポッドキャスト"
                  onerror="this.style.display='none'"
                  style="width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:4px; margin-bottom:8px">
             <div class="play-overlay" id="play-maat" style="
@@ -1582,8 +1582,8 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
             ">
               <span style="color:white; font-size:1.1rem; margin-left:2px">&#9654;</span>
             </div>
-            <div class="format-label">Podcast</div>
-            <div class="format-meta">3 min · click to play</div>
+            <div class="format-label">ポッドキャスト</div>
+            <div class="format-meta">3分 · タップで再生</div>
             <audio id="podcast-maat" preload="metadata"
                    src="assets/audio/podcast/maat_podcast_3min.mp3"></audio>
           </div>
@@ -1591,8 +1591,8 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
             <video controls preload="metadata" playsinline style="width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:4px;margin-bottom:8px;background:#000">
               <source src="https://pub-7c709cd3f8e6425dbeffaed4ca2cf901.r2.dev/teacher_showcase/teacher_vid_package/maat.mp4" type="video/mp4">
             </video>
-            <div class="format-label">Manga Short</div>
-            <div class="format-meta">Vertical · 90s</div>
+            <div class="format-label">マンガショート</div>
+            <div class="format-meta">縦型 · 90秒</div>
           </div>
         </div>
       </div>
@@ -1605,27 +1605,27 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
 
       <!-- READ BOOK -->
       <div class="section-toggle" onclick="toggleSection('maat_book')">
-        <span class="toggle-arrow" id="arr_maat_book">▸</span> Read Sample Chapter (~2,037 words)</div>
+        <span class="toggle-arrow" id="arr_maat_book">▸</span> サンプル章を読む（約2,037語）</div>
       <div id="maat_book" class="collapsible" style="display:none">
         <div class="book-content">
-<h3 class="chapter-heading">Chapter 1 — The Alarm That Won't Stop Ringing</h3>
+<h3 class="chapter-heading">第1章 — 鳴りやまない警報</h3>
 <br>
-<p>Your performance review is next Thursday.</p>
+<p>人事評価は来週の木曜日だ。</p>
 <br>
-<p>You have been preparing since Monday — not the material. The material you already hold. You have been preparing your <em>face</em>. Your voice. The composure you intend to wear into that room so the alarm under your ribs does not show. The longest hour of every day this week is the one no one sees.</p>
+<p>月曜からずっと準備してきた——資料ではない。資料はすでにあなたの内にある。あなたが整えてきたのは、自分の <em>表情</em>だ。声だ。肋骨の奥の警報を悟らせぬよう、あの部屋にまとっていくつもりの落ち着きだ。この一週間、毎日のいちばん長い一時間は、誰の目にも映らない一時間だ。</p>
 <br>
-<p>Your calendar names it productivity. Your body is running an older liturgy underneath — a longing that the calendar has no column for, that no manager will ever ask about, that runs all the same.</p>
+<p>カレンダーはそれを「生産性」と名づける。だが身体は、その奥でより古い典礼を執り行っている——カレンダーに記す欄もなく、どんな上司も決して尋ねることのない、それでも変わらず流れ続ける一つの渇望を。</p>
 <br>
-<h4 class="preview-section-heading">The Scan</h4>
+<h4 class="preview-section-heading">走査（スキャン）</h4>
 <br>
-<p>There is a part of you that is always scanning.</p>
+<p>あなたの中には、いつも走査を続けている部分がある。</p>
 <br>
-<p>Not visibly. Not with any drama. Simply — scanning. Watching the manager's response time. Reading tone in a Slack message. Running a quiet inventory of last Tuesday's comment and whether it meant what you suspect it meant. You have been doing this so well, for so long, that you have stopped feeling it as a separate thing. You have begun to call it your personality.</p>
+<p>目に見える形でもなく、何の劇的さもなく。ただ——走査している。上司の返信の速さを見張る。Slackのメッセージの語調を読む。先週火曜のあの一言と、それがあなたの疑うとおりの意味だったのかを、静かに棚卸ししている。あまりに巧みに、あまりに長く続けてきたので、もうそれを別個のものとして感じなくなっている。あなたはそれを「自分の性格」と呼びはじめている。</p>
 <br>
-<p>It is not. It is a mechanism. And the moment it is seen for what it is, something in it begins to loosen.</p>
+<p>そうではない。それは一つの機構だ。そしてそれがあるがままに見られた瞬間、その内の何かがゆるみはじめる。</p>
 <br>
 <div style="margin-top:32px; padding-top:20px; border-top:1px solid #333; text-align:center;">
-  <a href="./teacher_showcase/maat__chapter_1.html" style="color:#F5A623; text-decoration:none; font-family:'DM Sans',sans-serif; font-size:0.95rem; letter-spacing:0.05em; font-weight:500; border-bottom:1px solid #F5A623; padding-bottom:2px;" target="_blank" rel="noopener">Read full chapter →</a>
+  <a href="./teacher_showcase/maat__chapter_1.html" style="color:#F5A623; text-decoration:none; font-family:'DM Sans',sans-serif; font-size:0.95rem; letter-spacing:0.05em; font-weight:500; border-bottom:1px solid #F5A623; padding-bottom:2px;" target="_blank" rel="noopener">全章を読む →</a>
 </div>
 </div>
       </div>
@@ -1655,17 +1655,17 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
 
       <!-- FORMATS ROW (ebook, audiobook, manga, podcast, social) -->
       <div class="section-toggle" onclick="toggleSection('omote_formats')">
-        <span class="toggle-arrow open" id="arr_omote_formats">▸</span> Formats
+        <span class="toggle-arrow open" id="arr_omote_formats">▸</span> フォーマット
       </div>
       <div id="omote_formats" class="collapsible" style="display:block">
         <div class="formats-grid">
           <div class="format-card" onclick="toggleSection('omote_book')" style="cursor:pointer">
-            <img src="https://pub-7c709cd3f8e6425dbeffaed4ca2cf901.r2.dev/teacher_showcase/assets/covers/kdp/omote_localized_2026-05-17.png" loading="lazy" alt="Omote Ebook" onerror="this.style.display='none'">
+            <img src="https://pub-7c709cd3f8e6425dbeffaed4ca2cf901.r2.dev/teacher_showcase/assets/covers/kdp/omote_localized_2026-05-17.png" loading="lazy" alt="Omote 電子書籍" onerror="this.style.display='none'">
             <div class="format-label">電子書籍</div>
             <div class="format-brand">面の地出版</div>
           </div>
           <div class="format-card podcast-playable" style="cursor:pointer;position:relative" onclick="toggleAudiobook('omote')">
-            <img src="https://pub-7c709cd3f8e6425dbeffaed4ca2cf901.r2.dev/teacher_showcase/assets/covers/kdp/omote_audiobook_localized_2026-05-17.jpg" loading="lazy" alt="Omote Audiobook" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:4px;margin-bottom:8px">
+            <img src="https://pub-7c709cd3f8e6425dbeffaed4ca2cf901.r2.dev/teacher_showcase/assets/covers/kdp/omote_audiobook_localized_2026-05-17.jpg" loading="lazy" alt="Omote オーディオブック" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:4px;margin-bottom:8px">
             <div class="play-overlay" id="play-ab-omote" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:44px;height:44px;border-radius:50%;background:rgba(0,0,0,0.6);display:flex;align-items:center;justify-content:center;pointer-events:none">
               <span style="color:white;font-size:1.1rem;margin-left:2px">&#9654;</span>
             </div>
@@ -1674,7 +1674,7 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
             <audio id="audiobook-omote" preload="metadata" src="assets/audio/audiobook_chapters/omote_sleep_anxiety_ch1.mp3"></audio>
           </div>
           <div class="format-card" onclick="cycleManga('omote')" style="cursor:pointer">
-            <img id="manga-img-omote" src="assets/manga_covers/omote_scene.png" loading="lazy" alt="Omote Character" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center top;border-radius:4px;margin-bottom:8px">
+            <img id="manga-img-omote" src="assets/manga_covers/omote_scene.png" loading="lazy" alt="Omote キャラクター" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center top;border-radius:4px;margin-bottom:8px">
             <div class="format-label">漫画</div>
             <div class="format-meta">キャラクターアート</div>
           </div>
@@ -1682,7 +1682,7 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
                style="cursor:pointer; position:relative"
                onclick="togglePodcast('omote')">
             <img src="https://pub-7c709cd3f8e6425dbeffaed4ca2cf901.r2.dev/teacher_showcase/assets/covers/kdp/omote_podcast_localized_2026-05-17.jpg"
-                 loading="lazy" alt="Omote podcast"
+                 loading="lazy" alt="Omote ポッドキャスト"
                  onerror="this.style.display='none'"
                  style="width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:4px; margin-bottom:8px">
             <div class="play-overlay" id="play-omote" style="
@@ -1757,43 +1757,43 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
         <div>
           <div class="teacher-name">Master Sha</div>
           <div class="teacher-brand">Night Architecture Books <span class="brand-jp">夜の建築書房</span></div>
-          <div class="teacher-tradition">Soul Mind Body / quantum healing</div>
-          <div class="teacher-focus">Somatic healing, depression, grief</div>
+          <div class="teacher-tradition">ソウル・マインド・ボディ / 量子ヒーリング</div>
+          <div class="teacher-focus">ソマティック・ヒーリング、抑うつ、悲嘆</div>
           <div class="teacher-stats">🇨🇳 中文 · elder_stabilizer · 8,492 words · iyashikei</div>
-                <button class="teacher-select-btn" id="sel-btn-master_sha" data-tname="Master Sha" onclick="chooseTeacher('master_sha', 'Master Sha')">Select Master Sha</button>
+                <button class="teacher-select-btn" id="sel-btn-master_sha" data-tname="Master Sha" onclick="chooseTeacher('master_sha', 'Master Sha')">Master Shaを選ぶ</button>
       </div>
       </div>
 
       <!-- FORMATS ROW (ebook, audiobook, manga, podcast, social) -->
       <div class="section-toggle" onclick="toggleSection('master_sha_formats')">
-        <span class="toggle-arrow open" id="arr_master_sha_formats">▸</span> Formats
+        <span class="toggle-arrow open" id="arr_master_sha_formats">▸</span> フォーマット
       </div>
       <div id="master_sha_formats" class="collapsible" style="display:block">
         <div class="formats-grid">
           <div class="format-card" onclick="toggleSection('master_sha_book')" style="cursor:pointer">
-            <img src="assets/covers/kdp/master_sha_ebook.png" loading="lazy" alt="Master Sha Ebook" onerror="this.style.display='none'">
-            <div class="format-label">Ebook</div>
+            <img src="assets/covers/kdp/master_sha_ebook.png" loading="lazy" alt="Master Sha 電子書籍" onerror="this.style.display='none'">
+            <div class="format-label">電子書籍</div>
             <div class="format-brand">Night Architecture Books</div>
           </div>
           <div class="format-card podcast-playable" style="cursor:pointer;position:relative" onclick="toggleAudiobook('master_sha')">
-            <img src="assets/covers/kdp/master_sha_audiobook.png" loading="lazy" alt="Master Sha Audiobook" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:4px;margin-bottom:8px">
+            <img src="assets/covers/kdp/master_sha_audiobook.png" loading="lazy" alt="Master Sha オーディオブック" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:4px;margin-bottom:8px">
             <div class="play-overlay" id="play-ab-master_sha" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:44px;height:44px;border-radius:50%;background:rgba(0,0,0,0.6);display:flex;align-items:center;justify-content:center;pointer-events:none">
               <span style="color:white;font-size:1.1rem;margin-left:2px">&#9654;</span>
             </div>
-            <div class="format-label">Audiobook</div>
-            <div class="format-meta">Ch 1 · click to play</div>
+            <div class="format-label">オーディオブック</div>
+            <div class="format-meta">第1章 · タップで再生</div>
             <audio id="audiobook-master_sha" preload="metadata" src="https://pub-7c709cd3f8e6425dbeffaed4ca2cf901.r2.dev/teacher_showcase/audio_remap/master_sha_audiobook_en.mp3"></audio>
           </div>
           <div class="format-card" onclick="cycleManga('master_sha')" style="cursor:pointer">
-            <img id="manga-img-master_sha" src="assets/manga_covers/master_sha_scene.png" loading="lazy" alt="Master Sha Character" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center top;border-radius:4px;margin-bottom:8px">
-            <div class="format-label">Manga</div>
-            <div class="format-meta">Character art</div>
+            <img id="manga-img-master_sha" src="assets/manga_covers/master_sha_scene.png" loading="lazy" alt="Master Sha キャラクター" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center top;border-radius:4px;margin-bottom:8px">
+            <div class="format-label">マンガ</div>
+            <div class="format-meta">キャラクターアート</div>
           </div>
           <div class="format-card podcast-playable"
                style="cursor:pointer; position:relative"
                onclick="togglePodcast('master_sha')">
             <img src="assets/covers/kdp/master_sha_podcast.png"
-                 loading="lazy" alt="Master Sha podcast"
+                 loading="lazy" alt="Master Sha ポッドキャスト"
                  onerror="this.style.display='none'"
                  style="width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:4px; margin-bottom:8px">
             <div class="play-overlay" id="play-master_sha" style="
@@ -1804,8 +1804,8 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
             ">
               <span style="color:white; font-size:1.1rem; margin-left:2px">&#9654;</span>
             </div>
-            <div class="format-label">Podcast</div>
-            <div class="format-meta">3 min · click to play</div>
+            <div class="format-label">ポッドキャスト</div>
+            <div class="format-meta">3分 · タップで再生</div>
             <audio id="podcast-master_sha" preload="metadata"
                    src="assets/audio/podcast/master_sha_podcast_3min.mp3"></audio>
           </div>
@@ -1813,8 +1813,8 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
             <video controls preload="metadata" playsinline style="width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:4px;margin-bottom:8px;background:#000">
               <source src="https://pub-7c709cd3f8e6425dbeffaed4ca2cf901.r2.dev/teacher_showcase/teacher_vid_package/master_sha.mp4" type="video/mp4">
             </video>
-            <div class="format-label">Manga Short</div>
-            <div class="format-meta">Vertical · 90s</div>
+            <div class="format-label">マンガショート</div>
+            <div class="format-meta">縦型 · 90秒</div>
           </div>
         </div>
       </div>
@@ -1827,27 +1827,27 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
 
       <!-- READ BOOK -->
       <div class="section-toggle" onclick="toggleSection('master_sha_book')">
-        <span class="toggle-arrow" id="arr_master_sha_book">▸</span> Read Sample Chapter (~2,064 words)</div>
+        <span class="toggle-arrow" id="arr_master_sha_book">▸</span> サンプル章を読む（約2,064語）</div>
       <div id="master_sha_book" class="collapsible" style="display:none">
         <div class="book-content">
-<h3 class="chapter-heading">Chapter 1 — The Alarm That Won't Stop Ringing</h3>
+<h3 class="chapter-heading">第1章 — 鳴りやまない警報</h3>
 <br>
-<p>Your performance review is next Thursday.</p>
+<p>人事評価は来週の木曜日だ。</p>
 <br>
-<p>You have been preparing since Monday — not the material. You already know the material. You have been preparing your <em>face</em>. Your voice. The version of yourself who walks into that room and does not let the alarm show. The preparation no one can see is the part that empties you. The calendar says: productive. The body is running something else entirely. A field is humming underneath the day, and it is not the field of the work.</p>
+<p>月曜からずっと準備してきた——資料ではない。資料はすでに知り尽くしている。あなたが整えてきたのは、自分の <em>表情</em>だ。声だ。あの部屋に入っても警報を悟らせない自分の姿だ。誰にも見えないこの準備こそが、あなたを空っぽにしていく部分だ。カレンダーは言う——「生産的」。だが身体は、まったく別のものを走らせている。一日の下では一つの「場（フィールド）」が鳴っている。そしてそれは、仕事の場ではない。</p>
 <br>
-<p>Listen. There is information inside that hum. Today we will name it precisely, and we will give it the right name in the right order — because the wrong order is part of what is exhausting you.</p>
+<p>耳を澄ませてほしい。その鳴りの中には、情報がある。今日はそれを正確に名づけよう。正しい順序で、正しい名を与えよう——なぜなら、順序を誤ることこそが、あなたを消耗させているものの一部だからだ。</p>
 <br>
-<h4 class="preview-section-heading">The Scan</h4>
+<h4 class="preview-section-heading">走査（スキャン）</h4>
 <br>
-<p>There is a part of you that is always scanning.</p>
+<p>あなたの中には、いつも走査を続けている部分がある。</p>
 <br>
-<p>Not anxiously. Not obviously. Just — scanning. Tracking the manager's reply time. Reading the tone of a Slack message. Recalculating what last Tuesday's comment meant. You have been doing this so efficiently, for so long, that you have stopped noticing. You have mistaken it for the kind of person you are.</p>
+<p>不安げにではない。目立つ形でもない。ただ——走査している。上司の返信の速さを追う。Slackのメッセージの語調を読む。先週火曜のあの一言が何を意味したのかを計算し直す。あまりに長く、あまりに効率よく続けてきたので、もう気づかなくなっている。あなたはそれを「自分はそういう人間だ」と取り違えてきた。</p>
 <br>
-<p>It is not who you are. It is a mechanism running in the soul-body-mind-spirit system, and the moment you see it clearly, the field begins to change.</p>
+<p>それはあなたそのものではない。それは魂・身体・心・霊のシステムの中で作動している一つの機構であり、それをはっきりと見た瞬間、場（フィールド）は変わりはじめる。</p>
 <br>
 <div style="margin-top:32px; padding-top:20px; border-top:1px solid #333; text-align:center;">
-  <a href="./teacher_showcase/master_sha__chapter_1.html" style="color:#F5A623; text-decoration:none; font-family:'DM Sans',sans-serif; font-size:0.95rem; letter-spacing:0.05em; font-weight:500; border-bottom:1px solid #F5A623; padding-bottom:2px;" target="_blank" rel="noopener">Read full chapter →</a>
+  <a href="./teacher_showcase/master_sha__chapter_1.html" style="color:#F5A623; text-decoration:none; font-family:'DM Sans',sans-serif; font-size:0.95rem; letter-spacing:0.05em; font-weight:500; border-bottom:1px solid #F5A623; padding-bottom:2px;" target="_blank" rel="noopener">全章を読む →</a>
 </div>
 </div>
       </div>
@@ -1953,19 +1953,15 @@ const TEACHER_LABELS = {
         composite: '綜合模式（無教師） →', compositeHint: '為此品牌創作所有書籍，不使用教師之聲' },
 };
 function _teacherLang() {
-  // Honor explicit ?lang= override first (URL carries locale across the handoff,
-  // more robust than localStorage/navigator — see wizard i18n leak fix).
+  // ja sibling page: honor explicit ?lang= override, else default to ja.
   try {
     var _p = new URLSearchParams(window.location.search).get('lang');
-    if (_p === 'ja') { try { localStorage.setItem('pearl_prime_locale','ja'); } catch (e) {} return 'ja'; }
+    if (_p === 'ja') return 'ja';
     if (_p === 'tw' || _p === 'zh-TW') return 'tw';
     if (_p === 'zh' || _p === 'zh-CN') return 'zh';
   } catch (e) {}
-  const loc = localStorage.getItem('pearl_prime_locale') || navigator.language || 'en';
-  if (loc.startsWith('ja')) return 'ja';
-  if (loc === 'zh-TW' || loc === 'tw') return 'tw';
-  if (loc.startsWith('zh')) return 'zh';
-  return 'en';
+  try { localStorage.setItem('pearl_prime_locale', 'ja'); } catch (e) {}
+  return 'ja';
 }
 function _wizardFile() {
   const lang = _teacherLang();

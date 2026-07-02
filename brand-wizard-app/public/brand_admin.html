@@ -752,7 +752,7 @@ function renderPhase1(){
   h+='<div class="nba-icon">'+icon('external','accent')+'</div>';
   h+='<div class="nba-body"><div class="nba-label">Guided Platform Setup</div>';
   h+='<div class="nba-text">Step-by-step setup for every platform (English / 日本語) with secure, write-only login capture.';
-  h+=' <a class="action-btn" style="margin-left:6px" href="platform_setup_helper.html?brand='+encodeURIComponent(brandId||'')+'&brand_name='+encodeURIComponent(b.d||'')+'&brand_focus='+encodeURIComponent(b.f||'')+'&brand_desc='+encodeURIComponent(desc(b))+'" target="_blank">'+icon('arrow_right','sm')+' Open Setup Helper</a></div></div></div>';
+  h+=' <a class="action-btn" style="margin-left:6px" href="platform_setup_helper.html?brand='+encodeURIComponent(brandId||'')+'&brand_name='+encodeURIComponent(b.d||'')+'&brand_focus='+encodeURIComponent(b.f||'')+'&brand_desc='+encodeURIComponent(desc(b))+'&lang='+encodeURIComponent(window.i18n?window.i18n.locale():'en')+'" target="_blank">'+icon('arrow_right','sm')+' Open Setup Helper</a></div></div></div>';
 
   // Next best action for setup
   if(remaining>0){

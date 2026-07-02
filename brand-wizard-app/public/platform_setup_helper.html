@@ -127,7 +127,7 @@ function fillTpl(tpl){ return String(tpl||'')
 function readBrandFromUrl(){ const q=new URLSearchParams(location.search);
   BRAND.id=q.get('brand')||q.get('brand_id')||''; BRAND.name=q.get('brand_name')||''; BRAND.focus=q.get('brand_focus')||'';
   BRAND.desc=q.get('brand_desc')||''; BRAND.email=q.get('brand_email')||''; BRAND.slug=q.get('brand_slug')||slug(BRAND.name);
-  BRAND.publisher=q.get('publisher')||q.get('brand_publisher')||''; if(q.get('market')==='ja') MARKET='ja'; }
+  BRAND.publisher=q.get('publisher')||q.get('brand_publisher')||''; var _mk=q.get('market'), _lg=(q.get('lang')||''); if(_mk==='ja'||_mk==='jp'||_lg==='ja'||_lg.indexOf('ja')===0) MARKET='ja'; }
 // Bridge: fill any missing brand fields from the brand-config registry (gen_setup_helper_brands.py).
 async function loadBrandConfig(){
   if(!BRAND.id) return;
