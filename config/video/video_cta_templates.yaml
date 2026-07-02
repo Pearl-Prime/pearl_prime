@@ -1,7 +1,7 @@
 # Video CTA Templates — Per-format freebie call-to-action specs
 # Authority: Plan — End-to-End Video Production + Upload + Freebie CTAs
 # Tokens: {workbook_label}, {slug}, {brand_id}, {url}, {topic_display}
-# URL base: brand-admin-onboarding.pages.dev/free/{slug}
+# URL base: brand-admin-onboarding-bu2.pages.dev/free/{slug}
 
 schema_version: "1.0"
 
@@ -19,7 +19,7 @@ youtube:
   cta_end_card:
     timing: "last_10s"
     type: overlay
-    template: "Free {workbook_label}: brand-admin-onboarding.pages.dev/free/{slug}"
+    template: "Free {workbook_label}: brand-admin-onboarding-bu2.pages.dev/free/{slug}"
     overlay_position: lower_third
     font_size: 36
     font_color: "#FFFFFF"
@@ -29,7 +29,7 @@ youtube:
   cta_description:
     type: description_link
     template: |
-      📖 Free {workbook_label}: https://brand-admin-onboarding.pages.dev/free/{slug}?utm_source=youtube&utm_medium=video&utm_campaign={brand_id}
+      📖 Free {workbook_label}: https://brand-admin-onboarding-bu2.pages.dev/free/{slug}?utm_source=youtube&utm_medium=video&utm_campaign={brand_id}
 
       This video is about {topic_display}. Each chapter walks you through
       a single scene — recognition, mechanism, practice, integration.
@@ -40,7 +40,7 @@ youtube:
     type: pinned_comment
     template: >-
       Get the free {workbook_label} for this book:
-      brand-admin-onboarding.pages.dev/free/{slug}
+      brand-admin-onboarding-bu2.pages.dev/free/{slug}
 
 # ── YouTube Shorts (60s, 9:16) ────────────────────────────────────
 youtube_shorts:
@@ -57,12 +57,12 @@ youtube_shorts:
   cta_description:
     type: description_link
     template: >-
-      Free {workbook_label}: brand-admin-onboarding.pages.dev/free/{slug}?utm_source=youtube_shorts&utm_medium=short&utm_campaign={brand_id}
+      Free {workbook_label}: brand-admin-onboarding-bu2.pages.dev/free/{slug}?utm_source=youtube_shorts&utm_medium=short&utm_campaign={brand_id}
 
   cta_pinned_comment:
     type: pinned_comment
     template: >-
-      📖 Free {workbook_label}: brand-admin-onboarding.pages.dev/free/{slug}
+      📖 Free {workbook_label}: brand-admin-onboarding-bu2.pages.dev/free/{slug}
 
 # ── TikTok (30-60s, 9:16) ────────────────────────────────────────
 tiktok:
@@ -78,7 +78,7 @@ tiktok:
 
   cta_bio_link:
     type: bio_link
-    template: "brand-admin-onboarding.pages.dev/free/{slug}?utm_source=tiktok&utm_medium=video&utm_campaign={brand_id}"
+    template: "brand-admin-onboarding-bu2.pages.dev/free/{slug}?utm_source=tiktok&utm_medium=video&utm_campaign={brand_id}"
 
   cta_caption:
     type: post_caption
@@ -110,7 +110,7 @@ instagram:
 
   cta_bio_link:
     type: bio_link
-    template: "brand-admin-onboarding.pages.dev/free/{slug}?utm_source=instagram&utm_medium=reels&utm_campaign={brand_id}"
+    template: "brand-admin-onboarding-bu2.pages.dev/free/{slug}?utm_source=instagram&utm_medium=reels&utm_campaign={brand_id}"
 
 # ── LINE (60-90s, 9:16, Japan/Taiwan) ─────────────────────────────
 line:
@@ -132,7 +132,7 @@ line:
     timing: "last_8s"
     position: bottom_right
     size_px: 150
-    url_template: "brand-admin-onboarding.pages.dev/free/{slug}?utm_source=line&utm_medium=video&utm_campaign={brand_id}"
+    url_template: "brand-admin-onboarding-bu2.pages.dev/free/{slug}?utm_source=line&utm_medium=video&utm_campaign={brand_id}"
     margin: 20
 
   cta_message:

@@ -2,9 +2,9 @@
 """
 Generate brand URL routing manifest for Cloudflare Pages — $0 cost.
 
-Using path-based routing on brand-admin-onboarding.pages.dev:
-  - Landing pages: brand-admin-onboarding.pages.dev/{brand-slug}/
-  - Freebie pages: brand-admin-onboarding.pages.dev/free/{freebie-slug}
+Using path-based routing on brand-admin-onboarding-bu2.pages.dev:
+  - Landing pages: brand-admin-onboarding-bu2.pages.dev/{brand-slug}/
+  - Freebie pages: brand-admin-onboarding-bu2.pages.dev/free/{freebie-slug}
   - Email sending: via GHL msgsndr.com infrastructure (no custom domain needed)
 
 Requires: CLOUDFLARE_API_TOKEN and CLOUDFLARE_ZONE_ID env vars (or Keychain).
@@ -46,7 +46,7 @@ except ImportError:
 
 # ── Cloudflare API ────────────────────────────────────────────────
 CF_API_BASE = "https://api.cloudflare.com/client/v4"
-ROOT_DOMAIN = "brand-admin-onboarding.pages.dev"
+ROOT_DOMAIN = "brand-admin-onboarding-bu2.pages.dev"
 
 # GHL targets for CNAME records
 GHL_FUNNEL_TARGET = "funnels.msgsndr.com"      # Landing pages / funnels

@@ -54,7 +54,7 @@ PUBLIC = REPO / "brand-wizard-app" / "public" / "platform_setup_helper_brands.js
 OPLINKS = REPO / "artifacts" / "onboarding" / "setup_helper_brand_links.tsv"
 UNIFIED = REPO / "config" / "brand_management" / "global_brand_registry_unified.yaml"
 DISPLAY_NAMES = REPO / "config" / "catalog_planning" / "brand_display_names.yaml"
-PUBLIC_BASE = "https://brand-admin-onboarding.pages.dev/platform_setup_helper"
+PUBLIC_BASE = "https://brand-admin-onboarding-bu2.pages.dev/platform_setup_helper"
 LOCAL_BASE = "http://localhost:5174/platform_setup_helper.html"
 
 SCAN_GLOBS = [

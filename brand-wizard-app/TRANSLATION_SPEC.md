@@ -360,7 +360,7 @@ eval "$(python3 ../../scripts/ci/load_integration_env_from_keychain.py)"
 npx wrangler pages deploy dist --project-name brand-admin-onboarding --branch main
 
 # Verify production URL
-curl -sL "https://brand-admin-onboarding.pages.dev/wizard-zh.html" | grep "src=.*wizard-zh"
+curl -sL "https://brand-admin-onboarding-bu2.pages.dev/wizard-zh.html" | grep "src=.*wizard-zh"
 ```
 
 ---

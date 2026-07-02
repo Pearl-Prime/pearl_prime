@@ -21,7 +21,7 @@ BRAND = "way_stream_sanctuary"
 CATALOG = REPO / "brand-wizard-app/public/brand_catalogs/way_stream_sanctuary.json"
 DELIVERIES = REPO / "brand-wizard-app/public/brand_deliveries/way_stream_sanctuary.json"
 OUT = REPO / "storefront/public/app/sample_catalog.way_stream_sanctuary.en-US.json"
-BRAND_ADMIN_BASE = "https://brand-admin-onboarding.pages.dev"
+BRAND_ADMIN_BASE = "https://brand-admin-onboarding-bu2.pages.dev"
 PRICE_CENTS = 499
 
 

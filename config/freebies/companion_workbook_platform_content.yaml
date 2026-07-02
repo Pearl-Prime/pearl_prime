@@ -18,7 +18,7 @@ cta_templates:
     text: >
       This audiobook has a companion {workbook_label} with all the exercises
       and reflection prompts. You can get it free at
-      brand-admin-onboarding.pages.dev/free/{slug}.
+      brand-admin-onboarding-bu2.pages.dev/free/{slug}.
     max_seconds: 20
     placement: after_intro_chapter_narration
 
@@ -26,7 +26,7 @@ cta_templates:
   audiobook_back_matter_spoken:
     text: >
       To go deeper and actually do the work from this book, download the
-      companion {workbook_label} at brand-admin-onboarding.pages.dev/free/{slug}.
+      companion {workbook_label} at brand-admin-onboarding-bu2.pages.dev/free/{slug}.
       You will find guided exercises, journaling pages, and tools you can
       return to again and again. It is free — designed to go with exactly
       this book.
@@ -37,7 +37,7 @@ cta_templates:
   ebook_front_matter_pointer:
     text: >
       A companion {workbook_label} is available for this book at
-      brand-admin-onboarding.pages.dev/free/{slug}. You may want to have it
+      brand-admin-onboarding-bu2.pages.dev/free/{slug}. You may want to have it
       alongside you as you read.
     placement: front_matter
     applies_to: [full]   # light_guide: optional; none: skip
@@ -48,7 +48,7 @@ cta_templates:
       A companion {workbook_label} is available for this book.
       It deepens every exercise with guided practice pages, reflection
       prompts, and tools you can return to.
-      Get it free at brand-admin-onboarding.pages.dev/free/{slug}.
+      Get it free at brand-admin-onboarding-bu2.pages.dev/free/{slug}.
     placement: after_intro_integration
     applies_to: [full, light_guide]
 
@@ -56,7 +56,7 @@ cta_templates:
   ebook_mid_book_cta_line:
     text: >
       Download the companion {workbook_label} at
-      brand-admin-onboarding.pages.dev/free/{slug} to work through these
+      brand-admin-onboarding-bu2.pages.dev/free/{slug} to work through these
       exercises in depth.
     placement: after_highest_exercise_density_chapter
     applies_to: [full]
@@ -69,7 +69,7 @@ cta_templates:
       {workbook_label} has everything you need to put this into practice.
       Guided exercises, reflection pages, and tools built for exactly
       what you just read.
-      Get it free at brand-admin-onboarding.pages.dev/free/{slug}.
+      Get it free at brand-admin-onboarding-bu2.pages.dev/free/{slug}.
     placement: back_matter
     applies_to: [full, light_guide]
 
@@ -82,7 +82,7 @@ platform_description:
     text: >
       Includes a free companion {workbook_label} with guided exercises
       and reflection prompts. Download at
-      brand-admin-onboarding.pages.dev/free/{slug}.
+      brand-admin-onboarding-bu2.pages.dev/free/{slug}.
     applies_to: [full, light_guide]
 
   # Additional line for full workbook bundles (KDP bundle listing, etc.)
@@ -123,8 +123,8 @@ bundle_metadata:
 # UTM URLs used in ebook hyperlinks and platform description links.
 
 utm:
-  base_url: "brand-admin-onboarding.pages.dev/free/{slug}"
-  spoken_url: "brand-admin-onboarding.pages.dev/free/{slug}"   # no UTM in spoken narration
+  base_url: "brand-admin-onboarding-bu2.pages.dev/free/{slug}"
+  spoken_url: "brand-admin-onboarding-bu2.pages.dev/free/{slug}"   # no UTM in spoken narration
 
   params:
     audiobook_post_intro:

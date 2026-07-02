@@ -24,7 +24,7 @@ for f in "${SPINE_HTML[@]}"; do
 done
 echo "Synced onboarding spine HTML -> brand-wizard-app/public/"
 
-# Pearl Prime pitch deck (docs/) → public root so brand-admin-onboarding.pages.dev serves them
+# Pearl Prime pitch deck (docs/) → public root so brand-admin-onboarding-bu2.pages.dev serves them
 DOCS_HTML=(
   pearl_prime_v6-3.html
   pearl_prime_v6-3-ja.html

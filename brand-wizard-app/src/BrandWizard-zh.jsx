@@ -3344,7 +3344,7 @@ function IntroWelcome({ onNext }) {
           </div>
           <p className="mt-8 text-center text-xs">
             <a
-              href="https://brand-admin-onboarding.pages.dev/pearl_prime_v6-3.html"
+              href="https://brand-admin-onboarding-bu2.pages.dev/pearl_prime_v6-3.html"
               className="font-semibold text-orange-400 underline decoration-orange-300 underline-offset-2 hover:text-orange-300"
             >
               {t("ui", "返回起点")}

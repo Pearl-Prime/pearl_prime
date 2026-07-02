@@ -46,8 +46,8 @@ open http://localhost:8000/index.html
 After merging this branch to `main`, the brand-admin-onboarding-pages CI deploys to Cloudflare Pages and the mockups become available at:
 
 ```
-https://brand-admin-onboarding.pages.dev/storefront_mockups/index.html
-https://brand-admin-onboarding.pages.dev/storefront_mockups/locale_landing_en_US.html
+https://brand-admin-onboarding-bu2.pages.dev/storefront_mockups/index.html
+https://brand-admin-onboarding-bu2.pages.dev/storefront_mockups/locale_landing_en_US.html
 … etc
 ```
 

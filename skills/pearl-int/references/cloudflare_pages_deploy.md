@@ -25,7 +25,7 @@ main → workflow auto-fires → fix live in ~2-3 min on CDN.**
    - Builds `brand-wizard-app/dist/` via `npm run build`
    - Deploys via `cloudflare/wrangler-action@v3` using `secrets.CLOUDFLARE_API_TOKEN` + `secrets.CLOUDFLARE_ACCOUNT_ID` (GitHub repo secrets — *NOT* your local Keychain)
    - Target project: **`brand-admin-onboarding`** (`--project-name=brand-admin-onboarding`)
-5. Live at `https://brand-admin-onboarding.pages.dev` (+ whatever custom domain is pointed at it).
+5. Live at `https://brand-admin-onboarding-bu2.pages.dev` (+ whatever custom domain is pointed at it).
 6. Watch: `gh run watch <run-id>` or `gh run list --workflow=brand-admin-onboarding-pages.yml --limit 3`.
 
 Typical wall-clock: build ~2 min + deploy ~30 sec + CDN propagation ~30 sec = **~3 min from merge to visible**.

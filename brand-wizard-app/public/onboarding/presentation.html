@@ -33,12 +33,12 @@ code{font-size:.85em;background:var(--card);padding:2px 8px;border-radius:6px}
 <div class="hero">
 <h1>Onboarding proof — PNG presentation deck</h1>
 <p>Raster tiles from <code>example_registry.json</code>. Full registry UI: <code>../lane_examples_gallery.html</code>.</p>
-<p class="canon"><strong>Live:</strong> <a href="https://brand-admin-onboarding.pages.dev/onboarding/presentation.html">https://brand-admin-onboarding.pages.dev/onboarding/presentation.html</a></p>
+<p class="canon"><strong>Live:</strong> <a href="https://brand-admin-onboarding-bu2.pages.dev/onboarding/presentation.html">https://brand-admin-onboarding-bu2.pages.dev/onboarding/presentation.html</a></p>
 <div class="nav">
 <a href="../brand_onboarding_hub.html">Hub</a>
 <a href="../brand_admin_master_onboarding.html">Master onboarding</a>
 <a href="../lane_examples_gallery.html">Lane gallery</a>
-<a href="https://brand-admin-onboarding.pages.dev" target="_blank" rel="noopener">Live wizard</a>
+<a href="https://brand-admin-onboarding-bu2.pages.dev" target="_blank" rel="noopener">Live wizard</a>
 </div>
 </div>
 
@@ -101,7 +101,7 @@ fetch('example_registry.json').then(function(r){if(!r.ok)throw 0;return r.json()
     return r.status==='ready';
   }).sort(function(a,b){return a.id.localeCompare(b.id);}).forEach(function(r){rest.appendChild(slide(r));});
 }).catch(function(){
-  document.querySelector('section').insertBefore(el('p',null,'Could not load registry. Serve <code>brand-wizard-app/public</code> (see <code>scripts/dev/serve_brand_admin_public.sh</code>) or open the <a href="https://brand-admin-onboarding.pages.dev/onboarding/presentation.html">live deck</a>.'), document.querySelector('section').firstChild);
+  document.querySelector('section').insertBefore(el('p',null,'Could not load registry. Serve <code>brand-wizard-app/public</code> (see <code>scripts/dev/serve_brand_admin_public.sh</code>) or open the <a href="https://brand-admin-onboarding-bu2.pages.dev/onboarding/presentation.html">live deck</a>.'), document.querySelector('section').firstChild);
 });
 })();
 </script>
