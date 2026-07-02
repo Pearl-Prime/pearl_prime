@@ -11,7 +11,7 @@
 
 | Order | File | What it covers |
 |-------|------|----------------|
-| 1 | **STORY_TYPES_AND_STRUCTURES.md** (repo root) | Story origin (true vs composite), five story types, structure templates, principle-teacher rule, five-element check, schema. Primary story authority. |
+| 1 | **docs/STORY_TYPES_AND_STRUCTURES.md** | Story origin (true vs composite), five story types, structure templates, principle-teacher rule, five-element check, schema. Primary story authority. |
 | 2 | **specs/PHOENIX_V4_5_WRITER_SPEC.md** | Voice, TTS rules, six atom types; §4.3 STORY and §6 Four Story Rules (Misfire Tax, Silence Beat, Never-Know, Interrupt). Prose and atom rules. **Backup:** [docs/WRITER_SPEC_EXTRACT_FOR_ATOMS.md](./WRITER_SPEC_EXTRACT_FOR_ATOMS.md) if the full spec won’t open. |
 | 3 | **docs/HIGH_IMPACT_STORY_ATOM_UPGRADE_RUBRIC.md** | Specificity, cost, conflict, insight pivot, residual echo. Quality bar for every STORY. |
 
