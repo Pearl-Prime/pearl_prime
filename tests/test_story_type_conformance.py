@@ -121,6 +121,39 @@ def test_yaml_atom_conformance_violation_fails(tmp_path):
     assert "COMPOSITE_FORBIDS_RECOGNITION_EXCHANGE" in res.flags
 
 
+def test_unknown_story_type_is_warn_not_blocking(tmp_path):
+    """Esoteric teacher extension types (receiver_witness, soul_remembrance, …) are
+    surfaced as WARN, never a blocking conformance FAIL — don't red-wall CI."""
+    from phoenix_v4.quality.story_atom_lint import _CONFORMANCE_FAIL_CODES
+    assert "UNKNOWN_STORY_TYPE" not in _CONFORMANCE_FAIL_CODES
+    body = (
+        "There was a woman who sat in the quiet for a long time. She had lost the thread "
+        "and could not sleep, and she realized the silence itself was the teaching she "
+        "had been avoiding for most of her striving, exhausting years."
+    )
+    p = _write_atom(
+        tmp_path,
+        "atom_id: t_STORY_9\nstory_origin: composite\nstory_type: soul_remembrance\nband: '3'",
+        body,
+    )
+    res = lint_story_atom_yaml(p)
+    assert "UNKNOWN_STORY_TYPE" in res.flags
+    assert not any(f in _CONFORMANCE_FAIL_CODES for f in res.flags)
+
+
+def test_localized_and_candidate_atoms_out_of_scope():
+    from phoenix_v4.quality.story_atom_lint import _is_in_scope_story_yaml
+    assert _is_in_scope_story_yaml(
+        Path("SOURCE_OF_TRUTH/teacher_banks/adi_da/approved_atoms/STORY/adi_da_STORY_001.yaml")
+    )
+    assert not _is_in_scope_story_yaml(
+        Path("SOURCE_OF_TRUTH/teacher_banks/adi_da/approved_atoms_localized/ja-JP/STORY/adi_da_STORY_000_ja-JP.yaml")
+    )
+    assert not _is_in_scope_story_yaml(
+        Path("SOURCE_OF_TRUTH/teacher_banks/ahjan/candidate_atoms/STORY/ahjan_STORY_000_mined.yaml")
+    )
+
+
 def test_yaml_atom_conformant_not_failed_by_conformance(tmp_path):
     body = (
         "Naomi sat in her car outside the hospital and could not turn the ignition. She had "

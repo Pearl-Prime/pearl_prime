@@ -292,14 +292,47 @@ def iter_text_files(root: Path) -> List[Path]:
     return sorted(files)
 
 
+# Extract the STORY_TYPE meta value per block, in document order, from a raw
+# CANONICAL.txt (persona pools tagged by scripts/atom_writing/classify_story_types.py).
+_CANON_META_RE = re.compile(
+    r"##\s*[^\n]+\n---\s*\n(?P<meta>.*?)\n---\s*\n", re.DOTALL
+)
+_STORY_TYPE_LINE_RE = re.compile(r"^\s*STORY_TYPE\s*:\s*(\S+)", re.MULTILINE)
+
+
+def _canonical_story_types(path: Path) -> List["str | None"]:
+    text = path.read_text(encoding="utf-8", errors="replace")
+    types: List["str | None"] = []
+    for m in _CANON_META_RE.finditer(text):
+        mt = _STORY_TYPE_LINE_RE.search(m.group("meta"))
+        types.append(mt.group(1) if mt else None)
+    return types
+
+
 def lint_canonical_file(path: Path) -> List[StoryLintResult]:
-    """Parse CANONICAL.txt into blocks and lint each atom. Raises ValueError if malformed."""
+    """Parse CANONICAL.txt into blocks and lint each atom. Raises ValueError if malformed.
+
+    When a block carries a STORY_TYPE meta tag (persona pools, Phase-3), the §7
+    conformance + §3 naming checks are applied too. Untagged blocks get only the
+    5-element prose lint (unchanged behavior).
+    """
     blocks = parse_canonical_blocks_from_path(path)
     path_str = str(path)
-    return [
-        lint_one_prose(block.body, block.atom_id, path_str, band=block.band)
-        for block in blocks
-    ]
+    story_types = _canonical_story_types(path)
+    aligned = len(story_types) == len(blocks)
+    results: List[StoryLintResult] = []
+    for i, block in enumerate(blocks):
+        base = lint_one_prose(block.body, block.atom_id, path_str, band=block.band)
+        st = story_types[i] if aligned else None
+        if st:
+            # persona pools carry no story_origin / teacher → origin=None, principle=False
+            extra = check_story_type_conformance(st, None, teacher_is_principle=False)
+            naming = check_character_study_naming(st, block.body)
+            if naming:
+                extra = extra + [naming]
+            base = _escalate(base, extra, _CONFORMANCE_FAIL_CODES)
+        results.append(base)
+    return results
 
 
 def _escalate(base: StoryLintResult, extra_flags: List[str], fail_codes: frozenset) -> StoryLintResult:
@@ -327,9 +360,13 @@ def _escalate(base: StoryLintResult, extra_flags: List[str], fail_codes: frozens
     )
 
 
+# Only genuine §7 CONTRADICTIONS block the gate. UNKNOWN_STORY_TYPE is a WARN,
+# not a FAIL: teacher banks legitimately carry esoteric extension types
+# (receiver_witness, soul_remembrance, conduit_session) that the 5-type authority
+# doesn't enumerate — surface them for review, don't red-wall CI. Whether to
+# canonicalize or extend the enum is an authority decision, not a merge blocker.
 _CONFORMANCE_FAIL_CODES = frozenset(
     {
-        "UNKNOWN_STORY_TYPE",
         "COMPOSITE_FORBIDS_RECOGNITION_EXCHANGE",
         "RECOGNITION_EXCHANGE_REQUIRES_TRUE_STORY",
         "PRINCIPLE_TEACHER_TYPE_FORBIDDEN",
@@ -366,13 +403,25 @@ def lint_story_atom_yaml(path: Path, principle_teachers: "set[str] | None" = Non
     return _escalate(base, extra, _CONFORMANCE_FAIL_CODES)
 
 
+# The story_type authority (docs/STORY_TYPES_AND_STRUCTURES.md) governs the
+# APPROVED ENGLISH STORY atoms. Localized banks carry a separate translated
+# vocabulary (e.g. story_type: dialogue_exchange) and candidate banks are pre-
+# approval WIP — both are out of scope for §7 conformance.
+_YAML_ATOM_EXCLUDE_PARTS = frozenset({"approved_atoms_localized", "candidate_atoms"})
+
+
+def _is_in_scope_story_yaml(p: Path) -> bool:
+    parts = set(p.parts)
+    return "STORY" in parts and not (_YAML_ATOM_EXCLUDE_PARTS & parts)
+
+
 def iter_story_atom_yaml(root: Path) -> List[Path]:
-    """Find STORY-atom YAML files (under a STORY/ dir) for conformance linting."""
+    """Find in-scope (approved-English) STORY-atom YAML files for conformance linting."""
     if root.is_file():
-        return [root] if (root.suffix.lower() in (".yaml", ".yml") and "STORY" in root.parts) else []
+        return [root] if (root.suffix.lower() in (".yaml", ".yml") and _is_in_scope_story_yaml(root)) else []
     out: List[Path] = []
     for p in root.rglob("*.y*ml"):
-        if p.is_file() and "STORY" in p.parts:
+        if p.is_file() and _is_in_scope_story_yaml(p):
             out.append(p)
     return sorted(out)
 
@@ -391,6 +440,20 @@ def parse_args() -> argparse.Namespace:
         default="FAIL",
         help="Exit nonzero if any result is at/above this severity",
     )
+    ap.add_argument(
+        "--conformance-only",
+        action="store_true",
+        help=(
+            "CI-gate mode: exit nonzero ONLY on §7 story_type conformance FAILs "
+            "(schema violations on TAGGED atoms). Ignores the pre-existing "
+            "5-element FAILs so legacy/untagged content never red-walls the gate."
+        ),
+    )
+    ap.add_argument(
+        "--story-only",
+        action="store_true",
+        help="In directory mode, lint only files under a STORY/ path (skip HOOK/SCENE/EXERCISE).",
+    )
     return ap.parse_args()
 
 
@@ -402,8 +465,12 @@ def main() -> int:
         print(f"Error: path not found: {root}", file=sys.stderr)
         return 1
 
+    text_files = iter_text_files(root)
+    if args.story_only:
+        text_files = [f for f in text_files if "STORY" in f.parts]
+
     results: List[StoryLintResult] = []
-    for f in iter_text_files(root):
+    for f in text_files:
         try:
             if f.name == "CANONICAL.txt":
                 try:
@@ -507,6 +574,21 @@ def main() -> int:
         print("\nTop issues:")
         for r in top:
             print(f"- {r.status} {r.story_id} ({r.word_count}w) {Path(r.path).name} :: {', '.join(r.flags)}")
+
+    if args.conformance_only:
+        # CI-gate mode: block ONLY on §7 schema violations (tagged atoms).
+        # Legacy 5-element FAILs and naming/variety WARNs never fail the gate.
+        conformance_fails = [
+            r for r in results if any(f in _CONFORMANCE_FAIL_CODES for f in r.flags)
+        ]
+        if conformance_fails:
+            print("\nStory-type conformance violations (BLOCKING):")
+            for r in conformance_fails:
+                bad = [f for f in r.flags if f in _CONFORMANCE_FAIL_CODES]
+                print(f"- {r.story_id} {Path(r.path).name} :: {', '.join(bad)}")
+            return EXIT_FAIL
+        print("\nStory-type conformance: PASS (no §7 schema violations on tagged atoms).")
+        return EXIT_PASS
 
     return status_to_exit_code(overall)
 

@@ -1,0 +1,48 @@
+# Story-type conformance gate — enforces docs/STORY_TYPES_AND_STRUCTURES.md §7 on
+# tagged STORY atoms (composite⇏recognition_exchange, recognition_exchange⇒true_story,
+# principle-teacher type restriction, valid story_type enum).
+#
+# --conformance-only: blocks ONLY on §7 schema violations of TAGGED atoms. Legacy
+# 5-element FAILs and naming/variety WARNs never fail this gate, and UNtagged atoms
+# (the persona pools until Phase-3 tagging) can't violate it — so this never
+# red-walls existing content. NOT yet a required check: promote via
+# config/governance/required_checks.yaml + ruleset once the catalog is tagged
+# (Phase 4). Path-filtered pull_request is safe precisely because it is not required.
+name: Story-type conformance
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'atoms/**/STORY/**'
+      - 'SOURCE_OF_TRUTH/**/STORY/**'
+      - 'phoenix_v4/quality/story_atom_lint.py'
+      - 'config/teachers/teacher_registry.yaml'
+      - '.github/workflows/story-type-conformance.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'atoms/**/STORY/**'
+      - 'SOURCE_OF_TRUTH/**/STORY/**'
+      - 'phoenix_v4/quality/story_atom_lint.py'
+jobs:
+  story-type-conformance:
+    name: story-type-conformance
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install deps
+        run: pip install -q pyyaml
+      - name: Teacher-mode STORY atoms (tagged) — §7 conformance
+        run: |
+          PYTHONPATH=. python3 phoenix_v4/quality/story_atom_lint.py \
+            --path SOURCE_OF_TRUTH --conformance-only \
+            --json-out artifacts/ops/story_type_conformance_teacher.json
+      - name: Persona STORY pools — §7 conformance (no-op until Phase-3 tagging)
+        run: |
+          PYTHONPATH=. python3 phoenix_v4/quality/story_atom_lint.py \
+            --path atoms --story-only --conformance-only \
+            --json-out artifacts/ops/story_type_conformance_pools.json
