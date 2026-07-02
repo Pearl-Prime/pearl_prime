@@ -52,7 +52,7 @@ def _merge_brand_catalog_urls(
     brand_id: str,
     locale: str,
     funnel_topics: set[str],
-    landing_base: str = "https://phoenix-brand-admin.pages.dev",
+    landing_base: str = "https://brand-admin-onboarding-bu2.pages.dev",
 ) -> None:
     """Add topic×persona URLs from brand-wizard catalog JSON (e.g. way_stream_sanctuary)."""
     catalog_path = REPO_ROOT / f"brand-wizard-app/public/brand_catalogs/{brand_id}.json"

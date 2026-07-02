@@ -74,7 +74,7 @@ def main() -> int:
         topics=args.topics,
         shop_base=args.shop_base,
         persona_id=args.persona_id,
-        landing_base=args.landing_base or "https://brand-admin-onboarding.pages.dev",
+        landing_base=args.landing_base or "https://brand-admin-onboarding-bu2.pages.dev",
         funnel_path_prefix=args.funnel_path_prefix,
     )
     errors = validate_feed(feed)

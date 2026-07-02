@@ -60,6 +60,6 @@ def resolve_funnel_landing_path(profile: dict[str, Any], slug: str) -> str:
 
 
 def resolve_landing_url(profile: dict[str, Any], slug: str) -> str:
-    base = str(profile.get("landing_base") or "https://phoenix-brand-admin.pages.dev").rstrip("/")
+    base = str(profile.get("landing_base") or "https://brand-admin-onboarding-bu2.pages.dev").rstrip("/")
     path = resolve_funnel_landing_path(profile, slug)
     return f"{base}{path}"
