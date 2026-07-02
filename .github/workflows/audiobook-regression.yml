@@ -72,7 +72,10 @@ jobs:
           if not ver.startswith("2."):
               print(f"FAIL: checklist_version={ver!r}; expected 2.x"); sys.exit(1)
           gates = cl.get("gates", [])
-          hard_ids = [g["gate_id"] for g in gates if g.get("type") == "HARD"]
+          # Gate type is canonically lowercase ("hard"/"scored") — matches the runtime
+          # comparator loop (scripts/audiobook_script/run_comparator_loop.py) and
+          # validate_translations.py. Compare case-insensitively so CI tracks the data contract.
+          hard_ids = [g["gate_id"] for g in gates if str(g.get("type", "")).lower() == "hard"]
           required_hard = {"semantic_fidelity","claim_integrity","psychological_safety","tts_readability_cadence","compliance_disclaimer_preservation"}
           missing = required_hard - set(hard_ids)
           if missing:

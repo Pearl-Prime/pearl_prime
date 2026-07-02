@@ -22,10 +22,27 @@ ALLOWED_TOP_LEVEL = frozenset({
     "fallback_alignment", "constraints", "doctrine_schema_version",
     "display_name", "forbidden_claims", "tone_boundaries", "glossary", "prohibited_outcomes", "exercise_safety_notes",
     "schema_version", "doctrine_profile",
+    # Teacher provenance / biographical fields carried by hand-authored doctrine files
+    # (joshin, kenjin, miyuki, maat, master_feung, miki, ra). These are real, populated
+    # fields — not drift — so the allowlist must recognize them (Q-GATECLEAN-02: extend
+    # schema, keys are load-bearing; there is no compliant precedent that omits them —
+    # joshin itself carries the same set — so removing them would delete authentic content).
+    "short_name", "honorific", "gender", "age_range", "cultural_background",
+    "sub_school", "lineage_root", "ordination_level", "geographic_anchors", "sacred_site", "location",
+    "first_person_bio", "background", "voice_id_audiobook",
+    "core_doctrines", "heart_sutra_opening", "key_metaphors", "program_names",
+    "partner_teacher", "book_title", "stable_characters", "signature_settings",
 })
 
+# Every teacher must declare its doctrinal substance via at least ONE of these fields.
+# Shingon/esoteric teachers (joshin, kenjin) carry a full doctrinal list under
+# `core_doctrines`; others use `primary_methods`/`core_principles`. Accepting any one
+# avoids force-fitting empty canonical keys onto authentic tradition-specific structures.
+SUBSTANCE_KEYS = frozenset({"primary_methods", "core_principles", "core_doctrines"})
+
+# Strictly required on every doctrine file.
 REQUIRED_TOP_LEVEL = frozenset({
-    "teacher_id", "doctrine_version", "tradition", "primary_methods", "core_principles", "tone_profile",
+    "teacher_id", "doctrine_version", "tradition", "tone_profile",
 })
 
 # Nested allowlist: fallback_alignment → only these keys
@@ -61,6 +78,13 @@ def validate_doctrine_schema(doctrine_path: Path) -> tuple[bool, list[str]]:
     for key in REQUIRED_TOP_LEVEL:
         if key not in data or data[key] is None:
             errors.append(f"Missing required key: {key}")
+
+    # Doctrinal substance: at least one of primary_methods / core_principles / core_doctrines
+    if not any(data.get(k) is not None for k in SUBSTANCE_KEYS):
+        errors.append(
+            "Missing doctrinal substance: need at least one of "
+            + ", ".join(sorted(SUBSTANCE_KEYS))
+        )
 
     # Nested allowlist: fallback_alignment
     fa = data.get("fallback_alignment")
