@@ -12,9 +12,12 @@ import pytest
 
 from phoenix_v4.quality.register_gate import (
     F2_LOWERCASE_SENTENCE_START_NOUNS,
+    F14_BEAT_LINE_SHARE_MAX,
     _detect_f2_broken_fragments,
+    _detect_f14_beat_line_share,
     _f11_first_paragraph_warns,
     _parse_hook_variation_first_paragraphs,
+    _split_chapters,
     evaluate_register,
     evaluate_register_from_path,
     load_hook_atoms_from_paths,
@@ -654,4 +657,120 @@ def test_f12_excludes_master_bedroom_compound_noun() -> None:
     result = evaluate_register(body)
     assert not any(f.failure_id == "F12" for f in result.findings), (
         "F12 must not flag 'master bedroom' as an un-wrapped teacher voice-shift"
+    )
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# F14 — beat-line-share ceiling (HARD_FAIL) — 365fd19cc3 choppy-render gate
+# ─────────────────────────────────────────────────────────────────────────────
+
+F14_FIXTURE_DIR = REPO_ROOT / "tests" / "fixtures" / "register_gate_f14"
+# Calibration anchors (docs/PEARL_PRIME_BEATLINE_CEILING_CALIBRATION_2026-07-02.md):
+#   stitched EPUB render  → 35.0% beat-lines → HARD_FAIL
+#   hand-seam-written FINAL → 2.8% beat-lines → PASS (no F14)
+F14_CHOPPY_EXPECTED_SHARE = 0.35   # stitched sample, ± tolerance below
+F14_CLEAN_EXPECTED_SHARE = 0.03    # seam-written FINAL sample, ± tolerance below
+
+
+def _choppy_book(n_beats: int = 40, n_real: int = 20) -> str:
+    """Synthetic 365fd19cc3-class render: mostly standalone one-line beat fragments."""
+    beat = "An ordinary pace is a sustainable pace."
+    real = (
+        "None of those loops closed, and that is the cost. A task, once done, is finished "
+        "and lets you go. A worry stays open, circling back to be checked again and again, "
+        "each return spending a little of what you did not have to spare."
+    )
+    paras = []
+    for i in range(max(n_beats, n_real)):
+        if i < n_beats:
+            paras.append(beat)
+        if i < n_real:
+            paras.append(real)
+    return "Chapter 1\n\n" + "\n\n".join(paras) + "\n"
+
+
+def _clean_book(n_real: int = 30) -> str:
+    """Synthetic cohesive render: multi-sentence flowing paragraphs, no injected beats."""
+    real = (
+        "She knows the shape of the exhaustion well enough to describe it from the inside. "
+        "The red-eye lands at six-fifteen and the cold light on the tarmac is the same "
+        "everywhere. She buys a coffee that costs seven dollars, and it is the right "
+        "temperature, and nothing else is, and that last line is the tell she has been "
+        "misreading for months."
+    )
+    return "Chapter 1\n\n" + "\n\n".join([real] * n_real) + "\n"
+
+
+def test_f14_hard_fails_choppy_render() -> None:
+    """A render dominated by one-line beats must HARD_FAIL on F14."""
+    result = evaluate_register(_choppy_book(), quality_profile="production")
+    f14 = [f for f in result.findings if f.failure_id == "F14"]
+    assert len(f14) == 1, "expected exactly one F14 finding on the choppy render"
+    assert f14[0].severity == "HARD_FAIL"
+    assert result.verdict == "HARD_FAIL", "F14 breach must drive the aggregate verdict to HARD_FAIL"
+    assert f14[0].evidence["beat_line_share"] > F14_BEAT_LINE_SHARE_MAX
+
+
+def test_f14_passes_cohesive_render() -> None:
+    """A cohesive multi-sentence render must NOT produce an F14 finding."""
+    result = evaluate_register(_clean_book(), quality_profile="production")
+    assert not any(f.failure_id == "F14" for f in result.findings), (
+        "F14 must not fire on cohesive flowing prose"
+    )
+
+
+def test_f14_kill_switch_env_disables(monkeypatch) -> None:
+    """REGISTER_GATE_F14_BEATLINE=0 disables the ceiling even on a choppy render."""
+    monkeypatch.setenv("REGISTER_GATE_F14_BEATLINE", "0")
+    result = evaluate_register(_choppy_book(), quality_profile="production")
+    assert not any(f.failure_id == "F14" for f in result.findings), (
+        "kill-switch must suppress the F14 finding"
+    )
+
+
+def test_f14_disabled_on_draft_profile() -> None:
+    """quality_profile='draft' disables F14 (drafts may be intentionally sparse)."""
+    result = evaluate_register(_choppy_book(), quality_profile="draft")
+    assert not any(f.failure_id == "F14" for f in result.findings)
+
+
+def test_f14_short_slice_not_scored() -> None:
+    """A slice below the minimum body-paragraph count is never scored (no false gate)."""
+    tiny = "Chapter 1\n\nRest here.\n\nBreathe out.\n\nLet it close.\n"
+    findings = _detect_f14_beat_line_share(_split_chapters(tiny))
+    assert findings == [], "F14 must not score a slice below F14_MIN_BODY_PARAS"
+
+
+def test_f14_calibration_stitched_epub_fixture_fails() -> None:
+    """
+    Calibration anchor: the real stitched way_stream_sanctuary·corporate_managers·
+    burnout·grief render (~35% beat-lines) MUST HARD_FAIL on F14.
+    """
+    fixture = F14_FIXTURE_DIR / "choppy_stitched_book.txt"
+    text = fixture.read_text(encoding="utf-8")
+    findings = _detect_f14_beat_line_share(_split_chapters(text))
+    assert len(findings) == 1, "stitched EPUB fixture must trip F14"
+    ev = findings[0].evidence
+    assert findings[0].severity == "HARD_FAIL"
+    assert ev["beat_line_share"] == pytest.approx(F14_CHOPPY_EXPECTED_SHARE, abs=0.03), (
+        f"stitched fixture beat-line share drifted: {ev['beat_line_share']}"
+    )
+    assert ev["beat_line_share"] > F14_BEAT_LINE_SHARE_MAX
+
+
+def test_f14_calibration_seamwritten_fixture_passes() -> None:
+    """
+    Calibration anchor: the real hand-seam-written FINAL (~2.8% beat-lines) MUST NOT
+    trip F14 — proving the cutoff cleanly separates the good baseline from the regression.
+    """
+    fixture = F14_FIXTURE_DIR / "clean_seamwritten_book.txt"
+    text = fixture.read_text(encoding="utf-8")
+    findings = _detect_f14_beat_line_share(_split_chapters(text))
+    assert findings == [], "seam-written FINAL fixture must PASS F14 (no finding)"
+
+
+def test_f14_cutoff_separates_the_two_samples() -> None:
+    """The chosen cutoff sits strictly between the PASS and FAIL calibration samples."""
+    assert F14_CLEAN_EXPECTED_SHARE < F14_BEAT_LINE_SHARE_MAX < F14_CHOPPY_EXPECTED_SHARE, (
+        "F14 cutoff must separate the seam-written FINAL from the stitched EPUB"
     )

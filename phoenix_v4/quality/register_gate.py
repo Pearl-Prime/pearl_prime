@@ -24,13 +24,22 @@ F12: un-wrapped voice-shift → FAIL on raw teacher/science register (bypassed t
      with D12's voice_braid_gate (cross-zone bleed); F12 is the un-wrapped-shift sibling.
 F13: dwell-beat / integration starvation → FAIL when 3+ consecutive named insights run
      with no dwell beat between them. Per OVERLAY_SPEC §7.3 dwell contract + §13 criterion #13.
+F14: beat-line-share ceiling → HARD_FAIL when the share of short standalone injected-beat
+     lines (single sentence, ≤ F14_BEAT_MAX_WORDS words, not dialogue/heading/list) exceeds
+     F14_BEAT_LINE_SHARE_MAX of the book's body paragraphs. This is the choppy-render gate:
+     the 365fd19cc3 injector regression produced ~35% beat-line renders that F1 (≥3-sentence
+     paragraphs only) and F13 (advisory, never gates) both let through. Calibrated against two
+     committed samples — the stitched `way_stream_sanctuary·corporate_managers·burnout·grief`
+     render (35.0% beat-lines → FAIL) and its hand-seam-written FINAL (2.8% → PASS); cutoff 0.25.
+     Kill-switch: REGISTER_GATE_F14_BEATLINE=0 (or quality_profile="draft") disables it.
+     Per docs/PEARL_PRIME_BEATLINE_CEILING_CALIBRATION_2026-07-02.md.
 
 Verdicts:
   PASS         — 0 FAIL, 0 WARN
   ADVISORY     — 0 FAIL, ≤ 2 WARN
   WARN         — 0 FAIL, ≥ 3 WARN
   FAIL         — ≥ 1 FAIL
-  HARD_FAIL    — any F2 violation (renderer artifact; never ship)
+  HARD_FAIL    — any F2 violation (renderer artifact; never ship) OR F14 beat-line ceiling breach
 """
 from __future__ import annotations
 
@@ -1342,6 +1351,126 @@ def _detect_f13_dwell_starvation(
 
 
 # ─────────────────────────────────────────────────────────────────────────────
+# F14 — Beat-line-share ceiling (HARD_FAIL)
+# ─────────────────────────────────────────────────────────────────────────────
+#
+# The 365fd19cc3 dwell-injector regression stitched books out of standalone one-line
+# "beat" fragments between real atoms. F1 only inspects paragraphs of ≥3 sentences, so
+# these one-line beats slipped under it; F13 flags integration starvation but only ever
+# emits WARN (never gates). This is the dedicated ceiling that HARD_FAILs a choppy render
+# so 365fd19cc3-class output can never silently PASS again.
+#
+# Metric: BEAT-LINE SHARE = (# body paragraphs that are a single short standalone beat
+# line) / (# body paragraphs). A paragraph counts as a beat line iff it is one sentence,
+# ≤ F14_BEAT_MAX_WORDS words, and is not dialogue, a heading, a chapter marker, a markdown
+# rule, or a list item. Structural / front-matter lines are excluded from BOTH numerator
+# and denominator so they neither inflate nor mask the ratio.
+#
+# Calibration (docs/PEARL_PRIME_BEATLINE_CEILING_CALIBRATION_2026-07-02.md):
+#   stitched EPUB render  → 35.0% beat-lines → HARD_FAIL   (the 365fd19cc3-class regression)
+#   hand-seam-written FINAL → 2.8% beat-lines → PASS        (the good baseline)
+#   chosen cutoff 0.25 sits ~10 pts below the FAIL sample and ~22 pts above the PASS sample.
+
+F14_BEAT_LINE_SHARE_MAX = 0.25   # > this share of body paras being one-line beats → HARD_FAIL
+F14_BEAT_MAX_WORDS = 11          # a "beat line" is a single sentence of at most this many words
+F14_MIN_BODY_PARAS = 12          # need a real book's worth of paragraphs before ratio is meaningful
+
+_F14_RULE_RE = re.compile(r"^\s*[-*_]{3,}\s*$")
+_F14_LIST_RE = re.compile(r"^\s*(?:[-*+•]\s|\d+[.)]\s)")
+
+
+def _f14_is_structural_line(para: str) -> bool:
+    """Front-matter / structural lines excluded from the beat-line ratio (both num + denom)."""
+    p = para.strip()
+    if not p:
+        return True
+    if p.startswith("#"):                       # markdown heading
+        return True
+    if p.startswith("Chapter ") and "\n" not in p:
+        return True
+    if _F14_RULE_RE.match(p):                    # --- / *** rule
+        return True
+    if _F14_LIST_RE.match(p):                    # bullet / numbered list item
+        return True
+    if p.startswith("*") and p.endswith("*") and p.count("*") == 2:
+        return True                              # italic spine/protagonist note block
+    return False
+
+
+def _f14_is_dialogue(para: str) -> bool:
+    return para.lstrip()[:1] in ('"', "“", "'")
+
+
+def _detect_f14_beat_line_share(
+    chapters: list[tuple[int, str]],
+) -> list[RegisterFinding]:
+    """
+    HARD_FAIL when short standalone one-line injected beats dominate the body.
+
+    Deterministic, no LLM. Excludes headings / rules / lists / dialogue so a legitimately
+    terse book is not false-positived; a real book needs ≥F14_MIN_BODY_PARAS body paragraphs
+    before the ratio is scored at all (short slices stay unflagged).
+    """
+    total_body = 0
+    beat_lines = 0
+    beat_examples: list[str] = []
+    for _ch_num, ch_text in chapters:
+        for para in _split_paragraphs(ch_text):
+            if _f14_is_structural_line(para):
+                continue
+            total_body += 1
+            sentences = _split_sentences(para)
+            word_count = len(para.split())
+            if (
+                len(sentences) <= 1
+                and word_count <= F14_BEAT_MAX_WORDS
+                and not _f14_is_dialogue(para)
+            ):
+                beat_lines += 1
+                if len(beat_examples) < 8:
+                    beat_examples.append(para.strip()[:120])
+
+    if total_body < F14_MIN_BODY_PARAS:
+        return []
+
+    share = beat_lines / total_body if total_body else 0.0
+    if share <= F14_BEAT_LINE_SHARE_MAX:
+        return []
+
+    return [RegisterFinding(
+        failure_id="F14",
+        severity="HARD_FAIL",
+        chapter=None,
+        summary=(
+            f"beat-line-share ceiling breached — {beat_lines}/{total_body} body "
+            f"paragraphs ({share * 100:.1f}%) are short standalone one-line beats "
+            f"(> {F14_BEAT_LINE_SHARE_MAX * 100:.0f}% cap). Choppy stitched-atom render "
+            f"(365fd19cc3-class injector regression); never ship."
+        ),
+        evidence={
+            "beat_lines": beat_lines,
+            "body_paragraphs": total_body,
+            "beat_line_share": round(share, 4),
+            "threshold": F14_BEAT_LINE_SHARE_MAX,
+            "beat_max_words": F14_BEAT_MAX_WORDS,
+            "examples": beat_examples,
+            "spec_ref": "docs/PEARL_PRIME_BEATLINE_CEILING_CALIBRATION_2026-07-02.md",
+        },
+    )]
+
+
+def _f14_enabled(quality_profile: str) -> bool:
+    """F14 kill-switch. Disabled by REGISTER_GATE_F14_BEATLINE=0 or quality_profile='draft'."""
+    import os
+    flag = (os.environ.get("REGISTER_GATE_F14_BEATLINE") or "").strip().lower()
+    if flag in ("0", "false", "off", "no"):
+        return False
+    if quality_profile.strip().lower() == "draft":
+        return False
+    return True
+
+
+# ─────────────────────────────────────────────────────────────────────────────
 # Aggregate verdict
 # ─────────────────────────────────────────────────────────────────────────────
 
@@ -1373,6 +1502,7 @@ def _route_suggested_lanes(findings: list[RegisterFinding]) -> list[str]:
         "F11": "Pearl_Editor (HOOK/ANGLE_DEFINITION scene-first rewrite per HOOK-SCENE-FIRST-01)",
         "F12": "Pearl_Dev (route teacher/science register through teacher_wrapper / science_wrapper per BESTSELLER-FIT-PLAN-VOICE-DOCTRINE-V1-01) + Pearl_Editor (re-attribute the raw shift; shares D12 VoiceOutOfZoneError vocab)",
         "F13": "Pearl_Editor + Pearl_Writer (re-pace per §7.3 dwell contract — insert a dwell beat after each named insight; §13 criterion #13)",
+        "F14": "Pearl_Dev (composer scaffolding — stop emitting standalone one-line beats between atoms; fold them into neighbor paragraphs or disable the injector on the spine path per #4566/G1)",
     }
     seen: set[str] = set()
     lanes: list[str] = []
@@ -1428,6 +1558,8 @@ def evaluate_register(
     findings += _detect_f7_practice_density(chapters)
     findings += _detect_f12_unwrapped_voice_shift(chapters)
     findings += _detect_f13_dwell_starvation(chapters)
+    if _f14_enabled(quality_profile):
+        findings += _detect_f14_beat_line_share(chapters)
     if hook_atoms:
         if f11_all_variations:
             findings += _detect_f11_hook_abstract_opening_all_variations(hook_atoms)

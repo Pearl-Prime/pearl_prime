@@ -32,11 +32,20 @@ phoenix_v4/rendering/pearl_writer_expand.py — thin-section LLM expansion is ga
 behind section_packet_composer's `expand_thin_sections` flag (default False) and is
 NOT wired to any run_pipeline CLI flag. Do not enable it on the spine+production
 release path without an explicit spec amendment.
+
+NOTE (G1, render-hardening 2026-07-02, fast-follow to #4566): the word-count FLOOR
+PADDER (ensure_word_count_floor) is DISABLED on the spine path — both the function
+body (#4566) and the call sites here. An under-length spine book is surfaced as a
+thin-pool / atom-shape signal in the governance report (`spine_word_floor_signals`),
+NOT papered over with standalone one-line filler (the choppy class register_gate F14
+now HARD_FAILs). Re-enable padding only via PHOENIX_SPINE_WORD_FLOOR_PAD=1 (not for
+the release path). See docs/PEARL_PRIME_BEATLINE_CEILING_CALIBRATION_2026-07-02.md.
 """
 from __future__ import annotations
 
 import argparse
 import json
+import os
 import re
 import sys
 from pathlib import Path
@@ -1320,14 +1329,43 @@ def _run_spine_pipeline_mode(
     prose = _final_f13_repair(prose, seed=f"{seed}:post_f13_flow_recheck")
     # Post-flow orphan strip before floor padding (flow inserts can leak slot labels).
     prose = _final_orphan_strip(prose)
-    # Strengthen trims can push one_hour_book below word_range floor; restore with
-    # gate-safe declarative padding (no threshold loosening).
+    # G1 (render-hardening 2026-07-02, fast-follow to #4566): the word-count FLOOR
+    # PADDER is DISABLED on the spine path. `ensure_word_count_floor` used to append
+    # standalone one-line "deprescribe"-class filler to hit a word floor — the exact
+    # stitched-one-liner class the dwell injector produced and that F14 now HARD_FAILs.
+    # #4566 no-op'd the function body; this closes the CALL SITE too so a future
+    # re-enable of the function cannot silently re-introduce choppy filler on spine.
+    # DOCTRINE: an under-length spine book is a THIN-POOL / atom signal (surface it,
+    # do not paper over it) — never LLM-pad, never standalone-filler-pad. See memory
+    # feedback_atom_deficit_is_shape_not_count + Q-FASTFOLLOW-01 (default a).
+    # Kill-switch to re-enable padding on spine (NOT recommended):
+    #   PHOENIX_SPINE_WORD_FLOOR_PAD=1
     from phoenix_v4.rendering.book_renderer import _runtime_word_range as _book_word_range
     from phoenix_v4.rendering.register_output_strengthen import ensure_word_count_floor
 
+    _spine_floor_pad_enabled = (
+        os.environ.get("PHOENIX_SPINE_WORD_FLOOR_PAD", "").strip().lower()
+        in ("1", "true", "on", "yes")
+    )
     _word_bounds = _book_word_range(runtime_fmt)
     if _word_bounds:
-        prose = ensure_word_count_floor(prose, floor=_word_bounds[0], seed=f"{seed}:floor")
+        _under = len(prose.split()) < _word_bounds[0]
+        if _spine_floor_pad_enabled:
+            prose = ensure_word_count_floor(prose, floor=_word_bounds[0], seed=f"{seed}:floor")
+        elif _under:
+            # Surface, do not pad. Under-length spine output = thin atom pool.
+            _governance_report.setdefault("spine_word_floor_signals", []).append(
+                {
+                    "stage": "post_flow_pre_gate",
+                    "word_count": len(prose.split()),
+                    "floor": _word_bounds[0],
+                    "action": "not_padded",
+                    "reason": (
+                        "spine word-floor padder disabled (G1/#4566); under-length is a "
+                        "thin-pool / atom-shape signal, not filler territory"
+                    ),
+                }
+            )
     # Floor padding can duplicate closings and strip flow cues — repair before gates.
     prose = _final_cap_f7(prose, max_per_chapter=1, max_by_chapter=_f7_max_by_chapter)
     prose = ensure_chapter_flow_cues(
@@ -1340,15 +1378,27 @@ def _run_spine_pipeline_mode(
         prose, flow_profile=_flow_profile, seed=f"{seed}:post_all_flow"
     )
     prose = _final_cap_f7(prose, max_per_chapter=1, max_by_chapter=_f7_max_by_chapter)
-    # F7 cap can drop one_hour_book below word_range floor — restore once more without
-    # a follow-up F7 pass (padding lines are F7-safe declaratives).
+    # F7 cap can drop one_hour_book below word_range floor. G1: on spine, do NOT re-pad
+    # (see the disabled first call site above) — surface the under-length as a thin-pool
+    # signal. Only re-pad when the PHOENIX_SPINE_WORD_FLOOR_PAD kill-switch is set.
     if _word_bounds and len(prose.split()) < _word_bounds[0]:
-        prose = ensure_word_count_floor(prose, floor=_word_bounds[0], seed=f"{seed}:floor_final")
-        prose = ensure_chapter_flow_cues(
-            prose, flow_profile=_flow_profile, seed=f"{seed}:floor_final_flow"
-        )
-        prose = _final_f4_closings(prose, seed=f"{seed}:floor_final_close")
-        prose = _final_orphan_strip(prose)
+        if _spine_floor_pad_enabled:
+            prose = ensure_word_count_floor(prose, floor=_word_bounds[0], seed=f"{seed}:floor_final")
+            prose = ensure_chapter_flow_cues(
+                prose, flow_profile=_flow_profile, seed=f"{seed}:floor_final_flow"
+            )
+            prose = _final_f4_closings(prose, seed=f"{seed}:floor_final_close")
+            prose = _final_orphan_strip(prose)
+        else:
+            _governance_report.setdefault("spine_word_floor_signals", []).append(
+                {
+                    "stage": "post_f7_pre_gate",
+                    "word_count": len(prose.split()),
+                    "floor": _word_bounds[0],
+                    "action": "not_padded",
+                    "reason": "spine word-floor padder disabled (G1/#4566); thin-pool signal",
+                }
+            )
 
     # Floor / flow passes after post_f13_flow_recheck can re-break register (F13/F4).
     prose = _final_f13_repair(prose, seed=f"{seed}:pre_gate_f13")

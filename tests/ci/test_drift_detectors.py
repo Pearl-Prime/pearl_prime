@@ -38,7 +38,40 @@ def _write_map(repo: Path) -> None:
 # --- check_canonical_pipeline_path ---
 
 
-def test_canonical_pipeline_pass_with_spine(tmp_path: Path) -> None:
+def test_canonical_pipeline_pass_with_full_chord(tmp_path: Path) -> None:
+    """G3: a production invocation carrying the full four-piece chord PASSES."""
+    scripts = tmp_path / "scripts" / "prod"
+    scripts.mkdir(parents=True)
+    (scripts / "assemble.py").write_text(
+        textwrap.dedent(
+            """
+            cmd = [
+                sys.executable, "scripts/run_pipeline.py",
+                "--pipeline-mode", "spine",
+                "--quality-profile", "production",
+                "--exercise-journeys",
+                "--render-book",
+                "--arc", "arc.yaml",
+            ]
+            """
+        ).strip()
+        + "\n",
+        encoding="utf-8",
+    )
+    r = _run(
+        "check_canonical_pipeline_path.py",
+        tmp_path,
+        "--paths",
+        "scripts/prod/assemble.py",
+        "--gate-mode",
+        "fail",
+    )
+    assert r.returncode == 0, (r.stdout, r.stderr)
+    assert "PASS" in r.stderr
+
+
+def test_canonical_pipeline_fail_spine_only_missing_chord(tmp_path: Path) -> None:
+    """G3: spine alone is no longer enough — missing quality-profile/exercise-journeys FAILS."""
     scripts = tmp_path / "scripts" / "prod"
     scripts.mkdir(parents=True)
     (scripts / "assemble.py").write_text(
@@ -62,6 +95,39 @@ def test_canonical_pipeline_pass_with_spine(tmp_path: Path) -> None:
         "scripts/prod/assemble.py",
         "--gate-mode",
         "fail",
+    )
+    assert r.returncode == 1, (r.stdout, r.stderr)
+    assert "incomplete bestseller chord" in r.stderr
+    assert "--quality-profile production" in r.stderr
+    assert "--exercise-journeys" in r.stderr
+
+
+def test_canonical_pipeline_chord_kill_switch_reverts_to_spine_only(tmp_path: Path) -> None:
+    """G3 kill-switch: CANONICAL_PIPELINE_CHORD_FULL=0 → spine-only PASSES (pre-G3 behavior)."""
+    scripts = tmp_path / "scripts" / "prod"
+    scripts.mkdir(parents=True)
+    (scripts / "assemble.py").write_text(
+        textwrap.dedent(
+            """
+            cmd = [
+                sys.executable, "scripts/run_pipeline.py",
+                "--pipeline-mode", "spine",
+                "--render-book",
+                "--arc", "arc.yaml",
+            ]
+            """
+        ).strip()
+        + "\n",
+        encoding="utf-8",
+    )
+    r = _run(
+        "check_canonical_pipeline_path.py",
+        tmp_path,
+        "--paths",
+        "scripts/prod/assemble.py",
+        "--gate-mode",
+        "fail",
+        env={"CANONICAL_PIPELINE_CHORD_FULL": "0"},
     )
     assert r.returncode == 0, (r.stdout, r.stderr)
     assert "PASS" in r.stderr

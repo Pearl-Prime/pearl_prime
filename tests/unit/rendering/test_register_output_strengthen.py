@@ -7,6 +7,7 @@ from phoenix_v4.rendering.register_output_strengthen import (
     ensure_book_terminal_integrity,
     ensure_dwell_beats,
     ensure_unique_chapter_closings,
+    ensure_word_count_floor,
     repair_f13_dwell_contract,
     verify_f7_exercise_preservation,
     _DEPRESCRIBE_ALTERNATIVES,
@@ -37,6 +38,24 @@ def test_ensure_dwell_beats_is_noop():
     chapter = f"Chapter 2\n\n{body}"
     out = ensure_dwell_beats(chapter, seed="test")
     assert out == chapter
+
+
+def test_ensure_word_count_floor_is_noop():
+    """
+    G1 (render-hardening 2026-07-02): the word-floor padder is disabled (#4566). It must
+    NOT append standalone one-line filler to hit a floor — an under-length book is a
+    thin-pool signal, surfaced by run_pipeline, never papered over. Even asked to reach a
+    floor far above the input, the padder returns the prose byte-for-byte unchanged.
+    """
+    body = (
+        "She knows the shape of the exhaustion well enough to describe it from the inside. "
+        "The red-eye lands at six-fifteen. She buys a coffee that costs seven dollars."
+    )
+    chapter = f"Chapter 1\n\n{body}"
+    before_words = len(chapter.split())
+    out = ensure_word_count_floor(chapter, floor=before_words + 5000, seed="floor")
+    assert out == chapter, "floor padder must be a no-op (no filler appended)"
+    assert len(out.split()) == before_words, "no words may be added to reach the floor"
 
 
 def test_break_pedagogical_cadence_clears_f6():
