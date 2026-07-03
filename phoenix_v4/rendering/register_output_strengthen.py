@@ -134,7 +134,10 @@ def spine_deprescribe_inject_enabled() -> bool:
 
     Default OFF on spine (G1-residual, 2026-07-02): surplus prescribed-action
     paragraphs are dropped, not replaced with standalone comfort one-liners.
-    Set PHOENIX_SPINE_DEPRESCRIBE=1 to re-enable the legacy injector.
+    Absorbed by restore workstream #2 (bridges-off + dwell, 2026-07-04) —
+    supersedes the held ``agent/g1-residual-deprescribe-*`` branch; do not
+    re-enable alongside within-slot bridges. Set PHOENIX_SPINE_DEPRESCRIBE=1
+    only for explicit A/B of the legacy injector.
     """
     return os.environ.get("PHOENIX_SPINE_DEPRESCRIBE", "").strip().lower() in (
         "1",

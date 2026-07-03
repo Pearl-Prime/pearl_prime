@@ -22,6 +22,12 @@ from phoenix_v4.rendering import chapter_composer as cc
 from phoenix_v4.rendering import golden_chapter_synthesis as gcs
 
 
+@pytest.fixture(autouse=True)
+def _enable_within_slot_bridges_for_unit_tests(monkeypatch):
+    """Bridge machinery tests exercise the template path; production default is OFF."""
+    monkeypatch.setattr(cc, "within_slot_bridges_enabled", lambda: True)
+
+
 # ---------------------------------------------------------------------------
 # Test 3: bridge families load correctly from YAML
 # ---------------------------------------------------------------------------
