@@ -39,9 +39,8 @@ except ImportError:
 
 try:
     import requests
-except ImportError:
-    print("ERROR: requests not installed. Run: pip install requests", file=sys.stderr)
-    sys.exit(1)
+except ImportError:  # pragma: no cover — only required for live Qwen calls
+    requests = None  # type: ignore[assignment]
 
 # ─── Paths ──────────────────────────────────────────────────────────────────
 REPO_ROOT = Path(__file__).resolve().parent.parent.parent
@@ -408,7 +407,9 @@ def _build_system_prompt(topic: str, skin: dict, section_type: str, arc_role: st
         "SCENE": (
             "Write a SCENE section: 5–8 paragraphs of sensory immersion, 300–500 words. "
             "One concrete detail per sentence. Second person present tense. "
-            "Use the location token {location_token} where relevant. "
+            "Honor the section purpose exactly — digital, relational, and social scenes "
+            "must be distinct and purpose-appropriate. "
+            "Never emit unresolved template tokens (no {location.*}, no {weather_detail}). "
             "Illustrates the pattern — does not explain it. "
             "End with '---' on its own line."
         ),
@@ -475,9 +476,12 @@ def qwen_generate(
     if dry_run:
         return f"[DRY RUN — {topic} {section_type} ch variant {variant_n}]"
 
+    if requests is None:
+        return "[GENERATION_FAILED: requests not installed]"
+
     system = _build_system_prompt(topic, skin, section_type, arc_role)
-    if location_token and section_type == "SCENE":
-        system = system.replace("{location_token}", location_token)
+    # Never splice unresolved {location.*} placeholders into prompts or prose.
+    # SCENE distinctness comes from section_purpose (scene_*_purpose), not token injection.
 
     diversity_hint = ""
     if prev_opening and variant_n > 1:
@@ -493,7 +497,6 @@ def qwen_generate(
         f"Section purpose: \"{section_purpose}\"\n"
         f"Section type: {section_type}\n"
         f"Arc role: {arc_role}\n"
-        + (f"Location token to use: {location_token}\n" if location_token and section_type == "SCENE" else "")
         + diversity_hint
     )
 
@@ -579,7 +582,9 @@ def generate_variants(
     """Generate `min_variants` variants for one section. Returns (variants_list, provenance_counts)."""
     sec_type = sec_spec["type"]
     scene_type = sec_spec.get("scene_type")
-    location_token = LOCATION_TOKENS.get(scene_type) if scene_type else None
+    # LOCATION_TOKENS are unresolved {location.*} placeholders — never inject them.
+    # SCENE purpose-distinctness is driven by section_purpose (scene_*_purpose).
+    location_token = None
 
     # Variant family names
     if sec_type == "TEACHER_DOCTRINE":
@@ -591,7 +596,9 @@ def generate_variants(
     variants = []
     prev_opening = ""
 
-    # Pool from persona atoms (HOOK, SCENE, STORY types match first)
+    # Pool from persona atoms (HOOK/STORY only). SCENE always routes to Qwen so
+    # scene_{digital,relational,social}_purpose is honored — robotic SCENE banks
+    # (atoms/*/SCENE/CANONICAL.txt) are code-path dead (physical delete needs Rule 0).
     persona_pool = persona_atoms.get(sec_type, [])
 
     # Pool from teacher atoms (TEACHER_DOCTRINE, HOOK, EXERCISE, INTEGRATION)
@@ -631,11 +638,11 @@ def generate_variants(
                 prev_opening = cached[:80]
                 continue
 
-        # 2. Try persona atom pool (for HOOK, SCENE types)
+        # 2. Try persona atom pool (HOOK/STORY only — SCENE is Qwen-by-purpose)
         content = None
         source = "qwen_generated"
 
-        if persona_pool and sec_type in ("HOOK", "SCENE", "STORY"):
+        if persona_pool and sec_type in ("HOOK", "STORY"):
             idx = i % len(persona_pool)
             atom_content = persona_pool[idx]
             if atom_content and len(atom_content) > 50:
@@ -655,7 +662,7 @@ def generate_variants(
                 provenance_counts["teacher_adapted"] += 1
                 _track(topic, ch_key, sec_key, variant_n, "teacher_adapted")
 
-        # 4. Fall back to Qwen generation
+        # 4. Fall back to Qwen generation (SCENE always lands here)
         if content is None:
             logger.info("  Qwen: %s ch%s sec%s v%d", topic, ch_key[-2:], sec_key[-2:], variant_n)
             content = qwen_generate(
@@ -675,14 +682,6 @@ def generate_variants(
             _track(topic, ch_key, sec_key, variant_n, "qwen_generated")
             if not dry_run:
                 time.sleep(QWEN_RATE_LIMIT_S)
-
-        # Inject location token into SCENE if not already present
-        if sec_type == "SCENE" and location_token and location_token not in content and not dry_run:
-            # Wrap first paragraph with location context
-            lines = content.split("\n\n")
-            if lines:
-                lines[0] = lines[0].rstrip(".") + f" in {location_token}."
-            content = "\n\n".join(lines)
 
         # Save to cache
         if not dry_run:
