@@ -58,3 +58,26 @@ jobs:
             EXTRA=(--base "$BASE" --head HEAD)
           fi
           PYTHONPATH=scripts/ci:. python3 scripts/ci/check_authority_doc_read.py "${EXTRA[@]}"
+
+      - name: Manga render-progress bytes (stub-as-done — BLOCK)
+        run: |
+          BASE="${{ steps.diff_base.outputs.base }}"
+          EXTRA=()
+          if [ -n "$BASE" ]; then
+            EXTRA=(--base "$BASE" --head HEAD)
+          fi
+          PYTHONPATH=scripts/ci:. python3 scripts/ci/check_render_progress_bytes.py "${EXTRA[@]}"
+
+      - name: Manga story-authored render entry (listing-as-story — BLOCK)
+        run: |
+          python3 -m pip install --quiet pyyaml  # only dep; gate uses inline substance mirrors otherwise
+          BASE="${{ steps.diff_base.outputs.base }}"
+          EXTRA=()
+          if [ -n "$BASE" ]; then
+            EXTRA=(--base "$BASE" --head HEAD)
+          fi
+          PYTHONPATH=scripts/ci:. python3 scripts/ci/check_manga_story_authored.py "${EXTRA[@]}"
+
+      - name: Manga config wiring (unwired-config-as-working — BLOCK)
+        run: |
+          PYTHONPATH=scripts/ci:. python3 scripts/ci/check_manga_wiring.py

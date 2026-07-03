@@ -85,6 +85,45 @@ not an executed build), mark it with a same-or-preceding-line comment
 `# CI-ALLOWLIST: legacy-registry-ok — <reason>` to exempt that block. Do NOT weaken the
 gate to pass; fix real bestseller builds by adding the missing chord flags.
 
+## Manga Vision-Conformance Doctrine (MANDATORY — Pearl manga sessions)
+
+Read `artifacts/qa/MANGA_VISION_CONFORMANCE_AUDIT_2026-07-03.md` (the honest
+baseline) and `docs/specs/MANGA_100PCT_PRODUCTION_ROADMAP_2026-07-03.md` (the
+routed plan) before any manga certification, catalog, story, bank, or render
+work.
+
+1. **Six-layer acceptance taxonomy — label every manga status claim.** Never
+   report a manga axis, series, or asset as "done", "working", "ready", or
+   "shippable" without naming the layer it has actually reached:
+   `ABSENT → RESEARCHED → SPECCED → CONFIG-EXISTS → CODE-WIRED → EXECUTED-REAL →
+   PROVEN-AT-BAR`. A config that exists is CONFIG-EXISTS, not working. A gate
+   PASS is not the pro bar. Only a byte-verified artifact is EXECUTED-REAL; only
+   a blind-judged sample is PROVEN-AT-BAR (nothing is, today).
+
+2. **Three drift classes are now CI-enforced — do not weaken the gates to pass.**
+   These are wired into the **Drift detectors** required check and
+   `scripts/run_production_readiness_gates.py` (gates 21–23):
+   - **stub-as-done** → `check_render_progress_bytes.py`: a RENDER_PROGRESS.tsv
+     row marked `ok/done` with `bytes < 50_000` (or a missing image under
+     `--require-images`) **cannot merge**. Fix by rendering real panels, never by
+     editing the byte column.
+   - **listing-as-story** → `check_manga_story_authored.py`: a (series, episode)
+     cannot enter the render queue without an authored `chapter_script_writer_handoff`
+     that has ≥ 6 authored panels and no stub markers. A `series_plan` is a
+     listing, not a story. Import `assert_story_authored()` at any new render
+     dispatch site.
+   - **unwired-config-as-working** → `check_manga_wiring.py`: a new
+     `config/manga/*.yaml` with no non-test consumer must carry `status: unwired`
+     or a `KNOWN_UNWIRED` entry with a reason. Do not add a config and report the
+     feature as working — wire it or declare it unwired.
+
+3. **Layered assembly, never single-shot pages.** Panels are assembled
+   deterministically from banked layers via `scripts/manga/assemble_from_bank.py`
+   (spec `MANGA_LAYER_RENDER_CONTRACT_SPEC.md` §4/§10, `MANGA_V5_LAYERED_ARCHITECTURE.md`
+   §7). Every layer in a manifest carries `provenance: REAL|INTERIM`; an INTERIM
+   layer is a labeled stand-in and is **never** presented as final art. Do not
+   ship a text-to-image single-shot page as a "layered" panel.
+
 ## Pearl_GitHub Scope
 
 Pearl_GitHub owns:

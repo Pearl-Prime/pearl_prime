@@ -459,8 +459,38 @@ def main() -> int:
     else:
         gate("20. Waystream catalog uniqueness", True, "gate script not present; skip", skip=True)
 
+    # --- 21-23. Manga M1 enforcement rails (three drift-class kills) ---
+    for num, script, label in (
+        ("21", "check_render_progress_bytes.py",
+         "Manga render-progress bytes (no stub-as-done)"),
+        ("22", "check_manga_story_authored.py",
+         "Manga story-authored (no listing-as-story)"),
+        ("23", "check_manga_wiring.py",
+         "Manga config wiring (no unwired-config-as-working)"),
+    ):
+        g = REPO_ROOT / "scripts" / "ci" / script
+        if g.exists():
+            try:
+                env = os.environ.copy()
+                env["PYTHONPATH"] = f"{REPO_ROOT / 'scripts' / 'ci'}{os.pathsep}{REPO_ROOT}"
+                r = subprocess.run(
+                    [sys.executable, str(g)],
+                    cwd=str(REPO_ROOT), env=env,
+                    capture_output=True, text=True, timeout=360,
+                )
+                g_ok = r.returncode == 0
+                out = (r.stderr or r.stdout or "").strip()
+                g_detail = out.splitlines()[-1] if out else script
+            except Exception as e:
+                g_ok = False
+                g_detail = str(e)
+            if not gate(f"{num}. {label}", g_ok, g_detail):
+                failed += 1
+        else:
+            gate(f"{num}. {label}", True, "gate script not present; skip", skip=True)
+
     # --- Report ---
-    print("V4.5 Production Readiness — 20 conditions\n")
+    print("V4.5 Production Readiness — 23 conditions\n")
     for name, status, detail in RESULTS:
         sym = "✓" if status == "PASS" else ("○" if status == "SKIP" else "✗")
         print(f"  {sym} {status:4}  {name}")
