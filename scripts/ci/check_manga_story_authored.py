@@ -118,6 +118,36 @@ def panel_authored_text(panel: Mapping[str, Any]) -> str:
     return " ".join(p for p in parts if p.strip())
 
 
+# Brand-teacher display names that must NEVER appear in panel/reader-facing text
+# (M4 item 5 — teacher-never-named). Metadata fields like teacher_id are fine;
+# only authored panel text is scanned. Vessel characters (e.g. a mechanic) are
+# allowed; these patterns target real teacher identities from the brand roster.
+_TEACHER_NAME_RES: tuple[re.Pattern[str], ...] = (
+    re.compile(r"\bAhjan\b", re.IGNORECASE),
+    re.compile(r"\bSai\s*Maa?\b", re.IGNORECASE),
+    re.compile(r"\bAdi\s*Da\b", re.IGNORECASE),
+)
+
+
+def teacher_named_in_panels(chapter_script: Mapping[str, Any]) -> str | None:
+    """Return the matched teacher name if panel text names a brand teacher, else None."""
+    panels = list(iter_panels(chapter_script))
+    blob = "\n".join(panel_authored_text(p) for p in panels)
+    # Also ban teacher_id tokens that are known brand teachers when they appear
+    # as spoken/caption words (not as YAML keys — we only scan panel text).
+    tid = str(chapter_script.get("teacher_id") or "").strip().lower()
+    extra: list[re.Pattern[str]] = []
+    if tid in ("ahjan", "sai_ma", "sai_maa", "adi_da"):
+        # word-boundary on the bare id and common spaced forms
+        extra.append(re.compile(rf"\b{re.escape(tid)}\b", re.IGNORECASE))
+        extra.append(re.compile(rf"\b{re.escape(tid.replace('_', ' '))}\b", re.IGNORECASE))
+    for pat in (*_TEACHER_NAME_RES, *extra):
+        m = pat.search(blob)
+        if m:
+            return m.group(0)
+    return None
+
+
 def evaluate_authored(chapter_script: Mapping[str, Any]) -> tuple[bool, str]:
     """Return (authored_ok, reason). reason is '' on pass."""
     if chapter_script.get("artifact_type") != _HANDOFF_TYPE:
@@ -133,6 +163,12 @@ def evaluate_authored(chapter_script: Mapping[str, Any]) -> tuple[bool, str]:
     m = _STUB_RE.search(blob)
     if m:
         return False, f"unfilled stub marker {m.group(0)!r} in panel text"
+    named = teacher_named_in_panels(chapter_script)
+    if named:
+        return False, (
+            f"brand teacher named in panel text ({named!r}) — teacher-mode doctrine "
+            f"must enter via a genre-native vessel; never name the teacher in-story"
+        )
     return True, ""
 
 

@@ -12,7 +12,8 @@
 # format mix (ebook vs manga/webtoon) = config/catalog/catalog_generation_config.yaml
 # ::lane_content_mix (cites global_manga_distribution_strategy.md §6.1). Do NOT cite
 # this content_mix for format %. Known stale: japan manga 60 here vs lane_content_mix
-# 70 vs research 40; taiwan/france show NO manga line despite being manga markets.
+# 70 vs research 40. C-1/C-2 closed 2026-07-04: taiwan + france now carry manga tracks
+# (MANGA_MARKET_INTEGRATION_V1_SPEC §C; #2795 stood down — conflicting).
 # EU / LATAM / Brazil / Hungary / HK / SG content_mix are PLACEHOLDERS — their catalog
 # plans (docs/EUROPE_CATALOG_PLAN.md, docs/LATAM_CATALOG_PLAN.md) mark format+genre
 # "TO RESEARCH" (unfilled scaffolds).
@@ -175,11 +176,13 @@ markets:
       - solar_return          # (locale name TBD)
       - devotion_path         # (locale name TBD)
     brand_count: 12
-    business_tracks: [ebook, audiobook]
+    # C-2 (MANGA_MARKET_INTEGRATION_V1_SPEC §C): France #1 EU manga market — 30% manga slice.
+    business_tracks: [ebook, audiobook, manga]
     platform_strategy: [amazon_fr, google_play, apple_books_fr, fnac, storytel_fr]
     content_mix:
-      ebook: 65
-      audiobook: 35
+      ebook: 45
+      audiobook: 25
+      manga: 30
 
   # ── SECONDARY ────────────────────────────────────────────────────────────
 
@@ -217,11 +220,13 @@ markets:
       # full 19-brand surface (12 teacher + 6 zh-specific + 1 Adi Da Taiwan-only).
       - bright_presence_tw    # 朗在出版 (Adi Da, Taiwan exclusive teacher-mode brand)
     brand_count: 19  # 6 zh-specific + 12 teacher + 1 Adi Da Taiwan-exclusive
-    business_tracks: [ebook, audiobook]
-    platform_strategy: [readmoo, google_play, apple_books_tw, amazon_tw]
+    # C-1 (MANGA_MARKET_INTEGRATION_V1_SPEC §C): Taiwan 55% manga slice; 274 plans ready.
+    business_tracks: [ebook, audiobook, manga]
+    platform_strategy: [readmoo, google_play, apple_books_tw, amazon_tw, webtoon_canvas, line_manga_indies, bookwalker]
     content_mix:
-      ebook: 70
-      audiobook: 30
+      ebook: 30
+      audiobook: 15
+      manga: 55
 
   china:
     market_id: china

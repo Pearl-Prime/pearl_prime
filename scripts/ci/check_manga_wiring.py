@@ -44,9 +44,8 @@ CONSUMER_ROOTS = ("scripts", "phoenix_v4")
 # unwired config: prefer `status: unwired` in the file; use this list only for
 # reference/historical YAMLs that are not runtime configs.
 KNOWN_UNWIRED = {
-    "manga_mode_vessels.yaml":
-        "teacher/music narrative vessels; loader is test-only — roadmap M4 wires "
-        "it into story_architect + chapter-writer prompt assembly",
+    # manga_mode_vessels.yaml — WIRED in M4 (#4616): load_vessel called from
+    # story_architect.apply_mode_vessel + chapter/writer._mode_vessel_prompt_block.
     "anatomical_correction_loras.yaml": "research metadata, not a runtime config",
     "community_assets_audit_2026-04-29.yaml": "historical audit record",
     "genre_ite_profiles.yaml": "designed for ITE; integration pending",
