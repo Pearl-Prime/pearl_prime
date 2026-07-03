@@ -1,0 +1,97 @@
+# Character Roster — story_atoms generation
+# Persona: healthcare_rns / Topic: cross-topic (anchored, anxiety, boundaries,
+# burnout, compassion_fatigue, courage, depression, financial_anxiety,
+# financial_stress, grief, imposter_syndrome, overthinking, self_worth,
+# sleep_anxiety, social_anxiety, somatic_healing)
+# Authority: story_atom_tier_templates.yaml
+#
+# PURPOSE: Naming roster for the Wave-1 CHARACTER_STUDY_UNNAMED individuation pass
+# (phoenix_v4/quality/story_atom_lint.py). healthcare_rns/{topic}/STORY/CANONICAL.txt
+# is a fixed 20-block template shared verbatim across all 16 topics (workplace-noun
+# substitutions: 12-hour shift, break room, charting, patient, scrubs, staffing ratio,
+# call light, unit). Each topic file gets the SAME name-per-slot mapping below, so a
+# given version number (v01, v02, ...) carries the same character across every topic
+# in this persona. anxiety/burnout/overthinking additionally carry 3 deep-authored
+# blocks (v21-v23) that are NOT part of the shared template — each has its own
+# distinct register/story and gets a per-file name (listed below under
+# extended_blocks), matching the working_parents precedent of not forcing template
+# names onto non-template prose.
+#
+# Demographic: registered nurses (hospital/unit setting, 20s-50s), gender-matched to
+# the block's existing pronouns (She/He) as authored. Names avoid overlap with
+# gen_z_professionals, working_parents, and corporate_managers rosters per the
+# "own roster per persona" rule, and lean toward names common among US nursing-
+# workforce demographics (many first- or second-generation, per BLS/NCSBN nursing
+# workforce composition).
+
+version: "1.0"
+persona: healthcare_rns
+topics:
+  - anchored
+  - anxiety
+  - boundaries
+  - burnout
+  - compassion_fatigue
+  - courage
+  - depression
+  - financial_anxiety
+  - financial_stress
+  - grief
+  - imposter_syndrome
+  - overthinking
+  - self_worth
+  - sleep_anxiety
+  - social_anxiety
+  - somatic_healing
+
+# Slot map: applies identically to every topic file above (v01-v20).
+slot_names:
+  v01: {name: Marisol, gender: F, role: "med-surg RN"}
+  v02: {name: Dominic, gender: M, role: "ICU RN"}
+  v03: {name: Fatima, gender: F, role: "ER RN"}
+  v04: {name: Wesley, gender: M, role: "night-shift charge nurse"}
+  v05: {name: Camille, gender: F, role: "oncology RN"}
+  v06: {name: Anthony, gender: M, role: "telemetry RN"}
+  v07: {name: Josephine, gender: F, role: "pediatric RN"}
+  v08: {name: Julio, gender: M, role: "PACU RN"}
+  v09: {name: Harriet, gender: F, role: "float-pool RN"}
+  v10: {name: Isaiah, gender: M, role: "cardiac RN"}
+  v11: {name: Consuela, gender: F, role: "labor & delivery RN"}
+  v12: {name: Douglas, gender: M, role: "step-down unit RN"}
+  v13: {name: Meilin, gender: F, role: "med-surg RN"}
+  v14: {name: Rashid, gender: M, role: "ICU RN"}
+  v15: {name: Odessa, gender: F, role: "ER RN"}
+  v16: {name: Trent, gender: M, role: "charge nurse"}
+  v17: {name: null, gender: null, role: "atmospheric — no named protagonist required"}
+  v18: {name: Bartholomew, gender: M, role: "senior RN"}
+  v19: {name: Nadine, gender: F, role: "oncology RN"}
+  v20: {name: Malachi, gender: M, role: "night-shift RN"}
+
+# Extended blocks (v21-v23): present only in anxiety, burnout, overthinking.
+# These are deep-authored, NOT part of the 20-block template — distinct register,
+# distinct story per file. burnout's v21-v23 were already named pre-existing
+# (Devon, Aiko, Kenji) and were left untouched. anxiety and overthinking's
+# v21-v23 were unnamed (2 of the 6 slipped past the lint via a false-positive
+# Name+person-verb match on a non-name capitalized word — "Dinner was",
+# "Some kept" — but were named anyway per the mission's genuine-gap rule).
+extended_blocks:
+  anxiety:
+    v21: {name: Priscilla, gender: F, role: "RN, front-door decompression scene"}
+    v22: {name: Gerald, gender: M, role: "RN, fourteen-year veteran"}
+    v23: {name: Anaya, gender: F, role: "RN, drive-home ritual"}
+  burnout:
+    v21: {name: Devon, gender: M, role: "RN, burnout register (pre-existing)"}
+    v22: {name: Aiko, gender: F, role: "RN, burnout register (pre-existing)"}
+    v23: {name: Kenji, gender: M, role: "RN, burnout register (pre-existing)"}
+  overthinking:
+    v21: {name: Delphine, gender: F, role: "RN, overthinking register"}
+    v22: {name: Casimir, gender: M, role: "RN, overthinking register"}
+    v23: {name: null, gender: F, role: "RN, overthinking register (already named-adjacent; false-positive lint pass, left as-is)"}
+
+notes_for_writer: |
+  Minimal edit per block: insert the slot name performing a person-verb action
+  (matches story_atom_lint.py's Name+person-verb naming regex — "Marisol sat",
+  "Dominic told himself", "Fatima moved through" — not just a name token dropped
+  into the sentence). Preserve scene/stakes/open-ending/word-count/metadata
+  verbatim. v17 (and each topic's other atmospheric-typed slot, when present) is
+  NOT a character_study atom and does not require a name.
