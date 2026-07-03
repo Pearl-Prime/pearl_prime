@@ -19,38 +19,50 @@ main_characters:
 - id: lena
   name: Lena Voss
   age: 34
-  role: protagonist (compliance analyst — third year; reads systems for a living; privately cannot draw her own lines)
-  visual_anchor: dark auburn hair in a low knot, wire-rim glasses, charcoal blazer over a cream shell; always carries a slim hardcover notebook she never opens in meetings
+  role: protagonist (compliance analyst — third year; reads systems for a living;
+    privately cannot draw her own lines)
+  visual_anchor: dark auburn hair in a low knot, wire-rim glasses, charcoal blazer
+    over a cream shell; always carries a slim hardcover notebook she never opens in
+    meetings
 - id: marcus
   name: Marcus Hale
   age: 41
-  role: director of product risk — institutional, not villainous; the person who cc's everyone at 9:14 PM
-  visual_anchor: silver at the temples, rolled sleeves, company lanyard slightly crooked; smile that arrives half a beat before his eyes
+  role: director of product risk — institutional, not villainous; the person who cc's
+    everyone at 9:14 PM
+  visual_anchor: silver at the temples, rolled sleeves, company lanyard slightly crooked;
+    smile that arrives half a beat before his eyes
 scene_palette:
   primary: fog-grey open-plan office + cool monitor glow
   secondary: warm desk-lamp pools (islands of false safety)
-  accent: red unread-badge on messaging app (visual through-line — never explained in dialogue)
+  accent: red unread-badge on messaging app (visual through-line — never explained
+    in dialogue)
   false_relief_palette: slightly lifted grey-blue (panels 22–24 only)
 pages:
 - page_id: ep_001_p01
   panels:
   - panel_id: ep001_001
-    scene: 'Wide shot of an empty compliance floor at 7:02 PM. Fluorescent grids, glass conference rooms like aquariums. One desk still lit — Lena''s. Her coat hangs on the chair back; she is not in frame yet.'
+    scene: Wide shot of an empty compliance floor at 7:02 PM. Fluorescent grids, glass
+      conference rooms like aquariums. One desk still lit — Lena's. Her coat hangs
+      on the chair back; she is not in frame yet.
     beat_type: null
-    intent: ASSUMPTION PLANTED — the office looks orderly; the caption will trust it
+    intent: ASSUMPTION PLANTED — the office looks orderly; the caption will trust
+      it
     narrator_caption_by_locale:
       en_US: The building empties on schedule. That is what the logs say.
     silence_confirmed: true
   - panel_id: ep001_002
-    scene: 'Medium on Lena at her monitor. Spreadsheet of access permissions. Her reflection in the glass shows her face calm, competent.'
+    scene: Medium on Lena at her monitor. Spreadsheet of access permissions. Her reflection
+      in the glass shows her face calm, competent.
     beat_type: micro
     intent: Hyper-analyst competence — she is good at this
   - panel_id: ep001_003
-    scene: 'Close on her hand hovering over the trackpad. A messaging notification slides in from the corner — sender: Marcus Hale. Preview text: "Can you sanity-check the Rivera file tonight? Won''t take long."'
+    scene: 'Close on her hand hovering over the trackpad. A messaging notification
+      slides in from the corner — sender: Marcus Hale. Preview text: "Can you sanity-check
+      the Rivera file tonight? Won''t take long."'
     beat_type: spatial
     intent: Institutional pressure enters as a small rectangle of light
   - panel_id: ep001_004
-    scene: 'Lena''s face. She reads it once. No surprise — this has happened before.'
+    scene: Lena's face. She reads it once. No surprise — this has happened before.
     beat_type: micro
     dialogue_lines:
     - speaker: lena_internal
@@ -61,17 +73,21 @@ pages:
       tail_style: dotless
       position_hint: top_left
   - panel_id: ep001_005
-    scene: 'POV over her shoulder. The Rivera file is already open in a second tab — as if she expected this. The timestamp on the last edit: 6:58 PM, Marcus.'
+    scene: 'POV over her shoulder. The Rivera file is already open in a second tab
+      — as if she expected this. The timestamp on the last edit: 6:58 PM, Marcus.'
     beat_type: spatial
-    intent: CAPTION/ART GAP seed — art shows preparation; caption has not admitted it yet
+    intent: CAPTION/ART GAP seed — art shows preparation; caption has not admitted
+      it yet
     narrator_caption_by_locale:
       en_US: He only asks when the trail is already warm.
   - panel_id: ep001_006
-    scene: 'Tight on Lena''s thumb above the reply field. Typed but unsent: "Sure — send the scope."'
+    scene: 'Tight on Lena''s thumb above the reply field. Typed but unsent: "Sure
+      — send the scope."'
     beat_type: micro
     intent: Boundary moment shown as a half-action, not a lesson
   - panel_id: ep001_007
-    scene: 'Hard cut — elevator bank. Marcus holding the door with his foot, two contractors exiting. He nods at Lena as if this is coincidence.'
+    scene: Hard cut — elevator bank. Marcus holding the door with his foot, two contractors
+      exiting. He nods at Lena as if this is coincidence.
     beat_type: spatial
     dialogue_lines:
     - speaker: marcus
@@ -82,10 +98,12 @@ pages:
       tail_style: pointer
       position_hint: right
   - panel_id: ep001_008
-    scene: 'Corridor walk. Marcus talks; Lena listens. His mouth moves; her caption runs underneath in a different register.'
+    scene: Corridor walk. Marcus talks; Lena listens. His mouth moves; her caption
+      runs underneath in a different register.
     beat_type: micro
     narrator_caption_by_locale:
-      en_US: '"We need this before Singapore opens," he said [meaning: you will not sleep until it is done].'
+      en_US: '"We need this before Singapore opens," he said [meaning: you will not
+        sleep until it is done].'
     dialogue_lines:
     - speaker: marcus
       text_by_locale:
@@ -95,25 +113,30 @@ pages:
       tail_style: pointer
       position_hint: left
   - panel_id: ep001_009
-    scene: 'Close on Lena''s jaw at the hinge. Not anger — lock.'
+    scene: Close on Lena's jaw at the hinge. Not anger — lock.
     beat_type: micro
     intent: Somatic boundary cost — body knows before she refuses
     silence_confirmed: true
   - panel_id: ep001_010
-    scene: 'Match-cut: a locked server-room door handle → Lena''s fingers curled around her notebook.'
+    scene: 'Match-cut: a locked server-room door handle → Lena''s fingers curled around
+      her notebook.'
     beat_type: spatial
     intent: Paranoia grammar — shape echo, not supernatural
   - panel_id: ep001_011
-    scene: 'Back at her desk. 9:31 PM. The open-plan is darker. Three other monitors on her floor still lit — she counts them without meaning to.'
+    scene: Back at her desk. 9:31 PM. The open-plan is darker. Three other monitors
+      on her floor still lit — she counts them without meaning to.
     beat_type: spatial
     narrator_caption_by_locale:
-      en_US: Three people still here. Or three machines left on. Hard to tell from the logs.
+      en_US: Three people still here. Or three machines left on. Hard to tell from
+        the logs.
   - panel_id: ep001_012
-    scene: 'Screen: Rivera file permissions history. Marcus granted temporary admin at 6:41 PM. Lena''s login at 6:55 PM. Her own name in the audit trail.'
+    scene: 'Screen: Rivera file permissions history. Marcus granted temporary admin
+      at 6:41 PM. Lena''s login at 6:55 PM. Her own name in the audit trail.'
     beat_type: micro
-    intent: Investigation engine — she is building a case against the request and against herself
+    intent: Investigation engine — she is building a case against the request and
+      against herself
   - panel_id: ep001_013
-    scene: 'Lena''s face in monitor light. Glasses reflection hides her eyes.'
+    scene: Lena's face in monitor light. Glasses reflection hides her eyes.
     beat_type: micro
     dialogue_lines:
     - speaker: lena_internal
@@ -124,25 +147,30 @@ pages:
       tail_style: dotless
       position_hint: center
   - panel_id: ep001_014
-    scene: 'Insert — her notebook finally open. A list in tight handwriting: names, times, question marks. No headings. No advice.'
+    scene: 'Insert — her notebook finally open. A list in tight handwriting: names,
+      times, question marks. No headings. No advice.'
     beat_type: micro
     intent: Analyst portrait — obsession as craft, not therapy worksheet
   - panel_id: ep001_015
-    scene: 'Phone buzzes. Marcus again: "Thanks for staying on this. Team player." No question mark.'
+    scene: 'Phone buzzes. Marcus again: "Thanks for staying on this. Team player."
+      No question mark.'
     beat_type: spatial
-    intent: Assumption she already agreed — the boundary was crossed in the gap between messages
+    intent: Assumption she already agreed — the boundary was crossed in the gap between
+      messages
   - panel_id: ep001_016
-    scene: 'Wide silent panel. Lena alone in the aquarium office. Red badge still glowing on the messaging icon.'
+    scene: Wide silent panel. Lena alone in the aquarium office. Red badge still glowing
+      on the messaging icon.
     beat_type: long_drop
     silence_confirmed: true
   - panel_id: ep001_017
-    scene: 'False relief beat — break room microwave light. Lena pours bad coffee. Shoulders drop one millimeter.'
+    scene: False relief beat — break room microwave light. Lena pours bad coffee.
+      Shoulders drop one millimeter.
     beat_type: spatial
     intent: FALSE RELIEF — iyashikei bleed forbidden except here per thriller bible
     narrator_caption_by_locale:
       en_US: Coffee helps. That is a story I tell at 10 PM.
   - panel_id: ep001_018
-    scene: 'Close on the coffee surface — her face reflected, distorted.'
+    scene: Close on the coffee surface — her face reflected, distorted.
     beat_type: micro
     dialogue_lines:
     - speaker: lena_internal
@@ -153,29 +181,34 @@ pages:
       tail_style: dotless
       position_hint: bottom_right
   - panel_id: ep001_019
-    scene: 'Hard cut — security camera still on a hallway monitor she is not supposed to watch. Empty corridor. 10:04 PM timestamp.'
+    scene: Hard cut — security camera still on a hallway monitor she is not supposed
+      to watch. Empty corridor. 10:04 PM timestamp.
     beat_type: spatial
     intent: Threat diffuse — systemic, not a monster
   - panel_id: ep001_020
-    scene: 'Lena at keyboard. She drafts an incident note. Deletes the first sentence. Types: "Unapproved after-hours access pattern — recommend review."'
+    scene: 'Lena at keyboard. She drafts an incident note. Deletes the first sentence.
+      Types: "Unapproved after-hours access pattern — recommend review."'
     beat_type: micro
     intent: Action — she draws a line on paper while unable to draw it in chat
   - panel_id: ep001_021
-    scene: 'Her finger on SEND for the internal report. Hovering.'
+    scene: Her finger on SEND for the internal report. Hovering.
     beat_type: micro
     silence_confirmed: true
   - panel_id: ep001_022
-    scene: 'Marcus''s desk — wide shot from Lena''s POV across the floor. Dark. Chair pushed in. Monitor off.'
+    scene: Marcus's desk — wide shot from Lena's POV across the floor. Dark. Chair
+      pushed in. Monitor off.
     beat_type: spatial
     intent: WIDENED GAP — caption will claim he is still here; art shows absence
     narrator_caption_by_locale:
       en_US: He is still somewhere in the building. I can feel the trail.
   - panel_id: ep001_023
-    scene: 'Same desk, tighter. A company lanyard on the chair — crooked, silver at the temples visible in the badge photo.'
+    scene: Same desk, tighter. A company lanyard on the chair — crooked, silver at
+      the temples visible in the badge photo.
     beat_type: micro
     intent: Reader privilege — object contradicts her certainty
   - panel_id: ep001_024
-    scene: 'Close on Lena''s face. She sends the report anyway. Not relief — commitment to a hypothesis.'
+    scene: Close on Lena's face. She sends the report anyway. Not relief — commitment
+      to a hypothesis.
     beat_type: micro
     dialogue_lines:
     - speaker: lena
@@ -186,9 +219,27 @@ pages:
       tail_style: pointer
       position_hint: top_left
   - panel_id: ep001_025
-    scene: 'Final panel — her phone screen. Auto-reply from Marcus, timestamp 10:06 PM: "Got it. Heading out now. Appreciate you." The red badge clears. Her reflection in the black screen does not match her expression.'
+    scene: 'Final panel — her phone screen. Auto-reply from Marcus, timestamp 10:06
+      PM: "Got it. Heading out now. Appreciate you." The red badge clears. Her reflection
+      in the black screen does not match her expression.'
     beat_type: micro
-    intent: CHAPTER END — perceptual dissonance; boundaries topic embedded in the gap between consent and institution
+    intent: CHAPTER END — perceptual dissonance; boundaries topic embedded in the
+      gap between consent and institution
 notes:
-  genre_first_bar: 'Thriller contract honored — assumption planted, caption/art contradiction, no supernatural threat, no boundary lecture. Topic (boundaries) shown via after-hours access pattern and unsent yes.'
-  carrier_embedding: 'No explicit wellness vocabulary. Somatic beat limited to jaw lock (panel 9).'
+  genre_first_bar: Thriller contract honored — assumption planted, caption/art contradiction,
+    no supernatural threat, no boundary lecture. Topic (boundaries) shown via after-hours
+    access pattern and unsent yes.
+  carrier_embedding: No explicit wellness vocabulary. Somatic beat limited to jaw
+    lock (panel 9).
+craft_notes: 'VESSEL: the detective who reads bodies — body confesses before the mouth.
+  Teacher never named in-story.
+
+  GENRE BIBLE: docs/research/manga_craft/psychological_thriller.md
+
+  REUSED PILOT (M3 Wave 1): proven authored script retained; craft-notes block added
+  for exit check.
+
+  ACCEPTANCE LAYER: authored + gate-floor + craft-reviewed — NOT claimed bestseller.'
+genre: psychological_thriller
+mode: teacher
+vessel: the detective who reads bodies
