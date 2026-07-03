@@ -106,7 +106,7 @@ def check_story_type_conformance(
 
 
 # A named protagonist in this corpus is a capitalized token used as an actor
-# (Name + person-verb): "Priya submits", "Naomi sat", "Marcus scrolls". Bare
+# (Name + verb-ish token): "Priya submits", "Naomi sat", "Sam reads". Bare
 # count_proper_nouns is too crude — it counts sentence-initial "She"/"The" and
 # brand/place capitals (LinkedIn, Slack, Tuesday). This targets a *person* name.
 _NON_NAME_CAPS = frozenset(
@@ -114,29 +114,50 @@ _NON_NAME_CAPS = frozenset(
         "She", "He", "They", "We", "You", "It", "The", "But", "And", "When", "That",
         "This", "Then", "There", "Her", "His", "Their", "Not", "Now", "One", "Nobody",
         "Everybody", "Someone", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday",
-        "Saturday", "Sunday",
+        "Saturday", "Sunday", "January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December",
     }
 )
-_PERSON_VERBS = (
-    r"sat|stood|walked|ran|drove|said|told|felt|knew|understood|realized|noticed|saw|"
-    r"recognized|looked|turned|picked|checked|opened|closed|scrolled|submits|submitted|"
-    r"opens|opened|closes|whispered|asked|nodded|stopped|remembered|called|texted|smiled|"
-    r"moved|stared|recovered|reached|paused|sits|stands|was|had|has|is|kept|held|shook"
+# Function words that follow a capital but are not actor-verbs ("In the", "On Monday").
+_NON_ACTOR_FOLLOWERS = frozenset(
+    {
+        "the", "a", "an", "in", "on", "at", "to", "for", "of", "and", "or", "but",
+        "with", "from", "by", "as", "into", "about", "between", "through", "during",
+        "before", "after", "above", "below", "over", "under", "again", "further",
+        "then", "once", "here", "there", "when", "where", "why", "how", "all", "each",
+        "few", "more", "most", "other", "some", "such", "no", "nor", "not", "only",
+        "own", "same", "so", "than", "too", "very", "just", "also", "now", "still",
+        "who", "whom", "whose", "which", "what", "that", "this", "these", "those",
+    }
+)
+# Letters incl. common Latin diacritics (Zoë, José, Søren).
+_NAME_TOKEN = r"[A-Z][A-Za-z\u00C0-\u024F]{1,}"
+_NAME_POSSESSIVE_RE = re.compile(rf"\b({_NAME_TOKEN})['\u2019]s\b")
+_NAME_BE_RE = re.compile(
+    rf"\b({_NAME_TOKEN})\s+(?:is|was|were|has|had|have|does|did|can|could|will|would)\b"
 )
 _NAME_ACTOR_RE = re.compile(
-    r"\b([A-Z][a-z]{2,})\s+(?:had\s+|has\s+|just\s+)?(?:" + _PERSON_VERBS + r")\b"
+    rf"\b({_NAME_TOKEN})\s+(?:had\s+|has\s+|just\s+)?"
+    rf"([a-z]+(?:'t)?)\b"
 )
 
 
 def _has_named_person(text: str) -> bool:
-    for m in _NAME_ACTOR_RE.finditer(text):
+    for m in _NAME_POSSESSIVE_RE.finditer(text):
         if m.group(1) not in _NON_NAME_CAPS:
+            return True
+    for m in _NAME_BE_RE.finditer(text):
+        if m.group(1) not in _NON_NAME_CAPS:
+            return True
+    for m in _NAME_ACTOR_RE.finditer(text):
+        name, follower = m.group(1), m.group(2)
+        if name not in _NON_NAME_CAPS and follower not in _NON_ACTOR_FOLLOWERS:
             return True
     return False
 
 
 def check_character_study_naming(story_type: "str | None", prose: str) -> "str | None":
-    """§3 rule #1: a character_study needs a NAMED protagonist. WARN-severity.
+    """§3 rule #1: a character_study needs a NAMED protagonist. FAIL under hard-gate.
 
     Fires for character_study atoms whose protagonist is only a pronoun (no
     Name-as-actor). Returns a flag code or None.
@@ -148,8 +169,15 @@ def check_character_study_naming(story_type: "str | None", prose: str) -> "str |
     return None
 
 
+def check_anchored_story_naming(prose: str) -> "str | None":
+    """Anchored story_atoms are character-arc prose — always require a NAMED protagonist."""
+    if not _has_named_person(normalize_text(prose)):
+        return "CHARACTER_STUDY_UNNAMED"
+    return None
+
+
 def story_type_variety_flag(story_types: List[str]) -> "str | None":
-    """§9 advisory: a compiled book should carry ≥2 distinct story_types. WARN.
+    """§9: a compiled book should carry ≥2 distinct story_types. FAIL under hard-gate.
 
     Ignores blank/untagged entries; returns a flag only when ≥1 type is present
     but fewer than 2 distinct tagged types appear.
@@ -158,6 +186,16 @@ def story_type_variety_flag(story_types: List[str]) -> "str | None":
     if distinct and len(distinct) < 2:
         return "LOW_STORY_TYPE_VARIETY"
     return None
+
+
+def is_anchored_story_atom_path(path: Path) -> bool:
+    """True for story_atoms/<persona>/anchored/... prose files."""
+    parts = path.parts
+    try:
+        i = parts.index("story_atoms")
+    except ValueError:
+        return False
+    return len(parts) > i + 2 and parts[i + 2] == "anchored"
 
 
 def load_principle_teachers(registry_path: "Path | None" = None) -> "set[str]":
@@ -330,7 +368,7 @@ def lint_canonical_file(path: Path) -> List[StoryLintResult]:
             naming = check_character_study_naming(st, block.body)
             if naming:
                 extra = extra + [naming]
-            base = _escalate(base, extra, _CONFORMANCE_FAIL_CODES)
+            base = _escalate(base, extra, _HARD_GATE_FAIL_CODES)
         results.append(base)
     return results
 
@@ -373,6 +411,16 @@ _CONFORMANCE_FAIL_CODES = frozenset(
     }
 )
 
+# Hard gate (restore workstream #3): naming + variety + §7 conformance are FAIL.
+# Persona catalog atoms/ stay on --conformance-only until Claude finishes authoring;
+# story_atoms/anchored and tagged character_study atoms use --hard-gate.
+_HARD_GATE_FAIL_CODES = _CONFORMANCE_FAIL_CODES | frozenset(
+    {
+        "CHARACTER_STUDY_UNNAMED",
+        "LOW_STORY_TYPE_VARIETY",
+    }
+)
+
 
 def lint_story_atom_yaml(path: Path, principle_teachers: "set[str] | None" = None) -> StoryLintResult:
     """Lint a teacher-mode STORY atom YAML: 5-element prose lint + §7 conformance + §3 naming.
@@ -400,7 +448,7 @@ def lint_story_atom_yaml(path: Path, principle_teachers: "set[str] | None" = Non
     naming = check_character_study_naming(story_type, body)
     if naming:
         extra = extra + [naming]
-    return _escalate(base, extra, _CONFORMANCE_FAIL_CODES)
+    return _escalate(base, extra, _HARD_GATE_FAIL_CODES)
 
 
 # The story_type authority (docs/STORY_TYPES_AND_STRUCTURES.md) governs the
@@ -450,6 +498,15 @@ def parse_args() -> argparse.Namespace:
         ),
     )
     ap.add_argument(
+        "--hard-gate",
+        action="store_true",
+        help=(
+            "CI hard gate: exit nonzero on CHARACTER_STUDY_UNNAMED, "
+            "LOW_STORY_TYPE_VARIETY, and §7 conformance FAILs. Use on "
+            "story_atoms/anchored and tagged teacher STORY atoms."
+        ),
+    )
+    ap.add_argument(
         "--story-only",
         action="store_true",
         help="In directory mode, lint only files under a STORY/ path (skip HOOK/SCENE/EXERCISE).",
@@ -490,7 +547,12 @@ def main() -> int:
                     )
             else:
                 text = f.read_text(encoding="utf-8", errors="replace")
-                results.append(lint_story(text, f))
+                base = lint_story(text, f)
+                if is_anchored_story_atom_path(f):
+                    naming = check_anchored_story_naming(text)
+                    if naming:
+                        base = _escalate(base, [naming], _HARD_GATE_FAIL_CODES)
+                results.append(base)
         except Exception as e:
             results.append(
                 StoryLintResult(
@@ -574,6 +636,52 @@ def main() -> int:
         print("\nTop issues:")
         for r in top:
             print(f"- {r.status} {r.story_id} ({r.word_count}w) {Path(r.path).name} :: {', '.join(r.flags)}")
+
+    if args.hard_gate:
+        # Book-level variety: when ≥1 tagged story_type is present across the
+        # lint set, require ≥2 distinct types (per-book floor).
+        tagged_types: List[str] = []
+        for f in text_files:
+            if f.name == "CANONICAL.txt":
+                tagged_types.extend(t for t in _canonical_story_types(f) if t)
+        for yf in yaml_atoms:
+            try:
+                import yaml as _yaml
+                data = _yaml.safe_load(yf.read_text(encoding="utf-8")) or {}
+                st = data.get("story_type") if isinstance(data, dict) else None
+                if st:
+                    tagged_types.append(str(st))
+            except Exception:
+                pass
+        variety = story_type_variety_flag(tagged_types)
+        if variety:
+            results.append(
+                StoryLintResult(
+                    path=str(root),
+                    story_id="__book_variety__",
+                    word_count=0,
+                    flags=[variety],
+                    missing_signals=0,
+                    status="FAIL",
+                    notes=["per-book story_type variety floor (≥2 distinct tagged types)"],
+                    band="",
+                )
+            )
+
+        hard_fails = [
+            r for r in results if any(f in _HARD_GATE_FAIL_CODES for f in r.flags)
+        ]
+        if hard_fails:
+            print("\nStory-atom hard-gate violations (BLOCKING):")
+            for r in hard_fails:
+                bad = [f for f in r.flags if f in _HARD_GATE_FAIL_CODES]
+                print(f"- {r.story_id} {Path(r.path).name} :: {', '.join(bad)}")
+            return EXIT_FAIL
+        print(
+            "\nStory-atom hard-gate: PASS "
+            "(no CHARACTER_STUDY_UNNAMED / LOW_STORY_TYPE_VARIETY / §7 violations)."
+        )
+        return EXIT_PASS
 
     if args.conformance_only:
         # CI-gate mode: block ONLY on §7 schema violations (tagged atoms).

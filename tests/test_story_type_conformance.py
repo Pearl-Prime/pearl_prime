@@ -69,11 +69,58 @@ def test_character_study_unnamed_flagged():
     assert check_character_study_naming("character_study", prose) == "CHARACTER_STUDY_UNNAMED"
 
 
+def test_naming_detects_possessive_and_diacritics():
+    from phoenix_v4.quality.story_atom_lint import _has_named_person
+    assert _has_named_person("Zoë's PTO request is approved in the time it takes.")
+    assert _has_named_person("Marcus is on a call with the project lead.")
+    assert _has_named_person("Sam reads the invite three times.")
+
+
 def test_naming_only_applies_to_character_study():
     unnamed = "She sat in the quiet room and did not move."
     assert check_character_study_naming("atmospheric", unnamed) is None
     assert check_character_study_naming("direct_teaching", unnamed) is None
     assert check_character_study_naming(None, unnamed) is None
+
+
+def test_character_study_unnamed_is_hard_gate_fail(tmp_path):
+    from phoenix_v4.quality.story_atom_lint import _HARD_GATE_FAIL_CODES
+    assert "CHARACTER_STUDY_UNNAMED" in _HARD_GATE_FAIL_CODES
+    assert "LOW_STORY_TYPE_VARIETY" in _HARD_GATE_FAIL_CODES
+    body = (
+        "She sat in the quarterly review for the third time that week, and she couldn't "
+        "stop shaking, and she realized she had been exhausted for months pretending otherwise."
+    )
+    p = _write_atom(
+        tmp_path,
+        "atom_id: test_STORY_unnamed\nstory_origin: composite\nstory_type: character_study\nband: '3'",
+        body,
+    )
+    res = lint_story_atom_yaml(p)
+    assert res.status == "FAIL"
+    assert "CHARACTER_STUDY_UNNAMED" in res.flags
+
+
+def test_anchored_story_path_requires_name(tmp_path):
+    from phoenix_v4.quality.story_atom_lint import (
+        check_anchored_story_naming,
+        is_anchored_story_atom_path,
+        _escalate,
+        lint_story,
+        _HARD_GATE_FAIL_CODES,
+    )
+    p = (
+        tmp_path / "story_atoms" / "gen_z_professionals" / "anchored"
+        / "anxiety" / "overwhelm" / "recognition" / "micro" / "v01.txt"
+    )
+    p.parent.mkdir(parents=True)
+    prose = "She sat in the quiet room and did not move for a long time."
+    p.write_text(prose, encoding="utf-8")
+    assert is_anchored_story_atom_path(p)
+    assert check_anchored_story_naming(prose) == "CHARACTER_STUDY_UNNAMED"
+    base = lint_story(prose, p)
+    escalated = _escalate(base, ["CHARACTER_STUDY_UNNAMED"], _HARD_GATE_FAIL_CODES)
+    assert escalated.status == "FAIL"
 
 
 # ── §9 variety ────────────────────────────────────────────────────────────
