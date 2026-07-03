@@ -1,0 +1,835 @@
+# locale_genre_allocations.yaml
+# M2 — R1 allocation chain: research → per-locale genre mix → allocation-derived plans.
+#
+# Authority: docs/specs/MANGA_100PCT_PRODUCTION_ROADMAP_2026-07-03.md §2
+# Consumer: scripts/manga/generate_catalog_plan_from_strategic.py (Phase 2X.4 vehicle)
+# Research triad (ONLY sanctioned sources — cite doc+section per line):
+#   research/2026-03-30_asian-persona-topic-market-fit.md
+#   research/2026-03-30_us-persona-topic-market-fit.md
+#   research/2026-03-30_europe-latam-persona-topic-market-fit.md
+# Plus strategic plans: docs/CJK_CATALOG_PLAN.md, docs/US_CATALOG_PLAN.md,
+# docs/GENRE_PORTFOLIO_PLAN.md (global matrix disaggregated here).
+#
+# Locale set = config/localization/locale_registry.yaml `all_locales` (13).
+# pt_BR is Q-MANGA-01 candidate only — status: pending_ratification; registry untouched.
+# Q-MANGA-02 default (Western = illustrated self-help picture books) encoded below;
+# operator ratification still required (do not treat as ratified).
+#
+# genre_id values MUST match scripts/manga/generate_catalog_plan_from_strategic.py
+# VALID_GENRES / config/manga/manga_taxonomy.yaml family ids as mapped there.
+# share_pct per locale sums to 100. tier ∈ {primary, secondary, niche}.
+
+schema_version: "1"
+status: active
+milestone: M2
+last_updated: "2026-07-04"
+q_manga_01_pt_br: pending_ratification
+q_manga_02_western_picture_books: default_applied_pending_ratification
+
+# Product-shape lanes (Q-MANGA-02 default)
+lanes:
+  cjk_genre_led:
+    description: >-
+      Readers search by genre (psych horror / romance / mecha / cultivation).
+      Wellness embeds inside genre shells (CJK_CATALOG_PLAN §1 genre-shell revenue gap).
+    locales: [ja_JP, zh_CN, zh_TW, zh_HK, ko_KR]
+  western_intent_led:
+    description: >-
+      Intent-led illustrated self-help picture books for Gen Z/Alpha
+      (US low-manga / high-self-help search intent).
+    locales: [en_US, es_US, es_ES, de_DE, it_IT, hu_HU, zh_SG]
+  fr_bd_manga:
+    description: >-
+      France BD/manga culture — real genre manga, not pure picture-book shelf.
+      Developpement personnel demand coexists with #1 EU manga market.
+    locales: [fr_FR]
+
+locales:
+
+  # ─── WESTERN INTENT-LED (picture-book default) ───────────────────────────
+
+  en_US:
+    lane: western_intent_led
+    product_shape: illustrated_self_help_picture_books
+    status: active
+    genres:
+      - genre_id: iyashikei
+        share_pct: 22
+        tier: primary
+        research_citation: "research/2026-03-30_us-persona-topic-market-fit.md §7 Gen Z Professionals; docs/US_CATALOG_PLAN.md §4 Genre Map (wellness-as-comedy / slice)"
+        confidence: high
+      - genre_id: workplace_drama
+        share_pct: 16
+        tier: primary
+        research_citation: "research/2026-03-30_us-persona-topic-market-fit.md §7 (workplace anxiety, imposter); docs/US_CATALOG_PLAN.md §6 brand→format (career_lift / high_performer doodle)"
+        confidence: high
+      - genre_id: psychological_thriller
+        share_pct: 14
+        tier: primary
+        research_citation: "research/2026-03-30_us-persona-topic-market-fit.md §7 (overthinking #1 Gen Z topic); docs/US_CATALOG_PLAN.md §4 (CBT in thriller shell)"
+        confidence: high
+      - genre_id: romance_josei_drama
+        share_pct: 12
+        tier: secondary
+        research_citation: "docs/US_CATALOG_PLAN.md §4 (Lore Olympus / Heartstopper romance = largest BookTok; wellness structural not marketed)"
+        confidence: high
+      - genre_id: school_coming_of_age
+        share_pct: 10
+        tier: secondary
+        research_citation: "research/2026-03-30_us-persona-topic-market-fit.md §8 Gen Alpha (58% burnout by age 12; kids/YA audiobook +48%)"
+        confidence: high
+      - genre_id: supernatural_mystery
+        share_pct: 8
+        tier: secondary
+        research_citation: "docs/US_CATALOG_PLAN.md §4 (somatic/spiritual metaphor shells); research/2026-03-30_us-persona-topic-market-fit.md §1 (anxiety/somatic demand)"
+        confidence: medium
+      - genre_id: sports_competition
+        share_pct: 6
+        tier: niche
+        research_citation: "research/2026-03-30_us-persona-topic-market-fit.md §7–§8 (ADHD/focus/motivation as performance frames)"
+        confidence: medium
+      - genre_id: dark_fantasy
+        share_pct: 5
+        tier: niche
+        research_citation: "docs/US_CATALOG_PLAN.md §3 format mix Genre OGN 10% (trauma/grief in fantasy shell)"
+        confidence: medium
+      - genre_id: psychological_horror
+        share_pct: 4
+        tier: niche
+        research_citation: "docs/US_CATALOG_PLAN.md §4 horror row (SIKTTC / Sweet Home comps — cult, not primary US self-help shelf)"
+        confidence: medium
+      - genre_id: isekai
+        share_pct: 3
+        tier: niche
+        research_citation: "docs/CJK_CATALOG_PLAN.md §1 (burnout→isekai recovery shell) applied at low Western share — implication only"
+        confidence: low
+
+  es_US:
+    lane: western_intent_led
+    product_shape: illustrated_self_help_picture_books
+    status: active
+    genres:
+      - genre_id: iyashikei
+        share_pct: 20
+        tier: primary
+        research_citation: "research/2026-03-30_europe-latam-persona-topic-market-fit.md §1 es-US (anxiety primary; family/relationships); Cross-Locale matrix anxiety **"
+        confidence: high
+      - genre_id: romance_josei_drama
+        share_pct: 18
+        tier: primary
+        research_citation: "research/2026-03-30_europe-latam-persona-topic-market-fit.md §1 + Cross-Locale (family dynamics / relationships ** for es-US)"
+        confidence: high
+      - genre_id: workplace_drama
+        share_pct: 14
+        tier: secondary
+        research_citation: "research/2026-03-30_europe-latam-persona-topic-market-fit.md Cross-Locale (burnout * es-US)"
+        confidence: medium
+      - genre_id: psychological_thriller
+        share_pct: 12
+        tier: secondary
+        research_citation: "research/2026-03-30_europe-latam-persona-topic-market-fit.md §1 (anxiety 21.4% prevalence; generational trauma **)"
+        confidence: high
+      - genre_id: school_coming_of_age
+        share_pct: 10
+        tier: secondary
+        research_citation: "research/2026-03-30_europe-latam-persona-topic-market-fit.md §1 (fastest-growing Spanish audiobook segment; younger bilingual readers)"
+        confidence: medium
+      - genre_id: supernatural_mystery
+        share_pct: 10
+        tier: secondary
+        research_citation: "research/2026-03-30_europe-latam-persona-topic-market-fit.md §1 (generational trauma framing — metaphor shells)"
+        confidence: medium
+      - genre_id: historical_period
+        share_pct: 8
+        tier: niche
+        research_citation: "research/2026-03-30_europe-latam-persona-topic-market-fit.md §1 (generational trauma ** — period/family-history shells)"
+        confidence: medium
+      - genre_id: dark_fantasy
+        share_pct: 5
+        tier: niche
+        research_citation: "docs/US_CATALOG_PLAN.md §3 Genre OGN path applied to Spanish-US bilingual shelf — implication"
+        confidence: low
+      - genre_id: sports_competition
+        share_pct: 3
+        tier: niche
+        research_citation: "research/2026-03-30_europe-latam-persona-topic-market-fit.md Cross-Locale (productivity * es-US) as performance frame"
+        confidence: low
+
+  es_ES:
+    lane: western_intent_led
+    product_shape: illustrated_self_help_picture_books
+    status: active
+    genres:
+      - genre_id: iyashikei
+        share_pct: 20
+        tier: primary
+        research_citation: "research/2026-03-30_europe-latam-persona-topic-market-fit.md §2 es-ES (self-help genre +47%; Marian Rojas Estapé practical neuroscience)"
+        confidence: high
+      - genre_id: psychological_thriller
+        share_pct: 16
+        tier: primary
+        research_citation: "research/2026-03-30_europe-latam-persona-topic-market-fit.md §2 (34% mental-health affected; anxiety **)"
+        confidence: high
+      - genre_id: workplace_drama
+        share_pct: 14
+        tier: primary
+        research_citation: "research/2026-03-30_europe-latam-persona-topic-market-fit.md Cross-Locale (burnout ** es-ES)"
+        confidence: high
+      - genre_id: romance_josei_drama
+        share_pct: 12
+        tier: secondary
+        research_citation: "research/2026-03-30_europe-latam-persona-topic-market-fit.md Cross-Locale (family/relationships * es-ES)"
+        confidence: medium
+      - genre_id: supernatural_mystery
+        share_pct: 10
+        tier: secondary
+        research_citation: "research/2026-03-30_europe-latam-persona-topic-market-fit.md §2 (Ikigai / meaning frames as gentle mystery shells)"
+        confidence: medium
+      - genre_id: school_coming_of_age
+        share_pct: 10
+        tier: secondary
+        research_citation: "research/2026-03-30_europe-latam-persona-topic-market-fit.md §2 (govt mental-health investment; youth-facing)"
+        confidence: medium
+      - genre_id: historical_period
+        share_pct: 8
+        tier: niche
+        research_citation: "research/2026-03-30_europe-latam-persona-topic-market-fit.md §2 (Spanish literary tradition; period wellness embeds — implication)"
+        confidence: low
+      - genre_id: dark_fantasy
+        share_pct: 6
+        tier: niche
+        research_citation: "docs/GENRE_PORTFOLIO_PLAN.md global dark-fantasy tier applied at EU picture-book margin — implication"
+        confidence: low
+      - genre_id: sports_competition
+        share_pct: 4
+        tier: niche
+        research_citation: "research/2026-03-30_europe-latam-persona-topic-market-fit.md Cross-Locale (sleep/recovery * es-ES) as body-performance frame"
+        confidence: low
+
+  de_DE:
+    lane: western_intent_led
+    product_shape: illustrated_self_help_picture_books
+    status: active
+    genres:
+      - genre_id: workplace_drama
+        share_pct: 20
+        tier: primary
+        research_citation: "research/2026-03-30_europe-latam-persona-topic-market-fit.md §4 de-DE (44% burnout; largest EU audiobook market)"
+        confidence: high
+      - genre_id: iyashikei
+        share_pct: 18
+        tier: primary
+        research_citation: "research/2026-03-30_europe-latam-persona-topic-market-fit.md §4 + Cross-Locale (sleep/recovery ** de-DE)"
+        confidence: high
+      - genre_id: psychological_thriller
+        share_pct: 16
+        tier: primary
+        research_citation: "research/2026-03-30_europe-latam-persona-topic-market-fit.md §4 (anxiety **; evidence-based tone)"
+        confidence: high
+      - genre_id: supernatural_mystery
+        share_pct: 10
+        tier: secondary
+        research_citation: "research/2026-03-30_europe-latam-persona-topic-market-fit.md Cross-Locale (sleep ** as gentle mystery/somatic shells)"
+        confidence: medium
+      - genre_id: romance_josei_drama
+        share_pct: 10
+        tier: secondary
+        research_citation: "research/2026-03-30_europe-latam-persona-topic-market-fit.md Cross-Locale (relationships * de-DE)"
+        confidence: medium
+      - genre_id: school_coming_of_age
+        share_pct: 8
+        tier: secondary
+        research_citation: "research/2026-03-30_europe-latam-persona-topic-market-fit.md §4 (ebook-forward youth segment — implication)"
+        confidence: low
+      - genre_id: historical_period
+        share_pct: 8
+        tier: niche
+        research_citation: "research/2026-03-30_europe-latam-persona-topic-market-fit.md Cross-Locale (generational trauma * de-DE)"
+        confidence: medium
+      - genre_id: dark_fantasy
+        share_pct: 6
+        tier: niche
+        research_citation: "docs/GENRE_PORTFOLIO_PLAN.md dark-fantasy mega tier at EU margin — implication"
+        confidence: low
+      - genre_id: sports_competition
+        share_pct: 4
+        tier: niche
+        research_citation: "research/2026-03-30_europe-latam-persona-topic-market-fit.md §4 (performance/burnout recovery frames — implication)"
+        confidence: low
+
+  it_IT:
+    lane: western_intent_led
+    product_shape: illustrated_self_help_picture_books
+    status: active
+    genres:
+      - genre_id: iyashikei
+        share_pct: 20
+        tier: primary
+        research_citation: "research/2026-03-30_europe-latam-persona-topic-market-fit.md §7 M2 genre allocation (it_IT) — disaggregated from EU ebook-forward peer pattern"
+        confidence: medium
+      - genre_id: romance_josei_drama
+        share_pct: 16
+        tier: primary
+        research_citation: "research/2026-03-30_europe-latam-persona-topic-market-fit.md §7 M2 (it_IT) — romance/fumetti adjacency"
+        confidence: medium
+      - genre_id: workplace_drama
+        share_pct: 14
+        tier: primary
+        research_citation: "research/2026-03-30_europe-latam-persona-topic-market-fit.md §7 M2 (it_IT) — burnout peer to fr_FR/de_DE"
+        confidence: medium
+      - genre_id: psychological_thriller
+        share_pct: 14
+        tier: secondary
+        research_citation: "research/2026-03-30_europe-latam-persona-topic-market-fit.md §7 M2 (it_IT) — anxiety as EU-wide **"
+        confidence: medium
+      - genre_id: historical_period
+        share_pct: 10
+        tier: secondary
+        research_citation: "research/2026-03-30_europe-latam-persona-topic-market-fit.md §7 M2 (it_IT) — strong period/literary tradition"
+        confidence: medium
+      - genre_id: supernatural_mystery
+        share_pct: 8
+        tier: secondary
+        research_citation: "research/2026-03-30_europe-latam-persona-topic-market-fit.md §7 M2 (it_IT)"
+        confidence: medium
+      - genre_id: school_coming_of_age
+        share_pct: 8
+        tier: niche
+        research_citation: "research/2026-03-30_europe-latam-persona-topic-market-fit.md §7 M2 (it_IT)"
+        confidence: medium
+      - genre_id: dark_fantasy
+        share_pct: 6
+        tier: niche
+        research_citation: "research/2026-03-30_europe-latam-persona-topic-market-fit.md §7 M2 (it_IT)"
+        confidence: medium
+      - genre_id: sports_competition
+        share_pct: 4
+        tier: niche
+        research_citation: "research/2026-03-30_europe-latam-persona-topic-market-fit.md §7 M2 (it_IT)"
+        confidence: low
+
+  hu_HU:
+    lane: western_intent_led
+    product_shape: illustrated_self_help_picture_books
+    status: active
+    genres:
+      - genre_id: iyashikei
+        share_pct: 24
+        tier: primary
+        research_citation: "research/2026-03-30_europe-latam-persona-topic-market-fit.md §5 hu-HU + §8 M2 genre allocation (önismeret framing; stigma-safe gentle register)"
+        confidence: medium
+      - genre_id: psychological_thriller
+        share_pct: 16
+        tier: primary
+        research_citation: "research/2026-03-30_europe-latam-persona-topic-market-fit.md §5 (szorongás/anxiety most central help-seeking node)"
+        confidence: high
+      - genre_id: romance_josei_drama
+        share_pct: 16
+        tier: primary
+        research_citation: "research/2026-03-30_europe-latam-persona-topic-market-fit.md §5 (romance 20% of book sales; self-development low share — ride romance shell)"
+        confidence: high
+      - genre_id: supernatural_mystery
+        share_pct: 12
+        tier: secondary
+        research_citation: "research/2026-03-30_europe-latam-persona-topic-market-fit.md §8 M2 (hu_HU) — metaphor shells avoid clinical framing"
+        confidence: medium
+      - genre_id: workplace_drama
+        share_pct: 10
+        tier: secondary
+        research_citation: "research/2026-03-30_europe-latam-persona-topic-market-fit.md Cross-Locale (burnout * hu-HU)"
+        confidence: medium
+      - genre_id: school_coming_of_age
+        share_pct: 8
+        tier: secondary
+        research_citation: "research/2026-03-30_europe-latam-persona-topic-market-fit.md §8 M2 (hu_HU) — youth digital self-help bridge"
+        confidence: medium
+      - genre_id: historical_period
+        share_pct: 8
+        tier: niche
+        research_citation: "research/2026-03-30_europe-latam-persona-topic-market-fit.md §5 (world literature dominates; period shells)"
+        confidence: medium
+      - genre_id: dark_fantasy
+        share_pct: 4
+        tier: niche
+        research_citation: "research/2026-03-30_europe-latam-persona-topic-market-fit.md §8 M2 (hu_HU)"
+        confidence: low
+      - genre_id: sports_competition
+        share_pct: 2
+        tier: niche
+        research_citation: "research/2026-03-30_europe-latam-persona-topic-market-fit.md §8 M2 (hu_HU)"
+        confidence: low
+
+  zh_SG:
+    lane: western_intent_led
+    product_shape: illustrated_self_help_picture_books
+    status: active
+    note: >-
+      English-dominant commerce + Mandarin bilingual (locale_registry header).
+      Genre-led CJK shells secondary; intent-led picture books primary for EN shelf.
+    genres:
+      - genre_id: workplace_drama
+        share_pct: 22
+        tier: primary
+        research_citation: "research/2026-03-30_asian-persona-topic-market-fit.md §4 zh-SG (61% burnout; 68% Gen Z burnout) + §9 M2 genre allocation"
+        confidence: high
+      - genre_id: iyashikei
+        share_pct: 18
+        tier: primary
+        research_citation: "research/2026-03-30_asian-persona-topic-market-fit.md §4 (sleep deprivation; mental wellness #1 priority ages 20-29)"
+        confidence: high
+      - genre_id: psychological_thriller
+        share_pct: 14
+        tier: primary
+        research_citation: "research/2026-03-30_asian-persona-topic-market-fit.md §4 (Gen Z daily stress 62%; panic/anxiety supporting topics)"
+        confidence: high
+      - genre_id: school_coming_of_age
+        share_pct: 12
+        tier: secondary
+        research_citation: "research/2026-03-30_asian-persona-topic-market-fit.md §4 (Gen Z hustle-culture counter-narratives)"
+        confidence: high
+      - genre_id: romance_josei_drama
+        share_pct: 10
+        tier: secondary
+        research_citation: "research/2026-03-30_asian-persona-topic-market-fit.md §9 M2 (zh_SG) — bilingual relationship frames"
+        confidence: medium
+      - genre_id: supernatural_mystery
+        share_pct: 8
+        tier: secondary
+        research_citation: "research/2026-03-30_asian-persona-topic-market-fit.md §4 (multicultural grief/attachment — metaphor shells)"
+        confidence: medium
+      - genre_id: sci_fi_cyberpunk
+        share_pct: 6
+        tier: niche
+        research_citation: "research/2026-03-30_asian-persona-topic-market-fit.md §9 M2 (zh_SG) — tech-hub identity"
+        confidence: medium
+      - genre_id: isekai
+        share_pct: 5
+        tier: niche
+        research_citation: "docs/CJK_CATALOG_PLAN.md §1 (burnout→isekai) at SG bilingual margin"
+        confidence: low
+      - genre_id: dark_fantasy
+        share_pct: 5
+        tier: niche
+        research_citation: "research/2026-03-30_asian-persona-topic-market-fit.md §9 M2 (zh_SG)"
+        confidence: low
+
+  # ─── CJK GENRE-LED ───────────────────────────────────────────────────────
+
+  ja_JP:
+    lane: cjk_genre_led
+    product_shape: genre_manga
+    status: active
+    genres:
+      - genre_id: psychological_horror
+        share_pct: 14
+        tier: primary
+        research_citation: "docs/CJK_CATALOG_PLAN.md §1 + §4 (anxiety/sleep inside horror shell; genre-shell revenue gap)"
+        confidence: high
+      - genre_id: dark_fantasy
+        share_pct: 12
+        tier: primary
+        research_citation: "docs/CJK_CATALOG_PLAN.md §1 (Frieren/Berserk model — grief inside fantasy)"
+        confidence: high
+      - genre_id: workplace_drama
+        share_pct: 12
+        tier: primary
+        research_citation: "research/2026-03-30_asian-persona-topic-market-fit.md §5 ja-JP (karoshi; 1,057 work-related mental-health cases FY2024)"
+        confidence: high
+      - genre_id: iyashikei
+        share_pct: 10
+        tier: secondary
+        research_citation: "docs/CJK_CATALOG_PLAN.md §1 (iyashikei anchor tier — loyalty, 3M ceiling without genre shell)"
+        confidence: high
+      - genre_id: isekai
+        share_pct: 10
+        tier: secondary
+        research_citation: "docs/CJK_CATALOG_PLAN.md §1 + §4 (burnout recovery inside isekai shell)"
+        confidence: high
+      - genre_id: mecha
+        share_pct: 8
+        tier: secondary
+        research_citation: "docs/CJK_CATALOG_PLAN.md §5 (Evangelion identity-collapse model; GENRE_PORTFOLIO_PLAN mecha mega)"
+        confidence: high
+      - genre_id: romance_josei_drama
+        share_pct: 8
+        tier: secondary
+        research_citation: "docs/GENRE_PORTFOLIO_PLAN.md romance/josei large tier; research/2026-03-30_asian-persona-topic-market-fit.md §5"
+        confidence: medium
+      - genre_id: supernatural_mystery
+        share_pct: 8
+        tier: secondary
+        research_citation: "docs/CJK_CATALOG_PLAN.md §4 (somatic/sleep inside mystery shell)"
+        confidence: high
+      - genre_id: psychological_thriller
+        share_pct: 6
+        tier: niche
+        research_citation: "docs/CJK_CATALOG_PLAN.md §5 cognitive_clarity thriller tier"
+        confidence: high
+      - genre_id: action_battle
+        share_pct: 5
+        tier: niche
+        research_citation: "docs/GENRE_PORTFOLIO_PLAN.md action/battle mega tier (JP shonen market)"
+        confidence: medium
+      - genre_id: sports_competition
+        share_pct: 4
+        tier: niche
+        research_citation: "docs/GENRE_PORTFOLIO_PLAN.md sports large tier (Slam Dunk / Haikyuu comps)"
+        confidence: medium
+      - genre_id: historical_period
+        share_pct: 3
+        tier: niche
+        research_citation: "docs/GENRE_PORTFOLIO_PLAN.md historical mid tier (Vinland / Vagabond)"
+        confidence: medium
+
+  zh_CN:
+    lane: cjk_genre_led
+    product_shape: genre_manga
+    status: active
+    genres:
+      - genre_id: cultivation_martial
+        share_pct: 18
+        tier: primary
+        research_citation: "docs/GENRE_PORTFOLIO_PLAN.md (cultivation huge in CN); docs/CJK_CATALOG_PLAN.md CN format row"
+        confidence: high
+      - genre_id: isekai
+        share_pct: 12
+        tier: primary
+        research_citation: "docs/CJK_CATALOG_PLAN.md §1 (burnout→isekai); research/2026-03-30_asian-persona-topic-market-fit.md §3 zh-CN (996 / sleep economy)"
+        confidence: high
+      - genre_id: workplace_drama
+        share_pct: 12
+        tier: primary
+        research_citation: "research/2026-03-30_asian-persona-topic-market-fit.md §3 (sleep economy; self-help rising ~20% on audio platforms)"
+        confidence: high
+      - genre_id: romance_josei_drama
+        share_pct: 12
+        tier: primary
+        research_citation: "research/2026-03-30_asian-persona-topic-market-fit.md §3 (Ximalaya fiction 60%; lifestyle/self-help top Douyin)"
+        confidence: medium
+      - genre_id: supernatural_mystery
+        share_pct: 10
+        tier: secondary
+        research_citation: "research/2026-03-30_asian-persona-topic-market-fit.md §3 (sleep-disorder framing as mystery/somatic)"
+        confidence: medium
+      - genre_id: psychological_horror
+        share_pct: 8
+        tier: secondary
+        research_citation: "docs/CJK_CATALOG_PLAN.md §1 genre-shell model applied to CN anxiety/sleep"
+        confidence: medium
+      - genre_id: dark_fantasy
+        share_pct: 8
+        tier: secondary
+        research_citation: "docs/GENRE_PORTFOLIO_PLAN.md dark-fantasy mega; CN web-novel adjacency"
+        confidence: medium
+      - genre_id: iyashikei
+        share_pct: 8
+        tier: secondary
+        research_citation: "docs/CJK_CATALOG_PLAN.md §1 iyashikei anchor (loyalty tier)"
+        confidence: medium
+      - genre_id: sci_fi_cyberpunk
+        share_pct: 6
+        tier: niche
+        research_citation: "research/2026-03-30_asian-persona-topic-market-fit.md §3 (tech/AI adaptation self-help rising)"
+        confidence: medium
+      - genre_id: action_battle
+        share_pct: 4
+        tier: niche
+        research_citation: "docs/GENRE_PORTFOLIO_PLAN.md action/battle mega tier"
+        confidence: low
+      - genre_id: school_coming_of_age
+        share_pct: 2
+        tier: niche
+        research_citation: "docs/GENRE_PORTFOLIO_PLAN.md school mid tier"
+        confidence: low
+
+  zh_TW:
+    lane: cjk_genre_led
+    product_shape: genre_manga
+    status: active
+    genres:
+      - genre_id: psychological_horror
+        share_pct: 14
+        tier: primary
+        research_citation: "research/2026-03-30_asian-persona-topic-market-fit.md §1 zh-TW (~40% insomnia; mental-health prevalence doubling); docs/CJK_CATALOG_PLAN.md TW hybrid/BD influence"
+        confidence: high
+      - genre_id: romance_josei_drama
+        share_pct: 14
+        tier: primary
+        research_citation: "research/2026-03-30_asian-persona-topic-market-fit.md §1 (心靈成長 category; Readmoo self-help/inspirational top)"
+        confidence: high
+      - genre_id: workplace_drama
+        share_pct: 12
+        tier: primary
+        research_citation: "research/2026-03-30_asian-persona-topic-market-fit.md §1 (high-pressure work/education culture)"
+        confidence: high
+      - genre_id: iyashikei
+        share_pct: 12
+        tier: secondary
+        research_citation: "docs/CJK_CATALOG_PLAN.md §2 TW (atmospheric literary palette; French BD influence)"
+        confidence: high
+      - genre_id: supernatural_mystery
+        share_pct: 10
+        tier: secondary
+        research_citation: "research/2026-03-30_asian-persona-topic-market-fit.md §1 (sleep/insomnia as mystery shells)"
+        confidence: high
+      - genre_id: dark_fantasy
+        share_pct: 10
+        tier: secondary
+        research_citation: "docs/CJK_CATALOG_PLAN.md §1 genre-shell model; TW literary register"
+        confidence: medium
+      - genre_id: cultivation_martial
+        share_pct: 8
+        tier: secondary
+        research_citation: "docs/GENRE_PORTFOLIO_PLAN.md (cultivation huge in CN/TW)"
+        confidence: high
+      - genre_id: isekai
+        share_pct: 8
+        tier: niche
+        research_citation: "docs/CJK_CATALOG_PLAN.md §1 burnout→isekai"
+        confidence: medium
+      - genre_id: psychological_thriller
+        share_pct: 6
+        tier: niche
+        research_citation: "research/2026-03-30_asian-persona-topic-market-fit.md §1 (younger adults worse mental health TSCS 2021)"
+        confidence: medium
+      - genre_id: historical_period
+        share_pct: 4
+        tier: niche
+        research_citation: "docs/CJK_CATALOG_PLAN.md §2 TW literary register"
+        confidence: low
+      - genre_id: school_coming_of_age
+        share_pct: 2
+        tier: niche
+        research_citation: "research/2026-03-30_asian-persona-topic-market-fit.md §1 (education-pressure culture)"
+        confidence: medium
+
+  zh_HK:
+    lane: cjk_genre_led
+    product_shape: genre_manga
+    status: active
+    note: >-
+      Deferred per CJK_CATALOG_PLAN §2 HK addendum; genre allocation authored in
+      research/2026-03-30_asian-persona-topic-market-fit.md §10 M2 (zh_HK).
+    genres:
+      - genre_id: workplace_drama
+        share_pct: 20
+        tier: primary
+        research_citation: "research/2026-03-30_asian-persona-topic-market-fit.md §2 zh-HK (49% burnout doubled YoY; finance-sector hours) + §10 M2"
+        confidence: high
+      - genre_id: psychological_horror
+        share_pct: 14
+        tier: primary
+        research_citation: "research/2026-03-30_asian-persona-topic-market-fit.md §2 (46% depression/anxiety; 39.4% insomnia) + §10 M2"
+        confidence: high
+      - genre_id: iyashikei
+        share_pct: 12
+        tier: primary
+        research_citation: "research/2026-03-30_asian-persona-topic-market-fit.md §2 (身心健康 framing; sleep repair) + docs/CJK_CATALOG_PLAN.md §2 HK=TW hybrid format"
+        confidence: high
+      - genre_id: romance_josei_drama
+        share_pct: 12
+        tier: secondary
+        research_citation: "research/2026-03-30_asian-persona-topic-market-fit.md §10 M2 (zh_HK) — loneliness 45% / attachment"
+        confidence: medium
+      - genre_id: supernatural_mystery
+        share_pct: 10
+        tier: secondary
+        research_citation: "research/2026-03-30_asian-persona-topic-market-fit.md §2 (silent grieving cultural norm; grief_companion_hk)"
+        confidence: high
+      - genre_id: dark_fantasy
+        share_pct: 10
+        tier: secondary
+        research_citation: "docs/CJK_CATALOG_PLAN.md §2 HK hybrid same as TW (literary palette)"
+        confidence: medium
+      - genre_id: psychological_thriller
+        share_pct: 8
+        tier: secondary
+        research_citation: "research/2026-03-30_asian-persona-topic-market-fit.md §2 (Gen Z 43% depression symptoms)"
+        confidence: high
+      - genre_id: school_coming_of_age
+        share_pct: 6
+        tier: niche
+        research_citation: "research/2026-03-30_asian-persona-topic-market-fit.md §2 (young adults 18-29 most affected)"
+        confidence: high
+      - genre_id: historical_period
+        share_pct: 4
+        tier: niche
+        research_citation: "research/2026-03-30_asian-persona-topic-market-fit.md §10 M2 (zh_HK)"
+        confidence: low
+      - genre_id: isekai
+        share_pct: 4
+        tier: niche
+        research_citation: "docs/CJK_CATALOG_PLAN.md §1 burnout→isekai applied to HK finance burnout"
+        confidence: low
+
+  ko_KR:
+    lane: cjk_genre_led
+    product_shape: genre_webtoon
+    status: active
+    distribution_note: hold_pending_market_clearance
+    genres:
+      - genre_id: romance_josei_drama
+        share_pct: 18
+        tier: primary
+        research_citation: "research/2026-03-30_asian-persona-topic-market-fit.md §6 ko-KR (webtoon-native; Kakao/Naver); docs/CJK_CATALOG_PLAN.md §2 KR vertical color"
+        confidence: high
+      - genre_id: isekai
+        share_pct: 14
+        tier: primary
+        research_citation: "docs/GENRE_PORTFOLIO_PLAN.md isekai mega digital (Solo Leveling model); research/2026-03-30_asian-persona-topic-market-fit.md §6"
+        confidence: high
+      - genre_id: action_battle
+        share_pct: 12
+        tier: primary
+        research_citation: "research/2026-03-30_asian-persona-topic-market-fit.md §6 (webtoon action tier); docs/GENRE_PORTFOLIO_PLAN.md"
+        confidence: high
+      - genre_id: psychological_horror
+        share_pct: 10
+        tier: secondary
+        research_citation: "research/2026-03-30_asian-persona-topic-market-fit.md §6 (suicide #1 ages 10-39 — careful genre-shell, not clinical)"
+        confidence: medium
+      - genre_id: workplace_drama
+        share_pct: 10
+        tier: secondary
+        research_citation: "research/2026-03-30_asian-persona-topic-market-fit.md §6 (burnout; suicide leading cause ages 40s)"
+        confidence: high
+      - genre_id: school_coming_of_age
+        share_pct: 10
+        tier: secondary
+        research_citation: "research/2026-03-30_asian-persona-topic-market-fit.md §6 (teen suicide rate record; youth webtoon)"
+        confidence: high
+      - genre_id: sci_fi_cyberpunk
+        share_pct: 8
+        tier: secondary
+        research_citation: "research/2026-03-30_asian-persona-topic-market-fit.md §6 (K-wellness tech-enabled; digital mental-health $3.6B by 2035)"
+        confidence: medium
+      - genre_id: iyashikei
+        share_pct: 8
+        tier: niche
+        research_citation: "research/2026-03-30_asian-persona-topic-market-fit.md §6 (K-wellness holistic self-care branding)"
+        confidence: medium
+      - genre_id: supernatural_mystery
+        share_pct: 5
+        tier: niche
+        research_citation: "docs/CJK_CATALOG_PLAN.md §1 mystery shell model"
+        confidence: low
+      - genre_id: dark_fantasy
+        share_pct: 5
+        tier: niche
+        research_citation: "docs/GENRE_PORTFOLIO_PLAN.md dark-fantasy mega"
+        confidence: low
+
+  # ─── FRANCE BD / MANGA (own mix) ─────────────────────────────────────────
+
+  fr_FR:
+    lane: fr_bd_manga
+    product_shape: bd_manga
+    status: active
+    genres:
+      - genre_id: workplace_drama
+        share_pct: 16
+        tier: primary
+        research_citation: "research/2026-03-30_europe-latam-persona-topic-market-fit.md §3 fr-FR (52% young workers loss of meaning; burn-out #1 topic)"
+        confidence: high
+      - genre_id: psychological_thriller
+        share_pct: 14
+        tier: primary
+        research_citation: "research/2026-03-30_europe-latam-persona-topic-market-fit.md §3 (anxiété #2; Christophe André acceptance model)"
+        confidence: high
+      - genre_id: romance_josei_drama
+        share_pct: 12
+        tier: primary
+        research_citation: "research/2026-03-30_europe-latam-persona-topic-market-fit.md §3 (confiance en soi; Kilomètre Zéro fiction+growth blend)"
+        confidence: high
+      - genre_id: dark_fantasy
+        share_pct: 12
+        tier: secondary
+        research_citation: "docs/specs/MANGA_MARKET_INTEGRATION_V1_SPEC.md §C (France #1 EU manga market 35% share; BD culture)"
+        confidence: high
+      - genre_id: historical_period
+        share_pct: 10
+        tier: secondary
+        research_citation: "research/2026-03-30_europe-latam-persona-topic-market-fit.md §3 (philosophical/intellectual tone; period BD tradition)"
+        confidence: medium
+      - genre_id: iyashikei
+        share_pct: 10
+        tier: secondary
+        research_citation: "research/2026-03-30_europe-latam-persona-topic-market-fit.md §3 (bien-être / épanouissement; meditation retreats 3x)"
+        confidence: high
+      - genre_id: supernatural_mystery
+        share_pct: 8
+        tier: secondary
+        research_citation: "research/2026-03-30_europe-latam-persona-topic-market-fit.md §3 (psychologie populaire porous with fiction)"
+        confidence: medium
+      - genre_id: psychological_horror
+        share_pct: 8
+        tier: niche
+        research_citation: "docs/specs/MANGA_MARKET_INTEGRATION_V1_SPEC.md §C (30% manga slice; genre-manga not picture-book-only)"
+        confidence: medium
+      - genre_id: school_coming_of_age
+        share_pct: 6
+        tier: niche
+        research_citation: "research/2026-03-30_europe-latam-persona-topic-market-fit.md §3 (64% of 18-35 bought self-help book)"
+        confidence: medium
+      - genre_id: action_battle
+        share_pct: 4
+        tier: niche
+        research_citation: "docs/specs/MANGA_MARKET_INTEGRATION_V1_SPEC.md §C (manga market share — shonen BD adjacency)"
+        confidence: low
+
+  # ─── Q-MANGA-01 CANDIDATE (not in locale_registry.yaml) ──────────────────
+
+  pt_BR:
+    lane: western_intent_led
+    product_shape: illustrated_self_help_picture_books
+    status: pending_ratification
+    note: >-
+      NOT in config/localization/locale_registry.yaml. Allocation block is
+      ratification-ready only. Registry cap amendment is a SEPARATE operator-gated PR.
+      Research exists in europe-latam §6 (WHO anxiety 9.3% world-highest; webtoon CAGR 40%+ LATAM).
+    genres:
+      - genre_id: iyashikei
+        share_pct: 20
+        tier: primary
+        research_citation: "research/2026-03-30_europe-latam-persona-topic-market-fit.md §6 pt-BR (ansiedade #1; spiritual/devotional self-help)"
+        confidence: high
+      - genre_id: psychological_thriller
+        share_pct: 16
+        tier: primary
+        research_citation: "research/2026-03-30_europe-latam-persona-topic-market-fit.md §6 (Augusto Cury anxiety bestsellers)"
+        confidence: high
+      - genre_id: romance_josei_drama
+        share_pct: 14
+        tier: primary
+        research_citation: "research/2026-03-30_europe-latam-persona-topic-market-fit.md §6 (webtoon/manga platforms; Conrad Editora)"
+        confidence: high
+      - genre_id: supernatural_mystery
+        share_pct: 12
+        tier: secondary
+        research_citation: "research/2026-03-30_europe-latam-persona-topic-market-fit.md §6 (Café com Deus Pai spiritual #1 book 2024-25)"
+        confidence: high
+      - genre_id: workplace_drama
+        share_pct: 10
+        tier: secondary
+        research_citation: "research/2026-03-30_europe-latam-persona-topic-market-fit.md Cross-Locale (productivity ** pt-BR)"
+        confidence: medium
+      - genre_id: school_coming_of_age
+        share_pct: 10
+        tier: secondary
+        research_citation: "research/2026-03-30_europe-latam-persona-topic-market-fit.md §6 (young population; smartphone 66.6%; webtoon GTM)"
+        confidence: high
+      - genre_id: isekai
+        share_pct: 8
+        tier: niche
+        research_citation: "research/2026-03-30_europe-latam-persona-topic-market-fit.md §6 (manga/webtoon opportunity; Social Comics)"
+        confidence: medium
+      - genre_id: dark_fantasy
+        share_pct: 6
+        tier: niche
+        research_citation: "research/2026-03-30_europe-latam-persona-topic-market-fit.md §6 (manga culture adjacency)"
+        confidence: low
+      - genre_id: sports_competition
+        share_pct: 4
+        tier: niche
+        research_citation: "research/2026-03-30_europe-latam-persona-topic-market-fit.md Cross-Locale (habits/productivity **)"
+        confidence: low

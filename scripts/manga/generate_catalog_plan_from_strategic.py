@@ -7,6 +7,7 @@ plan generator). Reads:
   - docs/GENRE_PORTFOLIO_PLAN.md      (37 brands × 12+ genres, per-brand %-allocations)
   - docs/CJK_CATALOG_PLAN.md          (per-locale format mix for JP/TW/CN/KR)
   - docs/US_CATALOG_PLAN.md           (US-specific guidance)
+  - config/manga/locale_genre_allocations.yaml  (M2 — per-locale genre mix; R1 chain)
 
 Emits a structured Markdown catalog plan replacing the stale hand-edited
 artifacts/manga/MANGA_FULL_CATALOG_PLAN.md (Apr 7-12, retired per D-3).
@@ -15,6 +16,11 @@ Per Phase 2X.1, this script does NOT auto-write the catalog plan to its target
 path. The actual replacement happens atomically in Phase 2X.4 per D-20. This
 script's default mode emits to stdout. Use --output PATH for explicit writes;
 --dry-run validates parse without writing.
+
+M2 (Roadmap §2): when locale_genre_allocations.yaml is present, per-locale
+series counts are allocation-derived (70% locale share × 30% brand strategic).
+Mass plan regeneration is M7 Wave A — this script proves the chain; callers
+must not mass-commit regenerated plans from an M2 PR.
 """
 from __future__ import annotations
 
@@ -23,13 +29,16 @@ import re
 import sys
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Iterable
+from typing import Any, Iterable
 
 REPO = Path(__file__).resolve().parents[2]
 
 GENRE_PORTFOLIO_PATH = REPO / "docs" / "GENRE_PORTFOLIO_PLAN.md"
 CJK_CATALOG_PATH = REPO / "docs" / "CJK_CATALOG_PLAN.md"
 US_CATALOG_PATH = REPO / "docs" / "US_CATALOG_PLAN.md"
+LOCALE_ALLOCATIONS_PATH = (
+    REPO / "config" / "manga" / "locale_genre_allocations.yaml"
+)
 
 # Per spec §4.1 — must match scripts/manga/generate_series_plans_from_catalog.py
 # VALID_GENRES exactly after Phase 2X.4 atomic flips the planner allow-list.
@@ -292,6 +301,93 @@ def compute_metadata_affinity(brand_desc: str, brand_id: str = "") -> dict[str, 
     return {g: v / peak for g, v in raw.items()}
 
 
+
+
+def load_locale_allocations(
+    path: Path,
+    *,
+    include_pending: bool = False,
+) -> dict[str, dict[str, float]]:
+    """Load per-locale genre share_pct maps from locale_genre_allocations.yaml.
+
+    Returns locale_id → {genre_id: share_pct}. Skips blocks with
+    status: pending_ratification unless include_pending=True (pt_BR / Q-MANGA-01).
+    """
+    try:
+        import yaml  # type: ignore
+    except ImportError as exc:  # pragma: no cover
+        raise SystemExit(
+            "error: PyYAML required to load locale_genre_allocations.yaml "
+            f"({exc})"
+        ) from exc
+
+    if not path.exists():
+        return {}
+
+    data: Any = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
+    locales_raw = data.get("locales") or {}
+    out: dict[str, dict[str, float]] = {}
+    for locale_id, block in locales_raw.items():
+        if not isinstance(block, dict):
+            continue
+        status = str(block.get("status") or "active").strip().lower()
+        if status == "pending_ratification" and not include_pending:
+            continue
+        shares: dict[str, float] = {}
+        for row in block.get("genres") or []:
+            if not isinstance(row, dict):
+                continue
+            gid = str(row.get("genre_id") or "").strip()
+            if gid not in VALID_GENRES:
+                continue
+            try:
+                shares[gid] = float(row.get("share_pct") or 0.0)
+            except (TypeError, ValueError):
+                continue
+        if shares:
+            out[str(locale_id)] = shares
+    return out
+
+
+def blend_locale_and_brand(
+    locale_shares: dict[str, float],
+    brand_pct: dict[str, float],
+    *,
+    locale_weight: float = 0.70,
+    brand_weight: float = 0.30,
+) -> dict[str, float]:
+    """Blend locale allocation shares with brand strategic % (both 0–100 scale)."""
+    blended: dict[str, float] = {}
+    for genre in VALID_GENRES:
+        loc = locale_shares.get(genre, 0.0)
+        br = brand_pct.get(genre, 0.0)
+        blended[genre] = locale_weight * loc + brand_weight * br
+    total = sum(blended.values())
+    if total <= 0:
+        # Uniform fallback — should not happen when allocation file is well-formed.
+        n = len(VALID_GENRES)
+        return {g: 100.0 / n for g in VALID_GENRES}
+    return {g: (v / total) * 100.0 for g, v in blended.items()}
+
+
+def locale_series_counts(
+    brand: "BrandAllocation",
+    locale_shares: dict[str, float] | None,
+) -> dict[str, int]:
+    """Per-locale series counts: allocation-derived when shares present.
+
+    When locale_shares is None (legacy / --no-allocations), fall back to the
+    brand's precomputed spread_counts (global matrix — pre-M2 behaviour).
+    """
+    if not locale_shares:
+        if brand.spread_counts:
+            return dict(brand.spread_counts)
+        return {
+            g: brand.series_per_genre(g) for g in VALID_GENRES
+            if brand.series_per_genre(g) > 0
+        }
+    blended = blend_locale_and_brand(locale_shares, brand.genre_pct)
+    return distribute_strategic_strict(brand.target_series, blended)
 
 
 def distribute_strategic_strict(
@@ -695,32 +791,78 @@ def parse_locale_formats(cjk_text: str) -> dict[str, LocaleConfig]:
 # ─── catalog plan emitter ───────────────────────────────────────────────────
 
 
-def emit_catalog_plan(brands: list[BrandAllocation], locales: dict[str, LocaleConfig]) -> str:
-    """Generate the new MANGA_FULL_CATALOG_PLAN.md content."""
+def emit_catalog_plan(
+    brands: list[BrandAllocation],
+    locales: dict[str, LocaleConfig],
+    *,
+    locale_allocations: dict[str, dict[str, float]] | None = None,
+    locale_order: tuple[str, ...] | None = None,
+) -> str:
+    """Generate the new MANGA_FULL_CATALOG_PLAN.md content.
+
+    When ``locale_allocations`` is provided (M2), per-locale series counts are
+    allocation-derived via ``locale_series_counts`` — closing research→allocation→plan.
+    """
     lines: list[str] = []
+    alloc = locale_allocations or {}
+    order = locale_order or VALID_LOCALES
+    # Ensure every locale in order has a LocaleConfig (scaffold if missing).
+    for lc_id in order:
+        if lc_id not in locales:
+            locales[lc_id] = LocaleConfig(
+                locale=lc_id,
+                format_mix={"primary": "color_vertical_webtoon"},
+                primary_platforms=["TBD"],
+                distribution_status=(
+                    "hold_pending_market_clearance" if lc_id == "ko_KR"
+                    else "gray_zone_disclosed" if lc_id == "zh_CN"
+                    else "distributed"
+                ),
+            )
+
+    allocation_mode = bool(alloc)
+    inputs_note = (
+        "docs/GENRE_PORTFOLIO_PLAN.md + docs/CJK_CATALOG_PLAN.md + "
+        "docs/US_CATALOG_PLAN.md + config/manga/locale_genre_allocations.yaml"
+        if allocation_mode
+        else "docs/GENRE_PORTFOLIO_PLAN.md + docs/CJK_CATALOG_PLAN.md + docs/US_CATALOG_PLAN.md"
+    )
 
     # Header
     lines.extend([
         "<!-- AUTO-GENERATED — do not hand-edit. -->",
         "<!-- Source: scripts/manga/generate_catalog_plan_from_strategic.py -->",
-        "<!-- Inputs: docs/GENRE_PORTFOLIO_PLAN.md + docs/CJK_CATALOG_PLAN.md + docs/US_CATALOG_PLAN.md -->",
+        f"<!-- Inputs: {inputs_note} -->",
         "<!-- Per specs/MANGA_CATALOG_RECONCILIATION_SPEC.md §7.1 + D-17 -->",
+        (
+            "<!-- M2: per-locale series counts are allocation-derived "
+            "(70% locale share × 30% brand strategic). -->"
+            if allocation_mode
+            else "<!-- Legacy: per-locale series counts mirror the global brand matrix. -->"
+        ),
         "",
         "# Phoenix Omega — Manga Full Catalog Plan",
         "",
         "Auto-generated from the strategic-tier plans. To update this file, edit the source",
         "strategic docs and re-run the generator.",
         "",
-        "## Locales (per D-18, 5-locale matrix)",
+        (
+            f"## Locales ({len(order)}-locale matrix"
+            + (" — allocation-derived" if allocation_mode else "")
+            + ")"
+        ),
         "",
-        "| Locale | Primary format | Platform(s) | Distribution status |",
-        "|---|---|---|---|",
+        "| Locale | Primary format | Platform(s) | Distribution status | Allocation |",
+        "|---|---|---|---|---|",
     ])
-    for lc_id in VALID_LOCALES:
+    for lc_id in order:
         lc = locales[lc_id]
         platforms = ", ".join(lc.primary_platforms)
         fmt = lc.format_mix.get("primary", "n/a")
-        lines.append(f"| {lc_id} | {fmt} | {platforms} | {lc.distribution_status} |")
+        alloc_flag = "yes" if lc_id in alloc else "fallback-global"
+        lines.append(
+            f"| {lc_id} | {fmt} | {platforms} | {lc.distribution_status} | {alloc_flag} |"
+        )
     lines.append("")
 
     # Brand portfolio summary
@@ -741,19 +883,31 @@ def emit_catalog_plan(brands: list[BrandAllocation], locales: dict[str, LocaleCo
     lines.append("")
 
     # Series rows by brand × locale × genre
+    count_rule = (
+        "allocation-derived (`locale_share × 0.70 + brand_strategic × 0.30`, "
+        "largest-remainder to `target_series`)"
+        if allocation_mode
+        else "the integer round of `target_series × genre_pct` for each genre slug "
+        "(identical across locales — pre-M2 global matrix)"
+    )
     lines.extend([
         "## Catalog rows (brand × locale × genre)",
         "",
         f"Total brands parsed: **{len(brands)}**.",
-        f"Total locales: **{len(VALID_LOCALES)}** (per D-18).",
+        f"Total locales: **{len(order)}**.",
         f"Total genre slugs in allow-list: **{len(VALID_GENRES)}** (per §4.1).",
+        f"Allocation mode: **{'on' if allocation_mode else 'off'}**.",
         "",
-        "Each row below represents one brand × locale slice. The series count is",
-        "the integer round of `target_series × genre_pct` for each genre slug.",
+        f"Each row below represents one brand × locale slice. The series count is {count_rule}.",
         "",
     ])
 
     total_series_count = 0
+    # Per-locale genre totals for the M2 proof artifact / summary.
+    locale_genre_totals: dict[str, dict[str, int]] = {
+        lc_id: {g: 0 for g in VALID_GENRES} for lc_id in order
+    }
+
     for brand in sorted(brands, key=lambda b: b.brand_id):
         lines.append(f"### `{brand.brand_id}` ({brand.tier} — {brand.target_series} series target)")
         if brand.description:
@@ -761,16 +915,39 @@ def emit_catalog_plan(brands: list[BrandAllocation], locales: dict[str, LocaleCo
         lines.append("")
         lines.append("| Locale | Genre | Series count | Distribution status |")
         lines.append("|---|---|---|---|")
-        for lc_id in VALID_LOCALES:
+        for lc_id in order:
             lc = locales[lc_id]
+            shares = alloc.get(lc_id)
+            counts = locale_series_counts(brand, shares)
             for genre in VALID_GENRES:
-                count = brand.series_per_genre(genre)
+                count = counts.get(genre, 0)
                 if count <= 0:
                     continue
                 lines.append(
                     f"| {lc_id} | {genre} | {count} | {lc.distribution_status} |"
                 )
                 total_series_count += count
+                locale_genre_totals[lc_id][genre] += count
+        lines.append("")
+
+    # Per-locale genre distribution summary (M2 proof surface)
+    lines.extend([
+        "## Per-locale genre distribution",
+        "",
+        "Aggregate series counts across all brands, by locale × genre.",
+        "",
+    ])
+    for lc_id in order:
+        totals = locale_genre_totals[lc_id]
+        active = [(g, n) for g, n in totals.items() if n > 0]
+        active.sort(key=lambda kv: -kv[1])
+        total = sum(n for _, n in active) or 1
+        lines.append(f"### `{lc_id}` (total series rows: {sum(n for _, n in active)})")
+        lines.append("")
+        lines.append("| Genre | Series | Share of locale |")
+        lines.append("|---|---|---|")
+        for genre, n in active:
+            lines.append(f"| {genre} | {n} | {100.0 * n / total:.1f}% |")
         lines.append("")
 
     # Summary
@@ -778,13 +955,15 @@ def emit_catalog_plan(brands: list[BrandAllocation], locales: dict[str, LocaleCo
         "## Summary",
         "",
         f"- **Brands**: {len(brands)}",
-        f"- **Locales**: {len(VALID_LOCALES)}",
+        f"- **Locales**: {len(order)}",
         f"- **Genres**: {len(VALID_GENRES)}",
+        f"- **Allocation mode**: {'on' if allocation_mode else 'off'}",
         f"- **Total localized series rows**: {total_series_count}",
         f"- **Estimated chapters at 14/series**: {total_series_count * 14}",
         "",
         "Per spec D-20, this catalog plan is materialized to disk by Phase 2X.4",
         "atomic PR (schema flip + 132+716 stale YAML deletion + regenerate).",
+        "M2 proves allocation-derived mixes; mass per-locale regeneration is M7 Wave A.",
         "",
     ])
 
@@ -825,6 +1004,25 @@ def main(argv: list[str] | None = None) -> int:
         default=US_CATALOG_PATH,
         help=f"Path to US_CATALOG_PLAN.md (default: {US_CATALOG_PATH.relative_to(REPO)})",
     )
+    parser.add_argument(
+        "--allocations",
+        type=Path,
+        default=LOCALE_ALLOCATIONS_PATH,
+        help=(
+            "Path to locale_genre_allocations.yaml (M2). "
+            f"Default: {LOCALE_ALLOCATIONS_PATH.relative_to(REPO)}"
+        ),
+    )
+    parser.add_argument(
+        "--no-allocations",
+        action="store_true",
+        help="Ignore locale_genre_allocations.yaml (pre-M2 global-matrix behaviour).",
+    )
+    parser.add_argument(
+        "--include-pending",
+        action="store_true",
+        help="Include pending_ratification locales (e.g. pt_BR / Q-MANGA-01).",
+    )
     args = parser.parse_args(argv)
 
     for path in (args.genre_portfolio, args.cjk_catalog, args.us_catalog):
@@ -851,6 +1049,7 @@ def main(argv: list[str] | None = None) -> int:
     # across all 15 genres, biased by strategic %-allocation + description tags.
     # Per operator directive (2026-04-26): ALL brands get genre spread; some
     # get a little more, some a little less, based on metadata.
+    # Used as the fallback when --no-allocations or a locale lacks a block.
     for brand in brands:
         affinity = compute_metadata_affinity(brand.description, brand.brand_id)
         brand.spread_counts = distribute_with_spread(
@@ -860,16 +1059,55 @@ def main(argv: list[str] | None = None) -> int:
             tier=brand.tier,
         )
 
+    alloc: dict[str, dict[str, float]] = {}
+    if not args.no_allocations:
+        alloc = load_locale_allocations(
+            args.allocations,
+            include_pending=args.include_pending,
+        )
+
+    # Locale order: allocation keys (registry order preserved by YAML) when
+    # allocation mode is on; else legacy VALID_LOCALES.
+    if alloc:
+        locale_order: tuple[str, ...] = tuple(alloc.keys())
+    else:
+        locale_order = VALID_LOCALES
+
     if args.dry_run:
-        # Report distribution stats
         spread_total = sum(sum(b.spread_counts.values()) for b in brands)
-        print(f"dry-run: parsed {len(brands)} brands × {len(locales)} locales OK")
-        print(f"dry-run: spread distribution = {spread_total} series per locale × 5 locales = {spread_total * 5} localized rows")
+        mode = "allocation-derived" if alloc else "global-matrix"
+        print(
+            f"dry-run: parsed {len(brands)} brands × {len(locale_order)} locales OK "
+            f"(mode={mode})"
+        )
+        if alloc:
+            # Sample one flagship brand across locales to prove mixes diverge.
+            sample = next(
+                (b for b in brands if b.tier == "flagship"),
+                brands[0],
+            )
+            for lc_id, shares in list(alloc.items())[:3]:
+                counts = locale_series_counts(sample, shares)
+                top = sorted(counts.items(), key=lambda kv: -kv[1])[:3]
+                top_s = ", ".join(f"{g}={n}" for g, n in top)
+                print(f"dry-run: sample `{sample.brand_id}` @ {lc_id}: {top_s}")
+        else:
+            print(
+                f"dry-run: spread distribution = {spread_total} series per locale "
+                f"× {len(locale_order)} locales = "
+                f"{spread_total * len(locale_order)} localized rows"
+            )
         return 0
 
-    output = emit_catalog_plan(brands, locales)
+    output = emit_catalog_plan(
+        brands,
+        locales,
+        locale_allocations=alloc or None,
+        locale_order=locale_order,
+    )
 
     if args.output:
+        args.output.parent.mkdir(parents=True, exist_ok=True)
         args.output.write_text(output, encoding="utf-8")
         print(f"wrote {args.output} ({len(output)} bytes)")
     else:

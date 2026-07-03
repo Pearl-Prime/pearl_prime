@@ -585,4 +585,68 @@ The Asian self-help/wellness audiobook market represents a convergence of acute 
 
 ---
 
-*Research compiled 2026-03-30. All market projections are forward-looking estimates from cited sources and should be validated against primary platform data before brand launch decisions.*
+## 9. M2 Genre Allocation — zh-SG (Singapore) disaggregation
+
+**Date:** 2026-07-04 · **Milestone:** M2 (Roadmap §2 item 2) · **Method:** REUSE-FIRST —
+disaggregate §4 market-level findings into per-genre allocation shares. No new market survey.
+
+**Lane call:** `western_intent_led` / illustrated self-help picture books (Q-MANGA-02 default).
+Singapore is English-dominant in commerce with Mandarin bilingual content
+(`locale_registry.yaml` header). Readers arrive by *intent* (burnout, sleep, hustle-culture
+recovery), not by manga genre shelf — so the Western picture-book shape fits better than
+pure CJK genre-led, with light CJK shells (isekai, sci-fi) at the bilingual margin.
+
+| genre_id | share% | tier | Derivation from §4 |
+|---|---|---|---|
+| workplace_drama | 22 | primary | 61% employee burnout; 68% Gen Z burnout; Workplace Fairness Act 2025 |
+| iyashikei | 18 | primary | Sleep-deprived city; mental wellness #1 priority ages 20–29 |
+| psychological_thriller | 14 | primary | 62% Gen Z daily stress; panic/anxiety supporting brands |
+| school_coming_of_age | 12 | secondary | Gen Z hustle-culture counter-narratives; quiet quitting |
+| romance_josei_drama | 10 | secondary | Multicultural attachment dynamics (§4.2 inner_security_sg) |
+| supernatural_mystery | 8 | secondary | Multicultural grief practices (Chinese/Malay/Indian/Western) |
+| sci_fi_cyberpunk | 6 | niche | Tech-hub identity; AI-adaptation self-help adjacency |
+| isekai | 5 | niche | Burnout→exit-the-system shell (CJK_CATALOG_PLAN §1) at low share |
+| dark_fantasy | 5 | niche | Grief/meaning shells at margin |
+
+**Confidence:** high on primary rows (direct §4 metrics); medium/low on niche CJK shells
+(implication from CJK plan, not SG-specific manga shelf data).
+
+Encoded in `config/manga/locale_genre_allocations.yaml` → `locales.zh_SG`.
+
+---
+
+## 10. M2 Genre Allocation — zh-HK (Hong Kong)
+
+**Date:** 2026-07-04 · **Milestone:** M2 (Roadmap §2 item 2) · **Method:** Author genre
+allocation from §2 market evidence + CJK_CATALOG_PLAN §2 HK addendum (format defaults to TW;
+strategic divergence was the deferred Pearl_Research task — this section closes it for genre mix).
+
+**Lane call:** `cjk_genre_led` / genre manga. HK shares Traditional Chinese + TW hybrid format
+(manga page layout, atmospheric/literary palette, French BD influence). Finance-sector burnout
+and insomnia prevalence point to workplace + psych-horror + iyashikei as the spine; romance and
+mystery carry loneliness/grief cultural norms.
+
+| genre_id | share% | tier | Derivation from §2 + CJK plan §2 |
+|---|---|---|---|
+| workplace_drama | 20 | primary | 49% burnout (doubled YoY); finance/banking long hours; 77% job-related MH issues |
+| psychological_horror | 14 | primary | 46% depression/anxiety; 39.4% insomnia — genre shell, not clinical shelf |
+| iyashikei | 12 | primary | 身心健康 / 減壓 framing; sleep-repair demand; TW-hybrid literary register |
+| romance_josei_drama | 12 | secondary | 45% cite loneliness; attachment/economic-instability stressors |
+| supernatural_mystery | 10 | secondary | Silent grieving cultural norm; grief_companion_hk |
+| dark_fantasy | 10 | secondary | TW-hybrid literary palette (CJK plan §2) |
+| psychological_thriller | 8 | secondary | Gen Z 18–29 most affected (43% depression symptoms) |
+| school_coming_of_age | 6 | niche | Young-adult concentration of symptoms |
+| historical_period | 4 | niche | Literary register adjacency |
+| isekai | 4 | niche | Finance-burnout → exit-system shell at low share |
+
+**Confidence:** high on primary rows (direct §2 metrics); medium on secondary; low on
+historical/isekai niche.
+
+Encoded in `config/manga/locale_genre_allocations.yaml` → `locales.zh_HK`.
+
+---
+
+*Research compiled 2026-03-30; §§9–10 genre-allocation disaggregations appended 2026-07-04 (M2).
+All market projections are forward-looking estimates from cited sources and should be validated
+against primary platform data before brand launch decisions.*
+

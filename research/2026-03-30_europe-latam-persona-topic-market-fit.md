@@ -455,3 +455,66 @@ This report provides market-fit data for therapeutic and self-help content acros
 [41] [World Population Review - Anxiety Rates by Country 2026](https://worldpopulationreview.com/country-rankings/anxiety-rates-by-country)
 
 [42] [Bloomberg Linea - Spanish-Language Audiobook Subscriptions](https://www.bloomberglinea.com/english/listeners-in-mexico-spain-lead-surge-in-spanish-language-audiobook-subscriptions/)
+
+---
+
+## 7. M2 Genre Allocation — it_IT (Italy)
+
+**Date:** 2026-07-04 · **Milestone:** M2 (Roadmap §2 item 2) · **Method:** REUSE-FIRST —
+Italy was absent from the original six-locale scope (§0). This section authors a genre
+allocation by peer-pattern from fr_FR / de_DE / es_ES (ebook-forward EU markets with
+manga/fumetti adjacency), not a fresh market survey. Confidence is medium throughout
+until a dedicated Italy pass lands.
+
+**Lane call:** `western_intent_led` / illustrated self-help picture books (Q-MANGA-02 default).
+Italy is ebook-forward per generator VALID_LOCALES commentary (2026-05-29 ratification note:
+DE/IT ebook-forward; FR/BR genuine manga cultures). Fumetti/manga adjacency supports a
+higher romance + historical share than pure US picture-book mix, but not fr_FR's full BD lane.
+
+| genre_id | share% | tier | Derivation |
+|---|---|---|---|
+| iyashikei | 20 | primary | EU peer pattern (fr_FR bien-être / es_ES +47% self-help growth) |
+| romance_josei_drama | 16 | primary | Fumetti/romance adjacency; EU relationship-topic overlap |
+| workplace_drama | 14 | primary | Peer to fr_FR burn-out #1 and de_DE 44% burnout |
+| psychological_thriller | 14 | secondary | EU-wide anxiety ** in Cross-Locale matrix |
+| historical_period | 10 | secondary | Strong Italian period/literary tradition (peer inference) |
+| supernatural_mystery | 8 | secondary | Gentle metaphor shells for mental-wellness topics |
+| school_coming_of_age | 8 | niche | Youth ebook segment (peer to es_ES/de_DE) |
+| dark_fantasy | 6 | niche | EU manga-margin genre shell |
+| sports_competition | 4 | niche | Performance/motivation frame at low share |
+
+**Confidence:** medium on all rows (peer-derived; no Italy-primary sources in this triad).
+Flagged for a future Italy-primary research upgrade.
+
+Encoded in `config/manga/locale_genre_allocations.yaml` → `locales.it_IT`.
+
+---
+
+## 8. M2 Genre Allocation — hu_HU (Hungary) upgrade
+
+**Date:** 2026-07-04 · **Milestone:** M2 (Roadmap §2 item 2) · **Method:** REUSE-FIRST —
+upgrade §5 market-level findings (opportunity score 5/10, very-high stigma, romance 20% of
+sales, self-development "considerably lower share") into per-genre allocation shares.
+
+**Lane call:** `western_intent_led` / illustrated self-help picture books. Stigma-safe
+framing is mandatory: §5 requires *önismeret* (self-knowledge) not clinical "fixing."
+Romance shells carry wellness because romance already dominates the shelf; iyashikei and
+mystery provide non-clinical entry points.
+
+| genre_id | share% | tier | Derivation from §5 |
+|---|---|---|---|
+| iyashikei | 24 | primary | Stigma-safe gentle register; önismeret framing |
+| psychological_thriller | 16 | primary | Szorongás is the most central help-seeking node |
+| romance_josei_drama | 16 | primary | Romance = 20% of book sales; ride existing shelf |
+| supernatural_mystery | 12 | secondary | Metaphor shells avoid clinical mental-illness framing |
+| workplace_drama | 10 | secondary | Cross-Locale burnout * |
+| school_coming_of_age | 8 | secondary | Digital self-help bridging rural professional scarcity |
+| historical_period | 8 | niche | World literature dominates sales — period shells fit |
+| dark_fantasy | 4 | niche | Margin genre shell |
+| sports_competition | 2 | niche | Minimal performance frame |
+
+**Confidence:** high on romance + anxiety primaries (direct §5); medium on secondary;
+low on dark_fantasy / sports niche.
+
+Encoded in `config/manga/locale_genre_allocations.yaml` → `locales.hu_HU`.
+
