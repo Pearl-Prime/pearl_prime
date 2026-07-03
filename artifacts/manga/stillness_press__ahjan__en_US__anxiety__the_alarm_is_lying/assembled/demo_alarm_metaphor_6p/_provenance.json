@@ -1,0 +1,173 @@
+{
+  "manifest": "artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/assembly_manifests/demo_alarm_metaphor_6p.yaml",
+  "manifest_sha256": "d720d79e8a08436e5e6c5db4efa2cd2f80647d2495833a23feb803fdb36f5255",
+  "series_id": "stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying",
+  "panels": 6,
+  "layers_total": 18,
+  "layers_real": 11,
+  "layers_interim": 7,
+  "records": [
+    {
+      "panel_id": "demo_p1_therapist_memory",
+      "layer_class": "L0",
+      "z": 0,
+      "asset": "artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L0/L0_2b9283d4c387.png",
+      "bytes": 1935875,
+      "provenance": "REAL",
+      "provenance_note": ""
+    },
+    {
+      "panel_id": "demo_p1_therapist_memory",
+      "layer_class": "L1",
+      "z": 10,
+      "asset": "artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/image_bank_sprites/wall_alarm_green_idle_INTERIM.png",
+      "bytes": 48953,
+      "provenance": "INTERIM",
+      "provenance_note": "rembg isnet cut from REAL composed_v3 ep_001_seg_025; replace via L1 render per object_inventory"
+    },
+    {
+      "panel_id": "demo_p1_therapist_memory",
+      "layer_class": "L2",
+      "z": 20,
+      "asset": "artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L2/L2_3210c57437fb_alpha.png",
+      "bytes": 1788182,
+      "provenance": "REAL",
+      "provenance_note": ""
+    },
+    {
+      "panel_id": "demo_p2_alarm_gaze",
+      "layer_class": "L0",
+      "z": 0,
+      "asset": "artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L0/L0_f3bc5f4cc41f.png",
+      "bytes": 1970859,
+      "provenance": "REAL",
+      "provenance_note": ""
+    },
+    {
+      "panel_id": "demo_p2_alarm_gaze",
+      "layer_class": "L1",
+      "z": 10,
+      "asset": "artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/image_bank_sprites/wall_alarm_green_idle_INTERIM.png",
+      "bytes": 48953,
+      "provenance": "INTERIM",
+      "provenance_note": "same INTERIM sprite, re-placed at a different scale \u2014 the bank-reuse demonstration"
+    },
+    {
+      "panel_id": "demo_p2_alarm_gaze",
+      "layer_class": "L2",
+      "z": 20,
+      "asset": "artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L2/L2_aaaf0385e52e_alpha.png",
+      "bytes": 1631464,
+      "provenance": "REAL",
+      "provenance_note": ""
+    },
+    {
+      "panel_id": "demo_p3_kettle_macro",
+      "layer_class": "L0",
+      "z": 0,
+      "asset": "artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L0/L0_f5f1f916e1bb.png",
+      "bytes": 1935875,
+      "provenance": "REAL",
+      "provenance_note": ""
+    },
+    {
+      "panel_id": "demo_p3_kettle_macro",
+      "layer_class": "L3",
+      "z": 30,
+      "asset": "artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/image_bank_sprites/kettle_on_burner_boiling_INTERIM.png",
+      "bytes": 68387,
+      "provenance": "INTERIM",
+      "provenance_note": "rembg isnet cut from REAL composed_v3 ep_001_seg_027; replace per object_inventory kettle/on_burner_boiling"
+    },
+    {
+      "panel_id": "demo_p3_kettle_macro",
+      "layer_class": "L4",
+      "z": 40,
+      "asset": "artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/image_bank_sprites/steam_wisp_procedural_INTERIM.png",
+      "bytes": 156830,
+      "provenance": "INTERIM",
+      "provenance_note": "procedural PIL wisp; replace with \u00a74.5 black-backdrop L4 render"
+    },
+    {
+      "panel_id": "demo_p4_watching_kettle",
+      "layer_class": "L0",
+      "z": 0,
+      "asset": "artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L0/L0_2b9283d4c387.png",
+      "bytes": 1935875,
+      "provenance": "REAL",
+      "provenance_note": ""
+    },
+    {
+      "panel_id": "demo_p4_watching_kettle",
+      "layer_class": "L2",
+      "z": 20,
+      "asset": "artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L2/L2_6003bcacf3a5_alpha.png",
+      "bytes": 1760613,
+      "provenance": "REAL",
+      "provenance_note": ""
+    },
+    {
+      "panel_id": "demo_p4_watching_kettle",
+      "layer_class": "L3",
+      "z": 30,
+      "asset": "artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/image_bank_sprites/kettle_on_burner_boiling_INTERIM.png",
+      "bytes": 68387,
+      "provenance": "INTERIM",
+      "provenance_note": "same kettle sprite, mirrored + rescaled \u2014 object reuse across panels"
+    },
+    {
+      "panel_id": "demo_p4_watching_kettle",
+      "layer_class": "L4",
+      "z": 40,
+      "asset": "artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/image_bank_sprites/steam_wisp_procedural_INTERIM.png",
+      "bytes": 156830,
+      "provenance": "INTERIM",
+      "provenance_note": ""
+    },
+    {
+      "panel_id": "demo_p5_noticing",
+      "layer_class": "L0",
+      "z": 0,
+      "asset": "artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L0/L0_f3bc5f4cc41f.png",
+      "bytes": 1970859,
+      "provenance": "REAL",
+      "provenance_note": ""
+    },
+    {
+      "panel_id": "demo_p5_noticing",
+      "layer_class": "L2",
+      "z": 20,
+      "asset": "artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L2/L2_2fb7ddd5e1a3_alpha.png",
+      "bytes": 2079773,
+      "provenance": "REAL",
+      "provenance_note": ""
+    },
+    {
+      "panel_id": "demo_p6_resolution",
+      "layer_class": "L0",
+      "z": 0,
+      "asset": "artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L0/L0_2b9283d4c387.png",
+      "bytes": 1935875,
+      "provenance": "REAL",
+      "provenance_note": ""
+    },
+    {
+      "panel_id": "demo_p6_resolution",
+      "layer_class": "L1",
+      "z": 10,
+      "asset": "artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/image_bank_sprites/wall_alarm_green_idle_INTERIM.png",
+      "bytes": 48953,
+      "provenance": "INTERIM",
+      "provenance_note": ""
+    },
+    {
+      "panel_id": "demo_p6_resolution",
+      "layer_class": "L2",
+      "z": 20,
+      "asset": "artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L2/L2_ebbbf9da6966_alpha.png",
+      "bytes": 1874848,
+      "provenance": "REAL",
+      "provenance_note": ""
+    }
+  ]
+}

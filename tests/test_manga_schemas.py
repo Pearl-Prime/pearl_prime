@@ -210,6 +210,23 @@ def _minimal_payload(stem: str) -> dict:
             "series_id": "stillness_press__ahjan__gen_z__anxiety",
             "format": "color_vertical_webtoon",
         },
+        "assembly_manifest": {
+            "schema_version": "1.0.0",
+            "series_id": "stillness_press__ahjan__gen_z__anxiety",
+            "canvas": {"width": 1080, "height": 1920},
+            "panels": [
+                {
+                    "panel_id": "p1",
+                    "layers": [
+                        {
+                            "layer_class": "L0",
+                            "asset": "bank/L0/kitchen.png",
+                            "provenance": "REAL",
+                        },
+                    ],
+                },
+            ],
+        },
         "ite_fractal_report": {
             "schema_version": "1.0.0",
             "artifact_type": "ite_fractal_report",
