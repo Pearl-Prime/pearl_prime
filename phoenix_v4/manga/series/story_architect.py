@@ -3,7 +3,10 @@
 from __future__ import annotations
 
 import hashlib
-from typing import Any
+from typing import Any, Optional
+
+# M4: mode vessels are loaded via the existing loader (call-reachability).
+# Additive — no behavior change unless ``mode`` is set on the series.
 
 
 # ── Beat templates per arc stage ────────────────────────────────────
@@ -400,6 +403,129 @@ def _generate_strategy_chapters(
     return chapters
 
 
+# genre_id / strategy aliases → vessel config keys in manga_mode_vessels.yaml
+_VESSEL_GENRE_KEYS: dict[str, str] = {
+    "iyashikei": "iyashikei",
+    "healing": "iyashikei",
+    "healing_iyashikei": "iyashikei",
+    "supernatural_everyday": "iyashikei",
+    "slice_of_life": "iyashikei",
+    "dark_fantasy": "dark_fantasy",
+    "mecha": "mecha",
+    "supernatural_mystery": "supernatural_mystery",
+    "psychological_thriller": "psychological_thriller",
+    "psych_thriller": "psychological_thriller",
+    "thriller": "psychological_thriller",
+    "romance_josei_drama": "romance_josei_drama",
+    "romance": "romance_josei_drama",
+    "josei": "romance_josei_drama",
+    "shojo": "romance_josei_drama",
+    "shoujo": "romance_josei_drama",
+    "workplace_drama": "workplace_drama",
+    "workplace": "workplace_drama",
+    "sci_fi_cyberpunk": "sci_fi_cyberpunk",
+    "cyberpunk": "sci_fi_cyberpunk",
+    "sci_fi": "sci_fi_cyberpunk",
+    "psychological_horror": "psychological_horror",
+    "horror": "psychological_horror",
+    "psych_horror": "psychological_horror",
+    "action_battle": "action_battle",
+    "battle": "action_battle",
+    "action": "action_battle",
+    "shonen": "action_battle",
+    "seinen": "psychological_thriller",
+    "historical_period": "historical_period",
+    "historical": "historical_period",
+    "isekai": "isekai",
+    "sports_competition": "sports_competition",
+    "sports": "sports_competition",
+    "school_coming_of_age": "school_coming_of_age",
+    "school": "school_coming_of_age",
+    "cultivation_martial": "cultivation_martial",
+    "cultivation": "cultivation_martial",
+}
+
+
+def resolve_vessel_genre(genre_id: str) -> str:
+    """Map a story-architect genre_id onto a manga_mode_vessels.yaml key."""
+    key = (genre_id or "").strip().lower()
+    return _VESSEL_GENRE_KEYS.get(key, key)
+
+
+def _vessel_beat_keys(mode: str) -> tuple[str, str, str]:
+    if mode == "music":
+        return ("opening", "mid", "closing")
+    return ("wound", "turn", "renewal")
+
+
+def apply_mode_vessel(
+    chapters: list[dict[str, Any]],
+    *,
+    genre_id: str,
+    mode: str,
+    repo_root: Optional[Any] = None,
+) -> tuple[list[dict[str, Any]], dict[str, Any]]:
+    """Weave the genre-native mode vessel into chapter beats (M4).
+
+    Calls ``phoenix_v4.manga.mode.vessels.load_vessel`` — the existing loader —
+    so manga_mode_vessels.yaml gains call-reachability. Injects one carrier beat
+    per chapter (wound/turn/renewal or opening/mid/closing) at beat_index 0 of
+    chapters 1–3. Returns (chapters, vessel_meta).
+    """
+    from phoenix_v4.manga.mode.vessels import load_vessel
+    from phoenix_v4.manga.mode.validator import ModeError, MODES
+
+    mode_norm = str(mode).strip().lower()
+    if mode_norm not in MODES:
+        raise ModeError(f"mode must be one of {MODES}, got {mode!r}")
+
+    vessel_genre = resolve_vessel_genre(genre_id)
+    vessel = load_vessel(vessel_genre, mode_norm, repo_root=repo_root)
+    beats_map = vessel.get("beats") or {}
+    keys = _vessel_beat_keys(mode_norm)
+    vessel_name = str(vessel.get("vessel") or "")
+    vessel_desc = str(vessel.get("vessel_desc") or "")
+
+    out: list[dict[str, Any]] = []
+    for idx, ch in enumerate(chapters):
+        ch2 = dict(ch)
+        plot = [dict(b) for b in (ch.get("plot_beats") or [])]
+        key = keys[min(idx, len(keys) - 1)]
+        skeleton = str(beats_map.get(key) or "").strip()
+        if skeleton:
+            beat_text = (
+                f"[mode:{mode_norm} vessel:{vessel_name} / {key}] {skeleton} "
+                f"— apparatus: {vessel_desc}. Teacher/musician is NEVER named; "
+                f"the vessel carries the mode diegetically."
+            )
+            injected = {
+                "beat_index": 0,
+                "beat_text": beat_text,
+                "is_carrier_beat": True,
+                "camera_hint": "medium",
+                "mood_hint": "hopeful" if key in ("renewal", "closing", "turn", "mid") else "tense",
+                "mode_vessel_beat": key,
+            }
+            # Re-index existing beats after the injection.
+            rest = []
+            for bi, b in enumerate(plot, start=1):
+                b2 = dict(b)
+                b2["beat_index"] = bi
+                rest.append(b2)
+            plot = [injected] + rest
+        ch2["plot_beats"] = plot
+        out.append(ch2)
+
+    meta = {
+        "mode": mode_norm,
+        "vessel_genre": vessel_genre,
+        "vessel": vessel_name,
+        "vessel_desc": vessel_desc,
+        "beats": {k: beats_map.get(k) for k in keys},
+    }
+    return out, meta
+
+
 def build_story_architecture_internal(
     *,
     series_id: str,
@@ -408,12 +534,18 @@ def build_story_architecture_internal(
     chapters: list[dict[str, Any]] | None = None,
     genre_id: str = "shonen",
     topic: str = "",
+    mode: Optional[str] = None,
+    repo_root: Optional[Any] = None,
 ) -> dict[str, Any]:
     """Build ``story_architecture_internal`` with optional carrier metadata on beats.
 
     When *chapters* is ``None``, generates a full 3-chapter arc with 12 beats
     per chapter (36 panels total across ~9 pages), using *genre_id* to select
     setting, protagonist, and rival names.
+
+    When *mode* is ``\"teacher\"`` or ``\"music\"``, the genre-native vessel from
+    ``config/manga/manga_mode_vessels.yaml`` is woven into beats via
+    ``load_vessel`` (M4). Legacy callers omit *mode* — behavior unchanged.
 
     Writer handoff strips beats to ``beat_index`` + ``beat_text`` only
     (see ``transmission.story_architecture_internal_to_handoff``).
@@ -433,7 +565,16 @@ def build_story_architecture_internal(
             note = "strategy_driven"
         else:
             chapters = _generate_default_chapters(series_id, arc_id, genre_id)
-    return {
+
+    vessel_meta: dict[str, Any] | None = None
+    mode_norm = (str(mode).strip().lower() if mode else "") or None
+    if mode_norm:
+        chapters, vessel_meta = apply_mode_vessel(
+            chapters, genre_id=genre_id, mode=mode_norm, repo_root=repo_root,
+        )
+        note = f"{note}+mode_vessel"
+
+    out: dict[str, Any] = {
         "schema_version": schema_version,
         "artifact_type": "story_architecture_internal",
         "series_id": series_id,
@@ -442,3 +583,7 @@ def build_story_architecture_internal(
         "transmission_audit": {"note": note},
         "constraint_checks": {"passed": True},
     }
+    if vessel_meta is not None:
+        out["mode"] = vessel_meta["mode"]
+        out["mode_vessel"] = vessel_meta
+    return out

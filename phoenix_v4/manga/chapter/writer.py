@@ -39,21 +39,75 @@ def _story_chapter_excerpt(
     raise ValueError(f"No chapter {chapter_number} in story_architecture_handoff")
 
 
+def _mode_vessel_prompt_block(
+    story_handoff: Mapping[str, Any],
+    *,
+    mode: str | None = None,
+    genre_id: str | None = None,
+) -> str:
+    """Append mode-vessel craft rules when mode is set (M4).
+
+    Calls ``load_vessel`` so manga_mode_vessels.yaml is on a callable path from
+    the chapter-writer prompt assembly. Empty string when mode is unset (legacy).
+    """
+    mode_norm = (mode or story_handoff.get("mode") or "").strip().lower()
+    if mode_norm not in ("teacher", "music"):
+        return ""
+    genre = (
+        genre_id
+        or story_handoff.get("genre_id")
+        or story_handoff.get("genre")
+        or (story_handoff.get("mode_vessel") or {}).get("vessel_genre")
+        or ""
+    )
+    if not genre:
+        return ""
+    from phoenix_v4.manga.mode.vessels import VesselError, load_vessel
+    from phoenix_v4.manga.series.story_architect import resolve_vessel_genre
+
+    try:
+        vessel = load_vessel(resolve_vessel_genre(str(genre)), mode_norm)
+    except (VesselError, Exception):
+        return ""
+    beats = vessel.get("beats") or {}
+    beat_lines = "\n".join(f"  - {k}: {v}" for k, v in beats.items() if v)
+    return (
+        "\n\nMode vessel (M4 — diegetic apparatus; NEVER name the teacher/musician):\n"
+        f"- mode: {mode_norm}\n"
+        f"- vessel: {vessel.get('vessel')}\n"
+        f"- vessel_desc: {vessel.get('vessel_desc')}\n"
+        f"- beat skeleton:\n{beat_lines}\n"
+        "Weave the vessel into panels as a genre-native presence. "
+        "Teacher-mode: doctrine earned (wound→turn→renewal). "
+        "Music-mode: motif felt (opening→mid→closing). "
+        "The brand teacher or musician is NEVER named in-story.\n"
+    )
+
+
 def build_chapter_writer_prompt(
     story_handoff: Mapping[str, Any],
     *,
     chapter_number: int,
     series_id: str,
     chapter_id: str,
+    mode: str | None = None,
+    genre_id: str | None = None,
 ) -> str:
-    """Deterministic prompt text for replay keys and future live backends."""
+    """Deterministic prompt text for replay keys and future live backends.
+
+    When *mode* is set (or present on the story handoff), appends the genre-native
+    vessel block from ``manga_mode_vessels.yaml`` via ``load_vessel`` (M4).
+    """
     tpl = _load_prompt_template()
     excerpt = _story_chapter_excerpt(story_handoff, chapter_number)
-    return tpl.format(
+    base = tpl.format(
         series_id=series_id,
         chapter_id=chapter_id,
         chapter_number=chapter_number,
         story_chapter_json=excerpt,
+    )
+    return base + _mode_vessel_prompt_block(
+        story_handoff, mode=mode, genre_id=genre_id,
     )
 
 
@@ -100,6 +154,12 @@ def write_chapter_script_pair(
         chapter_number=chapter_number,
         series_id=series_id,
         chapter_id=chapter_id,
+        mode=story_handoff.get("mode"),
+        genre_id=(
+            story_handoff.get("genre_id")
+            or story_handoff.get("genre")
+            or (story_handoff.get("mode_vessel") or {}).get("vessel_genre")
+        ),
     )
     hint = schema_hint if schema_hint is not None else {}
     raw = client.generate_json(

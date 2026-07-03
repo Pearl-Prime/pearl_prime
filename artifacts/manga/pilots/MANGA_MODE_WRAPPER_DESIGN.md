@@ -1,5 +1,12 @@
 # Manga Mode-Wrapper Design — Teacher-mode XOR Music-mode, baked in by genre
 
+**Authority status (M4, 2026-07-04):** This file is the cited authority for
+`config/manga/manga_mode_vessels.yaml`. Runtime consumers (call-reachability):
+`phoenix_v4/manga/mode/vessels.py` ← `story_architect.apply_mode_vessel` +
+`chapter/writer._mode_vessel_prompt_block`. Research companion:
+`docs/research/manga_craft/teacher_apparatus_per_genre.md`. Music×manga:
+`docs/specs/MUSIC_MODE_MANGA_V1_SPEC.md`.
+
 **Rule 0: one mode per series. Teacher-mode and music-mode are never combined.**
 A manga series is the work of **one archetype** — a *teacher* (the soul is a doctrine)
 or a *musician* (the soul is a sound). That choice is the series' spine, baked into

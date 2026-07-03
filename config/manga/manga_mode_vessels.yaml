@@ -105,15 +105,17 @@ genres:
       vessel_desc: "the hardest blow comes from a quiet body; lose by forcing, win by flowing"
       beats: {wound: "the student forces every bout and loses", turn: "from a settled body, the strike lands", renewal: "strength from stillness, kept"}
     music:
-      vessel: "the war-drum heart"
-      vessel_desc: "the fighter's pulse is the score — ragged forcing, steady settled"
-      beats: {opening: "the drum, ragged under strain", mid: "the beat re-finds itself mid-fight", closing: "steady heart; the turn felt before the blow"}
+      # M4 C-grade upgrade: pulse-as-score made diegetic (armor resonance, not abstract drum)
+      vessel: "the armor that keeps the pulse"
+      vessel_desc: "battle armor hums with the fighter's heart — ragged when forcing, a clean tone when settled; the score is the suit, not a narrator"
+      beats: {opening: "the armor hums ragged under strain", mid: "mid-clash the tone cleans as the body unclenches", closing: "steady hum; the turn felt in the metal before the blow"}
 
   historical_period:
     teacher:
-      vessel: "the master of the craft"
-      vessel_desc: "a swordsmith/calligrapher whose discipline IS the doctrine — the hand that knows first"
-      beats: {wound: "the apprentice rushes the craft", turn: "patience with the body; the hand knew", renewal: "the craft, and the self, settled"}
+      # M4 C-grade upgrade: craft-master made period-specific (hand knows before mind)
+      vessel: "the workshop hands that refuse hurry"
+      vessel_desc: "a period craftsperson (swordsmith, calligrapher, weaver) whose hands stop when the apprentice forces — doctrine is the pause the material demands, never a speech"
+      beats: {wound: "the apprentice rushes and the material fails", turn: "the hands stop; the body knew the grain first", renewal: "one slow correct motion, kept"}
     music:
       vessel: "the folk song down the eras"
       vessel_desc: "one melody survives generations; belonging carried by the song outliving its singers"
@@ -125,9 +127,10 @@ genres:
       vessel_desc: "the body's old-world alarms are the truest map; the body adapts faster than the mind"
       beats: {wound: "the stranger over-thinks the new world", turn: "the guide: trust the body's old map", renewal: "at home in the body, in any world"}
     music:
-      vessel: "the tune that crosses worlds"
-      vessel_desc: "the hummed song from home is magic here — the only thing that translates"
-      beats: {opening: "the borrowed melody, out of place", mid: "the tune works as magic at the turn", closing: "it becomes a song that fits the new world"}
+      # M4 C-grade upgrade: home-song as the only translating magic (not generic BGM)
+      vessel: "the hummed bar that still works here"
+      vessel_desc: "one half-remembered phrase from the old world is the only spell that translates — not power fantasy, belonging; the lead hums it when the new rules fail"
+      beats: {opening: "a hummed bar, out of place under two moons", mid: "the phrase opens a door no map showed", closing: "the same bar fits the new world — home, relocated"}
 
   sports_competition:
     teacher:
