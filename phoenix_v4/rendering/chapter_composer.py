@@ -342,6 +342,16 @@ def _load_within_slot_bridge_families() -> dict[str, Any]:
     return _WITHIN_SLOT_BRIDGE_CACHE
 
 
+def within_slot_bridges_enabled() -> bool:
+    """Production default OFF (restore 2026-07-04): no template within-slot glue.
+
+    YAML key ``within_slot_bridges`` (default false). Dwell/setup is the Claude
+    line-edit lane. Unit tests of the bridge machinery pass ``enabled=True``.
+    """
+    payload = _load_within_slot_bridge_families()
+    return bool(payload.get("within_slot_bridges", False))
+
+
 # ---------------------------------------------------------------------------
 # OPD-112: Next-atom semantic classifier for bridge ↔ following-atom continuity
 # ---------------------------------------------------------------------------
@@ -1668,8 +1678,13 @@ def _bridge_within_slot(
     atom_pair_index: int,
     chapter_index: int = 0,
     rotation_state: "WithinSlotRotationState | None" = None,
+    *,
+    enabled: "bool | None" = None,
 ) -> str:
     """Return a 1-sentence transition between two atoms of the same slot.
+
+    Production default is OFF (``within_slot_bridges: false``) — returns "".
+    Pass ``enabled=True`` to exercise the template machinery (unit tests / A/B).
 
     Deterministic: same (chapter_index, slot_type, atom_pair_index) with the
     same `rotation_state` always returns the same bridge variant. With the
@@ -1703,6 +1718,11 @@ def _bridge_within_slot(
       - docs/diagnostics/OPD-109_RENDERING_LAYER_DIAGNOSIS_2026-05-18.md
       - OPD-112 (bridge ↔ following-atom semantic continuity, 2026-05-20)
     """
+    if enabled is None:
+        enabled = within_slot_bridges_enabled()
+    if not enabled:
+        return ""
+
     st_upper = (slot_type or "").strip().upper()
     payload = _load_within_slot_bridge_families()
     families = payload.get("slot_families") or {}

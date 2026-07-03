@@ -1,5 +1,11 @@
 # Within-slot bridge families
 #
+# within_slot_bridges: false (default) — restore 2026-07-04 workstream #2.
+# Template glue ("Pin down the trigger", "Crouch a little closer") is OFF;
+# dwell/setup is the Claude line-edit lane, not this YAML. The families below
+# remain for A/B and for callers that pass enabled=True to _bridge_within_slot.
+within_slot_bridges: false
+#
 # Purpose: provide 1-sentence transition prose between consecutive atoms
 # that land in the SAME canonical slot at long runtimes (deep_book_6h
 # stacks up to ~8 atoms per slot after OPD-109 Phase 1 cap reduction).
