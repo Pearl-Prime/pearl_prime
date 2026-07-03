@@ -1,13 +1,12 @@
-# Story-type conformance gate — enforces docs/STORY_TYPES_AND_STRUCTURES.md §7 on
-# tagged STORY atoms (composite⇏recognition_exchange, recognition_exchange⇒true_story,
-# principle-teacher type restriction, valid story_type enum).
+# Story-type conformance + hard gate — enforces docs/STORY_TYPES_AND_STRUCTURES.md
+# §7/§3/§9 on tagged STORY atoms and story_atoms/anchored prose.
 #
 # --conformance-only: blocks ONLY on §7 schema violations of TAGGED atoms. Legacy
-# 5-element FAILs and naming/variety WARNs never fail this gate, and UNtagged atoms
-# (the persona pools until Phase-3 tagging) can't violate it — so this never
-# red-walls existing content. NOT yet a required check: promote via
-# config/governance/required_checks.yaml + ruleset once the catalog is tagged
-# (Phase 4). Path-filtered pull_request is safe precisely because it is not required.
+# 5-element FAILs never fail this path; UNtagged persona pools can't violate it.
+#
+# --hard-gate: blocks on CHARACTER_STUDY_UNNAMED, LOW_STORY_TYPE_VARIETY, and §7.
+# Applied to story_atoms/anchored (Claude authoring lane) and tagged teacher STORY
+# atoms. Persona atoms/ catalog stays on --conformance-only until authoring lands.
 name: Story-type conformance
 on:
   pull_request:
@@ -15,6 +14,7 @@ on:
     paths:
       - 'atoms/**/STORY/**'
       - 'SOURCE_OF_TRUTH/**/STORY/**'
+      - 'story_atoms/**'
       - 'phoenix_v4/quality/story_atom_lint.py'
       - 'config/teachers/teacher_registry.yaml'
       - '.github/workflows/story-type-conformance.yml'
@@ -23,6 +23,7 @@ on:
     paths:
       - 'atoms/**/STORY/**'
       - 'SOURCE_OF_TRUTH/**/STORY/**'
+      - 'story_atoms/**'
       - 'phoenix_v4/quality/story_atom_lint.py'
 jobs:
   story-type-conformance:
@@ -41,7 +42,12 @@ jobs:
           PYTHONPATH=. python3 phoenix_v4/quality/story_atom_lint.py \
             --path SOURCE_OF_TRUTH --conformance-only \
             --json-out artifacts/ops/story_type_conformance_teacher.json
-      - name: Persona STORY pools — §7 conformance (no-op until Phase-3 tagging)
+      - name: Anchored story_atoms — hard gate (NAMED + variety + §7)
+        run: |
+          PYTHONPATH=. python3 phoenix_v4/quality/story_atom_lint.py \
+            --path story_atoms --hard-gate \
+            --json-out artifacts/ops/story_type_hard_gate_anchored.json
+      - name: Persona STORY pools — §7 conformance only (no-op until authoring)
         run: |
           PYTHONPATH=. python3 phoenix_v4/quality/story_atom_lint.py \
             --path atoms --story-only --conformance-only \
