@@ -388,15 +388,19 @@ def test_target_persona_atoms_returned_intact(atoms_fixture: Path) -> None:
     """
     Positive control: the fix must STILL return the target persona's atoms
     (the bug is silent spillover, not a total kill-switch). Confirm the
-    `gen_z_professionals/anxiety` HOOK/SCENE/STORY atoms come back.
+    `gen_z_professionals/anxiety` HOOK/STORY atoms come back.
+
+    SCENE is intentionally excluded from persona overlay (SCENE-kill:
+    registry/Qwen owns SCENE via scene_*_purpose).
     """
     merged = es._merged_persona_atoms_deep_6h(
         "gen_z_professionals", "anxiety", atoms_fixture, locale=None
     )
-    assert set(merged.keys()) >= {"HOOK", "SCENE", "STORY"}, (
+    assert set(merged.keys()) >= {"HOOK", "STORY"}, (
         f"Target persona slots missing from merged pool: {merged.keys()}"
     )
-    for slot in ("HOOK", "SCENE", "STORY"):
+    assert "SCENE" not in merged
+    for slot in ("HOOK", "STORY"):
         assert len(merged[slot]) >= 3, (
             f"{slot} pool too small: {len(merged[slot])} atoms (want >= 3 "
             "for SPEC-739-THRESHOLD-01)"

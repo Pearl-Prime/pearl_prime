@@ -8,8 +8,10 @@ using deterministic hashing.
 Two enrichment modes:
   Teacher mode: teacher atoms overlay HOOK, EXERCISE, INTEGRATION, PIVOT,
     PERMISSION, TAKEAWAY, THREAD, TEACHER_DOCTRINE. SCENEs stay from registry.
-  Regular mode: persona atoms overlay HOOK, SCENE, STORY from
-    atoms/{persona}/{topic}/. REFLECTIONs and INTEGRATIONs stay from registry.
+  Regular mode: persona atoms overlay HOOK, STORY from
+    atoms/{persona}/{topic}/. SCENEs stay from registry (Qwen-by-purpose;
+    robotic persona SCENE banks are code-path dead). REFLECTIONs and
+    INTEGRATIONs stay from registry.
 
 This replaces the atom assembly path (pool_index + slot_resolver) as the
 sole content source for book production.
@@ -53,8 +55,10 @@ _TEACHER_OVERLAY_TYPES = frozenset({
     "TEACHER_DOCTRINE", "COMPRESSION", "COMPOSITE_TEACHER_DOCTRINE", "HOOK", "EXERCISE",
     "INTEGRATION", "PIVOT", "PERMISSION", "TAKEAWAY", "THREAD",
 })
-# Section types that get overlaid in regular/persona mode
-_PERSONA_OVERLAY_TYPES = frozenset({"HOOK", "SCENE", "STORY"})
+# Section types that get overlaid in regular/persona mode.
+# SCENE is intentionally excluded: registry variants are purpose-driven (Qwen via
+# scene_*_purpose). Persona SCENE banks (atoms/*/SCENE/CANONICAL.txt) are not used.
+_PERSONA_OVERLAY_TYPES = frozenset({"HOOK", "STORY"})
 # Mapping from registry section type to teacher atom directory name.
 #
 # TEACHER_DOCTRINE lookup chain (first non-empty pool wins, per
