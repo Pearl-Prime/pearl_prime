@@ -1,0 +1,83 @@
+# Character Roster — story_atoms generation
+# Persona: gen_alpha_students / Topic: cross-topic (anxiety, boundaries, burnout,
+#          compassion_fatigue, courage, depression, financial_anxiety,
+#          financial_stress, grief, imposter_syndrome, overthinking, self_worth,
+#          sleep_anxiety, social_anxiety, somatic_healing, anchored)
+# Authority: story_atom_tier_templates.yaml
+#
+# PURPOSE: Naming pool for the Wave-1 CHARACTER_STUDY_UNNAMED individuation pass
+# (docs/HIGH_IMPACT_STORY_ATOM_UPGRADE_RUBRIC.md rubric; phoenix_v4/quality/story_atom_lint.py
+# CHARACTER_STUDY_UNNAMED check). Precedent: PR #4602 (gen_z_professionals/anxiety +
+# working_parents/anxiety), extended here to gen_alpha_students across all 16 STORY pools.
+#
+# Demographic: Gen Alpha students (born ~2010+; school-age, upper-elementary through
+# high-school framing per this pool's existing "school pressure" / "group chat" /
+# "screen time" vocabulary) — a DISTINCT, notably younger naming convention from
+# entrepreneurs (see character_roster_entrepreneurs.yaml). Names below are drawn from
+# common 2010s-2020s US birth-name data (short, contemporary, generation-appropriate —
+# e.g. Aiden/Nova/Kai rather than founder-generation names like Marcus/Elena), gender-
+# balanced, and reused across the 16 topic pools.
+#
+# CONTINUITY RULE: within one pool, the same name is reused across same-arc-progression
+# variants only when the block is a direct continuation of the same character (rare in
+# this flat v01-v20 STORY format — most v-slots are independent vignettes and get
+# distinct names). Gender-matched to each block's pronouns.
+#
+# NOTE: a handful of template blocks (inherited from the shared 20-variant STORY
+# skeleton — see docs/PEARL_ARCHITECT_STATE.md PR #178 lineage) carry adult-coded scene
+# furniture ("his daughter asked why his hands shook at dinner") left over from the
+# adult-persona template this skeleton was cloned from. Per mission scope (minimal edit:
+# name + one light individuating detail; preserve scene/stakes/metadata verbatim), these
+# are named but NOT rewritten in this pass — the scene-furniture mismatch is a separate,
+# larger authoring gap tracked outside this individuation task.
+
+version: "1.0"
+scope: gen_alpha_students_all_topics_wave1_naming
+persona: gen_alpha_students
+
+roster:
+  - name: Kai
+    gender: m
+    role: "middle-schooler, group chat / school pressure"
+  - name: Nova
+    gender: f
+    role: "high-schooler, social media + comparison"
+  - name: Mason
+    gender: m
+    role: "upper-elementary, screen time / identity"
+  - name: Aria
+    gender: f
+    role: "middle-schooler, online persona"
+  - name: Ezra
+    gender: m
+    role: "high-schooler, content creator pressure"
+  - name: Willow
+    gender: f
+    role: "middle-schooler, algorithm-driven comparison"
+  - name: Mateo
+    gender: m
+    role: "upper-elementary, notifications overload"
+  - name: Harper
+    gender: f
+    role: "high-schooler, group-chat dynamics"
+  - name: Micah
+    gender: m
+    role: "middle-schooler, school pressure"
+  - name: Luna
+    gender: f
+    role: "upper-elementary, social comparison"
+  - name: Elias
+    gender: m
+    role: "high-schooler, identity performance online"
+  - name: Zoe
+    gender: f
+    role: "middle-schooler, screen time / notifications"
+
+notes: |
+  Names are cycled across the 16 STORY/CANONICAL.txt pools (anchored, anxiety,
+  boundaries, burnout, compassion_fatigue, courage, depression, financial_anxiety,
+  financial_stress, grief, imposter_syndrome, overthinking, self_worth, sleep_anxiety,
+  social_anxiety, somatic_healing). Each pool's ~16 unnamed character_study v-slots
+  draw from this roster in rotation, gender-matched to the block's existing pronouns,
+  with light individuating detail added alongside the name per the minimal-edit rule
+  (preserve scene/stakes/open-ending/word-count/metadata verbatim).
