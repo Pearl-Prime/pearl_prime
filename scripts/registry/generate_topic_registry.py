@@ -39,9 +39,8 @@ except ImportError:
 
 try:
     import requests
-except ImportError:
-    print("ERROR: requests not installed. Run: pip install requests", file=sys.stderr)
-    sys.exit(1)
+except ImportError:  # pragma: no cover — only required for live Qwen calls
+    requests = None  # type: ignore[assignment]
 
 # ─── Paths ──────────────────────────────────────────────────────────────────
 REPO_ROOT = Path(__file__).resolve().parent.parent.parent
@@ -476,6 +475,9 @@ def qwen_generate(
 ) -> str:
     if dry_run:
         return f"[DRY RUN — {topic} {section_type} ch variant {variant_n}]"
+
+    if requests is None:
+        return "[GENERATION_FAILED: requests not installed]"
 
     system = _build_system_prompt(topic, skin, section_type, arc_role)
     # Never splice unresolved {location.*} placeholders into prompts or prose.
