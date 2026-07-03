@@ -1,0 +1,163 @@
+schema_version: 1.0.0
+artifact_type: chapter_script_writer_handoff
+schema_authority: schemas/manga/chapter_script_writer_handoff.schema.json
+series_id: high_performer_workplace__naruse_tsuyoshi__ja_JP__burnout__green_on_the_dashboard
+chapter_id: ep_001
+title: ダッシュボードは緑——第一話
+title_en_gloss: Green on the Dashboard — Episode 1
+manga_author: 成瀬 剛
+teacher_id: brand_teacher_unresolved
+brand_id: high_performer_workplace
+engine: burnout
+locale: ja_JP
+default_locale: ja_JP
+available_locales:
+- ja_JP
+- en_US
+- zh_CN
+- zh_TW
+genre: workplace_drama
+mode: teacher
+vessel: 周期を見た清掃員
+main_characters:
+- id: cole
+  name: 航
+  name_romaji: Ko
+  age: 33
+  role: 主人公（営業部長・指標は全部緑）
+  visual_anchor: パリッとしたシャツ、震えるスマートウォッチ
+- id: custodian
+  name: 清掃員
+  age: 不詳
+  role: 器の存在——ペンを置く時機の小さな所作；ブランド教師の名は決して使わない
+  visual_anchor: ジャンル固有；顔は任意；手と姿勢が教えを運ぶ
+scene_palette:
+  primary: ジャンル主導；craft_notes参照
+  secondary: 更新ビートの温かいアクセント
+  accent: 一つの反復する視覚的スルーライン
+pages:
+- page_id: ep_001_p01
+  panels:
+  - panel_id: ep001_001
+    scene: オープンプラン、またはガラスの会議室。蛍光灯の正直さ。航はすでに有能を演じている。
+    beat_type: micro
+    silence_confirmed: true
+    intent: ジャンル世界の確立
+  - panel_id: ep001_002
+    scene: バッジ、クリッカー、白い隙間のないカレンダー。
+    beat_type: micro
+    silence_confirmed: true
+    intent: 心より先に身体
+  - panel_id: ep001_003
+    scene: 会議、または指標の瞬間。部屋の視線が天気だ。
+    beat_type: micro
+    narrator_caption_by_locale:
+      ja_JP: 一日には形がある。身体はもう知っている。
+      en_US: The day has a shape. The body already knows.
+      zh_TW: '[zh_TW] The day has a shape. The body already knows.'
+      zh_CN: '[zh_CN] The day has a shape. The body already knows.'
+  - panel_id: ep001_004
+    scene: 航の顔のミディアム。警戒しているが、まだ壊れていない。33歳。パリッとしたシャツ、震えるスマートウォッチ。
+    beat_type: micro
+    silence_confirmed: true
+  - panel_id: ep001_005
+    scene: 航は押し通す——有能な動き。ジャンルの行動は続く。内側では、話題の天気（burnout）は姿勢と息だけで、題名にはならない。
+    beat_type: micro
+    dialogue_lines:
+    - speaker: cole
+      text_by_locale:
+        ja_JP: 大丈夫です。
+        en_US: I've got it.
+        zh_TW: '[zh_TW] I''ve got it.'
+        zh_CN: '[zh_CN] I''ve got it.'
+      intensity: whisper
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_right
+  - panel_id: ep001_006
+    scene: 代償が身体に落ちる——顎、手、止めた息。ジャンルの世界は待たない。
+    beat_type: micro
+    intent: 傷——身体の代償
+  - panel_id: ep001_007
+    scene: 航はさらに力を入れる。もっと演技、もっとパターン。器はまだ入っていない。
+    beat_type: micro
+    silence_confirmed: true
+  - panel_id: ep001_008
+    scene: ワイド：ジャンルの圧力が頂点——衝突、会議、冷えた部屋、フィードのスパイク。講義はない。天気だけ。
+    beat_type: micro
+    intent: 圧力の頂点
+  - panel_id: ep001_009
+    scene: 器が入る：このカレンダーを見た夜勤の人。どの教えの系譜の名もない。存在だけ。（周期を見た清掃員：ペンを置く時機の小さな所作）
+    beat_type: micro
+    silence_confirmed: true
+    intent: 器——教師は決して名指しされない
+  - panel_id: ep001_010
+    scene: 器がジャンル固有の小さな所作をする——日課の手、地面の掌、引かれた椅子、足の置き方、信じた周波数。助言の演説はない。
+    beat_type: micro
+    silence_confirmed: true
+    intent: 転機の始まり
+  - panel_id: ep001_011
+    scene: 航が見る。心が同意する半秒前に、身体が落ち着く。
+    beat_type: micro
+    narrator_caption_by_locale:
+      ja_JP: 先に知っていた。
+      en_US: It knew first.
+      zh_TW: '[zh_TW] It knew first.'
+      zh_CN: '[zh_CN] It knew first.'
+  - panel_id: ep001_012
+    scene: 器の任意の一言——実践的で、教義ではない。
+    beat_type: micro
+    dialogue_lines:
+    - speaker: custodian
+      text_by_locale:
+        ja_JP: 押し通すな。落ち着け。
+        en_US: Don't override. Settle.
+        zh_TW: '[zh_TW] Don''t override. Settle.'
+        zh_CN: '[zh_CN] Don''t override. Settle.'
+      intensity: soft
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_right
+  - panel_id: ep001_013
+    scene: 航が一度だけ、小さな動きを試す。ジャンルの行動は続くが、別の身体から。
+    beat_type: micro
+    intent: 更新の試み
+  - panel_id: ep001_014
+    scene: 世界がわずかに応える——テレメトリが緩む、土地が温まる、部屋が静まる。勝利ではない。許可だ。
+    beat_type: micro
+    silence_confirmed: true
+  - panel_id: ep001_015
+    scene: 閉じのワイド。航は一つの小さな所作を意図して続ける。話題は天気として残る。熟達はない。治癒はない。最初の道具だけ。
+    beat_type: micro
+    narrator_caption_by_locale:
+      ja_JP: 終わらせなくていい。一度、気づけばいい。
+      en_US: I don't have to finish it. I have to notice it once.
+      zh_TW: '[zh_TW] I don''t have to finish it. I have to notice it once.'
+      zh_CN: '[zh_CN] I don''t have to finish it. I have to notice it once.'
+  - panel_id: ep001_016
+    scene: 静かな色面の上のタイポグラフィックなエンドカード。
+    beat_type: micro
+    narrator_caption_by_locale:
+      ja_JP: 第一話・了——ダッシュボードは緑
+      en_US: End of Episode 1 — Green on the Dashboard
+      zh_TW: '[zh_TW] End of Episode 1 — Green on the Dashboard'
+      zh_CN: '[zh_CN] End of Episode 1 — Green on the Dashboard'
+notes:
+  pacing: 十六コマ。入口フロアを満たし、ウェブトゥーンの呼吸。沈黙が働き、台詞は転換点のみ。表面はジャンル物語；話題は身体の天気のみ。
+  bubble_style_register: 主人公の台詞：round_normal、多くはwhisper。器の台詞：soft、実践的、講義ではない。
+  sfx_policy: 最小限。囁きレジスタのみ。
+  language: ja_JPが権威。en_USはオペレータ用グロスのみ。翻訳ではなくネイティブ原作。
+  translation_pipeline_handoff: en_USグロスはレビュー用。CJK他言語は別レーン。
+craft_notes: 'VESSEL: 周期を見た清掃員 — ペンを置く時機の小さな所作。config/manga/manga_mode_vessels.yaml
+  より引用。教師は物語内で決して名指ししない（teacher_id=''brand_teacher_unresolved'' はメタデータのみ）。
+
+  GENRE BIBLE: docs/research/manga_craft/workplace_drama.md
+
+  GENRE-FIRST (ja_JP): 表面はworkplace_dramaの物語。話題（burnout）は姿勢・息・代償としての内的天気。
+
+  ARC: 傷（強制／演技／逃走）→転機（器が落ち着きを見せる）→更新（一つの保持された所作）。
+
+  NATIVE: 英語からの翻訳ではない。JP市場のジャンル検索向け原作。
+
+  ACCEPTANCE: native-authored + gate-floor + JP-craft-reviewed — NOT claimed bestseller
+  (M6 bar).'
