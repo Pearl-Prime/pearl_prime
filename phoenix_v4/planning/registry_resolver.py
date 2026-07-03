@@ -657,7 +657,8 @@ def resolve_book(
                         break
                 if atom_pool:
                     t_idx = _deterministic_index(
-                        f"{seed}:{ch_key}:{sec_key}:teacher", len(atom_pool)
+                        f"{seed}:{ch_key}:{sec_key}:{purpose}:teacher",
+                        len(atom_pool),
                     )
                     overlay_content = atom_pool[t_idx]["content"]
                     overlay_id = atom_pool[t_idx]["atom_id"]
@@ -667,7 +668,8 @@ def resolve_book(
                 atom_pool = persona_atoms.get(sec_type, [])
                 if atom_pool:
                     p_idx = _deterministic_index(
-                        f"{seed}:{ch_key}:{sec_key}:persona", len(atom_pool)
+                        f"{seed}:{ch_key}:{sec_key}:{purpose}:persona",
+                        len(atom_pool),
                     )
                     overlay_content = atom_pool[p_idx]["content"]
                     overlay_id = atom_pool[p_idx]["atom_id"]
@@ -698,9 +700,9 @@ def resolve_book(
                 ))
                 continue
 
-            # ── DEFAULT: use registry variant ──
+            # ── DEFAULT: use registry variant (purpose-seeded — restore #4) ──
             v_idx = _deterministic_index(
-                f"{seed}:{ch_key}:{sec_key}", len(variants)
+                f"{seed}:{ch_key}:{sec_key}:{purpose}", len(variants)
             )
             variant = variants[v_idx]
             resolved_sections.append(ResolvedSection(

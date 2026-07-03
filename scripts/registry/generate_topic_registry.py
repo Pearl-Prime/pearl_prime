@@ -67,6 +67,8 @@ ALL_TOPICS = [
     "depression", "courage", "overthinking", "compassion_fatigue",
     "social_anxiety", "sleep_anxiety", "financial_anxiety",
     "financial_stress", "somatic_healing",
+    # Reconciled 2026-07-04 (restore #4): registries exist; include in --all regen.
+    "adhd_focus", "grief", "mindfulness",
 ]
 
 # Chapter section layouts (from template — sequence of type per chapter)
@@ -530,6 +532,26 @@ def qwen_generate(
 
 # ─── Variant generation logic ─────────────────────────────────────────────────
 
+def purpose_seeded_index(
+    topic: str,
+    ch_key: str,
+    sec_key: str,
+    purpose: str,
+    variant_i: int,
+    pool_size: int,
+) -> int:
+    """Pick a pool index seeded by section purpose so same-type sections diverge.
+
+    Replaces ``i % len(pool)`` which collapsed every SCENE/REFLECTION/… slot onto
+    the same atom (32/90 dups). Same-section variants still vary via ``variant_i``.
+    """
+    if pool_size <= 0:
+        return 0
+    seed = f"{topic}:{ch_key}:{sec_key}:{purpose}:{variant_i}"
+    digest = hashlib.sha256(seed.encode("utf-8")).digest()
+    return int.from_bytes(digest[:8], "big") % pool_size
+
+
 def get_section_purpose(titles: dict, ch_key: str, sec_spec: dict) -> str:
     # ch_key is "chapter_01" but titles map uses "ch01"
     short_key = "ch" + ch_key.split("_")[1]
@@ -643,7 +665,9 @@ def generate_variants(
         source = "qwen_generated"
 
         if persona_pool and sec_type in ("HOOK", "STORY"):
-            idx = i % len(persona_pool)
+            idx = purpose_seeded_index(
+                topic, ch_key, sec_key, section_purpose, i, len(persona_pool)
+            )
             atom_content = persona_pool[idx]
             if atom_content and len(atom_content) > 50:
                 content = atom_content
@@ -653,7 +677,9 @@ def generate_variants(
 
         # 3. Try teacher atom adaptation (for TEACHER_DOCTRINE, EXERCISE, INTEGRATION)
         if content is None and teacher_pool and sec_type in ("TEACHER_DOCTRINE", "EXERCISE", "INTEGRATION", "HOOK", "REFLECTION"):
-            idx = i % len(teacher_pool)
+            idx = purpose_seeded_index(
+                topic, ch_key, sec_key, section_purpose, i, len(teacher_pool)
+            )
             teacher_content = teacher_pool[idx]
             if teacher_content and len(teacher_content) > 50:
                 # Adapt by prepending topic context note (thin layer)
@@ -784,12 +810,7 @@ def build_registry(
                 tok for var in variants for tok in var.get("location_tokens", [])
             ))
 
-            # Strip internal _provenance field for output
-            clean_variants = []
-            for var in variants:
-                clean_var = {k: v for k, v in var.items() if k != "_provenance"}
-                clean_variants.append(clean_var)
-
+            # Persist _provenance for auditability (restore workstream #4).
             chapter_dict["sections"][sec_key] = {
                 "section_id": sec_id,
                 "section": seq,
@@ -799,7 +820,7 @@ def build_registry(
                 "min_variants_required": min_v,
                 "story_eligible": story_eligible,
                 "location_aware": location_aware,
-                "variants": clean_variants,
+                "variants": variants,
                 "metadata": {
                     "persona": "Gen Z",
                     "topic": topic,
