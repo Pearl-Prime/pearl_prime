@@ -1,0 +1,20 @@
+| panel | layer | z | provenance | bytes | asset |
+|---|---|---|---|---|---|
+| wire_p1 | L0 | 0 | **INTERIM** | 14,408 | artifacts/manga/cognitive_clarity__en_US__psychological_thriller__series01/image_bank_sprites/L0_plate_INTERIM.png |
+| wire_p1 | L2 | 20 | **INTERIM** | 5,744 | artifacts/manga/cognitive_clarity__en_US__psychological_thriller__series01/image_bank_sprites/L2_character_INTERIM.png |
+| wire_p1 | L3 | 30 | **INTERIM** | 2,864 | artifacts/manga/cognitive_clarity__en_US__psychological_thriller__series01/image_bank_sprites/L3_object_INTERIM.png |
+| wire_p2 | L0 | 0 | **INTERIM** | 14,408 | artifacts/manga/cognitive_clarity__en_US__psychological_thriller__series01/image_bank_sprites/L0_plate_INTERIM.png |
+| wire_p2 | L2 | 20 | **INTERIM** | 5,744 | artifacts/manga/cognitive_clarity__en_US__psychological_thriller__series01/image_bank_sprites/L2_character_INTERIM.png |
+| wire_p2 | L3 | 30 | **INTERIM** | 2,864 | artifacts/manga/cognitive_clarity__en_US__psychological_thriller__series01/image_bank_sprites/L3_object_INTERIM.png |
+| wire_p3 | L0 | 0 | **INTERIM** | 14,408 | artifacts/manga/cognitive_clarity__en_US__psychological_thriller__series01/image_bank_sprites/L0_plate_INTERIM.png |
+| wire_p3 | L2 | 20 | **INTERIM** | 5,744 | artifacts/manga/cognitive_clarity__en_US__psychological_thriller__series01/image_bank_sprites/L2_character_INTERIM.png |
+| wire_p3 | L3 | 30 | **INTERIM** | 2,864 | artifacts/manga/cognitive_clarity__en_US__psychological_thriller__series01/image_bank_sprites/L3_object_INTERIM.png |
+| wire_p4 | L0 | 0 | **INTERIM** | 14,408 | artifacts/manga/cognitive_clarity__en_US__psychological_thriller__series01/image_bank_sprites/L0_plate_INTERIM.png |
+| wire_p4 | L2 | 20 | **INTERIM** | 5,744 | artifacts/manga/cognitive_clarity__en_US__psychological_thriller__series01/image_bank_sprites/L2_character_INTERIM.png |
+| wire_p4 | L3 | 30 | **INTERIM** | 2,864 | artifacts/manga/cognitive_clarity__en_US__psychological_thriller__series01/image_bank_sprites/L3_object_INTERIM.png |
+| wire_p5 | L0 | 0 | **INTERIM** | 14,408 | artifacts/manga/cognitive_clarity__en_US__psychological_thriller__series01/image_bank_sprites/L0_plate_INTERIM.png |
+| wire_p5 | L2 | 20 | **INTERIM** | 5,744 | artifacts/manga/cognitive_clarity__en_US__psychological_thriller__series01/image_bank_sprites/L2_character_INTERIM.png |
+| wire_p5 | L3 | 30 | **INTERIM** | 2,864 | artifacts/manga/cognitive_clarity__en_US__psychological_thriller__series01/image_bank_sprites/L3_object_INTERIM.png |
+| wire_p6 | L0 | 0 | **INTERIM** | 14,408 | artifacts/manga/cognitive_clarity__en_US__psychological_thriller__series01/image_bank_sprites/L0_plate_INTERIM.png |
+| wire_p6 | L2 | 20 | **INTERIM** | 5,744 | artifacts/manga/cognitive_clarity__en_US__psychological_thriller__series01/image_bank_sprites/L2_character_INTERIM.png |
+| wire_p6 | L3 | 30 | **INTERIM** | 2,864 | artifacts/manga/cognitive_clarity__en_US__psychological_thriller__series01/image_bank_sprites/L3_object_INTERIM.png |
