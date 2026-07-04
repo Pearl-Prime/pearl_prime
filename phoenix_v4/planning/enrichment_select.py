@@ -58,6 +58,10 @@ _COMPOSITE_REFLECTION_SLOT_TYPES = frozenset({
 })
 _COMPOSITE_SLOT_TYPES = _COMPOSITE_DOCTRINE_SLOT_TYPES | _COMPOSITE_REFLECTION_SLOT_TYPES
 
+# De-injection 2026-07-05: one authored occupant per slot — no registry stacking on
+# persona HOOK/SCENE or on composite doctrine/reflection blocks.
+_REGISTRY_SINGLE_OCCUPANT_SLOTS = frozenset({"HOOK", "SCENE"})
+
 # ---------------------------------------------------------------------------
 # ACT-010: Doctrine quarantine — pre-selection filter for somatic_first frame
 # Synced from phoenix_v4/quality/frame_governor.py :: SPIRITUAL_LEXICON
@@ -286,6 +290,49 @@ def _note_primary_body(seen_bodies: Any, body: str) -> None:
     add = getattr(seen_bodies, "add", None)
     if callable(add):
         add(_norm_ws(body))
+
+
+def _pick_hook_index_unique(
+    rotation: "PersonaPoolRotationState",
+    pool: List[Dict[str, Any]],
+    seed_key: str,
+    label: str,
+    seen_bodies: Any,
+    used_hooks: set[str],
+    *,
+    contract: Optional[dict] = None,
+    engine: str = "",
+) -> int:
+    """HOOK primary pick — never reuse the same hook body twice per book (Part F)."""
+    if not pool:
+        return 0
+    from phoenix_v4.planning.book_identity_contract import (
+        banned_phrase_penalty,
+        engine_metaphor_bonus,
+    )
+
+    order = rotation.least_used_order(pool, seed_key, label)
+    best_idx: Optional[int] = None
+    best_score = float("-inf")
+    for i in order:
+        body = str(pool[i].get("content") or "")
+        if not body.strip():
+            continue
+        norm = _norm_ws(body)
+        if norm in used_hooks:
+            continue
+        if seen_bodies and (norm in seen_bodies or _seen_similar(seen_bodies, body)):
+            continue
+        score = -float(rotation.book_count(str(pool[i].get("atom_id") or "")))
+        if contract:
+            score -= banned_phrase_penalty(body, contract)
+            score += engine_metaphor_bonus(body, contract, engine)
+        if score > best_score:
+            best_score = score
+            best_idx = i
+    if best_idx is not None:
+        return best_idx
+    return _pick_primary_index_unseen(rotation, pool, seed_key, label, seen_bodies)
 
 
 # ---------------------------------------------------------------------------
@@ -1993,6 +2040,14 @@ def select_enrichment(
     # still drives ordering — this only skips already-used bodies within that
     # order, falling back to the deterministic anchor when none are unused.
     _book_seen_bodies = _SeenBodies()
+    _book_used_hooks: set[str] = set()
+    _identity_contract = None
+    try:
+        from phoenix_v4.planning.book_identity_contract import load_book_identity_contract
+
+        _identity_contract = load_book_identity_contract(topic)
+    except ImportError:
+        _identity_contract = None
     _scene_ladder_done: set[int] = set()
     _chapter_story_depths_raw = list(_spine.get("chapter_story_depths") or [])
     _planner_warnings_mut: List[str] = list(_spine.get("chapter_planner_warnings") or [])
@@ -2022,6 +2077,7 @@ def select_enrichment(
         slots_out: List[EnrichedSlot] = []
         ch_breakdown: Dict[str, int] = defaultdict(int)
         ch_words = 0
+        _chapter_composite_doctrine = False
 
         for slot_i, slot in enumerate(bm_ch.slots):
             audit_counts["total_slots"] += 1
@@ -2256,6 +2312,7 @@ def select_enrichment(
                             # stem) so two sections sharing the same doctrine are still caught.
                             _note_primary_body(_book_seen_bodies, _cx_hit[0])
                             _composite_filled = True
+                            _chapter_composite_doctrine = True
                             audit_counts["slots_from_composite"] = (
                                 audit_counts.get("slots_from_composite", 0) + 1
                             )
@@ -2322,11 +2379,21 @@ def select_enrichment(
                             # chapters/clusters (the deep-tier F1 ~93 driver). The
                             # least-used anchor is preserved when no unused body
                             # exists, keeping determinism + the never-empty contract.
-                            _ap_idx = _pick_primary_index_unseen(
-                                _persona_rotation, _ap_pool,
-                                f"{seed_key}:persona", "persona",
-                                _book_seen_bodies,
-                            )
+                            if stype == "HOOK":
+                                _ap_idx = _pick_hook_index_unique(
+                                    _persona_rotation, _ap_pool,
+                                    f"{seed_key}:persona", "persona",
+                                    _book_seen_bodies,
+                                    _book_used_hooks,
+                                    contract=_identity_contract,
+                                    engine=engine,
+                                )
+                            else:
+                                _ap_idx = _pick_primary_index_unseen(
+                                    _persona_rotation, _ap_pool,
+                                    f"{seed_key}:persona", "persona",
+                                    _book_seen_bodies,
+                                )
                             _ap_atom = _ap_pool[_ap_idx]
                             _ap_content = str(_ap_atom.get("content") or "").strip()
                             if _ap_content:
@@ -2339,17 +2406,25 @@ def select_enrichment(
                                 persona_primary_idx = _ap_idx
                                 _persona_rotation.register(_ap_aid)
                                 _note_primary_body(_book_seen_bodies, _ap_content)
+                                if stype == "HOOK":
+                                    _book_used_hooks.add(_norm_ws(_ap_content))
 
-                    # 2) registry (baseline)
-                    _ar_hit = _try_registry_variant(reg_lists, stype, reg_counters, seed_key)
-                    if _ar_hit and not _is_doctrine_quarantined(_ar_hit[0], _frame):
-                        _add_pieces.append(_ar_hit[0])
-                        _add_sources.append("registry")
-                        _add_ids.append(_ar_hit[1])
-                        reg_sec_meta = (_ar_hit[2], _ar_hit[3])
-                        variant_id = _ar_hit[1]
-                        audit_counts["slots_from_registry"] += 1
-                        _book_tracker.record(_ar_hit[1], slot_type=stype)
+                    # 2) registry (baseline) — skip when slot already has primary content
+                    _skip_registry_stack = (
+                        (stype in _REGISTRY_SINGLE_OCCUPANT_SLOTS and bool(_add_pieces))
+                        or _composite_filled
+                        or (stype == "REFLECTION" and _chapter_composite_doctrine)
+                    )
+                    if not _skip_registry_stack:
+                        _ar_hit = _try_registry_variant(reg_lists, stype, reg_counters, seed_key)
+                        if _ar_hit and not _is_doctrine_quarantined(_ar_hit[0], _frame):
+                            _add_pieces.append(_ar_hit[0])
+                            _add_sources.append("registry")
+                            _add_ids.append(_ar_hit[1])
+                            reg_sec_meta = (_ar_hit[2], _ar_hit[3])
+                            variant_id = _ar_hit[1]
+                            audit_counts["slots_from_registry"] += 1
+                            _book_tracker.record(_ar_hit[1], slot_type=stype)
 
                     # 3) teacher (respects _TEACHER_OVERLAY_TYPES)
                     if tid and teacher_atoms:
@@ -2385,7 +2460,7 @@ def select_enrichment(
                     content = "\n\n".join(_add_pieces)
                     source = "+".join(_add_sources)
                     source_id = "+".join(_add_ids)
-                    atom_id = _add_ids[0] if _add_ids else ""
+                    atom_id = variant_id or (_add_ids[0] if _add_ids else "")
 
             # PR #612: hard-fail on missing content. No waterfall fallbacks.
             # No content_bank fallback. No [CONTENT GAP: ...] string placeholder.

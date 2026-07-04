@@ -15,6 +15,7 @@ from __future__ import annotations
 
 import hashlib
 import logging
+import os
 import re
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -83,6 +84,7 @@ _CHAPTER_INDEX_TLS: int = 0  # Thread-local-ish chapter index for variant rotati
 # Module-level locale for bridge functions (set by compose_chapter_prose)
 _LOCALE_TLS: str | None = None
 _BOOK_BRIDGE_MEMORY_TLS: "BridgeMemory | None" = None
+_BOOK_TRANSITION_USED_TLS: set[str] | None = None
 # OPD-109 Phase 1.1: per-render rotation memory for within-slot bridges.
 # Set by render_spine_book at the start of a book render (so usage counts
 # accumulate across chapters) and cleared at the end so we never leak state
@@ -342,14 +344,65 @@ def _load_within_slot_bridge_families() -> dict[str, Any]:
     return _WITHIN_SLOT_BRIDGE_CACHE
 
 
+def render_glue_enabled() -> bool:
+    """Master kill-switch — production default OFF (de-injection 2026-07-05)."""
+    from phoenix_v4.rendering.render_glue import render_glue_enabled as _master
+
+    return _master()
+
+
 def within_slot_bridges_enabled() -> bool:
     """Production default OFF (restore 2026-07-04): no template within-slot glue.
 
     YAML key ``within_slot_bridges`` (default false). Dwell/setup is the Claude
     line-edit lane. Unit tests of the bridge machinery pass ``enabled=True``.
     """
+    if not render_glue_enabled():
+        return False
     payload = _load_within_slot_bridge_families()
     return bool(payload.get("within_slot_bridges", False))
+
+
+def _glue_family_enabled(env_var: str, yaml_key: str, loader) -> bool:
+    """YAML default OFF; set env var to ``1``/``true`` for A/B re-enable."""
+    env = os.environ.get(env_var)
+    if env is not None:
+        return env.strip().lower() not in ("0", "false", "no", "")
+    payload = loader()
+    return bool(payload.get(yaml_key, False))
+
+
+def bridge_transition_families_enabled() -> bool:
+    """Production default OFF (de-injection 2026-07-05): no bridge_transition YAML glue."""
+    if not render_glue_enabled():
+        return False
+    return _glue_family_enabled(
+        "PHOENIX_BRIDGE_TRANSITION_FAMILIES",
+        "bridge_transition_families",
+        _load_bridge_transition_families,
+    )
+
+
+def mechanism_thesis_families_enabled() -> bool:
+    """Production default OFF (de-injection 2026-07-05): no mechanism_thesis YAML glue."""
+    if not render_glue_enabled():
+        return False
+    return _glue_family_enabled(
+        "PHOENIX_MECHANISM_THESIS_FAMILIES",
+        "mechanism_thesis_families",
+        _load_mechanism_thesis_families,
+    )
+
+
+def exercise_wrapper_families_enabled() -> bool:
+    """Production default OFF (de-injection 2026-07-05): no exercise_wrapper YAML glue."""
+    if not render_glue_enabled():
+        return False
+    return _glue_family_enabled(
+        "PHOENIX_EXERCISE_WRAPPER_FAMILIES",
+        "exercise_wrapper_families",
+        _load_exercise_wrapper_families,
+    )
 
 
 # ---------------------------------------------------------------------------
@@ -889,6 +942,8 @@ def _select_bridge_candidate(
     context_text: str,
     seed: str = "",
 ) -> dict[str, Any] | None:
+    if not bridge_transition_families_enabled():
+        return None
     if bridge_memory is None:
         bridge_memory = BridgeMemory()
     chapter_position = _chapter_position_bucket(chapter_index, total_chapters)
@@ -1290,7 +1345,7 @@ def _derive_thesis(
 
     # 3. mechanism_thesis_families.yaml lookup by emotional_job
     job = _normalize_emotional_job(emotional_job)
-    if job:
+    if job and mechanism_thesis_families_enabled():
         payload = _load_mechanism_thesis_families()
         job_bank = (((payload.get("thesis_families") or {}).get(job)) or {})
         candidates = _collect_text_entries(job_bank if isinstance(job_bank, dict) else {})
@@ -1322,6 +1377,8 @@ def _bridge_after_opening(
     bridge_memory: BridgeMemory | None = None,
 ) -> str:
     """Bridge from HOOK/SCENE → MECHANISM."""
+    if not bridge_transition_families_enabled():
+        return ""
     job = _normalize_emotional_job(emotional_job)
     if job:
         selected = _select_bridge_candidate(
@@ -1396,6 +1453,8 @@ def _bridge_before_story(
     bridge_memory: BridgeMemory | None = None,
 ) -> str:
     """Bridge from REFLECTION → STORY."""
+    if not bridge_transition_families_enabled():
+        return ""
     job = _normalize_emotional_job(emotional_job)
     if job:
         selected = _select_bridge_candidate(
@@ -1462,6 +1521,8 @@ def _bridge_before_exercise(
     bridge_memory: BridgeMemory | None = None,
 ) -> str:
     """Bridge from STORY → EXERCISE."""
+    if not bridge_transition_families_enabled():
+        return ""
     job = _normalize_emotional_job(emotional_job)
     if job:
         selected = _select_bridge_candidate(
@@ -1519,6 +1580,8 @@ def _bridge_before_integration(
     bridge_memory: BridgeMemory | None = None,
 ) -> str:
     """Bridge from EXERCISE → INTEGRATION."""
+    if not bridge_transition_families_enabled():
+        return ""
     job = _normalize_emotional_job(emotional_job)
     # When no bridge_memory is supplied but exercise_memory is, synthesise a
     # transient BridgeMemory seeded with the phrases already seen book-wide so
@@ -1657,7 +1720,7 @@ def prepend_story_introduction_bridge(
 ) -> str:
     """Prepend OPD-123 story_introduction bridge when ``first_atom`` is a named story."""
     body = (story_text or "").strip()
-    if not body:
+    if not body or not render_glue_enabled():
         return body
     bridge = _bridge_story_introduction(
         first_atom,
@@ -2077,6 +2140,8 @@ def _distill_mechanism(
     mechanism_memory: MechanismThesisMemory | None = None,
 ) -> str:
     """Derive a mechanism-explanation paragraph from REFLECTION content."""
+    if not mechanism_thesis_families_enabled():
+        return ""
     job = _normalize_emotional_job(emotional_job)
     if not job:
         return _distill_mechanism_legacy(reflection, thesis)
@@ -2182,34 +2247,8 @@ def _fallback_takeaway(
     total_chapters: int = 1,
     bridge_memory: BridgeMemory | None = None,
 ) -> str:
-    """Generate a takeaway when TAKEAWAY slot is missing/placeholder."""
-    job = _normalize_emotional_job(emotional_job)
-    if job:
-        selected = _select_bridge_candidate(
-            bridge_type="takeaway_fallback",
-            emotional_job=job,
-            chapter_index=chapter_index,
-            total_chapters=total_chapters,
-            bridge_memory=bridge_memory,
-            context_text=thesis,
-        )
-        if selected:
-            text = str(selected.get("text", "")).strip()
-            return _gt(text, locale=_LOCALE_TLS) if _LOCALE_TLS else text
-    core = thesis.replace("The point is that ", "")
-    options = [
-        "Remember this: {core} Keep it concrete long enough to test it in your next ordinary hour.",
-        "Carry this forward: {core} Let your next small action prove whether it is true.",
-        "Keep this close: {core} Insight counts only when it changes the next moment you are inside the pattern.",
-    ]
-    template = _pick_variant(options, thesis, str(chapter_index), str(total_chapters))
-    if _LOCALE_TLS:
-        translated = _gt(template, locale=_LOCALE_TLS)
-        try:
-            return translated.format(core=core)
-        except (KeyError, IndexError):
-            return translated
-    return template.format(core=core)
+    """De-injection 2026-07-05: no render-time takeaway template; use TAKEAWAY atoms."""
+    return ""
 
 
 # DEFECT 1 (cross_book_transitions): per-keyword fallback pools. The original
@@ -2284,6 +2323,8 @@ def _fallback_thread(
     """Generate a thread-forward when THREAD slot is missing/placeholder."""
     if chapter_index >= total_chapters - 1:
         return ""  # Last chapter: no thread-forward
+    if not bridge_transition_families_enabled():
+        return ""
     # DEFECT 1 (A): resolve planner arc-roles (destabilization/stabilization/etc.)
     # onto bridge-bank jobs so the data-driven 'Ahead of you:' bank actually fires
     # instead of falling through to the hardcoded pool.
@@ -2430,6 +2471,8 @@ def _exercise_setup_sentence(
     exercise_memory: ExerciseWrapperMemory | None = None,
 ) -> str:
     seed = f"{reflection} {story}".lower()
+    if not exercise_wrapper_families_enabled():
+        return ""
     # Rotate distinct secular openers per body part via the memory-aware selector
     # (was: one hardcoded line per part, no rotation -> the same opener repeated
     # ~once/chapter in body-heavy books and tripped repeated-phrase density).
@@ -2564,6 +2607,8 @@ def _post_practice_validation_sentence(
     practice_type: str = "",
     exercise_memory: ExerciseWrapperMemory | None = None,
 ) -> str:
+    if not exercise_wrapper_families_enabled():
+        return ""
     job = _normalize_emotional_job(emotional_job)
     if not job:
         options = [
@@ -2663,29 +2708,6 @@ def _shape_thread(
 # ---------------------------------------------------------------------------
 # Main composition function
 # ---------------------------------------------------------------------------
-
-def _append_anxiety_chapter_one_scan_practice(
-    parts: list[str],
-    *,
-    chapter_index: int,
-    topic_id: str,
-    thesis: str,
-) -> None:
-    """Chapter 1 (anxiety): concrete prediction-vs-fact / scanning practice for golden readiness."""
-    if chapter_index != 0 or (topic_id or "").strip().lower() != "anxiety" or not (thesis or "").strip():
-        return
-    blob = "\n".join(parts).lower()
-    if "one neutral fact from the last five minutes" in blob:
-        return
-    parts.append(
-        "Try this for ninety seconds:\n\n"
-        "1. Notice where your attention is scanning right now (messages, a face, something you said, tomorrow).\n"
-        "2. Write the worry as one sentence — the prediction your mind is treating like a fact.\n"
-        "3. Write one neutral fact from the last five minutes that does not depend on that prediction.\n\n"
-        "You are not debating whether the worry is 'true.' You are watching your nervous system "
-        "confuse a forecast with evidence."
-    )
-
 
 def angle_callback_memory_line(prior_assertion: str) -> str:
     """One-sentence recall of the prior journey layer (OPD-116/117)."""
@@ -2817,6 +2839,36 @@ def _strengthen_opening_chapter_flow(
     return parts
 
 
+def _authored_transition(
+    boundary: str,
+    *,
+    topic_id: str = "",
+    persona_id: str = "",
+    engine_type: str = "",
+    chapter_index: int = 0,
+    book_seed: str = "",
+    locale: Optional[str] = None,
+) -> str:
+    """Emit authored TRANSITION atom when render glue is OFF; else ``""``."""
+    if render_glue_enabled() or not topic_id or not persona_id:
+        return ""
+    from phoenix_v4.planning.transition_atoms import select_authored_transition
+
+    global _BOOK_TRANSITION_USED_TLS
+    if _BOOK_TRANSITION_USED_TLS is None:
+        _BOOK_TRANSITION_USED_TLS = set()
+    return select_authored_transition(
+        boundary,
+        persona_id=persona_id,
+        topic_id=topic_id,
+        engine_type=engine_type,
+        chapter_index=chapter_index,
+        book_seed=book_seed,
+        locale=locale,
+        used_texts=_BOOK_TRANSITION_USED_TLS,
+    )
+
+
 def compose_chapter_prose(
     slot_types: list[str],
     slot_proses: list[str],
@@ -2928,17 +2980,27 @@ def compose_chapter_prose(
 
     # 4. STORY with optional QA label
     if story_raw and not _is_placeholder_text(story_raw):
-        parts.append(
-            _bridge_before_story(
-                thesis,
-                reflection=reflection_raw,
-                story=story_raw,
-                emotional_job=emotional_role,
-                chapter_index=chapter_index,
-                total_chapters=total_chapters,
-                bridge_memory=resolved_bridge_memory,
-            )
+        _before_story = _bridge_before_story(
+            thesis,
+            reflection=reflection_raw,
+            story=story_raw,
+            emotional_job=emotional_role,
+            chapter_index=chapter_index,
+            total_chapters=total_chapters,
+            bridge_memory=resolved_bridge_memory,
         )
+        if not _before_story:
+            _before_story = _authored_transition(
+                "before_story",
+                topic_id=topic_id,
+                persona_id=persona_id,
+                engine_type=engine_type,
+                chapter_index=chapter_index,
+                book_seed=book_seed,
+                locale=locale,
+            )
+        if _before_story:
+            parts.append(_before_story)
         story_raw = prepend_story_introduction_bridge(
             story_raw,
             story_raw,
@@ -2960,7 +3022,12 @@ def compose_chapter_prose(
         parts.append(compression_raw)
 
     # 5c. Mechanism deepening after story + section land (OPD-124 sequence).
-    if thesis:
+    # De-injection 2026-07-05: skip template bridge/mechanism/thesis when glue families
+    # are OFF; authored arc_thesis still lands when provided by the spine.
+    show_mechanism_glue = (
+        bridge_transition_families_enabled() or mechanism_thesis_families_enabled()
+    )
+    if show_mechanism_glue and thesis:
         parts.append(
             _bridge_after_opening(
                 thesis,
@@ -2978,8 +3045,22 @@ def compose_chapter_prose(
             emotional_job=emotional_role,
             mechanism_memory=mechanism_memory,
         )
-        parts.append(mechanism)
+        if mechanism:
+            parts.append(mechanism)
         parts.append(thesis)
+    elif arc_thesis and arc_thesis.strip():
+        _after_opening = _authored_transition(
+            "after_opening",
+            topic_id=topic_id,
+            persona_id=persona_id,
+            engine_type=engine_type,
+            chapter_index=chapter_index,
+            book_seed=book_seed,
+            locale=locale,
+        )
+        if _after_opening:
+            parts.append(_after_opening)
+        parts.append(arc_thesis.strip())
 
     # 6. Exercise with bridge — preserve every EXERCISE slot (Holistic v2 Phase B)
     if not exercise_blocks:
@@ -2996,6 +3077,33 @@ def compose_chapter_prose(
                 exercise_blocks = [composed]
         except Exception:
             pass
+
+    _bridge_glue = bridge_transition_families_enabled()
+    _wrapper_glue = exercise_wrapper_families_enabled()
+    practice_type = ""
+
+    def _transition_before_exercise() -> str:
+        if _bridge_glue:
+            return _bridge_before_exercise(
+                thesis,
+                reflection=reflection_raw,
+                story=story_raw,
+                emotional_job=emotional_role,
+                practice_type=practice_type,
+                exercise_memory=exercise_memory,
+                chapter_index=chapter_index,
+                total_chapters=total_chapters,
+                bridge_memory=resolved_bridge_memory,
+            )
+        return _authored_transition(
+            "before_exercise",
+            topic_id=topic_id,
+            persona_id=persona_id,
+            engine_type=engine_type,
+            chapter_index=chapter_index,
+            book_seed=book_seed,
+            locale=locale,
+        )
 
     for ex_idx, exercise_raw in enumerate(exercise_blocks):
         exercise_from_library_34 = ex_idx == 0 and len(exercise_blocks) == 1 and not slot_lists.get("EXERCISE")
@@ -3023,36 +3131,28 @@ def compose_chapter_prose(
                 integration_text=int_for_ex,
             )
             if composed_exercise.strip():
-                parts.append(
-                    _bridge_before_exercise(
-                        thesis,
-                        reflection=reflection_raw,
-                        story=story_raw,
+                _ex_bridge = _transition_before_exercise()
+                if _ex_bridge:
+                    parts.append(_ex_bridge)
+                if _wrapper_glue:
+                    setup = _exercise_setup_sentence(
+                        reflection_raw,
+                        story_raw,
                         emotional_job=emotional_role,
                         practice_type=practice_type,
                         exercise_memory=exercise_memory,
-                        chapter_index=chapter_index,
-                        total_chapters=total_chapters,
-                        bridge_memory=resolved_bridge_memory,
                     )
-                )
-                setup = _exercise_setup_sentence(
-                    reflection_raw,
-                    story_raw,
-                    emotional_job=emotional_role,
-                    practice_type=practice_type,
-                    exercise_memory=exercise_memory,
-                )
-                if setup:
-                    parts.append(setup)
+                    if setup:
+                        parts.append(setup)
                 parts.append(composed_exercise)
-                parts.append(
-                    _post_practice_validation_sentence(
-                        emotional_job=emotional_role,
-                        practice_type=practice_type,
-                        exercise_memory=exercise_memory,
+                if _wrapper_glue:
+                    parts.append(
+                        _post_practice_validation_sentence(
+                            emotional_job=emotional_role,
+                            practice_type=practice_type,
+                            exercise_memory=exercise_memory,
+                        )
                     )
-                )
                 assembled_ok = True
                 if exercise_from_library_34:
                     _bump_exercise_stat(exercise_source_stats, "library_34_fallback")
@@ -3075,35 +3175,28 @@ def compose_chapter_prose(
                     templates=load_component_templates(),
                 )
                 if composed:
-                    parts.append(
-                        _bridge_before_exercise(
-                            thesis,
-                            reflection=reflection_raw,
-                            story=story_raw,
+                    _ex_bridge = _transition_before_exercise()
+                    if _ex_bridge:
+                        parts.append(_ex_bridge)
+                    if _wrapper_glue:
+                        setup = _exercise_setup_sentence(
+                            reflection_raw,
+                            story_raw,
                             emotional_job=emotional_role,
                             practice_type=practice_type,
                             exercise_memory=exercise_memory,
-                            chapter_index=chapter_index,
-                            total_chapters=total_chapters,
-                            bridge_memory=resolved_bridge_memory,
                         )
-                    )
-                    setup = _exercise_setup_sentence(
-                        reflection_raw,
-                        story_raw,
-                        emotional_job=emotional_role,
-                        practice_type=practice_type,
-                        exercise_memory=exercise_memory,
-                    )
-                    parts.append(setup)
+                        if setup:
+                            parts.append(setup)
                     parts.append(composed)
-                    parts.append(
-                        _post_practice_validation_sentence(
-                            emotional_job=emotional_role,
-                            practice_type=practice_type,
-                            exercise_memory=exercise_memory,
+                    if _wrapper_glue:
+                        parts.append(
+                            _post_practice_validation_sentence(
+                                emotional_job=emotional_role,
+                                practice_type=practice_type,
+                                exercise_memory=exercise_memory,
+                            )
                         )
-                    )
                     integration_raw = ""
                     if exercise_from_library_34:
                         _bump_exercise_stat(exercise_source_stats, "library_34_fallback")
@@ -3112,51 +3205,35 @@ def compose_chapter_prose(
                 else:
                     raise ValueError("empty compose")
             except Exception:
-                parts.append(
-                    _bridge_before_exercise(
-                        thesis,
-                        reflection=reflection_raw,
-                        story=story_raw,
-                        emotional_job=emotional_role,
-                        practice_type=practice_type,
-                        exercise_memory=exercise_memory,
-                        chapter_index=chapter_index,
-                        total_chapters=total_chapters,
-                        bridge_memory=resolved_bridge_memory,
-                    )
-                )
-                # OPD-113: explicit introduction cue (Part 1) for fallback path
-                introduction_cue = _exercise_introduction_cue(practice_type)
-                if introduction_cue:
-                    parts.append(introduction_cue)
-                parts.append(
-                    _exercise_setup_sentence(
+                _ex_bridge = _transition_before_exercise()
+                if _ex_bridge:
+                    parts.append(_ex_bridge)
+                if _wrapper_glue:
+                    introduction_cue = _exercise_introduction_cue(practice_type)
+                    if introduction_cue:
+                        parts.append(introduction_cue)
+                    setup = _exercise_setup_sentence(
                         reflection_raw,
                         story_raw,
                         emotional_job=emotional_role,
                         practice_type=practice_type,
                         exercise_memory=exercise_memory,
                     )
-                )
+                    if setup:
+                        parts.append(setup)
                 parts.append(exercise_raw)
-                parts.append(
-                    _post_practice_validation_sentence(
-                        emotional_job=emotional_role,
-                        practice_type=practice_type,
-                        exercise_memory=exercise_memory,
+                if _wrapper_glue:
+                    parts.append(
+                        _post_practice_validation_sentence(
+                            emotional_job=emotional_role,
+                            practice_type=practice_type,
+                            exercise_memory=exercise_memory,
+                        )
                     )
-                )
                 if exercise_from_library_34:
                     _bump_exercise_stat(exercise_source_stats, "library_34_fallback")
                 else:
                     _bump_exercise_stat(exercise_source_stats, "registry")
-
-    _append_anxiety_chapter_one_scan_practice(
-        parts,
-        chapter_index=chapter_index,
-        topic_id=topic_id,
-        thesis=thesis,
-    )
 
     # 7a. PERMISSION (receive the reader — Writer Spec §4.8)
     # Short emotional permission statement placed near INTEGRATION. High-cost chapters only.
@@ -3165,30 +3242,29 @@ def compose_chapter_prose(
 
     # 8. Integration with bridge
     if integration_raw and not _is_placeholder_text(integration_raw):
-        parts.append(
-            _bridge_before_integration(
-                thesis,
-                integration=integration_raw,
-                emotional_job=emotional_role,
-                practice_type=practice_type,
-                exercise_memory=exercise_memory,
-                chapter_index=chapter_index,
-                total_chapters=total_chapters,
-                bridge_memory=resolved_bridge_memory,
-            )
+        bridge_int = _bridge_before_integration(
+            thesis,
+            integration=integration_raw,
+            emotional_job=emotional_role,
+            practice_type=practice_type if practice_type else "",
+            exercise_memory=exercise_memory,
+            chapter_index=chapter_index,
+            total_chapters=total_chapters,
+            bridge_memory=resolved_bridge_memory,
         )
+        if not bridge_int:
+            bridge_int = _authored_transition(
+                "before_integration",
+                topic_id=topic_id,
+                persona_id=persona_id,
+                engine_type=engine_type,
+                chapter_index=chapter_index,
+                book_seed=book_seed,
+                locale=locale,
+            )
+        if bridge_int:
+            parts.append(bridge_int)
         parts.append(integration_raw)
-    elif thesis:
-        # Fallback takeaway when integration is missing
-        parts.append(
-            _fallback_takeaway(
-                thesis,
-                emotional_job=emotional_role,
-                chapter_index=chapter_index,
-                total_chapters=total_chapters,
-                bridge_memory=resolved_bridge_memory,
-            )
-        )
 
     # 9. Takeaway (explicit slot or fallback)
     if takeaway_raw and not _is_placeholder_text(takeaway_raw):
@@ -3225,6 +3301,22 @@ def compose_chapter_prose(
 
     # Filter empty parts and join
     composed = "\n\n".join(p for p in parts if p and p.strip())
+
+    if topic_id:
+        try:
+            from phoenix_v4.planning.book_identity_contract import (
+                ensure_identity_line_in_text,
+                identity_line_for_chapter,
+                load_book_identity_contract,
+            )
+
+            _contract = load_book_identity_contract(topic_id)
+            if _contract:
+                _iline = identity_line_for_chapter(_contract, chapter_index, total_chapters)
+                if _iline:
+                    composed = ensure_identity_line_in_text(composed, _iline)
+        except ImportError:
+            pass
 
     # Locale post-processing: replace English template strings with locale versions
     if locale and locale != "en-US":
@@ -3536,9 +3628,10 @@ def compose_from_enriched_book(
     exercise_memory = ExerciseWrapperMemory()
     bridge_memory = BridgeMemory()
     within_slot_rotation = WithinSlotRotationState()
-    global _BOOK_BRIDGE_MEMORY_TLS, _WITHIN_SLOT_ROTATION_TLS
+    global _BOOK_BRIDGE_MEMORY_TLS, _WITHIN_SLOT_ROTATION_TLS, _BOOK_TRANSITION_USED_TLS
     _BOOK_BRIDGE_MEMORY_TLS = bridge_memory
     _WITHIN_SLOT_ROTATION_TLS = within_slot_rotation
+    _BOOK_TRANSITION_USED_TLS = set()
 
     chapters_prose: list[str] = []
     for ch_idx, ch in enumerate(enriched.chapters):
@@ -3641,5 +3734,6 @@ def compose_from_enriched_book(
         if isinstance(rr, list):
             rr.extend(furniture_notes)
     _BOOK_BRIDGE_MEMORY_TLS = None
+    _BOOK_TRANSITION_USED_TLS = None
     _WITHIN_SLOT_ROTATION_TLS = None
     return deduped

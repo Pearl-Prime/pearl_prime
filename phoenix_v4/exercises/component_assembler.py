@@ -9,6 +9,7 @@ with only the appropriate components at the right depth.
 from __future__ import annotations
 
 import hashlib
+import os
 import re
 from pathlib import Path
 from typing import Any, Optional
@@ -185,6 +186,22 @@ def _load_yaml(p: Path) -> Any:
         return yaml.safe_load(f) or {}
 
 
+def exercise_component_templates_enabled() -> bool:
+    """Production default OFF (de-injection 2026-07-05): no bridge/intro template stacking."""
+    from phoenix_v4.rendering.render_glue import render_glue_enabled
+
+    if not render_glue_enabled():
+        return False
+    env = os.environ.get("PHOENIX_EXERCISE_COMPONENT_TEMPLATES")
+    if env is not None:
+        return env.strip().lower() not in ("0", "false", "no", "")
+    return True
+
+
+def _empty_variants() -> ComponentVariants:
+    return ComponentVariants(full="", lean="")
+
+
 def _sentences(text: str) -> list[str]:
     return [s.strip() for s in re.split(r"(?<=[.!?])\s+", text.strip()) if s.strip()]
 
@@ -350,41 +367,60 @@ def resolve_exercise_components(
 
     Priority:
     1. Explicit text passed in (from atoms, practice library, or ab_tady_37 components)
-    2. Templates (bridge, intro) keyed by exercise_type
-    3. Standards (aha, integration) keyed by exercise_id
+    2. Templates (bridge, intro) keyed by exercise_type — only when
+       ``exercise_component_templates_enabled()`` (default OFF)
+    3. Standards (aha, integration) keyed by exercise_id — same gate
     """
-    bridge_templates = _load_bridge_templates()
-    introduction_templates = _load_introduction_templates()  # OPD-113
-    intro_templates = _load_intro_templates()
-    aha_standards = _load_aha_standards()
-    integration_standards = _load_integration_standards()
-
     eff_type = infer_exercise_type(chapter_index, exercise_type)
     seed = resolution_seed or exercise_id or f"ch{chapter_index}"
     std_key = pick_phoenix_standard_key(chapter_index, exercise_type, seed)
 
-    # Bridge from templates
-    bt = bridge_templates.get(eff_type) or bridge_templates.get("_default") or {}
-    bridge = ComponentVariants(
-        full=bt.get("full", ""),
-        lean=bt.get("lean", ""),
-        gentle=bt.get("gentle", ""),
-    )
+    templates_on = exercise_component_templates_enabled()
 
-    # Introduction from templates (OPD-113: explicit "Now we're going to do an
-    # exercise" cue — operator's Part 1 of the 5-part structure)
-    intr = introduction_templates.get(eff_type) or introduction_templates.get("_default") or {}
-    introduction = ComponentVariants(
-        full=intr.get("full", ""),
-        lean=intr.get("lean", ""),
-    )
+    if templates_on:
+        bridge_templates = _load_bridge_templates()
+        introduction_templates = _load_introduction_templates()
+        intro_templates = _load_intro_templates()
+        aha_standards = _load_aha_standards()
+        integration_standards = _load_integration_standards()
 
-    # Intro from templates (operator's Part 2 / "description" in operator-speak)
-    it = intro_templates.get(eff_type) or intro_templates.get("_default") or {}
-    intro = ComponentVariants(
-        full=it.get("full", ""),
-        lean=it.get("lean", ""),
-    )
+        bt = bridge_templates.get(eff_type) or bridge_templates.get("_default") or {}
+        bridge = ComponentVariants(
+            full=bt.get("full", ""),
+            lean=bt.get("lean", ""),
+            gentle=bt.get("gentle", ""),
+        )
+
+        intr = introduction_templates.get(eff_type) or introduction_templates.get("_default") or {}
+        introduction = ComponentVariants(
+            full=intr.get("full", ""),
+            lean=intr.get("lean", ""),
+        )
+
+        it = intro_templates.get(eff_type) or intro_templates.get("_default") or {}
+        intro = ComponentVariants(
+            full=it.get("full", ""),
+            lean=it.get("lean", ""),
+        )
+
+        aha_full = (
+            aha_text
+            or aha_standards.get(exercise_id, "")
+            or aha_standards.get(std_key, "")
+            or aha_standards.get("_default", "")
+        )
+        int_full = (
+            integration_text
+            or integration_standards.get(exercise_id, "")
+            or integration_standards.get(std_key, "")
+            or integration_standards.get("_default", "")
+        )
+    else:
+        bridge = _empty_variants()
+        introduction = _empty_variants()
+        intro = _empty_variants()
+        aha_full = aha_text or ""
+        int_full = integration_text or ""
 
     # Description from passed text
     description = ComponentVariants(
@@ -392,25 +428,11 @@ def resolve_exercise_components(
         lean=_derive_lean(description_text, max_sentences=3) if description_text else "",
     )
 
-    # AHA: explicit text, then YAML keyed by atom/technique id, then Phoenix standard pool
-    aha_full = (
-        aha_text
-        or aha_standards.get(exercise_id, "")
-        or aha_standards.get(std_key, "")
-        or aha_standards.get("_default", "")
-    )
     aha = ComponentVariants(
         full=aha_full,
         lean=_derive_lean(aha_full) if aha_full else "",
     )
 
-    # Integration: same precedence; integration file may only define a subset of keys
-    int_full = (
-        integration_text
-        or integration_standards.get(exercise_id, "")
-        or integration_standards.get(std_key, "")
-        or integration_standards.get("_default", "")
-    )
     integration = ComponentVariants(
         full=int_full,
         lean=_derive_lean(int_full) if int_full else "",
@@ -451,7 +473,7 @@ def resolve_from_ab_tady_components(exercise_data: dict) -> ExerciseComponents:
 
     # OPD-113: introduction — prefer ab_tady-provided field, else template fallback
     introduction = _variants("introduction")
-    if not introduction.full and not introduction.lean:
+    if not introduction.full and not introduction.lean and exercise_component_templates_enabled():
         intr_templates = _load_introduction_templates()
         eff_type = infer_exercise_type(0, exercise_type)
         intr = intr_templates.get(eff_type) or intr_templates.get("_default") or {}
@@ -579,4 +601,15 @@ def assemble_exercise_for_chapter(
         )
 
     selection = select_components(ctx, rules)
+    if not exercise_component_templates_enabled():
+        selection = ComponentSelection(
+            bridge=ComponentMode.SKIP,
+            introduction=ComponentMode.SKIP,
+            intro=ComponentMode.SKIP,
+            description=selection.description,
+            aha=selection.aha,
+            integration=selection.integration,
+            bridge_tone=selection.bridge_tone,
+            rule_name=f"{selection.rule_name}|templates_off",
+        )
     return assemble_exercise(components, selection)
