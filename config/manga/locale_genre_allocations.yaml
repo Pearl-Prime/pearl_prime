@@ -10,9 +10,8 @@
 # Plus strategic plans: docs/CJK_CATALOG_PLAN.md, docs/US_CATALOG_PLAN.md,
 # docs/GENRE_PORTFOLIO_PLAN.md (global matrix disaggregated here).
 #
-# Locale set = config/localization/locale_registry.yaml `all_locales` (13).
-# pt_BR is Q-MANGA-01 candidate only — status: pending_ratification; registry untouched.
-# Q-MANGA-02 default (Western = illustrated self-help picture books) encoded below;
+# Locale set = config/localization/locale_registry.yaml `all_locales` (14; pt_BR ratified OPD-20260704-005).
+# Q-MANGA-02 Western = illustrated self-help picture books (ratified OPD-20260704-006).
 # operator ratification still required (do not treat as ratified).
 #
 # genre_id values MUST match scripts/manga/generate_catalog_plan_from_strategic.py
@@ -23,8 +22,8 @@ schema_version: "1"
 status: active
 milestone: M2
 last_updated: "2026-07-04"
-q_manga_01_pt_br: pending_ratification
-q_manga_02_western_picture_books: default_applied_pending_ratification
+q_manga_01_pt_br: ratified_OPD-20260704-005
+q_manga_02_western_picture_books: ratified_OPD-20260704-006
 
 # Product-shape lanes (Q-MANGA-02 default)
 lanes:
@@ -777,16 +776,15 @@ locales:
         research_citation: "docs/specs/MANGA_MARKET_INTEGRATION_V1_SPEC.md §C (manga market share — shonen BD adjacency)"
         confidence: low
 
-  # ─── Q-MANGA-01 CANDIDATE (not in locale_registry.yaml) ──────────────────
+  # ─── Q-MANGA-01 RATIFIED (OPD-20260704-005) — 14th locale ────────────────
 
   pt_BR:
     lane: western_intent_led
     product_shape: illustrated_self_help_picture_books
-    status: pending_ratification
+    status: active
     note: >-
-      NOT in config/localization/locale_registry.yaml. Allocation block is
-      ratification-ready only. Registry cap amendment is a SEPARATE operator-gated PR.
-      Research exists in europe-latam §6 (WHO anxiety 9.3% world-highest; webtoon CAGR 40%+ LATAM).
+      Q-MANGA-01 ratified 2026-07-04 (OPD-20260704-005). In locale_registry.yaml
+      all_locales. Research: europe-latam §6. M7 Wave A order: after fr_FR.
     genres:
       - genre_id: iyashikei
         share_pct: 20

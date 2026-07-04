@@ -180,14 +180,14 @@ minutes). **Blocked on: M5 first episodes + operator recruiting judges
 - **Wave C (banks/assembly):** M5 per flagship, copy-across decision doc
   first (upgrade copy-across from SPECCED: one analysis doc deciding which
   brands/series copy vs stand alone, per platform families config).
-- **pt_BR (Q-MANGA-01):** joins the registry only by operator ratification
-  (PR #1604 lineage), then enters Wave A.
+- **pt_BR (Q-MANGA-01):** **RESOLVED** OPD-20260704-005 — 14th locale ratified;
+  enters Wave A after fr_FR.
 - **ko_KR:** stays plan-complete/ship-gated (Q-MANGA-05).
 - **Japan manga-only catalog:** proceeds per JAPAN_MANGA_ONLY_CATALOG_V1_SPEC
   once Q-MANGA-07 legal entity clears (operator-tier).
 
 Exit PROOF per locale: grid row fully green in the conformance TSV re-run.
-**Blocked on: M2 (allocations), operator Qs 01/05/07.**
+**Blocked on: M2 (allocations — done), operator Qs 05/07 (01/02/03/06 ratified 2026-07-04).**
 
 ---
 
@@ -196,16 +196,14 @@ Exit PROOF per locale: grid row fully green in the conformance TSV re-run.
 ```
 NOW (no GPU, no operator):   M1 rails → M2 allocation → M3 wave 1 (en_US 37)
                               └ M4 research + music sub-spec in parallel
-ON Pearl Star return:        M5 pilot (Q-MANGA-03 envelope) → RESUME_COMMANDS.sh
-ON operator answers:         Q-01 pt_BR · Q-03 GPU envelope · Q-05 ko_KR ·
-                             Q-06 tentpole (rec: B) · Q-07 Japan legal entity ·
-                             M6 judge recruiting
+ON Pearl Star return:        M5 pilot (Q-MANGA-03 envelope, OPD-20260704-007) → RESUME_COMMANDS.sh
+RATIFIED 2026-07-04:         Q-01 pt_BR (OPD-005) · Q-02 picture-books (OPD-006) ·
+                             Q-03 GPU envelope (OPD-007) · Q-06 mecha tentpole (OPD-008)
+ON operator answers:         Q-05 ko_KR · Q-07 Japan legal entity · M6 judge recruiting
 ```
 
-**Tentpole D1 options (Q-MANGA-06):** (A) keep warrior_calm ja_JP as battle
-and re-author its profile; (B) re-point to the cultivation-burnout hybrid its
-authored script already proves (**recommended** — story asset exists, zero
-new risk); (C) drop the tentpole flag for ja_JP. Not self-ratified.
+**Tentpole D1 (Q-MANGA-06):** **RESOLVED** OPD-20260704-008 — option B (mecha /
+cultivation-burnout hybrid); applied in M3 Wave 2 ja_JP warrior_calm script.
 
 **Reuse ledger (nothing re-authored):** run_manga_pipeline.run_one_book ·
 generate_catalog_plan_from_strategic.py · translate_chapter_script.py ·

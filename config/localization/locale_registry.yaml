@@ -343,6 +343,32 @@ locales:
       kobo: HU
       spotify: HU
 
+  # ─── PORTUGUESE (BRAZIL) — Q-MANGA-01 ratified 2026-07-04 (OPD-20260704-005) ─
+
+  pt-BR:
+    language: Portuguese (Brazil)
+    region: Brazil
+    script: Latin
+    direction: ltr
+    tts_provider: google_neural2
+    tts_fallback: elevenlabs
+    tts_locale_code: pt-BR
+    elevenlabs_model: eleven_multilingual_v2
+    google_voice_default: pt-BR-Neural2-A
+    catalog_language: Português (Brasil)
+    notes: >
+      Brazil — real manga/webtoon market (Conrad Editora, Social Comics, WEBTOON PT).
+      WHO anxiety prevalence world-highest; strong self-help + comics culture.
+      Neutral Brazilian Portuguese (not European). Cap amendment: 14th locale
+      (Q-MANGA-01). M7 Wave A order: fr_FR first, then pt_BR.
+    is_baseline: false
+    storefront_ids:
+      google_play: pt-BR
+      findaway: BR
+      apple_books: BR
+      kobo: BR
+      spotify: BR
+
 # ─── LOCALE GROUPS (for wave planning) ──────────────────────────────────────
 
 locale_groups:
@@ -367,6 +393,9 @@ locale_groups:
   spanish_all:
     - es-US
     - es-ES
+  latam:
+    - es-US
+    - pt-BR
   european:
     - fr-FR
     - de-DE
@@ -387,6 +416,7 @@ locale_groups:
     - de-DE
     - it-IT
     - hu-HU
+    - pt-BR
 
 # ─── DISTRIBUTION HARD RULES ────────────────────────────────────────────────
 # Enforced by distribution layer — not just a recommendation.
