@@ -1,0 +1,177 @@
+# Character Roster — gen_z_professionals / financial_anxiety (engine: spiral)
+# Authority: SOURCE_OF_TRUTH/story_atoms/story_atom_tier_templates.yaml
+# 12 named characters; one per chapter. Pearl_Writer authored.
+version: "1.0"
+topic: financial_anxiety
+persona: gen_z_professionals
+engine: spiral
+
+characters:
+  - id: theo
+    name: Theo
+    age: 24
+    role: "junior UX designer at a mid-size SaaS company, first salaried job"
+    signature_trigger: "the rent cell selected in his 1am budget spreadsheet"
+    signature_pattern: "recalculates the same fixed numbers hoping a new arrangement yields a different total; rebuilds the sheet from scratch because the saved version feels untrustworthy"
+    signature_detail: "re-types numbers he already knows, deletes and retypes a decimal, the cursor blinking in an empty cell; back teeth aching from a clenched jaw"
+    topic_tie: "financial anxiety via the 1am recalculation loop — re-running fixed rent/savings/loan math as if arithmetic could change the outcome"
+    arc_position_coverage:
+      recognition: "story_atoms/gen_z_professionals/anchored/financial_anxiety/spiral/recognition/micro/v01.txt"
+      mechanism_proof: "story_atoms/gen_z_professionals/anchored/financial_anxiety/spiral/mechanism_proof/micro/v01.txt"
+      turning_point: "story_atoms/gen_z_professionals/anchored/financial_anxiety/spiral/turning_point/micro/v01.txt"
+      embodiment: "story_atoms/gen_z_professionals/anchored/financial_anxiety/spiral/embodiment/micro/v01.txt"
+    notes_for_writer: "Theo's engine is spiral-as-arithmetic: the compulsion is literal re-computation, distinct from Maya's Slack-badge avoidance and Nora's refresh-circle checking. Keep it concrete to the spreadsheet UI — cells, tabs, arrow keys, decimals, the blinking cursor, the clock time climbing. NEVER name the feeling; show jaw/teeth, shoulders, the face-down phone. The math never resolves because it isn't a math problem; the shift is tolerating the un-recalculated number, not finding a better one. Rent genuinely is most of his paycheck — do not resolve the finances, only the loop. Third-person present throughout."
+  - id: nia
+    name: Nia
+    age: 24
+    role: "Gig-stacking side-hustler (delivery driver by night, freelance designer, casual reseller) topping up an underpaid entry-level day job"
+    signature_trigger: "A low-dollar app notification — a $4.75 delivery ping, an unpaid freelance invoice, a resale watcher — landing late at night against a bill that clears in days"
+    signature_pattern: "Runs a live per-ping cost-benefit in her head (gas vs. payout, sleep-hours vs. dollars) and answers it by taking the next gig; treats her own exhaustion as a spendable budget line, so the tireder she gets the more she works"
+    signature_detail: "Three earning apps open in a fan across one phone screen; the folded twenty a Friday customer slips into a returned delivery bag; the phone going into the glovebox"
+    topic_tie: "financial anxiety via side-hustle stacking — the accelerating 1am math that converts sleep and rest into billable units"
+    arc_position_coverage:
+      recognition: "story_atoms/gen_z_professionals/anchored/financial_anxiety/spiral/recognition/micro/v02.txt"
+      mechanism_proof: "story_atoms/gen_z_professionals/anchored/financial_anxiety/spiral/mechanism_proof/micro/v02.txt"
+      turning_point: "story_atoms/gen_z_professionals/anchored/financial_anxiety/spiral/turning_point/micro/v02.txt"
+      embodiment: "story_atoms/gen_z_professionals/anchored/financial_anxiety/spiral/embodiment/micro/v02.txt"
+    notes_for_writer: "Keep every beat in dollars, minutes, and app mechanics — she thinks in units, never in feelings. NEVER label the state (no 'exhausted', 'anxious', 'burned out'); show it as behavior: not eating, doing math on the couch at 1am, friends who stopped inviting her, sitting still when the light turns green. The spiral is that being-behind is self-fueling: earning to escape the number keeps her too depleted to get ahead of it. Embodiment must stay small and slightly uncomfortable — letting one offer expire reads to her like an unpaid debt, not relief. Her recovery is SUBTRACTION (declining a ping, an empty hour), not a new productivity system. Do not give her insight before turning_point; recognition and mechanism_proof stay pre-awareness."
+  - id: sol
+    name: Sol
+    age: 25
+    role: "junior UX designer at a mid-size SaaS company, first salaried job"
+    signature_trigger: "a group-plan invite with a shared cost — the cabin split, the trip thread, the photo of the weekend she skipped"
+    signature_pattern: "declines with a fabricated 'work' excuse to hide the money reason, then heart-reacts to the group photo fast so the pause never shows — social withdrawal disguised as busyness"
+    signature_detail: "the fake casual sad-face text ('slammed that weekend :(') she rereads to make sure the alibi lands, and the open-close-reopen of the banking app on a number she already knows"
+    topic_tie: "financial anxiety via social-cost avoidance masked as busyness — the shared-expense math that quietly decides her friendships for her"
+    arc_position_coverage:
+      recognition: "story_atoms/gen_z_professionals/anchored/financial_anxiety/spiral/recognition/micro/v03.txt"
+      mechanism_proof: "story_atoms/gen_z_professionals/anchored/financial_anxiety/spiral/mechanism_proof/micro/v03.txt"
+      turning_point: "story_atoms/gen_z_professionals/anchored/financial_anxiety/spiral/turning_point/micro/v03.txt"
+      embodiment: "story_atoms/gen_z_professionals/anchored/financial_anxiety/spiral/embodiment/micro/v03.txt"
+    notes_for_writer: "Keep Sol's tell in the DEVICE — the muted thread, the heart-react-before-the-pause, the excuse reread for plausibility. Her recurring object is the group chat and the photo she is not in. Never let her name the feeling; show the body (pasta going cold, eating standing, thumb over send). The arc moves from lying-by-omission (recognition/mechanism) to a half-honest sentence she can't yet send (turning) to a 'maybe' backed by a real weekly number and a reminder named after the mountains (embodiment) — hope without a guaranteed yes. The trip/photo motif must recur across all four so the through-line reads as one person, not four vignettes."
+  - id: wren
+    name: Wren
+    age: 24
+    role: "junior data analyst at a mid-size fintech, first salaried job out of a state school"
+    signature_trigger: "the four-hour window every payday between the 6:02 a.m. deposit and the autopays draining it — the only hours the money is 'real'"
+    signature_pattern: "compulsively watching the balance during that window, screenshotting the peak, refreshing to confirm each autopay leave, then keeping the app open on a number that has stopped moving to run days-until-next-Friday math"
+    signature_detail: "the 6:02 a.m. deposit time; the screenshot-the-peak ritual; the physical tell of the thumb going back to the app between messages; face-down phone as the small departure from habit"
+    topic_tie: "financial anxiety via the accelerating 1am spiral — watching a balance leave in real time and re-running the subtraction as if repetition could change the number"
+    arc_position_coverage:
+      recognition: "story_atoms/gen_z_professionals/anchored/financial_anxiety/spiral/recognition/micro/v04.txt"
+      mechanism_proof: "story_atoms/gen_z_professionals/anchored/financial_anxiety/spiral/mechanism_proof/micro/v04.txt"
+      turning_point: "story_atoms/gen_z_professionals/anchored/financial_anxiety/spiral/turning_point/micro/v04.txt"
+      embodiment: "story_atoms/gen_z_professionals/anchored/financial_anxiety/spiral/embodiment/micro/v04.txt"
+    notes_for_writer: "Wren's core motif overlaps deliberately with Renata's 'lands and leaves in the same breath' (healthcare RN financial_stress v03) but the distinct signature is the FOUR-HOUR WATCH WINDOW and the screenshot-the-peak ritual — keep those load-bearing so Wren reads as its own person. Gen-Z texture: the app is the nervous system, the spiral is measured in refreshes and screenshots not spreadsheets. NEVER label the feeling (no 'anxious', 'panicked', 'broke'); show the thumb, the subtraction-done-twice, the face-down phone. Engine is SPIRAL: the loop accelerates and repeats (subtract, refresh, re-subtract, days-until math) — the acceleration IS the mechanism. Recognition = first naming the window with no insight. Mechanism_proof = the ritual hardened, watching each autopay leave, cost = the four hours spent counting. Turning_point = the reframe loosens the grip WITHOUT a fix (still no insight into why). Embodiment = one deliberate payday of NOT watching, checking once at lunch — 'not peace exactly,' setting down something heavy for a block. Keep 3rd-person present, Wren un-gendered throughout (use 'Wren'/'the' constructions, avoid he/she)."
+  - id: kofi
+    name: Kofi
+    age: 24
+    role: "junior data analyst at a logistics firm, first salaried job"
+    signature_trigger: "the monthly remittance transfer he sends home the instant his paycheck lands, before he pays himself"
+    signature_pattern: "reflexive in-head currency conversion (rate minus fee) and 1am recalculation loops where the transfer and rent are fixed floors and only his own remainder flexes downward"
+    signature_detail: "his mother's voice note saying \"small-small\" that he replays; the Send-button hold-and-press; the empty account in his own name he never funds"
+    topic_tie: "financial anxiety via the accelerating 1am math of a remittance obligation treated as an untouchable floor, so the only variable left to cut is himself"
+    arc_position_coverage:
+      recognition: "story_atoms/gen_z_professionals/anchored/financial_anxiety/spiral/recognition/micro/v05.txt"
+      mechanism_proof: "story_atoms/gen_z_professionals/anchored/financial_anxiety/spiral/mechanism_proof/micro/v05.txt"
+      turning_point: "story_atoms/gen_z_professionals/anchored/financial_anxiety/spiral/turning_point/micro/v05.txt"
+      embodiment: "story_atoms/gen_z_professionals/anchored/financial_anxiety/spiral/embodiment/micro/v05.txt"
+    notes_for_writer: "Kofi's signature is the transfer-before-self ritual and the reflexive exchange-rate math — keep him distinct from Maya (Slack-badge avoidance) and Nora (2am refresh-circle). NEVER label the feeling (no \"anxious/guilty/ashamed\"); show it as body and behavior: thumb hovering on Send, breath held, skipped lunches, quick heart. The obligation is real and loved, not resented — the ache is that he has made himself the only adjustable line item. Embodiment is deliberately small and uneasy (funding his own account \"less than a dinner\" feels like theft), never a budgeting-triumph. Keep 3rd-person present, one concrete trigger per atom, no resolution."
+  - id: bex
+    name: Bex
+    age: 24
+    role: "Junior UX designer at a mid-size SaaS company"
+    signature_trigger: "A 'Pay in 4' installment reminder banner she swipes away without opening"
+    signature_pattern: "Deliberate not-looking — she keeps the four stacked BNPL apps closed so the total stays a fog instead of a figure, dismissing every notification and postponing the tally to a 'Sunday' that is already here"
+    signature_detail: "Four un-opened buy-now-pay-later apps (Klarna, Afterpay, an in-app one, and a fourth she can't name), the coffee-shop card decline she plays off, and the phone she leaves face-up on the desk at the end"
+    topic_tie: "financial anxiety via stacked BNPL debt she avoids by never opening the apps"
+    arc_position_coverage:
+      recognition: "story_atoms/gen_z_professionals/anchored/financial_anxiety/spiral/recognition/micro/v06.txt"
+      mechanism_proof: "story_atoms/gen_z_professionals/anchored/financial_anxiety/spiral/mechanism_proof/micro/v06.txt"
+      turning_point: "story_atoms/gen_z_professionals/anchored/financial_anxiety/spiral/turning_point/micro/v06.txt"
+      embodiment: "story_atoms/gen_z_professionals/anchored/financial_anxiety/spiral/embodiment/micro/v06.txt"
+    notes_for_writer: "Bex's signature is AVOIDANCE-AS-CONTROL and the specific texture of BNPL fragmentation — the debt is spread thin across apps so no single screen shows the truth; her spiral is the 1am reconstruction of a total she keeps refusing to see. Keep her wry and self-deflecting ('laughs it off', 'means it, and does not do it') — she is competent and funny, not tearful. NEVER use emotion labels; render feeling as body (chest 'doing the tight thing') and gesture (swiping banners, the screenshot, the face-up phone). The keystone image is the reversal of the compulsive open-close: her recognition/mechanism atoms are about NOT opening; her embodiment is opening ONE app on purpose and not closing it. Distinct from Maya (Slack red-badge dread) and Nora (refresh-as-pulse): Bex's gesture is the dismiss-swipe and the fog she maintains on purpose. Keep endings unresolved — she writes two of four lines, sets a blank for tomorrow; no debt is paid, nothing is solved."
+  - id: dre
+    name: Dre
+    age: 25
+    role: "junior UX designer, mid-size fintech; first salaried job, three years out of a state school"
+    signature_trigger: "a group-chat notification with a vacation photo — a boarding pass, an infinity pool, a rooftop"
+    signature_pattern: "fires a heart-react in under a second while a silent conversion runs underneath — photo into a number, number into a verdict about himself — then mutes and unmutes, locks and unlocks, to look again"
+    signature_detail: "the reflexive double-tap heart sent in under a second, sitting on top of a mental ledger he never writes down; the banking app he opens to check a number he already knows"
+    topic_tie: "financial anxiety via comparison — the group chat's vacation posts converted into a silent tally of what everyone else can afford"
+    arc_position_coverage:
+      recognition: "story_atoms/gen_z_professionals/anchored/financial_anxiety/spiral/recognition/micro/v07.txt"
+      mechanism_proof: "story_atoms/gen_z_professionals/anchored/financial_anxiety/spiral/mechanism_proof/micro/v07.txt"
+      turning_point: "story_atoms/gen_z_professionals/anchored/financial_anxiety/spiral/turning_point/micro/v07.txt"
+      embodiment: "story_atoms/gen_z_professionals/anchored/financial_anxiety/spiral/embodiment/micro/v07.txt"
+    notes_for_writer: "Dre's spiral is comparison-shaped and phone-native: the tell is always the gap between the instant, genuine heart-react and the slow, private arithmetic beneath it. Keep the emotion in the BODY and the GESTURE (thumb hovering, jaw, re-reading a caption, mute/unmute, lock/unlock, double-tap) — never label it. His accelerant is the chain 'photo → number → flight → what-they-earn → verdict about me,' the classic 1am math done in daylight. Reuse the shared roster cast (Jordan, Priya, Maya) as the friends whose posts trigger him — that's canonical per the SHARING RULE. His relief is never triumphant: a real reply with no number in it, a glass of water, the phone left in another room. Distinct from Maya (Slack red-badge) and Nora (banking-app refresh-circle): Dre's signature object is the little red heart — the fastest true thing he does all day, sitting on top of the slowest false one."
+  - id: lena
+    name: Lena
+    age: 26
+    role: "Data analyst at a mid-size SaaS company, first job with a real salary band"
+    signature_trigger: "The personal-finance spreadsheet she rebuilt the night the raise landed — specifically the projection row where her cursor idles at 1 a.m., and the duplicated what-if tabs (projection A/B/C)"
+    signature_pattern: "The accelerating recompute: she reopens the sheet and re-runs the same forecast from a slightly better angle, adding and deleting the same transfer amount, chasing a total toward a word like 'enough' that never resolves — the spiral is arithmetic, not words"
+    signature_detail: "The raise is real and in the top cell (bigger, black, correct) yet the tightness behind the sternum is identical to the old number's; the sleeping coworker/budget-losing sister who feel fine on less are her recurring contrast"
+    topic_tie: "financial anxiety via the accelerating 1 a.m. recompute — reopening and re-forecasting a spreadsheet to chase 'enough'"
+    arc_position_coverage:
+      recognition: "story_atoms/gen_z_professionals/anchored/financial_anxiety/spiral/recognition/micro/v08.txt"
+      mechanism_proof: "story_atoms/gen_z_professionals/anchored/financial_anxiety/spiral/mechanism_proof/micro/v08.txt"
+      turning_point: "story_atoms/gen_z_professionals/anchored/financial_anxiety/spiral/turning_point/micro/v08.txt"
+      embodiment: "story_atoms/gen_z_professionals/anchored/financial_anxiety/spiral/embodiment/micro/v08.txt"
+    notes_for_writer: "Her specific shame is META and must stay center: she got the exact fix she told herself would work (more money), it changed nothing, so the fault must be her — do not resolve this, it's the engine. Keep her fluent and competent with numbers (she's an analyst); the spiral is not innumeracy, it's numeracy weaponized. Signature must stay distinct: Maya = Slack red badge / morning dread; Nora = 2 a.m. banking-app refresh + one-income injustice; Zoë = replaceability. Lena = the rebuilt spreadsheet + recompute-from-a-better-angle. NEVER name the emotion — stay on body (sternum, jaw), behavior (duplicating tabs, un-recomputed), and the small physical still-point (bowl in hand, closing the lid). Embodiment is a labeled reframe typed into the note, not a cure — 'quiet that is not relief.'"
+  - id: ash
+    name: Ash
+    age: 26
+    role: "freelance graphic designer / brand contractor (variable project income)"
+    signature_trigger: "a quiet inbox / a light week with no new project landing"
+    signature_pattern: "reads the lull as danger, runs runway math (balance ÷ rent, minus a safety month, minus another), then panic-over-books every client at once and crashes trying to deliver"
+    signature_detail: "the freelance dashboard 'runway math' left open in a browser tab, recalculated against a balance that hasn't changed, plus the payment-portal refresh checking whether an invoice cleared"
+    topic_tie: "financial anxiety via the self-employed runway spiral — no fixed paycheck, so silence reads as threat and the loop is 1am survival math plus reflexive over-booking"
+    arc_position_coverage:
+      recognition: "story_atoms/gen_z_professionals/anchored/financial_anxiety/spiral/recognition/micro/v09.txt"
+      mechanism_proof: "story_atoms/gen_z_professionals/anchored/financial_anxiety/spiral/mechanism_proof/micro/v09.txt"
+      turning_point: "story_atoms/gen_z_professionals/anchored/financial_anxiety/spiral/turning_point/micro/v09.txt"
+      embodiment: "story_atoms/gen_z_professionals/anchored/financial_anxiety/spiral/embodiment/micro/v09.txt"
+    notes_for_writer: "Ash is the freelancer/gig-income variant — distinct from salaried characters: the fear isn't a bill or a badge, it's the STRUCTURAL uncertainty of variable income, where a slow week is indistinguishable from ruin. Keep the two physical tells consistent: (1) the runway-math tab always open and recalculated, (2) the payment-portal invoice refresh. Show the crash through over-commitment (the yes-to-everything week), never through the word 'anxious' or 'overwhelmed'. Signature verb-texture: dividing, subtracting a safety month, refreshing, saying yes. The arc bends on CONSEQUENCE-ABSENCE, not reassurance-from-another (that's Nora's lane) — the danger simply fails to arrive. Embodiment = the pause before the math + the deferred yes ('let me check my calendar'), a boundary Ash could never afford to set before. Austin/remote-contractor texture; do not give Ash a boss or a fixed shift."
+  - id: imani
+    name: Imani
+    age: 25
+    role: "junior product designer at a mid-size agency, first salaried job out of a bootcamp cohort"
+    signature_trigger: "the loan payoff estimate at the top of the servicer portal — the multi-year date that never changes between checks"
+    signature_pattern: "the open-close loop: opens the loan balance, closes it, opens the pastel budgeting app she never fills, closes that too, reopens the balance — thumb running the path on muscle memory"
+    signature_detail: "her breath stops at the top of the scroll over the first empty budget field; the payoff estimate reads three years and seven months; peer salaries surface as posts in her design-cohort feed (base plus equity)"
+    topic_tie: "financial anxiety via the loan-portal open-close loop"
+    arc_position_coverage:
+      recognition: "story_atoms/gen_z_professionals/anchored/financial_anxiety/spiral/recognition/micro/v10.txt"
+      mechanism_proof: "story_atoms/gen_z_professionals/anchored/financial_anxiety/spiral/mechanism_proof/micro/v10.txt"
+      turning_point: "story_atoms/gen_z_professionals/anchored/financial_anxiety/spiral/turning_point/micro/v10.txt"
+      embodiment: "story_atoms/gen_z_professionals/anchored/financial_anxiety/spiral/embodiment/micro/v10.txt"
+    notes_for_writer: "Imani shares her core mechanism (loan portal open-close + budgeting app never filled) with Renata in healthcare_rns/financial_stress — keep them DISTINCT: Imani is a designer, not a nurse. Her world is critiques, redlining mock-ups, a cohort feed where peers post salaries/equity — comparison is her accelerant, not shift work. Her bodily signature is the held breath at the top of the scroll and the thumb's lock-screen muscle memory; her number is the 3yr-7mo payoff estimate. NEVER use emotion labels (anxious/broke/overwhelmed) — stay on breath, jaw, ribs, the stilled thumb. The pastel/'cheerful empty circles' budgeting app is her recurring object; the loop always ends unresolved except in embodiment, where she enters exactly one real number (Rent) and leaves it — a small different act, not a plan. Insight-pivot language belongs only in turning_point and embodiment ('can't quite file away' / 'a fact instead of a sentence passed on her')."
+  - id: quinn
+    name: Quinn
+    age: 24
+    role: "junior UX designer on a rolling contract (no benefits, deposit timing varies)"
+    signature_trigger: "a card decline / a deposit landing / a roommate's casual 'whenever' — anything that makes the balance the only number in the room"
+    signature_pattern: "pull-to-refresh as a nervous tic — thumb dragging the screen until it bounces, re-checking a number she already knows; subtracting the paycheck down to zero out loud the morning it arrives"
+    signature_detail: "the balance read as a water line — 'one emergency from underwater'; the payday 'comma' that dissolves by 6:40 a.m.; the forgotten auto-draft; the storage unit she never canceled; forty-one dollars"
+    topic_tie: "financial anxiety via the balance-refresh spiral — checking the number as compulsion, the 1am/6am subtraction loop that accelerates toward zero"
+    arc_position_coverage:
+      recognition: "story_atoms/gen_z_professionals/anchored/financial_anxiety/spiral/recognition/micro/v11.txt"
+      mechanism_proof: "story_atoms/gen_z_professionals/anchored/financial_anxiety/spiral/mechanism_proof/micro/v11.txt"
+      turning_point: "story_atoms/gen_z_professionals/anchored/financial_anxiety/spiral/turning_point/micro/v11.txt"
+      embodiment: "story_atoms/gen_z_professionals/anchored/financial_anxiety/spiral/embodiment/micro/v11.txt"
+    notes_for_writer: "Keep Quinn's compulsion tactile and specific: the physical pull-to-refresh bounce, the deposit 'comma' as a fleeting weather event, exact small dollar figures ($41, $11, the $40 owed). Never label the feeling (no anxious/panicked/dread) — show thumb, breath held, standing to eat, the number felt across a room. 'Underwater' is her governing image; render it through money-behavior, not water metaphor overload. Embodiment must stay un-triumphant: not-checking is fragile and time-bound (she still reads it at 7:04), a different ground, not a cure. Priya-style incidental debtors are fine as off-page mentions; Quinn is the sole POV in every atom."
+  - id: devon
+    name: Devon
+    age: 24
+    role: "junior UX designer at a mid-size SaaS company, first salaried job"
+    signature_trigger: "any moment that touches money in passing — a friend buying a round, a coffee, a dinner split — even when nothing is being asked of him"
+    signature_pattern: "an involuntary second ledger: he converts the lived moment into dollars in real time and subtracts it against a rent number he knows by heart, all while nodding along to the conversation on the surface"
+    signature_detail: "the thumb that opens the phone calculator and closes it and opens it again under the table; the tip rounded up because the barista was watching"
+    topic_tie: "financial anxiety via compulsive real-time arithmetic — the running mental subtraction that prices every social moment and never switches off"
+    arc_position_coverage:
+      recognition: "story_atoms/gen_z_professionals/anchored/financial_anxiety/spiral/recognition/micro/v12.txt"
+      mechanism_proof: "story_atoms/gen_z_professionals/anchored/financial_anxiety/spiral/mechanism_proof/micro/v12.txt"
+      turning_point: "story_atoms/gen_z_professionals/anchored/financial_anxiety/spiral/turning_point/micro/v12.txt"
+      embodiment: "story_atoms/gen_z_professionals/anchored/financial_anxiety/spiral/embodiment/micro/v12.txt"
+    notes_for_writer: "Devon's signature is DISTINCT from Maya (Slack red-badge dread) and from Nora/Nadia (the banking-app refresh under the covers): he never checks a balance on screen — the ledger runs in his head, against social spending, mid-conversation. NEVER use emotion labels (anxious/broke/stressed); show it only as the arithmetic, the calculator thumb, the surface nodding that masks the column adding underneath. Concrete money objects only (eight-dollar latte, twenty-two-dollar round, split-later app, card reader). The turning_point is a STOP, not a fix — the loop pausing is what frightens him, because he does not know who he is in the silence. The embodiment is choosing NOT to do the division for the length of one friend's story — the number still waits at the edge; residual echo intact. Keep him warm and socially present on the surface; the whole horror is that the second column runs while he is being a good friend. Good sequel candidates: pricing a wedding gift he can't afford, the group-chat Venmo request, a raise that changes the rent number but not the loop."
