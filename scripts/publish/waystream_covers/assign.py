@@ -18,6 +18,7 @@ import yaml
 
 from . import palette as P
 from .templates import Spec
+from .layout_zones import layout_variant_for_book
 
 ROOT = Path(__file__).resolve().parents[3]
 CFG = ROOT / "config/publishing/waystream_cover_system.yaml"
@@ -27,6 +28,15 @@ SERVED_COVERS = ROOT / "brand-wizard-app/public/assets/covers/way_stream_sanctua
 POOLS = ROOT / "artifacts/waystream/author_pools"
 
 TRACK_FALLBACK_POOL = {"activation": "lena_frost", "ground": "theo_castellan"}
+
+TYPE_DOMINANT_ELIGIBLE = {"gradient_solo", "framed", "duotone_split", "stripe_minimal"}
+
+
+def render_family(card_family: str, book_id: str) -> str:
+    h = hashlib.sha256(f"type_dominant|{book_id}".encode()).digest()
+    if card_family in TYPE_DOMINANT_ELIGIBLE and h[2] % 5 == 0:
+        return "type_dominant"
+    return card_family
 
 
 def load_cfg(path: Path = CFG) -> dict:
@@ -241,31 +251,22 @@ def spec_from_row(cfg: dict, row: dict, allow_fallback=True):
         raise KeyError(f"author not in config: {row['author']} -> {aid}")
     inst = int(row["installment"])
     motif = cfg["topic_symbols"].get(row["topic"], {}).get("motif", "ring")
-    fam = card["family"]
-    fp = author_fingerprint(aid, fam, cfg["brand"]["brand_id"])
-    # COVER HOOK (re-enabled per operator 2026-07-01 second pass): the parked
-    # short-hook path is the per-cell fallback for the bigger (2.2x) subtitle.
-    # Prefer the authored `short_hook`; if none, DERIVE a clean lead phrase from
-    # the subtitle via cover_subtitle() (em-dash/paren-stripped, no mid-word cut)
-    # so a too-long no-hook subtitle still falls back to a short, clean hook
-    # instead of overflowing the cover. templates use it only when the FULL
-    # subtitle would not fit at 2.2x; where the full subtitle fits, it is drawn.
-    cover_hook = cover_subtitle(row["subtitle"], (row.get("short_hook") or "").strip())
+    card_fam = card["family"]
+    fam = render_family(card_fam, row["book_id"])
+    layout_var = layout_variant_for_book(row["book_id"])
+    fp = author_fingerprint(aid, card_fam, cfg["brand"]["brand_id"])
     spec = Spec(
-        # operator 2026-07-01 (second pass): draw the FULL catalog subtitle at the
-        # bigger (2.2x) size where it fits; templates fall back to `short_hook`
-        # (authored, else derived) per-cell only when it would overrun.
-        title=row["title"], subtitle=row["subtitle"],
-        short_hook=cover_hook,
+        title=(row["title"] or "").strip(),
+        subtitle=(row["subtitle"] or "").strip(),
         author_display=row["author"], imprint=cfg["brand"]["imprint"],
         series_name=row["cluster"].strip().upper(), book_num=inst, count=inst,
         topic=row["topic"], motif=motif,
         serif=card["serif"], sans=card["sans"], title_case=card.get("title_case", "sentence"),
         deep=P.hex_rgb(card["deep"]), field=P.hex_rgb(card["field"]), accent=P.hex_rgb(card["accent"]),
-        seed=seed_of(row["book_id"]), family=fam,
+        seed=seed_of(row["book_id"]), family=fam, layout_variant=layout_var,
         framing=fp["framing"], plate=fp["plate"],
     )
     img_path, pool_src = (None, None)
-    if card["family"] in cfg["image_families"]:
+    if card_fam in cfg["image_families"]:
         img_path, pool_src = pick_pool_image(aid, card["track"], row["book_id"], allow_fallback)
     return spec, img_path, pool_src, aid

@@ -24,18 +24,29 @@ def _title_words(title: str) -> list[str]:
     return [w for w in chunk.split() if len(w) > 3][:5]
 
 
-def ocr_match(cover: Path, title: str) -> bool:
+def _subtitle_words(subtitle: str) -> list[str]:
+    chunk = re.sub(r"[^\w\s]", " ", (subtitle or "").lower())
+    return [w for w in chunk.split() if len(w) > 3][:6]
+
+
+def ocr_match(cover: Path, title: str, subtitle: str = "") -> bool:
     try:
         import pytesseract
         from PIL import Image
     except ImportError:
         return True
     txt = pytesseract.image_to_string(Image.open(cover), config="--psm 6").lower()
-    words = _title_words(title)
-    if not words:
-        return True
-    hits = sum(1 for w in words if w in txt)
-    return hits >= max(2, len(words) - 1)
+    title_words = _title_words(title)
+    title_ok = True
+    if title_words:
+        hits = sum(1 for w in title_words if w in txt)
+        title_ok = hits >= max(2, len(title_words) - 1)
+    sub_words = _subtitle_words(subtitle)
+    sub_ok = True
+    if sub_words:
+        sub_hits = sum(1 for w in sub_words if w in txt)
+        sub_ok = sub_hits >= max(2, min(4, len(sub_words)))
+    return title_ok and sub_ok
 
 
 def main() -> None:
@@ -78,7 +89,7 @@ def main() -> None:
                 errors.append(f"dashboard title mismatch: {bid}")
             if d["subtitle"].strip() != plan["subtitle"].strip():
                 errors.append(f"dashboard subtitle mismatch: {bid}")
-        if args.ocr and cov.is_file() and not ocr_match(cov, plan["title"]):
+        if args.ocr and cov.is_file() and not ocr_match(cov, plan["title"], plan.get("subtitle", "")):
             ocr_fail.append(bid)
 
     titles = [p["title"] for p in plans.values()]
