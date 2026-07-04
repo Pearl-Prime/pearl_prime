@@ -2809,6 +2809,8 @@ def _strengthen_opening_chapter_flow(
     selector), not through this function. The late-chapter MISSING_CLEAR_POINT /
     WEAK_TRANSITIONS fix therefore lives there; this opening-only helper is unchanged.
     """
+    if not render_glue_enabled():
+        return parts
     if chapter_index > 1:
         return parts
     claim = (thesis or "").strip()

@@ -1501,13 +1501,20 @@ def strengthen_chapter_flow_for_delivery(
     (b) re-evaluate and append deterministic guarantee lines until the *specific* fixable
     errors are cleared. This strengthens the OUTPUT only — the gate and its thresholds are
     untouched. Deterministic given (book_seed, chapter_index).
+
+    De-injection 2026-07-05: when ``PHOENIX_ENABLE_RENDER_GLUE`` is off (production default),
+    return cleaned prose without appending flow-glue guarantee lines.
     """
+    from phoenix_v4.rendering.render_glue import render_glue_enabled
+
     del emotional_role, topic_id
 
     base = _normalize_generic_scene_lighting((composed or "").strip())
     if not base:
         return base
     base = clean_for_delivery(base, plan=plan)
+    if not render_glue_enabled():
+        return base
 
     profile = flow_profile if flow_profile is not None else _chapter_flow_profile_from_plan(plan)
     result = evaluate_chapter_flow(base, flow_profile=profile)
@@ -1575,6 +1582,10 @@ def strengthen_rendered_spine_manuscript(
     flow_profile: Optional[str] = None,
 ) -> str:
     """Apply strengthen_chapter_flow_for_delivery per Chapter N block (enriched-book / spine output)."""
+    from phoenix_v4.rendering.render_glue import render_glue_enabled
+
+    if not render_glue_enabled():
+        return rendered_text
     text = (rendered_text or "").strip()
     if not text:
         return rendered_text
