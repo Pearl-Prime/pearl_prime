@@ -23,13 +23,17 @@
 # this flat v01-v20 STORY format — most v-slots are independent vignettes and get
 # distinct names). Gender-matched to each block's pronouns.
 #
-# NOTE: a handful of template blocks (inherited from the shared 20-variant STORY
-# skeleton — see docs/PEARL_ARCHITECT_STATE.md PR #178 lineage) carry adult-coded scene
-# furniture ("his daughter asked why his hands shook at dinner") left over from the
-# adult-persona template this skeleton was cloned from. Per mission scope (minimal edit:
-# name + one light individuating detail; preserve scene/stakes/metadata verbatim), these
-# are named but NOT rewritten in this pass — the scene-furniture mismatch is a separate,
-# larger authoring gap tracked outside this individuation task.
+# RESOLVED: the handful of template blocks (inherited from the shared 20-variant STORY
+# skeleton — see docs/PEARL_ARCHITECT_STATE.md PR #178 lineage) that carried adult-coded
+# scene furniture ("his daughter asked why his hands shook at dinner", solo car/parking-lot
+# commute beats, "the boundary between work and the rest of her") were rewritten for
+# age-appropriate framing (school gates, classroom, family dinner with a sibling instead of
+# a child, bus/room instead of a car) across all 16 STORY pools. Mechanism text, metadata,
+# and open endings were preserved verbatim — only the scene furniture changed. See the
+# PEARL_GITHUB_ONBOARDING-routed audit that landed this fix for the block-by-block mapping
+# (STORY v05, v10, v15, v17, v18). Same shared skeleton is still correctly adult-coded for
+# the other 11 personas it's cloned into (healthcare_rns, corporate_managers, etc.) — do not
+# port this rewrite to those personas.
 
 version: "1.0"
 scope: gen_alpha_students_all_topics_wave1_naming
