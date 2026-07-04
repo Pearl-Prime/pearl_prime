@@ -144,11 +144,13 @@ PUBLIC = ROOT / "brand-wizard-app" / "public"
 SRC = ROOT / "brand-wizard-app" / "src"
 SHOWCASE_EN = PUBLIC / "teacher_showcase.html"
 
-# locale -> (wizard component, localized showcase sibling, <html lang> value)
+# locale routing code -> (wizard component, localized showcase sibling, <html lang> BCP-47)
+# Routing codes (ja/zh/tw) stay short for _teacherLang() / _wizardFile(); html lang uses
+# valid BCP-47 (zh-Hant for Taiwan Traditional Chinese — never bare "tw").
 LOCALES = {
     "ja": ("BrandWizard-ja.jsx", "teacher_showcase-ja.html", "ja"),
     "zh": ("BrandWizard-zh.jsx", "teacher_showcase-zh.html", "zh"),
-    "tw": ("BrandWizard-tw.jsx", "teacher_showcase-tw.html", "tw"),
+    "tw": ("BrandWizard-tw.jsx", "teacher_showcase-tw.html", "zh-Hant"),
 }
 
 
@@ -180,9 +182,9 @@ def check_localized_teacher_handoff() -> int:
 
 def check_localized_showcase_pages() -> int:
     """Each localized teacher_showcase sibling must exist, declare its <html lang>,
-    and its _teacherLang() must default to its locale (never fall through to English)."""
+    and its _teacherLang() must default to its routing locale (never fall through to English)."""
     rc = 0
-    for loc, (_wiz, sibling, lang) in LOCALES.items():
+    for loc, (_wiz, sibling, html_lang) in LOCALES.items():
         f = PUBLIC / sibling
         if not f.is_file():
             print(f"ERROR: missing {f} ({loc} teacher showcase page)")
@@ -190,8 +192,8 @@ def check_localized_showcase_pages() -> int:
             continue
         text = f.read_text(encoding="utf-8")
         problems = []
-        if f'<html lang="{lang}">' not in text:
-            problems.append(f'missing <html lang="{lang}">')
+        if f'<html lang="{html_lang}">' not in text:
+            problems.append(f'missing <html lang="{html_lang}">')
         fn = re.search(r"function _teacherLang\(\)\s*\{(.*?)\n\}", text, re.S)
         if not fn:
             problems.append("_teacherLang() not found")
@@ -203,7 +205,7 @@ def check_localized_showcase_pages() -> int:
                 print(f"  - {p}")
             rc = 1
         else:
-            print(f"OK: {sibling} declares lang={lang} and _teacherLang() defaults to {loc}")
+            print(f"OK: {sibling} declares lang={html_lang} and _teacherLang() defaults to {loc}")
     return rc
 
 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="tw">
+<html lang="zh-Hant">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -614,11 +614,11 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
         <div class="teacher-avatar" style="overflow:hidden;padding:0;height:96px"><img src="teacher_pics/manga/master_feung_top.png" alt="master_feung" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;border-radius:inherit" onerror="this.src='teacher_pics/master_sha.png'"></div>
         <div>
           <div class="teacher-name">Master Feung</div>
-          <div class="teacher-brand">Iron Gate Press <span class="brand-jp">铁门出版</span></div>
-          <div class="teacher-tradition">道家 / 气功 / 传统中医</div>
-          <div class="teacher-focus">倦怠、身心疗愈、勇气</div>
-          <div class="teacher-stats">🇨🇳 中文 · 长者稳定 · 8,614 字 · 武侠</div>
-                <button class="teacher-select-btn" id="sel-btn-master_feung" data-tname="Master Feung" onclick="chooseTeacher('master_feung', 'Master Feung')">选择冯老师</button>
+          <div class="teacher-brand">Iron Gate Press <span class="brand-jp">鐵門出版</span></div>
+          <div class="teacher-tradition">道家 / 氣功 / 傳統中醫</div>
+          <div class="teacher-focus">倦怠、身心療癒、勇氣</div>
+          <div class="teacher-stats">🇨🇳 中文 · 長者穩定 · 8,614字 · 武俠</div>
+                <button class="teacher-select-btn" id="sel-btn-master_feung" data-tname="Master Feung" onclick="chooseTeacher('master_feung', 'Master Feung')">選擇馮老師</button>
       </div>
       </div>
 
@@ -630,22 +630,22 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
         <div class="formats-grid">
           <div class="format-card" onclick="toggleSection('master_feung_book')" style="cursor:pointer">
             <img src="https://pub-7c709cd3f8e6425dbeffaed4ca2cf901.r2.dev/teacher_showcase/assets/covers/kdp/master_feung_localized_2026-05-17.png" loading="lazy" alt="Master Feung 電子書" onerror="this.style.display='none'">
-            <div class="format-label">电子书</div>
-            <div class="format-brand">铁门出版</div>
+            <div class="format-label">電子書</div>
+            <div class="format-brand">鐵門出版</div>
           </div>
           <div class="format-card podcast-playable" style="cursor:pointer;position:relative" onclick="toggleAudiobook('master_feung')">
             <img src="https://pub-7c709cd3f8e6425dbeffaed4ca2cf901.r2.dev/teacher_showcase/assets/covers/kdp/master_feung_audiobook_localized_2026-05-17.jpg" loading="lazy" alt="Master Feung 有聲書" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:4px;margin-bottom:8px">
             <div class="play-overlay" id="play-ab-master_feung" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:44px;height:44px;border-radius:50%;background:rgba(0,0,0,0.6);display:flex;align-items:center;justify-content:center;pointer-events:none">
               <span style="color:white;font-size:1.1rem;margin-left:2px">&#9654;</span>
             </div>
-            <div class="format-label">有声书</div>
-            <div class="format-meta">第1章 · 点击播放</div>
+            <div class="format-label">有聲書</div>
+            <div class="format-meta">第1章 · 點擊播放</div>
             <audio id="audiobook-master_feung" preload="metadata" src="https://pub-7c709cd3f8e6425dbeffaed4ca2cf901.r2.dev/teacher_showcase/audio_remap/master_feung_audiobook_zh-cn.mp3"></audio>
           </div>
           <div class="format-card" onclick="cycleManga('master_feung')" style="cursor:pointer">
             <img id="manga-img-master_feung" src="assets/manga_covers/master_feung_scene.png" loading="lazy" alt="Master Feung 角色" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center top;border-radius:4px;margin-bottom:8px">
-            <div class="format-label">漫画</div>
-            <div class="format-meta">角色艺术</div>
+            <div class="format-label">漫畫</div>
+            <div class="format-meta">角色插畫</div>
           </div>
           <div class="format-card podcast-playable"
                style="cursor:pointer; position:relative"
@@ -663,7 +663,7 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
               <span style="color:white; font-size:1.1rem; margin-left:2px">&#9654;</span>
             </div>
             <div class="format-label">播客</div>
-            <div class="format-meta">3分钟 · 点击播放</div>
+            <div class="format-meta">3分鐘 · 點擊播放</div>
             <audio id="podcast-master_feung" preload="metadata"
                    src="assets/audio/podcast/master_wu_podcast_3min.mp3"></audio>
           </div>
@@ -671,8 +671,8 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
             <video controls preload="metadata" playsinline style="width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:4px;margin-bottom:8px;background:#000">
               <source src="https://pub-7c709cd3f8e6425dbeffaed4ca2cf901.r2.dev/teacher_showcase/teacher_vid_package/master_feung.mp4" type="video/mp4">
             </video>
-            <div class="format-label">漫画短片</div>
-            <div class="format-meta">竖版 · 90秒</div>
+            <div class="format-label">漫畫短片</div>
+            <div class="format-meta">直式 · 90秒</div>
           </div>
         </div>
       </div>
@@ -685,27 +685,27 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
 
       <!-- READ BOOK -->
       <div class="section-toggle" onclick="toggleSection('master_feung_book')">
-        <span class="toggle-arrow" id="arr_master_feung_book">▸</span> 阅读样章 (约2,333字)</div>
+        <span class="toggle-arrow" id="arr_master_feung_book">▸</span> 閱讀樣章（約2,333字）</div>
       <div id="master_feung_book" class="collapsible" style="display:none">
         <div class="book-content">
-<h3 class="chapter-heading">第一章 — 鸣不止的警报</h3>
+<h3 class="chapter-heading">第一章 — 鳴不止的警報</h3>
 <br>
-<p>你的绩效评估在下周四。</p>
+<p>你的績效評估在下週四。</p>
 <br>
-<p>从周一开始，你就在准备——不是材料。材料你早就熟了。你在准备的是你的<em>脸</em>。你的声音。那个走进会议室、不让警报显形的版本的自己。没有人看得见的那部分准备，才是这一周里最耗人的部分。</p>
+<p>從週一開始，你就在準備——不是材料。材料你早就熟了。你在準備的是你的<em>臉</em>。你的聲音。那個走進會議室、不讓警報顯形的版本的自己。沒有人看得見的那部分準備，才是這一週裡最耗人的部分。</p>
 <br>
-<p>日历说：高效。身体却在跑一套完全不同的程式。</p>
+<p>日曆說：高效。身體卻在跑一套完全不同的程式。</p>
 <br>
-<h4 class="preview-section-heading">扫描</h4>
+<h4 class="preview-section-heading">掃描</h4>
 <br>
-<p>你身上有一部分总是在扫描。</p>
+<p>你身上有一部分總是在掃描。</p>
 <br>
-<p>不是焦虑地扫。不是显眼地扫。就是——扫描。盯着主管的回复时间。读一条 Slack 消息的语气。反复推算上周二那句话到底是什么意思。你做这件事已经太久、太熟练，以至于自己都不再察觉。你把它当成了"我就是这种人"。</p>
+<p>不是焦慮地掃。不是顯眼地掃。就是——掃描。盯著主管的回覆時間。讀一條 Slack 訊息的語氣。反覆推算上週二那句話到底是什麼意思。你做這件事已經太久、太熟練，以至於自己都不再察覺。你把它當成了「我就是這種人」。</p>
 <br>
-<p>不是。这是一个机制。看清楚之后，它就开始松动。</p>
+<p>不是。這是一個機制。看清楚之後，它就開始鬆動。</p>
 <br>
 <div style="margin-top:32px; padding-top:20px; border-top:1px solid #333; text-align:center;">
-  <a href="./teacher_showcase/master_feung__chapter_1.html" style="color:#F5A623; text-decoration:none; font-family:'DM Sans',sans-serif; font-size:0.95rem; letter-spacing:0.05em; font-weight:500; border-bottom:1px solid #F5A623; padding-bottom:2px;" target="_blank" rel="noopener">阅读完整章节 →</a>
+  <a href="./teacher_showcase/master_feung__chapter_1.html" style="color:#F5A623; text-decoration:none; font-family:'DM Sans',sans-serif; font-size:0.95rem; letter-spacing:0.05em; font-weight:500; border-bottom:1px solid #F5A623; padding-bottom:2px;" target="_blank" rel="noopener">閱讀完整章節 →</a>
 </div>
 </div>
       </div>
@@ -950,10 +950,10 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
         <div>
           <div class="teacher-name">Junko</div>
           <div class="teacher-brand">Bare Form Books <span class="brand-jp">裸形書房</span></div>
-          <div class="teacher-tradition">禅僧 / 侘び寂び / 座禅</div>
-          <div class="teacher-focus">燃え尽き症候群、インポスター症候群、勇気</div>
-          <div class="teacher-stats">🇯🇵 日本語 · ソマティック・コンパニオン · 8,872 語 · 青年マンガ</div>
-                <button class="teacher-select-btn" id="sel-btn-junko" data-tname="Junko" onclick="chooseTeacher('junko', 'Junko')">純子を選ぶ</button>
+          <div class="teacher-tradition">禪僧 / 侘寂 / 坐禪</div>
+          <div class="teacher-focus">倦怠症候群、冒名頂替症候群、勇氣</div>
+          <div class="teacher-stats">🇯🇵 日語 · somatic_companion · 8,872字 · 青年漫畫</div>
+                <button class="teacher-select-btn" id="sel-btn-junko" data-tname="Junko" onclick="chooseTeacher('junko', 'Junko')">選擇 Junko</button>
       </div>
       </div>
 
@@ -965,7 +965,7 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
         <div class="formats-grid">
           <div class="format-card" onclick="toggleSection('junko_book')" style="cursor:pointer">
             <img src="https://pub-7c709cd3f8e6425dbeffaed4ca2cf901.r2.dev/teacher_showcase/assets/covers/kdp/junko_localized_2026-05-21.png" loading="lazy" alt="Junko 電子書" onerror="this.style.display='none'">
-            <div class="format-label">電子書籍</div>
+            <div class="format-label">電子書</div>
             <div class="format-brand">裸形書房</div>
           </div>
           <div class="format-card podcast-playable" style="cursor:pointer;position:relative" onclick="toggleAudiobook('junko')">
@@ -973,14 +973,14 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
             <div class="play-overlay" id="play-ab-junko" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:44px;height:44px;border-radius:50%;background:rgba(0,0,0,0.6);display:flex;align-items:center;justify-content:center;pointer-events:none">
               <span style="color:white;font-size:1.1rem;margin-left:2px">&#9654;</span>
             </div>
-            <div class="format-label">オーディオブック</div>
-            <div class="format-meta">第1章 · クリックして再生</div>
+            <div class="format-label">有聲書</div>
+            <div class="format-meta">第1章 · 點擊播放</div>
             <audio id="audiobook-junko" preload="metadata" src="assets/audio/audiobook_chapters/miyuki_overthinking_ch1.mp3"></audio>
           </div>
           <div class="format-card" onclick="cycleManga('junko')" style="cursor:pointer">
             <img id="manga-img-junko" src="assets/manga_covers/miyuki_scene.png" loading="lazy" alt="Junko 角色" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center top;border-radius:4px;margin-bottom:8px">
-            <div class="format-label">漫画</div>
-            <div class="format-meta">キャラクターアート</div>
+            <div class="format-label">漫畫</div>
+            <div class="format-meta">角色插畫</div>
           </div>
           <div class="format-card podcast-playable"
                style="cursor:pointer; position:relative"
@@ -997,8 +997,8 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
             ">
               <span style="color:white; font-size:1.1rem; margin-left:2px">&#9654;</span>
             </div>
-            <div class="format-label">ポッドキャスト</div>
-            <div class="format-meta">3分 · クリックして再生</div>
+            <div class="format-label">播客</div>
+            <div class="format-meta">3分鐘 · 點擊播放</div>
             <audio id="podcast-junko" preload="metadata"
                    src="assets/audio/podcast/junko_podcast_3min.mp3"></audio>
           </div>
@@ -1006,8 +1006,8 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
             <video controls preload="metadata" playsinline style="width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:4px;margin-bottom:8px;background:#000">
               <source src="https://pub-7c709cd3f8e6425dbeffaed4ca2cf901.r2.dev/teacher_showcase/teacher_vid_package/junko.mp4" type="video/mp4">
             </video>
-            <div class="format-label">マンガショート</div>
-            <div class="format-meta">縦型 · 90秒</div>
+            <div class="format-label">漫畫短片</div>
+            <div class="format-meta">直式 · 90秒</div>
           </div>
         </div>
       </div>
@@ -1030,29 +1030,27 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
 
       <!-- READ BOOK -->
       <div class="section-toggle" onclick="toggleSection('junko_book')">
-        <span class="toggle-arrow" id="arr_junko_book">▸</span> サンプル章を読む (約2,857文字)</div>
+        <span class="toggle-arrow" id="arr_junko_book">▸</span> 閱讀樣章（約2,857字）</div>
       <div id="junko_book" class="collapsible" style="display:none">
         <div class="book-content">
-<h3 class="chapter-heading">第1章 — 鳴り止まない警報</h3>
+<h3 class="chapter-heading">第1章 — 響個不停的警報</h3>
 <br>
-<p>来週の木曜日に、人事評価がある。</p>
+<p>你的績效考核在下週四。</p>
 <br>
-<p>月曜日からあなたが準備してきたのは、資料ではない。資料はもう頭に入っている。準備してきたのは、自分の<em>顔</em>だ。声。あの部屋に入っても警報が見えないようにする、自分のひとつのバージョン。誰にも映らない準備こそが、この一週間でいちばん消耗する作業だった。</p>
+<p>從星期一起你就一直在準備——不是資料。資料你早已了然於心。你一直在準備的，是自己的 <em>臉</em>。你的聲音。那個走進那個房間、不讓警報顯露出來的自己。這場沒人看得見的準備，才是這一週裡最耗神的部分。</p>
 <br>
-<p>カレンダーには「生産的」と書いてある。あなたの体はまったく別のものを走らせている。</p>
+<p>你的行事曆寫著：有生產力。可你的身體，卻在運行著全然不同的東西。</p>
 <br>
-<h4 class="preview-section-heading">スキャン</h4>
+<h4 class="preview-section-heading">掃描</h4>
 <br>
-<p>あなたの中には、いつも何かを走査している部分がある。</p>
+<p>你的內在，有一個部分始終在掃描。</p>
 <br>
-<p>不安そうにではない。あからさまにでもない。ただ — 走査している。マネージャーの返信の速さを測り、Slackの語感を読み、先週火曜の発言の含みを計算し直している。あまりに長く、巧みに続けてきたので、もう気づくこともない。「自分はそういう人間だ」と勘違いしてきた。</p>
+<p>不是焦慮地，也不是明顯地。只是——掃描著。監測主管的回覆速度。解讀一則 Slack 訊息的語氣。反覆推算上週二那句話是否別有含意。你這麼做得太有效率、太久了，久到你已不再察覺。你把它誤認成了「自己本就是這樣的人」。</p>
 <br>
-<p>違う。それはひとつの仕組みだ。はっきり見えた瞬間、それは変わりはじめる。</p>
-<br>
-<p>このメッセージは、私が考えたものではない。受け取っているものだ。</p>
+<p>並非如此。那是一套機制。而當你一旦看清它，它便會改變。</p>
 <br>
 <div style="margin-top:32px; padding-top:20px; border-top:1px solid #333; text-align:center;">
-  <a href="./teacher_showcase/junko__chapter_1.html" style="color:#F5A623; text-decoration:none; font-family:'DM Sans',sans-serif; font-size:0.95rem; letter-spacing:0.05em; font-weight:500; border-bottom:1px solid #F5A623; padding-bottom:2px;" target="_blank" rel="noopener">全章を読む →</a>
+  <a href="./teacher_showcase/junko__chapter_1.html" style="color:#F5A623; text-decoration:none; font-family:'DM Sans',sans-serif; font-size:0.95rem; letter-spacing:0.05em; font-weight:500; border-bottom:1px solid #F5A623; padding-bottom:2px;" target="_blank" rel="noopener">閱讀完整章節 →</a>
 </div>
 </div>
       </div>
@@ -1073,10 +1071,10 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
         <div>
           <div class="teacher-name">Miki</div>
           <div class="teacher-brand">Present Tense Books <span class="brand-jp">今此処文庫</span></div>
-          <div class="teacher-tradition">神道 / 森林浴 / 自然瞑想</div>
-          <div class="teacher-focus">睡眠不安、不安、共感疲労</div>
-          <div class="teacher-stats">🇯🇵 日本語 · リサーチガイド · 8,177 語 · 癒し系</div>
-                <button class="teacher-select-btn" id="sel-btn-miki" data-tname="Miki" onclick="chooseTeacher('miki', 'Miki')">美季を選ぶ</button>
+          <div class="teacher-tradition">神道 / 森林浴 / 自然冥想</div>
+          <div class="teacher-focus">睡眠焦慮、焦慮、同理心疲勞</div>
+          <div class="teacher-stats">🇯🇵 日語 · research_guide · 8,177字 · 療癒系</div>
+                <button class="teacher-select-btn" id="sel-btn-miki" data-tname="Miki" onclick="chooseTeacher('miki', 'Miki')">選擇 Miki</button>
       </div>
       </div>
 
@@ -1088,7 +1086,7 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
         <div class="formats-grid">
           <div class="format-card" onclick="toggleSection('miki_book')" style="cursor:pointer">
             <img src="https://pub-7c709cd3f8e6425dbeffaed4ca2cf901.r2.dev/teacher_showcase/assets/covers/kdp/miki_starseed_2026-05-21.png" loading="lazy" alt="Miki 電子書" onerror="this.style.display='none'">
-            <div class="format-label">電子書籍</div>
+            <div class="format-label">電子書</div>
             <div class="format-brand">今此処文庫</div>
           </div>
           <div class="format-card podcast-playable" style="cursor:pointer;position:relative" onclick="toggleAudiobook('miki')">
@@ -1096,14 +1094,14 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
             <div class="play-overlay" id="play-ab-miki" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:44px;height:44px;border-radius:50%;background:rgba(0,0,0,0.6);display:flex;align-items:center;justify-content:center;pointer-events:none">
               <span style="color:white;font-size:1.1rem;margin-left:2px">&#9654;</span>
             </div>
-            <div class="format-label">オーディオブック</div>
-            <div class="format-meta">第1章 · クリックして再生</div>
+            <div class="format-label">有聲書</div>
+            <div class="format-meta">第1章 · 點擊播放</div>
             <audio id="audiobook-miki" preload="metadata" src="assets/audio/audiobook_chapters/miki_imposter_syndrome_ch1.mp3"></audio>
           </div>
           <div class="format-card" onclick="cycleManga('miki')" style="cursor:pointer">
             <img id="manga-img-miki" src="assets/manga_covers/miki_scene.png" loading="lazy" alt="Miki 角色" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center top;border-radius:4px;margin-bottom:8px">
-            <div class="format-label">漫画</div>
-            <div class="format-meta">キャラクターアート</div>
+            <div class="format-label">漫畫</div>
+            <div class="format-meta">角色插畫</div>
           </div>
           <div class="format-card podcast-playable"
                style="cursor:pointer; position:relative"
@@ -1120,8 +1118,8 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
             ">
               <span style="color:white; font-size:1.1rem; margin-left:2px">&#9654;</span>
             </div>
-            <div class="format-label">ポッドキャスト</div>
-            <div class="format-meta">3分 · クリックして再生</div>
+            <div class="format-label">播客</div>
+            <div class="format-meta">3分鐘 · 點擊播放</div>
             <audio id="podcast-miki" preload="metadata"
                    src="assets/audio/podcast/miki_podcast_3min.mp3"></audio>
           </div>
@@ -1129,8 +1127,8 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
             <video controls preload="metadata" playsinline style="width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:4px;margin-bottom:8px;background:#000">
               <source src="https://pub-7c709cd3f8e6425dbeffaed4ca2cf901.r2.dev/teacher_showcase/teacher_vid_package/miki.mp4" type="video/mp4">
             </video>
-            <div class="format-label">マンガショート</div>
-            <div class="format-meta">縦型 · 90秒</div>
+            <div class="format-label">漫畫短片</div>
+            <div class="format-meta">直式 · 90秒</div>
           </div>
         </div>
       </div>
@@ -1143,27 +1141,27 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
 
       <!-- READ BOOK -->
       <div class="section-toggle" onclick="toggleSection('miki_book')">
-        <span class="toggle-arrow" id="arr_miki_book">▸</span> サンプル章を読む (約3,041文字)</div>
+        <span class="toggle-arrow" id="arr_miki_book">▸</span> 閱讀樣章（約3,041字）</div>
       <div id="miki_book" class="collapsible" style="display:none">
         <div class="book-content">
-<h3 class="chapter-heading">第1章 — 鳴り止まない警報</h3>
+<h3 class="chapter-heading">第1章 — 響個不停的警報</h3>
 <br>
-<p>来週の木曜日、人事評価がある。</p>
+<p>你的績效考核在下週四。</p>
 <br>
-<p>月曜日からずっと準備してきた——資料のことではない。資料はもう頭に入っている。準備していたのは、自分の<em>顔</em>。声。その部屋に入っても警報を表に出さない自分のあり方。誰にも見えないその準備こそが、一週間で最も消耗する時間だった。</p>
+<p>從星期一起你就一直在準備——不是資料。資料你早已了然於心。你一直在準備的，是自己的 <em>臉</em>。你的聲音。那個走進那個房間、不讓警報顯露出來的自己。這場沒人看得見的準備，才是這一週裡最耗神的部分。</p>
 <br>
-<p>カレンダーは言う——「順調」。けれど体は、まったく別のものを走らせている。</p>
+<p>你的行事曆寫著：有生產力。可你的身體，卻在運行著全然不同的東西。</p>
 <br>
-<h4 class="preview-section-heading">スキャン</h4>
+<h4 class="preview-section-heading">掃描</h4>
 <br>
-<p>あなたの中には、常にスキャンしている部分がある。</p>
+<p>你的內在，有一個部分始終在掃描。</p>
 <br>
-<p>不安そうにではない。目立つ形でもない。ただ——スキャンしている。上司の返信の速さを測る。Slackのメッセージの語調を読む。先週の火曜の一言に何か意味があったのではないかと、何度も計算し直している。あまりに長く、あまりに効率よくこれを続けてきたので、もうそれをしていることに気づかない。「自分はそういう人間だから」と取り違えてきた。</p>
+<p>不是焦慮地，也不是明顯地。只是——掃描著。監測主管的回覆速度。解讀一則 Slack 訊息的語氣。反覆推算上週二那句話是否別有含意。你這麼做得太有效率、太久了，久到你已不再察覺。你把它誤認成了「自己本就是這樣的人」。</p>
 <br>
-<p>そうではない。これは仕組みだ。そして、はっきり見えた瞬間から、それは変わり始める。</p>
+<p>並非如此。那是一套機制。而當你一旦看清它，它便會改變。</p>
 <br>
 <div style="margin-top:32px; padding-top:20px; border-top:1px solid #333; text-align:center;">
-  <a href="./teacher_showcase/miki__chapter_1.html" style="color:#F5A623; text-decoration:none; font-family:'DM Sans',sans-serif; font-size:0.95rem; letter-spacing:0.05em; font-weight:500; border-bottom:1px solid #F5A623; padding-bottom:2px;" target="_blank" rel="noopener">全章を読む →</a>
+  <a href="./teacher_showcase/miki__chapter_1.html" style="color:#F5A623; text-decoration:none; font-family:'DM Sans',sans-serif; font-size:0.95rem; letter-spacing:0.05em; font-weight:500; border-bottom:1px solid #F5A623; padding-bottom:2px;" target="_blank" rel="noopener">閱讀完整章節 →</a>
 </div>
 </div>
       </div>
@@ -1416,22 +1414,22 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
         <div>
           <div class="teacher-name">上心 先生</div>
           <div class="teacher-brand">Clear Seeing Books <span class="brand-jp">明見書房</span></div>
-          <div class="teacher-tradition">禅僧 / 公案 / マインドフルネス</div>
-          <div class="teacher-focus">考えすぎ・不安・燃え尽き症候群</div>
-          <div class="teacher-stats">🇯🇵 日本語 · リサーチガイド · 4,799 語 · 青年マンガ</div>
-                <button class="teacher-select-btn" id="sel-btn-joshin" data-tname="Joshin" onclick="chooseTeacher('joshin', 'Joshin')">上心を選ぶ</button>
+          <div class="teacher-tradition">禪僧 / 公案 / 正念</div>
+          <div class="teacher-focus">想太多、焦慮、倦怠症候群</div>
+          <div class="teacher-stats">🇯🇵 日語 · research_guide · 4,799字 · 青年漫畫</div>
+                <button class="teacher-select-btn" id="sel-btn-joshin" data-tname="Joshin" onclick="chooseTeacher('joshin', 'Joshin')">選擇 Joshin</button>
       </div>
       </div>
 
       <!-- FORMATS ROW (ebook, audiobook, manga, podcast, social) -->
       <div class="section-toggle" onclick="toggleSection('joshin_formats')">
-        <span class="toggle-arrow open" id="arr_joshin_formats">▸</span> フォーマット
+        <span class="toggle-arrow open" id="arr_joshin_formats">▸</span> 格式
       </div>
       <div id="joshin_formats" class="collapsible" style="display:block">
         <div class="formats-grid">
           <div class="format-card" onclick="toggleSection('joshin_book')" style="cursor:pointer">
             <img src="https://pub-7c709cd3f8e6425dbeffaed4ca2cf901.r2.dev/teacher_showcase/assets/covers/kdp/joshin_localized_2026-05-17.png" loading="lazy" alt="Joshin 電子書" onerror="this.style.display='none'">
-            <div class="format-label">電子書籍</div>
+            <div class="format-label">電子書</div>
             <div class="format-brand">明見書房</div>
           </div>
           <div class="format-card podcast-playable" style="cursor:pointer;position:relative" onclick="toggleAudiobook('joshin')">
@@ -1439,14 +1437,14 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
             <div class="play-overlay" id="play-ab-joshin" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:44px;height:44px;border-radius:50%;background:rgba(0,0,0,0.6);display:flex;align-items:center;justify-content:center;pointer-events:none">
               <span style="color:white;font-size:1.1rem;margin-left:2px">&#9654;</span>
             </div>
-            <div class="format-label">オーディオブック</div>
-            <div class="format-meta">第1章 · クリックして再生</div>
+            <div class="format-label">有聲書</div>
+            <div class="format-meta">第1章 · 點擊播放</div>
             <audio id="audiobook-joshin" preload="metadata" src="assets/audio/audiobook_chapters/joshin_anxiety_ch1.mp3"></audio>
           </div>
           <div class="format-card" onclick="cycleManga('joshin')" style="cursor:pointer">
             <img id="manga-img-joshin" src="assets/manga_covers/joshin_symbolic.png" loading="lazy" alt="Joshin 角色" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center top;border-radius:4px;margin-bottom:8px">
-            <div class="format-label">漫画</div>
-            <div class="format-meta">キャラクターアート</div>
+            <div class="format-label">漫畫</div>
+            <div class="format-meta">角色插畫</div>
           </div>
           <div class="format-card podcast-playable"
                style="cursor:pointer; position:relative"
@@ -1463,8 +1461,8 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
             ">
               <span style="color:white; font-size:1.1rem; margin-left:2px">&#9654;</span>
             </div>
-            <div class="format-label">ポッドキャスト</div>
-            <div class="format-meta">3分 · クリックして再生</div>
+            <div class="format-label">播客</div>
+            <div class="format-meta">3分鐘 · 點擊播放</div>
             <audio id="podcast-joshin" preload="metadata"
                    src="assets/audio/podcast/joshin_podcast_3min.mp3"></audio>
           </div>
@@ -1472,8 +1470,8 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
             <video controls preload="metadata" playsinline style="width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:4px;margin-bottom:8px;background:#000">
               <source src="https://pub-7c709cd3f8e6425dbeffaed4ca2cf901.r2.dev/teacher_showcase/teacher_vid_package/joshin.mp4" type="video/mp4">
             </video>
-            <div class="format-label">マンガショート</div>
-            <div class="format-meta">縦型 · 90秒</div>
+            <div class="format-label">漫畫短片</div>
+            <div class="format-meta">直式 · 90秒</div>
           </div>
         </div>
       </div>
@@ -1494,27 +1492,27 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
 
       <!-- READ BOOK -->
       <div class="section-toggle" onclick="toggleSection('joshin_book')">
-        <span class="toggle-arrow" id="arr_joshin_book">▸</span> サンプル章を読む (約3,022文字)</div>
+        <span class="toggle-arrow" id="arr_joshin_book">▸</span> 閱讀樣章（約3,022字）</div>
       <div id="joshin_book" class="collapsible" style="display:none">
         <div class="book-content">
-<h3 class="chapter-heading">第1章 — 鳴り止まない警報</h3>
+<h3 class="chapter-heading">第1章 — 響個不停的警報</h3>
 <br>
-<p>人事評価は来週の木曜日。</p>
+<p>你的績效考核在下週四。</p>
 <br>
-<p>月曜から準備をしてきた。資料ではない。資料は頭に入っている。準備してきたのは、自分の<em>顔</em>である。声。あの部屋に入って、警報を外に漏らさない自分のバージョン。本音は奥に押し込み、建前を磨く。誰にも見えないこの作業が、一週間で一番疲れる。</p>
+<p>從星期一起你就一直在準備——不是資料。資料你早已了然於心。你一直在準備的，是自己的 <em>臉</em>。你的聲音。那個走進那個房間、不讓警報顯露出來的自己。這場沒人看得見的準備，才是這一週裡最耗神的部分。</p>
 <br>
-<p>カレンダーは「生産的」と表示している。体はまったく別のプログラムを走らせている。</p>
+<p>你的行事曆寫著：有生產力。可你的身體，卻在運行著全然不同的東西。</p>
 <br>
-<h4 class="preview-section-heading">スキャン</h4>
+<h4 class="preview-section-heading">掃描</h4>
 <br>
-<p>あなたの中には、常にスキャンしている部分がある。</p>
+<p>你的內在，有一個部分始終在掃描。</p>
 <br>
-<p>不安げにではない。露骨にでもない。ただ — スキャンしている。マネージャーの返信速度を監視する。Slackの一文のトーンを読む。先週火曜日のあのコメントが何を意味していたか、再計算する。あまりにも長く、あまりにも効率的に走らせ続けてきたので、もう気づかなくなっている。「自分はそういう性格なんだ」と取り違えている。</p>
+<p>不是焦慮地，也不是明顯地。只是——掃描著。監測主管的回覆速度。解讀一則 Slack 訊息的語氣。反覆推算上週二那句話是否別有含意。你這麼做得太有效率、太久了，久到你已不再察覺。你把它誤認成了「自己本就是這樣的人」。</p>
 <br>
-<p>性格ではない。これは作動中のメカニズムである。密教ではこれを技術として扱う。見えるようになった瞬間、扱えるものに変わる。</p>
+<p>並非如此。那是一套機制。而當你一旦看清它，它便會改變。</p>
 <br>
 <div style="margin-top:32px; padding-top:20px; border-top:1px solid #333; text-align:center;">
-  <a href="./teacher_showcase/joshin__chapter_1.html" style="color:#F5A623; text-decoration:none; font-family:'DM Sans',sans-serif; font-size:0.95rem; letter-spacing:0.05em; font-weight:500; border-bottom:1px solid #F5A623; padding-bottom:2px;" target="_blank" rel="noopener">全章を読む →</a>
+  <a href="./teacher_showcase/joshin__chapter_1.html" style="color:#F5A623; text-decoration:none; font-family:'DM Sans',sans-serif; font-size:0.95rem; letter-spacing:0.05em; font-weight:500; border-bottom:1px solid #F5A623; padding-bottom:2px;" target="_blank" rel="noopener">閱讀完整章節 →</a>
 </div>
 </div>
       </div>
@@ -1646,10 +1644,10 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
         <div>
           <div class="teacher-name">Omote Sensei</div>
           <div class="teacher-brand">Held Ground Press <span class="brand-jp">面の地出版</span></div>
-          <div class="teacher-tradition">日本美学 / 能楽 / 真正性</div>
-          <div class="teacher-focus">自己肯定感、社交不安、インポスター症候群</div>
-          <div class="teacher-stats">🇯🇵 日本語 · リサーチガイド · 9,073 語 · 青年マンガ</div>
-                <button class="teacher-select-btn" id="sel-btn-omote" data-tname="Omote" onclick="chooseTeacher('omote', 'Omote')">面先生を選ぶ</button>
+          <div class="teacher-tradition">日本美學 / 能樂 / 真實性</div>
+          <div class="teacher-focus">自我肯定感、社交焦慮、冒名頂替症候群</div>
+          <div class="teacher-stats">🇯🇵 日語 · research_guide · 9,073字 · 青年漫畫</div>
+                <button class="teacher-select-btn" id="sel-btn-omote" data-tname="Omote" onclick="chooseTeacher('omote', 'Omote')">選擇 Omote</button>
       </div>
       </div>
 
@@ -1661,7 +1659,7 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
         <div class="formats-grid">
           <div class="format-card" onclick="toggleSection('omote_book')" style="cursor:pointer">
             <img src="https://pub-7c709cd3f8e6425dbeffaed4ca2cf901.r2.dev/teacher_showcase/assets/covers/kdp/omote_localized_2026-05-17.png" loading="lazy" alt="Omote 電子書" onerror="this.style.display='none'">
-            <div class="format-label">電子書籍</div>
+            <div class="format-label">電子書</div>
             <div class="format-brand">面の地出版</div>
           </div>
           <div class="format-card podcast-playable" style="cursor:pointer;position:relative" onclick="toggleAudiobook('omote')">
@@ -1669,14 +1667,14 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
             <div class="play-overlay" id="play-ab-omote" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:44px;height:44px;border-radius:50%;background:rgba(0,0,0,0.6);display:flex;align-items:center;justify-content:center;pointer-events:none">
               <span style="color:white;font-size:1.1rem;margin-left:2px">&#9654;</span>
             </div>
-            <div class="format-label">オーディオブック</div>
-            <div class="format-meta">第1章 · クリックして再生</div>
+            <div class="format-label">有聲書</div>
+            <div class="format-meta">第1章 · 點擊播放</div>
             <audio id="audiobook-omote" preload="metadata" src="assets/audio/audiobook_chapters/omote_sleep_anxiety_ch1.mp3"></audio>
           </div>
           <div class="format-card" onclick="cycleManga('omote')" style="cursor:pointer">
             <img id="manga-img-omote" src="assets/manga_covers/omote_scene.png" loading="lazy" alt="Omote 角色" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center top;border-radius:4px;margin-bottom:8px">
-            <div class="format-label">漫画</div>
-            <div class="format-meta">キャラクターアート</div>
+            <div class="format-label">漫畫</div>
+            <div class="format-meta">角色插畫</div>
           </div>
           <div class="format-card podcast-playable"
                style="cursor:pointer; position:relative"
@@ -1693,8 +1691,8 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
             ">
               <span style="color:white; font-size:1.1rem; margin-left:2px">&#9654;</span>
             </div>
-            <div class="format-label">ポッドキャスト</div>
-            <div class="format-meta">3分 · クリックして再生</div>
+            <div class="format-label">播客</div>
+            <div class="format-meta">3分鐘 · 點擊播放</div>
             <audio id="podcast-omote" preload="metadata"
                    src="assets/audio/podcast/omote_podcast_3min.mp3"></audio>
           </div>
@@ -1702,8 +1700,8 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
             <video controls preload="metadata" playsinline style="width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:4px;margin-bottom:8px;background:#000">
               <source src="https://pub-7c709cd3f8e6425dbeffaed4ca2cf901.r2.dev/teacher_showcase/teacher_vid_package/omote.mp4" type="video/mp4">
             </video>
-            <div class="format-label">マンガショート</div>
-            <div class="format-meta">縦型 · 90秒</div>
+            <div class="format-label">漫畫短片</div>
+            <div class="format-meta">直式 · 90秒</div>
           </div>
         </div>
       </div>
@@ -1716,27 +1714,27 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
 
       <!-- READ BOOK -->
       <div class="section-toggle" onclick="toggleSection('omote_book')">
-        <span class="toggle-arrow" id="arr_omote_book">▸</span> サンプル章を読む (約3,325文字)</div>
+        <span class="toggle-arrow" id="arr_omote_book">▸</span> 閱讀樣章（約3,325字）</div>
       <div id="omote_book" class="collapsible" style="display:none">
         <div class="book-content">
-<h3 class="chapter-heading">第1章 — 鳴り止まない警報</h3>
+<h3 class="chapter-heading">第1章 — 響個不停的警報</h3>
 <br>
-<p>人事評価は来週の木曜日。</p>
+<p>你的績效考核在下週四。</p>
 <br>
-<p>月曜から準備をしてきた。資料ではない。資料は頭に入っている。準備してきたのは、あの部屋に運んでいく自分のバージョン — 声、間、視線。警報を悟られない人物を、月曜から組み立てている。誰にも見えないこの作業が、一週間で一番疲れる。</p>
+<p>從星期一起你就一直在準備——不是資料。資料你早已了然於心。你一直在準備的，是自己的 <em>臉</em>。你的聲音。那個走進那個房間、不讓警報顯露出來的自己。這場沒人看得見的準備，才是這一週裡最耗神的部分。</p>
 <br>
-<p>カレンダーは「生産的」と表示している。体はまったく別のプログラムを走らせている。</p>
+<p>你的行事曆寫著：有生產力。可你的身體，卻在運行著全然不同的東西。</p>
 <br>
-<h4 class="preview-section-heading">スキャン</h4>
+<h4 class="preview-section-heading">掃描</h4>
 <br>
-<p>あなたの中には、常にスキャンしている部分がある。</p>
+<p>你的內在，有一個部分始終在掃描。</p>
 <br>
-<p>不安げにではない。露骨にでもない。ただ — スキャンしている。マネージャーの返信速度を監視する。Slackの一文のトーンを読む。先週火曜日のあのコメントが何を意味していたか、再計算する。あまりにも長く、あまりにも効率的に走らせ続けてきたので、もう気づかなくなっている。「自分はそういう性格なんだ」と取り違えている。</p>
+<p>不是焦慮地，也不是明顯地。只是——掃描著。監測主管的回覆速度。解讀一則 Slack 訊息的語氣。反覆推算上週二那句話是否別有含意。你這麼做得太有效率、太久了，久到你已不再察覺。你把它誤認成了「自己本就是這樣的人」。</p>
 <br>
-<p>性格ではない。これは作動中のメカニズムである。そして、聖地で何度も確認してきたことだが — メカニズムは見えた瞬間、扱えるものに変わる。</p>
+<p>並非如此。那是一套機制。而當你一旦看清它，它便會改變。</p>
 <br>
 <div style="margin-top:32px; padding-top:20px; border-top:1px solid #333; text-align:center;">
-  <a href="./teacher_showcase/omote__chapter_1.html" style="color:#F5A623; text-decoration:none; font-family:'DM Sans',sans-serif; font-size:0.95rem; letter-spacing:0.05em; font-weight:500; border-bottom:1px solid #F5A623; padding-bottom:2px;" target="_blank" rel="noopener">全章を読む →</a>
+  <a href="./teacher_showcase/omote__chapter_1.html" style="color:#F5A623; text-decoration:none; font-family:'DM Sans',sans-serif; font-size:0.95rem; letter-spacing:0.05em; font-weight:500; border-bottom:1px solid #F5A623; padding-bottom:2px;" target="_blank" rel="noopener">閱讀完整章節 →</a>
 </div>
 </div>
       </div>
@@ -1953,11 +1951,11 @@ const TEACHER_LABELS = {
         composite: '綜合模式（無教師） →', compositeHint: '為此品牌創作所有書籍，不使用教師之聲' },
 };
 function _teacherLang() {
-  // tw sibling page: honor explicit ?lang= override, else default to tw.
+  // zh-Hant (Taiwan) sibling page: honor explicit ?lang= override, else default to tw routing code.
   try {
     var _p = new URLSearchParams(window.location.search).get('lang');
     if (_p === 'ja') return 'ja';
-    if (_p === 'tw' || _p === 'zh-TW') return 'tw';
+    if (_p === 'tw' || _p === 'zh-TW' || _p === 'zh-Hant') return 'tw';
     if (_p === 'zh' || _p === 'zh-CN') return 'zh';
   } catch (e) {}
   try { localStorage.setItem('pearl_prime_locale', 'tw'); } catch (e) {}

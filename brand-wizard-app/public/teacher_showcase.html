@@ -1958,12 +1958,12 @@ function _teacherLang() {
   try {
     var _p = new URLSearchParams(window.location.search).get('lang');
     if (_p === 'ja') { try { localStorage.setItem('pearl_prime_locale','ja'); } catch (e) {} return 'ja'; }
-    if (_p === 'tw' || _p === 'zh-TW') return 'tw';
+    if (_p === 'tw' || _p === 'zh-TW' || _p === 'zh-Hant') return 'tw';
     if (_p === 'zh' || _p === 'zh-CN') return 'zh';
   } catch (e) {}
   const loc = localStorage.getItem('pearl_prime_locale') || navigator.language || 'en';
   if (loc.startsWith('ja')) return 'ja';
-  if (loc === 'zh-TW' || loc === 'tw') return 'tw';
+  if (loc === 'zh-TW' || loc === 'zh-Hant' || loc === 'tw') return 'tw';
   if (loc.startsWith('zh')) return 'zh';
   return 'en';
 }
