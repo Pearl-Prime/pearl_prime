@@ -41,8 +41,8 @@ def test_local_dispatch_ships_expected_payload(monkeypatch):
     payload = json.loads(cmd[5])
     assert payload["prompt"] == "hi"
     assert payload["seed"] == 1
-    # default priority injected
-    assert payload["priority"] == 5
+    # priority must NOT be injected — on-box workers reject unknown kwargs
+    assert "priority" not in payload
 
 
 def test_ssh_dispatch_when_no_dsn(monkeypatch):
@@ -67,7 +67,8 @@ def test_ssh_dispatch_when_no_dsn(monkeypatch):
     assert "t2i_flux_schnell" in remote
 
 
-def test_priority_override_passed_through(monkeypatch):
+def test_priority_arg_accepted_but_not_injected(monkeypatch):
+    """priority= is validated but not shipped as a task kwarg (workers reject it)."""
     captured = {}
 
     def fake_run(cmd, *args, **kwargs):
@@ -79,7 +80,8 @@ def test_priority_override_passed_through(monkeypatch):
 
     dispatch_gpu_job("t2i", {"prompt": "p"}, task="t2i_flux_dev_h1a", priority=8)
     payload = json.loads(captured["cmd"][5])
-    assert payload["priority"] == 8
+    assert payload["prompt"] == "p"
+    assert "priority" not in payload
 
 
 def test_unknown_job_class_rejected():

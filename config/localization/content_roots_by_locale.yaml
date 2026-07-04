@@ -313,6 +313,30 @@ locales:
       Avoid clinical language in titles; wellness/self-development framing.
       Phase 4 brands: TBD (stabilizer_it, sleep_repair_it).
 
+  # ─── PORTUGUESE (BRAZIL) — Q-MANGA-01 ratified 2026-07-04 (OPD-20260704-005) ─
+
+  pt-BR:
+    description: >
+      Portuguese (Brazil) — Brazil.
+      Atoms stored in locale subdirectory (atoms/pt-BR/).
+      14th locale (Q-MANGA-01); M7 Wave A after fr_FR.
+    atoms_root: "atoms/pt-BR"
+    translation_source_locale: en-US
+    translation_output_root: "atoms/pt-BR"
+    quality_contracts_dir: "config/localization/quality_contracts/pt-BR/"
+    population_status: planned
+    is_baseline: false
+    rollout_phase: Phase 4 (Months 7–12)
+    distribution_blocker: null
+    tts_notes: >
+      Primary: ElevenLabs eleven_multilingual_v2 (pt-BR).
+      Fallback: Google pt-BR-Neural2-A. Neutral Brazilian Portuguese (not European).
+    notes: >
+      Brazilian Portuguese (Português do Brasil). Real manga/webtoon market
+      (Conrad Editora, Social Comics, WEBTOON PT). WHO anxiety prevalence
+      world-highest; strong self-help + comics culture. Neutral Brazilian
+      register — not European Portuguese.
+
   # ─── HUNGARIAN ────────────────────────────────────────────────────────────
 
   hu-HU:

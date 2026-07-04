@@ -2178,7 +2178,7 @@ class TxtWriter:
             lines.append(
                 f"This audiobook has a companion {workbook_label} with all the exercises "
                 f"and reflection prompts. You can get it free at "
-                f"brand-admin-onboarding.pages.dev/free/{freebie_slug}."
+                f"brand-admin-onboarding-bu2.pages.dev/free/{freebie_slug}."
             )
             lines.append("")
 
@@ -2186,7 +2186,7 @@ class TxtWriter:
         if freebie_slug and workbook_type == "full" and self.options.clean_output:
             lines.append(
                 f"A companion {workbook_label} is available for this book at "
-                f"brand-admin-onboarding.pages.dev/free/{freebie_slug}. "
+                f"brand-admin-onboarding-bu2.pages.dev/free/{freebie_slug}. "
                 f"You may want to have it alongside you as you read."
             )
             lines.append("")
@@ -2399,7 +2399,7 @@ class TxtWriter:
             lines.append("")
             lines.append(
                 f"To go deeper and actually do the work from this book, download the "
-                f"companion {workbook_label} at brand-admin-onboarding.pages.dev/free/{freebie_slug}. "
+                f"companion {workbook_label} at brand-admin-onboarding-bu2.pages.dev/free/{freebie_slug}. "
                 f"You will find guided exercises, journaling pages, and tools you can "
                 f"return to again and again. It is free — designed to go with exactly this book."
             )
@@ -2411,7 +2411,7 @@ class TxtWriter:
             lines.append(
                 f"Before you go — if you want to take this further, a companion "
                 f"{workbook_label} is waiting for you at "
-                f"brand-admin-onboarding.pages.dev/free/{freebie_slug}."
+                f"brand-admin-onboarding-bu2.pages.dev/free/{freebie_slug}."
             )
             lines.append("")
 
