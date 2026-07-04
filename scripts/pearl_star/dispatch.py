@@ -46,13 +46,17 @@ DEFER_CLI = REPO_ROOT / "scripts" / "manga" / "defer_panel_job_cli.py"
 DEFAULT_PS_PY = Path("/opt/pearl-star/venv/bin/python")
 
 
-def queue_python() -> str:
-    """Python interpreter that has procrastinate (Pearl Star venv, or env override)."""
+def queue_python(*, on_pearl_star: bool = False) -> str:
+    """Python interpreter that has procrastinate (Pearl Star venv, or env override).
+
+    When *on_pearl_star* is True (SSH defer path), always prefer the on-box venv
+    path even if it is absent on the Mac client — the remote shell resolves it.
+    """
     for key in ("PS_PY", "PS_QUEUE_PYTHON"):
         v = os.environ.get(key, "").strip()
         if v:
             return v
-    if DEFAULT_PS_PY.is_file():
+    if on_pearl_star or DEFAULT_PS_PY.is_file():
         return str(DEFAULT_PS_PY)
     return "python3"
 
@@ -120,12 +124,19 @@ def dispatch_gpu_job(
 
     resolved = _resolve_task(job_class, task)
     full_payload = dict(payload)
-    full_payload.setdefault("priority", int(priority))
+    # Note: do NOT inject priority= into task kwargs — on-box workers
+    # (t2i_flux_dev_h1a / t2i_flux_schnell) reject unknown kwargs. Priority is
+    # advisory for future schedulers only; enqueue order is FIFO today.
 
     host = ssh_host or os.environ.get("PS_QUEUE_SSH_HOST", "pearl_star")
     if queue_dsn_configured():
         return _run_defer_cli(resolved, full_payload, local=True)
     return _run_defer_cli(resolved, full_payload, local=False, ssh_host=host)
+
+
+# Default on-box phoenix checkout (operator tree). Mac clients must set this
+# when deferring over SSH — local REPO_ROOT is not valid on Pearl Star.
+_DEFAULT_PS_REPO = "/home/ahjan108/phoenix_omega"
 
 
 def _resolve_task(job_class: str, task: str | None) -> str:
@@ -157,17 +168,26 @@ def _run_defer_cli(
     ssh_host: str = "pearl_star",
 ) -> dict[str, Any]:
     payload_json = json.dumps(payload)
-    repo = os.environ.get("PS_PHOENIX_REPO", str(REPO_ROOT))
-    py = queue_python()
     if local:
+        repo = os.environ.get("PS_PHOENIX_REPO", str(REPO_ROOT))
+        py = queue_python(on_pearl_star=False)
         cmd = [py, str(DEFER_CLI), "--task", task, "--payload", payload_json]
         proc = subprocess.run(
             cmd, capture_output=True, text=True, timeout=60, env=os.environ.copy()
         )
     else:
+        # On-box checkout + venv (Mac REPO_ROOT is not valid over SSH).
+        repo = os.environ.get("PS_PHOENIX_REPO", _DEFAULT_PS_REPO)
+        py = queue_python(on_pearl_star=True)
         inner = json.dumps(payload_json)
+        # Prefer system queue.env; fall back to operator-exported env
+        # (~/phoenix_omega/.pearl_star_queue.env — Case C when /etc/pearl-star/queue.env
+        # is missing). Never hardcode DSN in repo.
         remote = (
-            f"cd {repo} && set -a && . /etc/pearl-star/queue.env 2>/dev/null; set +a && "
+            f"cd {repo} && set -a && "
+            f". /etc/pearl-star/queue.env 2>/dev/null; "
+            f". {repo}/.pearl_star_queue.env 2>/dev/null; "
+            f"set +a && "
             f"{py} scripts/manga/defer_panel_job_cli.py --task {task} --payload {inner}"
         )
         proc = subprocess.run(
