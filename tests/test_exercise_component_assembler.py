@@ -321,8 +321,9 @@ class TestTemplateFiles:
 # ---------------------------------------------------------------------------
 
 class TestChapterComposerBackwardCompat:
-    def test_compose_without_exercise_context(self):
+    def test_compose_without_exercise_context(self, monkeypatch: pytest.MonkeyPatch):
         """compose_chapter_prose without exercise_context uses 5-dim template wrapping."""
+        monkeypatch.setenv("PHOENIX_ENABLE_RENDER_GLUE", "1")
         from phoenix_v4.rendering.chapter_composer import compose_chapter_prose
 
         result = compose_chapter_prose(
