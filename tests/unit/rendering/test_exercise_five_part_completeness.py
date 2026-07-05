@@ -42,6 +42,11 @@ from phoenix_v4.exercises.models import (
 )
 
 
+@pytest.fixture(autouse=True)
+def _enable_exercise_component_templates(monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setenv("PHOENIX_ENABLE_RENDER_GLUE", "1")
+
+
 # ---------------------------------------------------------------------------
 # 5-part markers — string patterns that identify each operator-required part.
 # These markers come from the existing template YAMLs and standards files.

@@ -1,10 +1,15 @@
 from __future__ import annotations
 
+import pytest
+
 from phoenix_v4.quality.chapter_flow_gate import evaluate_chapter_flow
 from phoenix_v4.rendering.chapter_composer import compose_chapter_prose
 
 
-def test_compose_chapter_applies_overlay_craft_rules() -> None:
+def test_compose_chapter_applies_overlay_craft_rules(monkeypatch: pytest.MonkeyPatch) -> None:
+    # Exercise setup glue is part of the overlay craft path; production default is OFF.
+    monkeypatch.setenv("PHOENIX_ENABLE_RENDER_GLUE", "1")
+    monkeypatch.setenv("PHOENIX_EXERCISE_WRAPPER_FAMILIES", "1")
     slots = ["HOOK", "SCENE", "STORY", "REFLECTION", "EXERCISE", "INTEGRATION"]
     proses = [
         "You reread the message before your feet hit the floor.",

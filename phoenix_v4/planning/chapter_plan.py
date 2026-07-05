@@ -15,6 +15,8 @@ VALID_SLOT_TYPES = {
     "TAKEAWAY",
     "INTEGRATION",
     "THREAD",
+    "TRANSITION",
+    "DWELL",
     "PERMISSION",
     "TEACHER_DOCTRINE",
 }

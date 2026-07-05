@@ -17,9 +17,17 @@ These tests pin the fix:
 """
 from __future__ import annotations
 
+import pytest
+
 from phoenix_v4.rendering import chapter_composer as cc
 
 
+@pytest.fixture(autouse=True)
+def _enable_render_glue_for_bridge_cap_tests(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Bridge cap tests exercise template machinery; production default is glue OFF."""
+    monkeypatch.setenv("PHOENIX_ENABLE_RENDER_GLUE", "1")
+    monkeypatch.setenv("PHOENIX_BRIDGE_TRANSITION_FAMILIES", "1")
+    cc._BRIDGE_TRANSITION_CACHE = None
 def test_direction_substrings_extracted_for_recognition() -> None:
     ds = cc._bridge_direction_substrings()
     # The recognition block's shared direction is the courage proof's offender phrase.

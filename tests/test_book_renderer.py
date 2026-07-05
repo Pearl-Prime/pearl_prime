@@ -132,7 +132,23 @@ def test_txt_writer_emits_missing_when_on_missing_placeholder() -> None:
     out.unlink(missing_ok=True)
 
 
-def test_strengthen_chapter_flow_for_delivery_repairs_spine_like_prose() -> None:
+def test_strengthen_skipped_when_render_glue_off(monkeypatch: pytest.MonkeyPatch) -> None:
+    from phoenix_v4.quality.chapter_flow_gate import evaluate_chapter_flow
+    from phoenix_v4.rendering.book_renderer import strengthen_chapter_flow_for_delivery
+
+    monkeypatch.delenv("PHOENIX_ENABLE_RENDER_GLUE", raising=False)
+    prose = "The desk is the same desk. The screen is bright.\n\nYou read the subject line twice."
+    before = evaluate_chapter_flow(prose)
+    out = strengthen_chapter_flow_for_delivery(prose, chapter_index=0, book_seed="glue-off")
+    assert out == prose or out.strip() == prose.strip()
+    after = evaluate_chapter_flow(out)
+    assert after.status == before.status
+
+
+def test_strengthen_chapter_flow_for_delivery_repairs_spine_like_prose(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setenv("PHOENIX_ENABLE_RENDER_GLUE", "1")
     from phoenix_v4.quality.chapter_flow_gate import evaluate_chapter_flow
     from phoenix_v4.rendering.book_renderer import strengthen_chapter_flow_for_delivery
 

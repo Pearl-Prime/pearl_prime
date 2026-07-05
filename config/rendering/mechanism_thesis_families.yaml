@@ -1,4 +1,7 @@
 schema_version: 1
+# De-injection 2026-07-05: default OFF on spine/production path. Set true or
+# PHOENIX_MECHANISM_THESIS_FAMILIES=1 for A/B re-enable.
+mechanism_thesis_families: false
 
 thesis_families:
   recognition:

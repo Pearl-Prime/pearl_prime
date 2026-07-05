@@ -10,6 +10,7 @@ from phoenix_v4.rendering.golden_chapter_synthesis import _first_or_join
 @pytest.fixture(autouse=True)
 def _enable_within_slot_bridges_for_unit_tests(monkeypatch):
     """Bridge machinery tests exercise the template path; production default is OFF."""
+    monkeypatch.setenv("PHOENIX_ENABLE_RENDER_GLUE", "1")
     monkeypatch.setattr(cc, "within_slot_bridges_enabled", lambda: True)
 
 

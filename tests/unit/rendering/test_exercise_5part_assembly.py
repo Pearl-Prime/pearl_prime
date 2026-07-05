@@ -1,10 +1,17 @@
 """F3+F4: five-part exercise assembly (Holistic v2 Phase B)."""
 from __future__ import annotations
 
+import pytest
+
 from phoenix_v4.exercises.component_assembler import assemble_exercise_for_chapter
 from phoenix_v4.exercises.models import AssemblyContext, EmotionalState
 from phoenix_v4.rendering.golden_chapter_synthesis import _bucket_slots
 from phoenix_v4.planning.enrichment_select import EnrichedSlot
+
+
+@pytest.fixture(autouse=True)
+def _enable_exercise_component_templates(monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setenv("PHOENIX_ENABLE_RENDER_GLUE", "1")
 
 
 def test_assemble_exercise_includes_all_five_parts():

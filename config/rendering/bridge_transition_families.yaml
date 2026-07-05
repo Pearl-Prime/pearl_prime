@@ -1,4 +1,7 @@
 schema_version: 1
+# De-injection 2026-07-05: default OFF on spine/production path. Set true or
+# PHOENIX_BRIDGE_TRANSITION_FAMILIES=1 for A/B re-enable.
+bridge_transition_families: false
 bridge_types:
   after_opening:
     recognition:

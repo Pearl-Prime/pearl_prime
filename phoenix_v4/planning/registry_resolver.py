@@ -275,17 +275,26 @@ def _parse_canonical_txt(path: Path, *, slot_type: Optional[str] = None) -> list
     current_header = ""
     in_body = False
     body_lines: list[str] = []
+    meta_lines: list[str] = []
     delimiter_count = 0
     st_upper = (slot_type or "").strip().upper()
 
     def _flush_block() -> None:
-        nonlocal current_id, body_lines
+        nonlocal current_id, body_lines, meta_lines
         if not current_id or not body_lines:
             return
         content = "\n".join(body_lines).strip()
         if not content:
             return
-        atom = {"atom_id": current_id, "content": content, "metadata": {}}
+        meta: dict = {}
+        if meta_lines and yaml is not None:
+            try:
+                parsed = yaml.safe_load("\n".join(meta_lines))
+                if isinstance(parsed, dict):
+                    meta = parsed
+            except Exception:
+                meta = {}
+        atom = {"atom_id": current_id, "content": content, "metadata": meta}
         if st_upper == "SCENE" or current_id.upper().startswith("SCENE "):
             atom = attach_scene_metadata(atom, f"## {current_id}")
         blocks.append(atom)
@@ -303,6 +312,7 @@ def _parse_canonical_txt(path: Path, *, slot_type: Optional[str] = None) -> list
             current_header = stripped
             current_id = stripped.replace("## ", "").strip()
             body_lines = []
+            meta_lines = []
             in_body = False
             delimiter_count = 0
         elif _is_bare_block_header(stripped, _next_nonempty(i)):
@@ -313,12 +323,15 @@ def _parse_canonical_txt(path: Path, *, slot_type: Optional[str] = None) -> list
             current_header = stripped
             current_id = stripped
             body_lines = []
+            meta_lines = []
             in_body = False
             delimiter_count = 0
         elif stripped == "---":
             delimiter_count += 1
             if delimiter_count >= 2:
                 in_body = True
+        elif delimiter_count == 1 and not in_body:
+            meta_lines.append(line)
         elif in_body:
             body_lines.append(line)
 
@@ -367,7 +380,7 @@ def _pick_composite_pool(
 _KNOWN_SLOT_DIRS = frozenset({
     "HOOK", "SCENE", "STORY", "REFLECTION", "EXERCISE", "INTEGRATION",
     "TEACHER_DOCTRINE", "COMPRESSION", "PERMISSION", "PIVOT",
-    "TAKEAWAY", "THREAD",
+    "TAKEAWAY", "THREAD", "TRANSITION", "DWELL",
     "ANGLE_DEFINITION", "ANGLE_CALLBACK",
 })
 

@@ -2,7 +2,19 @@ from __future__ import annotations
 
 from pathlib import Path
 
+import pytest
+
 from phoenix_v4.rendering import chapter_composer as cc
+
+
+@pytest.fixture(autouse=True)
+def _enable_render_glue_for_exercise_wrapper_tests(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Exercise wrapper tests exercise template glue; production default is OFF."""
+    monkeypatch.setenv("PHOENIX_ENABLE_RENDER_GLUE", "1")
+    monkeypatch.setenv("PHOENIX_EXERCISE_WRAPPER_FAMILIES", "1")
+    monkeypatch.setenv("PHOENIX_BRIDGE_TRANSITION_FAMILIES", "1")
+    cc._EXERCISE_WRAPPER_CACHE = None
+    cc._BRIDGE_TRANSITION_CACHE = None
 
 
 def test_setup_sentence_varies_by_emotional_job() -> None:

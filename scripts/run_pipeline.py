@@ -543,7 +543,15 @@ def _clamp_book_to_word_ceiling(prose: str, ceiling: int, *, reserve: int = 0) -
             else:
                 remain = target - used
                 if remain > 0:
-                    kept.append(" ".join(p.split()[:remain]))
+                    sliced = " ".join(p.split()[:remain])
+                    # Part C (de-injection 2026-07-05): trim at sentence boundary,
+                    # not mid-word/mid-sentence when the final paragraph is sliced.
+                    for end_char in (".", "!", "?"):
+                        pos = sliced.rfind(end_char)
+                        if pos >= max(0, len(sliced) // 3):
+                            sliced = sliced[: pos + 1].strip()
+                            break
+                    kept.append(sliced)
                 break
         return "\n\n".join(kept).strip()
 

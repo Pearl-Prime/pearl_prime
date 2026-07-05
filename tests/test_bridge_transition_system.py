@@ -11,6 +11,13 @@ from phoenix_v4.rendering import chapter_composer as cc
 def _enable_within_slot_bridges_for_unit_tests(monkeypatch):
     """Bridge machinery tests exercise the template path; production default is OFF."""
     monkeypatch.setattr(cc, "within_slot_bridges_enabled", lambda: True)
+    monkeypatch.setenv("PHOENIX_ENABLE_RENDER_GLUE", "1")
+    monkeypatch.setenv("PHOENIX_BRIDGE_TRANSITION_FAMILIES", "1")
+    monkeypatch.setenv("PHOENIX_MECHANISM_THESIS_FAMILIES", "1")
+    monkeypatch.setenv("PHOENIX_EXERCISE_WRAPPER_FAMILIES", "1")
+    cc._BRIDGE_TRANSITION_CACHE = None
+    cc._MECHANISM_THESIS_CACHE = None
+    cc._EXERCISE_WRAPPER_CACHE = None
 
 
 def _sample_thesis() -> str:
@@ -241,10 +248,10 @@ def test_backward_compat_emotional_job_empty() -> None:
     assert "outside" in out or "pattern" in out
 
 
-def test_fallback_takeaway_varies_by_thesis() -> None:
-    one = cc._fallback_takeaway("The point is that pausing breaks the loop.")
-    two = cc._fallback_takeaway("The point is that naming the signal lowers panic.")
-    assert one != two
+def test_fallback_takeaway_disabled_by_default(monkeypatch) -> None:
+    monkeypatch.setenv("PHOENIX_ENABLE_RENDER_GLUE", "0")
+    monkeypatch.delenv("PHOENIX_BRIDGE_TRANSITION_FAMILIES", raising=False)
+    assert cc._fallback_takeaway("The point is that pausing breaks the loop.") == ""
 
 
 def test_no_self_announcing_phrases_in_bridge_outputs() -> None:

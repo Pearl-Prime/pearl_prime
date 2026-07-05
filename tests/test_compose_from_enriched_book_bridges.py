@@ -1,14 +1,25 @@
 """Tests for spine enriched-book slot bridge injection."""
 
+import pytest
+
 from phoenix_v4.planning.enrichment_select import (
     EnrichedBook,
     EnrichedChapter,
     EnrichedSlot,
 )
+from phoenix_v4.rendering import chapter_composer as cc
 from phoenix_v4.rendering.chapter_composer import (
     _inject_slot_bridges,
     compose_from_enriched_book,
 )
+
+
+@pytest.fixture(autouse=True)
+def _enable_render_glue_for_slot_bridge_tests(monkeypatch: pytest.MonkeyPatch) -> None:
+    """These tests exercise template slot bridges; production default is glue OFF."""
+    monkeypatch.setenv("PHOENIX_ENABLE_RENDER_GLUE", "1")
+    monkeypatch.setenv("PHOENIX_BRIDGE_TRANSITION_FAMILIES", "1")
+    cc._BRIDGE_TRANSITION_CACHE = None
 
 
 def _slot(st: str, content: str) -> EnrichedSlot:
