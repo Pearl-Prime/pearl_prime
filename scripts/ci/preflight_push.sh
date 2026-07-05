@@ -22,4 +22,12 @@ if [[ -z "$base" ]]; then
   echo "Branch has no history in common with main. Create branch from origin/main." >&2
   exit 1
 fi
+# Disk guard — soft-warn only (do not block push; block worktree add separately)
+repo_root="$(git rev-parse --show-toplevel)"
+disk_guard="${repo_root}/scripts/git/disk_guard.py"
+if [[ -f "$disk_guard" ]]; then
+  if ! PYTHONPATH="${repo_root}${PYTHONPATH:+:${PYTHONPATH}}" python3 "$disk_guard" --warn-only; then
+    echo "⚠️  Disk guard: low free space (push preflight continues; avoid git worktree add until remediated)." >&2
+  fi
+fi
 echo "Preflight OK."

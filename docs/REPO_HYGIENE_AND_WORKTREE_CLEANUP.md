@@ -4,7 +4,7 @@ Purpose: **repo-wide** safe cleanup after merges — branches, worktrees, and st
 
 **Onboarding-specific** quick path: [docs/ONBOARDING_POST_MERGE_HYGIENE.md](./ONBOARDING_POST_MERGE_HYGIENE.md).
 
-**Automation:** [docs/PEARL_GITHUB_AUTOPILOT_RUNBOOK.md](./PEARL_GITHUB_AUTOPILOT_RUNBOOK.md) (hourly alignment + prune guidance), `bash scripts/git/health_check.sh` (session/push sanity).
+**Automation:** [docs/PEARL_GITHUB_AUTOPILOT_RUNBOOK.md](./PEARL_GITHUB_AUTOPILOT_RUNBOOK.md) (hourly alignment + prune guidance), `bash scripts/git/health_check.sh` (session/push sanity), `python3 scripts/git/disk_guard.py --worktree-add-safe` before any `git worktree add` (refuses below 20 GB free; stale `.claude/worktrees` orphans reported only).
 
 ---
 
