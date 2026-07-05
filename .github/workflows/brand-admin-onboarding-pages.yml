@@ -116,14 +116,28 @@ jobs:
             fi
           done
 
-      - name: Ensure Pages project exists (idempotent — no-op if already created)
+      - name: Ensure Pages project exists (idempotent — create only if missing)
         continue-on-error: true
-        uses: cloudflare/wrangler-action@v3
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN_PAGES || secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          workingDirectory: brand-wizard-app
-          command: pages project create brand-admin-onboarding --production-branch=main
+        shell: bash
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN_PAGES || secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          set -euo pipefail
+          # `wrangler pages project create` is NOT idempotent: Cloudflare's API
+          # returns an error (project already exists) on every re-run, which
+          # rendered this step as a red ✗ even though the deploy that follows
+          # succeeds — a persistent false-red for operators. List first and only
+          # create when the project is genuinely absent, so this step stays green.
+          # NOTE: project name is `brand-admin-onboarding` (serves
+          # brand-admin-onboarding-bu2.pages.dev) — do NOT rename (#4584/#4585).
+          npm i wrangler@3.90.0 --no-save
+          if npx wrangler pages project list 2>/dev/null | grep -qw "brand-admin-onboarding"; then
+            echo "Pages project 'brand-admin-onboarding' already exists — no-op."
+          else
+            echo "Pages project 'brand-admin-onboarding' not found — creating."
+            npx wrangler pages project create brand-admin-onboarding --production-branch=main
+          fi
 
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3
