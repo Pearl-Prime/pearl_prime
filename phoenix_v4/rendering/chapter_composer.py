@@ -3430,6 +3430,8 @@ def _slot_bridge_paragraph(
     last_story: str,
 ) -> str:
     """Return one bridge paragraph for a (prev_type, curr_type) pair, or empty string."""
+    if not render_glue_enabled():
+        return ""
     pair = (prev_t.strip().upper(), curr_t.strip().upper())
 
     if pair in {("SCENE", "REFLECTION"), ("HOOK", "REFLECTION")}:
