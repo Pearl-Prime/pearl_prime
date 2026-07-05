@@ -25,6 +25,10 @@ title_templates:
   # the book is never off-topic, with the engine angle as the rotating creative half.
   series_metaphor: "{SeriesTitle}: {EngineAngle}"
   topic_metaphor: "{PrimaryKeyword}: {EngineAngle}"
+  # Formula 4 (research): hook first (no keyword), keyword in descriptive half after colon.
+  formula4_hook: "{EngineAngle}: {PrimaryKeyword}"
+  formula4_series: "{SeriesTitle}: {PrimaryKeyword}"
+  formula4_guide: "{EngineAngle}: A Guide to {PrimaryKeyword}"
 
   # --- Grammar Family D: Scientific / method (workbook style) ---
   method_title: "The {PrimaryKeyword} Method"
@@ -295,7 +299,7 @@ brand_template_preferences:
   # Engine-bearing templates first so each (persona, topic, engine, format) cell
   # gets a distinct subtitle string (800/800 anti-spam). LONG-ONLY strategy.
   way_stream_sanctuary:
-    title: [series_metaphor, topic_metaphor, persona_targeted]
+    title: [formula4_hook, formula4_series, formula4_guide, series_metaphor, metaphor_title, journey_title]
     subtitle: [engine_persona_hook, engine_topic_persona, engine_voice, engine_field_guide, engine_reset, generation_voice, profession_specific, identity_shift]
     subtitle_strategy: { none_pct: 0.0, short_pct: 0.0, long_pct: 1.0 }
     content_mix: { persona_direct: 0.65, topic_direct: 0.25, metaphor: 0.10, location: 0.00 }
@@ -347,10 +351,13 @@ brand_template_preferences:
     content_mix: { persona_direct: 0.35, topic_direct: 0.15, metaphor: 0.40, location: 0.10 }
 
   default:
-    title: [scenario_direct, outcome_focused]
-    subtitle: [short_method, three_part, how_to_stack]
-    subtitle_strategy: { none_pct: 0.10, short_pct: 0.25, long_pct: 0.65 }
-    content_mix: { persona_direct: 0.20, topic_direct: 0.40, metaphor: 0.30, location: 0.10 }
+    # Shared Formula-4 defaults for brands without explicit prefs (qi_foundation,
+    # relational_calm, warrior_calm, body_memory, heart_transmission). Long-only
+    # subtitles so persona+keyword land in the subtitle field, not colon-joined.
+    title: [formula4_hook, formula4_series, formula4_guide, scenario_direct, outcome_focused]
+    subtitle: [engine_persona_hook, engine_topic_persona, profession_specific, generation_voice, engine_field_guide, short_method, three_part]
+    subtitle_strategy: { none_pct: 0.0, short_pct: 0.0, long_pct: 1.0 }
+    content_mix: { persona_direct: 0.65, topic_direct: 0.25, metaphor: 0.10, location: 0.00 }
 
 # Micro-promise clauses per brand (for {PromiseClause})
 micro_promises:

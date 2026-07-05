@@ -227,7 +227,12 @@ def generate_candidates(
 
     brand_prefs = (patterns.get("brand_template_preferences") or {}).get(brand_id) or \
                   (patterns.get("brand_template_preferences") or {}).get("default") or {}
-    preferred_title = list(brand_prefs.get("title") or ["scenario_direct"])
+    # Formula 4 (hook-first, keyword post-colon) is the default title shape for every
+    # brand; brand prefs add voice variety after the shared F4 templates.
+    _f4_titles = ["formula4_hook", "formula4_series", "formula4_guide"]
+    preferred_title = list(dict.fromkeys(
+        _f4_titles + list(brand_prefs.get("title") or ["scenario_direct"])
+    ))
     preferred_sub = list(brand_prefs.get("subtitle") or ["micro_promise"])
     subtitle_strategy = brand_prefs.get("subtitle_strategy") or {"none_pct": 0.10, "short_pct": 0.25, "long_pct": 0.65}
     content_mix = brand_prefs.get("content_mix") or {"persona_direct": 0.20, "topic_direct": 0.40, "metaphor": 0.30, "location": 0.10}
