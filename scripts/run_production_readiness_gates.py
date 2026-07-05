@@ -467,6 +467,10 @@ def main() -> int:
          "Manga story-authored (no listing-as-story)"),
         ("23", "check_manga_wiring.py",
          "Manga config wiring (no unwired-config-as-working)"),
+        ("24", "check_manga_l2_cutout_alpha.py",
+         "Manga L2 cutout alpha (no ghost-matte)"),
+        ("25", "check_manga_visual_acceptance.py",
+         "Manga L2 visual acceptance (eye bar on REAL assets)"),
     ):
         g = REPO_ROOT / "scripts" / "ci" / script
         if g.exists():
@@ -489,8 +493,30 @@ def main() -> int:
         else:
             gate(f"{num}. {label}", True, "gate script not present; skip", skip=True)
 
+    # --- 26. 12-shape chapter object/character continuity ---
+    g26 = REPO_ROOT / "scripts" / "ci" / "check_chapter_object_continuity.py"
+    if g26.exists():
+        try:
+            env = os.environ.copy()
+            env["PYTHONPATH"] = str(REPO_ROOT)
+            r = subprocess.run(
+                [sys.executable, str(g26)],
+                cwd=str(REPO_ROOT), env=env,
+                capture_output=True, text=True, timeout=360,
+            )
+            g_ok = r.returncode == 0
+            out = (r.stderr or r.stdout or "").strip()
+            g_detail = out.splitlines()[-1] if out else "check_chapter_object_continuity"
+        except Exception as e:
+            g_ok = False
+            g_detail = str(e)
+        if not gate("26. 12-shape chapter object continuity", g_ok, g_detail):
+            failed += 1
+    else:
+        gate("26. 12-shape chapter object continuity", True, "gate script not present; skip", skip=True)
+
     # --- Report ---
-    print("V4.5 Production Readiness — 23 conditions\n")
+    print("V4.5 Production Readiness — 25 conditions\n")
     for name, status, detail in RESULTS:
         sym = "✓" if status == "PASS" else ("○" if status == "SKIP" else "✗")
         print(f"  {sym} {status:4}  {name}")

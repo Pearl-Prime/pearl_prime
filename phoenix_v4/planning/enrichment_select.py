@@ -44,6 +44,14 @@ from phoenix_v4.planning.registry_resolver import (
     _pick_composite_pool,
     load_registry,
 )
+from phoenix_v4.planning.chapter_object_continuity import (
+    CONTINUITY_CONNECTIVE_SLOTS,
+    chapter_context_from_spine,
+    continuity_bank_empty,
+    filter_connective_pool,
+    is_twelve_shape_continuity_active,
+    load_chapter_continuity_plan,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -2016,6 +2024,13 @@ def select_enrichment(
 
     enriched_chapters: List[EnrichedChapter] = []
     plan_context = dict(request.spine_context or {})
+    if pid and topic:
+        _existing_plan = plan_context.get("chapter_continuity_plan")
+        if not _existing_plan:
+            _loaded_plan = load_chapter_continuity_plan(pid, topic, root)
+            if _loaded_plan:
+                plan_context["chapter_continuity_plan"] = _loaded_plan
+                plan_context.setdefault("twelve_shape_continuity", True)
     _angle_id_enrich = str(plan_context.get("angle_id") or "").strip()
     _angle_layer_by_ch = dict(plan_context.get("angle_layer_by_chapter") or {})
     _angle_fallback_warnings: List[str] = list(plan_context.get("angle_journey_warnings") or [])
@@ -2103,14 +2118,22 @@ def select_enrichment(
             teacher_expand_pool: Optional[List[dict]] = None
             teacher_primary_idx: Optional[int] = None
 
-            if not content and _angle_id_enrich and stype == "ANGLE_DEFINITION":
-                _ad = _try_angle_definition(
-                    persona_id=pid,
-                    topic_id=topic,
-                    angle_id=_angle_id_enrich,
-                    repo_root=root,
-                    fallback_warnings=_angle_fallback_warnings,
-                )
+            if not content and stype == "ANGLE_DEFINITION":
+                _angle_for_slot = _angle_id_enrich
+                if is_twelve_shape_continuity_active(plan_context):
+                    _cont_angle = chapter_context_from_spine(plan_context, chapter_index0)
+                    if _cont_angle and _cont_angle.angle_id:
+                        _angle_for_slot = _cont_angle.angle_id
+                if _angle_for_slot:
+                    _ad = _try_angle_definition(
+                        persona_id=pid,
+                        topic_id=topic,
+                        angle_id=_angle_for_slot,
+                        repo_root=root,
+                        fallback_warnings=_angle_fallback_warnings,
+                    )
+                else:
+                    _ad = None
                 if _ad:
                     content, source, source_id = _ad[0], _ad[1], _ad[2]
                     atom_id = source_id
@@ -2328,7 +2351,28 @@ def select_enrichment(
                             book_frame=_frame,
                         )
                     ]
-                    if _ap_pool and not _composite_filled:
+                    _continuity_gap_filled = False
+                    if (
+                        is_twelve_shape_continuity_active(plan_context)
+                        and stype in CONTINUITY_CONNECTIVE_SLOTS
+                    ):
+                        _cont_ctx = chapter_context_from_spine(plan_context, chapter_index0)
+                        if _cont_ctx:
+                            _ap_pool = filter_connective_pool(_ap_pool, stype, _cont_ctx)
+                            if not _ap_pool and not _composite_filled:
+                                logger.warning(
+                                    "12-shape continuity BANK EMPTY: %s ch%s object=%s character=%s",
+                                    stype,
+                                    bm_ch.number,
+                                    _cont_ctx.anxiety_object,
+                                    _cont_ctx.character,
+                                )
+                                content = continuity_bank_empty(stype, _cont_ctx)
+                                source = "continuity_bank_empty"
+                                source_id = "EMPTY"
+                                atom_id = "EMPTY"
+                                _continuity_gap_filled = True
+                    if _ap_pool and not _composite_filled and not _continuity_gap_filled:
                         if (
                             stype == "SCENE"
                             and chapter_index0 not in _scene_ladder_done
@@ -2470,7 +2514,23 @@ def select_enrichment(
                 gap_details.append(
                     {"chapter": bm_ch.number, "slot_index": slot_i, "slot_type": stype}
                 )
-                raise EnrichmentGapError(
+                if (
+                    is_twelve_shape_continuity_active(plan_context)
+                    and stype in CONTINUITY_CONNECTIVE_SLOTS
+                ):
+                    _cont_ctx_gap = chapter_context_from_spine(plan_context, chapter_index0)
+                    if _cont_ctx_gap:
+                        content = continuity_bank_empty(stype, _cont_ctx_gap)
+                        source = "continuity_bank_empty"
+                        source_id = "EMPTY"
+                        atom_id = "EMPTY"
+                        logger.warning(
+                            "12-shape continuity fail-closed: %s ch%s",
+                            stype,
+                            bm_ch.number,
+                        )
+                if not content:
+                    raise EnrichmentGapError(
                     f"No enrichable content for slot {stype} "
                     f"(topic={topic} chapter={bm_ch.number} slot_index={slot_i}). "
                     f"Sources tried: persona={bool(persona_atoms.get(stype) if persona_atoms else False)}, "
