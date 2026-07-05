@@ -1,5 +1,61 @@
 # en_US Catalog Bestseller Audit — 2026-05-13
 
+> ## ⚠️ STATUS: SUPERSEDED — the `scene_anchor_density` blocker below is FIXED (do not re-open)
+>
+> **Refreshed 2026-07-06.** The headline finding of this audit —
+> *"`scene_anchor_density` (168 books, 84.0%) — single largest blocker to
+> bestseller-readiness today"* — is a **stale pre-fix snapshot** and is **no
+> longer accurate**. The gate was recalibrated and the fix has been live on
+> `main` since 2026-05-12.
+>
+> **This was a mis-calibrated gate, not a real scene-anchor deficit.** Empirical
+> sweep of all 168 cap=2 failures (recorded in
+> `docs/specs/SCENE_ANCHOR_DENSITY_CAP_V2_SPEC.md` and
+> `docs/diagnostics/SCENE_ANCHOR_DENSITY_ROOTCAUSE_2026-06-12.md`):
+>
+> | max paragraph_count | failures | interpretation |
+> |---|---:|---|
+> | 3 | 156 | natural rhetorical motif — **1 paragraph over the legacy cap=2** |
+> | 4 | 11  | borderline overuse |
+> | 5 | 1   | genuine overuse |
+>
+> 156 of 168 failures were a single paragraph over an un-calibrated legacy cap.
+> The fix (PR **#1091**, *"scene_anchor_density yield recovery (13% → 94%)"*)
+> raised the default per-chapter cap **2 → 3**, centralized it in
+> `config/quality/scene_anchor_density_config.yaml`
+> (`default_cap_per_chapter: 3`), and added a reducer + a regression test
+> (`scripts/pearl_prime_en_us/tests/test_scene_anchor_density_gate.py`, 4/4 green)
+> that locks the cap ≥ 3 while keeping genuine 4+ paragraph repetition blocked.
+> PR **#1234** brought the anxiety authored plans to `scene_anchor_cap: 3` to
+> match. **No atoms were added or changed — the source pool was never the
+> problem.**
+>
+> **Before → after (bounded evidence — no fabricated catalog number):**
+>
+> | | scene_anchor_density blocked | catalog yield |
+> |---|---:|---:|
+> | **BEFORE** (this audit, cap=2) | 168/200 = **84.0%** | 26/200 = **13.0%** |
+> | **AFTER** (cap=3, PR #1091) | ≈12/200 (the 11×pc4 + 1×pc5 genuine cases) → **≈6%** | projected **≈91%** (156 pc3 motif books recovered; PR #1091 states 94%) |
+>
+> The AFTER catalog yield is a **projection** from the recorded per-book
+> paragraph-count sweep, not a fresh render. Confirming the exact ship-rate
+> requires one Tier-1, operator-present 200-book re-render at cap=3
+> (`scripts/pearl_prime_en_us/assemble_first_100_qa.py` →
+> `aggregate_bestseller_audit.py`); the aggregator cannot self-regenerate this
+> file because `artifacts/pearl_prime_en_us/first_100_qa/renders/**` is
+> git-ignored/absent. **Operator ask:** schedule that one re-render to replace
+> the projection with a measured figure — see
+> `docs/diagnostics/SCENE_ANCHOR_DENSITY_ROOTCAUSE_2026-06-12.md` §7.
+>
+> **Do NOT** re-loosen the gate, re-tune the composer, or backfill atoms for this
+> blocker — all three would be drift. The gate is correctly calibrated; the only
+> residual task was this stale-artifact correction.
+>
+> _Everything below this banner is the original 2026-05-13 cap=2 snapshot,
+> preserved verbatim for historical reference._
+
+---
+
 ## TL;DR
 
 - **200 BookSpecs assembled** from the canonical planner (en_US catalog ceiling).
