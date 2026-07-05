@@ -2,7 +2,18 @@ from __future__ import annotations
 
 from pathlib import Path
 
+import pytest
+
 from phoenix_v4.rendering import chapter_composer as cc
+
+
+@pytest.fixture(autouse=True)
+def _enable_mechanism_thesis_glue(monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setenv("PHOENIX_ENABLE_RENDER_GLUE", "1")
+    monkeypatch.setenv("PHOENIX_MECHANISM_THESIS_FAMILIES", "1")
+    monkeypatch.setenv("PHOENIX_BRIDGE_TRANSITION_FAMILIES", "1")
+    cc._MECHANISM_THESIS_CACHE = None
+    cc._BRIDGE_TRANSITION_CACHE = None
 
 
 def _jobs() -> list[str]:

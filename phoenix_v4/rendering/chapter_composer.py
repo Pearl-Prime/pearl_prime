@@ -2247,8 +2247,36 @@ def _fallback_takeaway(
     total_chapters: int = 1,
     bridge_memory: BridgeMemory | None = None,
 ) -> str:
-    """De-injection 2026-07-05: no render-time takeaway template; use TAKEAWAY atoms."""
-    return ""
+    """Generate a takeaway when TAKEAWAY slot is missing/placeholder."""
+    if not render_glue_enabled():
+        return ""
+    job = _normalize_emotional_job(emotional_job)
+    if job:
+        selected = _select_bridge_candidate(
+            bridge_type="takeaway_fallback",
+            emotional_job=job,
+            chapter_index=chapter_index,
+            total_chapters=total_chapters,
+            bridge_memory=bridge_memory,
+            context_text=thesis,
+        )
+        if selected:
+            text = str(selected.get("text", "")).strip()
+            return _gt(text, locale=_LOCALE_TLS) if _LOCALE_TLS else text
+    core = thesis.replace("The point is that ", "")
+    options = [
+        "Remember this: {core} Keep it concrete long enough to test it in your next ordinary hour.",
+        "Carry this forward: {core} Let your next small action prove whether it is true.",
+        "Keep this close: {core} Insight counts only when it changes the next moment you are inside the pattern.",
+    ]
+    template = _pick_variant(options, thesis, str(chapter_index), str(total_chapters))
+    if _LOCALE_TLS:
+        translated = _gt(template, locale=_LOCALE_TLS)
+        try:
+            return translated.format(core=core)
+        except (KeyError, IndexError):
+            return translated
+    return template.format(core=core)
 
 
 # DEFECT 1 (cross_book_transitions): per-keyword fallback pools. The original
