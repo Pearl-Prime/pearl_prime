@@ -109,6 +109,7 @@
       <button class="btn primary" id="ui-dlall" onclick="downloadAll()">⬇ Download all packets</button>
       <button class="btn" id="ui-history" onclick="showView('history')">🕘 Review History</button>
       <button class="btn" id="ui-catalog" onclick="showView('catalog')">📚 View Catalog</button>
+      <a class="btn" id="ui-weekly-os" href="brand_admin_weekly_os.html">📅 Weekly OS</a>
     </div>
   </div>
 
@@ -169,6 +170,7 @@ const CHROME = {
     thisWeekTag:"this week", weeksAgo:(n)=>`${n} week${n>1?"s":""} ago`,
     catalogCount:(n)=>`${n} titles in catalog`,
     viewingPast:(w)=>`Viewing past week <b style="color:var(--amber2)">${w}</b>`, jumpCurrent:"→ jump to current week",
+    weeklyOs:"📅 Weekly OS (setup rhythm)",
   },
   ja: {
     h1:"ブランドディレクター運用", sub:"Pearl Prime · 週次コンテンツパケット", handoff:"週次ハンドオフ",
@@ -187,6 +189,7 @@ const CHROME = {
     thisWeekTag:"今週", weeksAgo:(n)=>`${n}週間前`,
     catalogCount:(n)=>`カタログ ${n}タイトル`,
     viewingPast:(w)=>`過去の週 <b style="color:var(--amber2)">${w}</b> を表示中`, jumpCurrent:"→ 今週へ",
+    weeklyOs:"📅 週次OS（セットアップ）",
   },
   "zh-Hant": {
     h1:"品牌總監營運", sub:"Pearl Prime · 每週內容包", handoff:"每週交接",
@@ -205,6 +208,7 @@ const CHROME = {
     thisWeekTag:"本週", weeksAgo:(n)=>`${n} 週前`,
     catalogCount:(n)=>`書目共 ${n} 本`,
     viewingPast:(w)=>`正在檢視過去的一週 <b style="color:var(--amber2)">${w}</b>`, jumpCurrent:"→ 跳至本週",
+    weeklyOs:"📅 每週營運節奏（Weekly OS）",
   },
   "zh-Hans": {
     h1:"品牌总监运营", sub:"Pearl Prime · 每周内容包", handoff:"每周交接",
@@ -223,6 +227,7 @@ const CHROME = {
     thisWeekTag:"本周", weeksAgo:(n)=>`${n} 周前`,
     catalogCount:(n)=>`书目共 ${n} 本`,
     viewingPast:(w)=>`正在查看过去的一周 <b style="color:var(--amber2)">${w}</b>`, jumpCurrent:"→ 跳至本周",
+    weeklyOs:"📅 每周运营节奏（Weekly OS）",
   },
 };
 
@@ -746,6 +751,7 @@ function applyChrome() {
   document.title = "Pearl Prime — " + T.h1;
   setText("ui-h1", T.h1); setText("ui-sub", T.sub); setText("ui-handoff", T.handoff);
   setText("ui-dlall", T.dlAll); setText("ui-history", T.history); setText("ui-catalog", T.catalog);
+  setText("ui-weekly-os", T.weeklyOs);
   setText("ui-history-h", T.reviewHistory); setText("ui-history-back", T.back); setText("ui-history-intro", T.historyIntro);
   setText("ui-files-note", T.filesNote);
   setText("ui-catalog-h", T.fullCatalog); setText("ui-catalog-back", T.back);
@@ -767,6 +773,8 @@ async function boot() {
   try { const r = await fetch("brand_admin_brands.json", {cache:"no-store"}); if (r.ok) bridge = await r.json(); } catch (_e) {}
   const info = bridge[id] || {};
   BRAND = { id, label: info.d || humanize(id) };
+  const wos = document.getElementById("ui-weekly-os");
+  if (wos) wos.href = "/brand_admin_weekly_os.html?brand=" + encodeURIComponent(id);
   const base = id.replace(/_(en_us|es_us|es_es|pt_br|zh_tw|zh_hk|zh_cn|zh_sg|ja_jp|ko_kr)$/, "");
   // Pull the brand's REAL catalog (book plans are en_US only, so US/English view only).
   REAL_CATALOG = null;
