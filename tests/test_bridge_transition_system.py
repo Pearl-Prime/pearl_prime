@@ -249,6 +249,7 @@ def test_backward_compat_emotional_job_empty() -> None:
 
 
 def test_fallback_takeaway_disabled_by_default(monkeypatch) -> None:
+    monkeypatch.setenv("PHOENIX_ENABLE_RENDER_GLUE", "0")
     monkeypatch.delenv("PHOENIX_BRIDGE_TRANSITION_FAMILIES", raising=False)
     assert cc._fallback_takeaway("The point is that pausing breaks the loop.") == ""
 
