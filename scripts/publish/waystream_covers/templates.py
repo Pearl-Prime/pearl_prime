@@ -4,7 +4,8 @@ TITLE and SUBTITLE are drawn exactly as authored in the book plan (no re-derivat
 no hook fallback, no truncation). Fit-to-box uses shrink/wrap only.
 
 Layout variants rotate per book_id (stacked | split_above_below | frame_center).
-Symbols avoid busy image regions; text never overlaps symbol framing lines.
+Collision-free solver (layout_solver.py) guarantees zero overlap including symbol
+framing lines; assertion raises CoverLayoutCollisionError on any violation.
 """
 from __future__ import annotations
 from dataclasses import dataclass
@@ -12,6 +13,7 @@ from PIL import Image, ImageDraw, ImageFilter, ImageStat
 
 from .fonts import get_font
 from . import layout_zones as Z
+from . import layout_solver as LS
 from . import palette as P
 from . import symbols as S
 
@@ -23,12 +25,14 @@ THUMBNAIL_TEST_W = 280
 MIN_THUMB_CAP_PX = 11
 BUSY_VARIANCE_THRESHOLD = 900.0
 BUSY_EDGE_THRESHOLD = 22.0
-MAX_SUBTITLE_LINES = 5
+LINE_LIKE_MOTIFS = frozenset({"lowline", "divider"})
+NO_FRAMING_FAMILIES = frozenset({"panel_bands"})
 
 # QC hooks — read by render.py proof driver
 LAST_TITLE_DRAWN: str = ""
 LAST_SUBTITLE_DRAWN: str = ""
 LAST_SUBTITLE_DECISION: tuple[bool, str, int, bool] | None = None
+LAST_LAYOUT_REPORT: dict = {}
 
 
 @dataclass
@@ -114,6 +118,36 @@ def fit_subtitle(draw, spec, serif, maxw, max_lines, base_px, max_h=None):
     while len(lines) > max_lines and len(lines) > 1:
         lines = lines[:-1]
     return f, lines, floor_px
+
+
+MAX_SUBTITLE_LINES = 5
+
+
+def fit_subtitle_panel(draw, spec, serif, maxw, max_lines, base_px, max_h=None):
+    """panel_bands: sans + larger floor so subtitle survives thumbnail."""
+    text = (spec.subtitle or "").strip()
+    if not text:
+        f = get_font(spec.sans, "regular", 12)
+        return f, [], 12
+    floor_px = max(36, int(round(base_px * 0.65)))
+    cap_px = max(floor_px, int(round(base_px * 1.4)))
+    best = None
+    for px in range(cap_px, floor_px - 1, -2):
+        f = get_font(spec.sans, "regular", px)
+        lines = _wrap(draw, text, f, maxw)
+        if len(lines) > max_lines:
+            continue
+        block_h = len(lines) * int(_line_h(f) * 1.08)
+        if max_h is not None and block_h > max_h:
+            continue
+        if _thumb_cap_px(px) < MIN_THUMB_CAP_PX and px > floor_px:
+            continue
+        best = (f, lines, px)
+        break
+    if best:
+        return best
+    f = get_font(spec.sans, "regular", floor_px)
+    return f, _wrap(draw, text, f, maxw), floor_px
 
 
 def fit_title(draw, text, family, maxw, max_h, start=200, min_px=104, weight="bold", ls=1.06):
@@ -205,15 +239,6 @@ def _is_busy(cover, box) -> bool:
     return var >= BUSY_VARIANCE_THRESHOLD or edge >= BUSY_EDGE_THRESHOLD
 
 
-def _shift_symbol_zone_if_busy(cover, plan: Z.ZonePlan) -> Z.Rect:
-    z = plan.symbol
-    if _is_busy(cover, (z.x0, z.y0, z.x1, z.y1)):
-        # lift symbol cluster out of busy image band
-        lift = 0.08 if plan.variant == "split_above_below" else 0.06
-        return Z.Rect(z.x0, max(0.05, z.y0 - lift), z.x1, max(z.y0 + 0.06, z.y1 - lift))
-    return z
-
-
 def _zone_plan(spec: Spec) -> Z.ZonePlan:
     return Z.zone_plan(spec.family, spec.layout_variant)
 
@@ -222,54 +247,132 @@ def _center_y(zone: Z.Rect, block_h: int) -> int:
     return int(zone.y0 * H) + max(0, (zone.height_px() - block_h) // 2)
 
 
-def _draw_zoned_title_subtitle(dr, spec, plan, title_fill, subtitle_fill, *, shadow=None,
-                               align="center", x_left=None, cx=None):
-    global LAST_TITLE_DRAWN, LAST_SUBTITLE_DRAWN, LAST_SUBTITLE_DECISION
-    cx = W // 2 if cx is None else cx
+def _compose_layout(
+    cover,
+    dr,
+    spec: Spec,
+    plan: Z.ZonePlan,
+    *,
+    sym_scrim: bool = False,
+    sym_orientation: str = "auto",
+) -> LS.SolvedLayout:
+    """Text placement first, then symbol below subtitle with gap; assert 0 overlaps."""
+    global LAST_LAYOUT_REPORT
+
+    forbidden_text: list[Z.Rect] = [plan.byline]
+    if plan.image.x1 > plan.image.x0:
+        forbidden_text.append(plan.image)
+
     title_text = display_title(spec)
     tf, tlines, _, tblock = Z.fit_in_zone(
         dr, title_text, spec.serif, plan.title, weight="bold",
         start_px=196, min_px=80, scale=TITLE_SCALE, max_lines=4,
     )
-    ty = _center_y(plan.title, tblock)
-    y = draw_lines(dr, tlines, tf, cx, ty, title_fill, shadow=shadow, align=align, x_left=x_left)
+    title_y = LS.find_clear_y(plan.title, tblock, tuple(forbidden_text))
+    if title_y is None:
+        title_y = _center_y(plan.title, tblock)
+    title_box = LS.text_block_at(title_y, tblock, plan.title)
+
+    stack_sub = plan.variant == "stacked" or spec.family == "panel_bands"
+    sub_fn = fit_subtitle_panel if spec.family == "panel_bands" else fit_subtitle
+    sub_base = 64 if spec.family == "panel_bands" else 52
+    sub_y, sf, sub_lines, sub_block = LS.solve_subtitle_y(
+        dr, spec, plan, tuple(forbidden_text), title_box,
+        fit_subtitle_fn=sub_fn,
+        max_lines=MAX_SUBTITLE_LINES,
+        base_px=sub_base,
+        prefer_below_title_y=title_y + tblock + 14 if stack_sub else None,
+    )
+    subtitle_box = LS.text_block_at(sub_y, sub_block, plan.subtitle)
+
+    sym_zone = LS.resolve_symbol_zone(cover, plan, _is_busy)
+    if spec.family == "panel_bands":
+        sym_zone = plan.symbol
+    elif spec.motif in LINE_LIKE_MOTIFS and sym_zone.y0 >= plan.title.y0 - 0.02:
+        sym_zone = Z.Rect(0.76, 0.20, 0.92, 0.30)
+    else:
+        sym_zone = LS.symbol_zone_after_text(plan, subtitle_box)
+    zone_px = (W * sym_zone.x0, H * sym_zone.y0, W * sym_zone.x1, H * sym_zone.y1)
+    sym_col = _sym_color(cover, zone_px, spec)
+    use_framing = "none" if spec.family in NO_FRAMING_FAMILIES else LS.effective_framing(
+        spec.framing, sym_zone, subtitle_box,
+    )
+    sbox, glyph_box, framed_box = LS.measure_symbol_boxes(
+        cover, spec, plan, sym_zone, sym_col,
+        framing=use_framing if use_framing != "none" else "none",
+        orientation=sym_orientation, scrim=sym_scrim,
+    )
+    if use_framing != "none":
+        _frame_symbols(dr, use_framing, sbox, sym_col)
+    if use_framing == "none":
+        framed_box = glyph_box
+
+    byline_y = int(plan.byline.y0 * H)
+    byline_box = Z.Rect(
+        plan.byline.x0, byline_y / H,
+        plan.byline.x1, min(1.0, (byline_y + LS.BYLINE_BLOCK_H) / H),
+    )
+    series_y = int(plan.series.y0 * H)
+    series_box = Z.Rect(
+        plan.series.x0, series_y / H,
+        plan.series.x1, min(1.0, (series_y + LS.SERIES_BLOCK_H) / H),
+    )
+
+    elements = [
+        LS.ElementBox("title", title_box),
+        LS.ElementBox("subtitle", subtitle_box),
+        LS.ElementBox("symbol_framed", framed_box),
+        LS.ElementBox("byline", byline_box),
+        LS.ElementBox("series", series_box),
+    ]
+    LAST_LAYOUT_REPORT = LS.assert_zero_overlaps(elements)
+
+    return LS.SolvedLayout(
+        title_y=title_y, title_font=tf, title_lines=tlines, title_box=title_box,
+        subtitle_y=sub_y, subtitle_font=sf, subtitle_lines=sub_lines, subtitle_box=subtitle_box,
+        symbol_glyph_box=glyph_box, symbol_framed_box=framed_box,
+        byline_y=byline_y, byline_box=byline_box,
+        series_y=series_y, series_box=series_box,
+        elements=elements,
+    )
+
+
+def _draw_zoned_title_subtitle(cover, dr, spec, plan, title_fill, subtitle_fill, *, shadow=None,
+                               align="center", x_left=None, cx=None,
+                               sym_scrim=False, sym_orientation="auto"):
+    global LAST_TITLE_DRAWN, LAST_SUBTITLE_DRAWN, LAST_SUBTITLE_DECISION
+    cx = W // 2 if cx is None else cx
+    layout = _compose_layout(
+        cover, dr, spec, plan, sym_scrim=sym_scrim, sym_orientation=sym_orientation,
+    )
+    title_text = display_title(spec)
+    draw_lines(
+        dr, layout.title_lines, layout.title_font, cx, layout.title_y,
+        title_fill, shadow=shadow, align=align, x_left=x_left,
+    )
     LAST_TITLE_DRAWN = title_text
 
-    sub_zone = plan.subtitle
-    sf, sub_lines, _ = fit_subtitle(
-        dr, spec, spec.serif, sub_zone.width_px() - 16, MAX_SUBTITLE_LINES, 52,
-        max_h=sub_zone.height_px(),
+    draw_lines(
+        dr, layout.subtitle_lines, layout.subtitle_font, cx, layout.subtitle_y,
+        subtitle_fill, shadow=shadow, align=align, x_left=x_left,
     )
-    sub_block = len(sub_lines) * int(_line_h(sf) * 1.06)
-    sub_y = (y + 10) if plan.variant == "stacked" else _center_y(sub_zone, sub_block)
-    if sub_y + sub_block > int(sub_zone.y1 * H):
-        sub_y = _center_y(sub_zone, sub_block)
-    forbidden = (plan.image, plan.symbol)
-    if Z.rects_collide(Z.text_block_rect(sub_y, sub_block, sub_zone), forbidden):
-        sub_y = int(sub_zone.y0 * H)
-
-    y2 = draw_lines(dr, sub_lines, sf, cx, sub_y, subtitle_fill, shadow=shadow, align=align, x_left=x_left)
     drawn_sub = (spec.subtitle or "").strip()
     LAST_SUBTITLE_DRAWN = drawn_sub
-    LAST_SUBTITLE_DECISION = (False, drawn_sub, len(sub_lines), False)
-    return y2
+    LAST_SUBTITLE_DECISION = (False, drawn_sub, len(layout.subtitle_lines), False)
+    return layout.subtitle_y + len(layout.subtitle_lines) * int(_line_h(layout.subtitle_font) * 1.06)
 
 
 def _sym_color(cover, zone, spec):
-    return S.pick_symbol_color(cover, zone, {"deep": spec.deep, "field": spec.field, "accent": spec.accent})
-
-
-def _symbol_px(plan: Z.ZonePlan, cover=None) -> tuple:
-    z = _shift_symbol_zone_if_busy(cover, plan) if cover is not None else plan.symbol
-    return (W * z.x0, H * z.y0, W * z.x1, H * z.y1)
+    if isinstance(zone, tuple) and len(zone) == 4:
+        zone_px = zone
+    else:
+        zone_px = zone
+    return S.pick_symbol_color(cover, zone_px, {"deep": spec.deep, "field": spec.field, "accent": spec.accent})
 
 
 def _draw_symbols(dr, cover, spec, plan, scrim=False):
-    zone = _symbol_px(plan, cover)
-    sym_col = _sym_color(cover, zone, spec)
-    sbox = S.draw_symbol_set(cover, spec.motif, zone, spec.count, sym_col, spec.seed, scrim=scrim)
-    _frame_symbols(dr, spec.framing, sbox, sym_col)
-    return sbox
+    """Symbols already drawn by _compose_layout; framing re-applied if needed."""
+    pass
 
 
 def cover_crop(img, w, h):
@@ -337,8 +440,7 @@ def full_bleed(spec, image):
         _draw_text_band(cover, plan.subtitle.y0 - 0.01, plan.subtitle.y1 - plan.subtitle.y0 + 0.03,
                         P.darken(spec.deep, 0.55), 215)
     dr = ImageDraw.Draw(cover)
-    _draw_zoned_title_subtitle(dr, spec, plan, P.CREAM, P.CREAM, shadow=(3, 4, (0, 0, 0)))
-    _draw_symbols(dr, cover, spec, plan, scrim=True)
+    _draw_zoned_title_subtitle(cover, dr, spec, plan, P.CREAM, P.CREAM, shadow=(3, 4, (0, 0, 0)), sym_scrim=True)
     series_band(dr, spec, W // 2, int(plan.series.y0 * H), P.CREAM)
     byline(dr, spec, W // 2, int(plan.byline.y0 * H), P.CREAM, (204, 200, 192))
     return cover
@@ -361,8 +463,7 @@ def inset_card(spec, image):
     b = 10
     cover.paste(Image.new("RGB", (cw + 2 * b, ch + 2 * b), spec.accent), (cx0 - b, cy0 - b))
     cover.paste(card, (cx0, cy0))
-    _draw_zoned_title_subtitle(dr, spec, plan, ink, ink)
-    _draw_symbols(dr, cover, spec, plan)
+    _draw_zoned_title_subtitle(cover, dr, spec, plan, ink, ink)
     series_band(dr, spec, W // 2, int(plan.series.y0 * H), P.darken(spec.accent, 0.1))
     byline(dr, spec, W // 2, int(plan.byline.y0 * H), ink, P.mix(spec.field, ink, 0.5))
     return cover
@@ -379,10 +480,11 @@ def panel_bands(spec, image):
     pan_y0 = int(plan.image.y0 * H) or top_h
     panel = cover_crop(image, W, ph).convert("RGB") if image else P.gradient((W, ph), spec.deep, spec.accent)
     cover.paste(panel, (0, pan_y0))
-    dr.rectangle([0, pan_y0 + ph - 5, W, pan_y0 + ph], fill=spec.accent)
+    # Soft edge into text band — no hard accent rule (reads as stray line under title).
+    scrim(cover, 0, pan_y0 + ph - 28, W, 28, spec.field, 0, 200)
     ink = P.best_contrast(spec.field, [P.INK, spec.deep])
-    _draw_zoned_title_subtitle(dr, spec, plan, ink, ink)
-    _draw_symbols(dr, cover, spec, plan)
+    sub_ink = P.mix(spec.accent, ink, 0.35)
+    _draw_zoned_title_subtitle(cover, dr, spec, plan, ink, sub_ink)
     byline(dr, spec, W // 2, int(plan.byline.y0 * H), ink, P.mix(spec.field, ink, 0.55))
     return cover
 
@@ -401,8 +503,7 @@ def title_block(spec, image):
         _draw_text_band(cover, plan.title.y0 - 0.01, plan.title.y1 - plan.title.y0 + 0.02, P.darken(spec.deep, 0.55), 225)
         _draw_text_band(cover, plan.subtitle.y0 - 0.01, plan.subtitle.y1 - plan.subtitle.y0 + 0.02, P.darken(spec.deep, 0.55), 215)
     dr = ImageDraw.Draw(cover)
-    _draw_zoned_title_subtitle(dr, spec, plan, P.CREAM, P.CREAM)
-    _draw_symbols(dr, cover, spec, plan, scrim=True)
+    _draw_zoned_title_subtitle(cover, dr, spec, plan, P.CREAM, P.CREAM)
     series_band(dr, spec, W // 2, int(plan.series.y0 * H), P.CREAM)
     byline(dr, spec, W // 2, int(plan.byline.y0 * H), P.CREAM, P.lighten(spec.deep, 0.5))
     return cover
@@ -413,8 +514,7 @@ def gradient_solo(spec, image=None):
     cover = P.gradient((W, H), spec.deep, P.mix(spec.deep, spec.field, 0.5), angle=68)
     cover = P.grain(P.vignette(cover, 0.26), 5).convert("RGB")
     dr = ImageDraw.Draw(cover)
-    _draw_zoned_title_subtitle(dr, spec, plan, P.CREAM, P.CREAM, shadow=(2, 3, P.darken(spec.deep, 0.3)))
-    _draw_symbols(dr, cover, spec, plan)
+    _draw_zoned_title_subtitle(cover, dr, spec, plan, P.CREAM, P.CREAM, shadow=(2, 3, P.darken(spec.deep, 0.3)))
     series_band(dr, spec, W // 2, int(plan.series.y0 * H), P.lighten(spec.accent, 0.2))
     byline(dr, spec, W // 2, int(plan.byline.y0 * H), P.CREAM, P.lighten(spec.deep, 0.5))
     return cover
@@ -429,8 +529,7 @@ def framed(spec, image=None):
     dr.rectangle([inset, inset, W - inset, H - inset], outline=spec.accent, width=6)
     dr.rectangle([inset + 16, inset + 16, W - inset - 16, H - inset - 16],
                  outline=P.mix(spec.accent, spec.field, 0.45), width=2)
-    _draw_zoned_title_subtitle(dr, spec, plan, ink, ink)
-    _draw_symbols(dr, cover, spec, plan)
+    _draw_zoned_title_subtitle(cover, dr, spec, plan, ink, ink)
     series_band(dr, spec, W // 2, int(plan.series.y0 * H), P.darken(spec.accent, 0.1))
     byline(dr, spec, W // 2, int(plan.byline.y0 * H), ink, P.mix(spec.field, ink, 0.5))
     return cover
@@ -443,9 +542,8 @@ def duotone_split(spec, image=None):
     cover.paste(P.gradient((W, split), spec.deep, P.darken(spec.deep, 0.18)), (0, 0))
     dr = ImageDraw.Draw(cover)
     dr.rectangle([0, split - 6, W, split], fill=spec.accent)
-    _draw_zoned_title_subtitle(dr, spec, plan, P.CREAM, P.CREAM, shadow=(2, 3, P.darken(spec.deep, 0.3)))
+    _draw_zoned_title_subtitle(cover, dr, spec, plan, P.CREAM, P.CREAM, shadow=(2, 3, P.darken(spec.deep, 0.3)))
     ink = P.best_contrast(spec.field, [P.INK, spec.deep])
-    _draw_symbols(dr, cover, spec, plan)
     series_band(dr, spec, W // 2, int(plan.series.y0 * H), P.darken(spec.accent, 0.1))
     byline(dr, spec, W // 2, int(plan.byline.y0 * H), ink, P.mix(spec.field, ink, 0.5))
     return cover
@@ -460,11 +558,9 @@ def stripe_minimal(spec, image=None):
     dr.rectangle([sw, 0, sw + 6, H], fill=spec.accent)
     ink = P.best_contrast(spec.field, [P.INK, spec.deep])
     lx = int(W * plan.title.x0)
-    _draw_zoned_title_subtitle(dr, spec, plan, ink, ink, align="left", x_left=lx, cx=None)
-    zone = _symbol_px(plan, cover)
-    scol = P.best_contrast(spec.deep, [spec.accent, P.CREAM])
-    sbox = S.draw_symbol_set(cover, spec.motif, zone, spec.count, scol, spec.seed, orientation="column")
-    _frame_symbols(dr, spec.framing, sbox, scol, pad=24)
+    _draw_zoned_title_subtitle(
+        cover, dr, spec, plan, ink, ink, align="left", x_left=lx, cx=None, sym_orientation="column",
+    )
     series_band(dr, spec, None, int(plan.series.y0 * H), P.darken(spec.accent, 0.1), align="left", x_left=lx)
     byline(dr, spec, None, int(plan.byline.y0 * H), ink, P.mix(spec.field, ink, 0.5), align="left", x_left=lx)
     return cover
@@ -475,9 +571,10 @@ def type_dominant(spec, image=None):
     cover = P.grain(Image.new("RGB", (W, H), spec.deep), 3).convert("RGB")
     dr = ImageDraw.Draw(cover)
     dr.rectangle([0, int(H * 0.88), W, H], fill=spec.field)
-    _draw_zoned_title_subtitle(dr, spec, plan, P.CREAM, P.lighten(spec.accent, 0.15),
-                               shadow=(2, 3, P.darken(spec.deep, 0.35)))
-    _draw_symbols(dr, cover, spec, plan)
+    _draw_zoned_title_subtitle(
+        cover, dr, spec, plan, P.CREAM, P.lighten(spec.accent, 0.15),
+        shadow=(2, 3, P.darken(spec.deep, 0.35)),
+    )
     series_band(dr, spec, W // 2, int(plan.series.y0 * H), spec.accent)
     ink = P.best_contrast(spec.field, [P.INK, spec.deep])
     byline(dr, spec, W // 2, int(plan.byline.y0 * H), ink, P.mix(spec.field, ink, 0.5))

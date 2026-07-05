@@ -81,6 +81,7 @@ def render_row(cfg, row, out_path, allow_fallback=True):
         "plan_title": row.get("title", ""), "plan_subtitle": row.get("subtitle", ""),
         "title_case": spec.title_case,
         "drawn_title": T.LAST_TITLE_DRAWN, "drawn_subtitle": T.LAST_SUBTITLE_DRAWN,
+        "overlap_report": dict(T.LAST_LAYOUT_REPORT),
         "pool_src": pool_src, "out": out_path, "thumb": thumb_path,
     }
 
@@ -136,6 +137,10 @@ def qc_contact_sheet(items, out_path, cols=2):
         dr.text((lx, ly + 180), f'DRAWN: {"OK" if s_ok else "MISMATCH"}', font=bf, fill=ok_c if s_ok else bad_c)
         if not s_ok:
             dr.text((lx, ly + 202), (it["drawn_subtitle"] or "")[:70], font=tf, fill=bad_c)
+        ov = it.get("overlap_report") or {}
+        ov_n = ov.get("overlap_count", "?")
+        dr.text((lx, ly + 230), f'OVERLAPS: {ov_n} (required 0)', font=bf,
+                fill=ok_c if ov_n == 0 else bad_c)
     out_path.parent.mkdir(parents=True, exist_ok=True)
     sheet.save(out_path)
     return out_path
@@ -157,10 +162,12 @@ def cmd_qc_pilot(cfg, catalog):
         items.append(it)
         t_ok = _text_match(it["plan_title"], it["drawn_title"], it.get("title_case", "sentence"))
         s_ok = _text_match(it["plan_subtitle"], it["drawn_subtitle"])
-        flag = "OK" if (t_ok and s_ok) else "FAIL"
-        if not t_ok or not s_ok:
+        ov = it.get("overlap_report") or {}
+        ov_ok = ov.get("overlap_count") == 0
+        flag = "OK" if (t_ok and s_ok and ov_ok) else "FAIL"
+        if not t_ok or not s_ok or not ov_ok:
             mismatches.append(bid)
-        print(f'  [{flag}] {bid}')
+        print(f'  [{flag}] {bid} overlaps={ov.get("overlap_count", "?")}')
         if not t_ok:
             print(f'         title plan: {it["plan_title"][:60]}')
             print(f'         title draw: {it["drawn_title"][:60]}')
@@ -169,7 +176,7 @@ def cmd_qc_pilot(cfg, catalog):
             print(f'         sub draw:   {it["drawn_subtitle"][:60]}')
     sheet = qc_contact_sheet(items, OUT / "qc_pilot_contact_sheet.png", cols=2)
     print(f"\nQC CONTACT SHEET: {sheet}")
-    print(f"TEXT PROOF: {len(items) - len(mismatches)}/{len(items)} cells plan==drawn")
+    print(f"TEXT PROOF: {len(items) - len(mismatches)}/{len(items)} cells plan==drawn + 0 overlaps")
     if mismatches:
         print(f"MISMATCHES: {mismatches}")
     else:

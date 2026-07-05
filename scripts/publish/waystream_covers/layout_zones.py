@@ -74,9 +74,10 @@ def zone_plan(family: str, variant: str) -> ZonePlan:
                         Rect(0.12, 0.29, 0.88, 0.63), Rect(0.34, 0.66, 0.66, 0.74),
                         Rect(0.08, 0.86, 0.92, 0.94), Rect(0.08, 0.78, 0.92, 0.82))
     if family == "panel_bands":
-        return ZonePlan(v, Rect(0.08, 0.62, 0.92, 0.76), Rect(0.08, 0.76, 0.92, 0.86),
-                        Rect(0.0, 0.155, 1.0, 0.60), Rect(0.34, 0.88, 0.66, 0.94),
-                        Rect(0.08, 0.92, 0.92, 0.98), Rect(0.08, 0.04, 0.92, 0.12))
+        # Symbol in image corner — never in text footer (lowline reads as a rule under title).
+        return ZonePlan(v, Rect(0.08, 0.62, 0.92, 0.78), Rect(0.08, 0.62, 0.92, 0.88),
+                        Rect(0.0, 0.155, 1.0, 0.60), Rect(0.78, 0.50, 0.94, 0.58),
+                        Rect(0.08, 0.90, 0.92, 0.97), Rect(0.08, 0.04, 0.92, 0.12))
     if family == "title_block":
         if v == "split_above_below":
             return ZonePlan(v, Rect(0.10, 0.06, 0.90, 0.18), Rect(0.10, 0.66, 0.90, 0.80),
