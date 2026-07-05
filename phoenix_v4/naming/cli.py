@@ -11,7 +11,7 @@ from pathlib import Path
 from typing import Any
 
 from . import dedupe, generator, keyword_bank, scorer, validator
-from ._config import load_naming_scoring
+from ._config import load_naming_scoring, load_persona_flavor
 
 
 def load_existing_titles(path: str | Path | None) -> list[str]:
@@ -52,6 +52,11 @@ def run(
     secondary_keywords = keywords.get("secondary") or []
     scenario_phrase = angle_id.replace("_", " ")
 
+    flavor = load_persona_flavor()
+    personas_cfg = flavor.get("personas") or {}
+    persona_cfg = personas_cfg.get(persona_id) or personas_cfg.get("default") or {}
+    persona_display = persona_cfg.get("persona_role") or persona_id.replace("_", " ").title()
+
     book_id, candidates = generator.generate_candidates(
         topic_id=topic_id,
         persona_id=persona_id,
@@ -71,6 +76,9 @@ def run(
             current_batch=batch_templates,
             tfidf_index=tfidf_index,
             primary_keyword=primary_keyword,
+            formula4=True,
+            persona_display=persona_display,
+            persona_id=persona_id,
         )
         if not ok:
             rejection_reasons[reason] = rejection_reasons.get(reason, 0) + 1
