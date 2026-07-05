@@ -20,7 +20,17 @@ from __future__ import annotations
 import itertools
 from collections import Counter
 
+import pytest
+
 from phoenix_v4.rendering import chapter_composer as cc
+
+
+@pytest.fixture(autouse=True)
+def _enable_render_glue_for_frontier_lane_a_tests(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Lane A tests exercise thread/bridge machinery; production default is glue OFF."""
+    monkeypatch.setenv("PHOENIX_ENABLE_RENDER_GLUE", "1")
+    monkeypatch.setenv("PHOENIX_BRIDGE_TRANSITION_FAMILIES", "1")
+    cc._BRIDGE_TRANSITION_CACHE = None
 
 
 # A realistic 12-chapter emotional-role sequence using the planner's actual arc
