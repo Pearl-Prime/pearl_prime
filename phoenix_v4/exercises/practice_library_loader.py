@@ -134,6 +134,8 @@ def compose_exercise(
     chapter_index: int,
     seed: str,
     templates: Optional[dict] = None,
+    *,
+    content_only: bool = False,
 ) -> str:
     """Compose a full exercise with bridge + introduction + intro + description + aha + integration.
 
@@ -141,11 +143,16 @@ def compose_exercise(
     OPD-113: prepends an explicit "Now we're going to do an exercise" cue
     (operator's Part 1) before the intro/description.
 
+    When content_only=True, render lean bridge + practice description only —
+    no introduction_templates.yaml cue, intro/aha/integration scaffolding.
+    Used for ch1 pilot de-glue; bank-wide follow-up pending.
+
     Args:
         exercise: Exercise dict from practice library (must have 'text' and 'name')
         chapter_index: Chapter position (for deterministic rotation)
         seed: Book-level seed for deterministic selection
         templates: Component templates (loaded if not provided)
+        content_only: Skip assembly scaffolding; bridge (lean) + description only
 
     Returns:
         Fully composed exercise text ready for rendering.
@@ -157,18 +164,24 @@ def compose_exercise(
     ex_type = exercise.get("exercise_type", "body_awareness")
     components = exercise.get("components", {})
 
+    def _get_text(comp: Any) -> str:
+        if isinstance(comp, str):
+            return comp
+        if isinstance(comp, dict):
+            return comp.get("lean", comp.get("full", comp.get("text", str(comp))))
+        return str(comp) if comp else ""
+
+    if content_only:
+        bridge = _get_text(components.get("bridge", "")) if isinstance(components, dict) else ""
+        desc = description or _get_text(components.get("description", ""))
+        return "\n\n".join(p for p in (bridge, desc) if p).strip()
+
     # OPD-113: explicit "Now we're going to do an exercise" cue (Part 1)
     introduction = _introduction_for_type(ex_type)
 
     # Use pre-composed components if available
     if isinstance(components, dict) and components.get("bridge"):
         # Components may be strings or dicts with full/lean variants
-        def _get_text(comp):
-            if isinstance(comp, str):
-                return comp
-            if isinstance(comp, dict):
-                return comp.get("full", comp.get("text", str(comp)))
-            return str(comp) if comp else ""
         bridge = _get_text(components["bridge"])
         # OPD-113: prefer ab_tady-provided introduction, else template lookup
         intro_from_data = _get_text(components.get("introduction", ""))
