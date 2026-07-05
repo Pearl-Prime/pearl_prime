@@ -87,3 +87,7 @@ jobs:
 
       - name: 12-shape chapter object continuity (BLOCK)
         run: PYTHONPATH=. python3 scripts/ci/check_chapter_object_continuity.py
+
+      - name: Data dictionary enforced (undocumented / orphan / unwired-knob — BLOCK)
+        run: |
+          PYTHONPATH=scripts/ci:. python3 scripts/ci/check_data_dictionary.py

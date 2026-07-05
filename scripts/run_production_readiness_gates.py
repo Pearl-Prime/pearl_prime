@@ -515,14 +515,47 @@ def main() -> int:
     else:
         gate("26. 12-shape chapter object continuity", True, "gate script not present; skip", skip=True)
 
+    # --- 27. Enforced data dictionary (undocumented / orphan / unwired-knob / bypass) ---
+    # CASCADE-BLOCK: this is the SSOT-integrity gate. A red here means the repo has
+    # an undocumented file, a silent orphan, a selector-blind atom bank, or a
+    # book-assembly path bypassing chapter_planner/book_pass_gate. A dependent
+    # NEXT-5 lane MUST NOT declare "done" while this is red — the runner records
+    # data_dict_red so any downstream aggregator can honor the cascade.
+    data_dict_red = False
+    g27 = REPO_ROOT / "scripts" / "ci" / "check_data_dictionary.py"
+    if g27.exists():
+        try:
+            env = os.environ.copy()
+            env["PYTHONPATH"] = f"{REPO_ROOT / 'scripts' / 'ci'}{os.pathsep}{REPO_ROOT}"
+            r = subprocess.run(
+                [sys.executable, str(g27)],
+                cwd=str(REPO_ROOT), env=env,
+                capture_output=True, text=True, timeout=360,
+            )
+            g_ok = r.returncode == 0
+            out = (r.stderr or r.stdout or "").strip()
+            g_detail = out.splitlines()[-1] if out else "check_data_dictionary"
+        except Exception as e:
+            g_ok = False
+            g_detail = str(e)
+        if not gate("27. Enforced data dictionary (no undoc/orphan/unwired-knob/bypass)",
+                    g_ok, g_detail):
+            failed += 1
+            data_dict_red = True
+    else:
+        gate("27. Enforced data dictionary", True, "gate script not present; skip", skip=True)
+
     # --- Report ---
-    print("V4.5 Production Readiness — 25 conditions\n")
+    print("V4.5 Production Readiness — 27 conditions\n")
     for name, status, detail in RESULTS:
         sym = "✓" if status == "PASS" else ("○" if status == "SKIP" else "✗")
         print(f"  {sym} {status:4}  {name}")
         if detail:
             print(f"      {detail}")
     print()
+    if data_dict_red:
+        print("CASCADE-BLOCK: gate 27 (data dictionary) is RED — dependent NEXT-5 "
+              "lanes may not declare done until the SSOT is documented/wired.")
     if failed > 0:
         print(f"FAILED: {failed} condition(s) not met.")
         return 1
