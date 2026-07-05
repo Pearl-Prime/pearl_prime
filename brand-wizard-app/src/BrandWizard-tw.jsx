@@ -6,6 +6,28 @@ import { OutputProofStrip } from "./onboarding/OutputProofStrip.jsx";
 import { LaneChoiceCard } from "./onboarding/LaneChoiceCard.jsx";
 import { MarketChoiceCard } from "./onboarding/MarketChoiceCard.jsx";
 
+/** zh-TW wizard default market; ?market= / phoenix_onboarding_market override onboarding.html handoff. */
+function resolveOnboardingMarket() {
+  const norm = (s) => String(s || "").toLowerCase().replace(/[\s-]+/g, "_");
+  try {
+    const url = new URLSearchParams(window.location.search).get("market");
+    if (url) {
+      const k = norm(url);
+      if (k === "tw" || k === "taiwan" || k === "zh_tw") return "taiwan";
+      return k;
+    }
+  } catch (_) {}
+  try {
+    const stored = localStorage.getItem("phoenix_onboarding_market");
+    if (stored) {
+      const k = norm(stored);
+      if (k === "tw" || k === "taiwan" || k === "zh_tw") return "taiwan";
+      return k;
+    }
+  } catch (_) {}
+  return "taiwan";
+}
+
 // ─────────────────────────────────────────────────────────────
 // PEARL PRIME — BRAND CREATION WIZARD v2.1
 // White theme, 11-step wizard, persona impact panel
@@ -2878,7 +2900,7 @@ function Step11Launch({ state, update, i18n = {} }) {
               {matched.is_teacher ? `${t("ui", "Teacher brand")} · ${matched.teacher}` : t("ui", "Composite brand")} · {matched.brand_id}
             </div>
             <button
-              onClick={() => { window.location.href = "brand_admin_weekly_os.html?brand=" + encodeURIComponent(matched.brand_id); }}
+              onClick={() => { window.location.href = "/brand_admin_weekly_os?brand=" + encodeURIComponent(matched.brand_id); }}
               className="mt-4 inline-flex items-center gap-2 rounded-xl bg-emerald-600 px-7 py-3 text-sm font-bold text-white shadow-lg transition-all hover:-translate-y-0.5 hover:bg-emerald-700"
             >
               {t("ui", "Open Brand Director")} <ArrowRight size={16} />
@@ -3263,7 +3285,7 @@ function generateYAML(state) {
   Object.entries(state.voiceSettings || {}).forEach(([k, v]) => { y += `    ${k}: ${v}\n`; });
   y += `\n  visual_style: "${state.visualStyle}"\n  tradition: "${state.tradition}"\n  emotional_outcomes: [${(state.emotions || []).map((e) => `"${e}"`).join(", ")}]\n\n`;
   y += `  content_angles: [${(state.angles || []).map((a) => `"${a}"`).join(", ")}]\n  topic_tags: [${(state.topicTags || []).map((t) => `"${t}"`).join(", ")}]\n\n`;
-  y += `  onboarding_lane: "${state.onboardingLane || "self_help"}"\n  onboarding_market: "${state.onboardingMarket || "us"}"\n`;
+  y += `  onboarding_lane: "${state.onboardingLane || "self_help"}"\n  onboarding_market: "${state.onboardingMarket || "taiwan"}"\n`;
   y += `  format_focus: "${state.formatFocus || "book"}"\n  channels: [${(state.channels || []).map((c) => `"${c}"`).join(", ")}]\n\n`;
   y += `  revenue_blend:\n    user_topics_weight: 0.30\n    proven_topics_weight: 0.70\n    note: "System blends brand identity with persona-based demand and proven search terms"\n\n`;
 
@@ -3591,8 +3613,8 @@ export default function BrandWizard() {
     voiceSettings: {}, visualStyle: null, emotions: [],
     tradition: "", angles: [], topicTags: [],
     formatFocus: null, channels: [],
-    onboardingLane: "self_help", onboardingMarket: "us",
-    contact: { firstName: "", lastName: "", email: "", phoneCode: "+1", phone: "", line: "", whatsapp: "", wechat: "", messenger: "", preferred: "email" },
+    onboardingLane: "self_help", onboardingMarket: "taiwan",
+    contact: { firstName: "", lastName: "", email: "", phoneCode: "+886", phone: "", line: "", whatsapp: "", wechat: "", messenger: "", preferred: "email" },
   });
 
   const update = useCallback((patch) => setState((prev) => ({ ...prev, ...patch })), []);
@@ -3612,6 +3634,12 @@ export default function BrandWizard() {
     const urlMode = params.get("mode");
     if (urlTeacher || urlMode === "composite" || urlMode === "music") { setPhase("wizard"); setStep(0); scrollTop(); }
   }, []);
+
+  // Market from onboarding.html handoff (?market= / phoenix_onboarding_market) or TW default.
+  useEffect(() => {
+    const market = resolveOnboardingMarket();
+    if (market) update({ onboardingMarket: market });
+  }, [update]);
 
   // INTRO: 0=welcome, 1=journey → straight to wizard (preview pages removed)
   if (phase === "intro") {
