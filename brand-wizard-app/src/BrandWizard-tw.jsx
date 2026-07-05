@@ -2878,7 +2878,7 @@ function Step11Launch({ state, update, i18n = {} }) {
               {matched.is_teacher ? `${t("ui", "Teacher brand")} · ${matched.teacher}` : t("ui", "Composite brand")} · {matched.brand_id}
             </div>
             <button
-              onClick={() => { window.location.href = "brand_handoff_dashboard.html?brand=" + encodeURIComponent(matched.brand_id); }}
+              onClick={() => { window.location.href = "brand_admin_weekly_os.html?brand=" + encodeURIComponent(matched.brand_id); }}
               className="mt-4 inline-flex items-center gap-2 rounded-xl bg-emerald-600 px-7 py-3 text-sm font-bold text-white shadow-lg transition-all hover:-translate-y-0.5 hover:bg-emerald-700"
             >
               {t("ui", "Open Brand Director")} <ArrowRight size={16} />
