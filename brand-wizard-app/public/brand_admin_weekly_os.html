@@ -21,6 +21,12 @@ html,body{width:100%;height:100%;font-family:"DM Sans",sans-serif;background:#0e
 .nav-pill:hover{color:var(--hi);background:rgba(180,83,9,.08)}
 .nav-pill.active{color:var(--acc2);background:rgba(180,83,9,.14);border-color:var(--border)}
 .nav-pill.locked{opacity:.3;cursor:not-allowed}
+.top-cta{font-family:var(--mono);font-size:.48rem;letter-spacing:.06em;text-transform:uppercase;color:var(--acc2);border:1px solid var(--border);padding:5px 12px;border-radius:4px;text-decoration:none;margin-left:auto;white-space:nowrap}
+.top-cta:hover{background:rgba(180,83,9,.14)}
+.market-note{font-size:.72rem;color:var(--mid);line-height:1.55;border-left:3px solid var(--acc);background:rgba(180,83,9,.06);padding:10px 14px;border-radius:0 6px 6px 0;margin:0 0 16px}
+.planned-tag{font-family:var(--mono);font-size:.42rem;letter-spacing:.06em;text-transform:uppercase;color:var(--acc2);border:1px solid rgba(217,119,6,.35);padding:2px 8px;border-radius:10px;margin-left:8px}
+.check-card.planned-card{opacity:.72;border-style:dashed}
+.check-card.planned-card .check-box{opacity:.35;pointer-events:none}
 
 /* -- Main Progress Bar -- */
 #main-progress{position:fixed;top:48px;left:0;right:0;z-index:99;padding:12px 20px;background:rgba(14,10,6,.95);border-bottom:1px solid var(--border)}
@@ -79,10 +85,6 @@ html,body{width:100%;height:100%;font-family:"DM Sans",sans-serif;background:#0e
 .coord-build-badge.stale{color:var(--acc2)}
 .coord-build-badge.missing{color:var(--red)}
 .coord-build-badge.loading{opacity:.6}
-.admin-dl-spinner{display:inline-flex;align-items:center;margin-right:6px;vertical-align:middle}
-.admin-dl-spinner svg{animation:admin-dl-spin .8s linear infinite}
-@keyframes admin-dl-spin{to{transform:rotate(360deg)}}
-.action-btn:disabled{opacity:.55;cursor:not-allowed;pointer-events:none}
 
 /* -- Warn / Note -- */
 .warn{border-left:3px solid #dc2626;background:rgba(220,38,38,.06);padding:8px 14px;border-radius:0 6px 6px 0;margin:8px 0;font-size:.72rem;color:var(--mid);line-height:1.55}
@@ -154,13 +156,14 @@ html,body{width:100%;height:100%;font-family:"DM Sans",sans-serif;background:#0e
 <!-- Top Bar -->
 <div id="topbar">
   <h1 data-i18n="topbar.title">Brand Admin</h1>
-  <span class="pill" id="brand-pill" data-i18n="wos.noBrand">No brand</span>
+  <span class="pill" id="brand-pill">No brand</span>
   <div class="nav-pills">
     <button class="nav-pill active" data-phase="1" data-i18n="nav.setup" onclick="showPhase(1)">Setup</button>
     <button class="nav-pill locked" data-phase="2" data-i18n="nav.upload" onclick="showPhase(2)">Upload</button>
     <button class="nav-pill locked" data-phase="3" data-i18n="nav.weekly" onclick="showPhase(3)">Weekly</button>
   </div>
-  <div class="progress-text" id="top-progress" data-i18n="wos.phaseStatic">Phase 1 of 3</div>
+  <a class="top-cta" id="handoff-cta" href="brand_handoff_dashboard.html" style="display:none">Weekly packet →</a>
+  <div class="progress-text" id="top-progress">Phase 1 of 3</div>
 </div>
 
 <!-- Main Progress -->
@@ -178,7 +181,7 @@ html,body{width:100%;height:100%;font-family:"DM Sans",sans-serif;background:#0e
     <span class="phase-label" id="pl3" data-i18n="phase.weeklyRhythm">Weekly Rhythm</span>
   </div>
   <div class="bar-track"><div class="bar-fill" id="bar-fill" style="width:0"></div></div>
-  <div class="pct-text" id="pct-text" data-i18n="wos.pctStatic">0% complete</div>
+  <div class="pct-text" id="pct-text">0% complete</div>
 </div>
 
 <!-- Brand Picker -->
@@ -196,119 +199,79 @@ html,body{width:100%;height:100%;font-family:"DM Sans",sans-serif;background:#0e
   <!-- Quick Links -->
   <div style="margin-top:40px;padding-top:20px;border-top:1px solid var(--border);text-align:center">
     <div style="font-family:var(--mono);font-size:.45rem;color:var(--dim);letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px" data-i18n="quicklinks.heading">Quick Platform Links</div>
-    <div class="quick-links">
-      <a class="qlink" href="https://kdp.amazon.com/bookshelf" target="_blank" data-i18n="quicklinks.kdp">KDP</a>
-      <a class="qlink" href="https://play.google.com/books/publish" target="_blank" data-i18n="quicklinks.googlePlay">Google Play</a>
-      <a class="qlink" href="https://authors.apple.com" target="_blank" data-i18n="quicklinks.appleBooks">Apple Books</a>
-      <a class="qlink" href="https://studio.youtube.com" target="_blank" data-i18n="quicklinks.youtube">YouTube</a>
-      <a class="qlink" href="https://www.tiktok.com/creator" target="_blank" data-i18n="quicklinks.tiktok">TikTok</a>
-      <a class="qlink" href="https://www.webtoons.com/en/challenge/publish" target="_blank" data-i18n="quicklinks.webtoon">WEBTOON</a>
-      <a class="qlink" href="https://writinglife.kobobooks.com" target="_blank" data-i18n="quicklinks.kobo">Kobo</a>
-      <a class="qlink" href="https://draft2digital.com" target="_blank" data-i18n="quicklinks.d2d">D2D</a>
-      <a class="qlink" href="https://www.instagram.com" target="_blank" data-i18n="quicklinks.instagram">Instagram</a>
-      <a class="qlink" href="https://manager.line.biz" target="_blank" data-i18n="quicklinks.line">LINE</a>
-    </div>
+    <div class="quick-links" id="quick-links"></div>
     <div style="margin-top:16px">
-      <a class="action-btn" onclick="resetBrand()" style="cursor:pointer">Change Brand</a>
-      <a class="action-btn" href="brand_admin_setup_guide.html" target="_blank">Detailed Setup Docs</a>
-    </div>
+      <a class="action-btn" onclick="resetBrand()" style="cursor:pointer">Change Brand</a>    </div>
   </div>
 </div>
 
-<script src="js/toast.js"></script>
 <script>
-// Locale-aware brand focus (JA / zh-Hant TW); data ships English focus for all locale slices.
-var FOCUS_JA = {"Boundaries, self-worth, integrity, truth-based living": "境界線、自己肯定感、誠実さ、真実に根ざした生き方", "Burnout recovery, nervous system regulation": "燃え尽きからの回復、神経系の調整", "Career transitions, feeling unstuck": "キャリアの転機、停滞感からの脱却", "Creative blocks, artistic expression": "創作の行き詰まり、芸術的表現", "Discipline, resilience, courage, mental toughness": "規律、回復力、勇気、精神的な強さ", "Energy management, vitality, life force balance": "エネルギー管理、活力、生命力のバランス", "Executive performance, leadership under pressure": "エグゼクティブの成果、重圧下のリーダーシップ", "Gen Z grounding, identity formation, confidence building": "Z世代の地に足のついた在り方、アイデンティティ形成、自信の育成", "Grief integration, emotional healing, compassion practices": "悲嘆の統合、感情の癒し、慈悲の実践", "Heart-led awakening, cosmic transmission, soul remembrance, frequency-based guidance": "心に導かれる目覚め、宇宙的な伝授、魂の想起、周波数に基づく導き", "Life transitions, legacy, reinvention": "人生の転機、遺産、自己再生", "Meditation, mindfulness, inner peace, spiritual illumination": "瞑想、マインドフルネス、内なる平安、霊的な照らし", "Mental clarity, overthinking relief, contemplative-inspired calm": "思考の明晰さ、考えすぎの緩和、観想に根ざした静けさ", "Nature-based grounding, presence, contemplative stillness": "自然に根ざした落ち着き、今ここへの臨在、観想的な静けさ", "Nervous system regulation, somatic awareness, body-based healing": "神経系の調整、身体感覚への気づき、身体に根ざした癒し", "Neurodivergent focus, ADHD support": "神経多様性への集中支援、ADHDサポート", "Parenting stress, co-regulation": "子育てのストレス、共調整（コ・レギュレーション）", "Peak performance, focus, productivity": "ピークパフォーマンス、集中、生産性", "Purpose, meaning, existential clarity, cosmic perspective": "目的、意味、実存的な明晰さ、宇宙的な視座", "Relationship repair, co-regulation": "関係の修復、共調整（コ・レギュレーション）", "Shingon ritual technology to disrupt mental spirals without negating the mind; interrupt the thought-loop with embodied ritual": "心を否定せずに思考の渦を断つ真言密教の儀礼技法——身体に根ざした儀礼で思考のループを断ち切る", "Sleep anxiety, insomnia, nighttime rest": "睡眠不安、不眠、夜の休息", "Sleep, rest, gentle recovery, soft restoration": "睡眠、休息、穏やかな回復、やさしい立て直し", "Social anxiety, confidence building": "社交不安、自信の育成", "Spiritual awakening, radical self-inquiry, devotional practice": "霊的な目覚め、徹底した自己探究、献身の実践", "Trauma recovery, spiritual healing, soul-level repair": "トラウマからの回復、霊的な癒し、魂レベルの修復", "attention regulation; feel less scattered": "注意の調整——散漫さをやわらげる", "consistent practice; connection to something larger": "継続的な実践——より大きな何かとのつながり", "data-driven habits; optimize and feel good": "データに基づく習慣——最適化し、心地よくある", "emotional regulation; mental toughness": "感情の調整——精神的な強さ", "evidence-based habits; feel in control of aging": "科学的根拠に基づく習慣——加齢を自分でコントロールする感覚", "focus and ship; sustain without burning out": "集中して形にする——燃え尽きずに続ける", "focus and sleep; stop spiraling": "集中と睡眠——思考の渦を止める", "gentle self-inquiry; feel safe exploring": "やさしい自己探究——安心して探究できる", "hormone-aware habits; feel in control of body": "ホルモンに配慮した習慣——身体を自分でコントロールする感覚", "integrate between sessions; feel safe in body": "セッションの合間の統合——身体の中で安心していられる", "morning routine; feel set for the day": "朝のルーティン——一日への準備が整う感覚", "peak performance; confident under pressure": "ピークパフォーマンス——重圧下でも自信を保つ", "quiet the 2am overthinking mind; find meaning without religion": "午前2時の考えすぎる心を静める——宗教によらず意味を見出す", "somatic regulation; reset in the middle of the day": "ソマティックな調整——一日の途中でリセットする"};
-var FOCUS_TW = {"Boundaries, self-worth, integrity, truth-based living":"界線、自我價值、誠信、以真實為本的生活","Burnout recovery, nervous system regulation":"倦怠復原、神經系統調節","Career transitions, feeling unstuck":"職涯轉折、擺脫停滯","Creative blocks, artistic expression":"創作瓶頸、藝術表達","Discipline, resilience, courage, mental toughness":"紀律、韌性、勇氣、心理韌度","Energy management, vitality, life force balance":"能量管理、活力、生命力平衡","Executive performance, leadership under pressure":"高階績效、壓力下的領導力","Gen Z grounding, identity formation, confidence building":"Z世代落地、身分形塑、自信建立","Grief integration, emotional healing, compassion practices":"悲傷整合、情緒療癒、慈悲練習","Heart-led awakening, cosmic transmission, soul remembrance, frequency-based guidance":"心所引領的覺醒、宇宙傳訊、靈魂憶起、頻率導引","Life transitions, legacy, reinvention":"人生轉折、傳承、自我重塑","Meditation, mindfulness, inner peace, spiritual illumination":"冥想、正念、內在平靜、靈性照亮","Mental clarity, overthinking relief, contemplative-inspired calm":"思緒清明、緩解想太多、觀想式的寧靜","Nature-based grounding, presence, contemplative stillness":"自然落地、臨在、觀想式靜定","Nervous system regulation, somatic awareness, body-based healing":"神經系統調節、身體覺察、以身體為本的療癒","Neurodivergent focus, ADHD support":"神經多樣性專注支援、ADHD支持","Parenting stress, co-regulation":"育兒壓力、共同調節","Peak performance, focus, productivity":"巔峰表現、專注、生產力","Purpose, meaning, existential clarity, cosmic perspective":"目的、意義、存在的清明、宇宙視角","Relationship repair, co-regulation":"關係修復、共同調節","Shingon ritual technology to disrupt mental spirals without negating the mind; interrupt the thought-loop with embodied ritual":"以真言密教儀軌打斷思緒漩渦而不否定心智——用身體化的儀軌切斷思考迴圈","Sleep anxiety, insomnia, nighttime rest":"睡眠焦慮、失眠、夜間休息","Sleep, rest, gentle recovery, soft restoration":"睡眠、休息、溫和復原、柔和重整","Social anxiety, confidence building":"社交焦慮、自信建立","Spiritual awakening, radical self-inquiry, devotional practice":"靈性覺醒、徹底的自我探問、奉獻修行","Trauma recovery, spiritual healing, soul-level repair":"創傷復原、靈性療癒、靈魂層級的修復","attention regulation; feel less scattered":"注意力調節——減少散亂感","consistent practice; connection to something larger":"持續練習——與更大的事物連結","data-driven habits; optimize and feel good":"數據驅動的習慣——優化並感到良好","emotional regulation; mental toughness":"情緒調節——心理韌度","evidence-based habits; feel in control of aging":"實證習慣——對老化有掌控感","focus and ship; sustain without burning out":"專注並交付——不倦怠地持續","focus and sleep; stop spiraling":"專注與睡眠——停止思緒漩渦","gentle self-inquiry; feel safe exploring":"溫柔的自我探問——安心探索","hormone-aware habits; feel in control of body":"荷爾蒙覺察習慣——對身體有掌控感","integrate between sessions; feel safe in body":"練習之間的整合——在身體裡感到安全","morning routine; feel set for the day":"晨間例行——為一天做好準備","peak performance; confident under pressure":"巔峰表現——壓力下仍有自信","quiet the 2am overthinking mind; find meaning without religion":"安撫凌晨兩點想太多的心——不靠宗教找到意義","somatic regulation; reset in the middle of the day":"身體調節——在一天中途重置"};
-function wosLang(){ try{ var p=new URLSearchParams(location.search); var brand=(p.get('brand')||'').toLowerCase(); var bm=brand.match(/_([a-z]{2})_([a-z]{2})$/); if(bm){ var lane=bm[1]+'_'+bm[2]; if(lane==='ja_jp') return 'ja'; if(lane==='zh_tw'||lane==='zh_hk') return 'tw'; if(lane==='zh_cn'||lane==='zh_sg') return 'zh'; } var raw=(p.get('lang')||localStorage.getItem('pearl_prime_locale')||navigator.language||'en'); if(/^tw$/i.test(raw)||/^zh-TW$/i.test(raw)||/^zh-Hant/i.test(raw)||raw==='zh_TW') return 'tw'; if(/^ja/i.test(raw)) return 'ja'; if(/^zh/i.test(raw)) return 'zh'; return String(raw).slice(0,2).toLowerCase(); }catch(e){ return 'en'; } }
-var FOCUS_ZH_HANS = {"Boundaries, self-worth, integrity, truth-based living":"界限、自我价值、诚信、以真实为本的生活","Burnout recovery, nervous system regulation":"倦怠恢复、神经系统调节","Career transitions, feeling unstuck":"职业转折、摆脱停滞","Creative blocks, artistic expression":"创作瓶颈、艺术表达","Discipline, resilience, courage, mental toughness":"纪律、韧性、勇气、心理韧度","Energy management, vitality, life force balance":"能量管理、活力、生命力平衡","Executive performance, leadership under pressure":"高管绩效、压力下的领导力","Gen Z grounding, identity formation, confidence building":"Z世代落地、身份塑造、自信建立","Grief integration, emotional healing, compassion practices":"悲伤整合、情绪疗愈、慈悲练习","Heart-led awakening, cosmic transmission, soul remembrance, frequency-based guidance":"心所引领的觉醒、宇宙传讯、灵魂忆起、频率导引","Life transitions, legacy, reinvention":"人生转折、传承、自我重塑","Meditation, mindfulness, inner peace, spiritual illumination":"冥想、正念、内在平静、灵性照亮","Mental clarity, overthinking relief, contemplative-inspired calm":"思绪清明、缓解想太多、观想式的宁静","Nature-based grounding, presence, contemplative stillness":"自然落地、临在、观想式静定","Nervous system regulation, somatic awareness, body-based healing":"神经系统调节、身体觉察、以身体为本的疗愈","Neurodivergent focus, ADHD support":"神经多样性专注支持、ADHD支持","Parenting stress, co-regulation":"育儿压力、共同调节","Peak performance, focus, productivity":"巅峰表现、专注、生产力","Purpose, meaning, existential clarity, cosmic perspective":"目的、意义、存在的清明、宇宙视角","Relationship repair, co-regulation":"关系修复、共同调节","Shingon ritual technology to disrupt mental spirals without negating the mind; interrupt the thought-loop with embodied ritual":"以真言密教仪轨打断思绪漩涡而不否定心智——用身体化的仪轨切断思考回路","Sleep anxiety, insomnia, nighttime rest":"睡眠焦虑、失眠、夜间休息","Sleep, rest, gentle recovery, soft restoration":"睡眠、休息、温和恢复、柔和重整","Social anxiety, confidence building":"社交焦虑、自信建立","Spiritual awakening, radical self-inquiry, devotional practice":"灵性觉醒、彻底的自我探问、奉献修行","Trauma recovery, spiritual healing, soul-level repair":"创伤恢复、灵性疗愈、灵魂层面的修复","attention regulation; feel less scattered":"注意力调节——减少散乱感","consistent practice; connection to something larger":"持续练习——与更大的事物连接","data-driven habits; optimize and feel good":"数据驱动的习惯——优化并感觉良好","emotional regulation; mental toughness":"情绪调节——心理韧度","evidence-based habits; feel in control of aging":"循证习惯——对衰老有掌控感","focus and ship; sustain without burning out":"专注并交付——不倦怠地持续","focus and sleep; stop spiraling":"专注与睡眠——停止思绪漩涡","gentle self-inquiry; feel safe exploring":"温柔的自我探问——安心探索","hormone-aware habits; feel in control of body":"荷尔蒙觉察习惯——对身体有掌控感","integrate between sessions; feel safe in body":"练习之间的整合——在身体里感到安全","morning routine; feel set for the day":"晨间例行——为一天做好准备","peak performance; confident under pressure":"巅峰表现——压力下仍有自信","quiet the 2am overthinking mind; find meaning without religion":"安抚凌晨两点想太多的心——不靠宗教找到意义","somatic regulation; reset in the middle of the day":"身体调节——在一天中途重置"};
-function localizeFocus(f){ var L=wosLang(); if(L==='ja' && FOCUS_JA[f]) return FOCUS_JA[f]; if(L==='tw' && FOCUS_TW[f]) return FOCUS_TW[f]; if(L==='zh' && FOCUS_ZH_HANS[f]) return FOCUS_ZH_HANS[f]; return f; }
-</script>
-<script>
-// ── Brand Data — unified 39×14 from brand_admin_brands.json (gen_brand_admin_brands.py);
-// the const below is a stale fallback if the fetch fails. ──
-let B={
-  inner_light_press_en_us:{d:"Inner Light Press",t:"Ahjan",tm:true,tr:"Contemplative / inner light",f:"Meditation, mindfulness, inner peace",tp:["anxiety","burnout","depression","self_worth","somatic_healing","mindfulness"]},
-  awakening_press_en_us:{d:"Awakening Press",t:"Adi Da",tm:true,tr:"Radical devotion",f:"Spiritual awakening, radical self-inquiry",tp:["self_worth","courage","boundaries","depression","grief"]},
-  vitality_path_en_us:{d:"Vitality Path",t:"Master Feung",tm:true,tr:"Taoist energy cultivation",f:"Energy management, vitality, life force balance",tp:["burnout","somatic_healing","courage","self_worth"]},
-  healing_ground_press_en_us:{d:"Healing Ground Press",t:"Sai Ma",tm:true,tr:"Divine healing / compassion",f:"Grief integration, emotional healing",tp:["grief","compassion_fatigue","depression","boundaries"]},
-  cosmic_edge_en_us:{d:"Cosmic Edge",t:"Ra",tm:true,tr:"Cosmic consciousness",f:"Purpose, meaning, existential clarity",tp:["imposter_syndrome","self_worth","courage","overthinking"]},
-  zen_clarity_en_us:{d:"Zen Clarity",t:"Junko",tm:true,tr:"Japanese mindfulness / zen",f:"Mental clarity, overthinking relief",tp:["overthinking","anxiety","sleep_anxiety","social_anxiety","mindfulness"]},
-  gen_spark_en_us:{d:"Gen Spark",t:"Miki",tm:true,tr:"Youth activation",f:"Gen Z grounding, identity, confidence",tp:["imposter_syndrome","social_anxiety","self_worth","boundaries"]},
-  iron_will_en_us:{d:"Iron Will",t:"Master Wu",tm:true,tr:"Warrior discipline",f:"Discipline, resilience, courage",tp:["courage","burnout","imposter_syndrome","boundaries"]},
-  body_wisdom_en_us:{d:"Body Wisdom",t:"Pamela Fellows",tm:true,tr:"Somatic therapy / polyvagal",f:"Nervous system regulation, somatic awareness",tp:["anxiety","somatic_healing","sleep_anxiety","burnout"]},
-  still_forest_en_us:{d:"Still Forest",t:"Joshin",tm:true,tr:"Forest meditation",f:"Nature-based grounding, presence",tp:["anxiety","overthinking","somatic_healing","depression"]},
-  truth_compass_en_us:{d:"Truth Compass",t:"Maat",tm:true,tr:"Divine principle / truth",f:"Boundaries, self-worth, integrity",tp:["boundaries","self_worth","imposter_syndrome","financial_stress"]},
-  gentle_wave_en_us:{d:"Gentle Wave",t:"Omote",tm:true,tr:"Japanese healing",f:"Sleep, rest, gentle recovery",tp:["sleep_anxiety","burnout","anxiety","compassion_fatigue","mindfulness"]},
-  soul_repair_en_us:{d:"Soul Repair",t:"Master Sha",tm:true,tr:"Soul healing",f:"Trauma recovery, spiritual healing",tp:["grief","depression","self_worth","somatic_healing","courage"]},
-  stabilizer_en_us:{d:"Stabilizer",t:null,tm:false,tr:"",f:"Burnout recovery, nervous system regulation",tp:["burnout","anxiety","somatic_healing"]},
-  optimizer_en_us:{d:"Optimizer",t:null,tm:false,tr:"",f:"Peak performance, focus, productivity",tp:["imposter_syndrome","burnout","overthinking"]},
-  night_reset_en_us:{d:"Night Reset",t:null,tm:false,tr:"",f:"Sleep anxiety, insomnia, nighttime rest",tp:["sleep_anxiety","anxiety","overthinking"]},
-  career_lift_en_us:{d:"Career Lift",t:null,tm:false,tr:"",f:"Career transitions, feeling unstuck",tp:["imposter_syndrome","courage","financial_anxiety"]},
-  adhd_forge_en_us:{d:"ADHD Forge",t:null,tm:false,tr:"",f:"Neurodivergent focus, ADHD support",tp:["adhd_focus","overthinking","anxiety","imposter_syndrome"]},
-  creative_unfold_en_us:{d:"Creative Unfold",t:null,tm:false,tr:"",f:"Creative blocks, artistic expression",tp:["self_worth","courage","boundaries"]},
-  resilient_parent_en_us:{d:"Resilient Parent",t:null,tm:false,tr:"",f:"Parenting stress, co-regulation",tp:["burnout","compassion_fatigue","boundaries"]},
-  executive_calm_en_us:{d:"Executive Calm",t:null,tm:false,tr:"",f:"Executive performance, leadership under pressure",tp:["burnout","anxiety","imposter_syndrome"]},
-  confidence_core_en_us:{d:"Confidence Core",t:null,tm:false,tr:"",f:"Social anxiety, confidence building",tp:["social_anxiety","self_worth","imposter_syndrome"]},
-  relationship_clarity_en_us:{d:"Relationship Clarity",t:null,tm:false,tr:"",f:"Relationship repair, co-regulation",tp:["boundaries","grief","compassion_fatigue"]},
-  legacy_builder_en_us:{d:"Legacy Builder",t:null,tm:false,tr:"",f:"Life transitions, legacy, reinvention",tp:["self_worth","courage","financial_stress"]}
-};
+const JSON_BASE='';
+let B={}, OS_DATA=null, PACKET_BRIDGE=null, MARKET_ID='en_us', MARKET=null;
+let SETUP=[], UPLOADS=[], UPLOADS_PLANNED=[], WEEK=[], QUICK_LINKS=[];
 
 const KW={anxiety:"anxiety relief, calm, stress management",burnout:"burnout recovery, rest, energy restoration",depression:"emotional healing, hope, mental wellness",self_worth:"self-worth, confidence, self-esteem",somatic_healing:"somatic healing, body awareness, nervous system",mindfulness:"mindfulness, meditation, present moment",courage:"courage, bravery, resilience, inner strength",boundaries:"healthy boundaries, self-protection, assertiveness",grief:"grief support, loss, healing after loss",compassion_fatigue:"compassion fatigue, caregiver support",overthinking:"overthinking, mental clarity, calm mind",sleep_anxiety:"sleep anxiety, insomnia help, restful sleep",social_anxiety:"social anxiety, social confidence",imposter_syndrome:"imposter syndrome, self-doubt, confidence",financial_stress:"financial stress, money anxiety, abundance",financial_anxiety:"financial anxiety, career confidence",adhd_focus:"ADHD focus, neurodivergent support, attention"};
 
-// Setup steps with platform info
-const SETUP=[
-  {id:"gmail",n:"Google Account",url:"https://accounts.google.com/signup",t:"5 min",all:true},
-  {id:"youtube",n:"YouTube Channel",url:"https://www.youtube.com/channel_switcher",t:"15 min",all:true},
-  {id:"kdp",n:"Amazon KDP",url:"https://kdp.amazon.com/signup",t:"20 min",all:true},
-  {id:"gplay",n:"Google Play Books",url:"https://play.google.com/books/publish/",t:"25 min",all:true},
-  {id:"apple",n:"Apple Books",url:"https://authors.apple.com",t:"30 min",all:true},
-  {id:"kobo",n:"Kobo Writing Life",url:"https://writinglife.kobobooks.com",t:"20 min",all:true},
-  {id:"tiktok",n:"TikTok Business",url:"https://www.tiktok.com/signup",t:"15 min",all:true},
-  {id:"instagram",n:"Instagram Business",url:"https://www.instagram.com/accounts/emailsignup/",t:"15 min",all:true},
-  {id:"webtoon",n:"WEBTOON Canvas",url:"https://www.webtoons.com/en/challenge/publish",t:"20 min",all:true},
-  {id:"d2d",n:"Draft2Digital",url:"https://draft2digital.com/signup",t:"15 min",all:true}
-];
+function laneFromBrandId(bid){const m=bid.match(/_([a-z]{2}_[a-z]{2})$/);return m?m[1]:'en_us';}
+function resolveMarket(bid){if(!OS_DATA)return'en_us';const lane=laneFromBrandId(bid);return(OS_DATA.lane_to_market&&OS_DATA.lane_to_market[lane])||OS_DATA.default_market||'en_us';}
+function applyMarketProfile(marketId){
+  MARKET_ID=marketId;
+  MARKET=(OS_DATA&&OS_DATA.markets&&OS_DATA.markets[marketId])||(OS_DATA&&OS_DATA.markets.en_us)||{};
+  SETUP=MARKET.setup||[];
+  UPLOADS=(MARKET.uploads||[]).filter(u=>u.status==='ready');
+  UPLOADS_PLANNED=(MARKET.uploads||[]).filter(u=>u.status==='planned');
+  WEEK=MARKET.week||[];
+  QUICK_LINKS=MARKET.quick_links||[];
+}
+function setupReady(){return SETUP.filter(st=>st.status!=='planned');}
+function setupPlanned(){return SETUP.filter(st=>st.status==='planned');}
 
-// Upload platforms for Phase 2
-const UPLOADS=[
-  {id:"u_kdp",n:"Amazon KDP",url:"https://kdp.amazon.com/bookshelf",titles:6,icon:"A",steps:["Log in to KDP Bookshelf","Click 'Create New Title' > Kindle eBook","Enter title, subtitle, author, description (use COPY buttons below)","Upload EPUB from KDP/ folder","Upload cover from KDP/ folder","Set price ($2.99-9.99 for 70% royalty) and publish","Repeat for each title"]},
-  {id:"u_gplay",n:"Google Play Books",url:"https://play.google.com/books/publish",titles:4,icon:"G",steps:["Open Partner Center","Click 'Add Book' > 'Add New Book'","Upload EPUB from GooglePlay/ folder","Fill in metadata (use COPY buttons)","Upload cover image","Set pricing and territories","Submit for review"]},
-  {id:"u_apple",n:"Apple Books",url:"https://authors.apple.com",titles:3,icon:"AB",steps:["Open Apple Books for Authors","Click 'New Book'","Upload EPUB 3.3 from AppleBooks/ folder","Enter metadata","Upload cover","Set pricing and publish"]},
-  {id:"u_webtoon",n:"WEBTOON Canvas",url:"https://www.webtoons.com/en/challenge/publish",titles:2,icon:"W",manga:true,steps:["Open WEBTOON Creator Studio","Select your series (or create new)","Click 'Add Episode'","Upload panels from WEBTOON/ folder (800px wide, JPG)","Add episode title and thumbnail","Publish episode"]},
-  {id:"u_kobo",n:"Kobo Writing Life",url:"https://writinglife.kobobooks.com",titles:3,icon:"K",steps:["Log in to Kobo Writing Life","Click 'Create New eBook'","Upload EPUB and cover","Enter metadata","Set pricing and territories","Publish"]},
-  {id:"u_tiktok",n:"TikTok",url:"https://www.tiktok.com/creator",titles:3,icon:"T",video:true,steps:["Open TikTok Creator","Tap '+' to upload","Select MP4 from Video/ folder","Add caption with hashtags","Post"]},
-  {id:"u_youtube",n:"YouTube",url:"https://studio.youtube.com",titles:2,icon:"Y",video:true,steps:["Open YouTube Studio","Click 'Create' > 'Upload Video'","Select MP4 from Video/ folder","Add title, description, tags (use COPY buttons)","Set thumbnail and publish"]}
-];
+async function loadBridges(){
+  const paths=[JSON_BASE+'brand_admin_brands.json',JSON_BASE+'brand_admin_weekly_os_data.json',JSON_BASE+'brand_admin_weekly_packets.json'];
+  const [br,pf,pk]=await Promise.all(paths.map(p=>fetch(p,{cache:'no-store'}).then(r=>r.ok?r.json():null).catch(()=>null)));
+  if(br&&typeof br==='object')B=br;
+  if(pf&&typeof pf==='object')OS_DATA=pf;
+  if(pk&&typeof pk==='object')PACKET_BRIDGE=pk;
+}
 
-// Weekly schedule
-const WEEK=[
-  {day:"MON",title:"Download Package",tasks:[{t:"Download this week's content package",btn:"Download",url:null}]},
-  {day:"TUE",title:"KDP Upload Day",tasks:[{t:"Upload 6 titles to Amazon KDP",btn:"Open KDP",url:"https://kdp.amazon.com/bookshelf"}]},
-  {day:"WED",title:"Multi-Platform",tasks:[{t:"Upload to Google Play Books",btn:"Open GP",url:"https://play.google.com/books/publish"},{t:"Upload to Apple Books",btn:"Open AB",url:"https://authors.apple.com"},{t:"Upload to Kobo",btn:"Open Kobo",url:"https://writinglife.kobobooks.com"}]},
-  {day:"THU",title:"Manga + D2D",tasks:[{t:"Upload manga episodes to WEBTOON",btn:"Open WEBTOON",url:"https://www.webtoons.com/en/challenge/publish"},{t:"Upload remaining to Draft2Digital",btn:"Open D2D",url:"https://draft2digital.com"}]},
-  {day:"FRI",title:"Video Day",tasks:[{t:"Post TikTok videos",btn:"Open TikTok",url:"https://www.tiktok.com/creator"},{t:"Upload YouTube videos",btn:"Open YouTube",url:"https://studio.youtube.com"},{t:"Post Instagram Reels",btn:"Open IG",url:"https://www.instagram.com"}]},
-  {day:"SAT",title:"Review",tasks:[{t:"Check KDP reports",btn:"KDP Reports",url:"https://kdp.amazon.com/reports"},{t:"Check YouTube Analytics",btn:"YT Analytics",url:"https://studio.youtube.com/channel/analytics"}]},
-  {day:"SUN",title:"Rest",tasks:[{t:"System auto-refreshes next week's queue. Take the day off."}]}
-];
+function packetStatus(bid){
+  if(!PACKET_BRIDGE)return{state:'unknown'};
+  const ok=PACKET_BRIDGE.brands&&PACKET_BRIDGE.brands[bid];
+  if(ok&&ok.buildable)return{state:'ready',info:ok};
+  const blocked=PACKET_BRIDGE.blocked&&PACKET_BRIDGE.blocked[bid];
+  if(blocked)return{state:'blocked',reason:blocked.reason||'No shippable weekly packet yet.'};
+  return{state:'missing'};
+}
+
+function renderQuickLinks(){
+  const el=document.getElementById('quick-links');
+  if(!el)return;
+  el.innerHTML=(QUICK_LINKS.length?QUICK_LINKS:[
+    {label:'KDP',url:'https://kdp.amazon.com/bookshelf'},
+    {label:'Google Play',url:'https://play.google.com/books/publish'}
+  ]).map(q=>`<a class="qlink" href="${q.url}" target="_blank">${q.label}</a>`).join('');
+}
+
+function updateHandoffCta(){
+  const el=document.getElementById('handoff-cta');
+  if(!el||!brandId)return;
+  el.style.display='inline-flex';
+  el.href='brand_handoff_dashboard.html?brand='+encodeURIComponent(brandId);
+  el.textContent=(MARKET&&MARKET.ui_lang==='zh-Hant')?'每週內容包 →':(MARKET&&MARKET.ui_lang==='zh-Hans')?'每周内容包 →':(MARKET&&MARKET.ui_lang==='ja')?'週次パケット →':'Weekly packet →';
+}
 
 // ── State ──
 let brand=null, brandId=null, state={};
-// Static weekly-packet bridge (brand_admin_weekly_packets.json, gen_brand_admin_weekly_packets.py).
-// Read when no ?api_base= is set so the WEEKLY phase shows real packet data on static Pages.
-let PKTS={brands:{},blocked:{},week:null};
-function currentPacket(){ return (brandId&&PKTS.brands&&PKTS.brands[brandId])||null; }
-function currentBlocked(){ return (brandId&&PKTS.blocked&&PKTS.blocked[brandId])||null; }
 function key(){ return brandId||'_'; }
 function load(){ try{ state=JSON.parse(localStorage.getItem('ba_state')||'{}'); }catch(e){ state={}; } }
 function save(){ try{ localStorage.setItem('ba_state',JSON.stringify(state)); }catch(e){} }
 function bs(){ return state[key()]||(state[key()]={setup:{},upload:{},weekly:{},phase:1}); }
 
 // ── Helpers ──
-function slug(n){ return n.toLowerCase().replace(/[^a-z0-9]+/g,'_').replace(/_+$/,''); }
-function keywords(b){ return b.tp.map(t=>KW[t]||t).join(', '); }
-function desc(b){ let s=`${b.d}. ${b.f}.`; if(b.tm&&b.t) s+=` Guided by ${b.t}.`; return s; }
-function bio(b){ let s=b.d+' -- '+b.f.split(',')[0]; if(b.tr) s+='. '+b.tr+' wisdom.'; else s+='. Practical tools.'; return s.length>150?s.substring(0,147)+'...':s; }
+function slug(n){ return String(n||'').toLowerCase().replace(/[^a-z0-9\u4e00-\u9fff]+/g,'_').replace(/_+$/,''); }
+function keywords(b){ return (b.tp||[]).map(t=>KW[t]||t).join(', '); }
+function desc(b){ let s=`${b.d}. ${b.f||''}.`; if(b.tm&&b.t) s+=` Guided by ${b.t}.`; return s; }
+function bio(b){ let s=b.d+' -- '+(b.f||'').split(',')[0]; if(b.tr) s+='. '+b.tr+' wisdom.'; else s+='. Practical tools.'; return s.length>150?s.substring(0,147)+'...':s; }
 
 function copyText(text,btn){
   navigator.clipboard.writeText(text).then(()=>{
@@ -316,23 +279,22 @@ function copyText(text,btn){
     setTimeout(()=>{ btn.textContent='COPY'; btn.classList.remove('copied'); },1500);
   });
 }
-function T(k,fb){return (window.i18n&&typeof window.i18n.t==='function'&&window.i18n.t(k)!==k)?window.i18n.t(k):fb;}
 function prefill(label,val){
   const eid='pf_'+Math.random().toString(36).substr(2,6);
-  return `<div class="prefill"><div class="prefill-label">${T('pf.'+label,label)}</div><div class="prefill-row"><div class="prefill-val" id="${eid}">${val}</div><button class="copy-btn" onclick="copyText(document.getElementById('${eid}').textContent,this)">${T('wos.copy','COPY')}</button></div></div>`;
+  return `<div class="prefill"><div class="prefill-label">${label}</div><div class="prefill-row"><div class="prefill-val" id="${eid}">${val}</div><button class="copy-btn" onclick="copyText(document.getElementById('${eid}').textContent,this)">COPY</button></div></div>`;
 }
 
 // ── Phase calculation ──
 function calcPhase(){
   const s=bs();
-  const setupDone=SETUP.every(st=>s.setup[st.id]);
+  const setupDone=setupReady().every(st=>s.setup[st.id]);
   const uploadDone=UPLOADS.every(u=>s.upload[u.id+'_all']);
   if(uploadDone && setupDone) return 3;
   if(setupDone) return 2;
   return 1;
 }
-function setupPct(){ const s=bs(); const done=SETUP.filter(st=>s.setup[st.id]).length; return Math.round((done/SETUP.length)*100); }
-function uploadPct(){ const s=bs(); const done=UPLOADS.filter(u=>s.upload[u.id+'_all']).length; return Math.round((done/UPLOADS.length)*100); }
+function setupPct(){ const s=bs(); const items=setupReady(); if(!items.length)return 0; const done=items.filter(st=>s.setup[st.id]).length; return Math.round((done/items.length)*100); }
+function uploadPct(){ const s=bs(); if(!UPLOADS.length)return 0; const done=UPLOADS.filter(u=>s.upload[u.id+'_all']).length; return Math.round((done/UPLOADS.length)*100); }
 function weekPct(){ const s=bs(); const days=['MON','TUE','WED','THU','FRI','SAT','SUN']; const done=days.filter(d=>s.weekly[d]).length; return Math.round((done/7)*100); }
 
 function overallPct(){
@@ -357,10 +319,10 @@ function renderProgress(){
   document.getElementById('pf2').style.width=up+'%';
   // Overall bar
   document.getElementById('bar-fill').style.width=op+'%';
-  document.getElementById('pct-text').textContent=op+(window.i18n?window.i18n.t('wos.pctSuffix'):'% complete');
+  document.getElementById('pct-text').textContent=op+'% complete';
   // Top progress
   const curPhase=sp<100?1:(up<100?2:3);
-  document.getElementById('top-progress').textContent=(window.i18n?window.i18n.t('wos.phaseOf').replace('{n}',curPhase):'Phase '+curPhase+' of 3')+' -- '+op+'%';
+  document.getElementById('top-progress').textContent=`Phase ${curPhase} of 3 -- ${op}%`;
   // Nav pills
   document.querySelectorAll('.nav-pill').forEach(p=>{
     const ph=parseInt(p.dataset.phase);
@@ -381,25 +343,26 @@ function renderProgress(){
 function renderPhase1(){
   const el=document.getElementById('phase1'), s=bs(), b=brand, sl=slug(b.d);
   let h=`<div class="phase-title" data-i18n="phase1.title">Phase 1: Setup</div><div class="phase-sub" data-i18n="phase1.subtitle">Create accounts on each platform. Check off when done.</div>`;
-  SETUP.forEach((st,i)=>{
+  if(MARKET&&MARKET.market_note) h+=`<div class="market-note">${MARKET.market_note}</div>`;
+  setupReady().forEach((st,i)=>{
     const done=s.setup[st.id];
     const cid='s1_'+st.id;
     h+=`<div class="check-card ${done?'completed':''}" id="card_${st.id}">
       <div class="check-head" onclick="toggleBody('${cid}')">
         <div class="check-box ${done?'done':''}" onclick="event.stopPropagation();toggleSetup('${st.id}')">${done?'&#10003;':''}</div>
         <div class="check-num">${i+1}</div>
-        <div class="check-label" data-i18n="setup.${st.id}">${st.n}</div>
-        <div class="check-time">${st.t.replace('min',(window.i18n?window.i18n.t('wos.min'):'min'))}</div>
+        <div class="check-label">${st.n}</div>
+        <div class="check-time">${st.t}</div>
         <div class="check-arrow" id="arr_${cid}">&#9662;</div>
       </div>
       <div class="check-body" id="${cid}">
-        <a class="action-btn" href="${st.url}" target="_blank">${T('wos.openTmpl','Open {n}').replace('{n}',T('setup.'+st.id,st.n))} &#8599;</a>`;
+        <a class="action-btn" href="${st.url}" target="_blank">Open ${st.n} &#8599;</a>`;
     // Per-step prefills
     if(st.id==='youtube'){
       h+=prefill('Channel Name',b.d);
       h+=prefill('Description',desc(b));
     } else if(st.id==='kdp'){
-      h+=`<div class="warn"><strong>${T('wos.kdpWarnStrong','AI Disclosure required on every upload.')}</strong> ${T('wos.kdpWarnRest','Amazon requires you to declare AI-assisted content.')}</div>`;
+      h+=`<div class="warn"><strong>AI Disclosure required on every upload.</strong> Amazon requires you to declare AI-assisted content.</div>`;
       h+=prefill('Author / Publisher',b.tm?b.t:b.d);
       h+=prefill('Keywords',keywords(b));
     } else if(st.id==='gplay'){
@@ -421,9 +384,26 @@ function renderPhase1(){
     } else if(st.id==='kobo'){
       h+=prefill('Author Name',b.tm?b.t:b.d);
     }
-    h+=`<div style="margin-top:10px"><label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:.72rem;color:var(--mid)"><input type="checkbox" ${done?'checked':''} onchange="toggleSetup('${st.id}')"> ${T('wos.stepDone',"I've completed this step")}</label></div>`;
+    h+=`<div style="margin-top:10px"><label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:.72rem;color:var(--mid)"><input type="checkbox" ${done?'checked':''} onchange="toggleSetup('${st.id}')"> I've completed this step</label></div>`;
     h+=`</div></div>`;
   });
+  const planned=setupPlanned();
+  if(planned.length){
+    h+=`<div class="note" style="margin-top:14px"><strong>Planned platforms</strong> — listed in the market guide but not yet automated in weekly packets. Track applications manually; do not expect a download button.</div>`;
+    planned.forEach((st,i)=>{
+      h+=`<div class="check-card planned-card" id="card_${st.id}">
+        <div class="check-head">
+          <div class="check-box"></div>
+          <div class="check-num">·</div>
+          <div class="check-label">${st.n}<span class="planned-tag">planned</span></div>
+          <div class="check-time">${st.t||''}</div>
+        </div>
+        <div class="check-body open" style="display:block;padding:12px 18px 18px">
+          ${st.planned_note||'Not yet automated in repo output.'}
+          ${st.url?`<div style="margin-top:8px"><a class="action-btn" href="${st.url}" target="_blank">Open ${st.n} ↗</a></div>`:''}
+        </div></div>`;
+    });
+  }
   el.innerHTML=h;
 }
 
@@ -431,16 +411,22 @@ function renderPhase1(){
 function renderPhase2(){
   const el=document.getElementById('phase2'), s=bs(), b=brand, sl=slug(b.d);
   const locked=setupPct()<100;
-  let h=`<div class="phase-title" data-i18n="phase2.title">Phase 2: First Upload</div><div class="phase-sub">${locked?'Complete Phase 1 to unlock.':'Upload your first week of content to every platform.'}</div>`;
+  let h=`<div class="phase-title" data-i18n="phase2.title">Phase 2: First Upload</div><div class="phase-sub">${locked?'Complete Phase 1 to unlock.':'Upload your first week of content to every ready platform.'}</div>`;
   if(locked){ h=`<div class="locked-overlay">${h}<div style="height:200px"></div></div>`; el.innerHTML=h; return; }
 
-  // Package download
+  const pkt=packetStatus(brandId);
+  const blurb=(MARKET&&MARKET.package_blurb)||'Weekly content package with ebooks, manga, podcast, and metadata.';
+  const folders=(MARKET&&MARKET.package_folders)||'Platform folders inside the ZIP.';
   h+=`<div class="upload-card">
     <h3>Your Content Package</h3>
-    <div style="font-size:.75rem;color:var(--mid);margin-bottom:10px">8 ebooks + 4 manga + 3 micro = 15 titles. Covers, metadata, video included.</div>
-    <button type="button" class="action-btn big" id="admin-packet-dl-btn" onclick="downloadAdminPacket(event)">Download Week 1 Package</button>
-    <div id="coord-build-badge" class="coord-build-badge loading">Last built: checking…</div>
-    <div style="margin-top:10px;font-family:var(--mono);font-size:.5rem;color:var(--dim)">KDP/ GooglePlay/ AppleBooks/ WEBTOON/ Video/ metadata.csv</div>
+    <div style="font-size:.75rem;color:var(--mid);margin-bottom:10px">${blurb}</div>`;
+  if(pkt.state==='ready'){
+    h+=`<a class="action-btn big" id="admin-packet-dl-btn" onclick="downloadAdminPacket(event)">Download Week 1 Package</a>`;
+  }else{
+    h+=`<div class="warn"><strong>No shippable download.</strong> ${pkt.reason||'This brand has no buildable weekly packet on disk yet.'} Use the <a href="brand_handoff_dashboard.html?brand=${encodeURIComponent(brandId)}" style="color:var(--acc2)">Weekly packet dashboard</a> for metadata-only CSV exports.</div>`;
+  }
+  h+=`<div id="coord-build-badge" class="coord-build-badge loading">Packet bridge: checking…</div>
+    <div style="margin-top:10px;font-family:var(--mono);font-size:.5rem;color:var(--dim)">${folders}</div>
   </div>`;
 
   // Per-platform upload cards
@@ -468,26 +454,23 @@ function renderPhase2(){
     h+=`<div class="upload-progress">${countUpload(u)} / ${u.titles} uploaded</div>`;
     h+=`</div>`;
   });
+  if(UPLOADS_PLANNED.length){
+    h+=`<div class="note" style="margin-top:10px"><strong>Planned upload targets</strong> — not in automated weekly ZIP yet.</div>`;
+    UPLOADS_PLANNED.forEach(u=>{
+      h+=`<div class="upload-card planned-card"><h3>${u.n} <span class="planned-tag">planned</span></h3>
+        <div style="font-size:.72rem;color:var(--mid)">${u.planned_note||'Manual / MCN path only.'}</div>
+        ${u.url?`<a class="action-btn" href="${u.url}" target="_blank">Open ${u.n} ↗</a>`:''}</div>`;
+    });
+  }
   el.innerHTML=h;
-  startCoordBadgePolling();
+  refreshCoordinationBuildBadge();
 }
 function countUpload(u){ const s=bs(); let c=0; for(let i=1;i<=u.titles;i++) if(s.upload[u.id+'_t'+i]) c++; return c; }
 
-var _adminPacketDownloading=false;
-var _coordBadgePollTimer=null;
-var _coordBadgeLastStatus=null;
-var _coordBadgeBuildToastShown=false;
-var ADMIN_DL_SPINNER='<span class="admin-dl-spinner" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg></span>';
 function brandAdminApiBase(){
   try{var q=new URLSearchParams(window.location.search).get('api_base');if(q)return q.replace(/\/$/,'');}catch(e0){}
   if(typeof window.__BRAND_ADMIN_API_BASE==='string')return window.__BRAND_ADMIN_API_BASE.replace(/\/$/,'');
   return 'http://127.0.0.1:8000';
-}
-// True only when an api_base was EXPLICITLY supplied (operator running scripts/run_server.py).
-// On static Cloudflare Pages this is false, so the WEEKLY phase uses the static packet bridge.
-function hasExplicitApiBase(){
-  try{if(new URLSearchParams(window.location.search).get('api_base'))return true;}catch(e0){}
-  return typeof window.__BRAND_ADMIN_API_BASE==='string';
 }
 function currentIsoWeek(){
   var d=new Date();
@@ -496,113 +479,47 @@ function currentIsoWeek(){
   var wn=1+Math.round(((thu-w1)/86400000-3+(w1.getDay()+6)%7)/7);
   return thu.getFullYear()+'-W'+String(wn).padStart(2,'0');
 }
-function adminDownloadButtonIdleHtml(){return 'Download Week 1 Package';}
-function setAdminDownloadButtonLoading(btn,loading){
-  if(!btn)return;
-  if(loading){btn.disabled=true;btn.innerHTML=ADMIN_DL_SPINNER+' Building…';}
-  else{btn.disabled=false;btn.textContent=adminDownloadButtonIdleHtml();}
-}
-function stopCoordBadgePolling(){
-  if(_coordBadgePollTimer){clearTimeout(_coordBadgePollTimer);_coordBadgePollTimer=null;}
-}
-function scheduleCoordBadgePoll(){
-  stopCoordBadgePolling();
-  _coordBadgePollTimer=setTimeout(function(){
-    _coordBadgePollTimer=null;
-    if(!document.hidden)refreshCoordinationBuildBadge(true);
-    scheduleCoordBadgePoll();
-  },60000);
-}
-function startCoordBadgePolling(){
-  refreshCoordinationBuildBadge(false);
-  // Static mode has no backend to poll — the bridge is fetched once at init.
-  if(!hasExplicitApiBase())return;
-  scheduleCoordBadgePoll();
-  if(!window.__coordBadgeVisBound){
-    window.__coordBadgeVisBound=true;
-    document.addEventListener('visibilitychange',function(){
-      if(!document.hidden)refreshCoordinationBuildBadge(true);
-    });
-  }
-}
-function refreshCoordinationBuildBadge(fromPoll){
+function refreshCoordinationBuildBadge(){
   var el=document.getElementById('coord-build-badge');
   if(!el)return;
-  // Static mode (Pages, no api_base): reflect the committed packet from the bridge.
-  if(!hasExplicitApiBase()){
-    var pk=currentPacket();
-    if(pk){
-      var co=pk.coordination||{};
-      var ready=pk.headline_axes_ready||pk.axis_count_ready||0;
-      el.className='coord-build-badge current';
-      el.textContent='Week '+(pk.week||PKTS.week||'')+' package ready · '+ready+'/4 axes';
-      return;
-    }
-    var bl=currentBlocked();
-    el.className='coord-build-badge missing';
-    el.textContent=bl?'No package yet — pending catalog reconciliation':'No package for this brand';
+  const pkt=packetStatus(brandId);
+  if(pkt.state==='ready'){
+    el.className='coord-build-badge current';
+    el.textContent='Packet bridge: '+((pkt.info&&pkt.info.week)||'ready')+' · buildable';
     return;
   }
-  if(!fromPoll){el.className='coord-build-badge loading';el.textContent='Last built: checking…';}
+  if(pkt.state==='blocked'){
+    el.className='coord-build-badge stale';
+    el.textContent='Packet bridge: blocked · '+(pkt.reason||'pending reconciliation');
+    return;
+  }
+  el.className='coord-build-badge loading';
+  el.textContent='Packet bridge: checking…';
   fetch(brandAdminApiBase()+'/api/brand_admin/coordination-status',{cache:'no-store'})
     .then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json();})
     .then(function(data){
-      var st=String(data.status||'MISSING').toUpperCase();
-      var prev=_coordBadgeLastStatus;
-      _coordBadgeLastStatus=st;
-      el.className='coord-build-badge '+st.toLowerCase();
-      el.textContent='Last built: '+(data.relative||'never')+' · '+st;
-      if(fromPoll&&prev==='MISSING'&&st==='CURRENT'&&!_coordBadgeBuildToastShown){
-        _coordBadgeBuildToastShown=true;
-        if(typeof toast!=='undefined')toast.info('Weekly package built — refresh to download latest');
-      }
+      var st=(data.status||'MISSING').toLowerCase();
+      el.className='coord-build-badge '+st;
+      el.textContent='Last built: '+(data.relative||'never')+' · '+(data.status||'MISSING');
     })
     .catch(function(){
-      _coordBadgeLastStatus=null;
       el.className='coord-build-badge missing';
-      el.textContent='Last built: unavailable · start python3 scripts/run_server.py';
+      el.textContent='Packet bridge: static JSON only · no live API';
     });
 }
 function downloadAdminPacket(ev){
-  if(_adminPacketDownloading)return;
-  if(!brandId){if(typeof toast!=='undefined')toast.error('Select a brand first.');return;}
-  var btn=(ev&&ev.currentTarget)||document.getElementById('admin-packet-dl-btn');
-  // Static mode (Pages, no api_base): serve the real packet manifest from the bridge as a
-  // downloadable blob. The full multi-axis zip is LFS/backend-served — surfaced via the
-  // api_path when an operator runs scripts/run_server.py (?api_base=...).
-  if(!hasExplicitApiBase()){
-    var pk=currentPacket();
-    if(!pk){
-      var bl=currentBlocked();
-      if(typeof toast!=='undefined')toast.error(bl?('No package yet — '+(bl.reason||'pending catalog reconciliation')):('No package for '+brandId+'.'));
-      return;
-    }
-    try{
-      var dl=pk.download||{};
-      var manifest={brand_id:brandId,packet_dir:pk.packet_dir,week:pk.week,week_monday:pk.week_monday,
-        package_type:pk.package_type,axes:pk.axes,axis_count_ready:pk.axis_count_ready,
-        headline_axes_ready:pk.headline_axes_ready,cost_usd:pk.cost_usd,
-        full_package:{filename:dl.filename,size_bytes:dl.size_bytes,
-          note:'Full multi-axis zip is served by the brand-admin API. Run scripts/run_server.py and open this page with ?api_base=http://127.0.0.1:8000 to download it.'},
-        source:'brand_admin_weekly_packets.json (static bridge)'};
-      var a=document.createElement('a');
-      a.href=URL.createObjectURL(new Blob([JSON.stringify(manifest,null,2)],{type:'application/json'}));
-      a.download=(pk.packet_dir||brandId)+'_'+pk.week+'_manifest.json';
-      a.click();
-      URL.revokeObjectURL(a.href);
-      if(typeof toast!=='undefined')toast.success('Downloaded '+(pk.packet_dir||brandId)+' Week '+pk.week+' manifest ('+(pk.headline_axes_ready||0)+'/4 axes ready)');
-    }catch(e){ if(typeof toast!=='undefined')toast.error('Could not build manifest download.'); }
-    return;
-  }
-  var week=currentIsoWeek();
+  if(!brandId){alert('Select a brand first.');return;}
+  const pkt=packetStatus(brandId);
+  if(pkt.state!=='ready'){alert(pkt.reason||'No shippable package for this brand/week.');return;}
+  var week=(pkt.info&&pkt.info.week)||currentIsoWeek();
+  var btn=ev&&ev.target?ev.target:document.getElementById('admin-packet-dl-btn');
   var url=brandAdminApiBase()+'/api/brand_admin/download/'+encodeURIComponent(brandId)+'/'+encodeURIComponent(week);
-  _adminPacketDownloading=true;
-  setAdminDownloadButtonLoading(btn,true);
+  if(btn){btn.style.pointerEvents='none';btn.textContent='Downloading…';}
   fetch(url)
     .then(function(r){
-      if(r.status===404){var e=new Error('404');e._toastMsg='No package for '+brandId+'/'+week+'. Has Monday cron run?';throw e;}
-      if(r.status===500){return r.json().catch(function(){return{};}).then(function(){var e=new Error('500');e._toastMsg='Build pipeline failed. Check Monday cron logs.';throw e;});}
-      if(!r.ok){var e=new Error('HTTP');e._toastMsg='Download failed (HTTP '+r.status+')';throw e;}
+      if(r.status===404){throw new Error('No package for this brand/week.');}
+      if(r.status===500){return r.json().then(function(j){throw new Error(j.detail||'Build pipeline failed');});}
+      if(!r.ok)throw new Error('Download failed (HTTP '+r.status+')');
       return r.blob();
     })
     .then(function(blob){
@@ -611,20 +528,9 @@ function downloadAdminPacket(ev){
       a.download=brandId+'_'+week+'.zip';
       a.click();
       URL.revokeObjectURL(a.href);
-      if(typeof toast!=='undefined')toast.success('Downloaded '+brandId+'_'+week+'.zip');
     })
-    .catch(function(e){
-      var msg=e&&e._toastMsg;
-      if(!msg)msg=e&&(e.message||String(e));
-      if((e instanceof TypeError)||(e&&e.name==='TypeError')||/Failed to fetch|NetworkError|Load failed|fetch/i.test(String(msg))){
-        msg='Server unreachable. Is the API running?';
-      }
-      if(typeof toast!=='undefined')toast.error(msg);
-    })
-    .finally(function(){
-      _adminPacketDownloading=false;
-      setAdminDownloadButtonLoading(btn,false);
-    });
+    .catch(function(e){alert(e.message||String(e));})
+    .finally(function(){if(btn){btn.style.pointerEvents='';btn.textContent='Download Week 1 Package';}});
 }
 
 // ── Render Phase 3: Weekly ──
@@ -678,14 +584,8 @@ function toggleUpload(tid,uid,total){
   if(wasDone>=100 && uploadPct()>=100) celebrate('Phase 2 Complete','Weekly rhythm unlocked!');
 }
 function toggleWeekly(day){
-  const wasDone=weekPct();
   const s=bs(); s.weekly[day]=!s.weekly[day]; save();
   renderPhase3(); renderProgress();
-  if(wasDone<100 && weekPct()>=100){
-    // Phase 3 (final) complete -> hand off to the brand director operations dashboard for this brand.
-    celebrate('Weekly Rhythm Complete','Opening brand operations…');
-    setTimeout(function(){ window.location.href='brand_handoff_dashboard.html?brand='+encodeURIComponent(brandId); },1500);
-  }
 }
 function toggleBody(id){
   const body=document.getElementById(id);
@@ -730,7 +630,7 @@ function renderPicker(){
   for(const [bid,b] of Object.entries(B)){
     h+=`<div class="brand-card" onclick="selectBrand('${bid}')">
       <h3>${b.d}</h3>
-      <div class="focus">${localizeFocus(b.f)}</div>
+      <div class="focus">${b.f}</div>
       ${b.tm?`<span class="teacher-tag">${b.t}</span>`:''}
     </div>`;
   }
@@ -750,13 +650,16 @@ function resetBrand(){
 // ── Init ──
 function initBrand(bid){
   if(!B[bid]){ renderPicker(); return; }
-  brandId=bid; brand=B[bid]; load();
+  brandId=bid; brand=B[bid];
+  applyMarketProfile(resolveMarket(bid));
+  load();
   document.getElementById('picker').classList.remove('show');
   document.getElementById('picker').style.display='none';
   document.getElementById('main-wrap').style.display='block';
   document.getElementById('brand-pill').textContent=brand.d;
+  updateHandoffCta();
+  renderQuickLinks();
   renderPhase1(); renderPhase2(); renderPhase3(); renderProgress();
-  // Auto-show correct phase
   const sp=setupPct();
   if(sp>=100 && uploadPct()>=100) showPhase(3);
   else if(sp>=100) showPhase(2);
@@ -764,9 +667,7 @@ function initBrand(bid){
 }
 
 async function init(){
-  try{ const r=await fetch('brand_admin_brands.json',{cache:'no-store'}); if(r.ok){ const j=await r.json(); if(j&&Object.keys(j).length) B=j; } }catch(_e){}
-  // Static weekly-packet bridge (second bridge; sibling of brand_admin_brands.json).
-  try{ const rp=await fetch('brand_admin_weekly_packets.json',{cache:'no-store'}); if(rp.ok){ const jp=await rp.json(); if(jp&&jp.brands) PKTS=jp; } }catch(_e2){}
+  await loadBridges();
   const p=new URLSearchParams(window.location.search);
   const bid=p.get('brand');
   if(bid && B[bid]) initBrand(bid);
