@@ -2829,6 +2829,7 @@ function Step10Blueprint_UNUSED({ state }) {
 }
 
 function Step11Launch({ state, update, i18n = {} }) {
+  const { t } = useTranslation();
   const { tArchetypes: _A = ARCHETYPES, tPersonas: _P = PERSONAS, tMoments: _M = MOMENTS, tVisualStyles: _V = VISUAL_STYLES, tSelectionFeedback: _SF = SELECTION_FEEDBACK } = i18n;
   const handleField = (field, val) => update({ contact: { ...state.contact, [field]: val } });
   const c = state.contact || {};
