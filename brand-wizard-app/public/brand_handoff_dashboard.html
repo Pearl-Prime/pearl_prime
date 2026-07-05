@@ -188,6 +188,42 @@ const CHROME = {
     catalogCount:(n)=>`カタログ ${n}タイトル`,
     viewingPast:(w)=>`過去の週 <b style="color:var(--amber2)">${w}</b> を表示中`, jumpCurrent:"→ 今週へ",
   },
+  "zh-Hant": {
+    h1:"品牌總監營運", sub:"Pearl Prime · 每週內容包", handoff:"每週交接",
+    dlAll:"⬇ 下載所有內容包", history:"🕘 檢視歷史", catalog:"📚 檢視書目",
+    reviewHistory:"歷史紀錄", historyIntro:"自本品牌上線以來的每週內容包。點選某一週即可重新開啟該週的內容包。",
+    filesNote:"每個下載都是各平台的正式上架檔案，內含所有書目的中繼資料。上傳時請附上你製作完成的稿件、封面與音訊檔案（來自你的書籍製作）。",
+    realFiles:"你的實際製作檔案", realFilesNote:"本週實際製作完成的書籍與素材——下載後即可直接上傳。",
+    back:"← 返回本週", fullCatalog:"完整書目 —", openPacket:"開啟內容包 →",
+    thisWeek:"本週", storeSep:"、",
+    ebookNoun:"本", audiobookNoun:"部", episodeNoun:"集", mangaNoun:"話",
+    fmt:{ebooks:"電子書", audiobooks:"有聲書", episodes:"單集", manga:"webtoon/漫畫"},
+    toStores:(c,noun,s)=>`<b>${c}</b>${noun} → ${s}`,
+    countThisWeek:(n,noun)=>`本週 ${n}${noun}`,
+    howto:(l)=>`${l} 的上架教學`,
+    historyMeta:(e,a,p,tag)=>`電子書${e}・有聲書${a}・單集${p}・${tag}`,
+    thisWeekTag:"本週", weeksAgo:(n)=>`${n} 週前`,
+    catalogCount:(n)=>`書目共 ${n} 本`,
+    viewingPast:(w)=>`正在檢視過去的一週 <b style="color:var(--amber2)">${w}</b>`, jumpCurrent:"→ 跳至本週",
+  },
+  "zh-Hans": {
+    h1:"品牌总监运营", sub:"Pearl Prime · 每周内容包", handoff:"每周交接",
+    dlAll:"⬇ 下载所有内容包", history:"🕘 查看历史", catalog:"📚 查看书目",
+    reviewHistory:"历史记录", historyIntro:"自本品牌上线以来的每周内容包。点击某一周即可重新打开该周的内容包。",
+    filesNote:"每个下载都是各平台的正式上架文件，包含所有书目的元数据。上传时请附上你制作完成的稿件、封面和音频文件（来自你的书籍制作）。",
+    realFiles:"你的实际制作文件", realFilesNote:"本周实际制作完成的书籍和素材——下载后即可直接上传。",
+    back:"← 返回本周", fullCatalog:"完整书目 —", openPacket:"打开内容包 →",
+    thisWeek:"本周", storeSep:"、",
+    ebookNoun:"本", audiobookNoun:"部", episodeNoun:"集", mangaNoun:"话",
+    fmt:{ebooks:"电子书", audiobooks:"有声书", episodes:"单集", manga:"webtoon/漫画"},
+    toStores:(c,noun,s)=>`<b>${c}</b>${noun} → ${s}`,
+    countThisWeek:(n,noun)=>`本周 ${n}${noun}`,
+    howto:(l)=>`${l} 的上架教程`,
+    historyMeta:(e,a,p,tag)=>`电子书${e}・有声书${a}・单集${p}・${tag}`,
+    thisWeekTag:"本周", weeksAgo:(n)=>`${n} 周前`,
+    catalogCount:(n)=>`书目共 ${n} 本`,
+    viewingPast:(w)=>`正在查看过去的一周 <b style="color:var(--amber2)">${w}</b>`, jumpCurrent:"→ 跳至本周",
+  },
 };
 
 // ── Platform sets (each step = a single action the director takes) ─────────
@@ -320,6 +356,126 @@ const PLATFORMS_JP = [
     ] },
 ];
 
+// Traditional Chinese (Taiwan/HK) — international self-publishing set, localized.
+const PLATFORMS_TW = [
+  { id:"google_play", label:"Google Play 圖書", icon:"▶", feed:"ebooks", dlType:"gp_booklist",
+    mode:"批次上傳", modeClass:"mode-bulk", dlLabel:"⬇ Google Play 批次 CSV",
+    steps:[
+      "下載這個內容包。",
+      "登入 <b>Google Play 圖書合作夥伴中心</b> → <b>圖書目錄</b>。",
+      "<b>進階選項 → 上傳書單</b>，選擇內容包中的書單檔案。",
+      "<b>進階選項 → 上傳內容檔案 → 選擇檔案</b>，選擇內容包中的書籍檔案。",
+      "將每本書設為 <b>販售中</b>。",
+    ] },
+  { id:"amazon_kdp", label:"Amazon KDP", icon:"📖", feed:"ebooks", dlType:"kdp_csv",
+    mode:"逐本上架", modeClass:"mode-single", dlLabel:"⬇ KDP 中繼資料 CSV",
+    steps:[
+      "下載這個內容包。",
+      "登入 <b>KDP</b> → <b>+ 建立 → Kindle 電子書</b>。",
+      "將內容包中的書名、簡介、關鍵字、分類複製到對應欄位。",
+      "當 KDP 詢問 AI 內容時，選擇 <b>是</b>。",
+      "上傳該書的電子書檔案與封面（來自內容包）。",
+      "輸入售價 → <b>出版</b>。每本書重複此步驟。",
+    ] },
+  { id:"apple_books", label:"Apple Books", icon:"", feed:"ebooks", dlType:"ebook_csv",
+    mode:"逐本上架", modeClass:"mode-single", dlLabel:"⬇ Apple 中繼資料 CSV",
+    steps:[
+      "下載這個內容包。",
+      "在 <b>authors.apple.com</b> 登入 → <b>Submit a New Book</b>。",
+      "上傳該書的電子書檔案、試閱與封面（來自內容包）。",
+      "將內容包中的書籍資訊複製到對應欄位（語言選 Chinese (Traditional)）。",
+      "輸入售價 → <b>Submit</b>。每本書重複此步驟。",
+    ] },
+  { id:"kobo", label:"樂天 Kobo", icon:"📕", feed:"ebooks", dlType:"ebook_csv",
+    mode:"逐本上架", modeClass:"mode-single", dlLabel:"⬇ Kobo 中繼資料 CSV",
+    steps:[
+      "下載這個內容包。",
+      "登入 <b>Kobo Writing Life</b>（kobo.com/writinglife）。",
+      "點選 <b>建立新電子書</b>，貼上內容包中的書名、作者與簡介。",
+      "上傳內容包中的 EPUB 檔案與封面。",
+      "輸入售價 → <b>出版</b>。每本書重複此步驟。",
+    ] },
+  { id:"podcast", label:"Podcast · Spotify + Apple", icon:"🎙", feed:"episodes", dlType:"podcast_csv",
+    mode:"每週單集", modeClass:"mode-rss", dlLabel:"⬇ 單集表",
+    steps:[
+      "下載這個內容包。",
+      "登入 <b>Spotify for Creators</b>。",
+      "<b>新增單集</b> → 上傳本週的音訊檔案（來自內容包）。",
+      "複製內容包中的單集標題、集數與說明。",
+      "設定日期 → <b>發佈</b>。",
+    ] },
+  { id:"webtoon", label:"Webtoon · 漫畫", icon:"🖼", feed:"manga", dlType:"manga_csv",
+    mode:"每週一話", modeClass:"mode-rss", dlLabel:"⬇ 章節表",
+    steps:[
+      "下載這個內容包。",
+      "從下方 <b>你的實際製作檔案</b> 取得本週檔案——Webtoon 用的 <b>直式長條圖（.png）</b>，以及印刷/KDP 用的 <b>漫畫 PDF</b>。",
+      "在 <b>LINE Webtoon Canvas</b>（canvas.webtoons.com）→ <b>發佈 → 新增單集</b>，上傳直式長條圖。",
+      "複製內容包中的章節標題、集數與說明。",
+      "印刷/KDP 版請上傳漫畫 PDF 作為稿件。",
+      "設定日期 → <b>發佈</b>。每週一話。",
+    ] },
+];
+
+// Simplified Chinese (China/SG) — international self-publishing set, localized.
+const PLATFORMS_CN = [
+  { id:"google_play", label:"Google Play 图书", icon:"▶", feed:"ebooks", dlType:"gp_booklist",
+    mode:"批量上传", modeClass:"mode-bulk", dlLabel:"⬇ Google Play 批量 CSV",
+    steps:[
+      "下载这个内容包。",
+      "登录 <b>Google Play 图书合作伙伴中心</b> → <b>图书目录</b>。",
+      "<b>高级选项 → 上传书单</b>，选择内容包中的书单文件。",
+      "<b>高级选项 → 上传内容文件 → 选择文件</b>，选择内容包中的书籍文件。",
+      "将每本书设为 <b>在售</b>。",
+    ] },
+  { id:"amazon_kdp", label:"Amazon KDP", icon:"📖", feed:"ebooks", dlType:"kdp_csv",
+    mode:"逐本上架", modeClass:"mode-single", dlLabel:"⬇ KDP 元数据 CSV",
+    steps:[
+      "下载这个内容包。",
+      "登录 <b>KDP</b> → <b>+ 创建 → Kindle 电子书</b>。",
+      "将内容包中的书名、简介、关键词、分类复制到对应字段。",
+      "当 KDP 询问 AI 内容时，选择 <b>是</b>。",
+      "上传该书的电子书文件与封面（来自内容包）。",
+      "输入售价 → <b>出版</b>。每本书重复此步骤。",
+    ] },
+  { id:"apple_books", label:"Apple Books", icon:"", feed:"ebooks", dlType:"ebook_csv",
+    mode:"逐本上架", modeClass:"mode-single", dlLabel:"⬇ Apple 元数据 CSV",
+    steps:[
+      "下载这个内容包。",
+      "在 <b>authors.apple.com</b> 登录 → <b>Submit a New Book</b>。",
+      "上传该书的电子书文件、试读与封面（来自内容包）。",
+      "将内容包中的书籍信息复制到对应字段（语言选 Chinese (Simplified)）。",
+      "输入售价 → <b>Submit</b>。每本书重复此步骤。",
+    ] },
+  { id:"kobo", label:"Kobo", icon:"📕", feed:"ebooks", dlType:"ebook_csv",
+    mode:"逐本上架", modeClass:"mode-single", dlLabel:"⬇ Kobo 元数据 CSV",
+    steps:[
+      "下载这个内容包。",
+      "登录 <b>Kobo Writing Life</b>（kobo.com/writinglife）。",
+      "点击 <b>创建新电子书</b>，粘贴内容包中的书名、作者与简介。",
+      "上传内容包中的 EPUB 文件与封面。",
+      "输入售价 → <b>出版</b>。每本书重复此步骤。",
+    ] },
+  { id:"podcast", label:"Podcast · Spotify + Apple", icon:"🎙", feed:"episodes", dlType:"podcast_csv",
+    mode:"每周单集", modeClass:"mode-rss", dlLabel:"⬇ 单集表",
+    steps:[
+      "下载这个内容包。",
+      "登录 <b>Spotify for Creators</b>。",
+      "<b>新增单集</b> → 上传本周的音频文件（来自内容包）。",
+      "复制内容包中的单集标题、集数与说明。",
+      "设置日期 → <b>发布</b>。",
+    ] },
+  { id:"webtoon", label:"Webtoon · 漫画", icon:"🖼", feed:"manga", dlType:"manga_csv",
+    mode:"每周一话", modeClass:"mode-rss", dlLabel:"⬇ 章节表",
+    steps:[
+      "下载这个内容包。",
+      "从下方 <b>你的实际制作文件</b> 获取本周文件——Webtoon 用的 <b>竖版长条图（.png）</b>，以及印刷/KDP 用的 <b>漫画 PDF</b>。",
+      "在 <b>Webtoon Canvas</b>（canvas.webtoons.com）→ <b>发布 → 新增单集</b>，上传竖版长条图。",
+      "复制内容包中的章节标题、集数与说明。",
+      "印刷/KDP 版请上传漫画 PDF 作为稿件。",
+      "设置日期 → <b>发布</b>。每周一话。",
+    ] },
+];
+
 const CATALOG_START = new Date(2026, 4, 4);
 const WEEKLY_EBOOKS = 8, WEEKLY_AUDIOBOOKS = 3, WEEKLY_EPISODES = 2, WEEKLY_MANGA = 1;
 
@@ -337,6 +493,20 @@ const CAT_JA = {
   angles:["心が疲れた人へ","燃え尽き回復・教義なし","神経系を休める","崩壊からの再生","考えすぎる人へ","悲しみに寄り添う静けさ"],
   keywords:["スピリチュアル","マインドフルネス","瞑想","手放す","内なる静けさ","燃え尽き回復","自律神経"],
   cats:["宗教・スピリチュアル","自己啓発","心理学"],
+};
+const CAT_ZH_HANT = {
+  titles:["空的容器","回歸寧靜","無宗教的虔敬","不慌不忙的心","以空為庇護","承接你的大地","臣服不是失敗","留存的靜默","變得透明","足夠的恩典","安住於當下","追尋的終點"],
+  descs:["為不堪負荷的心而寫——回到當下的觀想之路，篇章短小。","沒有教條的倦怠復原：把休息當作一種修行。","脫去宗教的虔敬——寫給心靈上無家可歸的人。","為無法停止緊繃的神經系統而寫的寧靜。","當掌控是唯一讓你安全的東西時，學習放手。","當你賴以組織人生的一切崩解後，重建自我。"],
+  angles:["寫給心靈疲憊的人","倦怠復原・沒有教條","安頓神經系統","崩解之後的重建","歡迎想太多的人","懂得哀傷的寧靜"],
+  keywords:["靈性修行","為倦怠而生的正念","觀想式生活","放手","內在寧靜","無宗教的虔敬","神經系統"],
+  cats:["宗教與靈性","自我成長","身心靈"],
+};
+const CAT_ZH_HANS = {
+  titles:["空的容器","回归宁静","无宗教的虔敬","不慌不忙的心","以空为庇护","承接你的大地","臣服不是失败","留存的静默","变得透明","足够的恩典","安住于当下","追寻的终点"],
+  descs:["为不堪重负的心而写——回到当下的观想之路，篇章短小。","没有教条的倦怠恢复：把休息当作一种修行。","脱去宗教的虔敬——写给心灵上无家可归的人。","为无法停止紧绷的神经系统而写的宁静。","当掌控是唯一让你安全的东西时，学习放手。","当你赖以组织人生的一切崩解后，重建自我。"],
+  angles:["写给心灵疲惫的人","倦怠恢复・没有教条","安顿神经系统","崩解之后的重建","欢迎想太多的人","懂得哀伤的宁静"],
+  keywords:["灵性修行","为倦怠而生的正念","观想式生活","放手","内在宁静","无宗教的虔敬","神经系统"],
+  cats:["宗教与灵性","自我成长","身心灵"],
 };
 const COVER_HUES = [18, 32, 268, 200, 150, 340];
 
@@ -369,8 +539,8 @@ function weekLabelFor(idx){ const h = weekHistory(); return (idx==null) ? curren
 // ── Deterministic catalog ───────────────────────────────────────────────────
 function slug(s){ const x = String(s).toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,""); return x || "title"; }
 function isbnFor(i){ return "978" + String(1000000000 + i * 7919).slice(0,10); }
-function priceFor(i){ return CURRENCY === "jpy" ? (i % 3 === 0 ? "500" : "700") : (i % 3 === 0 ? "4.99" : "5.99"); }
-function audioPrice(){ return CURRENCY === "jpy" ? "1500" : "9.99"; }
+function priceFor(i){ const lo = i % 3 === 0; if (CURRENCY === "jpy") return lo ? "500" : "700"; if (CURRENCY === "twd") return lo ? "150" : "220"; if (CURRENCY === "cny") return lo ? "25" : "35"; return lo ? "4.99" : "5.99"; }
+function audioPrice(){ return CURRENCY === "jpy" ? "1500" : CURRENCY === "twd" ? "350" : CURRENCY === "cny" ? "45" : "9.99"; }
 
 function buildCatalog() {
   if (REAL_CATALOG && REAL_CATALOG.length) {
@@ -413,7 +583,7 @@ function dl(name, text, mime) {
 function row(arr, sep){ return arr.map(v => sep === "\t" ? String(v) : `"${String(v).replace(/"/g,'""')}"`).join(sep || ","); }
 function buildMetadataFile(p, week, pkt) {
   const items = feedFor(pkt, p), pc = `price_${CURRENCY}`;
-  const langTag = CURRENCY === "jpy" ? "ja-JP" : "en-US", pub = BRAND.label;
+  const langTag = CURRENCY === "jpy" ? "ja-JP" : CURRENCY === "twd" ? "zh-TW" : CURRENCY === "cny" ? "zh-CN" : "en-US", pub = BRAND.label;
   const au = b => b.author || pub;                 // narrating teacher, else the imprint (composite)
   const stem = b => b.file_stem || b.book_id || slug(b.title);
   const ef = b => `${stem(b)}.epub`, cf = b => `${stem(b)}.jpg`;
@@ -437,7 +607,7 @@ function buildMetadataFile(p, week, pkt) {
   }
   if (p.dlType === "audiobook_csv") {
     const head = ["title","author","narrator","publisher","isbn","description","category",pc,"digital_voice","audio_files","cover_file"];
-    const rows = items.map(b => [b.title, au(b), LANG==="ja"?"AI音声":"Digital voice (AI)", pub, b.isbn||"PENDING", b.longDesc||b.desc, (b.cats&&b.cats[0])||CAT.cats[0], b.audioP||audioPrice(), "Yes", `${stem(b)}/01_opening.mp3; ${stem(b)}/chapters/*.mp3; ${stem(b)}/99_closing.mp3; ${stem(b)}/retail_sample.mp3`, `${stem(b)}_cover.jpg`]);
+    const rows = items.map(b => [b.title, au(b), LANG==="ja"?"AI音声":LANG==="zh-Hant"?"AI語音":LANG==="zh-Hans"?"AI语音":"Digital voice (AI)", pub, b.isbn||"PENDING", b.longDesc||b.desc, (b.cats&&b.cats[0])||CAT.cats[0], b.audioP||audioPrice(), "Yes", `${stem(b)}/01_opening.mp3; ${stem(b)}/chapters/*.mp3; ${stem(b)}/99_closing.mp3; ${stem(b)}/retail_sample.mp3`, `${stem(b)}_cover.jpg`]);
     return {name:`${p.id}_audiobooks__${BRAND.id}__${week}.csv`, text:[head, ...rows].map(r => row(r)).join("\n"), mime:"text/csv"};
   }
   if (p.dlType === "podcast_csv") {
@@ -585,12 +755,13 @@ async function boot() {
   const qid = new URLSearchParams(location.search).get("brand");
   const id = qid || BRAND.id;
   const lane = (id.match(/_([a-z]{2}_[a-z]{2})$/) || [])[1] || "en_us";
-  MARKET = (lane === "ja_jp") ? "jp" : "us";
-  LANG = (MARKET === "jp") ? "ja" : "en";
-  CURRENCY = (MARKET === "jp") ? "jpy" : "usd";
-  PLATFORMS = (MARKET === "jp") ? PLATFORMS_JP : PLATFORMS_US;
+  // Lane suffix → market + language. Traditional (zh-Hant) and Simplified
+  // (zh-Hans) are distinct scripts and never interchangeable.
+  if (lane === "ja_jp") { MARKET = "jp"; LANG = "ja"; CURRENCY = "jpy"; PLATFORMS = PLATFORMS_JP; CAT = CAT_JA; }
+  else if (lane === "zh_tw" || lane === "zh_hk") { MARKET = "tw"; LANG = "zh-Hant"; CURRENCY = "twd"; PLATFORMS = PLATFORMS_TW; CAT = CAT_ZH_HANT; }
+  else if (lane === "zh_cn" || lane === "zh_sg") { MARKET = "cn"; LANG = "zh-Hans"; CURRENCY = "cny"; PLATFORMS = PLATFORMS_CN; CAT = CAT_ZH_HANS; }
+  else { MARKET = "us"; LANG = "en"; CURRENCY = "usd"; PLATFORMS = PLATFORMS_US; CAT = CAT_EN; }
   T = CHROME[LANG];
-  CAT = (MARKET === "jp") ? CAT_JA : CAT_EN;
   applyChrome();
   let bridge = {};
   try { const r = await fetch("brand_admin_brands.json", {cache:"no-store"}); if (r.ok) bridge = await r.json(); } catch (_e) {}

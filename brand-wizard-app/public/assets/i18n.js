@@ -547,6 +547,69 @@
 
   // ─── zh-CN ──────────────────────────────────────────
   I18N["zh-CN"] = {
+    // brand_admin_weekly_os.html (director ops console) keys \u2014 Simplified Chinese
+    "page.title": "\u54C1\u724C\u7BA1\u7406 \u2014 Pearl Prime",
+    "setup.gmail": "Google \u8D26\u53F7",
+    "setup.youtube": "YouTube \u9891\u9053",
+    "setup.kdp": "Amazon KDP",
+    "setup.gplay": "Google Play \u56FE\u4E66",
+    "setup.apple": "Apple Books",
+    "setup.kobo": "Kobo Writing Life",
+    "setup.tiktok": "TikTok \u5546\u4E1A\u8D26\u53F7",
+    "setup.instagram": "Instagram \u5546\u4E1A\u8D26\u53F7",
+    "setup.webtoon": "Webtoon Canvas",
+    "setup.d2d": "Draft2Digital",
+    "wos.min": "\u5206\u949F",
+    "wos.pctSuffix": "% \u5B8C\u6210",
+    "wos.phaseOf": "\u9636\u6BB5 {n} / 3",
+    "wos.phaseStatic": "\u9636\u6BB5 1 / 3",
+    "wos.pctStatic": "0% \u5B8C\u6210",
+    "wos.noBrand": "\u5C1A\u672A\u9009\u62E9\u54C1\u724C",
+    "wos.copy": "\u590D\u5236",
+    "wos.openTmpl": "\u6253\u5F00 {n}",
+    "wos.stepDone": "\u6211\u5DF2\u5B8C\u6210\u6B64\u6B65\u9AA4",
+    "wos.kdpWarnStrong": "\u6BCF\u6B21\u4E0A\u4F20\u90FD\u9700\u7533\u62A5 AI \u5185\u5BB9\u3002",
+    "wos.kdpWarnRest": "Amazon \u8981\u6C42\u7533\u62A5 AI \u8F85\u52A9\u5185\u5BB9\u3002",
+    "pf.Channel Name": "\u9891\u9053\u540D\u79F0",
+    "pf.Description": "\u7B80\u4ECB",
+    "pf.Author / Publisher": "\u4F5C\u8005 / \u51FA\u7248\u793E",
+    "pf.Keywords": "\u5173\u952E\u8BCD",
+    "pf.Publisher Name": "\u51FA\u7248\u793E\u540D\u79F0",
+    "pf.Display Name": "\u663E\u793A\u540D\u79F0",
+    "pf.Bio (150 chars)": "\u4E2A\u4EBA\u7B80\u4ECB\uFF08150 \u5B57\uFF09",
+    "pf.Username": "\u7528\u6237\u540D",
+    "pf.Creator Nickname": "\u521B\u4F5C\u8005\u6635\u79F0",
+    "pf.Series Summary": "\u7CFB\u5217\u7B80\u4ECB",
+    "pf.Author / Pen Name": "\u4F5C\u8005 / \u7B14\u540D",
+    "pf.Email": "\u7535\u5B50\u90AE\u7BB1",
+    "pf.Publisher": "\u51FA\u7248\u793E",
+    "pf.Author Name": "\u4F5C\u8005\u540D\u79F0",
+    "pf.Author": "\u4F5C\u8005",
+    "pf.Title Template": "\u4E66\u540D\u6A21\u677F",
+    "topbar.title": "\u54C1\u724C\u7BA1\u7406",
+    "nav.setup": "\u8BBE\u7F6E",
+    "nav.upload": "\u4E0A\u4F20",
+    "nav.weekly": "\u6BCF\u5468",
+    "phase.setup": "\u8BBE\u7F6E",
+    "phase.firstUpload": "\u9996\u6B21\u4E0A\u4F20",
+    "phase.weeklyRhythm": "\u6BCF\u5468\u8282\u594F",
+    "phase1.title": "\u9636\u6BB5 1\uFF1A\u5E73\u53F0\u8BBE\u7F6E",
+    "phase1.subtitle": "\u5728\u5404\u5E73\u53F0\u4E0A\u521B\u5EFA\u8D26\u53F7\uFF0C\u5B8C\u6210\u540E\u8BF7\u52FE\u9009\u3002",
+    "phase2.title": "\u9636\u6BB5 2\uFF1A\u9996\u6B21\u4E0A\u4F20",
+    "phase3.title": "\u9636\u6BB5 3\uFF1A\u6BCF\u5468\u8282\u594F",
+    "picker.title": "\u54C1\u724C\u7BA1\u7406",
+    "picker.subtitle": "\u9009\u62E9\u54C1\u724C\u4EE5\u5F00\u59CB",
+    "quicklinks.heading": "\u5E73\u53F0\u5FEB\u901F\u94FE\u63A5",
+    "quicklinks.kdp": "KDP",
+    "quicklinks.googlePlay": "Google Play",
+    "quicklinks.appleBooks": "Apple Books",
+    "quicklinks.youtube": "YouTube",
+    "quicklinks.tiktok": "TikTok",
+    "quicklinks.webtoon": "Webtoon",
+    "quicklinks.kobo": "Kobo",
+    "quicklinks.d2d": "Draft2Digital",
+    "quicklinks.instagram": "Instagram",
+    "quicklinks.line": "LINE",
     "nav.brand": "Pearl Prime",
     "nav.markets": "\u5E02\u573A",
     "nav.teachers": "\u5BFC\u5E08",
@@ -1243,8 +1306,10 @@
       var val = t(key);
       if (val && val !== key) el.setAttribute("title", val);
     });
-    // Update html lang attribute
-    document.documentElement.setAttribute("lang", currentLocale);
+    // Update html lang attribute (emit BCP-47 script subtag for Chinese so a
+    // Traditional brand reads zh-Hant and a Simplified brand reads zh-Hans).
+    var LANG_ATTR = { "zh-TW": "zh-Hant", "zh-CN": "zh-Hans" };
+    document.documentElement.setAttribute("lang", LANG_ATTR[currentLocale] || currentLocale);
   }
 
   /* ══════════════════════════════════════════════════════
