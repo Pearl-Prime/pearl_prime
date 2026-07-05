@@ -31,6 +31,8 @@ provenance:
 markets:
   - {id: en, label_en: "English", label_native: "English", lane_hint: en_US}
   - {id: ja, label_en: "Japanese", label_native: "日本語", lane_hint: ja_JP}
+  - {id: zh_tw, label_en: "Traditional Chinese (Taiwan)", label_native: "繁體中文（台灣）", lane_hint: zh_TW}
+  - {id: zh_cn, label_en: "Simplified Chinese (China)", label_native: "简体中文（中国）", lane_hint: zh_CN}
 
 ui:
   en:

@@ -1,0 +1,192 @@
+# Brand Admin Weekly OS — per-market setup / upload / weekly rhythm truth.
+#
+# SSOT for brand_admin_weekly_os.html phase content (Setup, First Upload, Weekly Rhythm).
+# Generator: scripts/onboarding/gen_brand_admin_weekly_os_data.py
+#   → brand-wizard-app/public/brand_admin_weekly_os_data.json
+#
+# status:
+#   ready   — operator can act today; repo weekly packets may include matching axis output
+#   planned — in market guide but not yet automated / no honest download in repo today
+#
+# Authority: docs/brand_admin/zh_TW_distribution_guide.md,
+#            docs/brand_admin/zh_CN_distribution_guide.md,
+#            config/brand_management/platform_credential_fields.yaml (lane hints)
+
+schema_version: "1.0"
+provenance:
+  authored: "2026-07-05"
+  authority_docs:
+    - docs/brand_admin/zh_TW_distribution_guide.md
+    - docs/brand_admin/zh_CN_distribution_guide.md
+
+market_profiles:
+  en_us:
+    lane_suffixes: [en_us, es_us, es_es, pt_br, de_de, fr_fr, ko_kr, hu_hu, it_it]
+    ui_lang: en
+    market_note: null
+    package_blurb: "8 ebooks + 4 manga + 3 micro = 15 titles. Covers, metadata, video included."
+    package_folders: "KDP / GooglePlay / AppleBooks / WEBTOON / Video / metadata.csv"
+    setup:
+      - {id: gmail, n: "Google Account", url: "https://accounts.google.com/signup", t: "5 min", status: ready}
+      - {id: youtube, n: "YouTube Channel", url: "https://www.youtube.com/channel_switcher", t: "15 min", status: ready}
+      - {id: kdp, n: "Amazon KDP", url: "https://kdp.amazon.com/signup", t: "20 min", status: ready}
+      - {id: gplay, n: "Google Play Books", url: "https://play.google.com/books/publish/", t: "25 min", status: ready}
+      - {id: apple, n: "Apple Books", url: "https://authors.apple.com", t: "30 min", status: ready}
+      - {id: kobo, n: "Kobo Writing Life", url: "https://writinglife.kobobooks.com", t: "20 min", status: ready}
+      - {id: tiktok, n: "TikTok Business", url: "https://www.tiktok.com/signup", t: "15 min", status: ready}
+      - {id: instagram, n: "Instagram Business", url: "https://www.instagram.com/accounts/emailsignup/", t: "15 min", status: ready}
+      - {id: webtoon, n: "WEBTOON Canvas", url: "https://www.webtoons.com/en/challenge/publish", t: "20 min", status: ready}
+      - {id: d2d, n: "Draft2Digital", url: "https://draft2digital.com/signup", t: "15 min", status: ready}
+    uploads:
+      - {id: u_kdp, n: "Amazon KDP", url: "https://kdp.amazon.com/bookshelf", titles: 6, status: ready, steps: ["Log in to KDP Bookshelf", "Click 'Create New Title' > Kindle eBook", "Enter title, subtitle, author, description (use COPY buttons below)", "Upload EPUB from KDP/ folder", "Upload cover from KDP/ folder", "Set price ($2.99-9.99 for 70% royalty) and publish", "Repeat for each title"]}
+      - {id: u_gplay, n: "Google Play Books", url: "https://play.google.com/books/publish", titles: 4, status: ready, steps: ["Open Partner Center", "Click 'Add Book' > 'Add New Book'", "Upload EPUB from GooglePlay/ folder", "Fill in metadata (use COPY buttons)", "Upload cover image", "Set pricing and territories", "Submit for review"]}
+      - {id: u_apple, n: "Apple Books", url: "https://authors.apple.com", titles: 3, status: ready, steps: ["Open Apple Books for Authors", "Click 'New Book'", "Upload EPUB 3.3 from AppleBooks/ folder", "Enter metadata", "Upload cover", "Set pricing and publish"]}
+      - {id: u_webtoon, n: "WEBTOON Canvas", url: "https://www.webtoons.com/en/challenge/publish", titles: 2, status: ready, manga: true, steps: ["Open WEBTOON Creator Studio", "Select your series (or create new)", "Click 'Add Episode'", "Upload panels from WEBTOON/ folder (800px wide, JPG)", "Add episode title and thumbnail", "Publish episode"]}
+      - {id: u_kobo, n: "Kobo Writing Life", url: "https://writinglife.kobobooks.com", titles: 3, status: ready, steps: ["Log in to Kobo Writing Life", "Click 'Create New eBook'", "Upload EPUB and cover", "Enter metadata", "Set pricing and territories", "Publish"]}
+      - {id: u_tiktok, n: "TikTok", url: "https://www.tiktok.com/creator", titles: 3, status: ready, video: true, steps: ["Open TikTok Creator", "Tap '+' to upload", "Select MP4 from Video/ folder", "Add caption with hashtags", "Post"]}
+      - {id: u_youtube, n: "YouTube", url: "https://studio.youtube.com", titles: 2, status: ready, video: true, steps: ["Open YouTube Studio", "Click 'Create' > 'Upload Video'", "Select MP4 from Video/ folder", "Add title, description, tags (use COPY buttons)", "Set thumbnail and publish"]}
+    week:
+      - {day: MON, title: "Download Package", tasks: [{t: "Download this week's content package", btn: "Download", url: null}]}
+      - {day: TUE, title: "KDP Upload Day", tasks: [{t: "Upload 6 titles to Amazon KDP", btn: "Open KDP", url: "https://kdp.amazon.com/bookshelf"}]}
+      - {day: WED, title: "Multi-Platform", tasks: [{t: "Upload to Google Play Books", btn: "Open GP", url: "https://play.google.com/books/publish"}, {t: "Upload to Apple Books", btn: "Open AB", url: "https://authors.apple.com"}, {t: "Upload to Kobo", btn: "Open Kobo", url: "https://writinglife.kobobooks.com"}]}
+      - {day: THU, title: "Manga + D2D", tasks: [{t: "Upload manga episodes to WEBTOON", btn: "Open WEBTOON", url: "https://www.webtoons.com/en/challenge/publish"}, {t: "Upload remaining to Draft2Digital", btn: "Open D2D", url: "https://draft2digital.com"}]}
+      - {day: FRI, title: "Video Day", tasks: [{t: "Post TikTok videos", btn: "Open TikTok", url: "https://www.tiktok.com/creator"}, {t: "Upload YouTube videos", btn: "Open YouTube", url: "https://studio.youtube.com"}, {t: "Post Instagram Reels", btn: "Open IG", url: "https://www.instagram.com"}]}
+      - {day: SAT, title: "Review", tasks: [{t: "Check KDP reports", btn: "KDP Reports", url: "https://kdp.amazon.com/reports"}, {t: "Check YouTube Analytics", btn: "YT Analytics", url: "https://studio.youtube.com/channel/analytics"}]}
+      - {day: SUN, title: "Rest", tasks: [{t: "System auto-refreshes next week's queue. Take the day off."}]}
+    quick_links:
+      - {label: KDP, url: "https://kdp.amazon.com/bookshelf"}
+      - {label: "Google Play", url: "https://play.google.com/books/publish"}
+      - {label: "Apple Books", url: "https://authors.apple.com"}
+      - {label: YouTube, url: "https://studio.youtube.com"}
+      - {label: TikTok, url: "https://www.tiktok.com/creator"}
+      - {label: WEBTOON, url: "https://www.webtoons.com/en/challenge/publish"}
+      - {label: Kobo, url: "https://writinglife.kobobooks.com"}
+      - {label: D2D, url: "https://draft2digital.com"}
+      - {label: Instagram, url: "https://www.instagram.com"}
+      - {label: LINE, url: "https://manager.line.biz"}
+
+  ja_jp:
+    lane_suffixes: [ja_jp]
+    ui_lang: ja
+    market_note: "Japan market — Kobo + audiobook.jp + LINE Manga paths. Weekly packet axes match international MVP bundle."
+    package_blurb: "週次パケット：電子書籍・オーディオブック・ポッドキャスト・マンガ（国際MVP軸）。"
+    package_folders: "GooglePlay / KDP / AppleBooks / Kobo / Podcast / Manga / metadata.csv"
+    setup:
+      - {id: gmail, n: "Google アカウント", url: "https://accounts.google.com/signup", t: "5分", status: ready}
+      - {id: gplay, n: "Google Play ブックス", url: "https://play.google.com/books/publish/", t: "25分", status: ready}
+      - {id: kdp, n: "Amazon KDP (.co.jp)", url: "https://kdp.amazon.com/signup", t: "20分", status: ready}
+      - {id: apple, n: "Apple Books", url: "https://authors.apple.com", t: "30分", status: ready}
+      - {id: kobo, n: "楽天Kobo Writing Life", url: "https://www.kobo.com/jp/ja/p/writinglife", t: "20分", status: ready}
+      - {id: line_oa, n: "LINE公式アカウント", url: "https://manager.line.biz", t: "20分", status: ready}
+      - {id: webtoon, n: "LINEマンガ / Webtoon", url: "https://www.webtoons.com/ja/challenge/publish", t: "20分", status: ready}
+      - {id: youtube, n: "YouTube", url: "https://studio.youtube.com", t: "15分", status: ready}
+    uploads:
+      - {id: u_gplay, n: "Google Play ブックス", url: "https://play.google.com/books/publish", titles: 4, status: ready, steps: ["パートナーセンターでEPUB一括アップロード", "メタデータCSVをアップロード", "販売設定"]}
+      - {id: u_kdp, n: "Amazon KDP", url: "https://kdp.amazon.com/bookshelf", titles: 6, status: ready, steps: ["KDPにログイン", "Kindle本を1冊ずつ作成", "AI利用は「はい」", "EPUBと表紙をアップロード"]}
+      - {id: u_apple, n: "Apple Books", url: "https://authors.apple.com", titles: 3, status: ready, steps: ["新規ブック提出", "EPUB・表紙アップロード", "メタデータ入力"]}
+      - {id: u_kobo, n: "楽天Kobo", url: "https://www.kobo.com/jp/ja/p/writinglife", titles: 3, status: ready, steps: ["電子書籍を作成", "EPUBと表紙", "価格設定"]}
+      - {id: u_webtoon, n: "Webtoon / LINEマンガ", url: "https://www.webtoons.com/ja/challenge/publish", titles: 2, status: ready, manga: true, steps: ["新規エピソード", "縦スクロール画像アップロード", "公開"]}
+    week:
+      - {day: MON, title: "パケット取得", tasks: [{t: "今週のコンテンツパケットをダウンロード", btn: "Download", url: null}]}
+      - {day: TUE, title: "KDP", tasks: [{t: "KDPへ6冊アップロード", btn: "KDP", url: "https://kdp.amazon.com/bookshelf"}]}
+      - {day: WED, title: "Play + Apple + Kobo", tasks: [{t: "Google Play", btn: "GP", url: "https://play.google.com/books/publish"}, {t: "Apple Books", btn: "AB", url: "https://authors.apple.com"}, {t: "Kobo", btn: "Kobo", url: "https://www.kobo.com/jp/ja/p/writinglife"}]}
+      - {day: THU, title: "マンガ", tasks: [{t: "Webtoon / LINEマンガに1話", btn: "Webtoon", url: "https://www.webtoons.com/ja/challenge/publish"}]}
+      - {day: FRI, title: "ポッドキャスト + SNS", tasks: [{t: "Spotify for Creators", btn: "Spotify", url: "https://creators.spotify.com"}, {t: "YouTube", btn: "YT", url: "https://studio.youtube.com"}]}
+      - {day: SAT, title: "レビュー", tasks: [{t: "KDPレポート確認", btn: "Reports", url: "https://kdp.amazon.com/reports"}]}
+      - {day: SUN, title: "休息", tasks: [{t: "来週のキューは自動更新。休みましょう。"}]}
+    quick_links:
+      - {label: KDP, url: "https://kdp.amazon.com/bookshelf"}
+      - {label: "Google Play", url: "https://play.google.com/books/publish"}
+      - {label: "Apple Books", url: "https://authors.apple.com"}
+      - {label: Kobo, url: "https://www.kobo.com/jp/ja/p/writinglife"}
+      - {label: LINE, url: "https://manager.line.biz"}
+      - {label: Webtoon, url: "https://www.webtoons.com/ja/challenge/publish"}
+
+  zh_tw:
+    lane_suffixes: [zh_tw, zh_hk]
+    ui_lang: "zh-Hant"
+    market_note: "台灣市場優先節奏。Readmoo、博客來、KKBOX、Comico 在指南中列為目標平台，但 repo 週包尚未自動產出對應上架檔 — 標示為 planned，勿當成可下載。"
+    package_blurb: "週包含國際自出版軸（Google Play / Kobo / Apple / KDP）+ Podcast + Webtoon 漫畫。台灣原生平台需另行申請帳號。"
+    package_folders: "GooglePlay / Kobo / AppleBooks / KDP / Podcast / WEBTOON / metadata.csv"
+    setup:
+      - {id: gmail, n: "Google 帳號", url: "https://accounts.google.com/signup", t: "5 分鐘", status: ready}
+      - {id: line_oa, n: "LINE 官方帳號", url: "https://manager.line.biz", t: "20 分鐘", status: ready}
+      - {id: gplay, n: "Google Play 圖書（台灣）", url: "https://play.google.com/books/publish/", t: "25 分鐘", status: ready}
+      - {id: readmoo, n: "Readmoo 讀墨", url: "https://readmoo.com/publisher", t: "申請 2 週", status: planned, planned_note: "台灣最大原生電子書平台 — 需出版社審核；週包尚無 Readmoo 專用輸出。"}
+      - {id: books_tw, n: "博客來電子書", url: "mailto:ebook@books.com.tw", t: "洽談 3–4 週", status: planned, planned_note: "需出版社合約 — 非自助上傳；repo 尚未自動化。"}
+      - {id: kobo, n: "Kobo Writing Life（台灣）", url: "https://www.kobo.com/tw/zh/p/writinglife", t: "20 分鐘", status: ready}
+      - {id: apple, n: "Apple Books（台灣）", url: "https://authors.apple.com", t: "30 分鐘", status: ready}
+      - {id: kdp, n: "Amazon KDP", url: "https://kdp.amazon.com/signup", t: "20 分鐘", status: ready}
+      - {id: webtoon, n: "LINE Webtoon Canvas（繁中）", url: "https://www.webtoons.com/zh-hant/creators", t: "20 分鐘", status: ready}
+      - {id: youtube, n: "YouTube", url: "https://studio.youtube.com", t: "15 分鐘", status: ready}
+      - {id: tiktok, n: "TikTok", url: "https://www.tiktok.com/signup", t: "15 分鐘", status: ready}
+      - {id: instagram, n: "Instagram", url: "https://www.instagram.com/accounts/emailsignup/", t: "15 分鐘", status: ready}
+      - {id: kkbox, n: "KKBOX", url: "https://www.kkbox.com/tw/tw/apply", t: "申請中", status: planned, planned_note: "有聲書平台 — 需直接洽談；repo 尚無 KKBOX 週包輸出。"}
+      - {id: comico, n: "Comico", url: "https://www.comico.com.tw", t: "編輯審核", status: planned, planned_note: "漫畫策展平台 — 需申請；非 Canvas 自助流程。"}
+    uploads:
+      - {id: u_gplay, n: "Google Play 圖書", url: "https://play.google.com/books/publish", titles: 4, status: ready, steps: ["登入合作夥伴中心", "上傳 GooglePlay/ 資料夾 EPUB", "批次上傳書單 CSV", "設定台灣售價（TWD）", "提交審核"]}
+      - {id: u_kobo, n: "Kobo Writing Life", url: "https://www.kobo.com/tw/zh/p/writinglife", titles: 3, status: ready, steps: ["登入 Kobo", "建立新電子書", "上傳 EPUB 與封面", "設定台灣區域與 TWD 定價", "出版"]}
+      - {id: u_apple, n: "Apple Books", url: "https://authors.apple.com", titles: 3, status: ready, steps: ["Submit a New Book", "上傳 EPUB（繁體中文）", "語言選 Chinese (Traditional)", "設定台灣區域定價"]}
+      - {id: u_kdp, n: "Amazon KDP", url: "https://kdp.amazon.com/bookshelf", titles: 6, status: ready, steps: ["登入 KDP", "逐本建立 Kindle 電子書", "AI 內容選「是」", "上傳 EPUB 與封面"]}
+      - {id: u_webtoon, n: "LINE Webtoon Canvas", url: "https://www.webtoons.com/zh-hant/creators", titles: 2, status: ready, manga: true, steps: ["開啟創作者後台", "新增單集", "上傳 WEBTOON/ 直式長條圖（800px 寬）", "繁中標題與說明", "發佈"]}
+      - {id: u_tiktok, n: "TikTok", url: "https://www.tiktok.com/creator", titles: 3, status: ready, video: true, steps: ["上傳 Video/ MP4", "加入繁中 caption", "發佈"]}
+      - {id: u_youtube, n: "YouTube", url: "https://studio.youtube.com", titles: 2, status: ready, video: true, steps: ["上傳 Video/ MP4", "繁中標題與說明", "發佈"]}
+      - {id: u_readmoo, n: "Readmoo 讀墨", url: "https://readmoo.com/publisher", titles: 0, status: planned, planned_note: "待出版社帳號核准後手動上傳 EPUB — 週包尚無 Readmoo 專檔。"}
+      - {id: u_books_tw, n: "博客來電子書", url: "mailto:ebook@books.com.tw", titles: 0, status: planned, planned_note: "需出版社合約 — 非自動化上傳。"}
+    week:
+      - {day: MON, title: "下載週包", tasks: [{t: "下載本週內容包（國際自出版軸）", btn: "Download", url: null}]}
+      - {day: TUE, title: "台灣電子書優先", tasks: [{t: "Google Play 圖書批次上傳", btn: "Google Play", url: "https://play.google.com/books/publish"}, {t: "Kobo Writing Life 上架", btn: "Kobo", url: "https://www.kobo.com/tw/zh/p/writinglife"}]}
+      - {day: WED, title: "Apple + KDP", tasks: [{t: "Apple Books（繁體 / 台灣區）", btn: "Apple Books", url: "https://authors.apple.com"}, {t: "Amazon KDP 逐本上架", btn: "KDP", url: "https://kdp.amazon.com/bookshelf"}]}
+      - {day: THU, title: "漫畫週", tasks: [{t: "LINE Webtoon Canvas 發佈一話", btn: "Webtoon", url: "https://www.webtoons.com/zh-hant/creators"}]}
+      - {day: FRI, title: "Podcast + 社群", tasks: [{t: "Spotify for Creators 單集", btn: "Spotify", url: "https://creators.spotify.com"}, {t: "LINE / TikTok / YouTube 短影音", btn: "LINE", url: "https://manager.line.biz"}]}
+      - {day: SAT, title: "檢視 + 申請追蹤", tasks: [{t: "檢查 Google Play / Kobo 報表", btn: "Reports", url: "https://play.google.com/books/publish"}, {t: "追蹤 Readmoo / 博客來申請進度（planned 平台）", btn: "Readmoo", url: "https://readmoo.com/publisher"}]}
+      - {day: SUN, title: "休息", tasks: [{t: "系統自動刷新下週佇列。今天休息。"}]}
+    quick_links:
+      - {label: "Google Play", url: "https://play.google.com/books/publish"}
+      - {label: Kobo, url: "https://www.kobo.com/tw/zh/p/writinglife"}
+      - {label: "Apple Books", url: "https://authors.apple.com"}
+      - {label: KDP, url: "https://kdp.amazon.com/bookshelf"}
+      - {label: "LINE Webtoon", url: "https://www.webtoons.com/zh-hant/creators"}
+      - {label: Readmoo, url: "https://readmoo.com/publisher"}
+      - {label: LINE, url: "https://manager.line.biz"}
+      - {label: TikTok, url: "https://www.tiktok.com/creator"}
+
+  zh_cn:
+    lane_suffixes: [zh_cn, zh_sg]
+    ui_lang: "zh-Hans"
+    market_note: "中国大陆需 MCN/持牌代理才能上国内平台。国际自出版轴（Google Play / KDP / Apple）可自助；喜马拉雅等国内平台标为 planned，勿假装已自动化。"
+    package_blurb: "周包含国际自出版轴 + Podcast + Webtoon。国内平台需 MCN 代理 — 见 planned 项。"
+    package_folders: "GooglePlay / KDP / AppleBooks / Podcast / WEBTOON / metadata.csv"
+    setup:
+      - {id: gmail, n: "Google 账号", url: "https://accounts.google.com/signup", t: "5 分钟", status: ready}
+      - {id: gplay, n: "Google Play 图书", url: "https://play.google.com/books/publish/", t: "25 分钟", status: ready}
+      - {id: kdp, n: "Amazon KDP", url: "https://kdp.amazon.com/signup", t: "20 分钟", status: ready}
+      - {id: apple, n: "Apple Books", url: "https://authors.apple.com", t: "30 分钟", status: ready}
+      - {id: kobo, n: "Kobo Writing Life", url: "https://www.kobo.com/writinglife", t: "20 分钟", status: ready}
+      - {id: ximalaya, n: "喜马拉雅", url: "https://www.ximalaya.com/zhubo", t: "MCN 代理", status: planned, planned_note: "大陆有声平台 — 需国内运营商/MCN；credential 字段存在但 repo 周包未自动化国内上架。"}
+      - {id: wechat_reading, n: "微信读书", url: "https://weread.qq.com", t: "MCN 代理", status: planned, planned_note: "需出版许可证 + MCN — 外国实体不可自助上架。"}
+      - {id: dedao, n: "得到", url: "https://www.dedao.cn", t: "MCN 代理", status: planned, planned_note: "需内容审核 + 国内实体 — planned。"}
+      - {id: webtoon, n: "Webtoon / 快看", url: "https://www.webtoons.com/zh/challenge/publish", t: "20 分钟", status: ready}
+      - {id: youtube, n: "YouTube", url: "https://studio.youtube.com", t: "15 分钟", status: ready}
+      - {id: bilibili, n: "哔哩哔哩", url: "https://member.bilibili.com", t: "MCN 代理", status: planned, planned_note: "国内漫画/视频 — 需 MCN 与内容审核。"}
+    uploads:
+      - {id: u_gplay, n: "Google Play 图书", url: "https://play.google.com/books/publish", titles: 4, status: ready, steps: ["登录合作伙伴中心", "上传 GooglePlay/ EPUB", "批量书单 CSV", "设置定价", "提交审核"]}
+      - {id: u_kdp, n: "Amazon KDP", url: "https://kdp.amazon.com/bookshelf", titles: 6, status: ready, steps: ["登录 KDP", "逐本创建 Kindle 电子书", "AI 内容选「是」", "上传 EPUB 与封面"]}
+      - {id: u_apple, n: "Apple Books", url: "https://authors.apple.com", titles: 3, status: ready, steps: ["Submit a New Book", "上传 EPUB（简体中文）", "语言选 Chinese (Simplified)", "设置定价"]}
+      - {id: u_webtoon, n: "Webtoon Canvas", url: "https://www.webtoons.com/zh/challenge/publish", titles: 2, status: ready, manga: true, steps: ["创作者后台新增单集", "上传 WEBTOON/ 条图", "发布"]}
+      - {id: u_ximalaya, n: "喜马拉雅", url: "https://www.ximalaya.com/zhubo", titles: 0, status: planned, planned_note: "需 MCN 代理上传 — repo 周包无国内专档。"}
+      - {id: u_wechat, n: "微信读书", url: "https://weread.qq.com", titles: 0, status: planned, planned_note: "需 MCN + 出版许可 — 非自动化。"}
+    week:
+      - {day: MON, title: "下载周包", tasks: [{t: "下载本周国际自出版内容包", btn: "Download", url: null}]}
+      - {day: TUE, title: "Google Play + KDP", tasks: [{t: "Google Play 批量上传", btn: "Google Play", url: "https://play.google.com/books/publish"}, {t: "KDP 逐本上架", btn: "KDP", url: "https://kdp.amazon.com/bookshelf"}]}
+      - {day: WED, title: "Apple Books", tasks: [{t: "Apple Books（简体）上架", btn: "Apple Books", url: "https://authors.apple.com"}]}
+      - {day: THU, title: "漫画", tasks: [{t: "Webtoon Canvas 发布一话", btn: "Webtoon", url: "https://www.webtoons.com/zh/challenge/publish"}]}
+      - {day: FRI, title: "Podcast + 视频", tasks: [{t: "Spotify for Creators", btn: "Spotify", url: "https://creators.spotify.com"}, {t: "YouTube 短视频", btn: "YouTube", url: "https://studio.youtube.com"}]}
+      - {day: SAT, title: "MCN 进度", tasks: [{t: "与 MCN 代理确认国内平台审核状态（planned 项）", btn: "MCN", url: null}, {t: "检查 Google Play / KDP 报表", btn: "Reports", url: "https://play.google.com/books/publish"}]}
+      - {day: SUN, title: "休息", tasks: [{t: "系统自动刷新下周队列。今天休息。"}]}
+    quick_links:
+      - {label: "Google Play", url: "https://play.google.com/books/publish"}
+      - {label: KDP, url: "https://kdp.amazon.com/bookshelf"}
+      - {label: "Apple Books", url: "https://authors.apple.com"}
+      - {label: Webtoon, url: "https://www.webtoons.com/zh/challenge/publish"}
+      - {label: "喜马拉雅", url: "https://www.ximalaya.com/zhubo"}
