@@ -520,9 +520,38 @@ let BRAND = {id:"devotion_path_en_us", label:"Open Vessel Press"};
 let MARKET = "us", LANG = "en", CURRENCY = "usd", PLATFORMS = PLATFORMS_US, T = CHROME.en, CAT = CAT_EN;
 let REAL_CATALOG = null; // the brand's actual books (from brand_catalogs/<base>.json) when available
 let REAL_DELIVERY = null; // the brand's actual rendered files (from brand_deliveries/<base>.json) when available
+let PACKET_BRIDGE = null;
+let PACKET_BLOCK = null;
 const DELIV_PLAT = {kdp:"Amazon KDP", google_play:"Google Play", apple_books:"Apple Books", kobo:"Rakuten Kobo", audiobook:"Audiobook", audible:"Audible", google_play_audiobook:"Google Play Audiobook", spotify_podcast:"Podcast · Spotify", apple_podcasts:"Podcast · Apple", webtoon:"Webtoon", piccoma:"Piccoma", line_manga:"LINE Manga", pearl_news:"Pearl News"};
 let currentWeekIdx = null;
 function esc(s){ return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+function packetBridgeStatus(brandId){
+  if(!PACKET_BRIDGE)return null;
+  const blocked=PACKET_BRIDGE.blocked&&PACKET_BRIDGE.blocked[brandId];
+  if(blocked)return{state:"blocked",reason:blocked.reason||"No shippable weekly packet yet."};
+  const ready=PACKET_BRIDGE.brands&&PACKET_BRIDGE.brands[brandId];
+  if(ready&&ready.buildable)return{state:"ready",info:ready};
+  return null;
+}
+function isPacketBlocked(){ return PACKET_BLOCK&&PACKET_BLOCK.state==="blocked"; }
+function applyPacketBlockUi(){
+  const blocked=isPacketBlocked();
+  const dlAll=document.getElementById("ui-dlall");
+  if(dlAll){ dlAll.disabled=blocked; dlAll.style.opacity=blocked?"0.45":"1"; dlAll.style.cursor=blocked?"not-allowed":""; }
+  let banner=document.getElementById("packet-block-banner");
+  if(blocked){
+    const msg=PACKET_BLOCK.reason||"No shippable weekly packet yet.";
+    const title=LANG==="zh-Hant"?"無可下載週包":LANG==="zh-Hans"?"无可下载周包":"No shippable download";
+    if(!banner){
+      banner=document.createElement("div");
+      banner.id="packet-block-banner";
+      banner.className="viewing-note";
+      banner.style.cssText="border:1px solid var(--amber2);padding:12px;margin-bottom:12px;color:var(--amber2)";
+      document.getElementById("view-weekly").insertBefore(banner,document.getElementById("slots-summary"));
+    }
+    banner.innerHTML=`<strong>${title}.</strong> ${esc(msg)}`;
+  }else if(banner){ banner.remove(); }
+}
 function pad(a, n){ a = (a||[]).slice(0,n); while (a.length < n) a.push(""); return a; }
 
 // ── ISO-week helpers ──────────────────────────────────────────────────────
@@ -630,12 +659,14 @@ function buildMetadataFile(p, week, pkt) {
   }
 }
 function dlPacket(pid) {
+  if (isPacketBlocked()) return;
   const week = weekLabelFor(currentWeekIdx), pkt = packetFor(currentWeekIdx);
   const p = PLATFORMS.find(x => x.id === pid);
   const f = p && buildMetadataFile(p, week, pkt);
   if (f) dl(f.name, f.text, f.mime);
 }
 function downloadAll() {
+  if (isPacketBlocked()) return;
   const week = weekLabelFor(currentWeekIdx), pkt = packetFor(currentWeekIdx);
   const head = ["channel","format","title","id","description",`price_${CURRENCY}`,"week","brand"];
   const rows = [head];
@@ -678,7 +709,7 @@ function renderWeekly() {
         <span class="platform-name">${p.label}</span>
         <span class="mode-tag ${p.modeClass}">${p.mode}</span>
         <span class="platform-count">${T.countThisWeek(items.length, noun)}</span>
-        <span class="platform-dls"><button class="btn sm primary" onclick="dlPacket('${p.id}')">${p.dlLabel}</button></span>
+        <span class="platform-dls"><button class="btn sm primary" ${isPacketBlocked()?"disabled style=\"opacity:.45;cursor:not-allowed\"":""} onclick="dlPacket('${p.id}')">${p.dlLabel}</button></span>
       </div>
       <div class="platform-body">
         <details class="howto" open>
@@ -704,6 +735,7 @@ function renderWeekly() {
       ? `<div class="real-files"><div class="rf-head">✅ ${T.realFiles} — ${wk}</div><div class="rf-note">${T.realFilesNote}</div>${groups}</div>`
       : "";
   } else { rfEl.innerHTML = ""; }
+  applyPacketBlockUi();
 }
 
 function renderHistory() {
@@ -784,6 +816,8 @@ async function boot() {
   // Pull the brand's REAL rendered files (only brands with rendered output have a feed).
   REAL_DELIVERY = null;
   try { const r = await fetch(`brand_deliveries/${base}.json`, {cache:"no-store"}); if (r.ok) { const j = await r.json(); if (j && j.weeks) REAL_DELIVERY = j; } } catch (_e) {}
+  try { const r = await fetch("brand_admin_weekly_packets.json", {cache:"no-store"}); if (r.ok) PACKET_BRIDGE = await r.json(); } catch (_e) {}
+  PACKET_BLOCK = packetBridgeStatus(id);
   renderWeekly();
 }
 boot();

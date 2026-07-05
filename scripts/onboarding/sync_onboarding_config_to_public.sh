@@ -4,13 +4,17 @@ ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
 DEST="${ROOT}/brand-wizard-app/public/onboarding"
 PUBLIC="${ROOT}/brand-wizard-app/public"
 mkdir -p "${DEST}"
-cp "${ROOT}/config/onboarding"/*.json "${DEST}/"
-echo "Synced config/onboarding/*.json -> brand-wizard-app/public/onboarding/"
+shopt -s nullglob
+onboarding_json=("${ROOT}/config/onboarding"/*.json)
+if ((${#onboarding_json[@]})); then
+  cp "${onboarding_json[@]}" "${DEST}/"
+  echo "Synced config/onboarding/*.json -> brand-wizard-app/public/onboarding/"
+else
+  echo "warn: no config/onboarding/*.json (skip)" >&2
+fi
 
 # Static onboarding/prez spine (repo root) → public root so Cloudflare Pages serves real HTML
 # (not SPA index.html fallback).
-# Consolidated to 7 pages — see plan audit.
-# Only market_lane_matrix still lives at repo root.
 SPINE_HTML=(
   market_lane_matrix.html
 )
@@ -23,6 +27,20 @@ for f in "${SPINE_HTML[@]}"; do
   fi
 done
 echo "Synced onboarding spine HTML -> brand-wizard-app/public/"
+
+# Weekly OS: repo-root brand_admin_weekly_os.html is canonical logic; transform paths for Pages dist.
+WEEKLY_OS_SRC="${ROOT}/brand_admin_weekly_os.html"
+WEEKLY_OS_DEST="${PUBLIC}/brand_admin_weekly_os.html"
+if [[ -f "${WEEKLY_OS_SRC}" ]]; then
+  sed \
+    -e 's|brand-wizard-app/public/assets/|assets/|g' \
+    -e "s|JSON_BASE='brand-wizard-app/public/'|JSON_BASE=''|g" \
+    -e 's|brand-wizard-app/public/brand_handoff_dashboard.html|brand_handoff_dashboard.html|g' \
+    "${WEEKLY_OS_SRC}" > "${WEEKLY_OS_DEST}"
+  echo "Synced brand_admin_weekly_os.html -> brand-wizard-app/public/ (Pages-safe paths)"
+else
+  echo "warn: missing brand_admin_weekly_os.html (skip)" >&2
+fi
 
 # Pearl Prime pitch deck (docs/) → public root so brand-admin-onboarding-bu2.pages.dev serves them
 DOCS_HTML=(

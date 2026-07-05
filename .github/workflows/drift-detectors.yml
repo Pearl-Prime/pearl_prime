@@ -81,3 +81,6 @@ jobs:
       - name: Manga config wiring (unwired-config-as-working — BLOCK)
         run: |
           PYTHONPATH=scripts/ci:. python3 scripts/ci/check_manga_wiring.py
+
+      - name: Brand admin Weekly OS public sync (BLOCK)
+        run: python3 scripts/ci/check_brand_admin_weekly_os_public_sync.py
