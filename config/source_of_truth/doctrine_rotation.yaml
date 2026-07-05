@@ -1,0 +1,73 @@
+# Doctrine rotation — per-chapter REFLECTION variant assignment (one per chapter, no repeats).
+# Authority: docs/doctrine_distribution_plan.md
+# Consumer: phoenix_v4/planning/doctrine_rotation.py → enrichment_select._try_composite_content
+
+version: 1
+status: wired
+
+brand_dosage_profiles:
+  somatic_heavy:
+    description: Somatic/composite brands — doctrine on every chapter in the sequence.
+    book_frames: [somatic_first, somatic, trauma_informed]
+    reflection_chapters: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+  commercial_light:
+    description: Commercial/mainstream brands — lighter doctrine dosage.
+    book_frames: [commercial, mainstream, productivity_first]
+    reflection_chapters: [1, 4, 7, 10, 12]
+
+topic_sequences:
+  anxiety:
+    default_12:
+      - chapter: 1
+        doctrine_id: "COMPOSITE_DOCTRINE v03"
+        doctrine_target: sensation_vs_story
+      - chapter: 2
+        doctrine_id: "COMPOSITE_DOCTRINE v01"
+      - chapter: 3
+        doctrine_id: "COMPOSITE_DOCTRINE v05"
+      - chapter: 4
+        doctrine_id: "COMPOSITE_DOCTRINE v04"
+      - chapter: 5
+        doctrine_id: "COMPOSITE_DOCTRINE v02"
+      - chapter: 6
+        doctrine_id: "COMPOSITE_DOCTRINE v06"
+      - chapter: 7
+        doctrine_id: "COMPOSITE_DOCTRINE v07"
+      - chapter: 8
+        doctrine_id: "COMPOSITE_DOCTRINE v08"
+      - chapter: 9
+        doctrine_id: "COMPOSITE_DOCTRINE v09"
+      - chapter: 10
+        doctrine_id: "COMPOSITE_DOCTRINE v10"
+      - chapter: 11
+        doctrine_id: "COMPOSITE_DOCTRINE v11"
+      - chapter: 12
+        doctrine_id: "COMPOSITE_DOCTRINE v15"
+  burnout:
+    default_12:
+      - {chapter: 1, doctrine_id: "COMPOSITE_DOCTRINE v01"}
+      - {chapter: 2, doctrine_id: "COMPOSITE_DOCTRINE v02"}
+      - {chapter: 3, doctrine_id: "COMPOSITE_DOCTRINE v03"}
+      - {chapter: 4, doctrine_id: "COMPOSITE_DOCTRINE v04"}
+      - {chapter: 5, doctrine_id: "COMPOSITE_DOCTRINE v05"}
+      - {chapter: 6, doctrine_id: "COMPOSITE_DOCTRINE v06"}
+      - {chapter: 7, doctrine_id: "COMPOSITE_DOCTRINE v07"}
+      - {chapter: 8, doctrine_id: "COMPOSITE_DOCTRINE v08"}
+      - {chapter: 9, doctrine_id: "COMPOSITE_DOCTRINE v09"}
+      - {chapter: 10, doctrine_id: "COMPOSITE_DOCTRINE v10"}
+      - {chapter: 11, doctrine_id: "COMPOSITE_DOCTRINE v11"}
+      - {chapter: 12, doctrine_id: "COMPOSITE_DOCTRINE v12"}
+  grief:
+    default_12:
+      - {chapter: 1, doctrine_id: "COMPOSITE_DOCTRINE v01"}
+      - {chapter: 2, doctrine_id: "COMPOSITE_DOCTRINE v02"}
+      - {chapter: 3, doctrine_id: "COMPOSITE_DOCTRINE v03"}
+      - {chapter: 4, doctrine_id: "COMPOSITE_DOCTRINE v04"}
+      - {chapter: 5, doctrine_id: "COMPOSITE_DOCTRINE v05"}
+      - {chapter: 6, doctrine_id: "COMPOSITE_DOCTRINE v06"}
+      - {chapter: 7, doctrine_id: "COMPOSITE_DOCTRINE v07"}
+      - {chapter: 8, doctrine_id: "COMPOSITE_DOCTRINE v08"}
+      - {chapter: 9, doctrine_id: "COMPOSITE_DOCTRINE v09"}
+      - {chapter: 10, doctrine_id: "COMPOSITE_DOCTRINE v10"}
+      - {chapter: 11, doctrine_id: "COMPOSITE_DOCTRINE v11"}
+      - {chapter: 12, doctrine_id: "COMPOSITE_DOCTRINE v12"}

@@ -43,7 +43,7 @@ REFINED_SLOTS = [
 ]
 _STORY_ARC = ("recognition", "mechanism_proof", "turning_point")
 
-CH1_DOCTRINE_ID = "COMPOSITE_DOCTRINE v03_pure"
+CH1_DOCTRINE_ID = "COMPOSITE_DOCTRINE v03"
 EXERCISE_ID = "med_007"
 
 ATOM_PICKS = {
@@ -205,7 +205,7 @@ def assemble_v4() -> ChapterPreview:
             note = f"character={CHARACTER}; arc={arc}"
         elif slot == "REFLECTION":
             aid, body, bank = _load_doctrine()
-            note = "v03_pure — reflection only, no embedded practice"
+            note = "v03 sensation-vs-story — reflection only, no embedded practice"
         elif slot == "EXERCISE":
             aid, body, bank = _load_exercise_med007()
             note = "med_007 content_only — bridge + description, no assembly glue"
@@ -245,7 +245,7 @@ def _format_annotated(preview: ChapterPreview) -> str:
     lines = [
         "Chapter 1 — promise_engine v4 (atom cleanup)",
         f"Cell: {PERSONA} × {TOPIC} | Character: {CHARACTER} | Object: {OBJECT}",
-        f"Fixes: exercise de-glue | pivot≠integration | one practice (v03_pure)",
+        f"Fixes: exercise de-glue | pivot≠integration | one practice (v03)",
         "",
         "=" * 72,
         "",

@@ -52,6 +52,13 @@ from phoenix_v4.planning.chapter_object_continuity import (
     is_twelve_shape_continuity_active,
     load_chapter_continuity_plan,
 )
+from phoenix_v4.planning.doctrine_rotation import (
+    is_reflection_rotation_slot,
+    load_doctrine_rotation_config,
+    normalize_doctrine_id,
+    pick_doctrine_atom_by_id,
+    resolve_chapter_doctrine_id,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -805,6 +812,22 @@ def _pick_teacher_pool(teacher_atoms: Dict[str, List[dict]], slot_type: str) -> 
     return []
 
 
+def _doctrine_rotation_active(
+    topic_id: str,
+    spine_context: Optional[Dict[str, Any]],
+    *,
+    repo_root: Optional[Path] = None,
+) -> bool:
+    ctx = spine_context or {}
+    if ctx.get("chapter_continuity_plan"):
+        return True
+    topic = (topic_id or "").strip()
+    sequences = (
+        (load_doctrine_rotation_config(repo_root).get("topic_sequences") or {}).get(topic)
+    )
+    return bool(sequences)
+
+
 def _try_composite_content(
     composite_atoms: Dict[str, List[dict]],
     slot_type: str,
@@ -814,6 +837,10 @@ def _try_composite_content(
     persona_id: str = "",
     book_frame: str = "somatic_first",
     seen_bodies: Any = None,
+    chapter_index0: int = 0,
+    spine_context: Optional[Dict[str, Any]] = None,
+    used_doctrine_ids: Optional[set[str]] = None,
+    repo_root: Optional[Path] = None,
 ) -> Optional[Tuple[str, str, int, Dict[str, Any]]]:
     """Regular mode: topic composite doctrine/reflection before persona pool."""
     pool = _pick_composite_pool(composite_atoms, slot_type)
@@ -830,6 +857,39 @@ def _try_composite_content(
     ]
     if not pool:
         return None
+
+    if is_reflection_rotation_slot(slot_type) and _doctrine_rotation_active(
+        topic_id, spine_context, repo_root=repo_root,
+    ):
+        assigned = resolve_chapter_doctrine_id(
+            topic_id,
+            chapter_index0,
+            spine_context=spine_context,
+            book_frame=book_frame,
+            repo_root=repo_root,
+        )
+        if not assigned:
+            return None
+        atom = pick_doctrine_atom_by_id(pool, assigned, used_doctrine_ids=used_doctrine_ids)
+        if not atom:
+            return None
+        content = str(atom.get("content") or "").strip()
+        if not content:
+            return None
+        aid = str(atom.get("atom_id") or assigned)
+        logger.info(
+            "doctrine_rotation: ch%s topic=%s assigned=%s atom=%s",
+            chapter_index0 + 1,
+            topic_id,
+            normalize_doctrine_id(assigned),
+            aid,
+        )
+        idx = next(
+            (i for i, a in enumerate(pool) if normalize_doctrine_id(str(a.get("atom_id") or "")) == normalize_doctrine_id(assigned)),
+            0,
+        )
+        return content, aid, idx, dict(atom.get("metadata") or {})
+
     # Dedup-aware pick: deterministic anchor, then walk forward skipping bodies
     # already used book-wide — reuses the SAME _SeenBodies exact+fuzzy membership
     # as the persona path (no parallel dedup). Falls back to the anchor when every
@@ -2056,6 +2116,7 @@ def select_enrichment(
     # order, falling back to the deterministic anchor when none are unused.
     _book_seen_bodies = _SeenBodies()
     _book_used_hooks: set[str] = set()
+    _book_used_doctrine_ids: set[str] = set()
     _identity_contract = None
     try:
         from phoenix_v4.planning.book_identity_contract import load_book_identity_contract
@@ -2307,6 +2368,10 @@ def select_enrichment(
                             persona_id=persona_id,
                             book_frame=_frame,
                             seen_bodies=_book_seen_bodies,
+                            chapter_index0=chapter_index0,
+                            spine_context=plan_context,
+                            used_doctrine_ids=_book_used_doctrine_ids,
+                            repo_root=root,
                         )
                         if _cx_hit:
                             # Composite brands have no named teacher, so the doctrine body
@@ -2336,6 +2401,10 @@ def select_enrichment(
                             _note_primary_body(_book_seen_bodies, _cx_hit[0])
                             _composite_filled = True
                             _chapter_composite_doctrine = True
+                            if is_reflection_rotation_slot(stype):
+                                _book_used_doctrine_ids.add(
+                                    normalize_doctrine_id(_cx_hit[1])
+                                )
                             audit_counts["slots_from_composite"] = (
                                 audit_counts.get("slots_from_composite", 0) + 1
                             )
