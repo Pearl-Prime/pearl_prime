@@ -1,0 +1,152 @@
+{
+  "generated_at": "2026-07-06T20:43:04.457846+00:00",
+  "spec": "MANGA_COMPOSITION_GRAMMAR_SPEC.md \u00a710",
+  "panels": [
+    {
+      "panel_id": "p1_establishing",
+      "shot_type": "establishing",
+      "passed": true,
+      "ops_applied": [
+        "G3_horizon_scale",
+        "G6_defringe",
+        "G4_contact_shadow",
+        "G5_occluder_BOOK"
+      ],
+      "gates": [
+        {
+          "gate": "G1",
+          "severity": "PASS",
+          "message": "diegetic pair \u2014 legality auto-pass"
+        },
+        {
+          "gate": "G2",
+          "severity": "PASS",
+          "message": "angle_bucket match (eye_level)"
+        },
+        {
+          "gate": "G8",
+          "severity": "PASS",
+          "message": "light azimuth compatible (camera_left/camera_left)"
+        },
+        {
+          "gate": "G3",
+          "severity": "PASS",
+          "message": "horizon-ratio scale within tolerance"
+        },
+        {
+          "gate": "G4",
+          "severity": "PASS",
+          "message": "contact shadow rendered"
+        },
+        {
+          "gate": "G6",
+          "severity": "PASS",
+          "message": "defringe applied"
+        }
+      ]
+    },
+    {
+      "panel_id": "p2_dialogue_bust",
+      "shot_type": "dialogue_bust",
+      "passed": true,
+      "ops_applied": [
+        "derive_defocus",
+        "G6_defringe",
+        "VN_stage_paste"
+      ],
+      "gates": [
+        {
+          "gate": "G1",
+          "severity": "PASS",
+          "message": "waist_up \u00d7 defocus_derived \u2192 LEGAL"
+        },
+        {
+          "gate": "G2",
+          "severity": "PASS",
+          "message": "abstract BG \u2014 angle exempt"
+        },
+        {
+          "gate": "G8",
+          "severity": "PASS",
+          "message": "light azimuth compatible (camera_left/camera_left)"
+        },
+        {
+          "gate": "G6",
+          "severity": "PASS",
+          "message": "defringe applied"
+        }
+      ]
+    },
+    {
+      "panel_id": "p3_insert_object",
+      "shot_type": "insert_object",
+      "passed": true,
+      "ops_applied": [
+        "L0_plate_crop"
+      ],
+      "gates": [
+        {
+          "gate": "G1",
+          "severity": "PASS",
+          "message": "insert \u2014 no L2 combination"
+        }
+      ]
+    },
+    {
+      "panel_id": "p4_reaction_emotion",
+      "shot_type": "reaction_emotion",
+      "passed": true,
+      "ops_applied": [
+        "derive_tone_gradient",
+        "G6_defringe"
+      ],
+      "gates": [
+        {
+          "gate": "G1",
+          "severity": "PASS",
+          "message": "waist_up \u00d7 tone_gradient \u2192 LEGAL"
+        },
+        {
+          "gate": "G2",
+          "severity": "PASS",
+          "message": "abstract BG \u2014 angle exempt"
+        },
+        {
+          "gate": "G8",
+          "severity": "PASS",
+          "message": "light azimuth compatible (camera_left/ambient)"
+        },
+        {
+          "gate": "G6",
+          "severity": "PASS",
+          "message": "defringe applied"
+        }
+      ]
+    },
+    {
+      "panel_id": "control_illegal_waist_on_room",
+      "shot_type": "control",
+      "passed": false,
+      "ops_applied": [
+        "bbox_legacy_\u00a710"
+      ],
+      "gates": [
+        {
+          "gate": "G1",
+          "severity": "FAIL",
+          "message": "waist_up \u00d7 full_render is ILLEGAL (no diegetic pair)"
+        },
+        {
+          "gate": "G4",
+          "severity": "FAIL",
+          "message": "contact shadow missing"
+        },
+        {
+          "gate": "G3",
+          "severity": "FAIL",
+          "message": "bbox_legacy \u2014 no horizon-ratio grounding"
+        }
+      ]
+    }
+  ]
+}

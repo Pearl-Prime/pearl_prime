@@ -1,0 +1,123 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://phoenix-omega/schemas/manga/composition_meta.schema.json",
+  "title": "Manga bank asset composition metadata",
+  "description": "Sidecar schema per MANGA_COMPOSITION_GRAMMAR_SPEC.md §4. Sibling to .provenance.json.",
+  "type": "object",
+  "required": ["schema_version", "asset_id", "layer_class"],
+  "properties": {
+    "schema_version": { "type": "string", "const": "1.0.0" },
+    "asset_id": { "type": "string" },
+    "layer_class": { "enum": ["L0", "L1", "L2", "L3", "L4"] },
+    "light": {
+      "type": "object",
+      "properties": {
+        "azimuth": {
+          "enum": ["camera_left", "camera_right", "frontal", "back", "ambient"]
+        },
+        "temporal_state": {
+          "enum": ["dawn", "day", "evening", "night"]
+        }
+      }
+    },
+    "style_register": { "type": "string" },
+    "bg_class": {
+      "enum": [
+        "full_render",
+        "partial_motif",
+        "defocus_derived",
+        "tone_gradient",
+        "manpu_emotion",
+        "speedlines_focus",
+        "white_void",
+        "black_void"
+      ]
+    },
+    "camera": {
+      "type": "object",
+      "properties": {
+        "angle_bucket": {
+          "enum": ["eye_level", "aori", "fukan", "overhead"]
+        },
+        "eye_level_y_pct": { "type": "number", "minimum": 0, "maximum": 100 },
+        "camera_height": {
+          "enum": ["standing", "seated", "low", "overhead"]
+        }
+      }
+    },
+    "ground_plane": {
+      "type": "object",
+      "properties": {
+        "visible": { "type": "boolean" },
+        "frame_bottom_depth_m": { "type": "number" }
+      }
+    },
+    "anchor_slots": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["slot_id", "kind", "feet_y_pct", "center_x_pct"],
+        "properties": {
+          "slot_id": { "type": "string" },
+          "kind": { "enum": ["stand", "seat", "lean"] },
+          "feet_y_pct": { "type": "number" },
+          "center_x_pct": { "type": "number" },
+          "expected_figure_h_pct": { "type": "number" },
+          "occluder_crop_bbox_pct": {
+            "type": "array",
+            "items": { "type": "number" },
+            "minItems": 4,
+            "maxItems": 4
+          }
+        }
+      }
+    },
+    "crop_class": {
+      "enum": [
+        "full_figure",
+        "knees_up",
+        "thigh_up",
+        "waist_up",
+        "bust",
+        "face_cu",
+        "ecu_fragment",
+        "hands",
+        "silhouette"
+      ]
+    },
+    "anchor": {
+      "type": "object",
+      "properties": {
+        "point": { "enum": ["feet", "seat", "waist_line"] },
+        "y_px": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "eye_y_px": { "type": "integer", "minimum": 0 },
+    "implied_camera": {
+      "type": "object",
+      "properties": {
+        "angle_bucket": {
+          "enum": ["eye_level", "aori", "fukan", "overhead"]
+        },
+        "el_crossing": { "type": "string" }
+      }
+    },
+    "pose_id": { "type": "string" },
+    "figure_height_m": { "type": "number" },
+    "diegetic_pair": { "type": "string" },
+    "real_height_m": { "type": "number" },
+    "contact_type": {
+      "enum": ["floor", "table", "wall", "held", "airborne"]
+    }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "layer_class": { "const": "L0" } } },
+      "then": { "required": ["bg_class"] }
+    },
+    {
+      "if": { "properties": { "layer_class": { "const": "L2" } } },
+      "then": { "required": ["crop_class", "anchor", "eye_y_px", "implied_camera"] }
+    }
+  ]
+}
