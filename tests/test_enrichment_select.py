@@ -81,11 +81,13 @@ def test_audit_counts_present(fmt_std):
 
 
 def test_teacher_atoms_preferred_for_hook(fmt_std):
+    # gen_z_professionals × anxiety uses twelve_shape connective_picks on ch1 HOOK
+    # (flagship continuity) — teacher stacking is intentionally bypassed there.
     book = select_enrichment(
         EnrichmentRequest(
             beatmap=_beatmap("anxiety", fmt_std),
             teacher_id="ahjan",
-            persona_id="gen_z_professionals",
+            persona_id="corporate_managers",
             topic_id="anxiety",
             seed="teacher_hook",
         )
@@ -111,7 +113,14 @@ def test_peek_registry_for_beatmap_slot_non_empty_under_teacher(fmt_std):
         )
     )
     # PR #612: teacher_atom appears inside stacked source, not alone.
-    assert "teacher_atom" in book.chapters[0].slots[0].source
+    # Twelve-shape ch1 HOOK may be connective_picks-only (persona_atom); teacher
+    # still participates elsewhere in the chapter.
+    hook = book.chapters[0].slots[0]
+    if "teacher_atom" not in hook.source:
+        teacher_slots = [s for s in book.chapters[0].slots if "teacher_atom" in s.source]
+        assert teacher_slots, "expected teacher_atom somewhere in ch1 under ahjan"
+    else:
+        assert "teacher_atom" in hook.source
     peek = peek_registry_content_for_beatmap_slot(
         beatmap=bm,
         chapter_number=1,
