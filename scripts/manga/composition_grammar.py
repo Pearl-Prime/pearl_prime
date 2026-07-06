@@ -206,7 +206,7 @@ def g3_horizon_scale_check(
     if y_feet <= y_horizon:
         return GateResult("G3", GateSeverity.FAIL, "feet at or above horizon")
     expected_pct = slot.get("expected_figure_h_pct")
-    if expected_pct is not None:
+    if expected_pct is not None and expected_pct > 0:
         actual_pct = scaled_figure_h_px / canvas_h * 100
         delta = abs(actual_pct - expected_pct) / expected_pct
         if delta > 0.15:
@@ -290,6 +290,13 @@ def _hex_to_rgb(h: str) -> tuple[int, int, int]:
     return int(h[0:2], 16), int(h[2:4], 16), int(h[4:6], 16)
 
 
+def alpha_tight_bbox(img: Image.Image) -> tuple[int, int, int, int] | None:
+    """Tight bbox from alpha channel only (ignores RGB under transparent pixels)."""
+    rgba = img.convert("RGBA")
+    alpha = rgba.getchannel("A")
+    return alpha.getbbox()
+
+
 # ── grounding ops ──────────────────────────────────────────────────────────────
 
 
@@ -315,22 +322,29 @@ def horizon_scale_paste(
     """G3: scale from horizon-ratio law and paste anchored at slot."""
     W, H = canvas.size
     cutout = defringe_cutout(cutout)
-    tight = cutout.getbbox()
+    tight = alpha_tight_bbox(cutout)
     if tight is None:
+        return canvas, 0.0, (0, 0, 0, 0)
+
+    y_horizon = H * (l0_meta.get("camera") or {}).get("eye_level_y_pct", 42) / 100
+    y_feet = H * slot["feet_y_pct"] / 100
+    if y_feet <= y_horizon:
         return canvas, 0.0, (0, 0, 0, 0)
 
     layer_tight = cutout.crop(tight)
     anchor_y = l2_meta["anchor"]["y_px"]
     anchor_in_tight = anchor_y - tight[1]
-    figure_h_px = max(1, anchor_in_tight)
+    if anchor_in_tight <= 0:
+        return canvas, 0.0, (0, 0, 0, 0)
+    figure_h_px = anchor_in_tight
 
     cam_h_key = (l0_meta.get("camera") or {}).get("camera_height", "seated")
     camera_height_m = CAMERA_HEIGHT_M.get(cam_h_key, 1.15)
     figure_height_m = l2_meta.get("figure_height_m", 1.62)
 
-    y_horizon = H * (l0_meta.get("camera") or {}).get("eye_level_y_pct", 42) / 100
-    y_feet = H * slot["feet_y_pct"] / 100
     target_figure_h = (figure_height_m / camera_height_m) * (y_feet - y_horizon)
+    if target_figure_h <= 0:
+        return canvas, 0.0, (0, 0, 0, 0)
 
     scale = target_figure_h / figure_h_px
     new_w = max(1, int(layer_tight.width * scale))
@@ -358,7 +372,7 @@ def bbox_legacy_paste(
     target_y = int(H * y_pct / 100)
     target_w = int(W * w_pct / 100)
     target_h = int(H * h_pct / 100)
-    tight_box = cutout.getbbox()
+    tight_box = alpha_tight_bbox(cutout)
     if tight_box is None:
         return canvas
     layer_tight = cutout.crop(tight_box)
@@ -453,7 +467,7 @@ def dialogue_bust_paste(
     """Stage waist_up/bust on abstract BG: bottom-anchored VN stage slot."""
     W, H = canvas.size
     cutout = defringe_cutout(cutout)
-    tight = cutout.getbbox()
+    tight = alpha_tight_bbox(cutout)
     if tight is None:
         return canvas
     layer_tight = cutout.crop(tight)

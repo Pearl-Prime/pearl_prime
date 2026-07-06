@@ -62,7 +62,7 @@
           "kind": { "enum": ["stand", "seat", "lean"] },
           "feet_y_pct": { "type": "number" },
           "center_x_pct": { "type": "number" },
-          "expected_figure_h_pct": { "type": "number" },
+          "expected_figure_h_pct": { "type": "number", "exclusiveMinimum": 0 },
           "occluder_crop_bbox_pct": {
             "type": "array",
             "items": { "type": "number" },
@@ -87,6 +87,7 @@
     },
     "anchor": {
       "type": "object",
+      "required": ["point", "y_px"],
       "properties": {
         "point": { "enum": ["feet", "seat", "waist_line"] },
         "y_px": { "type": "integer", "minimum": 0 }
@@ -95,6 +96,7 @@
     "eye_y_px": { "type": "integer", "minimum": 0 },
     "implied_camera": {
       "type": "object",
+      "required": ["angle_bucket"],
       "properties": {
         "angle_bucket": {
           "enum": ["eye_level", "aori", "fukan", "overhead"]
