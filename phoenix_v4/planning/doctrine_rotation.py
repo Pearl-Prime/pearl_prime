@@ -123,47 +123,135 @@ def resolve_chapter_doctrine_id(
     return None
 
 
+def spacing_window(pool_size: int, chapter_count: int) -> int:
+    """Bounded-reuse spacing window = ``min(pool_size, chapter_count)`` (>= 1).
+
+    A doctrine may not repeat within this many chapters. When the lesson library
+    grows past the chapter count the window widens to the full pool size, so the
+    rule auto-tightens back toward strict no-repeat with no code change.
+    """
+    ps = max(1, int(pool_size or 1))
+    cc = max(1, int(chapter_count or ps))
+    return min(ps, cc)
+
+
+def _distinct_pool_ids(pool: list[dict]) -> set[str]:
+    return {
+        normalize_doctrine_id(str(a.get("atom_id") or ""))
+        for a in pool
+        if normalize_doctrine_id(str(a.get("atom_id") or ""))
+    }
+
+
+def _least_recently_used_atom(
+    pool: list[dict], recent: list[str]
+) -> Optional[dict]:
+    """Fail-safe pick: the pool atom used longest ago (never-used first).
+
+    Deterministic — ties break on pool order — so re-renders at the same seed
+    reproduce. Returns ``None`` only when the pool is empty.
+    """
+    best: Optional[dict] = None
+    best_key: Optional[tuple[int, int]] = None
+    for pos, atom in enumerate(pool):
+        aid = normalize_doctrine_id(str(atom.get("atom_id") or ""))
+        last_used = -1  # never used → most preferred
+        for i, rid in enumerate(recent):
+            if rid == aid:
+                last_used = i
+        key = (last_used, pos)
+        if best_key is None or key < best_key:
+            best_key = key
+            best = atom
+    return best
+
+
 def pick_doctrine_atom_by_id(
     pool: list[dict],
     doctrine_id: str,
     *,
     used_doctrine_ids: Optional[set[str]] = None,
     current_chapter_doctrine_id: Optional[str] = None,
+    recent_doctrine_ids: Optional[list[str]] = None,
+    chapter_count: Optional[int] = None,
 ) -> Optional[dict]:
     """
-    Select the pool atom matching doctrine_id. Fail closed on a CROSS-chapter repeat.
+    Select the pool atom for ``doctrine_id`` under BOUNDED-REUSE spacing.
 
-    Design intent (docs/doctrine_distribution_plan.md rules 1–2): each chapter gets
-    exactly ONE doctrine variant, SHARED across every REFLECTION slot in that chapter;
-    "no repeats" is a CROSS-chapter guarantee only. Multi-REFLECTION templates
-    (e.g. deep_book_6h with 2 REFLECTION slots/chapter) resolve the SAME per-chapter
-    doctrine for each slot — that intra-chapter recurrence is expected and MUST NOT
-    fail closed. Only a doctrine already assigned to a *prior* chapter is a violation.
+    Design intent (docs/doctrine_distribution_plan.md rules 1–2, bounded-reuse
+    revision): each chapter gets exactly ONE doctrine variant, SHARED across every
+    REFLECTION slot in that chapter. A variant MAY repeat across chapters, but not
+    within a spacing window of ``min(pool_size, chapter_count)`` chapters, and never
+    in two adjacent chapters. This lets a small lesson library (e.g. 5 anxiety
+    variants) still cover all 12 chapters with spaced reuse; when the library grows
+    past the chapter count the window widens back toward strict no-repeat.
 
-    ``current_chapter_doctrine_id`` names the doctrine assigned to the chapter being
-    filled; when ``target`` equals it, an entry already present in ``used_doctrine_ids``
-    is an intra-chapter re-pick (allowed), not a cross-chapter repeat.
+    ``recent_doctrine_ids`` is the ORDERED list of doctrines assigned to PRIOR
+    chapters (oldest→newest) — spacing needs recency, which the legacy unordered
+    ``used_doctrine_ids`` set cannot express (it is honored as a conservative
+    fallback: every entry counts as recent).
+
+    ``current_chapter_doctrine_id`` names this chapter's single doctrine; a
+    ``target`` equal to it is an intra-chapter re-pick (multi-REFLECTION templates
+    resolve the same doctrine for each slot) and is always allowed.
+
+    Fail-safe: when the assigned doctrine cannot be honored at the required spacing
+    (too close a repeat) or is missing from the pool, degrade to the least-recently
+    -used pool atom. Never raises; returns ``None`` only when the pool is empty.
     """
-    target = normalize_doctrine_id(doctrine_id)
-    if not target:
+    if not pool:
         return None
-    used = used_doctrine_ids or set()
+
+    target = normalize_doctrine_id(doctrine_id)
     current = normalize_doctrine_id(current_chapter_doctrine_id or "")
-    if target in used and target != current:
-        logger.error("doctrine_rotation: repeat blocked — %s already assigned", target)
-        raise DoctrineRotationError(f"doctrine repeat blocked: {target}")
 
-    for atom in pool:
-        aid = normalize_doctrine_id(str(atom.get("atom_id") or ""))
-        if aid == target:
-            return atom
+    recent = [normalize_doctrine_id(x) for x in (recent_doctrine_ids or []) if x]
+    if not recent and used_doctrine_ids:
+        # Legacy unordered set — treat every prior id as "recent" (conservative).
+        recent = [normalize_doctrine_id(x) for x in used_doctrine_ids if x]
 
-    logger.error(
-        "doctrine_rotation: variant missing from REFLECTION pool — %s (pool size %d)",
-        target,
-        len(pool),
+    def _find(tid: str) -> Optional[dict]:
+        for atom in pool:
+            if normalize_doctrine_id(str(atom.get("atom_id") or "")) == tid:
+                return atom
+        return None
+
+    if not target:
+        return _least_recently_used_atom(pool, recent)
+
+    # Intra-chapter re-pick: same doctrine shared across a chapter's slots (rule 1).
+    if target == current:
+        hit = _find(target)
+        return hit if hit is not None else _least_recently_used_atom(pool, recent)
+
+    window = spacing_window(
+        len(_distinct_pool_ids(pool)),
+        chapter_count if chapter_count is not None else len(recent) + 1,
     )
-    return None
+    # Blocked: target used within the last (window-1) chapters, or in the adjacent one.
+    blocked = set(recent[-(window - 1):]) if window > 1 else set()
+    if recent:
+        blocked.add(recent[-1])
+
+    hit = _find(target)
+    if hit is not None and target not in blocked:
+        return hit
+
+    # Fail-safe: assigned doctrine unusable — degrade to least-recently-used rather
+    # than dropping the slot (silent gap) or raising (the pre-#4673 crash).
+    if hit is None:
+        logger.warning(
+            "doctrine_rotation: assigned %s missing from pool (size %d) — LRU fallback",
+            target,
+            len(pool),
+        )
+    else:
+        logger.info(
+            "doctrine_rotation: assigned %s repeats within window %d — LRU fallback",
+            target,
+            window,
+        )
+    return _least_recently_used_atom(pool, recent)
 
 
 def is_reflection_rotation_slot(slot_type: str) -> bool:

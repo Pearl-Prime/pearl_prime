@@ -1,8 +1,13 @@
-# Doctrine rotation — per-chapter REFLECTION variant assignment (one per chapter, no repeats).
+# Doctrine rotation — per-chapter REFLECTION variant assignment (one per chapter).
 # Authority: docs/doctrine_distribution_plan.md
 # Consumer: phoenix_v4/planning/doctrine_rotation.py → enrichment_select._try_composite_content
+#
+# BOUNDED REUSE: a sequence may reuse variants when the lesson library is smaller than
+# the chapter count. The picker enforces a spacing window of min(pool_size, chapter_count)
+# chapters and never repeats in two adjacent chapters; when the library grows past the
+# chapter count the window widens back toward strict no-repeat with no config change.
 
-version: 1
+version: 2
 status: wired
 
 brand_dosage_profiles:
@@ -17,6 +22,13 @@ brand_dosage_profiles:
 
 topic_sequences:
   anxiety:
+    # Bounded-reuse cycle over the 5 authored REFLECTION variants (v01–v05 in
+    # SOURCE_OF_TRUTH/composite_doctrine/anxiety/REFLECTION/CANONICAL.txt). The curated
+    # foundational→integrative order (v03,v01,v05,v04,v02) repeats every 5 chapters, so
+    # each variant recurs exactly 5 chapters apart (window = min(5,12) = 5) and never
+    # in adjacent chapters. Previously this listed v06–v15, which do NOT exist in the
+    # pool, so chapters 6–12 were silently dropped. Grow the library later to widen the
+    # spacing back toward strict no-repeat — no code change needed.
     default_12:
       - chapter: 1
         doctrine_id: "COMPOSITE_DOCTRINE v03"
@@ -30,19 +42,19 @@ topic_sequences:
       - chapter: 5
         doctrine_id: "COMPOSITE_DOCTRINE v02"
       - chapter: 6
-        doctrine_id: "COMPOSITE_DOCTRINE v06"
+        doctrine_id: "COMPOSITE_DOCTRINE v03"
       - chapter: 7
-        doctrine_id: "COMPOSITE_DOCTRINE v07"
+        doctrine_id: "COMPOSITE_DOCTRINE v01"
       - chapter: 8
-        doctrine_id: "COMPOSITE_DOCTRINE v08"
+        doctrine_id: "COMPOSITE_DOCTRINE v05"
       - chapter: 9
-        doctrine_id: "COMPOSITE_DOCTRINE v09"
+        doctrine_id: "COMPOSITE_DOCTRINE v04"
       - chapter: 10
-        doctrine_id: "COMPOSITE_DOCTRINE v10"
+        doctrine_id: "COMPOSITE_DOCTRINE v02"
       - chapter: 11
-        doctrine_id: "COMPOSITE_DOCTRINE v11"
+        doctrine_id: "COMPOSITE_DOCTRINE v03"
       - chapter: 12
-        doctrine_id: "COMPOSITE_DOCTRINE v15"
+        doctrine_id: "COMPOSITE_DOCTRINE v01"
   burnout:
     default_12:
       - {chapter: 1, doctrine_id: "COMPOSITE_DOCTRINE v01"}

@@ -9,10 +9,10 @@ import pytest
 from phoenix_v4.planning import enrichment_select as es
 from phoenix_v4.planning.beatmap_compile import Beatmap, BeatmapChapter, BeatmapSlot
 from phoenix_v4.planning.doctrine_rotation import (
-    DoctrineRotationError,
     normalize_doctrine_id,
     pick_doctrine_atom_by_id,
     resolve_chapter_doctrine_id,
+    spacing_window,
 )
 from phoenix_v4.planning.enrichment_select import EnrichmentRequest, select_enrichment
 
@@ -83,8 +83,9 @@ def _twelve_chapter_beatmap(
     )
 
 
-# Expected gen_z × anxiety rotation (from doctrine_distribution_plan / twelve_shape plan)
-EXPECTED_ANXIETY_12 = [
+# The gen_z × anxiety 12-shape continuity PLAN still lists v06–v15 (resolution is a
+# pure config lookup, independent of what the REFLECTION pool actually holds).
+TWELVE_SHAPE_PLAN_ANXIETY = [
     "COMPOSITE_DOCTRINE v03",
     "COMPOSITE_DOCTRINE v01",
     "COMPOSITE_DOCTRINE v05",
@@ -99,9 +100,39 @@ EXPECTED_ANXIETY_12 = [
     "COMPOSITE_DOCTRINE v15",
 ]
 
+# Bounded-reuse config sequence (doctrine_rotation.yaml → topic_sequences.anxiety):
+# the 5 authored variants (v03,v01,v05,v04,v02) cycled every 5 chapters. Each recurs
+# exactly 5 chapters apart (window = min(5,12) = 5) and never in adjacent chapters.
+EXPECTED_ANXIETY_12_BOUNDED = [
+    "COMPOSITE_DOCTRINE v03",
+    "COMPOSITE_DOCTRINE v01",
+    "COMPOSITE_DOCTRINE v05",
+    "COMPOSITE_DOCTRINE v04",
+    "COMPOSITE_DOCTRINE v02",
+    "COMPOSITE_DOCTRINE v03",
+    "COMPOSITE_DOCTRINE v01",
+    "COMPOSITE_DOCTRINE v05",
+    "COMPOSITE_DOCTRINE v04",
+    "COMPOSITE_DOCTRINE v02",
+    "COMPOSITE_DOCTRINE v03",
+    "COMPOSITE_DOCTRINE v01",
+]
+
+# The 5 authored anxiety REFLECTION variants actually present in the bank (v01–v05).
+ANXIETY_POOL_VARIANTS = [3, 1, 5, 4, 2]
+
 
 def test_normalize_doctrine_id_strips_suffix() -> None:
     assert normalize_doctrine_id("COMPOSITE_DOCTRINE v03_pure") == "COMPOSITE_DOCTRINE v03"
+
+
+def test_spacing_window_formula() -> None:
+    """window = min(pool_size, chapter_count), floored at 1; widens as the pool grows."""
+    assert spacing_window(5, 12) == 5    # small pool → window == pool size
+    assert spacing_window(12, 12) == 12  # pool == chapters → strict no-repeat
+    assert spacing_window(20, 12) == 12  # pool grew past chapters → widen to chapters
+    assert spacing_window(1, 12) == 1    # degenerate pool
+    assert spacing_window(0, 0) == 1     # never below 1
 
 
 def test_resolve_from_twelve_shape_plan(tmp_path: Path) -> None:
@@ -121,7 +152,7 @@ def test_resolve_from_twelve_shape_plan(tmp_path: Path) -> None:
 
     plan = load_chapter_continuity_plan("gen_z_professionals", "anxiety", tmp_path)
     spine = {"chapter_continuity_plan": plan, "twelve_shape_continuity": True}
-    for ch0, expected in enumerate(EXPECTED_ANXIETY_12):
+    for ch0, expected in enumerate(TWELVE_SHAPE_PLAN_ANXIETY):
         got = resolve_chapter_doctrine_id(
             "anxiety",
             ch0,
@@ -132,11 +163,80 @@ def test_resolve_from_twelve_shape_plan(tmp_path: Path) -> None:
         assert got == expected, f"ch{ch0 + 1}: expected {expected}, got {got}"
 
 
-def test_pick_doctrine_atom_blocks_repeat() -> None:
+def test_pick_doctrine_atom_blocks_adjacent_repeat() -> None:
+    """Bounded reuse: an ADJACENT repeat is never assigned — degrade to LRU, no crash.
+
+    The prior chapter used v01; asking for v01 again must NOT return v01 and must NOT
+    raise (fail-safe) — it degrades to the least-recently-used pool atom (v02, unused).
+    """
     pool = [_reflection_atom(1, "a"), _reflection_atom(2, "b")]
-    used = {"COMPOSITE_DOCTRINE v01"}
-    with pytest.raises(DoctrineRotationError):
-        pick_doctrine_atom_by_id(pool, "COMPOSITE_DOCTRINE v01", used_doctrine_ids=used)
+    atom = pick_doctrine_atom_by_id(
+        pool,
+        "COMPOSITE_DOCTRINE v01",
+        recent_doctrine_ids=["COMPOSITE_DOCTRINE v01"],  # prior (adjacent) chapter
+        chapter_count=2,
+    )
+    assert atom is not None  # never crashes / returns None on a non-empty pool
+    assert normalize_doctrine_id(atom["atom_id"]) == "COMPOSITE_DOCTRINE v02"
+
+
+def test_pick_doctrine_atom_allows_spaced_reuse() -> None:
+    """Bounded reuse: a repeat AT OR BEYOND the spacing window is allowed.
+
+    Pool of 5 variants over 12 chapters → window = min(5, 12) = 5. A v01 last used
+    5 chapters ago (gap == window) may be reassigned.
+    """
+    pool = [_reflection_atom(v, f"body{v}") for v in (1, 2, 3, 4, 5)]
+    # v01 used at the oldest of 5 prior chapters → exactly `window` chapters back.
+    recent = [
+        "COMPOSITE_DOCTRINE v01",
+        "COMPOSITE_DOCTRINE v02",
+        "COMPOSITE_DOCTRINE v03",
+        "COMPOSITE_DOCTRINE v04",
+        "COMPOSITE_DOCTRINE v05",
+    ]
+    atom = pick_doctrine_atom_by_id(
+        pool,
+        "COMPOSITE_DOCTRINE v01",
+        recent_doctrine_ids=recent,
+        chapter_count=12,
+    )
+    assert atom is not None
+    assert normalize_doctrine_id(atom["atom_id"]) == "COMPOSITE_DOCTRINE v01"
+
+
+def test_pick_doctrine_atom_blocks_within_window_repeat() -> None:
+    """A repeat CLOSER than the spacing window is blocked → LRU fallback, no crash."""
+    pool = [_reflection_atom(v, f"body{v}") for v in (1, 2, 3, 4, 5)]
+    # window = 5; v05 was used 2 chapters ago (gap 2 < 5) → must not be reassigned.
+    recent = [
+        "COMPOSITE_DOCTRINE v01",
+        "COMPOSITE_DOCTRINE v02",
+        "COMPOSITE_DOCTRINE v03",
+        "COMPOSITE_DOCTRINE v05",
+        "COMPOSITE_DOCTRINE v04",
+    ]
+    atom = pick_doctrine_atom_by_id(
+        pool,
+        "COMPOSITE_DOCTRINE v05",
+        recent_doctrine_ids=recent,
+        chapter_count=12,
+    )
+    assert atom is not None
+    assert normalize_doctrine_id(atom["atom_id"]) != "COMPOSITE_DOCTRINE v05"
+
+
+def test_pick_doctrine_atom_missing_variant_degrades_to_lru() -> None:
+    """Fail-safe: an assigned variant absent from the pool degrades to LRU, never None."""
+    pool = [_reflection_atom(v, f"body{v}") for v in (1, 2, 3, 4, 5)]
+    atom = pick_doctrine_atom_by_id(
+        pool,
+        "COMPOSITE_DOCTRINE v15",  # not in the pool
+        recent_doctrine_ids=["COMPOSITE_DOCTRINE v01"],
+        chapter_count=12,
+    )
+    assert atom is not None
+    assert normalize_doctrine_id(atom["atom_id"]) != "COMPOSITE_DOCTRINE v01"  # LRU, not adjacent
 
 
 def test_pick_doctrine_atom_allows_intra_chapter_repick() -> None:
@@ -158,22 +258,30 @@ def test_pick_doctrine_atom_allows_intra_chapter_repick() -> None:
     assert normalize_doctrine_id(atom["atom_id"]) == "COMPOSITE_DOCTRINE v03"
 
 
-def test_pick_doctrine_atom_still_blocks_cross_chapter_repeat() -> None:
-    """A doctrine used by a PRIOR chapter is still a fail-closed violation (#4672 rule 2)."""
+def test_pick_doctrine_atom_legacy_set_is_conservative() -> None:
+    """Backward-compat: a legacy unordered `used_doctrine_ids` set (no recency) is
+    treated conservatively — every prior id counts as within-window, so a repeat
+    degrades to LRU rather than being reassigned (and still never raises)."""
     pool = [_reflection_atom(1, "a"), _reflection_atom(3, "b")]
-    with pytest.raises(DoctrineRotationError):
-        pick_doctrine_atom_by_id(
-            pool,
-            "COMPOSITE_DOCTRINE v01",  # prior chapter used v01
-            used_doctrine_ids={"COMPOSITE_DOCTRINE v01"},
-            current_chapter_doctrine_id="COMPOSITE_DOCTRINE v03",  # this chapter is v03
-        )
+    atom = pick_doctrine_atom_by_id(
+        pool,
+        "COMPOSITE_DOCTRINE v01",  # prior chapter used v01
+        used_doctrine_ids={"COMPOSITE_DOCTRINE v01"},
+        current_chapter_doctrine_id="COMPOSITE_DOCTRINE v03",  # this chapter is v03
+    )
+    assert atom is not None
+    assert normalize_doctrine_id(atom["atom_id"]) == "COMPOSITE_DOCTRINE v03"
 
 
 def _stage_anxiety_rotation_fixtures(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
-    """Copy the real anxiety rotation config + 12-shape plan + a REFLECTION bank into tmp."""
+    """Copy the real anxiety rotation config + 12-shape plan + a REFLECTION bank into tmp.
+
+    The REFLECTION bank holds only the 5 authored variants (v01–v05) — matching the
+    real SOURCE_OF_TRUTH bank — so the build exercises bounded reuse over a pool that
+    is smaller than the 12-chapter book.
+    """
     topic = "anxiety"
-    variant_nums = [3, 1, 5, 4, 2, 6, 7, 8, 9, 10, 11, 15]
+    variant_nums = ANXIETY_POOL_VARIANTS  # [3, 1, 5, 4, 2] → the 5 real v01–v05 atoms
     bodies = [(v, f"Doctrine body for variant v{v:02d} with enough words to pass gate.") for v in variant_nums]
     _write_reflection_bank(
         tmp_path / "SOURCE_OF_TRUTH" / "composite_doctrine" / topic / "REFLECTION" / "CANONICAL.txt",
@@ -207,10 +315,15 @@ def _stage_anxiety_rotation_fixtures(tmp_path: Path, monkeypatch: pytest.MonkeyP
     )
 
 
-def test_twelve_chapter_gen_z_anxiety_distinct_doctrines(
+def test_twelve_chapter_gen_z_anxiety_bounded_reuse_fills_all(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    """12-chapter gen_z×anxiety: 12 distinct doctrines in planned order, zero repeats."""
+    """12-chapter gen_z×anxiety over a 5-variant pool: EVERY chapter gets a doctrine.
+
+    Bounded reuse — the 5 authored variants (v01–v05) cover all 12 chapters via a
+    spaced cycle. Previously chapters 6–12 (assigned v06–v15, absent from the pool)
+    were silently dropped. Now: no silent drops, no crash, spaced repeats only.
+    """
     topic = "anxiety"
     _stage_anxiety_rotation_fixtures(tmp_path, monkeypatch)
 
@@ -228,32 +341,38 @@ def test_twelve_chapter_gen_z_anxiety_distinct_doctrines(
     picked_ids: List[str] = []
     for ch in book.chapters:
         slot = ch.slots[0]
+        # No silent drops: EVERY chapter's REFLECTION slot carries composite doctrine.
         assert "composite_doctrine" in slot.source, f"ch{ch.number} expected composite, got {slot.source}"
         aid = slot.source_id or ""
         picked_ids.append(normalize_doctrine_id(aid))
 
-    assert picked_ids == EXPECTED_ANXIETY_12
-    assert len(set(picked_ids)) == 12, f"repeat detected: {picked_ids}"
+    # All 12 chapters filled from the 5-variant pool, in the spaced-cycle order.
+    assert len(picked_ids) == 12
+    assert picked_ids == EXPECTED_ANXIETY_12_BOUNDED
+    # Every assigned variant exists in the 5-variant pool (no phantom v06–v15).
+    pool_ids = {f"COMPOSITE_DOCTRINE v{v:02d}" for v in ANXIETY_POOL_VARIANTS}
+    assert set(picked_ids) <= pool_ids, f"assigned a variant outside the pool: {set(picked_ids) - pool_ids}"
+    # Bounded reuse: 5 distinct lessons, and no lesson repeats in adjacent chapters.
+    assert len(set(picked_ids)) == len(ANXIETY_POOL_VARIANTS)
+    assert all(a != b for a, b in zip(picked_ids, picked_ids[1:])), f"adjacent repeat: {picked_ids}"
 
 
 def test_multi_reflection_chapter_no_crash_shares_doctrine(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    """Regression (multi-reflection crash, #4672 follow-up).
+    """Regression (multi-reflection crash, #4672/#4673 follow-up) under bounded reuse.
 
     A deep/standard template (deep_book_6h) has TWO REFLECTION slots per chapter.
-    Before the fix, the rotation guard resolved the SAME per-chapter doctrine for
-    both slots and fail-closed on the second slot as if it were a cross-chapter
-    repeat (DoctrineRotationError → uncaught sys.exit(1) at ch1). This asserts:
+    This asserts:
 
-      1. the 12-chapter build completes (no DoctrineRotationError);
+      1. the 12-chapter build completes (no crash, no DoctrineRotationError);
       2. both REFLECTION slots in a chapter SHARE that chapter's one doctrine
          (doctrine_distribution_plan rule 1);
-      3. cross-chapter doctrines are still all distinct (#4672 rule 2 intact).
+      3. every chapter is filled from the 5-variant pool via the spaced cycle, and
+         no lesson repeats in adjacent chapters (bounded reuse).
 
-    Both directions are guarded — compact (1-reflection) is covered by
-    ``test_twelve_chapter_gen_z_anxiety_distinct_doctrines``; the cross-chapter
-    fail-closed itself by ``test_pick_doctrine_atom_still_blocks_cross_chapter_repeat``.
+    The compact (1-reflection) shape is covered by
+    ``test_twelve_chapter_gen_z_anxiety_bounded_reuse_fills_all``.
     """
     topic = "anxiety"
     _stage_anxiety_rotation_fixtures(tmp_path, monkeypatch)
@@ -288,7 +407,11 @@ def test_multi_reflection_chapter_no_crash_shares_doctrine(
         )
         chapter_doctrines.append(slot_ids[0])
 
-    # planned foundational→integrative order, unchanged by the multi-slot shape
-    assert chapter_doctrines == EXPECTED_ANXIETY_12
-    # (3) cross-chapter no-repeat still holds
-    assert len(set(chapter_doctrines)) == 12, f"cross-chapter repeat: {chapter_doctrines}"
+    # planned spaced-cycle order, unchanged by the multi-slot shape
+    assert chapter_doctrines == EXPECTED_ANXIETY_12_BOUNDED
+    # (3) bounded reuse: every chapter filled from the 5-variant pool, no adjacent repeat
+    pool_ids = {f"COMPOSITE_DOCTRINE v{v:02d}" for v in ANXIETY_POOL_VARIANTS}
+    assert set(chapter_doctrines) <= pool_ids
+    assert all(a != b for a, b in zip(chapter_doctrines, chapter_doctrines[1:])), (
+        f"adjacent repeat: {chapter_doctrines}"
+    )

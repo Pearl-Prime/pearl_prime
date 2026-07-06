@@ -840,6 +840,8 @@ def _try_composite_content(
     chapter_index0: int = 0,
     spine_context: Optional[Dict[str, Any]] = None,
     used_doctrine_ids: Optional[set[str]] = None,
+    recent_doctrine_ids: Optional[List[str]] = None,
+    chapter_count: Optional[int] = None,
     repo_root: Optional[Path] = None,
 ) -> Optional[Tuple[str, str, int, Dict[str, Any]]]:
     """Regular mode: topic composite doctrine/reflection before persona pool."""
@@ -874,19 +876,27 @@ def _try_composite_content(
         # rule 1). Passing it as current_chapter_doctrine_id lets the guard tell an
         # intra-chapter re-pick (multi-REFLECTION templates like deep_book_6h resolve
         # the same doctrine for each REFLECTION slot — allowed) apart from a genuine
-        # cross-chapter repeat (still fail-closed, preserving #4672 rule 2 / gate 26).
+        # cross-chapter repeat. Under bounded reuse the guard permits SPACED repeats
+        # (window = min(pool_size, chapter_count)) and, when the assigned variant is
+        # missing or would repeat too soon, degrades to a least-recently-used pool
+        # atom — never dropping the slot (silent gap) or raising (the pre-#4673 crash).
         atom = pick_doctrine_atom_by_id(
             pool,
             assigned,
             used_doctrine_ids=used_doctrine_ids,
             current_chapter_doctrine_id=assigned,
+            recent_doctrine_ids=recent_doctrine_ids,
+            chapter_count=chapter_count,
         )
         if not atom:
             return None
         content = str(atom.get("content") or "").strip()
         if not content:
             return None
+        # Use the RETURNED atom's id — an LRU fallback may hand back a different
+        # variant than `assigned`, so key aid/idx off what was actually picked.
         aid = str(atom.get("atom_id") or assigned)
+        picked_norm = normalize_doctrine_id(aid)
         logger.info(
             "doctrine_rotation: ch%s topic=%s assigned=%s atom=%s",
             chapter_index0 + 1,
@@ -895,7 +905,7 @@ def _try_composite_content(
             aid,
         )
         idx = next(
-            (i for i, a in enumerate(pool) if normalize_doctrine_id(str(a.get("atom_id") or "")) == normalize_doctrine_id(assigned)),
+            (i for i, a in enumerate(pool) if normalize_doctrine_id(str(a.get("atom_id") or "")) == picked_norm),
             0,
         )
         return content, aid, idx, dict(atom.get("metadata") or {})
@@ -2127,6 +2137,12 @@ def select_enrichment(
     _book_seen_bodies = _SeenBodies()
     _book_used_hooks: set[str] = set()
     _book_used_doctrine_ids: set[str] = set()
+    # Bounded-reuse doctrine rotation: ORDERED per-chapter doctrine history (keyed by
+    # chapter_index0) so the picker can enforce a spacing window instead of the old
+    # unordered no-repeat set. Keyed per chapter — multi-REFLECTION slots re-stamp the
+    # same chapter's doctrine, they do not extend the history.
+    _book_doctrine_by_chapter: Dict[int, str] = {}
+    _book_chapter_count = len(bm.chapters) if getattr(bm, "chapters", None) else 12
     _identity_contract = None
     try:
         from phoenix_v4.planning.book_identity_contract import load_book_identity_contract
@@ -2381,6 +2397,14 @@ def select_enrichment(
                             chapter_index0=chapter_index0,
                             spine_context=plan_context,
                             used_doctrine_ids=_book_used_doctrine_ids,
+                            # Ordered prior-chapter doctrines (oldest→newest) for the
+                            # bounded-reuse spacing window; excludes this chapter.
+                            recent_doctrine_ids=[
+                                _book_doctrine_by_chapter[_c]
+                                for _c in sorted(_book_doctrine_by_chapter)
+                                if _c < chapter_index0
+                            ],
+                            chapter_count=_book_chapter_count,
                             repo_root=root,
                         )
                         if _cx_hit:
@@ -2412,9 +2436,12 @@ def select_enrichment(
                             _composite_filled = True
                             _chapter_composite_doctrine = True
                             if is_reflection_rotation_slot(stype):
-                                _book_used_doctrine_ids.add(
-                                    normalize_doctrine_id(_cx_hit[1])
-                                )
+                                _picked_norm = normalize_doctrine_id(_cx_hit[1])
+                                _book_used_doctrine_ids.add(_picked_norm)
+                                # Record THIS chapter's doctrine once (idempotent across
+                                # its multi-REFLECTION slots) so later chapters see an
+                                # ordered recency history for the spacing window.
+                                _book_doctrine_by_chapter[chapter_index0] = _picked_norm
                             audit_counts["slots_from_composite"] = (
                                 audit_counts.get("slots_from_composite", 0) + 1
                             )
