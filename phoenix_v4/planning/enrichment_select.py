@@ -49,6 +49,7 @@ from phoenix_v4.planning.chapter_object_continuity import (
     chapter_context_from_spine,
     continuity_bank_empty,
     filter_connective_pool,
+    filter_persona_pool_one_character,
     is_twelve_shape_continuity_active,
     load_chapter_continuity_plan,
 )
@@ -1390,20 +1391,44 @@ def _try_angle_callback(
                         f"ANGLE_CALLBACK: family default {fam!r} L{layer}"
                     )
                     return body, "angle_atom_family", f"angle_cb_family:{fam}:L{layer}"
-    prior, phase = "", ""
-    for row in meta["layer_progression"]:
-        if isinstance(row, dict) and int(row.get("layer") or 0) == layer:
-            phase = str(row.get("phase") or "")
-        if isinstance(row, dict) and int(row.get("layer") or 0) == layer - 1:
-            prior = str(row.get("assertion") or "")
-    fb = (_load_angle_journey_fallback().get("generic") or {}).get("angle_callback") or ""
-    tpl = str(fb).format(
-        layer=layer,
-        phase=phase or f"layer_{layer}",
-        prior_assertion=prior or "(opening definition)",
-    ).strip()
-    fallback_warnings.append(f"ANGLE_CALLBACK: planner-template fallback L{layer} for {aid!r}")
-    return tpl, "angle_template", f"angle_cb_tpl:{aid}:L{layer}"
+    from phoenix_v4.planning.angle_resolver import load_angle_registry
+
+    reg = load_angle_registry()
+    chain: list[str] = []
+    seen: set[str] = set()
+    current: Optional[str] = aid
+    while current and current not in seen:
+        chain.append(current)
+        seen.add(current)
+        entry = (reg.get("angles") or {}).get(current) or {}
+        parent = str(entry.get("parent_universal") or "").strip()
+        current = parent or None
+    for candidate in chain:
+        if candidate == aid:
+            continue
+        parent_path = (
+            repo_root
+            / "atoms"
+            / persona_id
+            / topic_id
+            / "ANGLE_CALLBACK"
+            / candidate
+            / f"level_{layer}.yaml"
+        )
+        if not parent_path.exists():
+            continue
+        data = _load_yaml(parent_path)
+        if isinstance(data, dict):
+            body = str(data.get("body") or data.get("content") or "").strip()
+            if body:
+                fallback_warnings.append(
+                    f"ANGLE_CALLBACK: parent chain {candidate!r} L{layer} for {aid!r}"
+                )
+                return body, "angle_atom_parent", f"angle_cb_parent:{candidate}:L{layer}"
+    fallback_warnings.append(
+        f"ANGLE_CALLBACK: no authored atom L{layer} for {aid!r}; fail-closed"
+    )
+    return None
 
 
 def _pick_persona_atom_by_id(pool: list[dict], atom_id: str) -> Optional[dict]:
@@ -2303,6 +2328,11 @@ def select_enrichment(
                         content, source, source_id = _ac[0], _ac[1], _ac[2]
                         atom_id = source_id
                         match_scores["angle_layer"] = int(_layer)
+                    elif is_twelve_shape_continuity_active(plan_context):
+                        content = f"[BANK EMPTY: ANGLE_CALLBACK ch{bm_ch.number}]"
+                        source = "continuity_bank_empty"
+                        source_id = "EMPTY"
+                        atom_id = "EMPTY"
 
             # 0) Story schedule: named-character arcs replace SCENE/STORY slots at section indices 2/5/9.
             # section_index is 1-based. StorySchedule keys: (chapter_number, section_index).
@@ -2358,7 +2388,7 @@ def select_enrichment(
                             _cont_ex_ctx.exercise_id,
                             chapter_index0,
                             seed,
-                            content_only=True,
+                            content_only=(chapter_index0 == 0),
                         )
                         if _pl_by_id:
                             _add_pieces.append(_pl_by_id[0])
@@ -2553,6 +2583,12 @@ def select_enrichment(
                             book_frame=_frame,
                         )
                     ]
+                    if is_twelve_shape_continuity_active(plan_context):
+                        _twelve_ctx = chapter_context_from_spine(plan_context, chapter_index0)
+                        if _twelve_ctx and _twelve_ctx.character:
+                            _ap_pool = filter_persona_pool_one_character(
+                                _ap_pool, _twelve_ctx.character, forbidden=_twelve_ctx.forbidden_names
+                            )
                     _continuity_gap_filled = False
                     if (
                         is_twelve_shape_continuity_active(plan_context)

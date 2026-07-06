@@ -183,11 +183,15 @@ def compose_exercise(
     if isinstance(components, dict) and components.get("bridge"):
         # Components may be strings or dicts with full/lean variants
         bridge = _get_text(components["bridge"])
-        # OPD-113: prefer ab_tady-provided introduction, else template lookup
+        # OPD-113: prefer ab_tady-provided introduction, else template lookup.
+        # When the library already carries a composed intro layer, skip the generic
+        # "Now we're going to do a practice" glue — ch1 pilot keeps content_only.
         intro_from_data = _get_text(components.get("introduction", ""))
+        intro = _get_text(components.get("intro", ""))
         if intro_from_data:
             introduction = intro_from_data
-        intro = _get_text(components.get("intro", ""))
+        elif intro:
+            introduction = ""
         aha = _get_text(components.get("aha", ""))
         integration = _get_text(components.get("integration", ""))
         return "\n\n".join(

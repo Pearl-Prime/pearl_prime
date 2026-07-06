@@ -569,6 +569,18 @@ def _f1_sig_jaccard(a: frozenset, b: frozenset) -> float:
     return (len(a & b) / u) if u else 0.0
 
 
+# Five-layer practice_library component paragraphs (intro/aha/integration) repeat
+# verbatim across med_009–med_024; book-wide dedupe must not strip them from ch2+.
+_PRACTICE_LIBRARY_LAYER_LEAD_RE = re.compile(
+    r"^(?:Now,\s*notice|Before you move on|This is .+\.\s+(?:Not to empty your mind|One thing to focus|Your breath is always))",
+    re.I,
+)
+
+
+def _is_practice_library_layer_paragraph(stripped: str) -> bool:
+    return bool(_PRACTICE_LIBRARY_LAYER_LEAD_RE.match((stripped or "").strip()))
+
+
 def _dedup_paragraphs_book_wide(
     text: str,
     min_words: int = 30,
@@ -627,6 +639,9 @@ def _dedup_paragraphs_book_wide(
             continue
         # Always keep chapter headings so chapter structure survives the pass.
         if re.match(r"^Chapter\s+\d+", stripped, re.IGNORECASE):
+            kept.append(stripped)
+            continue
+        if _is_practice_library_layer_paragraph(stripped):
             kept.append(stripped)
             continue
         wc = len(stripped.split())

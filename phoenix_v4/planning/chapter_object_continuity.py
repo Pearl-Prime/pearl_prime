@@ -23,6 +23,22 @@ CONTINUITY_CONNECTIVE_SLOTS = frozenset(
     {"HOOK", "SCENE", "PIVOT", "INTEGRATION", "TAKEAWAY", "THREAD"}
 )
 
+# Book-wide one-character guard: depth/persona fills may deepen the anchored
+# character but must not introduce any other named character in twelve_shape builds.
+FLAGSHIP_FORBIDDEN_NAMES: tuple[str, ...] = (
+    "Hana",
+    "Min",
+    "Yuki",
+    "Jordan",
+    "Marcus",
+    "Suki",
+    "Devon",
+    "Leo",
+    "Nia",
+    "Alex",
+    "Sam",
+)
+
 _OBJECT_ALIASES: dict[str, tuple[str, ...]] = {
     "after_send_reply_anxiety": (
         "after-send",
@@ -90,7 +106,7 @@ class ChapterContinuityContext:
     angle_id: str = ""
     practice_target: str = ""
     doctrine_target: str = ""
-    forbidden_names: tuple[str, ...] = ("Hana", "Min", "Yuki")
+    forbidden_names: tuple[str, ...] = FLAGSHIP_FORBIDDEN_NAMES
     expected_doctrine_snippet: str = ""
 
 
@@ -189,6 +205,42 @@ def _object_matches(atom_object: str, chapter_object: str) -> bool:
     return any(a.lower() in combined for a in aliases)
 
 
+def forbidden_characters_in_text(
+    text: str,
+    anchored: str,
+    *,
+    forbidden: tuple[str, ...] | None = None,
+) -> list[str]:
+    """Return forbidden character names present in prose (excluding the anchor)."""
+    names = forbidden or FLAGSHIP_FORBIDDEN_NAMES
+    anchored_clean = (anchored or "").strip()
+    hits: list[str] = []
+    for name in names:
+        if name == anchored_clean:
+            continue
+        if re.search(rf"\b{re.escape(name)}\b", text or ""):
+            hits.append(name)
+    return hits
+
+
+def filter_persona_pool_one_character(
+    pool: list[dict],
+    anchored: str,
+    *,
+    forbidden: tuple[str, ...] | None = None,
+) -> list[dict]:
+    """Drop persona atoms that introduce a named character other than the anchor."""
+    if not anchored:
+        return pool
+    out: list[dict] = []
+    for atom in pool:
+        content = str(atom.get("content") or "")
+        if forbidden_characters_in_text(content, anchored, forbidden=forbidden):
+            continue
+        out.append(atom)
+    return out
+
+
 def filter_connective_pool(
     pool: list[dict],
     slot: str,
@@ -220,7 +272,7 @@ def filter_connective_pool(
             if ch:
                 continue
             out.append(atom)
-    return out
+    return filter_persona_pool_one_character(out, ctx.character, forbidden=ctx.forbidden_names)
 
 
 def continuity_bank_empty(slot: str, ctx: ChapterContinuityContext) -> str:
