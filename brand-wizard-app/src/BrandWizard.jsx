@@ -3675,6 +3675,15 @@ export default function BrandWizard() {
     const params = new URLSearchParams(window.location.search);
     const urlTeacher = params.get("teacher");
     const urlMode = params.get("mode");
+    // Seed the onboarding market from the entry-screen hand-in (?market=hungary) or a
+    // persisted lane, so a localized wizard lands the signup in the correct catalog
+    // lane instead of defaulting to US. brandMatch.LANE_FROM_MARKET accepts these tokens.
+    let seededMarket = params.get("market");
+    if (!seededMarket) { try { seededMarket = localStorage.getItem("phoenix_onboarding_market") || localStorage.getItem("phoenix_lane"); } catch (_) {} }
+    if (seededMarket) {
+      const norm = String(seededMarket).toLowerCase().replace(/[\s-]+/g, "_");
+      update({ onboardingMarket: norm });
+    }
     if (urlTeacher || urlMode === "composite" || urlMode === "music") { setPhase("wizard"); setStep(0); scrollTop(); }
   }, []);
 

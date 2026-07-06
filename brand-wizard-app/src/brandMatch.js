@@ -10,6 +10,7 @@
 // arch (archetype), tp (primary topics), f (focus), tr (tradition), lane.
 
 export const LANE_FROM_MARKET = {
+  // country / short-code words
   us: "en_us", usa: "en_us", united_states: "en_us",
   japan: "ja_jp", jp: "ja_jp",
   taiwan: "zh_tw", tw: "zh_tw",
@@ -19,7 +20,16 @@ export const LANE_FROM_MARKET = {
   korea: "ko_kr", kr: "ko_kr",
   brazil: "pt_br", br: "pt_br",
   spain: "es_es", es: "es_es",
-  mexico: "es_us",
+  mexico: "es_us", us_hispanic: "es_us",
+  france: "fr_fr", fr: "fr_fr",
+  germany: "de_de", de: "de_de",
+  italy: "it_it", it: "it_it",
+  hungary: "hu_hu", hu: "hu_hu",
+  // explicit lane codes pass through unchanged (entry screen hands in fr_fr etc.)
+  en_us: "en_us", ja_jp: "ja_jp", ko_kr: "ko_kr",
+  zh_tw: "zh_tw", zh_cn: "zh_cn", zh_hk: "zh_hk", zh_sg: "zh_sg",
+  es_us: "es_us", es_es: "es_es", fr_fr: "fr_fr", de_de: "de_de",
+  it_it: "it_it", hu_hu: "hu_hu", pt_br: "pt_br",
 };
 
 function norm(s) {

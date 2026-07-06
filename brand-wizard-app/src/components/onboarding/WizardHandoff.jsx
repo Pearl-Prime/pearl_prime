@@ -1,14 +1,40 @@
-const WIZARD_BY_MARKET = {
-  us: "/wizard.html",
-  jp: "/wizard-ja.html",
-  tw: "/wizard-tw.html",
-  cn: "/wizard-zh.html",
-  kr: "/wizard.html",
+// Map any market/lane token → the correct localized Brand Wizard URL.
+// jp/tw/cn keep their dedicated forked builds (extra locale guards); every other
+// market rides the generic wizard.html with an explicit ?lang= so nothing lands
+// on US-English copy by accident.
+const norm = (s) => String(s || "").toLowerCase().replace(/[\s-]+/g, "_");
+
+const DEDICATED = {
+  jp: "/wizard-ja.html", japan: "/wizard-ja.html", ja_jp: "/wizard-ja.html",
+  tw: "/wizard-tw.html", taiwan: "/wizard-tw.html", zh_tw: "/wizard-tw.html",
+  cn: "/wizard-zh.html", china: "/wizard-zh.html", zh_cn: "/wizard-zh.html",
 };
 
+// market token → generic-wizard ?lang= key
+const LANG_BY_MARKET = {
+  us: "en", usa: "en", en_us: "en",
+  kr: "ko", korea: "ko", ko_kr: "ko",
+  hk: "tw", hong_kong: "tw", zh_hk: "tw",
+  sg: "zh", singapore: "zh", zh_sg: "zh",
+  mexico: "es", es_us: "es", latam: "es",
+  spain: "es_es", es_es: "es_es",
+  france: "fr", fr_fr: "fr",
+  germany: "de", de_de: "de",
+  italy: "it", it_it: "it",
+  hungary: "hu", hu_hu: "hu",
+  brazil: "pt", br: "pt", pt_br: "pt",
+};
+
+function wizardHref(market) {
+  const key = norm(market);
+  const dedicated = DEDICATED[key];
+  if (dedicated) return `${dedicated}?mode=composite&market=${encodeURIComponent(market)}`;
+  const lang = LANG_BY_MARKET[key] || "en";
+  return `/wizard.html?lang=${lang}&mode=composite&market=${encodeURIComponent(market)}`;
+}
+
 export default function WizardHandoff({ market = "us" }) {
-  const wizardPath = WIZARD_BY_MARKET[market] || "/wizard.html";
-  const href = `${wizardPath}?mode=composite&market=${encodeURIComponent(market)}`;
+  const href = wizardHref(market);
 
   const persistMarket = () => {
     try {
