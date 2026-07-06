@@ -1,6 +1,7 @@
 # 12-shape chapter continuity plan — gen_z_professionals × anxiety
 # Authority: docs/12SHAPE_CONTINUITY_WIRING.md + doctrine_distribution_plan.md
-plan_id: gen_z_professionals_anxiety_twelve_shape_v1
+# Bounded-reuse doctrine cycle (v01–v05 pool); one anchored character (Priya) per chapter.
+plan_id: gen_z_professionals_anxiety_twelve_shape_v2
 persona: gen_z_professionals
 topic: anxiety
 engine: overwhelm
@@ -12,58 +13,80 @@ chapters:
     character: Priya
     object: after_send_reply_anxiety
     angle_id: PROTECTIVE_ALARM
-    doctrine_id: "COMPOSITE_DOCTRINE v03_pure"
+    doctrine_id: "COMPOSITE_DOCTRINE v03"
     exercise_id: med_007
     practice_target: noting
     doctrine_target: sensation_vs_story
     expected_doctrine_snippet: "small space between the sensation and the story"
+    connective_picks:
+      TAKEAWAY: "TAKEAWAY v19"
+      INTEGRATION: "INTEGRATION v26"
+      THREAD: "THREAD v13"
   - chapter: 2
     title: "Two Minutes Before the Spiral"
-    character: Jordan
+    character: Priya
     object: morning_calendar_spiral
     doctrine_id: "COMPOSITE_DOCTRINE v01"
     exercise_id: med_009
-    expected_doctrine_snippet: "Anxiety is information, not defect"
+    expected_doctrine_snippet: "weather of the body is not the climate"
   - chapter: 3
     title: "Your Body Has Been Keeping Score"
-    character: Jordan
+    character: Priya
     object: chronic_somatic_tension
     doctrine_id: "COMPOSITE_DOCTRINE v05"
     exercise_id: med_015
     expected_doctrine_snippet: "pattern that protected you once"
   - chapter: 4
-    character: Marcus
+    title: "The Nervous System You Were Never Taught About"
+    character: Priya
     object: pre_presentation_activation
     doctrine_id: "COMPOSITE_DOCTRINE v04"
+    exercise_id: med_016
   - chapter: 5
-    character: Marcus
+    title: "Other People's Urgency Is Not Your Emergency"
+    character: Priya
     object: inherited_workplace_panic
     doctrine_id: "COMPOSITE_DOCTRINE v02"
+    exercise_id: med_017
   - chapter: 6
-    character: Jordan
+    title: "The Meeting Is Over But Your Brain Hasn't Left"
+    character: Priya
     object: post_meeting_rumination
-    doctrine_id: "COMPOSITE_DOCTRINE v06"
+    doctrine_id: "COMPOSITE_DOCTRINE v03"
+    exercise_id: med_018
   - chapter: 7
+    title: "The Catastrophe That Hasn't Happened Yet"
     character: Priya
     object: career_catastrophizing_spiral
-    doctrine_id: "COMPOSITE_DOCTRINE v07"
+    doctrine_id: "COMPOSITE_DOCTRINE v01"
+    exercise_id: med_019
   - chapter: 8
-    character: Jordan
+    title: "The Invisible Habits Keeping You Wired"
+    character: Priya
     object: morning_phone_cortisol_loop
-    doctrine_id: "COMPOSITE_DOCTRINE v08"
+    doctrine_id: "COMPOSITE_DOCTRINE v05"
+    exercise_id: med_020
   - chapter: 9
-    character: Marcus
+    title: "Building Something That Actually Sticks"
+    character: Priya
     object: abandoned_wellness_app_cycle
-    doctrine_id: "COMPOSITE_DOCTRINE v09"
+    doctrine_id: "COMPOSITE_DOCTRINE v04"
+    exercise_id: med_021
   - chapter: 10
-    character: Jordan
+    title: "Sustainable Regulation Across Time"
+    character: Priya
     object: job_change_practice_disruption
-    doctrine_id: "COMPOSITE_DOCTRINE v10"
+    doctrine_id: "COMPOSITE_DOCTRINE v02"
+    exercise_id: med_022
   - chapter: 11
+    title: "When It Gets Serious: Crisis Tools"
     character: Priya
     object: workplace_panic_response
-    doctrine_id: "COMPOSITE_DOCTRINE v11"
+    doctrine_id: "COMPOSITE_DOCTRINE v03"
+    exercise_id: med_023
   - chapter: 12
-    character: Jordan
+    title: "Who You Are Without the Overwhelm"
+    character: Priya
     object: regulated_tuesday_afternoon
-    doctrine_id: "COMPOSITE_DOCTRINE v15"
+    doctrine_id: "COMPOSITE_DOCTRINE v01"
+    exercise_id: med_024

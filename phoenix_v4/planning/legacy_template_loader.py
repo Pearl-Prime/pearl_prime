@@ -73,7 +73,15 @@ def resolve_template_library(
     """
     Returns template library name for topic × persona × format.
     Always returns a string. Falls back to 'spine_only' on any miss.
+    Cells with a twelve_shape continuity plan route to spine_only (promise_engine spine).
     """
+    try:
+        from phoenix_v4.planning.chapter_object_continuity import load_chapter_continuity_plan
+
+        if load_chapter_continuity_plan(persona, topic):
+            return "spine_only"
+    except ImportError:
+        pass
     try:
         import yaml as _yaml
     except ImportError:

@@ -83,21 +83,20 @@ def _twelve_chapter_beatmap(
     )
 
 
-# The gen_z × anxiety 12-shape continuity PLAN still lists v06–v15 (resolution is a
-# pure config lookup, independent of what the REFLECTION pool actually holds).
+# gen_z × anxiety 12-shape continuity plan (bounded v01–v05 pool per doctrine_rotation).
 TWELVE_SHAPE_PLAN_ANXIETY = [
     "COMPOSITE_DOCTRINE v03",
     "COMPOSITE_DOCTRINE v01",
     "COMPOSITE_DOCTRINE v05",
     "COMPOSITE_DOCTRINE v04",
     "COMPOSITE_DOCTRINE v02",
-    "COMPOSITE_DOCTRINE v06",
-    "COMPOSITE_DOCTRINE v07",
-    "COMPOSITE_DOCTRINE v08",
-    "COMPOSITE_DOCTRINE v09",
-    "COMPOSITE_DOCTRINE v10",
-    "COMPOSITE_DOCTRINE v11",
-    "COMPOSITE_DOCTRINE v15",
+    "COMPOSITE_DOCTRINE v03",
+    "COMPOSITE_DOCTRINE v01",
+    "COMPOSITE_DOCTRINE v05",
+    "COMPOSITE_DOCTRINE v04",
+    "COMPOSITE_DOCTRINE v02",
+    "COMPOSITE_DOCTRINE v03",
+    "COMPOSITE_DOCTRINE v01",
 ]
 
 # Bounded-reuse config sequence (doctrine_rotation.yaml → topic_sequences.anxiety):
@@ -122,8 +121,9 @@ EXPECTED_ANXIETY_12_BOUNDED = [
 ANXIETY_POOL_VARIANTS = [3, 1, 5, 4, 2]
 
 
-def test_normalize_doctrine_id_strips_suffix() -> None:
-    assert normalize_doctrine_id("COMPOSITE_DOCTRINE v03_pure") == "COMPOSITE_DOCTRINE v03"
+def test_normalize_doctrine_id_preserves_pure_suffix() -> None:
+    assert normalize_doctrine_id("COMPOSITE_DOCTRINE v03_pure") == "COMPOSITE_DOCTRINE v03_pure"
+    assert normalize_doctrine_id("COMPOSITE_DOCTRINE v03") == "COMPOSITE_DOCTRINE v03"
 
 
 def test_spacing_window_formula() -> None:

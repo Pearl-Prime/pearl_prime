@@ -29,17 +29,18 @@ class DoctrineRotationError(Exception):
 
 
 def normalize_doctrine_id(raw: str) -> str:
-    """Canonicalize doctrine atom ids (strip suffix tags like _pure)."""
+    """Canonicalize doctrine atom ids; preserve ``_pure`` (no-embedded-practice variant)."""
     text = (raw or "").strip()
     if not text:
         return ""
-    m = _DOCTRINE_ID_RE.match(text)
+    pure_tag = "_pure" if text.lower().endswith("_pure") else ""
+    m = _DOCTRINE_ID_RE.match(text.replace("_pure", "").replace("_PURE", ""))
     if not m:
         return text
     prefix = m.group(1).upper()
     if prefix == "REFLECTION":
         prefix = "COMPOSITE_DOCTRINE"
-    return f"{prefix} v{m.group(2)}"
+    return f"{prefix} v{m.group(2)}{pure_tag}"
 
 
 def _load_yaml(path: Path) -> dict[str, Any]:

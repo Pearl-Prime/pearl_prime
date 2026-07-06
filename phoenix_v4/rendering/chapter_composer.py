@@ -2899,6 +2899,20 @@ def _authored_transition(
     )
 
 
+def compose_ordered_chapter_prose(
+    slot_types: list[str],
+    slot_proses: list[str],
+) -> str:
+    """Twelve-shape flagship: 1:1 slot order, no bridges, reorder, or type collapse."""
+    parts: list[str] = []
+    for _st, prose in zip(slot_types, slot_proses):
+        body = (prose or "").strip()
+        if not body or _is_placeholder_text(body):
+            continue
+        parts.append(body)
+    return "\n\n".join(parts).strip()
+
+
 def compose_chapter_prose(
     slot_types: list[str],
     slot_proses: list[str],
@@ -3656,6 +3670,10 @@ def compose_from_enriched_book(
         post_compose_sanitize_chapter,
     )
 
+    from phoenix_v4.planning.chapter_object_continuity import is_twelve_shape_continuity_active
+
+    _twelve_shape_flagship = is_twelve_shape_continuity_active(enriched.spine_context or {})
+
     mechanism_memory = MechanismThesisMemory()
     exercise_memory = ExerciseWrapperMemory()
     bridge_memory = BridgeMemory()
@@ -3675,6 +3693,11 @@ def compose_from_enriched_book(
         if five_part_floor and contract_cap >= 1:
             contract_cap = max(contract_cap, five_part_floor)
         max_allowed = min(contract_cap, format_cap)
+        _chapter_has_exercise_slot = any(
+            str(s.slot_type or "").strip().upper() == "EXERCISE" for s in ch.slots
+        )
+        if _twelve_shape_flagship and _chapter_has_exercise_slot:
+            max_allowed = max(max_allowed, 1)
 
         ex_seen = 0
         slots_out = []
@@ -3740,6 +3763,7 @@ def compose_from_enriched_book(
             exercise_memory=exercise_memory,
             angle_id=str(_spine_ctx.get("angle_id") or ""),
             angle_layer_by_chapter=dict(_spine_ctx.get("angle_layer_by_chapter") or {}),
+            twelve_shape_flagship=_twelve_shape_flagship,
         )
         ch_body = post_compose_sanitize_chapter(
             ch_body,

@@ -45,6 +45,41 @@ _FORBIDDEN_OBJECT_DRIFT = (
 )
 
 
+_VALID_DOCTRINE_NUMS = frozenset(range(1, 6))
+
+
+def validate_twelve_shape_plan(chapters: list[dict[str, Any]]) -> list[str]:
+    """Fail-closed planner reconciliation checks for 12-shape flagship builds."""
+    errors: list[str] = []
+    if len(chapters) != 12:
+        errors.append(f"expected 12 chapters, got {len(chapters)}")
+    characters: set[str] = set()
+    for entry in chapters:
+        if not isinstance(entry, dict):
+            continue
+        ch = int(entry.get("chapter") or 0)
+        char = str(entry.get("character") or "").strip()
+        if char:
+            characters.add(char)
+        if not str(entry.get("exercise_id") or "").strip():
+            errors.append(f"ch{ch}: missing exercise_id (5-layer slot required)")
+        raw_doc = str(entry.get("doctrine_id") or "").strip()
+        m = re.match(r"COMPOSITE_DOCTRINE v(\d{2})", raw_doc, re.I)
+        if m and int(m.group(1)) not in _VALID_DOCTRINE_NUMS:
+            errors.append(f"ch{ch}: phantom doctrine {raw_doc} (pool is v01–v05)")
+    if len(characters) > 1:
+        errors.append(
+            f"character soup: {sorted(characters)} — flagship requires one anchored character"
+        )
+    return errors
+
+
+def assert_twelve_shape_plan(chapters: list[dict[str, Any]]) -> None:
+    errors = validate_twelve_shape_plan(chapters)
+    if errors:
+        raise AssertionError("twelve_shape plan invalid: " + "; ".join(errors))
+
+
 @dataclass
 class ChapterContinuityContext:
     chapter_number: int  # 1-based
@@ -161,6 +196,9 @@ def filter_connective_pool(
 ) -> list[dict]:
     """Filter persona atoms to object/character continuity matches."""
     if slot not in CONTINUITY_CONNECTIVE_SLOTS:
+        return pool
+    tagged = [a for a in pool if _meta_object(a)]
+    if not tagged:
         return pool
     out: list[dict] = []
     for atom in pool:

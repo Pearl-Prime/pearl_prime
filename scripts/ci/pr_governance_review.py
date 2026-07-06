@@ -15,6 +15,10 @@ Runs on every PR to main. Validates:
    derivation spec (docs/DURATION_DERIVATION_SPEC.md §6)
 9. SKELETON FREEZE: BLOCKs `feat(catalog): {locale} skeletons {brand} batch {N}` PRs
    (any locale except CJK ja_/zh_/ko_) while skeleton_freeze.yaml → active: true
+10. FLAGSHIP GOLDEN: BLOCKs CANONICAL_FLAGSHIP_CH1 snapshot edits without
+    `GOLDEN-UPDATE-RATIFIED: <OPD ref>` in PR body / commit messages
+11. FLAGSHIP PIPELINE: WARNs when phoenix_v4/{planning,rendering,exercises}/ or
+    scripts/run_pipeline.py changes without a test change in the same PR
 
 Exit 0 = approved. Exit 1 = blocked (with reasons).
 
@@ -487,7 +491,8 @@ def _normalize_path(path: str) -> str:
 def collect_override_text(pr_number=None) -> str:
     """Gather text in which an override token may appear: PR body + commit messages.
 
-    Override tokens (NEW-ARTIFACT-JUSTIFIED:, DURATION-DERIVATION-OK:) live in the
+    Override tokens (NEW-ARTIFACT-JUSTIFIED:, DURATION-DERIVATION-OK:,
+    GOLDEN-UPDATE-RATIFIED:) live in the PR description OR a commit body (per both
     PR description OR a commit body (per both specs). This reader is fail-open and
     additive — it never raises; if no source is available it returns "".
 
@@ -981,6 +986,106 @@ def check_pr_size(files):
         "details": {"total": total, "added": added, "modified": modified, "deleted": deleted},
     }
 
+
+FLAGSHIP_SNAPSHOT_PATHS = {
+    "artifacts/qa/snapshots/CANONICAL_FLAGSHIP_CH1.txt",
+    "artifacts/qa/snapshots/CANONICAL_FLAGSHIP_CH1_METADATA.json",
+}
+
+FLAGSHIP_PIPELINE_TOUCH_PREFIXES = (
+    "phoenix_v4/planning/",
+    "phoenix_v4/rendering/",
+    "phoenix_v4/exercises/",
+    "scripts/run_pipeline.py",
+)
+
+FLAGSHIP_TEST_TOUCH_PREFIXES = (
+    "tests/",
+    "scripts/ci/check_flagship",
+)
+
+
+def _path_touched(files, predicate) -> list[str]:
+    hits = []
+    for f in files:
+        path = f.get("path", "")
+        if predicate(path):
+            hits.append(path)
+    return hits
+
+
+def check_flagship_golden_ratification(files, override_text=""):
+    """BLOCK snapshot edits without operator ratification (GOLDEN-UPDATE-RATIFIED)."""
+    changed_paths = {f.get("path") for f in files}
+    snapshot_touched = sorted(changed_paths & FLAGSHIP_SNAPSHOT_PATHS)
+    if not snapshot_touched:
+        return {
+            "check": "flagship_golden_ratification",
+            "status": "PASS",
+            "message": "Flagship CH1 golden snapshot not in this PR — ratification guard inert.",
+            "details": {"snapshot_touched": []},
+        }
+    if _has_override_token(override_text, "GOLDEN-UPDATE-RATIFIED"):
+        return {
+            "check": "flagship_golden_ratification",
+            "status": "PASS",
+            "message": (
+                "Flagship CH1 golden snapshot edited with GOLDEN-UPDATE-RATIFIED override present."
+            ),
+            "details": {"snapshot_touched": snapshot_touched, "override": True},
+        }
+    return {
+        "check": "flagship_golden_ratification",
+        "status": "BLOCKED",
+        "message": (
+            "Flagship CH1 golden snapshot changed without operator ratification. "
+            "Add 'GOLDEN-UPDATE-RATIFIED: <OPD ref>' to the PR body / commit message, "
+            "or restore via `git checkout <sha> -- artifacts/qa/snapshots/CANONICAL_FLAGSHIP_CH1.txt`; "
+            "do NOT fresh-fix. Golden recipe: "
+            "artifacts/qa/snapshots/CANONICAL_FLAGSHIP_CH1_METADATA.json"
+        ),
+        "details": {"snapshot_touched": snapshot_touched, "override": False},
+    }
+
+
+def check_flagship_pipeline_test_coupling(files):
+    """WARN when flagship pipeline paths change without a test change in the same PR."""
+    pipeline_hits = _path_touched(
+        files,
+        lambda p: any(p == pref or p.startswith(pref) for pref in FLAGSHIP_PIPELINE_TOUCH_PREFIXES),
+    )
+    if not pipeline_hits:
+        return {
+            "check": "flagship_pipeline_test_coupling",
+            "status": "PASS",
+            "message": "No flagship pipeline paths in this PR — test-coupling guard inert.",
+            "details": {"pipeline_touched": []},
+        }
+    test_hits = _path_touched(
+        files,
+        lambda p: any(p.startswith(pref) for pref in FLAGSHIP_TEST_TOUCH_PREFIXES),
+    )
+    if test_hits:
+        return {
+            "check": "flagship_pipeline_test_coupling",
+            "status": "PASS",
+            "message": (
+                f"Flagship pipeline paths changed with co-test updates "
+                f"({len(test_hits)} test file(s))."
+            ),
+            "details": {"pipeline_touched": pipeline_hits, "test_touched": test_hits},
+        }
+    return {
+        "check": "flagship_pipeline_test_coupling",
+        "status": "WARN",
+        "message": (
+            "Flagship pipeline paths changed without a test change in this PR. "
+            "Add/update tests/product/test_flagship_contract.py and/or "
+            "scripts/ci/check_flagship_book_parity.py coverage."
+        ),
+        "details": {"pipeline_touched": pipeline_hits, "test_touched": []},
+    }
+
 # ---------------------------------------------------------------------------
 # Main
 # ---------------------------------------------------------------------------
@@ -1020,6 +1125,8 @@ def main():
         check_reinvention(files, registry, allowlist, override_text),
         check_duration_derivation(files, override_text),
         check_skeleton_freeze(files, skeleton_freeze, pr_title, pr_number),
+        check_flagship_golden_ratification(files, override_text),
+        check_flagship_pipeline_test_coupling(files),
     ]
 
     blocked = [r for r in results if r["status"] == "BLOCKED"]

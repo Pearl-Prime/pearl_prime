@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Run V4.5 Production Readiness gates (19 conditions).
+Run V4.5 Production Readiness gates (29 conditions).
 Gate 16 + 16b: freebie governance — validate_freebie_density and cta_signature_caps run with same index (single scope).
 Usage: from repo root: python scripts/run_production_readiness_gates.py
        or: python -m scripts.run_production_readiness_gates
@@ -545,8 +545,56 @@ def main() -> int:
     else:
         gate("27. Enforced data dictionary", True, "gate script not present; skip", skip=True)
 
+    # --- 28. Flagship CH1 golden parity (byte diff vs canonical snapshot) ---
+    flagship_parity_gate = REPO_ROOT / "scripts" / "ci" / "check_flagship_book_parity.py"
+    if flagship_parity_gate.exists():
+        try:
+            env = os.environ.copy()
+            env["PYTHONPATH"] = str(REPO_ROOT)
+            r = subprocess.run(
+                [sys.executable, str(flagship_parity_gate)],
+                cwd=str(REPO_ROOT),
+                env=env,
+                capture_output=True,
+                text=True,
+                timeout=900,
+            )
+            fp_ok = r.returncode == 0
+            fp_detail = (r.stdout.splitlines()[0] if r.stdout else r.stderr.splitlines()[0] if r.stderr else "check_flagship_book_parity").strip()
+        except Exception as e:
+            fp_ok = False
+            fp_detail = str(e)
+        if not gate("28. Flagship CH1 golden parity (canonical snapshot byte diff)", fp_ok, fp_detail):
+            failed += 1
+    else:
+        gate("28. Flagship CH1 golden parity", True, "gate script not present; skip", skip=True)
+
+    # --- 29. Flagship CH1 executable contract (structural requirements) ---
+    contract_gate = REPO_ROOT / "scripts" / "ci" / "check_flagship_contract.py"
+    if contract_gate.exists():
+        try:
+            env = os.environ.copy()
+            env["PYTHONPATH"] = str(REPO_ROOT)
+            r = subprocess.run(
+                [sys.executable, str(contract_gate)],
+                cwd=str(REPO_ROOT),
+                env=env,
+                capture_output=True,
+                text=True,
+                timeout=900,
+            )
+            fc_ok = r.returncode == 0
+            fc_detail = (r.stdout.splitlines()[0] if r.stdout else r.stderr.splitlines()[0] if r.stderr else "check_flagship_contract").strip()
+        except Exception as e:
+            fc_ok = False
+            fc_detail = str(e)
+        if not gate("29. Flagship CH1 executable contract (12-shape structural gates)", fc_ok, fc_detail):
+            failed += 1
+    else:
+        gate("29. Flagship CH1 executable contract", True, "gate script not present; skip", skip=True)
+
     # --- Report ---
-    print("V4.5 Production Readiness — 27 conditions\n")
+    print("V4.5 Production Readiness — 29 conditions\n")
     for name, status, detail in RESULTS:
         sym = "✓" if status == "PASS" else ("○" if status == "SKIP" else "✗")
         print(f"  {sym} {status:4}  {name}")

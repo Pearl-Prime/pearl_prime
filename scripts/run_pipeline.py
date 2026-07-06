@@ -319,11 +319,13 @@ def _check_exercise_strict_canonical_gate(
     if quality_profile != "production":
         return
     practice_lib_count = (enrichment_audit or {}).get("slots_from_practice_library", 0)
-    if practice_lib_count <= 0:
+    plan_bound = (enrichment_audit or {}).get("slots_from_twelve_shape_plan_exercise", 0)
+    unbound_practice = practice_lib_count - plan_bound
+    if unbound_practice <= 0:
         return
     raise SystemExit(
         f"[PRODUCTION GATE] EXERCISE-BANK-RESOLUTION-01 strict-canonical: "
-        f"{practice_lib_count} EXERCISE slot(s) resolved via practice_library "
+        f"{unbound_practice} EXERCISE slot(s) resolved via practice_library "
         f"fall-through. Production must resolve EXERCISE from "
         f"teacher_banks/approved_atoms/EXERCISE or persona-atom EXERCISE bank. "
         f"Add atoms upstream (Pearl_Editor + Pearl_Writer ws), or use "
@@ -970,7 +972,7 @@ def _run_spine_pipeline_mode(
     )
     engines_data = load_topic_engines(topic_id, repo_root)
     fmt_spec = load_format_spec(runtime_fmt, repo_root)
-    beatmap = compile_beatmap(shaped_spine, engines_data, fmt_spec, repo_root)
+    beatmap = compile_beatmap(shaped_spine, engines_data, fmt_spec, repo_root, persona_id=persona_id)
 
     # Blocker 4 (angle_journey 0% coverage, 2026-06-17): resolve the raw catalog angle slug
     # (e.g. "false_alarm") to its registry journey-concept key (e.g. "INVISIBLE_THRESHOLD" via
@@ -1114,6 +1116,13 @@ def _run_spine_pipeline_mode(
         enriched = attach_exercise_journeys(enriched, seed=seed, enabled=True, repo_root=repo_root)
 
     _governance_report: dict = {}
+    from phoenix_v4.planning.chapter_object_continuity import is_twelve_shape_continuity_active
+
+    _delivery_plan = {
+        "runtime_format_id": runtime_fmt,
+        "book_plan_id": book_plan.plan_id,
+        "twelve_shape_continuity": is_twelve_shape_continuity_active(enriched.spine_context),
+    }
     # BookSlotTracker + resolve_injections are now wired inside select_enrichment().
     # Story schedule (named-character 4-arc arcs) fills SCENE slots at indices 2/5/9.
     # See enrichment_select.py: _story_schedule + _book_tracker instantiated before chapter loop.
@@ -1123,33 +1132,44 @@ def _run_spine_pipeline_mode(
         governance_report=_governance_report,
         artifact_dir=render_dir,
     )
-    prose = clean_for_delivery(
-        prose,
-        plan={"runtime_format_id": runtime_fmt, "book_plan_id": book_plan.plan_id},
-        governance_report=_governance_report,
-    )
     _flow_profile = flow_profile_for_runtime_format(runtime_fmt)
-    prose = strengthen_rendered_spine_manuscript(
-        prose,
-        book_seed=seed,
-        flow_profile=_flow_profile,
-    )
-    prose = clean_for_delivery(
-        prose,
-        plan={"runtime_format_id": runtime_fmt, "book_plan_id": book_plan.plan_id},
-        governance_report=_governance_report,
-    )
-    prose = strengthen_rendered_spine_manuscript(
-        prose,
-        book_seed=seed,
-        flow_profile=_flow_profile,
-    )
-    # Sprint-1: run dedupe_scene_furniture_book AFTER both strengthen passes so that
-    # any repeated phrases introduced or survived through strengthen are caught here,
-    # just before the scene_anchor_density check.
-    prose, _whole_book_dedupe_notes = dedupe_scene_furniture_book(prose)
-    if _whole_book_dedupe_notes:
-        _governance_report.setdefault("whole_book_dedupe_notes", []).extend(_whole_book_dedupe_notes)
+    _twelve_shape_delivery = bool(_delivery_plan.get("twelve_shape_continuity"))
+    if _twelve_shape_delivery:
+        prose = clean_for_delivery(
+            prose,
+            plan=_delivery_plan,
+            governance_report=_governance_report,
+        )
+        _governance_report["twelve_shape_delivery_mode"] = "minimal"
+    else:
+        prose = clean_for_delivery(
+            prose,
+            plan=_delivery_plan,
+            governance_report=_governance_report,
+        )
+        prose = strengthen_rendered_spine_manuscript(
+            prose,
+            book_seed=seed,
+            flow_profile=_flow_profile,
+        )
+        prose = clean_for_delivery(
+            prose,
+            plan=_delivery_plan,
+            governance_report=_governance_report,
+        )
+        prose = strengthen_rendered_spine_manuscript(
+            prose,
+            book_seed=seed,
+            flow_profile=_flow_profile,
+        )
+        # Sprint-1: run dedupe_scene_furniture_book AFTER both strengthen passes so that
+        # any repeated phrases introduced or survived through strengthen are caught here,
+        # just before the scene_anchor_density check.
+        prose, _whole_book_dedupe_notes = dedupe_scene_furniture_book(prose)
+        if _whole_book_dedupe_notes:
+            _governance_report.setdefault("whole_book_dedupe_notes", []).extend(
+                _whole_book_dedupe_notes
+            )
     _arch_v = int(
         book_spec_for_compiler.get("chapter_architecture_version")
         or getattr(args, "chapter_architecture_version", None)
@@ -1159,335 +1179,336 @@ def _run_spine_pipeline_mode(
     # see below) so downstream passes (per-chapter word cap via _extract_registry_chapters, locale
     # post-process, music overlay) cannot strip the "Chapter N"-less preamble block.
     #
-    # Apply per-chapter word cap from modular output format (see apply_output_format_to_plan above).
-    # Preserves the "Chapter N" heading line and paragraph structure so downstream gates can
-    # still parse chapters via _extract_registry_chapters; only the body is truncated by words.
-    if _per_chapter_word_cap:
-        _chs = _extract_registry_chapters(prose)
-        if _chs:
-            _pre_cap_words = sum(len(c.split()) for c in _chs)
-            _capped: list[str] = []
-            for _ch in _chs:
-                _lines = _ch.splitlines()
-                _heading = _lines[0] if _lines else ""
-                _body = "\n".join(_lines[1:])
-                _body_words = _body.split()
-                if len(_body_words) > _per_chapter_word_cap:
-                    _paras = re.split(r"\n\s*\n", _body)
-                    _kept: list[str] = []
-                    _used = 0
-                    for _p in _paras:
-                        _pw = len(_p.split())
-                        if _used + _pw <= _per_chapter_word_cap:
-                            _kept.append(_p)
-                            _used += _pw
-                        else:
-                            _remain = _per_chapter_word_cap - _used
-                            if _remain > 0:
-                                _kept.append(" ".join(_p.split()[:_remain]))
-                                _used = _per_chapter_word_cap
-                            break
-                    _body = "\n\n".join(_kept).strip()
-                _capped.append(f"{_heading}\n\n{_body}".strip() if _body else _heading)
-            prose = "\n\n".join(_capped)
-            _post_cap_words = sum(len(c.split()) for c in _capped)
+    if not _twelve_shape_delivery:
+        # Apply per-chapter word cap from modular output format (see apply_output_format_to_plan above).
+        # Preserves the "Chapter N" heading line and paragraph structure so downstream gates can
+        # still parse chapters via _extract_registry_chapters; only the body is truncated by words.
+        if _per_chapter_word_cap:
+            _chs = _extract_registry_chapters(prose)
+            if _chs:
+                _pre_cap_words = sum(len(c.split()) for c in _chs)
+                _capped: list[str] = []
+                for _ch in _chs:
+                    _lines = _ch.splitlines()
+                    _heading = _lines[0] if _lines else ""
+                    _body = "\n".join(_lines[1:])
+                    _body_words = _body.split()
+                    if len(_body_words) > _per_chapter_word_cap:
+                        _paras = re.split(r"\n\s*\n", _body)
+                        _kept: list[str] = []
+                        _used = 0
+                        for _p in _paras:
+                            _pw = len(_p.split())
+                            if _used + _pw <= _per_chapter_word_cap:
+                                _kept.append(_p)
+                                _used += _pw
+                            else:
+                                _remain = _per_chapter_word_cap - _used
+                                if _remain > 0:
+                                    _kept.append(" ".join(_p.split()[:_remain]))
+                                    _used = _per_chapter_word_cap
+                                break
+                        _body = "\n\n".join(_kept).strip()
+                    _capped.append(f"{_heading}\n\n{_body}".strip() if _body else _heading)
+                prose = "\n\n".join(_capped)
+                _post_cap_words = sum(len(c.split()) for c in _capped)
+                print(
+                    f"Per-chapter word cap applied: {_pre_cap_words} → {_post_cap_words} words "
+                    f"(cap {_per_chapter_word_cap}w/chapter)",
+                    file=sys.stderr,
+                )
+        # Book-level word ceiling clamp (DEFERRED-LANE word_budget 2026-06-15).
+        # The per-chapter cap above only fires for modular output formats (_cli_output_format
+        # set); spine renders (standard_book et al.) have no such cap, so the post-render
+        # strengthen passes + arch-v2 preamble push the book past the runtime word ceiling and
+        # HARD_FAIL the book_pass word_budget gate. This clamp is the missing book-level guard:
+        # it always applies in spine mode and trims the book back to cap_word_target (22000 for
+        # standard_book) so render accounting matches the gate. Trims only — never pads.
+        _runtime_word_ceiling = _load_runtime_word_ceiling(runtime_fmt, repo_root)
+        # Blocker 1 (2026-06-17): reserve a small word budget under the ceiling for the post-clamp
+        # ensure_chapter_flow_cues pass so its (short) clear-point/transition guarantee sentences do
+        # not push the book back over the ceiling. Bounded so it never trims the book more than ~10%.
+        _cue_reserve = min(_n_chapters * 30, max(0, (_runtime_word_ceiling or 0) // 10))
+        if _runtime_word_ceiling:
+            prose, _pre_clamp_words, _post_clamp_words = _clamp_book_to_word_ceiling(
+                prose, _runtime_word_ceiling, reserve=_cue_reserve
+            )
+            if _post_clamp_words < _pre_clamp_words:
+                print(
+                    f"Book word ceiling clamp applied: {_pre_clamp_words} → {_post_clamp_words} words "
+                    f"(ceiling {_runtime_word_ceiling}w, reserve {_cue_reserve}w, runtime={runtime_fmt})",
+                    file=sys.stderr,
+                )
+        # Blocker 1 (2026-06-17): FINAL chapter_flow cue pass — runs AFTER all truncation (clamp +
+        # per-chapter cap) so the appended clear-point / transition guarantee sentences cannot be
+        # clamped away. Word-bounded (see ensure_chapter_flow_cues); only fixes the same fixable
+        # errors (MISSING_CLEAR_POINT / WEAK_TRANSITIONS) the in-render glue pass targets. The
+        # chapter_flow gate below remains the arbiter; this only strengthens the OUTPUT.
+        prose = ensure_chapter_flow_cues(prose, flow_profile=_flow_profile, seed=seed)
+        # Default cap is sourced from config/quality/scene_anchor_density_config.yaml.
+        # Authored plans (config/plans/*.yaml) may override per-chapter via
+        # scene_plan.scene_anchor_cap; the min() across chapters means any chapter that
+        # tightens the cap tightens the book — preserving backward compat for hand-tuned plans.
+        _scene_anchor_default_cap = int(
+            _load_scene_anchor_density_config().get("default_cap_per_chapter", 3)
+        )
+        scene_anchor_cap = min(
+            int((ch.scene_plan or {}).get("scene_anchor_cap", _scene_anchor_default_cap))
+            for ch in book_plan.chapters
+        )
+        # Blocker 2 (A1-generalize, 2026-06-17): reduce any 4–8 word n-gram that exceeds the
+        # per-chapter scene_anchor cap BEFORE the gate runs. Generalizes _DIRECTION_CAP_PER_CHAPTER
+        # (bridge-bank directions only) and dedupe_scene_furniture_book (closed allowlist only) to
+        # the full set the gate measures — HOOK lead-ins, un-allowlisted furniture variants, topic
+        # restatements. Strengthens output only; the gate + its cap are unchanged and still decide.
+        prose, _scene_anchor_reduce_notes = _reduce_scene_anchor_density(prose, scene_anchor_cap)
+        if _scene_anchor_reduce_notes:
+            _governance_report.setdefault("scene_anchor_density_reduce_notes", []).extend(
+                _scene_anchor_reduce_notes
+            )
             print(
-                f"Per-chapter word cap applied: {_pre_cap_words} → {_post_cap_words} words "
-                f"(cap {_per_chapter_word_cap}w/chapter)",
+                f"Scene anchor density reducer: trimmed {len(_scene_anchor_reduce_notes)} "
+                f"over-cap phrase occurrence group(s) (cap {scene_anchor_cap}/chapter).",
                 file=sys.stderr,
             )
-    # Book-level word ceiling clamp (DEFERRED-LANE word_budget 2026-06-15).
-    # The per-chapter cap above only fires for modular output formats (_cli_output_format
-    # set); spine renders (standard_book et al.) have no such cap, so the post-render
-    # strengthen passes + arch-v2 preamble push the book past the runtime word ceiling and
-    # HARD_FAIL the book_pass word_budget gate. This clamp is the missing book-level guard:
-    # it always applies in spine mode and trims the book back to cap_word_target (22000 for
-    # standard_book) so render accounting matches the gate. Trims only — never pads.
-    _runtime_word_ceiling = _load_runtime_word_ceiling(runtime_fmt, repo_root)
-    # Blocker 1 (2026-06-17): reserve a small word budget under the ceiling for the post-clamp
-    # ensure_chapter_flow_cues pass so its (short) clear-point/transition guarantee sentences do
-    # not push the book back over the ceiling. Bounded so it never trims the book more than ~10%.
-    _cue_reserve = min(_n_chapters * 30, max(0, (_runtime_word_ceiling or 0) // 10))
-    if _runtime_word_ceiling:
-        prose, _pre_clamp_words, _post_clamp_words = _clamp_book_to_word_ceiling(
-            prose, _runtime_word_ceiling, reserve=_cue_reserve
-        )
-        if _post_clamp_words < _pre_clamp_words:
-            print(
-                f"Book word ceiling clamp applied: {_pre_clamp_words} → {_post_clamp_words} words "
-                f"(ceiling {_runtime_word_ceiling}w, reserve {_cue_reserve}w, runtime={runtime_fmt})",
-                file=sys.stderr,
-            )
-    # Blocker 1 (2026-06-17): FINAL chapter_flow cue pass — runs AFTER all truncation (clamp +
-    # per-chapter cap) so the appended clear-point / transition guarantee sentences cannot be
-    # clamped away. Word-bounded (see ensure_chapter_flow_cues); only fixes the same fixable
-    # errors (MISSING_CLEAR_POINT / WEAK_TRANSITIONS) the in-render glue pass targets. The
-    # chapter_flow gate below remains the arbiter; this only strengthens the OUTPUT.
-    prose = ensure_chapter_flow_cues(prose, flow_profile=_flow_profile, seed=seed)
-    # Default cap is sourced from config/quality/scene_anchor_density_config.yaml.
-    # Authored plans (config/plans/*.yaml) may override per-chapter via
-    # scene_plan.scene_anchor_cap; the min() across chapters means any chapter that
-    # tightens the cap tightens the book — preserving backward compat for hand-tuned plans.
-    _scene_anchor_default_cap = int(
-        _load_scene_anchor_density_config().get("default_cap_per_chapter", 3)
-    )
-    scene_anchor_cap = min(
-        int((ch.scene_plan or {}).get("scene_anchor_cap", _scene_anchor_default_cap))
-        for ch in book_plan.chapters
-    )
-    # Blocker 2 (A1-generalize, 2026-06-17): reduce any 4–8 word n-gram that exceeds the
-    # per-chapter scene_anchor cap BEFORE the gate runs. Generalizes _DIRECTION_CAP_PER_CHAPTER
-    # (bridge-bank directions only) and dedupe_scene_furniture_book (closed allowlist only) to
-    # the full set the gate measures — HOOK lead-ins, un-allowlisted furniture variants, topic
-    # restatements. Strengthens output only; the gate + its cap are unchanged and still decide.
-    prose, _scene_anchor_reduce_notes = _reduce_scene_anchor_density(prose, scene_anchor_cap)
-    if _scene_anchor_reduce_notes:
-        _governance_report.setdefault("scene_anchor_density_reduce_notes", []).extend(
-            _scene_anchor_reduce_notes
-        )
-        print(
-            f"Scene anchor density reducer: trimmed {len(_scene_anchor_reduce_notes)} "
-            f"over-cap phrase occurrence group(s) (cap {scene_anchor_cap}/chapter).",
-            file=sys.stderr,
-        )
-    scene_anchor_violations = _scene_anchor_density_violations(prose, scene_anchor_cap)
-    scene_anchor_report_path = render_dir / "scene_anchor_density_report.json"
-    if scene_anchor_violations:
-        scene_anchor_report_path.write_text(
-            json.dumps(
-                {
-                    "status": "FAIL",
-                    "book_plan_id": book_plan.plan_id,
-                    "scene_anchor_cap": scene_anchor_cap,
-                    "violations": scene_anchor_violations,
-                },
-                indent=2,
-            ),
-            encoding="utf-8",
-        )
-        print(
-            f"Scene anchor density cap: FAIL — repeated >3-word phrases exceed cap {scene_anchor_cap}. "
-            f"Report: {scene_anchor_report_path}",
-            file=sys.stderr,
-        )
-        if gates_hard:
-            return 1
-    else:
-        scene_anchor_report_path.write_text(
-            json.dumps(
-                {
-                    "status": "PASS",
-                    "book_plan_id": book_plan.plan_id,
-                    "scene_anchor_cap": scene_anchor_cap,
-                    "violations": [],
-                },
-                indent=2,
-            ),
-            encoding="utf-8",
-        )
-    # Book-audit craft strengthen (2026-06-21): dwell beats (F13), practice-density cap
-    # (F7), transformation-arc landings, and terminal-sentence integrity — runs AFTER
-    # scene-anchor reducer so injected dwell beats are not trimmed as over-cap phrases.
-    # Strengthens OUTPUT only; register gate thresholds untouched.
-    from phoenix_v4.rendering.register_output_strengthen import (
-        strengthen_register_craft_output,
-        spine_deprescribe_inject_enabled,
-    )
-
-    _spine_deprescribe_inject_enabled = spine_deprescribe_inject_enabled()
-    if not _spine_deprescribe_inject_enabled:
-        _governance_report.setdefault("spine_deprescribe_signals", []).append(
-            {
-                "action": "injector_disabled",
-                "reason": (
-                    "G1-residual: deprescribe one-line filler disabled on spine; "
-                    "surplus prescribed-action paragraphs dropped, not replaced. "
-                    "PHOENIX_SPINE_DEPRESCRIBE=1 to re-enable."
+        scene_anchor_violations = _scene_anchor_density_violations(prose, scene_anchor_cap)
+        scene_anchor_report_path = render_dir / "scene_anchor_density_report.json"
+        if scene_anchor_violations:
+            scene_anchor_report_path.write_text(
+                json.dumps(
+                    {
+                        "status": "FAIL",
+                        "book_plan_id": book_plan.plan_id,
+                        "scene_anchor_cap": scene_anchor_cap,
+                        "violations": scene_anchor_violations,
+                    },
+                    indent=2,
                 ),
-            }
+                encoding="utf-8",
+            )
+            print(
+                f"Scene anchor density cap: FAIL — repeated >3-word phrases exceed cap {scene_anchor_cap}. "
+                f"Report: {scene_anchor_report_path}",
+                file=sys.stderr,
+            )
+            if gates_hard:
+                return 1
+        else:
+            scene_anchor_report_path.write_text(
+                json.dumps(
+                    {
+                        "status": "PASS",
+                        "book_plan_id": book_plan.plan_id,
+                        "scene_anchor_cap": scene_anchor_cap,
+                        "violations": [],
+                    },
+                    indent=2,
+                ),
+                encoding="utf-8",
+            )
+        # Book-audit craft strengthen (2026-06-21): dwell beats (F13), practice-density cap
+        # (F7), transformation-arc landings, and terminal-sentence integrity — runs AFTER
+        # scene-anchor reducer so injected dwell beats are not trimmed as over-cap phrases.
+        # Strengthens OUTPUT only; register gate thresholds untouched.
+        from phoenix_v4.rendering.register_output_strengthen import (
+            strengthen_register_craft_output,
+            spine_deprescribe_inject_enabled,
         )
 
-    prose = strengthen_register_craft_output(
-        prose,
-        seed=seed or book_plan.plan_id,
-        inject_deprescribe_alternative=_spine_deprescribe_inject_enabled,
-    )
-    # Post-strengthen flow cue pass: register craft strengthen can strip thesis /
-    # actionable cues (e.g. F7 deprescription); re-run the word-bounded guarantee
-    # pass so chapter_flow is scored on the final manuscript.
-    prose = ensure_chapter_flow_cues(
-        prose, flow_profile=_flow_profile, seed=f"{seed}:post_strengthen"
-    )
-    # Flow-cue guarantee lines can re-introduce F7 prescribed-action false positives
-    # (imperative + timing substrings). Final cap before gates — thresholds untouched.
-    from phoenix_v4.rendering.register_output_strengthen import (
-        cap_prescribed_action_density as _final_cap_f7,
-        _exercise_contract_by_chapter,
-    )
-
-    _f7_caps = _exercise_contract_by_chapter(_governance_report)
-    _f7_max_by_chapter = {
-        ch: min(contract, 1) if contract > 0 else 0 for ch, contract in _f7_caps.items()
-    }
-    _f7_cap_kw = {
-        "max_per_chapter": 1,
-        "max_by_chapter": _f7_max_by_chapter,
-        "inject_deprescribe_alternative": _spine_deprescribe_inject_enabled,
-    }
-    prose = _final_cap_f7(prose, **_f7_cap_kw)
-    # F1/F4 dedupe must run AFTER flow-cue injection (same stage ordering as F7 cap).
-    from phoenix_v4.rendering.register_output_strengthen import (
-        dedupe_register_f1_paragraphs as _final_f1_dedupe,
-        ensure_unique_chapter_closings as _final_f4_closings,
-        remove_sub_four_word_orphan_paragraphs as _final_orphan_strip,
-    )
-
-    prose, _f1_dedupe_final = _final_f1_dedupe(prose)
-    if _f1_dedupe_final:
-        _governance_report.setdefault("register_f1_dedupe_notes", []).extend(_f1_dedupe_final)
-    prose = _final_f4_closings(prose, seed=f"{seed}:final_close")
-    prose = _final_orphan_strip(prose)
-    from phoenix_v4.rendering.register_output_strengthen import (
-        repair_f13_dwell_contract as _final_f13_repair,
-        verify_f7_exercise_preservation,
-    )
-
-    prose = _final_f13_repair(prose, seed=f"{seed}:post_flow_f13")
-    # Post-F13 flow-cue pass: dwell-beat / deprescribe inserts run after the first
-    # flow guarantee; re-run so chapter_flow is scored on the final manuscript.
-    prose = ensure_chapter_flow_cues(
-        prose, flow_profile=_flow_profile, seed=f"{seed}:post_f13_flow"
-    )
-    prose = _final_cap_f7(prose, **_f7_cap_kw)
-    prose = _final_f13_repair(prose, seed=f"{seed}:post_f13_flow_recheck")
-    # Post-flow orphan strip before floor padding (flow inserts can leak slot labels).
-    prose = _final_orphan_strip(prose)
-    # G1 (render-hardening 2026-07-02, fast-follow to #4566): the word-count FLOOR
-    # PADDER is DISABLED on the spine path. `ensure_word_count_floor` used to append
-    # standalone one-line "deprescribe"-class filler to hit a word floor — the exact
-    # stitched-one-liner class the dwell injector produced and that F14 now HARD_FAILs.
-    # #4566 no-op'd the function body; this closes the CALL SITE too so a future
-    # re-enable of the function cannot silently re-introduce choppy filler on spine.
-    # DOCTRINE: an under-length spine book is a THIN-POOL / atom signal (surface it,
-    # do not paper over it) — never LLM-pad, never standalone-filler-pad. See memory
-    # feedback_atom_deficit_is_shape_not_count + Q-FASTFOLLOW-01 (default a).
-    # Kill-switch to re-enable padding on spine (NOT recommended):
-    #   PHOENIX_SPINE_WORD_FLOOR_PAD=1
-    from phoenix_v4.rendering.book_renderer import _runtime_word_range as _book_word_range
-    from phoenix_v4.rendering.register_output_strengthen import ensure_word_count_floor
-
-    _spine_floor_pad_enabled = (
-        os.environ.get("PHOENIX_SPINE_WORD_FLOOR_PAD", "").strip().lower()
-        in ("1", "true", "on", "yes")
-    )
-    _word_bounds = _book_word_range(runtime_fmt)
-    if _word_bounds:
-        _under = len(prose.split()) < _word_bounds[0]
-        if _spine_floor_pad_enabled:
-            prose = ensure_word_count_floor(prose, floor=_word_bounds[0], seed=f"{seed}:floor")
-        elif _under:
-            # Surface, do not pad. Under-length spine output = thin atom pool.
-            _governance_report.setdefault("spine_word_floor_signals", []).append(
+        _spine_deprescribe_inject_enabled = spine_deprescribe_inject_enabled()
+        if not _spine_deprescribe_inject_enabled:
+            _governance_report.setdefault("spine_deprescribe_signals", []).append(
                 {
-                    "stage": "post_flow_pre_gate",
-                    "word_count": len(prose.split()),
-                    "floor": _word_bounds[0],
-                    "action": "not_padded",
+                    "action": "injector_disabled",
                     "reason": (
-                        "spine word-floor padder disabled (G1/#4566); under-length is a "
-                        "thin-pool / atom-shape signal, not filler territory"
+                        "G1-residual: deprescribe one-line filler disabled on spine; "
+                        "surplus prescribed-action paragraphs dropped, not replaced. "
+                        "PHOENIX_SPINE_DEPRESCRIBE=1 to re-enable."
                     ),
                 }
             )
-    # Floor padding can duplicate closings and strip flow cues — repair before gates.
-    prose = _final_cap_f7(prose, **_f7_cap_kw)
-    prose = ensure_chapter_flow_cues(
-        prose, flow_profile=_flow_profile, seed=f"{seed}:post_floor_flow"
-    )
-    prose = _final_cap_f7(prose, **_f7_cap_kw)
-    prose = _final_f4_closings(prose, seed=f"{seed}:post_all_flow")
-    prose = _final_orphan_strip(prose)
-    prose = ensure_chapter_flow_cues(
-        prose, flow_profile=_flow_profile, seed=f"{seed}:post_all_flow"
-    )
-    prose = _final_cap_f7(prose, **_f7_cap_kw)
-    # F7 cap can drop one_hour_book below word_range floor. G1: on spine, do NOT re-pad
-    # (see the disabled first call site above) — surface the under-length as a thin-pool
-    # signal. Only re-pad when the PHOENIX_SPINE_WORD_FLOOR_PAD kill-switch is set.
-    if _word_bounds and len(prose.split()) < _word_bounds[0]:
-        if _spine_floor_pad_enabled:
-            prose = ensure_word_count_floor(prose, floor=_word_bounds[0], seed=f"{seed}:floor_final")
-            prose = ensure_chapter_flow_cues(
-                prose, flow_profile=_flow_profile, seed=f"{seed}:floor_final_flow"
-            )
-            prose = _final_f4_closings(prose, seed=f"{seed}:floor_final_close")
-            prose = _final_orphan_strip(prose)
-        else:
-            _governance_report.setdefault("spine_word_floor_signals", []).append(
-                {
-                    "stage": "post_f7_pre_gate",
-                    "word_count": len(prose.split()),
-                    "floor": _word_bounds[0],
-                    "action": "not_padded",
-                    "reason": "spine word-floor padder disabled (G1/#4566); thin-pool signal",
-                }
-            )
 
-    # Floor / flow passes after post_f13_flow_recheck can re-break register (F13/F4).
-    prose = _final_f13_repair(prose, seed=f"{seed}:pre_gate_f13")
-    prose = _final_f4_closings(prose, seed=f"{seed}:pre_gate_f4")
-    prose = ensure_chapter_flow_cues(
-        prose, flow_profile=_flow_profile, seed=f"{seed}:pre_gate_flow"
-    )
-    prose = _final_f13_repair(prose, seed=f"{seed}:pre_gate_f13_recheck")
-    prose = _final_cap_f7(prose, **_f7_cap_kw)
-    prose = _final_orphan_strip(prose)
-    from phoenix_v4.rendering.register_output_strengthen import (
-        destack_adjacent_inject_paragraphs as _destack_inject_paras,
-        fold_standalone_inject_paragraphs as _fold_inject_paras,
-    )
-
-    prose = _destack_inject_paras(prose)
-    # G1-residual Phase-2 (cohesion restore): weave any surviving standalone
-    # one-line inject paragraphs (within-slot bridges + formulaic practice
-    # intros) into a neighbor narrative paragraph, and mark bare Title-Case
-    # section titles as real headings. Returns the composer floor to the
-    # pre-injector 0-5% beat-line band (docs/BESTSELLER_QUALITY_ARCHAEOLOGY_
-    # 2026-07-03.md). PHOENIX_INJECT_FOLD=0 / PHOENIX_SECTION_HEADING_MARK=0
-    # disable. Deterministic; no LLM; gate thresholds untouched.
-    prose = _fold_inject_paras(prose)
-    # Folding a practice-intro into the exercise it introduces can tip that
-    # paragraph into F7 prescribed-action classification, so re-cap F7 once more
-    # AFTER the fold (drop-mode on spine — never re-inject filler). Keeps the F7
-    # per-chapter invariant without disturbing the restored 0-5% beat-line floor.
-    prose = _final_cap_f7(prose, **_f7_cap_kw)
-    # F6 cadence had no pre-gate repair: the single break inside strengthen_register_craft_output
-    # (above) runs BEFORE the flow-cue / floor / F4 / F13 convergence passes, which re-introduce
-    # repeating sentence-length 4-grams (e.g. [9,9,9,10] ×3 → register F6 FAIL on social_anxiety /
-    # somatic_healing). Add the missing FINAL break here, mirroring the pre-gate F4/F13 repairs. It
-    # only lengthens the 3rd+ occurrence of each repeating cadence (~10-12 words/book), makes closing
-    # lines MORE unique (F4-safe), preserves cue substrings (chapter_flow-safe), and adds no
-    # imperative/timing tokens (F7-safe). Strengthens OUTPUT only; the register gate remains arbiter.
-    from phoenix_v4.rendering.register_output_strengthen import (
-        break_pedagogical_cadence_repetition as _final_f6_break,
-    )
-
-    prose = _final_f6_break(prose, seed=f"{seed}:pre_gate_f6")
-
-    _f7_preservation_violations = verify_f7_exercise_preservation(
-        prose,
-        governance_report=_governance_report,
-        max_prescribed_per_chapter=1,
-    )
-    if _f7_preservation_violations:
-        _governance_report.setdefault(
-            "f7_exercise_preservation_violations", []
-        ).extend(_f7_preservation_violations)
-        print(
-            "F7 exercise-preservation check: "
-            + "; ".join(_f7_preservation_violations),
-            file=sys.stderr,
+        prose = strengthen_register_craft_output(
+            prose,
+            seed=seed or book_plan.plan_id,
+            inject_deprescribe_alternative=_spine_deprescribe_inject_enabled,
         )
+        # Post-strengthen flow cue pass: register craft strengthen can strip thesis /
+        # actionable cues (e.g. F7 deprescription); re-run the word-bounded guarantee
+        # pass so chapter_flow is scored on the final manuscript.
+        prose = ensure_chapter_flow_cues(
+            prose, flow_profile=_flow_profile, seed=f"{seed}:post_strengthen"
+        )
+        # Flow-cue guarantee lines can re-introduce F7 prescribed-action false positives
+        # (imperative + timing substrings). Final cap before gates — thresholds untouched.
+        from phoenix_v4.rendering.register_output_strengthen import (
+            cap_prescribed_action_density as _final_cap_f7,
+            _exercise_contract_by_chapter,
+        )
+
+        _f7_caps = _exercise_contract_by_chapter(_governance_report)
+        _f7_max_by_chapter = {
+            ch: min(contract, 1) if contract > 0 else 0 for ch, contract in _f7_caps.items()
+        }
+        _f7_cap_kw = {
+            "max_per_chapter": 1,
+            "max_by_chapter": _f7_max_by_chapter,
+            "inject_deprescribe_alternative": _spine_deprescribe_inject_enabled,
+        }
+        prose = _final_cap_f7(prose, **_f7_cap_kw)
+        # F1/F4 dedupe must run AFTER flow-cue injection (same stage ordering as F7 cap).
+        from phoenix_v4.rendering.register_output_strengthen import (
+            dedupe_register_f1_paragraphs as _final_f1_dedupe,
+            ensure_unique_chapter_closings as _final_f4_closings,
+            remove_sub_four_word_orphan_paragraphs as _final_orphan_strip,
+        )
+
+        prose, _f1_dedupe_final = _final_f1_dedupe(prose)
+        if _f1_dedupe_final:
+            _governance_report.setdefault("register_f1_dedupe_notes", []).extend(_f1_dedupe_final)
+        prose = _final_f4_closings(prose, seed=f"{seed}:final_close")
+        prose = _final_orphan_strip(prose)
+        from phoenix_v4.rendering.register_output_strengthen import (
+            repair_f13_dwell_contract as _final_f13_repair,
+            verify_f7_exercise_preservation,
+        )
+
+        prose = _final_f13_repair(prose, seed=f"{seed}:post_flow_f13")
+        # Post-F13 flow-cue pass: dwell-beat / deprescribe inserts run after the first
+        # flow guarantee; re-run so chapter_flow is scored on the final manuscript.
+        prose = ensure_chapter_flow_cues(
+            prose, flow_profile=_flow_profile, seed=f"{seed}:post_f13_flow"
+        )
+        prose = _final_cap_f7(prose, **_f7_cap_kw)
+        prose = _final_f13_repair(prose, seed=f"{seed}:post_f13_flow_recheck")
+        # Post-flow orphan strip before floor padding (flow inserts can leak slot labels).
+        prose = _final_orphan_strip(prose)
+        # G1 (render-hardening 2026-07-02, fast-follow to #4566): the word-count FLOOR
+        # PADDER is DISABLED on the spine path. `ensure_word_count_floor` used to append
+        # standalone one-line "deprescribe"-class filler to hit a word floor — the exact
+        # stitched-one-liner class the dwell injector produced and that F14 now HARD_FAILs.
+        # #4566 no-op'd the function body; this closes the CALL SITE too so a future
+        # re-enable of the function cannot silently re-introduce choppy filler on spine.
+        # DOCTRINE: an under-length spine book is a THIN-POOL / atom signal (surface it,
+        # do not paper over it) — never LLM-pad, never standalone-filler-pad. See memory
+        # feedback_atom_deficit_is_shape_not_count + Q-FASTFOLLOW-01 (default a).
+        # Kill-switch to re-enable padding on spine (NOT recommended):
+        #   PHOENIX_SPINE_WORD_FLOOR_PAD=1
+        from phoenix_v4.rendering.book_renderer import _runtime_word_range as _book_word_range
+        from phoenix_v4.rendering.register_output_strengthen import ensure_word_count_floor
+
+        _spine_floor_pad_enabled = (
+            os.environ.get("PHOENIX_SPINE_WORD_FLOOR_PAD", "").strip().lower()
+            in ("1", "true", "on", "yes")
+        )
+        _word_bounds = _book_word_range(runtime_fmt)
+        if _word_bounds:
+            _under = len(prose.split()) < _word_bounds[0]
+            if _spine_floor_pad_enabled:
+                prose = ensure_word_count_floor(prose, floor=_word_bounds[0], seed=f"{seed}:floor")
+            elif _under:
+                # Surface, do not pad. Under-length spine output = thin atom pool.
+                _governance_report.setdefault("spine_word_floor_signals", []).append(
+                    {
+                        "stage": "post_flow_pre_gate",
+                        "word_count": len(prose.split()),
+                        "floor": _word_bounds[0],
+                        "action": "not_padded",
+                        "reason": (
+                            "spine word-floor padder disabled (G1/#4566); under-length is a "
+                            "thin-pool / atom-shape signal, not filler territory"
+                        ),
+                    }
+                )
+        # Floor padding can duplicate closings and strip flow cues — repair before gates.
+        prose = _final_cap_f7(prose, **_f7_cap_kw)
+        prose = ensure_chapter_flow_cues(
+            prose, flow_profile=_flow_profile, seed=f"{seed}:post_floor_flow"
+        )
+        prose = _final_cap_f7(prose, **_f7_cap_kw)
+        prose = _final_f4_closings(prose, seed=f"{seed}:post_all_flow")
+        prose = _final_orphan_strip(prose)
+        prose = ensure_chapter_flow_cues(
+            prose, flow_profile=_flow_profile, seed=f"{seed}:post_all_flow"
+        )
+        prose = _final_cap_f7(prose, **_f7_cap_kw)
+        # F7 cap can drop one_hour_book below word_range floor. G1: on spine, do NOT re-pad
+        # (see the disabled first call site above) — surface the under-length as a thin-pool
+        # signal. Only re-pad when the PHOENIX_SPINE_WORD_FLOOR_PAD kill-switch is set.
+        if _word_bounds and len(prose.split()) < _word_bounds[0]:
+            if _spine_floor_pad_enabled:
+                prose = ensure_word_count_floor(prose, floor=_word_bounds[0], seed=f"{seed}:floor_final")
+                prose = ensure_chapter_flow_cues(
+                    prose, flow_profile=_flow_profile, seed=f"{seed}:floor_final_flow"
+                )
+                prose = _final_f4_closings(prose, seed=f"{seed}:floor_final_close")
+                prose = _final_orphan_strip(prose)
+            else:
+                _governance_report.setdefault("spine_word_floor_signals", []).append(
+                    {
+                        "stage": "post_f7_pre_gate",
+                        "word_count": len(prose.split()),
+                        "floor": _word_bounds[0],
+                        "action": "not_padded",
+                        "reason": "spine word-floor padder disabled (G1/#4566); thin-pool signal",
+                    }
+                )
+
+        # Floor / flow passes after post_f13_flow_recheck can re-break register (F13/F4).
+        prose = _final_f13_repair(prose, seed=f"{seed}:pre_gate_f13")
+        prose = _final_f4_closings(prose, seed=f"{seed}:pre_gate_f4")
+        prose = ensure_chapter_flow_cues(
+            prose, flow_profile=_flow_profile, seed=f"{seed}:pre_gate_flow"
+        )
+        prose = _final_f13_repair(prose, seed=f"{seed}:pre_gate_f13_recheck")
+        prose = _final_cap_f7(prose, **_f7_cap_kw)
+        prose = _final_orphan_strip(prose)
+        from phoenix_v4.rendering.register_output_strengthen import (
+            destack_adjacent_inject_paragraphs as _destack_inject_paras,
+            fold_standalone_inject_paragraphs as _fold_inject_paras,
+        )
+
+        prose = _destack_inject_paras(prose)
+        # G1-residual Phase-2 (cohesion restore): weave any surviving standalone
+        # one-line inject paragraphs (within-slot bridges + formulaic practice
+        # intros) into a neighbor narrative paragraph, and mark bare Title-Case
+        # section titles as real headings. Returns the composer floor to the
+        # pre-injector 0-5% beat-line band (docs/BESTSELLER_QUALITY_ARCHAEOLOGY_
+        # 2026-07-03.md). PHOENIX_INJECT_FOLD=0 / PHOENIX_SECTION_HEADING_MARK=0
+        # disable. Deterministic; no LLM; gate thresholds untouched.
+        prose = _fold_inject_paras(prose)
+        # Folding a practice-intro into the exercise it introduces can tip that
+        # paragraph into F7 prescribed-action classification, so re-cap F7 once more
+        # AFTER the fold (drop-mode on spine — never re-inject filler). Keeps the F7
+        # per-chapter invariant without disturbing the restored 0-5% beat-line floor.
+        prose = _final_cap_f7(prose, **_f7_cap_kw)
+        # F6 cadence had no pre-gate repair: the single break inside strengthen_register_craft_output
+        # (above) runs BEFORE the flow-cue / floor / F4 / F13 convergence passes, which re-introduce
+        # repeating sentence-length 4-grams (e.g. [9,9,9,10] ×3 → register F6 FAIL on social_anxiety /
+        # somatic_healing). Add the missing FINAL break here, mirroring the pre-gate F4/F13 repairs. It
+        # only lengthens the 3rd+ occurrence of each repeating cadence (~10-12 words/book), makes closing
+        # lines MORE unique (F4-safe), preserves cue substrings (chapter_flow-safe), and adds no
+        # imperative/timing tokens (F7-safe). Strengthens OUTPUT only; the register gate remains arbiter.
+        from phoenix_v4.rendering.register_output_strengthen import (
+            break_pedagogical_cadence_repetition as _final_f6_break,
+        )
+
+        prose = _final_f6_break(prose, seed=f"{seed}:pre_gate_f6")
+
+        _f7_preservation_violations = verify_f7_exercise_preservation(
+            prose,
+            governance_report=_governance_report,
+            max_prescribed_per_chapter=1,
+        )
+        if _f7_preservation_violations:
+            _governance_report.setdefault(
+                "f7_exercise_preservation_violations", []
+            ).extend(_f7_preservation_violations)
+            print(
+                "F7 exercise-preservation check: "
+                + "; ".join(_f7_preservation_violations),
+                file=sys.stderr,
+            )
     word_count = len(prose.split())
     _quality_gate_failures: list[str] = []
     _chapter_flow_status = "SKIPPED"

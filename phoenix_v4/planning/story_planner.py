@@ -234,8 +234,10 @@ def _index_by_character(atoms: List[AtomFile]) -> Dict[str, Dict[str, List[AtomF
     return idx
 
 
-def _story_assembly_mode(runtime_format: str) -> str:
-    """deep_book_6h uses hard same-character continuity; short formats keep soft borrow."""
+def _story_assembly_mode(runtime_format: str, *, twelve_shape: bool = False) -> str:
+    """deep_book_6h and twelve_shape use hard same-character continuity."""
+    if twelve_shape:
+        return "hard"
     return "hard" if (runtime_format or "").strip() == "deep_book_6h" else "soft"
 
 
@@ -278,24 +280,45 @@ def _assemble_story(
             chosen = available[idx]
         else:
             if mode == "hard":
-                continue  # same-character only — never borrow another character's atom
-            # Borrow from the pool — prefer a different character name than primary
-            pool = [
-                a for a in all_atoms
-                if a.arc_position == arc_pos
-                and a.path not in used_atom_paths
-                and a.word_count >= 30
-                and a.character != primary_character
-            ]
-            if not pool:
+                anchored = [
+                    a for a in all_atoms
+                    if a.arc_position == arc_pos
+                    and a.path not in used_atom_paths
+                    and a.word_count >= 30
+                    and a.character == primary_character
+                ]
+                if not anchored:
+                    anchored = [
+                        a for a in all_atoms
+                        if a.arc_position == arc_pos
+                        and a.path not in used_atom_paths
+                        and a.word_count >= 30
+                        and a.character in ("unknown", "")
+                        and primary_character in a.text
+                    ]
+                if not anchored:
+                    continue
+                idx = _deterministic_index(
+                    f"{seed}:story:{story_num}:{arc_pos}:anchored_text", len(anchored)
+                )
+                chosen = anchored[idx]
+            else:
                 pool = [
                     a for a in all_atoms
-                    if a.arc_position == arc_pos and a.word_count >= 30
+                    if a.arc_position == arc_pos
+                    and a.path not in used_atom_paths
+                    and a.word_count >= 30
+                    and a.character != primary_character
                 ]
-            if not pool:
-                return None
-            idx = _deterministic_index(f"{seed}:story:{story_num}:{arc_pos}:borrow", len(pool))
-            chosen = pool[idx]
+                if not pool:
+                    pool = [
+                        a for a in all_atoms
+                        if a.arc_position == arc_pos and a.word_count >= 30
+                    ]
+                if not pool:
+                    return None
+                idx = _deterministic_index(f"{seed}:story:{story_num}:{arc_pos}:borrow", len(pool))
+                chosen = pool[idx]
 
         atoms[arc_pos] = chosen
         used_atom_paths.add(chosen.path)
@@ -417,6 +440,65 @@ def _schedule_phase(
     return assignments
 
 
+def _build_schedule_from_continuity_plan(
+    all_atoms: List[AtomFile],
+    seed: str,
+    continuity_plan: List[dict],
+    planner_warnings: Optional[List[str]] = None,
+) -> StorySchedule:
+    """12-shape: one plan-assigned character per chapter, hard same-character arcs."""
+    warns = planner_warnings if planner_warnings is not None else []
+    char_idx = _index_by_character(all_atoms)
+    schedule = StorySchedule()
+    used_paths: set = set()
+
+    for entry in continuity_plan:
+        if not isinstance(entry, dict):
+            continue
+        ch = int(entry.get("chapter") or 0)
+        char = str(entry.get("character") or "").strip()
+        if ch < 1 or not char:
+            continue
+
+        phase_chapters = next(
+            (list(r) for r in DEFAULT_PHASE_CHAPTERS.values() if ch in r),
+            list(range(1, 13)),
+        )
+        is_final_chapter = ch == phase_chapters[-1]
+        slot_arcs = _SLOT_ARC_FINAL if is_final_chapter else _SLOT_ARC
+
+        arc = _assemble_story(
+            char,
+            char_idx,
+            all_atoms,
+            f"{seed}:twelve_shape:ch{ch}",
+            ch,
+            used_paths,
+            mode="hard",
+        )
+        if arc is None:
+            warns.append(
+                f"story_plan:twelve_shape ch{ch}: could not assemble hard arc for {char!r}"
+            )
+            continue
+
+        for sec_idx, arc_pos in zip(SCENE_SECTION_INDICES, slot_arcs):
+            atom = arc.atoms.get(arc_pos)
+            if atom is None:
+                continue
+            src = (
+                f"story_plan:twelve_shape:ch{ch}:{arc.story_id}:{arc_pos}"
+                f":{atom.engine}:{atom.variant}"
+            )
+            schedule.assignments[(ch, sec_idx)] = StoryAtomSlot(
+                arc_position=arc_pos,
+                text=atom.text,
+                source=src,
+            )
+
+    return schedule
+
+
 # --------------------------------------------------------------------------- #
 # Public API
 # --------------------------------------------------------------------------- #
@@ -430,6 +512,7 @@ def build_story_schedule(
     phase_chapters: Optional[Dict[str, range]] = None,
     runtime_format: str = "",
     planner_warnings: Optional[List[str]] = None,
+    continuity_plan: Optional[List[dict]] = None,
 ) -> StorySchedule:
     """Build a full-book story schedule: 3-6 full-arch stories per phase.
 
@@ -448,6 +531,24 @@ def build_story_schedule(
     all_atoms = _load_all_atoms(persona_id, topic, repo_root)
     if not all_atoms:
         return StorySchedule()
+
+    if continuity_plan is None:
+        try:
+            from phoenix_v4.planning.chapter_object_continuity import load_chapter_continuity_plan
+
+            loaded = load_chapter_continuity_plan(persona_id, topic, repo_root)
+            if loaded:
+                continuity_plan = loaded
+        except ImportError:
+            pass
+
+    if continuity_plan:
+        return _build_schedule_from_continuity_plan(
+            all_atoms,
+            seed,
+            continuity_plan,
+            planner_warnings=planner_warnings,
+        )
 
     mode = _story_assembly_mode(runtime_format)
     warns = planner_warnings if planner_warnings is not None else []

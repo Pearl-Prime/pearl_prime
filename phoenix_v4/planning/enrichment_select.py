@@ -888,6 +888,18 @@ def _try_composite_content(
             recent_doctrine_ids=recent_doctrine_ids,
             chapter_count=chapter_count,
         )
+        if is_twelve_shape_continuity_active(spine_context) and assigned:
+            exact = _pick_persona_atom_by_id(pool, assigned) or next(
+                (
+                    a
+                    for a in pool
+                    if normalize_doctrine_id(str(a.get("atom_id") or ""))
+                    == normalize_doctrine_id(assigned)
+                ),
+                None,
+            )
+            if exact:
+                atom = exact
         if not atom:
             return None
         content = str(atom.get("content") or "").strip()
@@ -1392,6 +1404,54 @@ def _try_angle_callback(
     ).strip()
     fallback_warnings.append(f"ANGLE_CALLBACK: planner-template fallback L{layer} for {aid!r}")
     return tpl, "angle_template", f"angle_cb_tpl:{aid}:L{layer}"
+
+
+def _pick_persona_atom_by_id(pool: list[dict], atom_id: str) -> Optional[dict]:
+    target = (atom_id or "").strip()
+    if not target or not pool:
+        return None
+    for atom in pool:
+        if str(atom.get("atom_id") or "").strip() == target:
+            return atom
+    return None
+
+
+def _try_practice_library_by_id(
+    exercise_id: str,
+    chapter_index: int,
+    seed: str,
+    *,
+    content_only: bool = False,
+) -> Optional[Tuple[str, str]]:
+    """Compose a specific practice_library exercise (full or content-only assembly)."""
+    try:
+        from phoenix_v4.exercises.practice_library_loader import (
+            compose_exercise,
+            load_component_templates,
+            load_practice_library,
+        )
+
+        library = load_practice_library()
+        all_exercises: List[dict] = []
+        for exercises in library.values():
+            if isinstance(exercises, list):
+                all_exercises.extend(exercises)
+        exercise = next((e for e in all_exercises if e.get("id") == exercise_id), None)
+        if not exercise:
+            logger.warning("practice_library: exercise_id %s not found", exercise_id)
+            return None
+        composed = compose_exercise(
+            exercise,
+            chapter_index,
+            seed,
+            load_component_templates(),
+            content_only=content_only,
+        )
+        if composed and composed.strip():
+            return composed.strip(), exercise_id
+    except Exception as e:
+        logger.warning("Practice library by id failed (%s): %s", exercise_id, e)
+    return None
 
 
 def _try_practice_library(
@@ -2093,6 +2153,7 @@ def select_enrichment(
         "slots_from_persona": 0,
         "slots_from_registry": 0,
         "slots_from_practice_library": 0,
+        "slots_from_twelve_shape_plan_exercise": 0,
         "practice_library_warnings": 0,
         "slots_empty": 0,
         "slots_format_scaled": 0,
@@ -2162,6 +2223,9 @@ def select_enrichment(
         repo_root=root,
         runtime_format=rf_bm,
         planner_warnings=_planner_warnings_mut,
+        continuity_plan=plan_context.get("chapter_continuity_plan")
+        if is_twelve_shape_continuity_active(plan_context)
+        else None,
     )
 
     # Section packet audit: per-slot source detail (written to enrichment_audit at end).
@@ -2252,7 +2316,11 @@ def select_enrichment(
             # somatic_section_index (patch_beatmap_angle_journey preserves it; see beatmap_compile.py:209-212).
             # Fall back to slot_i + 1 only when somatic_section_index is not set (short formats / non-v2).
             _sec_idx = getattr(slot, "somatic_section_index", 0) or (slot_i + 1)
-            if stype in ("SCENE", "STORY") and _sec_idx in SCENE_SECTION_INDICES:
+            _twelve_shape_active = is_twelve_shape_continuity_active(plan_context)
+            _story_routable = stype == "STORY" or (
+                stype == "SCENE" and not _twelve_shape_active
+            )
+            if _story_routable and _sec_idx in SCENE_SECTION_INDICES:
                 _sched_slot = _story_schedule.get(bm_ch.number, _sec_idx)
                 if _sched_slot is not None and _sched_slot.text:
                     content = _sched_slot.text
@@ -2280,6 +2348,24 @@ def select_enrichment(
                 _add_ids: List[str] = []
 
                 if stype == "EXERCISE":
+                    _cont_ex_ctx = (
+                        chapter_context_from_spine(plan_context, chapter_index0)
+                        if is_twelve_shape_continuity_active(plan_context)
+                        else None
+                    )
+                    if _cont_ex_ctx and _cont_ex_ctx.exercise_id:
+                        _pl_by_id = _try_practice_library_by_id(
+                            _cont_ex_ctx.exercise_id,
+                            chapter_index0,
+                            seed,
+                            content_only=True,
+                        )
+                        if _pl_by_id:
+                            _add_pieces.append(_pl_by_id[0])
+                            _add_sources.append("practice_library")
+                            _add_ids.append(_pl_by_id[1])
+                            audit_counts["slots_from_practice_library"] += 1
+                            audit_counts["slots_from_twelve_shape_plan_exercise"] += 1
                     # EXERCISE-slot rule (PR #612): teacher exercise wins; else practice_library;
                     # else fall through to hard-fail gap raise below.
                     #
@@ -2290,7 +2376,9 @@ def select_enrichment(
                     # essay-shaped atoms here; fall through to practice_library which
                     # produces actual practice content. See _is_practice_atom() above.
                     _at_hit_ex = None
-                    if tid and teacher_atoms:
+                    if _add_pieces:
+                        pass
+                    elif tid and teacher_atoms:
                         _at_for_slot_ex = {
                             _k: [
                                 _a for _a in _pool
@@ -2321,7 +2409,7 @@ def select_enrichment(
                         _add_ids.append(_at_hit_ex[1])
                         teacher_content_val = _at_content_ex
                         audit_counts["slots_from_teacher"] += 1
-                    elif persona_atoms:
+                    elif not _add_pieces and persona_atoms:
                         # OPD-107 (2026-05-18): consult persona EXERCISE pool through the
                         # SAME shape gate before falling through to practice_library.
                         # Pre-fix, the EXERCISE branch hard-coded teacher → practice_library;
@@ -2417,16 +2505,24 @@ def select_enrichment(
                             # .py:216-219), filling {TRADITION} from spine_context or the
                             # template slot_defaults. Teacher brands never reach this block
                             # (it is gated `if not tid`), so named framing is unaffected.
-                            from phoenix_v4.rendering.teacher_wrapper import (
-                                apply_wrapper as _aw_composite,
-                            )
-                            _cx_body = _aw_composite(
-                                _cx_hit[0],
-                                teacher_id=_GENERALIZED_WRAPPER_SENTINEL,
-                                section_type=stype,
-                                seed=f"{seed_key}:composite",
-                                spine_context=plan_context,
-                            )
+                            #
+                            # Twelve-shape flagship: plan-bound doctrine atoms are complete
+                            # beats — skip generalized wrapper glue (v03_pure doctrine).
+                            _cx_body = _cx_hit[0]
+                            if not (
+                                is_twelve_shape_continuity_active(plan_context)
+                                and stype in _COMPOSITE_REFLECTION_SLOT_TYPES
+                            ):
+                                from phoenix_v4.rendering.teacher_wrapper import (
+                                    apply_wrapper as _aw_composite,
+                                )
+                                _cx_body = _aw_composite(
+                                    _cx_hit[0],
+                                    teacher_id=_GENERALIZED_WRAPPER_SENTINEL,
+                                    section_type=stype,
+                                    seed=f"{seed_key}:composite",
+                                    spine_context=plan_context,
+                                )
                             _add_pieces.append(_cx_body)
                             _add_sources.append("composite_doctrine")
                             _add_ids.append(_cx_hit[1])
@@ -2464,20 +2560,42 @@ def select_enrichment(
                     ):
                         _cont_ctx = chapter_context_from_spine(plan_context, chapter_index0)
                         if _cont_ctx:
-                            _ap_pool = filter_connective_pool(_ap_pool, stype, _cont_ctx)
-                            if not _ap_pool and not _composite_filled:
-                                logger.warning(
-                                    "12-shape continuity BANK EMPTY: %s ch%s object=%s character=%s",
-                                    stype,
-                                    bm_ch.number,
-                                    _cont_ctx.anxiety_object,
-                                    _cont_ctx.character,
-                                )
-                                content = continuity_bank_empty(stype, _cont_ctx)
-                                source = "continuity_bank_empty"
-                                source_id = "EMPTY"
-                                atom_id = "EMPTY"
-                                _continuity_gap_filled = True
+                            _plan_entry = next(
+                                (
+                                    c
+                                    for c in (plan_context.get("chapter_continuity_plan") or [])
+                                    if int(c.get("chapter") or 0) == bm_ch.number
+                                ),
+                                None,
+                            )
+                            _connective_picks = (
+                                (_plan_entry or {}).get("connective_picks") or {}
+                            )
+                            _forced_id = str(_connective_picks.get(stype) or "").strip()
+                            if _forced_id:
+                                _forced = _pick_persona_atom_by_id(_ap_pool, _forced_id)
+                                if _forced and str(_forced.get("content") or "").strip():
+                                    content = str(_forced.get("content") or "").strip()
+                                    source = "persona_atom"
+                                    source_id = _forced_id
+                                    atom_id = _forced_id
+                                    audit_counts["slots_from_persona"] += 1
+                                    _continuity_gap_filled = True
+                            if not _continuity_gap_filled:
+                                _ap_pool = filter_connective_pool(_ap_pool, stype, _cont_ctx)
+                                if not _ap_pool:
+                                    logger.warning(
+                                        "12-shape continuity BANK EMPTY: %s ch%s object=%s character=%s",
+                                        stype,
+                                        bm_ch.number,
+                                        _cont_ctx.anxiety_object,
+                                        _cont_ctx.character,
+                                    )
+                                    content = continuity_bank_empty(stype, _cont_ctx)
+                                    source = "continuity_bank_empty"
+                                    source_id = "EMPTY"
+                                    atom_id = "EMPTY"
+                                    _continuity_gap_filled = True
                     if _ap_pool and not _composite_filled and not _continuity_gap_filled:
                         if (
                             stype == "SCENE"
@@ -2564,8 +2682,13 @@ def select_enrichment(
                         (stype in _REGISTRY_SINGLE_OCCUPANT_SLOTS and bool(_add_pieces))
                         or _composite_filled
                         or (stype == "REFLECTION" and _chapter_composite_doctrine)
+                        or (
+                            is_twelve_shape_continuity_active(plan_context)
+                            and stype in CONTINUITY_CONNECTIVE_SLOTS
+                            and bool(_add_pieces)
+                        )
                     )
-                    if not _skip_registry_stack:
+                    if not _skip_registry_stack and not _continuity_gap_filled:
                         _ar_hit = _try_registry_variant(reg_lists, stype, reg_counters, seed_key)
                         if _ar_hit and not _is_doctrine_quarantined(_ar_hit[0], _frame):
                             _add_pieces.append(_ar_hit[0])
@@ -2606,7 +2729,7 @@ def select_enrichment(
                             teacher_content_val = _at_content
                             audit_counts["slots_from_teacher"] += 1
 
-                if _add_pieces:
+                if _add_pieces and not (content and _continuity_gap_filled):
                     content = "\n\n".join(_add_pieces)
                     source = "+".join(_add_sources)
                     source_id = "+".join(_add_ids)
@@ -2858,7 +2981,7 @@ def select_enrichment(
         "angle_layer_by_chapter": _angle_layer_by_ch,
     }
 
-    _out_spine = dict(request.spine_context or {})
+    _out_spine = dict(plan_context)
     if _planner_warnings_mut:
         _existing_warns = list(_out_spine.get("chapter_planner_warnings") or [])
         _out_spine["chapter_planner_warnings"] = _existing_warns + _planner_warnings_mut
@@ -3907,6 +4030,14 @@ def apply_depth_pass(
     Pass 2 (Priority fill): Remaining budget distributed by priority — late chapters
     first, then by deficit size.
     """
+    from phoenix_v4.planning.chapter_object_continuity import is_twelve_shape_continuity_active
+
+    if is_twelve_shape_continuity_active(enriched_book.spine_context):
+        logger.info(
+            "twelve_shape_continuity: depth_module pass disabled to preserve "
+            "approved 12-slot chapter shape"
+        )
+        return enriched_book
     root = repo_root or REPO_ROOT
     topic = enriched_book.topic
     modules = depth_map.get("depth_modules") or {}

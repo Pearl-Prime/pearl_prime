@@ -52,6 +52,23 @@ SOMATIC_10_SLOT_GRID = [
     "INTEGRATION",  # section_10
 ]
 
+# 12-shape promise_engine refined slot grid (flagship gen_z × anxiety).
+TWELVE_SHAPE_PROMISE_ENGINE_SLOTS = [
+    "HOOK",
+    "ANGLE_DEFINITION",
+    "SCENE",
+    "STORY",  # recognition — story_schedule section 2
+    "PIVOT",
+    "REFLECTION",
+    "EXERCISE",
+    "STORY",  # mechanism_proof — story_schedule section 5
+    "STORY",  # turning_point — story_schedule section 9
+    "TAKEAWAY",
+    "INTEGRATION",
+    "THREAD",
+]
+_TWELVE_SHAPE_STORY_SECTIONS = (2, 5, 9)
+
 # Parallel budget keys (non-uniform six-hour baseline; scaled per chapter target).
 SOMATIC_BUDGET_KEYS = [
     "HOOK",
@@ -327,6 +344,27 @@ def _somatic_slot_required(slot_type: str, req_set: Set[str]) -> bool:
     return st in req_set
 
 
+def resolve_twelve_shape_slot_grid(
+    persona_id: str,
+    topic_id: str,
+    repo_root: Optional[Path] = None,
+) -> Optional[List[str]]:
+    """Return 12-shape promise_engine slots when a continuity plan exists for the cell."""
+    from phoenix_v4.planning.chapter_object_continuity import load_chapter_continuity_plan
+
+    plan = load_chapter_continuity_plan(persona_id, topic_id, repo_root)
+    if not plan:
+        return None
+    return list(TWELVE_SHAPE_PROMISE_ENGINE_SLOTS)
+
+
+def _twelve_shape_somatic_section_index(slot_type: str, story_slot_index: int) -> int:
+    """Map STORY arc slots to story_schedule section indices; other slots use slot order."""
+    if slot_type == "STORY" and story_slot_index < len(_TWELVE_SHAPE_STORY_SECTIONS):
+        return _TWELVE_SHAPE_STORY_SECTIONS[story_slot_index]
+    return 0
+
+
 def resolve_slot_definitions(
     shaped_chapter: ShapedChapter,
     runtime_format: str,
@@ -432,6 +470,7 @@ def compile_beatmap(
     topic_engines: Dict[str, Any],
     format_spec: Dict[str, Any],
     repo_root: Optional[Path] = None,
+    persona_id: Optional[str] = None,
 ) -> Beatmap:
     root = repo_root or REPO_ROOT
     if shaped_spine.stage != "knob_apply":
@@ -473,6 +512,60 @@ def compile_beatmap(
             forbidden_hits.append({"chapter": ch.number, "slot": mv, "source": "forbidden_moves"})
 
         ch_target = ch.target_word_count
+
+        twelve_shape_grid = (
+            resolve_twelve_shape_slot_grid(persona_id or "", shaped_spine.topic, root)
+            if persona_id
+            else None
+        )
+
+        if twelve_shape_grid:
+            ordered = list(twelve_shape_grid)
+            word_by_slot = _allocate_words(ordered, wmap, ch_target, [])
+            req_set = set(required)
+            story_i = 0
+            slots_twelve: List[BeatmapSlot] = []
+            for j, st in enumerate(ordered):
+                sec_idx = _twelve_shape_somatic_section_index(st, story_i)
+                if st == "STORY":
+                    story_i += 1
+                crit: Dict[str, Any] = {
+                    "topic": shaped_spine.topic,
+                    "persona": persona_id,
+                    "engine": default_engine,
+                    "slot_type": st,
+                    "emotional_temperature": ch.emotional_temperature,
+                    "phase": ch.phase,
+                    "chapter_role": ch.role,
+                    "runtime_format": shaped_spine.runtime_format,
+                }
+                hooks = _enrichment_hooks_for_slot(ch.enrichment_priority, st)
+                slots_twelve.append(
+                    BeatmapSlot(
+                        slot_type=st,
+                        weight=float(wmap.get(st, 0.2)),
+                        target_words=word_by_slot[st],
+                        somatic_section_index=sec_idx or (j + 1),
+                        atom_selection_criteria=crit,
+                        enrichment_hooks=hooks,
+                        emotional_temperature=ch.emotional_temperature,
+                        is_required=st in req_set,
+                    )
+                )
+                sections_included += 1
+            chapters_out.append(
+                BeatmapChapter(
+                    number=ch.number,
+                    role=ch.role,
+                    working_title=ch.working_title,
+                    thesis=ch.thesis,
+                    phase=ch.phase,
+                    target_word_count=ch_target,
+                    slots=slots_twelve,
+                    slot_definitions=[s.slot_type for s in slots_twelve],
+                )
+            )
+            continue
 
         if shaped_spine.runtime_format in SOMATIC_FULL_RUNTIME_FORMATS:
             for r in required:

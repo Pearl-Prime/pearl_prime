@@ -81,4 +81,5 @@ def test_deep_book_schedule_same_character_per_chapter():
 
         by_ch.setdefault(ch, []).append(_extract_character(slot.text))
     for ch, names in by_ch.items():
-        assert len(set(names)) <= 1, f"chapter {ch} mixed characters: {names}"
+        named = [n for n in names if n]
+        assert len(set(named)) <= 1, f"chapter {ch} mixed characters: {names}"

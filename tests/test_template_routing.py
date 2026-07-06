@@ -2,7 +2,8 @@ from phoenix_v4.planning.legacy_template_loader import resolve_template_library
 
 
 def test_somatic_gen_z_standard():
-    assert resolve_template_library("anxiety", "gen_z_professionals", "standard_book") == "v2_somatic"
+    # Twelve-shape continuity plan routes all formats to spine_only for this cell.
+    assert resolve_template_library("anxiety", "gen_z_professionals", "standard_book") == "spine_only"
 
 
 def test_somatic_professional_standard():
@@ -38,15 +39,15 @@ def test_missing_config_fallback():
 # must route to v2_somatic for somatic topics, matching standard_book behaviour and
 # their SOMATIC_FULL_RUNTIME_FORMATS membership in phoenix_v4/planning/beatmap_compile.py.
 def test_somatic_gen_z_deep_book_6h():
-    assert resolve_template_library("anxiety", "gen_z_professionals", "deep_book_6h") == "v2_somatic"
+    assert resolve_template_library("anxiety", "gen_z_professionals", "deep_book_6h") == "spine_only"
 
 
 def test_somatic_gen_z_extended_book_2h():
-    assert resolve_template_library("anxiety", "gen_z_professionals", "extended_book_2h") == "v2_somatic"
+    assert resolve_template_library("anxiety", "gen_z_professionals", "extended_book_2h") == "spine_only"
 
 
 def test_somatic_gen_z_deep_book_4h():
-    assert resolve_template_library("anxiety", "gen_z_professionals", "deep_book_4h") == "v2_somatic"
+    assert resolve_template_library("anxiety", "gen_z_professionals", "deep_book_4h") == "spine_only"
 
 
 def test_somatic_professional_deep_book_6h():

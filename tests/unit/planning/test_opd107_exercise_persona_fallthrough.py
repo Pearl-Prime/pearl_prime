@@ -225,7 +225,15 @@ def patch_atom_loaders(monkeypatch):
     Also stubs _try_practice_library to return a sentinel so we can detect
     when the practice_library fallback fires (the LAST resort in the EXERCISE
     branch).
+
+    Twelve_shape continuity is disabled so OPD-107 persona fallthrough is
+    exercised (flagship gen_z×anxiety binds plan exercises when active).
     """
+    monkeypatch.setattr(
+        es,
+        "is_twelve_shape_continuity_active",
+        lambda *args, **kwargs: False,
+    )
 
     real_load_teacher = es._load_teacher_atoms
     real_load_persona = es._load_persona_atoms

@@ -775,6 +775,26 @@ def _collapse_chapter_one_story_stack(story: str) -> str:
     return s
 
 
+def build_ordered_slot_streams(
+    slots: list["EnrichedSlot"],
+    *,
+    chapter_index0: int = 0,
+) -> tuple[list[str], list[str]]:
+    """1:1 slot order for twelve_shape flagship — no type bucketing or story collapse."""
+    types_: list[str] = []
+    proses: list[str] = []
+    for slot in slots:
+        st = str(getattr(slot, "slot_type", "") or "").strip().upper()
+        body = str(getattr(slot, "content", "") or "").strip()
+        if not st or not body:
+            continue
+        if st.startswith("_DEPTH"):
+            continue
+        types_.append(st)
+        proses.append(_strip_slot_artifacts(body, chapter_index=chapter_index0))
+    return types_, proses
+
+
 def build_virtual_slot_streams(
     slots: list["EnrichedSlot"],
     *,
@@ -1161,6 +1181,7 @@ def compose_golden_spine_chapter(
     exercise_memory: Any = None,
     angle_id: str = "",
     angle_layer_by_chapter: Optional[dict[int, int]] = None,
+    twelve_shape_flagship: bool = False,
 ) -> tuple[str, dict[str, Any]]:
     """
     Returns (chapter body without ``Chapter N`` heading, synthesis_meta).
@@ -1176,13 +1197,19 @@ def compose_golden_spine_chapter(
 
     _ch_num = int(getattr(chapter, "number", chapter_index0 + 1))
     _angle_layer = (angle_layer_by_chapter or {}).get(_ch_num)
-    slot_types, slot_proses = build_virtual_slot_streams(
-        chapter.slots,
-        chapter_index0=chapter_index0,
-        angle_id=angle_id or "",
-        angle_layer=_angle_layer,
-        topic_id=topic_id,
-    )
+    if twelve_shape_flagship:
+        slot_types, slot_proses = build_ordered_slot_streams(
+            chapter.slots,
+            chapter_index0=chapter_index0,
+        )
+    else:
+        slot_types, slot_proses = build_virtual_slot_streams(
+            chapter.slots,
+            chapter_index0=chapter_index0,
+            angle_id=angle_id or "",
+            angle_layer=_angle_layer,
+            topic_id=topic_id,
+        )
     meta: dict[str, Any] = {
         "virtual_slot_types": slot_types,
         "beat_model": list(GOLDEN_BEATS),
@@ -1204,6 +1231,18 @@ def compose_golden_spine_chapter(
     # through to mechanism_thesis_families lookup or the legacy keyword chain —
     # the documented thesis-routing drift in the bestseller drift analysis.
     chapter_arc_thesis = str(getattr(chapter, "thesis", "") or "").strip()
+    if twelve_shape_flagship:
+        from phoenix_v4.rendering.chapter_composer import compose_ordered_chapter_prose
+
+        ch_body = compose_ordered_chapter_prose(slot_types, slot_proses).strip()
+        meta["frame_governance"] = {
+            "violations": [],
+            "softened": 0,
+            "stripped": 0,
+            "skipped": "twelve_shape_ordered",
+        }
+        return ch_body, meta
+
     composed = compose_chapter_prose(
         slot_types,
         slot_proses,

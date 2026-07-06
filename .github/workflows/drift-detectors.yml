@@ -88,6 +88,15 @@ jobs:
       - name: 12-shape chapter object continuity (BLOCK)
         run: PYTHONPATH=. python3 scripts/ci/check_chapter_object_continuity.py
 
+      - name: Flagship 12-shape chapter shape (BLOCK)
+        run: PYTHONPATH=. python3 scripts/ci/check_flagship_chapter_shape.py
+
+      - name: Flagship CH1 golden parity (BLOCK)
+        run: PYTHONPATH=. python3 scripts/ci/check_flagship_book_parity.py
+
+      - name: Flagship CH1 executable contract (BLOCK)
+        run: PYTHONPATH=. python3 scripts/ci/check_flagship_contract.py
+
       - name: Data dictionary enforced (undocumented / orphan / unwired-knob — BLOCK)
         run: |
           PYTHONPATH=scripts/ci:. python3 scripts/ci/check_data_dictionary.py

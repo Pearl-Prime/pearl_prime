@@ -359,7 +359,7 @@ def _strip_scaffolding_lines(text: str) -> str:
     return "\n".join(out)
 
 
-def _strip_angle_journey_placeholders(text: str) -> str:
+def _strip_angle_journey_placeholders(text: str, *, preserve: bool = False) -> str:
     """Drop blank-line-delimited paragraphs led by an '[Angle journey — …]' placeholder marker.
 
     These blocks come from config/planning/angle_journey_fallback.yaml when the per-angle
@@ -367,7 +367,11 @@ def _strip_angle_journey_placeholders(text: str) -> str:
     bracketed leader plus interpolated follow-on lines such as "This book follows the … lens:"
     or "Phase: …. Prior layer: …" — is planner scaffolding, never reader-facing prose, so the
     entire block is removed (a line-level strip would orphan the follow-on lines).
+
+    When ``preserve`` is True (twelve_shape flagship with banked angle atoms), keep all blocks.
     """
+    if preserve:
+        return text
     paragraphs = re.split(r"\n\s*\n", text)
     kept: list[str] = []
     for para in paragraphs:
@@ -811,7 +815,10 @@ def clean_for_delivery(
     """
     text = _resolve_loc_var_fallbacks(text, plan=plan)
     text = _strip_scaffolding_lines(text)
-    text = _strip_angle_journey_placeholders(text)
+    _preserve_angle = bool((plan or {}).get("twelve_shape_continuity")) or bool(
+        (plan or {}).get("preserve_angle_definition")
+    )
+    text = _strip_angle_journey_placeholders(text, preserve=_preserve_angle)
     text = re.sub(r"\s*\{['\"][^'\"]+['\"]\s*:\s*", " ", text)
     text = re.sub(r"\s*\[\s*\{\s*['\"][^'\"]+['\"]\s*:\s*", " ", text)
     text = _dedup_repeated_blocks(text, word_floor=_delivery_word_floor_from_plan(plan))
