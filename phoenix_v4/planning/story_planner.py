@@ -234,6 +234,107 @@ def _index_by_character(atoms: List[AtomFile]) -> Dict[str, Dict[str, List[AtomF
     return idx
 
 
+_STORY_PICK_ARCS = frozenset({"recognition", "mechanism_proof", "turning_point", "embodiment"})
+
+
+def normalize_story_pick_variant(raw: str) -> str:
+    """Normalize plan story_picks value to variant stem (e.g. v03)."""
+    text = str(raw or "").strip()
+    if not text:
+        return ""
+    if text.lower().startswith("v") and " " not in text:
+        return text
+    parts = text.split()
+    return parts[-1] if parts else text
+
+
+def find_atom_by_variant(
+    all_atoms: List[AtomFile],
+    arc_position: str,
+    variant: str,
+) -> Optional[AtomFile]:
+    """Resolve a story atom file by arc position + variant stem."""
+    v = normalize_story_pick_variant(variant)
+    if not v or arc_position not in ARC_POSITIONS:
+        return None
+    matches = [a for a in all_atoms if a.arc_position == arc_position and a.variant == v]
+    return matches[0] if matches else None
+
+
+def _pick_arc_atom(
+    arc_pos: str,
+    primary_character: str,
+    char_idx: Dict[str, Dict[str, List[AtomFile]]],
+    all_atoms: List[AtomFile],
+    seed: str,
+    story_num: int,
+    used_atom_paths: set,
+    mode: str = "soft",
+    *,
+    forced_variant: str = "",
+) -> Optional[AtomFile]:
+    """Pick one arc-position atom; explicit variant pin bypasses deterministic_index."""
+    if forced_variant:
+        chosen = find_atom_by_variant(all_atoms, arc_pos, forced_variant)
+        if chosen is None:
+            return None
+        used_atom_paths.add(chosen.path)
+        return chosen
+
+    char_arcs = char_idx.get(primary_character, {})
+    available = [
+        a for a in char_arcs.get(arc_pos, [])
+        if a.path not in used_atom_paths and a.word_count >= 30
+    ]
+    if available:
+        idx = _deterministic_index(f"{seed}:story:{story_num}:{arc_pos}:primary", len(available))
+        chosen = available[idx]
+    else:
+        if mode == "hard":
+            anchored = [
+                a for a in all_atoms
+                if a.arc_position == arc_pos
+                and a.path not in used_atom_paths
+                and a.word_count >= 30
+                and a.character == primary_character
+            ]
+            if not anchored:
+                anchored = [
+                    a for a in all_atoms
+                    if a.arc_position == arc_pos
+                    and a.path not in used_atom_paths
+                    and a.word_count >= 30
+                    and a.character in ("unknown", "")
+                    and primary_character in a.text
+                ]
+            if not anchored:
+                return None
+            idx = _deterministic_index(
+                f"{seed}:story:{story_num}:{arc_pos}:anchored_text", len(anchored)
+            )
+            chosen = anchored[idx]
+        else:
+            pool = [
+                a for a in all_atoms
+                if a.arc_position == arc_pos
+                and a.path not in used_atom_paths
+                and a.word_count >= 30
+                and a.character != primary_character
+            ]
+            if not pool:
+                pool = [
+                    a for a in all_atoms
+                    if a.arc_position == arc_pos and a.word_count >= 30
+                ]
+            if not pool:
+                return None
+            idx = _deterministic_index(f"{seed}:story:{story_num}:{arc_pos}:borrow", len(pool))
+            chosen = pool[idx]
+
+    used_atom_paths.add(chosen.path)
+    return chosen
+
+
 def _story_assembly_mode(runtime_format: str, *, twelve_shape: bool = False) -> str:
     """deep_book_6h and twelve_shape use hard same-character continuity."""
     if twelve_shape:
@@ -265,63 +366,32 @@ def _assemble_story(
     story_num: int,
     used_atom_paths: set,
     mode: str = "soft",
+    story_picks: Optional[Dict[str, str]] = None,
 ) -> Optional[StoryArc]:
     """Build a StoryArc for primary_character; soft mode may borrow other characters."""
     atoms: Dict[str, AtomFile] = {}
-    char_arcs = char_idx.get(primary_character, {})
+    picks = story_picks or {}
 
     for arc_pos in ARC_POSITIONS:
-        available = [
-            a for a in char_arcs.get(arc_pos, [])
-            if a.path not in used_atom_paths and a.word_count >= 30
-        ]
-        if available:
-            idx = _deterministic_index(f"{seed}:story:{story_num}:{arc_pos}:primary", len(available))
-            chosen = available[idx]
-        else:
+        forced = normalize_story_pick_variant(picks.get(arc_pos, "")) if picks.get(arc_pos) else ""
+        chosen = _pick_arc_atom(
+            arc_pos,
+            primary_character,
+            char_idx,
+            all_atoms,
+            seed,
+            story_num,
+            used_atom_paths,
+            mode,
+            forced_variant=forced,
+        )
+        if chosen is None:
+            if forced:
+                return None
             if mode == "hard":
-                anchored = [
-                    a for a in all_atoms
-                    if a.arc_position == arc_pos
-                    and a.path not in used_atom_paths
-                    and a.word_count >= 30
-                    and a.character == primary_character
-                ]
-                if not anchored:
-                    anchored = [
-                        a for a in all_atoms
-                        if a.arc_position == arc_pos
-                        and a.path not in used_atom_paths
-                        and a.word_count >= 30
-                        and a.character in ("unknown", "")
-                        and primary_character in a.text
-                    ]
-                if not anchored:
-                    continue
-                idx = _deterministic_index(
-                    f"{seed}:story:{story_num}:{arc_pos}:anchored_text", len(anchored)
-                )
-                chosen = anchored[idx]
-            else:
-                pool = [
-                    a for a in all_atoms
-                    if a.arc_position == arc_pos
-                    and a.path not in used_atom_paths
-                    and a.word_count >= 30
-                    and a.character != primary_character
-                ]
-                if not pool:
-                    pool = [
-                        a for a in all_atoms
-                        if a.arc_position == arc_pos and a.word_count >= 30
-                    ]
-                if not pool:
-                    return None
-                idx = _deterministic_index(f"{seed}:story:{story_num}:{arc_pos}:borrow", len(pool))
-                chosen = pool[idx]
-
+                continue
+            return None
         atoms[arc_pos] = chosen
-        used_atom_paths.add(chosen.path)
 
     if not atoms:
         return None
@@ -467,11 +537,62 @@ def _build_schedule_from_continuity_plan(
         is_final_chapter = ch == phase_chapters[-1]
         slot_arcs = _SLOT_ARC_FINAL if is_final_chapter else _SLOT_ARC
 
+        story_picks_map = {
+            k: str(v).strip()
+            for k, v in (entry.get("story_picks") or {}).items()
+            if k in _STORY_PICK_ARCS and str(v).strip()
+        }
+        seed_key = f"{seed}:twelve_shape:ch{ch}"
+
+        if story_picks_map:
+            chapter_atoms: Dict[str, AtomFile] = {}
+            missing = False
+            for arc_pos in slot_arcs:
+                forced = (
+                    normalize_story_pick_variant(story_picks_map[arc_pos])
+                    if arc_pos in story_picks_map
+                    else ""
+                )
+                atom = _pick_arc_atom(
+                    arc_pos,
+                    char,
+                    char_idx,
+                    all_atoms,
+                    seed_key,
+                    ch,
+                    used_paths,
+                    "hard",
+                    forced_variant=forced,
+                )
+                if atom is None:
+                    warns.append(
+                        f"story_plan:twelve_shape ch{ch}: story_pick {arc_pos}"
+                        f"={story_picks_map.get(arc_pos, forced)!r} unresolved"
+                    )
+                    missing = True
+                    break
+                chapter_atoms[arc_pos] = atom
+            if missing:
+                continue
+            story_id = f"story_{ch}"
+            for sec_idx, arc_pos in zip(SCENE_SECTION_INDICES, slot_arcs):
+                atom = chapter_atoms[arc_pos]
+                src = (
+                    f"story_plan:twelve_shape:ch{ch}:{story_id}:{arc_pos}"
+                    f":{atom.engine}:{atom.variant}"
+                )
+                schedule.assignments[(ch, sec_idx)] = StoryAtomSlot(
+                    arc_position=arc_pos,
+                    text=atom.text,
+                    source=src,
+                )
+            continue
+
         arc = _assemble_story(
             char,
             char_idx,
             all_atoms,
-            f"{seed}:twelve_shape:ch{ch}",
+            seed_key,
             ch,
             used_paths,
             mode="hard",
