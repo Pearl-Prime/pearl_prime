@@ -38,19 +38,27 @@ def _write_reflection_bank(path: Path, variants: List[tuple[int, str]]) -> None:
     path.write_text("\n".join(lines), encoding="utf-8")
 
 
-def _twelve_chapter_beatmap(topic: str = "anxiety") -> Beatmap:
+def _twelve_chapter_beatmap(
+    topic: str = "anxiety",
+    *,
+    reflections_per_chapter: int = 1,
+    runtime_format: str = "standard_book",
+) -> Beatmap:
     chapters: List[BeatmapChapter] = []
     for n in range(1, 13):
-        slot = BeatmapSlot(
-            slot_type="REFLECTION",
-            weight=1.0,
-            target_words=200,
-            somatic_section_index=4,
-            atom_selection_criteria={},
-            enrichment_hooks=[],
-            emotional_temperature="neutral",
-            is_required=True,
-        )
+        slots = [
+            BeatmapSlot(
+                slot_type="REFLECTION",
+                weight=1.0,
+                target_words=200,
+                somatic_section_index=4,
+                atom_selection_criteria={},
+                enrichment_hooks=[],
+                emotional_temperature="neutral",
+                is_required=True,
+            )
+            for _ in range(reflections_per_chapter)
+        ]
         chapters.append(
             BeatmapChapter(
                 number=n,
@@ -58,9 +66,9 @@ def _twelve_chapter_beatmap(topic: str = "anxiety") -> Beatmap:
                 working_title=f"Ch{n}",
                 thesis="",
                 phase="middle",
-                target_word_count=200,
-                slots=[slot],
-                slot_definitions=["REFLECTION"],
+                target_word_count=200 * reflections_per_chapter,
+                slots=slots,
+                slot_definitions=["REFLECTION"] * reflections_per_chapter,
             )
         )
     return Beatmap(
@@ -68,8 +76,8 @@ def _twelve_chapter_beatmap(topic: str = "anxiety") -> Beatmap:
         stage="compile",
         topic=topic,
         family_id="test",
-        runtime_format="standard_book",
-        total_target_words=2400,
+        runtime_format=runtime_format,
+        total_target_words=2400 * reflections_per_chapter,
         chapters=chapters,
         compile_audit={},
     )
@@ -131,10 +139,39 @@ def test_pick_doctrine_atom_blocks_repeat() -> None:
         pick_doctrine_atom_by_id(pool, "COMPOSITE_DOCTRINE v01", used_doctrine_ids=used)
 
 
-def test_twelve_chapter_gen_z_anxiety_distinct_doctrines(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
-) -> None:
-    """12-chapter gen_z×anxiety: 12 distinct doctrines in planned order, zero repeats."""
+def test_pick_doctrine_atom_allows_intra_chapter_repick() -> None:
+    """Multi-REFLECTION chapters resolve the SAME doctrine for each slot — allowed.
+
+    doctrine_distribution_plan rule 1: one doctrine per chapter, shared across all
+    REFLECTION slots. Passing current_chapter_doctrine_id lets the guard tell an
+    intra-chapter re-pick (allowed) apart from a cross-chapter repeat (blocked).
+    """
+    pool = [_reflection_atom(3, "b"), _reflection_atom(1, "a")]
+    used = {"COMPOSITE_DOCTRINE v03"}  # slot 1 of this chapter already stored v03
+    atom = pick_doctrine_atom_by_id(
+        pool,
+        "COMPOSITE_DOCTRINE v03",
+        used_doctrine_ids=used,
+        current_chapter_doctrine_id="COMPOSITE_DOCTRINE v03",
+    )
+    assert atom is not None
+    assert normalize_doctrine_id(atom["atom_id"]) == "COMPOSITE_DOCTRINE v03"
+
+
+def test_pick_doctrine_atom_still_blocks_cross_chapter_repeat() -> None:
+    """A doctrine used by a PRIOR chapter is still a fail-closed violation (#4672 rule 2)."""
+    pool = [_reflection_atom(1, "a"), _reflection_atom(3, "b")]
+    with pytest.raises(DoctrineRotationError):
+        pick_doctrine_atom_by_id(
+            pool,
+            "COMPOSITE_DOCTRINE v01",  # prior chapter used v01
+            used_doctrine_ids={"COMPOSITE_DOCTRINE v01"},
+            current_chapter_doctrine_id="COMPOSITE_DOCTRINE v03",  # this chapter is v03
+        )
+
+
+def _stage_anxiety_rotation_fixtures(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    """Copy the real anxiety rotation config + 12-shape plan + a REFLECTION bank into tmp."""
     topic = "anxiety"
     variant_nums = [3, 1, 5, 4, 2, 6, 7, 8, 9, 10, 11, 15]
     bodies = [(v, f"Doctrine body for variant v{v:02d} with enough words to pass gate.") for v in variant_nums]
@@ -169,6 +206,14 @@ def test_twelve_chapter_gen_z_anxiety_distinct_doctrines(
         },
     )
 
+
+def test_twelve_chapter_gen_z_anxiety_distinct_doctrines(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """12-chapter gen_z×anxiety: 12 distinct doctrines in planned order, zero repeats."""
+    topic = "anxiety"
+    _stage_anxiety_rotation_fixtures(tmp_path, monkeypatch)
+
     req = EnrichmentRequest(
         topic_id=topic,
         persona_id="gen_z_professionals",
@@ -190,4 +235,60 @@ def test_twelve_chapter_gen_z_anxiety_distinct_doctrines(
     assert picked_ids == EXPECTED_ANXIETY_12
     assert len(set(picked_ids)) == 12, f"repeat detected: {picked_ids}"
 
-    print("doctrine_rotation_proof:", picked_ids)
+
+def test_multi_reflection_chapter_no_crash_shares_doctrine(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Regression (multi-reflection crash, #4672 follow-up).
+
+    A deep/standard template (deep_book_6h) has TWO REFLECTION slots per chapter.
+    Before the fix, the rotation guard resolved the SAME per-chapter doctrine for
+    both slots and fail-closed on the second slot as if it were a cross-chapter
+    repeat (DoctrineRotationError → uncaught sys.exit(1) at ch1). This asserts:
+
+      1. the 12-chapter build completes (no DoctrineRotationError);
+      2. both REFLECTION slots in a chapter SHARE that chapter's one doctrine
+         (doctrine_distribution_plan rule 1);
+      3. cross-chapter doctrines are still all distinct (#4672 rule 2 intact).
+
+    Both directions are guarded — compact (1-reflection) is covered by
+    ``test_twelve_chapter_gen_z_anxiety_distinct_doctrines``; the cross-chapter
+    fail-closed itself by ``test_pick_doctrine_atom_still_blocks_cross_chapter_repeat``.
+    """
+    topic = "anxiety"
+    _stage_anxiety_rotation_fixtures(tmp_path, monkeypatch)
+
+    req = EnrichmentRequest(
+        topic_id=topic,
+        persona_id="gen_z_professionals",
+        teacher_id=None,
+        beatmap=_twelve_chapter_beatmap(
+            topic, reflections_per_chapter=2, runtime_format="deep_book_6h",
+        ),
+        seed="multi_reflection_regression",
+        publishable_book=False,
+        spine_context={"book_frame": "somatic_first"},
+    )
+    # Must NOT raise DoctrineRotationError (the pre-fix crash).
+    book = select_enrichment(req, repo_root=tmp_path)
+
+    assert len(book.chapters) == 12, "expected a completed 12-chapter build"
+
+    chapter_doctrines: List[str] = []
+    for ch in book.chapters:
+        slot_ids = [
+            normalize_doctrine_id(s.source_id or "")
+            for s in ch.slots
+            if "composite_doctrine" in s.source
+        ]
+        assert slot_ids, f"ch{ch.number}: expected composite doctrine in REFLECTION slots"
+        # (2) all REFLECTION slots in this chapter share ONE doctrine
+        assert len(set(slot_ids)) == 1, (
+            f"ch{ch.number}: REFLECTION slots must share one doctrine, got {slot_ids}"
+        )
+        chapter_doctrines.append(slot_ids[0])
+
+    # planned foundational→integrative order, unchanged by the multi-slot shape
+    assert chapter_doctrines == EXPECTED_ANXIETY_12
+    # (3) cross-chapter no-repeat still holds
+    assert len(set(chapter_doctrines)) == 12, f"cross-chapter repeat: {chapter_doctrines}"

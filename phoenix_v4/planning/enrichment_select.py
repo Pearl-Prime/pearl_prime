@@ -870,7 +870,17 @@ def _try_composite_content(
         )
         if not assigned:
             return None
-        atom = pick_doctrine_atom_by_id(pool, assigned, used_doctrine_ids=used_doctrine_ids)
+        # `assigned` IS this chapter's single doctrine (doctrine_distribution_plan
+        # rule 1). Passing it as current_chapter_doctrine_id lets the guard tell an
+        # intra-chapter re-pick (multi-REFLECTION templates like deep_book_6h resolve
+        # the same doctrine for each REFLECTION slot — allowed) apart from a genuine
+        # cross-chapter repeat (still fail-closed, preserving #4672 rule 2 / gate 26).
+        atom = pick_doctrine_atom_by_id(
+            pool,
+            assigned,
+            used_doctrine_ids=used_doctrine_ids,
+            current_chapter_doctrine_id=assigned,
+        )
         if not atom:
             return None
         content = str(atom.get("content") or "").strip()

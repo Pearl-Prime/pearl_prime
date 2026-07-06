@@ -128,15 +128,28 @@ def pick_doctrine_atom_by_id(
     doctrine_id: str,
     *,
     used_doctrine_ids: Optional[set[str]] = None,
+    current_chapter_doctrine_id: Optional[str] = None,
 ) -> Optional[dict]:
     """
-    Select the pool atom matching doctrine_id. Fail closed on repeat or miss.
+    Select the pool atom matching doctrine_id. Fail closed on a CROSS-chapter repeat.
+
+    Design intent (docs/doctrine_distribution_plan.md rules 1–2): each chapter gets
+    exactly ONE doctrine variant, SHARED across every REFLECTION slot in that chapter;
+    "no repeats" is a CROSS-chapter guarantee only. Multi-REFLECTION templates
+    (e.g. deep_book_6h with 2 REFLECTION slots/chapter) resolve the SAME per-chapter
+    doctrine for each slot — that intra-chapter recurrence is expected and MUST NOT
+    fail closed. Only a doctrine already assigned to a *prior* chapter is a violation.
+
+    ``current_chapter_doctrine_id`` names the doctrine assigned to the chapter being
+    filled; when ``target`` equals it, an entry already present in ``used_doctrine_ids``
+    is an intra-chapter re-pick (allowed), not a cross-chapter repeat.
     """
     target = normalize_doctrine_id(doctrine_id)
     if not target:
         return None
     used = used_doctrine_ids or set()
-    if target in used:
+    current = normalize_doctrine_id(current_chapter_doctrine_id or "")
+    if target in used and target != current:
         logger.error("doctrine_rotation: repeat blocked — %s already assigned", target)
         raise DoctrineRotationError(f"doctrine repeat blocked: {target}")
 
