@@ -13,9 +13,10 @@
   /* ══════════════════════════════════════════════════════
      SUPPORTED LOCALES
      ══════════════════════════════════════════════════════ */
+  // Canonical 14 global markets (config/localization/locale_registry.yaml).
   var SUPPORTED = [
-    "en-US","ja-JP","zh-TW","zh-CN","ko-KR","fr-FR","de-DE",
-    "hu-HU","id-ID","th-TH","vi-VN","pt-BR","es-MX"
+    "en-US","es-US","es-ES","pt-BR","fr-FR","de-DE","it-IT","hu-HU",
+    "ja-JP","ko-KR","zh-CN","zh-TW","zh-HK","zh-SG"
   ];
 
   /* ══════════════════════════════════════════════════════
@@ -1222,14 +1223,58 @@
     "picker.lang": "Idioma"
   };
 
+  // ─── es-US (US Hispanic, neutral LatAm — nav + CTAs) ─
+  I18N["es-US"] = {
+    "nav.brand":"Pearl Prime","nav.markets":"Mercados","nav.teachers":"Maestros",
+    "nav.showcase":"Escaparate","nav.intro":"Introducción","nav.marketing":"Marketing",
+    "nav.dashboard":"Panel","nav.matrix":"Matriz","nav.gallery":"Galería","nav.admin":"Admin de Marca",
+    "entry.title":"Pearl Prime","entry.subtitle":"Elige tu mercado",
+    "entry.learn":"Conocer más","entry.learn.desc":"Muéstrame cómo funciona",
+    "entry.start":"Empezar a trabajar","entry.start.desc":"Estoy listo",
+    "entry.onboarding":"Incorporación de marca","entry.onboarding.desc":"Configurar mi marca por primera vez",
+    "entry.operations":"Operaciones de marca","entry.operations.desc":"Hacer mis cargas semanales",
+    "entry.back.market":"Cambiar mercado","entry.back":"Atrás","picker.lang":"Idioma"
+  };
+  // ─── es-ES (Spain, Castilian — nav + CTAs) ──────────
+  I18N["es-ES"] = {
+    "nav.brand":"Pearl Prime","nav.markets":"Mercados","nav.teachers":"Maestros",
+    "nav.showcase":"Escaparate","nav.intro":"Introducción","nav.marketing":"Marketing",
+    "nav.dashboard":"Panel","nav.matrix":"Matriz","nav.gallery":"Galería","nav.admin":"Admin de Marca",
+    "entry.title":"Pearl Prime","entry.subtitle":"Elige tu mercado",
+    "entry.learn":"Saber más","entry.learn.desc":"Enséñame cómo funciona",
+    "entry.start":"Empezar a trabajar","entry.start.desc":"Estoy listo",
+    "entry.onboarding":"Alta de marca","entry.onboarding.desc":"Configurar mi marca por primera vez",
+    "entry.operations":"Operaciones de marca","entry.operations.desc":"Subir mis publicaciones semanales",
+    "entry.back.market":"Cambiar mercado","entry.back":"Atrás","picker.lang":"Idioma"
+  };
+  // ─── it-IT (Italy — nav + CTAs) ─────────────────────
+  I18N["it-IT"] = {
+    "nav.brand":"Pearl Prime","nav.markets":"Mercati","nav.teachers":"Maestri",
+    "nav.showcase":"Vetrina","nav.intro":"Intro","nav.marketing":"Marketing",
+    "nav.dashboard":"Dashboard","nav.matrix":"Matrice","nav.gallery":"Galleria","nav.admin":"Brand Admin",
+    "entry.title":"Pearl Prime","entry.subtitle":"Scegli il tuo mercato",
+    "entry.learn":"Scopri di più","entry.learn.desc":"Mostrami come funziona",
+    "entry.start":"Inizia a lavorare","entry.start.desc":"Sono pronto",
+    "entry.onboarding":"Attivazione brand","entry.onboarding.desc":"Configura il mio brand per la prima volta",
+    "entry.operations":"Operazioni brand","entry.operations.desc":"Fai i miei caricamenti settimanali",
+    "entry.back.market":"Cambia mercato","entry.back":"Indietro","picker.lang":"Lingua"
+  };
+  // zh-HK / zh-SG share script with zh-TW / zh-CN — alias the chrome so picking
+  // Hong Kong or Singapore renders Traditional / Simplified, not English.
+  I18N["zh-HK"] = I18N["zh-TW"];
+  I18N["zh-SG"] = I18N["zh-CN"];
+
   /* ══════════════════════════════════════════════════════
      LOCALE MATCHING
      ══════════════════════════════════════════════════════ */
+  // zh-HK reuses Traditional (zh-TW) chrome; zh-SG reuses Simplified (zh-CN):
+  // same script, documented alias — never a US-English fallback.
   var LANE_TO_LOCALE = {
     en_US:"en-US", ja_JP:"ja-JP", zh_TW:"zh-TW", zh_CN:"zh-CN", ko_KR:"ko-KR",
-    fr_FR:"fr-FR", de_DE:"de-DE", hu_HU:"hu-HU", id_ID:"id-ID", th_TH:"th-TH",
-    vi_VN:"vi-VN", pt_BR:"pt-BR", es_MX:"es-MX",
-    zh_HK:"zh-TW", zh_SG:"zh-CN", es_US:"es-MX", es_ES:"es-MX", it_IT:"en-US"
+    fr_FR:"fr-FR", de_DE:"de-DE", hu_HU:"hu-HU", it_IT:"it-IT",
+    pt_BR:"pt-BR", es_US:"es-US", es_ES:"es-ES",
+    zh_HK:"zh-TW", zh_SG:"zh-CN",
+    id_ID:"id-ID", th_TH:"th-TH", vi_VN:"vi-VN", es_MX:"es-US"
   };
 
   function matchLocale(raw) {
@@ -1239,9 +1284,11 @@
     if (I18N[norm]) return norm;
     // Try common mappings
     var map = {
-      "ja":"ja-JP","ko":"ko-KR","fr":"fr-FR","de":"de-DE","hu":"hu-HU",
-      "id":"id-ID","th":"th-TH","vi":"vi-VN","pt":"pt-BR","es":"es-MX",
-      "zh-Hant":"zh-TW","zh-Hans":"zh-CN","zh-TW":"zh-TW","zh-CN":"zh-CN","zh":"zh-CN"
+      "ja":"ja-JP","ko":"ko-KR","fr":"fr-FR","de":"de-DE","hu":"hu-HU","it":"it-IT",
+      "id":"id-ID","th":"th-TH","vi":"vi-VN","pt":"pt-BR",
+      "es-ES":"es-ES","es-US":"es-US","es-MX":"es-US","es":"es-US",
+      "zh-Hant":"zh-TW","zh-Hans":"zh-CN","zh-HK":"zh-TW","zh-SG":"zh-CN",
+      "zh-TW":"zh-TW","zh-CN":"zh-CN","zh":"zh-CN"
     };
     // Check prefix matches
     for (var k in map) {
@@ -1316,10 +1363,12 @@
      LANGUAGE PICKER
      ══════════════════════════════════════════════════════ */
   var LOCALE_LABELS = {
-    "en-US":"English","ja-JP":"\u65E5\u672C\u8A9E","zh-TW":"\u7E41\u9AD4\u4E2D\u6587",
-    "zh-CN":"\u7B80\u4F53\u4E2D\u6587","ko-KR":"\uD55C\uAD6D\uC5B4","fr-FR":"Fran\u00E7ais",
-    "de-DE":"Deutsch","hu-HU":"Magyar","id-ID":"Bahasa","th-TH":"\u0E44\u0E17\u0E22",
-    "vi-VN":"Ti\u1EBFng Vi\u1EC7t","pt-BR":"Portugu\u00EAs","es-MX":"Espa\u00F1ol"
+    "en-US":"English","es-US":"Espa\u00F1ol (LatAm)","es-ES":"Espa\u00F1ol (Espa\u00F1a)",
+    "pt-BR":"Portugu\u00EAs","fr-FR":"Fran\u00E7ais","de-DE":"Deutsch","it-IT":"Italiano",
+    "hu-HU":"Magyar","ja-JP":"\u65E5\u672C\u8A9E","ko-KR":"\uD55C\uAD6D\uC5B4",
+    "zh-CN":"\u7B80\u4F53\u4E2D\u6587","zh-TW":"\u7E41\u9AD4\u4E2D\u6587",
+    "zh-HK":"\u7E41\u9AD4\u4E2D\u6587\uFF08\u9999\u6E2F\uFF09","zh-SG":"\u7B80\u4F53\u4E2D\u6587\uFF08\u65B0\u52A0\u5761\uFF09",
+    "id-ID":"Bahasa","th-TH":"\u0E44\u0E17\u0E22","vi-VN":"Ti\u1EBFng Vi\u1EC7t","es-MX":"Espa\u00F1ol"
   };
 
   function createLanguagePicker() {

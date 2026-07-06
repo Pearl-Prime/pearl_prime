@@ -77,7 +77,7 @@ html,body{width:100%;height:100%;font-family:"DM Sans",sans-serif;background:#0e
   <div class="sub" style="font-family:var(--serif);font-size:clamp(1rem,2.5vw,1.6rem);font-weight:300;letter-spacing:.04em;color:rgba(250,246,240,.5);margin-bottom:4px">Choose Your Market</div>
   <div style="font-family:var(--serif);font-size:clamp(0.9rem,2.2vw,1.4rem);font-weight:300;letter-spacing:.04em;color:rgba(250,246,240,.5);margin-bottom:4px">市場を選択してください</div>
   <div style="font-family:var(--serif);font-size:clamp(0.9rem,2.2vw,1.4rem);font-weight:300;letter-spacing:.04em;color:rgba(250,246,240,.5);margin-bottom:12px">选择您的市场</div>
-  <div class="zone-label">Choose Your Market &middot; 13 Global Lanes</div>
+  <div class="zone-label">Choose Your Market &middot; 14 Global Lanes</div>
   <div class="amber-rule"></div>
   <div class="flags" id="flag-grid"></div>
 </div>
@@ -142,7 +142,8 @@ var LANES={
   fr_FR:{flag:"\u{1F1EB}\u{1F1F7}",name:"France",lang:"Fran\u00E7ais"},
   de_DE:{flag:"\u{1F1E9}\u{1F1EA}",name:"Germany",lang:"Deutsch"},
   it_IT:{flag:"\u{1F1EE}\u{1F1F9}",name:"Italy",lang:"Italiano"},
-  hu_HU:{flag:"\u{1F1ED}\u{1F1FA}",name:"Hungary",lang:"Magyar"}
+  hu_HU:{flag:"\u{1F1ED}\u{1F1FA}",name:"Hungary",lang:"Magyar"},
+  pt_BR:{flag:"\u{1F1E7}\u{1F1F7}",name:"Brazil",lang:"Português"}
 };
 
 var currentLane=null;
@@ -193,6 +194,33 @@ var LANE_CHIP={
   fr_FR:"fr",de_DE:"de",it_IT:"eu",hu_HU:"eu"
 };
 
+/* Lane → localized Brand Wizard URL. jp/tw/cn keep dedicated forked builds;
+   every other lane rides the generic wizard with an explicit ?lang= so nothing
+   lands on US-English copy. zh_HK → Traditional (tw), zh_SG → Simplified (zh). */
+var LANE_WIZARD={
+  en_US:"wizard.html",
+  ja_JP:"wizard-ja.html",
+  zh_TW:"wizard-tw.html",
+  zh_CN:"wizard-zh.html",
+  zh_HK:"wizard-tw.html",
+  zh_SG:"wizard-zh.html",
+  ko_KR:"wizard.html?lang=ko",
+  es_US:"wizard.html?lang=es",
+  es_ES:"wizard.html?lang=es_es",
+  fr_FR:"wizard.html?lang=fr",
+  de_DE:"wizard.html?lang=de",
+  it_IT:"wizard.html?lang=it",
+  hu_HU:"wizard.html?lang=hu",
+  pt_BR:"wizard.html?lang=pt"
+};
+/* Lane → market token that brandMatch.js maps to the SAME lane (routes the signup
+   into the correct catalog lane, never en_us by accident). */
+var LANE_MARKET={
+  en_US:"us",ja_JP:"jp",ko_KR:"kr",zh_TW:"tw",zh_CN:"cn",zh_HK:"hk",zh_SG:"sg",
+  es_US:"es_us",es_ES:"spain",fr_FR:"france",de_DE:"germany",it_IT:"italy",
+  hu_HU:"hungary",pt_BR:"brazil"
+};
+
 function goLearn(){
   if(!currentLane)return;
   var chip=LANE_CHIP[currentLane]||"all";
@@ -201,12 +229,19 @@ function goLearn(){
   window.location.href='presenter.html?deck=intro&lane='+chip+'&briefing='+briefing;
 }
 function goOnboarding(){
-  var chip=LANE_CHIP[currentLane]||"";
-  window.location.href='brand_admin.html?phase=0'+(chip?'&lane='+chip:'');
+  if(!currentLane)return;
+  // Entry → localized Brand Wizard (onboarding), carrying the market so the signup
+  // lands in the correct catalog lane.
+  var base=LANE_WIZARD[currentLane]||"wizard.html";
+  var market=LANE_MARKET[currentLane]||"us";
+  var sep=base.indexOf('?')>=0?'&':'?';
+  window.location.href=base+sep+'mode=composite&market='+encodeURIComponent(market);
 }
 function goOperations(){
-  var chip=LANE_CHIP[currentLane]||"";
-  window.location.href='brand_admin.html?phase=3'+(chip?'&lane='+chip:'');
+  if(!currentLane)return;
+  // Entry → localized Weekly OS (operations), pre-filtered to this lane's brands.
+  var lane=currentLane.toLowerCase();
+  window.location.href='brand_admin_weekly_os.html?lane='+encodeURIComponent(lane);
 }
 
 /* Auto-restore */

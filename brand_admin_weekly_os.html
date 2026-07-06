@@ -622,18 +622,23 @@ function dismissCelebration(){
 }
 
 // ── Brand Picker ──
+let LANE_FILTER=null; // set from ?lane= on the entry-screen "Brand Operations" hand-in
 function renderPicker(){
   const el=document.getElementById('picker');
   el.classList.add('show');
   document.getElementById('main-wrap').style.display='none';
-  let h=`<h1 data-i18n="picker.title">Brand Admin</h1><p class="sub" data-i18n="picker.subtitle">Select a brand to begin</p><div class="brand-grid">`;
-  for(const [bid,b] of Object.entries(B)){
+  const entries=Object.entries(B).filter(([bid])=>!LANE_FILTER||bid.endsWith('_'+LANE_FILTER));
+  let h=`<h1 data-i18n="picker.title">Brand Admin</h1><p class="sub" data-i18n="picker.subtitle">Select a brand to begin</p>`;
+  if(LANE_FILTER){ h+=`<p class="sub" style="color:var(--acc2)">${LANE_FILTER.toUpperCase().replace('_','-')} · ${entries.length} brands</p>`; }
+  h+=`<div class="brand-grid">`;
+  for(const [bid,b] of entries){
     h+=`<div class="brand-card" onclick="selectBrand('${bid}')">
       <h3>${b.d}</h3>
       <div class="focus">${b.f}</div>
       ${b.tm?`<span class="teacher-tag">${b.t}</span>`:''}
     </div>`;
   }
+  if(!entries.length){ h+=`<div class="brand-card" style="opacity:.6">No brands in this lane yet.</div>`; }
   h+='</div>';
   el.innerHTML=h;
 }
@@ -670,6 +675,13 @@ async function init(){
   await loadBridges();
   const p=new URLSearchParams(window.location.search);
   const bid=p.get('brand');
+  // ?lane= (from the entry-screen "Brand Operations" hand-in) pre-filters the picker
+  // to that market's brands AND localizes the picker chrome before a brand is chosen.
+  let laneRaw=(p.get('lane')||'').toLowerCase().replace(/-/g,'_');
+  if(laneRaw && OS_DATA && OS_DATA.lane_to_market && OS_DATA.lane_to_market[laneRaw]){
+    LANE_FILTER=laneRaw;
+    applyMarketProfile(OS_DATA.lane_to_market[laneRaw]);
+  }
   if(bid && B[bid]) initBrand(bid);
   else renderPicker();
 }

@@ -19,8 +19,13 @@ This index links the five locale-specific distribution guides that govern how Ph
 | zh_HK | 6 | 4 | 3 | 3 | Low — direct upload | [zh_HK Guide](zh_HK_distribution_guide.md) |
 | zh_CN | 6 | 4 | 3 | 3 | **High** — MCN agent required, tax + legal | [zh_CN Guide](zh_CN_distribution_guide.md) |
 | zh_SG | 6 | 4 | 3 | 3 | Low — English + Chinese dual-channel | [zh_SG Guide](zh_SG_distribution_guide.md) |
+| ko / es-US / es-ES / fr / de / it / hu / pt-BR | — | see guide | see guide | see guide | Low–Medium — mostly self-serve + local retailers | [Global Markets Guide](global_markets_distribution_guide.md) |
 
-**Total:** 48 brands across 5 locales.
+**Total:** 48 brands across the 5 original locale guides. The 14-lane Weekly-OS
+platform truth (all markets above) is encoded in
+`config/brand_management/brand_admin_weekly_os_platforms.yaml` →
+`brand-wizard-app/public/brand_admin_weekly_os_data.json`; the eight non-CJK
+markets are documented in the [Global Markets Guide](global_markets_distribution_guide.md).
 
 ## Brand Count Summary
 
