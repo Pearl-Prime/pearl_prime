@@ -849,7 +849,7 @@ Author signature cover art base backgrounds for the first 10 authors of every ca
 | **Resolver** | [phoenix_v4/planning/author_cover_art_resolver.py](../phoenix_v4/planning/author_cover_art_resolver.py) — `resolve_author_cover_art(author_id_or_teacher_id)`; fallback default |
 | **Generator** | [scripts/generate_author_cover_art_bases.py](../scripts/generate_author_cover_art_bases.py) — Pure Python PNG gradients → `assets/authors/cover_art/{author_id}_base.png` |
 | **Workers AI / FLUX (T2I reference)** | docs/flux_shnell_research.rtf (optional local reference; if file missing in a fork, treat as backlog item) — Cloudflare Workers AI FLUX API; use when adding T2I-generated cover art or video image bank |
-| **Pipeline output** | [scripts/run_pipeline.py](../scripts/run_pipeline.py) — Plan JSON: `cover_art_base`, `cover_art_style_hint`, `cover_art_palette_tokens`, `cover_variant_id` |
+| **Pipeline output** | [scripts/run_pipeline.py](../scripts/run_pipeline.py) — Plan JSON: `cover_art_base`, `cover_art_style_hint`, `cover_art_palette_tokens`, `cover_variant_id` | <!-- CI-ALLOWLIST: legacy-registry-ok — docs-index prose reference, not an executed build -->
 | **CI gate** | [scripts/ci/check_author_cover_art.py](../scripts/ci/check_author_cover_art.py) — Launchable authors: registry + PNG + style/palette; exit 0/1 |
 | **Production gates** | [scripts/run_production_readiness_gates.py](../scripts/run_production_readiness_gates.py) — **Gate 18:** author cover art |
 | **Assets** | `assets/authors/cover_art/` — `{author_id}_base.png` (1080×1920); see [assets/authors/README.md](../assets/authors/README.md) |
@@ -949,8 +949,8 @@ EI V1 is 100% at **test slice** when the 4 targeted unit tests pass. It is **100
 
 | Item | Location | Purpose |
 |------|----------|---------|
-| **`--ei-v2-compare` flag** | [scripts/run_pipeline.py](../scripts/run_pipeline.py) | Post-render, runs `ei_parallel_adapter.compare_slot` for every atom in the book. Non-blocking try-except ensures V2 errors never halt the main pipeline. Outputs: `artifacts/ei_v2/ei_v1_v2_comparison.json`, `artifacts/ei_v2/ei_v1_v2_summary.txt` |
-| **`--ei-hybrid` flag** | [scripts/run_pipeline.py](../scripts/run_pipeline.py) | Activates hybrid V1+V2 selector: V1 picks → V2 scores → risk blocks → margin override → dimension gates → learner feedback. Per-book enforcement with catalog-calibrated thresholds. |
+| **`--ei-v2-compare` flag** | [scripts/run_pipeline.py](../scripts/run_pipeline.py) | Post-render, runs `ei_parallel_adapter.compare_slot` for every atom in the book. Non-blocking try-except ensures V2 errors never halt the main pipeline. Outputs: `artifacts/ei_v2/ei_v1_v2_comparison.json`, `artifacts/ei_v2/ei_v1_v2_summary.txt` | <!-- CI-ALLOWLIST: legacy-registry-ok — docs-index prose reference, not an executed build -->
+| **`--ei-hybrid` flag** | [scripts/run_pipeline.py](../scripts/run_pipeline.py) | Activates hybrid V1+V2 selector: V1 picks → V2 scores → risk blocks → margin override → dimension gates → learner feedback. Per-book enforcement with catalog-calibrated thresholds. | <!-- CI-ALLOWLIST: legacy-registry-ok — docs-index prose reference, not an executed build -->
 
 ### Artifacts
 
@@ -1070,7 +1070,7 @@ Layered selection with override logic. V1 picks the winner; V2 scores the same c
 2. **Per-book hybrid** — Run hybrid override in production per book
 3. **Scope expansion** — Gradually increase override scope by format/persona/topic once stable
 
-**Pipeline flag:** `--ei-hybrid` on `run_pipeline.py` activates hybrid mode (V1 + V2 layered + dimension gates + learner)
+**Pipeline flag:** `--ei-hybrid` on `run_pipeline.py` activates hybrid mode (V1 + V2 layered + dimension gates + learner) <!-- CI-ALLOWLIST: legacy-registry-ok — docs-index prose reference, not an executed build -->
 
 ---
 
@@ -1169,7 +1169,7 @@ Clean epub/TTS-ready output pipeline with delivery contract gate, word-count gat
 
 | Item | Location |
 |------|----------|
-| **Run pipeline** | [scripts/run_pipeline.py](../scripts/run_pipeline.py) — Full 6-stage pipeline: BookSpec → FormatPlan → CompiledBook → render. Flags: `--topic`, `--persona`, `--arc`, `--structural-format`, `--runtime-format`, `--render-book`, `--render-formats`, `--skip-word-count-gate`, `--generate-freebies`, `--no-update-freebie-index` (used by production gates so sim doesn't mutate freebie index) |
+| **Run pipeline** | [scripts/run_pipeline.py](../scripts/run_pipeline.py) — Full 6-stage pipeline: BookSpec → FormatPlan → CompiledBook → render. Flags: `--topic`, `--persona`, `--arc`, `--structural-format`, `--runtime-format`, `--render-book`, `--render-formats`, `--skip-word-count-gate`, `--generate-freebies`, `--no-update-freebie-index` (used by production gates so sim doesn't mutate freebie index) | <!-- CI-ALLOWLIST: legacy-registry-ok — docs-index prose reference, not an executed build -->
 | **Render plan to txt** | [scripts/render_plan_to_txt.py](../scripts/render_plan_to_txt.py) — Standalone render from saved plan JSON |
 
 ### Delivery contract gate (forbidden patterns)
@@ -1433,7 +1433,7 @@ Single index: every test file, how to run, markers, CI workflows, and test infra
 
 | Item | Location |
 |------|----------|
-| **Run pipeline** | [scripts/run_pipeline.py](../scripts/run_pipeline.py) — Full 6-stage; --topic, --persona, --arc, --teacher, --author, --render-book, --generate-freebies, --no-update-freebie-index, etc. |
+| **Run pipeline** | [scripts/run_pipeline.py](../scripts/run_pipeline.py) — Full 6-stage; --topic, --persona, --arc, --teacher, --author, --render-book, --generate-freebies, --no-update-freebie-index, etc. | <!-- CI-ALLOWLIST: legacy-registry-ok — docs-index prose reference, not an executed build -->
 | **Render plan to txt** | [scripts/render_plan_to_txt.py](../scripts/render_plan_to_txt.py) — Stage 6 standalone render |
 | **Plan freebie assets** | [scripts/plan_freebie_assets.py](../scripts/plan_freebie_assets.py) — Catalog or canonical; manifest output |
 | **Create freebie assets** | [scripts/create_freebie_assets.py](../scripts/create_freebie_assets.py) — HTML, PDF, EPUB, MP3 |
@@ -1724,7 +1724,7 @@ All root-level `scripts/*.py` files confirmed present on disk.
 
 | Script | Purpose |
 |--------|---------|
-| [scripts/run_pipeline.py](../scripts/run_pipeline.py) | Full 6-stage pipeline CLI — see Delivery pipeline section |
+| [scripts/run_pipeline.py](../scripts/run_pipeline.py) | Full 6-stage pipeline CLI — see Delivery pipeline section | <!-- CI-ALLOWLIST: legacy-registry-ok — docs-index prose reference, not an executed build -->
 | [scripts/run_production_readiness_gates.py](../scripts/run_production_readiness_gates.py) | Production readiness gate runner |
 | [scripts/render_plan_to_txt.py](../scripts/render_plan_to_txt.py) | Standalone render from saved plan JSON |
 | [scripts/release/rollback_smoke.sh](../scripts/release/rollback_smoke.sh) | Post-restore verification (gates + pytest); DR drill evidence |
@@ -2090,6 +2090,7 @@ All `.md` files under `specs/` confirmed present on disk. Additional `.txt` and 
 | [specs/BRAND_ARCHETYPE_VALIDATOR_SPEC.md](../specs/BRAND_ARCHETYPE_VALIDATOR_SPEC.md) | Brand archetype validation rules |
 | [specs/COMPILED_PLAN_SCHEMA_CONTRACT.md](../specs/COMPILED_PLAN_SCHEMA_CONTRACT.md) | CompiledBook JSON schema contract |
 | [specs/DUPE_EVAL_SPEC.md](../specs/DUPE_EVAL_SPEC.md) | Duplication evaluation: prose, atom, structural |
+| [specs/RENDITION_SYSTEM_SPEC.md](../specs/RENDITION_SYSTEM_SPEC.md) | **Shared-bank rendition system** — doctrine + practice-library paragraph-unit renditions, KDP shingle proxy gate, planner assignment; complements CTSS (structural-only). Status: SPECCED. |
 | [specs/ENGINE_DEFINITION_SCHEMA.md](../specs/ENGINE_DEFINITION_SCHEMA.md) | Engine YAML schema (spiral, watcher, false_alarm, etc.) |
 | [specs/INTRO_CONCLUSION_VARIATION_SPEC.md](../specs/INTRO_CONCLUSION_VARIATION_SPEC.md) | Intro/conclusion variation: flag, pools, injection rules |
 | [specs/OMEGA_LAYER_CONTRACTS.md](../specs/OMEGA_LAYER_CONTRACTS.md) | Omega layer interface contracts |
@@ -2246,7 +2247,7 @@ All `.md` files under `specs/` confirmed present on disk. Additional `.txt` and 
 
 | Script / module | Section | Status |
 |-----------------|---------|--------|
-| [scripts/run_pipeline.py](../scripts/run_pipeline.py) | Delivery pipeline | ✓ |
+| [scripts/run_pipeline.py](../scripts/run_pipeline.py) | Delivery pipeline | ✓ | <!-- CI-ALLOWLIST: legacy-registry-ok — docs-index prose reference, not an executed build -->
 | [scripts/run_production_readiness_gates.py](../scripts/run_production_readiness_gates.py) | Simulation | ✓ |
 | [scripts/observability/detect_changes.py](../scripts/observability/detect_changes.py) | Change observation and impact | ✓ — Git diff (--base/--head) + registry → change_events.jsonl |
 | [scripts/observability/impact_from_changes.py](../scripts/observability/impact_from_changes.py) | Change observation and impact | ✓ — change_events.jsonl → impact summary (affected_systems, downstream, related) |
