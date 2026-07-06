@@ -243,6 +243,15 @@ def _minimal_payload(stem: str) -> dict:
             ],
             "blocker_no_fractal_nature_in_release_resolve": False,
         },
+        "composition_meta": {
+            "schema_version": "1.0.0",
+            "asset_id": "L2_pilot_minimal",
+            "layer_class": "L2",
+            "crop_class": "waist_up",
+            "anchor": {"point": "waist_line", "y_px": 800},
+            "eye_y_px": 400,
+            "implied_camera": {"angle_bucket": "eye_level", "el_crossing": "chest"},
+        },
     }
     if stem not in builders:
         raise KeyError(stem)
