@@ -136,6 +136,14 @@ def main() -> int:
             print("smoke: panel_prompts.json not produced", file=sys.stderr)
             return 1
         panel_prompts = json.loads(pp_path.read_text(encoding="utf-8"))
+        # MANGA.BESTSELLER.GENRE_ENGINE reads declared genre from the chapter script.
+        from phoenix_v4.manga.models import paths as manga_paths
+
+        script_path = ws / manga_paths.CHAPTER_SCRIPT_WRITER_HANDOFF
+        script = json.loads(script_path.read_text(encoding="utf-8"))
+        script["genre_id"] = "ci_smoke_genre"
+        script_path.write_text(json.dumps(script, indent=2) + "\n", encoding="utf-8")
+
         replay = ws / "_replay"
         replay.mkdir()
         mapping: dict[str, str] = {}
