@@ -1182,6 +1182,8 @@ def compose_golden_spine_chapter(
     angle_id: str = "",
     angle_layer_by_chapter: Optional[dict[int, int]] = None,
     twelve_shape_flagship: bool = False,
+    engine_type: str = "",
+    chapter_intent: str = "",
 ) -> tuple[str, dict[str, Any]]:
     """
     Returns (chapter body without ``Chapter N`` heading, synthesis_meta).
@@ -1223,6 +1225,12 @@ def compose_golden_spine_chapter(
     contract = contracts[chapter_index0] if chapter_index0 < len(contracts) else contracts[-1]
     emotional_role = str(getattr(contract, "emotional_job", "") or "")
 
+    if not chapter_intent:
+        from phoenix_v4.planning.book_structure_plan import JOB_TO_INTENT
+
+        _intent_candidates = JOB_TO_INTENT.get(emotional_role.lower(), ["establish_mask", "expose_cost"])
+        chapter_intent = _intent_candidates[chapter_index0 % len(_intent_candidates)]
+
     # Forward EnrichedChapter.thesis as arc_thesis so the composer's 4-stage
     # derivation chain (arc_thesis > chapter_thesis_bank > mechanism_thesis_families
     # > legacy keyword extraction) can use the spine-authored thesis directly
@@ -1255,6 +1263,8 @@ def compose_golden_spine_chapter(
         mechanism_memory=mechanism_memory,
         exercise_memory=exercise_memory,
         arc_thesis=chapter_arc_thesis,
+        chapter_intent=chapter_intent,
+        engine_type=engine_type,
     )
 
     has_doctrine = any(

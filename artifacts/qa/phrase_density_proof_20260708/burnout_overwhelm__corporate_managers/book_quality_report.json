@@ -1,0 +1,31 @@
+{
+  "status": "WARN",
+  "release_band": "Hold",
+  "fail_reasons": [],
+  "hold_reasons": [
+    "repeated phrase density above book cap"
+  ],
+  "metrics": {
+    "runtime_format_id": "standard_book",
+    "word_count": 12801,
+    "word_range": [
+      9000,
+      22000
+    ],
+    "chapter_count": 12,
+    "flow_profile": "standard",
+    "flow_failures": [],
+    "artifact_hits": [],
+    "repeated_phrase_violations": [
+      {
+        "phrase": "in the contemplative tradition",
+        "count": 14,
+        "chapter": null,
+        "matched_allowlist_entry": null,
+        "cap_applied": 12,
+        "rule_fired": "book_wide_cap",
+        "rule": "book_wide_cap"
+      }
+    ]
+  }
+}

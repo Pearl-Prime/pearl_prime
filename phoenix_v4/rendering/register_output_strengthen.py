@@ -935,6 +935,59 @@ def ensure_word_count_floor(prose: str, *, floor: int, seed: str = "floor") -> s
     return prose
 
 
+# Audit 2026-06-30 named offenders + the within-slot bridge bank short refrains that
+# read as faux-earned callbacks when they recur standalone across chapters.
+_NAMED_TEMPLATE_CADENCE_REFRAINS: tuple[str, ...] = (
+    "Peel back the obvious. Something else lives one inch down.",
+    "Rest at this stop. You do not have to march past it.",
+    "Quiet the explanation. Watch the small switch flip.",
+    "Trust that the noticing itself is doing some quiet work.",
+    "Naming the pattern is already work. Let it land before the next piece.",
+)
+
+
+def _template_cadence_refrain_set() -> frozenset[str]:
+    texts = set(_NAMED_TEMPLATE_CADENCE_REFRAINS)
+    for line in _load_within_slot_bridge_texts():
+        if line and len(line.split()) <= 18:
+            texts.add(line.strip())
+    return frozenset(texts)
+
+
+def suppress_unbudgeted_template_cadence(
+    prose: str,
+    *,
+    max_book_occurrences: int = 1,
+) -> str:
+    """Drop surplus standalone template-cadence lines (OPD-20260629-002 / cohesion).
+
+    The first ``max_book_occurrences`` standalone paragraph per refrain may remain
+    (earned dwell). Later standalone occurrences are removed — they are template
+    bridge recurrence, not budgeted ANGLE_CALLBACK callbacks. Embedded refrains
+    inside longer narrative paragraphs are left intact.
+    """
+    refrain_set = _template_cadence_refrain_set()
+    if not refrain_set:
+        return prose
+    book_counts: dict[str, int] = {}
+    front, chapters = _split_book(prose)
+    if not chapters:
+        return prose
+    out: list[tuple[int, str]] = []
+    for num, body in chapters:
+        paras = [p for p in re.split(r"\n\s*\n", body) if p.strip()]
+        kept: list[str] = []
+        for para in paras:
+            norm = re.sub(r"\s+", " ", para.strip())
+            if norm in refrain_set:
+                book_counts[norm] = book_counts.get(norm, 0) + 1
+                if book_counts[norm] > max_book_occurrences:
+                    continue
+            kept.append(para)
+        out.append((num, "\n\n".join(kept).strip()))
+    return _join_book(front, out)
+
+
 def strengthen_register_craft_output(
     prose: str,
     *,
@@ -963,6 +1016,7 @@ def strengthen_register_craft_output(
     work = repair_f13_dwell_contract(work, seed=seed, ledger=ledger)
     work, _f1_notes = dedupe_register_f1_paragraphs(work)
     work = ensure_unique_chapter_closings(work, seed=seed)
+    work = suppress_unbudgeted_template_cadence(work)
     work = remove_sub_four_word_orphan_paragraphs(work)
     work = ensure_book_terminal_integrity(work)
     return work

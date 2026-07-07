@@ -82,12 +82,21 @@ generalized:
   # form a dangling-preposition (F2.B) or lowercase-fragment (F2.C) artifact. Generalized mode is
   # 65-70% of catalog output, so this is the highest-volume fix.
   intro_wrapper:
-    pattern: "{TRADITION} teaches that the path begins with one honest look at what is actually here."
+    # Pattern uses "holds that" (not "teaches that") so the two high-volume stems do
+    # not share the same 5-gram prefix when TRADITION resolves to "the contemplative
+    # tradition" — book_quality_gate counts 4–6-grams book-wide (cap 12).
+    pattern: "{TRADITION} holds that the path begins with one honest look at what is actually here."
     variants:
       - "{TRADITION} teaches that change starts with what you can feel right now."
       - "Within the {TRADITION_SHORT} lineage, practitioners have long known that the body leads."
       - "I came across this teaching tradition at a time when nothing else was landing."
-      - "Rooted in {TRADITION}, this approach holds that presence comes before strategy."
+      - "{TRADITION_SHORT} practice holds that presence comes before strategy."
+      # Additive variants (phrase-density rotation lane 2026-07-08): diversify the
+      # generalized pool so composite-doctrine wrapper prefixes spread under the
+      # book-wide cap without sharing high-volume n-gram clusters.
+      - "Across {TRADITION_SHORT} teaching, the first move is to feel the body before you explain it."
+      - "What {TRADITION_SHORT} practitioners keep rediscovering is simple: start where you actually are."
+      - "The {TRADITION_SHORT} lineage has long pointed here first — one honest look, then the next step."
     slot_requirements: [TRADITION]
 
   exercise_wrapper:

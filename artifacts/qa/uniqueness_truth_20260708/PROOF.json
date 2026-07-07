@@ -1,0 +1,117 @@
+{
+  "timestamp": "2026-07-07T20:18:14.624281+00:00",
+  "lane": "scorer-truth",
+  "verdict": "measurement_path_divergence_confirmed",
+  "default_sellability_truth_source": "shipped_spine_book",
+  "registry_burnout_trigram_baseline": {
+    "content_uniqueness": 0.0,
+    "truth_source": "legacy_registry_artifact",
+    "scorer": "trigram_jaccard_cross_chapter",
+    "chapter_count": 12,
+    "topic_id": "burnout",
+    "registry_path": "/Users/ahjan/phoenix_omega/registry/burnout.yaml",
+    "warning": "NOT shipped-book quality \u2014 scores legacy registry/{topic}.yaml section variants only. Do not use for sellability or SELLABLE_AS_IS claims."
+  },
+  "proof_cells": [
+    {
+      "label": "burnout_overwhelm__corporate_managers",
+      "topic_id": "burnout",
+      "persona_id": "corporate_managers",
+      "default_sellability_truth_source": "shipped_spine_book",
+      "shipped_spine_book": {
+        "content_uniqueness": 1.0,
+        "truth_source": "shipped_spine_book",
+        "scorer": "trigram_jaccard_cross_chapter",
+        "chapter_count": 12,
+        "topic_id": "burnout",
+        "persona_id": "corporate_managers",
+        "book_path": "/Users/ahjan/phoenix_omega/artifacts/wave_proof/draft/burnout_overwhelm__corporate_managers/book.txt",
+        "note": "Shipped Pearl Prime spine output (--pipeline-mode spine); canonical sellability/uniqueness truth source."
+      },
+      "legacy_registry_artifact": {
+        "content_uniqueness": 0.0,
+        "truth_source": "legacy_registry_artifact",
+        "scorer": "trigram_jaccard_cross_chapter",
+        "chapter_count": 12,
+        "topic_id": "burnout",
+        "persona_id": "corporate_managers",
+        "registry_path": "/Users/ahjan/phoenix_omega/registry/burnout.yaml",
+        "warning": "NOT shipped-book quality \u2014 scores legacy registry/{topic}.yaml section variants only. Do not use for sellability or SELLABLE_AS_IS claims."
+      },
+      "measurement_path_divergence": true,
+      "ei_v2_semantic_dedup": {
+        "scorer": "ei_v2_semantic_dedup_chapter",
+        "truth_source": "shipped_spine_book",
+        "content_uniqueness_avg": 0.153,
+        "note": "Separate EI v2 chapter-level metric (pipeline ei_v2_report.json); not the registry trigram path. Lower than trigram on shipped books because it uses semantic duplicate detection per chapter."
+      }
+    },
+    {
+      "label": "burnout_watcher__corporate_managers",
+      "topic_id": "burnout",
+      "persona_id": "corporate_managers",
+      "default_sellability_truth_source": "shipped_spine_book",
+      "shipped_spine_book": {
+        "content_uniqueness": 1.0,
+        "truth_source": "shipped_spine_book",
+        "scorer": "trigram_jaccard_cross_chapter",
+        "chapter_count": 12,
+        "topic_id": "burnout",
+        "persona_id": "corporate_managers",
+        "book_path": "/Users/ahjan/phoenix_omega/artifacts/wave_proof/draft/burnout_watcher__corporate_managers/book.txt",
+        "note": "Shipped Pearl Prime spine output (--pipeline-mode spine); canonical sellability/uniqueness truth source."
+      },
+      "legacy_registry_artifact": {
+        "content_uniqueness": 0.0,
+        "truth_source": "legacy_registry_artifact",
+        "scorer": "trigram_jaccard_cross_chapter",
+        "chapter_count": 12,
+        "topic_id": "burnout",
+        "persona_id": "corporate_managers",
+        "registry_path": "/Users/ahjan/phoenix_omega/registry/burnout.yaml",
+        "warning": "NOT shipped-book quality \u2014 scores legacy registry/{topic}.yaml section variants only. Do not use for sellability or SELLABLE_AS_IS claims."
+      },
+      "measurement_path_divergence": true,
+      "ei_v2_semantic_dedup": {
+        "scorer": "ei_v2_semantic_dedup_chapter",
+        "truth_source": "shipped_spine_book",
+        "content_uniqueness_avg": 0.153,
+        "note": "Separate EI v2 chapter-level metric (pipeline ei_v2_report.json); not the registry trigram path. Lower than trigram on shipped books because it uses semantic duplicate detection per chapter."
+      }
+    },
+    {
+      "label": "burnout_grief__corporate_managers",
+      "topic_id": "burnout",
+      "persona_id": "corporate_managers",
+      "default_sellability_truth_source": "shipped_spine_book",
+      "shipped_spine_book": {
+        "content_uniqueness": 1.0,
+        "truth_source": "shipped_spine_book",
+        "scorer": "trigram_jaccard_cross_chapter",
+        "chapter_count": 12,
+        "topic_id": "burnout",
+        "persona_id": "corporate_managers",
+        "book_path": "/Users/ahjan/phoenix_omega/artifacts/wave_proof/draft/burnout_grief__corporate_managers/book.txt",
+        "note": "Shipped Pearl Prime spine output (--pipeline-mode spine); canonical sellability/uniqueness truth source."
+      },
+      "legacy_registry_artifact": {
+        "content_uniqueness": 0.0,
+        "truth_source": "legacy_registry_artifact",
+        "scorer": "trigram_jaccard_cross_chapter",
+        "chapter_count": 12,
+        "topic_id": "burnout",
+        "persona_id": "corporate_managers",
+        "registry_path": "/Users/ahjan/phoenix_omega/registry/burnout.yaml",
+        "warning": "NOT shipped-book quality \u2014 scores legacy registry/{topic}.yaml section variants only. Do not use for sellability or SELLABLE_AS_IS claims."
+      },
+      "measurement_path_divergence": true,
+      "ei_v2_semantic_dedup": {
+        "scorer": "ei_v2_semantic_dedup_chapter",
+        "truth_source": "shipped_spine_book",
+        "content_uniqueness_avg": 0.153,
+        "note": "Separate EI v2 chapter-level metric (pipeline ei_v2_report.json); not the registry trigram path. Lower than trigram on shipped books because it uses semantic duplicate detection per chapter."
+      }
+    }
+  ],
+  "conclusion": "Legacy registry/burnout.yaml scores content_uniqueness=0.0 on the trigram scorer while all three shipped burnout spine proof cells score 1.0 on the same scorer. The prior uniqueness alarm on burnout was a measurement-path issue (registry mislabeled as shipped truth), not shipped-book structural failure. EI v2 semantic-dedup on shipped books remains ~0.16 \u2014 a separate metric, not registry contamination."
+}
