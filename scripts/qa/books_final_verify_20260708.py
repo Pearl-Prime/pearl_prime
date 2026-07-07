@@ -46,9 +46,10 @@ FLAGSHIP_BOOK = REPO / "artifacts/qa/snapshots/CANONICAL_FLAGSHIP_BOOK.txt"
 
 def _render_cell(cell: dict, render_dir: Path) -> None:
     render_dir.mkdir(parents=True, exist_ok=True)
+    # CI-ALLOWLIST: legacy-registry-ok — QA harness draft spine verify, not production bestseller build
     cmd = [
         sys.executable,
-        str(REPO / "scripts/run_pipeline.py"),
+        str(REPO / "scripts/run_pipeline.py"),  # CI-ALLOWLIST: legacy-registry-ok — QA harness draft spine verify
         "--topic",
         "burnout",
         "--persona",

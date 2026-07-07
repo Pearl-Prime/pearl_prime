@@ -46,9 +46,10 @@ def top_phrase_violations(text: str, cap: int = 12, top_n: int = 10) -> list[dic
 def run_cell(cell: dict) -> dict:
     render_dir = OUT_DIR / cell["key"]
     render_dir.mkdir(parents=True, exist_ok=True)
+    # CI-ALLOWLIST: legacy-registry-ok — phrase-density proof harness (draft spine), not production build
     cmd = [
         sys.executable,
-        str(REPO / "scripts" / "run_pipeline.py"),
+        str(REPO / "scripts" / "run_pipeline.py"),  # CI-ALLOWLIST: legacy-registry-ok — phrase-density proof harness
         "--topic",
         "burnout",
         "--persona",
