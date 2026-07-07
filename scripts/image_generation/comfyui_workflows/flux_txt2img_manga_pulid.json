@@ -1,8 +1,8 @@
 {
     "_meta": {
         "name": "Phoenix Omega — FLUX schnell-fp8 + PuLID-FaceNet (manga panel)",
-        "description": "FLUX-schnell-fp8 base + PuLID-FaceNet identity lock. Reference image conditioning via PulidFluxFaceNetLoader (commercial-clean per audit PR #803; NOT InsightFace AntelopeV2). Sampler is schnell-canonical 4 steps cfg 1.0 euler simple. Generator replaces {{positive_prompt}} / {{negative_prompt}} / {{reference_image}}. 1080x1920 webtoon vertical default.",
-        "version": "1.0.0",
+        "description": "FLUX-schnell-fp8 base + PuLID-FaceNet identity lock. Uses PulidFluxFaceNetLoader (commercial-clean; NOT InsightFace AntelopeV2). Updated 2026-07-04 for lldacing ApplyPulidFlux input schema (pulid_flux + eva_clip + face_analysis + image).",
+        "version": "1.1.0",
         "phase": "V2-B-PuLID-FaceNet",
         "license_notes": "lldacing/ComfyUI_PuLID_Flux_ll Apache 2.0; facenet-pytorch + VGGFace2 commercial-clean weights; flux1-schnell-fp8 Apache 2.0"
     },
@@ -27,19 +27,28 @@
         "inputs": {"image": "{{reference_image}}"}
     },
     "11": {
-        "class_type": "PulidFluxFaceNetLoader",
-        "inputs": {}
+        "class_type": "PulidFluxModelLoader",
+        "inputs": {"pulid_file": "pulid_flux_v0.9.1.safetensors"}
     },
     "12": {
+        "class_type": "PulidFluxEvaClipLoader",
+        "inputs": {}
+    },
+    "13": {
+        "class_type": "PulidFluxFaceNetLoader",
+        "inputs": {"provider": "CUDA"}
+    },
+    "14": {
         "class_type": "ApplyPulidFlux",
         "inputs": {
             "model": ["1", 0],
             "pulid_flux": ["11", 0],
-            "reference_image": ["10", 0],
+            "eva_clip": ["12", 0],
+            "face_analysis": ["13", 0],
+            "image": ["10", 0],
             "weight": 0.85,
             "start_at": 0.0,
-            "end_at": 1.0,
-            "method": "fidelity"
+            "end_at": 1.0
         }
     },
     "5": {
@@ -51,7 +60,7 @@
             "sampler_name": "euler",
             "scheduler": "simple",
             "denoise": 1.0,
-            "model": ["12", 0],
+            "model": ["14", 0],
             "positive": ["2", 0],
             "negative": ["3", 0],
             "latent_image": ["4", 0]

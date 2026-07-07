@@ -1,0 +1,33 @@
+{
+  "character_id": "mira_aoki",
+  "usable_poses": [
+    "front_portrait_seated_alert.png",
+    "front_portrait_seated_calm.png",
+    "front_portrait_seated_tense.png"
+  ],
+  "excluded_no_face": [
+    "front_portrait_seated_soft.png"
+  ],
+  "pairs": [
+    {
+      "a": "front_portrait_seated_alert.png",
+      "b": "front_portrait_seated_calm.png",
+      "distance": 0.224706768989563
+    },
+    {
+      "a": "front_portrait_seated_alert.png",
+      "b": "front_portrait_seated_tense.png",
+      "distance": 0.3084107041358948
+    },
+    {
+      "a": "front_portrait_seated_calm.png",
+      "b": "front_portrait_seated_tense.png",
+      "distance": 0.30481308698654175
+    }
+  ],
+  "mean_distance": 0.2793101867039998,
+  "max_distance": 0.3084107041358948,
+  "gate_threshold": 0.4,
+  "gate_pass": true,
+  "interpretation": "PASS \u2014 same identity across poses with detectable faces"
+}
