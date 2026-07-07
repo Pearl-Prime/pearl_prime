@@ -43,6 +43,8 @@ The repo has additional `package.json` files under `brand-wizard-app/` and `stor
 
 **Repo-side fix:** root `package.json` installs only `wrangler`. Deploy command should remain `npx wrangler deploy` (or `npm run deploy`) with an empty optional build command.
 
+**Node pin:** Cloudflare Workers Builds runs Node 20.x. Wrangler 4.87+ requires Node 22; root manifest pins `4.86.0`.
+
 **Dashboard fallback** (operator, account `0fe2f0679b00fb8a5c3ce830f4144c98`): if builds still fail, set build env `SKIP_DEPENDENCY_INSTALL=true` and deploy command `npm ci && npx wrangler deploy`. Root directory: repository root.
 
 **CI mirror:** [`.github/workflows/pearl-prime-worker-build-verify.yml`](../.github/workflows/pearl-prime-worker-build-verify.yml) runs `npm ci` + `wrangler deploy --dry-run` on worker file changes.

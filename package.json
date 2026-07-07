@@ -7,9 +7,9 @@
     "build:worker": "wrangler deploy --dry-run"
   },
   "devDependencies": {
-    "wrangler": "^4.103.0"
+    "wrangler": "4.86.0"
   },
   "engines": {
-    "node": ">=20"
+    "node": ">=20.3.0"
   }
 }
