@@ -6,6 +6,14 @@ Read-only gate for operator acquisition closeout. Checks:
   - File size ≥ min_bytes (default 500_000)
   - sha256 matches registry when asset_status is ACQUIRED
 
+Usage:
+  python3 scripts/qa/validate_manga_blind10_comparators.py --require-p0
+  python3 scripts/qa/validate_manga_blind10_comparators.py --run-id manga_blind10_2026-07-08 --require-p0 --json
+  python3 scripts/qa/validate_manga_blind10_comparators.py --slot 01
+
+Docs: artifacts/qa/manga_blind10_2026-07-08/COMPARATOR_SCAN_DELIVERY_CHECKLIST.md
+      artifacts/qa/manga_blind10_2026-07-08/BLIND10_SCHEDULING_MEMO.md
+
 Exit codes:
   0 — all required entries satisfied
   1 — missing files, size failures, or sha256 mismatch

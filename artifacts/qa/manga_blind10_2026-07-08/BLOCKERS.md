@@ -1,6 +1,6 @@
 # M6 Blind-10 — Blockers (live audit 2026-07-08)
 
-**Verified HEAD:** `9f70a3d6ecab877c50279ce7a23d3a7731d9ab92`
+**Verified HEAD:** `2ca947a9fa85a9793f3f097cf10bfdcf5ef31f66` (origin/main)
 
 ---
 
@@ -11,6 +11,7 @@ M6-BLK-001  M5_INSUFFICIENT_RENDERS
 M6-BLK-002  JUDGES_NOT_RECRUITED
 M6-BLK-003  PEARL_STAR_GPU_QUEUE
 M6-BLK-004  COMPARATOR_ASSETS_PENDING
+M6-BLK-005  SLOT_02_BYTE_GATE
 ```
 
 ---
@@ -20,11 +21,11 @@ M6-BLK-004  COMPARATOR_ASSETS_PENDING
 **Blocks:** Full blind-10 human run (slots 02–10); slot_01 human packet discouraged until M5 upgrade.
 
 **Evidence:**
-- `CANDIDATE_SET.tsv`: 1/10 `prescreen_only`, 2/10 INTERIM wiring proofs, 7/10 ABSENT
-- Closeout handoff: 2 image banks, pilot PuLID only, no full 35-panel M5-assembled ep_001 at 0 INTERIM
+- `CANDIDATE_SET.tsv`: 1/10 `prescreen_only`, 1/10 partial M5 (byte gate), 2/10 INTERIM wiring proofs, 6/10 ABSENT
+- Closeout handoff: 2 image banks, pilot PuLID only
 - `demo_alarm_metaphor_6p` is 6-panel excerpt with INTERIM layers — not blind-10 eligible
 
-**Unblock:** M5 delivers ≥ 4 end-to-end assembled episodes (0 INTERIM) across ≥ 4 genres per roadmap §6.
+**Unblock:** M5 delivers ≥ 8 end-to-end assembled episodes (0 INTERIM, byte floor) across ≥ 4 genres per roadmap §6.
 
 ---
 
@@ -34,9 +35,9 @@ M6-BLK-004  COMPARATOR_ASSETS_PENDING
 
 **Requirement:** ≥ 3 manga professionals per locale lane (JP-native for ja_JP). Operator-tier per roadmap.
 
-**Sourcing lane:** `ready-to-recruit` — `JUDGE_RECRUITMENT_BRIEF.md`, `JUDGE_OUTREACH_TEMPLATE.md`, `SOURCING_TRACKER.yaml` landed 2026-07-08. Zero judges confirmed.
+**Sourcing lane:** `ready_to_recruit` — outreach **drafted, not sent**; `JUDGE_OUTREACH_SEND_CHECKLIST.md` landed 2026-07-08. Zero judges confirmed.
 
-**Unblock:** Operator recruits ≥ 3 en_US pros; log confirmed judges in `SOURCING_TRACKER.yaml` → `judges.recruited[]`.
+**Unblock:** Operator sends outreach to 8–10 prospects; log ≥ 3 confirmed in `SOURCING_TRACKER.yaml` → `judges.recruited[]`.
 
 ---
 
@@ -54,17 +55,28 @@ M6-BLK-004  COMPARATOR_ASSETS_PENDING
 
 **Blocks:** Judge packet distribution for slots needing comparators.
 
-**Evidence:** `COMPARATOR_REGISTRY.yaml` → all 20 entries `asset_status: PENDING_OPERATOR_SCAN`; `comparators/` empty on disk.
+**Evidence:** `validate_manga_blind10_comparators.py --require-p0` → exit 1; `acquired: 0`; 2 missing_p0 errors. `comparators/` has README + manifest only — no PDFs.
 
-**Sourcing lane:** `ready-to-source` — full 10-slot registry + `COMPARATOR_ACQUISITION_CHECKLIST.md` landed 2026-07-08. P0 pilot: Yotsuba&! + Barakamon (slot 01).
+**Sourcing lane:** `ready_to_source` — `COMPARATOR_SCAN_DELIVERY_CHECKLIST.md` landed 2026-07-08. P0 pilot: Yotsuba&! + Barakamon (slot 01).
 
-**Unblock:** Operator acquires licensed scans per checklist; record sha256 in registry; flip `SOURCING_TRACKER.yaml` counts.
+**Unblock:** Operator acquires licensed scans per checklist; record sha256 in registry; validator exit 0.
+
+---
+
+## M6-BLK-005 — Slot_02 byte gate (SOFT — M5 upgrade path)
+
+**Blocks:** Using `ep_001_from_continuity` (0-INTERIM M5 assembly) for human blind-10 instead of legacy v3.
+
+**Evidence:** `assembled/ep_001_from_continuity/` — 35 panels, `layers_interim: 0`, but `ep001_029.png` = **12,741 bytes** (floor 99,690). 34/35 panels pass.
+
+**Unblock:** Re-render or re-export ep001_029 ≥ 99,690 bytes; update `CANDIDATE_SET.tsv` slot 02 → `blind10_eligible: prescreen_only` or `yes`.
 
 ---
 
 ## What is NOT blocked
 
 - Protocol ratification (this artifact set)
-- Slot_01 Qwen2.5-VL pre-screen (when Pearl Star online)
-- Judge recruitment outreach (materials ready — `JUDGE_OUTREACH_TEMPLATE.md`)
-- Comparator sourcing (checklist + full registry ready — `COMPARATOR_ACQUISITION_CHECKLIST.md`)
+- Slot_01 Qwen2.5-VL pre-screen (when Pearl Star online) — legacy `composed_v3_qwen`
+- Judge recruitment outreach prep (`JUDGE_OUTREACH_SEND_CHECKLIST.md` — send is operator action)
+- Comparator sourcing prep (`COMPARATOR_SCAN_DELIVERY_CHECKLIST.md` — scan is operator action)
+- Pilot scheduling lane (`BLIND10_SCHEDULING_MEMO.md`)

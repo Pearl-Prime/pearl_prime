@@ -1,7 +1,8 @@
 # M6 Sourcing — Operator Memo (judges + comparators)
 
 **Date:** 2026-07-08 · **Run ID:** `manga_blind10_2026-07-08`  
-**Layer:** SPECCED — acquisition lane **advanced** (pilot execution sheet + drafts); nothing PROVEN-AT-BAR yet
+**Layer:** SPECCED — acquisition + scheduling lanes **advanced**; nothing PROVEN-AT-BAR yet
+**Scheduling:** `BLIND10_SCHEDULING_MEMO.md` — pilot Jul 15–29; full blind-10 earliest Sep 2026
 
 ---
 
@@ -25,7 +26,7 @@ M6 protocol is landed (PR #4725, `9f70a3d6ec`). Judge recruitment and comparator
 
 ### Exact next actions (judges)
 
-1. Open `PILOT_SLOT_01_ACQUISITION_EXECUTION.md` — prospect criteria + send order.
+1. Execute `JUDGE_OUTREACH_SEND_CHECKLIST.md` — prospect criteria + send order.
 2. Personalize `JUDGE_OUTREACH_DRAFTS_SLOT_01.md` for 8–10 prospects; send Variant A.
 3. On yes: NDA → assign `judge_XX` ID → log in `SOURCING_TRACKER.yaml`.
 4. **Do not distribute packets** until slot_01 comparators are on disk.
@@ -47,7 +48,7 @@ M6 protocol is landed (PR #4725, `9f70a3d6ec`). Judge recruitment and comparator
 
 ### Exact next actions (comparators)
 
-1. Execute `PILOT_SLOT_01_ACQUISITION_EXECUTION.md` (ISBNs, URLs, scan spec).
+1. Execute `COMPARATOR_SCAN_DELIVERY_CHECKLIST.md` (ISBNs, URLs, scan spec).
 2. Scan PDFs → `comparators/yotsuba_v1_ch1_pages_5-8.pdf` + `comparators/barakamon_v1_ch1_pages_6-10.pdf`.
 3. Run `python3 scripts/qa/validate_manga_blind10_comparators.py --require-p0`.
 4. Record sha256; flip registry + tracker to `ACQUIRED`.
@@ -66,7 +67,7 @@ Pearl Star online
   → distribute blind → collect scorecards → scorecards/
 ```
 
-Slot_01 remains `prescreen_only` in `CANDIDATE_SET.tsv` — pilot human review is **discouraged** until M5 bank re-render at 0 INTERIM, but pre-screen + comparator/judge prep can proceed now.
+Slot_01 remains `prescreen_only` in `CANDIDATE_SET.tsv` — pilot human review is **discouraged** until M5 bank re-render at 0 INTERIM (slot_02 `ep_001_from_continuity` when ep001_029 byte gate clears), but pre-screen + comparator/judge prep can proceed now.
 
 ---
 
@@ -78,6 +79,7 @@ Slot_01 remains `prescreen_only` in `CANDIDATE_SET.tsv` — pilot human review i
 | M6-BLK-002 | PROVEN-AT-BAR | Judges not recruited — **outreach ready** |
 | M6-BLK-003 | M5 scale + pre-screen | Pearl Star GPU queue |
 | M6-BLK-004 | Judge packet distribution | Comparators not on disk — **checklist ready** |
+| M6-BLK-005 | M5 upgrade path | ep001_029 undersized on ep_001_from_continuity |
 
 ---
 
@@ -85,6 +87,9 @@ Slot_01 remains `prescreen_only` in `CANDIDATE_SET.tsv` — pilot human review i
 
 | Artifact | Path |
 |---|---|
+| **Scheduling memo** | `artifacts/qa/manga_blind10_2026-07-08/BLIND10_SCHEDULING_MEMO.md` |
+| Judge send checklist | `artifacts/qa/manga_blind10_2026-07-08/JUDGE_OUTREACH_SEND_CHECKLIST.md` |
+| Comparator scan checklist | `artifacts/qa/manga_blind10_2026-07-08/COMPARATOR_SCAN_DELIVERY_CHECKLIST.md` |
 | Judge brief | `artifacts/qa/manga_blind10_2026-07-08/JUDGE_RECRUITMENT_BRIEF.md` |
 | Outreach templates | `artifacts/qa/manga_blind10_2026-07-08/JUDGE_OUTREACH_TEMPLATE.md` |
 | Comparator checklist | `artifacts/qa/manga_blind10_2026-07-08/COMPARATOR_ACQUISITION_CHECKLIST.md` |

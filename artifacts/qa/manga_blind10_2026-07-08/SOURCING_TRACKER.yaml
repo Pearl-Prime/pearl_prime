@@ -5,8 +5,10 @@
 schema_version: manga_blind10_sourcing_tracker_v1
 run_id: manga_blind10_2026-07-08
 updated: "2026-07-08"
-verified_head: "339ed3163772cd41d6c5c0d044dd163bec25a99c"
+verified_head: "2ca947a9fa85a9793f3f097cf10bfdcf5ef31f66"
 acquisition_lane: "pilot_slot_01_advanced_2026-07-08"
+scheduling_lane: "blind10_scheduling_advanced_2026-07-08"
+scheduling_memo: BLIND10_SCHEDULING_MEMO.md
 
 judges:
   status: ready_to_recruit  # ready_to_recruit | recruiting | sufficient | blocked
@@ -28,9 +30,13 @@ judges:
     slot: "01"
     status: drafted  # drafted | sent — NOT sent until operator sends email
     draft_artifact: JUDGE_OUTREACH_DRAFTS_SLOT_01.md
+    send_checklist: JUDGE_OUTREACH_SEND_CHECKLIST.md
     execution_artifact: PILOT_SLOT_01_ACQUISITION_EXECUTION.md
     compensation_usd: "75-125"
     timeline_window: "2026-07-15 to 2026-07-29"
+    prospects_to_contact: 10
+    confirmed_floor: 3
+    confirmed_ideal: 5
   recruited: []  # append: {id, credentials, contract_date, status: confirmed|scheduled|declined}
   blockers:
     - id: M6-BLK-002
@@ -47,6 +53,13 @@ comparators:
   priority_p2_slots: ["05", "06", "07", "08", "09", "10"]
   asset_root: comparators/
   validation_script: scripts/qa/validate_manga_blind10_comparators.py
+  scan_delivery_checklist: COMPARATOR_SCAN_DELIVERY_CHECKLIST.md
+  validator_last_run:
+    date: "2026-07-08"
+    acquired: 0
+    pilot_ready: false
+    errors: 2
+    note: "missing_p0 — yotsuba + barakamon PDFs not on disk"
   slots:
     "01":
       comp_01_a:
@@ -98,14 +111,42 @@ comparators:
     - id: M6-BLK-004
       note: "Zero comparators acquired on disk — slot_01 ready_to_acquire (2 PDFs)"
 
+scheduling:
+  blind10_ready: partial  # partial | yes | no
+  pilot:
+    prescreen_candidate: slot_01
+    prescreen_render_path: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/composed_v3_qwen
+    m5_upgrade_path: slot_02_ep_001_from_continuity
+    m5_upgrade_blocker: "ep001_029 undersized (12741 bytes)"
+    calendar:
+      acquisition: "2026-07-08 to 2026-07-14"
+      outreach_send: "2026-07-08 to 2026-07-14"
+      judge_recruitment: "2026-07-15 to 2026-07-18"
+      packet_assembly: "2026-07-19 to 2026-07-22"
+      judge_sessions: "2026-07-23 to 2026-07-29"
+      pilot_closeout: "2026-07-30"
+  full_blind10:
+    earliest_start: "2026-09-01"
+    calendar:
+      m5_render_recovery: "2026-07-08 to 2026-07-31"
+      comparator_p1_p2: "2026-08-01 to 2026-08-14"
+      judge_recruitment: "2026-08-15 to 2026-08-28"
+      judge_sessions: "2026-09-01 to 2026-09-15"
+      verdict: "2026-09-16"
+    gate: "≥8 slots blind10_eligible=yes in CANDIDATE_SET.tsv"
+
 next_operator_actions:
-  - action: "Execute PILOT_SLOT_01_ACQUISITION_EXECUTION.md — buy + scan 2 P0 PDFs"
+  - action: "Execute COMPARATOR_SCAN_DELIVERY_CHECKLIST.md — buy + scan 2 P0 PDFs"
     unblocks: [M6-BLK-004-pilot]
-  - action: "Personalize JUDGE_OUTREACH_DRAFTS_SLOT_01.md; send to 8–10 prospects; mark sent in tracker"
+    parallel: true
+  - action: "Execute JUDGE_OUTREACH_SEND_CHECKLIST.md — send Variant A to 8–10 prospects"
     unblocks: [M6-BLK-002-pilot]
+    parallel: true
   - action: "After PDFs land: python3 scripts/qa/validate_manga_blind10_comparators.py --require-p0"
     unblocks: [registry_sha256_closeout]
-  - action: "Run slot_01 pre-screen on Pearl Star when online"
-    unblocks: [pilot_packet_assembly]
+  - action: "Run slot_01 pre-screen on Pearl Star when online (PRESCREEN_RUNBOOK.md)"
+    unblocks: [prescreen_archive]
+  - action: "Fix ep001_029 byte gate on ep_001_from_continuity for M5 upgrade path"
+    unblocks: [M6-BLK-005]
   - action: "Do not schedule full blind-10 until M6-BLK-001 cleared (≥8 render-ready slots)"
     unblocks: []

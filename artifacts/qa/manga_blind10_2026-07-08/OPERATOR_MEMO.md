@@ -2,6 +2,7 @@
 
 **Date:** 2026-07-08 · **Run ID:** `manga_blind10_2026-07-08`
 **Layer:** SPECCED (protocol landed) — **PROVEN-AT-BAR:** none
+**Scheduling memo:** `BLIND10_SCHEDULING_MEMO.md` (operator-ready timeline)
 
 ---
 
@@ -20,8 +21,8 @@ M6 does **not** unblock M5, M7, or catalog ship claims by itself.
 |---|---|
 | `manga_blind10_*` artifacts | **Present** (this folder — protocol only) |
 | Full blind-10 judge run | **NOT_RUN** |
-| Episodes render-ready for human packet | **1 / 10** (stillness ep_001 legacy) |
-| M5 E2E assembled episodes (0 INTERIM) | **0** |
+| Episodes render-ready for human packet | **1 / 10** (stillness ep_001 legacy prescreen_only) |
+| M5 E2E assembled episodes (0 INTERIM, byte gate) | **0** (slot_02 partial: 34/35 panels pass) |
 | PROVEN-AT-BAR manga | **0** |
 
 ---
@@ -77,6 +78,9 @@ See `BLOCKERS.md` for machine-readable blocker IDs.
 | Candidate queue | `artifacts/qa/manga_blind10_2026-07-08/CANDIDATE_SET.tsv` |
 | Slot 01 pilot packet | `artifacts/qa/manga_blind10_2026-07-08/judge_packets/slot_01_stillness_ep001/` |
 | Pre-screen | `artifacts/qa/manga_blind10_2026-07-08/pre_screen/PRESCREEN_RUNBOOK.md` |
+| **Scheduling memo** | `artifacts/qa/manga_blind10_2026-07-08/BLIND10_SCHEDULING_MEMO.md` |
+| Judge send checklist | `artifacts/qa/manga_blind10_2026-07-08/JUDGE_OUTREACH_SEND_CHECKLIST.md` |
+| Comparator scan checklist | `artifacts/qa/manga_blind10_2026-07-08/COMPARATOR_SCAN_DELIVERY_CHECKLIST.md` |
 | **Sourcing memo** | `artifacts/qa/manga_blind10_2026-07-08/SOURCING_OPERATOR_MEMO.md` |
 | Judge recruitment | `artifacts/qa/manga_blind10_2026-07-08/JUDGE_RECRUITMENT_BRIEF.md` |
 | Comparator checklist | `artifacts/qa/manga_blind10_2026-07-08/COMPARATOR_ACQUISITION_CHECKLIST.md` |
