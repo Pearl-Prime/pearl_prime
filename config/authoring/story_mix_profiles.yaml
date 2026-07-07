@@ -1,0 +1,79 @@
+# Story-mix profiles — per-book external-story spread knob
+# Authority: specs/EXTERNAL_STORIES_BANK_SPEC.md §4
+# Status: spec-only — planner consumer unwired until accent build lane opens.
+
+schema_version: "1.0.0"
+
+profiles:
+  practical_credible:
+    label: "Atomic-Habits-like"
+    description: "Heavy historical, business, sports, research-adjacent; credibility-forward"
+    type_weights:
+      historical: 0.25
+      business: 0.20
+      sports: 0.15
+      true_life_broadcast: 0.15
+      film: 0.10
+      book: 0.05
+      mythic: 0.05
+      pop_culture: 0.05
+    emotional_weights:
+      breakthrough: 0.30
+      contrast: 0.25
+      underdog: 0.20
+      cautionary: 0.15
+      quiet-recognition: 0.10
+
+  intimate_voice:
+    label: "Badass-like"
+    description: "Heavy true-life broadcast, pop culture, film; intimate reader proximity"
+    type_weights:
+      true_life_broadcast: 0.30
+      pop_culture: 0.20
+      film: 0.15
+      sports: 0.10
+      historical: 0.10
+      book: 0.05
+      business: 0.05
+      mythic: 0.05
+    emotional_weights:
+      quiet-recognition: 0.25
+      humor: 0.20
+      breakthrough: 0.20
+      tearjerker: 0.15
+      contrast: 0.10
+      underdog: 0.10
+
+  timeless_wisdom:
+    label: "Power-of-Now-like"
+    description: "Heavy mythic, historical, book; minimal celebrity; parable register"
+    type_weights:
+      mythic: 0.30
+      historical: 0.20
+      book: 0.15
+      film: 0.10
+      true_life_broadcast: 0.10
+      sports: 0.05
+      business: 0.05
+      pop_culture: 0.05
+    emotional_weights:
+      quiet-recognition: 0.35
+      contrast: 0.20
+      breakthrough: 0.15
+      cautionary: 0.15
+      underdog: 0.10
+      humor: 0.05
+
+dosage:
+  typical_book_min: 2
+  typical_book_max: 4
+  hard_book_max: 6
+  reuse_cap_per_brand_quarter: 3
+  no_adjacent_beats: true
+
+default_by_brand:
+  stillness_press: practical_credible
+  calm_horizon: practical_credible
+  inner_stillness: timeless_wisdom
+  grounded_path: practical_credible
+  quiet_mind_audio: intimate_voice

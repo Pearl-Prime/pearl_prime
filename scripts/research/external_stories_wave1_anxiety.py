@@ -1,0 +1,437 @@
+"""Anxiety topic — Wave 1 external stories corpus."""
+ANXIETY_STORIES = [
+    {
+        "story_id": "ext_anx_historical_darwin_palpitations_v01",
+        "type": "historical",
+        "emotional_shape": "quiet-recognition",
+        "story": (
+            "Charles Darwin suffered decades of palpitations, trembling, nausea, and dread so severe "
+            "that he often could not leave his home at Down House. Victorian physicians called it "
+            "nervous illness; modern readers recognize anxiety in a body that would not stand down. "
+            "Darwin still finished On the Origin of Species — not because the alarm stopped, but "
+            "because he built a life around its rhythm: short walks, strict routine, letters instead "
+            "of lecture halls.\n\n"
+            "Anxiety is not proof you cannot do the work. Sometimes it is proof your nervous system "
+            "is loud while your mind is still accurate. Darwin's palpitations did not invalidate "
+            "his eye for finches. They named the cost of seeing clearly in a world that punishes "
+            "new answers."
+        ),
+        "source": "Charles Darwin — documented health and anxiety",
+        "citation": "Darwin, C. Autobiography; Colp, R. Darwin's Illness (2008); Darwin Correspondence Project.",
+        "rights_class": "verified_facts_only",
+        "topic_keys": ["anxiety"],
+        "doctrine_keys": ["COMPOSITE_DOCTRINE v01"],
+        "locale_fit": ["universal", "en_US"],
+        "secular_safe": True,
+        "position_fit": "supports REFLECTION",
+        "sensitivity_notes": "",
+    },
+    {
+        "story_id": "ext_anx_sports_simone_biles_tokyo_v01",
+        "type": "sports",
+        "emotional_shape": "breakthrough",
+        "story": (
+            "At the Tokyo 2020 Olympics, Simone Biles withdrew from several gymnastics finals, citing "
+            "the 'twisties' — a disorienting loss of spatial awareness in the air. The world wanted "
+            "a medal narrative; Biles offered a nervous-system narrative. She said she could have "
+            "competed for the team but risked serious injury because her body and mind were not "
+            "synchronized.\n\n"
+            "Performance anxiety at that altitude is not stage fright with chalk. It is the moment "
+            "when the skill that once felt automatic demands proof you still trust gravity. Biles "
+            "named the alarm publicly and chose safety over applause. For many listeners, that was "
+            "the first time anxiety in elite sport sounded like courage instead of quitting."
+        ),
+        "source": "Simone Biles — Tokyo 2020 Olympics withdrawal",
+        "citation": "IOC press conferences July 2021; Biles statements via USA Gymnastics; NBC Olympic coverage.",
+        "rights_class": "verified_facts_only",
+        "topic_keys": ["anxiety"],
+        "doctrine_keys": ["COMPOSITE_DOCTRINE v05"],
+        "locale_fit": ["universal"],
+        "secular_safe": True,
+        "position_fit": "supports PIVOT",
+        "sensitivity_notes": "",
+    },
+    {
+        "story_id": "ext_anx_business_kodak_digital_v01",
+        "type": "business",
+        "emotional_shape": "cautionary",
+        "story": (
+            "Kodak invented the first digital camera in 1975 — and then protected its film cash cow "
+            "for decades while the world learned to photograph without rolls. Executives understood "
+            "the technology; anxiety about cannibalizing profit kept the future in a lab drawer. "
+            "When digital finally swallowed the market, Kodak filed for bankruptcy in 2012.\n\n"
+            "Corporate anxiety often masquerades as prudence. The cautionary lesson is not 'innovate "
+            "faster.' It is that bodies and institutions share a reflex: when the safe identity is "
+            "threatened, we postpone the obvious until the cliff arrives. Kodak's fear was not "
+            "ignorance. It was attachment to a story that used to work."
+        ),
+        "source": "Kodak digital camera invention and bankruptcy arc",
+        "citation": "Anthony, S. The Little Black Book of Innovation (2011); Kodak Chapter 11 filing Jan 2012; Rochester Democrat and Chronicle archives.",
+        "rights_class": "verified_facts_only",
+        "topic_keys": ["anxiety"],
+        "doctrine_keys": ["COMPOSITE_DOCTRINE v04"],
+        "locale_fit": ["universal", "en_US"],
+        "secular_safe": True,
+        "position_fit": "supports PIVOT",
+        "sensitivity_notes": "",
+    },
+    {
+        "story_id": "ext_anx_mythic_icarus_v01",
+        "type": "mythic",
+        "emotional_shape": "cautionary",
+        "story": (
+            "Daedalus built wings of wax and feather for himself and his son Icarus to escape Crete. "
+            "He warned: fly the middle path — not too low where the sea's damp clings, not too high "
+            "where the sun melts wax. Icarus soared anyway, intoxicated by height, and fell into the "
+            "sea.\n\n"
+            "The myth is usually taught as hubris. It is also an anxiety map: the terror of "
+            "moderation when ecstasy is available. Many anxious people do not fear falling. They fear "
+            "the moment after success — when the body asks whether you can hold altitude without "
+            "burning the very structure that lifted you."
+        ),
+        "source": "Greek myth — Icarus and Daedalus",
+        "citation": "Ovid, Metamorphoses VIII.183–235; Apollodorus, Bibliotheca III.15.9.",
+        "rights_class": "public_domain_retelling",
+        "topic_keys": ["anxiety"],
+        "doctrine_keys": ["COMPOSITE_DOCTRINE v04"],
+        "locale_fit": ["universal"],
+        "secular_safe": True,
+        "position_fit": "supports REFLECTION",
+        "sensitivity_notes": "",
+    },
+    {
+        "story_id": "ext_anx_film_inside_out_v01",
+        "type": "film",
+        "emotional_shape": "breakthrough",
+        "story": (
+            "In Pixar's Inside Out, eleven-year-old Riley's emotions are personified — Joy tries to "
+            "run the console alone while Sadness is treated as contamination. When Riley's family "
+            "moves cities, Joy's control strategy collapses; only when Sadness is allowed to name "
+            "loss does Riley reconnect with her parents and regain coherent feeling.\n\n"
+            "The film's anxiety insight is structural: panic is not always fear out of control. "
+            "Sometimes it is ungrieved change managed by a part that believes happiness must "
+            "monopolize the dashboard. Riley's recovery begins when mixed feelings are permitted "
+            "to coexist — not when Joy wins the argument. That is anxiety named as logistics, "
+            "not moral failure: many bodies need more than one emotion on stage at once."
+        ),
+        "source": "Inside Out (2015), Pixar Animation Studios",
+        "citation": "Docter, P. & Del Carmen, R. (dirs.) Inside Out. Disney/Pixar, 2015.",
+        "rights_class": "nominative_reference",
+        "topic_keys": ["anxiety"],
+        "doctrine_keys": ["COMPOSITE_DOCTRINE v02"],
+        "locale_fit": ["universal", "en_US"],
+        "secular_safe": True,
+        "position_fit": "supports TAKEAWAY",
+        "sensitivity_notes": "",
+    },
+    {
+        "story_id": "ext_anx_film_gravity_v01",
+        "type": "film",
+        "emotional_shape": "underdog",
+        "story": (
+            "In Alfonso Cuarón's Gravity, astronaut Ryan Stone is stranded after debris destroys "
+            "her shuttle. Oxygen ticks down; every grab for handholds is also a grab against panic. "
+            "The film's terror is not only space — it is breath becoming a ledger. Stone must "
+            "do precision work while grief and hyperventilation compete for the same ribcage.\n\n"
+            "Anxiety often feels like zero gravity: no friction, no floor, no proof the next minute "
+            "will arrive. Stone's arc is not fearless mastery. It is acting with trembling hands "
+            "because the alternative is drift. The body learns one rung at a time that panic and "
+            "motion can occupy the same suit."
+        ),
+        "source": "Gravity (2013), Warner Bros.",
+        "citation": "Cuarón, A. (dir.) Gravity. Warner Bros., 2013.",
+        "rights_class": "nominative_reference",
+        "topic_keys": ["anxiety"],
+        "doctrine_keys": ["COMPOSITE_DOCTRINE v05"],
+        "locale_fit": ["universal"],
+        "secular_safe": True,
+        "position_fit": "supports HOOK",
+        "sensitivity_notes": "",
+    },
+    {
+        "story_id": "ext_anx_historical_ada_lovelace_v01",
+        "type": "historical",
+        "emotional_shape": "contrast",
+        "story": (
+            "Ada Lovelace, daughter of the poet Byron, translated and annotated Charles Babbage's "
+            "Analytical Engine notes in 1843 — arguably the first published computer program. She "
+            "also lived under Victorian scrutiny: women of her class were not supposed to imagine "
+            "machines that might think. Her letters show exhilaration and doubt braided together — "
+            "visionary math beside fear of overstepping.\n\n"
+            "Anxiety in high ability often sounds like fraudulence before the word existed. Lovelace "
+            "did not wait for permission from her nervous system. She wrote the algorithm anyway — "
+            "proof that the chest tightens and the mind can still publish the future. "
+            "Her notes remain a map for anyone whose hands shake over work that matters."
+        ),
+        "source": "Ada Lovelace — Analytical Engine notes",
+        "citation": "Lovelace, A. Notes on L. F. Menabrea (1843); Fuegi, J. Lovelace & Babbage (2003) IEEE Annals.",
+        "rights_class": "verified_facts_only",
+        "topic_keys": ["anxiety"],
+        "doctrine_keys": ["COMPOSITE_DOCTRINE v03"],
+        "locale_fit": ["universal", "en_US"],
+        "secular_safe": True,
+        "position_fit": "supports REFLECTION",
+        "sensitivity_notes": "",
+    },
+    {
+        "story_id": "ext_anx_historical_lincoln_melancholy_v01",
+        "type": "historical",
+        "emotional_shape": "quiet-recognition",
+        "story": (
+            "Abraham Lincoln's contemporaries documented a man prone to deep melancholy — long "
+            "depressive episodes, suicidal language in his youth, and a temperament historians "
+            "later read alongside his stamina during the Civil War. He did not have our vocabulary "
+            "for anxiety disorders, but the record describes a leader who knew the interior weather "
+            "and still filed briefs, buried a son, and delivered the Gettysburg Address.\n\n"
+            "American civic myth likes steady nerves. Lincoln's verified melancholy offers a "
+            "counter-myth: the alarm can be chronic while duty remains choosable. Anxiety here is "
+            "not weakness disqualifying power. It is a documented human backdrop to decisions that "
+            "could not wait for perfect calm."
+        ),
+        "source": "Abraham Lincoln — documented melancholy",
+        "citation": "Shenk, J.W. Lincoln's Melancholy (2005); Lincoln legal papers and contemporary memoirs.",
+        "rights_class": "verified_facts_only",
+        "topic_keys": ["anxiety"],
+        "doctrine_keys": ["COMPOSITE_DOCTRINE v01"],
+        "locale_fit": ["en_US"],
+        "secular_safe": True,
+        "position_fit": "supports REFLECTION",
+        "sensitivity_notes": "US political figure — en_US cluster only per locale policy.",
+    },
+    {
+        "story_id": "ext_anx_moth_stage_fright_v01",
+        "type": "true_life_broadcast",
+        "emotional_shape": "humor",
+        "story": (
+            "On The Moth, performers routinely describe stage fright as a bodily hijacking — knees "
+            "liquifying, mouth drying, the moment before the microphone when the story you rehearsed "
+            "in the shower evaporates. One recurring arc: the teller walks into the light anyway, "
+            "forgets a line, laughs, and discovers the audience is not a tribunal but witnesses.\n\n"
+            "Performance anxiety shrinks when the goal shifts from 'be flawless' to 'be in contact.' "
+            "The Moth archive is proof that shaking hands can still hold a true sentence. The humor "
+            "is not mockery. It is recognition that terror and telling can share a stage. "
+            "The body can tremble and still deliver the true sentence the room came to hear."
+        ),
+        "source": "The Moth — stage fright and performance anxiety stories",
+        "citation": "The Moth Radio Hour and podcast archive; live story slam recordings.",
+        "rights_class": "paraphrase_attributed",
+        "topic_keys": ["anxiety"],
+        "doctrine_keys": ["COMPOSITE_DOCTRINE v02"],
+        "locale_fit": ["en_US", "universal"],
+        "secular_safe": True,
+        "position_fit": "supports REFLECTION",
+        "sensitivity_notes": "",
+    },
+    {
+        "story_id": "ext_anx_fresh_air_anxiety_theme_v01",
+        "type": "true_life_broadcast",
+        "emotional_shape": "quiet-recognition",
+        "story": (
+            "NPR's Fresh Air has repeatedly hosted clinicians, writers, and public figures discussing "
+            "anxiety as a civilizational hum — not only pathology but the sound of hyper-vigilant "
+            "bodies in news cycles, caregiving, and creative work. A recurring listener theme in "
+            "call-in segments: 'I look fine at dinner and rehearse catastrophes in the car.'\n\n"
+            "Fresh Air's register is conversational precision — naming worry without moralizing it. "
+            "For anxious listeners, hearing a voice describe the split between exterior competence "
+            "and interior alarm can be the first normalization that does not demand a cure on "
+            "Wednesday. Recognition is not resolution. It is oxygen — the kind that lets you "
+            "stay in the conversation without pretending the alarm is silent."
+        ),
+        "source": "Fresh Air — anxiety and mental health episode themes",
+        "citation": "NPR Fresh Air archive; Terry Gross interviews on anxiety disorders and stress (2010s–2020s).",
+        "rights_class": "paraphrase_attributed",
+        "topic_keys": ["anxiety"],
+        "doctrine_keys": ["COMPOSITE_DOCTRINE v08"],
+        "locale_fit": ["en_US"],
+        "secular_safe": True,
+        "position_fit": "supports REFLECTION",
+        "sensitivity_notes": "",
+    },
+    {
+        "story_id": "ext_anx_zh_cn_sima_qian_v01",
+        "type": "historical",
+        "emotional_shape": "underdog",
+        "story": (
+            "司马迁因替李陵辩护触怒汉武帝，受宫刑。对于士大夫而言，这是比死更难承受的"
+            "屈辱；他在《报任安书》里写自己曾欲自尽，却选择活下来完成《史记》。"
+            "身体与名誉的焦虑并未消失，被他织进《太史公自序》的使命感里。\n\n"
+            "焦虑有时不是逃避工作的借口，而是极端羞辱之后仍要继续书写的代价。"
+            "司马迁的例子说明：最剧烈的精神震荡，也可能与最长线的见证并存——"
+            "不是因为他不痛，而是因为他把痛写进了时间的账本。"
+        ),
+        "source": "司马迁 — 《报任安书》与《史记》",
+        "citation": "司马迁《史记·太史公自序》；《报任安书》",
+        "rights_class": "public_domain_retelling",
+        "topic_keys": ["anxiety"],
+        "doctrine_keys": ["COMPOSITE_DOCTRINE v05"],
+        "locale_fit": ["zh_CN", "zh_TW"],
+        "secular_safe": True,
+        "position_fit": "supports TAKEAWAY",
+        "sensitivity_notes": "",
+    },
+    {
+        "story_id": "ext_anx_zh_cn_xiang_yu_v01",
+        "type": "historical",
+        "emotional_shape": "cautionary",
+        "story": (
+            "项羽垓下被围，夜闻四面楚歌，以为楚地尽失，军心瓦解。《史记》写他惊惶、"
+            "饮酒悲歌，次日突围至乌江，自觉无颜见江东父老而自刎。后世读此，常叹其"
+            "刚烈，亦见其焦虑如何在一夜之间放大为'全盘皆输'的叙事。\n\n"
+            "灾难化思维并不现代：当环境音被解读为灭顶证据，最勇的人也会把一次失利"
+            "写成终局。项羽的故事是警示——警报声可能是真实的，但大脑给警报配的"
+            "字幕，未必是史实。"
+        ),
+        "source": "项羽 — 垓下之战与乌江自刎",
+        "citation": "司马迁《史记·项羽本纪》",
+        "rights_class": "public_domain_retelling",
+        "topic_keys": ["anxiety"],
+        "doctrine_keys": ["COMPOSITE_DOCTRINE v04"],
+        "locale_fit": ["zh_CN", "zh_TW"],
+        "secular_safe": True,
+        "position_fit": "supports PIVOT",
+        "sensitivity_notes": "",
+    },
+    {
+        "story_id": "ext_anx_zh_cn_su_shi_v01",
+        "type": "historical",
+        "emotional_shape": "breakthrough",
+        "story": (
+            "苏轼一生多次贬谪，乌台诗案后几近丧命，黄州时期贫病交加。他在《定风波》"
+            "里写：'莫听穿林打叶声，何妨吟啸且徐行。'并非无雨，而是雨声中选择"
+            "不把每一滴都听成审判。后世读者从中取出的是焦虑与旷达并存的证据——"
+            "不是否认政治恐惧，而是在恐惧里练习步伐。\n\n"
+            "中文语境里的焦虑疗愈常引用苏轼，不是因为他无忧无虑，而是因为他把"
+            "外部不确定写进了词牌，让身体记得：惊雷在耳，仍可徐行。"
+        ),
+        "source": "苏轼 — 黄州时期与《定风波》",
+        "citation": "苏轼《定风波·莫听穿林打叶声》；《宋史·苏轼传》",
+        "rights_class": "public_domain_retelling",
+        "topic_keys": ["anxiety"],
+        "doctrine_keys": ["COMPOSITE_DOCTRINE v02"],
+        "locale_fit": ["zh_CN", "zh_TW"],
+        "secular_safe": True,
+        "position_fit": "supports TAKEAWAY",
+        "sensitivity_notes": "",
+    },
+    {
+        "story_id": "ext_anx_ja_jp_karoshi_v01",
+        "type": "business",
+        "emotional_shape": "cautionary",
+        "story": (
+            "1980年代、日本で「過労死（かろうし）」という言葉が社会的に固定化した。"
+            "長時間労働、休暇不使用、倒れても休めない空気——不安は個人の心配事ではなく、"
+            "職場の構造として身体に刻まれた。政府は後年、労災認定基準を拡大し、"
+            "メディアは若手社員の急死を繰り返し報じた。\n\n"
+            "日本の聴衆にとって、仕事の不安は『明日の会議』だけではない。"
+            "『このまま働き続けても大丈夫か』という慢性的な身体警報である。"
+            "過労死の史は、個人の弱さではなく、警報を無視させる文化の費用だ。"
+        ),
+        "source": "日本の過労死問題 — 1980年代以降",
+        "citation": "厚生労働省 過労死等の労災補償状況；西垣通『過労死』岩波新書",
+        "rights_class": "verified_facts_only",
+        "topic_keys": ["anxiety"],
+        "doctrine_keys": ["COMPOSITE_DOCTRINE v08"],
+        "locale_fit": ["ja_JP"],
+        "secular_safe": True,
+        "position_fit": "supports PIVOT",
+        "sensitivity_notes": "労働災害・死亡テーマ。簡潔な公共事実のみ。",
+    },
+    {
+        "story_id": "ext_anx_film_shoplifters_v01",
+        "type": "film",
+        "emotional_shape": "tearjerker",
+        "story": (
+            "是枝裕和の『万引き家族』は、貧困のなかで結びついた疑似家族が、盗みと"
+            "愛情の境界で暮らす物語だ。子どもは店の死角を覚える一方、世界への不安は"
+            "'捕まるかもしれない'という身体感覚として常に残る。幸福な場面にも、"
+            "聴衆は追い詰められた神経を忘れられない。\n\n"
+            "経済的不安と社会的不安は分離できない。日本の視聴者にとって、この映画は"
+            "『お金の心配』が家族の呼吸をどう細くするかを、fictionとしてではなく"
+            "生活の近さで見せる——それ自体が不安の言語化になる。"
+        ),
+        "source": "万引き家族（2018）、是枝裕和監督",
+        "citation": "是枝裕和『万引き家族』ギャガ、2018；カンヌ国際映画祭 パルム・ドール",
+        "rights_class": "nominative_reference",
+        "topic_keys": ["anxiety"],
+        "doctrine_keys": ["COMPOSITE_DOCTRINE v01"],
+        "locale_fit": ["ja_JP", "universal"],
+        "secular_safe": True,
+        "position_fit": "supports REFLECTION",
+        "sensitivity_notes": "",
+    },
+    {
+        "story_id": "ext_anx_business_nokia_v01",
+        "type": "business",
+        "emotional_shape": "cautionary",
+        "story": (
+            "Nokia dominated mobile phones in the early 2000s — then smartphones rewrote the "
+            "category. Public postmortems describe internal fear of killing successful product "
+            "lines, fragmented software bets, and the anxiety of admitting that the map said "
+            "'turn here' years before the company did. Microsoft acquired Nokia's devices unit "
+            "in 2013 as the brand's phone era ended.\n\n"
+            "Market anxiety is collective: thousands of competent people can share a silence "
+            "about the obvious because naming it means becoming the messenger who gets shot. "
+            "Nokia's arc is not ridicule. It is what happens when alarm is whispered in meetings "
+            "but not priced into strategy until the window closes."
+        ),
+        "source": "Nokia smartphone transition and decline",
+        "citation": "Chesbrough, H. Nokia's smartphone era analyses; Microsoft–Nokia acquisition 2013; Nokia annual reports 2007–2013.",
+        "rights_class": "verified_facts_only",
+        "topic_keys": ["anxiety"],
+        "doctrine_keys": ["COMPOSITE_DOCTRINE v04"],
+        "locale_fit": ["universal"],
+        "secular_safe": True,
+        "position_fit": "supports PIVOT",
+        "sensitivity_notes": "",
+    },
+    {
+        "story_id": "ext_anx_storycorps_911_v01",
+        "type": "true_life_broadcast",
+        "emotional_shape": "tearjerker",
+        "story": (
+            "StoryCorps recorded hundreds of conversations about September 11, 2001 — spouses "
+            "describing last phone calls, children asking why a parent did not come home, "
+            "first responders whose bodies stayed on alert for years after the dust settled. "
+            "A recurring thread is not only grief but hyper-vigilance: sirens that rewind time, "
+            "subway stops that feel like traps.\n\n"
+            "Collective trauma seeds personal anxiety. The 9/11 archive documents how a nation's "
+            "worst day becomes a private nervous system soundtrack — proof that worry after "
+            "catastrophe is not overreaction. It is memory doing unfinished work in the chest — "
+            "and naming that work is often the first way the present stops feeling like trespass."
+        ),
+        "source": "StoryCorps — September 11 remembrance archive",
+        "citation": "StoryCorps 9/11 Initiative; National September 11 Memorial & Museum oral history partnerships.",
+        "rights_class": "paraphrase_attributed",
+        "topic_keys": ["anxiety"],
+        "doctrine_keys": ["COMPOSITE_DOCTRINE v01"],
+        "locale_fit": ["en_US"],
+        "secular_safe": True,
+        "position_fit": "supports REFLECTION",
+        "sensitivity_notes": "Mass-casualty event; paraphrase only, no graphic detail.",
+    },
+    {
+        "story_id": "ext_anx_ted_mcgonigal_stress_v01",
+        "type": "true_life_broadcast",
+        "emotional_shape": "contrast",
+        "story": (
+            "Health psychologist Kelly McGonigal, in her widely cited TED talk 'How to Make Stress "
+            "Your Friend,' revisits research on stress beliefs: people who interpret physiological "
+            "arousal as harmful show worse cardiovascular outcomes than those who read the same "
+            "sensations as the body rising to a challenge. She does not claim stress is pleasant — "
+            "she reframes the secondary anxiety about anxiety.\n\n"
+            "For listeners whose chest tightens before meetings, the contrast is liberating: part "
+            "of the damage may be the story layered on top of the pulse. Naming stress as "
+            "performance preparation will not erase fear, but it can shrink the shame that "
+            "pretends a human body should never activate."
+        ),
+        "source": "Kelly McGonigal — TED talk on stress mindset",
+        "citation": "McGonigal, K. TED Global 2013 'How to Make Stress Your Friend'; Jamieson et al. stress reappraisal studies.",
+        "rights_class": "paraphrase_attributed",
+        "topic_keys": ["anxiety"],
+        "doctrine_keys": ["COMPOSITE_DOCTRINE v03"],
+        "locale_fit": ["universal", "en_US"],
+        "secular_safe": True,
+        "position_fit": "supports TAKEAWAY",
+        "sensitivity_notes": "",
+    },
+]
