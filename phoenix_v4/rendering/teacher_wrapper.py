@@ -15,6 +15,7 @@ from __future__ import annotations
 
 import hashlib
 import re
+from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
@@ -35,6 +36,54 @@ _PLACEHOLDER_SLOT_VALUES: frozenset[str] = frozenset({
 })
 
 _TRADITION_BARE_ADJECTIVE = frozenset({"contemplative"})
+
+# Book-wide soft cap for identical generalized intro prefixes. Matches the
+# book_quality_gate default cap (12) with one headroom slot so rotation
+# prefers unused variants before the gate fires.
+_WRAPPER_BOOK_CAP_DEFAULT = 11
+_NGRAM_WINDOW_SIZES = (4, 5, 6)
+
+
+def _wrapper_ngrams(text: str) -> list[str]:
+    words = re.findall(r"[a-z0-9']+", (text or "").lower())
+    out: list[str] = []
+    for n in _NGRAM_WINDOW_SIZES:
+        for i in range(0, max(0, len(words) - n + 1)):
+            out.append(" ".join(words[i : i + n]))
+    return out
+
+
+@dataclass
+class WrapperUsageMemory:
+    """Book-wide usage counter for resolved teacher-wrapper prefix stems."""
+
+    book_cap: int = _WRAPPER_BOOK_CAP_DEFAULT
+    _counts: dict[str, int] = field(default_factory=dict)
+    _ngram_counts: dict[str, int] = field(default_factory=dict)
+
+    @staticmethod
+    def normalize_key(text: str) -> str:
+        return re.sub(r"\s+", " ", (text or "").lower().strip())
+
+    def count(self, text: str) -> int:
+        return self._counts.get(self.normalize_key(text), 0)
+
+    def record(self, text: str) -> None:
+        key = self.normalize_key(text)
+        self._counts[key] = self._counts.get(key, 0) + 1
+        for ng in _wrapper_ngrams(text):
+            self._ngram_counts[ng] = self._ngram_counts.get(ng, 0) + 1
+
+    def at_cap(self, text: str) -> bool:
+        return self.count(text) >= self.book_cap
+
+    def max_ngram_load(self, text: str) -> int:
+        """Highest 4–6-gram count this prefix would reach after one more use."""
+        loads = [self._ngram_counts.get(ng, 0) + 1 for ng in _wrapper_ngrams(text)]
+        return max(loads) if loads else 0
+
+    def ngram_over_cap(self, text: str) -> bool:
+        return self.max_ngram_load(text) > self.book_cap + 1
 
 
 def _load_yaml(p: Path) -> Dict[str, Any]:
@@ -91,9 +140,13 @@ def _slot_value_is_placeholder(key: str, value: str) -> bool:
     v = str(value or "").strip().lower()
     if not v:
         return True
-    if v in _PLACEHOLDER_SLOT_VALUES:
-        return True
     if key == "TRADITION" and v in _TRADITION_BARE_ADJECTIVE:
+        return True
+    if key == "TRADITION" and v in _PLACEHOLDER_SLOT_VALUES:
+        return True
+    if key == "PRACTICE_NAME" and v == "the practice":
+        return True
+    if key == "TEACHING_LINEAGE" and v == "mindfulness and somatic":
         return True
     return False
 
@@ -199,18 +252,52 @@ def _resolve(pattern: str, slots: Dict[str, str]) -> Optional[str]:
     return resolved
 
 
-def _pick_variant(variants: List[str], slots: Dict[str, str], seed: str) -> Optional[str]:
-    """Deterministically pick a fully-resolvable variant. Returns None if none resolve."""
+def _pick_variant(
+    variants: List[str],
+    slots: Dict[str, str],
+    seed: str,
+    *,
+    usage_memory: Optional[WrapperUsageMemory] = None,
+) -> Optional[str]:
+    """Pick a fully-resolvable variant; prefer least-used when memory is provided."""
     if not variants:
         return None
-    h = int(hashlib.sha1(seed.encode("utf-8")).hexdigest(), 16)
-    start = h % len(variants)
-    for i in range(len(variants)):
-        cand = variants[(start + i) % len(variants)]
+    resolved_pool: list[tuple[str, str]] = []
+    for cand in variants:
         resolved = _resolve(cand, slots)
         if resolved:
-            return resolved
-    return None
+            resolved_pool.append((cand, resolved))
+    if not resolved_pool:
+        return None
+
+    h = int(hashlib.sha1(seed.encode("utf-8")).hexdigest(), 16)
+    if usage_memory is None:
+        start = h % len(resolved_pool)
+        for i in range(len(resolved_pool)):
+            return resolved_pool[(start + i) % len(resolved_pool)][1]
+        return None
+
+    under_cap = [
+        (cand, resolved)
+        for cand, resolved in resolved_pool
+        if not usage_memory.at_cap(resolved) and not usage_memory.ngram_over_cap(resolved)
+    ]
+    candidates = under_cap or [
+        (cand, resolved)
+        for cand, resolved in resolved_pool
+        if not usage_memory.at_cap(resolved)
+    ] or resolved_pool
+
+    def _sort_key(item: tuple[str, str]) -> tuple[int, int, int]:
+        _cand, resolved = item
+        return (
+            usage_memory.max_ngram_load(resolved),
+            usage_memory.count(resolved),
+            int(hashlib.sha1(f"{seed}:{resolved}".encode("utf-8")).hexdigest(), 16),
+        )
+
+    candidates.sort(key=_sort_key)
+    return candidates[0][1]
 
 
 def resolve_wrapper(
@@ -219,6 +306,7 @@ def resolve_wrapper(
     section_type: str,
     seed: str,
     spine_context: Optional[Dict[str, Any]] = None,
+    usage_memory: Optional[WrapperUsageMemory] = None,
 ) -> Tuple[str, str]:
     """
     Return (prefix, suffix) strings to wrap teacher_atom_content.
@@ -258,8 +346,15 @@ def resolve_wrapper(
         if not isinstance(block, dict):
             continue
         pool = _variant_pool(block)
-        chosen = _pick_variant(pool, slots, f"{seed}:{mode}:{wrapper_key}")
+        chosen = _pick_variant(
+            pool,
+            slots,
+            f"{seed}:{mode}:{wrapper_key}",
+            usage_memory=usage_memory,
+        )
         if chosen:
+            if usage_memory is not None and chosen.strip():
+                usage_memory.record(chosen)
             # Prefix/suffix partition:
             #   intro_wrapper + exercise_wrapper → prefix only
             #   conclusion_wrapper               → suffix only
@@ -303,6 +398,7 @@ def apply_wrapper(
     section_type: str,
     seed: str,
     spine_context: Optional[Dict[str, Any]] = None,
+    usage_memory: Optional[WrapperUsageMemory] = None,
 ) -> str:
     """
     Convenience: resolve + apply. Returns content unchanged if no wrapper applies.
@@ -315,6 +411,7 @@ def apply_wrapper(
         section_type=section_type,
         seed=seed,
         spine_context=spine_context,
+        usage_memory=usage_memory,
     )
     if not prefix and not suffix:
         return body

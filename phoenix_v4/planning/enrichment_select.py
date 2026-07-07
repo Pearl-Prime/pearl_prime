@@ -2271,6 +2271,9 @@ def select_enrichment(
     _chapter_collision_families: List[List[str]] = []
 
     _book_tracker = BookSlotTracker()
+    from phoenix_v4.rendering.teacher_wrapper import WrapperUsageMemory
+
+    _book_wrapper_memory = WrapperUsageMemory()
 
     # OPD-109 Phase 3: per-book rotation state for persona atom picks. Prefers
     # least-used atoms (with deterministic SHA tiebreak), so the selector spreads
@@ -2501,6 +2504,7 @@ def select_enrichment(
                         _at_content_ex = _aw(
                             _at_hit_ex[0], teacher_id=tid, section_type=stype,
                             seed=seed_key, spine_context=plan_context,
+                            usage_memory=_book_wrapper_memory,
                         )
                         _add_pieces.append(_at_content_ex)
                         _add_sources.append("teacher_atom")
@@ -2620,6 +2624,7 @@ def select_enrichment(
                                     section_type=stype,
                                     seed=f"{seed_key}:composite",
                                     spine_context=plan_context,
+                                    usage_memory=_book_wrapper_memory,
                                 )
                             _add_pieces.append(_cx_body)
                             _add_sources.append("composite_doctrine")
@@ -2831,6 +2836,7 @@ def select_enrichment(
                             _at_content = _aw(
                                 _at_raw, teacher_id=tid, section_type=stype,
                                 seed=seed_key, spine_context=plan_context,
+                                usage_memory=_book_wrapper_memory,
                             )
                             _add_pieces.append(_at_content)
                             _add_sources.append("teacher_atom")
