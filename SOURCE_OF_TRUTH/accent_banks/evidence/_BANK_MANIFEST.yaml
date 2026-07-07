@@ -1,0 +1,56 @@
+# Evidence bank — Wave 1 (Pearl_Research)
+# Status: unwired — no pipeline consumer until accent build lane opens.
+# Spec: user PROMPT 2 + specs/ACCENT_BEATS_SYSTEM_SPEC.md §5.2 (CITED_EVIDENCE)
+# KNOWN_UNWIRED: accent_banks/evidence/ — bank seeded; composer/planner consumer absent.
+
+bank_id: evidence_wave_1
+status: unwired
+wave: 1
+authority: Pearl_Research
+created: 2026-07-07
+schema_version: "1.0.0"
+
+entry_schema:
+  required:
+    - evidence_id
+    - entry_type          # finding | documented_case
+    - claim
+    - citation
+    - year
+    - robustness          # robust | mixed | weakened | single-study
+    - topic_keys
+    - doctrine_keys
+    - locale_framing_notes
+    - sensitivity_notes
+    - secular_safe
+    - position_fit        # supports REFLECTION | supports PIVOT | supports TAKEAWAY
+  optional:
+    - caveat              # required when robustness is weakened or mixed with replication concerns
+    - case_attribution    # documented_case only — named public figure or published composite
+
+topics_wave_1:
+  anxiety:
+    target: 15-20
+    path: anxiety/entries.yaml
+  burnout:
+    target: 10
+    path: burnout/entries.yaml
+  financial_anxiety:
+    target: 10
+    path: financial_anxiety/entries.yaml
+  imposter_syndrome:
+    target: 10
+    path: imposter_syndrome/entries.yaml
+  boundaries:
+    target: 10
+    path: boundaries/entries.yaml
+  social_anxiety:
+    target: 10
+    path: social_anxiety/entries.yaml
+
+locale_clusters:
+  en_EU: "English + Western EU markets — individualist framing, direct self-agency"
+  zh_TW_zh_CN: "Traditional/Simplified Chinese — collectivist family/workplace norms; mental-health stigma sensitivity"
+  ja_JP: "Japanese — gambaru/overwork culture; indirect emotional expression; workplace hierarchy"
+
+rejected_claims_log: artifacts/research/evidence_rejected_claims_log.jsonl

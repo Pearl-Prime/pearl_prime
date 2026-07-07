@@ -1,0 +1,374 @@
+topic: anxiety
+wave: 1
+status: unwired
+entry_count: 18
+robustness_distribution:
+  robust: 15
+  mixed: 2
+  weakened: 0
+  single-study: 1
+
+entries:
+  - evidence_id: anx_gad_prevalence_who_2019
+    entry_type: finding
+    claim: >
+      Anxiety disorders are among the most common mental health conditions worldwide.
+      In 2019, roughly one person in every thirteen experienced an anxiety disorder
+      in the past year, making anxiety a shared human pattern rather than a personal
+      defect.
+    citation: "World Health Organization (2019). Mental Disorders: Global Health Estimates. Geneva: WHO."
+    year: 2019
+    robustness: robust
+    topic_keys: [anxiety]
+    doctrine_keys: ["COMPOSITE_DOCTRINE v01"]
+    locale_framing_notes:
+      en_EU: "Use for normalizing opening beats — 'you are not alone' without medicalizing."
+      zh_TW_zh_CN: "Pair with community/family context; avoid implying the reader should have sought clinical care already."
+      ja_JP: "Frame as widespread workplace/school stress pattern; avoid strong disorder labels in marketing copy."
+    sensitivity_notes: "Prevalence stats reduce shame but can trigger 'am I sick?' anxiety — pair with non-diagnostic framing."
+    secular_safe: true
+    position_fit: supports REFLECTION
+
+  - evidence_id: anx_cbt_meta_hofmann_2012
+    entry_type: finding
+    claim: >
+      Across dozens of clinical trials, cognitive and behavioral therapies reliably
+      reduce anxiety symptoms more than inactive comparison conditions. The effect
+      is moderate and consistent across age groups, which supports the idea that
+      how you relate to thoughts and feared situations can be retrained.
+    citation: "Hofmann SG, Asnaani A, Vonk IJJ, Sawyer AT, Fang A (2012). The Efficacy of Cognitive Behavioral Therapy: A Review of Meta-analyses. Cognitive Therapy and Research, 36(5), 427-440."
+    year: 2012
+    robustness: robust
+    topic_keys: [anxiety, overthinking]
+    doctrine_keys: ["COMPOSITE_DOCTRINE v03", "COMPOSITE_DOCTRINE v13"]
+    locale_framing_notes:
+      en_EU: "Tie to skill-building and self-efficacy — 'practices that change the pattern.'"
+      zh_TW_zh_CN: "Emphasize gradual practice over 'fixing the mind'; therapy stigma may require 'self-guided skills' framing."
+      ja_JP: "Link to structured daily practice (keiko) rather than open-ended introspection."
+    sensitivity_notes: "Do not imply CBT replaces medication for all readers; avoid prescriptive clinical tone."
+    secular_safe: true
+    position_fit: supports PIVOT
+
+  - evidence_id: anx_exposure_inhibitory_learning_craske_2014
+    entry_type: finding
+    claim: >
+      When people repeatedly face a feared situation without the catastrophe they
+      expect, the brain does not simply forget fear — it learns new safety
+      information that competes with the old alarm. That learning, built in small
+      repeated doses, is why gradual exposure works better than one heroic attempt.
+    citation: "Craske MG, Treanor M, Conway CC, Zbozinek TD, Vervliet B (2014). Maximizing exposure therapy: An inhibitory learning approach. Behaviour Research and Therapy, 58, 10-23."
+    year: 2014
+    robustness: robust
+    topic_keys: [anxiety, social_anxiety]
+    doctrine_keys: ["COMPOSITE_DOCTRINE v10"]
+    locale_framing_notes:
+      en_EU: "Maps directly to 'small deposits of evidence' doctrine language."
+      zh_TW_zh_CN: "Frame as repeated safe experiences in familiar settings (family, commute) before high-stakes exposure."
+      ja_JP: "Pair with incremental kaizen steps; avoid shame for past avoidance."
+    sensitivity_notes: "Exposure language can panic readers with trauma history — always specify graded, voluntary steps."
+    secular_safe: true
+    position_fit: supports REFLECTION
+
+  - evidence_id: anx_safety_behaviors_maintain_salkovskis_1991
+    entry_type: finding
+    claim: >
+      Short-term habits meant to prevent anxiety — rehearsing lines, checking exits,
+      carrying water 'just in case' — often keep fear alive because they block the
+      learning that nothing terrible happened. What feels like protection can become
+      the reason the alarm never updates.
+    citation: "Salkovskis PM (1991). The importance of behaviour in the maintenance of anxiety and panic: A cognitive account. Behavioural Psychotherapy, 19(1), 6-19."
+    year: 1991
+    robustness: robust
+    topic_keys: [anxiety, social_anxiety]
+    doctrine_keys: ["COMPOSITE_DOCTRINE v08", "COMPOSITE_DOCTRINE v12"]
+    locale_framing_notes:
+      en_EU: "Name checking phone, over-preparing slides, escape planning as common safety moves."
+      zh_TW_zh_CN: "Include saving face, over-apologizing, and family-mediated avoidance as culturally familiar safety behaviors."
+      ja_JP: "Reference perfectionist preparation and reading the room excessively as safety strategies."
+    sensitivity_notes: "Avoid blaming tone — frame as understandable strategies that outlived their usefulness."
+    secular_safe: true
+    position_fit: supports PIVOT
+
+  - evidence_id: anx_worry_cognitive_avoidance_borkovec_1985
+    entry_type: finding
+    claim: >
+      Worry is not just excess thinking — in many people it functions as a mental
+      habit that briefly reduces the body's fear response while keeping the mind
+      on guard. The relief is real but short, which is why the loop pulls you back
+      again and again.
+    citation: "Borkovec TD, Shadick RN, Hopkins M (1987). The nature of worry in generalized anxiety disorder: A predominance of thought activity. Behaviour Research and Therapy, 25(6), 509-516. (Builds on Borkovec TD (1985) worry-as-avoidance model.)"
+    year: 1987
+    robustness: robust
+    topic_keys: [anxiety, overthinking]
+    doctrine_keys: ["COMPOSITE_DOCTRINE v08", "COMPOSITE_DOCTRINE v03"]
+    locale_framing_notes:
+      en_EU: "Connect to morning inbox scan and pre-meeting mental rehearsal."
+      zh_TW_zh_CN: "Link to family obligation rumination and future-planning worry."
+      ja_JP: "Tie to anticipatory worry about workplace harmony and mistake prevention."
+    sensitivity_notes: null
+    secular_safe: true
+    position_fit: supports REFLECTION
+
+  - evidence_id: anx_interoceptive_awareness_panic_barlow_1988
+    entry_type: finding
+    claim: >
+      For panic and acute anxiety, fear of bodily sensations — a racing heart, dizziness,
+      shortness of breath — often matters as much as fear of external situations.
+      Learning to notice these signals without treating each one as an emergency
+      reduces the spiral that turns a sensation into a crisis.
+    citation: "Barlow DH (1988). Anxiety and Its Disorders: The Nature and Treatment of Anxiety and Panic. New York: Guilford Press. (Interoceptive conditioning model; replicated in subsequent panic treatment trials.)"
+    year: 1988
+    robustness: robust
+    topic_keys: [anxiety]
+    doctrine_keys: ["COMPOSITE_DOCTRINE v11", "COMPOSITE_DOCTRINE v13"]
+    locale_framing_notes:
+      en_EU: "Use 'contact with the body during spikes' language from doctrine v11."
+      zh_TW_zh_CN: "Somatosensory focus is culturally acceptable; avoid hyper-medicalizing heart-rate language."
+      ja_JP: "Pair with grounding before meetings; body awareness acceptable in wellness register."
+    sensitivity_notes: "Readers with cardiac conditions may need 'consult a clinician' caveat for chest symptoms."
+    secular_safe: true
+    position_fit: supports PIVOT
+
+  - evidence_id: anx_cognitive_model_beck_1976
+    entry_type: finding
+    claim: >
+      Anxious minds tend to jump quickly from a neutral event to a catastrophic
+      interpretation — reading a late reply as rejection, a physical twinge as
+      collapse. Researchers found that these automatic interpretations are habits
+      the brain learned, not facts about reality, and they can be questioned.
+    citation: "Beck AT (1976). Cognitive Therapy and the Emotional Disorders. New York: International Universities Press."
+    year: 1976
+    robustness: robust
+    topic_keys: [anxiety, overthinking]
+    doctrine_keys: ["COMPOSITE_DOCTRINE v03"]
+    locale_framing_notes:
+      en_EU: "Maps to sensation-vs-story seam in doctrine v03."
+      zh_TW_zh_CN: "Emphasize relational/social misreadings (hierarchy, face) not only achievement fears."
+      ja_JP: "Include misreading silence in group settings as a culturally salient example."
+    sensitivity_notes: null
+    secular_safe: true
+    position_fit: supports REFLECTION
+
+  - evidence_id: anx_slow_breathing_parasympathetic_zaccaro_2018
+    entry_type: finding
+    claim: >
+      Slow, deliberate breathing at roughly five or six breaths per minute shifts
+      the balance of the autonomic nervous system toward calm within minutes in
+      laboratory studies. The effect is physiological, not symbolic — the body
+      receives a downshift signal it already knows how to use.
+    citation: "Zaccaro A, Piarulli A, Laurino M, et al. (2018). How Breath-Control Can Change Your Life: A Systematic Review on Psycho-Physiological Correlates of Controlled Breathing. Frontiers in Human Neuroscience, 12, 353."
+    year: 2018
+    robustness: robust
+    topic_keys: [anxiety, somatic_healing]
+    doctrine_keys: ["COMPOSITE_DOCTRINE v04"]
+    locale_framing_notes:
+      en_EU: "Supports 'breath already moving' doctrine without requiring special technique."
+      zh_TW_zh_CN: "Breath practice widely accepted in wellness/meditation contexts."
+      ja_JP: "Compatible with existing breath traditions; frame as secular physiology."
+    sensitivity_notes: null
+    secular_safe: true
+    position_fit: supports TAKEAWAY
+
+  - evidence_id: anx_sleep_deprivation_amplifies_anxiety_ben_simon_2020
+    entry_type: finding
+    claim: >
+      Even one night of poor sleep can raise next-day anxiety by disrupting the
+      brain's ability to calm threat responses. Sleep loss does not just make you
+      tired — it turns up the volume on the alarm system.
+    citation: "Ben Simon E, Rossi A, Harvey AG, Walker MP (2020). Overanxious and underslept. Nature Human Behaviour, 4, 100-110."
+    year: 2020
+    robustness: robust
+    topic_keys: [anxiety, sleep_anxiety]
+    doctrine_keys: ["COMPOSITE_DOCTRINE v09", "COMPOSITE_DOCTRINE v08"]
+    locale_framing_notes:
+      en_EU: "Link to 'another app won't fix a week with no margin' — architecture over hacks."
+      zh_TW_zh_CN: "Sleep sacrifice for family/work is common; validate without moralizing."
+      ja_JP: "Reference overwork sleep debt without naming specific corporate cultures."
+    sensitivity_notes: null
+    secular_safe: true
+    position_fit: supports REFLECTION
+
+  - evidence_id: anx_mindfulness_meta_goyal_2014
+    entry_type: finding
+    claim: >
+      Mindfulness meditation programs show small to moderate improvements in anxiety
+      when compared with inactive controls in a large review of clinical trials.
+      The benefit is real but modest — mindfulness is a support, not a magic switch.
+    citation: "Goyal M, Singh S, Sibinga EMS, et al. (2014). Meditation Programs for Psychological Stress and Well-being: A Systematic Review and Meta-analysis. JAMA Internal Medicine, 174(3), 357-368."
+    year: 2014
+    robustness: mixed
+    caveat: >
+      Effect sizes are modest; active control comparisons shrink benefits. Do not
+      overclaim — pair with 'small daily practice' framing from doctrine v09.
+    topic_keys: [anxiety]
+    doctrine_keys: ["COMPOSITE_DOCTRINE v04", "COMPOSITE_DOCTRINE v09"]
+    locale_framing_notes:
+      en_EU: "Honest register: 'helps some people, worth trying in small doses.'"
+      zh_TW_zh_CN: "Meditation has cultural roots — frame respectfully, not as imported novelty."
+      ja_JP: "Distinguish secular mindfulness from religious practice if brand is secular."
+    sensitivity_notes: "Spiritual framing may conflict with secular_safe brands — check brand profile."
+    secular_safe: true
+    position_fit: supports TAKEAWAY
+
+  - evidence_id: anx_emotion_differentiation_kashdan_2010
+    entry_type: finding
+    claim: >
+      People who can name specific emotions — distinguishing anxious from ashamed,
+      irritated from afraid — tend to cope more flexibly than people who experience
+      everything as one undifferentiated 'bad.' Putting words on the weather helps
+      you stop confusing it with the climate.
+    citation: "Kashdan TB, Barrett LF, McKnight PE (2015). Unpacking emotion differentiation: Transforming unpleasant experience by perceiving distinctions in negativity. Current Directions in Psychological Science, 24(1), 10-16."
+    year: 2015
+    robustness: mixed
+    caveat: "Literature on emotion granularity is growing but effect sizes vary by measure and population."
+    topic_keys: [anxiety]
+    doctrine_keys: ["COMPOSITE_DOCTRINE v01"]
+    locale_framing_notes:
+      en_EU: "Direct tie to weather/climate metaphor in doctrine v01."
+      zh_TW_zh_CN: "Emotional vocabulary may be indirect — 'naming' can be somatic or relational."
+      ja_JP: "High-context culture may express emotion through behavior; adapt examples."
+    sensitivity_notes: null
+    secular_safe: true
+    position_fit: supports REFLECTION
+
+  - evidence_id: anx_acute_stress_prefrontal_arnsten_2009
+    entry_type: finding
+    claim: >
+      Under acute stress, the brain's executive circuits — the parts that plan,
+      prioritize, and choose — are temporarily dampened while threat circuits activate.
+      Feeling unable to think clearly in a spike is biology, not weakness.
+    citation: "Arnsten AFT (2009). Stress signalling pathways that impair prefrontal cortex structure and function. Nature Reviews Neuroscience, 10(6), 410-422."
+    year: 2009
+    robustness: robust
+    topic_keys: [anxiety]
+    doctrine_keys: ["COMPOSITE_DOCTRINE v11", "COMPOSITE_DOCTRINE v14"]
+    locale_framing_notes:
+      en_EU: "Supports crisis-contact beats — competence and activation can coexist."
+      zh_TW_zh_CN: "Validate performance pressure in exams/work without excusing harm."
+      ja_JP: "Relevant to meeting/presentation spikes in hierarchy-heavy workplaces."
+    sensitivity_notes: null
+    secular_safe: true
+    position_fit: supports PIVOT
+
+  - evidence_id: anx_self_compassion_neff_2003
+    entry_type: finding
+    claim: >
+      Treating yourself with the same kindness you would offer a struggling friend —
+      rather than harsh self-criticism — is associated with lower anxiety and less
+      fear of negative evaluation. Self-compassion is a skill, not a personality trait.
+    citation: "Neff KD (2003). Self-compassion: An alternative conceptualization of attitudes toward oneself. Self and Identity, 2(2), 85-101."
+    year: 2003
+    robustness: robust
+    topic_keys: [anxiety, self_worth]
+    doctrine_keys: ["COMPOSITE_DOCTRINE v05", "COMPOSITE_DOCTRINE v14"]
+    locale_framing_notes:
+      en_EU: "Maps to 'come home' doctrine — present self is acceptable."
+      zh_TW_zh_CN: "Self-compassion can sound selfish; frame as sustainable care for family role."
+      ja_JP: "Indirect kindness-to-self may land better than explicit 'love yourself' phrasing."
+    sensitivity_notes: null
+    secular_safe: true
+    position_fit: supports TAKEAWAY
+
+  - evidence_id: anx_predictive_processing_barrett_2017
+    entry_type: finding
+    claim: >
+      The brain constantly predicts what the body should feel next and updates when
+      predictions are wrong. Anxiety can be understood as a prediction system stuck
+      on high alert — sending threat signals ahead of the evidence.
+    citation: "Barrett LF (2017). How Emotions Are Made: The Secret Life of the Brain. Boston: Houghton Mifflin Harcourt."
+    year: 2017
+    robustness: single-study
+    caveat: "Popular synthesis of predictive-processing research; core claims are theory-consistent but not all specific anxiety applications are trial-tested."
+    topic_keys: [anxiety, overthinking]
+    doctrine_keys: ["COMPOSITE_DOCTRINE v03", "COMPOSITE_DOCTRINE v13"]
+    locale_framing_notes:
+      en_EU: "Use sparingly — theory-forward; pair with more replicated CBT/exposure claims."
+      zh_TW_zh_CN: "Abstract — anchor with concrete bodily examples."
+      ja_JP: "Keep concrete; theory-heavy framing may feel academic."
+    sensitivity_notes: null
+    secular_safe: true
+    position_fit: supports REFLECTION
+
+  - evidence_id: anx_case_weekes_hope_and_help_1962
+    entry_type: documented_case
+    claim: >
+      In her published clinical work, Dr. Claire Weekes described patients who feared
+      their anxiety symptoms meant impending collapse or insanity — and recovered by
+      learning to let the waves pass without fighting them. Her phrase 'floating'
+      through panic became a template for millions of readers.
+    citation: "Weekes C (1962). Hope and Help for Your Nerves. London: Angus & Robertson. (Documented patient composites and correspondence cases.)"
+    year: 1962
+    robustness: robust
+    topic_keys: [anxiety]
+    doctrine_keys: ["COMPOSITE_DOCTRINE v11", "COMPOSITE_DOCTRINE v04"]
+    case_attribution: "Published patient composites — Claire Weekes, Hope and Help for Your Nerves (1962)"
+    locale_framing_notes:
+      en_EU: "Classic Anglophone anxiety self-help lineage — high recognition among older readers."
+      zh_TW_zh_CN: "Less known; use as historical case, not assumed cultural reference."
+      ja_JP: "Translate concept of 'floating' with care — not passive giving-up."
+    sensitivity_notes: "Historical gendered language in source; modern framing should be inclusive."
+    secular_safe: true
+    position_fit: supports REFLECTION
+
+  - evidence_id: anx_case_barbra_streisand_stage_fright_1986
+    entry_type: documented_case
+    claim: >
+      Barbra Streisand spoke publicly about a 1967 performance in Central Park where
+      she forgot lyrics mid-song and developed years of stage fright — avoiding live
+      performance until she returned in 1986 with cue cards and a new relationship
+      to error. Her account shows that high competence and severe performance anxiety
+      can coexist.
+    citation: "Streisand B (2018). My Name Is Barbra. New York: Viking. (Autobiographical account of 1967 Central Park incident and return to live performance.)"
+    year: 2018
+    robustness: robust
+    topic_keys: [anxiety, social_anxiety, imposter_syndrome]
+    doctrine_keys: ["COMPOSITE_DOCTRINE v14"]
+    case_attribution: "Barbra Streisand — autobiographical published account"
+    locale_framing_notes:
+      en_EU: "Strong celebrity recognition; use for performance/high-functioning anxiety."
+      zh_TW_zh_CN: "Celebrity may be less salient; use as 'public performer' archetype."
+      ja_JP: "Performance anxiety culturally familiar in entertainment/work presentation contexts."
+    sensitivity_notes: "Celebrity cases can feel distant — pair with ordinary-workplace parallel."
+    secular_safe: true
+    position_fit: supports PIVOT
+
+  - evidence_id: anx_case_olympic_anxiety_sarkar_2014
+    entry_type: documented_case
+    claim: >
+      Sports psychologists documenting Olympic athletes describe performers who
+      experienced debilitating pre-competition anxiety yet achieved medals — including
+      cases where athletes reframed arousal as readiness rather than danger. The
+      published literature treats anxiety and excellence as co-occurring, not opposite.
+    citation: "Sarkar M, Fletcher D (2014). Ordinary Magic, Extraordinary Performance: Psychological Resilience and Thriving in High Achievers. International Review of Sport and Exercise Psychology, 7(1), 46-60."
+    year: 2014
+    robustness: robust
+    topic_keys: [anxiety]
+    doctrine_keys: ["COMPOSITE_DOCTRINE v11", "COMPOSITE_DOCTRINE v14"]
+    case_attribution: "Aggregated published Olympic athlete case literature — Sarkar & Fletcher (2014)"
+    locale_framing_notes:
+      en_EU: "Sports frame works for performance-minded brands."
+      zh_TW_zh_CN: "National athletic pride angle can resonate; avoid political medal narratives."
+      ja_JP: "Olympic/exam-season performance frame culturally salient."
+    sensitivity_notes: null
+    secular_safe: true
+    position_fit: supports TAKEAWAY
+
+  - evidence_id: anx_digital_hypervigilance_dose_response_2023
+    entry_type: finding
+    claim: >
+      Large survey studies link habitual phone-checking and notification-driven
+      attention switching with higher reported anxiety, especially when checking
+      extends into social and rest periods. The dose matters — not screens alone,
+      but the guard never standing down.
+    citation: "Thomée S, Härenstam A, Hagberg M (2011). Mobile phone use and stress, sleep disturbances, and symptoms of depression among young adults. BMC Public Health, 11, 66. (Foundational; replicated in subsequent digital-wellbeing cohort studies.)"
+    year: 2011
+    robustness: robust
+    topic_keys: [anxiety]
+    doctrine_keys: ["COMPOSITE_DOCTRINE v12", "COMPOSITE_DOCTRINE v08"]
+    locale_framing_notes:
+      en_EU: "Maps to surveillance-as-care doctrine v12."
+      zh_TW_zh_CN: "WeChat/work-app vigilance is the culturally specific parallel."
+      ja_JP: "Line/work messaging constant availability is salient example."
+    sensitivity_notes: "Correlation not causation — frame as pattern worth testing, not verdict."
+    secular_safe: true
+    position_fit: supports REFLECTION

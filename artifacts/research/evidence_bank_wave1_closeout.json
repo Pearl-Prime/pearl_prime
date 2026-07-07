@@ -1,0 +1,31 @@
+{
+  "wave": 1,
+  "status": "unwired",
+  "created": "2026-07-07",
+  "authority": "Pearl_Research",
+  "bank_path": "SOURCE_OF_TRUTH/accent_banks/evidence/",
+  "counts_by_topic": {
+    "anxiety": 18,
+    "burnout": 10,
+    "financial_anxiety": 10,
+    "imposter_syndrome": 10,
+    "boundaries": 10,
+    "social_anxiety": 10
+  },
+  "total_entries": 68,
+  "entry_type_counts": {
+    "finding": 59,
+    "documented_case": 9
+  },
+  "robustness_distribution": {
+    "robust": 59,
+    "mixed": 8,
+    "weakened": 0,
+    "single_study": 1
+  },
+  "robustness_notes": "All weakened findings excluded from bank; 8 mixed/single-study entries carry caveat field. Zero weakened entries ship unflagged.",
+  "rejected_claims_count": 10,
+  "rejected_claims_log": "artifacts/research/evidence_rejected_claims_log.jsonl",
+  "top5_topics_rationale": "Pearl Prime wave_1_slate topic_balance: burnout(5), financial_anxiety(4), imposter_syndrome(4), boundaries(3), social_anxiety(2)",
+  "wiring_status": "KNOWN_UNWIRED — no composer/planner consumer; accent build lane gated on flagship-read-approved"
+}
