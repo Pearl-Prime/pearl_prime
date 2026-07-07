@@ -214,6 +214,12 @@ def main(argv: list[str] | None = None) -> int:
         default=0,
         help="Cap emitted files (0 = no cap). Use 180 for catalog scale-up doctrine batches.",
     )
+    parser.add_argument(
+        "--skip",
+        type=int,
+        default=0,
+        help="Skip first N allocation-derived plans (for batch 2+ after batch 1 merged).",
+    )
     args = parser.parse_args(argv)
 
     locale = args.locale
@@ -251,6 +257,8 @@ def main(argv: list[str] | None = None) -> int:
     schema = load_schema()
 
     total = 0
+    emitted = 0
+    skipped_plans = 0
     skipped_brands: list[str] = []
     failed: list[tuple[str, list[str]]] = []
     genre_totals: dict[str, int] = {}
@@ -269,7 +277,11 @@ def main(argv: list[str] | None = None) -> int:
                 continue
             genre_totals[genre] = genre_totals.get(genre, 0) + count
             for i in range(count):
-                if args.max_files and total >= args.max_files:
+                if args.skip and skipped_plans < args.skip:
+                    skipped_plans += 1
+                    total += 1
+                    continue
+                if args.max_files and emitted >= args.max_files:
                     break
                 series_slug = f"series{i + 1:02d}"
                 plan = emit_series_plan_yaml(
@@ -288,15 +300,18 @@ def main(argv: list[str] | None = None) -> int:
                     print(f"[dry-run] {plan['series_id']} ({plan['master_format']})")
                 else:
                     write_plan(args.out_root, plan)
+                emitted += 1
                 total += 1
-            if args.max_files and total >= args.max_files:
+            if args.max_files and emitted >= args.max_files:
                 break
-        if args.max_files and total >= args.max_files:
+        if args.max_files and emitted >= args.max_files:
             break
 
     print()
     print(f"M7 Wave A — {locale}")
-    print(f"  allocation-derived series: {total}")
+    print(f"  allocation-derived series: {emitted if not args.dry_run or args.max_files or args.skip else total}")
+    if args.skip:
+        print(f"  skipped (prior batches): {args.skip}")
     print(f"  brands skipped (manga_locales): {len(skipped_brands)}")
     if skipped_brands:
         print(f"    {', '.join(skipped_brands)}")

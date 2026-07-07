@@ -39,7 +39,7 @@
     "localized_titles": {
       "type": "object",
       "patternProperties": {
-        "^(en_US|ja_JP|ko_KR|zh_TW|zh_CN)$": { "type": "string" }
+        "^(en_US|ja_JP|ko_KR|zh_TW|zh_CN|fr_FR)$": { "type": "string" }
       },
       "additionalProperties": false,
       "description": "v2 — per-locale book/episode title."
