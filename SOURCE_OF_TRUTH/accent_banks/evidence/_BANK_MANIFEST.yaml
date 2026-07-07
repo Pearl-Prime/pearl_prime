@@ -1,13 +1,14 @@
-# Evidence bank — Wave 1 (Pearl_Research)
+# Evidence bank — Pearl_Research (Wave 1 + Wave 2)
 # Status: unwired — no pipeline consumer until accent build lane opens.
 # Spec: user PROMPT 2 + specs/ACCENT_BEATS_SYSTEM_SPEC.md §5.2 (CITED_EVIDENCE)
 # KNOWN_UNWIRED: accent_banks/evidence/ — bank seeded; composer/planner consumer absent.
 
-bank_id: evidence_wave_1
+bank_id: evidence_bank
 status: unwired
-wave: 1
+waves: [1, 2]
 authority: Pearl_Research
 created: 2026-07-07
+wave_2_added: 2026-07-07
 schema_version: "1.0.0"
 
 entry_schema:
@@ -47,6 +48,82 @@ topics_wave_1:
   social_anxiety:
     target: 10
     path: social_anxiety/entries.yaml
+
+topics_wave_2:
+  depression:
+    target: 10
+    path: depression/entries.yaml
+    doctrine_bank: true
+    sensitivity: mental_health_adjacent
+  grief:
+    target: 10
+    path: grief/entries.yaml
+    doctrine_bank: true
+    sensitivity: mental_health_adjacent
+  overthinking:
+    target: 10
+    path: overthinking/entries.yaml
+    doctrine_bank: true
+    cross_topic_keys: [perfectionism]
+  sleep_anxiety:
+    target: 10
+    path: sleep_anxiety/entries.yaml
+    doctrine_bank: true
+  somatic_healing:
+    target: 10
+    path: somatic_healing/entries.yaml
+    doctrine_bank: true
+  self_worth:
+    target: 10
+    path: self_worth/entries.yaml
+    doctrine_bank: true
+    cross_topic_keys: [comparison, loneliness]
+  compassion_fatigue:
+    target: 10
+    path: compassion_fatigue/entries.yaml
+    doctrine_bank: true
+  courage:
+    target: 10
+    path: courage/entries.yaml
+    doctrine_bank: true
+    cross_topic_keys: [career_transitions]
+  financial_stress:
+    target: 10
+    path: financial_stress/entries.yaml
+    doctrine_bank: true
+  shame:
+    target: 10
+    path: shame/entries.yaml
+    doctrine_bank: false
+  relationship_anxiety:
+    target: 10
+    path: relationship_anxiety/entries.yaml
+    doctrine_bank: false
+    cross_topic_keys: [loneliness]
+  body_image:
+    target: 10
+    path: body_image/entries.yaml
+    doctrine_bank: false
+    cross_topic_keys: [comparison]
+  money:
+    target: 10
+    path: money/entries.yaml
+    doctrine_bank: false
+  divorce:
+    target: 10
+    path: divorce/entries.yaml
+    doctrine_bank: false
+    cross_topic_keys: [career_transitions, loneliness]
+  addiction:
+    target: 10
+    path: addiction/entries.yaml
+    doctrine_bank: false
+    sensitivity: clinical_adjacent
+  adhd:
+    target: 10
+    path: adhd/entries.yaml
+    doctrine_bank: false
+    sensitivity: clinical_adjacent
 
 locale_clusters:
   en_EU: "English + Western EU markets — individualist framing, direct self-agency"

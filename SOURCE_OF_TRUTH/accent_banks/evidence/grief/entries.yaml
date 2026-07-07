@@ -1,0 +1,196 @@
+topic: grief
+wave: 2
+status: unwired
+entry_count: 10
+robustness_distribution:
+  robust: 9
+  mixed: 1
+  weakened: 0
+  single-study: 0
+
+entries:
+  - evidence_id: gri_dual_process_stroebe_1999
+    entry_type: finding
+    claim: >
+      Grief researchers describe two alternating modes — facing the loss and taking
+      breaks from it — both healthy. You do not have to grieve constantly to grieve
+      authentically.
+    citation: "Stroebe W, Schut H (1999). The dual process model of coping with bereavement: Rationale and description. Death Studies, 23(3), 197-224."
+    year: 1999
+    robustness: robust
+    topic_keys: [grief, loneliness]
+    doctrine_keys: ["COMPOSITE_DOCTRINE v03"]
+    locale_framing_notes:
+      en_EU: "Lightness-without-betrayal doctrine v03."
+      zh_TW_zh_CN: "Family may expect constant mourning — validate rest."
+      ja_JP: "Returning to work while grieving — culturally pressured."
+    sensitivity_notes: "Not applicable to all loss types (e.g., traumatic loss may need specialist support)."
+    secular_safe: true
+    position_fit: supports REFLECTION
+
+  - evidence_id: gri_grief_size_equals_love_klass_1996
+    entry_type: finding
+    claim: >
+      Clinicians and researchers emphasize that grief intensity often reflects attachment
+      depth — large sorrow documents large love, not a broken coping system.
+    citation: "Klass D, Silverman PR, Nickman SL (1996). Continuing Bonds: New Understandings of Grief. Washington, DC: Taylor & Francis."
+    year: 1996
+    robustness: robust
+    topic_keys: [grief]
+    doctrine_keys: ["COMPOSITE_DOCTRINE v01"]
+    locale_framing_notes:
+      en_EU: "Direct doctrine v01 alignment."
+      zh_TW_zh_CN: "Ancestor veneration overlap — love continues."
+      ja_JP: "Bond with deceased culturally normalized in some contexts."
+    sensitivity_notes: null
+    secular_safe: true
+    position_fit: supports REFLECTION
+
+  - evidence_id: gri_no_fixed_timeline_worden_2009
+    entry_type: finding
+    claim: >
+      Major grief models reject a single timetable for 'getting over it.' Year-two
+      waves are common and do not mean you have failed to heal.
+    citation: "Worden JW (2009). Grief Counseling and Grief Therapy, 4th ed. New York: Springer."
+    year: 2009
+    robustness: robust
+    topic_keys: [grief]
+    doctrine_keys: ["COMPOSITE_DOCTRINE v02"]
+    locale_framing_notes:
+      en_EU: "Pushback on 'should be over it by now.'"
+      zh_TW_zh_CN: "Family expectations for quick return to duty."
+      ja_JP: "Workplace bereavement leave limits vs inner timeline."
+    sensitivity_notes: "Prolonged grief disorder exists for a minority — persistent impairment may need professional support."
+    secular_safe: true
+    position_fit: supports REFLECTION
+
+  - evidence_id: gri_continuing_bonds_healthy_1996
+    entry_type: finding
+    claim: >
+      Maintaining an internal relationship with someone who died — talking to them,
+      sensing their influence — is common and often adaptive, not denial.
+    citation: "Klass D, Silverman PR, Nickman SL (1996). Continuing Bonds: New Understandings of Grief. Washington, DC: Taylor & Francis."
+    year: 1996
+    robustness: robust
+    topic_keys: [grief]
+    doctrine_keys: ["COMPOSITE_DOCTRINE v04"]
+    locale_framing_notes:
+      en_EU: "Doctrine v04 — talking to them is not failure."
+      zh_TW_zh_CN: "Ancestor remembrance traditions align."
+      ja_JP: "Memorial practices culturally integrated."
+    sensitivity_notes: null
+    secular_safe: true
+    position_fit: supports PIVOT
+
+  - evidence_id: gri_complicated_grief_shear_2015
+    entry_type: finding
+    claim: >
+      For most people grief softens with time, but a subset develops prolonged intense
+      grief that interferes with daily life — a pattern clinicians can treat. Struggling
+      does not mean you are weak; sometimes extra help is the right next step.
+    citation: "Shear MK (2015). Complicated grief. New England Journal of Medicine, 372(2), 153-160."
+    year: 2015
+    robustness: robust
+    topic_keys: [grief]
+    doctrine_keys: ["COMPOSITE_DOCTRINE v11"]
+    locale_framing_notes:
+      en_EU: "Normalize specialist grief therapy when stuck."
+      zh_TW_zh_CN: "Stigma on grief counseling — frame as skilled support."
+      ja_JP: "Professional help acceptable in urban wellness markets."
+    sensitivity_notes: "If grief prevents basic functioning for many months, encourage grief counselor or clinician — not self-help alone."
+    secular_safe: true
+    position_fit: supports TAKEAWAY
+
+  - evidence_id: gri_anniversary_reactions_1989
+    entry_type: finding
+    claim: >
+      Grief often resurges on birthdays, holidays, and death anniversaries — predictable
+      waves that feel like setbacks but are normal rhythm, not regression.
+    citation: "Rando TA (1993). Treatment of Complicated Mourning. Champaign, IL: Research Press. (Anniversary reaction literature.)"
+    year: 1993
+    robustness: robust
+    topic_keys: [grief]
+    doctrine_keys: ["COMPOSITE_DOCTRINE v10"]
+    locale_framing_notes:
+      en_EU: "Calendar-trigger planning for hard days."
+      zh_TW_zh_CN: "Qingming / festival triggers."
+      ja_JP: "Obon / memorial season waves."
+    sensitivity_notes: null
+    secular_safe: true
+    position_fit: supports REFLECTION
+
+  - evidence_id: gri_case_cs_lewis_grief_observed_1961
+    entry_type: documented_case
+    claim: >
+      C.S. Lewis published his journal after his wife's death, describing waves of
+      disbelief, anger, and numbness — including fear that his faith and reason offered
+      no immediate comfort. His account normalized intellectual grief.
+    citation: "Lewis CS (1961). A Grief Observed. London: Faber and Faber."
+    year: 1961
+    robustness: robust
+    topic_keys: [grief]
+    doctrine_keys: ["COMPOSITE_DOCTRINE v01"]
+    case_attribution: "C.S. Lewis — published grief journal (1961)"
+    locale_framing_notes:
+      en_EU: "Christian author — use grief content, not theology, for secular brands."
+      zh_TW_zh_CN: "Literary grief memoir archetype."
+      ja_JP: "Translated classic — recognition varies."
+    sensitivity_notes: "Source includes religious framing — secular_safe false for strict secular brands; grief pattern still usable with attribution."
+    secular_safe: false
+    position_fit: supports REFLECTION
+
+  - evidence_id: gri_social_support_buffers_2003
+    entry_type: finding
+    claim: >
+      People who receive consistent, non-judgmental support after loss show better
+      long-term adjustment in bereavement studies — presence matters more than perfect
+      words.
+    citation: "Stroebe W, Schut H, Stroebe MS (2005). Grief work, disclosure and counseling: Do they help the bereaved? Clinical Psychology Review, 25(3), 395-414."
+    year: 2005
+    robustness: mixed
+    caveat: "Effect sizes modest; quality of support matters more than quantity."
+    topic_keys: [grief, loneliness]
+    doctrine_keys: ["COMPOSITE_DOCTRINE v05"]
+    locale_framing_notes:
+      en_EU: "Ask for practical help, not fixing."
+      zh_TW_zh_CN: "Community meal trains / family presence."
+      ja_JP: "Indirect support through group attendance."
+    sensitivity_notes: null
+    secular_safe: true
+    position_fit: supports TAKEAWAY
+
+  - evidence_id: gri_meaning_making_neimeyer_2001
+    entry_type: finding
+    claim: >
+      Rebuilding a sense of meaning after loss — not 'finding a reason' but integrating
+      the death into a life story — predicts adjustment better than suppressing grief.
+    citation: "Neimeyer RA (2001). Meaning reconstruction and the experience of loss. Washington, DC: American Psychological Association."
+    year: 2001
+    robustness: robust
+    topic_keys: [grief]
+    doctrine_keys: ["COMPOSITE_DOCTRINE v12"]
+    locale_framing_notes:
+      en_EU: "Meaning without toxic positivity."
+      zh_TW_zh_CN: "Avoid 'everything happens for a reason' — integrate loss."
+      ja_JP: "Gradual life reorganization framing."
+    sensitivity_notes: "Meaning-making can feel invalidating early — timing matters."
+    secular_safe: true
+    position_fit: supports PIVOT
+
+  - evidence_id: gri_disenfranchised_grief_doka_1989
+    entry_type: finding
+    claim: >
+      Losses that society does not fully recognize — miscarriage, ex-partner, pet,
+      estranged family — still produce full grief that deserves acknowledgment.
+    citation: "Doka KJ (1989). Disenfranchised Grief: Recognizing Hidden Sorrow. Lexington, MA: Lexington Books."
+    year: 1989
+    robustness: robust
+    topic_keys: [grief]
+    doctrine_keys: ["COMPOSITE_DOCTRINE v14"]
+    locale_framing_notes:
+      en_EU: "Hidden loss validation."
+      zh_TW_zh_CN: "Miscarriage stigma — high salience."
+      ja_JP: "Pet loss increasingly recognized."
+    sensitivity_notes: null
+    secular_safe: true
+    position_fit: supports REFLECTION

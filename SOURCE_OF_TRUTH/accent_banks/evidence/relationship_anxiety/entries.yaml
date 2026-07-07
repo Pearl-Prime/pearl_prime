@@ -1,0 +1,196 @@
+topic: relationship_anxiety
+wave: 2
+status: unwired
+entry_count: 10
+robustness_distribution:
+  robust: 9
+  mixed: 1
+  weakened: 0
+  single-study: 0
+
+entries:
+  - evidence_id: rel_attachment_anxiety_bowlby_1988
+    entry_type: finding
+    claim: >
+      Some people carry chronic worry about abandonment or rejection in close
+      relationships — attachment anxiety — that predates the current partner and
+      amplifies ordinary conflicts.
+    citation: "Bowlby J (1988). A Secure Base. New York: Basic Books."
+    year: 1988
+    robustness: robust
+    topic_keys: [relationship_anxiety, anxiety]
+    doctrine_keys: []
+    locale_framing_notes:
+      en_EU: "Pattern predates this relationship."
+      zh_TW_zh_CN: "Family attachment legacy."
+      ja_JP: "Fear of being burdensome."
+    sensitivity_notes: null
+    secular_safe: true
+    position_fit: supports REFLECTION
+
+  - evidence_id: rel_protest_behavior_hazan_1987
+    entry_type: finding
+    claim: >
+      Anxious attachment often shows 'protest behaviors' — texting repeatedly, seeking
+      reassurance, picking fights to test closeness — which push partners away.
+    citation: "Hazan C, Shaver P (1987). Romantic love conceptualized as an attachment process. Journal of Personality and Social Psychology, 52(3), 511-524."
+    year: 1987
+    robustness: robust
+    topic_keys: [relationship_anxiety]
+    doctrine_keys: []
+    locale_framing_notes:
+      en_EU: "Reassurance loop naming."
+      zh_TW_zh_CN: "WeChat message checking."
+      ja_JP: "Read-receipt anxiety."
+    sensitivity_notes: null
+    secular_safe: true
+    position_fit: supports PIVOT
+
+  - evidence_id: rel_loneliness_in_marriage_2018
+    entry_type: finding
+    claim: >
+      Loneliness can occur inside marriage when partners feel unseen — emotional
+      disconnection predicts distress beyond relationship status alone.
+    citation: "Cacioppo JT, Patrick W (2008). Loneliness: Human Nature and the Need for Social Connection. New York: Norton."
+    year: 2008
+    robustness: robust
+    topic_keys: [relationship_anxiety, loneliness]
+    doctrine_keys: []
+    locale_framing_notes:
+      en_EU: "Loneliness topic key — together but alone."
+      zh_TW_zh_CN: "Coexisting without emotional intimacy."
+      ja_JP: "Under one roof, disconnected."
+    sensitivity_notes: null
+    secular_safe: true
+    position_fit: supports REFLECTION
+
+  - evidence_id: rel_gottman_four_horsemen_1994
+    entry_type: finding
+    claim: >
+      Relationship researchers identified criticism, contempt, defensiveness, and
+      stonewalling as patterns that predict breakup — anxiety often fuels the first
+      three when unchecked.
+    citation: "Gottman JM (1994). What Predicts Divorce? Hillsdale, NJ: Erlbaum."
+    year: 1994
+    robustness: robust
+    topic_keys: [relationship_anxiety, boundaries]
+    doctrine_keys: []
+    locale_framing_notes:
+      en_EU: "Name patterns not partners."
+      zh_TW_zh_CN: "Indirect conflict styles — adapt examples."
+      ja_JP: "Stonewalling in conflict-avoidant pairs."
+    sensitivity_notes: "Not couple therapy — patterns awareness only."
+    secular_safe: true
+    position_fit: supports PIVOT
+
+  - evidence_id: rel_reassurance_backfire_2012
+    entry_type: finding
+    claim: >
+      Excessive reassurance-seeking can temporarily calm relationship anxiety but
+      maintains it long-term — partners cannot provide enough proof to satisfy doubt.
+    citation: "Mikulincer M, Shaver PR (2007). Attachment in Adulthood: Structure, Dynamics, and Change. Guilford Press."
+    year: 2007
+    robustness: robust
+    topic_keys: [relationship_anxiety, overthinking]
+    doctrine_keys: []
+    locale_framing_notes:
+      en_EU: "Ask once vs ask six times."
+      zh_TW_zh_CN: "Partner reassurance addiction."
+      ja_JP: "Repeated confirmation seeking."
+    sensitivity_notes: null
+    secular_safe: true
+    position_fit: supports REFLECTION
+
+  - evidence_id: rel_case_mister_rogers_neighborhood_1968
+    entry_type: documented_case
+    claim: >
+      Fred Rogers's published interviews described lifelong sensitivity to rejection
+      and deliberate practice of making others feel seen — documenting that relational
+      warmth can be built, not only inherited.
+    citation: "Rogers F, Sharapan B (2000). The World According to Mister Rogers. New York: Hyperion."
+    year: 2000
+    robustness: robust
+    topic_keys: [relationship_anxiety, loneliness]
+    doctrine_keys: []
+    case_attribution: "Fred Rogers — published interviews and writings"
+    locale_framing_notes:
+      en_EU: "Beloved figure — connection craft."
+      zh_TW_zh_CN: "Warmth as practiced skill."
+      ja_JP: "Deliberate belonging-building."
+    sensitivity_notes: null
+    secular_safe: true
+    position_fit: supports TAKEAWAY
+
+  - evidence_id: rel_secure_base_experiment_2000
+    entry_type: finding
+    claim: >
+      Lab studies show people explore and take social risks more boldly when they
+      believe a supportive partner is available — secure base effect.
+    citation: "Feeney BC (2004). A secure base: Responsive support of goal strivings and exploration in adult intimate relationships. Journal of Personality and Social Psychology, 87(5), 631-648."
+    year: 2004
+    robustness: robust
+    topic_keys: [relationship_anxiety, courage]
+    doctrine_keys: []
+    locale_framing_notes:
+      en_EU: "Build secure-base behaviors."
+      zh_TW_zh_CN: "Mutual support for risks."
+      ja_JP: "Partner as anchor for new challenges."
+    sensitivity_notes: null
+    secular_safe: true
+    position_fit: supports TAKEAWAY
+
+  - evidence_id: rel_conflict_anxiety_physiology_2016
+    entry_type: finding
+    claim: >
+      Relationship conflict elevates heart rate and stress hormones even in mild
+      disagreements — the body treats relational threat like physical threat.
+    citation: "Kiecolt-Glaser JK, Wilson SJ (2017). Lovesick: How couples' relationships influence health. Annual Review of Clinical Psychology, 13, 421-443."
+    year: 2017
+    robustness: robust
+    topic_keys: [relationship_anxiety, somatic_healing]
+    doctrine_keys: []
+    locale_framing_notes:
+      en_EU: "Pause during physiological flooding."
+      zh_TW_zh_CN: "Cool-down before continuing argument."
+      ja_JP: "Exit conflict when body spikes."
+    sensitivity_notes: "Domestic violence contexts need safety planning — not generic conflict tips."
+    secular_safe: true
+    position_fit: supports PIVOT
+
+  - evidence_id: rel_mindfulness_couples_2016
+    entry_type: finding
+    claim: >
+      Couples mindfulness programs show modest improvements in relationship satisfaction
+      and reduced reactivity in randomized trials.
+    citation: "Khaddouma A, Gordon KC, Strand EB (2015). Mindful mates: A pilot study of the effects of mindfulness-based relationship education. Family Process, 54(4), 696-711."
+    year: 2015
+    robustness: mixed
+    caveat: "Pilot-scale trials; effects modest."
+    topic_keys: [relationship_anxiety]
+    doctrine_keys: []
+    locale_framing_notes:
+      en_EU: "Pause before reactive text."
+      zh_TW_zh_CN: "Joint breathing before hard talk."
+      ja_JP: "Mindful listening practice."
+    sensitivity_notes: null
+    secular_safe: true
+    position_fit: supports TAKEAWAY
+
+  - evidence_id: rel_anxious_avoidant_trap_1987
+    entry_type: finding
+    claim: >
+      Anxious-anxious or anxious-avoidant pairings often create pursue-withdraw
+      cycles that intensify both partners' fears — the dance is relational, not
+      one person's flaw.
+    citation: "Hazan C, Shaver P (1987). Romantic love conceptualized as an attachment process. Journal of Personality and Social Psychology, 52(3), 511-524."
+    year: 1987
+    robustness: robust
+    topic_keys: [relationship_anxiety]
+    doctrine_keys: []
+    locale_framing_notes:
+      en_EU: "Pursue-withdraw naming."
+      zh_TW_zh_CN: "One pursues, one retreats — family pattern."
+      ja_JP: "Indirect pursuit and withdrawal."
+    sensitivity_notes: null
+    secular_safe: true
+    position_fit: supports REFLECTION

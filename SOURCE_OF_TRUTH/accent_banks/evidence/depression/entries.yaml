@@ -1,0 +1,203 @@
+topic: depression
+wave: 2
+status: unwired
+entry_count: 10
+robustness_distribution:
+  robust: 8
+  mixed: 2
+  weakened: 0
+  single-study: 0
+
+entries:
+  - evidence_id: dep_mood_state_not_identity_beck_1976
+    entry_type: finding
+    claim: >
+      When energy is low, the mind often reports not "I am tired" but "I am worthless"
+      or "nothing matters." Researchers found these verdicts are symptoms produced by
+      the state — like a fever producing chills — not accurate readings of your life.
+    citation: "Beck AT (1976). Cognitive Therapy and the Emotional Disorders. New York: International Universities Press."
+    year: 1976
+    robustness: robust
+    topic_keys: [depression]
+    doctrine_keys: ["COMPOSITE_DOCTRINE v01"]
+    locale_framing_notes:
+      en_EU: "Maps to state-vs-identity doctrine beat — direct self-help register."
+      zh_TW_zh_CN: "Avoid implying reader should have sought care; frame as understandable signal."
+      ja_JP: "Indirect framing — heaviness as weather, not character defect."
+    sensitivity_notes: "Not a substitute for clinical assessment. If symptoms persist or include self-harm thoughts, seek professional help."
+    secular_safe: true
+    position_fit: supports REFLECTION
+
+  - evidence_id: dep_behavioral_activation_martell_2001
+    entry_type: finding
+    claim: >
+      For depression, doing small valued activities before motivation returns — behavioral
+      activation — reduces symptoms as reliably as many talk therapies in clinical trials.
+      Action can precede feeling, not the other way around.
+    citation: "Martell CR, Addis ME, Jacobson NS (2001). Depression in Context: Strategies for Guided Action. New York: Norton. (Supported by meta-analyses of behavioral activation trials.)"
+    year: 2001
+    robustness: robust
+    topic_keys: [depression]
+    doctrine_keys: ["COMPOSITE_DOCTRINE v02"]
+    locale_framing_notes:
+      en_EU: "One glass of water / one step outside — doctrine v02 alignment."
+      zh_TW_zh_CN: "Smallest act framed as care, not performance."
+      ja_JP: "Tiny daily acts without gambaru pressure."
+    sensitivity_notes: "Skills framing only — not treatment protocol. Severe depression may require professional support to initiate activation."
+    secular_safe: true
+    position_fit: supports TAKEAWAY
+
+  - evidence_id: dep_anhedonia_reward_circuit_2009
+    entry_type: finding
+    claim: >
+      Depression often dulls the brain's reward response — activities that once felt
+      good return little pleasure. This flatness is a neurobiological shift, not proof
+      that your life has lost meaning permanently.
+    citation: "Pizzagalli DA (2014). Depression, stress, and anhedonia: Toward a synthesis and integrated model. Annual Review of Clinical Psychology, 10, 393-423."
+    year: 2014
+    robustness: robust
+    topic_keys: [depression, burnout]
+    doctrine_keys: ["COMPOSITE_DOCTRINE v03"]
+    locale_framing_notes:
+      en_EU: "Replaces 'lazy' with 'depleted' — doctrine v03."
+      zh_TW_zh_CN: "Family pressure to 'snap out of it' — validate biology gently."
+      ja_JP: "Low fuel metaphor culturally accessible."
+    sensitivity_notes: "Do not promise reward circuits 'bounce back' on a fixed timeline."
+    secular_safe: true
+    position_fit: supports REFLECTION
+
+  - evidence_id: dep_social_withdrawal_maintains_2011
+    entry_type: finding
+    claim: >
+      Withdrawal during low mood reduces short-term strain but often deepens depression
+      over weeks by cutting off connection and positive input — the isolation that
+      feels protective can become part of the loop.
+    citation: "Joiner TE (1990). A confirmatory factor-analytic investigation of the interpersonal-psychological theory of suicidal behavior. (Withdrawal literature cluster.) See also: Cuijpers P, et al. (2011). Interpersonal psychotherapy for depression: A meta-analysis. American Journal of Psychiatry."
+    year: 2011
+    robustness: robust
+    topic_keys: [depression]
+    doctrine_keys: ["COMPOSITE_DOCTRINE v04"]
+    locale_framing_notes:
+      en_EU: "Withdrawal-as-illness-voice, not moral failure."
+      zh_TW_zh_CN: "Family may misread withdrawal as rudeness — name gently."
+      ja_JP: "Hikikomori-adjacent themes need careful, non-diagnostic framing."
+    sensitivity_notes: "If withdrawal includes suicidal ideation, professional help is urgent — always flag."
+    secular_safe: true
+    position_fit: supports PIVOT
+
+  - evidence_id: dep_global_prevalence_who_2023
+    entry_type: finding
+    claim: >
+      Depression is one of the most common mental health conditions worldwide — roughly
+      one in twenty adults lives with it in a given year. The pattern is widespread,
+      not a personal defect.
+    citation: "World Health Organization (2023). Depressive disorder (including depressive episode). WHO Fact Sheet."
+    year: 2023
+    robustness: robust
+    topic_keys: [depression]
+    doctrine_keys: ["COMPOSITE_DOCTRINE v01"]
+    locale_framing_notes:
+      en_EU: "Normalize without medicalizing every sad week."
+      zh_TW_zh_CN: "Stigma around named depression — balance normalization with care."
+      ja_JP: "Mental-health naming sensitivity — use 'low mood pattern' if needed."
+    sensitivity_notes: "Prevalence reduces shame; does not replace diagnosis or treatment guidance."
+    secular_safe: true
+    position_fit: supports REFLECTION
+
+  - evidence_id: dep_exercise_moderate_effect_2024
+    entry_type: finding
+    claim: >
+      Regular moderate exercise shows small-to-moderate antidepressant effects in
+      meta-analyses of clinical trials — comparable to some therapies for mild-to-moderate
+      depression. Movement is support, not a cure-all.
+    citation: "Noetel M, et al. (2024). Effect of exercise for depression: Systematic review and network meta-analysis of randomised controlled trials. BMJ, 384, e075847."
+    year: 2024
+    robustness: mixed
+    caveat: "Effects strongest in mild-moderate depression; adherence and access vary. Not replacement for professional care when severe."
+    topic_keys: [depression, somatic_healing]
+    doctrine_keys: ["COMPOSITE_DOCTRINE v02"]
+    locale_framing_notes:
+      en_EU: "Walk-before-pharmacy framing for wellness brands only."
+      zh_TW_zh_CN: "Exercise advice can shame — emphasize 'if body allows.'"
+      ja_JP: "Walking after work — low-bar entry."
+    sensitivity_notes: "Never imply exercise replaces medication or therapy. Professional-help pointer for moderate-severe symptoms."
+    secular_safe: true
+    position_fit: supports TAKEAWAY
+
+  - evidence_id: dep_rumination_nolen_hoeksema_1991
+    entry_type: finding
+    claim: >
+      Repetitive focus on why you feel bad — rumination — predicts longer and deeper
+      depressive episodes in longitudinal studies. The analysis feels productive but
+      often deepens the hole.
+    citation: "Nolen-Hoeksema S (1991). Responses to depression and their effects on the duration of depressive episodes. Journal of Abnormal Psychology, 100(4), 569-582."
+    year: 1991
+    robustness: robust
+    topic_keys: [depression, overthinking]
+    doctrine_keys: ["COMPOSITE_DOCTRINE v08"]
+    locale_framing_notes:
+      en_EU: "Why-am-I-like-this loops at 2 a.m."
+      zh_TW_zh_CN: "Family obligation rumination overlap."
+      ja_JP: "Self-criticism loops after workplace mistakes."
+    sensitivity_notes: null
+    secular_safe: true
+    position_fit: supports PIVOT
+
+  - evidence_id: dep_case_william_styron_darkness_visible_1990
+    entry_type: documented_case
+    claim: >
+      William Styron's published memoir described a Pulitzer-winning author descending
+      into severe depression despite external success — including inability to work,
+      withdrawal, and suicidal preoccupation — and recovering with hospital care and time.
+      His account separates achievement from inner state.
+    citation: "Styron W (1990). Darkness Visible: A Memoir of Madness. New York: Random House."
+    year: 1990
+    robustness: robust
+    topic_keys: [depression]
+    doctrine_keys: ["COMPOSITE_DOCTRINE v14"]
+    case_attribution: "William Styron — published memoir (1990)"
+    locale_framing_notes:
+      en_EU: "Literary figure — high recognition in en/EU."
+      zh_TW_zh_CN: "Use as 'acclaimed writer' archetype."
+      ja_JP: "Translated memoir known in literary circles."
+    sensitivity_notes: "Includes suicidal ideation — pair with professional-help pointer; not trauma entertainment."
+    secular_safe: true
+    position_fit: supports REFLECTION
+
+  - evidence_id: dep_sleep_circadian_disruption_2013
+    entry_type: finding
+    claim: >
+      Sleep disruption and depression reinforce each other — poor sleep worsens mood
+      regulation, and low mood disrupts sleep architecture. Fixing one lever often
+      helps the other, though neither is the whole story.
+    citation: "Baglioni C, et al. (2016). Sleep and mental disorders: A meta-analysis of polysomnographic research. Psychological Bulletin, 142(9), 969-990."
+    year: 2016
+    robustness: robust
+    topic_keys: [depression, sleep_anxiety]
+    doctrine_keys: ["COMPOSITE_DOCTRINE v09"]
+    locale_framing_notes:
+      en_EU: "Sleep hygiene as adjunct, not depression cure."
+      zh_TW_zh_CN: "Late-night phone use + low mood common pattern."
+      ja_JP: "Overwork sleep debt linkage."
+    sensitivity_notes: "Persistent insomnia with depression warrants clinical evaluation."
+    secular_safe: true
+    position_fit: supports TAKEAWAY
+
+  - evidence_id: dep_cbt_meta_cuijpers_2013
+    entry_type: finding
+    claim: >
+      Cognitive behavioral therapy for depression shows reliable moderate effects across
+      hundreds of trials — changing thought and behavior patterns helps many people,
+      especially alongside other care when needed.
+    citation: "Cuijpers P, et al. (2013). A meta-analysis of cognitive-behavioural therapy for adult depression, alone and in comparison with other treatments. Canadian Journal of Psychiatry, 58(7), 376-385."
+    year: 2013
+    robustness: robust
+    topic_keys: [depression]
+    doctrine_keys: ["COMPOSITE_DOCTRINE v03"]
+    locale_framing_notes:
+      en_EU: "Skills-from-therapy framing for self-help lane."
+      zh_TW_zh_CN: "Therapy stigma — 'patterns you can practice' language."
+      ja_JP: "Structured practice over open emotional disclosure."
+    sensitivity_notes: "Meta-analysis supports CBT as treatment — audiobook offers skills, not therapy. Professional help for moderate-severe depression."
+    secular_safe: true
+    position_fit: supports PIVOT
