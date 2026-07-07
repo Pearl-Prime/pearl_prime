@@ -1,0 +1,125 @@
+schema_version: "1.0.0"
+artifact_type: serial_spine
+series_id: stillness_press__en_US__action_battle__series01
+catalog_title: "The Blade That Stopped Trying"
+genre: action_battle
+mode: teacher
+pilot_ref: artifacts/manga/pilots/wave1/the_blade_that_stopped_trying__ep_001.chapter_script.yaml
+spine_source: artifacts/manga/pilots/SERIAL_ENGINE_SPINES_5VOL.md
+
+serial_engine: settled_strike_ladder
+long_arc_spine: >-
+  Can Jun's unbraced body strike truer than every forcing style on the ladder — and
+  can settling survive when crowd, pain, and the scoreboard cannot see the art — while
+  Kazu's iron wins today and bills his body tomorrow?
+renewable_unit: >-
+  One bout per arc in a new arena context — home circle, qualifier crowd, tournament
+  bracket, federation mat — where the settled strike must be re-earned after bracing
+  returns.
+escalation_axis: >-
+  The unbracing ladder — each volume Jun gives something up (crowd comfort, pain
+  tolerance, visible power, forfeit pride) while opponents escalate forcing modalities
+  and Kazu's iron fractures accumulate.
+shell_law: >-
+  Battle manga may escalate classically — ladder, tournament, style war — but this
+  engine inverts the shonen power curve: every arc Jun gives something up. Power-ups
+  are subtractions; doctrine is earned in defeat.
+binge_mechanism: >-
+  Ladder + rivalry + style-war + the injustice engine of an art the scoreboard cannot
+  see.
+
+volume_arcs:
+  - volume: 1
+    title: "The Strike You Cannot Force"
+    logline: >-
+      Settled strike works in the home circle and shatters under crowd and qualifier
+      stakes; Tessen-ryū prodigy Kazu demolishes a friend at volume close.
+    status: authored
+  - volume: 2
+    title: "The School of Iron"
+    logline: >-
+      Tournament arc vs Tessen; Jun loses the final when pain re-braces her mid-bout;
+      Sensei and Iron Master shared one teacher — two griefs from one deathbed.
+    status: planned
+  - volume: 3
+    title: "The Settling Under Pain"
+    logline: >-
+      Inverse training — unclench around injury; Sensei collapses into real frailty;
+      Kazu's accumulating fractures surface — his brace is billing him.
+    status: planned
+  - volume: 4
+    title: "The Invisible Art"
+    logline: >-
+      Federation scoring rewards visible power; settling looks like doing nothing;
+      Jun must win so cleanly that stillness becomes visible.
+    status: planned
+  - volume: 5
+    title: "The Two Roads"
+    logline: >-
+      Kazu's body gives out mid-final; succession duel with the Iron Master who
+      re-finds settledness; dojo passes to Jun — inheritance of tempo, not power.
+    status: planned
+
+named_pressures:
+  - id: home_dojo_circle
+    kind: system
+    label: Home sparring circle — where settling is first earned in private
+    introduced_volume: 1
+    arc_note: ep_001 dawn win; ep_002 shatters under audience.
+  - id: sensei
+    kind: relationship
+    label: The Sensei — doctrine as fighter, not speech
+    introduced_volume: 1
+    arc_note: V3 collapse makes stillness real frailty.
+  - id: prefectural_qualifiers
+    kind: system
+    label: Prefectural qualifier ladder and public stakes
+    introduced_volume: 1
+    arc_note: ep_002 signup and date plant; forcing styles ahead.
+  - id: tessen_ryu
+    kind: rival
+    label: Tessen-ryū — the school of iron
+    introduced_volume: 1
+    arc_note: Kazu seed at V1 close; full rivalry V2.
+  - id: federation_scoring
+    kind: system
+    label: Federation scoring that cannot see invisible art
+    introduced_volume: 4
+  - id: iron_master
+    kind: rival
+    label: Iron Master — doctrine war with family roots
+    introduced_volume: 5
+
+rivals:
+  - id: circle_challenger
+    name: Traveling challenger (V1)
+    pressure_id: home_dojo_circle
+    rival_arc: read_brace → exploit_mid_bout → seed_public_stakes
+  - id: kazu
+    name: Kazu
+    pressure_id: tessen_ryu
+    rival_arc: iron_wins → pain_rebrace_beats_jun → fractures_accumulate → settling_road
+  - id: iron_master
+    name: Iron Master
+    pressure_id: iron_master
+    rival_arc: abandoned_settledness → doctrine_war → re_finds_stillness
+
+set_piece_registry:
+  - id: dawn_dojo_establishing
+    label: Mountain dojo at dawn — pale wood, worn sparring circle
+    renewal_rule: New arena each volume; same circle grammar.
+  - id: brace_tell_closeup
+    label: Shoulders, jaw, grip as fight-reading
+    renewal_rule: New opponent reads Jun's brace when it returns.
+  - id: sensei_counter_tap
+    label: One unhurried tap from settled stillness
+    renewal_rule: Sensei as opponent V1; as witness later volumes.
+  - id: settled_strike_first_touch
+    label: First unforced strike that lands true
+    renewal_rule: Must be re-earned after each re-brace; never free.
+  - id: water_level_stance_practice
+    label: Training-by-subtraction — body finding level
+    renewal_rule: New constraint each arc (crowd, pain, injury).
+  - id: one_breath_duel
+    label: Silent pages, then one strike
+    renewal_rule: V4 climax grammar; timing over power.
