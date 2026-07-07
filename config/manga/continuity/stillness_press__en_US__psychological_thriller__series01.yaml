@@ -1,0 +1,64 @@
+schema_version: "1.0.0"
+artifact_type: series_continuity_state
+series_id: stillness_press__en_US__psychological_thriller__series01
+last_episode_id: ep_001
+
+volume_arc_position:
+  volume: 1
+  chapter_in_volume: 1
+  volume_title: "The Tell"
+
+settled_state: >-
+  Mara closed Hadley by reading her own chest as instrument — the alarm spiked on
+  the alibi location before her mind caught up. She believes the body's signal is
+  data to trust, not static to override; coat throat unbuttoned for the first time.
+
+rival_state:
+  - rival_id: hadley
+    state: confessed_ep001 — smooth mask broke on the quiet alibi question; throat tell confirmed on mute footage
+    last_seen_episode: ep_001
+  - rival_id: voss
+    state: coffee_unfinished — one bullpen observation landed; his own body still unread
+    last_seen_episode: ep_001
+  - rival_id: the_ledger
+    state: not_yet_arrived — bureau behavioral-analytics unit seeds V1 per spine
+    last_seen_episode: ep_001
+
+motif_state:
+  vessel_state: witness_first_instrument — Mara checks her own chest before the case file; hand-over-heart sketched in notebook
+
+active_pressures:
+  - voss
+  - hadley_aftermath
+  - new_case_file
+  - the_ledger
+
+set_pieces_fired:
+  - precinct_night_establishing
+  - white_room_logic_push
+  - muted_footage_reading
+  - throat_tell_reveal
+  - amber_lamp_body_read
+  - interrogation_stillness_duel
+  - notebook_tell_sketch
+
+unresolved_hooks:
+  - Hadley confessed — but his throat tell may confess to a different crime than charged
+  - Voss's coffee he never finishes — his body unread since the bullpen observation
+  - New case file on Mara's desk at dawn — method untested on a fresh witness
+  - The Ledger — replicable behavioral-analytics model the bureau is rolling out
+  - Mara scans exits before faces — her own tell never examined
+
+next_episode_mandate:
+  episode_id: ep_002
+  must_rebreak: >-
+    Mara's body-trust must face its first serial-scale test — the Hadley conviction
+    wobbles (tell real, crime misidentified) OR a new witness where the body confesses
+    to ITS truth, not her theory. Cannot rerun wound→turn→renewal to a clean one-shot cure.
+  must_plant:
+    - hadley_conviction_wobble — throat tell pointed at a different crime than charged
+    - the_ledger — behavioral-analytics unit named, briefed, or visible at the bureau
+  forbidden:
+    - Mara overrides her alarm and wins by logic alone
+    - supernatural threat as the primary case source
+    - Voss lectures the method in caption or advice speech

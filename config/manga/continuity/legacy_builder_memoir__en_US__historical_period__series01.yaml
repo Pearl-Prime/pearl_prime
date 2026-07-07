@@ -1,0 +1,48 @@
+schema_version: "1.0.0"
+artifact_type: series_continuity_state
+series_id: legacy_builder_memoir__en_US__historical_period__series01
+last_episode_id: ep_001
+
+volume_arc_position:
+  volume: 1
+  chapter_in_volume: 1
+  volume_title: "The Character for Return"
+
+settled_state: >-
+  Fumi learned to hold the brush off the paper; 帰 was rewritten whole. She
+  believes slowness is a skill — but she still reads lists fast when afraid.
+
+rival_state: []
+
+motif_state:
+  vessel_state: workshop_hands_refuse_hurry — one correct slow motion kept
+
+active_pressures:
+  - mukden_clock
+  - casualty_lists
+  - locked_drawer
+
+set_pieces_fired:
+  - ink_grinding
+  - blotted_character
+  - dictation_duel
+  - list_reading
+  - drawer_open
+
+unresolved_hooks:
+  - Posthumous letter in the drawer — unread, recipient unknown to reader
+  - Shinji not on today's list — Mukden clock still running
+  - Widow Shiono's son Tōgo — fate ambiguous
+  - Gensai's drawer holds more than one returned bundle
+
+next_episode_mandate:
+  episode_id: ep_002
+  must_rebreak: >-
+    Fumi's new slowness must shatter under a fresh war-paper context — a censor
+    bar, a second list, or a letter that cannot wait — not a repeat blotted 帰 lesson.
+  must_plant:
+    - censor_bars — first black line across text she already copied
+    - casualty_lists — new names under victory lanterns
+  forbidden:
+    - modern grief vocabulary in any voice
+    - resolving widow Shiono's knowledge into exposition

@@ -57,4 +57,10 @@ def story_architecture_internal_to_handoff(internal: Mapping[str, Any]) -> dict[
     out["chapters"] = [
         _strip_chapter_for_handoff(ch) for ch in (internal.get("chapters") or [])
     ]
+    if internal.get("serial_context") is not None:
+        out["serial_context"] = deepcopy(internal["serial_context"])
+    if internal.get("mode") is not None:
+        out["mode"] = internal["mode"]
+    if internal.get("mode_vessel") is not None:
+        out["mode_vessel"] = deepcopy(internal["mode_vessel"])
     return out

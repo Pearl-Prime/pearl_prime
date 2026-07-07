@@ -106,9 +106,40 @@ def build_chapter_writer_prompt(
         chapter_number=chapter_number,
         story_chapter_json=excerpt,
     )
-    return base + _mode_vessel_prompt_block(
+    block = _mode_vessel_prompt_block(
         story_handoff, mode=mode, genre_id=genre_id,
     )
+    serial_block = _serial_continuity_prompt_block(
+        story_handoff, chapter_number=chapter_number,
+    )
+    return base + block + serial_block
+
+
+def _serial_continuity_prompt_block(
+    story_handoff: Mapping[str, Any],
+    *,
+    chapter_number: int,
+) -> str:
+    """Append serial spine continuity when story handoff carries serial_context."""
+    ctx = story_handoff.get("serial_context")
+    if not isinstance(ctx, dict):
+        series_id = str(story_handoff.get("series_id") or "")
+        if not series_id:
+            return ""
+        try:
+            from phoenix_v4.manga.serial.spine_loader import (
+                build_serial_context,
+                serial_prompt_block,
+            )
+
+            ctx = build_serial_context(series_id, chapter_number=chapter_number)
+        except Exception:
+            return ""
+    if not ctx:
+        return ""
+    from phoenix_v4.manga.serial.spine_loader import serial_prompt_block
+
+    return serial_prompt_block(ctx, chapter_number=chapter_number)
 
 
 def _normalize_pair(

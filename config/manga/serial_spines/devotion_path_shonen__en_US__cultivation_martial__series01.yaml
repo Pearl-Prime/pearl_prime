@@ -1,0 +1,102 @@
+schema_version: "1.0.0"
+artifact_type: serial_spine
+series_id: devotion_path_shonen__en_US__cultivation_martial__series01
+catalog_title: "The Mountain Does Not Move"
+genre: cultivation_martial
+mode: teacher
+pilot_ref: artifacts/manga/pilots/wave2/the_mountain_does_not_move__ep_001.chapter_script.yaml
+spine_source: artifacts/manga/pilots/wave2/README.md
+
+serial_engine: breakthrough_ladder_rank_politics
+long_arc_spine: >-
+  Shen Yan vowed to climb the Ninefold Gate sect's whole ladder without leaving
+  the First Gate — but every forced opening bills the body, Wei Long's five rings
+  mock him, and the Autumn Ascent roll decides who exists.
+renewable_unit: >-
+  One gate, one ring, one public verdict — breakthrough logic tested on the
+  tournament clock.
+escalation_axis: >-
+  Forcing ruptures → demotion → foundation reforging → invisible art → doctrine
+  war. Stillness is a power mechanic with ladder consequences, never a mood.
+shell_law: >-
+  Cultivation MAY escalate classically (ladder, tournament, sect politics) but
+  every arc Yan gives something up; unbracing is the power system.
+binge_mechanism: >-
+  Ring-hum progression + roll verdicts + rival stroll + inner-vision channel maps.
+
+volume_arcs:
+  - volume: 1
+    title: "Struck From the Roll"
+    logline: >-
+      Public qi-deviation on the Ascent; demotion to the lowest gate; vow to
+      climb without leaving the first gate.
+    status: authored
+  - volume: 2
+    title: "The School of Iron"
+    logline: >-
+      Tournament arc vs pill-merchant clan; pain re-braces mid-bout; shared
+      teacher lineage with Wei Long revealed.
+    status: planned
+  - volume: 3
+    title: "Settling Under Pain"
+    logline: >-
+      Inverse training — unclench around injury; Master Ku's frailty shown not
+      said; Wei's forced openings bill him.
+    status: planned
+  - volume: 4
+    title: "The Invisible Art"
+    logline: >-
+      Federation scoring cannot see settling; Yan must win so cleanly stillness
+      becomes visible.
+    status: planned
+  - volume: 5
+    title: "The Two Roads"
+    logline: >-
+      Wei's body gives out; succession duel with the Iron Master; nationals wait.
+    status: planned
+
+named_pressures:
+  - id: autumn_ascent_roll
+    kind: system
+    label: Elder Bai's tournament roll — names written on and off
+    introduced_volume: 1
+  - id: nine_gate_ladder
+    kind: system
+    label: Nine gates in the body / nine on the mountain
+    introduced_volume: 1
+  - id: wei_long
+    kind: rival
+    label: Wei Long — five-ring heir who strolls the Ascent
+    introduced_volume: 1
+    arc_note: ep_002 must show him collecting owed humiliation publicly.
+  - id: master_ku_mystery
+    kind: mystery
+    label: Why inner elders bow to the token-checker at the lowest gate
+    introduced_volume: 1
+  - id: pill_merchant_clan
+    kind: system
+    label: Wei Long's clan — forcing as family business
+    introduced_volume: 2
+
+rivals:
+  - id: wei_long
+    name: Wei Long
+    pressure_id: wei_long
+    rival_arc: stroll_taunt → public_humiliation → fractures_surface → two_roads
+
+set_piece_registry:
+  - id: channel_map_inset
+    label: Inner-vision channel map during qi flow
+    renewal_rule: New channel each breakthrough; jade vs furnace-red grammar.
+  - id: ring_hum
+    label: Gate-ring hum when a level answers
+    renewal_rule: Audible rank tick; readers learn ladder by sound.
+  - id: ford_demonstration
+    label: Rooting frees what flooding could not
+    renewal_rule: New obstacle each volume; same rooting proof.
+  - id: verdict_scroll
+    label: Elder Bai writes a name on or off the roll
+    renewal_rule: Public stakes; never private.
+  - id: threshold_breath
+    label: One unbraced breath at a gate everyone skipped
+    renewal_rule: Gate location changes; breath grammar constant.

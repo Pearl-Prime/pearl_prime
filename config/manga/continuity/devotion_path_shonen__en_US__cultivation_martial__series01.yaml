@@ -1,0 +1,53 @@
+schema_version: "1.0.0"
+artifact_type: series_continuity_state
+series_id: devotion_path_shonen__en_US__cultivation_martial__series01
+last_episode_id: ep_001
+
+volume_arc_position:
+  volume: 1
+  chapter_in_volume: 1
+  volume_title: "Struck From the Roll"
+
+settled_state: >-
+  Shen Yan struck from the Autumn Ascent roll but vowed to climb the whole ladder
+  from the First Gate. One unbraced breath opened what he skipped; he believes
+  settling can replace forcing.
+
+rival_state:
+  - rival_id: wei_long
+    state: strolling_taunt — five rings displayed; struck Yan from roll publicly
+    last_seen_episode: ep_001
+
+motif_state:
+  vessel_state: master_of_lower_gate — ford rooting succeeded once; First Ring humming
+
+active_pressures:
+  - autumn_ascent_roll
+  - nine_gate_ladder
+  - wei_long
+  - master_ku_mystery
+
+set_pieces_fired:
+  - channel_map_inset
+  - ring_hum
+  - ford_demonstration
+  - verdict_scroll
+  - threshold_breath
+
+unresolved_hooks:
+  - Struck from roll — next Ascent months away but sect gossip spreads
+  - Wei Long's stroll taunt unpaid
+  - Why elders bow to Master Ku from a distance
+  - Yan's vow heard by the whole outer court
+
+next_episode_mandate:
+  episode_id: ep_002
+  must_rebreak: >-
+    Yan's settling must fail under crowd/stakes — pain re-braces or public humiliation
+    by Wei Long in a new context. Not a serene wellness cadence repeat.
+  must_plant:
+    - wei_long — collects owed humiliation; forces Yan to brace mid-scene
+    - autumn_ascent_roll — rumor of reinstatement terms or exhibition match
+  forbidden:
+    - courtyard-sweeping wellness metaphor
+    - Yan wins cleanly without cost

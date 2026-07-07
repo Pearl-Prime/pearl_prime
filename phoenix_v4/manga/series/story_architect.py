@@ -3,7 +3,8 @@
 from __future__ import annotations
 
 import hashlib
-from typing import Any, Optional
+from pathlib import Path
+from typing import Any, Mapping, Optional
 
 # M4: mode vessels are loaded via the existing loader (call-reachability).
 # Additive — no behavior change unless ``mode`` is set on the series.
@@ -526,6 +527,49 @@ def apply_mode_vessel(
     return out, meta
 
 
+def _inject_serial_carrier_beat(
+    chapters: list[dict[str, Any]],
+    serial_context: Mapping[str, Any],
+    *,
+    chapter_number: int,
+) -> list[dict[str, Any]]:
+    """Prepend one serial-memory carrier beat when a spine is adopted."""
+    if not chapters or chapter_number < 1:
+        return chapters
+    idx = min(chapter_number - 1, len(chapters) - 1)
+    ch = dict(chapters[idx])
+    plot = [dict(b) for b in (ch.get("plot_beats") or [])]
+    mandate = serial_context.get("episode_mandate") or {}
+    rebreak = mandate.get("must_rebreak") or serial_context.get("settled_state") or ""
+    pressures = serial_context.get("active_pressures") or []
+    pressure_txt = ", ".join(str(p) for p in pressures[:3])
+    beat_text = (
+        f"[serial:engine={serial_context.get('serial_engine')}] "
+        f"Carry forward: {serial_context.get('settled_state')} "
+        f"Active pressures: {pressure_txt or 'none'}. "
+        f"This chapter must re-break the settled state in a new context — "
+        f"{rebreak}"
+    )
+    injected = {
+        "beat_index": 0,
+        "beat_text": beat_text,
+        "is_carrier_beat": True,
+        "camera_hint": "medium",
+        "mood_hint": "tense",
+        "serial_carrier_beat": True,
+    }
+    rest = []
+    for bi, b in enumerate(plot, start=1):
+        b2 = dict(b)
+        b2["beat_index"] = bi
+        rest.append(b2)
+    ch["plot_beats"] = [injected] + rest
+    ch["serial_episode_mandate"] = mandate or None
+    out = list(chapters)
+    out[idx] = ch
+    return out
+
+
 def build_story_architecture_internal(
     *,
     series_id: str,
@@ -535,6 +579,7 @@ def build_story_architecture_internal(
     genre_id: str = "shonen",
     topic: str = "",
     mode: Optional[str] = None,
+    chapter_number: int = 1,
     repo_root: Optional[Any] = None,
 ) -> dict[str, Any]:
     """Build ``story_architecture_internal`` with optional carrier metadata on beats.
@@ -590,6 +635,22 @@ def build_story_architecture_internal(
         )
         note = f"{note}+mode_vessel"
 
+    serial_context: dict[str, Any] | None = None
+    try:
+        from phoenix_v4.manga.serial.spine_loader import build_serial_context
+
+        root = Path(repo_root) if repo_root is not None else None
+        serial_context = build_serial_context(
+            series_id, chapter_number=chapter_number, repo_root=root,
+        )
+        if serial_context is not None:
+            chapters = _inject_serial_carrier_beat(
+                chapters, serial_context, chapter_number=chapter_number,
+            )
+            note = f"{note}+serial_spine"
+    except Exception:
+        serial_context = None
+
     out: dict[str, Any] = {
         "schema_version": schema_version,
         "artifact_type": "story_architecture_internal",
@@ -602,6 +663,8 @@ def build_story_architecture_internal(
     if vessel_meta is not None:
         out["mode"] = vessel_meta["mode"]
         out["mode_vessel"] = vessel_meta
+    if serial_context is not None:
+        out["serial_context"] = serial_context
     if is_engine_governed(genre_id):
         out["story_engine_genre"] = engine_genre
         out["story_engine_governed"] = True

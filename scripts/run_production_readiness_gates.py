@@ -465,6 +465,8 @@ def main() -> int:
          "Manga render-progress bytes (no stub-as-done)"),
         ("22", "check_manga_story_authored.py",
          "Manga story-authored (no listing-as-story)"),
+        ("22c", "check_manga_serial_spine.py",
+         "Manga serial spine (adopted series spine+continuity)"),
         ("23", "check_manga_wiring.py",
          "Manga config wiring (no unwired-config-as-working)"),
         ("24", "check_manga_l2_cutout_alpha.py",

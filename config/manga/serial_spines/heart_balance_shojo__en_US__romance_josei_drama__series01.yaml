@@ -1,0 +1,103 @@
+schema_version: "1.0.0"
+artifact_type: serial_spine
+series_id: heart_balance_shojo__en_US__romance_josei_drama__series01
+catalog_title: "Worthy of the Window Seat"
+genre: romance_josei_drama
+mode: music
+pilot_ref: artifacts/manga/pilots/wave2/worthy_of_the_window_seat__ep_001.chapter_script.yaml
+spine_source: artifacts/manga/pilots/wave2/README.md
+
+serial_engine: delay_gaze_proximity_confession
+long_arc_spine: >-
+  Can the shop clerk who finishes famous composers' stuck phrases ever claim the
+  window seat — and the co-credit — when every bar she writes is erasable pencil
+  and every tune she plays is after closing, lights off?
+renewable_unit: >-
+  The shared song passing hand to hand — his ink bars vs her pencil bars in the
+  manuscript margins — under a premiere clock.
+escalation_axis: >-
+  Who is heard, and when: anonymous pencil → margin duet → overheard whole phrase
+  → almost-confession → public seat claim. Each volume breaks the beat in a new
+  social context (shop / premiere / press / rival venue / co-credit line).
+shell_law: >-
+  Romance escalates by delay and recognition — never by teaching. Music-mode law:
+  resolutions are scored, never explained; self-worth is felt as who plays in the
+  dark vs who hums in the open.
+binge_mechanism: >-
+  Margin-duet collection + premiere-clock dread + pencil-vs-ink legibility +
+  window-seat succession.
+
+volume_arcs:
+  - volume: 1
+    title: "Eight Bars, Unfinished"
+    logline: >-
+      Premiere in three weeks; the stuck eight bars pass in margins; Mio claims
+      the window seat unhidden for the first time.
+    status: authored
+  - volume: 2
+    title: "The Premiere Room"
+    logline: >-
+      Co-credit negotiations and a rival arranger who plays Ren's phrase perfectly
+      but without the margin history — borrowed brilliance vs earned duet.
+    status: planned
+  - volume: 3
+    title: "The Review That Names No One"
+    logline: >-
+      Press cycle tries to name only the famous pianist; the anonymous pencil bars
+      threaten to vanish from the record.
+    status: planned
+  - volume: 4
+    title: "The Other Window"
+    logline: >-
+      A second shop, a second seat — can the song exist when the geography of
+      permission changes?
+    status: planned
+  - volume: 5
+    title: "Both Halves, Aloud"
+    logline: >-
+      Final premiere; both names on the program; the hook renews — another stuck
+      phrase, another Thursday.
+    status: planned
+
+named_pressures:
+  - id: premiere_clock
+    kind: system
+    label: Three-week premiere deadline and co-credit machinery
+    introduced_volume: 1
+    arc_note: Externalizes delay; every episode tightens the clock.
+  - id: pencil_vs_ink
+    kind: relationship
+    label: Deniable pencil authorship vs named ink credit
+    introduced_volume: 1
+  - id: window_seat_custom
+    kind: system
+    label: Unspoken law that staff never take the bay seat
+    introduced_volume: 1
+  - id: rival_arranger
+    kind: rival
+    label: Perfect technical rival who can play the phrase without the shared history
+    introduced_volume: 2
+    arc_note: Plants ep_002 as overheard perfection without margin debt.
+
+rivals:
+  - id: rival_arranger
+    name: "Unnamed rival arranger (V2 seed)"
+    pressure_id: rival_arranger
+    rival_arc: borrowed_beat → forced_duet → recognition
+
+set_piece_registry:
+  - id: margin_duet
+    label: Pencil bars answering ink bars in manuscript margins
+    renewal_rule: New manuscript object each volume; same hand-to-hand grammar.
+  - id: drawer_almost_touch
+    label: Lost-and-found drawer handle almost-touch
+    renewal_rule: Object changes; proximity integer must rise.
+  - id: doorway_eye_lock
+    label: Dark-shop doorway gaze through rain glass
+    renewal_rule: New obstruction each recurrence (courier, crowd, press).
+  - id: bench_proximity
+    label: Piano-bench nearness without permission
+    renewal_rule: Distance measured in breaths; must shrink then rupture.
+  - id: window_seat_claim
+    label: Who sits in the bay seat facing the street
+    renewal_rule: V1 close = Mio claims; later volumes contest the seat's ownership.
