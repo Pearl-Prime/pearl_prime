@@ -143,6 +143,23 @@ def _minimal_payload(stem: str) -> dict:
             "chapter_clearance": "pass",
             "issues": [],
         },
+        "series_continuity_state": {
+            **common,
+            "artifact_type": "series_continuity_state",
+            "series_id": "s",
+            "last_episode_id": "ep_001",
+            "volume_arc_position": {
+                "volume": 1,
+                "chapter_in_volume": 1,
+                "volume_title": "v1",
+            },
+            "settled_state": "ok",
+            "rival_state": [{"rival_id": "r1", "state": "idle"}],
+            "motif_state": {},
+            "active_pressures": [],
+            "set_pieces_fired": [],
+            "unresolved_hooks": [],
+        },
         "series_memory": {
             **common,
             "artifact_type": "series_memory",
