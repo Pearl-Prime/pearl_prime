@@ -52,7 +52,13 @@ def merge_angle_journey(angle_id: str, registry: Optional[dict[str, Any]] = None
         journey = entry.get("journey")
         if isinstance(journey, dict):
             for key, val in journey.items():
-                if key not in merged or key == "layer_progression":
+                # Leaf overrides parent for every key (per docstring). The old
+                # special case `or key == "layer_progression"` let the PARENT
+                # overwrite a leaf's progression because parents merge later —
+                # inverted vs the documented contract, and it blocked per-angle
+                # ladders (flagship 11-level PROTECTIVE_ALARM, 2026-07-07). No
+                # child angle carried layer_progression before this change.
+                if key not in merged:
                     merged[key] = val
                 elif key == "named_object_by_topic" and isinstance(val, dict):
                     base = dict(merged.get("named_object_by_topic") or {})
@@ -135,6 +141,15 @@ def apply_angle_journey_slots(
                 ins = 1 if row and row[0] == "HOOK" else 0
                 row.insert(ins, ANGLE_DEFINITION_SLOT)
         else:
+            # Base slot templates (e.g. TWELVE_SHAPE_PROMISE_ENGINE_SLOTS) bake
+            # ANGLE_DEFINITION into every chapter's row, not just ch1's. The
+            # angle-journey overlay only ever ADDED ANGLE_CALLBACK for ch>0
+            # without removing that leftover slot, so ch2+ rendered the ch1
+            # golden definition verbatim a second time alongside its own
+            # callback (F1 book-level duplicate, 2026-07-07). Only chapter 1
+            # ever carries the definition.
+            if ANGLE_DEFINITION_SLOT in row:
+                row = [s for s in row if s != ANGLE_DEFINITION_SLOT]
             layer = layer_for_chapter(ch_num, layers)
             if layer is None:
                 out.append(row)

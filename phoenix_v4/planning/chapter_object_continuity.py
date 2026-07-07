@@ -61,7 +61,7 @@ _FORBIDDEN_OBJECT_DRIFT = (
 )
 
 
-_VALID_DOCTRINE_NUMS = frozenset(range(1, 6))
+_VALID_DOCTRINE_NUMS = frozenset(range(1, 16))
 
 
 def validate_twelve_shape_plan(chapters: list[dict[str, Any]]) -> list[str]:
@@ -82,7 +82,7 @@ def validate_twelve_shape_plan(chapters: list[dict[str, Any]]) -> list[str]:
         raw_doc = str(entry.get("doctrine_id") or "").strip()
         m = re.match(r"COMPOSITE_DOCTRINE v(\d{2})", raw_doc, re.I)
         if m and int(m.group(1)) not in _VALID_DOCTRINE_NUMS:
-            errors.append(f"ch{ch}: phantom doctrine {raw_doc} (pool is v01–v05)")
+            errors.append(f"ch{ch}: phantom doctrine {raw_doc} (pool is v01–v15)")
     if len(characters) > 1:
         errors.append(
             f"character soup: {sorted(characters)} — flagship requires one anchored character"

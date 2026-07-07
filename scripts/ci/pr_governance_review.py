@@ -990,6 +990,8 @@ def check_pr_size(files):
 FLAGSHIP_SNAPSHOT_PATHS = {
     "artifacts/qa/snapshots/CANONICAL_FLAGSHIP_CH1.txt",
     "artifacts/qa/snapshots/CANONICAL_FLAGSHIP_CH1_METADATA.json",
+    "artifacts/qa/snapshots/CANONICAL_FLAGSHIP_BOOK.txt",
+    "artifacts/qa/snapshots/CANONICAL_FLAGSHIP_BOOK_METADATA.json",
 }
 
 FLAGSHIP_PIPELINE_TOUCH_PREFIXES = (

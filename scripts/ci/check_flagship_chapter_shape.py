@@ -38,10 +38,23 @@ _THIN_EXERCISE_BRIDGE = re.compile(
     r"Just thirty seconds|Put the book down|Close the book for this",
     re.I,
 )
-_FIVE_LAYER_INTEGRATION = re.compile(r"before you move on", re.I)
+# Full-exercise integration layer closer. Meditations-library exercises close
+# "Before you move on, ..."; the ab_tady breath exercises close "Now, as you
+# return, ..." (broadened after the 2026-07-07 exercise re-pick across 6
+# libraries). A thin content_only exercise (golden ch1) has neither, so it is
+# still correctly rejected as not-full.
+_FIVE_LAYER_INTEGRATION = re.compile(r"before you move on|as you return", re.I)
 _FIVE_LAYER_INTRO = re.compile(r"This is .+\.", re.I)
+# Full-exercise aha layer. The phoenix-standard aha blocks and the ab_tady
+# exercises all open "Now, <reflective verb>" — this was hardcoded to the
+# meditations-library "notice your breathing" phrasing and missed the real
+# aha vocabulary after the re-pick. The authoritative full-5-layer check is
+# check_flagship_exercise_five_layer.py; this is the coarse render-marker proxy.
 _FIVE_LAYER_AHA = re.compile(
-    r"notice if your breathing changed|notice something|I want you to notice|Now,\s*notice",
+    r"Now,\s+(?:notice|reflect|observe|consider|take\s+a\s+(?:moment|second)|"
+    r"pause|bring\s+attention|slow\s+down|stop|acknowledge|examine|check\s+in|"
+    r"assess|see\s+if|with\s+the|I\s+want\s+you\s+to|let'?s|point\s+out)"
+    r"|notice if your breathing changed",
     re.I,
 )
 _BANK_EMPTY = re.compile(r"\[BANK EMPTY:", re.I)

@@ -83,20 +83,21 @@ def _twelve_chapter_beatmap(
     )
 
 
-# gen_z × anxiety 12-shape continuity plan (bounded v01–v05 pool per doctrine_rotation).
+# gen_z × anxiety 12-shape continuity plan — distinct-12 doctrine (OPD-20260707-FLAGSHIP-L4).
+# ch1 v03 golden-locked; ch6–12 use v06–v11,v15 after the doctrine flip landed in #4698.
 TWELVE_SHAPE_PLAN_ANXIETY = [
     "COMPOSITE_DOCTRINE v03",
     "COMPOSITE_DOCTRINE v01",
     "COMPOSITE_DOCTRINE v05",
     "COMPOSITE_DOCTRINE v04",
     "COMPOSITE_DOCTRINE v02",
-    "COMPOSITE_DOCTRINE v03",
-    "COMPOSITE_DOCTRINE v01",
-    "COMPOSITE_DOCTRINE v05",
-    "COMPOSITE_DOCTRINE v04",
-    "COMPOSITE_DOCTRINE v02",
-    "COMPOSITE_DOCTRINE v03",
-    "COMPOSITE_DOCTRINE v01",
+    "COMPOSITE_DOCTRINE v06",
+    "COMPOSITE_DOCTRINE v07",
+    "COMPOSITE_DOCTRINE v08",
+    "COMPOSITE_DOCTRINE v09",
+    "COMPOSITE_DOCTRINE v10",
+    "COMPOSITE_DOCTRINE v11",
+    "COMPOSITE_DOCTRINE v15",
 ]
 
 # Bounded-reuse config sequence (doctrine_rotation.yaml → topic_sequences.anxiety):

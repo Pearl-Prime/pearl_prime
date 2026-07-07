@@ -42,6 +42,19 @@ def test_parity_gate_passes_on_canonical_state() -> None:
     assert exit_code == 0, f"parity gate failed:\nstdout={stdout}\nstderr={stderr}"
 
 
+@pytest.mark.slow
+def test_full_book_snapshot_ratified_passes() -> None:
+    """Golden #2 was RATIFIED 2026-07-07 (OPD-20260707-FLAGSHIP-L4) on operator
+    Layer-4 read approval — the full-book snapshot is now LIVE (was DORMANT
+    before). The gate self-renders and must byte-match; marked slow because it
+    builds the book, and drift-detectors already enforces full parity on every
+    PR via the shared-render golden-gates step."""
+    exit_code, stdout, stderr = _run_gate("--snapshot", "full")
+    assert exit_code == 0, f"full snapshot parity failed:\nstdout={stdout}\nstderr={stderr}"
+    combined = stdout + stderr
+    assert "BYTE-IDENTICAL" in combined and "DORMANT" not in combined
+
+
 def test_parity_gate_fails_on_deliberately_broken_snapshot(tmp_path: Path) -> None:
     original = CANONICAL_SNAPSHOT.read_text(encoding="utf-8")
     broken = original.replace("protective alarm", "BROKEN protective alarm", 1)
@@ -50,4 +63,4 @@ def test_parity_gate_fails_on_deliberately_broken_snapshot(tmp_path: Path) -> No
     exit_code, stdout, stderr = _run_gate("--ch1-from-file", str(broken_path))
     assert exit_code != 0, "parity gate did not detect deliberately broken CH1"
     combined = stdout + stderr
-    assert "restore via `git checkout" in combined
+    assert "GOLDEN-UPDATE-RATIFIED" in combined or "do NOT fresh-fix" in combined

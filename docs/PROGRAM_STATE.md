@@ -13,6 +13,21 @@
 
 ## Current Status by Track
 
+### Flagship book (gen_z_professionals × anxiety) — PROVEN-AT-BAR
+**OPD-20260707-FLAGSHIP-L4** — operator Layer-4 blind-read **APPROVED** the full 12-chapter book
+(build 9, `extended_book_2h`, seed `flagship_phase2_layer6`, 21,012w). First PROVEN-AT-BAR book in
+program history. Both goldens now live + byte-frozen:
+- **Golden #1 (ch1):** `artifacts/qa/snapshots/CANONICAL_FLAGSHIP_CH1.txt` — CI-enforced.
+- **Golden #2 (full book):** `artifacts/qa/snapshots/CANONICAL_FLAGSHIP_BOOK.txt` (sha `fd0c49ec26…`) —
+  ratified this cycle; `check_flagship_book_parity.py --snapshot full` flipped DORMANT→live/required.
+- **Required gates (approved):** exercise five-layer integrity + pick diversity + F7 precision fix —
+  wired into Drift detectors + readiness gates 30/31. Ch1 parity stays byte-identical.
+- **Door-back (rider):** this cell is `extended_book_2h` by deliberate decision (Option A
+  mass-architecture retarget). The `deep_book_6h` variant is retired for **this cell only**
+  (xfail scoped to gen_z×anxiety×6h; the 40k floor stays live for every other cell/format). If a 6h
+  flagship is ever commissioned here it is a **content program** (more chapters/objects) and
+  **per-format exercise picks** is the designed mechanism — the xfail XPASSes and flags for un-retiring.
+
 ### en_US Listings
 - **Status:** **DONE**
 - **Details:** **1,519 LISTINGS** (storefront metadata — NOT readable EPUBs) across 26 brands + Waystream (800),

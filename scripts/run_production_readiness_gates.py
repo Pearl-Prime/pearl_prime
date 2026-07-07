@@ -597,8 +597,48 @@ def main() -> int:
     else:
         gate("29. Flagship CH1 executable contract", True, "gate script not present; skip", skip=True)
 
+    # --- 30. Flagship exercise five-layer integrity (self-renders the 2h book) ---
+    five_layer_gate = REPO_ROOT / "scripts" / "ci" / "check_flagship_exercise_five_layer.py"
+    if five_layer_gate.exists():
+        try:
+            env = os.environ.copy()
+            env["PYTHONPATH"] = str(REPO_ROOT)
+            r = subprocess.run(
+                [sys.executable, str(five_layer_gate)],
+                cwd=str(REPO_ROOT), env=env, capture_output=True, text=True, timeout=900,
+            )
+            fl_ok = r.returncode == 0
+            fl_detail = (r.stdout.splitlines()[0] if r.stdout else r.stderr.splitlines()[0] if r.stderr else "check_flagship_exercise_five_layer").strip()
+        except Exception as e:
+            fl_ok = False
+            fl_detail = str(e)
+        if not gate("30. Flagship exercise five-layer integrity (ch2-12 full compose survives)", fl_ok, fl_detail):
+            failed += 1
+    else:
+        gate("30. Flagship exercise five-layer integrity", True, "gate script not present; skip", skip=True)
+
+    # --- 31. Flagship exercise pick diversity (no all-one-library / sequential-run) ---
+    diversity_gate = REPO_ROOT / "scripts" / "ci" / "check_flagship_exercise_diversity.py"
+    if diversity_gate.exists():
+        try:
+            env = os.environ.copy()
+            env["PYTHONPATH"] = str(REPO_ROOT)
+            r = subprocess.run(
+                [sys.executable, str(diversity_gate)],
+                cwd=str(REPO_ROOT), env=env, capture_output=True, text=True, timeout=120,
+            )
+            dv_ok = r.returncode == 0
+            dv_detail = (r.stdout.splitlines()[0] if r.stdout else r.stderr.splitlines()[0] if r.stderr else "check_flagship_exercise_diversity").strip()
+        except Exception as e:
+            dv_ok = False
+            dv_detail = str(e)
+        if not gate("31. Flagship exercise pick diversity (>=5 libraries, no sequential-run)", dv_ok, dv_detail):
+            failed += 1
+    else:
+        gate("31. Flagship exercise pick diversity", True, "gate script not present; skip", skip=True)
+
     # --- Report ---
-    print("V4.5 Production Readiness — 29 conditions\n")
+    print("V4.5 Production Readiness — 31 conditions\n")
     for name, status, detail in RESULTS:
         sym = "✓" if status == "PASS" else ("○" if status == "SKIP" else "✗")
         print(f"  {sym} {status:4}  {name}")

@@ -142,11 +142,34 @@ def pick_phoenix_standard_key(
     exercise_type: str,
     resolution_seed: str,
 ) -> str:
-    """Deterministic Phoenix-standard key for aha/integration YAML lookup."""
-    eff = infer_exercise_type(chapter_index, exercise_type)
-    pool = AHA_POOL_BY_EXERCISE_TYPE[eff]
-    idx = _stable_pool_index(f"{resolution_seed}:phoenix_std:{eff}:ch{chapter_index}", len(pool))
-    return pool[idx]
+    """Deterministic Phoenix-standard key for aha/integration YAML lookup.
+
+    Rotation-path selection is collision-free across a book: independent hash
+    draws repeated the same key in up to 5 of 12 chapters (F1 wrapper-cluster
+    regression 2026-07-07). Chapters sharing a rotated type are exactly one
+    rotation-cycle apart, so stepping the pool by cycle number guarantees no
+    repeat while ceil(chapters / rotation_len) <= pool size. Direct-type
+    callers (exercise_type already a pool key) keep the original seeded draw.
+    """
+    et = (exercise_type or "").strip()
+    if et in AHA_POOL_BY_EXERCISE_TYPE:
+        pool = AHA_POOL_BY_EXERCISE_TYPE[et]
+        idx = _stable_pool_index(f"{resolution_seed}:phoenix_std:{et}:ch{chapter_index}", len(pool))
+        return pool[idx]
+    # Rotation-path types are positional (assigned by chapter index, not by the
+    # actual exercise), and the per-type pools overlap (e.g. shoulder_drop_reset
+    # sits in both 02 and 03), so type-local rotation still collides across
+    # chapters. One deduped union pool with a chapter stride is collision-free
+    # for books up to the union size.
+    seen: set[str] = set()
+    union: list[str] = []
+    for t in EXERCISE_TYPES_ROTATION:
+        for k in AHA_POOL_BY_EXERCISE_TYPE.get(t, ()):
+            if k not in seen:
+                seen.add(k)
+                union.append(k)
+    offset = _stable_pool_index("phoenix_std:union", len(union))
+    return union[(offset + chapter_index) % len(union)]
 
 
 # practice_library_loader categories → exercises_v4 template key

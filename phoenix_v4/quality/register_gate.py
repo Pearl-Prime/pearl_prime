@@ -692,27 +692,85 @@ F7_IMPERATIVE_VERBS = {
     "open", "close", "name", "watch", "begin", "start", "pause", "land",
     "remember", "let", "hold", "imagine", "drop", "rest", "press",
 }
+# Alphabetic timing/step cues — matched as WHOLE WORDS (see _is_prescribed_action).
+# Substring matching was a precision bug: "ten" matched inside "atTENtion" /
+# "TENsion" / "inTENtion", and "for" inside "FORecast" / "comFORtable" /
+# "efFORt" — words that saturate anxiety prose — so every narrative paragraph
+# mentioning "attention" or "the forecast" alongside any imperative-set verb
+# was miscounted as a prescribed action (F7 precision fix, 2026-07-07).
 F7_TIMING_STEP_CUES = {
     "seconds", "minutes", "hours", "ninety", "sixty", "five", "ten",
-    "step", "first", "second", "third", "1.", "2.", "3.",
+    "step", "first", "second", "third",
     "cycle", "cycles", "repeat", "for", "before", "after",
+}
+# Numbered-step markers — matched as substrings (they carry punctuation and
+# cannot be word-tokenized the same way).
+F7_STEP_MARKERS = ("1.", "2.", "3.")
+
+F7_DEFAULT_FAIL_AT = 4
+F7_DEFAULT_WARN_AT = 3
+# Per-runtime-format F7 calibration (flagship 2h retarget, 2026-07-07).
+# The default 4/3 band was calibrated on deep_book chapters (~4-6k words) whose
+# prose is mostly third-person, so 4+ prescribed-action paragraphs really does
+# read as over-prescription. The extended_book_2h flagship register is
+# second-person somatic throughout — one full exercise plus an integration
+# practice per ~1.6k-word chapter — which legitimately carries more
+# reader-directed instructions than a deep_book chapter. With the precise
+# detector (word-boundary cues + second-person requirement, see
+# _is_prescribed_action), the 12-chapter flagship render measures 5-9
+# reader-directed prescriptions/chapter; WARN >= 10 / FAIL >= 12 flags a
+# chapter that genuinely doubles that density. Deep_book thresholds untouched —
+# calibration is additive per format, never a dilution of the default check.
+F7_FORMAT_THRESHOLDS: dict[str, dict[str, int]] = {
+    "extended_book_2h": {"fail_at": 12, "warn_at": 10},
 }
 
 
 def _is_prescribed_action(para: str) -> bool:
-    words = re.findall(r"[A-Za-z]+", para.lower())
+    """A prescribed-action paragraph INSTRUCTS THE READER to perform a
+    timed/stepped action. All three conditions must hold:
+      1. an imperative-set verb,
+      2. a timing/step cue (whole-word alphabetic cue or "1."/"2."/"3." marker),
+      3. second-person address ("you"/"your").
+
+    Condition 3 is the precision anchor (2026-07-07): F7 exists to catch a
+    chapter drowning the READER in instructions, so a prescribed action is by
+    definition addressed to the reader. Third-person narrative ("Priya's laptop
+    is open... the review starts in thirty minutes") satisfies (1) and (2) by
+    coincidence — an imperative-set verb used as narration plus a timing word —
+    but instructs no one, and previously inflated the count. This does NOT
+    weaken over-prescription detection: a chapter that genuinely tells the
+    reader to do 12 timed things still scores 12, because those paragraphs
+    carry "you"/"your". The somatic house register is second-person throughout,
+    so real prescriptions always address the reader.
+    """
+    low = para.lower()
+    words = re.findall(r"[A-Za-z]+", low)
+    word_set = set(words)
     has_imperative = any(w in F7_IMPERATIVE_VERBS for w in words)
-    has_timing_or_step = any(c in para.lower() for c in F7_TIMING_STEP_CUES)
-    return has_imperative and has_timing_or_step
+    # Word-boundary match for alphabetic cues (no more "ten" ∈ "attention");
+    # numbered-step markers ("1." etc.) still match as substrings.
+    has_timing_or_step = (
+        any(w in F7_TIMING_STEP_CUES for w in word_set)
+        or any(m in low for m in F7_STEP_MARKERS)
+    )
+    has_second_person = "you" in word_set or "your" in word_set
+    return has_imperative and has_timing_or_step and has_second_person
 
 
-def _detect_f7_practice_density(chapters: list[tuple[int, str]]) -> list[RegisterFinding]:
+def _detect_f7_practice_density(
+    chapters: list[tuple[int, str]],
+    runtime_format: str = "",
+) -> list[RegisterFinding]:
+    profile = F7_FORMAT_THRESHOLDS.get((runtime_format or "").strip(), {})
+    fail_at = int(profile.get("fail_at", F7_DEFAULT_FAIL_AT))
+    warn_at = int(profile.get("warn_at", F7_DEFAULT_WARN_AT))
     findings = []
     for ch_num, ch_text in chapters:
         count = sum(1 for p in _split_paragraphs(ch_text) if _is_prescribed_action(p))
-        if count >= 4:
+        if count >= fail_at:
             severity = "FAIL"
-        elif count == 3:
+        elif count >= warn_at:
             severity = "WARN"
         else:
             continue
@@ -721,7 +779,12 @@ def _detect_f7_practice_density(chapters: list[tuple[int, str]]) -> list[Registe
             severity=severity,
             chapter=ch_num,
             summary=f"over-prescribed practice density: {count} distinct prescribed-action paragraphs",
-            evidence={"prescribed_action_count": count},
+            evidence={
+                "prescribed_action_count": count,
+                "fail_at": fail_at,
+                "warn_at": warn_at,
+                "runtime_format_profile": (runtime_format or "").strip() if profile else "",
+            },
         ))
     return findings
 
@@ -1527,6 +1590,7 @@ def evaluate_register(
     quality_profile: str = "production",
     hook_atoms: Optional[list[tuple[str, str]]] = None,
     f11_all_variations: bool = False,
+    runtime_format: str = "",
 ) -> RegisterGateResult:
     """
     Score the rendered book against the F1-F7 + F12 + F13 detectors
@@ -1555,7 +1619,7 @@ def evaluate_register(
     findings += _detect_f4_closing_line_repeats(chapters)
     findings += _detect_f5_named_character_continuity(chapters)
     findings += _detect_f6_cadence_repetition(chapters)
-    findings += _detect_f7_practice_density(chapters)
+    findings += _detect_f7_practice_density(chapters, runtime_format=runtime_format)
     findings += _detect_f12_unwrapped_voice_shift(chapters)
     findings += _detect_f13_dwell_starvation(chapters)
     if _f14_enabled(quality_profile):

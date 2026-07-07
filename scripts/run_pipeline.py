@@ -1576,6 +1576,7 @@ def _run_spine_pipeline_mode(
                 persona_id=persona_id,
                 topic_id=topic_id,
                 quality_profile=quality_profile,
+                runtime_format=runtime_fmt,
             )
             _register_verdict = _reg_result.verdict
             _register_f_counts = {}

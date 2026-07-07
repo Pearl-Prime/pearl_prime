@@ -231,6 +231,12 @@ def patch_atom_loaders(monkeypatch):
     """
     monkeypatch.setattr(
         es,
+        "_load_runtime_word_bounds",
+        lambda _rf, _root: (0, 10_000_000),
+    )
+
+    monkeypatch.setattr(
+        es,
         "is_twelve_shape_continuity_active",
         lambda *args, **kwargs: False,
     )

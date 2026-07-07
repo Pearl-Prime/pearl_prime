@@ -1,6 +1,7 @@
 # 12-shape chapter continuity plan — gen_z_professionals × anxiety
 # Authority: docs/12SHAPE_CONTINUITY_WIRING.md + doctrine_distribution_plan.md
-# Bounded-reuse doctrine cycle (v01–v05 pool); one anchored character (Priya) per chapter.
+# Bounded-reuse doctrine cycle (v01–v05 pool) until final-batch 12-distinct flip;
+# see gen_z_professionals_anxiety_distinct_doctrine_sequence.yaml + apply_distinct_doctrine_to_plan.py
 plan_id: gen_z_professionals_anxiety_twelve_shape_v2
 persona: gen_z_professionals
 topic: anxiety
@@ -34,7 +35,7 @@ chapters:
     character: Priya
     object: morning_calendar_spiral
     doctrine_id: "COMPOSITE_DOCTRINE v01"
-    exercise_id: med_009
+    exercise_id: cyclic_sighing
     expected_doctrine_snippet: "weather of the body is not the climate"
     connective_picks:
       HOOK: "HOOK v90"
@@ -52,7 +53,7 @@ chapters:
     character: Priya
     object: chronic_somatic_tension
     doctrine_id: "COMPOSITE_DOCTRINE v05"
-    exercise_id: med_015
+    exercise_id: body_003
     expected_doctrine_snippet: "pattern that protected you once"
     connective_picks:
       HOOK: "HOOK v91"
@@ -70,7 +71,7 @@ chapters:
     character: Priya
     object: pre_presentation_activation
     doctrine_id: "COMPOSITE_DOCTRINE v04"
-    exercise_id: med_016
+    exercise_id: sens_001
     connective_picks:
       HOOK: "HOOK v92"
       SCENE: "SCENE v86"
@@ -87,46 +88,142 @@ chapters:
     character: Priya
     object: inherited_workplace_panic
     doctrine_id: "COMPOSITE_DOCTRINE v02"
-    exercise_id: med_017
+    exercise_id: integ_012
+    expected_doctrine_snippet: "what you have been carrying"
+    connective_picks:
+      HOOK: "HOOK v93"
+      SCENE: "SCENE v87"
+      PIVOT: "PIVOT v54"
+      TAKEAWAY: "TAKEAWAY v24"
+      INTEGRATION: "INTEGRATION v39"
+      THREAD: "THREAD v24"
+    story_picks:
+      recognition: v21
+      mechanism_proof: v25
+      turning_point: v21
   - chapter: 6
     title: "The Meeting Is Over But Your Brain Hasn't Left"
     character: Priya
     object: post_meeting_rumination
-    doctrine_id: "COMPOSITE_DOCTRINE v03"
-    exercise_id: med_018
+    doctrine_id: "COMPOSITE_DOCTRINE v06"
+    exercise_id: thought_022
+    expected_doctrine_snippet: "shorter returns, clearer names"
+    connective_picks:
+      HOOK: "HOOK v94"
+      SCENE: "SCENE v88"
+      PIVOT: "PIVOT v55"
+      TAKEAWAY: "TAKEAWAY v25"
+      INTEGRATION: "INTEGRATION v40"
+      THREAD: "THREAD v25"
+    story_picks:
+      recognition: v22
+      mechanism_proof: v26
+      embodiment: v21
   - chapter: 7
     title: "The Catastrophe That Hasn't Happened Yet"
     character: Priya
     object: career_catastrophizing_spiral
-    doctrine_id: "COMPOSITE_DOCTRINE v01"
-    exercise_id: med_019
+    doctrine_id: "COMPOSITE_DOCTRINE v07"
+    exercise_id: thought_002
+    expected_doctrine_snippet: "the rehearsal, not the event"
+    connective_picks:
+      HOOK: "HOOK v95"
+      SCENE: "SCENE v89"
+      PIVOT: "PIVOT v56"
+      TAKEAWAY: "TAKEAWAY v26"
+      INTEGRATION: "INTEGRATION v41"
+      THREAD: "THREAD v26"
+    story_picks:
+      recognition: v23
+      mechanism_proof: v27
+      turning_point: v23
   - chapter: 8
     title: "The Invisible Habits Keeping You Wired"
     character: Priya
     object: morning_phone_cortisol_loop
-    doctrine_id: "COMPOSITE_DOCTRINE v05"
-    exercise_id: med_020
+    doctrine_id: "COMPOSITE_DOCTRINE v08"
+    exercise_id: eye_softening
+    expected_doctrine_snippet: "responsibility gets to enter your bloodstream"
+    connective_picks:
+      HOOK: "HOOK v96"
+      SCENE: "SCENE v90"
+      PIVOT: "PIVOT v57"
+      TAKEAWAY: "TAKEAWAY v27"
+      INTEGRATION: "INTEGRATION v42"
+      THREAD: "THREAD v27"
+    story_picks:
+      recognition: v24
+      mechanism_proof: v28
+      turning_point: v24
   - chapter: 9
     title: "Building Something That Actually Sticks"
     character: Priya
     object: abandoned_wellness_app_cycle
-    doctrine_id: "COMPOSITE_DOCTRINE v04"
-    exercise_id: med_021
+    doctrine_id: "COMPOSITE_DOCTRINE v09"
+    exercise_id: integ_018
+    expected_doctrine_snippet: "infrastructure instead of aspiration"
+    connective_picks:
+      HOOK: "HOOK v97"
+      SCENE: "SCENE v91"
+      PIVOT: "PIVOT v58"
+      TAKEAWAY: "TAKEAWAY v28"
+      INTEGRATION: "INTEGRATION v43"
+      THREAD: "THREAD v28"
+    story_picks:
+      recognition: v25
+      mechanism_proof: v29
+      embodiment: v22
   - chapter: 10
     title: "Sustainable Regulation Across Time"
     character: Priya
     object: job_change_practice_disruption
-    doctrine_id: "COMPOSITE_DOCTRINE v02"
-    exercise_id: med_022
+    doctrine_id: "COMPOSITE_DOCTRINE v10"
+    exercise_id: refl_015
+    expected_doctrine_snippet: "new data, not old doom"
+    connective_picks:
+      HOOK: "HOOK v98"
+      SCENE: "SCENE v92"
+      PIVOT: "PIVOT v59"
+      TAKEAWAY: "TAKEAWAY v29"
+      INTEGRATION: "INTEGRATION v44"
+      THREAD: "THREAD v29"
+    story_picks:
+      recognition: v26
+      mechanism_proof: v30
+      embodiment: v23
   - chapter: 11
     title: "When It Gets Serious: Crisis Tools"
     character: Priya
     object: workplace_panic_response
-    doctrine_id: "COMPOSITE_DOCTRINE v03"
-    exercise_id: med_023
+    doctrine_id: "COMPOSITE_DOCTRINE v11"
+    exercise_id: extended_exhale
+    expected_doctrine_snippet: "activation and competence can coexist"
+    connective_picks:
+      HOOK: "HOOK v99"
+      SCENE: "SCENE v93"
+      PIVOT: "PIVOT v60"
+      TAKEAWAY: "TAKEAWAY v30"
+      INTEGRATION: "INTEGRATION v45"
+      THREAD: "THREAD v30"
+    story_picks:
+      recognition: v27
+      mechanism_proof: v31
+      turning_point: v25
   - chapter: 12
     title: "Who You Are Without the Overwhelm"
     character: Priya
     object: regulated_tuesday_afternoon
-    doctrine_id: "COMPOSITE_DOCTRINE v01"
-    exercise_id: med_024
+    doctrine_id: "COMPOSITE_DOCTRINE v15"
+    exercise_id: refl_034
+    expected_doctrine_snippet: "functional with the hum present"
+    connective_picks:
+      HOOK: "HOOK v100"
+      SCENE: "SCENE v94"
+      PIVOT: "PIVOT v61"
+      TAKEAWAY: "TAKEAWAY v31"
+      INTEGRATION: "INTEGRATION v46"
+      THREAD: "THREAD v31"
+    story_picks:
+      recognition: v28
+      mechanism_proof: v32
+      embodiment: v24

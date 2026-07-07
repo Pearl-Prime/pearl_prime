@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+import re
 from pathlib import Path
 
 import pytest
@@ -340,15 +341,23 @@ class TestChapterComposerBackwardCompat:
         )
         assert "Your badge beeps" in result
         assert "Press your feet" in result
-        # Assembler + Phoenix standards (aha/integration) or legacy template wrap
+        # Assembler + Phoenix standards (aha/integration) or legacy template wrap.
+        # The aha layer opens "Now, <reflective verb>" and the integration closer
+        # is "Before you move on" (meditations) or "Now, as you return" (ab_tady).
+        # Broadened from the old narrow phrase list after the exercise aha-rotation
+        # + 6-library re-pick (2026-07-07); same vocabulary as the authoritative
+        # scripts/ci/check_flagship_chapter_shape.py _FIVE_LAYER_AHA marker.
         rl = result.lower()
         assert (
             "before you move on" in rl
-            or "now, notice" in rl
-            or "now, take a moment" in rl
-            or "now, pause" in rl
-            or "now, reflect" in rl
-        )
+            or re.search(
+                r"now,\s+(?:notice|reflect|observe|consider|take\s+a\s+(?:moment|second)|"
+                r"pause|bring\s+attention|slow\s+down|stop|acknowledge|examine|check\s+in|"
+                r"assess|see\s+if|with\s+the|i\s+want\s+you\s+to|let'?s|point\s+out|"
+                r"as\s+you\s+return)",
+                rl,
+            )
+        ), f"no aha/integration marker in composed exercise: {rl[:220]!r}"
 
     def test_compose_with_exercise_context(self):
         """compose_chapter_prose with exercise_context should use component assembler."""

@@ -163,10 +163,31 @@ def _repo_root() -> Path:
     return Path(__file__).resolve().parent.parent
 
 
+@pytest.mark.xfail(
+    strict=False,
+    reason=(
+        "RETIRED for gen_z_professionals x anxiety x deep_book_6h ONLY "
+        "(OPD-20260707-FLAGSHIP-L4). This cell was retargeted to the 2h band by "
+        "operator decision (Option A + Layer-4 read approval); its 6h enriched "
+        "mass was only ever reachable via the retired strengthen-pass padding, "
+        "and the Layer-4-approved concise exercise re-pick (6 libraries) drops "
+        "the 6h enriched total below 40k without stripping any teaching depth. "
+        "The 40k floor stays LIVE for every other cell/format (e.g. "
+        "test_deep_book_6h_exceeds_40k_words on somatic_healing). Door back: if a "
+        "6h flagship is ever commissioned for this cell it is a CONTENT program "
+        "(more chapters/objects) and per-format exercise picks is the designed "
+        "mechanism — at which point this xfail XPASSes and flags for un-retiring."
+    ),
+)
 @pytest.mark.parametrize("fmt", ["deep_book_6h"])
 def test_depth_dedup_preserves_book_completeness(fmt):
     """With the fuzzy dedup ON, a deep book still fills its word budget — the fix
-    rotates content, it does not strip required depth (no thinner books)."""
+    rotates content, it does not strip required depth (no thinner books).
+
+    NOTE: xfail for the gen_z x anxiety cell only — see the marker above. The
+    dedup-doesn't-strip property for this cell's LIVE format (extended_book_2h)
+    is covered by the flagship build gates (book_pass word budget + golden #2
+    parity); this 6h assertion is a retired-padding-era ghost, not a product."""
     import yaml
 
     from phoenix_v4.planning.beatmap_compile import (

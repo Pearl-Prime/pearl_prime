@@ -152,17 +152,23 @@ def test_leaf_inherits_structural_fields_from_parent(registry):
     prov = merged["_resolution_provenance"]
     assert prov["chain_depth"] == 1
     assert "framing_mode" in prov["inherited_fields"]
-    assert "journey" in prov["inherited_fields"]
+    # 12-shape flagship (2026-07-07): PROTECTIVE_ALARM carries its own
+    # journey.layer_progression (11 per-chapter callback levels), so journey
+    # is a leaf override now; analogy_lens still deep-merges from the parent.
+    assert "journey" in prov["leaf_overrides"]
 
 
 def test_leaf_inherits_journey_block_from_parent(registry):
-    """Topic-specific angle inherits analogy_lens + 5-layer progression from universal."""
+    """Topic-specific angle deep-merges journey: analogy_lens inherits from the
+    universal while the leaf's 11-level flagship ladder overrides the 5-layer
+    default (12-shape ladder extension 2026-07-07)."""
     merged = resolve_angle_with_inheritance("PROTECTIVE_ALARM", registry)
     journey = merged.get("journey")
-    assert isinstance(journey, dict), "journey block must be present (inherited)"
+    assert isinstance(journey, dict), "journey block must be present (merged)"
     assert journey.get("analogy_lens") == "progressive_compression"
     layers = journey.get("layer_progression") or []
-    assert len(layers) == 5
+    assert len(layers) == 11
+    assert [row["chapter_range"] for row in layers] == [[c, c] for c in range(2, 13)]
 
 
 def test_leaf_field_overrides_inherited_value(angles, registry):

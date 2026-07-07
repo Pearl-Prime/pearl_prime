@@ -72,6 +72,26 @@ SCENE_SECTION_INDICES: Tuple[int, ...] = (2, 5, 9)
 _SLOT_ARC: Tuple[str, str, str] = ("recognition", "mechanism_proof", "turning_point")
 _SLOT_ARC_FINAL: Tuple[str, str, str] = ("recognition", "mechanism_proof", "embodiment")
 
+
+def _slot_arcs_for_entry(
+    is_final_chapter: bool,
+    story_picks_map: dict,
+) -> Tuple[str, str, str]:
+    """Arc positions for a twelve-shape continuity-plan chapter.
+
+    Plan story_picks are authoritative for the closer position: a chapter whose
+    picks name embodiment gets the embodiment arc even when the phase-derived
+    default says turning_point, and vice versa (ch10-embodiment regression
+    2026-07-07 — the phase default silently discarded the plan's embodiment
+    pick and double-booked the neighbouring chapter's turning_point variant).
+    Chapters that pick neither (or both) fall back to the phase default.
+    """
+    if "embodiment" in story_picks_map and "turning_point" not in story_picks_map:
+        return _SLOT_ARC_FINAL
+    if "turning_point" in story_picks_map and "embodiment" not in story_picks_map:
+        return _SLOT_ARC
+    return _SLOT_ARC_FINAL if is_final_chapter else _SLOT_ARC
+
 _DEFAULT_ENGINES = [
     "overwhelm", "shame", "spiral", "comparison", "false_alarm", "grief", "watcher"
 ]
@@ -535,13 +555,13 @@ def _build_schedule_from_continuity_plan(
             list(range(1, 13)),
         )
         is_final_chapter = ch == phase_chapters[-1]
-        slot_arcs = _SLOT_ARC_FINAL if is_final_chapter else _SLOT_ARC
 
         story_picks_map = {
             k: str(v).strip()
             for k, v in (entry.get("story_picks") or {}).items()
             if k in _STORY_PICK_ARCS and str(v).strip()
         }
+        slot_arcs = _slot_arcs_for_entry(is_final_chapter, story_picks_map)
         seed_key = f"{seed}:twelve_shape:ch{ch}"
 
         if story_picks_map:

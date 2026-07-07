@@ -55,6 +55,20 @@ topic_sequences:
         doctrine_id: "COMPOSITE_DOCTRINE v03"
       - chapter: 12
         doctrine_id: "COMPOSITE_DOCTRINE v01"
+    # 12 distinct lessons — use after v06–v15 land in REFLECTION bank (flagship ch12 final batch).
+    distinct_12:
+      - {chapter: 1, doctrine_id: "COMPOSITE_DOCTRINE v03"}
+      - {chapter: 2, doctrine_id: "COMPOSITE_DOCTRINE v01"}
+      - {chapter: 3, doctrine_id: "COMPOSITE_DOCTRINE v05"}
+      - {chapter: 4, doctrine_id: "COMPOSITE_DOCTRINE v04"}
+      - {chapter: 5, doctrine_id: "COMPOSITE_DOCTRINE v02"}
+      - {chapter: 6, doctrine_id: "COMPOSITE_DOCTRINE v06"}
+      - {chapter: 7, doctrine_id: "COMPOSITE_DOCTRINE v07"}
+      - {chapter: 8, doctrine_id: "COMPOSITE_DOCTRINE v08"}
+      - {chapter: 9, doctrine_id: "COMPOSITE_DOCTRINE v09"}
+      - {chapter: 10, doctrine_id: "COMPOSITE_DOCTRINE v10"}
+      - {chapter: 11, doctrine_id: "COMPOSITE_DOCTRINE v11"}
+      - {chapter: 12, doctrine_id: "COMPOSITE_DOCTRINE v15"}
   burnout:
     default_12:
       - {chapter: 1, doctrine_id: "COMPOSITE_DOCTRINE v01"}

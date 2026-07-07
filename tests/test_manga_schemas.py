@@ -269,6 +269,45 @@ def _minimal_payload(stem: str) -> dict:
             "eye_y_px": 400,
             "implied_camera": {"angle_bucket": "eye_level", "el_crossing": "chest"},
         },
+        "serial_spine": {
+            **common,
+            "artifact_type": "serial_spine",
+            "series_id": "s",
+            "genre": "shonen",
+            "mode": "teacher",
+            "serial_engine": "rank_gate_trials",
+            "long_arc_spine": "Can the disciple prove worthy before the gate closes?",
+            "renewable_unit": "trial arc with escalating rival",
+            "escalation_axis": "rank and recognition",
+            "binge_mechanism": "unresolved gate deadline",
+            "volume_arcs": [
+                {"volume": v, "title": f"V{v}", "logline": f"Arc {v}"}
+                for v in range(1, 6)
+            ],
+            "named_pressures": [
+                {"id": "p1", "kind": "rival", "label": "Rival"},
+            ],
+            "set_piece_registry": [
+                {"id": "sp1", "label": "Trial gate"},
+            ],
+        },
+        "series_continuity_state": {
+            **common,
+            "artifact_type": "series_continuity_state",
+            "series_id": "s",
+            "last_episode_id": "ep_001",
+            "volume_arc_position": {
+                "volume": 1,
+                "chapter_in_volume": 1,
+                "volume_title": "Opening",
+            },
+            "settled_state": "Protagonist believes the trial is won.",
+            "rival_state": [],
+            "motif_state": {"condition": "calm"},
+            "active_pressures": ["p1"],
+            "set_pieces_fired": ["sp1"],
+            "unresolved_hooks": ["gate still closed"],
+        },
     }
     if stem not in builders:
         raise KeyError(stem)

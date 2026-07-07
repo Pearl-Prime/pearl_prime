@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "artifact": "flagship_full_book_golden",
+  "scope": "full_12_chapter_book",
+  "status": "ratified",
+  "ratified_at": "2026-07-07T04:42:15Z",
+  "canonical_branch": null,
+  "layer": null,
+  "seed": "flagship_phase2_layer6",
+  "invocation": [],
+  "invocation_shell": "",
+  "content_sha256": "fd0c49ec26c4c2d3709821b9335eeafa9a32653bb4033d68e2d81a26690144f7",
+  "word_count": 21012,
+  "byte_count": 118140,
+  "chapter_content_sha256": {
+    "ch1": "e68973b6c696df7cf1446e7b15b0a623690a0f138c126f61134033e7977251ae",
+    "ch2": "e9c0993564cb567751dfe39f72ece8e1f7d55600ea0eeba71e6dc4e861d560a0",
+    "ch3": "0db707c1b1aad9d1d0809544e79fcde63e561ffe24c1ba7c566af7be1945b5f3",
+    "ch4": "82e9b3001086ac695ce6958e6f493fbf22ff655b3825aa1593a9d39dabaafefc",
+    "ch5": "109eb8acce4e8f7a065e659429b65d7f0b2412d18336c72176718fdeeab3b2f9",
+    "ch6": "2a89e2b5f23f475b40446a91a8cb81ba9f1c8f5498f93d9f7163798cc3165bb4",
+    "ch7": "eb45e120c328f6d8c1d68a3b5ccdf85abd3eaafb8871ef130231d2723de63ba4",
+    "ch8": "02fe84df169bce4e35ff1a63cd1e4ad55efb5479cf99d470339059a93b408b5c",
+    "ch9": "581239a483534a167352566ab3f08eaf11fd0e5dd2dabd348e0915138db7bc72",
+    "ch10": "a9bbd5f7c4fa92f536a5199e07b4dc377eef9d468eab181bfc28176df8ce631b",
+    "ch11": "6b861efcaa182103c8e64a8a87903988b5d1ec483cec3bffe5db8df935645508",
+    "ch12": "483bf8309e8ce6a0c79c44a354562bdd0c52c5ff90099ff440713fcd8c0edc32"
+  },
+  "plan_id": "gen_z_professionals_anxiety_twelve_shape_v2",
+  "doctrine_sequence": "distinct_12",
+  "snapshot_txt": "artifacts/qa/snapshots/CANONICAL_FLAGSHIP_BOOK.txt",
+  "restoration_protocol": {
+    "summary": "Full-book golden activates only after operator approves the read. Until then this metadata is dormant.",
+    "ratify_snapshot_change": "PR body must include GOLDEN-UPDATE-RATIFIED: <OPD ref>",
+    "create_snapshot": "python3 scripts/qa/freeze_flagship_book_snapshot.py --render-dir <dir> --ratify-opd OPD-XXX",
+    "restore_snapshot": "git checkout <sha> -- artifacts/qa/snapshots/CANONICAL_FLAGSHIP_BOOK.txt artifacts/qa/snapshots/CANONICAL_FLAGSHIP_BOOK_METADATA.json"
+  },
+  "notes": "No CANONICAL_FLAGSHIP_BOOK.txt until operator ratifies post-read approval.",
+  "ratify_opd": "OPD-20260707-FLAGSHIP-L4"
+}

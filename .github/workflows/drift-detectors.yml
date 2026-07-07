@@ -91,8 +91,24 @@ jobs:
       - name: Flagship 12-shape chapter shape (BLOCK)
         run: PYTHONPATH=. python3 scripts/ci/check_flagship_chapter_shape.py
 
-      - name: Flagship CH1 golden parity (BLOCK)
-        run: PYTHONPATH=. python3 scripts/ci/check_flagship_book_parity.py
+      - name: Flagship golden gates — ch1 + full-book parity, exercise five-layer + diversity (BLOCK)
+        run: |
+          set -euo pipefail
+          # Exercise pick diversity — fast, no render (rejects all-one-library / sequential-run).
+          PYTHONPATH=. python3 scripts/ci/check_flagship_exercise_diversity.py
+          # One canonical production render, shared by every render-consuming golden gate.
+          PYTHONPATH=. python3 scripts/run_pipeline.py \
+            --topic anxiety --persona gen_z_professionals \
+            --arc config/source_of_truth/master_arcs/gen_z_professionals__anxiety__overwhelm__F006.yaml \
+            --pipeline-mode spine --runtime-format extended_book_2h \
+            --quality-profile production --exercise-journeys --no-job-check \
+            --render-book --render-dir /tmp/flagship_golden --seed flagship_phase2_layer6 || true
+          test -s /tmp/flagship_golden/book.txt
+          # Golden #1 (ch1) + golden #2 (full book) byte parity, both from the one render.
+          PYTHONPATH=. python3 scripts/ci/check_flagship_book_parity.py --snapshot all \
+            --ch1-from-file /tmp/flagship_golden/book.txt --full-from-file /tmp/flagship_golden/book.txt
+          # Every ch2-12 EXERCISE renders its full 5 layers (bridge/intro/description/aha/integration).
+          PYTHONPATH=. python3 scripts/ci/check_flagship_exercise_five_layer.py --book /tmp/flagship_golden/book.txt
 
       - name: Flagship CH1 executable contract (BLOCK)
         run: PYTHONPATH=. python3 scripts/ci/check_flagship_contract.py

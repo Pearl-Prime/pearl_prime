@@ -129,13 +129,33 @@ def evaluate_angle_journey_coherence(
         layer_nums = [layer for _, layer in observed_layers]
         if layer_nums != sorted(layer_nums):
             errors.append(
-                f"angle_journey: callback layers not monotonic 1→5: {layer_nums}"
+                f"angle_journey: callback layers not monotonic: {layer_nums}"
             )
-        if any(layer >= 5 and ch < 11 for ch, layer in observed_layers):
-            errors.append(
-                "angle_journey: layer 5 callback fired before chapter 11 "
-                f"(violations: {[(c, l) for c, l in observed_layers if l >= 5 and c < 11]})"
-            )
+        # Final-phase timing derives from the progression itself (was hardcoded
+        # layer>=5 / ch<11 for the 5-layer default; the flagship 11-level
+        # ladder made that read every mid-book layer as premature). The final
+        # layer must not fire before its own declared chapter_range floor —
+        # identical behavior for legacy 5-layer angles (L5 range [11,12]).
+        final_rows = [
+            r for r in layers
+            if isinstance(r, dict) and r.get("layer") is not None
+        ]
+        if final_rows:
+            final_layer = max(int(r["layer"]) for r in final_rows)
+            final_lo = None
+            for r in final_rows:
+                cr = r.get("chapter_range")
+                if int(r["layer"]) == final_layer and isinstance(cr, (list, tuple)) and len(cr) >= 2:
+                    final_lo = int(cr[0])
+            if final_lo is not None:
+                violations = [
+                    (c, l) for c, l in observed_layers if l >= final_layer and c < final_lo
+                ]
+                if violations:
+                    errors.append(
+                        f"angle_journey: layer {final_layer} callback fired before chapter {final_lo} "
+                        f"(violations: {violations})"
+                    )
 
     angle_slot_chapters = sum(
         1

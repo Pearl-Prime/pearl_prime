@@ -1,0 +1,24 @@
+# 12-distinct doctrine sequence — gen_z_professionals × anxiety flagship
+# Authority: final-batch flip only (after doctrine-v06-15-landed on main).
+# ch1 doctrine_id is IMMUTABLE (COMPOSITE_DOCTRINE v03) — ch1 parity byte-identical.
+# Consumer: scripts/flagship/apply_distinct_doctrine_to_plan.py
+#
+# Maps chapter number → doctrine_id. No repeats across 12 chapters.
+
+plan_id: gen_z_professionals_anxiety_twelve_distinct_doctrine_v1
+persona: gen_z_professionals
+topic: anxiety
+
+doctrine_by_chapter:
+  1: "COMPOSITE_DOCTRINE v03"   # golden-locked — do not change
+  2: "COMPOSITE_DOCTRINE v01"
+  3: "COMPOSITE_DOCTRINE v05"
+  4: "COMPOSITE_DOCTRINE v04"
+  5: "COMPOSITE_DOCTRINE v02"
+  6: "COMPOSITE_DOCTRINE v06"   # recovery-not-calm
+  7: "COMPOSITE_DOCTRINE v07"   # catastrophe cost
+  8: "COMPOSITE_DOCTRINE v08"   # morning scan tax
+  9: "COMPOSITE_DOCTRINE v09"   # sustainable practice architecture
+  10: "COMPOSITE_DOCTRINE v10"  # transition anchors
+  11: "COMPOSITE_DOCTRINE v11"  # crisis contact
+  12: "COMPOSITE_DOCTRINE v15"  # regulated with hum present

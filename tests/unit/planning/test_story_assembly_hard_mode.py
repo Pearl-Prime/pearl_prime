@@ -71,15 +71,37 @@ def test_runtime_format_selects_mode():
     assert _story_assembly_mode("micro_book_15") == "soft"
 
 
-def test_deep_book_schedule_same_character_per_chapter():
-    sched = build_story_schedule(
-        "gen_z_professionals", "anxiety", "hard_test", REPO, runtime_format="deep_book_6h",
-    )
-    by_ch: dict[int, list[str | None]] = {}
-    for (ch, _sec), slot in sched.assignments.items():
-        from phoenix_v4.planning.story_planner import _extract_character
 
-        by_ch.setdefault(ch, []).append(_extract_character(slot.text))
-    for ch, names in by_ch.items():
-        named = [n for n in names if n]
-        assert len(set(named)) <= 1, f"chapter {ch} mixed characters: {names}"
+def test_deep_book_schedule_same_character_per_chapter():
+    from phoenix_v4.planning.chapter_object_continuity import load_chapter_continuity_plan
+
+    persona_id = "gen_z_professionals"
+    topic = "anxiety"
+    plan = load_chapter_continuity_plan(persona_id, topic, REPO)
+    plan_char_by_ch = {
+        int(entry["chapter"]): str(entry["character"]).strip()
+        for entry in plan
+        if entry.get("chapter") and entry.get("character")
+    }
+
+    sched = build_story_schedule(
+        persona_id, topic, "hard_test", REPO, runtime_format="deep_book_6h",
+    )
+    by_ch_story: dict[int, set[str]] = {}
+    for (ch, _sec), slot in sched.assignments.items():
+        parts = slot.source.split(":")
+        story_id = ""
+        if len(parts) >= 4 and parts[1] == "twelve_shape":
+            story_id = parts[3]
+        elif len(parts) >= 3:
+            story_id = parts[2]
+        if story_id.startswith("story_"):
+            by_ch_story.setdefault(ch, set()).add(story_id)
+        expected_char = plan_char_by_ch.get(ch)
+        if expected_char:
+            assert expected_char in slot.text, (
+                f"chapter {ch} slot missing plan character {expected_char!r}: "
+                f"{slot.source!r}"
+            )
+    for ch, story_ids in by_ch_story.items():
+        assert len(story_ids) == 1, f"chapter {ch} mixed story arcs: {story_ids!r}"

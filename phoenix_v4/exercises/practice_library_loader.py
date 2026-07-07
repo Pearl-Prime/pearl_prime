@@ -129,6 +129,29 @@ def _introduction_for_type(exercise_type: str) -> str:
         return "Now we're going to do a practice."
 
 
+# Map exercise_type to template category (shared by both compose branches).
+_TEMPLATE_TYPE_MAP = {
+    "00_breath_regulation": "breath_regulation",
+    "01_grounding_orientation": "sensory_grounding",
+    "02_body_awareness_scan": "body_awareness",
+    "03_somatic_release_discharge": "body_awareness",
+    "04_nervous_system_downregulation": "breath_regulation",
+    "05_nervous_system_upregulation": "breath_regulation",
+    "06_vagal_stimulation_sound": "breath_regulation",
+    "07_self_contact_touch": "body_awareness",
+    "08_emotional_processing_completion": "meditations",
+    "09_embodied_intention_direction": "meditations",
+    "10_integration_return_to_baseline": "meditations",
+}
+
+
+def _template_category(ex_type: str) -> str:
+    category = _TEMPLATE_TYPE_MAP.get(ex_type, ex_type)
+    if category not in ("breath_regulation", "sensory_grounding", "body_awareness", "meditations"):
+        return "body_awareness"
+    return category
+
+
 def compose_exercise(
     exercise: dict,
     chapter_index: int,
@@ -194,6 +217,33 @@ def compose_exercise(
             introduction = ""
         aha = _get_text(components.get("aha", ""))
         integration = _get_text(components.get("integration", ""))
+        # F1 wrapper-cluster regression (2026-07-07): the library pre-composed
+        # the SAME mechanism and aha sentences into many exercises ("Not to
+        # empty your mind. Just to rest it." / "Now, notice if your breathing
+        # changed..."), so a 12-chapter book rendered near-identical wrapper
+        # paragraphs in every exercise chapter. The two flagged variation
+        # layers rotate per chapter here; bridge, description (canonical
+        # practice text) and the 2-sentence integration line stay
+        # library-owned. The content_only path (golden ch1) returns above.
+        if intro:
+            _cat = _template_category(ex_type)
+            _mechs = templates.get("intro_mechanism", {}).get(_cat) or []
+            if _mechs:
+                _off = _deterministic_index(f"{seed}:exercise:mech:{_cat}", len(_mechs))
+                intro = f"This is {name}. {_mechs[(_off + chapter_index) % len(_mechs)]}"
+        if aha:
+            try:
+                from phoenix_v4.exercises.component_assembler import _load_aha_standards
+
+                _std = _load_aha_standards()
+                _keys = sorted(
+                    k for k in _std if not k.startswith("_") and str(_std[k]).strip()
+                )
+                if _keys:
+                    _off2 = _deterministic_index(f"{seed}:exercise:aha", len(_keys))
+                    aha = str(_std[_keys[(_off2 + chapter_index) % len(_keys)]]).strip()
+            except Exception:
+                pass
         return "\n\n".join(
             p for p in (bridge, introduction, intro, description, aha, integration) if p
         ).strip()
@@ -206,25 +256,13 @@ def compose_exercise(
     bridge = bridges[chapter_index % len(bridges)]
 
     # 2. Intro = "This is {name}. {mechanism}."
-    # Map exercise_type to template category
-    type_map = {
-        "00_breath_regulation": "breath_regulation",
-        "01_grounding_orientation": "sensory_grounding",
-        "02_body_awareness_scan": "body_awareness",
-        "03_somatic_release_discharge": "body_awareness",
-        "04_nervous_system_downregulation": "breath_regulation",
-        "05_nervous_system_upregulation": "breath_regulation",
-        "06_vagal_stimulation_sound": "breath_regulation",
-        "07_self_contact_touch": "body_awareness",
-        "08_emotional_processing_completion": "meditations",
-        "09_embodied_intention_direction": "meditations",
-        "10_integration_return_to_baseline": "meditations",
-    }
-    category = type_map.get(ex_type, ex_type)
-    if category not in ("breath_regulation", "sensory_grounding", "body_awareness", "meditations"):
-        category = "body_awareness"
+    category = _template_category(ex_type)
     mechanisms = templates.get("intro_mechanism", {}).get(category, ["Your body already knows."])
-    mechanism = mechanisms[_deterministic_index(h + ":mech", len(mechanisms))]
+    # Rotation, not independent hash draws: chapters sharing a category must
+    # never repeat a mechanism line (F1 wrapper-cluster regression 2026-07-07
+    # — 4 of 12 chapters drew the same mechanism from a 12-variant pool).
+    _mech_offset = _deterministic_index(f"{seed}:exercise:mech:{category}", len(mechanisms))
+    mechanism = mechanisms[(_mech_offset + chapter_index) % len(mechanisms)]
     intro = f"This is {name}. {mechanism}"
 
     # 3. Description (the exercise text itself)
