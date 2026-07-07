@@ -235,6 +235,18 @@ def evaluate_bestseller_gate(
     # Story-substance (genre-agnostic, always on).
     findings.extend(_substance_findings(chapter_script, profile))
 
+    # Genre-native story engine (blocks shell-correct but structurally generic output).
+    try:
+        from phoenix_v4.manga.qc.genre_engine_gate import evaluate_genre_engine
+        genre_decl = None
+        if profile is not None:
+            genre_decl = getattr(profile, "genre_family", None) or getattr(profile, "genre_id", None)
+        findings.extend(
+            evaluate_genre_engine(chapter_script, genre_id=str(genre_decl or ""))
+        )
+    except Exception:
+        pass
+
     # Craft gates — only when a profile is available; promote MAJOR -> BLOCKER.
     if profile is not None:
         try:

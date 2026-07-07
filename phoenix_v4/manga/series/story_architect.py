@@ -553,18 +553,34 @@ def build_story_architecture_internal(
     Generation strategy (when *chapters* is ``None``):
       1. Try the RICH engine — derive chapters from the authored
          ``config/source_of_truth/manga_story_strategies/{genre}_strategies.yaml``
-         via ``story_strategy_loader`` (243+ combos per strategy). The Devotion
-         lane resolves to the HEALING / iyashikei register.
-      2. Fall back to the deterministic ``_BEAT_TEMPLATES`` only when no strategy
-         file exists for the (aliased) genre — preserves legacy/CI behavior.
+         via ``story_strategy_loader`` (243+ combos per strategy).
+      2. Validate against ``config/manga/story_engines.yaml`` for governed genres.
+      3. Fall back to ``_BEAT_TEMPLATES`` ONLY for non-governed legacy genres
+         (no strategy bank). Governed commercial shells hard-fail instead.
     """
+    from phoenix_v4.manga.story_engine_loader import (
+        StoryEngineError,
+        is_engine_governed,
+        resolve_engine_genre,
+        validate_architect_chapters,
+    )
+
     note = "chunk_b_deterministic"
+    engine_genre = resolve_engine_genre(genre_id)
     if chapters is None:
         chapters = _generate_strategy_chapters(series_id, arc_id, genre_id, topic)
         if chapters is not None:
             note = "strategy_driven"
+        elif is_engine_governed(genre_id):
+            raise StoryEngineError(
+                f"no strategy bank for governed genre {engine_genre!r} — "
+                f"generic _BEAT_TEMPLATES fallback blocked"
+            )
         else:
             chapters = _generate_default_chapters(series_id, arc_id, genre_id)
+
+    if is_engine_governed(genre_id):
+        validate_architect_chapters(chapters, genre_id)
 
     vessel_meta: dict[str, Any] | None = None
     mode_norm = (str(mode).strip().lower() if mode else "") or None
@@ -586,4 +602,7 @@ def build_story_architecture_internal(
     if vessel_meta is not None:
         out["mode"] = vessel_meta["mode"]
         out["mode_vessel"] = vessel_meta
+    if is_engine_governed(genre_id):
+        out["story_engine_genre"] = engine_genre
+        out["story_engine_governed"] = True
     return out
