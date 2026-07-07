@@ -179,6 +179,66 @@ SERIES = REPO / (
 )
 PILOT_MANIFEST = SERIES / "assembly_manifests/composition_grammar_pilot.yaml"
 CONTROL_MANIFEST = SERIES / "assembly_manifests/composition_grammar_control.yaml"
+DEMO_REAL_PILOT = SERIES / "assembly_manifests/demo_alarm_metaphor_6p_REAL_pilot.yaml"
+MIN_REAL_BYTES = 50_000
+
+
+def _bank_assets_real() -> bool:
+    """True when Pearl Star REAL image_bank PNGs are present (not LFS pointers)."""
+    probe = SERIES / "image_bank/L1/wall_alarm_green_idle.png"
+    return probe.is_file() and probe.stat().st_size >= MIN_REAL_BYTES
+
+
+def _manifest_g1_illegal_panels(manifest_path: Path) -> list[str]:
+    """Return panel_ids where waist_up/bust L2 × full_render L0 lacks defocus derivation."""
+    import json
+
+    manifest = yaml.safe_load(manifest_path.read_text())
+    illegal: list[str] = []
+    for panel in manifest.get("panels") or []:
+        l0_meta: dict = {}
+        l2_meta: dict | None = None
+        deriv = None
+        for lyr in panel.get("layers") or []:
+            if lyr.get("layer_class") == "L0":
+                ap = REPO / lyr["asset"]
+                sc = ap.with_suffix(".composition.json")
+                if sc.is_file():
+                    l0_meta = json.loads(sc.read_text())
+                deriv = lyr.get("derivation")
+            if lyr.get("layer_class") == "L2":
+                ap = REPO / lyr["asset"]
+                sc = ap.with_suffix(".composition.json")
+                if sc.is_file():
+                    l2_meta = json.loads(sc.read_text())
+        if not l2_meta:
+            continue
+        bg = l0_meta.get("bg_class", "full_render")
+        if deriv and deriv.get("type") == "defocus":
+            bg = "defocus_derived"
+        crop = l2_meta.get("crop_class", "")
+        if bg == "full_render" and crop in ("waist_up", "bust", "face_cu"):
+            illegal.append(panel["panel_id"])
+    return illegal
+
+
+@pytest.mark.skipif(not DEMO_REAL_PILOT.is_file(), reason="demo REAL pilot manifest missing")
+def test_demo_real_pilot_manifest_g1_legal():
+    """Hand-authored demo manifest must defocus L0 when L2 crop is bust/waist_up on full_render."""
+    illegal = _manifest_g1_illegal_panels(DEMO_REAL_PILOT)
+    assert illegal == [], f"G1-illegal panels (add L0 derivation defocus): {illegal}"
+
+
+@pytest.mark.skipif(not DEMO_REAL_PILOT.is_file(), reason="demo REAL pilot manifest missing")
+@pytest.mark.skipif(not _bank_assets_real(), reason="REAL image_bank PNGs not present")
+def test_demo_real_pilot_manifest_assembles(tmp_path):
+    """Demo REAL pilot assembles all 6 panels with grammar gates passing."""
+    out = tmp_path / "demo_real"
+    result = afb.run(DEMO_REAL_PILOT, out)
+    pngs = list(out.glob("demo_p*.png"))
+    assert len(pngs) == 6
+    assert result["gate_report"]
+    assert all(p["passed"] for p in result["gate_report"])
 
 
 @pytest.mark.skipif(not PILOT_MANIFEST.is_file(), reason="pilot manifest not present")

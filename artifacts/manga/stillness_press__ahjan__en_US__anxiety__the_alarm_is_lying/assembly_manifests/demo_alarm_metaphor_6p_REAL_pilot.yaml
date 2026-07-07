@@ -35,10 +35,13 @@ panels:
   narrator_caption: Once, my therapist said something I didn't believe.
 - panel_id: demo_p2_alarm_gaze
   archetype: character_quiet_face
+  shot_type: reaction_emotion
   layers:
   - layer_class: L0
     asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L0/L0_f3bc5f4cc41f.png
     provenance: REAL
+    derivation:
+      type: defocus
   - layer_class: L1
     asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/image_bank/L1/wall_alarm_green_idle.png
     bbox_pct:
@@ -82,10 +85,13 @@ panels:
   narrator_caption: It can't tell smoke from steam.
 - panel_id: demo_p4_watching_kettle
   archetype: shared_scene_medium
+  shot_type: establishing
   layers:
   - layer_class: L0
     asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L0/L0_2b9283d4c387.png
     provenance: REAL
+    derivation:
+      type: defocus
   - layer_class: L2
     asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L2/L2_6003bcacf3a5_alpha.png
     bbox_pct:
@@ -115,10 +121,13 @@ panels:
   - shhhh
 - panel_id: demo_p5_noticing
   archetype: character_quiet_face
+  shot_type: reaction_emotion
   layers:
   - layer_class: L0
     asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L0/L0_f3bc5f4cc41f.png
     provenance: REAL
+    derivation:
+      type: defocus
   - layer_class: L2
     asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L2/L2_2fb7ddd5e1a3_alpha.png
     bbox_pct:
@@ -135,10 +144,13 @@ panels:
     position_hint: top_right
 - panel_id: demo_p6_resolution
   archetype: character_at_table_medium
+  shot_type: establishing
   layers:
   - layer_class: L0
     asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L0/L0_2b9283d4c387.png
     provenance: REAL
+    derivation:
+      type: defocus
   - layer_class: L1
     asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/image_bank/L1/wall_alarm_green_idle.png
     bbox_pct:
