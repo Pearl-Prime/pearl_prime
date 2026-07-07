@@ -1,0 +1,173 @@
+# SERIALIZATION PROOF — ep_002 (TEACHER-MODE). One mode only: TEACHER. No music.
+# Continues "The Room Reads You Back" (stillness_press / psychological_thriller / series01).
+# Carries forward continuity state from
+# config/manga/continuity/stillness_press__en_US__psychological_thriller__series01.yaml
+# (last_episode_id: ep_001, next_episode_mandate for ep_002). This chapter does NOT let the Hadley
+# case stay closed: the tell was real but pointed at a different crime, and a bureau
+# behavioral-analytics unit ("the Ledger") arrives to compete with Mara's instrument rather than
+# confirm it. Mara does not win by overriding her alarm or by logic alone, no supernatural source
+# is introduced, and Voss never lectures the method — per the mandate's guardrails.
+
+schema_version: 1.0.0
+artifact_type: chapter_script_writer_handoff
+series_id: stillness_press__en_US__psychological_thriller__series01
+chapter_id: ep_002
+catalog_title: "The Room Reads You Back"
+title: "The Room Reads You Back — Episode 2: The Tell That Pointed Somewhere Else"
+mode: teacher                         # XOR — never music
+manga_author: Rei Calderwood
+teacher_id: ahjan                     # metadata only — never named in-story
+teacher_doctrine_anchor: body_first_not_mind
+brand_id: stillness_press
+genre: psychological_thriller
+topic: hypervigilance                 # interior — never named on the page
+locale: en_US
+available_locales: [en_US, ja_JP, zh_CN, zh_TW, ko_KR]
+
+# Teacher-mode 3-beat skeleton — NOT a repeat of ep_001's override/read/close shape:
+# wound is the closed Hadley case wobbling under a new instrument's audit; turn is Mara reading
+# her own alarm against the Ledger's confident model and finding the tell pointed at a DIFFERENT
+# crime; renewal is an open case, not a cure — the method is not vindicated, only tested again.
+mode_beats:
+  wound: page_1-2    (a new case file arrives at dawn per ep_001's close, but before Mara can open it, the bureau rolls out "the Ledger" — a behavioral-analytics unit whose model flags the closed Hadley conviction as statistically clean, the opposite read of what Mara's own alarm is telling her)
+  turn:  page_3-4    (Mara re-reads the muted Hadley footage against her own body's signal rather than the Ledger's confidence scores, and finds the throat-tell was real but keyed to a location that doesn't match the crime he was charged with)
+  renewal: page_5-6  (no clean vindication — Voss stays silent rather than lecturing the method; the case reopens instead of closing, and Mara's alarm and the Ledger's data are left as two unreconciled instruments, not one triumphant one)
+
+main_characters:
+  - id: mara
+    name: Mara Quist
+    role: >-
+      protagonist. Carried from ep_001: closed the Hadley case by reading her own chest as
+      instrument, coat unbuttoned for the first time. This chapter tests whether that trust
+      holds when the alarm and the paperwork disagree, not when they align.
+    visual_anchor: same sharp grey coat, throat now habitually unbuttoned one clasp; the notebook from ep_001 open on her desk to the hand-over-heart sketch; new habit visible — she checks her own chest before opening a file, not after.
+  - id: voss
+    name: Detective Voss
+    role: >-
+      carried from ep_001. Present for the Ledger briefing and the footage re-read. Says almost
+      nothing this chapter — benched by the software rollout per the spine, and deliberately does
+      NOT lecture the method even when directly asked to defend it.
+    visual_anchor: same rumpled tan coat, same unfinished coffee — now visibly cold in every panel he appears in, a detail no one but Mara seems to register.
+  - id: the_ledger
+    name: The Ledger
+    role: >-
+      NEW — the bureau's behavioral-analytics unit, presented as a screen, a confidence score, and
+      an unseen analyst's voice rather than a person Mara can read. Model-driven, replicable,
+      admissible — everything Mara's instrument is not (per continuity: not_yet_arrived — seeds V1).
+  - id: hadley
+    name: Hadley
+    role: >-
+      carried from ep_001 (confessed, convicted). Appears only as archived footage this chapter —
+      the muted interrogation tape, re-examined. His throat-tell is confirmed real but its target
+      is now in question, not his guilt in general.
+    visual_anchor: same footage from ep_001 — grey suit, composed hands — now paused, scrubbed, and re-scrubbed on a review monitor.
+  - id: deputy_chief_ames
+    name: Deputy Chief Ames
+    role: >-
+      NEW APPEARANCE — presents the Ledger rollout to the bullpen, treats it as validation and
+      replacement in the same breath. Not hostile to Mara, which makes the institutional pressure
+      harder to simply resist.
+
+scene_palette:
+  primary: precinct daylight — grey overcast through the blinds, flatter and more clinical than ep_001's sodium night
+  secondary: cold monitor-blue (the Ledger's confidence-score displays)
+  accent: warm desk-lamp amber (Mara's own instrument, now competing with the blue screens rather than the only light in the room)
+  turn_palette: none earned this chapter — the amber lamp is present but dimmed by the Ledger's monitors; the reward palette is withheld, matching the case staying open
+
+pages:
+  # ── WOUND: the closed case wobbles under a new instrument's audit ───────────
+  - page_id: ep002_p01
+    panels:
+      - {panel_id: ep002_001, beat_type: establishing, intent: "the new habit, honestly small — a real but incomplete change from ep_001's close",
+         scene: "Dawn precinct, overcast grey through the blinds. Mara at her desk, a new case file waiting exactly where ep_001 ended. Before she opens it, she rests two fingers on her own sternum, still, listening — a private habit now, not a performance. Nothing spikes. She opens the file."}
+      - {panel_id: ep002_002, beat_type: cost, intent: "the honest tell that trusting the alarm isn't a cure — it can also say nothing when something's wrong",
+         scene: "The new case is thin, unremarkable — a burglary report, low priority. Mara logs it without urgency, her body quiet, no signal either way. Small caption: 'Quiet didn't always mean clear. She was still learning the difference.'"}
+      - {panel_id: ep002_003, beat_type: arrival, intent: "the Ledger arrives ORGANICALLY — a bureau rollout, not a rival walking in",
+         scene: "DEPUTY CHIEF AMES calls the bullpen together around a wall-mounted monitor array, cold blue light washing the room. Ames, brisk: 'Behavioral-analytics unit is live as of this morning. We're calling it the Ledger. First case it's run — the Hadley conviction. Should all be very reassuring.'"}
+  - page_id: ep002_p02
+    panels:
+      - {panel_id: ep002_004, beat_type: dialogue, intent: "the Ledger framed as validation AND replacement in the same breath — institutional pressure introduced",
+         scene: "The monitor displays a confidence score on the Hadley conviction: 97% — clean, model-verified, no flags. Ames, to the room, not unkindly: 'This is what admissible looks like going forward. Detective Quist's read got us the confession. The Ledger confirms it was the right one.'"}
+      - {panel_id: ep002_005, beat_type: response, intent: "Mara's alarm spikes against the room's relief — the wound of the mandate begins here",
+         scene: "The room relaxes, a few quiet nods of relief. Mara's hand drifts to her own chest without her noticing she's done it — and her heart slams, once, hard, against a case everyone else in the room has just called finished. She frowns at her own reaction, unsettled."}
+      - {panel_id: ep002_006, beat_type: quiet, intent: "Voss, benched, says nothing — set-up for his silence later, not a lecture now",
+         scene: "Voss stands at the back of the bullpen, cold coffee in hand, watching the monitor rather than the room. He doesn't defend Mara's method or the Ledger's score. Someone asks him what he thinks; he just says, flat: 'Ask the tape,' and says nothing else."}
+
+  # ── TURN: reading her own alarm against the model's confidence ──────────────
+  - page_id: ep002_p03
+    panels:
+      - {panel_id: ep002_007, beat_type: action, intent: "Mara chooses her body's signal over the room's relief — not logic alone, not override",
+         scene: "Alone in the review room, amber lamp competing with the monitor's cold blue glow. Mara pulls the original muted Hadley footage rather than the Ledger's summary clip. She doesn't argue with the 97% on principle — she goes back to the actual tape because her own alarm hasn't stopped since the briefing."}
+      - {panel_id: ep002_008, beat_type: revelation, intent: "the throat-tell reconfirmed real — the instrument isn't wrong about WHAT it saw",
+         scene: "She loops the exact frame from ep_001 — Hadley's throat-swallow at the mention of the alibi location. It's there, unmistakable, exactly as it was. Her own chest, watching it, gives the same spike it gave the first time. The tell is real. That was never in question."}
+      - {panel_id: ep002_009, beat_type: response, intent: "the honest complication — real tell, wrong crime, per continuity's core mandate",
+         scene: "But this time she cross-references the location itself against the case file properly — and the address Hadley's throat flinched at isn't the burglary scene he was charged with. It's three blocks away, tied to an unsolved arson from the same week. Mara goes very still."}
+  - page_id: ep002_p04
+    panels:
+      - {panel_id: ep002_010, beat_type: revelation, intent: "BODY_FIRST_NOT_MIND, tested at serial scale — the alarm reads TRUE, not what her theory wanted",
+         scene: "Mara sits back, amber lamp on her hands. Her own read was never wrong about the tell — only her assumption about what it meant. Caption, hers: 'His body confessed. I just charged the wrong crime with it.' She doesn't panic; she writes it down, plainly, in the notebook."}
+      - {panel_id: ep002_011, beat_type: choice, intent: "she does not override the alarm to make it simpler, and she does not win by pure logic — she brings both instruments to Ames",
+         scene: "Mara brings the footage AND the Ledger's confidence score to Ames together, side by side. She doesn't discard the model to defend her instinct, and she doesn't discard her instinct to accept the model. Mara, level: 'The Ledger's right that the tell is real. It's wrong about what it confirms. Both of us need to look at the arson file.'"}
+
+  # ── RENEWAL, reopened: no vindication, an open case, two unreconciled instruments ──
+  - page_id: ep002_p05
+    panels:
+      - {panel_id: ep002_012, beat_type: quiet, intent: "institutional friction, not triumph — the case reopens uneasily, not cleanly",
+         scene: "Ames's face doesn't light up with relief this time. Reopening a 97%-confidence, publicly closed case is a cost, not a win. Ames, tight: 'You understand what re-flagging this does to the unit's numbers in its first week.' Mara: 'I understand what not flagging it does to the arson file.'"}
+      - {panel_id: ep002_013, beat_type: dialogue, intent: "Voss stays silent rather than lecturing the method — forbidden item explicitly avoided",
+         scene: "Voss, still at the back, still holding the same cold coffee, is asked directly by Ames whether Mara's read should overrule the model. He looks at Mara, then at the monitor, and says only: 'Ask the tape. Not me.' He offers no method-speech, no advice, no defense of Mara beyond that."}
+      - {panel_id: ep002_014, beat_type: rival, intent: "the Ledger established as ongoing institutional pressure, not resolved this chapter",
+         scene: "The Ledger's screen, elsewhere in the bullpen, quietly re-runs its confidence score on the Hadley file — unchanged, still 97%, indifferent to the arson cross-reference sitting three feet away on paper. Two instruments, same case, no agreement yet."}
+  - page_id: ep002_p06
+    panels:
+      - {panel_id: ep002_015, beat_type: quiet, intent: "the cost paid, the case genuinely open — no clean cure, matching the mandate's forbidden clause",
+         scene: "Evening. Mara at her desk, the arson file now open beside the closed Hadley folder, both flagged, neither resolved. She checks her own chest again — old habit, still true — and it gives her nothing new tonight, just quiet. She writes 'arson — unconfirmed' under the hand-over-heart sketch."}
+      - {panel_id: ep002_016, beat_type: revelation, intent: "small, honest progress tick — the instrument held under disagreement, never rewarded with a clean answer",
+         scene: "Close on the notebook: two small sketches now side by side — the hand over the heart, and beside it, new, a small screen icon with a question mark. Not a resolution. A second thing to watch, honestly logged as still unknown."}
+      - {panel_id: ep002_017, beat_type: close, intent: "OPEN close — propulsion into ep_003, the method tested, not proven, never cured",
+         scene: "Final wide panel: Mara alone at her desk, amber lamp the only warm light against the bullpen's blue monitor glow, the Ledger's screen still visible down the hall, still confident, still wrong about one thing it doesn't know yet. Narration box, small: 'The tape had told the truth from the first day. She was only now learning to ask it the right question.'"}
+
+craft_notes: >-
+  CONTINUITY (per
+  config/manga/continuity/stillness_press__en_US__psychological_thriller__series01.yaml
+  next_episode_mandate): must_rebreak satisfied — the Hadley conviction wobbles at serial scale
+  (tell real, crime misidentified, p3), and the chapter explicitly does not rerun a clean
+  wound->turn->renewal cure: the case ends OPEN, not solved, with two unreconciled instruments
+  (p5-6). must_plant satisfied — hadley_conviction_wobble is the chapter's central turn (p3-4,
+  throat tell re-confirmed real but keyed to an unsolved arson, not the charged burglary); the_ledger
+  is named, briefed to the bullpen, and made a visible ongoing institutional pressure (p1-2, p5).
+  Forbidden items avoided: Mara does not override her alarm and win by logic alone — she brings the
+  footage AND the model together rather than discarding either (p4); no supernatural threat is
+  introduced anywhere as a case source (the case remains a two-instrument procedural
+  disagreement); Voss does not lecture the method in caption or advice speech at any point — his
+  only lines ("Ask the tape," "Ask the tape. Not me.") explicitly redirect rather than explain
+  (p2, p5).
+  SERIALIZATION LAW: does not replay ep_001's override(logic)->read(footage)->close(confession)
+  shape. This chapter's wound is institutional (a model validating what her body still flags as
+  wrong), not a personal alarm to override; its turn is cross-referencing two instruments rather
+  than one triumphant read; its close reopens a closed case rather than confessing a new suspect —
+  per SERIAL_ENGINE_SPINES_5VOL.md §3 shell law: thriller escalates by adversary competence and
+  method inversion, here inverted onto the METHOD ITSELF (the Ledger) rather than a human rival.
+  GENRE AUTHORITY: per specs/MANGA_GENRE_AGENT_SPEC.md psychological_thriller / seinen conventions;
+  wrapper per MANGA_MODE_WRAPPER_DESIGN.md / GENRE_VESSEL_SKETCHES.md, carried forward from ep_001.
+  PACING CONTRACT: config/manga/manga_pacing_by_genre.yaml mystery family (words_per_page 80-140,
+  words_per_balloon_max 32, silent_panel_ratio 0.20-0.35 — held on p3/p6 review-room and desk
+  panels, narration_tolerance generous — used at open/turn/close per ep_001's precedent, sfx_usage
+  minimal_plus_dread_coded, page_turn_triggers used: hidden_truth_glimpse p3, ambiguous_line p5,
+  dread_reveal p4).
+  SHELL TRACEABILITY: rival/pressure state escalated per continuity rail — the_ledger converts
+  from spine-only "not_yet_arrived" seed to a fully briefed, screen-embodied institutional
+  pressure exactly as the mandate specifies; hadley converts from a closed, confessed case to an
+  open procedural wobble, still off-page as a person (archival footage only), preserving his
+  ep_001 confession while complicating what it actually proves.
+
+wrapper_note: >-
+  Teacher-mode only. The doctrine (the body's signal is data, not malfunction; it knows before the
+  mind) is never a self-help line and Voss never states it this chapter — his two lines both
+  redirect Mara back to the evidence rather than explaining the method. No musician, no song, no
+  sound-motif. If this were music-mode it would carry the Ledger's cold monitor-blue as a
+  recurring dissonant tone under Mara's own steady heartbeat-motif rather than Ames's or Voss's
+  spoken lines — it is not; mode XOR holds. Interior topic (hypervigilance / a nervous system on
+  high alert) never named on the page — it is felt as the gap between an alarm the room has
+  decided to stop listening to and an alarm that turns out to still be right, just about something
+  else.
