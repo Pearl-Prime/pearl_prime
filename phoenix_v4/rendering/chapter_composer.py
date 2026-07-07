@@ -1323,25 +1323,58 @@ def _derive_thesis(
         topic_overlay = _load_chapter_thesis_topics()  # topics block
         intent_key = chapter_intent.lower().replace("-", "_").replace(" ", "_")
         engine_key = _normalize_thesis_engine(engine_type)
-        # Precedence: topic override → engine baseline.
-        topic_block = ((topic_overlay.get(topic_id) or {}).get(intent_key)) or {}
-        intent_block = bank.get(intent_key) or {}
-        thesis = topic_block.get(engine_key) or intent_block.get(engine_key)
-        if thesis:
-            return str(thesis).strip()
-        # Legacy engine aliases (watcher ↔ burnout, false_alarm ↔ anxiety) — kept
-        # so older callers passing burnout/anxiety slugs still resolve.
-        engine_aliases = {
-            "burnout": "watcher",
-            "watcher": "burnout",
-            "anxiety": "false_alarm",
-            "false_alarm": "anxiety",
-        }
-        alt_engine = engine_aliases.get(engine_key, "")
-        if alt_engine:
-            thesis = topic_block.get(alt_engine) or intent_block.get(alt_engine)
+        topic_block_root = topic_overlay.get(topic_id) or {}
+        intent_block_root = bank
+
+        def _resolve_bank_thesis(ik: str) -> str:
+            topic_block = (topic_block_root.get(ik)) or {}
+            intent_block = intent_block_root.get(ik) or {}
+            thesis = topic_block.get(engine_key) or intent_block.get(engine_key)
             if thesis:
                 return str(thesis).strip()
+            engine_aliases = {
+                "burnout": "watcher",
+                "watcher": "burnout",
+                "anxiety": "false_alarm",
+                "false_alarm": "anxiety",
+            }
+            alt_engine = engine_aliases.get(engine_key, "")
+            if alt_engine:
+                thesis = topic_block.get(alt_engine) or intent_block.get(alt_engine)
+                if thesis:
+                    return str(thesis).strip()
+            return ""
+
+        # Try the chapter's intent first, then rotate through sibling intents for
+        # the same emotional_job when thesis_memory reports book-level reuse.
+        from phoenix_v4.planning.book_structure_plan import JOB_TO_INTENT
+
+        job = _normalize_emotional_job(emotional_job)
+        intent_candidates = [intent_key]
+        for alt in JOB_TO_INTENT.get(job, []):
+            ak = alt.lower().replace("-", "_").replace(" ", "_")
+            if ak not in intent_candidates:
+                intent_candidates.append(ak)
+        for ik in intent_candidates:
+            thesis = _resolve_bank_thesis(ik)
+            if not thesis:
+                continue
+            if thesis_memory is not None and thesis_memory.phrase_used_book(thesis):
+                continue
+            if thesis_memory is not None:
+                thesis_memory.register(
+                    chapter_index=chapter_index,
+                    phrase=thesis,
+                    shape=ik,
+                    stems=[ik],
+                    roots=[engine_key],
+                )
+            return thesis
+        # All bank candidates exhausted by memory — return the primary intent thesis
+        # anyway so the chapter still has a claim (never silent-fail).
+        primary = _resolve_bank_thesis(intent_key)
+        if primary:
+            return primary
 
     # 3. mechanism_thesis_families.yaml lookup by emotional_job
     job = _normalize_emotional_job(emotional_job)
@@ -3764,6 +3797,7 @@ def compose_from_enriched_book(
             angle_id=str(_spine_ctx.get("angle_id") or ""),
             angle_layer_by_chapter=dict(_spine_ctx.get("angle_layer_by_chapter") or {}),
             twelve_shape_flagship=_twelve_shape_flagship,
+            engine_type=str(_spine_ctx.get("engine") or "").strip(),
         )
         ch_body = post_compose_sanitize_chapter(
             ch_body,

@@ -1491,9 +1491,11 @@ def _run_spine_pipeline_mode(
         # imperative/timing tokens (F7-safe). Strengthens OUTPUT only; the register gate remains arbiter.
         from phoenix_v4.rendering.register_output_strengthen import (
             break_pedagogical_cadence_repetition as _final_f6_break,
+            suppress_unbudgeted_template_cadence as _final_cadence_suppress,
         )
 
         prose = _final_f6_break(prose, seed=f"{seed}:pre_gate_f6")
+        prose = _final_cadence_suppress(prose)
 
         _f7_preservation_violations = verify_f7_exercise_preservation(
             prose,

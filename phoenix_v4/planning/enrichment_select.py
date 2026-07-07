@@ -266,6 +266,8 @@ def _pick_primary_index_unseen(
     seed_key: str,
     label: str,
     seen_bodies: Any,
+    *,
+    recent_families: Optional[List[str]] = None,
 ) -> int:
     """Least-used index whose body has NOT been used book-wide.
 
@@ -276,12 +278,17 @@ def _pick_primary_index_unseen(
     ``seen_bodies`` is falsy / the pool is exhausted), falls back to the plain
     ``pick_index`` anchor — so behavior is unchanged when no unused body exists,
     and both determinism and the never-empty contract are preserved.
+
+    When ``recent_families`` is supplied, candidates whose ``collision_family``
+  metadata matches a family used in either of the previous two chapters are
+    skipped when any non-penalized alternative exists (ACT-007 adjacency).
     """
     if not pool:
         return 0
     if not seen_bodies:
         return rotation.pick_index(pool, seed_key)
     order = rotation.least_used_order(pool, seed_key, label)
+    fallback_idx: Optional[int] = None
     for i in order:
         body = str(pool[i].get("content") or "")
         if not body.strip():
@@ -289,7 +296,14 @@ def _pick_primary_index_unseen(
         norm = _norm_ws(body)
         if norm in seen_bodies or _seen_similar(seen_bodies, body):
             continue
+        meta = pool[i].get("metadata") if isinstance(pool[i].get("metadata"), dict) else {}
+        if recent_families and _collision_family_penalty(meta, recent_families) < 0:
+            if fallback_idx is None:
+                fallback_idx = i
+            continue
         return i
+    if fallback_idx is not None:
+        return fallback_idx
     # Every candidate already used book-wide → keep the deterministic anchor.
     return rotation.pick_index(pool, seed_key)
 
@@ -318,6 +332,7 @@ def _pick_hook_index_unique(
     *,
     contract: Optional[dict] = None,
     engine: str = "",
+    recent_families: Optional[List[str]] = None,
 ) -> int:
     """HOOK primary pick — never reuse the same hook body twice per book (Part F)."""
     if not pool:
@@ -330,6 +345,7 @@ def _pick_hook_index_unique(
     order = rotation.least_used_order(pool, seed_key, label)
     best_idx: Optional[int] = None
     best_score = float("-inf")
+    penalized_fallback: Optional[int] = None
     for i in order:
         body = str(pool[i].get("content") or "")
         if not body.strip():
@@ -339,16 +355,31 @@ def _pick_hook_index_unique(
             continue
         if seen_bodies and (norm in seen_bodies or _seen_similar(seen_bodies, body)):
             continue
+        meta = pool[i].get("metadata") if isinstance(pool[i].get("metadata"), dict) else {}
+        cf_pen = (
+            _collision_family_penalty(meta, recent_families or [])
+            if recent_families
+            else 0.0
+        )
         score = -float(rotation.book_count(str(pool[i].get("atom_id") or "")))
+        score += cf_pen
         if contract:
             score -= banned_phrase_penalty(body, contract)
             score += engine_metaphor_bonus(body, contract, engine)
+        if cf_pen < 0:
+            if penalized_fallback is None:
+                penalized_fallback = i
+            continue
         if score > best_score:
             best_score = score
             best_idx = i
-    if best_idx is not None:
+    if best_idx is not None and best_score > float("-inf"):
         return best_idx
-    return _pick_primary_index_unseen(rotation, pool, seed_key, label, seen_bodies)
+    if penalized_fallback is not None:
+        return penalized_fallback
+    return _pick_primary_index_unseen(
+        rotation, pool, seed_key, label, seen_bodies, recent_families=recent_families
+    )
 
 
 # ---------------------------------------------------------------------------
@@ -496,6 +527,26 @@ def _collision_family_penalty(
     if cf in recent_families:
         return -0.20
     return 0.0
+
+
+def _recent_collision_families(
+    chapter_families: List[List[str]],
+    chapter_index0: int,
+    *,
+    window: int = 2,
+) -> List[str]:
+    """Flatten collision_family values from the prior ``window`` chapters."""
+    out: List[str] = []
+    for prev in chapter_families[max(0, chapter_index0 - window) : chapter_index0]:
+        out.extend(prev)
+    return out
+
+
+def _atom_collision_family(atom: Dict[str, Any]) -> str:
+    meta = atom.get("metadata")
+    if isinstance(meta, dict):
+        return str(meta.get("collision_family") or "").strip()
+    return ""
 
 
 def _try_content_bank_fallback(
@@ -1425,6 +1476,20 @@ def _try_angle_callback(
                     f"ANGLE_CALLBACK: parent chain {candidate!r} L{layer} for {aid!r}"
                 )
                 return body, "angle_atom_parent", f"angle_cb_parent:{candidate}:L{layer}"
+    fb = (_load_angle_journey_fallback().get("generic") or {}).get("angle_callback") or ""
+    layers = list(meta.get("layer_progression") or [])
+    phase = layers[layer - 1] if 0 < layer <= len(layers) else f"layer_{layer}"
+    prior = layers[layer - 2] if layer >= 2 and layer - 2 < len(layers) else "the opening angle"
+    tpl = str(fb).format(
+        layer=layer,
+        phase=phase,
+        prior_assertion=prior,
+    ).strip()
+    if tpl:
+        fallback_warnings.append(
+            f"ANGLE_CALLBACK: planner-template fallback L{layer} for {aid!r}"
+        )
+        return tpl, "angle_template", f"angle_cb_tpl:{aid}:L{layer}"
     fallback_warnings.append(
         f"ANGLE_CALLBACK: no authored atom L{layer} for {aid!r}; fail-closed"
     )
@@ -2265,6 +2330,9 @@ def select_enrichment(
         reg_counters: Dict[str, int] = defaultdict(int)
 
         chapter_index0 = bm_ch.number - 1
+        _recent_families = _recent_collision_families(
+            _chapter_collision_families, chapter_index0, window=2
+        )
         slots_out: List[EnrichedSlot] = []
         ch_breakdown: Dict[str, int] = defaultdict(int)
         ch_words = 0
@@ -2691,15 +2759,20 @@ def select_enrichment(
                                     _book_used_hooks,
                                     contract=_identity_contract,
                                     engine=engine,
+                                    recent_families=_recent_families,
                                 )
                             else:
                                 _ap_idx = _pick_primary_index_unseen(
                                     _persona_rotation, _ap_pool,
                                     f"{seed_key}:persona", "persona",
                                     _book_seen_bodies,
+                                    recent_families=_recent_families,
                                 )
                             _ap_atom = _ap_pool[_ap_idx]
                             _ap_content = str(_ap_atom.get("content") or "").strip()
+                            _cf_atom = _atom_collision_family(_ap_atom)
+                            if _cf_atom:
+                                match_scores["_collision_family"] = _cf_atom
                             if _ap_content:
                                 _add_pieces.append(_ap_content)
                                 _add_sources.append("persona_atom")
