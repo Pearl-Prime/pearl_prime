@@ -1105,6 +1105,7 @@ Layered selection with override logic. V1 picks the winner; V2 scores the same c
 - [docs/UNIFIED_PERSONAS_BOOK_READINESS_ANALYSIS.md](./UNIFIED_PERSONAS_BOOK_READINESS_ANALYSIS.md) — Unified personas book readiness analysis
 - [docs/BESTSELLER_STRUCTURES.md](./BESTSELLER_STRUCTURES.md) — 12 bestseller narrative structures: beat orders, slot mappings, phase assignments, THREAD/PERMISSION guidance; dev uses for structure assignment in planner; writers use for chapter shape
 - [docs/CHAPTER_THESIS_BANK.md](./CHAPTER_THESIS_BANK.md) — Canonical thesis sentences for all 20 chapter intents × 7 engine types; first-half 9 intents + 11 new second-half deepening intents; THREAD sentences per intent; quick-reference engine × intent tables
+- [specs/ACCENT_BEATS_SYSTEM_SPEC.md](../specs/ACCENT_BEATS_SYSTEM_SPEC.md) — **SPECCED (parked).** Planner-placed sparse accents (quote, encouragement, reflection question, affirmation, troubleshooting, cited evidence); framing-inside-atom; PERMISSION/mantra reuse; QUOTE + CITED_EVIDENCE bank programs; GATE: `flagship-read-approved`
 
 ---
 
