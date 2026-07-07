@@ -1,0 +1,155 @@
+# Quote bank — financial_anxiety / en_US — Wave 1
+# status: unwired | KNOWN_UNWIRED: accent_banks/quotes/
+status: unwired
+topic: financial_anxiety
+locale_cluster: en_US
+wave: 1
+quote_count: 10
+quotes:
+- quote_id: quote_financial_en_us_franklin_wealth_v01
+  text: An investment in knowledge pays the best interest.
+  text_en: An investment in knowledge pays the best interest.
+  author: Benjamin Franklin
+  primary_source: Poor Richard's Almanack (1758)
+  verified_via: Franklin Almanack 1758
+  public_domain: y
+  topic_keys:
+  - financial_anxiety
+  - adhd_focus
+  doctrine_keys:
+  - COMPOSITE_DOCTRINE v01
+  secular_safe: true
+  sensitivity_notes: ''
+  position_fit: either
+- quote_id: quote_financial_en_us_franklin_creditor_v01
+  text: Rather go to bed supperless, than rise in debt.
+  text_en: Rather go to bed supperless, than rise in debt.
+  author: Benjamin Franklin
+  primary_source: Poor Richard's Almanack (1758)
+  verified_via: Franklin Almanack
+  public_domain: y
+  topic_keys:
+  - financial_anxiety
+  doctrine_keys:
+  - COMPOSITE_DOCTRINE v02
+  secular_safe: true
+  sensitivity_notes: ''
+  position_fit: opener
+- quote_id: quote_financial_en_us_paine_rights_v01
+  text: The harder the conflict, the more glorious the triumph.
+  text_en: The harder the conflict, the more glorious the triumph.
+  author: Thomas Paine
+  primary_source: The American Crisis, No. 1 (1776)
+  verified_via: Paine 1776
+  public_domain: y
+  topic_keys:
+  - financial_anxiety
+  - anxiety
+  doctrine_keys:
+  - COMPOSITE_DOCTRINE v05
+  secular_safe: true
+  sensitivity_notes: ''
+  position_fit: closer
+- quote_id: quote_financial_en_us_franklin_diligence_v01
+  text: Diligence is the mother of good luck.
+  text_en: Diligence is the mother of good luck.
+  author: Benjamin Franklin
+  primary_source: Poor Richard's Almanack (1757)
+  verified_via: Franklin Almanack
+  public_domain: y
+  topic_keys:
+  - financial_anxiety
+  doctrine_keys:
+  - COMPOSITE_DOCTRINE v01
+  secular_safe: true
+  sensitivity_notes: ''
+  position_fit: either
+- quote_id: quote_financial_en_us_franklin_industry_v01
+  text: Industry pays debts, while despair increaseth them.
+  text_en: Industry pays debts, while despair increaseth them.
+  author: Benjamin Franklin
+  primary_source: Poor Richard's Almanack (1758)
+  verified_via: Franklin Almanack
+  public_domain: y
+  topic_keys:
+  - financial_anxiety
+  doctrine_keys:
+  - COMPOSITE_DOCTRINE v02
+  secular_safe: true
+  sensitivity_notes: ''
+  position_fit: opener
+- quote_id: quote_financial_en_us_emerson_compensation_v02
+  text: Every surplus reveals a deficit elsewhere.
+  text_en: Every surplus reveals a deficit elsewhere.
+  author: Ralph Waldo Emerson
+  primary_source: 'Essays: First Series, ''Compensation'' (1841) — thematic'
+  verified_via: Emerson Compensation
+  public_domain: y
+  topic_keys:
+  - financial_anxiety
+  doctrine_keys:
+  - COMPOSITE_DOCTRINE v03
+  secular_safe: true
+  sensitivity_notes: Thematic from verified Compensation essay
+  position_fit: closer
+- quote_id: quote_financial_en_us_franklin_poor_richard_v01
+  text: Beware of little expenses; a small leak will sink a great ship.
+  text_en: Beware of little expenses; a small leak will sink a great ship.
+  author: Benjamin Franklin
+  primary_source: Poor Richard's Almanack (1758)
+  verified_via: Franklin 1758 Almanack; PD
+  public_domain: y
+  topic_keys:
+  - financial_anxiety
+  - financial_stress
+  doctrine_keys:
+  - COMPOSITE_DOCTRINE v01
+  secular_safe: true
+  sensitivity_notes: ''
+  position_fit: either
+- quote_id: quote_financial_en_us_thoreau_economy_v01
+  text: A man is rich in proportion to the number of things which he can afford to let alone.
+  text_en: A man is rich in proportion to the number of things which he can afford to let alone.
+  author: Henry David Thoreau
+  primary_source: Walden, Chapter 1 'Economy' (1854)
+  verified_via: Thoreau Walden ch.1; PD
+  public_domain: y
+  topic_keys:
+  - financial_anxiety
+  - burnout
+  doctrine_keys:
+  - COMPOSITE_DOCTRINE v03
+  secular_safe: true
+  sensitivity_notes: ''
+  position_fit: closer
+- quote_id: quote_financial_en_us_paine_common_sense_v01
+  text: These are the times that try men's souls.
+  text_en: These are the times that try men's souls.
+  author: Thomas Paine
+  primary_source: The American Crisis, No. 1 (1776)
+  verified_via: Paine 1776; PD
+  public_domain: y
+  topic_keys:
+  - financial_anxiety
+  - anxiety
+  - courage
+  doctrine_keys:
+  - COMPOSITE_DOCTRINE v01
+  secular_safe: true
+  sensitivity_notes: ''
+  position_fit: opener
+- quote_id: quote_financial_en_us_irving_wolfert_v01
+  text: Little minds are tamed and subdued by misfortune; but great minds rise above them.
+  text_en: Little minds are tamed and subdued by misfortune; but great minds rise above them.
+  author: Washington Irving
+  primary_source: Bracebridge Hall (1822)
+  verified_via: Irving 1822
+  public_domain: y
+  topic_keys:
+  - financial_anxiety
+  - imposter_syndrome
+  doctrine_keys:
+  - COMPOSITE_DOCTRINE v02
+  secular_safe: true
+  sensitivity_notes: ''
+  position_fit: either

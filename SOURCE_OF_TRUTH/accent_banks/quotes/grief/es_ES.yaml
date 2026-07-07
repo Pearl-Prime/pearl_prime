@@ -1,0 +1,198 @@
+# Quote bank — grief / es_ES — Wave 2
+# status: unwired | KNOWN_UNWIRED: accent_banks/quotes/
+status: unwired
+topic: grief
+locale_cluster: es_ES
+wave: 2
+quote_count: 12
+quotes:
+- quote_id: quote_w2_univ_seneca_letter_99_v01
+  text: Sometimes even to live is an act of courage.
+  text_en: Sometimes even to live is an act of courage.
+  author: Seneca
+  primary_source: Moral Letters to Lucilius, Letter 78.2
+  verified_via: Seneca Ep. 78.2; Loeb Gummere
+  public_domain: y
+  topic_keys:
+  - depression
+  - grief
+  - courage
+  doctrine_keys:
+  - COMPOSITE_DOCTRINE v01
+  secular_safe: true
+  sensitivity_notes: Endurance/consolation without religious framing
+  position_fit: opener
+- quote_id: quote_w2_univ_marcus_meditations_05_10_v01
+  text: Nature which governs the whole will soon change all things which you see, and out of their substance
+    make other things.
+  text_en: Nature which governs the whole will soon change all things which you see, and out of their
+    substance make other things.
+  author: Marcus Aurelius
+  primary_source: Meditations V.13 (tr. Long 1862)
+  verified_via: Meditations 5.13
+  public_domain: y
+  topic_keys:
+  - grief
+  - depression
+  - somatic_healing
+  doctrine_keys:
+  - COMPOSITE_DOCTRINE v03
+  secular_safe: true
+  sensitivity_notes: Nature/change cycle — secular consolation
+  position_fit: either
+- quote_id: quote_w2_univ_seneca_letter_104_v02
+  text: It is a rough road that leads to the heights of greatness.
+  text_en: It is a rough road that leads to the heights of greatness.
+  author: Seneca
+  primary_source: Moral Letters to Lucilius, Letter 104.10
+  verified_via: Seneca Ep. 104
+  public_domain: y
+  topic_keys:
+  - courage
+  - grief
+  - depression
+  doctrine_keys:
+  - COMPOSITE_DOCTRINE v05
+  secular_safe: true
+  sensitivity_notes: ''
+  position_fit: closer
+- quote_id: quote_w2_univ_epictetus_enchiridion_16_v01
+  text: When you see anyone weeping in grief, take care that the appearance does not hurry you away with
+    it.
+  text_en: When you see anyone weeping in grief, take care that the appearance does not hurry you away
+    with it.
+  author: Epictetus
+  primary_source: Enchiridion §16 (tr. Carter 1758)
+  verified_via: Epict. Ench. 16
+  public_domain: y
+  topic_keys:
+  - grief
+  - compassion_fatigue
+  - boundaries
+  doctrine_keys:
+  - COMPOSITE_DOCTRINE v02
+  secular_safe: true
+  sensitivity_notes: ''
+  position_fit: either
+- quote_id: quote_w2_univ_marcus_meditations_06_15_v01
+  text: The universe is change; our life is what our thoughts make it.
+  text_en: The universe is change; our life is what our thoughts make it.
+  author: Marcus Aurelius
+  primary_source: Meditations IV.3 (tr. Long)
+  verified_via: Meditations 4.3
+  public_domain: y
+  topic_keys:
+  - grief
+  - depression
+  - mindfulness
+  doctrine_keys:
+  - COMPOSITE_DOCTRINE v01
+  secular_safe: true
+  sensitivity_notes: Seasons/change — grief/depression consolation
+  position_fit: closer
+- quote_id: quote_w2_univ_seneca_consolation_v01
+  text: Light griefs are loquacious, but the great are dumb.
+  text_en: Light griefs are loquacious, but the great are dumb.
+  author: Seneca
+  primary_source: Troades 510 / Consolatio ad Marciam themes (Seneca grief corpus)
+  verified_via: Seneca Consolatio ad Marciam; Euripides Troades via Seneca
+  public_domain: y
+  topic_keys:
+  - grief
+  - depression
+  doctrine_keys:
+  - COMPOSITE_DOCTRINE v02
+  secular_safe: true
+  sensitivity_notes: Secular grief consolation
+  position_fit: opener
+- quote_id: quote_w2_univ_marcus_meditations_09_06_v01
+  text: When you arise in the morning, think of what a precious privilege it is to be alive.
+  text_en: When you arise in the morning, think of what a precious privilege it is to be alive.
+  author: Marcus Aurelius
+  primary_source: Meditations IX.6
+  verified_via: Meditations 9.6
+  public_domain: y
+  topic_keys:
+  - depression
+  - grief
+  - self_worth
+  doctrine_keys:
+  - COMPOSITE_DOCTRINE v05
+  secular_safe: true
+  sensitivity_notes: ''
+  position_fit: opener
+- quote_id: quote_w2_univ_seneca_letter_107_v01
+  text: Many things have fallen only to rise higher.
+  text_en: Many things have fallen only to rise higher.
+  author: Seneca
+  primary_source: Moral Letters to Lucilius, Letter 107.11
+  verified_via: Seneca Ep. 107
+  public_domain: y
+  topic_keys:
+  - grief
+  - depression
+  - courage
+  doctrine_keys:
+  - COMPOSITE_DOCTRINE v05
+  secular_safe: true
+  sensitivity_notes: Endurance/nature cycle
+  position_fit: closer
+- quote_id: quote_w2_grief_es_machado_v01
+  text: Caminante, no hay camino, se hace camino al andar.
+  text_en: Traveler, there is no path; the path is made by walking.
+  author: Antonio Machado
+  primary_source: Proverbios y cantares XXIX (1912)
+  verified_via: Machado 1912
+  public_domain: y
+  topic_keys:
+  - grief
+  - depression
+  doctrine_keys:
+  - COMPOSITE_DOCTRINE v05
+  secular_safe: true
+  sensitivity_notes: Endurance
+  position_fit: closer
+- quote_id: quote_w2_fill_univ_seneca_letter_107_v01_compassion_fatigue
+  text: Many things have fallen only to rise higher.
+  text_en: Many things have fallen only to rise higher.
+  author: Seneca
+  primary_source: Moral Letters to Lucilius, Letter 107.11
+  verified_via: Seneca Ep. 107
+  public_domain: y
+  topic_keys:
+  - compassion_fatigue
+  - depression
+  - grief
+  doctrine_keys: &id001
+  - COMPOSITE_DOCTRINE v05
+  secular_safe: true
+  sensitivity_notes: ''
+  position_fit: closer
+- quote_id: quote_w2_fill_univ_seneca_letter_107_v01_depression
+  text: Many things have fallen only to rise higher.
+  text_en: Many things have fallen only to rise higher.
+  author: Seneca
+  primary_source: Moral Letters to Lucilius, Letter 107.11
+  verified_via: Seneca Ep. 107
+  public_domain: y
+  topic_keys:
+  - depression
+  - grief
+  doctrine_keys: *id001
+  secular_safe: true
+  sensitivity_notes: ''
+  position_fit: closer
+- quote_id: quote_w2_fill_univ_seneca_letter_107_v01_grief
+  text: Many things have fallen only to rise higher.
+  text_en: Many things have fallen only to rise higher.
+  author: Seneca
+  primary_source: Moral Letters to Lucilius, Letter 107.11
+  verified_via: Seneca Ep. 107
+  public_domain: y
+  topic_keys:
+  - grief
+  - depression
+  doctrine_keys: *id001
+  secular_safe: true
+  sensitivity_notes: ''
+  position_fit: closer

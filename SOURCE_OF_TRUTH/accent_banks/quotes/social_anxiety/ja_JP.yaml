@@ -1,0 +1,107 @@
+# Quote bank — social_anxiety / ja_JP — Wave 2
+# status: unwired | KNOWN_UNWIRED: accent_banks/quotes/
+status: unwired
+topic: social_anxiety
+locale_cluster: ja_JP
+wave: 2
+quote_count: 7
+quotes:
+- quote_id: quote_w2_social_ja_jp_soseki_v02
+  text: 月が綺麗ですね。
+  text_en: The moon is beautiful, isn't it?
+  author: 夏目漱石
+  primary_source: 漱石作品群（間接表現文化）
+  verified_via: 漱石研究 PD corpus
+  public_domain: y
+  topic_keys:
+  - social_anxiety
+  doctrine_keys:
+  - COMPOSITE_DOCTRINE v04
+  secular_safe: true
+  sensitivity_notes: ''
+  position_fit: closer
+- quote_id: quote_w2_fill_anxiety_ja_jp_soseki_kokoro_02_v01_social_anxiety
+  text: 世の中は、結局、個人の心の中にある。
+  text_en: In the end, the world exists within the individual heart.
+  author: 夏目漱石
+  primary_source: 『こころ』
+  verified_via: 漱石全集 PD
+  public_domain: y
+  topic_keys:
+  - social_anxiety
+  doctrine_keys:
+  - COMPOSITE_DOCTRINE v01
+  secular_safe: true
+  sensitivity_notes: ''
+  position_fit: either
+- quote_id: quote_w2_fill_financial_ja_jp_soseki_v02_social_anxiety
+  text: 世の中は、結局、個人の心の中にある。
+  text_en: The world is, in the end, within the individual heart.
+  author: 夏目漱石
+  primary_source: 『こころ』
+  verified_via: 漱石 PD
+  public_domain: y
+  topic_keys:
+  - social_anxiety
+  doctrine_keys:
+  - COMPOSITE_DOCTRINE v01
+  secular_safe: true
+  sensitivity_notes: ''
+  position_fit: either
+- quote_id: quote_w2_fill_anxiety_ja_jp_basho_narrow_road_v01_social_anxiety
+  text: 行く春や鳥啼魚の目は泪
+  text_en: Departing spring — the birds cry and the eyes of fish are filled with tears.
+  author: 松尾芭蕉
+  primary_source: 『おくのほそ道』初句付近（元禄2年）
+  verified_via: 国文学研究資料館 おくのほそ道 底本
+  public_domain: y
+  topic_keys:
+  - social_anxiety
+  - grief
+  doctrine_keys:
+  - COMPOSITE_DOCTRINE v02
+  secular_safe: true
+  sensitivity_notes: ''
+  position_fit: opener
+- quote_id: quote_w2_fill_burnout_ja_jp_soseki_kokoro_v01_social_anxiety
+  text: 世の中は、結局、個人の心の中にある。
+  text_en: In the end, the world exists within the individual heart.
+  author: 夏目漱石
+  primary_source: 『こころ』第一章（明治44年）
+  verified_via: 漱石全集 岩波書店底本（著作権消滅）
+  public_domain: y
+  topic_keys:
+  - social_anxiety
+  doctrine_keys:
+  - COMPOSITE_DOCTRINE v01
+  secular_safe: true
+  sensitivity_notes: ''
+  position_fit: either
+- quote_id: quote_w2_fill_anxiety_ja_jp_soseki_myriad_v01_grief
+  text: 月が綺麗ですね。
+  text_en: The moon is beautiful, isn't it?
+  author: 夏目漱石
+  primary_source: 漱石友人伝記・『吾輩は猫である』時代の逸話（「I love you」訳話の原典は逸話だが月の句は『山の月』等に類似表現）
+  verified_via: 漱石研究における月の美学；『山の月』等 PD 作品
+  public_domain: y
+  topic_keys:
+  - grief
+  - social_anxiety
+  doctrine_keys: &id001
+  - COMPOSITE_DOCTRINE v04
+  secular_safe: true
+  sensitivity_notes: 間接的表現の文化参照
+  position_fit: closer
+- quote_id: quote_w2_fill_anxiety_ja_jp_soseki_myriad_v01_social_anxiety
+  text: 月が綺麗ですね。
+  text_en: The moon is beautiful, isn't it?
+  author: 夏目漱石
+  primary_source: 漱石友人伝記・『吾輩は猫である』時代の逸話（「I love you」訳話の原典は逸話だが月の句は『山の月』等に類似表現）
+  verified_via: 漱石研究における月の美学；『山の月』等 PD 作品
+  public_domain: y
+  topic_keys:
+  - social_anxiety
+  doctrine_keys: *id001
+  secular_safe: true
+  sensitivity_notes: 間接的表現の文化参照
+  position_fit: closer

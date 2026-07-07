@@ -1,0 +1,94 @@
+# Quote bank — social_anxiety / zh_CN — Wave 2
+# status: unwired | KNOWN_UNWIRED: accent_banks/quotes/
+status: unwired
+topic: social_anxiety
+locale_cluster: zh_CN
+wave: 2
+quote_count: 6
+quotes:
+- quote_id: quote_w2_social_zh_cn_zhuangzi_v01
+  text: 子非鱼，安知鱼之乐？
+  text_en: You are not a fish — how can you know the fish's joy?
+  author: 庄子
+  primary_source: 《庄子·秋水》
+  verified_via: ctext.org
+  public_domain: y
+  topic_keys:
+  - social_anxiety
+  - boundaries
+  doctrine_keys:
+  - COMPOSITE_DOCTRINE v01
+  secular_safe: true
+  sensitivity_notes: ''
+  position_fit: opener
+- quote_id: quote_w2_fill_anxiety_zh_cn_confucius_analects_12_v01_boundaries
+  text: 己所不欲，勿施于人。
+  text_en: What you do not want done to yourself, do not do to others.
+  author: 孔子
+  primary_source: 《论语·颜渊》
+  verified_via: ctext.org 论语 颜渊
+  public_domain: y
+  topic_keys:
+  - boundaries
+  - social_anxiety
+  doctrine_keys: &id001
+  - COMPOSITE_DOCTRINE v04
+  secular_safe: true
+  sensitivity_notes: ''
+  position_fit: either
+- quote_id: quote_w2_fill_anxiety_zh_cn_confucius_analects_12_v01_social_anxiety
+  text: 己所不欲，勿施于人。
+  text_en: What you do not want done to yourself, do not do to others.
+  author: 孔子
+  primary_source: 《论语·颜渊》
+  verified_via: ctext.org 论语 颜渊
+  public_domain: y
+  topic_keys:
+  - social_anxiety
+  - boundaries
+  doctrine_keys: *id001
+  secular_safe: true
+  sensitivity_notes: ''
+  position_fit: either
+- quote_id: quote_w2_fill_imposter_zh_cn_laozi_33_v01_social_anxiety
+  text: 知人者智，自知者明。
+  text_en: Knowing others is intelligence; knowing yourself is clarity.
+  author: 老子
+  primary_source: 《道德经》第三十三章
+  verified_via: ctext.org 道德经 33
+  public_domain: y
+  topic_keys:
+  - social_anxiety
+  doctrine_keys:
+  - COMPOSITE_DOCTRINE v01
+  secular_safe: true
+  sensitivity_notes: ''
+  position_fit: opener
+- quote_id: quote_w2_fill_imposter_zh_cn_zhuangzi_v03_social_anxiety
+  text: 子非鱼，安知鱼之乐？
+  text_en: You are not a fish — how can you know the fish's joy?
+  author: 庄子
+  primary_source: 《庄子·秋水》
+  verified_via: ctext.org 庄子 秋水
+  public_domain: y
+  topic_keys:
+  - social_anxiety
+  doctrine_keys:
+  - COMPOSITE_DOCTRINE v01
+  secular_safe: true
+  sensitivity_notes: ''
+  position_fit: opener
+- quote_id: quote_w2_fill_financial_zh_cn_wang_yangming_v04_social_anxiety
+  text: 志不立，天下无可成之事。
+  text_en: Without established will, nothing in the world can be accomplished.
+  author: 王阳明
+  primary_source: 《传习录》
+  verified_via: 传习录
+  public_domain: y
+  topic_keys:
+  - social_anxiety
+  doctrine_keys:
+  - COMPOSITE_DOCTRINE v02
+  secular_safe: true
+  sensitivity_notes: ''
+  position_fit: either

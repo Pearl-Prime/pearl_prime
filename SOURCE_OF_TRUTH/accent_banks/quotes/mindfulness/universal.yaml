@@ -1,0 +1,293 @@
+# Quote bank — mindfulness / universal — Wave 2
+# status: unwired | KNOWN_UNWIRED: accent_banks/quotes/
+status: unwired
+topic: mindfulness
+locale_cluster: universal
+wave: 2
+quote_count: 16
+quotes:
+- quote_id: quote_w2_univ_epictetus_enchiridion_33_v01
+  text: As soon as you lay hold of yourself and know where you are, you will find yourself in all the
+    labors of your life.
+  text_en: As soon as you lay hold of yourself and know where you are, you will find yourself in all the
+    labors of your life.
+  author: Epictetus
+  primary_source: Enchiridion §33
+  verified_via: Epict. Ench. 33
+  public_domain: y
+  topic_keys:
+  - mindfulness
+  - somatic_healing
+  doctrine_keys:
+  - COMPOSITE_DOCTRINE v02
+  locale_fit:
+  - universal
+  secular_safe: true
+  sensitivity_notes: ''
+  position_fit: opener
+- quote_id: quote_w2_univ_lao_tzu_ddj_23_v01
+  text: 希言自然。
+  text_en: Sparse words belong to nature.
+  author: Laozi
+  primary_source: Dao De Jing Chapter 23
+  verified_via: ctext.org dao-de-jing ch.23
+  public_domain: y
+  topic_keys:
+  - mindfulness
+  - boundaries
+  - somatic_healing
+  doctrine_keys:
+  - COMPOSITE_DOCTRINE v02
+  locale_fit:
+  - universal
+  secular_safe: true
+  sensitivity_notes: ''
+  position_fit: either
+- quote_id: quote_w2_univ_marcus_meditations_06_15_v01
+  text: The universe is change; our life is what our thoughts make it.
+  text_en: The universe is change; our life is what our thoughts make it.
+  author: Marcus Aurelius
+  primary_source: Meditations IV.3 (tr. Long)
+  verified_via: Meditations 4.3
+  public_domain: y
+  topic_keys:
+  - grief
+  - depression
+  - mindfulness
+  doctrine_keys:
+  - COMPOSITE_DOCTRINE v01
+  locale_fit:
+  - universal
+  secular_safe: true
+  sensitivity_notes: Seasons/change — grief/depression consolation
+  position_fit: closer
+- quote_id: quote_w2_univ_retag_marcus_meditations_07_22_v01
+  text: Do not disturb yourself by imagining your whole life at once. Live in the present, and live until
+    evening in the day's business alone.
+  text_en: Do not disturb yourself by imagining your whole life at once. Live in the present, and live
+    until evening in the day's business alone.
+  author: Marcus Aurelius
+  primary_source: Meditations VII.22 (tr. C.R. Haines, Loeb 1916)
+  verified_via: Meditations 7.22; Haines Loeb PD
+  public_domain: y
+  topic_keys:
+  - anxiety
+  - overthinking
+  - burnout
+  - adhd_focus
+  - mindfulness
+  - sleep_anxiety
+  doctrine_keys: &id001
+  - COMPOSITE_DOCTRINE v04
+  locale_fit: &id002
+  - universal
+  secular_safe: true
+  sensitivity_notes: ''
+  position_fit: either
+- quote_id: quote_w2_univ_retag_lao_tzu_ddj_26_v01
+  text: 重为轻根，静为躁君。
+  text_en: Heaviness is the root of lightness; stillness is the lord of unrest.
+  author: Laozi
+  primary_source: Dao De Jing (Tao Te Ching) Chapter 26, received Wang Bi text
+  verified_via: Chinese Text Project ctext.org dao-de-jing chapter 26; Legge 1891 PD translation cross-check
+  public_domain: y
+  topic_keys:
+  - anxiety
+  - burnout
+  - overthinking
+  - adhd_focus
+  - mindfulness
+  - somatic_healing
+  doctrine_keys: &id003
+  - COMPOSITE_DOCTRINE v02
+  - COMPOSITE_DOCTRINE v03
+  locale_fit: &id004
+  - universal
+  secular_safe: true
+  sensitivity_notes: Philosophical Daoist; secular framing OK for composite brands
+  position_fit: either
+- quote_id: quote_w2_univ_retag_lao_tzu_ddj_15_v01
+  text: 致虚极，守静笃。
+  text_en: Attain the utmost emptiness; hold firmly to stillness.
+  author: Laozi
+  primary_source: Dao De Jing Chapter 15
+  verified_via: ctext.org dao-de-jing ch.15; Legge PD
+  public_domain: y
+  topic_keys:
+  - anxiety
+  - burnout
+  - mindfulness
+  - somatic_healing
+  doctrine_keys: &id005
+  - COMPOSITE_DOCTRINE v02
+  locale_fit: &id006
+  - universal
+  secular_safe: true
+  sensitivity_notes: ''
+  position_fit: opener
+- quote_id: quote_w2_univ_retag_zhuangzi_cook_ding_v01
+  text: 臣之所好者道也，进乎技矣。
+  text_en: What I care about is the Way, which goes beyond skill.
+  author: Zhuangzi
+  primary_source: Zhuangzi, 'Nourishing Life' (養生主) — Cook Ding passage
+  verified_via: ctext.org zhuangzi/nei-pian; Watson 1968 translation PD excerpt
+  public_domain: y
+  topic_keys:
+  - anxiety
+  - overthinking
+  - adhd_focus
+  - imposter_syndrome
+  - mindfulness
+  - somatic_healing
+  doctrine_keys:
+  - COMPOSITE_DOCTRINE v02
+  locale_fit:
+  - universal
+  secular_safe: true
+  sensitivity_notes: ''
+  position_fit: either
+- quote_id: quote_w2_fill_univ_marcus_meditations_07_22_v01_mindfulness
+  text: Do not disturb yourself by imagining your whole life at once. Live in the present, and live until
+    evening in the day's business alone.
+  text_en: Do not disturb yourself by imagining your whole life at once. Live in the present, and live
+    until evening in the day's business alone.
+  author: Marcus Aurelius
+  primary_source: Meditations VII.22 (tr. C.R. Haines, Loeb 1916)
+  verified_via: Meditations 7.22; Haines Loeb PD
+  public_domain: y
+  topic_keys:
+  - mindfulness
+  doctrine_keys: *id001
+  locale_fit: *id002
+  secular_safe: true
+  sensitivity_notes: ''
+  position_fit: either
+- quote_id: quote_w2_fill_univ_lao_tzu_ddj_26_v01_mindfulness
+  text: 重为轻根，静为躁君。
+  text_en: Heaviness is the root of lightness; stillness is the lord of unrest.
+  author: Laozi
+  primary_source: Dao De Jing (Tao Te Ching) Chapter 26, received Wang Bi text
+  verified_via: Chinese Text Project ctext.org dao-de-jing chapter 26; Legge 1891 PD translation cross-check
+  public_domain: y
+  topic_keys:
+  - mindfulness
+  doctrine_keys: *id003
+  locale_fit: *id004
+  secular_safe: true
+  sensitivity_notes: Philosophical Daoist; secular framing OK for composite brands
+  position_fit: either
+- quote_id: quote_w2_fill_univ_lao_tzu_ddj_15_v01_compassion_fatigue
+  text: 致虚极，守静笃。
+  text_en: Attain the utmost emptiness; hold firmly to stillness.
+  author: Laozi
+  primary_source: Dao De Jing Chapter 15
+  verified_via: ctext.org dao-de-jing ch.15; Legge PD
+  public_domain: y
+  topic_keys:
+  - compassion_fatigue
+  - mindfulness
+  doctrine_keys: *id005
+  locale_fit: *id006
+  secular_safe: true
+  sensitivity_notes: ''
+  position_fit: opener
+- quote_id: quote_w2_fill_univ_lao_tzu_ddj_15_v01_mindfulness
+  text: 致虚极，守静笃。
+  text_en: Attain the utmost emptiness; hold firmly to stillness.
+  author: Laozi
+  primary_source: Dao De Jing Chapter 15
+  verified_via: ctext.org dao-de-jing ch.15; Legge PD
+  public_domain: y
+  topic_keys:
+  - mindfulness
+  doctrine_keys: *id005
+  locale_fit: *id006
+  secular_safe: true
+  sensitivity_notes: ''
+  position_fit: opener
+- quote_id: quote_w2_fill_univ_lao_tzu_ddj_15_v01_somatic_healing
+  text: 致虚极，守静笃。
+  text_en: Attain the utmost emptiness; hold firmly to stillness.
+  author: Laozi
+  primary_source: Dao De Jing Chapter 15
+  verified_via: ctext.org dao-de-jing ch.15; Legge PD
+  public_domain: y
+  topic_keys:
+  - somatic_healing
+  - mindfulness
+  doctrine_keys: *id005
+  locale_fit: *id006
+  secular_safe: true
+  sensitivity_notes: ''
+  position_fit: opener
+- quote_id: quote_w2_fill_univ_marcus_meditations_06_48_v01_mindfulness
+  text: Never let the future disturb you. You will meet it, if you have to, with the same weapons of reason
+    which today arm you against the present.
+  text_en: Never let the future disturb you. You will meet it, if you have to, with the same weapons of
+    reason which today arm you against the present.
+  author: Marcus Aurelius
+  primary_source: Meditations VI.48 (tr. Long)
+  verified_via: Meditations 6.48
+  public_domain: y
+  topic_keys:
+  - mindfulness
+  doctrine_keys:
+  - COMPOSITE_DOCTRINE v02
+  locale_fit:
+  - universal
+  secular_safe: true
+  sensitivity_notes: ''
+  position_fit: opener
+- quote_id: quote_w2_fill_univ_seneca_letter_13_v02_mindfulness
+  text: True happiness is to enjoy the present, without anxious dependence upon the future.
+  text_en: True happiness is to enjoy the present, without anxious dependence upon the future.
+  author: Seneca
+  primary_source: De Vita Beata §15 (On the Happy Life)
+  verified_via: Seneca De Vita Beata 15
+  public_domain: y
+  topic_keys:
+  - mindfulness
+  doctrine_keys:
+  - COMPOSITE_DOCTRINE v04
+  locale_fit:
+  - universal
+  secular_safe: true
+  sensitivity_notes: ''
+  position_fit: closer
+- quote_id: quote_w2_fill_marcus_sleep_v01
+  text: 'At day''s first light consider: whence you came, whither you go.'
+  text_en: 'At day''s first light consider: whence you came, whither you go.'
+  author: Marcus Aurelius
+  primary_source: Meditations II.1 (tr. Long)
+  verified_via: Meditations 2.1
+  public_domain: y
+  topic_keys:
+  - sleep_anxiety
+  - mindfulness
+  doctrine_keys:
+  - COMPOSITE_DOCTRINE v04
+  locale_fit:
+  - universal
+  secular_safe: true
+  sensitivity_notes: ''
+  position_fit: opener
+- quote_id: quote_w2_fill_laozi_somatic_v01
+  text: 重为轻根，静为躁君。
+  text_en: Heaviness is the root of lightness; stillness is the lord of unrest.
+  author: Laozi
+  primary_source: Dao De Jing Chapter 26
+  verified_via: ctext.org
+  public_domain: y
+  topic_keys:
+  - somatic_healing
+  - sleep_anxiety
+  - mindfulness
+  doctrine_keys:
+  - COMPOSITE_DOCTRINE v02
+  locale_fit:
+  - zh_CN
+  - zh_TW
+  - universal
+  secular_safe: true
+  sensitivity_notes: ''
+  position_fit: either

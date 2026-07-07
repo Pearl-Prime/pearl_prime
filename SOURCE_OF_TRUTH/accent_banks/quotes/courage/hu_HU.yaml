@@ -1,0 +1,197 @@
+# Quote bank — courage / hu_HU — Wave 2
+# status: unwired | KNOWN_UNWIRED: accent_banks/quotes/
+status: unwired
+topic: courage
+locale_cluster: hu_HU
+wave: 2
+quote_count: 12
+quotes:
+- quote_id: quote_w2_univ_seneca_letter_99_v01
+  text: Sometimes even to live is an act of courage.
+  text_en: Sometimes even to live is an act of courage.
+  author: Seneca
+  primary_source: Moral Letters to Lucilius, Letter 78.2
+  verified_via: Seneca Ep. 78.2; Loeb Gummere
+  public_domain: y
+  topic_keys:
+  - depression
+  - grief
+  - courage
+  doctrine_keys:
+  - COMPOSITE_DOCTRINE v01
+  secular_safe: true
+  sensitivity_notes: Endurance/consolation without religious framing
+  position_fit: opener
+- quote_id: quote_w2_univ_seneca_letter_104_v02
+  text: It is a rough road that leads to the heights of greatness.
+  text_en: It is a rough road that leads to the heights of greatness.
+  author: Seneca
+  primary_source: Moral Letters to Lucilius, Letter 104.10
+  verified_via: Seneca Ep. 104
+  public_domain: y
+  topic_keys:
+  - courage
+  - grief
+  - depression
+  doctrine_keys:
+  - COMPOSITE_DOCTRINE v05
+  secular_safe: true
+  sensitivity_notes: ''
+  position_fit: closer
+- quote_id: quote_w2_univ_epictetus_enchiridion_01_v01
+  text: Some things are in our control and others not.
+  text_en: Some things are in our control and others not.
+  author: Epictetus
+  primary_source: Enchiridion §1
+  verified_via: Epict. Ench. 1
+  public_domain: y
+  topic_keys:
+  - boundaries
+  - compassion_fatigue
+  - courage
+  doctrine_keys:
+  - COMPOSITE_DOCTRINE v01
+  secular_safe: true
+  sensitivity_notes: ''
+  position_fit: opener
+- quote_id: quote_w2_univ_seneca_letter_107_v01
+  text: Many things have fallen only to rise higher.
+  text_en: Many things have fallen only to rise higher.
+  author: Seneca
+  primary_source: Moral Letters to Lucilius, Letter 107.11
+  verified_via: Seneca Ep. 107
+  public_domain: y
+  topic_keys:
+  - grief
+  - depression
+  - courage
+  doctrine_keys:
+  - COMPOSITE_DOCTRINE v05
+  secular_safe: true
+  sensitivity_notes: Endurance/nature cycle
+  position_fit: closer
+- quote_id: quote_w2_univ_marcus_meditations_04_49_v01
+  text: Be like the rocky headland on which the waves constantly break.
+  text_en: Be like the rocky headland on which the waves constantly break.
+  author: Marcus Aurelius
+  primary_source: Meditations IV.49
+  verified_via: Meditations 4.49
+  public_domain: y
+  topic_keys:
+  - courage
+  - compassion_fatigue
+  - somatic_healing
+  doctrine_keys:
+  - COMPOSITE_DOCTRINE v03
+  secular_safe: true
+  sensitivity_notes: Nature metaphor
+  position_fit: either
+- quote_id: quote_w2_univ_marcus_meditations_12_17_v01
+  text: If it is not right, do not do it; if it is not true, do not say it.
+  text_en: If it is not right, do not do it; if it is not true, do not say it.
+  author: Marcus Aurelius
+  primary_source: Meditations XII.17
+  verified_via: Meditations 12.17
+  public_domain: y
+  topic_keys:
+  - boundaries
+  - courage
+  - self_worth
+  doctrine_keys:
+  - COMPOSITE_DOCTRINE v04
+  secular_safe: true
+  sensitivity_notes: ''
+  position_fit: closer
+- quote_id: quote_w2_univ_retag_seneca_letter_78_v01
+  text: It is not because things are difficult that we do not dare; it is because we do not dare that
+    things are difficult.
+  text_en: It is not because things are difficult that we do not dare; it is because we do not dare that
+    things are difficult.
+  author: Seneca
+  primary_source: Moral Letters to Lucilius, Letter 78.13
+  verified_via: Seneca Ep. 78.13; Loeb Gummere
+  public_domain: y
+  topic_keys:
+  - anxiety
+  - imposter_syndrome
+  - courage
+  - social_anxiety
+  doctrine_keys: &id001
+  - COMPOSITE_DOCTRINE v01
+  secular_safe: true
+  sensitivity_notes: ''
+  position_fit: either
+- quote_id: quote_w2_fill_univ_seneca_letter_78_v01_boundaries
+  text: It is not because things are difficult that we do not dare; it is because we do not dare that
+    things are difficult.
+  text_en: It is not because things are difficult that we do not dare; it is because we do not dare that
+    things are difficult.
+  author: Seneca
+  primary_source: Moral Letters to Lucilius, Letter 78.13
+  verified_via: Seneca Ep. 78.13; Loeb Gummere
+  public_domain: y
+  topic_keys:
+  - boundaries
+  - courage
+  doctrine_keys: *id001
+  secular_safe: true
+  sensitivity_notes: ''
+  position_fit: either
+- quote_id: quote_w2_fill_univ_seneca_letter_78_v01_courage
+  text: It is not because things are difficult that we do not dare; it is because we do not dare that
+    things are difficult.
+  text_en: It is not because things are difficult that we do not dare; it is because we do not dare that
+    things are difficult.
+  author: Seneca
+  primary_source: Moral Letters to Lucilius, Letter 78.13
+  verified_via: Seneca Ep. 78.13; Loeb Gummere
+  public_domain: y
+  topic_keys:
+  - courage
+  doctrine_keys: *id001
+  secular_safe: true
+  sensitivity_notes: ''
+  position_fit: either
+- quote_id: quote_w2_fill_univ_marcus_meditations_05_16_v01_courage
+  text: The soul becomes dyed with the color of its thoughts.
+  text_en: The soul becomes dyed with the color of its thoughts.
+  author: Marcus Aurelius
+  primary_source: Meditations V.16 (tr. Long)
+  verified_via: Meditations 5.16 — 'such as are thy habitual thoughts, such also will be the character
+    of thy mind'
+  public_domain: y
+  topic_keys:
+  - courage
+  doctrine_keys:
+  - COMPOSITE_DOCTRINE v01
+  secular_safe: true
+  sensitivity_notes: Condensed from Long translation; substance verified
+  position_fit: either
+- quote_id: quote_w2_fill_univ_marcus_meditations_03_16_v01_courage
+  text: The soul is dyed with the color of its thoughts.
+  text_en: The soul is dyed with the color of its thoughts.
+  author: Marcus Aurelius
+  primary_source: Meditations III.16 (tr. Long)
+  verified_via: Meditations 3.16
+  public_domain: y
+  topic_keys:
+  - courage
+  doctrine_keys:
+  - COMPOSITE_DOCTRINE v01
+  secular_safe: true
+  sensitivity_notes: ''
+  position_fit: either
+- quote_id: quote_w2_fill_univ_seneca_letter_85_v01_courage
+  text: He who is brave is free.
+  text_en: He who is brave is free.
+  author: Seneca
+  primary_source: De Beneficiis VII.3 / Letters themes
+  verified_via: Seneca De Beneficiis
+  public_domain: y
+  topic_keys:
+  - courage
+  doctrine_keys:
+  - COMPOSITE_DOCTRINE v02
+  secular_safe: true
+  sensitivity_notes: ''
+  position_fit: either
