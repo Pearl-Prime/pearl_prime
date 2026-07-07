@@ -467,6 +467,8 @@ def main() -> int:
          "Manga story-authored (no listing-as-story)"),
         ("22c", "check_manga_serial_spine.py",
          "Manga serial spine (adopted series spine+continuity)"),
+        ("22d", "check_manga_story_engine.py",
+         "Manga story-engine architect probe (governed genres)"),
         ("23", "check_manga_wiring.py",
          "Manga config wiring (no unwired-config-as-working)"),
         ("24", "check_manga_l2_cutout_alpha.py",

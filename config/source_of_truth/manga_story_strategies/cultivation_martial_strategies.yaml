@@ -1,0 +1,227 @@
+schema_version: 1.0.0
+genre: cultivation_martial
+strategy_count: 3
+selection_algorithm: sha256_hash_seeded
+topic_strategy_map:
+  discipline: strategy_01
+  courage: strategy_02
+  humiliation: strategy_03
+character_pool:
+  protagonist:
+  - Shen Yan
+  - Mei Lin
+  - Jun Wei
+  - Hua Rong
+  - Li Feng
+  companion:
+  - a gatekeeper who checks travel tokens and never raises a hand in anger
+  - an elder who names the meridian before the mind can lie about it
+  - a sect archivist who records every public rupture on the roll
+  - a retired inner disciple who sweeps the lowest gate and watches more than she speaks
+  - a stone-carver who warms the training token in his palm before handing it over
+  setting:
+  - the First Gate at the mountain foot where disciples mistake punishment for a seat
+  - a qi-testing hall lined with iron gate-rings and a roll that cannot be argued with
+  - a ford where the meridian refuses force and opens only when the body settles
+  - the Autumn Ascent platform where the whole sect watches a breakthrough fail in public
+  - a dantian chamber cut into cliff rock, paper talismans trembling in the draft
+strategies:
+  strategy_01:
+    name: The Gate That Opens by Settling
+    archetype_template: force_ruptures_settling_opens
+    description: >-
+      Discipline told as cultivation ladder logic — force qi and the meridian ruptures;
+      the master of the lower gate names pause; one slow correct motion opens what
+      battering could not. Humiliation is public; breakthrough is body-first.
+    layer_1_plot_skeleton:
+      variant_label: strategy_01_standard
+      beat_count: 9
+      beats:
+      - beat: 1
+        text: '{setting}, before dawn. {protagonist} forces qi through the Breath Gate while the sect
+          elders watch from the roll platform — meridian heat spikes, training wraps smoking at the
+          wrists, the dantian clenched like a fist.'
+        camera_hint: wide_establishing
+        mood_hint: force
+        is_carrier: true
+      - beat: 2
+        text: The qi deviates. {protagonist} doubles over as the meridian refuses the push; gate-rings
+          on the sash dim one by one. Public humiliation lands before the body finishes confessing
+          the rupture.'
+        camera_hint: medium_crowd
+        mood_hint: rupture
+        is_carrier: true
+      - beat: 3
+        text: '{companion} does not rescue — only points at the stone token warming in {protagonist}''s
+          palm. ''The gate you skipped is still here. Force bills the body. Settling opens the lower
+          gate.'''
+        camera_hint: close_two_shot
+        mood_hint: steady
+        is_carrier: true
+      - beat: 4
+        text: Silence. {protagonist} stands at the First Gate threshold, sect rank politics murmuring
+          behind — demotion scroll already inked. One breath unclenches the dantian before the mind
+          can brace again.'
+        camera_hint: extreme_close_up
+        mood_hint: stillness
+        is_carrier: true
+      - beat: 5
+        text: One slow correct motion — not a strike, a settling step. Qi moves without force; the
+          meridian that ruptured an hour ago answers with a faint gate-light at the lower dantian.'
+        camera_hint: medium_action
+        mood_hint: breakthrough
+        is_carrier: true
+      - beat: 6
+        text: The roll scribe marks the result. Not promotion — permission to train at the gate everyone
+          mistakes for punishment. {protagonist} bows; humiliation becomes ladder rung, not wound.'
+        camera_hint: medium
+        mood_hint: cost
+        is_carrier: false
+      - beat: 7
+        text: '{companion} turns the token once in hand. ''Next cycle raises the gate or the humiliation
+          of forcing. Choose which bill you pay.'''
+        camera_hint: close_up
+        mood_hint: sect_pressure
+        is_carrier: false
+      - beat: 8
+        text: Night at the lower gate. {protagonist} repeats the settling motion until the meridian
+          remembers — cultivation as body-first ledger, not mind ambition.'
+        camera_hint: wide_night
+        mood_hint: discipline
+        is_carrier: false
+      - beat: 9
+        text: Final panel — feet rooted, dantian open before thought. The mountain does not move;
+          {protagonist} stops trying to move it by force.'
+        camera_hint: close_up
+        mood_hint: integration
+        is_carrier: true
+  strategy_02:
+    name: The Rival With Five Rings
+    archetype_template: rank_politics_public_verdict
+    description: >-
+      Courage on the cultivation ladder — rival pressure, public bout, trembling guard
+      before a committed strike while qi still shakes in the meridian.
+    layer_1_plot_skeleton:
+      variant_label: strategy_02_standard
+      beat_count: 9
+      beats:
+      - beat: 1
+        text: '{setting}. Tournament brackets posted — {protagonist} faces a rival with five iron
+          gate-rings to their two. Sect whispers measure humiliation before the bout begins.'
+        camera_hint: wide
+        mood_hint: pressure
+        is_carrier: true
+      - beat: 2
+        text: '{protagonist} forces an opening strike; qi flares wrong and the meridian catches.
+          The crowd sees the trembling guard — courage is not absence of fear but motion while
+          the dantian still shakes.'
+        camera_hint: medium_action
+        mood_hint: trembling
+        is_carrier: true
+      - beat: 3
+        text: '{companion} from the rail — You cannot rive the gate mid-bout. Settle the breath,
+          then let the sect see one honest motion.'
+        camera_hint: over_shoulder
+        mood_hint: steady
+        is_carrier: true
+      - beat: 4
+        text: Breath held. {protagonist} stops bracing — meridian unclenches, training wraps
+          loosen, the lower gate flickers visible to anyone who knows cultivation sight.'
+        camera_hint: close_up
+        mood_hint: breakthrough
+        is_carrier: true
+      - beat: 5
+        text: One committed strike while afraid — not victory, but a touch that lands without
+          force rupture. The rival''s five rings clack; rank politics recalculate in silence.'
+        camera_hint: medium_action
+        mood_hint: cost
+        is_carrier: false
+      - beat: 6
+        text: 'Verdict scroll — no promotion, no demotion; a rematch clause and a public note on
+          the roll. Humiliation traded for a legible ladder rung.'
+        camera_hint: medium
+        mood_hint: sect
+        is_carrier: false
+      - beat: 7
+        text: '{protagonist} alone at the gate, palm on stone token. Qi settles slower than pride
+          wants; discipline is the bill paid in public.'
+        camera_hint: wide
+        mood_hint: discipline
+        is_carrier: false
+      - beat: 8
+        text: Rival passes without a word — five rings dull in torchlight. The feud is ladder,
+          not hatred; next cycle raises the gate or the humiliation of forcing.'
+        camera_hint: medium_two_shot
+        mood_hint: rivalry
+        is_carrier: false
+      - beat: 9
+        text: Dawn over the sect steps. {protagonist} takes the lower gate seat willingly —
+          cultivation continues where force already failed once.'
+        camera_hint: wide_establishing
+        mood_hint: renewal
+        is_carrier: true
+  strategy_03:
+    name: Struck From the Roll
+    archetype_template: public_deviation_demotion_vow
+    description: >-
+      Humiliation arc — qi deviation on the Ascent, demotion to lowest gate, vow to
+      climb without leaving the first gate. Breakthrough logic tested on sect clock.
+    layer_1_plot_skeleton:
+      variant_label: strategy_03_standard
+      beat_count: 9
+      beats:
+      - beat: 1
+        text: Autumn Ascent platform — whole sect gathered. {protagonist} forces the upper gate
+          sequence; meridian heat spikes, qi deviates in public, training wraps char at the
+          wrists.'
+        camera_hint: wide_crowd
+        mood_hint: rupture
+        is_carrier: true
+      - beat: 2
+        text: Elders strike the name from the roll. Demotion to the First Gate — humiliation
+          complete before {protagonist} straightens. Sect rank politics need no commentary.'
+        camera_hint: medium
+        mood_hint: humiliation
+        is_carrier: true
+      - beat: 3
+        text: '{companion} waits at the ford, token ledger open. ''The mountain does not move
+          because you hit it harder. Stand where you were put.'''
+        camera_hint: medium_two_shot
+        mood_hint: gate
+        is_carrier: true
+      - beat: 4
+        text: '{protagonist} bows at the lowest gate — vow spoken quiet, climb the whole ladder
+          without leaving the first gate. Dantian still bruised from force.'
+        camera_hint: close_up
+        mood_hint: vow
+        is_carrier: true
+      - beat: 5
+        text: One settling breath at the threshold. Meridians that ruptured on the platform
+          answer with a thin breakthrough light — not power, permission.'
+        camera_hint: extreme_close_up
+        mood_hint: breakthrough
+        is_carrier: true
+      - beat: 6
+        text: Night drills alone — qi routed without force, gate-rings on the sash counted
+          and re-counted. Discipline replaces the humiliation of public failure.'
+        camera_hint: wide_night
+        mood_hint: discipline
+        is_carrier: false
+      - beat: 7
+        text: Sect disciples pass on the stair, mocking the lowest gate. {protagonist} does not
+          brace — meridian open, stone token warm, cultivation as visible ledger.'
+        camera_hint: medium
+        mood_hint: sect_pressure
+        is_carrier: false
+      - beat: 8
+        text: '{companion} marks the ledger — one cycle survived without forcing. Next gate waits
+          — or next humiliation if {protagonist} forgets the bill.'
+        camera_hint: close_up
+        mood_hint: cost
+        is_carrier: false
+      - beat: 9
+        text: First light on the mountain foot. {protagonist} rooted at the gate everyone
+          mistakes for punishment — dantian settled before mind, ladder begun.'
+        camera_hint: wide
+        mood_hint: integration
+        is_carrier: true

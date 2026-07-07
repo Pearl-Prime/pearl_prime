@@ -67,16 +67,18 @@ def test_governed_genre_uses_strategy_not_generic(genre, topic):
     assert validate_engine_blob(_blob_from_chapters(out["chapters"]), genre) == []
 
 
-def test_cultivation_martial_hard_fails_without_strategy_bank():
+def test_cultivation_martial_governed_path_works():
     assert is_engine_governed("cultivation_martial")
-    assert not strategy_bank_exists("cultivation_martial")
-    with pytest.raises(StoryEngineError, match="generic _BEAT_TEMPLATES fallback blocked"):
-        build_story_architecture_internal(
-            series_id="cultivation_proof",
-            arc_id="a",
-            genre_id="cultivation_martial",
-            topic="discipline",
-        )
+    assert strategy_bank_exists("cultivation_martial")
+    out = build_story_architecture_internal(
+        series_id="cultivation_proof",
+        arc_id="a",
+        genre_id="cultivation_martial",
+        topic="discipline",
+    )
+    assert out["transmission_audit"]["note"] == "strategy_driven"
+    assert out.get("story_engine_governed") is True
+    assert validate_engine_blob(_blob_from_chapters(out["chapters"]), "cultivation_martial") == []
 
 
 def test_generic_template_blob_fails_governed_validation():
