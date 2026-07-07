@@ -8,6 +8,7 @@ from pathlib import Path
 import pytest
 
 from phoenix_v4.manga.image_backend import FixtureReplayImageBackend, NoopImageBackend
+from phoenix_v4.manga.models import paths as manga_paths
 from phoenix_v4.manga.models import stage_ids as sid
 from phoenix_v4.manga.models.validation import validate_instance
 from phoenix_v4.manga.qc.gate_registry import load_gate_registry
@@ -124,12 +125,14 @@ def test_chapter_runner_two_phase_resume(tmp_path: Path) -> None:
         arc_id="e2e_arc",
         genre_id="e2e_genre",
     )
+    genre_id = "e2e_genre"
     cr = {
         "schema_version": "1.0.0",
         "artifact_type": "chapter_request",
         "series_id": "e2e_series",
         "chapter_id": "ch_e2e",
         "arc_id": "e2e_arc",
+        "genre_id": genre_id,
     }
     validate_instance(cr, "chapter_request")
     (ws / "chapter_request.json").write_text(
@@ -145,6 +148,12 @@ def test_chapter_runner_two_phase_resume(tmp_path: Path) -> None:
     assert sid.CHAPTER_VISUAL in r1
     assert stage_is_passed(ws, sid.CHAPTER_VISUAL)
     assert not stage_is_passed(ws, sid.CHAPTER_IMAGE_GEN)
+
+    # MANGA.BESTSELLER.GENRE_ENGINE reads declared genre from the chapter script.
+    script_path = ws / manga_paths.CHAPTER_SCRIPT_WRITER_HANDOFF
+    script = json.loads(script_path.read_text(encoding="utf-8"))
+    script["genre_id"] = genre_id
+    script_path.write_text(json.dumps(script, indent=2) + "\n", encoding="utf-8")
 
     # Build replay map dynamically from generated panel_prompts
     pp = json.loads((ws / "panel_prompts.json").read_text(encoding="utf-8"))
