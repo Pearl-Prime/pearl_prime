@@ -43,10 +43,8 @@ SAMPLE_ROOT = REPO / "config" / "source_of_truth" / "manga_series_plans" / "_sam
 
 VALID_LOCALES = (
     "en_US", "ja_JP", "ko_KR", "zh_TW", "zh_CN",
-    "es_LA", "hu_HU", "zh_HK",
+    "es_US", "es_ES", "hu_HU", "zh_HK", "zh_SG",
     # 2026-05-29 ratified expansion (EUROPE_CATALOG_PLAN §6.1 + LATAM §1A):
-    # France + Brazil are top priority (genuine manga cultures); DE/IT ebook-forward.
-    # es_ES deferred pending es_LA/es_US/es_ES register reconciliation.
     "fr_FR", "de_DE", "it_IT", "pt_BR",
 )
 VALID_GENRES = (
@@ -64,7 +62,9 @@ VALID_GENRES = (
 
 
 _RE_TEACHER_HEADING = re.compile(r"^## \d+\.\s+([A-Z_]+)\s*—", re.IGNORECASE)
-_RE_LOCALE_HEADING = re.compile(r"^### (en_US|ja_JP|ko_KR|zh_TW|zh_CN|es_LA|hu_HU|zh_HK|fr_FR|de_DE|it_IT|pt_BR)\b")
+_RE_LOCALE_HEADING = re.compile(
+    r"^### (en_US|ja_JP|ko_KR|zh_TW|zh_CN|es_US|es_ES|hu_HU|zh_HK|zh_SG|fr_FR|de_DE|it_IT|pt_BR)\b"
+)
 # Strand sub-heading captures secondary catalog sections like
 # "### Ahjan — forest simplicity strand (Stillness Press; ...)".
 # When a strand heading appears under a teacher, subsequent rows are tagged

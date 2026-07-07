@@ -51,21 +51,21 @@ def test_valid_genres_matches_spec_4_1():
     assert set(mod.VALID_GENRES) == expected
 
 
-def test_valid_locales_includes_kr_per_d_18():
-    """VALID_LOCALES must include ko_KR per spec D-18 (5-locale matrix),
-    the 3 markets added per operator 2026-04-27 (es_LA, hu_HU, zh_HK),
-    and the 4 added per operator ratification 2026-05-29 (fr_FR, de_DE,
-    it_IT, pt_BR; EUROPE_CATALOG_PLAN §6.1 + LATAM_CATALOG_PLAN §1A).
-    es_ES is intentionally NOT wired pending es_LA/es_US/es_ES register
-    reconciliation (the two ratified docs conflict on whether es_ES registers)."""
+def test_valid_locales_matches_allocation_registry():
+    """VALID_LOCALES must align with locale_genre_allocations.yaml (14 registry locales).
+
+    M7 Wave A closed the es_LA placeholder — es_US/es_ES/zh_SG are the operative
+    Spanish and Singapore registry ids per locale_registry.yaml all_locales.
+    """
     mod = _import_module()
     assert "ko_KR" in mod.VALID_LOCALES
     expected = {
-        "en_US", "ja_JP", "ko_KR", "zh_TW", "zh_CN", "es_LA", "hu_HU", "zh_HK",
+        "en_US", "ja_JP", "ko_KR", "zh_TW", "zh_CN",
+        "es_US", "es_ES", "hu_HU", "zh_HK", "zh_SG",
         "fr_FR", "de_DE", "it_IT", "pt_BR",
     }
     assert set(mod.VALID_LOCALES) == expected, mod.VALID_LOCALES
-    assert len(mod.VALID_LOCALES) == 12
+    assert len(mod.VALID_LOCALES) == 14
 
 
 def test_dry_run_against_live_strategic_docs():

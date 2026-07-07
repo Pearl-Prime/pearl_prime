@@ -162,6 +162,24 @@ defaults_by_locale_genre:
     school_coming_of_age:   { master: color_vertical_webtoon, flatten: [] }
     mecha:                  { master: color_vertical_webtoon, flatten: [] }
 
+  # M7 Wave A — fr_FR (fr_bd_manga lane; #1 EU manga market per MANGA_MARKET_INTEGRATION §A.1)
+  fr_FR:
+    iyashikei:              { master: color_vertical_webtoon, flatten: [bw_page_manga] }
+    dark_fantasy:           { master: bw_page_manga, flatten: [] }   # BD tradition — print-first
+    psychological_horror:   { master: bw_page_manga, flatten: [] }
+    supernatural_mystery:   { master: color_vertical_webtoon, flatten: [bw_page_manga] }
+    isekai:                 { master: color_vertical_webtoon, flatten: [bw_page_manga] }
+    sci_fi_cyberpunk:       { master: color_vertical_webtoon, flatten: [bw_page_manga] }
+    psychological_thriller: { master: bw_page_manga, flatten: [] }
+    romance_josei_drama:    { master: color_vertical_webtoon, flatten: [] }
+    workplace_drama:        { master: color_vertical_webtoon, flatten: [bw_page_manga] }
+    action_battle:          { master: color_vertical_webtoon, flatten: [bw_page_manga] }
+    sports_competition:     { master: color_vertical_webtoon, flatten: [bw_page_manga] }
+    historical_period:      { master: bw_page_manga, flatten: [] }   # period BD adjacency
+    cultivation_martial:    { master: color_vertical_webtoon, flatten: [bw_page_manga] }
+    school_coming_of_age:   { master: color_vertical_webtoon, flatten: [] }
+    mecha:                  { master: bw_page_manga, flatten: [] }
+
 # ── target_platforms by (locale, master_format) ────────────────────────────
 # Only ALLOWED + ALLOWED_GREY platforms surface here. PARTNER_ONLY platforms
 # go to pending_partner_targets[] for documentation, not target_platforms[].
@@ -203,6 +221,12 @@ target_platforms_by_locale_format:
     color_page_manga:       []
     direct_self_help_illustrated: []
 
+  fr_FR:
+    color_vertical_webtoon: [webtoon_canvas, amazon_kdp_comics, globalcomix, kobo, apple_books]
+    bw_page_manga:          [amazon_kdp_comics, globalcomix, kobo, apple_books]
+    color_page_manga:       [amazon_kdp_comics, globalcomix, kobo, apple_books]
+    direct_self_help_illustrated: [amazon_kdp_comics, kobo, apple_books, google_play_books]
+
 # ── pending_partner_targets by locale (documented intent only) ─────────────
 pending_partner_targets_by_locale:
   en_US: []
@@ -210,6 +234,7 @@ pending_partner_targets_by_locale:
   zh_TW: [line_manga_originals]
   zh_CN: [tencent_comics_premium, kuaikan_premium]   # gray-zone primary push (above) is preferred over premium-only deals
   ko_KR: [naver_webtoon, kakao_webtoon, line_webtoon_kr]   # held per D-18; ready when AI Act clarifies
+  fr_FR: [delitoon, mangas_io]   # FR-native digital manga surfaces — partner opt-in only
 
 # ── connector_lane by (locale, master_format) ─────────────────────────────
 # Per PR #631 Decision 1.1: three WEBTOON connectors needed, not one.
@@ -243,6 +268,12 @@ connector_lane_by_locale_format:
   ko_KR:
     # Per D-18 RENDER+HOLD: no active connector until Korea AI Act resolution.
     color_vertical_webtoon: hold_pending_market_clearance
+    bw_page_manga:          print_only
+    color_page_manga:       print_only
+    direct_self_help_illustrated: print_only
+
+  fr_FR:
+    color_vertical_webtoon: unified_canvas
     bw_page_manga:          print_only
     color_page_manga:       print_only
     direct_self_help_illustrated: print_only

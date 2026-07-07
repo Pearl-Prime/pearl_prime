@@ -61,17 +61,13 @@ VALID_GENRES = (
 )
 
 # Per spec D-18: 5 locales (added ko_KR for render+hold).
-# Per operator 2026-04-27: extended to 8 markets — added es_LA (Latin America),
-# hu_HU (Hungary), zh_HK (Hong Kong). Per operator ratification 2026-05-29:
-# extended to 12 markets — added fr_FR, de_DE, it_IT, pt_BR (see inline note below).
-# Per-locale strategic plans are scaffolds until Pearl_Research deep-research
-# authors fill the format-mix + revenue tables.
+# M7 (2026-07-08): aligned to locale_genre_allocations.yaml + locale_registry all_locales (14).
+# es_LA retired — es_US/es_ES are the operative Spanish registry ids.
 VALID_LOCALES = (
     "en_US", "ja_JP", "zh_TW", "zh_CN", "ko_KR",
-    "es_LA", "hu_HU", "zh_HK",
+    "es_US", "es_ES", "hu_HU", "zh_HK", "zh_SG",
     # 2026-05-29 ratified expansion (EUROPE_CATALOG_PLAN §6.1 + LATAM §1A):
     # France + Brazil top priority (genuine manga cultures); DE/IT ebook-forward.
-    # es_ES deferred pending es_LA/es_US/es_ES register reconciliation.
     "fr_FR", "de_DE", "it_IT", "pt_BR",
 )
 

@@ -1,0 +1,92 @@
+# M6 blind-10 comparator registry — slot assignments + selection rules
+# Operator must place scan assets under comparators/ (gitignored) or external secure storage.
+# Record sha256 + source in each entry before judge distribution.
+
+schema_version: manga_blind10_comparator_v1
+run_id: manga_blind10_2026-07-08
+
+selection_rules:
+  per_episode: 2
+  match_dimensions:
+    - genre_id
+    - demographic_lane  # shojo | shonen | seinen | josei | webtoon_vertical
+    - locale_market     # en_US | ja_JP
+    - format            # vertical_scroll | magazine_page
+  forbidden_sources:
+    - phoenix_internal_renders
+    - ai_generated_reference
+    - unlicensed_aggregate_pirate_sites
+  research_anchors:
+    - artifacts/research/manga_quality_bar/01_iyashikei_craft_study.md
+    - artifacts/research/manga_quality_bar/02_studio_workflow_gap_analysis.md
+
+# Assigned comparators for slots with render_path != ABSENT
+slots:
+  "01":
+    genre_id: iyashikei
+    locale: en_US
+    demographic_lane: webtoon_vertical
+    comparators:
+      - id: comp_01_a
+        title: "Yotsuba&!"
+        creator: "Kiyohiko Azuma"
+        volume_chapter: "Vol 1, Chapter 1 (morning establishing sequence)"
+        rationale: "Gold-standard iyashikei panel flow, silence, environmental grounding"
+        excerpt_pages: "5-8"
+        operator_asset: "comparators/yotsuba_v1_ch1_pages_5-8.pdf"
+        asset_status: PENDING_OPERATOR_SCAN
+      - id: comp_01_b
+        title: "Barakamon"
+        creator: "Satsuki Yoshino"
+        volume_chapter: "Vol 1, Chapter 1 (arrival on island)"
+        rationale: "Character-environment balance, low-dialogue craft, warm register"
+        excerpt_pages: "6-10"
+        operator_asset: "comparators/barakamon_v1_ch1_pages_6-10.pdf"
+        asset_status: PENDING_OPERATOR_SCAN
+
+  "03":
+    genre_id: mecha
+    locale: en_US
+    demographic_lane: seinen
+    comparators:
+      - id: comp_03_a
+        title: "Mobile Suit Gundam: The Origin"
+        creator: "Yoshikazu Yasuhiko"
+        volume_chapter: "Vol 1, cockpit / chassis introspection sequence"
+        rationale: "Mecha-burnout register, machine-body metaphor fluency"
+        excerpt_pages: "TBD"
+        operator_asset: "comparators/gundam_origin_v1_excerpt.pdf"
+        asset_status: PENDING_OPERATOR_SCAN
+      - id: comp_03_b
+        title: "Planetes"
+        creator: "Makoto Yukimura"
+        volume_chapter: "Vol 1, workplace-mechanical routine pages"
+        rationale: "Grounded sci-mechanical tone matching cultivation/mechanic hybrid"
+        excerpt_pages: "TBD"
+        operator_asset: "comparators/planetes_v1_excerpt.pdf"
+        asset_status: PENDING_OPERATOR_SCAN
+
+  "04":
+    genre_id: psychological_thriller
+    locale: en_US
+    demographic_lane: seinen
+    comparators:
+      - id: comp_04_a
+        title: "Monster"
+        creator: "Naoki Urasawa"
+        volume_chapter: "Vol 1, tension / overthinking dialogue pages"
+        rationale: "Psychological thriller pacing, dialogue register"
+        excerpt_pages: "TBD"
+        operator_asset: "comparators/monster_v1_excerpt.pdf"
+        asset_status: PENDING_OPERATOR_SCAN
+      - id: comp_04_b
+        title: "20th Century Boys"
+        creator: "Naoki Urasawa"
+        volume_chapter: "Vol 1, paranoia-establishing sequence"
+        rationale: "Genre trope fluency, page-turn rhythm"
+        excerpt_pages: "TBD"
+        operator_asset: "comparators/20th_century_boys_v1_excerpt.pdf"
+        asset_status: PENDING_OPERATOR_SCAN
+
+# Slots 02, 05-10: assign comparators when render_path becomes non-ABSENT.
+# Use same genre_id + demographic_lane matching rules; cite craft bible per genre.
