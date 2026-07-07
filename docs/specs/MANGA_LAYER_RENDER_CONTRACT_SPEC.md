@@ -1,8 +1,10 @@
 # Manga Layer Render Contract Spec (v0.7 — V5 single-render decompose supersedes V4 L0+L2 split)
 
-**Status:** AUTHORITY (v0.7 — operator-directed 2026-05-20 after V4 ep_001 composite review; cumulative with v0.6.3 Phase 1 ToonOut + v0.6.2 doc-split)
+**Status:** AUTHORITY (v0.7.1 — composition-grammar addendum marker 2026-07-07; cumulative with v0.7 V5 pivot + v0.6.3 Phase 1 ToonOut + v0.6.2 doc-split)
 **Author:** Pearl_Architect + Pearl_Int + Pearl_Research
-**Schema version:** 0.7.0 (major architectural amendment: V5 Qwen-Image-Layered supersedes V4 L0+L2 split; V4 sections retained as the experiment-of-record)
+**Schema version:** 0.7.1 (composition-grammar addendum marker in §10; 0.7.0 was the major V5 architectural amendment: V5 Qwen-Image-Layered supersedes V4 L0+L2 split; V4 sections retained as the experiment-of-record)
+**Changes since v0.7 (v0.7.1 — composition-grammar addendum):**
+- §10 EXTENDED — marker added: the composition-compatibility + grounding layer (asset `composition_meta` sidecars, crop×bg_class legality matrix, horizon-ratio grounding scale, contact-shadow/occluder ops, beat→shot→recipe panel grammar) is specified in the standalone sibling spec `docs/specs/MANGA_COMPOSITION_GRAMMAR_SPEC.md` v1.0.1 (SPECCED, pilot EXECUTED-REAL via PR #4689 — Pearl_Research 2026-07-07; research basis `artifacts/research/manga_composition_grammar_research_2026-07-07.md`). §10 math remains the fallback for assets without composition metadata. Honors the §15.C.6 doc-split trip-wire; partially realizes §15.D.3 (reusable cinematic grammar) and gives §14.B.2/§14.B.3 their constructive counterpart.
 **Changes since v0.6.3 (v0.7 — V5 architectural pivot):**
 - §16 NEW — V5 Qwen-Image-Layered architecture documented in a standalone sibling spec at `docs/specs/MANGA_V5_LAYERED_ARCHITECTURE.md` v1.0.0 (decision, model files, workflow JSON, layer semantics, orchestrator design, V4→V5 carryforward/changes, acceptance criteria, open risks, Phase 1 ToonOut fallback). This V4 spec inserts a short §16 DEPRECATION MARKER that points to the standalone doc, lists what V5 supersedes from this spec, and lists what V5 reuses unchanged. Doc-split honors the §15.C.6 trip-wire (commit to split before 1900 lines).
 - §16 marker — V5 supersedes from this spec: §3 (layer pipeline architecture), §4 (layer taxonomy), §7 (per-archetype layer composition maps), §13.4 (Phase D render scripts), §15.A.6 (V4 composite-level operator review). V5 does NOT supersede §5 (safe-zone contracts), §5.9 (prompt compiler), `MANGA_CONTINUITY_STATE_SPEC.md` (formerly §6), §12 (validator infrastructure), §14 (failure modes & recovery), §15.A.1 (identity lock) — these remain authoritative under both V4 and V5.
@@ -853,6 +855,8 @@ def composite_layer(canvas, layer_cutout, archetype_bbox):
 ```
 
 **Feathering policy:** 0px (hard alpha). Manga line art needs crisp edges. L4 overlays get 2–3px Gaussian on alpha before screen-blend.
+
+**Composition-grammar addendum (v0.7.1 — 2026-07-07):** the placement math above is the *mechanical* contract only — it scales-to-fit and centers; it does not decide whether a layer combination is legal or grounded. The compatibility layer (asset `composition_meta`, crop×bg_class legality, eye-level/horizon grounding scale, contact-shadow + occluder-BOOK ops, beat→shot→recipe grammar) is specified in the standalone sibling spec **`docs/specs/MANGA_COMPOSITION_GRAMMAR_SPEC.md`** (SPECCED; §10 pilot EXECUTED-REAL via PR #4689 — gate module `scripts/manga/composition_grammar.py`). When both assets carry `composition_meta`, the sibling spec's G3 grounding law supersedes the min-fit-and-center rule above; unannotated assets keep the legacy behavior (flagged `bbox_legacy`).
 
 ---
 
