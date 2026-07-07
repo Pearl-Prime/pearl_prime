@@ -11,7 +11,7 @@
 
 **Doctrine (non-negotiable):** Accent beats are **planner-assigned, never composer-improvised**. Framing lives **inside the atom** — entry and exit authored per position variant. Composer-injected wrappers are **banned** (same scar as `COMPOSER_DEINJECTION_AND_TISSUE_SPEC_2026-07-05.md`).
 
-**Personality layer (WISDOM_ESSENCE v1.1):** traditions' distilled voice — corpus-convergent essence beats, distinct from `TEACHER_DOCTRINE`, `QUOTE`, and `AUTHOR_COMMENTARY` (parallel lane). Planner-placed, dosage-governed; composite mode uses secular register only.
+**Personality layer (four sources):** quotes (others' words) · cited evidence (science) · wisdom essence (traditions' distilled voice — `WISDOM_ESSENCE`, parallel lane) · **author commentary** (author's witness voice — `AUTHOR_COMMENTARY`, parallel lane). All planner-placed, dosage-governed; composite mode uses secular register for essence and bans teacher names in commentary.
 
 ---
 
@@ -80,12 +80,12 @@ Orphan `QUOTE/CANONICAL.txt` files are **candidate content** for Pearl_Editor re
 
 ## §2 — Accent atom classes
 
-Seven accent classes (six original + **WISDOM_ESSENCE** v1.1). Each is a **complete authored paragraph unit** with position variants — never a bare quote line plus composer wrapper.
+Eight accent classes (six original + **WISDOM_ESSENCE** + **AUTHOR_COMMENTARY** v1.1). Each is a **complete authored paragraph unit** with position variants — never a bare quote line plus composer wrapper.
 
 ### 2.1 Shared schema (`accent_atom.yaml`)
 
 ```yaml
-accent_class: QUOTE | ENCOURAGEMENT | REFLECTION_QUESTION | AFFIRMATION | TROUBLESHOOTING | CITED_EVIDENCE | WISDOM_ESSENCE
+accent_class: QUOTE | ENCOURAGEMENT | REFLECTION_QUESTION | AFFIRMATION | TROUBLESHOOTING | CITED_EVIDENCE | WISDOM_ESSENCE | AUTHOR_COMMENTARY
 accent_id: quote_anxiety_stoic_v01__opener
 topic_keys: [anxiety, overthinking]          # doctrine/topic affinity
 doctrine_keys: ["COMPOSITE_DOCTRINE v03"]   # optional; QUOTE/CITED_EVIDENCE typically required
@@ -149,6 +149,7 @@ claim_ledger:
 | **TROUBLESHOOTING** | INTEGRATION obstacle paragraphs | "When you forget for three days…" | `after_INTEGRATION` | `exercise_id` + `object` |
 | **CITED_EVIDENCE** | New bank | Named study/stat moment (not fiction) | `after_HOOK`, `before_STORY` (Gladwell Spiral alignment) | `doctrine_id` + claim ledger |
 | **WISDOM_ESSENCE** | New bank (`accent_banks/wisdom_essence/`) | Traditions' distilled voice — corpus-convergent themes, not teacher doctrine | `after_REFLECTION`, `before_THREAD` | `topic_keys` + `doctrine_keys` + `theme`; `source_teachers` audit only |
+| **AUTHOR_COMMENTARY** | New bank (`accent_banks/author_commentary/`) | Author's witness voice — observational, not expert | `after_REFLECTION`, `after_EXERCISE`, `after_PIVOT`, `before_THREAD` | `author_id` + `topic_keys`; bio-licensed |
 
 ### 2.3 WISDOM_ESSENCE schema extensions
 
@@ -219,7 +220,7 @@ bridge → EXERCISE → [ENCOURAGEMENT] → COMPRESSION? → INTEGRATION →
 [QUOTE closer]
 ```
 
-`[CITED_EVIDENCE]`, `[AFFIRMATION]`, and `[WISDOM_ESSENCE]` insert per class `allowed_positions` with the same handoff rule.
+`[CITED_EVIDENCE]`, `[AFFIRMATION]`, `[WISDOM_ESSENCE]`, and `[AUTHOR_COMMENTARY]` insert per class `allowed_positions` with the same handoff rule.
 
 ### 3.2 Per-class placement rules
 
@@ -232,6 +233,7 @@ bridge → EXERCISE → [ENCOURAGEMENT] → COMPRESSION? → INTEGRATION →
 | **TROUBLESHOOTING** | After INTEGRATION | `exercise_id` + `object` | TAKEAWAY |
 | **CITED_EVIDENCE** | After HOOK (Gladwell) or before first STORY | `claim_ledger.claim_id` + doctrine | STORY scene |
 | **WISDOM_ESSENCE** | After REFLECTION (coda) or before THREAD (grace note) | `theme` + `doctrine_keys` + `topic_keys` | EXERCISE / STORY or THREAD |
+| **AUTHOR_COMMENTARY** | After REFLECTION, after EXERCISE, after PIVOT, or before THREAD | `author_id` + `topic_keys` + `bio_license_refs` | EXERCISE / INTEGRATION / THREAD |
 
 ### 3.3 Invariants (gates)
 
@@ -256,6 +258,7 @@ accent_budget:
   TROUBLESHOOTING: 1
   CITED_EVIDENCE: 0
   WISDOM_ESSENCE: 0
+  AUTHOR_COMMENTARY: 0
 accent_distribution_profile: somatic_reflective  # see §4.3
 ```
 
@@ -383,8 +386,11 @@ max_chapters_with_any_accent_share: 0.35 # no book >35% accent-bearing chapters 
 | Anti-spam | extend `check_experience_layer.py` | `accent_signature` collision exceeds wave cap |
 | Wisdom essence mode bleed | `check_wisdom_essence_mode_bleed.py` | `secular_safe: false` atom in composite plan OR teacher name in composite `secular` body OR `tradition_attributed` variant in composite plan |
 | Wisdom essence doctrine bleed | `check_wisdom_essence_doctrine_boundary.py` | Atom body matches `TEACHER_DOCTRINE` source text OR missing `source_refs` audit |
+| Author commentary bio license | `check_author_commentary_bio_license.py` | `bio_license_refs` not satisfiable from author bio YAML |
+| Author commentary mode bleed | `check_author_commentary_mode_bleed.py` | `composite_safe: false` atom in composite-mode plan OR teacher name in composite-safe atom body |
+| Author commentary register | `check_author_commentary_register.py` | Expert-voice markers or clinical claim patterns |
 
-Register in `scripts/run_production_readiness_gates.py` as gates **#24–#30** (numbers provisional; coordinate with Drift detectors roster at build time).
+Register in `scripts/run_production_readiness_gates.py` as gates **#24–#33** (numbers provisional; coordinate with Drift detectors roster at build time).
 
 **Status:** all gates **ABSENT** until build lane; this spec is **SPECCED** only.
 
@@ -483,7 +489,7 @@ Register in `scripts/run_production_readiness_gates.py` as gates **#24–#30** (
 
 **Critical boundary:** `WISDOM_ESSENCE ≠ TEACHER_DOCTRINE`. Essence atoms are **corpus-convergent distillations** keyed by `theme`, not persona-keyed doctrine slots. Mode-bleed gate (OPD-115 Phase B in `phoenix_v4/planning/enrichment_select.py`) is **untouchable** — composite books receive WISDOM_ESSENCE **only** via `accent_beats` planner assignment.
 
-**Parallel lane:** `AUTHOR_COMMENTARY` (separate PR `#4713`) owns the author's witness voice. WISDOM_ESSENCE owns traditions' distilled voice under its own dosage and register rules.
+**Parallel lane:** `AUTHOR_COMMENTARY` (§13) owns the author's witness voice. WISDOM_ESSENCE owns traditions' distilled voice under its own dosage and register rules.
 
 ### 12.1 Corpus-convergent themes (anxiety pilot)
 
@@ -571,7 +577,7 @@ Joins experience / anti-spam tuple: extend `accent_signature` hash to include `W
 
 - Re-open `TEACHER_DOCTRINE` routing for essence content
 - Re-enable `teacher_wrapper` or render-glue for tradition voice
-- `AUTHOR_COMMENTARY` witness-register atoms (owned by `#4713`)
+- `AUTHOR_COMMENTARY` witness-register atoms (§13)
 - Flagship/live-lane file edits
 - Pipeline/composer wiring (parks with accent build order)
 
@@ -584,3 +590,128 @@ Joins experience / anti-spam tuple: extend `accent_signature` hash to include `W
 5. Dosage + placement — §12.4.
 6. Pilot bank path + unwired status — §12.5.
 7. Operator questions with defaults — §12.7.
+
+---
+
+## §13 — AUTHOR_COMMENTARY (v1.1 amendment)
+
+**Archaeology:** [artifacts/research/AUTHOR_COMMENTARY_ARCHAEOLOGY_2026-07-07.md](../artifacts/research/AUTHOR_COMMENTARY_ARCHAEOLOGY_2026-07-07.md)
+
+**Problem:** Books lack the author's personality — the witness register ("I've seen people try this — it helped them; maybe it'll help you too"), distinct from expert register ("I know this") and distinct from teacher/science wrappers.
+
+**Critical trap:** The teacher-mode "I came across the teachings of…" pattern **partially lived in `teacher_wrapper`** (render-glue path, default OFF since de-injection). **Resurrection = authored accent atoms only.** Re-enabling `teacher_wrapper` or any render-injection path for commentary is **out of scope and BLOCKED**.
+
+### 13.1 Two forms (spec both; v1 implements beats-only)
+
+| Form | Description | v1 recommendation |
+|------|-------------|-------------------|
+| **(a) Discrete commentary beats** | New `AUTHOR_COMMENTARY` accent class — planner-placed, sparse, framing inside atom | **Ship v1** |
+| **(b) Register threading** | Witness voice as coloring of existing PIVOT/TAKEAWAY slots | **Defer** — risks locked chapter shape; line-edit-lane experiment later |
+
+**Threading analysis:** PIVOT and TAKEAWAY carry thesis weight; threading witness register into them blurs slot voice zones (OPD-20260606-005). REFLECTION already accepts teacher_wrapper for attribution — commentary must not duplicate wrapper function. **Beats-only for v1.**
+
+### 13.2 Commentary types taxonomy
+
+| Type | `commentary_type` | Register rule | Example shape |
+|------|-------------------|---------------|---------------|
+| Observed pattern | `observed_pattern` | Third-person witness of others; never clinical | "I've watched people try this between meetings…" |
+| Personal admission | `personal_admission` | First-person; licensed by bio only | "This one took me the longest to believe." |
+| Gentle endorsement | `gentle_endorsement` | Outcome witness, not promise | "The ones who tried it came back sounding different — not fixed, just harder to gaslight." |
+| Source disclosure | `source_disclosure` | **Teacher-mode only** — observer, not student | "I came across Ahjan's teaching on the alarm within…" |
+| Skeptic's companion | `skeptics_companion` | Meets reader doubt without debate | "I didn't believe the body-lead thing either — until standup stopped being the loudest meeting." |
+
+**Banned in all types:** expert-voice ("I know"), clinical/therapeutic claims, fabricated credentials, guru register.
+
+### 13.3 Mode boundary (gate rule)
+
+| Mode | Teacher/tradition in commentary | Gate |
+|------|--------------------------------|------|
+| **Teacher-mode** | `source_disclosure` may name teacher/tradition — author is **observer**, not student | `mode_allow` includes `teacher_mode` |
+| **Composite** | **ZERO** teacher/tradition reference — witness *people and practices* only | `composite_safe: true` required; mode-bleed gate untouched |
+
+WISDOM_ESSENCE lane handles tradition-flavored distilled content separately under its own dosage.
+
+### 13.4 Bio-consistency contract
+
+Every commentary atom must be **derivable from the author's bio** (`assets/authors/<author_id>/bio.yaml`). The bio is the **license**.
+
+```yaml
+# AUTHOR_COMMENTARY extensions on accent_atom.yaml
+author_id: ravi_chandra                    # required
+commentary_type: observed_pattern | personal_admission | gentle_endorsement | source_disclosure | skeptics_companion
+mode_allow: [composite, teacher_mode]        # source_disclosure: [teacher_mode] only
+composite_safe: true|false                   # must be true unless teacher_mode-only atom
+bio_license_refs:                            # audit trail — which bio claims license this atom
+  - watched_teammates_try_practices
+register: witness                            # mandatory; gate-enforced
+expert_register_allowed: false               # mandatory
+```
+
+**Bio-enrichment program:** When bio depth is insufficient to license commentary (thin roster line only), enrich bio first — `status: operator_approved` required before production wiring (operator ratification logged in `operator_decisions_log.tsv`). **Authenticity rule:** observational claims only for pen-name/EI authors; no fabricated credentials; no clinical claims — consistent with manga full-EI-disclosure posture.
+
+**Positioning profile constraints** (`author_positioning_profiles.yaml`): commentary must respect `allowed_language` / `forbidden_language` for the author's profile (e.g. `research_guide` forbids `emotional_confession` — use observational witness, not memoir).
+
+### 13.5 Placement + dosage
+
+| Field | Default (12-chapter book) |
+|-------|---------------------------|
+| `accent_budget.AUTHOR_COMMENTARY` | **0** (pilot exception) |
+| Recommended production default | **3** per book (Q-AUTH-01) |
+| Brand tunable range | 2–4 |
+| Max chapters with any accent share | unchanged (§4.3, default 0.25) |
+
+Joins experience / anti-spam tuple: extend `accent_signature` hash to include `AUTHOR_COMMENTARY_count`.
+
+**Allowed positions:**
+
+| Position | Typical type | Handoff → |
+|----------|--------------|-----------|
+| `after_REFLECTION` | observed_pattern, source_disclosure (teacher) | EXERCISE / STORY |
+| `after_EXERCISE` | gentle_endorsement, skeptics_companion | INTEGRATION |
+| `after_PIVOT` | personal_admission | REFLECTION / EXERCISE |
+| `before_THREAD` | personal_admission, gentle_endorsement | THREAD |
+
+### 13.6 Bank program
+
+| Attribute | Spec |
+|-----------|------|
+| **Location** | `SOURCE_OF_TRUTH/accent_banks/author_commentary/<topic>/<author_id>/` |
+| **Pilot** | `anxiety/ravi_chandra/en_US.yaml` — 10 atoms, ≥3 types, golden-ch1 bar |
+| **Sizing — topic complete** | 8–12 atoms × active authors per persona×topic cell |
+| **Status** | `status: unwired` / `KNOWN_UNWIRED: accent_banks/author_commentary/` until build lane |
+
+### 13.7 Gates (proposed — build lane)
+
+| Gate | BLOCK condition |
+|------|-----------------|
+| `check_author_commentary_bio_license.py` | `bio_license_refs` not satisfiable from author bio YAML |
+| `check_author_commentary_mode_bleed.py` | `composite_safe: false` atom in composite-mode plan OR teacher name in composite-safe atom body |
+| `check_author_commentary_register.py` | Expert-voice markers or clinical claim patterns |
+| `check_accent_framing_in_atom.py` | (shared) composer wrapper detected |
+
+### 13.8 Operator decisions (defaults recommended)
+
+| ID | Question | Recommendation |
+|----|----------|----------------|
+| **Q-AUTH-01** | Dosage default | **3/book** |
+| **Q-AUTH-02** | Threading into existing beats? | **Beats-only for v1**; threading = line-edit-lane experiment later |
+| **Q-AUTH-03** | Bio-enrichment scope | **Flagship author now** (`ravi_chandra` for gen_z × anxiety); others per-brand as books enter production |
+
+### 13.9 Out of scope
+
+- Re-enable `teacher_wrapper` or render-glue for commentary
+- Teacher references in composite commentary
+- Fabricated credentials or clinical claims
+- Flagship/live-lane file edits
+- Pipeline/composer wiring (parks with accent build order)
+
+### 13.10 Acceptance (AUTHOR_COMMENTARY amendment)
+
+1. Archaeology report with six-layer labels — linked above.
+2. Two forms spec'd; v1 beats-only recommended — §13.1.
+3. Five-type taxonomy with register rules — §13.2.
+4. Mode boundary gate rule — §13.3.
+5. Bio-consistency contract + enrichment program — §13.4.
+6. Dosage + placement — §13.5.
+7. Pilot bank path + unwired status — §13.6.
+8. Operator questions with defaults — §13.8.
