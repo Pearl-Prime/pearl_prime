@@ -1,0 +1,186 @@
+# PILOT (wave2) — TEACHER-MODE manga (Tier-1 authored). One mode only: TEACHER. No music.
+# Genre: historical_period. Wrapper (per MANGA_MODE_WRAPPER_DESIGN.md / manga_mode_vessels.yaml):
+# historical teacher-vessel = THE WORKSHOP HANDS THAT REFUSE HURRY (M4 C-grade upgrade — period
+# craftsperson: here, a public letter-writer / calligrapher in a Meiji garrison town). The hands
+# stop when the apprentice forces; the doctrine is the pause the material demands — never a speech.
+# NEW genre×mode combo (historical×teacher had no written output before this).
+# Shell engine is HISTORICAL-NATIVE: era-force before personal arc, rank and paper machinery of a
+# real war, grief across time, honor/duty register, retrospective narration. (Render gated.)
+
+schema_version: 1.0.0
+artifact_type: chapter_script_writer_handoff
+series_id: legacy_builder_memoir__en_US__historical_period__series01
+catalog_title: "The Last Letter Home"
+chapter_id: ep_001
+title: "The Last Letter Home — Episode 1: The Character for Return"
+mode: teacher                         # XOR — never music
+manga_author: Hana Softwind           # EI author per series plan SSOT
+teacher_id: brand_teacher_unresolved  # metadata only (M3 convention); legacy_builder has no brand-teacher assignment; the teacher is NEVER named in-story
+teacher_doctrine_anchor: the_pause_the_material_demands
+brand_id: legacy_builder_memoir
+genre: historical_period
+topic: grief                          # interior — never named on the page
+locale: en_US
+available_locales: [en_US, ja_JP, ko_KR, zh_CN, zh_TW]
+
+# Teacher-mode 3-beat skeleton (doctrine earned through the craft, shown before told):
+mode_beats:
+  wound: page_3-4     (the doctrine's ABSENCE — Fumi rushes the one letter that cannot be rushed; the ink blots the character for RETURN)
+  turn:  page_5-6     (the hands stop; ground at the stone's pace, write at the paper's pace — the pause is where the mother's words get their weight)
+  renewal: page_8     (one slow correct motion, kept — and the title object arrives, a dead man's last letter home, to be read at its own pace)
+
+main_characters:
+  - id: fumi
+    name: Fumi Ashida
+    role: >-
+      protagonist, 19 — apprentice at a public letter-writer's shop in the castle town of Hōsen,
+      winter of Meiji 38 (1905). Took the apprenticeship for one reason: the shop sees the
+      casualty telegrams before the town does, and her brother Shinji is with the Eighth in
+      Manchuria. Fast, exact, and always writing toward being finished. (Unstated: she writes
+      fast so nothing has time to be true while she writes it. Never named on the page.)
+    visual_anchor: ink-stained right cuff; her brother's old student cap worn against the cold; eyes that go first, always, to any posted list of names.
+  - id: gensai
+    name: Ōoka Gensai              # historical TEACHER-VESSEL — the workshop hands that refuse hurry
+    role: >-
+      master scribe, 60s — thirty years writing the town's letters: marriage offers, debts,
+      apologies, and now, war. He has never once been seen to hurry. His hands stop — simply
+      stop — when a letter is being fled through instead of written. He owns a locked drawer
+      he has never explained. The doctrine lives in the pace of his grinding stone, not in speeches.
+    visual_anchor: sleeves bound with a cord gone grey from wear; hands like driftwood, perfectly steady; he grinds ink so slowly the steam of his breath moves faster.
+  - id: shiono
+    name: Widow Shiono
+    role: >-
+      a farmer's widow from the terraces above town. Comes every week, coins knotted in a
+      furoshiki, to dictate a letter to her son Tōgo of the Eighth Infantry. This week the
+      neighbors would not meet her eyes at the well, and the station board has a new name on it.
+      She dictates anyway. Whether she knows is a question the chapter refuses to answer for her.
+    visual_anchor: field-bent back straightened by force of will at the shop door; her son's first-year copybook carried like a passport.
+  - id: the_drawer
+    name: The Locked Drawer
+    role: >-
+      the recurring object — a paulownia drawer in the shop's back room. What it holds is the
+      town's weight: letters that came back. It opens once, at the end of the chapter.
+
+scene_palette:
+  primary: snow-grey castle town; charcoal roofs; paper-white and ink-black interiors
+  secondary: sodium-warm lantern light (victory lanterns for Port Arthur, strung over the street where the lists are posted)
+  accent: vermilion — the field-post stamps, the shrine gate, the one warm color in a black-and-white winter
+  turn_palette: low brazier light on two bent heads and one waiting brush (pages 5-6)
+
+pages:
+  # ── ERA FIRST: the world before the protagonist (silent, environmental) ────
+  - page_id: ep001_p01
+    panels:
+      - {panel_id: ep001_001, beat_type: era_hook, intent: "GENRE SHELL — invitation to an era; landscape before people (bible §3: era-establishing opening)",
+         scene: "SILENT. Wide establishing: the castle town of Hōsen under new snow, black-timbered roofs stepped down a hillside to a rail line. A troop train stands at the station, breathing steam. Era markers: telegraph poles new against old roofs; a garrison flag. Narration box (rectangular, retrospective, distanced): 'In the thirty-eighth year of Meiji, the letters left Hōsen twice a day.'"}
+      - {panel_id: ep001_002, beat_type: environmental_breath, intent: "the era's double face — victory lanterns over casualty lists",
+         scene: "SILENT. Street view: paper victory lanterns strung across the main street — PORT ARTHUR HAS FALLEN brushed on a banner — and directly beneath them, the station notice-board where a clerk in an official cap pastes up a fresh telegraph list of names. Townspeople gather in two weathers at once: some faces lantern-lit, some reading the board. Narration box: 'That winter the town learned to cheer and to count in the same breath.'"}
+      - {panel_id: ep001_003, beat_type: era_hook, intent: "locate the protagonist inside the era — via her one daily ritual",
+         scene: "FUMI ASHIDA, 19, brother's student cap, breath fogging, stands before the notice-board reading the new list top to bottom with a speed that is obviously practiced. Her lips move on the syllables. CU her mittened finger stopping under each surname beginning with A. Narration box: 'Fumi Ashida read the lists the way the pious read sutras. Daily. Twice, to be safe.' Her shoulders drop one centimeter: not today."}
+  - page_id: ep001_p02
+    panels:
+      - {panel_id: ep001_004, beat_type: political_advance, intent: "the paper machinery of the war — the shop as the town's throat (era-force before personal arc, bible §3)",
+         scene: "Interior: the letter-writer's shop. Low brazier, paper smell, a queue: a conscript's mother with a boy's photograph; a merchant with a requisition dispute; a girl Fumi's age clutching a returned envelope struck through with censor's black. ŌOKA GENSAI writes at his low desk, unhurried as weather. Formality register: court-polite. Merchant, hat in hands: 'Gensai-sensei, if the army holds my horses through spring planting—' Gensai, not looking up, brush moving: 'Then we will say so. Politely. Twice.'"}
+      - {panel_id: ep001_005, beat_type: political_advance, intent: "the censor's black — what the state does to sentences",
+         scene: "Fumi reads the returned letter for the girl her own age — aloud, quietly. Insert CU of the page: soldier's careful hand, three lines drowned under the field censor's black bar, then: '—but I am well. I dream of the persimmon tree.' The girl's face does not move; her hands do. Narration box: 'The army wrote its own kind of silence into every envelope. The town got fluent in reading around it.'"}
+      - {panel_id: ep001_006, beat_type: personal_reveal, intent: "Fumi's stake planted inside the era-force — the brother",
+         scene: "Lull. Fumi, restocking paper, slips a folded letter from her sleeve — read to softness at the creases. Insert: her brother SHINJI's hand, boyish: 'Eighth Infantry, before Mukden. The cold here makes Hōsen feel like a bath. Do not let the old man work you to bone, Fu.' One line above it, censor-blacked. CU Fumi's thumb over the black bar, once — a habit, like touching a scar. SILENT."}
+
+  # ── The commission that cannot be rushed ───────────────────────────────────
+  - page_id: ep001_p03
+    panels:
+      - {panel_id: ep001_007, beat_type: personal_reveal, intent: "the widow's weekly letter — and what the reader saw on the board that she may have too",
+         scene: "The shop door slides. WIDOW SHIONO enters, snow on her shoulders, back straightening at the threshold by pure will, coins knotted in a furoshiki, her son's old copybook under her arm. The queue goes quiet in the particular way of people who were at the well this morning. Behind her through the open door, far down the street: the notice-board, the lanterns. Fumi's eyes flick to it — page 1's list — and back. The reader saw the name SHIONO TŌGO pasted up. Whether the widow has, the panel refuses to say."}
+      - {panel_id: ep001_008, beat_type: silent_witness, intent: "the master accepts the impossible commission without one word of comment",
+         scene: "SILENT. Gensai looks at Widow Shiono for a long moment — then sets out fresh paper, adjusts his sleeve cord, and touches the grinding stone. Acceptance, in craft. The widow kneels opposite, arranges the copybook square to the desk edge like an offering. Fumi, at the side desk, has gone very still, eyes down."}
+      - {panel_id: ep001_009, beat_type: confrontation, intent: "the apprentice's rebellion — the era's arithmetic said out loud, almost",
+         scene: "Back room, fetching paper. Fumi, low and fierce, to Gensai as he passes: 'Sensei. The board — this morning — her son is—' She stops herself. 'Where does the letter even GO?' Gensai, selecting paper by weight, by touch, does not answer the question she asked. Gensai: 'Widow Shiono buys a letter every week. Today she will buy a letter.' He hands her the brush box. 'You will write it.'"}
+
+  # ── WOUND: she rushes the one letter that cannot be rushed ─────────────────
+  - page_id: ep001_p04
+    panels:
+      - {panel_id: ep001_010, beat_type: confrontation, intent: "WOUND BEAT — writing fast so it cannot be true while she writes it",
+         scene: "Fumi kneels at the desk, the widow opposite. Widow Shiono, hands folded, begins to dictate — village news, the early persimmons, the terrace wall mended. Fumi writes FAST — brush snapping column to column, grinding fresh ink in three harsh strokes, jaw set, outrunning something. SFX: the dry rasp of a hurried stone. The widow's words in balloons; Fumi's columns in insert, technically correct and somehow airless."}
+      - {panel_id: ep001_011, beat_type: grief_beat, intent: "the material fails — the character for RETURN drowns",
+         scene: "Widow Shiono: '...and write — come home when the war permits it. Write that last.' CU: Fumi's overloaded brush hits the paper too fast — the character 帰 — RETURN — blots, drowns, a black flower eating the column. The one word of the whole letter that mattered. SILENT beat panel: the ruined stroke, huge in frame. Fumi's breath stops."}
+      - {panel_id: ep001_012, beat_type: silent_witness, intent: "the hands stop — the vessel acts; no lecture comes",
+         scene: "Gensai's hand — driftwood-steady — settles over Fumi's wrist. Not a grip. A stop. He lifts the ruined sheet, holds it to the brazier light, studies the blot the way a swordsmith studies a crack. SILENT. The widow waits with the patience of terraced fields. Nothing is explained. Narration box, distanced: 'Thirty years at that desk had taught the old man exactly what a hurried stroke is fleeing.'"}
+
+  # ── TURN: the pause the material demands (doctrine shown, then barely told) ─
+  - page_id: ep001_p05
+    panels:
+      - {panel_id: ep001_013, beat_type: environmental_breath, intent: "TURN BEGINS — grinding at the stone's pace; the craft slows the page itself",
+         scene: "SILENT sequence, three tall slow panels in one: (1) Gensai's hands pour three drops of water into the inkstone's well. (2) The stick moves on the stone in long oval strokes, unhurried, steam of breath drifting faster than the hand. (3) The ink deepening in the well, black finding its true depth. Panel timing stretched; the reader's own pace forced down to the stone's. SFX, small: suru... suru... suru."}
+      - {panel_id: ep001_014, beat_type: personal_reveal, intent: "the only near-line of doctrine — craft instruction, not counsel",
+         scene: "Gensai loads the brush, hands it back to Fumi, handle first. Gensai, quietly, eyes on the paper: 'Grind until the stone goes quiet. Write at the pace the paper drinks.' Beat. 'The pause is part of the letter. Her son will read it there.' He says nothing else. Whether a dead man reads pauses is not a question his face permits."}
+      - {panel_id: ep001_015, beat_type: grief_beat, intent: "the dictation, slowed — the pause makes room for the words that matter",
+         scene: "Fumi writes again — at the paper's pace now. And in the space the slowness opens, Widow Shiono's dictation changes register: 'Say: the persimmons came early, and I salted them the way you like. Say: your father's grave gets the morning sun, now the pine is cut. Say—' her voice fails; Gensai's raised palm holds Fumi's brush OFF the paper, hovering, ink gathering at the tip, WAITING — full-width panel of the held brush and the widow's bowed head — 'Say: come home when the war permits it.'"}
+  - page_id: ep001_p06
+    panels:
+      - {panel_id: ep001_016, beat_type: grief_beat, intent: "the character for RETURN, written whole — the wound's mirror image",
+         scene: "CU: the brush comes down. 帰 — RETURN — written entire, balanced, black and calm on the page. Insert beside it, ghosted: the morning's drowned blot, for the reader's eye only. Widow Shiono watches the character dry as if watching a face. Widow Shiono, softly, to the paper: 'He was slow to walk, too. We never hurried him.'"}
+      - {panel_id: ep001_017, beat_type: silent_witness, intent: "grief across time — carried, not cured (bible §5: resolution is learning to carry it)",
+         scene: "SILENT. The finished letter, folded by Gensai's hands with ceremonial exactness. The widow receives it in both hands and bows to the exact degree one bows to a person. She tucks it beside the copybook. At the door she stops, back to the room, and stands one breath longer than leaving requires. Then she goes out into the snow. Nobody in the shop says her son's name."}
+      - {panel_id: ep001_018, beat_type: political_advance, intent: "the era-force answers back — the field-post window",
+         scene: "The post office, dusk, vermilion stamps and brass scales. The clerk reads the address, and his stamp-hand hesitates — his eyes go, involuntarily, to the notice-board copy nailed by his window. One beat of the state knowing what the letter refuses to know. Then he stamps it — VERMILION, FIELD POST, EIGHTH ARMY — and looks away as he does it. Clerk, official-flat: 'Twelve sen.' Narration box: 'The empire's machinery, that winter, ran on exactly this: clerks deciding, one envelope at a time, what not to say.'"}
+
+  # ── The drawer, and the era's account ──────────────────────────────────────
+  - page_id: ep001_p07
+    panels:
+      - {panel_id: ep001_019, beat_type: personal_reveal, intent: "the locked drawer opens — the town's grief, banked in paper",
+         scene: "Night shop. Fumi, sweeping, finds Gensai in the back room with the paulownia drawer OPEN. Inside: letters. Dozens. Bundled by family name, every bundle struck with the same brutal stamp — RETURN TO SENDER / ADDRESSEE FALLEN — some yellowed, some new. He is not reading them. He is squaring their edges, the way one tends graves. Fumi in the doorway, broom stopped. Fumi, barely aloud: 'All of them...?' Gensai: 'The families know where they are. Some come to sit with them. Some never will. Both are correct.'"}
+      - {panel_id: ep001_020, beat_type: environmental_breath, intent: "seasonal anchor + the personal dread, quiet (time-as-character, bible §3)",
+         scene: "SILENT. Wide: the shop under snow, lamplit paper windows, the castle black on its hill, victory lanterns guttering down the street. Insert CU inside: Fumi at the side desk beginning her own letter — 'Dear Shinji —' — and this time grinding the ink slowly, the stone barely whispering. The steam of her breath. Narration box: 'Mukden was six weeks away. No one in Hōsen knew that yet, and the winter, mercifully, did not say.'"}
+
+  # ── RENEWAL + HOOK: the title object arrives ───────────────────────────────
+  - page_id: ep001_p08
+    panels:
+      - {panel_id: ep001_021, beat_type: aftermath, intent: "RENEWAL — one slow correct motion, kept (the doctrine held without being named)",
+         scene: "Morning. Fumi at the notice-board — the daily sutra — but changed: she reads the full list at a walking pace, name by name, and this time bows her head slightly at each name she recognizes before moving on. It costs her longer. She pays it. Narration box: 'The lists did not get shorter that winter. Fumi Ashida got slower. In Hōsen, that passed for prayer.'"}
+      - {panel_id: ep001_022, beat_type: era_hook, intent: "HOOK — the last letter home arrives after its writer's death; next-issue engine set",
+         scene: "The shop. A field-post courier, snow to the knees, delivers a single battered envelope. Gensai reads the face of it and goes still in a way thirty years have never once required. Insert CU: sender — SHIONO TŌGO, EIGHTH INFANTRY. Written before Port Arthur; slower than the telegraph by three weeks. A dead man's last letter home, addressed to his mother."}
+      - {panel_id: ep001_023, beat_type: closure, intent: "TEACHER close — the task passes to the apprentice; at its pace, not hers",
+         scene: "Gensai places the unopened letter in Fumi's hands with both of his, the way the widow received hers. The weight of it in frame — a few monme of paper, heavier than the drawer. Gensai, quietly: 'Tomorrow we bring it to her. You will read it aloud.' Beat. 'At its pace. Not yours.' Final panel: the letter in her hands, vermilion stamp like a small sun, snow ticking at the paper window. Fumi bows her head — to the letter."}
+
+craft_notes: >-
+  VESSEL (teacher-mode): THE WORKSHOP HANDS THAT REFUSE HURRY — cited from
+  config/manga/manga_mode_vessels.yaml historical_period.teacher (M4 C-grade upgrade; vessel_desc
+  names calligrapher as a sanctioned period craftsperson). Doctrine = the pause the material
+  demands; hands stop when the apprentice forces (p4); shown (p5 grinding sequence) a full beat
+  before the only near-line of instruction (p5, craft-register: 'Write at the pace the paper
+  drinks'). Teacher is NEVER named in-story; teacher_id='brand_teacher_unresolved' is metadata only.
+  GENRE BIBLE: docs/research/manga_craft/historical_period.md — engine compliance: era-establishing
+  opening with silent environmental panels before any character (§3, p1); political/social layer
+  (war paper-machinery: telegraph lists, censor bars, field post) established BEFORE the personal
+  arc (§3/§6.6); societal force as antagonist, not an individual villain (§5 — the war's
+  arithmetic, embodied by clerks and stamps with comprehensible reasons); grief across time
+  carried not cured (§5, widow + drawer); retrospective distanced narrator in rectangular boxes
+  (§4); period formality registers and honorifics (§4 — sensei, court-polite merchant); era_marker
+  on every page-spread and environmental-breath/silent-witness panels >20% (§8).
+  DOSSIER: artifacts/research/genre_bestseller_dossiers/historical_bestseller_research_2026-05-13.md —
+  register: historical_slice_of_life/court-adjacent home front; therapeutic-embed landing moment
+  used is the dossier's LETTER SCENE (§7), built out as the series spine; anachronism policed
+  (Russo-Japanese-era field post, telegraph casualty lists, Port Arthur/Mukden timeline; no
+  Showa-era red-paper anachronism, no modern idiom in any balloon).
+  PACING CONTRACT: config/manga/manga_pacing_by_genre.yaml historical_period — narration tolerance
+  very_high (used), silent ratio 0.20-0.35 (7 silent/near-silent of 23), page_turn_triggers used:
+  era_hook (p1, p8), political_advance (p2, p6), personal_reveal (p7), grief_beat (p4-6).
+  SHELL TRACEABILITY: reader fantasy = standing inside a real, weighted past where stakes were
+  real and mattered; escalation engine = the war's paper arithmetic closing in on named people
+  (lists → censor bars → returned bundles → the posthumous letter) against the Mukden clock;
+  scene pleasures = ink-grinding craft detail, censor's black bars, the field-post stamp
+  hesitation, the drawer of returned letters, dictation-as-duel. GENERIC FAILURE MODE AVOIDED:
+  no modern therapeutic vocabulary in any era voice, no history-as-costume — the era shapes what
+  every character is ABLE to say (the widow's knowledge is never resolved into a modern grief
+  conversation; the clerk's mercy is procedural, not psychological). Remove the topic label and
+  this is still a home-front war drama about a scribe's shop. Cold-read gate: the blotted 帰 and
+  the held brush land as felt beats pages before any theme could be named.
+
+wrapper_note: >-
+  Teacher-mode only. The doctrine (grief moves at the hand's pace; the pause is part of the letter)
+  is never a self-help line — it is dramatized through the period craft vessel: hands that stop
+  (p4), ink ground at the stone's pace (p5), a brush held OFF the paper while a mother's voice
+  fails (p5), and an apprentice who ends the chapter reading casualty lists slower on purpose (p8).
+  No musician, no song, no sound-motif. If this were music-mode it would carry the same arc via the
+  folk-song-down-the-eras vessel and NO Gensai-as-teacher. Interior topic (grief) never named on
+  the page; the era is the facade, the letters are the engine, the war supplies the clock.
