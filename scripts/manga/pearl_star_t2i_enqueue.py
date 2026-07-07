@@ -33,8 +33,19 @@ def enqueue_panel_job(
     panel_id: str = "",
     output_basename: str = "",
     dest_path: str = "",
+    out_path: str | Path = "",
     ssh_host: str = "pearl_star",
 ) -> dict[str, Any]:
+    """Enqueue one t2i panel job (RAP queue-first).
+
+  *out_path* — repo-relative or absolute panel PNG path; mapped to Pearl
+  Star–writable *dest_path* via ``pearl_star_dest_path``.  RESUME_COMMANDS.sh
+  and bank-contract snippets use this kwarg.  Explicit *dest_path* wins when both
+  are set.
+    """
+    resolved_dest = dest_path
+    if not resolved_dest and out_path:
+        resolved_dest = pearl_star_dest_path(Path(out_path))
     payload = {
         "prompt": prompt,
         "negative": negative,
@@ -43,7 +54,7 @@ def enqueue_panel_job(
         "seed": seed,
         "panel_id": panel_id,
         "output_basename": output_basename or panel_id,
-        "dest_path": dest_path,
+        "dest_path": resolved_dest,
     }
     # Delegate to the canonical dispatch helper (RAP queue-first). This module
     # keeps its manga-specific signature + task picker + dest_path contract; the
