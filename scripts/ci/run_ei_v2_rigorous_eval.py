@@ -46,7 +46,7 @@ from phoenix_v4.quality.ei_v2.config import load_ei_v2_config
 from phoenix_v4.quality.ei_v2.safety_classifier import classify_safety
 from phoenix_v4.quality.ei_v2.tts_readability import score_tts_readability
 from phoenix_v4.quality.ei_v2.emotion_arc_validator import validate_emotion_arc
-from phoenix_v4.quality.ei_v2.semantic_dedup import detect_semantic_duplicates
+from phoenix_v4.quality.ei_v2.semantic_dedup import analyze_chapter_content_uniqueness
 from phoenix_v4.quality.ei_v2.domain_embeddings import domain_thesis_similarity
 from phoenix_v4.quality.ei_parallel_adapter import compare_slot, build_pipeline_comparison
 
@@ -145,6 +145,7 @@ class ChapterEval:
     somatic_precision: float = 0.0
     composite: float = 0.0
     issues: List[str] = field(default_factory=list)
+    uniqueness_evidence: Dict[str, Any] = field(default_factory=dict)
     eval_ms: float = 0.0
 
 
@@ -203,16 +204,16 @@ def evaluate_chapter(
 
     ev.safety_compliance = 1.0 - safety["risk_score"]
 
+    ei_cfg = load_ei_v2_config()
     if len(all_chapter_texts) > 1:
-        others = [t for i, t in enumerate(all_chapter_texts) if i != chapter_index and t.strip()]
-        if others:
-            dupes = detect_semantic_duplicates(
-                [chapter_text] + others[:5],
-                [f"ch{chapter_index}"] + [f"other{i}" for i in range(len(others[:5]))])
-            max_sim = max((d["similarity"] for d in dupes), default=0.0)
-            ev.content_uniqueness = max(0.0, 1.0 - max_sim * 2)
-        else:
-            ev.content_uniqueness = 1.0
+        uniq = analyze_chapter_content_uniqueness(
+            chapter_text,
+            chapter_index,
+            all_chapter_texts,
+            cfg=ei_cfg.get("semantic_dedup"),
+        )
+        ev.content_uniqueness = float(uniq["content_uniqueness"])
+        ev.uniqueness_evidence = uniq
     else:
         ev.content_uniqueness = 1.0
 

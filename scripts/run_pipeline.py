@@ -1728,6 +1728,12 @@ def _run_spine_pipeline_mode(
                         "content_uniqueness": round(_ev.content_uniqueness, 4),
                         "somatic_precision": round(_ev.somatic_precision, 4),
                         "issues": _ev.issues,
+                        "uniqueness_evidence": {
+                            "scoring_mode": (_ev.uniqueness_evidence or {}).get("scoring_mode"),
+                            "worst_pair": (_ev.uniqueness_evidence or {}).get("worst_pair"),
+                            "max_prose_similarity": (_ev.uniqueness_evidence or {}).get("max_prose_similarity"),
+                            "max_ngram_overlap": (_ev.uniqueness_evidence or {}).get("max_ngram_overlap"),
+                        },
                     }
                 )
             _ei_composite = (

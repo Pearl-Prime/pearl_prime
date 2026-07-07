@@ -66,6 +66,13 @@ semantic_dedup:
   semantic_similarity_threshold: 0.85
   cache_enabled: true
   cache_path: artifacts/ei_v2/dedup_cache.db
+  # Shipped-book chapter uniqueness (EI v2 rigorous eval / spine pipeline).
+  # Prose-first: penalize near-duplicate writing, not shared beat/structure.
+  within_book_chapter:
+    prose_ngram_weight: 0.70
+    prose_char_weight: 0.30
+    ngram_penalty_floor: 0.10
+    ngram_penalty_scale: 3.0
 emotion_arc:
   enabled: true
   mode: lexicon

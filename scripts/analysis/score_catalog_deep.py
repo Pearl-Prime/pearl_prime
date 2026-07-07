@@ -49,6 +49,13 @@ from urllib.error import URLError
 REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(REPO_ROOT))
 
+from phoenix_v4.quality.content_uniqueness_truth import (
+    DEFAULT_SELLABILITY_UNIQUENESS_TRUTH_SOURCE,
+    LEGACY_REGISTRY_WARNING,
+    TRUTH_SOURCE_LEGACY_REGISTRY,
+    enrich_catalog_book_result,
+)
+
 # ── Config ──
 CANONICAL_TOPICS = [
     "anxiety", "boundaries", "burnout", "compassion_fatigue", "courage",
@@ -788,7 +795,10 @@ def main():
             print(f"  Scoring {persona} × {topic} ...", end=" ", flush=True)
             t0 = time.time()
             try:
-                result = score_book(topic, persona, registry, use_llm=use_llm)
+                result = enrich_catalog_book_result(
+                    score_book(topic, persona, registry, use_llm=use_llm),
+                    topic,
+                )
                 elapsed = round(time.time() - t0, 2)
                 print(f"composite={result['composite']:.3f} ({elapsed}s)")
                 scored_books.append(result)
@@ -837,6 +847,11 @@ def main():
     output = {
         "scored_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "scoring_method": "heuristic_15_dims" + ("_plus_qwen_llm" if not args.skip_llm else ""),
+        "truth_source": TRUTH_SOURCE_LEGACY_REGISTRY,
+        "default_sellability_truth_source": DEFAULT_SELLABILITY_UNIQUENESS_TRUTH_SOURCE,
+        "sellability_truth": False,
+        "corpus_warning": LEGACY_REGISTRY_WARNING,
+        "note": "Scores registry/{topic}.yaml atom pools — NOT shipped spine books.",
         "qwen_host": QWEN_HOST if use_llm else None,
         "topics_scored": len(set(b["topic"] for b in scored_books)),
         "personas_scored": len(set(b["persona"] for b in scored_books)),

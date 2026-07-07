@@ -1,0 +1,303 @@
+{
+  "timestamp": "2026-07-07T20:18:34.554803+00:00",
+  "lane": "semantic-dedup within-book prose-first",
+  "root_cause": "Legacy chapter eval used atom-pool composite (35% ngram + 25% structure + 25% beat) with max_sim*2 penalty over others[:5]. Shipped books share therapeutic beat markers and paragraph rhythm; word n-gram overlap stays ~0.01 (trigram uniqueness=1.0). Beat similarity=1.0 inflated composite to ~0.42 \u2192 content_uniqueness\u22480.16 uniformly.",
+  "fix": "within_book_chapter prose-first scorer in semantic_dedup.py; compare all chapters; penalize prose n-gram/char overlap only",
+  "proof_cells": [
+    {
+      "label": "burnout_overwhelm__corporate_managers",
+      "before": {
+        "chapter_count": 12,
+        "content_uniqueness_avg": 0.153,
+        "content_uniqueness_min": 0.1278,
+        "content_uniqueness_max": 0.1588,
+        "per_chapter": [
+          0.1588,
+          0.1588,
+          0.1588,
+          0.1588,
+          0.1588,
+          0.1588,
+          0.1588,
+          0.1278,
+          0.1286,
+          0.1588,
+          0.1508,
+          0.1588
+        ]
+      },
+      "after": {
+        "content_uniqueness_avg": 0.8047,
+        "content_uniqueness_min": 0.6439,
+        "content_uniqueness_max": 0.8835,
+        "per_chapter": [
+          0.8155,
+          0.8835,
+          0.8835,
+          0.6439,
+          0.7987,
+          0.819,
+          0.8516,
+          0.8155,
+          0.6439,
+          0.7987,
+          0.8833,
+          0.819
+        ]
+      },
+      "chapter0_pair_evidence_before": {
+        "formula": "1 - max_composite*2 (others[:5], beat+structure weighted)",
+        "top_pairs": [
+          {
+            "id_a": "ch0",
+            "id_b": "other0",
+            "similarity": 0.4206,
+            "evidence": {
+              "ngram_overlap": 0.0101,
+              "char_ngram_overlap": 0.3565,
+              "structural_similarity": 0.4544,
+              "beat_similarity": 1.0
+            }
+          },
+          {
+            "id_a": "other0",
+            "id_b": "other1",
+            "similarity": 0.4184,
+            "evidence": {
+              "ngram_overlap": 0.0313,
+              "char_ngram_overlap": 0.3897,
+              "structural_similarity": 0.7958,
+              "beat_similarity": 0.6
+            }
+          },
+          {
+            "id_a": "other0",
+            "id_b": "other2",
+            "similarity": 0.4157,
+            "evidence": {
+              "ngram_overlap": 0.0031,
+              "char_ngram_overlap": 0.3645,
+              "structural_similarity": 0.4398,
+              "beat_similarity": 1.0
+            }
+          }
+        ]
+      },
+      "chapter0_pair_evidence_after": {
+        "scoring_mode": "within_book_chapter_prose_first",
+        "worst_pair": {
+          "id_a": "ch0",
+          "id_b": "ch7",
+          "similarity": 0.4143,
+          "prose_similarity": 0.1615,
+          "evidence": {
+            "ngram_overlap": 0.065,
+            "char_ngram_overlap": 0.3867,
+            "structural_similarity": 0.3341,
+            "beat_similarity": 1.0
+          }
+        },
+        "max_ngram_overlap": 0.065,
+        "max_prose_similarity": 0.1615
+      }
+    },
+    {
+      "label": "burnout_watcher__corporate_managers",
+      "before": {
+        "chapter_count": 12,
+        "content_uniqueness_avg": 0.153,
+        "content_uniqueness_min": 0.1278,
+        "content_uniqueness_max": 0.1588,
+        "per_chapter": [
+          0.1588,
+          0.1588,
+          0.1588,
+          0.1588,
+          0.1588,
+          0.1588,
+          0.1588,
+          0.1278,
+          0.1286,
+          0.1588,
+          0.1508,
+          0.1588
+        ]
+      },
+      "after": {
+        "content_uniqueness_avg": 0.8047,
+        "content_uniqueness_min": 0.6439,
+        "content_uniqueness_max": 0.8835,
+        "per_chapter": [
+          0.8155,
+          0.8835,
+          0.8835,
+          0.6439,
+          0.7987,
+          0.819,
+          0.8516,
+          0.8155,
+          0.6439,
+          0.7987,
+          0.8833,
+          0.819
+        ]
+      },
+      "chapter0_pair_evidence_before": {
+        "formula": "1 - max_composite*2 (others[:5], beat+structure weighted)",
+        "top_pairs": [
+          {
+            "id_a": "ch0",
+            "id_b": "other0",
+            "similarity": 0.4206,
+            "evidence": {
+              "ngram_overlap": 0.0101,
+              "char_ngram_overlap": 0.3565,
+              "structural_similarity": 0.4544,
+              "beat_similarity": 1.0
+            }
+          },
+          {
+            "id_a": "other0",
+            "id_b": "other1",
+            "similarity": 0.4184,
+            "evidence": {
+              "ngram_overlap": 0.0313,
+              "char_ngram_overlap": 0.3897,
+              "structural_similarity": 0.7958,
+              "beat_similarity": 0.6
+            }
+          },
+          {
+            "id_a": "other0",
+            "id_b": "other2",
+            "similarity": 0.4157,
+            "evidence": {
+              "ngram_overlap": 0.0031,
+              "char_ngram_overlap": 0.3645,
+              "structural_similarity": 0.4398,
+              "beat_similarity": 1.0
+            }
+          }
+        ]
+      },
+      "chapter0_pair_evidence_after": {
+        "scoring_mode": "within_book_chapter_prose_first",
+        "worst_pair": {
+          "id_a": "ch0",
+          "id_b": "ch7",
+          "similarity": 0.4143,
+          "prose_similarity": 0.1615,
+          "evidence": {
+            "ngram_overlap": 0.065,
+            "char_ngram_overlap": 0.3867,
+            "structural_similarity": 0.3341,
+            "beat_similarity": 1.0
+          }
+        },
+        "max_ngram_overlap": 0.065,
+        "max_prose_similarity": 0.1615
+      }
+    },
+    {
+      "label": "burnout_grief__corporate_managers",
+      "before": {
+        "chapter_count": 12,
+        "content_uniqueness_avg": 0.153,
+        "content_uniqueness_min": 0.1278,
+        "content_uniqueness_max": 0.1588,
+        "per_chapter": [
+          0.1588,
+          0.1588,
+          0.1588,
+          0.1588,
+          0.1588,
+          0.1588,
+          0.1588,
+          0.1278,
+          0.1286,
+          0.1588,
+          0.1508,
+          0.1588
+        ]
+      },
+      "after": {
+        "content_uniqueness_avg": 0.8047,
+        "content_uniqueness_min": 0.6439,
+        "content_uniqueness_max": 0.8835,
+        "per_chapter": [
+          0.8155,
+          0.8835,
+          0.8835,
+          0.6439,
+          0.7987,
+          0.819,
+          0.8516,
+          0.8155,
+          0.6439,
+          0.7987,
+          0.8833,
+          0.819
+        ]
+      },
+      "chapter0_pair_evidence_before": {
+        "formula": "1 - max_composite*2 (others[:5], beat+structure weighted)",
+        "top_pairs": [
+          {
+            "id_a": "ch0",
+            "id_b": "other0",
+            "similarity": 0.4206,
+            "evidence": {
+              "ngram_overlap": 0.0101,
+              "char_ngram_overlap": 0.3565,
+              "structural_similarity": 0.4544,
+              "beat_similarity": 1.0
+            }
+          },
+          {
+            "id_a": "other0",
+            "id_b": "other1",
+            "similarity": 0.4184,
+            "evidence": {
+              "ngram_overlap": 0.0313,
+              "char_ngram_overlap": 0.3897,
+              "structural_similarity": 0.7958,
+              "beat_similarity": 0.6
+            }
+          },
+          {
+            "id_a": "other0",
+            "id_b": "other2",
+            "similarity": 0.4157,
+            "evidence": {
+              "ngram_overlap": 0.0031,
+              "char_ngram_overlap": 0.3645,
+              "structural_similarity": 0.4398,
+              "beat_similarity": 1.0
+            }
+          }
+        ]
+      },
+      "chapter0_pair_evidence_after": {
+        "scoring_mode": "within_book_chapter_prose_first",
+        "worst_pair": {
+          "id_a": "ch0",
+          "id_b": "ch7",
+          "similarity": 0.4143,
+          "prose_similarity": 0.1615,
+          "evidence": {
+            "ngram_overlap": 0.065,
+            "char_ngram_overlap": 0.3867,
+            "structural_similarity": 0.3341,
+            "beat_similarity": 1.0
+          }
+        },
+        "max_ngram_overlap": 0.065,
+        "max_prose_similarity": 0.1615
+      }
+    }
+  ],
+  "duplicate_control": {
+    "content_uniqueness_ch0": 0.0,
+    "still_flagged": true
+  }
+}

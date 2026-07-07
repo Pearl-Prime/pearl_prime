@@ -18,7 +18,16 @@ from __future__ import annotations
 
 import hashlib
 import re
-from typing import Any, Callable, Dict, List, Optional, Set, Tuple
+from typing import Any, Callable, Dict, List, Mapping, Optional, Set, Tuple
+
+# Composite weights for atom-pool dedup (slot candidates). Do not use for
+# within-book chapter uniqueness — beat/structure are intentional there.
+ATOM_POOL_WEIGHTS: Dict[str, float] = {
+    "ngram": 0.35,
+    "char_ngram": 0.15,
+    "structural": 0.25,
+    "beat": 0.25,
+}
 
 
 def _word_ngrams(text: str, n: int) -> Set[str]:
@@ -114,6 +123,144 @@ def _beat_similarity(fp_a: Dict[str, bool], fp_b: Dict[str, bool]) -> float:
     return match / len(all_beats)
 
 
+def _pair_evidence(
+    text_a: str,
+    text_b: str,
+    *,
+    ngram_n: int,
+    weights: Mapping[str, float],
+) -> Dict[str, Any]:
+    """Similarity evidence for one text pair."""
+    ngrams_a = _word_ngrams(text_a, ngram_n)
+    ngrams_b = _word_ngrams(text_b, ngram_n)
+    ngram_sim = _jaccard(ngrams_a, ngrams_b)
+
+    char_a = _char_ngrams(text_a, 4)
+    char_b = _char_ngrams(text_b, 4)
+    char_sim = _jaccard(char_a, char_b)
+
+    shape_a = _paragraph_shape(text_a)
+    shape_b = _paragraph_shape(text_b)
+    struct_sim = _shape_similarity(shape_a, shape_b)
+
+    beats_a = _beat_fingerprint(text_a)
+    beats_b = _beat_fingerprint(text_b)
+    beat_sim = _beat_similarity(beats_a, beats_b)
+
+    w_n = float(weights.get("ngram", ATOM_POOL_WEIGHTS["ngram"]))
+    w_c = float(weights.get("char_ngram", ATOM_POOL_WEIGHTS["char_ngram"]))
+    w_s = float(weights.get("structural", ATOM_POOL_WEIGHTS["structural"]))
+    w_b = float(weights.get("beat", ATOM_POOL_WEIGHTS["beat"]))
+    composite = w_n * ngram_sim + w_c * char_sim + w_s * struct_sim + w_b * beat_sim
+
+    prose_similarity = (
+        float(weights.get("prose_ngram", 0.70)) * ngram_sim
+        + float(weights.get("prose_char", 0.30)) * char_sim
+    )
+
+    return {
+        "similarity": round(composite, 4),
+        "prose_similarity": round(prose_similarity, 4),
+        "ngram_overlap": round(ngram_sim, 4),
+        "char_ngram_overlap": round(char_sim, 4),
+        "structural_similarity": round(struct_sim, 4),
+        "beat_similarity": round(beat_sim, 4),
+    }
+
+
+def _within_book_cfg(cfg: Optional[Dict[str, Any]]) -> Dict[str, Any]:
+    base = dict((cfg or {}).get("within_book_chapter") or {})
+    return {
+        "ngram_n": int((cfg or {}).get("ngram_n", 6)),
+        "prose_ngram_weight": float(base.get("prose_ngram_weight", 0.70)),
+        "prose_char_weight": float(base.get("prose_char_weight", 0.30)),
+        "ngram_penalty_floor": float(base.get("ngram_penalty_floor", 0.10)),
+        "ngram_penalty_scale": float(base.get("ngram_penalty_scale", 3.0)),
+        "max_compare_chapters": base.get("max_compare_chapters"),
+    }
+
+
+def analyze_chapter_content_uniqueness(
+    chapter_text: str,
+    chapter_index: int,
+    all_chapter_texts: List[str],
+    *,
+    cfg: Optional[Dict[str, Any]] = None,
+) -> Dict[str, Any]:
+    """Score shipped-book chapter uniqueness with pair-level evidence.
+
+    Within-book comparison penalizes **prose** near-duplicates (word/char
+    n-gram overlap), not shared therapeutic beat markers or paragraph rhythm
+    that are intentional across a Pearl Prime spine.
+    """
+    wb = _within_book_cfg(cfg)
+    ngram_n = wb["ngram_n"]
+    chapter_id = f"ch{chapter_index}"
+
+    pairs: List[Dict[str, Any]] = []
+    others: List[Tuple[int, str]] = [
+        (j, t) for j, t in enumerate(all_chapter_texts) if j != chapter_index and t.strip()
+    ]
+    max_compare = wb["max_compare_chapters"]
+    if isinstance(max_compare, int) and max_compare > 0:
+        others = others[:max_compare]
+
+    for other_index, other_text in others:
+        ev = _pair_evidence(
+            chapter_text,
+            other_text,
+            ngram_n=ngram_n,
+            weights={
+                **ATOM_POOL_WEIGHTS,
+                "prose_ngram": wb["prose_ngram_weight"],
+                "prose_char": wb["prose_char_weight"],
+            },
+        )
+        pairs.append(
+            {
+                "id_a": chapter_id,
+                "id_b": f"ch{other_index}",
+                "similarity": ev["similarity"],
+                "prose_similarity": ev["prose_similarity"],
+                "evidence": {
+                    "ngram_overlap": ev["ngram_overlap"],
+                    "char_ngram_overlap": ev["char_ngram_overlap"],
+                    "structural_similarity": ev["structural_similarity"],
+                    "beat_similarity": ev["beat_similarity"],
+                },
+            }
+        )
+
+    if not pairs:
+        return {
+            "content_uniqueness": 1.0,
+            "worst_pair": None,
+            "pairs_compared": 0,
+            "max_prose_similarity": 0.0,
+            "scoring_mode": "within_book_chapter_prose_first",
+        }
+
+    pairs.sort(key=lambda p: p["prose_similarity"], reverse=True)
+    worst = pairs[0]
+    max_ngram = max(p["evidence"]["ngram_overlap"] for p in pairs)
+    max_char = max(p["evidence"]["char_ngram_overlap"] for p in pairs)
+    prose_sim = wb["prose_ngram_weight"] * max_ngram + wb["prose_char_weight"] * max_char
+    floor = wb["ngram_penalty_floor"]
+    scale = wb["ngram_penalty_scale"]
+    uniqueness = max(0.0, 1.0 - max(0.0, prose_sim - floor) * scale)
+
+    return {
+        "content_uniqueness": round(uniqueness, 4),
+        "worst_pair": worst,
+        "pairs_compared": len(pairs),
+        "max_prose_similarity": round(prose_sim, 4),
+        "max_ngram_overlap": round(max_ngram, 4),
+        "max_char_ngram_overlap": round(max_char, 4),
+        "top_pairs": pairs[:5],
+        "scoring_mode": "within_book_chapter_prose_first",
+    }
+
+
 def detect_semantic_duplicates(
     texts: List[str],
     ids: List[str],
@@ -131,7 +278,7 @@ def detect_semantic_duplicates(
     cfg = cfg or {}
     ngram_n = int(cfg.get("ngram_n", 6))
     ngram_threshold = float(cfg.get("ngram_overlap_threshold", 0.30))
-    semantic_threshold = float(cfg.get("semantic_similarity_threshold", 0.85))
+    weights = cfg.get("weights") or ATOM_POOL_WEIGHTS
 
     duplicates: List[Dict[str, Any]] = []
 
@@ -140,44 +287,20 @@ def detect_semantic_duplicates(
             text_a, text_b = texts[i], texts[j]
             id_a, id_b = ids[i], ids[j]
 
-            # Word n-gram overlap
-            ngrams_a = _word_ngrams(text_a, ngram_n)
-            ngrams_b = _word_ngrams(text_b, ngram_n)
-            ngram_sim = _jaccard(ngrams_a, ngrams_b)
-
-            # Character n-gram overlap (catches typo-level variants)
-            char_a = _char_ngrams(text_a, 4)
-            char_b = _char_ngrams(text_b, 4)
-            char_sim = _jaccard(char_a, char_b)
-
-            # Structural similarity
-            shape_a = _paragraph_shape(text_a)
-            shape_b = _paragraph_shape(text_b)
-            struct_sim = _shape_similarity(shape_a, shape_b)
-
-            # Narrative beat similarity
-            beats_a = _beat_fingerprint(text_a)
-            beats_b = _beat_fingerprint(text_b)
-            beat_sim = _beat_similarity(beats_a, beats_b)
-
-            # Composite score
-            composite = (
-                0.35 * ngram_sim
-                + 0.15 * char_sim
-                + 0.25 * struct_sim
-                + 0.25 * beat_sim
-            )
+            ev = _pair_evidence(text_a, text_b, ngram_n=ngram_n, weights=weights)
+            ngram_sim = ev["ngram_overlap"]
+            composite = ev["similarity"]
 
             if composite >= ngram_threshold or ngram_sim >= ngram_threshold:
                 duplicates.append({
                     "id_a": id_a,
                     "id_b": id_b,
-                    "similarity": round(composite, 4),
+                    "similarity": composite,
                     "evidence": {
-                        "ngram_overlap": round(ngram_sim, 4),
-                        "char_ngram_overlap": round(char_sim, 4),
-                        "structural_similarity": round(struct_sim, 4),
-                        "beat_similarity": round(beat_sim, 4),
+                        "ngram_overlap": ev["ngram_overlap"],
+                        "char_ngram_overlap": ev["char_ngram_overlap"],
+                        "structural_similarity": ev["structural_similarity"],
+                        "beat_similarity": ev["beat_similarity"],
                     },
                 })
 
