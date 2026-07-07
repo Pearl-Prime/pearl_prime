@@ -77,3 +77,7 @@ See `BLOCKERS.md` for machine-readable blocker IDs.
 | Candidate queue | `artifacts/qa/manga_blind10_2026-07-08/CANDIDATE_SET.tsv` |
 | Slot 01 pilot packet | `artifacts/qa/manga_blind10_2026-07-08/judge_packets/slot_01_stillness_ep001/` |
 | Pre-screen | `artifacts/qa/manga_blind10_2026-07-08/pre_screen/PRESCREEN_RUNBOOK.md` |
+| **Sourcing memo** | `artifacts/qa/manga_blind10_2026-07-08/SOURCING_OPERATOR_MEMO.md` |
+| Judge recruitment | `artifacts/qa/manga_blind10_2026-07-08/JUDGE_RECRUITMENT_BRIEF.md` |
+| Comparator checklist | `artifacts/qa/manga_blind10_2026-07-08/COMPARATOR_ACQUISITION_CHECKLIST.md` |
+| Sourcing tracker | `artifacts/qa/manga_blind10_2026-07-08/SOURCING_TRACKER.yaml` |

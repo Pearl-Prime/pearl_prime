@@ -1,6 +1,6 @@
 # M6 Blind-10 — Blockers (live audit 2026-07-08)
 
-**Verified HEAD:** `6e44f414335c4faa3ba63642dce0c7beb962f69e`
+**Verified HEAD:** `9f70a3d6ecab877c50279ce7a23d3a7731d9ab92`
 
 ---
 
@@ -34,7 +34,9 @@ M6-BLK-004  COMPARATOR_ASSETS_PENDING
 
 **Requirement:** ≥ 3 manga professionals per locale lane (JP-native for ja_JP). Operator-tier per roadmap.
 
-**Unblock:** Operator recruits and schedules blind review sessions.
+**Sourcing lane:** `ready-to-recruit` — `JUDGE_RECRUITMENT_BRIEF.md`, `JUDGE_OUTREACH_TEMPLATE.md`, `SOURCING_TRACKER.yaml` landed 2026-07-08. Zero judges confirmed.
+
+**Unblock:** Operator recruits ≥ 3 en_US pros; log confirmed judges in `SOURCING_TRACKER.yaml` → `judges.recruited[]`.
 
 ---
 
@@ -52,9 +54,11 @@ M6-BLK-004  COMPARATOR_ASSETS_PENDING
 
 **Blocks:** Judge packet distribution for slots needing comparators.
 
-**Evidence:** `COMPARATOR_REGISTRY.yaml` → all `asset_status: PENDING_OPERATOR_SCAN`
+**Evidence:** `COMPARATOR_REGISTRY.yaml` → all 20 entries `asset_status: PENDING_OPERATOR_SCAN`; `comparators/` empty on disk.
 
-**Unblock:** Operator sources licensed scans per registry; record sha256.
+**Sourcing lane:** `ready-to-source` — full 10-slot registry + `COMPARATOR_ACQUISITION_CHECKLIST.md` landed 2026-07-08. P0 pilot: Yotsuba&! + Barakamon (slot 01).
+
+**Unblock:** Operator acquires licensed scans per checklist; record sha256 in registry; flip `SOURCING_TRACKER.yaml` counts.
 
 ---
 
@@ -62,5 +66,5 @@ M6-BLK-004  COMPARATOR_ASSETS_PENDING
 
 - Protocol ratification (this artifact set)
 - Slot_01 Qwen2.5-VL pre-screen (when Pearl Star online)
-- Judge recruitment outreach (parallel)
-- Comparator sourcing (parallel)
+- Judge recruitment outreach (materials ready — `JUDGE_OUTREACH_TEMPLATE.md`)
+- Comparator sourcing (checklist + full registry ready — `COMPARATOR_ACQUISITION_CHECKLIST.md`)

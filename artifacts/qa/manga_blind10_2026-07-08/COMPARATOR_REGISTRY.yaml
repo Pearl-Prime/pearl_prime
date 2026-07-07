@@ -4,6 +4,7 @@
 
 schema_version: manga_blind10_comparator_v1
 run_id: manga_blind10_2026-07-08
+updated: "2026-07-08"
 
 selection_rules:
   per_episode: 2
@@ -19,13 +20,15 @@ selection_rules:
   research_anchors:
     - artifacts/research/manga_quality_bar/01_iyashikei_craft_study.md
     - artifacts/research/manga_quality_bar/02_studio_workflow_gap_analysis.md
+    - docs/research/manga_craft/
 
-# Assigned comparators for slots with render_path != ABSENT
+# All 10 slots pre-assigned for operator sourcing (see COMPARATOR_ACQUISITION_CHECKLIST.md)
 slots:
   "01":
     genre_id: iyashikei
     locale: en_US
     demographic_lane: webtoon_vertical
+    render_status: prescreen_only
     comparators:
       - id: comp_01_a
         title: "Yotsuba&!"
@@ -35,6 +38,7 @@ slots:
         excerpt_pages: "5-8"
         operator_asset: "comparators/yotsuba_v1_ch1_pages_5-8.pdf"
         asset_status: PENDING_OPERATOR_SCAN
+        priority: P0
       - id: comp_01_b
         title: "Barakamon"
         creator: "Satsuki Yoshino"
@@ -43,50 +47,230 @@ slots:
         excerpt_pages: "6-10"
         operator_asset: "comparators/barakamon_v1_ch1_pages_6-10.pdf"
         asset_status: PENDING_OPERATOR_SCAN
+        priority: P0
+
+  "02":
+    genre_id: iyashikei
+    locale: en_US
+    demographic_lane: webtoon_vertical
+    render_status: M5_TARGET
+    comparators:
+      - id: comp_02_a
+        title: "March Comes in Like a Lion"
+        creator: "Chica Umino"
+        volume_chapter: "Vol 1, Chapter 1 (interior melancholy + belonging)"
+        rationale: "Iyashikei-adjacent emotional grounding, caption-led silence"
+        excerpt_pages: "8-14"
+        operator_asset: "comparators/march_lion_v1_ch1_pages_8-14.pdf"
+        asset_status: PENDING_OPERATOR_SCAN
+        priority: P1
+      - id: comp_02_b
+        title: "Mushishi"
+        creator: "Yuki Urushibara"
+        volume_chapter: "Vol 1, Chapter 1 (wandering + environmental stillness)"
+        rationale: "Atmospheric iyashikei register, low-dialogue craft bar"
+        excerpt_pages: "6-11"
+        operator_asset: "comparators/mushishi_v1_ch1_pages_6-11.pdf"
+        asset_status: PENDING_OPERATOR_SCAN
+        priority: P1
 
   "03":
     genre_id: mecha
     locale: en_US
     demographic_lane: seinen
+    render_status: INTERIM_WIRING_ONLY
     comparators:
       - id: comp_03_a
         title: "Mobile Suit Gundam: The Origin"
         creator: "Yoshikazu Yasuhiko"
         volume_chapter: "Vol 1, cockpit / chassis introspection sequence"
         rationale: "Mecha-burnout register, machine-body metaphor fluency"
-        excerpt_pages: "TBD"
+        excerpt_pages: "10-16"
         operator_asset: "comparators/gundam_origin_v1_excerpt.pdf"
         asset_status: PENDING_OPERATOR_SCAN
+        priority: P1
       - id: comp_03_b
         title: "Planetes"
         creator: "Makoto Yukimura"
         volume_chapter: "Vol 1, workplace-mechanical routine pages"
         rationale: "Grounded sci-mechanical tone matching cultivation/mechanic hybrid"
-        excerpt_pages: "TBD"
+        excerpt_pages: "8-14"
         operator_asset: "comparators/planetes_v1_excerpt.pdf"
         asset_status: PENDING_OPERATOR_SCAN
+        priority: P1
 
   "04":
     genre_id: psychological_thriller
     locale: en_US
     demographic_lane: seinen
+    render_status: INTERIM_WIRING_ONLY
     comparators:
       - id: comp_04_a
         title: "Monster"
         creator: "Naoki Urasawa"
         volume_chapter: "Vol 1, tension / overthinking dialogue pages"
         rationale: "Psychological thriller pacing, dialogue register"
-        excerpt_pages: "TBD"
+        excerpt_pages: "12-20"
         operator_asset: "comparators/monster_v1_excerpt.pdf"
         asset_status: PENDING_OPERATOR_SCAN
+        priority: P1
       - id: comp_04_b
         title: "20th Century Boys"
         creator: "Naoki Urasawa"
         volume_chapter: "Vol 1, paranoia-establishing sequence"
         rationale: "Genre trope fluency, page-turn rhythm"
-        excerpt_pages: "TBD"
+        excerpt_pages: "10-18"
         operator_asset: "comparators/20th_century_boys_v1_excerpt.pdf"
         asset_status: PENDING_OPERATOR_SCAN
+        priority: P1
 
-# Slots 02, 05-10: assign comparators when render_path becomes non-ABSENT.
-# Use same genre_id + demographic_lane matching rules; cite craft bible per genre.
+  "05":
+    genre_id: action_battle
+    locale: en_US
+    demographic_lane: shonen
+    render_status: ABSENT
+    comparators:
+      - id: comp_05_a
+        title: "Vinland Saga"
+        creator: "Makoto Yukimura"
+        volume_chapter: "Vol 1, Chapter 1 (opening battle + restraint)"
+        rationale: "Seinen action_battle register, body-as-cost craft"
+        excerpt_pages: "10-18"
+        operator_asset: "comparators/vinland_saga_v1_ch1_pages_10-18.pdf"
+        asset_status: PENDING_OPERATOR_SCAN
+        priority: P2
+      - id: comp_05_b
+        title: "Demon Slayer"
+        creator: "Koyoharu Gotouge"
+        volume_chapter: "Vol 1, Chapter 1 (first confrontation sequence)"
+        rationale: "Shonen action pacing, speed-line and impact craft"
+        excerpt_pages: "8-15"
+        operator_asset: "comparators/demon_slayer_v1_ch1_pages_8-15.pdf"
+        asset_status: PENDING_OPERATOR_SCAN
+        priority: P2
+
+  "06":
+    genre_id: dark_fantasy
+    locale: en_US
+    demographic_lane: seinen
+    render_status: ABSENT
+    comparators:
+      - id: comp_06_a
+        title: "Berserk"
+        creator: "Kentaro Miura"
+        volume_chapter: "Vol 1, Chapter 1 (grief-weighted opening)"
+        rationale: "Dark fantasy black-fill, hatching, emotional cost bar"
+        excerpt_pages: "12-20"
+        operator_asset: "comparators/berserk_v1_ch1_pages_12-20.pdf"
+        asset_status: PENDING_OPERATOR_SCAN
+        priority: P2
+        content_note: "Mature content — flag for judge NDA packet"
+      - id: comp_06_b
+        title: "Frieren: Beyond Journey's End"
+        creator: "Kanehito Yamada / Tsukasa Abe"
+        volume_chapter: "Vol 1, Chapter 1 (post-journey grief register)"
+        rationale: "Contemporary dark-fantasy grief craft, accessible seinen tone"
+        excerpt_pages: "6-12"
+        operator_asset: "comparators/frieren_v1_ch1_pages_6-12.pdf"
+        asset_status: PENDING_OPERATOR_SCAN
+        priority: P2
+
+  "07":
+    genre_id: isekai
+    locale: en_US
+    demographic_lane: shonen
+    render_status: ABSENT
+    comparators:
+      - id: comp_07_a
+        title: "Re:Zero − Starting Life in Another World"
+        creator: "Tappei Nagatsuki / Shinichirou Otsuka"
+        volume_chapter: "Vol 1, Chapter 1 (arrival + trauma carryover)"
+        rationale: "Isekai wound-carryover register, costly growth bar"
+        excerpt_pages: "8-14"
+        operator_asset: "comparators/rezero_v1_ch1_pages_8-14.pdf"
+        asset_status: PENDING_OPERATOR_SCAN
+        priority: P2
+      - id: comp_07_b
+        title: "Mushoku Tensei: Jobless Reincarnation"
+        creator: "Rifujin na Magonote / Yuka Fujikawa"
+        volume_chapter: "Vol 1, Chapter 1 (second-chance arrival)"
+        rationale: "Isekai exposition discipline, body-in-new-world craft"
+        excerpt_pages: "8-14"
+        operator_asset: "comparators/mushoku_tensei_v1_ch1_pages_8-14.pdf"
+        asset_status: PENDING_OPERATOR_SCAN
+        priority: P2
+
+  "08":
+    genre_id: workplace_drama
+    locale: en_US
+    demographic_lane: josei
+    render_status: ABSENT
+    comparators:
+      - id: comp_08_a
+        title: "Aggretsuko"
+        creator: "Yeti (Sanrio)"
+        volume_chapter: "Vol 1, office-pressure / burnout sequence"
+        rationale: "Workplace burnout recognition, comedy-release valve craft"
+        excerpt_pages: "6-12"
+        operator_asset: "comparators/aggretsuko_v1_excerpt.pdf"
+        asset_status: PENDING_OPERATOR_SCAN
+        priority: P2
+      - id: comp_08_b
+        title: "Wotakoi: Love Is Hard for Otaku"
+        creator: "Fujita"
+        volume_chapter: "Vol 1, Chapter 1 (workplace social performance)"
+        rationale: "Office grid grammar, interior-caption irony engine"
+        excerpt_pages: "8-14"
+        operator_asset: "comparators/wotakoi_v1_ch1_pages_8-14.pdf"
+        asset_status: PENDING_OPERATOR_SCAN
+        priority: P2
+
+  "09":
+    genre_id: school_coming_of_age
+    locale: en_US
+    demographic_lane: shonen
+    render_status: ABSENT
+    comparators:
+      - id: comp_09_a
+        title: "March Comes in Like a Lion"
+        creator: "Chica Umino"
+        volume_chapter: "Vol 2, school-belonging / shogi club sequence"
+        rationale: "School anxiety + belonging without lecture"
+        excerpt_pages: "10-16"
+        operator_asset: "comparators/march_lion_v2_school_excerpt.pdf"
+        asset_status: PENDING_OPERATOR_SCAN
+        priority: P2
+      - id: comp_09_b
+        title: "Keep Your Hands Off Eizouken!"
+        creator: "Sumito Owara"
+        volume_chapter: "Vol 1, Chapter 1 (club-room creative obsession)"
+        rationale: "Coming-of-age social fear as texture, kinetic panel flow"
+        excerpt_pages: "6-12"
+        operator_asset: "comparators/eizouken_v1_ch1_pages_6-12.pdf"
+        asset_status: PENDING_OPERATOR_SCAN
+        priority: P2
+
+  "10":
+    genre_id: sci_fi_cyberpunk
+    locale: en_US
+    demographic_lane: seinen
+    render_status: ABSENT
+    comparators:
+      - id: comp_10_a
+        title: "Akira"
+        creator: "Katsuhiro Otomo"
+        volume_chapter: "Vol 1, Chapter 1 (neon-noir establishing + body-machine)"
+        rationale: "Sci-fi black-fill ceiling, environmental density bar"
+        excerpt_pages: "10-18"
+        operator_asset: "comparators/akira_v1_ch1_pages_10-18.pdf"
+        asset_status: PENDING_OPERATOR_SCAN
+        priority: P2
+      - id: comp_10_b
+        title: "Ghost in the Shell"
+        creator: "Masamune Shirow"
+        volume_chapter: "Vol 1, Chapter 1 (cybernetic body introspection)"
+        rationale: "Body-as-machine metaphor, tech-overlay craft"
+        excerpt_pages: "8-14"
+        operator_asset: "comparators/ghost_in_shell_v1_ch1_pages_8-14.pdf"
+        asset_status: PENDING_OPERATOR_SCAN
+        priority: P2
