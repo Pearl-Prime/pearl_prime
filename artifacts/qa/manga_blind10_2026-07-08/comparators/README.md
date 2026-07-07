@@ -9,3 +9,4 @@ After each acquisition:
 1. `sha256sum <file>.pdf`
 2. Update `COMPARATOR_REGISTRY.yaml` → `asset_status: ACQUIRED`, `sha256`, `acquired_date`
 3. Update `SOURCING_TRACKER.yaml` → `comparators.acquired` count
+4. Run `python3 scripts/qa/validate_manga_blind10_comparators.py --require-p0`

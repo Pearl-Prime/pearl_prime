@@ -6,7 +6,9 @@
 
 ## Variant A — Pilot (slot_01 only)
 
-**Subject:** Paid blind manga craft review — 1 episode (~35 panels)
+**Subject:** Paid blind manga craft review — 1 iyashikei episode (~35 panels)
+
+**Filled draft (slot_01):** `JUDGE_OUTREACH_DRAFTS_SLOT_01.md` — status **drafted**, not sent.
 
 ```
 Hi [Name],
@@ -18,17 +20,19 @@ published comparators on an 8-axis rubric (panel flow, lettering, genre fluency,
 etc.).
 
 What you'd receive:
-- One candidate episode (35 panels, read order)
-- Two genre-matched published excerpts (5–10 pages each) for calibration
-- Rubric + scorecard (scores 1–5 per axis; ~30–45 min)
+- One candidate episode (35 panels, vertical read order)
+- Two genre-matched published excerpts for calibration:
+  • Yotsuba&! Vol 1, Chapter 1, pages 5–8
+  • Barakamon Vol 1, Chapter 1, pages 6–10
+- Rubric + blank scorecard (scores 1–5 per axis; ~30–45 min)
 
 Requirements:
-- Professional serialized manga or EN webtoon editorial/lettering/art credits
+- Professional serialized manga or EN webtoon editorial, lettering, or art credits
 - Blind review — no researching the candidate's origin during scoring
 - NDA on unreleased work
 
-Compensation: [RATE] for the pilot session.
-Timeline: [WINDOW] — flexible on exact date.
+Compensation: $75–125 USD for the pilot session (single episode).
+Timeline: between July 15 and July 29, 2026 — flexible on exact date.
 
 If interested, reply with a one-line credential summary and I'll send the NDA
 and packet.

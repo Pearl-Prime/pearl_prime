@@ -1,0 +1,16 @@
+# Expected comparator PDFs for validate_manga_blind10_comparators.py
+# P0 pilot — operator places files here (gitignored *.pdf)
+
+run_id: manga_blind10_2026-07-08
+min_bytes: 500000
+scan_dpi_min: 300
+
+p0_pilot:
+  - id: comp_01_a
+    filename: yotsuba_v1_ch1_pages_5-8.pdf
+    pages: "5-8"
+    isbn: "978-0-7595-0410-5"
+  - id: comp_01_b
+    filename: barakamon_v1_ch1_pages_6-10.pdf
+    pages: "6-10"
+    isbn: "978-0-316-36217-6"
