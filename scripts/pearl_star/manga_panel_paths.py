@@ -31,22 +31,44 @@ def local_phoenix_repo() -> Path:
     return Path(os.environ.get("PS_LOCAL_REPO", str(REPO_ROOT)))
 
 
+def _linux_dest_path(path: Path) -> Path:
+    """Normalize a Pearl Star destination path for Linux (no macOS /private/var leak).
+
+    Mac clients resolve ``/var`` → ``/private/var`` via ``Path.resolve()``; Pearl
+    Star Linux has no ``/private/var``.  Strip that prefix when present.
+    """
+    s = os.path.normpath(str(path))
+    if s.startswith("/private/var/"):
+        s = "/var/" + s[len("/private/var/") :]
+    elif s == "/private/var":
+        s = "/var"
+    return Path(s)
+
+
+def _join_pearl_star_path(base: Path, *parts: str) -> Path:
+    """Join Pearl Star Linux paths without ``Path.resolve()`` (avoids /var symlink)."""
+    joined = base
+    for part in parts:
+        joined = joined / part
+    return _linux_dest_path(joined)
+
+
 def pearl_star_writable_dest(out_path: Path) -> Path:
     """Map a panel output path to a pearl-star-owned destination on Pearl Star."""
-    out_path = out_path.resolve()
-    root = manga_out_root()
+    out_resolved = out_path.resolve()
+    root = manga_out_root()  # Linux path — never .resolve() (macOS /var → /private/var)
     for base in (local_phoenix_repo(), phoenix_repo_on_star()):
         try:
-            rel = out_path.relative_to(base.resolve())
-            return (root / rel).resolve()
+            rel = out_resolved.relative_to(base.resolve())
+            return _join_pearl_star_path(root, *rel.parts)
         except ValueError:
             continue
     # Already under manga_out or an explicit absolute outside the repo.
     try:
-        out_path.relative_to(root.resolve())
-        return out_path
+        out_resolved.relative_to(_linux_dest_path(root))
+        return _linux_dest_path(out_resolved)
     except ValueError:
-        return root / out_path.name
+        return _join_pearl_star_path(root, out_resolved.name)
 
 
 def pearl_star_dest_path(out_path: Path) -> str:
