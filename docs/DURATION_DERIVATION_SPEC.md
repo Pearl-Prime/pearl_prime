@@ -1,6 +1,6 @@
 # Duration Derivation Spec — Pearl Prime runtime formats
 
-**Status:** PROPOSED (Phase-1 governance/spec; Phase-2 builds the config + CI guard).
+**Status:** ACTIVE (ratified 2026-06-12; Phase-2 config + CI guard landed; Group A stub backfill 2026-07-07).
 **Owner:** Pearl_Architect (spec) → Pearl_Dev (config + CI build).
 **Cap entry:** `DURATION-DERIVATION-01` (`docs/PEARL_ARCHITECT_STATE.md`).
 **Mirrors:** `AUTO-PLAN-SSOT-01` — single registry is the canonical source; downstream readers derive, never hand-set.
@@ -30,9 +30,9 @@ WPM constant, reconciles `standard_book`'s word-range cap (18k→22k), specifies
 so words and minutes can never drift apart again, scopes to en-US, and lays out the
 `duration_minutes` deprecation/migration path.
 
-**Phase boundary:** this document DESCRIBES the rules. The `format_registry.yaml` field additions,
-the registry-loader derivation function, and the `pr_governance_review.py` guard are **Phase-2
-builds** (two child workstreams in §10). No code or config is changed by this spec.
+**Phase boundary:** this document DESCRIBES the rules. Phase-2 config + CI guard **landed**
+(2026-06-12+); Group A atom-native stub backfill landed 2026-07-07. Reader migration of
+`duration_minutes` and CJK char-based audit remain open follow-ups.
 
 ---
 
@@ -359,23 +359,28 @@ this spec).
 
 ---
 
-## 8. Stub-format handling (the 10 word_range-less formats)
+## 8. Atom-native modular formats (Group A — duration contracts)
 
-Ten runtime formats carry only `chapter_count_default` (no `word_range`, no `duration_minutes`):
+Ten atom-native runtime formats were backfilled under `AUTO-PLAN-SSOT-01-AMENDMENT` Group A
+(`chapter_count_default` only, 2026-05-06). **Duration contracts landed 2026-07-07**
+(`ws_stub_format_duration_backfill`): each carries `word_range`, `fill_regime: midpoint`,
+and derived `audiobook_minutes` / `ebook_minutes` from aggregate word bands in
+`docs/ATOM_NATIVE_MODULAR_FORMATS.md`:
+
 `five_min_practice, pocket_guide, ten_things_to_do, symptom_to_action_atlas,
-daily_text_audio_companion, crisis_cards, weekly_challenge_pack, faq_audiobook, myth_vs_mechanism,
-protocol_library` (backfilled under `AUTO-PLAN-SSOT-01-AMENDMENT` Group A; not consumed by
-format_selector today).
+daily_text_audio_companion, crisis_cards, weekly_challenge_pack, faq_audiobook,
+myth_vs_mechanism, protocol_library`.
 
 Rules:
 
 1. **The derivation SKIPs any format without a `word_range`** (no `word_range` ⇒ no `word_target`
    ⇒ no derived minutes). No crash, no zero-minute label.
-2. **The §6 guard SKIPs these formats** (nothing to co-derive).
-3. **Spec recommendation (governance, not enforced by v1 guard):** block stub formats from any
-   catalog listing that advertises a duration until both `word_range` and (via derivation)
-   `audiobook_minutes`/`ebook_minutes` are populated. A stub cannot honestly advertise a duration.
-   Populating the stubs is a separate config task (not a child ws of this spec).
+2. **The §6 guard SKIPs formats with no word_range changes** (nothing to co-derive).
+3. **Listing / advertising gate (enforced):** `scripts/ci/check_format_duration_contracts.py`
+   BLOCKs when a runtime format carries `audiobook_minutes`, `ebook_minutes`, or `duration_minutes`
+   without a `word_range` + `fill_regime` that matches the derived values. Use
+   `phoenix_v4.ops.duration_derivation.can_advertise_duration()` in listing builders.
+   A format without an honest contract **must not** advertise a duration on any storefront surface.
 
 ---
 
@@ -404,22 +409,22 @@ Rules:
 
 ---
 
-## 10. Phase-2 child workstreams (described here; built later)
+## 10. Phase-2 child workstreams (landed 2026-06-12+)
 
-Both are PROPOSED (Phase-2 code/config); they do not run in Phase-1.
+Both original Phase-2 builds are **complete on main**:
 
-1. **Duration-derivation config build** (Pearl_Dev) — add `fill_regime` +
-   `audiobook_minutes`/`ebook_minutes` (+ `cap_word_target` for standard_book) to the 10
-   fully-specced formats in `format_registry.yaml`; raise `standard_book` ceiling 18k→22k; add a
-   registry-loader derivation function (reads `tts_wpm`/`ebook_wpm` from `duration_scorecard.yaml`,
-   applies §4 formulas, en-US-only early-skip, word_range-less skip). Deprecate `duration_minutes`
-   per §9. Tests: derivation unit tests per regime + the standard_book reconciliation.
+1. **Duration-derivation config build** (`ws_duration_derivation_config_build_20260612`) —
+   `fill_regime`, `audiobook_minutes`/`ebook_minutes`, `cap_word_target` on ladder formats;
+   `phoenix_v4/ops/duration_derivation.py`; `tests/test_duration_derivation.py`.
 
-2. **CI-guard build** (Pearl_Dev) — add `check_duration_derivation()` to
-   `scripts/ci/pr_governance_review.py`, register it in `main()`'s results list; v1 path-level
-   co-change BLOCK per §6.2 with the `DURATION-DERIVATION-OK:` override; record the ±15% band and v2
-   value-level plan in the docstring. Test: `tests/ci/test_duration_derivation_guard.py`
-   (trigger/require/override/skip cases).
+2. **CI-guard build** (`ws_duration_derivation_ci_guard_20260612`) —
+   `check_duration_derivation()` in `scripts/ci/pr_governance_review.py`.
+
+**Follow-up landed 2026-07-07:** `ws_stub_format_duration_backfill` — Group A atom-native
+formats backfilled; `scripts/ci/check_format_duration_contracts.py` enforces §8 advertising gate.
+
+**Still open (not child ws of original spec):** reader migration off `duration_minutes`; CJK
+char-based audit per `docs/DURATION_DERIVATION_SPEC_CJK_ADDENDUM.md`; v2 value-level CI guard.
 
 ---
 

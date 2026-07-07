@@ -214,35 +214,84 @@ runtime_formats:
     compatible_tiers: [A]
     compatible_structural_formats: [F013]
 
-  # AUTO-PLAN-SSOT-01-AMENDMENT Group A backfill (10 formats):
-  # These formats existed only in phoenix_v4/planning/book_structure_plan.FORMAT_CHAPTER_COUNTS.
-  # Per amendment Action item 1, backfill `chapter_count_default` from Python.
-  # Other registry fields (duration_minutes, word_range, compatible_tiers,
-  # compatible_structural_formats) are intentionally absent — Python had only
-  # the chapter_count value and these formats are not consumed by format_selector
-  # (verified pre-refactor: 0 hits in format_selector.py / enrichment_select.py /
-  # knob_apply.py). Operator may extend these entries with the other fields when
-  # the formats become first-class runtime targets.
+  # AUTO-PLAN-SSOT-01-AMENDMENT Group A atom-native formats (10).
+  # chapter_count_default backfilled 2026-05-06; word_range + derived duration
+  # backfilled 2026-07-07 (ws_stub_format_duration_backfill). Word bands are
+  # aggregate totals from docs/ATOM_NATIVE_MODULAR_FORMATS.md (per-unit targets
+  # × chapter/unit count). fill_regime: midpoint — independent units compose to
+  # the band midpoint (no gold cap-fill or deep floor-fill). Do NOT advertise
+  # duration on listings unless word_range + audiobook_minutes are present
+  # (enforced by scripts/ci/check_format_duration_contracts.py).
   five_min_practice:
     chapter_count_default: 5
+    word_range: [350, 650]  # ATOM_NATIVE §A: single practice unit (350–650w total)
+    fill_regime: midpoint
+    audiobook_minutes: 3   # DERIVED round(500/150); word_target=midpoint(350,650)=500
+    ebook_minutes: 2       # DERIVED round(500/230)
+    duration_minutes: 3    # DEPRECATED — overwritten with derived audiobook_minutes
   pocket_guide:
     chapter_count_default: 6
+    word_range: [1800, 8400]  # ATOM_NATIVE §B: 10–20 entries × 180–420w; 6-ch registry default
+    fill_regime: midpoint
+    audiobook_minutes: 34  # DERIVED round(5100/150); word_target=midpoint(1800,8400)=5100
+    ebook_minutes: 22      # DERIVED round(5100/230)
+    duration_minutes: 34
   ten_things_to_do:
     chapter_count_default: 8
+    word_range: [1200, 2600]  # ATOM_NATIVE §C: exactly 10 items × 120–260w
+    fill_regime: midpoint
+    audiobook_minutes: 13  # DERIVED round(1900/150); word_target=midpoint(1200,2600)=1900
+    ebook_minutes: 8       # DERIVED round(1900/230)
+    duration_minutes: 13
   symptom_to_action_atlas:
     chapter_count_default: 8
+    word_range: [1800, 13200]  # ATOM_NATIVE §D: 20–60 cards × 90–220w
+    fill_regime: midpoint
+    audiobook_minutes: 50  # DERIVED round(7500/150); word_target=midpoint(1800,13200)=7500
+    ebook_minutes: 33      # DERIVED round(7500/230)
+    duration_minutes: 50
   daily_text_audio_companion:
     chapter_count_default: 10
+    word_range: [1400, 3200]  # ATOM_NATIVE §E: 10 daily units × 140–320w
+    fill_regime: midpoint
+    audiobook_minutes: 15  # DERIVED round(2300/150); word_target=midpoint(1400,3200)=2300
+    ebook_minutes: 10      # DERIVED round(2300/230)
+    duration_minutes: 15
   crisis_cards:
     chapter_count_default: 6
+    word_range: [540, 1200]  # ATOM_NATIVE §F: 6 cards × 90–200w
+    fill_regime: midpoint
+    audiobook_minutes: 6   # DERIVED round(870/150); word_target=midpoint(540,1200)=870
+    ebook_minutes: 4       # DERIVED round(870/230)
+    duration_minutes: 6
   weekly_challenge_pack:
     chapter_count_default: 8
+    word_range: [1260, 3360]  # ATOM_NATIVE §G: 7 days × 180–480w (7-day pack; not 10_day_challenge)
+    fill_regime: midpoint
+    audiobook_minutes: 15  # DERIVED round(2310/150); word_target=midpoint(1260,3360)=2310
+    ebook_minutes: 10      # DERIVED round(2310/230)
+    duration_minutes: 15
   faq_audiobook:
     chapter_count_default: 8
+    word_range: [2560, 5600]  # ATOM_NATIVE §H: 8 answers × 320–700w (2–4 min each)
+    fill_regime: midpoint
+    audiobook_minutes: 27  # DERIVED round(4080/150); word_target=midpoint(2560,5600)=4080
+    ebook_minutes: 18      # DERIVED round(4080/230)
+    duration_minutes: 27
   myth_vs_mechanism:
     chapter_count_default: 8
+    word_range: [3600, 7200]  # ATOM_NATIVE §I: 8 episodes × 450–900w (3–6 min each)
+    fill_regime: midpoint
+    audiobook_minutes: 36  # DERIVED round(5400/150); word_target=midpoint(3600,7200)=5400
+    ebook_minutes: 23      # DERIVED round(5400/230)
+    duration_minutes: 36
   protocol_library:
     chapter_count_default: 10
+    word_range: [1200, 2800]  # ATOM_NATIVE §J: 10 protocols × 120–280w
+    fill_regime: midpoint
+    audiobook_minutes: 13  # DERIVED round(2000/150); word_target=midpoint(1200,2800)=2000
+    ebook_minutes: 9       # DERIVED round(2000/230)
+    duration_minutes: 13
 
   # Compact runtimes — purpose-built for short word bands with FEWER chapters
   # than the default short runtimes (which assume a 12-chapter spine compressed

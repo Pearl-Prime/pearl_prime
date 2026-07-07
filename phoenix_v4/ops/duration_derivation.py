@@ -63,6 +63,20 @@ FLOOR_MULTIPLIER = 1.04
 
 VALID_REGIMES = ("cap", "floor", "midpoint")
 
+# AUTO-PLAN-SSOT-01-AMENDMENT Group A atom-native formats (docs/ATOM_NATIVE_MODULAR_FORMATS.md).
+GROUP_A_ATOM_NATIVE_FORMATS = frozenset({
+    "five_min_practice",
+    "pocket_guide",
+    "ten_things_to_do",
+    "symptom_to_action_atlas",
+    "daily_text_audio_companion",
+    "crisis_cards",
+    "weekly_challenge_pack",
+    "faq_audiobook",
+    "myth_vs_mechanism",
+    "protocol_library",
+})
+
 
 # --------------------------------------------------------------------------- #
 # Config single-sourcing (§4.3)
@@ -191,3 +205,34 @@ def derive_all(registry: Dict[str, Any],
         if derived is not None:
             out[name] = derived
     return out
+
+
+def has_honest_duration_contract(fmt: Dict[str, Any]) -> bool:
+    """Return True when a format has the minimum fields for an honest duration claim (§8).
+
+    Requires ``word_range``, a valid ``fill_regime``, and stored ``audiobook_minutes`` /
+    ``ebook_minutes``. Does not verify numeric agreement — use
+    :func:`derive_format_minutes` for that.
+    """
+    if not fmt.get("word_range"):
+        return False
+    if fmt.get("fill_regime") not in VALID_REGIMES:
+        return False
+    if fmt.get("audiobook_minutes") is None or fmt.get("ebook_minutes") is None:
+        return False
+    return True
+
+
+def can_advertise_duration(fmt: Dict[str, Any],
+                           scorecard_config: Optional[dict] = None,
+                           repo_root: Optional[Path] = None,
+                           locale: str = "en-US") -> bool:
+    """Listing gate: True only when an en-US duration can be honestly advertised (§8).
+
+    A format must have a full contract *and* produce a non-None derivation at the
+    single-sourced WPM constants. CJK and other locales are handled by the CJK addendum.
+    """
+    if not has_honest_duration_contract(fmt):
+        return False
+    tts_wpm, ebook_wpm = load_wpm_constants(scorecard_config, repo_root)
+    return derive_format_minutes(fmt, tts_wpm, ebook_wpm, locale=locale) is not None

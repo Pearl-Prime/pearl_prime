@@ -21,9 +21,12 @@ sys.path.insert(0, str(REPO_ROOT))
 from phoenix_v4.ops.duration_derivation import (  # noqa: E402
     DEFAULT_EBOOK_WPM,
     DEFAULT_TTS_WPM,
+    GROUP_A_ATOM_NATIVE_FORMATS,
+    can_advertise_duration,
     derive_all,
     derive_format_minutes,
     derive_minutes,
+    has_honest_duration_contract,
     load_wpm_constants,
     word_target,
 )
@@ -69,6 +72,22 @@ WORKED = {
     "compact_book_5ch_15min": ([3000, 4500],  "midpoint", None, 3750,  25,  16, 15,  None),
     "compact_book_5ch_20min": ([4000, 5500],  "midpoint", None, 4750,  32,  21, 20,  None),
     "compact_book_8ch_30min": ([5500, 7500],  "midpoint", None, 6500,  43,  28, 30,  None),
+    "one_hour_book":          ([8000, 10000], "midpoint", None, 9000,  60,  39, None, None),
+}
+
+# Group A atom-native stubs — ws_stub_format_duration_backfill (2026-07-07).
+# Word bands from docs/ATOM_NATIVE_MODULAR_FORMATS.md aggregate totals.
+STUB_WORKED = {
+    "five_min_practice":          ([350, 650],     "midpoint", None, 500,  3,  2),
+    "pocket_guide":               ([1800, 8400],   "midpoint", None, 5100, 34, 22),
+    "ten_things_to_do":           ([1200, 2600],   "midpoint", None, 1900, 13,  8),
+    "symptom_to_action_atlas":    ([1800, 13200],  "midpoint", None, 7500, 50, 33),
+    "daily_text_audio_companion": ([1400, 3200],   "midpoint", None, 2300, 15, 10),
+    "crisis_cards":               ([540, 1200],    "midpoint", None, 870,   6,  4),
+    "weekly_challenge_pack":      ([1260, 3360],   "midpoint", None, 2310, 15, 10),
+    "faq_audiobook":              ([2560, 5600],   "midpoint", None, 4080, 27, 18),
+    "myth_vs_mechanism":          ([3600, 7200],   "midpoint", None, 5400, 36, 23),
+    "protocol_library":           ([1200, 2800],   "midpoint", None, 2000, 13,  9),
 }
 
 
@@ -219,6 +238,35 @@ def test_stub_format_skipped():
     assert derive_format_minutes({"chapter_count_default": 5}, 150, 230) is None
 
 
+@pytest.mark.parametrize("name", list(STUB_WORKED.keys()))
+def test_stub_worked_examples_match_spec(name):
+    wr, regime, cap, exp_wt, exp_audio, exp_ebook = STUB_WORKED[name]
+    wt = word_target(wr, regime, cap)
+    assert wt == exp_wt, f"{name}: word_target {wt} != spec {exp_wt}"
+    assert derive_minutes(wt, 150) == exp_audio, f"{name}: audiobook_minutes"
+    assert derive_minutes(wt, 230) == exp_ebook, f"{name}: ebook_minutes"
+
+
+def test_group_a_atom_native_has_honest_contract():
+    registry = _load_registry()
+    if not registry:
+        pytest.skip("format_registry.yaml not on disk")
+    runtime = registry.get("runtime_formats", {})
+    for name in GROUP_A_ATOM_NATIVE_FORMATS:
+        assert name in runtime, f"missing Group A format {name}"
+        assert has_honest_duration_contract(runtime[name]), f"{name} lacks honest contract"
+        assert can_advertise_duration(runtime[name]), f"{name} cannot advertise duration"
+
+
+def test_no_ten_day_challenge_format_id():
+    registry = _load_registry()
+    if not registry:
+        pytest.skip("format_registry.yaml not on disk")
+    runtime = registry.get("runtime_formats", {})
+    assert "10_day_challenge" not in runtime
+    assert "ten_day_challenge" not in runtime
+
+
 # --------------------------------------------------------------------------- #
 # Integration against the shipped registry (if present on disk)
 # --------------------------------------------------------------------------- #
@@ -230,18 +278,15 @@ def test_derive_all_against_shipped_registry():
     scorecard = _load_scorecard()
     derived = derive_all(registry, scorecard_config=scorecard)
 
-    # All 10 fully-specced formats derive; none of the 10 stubs do.
+    # All fully-specced ladder formats + Group A atom-native stubs derive.
     expected_specced = set(WORKED.keys())
-    assert expected_specced.issubset(set(derived.keys())), (
-        f"missing derived formats: {expected_specced - set(derived.keys())}"
+    expected_all = expected_specced | set(STUB_WORKED.keys())
+    assert expected_all.issubset(set(derived.keys())), (
+        f"missing derived formats: {expected_all - set(derived.keys())}"
     )
-    stubs = {
-        "five_min_practice", "pocket_guide", "ten_things_to_do",
-        "symptom_to_action_atlas", "daily_text_audio_companion", "crisis_cards",
-        "weekly_challenge_pack", "faq_audiobook", "myth_vs_mechanism",
-        "protocol_library",
-    }
-    assert not (stubs & set(derived.keys())), "stub formats must be skipped"
+
+    # Legacy word_range-less stub (hypothetical) still skipped.
+    assert derive_format_minutes({"chapter_count_default": 99}, 150, 230) is None
 
     # The derived values must match the registry's stored audiobook/ebook fields
     # (i.e. config and helper agree — the SSOT invariant).

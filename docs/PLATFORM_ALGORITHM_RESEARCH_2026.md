@@ -84,6 +84,11 @@
 
 ## Platform-Specific Knob Tuning
 
+> **STALE (2026-07-07):** `standard_book` is **147 min** derived audiobook post-#1550 / DURATION-DERIVATION-01,
+> not 55 min. Audible routing should prefer `deep_book_6h` / `deep_book_4h` per
+> `artifacts/research/duration_per_platform_20260613/DURATION_GAP_VERIFICATION.md`. Table below is
+> pre-#1550 historical reference — do not use for catalog routing.
+
 ### Duration → Format Selection
 | Platform | Ideal Runtime | Format |
 |----------|-------------|--------|

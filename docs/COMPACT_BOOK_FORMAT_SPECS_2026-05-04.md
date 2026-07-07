@@ -1,9 +1,11 @@
 # Compact Book Format Specs — 2026-05-04
 
-Authority document for three new **compact runtime formats** in the Pearl Prime
-book pipeline. This document is a **proposal / spec only**. No production code,
-config, or YAML files are modified by the PR that introduces this doc; wiring
-will land in a follow-up engineering PR (see §8).
+Authority document for three **compact runtime formats** in the Pearl Prime
+book pipeline. Originally a proposal (2026-05-04); **wired on main** via
+`config/format_selection/format_registry.yaml` (`compact_book_5ch_15min`,
+`compact_book_5ch_20min`, `compact_book_8ch_30min`) with `compact_chapter_subset`
+spine compression (PR-D-SPINE-01). This doc remains the beat-sheet authority;
+§1 status below reflects landed reality.
 
 ---
 
@@ -11,10 +13,10 @@ will land in a follow-up engineering PR (see §8).
 
 | Field | Value |
 | --- | --- |
-| Status | `proposal` |
-| Wiring | `not yet wired` (no code, registry, or quality-gate edits in this PR) |
+| Status | `landed` (was `proposal`; registry + spine path wired) |
+| Wiring | **wired** — `format_registry.yaml` compact runtimes + `compact_chapter_subset` in spine path |
 | Author agent | Pearl_Writer-A1 (Tier 1, Claude Code subagent) |
-| Approval | **PENDING** — operator sign-off required before engineering PR |
+| Approval | Engineering landed; operator GTM sign-off on micro→compact deprecation still open (OQ-DFU-02) |
 | Affects | `phoenix_v4/planning/enrichment_select.py`, `phoenix_v4/planning/beatmap_compile.py`, `phoenix_v4/planning/story_planner.py`, `config/format_selection/format_registry.yaml`, `config/quality/book_quality_gate.yaml` |
 | Related authority | `docs/PEARL_PRIME_BOOK_SYSTEM_CANONICAL.md` §6 (format registry), `docs/PEARL_PRIME_BESTSELLER_WRITING_OVERLAY_SPEC.md` |
 
