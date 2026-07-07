@@ -1,0 +1,35 @@
+{
+  "schema_version": "1.0.0",
+  "asset_id": "L0_65a6c4717bb1",
+  "layer_class": "L0",
+  "light": {
+    "azimuth": "camera_left",
+    "temporal_state": "dawn"
+  },
+  "style_register": "iyashikei_color",
+  "bg_class": "full_render",
+  "camera": {
+    "angle_bucket": "eye_level",
+    "eye_level_y_pct": 38,
+    "camera_height": "standing"
+  },
+  "anchor_slots": [
+    {
+      "slot_id": "bedside_seated",
+      "kind": "seat",
+      "feet_y_pct": 76,
+      "center_x_pct": 42,
+      "expected_figure_h_pct": 52,
+      "occluder_crop_bbox_pct": [
+        18,
+        66,
+        52,
+        24
+      ]
+    }
+  ],
+  "ground_plane": {
+    "visible": true,
+    "frame_bottom_depth_m": 2.0
+  }
+}

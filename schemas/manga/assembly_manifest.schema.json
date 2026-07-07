@@ -33,6 +33,7 @@
           "panel_id": { "type": "string" },
           "archetype": { "type": "string" },
           "beat_type": { "type": "string" },
+          "shot_type": { "type": "string" },
           "layers": {
             "type": "array",
             "minItems": 1,
@@ -101,6 +102,43 @@
         "provenance_note": {
           "type": "string",
           "description": "For INTERIM layers: what the stand-in was derived from and the exact command that produces the REAL replacement."
+        },
+        "shot_type": {
+          "type": "string",
+          "description": "Composition grammar shot register (establishing, dialogue_bust, reaction_emotion, etc.)"
+        },
+        "anchor_slot": {
+          "type": "string",
+          "description": "L2 only: slot_id referencing L0 composition_meta.anchor_slots for grammar placement"
+        },
+        "grounding": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "contact_shadow": { "type": "boolean", "default": true },
+            "occluder": { "type": "boolean", "default": true }
+          },
+          "description": "L2 grammar grounding ops (G4 contact shadow, G5 BOOK occluder)"
+        },
+        "derivation": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "type": {
+              "enum": ["defocus", "tone_gradient", "void"],
+              "description": "§8 derived L0 background (zero-GPU PIL ops)"
+            },
+            "void": {
+              "enum": ["white", "black"],
+              "description": "For derivation.type=void only"
+            },
+            "params": {
+              "type": "object",
+              "description": "Optional PIL derivation parameters (radius_px, top_hex, etc.)"
+            }
+          },
+          "required": ["type"],
+          "description": "L0 only: derive abstract stage from plate instead of full_render paste"
         }
       }
     }

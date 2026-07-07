@@ -78,3 +78,21 @@ def test_g3_outside_tolerance_fails():
     slot = {"feet_y_pct": 78, "expected_figure_h_pct": 55}
     r = g3_horizon_scale_check(KITCHEN_L0, slot, 1920, 700.0)
     assert r.severity == GateSeverity.FAIL
+
+
+def test_dialogue_bust_uses_slot_metadata():
+    from composition_grammar import DEFAULT_ABSTRACT_STAGE_SLOT, dialogue_bust_paste
+    from PIL import Image
+
+    canvas = Image.new("RGBA", (1080, 1920), "#FFFFFF")
+    cutout = Image.new("RGBA", (200, 400), (0, 0, 0, 0))
+    for y in range(50, 350):
+        for x in range(40, 160):
+            cutout.putpixel((x, y), (200, 100, 100, 255))
+    slot = {**DEFAULT_ABSTRACT_STAGE_SLOT, "feet_y_pct": 90, "expected_figure_h_pct": 40}
+    out = dialogue_bust_paste(canvas, cutout, {"eye_y_px": 120}, slot)
+    alpha = out.getchannel("A")
+    bbox = alpha.getbbox()
+    assert bbox is not None
+    # Custom slot feet_y_pct=90 → paste bottom near 90% frame height
+    assert bbox[3] >= int(1920 * 0.85)

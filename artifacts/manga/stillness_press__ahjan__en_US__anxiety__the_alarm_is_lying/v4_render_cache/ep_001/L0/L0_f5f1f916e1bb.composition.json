@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "asset_id": "L0_2b9283d4c387",
+  "asset_id": "L0_f5f1f916e1bb",
   "layer_class": "L0",
   "light": {
     "azimuth": "camera_left",
@@ -13,10 +13,6 @@
     "eye_level_y_pct": 42,
     "camera_height": "seated"
   },
-  "ground_plane": {
-    "visible": true,
-    "frame_bottom_depth_m": 1.8
-  },
   "anchor_slots": [
     {
       "slot_id": "seat_at_table",
@@ -24,15 +20,12 @@
       "feet_y_pct": 78,
       "center_x_pct": 38,
       "expected_figure_h_pct": 55,
-      "occluder_crop_bbox_pct": [22, 68, 58, 22]
-    },
-    {
-      "slot_id": "abstract_dialogue_stage",
-      "kind": "seat",
-      "feet_y_pct": 82,
-      "center_x_pct": 50,
-      "expected_figure_h_pct": 48,
-      "eye_align_y_pct": 32
+      "occluder_crop_bbox_pct": [
+        22,
+        68,
+        58,
+        22
+      ]
     }
   ]
 }

@@ -105,8 +105,9 @@ def assemble_p2_dialogue_bust() -> tuple[Image.Image, AssemblyReport]:
     bg = derive_defocus(plate.resize(CANVAS, Image.LANCZOS))
     canvas = bg.copy()
     cutout = Image.open(L2_WAIST).convert("RGBA")
-    canvas = dialogue_bust_paste(canvas, cutout)
-    report.ops_applied.extend(["derive_defocus", "G6_defringe", "VN_stage_paste"])
+    slot = l0_src_meta["anchor_slots"][1]  # abstract_dialogue_stage
+    canvas = dialogue_bust_paste(canvas, cutout, l2_meta, slot)
+    report.ops_applied.extend(["derive_defocus", "G6_defringe", "abstract_stage_paste"])
     report.gates.append(g6_defringe_applied(True))
 
     return canvas, report
@@ -131,7 +132,11 @@ def assemble_p4_reaction() -> tuple[Image.Image, AssemblyReport]:
 
     canvas = derive_tone_gradient(CANVAS)
     cutout = Image.open(L2_WAIST).convert("RGBA")
-    canvas = dialogue_bust_paste(canvas, cutout)
+    kitchen_meta = load_composition_meta(L0_KITCHEN)
+    slot = (kitchen_meta or {}).get("anchor_slots", [{}])[0]
+    if kitchen_meta and len(kitchen_meta.get("anchor_slots", [])) > 1:
+        slot = kitchen_meta["anchor_slots"][1]
+    canvas = dialogue_bust_paste(canvas, cutout, l2_meta, slot)
     report.ops_applied.extend(["derive_tone_gradient", "G6_defringe"])
     report.gates.append(g6_defringe_applied(True))
     return canvas, report

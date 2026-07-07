@@ -174,5 +174,28 @@ def test_refuses_unlabeled_manifest(bank, tmp_path):
         afb.run(mp, tmp_path / "refused")
 
 
+SERIES = REPO / (
+    "artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying"
+)
+PILOT_MANIFEST = SERIES / "assembly_manifests/composition_grammar_pilot.yaml"
+CONTROL_MANIFEST = SERIES / "assembly_manifests/composition_grammar_control.yaml"
+
+
+@pytest.mark.skipif(not PILOT_MANIFEST.is_file(), reason="pilot manifest not present")
+def test_grammar_pilot_manifest_assembles(tmp_path):
+    """Grammar panels assemble through the real bank path."""
+    out = tmp_path / "pilot"
+    result = afb.run(PILOT_MANIFEST, out)
+    assert result["gate_report"]
+    assert all(p["passed"] for p in result["gate_report"])
+
+
+@pytest.mark.skipif(not CONTROL_MANIFEST.is_file(), reason="control manifest not present")
+def test_grammar_control_illegal_combo_fails(tmp_path):
+    """waist_up × full_render hard-fails G1 when both sidecars exist."""
+    with pytest.raises(ValueError, match="composition grammar FAIL"):
+        afb.run(CONTROL_MANIFEST, tmp_path / "control_out")
+
+
 if __name__ == "__main__":
     raise SystemExit(pytest.main([__file__, "-v"]))

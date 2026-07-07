@@ -1,8 +1,7 @@
-"""Composition grammar ops for layered manga assembly (pilot lane).
+"""Composition grammar ops for layered manga assembly.
 
 Implements MANGA_COMPOSITION_GRAMMAR_SPEC.md gates G1–G6 and §8 derivations.
-Standalone module used by the pilot runner; target merge path is
-`scripts/manga/assemble_from_bank.py` once gates are proven.
+Imported by `scripts/manga/assemble_from_bank.py` for grammar-aware assembly.
 
 Tier 1. No LLM. No network. PIL only.
 """
@@ -14,7 +13,7 @@ from enum import Enum
 from pathlib import Path
 from typing import Any
 
-from PIL import Image, ImageChops, ImageDraw, ImageEnhance, ImageFilter
+from PIL import Image, ImageDraw, ImageEnhance, ImageFilter
 
 # Camera height hints (m) — spec §5 G3
 CAMERA_HEIGHT_M = {
@@ -107,6 +106,15 @@ G1_MATRIX: dict[str, dict[str, str]] = {
 ABSTRACT_BG = {
     "defocus_derived", "tone_gradient", "manpu_emotion",
     "white_void", "black_void",
+}
+
+# Default abstract-stage slot for dialogue/reaction bust placement (spec §7).
+DEFAULT_ABSTRACT_STAGE_SLOT: dict[str, Any] = {
+    "slot_id": "abstract_dialogue_stage",
+    "kind": "seat",
+    "feet_y_pct": 82,
+    "center_x_pct": 50,
+    "expected_figure_h_pct": 48,
 }
 
 
@@ -312,6 +320,52 @@ def defringe_cutout(img: Image.Image, px: int = 1) -> Image.Image:
     return rgba
 
 
+def plan_horizon_scale_paste(
+    cutout: Image.Image,
+    l2_meta: dict[str, Any],
+    l0_meta: dict[str, Any],
+    slot: dict[str, Any],
+    *,
+    canvas_size: tuple[int, int],
+) -> tuple[Image.Image | None, tuple[int, int], float, tuple[int, int, int, int]]:
+    """G3 plan: scaled layer + paste coords without mutating canvas."""
+    W, H = canvas_size
+    cutout = defringe_cutout(cutout)
+    tight = alpha_tight_bbox(cutout)
+    if tight is None:
+        return None, (0, 0), 0.0, (0, 0, 0, 0)
+
+    y_horizon = H * (l0_meta.get("camera") or {}).get("eye_level_y_pct", 42) / 100
+    y_feet = H * slot["feet_y_pct"] / 100
+    if y_feet <= y_horizon:
+        return None, (0, 0), 0.0, (0, 0, 0, 0)
+
+    layer_tight = cutout.crop(tight)
+    anchor_y = l2_meta["anchor"]["y_px"]
+    anchor_in_tight = anchor_y - tight[1]
+    if anchor_in_tight <= 0:
+        return None, (0, 0), 0.0, (0, 0, 0, 0)
+
+    cam_h_key = (l0_meta.get("camera") or {}).get("camera_height", "seated")
+    camera_height_m = CAMERA_HEIGHT_M.get(cam_h_key, 1.15)
+    figure_height_m = l2_meta.get("figure_height_m", 1.62)
+
+    target_figure_h = (figure_height_m / camera_height_m) * (y_feet - y_horizon)
+    if target_figure_h <= 0:
+        return None, (0, 0), 0.0, (0, 0, 0, 0)
+
+    scale = target_figure_h / anchor_in_tight
+    new_w = max(1, int(layer_tight.width * scale))
+    new_h = max(1, int(layer_tight.height * scale))
+    scaled = layer_tight.resize((new_w, new_h), Image.LANCZOS)
+
+    center_x = int(W * slot["center_x_pct"] / 100)
+    paste_x = center_x - new_w // 2
+    paste_y = int(y_feet - anchor_in_tight * scale)
+    bbox = (paste_x, paste_y, paste_x + new_w, paste_y + new_h)
+    return scaled, (paste_x, paste_y), target_figure_h, bbox
+
+
 def horizon_scale_paste(
     canvas: Image.Image,
     cutout: Image.Image,
@@ -320,44 +374,13 @@ def horizon_scale_paste(
     slot: dict[str, Any],
 ) -> tuple[Image.Image, float, tuple[int, int, int, int]]:
     """G3: scale from horizon-ratio law and paste anchored at slot."""
-    W, H = canvas.size
-    cutout = defringe_cutout(cutout)
-    tight = alpha_tight_bbox(cutout)
-    if tight is None:
+    scaled, dest, target_h, bbox = plan_horizon_scale_paste(
+        cutout, l2_meta, l0_meta, slot, canvas_size=canvas.size,
+    )
+    if scaled is None:
         return canvas, 0.0, (0, 0, 0, 0)
-
-    y_horizon = H * (l0_meta.get("camera") or {}).get("eye_level_y_pct", 42) / 100
-    y_feet = H * slot["feet_y_pct"] / 100
-    if y_feet <= y_horizon:
-        return canvas, 0.0, (0, 0, 0, 0)
-
-    layer_tight = cutout.crop(tight)
-    anchor_y = l2_meta["anchor"]["y_px"]
-    anchor_in_tight = anchor_y - tight[1]
-    if anchor_in_tight <= 0:
-        return canvas, 0.0, (0, 0, 0, 0)
-    figure_h_px = anchor_in_tight
-
-    cam_h_key = (l0_meta.get("camera") or {}).get("camera_height", "seated")
-    camera_height_m = CAMERA_HEIGHT_M.get(cam_h_key, 1.15)
-    figure_height_m = l2_meta.get("figure_height_m", 1.62)
-
-    target_figure_h = (figure_height_m / camera_height_m) * (y_feet - y_horizon)
-    if target_figure_h <= 0:
-        return canvas, 0.0, (0, 0, 0, 0)
-
-    scale = target_figure_h / figure_h_px
-    new_w = max(1, int(layer_tight.width * scale))
-    new_h = max(1, int(layer_tight.height * scale))
-    scaled = layer_tight.resize((new_w, new_h), Image.LANCZOS)
-
-    center_x = int(W * slot["center_x_pct"] / 100)
-    paste_x = center_x - new_w // 2
-    paste_y = int(y_feet - anchor_in_tight * scale)
-
-    canvas.alpha_composite(scaled, dest=(paste_x, paste_y))
-    bbox = (paste_x, paste_y, paste_x + new_w, paste_y + new_h)
-    return canvas, target_figure_h, bbox
+    canvas.alpha_composite(scaled, dest=dest)
+    return canvas, target_h, bbox
 
 
 def bbox_legacy_paste(
@@ -386,30 +409,35 @@ def bbox_legacy_paste(
     return canvas
 
 
-def apply_contact_shadow(
-    canvas: Image.Image,
-    contact_bbox: tuple[int, int, int, int],
-    light_azimuth: str = "camera_left",
-) -> Image.Image:
-    """G4: two-layer multiply ellipses under contact edge."""
-    x0, y0, x1, y1 = contact_bbox
-    if x1 <= x0 or y1 <= y0:
-        return canvas
-    W, H = canvas.size
-    contact_y = y1
-    subj_w = x1 - x0
-    subj_h = y1 - y0
-
-    sample = canvas.crop((max(0, x0), max(0, contact_y - 20), min(W, x1), min(H, contact_y + 5)))
-    if sample.getbbox():
-        rgb = sample.convert("RGB")
+def _shadow_rgb_from_floor(
+    floor_sample: Image.Image | None,
+) -> tuple[int, int, int]:
+    if floor_sample is not None and floor_sample.getbbox():
+        rgb = floor_sample.convert("RGB")
         pixels = list(rgb.getdata())
         r = sorted(p[0] for p in pixels)[len(pixels) // 4]
         g = sorted(p[1] for p in pixels)[len(pixels) // 4]
         b = sorted(p[2] for p in pixels)[len(pixels) // 4]
-        shadow_rgb = (max(0, r - 30), max(0, g - 30), max(0, b - 30))
-    else:
-        shadow_rgb = (80, 75, 70)
+        return max(0, r - 30), max(0, g - 30), max(0, b - 30)
+    return 80, 75, 70
+
+
+def render_contact_shadow_layer(
+    canvas_size: tuple[int, int],
+    contact_bbox: tuple[int, int, int, int],
+    light_azimuth: str = "camera_left",
+    floor_sample: Image.Image | None = None,
+) -> Image.Image:
+    """G4: RGBA shadow layer composited between L0 and L2 (under subject)."""
+    x0, y0, x1, y1 = contact_bbox
+    W, H = canvas_size
+    if x1 <= x0 or y1 <= y0:
+        return Image.new("RGBA", (W, H), (0, 0, 0, 0))
+
+    contact_y = y1
+    subj_w = x1 - x0
+    subj_h = y1 - y0
+    shadow_rgb = _shadow_rgb_from_floor(floor_sample)
 
     offset_x = int(subj_w * 0.08) if light_azimuth == "camera_left" else -int(subj_w * 0.08)
     cx = (x0 + x1) // 2 + offset_x
@@ -429,14 +457,25 @@ def apply_contact_shadow(
             fill=(*shadow_rgb, opacity),
         )
 
-    shadow_layer = shadow_layer.filter(ImageFilter.GaussianBlur(radius=max(2, subj_h * 0.02)))
-    base_rgb = canvas.convert("RGB")
-    shadow_rgb_layer = Image.new("RGB", (W, H), shadow_rgb)
-    multiplied = ImageChops.multiply(base_rgb, shadow_rgb_layer)
-    out = Image.composite(multiplied, base_rgb, shadow_layer.split()[3])
-    result = out.convert("RGBA")
-    result.putalpha(canvas.getchannel("A"))
-    return result
+    return shadow_layer.filter(ImageFilter.GaussianBlur(radius=max(2, subj_h * 0.02)))
+
+
+def apply_contact_shadow(
+    canvas: Image.Image,
+    contact_bbox: tuple[int, int, int, int],
+    light_azimuth: str = "camera_left",
+) -> Image.Image:
+    """G4 legacy whole-canvas path — prefer render_contact_shadow_layer + paste order."""
+    W, H = canvas.size
+    x0, y0, x1, y1 = contact_bbox
+    floor = canvas.crop((
+        max(0, x0), max(0, y1 - 20), min(W, x1), min(H, y1 + 5),
+    ))
+    shadow = render_contact_shadow_layer(
+        (W, H), contact_bbox, light_azimuth, floor_sample=floor,
+    )
+    canvas.alpha_composite(shadow)
+    return canvas
 
 
 def paste_occluder_from_slot(
@@ -460,23 +499,79 @@ def paste_occluder_from_slot(
     return canvas
 
 
+def resolve_anchor_slot(
+    l0_meta: dict[str, Any],
+    *,
+    anchor_slot: str | None = None,
+    shot_type: str | None = None,
+) -> dict[str, Any]:
+    """Resolve placement slot from L0 meta, manifest anchor_slot, or abstract default."""
+    if anchor_slot and l0_meta.get("anchor_slots"):
+        for slot in l0_meta["anchor_slots"]:
+            if slot.get("slot_id") == anchor_slot:
+                return slot
+        raise ValueError(f"anchor_slot {anchor_slot!r} not found in L0 composition_meta")
+    if shot_type in ("dialogue_bust", "reaction_emotion"):
+        return DEFAULT_ABSTRACT_STAGE_SLOT
+    slots = l0_meta.get("anchor_slots") or []
+    if slots:
+        return slots[0]
+    raise ValueError("grammar path requires anchor_slot or L0 anchor_slots")
+
+
+def effective_l0_meta(
+    l0_meta: dict[str, Any],
+    derivation: dict[str, Any] | None,
+) -> dict[str, Any]:
+    """Return L0 meta with bg_class overridden when manifest derivation is set."""
+    if not derivation:
+        return l0_meta
+    dtype = derivation.get("type")
+    mapping = {
+        "defocus": "defocus_derived",
+        "tone_gradient": "tone_gradient",
+        "void": "white_void" if derivation.get("void", "white") == "white" else "black_void",
+    }
+    bg = mapping.get(dtype)
+    if bg:
+        return {**l0_meta, "bg_class": bg}
+    return l0_meta
+
+
 def dialogue_bust_paste(
     canvas: Image.Image,
     cutout: Image.Image,
+    l2_meta: dict[str, Any] | None = None,
+    slot: dict[str, Any] | None = None,
 ) -> Image.Image:
-    """Stage waist_up/bust on abstract BG: bottom-anchored VN stage slot."""
+    """Stage waist_up/bust on abstract BG using anchor_slot metadata."""
     W, H = canvas.size
     cutout = defringe_cutout(cutout)
     tight = alpha_tight_bbox(cutout)
     if tight is None:
         return canvas
     layer_tight = cutout.crop(tight)
-    target_h = int(H * 0.48)
+
+    slot = slot or DEFAULT_ABSTRACT_STAGE_SLOT
+    bottom_y_pct = slot.get("bust_bottom_y_pct", slot.get("feet_y_pct", 82))
+    height_pct = slot.get("expected_figure_h_pct", 48)
+    center_x_pct = slot.get("center_x_pct", 50)
+
+    target_h = int(H * height_pct / 100)
     scale = target_h / layer_tight.height
     new_w = max(1, int(layer_tight.width * scale))
     new_h = max(1, int(layer_tight.height * scale))
     scaled = layer_tight.resize((new_w, new_h), Image.LANCZOS)
-    paste_x = (W - new_w) // 2
-    paste_y = int(H * 0.82) - new_h
+
+    paste_x = int(W * center_x_pct / 100) - new_w // 2
+    paste_y = int(H * bottom_y_pct / 100) - new_h
+
+    if l2_meta and "eye_y_px" in l2_meta and "eye_align_y_pct" in slot:
+        eye_in_tight = l2_meta["eye_y_px"] - tight[1]
+        if eye_in_tight > 0:
+            scaled_eye_y = int(eye_in_tight * scale)
+            target_eye_y = int(H * slot["eye_align_y_pct"] / 100)
+            paste_y = target_eye_y - scaled_eye_y
+
     canvas.alpha_composite(scaled, dest=(paste_x, paste_y))
     return canvas

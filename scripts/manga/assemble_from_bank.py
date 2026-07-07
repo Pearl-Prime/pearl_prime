@@ -43,11 +43,33 @@ import argparse
 import hashlib
 import json
 import sys
+import warnings
 from pathlib import Path
 from typing import Any
 
 import yaml
 from PIL import Image, ImageChops, ImageFilter
+
+from composition_grammar import (
+    ABSTRACT_BG,
+    AssemblyReport,
+    GateResult,
+    GateSeverity,
+    bbox_legacy_paste,
+    derive_defocus,
+    derive_tone_gradient,
+    dialogue_bust_paste,
+    effective_l0_meta,
+    g3_horizon_scale_check,
+    g4_shadow_applied,
+    g6_defringe_applied,
+    load_composition_meta,
+    paste_occluder_from_slot,
+    plan_horizon_scale_paste,
+    render_contact_shadow_layer,
+    resolve_anchor_slot,
+    run_combination_gates,
+)
 
 REPO = Path(__file__).resolve().parents[2]
 
@@ -114,13 +136,106 @@ def validate_manifest(manifest: dict[str, Any]) -> list[str]:
                     "— unlabeled layers are refused (stub-as-done guard)"
                 )
             if lc in CUTOUT_CLASSES and not layer.get("bbox_pct"):
-                errors.append(f"{pid}.layers[{j}] ({lc}): bbox_pct required for {lc}")
+                if not (lc == "L2" and layer.get("anchor_slot")):
+                    errors.append(f"{pid}.layers[{j}] ({lc}): bbox_pct required for {lc}")
             bbox = layer.get("bbox_pct")
             if bbox is not None and (
                 len(bbox) != 4 or not all(isinstance(v, (int, float)) for v in bbox)
             ):
                 errors.append(f"{pid}.layers[{j}]: bbox_pct must be [x,y,w,h] numbers")
     return errors
+
+
+def _apply_l0_derivation(
+    plate: Image.Image,
+    derivation: dict[str, Any],
+    canvas_size: tuple[int, int],
+) -> Image.Image:
+    """§8 derived backgrounds — zero-GPU PIL ops."""
+    W, H = canvas_size
+    dtype = derivation.get("type")
+    if dtype == "defocus":
+        params = derivation.get("params") or {}
+        resized = plate.resize((W, H), Image.LANCZOS)
+        return derive_defocus(resized, **params)
+    if dtype == "tone_gradient":
+        params = derivation.get("params") or {}
+        return derive_tone_gradient((W, H), **params)
+    if dtype == "void":
+        color = "#FFFFFF" if derivation.get("void", "white") == "white" else "#000000"
+        return Image.new("RGBA", (W, H), color)
+    raise ValueError(f"unknown L0 derivation type: {dtype!r}")
+
+
+def _grammar_l2_composite(
+    canvas: Image.Image,
+    cutout: Image.Image,
+    *,
+    l0_plate: Image.Image,
+    l0_meta: dict[str, Any],
+    l2_meta: dict[str, Any],
+    layer: dict[str, Any],
+    panel: dict[str, Any],
+    report: AssemblyReport,
+) -> Image.Image:
+    """G1/G2/G8 pre-flight + G3/G4/G5/G6 grounding when sidecars exist."""
+    derivation = None
+    for lyr in panel.get("layers") or []:
+        if lyr.get("layer_class") == "L0":
+            derivation = lyr.get("derivation")
+            break
+
+    eff_l0 = effective_l0_meta(l0_meta, derivation)
+    report.gates.extend(run_combination_gates(l2_meta, eff_l0))
+    fails = [g for g in report.gates if g.severity == GateSeverity.FAIL]
+    if fails:
+        raise ValueError(
+            f"{panel['panel_id']}: composition grammar FAIL — {fails[0].gate}: {fails[0].message}"
+        )
+
+    shot_type = panel.get("shot_type") or layer.get("shot_type")
+    grounding = layer.get("grounding") or {}
+    slot = resolve_anchor_slot(
+        eff_l0,
+        anchor_slot=layer.get("anchor_slot"),
+        shot_type=shot_type,
+    )
+    bg = eff_l0.get("bg_class", "full_render")
+    W, H = canvas.size
+
+    if bg in ABSTRACT_BG or derivation:
+        canvas = dialogue_bust_paste(canvas, cutout, l2_meta, slot)
+        report.ops_applied.extend(["abstract_stage_paste", "G6_defringe"])
+        report.gates.append(g6_defringe_applied(True))
+        return canvas
+
+    scaled, dest, target_h, contact_bbox = plan_horizon_scale_paste(
+        cutout, l2_meta, eff_l0, slot, canvas_size=(W, H),
+    )
+    report.ops_applied.extend(["G3_horizon_scale", "G6_defringe"])
+    report.gates.append(g3_horizon_scale_check(eff_l0, slot, H, target_h))
+
+    if scaled is None:
+        return canvas
+
+    if grounding.get("contact_shadow", True) and contact_bbox != (0, 0, 0, 0):
+        az = (eff_l0.get("light") or {}).get("azimuth", "camera_left")
+        x0, y0, x1, y1 = contact_bbox
+        floor = canvas.crop((
+            max(0, x0), max(0, y1 - 20), min(W, x1), min(H, y1 + 5),
+        ))
+        shadow = render_contact_shadow_layer((W, H), contact_bbox, az, floor_sample=floor)
+        canvas.alpha_composite(shadow)
+        report.ops_applied.append("G4_contact_shadow_under_L2")
+        report.gates.append(g4_shadow_applied(True))
+
+    canvas.alpha_composite(scaled, dest=dest)
+
+    if grounding.get("occluder", True) and slot.get("occluder_crop_bbox_pct"):
+        canvas = paste_occluder_from_slot(canvas, l0_plate, slot)
+        report.ops_applied.append("G5_occluder_BOOK")
+
+    return canvas
 
 
 def composite_layer(canvas: Image.Image, layer_cutout: Image.Image,
@@ -175,14 +290,18 @@ def _layer_z(layer: dict[str, Any]) -> int:
 
 
 def assemble_panel(panel: dict[str, Any], canvas_spec: dict[str, Any],
-                   manifest_dir: Path) -> tuple[Image.Image, list[dict]]:
-    """Assemble one panel. Returns (image, per-layer provenance records)."""
+                   manifest_dir: Path) -> tuple[Image.Image, list[dict], AssemblyReport | None]:
+    """Assemble one panel. Returns (image, per-layer provenance records, grammar report)."""
     W, H = canvas_spec["width"], canvas_spec["height"]
     bg_hex = canvas_spec.get("background_hex", "#FFFFFF")
     canvas = Image.new("RGBA", (W, H), bg_hex)
     records: list[dict] = []
+    grammar_report = AssemblyReport(panel["panel_id"], panel.get("shot_type", ""))
 
     layers = sorted(panel["layers"], key=_layer_z)
+    l0_plate: Image.Image | None = None
+    l0_meta: dict[str, Any] | None = None
+
     for layer in layers:
         asset_path = _resolve(layer["asset"], manifest_dir)
         img = Image.open(asset_path).convert("RGBA")
@@ -192,14 +311,66 @@ def assemble_panel(panel: dict[str, Any], canvas_spec: dict[str, Any],
         lc = layer["layer_class"]
 
         if lc == "L0":
-            img = img.resize((W, H), Image.LANCZOS)
-            canvas.alpha_composite(img)
+            l0_meta = load_composition_meta(asset_path)
+            l0_plate = img.copy()
+            derivation = layer.get("derivation")
+            if derivation:
+                canvas = _apply_l0_derivation(img, derivation, (W, H))
+                grammar_report.ops_applied.append(f"derive_{derivation.get('type')}")
+            else:
+                bg = img.resize((W, H), Image.LANCZOS)
+                canvas.alpha_composite(bg)
         elif lc == "L4" and layer.get("blend", "screen") == "screen":
             canvas = screen_blend_overlay(canvas, img, opacity)
+        elif lc == "L2":
+            l2_meta = load_composition_meta(asset_path)
+            if opacity < 1.0:
+                a = img.getchannel("A").point(lambda v: int(v * opacity))
+                img.putalpha(a)
+            if l0_meta and l2_meta and l0_plate is not None:
+                canvas = _grammar_l2_composite(
+                    canvas, img,
+                    l0_plate=l0_plate,
+                    l0_meta=l0_meta,
+                    l2_meta=l2_meta,
+                    layer=layer,
+                    panel=panel,
+                    report=grammar_report,
+                )
+            else:
+                if l0_meta and not l2_meta:
+                    warnings.warn(
+                        f"{panel['panel_id']}: bbox_legacy — L2 composition_meta absent",
+                        stacklevel=2,
+                    )
+                    grammar_report.gates.append(
+                        GateResult("meta", GateSeverity.WARN, "bbox_legacy — L2 meta absent"),
+                    )
+                elif l2_meta and not l0_meta:
+                    warnings.warn(
+                        f"{panel['panel_id']}: bbox_legacy — L0 composition_meta absent",
+                        stacklevel=2,
+                    )
+                    grammar_report.gates.append(
+                        GateResult("meta", GateSeverity.WARN, "bbox_legacy — L0 meta absent"),
+                    )
+                if not layer.get("bbox_pct"):
+                    raise ValueError(f"{panel['panel_id']}: L2 requires bbox_pct in legacy mode")
+                warnings.warn(
+                    f"{panel['panel_id']}: bbox_legacy — using §10 composite_layer",
+                    stacklevel=2,
+                )
+                grammar_report.gates.append(
+                    GateResult("placement", GateSeverity.WARN, "bbox_legacy"),
+                )
+                grammar_report.ops_applied.append("bbox_legacy_§10")
+                canvas = composite_layer(canvas, img, layer["bbox_pct"])
         else:
             if opacity < 1.0:
                 a = img.getchannel("A").point(lambda v: int(v * opacity))
                 img.putalpha(a)
+            if not layer.get("bbox_pct"):
+                raise ValueError(f"{panel['panel_id']}: {lc} requires bbox_pct")
             canvas = composite_layer(canvas, img, layer["bbox_pct"])
 
         records.append({
@@ -211,7 +382,9 @@ def assemble_panel(panel: dict[str, Any], canvas_spec: dict[str, Any],
             "provenance": layer["provenance"],
             "provenance_note": layer.get("provenance_note", ""),
         })
-    return canvas, records
+
+    has_grammar = bool(grammar_report.ops_applied or grammar_report.gates)
+    return canvas, records, grammar_report if has_grammar else None
 
 
 def _sha256(path: Path) -> str:
@@ -252,12 +425,25 @@ def run(manifest_path: Path, out_dir: Path, *, strip: bool = False,
     manifest_dir = manifest_path.parent
     all_records: list[dict] = []
     panel_paths: list[Path] = []
+    gate_reports: list[dict] = []
 
     for panel in manifest["panels"]:
-        img, records = assemble_panel(panel, manifest["canvas"], manifest_dir)
+        img, records, grammar_report = assemble_panel(panel, manifest["canvas"], manifest_dir)
         out_path = out_dir / f"{panel['panel_id']}.png"
         img.save(out_path)
         all_records.extend(records)
+
+        if grammar_report is not None:
+            gate_reports.append({
+                "panel_id": grammar_report.panel_id,
+                "shot_type": grammar_report.shot_type,
+                "passed": grammar_report.passed,
+                "ops_applied": grammar_report.ops_applied,
+                "gates": [
+                    {"gate": g.gate, "severity": g.severity.value, "message": g.message}
+                    for g in grammar_report.gates
+                ],
+            })
 
         final_path = out_path
         if bubbles and (panel.get("dialogue") or panel.get("narrator_caption") or panel.get("sfx")):
@@ -296,7 +482,15 @@ def run(manifest_path: Path, out_dir: Path, *, strip: bool = False,
                      f"**{r['provenance']}** | {r['bytes']:,} | {r['asset']} |")
     (out_dir / "_provenance.md").write_text("\n".join(lines) + "\n")
 
+    if gate_reports:
+        (out_dir / "gate_report.json").write_text(json.dumps({
+            "manifest": str(manifest_path),
+            "panels": gate_reports,
+        }, indent=2))
+
     result: dict[str, Any] = {"panels": [str(p) for p in panel_paths], "provenance": prov}
+    if gate_reports:
+        result["gate_report"] = gate_reports
     if strip:
         strip_path = out_dir / f"{manifest.get('manifest_id', manifest_path.stem)}_strip.jpg"
         render_strip(panel_paths, strip_path)

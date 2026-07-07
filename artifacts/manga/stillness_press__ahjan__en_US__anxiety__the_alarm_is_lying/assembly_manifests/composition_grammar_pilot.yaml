@@ -1,0 +1,58 @@
+schema_version: 1.0.0
+series_id: stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying
+episode_id: ep_001
+manifest_id: composition_grammar_pilot
+notes: >-
+  Grammar pilot via assemble_from_bank.py — reproduces FINDINGS.md §recommended patch set.
+  Control panel (illegal waist_up × full_render) is assembled separately and must FAIL G1.
+canvas:
+  width: 1080
+  height: 1920
+  background_hex: '#FFFFFF'
+panels:
+- panel_id: p1_establishing
+  shot_type: establishing
+  layers:
+  - layer_class: L0
+    asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L0/L0_2b9283d4c387.png
+    provenance: REAL
+  - layer_class: L2
+    asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L2/L2_3210c57437fb_alpha.png
+    anchor_slot: seat_at_table
+    grounding:
+      contact_shadow: true
+      occluder: true
+    bbox_pct: [24, 28, 56, 66]
+    provenance: REAL
+- panel_id: p2_dialogue_bust
+  shot_type: dialogue_bust
+  layers:
+  - layer_class: L0
+    asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L0/L0_2b9283d4c387.png
+    derivation:
+      type: defocus
+    provenance: REAL
+  - layer_class: L2
+    asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/image_bank/L2/mira_aoki/front_portrait_seated_calm_cutout.png
+    anchor_slot: abstract_dialogue_stage
+    bbox_pct: [20, 30, 60, 55]
+    provenance: REAL
+- panel_id: p3_insert_object
+  shot_type: insert_object
+  layers:
+  - layer_class: L0
+    asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L0/L0_window_breath_crop.png
+    provenance: REAL
+- panel_id: p4_reaction_emotion
+  shot_type: reaction_emotion
+  layers:
+  - layer_class: L0
+    asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L0/L0_2b9283d4c387.png
+    derivation:
+      type: tone_gradient
+    provenance: REAL
+  - layer_class: L2
+    asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/image_bank/L2/mira_aoki/front_portrait_seated_calm_cutout.png
+    anchor_slot: abstract_dialogue_stage
+    bbox_pct: [20, 30, 60, 55]
+    provenance: REAL
