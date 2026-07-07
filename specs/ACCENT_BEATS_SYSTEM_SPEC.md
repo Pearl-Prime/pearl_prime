@@ -1,6 +1,6 @@
 # Accent Beats System Spec — Planner-Placed Optional Chapter Elements
 
-**Version:** 1.0.0  
+**Version:** 1.1.0  
 **Date:** 2026-07-07  
 **Authority:** Pearl_Research + Pearl_Architect  
 **Status:** SPECCED (inventory + design only — no pipeline, composer, bank authoring, or flagship changes in this PR)  
@@ -10,6 +10,8 @@
 **Build order after flagship read:** cast_structure + renditions wired → accent layer planned + banks seeded → composer consumer + gates → book-#2/#3 pilot read against no-accent sibling.
 
 **Doctrine (non-negotiable):** Accent beats are **planner-assigned, never composer-improvised**. Framing lives **inside the atom** — entry and exit authored per position variant. Composer-injected wrappers are **banned** (same scar as `COMPOSER_DEINJECTION_AND_TISSUE_SPEC_2026-07-05.md`).
+
+**Personality layer (WISDOM_ESSENCE v1.1):** traditions' distilled voice — corpus-convergent essence beats, distinct from `TEACHER_DOCTRINE`, `QUOTE`, and `AUTHOR_COMMENTARY` (parallel lane). Planner-placed, dosage-governed; composite mode uses secular register only.
 
 ---
 
@@ -78,12 +80,12 @@ Orphan `QUOTE/CANONICAL.txt` files are **candidate content** for Pearl_Editor re
 
 ## §2 — Accent atom classes
 
-Six accent classes. Each is a **complete authored paragraph unit** with position variants — never a bare quote line plus composer wrapper.
+Seven accent classes (six original + **WISDOM_ESSENCE** v1.1). Each is a **complete authored paragraph unit** with position variants — never a bare quote line plus composer wrapper.
 
 ### 2.1 Shared schema (`accent_atom.yaml`)
 
 ```yaml
-accent_class: QUOTE | ENCOURAGEMENT | REFLECTION_QUESTION | AFFIRMATION | TROUBLESHOOTING | CITED_EVIDENCE
+accent_class: QUOTE | ENCOURAGEMENT | REFLECTION_QUESTION | AFFIRMATION | TROUBLESHOOTING | CITED_EVIDENCE | WISDOM_ESSENCE
 accent_id: quote_anxiety_stoic_v01__opener
 topic_keys: [anxiety, overthinking]          # doctrine/topic affinity
 doctrine_keys: ["COMPOSITE_DOCTRINE v03"]   # optional; QUOTE/CITED_EVIDENCE typically required
@@ -146,8 +148,42 @@ claim_ledger:
 | **AFFIRMATION** | `angle_registry.yaml` `core_mantras` | Short repeatable phrase; angle journey surface | `after_PIVOT`, `before_INTEGRATION` | `angle_id` |
 | **TROUBLESHOOTING** | INTEGRATION obstacle paragraphs | "When you forget for three days…" | `after_INTEGRATION` | `exercise_id` + `object` |
 | **CITED_EVIDENCE** | New bank | Named study/stat moment (not fiction) | `after_HOOK`, `before_STORY` (Gladwell Spiral alignment) | `doctrine_id` + claim ledger |
+| **WISDOM_ESSENCE** | New bank (`accent_banks/wisdom_essence/`) | Traditions' distilled voice — corpus-convergent themes, not teacher doctrine | `after_REFLECTION`, `before_THREAD` | `topic_keys` + `doctrine_keys` + `theme`; `source_teachers` audit only |
 
-### 2.3 Framing-inside-the-atom rule
+### 2.3 WISDOM_ESSENCE schema extensions
+
+`WISDOM_ESSENCE` atoms extend the shared schema with register variants and corpus audit fields. **Hard boundary:** `WISDOM_ESSENCE ≠ TEACHER_DOCTRINE`. Composite books receive planner-placed accent atoms only; mode-bleed gate (OPD-115) is **untouchable**.
+
+```yaml
+# WISDOM_ESSENCE extensions on accent_atom.yaml
+essence_id: we_anx_body_first_awareness_v01
+theme: body_first_awareness                    # corpus-convergent theme (≥3/6 teachers)
+source_teachers: [ahjan, junko, sai_ma, master_wu]  # audit trail — not rendered in composite
+source_refs:                                   # TEACHER_DOCTRINE atom IDs backing convergence
+  - ahjan_TEACHER_DOCTRINE_000
+secular_safe: true                             # required for composite-mode assignment
+dosage_class: sparse_flair                     # default sparse; max 2/book secular
+register_variants:
+  secular:                                     # (a) composite default — no teacher/tradition names
+    body: |
+      ...complete TTS paragraph with entry framing + exit handoff...
+  wisdom_traditions:                           # (b) distilled lines — still no named teachers
+    examples:
+      - "The body registers before the mind explains — look there first."
+  tradition_attributed:                        # (c) teacher-mode only — tradition named, not quoted doctrine
+    examples:
+      - "In the forest contemplative line, awareness begins at sensation, not belief."
+```
+
+**Register rules (gate-enforced):**
+
+| Variant | Mode | Render rule |
+|---------|------|-------------|
+| **(a) `secular`** | composite + teacher_mode | Full paragraph; **zero** teacher/tradition names |
+| **(b) `wisdom_traditions`** | composite + teacher_mode | Short distilled lines; no named teachers |
+| **(c) `tradition_attributed`** | **teacher_mode only** | Tradition-flavored attribution; never `TEACHER_DOCTRINE` prose |
+
+### 2.4 Framing-inside-the-atom rule
 
 **Banned:** composer functions that prepend/append accent wrappers (same class of failure as `bridge_transition_families.yaml` glue).
 
@@ -183,7 +219,7 @@ bridge → EXERCISE → [ENCOURAGEMENT] → COMPRESSION? → INTEGRATION →
 [QUOTE closer]
 ```
 
-`[CITED_EVIDENCE]` and `[AFFIRMATION]` insert per class `allowed_positions` with the same handoff rule.
+`[CITED_EVIDENCE]`, `[AFFIRMATION]`, and `[WISDOM_ESSENCE]` insert per class `allowed_positions` with the same handoff rule.
 
 ### 3.2 Per-class placement rules
 
@@ -195,6 +231,7 @@ bridge → EXERCISE → [ENCOURAGEMENT] → COMPRESSION? → INTEGRATION →
 | **AFFIRMATION** | After PIVOT or before INTEGRATION | `angle_id` + `core_mantras` entry | INTEGRATION |
 | **TROUBLESHOOTING** | After INTEGRATION | `exercise_id` + `object` | TAKEAWAY |
 | **CITED_EVIDENCE** | After HOOK (Gladwell) or before first STORY | `claim_ledger.claim_id` + doctrine | STORY scene |
+| **WISDOM_ESSENCE** | After REFLECTION (coda) or before THREAD (grace note) | `theme` + `doctrine_keys` + `topic_keys` | EXERCISE / STORY or THREAD |
 
 ### 3.3 Invariants (gates)
 
@@ -218,6 +255,7 @@ accent_budget:
   AFFIRMATION: 0
   TROUBLESHOOTING: 1
   CITED_EVIDENCE: 0
+  WISDOM_ESSENCE: 0
 accent_distribution_profile: somatic_reflective  # see §4.3
 ```
 
@@ -315,6 +353,22 @@ max_chapters_with_any_accent_share: 0.35 # no book >35% accent-bearing chapters 
 | AFFIRMATION | `angle_registry.yaml` `core_mantras` | 15 angles × 3–5 (TODO) | Pearl_Editor commission: **45–75 mantras** |
 | TROUBLESHOOTING | INTEGRATION obstacle paragraphs | ~12 high-quality EN patterns | Extract + key to `exercise_id`/`object` |
 
+### 5.4 WISDOM_ESSENCE bank
+
+| Attribute | Spec |
+|-----------|------|
+| **Location** | `SOURCE_OF_TRUTH/accent_banks/wisdom_essence/<topic>/entries.yaml` |
+| **Research** | [artifacts/research/WISDOM_ESSENCE_ESSENCE_MAP_2026-07-07.md](../artifacts/research/WISDOM_ESSENCE_ESSENCE_MAP_2026-07-07.md) — corpus convergence across six teacher-mode teachers; EI v2 `domain_thesis_similarity` offline scoring |
+| **Policy** | Corpus-convergent themes (≥3/6 teachers at EI v2 ≥0.35); **not** persona-keyed doctrine; composite uses `secular` register only |
+| **Keying** | `theme`, `topic_keys`, `doctrine_keys`, `position_fit`, `dosage_class` |
+| **Sizing — pilot** | 12 essence entries × 3 register variants = **36 authored units** (anxiety topic) |
+| **Sizing — topic complete** | 10 themes × 3 variants = **30 units/topic** |
+| **Dosage default** | **0–1/book** secular; max **2/book**; variant (c) teacher-mode only (Q-WISDOM-02) |
+| **Status** | `status: unwired` / `KNOWN_UNWIRED: accent_banks/wisdom_essence/` until build lane |
+| **Pearl_Research deliverable** | Essence map (linked); `source_refs` audit per entry |
+
+**Excluded themes (non-convergent / non-secular):** lineage-specific mechanics (Dragon Vein geomancy, light-language mechanics, Jagadguru lineage, Tao Calligraphy frequency field) — see essence map §Excluded.
+
 ---
 
 ## §6 — Gates (proposed — build lane)
@@ -327,8 +381,10 @@ max_chapters_with_any_accent_share: 0.35 # no book >35% accent-bearing chapters 
 | Claims freshness | `check_cited_evidence_staleness.py` | `stale_after` passed without re-review |
 | Sparsity | `check_accent_sparsity.py` | Accent chapter share > brand profile cap OR budget sum ≠ assigned count |
 | Anti-spam | extend `check_experience_layer.py` | `accent_signature` collision exceeds wave cap |
+| Wisdom essence mode bleed | `check_wisdom_essence_mode_bleed.py` | `secular_safe: false` atom in composite plan OR teacher name in composite `secular` body OR `tradition_attributed` variant in composite plan |
+| Wisdom essence doctrine bleed | `check_wisdom_essence_doctrine_boundary.py` | Atom body matches `TEACHER_DOCTRINE` source text OR missing `source_refs` audit |
 
-Register in `scripts/run_production_readiness_gates.py` as gates **#24–#28** (numbers provisional; coordinate with Drift detectors roster at build time).
+Register in `scripts/run_production_readiness_gates.py` as gates **#24–#30** (numbers provisional; coordinate with Drift detectors roster at build time).
 
 **Status:** all gates **ABSENT** until build lane; this spec is **SPECCED** only.
 
@@ -407,7 +463,7 @@ Register in `scripts/run_production_readiness_gates.py` as gates **#24–#28** (
 ## §11 — Acceptance (this spec)
 
 1. Fifteen-element coverage inventory with six-layer labels — §1.
-2. Six accent classes with shared schema + framing rule — §2.
+2. Seven accent classes with shared schema + framing rule — §2.
 3. Placement grammar + handoff table — §3.
 4. Plan schema + dosage / anti-spam — §4.
 5. QUOTE + CITED_EVIDENCE bank sizing — §5.
@@ -416,3 +472,115 @@ Register in `scripts/run_production_readiness_gates.py` as gates **#24–#28** (
 8. Registered in `specs/README.md`, `docs/DOCS_INDEX.md`, `artifacts/coordination/CANONICAL_ARTIFACTS_REGISTRY.tsv`.
 
 **Status claim:** This document is **SPECCED**. Implementation layers remain **ABSENT** until `flagship-read-approved` and follow-on build PRs land.
+
+---
+
+## §12 — WISDOM_ESSENCE (v1.1 amendment)
+
+**Research:** [artifacts/research/WISDOM_ESSENCE_ESSENCE_MAP_2026-07-07.md](../artifacts/research/WISDOM_ESSENCE_ESSENCE_MAP_2026-07-07.md)
+
+**Problem:** Composite books need tradition-flavored depth without importing `TEACHER_DOCTRINE` prose or re-opening `teacher_wrapper` render-glue. Readers recognize convergent wisdom (body-first awareness, noticing without fixing, impermanence-as-weather) across lineages — but no governed accent class has ever shipped that distilled voice as planner-placed beats.
+
+**Critical boundary:** `WISDOM_ESSENCE ≠ TEACHER_DOCTRINE`. Essence atoms are **corpus-convergent distillations** keyed by `theme`, not persona-keyed doctrine slots. Mode-bleed gate (OPD-115 Phase B in `phoenix_v4/planning/enrichment_select.py`) is **untouchable** — composite books receive WISDOM_ESSENCE **only** via `accent_beats` planner assignment.
+
+**Parallel lane:** `AUTHOR_COMMENTARY` (separate PR `#4713`) owns the author's witness voice. WISDOM_ESSENCE owns traditions' distilled voice under its own dosage and register rules.
+
+### 12.1 Corpus-convergent themes (anxiety pilot)
+
+Themes scored across six teacher-mode teachers (`ahjan`, `master_wu`, `master_feung`, `junko`, `sai_ma`, `master_sha`) with EI v2 `domain_thesis_similarity` offline scoring. Inclusion bar: **≥3/6 teachers** at EI v2 **≥0.35**.
+
+| Theme | Supporting | Default placement |
+|-------|------------|-------------------|
+| `body_first_awareness` | 6/6 | `after_REFLECTION` |
+| `noticing_without_fixing` | 6/6 | `after_REFLECTION` |
+| `bracing_cost` | 6/6 | `after_REFLECTION` |
+| `self_compassion_worth` | 6/6 | `before_THREAD` |
+| `impermanence_weather` | 6/6 | `after_REFLECTION` |
+| `observing_self` | 6/6 | `after_REFLECTION` |
+| `already_complete` | 6/6 | `before_THREAD` |
+| `suffering_as_pigment` | 6/6 | `after_REFLECTION` |
+| `transmission_beyond_mind` | 6/6 | `before_THREAD` |
+| `ordinary_life_practice` | 6/6 | `after_REFLECTION` |
+
+**Excluded (non-convergent / non-secular):** Dragon Vein geomancy (`master_wu`-specific); light-language mechanics (`junko`); Jagadguru lineage (`sai_ma`); Tao Calligraphy frequency field (`master_sha`).
+
+### 12.2 Three register variants
+
+| Variant | Key | Composite | Teacher-mode | Render |
+|---------|-----|-----------|--------------|--------|
+| **(a) Secular** | `register_variants.secular.body` | **Yes** (default) | Yes | Full TTS paragraph; zero teacher/tradition names |
+| **(b) Wisdom traditions** | `register_variants.wisdom_traditions.examples` | Yes | Yes | Short distilled lines; no named teachers |
+| **(c) Tradition attributed** | `register_variants.tradition_attributed.examples` | **No** | **Yes only** | Tradition-flavored attribution; not doctrine quotation |
+
+**Q-WISDOM-02 default:** variant (c) **disallowed** in secular/composite books.
+
+### 12.3 Mode boundary (gate rule)
+
+| Mode | Teacher/tradition in rendered text | Gate |
+|------|-----------------------------------|------|
+| **Composite** | **ZERO** named teachers; `secular_safe: true` required; variant (a) or (b) only | `check_wisdom_essence_mode_bleed.py` |
+| **Teacher-mode** | Variant (c) allowed; `source_teachers` remain audit-only | `mode_allow` includes `teacher_mode` |
+
+`AUTHOR_COMMENTARY` handles author witness voice; WISDOM_ESSENCE handles tradition-flavored distilled content — **do not conflate**.
+
+### 12.4 Placement + dosage
+
+| Field | Default (12-chapter book) |
+|-------|---------------------------|
+| `accent_budget.WISDOM_ESSENCE` | **0** (pilot exception) |
+| Recommended production default | **0–1/book** secular (Q-WISDOM-01) |
+| Secular hard cap | **2/book** |
+| Max chapters with any accent share | unchanged (§4.3, default 0.25) |
+
+Joins experience / anti-spam tuple: extend `accent_signature` hash to include `WISDOM_ESSENCE_count`.
+
+**Allowed positions:**
+
+| Position | Register | Handoff → |
+|----------|----------|-----------|
+| `after_REFLECTION` | secular coda (default) | EXERCISE / STORY |
+| `before_THREAD` | grace note | THREAD |
+
+### 12.5 Bank program
+
+| Attribute | Spec |
+|-----------|------|
+| **Location** | `SOURCE_OF_TRUTH/accent_banks/wisdom_essence/<topic>/entries.yaml` |
+| **Manifest** | `SOURCE_OF_TRUTH/accent_banks/wisdom_essence/_BANK_MANIFEST.yaml` |
+| **Pilot** | `anxiety/entries.yaml` — 12 essence entries, 3 register variants each, golden-ch1 bar |
+| **Sizing — topic complete** | 10 themes × 3 variants = **30 units/topic** |
+| **Status** | `status: unwired` / `KNOWN_UNWIRED: accent_banks/wisdom_essence/` until build lane |
+
+### 12.6 Gates (proposed — build lane)
+
+| Gate | BLOCK condition |
+|------|-----------------|
+| `check_wisdom_essence_mode_bleed.py` | `secular_safe: false` in composite plan OR teacher name in composite `secular` body OR `tradition_attributed` variant in composite plan |
+| `check_wisdom_essence_doctrine_boundary.py` | Atom body matches `TEACHER_DOCTRINE` source text OR missing `source_refs` audit |
+| `check_accent_framing_in_atom.py` | (shared) composer wrapper detected |
+
+### 12.7 Operator decisions (defaults recommended)
+
+| ID | Question | Recommendation |
+|----|----------|----------------|
+| **Q-WISDOM-01** | Dosage default secular | Max **2/book**; most **0–1** |
+| **Q-WISDOM-02** | Variant (c) in secular? | **(b) only** secular; **(c)** teacher-mode |
+| **Q-WISDOM-03** | Placement default | **post-REFLECTION** coda |
+
+### 12.8 Out of scope
+
+- Re-open `TEACHER_DOCTRINE` routing for essence content
+- Re-enable `teacher_wrapper` or render-glue for tradition voice
+- `AUTHOR_COMMENTARY` witness-register atoms (owned by `#4713`)
+- Flagship/live-lane file edits
+- Pipeline/composer wiring (parks with accent build order)
+
+### 12.9 Acceptance (WISDOM_ESSENCE amendment)
+
+1. Essence map with six-layer labels — linked above.
+2. Corpus-convergent theme table — §12.1.
+3. Three register variants with mode rules — §12.2.
+4. Mode boundary gate rule — §12.3.
+5. Dosage + placement — §12.4.
+6. Pilot bank path + unwired status — §12.5.
+7. Operator questions with defaults — §12.7.
