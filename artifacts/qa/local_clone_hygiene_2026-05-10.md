@@ -1,7 +1,7 @@
 # Local clone hygiene audit — 2026-05-10
 
-**PROJECT_ID:** PRJ-PEARL-DEVOPS-LOCAL-HYGIENE  
-**SUBSYSTEM:** pearl_devops (operator-machine cleanup; no push from damaged primary clone)  
+**PROJECT_ID:** PRJ-PEARL-DEVOPS-LOCAL-HYGIENE
+**SUBSYSTEM:** pearl_devops (operator-machine cleanup; no push from damaged primary clone)
 **Operator clone:** `/Users/ahjan/phoenix_omega`
 
 ## Initial state (pre-hygiene)
@@ -56,8 +56,8 @@ No commits and **no push** were made from `/Users/ahjan/phoenix_omega` during hy
 
 ## PR for this audit document
 
-- **PR:** https://github.com/Ahjan108/phoenix_omega_v4.8/pull/1003  
-- **Branch:** `agent/local-clone-hygiene-2026-05-10`  
+- **PR:** https://github.com/Ahjan108/phoenix_omega_v4.8/pull/1003
+- **Branch:** `agent/local-clone-hygiene-2026-05-10`
 - **Initial audit commit on branch:** `f6cbbc248a40b8be20f3580ed6544335fa735e81` (doc-only; sibling clone `phoenix_omega_local_hygiene_pr_wt`)
 
 **HANDOFF_TO:** operator — primary clone is aligned to `main` at `e25bd63e8a` with a clean index and empty status; delete `/tmp/.../quarantine/worktrees_*` when satisfied backups are enough.
