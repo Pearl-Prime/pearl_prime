@@ -79,10 +79,14 @@ def test_slot_definitions_match_slots(fmt_std):
 
 
 def test_exercise_excluded_when_weight_zero(fmt_std):
-    """Somatic 10-slot grid retains EXERCISE slots (V2 sections 4+8) even when spine blocks practice."""
+    """Purpose contract max_exercises=0 removes EXERCISE slots upstream for recognition ch1."""
+    from phoenix_v4.planning.chapter_planner import assign_chapter_purpose_contracts
+
     bm = _chain("anxiety", fmt_std)
     ch1 = bm.chapters[0]
-    assert ch1.slot_definitions.count("EXERCISE") == 2
+    contracts = assign_chapter_purpose_contracts(len(bm.chapters), "standard_book")
+    assert contracts[0].max_exercises == 0
+    assert ch1.slot_definitions.count("EXERCISE") == 0
 
 
 def test_required_section_survives_zero_weight(fmt_std, recwarn):
