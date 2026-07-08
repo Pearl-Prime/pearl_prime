@@ -1,4 +1,5 @@
 path	purpose	subsystem	owner	consumers	status
+scripts/ci/check_accent_plan_assignment.py	CI drift/readiness gate (check_accent_plan_assignment.py)	ci	Pearl_GitHub	.github/workflows	WIRED
 scripts/ci/check_agent_registry.py	CI drift/readiness gate (check_agent_registry.py)	ci	Pearl_GitHub	.github/workflows	WIRED
 scripts/ci/check_atoms_external_book_references.py	CI drift/readiness gate (check_atoms_external_book_references.py)	ci	Pearl_GitHub	.github/workflows	WIRED
 scripts/ci/check_author_cover_art.py	CI drift/readiness gate (check_author_cover_art.py)	ci	Pearl_GitHub	.github/workflows	WIRED
