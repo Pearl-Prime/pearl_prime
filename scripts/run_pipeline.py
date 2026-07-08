@@ -1115,6 +1115,24 @@ def _run_spine_pipeline_mode(
         from phoenix_v4.planning.enrichment_select import attach_exercise_journeys
         enriched = attach_exercise_journeys(enriched, seed=seed, enabled=True, repo_root=repo_root)
 
+    from phoenix_v4.planning.accent_planner import attach_accent_plan, validate_accent_plan
+
+    enriched = attach_accent_plan(
+        enriched,
+        brand_id=str(book_spec_for_compiler.get("brand_id") or "phoenix"),
+        author_id=book_spec_for_compiler.get("author_id"),
+        seed=seed,
+        locale=_enrich_locale,
+        teacher_mode=bool(book_spec_for_compiler.get("teacher_mode")),
+        repo_root=repo_root,
+    )
+    _accent_plan_errors = validate_accent_plan(enriched)
+    if _accent_plan_errors and quality_profile == "production":
+        raise SystemExit(
+            "[PRODUCTION GATE] Accent planner anti-spam violations:\n"
+            + "\n".join(f"  - {e}" for e in _accent_plan_errors)
+        )
+
     _governance_report: dict = {}
     from phoenix_v4.planning.chapter_object_continuity import is_twelve_shape_continuity_active
 

@@ -1,0 +1,50 @@
+# Brand accent dosage profiles — planner-owned sparse accent budgets
+# Authority: specs/ACCENT_BEATS_SYSTEM_SPEC.md §4.3
+schema_version: "1.0.0"
+
+profiles:
+  somatic_reflective:
+    label: "Sparse reflective accents"
+    accent_budget:
+      ENCOURAGEMENT: 2
+      CITED_EVIDENCE: 1
+      EXTERNAL_STORY: 2
+      WISDOM_ESSENCE: 1
+      AUTHOR_COMMENTARY: 1
+    max_accent_chapter_share: 0.35
+
+  commercial_action:
+    label: "Credibility-forward accents"
+    accent_budget:
+      ENCOURAGEMENT: 1
+      CITED_EVIDENCE: 2
+      EXTERNAL_STORY: 2
+      AUTHOR_COMMENTARY: 0
+      WISDOM_ESSENCE: 0
+    max_accent_chapter_share: 0.35
+
+  minimal_accent:
+    label: "No accents by default"
+    accent_budget:
+      ENCOURAGEMENT: 0
+      CITED_EVIDENCE: 0
+      EXTERNAL_STORY: 0
+      WISDOM_ESSENCE: 0
+      AUTHOR_COMMENTARY: 0
+    max_accent_chapter_share: 0.0
+
+default_by_brand:
+  stillness_press: somatic_reflective
+  calm_horizon: somatic_reflective
+  grounded_path: commercial_action
+  quiet_mind_audio: somatic_reflective
+
+default_profile: minimal_accent
+
+pilot_cells:
+  "corporate_managers:burnout":
+    profile: commercial_action
+    story_mix_profile: practical_credible
+  "gen_z_professionals:anxiety":
+    profile: somatic_reflective
+    story_mix_profile: intimate_voice

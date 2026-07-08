@@ -701,6 +701,8 @@ class EnrichedChapter:
     total_words: int
     source_breakdown: Dict[str, int]
     exercise_journey: Optional[Dict[str, Any]] = None
+    accent_beats: List[Dict[str, Any]] = field(default_factory=list)
+    accent_bodies: Dict[str, str] = field(default_factory=dict)
 
 
 @dataclass
@@ -3307,9 +3309,13 @@ def enriched_book_to_jsonable(book: EnrichedBook) -> Dict[str, Any]:
                 "source_breakdown": ch.source_breakdown,
                 "slots": [asdict(s) for s in ch.slots],
                 "exercise_journey": ch.exercise_journey,
+                "accent_beats": list(ch.accent_beats or []),
             }
             for ch in book.chapters
         ],
+        "accent_budget": dict((book.spine_context or {}).get("accent_budget") or {}),
+        "accent_signature": (book.spine_context or {}).get("accent_signature"),
+        "story_mix_profile": (book.spine_context or {}).get("story_mix_profile"),
     }
 
 

@@ -91,6 +91,9 @@ jobs:
       - name: 12-shape chapter object continuity (BLOCK)
         run: PYTHONPATH=. python3 scripts/ci/check_chapter_object_continuity.py
 
+      - name: Accent plan assignment (planner-owned accents — BLOCK)
+        run: PYTHONPATH=. python3 scripts/ci/check_accent_plan_assignment.py
+
       - name: Flagship 12-shape chapter shape (BLOCK)
         run: PYTHONPATH=. python3 scripts/ci/check_flagship_chapter_shape.py
 

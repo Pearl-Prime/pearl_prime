@@ -200,6 +200,7 @@ class BookSpec:
     perceived_positioning: Optional[str] = None
     experience_hash: Optional[str] = None
     ai_disclosure_status: Optional[str] = None
+    story_mix_profile: Optional[str] = None
     # Optional: populated when ``produce_single`` / ``produce_wave`` is given a readable
     # structured trend_score JSON path (docs/TREND_PIPELINE_TRUTH_AND_AUTOMATION_DEV_SPEC.md PR 3).
     trend_heat_score: Optional[float] = None
@@ -249,6 +250,8 @@ class BookSpec:
                 out[experience_field] = value
         if self.trend_heat_score is not None:
             out["trend_heat_score"] = self.trend_heat_score
+        if self.story_mix_profile is not None:
+            out["story_mix_profile"] = self.story_mix_profile
         return out
 
 
@@ -483,6 +486,15 @@ class CatalogPlanner:
         if not domain_id:
             domain_id = self._topic_to_domain(topic_id)
 
+        try:
+            from phoenix_v4.planning.accent_planner import resolve_story_mix_profile
+
+            story_mix_profile = resolve_story_mix_profile(
+                brand_id, persona_id=persona_id, topic_id=topic_id
+            )
+        except ImportError:
+            story_mix_profile = None
+
         return BookSpec(
             topic_id=topic_id,
             persona_id=persona_id,
@@ -503,6 +515,7 @@ class CatalogPlanner:
             narrator_id=narrator_id,
             atoms_model=atoms_model,
             trend_heat_score=trend_heat,
+            story_mix_profile=story_mix_profile,
         )
 
     def _derive_angle(

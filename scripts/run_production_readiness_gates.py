@@ -471,6 +471,8 @@ def main() -> int:
          "Manga story-engine architect probe (governed genres)"),
         ("22e", "check_spine_packet_integrity.py",
          "Spine packet integrity (planner duplicate guard)"),
+        ("22f", "check_accent_plan_assignment.py",
+         "Accent plan assignment (planner-owned accents only)"),
         ("23", "check_manga_wiring.py",
          "Manga config wiring (no unwired-config-as-working)"),
         ("24", "check_manga_l2_cutout_alpha.py",
