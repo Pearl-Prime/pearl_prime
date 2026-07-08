@@ -51,9 +51,22 @@ def test_compile_burnout_standard(fmt_std):
 
 
 def test_all_chapters_have_slots(fmt_std):
+    from phoenix_v4.planning.chapter_planner import (
+        assign_chapter_purpose_contracts,
+        resolve_effective_max_exercises,
+    )
+
+    somatic_exercise_slots = 2
     for topic in ("anxiety", "grief", "burnout"):
         bm = _chain(topic, fmt_std)
-        assert all(len(ch.slots) == 10 for ch in bm.chapters)
+        contracts = assign_chapter_purpose_contracts(len(bm.chapters), "standard_book")
+        for ch, contract in zip(bm.chapters, contracts):
+            effective_max = resolve_effective_max_exercises(
+                contract.max_exercises,
+                "standard_book",
+            )
+            expected_slots = 10 - (somatic_exercise_slots - effective_max)
+            assert len(ch.slots) == expected_slots
 
 
 def test_slot_definitions_match_slots(fmt_std):
