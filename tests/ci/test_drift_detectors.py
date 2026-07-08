@@ -112,6 +112,17 @@ def test_drift_detectors_workflow_uses_chord_fail_mode() -> None:
     assert "--gate-mode warn" not in workflow
 
 
+def test_drift_detectors_workflow_runs_spine_packet_integrity_gate() -> None:
+    workflow = (REPO_ROOT / ".github" / "workflows" / "drift-detectors.yml").read_text(
+        encoding="utf-8"
+    )
+    readiness = (REPO_ROOT / "scripts" / "run_production_readiness_gates.py").read_text(
+        encoding="utf-8"
+    )
+    assert "check_spine_packet_integrity.py" in workflow
+    assert "\"22e\", \"check_spine_packet_integrity.py\"" in readiness
+
+
 def test_canonical_pipeline_chord_kill_switch_reverts_to_spine_only(tmp_path: Path) -> None:
     """G3 kill-switch: CANONICAL_PIPELINE_CHORD_FULL=0 → spine-only PASSES (pre-G3 behavior)."""
     scripts = tmp_path / "scripts" / "prod"
