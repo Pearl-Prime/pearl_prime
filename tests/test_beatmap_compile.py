@@ -132,9 +132,10 @@ def test_word_budget_non_uniform_somatic(fmt_std):
     """Somatic grid uses scaled non-uniform baselines (second exercise > first)."""
     shaped = apply_knobs(load_spine("anxiety"), load_knob_profile("anxiety"))
     bm = compile_beatmap(shaped, load_topic_engines("anxiety"), fmt_std)
-    ch6 = next(c for c in bm.chapters if c.number == 6)
-    ex_a = ch6.slots[3]
-    ex_b = ch6.slots[7]
+    # ch5 is the first practice chapter (max_exercises=2) under purpose contracts.
+    ch5 = next(c for c in bm.chapters if c.number == 5)
+    ex_a = ch5.slots[3]
+    ex_b = ch5.slots[7]
     assert ex_a.slot_type == "EXERCISE"
     assert ex_b.slot_type == "EXERCISE"
     assert ex_b.target_words >= ex_a.target_words
