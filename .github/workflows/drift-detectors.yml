@@ -82,6 +82,9 @@ jobs:
         run: |
           PYTHONPATH=scripts/ci:. python3 scripts/ci/check_manga_wiring.py
 
+      - name: Spine packet integrity (planner owns duplicate resolution — BLOCK)
+        run: PYTHONPATH=scripts/ci:. python3 scripts/ci/check_spine_packet_integrity.py
+
       - name: Brand admin Weekly OS public sync (BLOCK)
         run: python3 scripts/ci/check_brand_admin_weekly_os_public_sync.py
 

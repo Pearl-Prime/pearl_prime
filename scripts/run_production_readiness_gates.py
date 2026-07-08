@@ -469,6 +469,8 @@ def main() -> int:
          "Manga serial spine (adopted series spine+continuity)"),
         ("22d", "check_manga_story_engine.py",
          "Manga story-engine architect probe (governed genres)"),
+        ("22e", "check_spine_packet_integrity.py",
+         "Spine packet integrity (planner duplicate guard)"),
         ("23", "check_manga_wiring.py",
          "Manga config wiring (no unwired-config-as-working)"),
         ("24", "check_manga_l2_cutout_alpha.py",
