@@ -1239,7 +1239,16 @@ def compose_golden_spine_chapter(
     # through to mechanism_thesis_families lookup or the legacy keyword chain —
     # the documented thesis-routing drift in the bestseller drift analysis.
     chapter_arc_thesis = str(getattr(chapter, "thesis", "") or "").strip()
-    if twelve_shape_flagship:
+    _accent_beats = list(getattr(chapter, "accent_beats", None) or [])
+    _accent_bodies = dict(getattr(chapter, "accent_bodies", None) or {})
+    if _accent_beats and _accent_bodies:
+        from phoenix_v4.rendering.accent_renderer import insert_accent_beats_into_streams
+
+        slot_types, slot_proses, _accent_rendered = insert_accent_beats_into_streams(
+            slot_types, slot_proses, _accent_beats, _accent_bodies
+        )
+        meta["accent_rendered"] = _accent_rendered
+    if twelve_shape_flagship or _accent_beats:
         from phoenix_v4.rendering.chapter_composer import compose_ordered_chapter_prose
 
         ch_body = compose_ordered_chapter_prose(slot_types, slot_proses).strip()
@@ -1247,7 +1256,7 @@ def compose_golden_spine_chapter(
             "violations": [],
             "softened": 0,
             "stripped": 0,
-            "skipped": "twelve_shape_ordered",
+            "skipped": "twelve_shape_ordered" if twelve_shape_flagship else "accent_ordered",
         }
         return ch_body, meta
 
