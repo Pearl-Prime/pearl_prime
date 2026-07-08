@@ -169,10 +169,21 @@ def test_total_words_within_format_range(fmt_std):
 
 def test_somatic_ten_slot_grid_order(fmt_std):
     from phoenix_v4.planning.beatmap_compile import SOMATIC_10_SLOT_GRID
+    from phoenix_v4.planning.chapter_planner import (
+        assign_chapter_purpose_contracts,
+        cap_exercise_slots_in_row,
+        resolve_effective_max_exercises,
+    )
 
     bm = _chain("anxiety", fmt_std)
-    for ch in bm.chapters:
-        assert [s.slot_type for s in ch.slots] == SOMATIC_10_SLOT_GRID
+    contracts = assign_chapter_purpose_contracts(len(bm.chapters), "standard_book")
+    for ch, contract in zip(bm.chapters, contracts):
+        effective_max = resolve_effective_max_exercises(
+            contract.max_exercises,
+            "standard_book",
+        )
+        expected = cap_exercise_slots_in_row(SOMATIC_10_SLOT_GRID, effective_max)
+        assert [s.slot_type for s in ch.slots] == expected
 
 
 def test_somatic_section_indices(fmt_std):
@@ -278,12 +289,27 @@ def test_output_chapters_match_input(fmt_std):
 
 
 def test_topics_produce_distinct_beatmaps(fmt_std):
+    from phoenix_v4.planning.chapter_planner import (
+        assign_chapter_purpose_contracts,
+        resolve_effective_max_exercises,
+    )
+
     topics = ("anxiety", "grief", "burnout")
     bms = [_chain(t, fmt_std) for t in topics]
     assert len({bm.topic for bm in bms}) == 3
+    contracts = assign_chapter_purpose_contracts(12, "standard_book")
+    somatic_exercise_slots = 2
+    expected_slots = sum(
+        10 - (somatic_exercise_slots - resolve_effective_max_exercises(c.max_exercises, "standard_book"))
+        for c in contracts
+    )
+    expected_exercises = sum(
+        resolve_effective_max_exercises(c.max_exercises, "standard_book")
+        for c in contracts
+    )
     for bm in bms:
-        assert sum(len(ch.slots) for ch in bm.chapters) == 120
-        assert sum(1 for ch in bm.chapters for s in ch.slots if s.slot_type == "EXERCISE") == 24
+        assert sum(len(ch.slots) for ch in bm.chapters) == expected_slots
+        assert sum(1 for ch in bm.chapters for s in ch.slots if s.slot_type == "EXERCISE") == expected_exercises
 
 
 def test_load_topic_engines_includes_allowed_engines():
