@@ -2932,6 +2932,40 @@ def _authored_transition(
     )
 
 
+_ADDITIVE_COMPOSE_TYPES = frozenset({"STORY", "REFLECTION", "TEACHER_DOCTRINE"})
+
+
+def _requires_additive_compose(slot_types: list[str]) -> bool:
+    """True when repeated authored STORY/REFLECTION/DOCTRINE packets must all land."""
+    counts: dict[str, int] = {}
+    for st in slot_types:
+        key = st.strip().upper()
+        if key not in _ADDITIVE_COMPOSE_TYPES:
+            continue
+        counts[key] = counts.get(key, 0) + 1
+        if counts[key] > 1:
+            return True
+    return False
+
+
+def compose_additive_chapter_prose(
+    slot_types: list[str],
+    slot_proses: list[str],
+    *,
+    arc_thesis: str = "",
+) -> str:
+    """Append every non-placeholder packet in slot order; optional arc_thesis append-only."""
+    parts: list[str] = []
+    for _st, prose in zip(slot_types, slot_proses):
+        body = (prose or "").strip()
+        if not body or _is_placeholder_text(body):
+            continue
+        parts.append(body)
+    if arc_thesis and arc_thesis.strip():
+        parts.append(arc_thesis.strip())
+    return "\n\n".join(parts).strip()
+
+
 def compose_ordered_chapter_prose(
     slot_types: list[str],
     slot_proses: list[str],
@@ -2979,6 +3013,13 @@ def compose_chapter_prose(
 
     Returns the composed chapter text (no heading — caller adds 'Chapter N').
     """
+    if _requires_additive_compose(slot_types):
+        return compose_additive_chapter_prose(
+            slot_types,
+            slot_proses,
+            arc_thesis=arc_thesis,
+        )
+
     # Set chapter index for variant rotation across all bridge/thesis functions
     global _CHAPTER_INDEX_TLS
     _CHAPTER_INDEX_TLS = chapter_index

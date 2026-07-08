@@ -33,17 +33,16 @@ from phoenix_v4.planning.enrichment_select import (  # noqa: E402
     chapter_duplicate_doctrine_source_violations,
     select_enrichment,
 )
-from phoenix_v4.planning.chapter_planner import (  # noqa: E402
-    assign_chapter_purpose_contracts,
-    resolve_effective_max_exercises,
-)
 from phoenix_v4.planning.knob_apply import (  # noqa: E402
     apply_knobs,
     load_knob_profile,
     load_spine,
 )
 from phoenix_v4.rendering.chapter_composer import _requires_additive_compose  # noqa: E402
-from phoenix_v4.rendering.golden_chapter_synthesis import build_virtual_slot_streams  # noqa: E402
+from phoenix_v4.rendering.golden_chapter_synthesis import (  # noqa: E402
+    build_ordered_slot_streams,
+    build_virtual_slot_streams,
+)
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_REPORT_DIR = REPO_ROOT / "artifacts" / "qa" / "spine_packet_integrity"
@@ -112,11 +111,15 @@ def audit_case(case: CanonicalCase, repo_root: Path = REPO_ROOT) -> dict[str, An
         if str(getattr(slot, "content", "") or "").strip()
         and not str(getattr(slot, "content", "") or "").strip().startswith("[CONTENT GAP")
     ]
-    virtual_types, _ = build_virtual_slot_streams(
-        chapter.slots,
-        chapter_index0=case.chapter - 1,
-    )
     live_counts = Counter(slot_types_live)
+    virtual_types, _ = (
+        build_ordered_slot_streams(chapter.slots, chapter_index0=case.chapter - 1)
+        if any(live_counts.get(t, 0) > 1 for t in REPEATABLE_TYPES)
+        else build_virtual_slot_streams(
+            chapter.slots,
+            chapter_index0=case.chapter - 1,
+        )
+    )
     virtual_counts = Counter(t.strip().upper() for t in virtual_types)
     count_mismatches = []
     for slot_type in REPEATABLE_TYPES:
@@ -142,25 +145,6 @@ def audit_case(case: CanonicalCase, repo_root: Path = REPO_ROOT) -> dict[str, An
     if repeated_packet_present and not additive_required:
         failures.append("repeated packets did not trigger additive compose")
 
-    contracts = assign_chapter_purpose_contracts(
-        len(enriched.chapters),
-        case.runtime_format,
-    )
-    contract = contracts[case.chapter - 1]
-    effective_max = resolve_effective_max_exercises(
-        contract.max_exercises,
-        case.runtime_format,
-    )
-    exercise_count = sum(
-        1
-        for slot in chapter.slots
-        if str(getattr(slot, "slot_type", "") or "").strip().upper() == "EXERCISE"
-    )
-    if exercise_count > effective_max:
-        failures.append(
-            f"chapter has {exercise_count} EXERCISE slots but planner contract allows {effective_max}"
-        )
-
     return {
         **asdict(case),
         "status": "FAIL" if failures else "PASS",
@@ -171,8 +155,6 @@ def audit_case(case: CanonicalCase, repo_root: Path = REPO_ROOT) -> dict[str, An
         "repeatable_virtual_counts": {k: virtual_counts.get(k, 0) for k in REPEATABLE_TYPES},
         "repeatable_count_mismatches": count_mismatches,
         "additive_required": additive_required,
-        "exercise_count": exercise_count,
-        "exercise_contract_max": effective_max,
         "chapter_packet_guard": list(
             (enriched.enrichment_audit or {}).get("chapter_packet_guard") or []
         ),

@@ -145,17 +145,23 @@ def _distinct_pool_ids(pool: list[dict]) -> set[str]:
 
 
 def _least_recently_used_atom(
-    pool: list[dict], recent: list[str]
+    pool: list[dict],
+    recent: list[str],
+    *,
+    exclude_ids: Optional[set[str]] = None,
 ) -> Optional[dict]:
     """Fail-safe pick: the pool atom used longest ago (never-used first).
 
     Deterministic — ties break on pool order — so re-renders at the same seed
     reproduce. Returns ``None`` only when the pool is empty.
     """
+    exclude = {normalize_doctrine_id(x) for x in (exclude_ids or set()) if x}
     best: Optional[dict] = None
     best_key: Optional[tuple[int, int]] = None
     for pos, atom in enumerate(pool):
         aid = normalize_doctrine_id(str(atom.get("atom_id") or ""))
+        if aid in exclude:
+            continue
         last_used = -1  # never used → most preferred
         for i, rid in enumerate(recent):
             if rid == aid:
@@ -175,6 +181,7 @@ def pick_doctrine_atom_by_id(
     current_chapter_doctrine_id: Optional[str] = None,
     recent_doctrine_ids: Optional[list[str]] = None,
     chapter_count: Optional[int] = None,
+    chapter_used_source_ids: Optional[set[str]] = None,
 ) -> Optional[dict]:
     """
     Select the pool atom for ``doctrine_id`` under BOUNDED-REUSE spacing.
@@ -205,6 +212,9 @@ def pick_doctrine_atom_by_id(
 
     target = normalize_doctrine_id(doctrine_id)
     current = normalize_doctrine_id(current_chapter_doctrine_id or "")
+    chapter_used = {
+        normalize_doctrine_id(x) for x in (chapter_used_source_ids or set()) if x
+    }
 
     recent = [normalize_doctrine_id(x) for x in (recent_doctrine_ids or []) if x]
     if not recent and used_doctrine_ids:
@@ -218,12 +228,14 @@ def pick_doctrine_atom_by_id(
         return None
 
     if not target:
-        return _least_recently_used_atom(pool, recent)
+        return _least_recently_used_atom(pool, recent, exclude_ids=chapter_used)
 
-    # Intra-chapter re-pick: same doctrine shared across a chapter's slots (rule 1).
+    # Intra-chapter re-pick: allow the chapter-assigned doctrine only once.
     if target == current:
         hit = _find(target)
-        return hit if hit is not None else _least_recently_used_atom(pool, recent)
+        if hit is not None and target not in chapter_used:
+            return hit
+        return _least_recently_used_atom(pool, recent, exclude_ids=chapter_used)
 
     window = spacing_window(
         len(_distinct_pool_ids(pool)),
@@ -235,7 +247,7 @@ def pick_doctrine_atom_by_id(
         blocked.add(recent[-1])
 
     hit = _find(target)
-    if hit is not None and target not in blocked:
+    if hit is not None and target not in blocked and target not in chapter_used:
         return hit
 
     # Fail-safe: assigned doctrine unusable — degrade to least-recently-used rather
@@ -252,7 +264,7 @@ def pick_doctrine_atom_by_id(
             target,
             window,
         )
-    return _least_recently_used_atom(pool, recent)
+    return _least_recently_used_atom(pool, recent, exclude_ids=chapter_used)
 
 
 def is_reflection_rotation_slot(slot_type: str) -> bool:

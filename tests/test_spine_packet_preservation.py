@@ -11,7 +11,7 @@ from phoenix_v4.rendering.chapter_composer import (
     compose_chapter_prose,
     _requires_additive_compose,
 )
-from phoenix_v4.rendering.golden_chapter_synthesis import build_virtual_slot_streams
+from phoenix_v4.rendering.golden_chapter_synthesis import build_ordered_slot_streams
 
 
 class _Slot:
@@ -51,7 +51,7 @@ def test_build_virtual_slot_streams_preserves_repeated_story_reflection_doctrine
         _Slot("REFLECTION", reflection_b),
         _Slot("INTEGRATION", "The burnout you are carrying does not stay with you."),
     ]
-    types_, proses = build_virtual_slot_streams(slots, chapter_index0=1)
+    types_, proses = build_ordered_slot_streams(slots, chapter_index0=1)
     assert types_ == [
         "HOOK", "STORY", "REFLECTION", "EXERCISE", "STORY",
         "TEACHER_DOCTRINE", "REFLECTION", "INTEGRATION",
