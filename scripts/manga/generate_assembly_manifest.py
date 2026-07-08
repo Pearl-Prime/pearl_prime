@@ -61,7 +61,7 @@ ARCHETYPE_SHOT_TYPE: dict[str, str] = {
     "seasonal_anchor_object": "insert_object",
     "window_light_threshold": "diegetic_cu",
     "pet_companion_micro": "insert_object",
-    "long_drop_decompression": "pillow_ma",
+    "long_drop_decompression": "establishing",
     "miyazaki_ma_pause": "pillow_ma",
     "character_at_table_medium": "establishing",
     "shared_scene_medium": "establishing",

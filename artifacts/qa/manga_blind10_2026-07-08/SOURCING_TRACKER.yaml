@@ -117,7 +117,7 @@ scheduling:
     prescreen_candidate: slot_01
     prescreen_render_path: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/composed_v3_qwen
     m5_upgrade_path: slot_02_ep_001_from_continuity
-    m5_upgrade_blocker: "ep001_029 undersized (12741 bytes)"
+    m5_upgrade_blocker: null  # cleared 2026-07-08: ep001_029 2093369B after manifest shot_type fix
     calendar:
       acquisition: "2026-07-08 to 2026-07-14"
       outreach_send: "2026-07-08 to 2026-07-14"
@@ -146,7 +146,5 @@ next_operator_actions:
     unblocks: [registry_sha256_closeout]
   - action: "Run slot_01 pre-screen on Pearl Star when online (PRESCREEN_RUNBOOK.md)"
     unblocks: [prescreen_archive]
-  - action: "Fix ep001_029 byte gate on ep_001_from_continuity for M5 upgrade path"
-    unblocks: [M6-BLK-005]
   - action: "Do not schedule full blind-10 until M6-BLK-001 cleared (≥8 render-ready slots)"
     unblocks: []
