@@ -880,6 +880,97 @@ def _doctrine_rotation_active(
     return bool(sequences)
 
 
+def chapter_duplicate_doctrine_source_violations(
+    slots: List["EnrichedSlot"],
+) -> List[Dict[str, Any]]:
+    """Return doctrine/reflection slots that reuse a source_id already in this chapter."""
+    seen: set[str] = set()
+    violations: List[Dict[str, Any]] = []
+    doctrine_types = _COMPOSITE_SLOT_TYPES
+    for idx, slot in enumerate(slots, start=1):
+        st = str(getattr(slot, "slot_type", "") or "").strip().upper()
+        if st not in doctrine_types:
+            continue
+        sid = normalize_doctrine_id(str(getattr(slot, "source_id", "") or ""))
+        if not sid:
+            continue
+        if sid in seen:
+            violations.append(
+                {
+                    "slot_index": idx,
+                    "slot_type": st,
+                    "source_id": sid,
+                    "duplicate_of_prior": True,
+                }
+            )
+        else:
+            seen.add(sid)
+    return violations
+
+
+def _normalize_overlap_sentence(text: str) -> Tuple[str, int]:
+    tokens = _DEPTH_DEDUP_TOKEN_RE.findall((text or "").lower())
+    return " ".join(tokens), len(tokens)
+
+
+def chapter_composite_sentence_overlap_violations(
+    slots: List["EnrichedSlot"],
+    *,
+    min_sentence_words: int = 5,
+    min_shared_sentences: int = 2,
+) -> List[Dict[str, Any]]:
+    """Return composite slot pairs that repeat multiple substantive sentences.
+
+    This is intentionally stricter than the source-id guard: it catches the
+    "different atom id, same packet body" class of regressions before the
+    renderer has a chance to collapse or dedupe anything downstream.
+    """
+    composite_rows: List[Dict[str, Any]] = []
+    for idx, slot in enumerate(slots, start=1):
+        st = str(getattr(slot, "slot_type", "") or "").strip().upper()
+        if st not in _COMPOSITE_SLOT_TYPES:
+            continue
+        body = str(getattr(slot, "content", "") or "").strip()
+        if not body:
+            continue
+        sentence_set: set[str] = set()
+        for raw in re.split(r"(?<=[.!?])\s+", re.sub(r"\s+", " ", body)):
+            norm, tok_count = _normalize_overlap_sentence(raw)
+            if norm and tok_count >= min_sentence_words:
+                sentence_set.add(norm)
+        composite_rows.append(
+            {
+                "slot_index": idx,
+                "slot_type": st,
+                "source_id": normalize_doctrine_id(
+                    str(getattr(slot, "source_id", "") or "")
+                ),
+                "sentences": sentence_set,
+            }
+        )
+
+    violations: List[Dict[str, Any]] = []
+    for left_i in range(len(composite_rows)):
+        left = composite_rows[left_i]
+        for right in composite_rows[left_i + 1:]:
+            shared = sorted(left["sentences"] & right["sentences"])
+            if len(shared) < min_shared_sentences:
+                continue
+            violations.append(
+                {
+                    "slot_index_a": left["slot_index"],
+                    "slot_type_a": left["slot_type"],
+                    "source_id_a": left["source_id"],
+                    "slot_index_b": right["slot_index"],
+                    "slot_type_b": right["slot_type"],
+                    "source_id_b": right["source_id"],
+                    "shared_sentence_count": len(shared),
+                    "shared_sentence_preview": shared[:5],
+                }
+            )
+    return violations
+
+
 def _try_composite_content(
     composite_atoms: Dict[str, List[dict]],
     slot_type: str,
@@ -894,6 +985,8 @@ def _try_composite_content(
     used_doctrine_ids: Optional[set[str]] = None,
     recent_doctrine_ids: Optional[List[str]] = None,
     chapter_count: Optional[int] = None,
+    chapter_used_source_ids: Optional[set[str]] = None,
+    share_reflection_doctrine: bool = False,
     repo_root: Optional[Path] = None,
 ) -> Optional[Tuple[str, str, int, Dict[str, Any]]]:
     """Regular mode: topic composite doctrine/reflection before persona pool."""
@@ -912,6 +1005,40 @@ def _try_composite_content(
     if not pool:
         return None
 
+    if share_reflection_doctrine and _doctrine_rotation_active(
+        topic_id, spine_context, repo_root=repo_root,
+    ):
+        assigned = resolve_chapter_doctrine_id(
+            topic_id,
+            chapter_index0,
+            spine_context=spine_context,
+            book_frame=book_frame,
+            repo_root=repo_root,
+        )
+        if assigned:
+            atom = pick_doctrine_atom_by_id(
+                pool,
+                assigned,
+                used_doctrine_ids=used_doctrine_ids,
+                current_chapter_doctrine_id=assigned,
+                recent_doctrine_ids=recent_doctrine_ids,
+                chapter_count=chapter_count,
+            )
+            if atom:
+                content = str(atom.get("content") or "").strip()
+                if content:
+                    aid = str(atom.get("atom_id") or assigned)
+                    picked_norm = normalize_doctrine_id(aid)
+                    idx = next(
+                        (
+                            i
+                            for i, a in enumerate(pool)
+                            if normalize_doctrine_id(str(a.get("atom_id") or "")) == picked_norm
+                        ),
+                        0,
+                    )
+                    return content, aid, idx, dict(atom.get("metadata") or {})
+
     if is_reflection_rotation_slot(slot_type) and _doctrine_rotation_active(
         topic_id, spine_context, repo_root=repo_root,
     ):
@@ -924,55 +1051,62 @@ def _try_composite_content(
         )
         if not assigned:
             return None
-        # `assigned` IS this chapter's single doctrine (doctrine_distribution_plan
-        # rule 1). Passing it as current_chapter_doctrine_id lets the guard tell an
-        # intra-chapter re-pick (multi-REFLECTION templates like deep_book_6h resolve
-        # the same doctrine for each REFLECTION slot — allowed) apart from a genuine
-        # cross-chapter repeat. Under bounded reuse the guard permits SPACED repeats
-        # (window = min(pool_size, chapter_count)) and, when the assigned variant is
-        # missing or would repeat too soon, degrades to a least-recently-used pool
-        # atom — never dropping the slot (silent gap) or raising (the pre-#4673 crash).
-        atom = pick_doctrine_atom_by_id(
-            pool,
-            assigned,
-            used_doctrine_ids=used_doctrine_ids,
-            current_chapter_doctrine_id=assigned,
-            recent_doctrine_ids=recent_doctrine_ids,
-            chapter_count=chapter_count,
-        )
-        if is_twelve_shape_continuity_active(spine_context) and assigned:
-            exact = _pick_persona_atom_by_id(pool, assigned) or next(
-                (
-                    a
-                    for a in pool
-                    if normalize_doctrine_id(str(a.get("atom_id") or ""))
-                    == normalize_doctrine_id(assigned)
-                ),
-                None,
+        assigned_norm = normalize_doctrine_id(assigned)
+        chapter_used_norm = {
+            normalize_doctrine_id(x) for x in (chapter_used_source_ids or set()) if x
+        }
+        if assigned_norm in chapter_used_norm and not share_reflection_doctrine:
+            pass
+        else:
+            # `assigned` IS this chapter's single doctrine (doctrine_distribution_plan
+            # rule 1). Passing it as current_chapter_doctrine_id lets the guard tell an
+            # intra-chapter re-pick (multi-REFLECTION templates like deep_book_6h resolve
+            # the same doctrine for each REFLECTION slot — allowed) apart from a genuine
+            # cross-chapter repeat. Under bounded reuse the guard permits SPACED repeats
+            # (window = min(pool_size, chapter_count)) and, when the assigned variant is
+            # missing or would repeat too soon, degrades to a least-recently-used pool
+            # atom — never dropping the slot (silent gap) or raising (the pre-#4673 crash).
+            atom = pick_doctrine_atom_by_id(
+                pool,
+                assigned,
+                used_doctrine_ids=used_doctrine_ids,
+                current_chapter_doctrine_id=assigned,
+                recent_doctrine_ids=recent_doctrine_ids,
+                chapter_count=chapter_count,
             )
-            if exact:
-                atom = exact
-        if not atom:
-            return None
-        content = str(atom.get("content") or "").strip()
-        if not content:
-            return None
-        # Use the RETURNED atom's id — an LRU fallback may hand back a different
-        # variant than `assigned`, so key aid/idx off what was actually picked.
-        aid = str(atom.get("atom_id") or assigned)
-        picked_norm = normalize_doctrine_id(aid)
-        logger.info(
-            "doctrine_rotation: ch%s topic=%s assigned=%s atom=%s",
-            chapter_index0 + 1,
-            topic_id,
-            normalize_doctrine_id(assigned),
-            aid,
-        )
-        idx = next(
-            (i for i, a in enumerate(pool) if normalize_doctrine_id(str(a.get("atom_id") or "")) == picked_norm),
-            0,
-        )
-        return content, aid, idx, dict(atom.get("metadata") or {})
+            if is_twelve_shape_continuity_active(spine_context) and assigned:
+                exact = _pick_persona_atom_by_id(pool, assigned) or next(
+                    (
+                        a
+                        for a in pool
+                        if normalize_doctrine_id(str(a.get("atom_id") or ""))
+                        == normalize_doctrine_id(assigned)
+                    ),
+                    None,
+                )
+                if exact:
+                    atom = exact
+            if not atom:
+                return None
+            content = str(atom.get("content") or "").strip()
+            if not content:
+                return None
+            # Use the RETURNED atom's id — an LRU fallback may hand back a different
+            # variant than `assigned`, so key aid/idx off what was actually picked.
+            aid = str(atom.get("atom_id") or assigned)
+            picked_norm = normalize_doctrine_id(aid)
+            logger.info(
+                "doctrine_rotation: ch%s topic=%s assigned=%s atom=%s",
+                chapter_index0 + 1,
+                topic_id,
+                normalize_doctrine_id(assigned),
+                aid,
+            )
+            idx = next(
+                (i for i, a in enumerate(pool) if normalize_doctrine_id(str(a.get("atom_id") or "")) == picked_norm),
+                0,
+            )
+            return content, aid, idx, dict(atom.get("metadata") or {})
 
     # Dedup-aware pick: deterministic anchor, then walk forward skipping bodies
     # already used book-wide — reuses the SAME _SeenBodies exact+fuzzy membership
@@ -982,7 +1116,10 @@ def _try_composite_content(
     # re-drew the SAME section_06 block (the repeated-phrase Hold residual).
     anchor = _deterministic_index(f"{seed_key}:composite", len(pool))
     idx = anchor
-    if seen_bodies:
+    chapter_used_norm = {
+        normalize_doctrine_id(x) for x in (chapter_used_source_ids or set()) if x
+    }
+    if seen_bodies or (chapter_used_norm and not share_reflection_doctrine):
         n = len(pool)
         _found = False
         for _step in range(n):
@@ -990,7 +1127,12 @@ def _try_composite_content(
             _body = str(pool[_j].get("content") or "")
             if not _body.strip():
                 continue
-            if _norm_ws(_body) in seen_bodies or _seen_similar(seen_bodies, _body):
+            _aid_norm = normalize_doctrine_id(str(pool[_j].get("atom_id") or ""))
+            if chapter_used_norm and _aid_norm in chapter_used_norm and not share_reflection_doctrine:
+                continue
+            if seen_bodies and (
+                _norm_ws(_body) in seen_bodies or _seen_similar(seen_bodies, _body)
+            ):
                 continue
             idx = _j
             _found = True
@@ -2255,6 +2397,7 @@ def select_enrichment(
 
     enriched_chapters: List[EnrichedChapter] = []
     plan_context = dict(request.spine_context or {})
+    plan_context.setdefault("runtime_format", bm.runtime_format)
     if pid and topic:
         _existing_plan = plan_context.get("chapter_continuity_plan")
         if not _existing_plan:
@@ -2340,6 +2483,17 @@ def select_enrichment(
         ch_breakdown: Dict[str, int] = defaultdict(int)
         ch_words = 0
         _chapter_composite_doctrine = False
+        _chapter_used_doctrine_source_ids: set[str] = set()
+        _chapter_reflection_count = sum(
+            1
+            for _s in bm_ch.slots
+            if str(_s.slot_type).strip().upper() == "REFLECTION"
+        )
+        _share_reflection_doctrine = (
+            str(bm.runtime_format or plan_context.get("runtime_format") or "")
+            == "deep_book_6h"
+            and _chapter_reflection_count > 1
+        )
 
         for slot_i, slot in enumerate(bm_ch.slots):
             audit_counts["total_slots"] += 1
@@ -2595,6 +2749,8 @@ def select_enrichment(
                                 if _c < chapter_index0
                             ],
                             chapter_count=_book_chapter_count,
+                            chapter_used_source_ids=_chapter_used_doctrine_source_ids,
+                            share_reflection_doctrine=_share_reflection_doctrine,
                             repo_root=root,
                         )
                         if _cx_hit:
@@ -2634,8 +2790,9 @@ def select_enrichment(
                             _note_primary_body(_book_seen_bodies, _cx_hit[0])
                             _composite_filled = True
                             _chapter_composite_doctrine = True
+                            _picked_norm = normalize_doctrine_id(_cx_hit[1])
+                            _chapter_used_doctrine_source_ids.add(_picked_norm)
                             if is_reflection_rotation_slot(stype):
-                                _picked_norm = normalize_doctrine_id(_cx_hit[1])
                                 _book_used_doctrine_ids.add(_picked_norm)
                                 # Record THIS chapter's doctrine once (idempotent across
                                 # its multi-REFLECTION slots) so later chapters see an
@@ -3069,6 +3226,18 @@ def select_enrichment(
         )
 
     total_words = sum(ch.total_words for ch in enriched_chapters)
+    chapter_packet_guard = []
+    for ch in enriched_chapters:
+        duplicate_source = chapter_duplicate_doctrine_source_violations(ch.slots)
+        sentence_overlap = chapter_composite_sentence_overlap_violations(ch.slots)
+        if duplicate_source or sentence_overlap:
+            chapter_packet_guard.append(
+                {
+                    "chapter": ch.number,
+                    "duplicate_doctrine_source_violations": duplicate_source,
+                    "composite_sentence_overlap_violations": sentence_overlap,
+                }
+            )
     enrichment_audit: Dict[str, Any] = {
         **audit_counts,
         "total_words": total_words,
@@ -3091,6 +3260,7 @@ def select_enrichment(
             }
             for (ch_i, sec_i), slot in sorted(_story_schedule.assignments.items())
         ],
+        "chapter_packet_guard": chapter_packet_guard,
         "angle_journey_fallback_warnings": _angle_fallback_warnings,
         "angle_id": _angle_id_enrich,
         "angle_layer_by_chapter": _angle_layer_by_ch,
