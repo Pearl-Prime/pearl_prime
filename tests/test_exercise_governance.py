@@ -1,4 +1,4 @@
-"""Per-chapter EXERCISE caps (config + ChapterContract)."""
+"""Per-chapter EXERCISE caps are planner-owned; renderer reports violations only."""
 
 from __future__ import annotations
 
@@ -16,7 +16,7 @@ def _four_exercise_slots() -> list[EnrichedSlot]:
     ]
 
 
-def test_four_exercise_slots_two_kept_default() -> None:
+def test_renderer_does_not_drop_excess_exercise_slots() -> None:
     ch = EnrichedChapter(1, "r", "wt", "th", _four_exercise_slots(), 80, {})
     book = EnrichedBook(
         1,
@@ -37,7 +37,8 @@ def test_four_exercise_slots_two_kept_default() -> None:
             return_value={"exercise_governance": {"max_per_chapter_default": 2, "override_per_format": {}}},
         ):
             compose_from_enriched_book(book, governance_report=gov)
-    assert len(gov.get("exercise_slots_dropped", [])) == 2
+    assert not gov.get("exercise_slots_dropped")
+    assert len(gov.get("exercise_slot_contract_violations", [])) == 1
 
 
 def test_one_exercise_unchanged() -> None:
@@ -59,9 +60,10 @@ def test_one_exercise_unchanged() -> None:
     with patch("phoenix_v4.planning.chapter_planner.assign_chapter_purpose_contracts", return_value=fixed):
         compose_from_enriched_book(book, governance_report=gov)
     assert not gov.get("exercise_slots_dropped")
+    assert not gov.get("exercise_slot_contract_violations")
 
 
-def test_micro_book_15_max_one() -> None:
+def test_micro_book_15_reports_violation_for_excess() -> None:
     ch = EnrichedChapter(1, "r", "wt", "th", _four_exercise_slots(), 80, {})
     book = EnrichedBook(
         1,
@@ -78,10 +80,11 @@ def test_micro_book_15_max_one() -> None:
     gov: dict = {}
     with patch("phoenix_v4.planning.chapter_planner.assign_chapter_purpose_contracts", return_value=fixed):
         compose_from_enriched_book(book, governance_report=gov)
-    assert len(gov.get("exercise_slots_dropped", [])) == 3
+    assert not gov.get("exercise_slots_dropped")
+    assert len(gov.get("exercise_slot_contract_violations", [])) == 1
 
 
-def test_contract_max_one_overrides_default() -> None:
+def test_contract_max_one_reports_violation_for_excess() -> None:
     ch = EnrichedChapter(1, "r", "wt", "th", _four_exercise_slots(), 80, {})
     book = EnrichedBook(
         1,
@@ -102,4 +105,5 @@ def test_contract_max_one_overrides_default() -> None:
             return_value={"exercise_governance": {"max_per_chapter_default": 2, "override_per_format": {}}},
         ):
             compose_from_enriched_book(book, governance_report=gov)
-    assert len(gov.get("exercise_slots_dropped", [])) == 3
+    assert not gov.get("exercise_slots_dropped")
+    assert len(gov.get("exercise_slot_contract_violations", [])) == 1

@@ -394,6 +394,47 @@ def assign_chapter_purpose_contracts(
     return out
 
 
+def resolve_effective_max_exercises(
+    contract_max: int,
+    runtime_format: Optional[str],
+    *,
+    chapter_architecture_version: int = 1,
+    format_cap: Optional[int] = None,
+) -> int:
+    """
+    Planner-owned exercise multiplicity ceiling.
+
+    Applies OPD-135 five-part floor for deep_book_6h / arch v2 (when contract
+    already permits ≥1 exercise) and optional runtime format_cap upper bound.
+    Recognition / resolution chapters (contract_max=0) stay exercise-free.
+    """
+    rid = (runtime_format or "").strip()
+    cap = int(contract_max)
+    arch_v = int(chapter_architecture_version or 1)
+    five_part_floor = 2 if (rid == "deep_book_6h" or arch_v == 2) else 0
+    if five_part_floor and cap >= 1:
+        cap = max(cap, five_part_floor)
+    if format_cap is not None:
+        cap = min(cap, int(format_cap))
+    return max(0, cap)
+
+
+def cap_exercise_slots_in_row(slot_row: list[str], max_exercises: int) -> list[str]:
+    """Keep the first *max_exercises* EXERCISE entries; drop excess upstream."""
+    limit = max(0, int(max_exercises))
+    seen = 0
+    out: list[str] = []
+    for st in slot_row:
+        key = str(st).strip().upper()
+        if key == "EXERCISE":
+            if seen < limit:
+                out.append(st)
+                seen += 1
+            continue
+        out.append(st)
+    return out
+
+
 def _strip_doctrine_intro_headers(text: str) -> str:
     chunks: list[str] = []
     for para in text.split("\n\n"):

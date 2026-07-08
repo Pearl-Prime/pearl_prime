@@ -3660,6 +3660,7 @@ def compose_from_enriched_book(
 
     report = governance_report if governance_report is not None else {}
     report.setdefault("exercise_slots_dropped", [])
+    report.setdefault("exercise_slot_contract_violations", [])
     report.setdefault("chapter_contract_warnings", [])
     report.setdefault("frame_governance_chapters", [])
     report.setdefault("frame_softened_sentences", [])
@@ -3678,17 +3679,12 @@ def compose_from_enriched_book(
     rid = (enriched.runtime_format or "").strip()
     format_cap = int(overrides[rid]) if rid in overrides else format_default
 
-    # OPD-135: 5-part exercise assembly (PR #1275) needs ≥2 EXERCISE slots per
-    # practice chapter to drive Part 4 (aha) and Part 5 (integration) coverage.
-    # Raise a per-chapter floor when (a) runtime is deep_book_6h, or (b) the
-    # holistic-v2 chapter architecture is active. Apply only to chapters whose
-    # contract already permits ≥1 exercise so we preserve the recognition /
-    # resolution chapters' zero-exercise intent.
     _spine_ctx_cap = enriched.spine_context or {}
-    _arch_v = int(_spine_ctx_cap.get("chapter_architecture_version") or 1)
-    five_part_floor = 2 if (rid == "deep_book_6h" or _arch_v == 2) else 0
 
-    from phoenix_v4.planning.chapter_planner import assign_chapter_purpose_contracts
+    from phoenix_v4.planning.chapter_planner import (
+        assign_chapter_purpose_contracts,
+        resolve_effective_max_exercises,
+    )
 
     contracts = assign_chapter_purpose_contracts(
         len(enriched.chapters),
@@ -3719,45 +3715,33 @@ def compose_from_enriched_book(
     chapters_prose: list[str] = []
     for ch_idx, ch in enumerate(enriched.chapters):
         contract = contracts[ch_idx] if ch_idx < len(contracts) else contracts[-1]
-        contract_cap = int(contract.max_exercises)
-        # OPD-135: lift the contract cap to `five_part_floor` for practice
-        # chapters under deep_book_6h / arch v2, but never below contract zero
-        # (recognition / resolution chapters stay exercise-free).
-        if five_part_floor and contract_cap >= 1:
-            contract_cap = max(contract_cap, five_part_floor)
-        max_allowed = min(contract_cap, format_cap)
-        _chapter_has_exercise_slot = any(
-            str(s.slot_type or "").strip().upper() == "EXERCISE" for s in ch.slots
+        effective_max = resolve_effective_max_exercises(
+            contract.max_exercises,
+            enriched.runtime_format,
+            chapter_architecture_version=int(_spine_ctx_cap.get("chapter_architecture_version") or 1),
+            format_cap=format_cap,
         )
-        if _twelve_shape_flagship and _chapter_has_exercise_slot:
-            max_allowed = max(max_allowed, 1)
-
-        ex_seen = 0
-        slots_out = []
-        for slot in ch.slots:
-            st = str(slot.slot_type or "").strip().upper()
-            if st == "EXERCISE":
-                if ex_seen < max_allowed:
-                    slots_out.append(slot)
-                    ex_seen += 1
-                else:
-                    entry = {
-                        "chapter": ch.number,
-                        "chapter_index": ch_idx,
-                        "slot_type": st,
-                        "max_allowed": max_allowed,
-                        "contract_max_exercises": contract.max_exercises,
-                        "format_cap": format_cap,
-                    }
-                    if isinstance(report["exercise_slots_dropped"], list):
-                        report["exercise_slots_dropped"].append(entry)
-                    logger.warning(
-                        "Exercise governance: dropped EXERCISE slot in chapter %s (cap=%s).",
-                        ch.number,
-                        max_allowed,
-                    )
-            else:
-                slots_out.append(slot)
+        ex_count = sum(
+            1 for s in ch.slots if str(s.slot_type or "").strip().upper() == "EXERCISE"
+        )
+        if ex_count > effective_max:
+            entry = {
+                "chapter": ch.number,
+                "chapter_index": ch_idx,
+                "exercise_count": ex_count,
+                "effective_max": effective_max,
+                "contract_max_exercises": contract.max_exercises,
+                "format_cap": format_cap,
+            }
+            if isinstance(report["exercise_slot_contract_violations"], list):
+                report["exercise_slot_contract_violations"].append(entry)
+            logger.error(
+                "Exercise contract violation: chapter %s has %s EXERCISE slots but "
+                "planner allows %s — renderer will not silently drop.",
+                ch.number,
+                ex_count,
+                effective_max,
+            )
 
         if ch_idx > 0 and contracts[ch_idx].emotional_job == contracts[ch_idx - 1].emotional_job:
             msg = (
@@ -3778,9 +3762,7 @@ def compose_from_enriched_book(
 
         # Golden chapter path: slots are inputs; compose_chapter_prose threads thesis, bridges,
         # exercises, and endings (see golden_chapter_synthesis.compose_golden_spine_chapter).
-        from dataclasses import replace
-
-        ch_compose = replace(ch, slots=slots_out)
+        ch_compose = ch
         book_seed = f"{enriched.persona_id}:{enriched.topic}:{enriched.runtime_format}:ch{ch_idx}"
         _spine_ctx = enriched.spine_context or {}
         ch_body, _syn_meta = compose_golden_spine_chapter(

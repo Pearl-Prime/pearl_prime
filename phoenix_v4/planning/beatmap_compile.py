@@ -24,6 +24,11 @@ from phoenix_v4.planning.knob_apply import (
     SpineChapter,
     load_spine,
 )
+from phoenix_v4.planning.chapter_planner import (
+    assign_chapter_purpose_contracts,
+    cap_exercise_slots_in_row,
+    resolve_effective_max_exercises,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -493,6 +498,24 @@ def compile_beatmap(
     wmin, wmax = format_spec["word_range"]
     mid_total = (float(wmin) + float(wmax)) / 2.0
 
+    purpose_contracts = assign_chapter_purpose_contracts(
+        len(shaped_spine.chapters),
+        shaped_spine.runtime_format,
+    )
+
+    def _cap_row_for_chapter(ordered: List[str], chapter_number: int) -> List[str]:
+        ch_idx = max(0, int(chapter_number) - 1)
+        contract = (
+            purpose_contracts[ch_idx]
+            if ch_idx < len(purpose_contracts)
+            else purpose_contracts[-1]
+        )
+        effective_max = resolve_effective_max_exercises(
+            contract.max_exercises,
+            shaped_spine.runtime_format,
+        )
+        return cap_exercise_slots_in_row(ordered, effective_max)
+
     chapters_out: List[BeatmapChapter] = []
     sections_included = 0
     sections_excluded: List[Dict[str, Any]] = []
@@ -520,7 +543,7 @@ def compile_beatmap(
         )
 
         if twelve_shape_grid:
-            ordered = list(twelve_shape_grid)
+            ordered = _cap_row_for_chapter(list(twelve_shape_grid), ch.number)
             word_by_slot = _allocate_words(ordered, wmap, ch_target, [])
             req_set = set(required)
             story_i = 0
@@ -587,7 +610,10 @@ def compile_beatmap(
                         }
                     )
 
-            ordered = resolve_slot_definitions(ch, shaped_spine.runtime_format, orig)
+            ordered = _cap_row_for_chapter(
+                resolve_slot_definitions(ch, shaped_spine.runtime_format, orig),
+                ch.number,
+            )
             scaled = _scale_budget(SOMATIC_WORD_BUDGET, ch_target)
             tw_list = _reconcile_somatic_row_targets(
                 ordered, SOMATIC_BUDGET_KEYS, scaled, ch_target
@@ -697,6 +723,7 @@ def compile_beatmap(
         ordered = [s for s in canonical_order if s in candidates]
         if not ordered:
             raise ValueError(f"No slots compiled for chapter {ch.number} (topic {shaped_spine.topic})")
+        ordered = _cap_row_for_chapter(ordered, ch.number)
 
         # Word allocation
         min_audit_chunk: List[Dict[str, Any]] = []
