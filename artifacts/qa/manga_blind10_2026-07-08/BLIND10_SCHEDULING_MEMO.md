@@ -2,7 +2,7 @@
 
 **Run ID:** `manga_blind10_2026-07-08`  
 **Date:** 2026-07-08  
-**Verified HEAD:** `2ca947a9fa85a9793f3f097cf10bfdcf5ef31f66` (origin/main)  
+**Verified HEAD:** `ba9ab86e6e` (origin/main, #4740 ep001_029 byte-gate fix)  
 **Layer:** SPECCED — scheduling lane **advanced**; **PROVEN-AT-BAR:** none  
 **Status:** `partial` — pilot lane schedulable; full blind-10 blocked
 
@@ -12,12 +12,12 @@
 
 | Lane | Can start now? | Evidence |
 |---|---|---|
-| Slot_01 pre-screen (Qwen2.5-VL) | **Yes** — when Pearl Star Ollama online | `CANDIDATE_SET.tsv` slot 01 `prescreen_only`; legacy `composed_v3_qwen` 35p |
-| Slot_01 comparator acquisition | **Yes** — operator action | 0/2 P0 PDFs on disk; validator exits 1 |
-| Slot_01 judge outreach | **Yes** — draft only, not sent | `JUDGE_OUTREACH_DRAFTS_SLOT_01.md`; 0 contacted |
-| Slot_01 human judge packet | **No** | Needs P0 comparators + ≥3 judges + pre-screen pass |
-| Slot_02 M5 assembly (ep_001_from_continuity) | **Partial** | 35p, 0-INTERIM on main; **ep001_029 undersized** (12,741 B) |
-| Full blind-10 (10 slots) | **No** | M6-BLK-001: 1/10 prescreen_only, 9 blocked |
+| Slot_01 pre-screen (Qwen2.5-VL) | **In flight** — Pearl Star Ollama online | `qwen2.5vl:7b` on Tailscale; `run_frame_judge.py` running 2026-07-08 |
+| Slot_02 pre-screen (M5 assembly) | **Yes** — after slot_01 archive | `ep_001_from_continuity` 35/35 byte gate pass, 0 INTERIM |
+| Slot_01 comparator acquisition | **Done** — pilot subset validated | 2/2 P0 PDFs on disk; validator exit 0 |
+| Slot_01 judge outreach | **Yes** — prospect list ready, not sent | `JUDGE_PROSPECT_LIST_SLOT_01.md`; 0 contacted |
+| Slot_01 human judge packet | **No** | Needs ≥3 judges + pre-screen pass |
+| Full blind-10 (10 slots) | **No** | M6-BLK-001: 2/10 prescreen_only, 8 blocked |
 
 ---
 
@@ -27,12 +27,12 @@
 
 | # | Action | Owner | Prerequisite | Unblocks |
 |---|---|---|---|---|
-| A1 | Buy Yotsuba&! Vol 1 + Barakamon Vol 1 | Operator | Licensed retail budget | M6-BLK-004 pilot |
-| A2 | Scan 2 P0 PDFs → `comparators/` | Operator | A1 | Validator `--require-p0` |
-| A3 | Run comparator validator | Operator | A2 | Registry sha256 closeout |
-| A4 | Personalize + send judge outreach (8–10 prospects) | Operator | None (parallel with A1) | M6-BLK-002 pilot |
-| A5 | Run slot_01 pre-screen on Pearl Star | Operator + Pearl Star | Ollama `qwen2.5vl:7b` online | Pre-screen archive |
-| A6 | Order P1 comparator volumes (slots 02–04) | Operator | Budget | P1 ready when M5 lands |
+| A1 | ~~Acquire slot_01 P0 comparators~~ | Operator | **Done** 2026-07-08 | M6-BLK-004 pilot cleared |
+| A2 | ~~Deliver 2 P0 PDFs + validate~~ | Operator | **Done** | Registry sha256 closeout |
+| A3 | Personalize + send judge outreach (8–10 prospects) | Operator | `JUDGE_PROSPECT_LIST_SLOT_01.md` | M6-BLK-002 pilot |
+| A4 | Slot_01 pre-screen on Pearl Star | Operator + Pearl Star | **In flight** 2026-07-08 | Pre-screen archive |
+| A5 | Slot_02 pre-screen (M5 assembly) | Operator + Pearl Star | After A4 archive | slot_02 prescreen JSON |
+| A6 | Acquire P1 comparators (slots 02–04) | Operator | Budget / OFFICIAL_PREVIEW | P1 ready when M5 lands |
 
 ### Blocked — do not schedule
 
@@ -40,9 +40,8 @@
 |---|---|---|
 | M6-BLK-001 | Full blind-10 human run | ≥8 render-ready slots in `CANDIDATE_SET.tsv` |
 | M6-BLK-002 | PROVEN-AT-BAR claim | ≥3 confirmed judges in `SOURCING_TRACKER.yaml` |
-| M6-BLK-003 | M5 scale renders + pre-screen if offline | Pearl Star GPU queue (#3075) online |
-| M6-BLK-004 | Judge packet distribution | P0 comparators validated on disk |
-| M6-BLK-005 | Slot_02 human packet | Re-render `ep001_029` ≥99,690 B (0-INTERIM path) |
+| M6-BLK-003 | M5 scale renders | Pearl Star ComfyUI queue (#3075) — Ollama online for pre-screen |
+| M6-BLK-004 | Full blind-10 comparator set | 18 comparators pending (pilot P0 **cleared**) |
 
 ---
 
@@ -128,10 +127,10 @@ python3 scripts/qa/validate_manga_blind10_comparators.py --require-p0 --json
 |---|---|---|
 | Panels | 35 | 35 |
 | INTERIM layers | legacy path (not bank) | **0** |
-| Byte floor | All ≥99,690 | **34/35 pass** — ep001_029 = 12,741 B |
-| blind10_eligible | `prescreen_only` | `no` (byte gate) |
-| Pre-screen | **Run now** on `composed_v3_qwen` | Withhold until panel 29 fixed |
-| Human packet | Discouraged until M5 upgrade | Preferred path once byte gate clears |
+| Byte floor | All ≥99,690 | **35/35 pass** — ep001_029 = 2,093,369 B (#4740) |
+| blind10_eligible | `prescreen_only` | `prescreen_only` |
+| Pre-screen | **In flight** on `composed_v3_qwen` | Run after slot_01 archive |
+| Human packet | Discouraged until M5 upgrade | Preferred path once pre-screen passes |
 
 **Pre-screen command:** `pre_screen/PRESCREEN_RUNBOOK.md`  
 **Do not use:** `demo_alarm_metaphor_6p` (6p, INTERIM, G1 grammar blocked)
@@ -142,8 +141,8 @@ python3 scripts/qa/validate_manga_blind10_comparators.py --require-p0 --json
 
 All must be true before distributing `judge_packets/slot_01_stillness_ep001/`:
 
-- [ ] `validate_manga_blind10_comparators.py --require-p0` → exit 0
-- [ ] `COMPARATOR_REGISTRY.yaml` comp_01_a/b → `ACQUIRED` + sha256
+- [x] `validate_manga_blind10_comparators.py --require-p0` → exit 0
+- [x] `COMPARATOR_REGISTRY.yaml` comp_01_a/b → `ACQUIRED` + sha256
 - [ ] `SOURCING_TRACKER.yaml` → `judges.recruited` ≥3 confirmed
 - [ ] NDAs signed (local storage, not git)
 - [ ] Pre-screen JSON archived; median ≥75; no ≥3 panels below 50
@@ -155,8 +154,8 @@ All must be true before distributing `judge_packets/slot_01_stillness_ep001/`:
 
 ```
 manga-m6-blind10-ready=partial
-manga-m6-scheduling-blockers=M6-BLK-001,M6-BLK-002,M6-BLK-003,M6-BLK-004,M6-BLK-005
-manga-m6-scheduling-next=Operator: acquire 2 P0 comparator PDFs + send 8–10 judge outreach emails (parallel)
+manga-m6-scheduling-blockers=M6-BLK-001,M6-BLK-002,M6-BLK-003(M5-scale),M6-BLK-004(full-18)
+manga-m6-scheduling-next=Operator: send judge outreach (JUDGE_PROSPECT_LIST_SLOT_01.md) + await slot_01 pre-screen archive
 ```
 
 ---

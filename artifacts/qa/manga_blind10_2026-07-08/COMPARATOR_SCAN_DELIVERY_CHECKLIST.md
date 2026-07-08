@@ -1,8 +1,9 @@
 # M6 — Comparator Scan Delivery Checklist
 
 **Run ID:** `manga_blind10_2026-07-08`  
-**Status:** 0/20 acquired · 2/2 P0 ready_to_acquire  
-**Asset root:** `artifacts/qa/manga_blind10_2026-07-08/comparators/` (gitignored PDFs)
+**Status:** 2/20 acquired · 2/2 P0 **ACQUIRED** (OFFICIAL_PREVIEW, validated exit 0)  
+**Asset root:** `artifacts/qa/manga_blind10_2026-07-08/comparators/` (gitignored PDFs)  
+**Allowed operator-authorized inputs:** owned / borrowed scans, official preview pages exported to PDF, or publisher marketing excerpts compiled to PDF
 
 ---
 
@@ -59,7 +60,7 @@ python3 scripts/qa/validate_manga_blind10_comparators.py --slot 01 --json
 
 **Expected after P0 closeout:** `acquired: 2`, `pilot_ready: true`, `errors: 0`, exit code 0.
 
-**Current state (2026-07-08):** `acquired: 0`, `pilot_ready: false`, 2 missing_p0 errors.
+**Current state (2026-07-08):** `acquired: 2`, `pilot_ready: true`, `errors: 0` — P0 gate PASS (`29c8edce1d`).
 
 ---
 
