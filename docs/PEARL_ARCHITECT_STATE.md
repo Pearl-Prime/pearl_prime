@@ -24,6 +24,23 @@ It answers:
 Pearl_PM resolves overlap, active workstreams, project fit, and handoffs.  
 Pearl_Architect resolves subsystem ownership, governing docs, required repo sources, and architecture drift risk.
 
+## Standing role in the §18 provenance loop (2026-07-09)
+
+Pearl_Architect is wired into the provenance tracer (`docs/agent_brief.txt` §18;
+`docs/specs/CANONICAL_ARTIFACTS_REGISTRY_SPEC.md` §10) as the adjudicator of two things:
+
+- **Capabilities (caps)** — this file remains the architecture CAP REGISTRY. A new capability
+  gets a cap entry here; a `NO-without-ratification` registry row cannot spawn a new variant
+  without one. `inventory=REDUCED` (dropping/orphaning a previously-WIRED function) is forbidden
+  without an operator-ratified retirement — the machine backstop is `check_capability_regression.py`
+  (the no-lost-functions gate) requiring `CAPABILITY-RETIREMENT-RATIFIED: <OPD ref>`.
+- **`builds_on`** — Architect confirms that a new capability EXTENDS the right canonical component
+  (the registry `concept_key` it should attach to) rather than greenfielding beside it. This is the
+  human check behind `check_provenance()`'s `builds_on` field and `check_reinvention()`.
+
+Pearl_PM (not Architect) owns the workstream registry + PROGRAM_STATE currency — see
+`docs/PEARL_PM_STATE.md`. One serial actor per hot coordination file.
+
 ## Canonical Architecture Anchors
 
 When routing a task, start here:

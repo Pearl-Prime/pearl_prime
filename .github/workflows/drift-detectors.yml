@@ -127,3 +127,11 @@ jobs:
       - name: Data dictionary enforced (undocumented / orphan / unwired-knob — BLOCK)
         run: |
           PYTHONPATH=scripts/ci:. python3 scripts/ci/check_data_dictionary.py
+
+      - name: No-lost-functions — capability regression vs base (§18 — BLOCK)
+        env:
+          PR_BODY: ${{ github.event.pull_request.body }}
+        run: |
+          BASE="${{ steps.diff_base.outputs.base }}"
+          REF="${BASE:-origin/main}"
+          PYTHONPATH=scripts/ci:. python3 scripts/ci/check_capability_regression.py --baseline-ref "$REF"

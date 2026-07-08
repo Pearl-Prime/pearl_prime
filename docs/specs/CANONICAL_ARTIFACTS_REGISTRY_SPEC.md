@@ -39,7 +39,7 @@ Principle 9 is authored in the SAME PR as the registry (the prompt explicitly co
 
 ---
 
-## 2. The registry schema (9 columns, TAB-separated, LF line endings)
+## 2. The registry schema (11 columns, TAB-separated, LF line endings)
 
 File: `artifacts/coordination/CANONICAL_ARTIFACTS_REGISTRY.tsv`
 
@@ -54,11 +54,15 @@ File: `artifacts/coordination/CANONICAL_ARTIFACTS_REGISTRY.tsv`
 | 7 | `last_verified` | ISO date the canonical_path + sha_or_pr were last confirmed correct. | `2026-06-12` |
 | 8 | `supersedes` | Older path(s) this canonical replaced, `;`-joined, or `-` if none. Helps catch "you edited the dead one." | `-` |
 | 9 | `notes` | Free text: drift history, mirror paths, gotchas. | `drift = PR#773 manga overwrite 800x1000; restore both mirrors` |
+| 10 | `research_refs` | **§18 provenance.** Research artifact(s)/claim-id(s) the capability rests on (`;`-joined paths under `pearl_research/`, `artifacts/research/`, `docs/research/`), or `UNKNOWN-BACKFILL` where genuinely untraceable (honest, never invented). | `docs/research/PEARL_NEWS_QWEN_DEEP_RESEARCH_ENGINE.md` |
+| 11 | `doc_refs` | **§18 provenance.** The governing spec / authority doc(s) that define the capability (`;`-joined), or `UNKNOWN-BACKFILL`. Backfilled best-effort from `SUBSYSTEM_AUTHORITY_MAP.tsv` + self-referencing spec rows. | `docs/PEARL_NEWS_WRITER_SPEC.md` |
+
+Columns 10–11 encode the **research → documents → code** provenance chain of `docs/agent_brief.txt` §18. They were added by the provenance-tracer PR (2026-07-09) and backfilled deterministically: `doc_refs` from the row's subsystem authority docs (or the row's own path when it *is* a spec/authority doc); `research_refs` from any research-dir path in those docs / the canonical path itself, else `UNKNOWN-BACKFILL`. The `load_canonical_registry()` loader reads them via `DictReader`, so a ref predating this PR (10-or-fewer columns) yields `""` and never crashes (fail-open).
 
 **Header row (verbatim, single TAB between columns):**
 
 ```
-concept_key	canonical_path	sha_or_pr	owner_agent	subsystem	edit_not_recreate	last_verified	supersedes	notes
+concept_key	canonical_path	sha_or_pr	owner_agent	subsystem	edit_not_recreate	last_verified	supersedes	notes	research_refs	doc_refs
 ```
 
 ### 2.1 `edit_not_recreate` semantics
@@ -181,4 +185,44 @@ All seven are **in-envelope** governance-mechanism decisions (no legal/financial
 - No paid LLM API anywhere — content-overlap arm is Tier-2-local (Ollama Gemma/Qwen) by hard constraint.
 - Reuse-not-greenfield — extends `pr_governance_review.py`, promotes (does not replace) the known-good anchors registry + `SUBSYSTEM_AUTHORITY_MAP.tsv`.
 - Every seed row's `canonical_path` was verified to exist on `origin/main` at authoring (2026-06-12).
+
+---
+
+## 10. The §18 provenance tracer (research → documents → code + no-lost-functions)
+
+Added by the provenance-tracer PR (2026-07-09), enforcing `docs/agent_brief.txt` §18. This
+is the machine form of "everything descends from research, through documents, into code —
+and old functions survive new features." It EXTENDS the machinery this spec already owns; it
+does not add a parallel system.
+
+**(a) Provenance columns** — registry columns 10–11 (`research_refs`, `doc_refs`; §2). Every
+canonical artifact now records the research it rests on and the doc that governs it.
+
+**(b) `check_provenance()`** — a new check in `scripts/ci/pr_governance_review.py` (the 12th,
+alongside `check_reinvention`). A **capability-class** PR (adds ≥1 new code/config/spec file in
+a governed subsystem, and its conventional-commit type is not a bugfix type) must carry a
+`PROVENANCE:` block (`research` / `documents` / `builds_on` / `inventory`) in its body or a
+commit body. Ladder: a **missing** block is `WARN` in the report phase and flips to `BLOCK` in
+the strict phase (one constant, `PROVENANCE_MISSING_SEVERITY`). A block that declares
+`research: NONE` is a hard `BLOCK` in any phase — "route a Pearl_Research lane first."
+Bugfix-class PRs (conservative: explicit `fix|chore|docs|test|refactor|revert|style|ci|build|perf`
+prefix, or modify-only) are exempt entirely. Shares the existing override-token plumbing.
+
+**(c) `check_capability_regression.py`** — the no-lost-functions gate (registry row
+`capability_regression_gate`). A **sibling** of `check_data_dictionary.py` (NEW-ARTIFACT-JUSTIFIED:
+`check_data_dictionary` is an internal-consistency gate over the current tree; this is a
+baseline-vs-HEAD **diff** that must read another git ref and reason about status *transitions* —
+a distinct concern; the two share the builder, not the logic). It regenerates the data dictionary
+at HEAD, diffs against the committed dictionary at the baseline ref (default `origin/main`), and
+`BLOCK`s any path that was `WIRED` at baseline and is now removed or orphaned
+(`UNWIRED`/`KNOWN_UNWIRED`) — unless the PR carries `CAPABILITY-RETIREMENT-RATIFIED: <OPD ref>`.
+Fail-open when the baseline dictionary is unreadable. Wired into `.github/workflows/drift-detectors.yml`
+and `scripts/run_production_readiness_gates.py` (gate 32), the same surfaces as its sibling, so it is
+a required check.
+
+**PM + Architect in the loop** (`docs/SESSION_UNITY_PROTOCOL.md`, `docs/PEARL_PM_STATE.md`,
+`docs/PEARL_ARCHITECT_STATE.md`): the STARTUP_RECEIPT carries a `PROVENANCE:` field; CLOSEOUT
+updates the lane's `ACTIVE_WORKSTREAMS.tsv` row and, on milestone merges, `PROGRAM_STATE.md`.
+Architect adjudicates caps + `builds_on`; PM owns the workstream registry + `PROGRAM_STATE`
+currency. One serial actor on those hot files.
 - Principle 9 is additive and revertable (sits between §8 and `## Revert`; the `## Revert` instruction covers it).

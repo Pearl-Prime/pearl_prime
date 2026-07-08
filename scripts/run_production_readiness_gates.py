@@ -555,6 +555,33 @@ def main() -> int:
     else:
         gate("27. Enforced data dictionary", True, "gate script not present; skip", skip=True)
 
+    # --- 32. No-lost-functions capability regression (§18 dictionary-diff gate) ---
+    # A previously-WIRED capability that becomes orphaned/removed vs origin/main without
+    # an explicit CAPABILITY-RETIREMENT-RATIFIED tag is a regression: new features never
+    # bury old functions (docs/agent_brief.txt §18). Fail-open if origin/main's committed
+    # dictionary is not readable on this checkout (a diff gate with no baseline is a no-op).
+    g32 = REPO_ROOT / "scripts" / "ci" / "check_capability_regression.py"
+    if g32.exists():
+        try:
+            env = os.environ.copy()
+            env["PYTHONPATH"] = f"{REPO_ROOT / 'scripts' / 'ci'}{os.pathsep}{REPO_ROOT}"
+            r = subprocess.run(
+                [sys.executable, str(g32), "--baseline-ref", "origin/main"],
+                cwd=str(REPO_ROOT), env=env,
+                capture_output=True, text=True, timeout=360,
+            )
+            g_ok = r.returncode == 0
+            out = (r.stderr or r.stdout or "").strip()
+            g_detail = out.splitlines()[-1] if out else "check_capability_regression"
+        except Exception as e:
+            g_ok = False
+            g_detail = str(e)
+        if not gate("32. No-lost-functions capability regression (WIRED→orphan/removed needs ratification)",
+                    g_ok, g_detail):
+            failed += 1
+    else:
+        gate("32. No-lost-functions capability regression", True, "gate script not present; skip", skip=True)
+
     # --- 28. Flagship CH1 golden parity (byte diff vs canonical snapshot) ---
     flagship_parity_gate = REPO_ROOT / "scripts" / "ci" / "check_flagship_book_parity.py"
     if flagship_parity_gate.exists():
