@@ -129,4 +129,4 @@ Use this in chats whose job is to **build the next agent's startup prompt** rath
 
 **Canonical full text:** [./agent_brief.txt](./agent_brief.txt) — paste-ready, single source of truth. Do not duplicate the template here; edit `agent_brief.txt` and let this section continue to point at it to prevent drift.
 
-Operating reflexes (deconfliction, default-decision posture, worktree discipline, batching) are encoded as "Router Operating Principles v2" below the bootstrap in that same file; a compliant router reads the whole file.
+Operating reflexes (deconfliction, reconciliation, turn contracts, signal tokens, poison protocol, enforcement promotion, batching) are encoded as "Router Operating Principles v3" below the bootstrap in that same file; a compliant router reads the whole file.
