@@ -285,6 +285,21 @@ panel_layout_template_by_format:
   color_page_manga:              config/manga/panel_layout_templates/color_page.yaml
   direct_self_help_illustrated:  config/manga/panel_layout_templates/self_help_illustrated.yaml
 
+# ── Western intent-led lane override (Q-MANGA-02 / OPD-20260704-006) ───────
+# en_US illustrated self-help picture books — NOT manga digest / WEBTOON.
+# Authority: config/manga/locale_genre_allocations.yaml → western_intent_led.
+# Phase A (2026-07-08): en_US pilot cells only. Phase B: extend to es_US,
+# es_ES, de_DE, it_IT, hu_HU, zh_SG western_intent_led locales + render wiring.
+western_lane_override:
+  lane: western_intent_led
+  product_shape: illustrated_self_help_picture_books
+  locales:
+    en_US:
+      force_master: direct_self_help_illustrated
+      flatten: []
+      pilot_registry: config/manga/us_illustrated_pilot_cells.yaml
+      style_registry: config/manga/western_cartoon_styles.yaml
+
 # ── style → master_format override (when style strongly suggests a format) ─
 # Style tags from MANGA_FULL_CATALOG_PLAN.md "Style" column.
 style_overrides:

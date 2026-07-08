@@ -475,6 +475,8 @@ def main() -> int:
          "Accent plan assignment (planner-owned accents only)"),
         ("23", "check_manga_wiring.py",
          "Manga config wiring (no unwired-config-as-working)"),
+        ("23b", "check_western_lane_format.py",
+         "Western lane format (en_US illustrated pilot routing)"),
         ("24", "check_manga_l2_cutout_alpha.py",
          "Manga L2 cutout alpha (no ghost-matte)"),
         ("25", "check_manga_visual_acceptance.py",

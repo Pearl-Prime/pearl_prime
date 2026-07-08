@@ -154,6 +154,12 @@ def _load_yaml(path: Path) -> dict[str, Any]:
 
 def resolve_format(routing: dict[str, Any], locale: str, genre: str, style: str) -> str:
     """Return master_format for this row."""
+    wlo = routing.get("western_lane_override") or {}
+    locale_override = (wlo.get("locales") or {}).get(locale) or {}
+    forced_lane = locale_override.get("force_master")
+    if forced_lane:
+        return forced_lane
+
     style_overrides = (routing.get("style_overrides") or {}).get(style) or {}
     forced = style_overrides.get("force_master")
     if forced:
@@ -166,6 +172,11 @@ def resolve_format(routing: dict[str, Any], locale: str, genre: str, style: str)
 
 
 def resolve_flatten_exports(routing: dict[str, Any], locale: str, genre: str) -> list[str]:
+    wlo = routing.get("western_lane_override") or {}
+    locale_override = (wlo.get("locales") or {}).get(locale) or {}
+    if locale_override.get("force_master"):
+        return list(locale_override.get("flatten") or [])
+
     default = ((routing["defaults_by_locale_genre"].get(locale) or {}).get(genre) or {})
     return list(default.get("flatten") or [])
 

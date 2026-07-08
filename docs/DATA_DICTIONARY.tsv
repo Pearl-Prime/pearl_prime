@@ -57,6 +57,7 @@ scripts/ci/check_teacher_synthetic_governance.py	CI drift/readiness gate (check_
 scripts/ci/check_voice_audition_contract.py	CI drift/readiness gate (check_voice_audition_contract.py)	ci	Pearl_GitHub	.github/workflows	WIRED
 scripts/ci/check_wave_density.py	CI drift/readiness gate (check_wave_density.py)	ci	Pearl_GitHub	.github/workflows	WIRED
 scripts/ci/check_waystream_catalog_uniqueness.py	CI drift/readiness gate (check_waystream_catalog_uniqueness.py)	ci	Pearl_GitHub	.github/workflows	WIRED
+scripts/ci/check_western_lane_format.py	CI drift/readiness gate (check_western_lane_format.py)	ci	Pearl_GitHub	.github/workflows	WIRED
 config/source_of_truth/doctrine_rotation.yaml	config entry (doctrine_rotation.yaml)	config	Pearl_Architect	phoenix_v4/planning/doctrine_rotation.py;phoenix_v4/planning/enrichment_select.py;scripts/flagship/smoke_distinct_doctrine_flip.py;scripts/governance/build_data_dictionary.py	WIRED
 SOURCE_OF_TRUTH/composite_doctrine/anxiety/REFLECTION	composite-doctrine REFLECTION bank (anxiety)	doctrine_bank	Pearl_Editor	-	KNOWN_UNWIRED
 SOURCE_OF_TRUTH/composite_doctrine/boundaries/REFLECTION	composite-doctrine REFLECTION bank (boundaries)	doctrine_bank	Pearl_Editor	-	KNOWN_UNWIRED

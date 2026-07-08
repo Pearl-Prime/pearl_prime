@@ -107,9 +107,9 @@ def test_resolve_format_uses_style_override_for_webtoon_definition(routing):
 
 
 def test_resolve_format_locale_specific_seinen_dark_psychological(routing):
-    # ja_JP dark_psychological seinen → bw_page_manga; en_US → webtoon
+    # ja_JP dark_psychological seinen → bw_page_manga; en_US → western_lane_override illustrated
     assert resolve_format(routing, "ja_JP", "seinen", "dark_psychological") == "bw_page_manga"
-    assert resolve_format(routing, "en_US", "seinen", "dark_psychological") == "color_vertical_webtoon"
+    assert resolve_format(routing, "en_US", "seinen", "dark_psychological") == "direct_self_help_illustrated"
 
 
 def test_resolve_target_platforms_excludes_partner_only(routing):
@@ -128,8 +128,9 @@ def test_resolve_connector_lane_three_lanes_observable(routing):
 
 
 def test_resolve_flatten_exports_includes_bw_for_seinen_en_us(routing):
+    # western_lane_override forces illustrated master with no B&W flatten for en_US
     flatten = resolve_flatten_exports(routing, "en_US", "seinen")
-    assert "bw_page_manga" in flatten
+    assert flatten == []
 
 
 def test_resolve_flatten_exports_empty_for_pure_webtoon_genres(routing):

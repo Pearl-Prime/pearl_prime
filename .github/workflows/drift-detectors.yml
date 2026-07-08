@@ -82,6 +82,11 @@ jobs:
         run: |
           PYTHONPATH=scripts/ci:. python3 scripts/ci/check_manga_wiring.py
 
+      - name: Western lane format (en_US illustrated pilot — BLOCK)
+        run: |
+          python3 -m pip install --quiet pyyaml jsonschema
+          PYTHONPATH=scripts/ci:. python3 scripts/ci/check_western_lane_format.py
+
       - name: Spine packet integrity (planner owns duplicate resolution — BLOCK)
         run: PYTHONPATH=scripts/ci:. python3 scripts/ci/check_spine_packet_integrity.py
 
