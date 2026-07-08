@@ -1,21 +1,20 @@
-"""OPD-135: exercise governance cap must allow ≥2 EXERCISE slots per chapter
-under deep_book_6h / chapter_architecture_version=2.
+"""OPD-135: exercise multiplicity is planner-owned; renderer must not silently drop.
 
-PR #1275 wired the 5-part exercise assembly (intro + description + guidance +
-aha + integration) and depends on multiple EXERCISE slots per chapter to drive
-Part 4 (aha) and Part 5 (integration) coverage. The legacy governance cap
-clamped to `contract.max_exercises`, which is 0/1 for most chapters in the
-deep_book purpose-contract arc — dropping the second EXERCISE slot before it
-could render. These tests pin the surgical lift to `max(contract, 2)` for
-deep_book_6h and arch v2 while preserving the recognition / resolution
-chapters' zero-exercise intent.
+PR #1275 five-part exercise assembly needs ≥2 EXERCISE slots on deep_book_6h /
+arch-v2 practice chapters. The ceiling is resolved upstream in
+``resolve_effective_max_exercises`` + ``cap_exercise_slots_in_row`` (beatmap).
+The renderer records contract violations but never silently drops authored packets.
 """
 
 from __future__ import annotations
 
 from unittest.mock import patch
 
-from phoenix_v4.planning.chapter_planner import ChapterContract
+from phoenix_v4.planning.chapter_planner import (
+    ChapterContract,
+    cap_exercise_slots_in_row,
+    resolve_effective_max_exercises,
+)
 from phoenix_v4.planning.enrichment_select import EnrichedBook, EnrichedChapter, EnrichedSlot
 from phoenix_v4.rendering.chapter_composer import compose_from_enriched_book
 
@@ -67,66 +66,42 @@ def _run(book: EnrichedBook, contracts: list[ChapterContract], format_cap: int =
     return gov
 
 
-def test_deep_book_6h_lifts_contract_max_one_to_two() -> None:
-    """deep_book_6h chapter with contract.max_exercises=1 + 2 EXERCISE slots
-    used to drop the second slot; OPD-135 keeps both."""
+def test_resolve_effective_max_lifts_deep_book_contract_one_to_two() -> None:
+    assert resolve_effective_max_exercises(1, "deep_book_6h", format_cap=3) == 2
+
+
+def test_resolve_effective_max_lifts_arch_v2_contract_one_to_two() -> None:
+    assert resolve_effective_max_exercises(1, "standard_book", chapter_architecture_version=2) == 2
+
+
+def test_resolve_effective_max_preserves_zero_exercise_contract() -> None:
+    assert resolve_effective_max_exercises(0, "deep_book_6h") == 0
+
+
+def test_resolve_effective_max_legacy_runtime_unchanged() -> None:
+    assert resolve_effective_max_exercises(1, "standard_book") == 1
+
+
+def test_cap_exercise_slots_in_row_keeps_first_n() -> None:
+    row = ["HOOK", "EXERCISE", "STORY", "EXERCISE", "INTEGRATION"]
+    assert cap_exercise_slots_in_row(row, 1) == ["HOOK", "EXERCISE", "STORY", "INTEGRATION"]
+
+
+def test_renderer_does_not_drop_when_upstream_matches_contract() -> None:
+    """When enrichment emits exactly contract-allowed EXERCISE slots, render keeps all."""
     book, contracts = _book("deep_book_6h", contracts_max=1, slot_count=2)
     gov = _run(book, contracts)
-    assert not gov.get("exercise_slots_dropped"), (
-        f"deep_book_6h must keep ≥2 EXERCISE slots when contract caps at 1; "
-        f"dropped={gov.get('exercise_slots_dropped')}"
-    )
+    assert not gov.get("exercise_slots_dropped")
+    assert not gov.get("exercise_slot_contract_violations")
 
 
-def test_arch_v2_lifts_contract_max_one_to_two() -> None:
-    """chapter_architecture_version=2 also lifts the floor to 2."""
-    book, contracts = _book("standard_book", contracts_max=1, slot_count=2, arch_v=2)
-    gov = _run(book, contracts)
-    assert not gov.get("exercise_slots_dropped"), (
-        f"arch v2 must keep ≥2 EXERCISE slots when contract caps at 1; "
-        f"dropped={gov.get('exercise_slots_dropped')}"
-    )
-
-
-def test_deep_book_6h_preserves_zero_exercise_contract() -> None:
-    """Recognition / resolution chapters have contract.max_exercises=0 — the
-    OPD-135 floor MUST NOT lift them. The first 'exercise-free' intent stays."""
-    book, contracts = _book("deep_book_6h", contracts_max=0, slot_count=2)
-    gov = _run(book, contracts)
-    assert len(gov.get("exercise_slots_dropped", [])) == 2, (
-        f"deep_book_6h must still drop EXERCISE slots when contract is 0; "
-        f"dropped={gov.get('exercise_slots_dropped')}"
-    )
-
-
-def test_legacy_runtime_unchanged_when_contract_max_one() -> None:
-    """short_book / standard_book under arch v1 keep the legacy contract cap
-    (no surprise lift for established runtimes)."""
+def test_renderer_records_violation_instead_of_dropping_excess() -> None:
+    """Planner bug: too many EXERCISE slots must surface as violation, not silent drop."""
     book, contracts = _book("standard_book", contracts_max=1, slot_count=2)
     gov = _run(book, contracts)
-    assert len(gov.get("exercise_slots_dropped", [])) == 1, (
-        f"legacy runtime must still cap at contract.max_exercises=1; "
-        f"dropped={gov.get('exercise_slots_dropped')}"
-    )
+    assert not gov.get("exercise_slots_dropped")
+    assert len(gov.get("exercise_slot_contract_violations", [])) == 1
 
 
-def test_deep_book_6h_format_cap_remains_upper_bound() -> None:
-    """OPD-135 floor lifts the *floor* of the contract cap, but format_cap is
-    the absolute upper bound. With contract=3 + format_cap=3 + 4 slots, the
-    4th must still drop."""
-    book, contracts = _book("deep_book_6h", contracts_max=3, slot_count=4)
-    gov = _run(book, contracts, format_cap=3)
-    assert len(gov.get("exercise_slots_dropped", [])) == 1, (
-        f"format_cap=3 must still drop the 4th slot; "
-        f"dropped={gov.get('exercise_slots_dropped')}"
-    )
-
-
-def test_deep_book_6h_contract_two_unchanged() -> None:
-    """When contract.max_exercises is already 2, the floor is a no-op."""
-    book, contracts = _book("deep_book_6h", contracts_max=2, slot_count=2)
-    gov = _run(book, contracts)
-    assert not gov.get("exercise_slots_dropped"), (
-        f"contract=2 + 2 slots should keep both; "
-        f"dropped={gov.get('exercise_slots_dropped')}"
-    )
+def test_deep_book_format_cap_remains_upper_bound() -> None:
+    assert resolve_effective_max_exercises(3, "deep_book_6h", format_cap=3) == 3

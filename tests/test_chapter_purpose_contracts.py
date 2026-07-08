@@ -73,5 +73,22 @@ def test_max_exercises_enforced_in_compose_from_enriched_book() -> None:
     gov: dict = {}
     with patch("phoenix_v4.planning.chapter_planner.assign_chapter_purpose_contracts", return_value=fixed):
         compose_from_enriched_book(book, governance_report=gov)
-    dropped = gov.get("exercise_slots_dropped", [])
-    assert len(dropped) == 2
+    assert not gov.get("exercise_slots_dropped")
+    assert len(gov.get("exercise_slot_contract_violations", [])) == 1
+
+
+def test_beatmap_caps_exercise_slots_for_standard_book_ch2() -> None:
+    """Canonical repro: standard_book ch2 mechanism chapter allows 1 EXERCISE."""
+    from pathlib import Path
+
+    from phoenix_v4.planning.beatmap_compile import compile_beatmap, load_format_spec, load_topic_engines
+    from phoenix_v4.planning.knob_apply import apply_knobs, load_knob_profile, load_spine
+
+    repo = Path(__file__).resolve().parents[1]
+    fmt = load_format_spec("standard_book", repo)
+    spine = load_spine("burnout", repo, runtime_format="standard_book")
+    shaped = apply_knobs(spine, load_knob_profile("burnout", repo), runtime_format="standard_book")
+    beatmap = compile_beatmap(shaped, load_topic_engines("burnout", repo), fmt, repo_root=repo)
+    ch2 = beatmap.chapters[1]
+    exercise_count = sum(1 for s in ch2.slots if s.slot_type == "EXERCISE")
+    assert exercise_count == 1, f"expected 1 EXERCISE slot upstream, got {exercise_count}"

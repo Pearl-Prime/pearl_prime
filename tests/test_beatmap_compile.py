@@ -51,9 +51,22 @@ def test_compile_burnout_standard(fmt_std):
 
 
 def test_all_chapters_have_slots(fmt_std):
+    from phoenix_v4.planning.chapter_planner import (
+        assign_chapter_purpose_contracts,
+        resolve_effective_max_exercises,
+    )
+
+    somatic_exercise_slots = 2
     for topic in ("anxiety", "grief", "burnout"):
         bm = _chain(topic, fmt_std)
-        assert all(len(ch.slots) == 10 for ch in bm.chapters)
+        contracts = assign_chapter_purpose_contracts(len(bm.chapters), "standard_book")
+        for ch, contract in zip(bm.chapters, contracts):
+            effective_max = resolve_effective_max_exercises(
+                contract.max_exercises,
+                "standard_book",
+            )
+            expected_slots = 10 - (somatic_exercise_slots - effective_max)
+            assert len(ch.slots) == expected_slots
 
 
 def test_slot_definitions_match_slots(fmt_std):
@@ -66,10 +79,14 @@ def test_slot_definitions_match_slots(fmt_std):
 
 
 def test_exercise_excluded_when_weight_zero(fmt_std):
-    """Somatic 10-slot grid retains EXERCISE slots (V2 sections 4+8) even when spine blocks practice."""
+    """Purpose contract max_exercises=0 removes EXERCISE slots upstream for recognition ch1."""
+    from phoenix_v4.planning.chapter_planner import assign_chapter_purpose_contracts
+
     bm = _chain("anxiety", fmt_std)
     ch1 = bm.chapters[0]
-    assert ch1.slot_definitions.count("EXERCISE") == 2
+    contracts = assign_chapter_purpose_contracts(len(bm.chapters), "standard_book")
+    assert contracts[0].max_exercises == 0
+    assert ch1.slot_definitions.count("EXERCISE") == 0
 
 
 def test_required_section_survives_zero_weight(fmt_std, recwarn):
@@ -115,9 +132,10 @@ def test_word_budget_non_uniform_somatic(fmt_std):
     """Somatic grid uses scaled non-uniform baselines (second exercise > first)."""
     shaped = apply_knobs(load_spine("anxiety"), load_knob_profile("anxiety"))
     bm = compile_beatmap(shaped, load_topic_engines("anxiety"), fmt_std)
-    ch6 = next(c for c in bm.chapters if c.number == 6)
-    ex_a = ch6.slots[3]
-    ex_b = ch6.slots[7]
+    # ch5 is the first practice chapter (max_exercises=2) under purpose contracts.
+    ch5 = next(c for c in bm.chapters if c.number == 5)
+    ex_a = ch5.slots[3]
+    ex_b = ch5.slots[7]
     assert ex_a.slot_type == "EXERCISE"
     assert ex_b.slot_type == "EXERCISE"
     assert ex_b.target_words >= ex_a.target_words
@@ -151,10 +169,21 @@ def test_total_words_within_format_range(fmt_std):
 
 def test_somatic_ten_slot_grid_order(fmt_std):
     from phoenix_v4.planning.beatmap_compile import SOMATIC_10_SLOT_GRID
+    from phoenix_v4.planning.chapter_planner import (
+        assign_chapter_purpose_contracts,
+        cap_exercise_slots_in_row,
+        resolve_effective_max_exercises,
+    )
 
     bm = _chain("anxiety", fmt_std)
-    for ch in bm.chapters:
-        assert [s.slot_type for s in ch.slots] == SOMATIC_10_SLOT_GRID
+    contracts = assign_chapter_purpose_contracts(len(bm.chapters), "standard_book")
+    for ch, contract in zip(bm.chapters, contracts):
+        effective_max = resolve_effective_max_exercises(
+            contract.max_exercises,
+            "standard_book",
+        )
+        expected = cap_exercise_slots_in_row(SOMATIC_10_SLOT_GRID, effective_max)
+        assert [s.slot_type for s in ch.slots] == expected
 
 
 def test_somatic_section_indices(fmt_std):
@@ -260,12 +289,27 @@ def test_output_chapters_match_input(fmt_std):
 
 
 def test_topics_produce_distinct_beatmaps(fmt_std):
+    from phoenix_v4.planning.chapter_planner import (
+        assign_chapter_purpose_contracts,
+        resolve_effective_max_exercises,
+    )
+
     topics = ("anxiety", "grief", "burnout")
     bms = [_chain(t, fmt_std) for t in topics]
     assert len({bm.topic for bm in bms}) == 3
+    contracts = assign_chapter_purpose_contracts(12, "standard_book")
+    somatic_exercise_slots = 2
+    expected_slots = sum(
+        10 - (somatic_exercise_slots - resolve_effective_max_exercises(c.max_exercises, "standard_book"))
+        for c in contracts
+    )
+    expected_exercises = sum(
+        resolve_effective_max_exercises(c.max_exercises, "standard_book")
+        for c in contracts
+    )
     for bm in bms:
-        assert sum(len(ch.slots) for ch in bm.chapters) == 120
-        assert sum(1 for ch in bm.chapters for s in ch.slots if s.slot_type == "EXERCISE") == 24
+        assert sum(len(ch.slots) for ch in bm.chapters) == expected_slots
+        assert sum(1 for ch in bm.chapters for s in ch.slots if s.slot_type == "EXERCISE") == expected_exercises
 
 
 def test_load_topic_engines_includes_allowed_engines():
