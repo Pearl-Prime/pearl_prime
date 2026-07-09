@@ -57,10 +57,53 @@ logger = logging.getLogger(__name__)
 REPO_ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_TRADITION_PATH = REPO_ROOT / "config" / "manga" / "drawing_tradition_per_genre.yaml"
 DEFAULT_BLENDING_PATH = REPO_ROOT / "config" / "manga" / "cross_genre_blending_rules.yaml"
+DEFAULT_CANONICAL_GENRES_PATH = REPO_ROOT / "config" / "manga" / "canonical_genre_list.yaml"
 
 # engine_router / builder base_model ids that may key into H_token_mapping.
 # These mirror the keys used in drawing_tradition_per_genre.yaml H_token_mapping.
 _H_ENGINE_KEYS = ("flux_schnell", "qwen_image", "animagine_xl_4_0", "animagine")
+
+
+@lru_cache(maxsize=1)
+def _genre_aliases() -> dict[str, str]:
+    """Inbound alias map from canonical_genre_list.yaml (fail-open)."""
+    data = _load_yaml(str(DEFAULT_CANONICAL_GENRES_PATH))
+    raw = data.get("aliases") or {}
+    out: dict[str, str] = {}
+    if isinstance(raw, dict):
+        for key, value in raw.items():
+            if isinstance(key, str) and isinstance(value, str):
+                out[key.strip().lower()] = value.strip().lower()
+    return out
+
+
+def _normalize_genre_id(genre_id: str | None) -> str | None:
+    if not genre_id:
+        return None
+    key = str(genre_id).strip().lower().replace("-", "_").replace(" ", "_")
+    return key or None
+
+
+def resolve_canonical_genre(genre_id: str | None) -> str | None:
+    """Map inbound genre ids to canonical taxonomy/pacing ids."""
+    key = _normalize_genre_id(genre_id)
+    if not key:
+        return None
+    return _genre_aliases().get(key, key)
+
+
+def resolve_tradition_genre(genre_id: str | None) -> str | None:
+    """Return the genre id that owns a deep drawing-tradition block, else canonical."""
+    key = _normalize_genre_id(genre_id)
+    if not key:
+        return None
+    tradition = _load_yaml(str(DEFAULT_TRADITION_PATH))
+    genres = tradition.get("genres")
+    if isinstance(genres, dict):
+        block = genres.get(key)
+        if isinstance(block, dict) and block.get("status") != "deferred_phase2":
+            return key
+    return resolve_canonical_genre(genre_id)
 
 
 @lru_cache(maxsize=4)

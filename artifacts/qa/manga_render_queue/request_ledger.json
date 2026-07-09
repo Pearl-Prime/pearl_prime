@@ -65,24 +65,26 @@
       "desired_state": "usable_png",
       "height": 1920,
       "job_history": [],
-      "last_error": "missing_output",
-      "latest_job_id": null,
+      "last_error": null,
+      "latest_job_id": 543,
       "latest_queue_status": null,
       "layer_class": "L2",
       "layer_id": "seated_cockpit",
       "negative_sha256": "21c38ed32f73eba3c21bb74bec35fc7b59f09f3cd58758026c886522a9b473d2",
       "out_path": "artifacts/manga/warrior_calm_cultivation__master_wu__en_US__burnout__the_chassis_is_listening/image_bank/L2/seated_cockpit.png",
       "output_state": {
-        "exists": false
+        "bytes": 3548619,
+        "exists": true
       },
       "prompt_chars": 1280,
       "prompt_sha256": "88b7a61367f1d410f7832dcae396191084b236185aeae4273f05f9f715088dbd",
       "request_id": "mecha:L2:seated_cockpit",
       "series_id": "warrior_calm_cultivation__master_wu__en_US__burnout__the_chassis_is_listening",
       "series_key": "mecha",
-      "status": "requested",
+      "status": "usable",
       "task": "t2i_flux_dev_h1a",
-      "updated_at": "2026-07-09T07:27:06.730540+00:00",
+      "updated_at": "2026-07-09T14:31:54.885927+00:00",
+      "usable_at": "2026-07-09T14:31:54.885927+00:00",
       "width": 1080
     },
     "mecha:L2:threshold_stand": {
@@ -92,8 +94,8 @@
       "desired_state": "usable_png",
       "height": 1920,
       "job_history": [],
-      "last_error": "missing_output",
-      "latest_job_id": null,
+      "last_error": "blob_failed",
+      "latest_job_id": 547,
       "latest_queue_status": null,
       "layer_class": "L2",
       "layer_id": "threshold_stand",
@@ -107,9 +109,9 @@
       "request_id": "mecha:L2:threshold_stand",
       "series_id": "warrior_calm_cultivation__master_wu__en_US__burnout__the_chassis_is_listening",
       "series_key": "mecha",
-      "status": "requested",
+      "status": "blob_failed",
       "task": "t2i_flux_dev_h1a",
-      "updated_at": "2026-07-09T07:27:06.730573+00:00",
+      "updated_at": "2026-07-09T14:32:00.344852+00:00",
       "width": 1080
     },
     "mecha:L3:glove_pad": {
@@ -119,8 +121,8 @@
       "desired_state": "usable_png",
       "height": 1920,
       "job_history": [],
-      "last_error": "missing_output",
-      "latest_job_id": null,
+      "last_error": "blob_failed",
+      "latest_job_id": 548,
       "latest_queue_status": null,
       "layer_class": "L3",
       "layer_id": "glove_pad",
@@ -134,9 +136,9 @@
       "request_id": "mecha:L3:glove_pad",
       "series_id": "warrior_calm_cultivation__master_wu__en_US__burnout__the_chassis_is_listening",
       "series_key": "mecha",
-      "status": "requested",
+      "status": "blob_failed",
       "task": "t2i_flux_dev_h1a",
-      "updated_at": "2026-07-09T07:27:06.730601+00:00",
+      "updated_at": "2026-07-09T14:32:00.344852+00:00",
       "width": 1080
     },
     "mecha:L3:telemetry_panel": {
@@ -146,8 +148,8 @@
       "desired_state": "usable_png",
       "height": 1920,
       "job_history": [],
-      "last_error": "missing_output",
-      "latest_job_id": null,
+      "last_error": "blob_failed",
+      "latest_job_id": 549,
       "latest_queue_status": null,
       "layer_class": "L3",
       "layer_id": "telemetry_panel",
@@ -161,9 +163,9 @@
       "request_id": "mecha:L3:telemetry_panel",
       "series_id": "warrior_calm_cultivation__master_wu__en_US__burnout__the_chassis_is_listening",
       "series_key": "mecha",
-      "status": "requested",
+      "status": "blob_failed",
       "task": "t2i_flux_dev_h1a",
-      "updated_at": "2026-07-09T07:27:06.730625+00:00",
+      "updated_at": "2026-07-09T14:32:00.344852+00:00",
       "width": 1080
     },
     "stillness:L1:wall_alarm_green_idle": {
@@ -638,5 +640,5 @@
     }
   },
   "schema_version": "manga_render_request_ledger_v1",
-  "updated_at": "2026-07-09T07:27:09.024320+00:00"
+  "updated_at": "2026-07-09T14:32:00.346339+00:00"
 }
