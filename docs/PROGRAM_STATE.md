@@ -91,7 +91,7 @@ program history. Both goldens now live + byte-frozen:
   quality-contract README canon fix. **Planning artifact only — atom translation execution has not started.**
 
 ### Manga (all locales)
-- **Status:** **VISION-CERTIFIED 2026-07-03 — one series end-to-end real; scaffold everywhere else; July 9 wave landed stillness continuity + mecha dispatch wiring + 1/4 native L2/L3 REAL on `main`**
+- **Status:** **VISION-CERTIFIED 2026-07-03 — one series end-to-end real; scaffold everywhere else; July 10 mecha native bank + honest proof lane MERGED on `main`**
 - **Details:** R1–R8 conformance: R1 30% / R2 45% / R3 25% / R4 8% / R5 34% / R6 40% / R7 5% / R8 35%
   (six-layer taxonomy, adversarially refuted; authority: `artifacts/qa/MANGA_VISION_CONFORMANCE_AUDIT_2026-07-03.md`
   + `artifacts/qa/manga_vision_conformance_20260703.tsv`). Grid: 1,345 series plans across 5 locales
@@ -112,15 +112,17 @@ program history. Both goldens now live + byte-frozen:
     L0 sidecars + ledger wiring are on `main`.
   - **Mecha native L2/L3 dispatch wiring + seated_cockpit REAL — MERGED** (#5482, `f7eac13bade7a4e62f1b1138a7200c12c144f38f`).
     `resolve_tradition_genre` / `prompt_authority.py` / crossgenre enqueue / render-request ledger / blob gate are on
-    `main`. Native REAL `L2/seated_cockpit.png` is on `main` (LFS). **Honest mecha proof is still blocked:** 3/4 native
-    L2/L3 assets remain absent or blob_failed on `main` — `L2/threshold_stand`, `L3/glove_pad`, `L3/telemetry_panel`
-    (authority: `artifacts/qa/MANGA_MECHA_NATIVE_BLOCKER_AUDIT_2026-07-09.md` + #5482 closeout). Do not report mecha as
-    proof-ready or EXECUTED-REAL until those assets pass blob gate and a valid proof packet passes.
+    `main`. Native REAL `L2/seated_cockpit.png` is on `main` (LFS).
+  - **Mecha native L2/L3 completion + human-readability proof — MERGED** (#5486, `06a15f29eb217a51ee90f658375b2a4df0b847b5`).
+    Blob-gate PASS native assets on `main`: `L2/threshold_stand`, `L3/glove_pad`, `L3/telemetry_panel` + composition
+    sidecars. Native-only `ep_001_from_continuity.yaml` + `assembled/ep_001_human_readability_proof/` with planning +
+    chapter validators PASS (acceptance layer: **system working**; not PROVEN-AT-BAR). Authority:
+    `artifacts/qa/MANGA_MECHA_HUMAN_READABILITY_PROOF_CLOSEOUT_2026-07-10.md`. July 9 blocker/repair audits carry
+    superseded banners for stale L0-sidecar / zero-L2 claims.
   - **Human-readability rules artifact — MERGED earlier 2026-07-09** (#5323; ws `ws_manga_human_readability_rules_20260709`
     completed). Implementation closeout remains local-only until its lane merges.
-- **Next manga blocker (post-wave):** mecha native L2/L3 remaining assets (`threshold_stand`, `glove_pad`,
-  `telemetry_panel`) + honest proof packet — not the #5482 dispatch/seated_cockpit merge. Stillness post-merge proof
-  re-run is a separate dispatch lane (local-only artifacts must not be reported as landed).
+- **Next manga blocker (post-wave):** stillness post-merge proof re-run (local-only artifacts must not be reported as
+  landed). Mecha next step is operator blind-read / PROVEN-AT-BAR — not additional native-bank gap renders.
 
 ### DevOps / repo hygiene
 - **Status:** **July 9 wave landed LFS→R2 pilot + GHA catalog-fanout queue guard on `main`**
