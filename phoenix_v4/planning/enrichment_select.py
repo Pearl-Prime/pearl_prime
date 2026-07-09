@@ -268,6 +268,11 @@ def _pick_primary_index_unseen(
     seen_bodies: Any,
     *,
     recent_families: Optional[List[str]] = None,
+    prior_slot_type: str = "",
+    adjacency_active: bool = False,
+    persona_id: str = "",
+    topic_id: str = "",
+    candidate_slot_type: str = "",
 ) -> int:
     """Least-used index whose body has NOT been used book-wide.
 
@@ -285,7 +290,8 @@ def _pick_primary_index_unseen(
     """
     if not pool:
         return 0
-    if not seen_bodies:
+    _adjacency_walk = adjacency_active and bool(prior_slot_type.strip())
+    if not seen_bodies and not _adjacency_walk:
         return rotation.pick_index(pool, seed_key)
     order = rotation.least_used_order(pool, seed_key, label)
     fallback_idx: Optional[int] = None
@@ -294,13 +300,26 @@ def _pick_primary_index_unseen(
         if not body.strip():
             continue
         norm = _norm_ws(body)
-        if norm in seen_bodies or _seen_similar(seen_bodies, body):
+        if seen_bodies and (norm in seen_bodies or _seen_similar(seen_bodies, body)):
             continue
         meta = pool[i].get("metadata") if isinstance(pool[i].get("metadata"), dict) else {}
         if recent_families and _collision_family_penalty(meta, recent_families) < 0:
             if fallback_idx is None:
                 fallback_idx = i
             continue
+        if _adjacency_walk:
+            from phoenix_v4.planning.adjacency_selector import adjacency_penalty_for_atom
+
+            if adjacency_penalty_for_atom(
+                prior_slot_type,
+                pool[i],
+                persona_id=persona_id,
+                topic_id=topic_id,
+                slot_type=candidate_slot_type,
+            ) < 0:
+                if fallback_idx is None:
+                    fallback_idx = i
+                continue
         return i
     if fallback_idx is not None:
         return fallback_idx
@@ -333,6 +352,11 @@ def _pick_hook_index_unique(
     contract: Optional[dict] = None,
     engine: str = "",
     recent_families: Optional[List[str]] = None,
+    prior_slot_type: str = "",
+    adjacency_active: bool = False,
+    persona_id: str = "",
+    topic_id: str = "",
+    candidate_slot_type: str = "",
 ) -> int:
     """HOOK primary pick — never reuse the same hook body twice per book (Part F)."""
     if not pool:
@@ -366,7 +390,19 @@ def _pick_hook_index_unique(
         if contract:
             score -= banned_phrase_penalty(body, contract)
             score += engine_metaphor_bonus(body, contract, engine)
-        if cf_pen < 0:
+        adj_pen = 0.0
+        if adjacency_active and prior_slot_type:
+            from phoenix_v4.planning.adjacency_selector import adjacency_penalty_for_atom
+
+            adj_pen = adjacency_penalty_for_atom(
+                prior_slot_type,
+                pool[i],
+                persona_id=persona_id,
+                topic_id=topic_id,
+                slot_type=candidate_slot_type,
+            )
+            score += adj_pen
+        if cf_pen < 0 or adj_pen < 0:
             if penalized_fallback is None:
                 penalized_fallback = i
             continue
@@ -378,7 +414,17 @@ def _pick_hook_index_unique(
     if penalized_fallback is not None:
         return penalized_fallback
     return _pick_primary_index_unseen(
-        rotation, pool, seed_key, label, seen_bodies, recent_families=recent_families
+        rotation,
+        pool,
+        seed_key,
+        label,
+        seen_bodies,
+        recent_families=recent_families,
+        prior_slot_type=prior_slot_type,
+        adjacency_active=adjacency_active,
+        persona_id=persona_id,
+        topic_id=topic_id,
+        candidate_slot_type=candidate_slot_type,
     )
 
 
@@ -2466,6 +2512,10 @@ def select_enrichment(
         else None,
     )
 
+    from phoenix_v4.planning.adjacency_selector import is_adjacency_selector_active
+
+    _adjacency_active = is_adjacency_selector_active(plan_context)
+
     # Section packet audit: per-slot source detail (written to enrichment_audit at end).
     _slot_audit: List[Dict[str, Any]] = []
 
@@ -2496,6 +2546,7 @@ def select_enrichment(
             == "deep_book_6h"
             and _chapter_reflection_count > 1
         )
+        _prev_slot_type = ""
 
         for slot_i, slot in enumerate(bm_ch.slots):
             audit_counts["total_slots"] += 1
@@ -2924,6 +2975,11 @@ def select_enrichment(
                                     contract=_identity_contract,
                                     engine=engine,
                                     recent_families=_recent_families,
+                                    prior_slot_type=_prev_slot_type,
+                                    adjacency_active=_adjacency_active,
+                                    persona_id=persona_id,
+                                    topic_id=topic,
+                                    candidate_slot_type=stype,
                                 )
                             else:
                                 _ap_idx = _pick_primary_index_unseen(
@@ -2931,6 +2987,11 @@ def select_enrichment(
                                     f"{seed_key}:persona", "persona",
                                     _book_seen_bodies,
                                     recent_families=_recent_families,
+                                    prior_slot_type=_prev_slot_type,
+                                    adjacency_active=_adjacency_active,
+                                    persona_id=persona_id,
+                                    topic_id=topic,
+                                    candidate_slot_type=stype,
                                 )
                             _ap_atom = _ap_pool[_ap_idx]
                             _ap_content = str(_ap_atom.get("content") or "").strip()
@@ -3205,6 +3266,9 @@ def select_enrichment(
                     match_scores=dict(match_scores),
                 )
             )
+
+            if content and not content.startswith("[CONTENT GAP:") and not content.startswith("[BANK EMPTY:"):
+                _prev_slot_type = stype
 
         # ACT-007: record collision_families used in this chapter for dedup window
         _ch_fams: List[str] = []
