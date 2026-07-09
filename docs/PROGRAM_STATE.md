@@ -1,6 +1,6 @@
 # Program State — Single Source of Truth
 
-**LAST VERIFIED:** 2026-06-30 @ `origin/main` (Jul 1 runbook + Q-DRIFT-02 reconcile staged PR)
+**LAST VERIFIED:** 2026-07-09 @ `origin/main` `d48e1586c4d3d14002b71a553ba2e5436cac95d0` (July 9 merge wave + #5471 catalog-fanout queue guard)
 
 > **RULE:** Verify against `origin/main`, never git date or the working tree (shared-tree branch-churn shows
 > other-branch/stale state). This is the entry point — if another doc disagrees with this, this wins or that doc is stale.
@@ -89,7 +89,7 @@ program history. Both goldens now live + byte-frozen:
   execution not started.
 
 ### Manga (all locales)
-- **Status:** **VISION-CERTIFIED 2026-07-03 — one series end-to-end real; scaffold everywhere else**
+- **Status:** **VISION-CERTIFIED 2026-07-03 — one series end-to-end real; scaffold everywhere else; July 9 wave landed stillness continuity + mecha L0 sidecars on `main`**
 - **Details:** R1–R8 conformance: R1 30% / R2 45% / R3 25% / R4 8% / R5 34% / R6 40% / R7 5% / R8 35%
   (six-layer taxonomy, adversarially refuted; authority: `artifacts/qa/MANGA_VISION_CONFORMANCE_AUDIT_2026-07-03.md`
   + `artifacts/qa/manga_vision_conformance_20260703.tsv`). Grid: 1,345 series plans across 5 locales
@@ -101,6 +101,38 @@ program history. Both goldens now live + byte-frozen:
   M3 stories-first waves → M4 vessel wiring → M5 banks/GPU → M6 blind-10 pro-bar → M7 locale rollout).
   Supersedes `docs/MANGA_RECOVERY_AUDIT.md` as current state. Pearl Star unreachable during cert (box-side
   UNVERIFIED); GPU stays CJK-priority (OPD-20260629-003).
+- **July 9 merge wave (production truth on `main` only — do not conflate with local-only renders):**
+  - **Stillness ep_001 HR-U16 continuity + room-capable L2 wiring — MERGED** (#5428, `c6a0622c64ea52e4111fbb78d4484fd6b9761368`).
+    Room-capable L2 manifest wiring for `ep001_008` / `ep001_013` is on `main`. Authority:
+    `artifacts/qa/MANGA_STILLNESS_HR_U16_REPAIR_CLOSEOUT_2026-07-09.md`. Prior blocked proof packet
+    (`MANGA_STILLNESS_RULES_PROOF_PACKET_CLOSEOUT_2026-07-09.md`) is superseded provenance only.
+  - **Mecha L0 composition sidecars + render-ledger reconcile — MERGED** (#5419, `9dd7a5f986d05f3cb2989c9f680f402640e2d53c`).
+    L0 sidecars + ledger wiring are on `main`. **Honest mecha proof is still blocked:** zero native mecha L2/L3 REAL
+    assets on `main` (authority: `artifacts/qa/MANGA_MECHA_NATIVE_BLOCKER_AUDIT_2026-07-09.md`). Do not report mecha
+    as proof-ready or EXECUTED-REAL until those assets exist and a valid proof packet passes.
+  - **Human-readability rules artifact — MERGED earlier 2026-07-09** (#5323; ws `ws_manga_human_readability_rules_20260709`
+    completed). Implementation closeout remains local-only until its lane merges.
+- **Next manga blocker (post-wave):** mecha native L2/L3 REAL asset bank + honest proof packet — not the July 9 sidecar
+  merge. Stillness post-merge proof re-run is a separate dispatch lane (local-only artifacts must not be reported as
+  landed).
+
+### DevOps / repo hygiene
+- **Status:** **July 9 wave landed LFS→R2 pilot + GHA catalog-fanout queue guard on `main`**
+- **Details:**
+  - **LFS→R2 offload V1 spec + `composed_v4_qwen` pilot — MERGED** (#5306, `5b3f64e29954e252dc5b2dbc6a688dd2711612d8`).
+    V1 pilot only; full `assets/manga_catalog` Wave-2 offload remains a follow-on lane. Parent ws `ws_lfs_setup_20260410`
+    stays **active** (Phase B history rewrite still owner-gated).
+  - **Spine-gates test-fixture false-positive repair — MERGED** (#5341, `0403332493e2e9dafe51a5798d02a1b105e37926`).
+    Two genuine fixture blockers re-verified without flagship drift.
+  - **GHA catalog-fanout queue-pressure guard — MERGED** (#5471, tip of `main` after wave). Fail-closed throttle on
+    `catalog-fanout-*` workflows when queue is hot; authority: `artifacts/coordination/GHA_CATALOG_FANOUT_QUEUE_GUARD_CLOSEOUT_2026-07-09.md`.
+    Supersedes manual queue-relief waves as the durable fix for catalog starvation of non-catalog PRs.
+
+### Open PR truth (owner/operator-gated — not merged)
+| PR | State | Gate |
+|----|-------|------|
+| **#5295** | **OPEN**, checks green | Owner-gated full-repo redundancy/garbage sweep + Q-gated roadmap — **do not merge in this lane** |
+| **#3166** | **OPEN**, **draft** | `ci(budget): lean content-PR gating` — **DO NOT MERGE until Jul 1 reset** (operator-gated) |
 
 ### Storefront
 - **Status:** **LIVE (listings)** — **consumer paid-download scale still blocked** on asset depth
@@ -121,7 +153,7 @@ cold-start execution order after the ~Jul 1 CI/budget reset.
 | Step | Action | Notes |
 |------|--------|-------|
 | **0** | **Merge skeleton-freeze PR FIRST** — ensure `config/governance/skeleton_freeze.yaml` → `active: true` | CI enforcement live before any skeleton batch can re-merge |
-| **1** | Merge **#3166** (lean-CI path-filter) | ~83% Actions burn reduction; required before flip campaign |
+| **1** | Merge **#3166** (lean-CI path-filter) | ~83% Actions burn reduction; required before flip campaign — **still OPEN/draft/operator-gated as of 2026-07-09** (see Open PR truth above) |
 | **2** | Merge staged spine on green: **#3123** (content gaps), **#3127** (CJK recovery), **#3147** (CJK hardening); verify #3123 deletions < 50 | Also **#3110** if green (handoff §12) |
 | **2.5** | Merge **delivery-gate stub-catch PR (#3787)** before flip→assemble | So no shipped EPUB carries a `[Persona-specific hook for …]` placeholder — `delivery_contract_gate` hard-fails bracket stubs |
 | **3** | **Lane A:** warrior_calm flip pilot → on clean → full flip → assembly → **first R2 EPUB batch** | Split ~170 flip PRs across Jul+Aug per handoff §8 |
