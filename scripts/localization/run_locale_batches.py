@@ -41,15 +41,17 @@ def _load_dotenv() -> None:
 
 _load_dotenv()
 
+# Canonical 14-locale set per config/localization/locale_registry.yaml locale_groups.all_locales
+# (en-US is the baseline source locale and is never a translation target — 13 target locales here).
+# pt-PT and ru-RU are NOT in the canon (no locale_registry.yaml entry) — do not re-add without
+# first registering the locale there per its "ADDING A NEW LOCALE" rule.
 ALL_LOCALES = [
     # CJK (Route 1: Claude meta-prompt → Qwen)
     "ja-JP", "zh-CN", "zh-TW", "zh-HK", "zh-SG", "ko-KR",
     # European + Latin American (Route 2: Claude direct)
     "es-US", "es-ES", "fr-FR", "de-DE", "it-IT", "hu-HU",
     # Portuguese markets
-    "pt-BR", "pt-PT",
-    # Russian
-    "ru-RU",
+    "pt-BR",
 ]
 CORE_LOCALES = ["ja-JP", "zh-CN", "zh-TW", "zh-HK", "zh-SG", "ko-KR"]
 ALL_TOPICS = [

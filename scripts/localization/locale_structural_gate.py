@@ -33,7 +33,7 @@ Usage:
   python scripts/localization/locale_structural_gate.py --min-coverage 0.8
 
   # Scope to specific locales
-  python scripts/localization/locale_structural_gate.py --locales es-US es-ES de-DE it-IT ru-RU
+  python scripts/localization/locale_structural_gate.py --locales es-US es-ES de-DE it-IT
 """
 from __future__ import annotations
 
@@ -59,15 +59,15 @@ PEARL_NEWS_TOPICS = [
     "mental_health", "partnerships", "peace_conflict",
 ]
 
+# Canonical 14-locale set per config/localization/locale_registry.yaml locale_groups.all_locales
+# (en-US is baseline; 13 non-en-US target locales here). pt-PT / ru-RU are not in the canon.
 TARGET_LOCALES = [
     # CJK (Route 1)
     "ja-JP", "zh-CN", "zh-TW", "zh-HK", "zh-SG", "ko-KR",
     # European + Latin American (Route 2)
     "es-US", "es-ES", "fr-FR", "de-DE", "it-IT", "hu-HU",
     # Portuguese
-    "pt-BR", "pt-PT",
-    # Russian
-    "ru-RU",
+    "pt-BR",
 ]
 
 ATOMS_DIR = REPO_ROOT / "pearl_news" / "atoms" / "teacher_quotes_practices"

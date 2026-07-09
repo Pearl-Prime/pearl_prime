@@ -1672,8 +1672,8 @@ Translation and validation pipeline: parallel sharded translation (atoms + exerc
 
 | Item | Location |
 |------|----------|
-| **Content roots by locale** | [config/localization/content_roots_by_locale.yaml](../config/localization/content_roots_by_locale.yaml) — Maps all 13 locales to atoms_root, translation paths, TTS constraints, rollout phase, and distribution blockers (incl. it-IT). |
-| **Locale registry** | [config/localization/locale_registry.yaml](../config/localization/locale_registry.yaml) — All 13 locale definitions: language, script, TTS provider, storefront IDs, distribution rules; EU group includes it-IT. |
+| **Content roots by locale** | [config/localization/content_roots_by_locale.yaml](../config/localization/content_roots_by_locale.yaml) — Maps all 14 locales to atoms_root, translation paths, TTS constraints, rollout phase, and distribution blockers (incl. it-IT, pt-BR). |
+| **Locale registry** | [config/localization/locale_registry.yaml](../config/localization/locale_registry.yaml) — All 14 locale definitions: language, script, TTS provider, storefront IDs, distribution rules; EU group includes it-IT; pt-BR is the 14th locale (Q-MANGA-01, 2026-07-04). |
 | **Brand locale extension** | [config/localization/brand_registry_locale_extension.yaml](../config/localization/brand_registry_locale_extension.yaml) — Per-brand locale and territory. One brand = one locale. |
 
 **Quality contracts** — [config/localization/quality_contracts/](../config/localization/quality_contracts/) (README.md, glossary.yaml, release_thresholds.yaml, golden_translation_regression.yaml; stubs for locale gate).
