@@ -1,0 +1,29 @@
+{
+  "schema_version": "1.0.0",
+  "asset_id": "L2_seated_kitchen_knees_up_v1",
+  "layer_class": "L2",
+  "crop_class": "knees_up",
+  "abstract_stage_eligible": false,
+  "room_capable": true,
+  "scene_contamination": false,
+  "requires_occluder": false,
+  "pose_context": "seated",
+  "asset_class": "room_seated_knees_up",
+  "diegetic_pair": "L0_2b9283d4c387",
+  "pose_id": "medium_seated_three_quarter",
+  "light": {
+    "azimuth": "camera_left",
+    "temporal_state": "dawn"
+  },
+  "style_register": "iyashikei_color",
+  "implied_camera": {
+    "angle_bucket": "eye_level",
+    "el_crossing": "chest"
+  },
+  "figure_height_m": 1.62,
+  "anchor": {
+    "point": "seat",
+    "y_px": 1920
+  },
+  "eye_y_px": 420
+}

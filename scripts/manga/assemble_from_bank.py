@@ -98,6 +98,25 @@ def load_manifest(manifest_path: Path) -> dict[str, Any]:
         raise ValueError(
             "manifest failed validation:\n  - " + "\n  - ".join(errors)
         )
+    from panel_planning_rules import validate_manifest_composition_planning  # noqa: WPS433
+    from validate_chapter_composition_grammar import validate_chapter_composition_grammar  # noqa: WPS433
+
+    planning = validate_manifest_composition_planning(
+        manifest, manifest_path.parent, REPO,
+    )
+    if planning:
+        raise ValueError(
+            "manifest failed composition planning:\n  - " + "\n  - ".join(planning)
+        )
+    ch_fails = [
+        f for f in validate_chapter_composition_grammar(manifest, manifest_path.parent)
+        if f.severity == "FAIL"
+    ]
+    if ch_fails:
+        msgs = [f"{f.rule_id} {f.panel_id}: {f.message}" for f in ch_fails]
+        raise ValueError(
+            "manifest failed chapter composition grammar:\n  - " + "\n  - ".join(msgs)
+        )
     return manifest
 
 

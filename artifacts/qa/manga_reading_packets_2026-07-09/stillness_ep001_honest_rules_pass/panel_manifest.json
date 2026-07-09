@@ -1,0 +1,1641 @@
+{
+  "schema_version": "stillness_honest_rules_pass_panel_manifest_v1",
+  "series_id": "stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying",
+  "episode_id": "ep_001",
+  "panel_count": 35,
+  "canonical_manifest": "artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/assembly_manifests/ep_001_from_continuity.yaml",
+  "canonical_assembly": "artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/assembled/ep_001_from_continuity_final",
+  "proof_status": "PASS",
+  "hr_u16_repaired_panel": "ep001_008",
+  "room_capable_panels": [
+    "ep001_008",
+    "ep001_013"
+  ],
+  "panels": [
+    {
+      "order": 1,
+      "panel_id": "ep001_001",
+      "shot_type": "establishing",
+      "archetype": "sparse_establishing_wide",
+      "image": "panels/ep001_001.png",
+      "image_bytes": 2108242,
+      "chapter_findings": [],
+      "gate_report": {},
+      "layers": [
+        {
+          "layer_class": "L0",
+          "asset": "artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L0/L0_65a6c4717bb1.png",
+          "provenance": "REAL"
+        }
+      ]
+    },
+    {
+      "order": 2,
+      "panel_id": "ep001_002",
+      "shot_type": "insert_object",
+      "archetype": "tea_beat_close_up",
+      "image": "panels/ep001_002.png",
+      "image_bytes": 503793,
+      "chapter_findings": [],
+      "gate_report": {
+        "panel_id": "ep001_002",
+        "shot_type": "insert_object",
+        "passed": true,
+        "ops_applied": [
+          "derive_tone_gradient",
+          "abstract_stage_paste",
+          "G6_defringe"
+        ],
+        "gates": [
+          {
+            "gate": "G1",
+            "severity": "PASS",
+            "message": "hands \u00d7 tone_gradient \u2192 LEGAL"
+          },
+          {
+            "gate": "G2",
+            "severity": "PASS",
+            "message": "abstract BG \u2014 angle exempt"
+          },
+          {
+            "gate": "G8",
+            "severity": "PASS",
+            "message": "light azimuth compatible (ambient/camera_left)"
+          },
+          {
+            "gate": "G6",
+            "severity": "PASS",
+            "message": "defringe applied"
+          }
+        ]
+      },
+      "layers": [
+        {
+          "layer_class": "L0",
+          "asset": "artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L0/L0_f3bc5f4cc41f.png",
+          "provenance": "REAL",
+          "derivation": {
+            "type": "tone_gradient"
+          }
+        },
+        {
+          "layer_class": "L2",
+          "asset": "artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L2/L2_hands_wrapping_cup_clean_v2_alpha.png",
+          "provenance": "REAL"
+        }
+      ]
+    },
+    {
+      "order": 3,
+      "panel_id": "ep001_003",
+      "shot_type": "reaction_emotion",
+      "archetype": "character_quiet_face",
+      "image": "panels/ep001_003.png",
+      "image_bytes": 972051,
+      "chapter_findings": [],
+      "gate_report": {
+        "panel_id": "ep001_003",
+        "shot_type": "reaction_emotion",
+        "passed": true,
+        "ops_applied": [
+          "derive_defocus",
+          "abstract_stage_paste",
+          "G6_defringe"
+        ],
+        "gates": [
+          {
+            "gate": "G1",
+            "severity": "PASS",
+            "message": "bust \u00d7 defocus_derived \u2192 LEGAL"
+          },
+          {
+            "gate": "G2",
+            "severity": "PASS",
+            "message": "abstract BG \u2014 angle exempt"
+          },
+          {
+            "gate": "G8",
+            "severity": "PASS",
+            "message": "light azimuth compatible (camera_left/camera_left)"
+          },
+          {
+            "gate": "G6",
+            "severity": "PASS",
+            "message": "defringe applied"
+          }
+        ]
+      },
+      "layers": [
+        {
+          "layer_class": "L0",
+          "asset": "artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L0/L0_f3bc5f4cc41f.png",
+          "provenance": "REAL",
+          "derivation": {
+            "type": "defocus"
+          }
+        },
+        {
+          "layer_class": "L2",
+          "asset": "artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L2/L2_clean_bust_calm_v2_alpha.png",
+          "provenance": "REAL"
+        }
+      ]
+    },
+    {
+      "order": 4,
+      "panel_id": "ep001_004",
+      "shot_type": "insert_object",
+      "archetype": "hand_table_micro",
+      "image": "panels/ep001_004.png",
+      "image_bytes": 503793,
+      "chapter_findings": [],
+      "gate_report": {
+        "panel_id": "ep001_004",
+        "shot_type": "insert_object",
+        "passed": true,
+        "ops_applied": [
+          "derive_tone_gradient",
+          "abstract_stage_paste",
+          "G6_defringe"
+        ],
+        "gates": [
+          {
+            "gate": "G1",
+            "severity": "PASS",
+            "message": "hands \u00d7 tone_gradient \u2192 LEGAL"
+          },
+          {
+            "gate": "G2",
+            "severity": "PASS",
+            "message": "abstract BG \u2014 angle exempt"
+          },
+          {
+            "gate": "G8",
+            "severity": "PASS",
+            "message": "light azimuth compatible (ambient/camera_left)"
+          },
+          {
+            "gate": "G6",
+            "severity": "PASS",
+            "message": "defringe applied"
+          }
+        ]
+      },
+      "layers": [
+        {
+          "layer_class": "L0",
+          "asset": "artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L0/L0_f3bc5f4cc41f.png",
+          "provenance": "REAL",
+          "derivation": {
+            "type": "tone_gradient"
+          }
+        },
+        {
+          "layer_class": "L2",
+          "asset": "artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L2/L2_hands_wrapping_cup_clean_v2_alpha.png",
+          "provenance": "REAL"
+        }
+      ]
+    },
+    {
+      "order": 5,
+      "panel_id": "ep001_005",
+      "shot_type": "dialogue_bust",
+      "archetype": "chest_breath_micro",
+      "image": "panels/ep001_005.png",
+      "image_bytes": 972051,
+      "chapter_findings": [],
+      "gate_report": {
+        "panel_id": "ep001_005",
+        "shot_type": "dialogue_bust",
+        "passed": true,
+        "ops_applied": [
+          "derive_defocus",
+          "abstract_stage_paste",
+          "G6_defringe"
+        ],
+        "gates": [
+          {
+            "gate": "G1",
+            "severity": "PASS",
+            "message": "bust \u00d7 defocus_derived \u2192 LEGAL"
+          },
+          {
+            "gate": "G2",
+            "severity": "PASS",
+            "message": "abstract BG \u2014 angle exempt"
+          },
+          {
+            "gate": "G8",
+            "severity": "PASS",
+            "message": "light azimuth compatible (camera_left/camera_left)"
+          },
+          {
+            "gate": "G6",
+            "severity": "PASS",
+            "message": "defringe applied"
+          }
+        ]
+      },
+      "layers": [
+        {
+          "layer_class": "L0",
+          "asset": "artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L0/L0_f3bc5f4cc41f.png",
+          "provenance": "REAL",
+          "derivation": {
+            "type": "defocus"
+          }
+        },
+        {
+          "layer_class": "L2",
+          "asset": "artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L2/L2_clean_bust_calm_v2_alpha.png",
+          "provenance": "REAL"
+        }
+      ]
+    },
+    {
+      "order": 6,
+      "panel_id": "ep001_006",
+      "shot_type": "reaction_emotion",
+      "archetype": "character_face_micro_tension",
+      "image": "panels/ep001_006.png",
+      "image_bytes": 972051,
+      "chapter_findings": [],
+      "gate_report": {
+        "panel_id": "ep001_006",
+        "shot_type": "reaction_emotion",
+        "passed": true,
+        "ops_applied": [
+          "derive_defocus",
+          "abstract_stage_paste",
+          "G6_defringe"
+        ],
+        "gates": [
+          {
+            "gate": "G1",
+            "severity": "PASS",
+            "message": "bust \u00d7 defocus_derived \u2192 LEGAL"
+          },
+          {
+            "gate": "G2",
+            "severity": "PASS",
+            "message": "abstract BG \u2014 angle exempt"
+          },
+          {
+            "gate": "G8",
+            "severity": "PASS",
+            "message": "light azimuth compatible (camera_left/camera_left)"
+          },
+          {
+            "gate": "G6",
+            "severity": "PASS",
+            "message": "defringe applied"
+          }
+        ]
+      },
+      "layers": [
+        {
+          "layer_class": "L0",
+          "asset": "artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L0/L0_f3bc5f4cc41f.png",
+          "provenance": "REAL",
+          "derivation": {
+            "type": "defocus"
+          }
+        },
+        {
+          "layer_class": "L2",
+          "asset": "artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L2/L2_clean_bust_calm_v2_alpha.png",
+          "provenance": "REAL"
+        }
+      ]
+    },
+    {
+      "order": 7,
+      "panel_id": "ep001_007",
+      "shot_type": "insert_object",
+      "archetype": "tea_beat_close_up",
+      "image": "panels/ep001_007.png",
+      "image_bytes": 503793,
+      "chapter_findings": [],
+      "gate_report": {
+        "panel_id": "ep001_007",
+        "shot_type": "insert_object",
+        "passed": true,
+        "ops_applied": [
+          "derive_tone_gradient",
+          "abstract_stage_paste",
+          "G6_defringe"
+        ],
+        "gates": [
+          {
+            "gate": "G1",
+            "severity": "PASS",
+            "message": "hands \u00d7 tone_gradient \u2192 LEGAL"
+          },
+          {
+            "gate": "G2",
+            "severity": "PASS",
+            "message": "abstract BG \u2014 angle exempt"
+          },
+          {
+            "gate": "G8",
+            "severity": "PASS",
+            "message": "light azimuth compatible (ambient/camera_left)"
+          },
+          {
+            "gate": "G6",
+            "severity": "PASS",
+            "message": "defringe applied"
+          }
+        ]
+      },
+      "layers": [
+        {
+          "layer_class": "L0",
+          "asset": "artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L0/L0_f3bc5f4cc41f.png",
+          "provenance": "REAL",
+          "derivation": {
+            "type": "tone_gradient"
+          }
+        },
+        {
+          "layer_class": "L2",
+          "asset": "artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L2/L2_hands_wrapping_cup_clean_v2_alpha.png",
+          "provenance": "REAL"
+        }
+      ]
+    },
+    {
+      "order": 8,
+      "panel_id": "ep001_008",
+      "shot_type": "re_establish",
+      "archetype": "shared_meal_table_medium",
+      "image": "panels/ep001_008.png",
+      "image_bytes": 1938801,
+      "chapter_findings": [],
+      "gate_report": {
+        "panel_id": "ep001_008",
+        "shot_type": "re_establish",
+        "passed": true,
+        "ops_applied": [
+          "G3_horizon_scale",
+          "G6_defringe",
+          "G4_contact_shadow_under_L2",
+          "G5_occluder_BOOK"
+        ],
+        "gates": [
+          {
+            "gate": "G1",
+            "severity": "PASS",
+            "message": "diegetic pair \u2014 legality auto-pass"
+          },
+          {
+            "gate": "G2",
+            "severity": "PASS",
+            "message": "angle_bucket match (eye_level)"
+          },
+          {
+            "gate": "G8",
+            "severity": "PASS",
+            "message": "light azimuth compatible (camera_left/camera_left)"
+          },
+          {
+            "gate": "G3",
+            "severity": "PASS",
+            "message": "horizon-ratio scale within tolerance"
+          },
+          {
+            "gate": "G4",
+            "severity": "PASS",
+            "message": "contact shadow rendered"
+          }
+        ]
+      },
+      "layers": [
+        {
+          "layer_class": "L0",
+          "asset": "artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L0/L0_2b9283d4c387.png",
+          "provenance": "REAL"
+        },
+        {
+          "layer_class": "L2",
+          "asset": "artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L2/L2_seated_kitchen_knees_up_v1_alpha.png",
+          "provenance": "REAL",
+          "anchor_slot": "seat_at_table",
+          "grounding": {
+            "contact_shadow": true,
+            "occluder": true
+          }
+        }
+      ]
+    },
+    {
+      "order": 9,
+      "panel_id": "ep001_009",
+      "shot_type": "insert_object",
+      "archetype": "tea_beat_close_up",
+      "image": "panels/ep001_009.png",
+      "image_bytes": 503793,
+      "chapter_findings": [],
+      "gate_report": {
+        "panel_id": "ep001_009",
+        "shot_type": "insert_object",
+        "passed": true,
+        "ops_applied": [
+          "derive_tone_gradient",
+          "abstract_stage_paste",
+          "G6_defringe"
+        ],
+        "gates": [
+          {
+            "gate": "G1",
+            "severity": "PASS",
+            "message": "hands \u00d7 tone_gradient \u2192 LEGAL"
+          },
+          {
+            "gate": "G2",
+            "severity": "PASS",
+            "message": "abstract BG \u2014 angle exempt"
+          },
+          {
+            "gate": "G8",
+            "severity": "PASS",
+            "message": "light azimuth compatible (ambient/camera_left)"
+          },
+          {
+            "gate": "G6",
+            "severity": "PASS",
+            "message": "defringe applied"
+          }
+        ]
+      },
+      "layers": [
+        {
+          "layer_class": "L0",
+          "asset": "artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L0/L0_f3bc5f4cc41f.png",
+          "provenance": "REAL",
+          "derivation": {
+            "type": "tone_gradient"
+          }
+        },
+        {
+          "layer_class": "L2",
+          "asset": "artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L2/L2_hands_wrapping_cup_clean_v2_alpha.png",
+          "provenance": "REAL"
+        }
+      ]
+    },
+    {
+      "order": 10,
+      "panel_id": "ep001_010",
+      "shot_type": "insert_object",
+      "archetype": "hand_table_micro",
+      "image": "panels/ep001_010.png",
+      "image_bytes": 503793,
+      "chapter_findings": [],
+      "gate_report": {
+        "panel_id": "ep001_010",
+        "shot_type": "insert_object",
+        "passed": true,
+        "ops_applied": [
+          "derive_tone_gradient",
+          "abstract_stage_paste",
+          "G6_defringe"
+        ],
+        "gates": [
+          {
+            "gate": "G1",
+            "severity": "PASS",
+            "message": "hands \u00d7 tone_gradient \u2192 LEGAL"
+          },
+          {
+            "gate": "G2",
+            "severity": "PASS",
+            "message": "abstract BG \u2014 angle exempt"
+          },
+          {
+            "gate": "G8",
+            "severity": "PASS",
+            "message": "light azimuth compatible (ambient/camera_left)"
+          },
+          {
+            "gate": "G6",
+            "severity": "PASS",
+            "message": "defringe applied"
+          }
+        ]
+      },
+      "layers": [
+        {
+          "layer_class": "L0",
+          "asset": "artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L0/L0_f3bc5f4cc41f.png",
+          "provenance": "REAL",
+          "derivation": {
+            "type": "tone_gradient"
+          }
+        },
+        {
+          "layer_class": "L2",
+          "asset": "artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L2/L2_hands_wrapping_cup_clean_v2_alpha.png",
+          "provenance": "REAL"
+        }
+      ]
+    },
+    {
+      "order": 11,
+      "panel_id": "ep001_011",
+      "shot_type": "reaction_emotion",
+      "archetype": "character_face_micro_tension",
+      "image": "panels/ep001_011.png",
+      "image_bytes": 972051,
+      "chapter_findings": [],
+      "gate_report": {
+        "panel_id": "ep001_011",
+        "shot_type": "reaction_emotion",
+        "passed": true,
+        "ops_applied": [
+          "derive_defocus",
+          "abstract_stage_paste",
+          "G6_defringe"
+        ],
+        "gates": [
+          {
+            "gate": "G1",
+            "severity": "PASS",
+            "message": "bust \u00d7 defocus_derived \u2192 LEGAL"
+          },
+          {
+            "gate": "G2",
+            "severity": "PASS",
+            "message": "abstract BG \u2014 angle exempt"
+          },
+          {
+            "gate": "G8",
+            "severity": "PASS",
+            "message": "light azimuth compatible (camera_left/camera_left)"
+          },
+          {
+            "gate": "G6",
+            "severity": "PASS",
+            "message": "defringe applied"
+          }
+        ]
+      },
+      "layers": [
+        {
+          "layer_class": "L0",
+          "asset": "artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L0/L0_f3bc5f4cc41f.png",
+          "provenance": "REAL",
+          "derivation": {
+            "type": "defocus"
+          }
+        },
+        {
+          "layer_class": "L2",
+          "asset": "artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L2/L2_clean_bust_calm_v2_alpha.png",
+          "provenance": "REAL"
+        }
+      ]
+    },
+    {
+      "order": 12,
+      "panel_id": "ep001_012",
+      "shot_type": "insert_object",
+      "archetype": "hand_table_micro",
+      "image": "panels/ep001_012.png",
+      "image_bytes": 503793,
+      "chapter_findings": [],
+      "gate_report": {
+        "panel_id": "ep001_012",
+        "shot_type": "insert_object",
+        "passed": true,
+        "ops_applied": [
+          "derive_tone_gradient",
+          "abstract_stage_paste",
+          "G6_defringe"
+        ],
+        "gates": [
+          {
+            "gate": "G1",
+            "severity": "PASS",
+            "message": "hands \u00d7 tone_gradient \u2192 LEGAL"
+          },
+          {
+            "gate": "G2",
+            "severity": "PASS",
+            "message": "abstract BG \u2014 angle exempt"
+          },
+          {
+            "gate": "G8",
+            "severity": "PASS",
+            "message": "light azimuth compatible (ambient/camera_left)"
+          },
+          {
+            "gate": "G6",
+            "severity": "PASS",
+            "message": "defringe applied"
+          }
+        ]
+      },
+      "layers": [
+        {
+          "layer_class": "L0",
+          "asset": "artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L0/L0_f3bc5f4cc41f.png",
+          "provenance": "REAL",
+          "derivation": {
+            "type": "tone_gradient"
+          }
+        },
+        {
+          "layer_class": "L2",
+          "asset": "artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L2/L2_hands_wrapping_cup_clean_v2_alpha.png",
+          "provenance": "REAL"
+        }
+      ]
+    },
+    {
+      "order": 13,
+      "panel_id": "ep001_013",
+      "shot_type": "establishing",
+      "archetype": "sparse_establishing_wide",
+      "image": "panels/ep001_013.png",
+      "image_bytes": 1938317,
+      "chapter_findings": [],
+      "gate_report": {
+        "panel_id": "ep001_013",
+        "shot_type": "establishing",
+        "passed": true,
+        "ops_applied": [
+          "G3_horizon_scale",
+          "G6_defringe",
+          "G4_contact_shadow_under_L2",
+          "G5_occluder_BOOK"
+        ],
+        "gates": [
+          {
+            "gate": "G1",
+            "severity": "PASS",
+            "message": "full_figure \u00d7 full_render \u2192 LEGAL+ops"
+          },
+          {
+            "gate": "G2",
+            "severity": "PASS",
+            "message": "angle_bucket match (eye_level)"
+          },
+          {
+            "gate": "G8",
+            "severity": "PASS",
+            "message": "light azimuth compatible (camera_left/camera_left)"
+          },
+          {
+            "gate": "G3",
+            "severity": "PASS",
+            "message": "horizon-ratio scale within tolerance"
+          },
+          {
+            "gate": "G4",
+            "severity": "PASS",
+            "message": "contact shadow rendered"
+          }
+        ]
+      },
+      "layers": [
+        {
+          "layer_class": "L0",
+          "asset": "artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L0/L0_2b9283d4c387.png",
+          "provenance": "REAL"
+        },
+        {
+          "layer_class": "L2",
+          "asset": "artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L2/L2_full_figure_kitchen_standing_v1_alpha.png",
+          "provenance": "REAL",
+          "anchor_slot": "seat_at_table",
+          "grounding": {
+            "contact_shadow": true,
+            "occluder": true
+          }
+        }
+      ]
+    },
+    {
+      "order": 14,
+      "panel_id": "ep001_014",
+      "shot_type": "insert_object",
+      "archetype": "pet_companion_micro",
+      "image": "panels/ep001_014.png",
+      "image_bytes": 503793,
+      "chapter_findings": [],
+      "gate_report": {
+        "panel_id": "ep001_014",
+        "shot_type": "insert_object",
+        "passed": true,
+        "ops_applied": [
+          "derive_tone_gradient",
+          "abstract_stage_paste",
+          "G6_defringe"
+        ],
+        "gates": [
+          {
+            "gate": "G1",
+            "severity": "PASS",
+            "message": "hands \u00d7 tone_gradient \u2192 LEGAL"
+          },
+          {
+            "gate": "G2",
+            "severity": "PASS",
+            "message": "abstract BG \u2014 angle exempt"
+          },
+          {
+            "gate": "G8",
+            "severity": "PASS",
+            "message": "light azimuth compatible (ambient/camera_left)"
+          },
+          {
+            "gate": "G6",
+            "severity": "PASS",
+            "message": "defringe applied"
+          }
+        ]
+      },
+      "layers": [
+        {
+          "layer_class": "L0",
+          "asset": "artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L0/L0_f5f1f916e1bb.png",
+          "provenance": "REAL",
+          "derivation": {
+            "type": "tone_gradient"
+          }
+        },
+        {
+          "layer_class": "L2",
+          "asset": "artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L2/L2_hands_wrapping_cup_clean_v2_alpha.png",
+          "provenance": "REAL"
+        }
+      ]
+    },
+    {
+      "order": 15,
+      "panel_id": "ep001_015",
+      "shot_type": "reaction_emotion",
+      "archetype": "character_quiet_face",
+      "image": "panels/ep001_015.png",
+      "image_bytes": 952197,
+      "chapter_findings": [],
+      "gate_report": {
+        "panel_id": "ep001_015",
+        "shot_type": "reaction_emotion",
+        "passed": true,
+        "ops_applied": [
+          "derive_defocus",
+          "abstract_stage_paste",
+          "G6_defringe"
+        ],
+        "gates": [
+          {
+            "gate": "G1",
+            "severity": "PASS",
+            "message": "bust \u00d7 defocus_derived \u2192 LEGAL"
+          },
+          {
+            "gate": "G2",
+            "severity": "PASS",
+            "message": "abstract BG \u2014 angle exempt"
+          },
+          {
+            "gate": "G8",
+            "severity": "PASS",
+            "message": "light azimuth compatible (camera_left/camera_left)"
+          },
+          {
+            "gate": "G6",
+            "severity": "PASS",
+            "message": "defringe applied"
+          }
+        ]
+      },
+      "layers": [
+        {
+          "layer_class": "L0",
+          "asset": "artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L0/L0_f5f1f916e1bb.png",
+          "provenance": "REAL",
+          "derivation": {
+            "type": "defocus"
+          }
+        },
+        {
+          "layer_class": "L2",
+          "asset": "artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L2/L2_clean_bust_calm_v2_alpha.png",
+          "provenance": "REAL"
+        }
+      ]
+    },
+    {
+      "order": 16,
+      "panel_id": "ep001_016",
+      "shot_type": "establishing",
+      "archetype": "sparse_establishing_wide",
+      "image": "panels/ep001_016.png",
+      "image_bytes": 2633608,
+      "chapter_findings": [],
+      "gate_report": {},
+      "layers": [
+        {
+          "layer_class": "L0",
+          "asset": "artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L0/L0_68f134e1f995.png",
+          "provenance": "REAL"
+        }
+      ]
+    },
+    {
+      "order": 17,
+      "panel_id": "ep001_017",
+      "shot_type": "dialogue_bust",
+      "archetype": "chest_breath_micro",
+      "image": "panels/ep001_017.png",
+      "image_bytes": 1023948,
+      "chapter_findings": [],
+      "gate_report": {
+        "panel_id": "ep001_017",
+        "shot_type": "dialogue_bust",
+        "passed": true,
+        "ops_applied": [
+          "derive_defocus",
+          "abstract_stage_paste",
+          "G6_defringe"
+        ],
+        "gates": [
+          {
+            "gate": "G1",
+            "severity": "PASS",
+            "message": "bust \u00d7 defocus_derived \u2192 LEGAL"
+          },
+          {
+            "gate": "G2",
+            "severity": "PASS",
+            "message": "abstract BG \u2014 angle exempt"
+          },
+          {
+            "gate": "G8",
+            "severity": "PASS",
+            "message": "light azimuth compatible (camera_left/camera_left)"
+          },
+          {
+            "gate": "G6",
+            "severity": "PASS",
+            "message": "defringe applied"
+          }
+        ]
+      },
+      "layers": [
+        {
+          "layer_class": "L0",
+          "asset": "artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L0/L0_68f134e1f995.png",
+          "provenance": "REAL",
+          "derivation": {
+            "type": "defocus"
+          }
+        },
+        {
+          "layer_class": "L2",
+          "asset": "artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L2/L2_clean_bust_calm_v2_alpha.png",
+          "provenance": "REAL"
+        }
+      ]
+    },
+    {
+      "order": 18,
+      "panel_id": "ep001_018",
+      "shot_type": "insert_object",
+      "archetype": "hand_table_micro",
+      "image": "panels/ep001_018.png",
+      "image_bytes": 503793,
+      "chapter_findings": [],
+      "gate_report": {
+        "panel_id": "ep001_018",
+        "shot_type": "insert_object",
+        "passed": true,
+        "ops_applied": [
+          "derive_tone_gradient",
+          "abstract_stage_paste",
+          "G6_defringe"
+        ],
+        "gates": [
+          {
+            "gate": "G1",
+            "severity": "PASS",
+            "message": "hands \u00d7 tone_gradient \u2192 LEGAL"
+          },
+          {
+            "gate": "G2",
+            "severity": "PASS",
+            "message": "abstract BG \u2014 angle exempt"
+          },
+          {
+            "gate": "G8",
+            "severity": "PASS",
+            "message": "light azimuth compatible (ambient/camera_left)"
+          },
+          {
+            "gate": "G6",
+            "severity": "PASS",
+            "message": "defringe applied"
+          }
+        ]
+      },
+      "layers": [
+        {
+          "layer_class": "L0",
+          "asset": "artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L0/L0_f5f1f916e1bb.png",
+          "provenance": "REAL",
+          "derivation": {
+            "type": "tone_gradient"
+          }
+        },
+        {
+          "layer_class": "L2",
+          "asset": "artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L2/L2_hands_wrapping_cup_clean_v2_alpha.png",
+          "provenance": "REAL"
+        }
+      ]
+    },
+    {
+      "order": 19,
+      "panel_id": "ep001_019",
+      "shot_type": "insert_object",
+      "archetype": "tea_beat_close_up",
+      "image": "panels/ep001_019.png",
+      "image_bytes": 503793,
+      "chapter_findings": [],
+      "gate_report": {
+        "panel_id": "ep001_019",
+        "shot_type": "insert_object",
+        "passed": true,
+        "ops_applied": [
+          "derive_tone_gradient",
+          "abstract_stage_paste",
+          "G6_defringe"
+        ],
+        "gates": [
+          {
+            "gate": "G1",
+            "severity": "PASS",
+            "message": "hands \u00d7 tone_gradient \u2192 LEGAL"
+          },
+          {
+            "gate": "G2",
+            "severity": "PASS",
+            "message": "abstract BG \u2014 angle exempt"
+          },
+          {
+            "gate": "G8",
+            "severity": "PASS",
+            "message": "light azimuth compatible (ambient/camera_left)"
+          },
+          {
+            "gate": "G6",
+            "severity": "PASS",
+            "message": "defringe applied"
+          }
+        ]
+      },
+      "layers": [
+        {
+          "layer_class": "L0",
+          "asset": "artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L0/L0_f5f1f916e1bb.png",
+          "provenance": "REAL",
+          "derivation": {
+            "type": "tone_gradient"
+          }
+        },
+        {
+          "layer_class": "L2",
+          "asset": "artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L2/L2_hands_wrapping_cup_clean_v2_alpha.png",
+          "provenance": "REAL"
+        }
+      ]
+    },
+    {
+      "order": 20,
+      "panel_id": "ep001_020",
+      "shot_type": "dialogue_bust",
+      "archetype": "chest_breath_micro",
+      "image": "panels/ep001_020.png",
+      "image_bytes": 952197,
+      "chapter_findings": [],
+      "gate_report": {
+        "panel_id": "ep001_020",
+        "shot_type": "dialogue_bust",
+        "passed": true,
+        "ops_applied": [
+          "derive_defocus",
+          "abstract_stage_paste",
+          "G6_defringe"
+        ],
+        "gates": [
+          {
+            "gate": "G1",
+            "severity": "PASS",
+            "message": "bust \u00d7 defocus_derived \u2192 LEGAL"
+          },
+          {
+            "gate": "G2",
+            "severity": "PASS",
+            "message": "abstract BG \u2014 angle exempt"
+          },
+          {
+            "gate": "G8",
+            "severity": "PASS",
+            "message": "light azimuth compatible (camera_left/camera_left)"
+          },
+          {
+            "gate": "G6",
+            "severity": "PASS",
+            "message": "defringe applied"
+          }
+        ]
+      },
+      "layers": [
+        {
+          "layer_class": "L0",
+          "asset": "artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L0/L0_f5f1f916e1bb.png",
+          "provenance": "REAL",
+          "derivation": {
+            "type": "defocus"
+          }
+        },
+        {
+          "layer_class": "L2",
+          "asset": "artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L2/L2_clean_bust_calm_v2_alpha.png",
+          "provenance": "REAL"
+        }
+      ]
+    },
+    {
+      "order": 21,
+      "panel_id": "ep001_021",
+      "shot_type": "dialogue_bust",
+      "archetype": "chest_breath_micro",
+      "image": "panels/ep001_021.png",
+      "image_bytes": 952197,
+      "chapter_findings": [],
+      "gate_report": {
+        "panel_id": "ep001_021",
+        "shot_type": "dialogue_bust",
+        "passed": true,
+        "ops_applied": [
+          "derive_defocus",
+          "abstract_stage_paste",
+          "G6_defringe"
+        ],
+        "gates": [
+          {
+            "gate": "G1",
+            "severity": "PASS",
+            "message": "bust \u00d7 defocus_derived \u2192 LEGAL"
+          },
+          {
+            "gate": "G2",
+            "severity": "PASS",
+            "message": "abstract BG \u2014 angle exempt"
+          },
+          {
+            "gate": "G8",
+            "severity": "PASS",
+            "message": "light azimuth compatible (camera_left/camera_left)"
+          },
+          {
+            "gate": "G6",
+            "severity": "PASS",
+            "message": "defringe applied"
+          }
+        ]
+      },
+      "layers": [
+        {
+          "layer_class": "L0",
+          "asset": "artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L0/L0_f5f1f916e1bb.png",
+          "provenance": "REAL",
+          "derivation": {
+            "type": "defocus"
+          }
+        },
+        {
+          "layer_class": "L2",
+          "asset": "artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L2/L2_clean_bust_calm_v2_alpha.png",
+          "provenance": "REAL"
+        }
+      ]
+    },
+    {
+      "order": 22,
+      "panel_id": "ep001_022",
+      "shot_type": "establishing",
+      "archetype": "sparse_establishing_wide",
+      "image": "panels/ep001_022.png",
+      "image_bytes": 2093369,
+      "chapter_findings": [],
+      "gate_report": {},
+      "layers": [
+        {
+          "layer_class": "L0",
+          "asset": "artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L0/L0_f5f1f916e1bb.png",
+          "provenance": "REAL"
+        }
+      ]
+    },
+    {
+      "order": 23,
+      "panel_id": "ep001_023",
+      "shot_type": "reaction_emotion",
+      "archetype": "character_quiet_face",
+      "image": "panels/ep001_023.png",
+      "image_bytes": 952197,
+      "chapter_findings": [],
+      "gate_report": {
+        "panel_id": "ep001_023",
+        "shot_type": "reaction_emotion",
+        "passed": true,
+        "ops_applied": [
+          "derive_defocus",
+          "abstract_stage_paste",
+          "G6_defringe"
+        ],
+        "gates": [
+          {
+            "gate": "G1",
+            "severity": "PASS",
+            "message": "bust \u00d7 defocus_derived \u2192 LEGAL"
+          },
+          {
+            "gate": "G2",
+            "severity": "PASS",
+            "message": "abstract BG \u2014 angle exempt"
+          },
+          {
+            "gate": "G8",
+            "severity": "PASS",
+            "message": "light azimuth compatible (camera_left/camera_left)"
+          },
+          {
+            "gate": "G6",
+            "severity": "PASS",
+            "message": "defringe applied"
+          }
+        ]
+      },
+      "layers": [
+        {
+          "layer_class": "L0",
+          "asset": "artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L0/L0_f5f1f916e1bb.png",
+          "provenance": "REAL",
+          "derivation": {
+            "type": "defocus"
+          }
+        },
+        {
+          "layer_class": "L2",
+          "asset": "artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L2/L2_clean_bust_calm_v2_alpha.png",
+          "provenance": "REAL"
+        }
+      ]
+    },
+    {
+      "order": 24,
+      "panel_id": "ep001_024",
+      "shot_type": "establishing",
+      "archetype": "sparse_establishing_wide",
+      "image": "panels/ep001_024.png",
+      "image_bytes": 2093369,
+      "chapter_findings": [],
+      "gate_report": {},
+      "layers": [
+        {
+          "layer_class": "L0",
+          "asset": "artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L0/L0_f5f1f916e1bb.png",
+          "provenance": "REAL"
+        }
+      ]
+    },
+    {
+      "order": 25,
+      "panel_id": "ep001_025",
+      "shot_type": "insert_object",
+      "archetype": "seasonal_anchor_object",
+      "image": "panels/ep001_025.png",
+      "image_bytes": 503793,
+      "chapter_findings": [],
+      "gate_report": {
+        "panel_id": "ep001_025",
+        "shot_type": "insert_object",
+        "passed": true,
+        "ops_applied": [
+          "derive_tone_gradient",
+          "abstract_stage_paste",
+          "G6_defringe"
+        ],
+        "gates": [
+          {
+            "gate": "G1",
+            "severity": "PASS",
+            "message": "hands \u00d7 tone_gradient \u2192 LEGAL"
+          },
+          {
+            "gate": "G2",
+            "severity": "PASS",
+            "message": "abstract BG \u2014 angle exempt"
+          },
+          {
+            "gate": "G8",
+            "severity": "PASS",
+            "message": "light azimuth compatible (ambient/camera_left)"
+          },
+          {
+            "gate": "G6",
+            "severity": "PASS",
+            "message": "defringe applied"
+          }
+        ]
+      },
+      "layers": [
+        {
+          "layer_class": "L0",
+          "asset": "artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L0/L0_f5f1f916e1bb.png",
+          "provenance": "REAL",
+          "derivation": {
+            "type": "tone_gradient"
+          }
+        },
+        {
+          "layer_class": "L2",
+          "asset": "artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L2/L2_hands_wrapping_cup_clean_v2_alpha.png",
+          "provenance": "REAL"
+        }
+      ]
+    },
+    {
+      "order": 26,
+      "panel_id": "ep001_026",
+      "shot_type": "reaction_emotion",
+      "archetype": "character_face_micro_tension",
+      "image": "panels/ep001_026.png",
+      "image_bytes": 952197,
+      "chapter_findings": [],
+      "gate_report": {
+        "panel_id": "ep001_026",
+        "shot_type": "reaction_emotion",
+        "passed": true,
+        "ops_applied": [
+          "derive_defocus",
+          "abstract_stage_paste",
+          "G6_defringe"
+        ],
+        "gates": [
+          {
+            "gate": "G1",
+            "severity": "PASS",
+            "message": "bust \u00d7 defocus_derived \u2192 LEGAL"
+          },
+          {
+            "gate": "G2",
+            "severity": "PASS",
+            "message": "abstract BG \u2014 angle exempt"
+          },
+          {
+            "gate": "G8",
+            "severity": "PASS",
+            "message": "light azimuth compatible (camera_left/camera_left)"
+          },
+          {
+            "gate": "G6",
+            "severity": "PASS",
+            "message": "defringe applied"
+          }
+        ]
+      },
+      "layers": [
+        {
+          "layer_class": "L0",
+          "asset": "artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L0/L0_f5f1f916e1bb.png",
+          "provenance": "REAL",
+          "derivation": {
+            "type": "defocus"
+          }
+        },
+        {
+          "layer_class": "L2",
+          "asset": "artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L2/L2_clean_bust_calm_v2_alpha.png",
+          "provenance": "REAL"
+        }
+      ]
+    },
+    {
+      "order": 27,
+      "panel_id": "ep001_027",
+      "shot_type": "insert_object",
+      "archetype": "kettle_steam_macro",
+      "image": "panels/ep001_027.png",
+      "image_bytes": 503793,
+      "chapter_findings": [],
+      "gate_report": {
+        "panel_id": "ep001_027",
+        "shot_type": "insert_object",
+        "passed": true,
+        "ops_applied": [
+          "derive_tone_gradient",
+          "abstract_stage_paste",
+          "G6_defringe"
+        ],
+        "gates": [
+          {
+            "gate": "G1",
+            "severity": "PASS",
+            "message": "hands \u00d7 tone_gradient \u2192 LEGAL"
+          },
+          {
+            "gate": "G2",
+            "severity": "PASS",
+            "message": "abstract BG \u2014 angle exempt"
+          },
+          {
+            "gate": "G8",
+            "severity": "PASS",
+            "message": "light azimuth compatible (ambient/camera_left)"
+          },
+          {
+            "gate": "G6",
+            "severity": "PASS",
+            "message": "defringe applied"
+          }
+        ]
+      },
+      "layers": [
+        {
+          "layer_class": "L0",
+          "asset": "artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L0/L0_f5f1f916e1bb.png",
+          "provenance": "REAL",
+          "derivation": {
+            "type": "tone_gradient"
+          }
+        },
+        {
+          "layer_class": "L2",
+          "asset": "artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L2/L2_hands_wrapping_cup_clean_v2_alpha.png",
+          "provenance": "REAL"
+        }
+      ]
+    },
+    {
+      "order": 28,
+      "panel_id": "ep001_028",
+      "shot_type": "reaction_emotion",
+      "archetype": "character_quiet_face",
+      "image": "panels/ep001_028.png",
+      "image_bytes": 952197,
+      "chapter_findings": [],
+      "gate_report": {
+        "panel_id": "ep001_028",
+        "shot_type": "reaction_emotion",
+        "passed": true,
+        "ops_applied": [
+          "derive_defocus",
+          "abstract_stage_paste",
+          "G6_defringe"
+        ],
+        "gates": [
+          {
+            "gate": "G1",
+            "severity": "PASS",
+            "message": "bust \u00d7 defocus_derived \u2192 LEGAL"
+          },
+          {
+            "gate": "G2",
+            "severity": "PASS",
+            "message": "abstract BG \u2014 angle exempt"
+          },
+          {
+            "gate": "G8",
+            "severity": "PASS",
+            "message": "light azimuth compatible (camera_left/camera_left)"
+          },
+          {
+            "gate": "G6",
+            "severity": "PASS",
+            "message": "defringe applied"
+          }
+        ]
+      },
+      "layers": [
+        {
+          "layer_class": "L0",
+          "asset": "artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L0/L0_f5f1f916e1bb.png",
+          "provenance": "REAL",
+          "derivation": {
+            "type": "defocus"
+          }
+        },
+        {
+          "layer_class": "L2",
+          "asset": "artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L2/L2_clean_bust_calm_v2_alpha.png",
+          "provenance": "REAL"
+        }
+      ]
+    },
+    {
+      "order": 29,
+      "panel_id": "ep001_029",
+      "shot_type": "establishing",
+      "archetype": "long_drop_decompression",
+      "image": "panels/ep001_029.png",
+      "image_bytes": 2093369,
+      "chapter_findings": [],
+      "gate_report": {},
+      "layers": [
+        {
+          "layer_class": "L0",
+          "asset": "artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L0/L0_f5f1f916e1bb.png",
+          "provenance": "REAL"
+        }
+      ]
+    },
+    {
+      "order": 30,
+      "panel_id": "ep001_030",
+      "shot_type": "insert_object",
+      "archetype": "tea_beat_close_up",
+      "image": "panels/ep001_030.png",
+      "image_bytes": 503793,
+      "chapter_findings": [],
+      "gate_report": {
+        "panel_id": "ep001_030",
+        "shot_type": "insert_object",
+        "passed": true,
+        "ops_applied": [
+          "derive_tone_gradient",
+          "abstract_stage_paste",
+          "G6_defringe"
+        ],
+        "gates": [
+          {
+            "gate": "G1",
+            "severity": "PASS",
+            "message": "hands \u00d7 tone_gradient \u2192 LEGAL"
+          },
+          {
+            "gate": "G2",
+            "severity": "PASS",
+            "message": "abstract BG \u2014 angle exempt"
+          },
+          {
+            "gate": "G8",
+            "severity": "PASS",
+            "message": "light azimuth compatible (ambient/camera_left)"
+          },
+          {
+            "gate": "G6",
+            "severity": "PASS",
+            "message": "defringe applied"
+          }
+        ]
+      },
+      "layers": [
+        {
+          "layer_class": "L0",
+          "asset": "artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L0/L0_f5f1f916e1bb.png",
+          "provenance": "REAL",
+          "derivation": {
+            "type": "tone_gradient"
+          }
+        },
+        {
+          "layer_class": "L2",
+          "asset": "artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L2/L2_hands_wrapping_cup_clean_v2_alpha.png",
+          "provenance": "REAL"
+        }
+      ]
+    },
+    {
+      "order": 31,
+      "panel_id": "ep001_031",
+      "shot_type": "reaction_emotion",
+      "archetype": "character_quiet_face",
+      "image": "panels/ep001_031.png",
+      "image_bytes": 952197,
+      "chapter_findings": [],
+      "gate_report": {
+        "panel_id": "ep001_031",
+        "shot_type": "reaction_emotion",
+        "passed": true,
+        "ops_applied": [
+          "derive_defocus",
+          "abstract_stage_paste",
+          "G6_defringe"
+        ],
+        "gates": [
+          {
+            "gate": "G1",
+            "severity": "PASS",
+            "message": "bust \u00d7 defocus_derived \u2192 LEGAL"
+          },
+          {
+            "gate": "G2",
+            "severity": "PASS",
+            "message": "abstract BG \u2014 angle exempt"
+          },
+          {
+            "gate": "G8",
+            "severity": "PASS",
+            "message": "light azimuth compatible (camera_left/camera_left)"
+          },
+          {
+            "gate": "G6",
+            "severity": "PASS",
+            "message": "defringe applied"
+          }
+        ]
+      },
+      "layers": [
+        {
+          "layer_class": "L0",
+          "asset": "artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L0/L0_f5f1f916e1bb.png",
+          "provenance": "REAL",
+          "derivation": {
+            "type": "defocus"
+          }
+        },
+        {
+          "layer_class": "L2",
+          "asset": "artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L2/L2_clean_bust_calm_v2_alpha.png",
+          "provenance": "REAL"
+        }
+      ]
+    },
+    {
+      "order": 32,
+      "panel_id": "ep001_032",
+      "shot_type": "establishing",
+      "archetype": "sparse_establishing_wide",
+      "image": "panels/ep001_032.png",
+      "image_bytes": 2093369,
+      "chapter_findings": [],
+      "gate_report": {},
+      "layers": [
+        {
+          "layer_class": "L0",
+          "asset": "artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L0/L0_f5f1f916e1bb.png",
+          "provenance": "REAL"
+        }
+      ]
+    },
+    {
+      "order": 33,
+      "panel_id": "ep001_033",
+      "shot_type": "closure_breath",
+      "archetype": "pendulation_pair_visual_rhyme",
+      "image": "panels/ep001_033.png",
+      "image_bytes": 2093369,
+      "chapter_findings": [],
+      "gate_report": {},
+      "layers": [
+        {
+          "layer_class": "L0",
+          "asset": "artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L0/L0_f5f1f916e1bb.png",
+          "provenance": "REAL"
+        }
+      ]
+    },
+    {
+      "order": 34,
+      "panel_id": "ep001_034",
+      "shot_type": "establishing",
+      "archetype": "sparse_establishing_wide",
+      "image": "panels/ep001_034.png",
+      "image_bytes": 2093369,
+      "chapter_findings": [],
+      "gate_report": {},
+      "layers": [
+        {
+          "layer_class": "L0",
+          "asset": "artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L0/L0_f5f1f916e1bb.png",
+          "provenance": "REAL"
+        }
+      ]
+    },
+    {
+      "order": 35,
+      "panel_id": "ep001_035",
+      "shot_type": "establishing",
+      "archetype": "sparse_establishing_wide",
+      "image": "panels/ep001_035.png",
+      "image_bytes": 2093369,
+      "chapter_findings": [],
+      "gate_report": {},
+      "layers": [
+        {
+          "layer_class": "L0",
+          "asset": "artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L0/L0_f5f1f916e1bb.png",
+          "provenance": "REAL"
+        }
+      ]
+    }
+  ]
+}
