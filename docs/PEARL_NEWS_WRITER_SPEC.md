@@ -1,7 +1,7 @@
 # Pearl News Writer Spec
 
-**Last updated:** 2026-04-19  
-**Authority:** This file governs all Pearl News article writing, expansion prompts, and atom authoring.  
+**Last updated:** 2026-07-09
+**Authority:** This file governs all Pearl News article writing, expansion prompts, and atom authoring.
 **Related:** `pearl_news/prompts/expansion_system.txt`, `pearl_news/pipeline/quality_gates.py`, `pearl_news/config/editorial_firewall.yaml`, `docs/research/continue_gen_research3.md`, [PEARL_NEWS_GENERATIONAL_WRITER_SPEC.md](./PEARL_NEWS_GENERATIONAL_WRITER_SPEC.md), [PEARL_NEWS_GENERATIONAL_INTELLIGENCE_TECH_SPEC.md](./PEARL_NEWS_GENERATIONAL_INTELLIGENCE_TECH_SPEC.md)
 
 ---
@@ -340,6 +340,10 @@ When `pearl_news/pipeline/llm_expand.py` calls the expansion prompt, the model r
 - When expanding the **youth impact** section: the specificity standard applies (§7). Expanding vague impact into more vague impact fails. Find a data point or a concrete behavior.
 - When expanding the **teacher perspective**: do not add devotional language. Add context, a named practice being deployed in a specific setting, or a historical parallel.
 - When expanding the **forward look**: find the specific institution, decision point, or deadline. Do not add sentiment.
+- For youth-facing or Gen Z-facing pieces, keep the opening energy concrete enough to pass a screenshot test: if the headline or first paragraph would read like generic social-awareness copy in isolation, rewrite it with a body cost, behavior, contradiction, or named cohort.
+- Prefer visceral public facts over abstract institutional summary stats when both are available. If the lead fact could appear unchanged in a generic UN press release, it is usually not specific enough to anchor the Pearl News lede.
+- Let the teacher's own vocabulary do the translation work. Do not flatten a distinctive teaching frame into generic "resilience," "healing," or "awareness" language unless the source itself used that wording.
+- Avoid filler phrasing such as "in today's complex world," "raises awareness," "reminds us," or "this generation will inherit." Replace them with a named behavior, place, system, or public consequence.
 - **Never invent facts, numbers, quotes, or events.** Elaboration must be contextual and inferential, not fabricated.
 - Preserve HTML structure exactly. Expand paragraph text only. Do not add sections or remove the Source line.
 

@@ -256,6 +256,8 @@ Add one short companion note or README if needed that tells future agents:
 
 These are the best non-code candidates from the preserved user-home archive. They should be treated as compare/promote lanes, not auto-imports.
 
+Resolution note (2026-07-09): the external archive referenced in this section was fully evaluated during the external-home cleanup pass. Canonical replacements and explicit rejections were recorded in `artifacts/audit/EXTERNAL_HOME_CLEANUP_2026_07_09.md` before deleting `/Users/ahjan/phoenix_workspace_archive_2026_03_28`.
+
 ### A. Pearl News Gen Z prompt pack
 
 **Path:** `/Users/ahjan/phoenix_workspace_archive_2026_03_28/downloads_reviewed/preserved_candidates/pearl_news_genz_prompts.md`
