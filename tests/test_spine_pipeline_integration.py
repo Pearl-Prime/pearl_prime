@@ -200,13 +200,34 @@ def test_spine_gates_advisory_by_default(tmp_path: Path) -> None:
 @pytest.mark.slow
 @pytest.mark.skipif(not ANXIETY_ARC.exists(), reason="fixture arc missing")
 def test_spine_gates_hard_records_production_policy(tmp_path: Path) -> None:
-    # Marked slow (excluded from Core tests CI) because the production profile
-    # correctly blocks this fixture on scene_anchor_density cap. Since PR #575
-    # (55f7546f3, HOOK scene_recognition bank routing), the recognition bank
-    # injects shared phrases across chapters — production profile catches this
-    # (correct behavior), so the fixture no longer produces a clean production
-    # run. Keep the test for manual/integration runs; full fix needs either
-    # bank-variety expansion or a cleaner fixture arc.
+    # Marked slow (excluded from Core tests CI). RE-VERIFIED 2026-07-09: the
+    # scene_anchor_density / shared-HOOK-phrase theory below this comment (PR
+    # #575) is STALE — those now register as WARN-severity F1 findings, not
+    # the blocker. Two genuine gate false-positives previously masked behind it
+    # were identified (not atom-edited — those cells are shared with the
+    # extended_book_2h flagship golden ch5/ch10 PROTECTIVE_ALARM callbacks and
+    # atom tweaks perturb full-book parity): F2.B on a grammatically valid
+    # contact-clause sentence (PROTECTIVE_ALARM level_4), and a WEAK_TRANSITIONS
+    # lexicon gap in chapter 10 (PROTECTIVE_ALARM level_9). Both need gate-
+    # level fixes, not content edits. The remaining, real blocker is F7
+    # (over-prescribed-practice-
+    # density): register_gate.py's default fail_at=4/warn_at=3 was calibrated
+    # on third-person deep_book prose, but this catalog's standard_book
+    # content is second-person/experiential throughout and measures 3-9
+    # prescribed-action paragraphs/chapter as NORMAL density — confirmed via
+    # an independent historical standard_book render
+    # (artifacts/pearl_prime/standard_book/ahjan_gen_z_professionals_anxiety_en_US_20260518T011019Z/book.txt),
+    # which fails the same way across all 12 chapters. This is the same
+    # third-person-vs-second-person mismatch that extended_book_2h got a
+    # calibrated F7_FORMAT_THRESHOLDS exception for (2026-07-07, calibrated
+    # against the Layer-4-approved flagship build) — standard_book never got
+    # the same treatment. Do NOT invent a standard_book threshold here: no
+    # human-approved standard_book reference exists to calibrate against, and
+    # guessing one would be exactly the gate-tuned-to-composer-output drift
+    # CLAUDE.md's Bestseller Anti-Drift Doctrine forbids. Un-slowing this test
+    # needs a real F7 standard_book calibration workstream (measure against an
+    # editorially-approved standard_book reference once one exists) or a
+    # genuine density-reduction authoring pass — not a fixture tweak.
     out_dir = tmp_path / "spine_hard"
     plan_path = tmp_path / "spine_hard_plan.json"
     r = _run_spine(out_dir, plan_path, quality_profile="production")
