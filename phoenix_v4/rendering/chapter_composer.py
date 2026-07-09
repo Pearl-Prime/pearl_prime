@@ -2953,14 +2953,46 @@ def compose_additive_chapter_prose(
     slot_proses: list[str],
     *,
     arc_thesis: str = "",
+    topic_id: str = "",
+    persona_id: str = "",
+    engine_type: str = "",
+    chapter_index: int = 0,
+    book_seed: str = "",
+    locale: Optional[str] = None,
 ) -> str:
-    """Append every non-placeholder packet in slot order; optional arc_thesis append-only."""
+    """Append every non-placeholder packet in slot order; optional arc_thesis append-only.
+
+    De-injection 2026-07-09: at REFLECTION/TEACHER_DOCTRINE -> STORY boundaries an
+    authored TRANSITION atom (``before_story``) may be placed to soften the audit's
+    #1 jolt vector (teaching prose cold-cutting to a named scene). Fail-open: no atom
+    -> clean juxtaposition, never generated glue. This is the SAME wired consumer the
+    argument-order path uses (``_authored_transition``); the additive path previously
+    skipped it. The twelve_shape flagship composes via ``compose_ordered_chapter_prose``
+    (a different function) and never routes persona_id/topic_id here, so flagship bytes
+    are unaffected; transitions are placed only when both are supplied and the bank has
+    authored inventory.
+    """
     parts: list[str] = []
+    prev_type = ""
     for _st, prose in zip(slot_types, slot_proses):
         body = (prose or "").strip()
         if not body or _is_placeholder_text(body):
             continue
+        st_upper = (_st or "").strip().upper()
+        if st_upper == "STORY" and prev_type in {"REFLECTION", "TEACHER_DOCTRINE"}:
+            transition = _authored_transition(
+                "before_story",
+                topic_id=topic_id,
+                persona_id=persona_id,
+                engine_type=engine_type,
+                chapter_index=chapter_index,
+                book_seed=book_seed,
+                locale=locale,
+            )
+            if transition:
+                parts.append(transition)
         parts.append(body)
+        prev_type = st_upper
     if arc_thesis and arc_thesis.strip():
         parts.append(arc_thesis.strip())
     return "\n\n".join(parts).strip()
@@ -3018,6 +3050,12 @@ def compose_chapter_prose(
             slot_types,
             slot_proses,
             arc_thesis=arc_thesis,
+            topic_id=topic_id,
+            persona_id=persona_id,
+            engine_type=engine_type,
+            chapter_index=chapter_index,
+            book_seed=book_seed,
+            locale=locale,
         )
 
     # Set chapter index for variant rotation across all bridge/thesis functions
