@@ -1,0 +1,24 @@
+{
+  "schema_version": "1.0.0",
+  "asset_id": "threshold_stand",
+  "layer_class": "L2",
+  "style_register": "mecha_hangar",
+  "crop_class": "full_figure",
+  "pose_id": "threshold_stand",
+  "pose_context": "threshold",
+  "implied_camera": {
+    "angle_bucket": "eye_level",
+    "el_crossing": "chest"
+  },
+  "figure_height_m": 1.62,
+  "anchor": {
+    "point": "feet",
+    "y_px": 1920
+  },
+  "eye_y_px": 420,
+  "room_capable": true,
+  "abstract_stage_eligible": false,
+  "scene_contamination": false,
+  "requires_occluder": false,
+  "genre": "mecha"
+}

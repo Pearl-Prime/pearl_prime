@@ -1,5 +1,10 @@
 # Mecha-Native Asset Repair Closeout — 2026-07-09
 
+> **SUPERSEDED (partial) — 2026-07-10:** L0 sidecars landed in PR #5419 path; L2/L3 native REAL +
+> proof lane completed in `MANGA_MECHA_HUMAN_READABILITY_PROOF_CLOSEOUT_2026-07-10.md`. Stale claims:
+> seated_cockpit MISSING, enqueue blocked on `resolve_tradition_genre`, zero L2/L3 PNGs.
+
+
 **Lane:** mecha-native asset-repair (Pearl_Dev)  
 **Project:** `proj_manga_first_ship_20260425`  
 **Series:** `warrior_calm_cultivation__master_wu__en_US__burnout__the_chassis_is_listening`  
