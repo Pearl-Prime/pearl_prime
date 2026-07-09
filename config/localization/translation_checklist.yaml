@@ -115,3 +115,39 @@ locale_overrides:
   zh-SG:
     additional_checks:
       - "Simplified Chinese; Singapore multicultural context"
+
+  # ─── Added 2026-07-09 (translation source-pack lane) ───────────────────────
+  # These 7 locales previously had NO locale_overrides block at all — a translator
+  # or judge working these locales fell back to the generic gates with zero
+  # locale grounding (an english-stub gap in the quality contract itself, not in
+  # any translated content). Guidance below is sourced from the register/cultural
+  # notes already ratified in locale_registry.yaml and content_roots_by_locale.yaml
+  # — no new cultural claims are introduced here.
+  es-US:
+    additional_checks:
+      - "Neutral Latin American Spanish register (not Castilian) — no vosotros forms, no c/z distinction"
+      - "Second-person voice via tú (informal, warm), consistent with US Hispanic self-help register"
+  es-ES:
+    additional_checks:
+      - "Castilian Spanish register: vosotros verb forms and c/z distinction required (do not use neutral es-US forms)"
+      - "Second-person voice via tú, consistent with Spain wellness/self-help genre conventions"
+  fr-FR:
+    additional_checks:
+      - "Second-person voice via tu (informal), not vous, consistent with French self-help conventions"
+      - "Stoic/existentialist, philosophical framing is culturally accepted alongside somatic language — do not flatten to purely clinical tone"
+  de-DE:
+    additional_checks:
+      - "Second-person voice via du (informal), consistent with DACH (Germany/Austria/Switzerland) wellness register"
+      - "Evidence-based, science-grounded framing preferred; avoid overtly spiritual language — keep the secular nervous-system/neuroscience angle"
+  it-IT:
+    additional_checks:
+      - "Second-person voice via tu (informal), consistent with Italian wellness/self-development framing"
+      - "Avoid clinical/diagnostic language in reader-facing copy; prefer wellness and self-development register"
+  hu-HU:
+    additional_checks:
+      - "Second-person voice via te (informal), consistent with Hungarian wellness/self-development register"
+      - "Mental health stigma remains higher than Western Europe — prefer wellness/self-development framing over clinical language"
+  pt-BR:
+    additional_checks:
+      - "Neutral Brazilian Portuguese register (not European Portuguese) — avoid vós verb forms and European PT vocabulary"
+      - "Second-person voice via você, consistent with Brazilian self-help/comics-adjacent register"

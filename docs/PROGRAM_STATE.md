@@ -85,7 +85,8 @@ program history. Both goldens now live + byte-frozen:
 
 ### Localization
 - **Status:** **NEXT (0%)** — Waystream titles are now distinct + hard-gated on `main` (see above), so the prior
-  blocker is cleared; 13 locales can inherit clean titles without multiplied duplication. Planning established;
+  blocker is cleared; 14 locales (pt-BR ratified as the 14th, Q-MANGA-01/OPD-20260704-005)
+  can inherit clean titles without multiplied duplication. Planning established;
   execution not started.
 
 ### Manga (all locales)

@@ -1649,7 +1649,7 @@ Translation and validation pipeline: parallel sharded translation (atoms + exerc
 |------|----------|
 | **Translate/prompt via Qwen pipeline CLI** | [docs/TRANSLATE_QWEN_PIPELINE_CLI.md](./TRANSLATE_QWEN_PIPELINE_CLI.md) — All system languages; translate/prompt via Qwen GitHub pipeline CLI; EU catalogue (incl. it-IT) |
 | **Locale personas** | [docs/LOCALE_PERSONAS.md](./LOCALE_PERSONAS.md) — 40 persona definitions across 11 non-en-US locales (anxious_insomniac_tw, burned_out_professional_tw, etc.) |
-| **All-locale catalog marketing plan** | [docs/AUDIOBOOK_LOCALE_CATALOG_MARKETING_PLAN.md](./AUDIOBOOK_LOCALE_CATALOG_MARKETING_PLAN.md) — Per-locale positioning, go-live checklists, readiness tracker for all 13 locales (incl. it-IT EU catalogue) |
+| **All-locale catalog marketing plan** | [docs/AUDIOBOOK_LOCALE_CATALOG_MARKETING_PLAN.md](./AUDIOBOOK_LOCALE_CATALOG_MARKETING_PLAN.md) — Per-locale positioning, go-live checklists, readiness tracker for 13 locales (incl. it-IT EU catalogue); **does not yet cover pt-BR**, ratified as the 14th canonical locale (Q-MANGA-01) after this plan was written — Pearl_Marketing follow-up, not fixed in this pass |
 | **zh-CN distribution plan** | [docs/ZH_CN_DISTRIBUTION_PLAN.md](./ZH_CN_DISTRIBUTION_PLAN.md) — Local platform pipeline (Ximalaya, NetEase, WeChat Read, Dedao); Phase 5 prerequisite checklist |
 | **Locale strategy (rollout phases)** | `del_location_plan/locale_strategy.md` ⚠️ *file removed in PR #706 (2026-04-26 D1 cluster delete); content was: One brand = one locale; Phase 1–5 rollout; distribution routing; CI gate #49 — recover from git history if needed* |
 | **Locale prose & prompting** | `docs/LOCALE_PROSE_AND_PROMPTING.md` ⚠️ *file not present* |
@@ -2017,7 +2017,7 @@ Single list of every **doc**, **spec**, **config**, and **script** referenced in
 | [SCHEMA_CHANGELOG.md](./SCHEMA_CHANGELOG.md) | Schema & audit | ✓ |
 | [AUDIT_OLD_CHAT_SPECS_VS_V4.md](./AUDIT_OLD_CHAT_SPECS_VS_V4.md) | Schema & audit | ✓ |
 | [LOCALE_PERSONAS.md](./LOCALE_PERSONAS.md) | Locale personas | ✓ — 40 persona definitions across non-en-US locales (zh-TW, zh-HK, zh-CN, zh-SG, ja-JP, ko-KR, es-US, es-ES, fr-FR, de-DE, it-IT, hu-HU) |
-| [AUDIOBOOK_LOCALE_CATALOG_MARKETING_PLAN.md](./AUDIOBOOK_LOCALE_CATALOG_MARKETING_PLAN.md) | All-locale marketing plan | ✓ — Per-locale positioning, go-live checklists, readiness tracker for all 13 locales (incl. it-IT EU catalogue) |
+| [AUDIOBOOK_LOCALE_CATALOG_MARKETING_PLAN.md](./AUDIOBOOK_LOCALE_CATALOG_MARKETING_PLAN.md) | All-locale marketing plan | ✓ — Per-locale positioning, go-live checklists, readiness tracker for 13 locales (incl. it-IT EU catalogue); pt-BR (14th canonical locale, Q-MANGA-01) not yet covered |
 | [TRANSLATE_QWEN_PIPELINE_CLI.md](./TRANSLATE_QWEN_PIPELINE_CLI.md) | Translate/prompt via Qwen pipeline CLI | ✓ — All system languages; Qwen GitHub pipeline CLI; EU catalogue (it-IT) |
 | [AUDIOBOOK_PIPELINE_SPEC.md](./AUDIOBOOK_PIPELINE_SPEC.md) | Qwen-Only Audiobook Pipeline | ✓ — Full spec: flow, gates, patch injection, parallel architecture, artifact contract, manual review, gap tracker |
 | [GO_LIVE_FINAL_CHECKLIST.md](./GO_LIVE_FINAL_CHECKLIST.md) | Audiobook pipeline go-live | ✓ — 10-item sign-off gate; per-gate operator runbook; locked design decisions |
