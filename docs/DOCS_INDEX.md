@@ -1678,6 +1678,8 @@ Translation and validation pipeline: parallel sharded translation (atoms + exerc
 
 **Quality contracts** — [config/localization/quality_contracts/](../config/localization/quality_contracts/) (README.md, glossary.yaml, release_thresholds.yaml, golden_translation_regression.yaml; stubs for locale gate).
 
+**Market voice brief** — [config/localization/quality_contracts/MARKET_VOICE_BRIEF.md](../config/localization/quality_contracts/MARKET_VOICE_BRIEF.md) — per-locale (all 14) register, preferred/disallowed framing, title/subtitle constraints, translation dangers, mental-health wording cautions, storefront gotchas, and good-vs-bad example pairs for titles/subtitles/descriptions/CTA copy. Reference layer on top of the quality contracts above — does not change glossary terms, thresholds, or locale membership.
+
 ### CI / workflow
 
 [.github/workflows/translate-atoms-qwen-matrix.yml](../.github/workflows/translate-atoms-qwen-matrix.yml) — Stub workflow; implement for parallel sharded translation (manual/weekly). [.github/workflows/locale-gate.yml](../.github/workflows/locale-gate.yml) — Stub workflow; implement for locale validation on config/localization and atoms.
@@ -2219,6 +2221,7 @@ All `.md` files under `specs/` confirmed present on disk. Additional `.txt` and 
 | [config/localization/quality_contracts/glossary.yaml](../config/localization/quality_contracts/glossary.yaml) | Translation | ✓ — Canonical terms and preferred translations per locale (stub) |
 | [config/localization/quality_contracts/release_thresholds.yaml](../config/localization/quality_contracts/release_thresholds.yaml) | Translation | ✓ — Release thresholds for locale gate (stub) |
 | [config/localization/quality_contracts/golden_translation_regression.yaml](../config/localization/quality_contracts/golden_translation_regression.yaml) | Translation | ✓ — Golden segments for regression tests (stub) |
+| [config/localization/quality_contracts/MARKET_VOICE_BRIEF.md](../config/localization/quality_contracts/MARKET_VOICE_BRIEF.md) | Translation | ✓ — 14-locale market voice brief: register, framing, title/subtitle constraints, translation dangers, mental-health wording cautions, storefront gotchas, good-vs-bad examples |
 | [config/localization/content_roots_by_locale.yaml](../config/localization/content_roots_by_locale.yaml) | Translation | ✓ — all 12 locales mapped with atoms_root, TTS constraints, rollout phase, distribution blockers |
 | [.github/workflows/translate-atoms-qwen-matrix.yml](../.github/workflows/translate-atoms-qwen-matrix.yml) | Translation | ✓ — Stub: placeholder for translation matrix; weekly/manual |
 | [.github/workflows/locale-gate.yml](../.github/workflows/locale-gate.yml) | Translation | ✓ — Stub: placeholder for locale gate on config/localization and atoms |
