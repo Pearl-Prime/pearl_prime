@@ -1,6 +1,6 @@
 # Program State — Single Source of Truth
 
-**LAST VERIFIED:** 2026-07-09 @ `origin/main` `d48e1586c4d3d14002b71a553ba2e5436cac95d0` (July 9 merge wave + #5471 catalog-fanout queue guard)
+**LAST VERIFIED:** 2026-07-10 @ `origin/main` `41c03d1f8fef36be243c5534fc4753d616fbee4c` (post-#5482 SSOT reconciliation — July 9 afternoon wave #5479/#5480/#5481/#5482 landed)
 
 > **RULE:** Verify against `origin/main`, never git date or the working tree (shared-tree branch-churn shows
 > other-branch/stale state). This is the entry point — if another doc disagrees with this, this wins or that doc is stale.
@@ -84,13 +84,14 @@ program history. Both goldens now live + byte-frozen:
   #1947 — satisfies the GHL paid-slot attach row (OPD-20260630-002 / Q-DRIFT-02).
 
 ### Localization
-- **Status:** **NEXT (0%)** — Waystream titles are now distinct + hard-gated on `main` (see above), so the prior
+- **Status:** **NEXT (0% execution)** — Waystream titles are now distinct + hard-gated on `main` (see above), so the prior
   blocker is cleared; 14 locales (pt-BR ratified as the 14th, Q-MANGA-01/OPD-20260704-005)
-  can inherit clean titles without multiplied duplication. Planning established;
-  execution not started.
+  can inherit clean titles without multiplied duplication. **14-locale translation source pack — MERGED** (#5480,
+  `ea68ef510a13463e1181b426ff2661e4326b584f`, 2026-07-09): PERMISSION golden segments + checklist locale_overrides +
+  quality-contract README canon fix. **Planning artifact only — atom translation execution has not started.**
 
 ### Manga (all locales)
-- **Status:** **VISION-CERTIFIED 2026-07-03 — one series end-to-end real; scaffold everywhere else; July 9 wave landed stillness continuity + mecha L0 sidecars on `main`**
+- **Status:** **VISION-CERTIFIED 2026-07-03 — one series end-to-end real; scaffold everywhere else; July 9 wave landed stillness continuity + mecha dispatch wiring + 1/4 native L2/L3 REAL on `main`**
 - **Details:** R1–R8 conformance: R1 30% / R2 45% / R3 25% / R4 8% / R5 34% / R6 40% / R7 5% / R8 35%
   (six-layer taxonomy, adversarially refuted; authority: `artifacts/qa/MANGA_VISION_CONFORMANCE_AUDIT_2026-07-03.md`
   + `artifacts/qa/manga_vision_conformance_20260703.tsv`). Grid: 1,345 series plans across 5 locales
@@ -108,14 +109,18 @@ program history. Both goldens now live + byte-frozen:
     `artifacts/qa/MANGA_STILLNESS_HR_U16_REPAIR_CLOSEOUT_2026-07-09.md`. Prior blocked proof packet
     (`MANGA_STILLNESS_RULES_PROOF_PACKET_CLOSEOUT_2026-07-09.md`) is superseded provenance only.
   - **Mecha L0 composition sidecars + render-ledger reconcile — MERGED** (#5419, `9dd7a5f986d05f3cb2989c9f680f402640e2d53c`).
-    L0 sidecars + ledger wiring are on `main`. **Honest mecha proof is still blocked:** zero native mecha L2/L3 REAL
-    assets on `main` (authority: `artifacts/qa/MANGA_MECHA_NATIVE_BLOCKER_AUDIT_2026-07-09.md`). Do not report mecha
-    as proof-ready or EXECUTED-REAL until those assets exist and a valid proof packet passes.
+    L0 sidecars + ledger wiring are on `main`.
+  - **Mecha native L2/L3 dispatch wiring + seated_cockpit REAL — MERGED** (#5482, `f7eac13bade7a4e62f1b1138a7200c12c144f38f`).
+    `resolve_tradition_genre` / `prompt_authority.py` / crossgenre enqueue / render-request ledger / blob gate are on
+    `main`. Native REAL `L2/seated_cockpit.png` is on `main` (LFS). **Honest mecha proof is still blocked:** 3/4 native
+    L2/L3 assets remain absent or blob_failed on `main` — `L2/threshold_stand`, `L3/glove_pad`, `L3/telemetry_panel`
+    (authority: `artifacts/qa/MANGA_MECHA_NATIVE_BLOCKER_AUDIT_2026-07-09.md` + #5482 closeout). Do not report mecha as
+    proof-ready or EXECUTED-REAL until those assets pass blob gate and a valid proof packet passes.
   - **Human-readability rules artifact — MERGED earlier 2026-07-09** (#5323; ws `ws_manga_human_readability_rules_20260709`
     completed). Implementation closeout remains local-only until its lane merges.
-- **Next manga blocker (post-wave):** mecha native L2/L3 REAL asset bank + honest proof packet — not the July 9 sidecar
-  merge. Stillness post-merge proof re-run is a separate dispatch lane (local-only artifacts must not be reported as
-  landed).
+- **Next manga blocker (post-wave):** mecha native L2/L3 remaining assets (`threshold_stand`, `glove_pad`,
+  `telemetry_panel`) + honest proof packet — not the #5482 dispatch/seated_cockpit merge. Stillness post-merge proof
+  re-run is a separate dispatch lane (local-only artifacts must not be reported as landed).
 
 ### DevOps / repo hygiene
 - **Status:** **July 9 wave landed LFS→R2 pilot + GHA catalog-fanout queue guard on `main`**
