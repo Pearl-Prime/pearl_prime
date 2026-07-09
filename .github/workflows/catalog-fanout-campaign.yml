@@ -27,6 +27,13 @@ on:
         required: false
         default: '800'
         type: string
+      force_when_queue_hot:
+        description: >-
+          Override queue-pressure guard (default false). Set true only for deliberate
+          operator reruns when GitHub Actions is already congested.
+        required: false
+        default: false
+        type: boolean
 
 concurrency:
   group: catalog-fanout-campaign
@@ -35,6 +42,7 @@ concurrency:
 permissions:
   contents: write
   pull-requests: write
+  actions: read
 
 jobs:
   discover:
@@ -66,6 +74,17 @@ jobs:
 
       - name: Install PyYAML
         run: python -m pip install --quiet pyyaml
+
+      - name: Queue pressure guard
+        env:
+          FORCE_WHEN_QUEUE_HOT: ${{ github.event.inputs.force_when_queue_hot }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [ "${FORCE_WHEN_QUEUE_HOT}" = "true" ]; then
+            python3 scripts/ci/gha_queue_pressure_guard.py --force
+          else
+            python3 scripts/ci/gha_queue_pressure_guard.py
+          fi
 
       - name: Compute (locale, brand, slug) matrix
         id: list
@@ -133,7 +152,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 350
     strategy:
-      max-parallel: 6
+      max-parallel: 2
       fail-fast: false
       matrix: ${{ fromJson(needs.discover.outputs.matrix) }}
     env:
