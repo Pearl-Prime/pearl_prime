@@ -24,9 +24,9 @@ panels:
     asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L0/L0_f3bc5f4cc41f.png
     provenance: REAL
     derivation:
-      type: defocus
+      type: tone_gradient
   - layer_class: L2
-    asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L2/L2_d8b2ce3a0a12_alpha.png
+    asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L2/L2_hands_wrapping_cup_clean_v2_alpha.png
     provenance: REAL
     bbox_pct:
     - 28.0
@@ -44,7 +44,7 @@ panels:
     derivation:
       type: defocus
   - layer_class: L2
-    asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L2/L2_3c11aa977218_alpha.png
+    asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L2/L2_clean_bust_calm_v2_alpha.png
     provenance: REAL
     bbox_pct:
     - 22.0
@@ -60,9 +60,9 @@ panels:
     asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L0/L0_f3bc5f4cc41f.png
     provenance: REAL
     derivation:
-      type: defocus
+      type: tone_gradient
   - layer_class: L2
-    asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L2/L2_653dd498edf5_alpha.png
+    asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L2/L2_hands_wrapping_cup_clean_v2_alpha.png
     provenance: REAL
     bbox_pct:
     - 20.0
@@ -80,7 +80,7 @@ panels:
     derivation:
       type: defocus
   - layer_class: L2
-    asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L2/L2_a2b3093c526b_alpha.png
+    asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L2/L2_clean_bust_calm_v2_alpha.png
     provenance: REAL
     bbox_pct:
     - 25.0
@@ -98,7 +98,7 @@ panels:
     derivation:
       type: defocus
   - layer_class: L2
-    asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L2/L2_ebbbf9da6966_alpha.png
+    asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L2/L2_clean_bust_calm_v2_alpha.png
     provenance: REAL
     bbox_pct:
     - 22.0
@@ -114,9 +114,9 @@ panels:
     asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L0/L0_f3bc5f4cc41f.png
     provenance: REAL
     derivation:
-      type: defocus
+      type: tone_gradient
   - layer_class: L2
-    asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L2/L2_cd4bc9a1a15c_alpha.png
+    asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L2/L2_hands_wrapping_cup_clean_v2_alpha.png
     provenance: REAL
     bbox_pct:
     - 28.0
@@ -129,20 +129,22 @@ panels:
 - panel_id: ep001_008
   layers:
   - layer_class: L0
-    asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L0/L0_f3bc5f4cc41f.png
+    asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L0/L0_2b9283d4c387.png
     provenance: REAL
-    derivation:
-      type: defocus
   - layer_class: L2
-    asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L2/L2_79908ea9d659_alpha.png
+    asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L2/L2_seated_kitchen_knees_up_v1_alpha.png
     provenance: REAL
+    anchor_slot: seat_at_table
+    grounding:
+      contact_shadow: true
+      occluder: true
     bbox_pct:
-    - 22.0
-    - 25.0
-    - 78.0
-    - 80.0
-  archetype: dappled_light_hand
-  shot_type: insert_object
+    - 10.0
+    - 35.0
+    - 90.0
+    - 95.0
+  archetype: shared_meal_table_medium
+  shot_type: re_establish
   beat_type: spatial
 - panel_id: ep001_009
   layers:
@@ -150,9 +152,9 @@ panels:
     asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L0/L0_f3bc5f4cc41f.png
     provenance: REAL
     derivation:
-      type: defocus
+      type: tone_gradient
   - layer_class: L2
-    asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L2/L2_cd4bc9a1a15c_alpha.png
+    asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L2/L2_hands_wrapping_cup_clean_v2_alpha.png
     provenance: REAL
     bbox_pct:
     - 28.0
@@ -168,9 +170,9 @@ panels:
     asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L0/L0_f3bc5f4cc41f.png
     provenance: REAL
     derivation:
-      type: defocus
+      type: tone_gradient
   - layer_class: L2
-    asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L2/L2_c9f352872250_alpha.png
+    asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L2/L2_hands_wrapping_cup_clean_v2_alpha.png
     provenance: REAL
     bbox_pct:
     - 20.0
@@ -188,7 +190,7 @@ panels:
     derivation:
       type: defocus
   - layer_class: L2
-    asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L2/L2_71740b9e5913_alpha.png
+    asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L2/L2_clean_bust_calm_v2_alpha.png
     provenance: REAL
     bbox_pct:
     - 22.0
@@ -204,9 +206,9 @@ panels:
     asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L0/L0_f3bc5f4cc41f.png
     provenance: REAL
     derivation:
-      type: defocus
+      type: tone_gradient
   - layer_class: L2
-    asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L2/L2_2ecbdc633003_alpha.png
+    asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L2/L2_hands_wrapping_cup_clean_v2_alpha.png
     provenance: REAL
     bbox_pct:
     - 20.0
@@ -221,6 +223,18 @@ panels:
   - layer_class: L0
     asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L0/L0_2b9283d4c387.png
     provenance: REAL
+  - layer_class: L2
+    asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L2/L2_full_figure_kitchen_standing_v1_alpha.png
+    provenance: REAL
+    anchor_slot: seat_at_table
+    grounding:
+      contact_shadow: true
+      occluder: true
+    bbox_pct:
+    - 0.0
+    - 0.0
+    - 100.0
+    - 100.0
   archetype: sparse_establishing_wide
   shot_type: establishing
   beat_type: spatial
@@ -229,6 +243,16 @@ panels:
   - layer_class: L0
     asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L0/L0_f5f1f916e1bb.png
     provenance: REAL
+    derivation:
+      type: tone_gradient
+  - layer_class: L2
+    asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L2/L2_hands_wrapping_cup_clean_v2_alpha.png
+    provenance: REAL
+    bbox_pct:
+    - 18.0
+    - 25.0
+    - 78.0
+    - 88.0
   archetype: pet_companion_micro
   shot_type: insert_object
   beat_type: micro
@@ -240,7 +264,7 @@ panels:
     derivation:
       type: defocus
   - layer_class: L2
-    asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L2/L2_5e3c902a0e0d_alpha.png
+    asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L2/L2_clean_bust_calm_v2_alpha.png
     provenance: REAL
     bbox_pct:
     - 22.0
@@ -266,7 +290,7 @@ panels:
     derivation:
       type: defocus
   - layer_class: L2
-    asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L2/L2_054c9bbfde93_alpha.png
+    asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L2/L2_clean_bust_calm_v2_alpha.png
     provenance: REAL
     bbox_pct:
     - 25.0
@@ -282,9 +306,9 @@ panels:
     asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L0/L0_f5f1f916e1bb.png
     provenance: REAL
     derivation:
-      type: defocus
+      type: tone_gradient
   - layer_class: L2
-    asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L2/L2_c533c848b4b1_alpha.png
+    asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L2/L2_hands_wrapping_cup_clean_v2_alpha.png
     provenance: REAL
     bbox_pct:
     - 20.0
@@ -300,9 +324,9 @@ panels:
     asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L0/L0_f5f1f916e1bb.png
     provenance: REAL
     derivation:
-      type: defocus
+      type: tone_gradient
   - layer_class: L2
-    asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L2/L2_7d4bf0007a62_alpha.png
+    asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L2/L2_hands_wrapping_cup_clean_v2_alpha.png
     provenance: REAL
     bbox_pct:
     - 28.0
@@ -320,7 +344,7 @@ panels:
     derivation:
       type: defocus
   - layer_class: L2
-    asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L2/L2_2fb7ddd5e1a3_alpha.png
+    asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L2/L2_clean_bust_calm_v2_alpha.png
     provenance: REAL
     bbox_pct:
     - 25.0
@@ -338,7 +362,7 @@ panels:
     derivation:
       type: defocus
   - layer_class: L2
-    asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L2/L2_30104779547f_alpha.png
+    asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L2/L2_clean_bust_calm_v2_alpha.png
     provenance: REAL
     bbox_pct:
     - 25.0
@@ -364,7 +388,7 @@ panels:
     derivation:
       type: defocus
   - layer_class: L2
-    asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L2/L2_aaaf0385e52e_alpha.png
+    asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L2/L2_clean_bust_calm_v2_alpha.png
     provenance: REAL
     bbox_pct:
     - 22.0
@@ -387,6 +411,16 @@ panels:
   - layer_class: L0
     asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L0/L0_f5f1f916e1bb.png
     provenance: REAL
+    derivation:
+      type: tone_gradient
+  - layer_class: L2
+    asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L2/L2_hands_wrapping_cup_clean_v2_alpha.png
+    provenance: REAL
+    bbox_pct:
+    - 25.0
+    - 25.0
+    - 75.0
+    - 75.0
   archetype: seasonal_anchor_object
   shot_type: insert_object
   beat_type: micro
@@ -398,7 +432,7 @@ panels:
     derivation:
       type: defocus
   - layer_class: L2
-    asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L2/L2_71af54f6efd6_alpha.png
+    asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L2/L2_clean_bust_calm_v2_alpha.png
     provenance: REAL
     bbox_pct:
     - 22.0
@@ -413,6 +447,16 @@ panels:
   - layer_class: L0
     asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L0/L0_f5f1f916e1bb.png
     provenance: REAL
+    derivation:
+      type: tone_gradient
+  - layer_class: L2
+    asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L2/L2_hands_wrapping_cup_clean_v2_alpha.png
+    provenance: REAL
+    bbox_pct:
+    - 35.0
+    - 38.0
+    - 70.0
+    - 85.0
   archetype: kettle_steam_macro
   shot_type: insert_object
   beat_type: spatial
@@ -424,7 +468,7 @@ panels:
     derivation:
       type: defocus
   - layer_class: L2
-    asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L2/L2_6003bcacf3a5_alpha.png
+    asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L2/L2_clean_bust_calm_v2_alpha.png
     provenance: REAL
     bbox_pct:
     - 22.0
@@ -448,9 +492,9 @@ panels:
     asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L0/L0_f5f1f916e1bb.png
     provenance: REAL
     derivation:
-      type: defocus
+      type: tone_gradient
   - layer_class: L2
-    asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L2/L2_ebd33174e0bd_alpha.png
+    asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L2/L2_hands_wrapping_cup_clean_v2_alpha.png
     provenance: REAL
     bbox_pct:
     - 28.0
@@ -468,7 +512,7 @@ panels:
     derivation:
       type: defocus
   - layer_class: L2
-    asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L2/L2_3210c57437fb_alpha.png
+    asset: artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/v4_render_cache/ep_001/L2/L2_clean_bust_calm_v2_alpha.png
     provenance: REAL
     bbox_pct:
     - 22.0
