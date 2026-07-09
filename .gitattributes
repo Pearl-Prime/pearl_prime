@@ -104,3 +104,8 @@ brand-wizard-app/public/deliveries/** -filter -diff -merge -text
 
 # Dashboard cover thumbs: small JPEGs for CF Pages (full covers stay gitignored).
 brand-wizard-app/public/assets/cover_thumbs/** -filter -diff -merge -text
+
+# LFS→R2 offload V1 pilot — regenerable composed_v4_qwen render tree (forward-only).
+# Authority: docs/specs/LFS_TO_R2_OFFLOAD_V1_SPEC.md
+# Manifest: artifacts/manifests/lfs_offload/stillness_press_alarm_composed_v4_ep_001.tsv
+artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/composed_v4_qwen/** -filter -diff -merge -text
