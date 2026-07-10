@@ -260,6 +260,7 @@ def main() -> int:
                         sys.executable, str(pipeline_script),
                         "--topic", "self_worth", "--persona", "nyc_executives",
                         "--arc", str(arc_path),
+                        "--pipeline-mode", "registry",
                         "--out", str(out_path),
                         "--no-update-freebie-index",
                         "--skip-quality-gates",

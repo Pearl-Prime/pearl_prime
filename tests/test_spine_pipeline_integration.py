@@ -63,12 +63,12 @@ def test_run_pipeline_help_lists_pipeline_mode() -> None:
     assert "spine" in r.stdout
 
 
-def test_registry_mode_default() -> None:
-    """Default pipeline mode is registry (backward compatible)."""
+def test_spine_mode_default() -> None:
+    """Default pipeline mode is spine (canonical Pearl Prime path)."""
     ap = argparse.ArgumentParser()
-    ap.add_argument("--pipeline-mode", choices=["registry", "spine"], default="registry")
+    ap.add_argument("--pipeline-mode", choices=["registry", "spine"], default="spine")
     ns = ap.parse_args([])
-    assert ns.pipeline_mode == "registry"
+    assert ns.pipeline_mode == "spine"
 
 
 @pytest.mark.skipif(not ANXIETY_ARC.exists(), reason="fixture arc missing")
@@ -107,7 +107,7 @@ def test_spine_mode_budget_word_count_matches_book(tmp_path: Path) -> None:
 
 @pytest.mark.skipif(not ANXIETY_ARC.exists(), reason="fixture arc missing")
 def test_registry_mode_still_runs_for_anxiety(tmp_path: Path) -> None:
-    """Default registry path still renders when topic has a section registry."""
+    """Legacy registry path still renders when explicitly requested (draft QA only)."""
     out_dir = tmp_path / "reg_out"
     plan_path = tmp_path / "reg_plan.json"
     cmd = [
@@ -119,6 +119,8 @@ def test_registry_mode_still_runs_for_anxiety(tmp_path: Path) -> None:
         "gen_z_professionals",
         "--arc",
         str(ANXIETY_ARC),
+        "--pipeline-mode",
+        "registry",
         "--render-book",
         "--render-dir",
         str(out_dir),
@@ -262,6 +264,38 @@ def test_block_on_fail_helper_routes_per_profile() -> None:
         for gate in ("chapter_flow", "book_quality_gate", "scene_anti_genericity",
                      "ei_v2", "editorial"):
             assert _block_on_fail(profile, gate) is False, f"{profile}/{gate}"
+
+
+@pytest.mark.skipif(not ANXIETY_ARC.exists(), reason="fixture arc missing")
+def test_registry_blocked_under_production_profile(tmp_path: Path) -> None:
+    """Legacy registry mode must not run under production quality profile."""
+    out_dir = tmp_path / "reg_prod_block"
+    plan_path = tmp_path / "reg_prod_plan.json"
+    cmd = [
+        sys.executable,
+        str(RUN_PIPELINE),
+        "--topic",
+        "anxiety",
+        "--persona",
+        "gen_z_professionals",
+        "--arc",
+        str(ANXIETY_ARC),
+        "--pipeline-mode",
+        "registry",
+        "--quality-profile",
+        "production",
+        "--render-book",
+        "--render-dir",
+        str(out_dir),
+        "--out",
+        str(plan_path),
+        "--no-job-check",
+        "--no-generate-freebies",
+    ]
+    r = subprocess.run(cmd, cwd=str(REPO_ROOT), capture_output=True, text=True, timeout=60)
+    assert r.returncode != 0
+    combined = r.stderr + r.stdout
+    assert "registry mode cannot render production books" in combined or "registry is legacy and blocked" in combined
 
 
 @pytest.mark.skip(reason="PR #612: additive stacking surfaces legitimate content-cohesion "

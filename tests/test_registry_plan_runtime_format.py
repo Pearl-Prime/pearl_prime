@@ -33,6 +33,8 @@ def test_registry_plan_json_includes_runtime_format_id() -> None:
             "gen_z_professionals",
             "--arc",
             str(arc),
+            "--pipeline-mode",
+            "registry",
             "--out",
             str(out),
             "--no-generate-freebies",
