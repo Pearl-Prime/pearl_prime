@@ -2,187 +2,79 @@
 # Two-phase pipeline: generate (Qwen) → translate (Qwen + judge loop).
 #
 # Fills sparse band×depth combinations so late-arc chapters get deep atoms.
+#
+# DISABLED 2026-07-10 (follow-up to PR #5498, artifacts/qa/CI_WORKFLOW_BANNED_KEY_FIX_2026-07-10.md):
+# both phases of this workflow injected DASHSCOPE_API_KEY/BASE_URL/MODEL from repo
+# secrets into scripts/generate_band_depth_atoms.py and
+# scripts/localization/run_translation_loop.py, running on GitHub-hosted
+# ubuntu-latest -- which cannot reach Pearl Star's Tailscale-only Ollama
+# endpoint, the compliant Tier-2 path. Whether this workflow has ever made a
+# real (banned) DashScope-cloud call depends on what the QWEN_BASE_URL secret
+# is actually configured to, which is not knowable from the repo alone; either
+# way, an ubuntu-latest runner injecting these keys cannot be verified
+# compliant. See artifacts/qa/CI_DASHSCOPE_WORKFLOW_AUDIT_2026-07-10.md for the
+# full 8-workflow audit this fix is part of.
+#
+# The underlying scripts are already Ollama-capable (generate_band_depth_atoms.py
+# via the shared scripts/localization/llm_client.py; run_translation_loop.py as
+# of PR #5498) -- what's missing is a runner that can reach Pearl Star. Until a
+# self-hosted runner registered on that Tailscale network exists (an operator
+# infra decision, not made here), use the interactive path instead: run
+# `scripts/generate_band_depth_atoms.py` / `scripts/localization/run_translation_loop.py`
+# locally/on Pearl Star with OLLAMA_HOST set, as proven in
+# artifacts/qa/JA_JP_TRANSLATION_CLOSEOUT_2026-07-10.md.
 
 name: Generate + translate STORY atoms
-
-concurrency:
-  group: generate-translate-${{ github.event.inputs.scope }}
-  cancel-in-progress: false
 
 on:
   workflow_dispatch:
     inputs:
       scope:
-        description: 'Scope: "all", or a specific persona (e.g. "gen_z_professionals")'
+        description: 'DISABLED — see top-of-file comment. Kept for shape only.'
         required: true
         type: string
         default: 'all'
       target_bands:
-        description: 'Bands to fill (comma-separated, e.g. "4,5")'
+        description: 'DISABLED — see top-of-file comment. Kept for shape only.'
         required: false
         type: string
         default: '4,5'
       target_depths:
-        description: 'Depths to fill (comma-separated, e.g. "2,3,4")'
+        description: 'DISABLED — see top-of-file comment. Kept for shape only.'
         required: false
         type: string
         default: '2,3,4'
       atoms_per_combo:
-        description: 'Atoms per (band, depth) combo'
+        description: 'DISABLED — see top-of-file comment. Kept for shape only.'
         required: false
         type: number
         default: 2
       translate:
-        description: 'Run CJK6 translation after generation'
+        description: 'DISABLED — see top-of-file comment. Kept for shape only.'
         required: false
         type: boolean
         default: true
       dry_run:
-        description: 'Dry run (no API calls, no writes)'
+        description: 'DISABLED — see top-of-file comment. Kept for shape only.'
         required: false
         type: boolean
         default: false
       limit:
-        description: 'Limit to first N engine files (0 = no limit)'
+        description: 'DISABLED — see top-of-file comment. Kept for shape only.'
         required: false
         type: number
         default: 0
 
 permissions:
-  contents: write
-  pull-requests: write
+  contents: read
 
 jobs:
-  generate:
+  blocked:
     runs-on: ubuntu-latest
-    timeout-minutes: 480
-    env:
-      DASHSCOPE_API_KEY: ${{ secrets.QWEN_API_KEY }}
-      DASHSCOPE_BASE_URL: ${{ secrets.QWEN_BASE_URL }}
-      DASHSCOPE_MODEL: ${{ secrets.QWEN_MODEL }}
     steps:
-      - uses: actions/checkout@v4
-        with:
-          ref: main
-          fetch-depth: 1
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-
-      - name: Install dependencies
-        run: pip install --quiet openai pyyaml
-
-      # Phase 1: Generate atoms
-      - name: Generate band×depth atoms
+      - name: Explain why this workflow is disabled
         run: |
-          SCOPE="${{ github.event.inputs.scope }}"
-          BANDS="${{ github.event.inputs.target_bands }}"
-          DEPTHS="${{ github.event.inputs.target_depths }}"
-          APC="${{ github.event.inputs.atoms_per_combo }}"
-          DRY="${{ github.event.inputs.dry_run }}"
-          LIMIT="${{ github.event.inputs.limit }}"
-
-          CMD="python3 scripts/generate_band_depth_atoms.py"
-          CMD="$CMD --target-bands $BANDS --target-depths $DEPTHS --atoms-per-combo $APC"
-          CMD="$CMD --max-parallel 3"
-
-          if [ "$SCOPE" = "all" ]; then
-            CMD="$CMD --all"
-          else
-            CMD="$CMD --persona $SCOPE"
-          fi
-
-          if [ "$DRY" = "true" ]; then
-            CMD="$CMD --dry-run"
-          fi
-
-          if [ "$LIMIT" != "0" ] && [ -n "$LIMIT" ]; then
-            CMD="$CMD --limit $LIMIT"
-          fi
-
-          echo "Running: $CMD"
-          PYTHONPATH=. $CMD
-
-      # Save generated atoms as artifact
-      - name: Save generated atoms
-        if: ${{ github.event.inputs.dry_run != 'true' }}
-        uses: actions/upload-artifact@v4
-        with:
-          name: generated-atoms-${{ github.event.inputs.scope }}-${{ github.run_id }}
-          path: atoms/
-          if-no-files-found: warn
-          retention-days: 30
-
-      # Phase 2: Translate (optional)
-      - name: Translate to CJK6
-        if: ${{ github.event.inputs.translate == 'true' && github.event.inputs.dry_run != 'true' }}
-        run: |
-          SCOPE="${{ github.event.inputs.scope }}"
-          CMD="python3 scripts/localization/run_translation_loop.py"
-          CMD="$CMD --all-locales --slot STORY --resume --max-parallel 5"
-
-          if [ "$SCOPE" != "all" ]; then
-            CMD="$CMD --persona $SCOPE"
-          fi
-
-          echo "Running: $CMD"
-          PYTHONPATH=. $CMD || true  # Don't fail workflow on translation errors
-
-      - name: Report coverage
-        if: ${{ github.event.inputs.dry_run != 'true' }}
-        run: PYTHONPATH=. python3 scripts/ci/report_translation_coverage.py || true
-
-      # Count changes
-      - name: Count changes
-        if: ${{ github.event.inputs.dry_run != 'true' }}
-        id: count
-        run: |
-          CHANGED=$(git diff --name-only | wc -l | tr -d ' ')
-          echo "changed_files=$CHANGED" >> "$GITHUB_OUTPUT"
-          echo "Changed files: $CHANGED"
-
-      # Create PR
-      - name: Create PR
-        if: ${{ github.event.inputs.dry_run != 'true' && steps.count.outputs.changed_files > 0 }}
-        run: |
-          SCOPE="${{ github.event.inputs.scope }}"
-          BANDS="${{ github.event.inputs.target_bands }}"
-          DEPTHS="${{ github.event.inputs.target_depths }}"
-
-          git config user.name "Phoenix Omega Bot"
-          git config user.email "noreply@phoenix-omega.dev"
-
-          BRANCH="agent/gen-translate-atoms-${SCOPE}-$(date +%Y%m%d-%H%M%S)"
-          git checkout -b "$BRANCH"
-          git add atoms/
-          git commit -m "feat(atoms): generate band×depth gap atoms + CJK6 translation
-
-          Generated STORY atoms at sparse band×depth combinations (bands ${BANDS}, depths ${DEPTHS}).
-          Scope: ${SCOPE}
-          Translated to CJK6 locales via Qwen judge loop.
-
-          Co-Authored-By: Qwen (Dashscope) <noreply@alibaba.com>"
-
-          git push -u origin "$BRANCH"
-
-          gh pr create \
-            --title "feat(atoms): fill band×depth gaps + CJK6 (${SCOPE})" \
-            --body "$(cat <<'EOF'
-          ## Summary
-          - Generated STORY atoms at sparse band×depth combos (bands: ${BANDS}, depths: ${DEPTHS})
-          - Translated new atoms to CJK6 (ja-JP, ko-KR, zh-CN, zh-TW, zh-HK, zh-SG)
-          - Fills gap that causes late-arc chapters to use shallow (depth=1) atoms
-
-          ## Test plan
-          - [ ] Run systems test: \`python3 scripts/systems_test/run_systems_test.py --all --strict\`
-          - [ ] Run 20-book pipeline: \`python3 scripts/ci/run_1000_book_simulation.py --limit 20\`
-          - [ ] Check translation coverage: \`python3 scripts/ci/report_translation_coverage.py\`
-
-          Generated with Phoenix Omega atom pipeline.
-          EOF
-          )" \
-            --head "$BRANCH"
-        env:
-          GH_TOKEN: ${{ github.token }}
+          echo "::error::This workflow is disabled — it injected DASHSCOPE_API_KEY/BASE_URL/MODEL from repo secrets while running on GitHub-hosted ubuntu-latest, which cannot reach Pearl Star's Tailscale-only Ollama endpoint (the compliant Tier-2 path under CLAUDE.md's LLM Tier Policy)."
+          echo "::error::Use the interactive path instead: python3 scripts/generate_band_depth_atoms.py / python3 scripts/localization/run_translation_loop.py with OLLAMA_HOST set, run from an operator/Claude Code session with Tailscale access to Pearl Star."
+          echo "::error::See artifacts/qa/CI_DASHSCOPE_WORKFLOW_AUDIT_2026-07-10.md for full context."
+          exit 1
