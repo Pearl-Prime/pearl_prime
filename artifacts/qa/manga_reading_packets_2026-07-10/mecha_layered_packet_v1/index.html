@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Mecha Layered Proof — ep001_003 Hero</title>
+<style>
+  :root { --bg:#0b0e14; --card:#141a24; --accent:#5eb3ff; --warn:#e8a838; --ok:#6ecf8a; --text:#e8edf5; --muted:#8a9bb0; }
+  * { box-sizing: border-box; }
+  body { font-family: system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 1.25rem; line-height: 1.5; }
+  h1, h2 { margin: 0 0 .75rem; }
+  h1 { text-align: center; font-size: 1.5rem; }
+  .banner { background: #1a2436; border: 2px solid var(--accent); border-radius: 10px; padding: 1rem 1.25rem; margin-bottom: 1.5rem; max-width: 960px; margin-left: auto; margin-right: auto; }
+  .banner strong { color: var(--ok); }
+  .banner .layer { color: var(--warn); font-weight: 600; }
+  .grid { display: grid; gap: 1.5rem; max-width: 960px; margin: 0 auto; }
+  @media (min-width: 900px) { .grid { grid-template-columns: 1fr 1fr; } }
+  .card { background: var(--card); border: 1px solid #2a3548; border-radius: 10px; overflow: hidden; }
+  .card header { padding: .75rem 1rem; font-weight: 600; border-bottom: 1px solid #2a3548; background: #101722; }
+  .viewer-wrap { position: relative; background: #080a0f; min-height: 320px; }
+  .viewer-wrap img { width: 100%; display: block; }
+  .layer-toggle { display: flex; flex-wrap: wrap; gap: .5rem; padding: .75rem 1rem; border-top: 1px solid #2a3548; }
+  .layer-toggle label { display: flex; align-items: center; gap: .4rem; padding: .35rem .65rem; background: #1c2535; border-radius: 6px; cursor: pointer; font-size: .9rem; }
+  .layer-toggle input { accent-color: var(--accent); }
+  .meta { padding: .75rem 1rem; font-size: .88rem; color: var(--muted); }
+  .meta code { color: var(--accent); font-size: .82rem; }
+  .full { grid-column: 1 / -1; }
+  .stack-img { padding: .5rem; background: #080a0f; }
+  .stack-img img { width: 100%; border-radius: 6px; }
+  .strip { max-height: 220px; object-fit: contain; width: 100%; background: #080a0f; }
+  footer { text-align: center; color: var(--muted); font-size: .82rem; margin-top: 2rem; padding-bottom: 2rem; }
+</style>
+</head>
+<body>
+<div class="banner">
+  <strong>SYSTEM WORKING</strong> — native mecha bank REAL layers assemble into readable panels.
+  <span class="layer">Not PROVEN-AT-BAR.</span>
+  Hero: <code>ep001_003</code> with exact L0+L2 mapping from <code>_provenance.json</code>.
+</div>
+
+<h1>Mecha Layered Proof Viewer</h1>
+<p style="text-align:center;color:var(--muted);max-width:720px;margin:0 auto 1.5rem;">
+  Series: <code>warrior_calm_cultivation__master_wu__en_US__burnout__the_chassis_is_listening</code>
+</p>
+
+<div class="grid">
+  <div class="card full">
+    <header>Interactive layer stack — ep001_003</header>
+    <div class="viewer-wrap" id="composite">
+      <img id="layer-l0" src="layers/L0_cockpit_interior.png" alt="L0 cockpit_interior" style="position:absolute;inset:0;opacity:1"/>
+      <img id="layer-l2" src="layers/L2_seated_cockpit.png" alt="L2 seated_cockpit" style="position:absolute;inset:0;opacity:1"/>
+      <img id="layer-final" src="hero_final_panel.png" alt="assembled ep001_003" style="position:relative;opacity:0"/>
+    </div>
+    <div class="layer-toggle">
+      <label><input type="checkbox" id="toggle-l0" checked/> L0 cockpit_interior (z=0)</label>
+      <label><input type="checkbox" id="toggle-l2" checked/> L2 seated_cockpit (z=20)</label>
+      <label><input type="checkbox" id="toggle-final"/> Show assembled final</label>
+    </div>
+    <div class="meta">
+      Toggle layers to inspect source plates. Enable <em>Show assembled final</em> to compare against
+      <code>assembled/ep_001_human_readability_proof/ep001_003.png</code>.
+      Mapping from <code>_provenance.json</code> records + <code>ep_001_from_continuity.yaml</code>.
+    </div>
+  </div>
+
+  <div class="card">
+    <header>Hero final panel</header>
+    <img src="hero_final_panel.png" alt="hero final ep001_003"/>
+    <div class="meta"><strong>ep001_003</strong> · dialogue_bust · character_quiet_face<br/>1,483,363 bytes · REAL assembly</div>
+  </div>
+
+  <div class="card">
+    <header>Layer stack proof sheet</header>
+    <div class="stack-img"><img src="hero_layer_stack.png" alt="L0 + L2 = final"/></div>
+    <div class="meta">Side-by-side: source L0, source L2, assembled final.</div>
+  </div>
+
+  <div class="card full">
+    <header>Continuity strip (8-panel proof export)</header>
+    <img class="strip" src="continuity_strip.jpg" alt="ep_001 continuity strip"/>
+    <div class="meta"><code>ep_001_from_continuity_strip.jpg</code> · 2,931,382 bytes · 8 exemplar panels</div>
+  </div>
+
+  <div class="card full">
+    <header>Contact sheet — all 8 proof panels</header>
+    <img src="contact_sheet.png" alt="contact sheet"/>
+  </div>
+
+  <div class="card full">
+    <header>Proof grid</header>
+    <img src="proof_grid.png" alt="proof grid"/>
+  </div>
+</div>
+
+<footer>
+  Acceptance: system working · Packet: mecha_layered_packet_v1 · 2026-07-10 · Pearl_Dev
+</footer>
+
+<script>
+(function () {
+  const l0 = document.getElementById('layer-l0');
+  const l2 = document.getElementById('layer-l2');
+  const fin = document.getElementById('layer-final');
+  const t0 = document.getElementById('toggle-l0');
+  const t2 = document.getElementById('toggle-l2');
+  const tf = document.getElementById('toggle-final');
+
+  function sync() {
+    const showFinal = tf.checked;
+    l0.style.opacity = showFinal ? '0' : (t0.checked ? '1' : '0');
+    l2.style.opacity = showFinal ? '0' : (t2.checked ? '1' : '0');
+    fin.style.opacity = showFinal ? '1' : '0';
+    document.getElementById('composite').style.minHeight = showFinal ? 'auto' : '480px';
+  }
+  [t0, t2, tf].forEach(el => el.addEventListener('change', sync));
+  sync();
+})();
+</script>
+</body>
+</html>
