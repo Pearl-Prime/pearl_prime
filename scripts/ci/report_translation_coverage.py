@@ -43,14 +43,10 @@ def _bestseller_english_sources(atoms_root: Path) -> list[Path]:
     return sorted(out)
 
 
-def _bestseller_translated_count(
-    sources: list[Path], atoms_root: Path, locale: str
-) -> int:
+def _bestseller_translated_count(sources: list[Path], locale: str) -> int:
     n = 0
     for src in sources:
-        rel = src.relative_to(atoms_root)
-        persona, topic, slot = rel.parts[0], rel.parts[1], rel.parts[2]
-        tpath = atoms_root / persona / topic / slot / "locales" / locale / "CANONICAL.txt"
+        tpath = src.parent / "locales" / locale / "CANONICAL.txt"
         if tpath.is_file():
             n += 1
     return n
@@ -86,7 +82,7 @@ def main() -> int:
         "by_cjk_locale": {},
     }
     for loc in CJK6_LOCALES:
-        present = _bestseller_translated_count(bestseller_sources, atoms_en, loc)
+        present = _bestseller_translated_count(bestseller_sources, loc)
         expected = len(bestseller_sources)
         report["bestseller"]["by_cjk_locale"][loc] = {
             "translated_files": present,
