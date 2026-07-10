@@ -11,12 +11,18 @@ on:
       - 'atoms/**/locales/**'
       - 'scripts/localization/**'
       - 'SOURCE_OF_TRUTH/teacher_banks/**/approved_atoms_localized/**'
+      - 'scripts/ci/check_native_check.py'
+      - 'scripts/ci/report_translation_coverage.py'
+      - 'tests/test_native_check_contract.py'
   push:
     branches: [main]
     paths:
       - 'config/localization/**'
       - 'atoms/**/locales/**'
       - 'SOURCE_OF_TRUTH/teacher_banks/**/approved_atoms_localized/**'
+      - 'scripts/ci/check_native_check.py'
+      - 'scripts/ci/report_translation_coverage.py'
+      - 'tests/test_native_check_contract.py'
 
 jobs:
   locale-gate:
@@ -39,6 +45,14 @@ jobs:
       - name: Translation coverage report
         run: |
           PYTHONPATH=. python3 scripts/ci/report_translation_coverage.py || true
+
+      - name: Native check contract (bootstrap transition)
+        run: |
+          # Bootstrap: missing native_check warns (corpus unannotated).
+          # Ship gate is --production-only without --bootstrap-mode (companion PRs).
+          mkdir -p artifacts/qa
+          PYTHONPATH=. python3 scripts/ci/check_native_check.py --bootstrap-mode \
+            --json-out artifacts/qa/native_check_coverage.json
 
       - name: Teacher bank locale parity
         run: |
@@ -67,5 +81,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: locale-parity-report
-          path: artifacts/localization/teacher_parity.json
+          path: |
+            artifacts/localization/teacher_parity.json
+            artifacts/qa/native_check_coverage.json
           if-no-files-found: ignore

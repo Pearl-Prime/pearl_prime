@@ -5,8 +5,32 @@ Quality contracts for locale translation pipelines: glossary, release thresholds
 - **glossary.yaml** — Canonical terms and preferred translations per locale.
 - **release_thresholds.yaml** — Minimum quality scores and coverage to allow release.
 - **golden_translation_regression.yaml** — Golden segments used for regression tests.
+- **../native_check_contract.yaml** — Mandatory `native_check: y|n` on production-path translated atoms.
 
 See docs/DOCS_INDEX.md § Translation and locale gate workflow.
+
+## native_check contract (2026-07-10)
+
+**Authority:** `../native_check_contract.yaml`
+
+Every non-baseline translated atom on a production path must declare `native_check: y` or
+`native_check: n`. Production shipping requires `native_check: y`.
+
+| Surface | How native_check is recorded |
+|---|---|
+| Teacher banks (`SOURCE_OF_TRUTH/teacher_banks/*/approved_atoms_localized/{locale}/**/*.yaml`) | Inline `native_check: y\|n` field on each atom YAML |
+| Atoms (`atoms/**/locales/{locale}/`) | Sidecar `native_check.yaml` per locale directory with `variants: {v01: y, ...}` |
+
+`native_check: y` certifies: semantic fidelity, idiomatic fit, cultural fit,
+persona/age/register fit, emotional-temperature fit, script/punctuation/typography norms,
+and no obvious calque / machine-literal awkwardness.
+
+**CI gate:** `scripts/ci/check_native_check.py`
+- Locale gate / readiness: `--bootstrap-mode` (missing → warn) while corpus is unannotated.
+- Ship / companion translation PRs: `--production-only` (missing or `n` → FAIL).
+- Coverage JSON: `--json-out artifacts/qa/native_check_coverage.json` (by locale + atom class).
+
+Also surfaced in `scripts/ci/report_translation_coverage.py` → `native_check` block.
 
 ## When enabling locales (added 2026-03-06)
 

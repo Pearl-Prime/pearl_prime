@@ -671,6 +671,42 @@ def main() -> int:
     else:
         gate("31. Flagship exercise pick diversity", True, "gate script not present; skip", skip=True)
 
+    # --- 33. Translation native-check contract ---
+    # Bootstrap on readiness until companion lanes annotate corpus with native_check:y.
+    # Ship acceptance for translated atoms uses --production-only (no bootstrap).
+    native_check_gate = REPO_ROOT / "scripts" / "ci" / "check_native_check.py"
+    if native_check_gate.exists():
+        try:
+            env = os.environ.copy()
+            env["PYTHONPATH"] = str(REPO_ROOT)
+            r = subprocess.run(
+                [sys.executable, str(native_check_gate), "--bootstrap-mode"],
+                cwd=str(REPO_ROOT),
+                env=env,
+                capture_output=True,
+                text=True,
+                timeout=600,
+            )
+            nc_ok = r.returncode == 0
+            out = (r.stderr or r.stdout or "").strip()
+            nc_detail = out.splitlines()[-1] if out else "check_native_check"
+        except Exception as e:
+            nc_ok = False
+            nc_detail = str(e)
+        if not gate(
+            "33. Translation native-check contract (bootstrap; ship requires y)",
+            nc_ok,
+            nc_detail,
+        ):
+            failed += 1
+    else:
+        gate(
+            "33. Translation native-check contract",
+            True,
+            "gate script not present; skip",
+            skip=True,
+        )
+
     # --- Report ---
     print("V4.5 Production Readiness — 31 conditions\n")
     for name, status, detail in RESULTS:

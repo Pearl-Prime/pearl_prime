@@ -18,6 +18,14 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 
+
+def _native_check_summary(repo_root: Path) -> dict:
+    from scripts.ci.check_native_check import coverage_payload, scan_native_check
+
+    audit = scan_native_check(repo_root, bootstrap_mode=True, production_only=False)
+    return coverage_payload(audit, bootstrap_mode=True, production_only=False)
+
+
 CJK6_LOCALES = ("ja-JP", "ko-KR", "zh-CN", "zh-HK", "zh-SG", "zh-TW")
 BESTSELLER_SLOTS = ("PIVOT", "TAKEAWAY", "THREAD", "PERMISSION", "STORY")
 ENGINE_DIRS = ("comparison", "false_alarm", "grief", "overwhelm", "shame", "spiral", "watcher")
@@ -73,6 +81,11 @@ def main() -> int:
     locales = (args.locales or "en-US").split(",")
     report: dict = {"locales": locales, "by_locale": {}}
 
+    try:
+        report["native_check"] = _native_check_summary(REPO_ROOT)
+    except Exception as exc:
+        report["native_check"] = {"error": str(exc)}
+
     atoms_en = REPO_ROOT / "atoms"
     bestseller_sources = _bestseller_english_sources(atoms_en)
     report["bestseller"] = {
@@ -114,6 +127,14 @@ def main() -> int:
 
     for loc, data in report["by_locale"].items():
         print(f"  {loc}: {data['persona_topic_count']} CANONICAL.txt")
+    nc = report.get("native_check") or {}
+    if nc and "error" not in nc:
+        print(
+            f"\nNative check: y={nc.get('native_y', 0)} n={nc.get('native_n', 0)} "
+            f"missing={nc.get('missing', 0)} "
+            f"annotated={nc.get('annotated_ratio', 0):.1%} "
+            f"production_y={nc.get('native_y_ratio', 0):.1%}"
+        )
     bs = report["bestseller"]
     print(
         f"\nAll atoms ({len(ALL_ATOM_TYPES)} types, CJK6): {bs['english_source_files']} English source files"
