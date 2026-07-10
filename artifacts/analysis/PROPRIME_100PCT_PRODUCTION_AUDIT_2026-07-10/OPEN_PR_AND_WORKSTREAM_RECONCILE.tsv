@@ -1,0 +1,26 @@
+id	type	surface	status	relevance_to_books_first	already_solves_gap	must_merge_before_launch	owner	recommended_disposition
+5489	pr	composite_regular/atoms	OPEN high	critical — thin-persona STORY/canonical gaps	partial — slot-keyed not engine-keyed	yes	Pearl_Dev	merge-if-green
+5490	pr	composite_regular pipeline	OPEN high	critical — spine default drift	yes — locks spine path	yes	Pearl_Dev	merge-if-green
+5492	pr	composite_regular quality	OPEN high	high — anxiety enrichment proof	partial — single cell proof	no (proof lane)	Pearl_Prime	merge-if-green
+5494	pr	composite_regular content	OPEN medium	medium — new arc slice	no	no	Pearl_Prime	merge-if-green
+5237	pr	atoms quality	OPEN medium	medium — cohesion/stub lint	partial	no	Pearl_Editor	merge-if-green
+5495	pr	translation non-CJK	OPEN high	high — first pt-BR es-US atoms	pilot only	no	Pearl_Localization	merge-if-green
+5496	pr	translation ja-JP	OPEN high	high — Ollama path + 5 atoms	pilot only	no	Pearl_Localization	merge-if-green
+5497	pr	translation CI	OPEN high	medium — coverage counting fix	yes — infra	no	Pearl_Dev	merge-if-green
+5498	pr	translation CI	OPEN high	medium — banned-key workflow fix	yes — policy	no	Pearl_Dev	merge-if-green
+5499	pr	translation zh-TW	OPEN high	high — drift reconcile + 6 atoms	pilot only	no	Pearl_Localization	merge-if-green
+5500	pr	translation zh-CN	OPEN high	high — stage-1 gen_z gaps	pilot only	no	Pearl_Localization	merge-if-green
+5501	pr	translation ja-JP teacher-bank	OPEN high	medium — 51 teacher atoms	pilot only	no	Pearl_Localization	merge-if-green
+5503	pr	atoms content	OPEN medium	medium — overthinking stubs	no	no	Pearl_Writer	merge-if-green
+5502	pr	CI policy	OPEN low	low — dashscope workflow audit	no	no	Pearl_DevOps	merge-when-green
+5206	pr	audit pearl_prime	OPEN medium	evidence — journey gap diagnosis	partial — Path B scope	no	Pearl_PM	consume-do-not-merge-for-audit
+5295	pr	audit system redundancy	OPEN low	evidence only — not books roadmap	no	no	owner	do-not-merge
+4861	pr	audit governance	OPEN low	evidence — best-path canaries	no	no	Pearl_Architect	consume-do-not-merge
+3166	pr	CI budget	OPEN draft low	none — operator gated	no	no	operator	do-not-merge
+5073-5503-pr-catalog-skeletons	pr	catalog listings	OPEN ~150 low/negative — listings not EPUBs	no	no	catalog-fanout	merge-on-schedule-not-launch
+proj_state_convergence_20260328	workstream	repo coordination	active	high — parent program	partial	Pearl_PM	continue
+ws_manga_first_ship_20260425	workstream	manga	active low for books	low — mecha proof landed	no	Pearl_Dev	defer-post-books-wave1
+MUSIC-MODE-BRAND-INTEGRATION-V1	workstream	music_mode	cap active	medium — parallel track	partial (infra)	no	Pearl_Editor	phase-A-after-book-wave1
+ws_bestseller_pipeline_default_path_b_20260425	workstream	composite_regular quality	proposed/needed	high — SCENE story_schedule wiring	no	yes	Pearl_Dev	dispatch-post-5206
+ws_auto_plan_ssot_refactor_20260505	workstream	format SSOT	proposed low	low	no	no	Pearl_Dev	later
+ws_lfs_setup_20260410	workstream	devops	active low	low	partial (#5306 pilot)	no	owner-gated	later
