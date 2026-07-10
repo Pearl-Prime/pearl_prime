@@ -731,8 +731,17 @@ def main() -> int:
         print("Specify --locale, --all-locales, or --european-locales", file=sys.stderr)
         return 2
 
-    if not args.dry_run and not (os.environ.get("TOGETHER_API_KEY", "").strip() or os.environ.get("DASHSCOPE_API_KEY", "").strip()):
-        print("TOGETHER_API_KEY or DASHSCOPE_API_KEY required (set env var or use --dry-run)", file=sys.stderr)
+    # Ollama (Pearl Star, free/local -- CLAUDE.md Tier 2) needs no API key, only
+    # OLLAMA_HOST/QWEN_BASE_URL; accept it here so callers with a free local Qwen
+    # endpoint configured aren't forced toward paid cloud keys. Mirrors the same
+    # fix in scripts/translate_atoms_all_locales_cloud.py.
+    from scripts.localization.llm_client import _is_ollama_endpoint
+    if not args.dry_run and not (
+        os.environ.get("TOGETHER_API_KEY", "").strip()
+        or os.environ.get("DASHSCOPE_API_KEY", "").strip()
+        or _is_ollama_endpoint()
+    ):
+        print("TOGETHER_API_KEY, DASHSCOPE_API_KEY, or an Ollama endpoint (OLLAMA_HOST/QWEN_BASE_URL) required (or use --dry-run)", file=sys.stderr)
         return 2
 
     atoms_root = REPO_ROOT / "atoms"

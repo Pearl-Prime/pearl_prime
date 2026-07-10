@@ -64,8 +64,13 @@ banned_patterns:
     # GitHub Actions env injections of banned paid keys (CLAUDE.md LLM Tier Policy).
     # Tier-1 uses the Claude Code subscription CLI (no key); Tier-2 uses local
     # Gemma/Qwen on Pearl Star. Enforced key set = unambiguously paid, zero
-    # legitimate workflow use. DashScope/Qwen (Tier-2) and Together (present in
-    # translate-bestseller-atoms.yml, pending separate review) are intentionally
-    # NOT listed here.
-    regex: '(CLAUDE_API_KEY|ANTHROPIC_API_KEY|OPENAI_API_KEY|GOOGLE_API_KEY|GEMINI_API_KEY|PERPLEXITY_API_KEY|COHERE_API_KEY|MISTRAL_API_KEY|REPLICATE_API_TOKEN)\s*:\s*\$\{\{'
-    reason: "Paid-LLM API key injected into a GitHub Actions workflow env. Banned paid keys must not be wired into .github/workflows/** (Tier-1 = Claude Code subscription CLI, no key; Tier-2 = local Gemma/Qwen). DashScope/Qwen Tier-2 keys are intentionally not listed."
+    # legitimate workflow use. TOGETHER_API_KEY added 2026-07-10 (was the exact
+    # violation in translate-bestseller-atoms.yml this gate was meant to catch;
+    # see artifacts/qa/CI_WORKFLOW_BANNED_KEY_FIX_2026-07-10.md). DASHSCOPE_API_KEY
+    # remains intentionally NOT listed: it is also the env var name used by 8
+    # other workflows for legitimate Tier-2 Qwen access when QWEN_BASE_URL points
+    # at Ollama, so a blanket ban here would need a per-workflow audit of actual
+    # base_url resolution first, not a one-line regex change -- tracked as a
+    # separate follow-up, not resolved by this fix.
+    regex: '(CLAUDE_API_KEY|ANTHROPIC_API_KEY|OPENAI_API_KEY|GOOGLE_API_KEY|GEMINI_API_KEY|PERPLEXITY_API_KEY|COHERE_API_KEY|MISTRAL_API_KEY|REPLICATE_API_TOKEN|TOGETHER_API_KEY)\s*:\s*\$\{\{'
+    reason: "Paid-LLM API key injected into a GitHub Actions workflow env. Banned paid keys must not be wired into .github/workflows/** (Tier-1 = Claude Code subscription CLI, no key; Tier-2 = local Gemma/Qwen). DashScope/Qwen Tier-2 keys are intentionally not listed (see comment above)."
