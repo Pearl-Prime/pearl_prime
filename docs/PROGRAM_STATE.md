@@ -1,6 +1,6 @@
 # Program State — Single Source of Truth
 
-**LAST VERIFIED:** 2026-07-11 @ `origin/main` `4c896efb8ab0038e73906841ab82bb19c47b9eb3` (post-#5525 books-first SSOT refresh; #5490 spine lock + #5501 ja-JP teacher-bank + #5525 workstream closeout already on `main`; tip includes #5526 manga closeout docs)
+**LAST VERIFIED:** 2026-07-11 @ `origin/main` `e11f44b5abf8bd2b62c18182e304d79f2e27fdb3` (post-#5530/#5532 books-first SSOT; #5530 repair on `main`, #5532 reflected thin-persona caveat; this lane completes LAST VERIFIED + queue/NO_BINDING split + ACTIVE_WORKSTREAMS row)
 
 > **RULE:** Verify against `origin/main`, never git date or the working tree (shared-tree branch-churn shows
 > other-branch/stale state). This is the entry point — if another doc disagrees with this, this wins or that doc is stale.
@@ -60,20 +60,22 @@ program history. Both goldens now live + byte-frozen:
   scales with **zero engine work** (loop spine CLI over the F006 arc matrix + `build_epub.py`).
   **1 catalog EPUB assembled** (was 0).
 - ⚠ **Thin-persona caveat (the next lane):** **canonical atom repair MERGED** (#5489, 2026-07-10) — educators/nyc
-  slot-keyed gaps partially closed. **#5530 (2026-07-11) closed one more downstream blocker**: `educators ×
+  slot-keyed gaps partially closed. **#5530 (2026-07-11, `2d9ada1e21`) closed one more downstream blocker**: `educators ×
   imposter_syndrome` full spine render was still hard-failing with `EnrichmentGapError` on `REFLECTION` (ch7) even
   after #5489 — root cause was **not** pool thinness but a parser quirk in `registry_resolver._parse_canonical_txt`
   (single-delimiter atom blocks silently parse to **zero** real atoms; header count is not a reliable depth proxy for
-  this file family — the same silent-drop pattern is likely present in other REFLECTION pools across personas/topics,
-  **not yet audited catalog-wide**, flagged as a residual finding). Fixed for this one cell only (15 new atoms in the
-  verified two-delimiter shape); also removed a stale `false_alarm`/`imposter_syndrome` contradiction in
-  `topic_engine_bindings.yaml` (`forbidden_engines` had it, `allowed_engines` already had it too — `allowed_engines`
-  is the side the gate reads and the side #5489's shipped content already assumed). Full production spine proof:
-  `artifacts/qa/thin_persona_buildability_2026-07-11/`. Remaining blockers before spine-buildable EPUBs at catalog
-  scale: **engine-keyed** STORY pools (`atoms/<p>/<t>/<engine>/CANONICAL.txt`) for the rest of the thin-persona cells;
-  4-cell rebuild (#1922 pattern) must re-run to confirm tuple-viability PASS; `nyc × anxiety/false_alarm` may still
-  need **one band-1 STORY atom**; a catalog-wide REFLECTION-pool parse audit (the #5530 finding) is a new, separate,
-  not-yet-scoped lane. Next = engine-keyed STORY-pool seeding (≥12 banded variants/cell) + Waystream-scale EPUB wave.
+  this file family). #5530 appended 15 two-delimiter REFLECTION atoms (0→15 real usable) + removed a stale
+  `false_alarm` entry from `imposter_syndrome.forbidden_engines` (`false_alarm` remains legal in `allowed_engines`;
+  production `check_tuple_viability` reads allowed only). Proof: educators×imposter×false_alarm F006 full spine
+  render **structurally clear** (Layer 1) — `artifacts/qa/thin_persona_buildability_2026-07-11/SUMMARY.md`. Do **not**
+  re-queue the stale “`false_alarm` not in allowed_engines” premise. Remaining blockers before spine-buildable EPUBs
+  at catalog scale: broader **engine-keyed** STORY pools for remaining thin-persona cells; **4-cell rebuild proof**
+  (#1922 pattern); `nyc × anxiety/false_alarm` may still need **one band-1 STORY atom**; **governance-only
+  `NO_BINDING` cells** (distinct from repaired legal `false_alarm` cells): educators×boundaries×overwhelm,
+  educators×burnout×shame, educators×compassion_fatigue×shame, nyc_executives×burnout×shame; a catalog-wide
+  REFLECTION-pool parse audit (header count ≠ usable-atom count per #5530) is a new, separate, not-yet-scoped lane.
+  Next = remaining engine-keyed STORY seeding + rebuild proof + Waystream-scale EPUB wave (binding call only for true
+  `NO_BINDING` cells).
 - **Wave 2026-06-25 (teacher-bank unblock):** 12 teachers now have `TEACHER_DOCTRINE` atoms (PR #1914) — all 26
   brands unblocked from the `library_34` fallback. 29 `CANONICAL.txt` files backfilled for educators + nyc_executives
   thin slots (PR #1915); 69/69 tests pass.
@@ -153,12 +155,12 @@ program history. Both goldens now live + byte-frozen:
     `catalog-fanout-*` workflows when queue is hot; authority: `artifacts/coordination/GHA_CATALOG_FANOUT_QUEUE_GUARD_CLOSEOUT_2026-07-09.md`.
     Supersedes manual queue-relief waves as the durable fix for catalog starvation of non-catalog PRs.
 
-### Books-first roadmap (operator scan — 2026-07-11 post-#5525)
-- **Authority:** `artifacts/analysis/PROPRIME_100PCT_PRODUCTION_AUDIT_2026-07-10/` (audit snapshot still useful; queue below is live GitHub truth)
+### Books-first roadmap (operator scan — 2026-07-11 post-#5530)
+- **Authority:** `artifacts/analysis/PROPRIME_100PCT_PRODUCTION_AUDIT_2026-07-10/` (audit snapshot still useful; queue below is live GitHub truth) + `artifacts/qa/thin_persona_buildability_2026-07-11/SUMMARY.md`
 - **Verdict:** Pearl Prime books **NOT catalog-scale production-ready** (1 EPUB + 1 flagship PROVEN-AT-BAR ≠ ~1,519 listings)
-- **Landed (do not re-queue):** **#5490** spine-default lock (`2236c03a23`, 2026-07-10); **#5501** ja-JP teacher-bank (`45e511ab96`, 2026-07-10); **#5525** book-path workstream closeout (`1f4c3155d8`, 2026-07-10); **#5530** educators×imposter_syndrome REFLECTION parse-gap + binding contradiction repair (`2d9ada1e21`, 2026-07-11 — one cell only, see thin-persona caveat above; do not re-queue this exact cell, catalog-wide REFLECTION parse audit still open). Adjacency/transition/overlay already on `main`: #5156 / #5162 / #5298 / #5515 / #5516 / #5519.
+- **Landed (do not re-queue):** **#5490** spine-default lock (`2236c03a23`, 2026-07-10); **#5501** ja-JP teacher-bank (`45e511ab96`, 2026-07-10); **#5525** book-path workstream closeout (`1f4c3155d8`, 2026-07-10); **#5527** books-first SSOT refresh (`b58cdba62e`, 2026-07-10); **#5489** thin-persona canonical atom repair; **#5530** educators×imposter_syndrome REFLECTION parse-gap + binding contradiction repair (`2d9ada1e21`, 2026-07-11 — one cell only, see thin-persona caveat above; do not re-queue this exact cell); **#5532** PROGRAM_STATE thin-persona reflection (`e11f44b5ab`, 2026-07-11). Adjacency/transition/overlay already on `main`: #5156 / #5162 / #5298 / #5515 / #5516 / #5519.
 - **Next books-first actions (live order):**
-  1. **engine-keyed STORY pool seeding** for the remaining thin personas (educators/nyc) cells + **4-cell tuple-viability rebuild** (#1922 pattern). The `false_alarm`/`imposter_syndrome` binding-governance question is now resolved (#5530: `allowed_engines` side ratified, contradiction removed) — do not re-raise it. A new, separate, not-yet-scoped follow-on: catalog-wide audit of REFLECTION-pool real-parse depth (header count ≠ usable-atom count per #5530's finding).
+  1. **Remaining thin-persona engine-keyed STORY seeding** (educators/nyc cells still thin beyond the #5489/#5530 repaired surfaces) + **4-cell tuple-viability rebuild proof** (#1922 pattern). The `false_alarm`/`imposter_syndrome` binding-governance question is **resolved** (#5530) — do not re-raise it. Split governance: only true `NO_BINDING` cells need a binding call — do **not** conflate with already-legal/repaired `false_alarm` cells. Separate not-yet-scoped follow-on: catalog-wide REFLECTION-pool real-parse depth audit (header count ≠ usable-atom count per #5530).
   2. **Waystream EPUB wave** expansion from the proven spine CLI lane (#1923 pattern; chord: `--pipeline-mode spine --quality-profile production --exercise-journeys`)
   3. **GHL attach batch** for each newly shipped real EPUB
   4. **#5237** atom-cohesion craft lane — **OPEN but RED** (parse-sweep / Schema / Core / Drift / Release failing as of 2026-07-11); repair-needed follow-on, **not** a green next lane; re-evaluate scope against already-landed adjacency/transition/overlay fixes before fresh craft work
@@ -175,7 +177,7 @@ program history. Both goldens now live + byte-frozen:
 | **#5295** | **OPEN**, checks green | Owner-gated full-repo redundancy/garbage sweep + Q-gated roadmap — **do not merge in this lane** |
 | **#3166** | **OPEN**, **draft** | `ci(budget): lean content-PR gating` — **DO NOT MERGE until Jul 1 reset** (operator-gated) |
 
-**Merged (removed from open table):** #5490, #5501, #5525 (book-path lockdown + closeout).
+**Merged (removed from open table):** #5490, #5501, #5525 (book-path lockdown + closeout); #5527 (books-first SSOT); #5489/#5530 (thin-persona atom + residual buildability); #5532 (PROGRAM_STATE thin-persona reflection).
 
 ### Storefront
 - **Status:** **LIVE (listings)** — **consumer paid-download scale still blocked** on asset depth
