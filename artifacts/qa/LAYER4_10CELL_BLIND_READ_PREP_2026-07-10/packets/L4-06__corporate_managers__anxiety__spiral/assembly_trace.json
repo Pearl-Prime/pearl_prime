@@ -1,0 +1,141 @@
+{
+  "trace_kind": "epub_derived_assembly_trace",
+  "honesty_note": "Full spine render-dir assembly_trace was not retained beside these EPUBs; this trace is reconstructed from the landed EPUB bytes + wave10 matrix/closeout provenance. Sufficient for blind-read prep; not a substitute for a live render-dir.",
+  "cell": {
+    "persona": "corporate_managers",
+    "topic": "anxiety",
+    "engine": "spiral",
+    "brand": "way_stream_sanctuary",
+    "runtime": "standard_book"
+  },
+  "queue_evidence": {
+    "wave10_matrix_row": {
+      "book_id": "way_stream_sanctuary__corporate_managers__anxiety__spiral",
+      "persona": "corporate_managers",
+      "topic": "anxiety",
+      "engine": "spiral",
+      "runtime": "standard_book",
+      "render_status": "PASS",
+      "register_outcome": "register_PASS",
+      "epub_outcome": "epub_ok",
+      "epub_path": "artifacts/epubs/way_stream_sanctuary/way_stream_sanctuary__corporate_managers__anxiety__spiral.epub",
+      "epub_bytes": "46551",
+      "failing_gate": "none",
+      "notes": "spine+production; coverless; landed via #4486 merge"
+    },
+    "wave10_matrix_path": "artifacts/qa/WAYSTREAM_EPUB_WAVE10_MATRIX_2026-07-10.tsv",
+    "wave10_closeout_path": "artifacts/qa/WAYSTREAM_EPUB_WAVE10_CLOSEOUT_2026-07-10.md",
+    "land_commit": "321379f8f8efa5359b1a2af1ff6919cfc48011d4",
+    "land_pr": "#4486 / closeout #5510"
+  },
+  "epub": {
+    "path": "artifacts/epubs/way_stream_sanctuary/way_stream_sanctuary__corporate_managers__anxiety__spiral.epub",
+    "bytes": 46551,
+    "sha256": "144ef301dfe6868cebfc4c90dc01d747fc0c4efe255c4d8bbe4b315538051f33"
+  },
+  "extracted_book": {
+    "path": "book.txt",
+    "bytes": 89868,
+    "sha256": "54b0aa6ea4ac014b4a74dbbfc08c54edaa1be04eb90641bcec838f7799cb8655",
+    "word_count": 15228,
+    "chapter_count": 12
+  },
+  "chapters": [
+    {
+      "index": 1,
+      "source_file": "EPUB/chapter_01.xhtml",
+      "title": "Chapter 1",
+      "chars": 10888,
+      "words": 1920
+    },
+    {
+      "index": 2,
+      "source_file": "EPUB/chapter_02.xhtml",
+      "title": "Chapter 2",
+      "chars": 9263,
+      "words": 1662
+    },
+    {
+      "index": 3,
+      "source_file": "EPUB/chapter_03.xhtml",
+      "title": "Chapter 3",
+      "chars": 8814,
+      "words": 1484
+    },
+    {
+      "index": 4,
+      "source_file": "EPUB/chapter_04.xhtml",
+      "title": "Chapter 4",
+      "chars": 7637,
+      "words": 1285
+    },
+    {
+      "index": 5,
+      "source_file": "EPUB/chapter_05.xhtml",
+      "title": "Chapter 5",
+      "chars": 5573,
+      "words": 995
+    },
+    {
+      "index": 6,
+      "source_file": "EPUB/chapter_06.xhtml",
+      "title": "Chapter 6",
+      "chars": 6529,
+      "words": 1096
+    },
+    {
+      "index": 7,
+      "source_file": "EPUB/chapter_07.xhtml",
+      "title": "Chapter 7",
+      "chars": 5796,
+      "words": 974
+    },
+    {
+      "index": 8,
+      "source_file": "EPUB/chapter_08.xhtml",
+      "title": "Chapter 8",
+      "chars": 6808,
+      "words": 1095
+    },
+    {
+      "index": 9,
+      "source_file": "EPUB/chapter_09.xhtml",
+      "title": "Chapter 9",
+      "chars": 8603,
+      "words": 1379
+    },
+    {
+      "index": 10,
+      "source_file": "EPUB/chapter_10.xhtml",
+      "title": "Chapter 10",
+      "chars": 8428,
+      "words": 1397
+    },
+    {
+      "index": 11,
+      "source_file": "EPUB/chapter_11.xhtml",
+      "title": "Chapter 11",
+      "chars": 7564,
+      "words": 1256
+    },
+    {
+      "index": 12,
+      "source_file": "EPUB/chapter_12.xhtml",
+      "title": "Chapter 12",
+      "chars": 3406,
+      "words": 613
+    }
+  ],
+  "opf_meta": {
+    "dc_title": "Anxiety Relief: Breaking the Thought Loop: The Rumination Trap",
+    "dc_creator": "Mara Okonkwo",
+    "dc_identifier": "phoenix-omega-e07adbc8957d724b"
+  },
+  "pipeline_claim_from_matrix": {
+    "render_status": "PASS",
+    "register_outcome": "register_PASS",
+    "epub_outcome": "epub_ok",
+    "notes": "spine+production; coverless; landed via #4486 merge"
+  },
+  "generated_at": "2026-07-10T10:30:41Z"
+}
