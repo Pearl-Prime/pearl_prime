@@ -1,0 +1,40 @@
+{
+  "generated_at": "2026-07-10T09:20:00+08:00",
+  "gate_version": "v2_stipple_20260710",
+  "known_bad_fixture": "tests/fixtures/manga/blob_gate/seated_cockpit_stipple_blob_20260708.png",
+  "known_good_fixture": "tests/fixtures/manga/blob_gate/master_wu_pose_strike_paused_known_good.png",
+  "preserved_quarantine": "artifacts/manga/warrior_calm_cultivation__master_wu__en_US__burnout__the_chassis_is_listening/image_bank/L2/_BLOB_FAIL/seated_cockpit__pre_rerender.png",
+  "results": {
+    "known_bad": {
+      "verdict": "BLOB_FAIL",
+      "reasons": ["stipple_white_plate"],
+      "note": "Passed v1 edge-only gate (small_edge~7.3); fails v2 stipple heuristic"
+    },
+    "known_good": {
+      "verdict": "PASS",
+      "small_edge": 18.63
+    },
+    "pilot_L0": {
+      "path": "artifacts/qa/manga_layered_visual_proof_2026-07-10/mecha_master_wu_pilot/L0.png",
+      "verdict": "PASS",
+      "bytes": 3614713
+    },
+    "pilot_L2": {
+      "path": "artifacts/qa/manga_layered_visual_proof_2026-07-10/mecha_master_wu_pilot/L2.png",
+      "verdict": "PASS",
+      "bytes": 2413257
+    },
+    "pilot_L3": {
+      "path": "artifacts/qa/manga_layered_visual_proof_2026-07-10/mecha_master_wu_pilot/L3.png",
+      "verdict": "PASS",
+      "bytes": 2881567
+    },
+    "pilot_composite": {
+      "path": "artifacts/qa/manga_layered_visual_proof_2026-07-10/mecha_master_wu_pilot/composite.png",
+      "verdict": "PASS",
+      "bytes": 2354481,
+      "visual_inspect": "readable mecha cockpit + pilot + HUD; not stipple blob"
+    }
+  },
+  "mutation_test": "tests/manga/test_bank_layer_blob_gate.py::test_mutation_weakened_stipple_thresholds_would_pass_bad_blob"
+}

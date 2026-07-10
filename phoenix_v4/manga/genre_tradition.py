@@ -58,6 +58,7 @@ REPO_ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_TRADITION_PATH = REPO_ROOT / "config" / "manga" / "drawing_tradition_per_genre.yaml"
 DEFAULT_BLENDING_PATH = REPO_ROOT / "config" / "manga" / "cross_genre_blending_rules.yaml"
 DEFAULT_CANONICAL_GENRES_PATH = REPO_ROOT / "config" / "manga" / "canonical_genre_list.yaml"
+DEFAULT_COOKBOOK_PATH = REPO_ROOT / "config" / "manga" / "genre_prompt_cookbook.yaml"
 
 # engine_router / builder base_model ids that may key into H_token_mapping.
 # These mirror the keys used in drawing_tradition_per_genre.yaml H_token_mapping.
@@ -103,7 +104,67 @@ def resolve_tradition_genre(genre_id: str | None) -> str | None:
         block = genres.get(key)
         if isinstance(block, dict) and block.get("status") != "deferred_phase2":
             return key
-    return resolve_canonical_genre(genre_id)
+    canonical = resolve_canonical_genre(genre_id)
+    if canonical and cookbook_entry(canonical):
+        return canonical
+    return canonical
+
+
+def cookbook_entry(
+    genre_id: str | None,
+    *,
+    cookbook_path: Path | None = None,
+) -> dict[str, Any] | None:
+    """Return the manga-panel cookbook block for *genre_id*, or None (fail-open)."""
+    key = resolve_canonical_genre(genre_id) or _normalize_genre_id(genre_id)
+    if not key:
+        return None
+    doc = _load_yaml(str(cookbook_path or DEFAULT_COOKBOOK_PATH))
+    genres = doc.get("genres")
+    if not isinstance(genres, dict):
+        return None
+    block = genres.get(key)
+    return block if isinstance(block, dict) else None
+
+
+def locale_overlay_tokens(
+    locale: str | None,
+    *,
+    cookbook_path: Path | None = None,
+) -> tuple[str | None, list[str]]:
+    """Return (register_add, avoid_list) for a locale overlay from the cookbook."""
+    if not locale:
+        return None, []
+    doc = _load_yaml(str(cookbook_path or DEFAULT_COOKBOOK_PATH))
+    overlays = doc.get("locale_overlays")
+    if not isinstance(overlays, dict):
+        return None, []
+    block = overlays.get(str(locale).strip())
+    if not isinstance(block, dict):
+        return None, []
+    reg = block.get("register_add")
+    register_add = reg.strip() if isinstance(reg, str) and reg.strip() else None
+    avoid_raw = block.get("avoid") or []
+    avoid: list[str] = []
+    if isinstance(avoid_raw, list):
+        for item in avoid_raw:
+            if isinstance(item, str) and item.strip():
+                avoid.append(item.strip())
+    return register_add, avoid
+
+
+def preferred_panel_model(genre_id: str | None) -> str:
+    """Preferred base-model id from the manga-panel cookbook (Qwen-primary default)."""
+    entry = cookbook_entry(genre_id)
+    if entry:
+        model = entry.get("preferred_model")
+        if isinstance(model, str) and model.strip():
+            return model.strip()
+    doc = _load_yaml(str(DEFAULT_COOKBOOK_PATH))
+    default = doc.get("default_panel_model")
+    if isinstance(default, str) and default.strip():
+        return default.strip()
+    return "qwen_image"
 
 
 @lru_cache(maxsize=4)
@@ -215,7 +276,7 @@ def genre_tradition_tokens(
     genre_id: str | None,
     *,
     secondary_genre: str | None = None,
-    base_model: str = "flux_schnell",
+    base_model: str = "qwen_image",
     tradition_path: Path | None = None,
     blending_path: Path | None = None,
 ) -> tuple[list[str], list[str]]:

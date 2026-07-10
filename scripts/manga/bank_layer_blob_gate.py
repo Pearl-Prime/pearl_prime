@@ -27,17 +27,26 @@ from typing import Any
 
 from PIL import Image, ImageFilter
 
+import numpy as np
+
 # Calibrated 2026-07-08 against:
 #   FAIL: mecha queue blobs jobs 513–514 (small_edge ~0.9–1.1, edge_blur8 ~0.37)
 #   FAIL: white-backdrop noise blobs (high hf_ratio, low blur structure)
 #   PASS: repaired hangar (small_edge ~3.9, edge_blur8 ~1.1 — dark but architectural)
 #   PASS: repaired cockpit (small_edge ~6.8), flux-schnell covers (~11)
+# Calibrated 2026-07-10 (prompt-builder v3 lane):
+#   FAIL: seated_cockpit stipple-noise blob (small_edge ~7.3 PASS under v1 gate)
+#         blue/cyan cast on bright plate + high local HF after blur
+#   PASS: master_wu Qwen pose plates, mira_aoki_reference_qwen.png
 HARD_EDGE_FLOOR = 3.0
 MIN_SMALL_EDGE = 6.5
 MIN_BLUR_EDGE = 0.80
 MAX_HF_RATIO = 6.0
 DARK_MEAN_CEILING = 40.0
 DARK_FRAC_CEILING = 0.70
+STIPPLE_MEAN_FLOOR = 175.0
+STIPPLE_HF_FLOOR = 12.0
+STIPPLE_BLUE_DOM_FLOOR = 15.0
 
 
 @dataclass(frozen=True)
@@ -48,6 +57,8 @@ class BlobMetrics:
     edge_blur8: float
     small_edge: float
     bytes: int
+    hf_local: float = 0.0
+    blue_dom_bright: float = 0.0
 
 
 @dataclass(frozen=True)
@@ -83,6 +94,24 @@ def _mean_neighbor_edge(gray: Image.Image) -> float:
     return (edge_h / max(n_h, 1) + edge_v / max(n_v, 1)) / 2.0
 
 
+def _stipple_metrics(im: Image.Image) -> tuple[float, float]:
+    """Return (hf_local, blue_dom_bright) on a downsampled RGB work image."""
+    rgb = im.convert("RGB").resize((270, 480), Image.Resampling.BILINEAR)
+    gray = rgb.convert("L")
+    arr = np.array(gray)
+    blur = gray.filter(ImageFilter.GaussianBlur(radius=3))
+    ba = np.array(blur)
+    hf_local = float(np.abs(arr.astype(float) - ba.astype(float)).mean())
+    ra = np.array(rgb)
+    r, b = ra[:, :, 0], ra[:, :, 2]
+    bright = arr > 180
+    if bright.any():
+        blue_dom = float(b[bright].mean() - r[bright].mean())
+    else:
+        blue_dom = 0.0
+    return hf_local, blue_dom
+
+
 def measure_png(path: Path) -> BlobMetrics:
     im = Image.open(path).convert("RGB")
     gray = im.convert("L")
@@ -97,6 +126,7 @@ def measure_png(path: Path) -> BlobMetrics:
     total = sum(hist) or 1
     mean = sum(i * c for i, c in enumerate(hist)) / total
     dark_frac = sum(hist[: int(DARK_MEAN_CEILING)]) / total
+    hf_local, blue_dom_bright = _stipple_metrics(im)
     return BlobMetrics(
         path=str(path),
         mean=float(mean),
@@ -104,6 +134,8 @@ def measure_png(path: Path) -> BlobMetrics:
         edge_blur8=float(edge_blur8),
         small_edge=float(small_edge),
         bytes=path.stat().st_size,
+        hf_local=float(hf_local),
+        blue_dom_bright=float(blue_dom_bright),
     )
 
 
@@ -129,6 +161,15 @@ def judge_png(path: Path) -> BlobVerdict:
         and m.edge_blur8 < MIN_BLUR_EDGE
     ):
         reasons.append(f"hf_noise_ratio={hf_ratio:.2f}>{MAX_HF_RATIO}")
+    if (
+        m.mean > STIPPLE_MEAN_FLOOR
+        and m.hf_local > STIPPLE_HF_FLOOR
+        and m.blue_dom_bright > STIPPLE_BLUE_DOM_FLOOR
+    ):
+        reasons.append(
+            f"stipple_white_plate mean={m.mean:.1f} hf={m.hf_local:.1f} "
+            f"blue_dom={m.blue_dom_bright:.1f}"
+        )
     return BlobVerdict(ok=not reasons, reasons=reasons, metrics=m)
 
 

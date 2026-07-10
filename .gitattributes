@@ -109,3 +109,6 @@ brand-wizard-app/public/assets/cover_thumbs/** -filter -diff -merge -text
 # Authority: docs/specs/LFS_TO_R2_OFFLOAD_V1_SPEC.md
 # Manifest: artifacts/manifests/lfs_offload/stillness_press_alarm_composed_v4_ep_001.tsv
 artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/composed_v4_qwen/** -filter -diff -merge -text
+
+# CI regression fixtures must be real bytes (not LFS pointers)
+tests/fixtures/manga/blob_gate/*.png -filter -diff -merge -text

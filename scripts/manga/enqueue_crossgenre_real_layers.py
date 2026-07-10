@@ -318,7 +318,7 @@ def _compose_prompt(
 def build_jobs(
     series_key: str,
     *,
-    task: str = "t2i_flux_schnell",
+    task: str = "t2i_qwen_image",
     layer_ids: set[str] | None = None,
 ) -> list[LayerJob]:
     cfg = SERIES[series_key]
@@ -562,7 +562,7 @@ def main(argv: list[str] | None = None) -> int:
     )
     ap.add_argument(
         "--task",
-        default="t2i_flux_dev_h1a",
+        default="t2i_qwen_image",
         choices=["t2i_flux_dev_h1a", "t2i_qwen_image", "t2i_flux_schnell"],
     )
     ap.add_argument("--ssh-host", default="")

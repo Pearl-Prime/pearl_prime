@@ -119,10 +119,15 @@ program history. Both goldens now live + byte-frozen:
     chapter validators PASS (acceptance layer: **system working**; not PROVEN-AT-BAR). Authority:
     `artifacts/qa/MANGA_MECHA_HUMAN_READABILITY_PROOF_CLOSEOUT_2026-07-10.md`. July 9 blocker/repair audits carry
     superseded banners for stale L0-sidecar / zero-L2 claims.
+  - **Manga prompt-builder v3 + blob gate v2 + Qwen mecha layered pilot — MERGED 2026-07-10** (ws
+    `ws_manga_prompt_builder_v3_20260710`). `config/manga/genre_prompt_cookbook.yaml` (26 genres from research #5488),
+    Qwen-primary `prompt_authority.py`, stipple blob heuristic, `t2i_qwen_image` worker implemented. Honest pilot:
+    `artifacts/qa/manga_layered_visual_proof_2026-07-10/mecha_master_wu_pilot/composite.png` (EXECUTED-REAL; not
+    PROVEN-AT-BAR). Prior strip/seated_cockpit stipple-blob “strongest proof” claims superseded.
   - **Human-readability rules artifact — MERGED earlier 2026-07-09** (#5323; ws `ws_manga_human_readability_rules_20260709`
     completed). Implementation closeout remains local-only until its lane merges.
 - **Next manga blocker (post-wave):** stillness post-merge proof re-run (local-only artifacts must not be reported as
-  landed). Mecha next step is operator blind-read / PROVEN-AT-BAR — not additional native-bank gap renders.
+  landed). Mecha next step is operator blind-read / PROVEN-AT-BAR — v3 pilot is the current honest layered proof surface.
 
 ### DevOps / repo hygiene
 - **Status:** **July 9 wave landed LFS→R2 pilot + GHA catalog-fanout queue guard on `main`**
