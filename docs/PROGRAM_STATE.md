@@ -1,6 +1,6 @@
 # Program State — Single Source of Truth
 
-**LAST VERIFIED:** 2026-07-10 @ `origin/main` `7368a945e593d0960f32a9ce5d8b53b01ef1be7a` (post-July 10 books/translation wave — #5489/#5492/#5494/#5495–#5500/#5503/#5504/#5507/#5508 landed; books-first audit refresh #5506 + this SSOT lane)
+**LAST VERIFIED:** 2026-07-11 @ `origin/main` `4c896efb8ab0038e73906841ab82bb19c47b9eb3` (post-#5525 books-first SSOT refresh; #5490 spine lock + #5501 ja-JP teacher-bank + #5525 workstream closeout already on `main`; tip includes #5526 manga closeout docs)
 
 > **RULE:** Verify against `origin/main`, never git date or the working tree (shared-tree branch-churn shows
 > other-branch/stale state). This is the entry point — if another doc disagrees with this, this wins or that doc is stale.
@@ -90,7 +90,7 @@ program history. Both goldens now live + byte-frozen:
   ko-KR Stage-1 gen_z×anxiety slice (#5504), translation CI depth fix + banned-key closeout (#5497, #5498), overthinking
   stub prose + locale retranslations (#5503, #5507), parse-sweep stub gate (#5508). Live bestseller-atom coverage (post
   #5497 depth fix): ja-JP ~84%, zh-TW ~96%, zh-CN ~43%, ko-KR ~6% — **pilot cells only**; zero locale-native sellable
-  Pearl Prime catalog EPUBs at scale. **Still open:** #5501 ja-JP teacher-bank batch (teacher-gates red). **Not started
+  Pearl Prime catalog EPUBs at scale. **#5501 ja-JP teacher-bank MERGED** (`45e511ab963b070de82ec84d53386521e67c2194`, 2026-07-10). **Not started
   at catalog scale:** Phase B–D locale waves, localized EPUB assembly, storefront Phase A smoke with real downloads.
 
 ### Manga (all locales)
@@ -144,23 +144,29 @@ program history. Both goldens now live + byte-frozen:
     `catalog-fanout-*` workflows when queue is hot; authority: `artifacts/coordination/GHA_CATALOG_FANOUT_QUEUE_GUARD_CLOSEOUT_2026-07-09.md`.
     Supersedes manual queue-relief waves as the durable fix for catalog starvation of non-catalog PRs.
 
-### Books-first roadmap (operator scan — 2026-07-10 post-wave)
-- **Authority:** `artifacts/analysis/PROPRIME_100PCT_PRODUCTION_AUDIT_2026-07-10/` (refreshed to `7368a945e`)
+### Books-first roadmap (operator scan — 2026-07-11 post-#5525)
+- **Authority:** `artifacts/analysis/PROPRIME_100PCT_PRODUCTION_AUDIT_2026-07-10/` (audit snapshot still useful; queue below is live GitHub truth)
 - **Verdict:** Pearl Prime books **NOT catalog-scale production-ready** (1 EPUB + 1 flagship PROVEN-AT-BAR ≠ ~1,519 listings)
-- **Next 5 books-first actions:** (1) fix-merge **#5490** spine-default lock (CI red); (2) engine-keyed STORY pool seeding +
-  re-run educators/nyc tuple-viability; (3) Waystream EPUB wave 10 cells (#1923 CLI); (4) merge **#5501** when teacher-gates
-  green; (5) GHL attach batch for each new real EPUB
-- **Open green follow-ons:** **#5237** atom cohesion (if green)
+- **Landed (do not re-queue):** **#5490** spine-default lock (`2236c03a23`, 2026-07-10); **#5501** ja-JP teacher-bank (`45e511ab96`, 2026-07-10); **#5525** book-path workstream closeout (`1f4c3155d8`, 2026-07-10). Adjacency/transition/overlay already on `main`: #5156 / #5162 / #5298 / #5515 / #5516 / #5519.
+- **Next books-first actions (live order):**
+  1. **engine-keyed STORY pool seeding** for thin personas (educators/nyc) + any required binding-governance call (`false_alarm` / allowed_engines) + **4-cell tuple-viability rebuild** (#1922 pattern)
+  2. **Waystream EPUB wave** expansion from the proven spine CLI lane (#1923 pattern; chord: `--pipeline-mode spine --quality-profile production --exercise-journeys`)
+  3. **GHL attach batch** for each newly shipped real EPUB
+  4. **#5237** atom-cohesion craft lane — **OPEN but RED** (parse-sweep / Schema / Core / Drift / Release failing as of 2026-07-11); repair-needed follow-on, **not** a green next lane; re-evaluate scope against already-landed adjacency/transition/overlay fixes before fresh craft work
+  5. **#5206** bestseller-conformance audit/evidence — **OPEN**; treat as evidence-only / partially stale context (do not treat as fresh implementation authority without live reconciliation)
 - **Held / not now:** **#5295** (owner), **#3166** (operator budget), **#4861** (governance audit evidence)
-- **Not books prerequisite:** manga PROVEN-AT-BAR, **#5502** dashscope audit, ~150 catalog-skeleton listing PRs
+- **Not books prerequisite / not live authority:** manga PROVEN-AT-BAR; **#5526** manga-only (already merged tip docs); **#5518** agent-execution-fabric docs — **OPEN/RED** and **absent from `origin/main`** (do not cite as live authority); **#5502** dashscope audit; ~150 catalog-skeleton listing PRs
 
 ### Open PR truth (owner/operator-gated — not merged)
 | PR | State | Gate |
 |----|-------|------|
-| **#5490** | **OPEN**, CI **red** (Core/Drift/Release) | Spine-default lock — books-first; fix CI before merge |
-| **#5501** | **OPEN**, teacher-gates **red** | ja-JP teacher-bank translation pilot — merge when green |
+| **#5237** | **OPEN**, CI **red** | Atom cohesion craft — repair-needed follow-on; **not green**; re-scope vs landed #5156/#5162/#5298/#5515–#5519 before rework |
+| **#5206** | **OPEN**, checks green | Bestseller conformance audit/evidence — evidence-only; partially stale vs July 10 adjacency/atom merges |
+| **#5518** | **OPEN**, CI **red** | Agent execution fabric v1 docs — **not on `origin/main`**; **not live authority** until merged |
 | **#5295** | **OPEN**, checks green | Owner-gated full-repo redundancy/garbage sweep + Q-gated roadmap — **do not merge in this lane** |
 | **#3166** | **OPEN**, **draft** | `ci(budget): lean content-PR gating` — **DO NOT MERGE until Jul 1 reset** (operator-gated) |
+
+**Merged (removed from open table):** #5490, #5501, #5525 (book-path lockdown + closeout).
 
 ### Storefront
 - **Status:** **LIVE (listings)** — **consumer paid-download scale still blocked** on asset depth
