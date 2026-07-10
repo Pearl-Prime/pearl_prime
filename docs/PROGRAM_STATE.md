@@ -1,6 +1,6 @@
 # Program State — Single Source of Truth
 
-**LAST VERIFIED:** 2026-07-10 @ `origin/main` `41c03d1f8fef36be243c5534fc4753d616fbee4c` (post-#5482 SSOT reconciliation — July 9 afternoon wave #5479/#5480/#5481/#5482 landed)
+**LAST VERIFIED:** 2026-07-10 @ `origin/main` `7368a945e593d0960f32a9ce5d8b53b01ef1be7a` (post-July 10 books/translation wave — #5489/#5492/#5494/#5495–#5500/#5503/#5504/#5507/#5508 landed; books-first audit refresh #5506 + this SSOT lane)
 
 > **RULE:** Verify against `origin/main`, never git date or the working tree (shared-tree branch-churn shows
 > other-branch/stale state). This is the entry point — if another doc disagrees with this, this wins or that doc is stale.
@@ -59,12 +59,12 @@ program history. Both goldens now live + byte-frozen:
   (anxiety/false_alarm, boundaries/shame, boundaries/comparison) all register-PASS, ei_v2 0.62–0.64 — corporate_managers
   scales with **zero engine work** (loop spine CLI over the F006 arc matrix + `build_epub.py`).
   **1 catalog EPUB assembled** (was 0).
-- ⚠ **Thin-persona caveat (the next lane):** the +462 arc-seeded educators/nyc_executives cells are **NOT spine-buildable
-  yet** — a 4-cell rebuild (#1922) shows all 4 **HARD-FAIL tuple-viability preflight** before Stage 1. P1/P2 seeded arcs
-  + **slot-keyed** pools (`atoms/<p>/<t>/STORY/`) but NOT the **engine-keyed** pools (`atoms/<p>/<t>/<engine>/CANONICAL.txt`)
-  the spine builder reads → `NO_STORY_POOL`. Also: `educators/nyc × *_false_alarm` needs a **binding-governance call**
-  (`false_alarm` not in `imposter_syndrome.allowed_engines`); `nyc × anxiety/false_alarm` needs **one band-1 STORY atom**.
-  Next = engine-keyed STORY-pool seeding (≥12 banded variants/cell) + the binding decision — NOT gate/engine work.
+- ⚠ **Thin-persona caveat (the next lane):** **canonical atom repair MERGED** (#5489, 2026-07-10) — educators/nyc
+  slot-keyed gaps partially closed. Remaining blockers before spine-buildable EPUBs: **engine-keyed** STORY pools
+  (`atoms/<p>/<t>/<engine>/CANONICAL.txt`) for all thin-persona cells; 4-cell rebuild (#1922 pattern) must re-run to
+  confirm tuple-viability PASS. Also: `educators/nyc × *_false_alarm` needs a **binding-governance call** (`false_alarm`
+  not in `imposter_syndrome.allowed_engines`); `nyc × anxiety/false_alarm` may still need **one band-1 STORY atom**.
+  Next = engine-keyed STORY-pool seeding (≥12 banded variants/cell) + binding decision + Waystream-scale EPUB wave.
 - **Wave 2026-06-25 (teacher-bank unblock):** 12 teachers now have `TEACHER_DOCTRINE` atoms (PR #1914) — all 26
   brands unblocked from the `library_34` fallback. 29 `CANONICAL.txt` files backfilled for educators + nyc_executives
   thin slots (PR #1915); 69/69 tests pass.
@@ -84,11 +84,14 @@ program history. Both goldens now live + byte-frozen:
   #1947 — satisfies the GHL paid-slot attach row (OPD-20260630-002 / Q-DRIFT-02).
 
 ### Localization
-- **Status:** **NEXT (0% execution)** — Waystream titles are now distinct + hard-gated on `main` (see above), so the prior
-  blocker is cleared; 14 locales (pt-BR ratified as the 14th, Q-MANGA-01/OPD-20260704-005)
-  can inherit clean titles without multiplied duplication. **14-locale translation source pack — MERGED** (#5480,
-  `ea68ef510a13463e1181b426ff2661e4326b584f`, 2026-07-09): PERMISSION golden segments + checklist locale_overrides +
-  quality-contract README canon fix. **Planning artifact only — atom translation execution has not started.**
+- **Status:** **IN PROGRESS (pilot execution on `main`; not catalog-scale)** — Waystream titles are distinct + hard-gated
+  on `main` (see above). **14-locale translation source pack — MERGED** (#5480, 2026-07-09). **July 10 execution wave
+  landed on `main`:** ja-JP / zh-TW / zh-CN Stage-1 pilots (#5496, #5499, #5500), non-CJK Wave 1 pt-BR + es-US (#5495),
+  ko-KR Stage-1 gen_z×anxiety slice (#5504), translation CI depth fix + banned-key closeout (#5497, #5498), overthinking
+  stub prose + locale retranslations (#5503, #5507), parse-sweep stub gate (#5508). Live bestseller-atom coverage (post
+  #5497 depth fix): ja-JP ~84%, zh-TW ~96%, zh-CN ~43%, ko-KR ~6% — **pilot cells only**; zero locale-native sellable
+  Pearl Prime catalog EPUBs at scale. **Still open:** #5501 ja-JP teacher-bank batch (teacher-gates red). **Not started
+  at catalog scale:** Phase B–D locale waves, localized EPUB assembly, storefront Phase A smoke with real downloads.
 
 ### Manga (all locales)
 - **Status:** **VISION-CERTIFIED 2026-07-03 — one series end-to-end real; scaffold everywhere else; July 10 mecha native bank + honest proof lane MERGED on `main`**
@@ -141,9 +144,21 @@ program history. Both goldens now live + byte-frozen:
     `catalog-fanout-*` workflows when queue is hot; authority: `artifacts/coordination/GHA_CATALOG_FANOUT_QUEUE_GUARD_CLOSEOUT_2026-07-09.md`.
     Supersedes manual queue-relief waves as the durable fix for catalog starvation of non-catalog PRs.
 
+### Books-first roadmap (operator scan — 2026-07-10 post-wave)
+- **Authority:** `artifacts/analysis/PROPRIME_100PCT_PRODUCTION_AUDIT_2026-07-10/` (refreshed to `7368a945e`)
+- **Verdict:** Pearl Prime books **NOT catalog-scale production-ready** (1 EPUB + 1 flagship PROVEN-AT-BAR ≠ ~1,519 listings)
+- **Next 5 books-first actions:** (1) fix-merge **#5490** spine-default lock (CI red); (2) engine-keyed STORY pool seeding +
+  re-run educators/nyc tuple-viability; (3) Waystream EPUB wave 10 cells (#1923 CLI); (4) merge **#5501** when teacher-gates
+  green; (5) GHL attach batch for each new real EPUB
+- **Open green follow-ons:** **#5237** atom cohesion (if green)
+- **Held / not now:** **#5295** (owner), **#3166** (operator budget), **#4861** (governance audit evidence)
+- **Not books prerequisite:** manga PROVEN-AT-BAR, **#5502** dashscope audit, ~150 catalog-skeleton listing PRs
+
 ### Open PR truth (owner/operator-gated — not merged)
 | PR | State | Gate |
 |----|-------|------|
+| **#5490** | **OPEN**, CI **red** (Core/Drift/Release) | Spine-default lock — books-first; fix CI before merge |
+| **#5501** | **OPEN**, teacher-gates **red** | ja-JP teacher-bank translation pilot — merge when green |
 | **#5295** | **OPEN**, checks green | Owner-gated full-repo redundancy/garbage sweep + Q-gated roadmap — **do not merge in this lane** |
 | **#3166** | **OPEN**, **draft** | `ci(budget): lean content-PR gating` — **DO NOT MERGE until Jul 1 reset** (operator-gated) |
 
