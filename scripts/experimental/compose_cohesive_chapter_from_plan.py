@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 """
-Compose one cohesive chapter from an existing compiled plan.
+EXPERIMENTAL / NOT PRODUCTION — compose one cohesive chapter from a compiled plan.
+
+QA and research harness only. Production books MUST use:
+  scripts/run_pipeline.py --pipeline-mode spine --render-book ...
 
 Uses actual plan-selected slot prose, then applies a thesis-threaded assembly pass:
 hook -> scene -> bridge -> teaching -> bridge -> story -> bridge -> exercise -> integration.

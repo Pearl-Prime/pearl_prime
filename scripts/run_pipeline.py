@@ -20,7 +20,7 @@ books. For a RELEASE-grade build, every quality gate must pass:
 
 Profile semantics (argparse defaults below): --pipeline-mode default is `spine`
 (canonical Pearl Prime path). Legacy `--pipeline-mode registry` is blocked under
-`--quality-profile production` and emits a deprecation warning otherwise.
+`--quality-profile production|flagship` with `--render-book` (see `--allow-legacy-registry`).
 --quality-profile default is `production` (all gates run; any
 failure exits 1). Use `flagship` to verify only the three load-bearing structural
 gates (chapter_flow, book_quality_gate, scene_anti_genericity); `draft`/`debug` for

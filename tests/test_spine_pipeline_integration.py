@@ -64,11 +64,27 @@ def test_run_pipeline_help_lists_pipeline_mode() -> None:
 
 
 def test_spine_mode_default() -> None:
-    """Default pipeline mode is spine (canonical Pearl Prime path)."""
+    """Default pipeline mode is spine (COHESIVE-FLOW-PATH-DEFAULT-SPINE-01)."""
     ap = argparse.ArgumentParser()
     ap.add_argument("--pipeline-mode", choices=["registry", "spine"], default="spine")
     ns = ap.parse_args([])
     assert ns.pipeline_mode == "spine"
+
+
+def test_registry_mode_blocked_for_production_render() -> None:
+    """Registry + render-book + production exits unless allow-legacy-registry."""
+    import scripts.run_pipeline as rp
+
+    args = argparse.Namespace(
+        pipeline_mode="registry",
+        quality_profile="production",
+        render_book=True,
+        allow_legacy_registry=False,
+    )
+    assert rp._guard_legacy_registry_mode(args) == 1
+
+    args.allow_legacy_registry = True
+    assert rp._guard_legacy_registry_mode(args) is None
 
 
 @pytest.mark.skipif(not ANXIETY_ARC.exists(), reason="fixture arc missing")

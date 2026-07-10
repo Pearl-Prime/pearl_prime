@@ -1,9 +1,13 @@
 #!/usr/bin/env python3
 """
+DEBUG ONLY — standalone spine enrichment harness (NOT production).
+
 Pilot: Spine → KnobApply → BeatmapCompile → EnrichmentSelect → compose_from_enriched_book.
 
-Standalone (does not import run_pipeline). Writes book.txt, book_plan.json,
-enrichment_audit.json, budget.json.
+Does NOT import run_pipeline.py. Use scripts/run_pipeline.py --pipeline-mode spine
+for all production and catalog book builds. This script exists to debug spine
+enrichment in isolation. Writes book.txt, book_plan.json, enrichment_audit.json,
+budget.json.
 """
 from __future__ import annotations
 
@@ -24,7 +28,9 @@ def main() -> int:
     if str(REPO_ROOT) not in sys.path:
         sys.path.insert(0, str(REPO_ROOT))
 
-    parser = argparse.ArgumentParser(description="Pilot spine → enrichment → prose pipeline")
+    parser = argparse.ArgumentParser(
+        description="DEBUG ONLY: isolated spine→enrichment harness (not production; use run_pipeline.py --pipeline-mode spine)",
+    )
     parser.add_argument("--topic", required=True, help="Topic id (e.g. anxiety)")
     parser.add_argument("--persona", required=True, help="Persona id (e.g. gen_z_professionals)")
     parser.add_argument("--teacher", default="", help="Teacher id for atom overlay (e.g. ahjan)")

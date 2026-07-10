@@ -1,6 +1,11 @@
 #!/usr/bin/env python3
 """
-Render a compiled plan JSON to a single .txt file for QA.
+QA ONLY — render a compiled plan JSON to a single .txt file for inspection.
+
+NOT a production book-authoring path. Production builds use:
+  # CI-ALLOWLIST: legacy-registry-ok — docstring pointer only; not an executed production invocation
+  scripts/run_pipeline.py --pipeline-mode spine --quality-profile production --exercise-journeys --render-book ...
+
 Uses Stage 6 prose resolution and TxtWriter (phoenix_v4.rendering).
 Resolves all slot types from atoms/, compression_atoms, teacher_banks; placeholders written as
 [Placeholder: TYPE] or script exits 1 when plan contains placeholders unless --allow-placeholders.
@@ -17,7 +22,7 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 
 
 def main() -> int:
-    ap = argparse.ArgumentParser(description="Render plan JSON to book .txt for QA (Stage 6)")
+    ap = argparse.ArgumentParser(description="QA ONLY: render plan JSON to book .txt (Stage 6; not production authoring)")
     ap.add_argument("plan", help="Path to plan JSON (e.g. artifacts/book_001.plan.json)")
     ap.add_argument("-o", "--out", required=True, help="Output .txt path")
     ap.add_argument(

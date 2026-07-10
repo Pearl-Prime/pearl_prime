@@ -1734,7 +1734,7 @@ All root-level `scripts/*.py` files confirmed present on disk.
 | [scripts/build_proof_chapter.py](../scripts/build_proof_chapter.py) | Build a single proof chapter from atoms + plan |
 | [scripts/check_spec_version_bump.py](../scripts/check_spec_version_bump.py) | Verify spec version is bumped on breaking changes |
 | [scripts/clean_atom_prose.py](../scripts/clean_atom_prose.py) | Batch clean atom prose files (strip metadata artifacts) |
-| [scripts/compose_cohesive_chapter_from_plan.py](../scripts/compose_cohesive_chapter_from_plan.py) | Compose a cohesive chapter from a compiled plan JSON |
+| [scripts/experimental/compose_cohesive_chapter_from_plan.py](../scripts/experimental/compose_cohesive_chapter_from_plan.py) | EXPERIMENTAL: compose a cohesive chapter from a compiled plan JSON (not production) |
 | [scripts/create_freebie_assets.py](../scripts/create_freebie_assets.py) | Generate freebie assets (PDFs, landing copy) from plan |
 | [scripts/fill_non_story_coverage_gaps.py](../scripts/fill_non_story_coverage_gaps.py) | Fill missing HOOK/SCENE/REFLECTION/INTEGRATION/EXERCISE CANONICAL.txt files |
 | [scripts/generate_arcs_from_backlog.py](../scripts/generate_arcs_from_backlog.py) | Batch-generate arc YAMLs from arc backlog config |
