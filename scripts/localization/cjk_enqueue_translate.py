@@ -23,8 +23,34 @@ sys.path.insert(0, str(REPO_ROOT))
 from scripts.pearl_star.dispatch import DispatchError, dispatch_gpu_job
 
 
+def _pscli(*args: str, timeout: int = 30) -> subprocess.CompletedProcess:
+    """Run pscli locally if present on PATH, else over SSH to Pearl Star.
+
+    Mac clients never have pscli on PATH (it is only installed on Pearl
+    Star) — the dispatch itself already goes over SSH via dispatch.py, so
+    status/inspect polling must follow the same route rather than assuming
+    a local binary.
+    """
+    if shutil_which("pscli"):
+        return subprocess.run(["pscli", *args], capture_output=True, text=True, timeout=timeout)
+    ssh_host = os.environ.get("PS_QUEUE_SSH_HOST", "pearl_star")
+    repo = os.environ.get("PS_PHOENIX_REPO", "/home/ahjan108/phoenix_omega")
+    py = os.environ.get("PS_PY", "/opt/pearl-star/venv/bin/python")
+    remote = (
+        f"set -a; . /etc/pearl-star/queue.env 2>/dev/null; "
+        f". {repo}/.pearl_star_queue.env 2>/dev/null; set +a; "
+        f"{py} /usr/local/bin/pscli " + " ".join(args)
+    )
+    return subprocess.run(
+        ["ssh", "-o", "BatchMode=yes", ssh_host, remote],
+        capture_output=True,
+        text=True,
+        timeout=timeout + 15,
+    )
+
+
 def _pscli_status_ok() -> bool:
-    proc = subprocess.run(["pscli", "status"], capture_output=True, text=True, timeout=15)
+    proc = _pscli("status", timeout=15)
     if proc.returncode != 0:
         return False
     return "PAUSED" not in (proc.stdout or "")
@@ -33,12 +59,7 @@ def _pscli_status_ok() -> bool:
 def _wait_job(job_id: int, *, timeout_s: int = 7200) -> str:
     deadline = time.monotonic() + timeout_s
     while time.monotonic() < deadline:
-        proc = subprocess.run(
-            ["pscli", "inspect", str(job_id)],
-            capture_output=True,
-            text=True,
-            timeout=30,
-        )
+        proc = _pscli("inspect", str(job_id), timeout=30)
         out = proc.stdout or ""
         for line in out.splitlines():
             if line.strip().startswith("status:"):
@@ -65,9 +86,9 @@ def main(argv: list[str] | None = None) -> int:
     args = ap.parse_args(argv)
 
     if args.gpu_acquire:
-        subprocess.run(["pscli", "gpu-acquire", "cjk", "--note", "cjk_enqueue_translate"], check=False)
+        _pscli("gpu-acquire", "cjk", "--note", "cjk_enqueue_translate", timeout=15)
 
-    if shutil_which("pscli") and not _pscli_status_ok():
+    if not _pscli_status_ok():
         print("WARN: pscli status reports PAUSED or unreachable", file=sys.stderr)
 
     payload = {
