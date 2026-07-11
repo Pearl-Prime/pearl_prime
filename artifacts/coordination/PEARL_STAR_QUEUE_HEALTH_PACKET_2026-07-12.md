@@ -164,5 +164,5 @@ pearl-star-queue-reaper-fit=match
 pearl-star-queue-repair-applied=no
 pearl-star-queue-next-fix=Merge open PR #4565 (do not duplicate reaper files); optional alert.env after merge.
 pearl-star-queue-health-packet=artifacts/coordination/PEARL_STAR_QUEUE_HEALTH_PACKET_2026-07-12.md
-pearl-star-queue-health=<filled at merge>
+pearl-star-queue-health=23bdc6976d1b6a87c51fc935d13521281c879e68
 ```
