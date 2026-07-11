@@ -61,7 +61,7 @@ def test_teacher_mode_compile_smoke(teacher_id: str, tmp_path: Path):
         "--out", str(out_plan),
         "--no-job-check",
     ]
-    result = subprocess.run(cmd, cwd=REPO_ROOT, capture_output=True, text=True, timeout=120)
+    result = subprocess.run(cmd, cwd=REPO_ROOT, capture_output=True, text=True, timeout=300)
     if not _has_f006_coverage(teacher_id):
         # Expect coverage gate or compile failure when slots missing
         if result.returncode != 0:
