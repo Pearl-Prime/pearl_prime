@@ -1,12 +1,28 @@
 # Manga Human Readability Assembly Rules — 2026-07-09
 
-**Lane:** research-to-rules (not render)  
-**Status:** authored candidate (SPECCED; partial code wiring — see §12 drift table)  
-**Acceptance layer:** authored candidate — not system-working until HR-WIRE-* gates land  
-**Authority stack:** external craft/comics theory (cited inline) → `MANGA_COMPOSITION_GRAMMAR_SPEC.md` → operator half-person rule (2026-07-09) → repo pipeline audit  
+**Lane:** research-to-rules (not render)
+**Status:** authored candidate (SPECCED; partial code wiring — see §12 drift table)
+**Acceptance layer:** authored candidate — not system-working until HR-WIRE-* gates land
+**Authority stack:** external craft/comics theory (cited inline) → `MANGA_COMPOSITION_GRAMMAR_SPEC.md` → operator half-person rule (2026-07-09) → repo pipeline audit
 **Companion JSON:** `artifacts/qa/manga_human_readability_rules_2026-07-09.json`
 
 ---
+
+> **AUTHORITY STATUS (2026-07-11):** **SUPERSEDED** as the operator-facing scene-assembly
+> canonical singleton. Retained as subordinate historical / research-to-rules provenance.
+>
+> **Canonical singleton (panel visual legality):**
+> [`artifacts/qa/MANGA_CANON_SCENE_ASSEMBLY_CHECKLIST.md`](./MANGA_CANON_SCENE_ASSEMBLY_CHECKLIST.md)
+>
+> **Why superseded:** this document’s HR-U02 / G3 “horizon-ratio scale on room plates”
+> (universal eye-line ↔ horizon paste law) conflicts with live operator acceptance and with
+> `SCALE-001` in the canon checklist (camera-consistent projection; no universal horizon
+> assertion). Crop/room legality and floating-torso forbids remain useful subordinate guidance
+> where they do not contradict the canon checklist.
+>
+> Do **not** treat this file as equal scene-assembly authority.
+
+
 
 ## Executive summary
 
