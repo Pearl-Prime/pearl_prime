@@ -56,7 +56,7 @@ ENGINE_DIRS = ("comparison", "false_alarm", "grief", "overwhelm", "shame", "spir
 # All translatable atom types: slot types + engine directories
 ALL_ATOM_TYPES = SLOT_TYPES + ENGINE_DIRS
 CJK6_LOCALES = ("ja-JP", "ko-KR", "zh-CN", "zh-HK", "zh-SG", "zh-TW")
-EUROPEAN_LOCALES = ("es-US", "es-ES", "fr-FR", "de-DE", "it-IT", "hu-HU")
+EUROPEAN_LOCALES = ("es-US", "es-ES", "fr-FR", "de-DE", "it-IT", "hu-HU", "pt-BR")
 ALL_LOCALES = CJK6_LOCALES + EUROPEAN_LOCALES
 
 LOCALE_NAMES: dict[str, str] = {
@@ -693,7 +693,7 @@ def main() -> int:
     ap = argparse.ArgumentParser(description="Translation Loop — single-pass (default) or comparator loop mode")
     ap.add_argument("--locale", help="Target locale (e.g. ja-JP)")
     ap.add_argument("--all-locales", action="store_true", help="All 6 CJK locales")
-    ap.add_argument("--european-locales", action="store_true", help="All 6 European locales (es-US, es-ES, fr-FR, de-DE, it-IT, hu-HU)")
+    ap.add_argument("--european-locales", action="store_true", help="All 7 non-CJK locales (es-US, es-ES, fr-FR, de-DE, it-IT, hu-HU, pt-BR)")
     ap.add_argument("--persona", help="Filter to one persona")
     ap.add_argument("--topic", help="Filter to one topic")
     ap.add_argument("--slot", help="Slot type filter")
