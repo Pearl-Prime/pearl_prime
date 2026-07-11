@@ -60,17 +60,25 @@ def test_teacher_mode_compile_smoke(teacher_id: str, tmp_path: Path):
         "--teacher", teacher_id,
         "--out", str(out_plan),
         "--no-job-check",
+        # Compile smoke only: spine defaults to production gates_hard.
+        "--skip-quality-gates",
     ]
     result = subprocess.run(cmd, cwd=REPO_ROOT, capture_output=True, text=True, timeout=300)
     if not _has_f006_coverage(teacher_id):
         # Expect coverage gate or compile failure when slots missing
         if result.returncode != 0:
+            # Explicit coverage/deficit markers only — not incidental "coverage"
+            # in EXERCISE practice_library warnings (false green).
+            err = result.stderr or ""
+            err_l = err.lower()
             assert (
-                "coverage" in result.stderr.lower()
-                or "TeacherCoverageError" in result.stderr
-                or "insufficient" in result.stderr.lower()
-                or "teacher_exercise_deficit" in result.stderr.lower()
-            )
+                "TeacherCoverageError" in err
+                or "teacher coverage" in err_l
+                or "teacher coverage insufficient" in err_l
+                or "teacher_exercise_deficit" in err_l
+                or "teacher exercise deficit" in err_l
+                or "insufficient for required slots" in err_l
+            ), f"Under-covered teacher {teacher_id} failed for unexpected reason: {err[-800:]}"
         return
     assert result.returncode == 0, f"Pipeline failed for {teacher_id}: {result.stderr}"
     assert out_plan.exists()

@@ -3369,13 +3369,12 @@ def main() -> int:
             (artifacts_dir / "teacher_coverage_report.json").write_text(
                 _json_cov.dumps(gap_report, indent=2), encoding="utf-8"
             )
-            if skip_gates:
-                print("Teacher coverage gate WARN (skipped via --skip-quality-gates). See artifacts/teacher_coverage_report.json", file=sys.stderr)
-            else:
-                print("Teacher coverage gate failed. See artifacts/teacher_coverage_report.json", file=sys.stderr)
-                raise TeacherCoverageError(
-                    "Teacher coverage insufficient for required slots. See artifacts/teacher_coverage_report.json"
-                )
+            # Pre-compile coverage is structural (TEACHER_MODE_INVARIANTS §9), not a
+            # post-render quality gate. --skip-quality-gates must NOT bypass it.
+            print("Teacher coverage gate failed. See artifacts/teacher_coverage_report.json", file=sys.stderr)
+            raise TeacherCoverageError(
+                "Teacher coverage insufficient for required slots. See artifacts/teacher_coverage_report.json"
+            )
 
     # ── SECTION REGISTRY PATH (legacy fast-path; not production) ───
     # If a section registry exists for this topic, use it instead of atom assembly.
