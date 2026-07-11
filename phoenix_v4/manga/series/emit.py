@@ -33,18 +33,22 @@ def build_series_artifact_bundle(
     topic: str = "anxiety",
     demographic: str = "anxious_millennials_urban",
     auto_generate_author: bool = False,
+    mode: str | None = None,
 ) -> dict[str, Any]:
     """Deterministic bundle: all series JSON artifacts, each schema-validated.
 
     When *brand_id* is provided, also resolves a manga EI character-author
     and includes ``manga_author_identity`` in the bundle.
+
+    When *mode* is ``\"teacher\"`` or ``\"music\"``, story architecture carries
+    ``mode`` / ``mode_vessel`` for the real operator path (M4).
     """
     style = build_style_bible(schema_version=schema_version)
     letter = build_lettering_style_bible(schema_version=schema_version)
     genre = build_genre_blueprint(genre_id=genre_id, schema_version=schema_version)
     internal = build_story_architecture_internal(
         series_id=series_id, arc_id=arc_id, schema_version=schema_version,
-        genre_id=genre_id, topic=topic,
+        genre_id=genre_id, topic=topic, mode=mode,
     )
     handoff = story_architecture_internal_to_handoff(internal)
     assets = build_asset_registry(schema_version=schema_version)
@@ -160,6 +164,7 @@ def emit_series_setup(
     topic: str = "anxiety",
     demographic: str = "anxious_millennials_urban",
     auto_generate_author: bool = False,
+    mode: str | None = None,
 ) -> dict[str, Any]:
     """Build deterministic bundle, validate, write under workspace_root."""
     bundle = build_series_artifact_bundle(
@@ -172,6 +177,7 @@ def emit_series_setup(
         topic=topic,
         demographic=demographic,
         auto_generate_author=auto_generate_author,
+        mode=mode,
     )
     write_series_artifacts(workspace_root, bundle)
     return bundle

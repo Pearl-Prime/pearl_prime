@@ -209,6 +209,7 @@ def run_one_book(
     skip_pearl_star_check: bool,
     render_book: bool,
     chapter_id: str = "ch_smoke",
+    mode: str | None = None,
 ) -> dict[str, Any]:
     snap = config_snapshot_hash()
     bank_dir = repo_root / "image_bank" / brand_id / topic_id
@@ -246,6 +247,7 @@ def run_one_book(
         topic=topic_id,
         demographic=_persona_to_demographic(persona),
         auto_generate_author=False,
+        mode=mode,
     )
 
     # Resolve the brand's teacher so the render embeds the right teacher
@@ -383,6 +385,12 @@ def main() -> int:
     ap.add_argument("--topic", required=True)
     ap.add_argument("--persona", default="gen_z_professionals")
     ap.add_argument("--genre", default="shonen", help="Genre id for genre_blueprint (e.g. shonen, shojo, seinen)")
+    ap.add_argument(
+        "--mode",
+        default="",
+        choices=("", "teacher", "music"),
+        help="Optional mode vessel (teacher|music) woven into story architecture",
+    )
     ap.add_argument("--output-dir", type=Path, required=True)
     ap.add_argument("--min-panel-images", type=int, default=56)
     ap.add_argument(
@@ -413,6 +421,7 @@ def main() -> int:
         return 1
 
     out_root = args.output_dir.resolve()
+    mode = args.mode or None
     try:
         results: list[dict[str, Any]] = []
         if args.chapter_count == 1:
@@ -429,6 +438,7 @@ def main() -> int:
                     skip_pearl_star_check=args.skip_pearl_star_check,
                     render_book=args.render_book,
                     chapter_id="ch_smoke",
+                    mode=mode,
                 )
             )
         else:
@@ -448,6 +458,7 @@ def main() -> int:
                         skip_pearl_star_check=args.skip_pearl_star_check,
                         render_book=args.render_book,
                         chapter_id=cid,
+                        mode=mode,
                     )
                 )
     except Exception as e:

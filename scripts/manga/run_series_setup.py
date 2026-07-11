@@ -22,6 +22,12 @@ def main() -> int:
     parser.add_argument("--arc-id", required=True)
     parser.add_argument("--genre-id", required=True)
     parser.add_argument("--schema-version", default="1.0.0")
+    parser.add_argument(
+        "--mode",
+        default="",
+        choices=("", "teacher", "music"),
+        help="Optional mode vessel (teacher|music) for story architecture",
+    )
     parser.add_argument("--brand-id", default="", help="Brand ID for manga author resolution")
     parser.add_argument("--locale", default="en_US", help="Locale for manga author")
     parser.add_argument("--topic", default="anxiety", help="Therapeutic topic")
@@ -45,6 +51,7 @@ def main() -> int:
         topic=args.topic,
         demographic=args.demographic,
         auto_generate_author=args.auto_generate_author,
+        mode=(args.mode or None),
     )
     print("OK wrote series artifacts under", args.workspace.resolve())
     return 0

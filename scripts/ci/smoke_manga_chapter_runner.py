@@ -137,12 +137,26 @@ def main() -> int:
             return 1
         panel_prompts = json.loads(pp_path.read_text(encoding="utf-8"))
         # MANGA.BESTSELLER.GENRE_ENGINE reads declared genre from the chapter script.
+        # Real emit path must stamp genre_id; fail loudly if absent (no CI hot-patch).
         from phoenix_v4.manga.models import paths as manga_paths
 
         script_path = ws / manga_paths.CHAPTER_SCRIPT_WRITER_HANDOFF
         script = json.loads(script_path.read_text(encoding="utf-8"))
-        script["genre_id"] = "ci_smoke_genre"
-        script_path.write_text(json.dumps(script, indent=2) + "\n", encoding="utf-8")
+        declared = str(script.get("genre") or script.get("genre_id") or "").strip()
+        if not declared:
+            print(
+                "smoke: chapter_script_writer_handoff missing declared genre "
+                "(genre/genre_id) — runtime wiring bug, not a smoke concern",
+                file=sys.stderr,
+            )
+            return 1
+        if declared != "ci_smoke_genre":
+            print(
+                f"smoke: unexpected declared genre {declared!r} "
+                "(expected ci_smoke_genre from emit_series_setup)",
+                file=sys.stderr,
+            )
+            return 1
 
         replay = ws / "_replay"
         replay.mkdir()

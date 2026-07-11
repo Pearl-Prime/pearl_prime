@@ -162,4 +162,20 @@ def build_chapter_script_pair_from_handoff(
         "chapter_id": chapter_id,
         "pages": pages_internal,
     }
+    # Propagate declared genre from story handoff so GENRE_ENGINE can evaluate
+    # without CI/test-side mutation of the emitted script.
+    declared = (
+        handoff.get("genre_id")
+        or handoff.get("genre")
+        or (handoff.get("mode_vessel") or {}).get("vessel_genre")
+    )
+    if declared:
+        writer["genre_id"] = str(declared)
+        writer["genre"] = str(declared)
+        internal_doc["genre_id"] = str(declared)
+        internal_doc["genre"] = str(declared)
+    mode = handoff.get("mode")
+    if mode:
+        writer["mode"] = mode
+        internal_doc["mode"] = mode
     return writer, internal_doc
