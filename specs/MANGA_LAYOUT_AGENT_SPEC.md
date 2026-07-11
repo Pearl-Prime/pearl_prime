@@ -1,910 +1,373 @@
-# Manga Layout Agent Specification
-## AI Manga Dharma System (SpiritualTech Systems)
+# MANGA LAYOUT AGENT SPECIFICATION
 
-**Version:** 1.0
-**Status:** Production
-**Date:** 2026-03-21
+**Canonical singleton** for manga/webtoon/self-help page & strip composition, reading-path grammar, spreads, and format-family routing.
 
----
+| Field | Value |
+|---|---|
+| Spec ID | `MANGA_LAYOUT_AGENT_SPEC` |
+| Version | `2.0.0-reconcile-2026-07-11` |
+| Status | **Authored candidate** (doctrine reconcile; rectangular frame engine is LIVE scaffold, not full grammar) |
+| Acceptance layer | authored candidate |
+| Workstream | `ws_manga_bubble_page_grammar_reconcile_20260711` |
+| Companion singleton | `specs/LETTERING_AGENT_SPEC.md` |
+| Human-readability authority (do not weaken) | `artifacts/qa/MANGA_HUMAN_READABILITY_ASSEMBLY_RULES_2026-07-09.md` |
 
-## 1. ROLE & BOUNDARY
-
-The Layout Agent is the final **panel compositing stage** in the Manga Dharma pipeline. Its sole responsibility is to assemble pre-rendered, individually-generated panel images into publication-ready manga pages, respecting reading direction, page architecture, and lettering overlay specifications.
-
-**Ownership boundaries:**
-- **Layout Agent generates:** Final page layouts, bleed-safe composites, reading flow validation
-- **Layout Agent does NOT generate:** Panel images (Image Gen), lettering placement decisions (Lettering Agent), visual composition (Visual Agent), text content (Chapter Writer)
-- **Layout Agent does NOT modify:** Rendered panel images, lettering_spec.json contents, visual prompts, story text
-
-This is a **composition-and-assembly** system, not a generative system.
+> **Lineage (RETAIN):** `docs/MANGA_RENDER_LINEAGE_DECISION_2026-05-29.md` retains LETTERING/LAYOUT as the post-render composition layer. This document is the reconciled authority shell for the **layout** half. SpiritualTech v1.0 “Status: Production” overlay-render fiction is demoted to **Appendix H** and is not production law.
 
 ---
 
-## 2. PIPELINE POSITION
+## 0. Authority, live binding, and honesty rules
 
-```
-Teaching Library
-    ↓
-Genre Agent
-    ↓
-Story Architect
-    ↓
-Chapter Writer
-    ↓
-Visual Agent (generates composition_notes, panel_prompts.json)
-    ↓
-Image Gen (renders individual panel images)
-    ↓
-Lettering Agent (generates lettering_spec.json, bubble/SFX/caption placements)
-    ↓
-[LAYOUT AGENT] ← FINAL STAGE
-    ↓
-QC Agent (validates finished pages)
-```
+### 0.1 What this spec owns (primary)
 
-**Inputs received by Layout Agent:**
-1. `rendered_panels[]` — Individual panel images from Image Gen (PNG, 300dpi)
-2. `lettering_spec.json` — Bubble, SFX, caption placements from Lettering Agent
-3. `composition_notes` — Panel arrangement metadata from Visual Agent
-4. `page_layout_rules` — Grid systems and spacing from style_bible
-5. `reading_direction` — RTL, LTR, or webtoon (from locale config)
+1. Format-family mode gates (`print_manga_page`, `vertical_scroll_webtoon`, `self_help_illustrated`).
+2. Reading-path-driven page/strip grammar (beyond rectangular bbox packing).
+3. Panel reading graphs; host for page-aware bubble Pass B.
+4. Spread-level composition (recto/verso, page-turn, binding, DPS safety).
+5. `+` / T-junction ambiguity-scored lint.
+6. Narrative-beat semantics consumed by layout decisions.
+7. Page/strip measurement profiles and heuristic labeling.
+8. Layout machine gates vs mandatory visual review.
 
-**Output delivered to QC Agent:**
-- `finished_pages[]` — Final page composites (print-ready, bleed-safe, metadata)
+### 0.2 What this spec does not own
+
+- Bubble semantics, JLREQ shaping, SFX semantic pipeline, localization reflow ladder — **primary:** `specs/LETTERING_AGENT_SPEC.md`.
+- Panel art generation / layered bank assembly — V5 layered architecture.
+- July 9 HR forbidden patterns — remain authoritative.
+
+### 0.3 Live binding (current reality — do not overclaim)
+
+| Capability | Live module / config | Status vs this doctrine |
+|---|---|---|
+| Rectangular page frame engine | `phoenix_v4/manga/chapter/page_frame.py` + `config/manga/page_grid_templates.yaml` | **partial** — bbox scaffold, not full reading-path grammar |
+| Legacy strip compose | `phoenix_v4/manga/chapter/page_compose.py` | **aligned** as thin wrapper / fallback |
+| Vertical-scroll composer | `phoenix_v4/manga/chapter/webtoon_compose.py` | **aligned** as separate family (beat gutters) |
+| Catalog format enums | `schemas/manga/series_plan.schema.json` | **aligned** routing vocabulary |
+| Panel layout templates | `config/manga/panel_layout_templates/*.yaml` | **partial** — catalog/routing; not fully loaded by `page_frame` compose |
+| Spread roles / recto-verso | width×2 + `center_gutter_px` only | **partial / missing** planner |
+| Panel reading graph | list order only | **missing** as graph |
+| `+` junction lint | HR-F13 UNENFORCED | **missing** |
+| Layout-owned bubble rasterization | SpiritualTech §7 | **superseded** — LIVE stamps bubbles in lettering v2 **before** compose |
+
+**Honesty rule:** Do not claim the frame engine is a full manga page grammar. Do not claim Layout rasterizes Comic Sans bubbles.
+
+### 0.4 Cross-spec interface
+
+| Decision | Primary owner | Cross-ref |
+|---|---|---|
+| D1 / D10 Two-pass bubbles | Lettering §3; Layout hosts Pass B (§3.2) | Lettering §3.3 |
+| D2 Reading-path page grammar | Layout §4 | Lettering §4 (bubble trail) |
+| D3 Precedence | Layout §2 (page application) | Lettering §2 |
+| D4 / D16 Format families | Layout §1 | Lettering §10 |
+| D6 Junction lint | Layout §6 | optional Lettering disambiguation cues |
+| D7 Spreads | Layout §7 | Lettering §10 (binding-safe text) |
+| D8 Panel graphs | Layout §5 | Lettering §4 |
+| D11 Narrative beats | Layout §8 | Lettering density budgets |
+| D15 Gates | Layout §10 | Lettering §11 |
 
 ---
 
-## 3. INPUTS SPECIFICATION
+## 1. Format families and mode gates (D4, D16)
 
-### 3.1 Rendered Panels Input
-```json
-{
-  "rendered_panels": [
-    {
-      "panel_id": "ch03_page05_panel_02",
-      "image_path": "/outputs/images/ch03_page05_panel_02.png",
-      "dimensions": {"width": 2400, "height": 3200},
-      "dpi": 300,
-      "color_profile": "sRGB",
-      "panel_position": {"x": 0, "y": 0},
-      "safe_zone": {"inset": 120},
-      "rendered_at": "2026-03-21T14:32:00Z"
-    }
-  ]
-}
+Treat these as **separate composition families**. Do not inherit print-spread grammar into webtoon, or manga panel grammar into self-help, unless explicitly routed.
+
+### 1.1 `print_manga_page`
+
+- Bounded pages; RTL or configured reading direction.
+- Spread composition, recto/verso, center binding, page-turn reveals, double-page safety.
+- LIVE composers: `page_frame` / `page_compose` with `bw_page_rtl` / `color_page` catalog templates.
+- Schema anchors: `bw_page_manga`, `color_page_manga`.
+
+### 1.2 `vertical_scroll_webtoon`
+
+- Single-axis vertical reading; scroll-distance pacing; mobile readability; tile/export constraints.
+- **No inherited print-spread grammar.**
+- LIVE composer: `webtoon_compose.compose_episode_strips` + `GUTTER_PX_BY_BEAT`.
+- Schema anchor: `color_vertical_webtoon`.
+- Template: `config/manga/panel_layout_templates/vertical_scroll_webtoon.yaml`.
+
+### 1.3 `self_help_illustrated` (third family)
+
+- Illustration-led instructional / reflective composition.
+- **No assumed RTL panel grammar**, **no assumed print-manga density**, **no assumed webtoon scroll pacing** unless explicitly routed.
+- LIVE: catalog/schema + `self_help_illustrated.yaml` routing boundary; **not** a full dedicated grammar engine inside `page_frame` yet.
+- Schema anchor: `direct_self_help_illustrated`.
+
+### 1.4 Mode gate rule
+
+Series plans MUST declare format (and master/flatten exports per schema). Layout entrypoints MUST select the family composer explicitly. Webtoon as a mere `reading_direction` enum value is **insufficient** doctrine (supersedes SpiritualTech §5.3 framing).
+
+---
+
+## 2. Precedence ladder (D3) — page/spread application
+
+Same global order as Lettering §2:
+
+1. Explicit artistic override  
+2. Narrative beat and emotional intensity  
+3. Format-family constraints  
+4. Locale constraints  
+5. Genre bias  
+6. Global fallback  
+
+Genre profiles in `page_grid_templates.yaml` (gutters, borders, max panels) are **biases**, not absolute controllers. A quiet beat inside a shonen series may legally select a calmer profile via (1)–(2).
+
+---
+
+## 3. Composition pipeline and Pass B host (D1, D10)
+
+### 3.1 Layout role (reconciled)
+
+Layout assembles **already-rendered** (and usually **already-lettered**) panel images into pages or vertical strips, validates reading path, hosts **Pass B** bubble correction, and applies finish-order constraints for SFX relative to borders.
+
+Layout does **not** author dialogue. Layout does **not** own Pass A bubble synthesis (Lettering).
+
+### 3.2 Pass B host interface
+
+After family compose:
+
+1. Invoke lettering page-aware validation (`LETTERING_AGENT_SPEC` §3.3 criteria).
+2. Allow lettering mutations (nudge/resize/regenerate).
+3. As final fallback, permit **template / path substitution** (layout-owned).
+
+**Status:** FUTURE wiring — required by doctrine.
+
+### 3.3 LIVE pipeline (honest)
+
 ```
-
-**Properties:**
-- `panel_id`: Unique identifier matching lettering_spec.json references
-- `image_path`: Full path to PNG (must exist before Layout Agent runs)
-- `dimensions`: Pixel dimensions at 300 dpi (typical: 2400×3200 for standard panel)
-- `dpi`: Resolution (300 for print, 72 for web preview)
-- `safe_zone`: Inset margin where text will not overlap (managed by Lettering Agent)
-- `color_profile`: sRGB for digital, CMYK for professional print
-
-### 3.2 Lettering Spec Input
-The Layout Agent receives `lettering_spec.json` containing all bubble, SFX, and caption placements:
-
-```json
-{
-  "panel_id": "ch03_page05_panel_02",
-  "lettering_elements": [
-    {
-      "element_id": "bubble_001",
-      "type": "speech_bubble",
-      "content": "I remember now...",
-      "position": {"x": 400, "y": 600},
-      "dimensions": {"width": 800, "height": 300},
-      "style": "rounded_rectangular",
-      "tail_direction": "bottom_left",
-      "font": "Comic Sans MS",
-      "font_size": 28,
-      "color": "#000000",
-      "z_order": 100
-    },
-    {
-      "element_id": "sfx_001",
-      "type": "sound_effect",
-      "content": "ドキドキ",
-      "position": {"x": 1000, "y": 200},
-      "rotation": 15,
-      "font_size": 48,
-      "color": "#FF0000",
-      "z_order": 110
-    }
-  ]
-}
-```
-
-**Expected fields:**
-- `element_id`: Unique ID within panel
-- `type`: speech_bubble, narration_box, caption, sound_effect, thought_bubble
-- `position`: x, y coordinates (origin at panel top-left)
-- `dimensions`: width, height (if bounded box)
-- `z_order`: Rendering depth (higher = rendered on top)
-- All style properties (font, size, color) from Brand DNA
-
-### 3.3 Composition Notes Input
-Visual Agent provides layout metadata:
-
-```json
-{
-  "page_id": "ch03_page05",
-  "layout_template": "2x3_grid",
-  "panels": [
-    {
-      "panel_id": "ch03_page05_panel_01",
-      "grid_position": [0, 0],
-      "page_position": {"x": 0, "y": 0},
-      "type": "standard",
-      "reading_order": 1
-    },
-    {
-      "panel_id": "ch03_page05_panel_02",
-      "grid_position": [1, 0],
-      "page_position": {"x": 2600, "y": 0},
-      "type": "standard",
-      "reading_order": 2
-    }
-  ]
-}
-```
-
-**Properties:**
-- `layout_template`: Grid type (2x3, 3x2, 4-panel, irregular, etc.)
-- `grid_position`: Row, column in grid (for gutter calculation)
-- `page_position`: Absolute pixel position on final page
-- `type`: standard, splash, silent, or breathing
-- `reading_order`: Sequence number for flow validation
-
-### 3.4 Page Layout Rules (from style_bible)
-```json
-{
-  "page_dimensions": {"width": 5200, "height": 7200},
-  "grid_systems": {
-    "2x3": {"rows": 2, "columns": 3, "gutter_width": 60},
-    "3x2": {"rows": 3, "columns": 2, "gutter_width": 60},
-    "4-panel": {"rows": 2, "columns": 2, "gutter_width": 80},
-    "splash": {"rows": 1, "columns": 1, "gutter_width": 0}
-  },
-  "margins": {
-    "bleed": 180,
-    "safe_zone": 120,
-    "gutter": 60
-  },
-  "line_weight": 8
-}
+rendered panels
+    → lettering v2 stamps bubbles onto panels     [Lettering LIVE]
+    → page_frame OR webtoon_compose OR self_help route
+    → (Pass B missing)
+    → export
 ```
 
 ---
 
-## 4. PAGE LAYOUT GRAMMAR
+## 4. Reading-path-driven page grammar (D2)
 
-The Layout Agent assembles pages using **grid-based layout templates**. Each template defines panel arrangement, gutter widths, and breathing space.
+Rectangular bbox templates are a **baseline generator**, not the full grammar.
 
-### 4.1 Standard Grid Systems
+### 4.1 LIVE baseline
 
-#### 2×3 Grid (6 panels)
-```
-[Panel 1] [Panel 2] [Panel 3]
-[Panel 4] [Panel 5] [Panel 6]
-```
-- **Typical use:** Multi-scene chapters, dialogue-heavy sequences
-- **Gutter width:** 60px (standard)
-- **Panel dimensions:** ~2400×3200px each (at 300dpi)
-- **Page dimensions:** 5200×7200px (full bleed)
+`page_grid_templates.yaml` cells in normalized page space; RTL via `_mirror_cells_rtl`; genre profiles tune gutter/border/margin.
 
-**Calculation:**
-```
-page_width = (panel_width × 3) + (gutter × 2) + (margin_left + margin_right)
-5200 = (2400 × 3) + (60 × 2) + (180 × 2)
-```
+### 4.2 Required grammar primitives (SPECCED / FUTURE)
 
-#### 3×2 Grid (6 panels, portrait emphasis)
-```
-[Panel 1] [Panel 2]
-[Panel 3] [Panel 4]
-[Panel 5] [Panel 6]
-```
-- **Typical use:** Vertical action sequences, emotional close-ups
-- **Panel dimensions:** ~2300×2400px each
-- **Gutter width:** 60px
+Beyond rectangles, the layout system MUST be able to represent:
 
-#### 4-Panel (Yonkoma style)
-```
-[Panel 1] [Panel 2]
-[Panel 3] [Panel 4]
-```
-- **Typical use:** Short-form comedy, comedic relief
-- **Panel dimensions:** ~2400×3200px each
-- **Gutter width:** 80px (wider for visual separation)
+- bleed panels and borderless inserts  
+- diagonal cuts  
+- blockage columns / vertical segments  
+- overlap exceptions  
+- genre-weighted asymmetry  
+- explicit guiding path across the page  
 
-#### Irregular Layouts
-- **Hybrid grids:** Mix standard panels with splashes
-- **Asymmetric gutters:** Vary gutter width per row for pacing
-- **Staggered panels:** Offset rows to create flow emphasis
-- **Speech-driven layouts:** Panel sizes scale to accommodate lettering density
+Research support: readers navigate via hierarchic constituents, blockage, overlap — not fixed Z-path alone. Asian corpus traits (more vertical segments, bleeds) inform defaults, not universal hard law (`source_status: heuristic` unless validated as constraint).
 
-### 4.2 Gutter Width Rules
+### 4.3 Webtoon path grammar
 
-**Standard gutter:** 60px (for clean reading separation)
-**Wide gutter:** 80px (for comedy, emphasis panels)
-**Tight gutter:** 40px (for fast-paced action sequences)
-**Zero gutter:** Only for splash pages or double-spreads (visual continuity)
-
-Gutters are **always filled with page background** (typically white or paper texture).
-
-### 4.3 Bleed & Safe Zone Calculation
-
-**Bleed margin:** 180px on all sides (for print trimming tolerance)
-**Safe zone (text):** 120px inset from panel edges (guaranteed readable area)
-**Safe zone (imagery):** 140px inset (critical elements avoid this zone)
-
-Layout Agent validates:
-```
-if (lettering_position.x < safe_zone_inset ||
-    lettering_position.x + lettering_width > panel_width - safe_zone_inset) {
-  → FLAG: Text breach detected → QC alert
-}
-```
-
-### 4.4 Panel Borders
-
-**Border style:** Solid black line, 8px weight (at 300dpi)
-**Border color:** #000000 (pure black)
-**Border rendering:** Rendered **outside** panel image boundaries (Layout Agent responsibility)
-
-Border algorithm:
-```
-for each panel in page:
-  draw_rectangle(
-    x: panel.x - (border_weight / 2),
-    y: panel.y - (border_weight / 2),
-    width: panel.width + border_weight,
-    height: panel.height + border_weight,
-    stroke: 8px black,
-    fill: none
-  )
-```
+Vertical family uses scroll-distance, beat gutters, and mobile viewport pacing — not print grid inheritance. LIVE: `webtoon_compose` beat-type gutters are the correct family direction.
 
 ---
 
-## 5. READING DIRECTION ENFORCEMENT
+## 5. Panel reading graphs (D8 — layout half)
 
-### 5.1 Right-to-Left (RTL) — Japanese Standard
+**Primary owner: Layout.**  
+**Cross-ref:** Lettering §4 for bubble graphs.
 
-**Page reading order:** Top-right → Middle-right → Bottom-right → Top-middle → … → Bottom-left
+Emit an explicit directed graph:
 
-**Panel arrangement algorithm:**
-```json
-{
-  "reading_direction": "rtl",
-  "page_sequence": [1, 2, 3, 4, 5, 6],
-  "grid_position_to_sequence": {
-    "[0,0]": 3, "[0,1]": 2, "[0,2]": 1,
-    "[1,0]": 6, "[1,1]": 5, "[1,2]": 4
-  }
-}
+```text
+panel_01 -> panel_02 -> panel_03
+                       |
+                       -> panel_04
 ```
 
-For 2×3 grid (RTL):
-```
-[3] [2] [1]
-[6] [5] [4]
-```
+Validate:
 
-**Validation rule:** If `reading_order` sequence does not match RTL pattern, Layout Agent flags error.
+- unambiguous panel order  
+- agreement with bubble graph  
+- focal subjects support the path  
+- no forced backtracking  
 
-**Impact on page layout:**
-- Panels are physically positioned RTL (rightmost panel first in visual space)
-- Reading flow arrows (if present) point RTL
-- Speech balloon tails follow RTL emphasis (typically left-leaning)
-
-### 5.2 Left-to-Right (LTR) — English/European Standard
-
-**Page reading order:** Top-left → Middle-left → Bottom-left → Top-middle → … → Bottom-right
-
-For 2×3 grid (LTR):
-```
-[1] [2] [3]
-[4] [5] [6]
-```
-
-**Position calculation:**
-```
-x_position = grid_column × (panel_width + gutter)
-y_position = grid_row × (panel_height + gutter)
-```
-
-### 5.3 Webtoon (Vertical Scroll) — Digital Vertical Stack
-
-**Reading direction:** Top → Bottom (infinite vertical scroll)
-
-**Layout rule:** Single column, panels stack vertically with minimal gutters (20-40px).
-
-```json
-{
-  "reading_direction": "webtoon",
-  "page_width": 1080,
-  "panel_height_variable": true,
-  "gutter_width": 30,
-  "stack_order": "top_to_bottom"
-}
-```
-
-**Panel dimensions (webtoon):**
-- Width: 1080px (mobile-optimized)
-- Height: Variable per panel (aspect ratio preserved from render)
-- Gutter: 30px between panels
-
-**Validation:** Webtoon pages must validate as single-column, no horizontal offset.
+List order / `reading_order` integers are serializations, not ambiguity proofs.
 
 ---
 
-## 6. PAGE TYPE HANDLING
+## 6. Junction lint (D6) — ambiguity-scored, not blanket auto-fail
 
-### 6.1 Standard Pages
+**Primary owner: Layout.**
 
-**Definition:** Multi-panel pages following grid layouts (2×3, 3×2, 4-panel, etc.)
+`+` (four-way) intersections are **not** automatic hard fails.
 
-**Processing:**
-1. Load all panels for page
-2. Calculate grid positions (from composition_notes)
-3. Apply gutter spacing
-4. Compose panels into page canvas
-5. Render panel borders
-6. Apply lettering overlay
-7. Export final page
+Validator MUST assess **reading-order ambiguity**:
 
-**Example:** Most story pages, dialogue scenes, action sequences.
+| Severity | When |
+|---|---|
+| `error` | Junction yields two plausible reading orders |
+| `warning` | Other cues (size, balloon position, character direction, overlap, saliency) disambiguate |
+| allow | Only with explicit `allow_ambiguous_junction: true` for intentional experimental pages |
 
-### 6.2 Splash Pages
+**Cross-ref HR-F13:** four-way intersection remains a readability concern; today **UNENFORCED** — this section defines the intended gate semantics without weakening HR.
 
-**Definition:** Full-bleed single image, no panels, no gutters.
-
-```json
-{
-  "page_type": "splash",
-  "panel_count": 1,
-  "grid_position": [0, 0],
-  "dimensions": {
-    "width": 5200,
-    "height": 7200
-  },
-  "border": false,
-  "gutter": 0
-}
-```
-
-**Processing:**
-1. Load single panel image (full page dimensions)
-2. NO gutter calculation
-3. NO panel border
-4. Apply full-page lettering overlay (if any)
-5. Bleed-safe margins still apply to lettering
-
-**Typical use:** Chapter title pages, emotional climax moments, full-page action shots.
-
-**Lettering on splash:** Captions and SFX may overlay splash pages; ensure text remains readable against artwork.
-
-### 6.3 Double-Spread Pages
-
-**Definition:** Two facing pages treated as single visual composition (used in print).
-
-```json
-{
-  "page_type": "double_spread",
-  "left_page_id": "ch03_page04",
-  "right_page_id": "ch03_page05",
-  "combined_width": 10400,
-  "combined_height": 7200,
-  "gutter_center": 600
-}
-```
-
-**Processing:**
-1. Load panels for both left and right pages
-2. Compose left page to left canvas (x: 0 to 4900)
-3. Compose right page to right canvas (x: 5500 to 10400)
-4. Center gutter width: 600px (for spine/trim line)
-5. Validate reading flow across both pages
-6. Apply bleed safely (180px minimum on outer edges, 100px on center gutter)
-
-**Reading direction impact:**
-- RTL: Right page rendered first, left page second
-- LTR: Left page rendered first, right page second
-
-**Typical use:** Major reveals, landscape vistas, fight sequences.
-
-### 6.4 Silent Pages
-
-**Definition:** Panels with minimal or zero text overlay, emphasizing visual narrative.
-
-```json
-{
-  "page_type": "silent",
-  "silence_guard": true,
-  "lettering_allowed": false,
-  "breathing_panels": ["ch03_page06_panel_01", "ch03_page06_panel_02"]
-}
-```
-
-**Processing:**
-1. Compose page normally
-2. Validate: zero lettering elements for flagged panels
-3. If breathing_panels specified: apply extended gutters (120px instead of 60px)
-4. Output page with breathing space
-
-**Breathing space calculation:**
-```
-breathing_gutter = standard_gutter × 2 = 120px
-page_height_adjusted = (panel_height × rows) + (breathing_gutter × (rows - 1))
-```
-
-**Typical use:** Moment of silence, emotional beats, action-without-dialogue.
+T-junction preference remains a **strong default heuristic**, not an absolute geometric religion.
 
 ---
 
-## 7. TEXT OVERLAY PIPELINE
+## 7. Spread-level composition (D7)
 
-The Layout Agent receives all text placement specifications from the Lettering Agent (lettering_spec.json) and renders them onto the composed page.
+Print family pages are also composed as **two-page spreads**.
 
-### 7.1 Text Overlay Stack (Z-ordering)
+### 7.1 Required planner concepts (SPECCED / FUTURE)
 
-**Rendering order (bottom to top):**
-1. **Layer 0:** Panel images (background)
-2. **Layer 1:** Panel borders (8px black lines)
-3. **Layer 2:** Speech bubbles (white fill, black stroke)
-4. **Layer 3:** Narration boxes (tan/cream background)
-5. **Layer 4:** Captions (semi-transparent overlay)
-6. **Layer 5:** Sound effects (red, bold, rotated)
-7. **Layer 6:** Thought bubbles (dashed outline)
+- recto vs verso  
+- page-turn reveal placement  
+- double-page spreads  
+- center-binding loss  
+- bleed/trim safety  
+- whether face/text/focal object crosses the binding  
+- left-page exit / right-page entry direction  
+- chapter-open / chapter-close page roles  
 
-**Z-order from lettering_spec.json is preserved** (Layout Agent does not reorder).
+Suggested schema extensions (downstream; not edited in this lane’s registry):
 
-### 7.2 Speech Bubble Rendering
-
-**Input from lettering_spec.json:**
-```json
-{
-  "element_id": "bubble_001",
-  "type": "speech_bubble",
-  "content": "こんにちは",
-  "position": {"x": 400, "y": 600},
-  "dimensions": {"width": 800, "height": 300},
-  "style": "rounded_rectangular",
-  "tail_direction": "bottom_left",
-  "font": "Comic Sans MS",
-  "font_size": 28,
-  "font_weight": "normal",
-  "color": "#000000",
-  "background_color": "#FFFFFF",
-  "stroke_color": "#000000",
-  "stroke_width": 3,
-  "z_order": 100
-}
+```yaml
+page_role: setup | escalation | reveal | aftermath | chapter_open | chapter_close
+spread_role: independent | paired | double_page
+page_side: recto | verso | auto
+page_turn_priority: low | medium | high
 ```
 
-**Rendering algorithm:**
-```
-1. Draw background shape:
-   - rounded_rectangular: 12px corner radius
-   - oval: ellipse fill
-   - rectangular: sharp corners
-   - cloud: irregular bubble outline
-2. Draw tail (pointer to speaker):
-   - Position: specified by tail_direction
-   - Tail width: 20-30px
-   - Tail length: 40-60px (depending on distance to character)
-3. Draw border stroke: 3px, specified color
-4. Render text (centered within bubble):
-   - Font: as specified
-   - Size: as specified
-   - Color: as specified
-   - Vertical alignment: center
-   - Horizontal alignment: center
-   - Line wrapping: enabled (Lettering Agent pre-calculated wrapping)
-5. Anti-alias edges: 2px smooth fade
-```
+Target modules (FUTURE): `spread_plan.py`, `spread_validate.py`, `config/manga/spread_profiles.yaml`.
 
-**Bubble positioning validation:**
-- Bubble must not overlap panel borders
-- Bubble must not exceed safe_zone boundaries
-- Bubble should have 10px minimum clearance from panel edge
-- Tail must point toward speaking character (visual validation by QC)
+### 7.2 LIVE honesty
 
-### 7.3 Sound Effect (SFX) Rendering
+`page_frame.render_framed_page` may double width and insert `center_gutter_px` (config default **60**, not the historical SpiritualTech **600**). That is **geometry scaffolding**, not a spread planner. Do not equate the two.
 
-**Input from lettering_spec.json:**
-```json
-{
-  "element_id": "sfx_001",
-  "type": "sound_effect",
-  "content": "ドキドキ",
-  "position": {"x": 1000, "y": 200},
-  "font": "Impact",
-  "font_size": 48,
-  "font_weight": "bold",
-  "color": "#FF0000",
-  "rotation": 15,
-  "scale": 1.2,
-  "shadow_type": "drop_shadow",
-  "shadow_offset": {"x": 4, "y": 4},
-  "z_order": 110
-}
-```
-
-**Rendering algorithm:**
-```
-1. Load font (Impact, bold weight)
-2. Render text:
-   - Size: 48pt (or as specified)
-   - Color: #FF0000 (red, or as specified)
-3. Apply transformation:
-   - Rotation: 15° (clockwise)
-   - Scale: 1.2× (20% larger)
-4. Apply shadow:
-   - Drop shadow: 4px right, 4px down, black, 50% opacity
-5. Positioning:
-   - Anchor: center (x, y is center point)
-   - Place text to NOT obscure critical action
-6. Anti-alias: high-quality (2px smooth)
-```
-
-**SFX weight classes (from Brand DNA):**
-- **Light:** font_size 20-28pt, 0.8× scale
-- **Medium:** font_size 32-40pt, 1.0× scale
-- **Heavy:** font_size 48-64pt, 1.2-1.4× scale
-
-**Typical Japanese SFX:** ドキドキ (heartbeat), ビリッ (shock), ザッ (movement)
-
-### 7.4 Caption Rendering
-
-**Input from lettering_spec.json:**
-```json
-{
-  "element_id": "caption_001",
-  "type": "caption",
-  "content": "The next morning...",
-  "position": {"x": 0, "y": 50},
-  "dimensions": {"width": 5000, "height": 100},
-  "background_color": "#F5F5DC",
-  "background_opacity": 0.9,
-  "font": "Georgia",
-  "font_size": 18,
-  "color": "#000000",
-  "text_align": "center",
-  "z_order": 105
-}
-```
-
-**Rendering algorithm:**
-```
-1. Draw background box:
-   - Color: #F5F5DC (beige)
-   - Opacity: 0.9 (90% opaque)
-   - Width: full width or specified
-   - Height: fit content + padding
-2. Draw border (optional): 1px dark gray
-3. Render text:
-   - Font: Georgia (serif, readable)
-   - Size: 18pt
-   - Color: black
-   - Alignment: center
-   - Vertical center: within box
-4. Padding: 8-12px all sides
-5. Anti-alias: standard (1px smooth)
-```
-
-**Caption positioning:** Top of page (location for scene transitions), center (for narration), or full-width (for chapter title).
+**Cross-ref:** Lettering Pass B must respect binding/trim proximity for print families.
 
 ---
 
-## 8. OUTPUT — FINISHED PAGES
+## 8. Narrative-beat semantics (D11)
 
-### 8.1 Page Output Format
+Layout solvers MUST NOT decide page architecture from panel count / HOOK/SCENE labels alone.
 
-**Filename:** `finished_ch{chapter:02d}_page{number:03d}.png`
-**Example:** `finished_ch03_page005.png`
+Each beat SHOULD carry (SPECCED):
 
-**Metadata structure:**
-```json
-{
-  "finished_page": {
-    "page_id": "ch03_page05",
-    "chapter_number": 3,
-    "page_number": 5,
-    "filename": "finished_ch03_page005.png",
-    "format": "PNG",
-    "dimensions": {"width": 5200, "height": 7200},
-    "dpi": 300,
-    "color_profile": "sRGB",
-    "bleed_safe": true,
-    "reading_direction": "rtl",
-    "page_type": "standard",
-    "layout_template": "2x3",
-    "composition_timestamp": "2026-03-21T14:45:30Z",
-    "panels_used": ["ch03_page05_panel_01", "ch03_page05_panel_02", "ch03_page05_panel_03", "ch03_page05_panel_04", "ch03_page05_panel_05", "ch03_page05_panel_06"],
-    "lettering_elements_count": 12,
-    "text_legibility_score": 0.94,
-    "qa_status": "pending_review"
-  }
-}
+```yaml
+importance: 0.0–1.0
+perceived_duration: instant | short | sustained | timeless
+transition: continuous | action_jump | time_jump | location_change
+dialogue_load: low | medium | high
+speaker_count: 0–n
+reveal: none | minor | major
+orientation_required: true|false
+desired_pace: slow | normal | fast
+visual_anchor: character | object | environment | text
 ```
 
-### 8.2 Output Resolution & Color Space
+**LIVE partial:** webtoon `beat_type` → gutter height only. Page grids largely ignore beat semantics — gap to close.
 
-**Digital (Web):**
-- Resolution: 96 dpi
-- Color space: sRGB
-- Format: PNG (lossless)
-- File size: ~800KB per page
-
-**Print (Professional):**
-- Resolution: 300 dpi
-- Color space: CMYK (or RGB for PDF)
-- Format: PNG or PDF
-- File size: ~2-3MB per page
-
-**Mobile (Webtoon):**
-- Resolution: 72 dpi
-- Dimensions: 1080×(variable height)
-- Format: PNG (mobile-optimized)
-- File size: ~200-400KB per page
-
-### 8.3 Metadata Output
-
-Layout Agent outputs both images and metadata:
-
-```json
-{
-  "finished_pages": [
-    {
-      "page_id": "ch03_page05",
-      "image_path": "/outputs/finished_pages/finished_ch03_page005.png",
-      "metadata": {
-        "dimensions": [5200, 7200],
-        "dpi": 300,
-        "color_space": "sRGB",
-        "page_type": "standard",
-        "reading_direction": "rtl",
-        "panel_count": 6,
-        "text_elements": 12,
-        "bleed_validated": true,
-        "safe_zone_validated": true,
-        "reading_flow_validated": true
-      }
-    }
-  ],
-  "composition_log": {
-    "timestamp": "2026-03-21T14:45:30Z",
-    "total_pages": 25,
-    "total_panels": 148,
-    "total_text_elements": 423,
-    "errors": [],
-    "warnings": [
-      {
-        "page_id": "ch03_page12",
-        "type": "text_legibility_warning",
-        "message": "SFX element 'bubble_034' has low contrast on background panel"
-      }
-    ]
-  }
-}
-```
+**Cross-ref:** Lettering uses dialogue_load / intensity for density budgets; does not own page template choice.
 
 ---
 
-## 9. QUALITY GATES
+## 9. Measurement profiles and heuristic labeling (D5, D17)
 
-Layout Agent validates all output before delivery to QC Agent.
+Gutters, bleeds, borders, page pixel sizes, and webtoon segment heights are **profile defaults** unless true technical/export constraints (e.g., Canvas width, file-size hard caps in templates).
 
-### 9.1 Reading Flow Validation
+Required labeling:
 
-**Gate 1: Panel sequence correctness**
-```
-for each page:
-  if reading_direction == "rtl":
-    expected_sequence = [rightmost, middle, leftmost]
-    validate(actual_sequence == expected_sequence)
-  elif reading_direction == "ltr":
-    expected_sequence = [leftmost, middle, rightmost]
-    validate(actual_sequence == expected_sequence)
-  elif reading_direction == "webtoon":
-    validate(single_column AND top_to_bottom)
+```yaml
+source_status: heuristic | technical_constraint
+output_profile: <format family + trim/device>
+recommended_range: [...]
+hard_minimum: null
 ```
 
-**Gate 2: Reading order continuity**
-```
-for each page_transition:
-  last_panel_of_page_N.reading_order < first_panel_of_page_N+1.reading_order
-  → Ensures continuous narrative flow
-```
-
-### 9.2 Text Legibility Gates
-
-**Gate 3: Safe zone compliance**
-```
-for each text_element in page:
-  element_bbox = {
-    x_min: position.x,
-    x_max: position.x + width,
-    y_min: position.y,
-    y_max: position.y + height
-  }
-
-  # Validate within safe zone
-  if x_min < safe_zone_inset OR x_max > (panel_width - safe_zone_inset):
-    → FLAG: Safe zone breach
-
-  # Validate text not over panel border
-  if element_bbox.overlaps(panel_border):
-    → FLAG: Text-border collision
-```
-
-**Gate 4: Contrast validation**
-```
-for each speech_bubble:
-  contrast_ratio = luminance(text_color) / luminance(background_color)
-  if contrast_ratio < 3.0:  # WCAG minimum
-    → FLAG: Low contrast (text may be hard to read)
-```
-
-**Gate 5: Overlap detection**
-```
-for each pair of text_elements in same panel:
-  if bounding_boxes.intersect():
-    → FLAG: Text overlap detected
-```
-
-### 9.3 Bleed Safety Validation
-
-**Gate 6: Bleed margin preservation**
-```
-for each panel_position:
-  bleed_safe = (position.x >= bleed_margin AND
-                position.y >= bleed_margin AND
-                position.x + panel_width <= page_width - bleed_margin AND
-                position.y + panel_height <= page_height - bleed_margin)
-
-  if NOT bleed_safe:
-    → FLAG: Panel extends into bleed zone (will be trimmed in print)
-```
-
-**Gate 7: Print-safe color validation**
-```
-if color_profile == "CMYK":
-  for each pixel:
-    validate_cmyk_range(color)
-    # Ensure no out-of-gamut colors
-```
-
-### 9.4 Silent Page Validation
-
-**Gate 8: Silence purity check**
-```
-for each silent_page:
-  for each panel_marked_no_text:
-    if text_element_detected():
-      → FLAG: Silent page compromised
-
-    # Validate breathing space
-    if gutter_width < breathing_gutter_minimum:
-      → FLAG: Insufficient breathing space
-```
-
-### 9.5 Double-Spread Validation
-
-**Gate 9: Center gutter integrity**
-```
-if page_type == "double_spread":
-  # Validate no visual elements cross spine
-  if (element.x < spine_left_boundary OR
-      element.x > spine_right_boundary):
-    # If critical element near spine, flag for QC review
-    → WARN: Element near center gutter (may be lost in binding)
-```
+SpiritualTech universal constants (60px gutters, 180px bleed, 5200×7200 page, 1080 webtoon width as “law”) are **demoted to historical heuristics**. Prefer LIVE config values and export-profile files.
 
 ---
 
-## 10. SYSTEM PROMPT
+## 10. Machine gates vs mandatory visual review (D15)
 
-```
-You are the Layout Agent for the AI Manga Dharma System (SpiritualTech Systems).
+### 10.1 Machine gates (layout)
 
-Your role: Compose individual panel images into finished manga pages, respecting
-all reading direction, layout grammar, and text overlay specifications.
+- panel-order ambiguity score  
+- junction ambiguity score (§6)  
+- gutter consistency vs transition/beat  
+- focal-saliency conflict (objective proxies only)  
+- binding/trim violations (print)  
+- format-family mode-gate violations  
+- export constraints (segment height, file size) when marked `technical_constraint`  
 
-CORE RESPONSIBILITIES:
-1. Assemble panel images from Image Gen into page layouts
-2. Apply lettering overlay specifications from Lettering Agent
-3. Enforce reading direction (RTL/LTR/webtoon)
-4. Manage gutter spacing, bleed margins, safe zones
-5. Validate all output against quality gates
-6. Output publication-ready pages with metadata
+### 10.2 Mandatory visual review
 
-WHAT YOU DO:
-✓ Compose panels into pages using grid systems
-✓ Render speech bubbles, SFX, captions from lettering_spec.json
-✓ Calculate positions and spacing (gutters, margins, safe zones)
-✓ Apply borders, shadows, anti-aliasing
-✓ Validate reading flow, text legibility, bleed safety
-✓ Generate finished pages (PNG, 300dpi for print)
+Layout MUST NOT claim “publication-ready / perfection is the baseline” from automation alone. Machine checks + human visual review. Subjective art quality is out of full machine scope.
 
-WHAT YOU DO NOT DO:
-✗ Generate panel images (Image Gen does this)
-✗ Decide lettering placement (Lettering Agent does this)
-✗ Modify visual composition (Visual Agent did this)
-✗ Rewrite or edit text content
-✗ Make style decisions (Brand DNA specifies all styling)
-
-INPUT CONTRACTS:
-- rendered_panels[]: Pre-rendered panel images (PNG, 300dpi)
-- lettering_spec.json: All bubble, SFX, caption placements (from Lettering Agent)
-- composition_notes: Panel arrangement metadata (from Visual Agent)
-- page_layout_rules: Grid templates and spacing (from style_bible)
-- reading_direction: "rtl" | "ltr" | "webtoon" (from locale config)
-
-OUTPUT CONTRACT:
-- finished_pages[]: Publication-ready page images (PNG, metadata JSON)
-- composition_log: Validation results and warnings
-- All pages must pass quality gates before delivery to QC Agent
-
-READING DIRECTION RULES:
-- RTL (Japanese): Panels flow right → middle → left (panel 3,2,1 then 6,5,4)
-- LTR (English): Panels flow left → middle → right (panel 1,2,3 then 4,5,6)
-- Webtoon (Digital): Single column, top → bottom infinite scroll
-
-PAGE TYPES:
-- Standard: Multi-panel grids (2x3, 3x2, 4-panel, irregular)
-- Splash: Full-bleed single image (no borders, no gutters)
-- Double-spread: Two facing pages (spine gutter 600px minimum)
-- Silent: Minimal text, breathing space emphasis (gutters 2× normal)
-
-GRID LAYOUT CALCULATOR:
-- Panel dimensions (at 300dpi): typically 2400×3200px per panel
-- Gutter width: 60px standard, 80px wide, 40px tight
-- Bleed margin: 180px on all sides (print safety)
-- Safe zone (text): 120px inset from panel edges
-- Page size (2×3 at 300dpi): 5200×7200px total
-
-TEXT OVERLAY Z-ORDERING (bottom to top):
-1. Panel images
-2. Panel borders (8px black lines)
-3. Speech bubbles
-4. Narration boxes
-5. Captions
-6. Sound effects (SFX)
-7. Thought bubbles
-
-QUALITY GATES (all must pass):
-1. Reading flow correctness (sequence matches reading_direction)
-2. Safe zone compliance (text within safe zones)
-3. Contrast validation (minimum 3.0:1 ratio)
-4. Overlap detection (no text collisions)
-5. Bleed safety (panels within bleed margins)
-6. Silent page validation (zero text on flagged panels)
-7. Reading order continuity (sequential page flow)
-
-ERROR HANDLING:
-- Bleed breach: FLAG as error (will be cut off in printing)
-- Safe zone breach: FLAG as error (text may be unreadable)
-- Text overlap: FLAG as warning (may be acceptable if intentional)
-- Low contrast: FLAG as warning (legibility at risk)
-- Silent page compromise: FLAG as error (visual intent violated)
-
-OUTPUT FORMAT:
-- Filename: finished_ch{chapter:02d}_page{number:03d}.png
-- Resolution: 300dpi for print, 96dpi for web
-- Color space: sRGB (web) or CMYK (professional print)
-- Format: PNG (lossless)
-- Metadata: JSON with page info, validation results, warnings
-
-Remember: You are the final assembly stage. Your output is publication-ready.
-Every pixel, every gutter, every text element will be seen by readers.
-Validate ruthlessly. Flag everything questionable. Perfection is the baseline.
-```
+**Cross-ref:** Lettering §11; HR assembly rules.
 
 ---
 
-**SpiritualTech Systems · Layout Agent Spec v1.0 · Confidential**
+## 11. Text overlay / finish order (reconciled)
+
+### 11.1 What Layout composites
+
+Prefer compositing **pre-lettered** panel PNGs (LIVE). Layout may still define **finish z-order** for elements applied at page scope (cross-panel SFX, captions that span, crop marks).
+
+### 11.2 SFX z-order contract (cross-ref Lettering §6)
+
+SFX ordering relative to art, panel borders, and balloons MUST be explicit per format profile. Do not treat SFX as just another speech bubble in the page overlay stack.
+
+### 11.3 Superseded claim
+
+SpiritualTech §7 algorithms that had Layout rasterize all bubbles/SFX with example font “Comic Sans MS” are **superseded**. Fonts resolve only via `fonts/manga/FONT_REGISTRY.yaml` under Lettering ownership.
+
+---
+
+## 12. Page types (craft retained, enforcement labeled)
+
+| Page type | Intent | LIVE / SPECCED |
+|---|---|---|
+| Standard | Multi-panel framed page | LIVE bbox templates |
+| Splash | Full-bleed emphasis | LIVE page_type rule partial |
+| Silent | Wider gutters / no lettering | partial |
+| Double-spread | Spread geometry + future planner | partial geometry only |
+
+---
+
+## 13. Quality gates — layout level (reconciled)
+
+| Gate | Class | Notes |
+|---|---|---|
+| Format-family mode gate | machine | required |
+| Panel reading-graph unambiguity | machine FUTURE | |
+| Junction ambiguity | machine FUTURE | not blanket `+` fail |
+| Spread binding/trim | machine FUTURE | |
+| Beat/profile consistency | machine FUTURE | |
+| Pass B invoked for lettered print/webtoon | machine FUTURE | |
+| Visual review signoff | human mandatory | |
+
+---
+
+## 14. Implementation pointers (non-runtime this lane)
+
+Preferred Pearl_Dev evolution:
+
+- Keep `page_frame` + `page_grid_templates.yaml` as rectangular generator foundation.
+- Add `page_reading_graph.py`, `page_layout_validate.py`, `page_layout_solver.py`.
+- Add spread planner/validator + schema fields.
+- Keep `webtoon_compose` as the vertical family (do not merge into print grids).
+- Wire `self_help_illustrated` as an explicit third composer/route, not a manga grid alias.
+- Host Pass B after compose.
+
+See `artifacts/qa/MANGA_BUBBLE_PAGE_LAYOUT_IMPLEMENTATION_MAP_2026-07-11.tsv`.
+
+---
+
+## Appendix H — Historical SpiritualTech layout agent (non-normative)
+
+> **HISTORICAL / NON-NORMATIVE.** Former header `Status: Production` overclaimed. Former §7 text-overlay pipeline and Comic Sans examples are rejected as authority. Former double-spread center gutter **600px** conflicts with LIVE **60px** scaffolding — neither number is universal law; both are heuristics pending profile labeling.
+
+Salvageable ideas: reading-direction tables as **defaults**, silent-page breathing gutters, splash borderless intent, QC checklist structure (reframed under §10).

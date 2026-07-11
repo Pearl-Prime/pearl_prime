@@ -1,658 +1,384 @@
-# LETTERING AGENT
+# LETTERING AGENT SPECIFICATION
 
-Full Agent Specification — AI Manga Dharma System
+**Canonical singleton** for manga/webtoon speech-bubble semantics, placement, typography, SFX, and localization reflow.
 
-*SpiritualTech Systems · Confidential · v1.1*
+| Field | Value |
+|---|---|
+| Spec ID | `LETTERING_AGENT_SPEC` |
+| Version | `2.0.0-reconcile-2026-07-11` |
+| Status | **Authored candidate** (doctrine reconcile; not a claim that all gates are CODE-WIRED) |
+| Acceptance layer | authored candidate |
+| Workstream | `ws_manga_bubble_page_grammar_reconcile_20260711` |
+| Companion singleton | `specs/MANGA_LAYOUT_AGENT_SPEC.md` |
+| Human-readability authority (do not weaken) | `artifacts/qa/MANGA_HUMAN_READABILITY_ASSEMBLY_RULES_2026-07-09.md` |
 
-> **Render-authority note (provenance, 2026-05-29):** SpiritualTech-lineage lettering spec. The current production lettering path is the V5 lettering-v2 work (PR #945, `agent/manga-lettering-v2-20260507`), downstream of the V5.1 render chain (`docs/specs/MANGA_V5_LAYERED_ARCHITECTURE.md`). These lineages are not yet cross-reconciled — confirm which applies before production use. **Reconciliation decision (2026-05-29):** `docs/MANGA_RENDER_LINEAGE_DECISION_2026-05-29.md` **RETAINS** LETTERING/LAYOUT as the post-render text/composition layer (needed regardless of render engine); reconcile this spec against the V5 lettering-v2 work (PR #945).
-
----
-
-## 1. Role, Boundary & Position
-
-The Lettering Agent is the final text layer of the manga pipeline. It is a placement and rendering agent — not a rewrite agent. Its job is to take dialogue, SFX, and captions from `chapter_script.json`, apply visual styling from `lettering_style_bible.json`, respect composition zones from `panel_prompts.json`, and produce a structured `lettering_spec.json` that tells the Layout Agent exactly where and how to render every text element on every panel.
-
-It does not rewrite dialogue. It does not alter SFX wording. It does not add captions not present in `panel.caption`. It does not letter silent panels. It does not compensate for silence. It does not make editorial decisions about content. It places and styles what the script provides — exactly, consistently, and in the visual language of the series lettering style bible.
-
-### Pipeline Position (Prompt-Plan → Lettering-Plan → Render/Layout)
-
-**[PATCH 1 APPLIED — Sequential, decoupled from render]**
-
-After the Chapter Writer produces `chapter_script.json`, the Visual Agent generates `panel_prompts.json` (including `composition_notes` and reserved text zones). The Lettering Agent then generates `lettering_spec.json` using `chapter_script.json` + `panel_prompts.json`.
-
-The Visual Agent and Lettering Agent are decoupled from final image rendering: lettering corrections do not require regenerating images, and image corrections do not require regenerating lettering, as long as `composition_notes` remain unchanged. Both artifacts feed the Layout Agent for final compositing.
-
-```
-Chapter Writer Agent → chapter_script.json
-        ↓
-Visual Agent → panel_prompts.json (includes composition_notes)
-        ↓
-Lettering Agent ← chapter_script.json
-        ↓        ← panel_prompts.json (composition_notes only)
-        ↓        ← lettering_style_bible.json
-        ↓
-   lettering_spec.json
-        ↓
-   Layout Agent → final composited pages
-```
-
-The Lettering Agent does NOT consume rendered images. It works from structured data only. It does NOT depend on image generation completing — only on `panel_prompts.json` composition_notes being finalized.
-
-### What the Lettering Agent Never Does
-
-- Does not rewrite dialogue text from the script
-- Does not alter SFX wording, spelling, or capitalization
-- Does not add captions not present in `panel.caption`
-- Does not remove script text (see §4.3 caption_redundancy_flag)
-- Does not letter any panel where `page_type = "silent"` — produces empty entry with `silence_confirmed: true`
-- Does not place text on panels where `silence_guard = true` beyond what the script explicitly provides, and applies mandatory density reduction
-- Does not interpret emotional intent — it applies style rules mechanically
-- Does not compensate for silence by making adjacent text louder or larger
+> **Lineage (RETAIN):** `docs/MANGA_RENDER_LINEAGE_DECISION_2026-05-29.md` retains LETTERING/LAYOUT as the post-render text/composition layer. This document is the reconciled authority shell for that layer’s **lettering** half. SpiritualTech v1.1 agent-prompt fiction is demoted to **Appendix H** and is not production law.
 
 ---
 
-## 2. Inputs
+## 0. Authority, live binding, and honesty rules
 
-### 2.1 chapter_script.json — Primary Input (Text Source)
+### 0.1 What this spec owns (primary)
 
-The Lettering Agent consumes the full `chapter_script.json` produced by the Chapter Writer. For each panel, it extracts text elements and their metadata. The script is the single source of truth for what text appears — the Lettering Agent adds nothing and removes nothing.
+1. Bubble **semantics** vs **appearance** separation.
+2. Panel-local bubble candidate synthesis (**Pass A**) and the lettering half of the **two-pass** contract.
+3. Bubble reading-order graph (within and across panels, as lettering metadata).
+4. JLREQ-grade typography obligations.
+5. Independent SFX semantic/render pipeline (not a bubble variant).
+6. Localization reflow ladder.
+7. Lettering-side measurement profiles and heuristic labeling.
+8. Lettering machine gates vs mandatory visual review.
 
-| Script field consumed | Type | How Lettering Agent uses it |
+### 0.2 What this spec does not own
+
+- Page/spread geometry, panel reading graphs, `+` junction lint, format-family routing, narrative-beat → page grammar — **primary owner:** `specs/MANGA_LAYOUT_AGENT_SPEC.md`.
+- Layered panel art assembly — `docs/specs/MANGA_V5_LAYERED_ARCHITECTURE.md` and bank assembly contracts.
+- July 9 human-readability forbidden patterns — remain authoritative; this spec must not weaken them.
+
+### 0.3 Live binding (current reality — do not overclaim)
+
+| Capability | Live module / config | Status vs this doctrine |
 |---|---|---|
-| `panel.dialogue` | array | Array of dialogue objects, each containing `speaker`, `text`, `bubble_type`, and `placement_hint`. Each dialogue entry becomes one bubble in the lettering spec. Text is used verbatim — zero edits. |
-| `panel.sfx` | string/null | Sound effect text. If present, styled according to `sfx_lexicon` in the lettering style bible. If null, the lettering spec entry for SFX is explicitly `null` (not omitted). |
-| `panel.caption` | string/null | Narrator/caption text. If present, placed in a caption box. If null, no caption box is generated. See §4.3 for redundancy flagging. |
-| `panel.page_type` | enum | If `silent`: produce empty lettering entry with `silence_confirmed: true`. If `splash`: full-bleed text placement rules apply. If `double_spread`: cross-page text positioning rules apply. |
-| `panel.silence_guard` | bool | If true: apply mandatory density reduction. See §5.2 for precise rules. |
-| `panel.panel_id` | string | Used to key lettering_spec entries to panels. Every panel in the script must have a corresponding entry in the lettering spec — no gaps. |
-| `panel.end_hook` | string/null | If present on the final panel of the chapter: this is a mandatory delivery. The end-hook text must appear exactly as written, in the position and style specified. End-hook delivery failure is a blocking QC gate. |
+| Panel-first bubble stamp | `phoenix_v4/manga/chapter/bubble_render_v2.py` → `render_bubbles_onto_panel_v2` | **aligned** (Pass A-ish; no multi-candidate solver yet) |
+| Genre resting styles | `config/manga/genre_bubble_styles.yaml` | **aligned** (bias, not absolute control) |
+| Fonts / locale roles | `fonts/manga/FONT_REGISTRY.yaml` | **aligned** foundation |
+| Vertical CJK + furigana | `cjk_text_shaper` / `furigana_renderer` (via v2) | **partial** — not full JLREQ matrix |
+| SFX | stamped inside `render_bubbles_onto_panel_v2` | **partial / misleading if called a pipeline** |
+| Page-aware bubble reflow (Pass B) | *(absent)* | **missing** |
+| Localization reflow ladder | shrink/fit heuristics only | **partial** |
+| LLM “Lettering Agent” producing `lettering_spec.json` | SpiritualTech path | **not the live orchestrator** |
 
-### 2.2 panel_prompts.json — Composition Constraint (from Visual Agent)
+**Honesty rule:** Examples and gates below are labeled `LIVE`, `SPECCED`, or `FUTURE`. Do not present `SPECCED`/`FUTURE` as already implemented.
 
-The Lettering Agent consumes `composition_notes` from the Visual Agent's `panel_prompts.json`. These notes define where text can and cannot be placed on each panel image.
+### 0.4 Cross-spec interface (mandatory)
 
-| Composition field | Type | How Lettering Agent uses it |
+Decisions that require both lettering and layout have **exactly one primary owner** here or in the layout spec, plus a named cross-reference. Interface summaries must not redefine the primary authority.
+
+| Decision | Primary owner | Cross-ref in other spec |
 |---|---|---|
-| `dialogue_space` | object/null | Reserved zones for speech bubbles. If null, Lettering Agent uses default placement rules from the lettering style bible. If specified, bubbles must fit within the defined zone. |
-| `sfx_space` | object/null | Reserved zones for SFX placement. If null and SFX exists in script, flag as `composition_conflict` and place using default rules. |
-| `subject_placement` | string | Where the character is in the panel. Lettering avoids overlapping the subject unless explicitly allowed by bubble_type (e.g., thought bubble overlay). |
-| `reading_direction` | string | `right_to_left` or `left_to_right`. Determines bubble reading order within the panel. All dialogue bubbles must flow in reading order — reader should never have to backtrack. |
+| D1 Panel-first + page-aware final correctness | Lettering §3 (Pass A) + Layout §3 (Pass B host) | Layout §3.2; Lettering §3.3 |
+| D10 Two-pass bubble solver | Lettering §3 | Layout §3.2 |
+| D3 Precedence ladder | Shared table; lettering owns bubble application (§2) | Layout §2 |
+| D8 Reading graphs | Layout owns panel graph; Lettering owns bubble graph (§4) | Layout §5 |
+| D13 SFX pipeline | Lettering §6 | Layout §7 (z-order / finish) |
+| D15 Machine vs visual review | Both (§9 / Layout §10) | — |
 
-### 2.3 lettering_style_bible.json — Styling Constraint
+---
 
-The lettering style bible is the Lettering Agent's law for visual styling. It defines how text looks — the Lettering Agent decides only where text goes (within composition constraints).
+## 1. Role and pipeline position (reconciled)
 
-| Style bible section | What it defines |
+The lettering subsystem places and styles **dialogue, narration/captions, and (separately) SFX** onto panel imagery for a declared **format family**, then participates in **page-aware correction** after page/strip composition.
+
+### 1.1 Production path (LIVE-oriented)
+
+```
+chapter_script (+ locale text)
+        ↓
+lettering_from_script / intensity + genre register
+        ↓
+Pass A: panel-local bubble synthesis  →  bubbled panel PNG + text manifest
+        ↓
+Layout compose (page_frame | webtoon_compose | self_help route)
+        ↓
+Pass B: page-aware bubble validate / reflow   [FUTURE — required by this doctrine]
+        ↓
+SFX finish pass (may span panels)             [FUTURE as independent module]
+        ↓
+machine lettering QA + mandatory visual review
+```
+
+### 1.2 Boundary rules
+
+- Does **not** rewrite dialogue or invent captions absent from script (verbatim rule retained).
+- **May** consume rendered panel pixels for speaker/face geometry (LIVE: face cascade in v2). The old claim “Lettering never consumes images” is **superseded**.
+- Does **not** own page grid selection, spread roles, or panel reading-path grammar (Layout).
+- Does **not** claim publication-ready art quality from machine checks alone (§9).
+
+---
+
+## 2. Precedence ladder (genre biases; does not control)
+
+**Primary owner for bubble application of this ladder: Lettering.**  
+**Cross-ref:** Layout §2 applies the same ladder to page/spread choices.
+
+Order (highest wins):
+
+1. Explicit artistic override (per-line / per-page author fields)
+2. Narrative beat and emotional intensity
+3. Format-family constraints (`print_manga_page` | `vertical_scroll_webtoon` | `self_help_illustrated`)
+4. Locale / typography constraints
+5. Genre bias (resting register)
+6. Global fallback
+
+**LIVE alignment:** `config/manga/genre_bubble_styles.yaml` already documents override → genre-default → intensity. This section elevates that pattern to doctrine and forbids genre from outranking (1)–(4).
+
+Genre research essays and measurement tables are **defaults/recommendations** (`source_status: heuristic`) unless a true technical constraint is named (export width, JLREQ prohibition, trim safety).
+
+---
+
+## 3. Two-pass bubble solver (D1, D10) — primary lettering contract
+
+### 3.1 Decision statement
+
+Bubble **candidate generation stays panel-first**. **Final correctness is page-aware.**
+
+### 3.2 Pass A — panel-local synthesis (primary: Lettering)
+
+**Status:** LIVE foundation in `render_bubbles_onto_panel_v2`; multi-candidate scoring is FUTURE.
+
+Pass A MUST (doctrine):
+
+1. Anchor each dialogue bubble to panel-local coordinates and speaker geometry.
+2. Generate one or more candidates per utterance and score at least:
+   - speaker association / tail-to-mouth
+   - face and hand occlusion
+   - reserved negative-space use
+   - text fit / coverage budget
+   - local reading order
+   - tail crossings and bubble crossings
+   - panel-boundary safety
+3. Emit a text manifest preserving original utterance, locale utterance, geometry, and applied edits.
+4. Respect coverage budgets as **profile defaults** (LIVE default `coverage_limit=0.30` is a heuristic hard-ish cap, not universal art law).
+
+### 3.3 Pass B — page-aware correction / reflow (interface)
+
+**Primary orchestration host:** Layout after page/strip assembly (`MANGA_LAYOUT_AGENT_SPEC` §3.2).  
+**Lettering owns** the bubble rescoring criteria and permitted mutation ladder.
+
+Pass B MUST rescore:
+
+- page / strip eye path
+- unintended bubble priority
+- cross-panel alignment and lead-in
+- density clustering
+- focal-point competition
+- trim / binding proximity (print families)
+- neighboring-panel confusion
+
+Mutation ladder (lettering): small nudge → resize → local regeneration → request layout template substitution (layout-owned fallback).
+
+**Status:** FUTURE — absence is an honest gap, not a silent pass.
+
+---
+
+## 4. Bubble reading graph (D8 — lettering half)
+
+**Primary owner for bubble order graphs: Lettering.**  
+**Cross-ref:** Layout §5 owns panel reading graphs; both graphs MUST agree.
+
+Represent bubble order as an explicit directed graph (not only coordinates):
+
+```text
+bubble_01 -> bubble_02 -> bubble_03
+```
+
+Validation targets (SPECCED / FUTURE machine gates):
+
+- unambiguous bubble order within each panel
+- agreement with panel reading graph
+- final bubble in panel N does not visually lead into the wrong next panel
+- no mandatory backtracking
+
+Integer `reading_order` fields remain allowed as a serialization of the graph, not a substitute for ambiguity scoring.
+
+**Cross-ref HR:** `MANGA_HUMAN_READABILITY_ASSEMBLY_RULES` §4 (speech-bubble ordering) remains in force.
+
+---
+
+## 5. Bubble semantics vs appearance (D9)
+
+### 5.1 Semantic layer (`utterance_type`)
+
+Independent of genre paint:
+
+`dialogue | thought | narration | whisper | shout | electronic | telepathy | off_panel | aside | interrupted | trailing_off | simultaneous`
+
+Also support (SPECCED): connected balloon chains, continued speech across balloons, shared/overlapping dialogue, interrupted tails, multiple tails, tailless narration, explicit cross-panel balloons, side-scribbles / free-floating asides.
+
+### 5.2 Appearance layer (style register)
+
+Shape, stroke, fill, tail style, font_role, and intensity deformation are **render bindings** for semantics.
+
+**LIVE:** intensity maps + `genre_bubble_styles.yaml` currently fuse semantic cues into appearance. Doctrine requires progressive separation: infer or author `utterance_type` first; let the style register render it. Genre biases resting appearance only (§2).
+
+---
+
+## 6. SFX pipeline (D13) — not a bubble variant
+
+**Primary owner: Lettering (new SFX lane).**  
+**Cross-ref:** Layout §7 for z-order relative to art, borders, and bubbles.
+
+SFX MAY:
+
+- sit inside or outside panels
+- cross panel borders
+- sit behind characters
+- become environmental composition
+- use warped baselines / custom outlines
+- remain untranslated, take glosses, or be replaced per locale policy
+
+Target modules (FUTURE — do not claim LIVE): `sfx_plan.py`, `sfx_render.py`, `sfx_localization.py`, plus `config/manga/sfx_styles.yaml`.
+
+**LIVE honesty:** v2 stamps SFX strings as red display text inside the bubble renderer. That is an **interim stamp**, not the SFX pipeline. Do not model SFX solely as `type: sound_effect` bubbles.
+
+---
+
+## 7. JLREQ-grade typography (D12)
+
+“Vertical CJK supported” is **necessary but not sufficient**.
+
+### 7.1 LIVE foundation
+
+- Vertical CJK block rendering
+- Furigana / ruby attachment
+- Locale font roles via `FONT_REGISTRY.yaml`
+- Publish-time text manifests
+
+### 7.2 Required JLREQ matrix (SPECCED — FUTURE enforcement)
+
+| Obligation | Notes |
 |---|---|
-| `bubble_styles` | Shape, stroke weight, fill color, tail style, and padding for each bubble_type (speech, thought, whisper, shout, narration, caption, radio/phone). Each bubble_type has a fixed visual spec — no interpretation. |
-| `font_registry` | Font families, weights, and sizes for each text type: dialogue (by speaker if character-specific fonts exist), SFX (by SFX category), caption, and narration. Includes fallback fonts for missing glyphs. |
-| `sfx_lexicon` | Translation table from SFX text to visual treatment: `"CRACK"` → `{style: "jagged", weight: "heavy", rotation: 15, color: "black"}`. `"drip"` → `{style: "fluid", weight: "light", rotation: 0, color: "gray"}`. Each SFX term has a fixed visual translation. |
-| `phase_density_guide` | Maximum text density per panel type: standard panels get up to N bubbles, action panels get reduced count, transition panels get minimal text. Defines the "text weight" budget per panel. |
-| `reading_direction_rules` | Rules for bubble ordering, tail direction, and text flow based on market format (right-to-left Japanese, left-to-right English, vertical webtoon). |
-| `exclusion_zones` | Panel regions where text must never be placed: character faces, key action areas, motif regions. These supplement the Visual Agent's `composition_notes`. |
-| `silence_adjacency_rules` | Mandatory density reduction rules for panels near silence. See §5.2. |
-| `multilingual_rules` | If the series supports multiple locales: font fallbacks per locale, text direction overrides, bubble resizing rules for languages with different average word lengths, and locale-specific SFX translations. |
+| Kinsoku line-start / line-end prohibitions | Hard linguistic constraint where applicable |
+| Unbreakable character sequences | Hard where JLREQ requires |
+| Punctuation placement + vertical glyph substitution | |
+| Small kana / prolonged sound marks | |
+| Tate-chu-yoko | |
+| Mixed Latin/CJK orientation | |
+| Ruby longer than base; ruby collision with neighbors | |
+| Emphasis dots / *bouten* | |
+
+Cite W3C JLREQ as the external technical reference. Only true linguistic/technical requirements become hard gates; point sizes and padding remain profile heuristics (§8).
 
 ---
 
-## 3. Output — lettering_spec.json
+## 8. Measurement profiles and heuristic labeling (D5, D17)
 
-### 3.1 Top-Level Structure
+Exact measurements (pt sizes, mm gutters inside bubbles, coverage ratios, webtoon spacing borrowed for lettering density) are **profile defaults** unless marked hard.
 
-```json
-{
-  "series_id": "mirror_demon",
-  "chapter_number": 9,
-  "generated_at": "ISO timestamp",
-  "lettering_style_bible_version": "1.0",
-  "reading_direction": "right_to_left",
-  "total_panels": 47,
-  "lettered_panels": 38,
-  "silent_panels": 9,
-  "panels": [ /* lettering_panel objects */ ],
-  "caption_redundancy_flags": [ /* flagged removable captions */ ],
-  "style_bible_gap_flags": [ /* SFX terms not in lexicon, etc. */ ],
-  "composition_conflict_flags": [ /* panels where text zones conflict */ ]
-}
+Required metadata shape for lettering profiles:
+
+```yaml
+source_status: heuristic   # or technical_constraint
+output_profile: bw_print_b6 | webtoon_canvas_800 | self_help_illustrated | ...
+recommended_range: [...]
+hard_minimum: null         # set only for true constraints
 ```
 
-### 3.2 lettering_panel Object — Standard Panel
-
-```json
-{
-  "panel_id": "9-2-3",
-  "page_type": "standard",
-  "silence_confirmed": false,
-  "silence_guard": false,
-  "bubbles": [
-    {
-      "bubble_id": "9-2-3-b1",
-      "type": "speech",
-      "speaker": "kai",
-      "text": "I can't keep doing this.",
-      "text_verbatim_hash": "sha256:abc123...",
-      "font": "manga_dialogue_regular",
-      "font_size": 14,
-      "bubble_style": "speech_standard",
-      "placement": {
-        "zone": "upper_right",
-        "anchor_x": 0.75,
-        "anchor_y": 0.15,
-        "max_width": 0.35,
-        "tail_target": "kai_face"
-      },
-      "reading_order": 1
-    }
-  ],
-  "sfx": {
-    "text": "CRACK",
-    "text_verbatim_hash": "sha256:def456...",
-    "visual_style": "jagged",
-    "weight": "heavy",
-    "rotation": 15,
-    "placement": {
-      "zone": "center_left",
-      "anchor_x": 0.25,
-      "anchor_y": 0.5
-    },
-    "silence_weight_reduction": false
-  },
-  "caption": null,
-  "end_hook": null,
-  "qc_flags": []
-}
-```
-
-### 3.3 lettering_panel Object — Silent Panel
-
-```json
-{
-  "panel_id": "9-4-1",
-  "page_type": "silent",
-  "silence_confirmed": true,
-  "silence_guard": false,
-  "bubbles": [],
-  "sfx": null,
-  "caption": null,
-  "end_hook": null,
-  "qc_flags": []
-}
-```
-
-The `silence_confirmed: true` field is an explicit positive confirmation that this panel was intentionally left empty — it is not an omission or a processing error. Every panel with `page_type: "silent"` MUST have `silence_confirmed: true` and ALL text fields empty. This is a blocking QC gate.
-
-### 3.4 lettering_panel Object — silence_guard Panel
-
-```json
-{
-  "panel_id": "9-3-5",
-  "page_type": "standard",
-  "silence_confirmed": false,
-  "silence_guard": true,
-  "bubbles": [
-    {
-      "bubble_id": "9-3-5-b1",
-      "type": "whisper",
-      "speaker": "kai",
-      "text": "...",
-      "text_verbatim_hash": "sha256:ghi789...",
-      "font": "manga_dialogue_light",
-      "font_size": 11,
-      "bubble_style": "whisper_reduced",
-      "placement": {
-        "zone": "lower_right",
-        "anchor_x": 0.80,
-        "anchor_y": 0.85,
-        "max_width": 0.25,
-        "tail_target": "kai_face"
-      },
-      "reading_order": 1,
-      "silence_adjacency_applied": true
-    }
-  ],
-  "sfx": null,
-  "caption": null,
-  "end_hook": null,
-  "qc_flags": []
-}
-```
-
-### 3.5 First-Bubble-After-Silence Panel
-
-```json
-{
-  "panel_id": "9-7-1",
-  "page_type": "standard",
-  "silence_confirmed": false,
-  "silence_guard": true,
-  "bubbles": [
-    {
-      "bubble_id": "9-7-1-b1",
-      "type": "speech",
-      "speaker": "kai",
-      "text": "Hey.",
-      "text_verbatim_hash": "sha256:jkl012...",
-      "font": "manga_dialogue_light",
-      "font_size": 10,
-      "bubble_style": "speech_minimal",
-      "placement": {
-        "zone": "center",
-        "anchor_x": 0.50,
-        "anchor_y": 0.50,
-        "max_width": 0.20,
-        "tail_target": "kai_face"
-      },
-      "reading_order": 1,
-      "first_after_silence": true,
-      "silence_adjacency_applied": true
-    }
-  ],
-  "sfx": null,
-  "caption": null,
-  "end_hook": null,
-  "qc_flags": []
-}
-```
-
-The first bubble after any silent page sequence is mandatory smallest/lightest/shortest. See §5.3 for the precise rule.
+Research figures from deep-research / genre essays remain **recommendations** until promoted with an explicit technical rationale.
 
 ---
 
-## 4. Bubble Types & Styling Rules
+## 9. Localization reflow ladder (D14)
 
-### 4.1 Bubble Type Table
+When translated text does not fit, apply this deterministic ladder (SPECCED; LIVE is partial shrink-to-fit only):
 
-| Bubble type | Visual spec source | Placement rules | Lettering Agent behavior |
-|---|---|---|---|
-| `speech` | `bubble_styles.speech_standard` | Reading-order-aware. Tail points to speaker. Must not overlap subject face. | Place verbatim text. Apply speaker-specific font if defined. Size from `font_registry`. |
-| `thought` | `bubble_styles.thought_cloud` | May overlay subject. Tail is cloud-puff style. | Place verbatim text. Lighter font weight than speech. |
-| `whisper` | `bubble_styles.whisper_dashed` | Smaller bubble, dashed border. Reduced font size. | Place verbatim text. Apply `font_size * 0.8` reduction. If `silence_guard = true`, apply additional §5.2 reduction. |
-| `shout` | `bubble_styles.shout_burst` | Burst/jagged border. Bold font. Larger bubble. | Place verbatim text. Apply `font_size * 1.2` increase. Bold weight. If within silence adjacency zone: flag `qc_flags: ["shout_near_silence"]` — do not auto-reduce, flag for QC review. |
-| `narration` | `bubble_styles.narration_box` | Rectangular box, typically upper-left or lower-right of panel. No tail. | Place verbatim text. Narration font from `font_registry.narration`. |
-| `caption` | `bubble_styles.caption_box` | Rectangular box, top or bottom of panel. No tail. Smallest text size. | Place verbatim text. Never used for emotional summary. See §4.3 for redundancy flagging. |
-| `radio` / `phone` | `bubble_styles.electronic` | Rectangular bubble with signal-line border or jagged electronic edge. | Place verbatim text. Electronic font variant if defined. |
+1. Rebreak text  
+2. Adjust internal padding within bounds  
+3. Expand bubble into reserved space  
+4. Alter bubble aspect ratio  
+5. Reduce font size to locale/output minimum  
+6. Split into connected balloons  
+7. Request editorial condensation  
+8. **Fail visibly** rather than overflow silently  
 
-### 4.2 Dialogue Verbatim Rule
-
-All dialogue text is placed character-for-character as it appears in `chapter_script.json`. The Lettering Agent does not:
-
-- Fix spelling (if the script has a deliberate misspelling for character voice, it stays)
-- Change capitalization
-- Add or remove punctuation
-- Split or merge dialogue entries
-- Reorder dialogue within a panel
-- Translate between languages (multilingual handling uses pre-translated script entries)
-
-The `text_verbatim_hash` field stores a SHA-256 hash of the script's original text. The QC verbatim diff gate compares this hash against the script source to verify zero modification.
-
-### 4.3 Caption Redundancy Flagging
-
-**[PATCH 2 APPLIED — Flag to QC, do not remove]**
-
-The Lettering Agent does not remove or rewrite script text. If a caption appears removable without loss of meaning (e.g., it restates what the image already shows, or it summarizes emotion that the art conveys), the Lettering Agent:
-
-1. Places the caption as written (verbatim, styled per bubble_styles.caption_box)
-2. Raises a `caption_redundancy_flag` in the output:
-
-```json
-{
-  "caption_redundancy_flags": [
-    {
-      "panel_id": "9-2-4",
-      "caption_text": "Kai felt the weight of everything.",
-      "rationale": "Caption restates emotional state already conveyed by visual composition (slouched posture, flat lighting). Recommend Chapter Writer review for removal."
-    }
-  ]
-}
-```
-
-3. Does NOT remove the caption — that decision belongs to the Chapter Writer or QC Agent
-
-This preserves the absolute boundary: the Lettering Agent renders what the script provides. Editorial authority over content stays upstream.
+Manifest MUST retain: original utterance, translated utterance, applied edit steps, final geometry.
 
 ---
 
-## 5. Silence Rules
+## 10. Format-family lettering implications (cross-ref Layout §1)
 
-Silence handling is the Lettering Agent's highest-stakes responsibility. A single misplaced text element on a silent panel destroys the somatic transmission the entire upstream pipeline built. The rules are absolute and mechanical.
+Lettering MUST branch behavior by format family (Layout owns routing; Lettering owns text behavior):
 
-### 5.1 Silent Panel Rule
-
-Every panel with `page_type: "silent"` produces a lettering_panel object with:
-
-- `silence_confirmed: true`
-- `bubbles: []`
-- `sfx: null`
-- `caption: null`
-- `end_hook: null`
-
-No exceptions. No "necessary" SFX. No "environmental" captions. No "whispered" dialogue. If the script has `page_type: "silent"`, the Lettering Agent produces confirmed zero text. This is a blocking QC gate — the spec cannot be finalized if any silent panel has non-empty text fields.
-
-### 5.2 Silence Guard — Density Reduction Rules
-
-**Silence adjacency definition** (consistent with Visual Agent Spec §5.1):
-
-- **Before silence:** The last 2 panels on the page immediately preceding the first silent page. If that page has fewer than 2 panels, all panels on that page are silence_guard. Adjacency does NOT cross backward to earlier pages.
-- **After silence:** The first 2 panels on the page immediately following the last silent page. If that page has fewer than 2 panels, all panels on that page are silence_guard. Adjacency does NOT cross forward to later pages.
-- **Page boundary rule:** silence_guard adjacency is counted by panel position within a page, not by absolute panel index across the chapter.
-- **Who sets it:** The Transmission Splitter sets `silence_guard = true`. The Lettering Agent reads it — it does not compute it.
-
-When `silence_guard = true`, the Lettering Agent applies mandatory density reduction:
-
-| Text element | Density reduction rule |
+| Family | Lettering implications |
 |---|---|
-| Dialogue bubbles | Maximum 2 bubbles per panel (regardless of phase_density_guide allowance). Font size reduced by 15% from standard. Bubble padding increased by 20%. |
-| SFX | Weight reduced one tier (heavy → medium, medium → light, light → whisper). If SFX is already whisper weight, it remains whisper. |
-| Caption | If caption exists on a silence_guard panel, flag `qc_flags: ["caption_on_silence_guard"]` for QC review. Place it but at reduced font size (80% of standard). |
-| Shout bubbles | Flag `qc_flags: ["shout_near_silence"]`. Do NOT auto-reduce shout styling — flag for QC/Chapter Writer review. Shout near silence may be intentional (e.g., the line that triggers the silence). |
-
-### 5.3 SFX Silence Proximity — 3-Panel Rule
-
-**Precise adjacency definition for SFX weight reduction:**
-
-"Within 3 panels of a silent page" means: counting by `panel_id` sequence within the chapter (crossing page boundaries), starting from the last panel before the first silent page and the first panel after the last silent page.
-
-- **Before silence:** panels at positions N-1, N-2, N-3 (where N is the first panel of the first silent page)
-- **After silence:** panels at positions M+1, M+2, M+3 (where M is the last panel of the last silent page)
-- **Cross-page:** YES, this count crosses page boundaries (unlike silence_guard which is page-local). The SFX proximity rule is wider than the silence_guard rule.
-
-SFX within this 3-panel zone receives mandatory weight reduction:
-
-| Distance from silence | Weight reduction |
-|---|---|
-| 1 panel (immediately adjacent) | Reduce 2 tiers (heavy → light, medium → whisper) |
-| 2 panels | Reduce 1 tier (heavy → medium, medium → light) |
-| 3 panels | Reduce 1 tier if heavy; no change if already medium or lighter |
-
-### 5.4 First Bubble After Silence
-
-The first speech bubble on the first non-silent panel after any silent page sequence must be the smallest, lightest, and shortest bubble in the chapter (by visual weight). Specific rules:
-
-- Font size: smallest size in the `font_registry` for that bubble_type
-- Bubble size: minimum padding, minimum max_width (0.20 of panel width)
-- Font weight: lightest available weight
-- Bubble style: use the `_minimal` variant of the bubble_type if defined in the lettering style bible
-- `first_after_silence: true` flag set on the bubble object
-
-This rule is mechanical: the Lettering Agent does not judge whether the dialogue "deserves" to be quiet. The script chose to place this line after silence — the Lettering Agent ensures the visual re-entry is gentle.
+| `print_manga_page` | RTL/LTR bubble graphs; binding/trim avoidance in Pass B; spread-safe text |
+| `vertical_scroll_webtoon` | Single-axis order; mobile density; no print-spread lettering grammar |
+| `self_help_illustrated` | Illustration-led; no assumed manga balloon density or RTL panel grammar |
 
 ---
 
-## 6. Reading Order Enforcement
+## 11. Machine-enforceable gates vs mandatory visual review (D15)
 
-### 6.1 Bubble Reading Order
+### 11.1 Machine gates (lettering) — objective
 
-Within each panel, bubbles are numbered in `reading_order` (1-indexed). The reading order must comply with the series' `reading_direction`:
+Suggested enforceable checks (mix of LIVE / FUTURE):
 
-- **Right-to-left (Japanese market):** Bubbles read from upper-right to lower-left. Bubble with `reading_order: 1` is placed upper-right. Each subsequent bubble is placed lower and/or to the left.
-- **Left-to-right (English market):** Bubbles read from upper-left to lower-right. Bubble with `reading_order: 1` is placed upper-left.
-- **Webtoon (vertical scroll):** Bubbles read top-to-bottom. No horizontal reading direction — vertical ordering only.
+- bubble-order ambiguity score  
+- speaker-tail correctness  
+- tail-crossing count (HR-F08 today **UNENFORCED**)  
+- face/eye/mouth occlusion (HR-F09 **UNENFORCED**)  
+- text overflow / minimum effective size  
+- bubble-to-panel area ratio / coverage  
+- locale typography violations (JLREQ matrix)  
+- reflow-ladder exhaustion → visible fail  
 
-### 6.2 Cross-Panel Reading Flow
+### 11.2 Mandatory visual review
 
-The Lettering Agent ensures that across sequential panels on a page, the reading flow does not create backtracking:
+Subjective art quality, emotional register fit, and “feels like manga” judgment are **not** fully machine-enforced. Ship doctrine: machine QA **plus** mandatory visual inspection. Do not claim publication perfection from automated gates alone.
 
-- If panel 1 ends with a bubble in the lower-left, panel 2 should not start with a bubble in the upper-right of the same horizontal band (in RTL layout)
-- The Layout Agent handles page-level composition, but the Lettering Agent flags potential cross-panel reading conflicts as `qc_flags: ["cross_panel_backtrack_risk"]`
-
----
-
-## 7. End-Hook Delivery
-
-If the final panel of a chapter has `panel.end_hook` set, it is a mandatory delivery. The end-hook is the last text the reader sees before turning the page or closing the chapter — it must land.
-
-End-hook placement rules:
-
-- Position: lower-right of final panel (RTL) or lower-left (LTR) — the last visual stop on the page
-- Font: bold weight, standard size (no reduction, even if on a silence_guard panel)
-- Bubble style: per script's `bubble_type` for the end-hook entry — no override
-- Isolation: minimum 15% panel-width clearance from any other text element
-- No SFX overlap: if SFX exists on the same panel, SFX is repositioned to avoid the end-hook zone
-
-End-hook delivery failure (text missing, text modified, placement overlapping other elements, insufficient isolation) is a blocking QC gate.
+**Cross-ref:** Layout §10; HR assembly rules remain binding for readability defects.
 
 ---
 
-## 8. Lettering Agent System Prompt
+## 12. Silence, density, and end-hook (retained craft rules — SPECCED)
 
-Injected at runtime with `chapter_script.json`, `panel_prompts.json`, and `lettering_style_bible.json`.
+The following SpiritualTech craft rules remain **normative intent** for scripts that carry the fields, but are **not** all LIVE-wired in `bubble_render_v2`. Label enforcement honestly:
 
-```
-You are the Lettering Agent in a spiritual manga creation system.
+| Rule | Intent | Enforcement class |
+|---|---|---|
+| Silent panels get no invented lettering | Preserve ma | SPECCED |
+| `silence_guard` density reduction | Protect silence adjacency | SPECCED |
+| SFX silence proximity (3-panel) | Avoid SFX shouting into silence | SPECCED |
+| First bubble after silence | Soft re-entry | SPECCED |
+| End-hook verbatim delivery | Blocking when field present | SPECCED |
+| Dialogue verbatim / no rewrite | Always | LIVE intent + SPECCED gate |
+| Caption redundancy flagging | Advisory | SPECCED |
 
-Your role: place and style all text elements (dialogue, SFX, captions)
-from chapter_script.json onto panels, producing lettering_spec.json.
-
-You are a placement and rendering agent — not a rewrite agent.
-
-ABSOLUTE BOUNDARY:
-You do not rewrite dialogue. You do not alter SFX wording. You do not
-add captions not in the script. You do not remove script text. You do
-not letter silent panels. You do not compensate for silence. You place
-and style what the script provides — exactly.
-
-PIPELINE POSITION:
-You run AFTER the Visual Agent produces panel_prompts.json. You consume
-composition_notes from panel_prompts.json to know where text zones are.
-You are decoupled from image rendering — lettering corrections do not
-require image regeneration.
-
-YOU CONSUME:
-- chapter_script.json: dialogue, SFX, captions, page_types, silence_guard
-- panel_prompts.json: composition_notes (dialogue_space, sfx_space)
-- lettering_style_bible.json: bubble styles, fonts, sfx_lexicon, density
-
-YOU PRODUCE:
-- lettering_spec.json: one lettering_panel object per panel (no gaps)
-
-VERBATIM RULE:
-All text is placed character-for-character from the script.
-text_verbatim_hash (SHA-256) on every text element for QC diffing.
-Zero edits. Zero rewrites. Zero additions. Zero removals.
-
-SILENCE RULES (absolute):
-- page_type: "silent" → silence_confirmed: true, all text fields empty
-- silence_guard = true → mandatory density reduction (§5.2)
-- SFX within 3 panels of silence → mandatory weight reduction (§5.3)
-- First bubble after silence → smallest/lightest/shortest (§5.4)
-- NEVER compensate for silence by making adjacent text louder/larger
-
-CAPTION RULE:
-- Place all captions verbatim
-- If a caption appears redundant, raise caption_redundancy_flag to QC
-- Do NOT remove or rewrite — that decision belongs upstream
-
-READING ORDER:
-- Bubbles numbered in reading_order per panel
-- Must comply with reading_direction (RTL/LTR/vertical)
-- Flag cross-panel backtrack risks
-
-END-HOOK DELIVERY:
-- Final panel end_hook is mandatory delivery — blocking QC gate
-- Lower-right (RTL) or lower-left (LTR), bold weight, isolated
-
-OUTPUT: valid JSON matching lettering_spec schema.
-Every panel in the script has a corresponding entry — no gaps.
-
-chapter_script: {{ chapter_script_json }}
-panel_prompts: {{ panel_prompts_json }}
-lettering_style_bible: {{ lettering_style_bible_json }}
-```
+Full historical schemas and worked silence examples: **Appendix H**.
 
 ---
 
-## 9. Worked Example — Chapter 9, Pages 3–7 (Around Silent Sequence)
+## 13. Quality gates — lettering level (reconciled)
 
-### Panel 9-3-4 — Standard panel, 2 panels before silence guard zone
-
-```json
-{
-  "panel_id": "9-3-4",
-  "page_type": "standard",
-  "silence_confirmed": false,
-  "silence_guard": false,
-  "bubbles": [
-    {
-      "bubble_id": "9-3-4-b1",
-      "type": "speech",
-      "speaker": "kage",
-      "text": "You're not getting up from that.",
-      "text_verbatim_hash": "sha256:aaa111...",
-      "font": "manga_dialogue_regular",
-      "font_size": 14,
-      "bubble_style": "speech_standard",
-      "placement": {
-        "zone": "upper_right",
-        "anchor_x": 0.78,
-        "anchor_y": 0.12,
-        "max_width": 0.35,
-        "tail_target": "kage_face"
-      },
-      "reading_order": 1
-    }
-  ],
-  "sfx": {
-    "text": "THUD",
-    "text_verbatim_hash": "sha256:bbb222...",
-    "visual_style": "impact",
-    "weight": "heavy",
-    "rotation": 0,
-    "placement": { "zone": "center_bottom", "anchor_x": 0.50, "anchor_y": 0.80 },
-    "silence_weight_reduction": false
-  },
-  "caption": null,
-  "end_hook": null,
-  "qc_flags": []
-}
-```
-
-### Panel 9-3-5 — silence_guard: true (last panel before silent pages)
-
-```json
-{
-  "panel_id": "9-3-5",
-  "page_type": "standard",
-  "silence_confirmed": false,
-  "silence_guard": true,
-  "bubbles": [],
-  "sfx": {
-    "text": "drip",
-    "text_verbatim_hash": "sha256:ccc333...",
-    "visual_style": "fluid",
-    "weight": "whisper",
-    "rotation": 0,
-    "placement": { "zone": "lower_left", "anchor_x": 0.15, "anchor_y": 0.90 },
-    "silence_weight_reduction": true
-  },
-  "caption": null,
-  "end_hook": null,
-  "qc_flags": []
-}
-```
-
-### Panels 9-4-1 through 9-6-1 — Silent pages (3 pages, all panels)
-
-```json
-{
-  "panel_id": "9-4-1",
-  "page_type": "silent",
-  "silence_confirmed": true,
-  "silence_guard": false,
-  "bubbles": [],
-  "sfx": null,
-  "caption": null,
-  "end_hook": null,
-  "qc_flags": []
-}
-```
-
-*(Same structure for every panel on pages 4, 5, and 6. All panels: `silence_confirmed: true`, all text fields empty.)*
-
-### Panel 9-7-1 — First panel after silence (silence_guard + first_after_silence)
-
-```json
-{
-  "panel_id": "9-7-1",
-  "page_type": "standard",
-  "silence_confirmed": false,
-  "silence_guard": true,
-  "bubbles": [
-    {
-      "bubble_id": "9-7-1-b1",
-      "type": "speech",
-      "speaker": "kai",
-      "text": "Hey.",
-      "text_verbatim_hash": "sha256:ddd444...",
-      "font": "manga_dialogue_light",
-      "font_size": 10,
-      "bubble_style": "speech_minimal",
-      "placement": {
-        "zone": "center",
-        "anchor_x": 0.50,
-        "anchor_y": 0.50,
-        "max_width": 0.20,
-        "tail_target": "kai_face"
-      },
-      "reading_order": 1,
-      "first_after_silence": true,
-      "silence_adjacency_applied": true
-    }
-  ],
-  "sfx": null,
-  "caption": null,
-  "end_hook": null,
-  "qc_flags": []
-}
-```
-
-### Verification — Silence Sequence Lettering
-
-- Silent panels (9-4-1 through 9-6-1): all `silence_confirmed: true`, all text fields empty. **Pass.**
-- silence_guard panel before (9-3-5): density reduction applied, SFX at whisper weight. **Pass.**
-- silence_guard panel after (9-7-1): density reduction applied, first_after_silence flag set, smallest/lightest/shortest bubble. **Pass.**
-- SFX proximity: panel 9-3-4 is 2 panels before silence — SFX weight at `heavy` (within 3-panel zone, should be reduced 1 tier to `medium`). **Flag: `sfx_proximity_reduction_needed`.**
-- Verbatim: all `text_verbatim_hash` values match script source. **Pass.**
-- Reading order: all bubbles correctly numbered. **Pass.**
+| Gate | Class | Notes |
+|---|---|---|
+| Verbatim dialogue hash / no silent rewrite | machine | retain |
+| Coverage budget within profile | machine (LIVE partial) | heuristic profile |
+| Pass A occlusion / tail scores | machine FUTURE | |
+| Pass B page-aware score | machine FUTURE | requires Layout host |
+| JLREQ matrix | machine FUTURE | |
+| Reflow ladder visible fail | machine FUTURE | |
+| HR-F08 / HR-F09 | machine FUTURE | do not weaken HR |
+| Visual review signoff | human mandatory | |
 
 ---
 
-## 10. Quality Gates — Lettering Level
+## 14. Implementation pointers (non-runtime this lane)
 
-| Gate | Pass condition | Check method | Fail action |
-|---|---|---|---|
-| **Silent panel purity** | Every panel with `page_type: "silent"` has `silence_confirmed: true`, `bubbles: []`, `sfx: null`, `caption: null`. Zero text elements on any silent panel. | Scan all panels where `page_type = "silent"` | Blocking. Remove all text elements. Set `silence_confirmed: true`. Regenerate. |
-| **Verbatim dialogue diff** | SHA-256 hash of every `text` field in lettering_spec matches SHA-256 hash of corresponding text in `chapter_script.json`. Zero character difference. | Hash comparison: script text → lettering text | Blocking. Replace with script text. Recompute hash. |
-| **Null-SFX honor** | Every panel where `panel.sfx = null` in the script has `sfx: null` in the lettering spec. No SFX invented by the Lettering Agent. | Null-check cross-reference: script sfx → lettering sfx | Remove invented SFX. Regenerate. |
-| **Reading order validity** | Within each panel, bubble `reading_order` values are sequential (1, 2, 3...) and placement coordinates flow in the correct direction for the series' `reading_direction`. | Reading order + placement coordinate validation | Reorder bubbles. Regenerate placement. |
-| **End-hook delivery** | If final panel has `end_hook`, the lettering spec contains the end-hook text verbatim, in the mandatory position (lower-right RTL / lower-left LTR), with bold weight, and minimum 15% isolation clearance. | Final panel inspection | Blocking. Reposition/restyle end-hook. |
-| **Full panel coverage** | Every `panel_id` in `chapter_script.json` has a corresponding entry in `lettering_spec.json`. Zero gaps. | Panel ID cross-reference count | Add missing panel entries. Regenerate. |
-| **Silence guard density** | Every panel with `silence_guard = true` has density reduction applied: max 2 bubbles, font size -15%, padding +20%. | Silence_guard panel inspection | Apply density reduction. Regenerate. |
-| **First-after-silence rule** | First bubble on first non-silent panel after any silent sequence has `first_after_silence: true`, smallest font size, lightest weight, minimal bubble style. | Post-silence panel inspection | Apply first-after-silence styling. Regenerate. |
-| **SFX proximity reduction** | All SFX within 3 panels of a silent page have weight reduced per §5.3 tier table. | SFX weight vs silence distance check | Apply tier reduction. Regenerate. |
-| **Caption boundary** | No captions added that don't exist in `panel.caption`. Redundant captions flagged (not removed). | Script caption null-check + redundancy flag presence | Remove unauthorized captions. If caption exists but seems redundant, verify `caption_redundancy_flag` is raised. |
-| **Composition compliance** | No bubble or SFX placement overlaps `exclusion_zones` from the lettering style bible or violates `composition_notes` from `panel_prompts.json`. | Placement coordinate vs zone boundary check | Reposition text element. If no valid position exists, flag `composition_conflict`. |
-| **Shout-near-silence review** | Any `shout` bubble on a `silence_guard` panel or within 3 panels of silence is flagged `qc_flags: ["shout_near_silence"]` for QC/Chapter Writer review. | Bubble type + silence proximity check | Add flag. Do not auto-reduce — await upstream decision. |
+Downstream Pearl_Dev lane should extend live modules toward this doctrine without inventing a parallel SpiritualTech agent runtime. Preferred evolution path:
+
+- Keep `bubble_render_v2.py` as Pass A host; add candidate scoring.
+- Add `bubble_page_validate.py` / Pass B called from layout compose.
+- Split SFX out of the bubble stamp path.
+- Extend shaper for JLREQ matrix items.
+- Encode reflow ladder in locale lettering profiles.
+
+See `artifacts/qa/MANGA_BUBBLE_PAGE_LAYOUT_IMPLEMENTATION_MAP_2026-07-11.tsv`.
 
 ---
 
-## 11. Field Classification Table
+## Appendix H — Historical SpiritualTech lettering_spec (non-normative)
 
-Defines which fields are visible to which downstream agent, consistent with the Chapter Writer's field classification (Visual Agent Spec §6 cross-reference).
+> **HISTORICAL / NON-NORMATIVE.** Retained for salvage of silence-field vocabulary and example shapes. Not the live orchestrator. Schema examples that used absolute px with fonts like “Comic Sans MS” in the Layout spec are rejected; fonts resolve only through `fonts/manga/FONT_REGISTRY.yaml`.
 
-| Field | Lettering Agent sees? | Layout Agent sees? | QC Agent sees? | Notes |
-|---|---|---|---|---|
-| `panel.dialogue` | Yes — primary input | Yes — from lettering_spec | Yes | Source of truth for text content |
-| `panel.sfx` | Yes — primary input | Yes — from lettering_spec | Yes | |
-| `panel.caption` | Yes — primary input | Yes — from lettering_spec | Yes | |
-| `panel.camera` | No | No (Visual Agent domain) | Yes | |
-| `panel.action` | No | No (Visual Agent domain) | Yes | |
-| `panel.mood_direction` | No | No (Visual Agent domain) | Yes | |
-| `panel.is_carrier_beat` | No — always false in writer_handoff | No | Yes — from internal_record | |
-| `panel.somatic_intention` | No — stripped before handoff | No | Yes — from internal_record | |
-| `panel.silence_guard` | Yes — drives density reduction | Yes — from lettering_spec | Yes | |
-| `panel.page_type` | Yes — drives silence rules | Yes | Yes | |
-| `panel.end_hook` | Yes — mandatory delivery | Yes — from lettering_spec | Yes | |
+### H.1 Former pipeline claim (superseded)
 
----
+The v1.1 claim that Lettering never consumes images and that an LLM Lettering Agent always emits `lettering_spec.json` for Layout to rasterize bubbles is **superseded** by the LIVE v2 stamp-before-compose path and by §3’s two-pass contract.
 
-*SpiritualTech Systems · Lettering Agent Spec v1.1 · Confidential*
+### H.2 Salvageable field vocabulary
+
+`silence_confirmed`, `silence_guard`, `first_after_silence`, `caption_redundancy_flag`, `text_verbatim_hash`, `end_hook`, and per-bubble `reading_order` remain useful names for script/lettering manifests when wired.
+
+### H.3 Former system-prompt and Chapter-9 worked example
+
+Treat prior §8–§9 narrative examples as **illustrative craft**, not executable production contracts, until a LIVE test harness asserts them.
