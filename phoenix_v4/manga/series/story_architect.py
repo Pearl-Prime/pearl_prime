@@ -656,6 +656,8 @@ def build_story_architecture_internal(
         "artifact_type": "story_architecture_internal",
         "series_id": series_id,
         "arc_id": arc_id,
+        "genre_id": genre_id,
+        "genre": genre_id,
         "chapters": chapters,
         "transmission_audit": {"note": note},
         "constraint_checks": {"passed": True},
@@ -663,6 +665,10 @@ def build_story_architecture_internal(
     if vessel_meta is not None:
         out["mode"] = vessel_meta["mode"]
         out["mode_vessel"] = vessel_meta
+    elif mode_norm:
+        # Mode requested but vessel injection produced no meta (should not
+        # happen for teacher/music); still preserve the declared mode.
+        out["mode"] = mode_norm
     if serial_context is not None:
         out["serial_context"] = serial_context
     if is_engine_governed(genre_id):

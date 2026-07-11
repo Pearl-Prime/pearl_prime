@@ -149,6 +149,8 @@ def _normalize_pair(
     schema_version: str,
     series_id: str,
     chapter_id: str,
+    genre_id: str | None = None,
+    mode: str | None = None,
 ) -> tuple[dict[str, Any], dict[str, Any]]:
     wh = dict(writer_handoff)
     ir = dict(internal_record)
@@ -160,6 +162,18 @@ def _normalize_pair(
     ir["artifact_type"] = "chapter_script_internal_record"
     ir["series_id"] = series_id
     ir["chapter_id"] = chapter_id
+    # Stamp declared genre so evaluate_genre_engine does not depend on
+    # post-generation CI patches.
+    if genre_id and not (wh.get("genre") or wh.get("genre_id")):
+        wh["genre_id"] = str(genre_id)
+        wh["genre"] = str(genre_id)
+    if genre_id and not (ir.get("genre") or ir.get("genre_id")):
+        ir["genre_id"] = str(genre_id)
+        ir["genre"] = str(genre_id)
+    if mode and not wh.get("mode"):
+        wh["mode"] = mode
+    if mode and not ir.get("mode"):
+        ir["mode"] = mode
     return wh, ir
 
 
@@ -180,17 +194,19 @@ def write_chapter_script_pair(
     The client must return a JSON object with keys ``chapter_script_writer_handoff`` and
     ``chapter_script_internal_record`` (see replay fixtures).
     """
+    declared_genre = (
+        story_handoff.get("genre_id")
+        or story_handoff.get("genre")
+        or (story_handoff.get("mode_vessel") or {}).get("vessel_genre")
+    )
+    declared_mode = story_handoff.get("mode")
     prompt = build_chapter_writer_prompt(
         story_handoff,
         chapter_number=chapter_number,
         series_id=series_id,
         chapter_id=chapter_id,
-        mode=story_handoff.get("mode"),
-        genre_id=(
-            story_handoff.get("genre_id")
-            or story_handoff.get("genre")
-            or (story_handoff.get("mode_vessel") or {}).get("vessel_genre")
-        ),
+        mode=declared_mode,
+        genre_id=declared_genre,
     )
     hint = schema_hint if schema_hint is not None else {}
     raw = client.generate_json(
@@ -210,6 +226,8 @@ def write_chapter_script_pair(
         schema_version=schema_version,
         series_id=series_id,
         chapter_id=chapter_id,
+        genre_id=str(declared_genre) if declared_genre else None,
+        mode=str(declared_mode) if declared_mode else None,
     )
     validate_instance(wh, "chapter_script_writer_handoff")
     validate_instance(ir, "chapter_script_internal_record")
