@@ -25,11 +25,15 @@ recognition is Priya, but v03 of mechanism_proof may be Nadia.  The planner:
 Story spread
 ------------
 Each full story is assigned to ONE chapter in the phase.  Within that chapter,
-arc positions are spread across the three SCENE section slots:
-  SCENE slot 0 (e.g., sec2)  → recognition
-  SCENE slot 1 (e.g., sec5)  → mechanism_proof
-  SCENE slot 2 (e.g., sec9)  → turning_point  (sec9 in ch1/ch2)
-                              → embodiment     (sec9 in the last chapter of phase)
+arc positions are planned against three story anchors:
+  SCENE slot 0 (e.g., sec2)  → recognition      (early beat)
+  SCENE slot 1 (e.g., sec5)  → mechanism_proof  (middle beat)
+  SCENE slot 2 (e.g., sec9)  → turning_point    (late beat, ch1/ch2)
+                              → embodiment       (late beat, last chapter of phase)
+
+These are planner anchors, not a license for raw back-to-back vignette dumps.
+The rendering layer is expected to keep intervening non-story material so the
+chapter reads as one narrative unit rather than stacked same-character cold opens.
 
 The planner returns a StorySchedule that maps (chapter_index, scene_slot_index)
 → StoryAtomSlot so the injection resolver can look up the exact atom to inject.

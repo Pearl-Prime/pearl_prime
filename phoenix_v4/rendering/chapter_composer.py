@@ -2933,6 +2933,7 @@ def _authored_transition(
 
 
 _ADDITIVE_COMPOSE_TYPES = frozenset({"STORY", "REFLECTION", "TEACHER_DOCTRINE"})
+_ADDITIVE_OPENING_TYPES = frozenset({"ANGLE_CALLBACK", "ANGLE_DEFINITION", "SCENE"})
 
 
 def _requires_additive_compose(slot_types: list[str]) -> bool:
@@ -2944,6 +2945,20 @@ def _requires_additive_compose(slot_types: list[str]) -> bool:
             continue
         counts[key] = counts.get(key, 0) + 1
         if counts[key] > 1:
+            return True
+    return False
+
+
+def _story_deferral_anchor(slot_type: str) -> bool:
+    """Non-story slot types that can safely separate deferred story beats."""
+    st = (slot_type or "").strip().upper()
+    return bool(st) and st not in _ADDITIVE_OPENING_TYPES and st != "STORY"
+
+
+def _has_later_story_separator(block_types: list[str], start_index: int) -> bool:
+    """True when a later non-opening non-story block can separate a deferred STORY."""
+    for st in block_types[start_index + 1 :]:
+        if _story_deferral_anchor(st):
             return True
     return False
 
@@ -2960,7 +2975,7 @@ def compose_additive_chapter_prose(
     book_seed: str = "",
     locale: Optional[str] = None,
 ) -> str:
-    """Append every non-placeholder packet in slot order; optional arc_thesis append-only.
+    """Append every non-placeholder packet while spacing repeated story beats.
 
     De-injection 2026-07-09: at REFLECTION/TEACHER_DOCTRINE -> STORY boundaries an
     authored TRANSITION atom (``before_story``) may be placed to soften the audit's
@@ -2972,14 +2987,21 @@ def compose_additive_chapter_prose(
     are unaffected; transitions are placed only when both are supplied and the bank has
     authored inventory.
     """
-    parts: list[str] = []
-    prev_type = ""
+    blocks: list[tuple[str, str]] = []
     for _st, prose in zip(slot_types, slot_proses):
         body = (prose or "").strip()
         if not body or _is_placeholder_text(body):
             continue
-        st_upper = (_st or "").strip().upper()
-        if st_upper == "STORY" and prev_type in {"REFLECTION", "TEACHER_DOCTRINE"}:
+        blocks.append(((_st or "").strip().upper(), body))
+
+    parts: list[str] = []
+    prev_type = ""
+    deferred_story: list[str] = []
+    block_types = [st for st, _ in blocks]
+
+    def _emit_story(body: str) -> None:
+        nonlocal prev_type
+        if prev_type in {"REFLECTION", "TEACHER_DOCTRINE"}:
             transition = _authored_transition(
                 "before_story",
                 topic_id=topic_id,
@@ -2991,8 +3013,33 @@ def compose_additive_chapter_prose(
             )
             if transition:
                 parts.append(transition)
+        body = prepend_story_introduction_bridge(
+            body,
+            body,
+            chapter_index=chapter_index,
+        )
+        parts.append(body)
+        prev_type = "STORY"
+
+    for idx, (st_upper, body) in enumerate(blocks):
+        if st_upper == "STORY":
+            if (
+                prev_type in (_ADDITIVE_OPENING_TYPES | {"STORY"})
+                and _has_later_story_separator(block_types, idx)
+            ):
+                deferred_story.append(body)
+                continue
+            _emit_story(body)
+            continue
+
         parts.append(body)
         prev_type = st_upper
+        if deferred_story and _story_deferral_anchor(st_upper):
+            _emit_story(deferred_story.pop(0))
+
+    while deferred_story:
+        _emit_story(deferred_story.pop(0))
+
     if arc_thesis and arc_thesis.strip():
         parts.append(arc_thesis.strip())
     return "\n\n".join(parts).strip()
@@ -3002,7 +3049,12 @@ def compose_ordered_chapter_prose(
     slot_types: list[str],
     slot_proses: list[str],
 ) -> str:
-    """Twelve-shape flagship: 1:1 slot order, no bridges, reorder, or type collapse."""
+    """Twelve-shape flagship: 1:1 slot order, no bridges, reorder, or type collapse.
+
+    Story-spacing deferral lives in ``compose_additive_chapter_prose`` only.
+    Flagship golden parity and sequential beat-fingerprint contracts require
+    strict packet order here.
+    """
     parts: list[str] = []
     for _st, prose in zip(slot_types, slot_proses):
         body = (prose or "").strip()

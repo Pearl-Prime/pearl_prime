@@ -63,7 +63,20 @@ A book has four narrative phases, each covering three chapters:
 | HOPE     | 10–12            | recognition → mechanism_proof → **embodiment** (phase-final chapter) |
 
 `build_story_schedule()` selects N_PER_PHASE character journeys per phase,
-each covering all four arc positions across the SCENE slots of one chapter.
+using the SCENE/STORY anchors at sec 2 / 5 / 9 as **early / middle / late**
+story beats inside a chapter.
+
+Reader-facing assembly rule:
+- these anchors are planner positions, not permission to dump same-character
+  cold opens back-to-back
+- the assembler must preserve intervening non-story material so a chapter reads
+  as one narrative unit, not a stack of disconnected Priya-style vignettes
+
+This matches the longer-running operator doctrine in
+`artifacts/coordination/operator_decisions_log.tsv`:
+- `OPD-128` — preserve real SCENE space; do not let story routing erase it
+- `OPD-129` — chapters must be narrative units, not slot-collections; story
+  beats must not read like stitched fragments
 
 ## 4. Atom stacking
 
