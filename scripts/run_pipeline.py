@@ -2206,6 +2206,13 @@ def _run_spine_pipeline_mode(
         _write_gate_report("book_pass_report.json", {"status": "SKIPPED", "reason": "quality gates disabled"})
 
     if args.out:
+        _spine_ctx_out = enriched.spine_context or {}
+        _accent_beats_by_chapter = {
+            int(ch.number): [b.to_plan_dict() if hasattr(b, "to_plan_dict") else dict(b)
+                             for b in (getattr(ch, "accent_beats", None) or [])]
+            for ch in enriched.chapters
+            if getattr(ch, "accent_beats", None)
+        }
         plan_out = {
             "source": "spine_pipeline",
             "topic_id": topic_id,
@@ -2223,8 +2230,13 @@ def _run_spine_pipeline_mode(
             "chapter_architecture_version": _arch_v,
             "angle_id": _spine_angle_id,
             "chapter_planner_warnings": list(
-                (enriched.spine_context or {}).get("chapter_planner_warnings") or []
+                _spine_ctx_out.get("chapter_planner_warnings") or []
             ),
+            "accent_budget": dict(_spine_ctx_out.get("accent_budget") or {}),
+            "accent_signature": _spine_ctx_out.get("accent_signature"),
+            "story_mix_profile": _spine_ctx_out.get("story_mix_profile"),
+            "accent_assignments": list(_spine_ctx_out.get("accent_assignments") or []),
+            "accent_beats_by_chapter": _accent_beats_by_chapter,
         }
         out_path = Path(args.out)
         out_path.parent.mkdir(parents=True, exist_ok=True)
@@ -2342,16 +2354,97 @@ def _run_spine_pipeline_mode(
                 runtime_format=runtime_fmt,
             )
         _spa = enriched.enrichment_audit.get("section_packet_audit")
-        _spa_dict: dict = {}
+        _spa_payload: dict | list | None = None
         if isinstance(_spa, dict):
-            _spa_dict = dict(_spa)
-        if _music_audit_spine is not None:
-            _spa_dict["musician_overlay"] = _music_audit_spine
-        if _spa_dict:
+            _spa_payload = dict(_spa)
+            if _music_audit_spine is not None:
+                _spa_payload["musician_overlay"] = _music_audit_spine
+        elif isinstance(_spa, list):
+            _spa_payload = {
+                "slots": list(_spa),
+                "slot_count": len(_spa),
+            }
+            if _music_audit_spine is not None:
+                _spa_payload["musician_overlay"] = _music_audit_spine
+        elif _music_audit_spine is not None:
+            _spa_payload = {"musician_overlay": _music_audit_spine}
+        if _spa_payload:
             (render_dir / "section_packet_audit.json").write_text(
-                json.dumps(_spa_dict, indent=2, default=str, ensure_ascii=False),
+                json.dumps(_spa_payload, indent=2, default=str, ensure_ascii=False),
                 encoding="utf-8",
             )
+        # Durable rendered-accent audit: merge composer-rendered rows with planner
+        # assignments so every planned accent is visible even if a chapter path
+        # skipped syn_meta persistence.
+        _composer_rows = list((_governance_report or {}).get("accent_render_audit") or [])
+        _composer_by_id = {
+            str(r.get("accent_id") or ""): r
+            for r in _composer_rows
+            if r.get("accent_id")
+        }
+        _bodies_by_id = {}
+        for _ch in enriched.chapters:
+            for _aid, _body in dict(getattr(_ch, "accent_bodies", None) or {}).items():
+                if _aid and _body:
+                    _bodies_by_id[str(_aid)] = str(_body)
+        _accent_render_rows = []
+        _seen_ids = set()
+        for _row in list((enriched.spine_context or {}).get("accent_assignments") or []):
+            _aid = str(_row.get("accent_id") or "")
+            _comp = _composer_by_id.get(_aid) or {}
+            _body = _bodies_by_id.get(_aid) or ""
+            _excerpt = str(
+                _comp.get("rendered_excerpt")
+                or _comp.get("body")
+                or (_body[:220].replace("\n", " ").strip() if _body else "")
+            )
+            if not _excerpt and _body:
+                _excerpt = _body[:220].replace("\n", " ").strip()
+            _present = bool(_excerpt) and (
+                _excerpt[:40] in prose
+                or (_body[:40] in prose if _body else False)
+                or any(
+                    frag and frag in prose
+                    for frag in (" ".join(_excerpt.split()[:6]),)
+                )
+            )
+            _accent_render_rows.append(
+                {
+                    "chapter": _row.get("chapter") or _comp.get("chapter"),
+                    "class": _row.get("class") or _comp.get("class"),
+                    "accent_id": _aid,
+                    "position": _row.get("position") or _comp.get("position"),
+                    "provenance": (_row.get("keys") or {}).get("supply_provenance")
+                    or _row.get("supply_source")
+                    or _comp.get("provenance"),
+                    "rendered_excerpt": _excerpt,
+                    "present_in_manuscript": _present or bool(_comp.get("present_in_manuscript")),
+                }
+            )
+            if _aid:
+                _seen_ids.add(_aid)
+        for _aid, _comp in _composer_by_id.items():
+            if _aid in _seen_ids:
+                continue
+            _accent_render_rows.append(dict(_comp))
+        (render_dir / "rendered_accent_audit.json").write_text(
+            json.dumps(
+                {
+                    "contract_id": str(render_dir.name),
+                    "topic_id": topic_id,
+                    "persona_id": persona_id,
+                    "accent_budget": dict((enriched.spine_context or {}).get("accent_budget") or {}),
+                    "accent_signature": (enriched.spine_context or {}).get("accent_signature"),
+                    "story_mix_profile": (enriched.spine_context or {}).get("story_mix_profile"),
+                    "accents": _accent_render_rows,
+                    "count": len(_accent_render_rows),
+                },
+                indent=2,
+                default=str,
+                ensure_ascii=False,
+            ),
+            encoding="utf-8",
+        )
         _bq_fail, _bq_frag = _apply_book_quality_gate(
             render_dir=render_dir,
             prose=prose,

@@ -51,7 +51,7 @@ Six-layer taxonomy: `ABSENT → RESEARCHED → SPECCED → CONFIG-EXISTS → COD
 | 8 | **Summaries / takeaways** | TAKEAWAY slot; COMPRESSION slot in composer order (`chapter_composer.py` :6–7) | `COMPRESSION` stays **spine-optional**, not accent | **CODE-WIRED** (composer reads slot) / **CONFIG-EXISTS** (1,272 persona COMPRESSION dirs) | COMPRESSION is format-driven, not planner-sparse; do not fold into accent budget |
 | 9 | **Reflection questions** | Doctrine closers ("What is your climate today?" in `COMPOSITE_DOCTRINE v*`), CJK TAKEAWAY/SCENE `**Reflection Question:**` blocks | **`REFLECTION_QUESTION`** (new accent) | **EXECUTED-REAL** (embedded) → **SPECCED** (placeable) | Extract / author as accent atoms; plan assigns chapters |
 | 10 | **Encouragement / permission** | `PERMISSION` (245 teacher-bank YAMLs + 64 persona dirs), `PERMISSION_GRANT` (64 persona `CANONICAL.txt` trees), Writer Spec §4.8, `BESTSELLER_STRUCTURES.md` PERMISSION column, composer `:3282–3285` | **`ENCOURAGEMENT`** ← reuse PERMISSION/PERMISSION_GRANT with accent semantics | **EXECUTED-REAL** (content) / **CODE-WIRED** (structure-default render) | Re-key from structure-default to **planner-sparse**; distinguish permission (chapter-cost) vs encouragement (post-exercise) |
-| 11 | **Mantras / affirmations** | `config/angles/angle_registry.yaml` → `journey.core_mantras` (15 angles × TODO stubs) | **`AFFIRMATION`** ← reuse mantra content shape | **CONFIG-EXISTS** (schema) / **ABSENT** (authored mantras) | Surface reader-facing beat; Pearl_Editor commissions mantras per angle |
+| 11 | **Mantras / affirmations** | `config/angles/angle_registry.yaml` → `journey.core_mantras` (15 angles × TODO stubs) | **`AFFIRMATION`** ← reuse mantra content shape | **CONFIG-EXISTS** (schema) / **ABSENT** (authored mantras) / **NOT LIVE** in runtime | Do **not** claim AFFIRMATION is shipping; keep budget at 0 until Pearl_Editor commissions real mantras |
 | 12 | **Quotes** | ~22 orphan `atoms/<persona>/<topic>/QUOTE/CANONICAL.txt` (retired per `QUOTE-ATOM-ROUTING-01`); **no verified bank** | **`QUOTE`** (new accent + new bank) | **ABSENT** (verified) / **RESEARCHED** (orphan content) | Pearl_Research bank program; **not** 11th grid slot — accent overlay only |
 | 13 | **Case studies / cited evidence** | Fictional vignettes in STORY; Gladwell Spiral structure cites stats in `BESTSELLER_STRUCTURES.md` examples only | **`CITED_EVIDENCE`** (new accent + new bank) | **SPECCED** (structure examples) / **ABSENT** (bank + gate) | Pearl_Research claims ledger; distinct from fictional STORY |
 | 14 | **Obstacles / troubleshooting** | INTEGRATION prose ("chest will object", "forget for three rooms/meetings") — e.g. `atoms/gen_z_professionals/anxiety/INTEGRATION/CANONICAL.txt` | **`TROUBLESHOOTING`** (new accent) | **EXECUTED-REAL** (embedded) → **SPECCED** (placeable) | Extract standalone beats keyed to `exercise_id` / `object` |
@@ -61,7 +61,7 @@ Six-layer taxonomy: `ABSENT → RESEARCHED → SPECCED → CONFIG-EXISTS → COD
 
 | Category | Share | Classes |
 |----------|-------|---------|
-| **Dormant asset wiring** | ~70% | ENCOURAGEMENT, AFFIRMATION, REFLECTION_QUESTION, TROUBLESHOOTING (content partially exists) |
+| **Dormant asset wiring** | ~70% | ENCOURAGEMENT, REFLECTION_QUESTION, TROUBLESHOOTING (content partially exists). **AFFIRMATION remains deferred** (TODO mantras only). |
 | **Genuinely new** | ~30% | QUOTE, CITED_EVIDENCE (banks + verification + gates) |
 
 **Verified:** Only QUOTE and CITED_EVIDENCE require new bank programs from zero. All other accent classes reuse or refactor existing prose/assets.
@@ -145,7 +145,7 @@ claim_ledger:
 | **QUOTE** | New bank | Credibility + tonal entry/exit; doctrine echo | `before_HOOK`, `after_INTEGRATION` (closer) | `doctrine_id` or chapter `angle_id` |
 | **ENCOURAGEMENT** | `PERMISSION` / `PERMISSION_GRANT` atoms | Post-effort recognition — "You just sat with that for two minutes" | `after_EXERCISE`, `after_turning_point` | `exercise_id` or story `turning_point` pick |
 | **REFLECTION_QUESTION** | Doctrine closers, CJK reflection blocks | Reader pause before thread | `after_REFLECTION`, `before_THREAD` | `doctrine_id` or `object` |
-| **AFFIRMATION** | `angle_registry.yaml` `core_mantras` | Short repeatable phrase; angle journey surface | `after_PIVOT`, `before_INTEGRATION` | `angle_id` |
+| **AFFIRMATION** | `angle_registry.yaml` `core_mantras` | Short repeatable phrase; angle journey surface (**NOT LIVE** — TODO stubs only; excluded from `ALL_ACCENT_CLASSES`) | `after_PIVOT`, `before_INTEGRATION` | `angle_id` |
 | **TROUBLESHOOTING** | INTEGRATION obstacle paragraphs | "When you forget for three days…" | `after_INTEGRATION` | `exercise_id` + `object` |
 | **CITED_EVIDENCE** | New bank | Named study/stat moment (not fiction) | `after_HOOK`, `before_STORY` (Gladwell Spiral alignment) | `doctrine_id` + claim ledger |
 | **WISDOM_ESSENCE** | New bank (`accent_banks/wisdom_essence/`) | Traditions' distilled voice — corpus-convergent themes, not teacher doctrine | `after_REFLECTION`, `before_THREAD` | `topic_keys` + `doctrine_keys` + `theme`; `source_teachers` audit only |

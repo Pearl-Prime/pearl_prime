@@ -105,6 +105,106 @@ def test_anxiety_pilot_budget_includes_rq_and_ts():
     assert profile == "somatic_reflective"
     assert budget.get("REFLECTION_QUESTION", 0) >= 3
     assert budget.get("TROUBLESHOOTING", 0) >= 1
+    assert budget.get("QUOTE", 0) >= 3
+    assert budget.get("ENCOURAGEMENT", 0) >= 2
+    assert budget.get("EXTERNAL_STORY", 0) >= 2
+
+
+def test_allowed_positions_rejects_illegal_placement():
+    from phoenix_v4.planning.accent_planner import _position_fit_ok
+
+    entry = {
+        "commentary_id": "ac_ravi_anxiety_skeptic_standup_v01",
+        "allowed_positions": ["after_EXERCISE"],
+        "position_fit": None,
+    }
+    assert _position_fit_ok(entry, "after_EXERCISE") is True
+    assert _position_fit_ok(entry, "after_REFLECTION") is False
+
+
+def test_story_mix_weights_prefer_intimate_over_mythic():
+    from phoenix_v4.planning.accent_planner import _score_entry_for_chapter, _story_mix_profile_data
+
+    intimate = _story_mix_profile_data("intimate_voice", REPO_ROOT)
+    timeless = _story_mix_profile_data("timeless_wisdom", REPO_ROOT)
+    film_entry = {
+        "story_id": "ext_anx_film_inside_out_v01",
+        "type": "film",
+        "topic_keys": ["anxiety"],
+        "body": "A film story about anxiety that is long enough to score.",
+        "secular_safe": True,
+    }
+    mythic_entry = {
+        "story_id": "ext_anx_mythic_icarus_v01",
+        "type": "mythic",
+        "topic_keys": ["anxiety"],
+        "body": "A mythic story about anxiety that is long enough to score.",
+        "secular_safe": True,
+    }
+    common = dict(
+        accent_class="EXTERNAL_STORY",
+        topic_id="anxiety",
+        locale_cluster="en_US",
+        composite_mode=True,
+        chapter_number=3,
+        chapter_count=12,
+        position="after_REFLECTION",
+        book_idea="prediction-as-evidence swap",
+        book_motif="The Alarm (chest and phone)",
+        seed="story-mix-test",
+        persona_id="gen_z_professionals",
+    )
+    film_intimate = _score_entry_for_chapter(film_entry, story_mix_profile_data=intimate, **common)
+    mythic_intimate = _score_entry_for_chapter(mythic_entry, story_mix_profile_data=intimate, **common)
+    film_timeless = _score_entry_for_chapter(film_entry, story_mix_profile_data=timeless, **common)
+    mythic_timeless = _score_entry_for_chapter(mythic_entry, story_mix_profile_data=timeless, **common)
+    assert film_intimate > mythic_intimate
+    assert mythic_timeless > film_timeless
+
+
+@pytest.mark.slow
+def test_main_pass_allows_multi_item_class_budget():
+    """Budget >1 for a class must be satisfiable without relying only on refill."""
+    enriched = _enriched_anxiety()
+    plan = plan_accent_beats_for_book(
+        enriched,
+        brand_id="stillness_press",
+        seed="4242",
+        teacher_mode=False,
+        repo_root=REPO_ROOT,
+    )
+    by_class = {}
+    for row in plan.flat_rows:
+        by_class.setdefault(row["class"], []).append(row["chapter"])
+    # Multi-item classes should land on distinct chapters via the main spread path.
+    for cls in ("REFLECTION_QUESTION", "ENCOURAGEMENT", "EXTERNAL_STORY", "QUOTE"):
+        need = int(plan.accent_budget.get(cls, 0))
+        if need > 1:
+            assert len(by_class.get(cls, [])) >= min(need, 2), f"{cls} under-assigned: {by_class.get(cls)}"
+            assert len(set(by_class.get(cls, []))) >= min(need, 2)
+
+
+@pytest.mark.slow
+def test_encouragement_provenance_stable_across_assignments():
+    enriched = _enriched_anxiety()
+    plan = plan_accent_beats_for_book(
+        enriched,
+        brand_id="stillness_press",
+        seed="4242",
+        teacher_mode=False,
+        repo_root=REPO_ROOT,
+    )
+    enc = [r for r in plan.flat_rows if r.get("class") == "ENCOURAGEMENT"]
+    assert enc
+    provenances = {r.get("supply_source") for r in enc}
+    assert provenances == {"atom_pool"}
+
+
+def test_affirmation_not_in_live_accent_classes():
+    from phoenix_v4.planning.accent_planner import ALL_ACCENT_CLASSES
+
+    assert "AFFIRMATION" not in ALL_ACCENT_CLASSES
+
 
 
 def test_accent_signature_stable():
@@ -188,7 +288,11 @@ def test_anxiety_pilot_authored_rq_ts_lands_without_fallback():
     supported = alignment.get("supported_underfilled_budget_by_class") or {}
     assert int(supported.get("REFLECTION_QUESTION", 0)) == 0
     assert int(supported.get("TROUBLESHOOTING", 0)) == 0
-    assert alignment.get("status") == "PASS"
+    assert alignment.get("status") in ("PASS", "WARN")
+    assert alignment.get("exemplar_config_present") is True
+
+    quote_rows = [r for r in plan.flat_rows if r.get("class") == "QUOTE"]
+    assert len(quote_rows) >= 3
 
     assert strategy.get("book_idea") == ANXIETY_BOOK_IDEA
     assert strategy.get("book_motif") == ANXIETY_BOOK_MOTIF

@@ -3860,6 +3860,26 @@ def compose_from_enriched_book(
             twelve_shape_flagship=_twelve_shape_flagship,
             engine_type=str(_spine_ctx.get("engine") or "").strip(),
         )
+        # Persist rendered accent rows so operators can audit what landed.
+        _accent_rendered = list((_syn_meta or {}).get("accent_rendered") or [])
+        if _accent_rendered:
+            _audit_rows = report.setdefault("accent_render_audit", [])
+            for _ar in _accent_rendered:
+                if not isinstance(_ar, dict):
+                    continue
+                _body = str(_ar.get("body") or _ar.get("rendered_body") or "")
+                _audit_rows.append(
+                    {
+                        "chapter": ch.number,
+                        "class": _ar.get("class") or _ar.get("accent_class"),
+                        "accent_id": _ar.get("accent_id"),
+                        "position": _ar.get("position"),
+                        "provenance": _ar.get("provenance")
+                        or ((_ar.get("keys") or {}).get("supply_provenance") if isinstance(_ar.get("keys"), dict) else None),
+                        "rendered_excerpt": _body[:220].replace("\n", " ").strip(),
+                        "present_in_manuscript": bool(_body.strip()),
+                    }
+                )
         ch_body = post_compose_sanitize_chapter(
             ch_body,
             topic_id=enriched.topic,

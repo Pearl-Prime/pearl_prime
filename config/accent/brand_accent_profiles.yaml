@@ -11,6 +11,9 @@ profiles:
       EXTERNAL_STORY: 2
       WISDOM_ESSENCE: 1
       AUTHOR_COMMENTARY: 1
+      QUOTE: 0
+      REFLECTION_QUESTION: 0
+      TROUBLESHOOTING: 0
     max_accent_chapter_share: 0.35
 
   commercial_action:
@@ -48,3 +51,15 @@ pilot_cells:
   "gen_z_professionals:anxiety":
     profile: somatic_reflective
     story_mix_profile: intimate_voice
+    # Explicit flagship accent contract (ACCENT_BEATS_SYSTEM_SPEC §4.1 pilot shape + research layer).
+    # AFFIRMATION remains deferred — no authored non-TODO mantra supply.
+    accent_budget_overrides:
+      QUOTE: 3
+      ENCOURAGEMENT: 2
+      REFLECTION_QUESTION: 3
+      TROUBLESHOOTING: 1
+      CITED_EVIDENCE: 1
+      EXTERNAL_STORY: 2
+      WISDOM_ESSENCE: 1
+      AUTHOR_COMMENTARY: 1
+    max_accent_chapter_share: 0.85

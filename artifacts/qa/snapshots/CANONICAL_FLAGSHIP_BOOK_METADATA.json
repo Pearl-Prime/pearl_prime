@@ -3,15 +3,15 @@
   "artifact": "flagship_full_book_golden",
   "scope": "full_12_chapter_book",
   "status": "ratified",
-  "ratified_at": "2026-07-08T04:18:20Z",
+  "ratified_at": "2026-07-11T05:04:36Z",
   "canonical_branch": null,
   "layer": null,
   "seed": "flagship_phase2_layer6",
   "invocation": [],
   "invocation_shell": "",
-  "content_sha256": "88fcff84f9d889226dc35e00acca5a215519395621200fc55abb580d5853959d",
-  "word_count": 21567,
-  "byte_count": 121472,
+  "content_sha256": "9748228638d378e51b0734c1ac1270d7410843befffb9144ec87ba944d23be70",
+  "word_count": 21728,
+  "byte_count": 122518,
   "chapter_content_sha256": {
     "ch1": "e68973b6c696df7cf1446e7b15b0a623690a0f138c126f61134033e7977251ae",
     "ch2": "e9c0993564cb567751dfe39f72ece8e1f7d55600ea0eeba71e6dc4e861d560a0",
@@ -19,9 +19,9 @@
     "ch4": "82e9b3001086ac695ce6958e6f493fbf22ff655b3825aa1593a9d39dabaafefc",
     "ch5": "109eb8acce4e8f7a065e659429b65d7f0b2412d18336c72176718fdeeab3b2f9",
     "ch6": "2a89e2b5f23f475b40446a91a8cb81ba9f1c8f5498f93d9f7163798cc3165bb4",
-    "ch7": "11763f61768f2d5bf28c7027b70ccee8690e8d2f104c0b0b14cdcdff578d9fe0",
+    "ch7": "490d82f7779b21db145eac8f88b52e7c3e4be3f318008edd323668f1a7fbc99e",
     "ch8": "02fe84df169bce4e35ff1a63cd1e4ad55efb5479cf99d470339059a93b408b5c",
-    "ch9": "581239a483534a167352566ab3f08eaf11fd0e5dd2dabd348e0915138db7bc72",
+    "ch9": "4469ee1bee31d80c67e95b950a15b782a37c43fe5b5b9cf8aad8f7a964637b65",
     "ch10": "a9bbd5f7c4fa92f536a5199e07b4dc377eef9d468eab181bfc28176df8ce631b",
     "ch11": "6b861efcaa182103c8e64a8a87903988b5d1ec483cec3bffe5db8df935645508",
     "ch12": "483bf8309e8ce6a0c79c44a354562bdd0c52c5ff90099ff440713fcd8c0edc32"
@@ -36,5 +36,5 @@
     "restore_snapshot": "git checkout <sha> -- artifacts/qa/snapshots/CANONICAL_FLAGSHIP_BOOK.txt artifacts/qa/snapshots/CANONICAL_FLAGSHIP_BOOK_METADATA.json"
   },
   "notes": "No CANONICAL_FLAGSHIP_BOOK.txt until operator ratifies post-read approval.",
-  "ratify_opd": "OPD-20260708-ACCENT-PLANNER-V1"
+  "ratify_opd": "OPD-20260711-PROPRIME-ACCENT-PIPELINE-100PCT"
 }

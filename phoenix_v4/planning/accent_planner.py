@@ -70,10 +70,19 @@ DEFAULT_BOOK_MOTIF = "quiet_capacity"
 
 BOOK_PHASE_ORDER = ("problem", "history", "knowledge", "action", "maintenance")
 
+# Explicit flagship minima for gen_z_professionals × anxiety (contract-v1).
+# Prefer config/accent/brand_accent_profiles.yaml pilot_cells.accent_budget_overrides;
+# these remain as a hard floor so the anxiety pilot cannot silently drop quotes/RQ/TS.
 _PILOT_ACCENT_MINIMUMS: Dict[str, Dict[str, int]] = {
     "gen_z_professionals:anxiety": {
+        "QUOTE": 3,
+        "ENCOURAGEMENT": 2,
         "REFLECTION_QUESTION": 3,
         "TROUBLESHOOTING": 1,
+        "CITED_EVIDENCE": 1,
+        "EXTERNAL_STORY": 2,
+        "WISDOM_ESSENCE": 1,
+        "AUTHOR_COMMENTARY": 1,
     },
 }
 _PILOT_SHARE_CAP_FLOOR: Dict[str, float] = {
@@ -247,6 +256,8 @@ def resolve_enrichment_strategy_profile(
 
 def _dosage_target(dosage_envelope: Mapping[str, Any], accent_class: str) -> int:
     spec = dosage_envelope.get(accent_class)
+    if isinstance(spec, (int, float)):
+        return int(spec)
     if not isinstance(spec, dict):
         return 0
     if spec.get("target") is not None:
@@ -319,6 +330,13 @@ def resolve_accent_budget(
     )
     pilot_key = f"{persona_id}:{topic_id}"
     if enrichment_contract_v1:
+        # Config-authored overrides on the pilot cell take precedence as floors.
+        if isinstance(pilot, dict):
+            for cls, minimum in (pilot.get("accent_budget_overrides") or {}).items():
+                if cls in ALL_ACCENT_CLASSES:
+                    budget[cls] = max(int(budget.get(cls, 0)), int(minimum))
+            if pilot.get("max_accent_chapter_share") is not None:
+                share_cap = max(share_cap, float(pilot["max_accent_chapter_share"]))
         for cls, minimum in (_PILOT_ACCENT_MINIMUMS.get(pilot_key) or {}).items():
             budget[cls] = max(int(budget.get(cls, 0)), int(minimum))
         if pilot_key in _PILOT_SHARE_CAP_FLOOR:
@@ -370,6 +388,25 @@ def _chapter_slot_types(ch: EnrichedChapter) -> List[str]:
     return [str(s.slot_type or "").strip().upper() for s in ch.slots if str(s.slot_type or "").strip()]
 
 
+def _chapter_renderable_words(ch: EnrichedChapter) -> int:
+    """Count words available for accent insertion (empty chapters cannot host accents)."""
+    total = 0
+    for slot in ch.slots or []:
+        actual = int(getattr(slot, "actual_words", 0) or 0)
+        if actual > 0:
+            total += actual
+            continue
+        content = str(getattr(slot, "content", "") or "").strip()
+        if content:
+            total += len(content.split())
+    return total
+
+
+def _chapter_can_host_accents(ch: EnrichedChapter, *, min_words: int = 80) -> bool:
+    """Skip chapters whose slot streams are empty/stub — accents would not survive compose."""
+    return _chapter_renderable_words(ch) >= min_words and bool(_chapter_slot_types(ch))
+
+
 def _position_fits(position: str, slot_types: Sequence[str]) -> bool:
     st = list(slot_types)
     if position == "before_HOOK":
@@ -393,11 +430,33 @@ def _position_fits(position: str, slot_types: Sequence[str]) -> bool:
     return False
 
 
-def _pick_position(accent_class: str, slot_types: Sequence[str], *, seed: str, chapter_number: int) -> Optional[str]:
+def _pick_position(
+    accent_class: str,
+    slot_types: Sequence[str],
+    *,
+    seed: str,
+    chapter_number: int,
+    allowed_positions: Optional[Sequence[str]] = None,
+) -> Optional[str]:
     options = [p for p in CLASS_DEFAULT_POSITIONS.get(accent_class, ()) if _position_fits(p, slot_types)]
+    if allowed_positions:
+        allowed = {str(v).strip() for v in allowed_positions}
+        options = [p for p in options if p in allowed]
     if not options:
         return None
     return options[_deterministic_rank(seed, f"pos:{accent_class}:ch{chapter_number}") % len(options)]
+
+
+def _allowed_positions_ok(entry: Mapping[str, Any], position: str) -> bool:
+    """Honor authored bank `allowed_positions` contracts when present."""
+    allowed = entry.get("allowed_positions")
+    if allowed is None:
+        return True
+    values = allowed if isinstance(allowed, list) else [allowed]
+    normalized = {str(v).strip() for v in values if str(v).strip()}
+    if not normalized:
+        return True
+    return position in normalized
 
 
 def _locale_fit_ok(entry: Mapping[str, Any], locale_cluster: str) -> bool:
@@ -707,6 +766,8 @@ def _persona_fit_ok(entry: Mapping[str, Any], persona_id: str) -> bool:
 
 
 def _position_fit_ok(entry: Mapping[str, Any], position: str) -> bool:
+    if not _allowed_positions_ok(entry, position):
+        return False
     fit = entry.get("position_fit")
     if fit is None:
         return True
@@ -754,6 +815,43 @@ def _score_chapter_for_class(
     return score
 
 
+def _story_mix_weight_bonus(
+    entry: Mapping[str, Any],
+    *,
+    accent_class: str,
+    story_mix_profile_data: Optional[Mapping[str, Any]],
+    used_story_types: Optional[Sequence[str]] = None,
+) -> int:
+    """Apply research story-mix type/emotional weights for EXTERNAL_STORY picks."""
+    if accent_class != "EXTERNAL_STORY" or not story_mix_profile_data:
+        return 0
+    bonus = 0
+    type_weights = dict(story_mix_profile_data.get("type_weights") or {})
+    emotional_weights = dict(story_mix_profile_data.get("emotional_weights") or {})
+    story_type = str(
+        entry.get("story_type")
+        or entry.get("type")
+        or entry.get("external_story_type")
+        or ""
+    ).strip()
+    if story_type and story_type in type_weights:
+        bonus += int(round(float(type_weights[story_type]) * 40))
+    emotion = str(
+        entry.get("emotional_shape")
+        or entry.get("emotional_register")
+        or entry.get("emotion")
+        or ""
+    ).strip()
+    if emotion and emotion in emotional_weights:
+        bonus += int(round(float(emotional_weights[emotion]) * 20))
+    # Soft anti-repeat: prefer unused story types when the profile is diverse.
+    if used_story_types and story_type:
+        repeats = sum(1 for t in used_story_types if t == story_type)
+        if repeats:
+            bonus -= min(18, repeats * 9)
+    return bonus
+
+
 def _score_entry_for_chapter(
     entry: Mapping[str, Any],
     *,
@@ -768,6 +866,8 @@ def _score_entry_for_chapter(
     book_motif: str,
     seed: str,
     persona_id: str = "",
+    story_mix_profile_data: Optional[Mapping[str, Any]] = None,
+    used_story_types: Optional[Sequence[str]] = None,
 ) -> int:
     if not _topic_match(entry, topic_id) or not _locale_fit_ok(entry, locale_cluster):
         return -1
@@ -794,6 +894,12 @@ def _score_entry_for_chapter(
     doctrine_keys = entry.get("doctrine_keys") or []
     if doctrine_keys:
         score += 3
+    score += _story_mix_weight_bonus(
+        entry,
+        accent_class=accent_class,
+        story_mix_profile_data=story_mix_profile_data,
+        used_story_types=used_story_types,
+    )
     score += _deterministic_rank(seed, f"entry:{accent_class}:ch{chapter_number}:{_entry_id(entry)}") % 7
     return score
 
@@ -813,6 +919,8 @@ def _select_entry_scored(
     seed: str,
     used_ids: set[str],
     persona_id: str = "",
+    story_mix_profile_data: Optional[Mapping[str, Any]] = None,
+    used_story_types: Optional[Sequence[str]] = None,
 ) -> Optional[dict[str, Any]]:
     scored: List[Tuple[int, dict[str, Any]]] = []
     for row in pool:
@@ -832,6 +940,8 @@ def _select_entry_scored(
             book_motif=book_motif,
             seed=seed,
             persona_id=persona_id,
+            story_mix_profile_data=story_mix_profile_data,
+            used_story_types=used_story_types,
         )
         if score >= 0:
             scored.append((score, dict(row)))
@@ -1027,7 +1137,9 @@ def _build_alignment_report(
     strategy_report: Mapping[str, Any],
     repo_root: Path,
 ) -> Dict[str, Any]:
-    data = _load_yaml(repo_root / "config" / "authoring" / "bestseller_enrichment_signatures.yaml")
+    signatures_path = repo_root / "config" / "authoring" / "bestseller_enrichment_signatures.yaml"
+    data = _load_yaml(signatures_path)
+    exemplar_config_missing = not signatures_path.exists()
     profile_exemplars = ((data.get("profiles") or {}).get(story_mix_profile) or {}).get("exemplars") or []
     counts = _assignment_counts(flat_rows)
     chapters_with = {int(r.get("chapter") or 0) for r in flat_rows}
@@ -1060,6 +1172,8 @@ def _build_alignment_report(
     status = "PASS"
     if supported_underfilled:
         status = "FAIL"
+    elif exemplar_config_missing or not profile_exemplars:
+        status = "WARN"
     elif capability_gaps or any(v > 0 for v in underfilled_all.values()):
         status = "WARN"
 
@@ -1083,6 +1197,9 @@ def _build_alignment_report(
         "actual_accent_chapter_share": actual_share,
         "chapters_with_accents": sorted(chapters_with),
         "chapter_share": actual_share,
+        "exemplar_config_present": not exemplar_config_missing,
+        "exemplar_config_path": str(signatures_path.relative_to(repo_root)) if not exemplar_config_missing else None,
+        "exemplar_pool_size": len(profile_exemplars),
         "nearest_exemplar_id": (best_match or {}).get("exemplar_id"),
         "nearest_exemplar_label": (best_match or {}).get("label"),
         "nearest_exemplar_score": best_score if best_match else 0,
@@ -1091,6 +1208,15 @@ def _build_alignment_report(
             for cls in ALL_ACCENT_CLASSES
             if int(accent_budget.get(cls, 0)) > 0 or int(counts.get(cls, 0)) > 0
         },
+        "warnings": (
+            ["bestseller_enrichment_signatures.yaml missing — alignment is budget-fill only, not exemplar match"]
+            if exemplar_config_missing
+            else (
+                [f"no exemplars configured for story_mix_profile={story_mix_profile}"]
+                if not profile_exemplars
+                else []
+            )
+        ),
     }
 
 
@@ -1110,6 +1236,8 @@ def _apply_share_cap_with_refill(
     max_accents_per_chapter: int,
     topic_id: str,
     used_ids: set[str],
+    supply_provenance: Optional[Mapping[str, str]] = None,
+    story_mix_profile_data: Optional[Mapping[str, Any]] = None,
 ) -> Tuple[List[Dict[str, Any]], Dict[int, List[AccentBeat]]]:
     total_chapters = max(1, len(enriched.chapters))
     if share_cap <= 0 or not flat_rows:
@@ -1118,6 +1246,13 @@ def _apply_share_cap_with_refill(
     max_chapters = max(1, int(total_chapters * share_cap))
     beats_by_id = {b.accent_id: b for beats in chapter_assignments.values() for b in beats}
     trim_order = list(reversed(ACCENT_SELECTION_ORDER))
+    provenance_map = dict(supply_provenance or {})
+    used_story_types: List[str] = []
+    for row in flat_rows:
+        if row.get("class") == "EXTERNAL_STORY":
+            st = str((row.get("keys") or {}).get("story_type") or "")
+            if st:
+                used_story_types.append(st)
 
     def _chapter_count(rows: List[Dict[str, Any]]) -> int:
         return len({int(r["chapter"]) for r in rows})
@@ -1152,7 +1287,8 @@ def _apply_share_cap_with_refill(
         candidates = [
             ch.number
             for ch in enriched.chapters
-            if _pick_position(accent_class, _chapter_slot_types(ch), seed=seed, chapter_number=ch.number)
+            if _chapter_can_host_accents(ch)
+            and _pick_position(accent_class, _chapter_slot_types(ch), seed=seed, chapter_number=ch.number)
         ]
         ranked = sorted(
             candidates,
@@ -1174,7 +1310,7 @@ def _apply_share_cap_with_refill(
             if len(chapters_used) >= max_chapters and ch_num not in chapters_used:
                 continue
             ch = next((c for c in enriched.chapters if c.number == ch_num), None)
-            if ch is None:
+            if ch is None or not _chapter_can_host_accents(ch):
                 continue
             position = _pick_position(accent_class, _chapter_slot_types(ch), seed=seed, chapter_number=ch_num)
             if not position:
@@ -1193,6 +1329,8 @@ def _apply_share_cap_with_refill(
                 seed=seed,
                 used_ids=used_ids,
                 persona_id=enriched.persona_id,
+                story_mix_profile_data=story_mix_profile_data,
+                used_story_types=used_story_types,
             )
             if not entry:
                 continue
@@ -1200,16 +1338,24 @@ def _apply_share_cap_with_refill(
             if not body or not _composite_body_safe(body, composite_mode=composite_mode):
                 continue
             used_ids.add(accent_id)
+            prov = provenance_map.get(accent_class) or entry.get("provenance") or "authored_bank"
+            if accent_class in ("REFLECTION_QUESTION", "TROUBLESHOOTING"):
+                prov = provenance_map.get(accent_class) or entry.get("provenance") or "authored_bank"
+            beat_keys = {
+                "topic_id": topic_id,
+                "persona_id": enriched.persona_id,
+                "supply_provenance": prov,
+            }
+            story_type = str(entry.get("story_type") or entry.get("type") or entry.get("external_story_type") or "")
+            if story_type:
+                beat_keys["story_type"] = story_type
+                used_story_types.append(story_type)
             beat = AccentBeat(
                 accent_class,
                 accent_id,
                 position,
                 body,
-                {
-                    "topic_id": topic_id,
-                    "persona_id": enriched.persona_id,
-                    "supply_provenance": entry.get("provenance") or "authored_bank",
-                },
+                beat_keys,
             )
             rebuilt.setdefault(ch_num, []).append(beat)
             working_rows.append(
@@ -1337,7 +1483,7 @@ def _plan_accent_beats_for_book_legacy(
             ch = next((c for c in enriched.chapters if c.number == ch_num), None)
             if ch is None:
                 continue
-            if any(b.class_ == accent_class for beats in chapter_assignments.values() for b in beats):
+            if any(b.class_ == accent_class for b in chapter_assignments.get(ch_num, [])):
                 continue
             position = _pick_position(accent_class, _chapter_slot_types(ch), seed=seed, chapter_number=ch_num)
             if not position:
@@ -1505,6 +1651,7 @@ def plan_accent_beats_for_book(
     chapter_assignments: Dict[int, List[AccentBeat]] = {}
     flat_rows: List[Dict[str, Any]] = []
     total_chapters = max(1, len(enriched.chapters))
+    used_story_types: List[str] = []
 
     for accent_class in ACCENT_SELECTION_ORDER:
         budget = int(accent_budget.get(accent_class, 0))
@@ -1513,7 +1660,8 @@ def plan_accent_beats_for_book(
         candidates = [
             ch.number
             for ch in enriched.chapters
-            if _pick_position(accent_class, _chapter_slot_types(ch), seed=seed, chapter_number=ch.number)
+            if _chapter_can_host_accents(ch)
+            and _pick_position(accent_class, _chapter_slot_types(ch), seed=seed, chapter_number=ch.number)
         ]
         ranked = sorted(
             candidates,
@@ -1530,7 +1678,9 @@ def plan_accent_beats_for_book(
             ch = next((c for c in enriched.chapters if c.number == ch_num), None)
             if ch is None:
                 continue
-            if any(b.class_ == accent_class for beats in chapter_assignments.values() for b in beats):
+            if not _chapter_can_host_accents(ch):
+                continue
+            if any(b.class_ == accent_class for b in chapter_assignments.get(ch_num, [])):
                 continue
             if len(chapter_assignments.get(ch_num, [])) >= max_accents_per_chapter:
                 continue
@@ -1551,6 +1701,8 @@ def plan_accent_beats_for_book(
                 seed=seed,
                 used_ids=used_ids,
                 persona_id=persona_id,
+                story_mix_profile_data=mix_profile,
+                used_story_types=used_story_types,
             )
             if not entry:
                 continue
@@ -1561,16 +1713,21 @@ def plan_accent_beats_for_book(
             prov = supply_provenance.get(accent_class, "authored_bank")
             if accent_class in ("REFLECTION_QUESTION", "TROUBLESHOOTING"):
                 prov = supply_provenance.get(accent_class, entry.get("provenance") or "authored_bank")
+            beat_keys = {
+                "topic_id": topic_id,
+                "persona_id": persona_id,
+                "supply_provenance": prov,
+            }
+            story_type = str(entry.get("story_type") or entry.get("type") or entry.get("external_story_type") or "")
+            if story_type:
+                beat_keys["story_type"] = story_type
+                used_story_types.append(story_type)
             beat = AccentBeat(
                 accent_class,
                 accent_id,
                 position,
                 body,
-                {
-                    "topic_id": topic_id,
-                    "persona_id": persona_id,
-                    "supply_provenance": prov,
-                },
+                beat_keys,
             )
             chapter_assignments.setdefault(ch_num, []).append(beat)
             flat_rows.append(
@@ -1599,6 +1756,8 @@ def plan_accent_beats_for_book(
         max_accents_per_chapter=max_accents_per_chapter,
         topic_id=topic_id,
         used_ids=used_ids,
+        supply_provenance=supply_provenance,
+        story_mix_profile_data=mix_profile,
     )
 
     signature = compute_accent_signature(flat_rows, accent_budget=accent_budget)

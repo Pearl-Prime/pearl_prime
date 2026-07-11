@@ -1,6 +1,7 @@
 # Story-mix profiles — per-book external-story spread knob
 # Authority: specs/EXTERNAL_STORIES_BANK_SPEC.md §4
-# Status: spec-only — planner consumer unwired until accent build lane opens.
+# Status: LIVE — phoenix_v4/planning/accent_planner.py applies type_weights /
+# emotional_weights when scoring EXTERNAL_STORY under enrichment_contract_v1.
 
 schema_version: "1.0.0"
 
@@ -43,6 +44,12 @@ profiles:
       tearjerker: 0.15
       contrast: 0.10
       underdog: 0.10
+    # Optional dosage floors merged into contract-v1 budgets via resolve_accent_budget.
+    dosage_envelope:
+      QUOTE: 3
+      REFLECTION_QUESTION: 3
+      TROUBLESHOOTING: 1
+    max_accent_chapter_share: 0.85
 
   timeless_wisdom:
     label: "Power-of-Now-like"

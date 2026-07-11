@@ -121,6 +121,15 @@ jobs:
           # Every ch2-12 EXERCISE renders its full 5 layers (bridge/intro/description/aha/integration).
           PYTHONPATH=. python3 scripts/ci/check_flagship_exercise_five_layer.py --book /tmp/flagship_golden/book.txt
 
+      - name: Upload flagship golden book (always)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: flagship-golden-book
+          path: /tmp/flagship_golden/book.txt
+          if-no-files-found: warn
+          retention-days: 14
+
       - name: Flagship CH1 executable contract (BLOCK)
         run: PYTHONPATH=. python3 scripts/ci/check_flagship_contract.py
 

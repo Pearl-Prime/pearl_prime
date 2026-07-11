@@ -72,6 +72,11 @@ def insert_accent_beats_into_streams(
                 "class": cls,
                 "position": position,
                 "chapter_insert_index": insert_at,
+                "body": body,
+                "rendered_excerpt": body[:220].replace("\n", " ").strip(),
+                "provenance": (beat.get("keys") or {}).get("supply_provenance")
+                if isinstance(beat.get("keys"), dict)
+                else beat.get("supply_provenance"),
             }
         )
         offset += 1
