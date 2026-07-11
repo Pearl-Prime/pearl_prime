@@ -1,6 +1,6 @@
 # Program State — Single Source of Truth
 
-**LAST VERIFIED:** 2026-07-11 @ `origin/main` `e11f44b5abf8bd2b62c18182e304d79f2e27fdb3` (post-#5530/#5532 books-first SSOT; #5530 repair on `main`, #5532 reflected thin-persona caveat; this lane completes LAST VERIFIED + queue/NO_BINDING split + ACTIVE_WORKSTREAMS row)
+**LAST VERIFIED:** 2026-07-11 @ `origin/main` `d8532d2d43874051b90201bda8b07eab5c1ce817` (post-#5535 kenjin EXERCISE readiness; ProPrime modes A/B/C/D verification lane)
 
 > **RULE:** Verify against `origin/main`, never git date or the working tree (shared-tree branch-churn shows
 > other-branch/stale state). This is the entry point — if another doc disagrees with this, this wins or that doc is stale.
@@ -48,6 +48,13 @@ program history. Both goldens now live + byte-frozen:
   `scripts/publish/waystream_covers/verify_resync.py` (`plans=800 csv=800 covers=800 dashboard=800`, 0 structural
   errors, `--ocr` confirms cover text matches title); covers are gitignored local artifacts (slug-keyed, two-stage
   PIL-over-FLUX), not committed. Localization can inherit clean titles.
+
+### ProPrime modes (regular / composite / teacher / music) — VERIFIED 2026-07-11
+**Lane:** `agent/proprime-modes-100pct-20260711` → PR **#5535** (`d8532d2d43`) + GHA flagship QA `29129940199`.
+- **A regular mode:** PASS — Book flagship QA ladder on `main` (`extended_book_2h` × gen_z×anxiety, `--pipeline-mode spine --quality-profile production --exercise-journeys`) → Pass (chapter_flow/book_quality/ONTGP 0.63/EI 0.72). Artifacts: GHA run 29129940199; local mirror `artifacts/qa/proprime_modes_100pct_20260711/`. Durable Waystream EPUB remains on main (`artifacts/epubs/way_stream_sanctuary/...burnout__overwhelm.epub`, 1.7MB). Fresh Waystream rebuild on current main still hits `bracket_template_stub` on some burnout cells — do not treat that cell rebuild as green without a stub fix.
+- **B composite doctrine (regular mode):** PASS — flagship `enrichment_audit.json` shows `slots_from_composite=12` with `source=composite_doctrine` / `COMPOSITE_DOCTRINE v01–v15` (not teacher-mode hybrid).
+- **C teacher mode:** PASS under named production gates — `run_teacher_production_gates.py` PASS after #5535 kenjin EXERCISE seed; `pytest` teacher e2e smoke kenjin+joshin PASS (timeout 300s). Teacher teachings present in renders (`slots_from_teacher` 48–60). Full production book-quality Pass for every teacher×cell is **not** claimed (anxiety+joshin chapter_flow FAIL; some burnout cells stub-Reject).
+- **D music mode:** PASS as overlay production lane — `pytest` music suite 12/12; spine render `--music-mode with-lyrics --musician-id ahjan` four-piece chord → book_quality Pass + `music_overlay_audit.json` applied with LYRIC_* + MUSIC_REFLECTION_* injections. Music V2 / MusicGen / first-external-musician remain **proposed/held** (PROGRAM_STATE hold #6); ahjan_music is reference kit only.
 
 ### Production-Gate / Real-EPUBs
 - **Status:** **FIRST EPUB SHIPPED — durable on `main` (1 EPUB); validated brand generalizes across 4 cells**
