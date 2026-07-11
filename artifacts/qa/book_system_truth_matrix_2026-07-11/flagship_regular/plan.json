@@ -1,0 +1,168 @@
+{
+  "source": "spine_pipeline",
+  "topic_id": "anxiety",
+  "persona_id": "gen_z_professionals",
+  "teacher_id": "",
+  "runtime_format": "extended_book_2h",
+  "output_format_id": null,
+  "target_word_range": null,
+  "format_structural_id": null,
+  "book_plan_id": "ref_anxiety_genz_6h_v1",
+  "word_count": 21768,
+  "chapter_count": 12,
+  "pre_depth_total_words": 20960,
+  "post_depth_total_words": 20960,
+  "chapter_architecture_version": 1,
+  "angle_id": "PROTECTIVE_ALARM",
+  "chapter_planner_warnings": [],
+  "accent_budget": {
+    "ENCOURAGEMENT": 2,
+    "CITED_EVIDENCE": 1,
+    "EXTERNAL_STORY": 2,
+    "WISDOM_ESSENCE": 1,
+    "AUTHOR_COMMENTARY": 1
+  },
+  "accent_signature": "807561420aa70de7",
+  "story_mix_profile": "intimate_voice",
+  "accent_assignments": [
+    {
+      "chapter": 3,
+      "class": "ENCOURAGEMENT",
+      "accent_id": "enc_gen_z_professionals_anxiety_permission_v12",
+      "position": "after_turning_point",
+      "keys": {
+        "topic_id": "anxiety",
+        "persona_id": "gen_z_professionals"
+      }
+    },
+    {
+      "chapter": 8,
+      "class": "ENCOURAGEMENT",
+      "accent_id": "enc_gen_z_professionals_anxiety_permission_v18",
+      "position": "after_turning_point",
+      "keys": {
+        "topic_id": "anxiety",
+        "persona_id": "gen_z_professionals"
+      }
+    },
+    {
+      "chapter": 3,
+      "class": "CITED_EVIDENCE",
+      "accent_id": "anx_emotion_differentiation_kashdan_2010",
+      "position": "after_HOOK",
+      "keys": {
+        "topic_id": "anxiety",
+        "persona_id": "gen_z_professionals"
+      }
+    },
+    {
+      "chapter": 8,
+      "class": "EXTERNAL_STORY",
+      "accent_id": "ext_anx_ted_mcgonigal_stress_v01",
+      "position": "after_REFLECTION",
+      "keys": {
+        "topic_id": "anxiety",
+        "persona_id": "gen_z_professionals"
+      }
+    },
+    {
+      "chapter": 3,
+      "class": "EXTERNAL_STORY",
+      "accent_id": "ext_anx_storycorps_911_v01",
+      "position": "after_HOOK",
+      "keys": {
+        "topic_id": "anxiety",
+        "persona_id": "gen_z_professionals"
+      }
+    },
+    {
+      "chapter": 3,
+      "class": "WISDOM_ESSENCE",
+      "accent_id": "we_anx_standing_down_permission_v01",
+      "position": "before_THREAD",
+      "keys": {
+        "topic_id": "anxiety",
+        "persona_id": "gen_z_professionals"
+      }
+    },
+    {
+      "chapter": 3,
+      "class": "AUTHOR_COMMENTARY",
+      "accent_id": "ac_ravi_anxiety_admission_body_lead_v01",
+      "position": "after_REFLECTION",
+      "keys": {
+        "topic_id": "anxiety",
+        "persona_id": "gen_z_professionals"
+      }
+    }
+  ],
+  "accent_beats_by_chapter": {
+    "3": [
+      {
+        "class": "ENCOURAGEMENT",
+        "accent_id": "enc_gen_z_professionals_anxiety_permission_v12",
+        "position": "after_turning_point",
+        "keys": {
+          "topic_id": "anxiety",
+          "persona_id": "gen_z_professionals"
+        }
+      },
+      {
+        "class": "CITED_EVIDENCE",
+        "accent_id": "anx_emotion_differentiation_kashdan_2010",
+        "position": "after_HOOK",
+        "keys": {
+          "topic_id": "anxiety",
+          "persona_id": "gen_z_professionals"
+        }
+      },
+      {
+        "class": "EXTERNAL_STORY",
+        "accent_id": "ext_anx_storycorps_911_v01",
+        "position": "after_HOOK",
+        "keys": {
+          "topic_id": "anxiety",
+          "persona_id": "gen_z_professionals"
+        }
+      },
+      {
+        "class": "WISDOM_ESSENCE",
+        "accent_id": "we_anx_standing_down_permission_v01",
+        "position": "before_THREAD",
+        "keys": {
+          "topic_id": "anxiety",
+          "persona_id": "gen_z_professionals"
+        }
+      },
+      {
+        "class": "AUTHOR_COMMENTARY",
+        "accent_id": "ac_ravi_anxiety_admission_body_lead_v01",
+        "position": "after_REFLECTION",
+        "keys": {
+          "topic_id": "anxiety",
+          "persona_id": "gen_z_professionals"
+        }
+      }
+    ],
+    "8": [
+      {
+        "class": "ENCOURAGEMENT",
+        "accent_id": "enc_gen_z_professionals_anxiety_permission_v18",
+        "position": "after_turning_point",
+        "keys": {
+          "topic_id": "anxiety",
+          "persona_id": "gen_z_professionals"
+        }
+      },
+      {
+        "class": "EXTERNAL_STORY",
+        "accent_id": "ext_anx_ted_mcgonigal_stress_v01",
+        "position": "after_REFLECTION",
+        "keys": {
+          "topic_id": "anxiety",
+          "persona_id": "gen_z_professionals"
+        }
+      }
+    ]
+  }
+}
