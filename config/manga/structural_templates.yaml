@@ -1,0 +1,55 @@
+# Structural template registry — STRUCTURAL_COMPOSITION_MVP
+# Separate from PANEL_TYPE_SYSTEM_V1 storytelling taxonomy.
+schema_version: "1.0.0"
+registry_id: structural_templates_mvp_v1
+
+templates:
+  seated_table_scene:
+    template_id: seated_table_scene
+    description: "Character seated at table with pelvis/seat contact; no floating torso."
+    required_support_proof:
+      - seated_on
+    allowed_relations:
+      - seated_on
+      - resting_on
+      - held_by
+      - occluded_by
+    required_nodes:
+      - category: support_surface
+        role: seat_or_table
+        min: 1
+      - category: character
+        role: primary_subject
+        min: 1
+    contact_rule: seated_point_in_polygon
+    forbid:
+      - floating_readable_room_torso
+      - floating_readable_room_prop
+    overlay:
+      emit_support_overlay: true
+      overlay_from: resolved_transform
+
+  standing_room_scene:
+    template_id: standing_room_scene
+    description: "Full/standing figure with feet-on-floor contact in readable room."
+    required_support_proof:
+      - standing_on
+    allowed_relations:
+      - standing_on
+      - resting_on
+      - held_by
+      - occluded_by
+    required_nodes:
+      - category: support_surface
+        role: floor
+        min: 1
+      - category: character
+        role: primary_subject
+        min: 1
+    contact_rule: standing_point_in_polygon
+    forbid:
+      - floating_readable_room_torso
+      - floating_readable_room_prop
+    overlay:
+      emit_support_overlay: true
+      overlay_from: resolved_transform

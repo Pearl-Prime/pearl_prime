@@ -379,3 +379,21 @@ CROP-001, CROP-002, CROP-003, CROP-004, GROUND-001, GROUND-002,
 OCCLUDE-001, LIGHT-001, TONE-001, EDGE-001, TRANSFORM-001, READ-001, ACCEPT-001,
 SEQ-001, CONT-001, CONT-002, CONT-003, RHYTHM-001, RHYTHM-002, RHYTHM-003,
 FAIL-LIGHT-001, FAIL-TONE-001, FAIL-EDGE-001, FAIL-SCALE-001
+
+---
+
+## Structural Composition MVP — integration notes (2026-07-12)
+
+This checklist remains the **operator-facing doctrine singleton**. Structural runtime code is additive enforcement, not a second doctrine.
+
+| Hook | Path |
+|------|------|
+| Structural validation profile | `config/manga/composition_validation.yaml` |
+| Templates (seated table / standing room) | `config/manga/structural_templates.yaml` |
+| Panel-type → structural bridge | `config/manga/panel_type_structural_bridge.yaml` |
+| Runtime | `scripts/manga/structural_composition.py` |
+| Plan / quarantine | `scripts/manga/plan_panel_layout.py`, `scripts/manga/validate_scene_assembly_visual.py` |
+| Closeout | `artifacts/analysis/MANGA_STRUCTURAL_COMPOSITION_MVP_IMPLEMENTATION_CLOSEOUT_2026-07-12.md` |
+
+Maps checklist GROUND-001/002 + TRANSFORM-001 contact intent → machine hard-fails for the two scoped templates only. Does **not** re-canonize universal G3 horizon acceptance.
+

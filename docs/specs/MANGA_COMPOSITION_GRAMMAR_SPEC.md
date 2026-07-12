@@ -315,3 +315,27 @@ Derivation from a REAL plate preserves spatial retention (the blurred kitchen is
 - Registry: `artifacts/coordination/CANONICAL_ARTIFACTS_REGISTRY.tsv` row `manga_composition_grammar`.
 
 **Version history:** v1.0.0 (2026-07-07) — initial spec from the composition-grammar research lane; status SPECCED. v1.0.1 (2026-07-07) — post-pilot amendment: §10 marked EXECUTED-REAL per PR #4689; taxonomy header updated (pilot module + sidecar schema landed; assembler path still ABSENT).
+
+## 13. Structural Composition MVP — implementation status (2026-07-12)
+
+**Layer separation (mandatory):** `PANEL_TYPE_SYSTEM_V1` = storytelling / camera / crop / bubble taxonomy.
+`STRUCTURAL_COMPOSITION_MVP` = runtime legality / support / contact / candidate acceptance.
+Do **not** collapse structural rules into panel-type doctrine.
+
+| Path | Role | Layer claim |
+|------|------|-------------|
+| `config/manga/composition_validation.yaml` | Structural validation profile + THRESHOLD-001 bindings | CONFIG-EXISTS → CODE-WIRED via `structural_composition.py` |
+| `config/manga/structural_templates.yaml` | `seated_table_scene` / `standing_room_scene` registry | CONFIG-EXISTS → CODE-WIRED |
+| `config/manga/panel_type_structural_bridge.yaml` | Additive `panel_type_id → template/relations/proof` bridge | CONFIG-EXISTS → CODE-WIRED |
+| `schemas/manga/structural_bundle.schema.json` | Support/contact graph schema | CONFIG-EXISTS |
+| `schemas/manga/structural_plan.schema.json` | Resolved plan envelope (`plan_hash` on envelope, not body) | CONFIG-EXISTS |
+| `scripts/manga/structural_composition.py` | Shared transform + graph validation + overlay + render consume | CODE-WIRED |
+| `scripts/manga/plan_panel_layout.py` | Plan writer → quarantine `plans/` | CODE-WIRED |
+| `scripts/manga/validate_scene_assembly_visual.py` | Quarantine routing + operator verdict promotion | CODE-WIRED |
+
+**Honest non-claims:** This section does **not** claim `assemble_from_bank.py` now consumes structural plans by default.
+Lettering: live assembler still calls `bubble_render.render_bubbles_onto_panel` (v1); `bubble_render_v2` exists but is not the assembler call path; compiled safe-zone QC lives in `validate_layer.py`. Structural MVP did **not** rewire lettering.
+Universal horizon-ratio acceptance remains **not** canon (checklist SCALE-001); structural MVP uses support/contact graph + shared transform instead.
+
+**Doctrine singleton:** `artifacts/qa/MANGA_CANON_SCENE_ASSEMBLY_CHECKLIST.md` — do not duplicate gate prose here.
+

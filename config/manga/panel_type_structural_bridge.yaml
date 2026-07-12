@@ -1,0 +1,40 @@
+# Additive bridge: PANEL_TYPE_SYSTEM_V1 → STRUCTURAL_COMPOSITION_MVP
+# Does NOT rewrite panel-type doctrine into structural rules.
+# PANEL_TYPE_SYSTEM_V1 artifact may be SPECCED elsewhere; this bridge is the
+# explicit mapping surface only (CONFIG-EXISTS / CODE-WIRED when loaded).
+schema_version: "1.0.0"
+bridge_id: panel_type_to_structural_mvp_v1
+layers:
+  panel_type_system: PANEL_TYPE_SYSTEM_V1
+  structural_system: STRUCTURAL_COMPOSITION_MVP
+  doctrine_singleton: artifacts/qa/MANGA_CANON_SCENE_ASSEMBLY_CHECKLIST.md
+
+# panel_type_id → structural_template_id / allowed relations / required support proof
+mappings:
+  establish_standing_room:
+    panel_type_id: establish_standing_room
+    structural_template_id: standing_room_scene
+    allowed_relations: [standing_on, resting_on, occluded_by]
+    required_support_proof: [standing_on]
+  re_establish_seated_table:
+    panel_type_id: re_establish_seated_table
+    structural_template_id: seated_table_scene
+    allowed_relations: [seated_on, resting_on, held_by, occluded_by]
+    required_support_proof: [seated_on]
+  action_standing_room:
+    panel_type_id: action_standing_room
+    structural_template_id: standing_room_scene
+    allowed_relations: [standing_on, resting_on, held_by, occluded_by]
+    required_support_proof: [standing_on]
+  dialogue_seated_table:
+    panel_type_id: dialogue_seated_table
+    structural_template_id: seated_table_scene
+    allowed_relations: [seated_on, resting_on, held_by, occluded_by]
+    required_support_proof: [seated_on]
+
+# Shot/archetype hints (additive; not a replacement for ARCHETYPE_SHOT_TYPE)
+archetype_hints:
+  shared_meal_table_medium: re_establish_seated_table
+  character_at_table_medium: dialogue_seated_table
+  sparse_establishing_wide: establish_standing_room
+  walking_in_thought_medium: action_standing_room
