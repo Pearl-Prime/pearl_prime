@@ -12,9 +12,19 @@ RENDER_DIR = REPO_ROOT / "artifacts" / "rendered" / "cli_demo_trace_run_composit
 PROOF_DIR = REPO_ROOT / "artifacts" / "qa" / "proprime_accent_flagship_proof_2026-07-11"
 
 
+def _has_truth_bundle(path: Path) -> bool:
+    return path.exists() and (
+        (path / "enhancement_contract.json").exists()
+        or ((path / "plan.json").exists() and (path / "rendered_accent_audit.json").exists())
+    )
+
+
 @pytest.mark.slow
 def test_accent_flagship_truth_gate_artifacts_when_present():
-    target = RENDER_DIR if RENDER_DIR.exists() else PROOF_DIR
+    if _has_truth_bundle(PROOF_DIR):
+        target = PROOF_DIR
+    else:
+        target = RENDER_DIR if _has_truth_bundle(RENDER_DIR) else (RENDER_DIR if RENDER_DIR.exists() else PROOF_DIR)
     if not target.exists():
         pytest.skip("flagship render artifacts not present; run canonical anxiety render first")
     errors: list[str] = []

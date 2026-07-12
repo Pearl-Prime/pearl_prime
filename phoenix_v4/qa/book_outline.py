@@ -67,8 +67,7 @@ def _chapter_accents(
     assignments: Sequence[Mapping[str, Any]],
     accent_render_audit: Sequence[Mapping[str, Any]],
 ) -> List[Dict[str, str]]:
-    rows: List[Dict[str, str]] = []
-    seen: set[str] = set()
+    merged: Dict[str, Dict[str, str]] = {}
     sources = list(assignments) + list(accent_render_audit)
     for row in sources:
         try:
@@ -82,23 +81,36 @@ def _chapter_accents(
         if not cls and not accent_id:
             continue
         key = f"{cls}|{accent_id}"
-        if key in seen:
-            continue
-        seen.add(key)
+        item = merged.setdefault(
+            key,
+            {
+                "class": cls,
+                "accent_id": accent_id,
+                "position": "",
+                "provenance": "",
+                "rendered": "",
+                "renderer_stream_index": "",
+            },
+        )
         provenance = str(
             row.get("provenance")
             or row.get("supply_source")
             or _as_mapping(row.get("keys")).get("supply_provenance")
             or ""
         ).strip()
-        rows.append(
-            {
-                "class": cls,
-                "accent_id": accent_id,
-                "position": str(row.get("position") or "").strip(),
-                "provenance": provenance,
-            }
-        )
+        position = str(row.get("position") or "").strip()
+        if position:
+            item["position"] = position
+        if provenance:
+            item["provenance"] = provenance
+        if "present_in_manuscript" in row:
+            item["rendered"] = "yes" if row.get("present_in_manuscript") else "no"
+        stream_index = row.get("renderer_stream_index")
+        if stream_index is None:
+            stream_index = row.get("chapter_insert_index")
+        if stream_index is not None:
+            item["renderer_stream_index"] = str(stream_index)
+    rows = list(merged.values())
     rows.sort(key=lambda r: (r["class"], r["accent_id"]))
     return rows
 
@@ -403,6 +415,21 @@ def render_book_outline_markdown(payload: Mapping[str, Any]) -> str:
                 cls = str(a.get("class") or "")
                 aid = str(a.get("accent_id") or "")
                 bit = f"{cls}" + (f" `{aid}`" if aid else "")
+                pos = str(a.get("position") or "")
+                prov = str(a.get("provenance") or "")
+                rendered = str(a.get("rendered") or "")
+                stream = str(a.get("renderer_stream_index") or "")
+                extras = []
+                if pos:
+                    extras.append(f"@{pos}")
+                if prov:
+                    extras.append(f"via {prov}")
+                if stream:
+                    extras.append(f"stream {stream}")
+                if rendered:
+                    extras.append(f"rendered={rendered}")
+                if extras:
+                    bit += " (" + ", ".join(extras) + ")"
                 accent_bits.append(bit)
             lines.append("**Accents:** " + " · ".join(accent_bits))
         else:

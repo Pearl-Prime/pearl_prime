@@ -3926,6 +3926,9 @@ def compose_from_enriched_book(
                         "class": _ar.get("class") or _ar.get("accent_class"),
                         "accent_id": _ar.get("accent_id"),
                         "position": _ar.get("position"),
+                        "renderer_stream_index": _ar.get("chapter_insert_index"),
+                        "chapter_insert_index": _ar.get("chapter_insert_index"),
+                        "body_hash": _ar.get("body_hash"),
                         "provenance": _ar.get("provenance")
                         or ((_ar.get("keys") or {}).get("supply_provenance") if isinstance(_ar.get("keys"), dict) else None),
                         "rendered_excerpt": _body[:220].replace("\n", " ").strip(),

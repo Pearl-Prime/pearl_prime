@@ -39,23 +39,42 @@ def _fail(msg: str, errors: List[str]) -> None:
 
 
 def check_artifacts(render_dir: Path, *, errors: List[str]) -> Dict[str, Any]:
+    contract = _load_json(render_dir / "enhancement_contract.json") or {}
     plan = _load_json(render_dir / "plan.json") or {}
     audit = _load_json(render_dir / "rendered_accent_audit.json") or {}
     strategy = _load_json(render_dir / "enrichment_strategy_report.json") or {}
     spa = _load_json(render_dir / "section_packet_audit.json")
     book = (render_dir / "book.txt").read_text(encoding="utf-8") if (render_dir / "book.txt").exists() else ""
 
-    if not plan:
+    if not plan and not contract:
         _fail("plan.json missing", errors)
-    if not audit:
+    if not audit and not contract:
         _fail("rendered_accent_audit.json missing", errors)
     if spa is None:
         _fail("section_packet_audit.json missing", errors)
     if not book.strip():
         _fail("book.txt missing or empty", errors)
 
-    budget = dict(plan.get("accent_budget") or strategy.get("accent_budget") or {})
-    assignments = list(plan.get("accent_assignments") or strategy.get("assignments") or [])
+    contract_validation = dict(contract.get("validation") or {})
+    if contract and contract.get("status") != "PASS":
+        _fail(
+            f"enhancement_contract.json status={contract.get('status')} "
+            f"errors={contract_validation.get('errors') or []}",
+            errors,
+        )
+
+    budget = dict(
+        contract.get("accent_budget")
+        or plan.get("accent_budget")
+        or strategy.get("accent_budget")
+        or {}
+    )
+    assignments = list(
+        contract.get("accent_rows")
+        or plan.get("accent_assignments")
+        or strategy.get("assignments")
+        or []
+    )
     if not budget:
         _fail("accent_budget missing from plan.json / strategy report", errors)
     if not assignments:
@@ -101,6 +120,18 @@ def check_artifacts(render_dir: Path, *, errors: List[str]) -> Dict[str, Any]:
 
     # Trace honesty: audit rows should match assignment count and manuscript presence.
     audit_rows = list(audit.get("accents") or [])
+    if contract:
+        audit_rows = [
+            {
+                "chapter": row.get("chapter"),
+                "class": row.get("class"),
+                "accent_id": row.get("accent_id"),
+                "position": row.get("position"),
+                "rendered_excerpt": row.get("final_excerpt") or row.get("rendered_excerpt"),
+                "present_in_manuscript": row.get("present_in_manuscript"),
+            }
+            for row in list(contract.get("accent_rows") or [])
+        ]
     if assignments and not audit_rows:
         _fail("rendered_accent_audit.json has no accents rows", errors)
     if assignments and len(audit_rows) < len(assignments):
@@ -137,6 +168,8 @@ def check_artifacts(render_dir: Path, *, errors: List[str]) -> Dict[str, Any]:
         "assignment_counts": dict(counts),
         "story_types": story_types,
         "plan_has_accent_signature": bool(plan.get("accent_signature")),
+        "contract_status": contract.get("status") or "",
+        "contract_id": contract.get("contract_id") or "",
         "section_packet_audit_present": spa is not None,
         "audit_count": len(audit_rows),
         "errors": list(errors),

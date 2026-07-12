@@ -1,6 +1,8 @@
 """Materialize planner-assigned accent beats into chapter slot streams."""
 from __future__ import annotations
 
+import hashlib
+
 from typing import Any, Dict, List, Mapping, Sequence, Tuple
 
 ACCENT_SLOT_PREFIX = "_ACCENT:"
@@ -47,10 +49,14 @@ def insert_accent_beats_into_streams(
     types_out = list(slot_types)
     proses_out = list(slot_proses)
     rendered: List[Dict[str, Any]] = []
+    base_indices = {
+        id(beat): _index_for_position(str(beat.get("position") or ""), slot_types)
+        for beat in accent_beats
+    }
     ordered = sorted(
         accent_beats,
         key=lambda b: (
-            _index_for_position(str(b.get("position") or ""), types_out),
+            base_indices.get(id(b), len(slot_types)),
             str(b.get("class") or ""),
         ),
     )
@@ -61,7 +67,7 @@ def insert_accent_beats_into_streams(
         if not body:
             continue
         position = str(beat.get("position") or "")
-        insert_at = _index_for_position(position, types_out) + offset
+        insert_at = base_indices.get(id(beat), _index_for_position(position, slot_types)) + offset
         insert_at = max(0, min(insert_at, len(types_out)))
         cls = str(beat.get("class") or "ACCENT")
         types_out.insert(insert_at, f"{ACCENT_SLOT_PREFIX}{cls}")
@@ -73,6 +79,7 @@ def insert_accent_beats_into_streams(
                 "position": position,
                 "chapter_insert_index": insert_at,
                 "body": body,
+                "body_hash": hashlib.sha256(body.encode("utf-8")).hexdigest(),
                 "rendered_excerpt": body[:220].replace("\n", " ").strip(),
                 "provenance": (beat.get("keys") or {}).get("supply_provenance")
                 if isinstance(beat.get("keys"), dict)

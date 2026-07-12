@@ -237,6 +237,31 @@ def test_insert_accent_beats_preserves_planner_only():
     assert rendered[0]["accent_id"] == "burn_who_occupational_burnout_2019"
 
 
+def test_insert_accent_beats_does_not_double_offset_later_positions():
+    from phoenix_v4.rendering.accent_renderer import insert_accent_beats_into_streams
+
+    types_ = ["HOOK", "REFLECTION", "THREAD"]
+    proses = ["hook body", "reflection body", "thread body"]
+    beats = [
+        {"class": "QUOTE", "accent_id": "quote_01", "position": "after_HOOK", "keys": {}},
+        {"class": "ENCOURAGEMENT", "accent_id": "enc_01", "position": "before_THREAD", "keys": {}},
+    ]
+    bodies = {
+        "quote_01": "Quote body.",
+        "enc_01": "Encouragement body.",
+    }
+    out_types, out_proses, rendered = insert_accent_beats_into_streams(types_, proses, beats, bodies)
+    assert out_types == [
+        "HOOK",
+        "_ACCENT:QUOTE",
+        "REFLECTION",
+        "_ACCENT:ENCOURAGEMENT",
+        "THREAD",
+    ]
+    assert out_proses[3] == "Encouragement body."
+    assert [row["chapter_insert_index"] for row in rendered] == [1, 3]
+
+
 @pytest.mark.slow
 def test_attach_accent_plan_burnout_sparse_classes():
     planned = attach_accent_plan(

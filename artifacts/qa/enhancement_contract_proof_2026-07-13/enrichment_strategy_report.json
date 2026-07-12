@@ -1,0 +1,325 @@
+{
+  "strategy_profile": "intimate_voice",
+  "style_family": "intimate_voice",
+  "enrichment_strategy_profile": "intimate_voice",
+  "brand_accent_profile": "somatic_reflective",
+  "book_idea": "prediction-as-evidence swap",
+  "book_motif": "The Alarm (chest and phone)",
+  "requested_budget": {
+    "ENCOURAGEMENT": 2,
+    "QUOTE": 3,
+    "AUTHOR_COMMENTARY": 1,
+    "WISDOM_ESSENCE": 1,
+    "CITED_EVIDENCE": 1,
+    "TROUBLESHOOTING": 1,
+    "EXTERNAL_STORY": 2,
+    "REFLECTION_QUESTION": 3
+  },
+  "accent_budget": {
+    "ENCOURAGEMENT": 2,
+    "QUOTE": 3,
+    "AUTHOR_COMMENTARY": 1,
+    "WISDOM_ESSENCE": 1,
+    "CITED_EVIDENCE": 1,
+    "TROUBLESHOOTING": 1,
+    "EXTERNAL_STORY": 2,
+    "REFLECTION_QUESTION": 3
+  },
+  "assignment_counts": {
+    "ENCOURAGEMENT": 2,
+    "QUOTE": 3,
+    "AUTHOR_COMMENTARY": 1,
+    "WISDOM_ESSENCE": 1,
+    "CITED_EVIDENCE": 1,
+    "TROUBLESHOOTING": 1,
+    "EXTERNAL_STORY": 2,
+    "REFLECTION_QUESTION": 3
+  },
+  "fulfilled_counts": {
+    "ENCOURAGEMENT": 2,
+    "QUOTE": 3,
+    "AUTHOR_COMMENTARY": 1,
+    "WISDOM_ESSENCE": 1,
+    "CITED_EVIDENCE": 1,
+    "TROUBLESHOOTING": 1,
+    "EXTERNAL_STORY": 2,
+    "REFLECTION_QUESTION": 3
+  },
+  "capability_by_class": {
+    "ENCOURAGEMENT": "available",
+    "QUOTE": "available",
+    "AUTHOR_COMMENTARY": "available",
+    "WISDOM_ESSENCE": "available",
+    "CITED_EVIDENCE": "available",
+    "TROUBLESHOOTING": "available",
+    "EXTERNAL_STORY": "available",
+    "REFLECTION_QUESTION": "available"
+  },
+  "assignments": [
+    {
+      "chapter": 1,
+      "class": "REFLECTION_QUESTION",
+      "accent_id": "rq_anxiety_gen_z_professionals_11",
+      "position": "before_THREAD",
+      "supply_source": "authored_bank",
+      "keys": {
+        "topic_id": "anxiety",
+        "persona_id": "gen_z_professionals",
+        "supply_provenance": "authored_bank"
+      }
+    },
+    {
+      "chapter": 3,
+      "class": "REFLECTION_QUESTION",
+      "accent_id": "rq_anxiety_gen_z_professionals_12",
+      "position": "after_REFLECTION",
+      "supply_source": "authored_bank",
+      "keys": {
+        "topic_id": "anxiety",
+        "persona_id": "gen_z_professionals",
+        "supply_provenance": "authored_bank"
+      }
+    },
+    {
+      "chapter": 5,
+      "class": "REFLECTION_QUESTION",
+      "accent_id": "rq_anxiety_gen_z_professionals_03",
+      "position": "after_REFLECTION",
+      "supply_source": "authored_bank",
+      "keys": {
+        "topic_id": "anxiety",
+        "persona_id": "gen_z_professionals",
+        "supply_provenance": "authored_bank"
+      }
+    },
+    {
+      "chapter": 6,
+      "class": "TROUBLESHOOTING",
+      "accent_id": "ts_anxiety_gen_z_professionals_18",
+      "position": "after_INTEGRATION",
+      "supply_source": "authored_bank",
+      "keys": {
+        "topic_id": "anxiety",
+        "persona_id": "gen_z_professionals",
+        "supply_provenance": "authored_bank"
+      }
+    },
+    {
+      "chapter": 3,
+      "class": "QUOTE",
+      "accent_id": "quote_financial_en_us_paine_rights_v01",
+      "position": "before_THREAD",
+      "supply_source": "authored_bank",
+      "keys": {
+        "topic_id": "anxiety",
+        "persona_id": "gen_z_professionals",
+        "supply_provenance": "authored_bank"
+      }
+    },
+    {
+      "chapter": 4,
+      "class": "QUOTE",
+      "accent_id": "quote_anxiety_en_us_thoreau_walden_v01",
+      "position": "before_HOOK",
+      "supply_source": "authored_bank",
+      "keys": {
+        "topic_id": "anxiety",
+        "persona_id": "gen_z_professionals",
+        "supply_provenance": "authored_bank"
+      }
+    },
+    {
+      "chapter": 12,
+      "class": "QUOTE",
+      "accent_id": "quote_anxiety_en_us_whitman_leaves_1855_v01",
+      "position": "before_THREAD",
+      "supply_source": "authored_bank",
+      "keys": {
+        "topic_id": "anxiety",
+        "persona_id": "gen_z_professionals",
+        "supply_provenance": "authored_bank"
+      }
+    },
+    {
+      "chapter": 2,
+      "class": "ENCOURAGEMENT",
+      "accent_id": "enc_gen_z_professionals_anxiety_permission_v01",
+      "position": "after_turning_point",
+      "supply_source": "atom_pool",
+      "keys": {
+        "topic_id": "anxiety",
+        "persona_id": "gen_z_professionals",
+        "supply_provenance": "atom_pool"
+      }
+    },
+    {
+      "chapter": 12,
+      "class": "ENCOURAGEMENT",
+      "accent_id": "enc_gen_z_professionals_anxiety_permission_v19",
+      "position": "after_turning_point",
+      "supply_source": "atom_pool",
+      "keys": {
+        "topic_id": "anxiety",
+        "persona_id": "gen_z_professionals",
+        "supply_provenance": "atom_pool"
+      }
+    },
+    {
+      "chapter": 2,
+      "class": "CITED_EVIDENCE",
+      "accent_id": "anx_exposure_inhibitory_learning_craske_2014",
+      "position": "after_HOOK",
+      "supply_source": "authored_bank",
+      "keys": {
+        "topic_id": "anxiety",
+        "persona_id": "gen_z_professionals",
+        "supply_provenance": "authored_bank"
+      }
+    },
+    {
+      "chapter": 9,
+      "class": "EXTERNAL_STORY",
+      "accent_id": "ext_anx_storycorps_911_v01",
+      "position": "after_REFLECTION",
+      "supply_source": "authored_bank",
+      "keys": {
+        "topic_id": "anxiety",
+        "persona_id": "gen_z_professionals",
+        "supply_provenance": "authored_bank",
+        "story_type": "true_life_broadcast"
+      }
+    },
+    {
+      "chapter": 10,
+      "class": "WISDOM_ESSENCE",
+      "accent_id": "we_anx_impermanence_weather_v01",
+      "position": "before_THREAD",
+      "supply_source": "authored_bank",
+      "keys": {
+        "topic_id": "anxiety",
+        "persona_id": "gen_z_professionals",
+        "supply_provenance": "authored_bank"
+      }
+    },
+    {
+      "chapter": 10,
+      "class": "AUTHOR_COMMENTARY",
+      "accent_id": "ac_ravi_anxiety_observed_standup_v01",
+      "position": "after_REFLECTION",
+      "supply_source": "authored_bank",
+      "keys": {
+        "topic_id": "anxiety",
+        "persona_id": "gen_z_professionals",
+        "supply_provenance": "authored_bank"
+      }
+    },
+    {
+      "chapter": 5,
+      "class": "EXTERNAL_STORY",
+      "accent_id": "ext_anx_fresh_air_anxiety_theme_v01",
+      "position": "before_STORY",
+      "supply_source": "authored_bank",
+      "keys": {
+        "topic_id": "anxiety",
+        "persona_id": "gen_z_professionals",
+        "supply_provenance": "authored_bank",
+        "story_type": "true_life_broadcast"
+      }
+    }
+  ],
+  "supply_provenance_by_class": {
+    "REFLECTION_QUESTION": "authored_bank",
+    "TROUBLESHOOTING": "authored_bank",
+    "EXTERNAL_STORY": "authored_bank",
+    "CITED_EVIDENCE": "authored_bank",
+    "WISDOM_ESSENCE": "authored_bank",
+    "AUTHOR_COMMENTARY": "authored_bank",
+    "ENCOURAGEMENT": "atom_pool",
+    "QUOTE": "authored_bank"
+  },
+  "assignment_diagnostics_by_class": {
+    "REFLECTION_QUESTION": {
+      "budget": 3,
+      "assigned": 3,
+      "pool_size": 18,
+      "supply_provenance": "authored_bank",
+      "underfilled": 0,
+      "capability_gap": false
+    },
+    "TROUBLESHOOTING": {
+      "budget": 1,
+      "assigned": 1,
+      "pool_size": 18,
+      "supply_provenance": "authored_bank",
+      "underfilled": 0,
+      "capability_gap": false
+    },
+    "QUOTE": {
+      "budget": 3,
+      "assigned": 3,
+      "pool_size": 12,
+      "supply_provenance": "authored_bank",
+      "underfilled": 0,
+      "capability_gap": false
+    },
+    "ENCOURAGEMENT": {
+      "budget": 2,
+      "assigned": 2,
+      "pool_size": 21,
+      "supply_provenance": "atom_pool",
+      "underfilled": 0,
+      "capability_gap": false
+    },
+    "CITED_EVIDENCE": {
+      "budget": 1,
+      "assigned": 1,
+      "pool_size": 18,
+      "supply_provenance": "authored_bank",
+      "underfilled": 0,
+      "capability_gap": false
+    },
+    "EXTERNAL_STORY": {
+      "budget": 2,
+      "assigned": 2,
+      "pool_size": 20,
+      "supply_provenance": "authored_bank",
+      "underfilled": 0,
+      "capability_gap": false
+    },
+    "WISDOM_ESSENCE": {
+      "budget": 1,
+      "assigned": 1,
+      "pool_size": 12,
+      "supply_provenance": "authored_bank",
+      "underfilled": 0,
+      "capability_gap": false
+    },
+    "AUTHOR_COMMENTARY": {
+      "budget": 1,
+      "assigned": 1,
+      "pool_size": 10,
+      "supply_provenance": "authored_bank",
+      "underfilled": 0,
+      "capability_gap": false
+    }
+  },
+  "supported_underfilled_budget_by_class": {},
+  "underfilled_budget_by_class": {},
+  "capability_gaps": {},
+  "share_cap": 0.85,
+  "max_accents_per_chapter": 2,
+  "chapters_with_accents": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    9,
+    10,
+    12
+  ],
+  "chapter_count": 12,
+  "accent_chapter_share": 0.75,
+  "contract_id": "enhancement_contract_v1"
+}
