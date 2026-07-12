@@ -48,26 +48,87 @@ Smallest-safe-batch doctrine: one locale x one persona x smallest-gap topic shar
 session budget). Batch 1 targeted `corporate_managers` smallest gaps for all three locales:
 `people_pleasing/EXERCISE` + `trauma_recovery/{INTEGRATION,REFLECTION,SCENE}` (4 files/locale).
 
-## Real throughput observed this session
+## THIRD RESTART — this session (continuation, 2026-07-12)
 
-<!-- filled in after batch 1 completes -->
+Two prior incarnations were interrupted by environment instability (Cursor auto-attaching to
+sibling worktrees under `/Users/ahjan/...` and running heavy concurrent `git diff`/`status`/
+`worktree add` processes system-wide, confirmed live via `ps aux` mid-session — same host,
+many sibling agent sessions, not specific to this worktree). All prior real commits survived on
+`origin/agent/translation-wave-c-eastasia-rest-20260712` regardless. This session ran from a
+fresh worktree at `/private/tmp/phoenix_translation_waves/wave-c3-eastasia` (outside the main
+repo tree specifically to dodge the Cursor auto-attach), rebased cleanly onto `origin/main`
+(`3c181aa361`, sibling Wave A PR #5565 merged in the interim, zero path overlap), force-pushed
+the rebase, then continued **direct Claude-authored translation** (no Ollama/Pearl Star/queue
+this session — EXECUTION_MODE: claude_direct_authoring throughout).
 
-## Files written
+**Live coverage re-measured this session** via a direct filesystem walk of `atoms/**/CANONICAL.txt`
+(source) vs `atoms/**/locales/{locale}/CANONICAL.txt` (translated) — the true current denominator
+is **5,212** English-source atom directories (grew from the 3,754 figure cited by prior sessions
+as more atoms/topics were added elsewhere on `main`; re-verify denominator each session, don't
+carry forward a stale number):
 
-<!-- filled in after batch 1 completes and validated -->
+| Locale | Before this session | After this session | Delta |
+|---|---|---|---|
+| ko-KR | 252 / 5,212 (4.84%) | 259 / 5,212 (4.97%) | +7 atom dirs |
+| zh-HK | 260 / 5,212 (4.99%) | 267 / 5,212 (5.12%) | +7 atom dirs |
+| zh-SG | 256 / 5,212 (4.91%) | 263 / 5,212 (5.05%) | +7 atom dirs |
 
-## Coverage after
+## Method
 
-<!-- filled in after batch 1 completes -->
+Smallest-safe-batch doctrine continued: full-shard closure per (persona, topic/slot-family),
+targeting shards that were missing across **all three** target locales simultaneously so one
+translation pass serves ko-KR + zh-HK + zh-SG at once. Each shard translated directly by Claude
+(no LLM API calls), preserving exact `## HEADER vNN` / `---` metadata-block / `path:` / placeholder
+token (`{street_name}`, `{weather_detail}`, `{transit_line}`) structure from the English source,
+then validated with `python3 scripts/localization/validate_cjk_atom.py <paths>` before every
+commit. zh-HK written in Traditional Chinese with Hong Kong/Cantonese register (matching the tone
+established in prior committed zh-HK files on this branch — cantonese particles/grammar, not
+generic written Chinese). zh-SG written in Simplified Chinese with Singapore-market register
+(mainland-standard grammar, no Cantonese features). ko-KR standard Korean throughout.
+
+## Files written (7 shards x 3 locales = 21 files, all validate_cjk_atom.py PASS)
+
+1. `atoms/gen_alpha_students/anchored/boundaries/overwhelm/locales/{ko-KR,zh-HK,zh-SG}/CANONICAL.txt`
+   — 25 variants (RECOGNITION/MECHANISM_PROOF/TURNING_POINT/EMBODIMENT arc), path+metadata schema.
+2. `atoms/healthcare_rns/anchored/STORY/locales/{ko-KR,zh-HK,zh-SG}/CANONICAL.txt` — 20 variants,
+   slot-role schema; "anchored"-theme motif phrases translated consistently per locale.
+3. `atoms/educators/self_worth/EXERCISE/locales/{ko-KR,zh-HK,zh-SG}/CANONICAL.txt` — 30 variants,
+   embodiment/somatic instruction atoms.
+4. `atoms/educators/self_worth/SCENE/locales/{ko-KR,zh-HK,zh-SG}/CANONICAL.txt` — 30 variants,
+   `{street_name}`/`{weather_detail}`/`{transit_line}` placeholder tokens preserved verbatim.
+5. `atoms/educators/self_worth/INTEGRATION/locales/{ko-KR,zh-HK,zh-SG}/CANONICAL.txt` — 25 variants,
+   `carry_line` metadata translated alongside body prose.
+6. `atoms/educators/self_worth/comparison/locales/{ko-KR,zh-HK,zh-SG}/CANONICAL.txt` — 26 variants,
+   narrative arc, `CALLBACK_ID`/`CALLBACK_PHASE` metadata preserved.
+7. `atoms/educators/self_worth/shame/locales/{ko-KR,zh-HK,zh-SG}/CANONICAL.txt` — 26 variants,
+   narrative arc, `CALLBACK_ID`/`CALLBACK_PHASE` metadata preserved.
+
+**Skipped (source gap, not a translation gap):** `atoms/educators/self_worth/COMPRESSION/CANONICAL.txt`
+(English source) is a metadata-only stub — 30 `## COMPRESSION vNN` headers with empty bodies, no
+prose to translate. Translating stub-to-stub would just create three more empty-stub locale files
+(the exact anti-pattern recent sibling commits on this branch were fixing for other banks). Flagged
+here rather than silently worked around; a source-authoring fix belongs to a different lane
+(atom-authoring, not translation).
+
+## Commits this session (all on `agent/translation-wave-c-eastasia-rest-20260712`, pushed)
+
+`0856f5d561` (rebase of prior HOOK commit) → `aaae6b9da3` → `f0b20aceab` → `b58ccc15c7` →
+`2b68af1036` → `7e9581c45a` → `5cf4b9357d` → `99dd46b53d` (HEAD).
 
 ## Residual blockers
 
-- GPU contention on Pearl Star (shared with CosyVoice2 + other concurrent jobs) caps real
-  throughput well below the 4-12s/call spec — see Wave A's PR #5565 and prior session's
-  `TRANSLATION_LOCALE_EXEC_WAVE_2026-07-11.md` for the `nvidia-smi` root-cause evidence. This
-  session did not attempt to kill or investigate the contending process (out of scope for a
-  translation-lane session; risks breaking another agent's in-flight work).
-- Full closure of ko-KR (3,522 remaining), zh-HK (3,511 remaining), zh-SG (3,511 remaining) is not
-  feasible in a single session at observed throughput. This wave delivers a small, real,
-  byte-verified slice and documents the throughput ceiling honestly rather than claiming
-  completion.
+- GPU contention on Pearl Star and the Ollama/`pscli` PATH gap (documented by prior incarnations
+  of this session, see above) are moot for this session's method — no Ollama/queue path was used;
+  all translation was direct Claude authoring per the operator's explicit instruction for this
+  restart.
+- **Environmental instability reconfirmed**: `git commit`/`git push`/`git status` intermittently
+  hung for 2+ minutes mid-session due to system-wide I/O contention from many concurrent sibling
+  agent git processes on the same host (`ps aux` showed a dozen+ concurrent `git status`/`git diff`/
+  `git worktree add` processes from other sessions at once). Retrying the same command after a
+  timeout consistently succeeded — no data was lost, no force-push-over-others occurred. This is
+  environmental, not a signal to change translation method, consistent with the operator's
+  "BACKGROUND ON WHY THIS IS YOUR THIRD RESTART" framing.
+- Full closure of ko-KR (4,953 remaining), zh-HK (4,945 remaining), zh-SG (4,949 remaining) is not
+  feasible in a single session — the source atom universe is large and growing. This wave
+  delivers seven real, byte-verified, fully-validated shards across all three locales and
+  documents the remaining gap honestly rather than claiming completion.
