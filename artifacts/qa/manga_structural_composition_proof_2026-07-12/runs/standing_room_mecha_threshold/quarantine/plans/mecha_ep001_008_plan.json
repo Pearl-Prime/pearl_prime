@@ -1,0 +1,87 @@
+{
+  "schema_version": "1.0.0",
+  "envelope_id": "plan_mecha_ep001_008",
+  "transform_model": "structural_mvp_v1",
+  "structural_template_id": "standing_room_scene",
+  "panel_type_id": "action_standing_room",
+  "plan_body": {
+    "panel_id": "mecha_ep001_008",
+    "canvas": {
+      "width": 1080,
+      "height": 1920
+    },
+    "structural_template_id": "standing_room_scene",
+    "panel_type_id": "action_standing_room",
+    "required_support_proof": [
+      "standing_on"
+    ],
+    "allowed_relations": [
+      "standing_on",
+      "resting_on",
+      "held_by",
+      "occluded_by"
+    ],
+    "support_graph": {
+      "nodes": [
+        {
+          "node_id": "hangar_floor",
+          "category": "support_surface",
+          "role": "floor",
+          "support_polygon_pct": [
+            [
+              5.0,
+              78.0
+            ],
+            [
+              95.0,
+              78.0
+            ],
+            [
+              98.0,
+              98.0
+            ],
+            [
+              2.0,
+              98.0
+            ]
+          ]
+        },
+        {
+          "node_id": "pilot_standing",
+          "category": "character",
+          "role": "primary_subject",
+          "contact_point_pct": [
+            0.0,
+            0.0
+          ]
+        }
+      ],
+      "edges": [
+        {
+          "edge_id": "e_standing_threshold",
+          "relation": "standing_on",
+          "from_node": "pilot_standing",
+          "to_node": "hangar_floor"
+        }
+      ]
+    },
+    "resolved_placements": [
+      {
+        "node_id": "pilot_standing",
+        "transform": {
+          "tx_pct": 50.0,
+          "ty_pct": 88.0,
+          "uniform_scale": 1.0,
+          "rotation_deg": 0.0,
+          "transform_model": "structural_mvp_v1"
+        }
+      }
+    ],
+    "transform_model": "structural_mvp_v1"
+  },
+  "plan_hash": "374ba886a77ba2cc0e843172c37494f4e1e0e3e64910a64b15f3ec4dc4843f5d",
+  "validation": {
+    "status": "pass",
+    "failures": []
+  }
+}
