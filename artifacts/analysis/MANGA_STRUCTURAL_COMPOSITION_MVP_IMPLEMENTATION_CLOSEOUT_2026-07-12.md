@@ -144,18 +144,28 @@ Real proof run: structural plan + overlay + quarantine CLI on stillness seated/s
 
 ## PR / PUSH STATUS
 
-See live section appended after preflight attempt this turn. Do not invent remote SHAs.
-
-*(placeholder filled by shell preflight results)*
+| Field | Value |
+|-------|--------|
+| Local HEAD | `e0ee123126` (`proof(manga): structural composition EXECUTED-REAL packet on real assets`) |
+| Prior MVP commit | `c0fdba35e5` |
+| Ahead of `origin/main` | 2 commits (0 behind) |
+| push-guard | **OK** |
+| preflight_push | **OK** (disk warning: 5.39 GB free < 20 GB threshold; report-only) |
+| First `git push` | **REJECTED** — GH008 unknown LFS objects (support overlay PNGs) |
+| Remediation | `git lfs push origin HEAD` → Uploading LFS objects 100% (4/4), 38 KB |
+| Second `git push -u origin HEAD` | **OK** — remote branch created |
+| Upstream | `origin/agent/manga-structural-composition-mvp` tracking set |
+| PR | https://github.com/Ahjan108/phoenix_omega_v4.8/pull/5573 |
+| Merged to `origin/main`? | **No** |
+| Working tree note | Unrelated story-lane dirty files remain unstaged (not in this PR) |
 
 ---
 
 ## NEXT_ACTION
 
-1. Preserve proof packet on branch (commit if operator/policy requires artifact persistence).
-2. Push `agent/manga-structural-composition-mvp` only after push-guard + preflight pass; open PR to `main` when remote exists.
-3. Follow-on lane: optional `--structural-plan` assembler flag (explicit, off by default).
-4. Do not claim PROVEN-AT-BAR.
+1. Review/merge PR #5573 when CI + governance allow.
+2. Follow-on lane: optional `--structural-plan` assembler flag (explicit, off by default).
+3. Do not claim PROVEN-AT-BAR.
 
 ---
 
