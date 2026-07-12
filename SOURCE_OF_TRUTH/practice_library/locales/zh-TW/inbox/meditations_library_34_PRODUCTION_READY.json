@@ -1,0 +1,32 @@
+{
+  "content_type": "zh-TW_locale_partial",
+  "locale": "zh-TW",
+  "source_file": "meditations_library_34_PRODUCTION_READY.json",
+  "note": "LOCALIZATION-ADDED (flagship_phase2_layer6): partial zh-TW translation covering ONLY the exercise ids actually used by the zh-TW gen_z_professionals x anxiety x overwhelm/F006 flagship render. This is NOT full parity with the English source file of the same name (which has many more exercises). phoenix_v4/exercises/practice_library_loader.py::load_practice_library() currently globs SOURCE_OF_TRUTH/practice_library/inbox/*_PRODUCTION_READY.json with no locale parameter at all -- this file is inert until Pearl_Dev adds locale-aware loading (e.g. prefer an id match from SOURCE_OF_TRUTH/practice_library/locales/{locale}/inbox/ before falling back to the English inbox, analogous to phoenix_v4/exercises/practice_library_loader.py load_component_templates()'s existing locale fallback pattern).",
+  "exercises": [
+    {
+      "id": "med_007",
+      "name": "標記練習",
+      "exercise_type": "meditations",
+      "duration_seconds": 300,
+      "difficulty": "intermediate",
+      "tags": [
+        "noting",
+        "labeling",
+        "clarity"
+      ],
+      "text": "當經驗浮現時，輕輕地標記它們。思考。感受。聽見。看見。計畫。回憶。發癢。標記應該輕柔，像耳語一樣。你不是要陷入內容裡，只是承認正在發生的事。這在你與你的經驗之間創造出一點空間。你不是你的念頭，你是覺察到它們的那份覺知。",
+      "components": {
+        "bridge": {
+          "full": "大聲說出來做這個練習。接下來的三十秒，標記任何浮現的東西。",
+          "lean": "大聲說出來做這個練習。接下來的三十秒，標記任何浮現的東西。"
+        },
+        "description": {
+          "full": "當經驗浮現時，輕輕地標記它們。思考。感受。聽見。看見。計畫。回憶。發癢。標記應該輕柔，像耳語一樣。你不是要陷入內容裡，只是承認正在發生的事。這在你與你的經驗之間創造出一點空間。你不是你的念頭，你是覺察到它們的那份覺知。",
+          "lean": "當經驗浮現時，輕輕地標記它們。思考。感受。聽見。"
+        }
+      },
+      "pilot_note": "ch1 v4 de-glue: intro/aha/integration scaffolding removed; content_only render via compose_exercise"
+    }
+  ]
+}

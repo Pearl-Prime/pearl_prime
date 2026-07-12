@@ -1,0 +1,78 @@
+{
+  "content_type": "zh-TW_locale_partial",
+  "locale": "zh-TW",
+  "source_file": "thought_experiments_library_34_PRODUCTION_READY.json",
+  "note": "LOCALIZATION-ADDED (flagship_phase2_layer6): partial zh-TW translation covering ONLY the exercise ids actually used by the zh-TW gen_z_professionals x anxiety x overwhelm/F006 flagship render. This is NOT full parity with the English source file of the same name (which has many more exercises). phoenix_v4/exercises/practice_library_loader.py::load_practice_library() currently globs SOURCE_OF_TRUTH/practice_library/inbox/*_PRODUCTION_READY.json with no locale parameter at all -- this file is inert until Pearl_Dev adds locale-aware loading (e.g. prefer an id match from SOURCE_OF_TRUTH/practice_library/locales/{locale}/inbox/ before falling back to the English inbox, analogous to phoenix_v4/exercises/practice_library_loader.py load_component_templates()'s existing locale fallback pattern).",
+  "exercises": [
+    {
+      "id": "thought_002",
+      "name": "未來的記憶",
+      "exercise_type": "thought_experiments",
+      "duration_seconds": 120,
+      "difficulty": "intermediate",
+      "tags": [
+        "future",
+        "perspective",
+        "gratitude"
+      ],
+      "text": "想像你正從五年後回顧此刻。你未來的自己會想告訴你，關於你人生這個階段的什麼事？他們會說什麼才是真正重要的？他們會說什麼其實沒有你以為的那麼重要？有時候，未來能給我們現在無法給予的視角。",
+      "components": {
+        "bridge": {
+          "full": "在這裡暫停一下。不是為了修復什麼，只是給自己一個不同的片刻輸入。",
+          "lean": "在這裡暫停一下。"
+        },
+        "intro": {
+          "full": "這是未來的記憶。你的想像力知道一些邏輯不知道的事。你不需要相信這一點，試試看就好。",
+          "lean": "這是未來的記憶。你的想像力知道一些邏輯不知道的事。"
+        },
+        "description": {
+          "full": "想像你正從五年後回顧此刻。你未來的自己會想告訴你，關於你人生這個階段的什麼事？他們會說什麼才是真正重要的？他們會說什麼其實沒有你以為的那麼重要？有時候，未來能給我們現在無法給予的視角。",
+          "lean": "想像你正從五年後回顧此刻。他們會說什麼才是真正重要的？他們會說什麼其實沒有那麼重要。有時候，未來能給我們現在無法給予的視角。"
+        },
+        "aha": {
+          "full": "現在，我要你注意一件事。注意什麼感覺起來是真實的。沒有錯誤的答案。無論發生了什麼——或沒有發生什麼——都恰恰是對的。",
+          "lean": "現在，注意什麼感覺起來是真實的。沒有錯誤的答案。"
+        },
+        "integration": {
+          "full": "現在，在你繼續往下之前，之後再玩一次這個練習。從這一刻起，什麼都不必改變。你剛剛做了一件事。",
+          "lean": "在你繼續往下之前，之後再玩一次這個練習。你剛剛做了一件事。"
+        }
+      }
+    },
+    {
+      "id": "thought_022",
+      "name": "收音機轉盤",
+      "exercise_type": "thought_experiments",
+      "duration_seconds": 120,
+      "difficulty": "intermediate",
+      "tags": [
+        "attention",
+        "choice",
+        "focus"
+      ],
+      "text": "想像你的注意力就像一台收音機的轉盤。此刻，你調到的是哪一個頻道？「憂慮 FM」？「過去的遺憾電台」？「焦慮聯播網」？注意，你其實可以轉動這個轉盤。你可以選擇自己要調到哪裡。此刻，哪個頻道會更適合你？平靜、當下、可能性？你對自己注意力的掌控，遠比你以為的還要多。",
+      "components": {
+        "bridge": {
+          "full": "你的身體需要這個練習。不是為了修復什麼，只是給自己一個不同的片刻輸入。",
+          "lean": "你的身體需要這個練習。"
+        },
+        "intro": {
+          "full": "這是收音機轉盤。跟著它走到哪就到哪。你不需要相信這一點，試試看就好。",
+          "lean": "這是收音機轉盤。跟著它走到哪就到哪。"
+        },
+        "description": {
+          "full": "想像你的注意力就像一台收音機的轉盤。此刻，你調到的是哪一個頻道？「憂慮 FM」？「過去的遺憾電台」？「焦慮聯播網」？注意，你其實可以轉動這個轉盤。你可以選擇自己要調到哪裡。此刻，哪個頻道會更適合你？平靜、當下、可能性？你對自己注意力的掌控，遠比你以為的還要多。",
+          "lean": "想像你的注意力就像一台收音機的轉盤。此刻，你調到的是哪一個頻道？「憂慮 FM」？注意，你其實可以轉動這個轉盤。"
+        },
+        "aha": {
+          "full": "現在，我要你注意一件事。注意你的想像力去了哪裡。無論浮現了什麼都是有效的。無論發生了什麼——或沒有發生什麼——都恰恰是對的。",
+          "lean": "現在，注意你的想像力去了哪裡。無論浮現了什麼都是有效的。"
+        },
+        "integration": {
+          "full": "現在，在你繼續往下之前，你的想像力向你展示了一些真實的東西。從這一刻起，什麼都不必改變。這樣就夠了。",
+          "lean": "在你繼續往下之前，你的想像力向你展示了一些真實的東西。這樣就夠了。"
+        }
+      }
+    }
+  ]
+}
