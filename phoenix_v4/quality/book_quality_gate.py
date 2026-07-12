@@ -14,6 +14,7 @@ from pathlib import Path
 from typing import Any, Optional
 
 from phoenix_v4.quality.chapter_flow_gate import evaluate_chapter_flow, flow_profile_for_runtime_format
+from phoenix_v4.text.wordcount import count_words
 
 _OVERLAY_RULE_IDS = frozenset(
     {
@@ -376,7 +377,7 @@ def evaluate_book_quality(
     hold_reasons: list[str] = []
 
     chapters = _extract_chapters(text)
-    word_count = len(text.split())
+    word_count = count_words(text)
     bounds = _runtime_word_range(runtime_format_id)
     if not text:
         fail_reasons.append("manuscript is empty")

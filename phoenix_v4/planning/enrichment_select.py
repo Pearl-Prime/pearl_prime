@@ -1761,7 +1761,9 @@ def _norm_ws(text: str) -> str:
 
 
 def _wc(text: str) -> int:
-    return len((text or "").split())
+    from phoenix_v4.text.wordcount import count_words
+
+    return count_words(text or "")
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -3135,6 +3137,7 @@ def select_enrichment(
                         repo_root=root,
                         story_schedule=_story_schedule,
                         slot_tracker=_book_tracker,
+                        locale=locale,
                     )
                     content = _ri_result["text"]
                     if _ri_result.get("injections_resolved"):
@@ -3244,7 +3247,7 @@ def select_enrichment(
                     if _wc(content) > room_slot:
                         content = _truncate_to_word_budget(content, room_slot)
 
-            actual_w = len(content.split())
+            actual_w = _wc(content)
             ch_words += actual_w
             ch_breakdown[source] += 1
 

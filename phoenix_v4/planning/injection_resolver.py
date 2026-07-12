@@ -168,7 +168,7 @@ def _strip_known_marks(text: str) -> str:
 # Locale token fallbacks — loaded lazily from config/content_banks/loc_var_render.yaml
 # so packet-stage output matches book_renderer resolution (one source of truth).
 # Covers both flat tokens ({street_name}) and dotted tokens ({location.digital_space}).
-_LOCALE_FALLBACKS_CACHE: Optional[Dict[str, str]] = None
+_LOCALE_FALLBACKS_CACHE: Optional[Dict[str, Dict[str, str]]] = None
 
 # Hardcoded last-resort fallbacks used if loc_var_render.yaml is missing/unreadable.
 _LOCALE_HARDCODED = {
@@ -184,34 +184,47 @@ _LOCALE_HARDCODED = {
 }
 
 
-def _load_locale_fallbacks() -> Dict[str, str]:
+def _load_locale_fallbacks(locale: Optional[str] = None) -> Dict[str, str]:
+    """Load loc-var fallbacks; prefer locale bank when present (no silent EN overlay)."""
     global _LOCALE_FALLBACKS_CACHE
-    if _LOCALE_FALLBACKS_CACHE is not None:
-        return _LOCALE_FALLBACKS_CACHE
-    path = REPO_ROOT / "config" / "content_banks" / "loc_var_render.yaml"
-    merged = dict(_LOCALE_HARDCODED)
-    if path.is_file():
-        try:
-            data = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
-            merged.update({str(k): str(v) for k, v in (data.get("fallbacks") or {}).items()})
-        except Exception:
-            pass
-    _LOCALE_FALLBACKS_CACHE = merged
-    return merged
+    if _LOCALE_FALLBACKS_CACHE is None:
+        path = REPO_ROOT / "config" / "content_banks" / "loc_var_render.yaml"
+        by_locale: Dict[str, Dict[str, str]] = {"en-US": dict(_LOCALE_HARDCODED)}
+        if path.is_file():
+            try:
+                data = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
+                en = dict(_LOCALE_HARDCODED)
+                en.update({str(k): str(v) for k, v in (data.get("fallbacks") or {}).items()})
+                by_locale["en-US"] = en
+                for loc, mapping in (data.get("fallbacks_by_locale") or {}).items():
+                    if isinstance(mapping, dict):
+                        by_locale[str(loc)] = {str(k): str(v) for k, v in mapping.items()}
+            except Exception:
+                pass
+        _LOCALE_FALLBACKS_CACHE = by_locale
+
+    key = (locale or "en-US").strip() or "en-US"
+    if key != "en-US" and key in _LOCALE_FALLBACKS_CACHE:
+        # Locale bank exists → use it exclusively. Do not silently fill gaps with English.
+        return dict(_LOCALE_FALLBACKS_CACHE[key])
+    return dict(_LOCALE_FALLBACKS_CACHE.get("en-US") or _LOCALE_HARDCODED)
 
 
 import re as _re
-_LOC_SENTENCE_START_RE = _re.compile(r'(^|[.!?]\s+|\n\s*)(\{[A-Za-z_][A-Za-z_0-9.]*\})')
+_LOC_SENTENCE_START_RE = _re.compile(r'(^|[.!?。！？]\s+|\n\s*)(\{[A-Za-z_][A-Za-z_0-9.]*\})')
 
 
-def _fill_locale_tokens(text: str) -> str:
+def _fill_locale_tokens(text: str, locale: Optional[str] = None) -> str:
     """Replace locale tokens with sentence-start capitalization.
 
     Handles flat tokens ({street_name}), dotted tokens ({location.digital_space}),
     and title-case variants ({Weather_detail}). Tokens at sentence start are
     capitalized so ". {street_name}" → ". The street below" (not ". the street below").
+
+    When *locale* has a ``fallbacks_by_locale`` bank, only that bank is used —
+    missing keys stay unresolved rather than silently falling back to English.
     """
-    tokens = _load_locale_fallbacks()
+    tokens = _load_locale_fallbacks(locale)
 
     def _lookup(name: str) -> Optional[str]:
         if name in tokens:
@@ -824,6 +837,7 @@ def resolve_injections(
     repo_root: Optional[Path] = None,
     story_schedule: Optional[Any] = None,
     slot_tracker: Optional["BookSlotTracker"] = None,
+    locale: Optional[str] = None,
 ) -> dict:
     """
     Replace [STORY_INJECTION_POINT] / [EXERCISE_INJECTION_POINT] with real content.
@@ -925,7 +939,7 @@ def resolve_injections(
     result["text"] = _fill_mechanism_tokens(
         result["text"], persona_id, topic, seed, root
     )
-    result["text"] = _fill_locale_tokens(result["text"])
+    result["text"] = _fill_locale_tokens(result["text"], locale=locale)
     return result
 
 
