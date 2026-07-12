@@ -176,6 +176,57 @@ def _minimal_payload(stem: str) -> dict:
             "snapshot_of_series_memory_sha256": _ZERO_SHA,
             "facts": [],
         },
+        "structural_bundle": {
+            "schema_version": "1.0.0",
+            "bundle_id": "sb1",
+            "structural_template_id": "seated_table_scene",
+            "canvas": {"width": 1080, "height": 1920},
+            "nodes": [
+                {
+                    "node_id": "surface_1",
+                    "category": "support_surface",
+                    "support_polygon_pct": [[0.1, 0.8], [0.9, 0.8], [0.9, 0.95]],
+                },
+                {
+                    "node_id": "char_1",
+                    "category": "character",
+                    "contact_point_pct": [0.5, 0.8],
+                },
+            ],
+            "edges": [
+                {
+                    "edge_id": "edge_1",
+                    "relation": "seated_on",
+                    "from_node": "char_1",
+                    "to_node": "surface_1",
+                },
+            ],
+        },
+        "structural_plan": {
+            "schema_version": "1.0.0",
+            "envelope_id": "sp1",
+            "plan_hash": "abcdef0123456789",
+            "transform_model": "structural_mvp_v1",
+            "plan_body": {
+                "panel_id": "p1",
+                "canvas": {"width": 1080, "height": 1920},
+                "resolved_placements": [
+                    {
+                        "node_id": "char_1",
+                        "transform": {
+                            "tx_pct": 0.5,
+                            "ty_pct": 0.8,
+                            "uniform_scale": 1.0,
+                            "rotation_deg": 0.0,
+                        },
+                    },
+                ],
+                "support_graph": {
+                    "nodes": ["surface_1", "char_1"],
+                    "edges": ["edge_1"],
+                },
+            },
+        },
         "stage_manifest": {
             **common,
             "artifact_type": "stage_manifest",
