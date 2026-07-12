@@ -27,6 +27,22 @@ entries:
           When anxiety is running your day, the most useful question is not what you are afraid of. It is what the body is doing right now. Where is the tightness sitting. Where is the breath. What changed in the last ten seconds that no one in the room noticed except the part of you that lives below thought. That is the data. Everything else is commentary.
 
           Carry that orientation into the exercise that follows — begin where the signal already is, not where the explanation wishes it had started.
+    # LOCALIZATION-ADDED (zh-TW, flagship_phase2_layer6): loader has no locale
+    # dispatch yet for this bank (see phoenix_v4/planning/accent_planner.py
+    # _load_wisdom_essence — reads register_variants.secular.body directly with
+    # no locale param). Content staged here in the same shape as register_variants
+    # so a one-line loader change can pick it up. Reported to Pearl_Dev.
+    locale_variants:
+      zh_TW:
+        secular:
+          body: |
+            在解釋抵達之前，身體早已開口。胸口先是一緊，下顎繃緊，肩膀不自覺地往耳朵靠近——而心智還在組織它第一句「一切都沒事」的合理說詞。這不是智力上的失誤。這是一套運作順序：神經系統早在語言學會為警報配上旁白之前，就已經學會了掃描危險。
+
+            每一條真正經得起日常生活考驗的智慧之路，最終都回到同一個起點：去看訊號真正所在之處。不是訊號所編織的故事，也不是那個故事所下的判決。而是那股熱意、那陣緊縮、那淺淺的呼吸、那隻在任何人還來不及說清楚哪裡不對勁之前，就已經按上胸骨的手。身體不會像心智那樣說謊。它總是先登記，後解釋。
+
+            當焦慮主宰你的一天時，最有用的問題不是「你在害怕什麼」，而是「此刻身體正在做什麼」。緊繃停留在哪裡。呼吸停在哪裡。過去十秒鐘，房間裡沒有人察覺、卻只有活在思考之下的那部分的你注意到了什麼變化。這才是數據。其餘的，都只是評論。
+
+            把這份定向感帶進接下來的練習——從訊號已經所在之處開始，而不是從解釋希望它開始的地方開始。
       wisdom_traditions:
         examples:
           - "The body registers before the mind explains — look there first."

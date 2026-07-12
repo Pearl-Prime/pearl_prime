@@ -1,0 +1,116 @@
+{
+  "content_type": "zh-TW_locale_partial",
+  "locale": "zh-TW",
+  "source_file": "exercises_ab_tady_37_PRODUCTION_READY.json",
+  "note": "LOCALIZATION-ADDED (flagship_phase2_layer6): partial zh-TW translation covering ONLY the exercise ids actually used by the zh-TW gen_z_professionals x anxiety x overwhelm/F006 flagship render. This is NOT full parity with the English source file of the same name (which has many more exercises). phoenix_v4/exercises/practice_library_loader.py::load_practice_library() currently globs SOURCE_OF_TRUTH/practice_library/inbox/*_PRODUCTION_READY.json with no locale parameter at all -- this file is inert until Pearl_Dev adds locale-aware loading (e.g. prefer an id match from SOURCE_OF_TRUTH/practice_library/locales/{locale}/inbox/ before falling back to the English inbox, analogous to phoenix_v4/exercises/practice_library_loader.py load_component_templates()'s existing locale fallback pattern).",
+  "exercises": [
+    {
+      "id": "cyclic_sighing",
+      "name": "循環嘆息法",
+      "exercise_type": "00_breath_regulation",
+      "duration_seconds": 60,
+      "difficulty": "beginner",
+      "tags": [
+        "breath",
+        "stress_reset",
+        "vagal",
+        "research_backed"
+      ],
+      "text": "用鼻子吸氣。到頂點時，再做一次短促的第二次吸氣，把肺完全撐開。現在用嘴巴慢慢吐氣，讓氣息盡可能長地流出。這就是一個循環。再做一次。吸氣，短促的第二次吸氣，長長的吐氣。你的吐氣時間應該至少是吸氣的兩倍。重複五個循環。在最後一次吐氣時，讓你的肩膀放下來。",
+      "components": {
+        "bridge": {
+          "full": "在你繼續閱讀之前，用呼吸試試看。不是為了修復什麼，只是在接下來的六十秒裡，給你的神經系統一個不同的輸入。",
+          "lean": "在你繼續往下之前，用呼吸試試這個。"
+        },
+        "intro": {
+          "full": "這是循環嘆息練習。雙重吸氣後接一次長吐氣，是目前已知最快能在當下降低壓力的生理方法。史丹佛大學的研究人員發現，它在緩解急性壓力方面的效果甚至超過冥想。你不需要相信這一點，只要跟著計數走就好。",
+          "lean": "這是循環嘆息法。雙重吸氣，長吐氣。跟著計數走。"
+        },
+        "description": {
+          "full": "用鼻子吸氣。到頂點時，再做一次短促的第二次吸氣，把肺完全撐開。現在用嘴巴慢慢吐氣，讓氣息盡可能長地流出。這就是一個循環。再做一次。吸氣，短促的第二次吸氣，長長的吐氣。你的吐氣時間應該至少是吸氣的兩倍。重複五個循環。在最後一次吐氣時，讓你的肩膀放下來。",
+          "lean": "用鼻子吸氣。到頂點時再做一次短促的第二次吸氣。用嘴巴長長地吐氣。五個循環。"
+        },
+        "aha": {
+          "full": "現在，我要你注意一件事。你的吸氣可能感覺比一開始時稍微更飽滿一些。這不是想像。雙重吸氣重新打開了肺部塌陷的肺泡，增加了氧氣的攝入量。延長的吐氣向迷走神經傳遞了安全的訊號。你正在經歷的，是一種在你沒有刻意努力的情況下發生的生理性降檔。",
+          "lean": "現在，注意你的吸氣可能感覺比一開始更飽滿一些。延長的吐氣向你的迷走神經傳遞了安全的訊號。"
+        },
+        "integration": {
+          "full": "現在，在你繼續往下之前，再做一次呼吸，讓吐氣比吸氣更長。從這一刻起，什麼都不必改變。你不需要完美地記住這個技巧。當你回到螢幕前或回到房間裡時，保持簡單就好。一次一口呼吸，就足夠了。",
+          "lean": "現在，在你繼續往下之前，再做一次長長的吐氣。一次一口呼吸，就足夠了。"
+        }
+      }
+    },
+    {
+      "id": "extended_exhale",
+      "name": "延長吐氣",
+      "exercise_type": "04_nervous_system_downregulation",
+      "duration_seconds": 90,
+      "difficulty": "beginner",
+      "tags": [
+        "breath",
+        "exhale",
+        "parasympathetic",
+        "calming"
+      ],
+      "text": "吸氣數三拍，吐氣數六拍。就這樣。比例比數字本身更重要。你的吐氣時間大約應該是吸氣的兩倍。重複八個循環。不要強迫吐氣拉長到不舒服的地步，讓它隨著循環自然地延長。",
+      "components": {
+        "bridge": {
+          "full": "在你繼續閱讀之前，讓你的吐氣比吸氣有更多空間。這一個小小的改變，是你神經系統最快的槓桿。",
+          "lean": "在你繼續之前，試試更長的吐氣。"
+        },
+        "intro": {
+          "full": "這是延長吐氣練習。吐氣是呼吸中唯一能直接啟動副交感神經系統的階段。當你讓吐氣比吸氣更長時，你就是在手動把身體的平衡從警覺調整到安定。比例比時長更重要。",
+          "lean": "這是延長吐氣呼吸法。更長的吐氣能把你的系統從警覺調整到安定。"
+        },
+        "description": {
+          "full": "吸氣數三拍，吐氣數六拍。就這樣。比例比數字本身更重要。你的吐氣時間大約應該是吸氣的兩倍。重複八個循環。不要強迫吐氣拉長到不舒服的地步，讓它隨著循環自然地延長。",
+          "lean": "吸氣數三拍，吐氣數六拍。八個循環。讓吐氣自然地延長。"
+        },
+        "aha": {
+          "full": "現在，我要你注意一件事。如果吐氣在第五或第六個循環時自行變長了，那就是你的副交感神經系統正在發揮作用。不是你「決定」要放鬆的，而是你的呼吸機制給了身體一個不同的指令，而身體照做了。",
+          "lean": "現在，注意吐氣是否自行變長了。那就是你的副交感神經系統正在回應。"
+        },
+        "integration": {
+          "full": "現在，當你回到日常生活中時，你可以在任何地方使用這個比例。你不需要計數，只要讓吐氣比吸氣更長就好。在通話中、在會議裡、在走向車子的路上都可以。這個機制不受場合限制，處處適用。",
+          "lean": "現在，當你回去時，只要讓吐氣比吸氣更長就好。任何地方都適用。"
+        }
+      }
+    },
+    {
+      "id": "eye_softening",
+      "name": "柔和雙眼",
+      "exercise_type": "04_nervous_system_downregulation",
+      "duration_seconds": 60,
+      "difficulty": "beginner",
+      "tags": [
+        "eyes",
+        "softening",
+        "downregulation",
+        "simple"
+      ],
+      "text": "放柔你的目光。不要聚焦在任何東西上。讓你的視野變得寬闊、開放到周邊。留意房間的邊緣，卻不直接看向它們。現在把眼睛閉上一半，讓眼皮變得沉重。在半閉的眼皮之後，維持這種寬闊的周邊覺察。三十秒。當你睜開眼睛時，讓它們維持柔和。",
+      "components": {
+        "bridge": {
+          "full": "在你繼續閱讀之前，放柔你的雙眼。你的視覺系統一直處於聚焦模式，這讓你的神經系統維持在警覺狀態。放柔目光會傳遞出不同的訊號。",
+          "lean": "在你繼續之前，放柔你的雙眼。"
+        },
+        "intro": {
+          "full": "這是柔和雙眼練習。當你的眼睛聚焦且銳利時，你的交感神經系統會保持啟動狀態。當你讓目光變得寬闊、開放到周邊時，副交感神經系統就會被啟動。這就是為什麼在大自然中散步會讓人感到平靜——你的眼睛正在做一件不一樣的事。",
+          "lean": "這是柔和雙眼練習。寬闊的周邊視野會啟動你的平靜系統。"
+        },
+        "description": {
+          "full": "放柔你的目光。不要聚焦在任何東西上。讓你的視野變得寬闊、開放到周邊。留意房間的邊緣，卻不直接看向它們。現在把眼睛閉上一半，讓眼皮變得沉重。在半閉的眼皮之後，維持這種寬闊的周邊覺察。三十秒。當你睜開眼睛時，讓它們維持柔和。",
+          "lean": "讓視野變得寬闊、開放到周邊。把眼睛閉上一半。三十秒。睜開時保持柔和。"
+        },
+        "aha": {
+          "full": "現在，我要你注意，當你放柔目光時，你的呼吸可能變深了。視覺系統與呼吸系統透過自律神經系統相連結。放柔其中一個，另一個也會跟著放柔。你在沒有碰觸呼吸的情況下，改變了你的呼吸。",
+          "lean": "現在，注意你的呼吸變深了。放柔雙眼自動也放柔了你的呼吸。"
+        },
+        "integration": {
+          "full": "現在，當你回到閱讀時，讓你的雙眼維持比平常柔和百分之十。你仍然可以閱讀，仍然可以聚焦，但這份柔和會告訴你的身體：聚焦是一種選擇，而不是一場緊急狀況。",
+          "lean": "現在，當你回去時，讓雙眼維持柔和百分之十。聚焦是一種選擇，不是緊急狀況。"
+        }
+      }
+    }
+  ]
+}

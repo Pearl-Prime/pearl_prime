@@ -227,6 +227,13 @@ entries:
       en_EU: "Direct tie to weather/climate metaphor in doctrine v01."
       zh_TW_zh_CN: "Emotional vocabulary may be indirect — 'naming' can be somatic or relational."
       ja_JP: "High-context culture may express emotion through behavior; adapt examples."
+    # LOCALIZATION-ADDED (zh-TW, flagship_phase2_layer6): _load_cited_evidence()
+    # in phoenix_v4/planning/accent_planner.py reads `claim` directly with no
+    # locale param. Content staged here so a one-line loader change can pick it
+    # up. Citation stays in English/original per locked-citation convention.
+    # Reported to Pearl_Dev.
+    claim_locale_variants:
+      zh_TW: "能夠說出具體情緒名稱的人——區分出「焦慮」與「羞愧」、「煩躁」與「害怕」的不同——往往比那些把一切都經驗成單一模糊「不好」感受的人，更有彈性地應對困境。為天氣現象命名，能幫助你不再把它誤認成整體氣候。"
     sensitivity_notes: null
     secular_safe: true
     position_fit: supports REFLECTION

@@ -548,6 +548,46 @@ clusters:
     secular_safe: true
     position_fit: supports TAKEAWAY
     sensitivity_notes: ''
+  # LOCALIZATION-ADDED (zh-TW, flagship_phase2_layer6): native zh-TW (Traditional
+  # Chinese, Taiwan register) renderings of two universal-cluster stories that
+  # were rendering in English for this locale (ext_anx_historical_ada_lovelace_v01,
+  # ext_anx_ted_mcgonigal_stress_v01). Same story_id as their universal-cluster
+  # counterpart so downstream tracing still resolves; loader already merges
+  # universal + locale_cluster rows, so these are additional candidates in the
+  # zh_TW pool. Note for Pearl_Dev: the picker does not currently prefer a
+  # locale-native row over a universal (English) row with a different id for the
+  # same beat, so English selection can still happen by chance — worth a filter
+  # that prefers locale_cluster rows when one exists for the chosen slot.
+  - story_id: ext_anx_historical_ada_lovelace_v01
+    type: historical
+    emotional_shape: contrast
+    story: '艾達·勒芙蕾絲，詩人拜倫之女，於一八四三年翻譯並註解了查爾斯·巴貝奇「分析機」的筆記——那份註解，一般公認是史上第一份發表的電腦程式。她同時活在維多利亞時代的嚴格審視之下：像她這樣階級的女性，本不該去想像會思考的機器。她的信件裡，興奮與懷疑交織在一起——遠見卓識的數學，緊挨著「不該僭越」的恐懼。
+
+
+      高能力者的焦慮，聽起來常常很像「冒牌者症候群」——只是那個詞當時還沒被發明出來。勒芙蕾絲沒有等神經系統批准她才動筆。她還是把演算法寫了下來——證明了即使胸口發緊，心智依然能夠為未來寫下藍圖。她的筆記，至今仍是每一個因重要工作而雙手顫抖的人的一張地圖。'
+    source: 艾達·勒芙蕾絲——「分析機」筆記
+    citation: Lovelace, A. Notes on L. F. Menabrea (1843); Fuegi, J. Lovelace & Babbage (2003) IEEE Annals.
+    rights_class: verified_facts_only
+    topic_keys: [anxiety]
+    doctrine_keys: ["COMPOSITE_DOCTRINE v03"]
+    secular_safe: true
+    position_fit: supports REFLECTION
+    sensitivity_notes: ''
+  - story_id: ext_anx_ted_mcgonigal_stress_v01
+    type: true_life_broadcast
+    emotional_shape: contrast
+    story: '健康心理學家凱莉·麥高尼格，在她廣為流傳的 TED 演講《如何讓壓力成為你的朋友》中，回顧了關於「壓力信念」的研究：把生理喚起解讀為有害的人，心血管健康狀況通常較差；而把同樣的感受解讀為「身體正在迎接挑戰」的人，狀況則明顯較佳。她並不是說壓力是件愉快的事——她重新框定的，是那層疊加在焦慮之上的「對焦慮本身的焦慮」。
+
+
+      對於開會前總是胸口發緊的人來說，這個對比帶來一種解放感：傷害的一部分，或許正是疊加在心跳之上的那個故事。把壓力重新命名為「臨場前的準備狀態」，並不會讓恐懼消失，但它能縮小那份羞恥感——那種假裝人類身體本來就不該有任何激動反應的羞恥感。'
+    source: 凱莉·麥高尼格——關於壓力心態的 TED 演講
+    citation: McGonigal, K. TED Global 2013 'How to Make Stress Your Friend'; Jamieson et al. stress reappraisal studies.
+    rights_class: paraphrase_attributed
+    topic_keys: [anxiety]
+    doctrine_keys: ["COMPOSITE_DOCTRINE v03"]
+    secular_safe: true
+    position_fit: supports TAKEAWAY
+    sensitivity_notes: ''
   ja_JP:
   - story_id: ext_anx_ja_jp_karoshi_v01
     type: business
