@@ -282,6 +282,7 @@ Single index: every doc, script, config, and artifact for simulation, 10k/100k k
 | **Rigorous test & production 100%** | [docs/RIGOROUS_SYSTEM_TEST.md](./RIGOROUS_SYSTEM_TEST.md) — Sim as readiness; four production requirements |
 | **Pearl Prime release contract** | [docs/PEARL_PRIME_RELEASE_CONTRACT.md](./PEARL_PRIME_RELEASE_CONTRACT.md) — Main pipeline release contract and evidence bundle |
 | **Pearl Prime Cloudflare deployment** | [docs/PEARL_PRIME_CLOUDFLARE_DEPLOYMENT.md](./PEARL_PRIME_CLOUDFLARE_DEPLOYMENT.md) — Repo-owned Cloudflare worker contract for the `pearl-prime` service |
+| **Pearl Prime Cloudflare Git integration runbook** | [docs/runbooks/PEARL_PRIME_CLOUDFLARE_GIT_INTEGRATION_RUNBOOK.md](./runbooks/PEARL_PRIME_CLOUDFLARE_GIT_INTEGRATION_RUNBOOK.md) — Operator steps to disconnect or rebind the noisy `Workers Builds: pearl-prime` surface |
 | **Pearl Prime workflow hardening** | [docs/PEARL_PRIME_WHOLE_WORKFLOW_HARDENING_SPEC.md](./PEARL_PRIME_WHOLE_WORKFLOW_HARDENING_SPEC.md) — Whole-pipeline hardening contract |
 | **Pearl Prime bestseller overlay** | [docs/PEARL_PRIME_BESTSELLER_WRITING_OVERLAY_SPEC.md](./PEARL_PRIME_BESTSELLER_WRITING_OVERLAY_SPEC.md) — Writer craft overlay |
 | **Pearl Prime salvage audit** | [docs/PEARL_PRIME_SALVAGE_AUDIT_2026_03_29.md](./PEARL_PRIME_SALVAGE_AUDIT_2026_03_29.md) — Salvage vs `main` and recovery sequencing |

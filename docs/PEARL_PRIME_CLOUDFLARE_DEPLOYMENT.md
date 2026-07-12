@@ -37,6 +37,18 @@ Successful health responses return JSON with at least:
 
 This contract exists so the Cloudflare GitHub integration has a real, versioned build target in this repo. Until the external Cloudflare check is observed green on `main`, it remains non-authoritative for release readiness.
 
+## Live integration drift
+
+Verified on 2026-07-13 while investigating PR `#5576`:
+
+- the repo-owned CI mirror succeeded from repo root with `npm ci` + `npm run build:worker`
+- the Cloudflare GitHub check failed instantly and exposed no GitHub-visible annotations
+- the failing check linked to account `626d6eb8162a8121f74e59235d82a4f5`
+- the current Pages/storefront authority in Pearl_Int's lane map remains `b80152c319f941e6e92f928e2617a3d5`, which is the account tied to the repo's current Pages secret-backed lane
+- older session docs and prior fallbacks referenced account `0fe2f0679b00fb8a5c3ce830f4144c98`
+
+Implication: the worker-build account and the Pages account are not the same authority surface. Hard-coded Cloudflare account IDs in older handoffs are historical evidence unless they match the current lane's secret-backed account. Confirm the intended Cloudflare surface first, then confirm the account.
+
 ### Cloudflare Workers Builds (monorepo)
 
 The repo has additional `package.json` files under `brand-wizard-app/` and `storefront/`. Without a root manifest, Workers Builds can fail during dependency install before `npx wrangler deploy` runs.
@@ -45,6 +57,11 @@ The repo has additional `package.json` files under `brand-wizard-app/` and `stor
 
 **Node pin:** Cloudflare Workers Builds runs Node 20.x. Wrangler 4.87+ requires Node 22; root manifest pins `4.86.0`.
 
-**Dashboard fallback** (operator, account `0fe2f0679b00fb8a5c3ce830f4144c98`): if builds still fail, set build env `SKIP_DEPENDENCY_INSTALL=true` and deploy command `npm ci && npx wrangler deploy`. Root directory: repository root.
+**Dashboard fallback:** first confirm the intended Cloudflare account for `pearl-prime`. After that, if builds still fail, set build env `SKIP_DEPENDENCY_INSTALL=true` and deploy command `npm ci && npx wrangler deploy`. Root directory: repository root.
 
 **CI mirror:** [`.github/workflows/pearl-prime-worker-build-verify.yml`](../.github/workflows/pearl-prime-worker-build-verify.yml) runs `npm ci` + `wrangler deploy --dry-run` on worker file changes.
+
+**Operator runbook:** [docs/runbooks/PEARL_PRIME_CLOUDFLARE_GIT_INTEGRATION_RUNBOOK.md](./runbooks/PEARL_PRIME_CLOUDFLARE_GIT_INTEGRATION_RUNBOOK.md) documents the two supported paths:
+
+- disconnect the Cloudflare Git integration to eliminate non-authoritative PR noise
+- rebind the integration cleanly, with branch control and build-watch-path limits, if the check surface is intentionally retained

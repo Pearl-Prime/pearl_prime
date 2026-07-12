@@ -81,6 +81,7 @@ Each integration entry:
 - **Cap:** `PEARL-PRIME-STOREFRONT-V1-01`
 - **Subsystem:** `storefront`
 - **CF account:** `b80152c319f941e6e92f928e2617a3d5` (NOT the operator's primary `626d6eb8...` per `cloudflare_pages_deploy.md` Trap 3)
+- **Account authority:** use the repo's current `CLOUDFLARE_ACCOUNT_ID` secret. For the current Pages/storefront lane that resolves to `b80152c319f941e6e92f928e2617a3d5`; treat `626d6eb8...` as operator OAuth and `0fe2f067...` as older fallback/historical unless a specific lane proves otherwise.
 - **CF resources (8 operator-action-required slots):**
   - **Pages project** `pearl-prime-storefront` — live at `https://pearl-prime-storefront.pages.dev` post first deploy (custom domain `pearlprime.shop` Q-PRP-DOMAIN-01)
   - **D1 database** `pearl_prime_storefront` — single instance at Phase A; read-replicas at Phase B per spec §5.2
