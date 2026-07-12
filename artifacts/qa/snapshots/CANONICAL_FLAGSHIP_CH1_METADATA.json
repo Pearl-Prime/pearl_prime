@@ -2,7 +2,7 @@
   "schema_version": "1.0.0",
   "artifact": "flagship_ch1_golden",
   "scope": "ch1_only",
-  "ratified_at": "2026-07-06T05:43:53Z",
+  "ratified_at": "2026-07-12T07:44:50Z",
   "canonical_branch": "agent/flagship-ch1-production-repair",
   "layer": "flagship-ch1-prose-clean",
   "seed": "flagship_phase2_layer6",
@@ -31,9 +31,9 @@
     "flagship_phase2_layer6"
   ],
   "invocation_shell": "PYTHONPATH=. python3 scripts/run_pipeline.py --topic anxiety --persona gen_z_professionals --arc config/source_of_truth/master_arcs/gen_z_professionals__anxiety__overwhelm__F006.yaml --pipeline-mode spine --runtime-format extended_book_2h --quality-profile production --exercise-journeys --no-job-check --render-book --render-dir <render_dir> --seed flagship_phase2_layer6",
-    "content_sha256": "d9d16ec87f6655bfc989d8d2be51f0b93948b941da02e53c165fc7c7931a0059",
-  "word_count": 1237,
-  "byte_count": 6945,
+  "content_sha256": "ade122c28adf4a9799d38f86eb5db284a16ff500e01198ba6a311aad7209f651",
+  "word_count": 1173,
+  "byte_count": 6518,
   "atom_manifest": [
     {
       "slot": "HOOK",
@@ -47,7 +47,7 @@
       "atom_id": "angle_def:PROTECTIVE_ALARM",
       "bank": "atoms/gen_z_professionals/anxiety/ANGLE_DEFINITION/PROTECTIVE_ALARM/CANONICAL.txt",
       "word_count": 47,
-      "notes": "PROTECTIVE_ALARM persona slice; seeds Sunday\u2192Monday"
+      "notes": "PROTECTIVE_ALARM persona slice; seeds Sunday→Monday"
     },
     {
       "slot": "SCENE",
@@ -75,14 +75,14 @@
       "atom_id": "COMPOSITE_DOCTRINE v03",
       "bank": "SOURCE_OF_TRUTH/composite_doctrine/anxiety/REFLECTION/CANONICAL.txt",
       "word_count": 259,
-      "notes": "v03 sensation-vs-story \u2014 reflection only, no embedded practice"
+      "notes": "v03 sensation-vs-story — reflection only, no embedded practice"
     },
     {
       "slot": "EXERCISE",
       "atom_id": "med_007",
       "bank": "SOURCE_OF_TRUTH/practice_library/inbox/meditations_library_34_PRODUCTION_READY.json",
       "word_count": 64,
-      "notes": "med_007 content_only \u2014 bridge + description, no assembly glue"
+      "notes": "med_007 content_only — bridge + description, no assembly glue"
     },
     {
       "slot": "STORY",
@@ -127,7 +127,6 @@
     "STORY",
     "PIVOT",
     "REFLECTION",
-    "EXERCISE",
     "STORY",
     "STORY",
     "TAKEAWAY",
@@ -135,9 +134,10 @@
     "THREAD"
   ],
   "restoration_protocol": {
-    "summary": "Do NOT fresh-fix parity drift \u2014 restore the golden recipe from this metadata.",
+    "summary": "Do NOT fresh-fix parity drift — restore the golden recipe from this metadata.",
     "restore_snapshot": "git checkout <sha> -- artifacts/qa/snapshots/CANONICAL_FLAGSHIP_CH1.txt artifacts/qa/snapshots/CANONICAL_FLAGSHIP_CH1_METADATA.json",
     "ratify_snapshot_change": "PR body must include GOLDEN-UPDATE-RATIFIED: <OPD ref>",
     "authority_manifest": "artifacts/qa/ch1_12shape_preview_v4_20260705/manifest.json"
-  }
+  },
+  "notes": "Regenerated 2026-07-12 for purpose-contract CH1 max_exercises=0 (twelve-shape EXERCISE capped). Runtime CJK/exercise lane."
 }

@@ -1,9 +1,9 @@
 {
   "version": "v4",
   "v4_fixes": {
-    "exercise_glue": "med_007 content_only render; glue from compose_exercise + intro components (bank-wide follow-up)",
+    "exercise_glue": "CH1 has no EXERCISE under purpose-contract; later chapters keep med_* content_only",
     "pivot_integration": "PIVOT v50 rewritten principle-only; INTEGRATION v26 keeps concrete 11pm rep",
-    "one_practice": "COMPOSITE_DOCTRINE v03_pure (no embedded practice); EXERCISE med_007 only"
+    "one_practice": "COMPOSITE_DOCTRINE v03_pure (no embedded practice); CH1 recognition purpose-contract max_exercises=0 drops EXERCISE"
   },
   "beats": [
     {
@@ -18,7 +18,7 @@
       "atom_id": "angle_def:PROTECTIVE_ALARM",
       "bank": "atoms/gen_z_professionals/anxiety/ANGLE_DEFINITION/PROTECTIVE_ALARM/CANONICAL.txt",
       "word_count": 47,
-      "notes": "PROTECTIVE_ALARM persona slice; seeds Sunday\u2192Monday"
+      "notes": "PROTECTIVE_ALARM persona slice; seeds Sunday→Monday"
     },
     {
       "slot": "SCENE",
@@ -46,14 +46,7 @@
       "atom_id": "COMPOSITE_DOCTRINE v03",
       "bank": "SOURCE_OF_TRUTH/composite_doctrine/anxiety/REFLECTION/CANONICAL.txt",
       "word_count": 259,
-      "notes": "v03 sensation-vs-story \u2014 reflection only, no embedded practice"
-    },
-    {
-      "slot": "EXERCISE",
-      "atom_id": "med_007",
-      "bank": "SOURCE_OF_TRUTH/practice_library/inbox/meditations_library_34_PRODUCTION_READY.json",
-      "word_count": 64,
-      "notes": "med_007 content_only \u2014 bridge + description, no assembly glue"
+      "notes": "v03 sensation-vs-story — reflection only, no embedded practice"
     },
     {
       "slot": "STORY",
@@ -98,7 +91,7 @@
       "detail": "glue phrases found=none"
     },
     {
-      "test": "PIVOT \u2260 INTEGRATION",
+      "test": "PIVOT ≠ INTEGRATION",
       "pass": true,
       "detail": "shared phrases=none; similarity=0.04"
     },
