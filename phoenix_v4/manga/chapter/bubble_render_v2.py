@@ -25,14 +25,18 @@ from typing import Any, Mapping, Sequence
 from phoenix_v4.manga.chapter import bubble_render as br
 from phoenix_v4.manga.chapter.cjk_text_shaper import (
     is_cjk_locale,
-    measure_vertical_cjk_block,
     render_text_to_pil,
-    render_vertical_cjk_block,
     select_font_path_for_locale,
 )
 from phoenix_v4.manga.chapter.furigana_renderer import (
     normalize_furigana_segments,
     render_furigana_line,
+)
+from phoenix_v4.manga.chapter.jlreq_lettering import (
+    measure_jlreq_text_block,
+    plan_dialogue_lettering,
+    plan_sfx_layout,
+    render_jlreq_text_block,
 )
 from phoenix_v4.manga.chapter.svg_bubble_library import bubble_svg, svg_to_pil_rgba
 from phoenix_v4.manga.chapter.tail_geometry import (
@@ -361,16 +365,24 @@ def _layout_text_measure(
     text: str,
     *,
     locale: str,
-    vertical_kanji: bool,
+    jlreq_plan: Mapping[str, Any],
     font: Any,
     max_text_w: int,
     furigana: list[dict[str, str]],
 ) -> tuple[str, list[str], tuple[int, int]]:
     """Return layout mode, horizontal wrapped lines (empty if not used), and size."""
-    if vertical_kanji and is_cjk_locale(locale):
+    if (
+        str(jlreq_plan.get("writing_mode") or "horizontal_tb") == "vertical_rl"
+        and is_cjk_locale(locale)
+    ):
         max_h = max(40, int(max_text_w * 1.8))
-        tw, th = measure_vertical_cjk_block(
-            draw, text, font=font, locale=locale, max_column_height=max_h
+        tw, th = measure_jlreq_text_block(
+            draw,
+            text,
+            font=font,
+            locale=locale,
+            max_column_height=max_h,
+            plan=jlreq_plan,
         )
         return "vert", [], (tw, th)
 
@@ -501,6 +513,7 @@ def render_bubbles_onto_panel_v2(
 
     panel_image_path = Path(panel_image_path)
     lettering_panel = lettering_panel or {}
+    style_cfg = dict(bubble_style_config or {})
     if out_path is None:
         out_path = panel_image_path.with_name(
             panel_image_path.stem + "_bubbled_v2" + panel_image_path.suffix
@@ -537,7 +550,7 @@ def render_bubbles_onto_panel_v2(
 
     # Resolve the genre register once for this panel (soft iyashikei vs punchy
     # shonen). None when no genre is set -> intensity defaults are used.
-    genre_style = _resolve_genre_style(bubble_style_config)
+    genre_style = _resolve_genre_style(style_cfg)
     caption_font_role = "body"
     if genre_style and isinstance(genre_style.get("font_role"), str):
         # Captions follow the genre's lettering face (gentle for healing).
@@ -597,6 +610,14 @@ def render_bubbles_onto_panel_v2(
         if furigana_segments and locale != "ja_JP":
             furigana_segments = []
 
+        jlreq_plan = plan_dialogue_lettering(
+            text_stripped,
+            locale=locale,
+            vertical_kanji=vertical_kanji,
+            furigana=furigana_segments,
+            explicit_writing_mode=line.get("writing_mode"),
+        )
+
         bold = intensity in ("excited", "shouting", "screaming") or resolve_font_override(
             line, locale=locale, default_locale=default_locale
         ) == "bold_action"
@@ -613,7 +634,7 @@ def render_bubbles_onto_panel_v2(
                 draw,
                 text_stripped,
                 locale=locale,
-                vertical_kanji=vertical_kanji,
+                jlreq_plan=jlreq_plan,
                 font=font,
                 max_text_w=max_text_w,
                 furigana=furigana_segments,
@@ -663,7 +684,8 @@ def render_bubbles_onto_panel_v2(
                 col_h = max(40, int(inner_w * 1.85))
                 right_x = x2 - br._H_PAD  # type: ignore[attr-defined]
                 top_y = y1 + br._V_PAD + ( (y2 - y1 - col_h) // 2 if col_h < (y2 - y1) else 0 )  # type: ignore[attr-defined]
-                render_vertical_cjk_block(
+                render_jlreq_text_block(
+                    overlay,
                     draw,
                     text_stripped,
                     right_x,
@@ -672,6 +694,7 @@ def render_bubbles_onto_panel_v2(
                     locale=locale,
                     fill=text_fill,
                     max_column_height=col_h,
+                    plan=jlreq_plan,
                 )
             elif layout_mode == "furi" and furigana_segments:
                 import copy as _copy
@@ -731,6 +754,7 @@ def render_bubbles_onto_panel_v2(
             "bubble_style": bubble_style,
             "furigana": furigana_segments,
             "vertical_kanji": vertical_kanji,
+            "jlreq_plan": jlreq_plan,
             "bbox": list(bubble_bbox),
             "demonic_bubble": line.get("demonic_bubble"),
         })
@@ -748,30 +772,101 @@ def render_bubbles_onto_panel_v2(
             "bbox": bubble_bbox,
             "furigana": furigana_segments,
             "vertical_kanji": vertical_kanji,
+            "jlreq_plan": jlreq_plan,
         })
 
         zone_idx += 1
 
     # SFX uses the punchy display face (Bangers en_US) when the registry has it.
     sfx_font_role = "display"
-    for sfx_text in sfx:
+    placed_sfx: list[list[int]] = []
+    for sfx_idx, sfx_text in enumerate(sfx):
         if not sfx_text:
             continue
         sfx_font = _get_font_v2(locale, "screaming", bold=True, font_role=sfx_font_role)
-        sfx_idx = sfx.index(sfx_text)
-        sfx_x = int(pw * (0.30 + sfx_idx * 0.15) % pw)
-        sfx_y = int(ph * 0.40)
+        sfx_plan = plan_sfx_layout(
+            sfx_text,
+            locale=locale,
+            panel_size=(pw, ph),
+            occupied_bboxes=[list(b) for b in placed_bubbles] + placed_sfx,
+            reading_direction=str(
+                lettering_panel.get("reading_direction")
+                or style_cfg.get("reading_direction")
+                or "rtl"
+            ),
+            format_id=str(style_cfg.get("format_id") or ""),
+            font=sfx_font,
+            draw=draw,
+            index=sfx_idx,
+        )
+        sfx_x = int(sfx_plan["right_x"])
+        sfx_y = int(sfx_plan["top_y"])
         outline_col = (0, 0, 0, 200)
         sfx_fill = (220, 40, 40, 255)
         if not skip_text_overlay:
-            for ox, oy in [(-2, -2), (2, -2), (-2, 2), (2, 2), (0, -2), (0, 2)]:
-                render_text_to_pil(
-                    draw, sfx_text, sfx_x + ox, sfx_y + oy,
-                    font=sfx_font, locale=locale, fill=outline_col,
+            if sfx_plan["writing_mode"] == "vertical_rl":
+                for ox, oy in [(-2, -2), (2, -2), (-2, 2), (2, 2), (0, -2), (0, 2)]:
+                    render_jlreq_text_block(
+                        overlay,
+                        draw,
+                        sfx_text,
+                        sfx_x + ox,
+                        sfx_y + oy,
+                        font=sfx_font,
+                        locale=locale,
+                        fill=outline_col,
+                        max_column_height=int(sfx_plan["max_column_height"]),
+                        plan=sfx_plan["jlreq_plan"],
+                    )
+                render_jlreq_text_block(
+                    overlay,
+                    draw,
+                    sfx_text,
+                    sfx_x,
+                    sfx_y,
+                    font=sfx_font,
+                    locale=locale,
+                    fill=sfx_fill,
+                    max_column_height=int(sfx_plan["max_column_height"]),
+                    plan=sfx_plan["jlreq_plan"],
                 )
-            render_text_to_pil(draw, sfx_text, sfx_x, sfx_y, font=sfx_font, locale=locale, fill=sfx_fill)
-        layout_records.append({"type": "sfx", "text": sfx_text, "position": (sfx_x, sfx_y)})
-        manifest_entries.append({"kind": "sfx", "text": sfx_text, "position": [sfx_x, sfx_y]})
+            else:
+                for ox, oy in [(-2, -2), (2, -2), (-2, 2), (2, 2), (0, -2), (0, 2)]:
+                    render_text_to_pil(
+                        draw,
+                        sfx_text,
+                        sfx_x + ox,
+                        sfx_y + oy,
+                        font=sfx_font,
+                        locale=locale,
+                        fill=outline_col,
+                    )
+                render_text_to_pil(
+                    draw,
+                    sfx_text,
+                    sfx_x,
+                    sfx_y,
+                    font=sfx_font,
+                    locale=locale,
+                    fill=sfx_fill,
+                )
+        placed_sfx.append(list(sfx_plan["bbox"]))
+        layout_records.append(
+            {
+                "type": "sfx",
+                "text": sfx_text,
+                "position": (sfx_x, sfx_y),
+                "placement_plan": sfx_plan,
+            }
+        )
+        manifest_entries.append(
+            {
+                "kind": "sfx",
+                "text": sfx_text,
+                "position": [sfx_x, sfx_y],
+                "placement_plan": sfx_plan,
+            }
+        )
 
     composite = Image.alpha_composite(img, overlay)
     composite.save(str(out_path), format="PNG")
@@ -791,7 +886,7 @@ def render_bubbles_onto_panel_v2(
         "panel_stem": panel_image_path.stem,
         "out_path": str(out_path),
         "bubble_render_version": 2,
-        "genre": (bubble_style_config or {}).get("genre"),
+        "genre": style_cfg.get("genre"),
         "text_manifest_path": str(manifest_out_path) if emit_text_manifest else None,
         "bubbles": layout_records,
         "coverage_ratio": round(final_cov, 4),

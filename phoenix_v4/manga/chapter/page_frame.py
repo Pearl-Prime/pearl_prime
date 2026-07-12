@@ -42,6 +42,8 @@ from typing import Any, Mapping, Sequence
 
 import yaml
 
+from phoenix_v4.manga.chapter.spread_layout_solver import solve_page_layout
+
 # ── Config location ──────────────────────────────────────────────────────────
 
 _REPO_ROOT = Path(__file__).resolve().parents[3]
@@ -241,6 +243,9 @@ def render_framed_page(
     page_aspect: str | None = None,
     long_edge_px: int | None = None,
     lib: Mapping[str, Any] | None = None,
+    layout_decision: Mapping[str, Any] | None = None,
+    panel_metadata: Sequence[Mapping[str, Any]] | None = None,
+    format_id: str | None = None,
 ):
     """Compose ``panel_images`` (PIL images, reading order) into one framed page.
 
@@ -262,10 +267,32 @@ def render_framed_page(
     if n == 0:
         raise PageFrameError("render_framed_page called with zero panels")
 
-    tpl = select_template(n, page_type=page_type, genre=genre, lib=library)
-    prof = tpl["genre_profile"]
-    pt_rule = tpl["page_type_rule"]
-    cells = tpl["cells"]
+    if layout_decision is None:
+        synthetic_page = {
+            "page_type": page_type,
+            "reading_direction": reading_direction,
+            "panels": [
+                {
+                    "panel_id": str((panel_metadata or [{}] * n)[idx].get("panel_id") or f"panel_{idx + 1}"),
+                    **dict((panel_metadata or [{}] * n)[idx]),
+                }
+                for idx in range(n)
+            ],
+        }
+        layout_decision = solve_page_layout(
+            synthetic_page,
+            genre=genre,
+            reading_direction=reading_direction,
+            page_aspect=page_aspect,
+            long_edge_px=long_edge_px,
+            lib=library,
+            format_id=format_id,
+        )
+
+    prof = dict(layout_decision["genre_profile"])
+    pt_rule = dict(layout_decision["page_type_rule"])
+    cells = [list(row) for row in layout_decision["cells"]]
+    page_type = str(layout_decision["resolved_page_type"])
 
     # Resolve frame cosmetics (page_type overrides genre profile).
     gutter_px = int(pt_rule.get("gutter_px", prof.get("gutter_px", 48)))
@@ -281,16 +308,19 @@ def render_framed_page(
 
     # Page pixel canvas; double-spread doubles the width and adds a spine gutter.
     pw, ph = _page_pixel_size(page_aspect, long_edge_px)
-    spread = bool(pt_rule.get("spread"))
+    spread = bool(layout_decision.get("spread", pt_rule.get("spread")))
     center_gutter = int(pt_rule.get("center_gutter_px", 60)) if spread else 0
     if spread:
         pw = pw * 2 + center_gutter
 
     page = Image.new("RGBA", (pw, ph), (*bg, 255))
 
-    # RTL mirror.
+    # RTL mirror for legacy/no-solver cells. Solver-backed decisions already
+    # emit physical page-space cells.
     rd = (reading_direction or "ltr").lower()
-    if rd.startswith("rtl") or "right_to_left" in rd or rd == "right_to_left_horizontal":
+    if layout_decision is None and (
+        rd.startswith("rtl") or "right_to_left" in rd or rd == "right_to_left_horizontal"
+    ):
         cells = _mirror_cells_rtl(cells)
 
     # Content area = page minus outer margin (and spine for spreads).
@@ -413,6 +443,7 @@ def compose_framed_page_pngs(
 
     library = lib or load_grid_library()
     by_id = _paths_by_panel_id(panel_images_manifest)
+    meta_by_id = _meta_by_panel_id(panel_images_manifest)
     out_dir = Path(out_dir).resolve()
     out_dir.mkdir(parents=True, exist_ok=True)
 
@@ -430,6 +461,7 @@ def compose_framed_page_pngs(
         rd = str(page.get("reading_direction") or rd_default or "ltr")
 
         # Gather this page's ok panel image paths in declared order.
+        ok_panels: list[dict[str, Any]] = []
         paths: list[Path] = []
         for panel in page.get("panels") or []:
             pid = str(panel.get("panel_id") or "")
@@ -439,19 +471,32 @@ def compose_framed_page_pngs(
             if fp is None or not fp.is_file():
                 # non-ok panel — skip silently (matches noop/dry_run tolerance)
                 continue
+            ok_panels.append(dict(panel))
             paths.append(fp)
 
         if not paths:
             continue
 
-        # Determine capacity for this (page_type, genre) so we can spill overflow.
-        probe = select_template(
-            len(paths), page_type=page_type, genre=genre, lib=library
-        )
-        capacity = max(1, int(probe["panel_capacity"]))
-
-        for start in range(0, len(paths), capacity):
-            chunk = paths[start : start + capacity]
+        start = 0
+        while start < len(paths):
+            chunk_paths = paths[start:]
+            chunk_panels = ok_panels[start:]
+            decision = solve_page_layout(
+                {
+                    "page_type": page_type,
+                    "reading_direction": rd,
+                    "panels": chunk_panels,
+                },
+                genre=genre,
+                reading_direction=rd,
+                page_aspect=page_aspect,
+                long_edge_px=long_edge_px,
+                lib=library,
+                panel_meta_by_id=meta_by_id,
+            )
+            capacity = max(1, int(decision["panel_capacity"]))
+            chunk = chunk_paths[:capacity]
+            chunk_meta = chunk_panels[:capacity]
             loaded = [Image.open(p).convert("RGBA") for p in chunk]
             try:
                 page_img = render_framed_page(
@@ -462,6 +507,8 @@ def compose_framed_page_pngs(
                     page_aspect=page_aspect,
                     long_edge_px=long_edge_px,
                     lib=library,
+                    layout_decision=decision,
+                    panel_metadata=chunk_meta,
                 )
                 page_counter += 1
                 out_path = out_dir / f"page_{page_counter:03d}.png"
@@ -474,5 +521,6 @@ def compose_framed_page_pngs(
                     page_img.close()  # type: ignore[has-type]
                 except Exception:
                     pass
+            start += capacity
 
     return written
