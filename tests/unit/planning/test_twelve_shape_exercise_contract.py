@@ -1,4 +1,4 @@
-"""Twelve-shape beatmap must honor purpose-contract exercise caps (incl. CH1=0)."""
+"""Twelve-shape beatmap must honor purpose-contract exercise caps."""
 from __future__ import annotations
 
 from phoenix_v4.planning.beatmap_compile import (
@@ -17,8 +17,8 @@ def test_twelve_shape_grid_includes_exercise_before_cap() -> None:
     assert grid.count("EXERCISE") == 1
 
 
-def test_twelve_shape_ch1_drops_exercise_under_purpose_contract() -> None:
-    """Recognition chapter (max_exercises=0) must not keep the template EXERCISE slot."""
+def test_twelve_shape_ch1_keeps_single_exercise_when_contract_allows_it() -> None:
+    """Extended-book flagship chapter 1 keeps its single planned exercise slot."""
     fmt = load_format_spec("extended_book_2h")
     spine = load_spine("anxiety", runtime_format="extended_book_2h")
     shaped = apply_knobs(
@@ -33,8 +33,8 @@ def test_twelve_shape_ch1_drops_exercise_under_purpose_contract() -> None:
         persona_id="gen_z_professionals",
     )
     contracts = assign_chapter_purpose_contracts(len(bm.chapters), "extended_book_2h")
-    assert contracts[0].max_exercises == 0
+    assert contracts[0].max_exercises == 1
     ch1 = bm.chapters[0]
-    assert ch1.slot_definitions.count("EXERCISE") == 0, (
-        f"ch1 still has EXERCISE after purpose-contract cap: {ch1.slot_definitions}"
+    assert ch1.slot_definitions.count("EXERCISE") == 1, (
+        f"ch1 lost its planned EXERCISE slot: {ch1.slot_definitions}"
     )
