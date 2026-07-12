@@ -1,0 +1,106 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://phoenix-omega/schemas/manga/structural_bundle.schema.json",
+  "title": "Structural Composition MVP support/contact bundle",
+  "description": "Runtime legality graph for seated_table_scene / standing_room_scene. Separate from PANEL_TYPE_SYSTEM_V1.",
+  "type": "object",
+  "required": ["schema_version", "bundle_id", "structural_template_id", "nodes", "edges", "canvas"],
+  "properties": {
+    "schema_version": { "type": "string", "const": "1.0.0" },
+    "bundle_id": { "type": "string" },
+    "panel_id": { "type": "string" },
+    "panel_type_id": { "type": "string" },
+    "structural_template_id": {
+      "type": "string",
+      "enum": ["seated_table_scene", "standing_room_scene"]
+    },
+    "canvas": {
+      "type": "object",
+      "required": ["width", "height"],
+      "properties": {
+        "width": { "type": "integer", "minimum": 1 },
+        "height": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "nodes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["node_id", "category"],
+        "properties": {
+          "node_id": { "type": "string" },
+          "category": {
+            "enum": ["support_surface", "character", "prop", "occluder", "contact_shadow"]
+          },
+          "role": { "type": "string" },
+          "asset": { "type": "string" },
+          "support_polygon_pct": {
+            "type": "array",
+            "minItems": 3,
+            "items": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": { "type": "number" }
+            }
+          },
+          "contact_point_pct": {
+            "type": "array",
+            "minItems": 2,
+            "maxItems": 2,
+            "items": { "type": "number" }
+          },
+          "anchor_slots": { "type": "array" }
+        }
+      }
+    },
+    "edges": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["edge_id", "relation", "from_node", "to_node"],
+        "properties": {
+          "edge_id": { "type": "string" },
+          "relation": {
+            "enum": ["seated_on", "standing_on", "resting_on", "held_by", "occluded_by"]
+          },
+          "from_node": { "type": "string" },
+          "to_node": { "type": "string" },
+          "contact_region_pct": {
+            "type": "array",
+            "minItems": 3,
+            "items": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": { "type": "number" }
+            }
+          }
+        }
+      }
+    },
+    "placements": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["node_id", "transform"],
+        "properties": {
+          "node_id": { "type": "string" },
+          "transform": {
+            "type": "object",
+            "required": ["tx_pct", "ty_pct", "uniform_scale", "rotation_deg"],
+            "properties": {
+              "tx_pct": { "type": "number" },
+              "ty_pct": { "type": "number" },
+              "uniform_scale": { "type": "number", "exclusiveMinimum": 0 },
+              "rotation_deg": { "type": "number" },
+              "sx": { "type": "number" },
+              "sy": { "type": "number" }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "run_id": "floating_control_stillness_ep001_008",
+  "bundle_path": "artifacts/qa/manga_structural_composition_proof_2026-07-12/bundles/floating_control_stillness_ep001_008_bundle.json",
+  "expect_pass": false,
+  "started_at": "2026-07-12T07:45:57.657691+00:00",
+  "status": "hard_fail",
+  "fail_code": "CONTACT_FAIL",
+  "fail_message": "CONTACT_FAIL: edge=e_should_seat relation=seated_on: contact point not in support polygon (point-in-polygon; tolerance_px=6.0)",
+  "acceptance_layer": "EXECUTED-REAL",
+  "expected_fail": true
+}
