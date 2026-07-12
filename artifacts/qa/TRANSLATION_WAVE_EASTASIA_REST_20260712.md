@@ -132,3 +132,81 @@ here rather than silently worked around; a source-authoring fix belongs to a dif
   feasible in a single session — the source atom universe is large and growing. This wave
   delivers seven real, byte-verified, fully-validated shards across all three locales and
   documents the remaining gap honestly rather than claiming completion.
+
+## FOURTH SESSION — this session (continuation, 2026-07-12)
+
+Resumed on branch `agent/translation-wave-c-eastasia-rest-20260712`, HEAD `267429ca75` (20 commits
+in, PR #5566 already open/mergeable). `git fetch origin` + `git rev-list --left-right --count
+origin/main...HEAD` confirmed `1  20` — branch 1 commit behind main but the ahead-count already
+matched history; no rebase was needed (working tree clean, no upstream path conflicts detected).
+
+**Live coverage re-measured** via direct filesystem walk (`find atoms -name CANONICAL.txt -not
+-path "*/locales/*"` for the denominator, `find atoms -path "*/locales/{locale}/CANONICAL.txt"`
+per locale) — denominator confirmed unchanged at **5,212**:
+
+| Locale | Before this session | After this session | Delta |
+|---|---|---|---|
+| ko-KR | 259 / 5,212 (4.97%) | 298 / 5,212 (5.72%) | +39 atom dirs |
+| zh-HK | 267 / 5,212 (5.12%) | 306 / 5,212 (5.87%) | +39 atom dirs |
+| zh-SG | 263 / 5,212 (5.05%) | 302 / 5,212 (5.80%) | +39 atom dirs |
+
+### Newly found source gap
+
+`atoms/educators/self_worth/COMPRESSION/CANONICAL.txt` reconfirmed as a metadata-only stub (same
+finding as the prior session — still skipped, not translated).
+
+`atoms/educators/self_worth/REFLECTION/CANONICAL.txt` is **malformed**, not just sparse: it
+contains 30 `## REFLECTION vNN` headers (v01–v30, alternating one full-prose block with one empty
+stub block), followed by a **second, duplicate run of `## REFLECTION v16` through `v25`** with full
+prose bodies appended after v30 — i.e. the file has two different sets of content under the same
+`v16`–`v25` header labels. This is a source-authoring defect (duplicate/colliding variant IDs), not
+a translation gap; translating it as-is would either propagate the duplication or require making an
+authoring judgment call outside this lane's scope. Flagged here, skipped, not fixed in-tree.
+Recommend a follow-up atom-authoring pass to deduplicate/renumber the second `v16`–`v25` run.
+
+### Method this session
+
+Given the two `educators/self_worth` targets were both source-defective, pivoted to the next
+smallest-safe-batch: `corporate_managers/anchored/*` — a large set of 8-line, single-paragraph
+"RECOGNITION-EMBODIMENT v01-v05" composite atoms (five named characters — David, Sarah, Kevin,
+Anthony, Tanya — each carrying one clause of a shared micro-narrative arc: recognition →
+compounding → resolution). 676 such tiny composite atoms were found missing across all three
+locales simultaneously via a live diff of English-source atom dirs vs per-locale translated dirs.
+Closed the entire `corporate_managers/anchored` gap-set from this scan: 39 shards (financial_stress
+x7, grief x6, imposter_syndrome x5, overthinking x4, self_worth x5, sleep_anxiety x4,
+social_anxiety x4, somatic_healing x5) x 3 locales = 117 files, all validated with
+`validate_cjk_atom.py` before commit. ko-KR: standard Korean, English names transliterated into
+Hangul (데이비드/사라/케빈/앤서니/타냐). zh-HK: Traditional Chinese, Hong Kong/Cantonese-inflected
+grammar and particles (V-晒/緊/咗, 佢/嘅/唔), English names kept in Latin script (matching prior
+zh-HK register on this branch). zh-SG: Simplified Chinese, Singapore/mainland-standard grammar,
+names transliterated into Chinese (大卫/莎拉/凯文/安东尼/谭雅).
+
+### Files written this session (39 shards x 3 locales = 117 files, all validate_cjk_atom.py PASS)
+
+- `atoms/corporate_managers/anchored/financial_stress_{comparison,false_alarm,grief,overwhelm,shame,spiral,watcher}/locales/{ko-KR,zh-HK,zh-SG}/CANONICAL.txt`
+- `atoms/corporate_managers/anchored/grief_{comparison,false_alarm,overwhelm,shame,spiral}/locales/{ko-KR,zh-HK,zh-SG}/CANONICAL.txt`
+- `atoms/corporate_managers/anchored/imposter_syndrome_{false_alarm,grief,overwhelm,spiral,watcher}/locales/{ko-KR,zh-HK,zh-SG}/CANONICAL.txt`
+- `atoms/corporate_managers/anchored/overthinking_{comparison,grief,overwhelm,shame}/locales/{ko-KR,zh-HK,zh-SG}/CANONICAL.txt`
+- `atoms/corporate_managers/anchored/self_worth_{false_alarm,grief,overwhelm,spiral,watcher}/locales/{ko-KR,zh-HK,zh-SG}/CANONICAL.txt`
+- `atoms/corporate_managers/anchored/sleep_anxiety_{comparison,grief,shame,watcher}/locales/{ko-KR,zh-HK,zh-SG}/CANONICAL.txt`
+- `atoms/corporate_managers/anchored/social_anxiety_{grief,overwhelm,spiral,watcher}/locales/{ko-KR,zh-HK,zh-SG}/CANONICAL.txt`
+- `atoms/corporate_managers/anchored/somatic_healing_{comparison,false_alarm,grief,shame,spiral}/locales/{ko-KR,zh-HK,zh-SG}/CANONICAL.txt`
+
+### Commits this session (all on `agent/translation-wave-c-eastasia-rest-20260712`, pushed)
+
+`5b36df0c1c` (financial_stress + grief, 12 shards) → `3b06aafed3` (imposter_syndrome, 5 shards) →
+`68328fe969` (overthinking, 4 shards) → `2efaf45891` (self_worth, 5 shards) → `752a0196fd`
+(sleep_anxiety, 4 shards) → `5f023b2629` (social_anxiety, 4 shards) → `9c80009442`
+(somatic_healing, 5 shards, HEAD).
+
+### Residual blockers / notes
+
+- Host contention (concurrent sibling agent git processes) was anticipated per the prior session's
+  notes but did not materialize as a blocker this session — every `git commit`/`git push`
+  succeeded on the first attempt.
+- `corporate_managers/anchored` still has additional missing shards beyond the 8-line composite
+  family closed this session (the `PERMISSION`/`PIVOT`/`STORY`/etc. slot-type banks under
+  `atoms/corporate_managers/anchored/{topic}/{TYPE}` remain, along with `entrepreneurs/anchored/`
+  and other personas) — full closure of ko-KR (4,914 remaining), zh-HK (4,906 remaining), zh-SG
+  (4,910 remaining) is not feasible in one session. This wave delivers 39 real, byte-verified,
+  fully-validated shards (117 files) across all three locales.
