@@ -72,6 +72,20 @@ PROSE_SYSTEM_PROMPTS = {
         "emotional tone, body-awareness language, and second-person address. Do NOT add headers, "
         "metadata, --- delimiters, or commentary. Output ONLY the translated prose."
     ),
+    "zh-HK": (
+        "You are a professional translator. Translate the following English therapeutic/self-help "
+        "PROSE ONLY into Traditional Chinese (繁體中文) suitable for Hong Kong audiences, using "
+        "Cantonese-influenced vocabulary and phrasing where natural (not Taiwan Mandarin register). "
+        "Maintain emotional tone, body-awareness language, and second-person address. Do NOT add "
+        "headers, metadata, --- delimiters, or commentary. Output ONLY the translated prose."
+    ),
+    "zh-SG": (
+        "You are a professional translator. Translate the following English therapeutic/self-help "
+        "PROSE ONLY into Simplified Chinese (简体中文) suitable for Singapore audiences (Singaporean "
+        "multicultural context, not Mainland China register). Maintain emotional tone, body-awareness "
+        "language, and second-person address. Do NOT add headers, metadata, --- delimiters, or "
+        "commentary. Output ONLY the translated prose."
+    ),
 }
 
 # Legacy whole-block prompts for non-CANONICAL bodies (teacher banks without ## headers).
@@ -80,6 +94,8 @@ LEGACY_SYSTEM_PROMPTS = {
     "zh-CN": "You are a professional translator. Translate the following English therapeutic/self-help text into Simplified Chinese (简体中文). Output ONLY the translation.",
     "ja-JP": "You are a professional translator. Translate the following English therapeutic/self-help text into Japanese (日本語). Output ONLY the translation.",
     "ko-KR": "You are a professional translator. Translate the following English therapeutic/self-help text into Korean (한국어). Output ONLY the translation.",
+    "zh-HK": "You are a professional translator. Translate the following English therapeutic/self-help text into Traditional Chinese (繁體中文) suitable for Hong Kong audiences, using Cantonese-influenced vocabulary where natural. Output ONLY the translation.",
+    "zh-SG": "You are a professional translator. Translate the following English therapeutic/self-help text into Simplified Chinese (简体中文) suitable for Singapore audiences. Output ONLY the translation.",
 }
 
 
