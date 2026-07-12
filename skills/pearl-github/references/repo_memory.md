@@ -122,6 +122,105 @@ Files affected:
 - `atoms/corporate_managers/{burnout,financial_anxiety}/SCENE/CANONICAL.txt` (D3)
 - `skills/deep-research/SKILL.md` and reference files (×3 losses)
 
+### 2026-05-08 — Stale `.git/index.lock` vs live IDE-driven lock churn (Pearl_DevOps)
+
+What happened:
+
+- A `.git/index.lock` was sitting at `/Users/ahjan/phoenix_omega/.git/index.lock`, size 0, mtime ~8 hours old, with `lsof` reporting **no holder**.
+- Concurrently, the canonical checkout had **74+ live `git status --porcelain` processes** running, all spawned by Cursor's `gitWorker.js` (PPID `76215`) and Xcode's git plugin (`git-lfs filter-process` siblings). The IDE refreshes the index continuously, which legitimately creates and releases `index.lock` many times per minute.
+- Naïve `rm -f` on a lock would, in this environment, race a live IDE git operation and corrupt the index.
+
+Recovery pattern that worked:
+
+```bash
+lsof /Users/ahjan/phoenix_omega/.git/index.lock        # MUST return no rows (no holder)
+ls -la /Users/ahjan/phoenix_omega/.git/index.lock      # size==0 and age > 30 min => stale
+rm -f /Users/ahjan/phoenix_omega/.git/index.lock
+# Verify with light probes; do NOT use `git status` as the witness if the IDE is hot:
+git -C /Users/ahjan/phoenix_omega rev-parse HEAD       # < 1s — does not need index lock
+git -C /Users/ahjan/phoenix_omega stash list           # quick — does not need index lock
+GIT_TERMINAL_PROMPT=0 git -C /Users/ahjan/phoenix_omega fetch origin --dry-run
+```
+
+Permanent lessons:
+
+- A reappearing `index.lock` after removal is **expected** under heavy IDE load and is **not necessarily stale**. Re-run `lsof` before considering removal again.
+- `git status` is a **bad witness** for "lock is healthy" when 70+ concurrent IDE-driven status processes are flooding the working tree. It blocks on filesystem and lock contention even when nothing pathological is happening. Prefer `rev-parse HEAD`, `stash list`, and `fetch --dry-run`.
+- Three-way decision rule for an existing lock:
+  1. `lsof` shows a holder → **leave alone** (live op, will release).
+  2. `lsof` empty + size 0 + mtime > 30 min → **safe `rm -f`**.
+  3. `lsof` empty + size > 0 → **escalate**: this is a partially-written index op that may need `git fsck` follow-up; do not remove without operator review.
+
+### 2026-05-08 — `git clone --no-checkout` leaves the index EMPTY (near-miss on Rule #0)
+
+What happened:
+
+- Pearl_DevOps could not commit/push from canonical `phoenix_omega` because the IDE + four other parallel agents had wedged `git worktree add` for 35+ minutes with no progress (see next entry).
+- Fallback was a fresh clone: `GIT_LFS_SKIP_SMUDGE=1 git clone --no-checkout --depth 1 --single-branch --branch main https://github.com/Ahjan108/phoenix_omega_v4.8.git /Users/ahjan/phoenix_hyg_v2`.
+- After `git checkout -b agent/<branch>` and `git add artifacts/qa/<one-file>.md`, the staged diff showed **55,232 files changed (+234 / −7,728,766)** — the entire repo as deletions plus the one new file.
+- Root cause: `git clone --no-checkout` does **not** populate the index from `HEAD`. The index is left effectively empty. Adding a single file then commits a near-empty tree, i.e. a catastrophic mass-deletion identical in shape to the PR #245 incident.
+
+Recovery pattern that worked (caught BEFORE commit):
+
+```bash
+git -C <clone> ls-files | wc -l                # if << HEAD tree size, index is empty
+git -C <clone> read-tree HEAD                  # populates index from HEAD without touching working tree
+git -C <clone> diff --cached --stat            # MUST be empty after read-tree
+git -C <clone> add <single-new-file>
+git -C <clone> diff --cached --stat            # MUST show only the new file
+```
+
+Permanent lessons:
+
+- **Always run `git diff --cached --stat | tail -3` immediately before `git commit`** in any clone or worktree whose state you did not personally hand-craft. If the count is large or shows mass deletions you did not intend, **STOP**.
+- After any `git clone --no-checkout` (or any clone where the working tree is not fully populated), run `git read-tree HEAD` before staging anything.
+- This is now a Rule #0 sub-rule: **a one-file commit that triggers a 50,000-file deletion diff is the same incident class as PR #245.** Treat it the same way.
+
+### 2026-05-08 — `git worktree add` wedges under heavy concurrent agent + IDE load
+
+What happened:
+
+- Pearl_DevOps ran `git worktree add /Users/ahjan/phoenix_omega_hygiene_audit_wt -b agent/<branch> origin/main` from canonical.
+- At the same moment, **at least 4 other agent sessions** were running their own `git worktree add`, `git checkout -B`, `git fetch origin && git checkout -B agent/<branch> origin/main`, and `git reset --hard origin/main` on the same `.git`. Plus Cursor's 74 concurrent `git status --porcelain` workers.
+- The worktree's admin dir at `/Users/ahjan/phoenix_omega/.git/worktrees/phoenix_omega_hygiene_audit_wt` was created within seconds (HEAD, commondir, gitdir, index.lock, `locked initializing`), but the working-tree checkout phase **stalled for 35+ minutes** with no admin-dir mtime updates. `lsof` on the git pid showed it endlessly reading pack `.idx` files but never advancing past ~25% of file count.
+- A second-line attempted recovery (`git worktree prune` + manual cleanup) also stalled in the sandbox, leaving a partially-checked-out directory at `/Users/ahjan/phoenix_omega_hygiene_audit_wt`.
+
+Recovery pattern that worked:
+
+- Killed the stuck `git worktree add` process.
+- Bypassed canonical entirely: `GIT_LFS_SKIP_SMUDGE=1 git clone --no-checkout --depth 1 --single-branch --branch main https://github.com/Ahjan108/phoenix_omega_v4.8.git <fresh dir>` (≈ 8 min including network transfer).
+- Did all branch / commit / push work in the fresh clone (after `git read-tree HEAD` per the previous entry).
+
+Permanent lessons:
+
+- When canonical `phoenix_omega` is hot (multiple `git worktree add` / `git reset --hard` from sibling agents + IDE git workers), do **not** attempt yet another `git worktree add` from canonical. It will queue indefinitely on `.git/worktrees/`-level coordination and `index.lock`-class contention.
+- Preferred fallback: a fresh `--no-checkout --depth 1 --single-branch GIT_LFS_SKIP_SMUDGE=1` clone outside `~/phoenix_omega` (and outside the sandbox-write boundary you must remember to lift). Combined with the `read-tree HEAD` rule above, this is the safest contention-free path for small documentation PRs.
+- Detection signal: if `git worktree add` is still alive after 5 minutes and the admin-dir `mtime` has not advanced in 2 minutes, consider it wedged.
+
+### 2026-05-08 — "Orphan worktree" often means tracked-by-secondary-repo, not abandoned
+
+What happened:
+
+- Operator reported `/Users/ahjan/phoenix_omega_pearl_star_install_prep_wt` was on disk but absent from `git -C /Users/ahjan/phoenix_omega worktree list`. Looked like a classic orphan candidate for `rm -rf`.
+- Reading the worktree's `.git` gitfile revealed `gitdir: /Users/ahjan/phoenix_omega_gitops_tmp/.git/worktrees/phoenix_omega_pearl_star_install_prep_wt` — the worktree was tracked by a **secondary clone** at `/Users/ahjan/phoenix_omega_gitops_tmp` (whose own `origin` points at the local canonical), not by canonical itself.
+- `git -C /Users/ahjan/phoenix_omega_gitops_tmp worktree list` listed it cleanly. `git status --short` from inside it returned exit 0, empty output (clean).
+- Unilateral `rm -rf` would have orphaned an admin entry inside `phoenix_omega_gitops_tmp/.git/worktrees/` and left the secondary clone in a broken state.
+
+Recovery pattern that worked:
+
+- Did **not** delete. Documented as "orphan-vs-canonical / tracked-by-secondary-repo, clean".
+- Recommended coordinated cleanup to the operator: `git -C /Users/ahjan/phoenix_omega_gitops_tmp worktree remove <path>` first, then optionally retire the secondary clone.
+
+Permanent lessons:
+
+- An on-disk `_wt` directory that is missing from canonical `git worktree list` is **not necessarily orphan**. Always:
+  ```bash
+  cat <wt>/.git                                       # read the gitfile pointer
+  ls -la $(awk -F': ' '{print $2}' <wt>/.git)         # confirm admin dir exists
+  ```
+  If the gitfile points to **any** repo other than canonical, that repo owns the worktree.
+- Sibling secondary clones in `~/phoenix_omega_*` (e.g. `phoenix_omega_gitops_tmp`, `phoenix_omega_pearl_prime_contract`, `phoenix_omega_preflight_runtime`) are part of the local working set and may own `_wt` directories that look orphan from canonical's perspective. Audit them before pruning anything that looks abandoned.
+
 ## Branch Memory Snapshot — 2026-03-20
 
 ### Healthy / intentional
