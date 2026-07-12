@@ -163,7 +163,7 @@ def _score_hook_friction(chapter_text: str) -> int:
         return _PASS
     if hits >= 1:
         return _ADEQUATE
-    words_first = len(sents[0].split())
+    words_first = count_words(sents[0])
     if words_first <= 6:
         return _ADEQUATE
     return _FAIL

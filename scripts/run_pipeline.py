@@ -3482,7 +3482,7 @@ def main() -> int:
             print(f"Rendered book (txt): {book_path}")
 
             # Budget report (word_count matches delivered prose; enables word_count_gate)
-            _wc_prose = len(_prose_reg_out.split())
+            _wc_prose = count_words(_prose_reg_out)
             budget_path = render_dir / "budget.json"
             budget_payload: dict = {
                 "word_count": _wc_prose,

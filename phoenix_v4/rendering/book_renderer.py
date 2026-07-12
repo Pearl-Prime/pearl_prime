@@ -432,7 +432,7 @@ def _dedup_repeated_blocks(
 
     _CHAPTER_HEADING_RE = re.compile(r"^Chapter\s+\d+", re.IGNORECASE)
 
-    pre_wc = len(text.split())
+    pre_wc = count_words(text)
     parts = re.split(r"\n{2,}", text)
     # Sprint-1 fix: reset seen-set at each chapter boundary so depth paragraphs
     # shared across chapters are not removed.  Within a single chapter the same
@@ -449,7 +449,7 @@ def _dedup_repeated_blocks(
             seen = set()
             kept.append(para)
             continue
-        wc = len(para.split())
+        wc = count_words(para)
         if wc < min_words:
             kept.append(para)
             continue
@@ -461,7 +461,7 @@ def _dedup_repeated_blocks(
         kept.append(para)
 
     deduped = "\n\n".join(kept)
-    post_wc = len(deduped.split())
+    post_wc = count_words(deduped)
     unique_ratio = (post_wc / pre_wc) if pre_wc else 1.0
     if word_floor > 0 and post_wc < word_floor:
         logger.warning(
@@ -533,7 +533,7 @@ def _keep_cap_for_paragraph(paragraph: str, *, base_keep: int) -> int:
       (defaults to 2; env override `PHOENIX_ATOM_PARAGRAPH_KEEP`).
     - Paragraphs longer than 200 words → `base_keep` (defaults to 1).
     """
-    wc = len(paragraph.split())
+    wc = count_words(paragraph)
     if _ATOM_PARA_MIN_WORDS <= wc <= _ATOM_PARA_MAX_WORDS:
         return max(base_keep, _atom_paragraph_keep_default())
     return base_keep
@@ -670,7 +670,7 @@ def _dedup_paragraphs_book_wide(
         if _is_practice_library_layer_paragraph(stripped):
             kept.append(stripped)
             continue
-        wc = len(stripped.split())
+        wc = count_words(stripped)
         cc = len(stripped)
         # F1-signature class: short, dense, multi-sentence re-stamp (HOOK/EXERCISE/
         # doctrine) that escapes the word floor below but fires a large F1 cluster.
@@ -1758,7 +1758,7 @@ def _merge_tiny_bridge_paragraphs(chapter_body: str) -> str:
         # Only merge a SHORT line that is not itself a heading marker, and only when there is a
         # preceding body paragraph to attach to (never merge into the heading at index 0 alone).
         if (
-            len(stripped.split()) <= _CHOPPY_MERGE_MAX_WORDS
+            count_words(stripped) <= _CHOPPY_MERGE_MAX_WORDS
             and not stripped.startswith("#")
             and len(out) >= 1
         ):
@@ -1982,7 +1982,7 @@ def _build_deficit_report(
                 break
             aid = atom_ids[idx]
             prose = prose_map.get(aid, "")
-            wc = len(prose.split()) if prose else 0
+            wc = count_words(prose) if prose else 0
             ch_data["slots"].append({"slot": slot_type, "atom_id": aid, "word_count": wc})
             ch_data["chapter_word_count"] += wc
             slot_totals[slot_type] = slot_totals.get(slot_type, 0) + wc
