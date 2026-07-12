@@ -543,9 +543,10 @@ def compile_beatmap(
         )
 
         if twelve_shape_grid:
-            # Twelve-shape promise_engine grids are template-authoritative; purpose
-            # contracts govern the somatic grid path only (flagship CH1 keeps EXERCISE).
-            ordered = list(twelve_shape_grid)
+            # Twelve-shape grids are template-authoritative for slot *order*, but
+            # purpose-contract max_exercises still caps EXERCISE multiplicity
+            # (recognition / resolution chapters stay exercise-free).
+            ordered = _cap_row_for_chapter(list(twelve_shape_grid), ch.number)
             word_by_slot = _allocate_words(ordered, wmap, ch_target, [])
             req_set = set(required)
             story_i = 0

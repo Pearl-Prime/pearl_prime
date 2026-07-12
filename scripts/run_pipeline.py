@@ -44,6 +44,8 @@ the release path). See docs/PEARL_PRIME_BEATLINE_CEILING_CALIBRATION_2026-07-02.
 """
 from __future__ import annotations
 
+from phoenix_v4.text.wordcount import count_words
+
 import argparse
 import json
 import os
@@ -1538,7 +1540,7 @@ def _run_spine_pipeline_mode(
         )
         _word_bounds = _book_word_range(runtime_fmt)
         if _word_bounds:
-            _under = len(prose.split()) < _word_bounds[0]
+            _under = count_words(prose) < _word_bounds[0]
             if _spine_floor_pad_enabled:
                 prose = ensure_word_count_floor(prose, floor=_word_bounds[0], seed=f"{seed}:floor")
             elif _under:
@@ -1546,7 +1548,7 @@ def _run_spine_pipeline_mode(
                 _governance_report.setdefault("spine_word_floor_signals", []).append(
                     {
                         "stage": "post_flow_pre_gate",
-                        "word_count": len(prose.split()),
+                        "word_count": count_words(prose),
                         "floor": _word_bounds[0],
                         "action": "not_padded",
                         "reason": (
@@ -1570,7 +1572,7 @@ def _run_spine_pipeline_mode(
         # F7 cap can drop one_hour_book below word_range floor. G1: on spine, do NOT re-pad
         # (see the disabled first call site above) — surface the under-length as a thin-pool
         # signal. Only re-pad when the PHOENIX_SPINE_WORD_FLOOR_PAD kill-switch is set.
-        if _word_bounds and len(prose.split()) < _word_bounds[0]:
+        if _word_bounds and count_words(prose) < _word_bounds[0]:
             if _spine_floor_pad_enabled:
                 prose = ensure_word_count_floor(prose, floor=_word_bounds[0], seed=f"{seed}:floor_final")
                 prose = ensure_chapter_flow_cues(
@@ -1582,7 +1584,7 @@ def _run_spine_pipeline_mode(
                 _governance_report.setdefault("spine_word_floor_signals", []).append(
                     {
                         "stage": "post_f7_pre_gate",
-                        "word_count": len(prose.split()),
+                        "word_count": count_words(prose),
                         "floor": _word_bounds[0],
                         "action": "not_padded",
                         "reason": "spine word-floor padder disabled (G1/#4566); thin-pool signal",
@@ -1646,7 +1648,7 @@ def _run_spine_pipeline_mode(
                 + "; ".join(_f7_preservation_violations),
                 file=sys.stderr,
             )
-    word_count = len(prose.split())
+    word_count = count_words(prose)
     _quality_gate_failures: list[str] = []
     _chapter_flow_status = "SKIPPED"
     _chapter_flow_report_name = "chapter_flow_report.json"
@@ -2331,7 +2333,7 @@ def _run_spine_pipeline_mode(
         # budget.json honest about the artifact on disk (test_spine_pipeline_integration
         # ::test_spine_mode_budget_word_count_matches_book) and also corrects the
         # pre-existing music/locale-overlay drift.
-        budget_obj["word_count"] = len(_prose_out.split())
+        budget_obj["word_count"] = count_words(_prose_out)
         budget_obj["body_word_count"] = word_count
         budget_obj["pre_depth_total_words"] = pre_depth_words
         budget_obj["post_depth_total_words"] = post_depth_words

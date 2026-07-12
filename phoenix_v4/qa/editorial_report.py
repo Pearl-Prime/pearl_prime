@@ -25,6 +25,8 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
+from phoenix_v4.text.wordcount import count_words
+
 # ---------------------------------------------------------------------------
 # Score constants
 # ---------------------------------------------------------------------------
@@ -384,7 +386,7 @@ def _score_cadence_variety(chapter_text: str) -> int:
     sents = _sentences_from_text(chapter_text)
     if len(sents) < 5:
         return _ADEQUATE
-    lengths = [len(s.split()) for s in sents]
+    lengths = [count_words(s) for s in sents]
     if not lengths:
         return _FAIL
     std_dev = statistics.stdev(lengths) if len(lengths) > 1 else 0.0
@@ -585,7 +587,7 @@ def generate_editorial_report(
 
     chapter_assessments: List[ChapterAssessment] = []
     for idx, ch_text in enumerate(chapters):
-        wc = len(ch_text.split())
+        wc = count_words(ch_text)
         ca = ChapterAssessment(
             chapter_index=idx,
             hook_friction=_score_hook_friction(ch_text),
