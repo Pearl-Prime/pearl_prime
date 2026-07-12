@@ -5,6 +5,10 @@ Mirrors CI parse-sweep rules (assembly_compiler._parse_canonical_txt +
 over-match signature scan). Use before writing or pulling locale atoms so
 parse-failing translations never reach origin/main.
 
+Slot-type banks (HOOK/PIVOT/STORY/TAKEAWAY/…) are validated via the slot-role
+schema (empty metadata allowed). Story-engine banks keep the strict frozen
+story-role + path contract.
+
 Usage:
     python3 scripts/localization/validate_cjk_atom.py path/to/locales/ja-JP/CANONICAL.txt
     python3 scripts/localization/validate_cjk_atom.py --paths-file /tmp/backlog.txt
@@ -21,7 +25,10 @@ REPO_ROOT = Path(__file__).resolve().parents[2]
 def validate_locale_atom(path: Path) -> tuple[bool, list[str]]:
     """Return (ok, failure_reasons). ok=True means safe to commit/pull."""
     sys.path.insert(0, str(REPO_ROOT))
-    from phoenix_v4.planning.assembly_compiler import _parse_canonical_txt
+    from phoenix_v4.planning.assembly_compiler import (
+        _is_slot_atom_bank,
+        _parse_canonical_txt,
+    )
     from scripts.ci.check_canonical_atom_parse_sweep import (
         is_baseline_parse_fail,
         is_english_story_pool,
@@ -32,6 +39,7 @@ def validate_locale_atom(path: Path) -> tuple[bool, list[str]]:
     rel = str(path.resolve().relative_to(REPO_ROOT))
     baseline = load_baseline()
     reasons: list[str] = []
+    slot_bank = _is_slot_atom_bank(path)
 
     try:
         text = path.read_text(encoding="utf-8")
@@ -46,8 +54,10 @@ def validate_locale_atom(path: Path) -> tuple[bool, list[str]]:
         parse_failed = True
         parse_exc = str(exc)
 
-    om = overmatch_signature_hits(text)
-    if om > 0 and rel not in baseline:
+    # Slot banks intentionally use empty metadata blocks; the over-match
+    # fingerprint targets story-engine DEFECT-7 corruption, not slot shape.
+    om = 0 if slot_bank else overmatch_signature_hits(text)
+    if om > 0 and not is_baseline_parse_fail(rel, baseline):
         reasons.append("overmatch_signature")
     if om > 0 and is_english_story_pool(path):
         reasons.append("story_pool_overmatch")
