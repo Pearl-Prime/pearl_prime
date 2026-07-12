@@ -247,16 +247,53 @@ def _is_bare_block_header(stripped: str, next_nonempty: str) -> bool:
     return m.group(1) in _BARE_BLOCK_HEADER_TOKENS
 
 
-def _parse_canonical_txt(path: Path, *, slot_type: Optional[str] = None) -> list[dict]:
+class CanonicalParseError(ValueError):
+    """Header-present CANONICAL.txt block produced no usable prose atom."""
+
+
+# Lines that look like atom metadata (`key: value`), not prose paragraphs.
+_META_LINE_RE = _re.compile(r"^[\w.-]+\s*:\s*.*$")
+
+
+def _looks_like_metadata_only(lines: list[str]) -> bool:
+    """True when every non-empty line is a short YAML-ish ``key: value`` row."""
+    nonempty = [ln.strip() for ln in lines if ln.strip()]
+    if not nonempty:
+        return True
+    return all(
+        _META_LINE_RE.match(ln) or ln.startswith("#")
+        for ln in nonempty
+    )
+
+
+def _parse_canonical_txt(
+    path: Path,
+    *,
+    slot_type: Optional[str] = None,
+    text: Optional[str] = None,
+) -> list[dict]:
     """Parse atoms/persona/topic/TYPE/CANONICAL.txt into list of atom dicts.
 
-    Format:
+    Supported delimiter shapes (explicit):
+
+    **Two-delimiter (canonical):**
         ## TYPE vNN
         ---
         optional metadata
         ---
         prose body
         ---
+
+    **Single-delimiter / single-section legacy:**
+        ## TYPE vNN
+        ---
+        prose body
+        ---          # optional closing delimiter
+
+    In the legacy shape, text after the first ``---`` is prose (not metadata).
+    A header is never evidence of usable depth: header-present blocks with no
+    prose raise ``CanonicalParseError`` instead of being silently dropped
+    (educators×imposter_syndrome REFLECTION failure mode / #5530).
 
     Also tolerant of MALFORMED banks where the "## " prefix is missing from a
     block header (DEFECT 7 data corruption): a standalone ``TYPE vNN`` line whose
@@ -266,9 +303,10 @@ def _parse_canonical_txt(path: Path, *, slot_type: Optional[str] = None) -> list
     """
     from phoenix_v4.planning.scene_atom_header_parser import attach_scene_metadata
 
-    if not path.exists():
-        return []
-    text = path.read_text(encoding="utf-8")
+    if text is None:
+        if not path.exists():
+            return []
+        text = path.read_text(encoding="utf-8")
     raw_lines = text.splitlines()
     blocks: list[dict] = []
     current_id = ""
@@ -276,25 +314,112 @@ def _parse_canonical_txt(path: Path, *, slot_type: Optional[str] = None) -> list
     in_body = False
     body_lines: list[str] = []
     meta_lines: list[str] = []
+    pre_delimiter_lines: list[str] = []
     delimiter_count = 0
+    header_count = 0
+    malformed: list[str] = []
     st_upper = (slot_type or "").strip().upper()
 
-    def _flush_block() -> None:
-        nonlocal current_id, body_lines, meta_lines
-        if not current_id or not body_lines:
+    def _flush_block(*, next_header: bool = False) -> None:
+        nonlocal current_id, body_lines, meta_lines, pre_delimiter_lines, delimiter_count
+        if not current_id:
             return
-        content = "\n".join(body_lines).strip()
-        if not content:
-            return
+
+        body_text = "\n".join(body_lines).strip()
+        meta_text = "\n".join(meta_lines).strip()
+        pre_text = "\n".join(pre_delimiter_lines).strip()
+        content = ""
         meta: dict = {}
-        if meta_lines and yaml is not None:
-            try:
-                parsed = yaml.safe_load("\n".join(meta_lines))
-                if isinstance(parsed, dict):
-                    meta = parsed
-            except Exception:
-                meta = {}
-        atom = {"atom_id": current_id, "content": content, "metadata": meta}
+        shape = ""
+
+        metadata_prefix: list[str] = []
+        pre_prose_lines: list[str] = []
+        if pre_delimiter_lines:
+            saw_prose = False
+            for raw in pre_delimiter_lines:
+                stripped = raw.strip()
+                if not stripped:
+                    if saw_prose:
+                        pre_prose_lines.append(raw)
+                    continue
+                if not saw_prose and _META_LINE_RE.match(stripped):
+                    metadata_prefix.append(raw)
+                    continue
+                saw_prose = True
+                pre_prose_lines.append(raw)
+
+        if delimiter_count >= 2 and body_text:
+            # Canonical two-delimiter: metadata then prose.
+            shape = "two-delimiter"
+            content = body_text
+            if meta_lines and yaml is not None:
+                try:
+                    parsed = yaml.safe_load("\n".join(meta_lines))
+                    if isinstance(parsed, dict):
+                        meta = parsed
+                except Exception:
+                    meta = {}
+        elif delimiter_count >= 1 and pre_prose_lines:
+            # Legacy authored shape: metadata/prose appear directly after the
+            # header, followed only by closing delimiters.
+            shape = "pre-delimiter-legacy"
+            content = "\n".join(pre_prose_lines).strip()
+            if metadata_prefix and yaml is not None:
+                try:
+                    parsed = yaml.safe_load("\n".join(metadata_prefix))
+                    if isinstance(parsed, dict):
+                        meta = parsed
+                except Exception:
+                    meta = {}
+        elif delimiter_count == 1 and meta_text:
+            # Explicit single-delimiter legacy: sole section after --- is prose.
+            shape = "single-delimiter"
+            content = meta_text
+        elif delimiter_count >= 1 and not body_text and not meta_text:
+            # Some legacy banks interleave real atoms with empty placeholder
+            # headers (`## TYPE vNN` + `---`) for unused even-numbered slots.
+            # Skip those placeholders locally, but still fail loud at EOF if
+            # the file resolves to zero usable atoms overall.
+            return
+        elif delimiter_count >= 2 and not body_text and meta_text:
+            if _looks_like_metadata_only(meta_lines):
+                if next_header:
+                    # Another legacy placeholder shape stores only metadata for
+                    # an unused slot, then immediately starts the next header.
+                    # Skip those interleaved placeholders, but still fail loud
+                    # if the file ends on metadata-without-prose.
+                    return
+                malformed.append(
+                    f"{current_id!r}: two-delimiter block has metadata but empty "
+                    "prose (header count is not usable depth)"
+                )
+                return
+            # Legacy single-section written as `--- / prose / ---` (prose sat in
+            # the first segment; second delimiter opened an empty body).
+            shape = "single-section-legacy"
+            content = meta_text
+        elif delimiter_count == 0 and (body_text or meta_text):
+            shape = "no-delimiter"
+            content = (body_text or meta_text)
+        else:
+            malformed.append(
+                f"{current_id!r}: header present but no usable prose "
+                f"(delimiters={delimiter_count}, shape unresolved)"
+            )
+            return
+
+        if not content:
+            malformed.append(
+                f"{current_id!r}: header present but empty prose after {shape or 'parse'}"
+            )
+            return
+
+        atom = {
+            "atom_id": current_id,
+            "content": content,
+            "metadata": meta,
+            "delimiter_shape": shape,
+        }
         if st_upper == "SCENE" or current_id.upper().startswith("SCENE "):
             atom = attach_scene_metadata(atom, f"## {current_id}")
         blocks.append(atom)
@@ -308,34 +433,52 @@ def _parse_canonical_txt(path: Path, *, slot_type: Optional[str] = None) -> list
     for i, line in enumerate(raw_lines):
         stripped = line.strip()
         if stripped.startswith("## "):
-            _flush_block()
+            _flush_block(next_header=True)
             current_header = stripped
             current_id = stripped.replace("## ", "").strip()
+            header_count += 1
             body_lines = []
             meta_lines = []
+            pre_delimiter_lines = []
             in_body = False
             delimiter_count = 0
         elif _is_bare_block_header(stripped, _next_nonempty(i)):
             # Malformed bank: header line lost its "## " prefix. Treat exactly
             # like a "## " header so the raw atom-id label cannot be absorbed
             # into the prior block body.
-            _flush_block()
+            _flush_block(next_header=True)
             current_header = stripped
             current_id = stripped
+            header_count += 1
             body_lines = []
             meta_lines = []
+            pre_delimiter_lines = []
             in_body = False
             delimiter_count = 0
         elif stripped == "---":
             delimiter_count += 1
             if delimiter_count >= 2:
                 in_body = True
+        elif delimiter_count == 0 and current_id:
+            pre_delimiter_lines.append(line)
         elif delimiter_count == 1 and not in_body:
             meta_lines.append(line)
         elif in_body:
             body_lines.append(line)
 
     _flush_block()
+    if malformed:
+        raise CanonicalParseError(
+            f"Malformed CANONICAL.txt at {path}: "
+            + "; ".join(malformed)
+            + ". Use HEADER + --- + prose (single-delimiter legacy) or "
+            "HEADER + --- + metadata + --- + prose (two-delimiter)."
+        )
+    if header_count and not blocks:
+        raise CanonicalParseError(
+            f"Malformed CANONICAL.txt at {path}: found {header_count} header(s) "
+            "but parsed zero usable atoms (header count ≠ usable depth)."
+        )
     return blocks
 
 

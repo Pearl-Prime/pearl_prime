@@ -1,0 +1,838 @@
+{
+  "generated_at": "2026-07-12T14:06:25.890001+00:00",
+  "parser": "phoenix_v4.planning.registry_resolver._parse_canonical_txt",
+  "canonical_parse_error_type": "CanonicalParseError",
+  "slots_scanned": [
+    "ANGLE_CALLBACK",
+    "ANGLE_DEFINITION",
+    "COMPRESSION",
+    "DWELL",
+    "EXERCISE",
+    "HOOK",
+    "INTEGRATION",
+    "PERMISSION",
+    "PIVOT",
+    "REFLECTION",
+    "SCENE",
+    "STORY",
+    "TAKEAWAY",
+    "TEACHER_DOCTRINE",
+    "THREAD",
+    "TRANSITION"
+  ],
+  "primary_slots": [
+    "REFLECTION"
+  ],
+  "consumer_paths": [
+    {
+      "path": "phoenix_v4/planning/registry_resolver.py::_parse_canonical_txt",
+      "role": "persona + composite doctrine/reflection loader (bug surface)"
+    },
+    {
+      "path": "phoenix_v4/planning/registry_resolver.py::_load_persona_atoms",
+      "role": "walks atoms/{persona}/{topic}/{slot|engine}/CANONICAL.txt"
+    },
+    {
+      "path": "phoenix_v4/planning/registry_resolver.py::_load_composite_doctrine_atoms",
+      "role": "composite_doctrine CANONICAL.txt + REFLECTION/CANONICAL.txt"
+    },
+    {
+      "path": "phoenix_v4/quality/composite_doctrine_secular_lint.py",
+      "role": "imports registry_resolver._parse_canonical_txt"
+    },
+    {
+      "path": "scripts/qa/assemble_ch1_12shape_preview_v4.py",
+      "role": "imports registry_resolver._parse_canonical_txt"
+    },
+    {
+      "path": "phoenix_v4/planning/assembly_compiler.py::_parse_canonical_txt",
+      "role": "strict STORY metadata parser (separate contract; path/band)"
+    },
+    {
+      "path": "phoenix_v4/quality/base.py::parse_canonical_blocks",
+      "role": "quality lint two-delimiter block parser"
+    },
+    {
+      "path": "phoenix_v4/rendering/prose_resolver.py::_parse_canonical_with_prose",
+      "role": "render-time STORY prose map"
+    },
+    {
+      "path": "scripts/localization/run_translation_loop.py::parse_canonical",
+      "role": "translation loop variant splitter"
+    },
+    {
+      "path": "scripts/ci/check_canonical_atom_parse_sweep.py",
+      "role": "CI sweep via assembly_compiler strict parser (STORY over-match)"
+    }
+  ],
+  "totals": {
+    "files": 8664,
+    "headers": 126487,
+    "usable_atoms": 123632,
+    "parse_errors": 25,
+    "silent_zero_risk": 0,
+    "header_gt_usable_ok_files": 387
+  },
+  "delimiter_shape_counts": {
+    "two-delimiter": 6934,
+    "pre-delimiter-legacy": 280,
+    "single-delimiter": 197,
+    "single-section-legacy": 624
+  },
+  "by_slot": {
+    "COMPRESSION": {
+      "files": 649,
+      "headers": 9487,
+      "usable": 9484,
+      "errors": 1,
+      "silent_zero": 0
+    },
+    "EXERCISE": {
+      "files": 653,
+      "headers": 6998,
+      "usable": 6967,
+      "errors": 2,
+      "silent_zero": 0
+    },
+    "HOOK": {
+      "files": 733,
+      "headers": 15579,
+      "usable": 15579,
+      "errors": 0,
+      "silent_zero": 0
+    },
+    "INTEGRATION": {
+      "files": 709,
+      "headers": 13835,
+      "usable": 12908,
+      "errors": 7,
+      "silent_zero": 0
+    },
+    "PERMISSION": {
+      "files": 873,
+      "headers": 8573,
+      "usable": 8553,
+      "errors": 1,
+      "silent_zero": 0
+    },
+    "PIVOT": {
+      "files": 896,
+      "headers": 8819,
+      "usable": 8799,
+      "errors": 1,
+      "silent_zero": 0
+    },
+    "REFLECTION": {
+      "files": 723,
+      "headers": 16472,
+      "usable": 14727,
+      "errors": 9,
+      "silent_zero": 0
+    },
+    "SCENE": {
+      "files": 624,
+      "headers": 11632,
+      "usable": 11523,
+      "errors": 4,
+      "silent_zero": 0
+    },
+    "STORY": {
+      "files": 1001,
+      "headers": 17765,
+      "usable": 17765,
+      "errors": 0,
+      "silent_zero": 0
+    },
+    "TAKEAWAY": {
+      "files": 881,
+      "headers": 8673,
+      "usable": 8673,
+      "errors": 0,
+      "silent_zero": 0
+    },
+    "TEACHER_DOCTRINE": {
+      "files": 45,
+      "headers": 235,
+      "usable": 235,
+      "errors": 0,
+      "silent_zero": 0
+    },
+    "THREAD": {
+      "files": 874,
+      "headers": 8413,
+      "usable": 8413,
+      "errors": 0,
+      "silent_zero": 0
+    },
+    "ANGLE_DEFINITION": {
+      "files": 2,
+      "headers": 0,
+      "usable": 0,
+      "errors": 0,
+      "silent_zero": 0
+    },
+    "TRANSITION": {
+      "files": 1,
+      "headers": 6,
+      "usable": 6,
+      "errors": 0,
+      "silent_zero": 0
+    }
+  },
+  "silent_zero_files": [],
+  "sample_rows": [
+    {
+      "path": "atoms/corporate_managers/adhd_focus/COMPRESSION/CANONICAL.txt",
+      "slot": "COMPRESSION",
+      "header_count": 12,
+      "usable_atom_count": 12,
+      "delimiter_shapes": [
+        "two-delimiter"
+      ],
+      "silent_zero_risk": false,
+      "parse_error": null
+    },
+    {
+      "path": "atoms/corporate_managers/adhd_focus/EXERCISE/CANONICAL.txt",
+      "slot": "EXERCISE",
+      "header_count": 12,
+      "usable_atom_count": 12,
+      "delimiter_shapes": [
+        "two-delimiter"
+      ],
+      "silent_zero_risk": false,
+      "parse_error": null
+    },
+    {
+      "path": "atoms/corporate_managers/adhd_focus/HOOK/CANONICAL.txt",
+      "slot": "HOOK",
+      "header_count": 16,
+      "usable_atom_count": 16,
+      "delimiter_shapes": [
+        "two-delimiter"
+      ],
+      "silent_zero_risk": false,
+      "parse_error": null
+    },
+    {
+      "path": "atoms/corporate_managers/adhd_focus/HOOK/locales/ja-JP/CANONICAL.txt",
+      "slot": "HOOK",
+      "header_count": 6,
+      "usable_atom_count": 6,
+      "delimiter_shapes": [
+        "two-delimiter"
+      ],
+      "silent_zero_risk": false,
+      "parse_error": null
+    },
+    {
+      "path": "atoms/corporate_managers/adhd_focus/HOOK/locales/zh-CN/CANONICAL.txt",
+      "slot": "HOOK",
+      "header_count": 0,
+      "usable_atom_count": 0,
+      "delimiter_shapes": [],
+      "silent_zero_risk": false,
+      "parse_error": null
+    },
+    {
+      "path": "atoms/corporate_managers/adhd_focus/HOOK/locales/zh-TW/CANONICAL.txt",
+      "slot": "HOOK",
+      "header_count": 0,
+      "usable_atom_count": 0,
+      "delimiter_shapes": [],
+      "silent_zero_risk": false,
+      "parse_error": null
+    },
+    {
+      "path": "atoms/corporate_managers/adhd_focus/INTEGRATION/CANONICAL.txt",
+      "slot": "INTEGRATION",
+      "header_count": 12,
+      "usable_atom_count": 12,
+      "delimiter_shapes": [
+        "two-delimiter"
+      ],
+      "silent_zero_risk": false,
+      "parse_error": null
+    },
+    {
+      "path": "atoms/corporate_managers/adhd_focus/PERMISSION/CANONICAL.txt",
+      "slot": "PERMISSION",
+      "header_count": 12,
+      "usable_atom_count": 12,
+      "delimiter_shapes": [
+        "two-delimiter"
+      ],
+      "silent_zero_risk": false,
+      "parse_error": null
+    },
+    {
+      "path": "atoms/corporate_managers/adhd_focus/PERMISSION/locales/ja-JP/CANONICAL.txt",
+      "slot": "PERMISSION",
+      "header_count": 12,
+      "usable_atom_count": 12,
+      "delimiter_shapes": [
+        "two-delimiter"
+      ],
+      "silent_zero_risk": false,
+      "parse_error": null
+    },
+    {
+      "path": "atoms/corporate_managers/adhd_focus/PERMISSION/locales/zh-TW/CANONICAL.txt",
+      "slot": "PERMISSION",
+      "header_count": 12,
+      "usable_atom_count": 12,
+      "delimiter_shapes": [
+        "two-delimiter"
+      ],
+      "silent_zero_risk": false,
+      "parse_error": null
+    },
+    {
+      "path": "atoms/corporate_managers/adhd_focus/PIVOT/CANONICAL.txt",
+      "slot": "PIVOT",
+      "header_count": 12,
+      "usable_atom_count": 12,
+      "delimiter_shapes": [
+        "two-delimiter"
+      ],
+      "silent_zero_risk": false,
+      "parse_error": null
+    },
+    {
+      "path": "atoms/corporate_managers/adhd_focus/PIVOT/locales/ja-JP/CANONICAL.txt",
+      "slot": "PIVOT",
+      "header_count": 12,
+      "usable_atom_count": 12,
+      "delimiter_shapes": [
+        "two-delimiter"
+      ],
+      "silent_zero_risk": false,
+      "parse_error": null
+    },
+    {
+      "path": "atoms/corporate_managers/adhd_focus/PIVOT/locales/pt-BR/CANONICAL.txt",
+      "slot": "PIVOT",
+      "header_count": 12,
+      "usable_atom_count": 12,
+      "delimiter_shapes": [
+        "two-delimiter"
+      ],
+      "silent_zero_risk": false,
+      "parse_error": null
+    },
+    {
+      "path": "atoms/corporate_managers/adhd_focus/PIVOT/locales/zh-TW/CANONICAL.txt",
+      "slot": "PIVOT",
+      "header_count": 12,
+      "usable_atom_count": 12,
+      "delimiter_shapes": [
+        "two-delimiter"
+      ],
+      "silent_zero_risk": false,
+      "parse_error": null
+    },
+    {
+      "path": "atoms/corporate_managers/adhd_focus/REFLECTION/CANONICAL.txt",
+      "slot": "REFLECTION",
+      "header_count": 14,
+      "usable_atom_count": 14,
+      "delimiter_shapes": [
+        "two-delimiter"
+      ],
+      "silent_zero_risk": false,
+      "parse_error": null
+    },
+    {
+      "path": "atoms/corporate_managers/adhd_focus/SCENE/CANONICAL.txt",
+      "slot": "SCENE",
+      "header_count": 12,
+      "usable_atom_count": 12,
+      "delimiter_shapes": [
+        "two-delimiter"
+      ],
+      "silent_zero_risk": false,
+      "parse_error": null
+    },
+    {
+      "path": "atoms/corporate_managers/adhd_focus/STORY/CANONICAL.txt",
+      "slot": "STORY",
+      "header_count": 16,
+      "usable_atom_count": 16,
+      "delimiter_shapes": [
+        "two-delimiter"
+      ],
+      "silent_zero_risk": false,
+      "parse_error": null
+    },
+    {
+      "path": "atoms/corporate_managers/adhd_focus/TAKEAWAY/CANONICAL.txt",
+      "slot": "TAKEAWAY",
+      "header_count": 12,
+      "usable_atom_count": 12,
+      "delimiter_shapes": [
+        "two-delimiter"
+      ],
+      "silent_zero_risk": false,
+      "parse_error": null
+    },
+    {
+      "path": "atoms/corporate_managers/adhd_focus/TAKEAWAY/locales/ja-JP/CANONICAL.txt",
+      "slot": "TAKEAWAY",
+      "header_count": 12,
+      "usable_atom_count": 12,
+      "delimiter_shapes": [
+        "two-delimiter"
+      ],
+      "silent_zero_risk": false,
+      "parse_error": null
+    },
+    {
+      "path": "atoms/corporate_managers/adhd_focus/TAKEAWAY/locales/zh-TW/CANONICAL.txt",
+      "slot": "TAKEAWAY",
+      "header_count": 12,
+      "usable_atom_count": 12,
+      "delimiter_shapes": [
+        "two-delimiter"
+      ],
+      "silent_zero_risk": false,
+      "parse_error": null
+    },
+    {
+      "path": "atoms/corporate_managers/adhd_focus/TEACHER_DOCTRINE/CANONICAL.txt",
+      "slot": "TEACHER_DOCTRINE",
+      "header_count": 10,
+      "usable_atom_count": 10,
+      "delimiter_shapes": [
+        "two-delimiter"
+      ],
+      "silent_zero_risk": false,
+      "parse_error": null
+    },
+    {
+      "path": "atoms/corporate_managers/adhd_focus/THREAD/CANONICAL.txt",
+      "slot": "THREAD",
+      "header_count": 12,
+      "usable_atom_count": 12,
+      "delimiter_shapes": [
+        "two-delimiter"
+      ],
+      "silent_zero_risk": false,
+      "parse_error": null
+    },
+    {
+      "path": "atoms/corporate_managers/adhd_focus/THREAD/locales/pt-BR/CANONICAL.txt",
+      "slot": "THREAD",
+      "header_count": 12,
+      "usable_atom_count": 12,
+      "delimiter_shapes": [
+        "two-delimiter"
+      ],
+      "silent_zero_risk": false,
+      "parse_error": null
+    },
+    {
+      "path": "atoms/corporate_managers/anchored/PERMISSION/CANONICAL.txt",
+      "slot": "PERMISSION",
+      "header_count": 20,
+      "usable_atom_count": 20,
+      "delimiter_shapes": [
+        "two-delimiter"
+      ],
+      "silent_zero_risk": false,
+      "parse_error": null
+    },
+    {
+      "path": "atoms/corporate_managers/anchored/PERMISSION/locales/ja-JP/CANONICAL.txt",
+      "slot": "PERMISSION",
+      "header_count": 20,
+      "usable_atom_count": 20,
+      "delimiter_shapes": [
+        "two-delimiter"
+      ],
+      "silent_zero_risk": false,
+      "parse_error": null
+    },
+    {
+      "path": "atoms/corporate_managers/anchored/PERMISSION/locales/zh-CN/CANONICAL.txt",
+      "slot": "PERMISSION",
+      "header_count": 20,
+      "usable_atom_count": 20,
+      "delimiter_shapes": [
+        "two-delimiter"
+      ],
+      "silent_zero_risk": false,
+      "parse_error": null
+    },
+    {
+      "path": "atoms/corporate_managers/anchored/PERMISSION/locales/zh-TW/CANONICAL.txt",
+      "slot": "PERMISSION",
+      "header_count": 20,
+      "usable_atom_count": 20,
+      "delimiter_shapes": [
+        "two-delimiter"
+      ],
+      "silent_zero_risk": false,
+      "parse_error": null
+    },
+    {
+      "path": "atoms/corporate_managers/anchored/PIVOT/CANONICAL.txt",
+      "slot": "PIVOT",
+      "header_count": 20,
+      "usable_atom_count": 20,
+      "delimiter_shapes": [
+        "two-delimiter"
+      ],
+      "silent_zero_risk": false,
+      "parse_error": null
+    },
+    {
+      "path": "atoms/corporate_managers/anchored/PIVOT/locales/ja-JP/CANONICAL.txt",
+      "slot": "PIVOT",
+      "header_count": 20,
+      "usable_atom_count": 20,
+      "delimiter_shapes": [
+        "two-delimiter"
+      ],
+      "silent_zero_risk": false,
+      "parse_error": null
+    },
+    {
+      "path": "atoms/corporate_managers/anchored/PIVOT/locales/zh-CN/CANONICAL.txt",
+      "slot": "PIVOT",
+      "header_count": 20,
+      "usable_atom_count": 20,
+      "delimiter_shapes": [
+        "two-delimiter"
+      ],
+      "silent_zero_risk": false,
+      "parse_error": null
+    },
+    {
+      "path": "atoms/corporate_managers/anchored/PIVOT/locales/zh-TW/CANONICAL.txt",
+      "slot": "PIVOT",
+      "header_count": 20,
+      "usable_atom_count": 20,
+      "delimiter_shapes": [
+        "two-delimiter"
+      ],
+      "silent_zero_risk": false,
+      "parse_error": null
+    },
+    {
+      "path": "atoms/corporate_managers/anchored/STORY/CANONICAL.txt",
+      "slot": "STORY",
+      "header_count": 20,
+      "usable_atom_count": 20,
+      "delimiter_shapes": [
+        "two-delimiter"
+      ],
+      "silent_zero_risk": false,
+      "parse_error": null
+    },
+    {
+      "path": "atoms/corporate_managers/anchored/STORY/locales/ja-JP/CANONICAL.txt",
+      "slot": "STORY",
+      "header_count": 20,
+      "usable_atom_count": 20,
+      "delimiter_shapes": [
+        "two-delimiter"
+      ],
+      "silent_zero_risk": false,
+      "parse_error": null
+    },
+    {
+      "path": "atoms/corporate_managers/anchored/STORY/locales/zh-CN/CANONICAL.txt",
+      "slot": "STORY",
+      "header_count": 20,
+      "usable_atom_count": 20,
+      "delimiter_shapes": [
+        "two-delimiter"
+      ],
+      "silent_zero_risk": false,
+      "parse_error": null
+    },
+    {
+      "path": "atoms/corporate_managers/anchored/STORY/locales/zh-TW/CANONICAL.txt",
+      "slot": "STORY",
+      "header_count": 20,
+      "usable_atom_count": 20,
+      "delimiter_shapes": [
+        "two-delimiter"
+      ],
+      "silent_zero_risk": false,
+      "parse_error": null
+    },
+    {
+      "path": "atoms/corporate_managers/anchored/TAKEAWAY/CANONICAL.txt",
+      "slot": "TAKEAWAY",
+      "header_count": 20,
+      "usable_atom_count": 20,
+      "delimiter_shapes": [
+        "two-delimiter"
+      ],
+      "silent_zero_risk": false,
+      "parse_error": null
+    },
+    {
+      "path": "atoms/corporate_managers/anchored/TAKEAWAY/locales/ja-JP/CANONICAL.txt",
+      "slot": "TAKEAWAY",
+      "header_count": 20,
+      "usable_atom_count": 20,
+      "delimiter_shapes": [
+        "two-delimiter"
+      ],
+      "silent_zero_risk": false,
+      "parse_error": null
+    },
+    {
+      "path": "atoms/corporate_managers/anchored/TAKEAWAY/locales/zh-CN/CANONICAL.txt",
+      "slot": "TAKEAWAY",
+      "header_count": 20,
+      "usable_atom_count": 20,
+      "delimiter_shapes": [
+        "two-delimiter"
+      ],
+      "silent_zero_risk": false,
+      "parse_error": null
+    },
+    {
+      "path": "atoms/corporate_managers/anchored/TAKEAWAY/locales/zh-TW/CANONICAL.txt",
+      "slot": "TAKEAWAY",
+      "header_count": 20,
+      "usable_atom_count": 20,
+      "delimiter_shapes": [
+        "two-delimiter"
+      ],
+      "silent_zero_risk": false,
+      "parse_error": null
+    },
+    {
+      "path": "atoms/corporate_managers/anchored/THREAD/CANONICAL.txt",
+      "slot": "THREAD",
+      "header_count": 20,
+      "usable_atom_count": 20,
+      "delimiter_shapes": [
+        "two-delimiter"
+      ],
+      "silent_zero_risk": false,
+      "parse_error": null
+    },
+    {
+      "path": "atoms/corporate_managers/anchored/THREAD/locales/ja-JP/CANONICAL.txt",
+      "slot": "THREAD",
+      "header_count": 20,
+      "usable_atom_count": 20,
+      "delimiter_shapes": [
+        "two-delimiter"
+      ],
+      "silent_zero_risk": false,
+      "parse_error": null
+    },
+    {
+      "path": "atoms/corporate_managers/anchored/THREAD/locales/zh-CN/CANONICAL.txt",
+      "slot": "THREAD",
+      "header_count": 20,
+      "usable_atom_count": 20,
+      "delimiter_shapes": [
+        "two-delimiter"
+      ],
+      "silent_zero_risk": false,
+      "parse_error": null
+    },
+    {
+      "path": "atoms/corporate_managers/anchored/THREAD/locales/zh-TW/CANONICAL.txt",
+      "slot": "THREAD",
+      "header_count": 20,
+      "usable_atom_count": 20,
+      "delimiter_shapes": [
+        "two-delimiter"
+      ],
+      "silent_zero_risk": false,
+      "parse_error": null
+    },
+    {
+      "path": "atoms/corporate_managers/anxiety/COMPRESSION/CANONICAL.txt",
+      "slot": "COMPRESSION",
+      "header_count": 45,
+      "usable_atom_count": 45,
+      "delimiter_shapes": [
+        "two-delimiter"
+      ],
+      "silent_zero_risk": false,
+      "parse_error": null
+    },
+    {
+      "path": "atoms/corporate_managers/anxiety/COMPRESSION/locales/ja-JP/CANONICAL.txt",
+      "slot": "COMPRESSION",
+      "header_count": 45,
+      "usable_atom_count": 45,
+      "delimiter_shapes": [
+        "two-delimiter"
+      ],
+      "silent_zero_risk": false,
+      "parse_error": null
+    },
+    {
+      "path": "atoms/corporate_managers/anxiety/COMPRESSION/locales/zh-TW/CANONICAL.txt",
+      "slot": "COMPRESSION",
+      "header_count": 45,
+      "usable_atom_count": 45,
+      "delimiter_shapes": [
+        "two-delimiter"
+      ],
+      "silent_zero_risk": false,
+      "parse_error": null
+    },
+    {
+      "path": "atoms/corporate_managers/anxiety/EXERCISE/CANONICAL.txt",
+      "slot": "EXERCISE",
+      "header_count": 13,
+      "usable_atom_count": 13,
+      "delimiter_shapes": [
+        "two-delimiter"
+      ],
+      "silent_zero_risk": false,
+      "parse_error": null
+    },
+    {
+      "path": "atoms/corporate_managers/anxiety/EXERCISE/locales/ja-JP/CANONICAL.txt",
+      "slot": "EXERCISE",
+      "header_count": 13,
+      "usable_atom_count": 13,
+      "delimiter_shapes": [
+        "two-delimiter"
+      ],
+      "silent_zero_risk": false,
+      "parse_error": null
+    },
+    {
+      "path": "atoms/corporate_managers/anxiety/EXERCISE/locales/zh-TW/CANONICAL.txt",
+      "slot": "EXERCISE",
+      "header_count": 1,
+      "usable_atom_count": 1,
+      "delimiter_shapes": [
+        "two-delimiter"
+      ],
+      "silent_zero_risk": false,
+      "parse_error": null
+    },
+    {
+      "path": "atoms/corporate_managers/anxiety/HOOK/CANONICAL.txt",
+      "slot": "HOOK",
+      "header_count": 30,
+      "usable_atom_count": 30,
+      "delimiter_shapes": [
+        "two-delimiter"
+      ],
+      "silent_zero_risk": false,
+      "parse_error": null
+    }
+  ],
+  "acceptance": {
+    "silent_zero_impossible_when_parser_raises": true,
+    "note": "Post-fix parser raises CanonicalParseError on header-present empty-prose blocks; silent_zero_risk must be 0 for scanned files."
+  },
+  "parse_error_files_count": 25,
+  "parse_error_files_sample": [
+    {
+      "path": "atoms/corporate_managers/compassion_fatigue/INTEGRATION/locales/zh-TW/CANONICAL.txt",
+      "error": "CanonicalParseError: Malformed CANONICAL.txt at atoms/corporate_managers/compassion_fatigue/INTEGRATION/locales/zh-TW/CANONICAL.txt: 'INTEGRATION': header present but no usable prose (delimiters=0, shape unresolved). Use HEADER + --- + prose (single-delimiter legacy) or HEADER + --- + metadata + --- + prose (two-delimiter)."
+    },
+    {
+      "path": "atoms/corporate_managers/financial_stress/INTEGRATION/locales/ja-JP/CANONICAL.txt",
+      "error": "CanonicalParseError: Malformed CANONICAL.txt at atoms/corporate_managers/financial_stress/INTEGRATION/locales/ja-JP/CANONICAL.txt: 'INTEGRATION v18': two-delimiter block has metadata but empty prose (header count is not usable depth). Use HEADER + --- + prose (single-delimiter legacy) or HEADER + --- + metadata + --- + prose (two-delimiter)."
+    },
+    {
+      "path": "atoms/corporate_managers/imposter_syndrome/COMPRESSION/locales/zh-CN/CANONICAL.txt",
+      "error": "CanonicalParseError: Malformed CANONICAL.txt at atoms/corporate_managers/imposter_syndrome/COMPRESSION/locales/zh-CN/CANONICAL.txt: 'COMPRESSION v32': header present but no usable prose (delimiters=0, shape unresolved). Use HEADER + --- + prose (single-delimiter legacy) or HEADER + --- + metadata + --- + prose (two-delimiter)."
+    },
+    {
+      "path": "atoms/educators/anxiety/REFLECTION/locales/ja-JP/CANONICAL.txt",
+      "error": "CanonicalParseError: Malformed CANONICAL.txt at atoms/educators/anxiety/REFLECTION/locales/ja-JP/CANONICAL.txt: 'HOOK v01': header present but no usable prose (delimiters=0, shape unresolved). Use HEADER + --- + prose (single-delimiter legacy) or HEADER + --- + metadata + --- + prose (two-delimiter)."
+    },
+    {
+      "path": "atoms/educators/anxiety/REFLECTION/locales/zh-TW/CANONICAL.txt",
+      "error": "CanonicalParseError: Malformed CANONICAL.txt at atoms/educators/anxiety/REFLECTION/locales/zh-TW/CANONICAL.txt: 'HOOK v01': header present but no usable prose (delimiters=0, shape unresolved). Use HEADER + --- + prose (single-delimiter legacy) or HEADER + --- + metadata + --- + prose (two-delimiter)."
+    },
+    {
+      "path": "atoms/educators/compassion_fatigue/REFLECTION/locales/ja-JP/CANONICAL.txt",
+      "error": "CanonicalParseError: Malformed CANONICAL.txt at atoms/educators/compassion_fatigue/REFLECTION/locales/ja-JP/CANONICAL.txt: 'The Core Mechanism': header present but no usable prose (delimiters=0, shape unresolved); 'Alternative Names': header present but no usable prose (delimiters=0, shape unresolved). Use HEADER + --- + prose (single-delimiter legacy) or HEADER + --- + metadata + --- + prose (two-delimiter)."
+    },
+    {
+      "path": "atoms/first_responders/depression/REFLECTION/locales/ja-JP/CANONICAL.txt",
+      "error": "CanonicalParseError: Malformed CANONICAL.txt at atoms/first_responders/depression/REFLECTION/locales/ja-JP/CANONICAL.txt: 'REFLECTION v24': two-delimiter block has metadata but empty prose (header count is not usable depth). Use HEADER + --- + prose (single-delimiter legacy) or HEADER + --- + metadata + --- + prose (two-delimiter)."
+    },
+    {
+      "path": "atoms/gen_alpha_students/boundaries/REFLECTION/locales/zh-TW/CANONICAL.txt",
+      "error": "CanonicalParseError: Malformed CANONICAL.txt at atoms/gen_alpha_students/boundaries/REFLECTION/locales/zh-TW/CANONICAL.txt: 'TITLE v01': header present but no usable prose (delimiters=0, shape unresolved). Use HEADER + --- + prose (single-delimiter legacy) or HEADER + --- + metadata + --- + prose (two-delimiter)."
+    },
+    {
+      "path": "atoms/gen_alpha_students/depression/PERMISSION/locales/ja-JP/CANONICAL.txt",
+      "error": "CanonicalParseError: Malformed CANONICAL.txt at atoms/gen_alpha_students/depression/PERMISSION/locales/ja-JP/CANONICAL.txt: 'PERMISSION v01': header present but no usable prose (delimiters=0, shape unresolved); 'PERMISSION v02': header present but no usable prose (delimiters=0, shape unresolved); 'PERMISSION v03': header present but no usable prose (delimiters=0, shape unresolved); 'PERMISSION v04': header present but no usable prose (delimiters=0, shape unresolved); 'PERMISSION v05': header present but no usable prose (delimiters=0, shape unresolved); 'PERMISSION v06': header present but no usable prose (delimiters=0, shape unresolved); 'PERMISSION v07': header present but no usable prose (delimiters=0, shape unresolved); 'PERMISSION v08': header present but no usable prose (delimiters=0, shape unresolved); 'PERMISSION v09': header present but no usable prose (delimiters=0, shape unresolved); 'PERMISSION v10': header present but no usable prose (delimiters=0, shape unresolved); 'PERMISSION v11': header present but no usable prose (delimiters=0, shape unresolved); 'PERMISSION v12': header present but no usable prose (delimiters=0, shape unresolved); 'PERMISSION v13': header present but no usable prose (delimiters=0, shape unresolved); 'PERMISSION v14': header present but no usable prose (delimiters=0, shape unresolved); 'PERMISSION v15': header present but no usable prose (delimiters=0, shape unresolved); 'PERMISSION v16': header present but no usable prose (delimiters=0, shape unresolved); 'PERMISSION v17': header present but no usable prose (delimiters=0, shape unresolved); 'PERMISSION v18': header present but no usable prose (delimiters=0, shape unresolved); 'PERMISSION v19': header present but no usable prose (delimiters=0, shape unresolved); 'PERMISSION v20': header present but no usable prose (delimiters=0, shape unresolved). Use HEADER + --- + prose (single-delimiter legacy) or HEADER + --- + metadata + --- + prose (two-delimiter)."
+    },
+    {
+      "path": "atoms/gen_alpha_students/grief/REFLECTION/locales/ja-JP/CANONICAL.txt",
+      "error": "CanonicalParseError: Malformed CANONICAL.txt at atoms/gen_alpha_students/grief/REFLECTION/locales/ja-JP/CANONICAL.txt: 'HOOK v01': header present but no usable prose (delimiters=0, shape unresolved). Use HEADER + --- + prose (single-delimiter legacy) or HEADER + --- + metadata + --- + prose (two-delimiter)."
+    },
+    {
+      "path": "atoms/gen_x_sandwich/burnout/SCENE/locales/zh-TW/CANONICAL.txt",
+      "error": "CanonicalParseError: Malformed CANONICAL.txt at atoms/gen_x_sandwich/burnout/SCENE/locales/zh-TW/CANONICAL.txt: 'SCENE v': header present but no usable prose (delimiters=0, shape unresolved). Use HEADER + --- + prose (single-delimiter legacy) or HEADER + --- + metadata + --- + prose (two-delimiter)."
+    },
+    {
+      "path": "atoms/gen_x_sandwich/compassion_fatigue/SCENE/locales/ja-JP/CANONICAL.txt",
+      "error": "CanonicalParseError: Malformed CANONICAL.txt at atoms/gen_x_sandwich/compassion_fatigue/SCENE/locales/ja-JP/CANONICAL.txt: 'SCENE v18': header present but no usable prose (delimiters=0, shape unresolved). Use HEADER + --- + prose (single-delimiter legacy) or HEADER + --- + metadata + --- + prose (two-delimiter)."
+    },
+    {
+      "path": "atoms/gen_x_sandwich/social_anxiety/REFLECTION/locales/ja-JP/CANONICAL.txt",
+      "error": "CanonicalParseError: Malformed CANONICAL.txt at atoms/gen_x_sandwich/social_anxiety/REFLECTION/locales/ja-JP/CANONICAL.txt: 'REFLECTION v29': header present but no usable prose (delimiters=0, shape unresolved). Use HEADER + --- + prose (single-delimiter legacy) or HEADER + --- + metadata + --- + prose (two-delimiter)."
+    },
+    {
+      "path": "atoms/gen_x_sandwich/somatic_healing/REFLECTION/locales/ja-JP/CANONICAL.txt",
+      "error": "CanonicalParseError: Malformed CANONICAL.txt at atoms/gen_x_sandwich/somatic_healing/REFLECTION/locales/ja-JP/CANONICAL.txt: 'REFLECTION v24': header present but no usable prose (delimiters=0, shape unresolved). Use HEADER + --- + prose (single-delimiter legacy) or HEADER + --- + metadata + --- + prose (two-delimiter)."
+    },
+    {
+      "path": "atoms/healthcare_rns/anxiety/SCENE/locales/zh-CN/CANONICAL.txt",
+      "error": "CanonicalParseError: Malformed CANONICAL.txt at atoms/healthcare_rns/anxiety/SCENE/locales/zh-CN/CANONICAL.txt: 'SCENE v30': header present but no usable prose (delimiters=0, shape unresolved). Use HEADER + --- + prose (single-delimiter legacy) or HEADER + --- + metadata + --- + prose (two-delimiter)."
+    },
+    {
+      "path": "atoms/healthcare_rns/anxiety/SCENE/locales/zh-TW/CANONICAL.txt",
+      "error": "CanonicalParseError: Malformed CANONICAL.txt at atoms/healthcare_rns/anxiety/SCENE/locales/zh-TW/CANONICAL.txt: 'SCENE v30': header present but no usable prose (delimiters=0, shape unresolved). Use HEADER + --- + prose (single-delimiter legacy) or HEADER + --- + metadata + --- + prose (two-delimiter)."
+    },
+    {
+      "path": "atoms/healthcare_rns/burnout/EXERCISE/locales/zh-TW/CANONICAL.txt",
+      "error": "CanonicalParseError: Malformed CANONICAL.txt at atoms/healthcare_rns/burnout/EXERCISE/locales/zh-TW/CANONICAL.txt: 'EXERCISE v02': header present but no usable prose (delimiters=0, shape unresolved). Use HEADER + --- + prose (single-delimiter legacy) or HEADER + --- + metadata + --- + prose (two-delimiter)."
+    },
+    {
+      "path": "atoms/millennial_women_professionals/courage/EXERCISE/locales/ja-JP/CANONICAL.txt",
+      "error": "CanonicalParseError: Malformed CANONICAL.txt at atoms/millennial_women_professionals/courage/EXERCISE/locales/ja-JP/CANONICAL.txt: 'EXERCISE v': header present but no usable prose (delimiters=0, shape unresolved). Use HEADER + --- + prose (single-delimiter legacy) or HEADER + --- + metadata + --- + prose (two-delimiter)."
+    },
+    {
+      "path": "atoms/millennial_women_professionals/depression/INTEGRATION/locales/ja-JP/CANONICAL.txt",
+      "error": "CanonicalParseError: Malformed CANONICAL.txt at atoms/millennial_women_professionals/depression/INTEGRATION/locales/ja-JP/CANONICAL.txt: 'INTEGRATION v19': header present but no usable prose (delimiters=0, shape unresolved). Use HEADER + --- + prose (single-delimiter legacy) or HEADER + --- + metadata + --- + prose (two-delimiter)."
+    },
+    {
+      "path": "atoms/nyc_executives/compassion_fatigue/INTEGRATION/locales/zh-TW/CANONICAL.txt",
+      "error": "CanonicalParseError: Malformed CANONICAL.txt at atoms/nyc_executives/compassion_fatigue/INTEGRATION/locales/zh-TW/CANONICAL.txt: 'INTEGRATION v': header present but no usable prose (delimiters=0, shape unresolved). Use HEADER + --- + prose (single-delimiter legacy) or HEADER + --- + metadata + --- + prose (two-delimiter)."
+    },
+    {
+      "path": "atoms/tech_finance_burnout/imposter_syndrome/INTEGRATION/locales/zh-TW/CANONICAL.txt",
+      "error": "CanonicalParseError: Malformed CANONICAL.txt at atoms/tech_finance_burnout/imposter_syndrome/INTEGRATION/locales/zh-TW/CANONICAL.txt: 'INTEGRATION v25': two-delimiter block has metadata but empty prose (header count is not usable depth). Use HEADER + --- + prose (single-delimiter legacy) or HEADER + --- + metadata + --- + prose (two-delimiter)."
+    },
+    {
+      "path": "atoms/tech_finance_burnout/social_anxiety/PIVOT/locales/ja-JP/CANONICAL.txt",
+      "error": "CanonicalParseError: Malformed CANONICAL.txt at atoms/tech_finance_burnout/social_anxiety/PIVOT/locales/ja-JP/CANONICAL.txt: 'PIVOT v01': header present but no usable prose (delimiters=0, shape unresolved); 'PIVOT v02': header present but no usable prose (delimiters=0, shape unresolved); 'PIVOT v03': header present but no usable prose (delimiters=0, shape unresolved); 'PIVOT v04': header present but no usable prose (delimiters=0, shape unresolved); 'PIVOT v05': header present but no usable prose (delimiters=0, shape unresolved); 'PIVOT v06': header present but no usable prose (delimiters=0, shape unresolved); 'PIVOT v07': header present but no usable prose (delimiters=0, shape unresolved); 'PIVOT v08': header present but no usable prose (delimiters=0, shape unresolved); 'PIVOT v09': header present but no usable prose (delimiters=0, shape unresolved); 'PIVOT v10': header present but no usable prose (delimiters=0, shape unresolved); 'PIVOT v11': header present but no usable prose (delimiters=0, shape unresolved); 'PIVOT v12': header present but no usable prose (delimiters=0, shape unresolved); 'PIVOT v13': header present but no usable prose (delimiters=0, shape unresolved); 'PIVOT v14': header present but no usable prose (delimiters=0, shape unresolved); 'PIVOT v15': header present but no usable prose (delimiters=0, shape unresolved); 'PIVOT v16': header present but no usable prose (delimiters=0, shape unresolved); 'PIVOT v17': header present but no usable prose (delimiters=0, shape unresolved); 'PIVOT v18': header present but no usable prose (delimiters=0, shape unresolved); 'PIVOT v19': header present but no usable prose (delimiters=0, shape unresolved); 'PIVOT v20': header present but no usable prose (delimiters=0, shape unresolved). Use HEADER + --- + prose (single-delimiter legacy) or HEADER + --- + metadata + --- + prose (two-delimiter)."
+    },
+    {
+      "path": "atoms/tech_finance_burnout/somatic_healing/INTEGRATION/locales/ja-JP/CANONICAL.txt",
+      "error": "CanonicalParseError: Malformed CANONICAL.txt at atoms/tech_finance_burnout/somatic_healing/INTEGRATION/locales/ja-JP/CANONICAL.txt: 'INTEGRATION v22': two-delimiter block has metadata but empty prose (header count is not usable depth). Use HEADER + --- + prose (single-delimiter legacy) or HEADER + --- + metadata + --- + prose (two-delimiter)."
+    },
+    {
+      "path": "atoms/working_parents/compassion_fatigue/REFLECTION/locales/ja-JP/CANONICAL.txt",
+      "error": "CanonicalParseError: Malformed CANONICAL.txt at atoms/working_parents/compassion_fatigue/REFLECTION/locales/ja-JP/CANONICAL.txt: 'REFLECTION v': header present but no usable prose (delimiters=0, shape unresolved). Use HEADER + --- + prose (single-delimiter legacy) or HEADER + --- + metadata + --- + prose (two-delimiter)."
+    },
+    {
+      "path": "atoms/working_parents/financial_stress/INTEGRATION/locales/zh-TW/CANONICAL.txt",
+      "error": "CanonicalParseError: Malformed CANONICAL.txt at atoms/working_parents/financial_stress/INTEGRATION/locales/zh-TW/CANONICAL.txt: 'INTEGRATION v20': header present but no usable prose (delimiters=0, shape unresolved). Use HEADER + --- + prose (single-delimiter legacy) or HEADER + --- + metadata + --- + prose (two-delimiter)."
+    }
+  ]
+}
