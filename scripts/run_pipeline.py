@@ -2343,6 +2343,25 @@ def _run_spine_pipeline_mode(
             json.dumps(enriched.enrichment_audit, indent=2, default=str, ensure_ascii=False),
             encoding="utf-8",
         )
+        # Operator-facing chapter outline (all spine renders, not contract-only).
+        # Built from landed enrichment surfaces; does not change assembly.
+        try:
+            from phoenix_v4.qa.book_outline import write_book_outline
+
+            _outline_paths = write_book_outline(
+                enriched=enriched,
+                render_dir=render_dir,
+                topic_id=topic_id,
+                persona_id=persona_id,
+                locale=str(_enrich_locale or getattr(args, "locale", None) or "") or "en-US",
+                runtime_format=runtime_fmt,
+                accent_render_audit=list(
+                    (_governance_report or {}).get("accent_render_audit") or []
+                ),
+            )
+            print(f"Book outline: {_outline_paths.get('markdown')}")
+        except Exception as _outline_err:
+            print(f"Book outline: WARN — {_outline_err}", file=sys.stderr)
         _contract_id = "cli_demo_trace_run_composite_contract_v1"
         if str(render_dir).endswith(_contract_id):
             _write_enrichment_contract_reports(
