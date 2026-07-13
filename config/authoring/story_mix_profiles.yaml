@@ -49,6 +49,21 @@ profiles:
       QUOTE: 3
       REFLECTION_QUESTION: 3
       TROUBLESHOOTING: 1
+    enhancement_contract_v21:
+      optional_accent_strategy: sparse_and_functional
+      target_accent_chapters: {min: 5, max: 7}
+      target_total_accents: {min: 7, max: 9}
+      hard_max_total_accents: 10
+      max_accents_per_chapter: 2
+      author_voice:
+        AUTHOR_DISCLOSURE: proof_and_embodiment
+        AUTHOR_COMMENTARY: optional_accents
+      callback_policy:
+        plant_required_before_return: true
+        semantic_development_required: true
+      parable_tiebreak:
+        displaces: WISDOM_ESSENCE
+        never_displaces: AUTHOR_COMMENTARY
     max_accent_chapter_share: 0.85
 
   timeless_wisdom:

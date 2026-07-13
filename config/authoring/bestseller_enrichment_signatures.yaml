@@ -23,6 +23,25 @@ profiles:
           - true_life_broadcast
           - film
           - pop_culture
+        enhancement_contract_v21:
+          evidence_status: working_prior_not_empirical_count
+          optional_accent_budget:
+            target_accent_chapters: {min: 5, max: 7}
+            hard_max_accent_chapters: 8
+            target_total_accents: {min: 7, max: 9}
+            hard_max_total_accents: 10
+            max_accents_per_chapter: 2
+          external_story_functions:
+            - recognition
+            - mechanism_proof
+            - turn
+            - possibility
+            - cautionary
+          first_class_cohesion:
+            - CALLBACK_PLANT
+            - CALLBACK_RETURN
+            - ANALOGY
+            - METAPHOR
 
   practical_credible:
     exemplars:

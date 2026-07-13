@@ -14,6 +14,7 @@ from phoenix_v4.planning.accent_planner import (
     disallowed_positions_for_surface,
     preferred_positions_for_surface,
 )
+from phoenix_v4.planning.enhancement_contract_v21_runtime import validate_v21_integrity
 from phoenix_v4.planning.enrichment_select import EnrichedBook, EnrichedChapter
 from phoenix_v4.rendering.accent_renderer import insert_accent_beats_into_streams
 
@@ -314,12 +315,16 @@ def _stream_rows_for_chapter(
     stream_rows = list(slot_rows)
     accent_stream_by_id: Dict[str, Dict[str, Any]] = {}
     for rendered in sorted(rendered_rows, key=lambda row: int(row.get("chapter_insert_index") or 0)):
+        keys = _as_mapping(rendered.get("keys"))
         accent_row = {
             "kind": "accent",
             "chapter": int(chapter.number),
             "accent_id": str(rendered.get("accent_id") or ""),
             "class": str(rendered.get("class") or ""),
             "position": str(rendered.get("position") or ""),
+            "keys": keys,
+            "surface_bucket": str(rendered.get("surface_bucket") or keys.get("surface_bucket") or ""),
+            "count_unit": str(rendered.get("count_unit") or keys.get("count_unit") or ""),
             "provenance": str(rendered.get("provenance") or ""),
             "body": str(rendered.get("body") or "").strip(),
             "body_hash": str(rendered.get("body_hash") or ""),
@@ -643,8 +648,18 @@ def build_enhancement_contract_payload(
             }
         )
 
+    v21_integrity = validate_v21_integrity(
+        optional_budget=_as_mapping(v21_summary.get("optional_accent_budget")),
+        accent_rows=accent_rows,
+        core_surface_rows=core_surface_rows,
+        chapter_count=len(enriched.chapters or []),
+    )
+    validation["v21_integrity"] = v21_integrity  # type: ignore[assignment]
+
     errors: List[str] = []
     for key, rows in validation.items():
+        if key == "v21_integrity":
+            continue
         if key == "unresolved_markers":
             for row in rows:
                 errors.append(f"{key}:{row.get('kind')}:{row.get('match')}")
@@ -652,6 +667,10 @@ def build_enhancement_contract_payload(
         for row in rows:
             ident = row.get("accent_id") or row.get("slot_type") or row.get("kind") or "row"
             errors.append(f"{key}:{row.get('chapter')}:{ident}")
+    for row in _as_list(v21_integrity.get("hard_failures")):
+        if not isinstance(row, Mapping):
+            continue
+        errors.append(f"v21_integrity:{row.get('code')}:{row.get('chapter', '')}:{row.get('accent_id') or row.get('plant_id') or ''}")
 
     payload = {
         "schema_version": 1,
@@ -747,6 +766,16 @@ def render_enhancement_contract_markdown(payload: Mapping[str, Any]) -> str:
     else:
         for err in errors:
             lines.append(f"- FAIL: {err}")
+    v21_integrity = _as_mapping(_as_mapping(payload.get("validation")).get("v21_integrity"))
+    for warning in _as_list(v21_integrity.get("warnings")):
+        if not isinstance(warning, Mapping):
+            continue
+        lines.append(
+            "- WARN: V2.1 {code} — {detail}".format(
+                code=warning.get("code") or "warning",
+                detail=warning.get("detail") or "",
+            )
+        )
 
     lines.extend(
         [

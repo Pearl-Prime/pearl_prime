@@ -20,6 +20,10 @@ except ImportError:  # pragma: no cover
     yaml = None
 
 from phoenix_v4.planning.enrichment_select import EnrichedBook, EnrichedChapter
+from phoenix_v4.planning.enhancement_contract_v21_runtime import (
+    build_optional_accent_budget,
+    validate_optional_accent_budget,
+)
 
 REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 ACCENT_BANKS = REPO_ROOT / "SOURCE_OF_TRUTH" / "accent_banks"
@@ -442,41 +446,13 @@ def build_enhancement_contract_v21_summary(
                 planner_tracking_mode="downstream_audit_only",
             )
         )
-    target_accent_chapters = {
-        "min": _scale_from_trade_book(5, chapter_count, minimum=1),
-        "max": _scale_from_trade_book(7, chapter_count, minimum=1),
-    }
-    target_total_accents = {
-        "min": _scale_from_trade_book(7, chapter_count, minimum=1),
-        "max": _scale_from_trade_book(9, chapter_count, minimum=1),
-    }
-    hard_max_accent_chapters = _scale_from_trade_book(8, chapter_count, minimum=1)
-    hard_max_total_accents = _scale_from_trade_book(10, chapter_count, minimum=1)
-    accent_free_minimum = max(0, int(math.floor((4.0 * float(max(chapter_count, 1))) / 12.0)))
-    return {
-        "schema_version": ENHANCEMENT_CONTRACT_V21_SCHEMA_VERSION,
-        "truth_label": "research_informed_working_priors",
-        "surface_taxonomy": {
-            "chapter_engine": list(V21_CHAPTER_ENGINE_SURFACES),
-            "proof_and_embodiment": list(V21_PROOF_AND_EMBODIMENT_SURFACES),
-            "optional_accents": list(V21_OPTIONAL_ACCENT_SURFACES),
-            "cohesion_and_craft": list(V21_COHESION_AND_CRAFT_SURFACES),
-        },
-        "count_units": dict(V21_COUNT_UNITS),
-        "tracked_surfaces": tracked_surfaces,
-        "optional_accent_budget": {
-            "target_accent_chapters": target_accent_chapters,
-            "hard_max_accent_chapters": hard_max_accent_chapters,
-            "target_total_accents": target_total_accents,
-            "hard_max_total_accents": hard_max_total_accents,
-            "max_accents_per_chapter": int(max_accents_per_chapter),
-            "accent_free_chapters_minimum": accent_free_minimum,
-            "chapter_share_rounding": "ceil",
+    optional_budget = build_optional_accent_budget(
+        chapter_count=chapter_count,
+        max_accents_per_chapter=int(max_accents_per_chapter),
+    )
+    optional_budget.update(
+        {
             "class_hard_maxima": optional_requested,
-            "ceiling_interpretation": (
-                "Class-level maxima are ceilings, not instructions to maximize every optional accent "
-                "class simultaneously."
-            ),
             "actual": {
                 "assigned_total_optional_accents": sum(optional_counts.values()),
                 "optional_assignment_counts": optional_counts,
@@ -488,7 +464,25 @@ def build_enhancement_contract_v21_summary(
                     for ch, count in sorted(optional_per_chapter.items())
                 },
             },
+        }
+    )
+    optional_integrity = validate_optional_accent_budget(
+        optional_budget,
+        chapter_count=chapter_count,
+    )
+    return {
+        "schema_version": ENHANCEMENT_CONTRACT_V21_SCHEMA_VERSION,
+        "truth_label": "research_informed_working_priors",
+        "surface_taxonomy": {
+            "chapter_engine": list(V21_CHAPTER_ENGINE_SURFACES),
+            "proof_and_embodiment": list(V21_PROOF_AND_EMBODIMENT_SURFACES),
+            "optional_accents": list(V21_OPTIONAL_ACCENT_SURFACES),
+            "cohesion_and_craft": list(V21_COHESION_AND_CRAFT_SURFACES),
         },
+        "count_units": dict(V21_COUNT_UNITS),
+        "tracked_surfaces": tracked_surfaces,
+        "optional_accent_budget": optional_budget,
+        "optional_accent_integrity": optional_integrity,
         "phase_strategy": {
             "story_mix_profile": story_mix_profile,
             "chapter_phase_order": list(BOOK_PHASE_ORDER),

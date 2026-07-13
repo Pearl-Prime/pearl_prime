@@ -63,3 +63,16 @@ pilot_cells:
       WISDOM_ESSENCE: 1
       AUTHOR_COMMENTARY: 1
     max_accent_chapter_share: 0.85
+    enhancement_contract_v21:
+      truth_label: research_informed_working_priors
+      optional_accent_budget:
+        target_accent_chapters: {min: 5, max: 7}
+        hard_max_accent_chapters: 8
+        target_total_accents: {min: 7, max: 9}
+        hard_max_total_accents: 10
+        max_accents_per_chapter: 2
+      proof_surfaces_outside_optional_budget:
+        - TROUBLESHOOTING
+        - CITED_EVIDENCE
+        - EXTERNAL_STORY
+        - AUTHOR_DISCLOSURE
