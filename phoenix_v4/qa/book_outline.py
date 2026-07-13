@@ -202,9 +202,9 @@ def _chapter_v21_groups(
         cohesion_and_craft.append("CALLBACK_PLANT")
     if "ANGLE_CALLBACK" in slot_types:
         cohesion_and_craft.append("CALLBACK_RETURN")
-    if any("analogy" in hook for hook in hooks) or "ANGLE_DEFINITION" in slot_types:
+    if any("analogy" in hook for hook in hooks):
         cohesion_and_craft.append("ANALOGY")
-    if any("metaphor" in hook for hook in hooks) or "ANGLE_DEFINITION" in slot_types:
+    if any("metaphor" in hook for hook in hooks):
         cohesion_and_craft.append("METAPHOR")
     return {
         "chapter_engine": sorted(set(chapter_engine)),
@@ -224,10 +224,14 @@ def _enrichment_families(
         for h in slot.enrichment_applied or []:
             hooks.add(str(h).strip().lower())
     accent_classes = {str(a.get("class") or "").upper() for a in accents}
-    story_like = "STORY" in slot_types or "EXTERNAL_STORY" in accent_classes
+    story_like = (
+        "EXTERNAL_STORY" in accent_classes
+        or "PARABLE" in accent_classes
+        or any("parable" in hook for hook in hooks)
+    )
     return {
-        "metaphor": any("metaphor" in h for h in hooks) or bool(slot_types & {"ANGLE_DEFINITION"}),
-        "analogy": any("analogy" in h for h in hooks) or bool(slot_types & {"ANGLE_DEFINITION"}),
+        "metaphor": any("metaphor" in h for h in hooks),
+        "analogy": any("analogy" in h for h in hooks),
         "parable_or_external_story": story_like,
         "exercise": "EXERCISE" in slot_types
         or any(getattr(s, "journey_exercise_id", None) for s in (chapter.slots or [])),

@@ -266,9 +266,9 @@ def _chapter_v21_groups(
         cohesion_and_craft.append("CALLBACK_PLANT")
     if "ANGLE_CALLBACK" in slot_types:
         cohesion_and_craft.append("CALLBACK_RETURN")
-    if any("analogy" in hook for hook in hooks) or "ANGLE_DEFINITION" in slot_types:
+    if any("analogy" in hook for hook in hooks):
         cohesion_and_craft.append("ANALOGY")
-    if any("metaphor" in hook for hook in hooks) or "ANGLE_DEFINITION" in slot_types:
+    if any("metaphor" in hook for hook in hooks):
         cohesion_and_craft.append("METAPHOR")
 
     return {

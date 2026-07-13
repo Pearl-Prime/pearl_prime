@@ -201,9 +201,22 @@ CONTRACT_V1_SPINE_KEY = "enrichment_contract_v1"
 
 
 def enrichment_contract_v1_enabled(spine_context: Optional[Mapping[str, Any]]) -> bool:
-    """True only when the contract-v1 anxiety enrichment lane is explicitly armed."""
+    """Deterministically activate the contract from explicit or production doctrine."""
     ctx = spine_context or {}
-    return bool(ctx.get(CONTRACT_V1_SPINE_KEY))
+    if bool(ctx.get(CONTRACT_V1_SPINE_KEY)):
+        return True
+    quality_profile = str(
+        ctx.get("quality_profile") or ctx.get("profile") or ""
+    ).strip().lower()
+    runtime_format = str(
+        ctx.get("runtime_format")
+        or ctx.get("runtime_format_id")
+        or ""
+    ).strip()
+    return (
+        quality_profile in {"production", "flagship"}
+        and runtime_format == "extended_book_2h"
+    )
 
 
 def accent_class_bucket(accent_class: str) -> str:
