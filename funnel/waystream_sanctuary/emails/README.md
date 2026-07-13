@@ -7,6 +7,7 @@ Import one template per workflow email:
 
 - `email_1_tool_delivery.html`
 - `email_2_second_practice.html`
+- `email_bonus_pre_story.html` (send before E3 when `welcome_depth` is blank or missing)
 - `email_3_transformation_story.html`
 - `email_4_book_recommendation.html`
 - `email_5_more_books.html`
@@ -24,6 +25,16 @@ The freebie form webhook stores merge fields on the contact:
   `phoenix_e5_book1_*`, `phoenix_e5_book2_*`, `phoenix_e5_book3_*`,
   `phoenix_e6_book_title`, `phoenix_e7_bundle_title`,
   `phoenix_e8_last_chance_note`
+- bonus-before-E3 fields: `phoenix_bonus_pre_e3_title`,
+  `phoenix_bonus_pre_e3_url`, `phoenix_bonus_pre_e3_cta`,
+  `phoenix_bonus_pre_e3_tool_name`,
+  `phoenix_bonus_pre_e3_short_description`,
+  `phoenix_bonus_pre_e3_benefit`, `phoenix_bonus_pre_e3_microcopy`,
+  `phoenix_bonus_pre_e3_html_template`,
+  `phoenix_bonus_pre_e3_send_if_welcome_depth_missing`
+
+WF2 rule: send `email_bonus_pre_story.html` before Email 3 only when
+`welcome_depth` is blank or missing, then return to the normal E3 story email.
 
 Admin rule: if any field renders blank in a test contact, stop the live test and
 rerun `python3 scripts/freebies/validate_campaign_plan.py --brand-id way_stream_sanctuary`.

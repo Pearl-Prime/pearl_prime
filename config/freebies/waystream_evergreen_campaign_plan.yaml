@@ -47,11 +47,13 @@ plans:
   e1_benefit: Use it when anxiety starts to take over and you need one immediate step.
   e1_microcopy: No login wall. Keep this link for the moment you need it.
   e2_tool_name: Body scan to keep the reset going
-  e2_short_description: A second practice that keeps the first reset from being a one-off.
+  e2_short_description: A second practice that keeps the first reset from being a
+    one-off.
   e2_benefit: "Pair it with yesterday\u2019s tool so your body gets the signal twice."
   e2_microcopy: Do it once today. Notice the smallest shift.
   e3_tool_name: Transformation story
-  e3_short_description: A short story about why the anxiety reset can work in real life.
+  e3_short_description: A short story about why the anxiety reset can work in real
+    life.
   e3_benefit: See the mechanism through a human moment instead of a lecture.
   e3_microcopy: No pitch in this email. Just the story.
   e4_tool_name: The Waystream Guide to Anxiety
@@ -64,10 +66,12 @@ plans:
   e5_microcopy: Start with the first recommendation if you are unsure.
   e6_tool_name: The Follow-Up Waystream Guide for Anxiety
   e6_short_description: A follow-up book recommendation for the next layer of anxiety.
-  e6_benefit: Use this after the first book if you want a second angle on the same pattern.
+  e6_benefit: Use this after the first book if you want a second angle on the same
+    pattern.
   e6_microcopy: Recommendation 2 is for continuity, not pressure.
   e7_tool_name: The Anxiety Calm Bundle
-  e7_short_description: A bundle-style path that groups the next anxiety supports together.
+  e7_short_description: A bundle-style path that groups the next anxiety supports
+    together.
   e7_benefit: Use the bundle when you want the tools and books in one mental shelf.
   e7_microcopy: This is the cleanest path if you prefer everything in one place.
   e8_tool_name: Last-chance reminder
@@ -78,11 +82,14 @@ plans:
   e9_short_description: A still-here reminder with the original free tool link.
   e9_benefit: Return to the simplest reset any time you need it.
   e9_microcopy: No new ask today. Just the tool again.
-  e3_story_body: 'A Waystream reader once opened 90-Second Nervous System Reset in the middle of an ordinary day, not a dramatic
-    breaking point. The old pattern was already moving: anxiety had started to feel like a command, and the body was treating
-    the signal like proof. They did the practice once, then used the second reset the next day. The shift was small, but it
-    mattered: there was now a pause between the signal and the reaction. That is why this works. It does not argue with the
-    mind. It gives the body one repeatable cue that says, "we can slow this down before it runs the whole day."'
+  e3_story_body: 'A Waystream reader once opened 90-Second Nervous System Reset in
+    the middle of an ordinary day, not a dramatic breaking point. The old pattern
+    was already moving: anxiety had started to feel like a command, and the body was
+    treating the signal like proof. They did the practice once, then used the second
+    reset the next day. The shift was small, but it mattered: there was now a pause
+    between the signal and the reaction. That is why this works. It does not argue
+    with the mind. It gives the body one repeatable cue that says, "we can slow this
+    down before it runs the whole day."'
   e4_book_title: The Waystream Guide to Anxiety
   e5_book1_title: The Waystream Guide to Anxiety
   e5_book1_url: https://brand-admin-onboarding-bu2.pages.dev/download/way_stream_sanctuary__default_teacher__corporate_managers__anxiety__comparison
@@ -96,6 +103,18 @@ plans:
   e6_book_title: The Follow-Up Waystream Guide for Anxiety
   e7_bundle_title: The Anxiety Calm Bundle
   e8_last_chance_note: This is the last direct book nudge in the anxiety freebie sequence.
+  bonus_pre_e3_title: 'Bonus before the story: one extra anxiety practice'
+  bonus_pre_e3_url: https://brand-admin-onboarding-bu2.pages.dev/somatic_exercise_freebee_apps/ex13_body_scan.html?unlock=1
+  bonus_pre_e3_cta: Open the bonus practice
+  bonus_pre_e3_tool_name: Body scan to keep the reset going
+  bonus_pre_e3_short_description: A pre-E3 bonus email for the welcome-depth fallback
+    when GHL has no welcome_depth value.
+  bonus_pre_e3_benefit: Gives the contact one more felt practice before the story
+    email lands.
+  bonus_pre_e3_microcopy: Send this before Email 3 only when welcome_depth is blank
+    or missing.
+  bonus_pre_e3_html_template: funnel/waystream_sanctuary/emails/email_bonus_pre_story.html
+  bonus_pre_e3_send_if_welcome_depth_missing: true
 - brand_id: way_stream_sanctuary
   freebie_id: burnout_checklist_v1
   quiz_id: capacity_assessment
@@ -137,18 +156,22 @@ plans:
   e9_cta: Reopen the free tool
   e1_tool_name: Compassion Fatigue Audit
   e1_short_description: The free Waystream tool you requested for compassion fatigue.
-  e1_benefit: Use it when compassion fatigue starts to take over and you need one immediate step.
+  e1_benefit: Use it when compassion fatigue starts to take over and you need one
+    immediate step.
   e1_microcopy: No login wall. Keep this link for the moment you need it.
   e2_tool_name: Softer practice after caregiving overload
-  e2_short_description: A second practice that keeps the first reset from being a one-off.
+  e2_short_description: A second practice that keeps the first reset from being a
+    one-off.
   e2_benefit: "Pair it with yesterday\u2019s tool so your body gets the signal twice."
   e2_microcopy: Do it once today. Notice the smallest shift.
   e3_tool_name: Transformation story
-  e3_short_description: A short story about why the compassion fatigue reset can work in real life.
+  e3_short_description: A short story about why the compassion fatigue reset can work
+    in real life.
   e3_benefit: See the mechanism through a human moment instead of a lecture.
   e3_microcopy: No pitch in this email. Just the story.
   e4_tool_name: The Waystream Guide to Compassion Fatigue
-  e4_short_description: The first deeper Waystream book for this compassion fatigue pattern.
+  e4_short_description: The first deeper Waystream book for this compassion fatigue
+    pattern.
   e4_benefit: Use it when you want the full journey, not only the free tool.
   e4_microcopy: The free tools are still yours. This is the next layer.
   e5_tool_name: Waystream reading path
@@ -156,26 +179,33 @@ plans:
   e5_benefit: Choose the next book by the kind of support you want right now.
   e5_microcopy: Start with the first recommendation if you are unsure.
   e6_tool_name: The Follow-Up Waystream Guide for Compassion Fatigue
-  e6_short_description: A follow-up book recommendation for the next layer of compassion fatigue.
-  e6_benefit: Use this after the first book if you want a second angle on the same pattern.
+  e6_short_description: A follow-up book recommendation for the next layer of compassion
+    fatigue.
+  e6_benefit: Use this after the first book if you want a second angle on the same
+    pattern.
   e6_microcopy: Recommendation 2 is for continuity, not pressure.
   e7_tool_name: The Compassion Fatigue Calm Bundle
-  e7_short_description: A bundle-style path that groups the next compassion fatigue supports together.
+  e7_short_description: A bundle-style path that groups the next compassion fatigue
+    supports together.
   e7_benefit: Use the bundle when you want the tools and books in one mental shelf.
   e7_microcopy: This is the cleanest path if you prefer everything in one place.
   e8_tool_name: Last-chance reminder
-  e8_short_description: A final nudge before this compassion fatigue sequence quiets down.
+  e8_short_description: A final nudge before this compassion fatigue sequence quiets
+    down.
   e8_benefit: Take the next step now if you know you want the deeper support.
   e8_microcopy: If not, keep the free tool. That still counts.
   e9_tool_name: Compassion Fatigue Audit
   e9_short_description: A still-here reminder with the original free tool link.
   e9_benefit: Return to the simplest reset any time you need it.
   e9_microcopy: No new ask today. Just the tool again.
-  e3_story_body: 'A Waystream reader once opened Compassion Fatigue Audit in the middle of an ordinary day, not a dramatic
-    breaking point. The old pattern was already moving: compassion fatigue had started to feel like a command, and the body
-    was treating the signal like proof. They did the practice once, then used the second reset the next day. The shift was
-    small, but it mattered: there was now a pause between the signal and the reaction. That is why this works. It does not
-    argue with the mind. It gives the body one repeatable cue that says, "we can slow this down before it runs the whole day."'
+  e3_story_body: 'A Waystream reader once opened Compassion Fatigue Audit in the middle
+    of an ordinary day, not a dramatic breaking point. The old pattern was already
+    moving: compassion fatigue had started to feel like a command, and the body was
+    treating the signal like proof. They did the practice once, then used the second
+    reset the next day. The shift was small, but it mattered: there was now a pause
+    between the signal and the reaction. That is why this works. It does not argue
+    with the mind. It gives the body one repeatable cue that says, "we can slow this
+    down before it runs the whole day."'
   e4_book_title: The Waystream Guide to Compassion Fatigue
   e5_book1_title: The Waystream Guide to Compassion Fatigue
   e5_book1_url: https://brand-admin-onboarding-bu2.pages.dev/download/way_stream_sanctuary__default_teacher__corporate_managers__compassion_fatigue__grief
@@ -188,7 +218,20 @@ plans:
   e5_book3_note: Use this when you want the book path and free tools grouped together.
   e6_book_title: The Follow-Up Waystream Guide for Compassion Fatigue
   e7_bundle_title: The Compassion Fatigue Calm Bundle
-  e8_last_chance_note: This is the last direct book nudge in the compassion fatigue freebie sequence.
+  e8_last_chance_note: This is the last direct book nudge in the compassion fatigue
+    freebie sequence.
+  bonus_pre_e3_title: 'Bonus before the story: one extra compassion fatigue practice'
+  bonus_pre_e3_url: https://brand-admin-onboarding-bu2.pages.dev/somatic_exercise_freebee_apps/app22_tonglen.html?unlock=1
+  bonus_pre_e3_cta: Open the bonus practice
+  bonus_pre_e3_tool_name: Softer practice after caregiving overload
+  bonus_pre_e3_short_description: A pre-E3 bonus email for the welcome-depth fallback
+    when GHL has no welcome_depth value.
+  bonus_pre_e3_benefit: Gives the contact one more felt practice before the story
+    email lands.
+  bonus_pre_e3_microcopy: Send this before Email 3 only when welcome_depth is blank
+    or missing.
+  bonus_pre_e3_html_template: funnel/waystream_sanctuary/emails/email_bonus_pre_story.html
+  bonus_pre_e3_send_if_welcome_depth_missing: true
 - brand_id: way_stream_sanctuary
   freebie_id: anxiety_assessment_v1
   quiz_id: thought_sorter_assessment
@@ -230,14 +273,17 @@ plans:
   e9_cta: Reopen the free tool
   e1_tool_name: Overthinking Thought Sorter
   e1_short_description: The free Waystream tool you requested for overthinking.
-  e1_benefit: Use it when overthinking starts to take over and you need one immediate step.
+  e1_benefit: Use it when overthinking starts to take over and you need one immediate
+    step.
   e1_microcopy: No login wall. Keep this link for the moment you need it.
   e2_tool_name: Box breathing for the loop that will not stop
-  e2_short_description: A second practice that keeps the first reset from being a one-off.
+  e2_short_description: A second practice that keeps the first reset from being a
+    one-off.
   e2_benefit: "Pair it with yesterday\u2019s tool so your body gets the signal twice."
   e2_microcopy: Do it once today. Notice the smallest shift.
   e3_tool_name: Transformation story
-  e3_short_description: A short story about why the overthinking reset can work in real life.
+  e3_short_description: A short story about why the overthinking reset can work in
+    real life.
   e3_benefit: See the mechanism through a human moment instead of a lecture.
   e3_microcopy: No pitch in this email. Just the story.
   e4_tool_name: The Waystream Guide to Overthinking
@@ -250,10 +296,12 @@ plans:
   e5_microcopy: Start with the first recommendation if you are unsure.
   e6_tool_name: The Follow-Up Waystream Guide for Overthinking
   e6_short_description: A follow-up book recommendation for the next layer of overthinking.
-  e6_benefit: Use this after the first book if you want a second angle on the same pattern.
+  e6_benefit: Use this after the first book if you want a second angle on the same
+    pattern.
   e6_microcopy: Recommendation 2 is for continuity, not pressure.
   e7_tool_name: The Overthinking Calm Bundle
-  e7_short_description: A bundle-style path that groups the next overthinking supports together.
+  e7_short_description: A bundle-style path that groups the next overthinking supports
+    together.
   e7_benefit: Use the bundle when you want the tools and books in one mental shelf.
   e7_microcopy: This is the cleanest path if you prefer everything in one place.
   e8_tool_name: Last-chance reminder
@@ -264,11 +312,14 @@ plans:
   e9_short_description: A still-here reminder with the original free tool link.
   e9_benefit: Return to the simplest reset any time you need it.
   e9_microcopy: No new ask today. Just the tool again.
-  e3_story_body: 'A Waystream reader once opened Overthinking Thought Sorter in the middle of an ordinary day, not a dramatic
-    breaking point. The old pattern was already moving: overthinking had started to feel like a command, and the body was
-    treating the signal like proof. They did the practice once, then used the second reset the next day. The shift was small,
-    but it mattered: there was now a pause between the signal and the reaction. That is why this works. It does not argue
-    with the mind. It gives the body one repeatable cue that says, "we can slow this down before it runs the whole day."'
+  e3_story_body: 'A Waystream reader once opened Overthinking Thought Sorter in the
+    middle of an ordinary day, not a dramatic breaking point. The old pattern was
+    already moving: overthinking had started to feel like a command, and the body
+    was treating the signal like proof. They did the practice once, then used the
+    second reset the next day. The shift was small, but it mattered: there was now
+    a pause between the signal and the reaction. That is why this works. It does not
+    argue with the mind. It gives the body one repeatable cue that says, "we can slow
+    this down before it runs the whole day."'
   e4_book_title: The Waystream Guide to Overthinking
   e5_book1_title: The Waystream Guide to Overthinking
   e5_book1_url: https://brand-admin-onboarding-bu2.pages.dev/download/way_stream_sanctuary__default_teacher__corporate_managers__overthinking__false_alarm
@@ -281,7 +332,20 @@ plans:
   e5_book3_note: Use this when you want the book path and free tools grouped together.
   e6_book_title: The Follow-Up Waystream Guide for Overthinking
   e7_bundle_title: The Overthinking Calm Bundle
-  e8_last_chance_note: This is the last direct book nudge in the overthinking freebie sequence.
+  e8_last_chance_note: This is the last direct book nudge in the overthinking freebie
+    sequence.
+  bonus_pre_e3_title: 'Bonus before the story: one extra overthinking practice'
+  bonus_pre_e3_url: https://brand-admin-onboarding-bu2.pages.dev/somatic_exercise_freebee_apps/ex02_box_breathing.html?unlock=1
+  bonus_pre_e3_cta: Open the bonus practice
+  bonus_pre_e3_tool_name: Box breathing for the loop that will not stop
+  bonus_pre_e3_short_description: A pre-E3 bonus email for the welcome-depth fallback
+    when GHL has no welcome_depth value.
+  bonus_pre_e3_benefit: Gives the contact one more felt practice before the story
+    email lands.
+  bonus_pre_e3_microcopy: Send this before Email 3 only when welcome_depth is blank
+    or missing.
+  bonus_pre_e3_html_template: funnel/waystream_sanctuary/emails/email_bonus_pre_story.html
+  bonus_pre_e3_send_if_welcome_depth_missing: true
 - brand_id: way_stream_sanctuary
   freebie_id: anxiety_assessment_v1
   quiz_id: financial_checkin
@@ -323,18 +387,22 @@ plans:
   e9_cta: Reopen the free tool
   e1_tool_name: Financial Anxiety Check-In
   e1_short_description: The free Waystream tool you requested for financial anxiety.
-  e1_benefit: Use it when financial anxiety starts to take over and you need one immediate step.
+  e1_benefit: Use it when financial anxiety starts to take over and you need one immediate
+    step.
   e1_microcopy: No login wall. Keep this link for the moment you need it.
   e2_tool_name: An extended exhale for money panic
-  e2_short_description: A second practice that keeps the first reset from being a one-off.
+  e2_short_description: A second practice that keeps the first reset from being a
+    one-off.
   e2_benefit: "Pair it with yesterday\u2019s tool so your body gets the signal twice."
   e2_microcopy: Do it once today. Notice the smallest shift.
   e3_tool_name: Transformation story
-  e3_short_description: A short story about why the financial anxiety reset can work in real life.
+  e3_short_description: A short story about why the financial anxiety reset can work
+    in real life.
   e3_benefit: See the mechanism through a human moment instead of a lecture.
   e3_microcopy: No pitch in this email. Just the story.
   e4_tool_name: The Waystream Guide to Financial Anxiety
-  e4_short_description: The first deeper Waystream book for this financial anxiety pattern.
+  e4_short_description: The first deeper Waystream book for this financial anxiety
+    pattern.
   e4_benefit: Use it when you want the full journey, not only the free tool.
   e4_microcopy: The free tools are still yours. This is the next layer.
   e5_tool_name: Waystream reading path
@@ -342,26 +410,33 @@ plans:
   e5_benefit: Choose the next book by the kind of support you want right now.
   e5_microcopy: Start with the first recommendation if you are unsure.
   e6_tool_name: The Follow-Up Waystream Guide for Financial Anxiety
-  e6_short_description: A follow-up book recommendation for the next layer of financial anxiety.
-  e6_benefit: Use this after the first book if you want a second angle on the same pattern.
+  e6_short_description: A follow-up book recommendation for the next layer of financial
+    anxiety.
+  e6_benefit: Use this after the first book if you want a second angle on the same
+    pattern.
   e6_microcopy: Recommendation 2 is for continuity, not pressure.
   e7_tool_name: The Financial Anxiety Calm Bundle
-  e7_short_description: A bundle-style path that groups the next financial anxiety supports together.
+  e7_short_description: A bundle-style path that groups the next financial anxiety
+    supports together.
   e7_benefit: Use the bundle when you want the tools and books in one mental shelf.
   e7_microcopy: This is the cleanest path if you prefer everything in one place.
   e8_tool_name: Last-chance reminder
-  e8_short_description: A final nudge before this financial anxiety sequence quiets down.
+  e8_short_description: A final nudge before this financial anxiety sequence quiets
+    down.
   e8_benefit: Take the next step now if you know you want the deeper support.
   e8_microcopy: If not, keep the free tool. That still counts.
   e9_tool_name: Financial Anxiety Check-In
   e9_short_description: A still-here reminder with the original free tool link.
   e9_benefit: Return to the simplest reset any time you need it.
   e9_microcopy: No new ask today. Just the tool again.
-  e3_story_body: 'A Waystream reader once opened Financial Anxiety Check-In in the middle of an ordinary day, not a dramatic
-    breaking point. The old pattern was already moving: financial anxiety had started to feel like a command, and the body
-    was treating the signal like proof. They did the practice once, then used the second reset the next day. The shift was
-    small, but it mattered: there was now a pause between the signal and the reaction. That is why this works. It does not
-    argue with the mind. It gives the body one repeatable cue that says, "we can slow this down before it runs the whole day."'
+  e3_story_body: 'A Waystream reader once opened Financial Anxiety Check-In in the
+    middle of an ordinary day, not a dramatic breaking point. The old pattern was
+    already moving: financial anxiety had started to feel like a command, and the
+    body was treating the signal like proof. They did the practice once, then used
+    the second reset the next day. The shift was small, but it mattered: there was
+    now a pause between the signal and the reaction. That is why this works. It does
+    not argue with the mind. It gives the body one repeatable cue that says, "we can
+    slow this down before it runs the whole day."'
   e4_book_title: The Waystream Guide to Financial Anxiety
   e5_book1_title: The Waystream Guide to Financial Anxiety
   e5_book1_url: https://brand-admin-onboarding-bu2.pages.dev/download/way_stream_sanctuary__default_teacher__corporate_managers__financial_anxiety__overwhelm
@@ -374,7 +449,20 @@ plans:
   e5_book3_note: Use this when you want the book path and free tools grouped together.
   e6_book_title: The Follow-Up Waystream Guide for Financial Anxiety
   e7_bundle_title: The Financial Anxiety Calm Bundle
-  e8_last_chance_note: This is the last direct book nudge in the financial anxiety freebie sequence.
+  e8_last_chance_note: This is the last direct book nudge in the financial anxiety
+    freebie sequence.
+  bonus_pre_e3_title: 'Bonus before the story: one extra financial anxiety practice'
+  bonus_pre_e3_url: https://brand-admin-onboarding-bu2.pages.dev/somatic_exercise_freebee_apps/ex04_extended_exhale.html?unlock=1
+  bonus_pre_e3_cta: Open the bonus practice
+  bonus_pre_e3_tool_name: An extended exhale for money panic
+  bonus_pre_e3_short_description: A pre-E3 bonus email for the welcome-depth fallback
+    when GHL has no welcome_depth value.
+  bonus_pre_e3_benefit: Gives the contact one more felt practice before the story
+    email lands.
+  bonus_pre_e3_microcopy: Send this before Email 3 only when welcome_depth is blank
+    or missing.
+  bonus_pre_e3_html_template: funnel/waystream_sanctuary/emails/email_bonus_pre_story.html
+  bonus_pre_e3_send_if_welcome_depth_missing: true
 - brand_id: way_stream_sanctuary
   freebie_id: resistance_mapping_v1
   quiz_id: decision_resistance_map
@@ -419,11 +507,13 @@ plans:
   e1_benefit: Use it when courage starts to take over and you need one immediate step.
   e1_microcopy: No login wall. Keep this link for the moment you need it.
   e2_tool_name: The intention quadrant before the hard step
-  e2_short_description: A second practice that keeps the first reset from being a one-off.
+  e2_short_description: A second practice that keeps the first reset from being a
+    one-off.
   e2_benefit: "Pair it with yesterday\u2019s tool so your body gets the signal twice."
   e2_microcopy: Do it once today. Notice the smallest shift.
   e3_tool_name: Transformation story
-  e3_short_description: A short story about why the courage reset can work in real life.
+  e3_short_description: A short story about why the courage reset can work in real
+    life.
   e3_benefit: See the mechanism through a human moment instead of a lecture.
   e3_microcopy: No pitch in this email. Just the story.
   e4_tool_name: The Waystream Guide to Courage
@@ -436,10 +526,12 @@ plans:
   e5_microcopy: Start with the first recommendation if you are unsure.
   e6_tool_name: The Follow-Up Waystream Guide for Courage
   e6_short_description: A follow-up book recommendation for the next layer of courage.
-  e6_benefit: Use this after the first book if you want a second angle on the same pattern.
+  e6_benefit: Use this after the first book if you want a second angle on the same
+    pattern.
   e6_microcopy: Recommendation 2 is for continuity, not pressure.
   e7_tool_name: The Courage Calm Bundle
-  e7_short_description: A bundle-style path that groups the next courage supports together.
+  e7_short_description: A bundle-style path that groups the next courage supports
+    together.
   e7_benefit: Use the bundle when you want the tools and books in one mental shelf.
   e7_microcopy: This is the cleanest path if you prefer everything in one place.
   e8_tool_name: Last-chance reminder
@@ -450,11 +542,14 @@ plans:
   e9_short_description: A still-here reminder with the original free tool link.
   e9_benefit: Return to the simplest reset any time you need it.
   e9_microcopy: No new ask today. Just the tool again.
-  e3_story_body: 'A Waystream reader once opened Courage Decision Map in the middle of an ordinary day, not a dramatic breaking
-    point. The old pattern was already moving: courage had started to feel like a command, and the body was treating the signal
-    like proof. They did the practice once, then used the second reset the next day. The shift was small, but it mattered:
-    there was now a pause between the signal and the reaction. That is why this works. It does not argue with the mind. It
-    gives the body one repeatable cue that says, "we can slow this down before it runs the whole day."'
+  e3_story_body: 'A Waystream reader once opened Courage Decision Map in the middle
+    of an ordinary day, not a dramatic breaking point. The old pattern was already
+    moving: courage had started to feel like a command, and the body was treating
+    the signal like proof. They did the practice once, then used the second reset
+    the next day. The shift was small, but it mattered: there was now a pause between
+    the signal and the reaction. That is why this works. It does not argue with the
+    mind. It gives the body one repeatable cue that says, "we can slow this down before
+    it runs the whole day."'
   e4_book_title: The Waystream Guide to Courage
   e5_book1_title: The Waystream Guide to Courage
   e5_book1_url: https://brand-admin-onboarding-bu2.pages.dev/download/way_stream_sanctuary__default_teacher__corporate_managers__courage__false_alarm
@@ -468,6 +563,18 @@ plans:
   e6_book_title: The Follow-Up Waystream Guide for Courage
   e7_bundle_title: The Courage Calm Bundle
   e8_last_chance_note: This is the last direct book nudge in the courage freebie sequence.
+  bonus_pre_e3_title: 'Bonus before the story: one extra courage practice'
+  bonus_pre_e3_url: https://brand-admin-onboarding-bu2.pages.dev/somatic_exercise_freebee_apps/ex15_intention_quadrant.html?unlock=1
+  bonus_pre_e3_cta: Open the bonus practice
+  bonus_pre_e3_tool_name: The intention quadrant before the hard step
+  bonus_pre_e3_short_description: A pre-E3 bonus email for the welcome-depth fallback
+    when GHL has no welcome_depth value.
+  bonus_pre_e3_benefit: Gives the contact one more felt practice before the story
+    email lands.
+  bonus_pre_e3_microcopy: Send this before Email 3 only when welcome_depth is blank
+    or missing.
+  bonus_pre_e3_html_template: funnel/waystream_sanctuary/emails/email_bonus_pre_story.html
+  bonus_pre_e3_send_if_welcome_depth_missing: true
 - brand_id: way_stream_sanctuary
   freebie_id: companion_core_v2
   quiz_id: capacity_assessment
@@ -512,11 +619,13 @@ plans:
   e1_benefit: Use it when burnout starts to take over and you need one immediate step.
   e1_microcopy: No login wall. Keep this link for the moment you need it.
   e2_tool_name: Box breathing for depleted capacity
-  e2_short_description: A second practice that keeps the first reset from being a one-off.
+  e2_short_description: A second practice that keeps the first reset from being a
+    one-off.
   e2_benefit: "Pair it with yesterday\u2019s tool so your body gets the signal twice."
   e2_microcopy: Do it once today. Notice the smallest shift.
   e3_tool_name: Transformation story
-  e3_short_description: A short story about why the burnout reset can work in real life.
+  e3_short_description: A short story about why the burnout reset can work in real
+    life.
   e3_benefit: See the mechanism through a human moment instead of a lecture.
   e3_microcopy: No pitch in this email. Just the story.
   e4_tool_name: The Waystream Guide to Burnout
@@ -529,10 +638,12 @@ plans:
   e5_microcopy: Start with the first recommendation if you are unsure.
   e6_tool_name: The Follow-Up Waystream Guide for Burnout
   e6_short_description: A follow-up book recommendation for the next layer of burnout.
-  e6_benefit: Use this after the first book if you want a second angle on the same pattern.
+  e6_benefit: Use this after the first book if you want a second angle on the same
+    pattern.
   e6_microcopy: Recommendation 2 is for continuity, not pressure.
   e7_tool_name: The Burnout Calm Bundle
-  e7_short_description: A bundle-style path that groups the next burnout supports together.
+  e7_short_description: A bundle-style path that groups the next burnout supports
+    together.
   e7_benefit: Use the bundle when you want the tools and books in one mental shelf.
   e7_microcopy: This is the cleanest path if you prefer everything in one place.
   e8_tool_name: Last-chance reminder
@@ -543,11 +654,14 @@ plans:
   e9_short_description: A still-here reminder with the original free tool link.
   e9_benefit: Return to the simplest reset any time you need it.
   e9_microcopy: No new ask today. Just the tool again.
-  e3_story_body: 'A Waystream reader once opened Burnout Energy Audit in the middle of an ordinary day, not a dramatic breaking
-    point. The old pattern was already moving: burnout had started to feel like a command, and the body was treating the signal
-    like proof. They did the practice once, then used the second reset the next day. The shift was small, but it mattered:
-    there was now a pause between the signal and the reaction. That is why this works. It does not argue with the mind. It
-    gives the body one repeatable cue that says, "we can slow this down before it runs the whole day."'
+  e3_story_body: 'A Waystream reader once opened Burnout Energy Audit in the middle
+    of an ordinary day, not a dramatic breaking point. The old pattern was already
+    moving: burnout had started to feel like a command, and the body was treating
+    the signal like proof. They did the practice once, then used the second reset
+    the next day. The shift was small, but it mattered: there was now a pause between
+    the signal and the reaction. That is why this works. It does not argue with the
+    mind. It gives the body one repeatable cue that says, "we can slow this down before
+    it runs the whole day."'
   e4_book_title: The Waystream Guide to Burnout
   e5_book1_title: The Waystream Guide to Burnout
   e5_book1_url: https://brand-admin-onboarding-bu2.pages.dev/download/way_stream_sanctuary__default_teacher__corporate_managers__burnout__grief
@@ -561,6 +675,18 @@ plans:
   e6_book_title: The Follow-Up Waystream Guide for Burnout
   e7_bundle_title: The Burnout Calm Bundle
   e8_last_chance_note: This is the last direct book nudge in the burnout freebie sequence.
+  bonus_pre_e3_title: 'Bonus before the story: one extra burnout practice'
+  bonus_pre_e3_url: https://brand-admin-onboarding-bu2.pages.dev/somatic_exercise_freebee_apps/ex02_box_breathing.html?unlock=1
+  bonus_pre_e3_cta: Open the bonus practice
+  bonus_pre_e3_tool_name: Box breathing for depleted capacity
+  bonus_pre_e3_short_description: A pre-E3 bonus email for the welcome-depth fallback
+    when GHL has no welcome_depth value.
+  bonus_pre_e3_benefit: Gives the contact one more felt practice before the story
+    email lands.
+  bonus_pre_e3_microcopy: Send this before Email 3 only when welcome_depth is blank
+    or missing.
+  bonus_pre_e3_html_template: funnel/waystream_sanctuary/emails/email_bonus_pre_story.html
+  bonus_pre_e3_send_if_welcome_depth_missing: true
 - brand_id: way_stream_sanctuary
   freebie_id: identity_sheet_v1
   quiz_id: worth_inventory
@@ -602,14 +728,17 @@ plans:
   e9_cta: Reopen the free tool
   e1_tool_name: Self-Worth Inventory
   e1_short_description: The free Waystream tool you requested for self worth.
-  e1_benefit: Use it when self worth starts to take over and you need one immediate step.
+  e1_benefit: Use it when self worth starts to take over and you need one immediate
+    step.
   e1_microcopy: No login wall. Keep this link for the moment you need it.
   e2_tool_name: Box breathing for the comparison spiral
-  e2_short_description: A second practice that keeps the first reset from being a one-off.
+  e2_short_description: A second practice that keeps the first reset from being a
+    one-off.
   e2_benefit: "Pair it with yesterday\u2019s tool so your body gets the signal twice."
   e2_microcopy: Do it once today. Notice the smallest shift.
   e3_tool_name: Transformation story
-  e3_short_description: A short story about why the self worth reset can work in real life.
+  e3_short_description: A short story about why the self worth reset can work in real
+    life.
   e3_benefit: See the mechanism through a human moment instead of a lecture.
   e3_microcopy: No pitch in this email. Just the story.
   e4_tool_name: The Waystream Guide to Self Worth
@@ -621,11 +750,14 @@ plans:
   e5_benefit: Choose the next book by the kind of support you want right now.
   e5_microcopy: Start with the first recommendation if you are unsure.
   e6_tool_name: The Follow-Up Waystream Guide for Self Worth
-  e6_short_description: A follow-up book recommendation for the next layer of self worth.
-  e6_benefit: Use this after the first book if you want a second angle on the same pattern.
+  e6_short_description: A follow-up book recommendation for the next layer of self
+    worth.
+  e6_benefit: Use this after the first book if you want a second angle on the same
+    pattern.
   e6_microcopy: Recommendation 2 is for continuity, not pressure.
   e7_tool_name: The Self Worth Calm Bundle
-  e7_short_description: A bundle-style path that groups the next self worth supports together.
+  e7_short_description: A bundle-style path that groups the next self worth supports
+    together.
   e7_benefit: Use the bundle when you want the tools and books in one mental shelf.
   e7_microcopy: This is the cleanest path if you prefer everything in one place.
   e8_tool_name: Last-chance reminder
@@ -636,11 +768,14 @@ plans:
   e9_short_description: A still-here reminder with the original free tool link.
   e9_benefit: Return to the simplest reset any time you need it.
   e9_microcopy: No new ask today. Just the tool again.
-  e3_story_body: 'A Waystream reader once opened Self-Worth Inventory in the middle of an ordinary day, not a dramatic breaking
-    point. The old pattern was already moving: self worth had started to feel like a command, and the body was treating the
-    signal like proof. They did the practice once, then used the second reset the next day. The shift was small, but it mattered:
-    there was now a pause between the signal and the reaction. That is why this works. It does not argue with the mind. It
-    gives the body one repeatable cue that says, "we can slow this down before it runs the whole day."'
+  e3_story_body: 'A Waystream reader once opened Self-Worth Inventory in the middle
+    of an ordinary day, not a dramatic breaking point. The old pattern was already
+    moving: self worth had started to feel like a command, and the body was treating
+    the signal like proof. They did the practice once, then used the second reset
+    the next day. The shift was small, but it mattered: there was now a pause between
+    the signal and the reaction. That is why this works. It does not argue with the
+    mind. It gives the body one repeatable cue that says, "we can slow this down before
+    it runs the whole day."'
   e4_book_title: The Waystream Guide to Self Worth
   e5_book1_title: The Waystream Guide to Self Worth
   e5_book1_url: https://brand-admin-onboarding-bu2.pages.dev/download/way_stream_sanctuary__default_teacher__corporate_managers__self_worth__comparison
@@ -653,7 +788,20 @@ plans:
   e5_book3_note: Use this when you want the book path and free tools grouped together.
   e6_book_title: The Follow-Up Waystream Guide for Self Worth
   e7_bundle_title: The Self Worth Calm Bundle
-  e8_last_chance_note: This is the last direct book nudge in the self worth freebie sequence.
+  e8_last_chance_note: This is the last direct book nudge in the self worth freebie
+    sequence.
+  bonus_pre_e3_title: 'Bonus before the story: one extra self worth practice'
+  bonus_pre_e3_url: https://brand-admin-onboarding-bu2.pages.dev/somatic_exercise_freebee_apps/ex02_box_breathing.html?unlock=1
+  bonus_pre_e3_cta: Open the bonus practice
+  bonus_pre_e3_tool_name: Box breathing for the comparison spiral
+  bonus_pre_e3_short_description: A pre-E3 bonus email for the welcome-depth fallback
+    when GHL has no welcome_depth value.
+  bonus_pre_e3_benefit: Gives the contact one more felt practice before the story
+    email lands.
+  bonus_pre_e3_microcopy: Send this before Email 3 only when welcome_depth is blank
+    or missing.
+  bonus_pre_e3_html_template: funnel/waystream_sanctuary/emails/email_bonus_pre_story.html
+  bonus_pre_e3_send_if_welcome_depth_missing: true
 - brand_id: way_stream_sanctuary
   freebie_id: accountability_partner_v1
   quiz_id: evidence_log
@@ -695,18 +843,22 @@ plans:
   e9_cta: Reopen the free tool
   e1_tool_name: Imposter Evidence Log
   e1_short_description: The free Waystream tool you requested for imposter syndrome.
-  e1_benefit: Use it when imposter syndrome starts to take over and you need one immediate step.
+  e1_benefit: Use it when imposter syndrome starts to take over and you need one immediate
+    step.
   e1_microcopy: No login wall. Keep this link for the moment you need it.
   e2_tool_name: Extended exhale for the fraud alarm
-  e2_short_description: A second practice that keeps the first reset from being a one-off.
+  e2_short_description: A second practice that keeps the first reset from being a
+    one-off.
   e2_benefit: "Pair it with yesterday\u2019s tool so your body gets the signal twice."
   e2_microcopy: Do it once today. Notice the smallest shift.
   e3_tool_name: Transformation story
-  e3_short_description: A short story about why the imposter syndrome reset can work in real life.
+  e3_short_description: A short story about why the imposter syndrome reset can work
+    in real life.
   e3_benefit: See the mechanism through a human moment instead of a lecture.
   e3_microcopy: No pitch in this email. Just the story.
   e4_tool_name: The Waystream Guide to Imposter Syndrome
-  e4_short_description: The first deeper Waystream book for this imposter syndrome pattern.
+  e4_short_description: The first deeper Waystream book for this imposter syndrome
+    pattern.
   e4_benefit: Use it when you want the full journey, not only the free tool.
   e4_microcopy: The free tools are still yours. This is the next layer.
   e5_tool_name: Waystream reading path
@@ -714,26 +866,33 @@ plans:
   e5_benefit: Choose the next book by the kind of support you want right now.
   e5_microcopy: Start with the first recommendation if you are unsure.
   e6_tool_name: The Follow-Up Waystream Guide for Imposter Syndrome
-  e6_short_description: A follow-up book recommendation for the next layer of imposter syndrome.
-  e6_benefit: Use this after the first book if you want a second angle on the same pattern.
+  e6_short_description: A follow-up book recommendation for the next layer of imposter
+    syndrome.
+  e6_benefit: Use this after the first book if you want a second angle on the same
+    pattern.
   e6_microcopy: Recommendation 2 is for continuity, not pressure.
   e7_tool_name: The Imposter Syndrome Calm Bundle
-  e7_short_description: A bundle-style path that groups the next imposter syndrome supports together.
+  e7_short_description: A bundle-style path that groups the next imposter syndrome
+    supports together.
   e7_benefit: Use the bundle when you want the tools and books in one mental shelf.
   e7_microcopy: This is the cleanest path if you prefer everything in one place.
   e8_tool_name: Last-chance reminder
-  e8_short_description: A final nudge before this imposter syndrome sequence quiets down.
+  e8_short_description: A final nudge before this imposter syndrome sequence quiets
+    down.
   e8_benefit: Take the next step now if you know you want the deeper support.
   e8_microcopy: If not, keep the free tool. That still counts.
   e9_tool_name: Imposter Evidence Log
   e9_short_description: A still-here reminder with the original free tool link.
   e9_benefit: Return to the simplest reset any time you need it.
   e9_microcopy: No new ask today. Just the tool again.
-  e3_story_body: 'A Waystream reader once opened Imposter Evidence Log in the middle of an ordinary day, not a dramatic breaking
-    point. The old pattern was already moving: imposter syndrome had started to feel like a command, and the body was treating
-    the signal like proof. They did the practice once, then used the second reset the next day. The shift was small, but it
-    mattered: there was now a pause between the signal and the reaction. That is why this works. It does not argue with the
-    mind. It gives the body one repeatable cue that says, "we can slow this down before it runs the whole day."'
+  e3_story_body: 'A Waystream reader once opened Imposter Evidence Log in the middle
+    of an ordinary day, not a dramatic breaking point. The old pattern was already
+    moving: imposter syndrome had started to feel like a command, and the body was
+    treating the signal like proof. They did the practice once, then used the second
+    reset the next day. The shift was small, but it mattered: there was now a pause
+    between the signal and the reaction. That is why this works. It does not argue
+    with the mind. It gives the body one repeatable cue that says, "we can slow this
+    down before it runs the whole day."'
   e4_book_title: The Waystream Guide to Imposter Syndrome
   e5_book1_title: The Waystream Guide to Imposter Syndrome
   e5_book1_url: https://brand-admin-onboarding-bu2.pages.dev/download/way_stream_sanctuary__default_teacher__corporate_managers__imposter_syndrome__comparison
@@ -746,7 +905,20 @@ plans:
   e5_book3_note: Use this when you want the book path and free tools grouped together.
   e6_book_title: The Follow-Up Waystream Guide for Imposter Syndrome
   e7_bundle_title: The Imposter Syndrome Calm Bundle
-  e8_last_chance_note: This is the last direct book nudge in the imposter syndrome freebie sequence.
+  e8_last_chance_note: This is the last direct book nudge in the imposter syndrome
+    freebie sequence.
+  bonus_pre_e3_title: 'Bonus before the story: one extra imposter syndrome practice'
+  bonus_pre_e3_url: https://brand-admin-onboarding-bu2.pages.dev/somatic_exercise_freebee_apps/ex04_extended_exhale.html?unlock=1
+  bonus_pre_e3_cta: Open the bonus practice
+  bonus_pre_e3_tool_name: Extended exhale for the fraud alarm
+  bonus_pre_e3_short_description: A pre-E3 bonus email for the welcome-depth fallback
+    when GHL has no welcome_depth value.
+  bonus_pre_e3_benefit: Gives the contact one more felt practice before the story
+    email lands.
+  bonus_pre_e3_microcopy: Send this before Email 3 only when welcome_depth is blank
+    or missing.
+  bonus_pre_e3_html_template: funnel/waystream_sanctuary/emails/email_bonus_pre_story.html
+  bonus_pre_e3_send_if_welcome_depth_missing: true
 - brand_id: way_stream_sanctuary
   freebie_id: conversation_scripts_v1
   quiz_id: script_practice
@@ -788,14 +960,17 @@ plans:
   e9_cta: Reopen the free tool
   e1_tool_name: Boundaries Script Kit
   e1_short_description: The free Waystream tool you requested for boundaries.
-  e1_benefit: Use it when boundaries starts to take over and you need one immediate step.
+  e1_benefit: Use it when boundaries starts to take over and you need one immediate
+    step.
   e1_microcopy: No login wall. Keep this link for the moment you need it.
   e2_tool_name: Box breathing before the hard sentence
-  e2_short_description: A second practice that keeps the first reset from being a one-off.
+  e2_short_description: A second practice that keeps the first reset from being a
+    one-off.
   e2_benefit: "Pair it with yesterday\u2019s tool so your body gets the signal twice."
   e2_microcopy: Do it once today. Notice the smallest shift.
   e3_tool_name: Transformation story
-  e3_short_description: A short story about why the boundaries reset can work in real life.
+  e3_short_description: A short story about why the boundaries reset can work in real
+    life.
   e3_benefit: See the mechanism through a human moment instead of a lecture.
   e3_microcopy: No pitch in this email. Just the story.
   e4_tool_name: The Waystream Guide to Boundaries
@@ -808,10 +983,12 @@ plans:
   e5_microcopy: Start with the first recommendation if you are unsure.
   e6_tool_name: The Follow-Up Waystream Guide for Boundaries
   e6_short_description: A follow-up book recommendation for the next layer of boundaries.
-  e6_benefit: Use this after the first book if you want a second angle on the same pattern.
+  e6_benefit: Use this after the first book if you want a second angle on the same
+    pattern.
   e6_microcopy: Recommendation 2 is for continuity, not pressure.
   e7_tool_name: The Boundaries Calm Bundle
-  e7_short_description: A bundle-style path that groups the next boundaries supports together.
+  e7_short_description: A bundle-style path that groups the next boundaries supports
+    together.
   e7_benefit: Use the bundle when you want the tools and books in one mental shelf.
   e7_microcopy: This is the cleanest path if you prefer everything in one place.
   e8_tool_name: Last-chance reminder
@@ -822,11 +999,14 @@ plans:
   e9_short_description: A still-here reminder with the original free tool link.
   e9_benefit: Return to the simplest reset any time you need it.
   e9_microcopy: No new ask today. Just the tool again.
-  e3_story_body: 'A Waystream reader once opened Boundaries Script Kit in the middle of an ordinary day, not a dramatic breaking
-    point. The old pattern was already moving: boundaries had started to feel like a command, and the body was treating the
-    signal like proof. They did the practice once, then used the second reset the next day. The shift was small, but it mattered:
-    there was now a pause between the signal and the reaction. That is why this works. It does not argue with the mind. It
-    gives the body one repeatable cue that says, "we can slow this down before it runs the whole day."'
+  e3_story_body: 'A Waystream reader once opened Boundaries Script Kit in the middle
+    of an ordinary day, not a dramatic breaking point. The old pattern was already
+    moving: boundaries had started to feel like a command, and the body was treating
+    the signal like proof. They did the practice once, then used the second reset
+    the next day. The shift was small, but it mattered: there was now a pause between
+    the signal and the reaction. That is why this works. It does not argue with the
+    mind. It gives the body one repeatable cue that says, "we can slow this down before
+    it runs the whole day."'
   e4_book_title: The Waystream Guide to Boundaries
   e5_book1_title: The Waystream Guide to Boundaries
   e5_book1_url: https://brand-admin-onboarding-bu2.pages.dev/download/way_stream_sanctuary__default_teacher__corporate_managers__boundaries__comparison
@@ -839,7 +1019,20 @@ plans:
   e5_book3_note: Use this when you want the book path and free tools grouped together.
   e6_book_title: The Follow-Up Waystream Guide for Boundaries
   e7_bundle_title: The Boundaries Calm Bundle
-  e8_last_chance_note: This is the last direct book nudge in the boundaries freebie sequence.
+  e8_last_chance_note: This is the last direct book nudge in the boundaries freebie
+    sequence.
+  bonus_pre_e3_title: 'Bonus before the story: one extra boundaries practice'
+  bonus_pre_e3_url: https://brand-admin-onboarding-bu2.pages.dev/somatic_exercise_freebee_apps/ex02_box_breathing.html?unlock=1
+  bonus_pre_e3_cta: Open the bonus practice
+  bonus_pre_e3_tool_name: Box breathing before the hard sentence
+  bonus_pre_e3_short_description: A pre-E3 bonus email for the welcome-depth fallback
+    when GHL has no welcome_depth value.
+  bonus_pre_e3_benefit: Gives the contact one more felt practice before the story
+    email lands.
+  bonus_pre_e3_microcopy: Send this before Email 3 only when welcome_depth is blank
+    or missing.
+  bonus_pre_e3_html_template: funnel/waystream_sanctuary/emails/email_bonus_pre_story.html
+  bonus_pre_e3_send_if_welcome_depth_missing: true
 - brand_id: way_stream_sanctuary
   freebie_id: thirty_day_tracker_v1
   quiz_id: micro_action_kit
@@ -881,14 +1074,17 @@ plans:
   e9_cta: Reopen the free tool
   e1_tool_name: Depression Momentum Kit
   e1_short_description: The free Waystream tool you requested for depression.
-  e1_benefit: Use it when depression starts to take over and you need one immediate step.
+  e1_benefit: Use it when depression starts to take over and you need one immediate
+    step.
   e1_microcopy: No login wall. Keep this link for the moment you need it.
   e2_tool_name: Body scan for the first small step
-  e2_short_description: A second practice that keeps the first reset from being a one-off.
+  e2_short_description: A second practice that keeps the first reset from being a
+    one-off.
   e2_benefit: "Pair it with yesterday\u2019s tool so your body gets the signal twice."
   e2_microcopy: Do it once today. Notice the smallest shift.
   e3_tool_name: Transformation story
-  e3_short_description: A short story about why the depression reset can work in real life.
+  e3_short_description: A short story about why the depression reset can work in real
+    life.
   e3_benefit: See the mechanism through a human moment instead of a lecture.
   e3_microcopy: No pitch in this email. Just the story.
   e4_tool_name: The Waystream Guide to Depression
@@ -901,10 +1097,12 @@ plans:
   e5_microcopy: Start with the first recommendation if you are unsure.
   e6_tool_name: The Follow-Up Waystream Guide for Depression
   e6_short_description: A follow-up book recommendation for the next layer of depression.
-  e6_benefit: Use this after the first book if you want a second angle on the same pattern.
+  e6_benefit: Use this after the first book if you want a second angle on the same
+    pattern.
   e6_microcopy: Recommendation 2 is for continuity, not pressure.
   e7_tool_name: The Depression Calm Bundle
-  e7_short_description: A bundle-style path that groups the next depression supports together.
+  e7_short_description: A bundle-style path that groups the next depression supports
+    together.
   e7_benefit: Use the bundle when you want the tools and books in one mental shelf.
   e7_microcopy: This is the cleanest path if you prefer everything in one place.
   e8_tool_name: Last-chance reminder
@@ -915,11 +1113,14 @@ plans:
   e9_short_description: A still-here reminder with the original free tool link.
   e9_benefit: Return to the simplest reset any time you need it.
   e9_microcopy: No new ask today. Just the tool again.
-  e3_story_body: 'A Waystream reader once opened Depression Momentum Kit in the middle of an ordinary day, not a dramatic
-    breaking point. The old pattern was already moving: depression had started to feel like a command, and the body was treating
-    the signal like proof. They did the practice once, then used the second reset the next day. The shift was small, but it
-    mattered: there was now a pause between the signal and the reaction. That is why this works. It does not argue with the
-    mind. It gives the body one repeatable cue that says, "we can slow this down before it runs the whole day."'
+  e3_story_body: 'A Waystream reader once opened Depression Momentum Kit in the middle
+    of an ordinary day, not a dramatic breaking point. The old pattern was already
+    moving: depression had started to feel like a command, and the body was treating
+    the signal like proof. They did the practice once, then used the second reset
+    the next day. The shift was small, but it mattered: there was now a pause between
+    the signal and the reaction. That is why this works. It does not argue with the
+    mind. It gives the body one repeatable cue that says, "we can slow this down before
+    it runs the whole day."'
   e4_book_title: The Waystream Guide to Depression
   e5_book1_title: The Waystream Guide to Depression
   e5_book1_url: https://brand-admin-onboarding-bu2.pages.dev/download/way_stream_sanctuary__default_teacher__corporate_managers__depression__grief
@@ -932,7 +1133,20 @@ plans:
   e5_book3_note: Use this when you want the book path and free tools grouped together.
   e6_book_title: The Follow-Up Waystream Guide for Depression
   e7_bundle_title: The Depression Calm Bundle
-  e8_last_chance_note: This is the last direct book nudge in the depression freebie sequence.
+  e8_last_chance_note: This is the last direct book nudge in the depression freebie
+    sequence.
+  bonus_pre_e3_title: 'Bonus before the story: one extra depression practice'
+  bonus_pre_e3_url: https://brand-admin-onboarding-bu2.pages.dev/somatic_exercise_freebee_apps/ex13_body_scan.html?unlock=1
+  bonus_pre_e3_cta: Open the bonus practice
+  bonus_pre_e3_tool_name: Body scan for the first small step
+  bonus_pre_e3_short_description: A pre-E3 bonus email for the welcome-depth fallback
+    when GHL has no welcome_depth value.
+  bonus_pre_e3_benefit: Gives the contact one more felt practice before the story
+    email lands.
+  bonus_pre_e3_microcopy: Send this before Email 3 only when welcome_depth is blank
+    or missing.
+  bonus_pre_e3_html_template: funnel/waystream_sanctuary/emails/email_bonus_pre_story.html
+  bonus_pre_e3_send_if_welcome_depth_missing: true
 - brand_id: way_stream_sanctuary
   freebie_id: emergency_kit_v1
   quiz_id: pre_event_protocol
@@ -974,14 +1188,17 @@ plans:
   e9_cta: Reopen the free tool
   e1_tool_name: Social Anxiety Toolkit
   e1_short_description: The free Waystream tool you requested for social anxiety.
-  e1_benefit: Use it when social anxiety starts to take over and you need one immediate step.
+  e1_benefit: Use it when social anxiety starts to take over and you need one immediate
+    step.
   e1_microcopy: No login wall. Keep this link for the moment you need it.
   e2_tool_name: Grounding before the room gets loud
-  e2_short_description: A second practice that keeps the first reset from being a one-off.
+  e2_short_description: A second practice that keeps the first reset from being a
+    one-off.
   e2_benefit: "Pair it with yesterday\u2019s tool so your body gets the signal twice."
   e2_microcopy: Do it once today. Notice the smallest shift.
   e3_tool_name: Transformation story
-  e3_short_description: A short story about why the social anxiety reset can work in real life.
+  e3_short_description: A short story about why the social anxiety reset can work
+    in real life.
   e3_benefit: See the mechanism through a human moment instead of a lecture.
   e3_microcopy: No pitch in this email. Just the story.
   e4_tool_name: The Waystream Guide to Social Anxiety
@@ -993,11 +1210,14 @@ plans:
   e5_benefit: Choose the next book by the kind of support you want right now.
   e5_microcopy: Start with the first recommendation if you are unsure.
   e6_tool_name: The Follow-Up Waystream Guide for Social Anxiety
-  e6_short_description: A follow-up book recommendation for the next layer of social anxiety.
-  e6_benefit: Use this after the first book if you want a second angle on the same pattern.
+  e6_short_description: A follow-up book recommendation for the next layer of social
+    anxiety.
+  e6_benefit: Use this after the first book if you want a second angle on the same
+    pattern.
   e6_microcopy: Recommendation 2 is for continuity, not pressure.
   e7_tool_name: The Social Anxiety Calm Bundle
-  e7_short_description: A bundle-style path that groups the next social anxiety supports together.
+  e7_short_description: A bundle-style path that groups the next social anxiety supports
+    together.
   e7_benefit: Use the bundle when you want the tools and books in one mental shelf.
   e7_microcopy: This is the cleanest path if you prefer everything in one place.
   e8_tool_name: Last-chance reminder
@@ -1008,11 +1228,14 @@ plans:
   e9_short_description: A still-here reminder with the original free tool link.
   e9_benefit: Return to the simplest reset any time you need it.
   e9_microcopy: No new ask today. Just the tool again.
-  e3_story_body: 'A Waystream reader once opened Social Anxiety Toolkit in the middle of an ordinary day, not a dramatic breaking
-    point. The old pattern was already moving: social anxiety had started to feel like a command, and the body was treating
-    the signal like proof. They did the practice once, then used the second reset the next day. The shift was small, but it
-    mattered: there was now a pause between the signal and the reaction. That is why this works. It does not argue with the
-    mind. It gives the body one repeatable cue that says, "we can slow this down before it runs the whole day."'
+  e3_story_body: 'A Waystream reader once opened Social Anxiety Toolkit in the middle
+    of an ordinary day, not a dramatic breaking point. The old pattern was already
+    moving: social anxiety had started to feel like a command, and the body was treating
+    the signal like proof. They did the practice once, then used the second reset
+    the next day. The shift was small, but it mattered: there was now a pause between
+    the signal and the reaction. That is why this works. It does not argue with the
+    mind. It gives the body one repeatable cue that says, "we can slow this down before
+    it runs the whole day."'
   e4_book_title: The Waystream Guide to Social Anxiety
   e5_book1_title: The Waystream Guide to Social Anxiety
   e5_book1_url: https://brand-admin-onboarding-bu2.pages.dev/download/way_stream_sanctuary__default_teacher__corporate_managers__social_anxiety__comparison
@@ -1025,7 +1248,20 @@ plans:
   e5_book3_note: Use this when you want the book path and free tools grouped together.
   e6_book_title: The Follow-Up Waystream Guide for Social Anxiety
   e7_bundle_title: The Social Anxiety Calm Bundle
-  e8_last_chance_note: This is the last direct book nudge in the social anxiety freebie sequence.
+  e8_last_chance_note: This is the last direct book nudge in the social anxiety freebie
+    sequence.
+  bonus_pre_e3_title: 'Bonus before the story: one extra social anxiety practice'
+  bonus_pre_e3_url: https://brand-admin-onboarding-bu2.pages.dev/somatic_exercise_freebee_apps/ex14_grounding_54321.html?unlock=1
+  bonus_pre_e3_cta: Open the bonus practice
+  bonus_pre_e3_tool_name: Grounding before the room gets loud
+  bonus_pre_e3_short_description: A pre-E3 bonus email for the welcome-depth fallback
+    when GHL has no welcome_depth value.
+  bonus_pre_e3_benefit: Gives the contact one more felt practice before the story
+    email lands.
+  bonus_pre_e3_microcopy: Send this before Email 3 only when welcome_depth is blank
+    or missing.
+  bonus_pre_e3_html_template: funnel/waystream_sanctuary/emails/email_bonus_pre_story.html
+  bonus_pre_e3_send_if_welcome_depth_missing: true
 - brand_id: way_stream_sanctuary
   freebie_id: journal_reflection_v1
   quiz_id: financial_stress_audit
@@ -1067,18 +1303,22 @@ plans:
   e9_cta: Reopen the free tool
   e1_tool_name: Financial Stress Audit
   e1_short_description: The free Waystream tool you requested for financial stress.
-  e1_benefit: Use it when financial stress starts to take over and you need one immediate step.
+  e1_benefit: Use it when financial stress starts to take over and you need one immediate
+    step.
   e1_microcopy: No login wall. Keep this link for the moment you need it.
   e2_tool_name: Extended exhale for financial stress
-  e2_short_description: A second practice that keeps the first reset from being a one-off.
+  e2_short_description: A second practice that keeps the first reset from being a
+    one-off.
   e2_benefit: "Pair it with yesterday\u2019s tool so your body gets the signal twice."
   e2_microcopy: Do it once today. Notice the smallest shift.
   e3_tool_name: Transformation story
-  e3_short_description: A short story about why the financial stress reset can work in real life.
+  e3_short_description: A short story about why the financial stress reset can work
+    in real life.
   e3_benefit: See the mechanism through a human moment instead of a lecture.
   e3_microcopy: No pitch in this email. Just the story.
   e4_tool_name: The Waystream Guide to Financial Stress
-  e4_short_description: The first deeper Waystream book for this financial stress pattern.
+  e4_short_description: The first deeper Waystream book for this financial stress
+    pattern.
   e4_benefit: Use it when you want the full journey, not only the free tool.
   e4_microcopy: The free tools are still yours. This is the next layer.
   e5_tool_name: Waystream reading path
@@ -1086,26 +1326,33 @@ plans:
   e5_benefit: Choose the next book by the kind of support you want right now.
   e5_microcopy: Start with the first recommendation if you are unsure.
   e6_tool_name: The Follow-Up Waystream Guide for Financial Stress
-  e6_short_description: A follow-up book recommendation for the next layer of financial stress.
-  e6_benefit: Use this after the first book if you want a second angle on the same pattern.
+  e6_short_description: A follow-up book recommendation for the next layer of financial
+    stress.
+  e6_benefit: Use this after the first book if you want a second angle on the same
+    pattern.
   e6_microcopy: Recommendation 2 is for continuity, not pressure.
   e7_tool_name: The Financial Stress Calm Bundle
-  e7_short_description: A bundle-style path that groups the next financial stress supports together.
+  e7_short_description: A bundle-style path that groups the next financial stress
+    supports together.
   e7_benefit: Use the bundle when you want the tools and books in one mental shelf.
   e7_microcopy: This is the cleanest path if you prefer everything in one place.
   e8_tool_name: Last-chance reminder
-  e8_short_description: A final nudge before this financial stress sequence quiets down.
+  e8_short_description: A final nudge before this financial stress sequence quiets
+    down.
   e8_benefit: Take the next step now if you know you want the deeper support.
   e8_microcopy: If not, keep the free tool. That still counts.
   e9_tool_name: Financial Stress Audit
   e9_short_description: A still-here reminder with the original free tool link.
   e9_benefit: Return to the simplest reset any time you need it.
   e9_microcopy: No new ask today. Just the tool again.
-  e3_story_body: 'A Waystream reader once opened Financial Stress Audit in the middle of an ordinary day, not a dramatic breaking
-    point. The old pattern was already moving: financial stress had started to feel like a command, and the body was treating
-    the signal like proof. They did the practice once, then used the second reset the next day. The shift was small, but it
-    mattered: there was now a pause between the signal and the reaction. That is why this works. It does not argue with the
-    mind. It gives the body one repeatable cue that says, "we can slow this down before it runs the whole day."'
+  e3_story_body: 'A Waystream reader once opened Financial Stress Audit in the middle
+    of an ordinary day, not a dramatic breaking point. The old pattern was already
+    moving: financial stress had started to feel like a command, and the body was
+    treating the signal like proof. They did the practice once, then used the second
+    reset the next day. The shift was small, but it mattered: there was now a pause
+    between the signal and the reaction. That is why this works. It does not argue
+    with the mind. It gives the body one repeatable cue that says, "we can slow this
+    down before it runs the whole day."'
   e4_book_title: The Waystream Guide to Financial Stress
   e5_book1_title: The Waystream Guide to Financial Stress
   e5_book1_url: https://brand-admin-onboarding-bu2.pages.dev/download/way_stream_sanctuary__default_teacher__corporate_managers__financial_stress__overwhelm
@@ -1118,7 +1365,20 @@ plans:
   e5_book3_note: Use this when you want the book path and free tools grouped together.
   e6_book_title: The Follow-Up Waystream Guide for Financial Stress
   e7_bundle_title: The Financial Stress Calm Bundle
-  e8_last_chance_note: This is the last direct book nudge in the financial stress freebie sequence.
+  e8_last_chance_note: This is the last direct book nudge in the financial stress
+    freebie sequence.
+  bonus_pre_e3_title: 'Bonus before the story: one extra financial stress practice'
+  bonus_pre_e3_url: https://brand-admin-onboarding-bu2.pages.dev/somatic_exercise_freebee_apps/ex04_extended_exhale.html?unlock=1
+  bonus_pre_e3_cta: Open the bonus practice
+  bonus_pre_e3_tool_name: Extended exhale for financial stress
+  bonus_pre_e3_short_description: A pre-E3 bonus email for the welcome-depth fallback
+    when GHL has no welcome_depth value.
+  bonus_pre_e3_benefit: Gives the contact one more felt practice before the story
+    email lands.
+  bonus_pre_e3_microcopy: Send this before Email 3 only when welcome_depth is blank
+    or missing.
+  bonus_pre_e3_html_template: funnel/waystream_sanctuary/emails/email_bonus_pre_story.html
+  bonus_pre_e3_send_if_welcome_depth_missing: true
 - brand_id: way_stream_sanctuary
   freebie_id: breath_timer_v1
   quiz_id: wind_down_breath
@@ -1160,14 +1420,17 @@ plans:
   e9_cta: Reopen the free tool
   e1_tool_name: Sleep Anxiety Wind-Down
   e1_short_description: The free Waystream tool you requested for sleep anxiety.
-  e1_benefit: Use it when sleep anxiety starts to take over and you need one immediate step.
+  e1_benefit: Use it when sleep anxiety starts to take over and you need one immediate
+    step.
   e1_microcopy: No login wall. Keep this link for the moment you need it.
   e2_tool_name: Body scan for the night alarm
-  e2_short_description: A second practice that keeps the first reset from being a one-off.
+  e2_short_description: A second practice that keeps the first reset from being a
+    one-off.
   e2_benefit: "Pair it with yesterday\u2019s tool so your body gets the signal twice."
   e2_microcopy: Do it once today. Notice the smallest shift.
   e3_tool_name: Transformation story
-  e3_short_description: A short story about why the sleep anxiety reset can work in real life.
+  e3_short_description: A short story about why the sleep anxiety reset can work in
+    real life.
   e3_benefit: See the mechanism through a human moment instead of a lecture.
   e3_microcopy: No pitch in this email. Just the story.
   e4_tool_name: The Waystream Guide to Sleep Anxiety
@@ -1179,11 +1442,14 @@ plans:
   e5_benefit: Choose the next book by the kind of support you want right now.
   e5_microcopy: Start with the first recommendation if you are unsure.
   e6_tool_name: The Follow-Up Waystream Guide for Sleep Anxiety
-  e6_short_description: A follow-up book recommendation for the next layer of sleep anxiety.
-  e6_benefit: Use this after the first book if you want a second angle on the same pattern.
+  e6_short_description: A follow-up book recommendation for the next layer of sleep
+    anxiety.
+  e6_benefit: Use this after the first book if you want a second angle on the same
+    pattern.
   e6_microcopy: Recommendation 2 is for continuity, not pressure.
   e7_tool_name: The Sleep Anxiety Calm Bundle
-  e7_short_description: A bundle-style path that groups the next sleep anxiety supports together.
+  e7_short_description: A bundle-style path that groups the next sleep anxiety supports
+    together.
   e7_benefit: Use the bundle when you want the tools and books in one mental shelf.
   e7_microcopy: This is the cleanest path if you prefer everything in one place.
   e8_tool_name: Last-chance reminder
@@ -1194,11 +1460,14 @@ plans:
   e9_short_description: A still-here reminder with the original free tool link.
   e9_benefit: Return to the simplest reset any time you need it.
   e9_microcopy: No new ask today. Just the tool again.
-  e3_story_body: 'A Waystream reader once opened Sleep Anxiety Wind-Down in the middle of an ordinary day, not a dramatic
-    breaking point. The old pattern was already moving: sleep anxiety had started to feel like a command, and the body was
-    treating the signal like proof. They did the practice once, then used the second reset the next day. The shift was small,
-    but it mattered: there was now a pause between the signal and the reaction. That is why this works. It does not argue
-    with the mind. It gives the body one repeatable cue that says, "we can slow this down before it runs the whole day."'
+  e3_story_body: 'A Waystream reader once opened Sleep Anxiety Wind-Down in the middle
+    of an ordinary day, not a dramatic breaking point. The old pattern was already
+    moving: sleep anxiety had started to feel like a command, and the body was treating
+    the signal like proof. They did the practice once, then used the second reset
+    the next day. The shift was small, but it mattered: there was now a pause between
+    the signal and the reaction. That is why this works. It does not argue with the
+    mind. It gives the body one repeatable cue that says, "we can slow this down before
+    it runs the whole day."'
   e4_book_title: The Waystream Guide to Sleep Anxiety
   e5_book1_title: The Waystream Guide to Sleep Anxiety
   e5_book1_url: https://brand-admin-onboarding-bu2.pages.dev/download/way_stream_sanctuary__default_teacher__corporate_managers__sleep_anxiety__false_alarm
@@ -1211,7 +1480,20 @@ plans:
   e5_book3_note: Use this when you want the book path and free tools grouped together.
   e6_book_title: The Follow-Up Waystream Guide for Sleep Anxiety
   e7_bundle_title: The Sleep Anxiety Calm Bundle
-  e8_last_chance_note: This is the last direct book nudge in the sleep anxiety freebie sequence.
+  e8_last_chance_note: This is the last direct book nudge in the sleep anxiety freebie
+    sequence.
+  bonus_pre_e3_title: 'Bonus before the story: one extra sleep anxiety practice'
+  bonus_pre_e3_url: https://brand-admin-onboarding-bu2.pages.dev/somatic_exercise_freebee_apps/ex13_body_scan.html?unlock=1
+  bonus_pre_e3_cta: Open the bonus practice
+  bonus_pre_e3_tool_name: Body scan for the night alarm
+  bonus_pre_e3_short_description: A pre-E3 bonus email for the welcome-depth fallback
+    when GHL has no welcome_depth value.
+  bonus_pre_e3_benefit: Gives the contact one more felt practice before the story
+    email lands.
+  bonus_pre_e3_microcopy: Send this before Email 3 only when welcome_depth is blank
+    or missing.
+  bonus_pre_e3_html_template: funnel/waystream_sanctuary/emails/email_bonus_pre_story.html
+  bonus_pre_e3_send_if_welcome_depth_missing: true
 - brand_id: way_stream_sanctuary
   freebie_id: breath_reset_structured_v1
   quiz_id: body_scan_timer
@@ -1253,14 +1535,17 @@ plans:
   e9_cta: Reopen the free tool
   e1_tool_name: Somatic Body Scan
   e1_short_description: The free Waystream tool you requested for somatic healing.
-  e1_benefit: Use it when somatic healing starts to take over and you need one immediate step.
+  e1_benefit: Use it when somatic healing starts to take over and you need one immediate
+    step.
   e1_microcopy: No login wall. Keep this link for the moment you need it.
   e2_tool_name: Second body scan for deeper settling
-  e2_short_description: A second practice that keeps the first reset from being a one-off.
+  e2_short_description: A second practice that keeps the first reset from being a
+    one-off.
   e2_benefit: "Pair it with yesterday\u2019s tool so your body gets the signal twice."
   e2_microcopy: Do it once today. Notice the smallest shift.
   e3_tool_name: Transformation story
-  e3_short_description: A short story about why the somatic healing reset can work in real life.
+  e3_short_description: A short story about why the somatic healing reset can work
+    in real life.
   e3_benefit: See the mechanism through a human moment instead of a lecture.
   e3_microcopy: No pitch in this email. Just the story.
   e4_tool_name: The Waystream Guide to Somatic Healing
@@ -1272,26 +1557,33 @@ plans:
   e5_benefit: Choose the next book by the kind of support you want right now.
   e5_microcopy: Start with the first recommendation if you are unsure.
   e6_tool_name: The Follow-Up Waystream Guide for Somatic Healing
-  e6_short_description: A follow-up book recommendation for the next layer of somatic healing.
-  e6_benefit: Use this after the first book if you want a second angle on the same pattern.
+  e6_short_description: A follow-up book recommendation for the next layer of somatic
+    healing.
+  e6_benefit: Use this after the first book if you want a second angle on the same
+    pattern.
   e6_microcopy: Recommendation 2 is for continuity, not pressure.
   e7_tool_name: The Somatic Healing Calm Bundle
-  e7_short_description: A bundle-style path that groups the next somatic healing supports together.
+  e7_short_description: A bundle-style path that groups the next somatic healing supports
+    together.
   e7_benefit: Use the bundle when you want the tools and books in one mental shelf.
   e7_microcopy: This is the cleanest path if you prefer everything in one place.
   e8_tool_name: Last-chance reminder
-  e8_short_description: A final nudge before this somatic healing sequence quiets down.
+  e8_short_description: A final nudge before this somatic healing sequence quiets
+    down.
   e8_benefit: Take the next step now if you know you want the deeper support.
   e8_microcopy: If not, keep the free tool. That still counts.
   e9_tool_name: Somatic Body Scan
   e9_short_description: A still-here reminder with the original free tool link.
   e9_benefit: Return to the simplest reset any time you need it.
   e9_microcopy: No new ask today. Just the tool again.
-  e3_story_body: 'A Waystream reader once opened Somatic Body Scan in the middle of an ordinary day, not a dramatic breaking
-    point. The old pattern was already moving: somatic healing had started to feel like a command, and the body was treating
-    the signal like proof. They did the practice once, then used the second reset the next day. The shift was small, but it
-    mattered: there was now a pause between the signal and the reaction. That is why this works. It does not argue with the
-    mind. It gives the body one repeatable cue that says, "we can slow this down before it runs the whole day."'
+  e3_story_body: 'A Waystream reader once opened Somatic Body Scan in the middle of
+    an ordinary day, not a dramatic breaking point. The old pattern was already moving:
+    somatic healing had started to feel like a command, and the body was treating
+    the signal like proof. They did the practice once, then used the second reset
+    the next day. The shift was small, but it mattered: there was now a pause between
+    the signal and the reaction. That is why this works. It does not argue with the
+    mind. It gives the body one repeatable cue that says, "we can slow this down before
+    it runs the whole day."'
   e4_book_title: The Waystream Guide to Somatic Healing
   e5_book1_title: The Waystream Guide to Somatic Healing
   e5_book1_url: https://brand-admin-onboarding-bu2.pages.dev/download/way_stream_sanctuary__default_teacher__corporate_managers__somatic_healing__overwhelm
@@ -1304,7 +1596,20 @@ plans:
   e5_book3_note: Use this when you want the book path and free tools grouped together.
   e6_book_title: The Follow-Up Waystream Guide for Somatic Healing
   e7_bundle_title: The Somatic Healing Calm Bundle
-  e8_last_chance_note: This is the last direct book nudge in the somatic healing freebie sequence.
+  e8_last_chance_note: This is the last direct book nudge in the somatic healing freebie
+    sequence.
+  bonus_pre_e3_title: 'Bonus before the story: one extra somatic healing practice'
+  bonus_pre_e3_url: https://brand-admin-onboarding-bu2.pages.dev/somatic_exercise_freebee_apps/ex13_body_scan.html?unlock=1
+  bonus_pre_e3_cta: Open the bonus practice
+  bonus_pre_e3_tool_name: Second body scan for deeper settling
+  bonus_pre_e3_short_description: A pre-E3 bonus email for the welcome-depth fallback
+    when GHL has no welcome_depth value.
+  bonus_pre_e3_benefit: Gives the contact one more felt practice before the story
+    email lands.
+  bonus_pre_e3_microcopy: Send this before Email 3 only when welcome_depth is blank
+    or missing.
+  bonus_pre_e3_html_template: funnel/waystream_sanctuary/emails/email_bonus_pre_story.html
+  bonus_pre_e3_send_if_welcome_depth_missing: true
 - brand_id: way_stream_sanctuary
   freebie_id: journal_reflection_v1
   quiz_id: grief_letter_template
@@ -1349,7 +1654,8 @@ plans:
   e1_benefit: Use it when grief starts to take over and you need one immediate step.
   e1_microcopy: No login wall. Keep this link for the moment you need it.
   e2_tool_name: Body scan for what grief is carrying
-  e2_short_description: A second practice that keeps the first reset from being a one-off.
+  e2_short_description: A second practice that keeps the first reset from being a
+    one-off.
   e2_benefit: "Pair it with yesterday\u2019s tool so your body gets the signal twice."
   e2_microcopy: Do it once today. Notice the smallest shift.
   e3_tool_name: Transformation story
@@ -1366,7 +1672,8 @@ plans:
   e5_microcopy: Start with the first recommendation if you are unsure.
   e6_tool_name: The Follow-Up Waystream Guide for Grief
   e6_short_description: A follow-up book recommendation for the next layer of grief.
-  e6_benefit: Use this after the first book if you want a second angle on the same pattern.
+  e6_benefit: Use this after the first book if you want a second angle on the same
+    pattern.
   e6_microcopy: Recommendation 2 is for continuity, not pressure.
   e7_tool_name: The Grief Calm Bundle
   e7_short_description: A bundle-style path that groups the next grief supports together.
@@ -1380,11 +1687,14 @@ plans:
   e9_short_description: A still-here reminder with the original free tool link.
   e9_benefit: Return to the simplest reset any time you need it.
   e9_microcopy: No new ask today. Just the tool again.
-  e3_story_body: 'A Waystream reader once opened Grief Letter Template in the middle of an ordinary day, not a dramatic breaking
-    point. The old pattern was already moving: grief had started to feel like a command, and the body was treating the signal
-    like proof. They did the practice once, then used the second reset the next day. The shift was small, but it mattered:
-    there was now a pause between the signal and the reaction. That is why this works. It does not argue with the mind. It
-    gives the body one repeatable cue that says, "we can slow this down before it runs the whole day."'
+  e3_story_body: 'A Waystream reader once opened Grief Letter Template in the middle
+    of an ordinary day, not a dramatic breaking point. The old pattern was already
+    moving: grief had started to feel like a command, and the body was treating the
+    signal like proof. They did the practice once, then used the second reset the
+    next day. The shift was small, but it mattered: there was now a pause between
+    the signal and the reaction. That is why this works. It does not argue with the
+    mind. It gives the body one repeatable cue that says, "we can slow this down before
+    it runs the whole day."'
   e4_book_title: The Waystream Guide to Grief
   e5_book1_title: The Waystream Guide to Grief
   e5_book1_url: https://brand-admin-onboarding-bu2.pages.dev/download/way_stream_sanctuary__default_teacher__corporate_managers__grief__grief
@@ -1398,3 +1708,15 @@ plans:
   e6_book_title: The Follow-Up Waystream Guide for Grief
   e7_bundle_title: The Grief Calm Bundle
   e8_last_chance_note: This is the last direct book nudge in the grief freebie sequence.
+  bonus_pre_e3_title: 'Bonus before the story: one extra grief practice'
+  bonus_pre_e3_url: https://brand-admin-onboarding-bu2.pages.dev/somatic_exercise_freebee_apps/ex13_body_scan.html?unlock=1
+  bonus_pre_e3_cta: Open the bonus practice
+  bonus_pre_e3_tool_name: Body scan for what grief is carrying
+  bonus_pre_e3_short_description: A pre-E3 bonus email for the welcome-depth fallback
+    when GHL has no welcome_depth value.
+  bonus_pre_e3_benefit: Gives the contact one more felt practice before the story
+    email lands.
+  bonus_pre_e3_microcopy: Send this before Email 3 only when welcome_depth is blank
+    or missing.
+  bonus_pre_e3_html_template: funnel/waystream_sanctuary/emails/email_bonus_pre_story.html
+  bonus_pre_e3_send_if_welcome_depth_missing: true

@@ -65,7 +65,24 @@ SPECIAL_EMAIL_REQUIRED = (
     "e7_bundle_title",
     "e8_last_chance_note",
 )
-PAGE_PLAN_FIELDS = BASE_REQUIRED + OPTIONAL_METADATA + EMAIL_REQUIRED + SPECIAL_EMAIL_REQUIRED
+BONUS_PRE_E3_REQUIRED = (
+    "bonus_pre_e3_title",
+    "bonus_pre_e3_url",
+    "bonus_pre_e3_cta",
+    "bonus_pre_e3_tool_name",
+    "bonus_pre_e3_short_description",
+    "bonus_pre_e3_benefit",
+    "bonus_pre_e3_microcopy",
+    "bonus_pre_e3_html_template",
+    "bonus_pre_e3_send_if_welcome_depth_missing",
+)
+PAGE_PLAN_FIELDS = (
+    BASE_REQUIRED
+    + OPTIONAL_METADATA
+    + EMAIL_REQUIRED
+    + SPECIAL_EMAIL_REQUIRED
+    + BONUS_PRE_E3_REQUIRED
+)
 
 
 class CampaignPageParser(HTMLParser):
@@ -233,7 +250,12 @@ def _validate(
                 {"slug": slug, "field": "campaign_plan_id", "reason": "duplicate"}
             )
         seen_ids.add(campaign_plan_id)
-        for field in BASE_REQUIRED + EMAIL_REQUIRED + SPECIAL_EMAIL_REQUIRED:
+        for field in (
+            BASE_REQUIRED
+            + EMAIL_REQUIRED
+            + SPECIAL_EMAIL_REQUIRED
+            + BONUS_PRE_E3_REQUIRED
+        ):
             value = plan.get(field)
             if value is None or str(value).strip() == "":
                 report["invalid_plans"].append(
@@ -254,6 +276,25 @@ def _validate(
         for field in ("e5_book1_url", "e5_book2_url", "e5_book3_url"):
             if not _is_valid_url(str(plan.get(field) or "")):
                 report["invalid_urls"].append({"slug": slug, "field": field})
+        if not _is_valid_url(str(plan.get("bonus_pre_e3_url") or "")):
+            report["invalid_urls"].append({"slug": slug, "field": "bonus_pre_e3_url"})
+        if plan.get("bonus_pre_e3_send_if_welcome_depth_missing") is not True:
+            report["invalid_plans"].append(
+                {
+                    "slug": slug,
+                    "field": "bonus_pre_e3_send_if_welcome_depth_missing",
+                    "reason": "must be true",
+                }
+            )
+        template = REPO / str(plan.get("bonus_pre_e3_html_template") or "")
+        if not template.is_file():
+            report["invalid_plans"].append(
+                {
+                    "slug": slug,
+                    "field": "bonus_pre_e3_html_template",
+                    "reason": "template file missing",
+                }
+            )
 
     if sync_pages:
         for path in page_paths:

@@ -44,12 +44,26 @@
     'e7_bundle_title',
     'e8_last_chance_note',
   ];
+  var CAMPAIGN_BONUS_FIELDS = [
+    'bonus_pre_e3_title',
+    'bonus_pre_e3_url',
+    'bonus_pre_e3_cta',
+    'bonus_pre_e3_tool_name',
+    'bonus_pre_e3_short_description',
+    'bonus_pre_e3_benefit',
+    'bonus_pre_e3_microcopy',
+    'bonus_pre_e3_html_template',
+    'bonus_pre_e3_send_if_welcome_depth_missing',
+  ];
   for (var campaignIndex = 1; campaignIndex <= 9; campaignIndex += 1) {
     CAMPAIGN_SLOT_FIELDS.forEach(function (field) {
       CAMPAIGN_REQUIRED_FIELDS.push('e' + campaignIndex + '_' + field);
     });
   }
   CAMPAIGN_SPECIAL_FIELDS.forEach(function (field) {
+    CAMPAIGN_REQUIRED_FIELDS.push(field);
+  });
+  CAMPAIGN_BONUS_FIELDS.forEach(function (field) {
     CAMPAIGN_REQUIRED_FIELDS.push(field);
   });
 
@@ -214,6 +228,9 @@
         blockCampaignSubmit('invalid_url_e' + i);
       }
     }
+    if (!isHttpUrl(plan.bonus_pre_e3_url)) {
+      blockCampaignSubmit('invalid_url_bonus_pre_e3');
+    }
     if (brandId && plan.brand_id !== brandId) {
       blockCampaignSubmit('brand_mismatch');
     }
@@ -235,6 +252,9 @@
       });
     }
     CAMPAIGN_SPECIAL_FIELDS.forEach(function (field) {
+      campaign['phoenix_' + field] = plan[field];
+    });
+    CAMPAIGN_BONUS_FIELDS.forEach(function (field) {
       campaign['phoenix_' + field] = plan[field];
     });
     return campaign;

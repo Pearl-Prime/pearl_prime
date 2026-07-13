@@ -64,7 +64,21 @@ Also create these special content fields:
 | `phoenix_e7_bundle_title` | `phoenix_e7_bundle_title` |
 | `phoenix_e8_last_chance_note` | `phoenix_e8_last_chance_note` |
 
-There are 63 repeated E1-E9 fields plus 14 special content fields.
+Also create these WF2 / bonus-before-E3 fields. This is the HTML email that sends before E3 when `welcome_depth` is blank or missing:
+
+| JSON key | Custom field name |
+| --- | --- |
+| `phoenix_bonus_pre_e3_title` | `phoenix_bonus_pre_e3_title` |
+| `phoenix_bonus_pre_e3_url` | `phoenix_bonus_pre_e3_url` |
+| `phoenix_bonus_pre_e3_cta` | `phoenix_bonus_pre_e3_cta` |
+| `phoenix_bonus_pre_e3_tool_name` | `phoenix_bonus_pre_e3_tool_name` |
+| `phoenix_bonus_pre_e3_short_description` | `phoenix_bonus_pre_e3_short_description` |
+| `phoenix_bonus_pre_e3_benefit` | `phoenix_bonus_pre_e3_benefit` |
+| `phoenix_bonus_pre_e3_microcopy` | `phoenix_bonus_pre_e3_microcopy` |
+| `phoenix_bonus_pre_e3_html_template` | `phoenix_bonus_pre_e3_html_template` |
+| `phoenix_bonus_pre_e3_send_if_welcome_depth_missing` | `phoenix_bonus_pre_e3_send_if_welcome_depth_missing` |
+
+There are 63 repeated E1-E9 fields, 14 special content fields, and 9 bonus pre-E3 fields.
 
 ## Workflow Mapping
 
@@ -76,6 +90,7 @@ There are 63 repeated E1-E9 fields plus 14 special content fields.
 6. Import the branded Waystream HTML templates from:
    - `funnel/waystream_sanctuary/emails/email_1_tool_delivery.html`
    - `funnel/waystream_sanctuary/emails/email_2_second_practice.html`
+   - `funnel/waystream_sanctuary/emails/email_bonus_pre_story.html` — send before E3 only when `welcome_depth` is blank or missing
    - `funnel/waystream_sanctuary/emails/email_3_transformation_story.html`
    - `funnel/waystream_sanctuary/emails/email_4_book_recommendation.html`
    - `funnel/waystream_sanctuary/emails/email_5_more_books.html`
@@ -83,7 +98,7 @@ There are 63 repeated E1-E9 fields plus 14 special content fields.
    - `funnel/waystream_sanctuary/emails/email_7_book_three_bundle.html`
    - `funnel/waystream_sanctuary/emails/email_8_last_chance.html`
    - `funnel/waystream_sanctuary/emails/email_9_still_here.html`
-7. In each email, use the stored custom values for that slot. Email 3 uses `phoenix_e3_story_body`; Email 4 uses `phoenix_e4_book_title`; Email 5 uses the `phoenix_e5_book1_*` through `phoenix_e5_book3_*` fields.
+7. In each email, use the stored custom values for that slot. The bonus email uses the `phoenix_bonus_pre_e3_*` fields; Email 3 uses `phoenix_e3_story_body`; Email 4 uses `phoenix_e4_book_title`; Email 5 uses the `phoenix_e5_book1_*` through `phoenix_e5_book3_*` fields.
 
 ## Important Operating Rule
 
