@@ -19,11 +19,39 @@
     'source_page_slug',
     'campaign_plan_id',
   ];
+  var CAMPAIGN_SLOT_FIELDS = [
+    'title',
+    'url',
+    'cta',
+    'tool_name',
+    'short_description',
+    'benefit',
+    'microcopy',
+  ];
+  var CAMPAIGN_SPECIAL_FIELDS = [
+    'e3_story_body',
+    'e4_book_title',
+    'e5_book1_title',
+    'e5_book1_url',
+    'e5_book1_note',
+    'e5_book2_title',
+    'e5_book2_url',
+    'e5_book2_note',
+    'e5_book3_title',
+    'e5_book3_url',
+    'e5_book3_note',
+    'e6_book_title',
+    'e7_bundle_title',
+    'e8_last_chance_note',
+  ];
   for (var campaignIndex = 1; campaignIndex <= 9; campaignIndex += 1) {
-    CAMPAIGN_REQUIRED_FIELDS.push('e' + campaignIndex + '_title');
-    CAMPAIGN_REQUIRED_FIELDS.push('e' + campaignIndex + '_url');
-    CAMPAIGN_REQUIRED_FIELDS.push('e' + campaignIndex + '_cta');
+    CAMPAIGN_SLOT_FIELDS.forEach(function (field) {
+      CAMPAIGN_REQUIRED_FIELDS.push('e' + campaignIndex + '_' + field);
+    });
   }
+  CAMPAIGN_SPECIAL_FIELDS.forEach(function (field) {
+    CAMPAIGN_REQUIRED_FIELDS.push(field);
+  });
 
   function getQueryParam(name) {
     try {
@@ -202,10 +230,13 @@
       campaign_plan_id: plan.campaign_plan_id,
     };
     for (var slot = 1; slot <= 9; slot += 1) {
-      campaign['phoenix_e' + slot + '_title'] = plan['e' + slot + '_title'];
-      campaign['phoenix_e' + slot + '_url'] = plan['e' + slot + '_url'];
-      campaign['phoenix_e' + slot + '_cta'] = plan['e' + slot + '_cta'];
+      CAMPAIGN_SLOT_FIELDS.forEach(function (field) {
+        campaign['phoenix_e' + slot + '_' + field] = plan['e' + slot + '_' + field];
+      });
     }
+    CAMPAIGN_SPECIAL_FIELDS.forEach(function (field) {
+      campaign['phoenix_' + field] = plan[field];
+    });
     return campaign;
   }
 

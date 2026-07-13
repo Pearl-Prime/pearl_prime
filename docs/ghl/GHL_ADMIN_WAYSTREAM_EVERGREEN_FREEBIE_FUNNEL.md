@@ -33,19 +33,38 @@ Create GHL contact custom fields for these context fields:
 | `score_band` | `score_band` |
 | `answers_json` | `answers_json` |
 
-Create these GHL contact custom fields exactly:
+Create these GHL contact custom fields for every email slot E1 through E9:
 
-| Email | Title field | URL field | CTA field |
-| --- | --- | --- | --- |
-| E1 | `phoenix_e1_title` | `phoenix_e1_url` | `phoenix_e1_cta` |
-| E2 | `phoenix_e2_title` | `phoenix_e2_url` | `phoenix_e2_cta` |
-| E3 | `phoenix_e3_title` | `phoenix_e3_url` | `phoenix_e3_cta` |
-| E4 | `phoenix_e4_title` | `phoenix_e4_url` | `phoenix_e4_cta` |
-| E5 | `phoenix_e5_title` | `phoenix_e5_url` | `phoenix_e5_cta` |
-| E6 | `phoenix_e6_title` | `phoenix_e6_url` | `phoenix_e6_cta` |
-| E7 | `phoenix_e7_title` | `phoenix_e7_url` | `phoenix_e7_cta` |
-| E8 | `phoenix_e8_title` | `phoenix_e8_url` | `phoenix_e8_cta` |
-| E9 | `phoenix_e9_title` | `phoenix_e9_url` | `phoenix_e9_cta` |
+| Pattern | Example |
+| --- | --- |
+| `phoenix_eN_title` | `phoenix_e1_title` |
+| `phoenix_eN_url` | `phoenix_e1_url` |
+| `phoenix_eN_cta` | `phoenix_e1_cta` |
+| `phoenix_eN_tool_name` | `phoenix_e1_tool_name` |
+| `phoenix_eN_short_description` | `phoenix_e1_short_description` |
+| `phoenix_eN_benefit` | `phoenix_e1_benefit` |
+| `phoenix_eN_microcopy` | `phoenix_e1_microcopy` |
+
+Also create these special content fields:
+
+| JSON key | Custom field name |
+| --- | --- |
+| `phoenix_e3_story_body` | `phoenix_e3_story_body` |
+| `phoenix_e4_book_title` | `phoenix_e4_book_title` |
+| `phoenix_e5_book1_title` | `phoenix_e5_book1_title` |
+| `phoenix_e5_book1_url` | `phoenix_e5_book1_url` |
+| `phoenix_e5_book1_note` | `phoenix_e5_book1_note` |
+| `phoenix_e5_book2_title` | `phoenix_e5_book2_title` |
+| `phoenix_e5_book2_url` | `phoenix_e5_book2_url` |
+| `phoenix_e5_book2_note` | `phoenix_e5_book2_note` |
+| `phoenix_e5_book3_title` | `phoenix_e5_book3_title` |
+| `phoenix_e5_book3_url` | `phoenix_e5_book3_url` |
+| `phoenix_e5_book3_note` | `phoenix_e5_book3_note` |
+| `phoenix_e6_book_title` | `phoenix_e6_book_title` |
+| `phoenix_e7_bundle_title` | `phoenix_e7_bundle_title` |
+| `phoenix_e8_last_chance_note` | `phoenix_e8_last_chance_note` |
+
+There are 63 repeated E1-E9 fields plus 14 special content fields.
 
 ## Workflow Mapping
 
@@ -54,15 +73,23 @@ Create these GHL contact custom fields exactly:
 3. Map incoming JSON fields to the contact fields above.
 4. Add tags from the incoming `tags` array. At minimum, expect `source_freebie_quiz`, `freebie_captured`, and a topic tag such as `quiz_anxiety`.
 5. Start the 9-email sequence after the contact is created or updated.
-6. In each email, use the stored custom values for that slot:
-   - Email 1 uses `phoenix_e1_title`, `phoenix_e1_url`, `phoenix_e1_cta`.
-   - Continue the same pattern through Email 9.
+6. Import the branded Waystream HTML templates from:
+   - `funnel/waystream_sanctuary/emails/email_1_tool_delivery.html`
+   - `funnel/waystream_sanctuary/emails/email_2_second_practice.html`
+   - `funnel/waystream_sanctuary/emails/email_3_transformation_story.html`
+   - `funnel/waystream_sanctuary/emails/email_4_book_recommendation.html`
+   - `funnel/waystream_sanctuary/emails/email_5_more_books.html`
+   - `funnel/waystream_sanctuary/emails/email_6_book_two_recommendation.html`
+   - `funnel/waystream_sanctuary/emails/email_7_book_three_bundle.html`
+   - `funnel/waystream_sanctuary/emails/email_8_last_chance.html`
+   - `funnel/waystream_sanctuary/emails/email_9_still_here.html`
+7. In each email, use the stored custom values for that slot. Email 3 uses `phoenix_e3_story_body`; Email 4 uses `phoenix_e4_book_title`; Email 5 uses the `phoenix_e5_book1_*` through `phoenix_e5_book3_*` fields.
 
 ## Important Operating Rule
 
 The email plan is already resolved by the page before the webhook fires. GHL should store the values it receives and use those stored values in the 9-email sequence. GHL should not fetch a feed, rebuild a weekly newsletter, or infer a replacement campaign plan.
 
-If any `phoenix_e*_title`, `phoenix_e*_url`, or `phoenix_e*_cta` value is missing on a test contact, stop the test and ask dev to run:
+If any `phoenix_e*` value is missing on a test contact, stop the test and ask dev to run:
 
 ```bash
 python3 scripts/freebies/validate_campaign_plan.py --brand-id way_stream_sanctuary

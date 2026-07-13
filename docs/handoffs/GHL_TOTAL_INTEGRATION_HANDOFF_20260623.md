@@ -48,7 +48,7 @@ Skipping either half breaks the funnel: feed without webhook = no contacts; webh
 **Send back to operator:**
 
 ```text
-PHOENIX_GHL_FUNNEL_WEBHOOK=https://services.leadconnectorhq.com/hooks/...
+PHOENIX_GHL_FUNNEL_WEBHOOK=<REDACTED_GHL_WEBHOOK_URL>
 Feed URL confirmed: https://<cdn>/pearl-prime-content/stillness_press/en_US/<week>/marketing_feed.json
 Sub-account: ...
 Workflows published: yes

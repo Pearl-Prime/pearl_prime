@@ -37,9 +37,35 @@ OPTIONAL_METADATA = (
     "status",
 )
 EMAIL_REQUIRED = tuple(
-    f"e{i}_{field}" for i in range(1, 10) for field in ("title", "url", "cta")
+    f"e{i}_{field}"
+    for i in range(1, 10)
+    for field in (
+        "title",
+        "url",
+        "cta",
+        "tool_name",
+        "short_description",
+        "benefit",
+        "microcopy",
+    )
 )
-PAGE_PLAN_FIELDS = BASE_REQUIRED + OPTIONAL_METADATA + EMAIL_REQUIRED
+SPECIAL_EMAIL_REQUIRED = (
+    "e3_story_body",
+    "e4_book_title",
+    "e5_book1_title",
+    "e5_book1_url",
+    "e5_book1_note",
+    "e5_book2_title",
+    "e5_book2_url",
+    "e5_book2_note",
+    "e5_book3_title",
+    "e5_book3_url",
+    "e5_book3_note",
+    "e6_book_title",
+    "e7_bundle_title",
+    "e8_last_chance_note",
+)
+PAGE_PLAN_FIELDS = BASE_REQUIRED + OPTIONAL_METADATA + EMAIL_REQUIRED + SPECIAL_EMAIL_REQUIRED
 
 
 class CampaignPageParser(HTMLParser):
@@ -111,7 +137,7 @@ def _sync_page(path: Path, plan: dict[str, Any]) -> bool:
         re.DOTALL,
     )
     if pattern.search(text):
-        new_text = pattern.sub(block, text, count=1)
+        new_text = pattern.sub(lambda _match: block, text, count=1)
     else:
         marker = '<script src="/free/js/phoenix_lead.js"></script>'
         if marker in text:
@@ -207,7 +233,7 @@ def _validate(
                 {"slug": slug, "field": "campaign_plan_id", "reason": "duplicate"}
             )
         seen_ids.add(campaign_plan_id)
-        for field in BASE_REQUIRED + EMAIL_REQUIRED:
+        for field in BASE_REQUIRED + EMAIL_REQUIRED + SPECIAL_EMAIL_REQUIRED:
             value = plan.get(field)
             if value is None or str(value).strip() == "":
                 report["invalid_plans"].append(
@@ -223,6 +249,9 @@ def _validate(
             )
         for i in range(1, 10):
             field = f"e{i}_url"
+            if not _is_valid_url(str(plan.get(field) or "")):
+                report["invalid_urls"].append({"slug": slug, "field": field})
+        for field in ("e5_book1_url", "e5_book2_url", "e5_book3_url"):
             if not _is_valid_url(str(plan.get(field) or "")):
                 report["invalid_urls"].append({"slug": slug, "field": field})
 

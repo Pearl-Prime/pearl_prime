@@ -10,7 +10,7 @@
 1. **Phoenix** builds books, free tools, videos, and a weekly **content feed** (JSON file on the web).
 2. **You (GHL admin)** connect GHL once: import email workflows, paste the feed URL, map three fields.
 3. **Every Monday** Phoenix publishes a new feed. GHL reads it. **You do not re-enter links or rewrite emails.**
-4. **The funnel:** Social post → free tool/quiz → capture email → **3 nurture emails** (two exercises + a story) → **paid offer** on pearlprime.shop (only when the feed says an item is ready) → optional series upsell.
+4. **The funnel:** Social post → free tool/quiz → capture email → **3 core nurture emails** (two exercises + a story), with one optional WF2 bonus before the story for `welcome_depth` → **paid offer** on pearlprime.shop (only when the feed says an item is ready) → optional series upsell.
 
 **Psychology rule (non-negotiable):** Two felt exercises **before** any book offer. Story **before** price. See [Proof Loop](#the-proof-loop-what-contacts-experience).
 
@@ -39,7 +39,7 @@
 **Send back to project owner:**
 
 ```
-PHOENIX_GHL_FUNNEL_WEBHOOK=https://services.leadconnectorhq.com/hooks/...
+PHOENIX_GHL_FUNNEL_WEBHOOK=<REDACTED_GHL_WEBHOOK_URL>
 Feed URL (confirm): https://.../marketing_feed.json
 Sub-account name: ...
 Workflow published: yes/no
@@ -52,7 +52,7 @@ Test contact created: yes/no
 
 **Do nothing.** Phoenix replaces `marketing_feed.json` every Monday. Your GHL automation should **re-fetch or use the stable URL** we configured (same path, new file contents).
 
-If a week shows no paid item in the feed, **E4 (paid offer) is skipped automatically** — contacts still get E1–E3.
+If a week shows no paid item in the feed, **E4 (paid offer) is skipped automatically** — contacts still get E1, E2, optional WF2, and E3.
 
 ---
 
@@ -67,17 +67,18 @@ Email captured → GHL contact + tags
     ↓
 E1 (now)     — First exercise / tool link
 E2 (+24h)    — Second exercise (different technique)
+WF2 (+48h)   — Optional bonus (welcome_depth only; guided audio or assessment)
 E3 (+72h)    — Story only (no pitch)
 E4 (+120h)   — Paid offer → pearlprime.shop (ONLY if feed has ready paid item)
-E5 (+5d)     — Series / more books (optional)
+E5 (+288h)   — Series / more books (optional)
     ↓
 Post-purchase — Buyer tag unlocks workbooks; Series Upsell workflow (WF3)
 ```
 
-**Wrong:** Freebie → story → immediate book pitch.  
-**Right:** Exercise → Exercise → Story → Offer.
+**Wrong:** Freebie -> story -> immediate book pitch.
+**Right:** Exercise -> Exercise -> optional WF2 bonus -> Story -> Offer.
 
-Canonical copy lives in `docs/email_sequences/proof_loop_sequence.md`. Workflows use **merge tags** filled from the feed.
+Canonical copy for E1-E5 lives in `docs/email_sequences/proof_loop_sequence.md`. Mirror the shared HTML shells in `funnel/burnout_reset/emails/` into GHL. Those files are generic across `stillness_press`, `devotion_path`, and `way_stream_sanctuary`. The brand-specific landing-page HTML lives under `brand-wizard-app/public/free/...`, including paths like `brand-wizard-app/public/free/devotion_path/<slug>/index.html` and `brand-wizard-app/public/free/way_stream_sanctuary/<slug>/index.html`; those are site capture pages, not GHL email HTML.
 
 ---
 
@@ -110,7 +111,7 @@ Full schema: [config/marketing/marketing_feed_schema.yaml](../../config/marketin
 | ID | Name | Trigger | Purpose |
 |----|------|---------|---------|
 | **WF1** | Proof Loop | Contact tagged `freebie_captured` or feed trigger | E1–E5 spine |
-| **WF2** | Tier bonus drip | After E3, before E4 | Extra free assets (audio/PDF) from feed `email_slot` |
+| **WF2** | Tier bonus drip | Before E3 (`welcome_depth` only) | Extra free assets (audio/PDF) from feed `email_slot` |
 | **WF3** | Series upsell | Buyer tag or post-E5 | Book 2 / Book 3 path |
 | **WF4** | Re-engagement | 90 days no open | Win-back |
 
@@ -164,6 +165,7 @@ Full checklist: [GHL_ADMIN_HANDOFF_FREEBIE_CAPTURE.md](../GHL_ADMIN_HANDOFF_FREE
 | Piece | Status |
 |-------|--------|
 | Proof Loop email **copy** | Ready in repo |
+| Shared email **HTML shells** | Ready in repo |
 | WF1–WF4 workflow **template** | Import into GHL |
 | `marketing_feed.json` **builder** | `scripts/marketing/build_marketing_feed.py` — Mondays |
 | **Public feed URL** | R2 `pearl-prime-content` + CDN (operator gives URL) |

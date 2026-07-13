@@ -47,7 +47,7 @@ Forward **all four** admin docs listed below plus the copy/paste email in [GHL_A
 **Send back to operator:**
 
 ```text
-PHOENIX_GHL_FUNNEL_WEBHOOK_WAYSTREAM=https://services.leadconnectorhq.com/hooks/...
+PHOENIX_GHL_FUNNEL_WEBHOOK_WAYSTREAM=<REDACTED_GHL_WEBHOOK_URL>
 Feed URL confirmed: https://pub-4bac5d0b30be4b16824cd1eaa84ae9f5.r2.dev/pearl-prime-content/way_stream_sanctuary/en_US/<week>/marketing_feed.json
 Sub-account: ...
 Workflows published: yes
@@ -115,7 +115,7 @@ All pages include: `data-brand-id="way_stream_sanctuary"`, `data-topic`, `data-f
 ### After GHL admin returns the webhook URL
 
 ```bash
-URL='https://services.leadconnectorhq.com/hooks/...'
+URL='<REDACTED_GHL_WEBHOOK_URL>'
 security add-generic-password -s phoenix-omega -a PHOENIX_GHL_FUNNEL_WEBHOOK_WAYSTREAM -w "$URL" -U
 export PHOENIX_GHL_FUNNEL_WEBHOOK_WAYSTREAM="$URL"
 python3 scripts/freebies/inject_ghl_webhook.py --brand-id way_stream_sanctuary --require-env

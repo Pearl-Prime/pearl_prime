@@ -236,7 +236,7 @@ Uses `PHOENIX_GHL_FUNNEL_WEBHOOK` + `config/freebies/ghl_funnel_capture.yaml` (1
 ### Devotion Path / Waystream (per-brand)
 
 ```bash
-URL='https://services.leadconnectorhq.com/hooks/...'
+URL='<REDACTED_GHL_WEBHOOK_URL>'
 security add-generic-password -s phoenix-omega -a PHOENIX_GHL_FUNNEL_WEBHOOK_DEVOTION -w "$URL" -U   # or _WAYSTREAM
 export PHOENIX_GHL_FUNNEL_WEBHOOK_DEVOTION="$URL"
 python3 scripts/freebies/inject_ghl_webhook.py --brand-id devotion_path --require-env
