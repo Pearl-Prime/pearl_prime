@@ -40,5 +40,16 @@
       "expected_figure_h_pct": 48,
       "eye_align_y_pct": 32
     }
-  ]
+  ],
+  "structural_layer_contract": {
+    "id": "mecha_clean_structural_layer_v1",
+    "status": "blocked",
+    "role": "environment_support",
+    "subject": "environment",
+    "contains_primary_subject": true,
+    "contains_foreground_subject": true,
+    "contains_pilot": false,
+    "contains": ["mecha_subject", "hangar"],
+    "blocker": "legacy L0 prompt/bank plate includes Unit-07 as a hero mecha subject; clean mecha L0 must be empty hangar/support only"
+  }
 }

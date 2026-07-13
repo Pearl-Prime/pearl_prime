@@ -195,11 +195,17 @@ def _build_l0_contract_inputs(l0: dict, configs: dict) -> dict:
     }
 
 
-def _build_l2_contract_inputs(l2: dict, configs: dict) -> dict:
+def _build_l2_contract_inputs(
+    l2: dict,
+    configs: dict,
+    *,
+    subject_type_override: str | None = None,
+) -> dict:
     archetype = l2["archetype"]
     arch_ctx = configs["scene_context"]["archetypes"][archetype]
-    safe_zone_key = (f"subject={arch_ctx['subject_type']}"
-                     f"|framing={arch_ctx.get('cutout_policy', {}).get('framing_row', 'CU')}"
+    subject_type = subject_type_override or arch_ctx["subject_type"]
+    safe_zone_key = (f"subject={subject_type}"
+                     f"|framing={(arch_ctx.get('cutout_policy') or {}).get('framing_row', 'CU')}"
                      f"|genre=healing")
     # Look up framing from subject_contract; default to CU for face archetypes
     # The cutout_policy doesn't carry framing_row; compute from arch_ctx subject_type's safe_zone
@@ -209,14 +215,15 @@ def _build_l2_contract_inputs(l2: dict, configs: dict) -> dict:
         "character_silhouette_back": "CU",
         "character_full_figure": "MS",
         "character_full_figure_walking": "MS",
+        "character_ELS_in_L0": "LS",
         "character_hand_only": "ECU",
         "character_hands_and_arms": "ECU",
         "character_hands_only": "ECU",  # alias
         "character_chest_partial": "MCU",
         "character_pet_only": "ECU",
     }
-    framing_row = framing_for_subject.get(arch_ctx["subject_type"], "CU")
-    safe_zone_key = f"subject={arch_ctx['subject_type']}|framing={framing_row}|genre=healing"
+    framing_row = framing_for_subject.get(subject_type, "CU")
+    safe_zone_key = f"subject={subject_type}|framing={framing_row}|genre=healing"
     # Some subject_types alias (character_hands_only is not in safe_zones; map to character_hands_and_arms)
     if safe_zone_key not in configs["compiled_safe_zones"]["compiled"]:
         if "character_hands_only" in safe_zone_key:
@@ -233,12 +240,20 @@ def _build_l2_contract_inputs(l2: dict, configs: dict) -> dict:
     def _v(ax):
         v = axes.get(ax, {}).get("value")
         return v if isinstance(v, str) else ""
-    render_base = (
-        f"Front-facing portrait of Mira Aoki — early 30s East-Asian-coded woman with "
-        f"soft round face, medium almond eyes with double eyelids, "
-        f"long brown hair side-left parted with side-swept fringe, "
-        f"cream knit sweater with warm cardigan, small jade pendant on slim leather cord."
-    )
+    if subject_type == "character_ELS_in_L0":
+        render_base = (
+            f"Distant full-body view of Mira Aoki — early 30s East-Asian-coded woman with "
+            f"soft round face, medium almond eyes with double eyelids, "
+            f"long brown hair side-left parted with side-swept fringe, "
+            f"cream knit sweater with warm cardigan, small jade pendant on slim leather cord."
+        )
+    else:
+        render_base = (
+            f"Front-facing portrait of Mira Aoki — early 30s East-Asian-coded woman with "
+            f"soft round face, medium almond eyes with double eyelids, "
+            f"long brown hair side-left parted with side-swept fringe, "
+            f"cream knit sweater with warm cardigan, small jade pendant on slim leather cord."
+        )
     neg_base = (
         "shojo sparkle, plastic skin, uncanny valley, bow mouth, extra-large eyes, "
         "heavy decorative eyelashes, photorealistic, 3d render"

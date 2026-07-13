@@ -1,0 +1,34 @@
+{
+  "manga-mecha-clean-structural-proof-panel": "completed",
+  "panel_id": "p01_clean_mecha_hangar_floor",
+  "structural_template_id": "standing_room_scene",
+  "panel_type_id": "establish_standing_room",
+  "subject": "mecha",
+  "source_v5_panel_dir": "artifacts/qa/pearl_star_mecha_clean_structural_proof_2026-07-13/p01_clean_mecha_hangar_floor/source_v5_panel",
+  "manifest": "artifacts/qa/pearl_star_mecha_clean_structural_proof_2026-07-13/assembly_manifest.yaml",
+  "structural_plan": "artifacts/qa/pearl_star_mecha_clean_structural_proof_2026-07-13/p01_clean_mecha_hangar_floor/structural_plan.json",
+  "final_composite": "artifacts/qa/pearl_star_mecha_clean_structural_proof_2026-07-13/p01_clean_mecha_hangar_floor.png",
+  "gate_report": "artifacts/qa/pearl_star_mecha_clean_structural_proof_2026-07-13/p01_clean_mecha_hangar_floor/gate_report.json",
+  "required_gates": [
+    "L0_STRUCTURAL_PURITY",
+    "L2_STRUCTURAL_PURITY",
+    "L2_QUALITY",
+    "L0_SUPPORT_ZONE"
+  ],
+  "actual_gates": [
+    "L0_STRUCTURAL_PURITY",
+    "L2_STRUCTURAL_PURITY",
+    "G1",
+    "G2",
+    "G8",
+    "L2_QUALITY",
+    "L0_SUPPORT_ZONE",
+    "placement",
+    "G3",
+    "G4"
+  ],
+  "gate_passed": true,
+  "final_differs_from_model_layer_00": true,
+  "final_sha256": "8b80d160c10e717dca7890e400c2f49088d661d077ea8cdbdc04f1a341b9950e",
+  "model_layer_00_sha256": "c07b76de6ae76617b08bb416b91c8e1be7fc7db39ae16e93fb55c3cf690c8524"
+}

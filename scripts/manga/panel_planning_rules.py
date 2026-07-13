@@ -157,7 +157,12 @@ def validate_manifest_composition_planning(
                 f"(found L2 on shot_type=pillow_ma)"
             )
 
-        if shot == "insert_object" and bg in READABLE_ROOM_BG and not (l0.get("derivation")):
+        if (
+            shot == "insert_object"
+            and bg in READABLE_ROOM_BG
+            and not (l0.get("derivation"))
+            and _l2_layers(panel)
+        ):
             errors.append(
                 f"{pid}: HR-U20 insert_object requires tone_gradient/void derivation "
                 f"(or diegetic macro), not readable {bg}"

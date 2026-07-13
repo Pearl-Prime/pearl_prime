@@ -237,10 +237,13 @@ archetypes:
   # ── CLUSTER 4: ENVIRONMENTAL ───────────────────────────────────────────
 
   sparse_establishing_wide:
-    # No L2 layer — environmental archetype (L0 only).
+    # Environment-first archetype. If operator authors an on-frame character,
+    # V5 promotes that character through the character_ELS_in_L0 contract
+    # instead of silently discarding them.
     subject_type: null
-    scene_context_clause: "wide establishing shot of the panel's location (room, kitchen, garden, café corner — context-driven), soft daylight, breathable negative space"
-    attached_props_clause: "no specific props or characters in foreground; the space itself is the subject"
+    on_frame_character_subject_type: character_ELS_in_L0
+    scene_context_clause: "wide establishing shot of the panel's location (room, kitchen, garden, café corner — context-driven), soft daylight, breathable negative space, space remains primary even when a small character is present"
+    attached_props_clause: "no foreground crowding; if a character is present they remain small, grounded, and off-center within the room while the environment carries most of the frame"
     cutout_policy: null
 
   dappled_light_hand:

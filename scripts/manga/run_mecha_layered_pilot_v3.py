@@ -171,17 +171,27 @@ def main(argv: list[str] | None = None) -> int:
         return 0
 
     from scripts.manga.bank_layer_blob_gate import assert_not_blob
+    from scripts.manga.mecha_clean_structural_layer import validate_mecha_layer_meta
 
     bank_root = REPO / "artifacts" / "manga" / SERIES / "image_bank"
     mapping = {
-        "L0.png": bank_root / "L0" / "cockpit_interior.png",
-        "L2.png": bank_root / "L2" / "seated_cockpit.png",
-        "L3.png": bank_root / "L3" / "telemetry_panel.png",
+        "L0.png": (bank_root / "L0" / "cockpit_interior.png", "L0"),
+        "L2.png": (bank_root / "L2" / "seated_cockpit.png", "L2"),
+        "L3.png": (bank_root / "L3" / "telemetry_panel.png", "L3"),
     }
     gate_rows = []
-    for dest, src in mapping.items():
+    for dest, (src, layer_class) in mapping.items():
         if not src.is_file() or src.stat().st_size < 1000:
             print(f"BLOCKER missing bank layer {src}", file=sys.stderr)
+            return 3
+        sidecar = src.with_suffix(".composition.json")
+        if not sidecar.is_file():
+            print(f"BLOCKER missing reviewed mecha sidecar {sidecar}", file=sys.stderr)
+            return 3
+        try:
+            validate_mecha_layer_meta(json.loads(sidecar.read_text()), layer_class=layer_class)
+        except ValueError as exc:
+            print(f"BLOCKER contaminated/uncertified mecha bank layer {src}: {exc}", file=sys.stderr)
             return 3
         v = assert_not_blob(src)
         gate_rows.append(v.to_dict())

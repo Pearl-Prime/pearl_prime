@@ -1,0 +1,56 @@
+{
+  "manifest": "artifacts/qa/pearl_star_v5_structural_assembly_multi_proof_2026-07-13/assembly_manifest.yaml",
+  "panel": {
+    "panel_id": "p01_standing_wide_clear_floor",
+    "shot_type": "establishing",
+    "passed": true,
+    "ops_applied": [
+      "STRUCT_support_plan",
+      "G3_horizon_scale",
+      "G6_defringe",
+      "G4_contact_shadow_under_L2"
+    ],
+    "gates": [
+      {
+        "gate": "G1",
+        "severity": "PASS",
+        "message": "full_figure \u00d7 full_render \u2192 LEGAL+ops"
+      },
+      {
+        "gate": "G2",
+        "severity": "PASS",
+        "message": "angle_bucket match (eye_level)"
+      },
+      {
+        "gate": "G8",
+        "severity": "PASS",
+        "message": "light azimuth compatible (ambient/ambient)"
+      },
+      {
+        "gate": "L2_QUALITY",
+        "severity": "PASS",
+        "message": "single clean subject main_component_ratio=1.0 significant_components=1"
+      },
+      {
+        "gate": "L0_SUPPORT_ZONE",
+        "severity": "PASS",
+        "message": "zone=clear_floor kind=floor mode=standing_floor"
+      },
+      {
+        "gate": "placement",
+        "severity": "PASS",
+        "message": "structural_plan_hash=655771d59961878220c05cae19395f9e60356ab9c6d3c8a562e7330e8080bb24"
+      },
+      {
+        "gate": "G3",
+        "severity": "PASS",
+        "message": "horizon-ratio scale within tolerance"
+      },
+      {
+        "gate": "G4",
+        "severity": "PASS",
+        "message": "contact shadow rendered"
+      }
+    ]
+  }
+}

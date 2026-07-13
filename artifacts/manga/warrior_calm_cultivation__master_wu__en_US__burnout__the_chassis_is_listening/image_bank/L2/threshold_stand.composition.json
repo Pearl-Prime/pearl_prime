@@ -18,7 +18,18 @@
   "eye_y_px": 420,
   "room_capable": true,
   "abstract_stage_eligible": false,
-  "scene_contamination": false,
+  "scene_contamination": true,
   "requires_occluder": false,
-  "genre": "mecha"
+  "genre": "mecha",
+  "structural_layer_contract": {
+    "id": "mecha_clean_structural_layer_v1",
+    "status": "blocked",
+    "role": "single_subject_cutout",
+    "subject": "pilot",
+    "contains_background": true,
+    "contains_environment": true,
+    "contains": ["blob", "environment"],
+    "background_context": ["environment"],
+    "blocker": "legacy L2 is not a clean single-subject alpha cutout"
+  }
 }

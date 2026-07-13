@@ -112,3 +112,8 @@ artifacts/manga/stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying/compo
 
 # CI regression fixtures must be real bytes (not LFS pointers)
 tests/fixtures/manga/blob_gate/*.png -filter -diff -merge -text
+
+# Mecha structural QA proof PNGs are tiny generated fixtures; keep them as
+# real bytes so PR proof packets remain usable while LFS budget is exhausted.
+artifacts/qa/pearl_star_mecha_clean_structural_proof_2026-07-13/*.png -filter -diff -merge -text
+artifacts/qa/pearl_star_mecha_clean_structural_proof_2026-07-13/**/*.png -filter -diff -merge -text

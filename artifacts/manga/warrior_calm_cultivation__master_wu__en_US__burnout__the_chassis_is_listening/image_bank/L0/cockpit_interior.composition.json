@@ -42,5 +42,16 @@
       "expected_figure_h_pct": 48,
       "eye_align_y_pct": 30
     }
-  ]
+  ],
+  "structural_layer_contract": {
+    "id": "mecha_clean_structural_layer_v1",
+    "status": "blocked",
+    "role": "environment_support",
+    "subject": "environment",
+    "contains_primary_subject": true,
+    "contains_foreground_subject": true,
+    "contains_pilot": true,
+    "contains": ["pilot", "cockpit"],
+    "blocker": "legacy L0 contains pilot/body/cockpit action; clean mecha L0 must be empty environment/support only"
+  }
 }

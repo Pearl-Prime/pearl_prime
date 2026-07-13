@@ -1,0 +1,53 @@
+{
+  "manifest": "/Users/ahjan/phoenix_omega_manga_abc/artifacts/qa/pearl_star_v5_structural_assembly_2026-07-13/ep_001/ep001_013/assembly_manifest.yaml",
+  "panels": [
+    {
+      "panel_id": "ep001_013",
+      "shot_type": "establishing",
+      "passed": true,
+      "ops_applied": [
+        "STRUCT_support_plan",
+        "G3_horizon_scale",
+        "G6_defringe",
+        "G4_contact_shadow_under_L2"
+      ],
+      "gates": [
+        {
+          "gate": "G1",
+          "severity": "PASS",
+          "message": "full_figure \u00d7 full_render \u2192 LEGAL+ops"
+        },
+        {
+          "gate": "G2",
+          "severity": "PASS",
+          "message": "angle_bucket match (eye_level)"
+        },
+        {
+          "gate": "G8",
+          "severity": "PASS",
+          "message": "light azimuth compatible (ambient/ambient)"
+        },
+        {
+          "gate": "L2_QUALITY",
+          "severity": "PASS",
+          "message": "single clean subject main_component_ratio=1.0 significant_components=1"
+        },
+        {
+          "gate": "placement",
+          "severity": "PASS",
+          "message": "structural_plan_hash=dd3c27533954126d6ae3d8a915d6f94a68da03a0e6a1deeff1d7fd4cc7ffd97b"
+        },
+        {
+          "gate": "G3",
+          "severity": "PASS",
+          "message": "horizon-ratio scale within tolerance"
+        },
+        {
+          "gate": "G4",
+          "severity": "PASS",
+          "message": "contact shadow rendered"
+        }
+      ]
+    }
+  ]
+}

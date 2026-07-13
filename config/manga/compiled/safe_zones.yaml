@@ -33,6 +33,218 @@ compiled:
     subject_zone_pct:
     - 65
     - 80
+  subject=character_ELS_in_L0|framing=LS|genre=comedy:
+    _provenance:
+      framing: LS
+      genre: comedy
+      subject: character_ELS_in_L0
+    alpha_bimodal: true
+    backdrop: pure_white
+    backdrop_corner_tolerance: 5
+    composite_rule:
+      expression_burst_zone: outside_subject_zone_within_canvas
+    feather_px: 0
+    margin:
+      bottom: 10
+      left: 10
+      right: 10
+      top: 10
+    margin_min_pct_all_sides: 5
+    notes: 'long shot: full body; feet may align with bottom edge; head has 2% air'
+    subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: false
+      left: true
+      right: true
+      top: true
+    subject_zone_pct:
+    - 22
+    - 20
+  subject=character_ELS_in_L0|framing=LS|genre=dark_fantasy:
+    _provenance:
+      framing: LS
+      genre: dark_fantasy
+      subject: character_ELS_in_L0
+    alpha_bimodal: true
+    archetype_flag:
+      dramatic_bleed_allowed: true
+    backdrop: pure_white
+    backdrop_corner_tolerance: 5
+    feather_px: 0
+    margin:
+      bottom: 10
+      left: 10
+      right: 10
+      top: 10
+    margin_min_pct_all_sides: 5
+    notes: 'long shot: full body; feet may align with bottom edge; head has 2% air'
+    subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: false
+      left: true
+      right: true
+      top: true
+    subject_zone_pct:
+    - 22
+    - 20
+  subject=character_ELS_in_L0|framing=LS|genre=fantasy_adventure:
+    _provenance:
+      framing: LS
+      genre: fantasy_adventure
+      subject: character_ELS_in_L0
+    alpha_bimodal: true
+    backdrop: pure_white
+    backdrop_corner_tolerance: 5
+    feather_px: 0
+    margin:
+      bottom: 10
+      left: 10
+      right: 10
+      top: 10
+    margin_min_pct_all_sides: 5
+    notes: 'long shot: full body; feet may align with bottom edge; head has 2% air'
+    subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: false
+      left: true
+      right: true
+      top: true
+    subject_zone_pct:
+    - 40
+    - 95
+  subject=character_ELS_in_L0|framing=LS|genre=healing:
+    _provenance:
+      framing: LS
+      genre: healing
+      subject: character_ELS_in_L0
+    alpha_bimodal: true
+    backdrop: pure_white
+    backdrop_corner_tolerance: 5
+    composite_rule:
+      negative_space_min_pct: 40
+    feather_px: 0
+    margin:
+      bottom: 10
+      left: 10
+      right: 10
+      top: 10
+    margin_min_pct_all_sides: 5
+    notes: 'long shot: full body; feet may align with bottom edge; head has 2% air'
+    subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: false
+      left: true
+      right: true
+      top: true
+    subject_zone_pct:
+    - 22
+    - 20
+  subject=character_ELS_in_L0|framing=LS|genre=mecha:
+    _provenance:
+      framing: LS
+      genre: mecha
+      subject: character_ELS_in_L0
+    alpha_bimodal: true
+    backdrop: pure_white
+    backdrop_corner_tolerance: 5
+    feather_px: 0
+    margin:
+      bottom: 10
+      left: 10
+      right: 10
+      top: 10
+    margin_min_pct_all_sides: 5
+    notes: 'long shot: full body; feet may align with bottom edge; head has 2% air'
+    subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: false
+      left: true
+      right: true
+      top: true
+    subject_zone_pct:
+    - 50
+    - 95
+  subject=character_ELS_in_L0|framing=LS|genre=psychological_horror:
+    _provenance:
+      framing: LS
+      genre: psychological_horror
+      subject: character_ELS_in_L0
+    alpha_bimodal: true
+    backdrop: pure_white
+    backdrop_corner_tolerance: 5
+    feather_px: 0
+    framing_dutch_angle:
+      margin_all_bonus: 5
+    margin:
+      bottom: 10
+      left: 10
+      right: 10
+      top: 10
+    margin_min_pct_all_sides: 5
+    notes: 'long shot: full body; feet may align with bottom edge; head has 2% air'
+    subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: false
+      left: true
+      right: true
+      top: true
+    subject_zone_pct:
+    - 22
+    - 20
+  subject=character_ELS_in_L0|framing=LS|genre=romance:
+    _provenance:
+      framing: LS
+      genre: romance
+      subject: character_ELS_in_L0
+    alpha_bimodal: true
+    backdrop: pure_white
+    backdrop_corner_tolerance: 5
+    feather_px: 0
+    framing_CU:
+      eye_height_alignment: rule_of_thirds_upper
+    margin:
+      bottom: 10
+      left: 10
+      right: 10
+      top: 10
+    margin_min_pct_all_sides: 5
+    notes: 'long shot: full body; feet may align with bottom edge; head has 2% air'
+    subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: false
+      left: true
+      right: true
+      top: true
+    subject_zone_pct:
+    - 22
+    - 20
+  subject=character_ELS_in_L0|framing=LS|genre=slice_of_life:
+    _provenance:
+      framing: LS
+      genre: slice_of_life
+      subject: character_ELS_in_L0
+    alpha_bimodal: true
+    backdrop: pure_white
+    backdrop_corner_tolerance: 5
+    composite_rule:
+      negative_space_min_pct: 30
+    feather_px: 0
+    margin:
+      bottom: 10
+      left: 10
+      right: 10
+      top: 10
+    margin_min_pct_all_sides: 5
+    notes: 'long shot: full body; feet may align with bottom edge; head has 2% air'
+    subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: false
+      left: true
+      right: true
+      top: true
+    subject_zone_pct:
+    - 22
+    - 20
   subject=character_chest_partial|framing=MCU|genre=comedy:
     _provenance:
       framing: MCU

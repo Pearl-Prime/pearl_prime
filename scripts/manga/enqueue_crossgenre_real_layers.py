@@ -44,33 +44,39 @@ REPO = Path(__file__).resolve().parents[2]
 MANGA = REPO / "artifacts" / "manga"
 PANEL_PROMPTS = MANGA / "panel_prompts"
 MIN_REAL_BYTES = 50_000
+MECHA_CLEAN_LAYER_IDS = {
+    "hangar_pre_dawn",
+    "cockpit_interior",
+    "seated_cockpit",
+    "threshold_stand",
+    "glove_pad",
+    "telemetry_panel",
+}
 
 # Layer-id → keywords used to pick the richest matching panel_prompt excerpt.
 LAYER_PROMPT_ANCHORS: dict[str, tuple[str, ...]] = {
     "hangar_pre_dawn": (
         "hangar bay",
+        "empty hangar",
         "hangar",
         "cathedral-scale industrial",
-        "unit-07 stands docked",
         "pre-dawn",
     ),
     "cockpit_interior": (
         "cockpit interior",
-        "strapped into the cockpit",
-        "cockpit harness",
-        "inside the cockpit",
-        "hud blinks",
+        "empty cockpit",
+        "cockpit seat",
+        "instrument panel",
     ),
     "seated_cockpit": (
-        "strapped into the cockpit",
-        "cockpit harness",
-        "face is lit only by the warm amber",
+        "seated pilot",
+        "single pilot",
+        "pure white backdrop",
     ),
     "threshold_stand": (
-        "cockpit threshold",
-        "half in",
-        "outside the cockpit window",
-        "first full step out of dock",
+        "standing pilot",
+        "single pilot",
+        "pure white backdrop",
     ),
     "glove_pad": (
         "oatmeal-colored hand-knit glove pad",
@@ -79,9 +85,8 @@ LAYER_PROMPT_ANCHORS: dict[str, tuple[str, ...]] = {
     ),
     "telemetry_panel": (
         "telemetry",
-        "hud blinks an amber advisory",
+        "isolated telemetry",
         "subsystem latency",
-        "cockpit biosign",
     ),
     "office_after_hours": (
         "office after hours",
@@ -123,37 +128,35 @@ SCENE_CONTENT_ANCHORS: dict[str, str] = {
     "hangar_pre_dawn": (
         "Wide establishing shot of Hangar Bay 3 at 04:12 before dawn, cathedral-scale "
         "industrial hangar interior with visible steel catwalks, gantry cranes, floor "
-        "markings, docking clamps, and a 14-meter matte slate-grey mecha Unit-07 docked "
-        "at full height dwarfing the catwalks; overhead floods OFF; only standby work-lights "
-        "cast long hard shadows across armor plates; brass meridian-line tracery on chassis "
-        "spine; cool pre-dawn slate-blue ambient fill; NO characters in frame; clear "
+        "markings, docking clamps, and EMPTY repair gantries with no robot parked in frame; "
+        "overhead floods OFF; only standby work-lights cast long hard shadows across the floor; "
+        "cool pre-dawn slate-blue ambient fill; NO characters and NO mecha subject in frame; clear "
         "architectural perspective vanishing lines, readable hangar architecture, manga panel"
     ),
     "cockpit_interior": (
-        "Empty mecha cockpit interior plate (no pilot face required): sealed canopy, "
-        "flight harness straps, dual control yokes/joysticks, amber HUD glass reflecting "
-        "a single warm cockpit-amber filament lamp, oatmeal knit glove pad resting on a "
-        "console edge, slate-grey instrument panels with brass meridian-line inlays, "
+        "Empty mecha cockpit interior support plate: sealed canopy, empty flight harness "
+        "straps, dual control yokes/joysticks, amber HUD glass reflecting a single warm "
+        "cockpit-amber filament lamp, slate-grey instrument panels with brass meridian-line inlays, "
         "readable switches and telemetry strip LEDs, tight interior perspective, "
-        "seinen mecha manga cockpit, Patlabor / 86 / Bokurano register"
+        "NO pilot, NO person, NO glove prop, NO foreground character; seinen mecha manga cockpit"
     ),
     "seated_cockpit": (
-        "Pilot seated in mecha cockpit harness, charcoal flightsuit, short black hair "
-        "pinned at nape, jaw set, hands near controls, oatmeal glove pad on left palm, "
-        "lit by single warm amber cockpit lamp, pure white backdrop cutout plate"
+        "Single pilot seated pose cutout, charcoal flightsuit, short black hair pinned at nape, "
+        "jaw set, hands held as if near controls, oatmeal glove pad on left palm, pure white "
+        "backdrop alpha cutout plate, NO chair, NO cockpit, NO console, NO background"
     ),
     "threshold_stand": (
-        "Pilot standing at open cockpit threshold half stepping from machine into hangar "
-        "air, charcoal flightsuit, oatmeal glove pad visible, tense shoulders, "
-        "pure white backdrop character pose plate"
+        "Single pilot standing full-body cutout, charcoal flightsuit, oatmeal glove pad visible, "
+        "tense shoulders, pure white backdrop alpha cutout plate, NO cockpit threshold, "
+        "NO machine, NO hangar, NO environment"
     ),
     "glove_pad": (
         "Hand-knit oatmeal cream glove pad alone, soft yarn texture visible, rendered LARGE "
         "centered on pure white backdrop, product-plate clarity"
     ),
     "telemetry_panel": (
-        "Cockpit telemetry strip panel with amber LED indicators and dark slate bezel, "
-        "readable hardware detail, LARGE centered on pure white backdrop"
+        "Isolated telemetry strip object with amber LED indicators and dark slate bezel, "
+        "readable hardware detail, LARGE centered on pure white backdrop, NO cockpit scene"
     ),
     "office_after_hours": (
         "Dim corporate office after hours: dual glowing monitors, empty swivel chairs, "
@@ -292,19 +295,31 @@ def _compose_prompt(
     anchor = SCENE_CONTENT_ANCHORS.get(layer_id, "").strip()
     if anchor:
         parts.append(anchor)
-    excerpt = _best_panel_excerpt(layer_id, panel_texts)
+    excerpt = "" if layer_id in MECHA_CLEAN_LAYER_IDS else _best_panel_excerpt(layer_id, panel_texts)
     if excerpt and excerpt.lower() not in (anchor.lower() if anchor else ""):
         parts.append(excerpt)
     # Contract description is a last-resort crumb — never the sole content.
-    desc = (contract_description or "").strip()
+    desc = "" if layer_id in MECHA_CLEAN_LAYER_IDS else (contract_description or "").strip()
     if desc and all(desc.lower() not in p.lower() for p in parts):
         parts.append(desc)
     if layer_class == "L0":
+        parts.append(
+            "STRUCTURAL L0 contract: empty environment/support plate only, "
+            "no pilot, no person, no character, no foreground subject, no hero mecha subject, "
+            "support surfaces clearly visible for later compositing"
+        )
         parts.append("full-bleed scene plate filling frame, no letterboxing")
     elif layer_class == "L2":
-        parts.append("character pose on pure white backdrop, clean silhouette readable")
+        parts.append(
+            "STRUCTURAL L2 contract: exactly one alpha-separable subject cutout, "
+            "pilot OR mecha only, pure white backdrop, no cockpit, no hangar, "
+            "no environment, no console, no background objects, clean silhouette readable"
+        )
     elif layer_class == "L3":
-        parts.append("object rendered LARGE centered, pure white backdrop")
+        parts.append(
+            "STRUCTURAL L3 contract: one isolated object or telemetry prop only, "
+            "large centered pure white backdrop, no people, no pilot, no environment"
+        )
     parts.append(style)
     prompt = ", ".join(p for p in parts if p)
     if len(prompt) < 180:
@@ -354,7 +369,7 @@ def build_jobs(
                     style=style,
                     panel_texts=panel_texts,
                 ),
-                negative=negative,
+                negative=negative + ", people, person, pilot, character, foreground subject, hero mecha subject",
                 width=int(w),
                 height=int(h),
             )
@@ -378,7 +393,10 @@ def build_jobs(
                     style=style,
                     panel_texts=panel_texts,
                 ),
-                negative=negative + ", busy background",
+                negative=negative + (
+                    ", busy background, cockpit interior, hangar, environment, room, "
+                    "scenery, console background, multiple subjects, extra people"
+                ),
                 width=int(w),
                 height=int(h),
             )
@@ -402,7 +420,7 @@ def build_jobs(
                     style=style,
                     panel_texts=panel_texts,
                 ),
-                negative=negative + ", people, person, hands",
+                negative=negative + ", people, person, hands, pilot, character, background, environment, scene",
                 width=int(w),
                 height=int(h),
             )
