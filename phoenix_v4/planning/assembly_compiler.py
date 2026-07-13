@@ -340,7 +340,7 @@ def _resolve_atom_role(
     return LEGACY_VER_TO_ROLE.get(vnum)
 
 
-def _parse_canonical_txt(path: Path) -> list[dict[str, Any]]:
+def _parse_canonical_txt(path: Path, *, require_unique_ids: bool = False) -> list[dict[str, Any]]:
     """Parse CANONICAL.txt into list of {role, atom_id, path_line, band}. Canonical §5.3. BAND default 3 only when key missing."""
     if not path.exists():
         return []
@@ -349,6 +349,7 @@ def _parse_canonical_txt(path: Path) -> list[dict[str, Any]]:
         raise ValueError(f"Invalid CANONICAL.txt {path}: " + "; ".join(errs))
     text = path.read_text()
     atoms: list[dict[str, Any]] = []
+    seen_atom_ids: dict[str, int] = {}
     block = re.compile(
         r"^##\s+([A-Z_]+)\s+v(\d+)\s*\n---\s*\n([\s\S]*?)\n---",
         re.MULTILINE,
@@ -373,6 +374,12 @@ def _parse_canonical_txt(path: Path) -> list[dict[str, Any]]:
         else:
             raw_slug = re.sub(r"[^A-Za-z0-9]+", "_", raw_role).strip("_").upper() or "LEGACY"
             atom_id = f"{persona_dir}_{topic_dir}_{engine}_{role}_{raw_slug}_v{ver}"
+        if require_unique_ids and atom_id in seen_atom_ids:
+            raise ValueError(
+                f"Invalid CANONICAL.txt {path}: duplicate atom ID {atom_id!r} "
+                f"in blocks {seen_atom_ids[atom_id]} and {len(atoms) + 1}"
+            )
+        seen_atom_ids[atom_id] = len(atoms) + 1
         a = {"role": role, "atom_id": atom_id, "path_line": path_line, "band": band}
         if semantic_family:
             a["semantic_family"] = semantic_family

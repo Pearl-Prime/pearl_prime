@@ -16,6 +16,8 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Optional
 
+from phoenix_v4.planning.canonical_atom_blocks import parse_canonical_blocks
+
 try:
     import yaml
 except ImportError:
@@ -75,28 +77,34 @@ def _load_story_entries(
     return out
 
 
-def _parse_block_file_canonical(path: Path, persona: str, topic: str, slot_type: str) -> list[AtomEntry]:
-    """Parse a CANONICAL.txt block file (non-STORY). Blocks: ## TYPE vNN --- metadata --- prose ---."""
-    if not path.exists():
-        return []
-    text = path.read_text()
-    # Match ## SOMETHING vNN --- ... ---
-    block_re = re.compile(
-        r"^##\s+(\S+)\s+v(\d+)\s*\n---\s*\n([\s\S]*?)\n---",
-        re.MULTILINE,
+
+def _parse_block_file_canonical(
+    path: Path,
+    persona: str,
+    topic: str,
+    slot_type: str,
+) -> list[AtomEntry]:
+    # Parse non-STORY banks through the shared fail-closed block parser.
+    blocks = parse_canonical_blocks(
+        path,
+        persona=persona,
+        topic=topic,
+        slot_type=slot_type,
+        include_placeholders=False,
+        require_unique_ids=False,
+        require_usable_if_headers=False,
     )
-    out: list[AtomEntry] = []
-    for m in block_re.finditer(text):
-        _label, ver = m.group(1), m.group(2)
-        metadata = m.group(3)
-        atom_id = f"{persona}_{topic}_{slot_type}_v{ver}"
-        # Optional ID line in metadata overrides
-        for line in metadata.splitlines():
-            if line.strip().lower().startswith("id:"):
-                atom_id = line.split(":", 1)[1].strip()
-                break
-        out.append(AtomEntry(atom_id=atom_id, metadata={}))
-    return out
+    return [
+        AtomEntry(
+            atom_id=block.atom_id,
+            metadata={
+                **dict(block.metadata),
+                "word_count": block.word_count,
+                "delimiter_shape": block.delimiter_shape,
+            },
+        )
+        for block in blocks
+    ]
 
 
 def _load_compression_pool(persona_slug: str, topic_slug: str) -> list[AtomEntry]:
