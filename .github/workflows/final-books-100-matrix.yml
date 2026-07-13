@@ -1,0 +1,70 @@
+name: Final Books 100 Matrix
+
+on:
+  workflow_dispatch:
+    inputs:
+      out:
+        description: "Artifact output directory under artifacts/qa"
+        required: false
+        default: ""
+
+permissions:
+  contents: read
+
+concurrency:
+  group: final-books-100-matrix-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  final-books-100:
+    name: Run final books 100 proof matrix
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install test dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements-test.txt
+
+      - name: Run final proof matrix
+        env:
+          MATRIX_OUT_INPUT: ${{ inputs.out }}
+          GITHUB_RUN_ID_VALUE: ${{ github.run_id }}
+        run: |
+          set -euo pipefail
+          if [ -n "${MATRIX_OUT_INPUT}" ]; then
+            OUT="${MATRIX_OUT_INPUT}"
+          else
+            OUT="artifacts/qa/final_books_100_${GITHUB_RUN_ID_VALUE}"
+          fi
+          echo "out=$OUT" >> "$GITHUB_ENV"
+          PYTHONPATH=. python3 scripts/qa/run_final_books_100_matrix.py --out "$OUT"
+
+      - name: Summarize final matrix
+        if: always()
+        run: |
+          SUMMARY="$out/SUMMARY.md"
+          if [ -f "$SUMMARY" ]; then
+            cat "$SUMMARY" >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "No final matrix SUMMARY.md was produced." >> "$GITHUB_STEP_SUMMARY"
+          fi
+          PROOF="$out/proof_matrix.json"
+          if [ -f "$PROOF" ]; then
+            echo "" >> "$GITHUB_STEP_SUMMARY"
+            echo "Proof matrix: $PROOF" >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: Upload final matrix artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: final-books-100-matrix-${{ github.run_id }}
+          path: ${{ env.out }}/
+          retention-days: 60
