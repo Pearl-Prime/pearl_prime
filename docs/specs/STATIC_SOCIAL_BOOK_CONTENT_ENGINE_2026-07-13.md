@@ -1,8 +1,8 @@
 # Static Social Book Content Engine
 
-**Date:** 2026-07-13  
-**Scope:** Organic static social content generated from Pearl Prime books, freebies, and enhancement artifacts.  
-**Inputs:** `docs/book_deep_research.txt`, attached static self-help strategy brief, live GHL E1-E9 Waystream workflow.  
+**Date:** 2026-07-13
+**Scope:** Organic static social content generated from Pearl Prime books, freebies, and enhancement artifacts.
+**Inputs:** `docs/book_deep_research.txt`, attached static self-help strategy brief, live GHL E1-E9 Waystream workflow.
 **Status:** Operating spec / implementation target. This replaces quote-card-first assumptions in older 48 Social docs.
 
 ## Executive Doctrine
@@ -98,8 +98,8 @@ Forbidden hook style:
 
 ## Instagram Carousel Standard
 
-Default canvas: 1080x1350, 4:5.  
-Default length: 6-10 slides.  
+Default canvas: 1080x1350, 4:5.
+Default length: 6-10 slides.
 Default text load: one idea per slide; 15-45 words per teaching slide.
 
 Nine-slide default:
