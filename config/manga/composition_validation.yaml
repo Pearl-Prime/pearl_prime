@@ -1,16 +1,18 @@
-# Structural Composition MVP — validation profile (runtime legality layer)
-# Layer: STRUCTURAL_COMPOSITION_MVP (separate from PANEL_TYPE_SYSTEM_V1)
-# Authority: artifacts/qa/MANGA_CANON_SCENE_ASSEMBLY_CHECKLIST.md (doctrine singleton)
-# Status: CONFIG-EXISTS + CODE-WIRED when consumed by scripts/manga/structural_composition.py
-schema_version: "1.0.0"
-profile_id: structural_composition_mvp_v1
+# Structural Composition MVP — validation profile
+schema_version: "1.1.0"
+profile_id: structural_composition_mvp_v2
 scope:
   archetypes:
     - seated_table_scene
     - standing_room_scene
-  notes: "First scope only. Do not treat absence of other archetypes as pass."
+    - closeup_subject_scene
+    - prop_insert_scene
+    - two_character_dialogue_scene
+    - action_impact_scene
+    - symbolic_metaphor_scene
+    - establishing_environment_scene
+  notes: "Expanded production-scope structural templates; genre/panel mapping remains explicit."
 
-# THRESHOLD-001 bindings (checklist) — invent nothing beyond these named keys
 thresholds:
   seated_contact_px_tolerance:
     authority_path: config/manga/composition_validation.yaml
@@ -43,38 +45,13 @@ thresholds:
     units: ratio
     enforcement_status: bound
 
-# Categories that may appear in a structural support graph (unknown → hard fail)
-known_node_categories:
-  - support_surface
-  - character
-  - prop
-  - occluder
-  - contact_shadow
-
-# Relations in scope for MVP
-known_relations:
-  - seated_on
-  - standing_on
-  - resting_on
-  - held_by
-  - occluded_by
-
-# TRANSFORM-001: only uniform scale + bounded rotation; no non-uniform squash
-allowed_transform_ops:
-  - translate
-  - uniform_scale
-  - rotate
-forbidden_transform_ops:
-  - non_uniform_scale
-  - perspective_warp
-  - free_deform
-
-# Horizon-ratio G3 is NOT acceptance canon (checklist SCALE-001 conflict note)
+known_node_categories: [support_surface, character, prop, occluder, contact_shadow]
+known_relations: [seated_on, standing_on, resting_on, held_by, occluded_by]
+allowed_transform_ops: [translate, uniform_scale, rotate]
+forbidden_transform_ops: [non_uniform_scale, perspective_warp, free_deform]
 acceptance_canon:
   universal_horizon_ratio_law: false
-  note: "G3 horizon math remains implementation debt in composition_grammar.py; structural MVP uses support/contact graph + shared transform, not horizon-as-universal-law."
-
-# Lettering honesty (do not claim rewires)
+  note: "Support/contact graph + shared transform remain canonical."
 lettering_status:
   live_assembler_path: phoenix_v4/manga/chapter/bubble_render.py::render_bubbles_onto_panel
   richer_v2_exists: phoenix_v4/manga/chapter/bubble_render_v2.py
