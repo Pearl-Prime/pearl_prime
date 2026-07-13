@@ -1,0 +1,28 @@
+{
+  "schema_version": "1.0.0",
+  "lane": "07_localization_pm",
+  "branch": "agent/books100-localization-14-pm-20260714",
+  "base_sha": "b507f3029e2aa7e5d9adfdb258b16d17910dc4fe",
+  "status": "READY_FOR_OPERATOR_PR",
+  "files_changed": [
+    "scripts/localization/build_14_locale_worklist.py",
+    "tests/localization/test_build_14_locale_worklist.py"
+  ],
+  "tests": [
+    {
+      "command": "/Applications/Xcode.app/Contents/Developer/usr/bin/python3 /Users/ahjan/phoenix_omega/docs/books_100_multi_lane_pr_kit/lanes/07_localization_pm/apply.py /Users/ahjan/phoenix_omega_worktrees/books100-20260714/07_localization_pm",
+      "exit_code": 0,
+      "result_tail": ""
+    },
+    {
+      "command": "python3 -m pytest -q tests/localization/test_build_14_locale_worklist.py",
+      "exit_code": 0,
+      "result_tail": "============================= test session starts ==============================\nplatform darwin -- Python 3.9.6, pytest-8.4.2, pluggy-1.6.0\nrootdir: /Users/ahjan/phoenix_omega_worktrees/books100-20260714/07_localization_pm\nconfigfile: pytest.ini\nplugins: anyio-4.12.1\ncollected 1 item\n\ntests/localization/test_build_14_locale_worklist.py .                    [100%]\n\n============================== 1 passed in 0.31s ===============================\n"
+    }
+  ],
+  "blockers": [],
+  "truth": {
+    "fresh_production_render_completed": false,
+    "books_100_production_ready": false
+  }
+}
