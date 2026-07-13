@@ -1,0 +1,115 @@
+{
+  "schema_version": "1.0.0",
+  "runtime_executable_classes": [
+    "AUTHOR_COMMENTARY",
+    "CITED_EVIDENCE",
+    "ENCOURAGEMENT",
+    "EXTERNAL_STORY",
+    "QUOTE",
+    "REFLECTION_QUESTION",
+    "TROUBLESHOOTING",
+    "WISDOM_ESSENCE"
+  ],
+  "requested_classes": [
+    {
+      "class": "AUTHOR_DISCLOSURE",
+      "runtime_executable_as_accent": false,
+      "writer_action": "BLOCKED_DO_NOT_AUTHOR_TAXONOMY_ONLY_SUPPLY",
+      "required_metadata": {
+        "truth_metadata": true,
+        "profile_gate": true,
+        "semantic_fingerprint": false,
+        "plant_id_return_function_semantic_development": false
+      }
+    },
+    {
+      "class": "PARABLE",
+      "runtime_executable_as_accent": false,
+      "writer_action": "BLOCKED_DO_NOT_AUTHOR_TAXONOMY_ONLY_SUPPLY",
+      "required_metadata": {
+        "truth_metadata": false,
+        "profile_gate": true,
+        "semantic_fingerprint": false,
+        "plant_id_return_function_semantic_development": false
+      }
+    },
+    {
+      "class": "ANALOGY",
+      "runtime_executable_as_accent": false,
+      "writer_action": "BLOCKED_DO_NOT_AUTHOR_TAXONOMY_ONLY_SUPPLY",
+      "required_metadata": {
+        "truth_metadata": false,
+        "profile_gate": false,
+        "semantic_fingerprint": true,
+        "plant_id_return_function_semantic_development": false
+      }
+    },
+    {
+      "class": "METAPHOR",
+      "runtime_executable_as_accent": false,
+      "writer_action": "BLOCKED_DO_NOT_AUTHOR_TAXONOMY_ONLY_SUPPLY",
+      "required_metadata": {
+        "truth_metadata": false,
+        "profile_gate": false,
+        "semantic_fingerprint": true,
+        "plant_id_return_function_semantic_development": false
+      }
+    },
+    {
+      "class": "MOTIF",
+      "runtime_executable_as_accent": false,
+      "writer_action": "BLOCKED_DO_NOT_AUTHOR_TAXONOMY_ONLY_SUPPLY",
+      "required_metadata": {
+        "truth_metadata": false,
+        "profile_gate": false,
+        "semantic_fingerprint": false,
+        "plant_id_return_function_semantic_development": false
+      }
+    },
+    {
+      "class": "CALLBACK_RETURN",
+      "runtime_executable_as_accent": false,
+      "writer_action": "BLOCKED_DO_NOT_AUTHOR_TAXONOMY_ONLY_SUPPLY",
+      "required_metadata": {
+        "truth_metadata": false,
+        "profile_gate": false,
+        "semantic_fingerprint": false,
+        "plant_id_return_function_semantic_development": true
+      }
+    },
+    {
+      "class": "BRIDGE",
+      "runtime_executable_as_accent": false,
+      "writer_action": "BLOCKED_DO_NOT_AUTHOR_TAXONOMY_ONLY_SUPPLY",
+      "required_metadata": {
+        "truth_metadata": false,
+        "profile_gate": false,
+        "semantic_fingerprint": false,
+        "plant_id_return_function_semantic_development": false
+      }
+    },
+    {
+      "class": "TRANSITION",
+      "runtime_executable_as_accent": false,
+      "writer_action": "BLOCKED_DO_NOT_AUTHOR_TAXONOMY_ONLY_SUPPLY",
+      "required_metadata": {
+        "truth_metadata": false,
+        "profile_gate": false,
+        "semantic_fingerprint": false,
+        "plant_id_return_function_semantic_development": false
+      }
+    }
+  ],
+  "safe_to_author_now": [],
+  "blocked_classes": [
+    "AUTHOR_DISCLOSURE",
+    "PARABLE",
+    "ANALOGY",
+    "METAPHOR",
+    "MOTIF",
+    "CALLBACK_RETURN",
+    "BRIDGE",
+    "TRANSITION"
+  ],
+  "truth": "No supply is counted until the live runtime can select and prove it."
+}
