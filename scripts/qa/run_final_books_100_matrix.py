@@ -18,6 +18,7 @@ TARGETS = (
         "topic": "anxiety",
         "engine": None,
         "locale": "en-US",
+        "contract": True,
     },
     {
         "id": "zhtw_genz_anxiety",
@@ -139,7 +140,12 @@ def main() -> int:
                 "blocker": "matching master arc not found",
             })
             continue
-        render_dir = out / "renders" / target["id"]
+        render_name = (
+            f"{target['id']}_enhancement_contract"
+            if target.get("contract")
+            else target["id"]
+        )
+        render_dir = out / "renders" / render_name
         command = [
             sys.executable,
             "scripts/run_pipeline.py",
@@ -180,7 +186,15 @@ def main() -> int:
         out / "logs/localization_14.log",
     )
 
-    flagship = out / "renders/en_genz_anxiety/enhancement_contract.json"
+    flagship_row = next(
+        (row for row in books if row.get("id") == "en_genz_anxiety"),
+        None,
+    )
+    flagship = (
+        repo / str(flagship_row["render_dir"]) / "enhancement_contract.json"
+        if flagship_row and flagship_row.get("render_dir")
+        else out / "renders/en_genz_anxiety/enhancement_contract.json"
+    )
     if flagship.is_file():
         enhancement = _run(
             repo,

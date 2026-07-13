@@ -31,6 +31,31 @@ def test_proof_chapter_passes_flow_gate() -> None:
     assert result.metrics["thesis_hits"] >= 1
 
 
+def test_zh_tw_flow_cues_are_recognized_without_english_crutches() -> None:
+    chapter = """
+這一章先把身體的警報放回正確的位置。
+你可以注意胸口的緊縮，而不必立刻相信它。
+重點是，焦慮不是人格缺陷，而是一套過度努力的保護系統。
+這意味著，我們要練習的是辨認警報，而不是羞辱自己。
+這就是為什麼第一個步驟不是逼自己冷靜，而是先命名正在發生的事。
+換句話說，感覺可以很大，但它不需要替你做決定。
+在實際操作中，你先停一下，讓腳掌碰到地面。
+然後呼吸一次，把吐氣拉得比吸氣更長。
+例如，當訊息跳出來時，你可以先說：這是警報。
+因為身體正在預測危險，所以它會把小訊號放大。
+你可以看見，代價不是一封訊息，而是整天都被掃描佔據。
+請記住，你的身體不是問題；問題在於警報被迫工作太久。
+接下來，選擇一個最小的行動，寫下一句真實的話。
+從這裡開始，練習不是完美，而是一次又一次把自己帶回來。
+"""
+    result = evaluate_chapter_flow(chapter, locale="zh-TW")
+    assert result.status == "PASS", result.errors
+    assert result.metrics["locale_family"] == "zh"
+    assert result.metrics["transition_hits"] >= 3
+    assert result.metrics["thesis_hits"] >= 1
+    assert result.metrics["action_hits"] >= 1
+
+
 def test_chapter_flow_with_slots_requires_takeaway_and_thread_when_present() -> None:
     # When TAKEAWAY or THREAD slot is present but segment is empty, gate fails with TAKEAWAY_EMPTY / THREAD_EMPTY
     slots = ["HOOK", "SCENE", "REFLECTION", "EXERCISE", "TAKEAWAY", "INTEGRATION", "THREAD"]

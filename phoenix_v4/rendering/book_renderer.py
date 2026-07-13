@@ -1775,6 +1775,7 @@ def chapter_flow_gate_report(
     ei_v2_config: Optional[dict[str, Any]] = None,
     *,
     runtime_format_id: Optional[str] = None,
+    locale: Optional[str] = None,
 ) -> dict[str, Any]:
     """
     Evaluate each rendered chapter with chapter_flow_gate and return summary report.
@@ -1795,6 +1796,7 @@ def chapter_flow_gate_report(
     dg_cfg = (cfg_full or {}).get("dimension_gates") or {}
     dg_enabled = dg_cfg.get("enabled", True)
     flow_profile = _resolve_chapter_flow_profile(plan, runtime_format_id=runtime_format_id)
+    eval_locale = locale or (plan or {}).get("locale")
 
     chapter_slot_sequence = (plan or {}).get("chapter_slot_sequence") or []
     atom_ids = (plan or {}).get("atom_ids") or []
@@ -1851,7 +1853,7 @@ def chapter_flow_gate_report(
             slot_names, segment_proses = slot_meta[ch]
             composed = composed_chapters[ch]
             other_composed = [composed_chapters[j] for j in range(len(composed_chapters)) if j != ch]
-            text_result = evaluate_chapter_flow(composed, flow_profile=flow_profile)
+            text_result = evaluate_chapter_flow(composed, flow_profile=flow_profile, locale=eval_locale)
             errors = list(text_result.errors)
             for i, slot_name in enumerate(slot_names):
                 if slot_name == "TAKEAWAY":
@@ -1919,7 +1921,7 @@ def chapter_flow_gate_report(
     chapter_reports = []
     failed = 0
     for chapter_number, chapter_text in chapters:
-        res = evaluate_chapter_flow(chapter_text, flow_profile=flow_profile)
+        res = evaluate_chapter_flow(chapter_text, flow_profile=flow_profile, locale=eval_locale)
         if res.status != "PASS":
             failed += 1
         entry: dict[str, Any] = {

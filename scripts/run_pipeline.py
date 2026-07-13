@@ -358,6 +358,7 @@ def _apply_book_quality_gate(
     render_dir: Path,
     prose: str,
     runtime_format_id: str,
+    locale: str | None = None,
     gates_hard: bool,
     governance_report: dict | None = None,
     slot_sequences: list | None = None,
@@ -396,6 +397,7 @@ def _apply_book_quality_gate(
     rep = evaluate_book_quality(
         prose,
         runtime_format_id=runtime_format_id or "",
+        locale=locale,
         governance_report=governance_report,
         slot_sequences=slot_sequences,
         frame=frame,
@@ -418,6 +420,28 @@ def _apply_book_quality_gate(
     if gates_hard and str(rep.release_band) == "Reject":
         failures.append("book_quality_gate")
     return failures, fragment
+
+
+def _register_gate_blocks_delivery(verdict: str, findings: list[Any]) -> bool:
+    """Return True when register findings should block production delivery.
+
+    F13 is explicitly advisory-only in ``register_gate.py`` because the old dwell
+    injector caused choppy one-line filler. Keep reporting F13, but do not turn an
+    F13-only WARN verdict into a delivery block.
+    """
+    v = (verdict or "").strip().upper()
+    if v in ("PASS", "ADVISORY"):
+        return False
+    if any(str(getattr(f, "severity", "")).upper() in ("FAIL", "HARD_FAIL") for f in findings):
+        return True
+    warn_ids = [
+        str(getattr(f, "failure_id", "")).upper()
+        for f in findings
+        if str(getattr(f, "severity", "")).upper() == "WARN"
+    ]
+    if warn_ids and all(fid == "F13" for fid in warn_ids):
+        return False
+    return True
 
 
 def _enforce_pipeline_mode_policy(args: argparse.Namespace, quality_profile: str) -> int | None:
@@ -1023,6 +1047,7 @@ def _run_spine_pipeline_mode(
     from phoenix_v4.planning.book_structure_plan import load_book_structure_plan
     from phoenix_v4.planning.chapter_plan import render_atom_slot_spec
     from phoenix_v4.planning.chapter_planner import derive_chapter_selector_targets
+    from phoenix_v4.planning.catalog_planner import load_render_location_profiles
     from phoenix_v4.planning.knob_apply import apply_knobs, load_knob_profile, load_spine
     from phoenix_v4.quality.chapter_flow_gate import flow_profile_for_runtime_format
     from phoenix_v4.rendering.book_renderer import (
@@ -1724,7 +1749,7 @@ def _run_spine_pipeline_mode(
 
         try:
             _flow_report = chapter_flow_gate_report(
-                prose, runtime_format_id=runtime_fmt
+                prose, runtime_format_id=runtime_fmt, locale=_enrich_locale
             )
             _flow_report_path = render_dir / "chapter_flow_report.json"
             _flow_report_path.write_text(json.dumps(_flow_report, indent=2), encoding="utf-8")
@@ -1788,7 +1813,7 @@ def _run_spine_pipeline_mode(
                 f"Report: {_register_path}",
                 file=sys.stderr,
             )
-            if gates_hard and _register_verdict not in ("PASS", "ADVISORY"):
+            if gates_hard and _register_gate_blocks_delivery(_register_verdict, list(_reg_result.findings)):
                 _quality_gate_failures.append("register_gate")
         except Exception as _e:
             _register_status = "SKIPPED"
@@ -2264,8 +2289,13 @@ def _run_spine_pipeline_mode(
         }
         plan_out = {
             "source": "spine_pipeline",
+            "requested_topic_id": book_spec_for_compiler.get("requested_topic_id") or topic_id,
+            "requested_persona_id": book_spec_for_compiler.get("requested_persona_id") or persona_id,
+            "canonical_topic_id": book_spec_for_compiler.get("canonical_topic_id") or topic_id,
+            "canonical_persona_id": book_spec_for_compiler.get("canonical_persona_id") or persona_id,
             "topic_id": topic_id,
             "persona_id": persona_id,
+            "atoms_model": book_spec_for_compiler.get("atoms_model"),
             "teacher_id": teacher_for_enrich or "",
             "runtime_format": runtime_fmt,
             "output_format_id": _cli_output_format or None,
@@ -2290,6 +2320,16 @@ def _run_spine_pipeline_mode(
             ),
             "accent_beats_by_chapter": _accent_beats_by_chapter,
         }
+        if book_spec_for_compiler.get("requested_location_id"):
+            plan_out["requested_location_id"] = book_spec_for_compiler["requested_location_id"]
+        if book_spec_for_compiler.get("resolved_location_id"):
+            plan_out["resolved_location_id"] = book_spec_for_compiler["resolved_location_id"]
+            plan_out["location_id"] = book_spec_for_compiler["resolved_location_id"]
+            _location_profiles = load_render_location_profiles()
+            _location_profile = _location_profiles.get(book_spec_for_compiler["resolved_location_id"]) or {}
+            _city_name = _location_profile.get("city_name")
+            if _city_name:
+                plan_out["city_name"] = _city_name
     if args.out and plan_out is not None:
         out_path = Path(args.out)
         out_path.parent.mkdir(parents=True, exist_ok=True)
@@ -2541,6 +2581,7 @@ def _run_spine_pipeline_mode(
             render_dir=render_dir,
             prose=prose,
             runtime_format_id=runtime_fmt,
+            locale=_enrich_locale,
             gates_hard=_block_on_fail(quality_profile, "book_quality_gate"),
             governance_report=_governance_report,
             slot_sequences=None,
@@ -3153,7 +3194,15 @@ def main() -> int:
         repo_root=REPO_ROOT,
         arc_topic=getattr(arc, "topic", None),
     )
-    book_spec_for_compiler = {**book_spec.to_dict(), "topic_id": canonical_topic, "persona_id": canonical_persona}
+    book_spec_for_compiler = {
+        **book_spec.to_dict(),
+        "requested_topic_id": topic_id,
+        "requested_persona_id": persona_id,
+        "canonical_topic_id": canonical_topic,
+        "canonical_persona_id": canonical_persona,
+        "topic_id": canonical_topic,
+        "persona_id": canonical_persona,
+    }
     # F-COHERENCE: surface the arc's bound engine so the spine path can route atoms by
     # (topic, engine). Explicit so it holds regardless of BookSpec.to_dict() contents.
     book_spec_for_compiler["engine"] = getattr(arc, "engine", "") or book_spec_for_compiler.get("engine", "")

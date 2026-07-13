@@ -79,6 +79,18 @@ def _is_placeholder_text(text: str) -> bool:
     return bool(_PLACEHOLDER_RE.match(stripped) or _PLACEHOLDER_BRACKET_RE.match(stripped))
 
 
+def _strip_placeholder_lines(text: str) -> str:
+    """Remove whole-line editorial stubs from otherwise valid multiline prose."""
+    if not text:
+        return ""
+    kept: list[str] = []
+    for line in str(text).splitlines():
+        if _is_placeholder_text(line):
+            continue
+        kept.append(line)
+    return "\n".join(kept).strip()
+
+
 _CHAPTER_INDEX_TLS: int = 0  # Thread-local-ish chapter index for variant rotation
 
 # Module-level locale for bridge functions (set by compose_chapter_prose)
@@ -2989,7 +3001,7 @@ def compose_additive_chapter_prose(
     """
     blocks: list[tuple[str, str]] = []
     for _st, prose in zip(slot_types, slot_proses):
-        body = (prose or "").strip()
+        body = _strip_placeholder_lines(prose or "")
         if not body or _is_placeholder_text(body):
             continue
         blocks.append(((_st or "").strip().upper(), body))
@@ -3057,7 +3069,7 @@ def compose_ordered_chapter_prose(
     """
     parts: list[str] = []
     for _st, prose in zip(slot_types, slot_proses):
-        body = (prose or "").strip()
+        body = _strip_placeholder_lines(prose or "")
         if not body or _is_placeholder_text(body):
             continue
         parts.append(body)
@@ -3122,9 +3134,10 @@ def compose_chapter_prose(
     slot_lists: dict[str, list[str]] = {}
     for st, prose in zip(slot_types, slot_proses):
         st_upper = st.strip().upper()
-        slot_lists.setdefault(st_upper, []).append(prose)
+        body = _strip_placeholder_lines(prose or "")
+        slot_lists.setdefault(st_upper, []).append(body)
         if st_upper not in slot_map or _is_placeholder_text(slot_map[st_upper]):
-            slot_map[st_upper] = prose
+            slot_map[st_upper] = body
 
     # Extract slot content
     hook = slot_map.get("HOOK", "")
@@ -3920,21 +3933,17 @@ def compose_from_enriched_book(
                 if not isinstance(_ar, dict):
                     continue
                 _body = str(_ar.get("body") or _ar.get("rendered_body") or "")
-                _keys = _ar.get("keys") if isinstance(_ar.get("keys"), dict) else {}
                 _audit_rows.append(
                     {
                         "chapter": ch.number,
                         "class": _ar.get("class") or _ar.get("accent_class"),
                         "accent_id": _ar.get("accent_id"),
                         "position": _ar.get("position"),
-                        "keys": dict(_keys),
-                        "surface_bucket": _ar.get("surface_bucket") or _keys.get("surface_bucket"),
-                        "count_unit": _ar.get("count_unit") or _keys.get("count_unit"),
                         "renderer_stream_index": _ar.get("chapter_insert_index"),
                         "chapter_insert_index": _ar.get("chapter_insert_index"),
                         "body_hash": _ar.get("body_hash"),
                         "provenance": _ar.get("provenance")
-                        or _keys.get("supply_provenance"),
+                        or ((_ar.get("keys") or {}).get("supply_provenance") if isinstance(_ar.get("keys"), dict) else None),
                         "rendered_excerpt": _body[:220].replace("\n", " ").strip(),
                         "present_in_manuscript": bool(_body.strip()),
                     }
