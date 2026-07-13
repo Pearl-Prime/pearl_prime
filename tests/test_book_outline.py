@@ -166,6 +166,7 @@ def test_write_book_outline_emits_md_and_json(tmp_path: Path) -> None:
     assert "# Book Outline" in md
     assert "prediction-as-evidence swap" in md
     assert "The Alarm (chest and phone)" in md
+    assert "V2.1 optional budget" in md
     assert "Chapter 1" in md
     assert "EXERCISE ✓" in md
     assert "ENCOURAGEMENT" in md
@@ -174,6 +175,7 @@ def test_write_book_outline_emits_md_and_json(tmp_path: Path) -> None:
     assert payload["schema_version"] == 1
     assert payload["chapter_count"] == 2
     assert payload["book_idea"] == "prediction-as-evidence swap"
+    assert payload["enhancement_contract_v21"]["tracked_surfaces"]
 
 
 def test_chapter_rows_reflect_landed_slots_and_enrichments() -> None:
@@ -192,6 +194,9 @@ def test_chapter_rows_reflect_landed_slots_and_enrichments() -> None:
     assert ch1["enrichment_families"]["parable_or_external_story"] is True
     assert ch1["enrichment_families"]["callback"] is False
     assert "somatic_exercise" in ch1["enrichment_hooks"]
+    assert "PRACTICE_APPLICATION" in ch1["v21_surface_groups"]["chapter_engine"]
+    assert "HOOK_STORY" in ch1["v21_surface_groups"]["proof_and_embodiment"]
+    assert "CALLBACK_PLANT" in ch1["v21_surface_groups"]["cohesion_and_craft"]
     accent_classes = {a["class"] for a in ch1["accents"]}
     assert "ENCOURAGEMENT" in accent_classes
     assert "EXTERNAL_STORY" in accent_classes
@@ -201,6 +206,7 @@ def test_chapter_rows_reflect_landed_slots_and_enrichments() -> None:
     assert ch2["enrichment_families"]["callback"] is True
     assert ch2["enrichment_families"]["wisdom"] is True
     assert ch2["core_slots"]["EXERCISE"] is False
+    assert any(item["return_function"] == "angle_callback" for item in ch2["callback_semantics"])
 
 
 def test_missing_optional_surfaces_do_not_crash(tmp_path: Path) -> None:

@@ -11,6 +11,10 @@ import json
 from pathlib import Path
 from typing import Any, Dict, List, Mapping, Optional, Sequence
 
+from phoenix_v4.planning.accent_planner import (
+    accent_class_bucket,
+    build_enhancement_contract_v21_summary,
+)
 from phoenix_v4.planning.enrichment_select import EnrichedBook, EnrichedChapter
 
 CORE_SLOTS: tuple[str, ...] = (
@@ -67,8 +71,7 @@ def _chapter_accents(
     assignments: Sequence[Mapping[str, Any]],
     accent_render_audit: Sequence[Mapping[str, Any]],
 ) -> List[Dict[str, str]]:
-    rows: List[Dict[str, str]] = []
-    seen: set[str] = set()
+    merged: Dict[str, Dict[str, str]] = {}
     sources = list(assignments) + list(accent_render_audit)
     for row in sources:
         try:
@@ -82,42 +85,132 @@ def _chapter_accents(
         if not cls and not accent_id:
             continue
         key = f"{cls}|{accent_id}"
-        if key in seen:
-            continue
-        seen.add(key)
+        item = merged.setdefault(
+            key,
+            {
+                "class": cls,
+                "accent_id": accent_id,
+                "position": "",
+                "provenance": "",
+                "rendered": "",
+                "renderer_stream_index": "",
+            },
+        )
         provenance = str(
             row.get("provenance")
             or row.get("supply_source")
             or _as_mapping(row.get("keys")).get("supply_provenance")
             or ""
         ).strip()
-        rows.append(
-            {
-                "class": cls,
-                "accent_id": accent_id,
-                "position": str(row.get("position") or "").strip(),
-                "provenance": provenance,
-            }
-        )
+        position = str(row.get("position") or "").strip()
+        if position:
+            item["position"] = position
+        if provenance:
+            item["provenance"] = provenance
+        if "present_in_manuscript" in row:
+            item["rendered"] = "yes" if row.get("present_in_manuscript") else "no"
+        stream_index = row.get("renderer_stream_index")
+        if stream_index is None:
+            stream_index = row.get("chapter_insert_index")
+        if stream_index is not None:
+            item["renderer_stream_index"] = str(stream_index)
+    rows = list(merged.values())
     rows.sort(key=lambda r: (r["class"], r["accent_id"]))
     return rows
+
+
+def _source_tail(source_id: str) -> str:
+    raw = str(source_id or "").strip()
+    if ":" in raw:
+        return raw.split(":", 1)[1].strip()
+    return raw
 
 
 def _angle_info(chapter: EnrichedChapter) -> Dict[str, Any]:
     definition_ids: List[str] = []
     callback_ids: List[str] = []
+    callback_semantics: List[Dict[str, str]] = []
     for slot in chapter.slots or []:
         st = str(slot.slot_type or "").upper()
         sid = str(slot.source_id or slot.atom_id or slot.variant_id or "").strip()
         if st == "ANGLE_DEFINITION" and sid:
             definition_ids.append(sid)
+            callback_semantics.append(
+                {
+                    "slot_type": st,
+                    "plant_id": _source_tail(sid),
+                    "return_function": "",
+                    "semantic_development": "initial_angle_plant",
+                }
+            )
         elif st == "ANGLE_CALLBACK" and sid:
             callback_ids.append(sid)
+            callback_semantics.append(
+                {
+                    "slot_type": st,
+                    "plant_id": _source_tail(sid),
+                    "return_function": "angle_callback",
+                    "semantic_development": "later_chapter_reactivation",
+                }
+            )
     return {
         "definition_ids": definition_ids,
         "callback_ids": callback_ids,
         "has_definition": bool(definition_ids) or "ANGLE_DEFINITION" in _slot_types(chapter),
         "has_callback": bool(callback_ids) or "ANGLE_CALLBACK" in _slot_types(chapter),
+        "callback_semantics": callback_semantics,
+    }
+
+
+def _chapter_v21_groups(
+    chapter: EnrichedChapter,
+    accents: Sequence[Mapping[str, str]],
+) -> Dict[str, List[str]]:
+    slot_types = set(_slot_types(chapter))
+    hooks = {
+        str(hook).strip().lower()
+        for slot in (chapter.slots or [])
+        for hook in (slot.enrichment_applied or [])
+        if str(hook).strip()
+    }
+    accent_classes = {str(a.get("class") or "").upper() for a in accents}
+    chapter_engine: List[str] = []
+    if "EXERCISE" in slot_types:
+        chapter_engine.append("PRACTICE_APPLICATION")
+    if "TAKEAWAY" in slot_types:
+        chapter_engine.append("CLOSING_TAKEAWAY")
+    if "THREAD" in slot_types:
+        chapter_engine.append("PROPULSION")
+    if "TROUBLESHOOTING" in accent_classes:
+        chapter_engine.append("TROUBLESHOOTING")
+
+    proof_and_embodiment: List[str] = []
+    if "STORY" in slot_types:
+        proof_and_embodiment.append("HOOK_STORY")
+    for surface in ("EXTERNAL_STORY", "CITED_EVIDENCE", "AUTHOR_DISCLOSURE"):
+        if surface in accent_classes:
+            proof_and_embodiment.append(surface)
+
+    optional_accents = sorted(
+        surface
+        for surface in accent_classes
+        if accent_class_bucket(surface) == "optional_accents"
+    )
+
+    cohesion_and_craft: List[str] = []
+    if "ANGLE_DEFINITION" in slot_types:
+        cohesion_and_craft.append("CALLBACK_PLANT")
+    if "ANGLE_CALLBACK" in slot_types:
+        cohesion_and_craft.append("CALLBACK_RETURN")
+    if any("analogy" in hook for hook in hooks) or "ANGLE_DEFINITION" in slot_types:
+        cohesion_and_craft.append("ANALOGY")
+    if any("metaphor" in hook for hook in hooks) or "ANGLE_DEFINITION" in slot_types:
+        cohesion_and_craft.append("METAPHOR")
+    return {
+        "chapter_engine": sorted(set(chapter_engine)),
+        "proof_and_embodiment": sorted(set(proof_and_embodiment)),
+        "optional_accents": optional_accents,
+        "cohesion_and_craft": sorted(set(cohesion_and_craft)),
     }
 
 
@@ -232,8 +325,10 @@ def _chapter_outline_row(
         "core_slots": _core_slot_presence(chapter),
         "slot_types_landed": _slot_types(chapter),
         "angle": angle,
+        "callback_semantics": list(angle.get("callback_semantics") or []),
         "enrichment_hooks": _landed_enrichment_hooks(chapter),
         "enrichment_families": families,
+        "v21_surface_groups": _chapter_v21_groups(chapter, accents),
         "accents": accents,
         "exercise": _exercise_presence(chapter),
         "story": _story_presence(chapter, accents),
@@ -299,6 +394,24 @@ def build_book_outline_payload(
         or spine.get("story_mix_profile")
         or ""
     ).strip()
+    v21_summary = _as_mapping(strategy.get("enhancement_contract_v21")) or _as_mapping(
+        spine.get("enhancement_contract_v21")
+    )
+    if not v21_summary:
+        v21_summary = build_enhancement_contract_v21_summary(
+            accent_budget=_as_mapping(spine.get("accent_budget") or strategy.get("accent_budget")),
+            flat_rows=assignments,
+            chapter_count=len(enriched.chapters or []),
+            story_mix_profile=strategy_profile,
+            max_accents_per_chapter=int(
+                _as_mapping(_as_mapping(strategy.get("enhancement_contract_v21")).get("optional_accent_budget")).get(
+                    "max_accents_per_chapter"
+                )
+                or 2
+            ),
+            persona_id=persona_id or str(enriched.persona_id or ""),
+            topic_id=topic_id or str(enriched.topic or ""),
+        )
 
     spa_map = _spa_by_chapter(audit)
     chapters = [
@@ -322,6 +435,7 @@ def build_book_outline_payload(
         "book_motif": book_motif,
         "enrichment_strategy_profile": strategy_profile,
         "brand_accent_profile": str(strategy.get("brand_accent_profile") or "").strip(),
+        "enhancement_contract_v21": v21_summary,
         "chapter_count": len(chapters),
         "chapters": chapters,
     }
@@ -342,6 +456,16 @@ def render_book_outline_markdown(payload: Mapping[str, Any]) -> str:
     brand = str(payload.get("brand_accent_profile") or "").strip()
     if brand:
         lines.append(f"**Brand accent profile:** `{brand}`")
+    v21 = _as_mapping(payload.get("enhancement_contract_v21"))
+    if v21:
+        opt = _as_mapping(v21.get("optional_accent_budget"))
+        actual = _as_mapping(opt.get("actual"))
+        lines.append(
+            "**V2.1 optional budget:** "
+            f"assigned={actual.get('assigned_total_optional_accents') or 0} / "
+            f"hard_max={opt.get('hard_max_total_accents') or 0} / "
+            f"max_per_chapter={opt.get('max_accents_per_chapter') or 0}"
+        )
     lines.extend(["", f"**Chapters:** {payload.get('chapter_count') or 0}", ""])
 
     chapters = _as_list(payload.get("chapters"))
@@ -396,6 +520,19 @@ def render_book_outline_markdown(payload: Mapping[str, Any]) -> str:
             + (", ".join(fam_landed) if fam_landed else "_none_")
         )
 
+        v21_groups = _as_mapping(ch.get("v21_surface_groups"))
+        lines.append(
+            "**V2.1 groups:** "
+            + " | ".join(
+                [
+                    "engine=" + ",".join(_as_list(v21_groups.get("chapter_engine"))),
+                    "proof=" + ",".join(_as_list(v21_groups.get("proof_and_embodiment"))),
+                    "optional=" + ",".join(_as_list(v21_groups.get("optional_accents"))),
+                    "cohesion=" + ",".join(_as_list(v21_groups.get("cohesion_and_craft"))),
+                ]
+            )
+        )
+
         accents = [a for a in _as_list(ch.get("accents")) if isinstance(a, Mapping)]
         if accents:
             accent_bits = []
@@ -403,6 +540,21 @@ def render_book_outline_markdown(payload: Mapping[str, Any]) -> str:
                 cls = str(a.get("class") or "")
                 aid = str(a.get("accent_id") or "")
                 bit = f"{cls}" + (f" `{aid}`" if aid else "")
+                pos = str(a.get("position") or "")
+                prov = str(a.get("provenance") or "")
+                rendered = str(a.get("rendered") or "")
+                stream = str(a.get("renderer_stream_index") or "")
+                extras = []
+                if pos:
+                    extras.append(f"@{pos}")
+                if prov:
+                    extras.append(f"via {prov}")
+                if stream:
+                    extras.append(f"stream {stream}")
+                if rendered:
+                    extras.append(f"rendered={rendered}")
+                if extras:
+                    bit += " (" + ", ".join(extras) + ")"
                 accent_bits.append(bit)
             lines.append("**Accents:** " + " · ".join(accent_bits))
         else:
@@ -429,6 +581,26 @@ def render_book_outline_markdown(payload: Mapping[str, Any]) -> str:
             lines.append(f"**Story / parable / external:** {' · '.join(bits) if bits else 'yes'}")
         else:
             lines.append("**Story / parable / external:** _none_")
+
+        callback_semantics = [
+            item
+            for item in _as_list(ch.get("callback_semantics"))
+            if isinstance(item, Mapping)
+        ]
+        if callback_semantics:
+            bits = []
+            for item in callback_semantics:
+                bits.append(
+                    "{slot} `{plant}` {ret} {dev}".format(
+                        slot=str(item.get("slot_type") or ""),
+                        plant=str(item.get("plant_id") or ""),
+                        ret=str(item.get("return_function") or "plant"),
+                        dev=str(item.get("semantic_development") or ""),
+                    ).strip()
+                )
+            lines.append("**Callback semantics:** " + " · ".join(bits))
+        else:
+            lines.append("**Callback semantics:** _none_")
 
         provenance = [str(p) for p in _as_list(ch.get("source_provenance")) if p]
         lines.append(

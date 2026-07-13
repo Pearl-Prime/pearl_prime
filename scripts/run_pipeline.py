@@ -47,6 +47,7 @@ from __future__ import annotations
 from phoenix_v4.text.wordcount import count_words
 
 import argparse
+import hashlib
 import json
 import os
 import re
@@ -921,7 +922,36 @@ def _resolve_book_idea_and_motif(*, book_spec: Mapping[str, Any], arc: Any) -> t
     return explicit_idea or "recognition_before_action", explicit_motif or "quiet_capacity"
 
 
-def _write_enrichment_contract_reports(
+def _enhancement_contract_v1_enabled(
+    *,
+    book_spec: Mapping[str, Any],
+    runtime_format: str,
+    render_dir: Path,
+) -> bool:
+    _ = runtime_format
+    if bool(book_spec.get("enrichment_contract_v1")):
+        return True
+    render_name = str(render_dir.name or "").strip().lower()
+    return "enhancement_contract" in render_name or render_name.endswith("cli_demo_trace_run_composite_contract_v1")
+
+
+def _resolve_enhancement_contract_id(
+    *,
+    book_spec: Mapping[str, Any],
+    render_dir: Path,
+) -> str:
+    explicit = str(book_spec.get("enhancement_contract_id") or "").strip()
+    if explicit:
+        return explicit
+    render_name = str(render_dir.name or "").strip().lower()
+    if render_name.endswith("cli_demo_trace_run_composite_contract_v1"):
+        return "cli_demo_trace_run_composite_contract_v1"
+    if "enhancement_contract" in render_name:
+        return "enhancement_contract_v21"
+    return "enhancement_contract_v1"
+
+
+def _write_enhancement_contract_reports(
     *,
     enriched: Any,
     render_dir: Path,
@@ -929,6 +959,8 @@ def _write_enrichment_contract_reports(
     topic_id: str,
     persona_id: str,
     runtime_format: str,
+    manuscript_text: str,
+    accent_render_audit: list[dict[str, Any]],
 ) -> None:
     audit = enriched.enrichment_audit or {}
     strategy = dict(audit.get("enrichment_strategy_report") or {})
@@ -952,6 +984,18 @@ def _write_enrichment_contract_reports(
         topic_id=topic_id,
         persona_id=persona_id,
         runtime_format=runtime_format,
+    )
+    from phoenix_v4.qa.enhancement_contract import write_enhancement_contract
+
+    write_enhancement_contract(
+        enriched=enriched,
+        manuscript_text=manuscript_text,
+        render_dir=render_dir,
+        contract_id=contract_id,
+        topic_id=topic_id,
+        persona_id=persona_id,
+        runtime_format=runtime_format,
+        accent_render_audit=accent_render_audit,
     )
 
 
@@ -1126,9 +1170,11 @@ def _run_spine_pipeline_mode(
         or getattr(args, "locale", None)
         or None
     )
-    _enrichment_contract_v1 = bool(
-        book_spec_for_compiler.get("enrichment_contract_v1")
-    ) or str(render_dir).endswith("cli_demo_trace_run_composite_contract_v1")
+    _enrichment_contract_v1 = _enhancement_contract_v1_enabled(
+        book_spec=book_spec_for_compiler,
+        runtime_format=runtime_fmt,
+        render_dir=render_dir,
+    )
     enriched = select_enrichment(
         EnrichmentRequest(
             beatmap=beatmap,
@@ -2207,7 +2253,8 @@ def _run_spine_pipeline_mode(
         _write_gate_report("transformation_heatmap.json", {"status": "SKIPPED", "reason": "quality gates disabled"})
         _write_gate_report("book_pass_report.json", {"status": "SKIPPED", "reason": "quality gates disabled"})
 
-    if args.out:
+    plan_out: dict[str, Any] | None = None
+    if args.out or _enrichment_contract_v1:
         _spine_ctx_out = enriched.spine_context or {}
         _accent_beats_by_chapter = {
             int(ch.number): [b.to_plan_dict() if hasattr(b, "to_plan_dict") else dict(b)
@@ -2238,12 +2285,22 @@ def _run_spine_pipeline_mode(
             "accent_signature": _spine_ctx_out.get("accent_signature"),
             "story_mix_profile": _spine_ctx_out.get("story_mix_profile"),
             "accent_assignments": list(_spine_ctx_out.get("accent_assignments") or []),
+            "enhancement_contract_v21": dict(
+                _spine_ctx_out.get("enhancement_contract_v21") or {}
+            ),
             "accent_beats_by_chapter": _accent_beats_by_chapter,
         }
+    if args.out and plan_out is not None:
         out_path = Path(args.out)
         out_path.parent.mkdir(parents=True, exist_ok=True)
         out_path.write_text(json.dumps(plan_out, indent=2, ensure_ascii=False))
         print(f"Wrote {args.out}")
+    if _enrichment_contract_v1 and plan_out is not None:
+        _contract_plan_path = render_dir / "plan.json"
+        _contract_plan_path.write_text(
+            json.dumps(plan_out, indent=2, ensure_ascii=False),
+            encoding="utf-8",
+        )
 
     _music_audit_spine: dict | None = None
     if args.render_book:
@@ -2364,16 +2421,6 @@ def _run_spine_pipeline_mode(
             print(f"Book outline: {_outline_paths.get('markdown')}")
         except Exception as _outline_err:
             print(f"Book outline: WARN — {_outline_err}", file=sys.stderr)
-        _contract_id = "cli_demo_trace_run_composite_contract_v1"
-        if str(render_dir).endswith(_contract_id):
-            _write_enrichment_contract_reports(
-                enriched=enriched,
-                render_dir=render_dir,
-                contract_id=_contract_id,
-                topic_id=topic_id,
-                persona_id=persona_id,
-                runtime_format=runtime_fmt,
-            )
         _spa = enriched.enrichment_audit.get("section_packet_audit")
         _spa_payload: dict | list | None = None
         if isinstance(_spa, dict):
@@ -2435,6 +2482,12 @@ def _run_spine_pipeline_mode(
                     "class": _row.get("class") or _comp.get("class"),
                     "accent_id": _aid,
                     "position": _row.get("position") or _comp.get("position"),
+                    "renderer_stream_index": _comp.get("renderer_stream_index")
+                    or _comp.get("chapter_insert_index"),
+                    "chapter_insert_index": _comp.get("chapter_insert_index")
+                    or _comp.get("renderer_stream_index"),
+                    "body_hash": _comp.get("body_hash")
+                    or (hashlib.sha256(_body.encode("utf-8")).hexdigest() if _body else ""),
                     "provenance": (_row.get("keys") or {}).get("supply_provenance")
                     or _row.get("supply_source")
                     or _comp.get("provenance"),
@@ -2451,7 +2504,10 @@ def _run_spine_pipeline_mode(
         (render_dir / "rendered_accent_audit.json").write_text(
             json.dumps(
                 {
-                    "contract_id": str(render_dir.name),
+                    "contract_id": _resolve_enhancement_contract_id(
+                        book_spec=book_spec_for_compiler,
+                        render_dir=render_dir,
+                    ),
                     "topic_id": topic_id,
                     "persona_id": persona_id,
                     "accent_budget": dict((enriched.spine_context or {}).get("accent_budget") or {}),
@@ -2466,6 +2522,21 @@ def _run_spine_pipeline_mode(
             ),
             encoding="utf-8",
         )
+        if _enrichment_contract_v1:
+            _contract_id = _resolve_enhancement_contract_id(
+                book_spec=book_spec_for_compiler,
+                render_dir=render_dir,
+            )
+            _write_enhancement_contract_reports(
+                enriched=enriched,
+                render_dir=render_dir,
+                contract_id=_contract_id,
+                topic_id=topic_id,
+                persona_id=persona_id,
+                runtime_format=runtime_fmt,
+                manuscript_text=_prose_out,
+                accent_render_audit=_accent_render_rows,
+            )
         _bq_fail, _bq_frag = _apply_book_quality_gate(
             render_dir=render_dir,
             prose=prose,

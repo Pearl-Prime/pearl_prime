@@ -1,0 +1,364 @@
+{
+  "source": "spine_pipeline",
+  "topic_id": "anxiety",
+  "persona_id": "gen_z_professionals",
+  "teacher_id": "",
+  "runtime_format": "extended_book_2h",
+  "output_format_id": null,
+  "target_word_range": null,
+  "format_structural_id": null,
+  "book_plan_id": "ref_anxiety_genz_6h_v1",
+  "word_count": 21938,
+  "chapter_count": 12,
+  "pre_depth_total_words": 20916,
+  "post_depth_total_words": 20916,
+  "chapter_architecture_version": 1,
+  "angle_id": "PROTECTIVE_ALARM",
+  "chapter_planner_warnings": [],
+  "accent_budget": {
+    "ENCOURAGEMENT": 2,
+    "QUOTE": 3,
+    "AUTHOR_COMMENTARY": 1,
+    "WISDOM_ESSENCE": 1,
+    "CITED_EVIDENCE": 1,
+    "TROUBLESHOOTING": 1,
+    "EXTERNAL_STORY": 2,
+    "REFLECTION_QUESTION": 3
+  },
+  "accent_signature": "dff9e5e04bc91ef8",
+  "story_mix_profile": "intimate_voice",
+  "accent_assignments": [
+    {
+      "chapter": 1,
+      "class": "REFLECTION_QUESTION",
+      "accent_id": "rq_anxiety_gen_z_professionals_11",
+      "position": "before_THREAD",
+      "supply_source": "authored_bank",
+      "keys": {
+        "topic_id": "anxiety",
+        "persona_id": "gen_z_professionals",
+        "supply_provenance": "authored_bank"
+      }
+    },
+    {
+      "chapter": 3,
+      "class": "REFLECTION_QUESTION",
+      "accent_id": "rq_anxiety_gen_z_professionals_12",
+      "position": "after_REFLECTION",
+      "supply_source": "authored_bank",
+      "keys": {
+        "topic_id": "anxiety",
+        "persona_id": "gen_z_professionals",
+        "supply_provenance": "authored_bank"
+      }
+    },
+    {
+      "chapter": 5,
+      "class": "REFLECTION_QUESTION",
+      "accent_id": "rq_anxiety_gen_z_professionals_03",
+      "position": "after_REFLECTION",
+      "supply_source": "authored_bank",
+      "keys": {
+        "topic_id": "anxiety",
+        "persona_id": "gen_z_professionals",
+        "supply_provenance": "authored_bank"
+      }
+    },
+    {
+      "chapter": 6,
+      "class": "TROUBLESHOOTING",
+      "accent_id": "ts_anxiety_gen_z_professionals_18",
+      "position": "after_INTEGRATION",
+      "supply_source": "authored_bank",
+      "keys": {
+        "topic_id": "anxiety",
+        "persona_id": "gen_z_professionals",
+        "supply_provenance": "authored_bank"
+      }
+    },
+    {
+      "chapter": 3,
+      "class": "QUOTE",
+      "accent_id": "quote_financial_en_us_paine_rights_v01",
+      "position": "before_THREAD",
+      "supply_source": "authored_bank",
+      "keys": {
+        "topic_id": "anxiety",
+        "persona_id": "gen_z_professionals",
+        "supply_provenance": "authored_bank"
+      }
+    },
+    {
+      "chapter": 4,
+      "class": "QUOTE",
+      "accent_id": "quote_anxiety_en_us_thoreau_walden_v01",
+      "position": "before_HOOK",
+      "supply_source": "authored_bank",
+      "keys": {
+        "topic_id": "anxiety",
+        "persona_id": "gen_z_professionals",
+        "supply_provenance": "authored_bank"
+      }
+    },
+    {
+      "chapter": 12,
+      "class": "QUOTE",
+      "accent_id": "quote_anxiety_en_us_whitman_leaves_1855_v01",
+      "position": "before_THREAD",
+      "supply_source": "authored_bank",
+      "keys": {
+        "topic_id": "anxiety",
+        "persona_id": "gen_z_professionals",
+        "supply_provenance": "authored_bank"
+      }
+    },
+    {
+      "chapter": 2,
+      "class": "ENCOURAGEMENT",
+      "accent_id": "enc_gen_z_professionals_anxiety_permission_v01",
+      "position": "after_turning_point",
+      "supply_source": "atom_pool",
+      "keys": {
+        "topic_id": "anxiety",
+        "persona_id": "gen_z_professionals",
+        "supply_provenance": "atom_pool"
+      }
+    },
+    {
+      "chapter": 12,
+      "class": "ENCOURAGEMENT",
+      "accent_id": "enc_gen_z_professionals_anxiety_permission_v19",
+      "position": "after_turning_point",
+      "supply_source": "atom_pool",
+      "keys": {
+        "topic_id": "anxiety",
+        "persona_id": "gen_z_professionals",
+        "supply_provenance": "atom_pool"
+      }
+    },
+    {
+      "chapter": 2,
+      "class": "CITED_EVIDENCE",
+      "accent_id": "anx_exposure_inhibitory_learning_craske_2014",
+      "position": "after_HOOK",
+      "supply_source": "authored_bank",
+      "keys": {
+        "topic_id": "anxiety",
+        "persona_id": "gen_z_professionals",
+        "supply_provenance": "authored_bank"
+      }
+    },
+    {
+      "chapter": 9,
+      "class": "EXTERNAL_STORY",
+      "accent_id": "ext_anx_storycorps_911_v01",
+      "position": "after_REFLECTION",
+      "supply_source": "authored_bank",
+      "keys": {
+        "topic_id": "anxiety",
+        "persona_id": "gen_z_professionals",
+        "supply_provenance": "authored_bank",
+        "story_type": "true_life_broadcast"
+      }
+    },
+    {
+      "chapter": 10,
+      "class": "WISDOM_ESSENCE",
+      "accent_id": "we_anx_impermanence_weather_v01",
+      "position": "before_THREAD",
+      "supply_source": "authored_bank",
+      "keys": {
+        "topic_id": "anxiety",
+        "persona_id": "gen_z_professionals",
+        "supply_provenance": "authored_bank"
+      }
+    },
+    {
+      "chapter": 10,
+      "class": "AUTHOR_COMMENTARY",
+      "accent_id": "ac_ravi_anxiety_observed_standup_v01",
+      "position": "after_REFLECTION",
+      "supply_source": "authored_bank",
+      "keys": {
+        "topic_id": "anxiety",
+        "persona_id": "gen_z_professionals",
+        "supply_provenance": "authored_bank"
+      }
+    },
+    {
+      "chapter": 5,
+      "class": "EXTERNAL_STORY",
+      "accent_id": "ext_anx_fresh_air_anxiety_theme_v01",
+      "position": "before_STORY",
+      "supply_source": "authored_bank",
+      "keys": {
+        "topic_id": "anxiety",
+        "persona_id": "gen_z_professionals",
+        "supply_provenance": "authored_bank",
+        "story_type": "true_life_broadcast"
+      }
+    }
+  ],
+  "accent_beats_by_chapter": {
+    "1": [
+      {
+        "class": "REFLECTION_QUESTION",
+        "accent_id": "rq_anxiety_gen_z_professionals_11",
+        "position": "before_THREAD",
+        "keys": {
+          "topic_id": "anxiety",
+          "persona_id": "gen_z_professionals",
+          "supply_provenance": "authored_bank"
+        }
+      }
+    ],
+    "2": [
+      {
+        "class": "ENCOURAGEMENT",
+        "accent_id": "enc_gen_z_professionals_anxiety_permission_v01",
+        "position": "after_turning_point",
+        "keys": {
+          "topic_id": "anxiety",
+          "persona_id": "gen_z_professionals",
+          "supply_provenance": "atom_pool"
+        }
+      },
+      {
+        "class": "CITED_EVIDENCE",
+        "accent_id": "anx_exposure_inhibitory_learning_craske_2014",
+        "position": "after_HOOK",
+        "keys": {
+          "topic_id": "anxiety",
+          "persona_id": "gen_z_professionals",
+          "supply_provenance": "authored_bank"
+        }
+      }
+    ],
+    "3": [
+      {
+        "class": "REFLECTION_QUESTION",
+        "accent_id": "rq_anxiety_gen_z_professionals_12",
+        "position": "after_REFLECTION",
+        "keys": {
+          "topic_id": "anxiety",
+          "persona_id": "gen_z_professionals",
+          "supply_provenance": "authored_bank"
+        }
+      },
+      {
+        "class": "QUOTE",
+        "accent_id": "quote_financial_en_us_paine_rights_v01",
+        "position": "before_THREAD",
+        "keys": {
+          "topic_id": "anxiety",
+          "persona_id": "gen_z_professionals",
+          "supply_provenance": "authored_bank"
+        }
+      }
+    ],
+    "4": [
+      {
+        "class": "QUOTE",
+        "accent_id": "quote_anxiety_en_us_thoreau_walden_v01",
+        "position": "before_HOOK",
+        "keys": {
+          "topic_id": "anxiety",
+          "persona_id": "gen_z_professionals",
+          "supply_provenance": "authored_bank"
+        }
+      }
+    ],
+    "5": [
+      {
+        "class": "REFLECTION_QUESTION",
+        "accent_id": "rq_anxiety_gen_z_professionals_03",
+        "position": "after_REFLECTION",
+        "keys": {
+          "topic_id": "anxiety",
+          "persona_id": "gen_z_professionals",
+          "supply_provenance": "authored_bank"
+        }
+      },
+      {
+        "class": "EXTERNAL_STORY",
+        "accent_id": "ext_anx_fresh_air_anxiety_theme_v01",
+        "position": "before_STORY",
+        "keys": {
+          "topic_id": "anxiety",
+          "persona_id": "gen_z_professionals",
+          "supply_provenance": "authored_bank",
+          "story_type": "true_life_broadcast"
+        }
+      }
+    ],
+    "6": [
+      {
+        "class": "TROUBLESHOOTING",
+        "accent_id": "ts_anxiety_gen_z_professionals_18",
+        "position": "after_INTEGRATION",
+        "keys": {
+          "topic_id": "anxiety",
+          "persona_id": "gen_z_professionals",
+          "supply_provenance": "authored_bank"
+        }
+      }
+    ],
+    "9": [
+      {
+        "class": "EXTERNAL_STORY",
+        "accent_id": "ext_anx_storycorps_911_v01",
+        "position": "after_REFLECTION",
+        "keys": {
+          "topic_id": "anxiety",
+          "persona_id": "gen_z_professionals",
+          "supply_provenance": "authored_bank",
+          "story_type": "true_life_broadcast"
+        }
+      }
+    ],
+    "10": [
+      {
+        "class": "WISDOM_ESSENCE",
+        "accent_id": "we_anx_impermanence_weather_v01",
+        "position": "before_THREAD",
+        "keys": {
+          "topic_id": "anxiety",
+          "persona_id": "gen_z_professionals",
+          "supply_provenance": "authored_bank"
+        }
+      },
+      {
+        "class": "AUTHOR_COMMENTARY",
+        "accent_id": "ac_ravi_anxiety_observed_standup_v01",
+        "position": "after_REFLECTION",
+        "keys": {
+          "topic_id": "anxiety",
+          "persona_id": "gen_z_professionals",
+          "supply_provenance": "authored_bank"
+        }
+      }
+    ],
+    "12": [
+      {
+        "class": "QUOTE",
+        "accent_id": "quote_anxiety_en_us_whitman_leaves_1855_v01",
+        "position": "before_THREAD",
+        "keys": {
+          "topic_id": "anxiety",
+          "persona_id": "gen_z_professionals",
+          "supply_provenance": "authored_bank"
+        }
+      },
+      {
+        "class": "ENCOURAGEMENT",
+        "accent_id": "enc_gen_z_professionals_anxiety_permission_v19",
+        "position": "after_turning_point",
+        "keys": {
+          "topic_id": "anxiety",
+          "persona_id": "gen_z_professionals",
+          "supply_provenance": "atom_pool"
+        }
+      }
+    ]
+  }
+}
