@@ -1,0 +1,23 @@
+{
+  "schema_version": "1.0.0",
+  "lane": "02_integration_bank_cleanup",
+  "branch": "agent/books100-integration-bank-cleanup-20260714",
+  "base_sha": "b507f3029e2aa7e5d9adfdb258b16d17910dc4fe",
+  "status": "READY_FOR_OPERATOR_PR",
+  "files_changed": [
+    "atoms/corporate_managers/burnout/INTEGRATION/CANONICAL.txt",
+    "tests/planning/test_corporate_burnout_integration_bank.py"
+  ],
+  "tests": [
+    {
+      "command": "PYTHONPATH=. python3 -m pytest -q tests/planning/test_corporate_burnout_integration_bank.py",
+      "exit_code": 0,
+      "result_tail": "3 passed in 0.11s"
+    }
+  ],
+  "blockers": [],
+  "truth": {
+    "fresh_production_render_completed": false,
+    "books_100_production_ready": false
+  }
+}
