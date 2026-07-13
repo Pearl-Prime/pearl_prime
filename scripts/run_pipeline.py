@@ -928,17 +928,11 @@ def _enhancement_contract_v1_enabled(
     runtime_format: str,
     render_dir: Path,
 ) -> bool:
+    _ = runtime_format
     if bool(book_spec.get("enrichment_contract_v1")):
         return True
-    if str(render_dir).endswith("cli_demo_trace_run_composite_contract_v1"):
-        return True
-    from phoenix_v4.qa.enhancement_contract import enhancement_contract_v1_flagship
-
-    return enhancement_contract_v1_flagship(
-        topic_id=str(book_spec.get("topic_id") or ""),
-        persona_id=str(book_spec.get("persona_id") or ""),
-        runtime_format=str(runtime_format or ""),
-    )
+    render_name = str(render_dir.name or "").strip().lower()
+    return "enhancement_contract" in render_name or render_name.endswith("cli_demo_trace_run_composite_contract_v1")
 
 
 def _resolve_enhancement_contract_id(
@@ -949,8 +943,11 @@ def _resolve_enhancement_contract_id(
     explicit = str(book_spec.get("enhancement_contract_id") or "").strip()
     if explicit:
         return explicit
-    if str(render_dir).endswith("cli_demo_trace_run_composite_contract_v1"):
+    render_name = str(render_dir.name or "").strip().lower()
+    if render_name.endswith("cli_demo_trace_run_composite_contract_v1"):
         return "cli_demo_trace_run_composite_contract_v1"
+    if "enhancement_contract" in render_name:
+        return "enhancement_contract_v21"
     return "enhancement_contract_v1"
 
 
@@ -2288,6 +2285,9 @@ def _run_spine_pipeline_mode(
             "accent_signature": _spine_ctx_out.get("accent_signature"),
             "story_mix_profile": _spine_ctx_out.get("story_mix_profile"),
             "accent_assignments": list(_spine_ctx_out.get("accent_assignments") or []),
+            "enhancement_contract_v21": dict(
+                _spine_ctx_out.get("enhancement_contract_v21") or {}
+            ),
             "accent_beats_by_chapter": _accent_beats_by_chapter,
         }
     if args.out and plan_out is not None:

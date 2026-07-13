@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import math
 import re
 from dataclasses import dataclass, field, replace
 from pathlib import Path
@@ -42,6 +43,109 @@ ACCENT_CLASSES_V2 = frozenset(
 )
 
 ALL_ACCENT_CLASSES = ACCENT_CLASSES_V1 | ACCENT_CLASSES_V2
+
+ENHANCEMENT_CONTRACT_V21_SCHEMA_VERSION = "2.1.0"
+
+V21_CHAPTER_ENGINE_SURFACES: tuple[str, ...] = (
+    "VALIDATION_NORMALIZATION",
+    "MECHANISM_EXPLANATION",
+    "PRACTICE_APPLICATION",
+    "TROUBLESHOOTING",
+    "TRANSITION_GLUE",
+    "CLOSING_TAKEAWAY",
+    "PROPULSION",
+)
+
+V21_PROOF_AND_EMBODIMENT_SURFACES: tuple[str, ...] = (
+    "HOOK_STORY",
+    "EXTERNAL_STORY",
+    "AUTHOR_DISCLOSURE",
+    "CASE_STUDY",
+    "CITED_EVIDENCE",
+)
+
+V21_OPTIONAL_ACCENT_SURFACES: tuple[str, ...] = (
+    "QUOTE",
+    "ENCOURAGEMENT",
+    "REFLECTION_QUESTION",
+    "AUTHOR_COMMENTARY",
+    "WISDOM_ESSENCE",
+)
+
+V21_COHESION_AND_CRAFT_SURFACES: tuple[str, ...] = (
+    "CALLBACK_PLANT",
+    "CALLBACK_RETURN",
+    "MOTIF",
+    "ANALOGY",
+    "METAPHOR",
+    "BRIDGE",
+    "TRANSITION",
+)
+
+V21_SURFACE_BUCKET_BY_CLASS: Dict[str, str] = {
+    "QUOTE": "optional_accents",
+    "ENCOURAGEMENT": "optional_accents",
+    "REFLECTION_QUESTION": "optional_accents",
+    "AUTHOR_COMMENTARY": "optional_accents",
+    "WISDOM_ESSENCE": "optional_accents",
+    "TROUBLESHOOTING": "chapter_engine",
+    "CITED_EVIDENCE": "proof_and_embodiment",
+    "EXTERNAL_STORY": "proof_and_embodiment",
+    "AUTHOR_DISCLOSURE": "proof_and_embodiment",
+    "ANALOGY": "cohesion_and_craft",
+    "METAPHOR": "cohesion_and_craft",
+    "CALLBACK_PLANT": "cohesion_and_craft",
+    "CALLBACK_RETURN": "cohesion_and_craft",
+}
+
+V21_COUNT_UNITS: Dict[str, str] = {
+    "QUOTE": "borrowed_authority_block",
+    "ENCOURAGEMENT": "substantial_encouragement_block",
+    "REFLECTION_QUESTION": "standalone_reflection_prompt",
+    "AUTHOR_COMMENTARY": "substantial_interpretive_commentary_block",
+    "WISDOM_ESSENCE": "distilled_wisdom_block",
+    "CITED_EVIDENCE": "evidence_block",
+    "EXTERNAL_STORY": "substantial_vignette",
+    "AUTHOR_DISCLOSURE": "substantial_first_person_disclosure",
+    "ANALOGY": "major_explanatory_analogy",
+    "METAPHOR": "developed_or_recurring_metaphor",
+    "CALLBACK_RETURN": "meaningful_motif_return",
+}
+
+V21_PREFERRED_POSITIONS: Dict[str, Tuple[str, ...]] = {
+    "QUOTE": ("before_HOOK", "before_THREAD"),
+    "CITED_EVIDENCE": ("after_HOOK", "before_STORY"),
+    "EXTERNAL_STORY": ("after_HOOK", "after_REFLECTION", "before_STORY"),
+    "ENCOURAGEMENT": ("after_EXERCISE", "after_turning_point"),
+    "TROUBLESHOOTING": ("after_INTEGRATION",),
+    "REFLECTION_QUESTION": ("after_REFLECTION", "before_THREAD"),
+    "AUTHOR_COMMENTARY": ("after_PIVOT", "after_EXERCISE", "after_REFLECTION", "before_THREAD"),
+    "WISDOM_ESSENCE": ("after_REFLECTION", "before_THREAD"),
+    "CALLBACK_RETURN": ("after_PIVOT", "before_THREAD"),
+}
+
+V21_DISALLOWED_POSITIONS: Dict[str, Tuple[str, ...]] = {
+    "TROUBLESHOOTING": ("before_HOOK", "after_HOOK", "before_STORY"),
+}
+
+V21_PHASE_WEIGHTS_BY_CLASS: Dict[str, Dict[str, int]] = {
+    "REFLECTION_QUESTION": {"early": 6, "mid": 10, "late": 14},
+    "TROUBLESHOOTING": {"early": 4, "mid": 8, "late": 12},
+    "QUOTE": {"early": 14, "mid": 8, "late": 12},
+    "ENCOURAGEMENT": {"early": 6, "mid": 10, "late": 8},
+    "CITED_EVIDENCE": {"early": 12, "mid": 10, "late": 6},
+    "EXTERNAL_STORY": {"early": 8, "mid": 10, "late": 10},
+    "WISDOM_ESSENCE": {"early": 6, "mid": 10, "late": 12},
+    "AUTHOR_COMMENTARY": {"early": 6, "mid": 10, "late": 10},
+}
+
+V21_ROLE_WEIGHTS_BY_CLASS: Dict[str, Dict[str, int]] = {
+    "REFLECTION_QUESTION": {"recognition": 4, "reframe": 2, "integration": 2},
+    "TROUBLESHOOTING": {"practice": 3, "integration": 4, "application": 3},
+    "CITED_EVIDENCE": {"recognition": 3, "reframe": 3, "understand": 2},
+    "EXTERNAL_STORY": {"recognition": 3, "reframe": 3, "turn": 2},
+    "ENCOURAGEMENT": {"practice": 3, "integration": 3, "repair": 2},
+}
 
 ACCENT_SELECTION_ORDER: Tuple[str, ...] = (
     "REFLECTION_QUESTION",
@@ -96,6 +200,24 @@ def enrichment_contract_v1_enabled(spine_context: Optional[Mapping[str, Any]]) -
     """True only when the contract-v1 anxiety enrichment lane is explicitly armed."""
     ctx = spine_context or {}
     return bool(ctx.get(CONTRACT_V1_SPINE_KEY))
+
+
+def accent_class_bucket(accent_class: str) -> str:
+    return V21_SURFACE_BUCKET_BY_CLASS.get(str(accent_class or "").strip().upper(), "optional_accents")
+
+
+def count_unit_for_surface(surface: str) -> str:
+    return V21_COUNT_UNITS.get(str(surface or "").strip().upper(), "tracked_surface")
+
+
+def preferred_positions_for_surface(surface: str) -> List[str]:
+    key = str(surface or "").strip().upper()
+    return list(V21_PREFERRED_POSITIONS.get(key) or CLASS_DEFAULT_POSITIONS.get(key) or ())
+
+
+def disallowed_positions_for_surface(surface: str) -> List[str]:
+    key = str(surface or "").strip().upper()
+    return list(V21_DISALLOWED_POSITIONS.get(key) or ())
 
 
 _TEACHER_NAME_TOKENS = frozenset(
@@ -236,6 +358,200 @@ def resolve_story_mix_profile(
         return str(pilot["story_mix_profile"])
     data = _load_yaml(repo_root / "config" / "authoring" / "story_mix_profiles.yaml")
     return str((data.get("default_by_brand") or {}).get(brand_id) or "practical_credible")
+
+
+def _scale_from_trade_book(value: int, chapter_count: int, *, minimum: int = 0) -> int:
+    if chapter_count <= 0:
+        return minimum
+    return max(minimum, int(math.ceil((float(value) * float(chapter_count)) / 12.0)))
+
+
+def _surface_tracking_row(
+    surface: str,
+    *,
+    requested: int,
+    assigned: int,
+    planner_tracking_mode: str,
+) -> Dict[str, Any]:
+    return {
+        "surface": surface,
+        "bucket": accent_class_bucket(surface),
+        "requested": int(requested),
+        "assigned": int(assigned),
+        "count_unit": count_unit_for_surface(surface),
+        "preferred_positions": preferred_positions_for_surface(surface),
+        "disallowed_positions": disallowed_positions_for_surface(surface),
+        "planner_tracking_mode": planner_tracking_mode,
+    }
+
+
+def build_enhancement_contract_v21_summary(
+    *,
+    accent_budget: Mapping[str, int],
+    flat_rows: Sequence[Mapping[str, Any]],
+    chapter_count: int,
+    story_mix_profile: str,
+    max_accents_per_chapter: int,
+    persona_id: str = "",
+    topic_id: str = "",
+) -> Dict[str, Any]:
+    counts = _assignment_counts(flat_rows)
+    optional_counts = {
+        cls: int(counts.get(cls, 0))
+        for cls in V21_OPTIONAL_ACCENT_SURFACES
+        if int(accent_budget.get(cls, 0)) > 0 or int(counts.get(cls, 0)) > 0
+    }
+    optional_requested = {
+        cls: int(accent_budget.get(cls, 0))
+        for cls in V21_OPTIONAL_ACCENT_SURFACES
+        if int(accent_budget.get(cls, 0)) > 0 or int(counts.get(cls, 0)) > 0
+    }
+    optional_per_chapter: Dict[int, int] = {}
+    for row in flat_rows:
+        cls = str(row.get("class") or "").strip().upper()
+        if cls not in V21_OPTIONAL_ACCENT_SURFACES:
+            continue
+        chapter = int(row.get("chapter") or 0)
+        optional_per_chapter[chapter] = optional_per_chapter.get(chapter, 0) + 1
+    optional_chapters = sorted(optional_per_chapter)
+    tracked_surfaces: List[Dict[str, Any]] = []
+    for surface in V21_OPTIONAL_ACCENT_SURFACES:
+        tracked_surfaces.append(
+            _surface_tracking_row(
+                surface,
+                requested=int(accent_budget.get(surface, 0)),
+                assigned=int(counts.get(surface, 0)),
+                planner_tracking_mode="planner_counted",
+            )
+        )
+    for surface in ("TROUBLESHOOTING", "CITED_EVIDENCE", "EXTERNAL_STORY", "AUTHOR_DISCLOSURE"):
+        tracked_surfaces.append(
+            _surface_tracking_row(
+                surface,
+                requested=int(accent_budget.get(surface, 0)),
+                assigned=int(counts.get(surface, 0)),
+                planner_tracking_mode="planner_counted" if surface in accent_budget else "tracked_surface_only",
+            )
+        )
+    for surface in ("ANALOGY", "METAPHOR", "CALLBACK_RETURN"):
+        tracked_surfaces.append(
+            _surface_tracking_row(
+                surface,
+                requested=0,
+                assigned=0,
+                planner_tracking_mode="downstream_audit_only",
+            )
+        )
+    target_accent_chapters = {
+        "min": _scale_from_trade_book(5, chapter_count, minimum=1),
+        "max": _scale_from_trade_book(7, chapter_count, minimum=1),
+    }
+    target_total_accents = {
+        "min": _scale_from_trade_book(7, chapter_count, minimum=1),
+        "max": _scale_from_trade_book(9, chapter_count, minimum=1),
+    }
+    hard_max_accent_chapters = _scale_from_trade_book(8, chapter_count, minimum=1)
+    hard_max_total_accents = _scale_from_trade_book(10, chapter_count, minimum=1)
+    accent_free_minimum = max(0, int(math.floor((4.0 * float(max(chapter_count, 1))) / 12.0)))
+    return {
+        "schema_version": ENHANCEMENT_CONTRACT_V21_SCHEMA_VERSION,
+        "truth_label": "research_informed_working_priors",
+        "surface_taxonomy": {
+            "chapter_engine": list(V21_CHAPTER_ENGINE_SURFACES),
+            "proof_and_embodiment": list(V21_PROOF_AND_EMBODIMENT_SURFACES),
+            "optional_accents": list(V21_OPTIONAL_ACCENT_SURFACES),
+            "cohesion_and_craft": list(V21_COHESION_AND_CRAFT_SURFACES),
+        },
+        "count_units": dict(V21_COUNT_UNITS),
+        "tracked_surfaces": tracked_surfaces,
+        "optional_accent_budget": {
+            "target_accent_chapters": target_accent_chapters,
+            "hard_max_accent_chapters": hard_max_accent_chapters,
+            "target_total_accents": target_total_accents,
+            "hard_max_total_accents": hard_max_total_accents,
+            "max_accents_per_chapter": int(max_accents_per_chapter),
+            "accent_free_chapters_minimum": accent_free_minimum,
+            "chapter_share_rounding": "ceil",
+            "class_hard_maxima": optional_requested,
+            "ceiling_interpretation": (
+                "Class-level maxima are ceilings, not instructions to maximize every optional accent "
+                "class simultaneously."
+            ),
+            "actual": {
+                "assigned_total_optional_accents": sum(optional_counts.values()),
+                "optional_assignment_counts": optional_counts,
+                "chapters_with_optional_accents": optional_chapters,
+                "optional_accent_chapter_count": len(optional_chapters),
+                "accent_free_chapter_count": max(0, int(chapter_count) - len(optional_chapters)),
+                "per_chapter_optional_counts": {
+                    str(ch): int(count)
+                    for ch, count in sorted(optional_per_chapter.items())
+                },
+            },
+        },
+        "phase_strategy": {
+            "story_mix_profile": story_mix_profile,
+            "chapter_phase_order": list(BOOK_PHASE_ORDER),
+            "phase_weights_by_class": dict(V21_PHASE_WEIGHTS_BY_CLASS),
+            "role_weights_by_class": dict(V21_ROLE_WEIGHTS_BY_CLASS),
+            "anxiety_flagship_mode": (
+                "validation_plus_mechanism_hybrid"
+                if str(persona_id or "").strip() == "gen_z_professionals" and str(topic_id or "").strip() == "anxiety"
+                else "profile_default"
+            ),
+        },
+        "tracking_notes": [
+            "TROUBLESHOOTING, CITED_EVIDENCE, and EXTERNAL_STORY are tracked outside the optional-accent bucket.",
+            "AUTHOR_DISCLOSURE is distinct from AUTHOR_COMMENTARY even when no authored disclosure bank is present.",
+            "ANALOGY, METAPHOR, and callback return surfaces are counted downstream from slots/hooks and audits, not from optional accent budgets.",
+        ],
+    }
+
+
+def _external_story_function(entry: Mapping[str, Any]) -> Tuple[str, str]:
+    explicit = str(entry.get("story_function") or entry.get("story_role") or "").strip()
+    allowed = {"recognition", "mechanism_proof", "turn", "possibility", "cautionary"}
+    if explicit in allowed:
+        return explicit, "authored_bank"
+    emotion = str(entry.get("emotional_shape") or entry.get("emotional_register") or "").strip()
+    emotion_map = {
+        "quiet-recognition": "recognition",
+        "humor": "recognition",
+        "tearjerker": "recognition",
+        "contrast": "turn",
+        "breakthrough": "possibility",
+        "underdog": "possibility",
+        "cautionary": "cautionary",
+    }
+    if emotion in emotion_map:
+        return emotion_map[emotion], "inferred_emotional_shape"
+    fit = str(entry.get("position_fit") or "").upper()
+    if "PIVOT" in fit:
+        return "turn", "inferred_position_fit"
+    if "HOOK" in fit:
+        return "recognition", "inferred_position_fit"
+    if "TAKEAWAY" in fit:
+        return "possibility", "inferred_position_fit"
+    return "recognition", "default_recognition"
+
+
+def _truth_metadata_for_entry(accent_class: str, entry: Mapping[str, Any]) -> Dict[str, Any]:
+    cls = str(accent_class or "").strip().upper()
+    if cls == "EXTERNAL_STORY":
+        return {
+            "source": str(entry.get("source") or "").strip(),
+            "citation": str(entry.get("citation") or "").strip(),
+            "rights_class": str(entry.get("rights_class") or "").strip(),
+            "truth_status": str(entry.get("rights_class") or "unspecified").strip() or "unspecified",
+        }
+    if cls == "CITED_EVIDENCE":
+        return {
+            "citation": str(entry.get("citation") or "").strip(),
+            "year": entry.get("year"),
+            "robustness": str(entry.get("robustness") or "").strip(),
+            "truth_status": str(entry.get("robustness") or "unspecified").strip() or "unspecified",
+        }
+    return {}
 
 
 def resolve_enrichment_strategy_profile(
@@ -795,17 +1111,9 @@ def _score_chapter_for_class(
         return -1
     phase = _chapter_phase(ch.number, chapter_count)
     score = 0
-    phase_prefs: Dict[str, Dict[str, int]] = {
-        "REFLECTION_QUESTION": {"early": 6, "mid": 10, "late": 14},
-        "TROUBLESHOOTING": {"early": 4, "mid": 8, "late": 12},
-        "QUOTE": {"early": 14, "mid": 8, "late": 12},
-        "ENCOURAGEMENT": {"early": 6, "mid": 10, "late": 8},
-        "CITED_EVIDENCE": {"early": 12, "mid": 10, "late": 6},
-        "EXTERNAL_STORY": {"early": 8, "mid": 10, "late": 10},
-        "WISDOM_ESSENCE": {"early": 6, "mid": 10, "late": 12},
-        "AUTHOR_COMMENTARY": {"early": 6, "mid": 10, "late": 10},
-    }
-    score += phase_prefs.get(accent_class, {}).get(phase, 5)
+    score += V21_PHASE_WEIGHTS_BY_CLASS.get(accent_class, {}).get(phase, 5)
+    role = str(getattr(ch, "role", "") or "").strip().lower()
+    score += int(V21_ROLE_WEIGHTS_BY_CLASS.get(accent_class, {}).get(role, 0))
     if accent_class == "QUOTE":
         if position == "before_HOOK" and phase == "early":
             score += 8
@@ -1073,6 +1381,8 @@ def _build_strategy_report(
     share_cap: float,
     max_accents_per_chapter: int,
     chapter_count: int,
+    persona_id: str,
+    topic_id: str,
     repo_root: Path = REPO_ROOT,
 ) -> Dict[str, Any]:
     counts = _assignment_counts(flat_rows)
@@ -1097,6 +1407,15 @@ def _build_strategy_report(
         for cls in ALL_ACCENT_CLASSES
         if int(accent_budget.get(cls, 0)) > 0
     }
+    v21_summary = build_enhancement_contract_v21_summary(
+        accent_budget=accent_budget,
+        flat_rows=flat_rows,
+        chapter_count=chapter_count,
+        story_mix_profile=story_mix_profile,
+        max_accents_per_chapter=max_accents_per_chapter,
+        persona_id=persona_id,
+        topic_id=topic_id,
+    )
     return {
         "strategy_profile": story_mix_profile,
         "style_family": mix_data.get("strategy_family") or story_mix_profile,
@@ -1124,6 +1443,7 @@ def _build_strategy_report(
         "chapters_with_accents": sorted(chapters_with),
         "chapter_count": chapter_count,
         "accent_chapter_share": len(chapters_with) / max(1, chapter_count),
+        "enhancement_contract_v21": v21_summary,
     }
 
 
@@ -1217,6 +1537,7 @@ def _build_alignment_report(
                 else []
             )
         ),
+        "enhancement_contract_v21": dict(strategy_report.get("enhancement_contract_v21") or {}),
     }
 
 
@@ -1345,11 +1666,22 @@ def _apply_share_cap_with_refill(
                 "topic_id": topic_id,
                 "persona_id": enriched.persona_id,
                 "supply_provenance": prov,
+                "surface_bucket": accent_class_bucket(accent_class),
+                "count_unit": count_unit_for_surface(accent_class),
+                "preferred_positions": preferred_positions_for_surface(accent_class),
+                "disallowed_positions": disallowed_positions_for_surface(accent_class),
             }
             story_type = str(entry.get("story_type") or entry.get("type") or entry.get("external_story_type") or "")
             if story_type:
                 beat_keys["story_type"] = story_type
                 used_story_types.append(story_type)
+            truth_metadata = _truth_metadata_for_entry(accent_class, entry)
+            if truth_metadata:
+                beat_keys["truth_metadata"] = truth_metadata
+            if accent_class == "EXTERNAL_STORY":
+                story_function, story_function_source = _external_story_function(entry)
+                beat_keys["story_function"] = story_function
+                beat_keys["story_function_source"] = story_function_source
             beat = AccentBeat(
                 accent_class,
                 accent_id,
@@ -1717,11 +2049,22 @@ def plan_accent_beats_for_book(
                 "topic_id": topic_id,
                 "persona_id": persona_id,
                 "supply_provenance": prov,
+                "surface_bucket": accent_class_bucket(accent_class),
+                "count_unit": count_unit_for_surface(accent_class),
+                "preferred_positions": preferred_positions_for_surface(accent_class),
+                "disallowed_positions": disallowed_positions_for_surface(accent_class),
             }
             story_type = str(entry.get("story_type") or entry.get("type") or entry.get("external_story_type") or "")
             if story_type:
                 beat_keys["story_type"] = story_type
                 used_story_types.append(story_type)
+            truth_metadata = _truth_metadata_for_entry(accent_class, entry)
+            if truth_metadata:
+                beat_keys["truth_metadata"] = truth_metadata
+            if accent_class == "EXTERNAL_STORY":
+                story_function, story_function_source = _external_story_function(entry)
+                beat_keys["story_function"] = story_function
+                beat_keys["story_function_source"] = story_function_source
             beat = AccentBeat(
                 accent_class,
                 accent_id,
@@ -1773,6 +2116,8 @@ def plan_accent_beats_for_book(
         share_cap=share_cap,
         max_accents_per_chapter=max_accents_per_chapter,
         chapter_count=total_chapters,
+        persona_id=persona_id,
+        topic_id=topic_id,
         repo_root=repo_root,
     )
     alignment_report = _build_alignment_report(
@@ -1831,6 +2176,9 @@ def attach_accent_plan(
             "accent_signature": plan.signature,
             "story_mix_profile": plan.story_mix_profile,
             "accent_assignments": list(plan.flat_rows),
+            "enhancement_contract_v21": dict(
+                (plan.strategy_report.get("enhancement_contract_v21") or {})
+            ),
             "brand_id": brand_id,
             "book_idea": plan.strategy_report.get("book_idea"),
             "book_motif": plan.strategy_report.get("book_motif"),
@@ -1842,6 +2190,9 @@ def attach_accent_plan(
         "accent_signature": plan.signature,
         "story_mix_profile": plan.story_mix_profile,
         "assignment_count": len(plan.flat_rows),
+        "enhancement_contract_v21": dict(
+            (plan.strategy_report.get("enhancement_contract_v21") or {})
+        ),
     }
     audit["enrichment_strategy_report"] = dict(plan.strategy_report)
     audit["bestseller_alignment_report"] = dict(plan.alignment_report)

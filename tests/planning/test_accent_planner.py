@@ -228,7 +228,7 @@ def test_insert_accent_beats_preserves_planner_only():
             "class": "CITED_EVIDENCE",
             "accent_id": "burn_who_occupational_burnout_2019",
             "position": "after_HOOK",
-            "keys": {},
+            "keys": {"surface_bucket": "proof_and_embodiment"},
         }
     ]
     bodies = {"burn_who_occupational_burnout_2019": "Evidence paragraph with handoff to scene."}
@@ -243,8 +243,18 @@ def test_insert_accent_beats_does_not_double_offset_later_positions():
     types_ = ["HOOK", "REFLECTION", "THREAD"]
     proses = ["hook body", "reflection body", "thread body"]
     beats = [
-        {"class": "QUOTE", "accent_id": "quote_01", "position": "after_HOOK", "keys": {}},
-        {"class": "ENCOURAGEMENT", "accent_id": "enc_01", "position": "before_THREAD", "keys": {}},
+        {
+            "class": "QUOTE",
+            "accent_id": "quote_01",
+            "position": "after_HOOK",
+            "keys": {"surface_bucket": "optional_accents"},
+        },
+        {
+            "class": "ENCOURAGEMENT",
+            "accent_id": "enc_01",
+            "position": "before_THREAD",
+            "keys": {"surface_bucket": "optional_accents"},
+        },
     ]
     bodies = {
         "quote_01": "Quote body.",
@@ -321,4 +331,18 @@ def test_anxiety_pilot_authored_rq_ts_lands_without_fallback():
 
     assert strategy.get("book_idea") == ANXIETY_BOOK_IDEA
     assert strategy.get("book_motif") == ANXIETY_BOOK_MOTIF
+    v21 = (planned.spine_context or {}).get("enhancement_contract_v21") or {}
+    tracked = {row["surface"]: row for row in (v21.get("tracked_surfaces") or [])}
+    assert tracked["AUTHOR_DISCLOSURE"]["bucket"] == "proof_and_embodiment"
+    assert tracked["TROUBLESHOOTING"]["bucket"] == "chapter_engine"
+    assert tracked["EXTERNAL_STORY"]["bucket"] == "proof_and_embodiment"
+    ext_rows = [r for r in plan.flat_rows if r.get("class") == "EXTERNAL_STORY"]
+    assert ext_rows
+    for row in ext_rows:
+        keys = row.get("keys") or {}
+        assert keys.get("story_function")
+        assert (keys.get("truth_metadata") or {}).get("citation")
+        assert "after_HOOK" in (keys.get("preferred_positions") or []) or "before_STORY" in (
+            keys.get("preferred_positions") or []
+        )
     assert not validate_accent_plan(planned)

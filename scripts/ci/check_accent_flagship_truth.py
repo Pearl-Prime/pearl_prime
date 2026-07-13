@@ -69,6 +69,12 @@ def check_artifacts(render_dir: Path, *, errors: List[str]) -> Dict[str, Any]:
         or strategy.get("accent_budget")
         or {}
     )
+    v21 = dict(
+        contract.get("enhancement_contract_v21")
+        or plan.get("enhancement_contract_v21")
+        or strategy.get("enhancement_contract_v21")
+        or {}
+    )
     assignments = list(
         contract.get("accent_rows")
         or plan.get("accent_assignments")
@@ -79,6 +85,32 @@ def check_artifacts(render_dir: Path, *, errors: List[str]) -> Dict[str, Any]:
         _fail("accent_budget missing from plan.json / strategy report", errors)
     if not assignments:
         _fail("accent_assignments missing from plan.json / strategy report", errors)
+    if contract and not v21:
+        _fail("enhancement_contract_v21 missing from proof surfaces", errors)
+
+    if v21:
+        taxonomy = dict(v21.get("surface_taxonomy") or {})
+        optional_tax = {str(x) for x in list(taxonomy.get("optional_accents") or [])}
+        cohesion_tax = {str(x) for x in list(taxonomy.get("cohesion_and_craft") or [])}
+        tracked = {
+            str(row.get("surface") or ""): dict(row)
+            for row in list(v21.get("tracked_surfaces") or [])
+            if isinstance(row, Mapping)
+        }
+        if any(surface in optional_tax for surface in ("TROUBLESHOOTING", "CITED_EVIDENCE", "EXTERNAL_STORY")):
+            _fail("v2.1 taxonomy regressed proof surfaces into optional accents", errors)
+        if not {"ANALOGY", "METAPHOR"} <= cohesion_tax:
+            _fail("v2.1 cohesion_and_craft taxonomy missing ANALOGY/METAPHOR", errors)
+        disclosure = tracked.get("AUTHOR_DISCLOSURE") or {}
+        if disclosure.get("bucket") != "proof_and_embodiment":
+            _fail("AUTHOR_DISCLOSURE not tracked as proof_and_embodiment", errors)
+        opt = dict(v21.get("optional_accent_budget") or {})
+        actual = dict(opt.get("actual") or {})
+        if int(actual.get("assigned_total_optional_accents") or 0) > int(opt.get("hard_max_total_accents") or 0):
+            _fail("optional accent total exceeds v2.1 hard max", errors)
+        for chapter, count in dict(actual.get("per_chapter_optional_counts") or {}).items():
+            if int(count or 0) > int(opt.get("max_accents_per_chapter") or 0):
+                _fail(f"optional accent per-chapter ceiling exceeded: ch{chapter} -> {count}", errors)
 
     counts = Counter(str(r.get("class") or "") for r in assignments)
     for cls, need in budget.items():
@@ -111,6 +143,12 @@ def check_artifacts(render_dir: Path, *, errors: List[str]) -> Dict[str, Any]:
         st = str((row.get("keys") or {}).get("story_type") or "")
         if st:
             story_types.append(st)
+        story_function = str((row.get("keys") or {}).get("story_function") or row.get("story_function") or "")
+        truth_metadata = dict((row.get("keys") or {}).get("truth_metadata") or row.get("truth_metadata") or {})
+        if not story_function:
+            _fail(f"EXTERNAL_STORY {row.get('accent_id')} missing story_function", errors)
+        if not truth_metadata.get("citation") or not truth_metadata.get("source"):
+            _fail(f"EXTERNAL_STORY {row.get('accent_id')} missing truth metadata", errors)
     preferred = {"true_life_broadcast", "film", "pop_culture", "sports"}
     if story_types and not (set(story_types) & preferred):
         _fail(

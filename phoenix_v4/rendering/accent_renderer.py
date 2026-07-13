@@ -49,17 +49,30 @@ def insert_accent_beats_into_streams(
     types_out = list(slot_types)
     proses_out = list(slot_proses)
     rendered: List[Dict[str, Any]] = []
+    contract_mode = any(
+        isinstance(beat.get("keys"), dict) and beat.get("keys", {}).get("surface_bucket")
+        for beat in accent_beats
+    )
     base_indices = {
         id(beat): _index_for_position(str(beat.get("position") or ""), slot_types)
         for beat in accent_beats
     }
-    ordered = sorted(
-        accent_beats,
-        key=lambda b: (
-            base_indices.get(id(b), len(slot_types)),
-            str(b.get("class") or ""),
-        ),
-    )
+    if contract_mode:
+        ordered = sorted(
+            accent_beats,
+            key=lambda b: (
+                base_indices.get(id(b), len(slot_types)),
+                str(b.get("class") or ""),
+            ),
+        )
+    else:
+        ordered = sorted(
+            accent_beats,
+            key=lambda b: (
+                _index_for_position(str(b.get("position") or ""), types_out),
+                str(b.get("class") or ""),
+            ),
+        )
     offset = 0
     for beat in ordered:
         accent_id = str(beat.get("accent_id") or "")
@@ -67,7 +80,10 @@ def insert_accent_beats_into_streams(
         if not body:
             continue
         position = str(beat.get("position") or "")
-        insert_at = base_indices.get(id(beat), _index_for_position(position, slot_types)) + offset
+        if contract_mode:
+            insert_at = base_indices.get(id(beat), _index_for_position(position, slot_types)) + offset
+        else:
+            insert_at = _index_for_position(position, types_out) + offset
         insert_at = max(0, min(insert_at, len(types_out)))
         cls = str(beat.get("class") or "ACCENT")
         types_out.insert(insert_at, f"{ACCENT_SLOT_PREFIX}{cls}")

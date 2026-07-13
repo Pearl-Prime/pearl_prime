@@ -171,8 +171,16 @@ def test_build_enhancement_contract_payload_reconciles_final_manuscript() -> Non
     assert payload["status"] == "PASS", payload["validation"]["errors"]
     assert payload["accent_rows"][0]["present_in_manuscript"] is True
     assert payload["accent_rows"][1]["final_order_matches_renderer"] is True
+    assert payload["enhancement_contract_v21"]["optional_accent_budget"]["hard_max_total_accents"] >= 1
+    tracked = {
+        row["surface"]: row for row in payload["enhancement_contract_v21"]["tracked_surfaces"]
+    }
+    assert tracked["AUTHOR_DISCLOSURE"]["bucket"] == "proof_and_embodiment"
     proof_types = {row["slot_type"] for row in payload["core_surface_rows"]}
     assert {"STORY", "EXERCISE", "ANGLE_DEFINITION", "ANGLE_CALLBACK"} <= proof_types
+    callback_rows = [row for row in payload["core_surface_rows"] if row.get("callback_role")]
+    assert any(row["callback_role"] == "plant" for row in callback_rows)
+    assert any(row["callback_role"] == "return" for row in callback_rows)
     assert payload["validation"]["unresolved_markers"] == []
 
 
@@ -247,6 +255,7 @@ def test_spine_pipeline_auto_writes_contract_for_flagship_chord(tmp_path: Path) 
         "persona_id": "gen_z_professionals",
         "teacher_id": "ahjan",
         "locale": "en-US",
+        "enrichment_contract_v1": True,
     }
 
     with patch("phoenix_v4.planning.enrichment_select.select_enrichment", side_effect=lambda *a, **k: book):
@@ -295,4 +304,3 @@ def test_spine_pipeline_auto_writes_contract_for_flagship_chord(tmp_path: Path) 
     assert (render_dir / "enhancement_contract.json").exists()
     assert (render_dir / "enhancement_contract.md").exists()
     assert (render_dir / "plan.json").exists()
-

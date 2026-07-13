@@ -7,6 +7,13 @@ import re
 from pathlib import Path
 from typing import Any, Dict, List, Mapping, Optional, Sequence
 
+from phoenix_v4.planning.accent_planner import (
+    accent_class_bucket,
+    build_enhancement_contract_v21_summary,
+    count_unit_for_surface,
+    disallowed_positions_for_surface,
+    preferred_positions_for_surface,
+)
 from phoenix_v4.planning.enrichment_select import EnrichedBook, EnrichedChapter
 from phoenix_v4.rendering.accent_renderer import insert_accent_beats_into_streams
 
@@ -186,6 +193,91 @@ def _unresolved_markers(text: str) -> List[Dict[str, Any]]:
     return rows
 
 
+def _source_tail(source_id: str) -> str:
+    raw = str(source_id or "").strip()
+    if ":" in raw:
+        return raw.split(":", 1)[1].strip()
+    return raw
+
+
+def _callback_metadata(slot_type: str, source_id: str) -> Dict[str, Any]:
+    plant_id = _source_tail(source_id)
+    slot = str(slot_type or "").strip().upper()
+    if slot == "ANGLE_DEFINITION":
+        return {
+            "callback_role": "plant",
+            "plant_id": plant_id,
+            "return_function": "",
+            "semantic_development": "initial_angle_plant",
+        }
+    if slot == "ANGLE_CALLBACK":
+        return {
+            "callback_role": "return",
+            "plant_id": plant_id,
+            "return_function": "angle_callback",
+            "semantic_development": "later_chapter_reactivation",
+        }
+    return {
+        "callback_role": "",
+        "plant_id": plant_id,
+        "return_function": "",
+        "semantic_development": "",
+    }
+
+
+def _chapter_v21_groups(
+    chapter: EnrichedChapter,
+    accent_rows: Sequence[Mapping[str, Any]],
+) -> Dict[str, List[str]]:
+    slot_types = {str(slot.slot_type or "").strip().upper() for slot in (chapter.slots or []) if slot.slot_type}
+    hooks = {
+        str(hook).strip().lower()
+        for slot in (chapter.slots or [])
+        for hook in (slot.enrichment_applied or [])
+        if str(hook).strip()
+    }
+    accent_classes = {str(row.get("class") or "").strip().upper() for row in accent_rows if row.get("class")}
+    chapter_engine: List[str] = []
+    if "EXERCISE" in slot_types:
+        chapter_engine.append("PRACTICE_APPLICATION")
+    if "TAKEAWAY" in slot_types:
+        chapter_engine.append("CLOSING_TAKEAWAY")
+    if "THREAD" in slot_types:
+        chapter_engine.append("PROPULSION")
+    if "TROUBLESHOOTING" in accent_classes:
+        chapter_engine.append("TROUBLESHOOTING")
+
+    proof_and_embodiment: List[str] = []
+    if "STORY" in slot_types:
+        proof_and_embodiment.append("HOOK_STORY")
+    for surface in ("EXTERNAL_STORY", "CITED_EVIDENCE", "AUTHOR_DISCLOSURE"):
+        if surface in accent_classes:
+            proof_and_embodiment.append(surface)
+
+    optional_accents = sorted(
+        surface
+        for surface in accent_classes
+        if accent_class_bucket(surface) == "optional_accents"
+    )
+
+    cohesion_and_craft: List[str] = []
+    if "ANGLE_DEFINITION" in slot_types:
+        cohesion_and_craft.append("CALLBACK_PLANT")
+    if "ANGLE_CALLBACK" in slot_types:
+        cohesion_and_craft.append("CALLBACK_RETURN")
+    if any("analogy" in hook for hook in hooks) or "ANGLE_DEFINITION" in slot_types:
+        cohesion_and_craft.append("ANALOGY")
+    if any("metaphor" in hook for hook in hooks) or "ANGLE_DEFINITION" in slot_types:
+        cohesion_and_craft.append("METAPHOR")
+
+    return {
+        "chapter_engine": sorted(set(chapter_engine)),
+        "proof_and_embodiment": sorted(set(proof_and_embodiment)),
+        "optional_accents": optional_accents,
+        "cohesion_and_craft": sorted(set(cohesion_and_craft)),
+    }
+
+
 def _stream_rows_for_chapter(
     chapter: EnrichedChapter,
 ) -> tuple[List[Dict[str, Any]], Dict[str, Dict[str, Any]]]:
@@ -268,6 +360,28 @@ def build_enhancement_contract_payload(
         for row in render_rows
         if isinstance(row, Mapping) and row.get("accent_id")
     }
+    v21_summary = _as_mapping(strategy.get("enhancement_contract_v21")) or _as_mapping(
+        spine.get("enhancement_contract_v21")
+    )
+    if not v21_summary:
+        v21_summary = build_enhancement_contract_v21_summary(
+            accent_budget=_as_mapping(spine.get("accent_budget") or strategy.get("accent_budget")),
+            flat_rows=assignments,
+            chapter_count=len(enriched.chapters or []),
+            story_mix_profile=str(
+                strategy.get("enrichment_strategy_profile")
+                or spine.get("story_mix_profile")
+                or ""
+            ).strip(),
+            max_accents_per_chapter=int(
+                _as_mapping(_as_mapping(strategy.get("enhancement_contract_v21")).get("optional_accent_budget")).get(
+                    "max_accents_per_chapter"
+                )
+                or 2
+            ),
+            persona_id=persona,
+            topic_id=topic,
+        )
     chapter_sections = _chapter_sections(manuscript_text)
 
     surface_notes: List[Dict[str, str]] = [
@@ -296,6 +410,8 @@ def build_enhancement_contract_payload(
         "orphan_rendered": [],
         "unsupported_positions": [],
         "malformed_bodies": [],
+        "missing_story_function": [],
+        "missing_truth_metadata": [],
         "unresolved_markers": _unresolved_markers(manuscript_text),
         "core_surface_failures": [],
     }
@@ -334,6 +450,7 @@ def build_enhancement_contract_payload(
             for row in assignments
             if isinstance(row, Mapping) and int(row.get("chapter") or 0) == chapter_num
         ]
+        chapter_accent_rows: List[Dict[str, Any]] = []
         planned_ids = {str(row.get("accent_id") or "") for row in chapter_assignments if row.get("accent_id")}
         for accent_id, body in dict(chapter.accent_bodies or {}).items():
             if accent_id not in planned_ids:
@@ -384,46 +501,73 @@ def build_enhancement_contract_payload(
                     {"chapter": chapter_num, "accent_id": accent_id, "class": assignment.get("class")}
                 )
             render_row = _as_mapping(render_by_id.get(accent_id))
-            accent_rows.append(
-                {
-                    "chapter": chapter_num,
-                    "class": str(assignment.get("class") or ""),
-                    "accent_id": accent_id,
-                    "position": position,
-                    "renderer_stream_index": stream_row.get("renderer_stream_index"),
-                    "chapter_insert_index": stream_row.get("chapter_insert_index"),
-                    "final_char_start": loc.get("absolute_char_start"),
-                    "final_char_end": loc.get("absolute_char_end"),
-                    "final_paragraph_index": loc.get("paragraph_index"),
-                    "final_order_index": located_order.get(id(stream_row)),
-                    "final_order_matches_renderer": (
-                        located_order.get(id(stream_row)) == stream_row.get("renderer_stream_index")
-                        if loc.get("present") and stream_row
-                        else False
-                    ),
-                    "present_in_manuscript": bool(loc.get("present")),
-                    "match_mode": loc.get("match_mode"),
-                    "body_hash": _content_hash(body) if body else "",
-                    "selected_body_excerpt": _excerpt(body),
-                    "rendered_excerpt": str(
-                        render_row.get("rendered_excerpt")
-                        or stream_row.get("rendered_excerpt")
-                        or _excerpt(body)
-                    ).strip(),
-                    "final_excerpt": str(loc.get("excerpt") or "").strip(),
-                    "provenance": str(
-                        assignment.get("supply_source")
-                        or _as_mapping(assignment.get("keys")).get("supply_provenance")
-                        or render_row.get("provenance")
-                        or stream_row.get("provenance")
-                        or ""
-                    ).strip(),
-                    "supply_source": str(assignment.get("supply_source") or "").strip(),
-                    "keys": _as_mapping(assignment.get("keys")),
-                    "selected_surface_status": "partial",
-                    "render_surface_status": "real" if render_row else "reconstructed",
-                }
-            )
+            keys = _as_mapping(assignment.get("keys"))
+            truth_metadata = _as_mapping(keys.get("truth_metadata"))
+            accent_class = str(assignment.get("class") or "").strip()
+            if accent_class == "EXTERNAL_STORY":
+                if not str(keys.get("story_function") or "").strip():
+                    validation["missing_story_function"].append(
+                        {"chapter": chapter_num, "accent_id": accent_id, "class": accent_class}
+                    )
+                if not truth_metadata.get("citation") or not truth_metadata.get("source"):
+                    validation["missing_truth_metadata"].append(
+                        {"chapter": chapter_num, "accent_id": accent_id, "class": accent_class}
+                    )
+            accent_payload = {
+                "chapter": chapter_num,
+                "class": accent_class,
+                "accent_id": accent_id,
+                "position": position,
+                "surface_bucket": str(
+                    keys.get("surface_bucket") or accent_class_bucket(accent_class)
+                ),
+                "count_unit": str(
+                    keys.get("count_unit") or count_unit_for_surface(accent_class)
+                ),
+                "preferred_positions": list(
+                    keys.get("preferred_positions") or preferred_positions_for_surface(accent_class)
+                ),
+                "disallowed_positions": list(
+                    keys.get("disallowed_positions") or disallowed_positions_for_surface(accent_class)
+                ),
+                "story_function": str(keys.get("story_function") or "").strip(),
+                "story_function_source": str(keys.get("story_function_source") or "").strip(),
+                "truth_metadata": truth_metadata,
+                "renderer_stream_index": stream_row.get("renderer_stream_index"),
+                "chapter_insert_index": stream_row.get("chapter_insert_index"),
+                "final_char_start": loc.get("absolute_char_start"),
+                "final_char_end": loc.get("absolute_char_end"),
+                "final_paragraph_index": loc.get("paragraph_index"),
+                "final_order_index": located_order.get(id(stream_row)),
+                "final_order_matches_renderer": (
+                    located_order.get(id(stream_row)) == stream_row.get("renderer_stream_index")
+                    if loc.get("present") and stream_row
+                    else False
+                ),
+                "present_in_manuscript": bool(loc.get("present")),
+                "match_mode": loc.get("match_mode"),
+                "body_hash": _content_hash(body) if body else "",
+                "selected_body_excerpt": _excerpt(body),
+                "rendered_excerpt": str(
+                    render_row.get("rendered_excerpt")
+                    or stream_row.get("rendered_excerpt")
+                    or _excerpt(body)
+                ).strip(),
+                "final_excerpt": str(loc.get("excerpt") or "").strip(),
+                "provenance": str(
+                    assignment.get("supply_source")
+                    or keys.get("supply_provenance")
+                    or render_row.get("provenance")
+                    or stream_row.get("provenance")
+                    or ""
+                ).strip(),
+                "supply_source": str(assignment.get("supply_source") or "").strip(),
+                "keys": keys,
+                "selected_surface_status": "partial",
+                "render_surface_status": "real" if render_row else "reconstructed",
+            }
+            accent_rows.append(accent_payload)
+            chapter_accent_rows.append(accent_payload)
 
         slot_flow: List[str] = []
         source_ids: List[str] = []
@@ -442,6 +586,7 @@ def build_enhancement_contract_payload(
                         enhancement_hooks.append(name)
                 if slot_type in PROOF_SLOT_TYPES:
                     loc = _as_mapping(row.get("final_location"))
+                    callback_meta = _callback_metadata(slot_type, source_id)
                     slot_row = {
                         "chapter": chapter_num,
                         "slot_type": slot_type,
@@ -459,6 +604,7 @@ def build_enhancement_contract_payload(
                         "body_hash": str(row.get("body_hash") or ""),
                         "selected_body_excerpt": _excerpt(str(row.get("body") or "")),
                         "final_excerpt": str(loc.get("excerpt") or "").strip(),
+                        **callback_meta,
                     }
                     core_surface_rows.append(slot_row)
                     if not slot_row["present_in_manuscript"]:
@@ -478,6 +624,17 @@ def build_enhancement_contract_payload(
                 "source_ids": source_ids,
                 "enhancement_hooks": enhancement_hooks,
                 "accent_ids": sorted(planned_ids),
+                "v21_surface_groups": _chapter_v21_groups(chapter, chapter_accent_rows),
+                "callback_semantics": [
+                    {
+                        "slot_type": row["slot_type"],
+                        "plant_id": row.get("plant_id") or "",
+                        "return_function": row.get("return_function") or "",
+                        "semantic_development": row.get("semantic_development") or "",
+                    }
+                    for row in core_surface_rows
+                    if row["chapter"] == chapter_num and row.get("callback_role")
+                ],
                 "confirmed_required_slots": [
                     row["slot_type"]
                     for row in core_surface_rows
@@ -516,6 +673,7 @@ def build_enhancement_contract_payload(
         "supported_underfilled_budget_by_class": dict(
             alignment.get("supported_underfilled_budget_by_class") or {}
         ),
+        "enhancement_contract_v21": v21_summary,
         "surface_notes": surface_notes,
         "manuscript": {
             "sha256": _content_hash(manuscript_text),
@@ -558,6 +716,29 @@ def render_enhancement_contract_markdown(payload: Mapping[str, Any]) -> str:
             lines.append(
                 f"- `{note.get('surface')}` [{note.get('status')}] {note.get('detail')}"
             )
+
+    v21 = _as_mapping(payload.get("enhancement_contract_v21"))
+    if v21:
+        opt = _as_mapping(v21.get("optional_accent_budget"))
+        actual = _as_mapping(opt.get("actual"))
+        lines.extend(
+            [
+                "",
+                "## V2.1 Model",
+                "",
+                "- Buckets: chapter_engine / proof_and_embodiment / optional_accents / cohesion_and_craft",
+                (
+                    "- Optional accents: assigned={assigned} hard_max={hard_max} "
+                    "chapters_with_optional={chapters} max_per_chapter={per_chapter}"
+                ).format(
+                    assigned=actual.get("assigned_total_optional_accents") or 0,
+                    hard_max=opt.get("hard_max_total_accents") or 0,
+                    chapters=len(_as_list(actual.get("chapters_with_optional_accents"))),
+                    per_chapter=opt.get("max_accents_per_chapter") or 0,
+                ),
+                "- Ceiling rule: class maxima are ceilings, not maximize-all directives.",
+            ]
+        )
 
     lines.extend(["", "## Validation", ""])
     errors = _as_list(_as_mapping(payload.get("validation")).get("errors"))
@@ -619,9 +800,24 @@ def render_enhancement_contract_markdown(payload: Mapping[str, Any]) -> str:
     for row in _as_list(payload.get("chapters")):
         if not isinstance(row, Mapping):
             continue
+        groups = _as_mapping(row.get("v21_surface_groups"))
+        callback_bits = [
+            "{plant_id}:{return_function}:{semantic_development}".format(
+                plant_id=str(item.get("plant_id") or ""),
+                return_function=str(item.get("return_function") or "plant"),
+                semantic_development=str(item.get("semantic_development") or ""),
+            )
+            for item in _as_list(row.get("callback_semantics"))
+            if isinstance(item, Mapping)
+        ]
         lines.append(
             f"- ch{row.get('chapter')}: slot_flow={','.join(_as_list(row.get('slot_flow')))} "
-            f"accents={','.join(_as_list(row.get('accent_ids')))}"
+            f"accents={','.join(_as_list(row.get('accent_ids')))} "
+            f"engine={','.join(_as_list(groups.get('chapter_engine')))} "
+            f"proof={','.join(_as_list(groups.get('proof_and_embodiment')))} "
+            f"optional={','.join(_as_list(groups.get('optional_accents')))} "
+            f"cohesion={','.join(_as_list(groups.get('cohesion_and_craft')))} "
+            f"callbacks={','.join(callback_bits)}"
         )
     return "\n".join(lines).rstrip() + "\n"
 
