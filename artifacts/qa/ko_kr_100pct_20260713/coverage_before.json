@@ -1,0 +1,1785 @@
+{
+  "locales": [
+    "ko-KR"
+  ],
+  "by_locale": {
+    "ko-KR": {
+      "persona_topic_count": 0,
+      "has_atoms": false
+    }
+  },
+  "native_check": {
+    "teacher_atoms": 641,
+    "atom_locale_dirs": 12452,
+    "atom_variants": 0,
+    "total_checked": 641,
+    "native_y": 0,
+    "native_n": 71,
+    "missing": 119758,
+    "invalid": 0,
+    "warnings": 13093,
+    "violations": 0,
+    "bootstrap_mode": true,
+    "production_only": false,
+    "native_y_ratio": 0.0,
+    "annotated_ratio": 0.11076443057722309,
+    "by_locale": {
+      "es-US": {
+        "by_class": {
+          "COMPRESSION": {
+            "missing": 25,
+            "total": 25
+          },
+          "EXERCISE": {
+            "missing": 45,
+            "total": 45
+          },
+          "HOOK": {
+            "missing": 3,
+            "total": 3
+          },
+          "INTEGRATION": {
+            "missing": 3,
+            "total": 3
+          },
+          "PERMISSION": {
+            "missing": 73,
+            "total": 73
+          },
+          "PIVOT": {
+            "missing": 71,
+            "total": 71
+          },
+          "REFLECTION": {
+            "missing": 3,
+            "total": 3
+          },
+          "STORY": {
+            "missing": 20,
+            "total": 20
+          },
+          "TAKEAWAY": {
+            "missing": 73,
+            "total": 73
+          },
+          "THREAD": {
+            "missing": 71,
+            "total": 71
+          }
+        },
+        "totals": {
+          "y": 0,
+          "n": 0,
+          "missing": 387,
+          "invalid": 0,
+          "total": 387
+        }
+      },
+      "ja-JP": {
+        "by_class": {
+          "COMPRESSION": {
+            "n": 20,
+            "total": 2767,
+            "missing": 2747
+          },
+          "EXERCISE": {
+            "missing": 1985,
+            "total": 1985
+          },
+          "HOOK": {
+            "missing": 4760,
+            "total": 4792,
+            "n": 32
+          },
+          "INTEGRATION": {
+            "missing": 3522,
+            "total": 3522
+          },
+          "PERMISSION": {
+            "missing": 2356,
+            "total": 2371,
+            "n": 15
+          },
+          "PERMISSION_GRANT": {
+            "missing": 18,
+            "total": 18
+          },
+          "PIVOT": {
+            "missing": 2494,
+            "total": 2494
+          },
+          "QUOTE": {
+            "missing": 20,
+            "total": 20
+          },
+          "REFLECTION": {
+            "missing": 3948,
+            "total": 3948
+          },
+          "SCENE": {
+            "missing": 3271,
+            "total": 3271
+          },
+          "STORY": {
+            "missing": 3719,
+            "total": 3723,
+            "n": 4
+          },
+          "TAKEAWAY": {
+            "missing": 2403,
+            "total": 2403
+          },
+          "TEACHER_DOCTRINE": {
+            "missing": 70,
+            "total": 70
+          },
+          "THREAD": {
+            "missing": 2337,
+            "total": 2337
+          },
+          "anxiety_comparison": {
+            "missing": 5,
+            "total": 5
+          },
+          "anxiety_false_alarm": {
+            "missing": 5,
+            "total": 5
+          },
+          "anxiety_grief": {
+            "missing": 5,
+            "total": 5
+          },
+          "anxiety_overwhelm": {
+            "missing": 5,
+            "total": 5
+          },
+          "anxiety_shame": {
+            "missing": 5,
+            "total": 5
+          },
+          "anxiety_spiral": {
+            "missing": 5,
+            "total": 5
+          },
+          "anxiety_watcher": {
+            "missing": 5,
+            "total": 5
+          },
+          "boundaries_grief": {
+            "missing": 5,
+            "total": 5
+          },
+          "boundaries_overwhelm": {
+            "missing": 5,
+            "total": 5
+          },
+          "boundaries_spiral": {
+            "missing": 5,
+            "total": 5
+          },
+          "boundaries_watcher": {
+            "missing": 5,
+            "total": 5
+          },
+          "burnout_comparison": {
+            "missing": 5,
+            "total": 5
+          },
+          "burnout_false_alarm": {
+            "missing": 5,
+            "total": 5
+          },
+          "burnout_shame": {
+            "missing": 5,
+            "total": 5
+          },
+          "burnout_spiral": {
+            "missing": 1,
+            "total": 1
+          },
+          "comparison": {
+            "missing": 1400,
+            "total": 1400
+          },
+          "compassion_fatigue_comparison": {
+            "missing": 1,
+            "total": 1
+          },
+          "compassion_fatigue_false_alarm": {
+            "missing": 1,
+            "total": 1
+          },
+          "compassion_fatigue_shame": {
+            "missing": 1,
+            "total": 1
+          },
+          "compassion_fatigue_spiral": {
+            "missing": 1,
+            "total": 1
+          },
+          "courage_comparison": {
+            "missing": 1,
+            "total": 1
+          },
+          "courage_false_alarm": {
+            "missing": 1,
+            "total": 1
+          },
+          "courage_grief": {
+            "missing": 1,
+            "total": 1
+          },
+          "courage_overwhelm": {
+            "missing": 1,
+            "total": 1
+          },
+          "courage_shame": {
+            "missing": 1,
+            "total": 1
+          },
+          "courage_spiral": {
+            "missing": 1,
+            "total": 1
+          },
+          "courage_watcher": {
+            "missing": 1,
+            "total": 1
+          },
+          "depression_comparison": {
+            "missing": 1,
+            "total": 1
+          },
+          "depression_false_alarm": {
+            "missing": 1,
+            "total": 1
+          },
+          "depression_shame": {
+            "missing": 1,
+            "total": 1
+          },
+          "depression_spiral": {
+            "missing": 1,
+            "total": 1
+          },
+          "false_alarm": {
+            "missing": 1312,
+            "total": 1312
+          },
+          "financial_anxiety_comparison": {
+            "missing": 1,
+            "total": 1
+          },
+          "financial_anxiety_false_alarm": {
+            "missing": 1,
+            "total": 1
+          },
+          "financial_anxiety_grief": {
+            "missing": 1,
+            "total": 1
+          },
+          "financial_anxiety_watcher": {
+            "missing": 1,
+            "total": 1
+          },
+          "financial_stress_comparison": {
+            "missing": 1,
+            "total": 1
+          },
+          "financial_stress_false_alarm": {
+            "missing": 1,
+            "total": 1
+          },
+          "financial_stress_grief": {
+            "missing": 1,
+            "total": 1
+          },
+          "financial_stress_overwhelm": {
+            "missing": 1,
+            "total": 1
+          },
+          "financial_stress_shame": {
+            "missing": 1,
+            "total": 1
+          },
+          "financial_stress_spiral": {
+            "missing": 1,
+            "total": 1
+          },
+          "financial_stress_watcher": {
+            "missing": 1,
+            "total": 1
+          },
+          "grief": {
+            "missing": 1320,
+            "total": 1320
+          },
+          "grief_comparison": {
+            "missing": 1,
+            "total": 1
+          },
+          "grief_false_alarm": {
+            "missing": 1,
+            "total": 1
+          },
+          "grief_overwhelm": {
+            "missing": 1,
+            "total": 1
+          },
+          "grief_shame": {
+            "missing": 1,
+            "total": 1
+          },
+          "grief_spiral": {
+            "missing": 1,
+            "total": 1
+          },
+          "imposter_syndrome_false_alarm": {
+            "missing": 1,
+            "total": 1
+          },
+          "imposter_syndrome_grief": {
+            "missing": 1,
+            "total": 1
+          },
+          "imposter_syndrome_overwhelm": {
+            "missing": 1,
+            "total": 1
+          },
+          "imposter_syndrome_spiral": {
+            "missing": 1,
+            "total": 1
+          },
+          "imposter_syndrome_watcher": {
+            "missing": 1,
+            "total": 1
+          },
+          "overthinking_comparison": {
+            "missing": 1,
+            "total": 1
+          },
+          "overthinking_grief": {
+            "missing": 1,
+            "total": 1
+          },
+          "overthinking_overwhelm": {
+            "missing": 1,
+            "total": 1
+          },
+          "overthinking_shame": {
+            "missing": 1,
+            "total": 1
+          },
+          "overwhelm": {
+            "missing": 1660,
+            "total": 1660
+          },
+          "self_worth_false_alarm": {
+            "missing": 1,
+            "total": 1
+          },
+          "self_worth_grief": {
+            "missing": 1,
+            "total": 1
+          },
+          "self_worth_overwhelm": {
+            "missing": 1,
+            "total": 1
+          },
+          "self_worth_spiral": {
+            "missing": 1,
+            "total": 1
+          },
+          "self_worth_watcher": {
+            "missing": 1,
+            "total": 1
+          },
+          "shame": {
+            "missing": 1603,
+            "total": 1603
+          },
+          "sleep_anxiety_comparison": {
+            "missing": 1,
+            "total": 1
+          },
+          "sleep_anxiety_grief": {
+            "missing": 1,
+            "total": 1
+          },
+          "sleep_anxiety_shame": {
+            "missing": 1,
+            "total": 1
+          },
+          "sleep_anxiety_watcher": {
+            "missing": 1,
+            "total": 1
+          },
+          "social_anxiety_grief": {
+            "missing": 1,
+            "total": 1
+          },
+          "social_anxiety_overwhelm": {
+            "missing": 1,
+            "total": 1
+          },
+          "social_anxiety_spiral": {
+            "missing": 1,
+            "total": 1
+          },
+          "social_anxiety_watcher": {
+            "missing": 1,
+            "total": 1
+          },
+          "somatic_healing_comparison": {
+            "missing": 1,
+            "total": 1
+          },
+          "somatic_healing_false_alarm": {
+            "missing": 1,
+            "total": 1
+          },
+          "somatic_healing_grief": {
+            "missing": 1,
+            "total": 1
+          },
+          "somatic_healing_shame": {
+            "missing": 1,
+            "total": 1
+          },
+          "somatic_healing_spiral": {
+            "missing": 1,
+            "total": 1
+          },
+          "spiral": {
+            "missing": 1333,
+            "total": 1333
+          },
+          "watcher": {
+            "missing": 1496,
+            "total": 1496
+          }
+        },
+        "totals": {
+          "y": 0,
+          "n": 71,
+          "missing": 43903,
+          "invalid": 0,
+          "total": 43974
+        }
+      },
+      "ko-KR": {
+        "by_class": {
+          "EXERCISE": {
+            "missing": 48,
+            "total": 48
+          },
+          "HOOK": {
+            "missing": 56,
+            "total": 56
+          },
+          "INTEGRATION": {
+            "missing": 57,
+            "total": 57
+          },
+          "PERMISSION": {
+            "missing": 854,
+            "total": 854
+          },
+          "PIVOT": {
+            "missing": 857,
+            "total": 857
+          },
+          "REFLECTION": {
+            "missing": 22,
+            "total": 22
+          },
+          "SCENE": {
+            "missing": 42,
+            "total": 42
+          },
+          "STORY": {
+            "missing": 1330,
+            "total": 1330
+          },
+          "TAKEAWAY": {
+            "missing": 857,
+            "total": 857
+          },
+          "THREAD": {
+            "missing": 853,
+            "total": 853
+          },
+          "comparison": {
+            "missing": 7,
+            "total": 7
+          },
+          "financial_stress_comparison": {
+            "missing": 1,
+            "total": 1
+          },
+          "financial_stress_false_alarm": {
+            "missing": 1,
+            "total": 1
+          },
+          "financial_stress_grief": {
+            "missing": 1,
+            "total": 1
+          },
+          "financial_stress_overwhelm": {
+            "missing": 1,
+            "total": 1
+          },
+          "financial_stress_shame": {
+            "missing": 1,
+            "total": 1
+          },
+          "financial_stress_spiral": {
+            "missing": 1,
+            "total": 1
+          },
+          "financial_stress_watcher": {
+            "missing": 1,
+            "total": 1
+          },
+          "grief_comparison": {
+            "missing": 1,
+            "total": 1
+          },
+          "grief_false_alarm": {
+            "missing": 1,
+            "total": 1
+          },
+          "grief_overwhelm": {
+            "missing": 1,
+            "total": 1
+          },
+          "grief_shame": {
+            "missing": 1,
+            "total": 1
+          },
+          "grief_spiral": {
+            "missing": 1,
+            "total": 1
+          },
+          "imposter_syndrome_false_alarm": {
+            "missing": 1,
+            "total": 1
+          },
+          "imposter_syndrome_grief": {
+            "missing": 1,
+            "total": 1
+          },
+          "imposter_syndrome_overwhelm": {
+            "missing": 1,
+            "total": 1
+          },
+          "imposter_syndrome_spiral": {
+            "missing": 1,
+            "total": 1
+          },
+          "imposter_syndrome_watcher": {
+            "missing": 1,
+            "total": 1
+          },
+          "overthinking_comparison": {
+            "missing": 1,
+            "total": 1
+          },
+          "overthinking_grief": {
+            "missing": 1,
+            "total": 1
+          },
+          "overthinking_overwhelm": {
+            "missing": 1,
+            "total": 1
+          },
+          "overthinking_shame": {
+            "missing": 1,
+            "total": 1
+          },
+          "overwhelm": {
+            "missing": 5,
+            "total": 5
+          },
+          "self_worth_false_alarm": {
+            "missing": 1,
+            "total": 1
+          },
+          "self_worth_grief": {
+            "missing": 1,
+            "total": 1
+          },
+          "self_worth_overwhelm": {
+            "missing": 1,
+            "total": 1
+          },
+          "self_worth_spiral": {
+            "missing": 1,
+            "total": 1
+          },
+          "self_worth_watcher": {
+            "missing": 1,
+            "total": 1
+          },
+          "shame": {
+            "missing": 7,
+            "total": 7
+          },
+          "sleep_anxiety_comparison": {
+            "missing": 1,
+            "total": 1
+          },
+          "sleep_anxiety_grief": {
+            "missing": 1,
+            "total": 1
+          },
+          "sleep_anxiety_shame": {
+            "missing": 1,
+            "total": 1
+          },
+          "sleep_anxiety_watcher": {
+            "missing": 1,
+            "total": 1
+          },
+          "social_anxiety_grief": {
+            "missing": 1,
+            "total": 1
+          },
+          "social_anxiety_overwhelm": {
+            "missing": 1,
+            "total": 1
+          },
+          "social_anxiety_spiral": {
+            "missing": 1,
+            "total": 1
+          },
+          "social_anxiety_watcher": {
+            "missing": 1,
+            "total": 1
+          },
+          "somatic_healing_comparison": {
+            "missing": 1,
+            "total": 1
+          },
+          "somatic_healing_false_alarm": {
+            "missing": 1,
+            "total": 1
+          },
+          "somatic_healing_grief": {
+            "missing": 1,
+            "total": 1
+          },
+          "somatic_healing_shame": {
+            "missing": 1,
+            "total": 1
+          },
+          "somatic_healing_spiral": {
+            "missing": 1,
+            "total": 1
+          }
+        },
+        "totals": {
+          "y": 0,
+          "n": 0,
+          "missing": 5034,
+          "invalid": 0,
+          "total": 5034
+        }
+      },
+      "pt-BR": {
+        "by_class": {
+          "COMPRESSION": {
+            "missing": 25,
+            "total": 25
+          },
+          "EXERCISE": {
+            "missing": 45,
+            "total": 45
+          },
+          "HOOK": {
+            "missing": 3,
+            "total": 3
+          },
+          "INTEGRATION": {
+            "missing": 3,
+            "total": 3
+          },
+          "PERMISSION": {
+            "missing": 73,
+            "total": 73
+          },
+          "PIVOT": {
+            "missing": 71,
+            "total": 71
+          },
+          "REFLECTION": {
+            "missing": 3,
+            "total": 3
+          },
+          "STORY": {
+            "missing": 20,
+            "total": 20
+          },
+          "TAKEAWAY": {
+            "missing": 73,
+            "total": 73
+          },
+          "THREAD": {
+            "missing": 71,
+            "total": 71
+          }
+        },
+        "totals": {
+          "y": 0,
+          "n": 0,
+          "missing": 387,
+          "invalid": 0,
+          "total": 387
+        }
+      },
+      "zh-CN": {
+        "by_class": {
+          "COMPRESSION": {
+            "missing": 6,
+            "total": 6
+          },
+          "EXERCISE": {
+            "missing": 659,
+            "total": 659
+          },
+          "HOOK": {
+            "missing": 1459,
+            "total": 1459
+          },
+          "INTEGRATION": {
+            "missing": 1076,
+            "total": 1076
+          },
+          "PERMISSION": {
+            "missing": 1415,
+            "total": 1415
+          },
+          "PERMISSION_GRANT": {
+            "missing": 1,
+            "total": 1
+          },
+          "PIVOT": {
+            "missing": 1449,
+            "total": 1449
+          },
+          "REFLECTION": {
+            "missing": 1297,
+            "total": 1297
+          },
+          "SCENE": {
+            "missing": 1276,
+            "total": 1276
+          },
+          "STORY": {
+            "missing": 2049,
+            "total": 2049
+          },
+          "TAKEAWAY": {
+            "missing": 1417,
+            "total": 1417
+          },
+          "TEACHER_DOCTRINE": {
+            "missing": 5,
+            "total": 5
+          },
+          "THREAD": {
+            "missing": 1417,
+            "total": 1417
+          },
+          "anxiety_comparison": {
+            "missing": 5,
+            "total": 5
+          },
+          "anxiety_false_alarm": {
+            "missing": 5,
+            "total": 5
+          },
+          "anxiety_grief": {
+            "missing": 5,
+            "total": 5
+          },
+          "anxiety_overwhelm": {
+            "missing": 5,
+            "total": 5
+          },
+          "anxiety_shame": {
+            "missing": 5,
+            "total": 5
+          },
+          "anxiety_spiral": {
+            "missing": 5,
+            "total": 5
+          },
+          "anxiety_watcher": {
+            "missing": 5,
+            "total": 5
+          },
+          "comparison": {
+            "missing": 445,
+            "total": 445
+          },
+          "false_alarm": {
+            "missing": 444,
+            "total": 444
+          },
+          "grief": {
+            "missing": 401,
+            "total": 401
+          },
+          "overwhelm": {
+            "missing": 477,
+            "total": 477
+          },
+          "shame": {
+            "missing": 474,
+            "total": 474
+          },
+          "spiral": {
+            "missing": 423,
+            "total": 423
+          },
+          "watcher": {
+            "missing": 443,
+            "total": 443
+          }
+        },
+        "totals": {
+          "y": 0,
+          "n": 0,
+          "missing": 16668,
+          "invalid": 0,
+          "total": 16668
+        }
+      },
+      "zh-HK": {
+        "by_class": {
+          "EXERCISE": {
+            "missing": 48,
+            "total": 48
+          },
+          "HOOK": {
+            "missing": 36,
+            "total": 36
+          },
+          "INTEGRATION": {
+            "missing": 37,
+            "total": 37
+          },
+          "PERMISSION": {
+            "missing": 833,
+            "total": 833
+          },
+          "PIVOT": {
+            "missing": 837,
+            "total": 837
+          },
+          "REFLECTION": {
+            "missing": 12,
+            "total": 12
+          },
+          "SCENE": {
+            "missing": 42,
+            "total": 42
+          },
+          "STORY": {
+            "missing": 1630,
+            "total": 1630
+          },
+          "TAKEAWAY": {
+            "missing": 837,
+            "total": 837
+          },
+          "THREAD": {
+            "missing": 817,
+            "total": 817
+          },
+          "comparison": {
+            "missing": 7,
+            "total": 7
+          },
+          "financial_stress_comparison": {
+            "missing": 1,
+            "total": 1
+          },
+          "financial_stress_false_alarm": {
+            "missing": 1,
+            "total": 1
+          },
+          "financial_stress_grief": {
+            "missing": 1,
+            "total": 1
+          },
+          "financial_stress_overwhelm": {
+            "missing": 1,
+            "total": 1
+          },
+          "financial_stress_shame": {
+            "missing": 1,
+            "total": 1
+          },
+          "financial_stress_spiral": {
+            "missing": 1,
+            "total": 1
+          },
+          "financial_stress_watcher": {
+            "missing": 1,
+            "total": 1
+          },
+          "grief_comparison": {
+            "missing": 1,
+            "total": 1
+          },
+          "grief_false_alarm": {
+            "missing": 1,
+            "total": 1
+          },
+          "grief_overwhelm": {
+            "missing": 1,
+            "total": 1
+          },
+          "grief_shame": {
+            "missing": 1,
+            "total": 1
+          },
+          "grief_spiral": {
+            "missing": 1,
+            "total": 1
+          },
+          "imposter_syndrome_false_alarm": {
+            "missing": 1,
+            "total": 1
+          },
+          "imposter_syndrome_grief": {
+            "missing": 1,
+            "total": 1
+          },
+          "imposter_syndrome_overwhelm": {
+            "missing": 1,
+            "total": 1
+          },
+          "imposter_syndrome_spiral": {
+            "missing": 1,
+            "total": 1
+          },
+          "imposter_syndrome_watcher": {
+            "missing": 1,
+            "total": 1
+          },
+          "overthinking_comparison": {
+            "missing": 1,
+            "total": 1
+          },
+          "overthinking_grief": {
+            "missing": 1,
+            "total": 1
+          },
+          "overthinking_overwhelm": {
+            "missing": 1,
+            "total": 1
+          },
+          "overthinking_shame": {
+            "missing": 1,
+            "total": 1
+          },
+          "overwhelm": {
+            "missing": 5,
+            "total": 5
+          },
+          "self_worth_false_alarm": {
+            "missing": 1,
+            "total": 1
+          },
+          "self_worth_grief": {
+            "missing": 1,
+            "total": 1
+          },
+          "self_worth_overwhelm": {
+            "missing": 1,
+            "total": 1
+          },
+          "self_worth_spiral": {
+            "missing": 1,
+            "total": 1
+          },
+          "self_worth_watcher": {
+            "missing": 1,
+            "total": 1
+          },
+          "shame": {
+            "missing": 7,
+            "total": 7
+          },
+          "sleep_anxiety_comparison": {
+            "missing": 1,
+            "total": 1
+          },
+          "sleep_anxiety_grief": {
+            "missing": 1,
+            "total": 1
+          },
+          "sleep_anxiety_shame": {
+            "missing": 1,
+            "total": 1
+          },
+          "sleep_anxiety_watcher": {
+            "missing": 1,
+            "total": 1
+          },
+          "social_anxiety_grief": {
+            "missing": 1,
+            "total": 1
+          },
+          "social_anxiety_overwhelm": {
+            "missing": 1,
+            "total": 1
+          },
+          "social_anxiety_spiral": {
+            "missing": 1,
+            "total": 1
+          },
+          "social_anxiety_watcher": {
+            "missing": 1,
+            "total": 1
+          },
+          "somatic_healing_comparison": {
+            "missing": 1,
+            "total": 1
+          },
+          "somatic_healing_false_alarm": {
+            "missing": 1,
+            "total": 1
+          },
+          "somatic_healing_grief": {
+            "missing": 1,
+            "total": 1
+          },
+          "somatic_healing_shame": {
+            "missing": 1,
+            "total": 1
+          },
+          "somatic_healing_spiral": {
+            "missing": 1,
+            "total": 1
+          }
+        },
+        "totals": {
+          "y": 0,
+          "n": 0,
+          "missing": 5187,
+          "invalid": 0,
+          "total": 5187
+        }
+      },
+      "zh-SG": {
+        "by_class": {
+          "EXERCISE": {
+            "missing": 48,
+            "total": 48
+          },
+          "HOOK": {
+            "missing": 36,
+            "total": 36
+          },
+          "INTEGRATION": {
+            "missing": 37,
+            "total": 37
+          },
+          "PERMISSION": {
+            "missing": 831,
+            "total": 831
+          },
+          "PIVOT": {
+            "missing": 834,
+            "total": 834
+          },
+          "REFLECTION": {
+            "missing": 12,
+            "total": 12
+          },
+          "SCENE": {
+            "missing": 42,
+            "total": 42
+          },
+          "STORY": {
+            "missing": 1613,
+            "total": 1613
+          },
+          "TAKEAWAY": {
+            "missing": 834,
+            "total": 834
+          },
+          "THREAD": {
+            "missing": 755,
+            "total": 755
+          },
+          "comparison": {
+            "missing": 7,
+            "total": 7
+          },
+          "financial_stress_comparison": {
+            "missing": 1,
+            "total": 1
+          },
+          "financial_stress_false_alarm": {
+            "missing": 1,
+            "total": 1
+          },
+          "financial_stress_grief": {
+            "missing": 1,
+            "total": 1
+          },
+          "financial_stress_overwhelm": {
+            "missing": 1,
+            "total": 1
+          },
+          "financial_stress_shame": {
+            "missing": 1,
+            "total": 1
+          },
+          "financial_stress_spiral": {
+            "missing": 1,
+            "total": 1
+          },
+          "financial_stress_watcher": {
+            "missing": 1,
+            "total": 1
+          },
+          "grief_comparison": {
+            "missing": 1,
+            "total": 1
+          },
+          "grief_false_alarm": {
+            "missing": 1,
+            "total": 1
+          },
+          "grief_overwhelm": {
+            "missing": 1,
+            "total": 1
+          },
+          "grief_shame": {
+            "missing": 1,
+            "total": 1
+          },
+          "grief_spiral": {
+            "missing": 1,
+            "total": 1
+          },
+          "imposter_syndrome_false_alarm": {
+            "missing": 1,
+            "total": 1
+          },
+          "imposter_syndrome_grief": {
+            "missing": 1,
+            "total": 1
+          },
+          "imposter_syndrome_overwhelm": {
+            "missing": 1,
+            "total": 1
+          },
+          "imposter_syndrome_spiral": {
+            "missing": 1,
+            "total": 1
+          },
+          "imposter_syndrome_watcher": {
+            "missing": 1,
+            "total": 1
+          },
+          "overthinking_comparison": {
+            "missing": 1,
+            "total": 1
+          },
+          "overthinking_grief": {
+            "missing": 1,
+            "total": 1
+          },
+          "overthinking_overwhelm": {
+            "missing": 1,
+            "total": 1
+          },
+          "overthinking_shame": {
+            "missing": 1,
+            "total": 1
+          },
+          "overwhelm": {
+            "missing": 5,
+            "total": 5
+          },
+          "self_worth_false_alarm": {
+            "missing": 1,
+            "total": 1
+          },
+          "self_worth_grief": {
+            "missing": 1,
+            "total": 1
+          },
+          "self_worth_overwhelm": {
+            "missing": 1,
+            "total": 1
+          },
+          "self_worth_spiral": {
+            "missing": 1,
+            "total": 1
+          },
+          "self_worth_watcher": {
+            "missing": 1,
+            "total": 1
+          },
+          "shame": {
+            "missing": 7,
+            "total": 7
+          },
+          "sleep_anxiety_comparison": {
+            "missing": 1,
+            "total": 1
+          },
+          "sleep_anxiety_grief": {
+            "missing": 1,
+            "total": 1
+          },
+          "sleep_anxiety_shame": {
+            "missing": 1,
+            "total": 1
+          },
+          "sleep_anxiety_watcher": {
+            "missing": 1,
+            "total": 1
+          },
+          "social_anxiety_grief": {
+            "missing": 1,
+            "total": 1
+          },
+          "social_anxiety_overwhelm": {
+            "missing": 1,
+            "total": 1
+          },
+          "social_anxiety_spiral": {
+            "missing": 1,
+            "total": 1
+          },
+          "social_anxiety_watcher": {
+            "missing": 1,
+            "total": 1
+          },
+          "somatic_healing_comparison": {
+            "missing": 1,
+            "total": 1
+          },
+          "somatic_healing_false_alarm": {
+            "missing": 1,
+            "total": 1
+          },
+          "somatic_healing_grief": {
+            "missing": 1,
+            "total": 1
+          },
+          "somatic_healing_shame": {
+            "missing": 1,
+            "total": 1
+          },
+          "somatic_healing_spiral": {
+            "missing": 1,
+            "total": 1
+          }
+        },
+        "totals": {
+          "y": 0,
+          "n": 0,
+          "missing": 5100,
+          "invalid": 0,
+          "total": 5100
+        }
+      },
+      "zh-TW": {
+        "by_class": {
+          "COMPRESSION": {
+            "missing": 2780,
+            "total": 2780
+          },
+          "EXERCISE": {
+            "missing": 1941,
+            "total": 1941
+          },
+          "HOOK": {
+            "missing": 3927,
+            "total": 3927
+          },
+          "INTEGRATION": {
+            "missing": 3791,
+            "total": 3791
+          },
+          "PERMISSION": {
+            "missing": 2470,
+            "total": 2470
+          },
+          "PERMISSION_GRANT": {
+            "missing": 18,
+            "total": 18
+          },
+          "PIVOT": {
+            "missing": 2540,
+            "total": 2540
+          },
+          "PROTECTIVE_ALARM": {
+            "missing": 1,
+            "total": 1
+          },
+          "QUOTE": {
+            "missing": 15,
+            "total": 15
+          },
+          "REFLECTION": {
+            "missing": 3961,
+            "total": 3961
+          },
+          "SCENE": {
+            "missing": 3022,
+            "total": 3022
+          },
+          "STORY": {
+            "missing": 3485,
+            "total": 3485
+          },
+          "TAKEAWAY": {
+            "missing": 2533,
+            "total": 2533
+          },
+          "TEACHER_DOCTRINE": {
+            "missing": 70,
+            "total": 70
+          },
+          "THREAD": {
+            "missing": 2514,
+            "total": 2514
+          },
+          "anxiety_comparison": {
+            "missing": 1,
+            "total": 1
+          },
+          "anxiety_false_alarm": {
+            "missing": 1,
+            "total": 1
+          },
+          "anxiety_grief": {
+            "missing": 1,
+            "total": 1
+          },
+          "anxiety_overwhelm": {
+            "missing": 1,
+            "total": 1
+          },
+          "anxiety_shame": {
+            "missing": 1,
+            "total": 1
+          },
+          "anxiety_spiral": {
+            "missing": 1,
+            "total": 1
+          },
+          "anxiety_watcher": {
+            "missing": 1,
+            "total": 1
+          },
+          "boundaries_grief": {
+            "missing": 1,
+            "total": 1
+          },
+          "boundaries_overwhelm": {
+            "missing": 1,
+            "total": 1
+          },
+          "boundaries_spiral": {
+            "missing": 1,
+            "total": 1
+          },
+          "boundaries_watcher": {
+            "missing": 1,
+            "total": 1
+          },
+          "burnout_comparison": {
+            "missing": 1,
+            "total": 1
+          },
+          "burnout_false_alarm": {
+            "missing": 1,
+            "total": 1
+          },
+          "burnout_shame": {
+            "missing": 1,
+            "total": 1
+          },
+          "burnout_spiral": {
+            "missing": 1,
+            "total": 1
+          },
+          "comparison": {
+            "missing": 1396,
+            "total": 1396
+          },
+          "compassion_fatigue_comparison": {
+            "missing": 1,
+            "total": 1
+          },
+          "compassion_fatigue_false_alarm": {
+            "missing": 1,
+            "total": 1
+          },
+          "compassion_fatigue_shame": {
+            "missing": 1,
+            "total": 1
+          },
+          "compassion_fatigue_spiral": {
+            "missing": 1,
+            "total": 1
+          },
+          "courage_comparison": {
+            "missing": 1,
+            "total": 1
+          },
+          "courage_false_alarm": {
+            "missing": 1,
+            "total": 1
+          },
+          "courage_grief": {
+            "missing": 1,
+            "total": 1
+          },
+          "courage_overwhelm": {
+            "missing": 1,
+            "total": 1
+          },
+          "courage_shame": {
+            "missing": 1,
+            "total": 1
+          },
+          "courage_spiral": {
+            "missing": 1,
+            "total": 1
+          },
+          "courage_watcher": {
+            "missing": 1,
+            "total": 1
+          },
+          "depression_comparison": {
+            "missing": 1,
+            "total": 1
+          },
+          "depression_false_alarm": {
+            "missing": 1,
+            "total": 1
+          },
+          "depression_shame": {
+            "missing": 1,
+            "total": 1
+          },
+          "depression_spiral": {
+            "missing": 1,
+            "total": 1
+          },
+          "false_alarm": {
+            "missing": 1329,
+            "total": 1329
+          },
+          "financial_anxiety_comparison": {
+            "missing": 1,
+            "total": 1
+          },
+          "financial_anxiety_false_alarm": {
+            "missing": 1,
+            "total": 1
+          },
+          "financial_anxiety_grief": {
+            "missing": 1,
+            "total": 1
+          },
+          "financial_anxiety_watcher": {
+            "missing": 1,
+            "total": 1
+          },
+          "financial_stress_comparison": {
+            "missing": 1,
+            "total": 1
+          },
+          "financial_stress_false_alarm": {
+            "missing": 1,
+            "total": 1
+          },
+          "financial_stress_grief": {
+            "missing": 1,
+            "total": 1
+          },
+          "financial_stress_overwhelm": {
+            "missing": 1,
+            "total": 1
+          },
+          "financial_stress_shame": {
+            "missing": 1,
+            "total": 1
+          },
+          "financial_stress_spiral": {
+            "missing": 1,
+            "total": 1
+          },
+          "financial_stress_watcher": {
+            "missing": 1,
+            "total": 1
+          },
+          "grief": {
+            "missing": 1277,
+            "total": 1277
+          },
+          "grief_comparison": {
+            "missing": 1,
+            "total": 1
+          },
+          "grief_false_alarm": {
+            "missing": 1,
+            "total": 1
+          },
+          "grief_overwhelm": {
+            "missing": 1,
+            "total": 1
+          },
+          "grief_shame": {
+            "missing": 1,
+            "total": 1
+          },
+          "grief_spiral": {
+            "missing": 1,
+            "total": 1
+          },
+          "imposter_syndrome_false_alarm": {
+            "missing": 1,
+            "total": 1
+          },
+          "imposter_syndrome_grief": {
+            "missing": 1,
+            "total": 1
+          },
+          "imposter_syndrome_overwhelm": {
+            "missing": 1,
+            "total": 1
+          },
+          "imposter_syndrome_spiral": {
+            "missing": 1,
+            "total": 1
+          },
+          "imposter_syndrome_watcher": {
+            "missing": 1,
+            "total": 1
+          },
+          "overthinking_comparison": {
+            "missing": 1,
+            "total": 1
+          },
+          "overthinking_grief": {
+            "missing": 1,
+            "total": 1
+          },
+          "overthinking_overwhelm": {
+            "missing": 1,
+            "total": 1
+          },
+          "overthinking_shame": {
+            "missing": 1,
+            "total": 1
+          },
+          "overwhelm": {
+            "missing": 1579,
+            "total": 1579
+          },
+          "self_worth_false_alarm": {
+            "missing": 1,
+            "total": 1
+          },
+          "self_worth_grief": {
+            "missing": 1,
+            "total": 1
+          },
+          "self_worth_overwhelm": {
+            "missing": 1,
+            "total": 1
+          },
+          "self_worth_spiral": {
+            "missing": 1,
+            "total": 1
+          },
+          "self_worth_watcher": {
+            "missing": 1,
+            "total": 1
+          },
+          "shame": {
+            "missing": 1604,
+            "total": 1604
+          },
+          "sleep_anxiety_comparison": {
+            "missing": 1,
+            "total": 1
+          },
+          "sleep_anxiety_grief": {
+            "missing": 1,
+            "total": 1
+          },
+          "sleep_anxiety_shame": {
+            "missing": 1,
+            "total": 1
+          },
+          "sleep_anxiety_watcher": {
+            "missing": 1,
+            "total": 1
+          },
+          "social_anxiety_grief": {
+            "missing": 1,
+            "total": 1
+          },
+          "social_anxiety_overwhelm": {
+            "missing": 1,
+            "total": 1
+          },
+          "social_anxiety_spiral": {
+            "missing": 1,
+            "total": 1
+          },
+          "social_anxiety_watcher": {
+            "missing": 1,
+            "total": 1
+          },
+          "somatic_healing_comparison": {
+            "missing": 1,
+            "total": 1
+          },
+          "somatic_healing_false_alarm": {
+            "missing": 1,
+            "total": 1
+          },
+          "somatic_healing_grief": {
+            "missing": 1,
+            "total": 1
+          },
+          "somatic_healing_shame": {
+            "missing": 1,
+            "total": 1
+          },
+          "somatic_healing_spiral": {
+            "missing": 1,
+            "total": 1
+          },
+          "spiral": {
+            "missing": 1341,
+            "total": 1341
+          },
+          "watcher": {
+            "missing": 1425,
+            "total": 1425
+          }
+        },
+        "totals": {
+          "y": 0,
+          "n": 0,
+          "missing": 43092,
+          "invalid": 0,
+          "total": 43092
+        }
+      }
+    }
+  },
+  "bestseller": {
+    "slots": [
+      "PIVOT",
+      "TAKEAWAY",
+      "THREAD",
+      "PERMISSION",
+      "STORY"
+    ],
+    "cjk_locales": [
+      "ja-JP",
+      "ko-KR",
+      "zh-CN",
+      "zh-HK",
+      "zh-SG",
+      "zh-TW"
+    ],
+    "european_locales": [
+      "es-US",
+      "es-ES",
+      "fr-FR",
+      "de-DE",
+      "it-IT",
+      "hu-HU",
+      "pt-BR"
+    ],
+    "english_source_files": 3754,
+    "by_cjk_locale": {
+      "ja-JP": {
+        "translated_files": 3164,
+        "expected_files": 3754,
+        "coverage_ratio": 0.8428343100692595
+      },
+      "ko-KR": {
+        "translated_files": 248,
+        "expected_files": 3754,
+        "coverage_ratio": 0.0660628662759723
+      },
+      "zh-CN": {
+        "translated_files": 1622,
+        "expected_files": 3754,
+        "coverage_ratio": 0.4320724560468833
+      },
+      "zh-HK": {
+        "translated_files": 259,
+        "expected_files": 3754,
+        "coverage_ratio": 0.06899307405434203
+      },
+      "zh-SG": {
+        "translated_files": 255,
+        "expected_files": 3754,
+        "coverage_ratio": 0.06792754395311668
+      },
+      "zh-TW": {
+        "translated_files": 3600,
+        "expected_files": 3754,
+        "coverage_ratio": 0.9589770911028237
+      }
+    },
+    "by_european_locale": {
+      "es-US": {
+        "translated_files": 82,
+        "expected_files": 3754,
+        "coverage_ratio": 0.02184336707511987
+      },
+      "es-ES": {
+        "translated_files": 0,
+        "expected_files": 3754,
+        "coverage_ratio": 0.0
+      },
+      "fr-FR": {
+        "translated_files": 0,
+        "expected_files": 3754,
+        "coverage_ratio": 0.0
+      },
+      "de-DE": {
+        "translated_files": 0,
+        "expected_files": 3754,
+        "coverage_ratio": 0.0
+      },
+      "it-IT": {
+        "translated_files": 0,
+        "expected_files": 3754,
+        "coverage_ratio": 0.0
+      },
+      "hu-HU": {
+        "translated_files": 0,
+        "expected_files": 3754,
+        "coverage_ratio": 0.0
+      },
+      "pt-BR": {
+        "translated_files": 82,
+        "expected_files": 3754,
+        "coverage_ratio": 0.02184336707511987
+      }
+    }
+  }
+}
