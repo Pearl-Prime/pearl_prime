@@ -86,6 +86,7 @@ def insert_accent_beats_into_streams(
             insert_at = _index_for_position(position, types_out) + offset
         insert_at = max(0, min(insert_at, len(types_out)))
         cls = str(beat.get("class") or "ACCENT")
+        keys = dict(beat.get("keys") or {}) if isinstance(beat.get("keys"), dict) else {}
         types_out.insert(insert_at, f"{ACCENT_SLOT_PREFIX}{cls}")
         proses_out.insert(insert_at, body)
         rendered.append(
@@ -93,13 +94,14 @@ def insert_accent_beats_into_streams(
                 "accent_id": accent_id,
                 "class": cls,
                 "position": position,
+                "keys": keys,
+                "surface_bucket": keys.get("surface_bucket"),
+                "count_unit": keys.get("count_unit"),
                 "chapter_insert_index": insert_at,
                 "body": body,
                 "body_hash": hashlib.sha256(body.encode("utf-8")).hexdigest(),
                 "rendered_excerpt": body[:220].replace("\n", " ").strip(),
-                "provenance": (beat.get("keys") or {}).get("supply_provenance")
-                if isinstance(beat.get("keys"), dict)
-                else beat.get("supply_provenance"),
+                "provenance": keys.get("supply_provenance") or beat.get("supply_provenance"),
             }
         )
         offset += 1

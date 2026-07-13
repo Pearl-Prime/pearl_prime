@@ -3920,17 +3920,21 @@ def compose_from_enriched_book(
                 if not isinstance(_ar, dict):
                     continue
                 _body = str(_ar.get("body") or _ar.get("rendered_body") or "")
+                _keys = _ar.get("keys") if isinstance(_ar.get("keys"), dict) else {}
                 _audit_rows.append(
                     {
                         "chapter": ch.number,
                         "class": _ar.get("class") or _ar.get("accent_class"),
                         "accent_id": _ar.get("accent_id"),
                         "position": _ar.get("position"),
+                        "keys": dict(_keys),
+                        "surface_bucket": _ar.get("surface_bucket") or _keys.get("surface_bucket"),
+                        "count_unit": _ar.get("count_unit") or _keys.get("count_unit"),
                         "renderer_stream_index": _ar.get("chapter_insert_index"),
                         "chapter_insert_index": _ar.get("chapter_insert_index"),
                         "body_hash": _ar.get("body_hash"),
                         "provenance": _ar.get("provenance")
-                        or ((_ar.get("keys") or {}).get("supply_provenance") if isinstance(_ar.get("keys"), dict) else None),
+                        or _keys.get("supply_provenance"),
                         "rendered_excerpt": _body[:220].replace("\n", " ").strip(),
                         "present_in_manuscript": bool(_body.strip()),
                     }
