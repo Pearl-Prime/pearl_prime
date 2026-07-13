@@ -56,6 +56,28 @@ def test_zh_tw_flow_cues_are_recognized_without_english_crutches() -> None:
     assert result.metrics["action_hits"] >= 1
 
 
+def test_mixed_zh_tw_flagship_clear_point_shapes_are_recognized() -> None:
+    chapter = """
+從星期二開始，你的肩膀就一直聱在耳朵旁邊。你剛剛才發現。
+努力本來應該是那個能改變結果的變數。但這道數學題算不出來。
+Chapter one made a single claim and asked you to keep it: the alarm was doing its job. Here is what was hidden inside that job description.
+The alarm is not broken. It is misfiring. The body still fires the same scan when the danger is social, imagined, or twelve hours old in a Slack thread. It cannot always tell the difference between a tiger and a read receipt. That mismatch is the whole problem — and it is not your fault.
+Most people never make this distinction. They have spent so many years inside the ringing alarm that the ringing has become the only voice they remember being.
+Each time you notice the tightening before you react to it, the witness gets a small bit of practice.
+It is not you. It is the alarm doing what it was trained to do.
+這兩者有差別，而你的神經系統知道這一點。
+看見這一點時，先呼吸，然後選擇一個小行動。
+請記住，問題在於警報工作太久，不是你太脆弱。
+接著，把手機放遠一點，讓身體重新學習安全。
+同時，寫下一句真實的話，讓注意力回到現在。
+從這裡開始，練習不是完美，而是一次又一次把自己帶回來。
+"""
+    result = evaluate_chapter_flow(chapter, locale="zh-TW")
+    assert result.status == "PASS", result.errors
+    assert result.metrics["thesis_hits"] >= 1
+    assert result.metrics["transition_hits"] >= 3
+
+
 def test_chapter_flow_with_slots_requires_takeaway_and_thread_when_present() -> None:
     # When TAKEAWAY or THREAD slot is present but segment is empty, gate fails with TAKEAWAY_EMPTY / THREAD_EMPTY
     slots = ["HOOK", "SCENE", "REFLECTION", "EXERCISE", "TAKEAWAY", "INTEGRATION", "THREAD"]

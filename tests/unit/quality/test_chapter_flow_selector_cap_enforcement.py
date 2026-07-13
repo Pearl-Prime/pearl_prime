@@ -47,6 +47,13 @@ _EXPECTED_NEW_THESIS_CUES = (
     "what follows",
     "what remains",
     "the truth",
+    "the alarm is not broken",
+    "that mismatch is the whole problem",
+    "it is not you",
+    "both truths can stay true",
+    "is not the enemy",
+    "the problem was never",
+    "that is the whole point",
 )
 
 _EXPECTED_NEW_TRANSITION_CUES = (
@@ -59,6 +66,14 @@ _EXPECTED_NEW_TRANSITION_CUES = (
     "step into",
     "the seeing",
     "in another",
+    "earlier i said",
+    "here is what was hidden",
+    "when the loop",
+    "if the loop",
+    "both truths",
+    "look at",
+    "what survives",
+    "if a practice",
 )
 
 
@@ -209,16 +224,16 @@ def test_generic_prose_without_thesis_signal_still_fails() -> None:
 # ---------------------------------------------------------------------------
 
 def test_thesis_cues_count_matches_expansion() -> None:
-    """Sanity: 4 legacy + 11 expansion = 15 cues."""
-    assert len(_THESIS_CUES) == 15, (
-        f"Expected 15 thesis cues (4 legacy + 11 expansion); got {len(_THESIS_CUES)}. "
+    """Sanity: 4 legacy + 18 expansion = 22 cues."""
+    assert len(_THESIS_CUES) == 22, (
+        f"Expected 22 thesis cues (4 legacy + 18 expansion); got {len(_THESIS_CUES)}. "
         "Update count or expansion list."
     )
 
 
 def test_transition_cues_count_matches_expansion() -> None:
-    """Sanity: 13 legacy + 9 expansion = 22 cues."""
-    assert len(_TRANSITION_CUES) == 22, (
-        f"Expected 22 transition cues (13 legacy + 9 expansion); got {len(_TRANSITION_CUES)}. "
+    """Sanity: 13 legacy + 17 expansion = 30 cues."""
+    assert len(_TRANSITION_CUES) == 30, (
+        f"Expected 30 transition cues (13 legacy + 17 expansion); got {len(_TRANSITION_CUES)}. "
         "Update count or expansion list."
     )

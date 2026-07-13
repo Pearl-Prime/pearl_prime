@@ -114,6 +114,17 @@ _TRANSITION_CUES = (
     "step into",          # bridge family seeing-has-a-downstairs
     "the seeing",         # 'The seeing has a downstairs'
     "in another",         # 'in another room'
+    # Mixed-language zh-TW renders can retain authored English craft bridges.
+    # These are connective shapes, not gate bypasses: each marks a real relation
+    # between claims, examples, or chapter callbacks.
+    "earlier i said",
+    "here is what was hidden",
+    "when the loop",
+    "if the loop",
+    "both truths",
+    "look at",
+    "what survives",
+    "if a practice",
 )
 
 _THESIS_CUES = (
@@ -136,6 +147,15 @@ _THESIS_CUES = (
     "what follows",         # 'What follows is not a test, it is an invitation'
     "what remains",         # 'What remains is the moment after'
     "the truth",            # 'the body often tells the truth in extremities'
+    # Anxiety flagship / zh-TW mixed-language forms: real thesis shapes that
+    # express the clear point without the older "the point is" wording.
+    "the alarm is not broken",
+    "that mismatch is the whole problem",
+    "it is not you",
+    "both truths can stay true",
+    "is not the enemy",
+    "the problem was never",
+    "that is the whole point",
 )
 
 _AHA_CUES = (
@@ -164,6 +184,8 @@ _ZH_TRANSITION_CUES = (
     "請記住",
     "接下來",
     "從這裡開始",
+    "同時",
+    "接著",
 )
 
 _ZH_THESIS_CUES = (
@@ -176,6 +198,11 @@ _ZH_THESIS_CUES = (
     "真正的問題是",
     "真相是",
     "接下來要記住的是",
+    "問題在於",
+    "不是問題所在",
+    "這兩者有差別",
+    "差別在於",
+    "關鍵是",
 )
 
 _ZH_ACTION_CUES = (

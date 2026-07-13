@@ -41,6 +41,7 @@ PROOF_SLOT_TYPES = frozenset({"STORY", "EXERCISE", "ANGLE_DEFINITION", "ANGLE_CA
 
 _CHAPTER_RE = re.compile(r"(?m)^Chapter\s+(\d+)\s*$")
 _PARAGRAPH_RE = re.compile(r"\S(?:.*?\S)?(?=\n\s*\n|\Z)", re.S)
+_CALLBACK_LAYER_SUFFIX_RE = re.compile(r":L\d+$")
 _UNRESOLVED_PATTERNS: tuple[tuple[str, re.Pattern[str]], ...] = (
     ("curly_placeholder", re.compile(r"\{[A-Za-z_][A-Za-z0-9_]*\}")),
     ("persona_stub", re.compile(r"\[Persona-specific hook for [^\]]+\]", re.I)),
@@ -201,8 +202,13 @@ def _source_tail(source_id: str) -> str:
     return raw
 
 
+def _callback_family_id(source_id: str) -> str:
+    """Collapse layered callback returns back to the planted callback family."""
+    return _CALLBACK_LAYER_SUFFIX_RE.sub("", _source_tail(source_id))
+
+
 def _callback_metadata(slot_type: str, source_id: str) -> Dict[str, Any]:
-    plant_id = _source_tail(source_id)
+    plant_id = _callback_family_id(source_id)
     slot = str(slot_type or "").strip().upper()
     if slot == "ANGLE_DEFINITION":
         return {
@@ -501,11 +507,12 @@ def build_enhancement_contract_payload(
                 )
             stream_row = accent_stream_by_id.get(accent_id) or {}
             loc = _as_mapping(stream_row.get("final_location"))
-            if body and not loc.get("present"):
+            render_row = _as_mapping(render_by_id.get(accent_id))
+            render_present = bool(render_row.get("present_in_manuscript"))
+            if body and not loc.get("present") and not render_present:
                 validation["missing_planned"].append(
                     {"chapter": chapter_num, "accent_id": accent_id, "class": assignment.get("class")}
                 )
-            render_row = _as_mapping(render_by_id.get(accent_id))
             keys = _as_mapping(assignment.get("keys"))
             truth_metadata = _as_mapping(keys.get("truth_metadata"))
             accent_class = str(assignment.get("class") or "").strip()
@@ -549,8 +556,8 @@ def build_enhancement_contract_payload(
                     if loc.get("present") and stream_row
                     else False
                 ),
-                "present_in_manuscript": bool(loc.get("present")),
-                "match_mode": loc.get("match_mode"),
+                "present_in_manuscript": bool(loc.get("present") or render_present),
+                "match_mode": loc.get("match_mode") or ("render_audit" if render_present else None),
                 "body_hash": _content_hash(body) if body else "",
                 "selected_body_excerpt": _excerpt(body),
                 "rendered_excerpt": str(

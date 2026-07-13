@@ -184,6 +184,28 @@ def test_build_enhancement_contract_payload_reconciles_final_manuscript() -> Non
     assert payload["validation"]["unresolved_markers"] == []
 
 
+def test_callback_layer_returns_reconcile_to_prior_base_plant() -> None:
+    book = _sample_book()
+    book.chapters[0].slots = [
+        _slot("ANGLE_DEFINITION", "Angle definition body.", source_id="angle_def:PROTECTIVE_ALARM"),
+        _slot("ANGLE_CALLBACK", "Angle callback body.", source_id="angle_cb:PROTECTIVE_ALARM:L3"),
+        _slot("STORY", "Story body.", source_id="story_01", variant_id="story_v1"),
+        _slot("EXERCISE", "Exercise body.", source_id="exercise_01", variant_id="exercise_v1"),
+    ]
+    book.chapters[0].accent_beats = []
+    book.chapters[0].accent_bodies = {}
+    book.spine_context["accent_assignments"] = []
+    book.enrichment_audit["enrichment_strategy_report"]["assignments"] = []
+    manuscript = "Chapter 1\nLayered Callback\n\nAngle definition body.\n\nAngle callback body.\n\nStory body.\n\nExercise body.\n"
+    payload = build_enhancement_contract_payload(enriched=book, manuscript_text=manuscript)
+    callback_rows = [row for row in payload["core_surface_rows"] if row.get("callback_role")]
+    assert [row["plant_id"] for row in callback_rows] == ["PROTECTIVE_ALARM", "PROTECTIVE_ALARM"]
+    assert not [
+        err for err in payload["validation"]["errors"]
+        if "callback_return_without_prior_plant" in err
+    ]
+
+
 def test_build_enhancement_contract_payload_flags_missing_and_orphan_rows() -> None:
     book = _sample_book()
     book.chapters[0].accent_bodies["orphan_01"] = "Orphan body."
