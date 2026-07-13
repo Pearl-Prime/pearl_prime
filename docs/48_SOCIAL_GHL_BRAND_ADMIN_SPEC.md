@@ -10,9 +10,9 @@
 
 48 Social is Pearl Prime's exclusive organic marketing partner. For every book your brand produces, 48 Social:
 
-1. **Breaks the book into 30-50 social media posts** — quotes, insights, micro-practices, hooks
+1. **Breaks the book into 30-50 social media assets** — teaching carousels, practical posts, recognition posts, stories, reframes, original quote-with-commentary cards, and offers
 2. **Schedules them across all your platforms** — Instagram, TikTok, Facebook, Twitter/X, LinkedIn, Pinterest
-3. **Runs your email proof-loop campaign** (E1-E5) via GoHighLevel
+3. **Runs your email proof-loop campaign** (E1-E9) via GoHighLevel
 4. **Manages your freebie funnel** — landing page → email capture → nurture → book sale
 5. **Tracks everything** in the GHL CRM — who downloaded what, who bought what, who's ready for upsell
 
@@ -63,7 +63,7 @@ r2://pearl-prime-content/{brand_id}/{week}/
 
 | Our Asset | What 48 Social Creates | How |
 |-----------|----------------------|-----|
-| `book_001.txt` (prose) | 10 quote cards, 6 hook posts, 5 carousels | Extract best lines, overlay on brand-colored templates |
+| `book_001.txt` (prose) | Carousels, practical posts, recognition posts, story posts, reframes, and original quote-with-commentary cards | Extract clear points, mechanisms, practices, stories, callbacks, quotable lines, and offers |
 | `book_001_shorts.mp4` (60s video) | 4 video clip posts | Trim to 15-30s highlights, add captions + CTA overlay |
 | `book_001_tiktok.mp4` (30-60s) | 3 TikTok posts | Add trending sounds, text hooks, hashtags |
 | `book_001_instagram.mp4` (60s) | 3 Reels + 2 Stories | Reels with CTA, Stories with swipe-up |
@@ -99,7 +99,7 @@ r2://pearl-prime-content/{brand_id}/{week}/
 
 **GHL integration:**
 - 48 Social has admin access to each brand's GHL sub-account
-- Email sequences (E1-E5) are pre-configured and auto-triggered by freebie downloads
+- Email sequences (E1-E9) are pre-configured and auto-triggered by freebie downloads
 - Social scheduling can also run through GHL's social module if preferred over Metricool
 - CRM tracks: freebie downloads → email signups → book purchases → upsells
 
@@ -122,23 +122,40 @@ Every Monday:
 
 ## 2. The Content Repurposing Pipeline
 
+**Current static-content authority:** see [STATIC_SOCIAL_BOOK_CONTENT_ENGINE_2026-07-13.md](specs/STATIC_SOCIAL_BOOK_CONTENT_ENGINE_2026-07-13.md).
+
+The 2026 operating model is **carousel/practical-teaching first**, not quote-card first. The best static social assets behave like miniature self-help chapters: recognize the reader, validate the experience, explain one mechanism, offer one reframe, give one micro-practice, and end with a natural invitation.
+
 ```
 Book (from Pearl Prime weekly package)
   ↓
 48 Social Content Engine
   ↓
-30-50 Social Posts per book:
-  ├── 10 Quote Cards (key insights as images with text overlay)
-  ├── 8 Micro-Practice Posts (one exercise/technique per post)
-  ├── 6 Hook Posts (first line that stops the scroll)
-  ├── 5 Carousel Posts (multi-slide educational breakdowns)
-  ├── 4 Video Clip Posts (from your YouTube/Shorts/TikTok videos)
-  ├── 3 Story/Reel Templates (vertical format with CTA)
-  ├── 2 Thread Posts (Twitter/X long-form breakdowns)
-  └── 2 Engagement Posts (polls, questions, "which resonates?")
+30-50 static/social assets per book:
+  ├── 5-8 Instagram teaching carousels
+  ├── 2-4 LinkedIn PDF/document posts
+  ├── 6-10 Pinterest vertical Pins
+  ├── 4-6 Facebook photo/text/story posts
+  ├── 6-10 X/Threads text-native posts
+  ├── 2-4 TikTok photo-mode sequences
+  ├── 1-3 original quote-with-commentary cards
+  └── 2-4 offer/invitation posts
 ```
 
 Each post includes a **CTA** pointing to your freebie landing page.
+
+Default non-video mix per 20 posts:
+
+| Class | Target | Function |
+|-------|--------|----------|
+| Practical teaching | 8 | Saves, authority, usable value |
+| Recognition / validation | 5 | Emotional specificity, sharing |
+| Personal or reader-style stories | 3 | Trust and proof of method |
+| Strong opinions / reframes | 2 | Conversation and thought leadership |
+| Original quote with commentary | 1 | Shareable identity signal |
+| Offer / invitation | 1 | Freebie, book, bundle, or list growth |
+
+Quote-style posts must stay under 10-15% of the static feed unless a brand-specific test proves otherwise. Famous borrowed quotes are not default content.
 
 ---
 
@@ -190,11 +207,11 @@ With UTM parameters per platform:
 
 ---
 
-## 4. Email Proof-Loop Campaign (E1-E5)
+## 4. Email Proof-Loop Campaign (E1-E9)
 
-When someone downloads a freebie, they enter the **proof-loop email sequence**. 48 Social manages this via GHL.
+When someone downloads a freebie, they enter the **evergreen proof-loop email sequence**. 48 Social manages this via GHL. The current GHL implementation is contact-specific inbound webhook -> custom fields -> 9-email sequence, not an RSS/feed blast.
 
-### The 5-Email Sequence
+### The 9-Email Sequence
 
 | Email | Timing | Subject | Content | CTA |
 |-------|--------|---------|---------|-----|
@@ -203,8 +220,14 @@ When someone downloads a freebie, they enter the **proof-loop email sequence**. 
 | **E3** | +72 hours | "Someone's story" | Transformation story from the book's STORY atoms | "Read how this changed for someone like you" |
 | **E4** | +48 hours after E3 | "The full book is available" | Book offer with cover art + excerpt + companion info | "Get the full book → {store_link}" |
 | **E5** | +7 days after E4 | "More from {brand_name}" | Recommend 2-3 related books from the same brand | "Explore more → {brand_catalog_link}" |
+| **E6** | +72 hours after E5 | "Book two recommendation" | Second book recommendation for continuity | "Open recommendation 2" |
+| **E7** | After E6 | "Book three / bundle path" | Third book or bundle-style path | "See the bundle path" |
+| **E8** | Last direct nudge | "Last chance" | Final book-sequence reminder | "Take the next step" |
+| **E9** | Still-here reminder | "Still here" | Original free tool link again | "Reopen the free tool" |
 
-**Psychology:** Demonstrate the mechanism twice (E1 + E2) before offering the book (E4). Minimum 48-hour gap between story and offer.
+**Psychology:** Demonstrate the mechanism twice (E1 + E2), show transformation through a story (E3), then make the book offer (E4). E5-E9 continue the evergreen recommendation path without requiring a weekly feed lookup.
+
+For the current Waystream field map, see [GHL_ADMIN_WAYSTREAM_EVERGREEN_FREEBIE_FUNNEL.md](ghl/GHL_ADMIN_WAYSTREAM_EVERGREEN_FREEBIE_FUNNEL.md) and [proof_loop_sequence.md](email_sequences/proof_loop_sequence.md).
 
 ### Email CTA Links
 
@@ -214,7 +237,11 @@ When someone downloads a freebie, they enter the **proof-loop email sequence**. 
 | E2 | `brand-admin-onboarding.pages.dev/free/{slug}#exercise2` (second exercise) |
 | E3 | `brand-admin-onboarding.pages.dev/free/{slug}#story` (story page) |
 | E4 | `{platform_store_link}` (Google Play, Amazon, Apple — varies by lane) |
-| E5 | `catalog.brand-admin-onboarding.pages.dev/{brand_id}` (brand catalog) |
+| E5 | `catalog.brand-admin-onboarding.pages.dev/{brand_id}` or campaign-plan book list |
+| E6 | `phoenix_e6_url` |
+| E7 | `phoenix_e7_url` |
+| E8 | `phoenix_e8_url` |
+| E9 | `phoenix_e9_url` (usually original free tool) |
 
 ### Email Subject Lines by Language
 
@@ -240,12 +267,12 @@ Each brand gets its own GHL sub-account. 48 Social sets this up. Brand admin nee
 
 ### 5.2 What 48 Social Configures in GHL
 - **Contact lists:** Segmented by freebie type, book purchased, engagement level
-- **Email templates:** E1-E5 proof-loop, branded with your colors/logo
+- **Email templates:** E1-E9 proof-loop, branded with your colors/logo
 - **SMS templates:** Book launch announcements (opt-in only)
 - **Funnel pages:** Freebie landing page + thank-you page
 - **Social calendar:** 30-50 posts per book, spread across 2-3 weeks
 - **Automation workflows:**
-  - Freebie download → tag contact → start E1-E5 sequence
+  - Freebie download → tag contact → start E1-E9 sequence
   - E4 purchase → tag as buyer → add to upsell list
   - No engagement after E5 → move to re-engagement sequence (30 days later)
 
@@ -329,41 +356,48 @@ Every book produces 5 video formats. Each video has CTAs baked in:
 
 ### 7.1 Instagram
 - **Post frequency:** 1-2 posts/day (48 Social manages)
-- **Content mix:** 40% quote cards, 25% carousels, 20% Reels clips, 15% Stories
+- **Content mix:** carousel-first. Use 3-4 teaching carousels/week when asset volume allows, with occasional original quote-with-commentary cards, photo-story posts, and Stories.
+- **Carousel structure:** specific hook -> recognizable situation -> validation -> mechanism -> reframe -> practice -> obstacle -> takeaway -> save/share/reflection invitation
 - **Hashtags:** 15-20 per post, mix of broad (#selfcare #mentalhealth) and niche (#nervousystem #somatichealing)
 - **Bio link:** Linktree or direct to freebie (rotate with each new book)
 - **CTA:** Always in caption, never as only element (Instagram penalizes CTA-only posts)
+- **Avoid:** generic quote-card feed, stock meditation photos, large blocks of text over busy images
 
 ### 7.2 TikTok
 - **Post frequency:** 1-2/day
 - **Hook:** First 2 seconds must stop the scroll — text on screen + movement
-- **Content:** 60% video clips from book videos, 30% text-on-screen quotes, 10% trending sound + wellness message
+- **Static content:** use photo-mode carousels selectively for diary-style stories, "things I wish I knew" lists, progress narratives, and practical self-help sequences
+- **Video content:** still useful for reach, but static photo posts must feel native, immediate, and personal rather than reposted Instagram graphics
 - **Hashtags:** 3-5 max (TikTok algorithm prefers fewer, more specific)
 - **Bio:** Single link to current freebie
 
 ### 7.3 Facebook
 - **Post frequency:** 1/day
-- **Content:** Link posts to freebie landing page, quote images, short text excerpts
+- **Content:** authentic photo plus 150-400-word story, text-only reflection, practical graphic, 3-5 image album, or discussion prompt
 - **Groups:** Join 3-5 relevant wellness/self-help groups, share value (NOT promotional)
 - **CTA:** "Download the free guide" with direct link (Facebook allows links in posts)
+- **Priority:** emotional relevance and community conversation matter more than exact format
 
 ### 7.4 Twitter/X
 - **Post frequency:** 2-3/day (tweets are short-lived)
-- **Content:** Quote threads (break one insight into 5-7 tweets), single quotes, engagement polls
+- **Content:** text-first claims, sharp distinctions, short threads, diagrams, handwritten notes, or raw screenshots
 - **CTA:** Final tweet in thread: "Full free guide: [link]"
 - **Hashtags:** 1-2 per tweet max
+- **Rule:** one clear claim, one tension, one clean final sentence
 
 ### 7.5 Pinterest
 - **Post frequency:** 5-10 pins/week (Pinterest is evergreen — pins last months)
-- **Content:** Quote cards, book covers, exercise infographics, carousel pins
+- **Content:** vertical 2:3 instructional Pins, journal prompts, checklists, worksheet previews, book covers, and exercise infographics
 - **CTA:** Pin description links directly to freebie page
 - **Boards:** Create 3-5 boards per brand (Anxiety Tools, Sleep Practices, etc.)
+- **Search framing:** titles should answer specific needs, e.g. "journal prompts for decision anxiety" or "five grounding practices before sleep"
 
 ### 7.6 LinkedIn
 - **Post frequency:** 2-3/week
-- **Content:** Professional framing — "workplace wellness", "executive burnout", "leadership resilience"
+- **Content:** native PDF/document carousels, practical frameworks, leadership psychology, burnout, confidence, boundaries, difficult conversations, focus, and emotional regulation under pressure
 - **CTA:** "Free toolkit for professionals → [link]"
 - **Best for:** stabilizer, optimizer, executive_calm, career_lift brands
+- **Rule:** do not upload an Instagram screenshot; rewrite for work-relevant language and professional dwell time
 
 ---
 
