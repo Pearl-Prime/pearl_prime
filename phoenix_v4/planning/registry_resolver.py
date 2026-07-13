@@ -110,13 +110,57 @@ def _load_yaml(path: Path) -> dict:
     return data if isinstance(data, dict) else {}
 
 
+
+class DuplicateSelectedAtomError(ValueError):
+    # A non-reusable authored atom/body would repeat within one book.
+    pass
+
+
+def _normalized_body_hash(content: str) -> str:
+    normalized = " ".join(str(content or "").split()).casefold()
+    return hashlib.sha256(normalized.encode("utf-8")).hexdigest()
+
+
 def _deterministic_index(seed: str, pool_size: int) -> int:
-    """SHA256-based deterministic selection — same seed always picks same index."""
+    # SHA256-based deterministic selection.
     if pool_size <= 0:
         return 0
     digest = hashlib.sha256(seed.encode("utf-8")).digest()
     return int.from_bytes(digest[:8], "big") % pool_size
 
+
+def _select_unique_story_overlay(
+    atom_pool: list[dict],
+    *,
+    seed_key: str,
+    used_ids: set[str],
+    used_body_hashes: set[str],
+) -> dict:
+    candidates = [
+        atom
+        for atom in atom_pool
+        if str(atom.get("atom_id") or "") not in used_ids
+        and _normalized_body_hash(str(atom.get("content") or ""))
+        not in used_body_hashes
+    ]
+    if not candidates:
+        raise DuplicateSelectedAtomError(
+            "STORY overlay pool exhausted before book completion: no unused "
+            "atom ID/body remains. Author more STORY supply; do not repeat."
+        )
+    candidates = sorted(
+        candidates,
+        key=lambda atom: (
+            str(atom.get("atom_id") or ""),
+            _normalized_body_hash(str(atom.get("content") or "")),
+        ),
+    )
+    chosen = candidates[_deterministic_index(seed_key, len(candidates))]
+    used_ids.add(str(chosen.get("atom_id") or ""))
+    used_body_hashes.add(
+        _normalized_body_hash(str(chosen.get("content") or ""))
+    )
+    return chosen
 
 # ---------------------------------------------------------------------------
 # Registry loading
@@ -672,17 +716,33 @@ class ResolvedChapter:
         return sum(len(s.content.split()) for s in self.sections)
 
 
-class ResolvedBook:
-    """Complete resolved book from section registry."""
-    __slots__ = ("chapters", "topic", "seed", "registry_path", "teacher_id")
 
-    def __init__(self, chapters: list[ResolvedChapter], topic: str, seed: str,
-                 registry_path: str = "", teacher_id: str = ""):
+class ResolvedBook:
+    # Complete resolved book from section registry.
+    __slots__ = (
+        "chapters",
+        "topic",
+        "seed",
+        "registry_path",
+        "teacher_id",
+        "selection_audit",
+    )
+
+    def __init__(
+        self,
+        chapters: list[ResolvedChapter],
+        topic: str,
+        seed: str,
+        registry_path: str = "",
+        teacher_id: str = "",
+        selection_audit: Optional[dict[str, Any]] = None,
+    ):
         self.chapters = chapters
         self.topic = topic
         self.seed = seed
         self.registry_path = registry_path
         self.teacher_id = teacher_id
+        self.selection_audit = selection_audit or {}
 
     @property
     def word_count(self) -> int:
@@ -693,7 +753,6 @@ class ResolvedBook:
         return len(self.chapters)
 
     def to_prose(self) -> str:
-        """Render to plain text (chapter headings + section content)."""
         parts: list[str] = []
         for ch in self.chapters:
             parts.append(f"Chapter {ch.chapter_index + 1}")
@@ -704,7 +763,6 @@ class ResolvedBook:
                     parts.append(content)
                     parts.append("")
         return "\n".join(parts).strip()
-
 
 def resolve_book(
     registry: dict,
@@ -756,6 +814,9 @@ def resolve_book(
     )
 
     chapters: list[ResolvedChapter] = []
+    used_story_atom_ids: set[str] = set()
+    used_story_body_hashes: set[str] = set()
+    story_selection_rows: list[dict[str, Any]] = []
 
     for ch_key in sorted(sections_data.keys()):
         ch_data = sections_data[ch_key]
@@ -823,12 +884,36 @@ def resolve_book(
             if not overlay_content and persona_atoms and sec_type in _PERSONA_OVERLAY_TYPES:
                 atom_pool = persona_atoms.get(sec_type, [])
                 if atom_pool:
-                    p_idx = _deterministic_index(
-                        f"{seed}:{ch_key}:{sec_key}:{purpose}:persona",
-                        len(atom_pool),
+                    selector_key = (
+                        f"{seed}:{ch_key}:{sec_key}:{purpose}:persona"
                     )
-                    overlay_content = atom_pool[p_idx]["content"]
-                    overlay_id = atom_pool[p_idx]["atom_id"]
+                    if sec_type == "STORY":
+                        selected_atom = _select_unique_story_overlay(
+                            atom_pool,
+                            seed_key=selector_key,
+                            used_ids=used_story_atom_ids,
+                            used_body_hashes=used_story_body_hashes,
+                        )
+                        overlay_content = selected_atom["content"]
+                        overlay_id = selected_atom["atom_id"]
+                        story_selection_rows.append(
+                            {
+                                "chapter_key": ch_key,
+                                "section_key": sec_key,
+                                "section_id": sec_id,
+                                "atom_id": overlay_id,
+                                "body_sha256": _normalized_body_hash(
+                                    overlay_content
+                                ),
+                            }
+                        )
+                    else:
+                        p_idx = _deterministic_index(
+                            selector_key,
+                            len(atom_pool),
+                        )
+                        overlay_content = atom_pool[p_idx]["content"]
+                        overlay_id = atom_pool[p_idx]["atom_id"]
 
             # Practice library fallback for EXERCISE slots
             if not overlay_content and sec_type == "EXERCISE":
@@ -878,12 +963,42 @@ def resolve_book(
     topic = registry.get("topic", "unknown")
     reg_path = registry.get("_source_path", "")
 
+    body_counts: dict[str, int] = {}
+    id_counts: dict[str, int] = {}
+    for row in story_selection_rows:
+        body_hash = row["body_sha256"]
+        atom_id = row["atom_id"]
+        body_counts[body_hash] = body_counts.get(body_hash, 0) + 1
+        id_counts[atom_id] = id_counts.get(atom_id, 0) + 1
+    duplicate_ids = sorted(
+        atom_id for atom_id, count in id_counts.items() if count > 1
+    )
+    duplicate_body_hashes = sorted(
+        body_hash for body_hash, count in body_counts.items() if count > 1
+    )
+    if duplicate_ids or duplicate_body_hashes:
+        raise DuplicateSelectedAtomError(
+            "duplicate STORY selection escaped unique selector: "
+            f"ids={duplicate_ids} body_hashes={duplicate_body_hashes}"
+        )
+    selection_audit = {
+        "story_selection_count": len(story_selection_rows),
+        "selected_story_atom_ids": [
+            row["atom_id"] for row in story_selection_rows
+        ],
+        "duplicate_story_atom_ids": duplicate_ids,
+        "duplicate_story_body_hashes": duplicate_body_hashes,
+        "rows": story_selection_rows,
+        "status": "PASS",
+    }
+
     book = ResolvedBook(
         chapters=chapters,
         topic=topic,
         seed=seed,
         registry_path=str(reg_path),
         teacher_id=teacher_id or "",
+        selection_audit=selection_audit,
     )
 
     logger.info(
