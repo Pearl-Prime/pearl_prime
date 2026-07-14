@@ -1307,6 +1307,18 @@ def _run_spine_pipeline_mode(
     _accent_audit = enriched.enrichment_audit or {}
     _strategy_report = _accent_audit.get("enrichment_strategy_report") or {}
     _alignment_report = _accent_audit.get("bestseller_alignment_report") or {}
+    # Early, precise missing-supply signal: a required accent floor whose supply
+    # pool is empty for this locale is surfaced here at preflight (which accent,
+    # how many short, why) instead of only as a confusing late underfill stop.
+    # Advisory, not fatal — an absent bank degrades gracefully; a *present but
+    # unfilled* pool is what the supported-underfill production gate below blocks.
+    _supply_preflight = _strategy_report.get("accent_supply_preflight_blockers") or []
+    if _supply_preflight:
+        print(
+            "[ACCENT PREFLIGHT] Missing accent supply for required floors:\n"
+            + "\n".join(f"  - {b}" for b in _supply_preflight),
+            file=sys.stderr,
+        )
     _supported_underfill = _alignment_report.get("supported_underfilled_budget_by_class") or {}
     if _supported_underfill:
         _underfill_msg = (

@@ -24,6 +24,7 @@ from phoenix_v4.planning.enhancement_contract_v21_runtime import (
     build_optional_accent_budget,
     validate_optional_accent_budget,
 )
+from phoenix_v4.text.wordcount import count_words, has_cjk_script
 
 REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 ACCENT_BANKS = REPO_ROOT / "SOURCE_OF_TRUTH" / "accent_banks"
@@ -1301,7 +1302,11 @@ def _score_entry_for_chapter(
         return -1
     body = _entry_body(entry)
     min_words = 6 if accent_class in ("REFLECTION_QUESTION", "QUOTE") else 8
-    if len(body.split()) < min_words:
+    # CJK-honest length: whitespace tokenization treats a whole Han/kana quote as
+    # a single "word", which would reject every localized zh/ja/ko accent. count_words
+    # counts each CJK glyph as one unit and is identical to len(text.split()) for
+    # whitespace-delimited scripts, so this is not a threshold relaxation.
+    if count_words(body) < min_words:
         return -1
     if not _position_fit_ok(entry, position):
         return -1
@@ -1375,7 +1380,26 @@ def _select_entry_scored(
     return scored[0][1]
 
 
-def _resolve_body(accent_class: str, entry: Mapping[str, Any], *, position: str, composite_mode: bool) -> Tuple[str, str]:
+def _resolve_quote_text(entry: Mapping[str, Any], *, locale_cluster: str = "en_US") -> str:
+    """Pick the quote surface text honoring the render locale.
+
+    For CJK render locales (or when the localized original is itself CJK) render
+    the localized ``text`` — the real, verified in-language quote — falling back
+    to the English translation only if no localized original exists. For non-CJK
+    locales keep the historical ``text_en``-first order so en_US flagship output
+    stays byte-identical.
+    """
+    text_local = str(entry.get("text") or "").strip()
+    text_en = str(entry.get("text_en") or "").strip()
+    prefer_local = str(locale_cluster or "").lower().startswith(("zh", "ja", "ko")) or has_cjk_script(text_local)
+    if prefer_local and text_local:
+        return text_local
+    if not prefer_local and text_en:
+        return text_en
+    return text_local or text_en or _entry_body(entry)
+
+
+def _resolve_body(accent_class: str, entry: Mapping[str, Any], *, position: str, composite_mode: bool, locale_cluster: str = "en_US") -> Tuple[str, str]:
     if accent_class == "CITED_EVIDENCE":
         aid = str(entry.get("evidence_id") or "cited_unknown")
         return aid, _wrap_cited_evidence(str(entry.get("claim") or _entry_body(entry)), str(entry.get("citation") or ""), position=position)
@@ -1407,7 +1431,7 @@ def _resolve_body(accent_class: str, entry: Mapping[str, Any], *, position: str,
             position=position,
         )
     if accent_class == "QUOTE":
-        text = str(entry.get("text_en") or entry.get("text") or _entry_body(entry))
+        text = _resolve_quote_text(entry, locale_cluster=locale_cluster)
         return str(entry.get("quote_id") or "quote_unknown"), _wrap_quote(
             text,
             str(entry.get("author") or ""),
@@ -1493,6 +1517,36 @@ def _supported_underfilled_budget_by_class(
     return underfilled
 
 
+def preflight_accent_supply(
+    accent_budget: Mapping[str, int],
+    pools: Mapping[str, Sequence[Mapping[str, Any]]],
+    *,
+    locale_cluster: str = "en_US",
+) -> List[str]:
+    """Precise, early missing-supply blockers for required accent floors.
+
+    For every accent class carrying a positive budget floor whose supply pool is
+    EMPTY for this locale, emit an actionable line naming the class, the exact
+    shortfall, and the reason. Surfacing this at plan time converts the confusing
+    late ``[PRODUCTION GATE] Supported accent underfill`` stop — which only fires
+    when a pool exists but was left unfilled — into an early, precise signal for
+    the genuinely-missing-supply case (no bank authored/authorized for this
+    topic+locale).
+    """
+    blockers: List[str] = []
+    for cls in sorted(accent_budget):
+        cap_i = int(accent_budget.get(cls, 0))
+        if cap_i <= 0:
+            continue
+        if not pools.get(cls):
+            blockers.append(
+                f"{cls}: need {cap_i}, 0 available — no supply pool for "
+                f"locale '{locale_cluster}'; author or authorize a {cls} bank for "
+                f"this topic+locale before requiring it in the accent budget"
+            )
+    return blockers
+
+
 def _build_strategy_report(
     *,
     accent_budget: Mapping[str, int],
@@ -1508,11 +1562,15 @@ def _build_strategy_report(
     chapter_count: int,
     persona_id: str,
     topic_id: str,
+    locale_cluster: str = "en_US",
     repo_root: Path = REPO_ROOT,
 ) -> Dict[str, Any]:
     counts = _assignment_counts(flat_rows)
     capability_gaps = _capability_gaps(accent_budget, pools)
     underfilled = _supported_underfilled_budget_by_class(accent_budget, counts, pools)
+    supply_preflight_blockers = preflight_accent_supply(
+        accent_budget, pools, locale_cluster=locale_cluster
+    )
     chapters_with = {int(r.get("chapter") or 0) for r in flat_rows}
     mix_data = _story_mix_profile_data(story_mix_profile, repo_root)
     assignment_diagnostics: Dict[str, Any] = {}
@@ -1563,6 +1621,7 @@ def _build_strategy_report(
             if int(accent_budget.get(cls, 0)) > int(counts.get(cls, 0))
         },
         "capability_gaps": capability_gaps,
+        "accent_supply_preflight_blockers": supply_preflight_blockers,
         "share_cap": share_cap,
         "max_accents_per_chapter": max_accents_per_chapter,
         "chapters_with_accents": sorted(chapters_with),
@@ -1780,7 +1839,7 @@ def _apply_share_cap_with_refill(
             )
             if not entry:
                 continue
-            accent_id, body = _resolve_body(accent_class, entry, position=position, composite_mode=composite_mode)
+            accent_id, body = _resolve_body(accent_class, entry, position=position, composite_mode=composite_mode, locale_cluster=locale_cluster)
             if not body or not _composite_body_safe(body, composite_mode=composite_mode):
                 continue
             used_ids.add(accent_id)
@@ -1961,7 +2020,7 @@ def _plan_accent_beats_for_book_legacy(
             )
             if not entry:
                 continue
-            accent_id, body = _resolve_body(accent_class, entry, position=position, composite_mode=composite_mode)
+            accent_id, body = _resolve_body(accent_class, entry, position=position, composite_mode=composite_mode, locale_cluster=locale_cluster)
             if not body or not _composite_body_safe(body, composite_mode=composite_mode):
                 continue
             used_ids.add(accent_id)
@@ -2167,7 +2226,7 @@ def plan_accent_beats_for_book(
             )
             if not entry:
                 continue
-            accent_id, body = _resolve_body(accent_class, entry, position=position, composite_mode=composite_mode)
+            accent_id, body = _resolve_body(accent_class, entry, position=position, composite_mode=composite_mode, locale_cluster=locale_cluster)
             if not body or not _composite_body_safe(body, composite_mode=composite_mode):
                 continue
             used_ids.add(accent_id)
@@ -2247,6 +2306,7 @@ def plan_accent_beats_for_book(
         chapter_count=total_chapters,
         persona_id=persona_id,
         topic_id=topic_id,
+        locale_cluster=locale_cluster,
         repo_root=repo_root,
     )
     alignment_report = _build_alignment_report(
