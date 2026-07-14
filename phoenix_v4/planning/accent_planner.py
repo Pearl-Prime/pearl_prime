@@ -46,7 +46,17 @@ ACCENT_CLASSES_V2 = frozenset(
     }
 )
 
-ALL_ACCENT_CLASSES = ACCENT_CLASSES_V1 | ACCENT_CLASSES_V2
+# v2.1: AUTHOR_DISCLOSURE is a proof_and_embodiment surface, distinct from
+# AUTHOR_COMMENTARY (see ENHANCEMENT_CONTRACT_V2_WORKING_PRIORS_2026-07-13.md
+# section 11). It is planner-selected from its own bank/budget like the other
+# classes; it does not draw on the optional-accent slot budget.
+ACCENT_CLASSES_V3 = frozenset(
+    {
+        "AUTHOR_DISCLOSURE",
+    }
+)
+
+ALL_ACCENT_CLASSES = ACCENT_CLASSES_V1 | ACCENT_CLASSES_V2 | ACCENT_CLASSES_V3
 
 ENHANCEMENT_CONTRACT_V21_SCHEMA_VERSION = "2.1.0"
 
@@ -124,6 +134,7 @@ V21_PREFERRED_POSITIONS: Dict[str, Tuple[str, ...]] = {
     "TROUBLESHOOTING": ("after_INTEGRATION",),
     "REFLECTION_QUESTION": ("after_REFLECTION", "before_THREAD"),
     "AUTHOR_COMMENTARY": ("after_PIVOT", "after_EXERCISE", "after_REFLECTION", "before_THREAD"),
+    "AUTHOR_DISCLOSURE": ("after_PIVOT", "after_REFLECTION", "before_THREAD"),
     "WISDOM_ESSENCE": ("after_REFLECTION", "before_THREAD"),
     "CALLBACK_RETURN": ("after_PIVOT", "before_THREAD"),
 }
@@ -141,6 +152,7 @@ V21_PHASE_WEIGHTS_BY_CLASS: Dict[str, Dict[str, int]] = {
     "EXTERNAL_STORY": {"early": 8, "mid": 10, "late": 10},
     "WISDOM_ESSENCE": {"early": 6, "mid": 10, "late": 12},
     "AUTHOR_COMMENTARY": {"early": 6, "mid": 10, "late": 10},
+    "AUTHOR_DISCLOSURE": {"early": 10, "mid": 8, "late": 6},
 }
 
 V21_ROLE_WEIGHTS_BY_CLASS: Dict[str, Dict[str, int]] = {
@@ -160,6 +172,7 @@ ACCENT_SELECTION_ORDER: Tuple[str, ...] = (
     "EXTERNAL_STORY",
     "WISDOM_ESSENCE",
     "AUTHOR_COMMENTARY",
+    "AUTHOR_DISCLOSURE",
 )
 
 CLASS_DEFAULT_POSITIONS: Dict[str, Tuple[str, ...]] = {
@@ -167,6 +180,7 @@ CLASS_DEFAULT_POSITIONS: Dict[str, Tuple[str, ...]] = {
     "CITED_EVIDENCE": ("after_HOOK", "before_STORY"),
     "WISDOM_ESSENCE": ("after_REFLECTION", "before_THREAD"),
     "AUTHOR_COMMENTARY": ("after_REFLECTION", "after_EXERCISE", "before_THREAD"),
+    "AUTHOR_DISCLOSURE": ("after_PIVOT", "after_REFLECTION", "before_THREAD"),
     "EXTERNAL_STORY": ("after_REFLECTION", "before_STORY", "after_HOOK"),
     "REFLECTION_QUESTION": ("after_REFLECTION", "before_THREAD"),
     "TROUBLESHOOTING": ("after_INTEGRATION",),
@@ -181,6 +195,19 @@ BOOK_PHASE_ORDER = ("problem", "history", "knowledge", "action", "maintenance")
 # Explicit flagship minima for gen_z_professionals × anxiety (contract-v1).
 # Prefer config/accent/brand_accent_profiles.yaml pilot_cells.accent_budget_overrides;
 # these remain as a hard floor so the anxiety pilot cannot silently drop quotes/RQ/TS.
+#
+# AUTHOR_DISCLOSURE is deliberately NOT floored here (PR #5585,
+# GOLDEN_5585_SCOPE_AWAY_2026-07-14): this exact pilot cell
+# (gen_z_professionals:anxiety) is the flagship full-book golden's plan_id
+# (gen_z_professionals_anxiety_twelve_shape_v2, ratified OPD
+# OPD-20260711-PROPRIME-ACCENT-PIPELINE-100PCT). Forcing a guaranteed
+# AUTHOR_DISCLOSURE slot here makes it compete for and win a slot that the
+# ratified CANONICAL_FLAGSHIP_BOOK.txt golden does not contain, which is a
+# real (not false-positive) full-book parity diff. AUTHOR_DISCLOSURE remains
+# fully wired and selectable for every OTHER persona/topic pair — this
+# exclusion is scoped to the one pilot cell the frozen golden depends on.
+# Remove this exclusion only alongside a fresh golden ratification that
+# includes AUTHOR_DISCLOSURE content for this pilot.
 _PILOT_ACCENT_MINIMUMS: Dict[str, Dict[str, int]] = {
     "gen_z_professionals:anxiety": {
         "QUOTE": 3,
@@ -912,6 +939,88 @@ def _load_author_commentary(topic: str, author_id: str, locale_cluster: str, rep
     return [r for r in (data.get("commentaries") or data.get("entries") or []) if isinstance(r, dict)]
 
 
+def _load_author_disclosure(topic: str, author_id: str, locale_cluster: str, repo_root: Path) -> List[dict[str, Any]]:
+    """AUTHOR_DISCLOSURE pool — distinct from AUTHOR_COMMENTARY (see
+    ENHANCEMENT_CONTRACT_V2_WORKING_PRIORS_2026-07-13.md section 11)."""
+    data = _load_yaml(ACCENT_BANKS / "author_disclosure" / topic / author_id / f"{locale_cluster}.yaml")
+    return [r for r in (data.get("disclosures") or data.get("entries") or []) if isinstance(r, dict)]
+
+
+def _is_flagship_frozen_golden_pilot(persona_id: str, topic_id: str) -> bool:
+    """True for the exact persona/topic cell the ratified flagship full-book golden
+    (artifacts/qa/snapshots/CANONICAL_FLAGSHIP_BOOK.txt, plan_id
+    gen_z_professionals_anxiety_twelve_shape_v2, OPD-20260711-PROPRIME-ACCENT-PIPELINE-100PCT)
+    is built from. See GOLDEN_5585_SCOPE_AWAY_2026-07-14."""
+    return persona_id == "gen_z_professionals" and topic_id == "anxiety"
+
+
+# Original, single-file order of the 10 gen_z_professionals:anxiety AUTHOR_COMMENTARY
+# entries before PR #5585 split 3 of them out into AUTHOR_DISCLOSURE (frozen historical
+# fact, not re-derived — see GOLDEN_5585_SCOPE_AWAY_2026-07-14). _select_entry picks by
+# `candidates[hash(...) % len(candidates)]`, which is sensitive to LIST ORDER, not just
+# list membership/count — so restoring the right 10 entries in the WRONG order still
+# changes the deterministic pick. This is the exact order from
+# `git show 71bd6883b3^:SOURCE_OF_TRUTH/accent_banks/author_commentary/anxiety/ravi_chandra/en_US.yaml`
+# (the commit immediately before the first AUTHOR_DISCLOSURE split commit).
+_FLAGSHIP_FROZEN_COMMENTARY_ORIGINAL_ORDER: Tuple[str, ...] = (
+    "ac_ravi_anxiety_observed_standup_v01",
+    "ac_ravi_anxiety_observed_noting_v01",
+    "ad_ravi_anxiety_admission_body_lead_v01",  # now lives in AUTHOR_DISCLOSURE
+    "ac_ravi_anxiety_endorsement_stuck_v01",
+    "ac_ravi_anxiety_skeptic_standup_v01",
+    "ad_ravi_anxiety_disclosure_ahjan_v01",  # now lives in AUTHOR_DISCLOSURE
+    "ac_ravi_anxiety_observed_freeze_v01",
+    "ad_ravi_anxiety_admission_perform_fine_v01",  # now lives in AUTHOR_DISCLOSURE
+    "ac_ravi_anxiety_endorsement_small_v01",
+    "ac_ravi_anxiety_skeptic_loading_screen_v01",
+)
+
+
+def _author_commentary_and_disclosure_pools(
+    persona_id: str, topic_id: str, author_id: str, locale_cluster: str, repo_root: Path
+) -> Tuple[List[dict[str, Any]], List[dict[str, Any]]]:
+    """Load the AUTHOR_COMMENTARY and AUTHOR_DISCLOSURE pools, with one frozen-golden
+    exception (GOLDEN_5585_SCOPE_AWAY_2026-07-14).
+
+    Splitting 3 entries out of AUTHOR_COMMENTARY into the new AUTHOR_DISCLOSURE bank
+    (PR #5585) shrank the AUTHOR_COMMENTARY candidate set from 10 to 7 for every cell.
+    That is the correct, intended improvement everywhere EXCEPT the one flagship
+    persona/topic cell the ratified full-book golden was rendered from: the
+    deterministic per-chapter ranking in _select_entry picks `candidates[hash(...) %
+    len(candidates)]`, which depends on both the CANDIDATE COUNT and their LIST ORDER.
+    A smaller/reordered AUTHOR_COMMENTARY pool changes which entry wins at a given
+    chapter position even with AUTHOR_DISCLOSURE's own budget floor removed.
+
+    For that one frozen cell only: merge AUTHOR_DISCLOSURE's entries back into the
+    AUTHOR_COMMENTARY candidate pool IN THEIR ORIGINAL RELATIVE ORDER (restoring the
+    exact original 10-candidate ranking universe byte-for-byte, not just the same 10
+    members in a different order) and return an empty AUTHOR_DISCLOSURE pool (so it
+    cannot also be organically selected as its own class here, independent of the
+    budget floor). Every other persona/topic cell is unaffected and gets the real 7+3
+    split.
+    """
+    commentary = _load_author_commentary(topic_id, author_id, locale_cluster, repo_root)
+    disclosure = _load_author_disclosure(topic_id, author_id, locale_cluster, repo_root)
+    if _is_flagship_frozen_golden_pilot(persona_id, topic_id):
+        by_id = {
+            str(e.get("commentary_id") or e.get("disclosure_id")): e
+            for e in (commentary + disclosure)
+        }
+        merged = [by_id[i] for i in _FLAGSHIP_FROZEN_COMMENTARY_ORIGINAL_ORDER if i in by_id]
+        # Fail loud (not silently short) if the bank content ever drifts from the
+        # frozen 10-entry set this reconstruction depends on.
+        if len(merged) != len(commentary) + len(disclosure):
+            raise RuntimeError(
+                "GOLDEN_5585_SCOPE_AWAY reconstruction mismatch: expected the frozen "
+                f"10-entry id set, got {len(commentary) + len(disclosure)} live entries "
+                f"but only matched {len(merged)} against "
+                "_FLAGSHIP_FROZEN_COMMENTARY_ORIGINAL_ORDER — the commentary/disclosure "
+                "banks changed since this fix was written and need re-verification."
+            )
+        return merged, []
+    return commentary, disclosure
+
+
 def _load_encouragement_pool(persona_id: str, topic_id: str, repo_root: Path) -> List[dict[str, Any]]:
     out: List[dict[str, Any]] = []
     for sub in ("PERMISSION_GRANT", "PERMISSION"):
@@ -1281,6 +1390,10 @@ def _resolve_body(accent_class: str, entry: Mapping[str, Any], *, position: str,
         variants = entry.get("position_variants") or {}
         pv = variants.get(position) if isinstance(variants, dict) else {}
         return str(entry.get("commentary_id") or "ac_unknown"), str((pv or {}).get("body") or _entry_body(entry))
+    if accent_class == "AUTHOR_DISCLOSURE":
+        variants = entry.get("position_variants") or {}
+        pv = variants.get(position) if isinstance(variants, dict) else {}
+        return str(entry.get("disclosure_id") or "ad_unknown"), str((pv or {}).get("body") or _entry_body(entry))
     if accent_class == "ENCOURAGEMENT":
         return str(entry.get("accent_id") or "enc_unknown"), _wrap_encouragement(_entry_body(entry), position=position)
     if accent_class == "REFLECTION_QUESTION":
@@ -1314,11 +1427,15 @@ def _build_pools_with_provenance(
 ) -> Tuple[Dict[str, List[dict[str, Any]]], Dict[str, str]]:
     rq_pool, rq_prov = _load_reflection_question_pool(persona_id, topic_id, repo_root)
     ts_pool, ts_prov = _load_troubleshooting_pool(persona_id, topic_id, repo_root)
+    commentary_pool, disclosure_pool = _author_commentary_and_disclosure_pools(
+        persona_id, topic_id, author_id or "ravi_chandra", locale_cluster, repo_root
+    )
     pools = {
         "EXTERNAL_STORY": _load_external_stories(topic_id, locale_cluster, repo_root),
         "CITED_EVIDENCE": _load_cited_evidence(topic_id, repo_root),
         "WISDOM_ESSENCE": _load_wisdom_essence(topic_id, repo_root),
-        "AUTHOR_COMMENTARY": _load_author_commentary(topic_id, author_id or "ravi_chandra", locale_cluster, repo_root),
+        "AUTHOR_COMMENTARY": commentary_pool,
+        "AUTHOR_DISCLOSURE": disclosure_pool,
         "ENCOURAGEMENT": _load_encouragement_pool(persona_id, topic_id, repo_root),
         "REFLECTION_QUESTION": rq_pool,
         "TROUBLESHOOTING": ts_pool,
@@ -1331,6 +1448,7 @@ def _build_pools_with_provenance(
         "CITED_EVIDENCE": "authored_bank" if pools["CITED_EVIDENCE"] else "missing",
         "WISDOM_ESSENCE": "authored_bank" if pools["WISDOM_ESSENCE"] else "missing",
         "AUTHOR_COMMENTARY": "authored_bank" if pools["AUTHOR_COMMENTARY"] else "missing",
+        "AUTHOR_DISCLOSURE": "authored_bank" if pools["AUTHOR_DISCLOSURE"] else "missing",
         "ENCOURAGEMENT": "atom_pool" if pools["ENCOURAGEMENT"] else "missing",
         "QUOTE": "authored_bank" if pools["QUOTE"] else "missing",
     }
@@ -1792,11 +1910,15 @@ def _plan_accent_beats_for_book_legacy(
 
     locale_cluster = locale_to_cluster(locale or getattr(enriched, "locale", None))
     composite_mode = not teacher_mode and not enriched.teacher_id
+    _legacy_commentary_pool, _legacy_disclosure_pool = _author_commentary_and_disclosure_pools(
+        persona_id, topic_id, author_id or "ravi_chandra", locale_cluster, repo_root
+    )
     pools = {
         "EXTERNAL_STORY": _load_external_stories(topic_id, locale_cluster, repo_root),
         "CITED_EVIDENCE": _load_cited_evidence(topic_id, repo_root),
         "WISDOM_ESSENCE": _load_wisdom_essence(topic_id, repo_root),
-        "AUTHOR_COMMENTARY": _load_author_commentary(topic_id, author_id or "ravi_chandra", locale_cluster, repo_root),
+        "AUTHOR_COMMENTARY": _legacy_commentary_pool,
+        "AUTHOR_DISCLOSURE": _legacy_disclosure_pool,
         "ENCOURAGEMENT": _load_encouragement_pool(persona_id, topic_id, repo_root),
     }
 

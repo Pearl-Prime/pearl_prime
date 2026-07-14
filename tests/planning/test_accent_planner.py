@@ -334,6 +334,35 @@ def test_anxiety_pilot_authored_rq_ts_lands_without_fallback():
     v21 = (planned.spine_context or {}).get("enhancement_contract_v21") or {}
     tracked = {row["surface"]: row for row in (v21.get("tracked_surfaces") or [])}
     assert tracked["AUTHOR_DISCLOSURE"]["bucket"] == "proof_and_embodiment"
+
+    # AUTHOR_DISCLOSURE is wired and selectable in general (ALL_ACCENT_CLASSES,
+    # selection pools, ACCENT_SELECTION_ORDER all include it), but this exact
+    # pilot cell (gen_z_professionals:anxiety) fully excludes it — see
+    # _author_commentary_and_disclosure_pools() in accent_planner.py,
+    # GOLDEN_5585_SCOPE_AWAY_2026-07-14. This cell is the flagship full-book
+    # golden's plan_id (gen_z_professionals_anxiety_twelve_shape_v2, ratified
+    # OPD-20260711-PROPRIME-ACCENT-PIPELINE-100PCT). Removing only the
+    # guaranteed-minimum floor was NOT sufficient to restore byte parity:
+    # splitting 3 entries out of AUTHOR_COMMENTARY (10 -> 7 candidates) changed
+    # deterministic per-chapter ranking among the REMAINING commentary
+    # candidates too, independent of whether AUTHOR_DISCLOSURE itself is
+    # floored. The real fix merges those 3 entries back into the
+    # AUTHOR_COMMENTARY candidate pool for THIS cell only (restoring the
+    # original 10-candidate ranking universe byte-for-byte) and returns an
+    # empty AUTHOR_DISCLOSURE pool here, so provenance is honestly "missing"
+    # for this one cell, not "authored_bank" — every other persona/topic cell
+    # still gets the real 7+3 split with AUTHOR_DISCLOSURE genuinely available.
+    ad_rows = [r for r in plan.flat_rows if r.get("class") == "AUTHOR_DISCLOSURE"]
+    assert not ad_rows, (
+        "AUTHOR_DISCLOSURE must NOT be selected for gen_z_professionals:anxiety — "
+        "this pilot cell is scoped away to protect the frozen flagship golden"
+    )
+    assert provenance.get("AUTHOR_DISCLOSURE") == "missing", (
+        "for this one frozen cell, AUTHOR_DISCLOSURE's pool is genuinely empty "
+        "(merged back into AUTHOR_COMMENTARY for ranking purposes) — provenance "
+        "should say so honestly rather than claim authored_bank while selecting zero"
+    )
+
     assert tracked["TROUBLESHOOTING"]["bucket"] == "chapter_engine"
     assert tracked["EXTERNAL_STORY"]["bucket"] == "proof_and_embodiment"
     ext_rows = [r for r in plan.flat_rows if r.get("class") == "EXTERNAL_STORY"]
