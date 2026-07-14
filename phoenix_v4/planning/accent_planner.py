@@ -1002,7 +1002,7 @@ def _author_commentary_and_disclosure_pools(
     """
     commentary = _load_author_commentary(topic_id, author_id, locale_cluster, repo_root)
     disclosure = _load_author_disclosure(topic_id, author_id, locale_cluster, repo_root)
-    if _is_flagship_frozen_golden_pilot(persona_id, topic_id):
+    if author_id == "ravi_chandra" and _is_flagship_frozen_golden_pilot(persona_id, topic_id):
         by_id = {
             str(e.get("commentary_id") or e.get("disclosure_id")): e
             for e in (commentary + disclosure)

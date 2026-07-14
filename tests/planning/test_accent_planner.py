@@ -110,6 +110,33 @@ def test_anxiety_pilot_budget_includes_rq_and_ts():
     assert budget.get("EXTERNAL_STORY", 0) >= 2
 
 
+def test_flagship_frozen_golden_reconstruction_is_ravi_only():
+    from phoenix_v4.planning.accent_planner import _author_commentary_and_disclosure_pools
+
+    commentary, disclosure = _author_commentary_and_disclosure_pools(
+        "gen_z_professionals",
+        "anxiety",
+        "lena_thorne",
+        "en_US",
+        REPO_ROOT,
+    )
+
+    assert len(commentary) == 10
+    assert disclosure == []
+    assert {row.get("commentary_id") for row in commentary} == {
+        "ac_lena_anxiety_observed_charting_v01",
+        "ac_lena_anxiety_observed_small_practice_v01",
+        "ac_lena_anxiety_admission_panic_ended_it_v01",
+        "ac_lena_anxiety_endorsement_helpers_v01",
+        "ac_lena_anxiety_skeptic_monitor_v01",
+        "ac_lena_anxiety_disclosure_ahjan_v01",
+        "ac_lena_anxiety_observed_freeze_v01",
+        "ac_lena_anxiety_admission_perform_steady_v01",
+        "ac_lena_anxiety_endorsement_small_v01",
+        "ac_lena_anxiety_skeptic_hand_on_chest_v01",
+    }
+
+
 def test_allowed_positions_rejects_illegal_placement():
     from phoenix_v4.planning.accent_planner import _position_fit_ok
 
