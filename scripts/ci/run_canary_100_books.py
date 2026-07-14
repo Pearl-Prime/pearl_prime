@@ -152,6 +152,7 @@ def main() -> int:
             "--persona", persona,
             "--arc", str(arc_path),
             "--out", str(plan_path),
+            "--no-job-check",
             "--no-generate-freebies",
             "--no-update-freebie-index",
         ]

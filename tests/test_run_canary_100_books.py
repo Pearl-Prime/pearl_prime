@@ -35,6 +35,7 @@ def test_canary_uses_no_update_freebie_index(monkeypatch, tmp_path: Path) -> Non
 
     assert exit_code == 0
     assert recorded_cmds
+    assert "--no-job-check" in recorded_cmds[0]
     assert "--no-generate-freebies" in recorded_cmds[0]
     assert "--no-update-freebie-index" in recorded_cmds[0]
 
