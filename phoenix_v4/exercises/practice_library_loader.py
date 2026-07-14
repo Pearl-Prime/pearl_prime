@@ -31,8 +31,9 @@ INBOX_ROOT = REPO_ROOT / "SOURCE_OF_TRUTH" / "practice_library" / "inbox"
 COMPONENT_TEMPLATES_PATH = REPO_ROOT / "config" / "pearl_practice" / "component_templates.yaml"
 EXERCISE_TEMPLATES_PATH = REPO_ROOT / "config" / "pearl_practice" / "exercise_templates.yaml"
 
-# Cache
-_LIBRARY_CACHE: Optional[dict[str, list[dict]]] = None
+# Cache — keyed by locale ('en-US' for base) so a zh-TW render can't be served
+# an already-cached English library (or vice-versa).
+_LIBRARY_CACHE: dict[str, dict[str, list[dict]]] = {}
 _TEMPLATES_CACHE: Optional[dict] = None
 
 
@@ -50,24 +51,35 @@ def _deterministic_index(seed: str, pool_size: int) -> int:
     return int.from_bytes(digest[:8], "big") % pool_size
 
 
-def load_practice_library() -> dict[str, list[dict]]:
+def load_practice_library(locale: str | None = None) -> dict[str, list[dict]]:
     """Load all production-ready exercises from inbox, indexed by exercise_type.
+
+    Locale-aware: when ``locale`` is set and not 'en-US', reads the localized
+    inbox at ``SOURCE_OF_TRUTH/practice_library/locales/{locale}/inbox/`` when it
+    exists, otherwise the base English inbox (honest fallback). Cached per locale.
 
     Returns:
         Dict keyed by exercise_type (e.g., "body_awareness") -> list of exercise dicts.
         Each exercise dict has: id, name, text, exercise_type, components, duration_seconds, tags.
     """
-    global _LIBRARY_CACHE
-    if _LIBRARY_CACHE is not None:
-        return _LIBRARY_CACHE
+    cache_key = locale or "en-US"
+    cached = _LIBRARY_CACHE.get(cache_key)
+    if cached is not None:
+        return cached
+
+    inbox = INBOX_ROOT
+    if locale and locale != "en-US":
+        loc_inbox = REPO_ROOT / "SOURCE_OF_TRUTH" / "practice_library" / "locales" / locale / "inbox"
+        if loc_inbox.is_dir():
+            inbox = loc_inbox
 
     library: dict[str, list[dict]] = {}
 
-    if not INBOX_ROOT.exists():
-        logger.warning("Practice library inbox not found: %s", INBOX_ROOT)
+    if not inbox.exists():
+        logger.warning("Practice library inbox not found: %s", inbox)
         return library
 
-    for json_path in sorted(INBOX_ROOT.glob("*_PRODUCTION_READY.json")):
+    for json_path in sorted(inbox.glob("*_PRODUCTION_READY.json")):
         try:
             with open(json_path, encoding="utf-8") as f:
                 data = json.load(f)
@@ -94,8 +106,11 @@ def load_practice_library() -> dict[str, list[dict]]:
             library[ex_type].append(item)
 
     total = sum(len(v) for v in library.values())
-    logger.info("Loaded practice library: %d exercises across %d types", total, len(library))
-    _LIBRARY_CACHE = library
+    logger.info(
+        "Loaded practice library (locale=%s): %d exercises across %d types",
+        cache_key, total, len(library),
+    )
+    _LIBRARY_CACHE[cache_key] = library
     return library
 
 
@@ -159,6 +174,7 @@ def compose_exercise(
     templates: Optional[dict] = None,
     *,
     content_only: bool = False,
+    locale: str | None = None,
 ) -> str:
     """Compose a full exercise with bridge + introduction + intro + description + aha + integration.
 
@@ -180,7 +196,7 @@ def compose_exercise(
     Returns:
         Fully composed exercise text ready for rendering.
     """
-    templates = templates or load_component_templates()
+    templates = templates or load_component_templates(locale=locale)
 
     name = exercise.get("name", "Exercise")
     description = exercise.get("text", "")
@@ -297,15 +313,16 @@ def get_exercise_for_chapter(
     persona_id: str,
     seed: str,
     used_exercise_ids: Optional[set] = None,
+    locale: str | None = None,
 ) -> Optional[str]:
     """Get a fully composed exercise for a chapter position.
 
     Selects from the full 272-exercise library, avoiding repeats within a book.
     Returns composed text (bridge + intro + description + aha + integration)
-    or None if no exercises available.
+    or None if no exercises available. Locale-aware end to end.
     """
-    library = load_practice_library()
-    templates = load_component_templates()
+    library = load_practice_library(locale=locale)
+    templates = load_component_templates(locale=locale)
     used = used_exercise_ids or set()
 
     # Flatten all exercises into one pool

@@ -204,6 +204,7 @@ def _extract_character(text: str) -> Optional[str]:
 def _load_atoms_for_engine(
     base: Path,
     engine: str,
+    locale: Optional[str] = None,
 ) -> List[AtomFile]:
     atoms: List[AtomFile] = []
     engine_dir = base / engine
@@ -217,6 +218,18 @@ def _load_atoms_for_engine(
             text = f.read_text(encoding="utf-8").strip()
             if not text:
                 continue
+            # character / variant / word_count derive from the English source so
+            # story selection stays deterministic and locale-independent. Only the
+            # RENDERED text is swapped to the localized sibling when one exists at
+            # {arc_pos}/locales/{locale}/micro/{stem}.txt; otherwise English is kept
+            # (honest fallback, flagged by the locale-fallback gate). en-US: byte-identical.
+            render_text = text
+            if locale and locale != "en-US":
+                loc_f = engine_dir / arc_pos / "locales" / locale / "micro" / f.name
+                if loc_f.is_file():
+                    loc_text = loc_f.read_text(encoding="utf-8").strip()
+                    if loc_text:
+                        render_text = loc_text
             atoms.append(
                 AtomFile(
                     path=f,
@@ -225,7 +238,7 @@ def _load_atoms_for_engine(
                     variant=f.stem,
                     character=_extract_character(text) or "unknown",
                     word_count=len(text.split()),
-                    text=text,
+                    text=render_text,
                 )
             )
     return atoms
@@ -236,13 +249,14 @@ def _load_all_atoms(
     topic: str,
     repo_root: Path,
     engines: Optional[List[str]] = None,
+    locale: Optional[str] = None,
 ) -> List[AtomFile]:
     base = repo_root / "story_atoms" / persona_id / "anchored" / topic
     if not base.is_dir():
         return []
     all_atoms: List[AtomFile] = []
     for engine in (engines or _DEFAULT_ENGINES):
-        all_atoms.extend(_load_atoms_for_engine(base, engine))
+        all_atoms.extend(_load_atoms_for_engine(base, engine, locale=locale))
     return all_atoms
 
 
@@ -658,6 +672,7 @@ def build_story_schedule(
     runtime_format: str = "",
     planner_warnings: Optional[List[str]] = None,
     continuity_plan: Optional[List[dict]] = None,
+    locale: Optional[str] = None,
 ) -> StorySchedule:
     """Build a full-book story schedule: 3-6 full-arch stories per phase.
 
@@ -673,7 +688,7 @@ def build_story_schedule(
         n_per_phase: number of full stories per book phase (3-6)
         phase_chapters: override the default HARDSHIP/HELP/HEALING/HOPE chapter ranges
     """
-    all_atoms = _load_all_atoms(persona_id, topic, repo_root)
+    all_atoms = _load_all_atoms(persona_id, topic, repo_root, locale=locale)
     if not all_atoms:
         return StorySchedule()
 

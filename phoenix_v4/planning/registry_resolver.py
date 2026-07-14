@@ -529,17 +529,26 @@ def _parse_canonical_txt(
 def _load_composite_doctrine_atoms(
     topic_id: str,
     repo_root: Optional[Path] = None,
+    locale: Optional[str] = None,
 ) -> dict[str, list[dict]]:
-    """Load topic-scoped composite teacher doctrine/reflection from CANONICAL.txt."""
+    """Load topic-scoped composite teacher doctrine/reflection from CANONICAL.txt.
+
+    Locale-aware: when ``locale`` is set and not 'en-US', reads the localized
+    ``{dir}/locales/{locale}/CANONICAL.txt`` when present, otherwise falls back
+    to the base English ``CANONICAL.txt`` (mirrors persona-atom locale threading
+    via ``_locale_canonical_path``). en-US behaviour is unchanged.
+    """
     topic = (topic_id or "").strip()
     if not topic:
         return {}
     root = (repo_root or REPO_ROOT) / "SOURCE_OF_TRUTH" / "composite_doctrine" / topic
     atoms: dict[str, list[dict]] = {}
-    doctrine_blocks = _parse_canonical_txt(root / "CANONICAL.txt")
+    doctrine_blocks = _parse_canonical_txt(_locale_canonical_path(root, locale))
     if doctrine_blocks:
         atoms["COMPOSITE_TEACHER_DOCTRINE"] = doctrine_blocks
-    reflection_blocks = _parse_canonical_txt(root / "REFLECTION" / "CANONICAL.txt")
+    reflection_blocks = _parse_canonical_txt(
+        _locale_canonical_path(root / "REFLECTION", locale)
+    )
     if reflection_blocks:
         atoms["COMPOSITE_TEACHER_REFLECTION"] = reflection_blocks
     if atoms:

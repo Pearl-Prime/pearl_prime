@@ -1557,6 +1557,17 @@ def _read_text_atom(path: Path) -> str:
     return path.read_text(encoding="utf-8").strip()
 
 
+def _locale_file_path(base_dir: Path, filename: str, locale: Optional[str]) -> Path:
+    """Prefer base_dir/locales/{locale}/{filename} when it exists and
+    locale != 'en-US'; otherwise the base English file. Generic over filename
+    (CANONICAL.txt for ANGLE_DEFINITION, level_N.yaml for ANGLE_CALLBACK)."""
+    if locale and locale != "en-US":
+        lp = base_dir / "locales" / locale / filename
+        if lp.exists():
+            return lp
+    return base_dir / filename
+
+
 def _try_angle_definition(
     *,
     persona_id: str,
@@ -1564,12 +1575,13 @@ def _try_angle_definition(
     angle_id: str,
     repo_root: Path,
     fallback_warnings: List[str],
+    locale: Optional[str] = None,
 ) -> Optional[Tuple[str, str, str]]:
     aid = (angle_id or "").strip()
     if not aid or not persona_id or not topic_id:
         return None
-    base = repo_root / "atoms" / persona_id / topic_id / "ANGLE_DEFINITION" / aid / "CANONICAL.txt"
-    body = _read_text_atom(base)
+    base_dir = repo_root / "atoms" / persona_id / topic_id / "ANGLE_DEFINITION" / aid
+    body = _read_text_atom(_locale_file_path(base_dir, "CANONICAL.txt", locale))
     if body:
         return body, "angle_atom", f"angle_def:{aid}"
     meta = _angle_entry_meta(aid)
@@ -1578,8 +1590,8 @@ def _try_angle_definition(
 
     fam = family_default_angle_id(lens) if lens else None
     if fam and fam != aid:
-        fam_path = repo_root / "atoms" / persona_id / topic_id / "ANGLE_DEFINITION" / fam / "CANONICAL.txt"
-        body = _read_text_atom(fam_path)
+        fam_dir = repo_root / "atoms" / persona_id / topic_id / "ANGLE_DEFINITION" / fam
+        body = _read_text_atom(_locale_file_path(fam_dir, "CANONICAL.txt", locale))
         if body:
             fallback_warnings.append(
                 f"ANGLE_DEFINITION: family default {fam!r} for {aid!r}"
@@ -1605,11 +1617,13 @@ def _try_angle_callback(
     layer: int,
     repo_root: Path,
     fallback_warnings: List[str],
+    locale: Optional[str] = None,
 ) -> Optional[Tuple[str, str, str]]:
     aid = (angle_id or "").strip()
     if not aid or not persona_id or not topic_id or layer < 1:
         return None
-    path = repo_root / "atoms" / persona_id / topic_id / "ANGLE_CALLBACK" / aid / f"level_{layer}.yaml"
+    _cb_dir = repo_root / "atoms" / persona_id / topic_id / "ANGLE_CALLBACK" / aid
+    path = _locale_file_path(_cb_dir, f"level_{layer}.yaml", locale)
     if path.exists():
         data = _load_yaml(path)
         if isinstance(data, dict):
@@ -1622,7 +1636,8 @@ def _try_angle_callback(
 
     fam = family_default_angle_id(lens) if lens else None
     if fam and fam != aid:
-        fam_path = repo_root / "atoms" / persona_id / topic_id / "ANGLE_CALLBACK" / fam / f"level_{layer}.yaml"
+        _fam_dir = repo_root / "atoms" / persona_id / topic_id / "ANGLE_CALLBACK" / fam
+        fam_path = _locale_file_path(_fam_dir, f"level_{layer}.yaml", locale)
         if fam_path.exists():
             data = _load_yaml(fam_path)
             if isinstance(data, dict):
@@ -1647,14 +1662,15 @@ def _try_angle_callback(
     for candidate in chain:
         if candidate == aid:
             continue
-        parent_path = (
+        parent_path = _locale_file_path(
             repo_root
             / "atoms"
             / persona_id
             / topic_id
             / "ANGLE_CALLBACK"
-            / candidate
-            / f"level_{layer}.yaml"
+            / candidate,
+            f"level_{layer}.yaml",
+            locale,
         )
         if not parent_path.exists():
             continue
@@ -1702,6 +1718,7 @@ def _try_practice_library_by_id(
     seed: str,
     *,
     content_only: bool = False,
+    locale: Optional[str] = None,
 ) -> Optional[Tuple[str, str]]:
     """Compose a specific practice_library exercise (full or content-only assembly)."""
     try:
@@ -1711,7 +1728,7 @@ def _try_practice_library_by_id(
             load_practice_library,
         )
 
-        library = load_practice_library()
+        library = load_practice_library(locale=locale)
         all_exercises: List[dict] = []
         for exercises in library.values():
             if isinstance(exercises, list):
@@ -1724,8 +1741,9 @@ def _try_practice_library_by_id(
             exercise,
             chapter_index,
             seed,
-            load_component_templates(),
+            load_component_templates(locale=locale),
             content_only=content_only,
+            locale=locale,
         )
         if composed and composed.strip():
             return composed.strip(), exercise_id
@@ -1739,6 +1757,7 @@ def _try_practice_library(
     topic_id: str,
     persona_id: str,
     seed: str,
+    locale: Optional[str] = None,
 ) -> Optional[Tuple[str, str]]:
     try:
         from phoenix_v4.exercises.practice_library_loader import get_exercise_for_chapter
@@ -1748,6 +1767,7 @@ def _try_practice_library(
             topic_id=topic_id,
             persona_id=persona_id or "",
             seed=seed,
+            locale=locale,
         )
         if composed and composed.strip():
             return composed.strip(), "practice_library"
@@ -2339,7 +2359,7 @@ def peek_registry_content_for_beatmap_slot(
                 content = p_hit[0]
 
         if not content and stype == "EXERCISE":
-            pl = _try_practice_library(chapter_index0, topic, persona_id, seed)
+            pl = _try_practice_library(chapter_index0, topic, persona_id, seed, locale=request.locale)
             if pl:
                 content = pl[0]
 
@@ -2369,7 +2389,9 @@ def select_enrichment(
     sections_root = reg.get("sections") or {}
     teacher_atoms: Dict[str, List[dict]] = _load_teacher_atoms(tid) if tid else {}
     composite_atoms: Dict[str, List[dict]] = (
-        _load_composite_doctrine_atoms(topic, repo_root=root) if not tid else {}
+        _load_composite_doctrine_atoms(topic, repo_root=root, locale=request.locale)
+        if not tid
+        else {}
     )
     pid = (persona_id or "").strip()
     locale = request.locale
@@ -2512,6 +2534,7 @@ def select_enrichment(
         continuity_plan=plan_context.get("chapter_continuity_plan")
         if is_twelve_shape_continuity_active(plan_context)
         else None,
+        locale=locale,
     )
 
     from phoenix_v4.planning.adjacency_selector import is_adjacency_selector_active
@@ -2587,6 +2610,7 @@ def select_enrichment(
                         angle_id=_angle_for_slot,
                         repo_root=root,
                         fallback_warnings=_angle_fallback_warnings,
+                        locale=locale,
                     )
                 else:
                     _ad = None
@@ -2603,6 +2627,7 @@ def select_enrichment(
                         layer=int(_layer),
                         repo_root=root,
                         fallback_warnings=_angle_fallback_warnings,
+                        locale=locale,
                     )
                     if _ac:
                         content, source, source_id = _ac[0], _ac[1], _ac[2]
@@ -2669,6 +2694,7 @@ def select_enrichment(
                             chapter_index0,
                             seed,
                             content_only=(chapter_index0 == 0),
+                            locale=request.locale,
                         )
                         if _pl_by_id:
                             _add_pieces.append(_pl_by_id[0])
@@ -2774,7 +2800,7 @@ def select_enrichment(
                                 _note_primary_body(_book_seen_bodies, _ap_content)
                     if not _add_pieces:
                         # Final EXERCISE fallback: practice_library (unchanged path).
-                        _apl = _try_practice_library(chapter_index0, topic, persona_id, seed)
+                        _apl = _try_practice_library(chapter_index0, topic, persona_id, seed, locale=request.locale)
                         if _apl:
                             _add_pieces.append(_apl[0])
                             _add_sources.append("practice_library")
