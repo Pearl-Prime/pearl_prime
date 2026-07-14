@@ -1,7 +1,7 @@
 # 07 - Unblock Final Auditor Handoff
 
 STATUS=MERGED
-PR=pending-final-audit-pr
+PR=https://github.com/Ahjan108/phoenix_omega_v4.8/pull/5663
 MERGE_SHA=pending-final-audit-pr-merge
 SIGNAL: old-chat-unblock-final-terminal=pending-final-audit-pr-merge
 
