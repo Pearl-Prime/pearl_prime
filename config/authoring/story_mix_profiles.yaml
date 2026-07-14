@@ -2,6 +2,15 @@
 # Authority: specs/EXTERNAL_STORIES_BANK_SPEC.md §4
 # Status: LIVE — phoenix_v4/planning/accent_planner.py applies type_weights /
 # emotional_weights when scoring EXTERNAL_STORY under enrichment_contract_v1.
+#
+# NOTE (V2.1 writer doctrine, docs/ENHANCEMENT_CONTRACT_V2_WORKING_PRIORS_2026-07-13.md):
+# EXTERNAL_STORY (this file's subject) is `proof_and_embodiment`, not an `optional_accent` —
+# it is not sparsity-governed the way QUOTE/ENCOURAGEMENT/REFLECTION_QUESTION are.
+# `dosage_envelope.TROUBLESHOOTING` below is `chapter_engine`, also not accent-sparse.
+# The V2.1 authority doc's per-profile `max_accent_chapter_share` values (0.35 / 0.55 / 0.40)
+# describe the `optional_accents` layer only and are narrower than this file's legacy
+# `max_accent_chapter_share` field, which predates the layer split — do not conflate the two
+# when authoring; see specs/ACCENT_BEATS_SYSTEM_SPEC.md §0.1 and §4.2a.
 
 schema_version: "1.0.0"
 

@@ -1,5 +1,12 @@
 # Bestseller enrichment signature exemplars — used by accent_planner alignment report.
 # Without this file, alignment status must WARN (budget-fill only, not exemplar match).
+#
+# NOTE (V2.1 writer doctrine, docs/ENHANCEMENT_CONTRACT_V2_WORKING_PRIORS_2026-07-13.md):
+# `accent_counts` below is a flat legacy key retained for accent_planner.py compatibility.
+# For authoring purposes, only QUOTE / ENCOURAGEMENT / REFLECTION_QUESTION / AUTHOR_COMMENTARY /
+# WISDOM_ESSENCE are `optional_accents` (sparse). TROUBLESHOOTING, CITED_EVIDENCE, and
+# EXTERNAL_STORY are `chapter_engine` / `proof_and_embodiment` — not sparsity-governed, do not
+# treat their counts here as accent budget. See specs/ACCENT_BEATS_SYSTEM_SPEC.md §0.1.
 schema_version: "1.0.0"
 
 profiles:
