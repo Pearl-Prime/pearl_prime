@@ -127,6 +127,13 @@ def main() -> int:
                 return 1
 
     samples = _sample_arcs(args.n, args.seed, selected_formats or None)
+    if not samples and selected_formats:
+        print(
+            "No arcs matched analyzer-selected format IDs "
+            f"{selected_formats}; falling back to unfiltered arc sample.",
+            file=sys.stderr,
+        )
+        samples = _sample_arcs(args.n, args.seed, None)
     if not samples:
         print("No arcs found", file=sys.stderr)
         return 1
