@@ -111,3 +111,25 @@ python3 scripts/freebies/validate_campaign_plan.py --brand-id way_stream_sanctua
 ```
 
 Plan source: `config/freebies/waystream_evergreen_campaign_plan.yaml`.
+
+
+## Post-Experience Report Unlock Fields
+
+The updated Waystream flow no longer asks for email before the visitor uses the tool. The visitor completes the tool, sees the report offer, chooses a delivery channel, consents, and then submits the report unlock payload.
+
+Add these custom fields in addition to the existing campaign fields:
+
+| JSON key | Custom field name |
+| --- | --- |
+| `delivery_channel` | `delivery_channel` |
+| `delivery_address` | `delivery_address` |
+| `channel_consent` | `channel_consent` |
+| `report_id` | `report_id` |
+| `report_variant` | `report_variant` |
+| `report_summary` | `report_summary` |
+| `completed_at` | `completed_at` |
+| `completion_duration_seconds` | `completion_duration_seconds` |
+| `ab_variant` | `ab_variant` |
+| `result_summary` | `result_summary` |
+
+Test one lead per channel using dry-run or sandbox delivery first. Do not paste webhook URLs into tickets, docs, or screenshots.

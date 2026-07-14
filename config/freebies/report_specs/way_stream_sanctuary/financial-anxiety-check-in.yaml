@@ -1,0 +1,37 @@
+schema_version: 1
+brand_id: way_stream_sanctuary
+source_page_slug: financial-anxiety-check-in
+topic: financial_anxiety
+freebie_id: anxiety_assessment_v1
+quiz_id: financial_checkin
+completion_copy: You completed the check-in.
+report_title: Your Money Anxiety Report
+report_sections:
+- id: completion_reflection
+  purpose: Acknowledge the completed tool and mirror the user's effort.
+- id: answer_pattern
+  purpose: Summarize answer themes without exposing raw private text in previews.
+- id: somatic_signal
+  purpose: Name a possible body cue.
+- id: nervous_system_cue
+  purpose: Offer one regulation-oriented next cue.
+- id: psychological_reflection
+  purpose: Frame the pattern as reflective, not diagnostic.
+- id: spiritual_question
+  purpose: Offer a gentle inquiry without deterministic prediction.
+- id: next_week_reflective_forecast
+  purpose: Where the money signal and the fear story may separate.
+- id: recommended_practice
+  purpose: Pair one grounding breath with one concrete money action.
+insight_logic:
+  inputs:
+  - answers_json
+  - score
+  - score_band
+  - result_summary
+  method: Combine score/result bands with answer themes; if answers are sparse, use the completion state
+    and topic default.
+delivery_opening: You completed the check-in. Here is the Waystream report your tool unlocked.
+cta_copy: Send my personalized report
+claims_boundary: Educational and reflective only; not clinical advice, not therapy replacement, and no
+  healing, financial result, or medical promise.

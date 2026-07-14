@@ -1,7 +1,7 @@
 {
   "brand_id": "way_stream_sanctuary",
   "campaign_model": "evergreen_form_submit",
-  "checked_at": "2026-07-13T09:48:56.696925+00:00",
+  "checked_at": "2026-07-14T08:12:47.888690+00:00",
   "embedded_campaign_plan_mismatches": [],
   "expected_page_count": 15,
   "extra_pages": [],
@@ -35,8 +35,13 @@
   "secret_scan": {
     "full_webhook_url_files": [],
     "roots": [
-      "docs",
-      "artifacts",
+      "brand-wizard-app/public/free/way_stream_sanctuary",
+      "docs/ghl",
+      "docs/freebies",
+      "docs/integrations",
+      "docs/runbooks",
+      "artifacts/coordination/handoffs",
+      "artifacts/qa/freebie_post_experience_capture_20260714",
       "tests"
     ]
   }

@@ -55,6 +55,20 @@
     'bonus_pre_e3_html_template',
     'bonus_pre_e3_send_if_welcome_depth_missing',
   ];
+  var REPORT_PAYLOAD_FIELDS = [
+    'delivery_channel',
+    'delivery_address',
+    'channel_consent',
+    'report_id',
+    'report_variant',
+    'report_summary',
+    'completed_at',
+    'completion_duration_seconds',
+    'ab_variant',
+    'source_page_slug',
+    'freebie_id',
+    'result_summary',
+  ];
   for (var campaignIndex = 1; campaignIndex <= 9; campaignIndex += 1) {
     CAMPAIGN_SLOT_FIELDS.forEach(function (field) {
       CAMPAIGN_REQUIRED_FIELDS.push('e' + campaignIndex + '_' + field);
@@ -79,8 +93,38 @@
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(email || '').trim());
   }
 
+  function normalizeDeliveryChannel(channel) {
+    channel = String(channel || '').trim().toLowerCase();
+    if (channel === 'whatsapp' || channel === 'telegram' || channel === 'email' || channel === 'line' || channel === 'messenger') {
+      return channel;
+    }
+    return '';
+  }
+
+  function validateDeliveryAddress(channel, value) {
+    channel = normalizeDeliveryChannel(channel);
+    value = String(value || '').trim();
+    if (!channel || !value) return false;
+    if (channel === 'email') return isValidEmail(value);
+    if (channel === 'whatsapp') return /^\+?[0-9().\-\s]{7,24}$/.test(value);
+    if (channel === 'telegram') return /^@?[A-Za-z0-9_]{5,32}$/.test(value);
+    if (channel === 'line') return /^[A-Za-z0-9_.\-]{3,40}$/.test(value);
+    if (channel === 'messenger') return /^@?[A-Za-z0-9_.\-]{3,80}$/.test(value);
+    return false;
+  }
+
+  function isWaystreamPostExperienceCapture() {
+    var brandId = bodyData('brand-id');
+    var enabled = bodyData('post-experience-capture');
+    if (enabled === '1' || enabled === 'true') return true;
+    return brandId === 'way_stream_sanctuary' && currentPageSlug();
+  }
+
   function shouldShowEmailGate() {
     if (getQueryParam('unlock') === '1' || getQueryParam('cid')) {
+      return false;
+    }
+    if (isWaystreamPostExperienceCapture()) {
       return false;
     }
     try {
@@ -296,12 +340,22 @@
     var email = String(opts.email || '').trim();
     var firstName = String(opts.first_name || opts.firstName || '').trim();
     var phone = readOptionalPhone(opts);
-    if (!isValidEmail(email)) {
-      return Promise.reject(new Error('invalid_email'));
+    var deliveryChannel = normalizeDeliveryChannel(opts.delivery_channel || opts.deliveryChannel);
+    var deliveryAddress = String(opts.delivery_address || opts.deliveryAddress || '').trim();
+    if (!deliveryAddress && deliveryChannel === 'email') deliveryAddress = email;
+    if (!deliveryAddress && deliveryChannel === 'whatsapp') deliveryAddress = phone;
+    var isReportUnlock = !!(opts.report_id || opts.reportId || deliveryChannel || opts.channel_consent !== undefined);
+    var hasValidEmail = isValidEmail(email);
+    var hasValidDelivery = validateDeliveryAddress(deliveryChannel, deliveryAddress);
+    if (!hasValidEmail && !(isReportUnlock && hasValidDelivery)) {
+      return Promise.reject(new Error(isReportUnlock ? 'invalid_delivery_address' : 'invalid_email'));
+    }
+    if (isReportUnlock && opts.channel_consent !== true && opts.channelConsent !== true) {
+      return Promise.reject(new Error('missing_channel_consent'));
     }
     var payload = {
       name: opts.name || firstName,
-      email: email,
+      email: email || (deliveryChannel === 'email' ? deliveryAddress : ''),
       phone: phone || undefined,
       first_name: firstName,
       quiz_id: opts.quiz_id || opts.quizId || '',
@@ -312,6 +366,19 @@
       answers_json: opts.answers_json || opts.answersJson || null,
       tags: opts.tags || [],
     };
+    if (deliveryChannel) {
+      payload.delivery_channel = deliveryChannel;
+      payload.delivery_address = deliveryAddress;
+      payload.channel_consent = true;
+      if (deliveryChannel === 'whatsapp' && !payload.phone) payload.phone = deliveryAddress;
+    }
+    REPORT_PAYLOAD_FIELDS.forEach(function (field) {
+      var camel = field.replace(/_([a-z])/g, function (_, ch) { return ch.toUpperCase(); });
+      var value = opts[field] !== undefined ? opts[field] : opts[camel];
+      if (value !== undefined && value !== null && value !== '') {
+        payload[field] = value;
+      }
+    });
     var campaignPayload = resolveCampaignPayload(opts);
     Object.keys(campaignPayload).forEach(function (key) {
       payload[key] = campaignPayload[key];
@@ -321,6 +388,13 @@
     return postToGhl(payload).then(function () {
       return payload;
     });
+  }
+
+  function captureReportUnlock(opts) {
+    opts = opts || {};
+    opts.channel_consent = opts.channel_consent !== undefined ? opts.channel_consent : opts.channelConsent;
+    opts.tags = opts.tags || ['source_freebie_quiz', 'freebie_report_requested'];
+    return captureLead(opts);
   }
 
   /**
@@ -386,6 +460,8 @@
     getLeadContext: getLeadContext,
     appendUnlockParams: appendUnlockParams,
     captureLead: captureLead,
+    captureReportUnlock: captureReportUnlock,
+    validateDeliveryAddress: validateDeliveryAddress,
     initBreathworkLanding: initBreathworkLanding,
     initToolPage: initToolPage,
     somaticAppUrl: somaticAppUrl,

@@ -218,7 +218,16 @@ def _validate(
         "pages_without_embedded_campaign_plan": [],
         "embedded_campaign_plan_mismatches": [],
         "secret_scan": {
-            "roots": ["docs", "artifacts", "tests"],
+            "roots": [
+                "brand-wizard-app/public/free/way_stream_sanctuary",
+                "docs/ghl",
+                "docs/freebies",
+                "docs/integrations",
+                "docs/runbooks",
+                "artifacts/coordination/handoffs",
+                "artifacts/qa/freebie_post_experience_capture_20260714",
+                "tests",
+            ],
             "full_webhook_url_files": [],
         },
     }
@@ -334,7 +343,16 @@ def _validate(
             )
 
     report["secret_scan"]["full_webhook_url_files"] = _scan_full_webhook_urls(
-        [REPO / "docs", REPO / "artifacts", REPO / "tests"]
+        [
+            REPO / "brand-wizard-app/public/free/way_stream_sanctuary",
+            REPO / "docs/ghl",
+            REPO / "docs/freebies",
+            REPO / "docs/integrations",
+            REPO / "docs/runbooks",
+            REPO / "artifacts/coordination/handoffs",
+            REPO / "artifacts/qa/freebie_post_experience_capture_20260714",
+            REPO / "tests",
+        ]
     )
 
     failure_keys = (
