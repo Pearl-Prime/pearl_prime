@@ -30,9 +30,9 @@ if ! PYTHONPATH=. "$PYTHON_BIN" scripts/run_production_readiness_gates.py; then
   exit 1
 fi
 
-# 2. Run fast pytest
+# 2. Run fast/core pytest. Expensive integration tests have their own workflows.
 echo "Running fast pytest..."
-if ! PYTHONPATH=. "$PYTHON_BIN" -m pytest tests/ -m "not slow" -v --tb=short -x; then
+if ! PYTHONPATH=. "$PYTHON_BIN" -m pytest tests/ -m "not slow and not integration" -v --tb=short -x; then
   echo "{\"step\":\"pytest\",\"passed\":false,\"timestamp\":\"$(date -u +%Y-%m-%dT%H:%M:%SZ)\"}" > "$EVIDENCE"
   exit 1
 fi
