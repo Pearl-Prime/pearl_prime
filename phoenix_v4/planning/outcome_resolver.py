@@ -10,29 +10,47 @@ from phoenix_v4.planning.exercise_registry_loader import ExerciseDefinition
 _DIMS = ("awareness", "regulation", "integration")
 
 
+def _exercise_scores(ex: ExerciseDefinition) -> Dict[str, float]:
+    """Per-dimension delivery magnitudes for one exercise.
+
+    Prefers explicit ``outcome_scores`` (authored per-dimension magnitudes). Falls
+    back to the legacy equal-weight split over ``outcome_tags`` only when no
+    explicit scores are present, preserving backward compatibility for any
+    registry entry that has not been migrated.
+    """
+    explicit = getattr(ex, "outcome_scores", None) or {}
+    if explicit:
+        return {d: float(explicit.get(d, 0.0)) for d in _DIMS}
+    tags = [t.lower() for t in ex.outcome_tags if t]
+    if not tags:
+        return {d: 0.0 for d in _DIMS}
+    w = 1.0 / len(tags)
+    return {d: (w if d in tags else 0.0) for d in _DIMS}
+
+
 def resolve_combined_outcome(
     exercise_ids: Sequence[str],
     registry: Mapping[str, ExerciseDefinition],
 ) -> Dict[str, float]:
     """
-    Merge outcome_tags from each exercise into dimensional scores in [0, 1].
+    Merge each exercise's per-dimension delivery into combined scores in [0, 1].
 
-    Each exercise splits weight 1.0 across its outcome_tags; contributions sum per
-    dimension and are capped at 1.0.
+    Dimensions combine with a saturating "probabilistic OR" ``1 - prod(1 - s)``:
+    multiple exercises contributing to a dimension reinforce it without ever
+    exceeding 1.0, and a single strong exercise is preserved at its own value
+    (unlike the old equal-split, which structurally capped each dimension at 0.5
+    and made the thesis thresholds unsatisfiable in 2-step journeys).
     """
-    acc: Dict[str, float] = {d: 0.0 for d in _DIMS}
+    remaining: Dict[str, float] = {d: 1.0 for d in _DIMS}
     for eid in exercise_ids:
         ex = registry.get(str(eid).strip())
         if not ex:
             continue
-        tags = [t.lower() for t in ex.outcome_tags if t]
-        if not tags:
-            continue
-        w = 1.0 / len(tags)
-        for t in tags:
-            if t in acc:
-                acc[t] += w
-    return {d: min(1.0, acc[d]) for d in _DIMS}
+        scores = _exercise_scores(ex)
+        for d in _DIMS:
+            s = max(0.0, min(1.0, scores.get(d, 0.0)))
+            remaining[d] *= (1.0 - s)
+    return {d: round(min(1.0, 1.0 - remaining[d]), 6) for d in _DIMS}
 
 
 def validate_required_outcome(

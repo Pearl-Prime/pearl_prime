@@ -3,7 +3,7 @@ Load canonical exercise YAML registries for journey planning (read-only configs)
 """
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
@@ -23,6 +23,22 @@ class ExerciseDefinition:
     prerequisites: List[str]
     compatible_with: List[str]
     outcome_tags: List[str]
+    # Optional explicit per-dimension delivery magnitudes (0-1) keyed by
+    # awareness/regulation/integration. When present these supersede the legacy
+    # equal-weight split over outcome_tags in resolve_combined_outcome().
+    outcome_scores: Dict[str, float] = field(default_factory=dict)
+
+
+def _as_score_map(val: Any) -> Dict[str, float]:
+    out: Dict[str, float] = {}
+    if not isinstance(val, dict):
+        return out
+    for k, v in val.items():
+        try:
+            out[str(k).strip().lower()] = max(0.0, min(1.0, float(v)))
+        except (TypeError, ValueError):
+            continue
+    return out
 
 
 def _as_str_list(val: Any) -> List[str]:
@@ -75,6 +91,7 @@ def load_exercise_registry(
             prerequisites=_as_str_list(raw.get("prerequisites")),
             compatible_with=_as_str_list(raw.get("compatible_with")),
             outcome_tags=_as_str_list(raw.get("outcome_tags")),
+            outcome_scores=_as_score_map(raw.get("outcome_scores")),
         )
     return out
 

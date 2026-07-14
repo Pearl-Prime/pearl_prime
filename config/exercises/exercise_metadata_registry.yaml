@@ -13,6 +13,10 @@ exercises:
     prerequisites: []
     compatible_with: [anxiety, somatic_healing, sleep_anxiety]
     outcome_tags: [awareness, regulation]
+    # Explicit per-dimension delivery magnitudes (0-1). Replaces the old
+    # equal-weight tag split (which capped any dimension at 0.5 and made the
+    # thesis thresholds mathematically unsatisfiable in 2-step journeys).
+    outcome_scores: {awareness: 0.92, regulation: 0.55, integration: 0.45}
 
   sensation_tracking_v1:
     type: tracking
@@ -23,6 +27,7 @@ exercises:
     prerequisites: []
     compatible_with: [anxiety, overthinking, emotional_overwhelm]
     outcome_tags: [awareness, integration]
+    outcome_scores: {awareness: 0.90, regulation: 0.35, integration: 0.60}
 
   extended_exhale_v2:
     type: breath
@@ -33,6 +38,7 @@ exercises:
     prerequisites: []
     compatible_with: [anxiety, sleep_anxiety, burnout_pattern]
     outcome_tags: [regulation]
+    outcome_scores: {awareness: 0.15, regulation: 0.90, integration: 0.50}
 
   breath_anchor_v1:
     type: breath
@@ -43,6 +49,7 @@ exercises:
     prerequisites: [sensation_tracking_v1]
     compatible_with: [anxiety, emotional_overwhelm]
     outcome_tags: [regulation, integration]
+    outcome_scores: {awareness: 0.25, regulation: 0.88, integration: 0.62}
 
   sensation_hold_v1:
     type: somatic_hold
@@ -53,6 +60,7 @@ exercises:
     prerequisites: [sensation_tracking_v1]
     compatible_with: [anxiety, unnamed_feeling, emotional_overwhelm]
     outcome_tags: [awareness, regulation]
+    outcome_scores: {awareness: 0.82, regulation: 0.70, integration: 0.55}
 
   grounding_anchor_v1:
     type: grounding
@@ -63,3 +71,4 @@ exercises:
     prerequisites: []
     compatible_with: [anxiety, emotional_overwhelm, burnout_pattern]
     outcome_tags: [regulation, integration]
+    outcome_scores: {awareness: 0.30, regulation: 0.80, integration: 0.66}
