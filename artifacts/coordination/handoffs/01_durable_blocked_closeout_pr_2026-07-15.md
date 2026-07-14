@@ -1,44 +1,27 @@
-# Durable Blocked Closeout PR Handoff - 2026-07-15
+# 01 - Durable Blocked Closeout PR Handoff
 
-AGENT=Pearl_PM
-LANE=01_durable_blocked_closeout_pr
-STATUS=BLOCKED
-SIGNAL=old-chat-blocked-closeout-durable=blocked
+STATUS=MERGED
 
-## Discovery
+PR: https://github.com/Ahjan108/phoenix_omega_v4.8/pull/5652
+BRANCH: codex/old-chat-blocked-closeout-durable-20260715
+MERGE_SHA: b426f5c547800603ad5cf1807fa4bbb9b205195c
+SIGNAL: old-chat-blocked-closeout-durable=b426f5c547800603ad5cf1807fa4bbb9b205195c
 
-- Clean substrate used: sparse clone at `origin/main` `319ad84af8c3dfd3770bf3b08acd3bf6cfa6b44b`.
-- Local desktop root remained dirty and on stale branch `codex/registry-40x14-waystream`; it was not mutated.
-- Local free space during this lane was emergency-low: `/System/Volumes/Data` `11Gi` available, 98% used.
-- The blocked closeout artifacts and unblock prompt pack were absent from `origin/main`; they were copied from the operator-provided workspace and refreshed against live PR state.
+Summary:
+- Preserved the old-chat unblock prompt pack, closure matrix, closure dispatcher handoff, and lane 01 durability handoff on a remote PR.
+- PR #5652 initially blocked on Core tests, then Core completed successfully and the PR merged at 2026-07-14T19:40:08Z.
+- The remote branch was deleted after merge.
 
-## Files Preserved
+Proof:
+- `gh pr view 5652 --repo Ahjan108/phoenix_omega_v4.8 --json number,state,mergedAt,mergeCommit,statusCheckRollup`
+- All required checks completed successfully except skipped auto-merge.
 
-- `docs/agent_prompt_packs/20260715_old_chat_unblock_wave/`
-- `artifacts/coordination/old_chat_closure_matrix_2026-07-15.md`
-- `artifacts/coordination/handoffs/old_chat_closure_dispatcher_2026-07-15.md`
-- `artifacts/coordination/handoffs/01_durable_blocked_closeout_pr_2026-07-15.md`
+Cleanup:
+- worktrees: no repo worktree created; scratch sparse clone held at `/tmp/phoenix_old_chat_unblock_lane01_20260715` as proof root for this dispatcher run.
+- local branches: scratch local branch held with proof clone.
+- remote branches: `codex/old-chat-blocked-closeout-durable-20260715` deleted after merge.
+- scratch files: proof clone held.
+- background jobs: none.
 
-## Live PR Smoke
-
-- #5645: open, non-draft, Core tests failing; changed file `SOURCE_OF_TRUTH/accent_banks/author_commentary/anxiety/lena_thorne/en_US.yaml`.
-- #5636: open, draft, checks green except skipped auto-merge; changed file `.github/workflows/brand-admin-onboarding-pages.yml`.
-- #5629: open, checks green, broad file list across research scripts/docs/examples/workflow/skills; not a narrow research carrier.
-
-## Cleanup Ledger
-
-- worktrees: none created; sparse clone only.
-- local branches: branch `codex/old-chat-blocked-closeout-durable-20260715` created in the sparse clone; HOLD while PR #5652 remains open.
-- remote branches: `codex/old-chat-blocked-closeout-durable-20260715` pushed; HOLD with PR #5652 because Core checks stalled.
-- scratch files: sparse clone path `/tmp/phoenix_old_chat_unblock_lane01_20260715` listed as proof scratch for this dispatcher run; delete after downstream lanes no longer need local inspection.
-- background jobs: none started.
-
-## Blocker
-
-PR #5652 is mergeable and docs/governance/check-impact/release/scan gates passed, but Core tests stayed in `Run fast/core pytest` with no step progress across three polls. `gh run view 29360824955 --log` reported that logs are unavailable while the run is in progress.
-
-The remote PR is the durable artifact surface for lanes 02-04.
-
-## Next Action
-
-Proceed with lanes 02-04 using PR #5652 as the preserved closeout artifact. Recheck #5652 later; if Core completes green, merge it and replace this blocked signal with the merge SHA in the dispatcher final receipt.
+Next action:
+- Continue lanes 02-04 with #5652 durability now merged.
