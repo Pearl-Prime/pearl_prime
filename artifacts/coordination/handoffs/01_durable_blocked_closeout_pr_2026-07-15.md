@@ -2,8 +2,8 @@
 
 AGENT=Pearl_PM
 LANE=01_durable_blocked_closeout_pr
-STATUS=MERGE_CANDIDATE
-SIGNAL=old-chat-blocked-closeout-durable=pending-pr
+STATUS=BLOCKED
+SIGNAL=old-chat-blocked-closeout-durable=blocked
 
 ## Discovery
 
@@ -28,17 +28,17 @@ SIGNAL=old-chat-blocked-closeout-durable=pending-pr
 ## Cleanup Ledger
 
 - worktrees: none created; sparse clone only.
-- local branches: branch `codex/old-chat-blocked-closeout-durable-20260715` created in the sparse clone; HOLD until PR merge/block disposition.
-- remote branches: pending push; delete after merge, HOLD if PR blocked.
-- scratch files: sparse clone path `/tmp/phoenix_old_chat_unblock_lane01_20260715` must be deleted after branch is pushed and no local-only value remains.
+- local branches: branch `codex/old-chat-blocked-closeout-durable-20260715` created in the sparse clone; HOLD while PR #5652 remains open.
+- remote branches: `codex/old-chat-blocked-closeout-durable-20260715` pushed; HOLD with PR #5652 because Core checks stalled.
+- scratch files: sparse clone path `/tmp/phoenix_old_chat_unblock_lane01_20260715` listed as proof scratch for this dispatcher run; delete after downstream lanes no longer need local inspection.
 - background jobs: none started.
 
-## Lane Contract
+## Blocker
 
-MERGED state requires the docs-only durability PR to merge and emit `old-chat-blocked-closeout-durable=<merge-sha>`.
+PR #5652 is mergeable and docs/governance/check-impact/release/scan gates passed, but Core tests stayed in `Run fast/core pytest` with no step progress across three polls. `gh run view 29360824955 --log` reported that logs are unavailable while the run is in progress.
 
-BLOCKED state requires the remote branch or PR to preserve the artifacts and emit `old-chat-blocked-closeout-durable=blocked`.
+The remote PR is the durable artifact surface for lanes 02-04.
 
 ## Next Action
 
-Push `codex/old-chat-blocked-closeout-durable-20260715`, open the docs-only durability PR, poll checks, and merge if green. If it cannot merge, keep the remote branch/PR as the durable blocker surface and allow lanes 02-04 to proceed under their blocked-lane dependency rule.
+Proceed with lanes 02-04 using PR #5652 as the preserved closeout artifact. Recheck #5652 later; if Core completes green, merge it and replace this blocked signal with the merge SHA in the dispatcher final receipt.
