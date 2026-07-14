@@ -18,10 +18,17 @@ from __future__ import annotations
 
 import csv
 import json
+import sys
 from collections import Counter, defaultdict
 from pathlib import Path
 
 import yaml
+
+SCRIPT_DIR = Path(__file__).resolve().parent
+if str(SCRIPT_DIR) not in sys.path:
+    sys.path.insert(0, str(SCRIPT_DIR))
+
+from brand_director_assignments import director_for, load_director_assignments
 
 REPO = Path(__file__).resolve().parents[2]
 UNIFIED = REPO / "config" / "brand_management" / "global_brand_registry_unified.yaml"
@@ -103,6 +110,7 @@ def main() -> None:
     nb = _non_buildable()
     catalog_topics = _catalog_topics_by_archetype()
     plan_topics = _book_plan_topics_by_archetype()
+    directors = load_director_assignments()
     backfilled = 0
     out = {}
     for bid, b in brands.items():
@@ -110,10 +118,16 @@ def main() -> None:
             continue
         tid = b.get("teacher_id") or ""
         arch = b.get("brand_archetype_id") or ""
+        director = director_for(
+            brand_id=bid,
+            base_brand=arch,
+            assignments=directors,
+            allow_base=False,
+        )
         tp = _resolve_primary_topics(b, catalog_topics, plan_topics)
         if not (b.get("primary_topics") or []) and tp:
             backfilled += 1
-        out[bid] = {
+        entry = {
             "d": b.get("publication_corp") or b.get("display_name") or bid,  # display / imprint (KDP publisher)
             "t": humanize(tid),                                              # teacher display
             "tid": tid,                                                      # raw teacher slug (match key)
@@ -128,6 +142,9 @@ def main() -> None:
             "manga_pct": b.get("lane_manga_pct"),
             "lifecycle": b.get("lifecycle") or "active",
         }
+        if director:
+            entry.update(director)
+        out[bid] = entry
     OUT.write_text(json.dumps(out, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
     print(f"wrote {len(out)} brands -> {OUT.relative_to(REPO)}")
     if backfilled:

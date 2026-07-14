@@ -33,6 +33,9 @@
     .slots-summary .lbl { font-family: var(--mono); font-size: 0.68rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
     .slots-summary .chip { font-family: var(--mono); font-size: 0.72rem; color: var(--cream); background: var(--card2); border: 1px solid var(--border); border-radius: 20px; padding: 3px 11px; }
     .slots-summary .chip b { color: var(--amber2); }
+    .identity-strip { background: rgba(250,246,240,0.035); border: 1px solid rgba(180,83,9,0.16); border-radius: 8px; padding: 9px 14px; display: flex; gap: 10px; flex-wrap: wrap; margin: -0.5rem 0 1.5rem; font-size: 0.75rem; color: var(--muted); }
+    .identity-strip .identity-item { font-family: var(--mono); }
+    .identity-strip b { color: var(--cream); font-family: var(--font); font-weight: 600; }
     .real-files { background: rgba(34,197,94,0.07); border: 1px solid rgba(34,197,94,0.3); border-radius: 8px; padding: 12px 16px; margin-bottom: 1.5rem; }
     .rf-head { font-size: 0.85rem; font-weight: 700; color: var(--green); }
     .rf-note { font-size: 0.7rem; color: var(--muted); margin: 3px 0 10px; }
@@ -112,6 +115,7 @@
       <a class="btn" id="ui-weekly-os" href="brand_admin_weekly_os.html">📅 Weekly OS</a>
     </div>
   </div>
+  <div class="identity-strip" id="identity-strip"></div>
 
   <div id="view-weekly">
     <div class="viewing-note hidden" id="history-note"></div>
@@ -171,6 +175,10 @@ const CHROME = {
     catalogCount:(n)=>`${n} titles in catalog`,
     viewingPast:(w)=>`Viewing past week <b style="color:var(--amber2)">${w}</b>`, jumpCurrent:"→ jump to current week",
     weeklyOs:"📅 Weekly OS (setup rhythm)",
+    brandDirector:"Brand Director", productionPendingTitle:"Catalog ready, production files pending",
+    catalogReady:"Catalog ready", productionPending:"Production files pending", weeklyPacketPending:"Weekly packet pending", weeklyPacketReady:"Weekly packet ready",
+    catalogBlockedNote:"Catalog metadata is live. Production files and a shippable weekly packet are still pending, so upload downloads are disabled.",
+    openCatalogAction:"Open catalog", downloadsPending:"Downloads pending",
   },
   ja: {
     h1:"ブランドディレクター運用", sub:"Pearl Prime · 週次コンテンツパケット", handoff:"週次ハンドオフ",
@@ -190,6 +198,10 @@ const CHROME = {
     catalogCount:(n)=>`カタログ ${n}タイトル`,
     viewingPast:(w)=>`過去の週 <b style="color:var(--amber2)">${w}</b> を表示中`, jumpCurrent:"→ 今週へ",
     weeklyOs:"📅 週次OS（セットアップ）",
+    brandDirector:"ブランドディレクター", productionPendingTitle:"カタログ準備済み・制作ファイル待ち",
+    catalogReady:"カタログ準備済み", productionPending:"制作ファイル待ち", weeklyPacketPending:"週次パケット待ち", weeklyPacketReady:"週次パケット準備済み",
+    catalogBlockedNote:"カタログ情報は公開済みです。制作ファイルと公開可能な週次パケットはまだ待機中のため、アップロード用ダウンロードは無効です。",
+    openCatalogAction:"カタログを開く", downloadsPending:"ダウンロード準備中",
   },
   "zh-Hant": {
     h1:"品牌總監營運", sub:"Pearl Prime · 每週內容包", handoff:"每週交接",
@@ -209,6 +221,10 @@ const CHROME = {
     catalogCount:(n)=>`書目共 ${n} 本`,
     viewingPast:(w)=>`正在檢視過去的一週 <b style="color:var(--amber2)">${w}</b>`, jumpCurrent:"→ 跳至本週",
     weeklyOs:"📅 每週營運節奏（Weekly OS）",
+    brandDirector:"品牌總監", productionPendingTitle:"書目已就緒，製作檔案待完成",
+    catalogReady:"書目已就緒", productionPending:"製作檔案待完成", weeklyPacketPending:"每週內容包待完成", weeklyPacketReady:"每週內容包已就緒",
+    catalogBlockedNote:"書目中繼資料已上線。製作檔案與可交付的每週內容包仍待完成，因此上傳下載已停用。",
+    openCatalogAction:"開啟書目", downloadsPending:"下載尚未開放",
   },
   "zh-Hans": {
     h1:"品牌总监运营", sub:"Pearl Prime · 每周内容包", handoff:"每周交接",
@@ -228,6 +244,10 @@ const CHROME = {
     catalogCount:(n)=>`书目共 ${n} 本`,
     viewingPast:(w)=>`正在查看过去的一周 <b style="color:var(--amber2)">${w}</b>`, jumpCurrent:"→ 跳至本周",
     weeklyOs:"📅 每周运营节奏（Weekly OS）",
+    brandDirector:"品牌总监", productionPendingTitle:"书目已就绪，制作文件待完成",
+    catalogReady:"书目已就绪", productionPending:"制作文件待完成", weeklyPacketPending:"每周内容包待完成", weeklyPacketReady:"每周内容包已就绪",
+    catalogBlockedNote:"书目元数据已上线。制作文件与可交付的每周内容包仍待完成，因此上传下载已停用。",
+    openCatalogAction:"打开书目", downloadsPending:"下载尚未开放",
   },
 };
 
@@ -516,7 +536,7 @@ const CAT_ZH_HANS = {
 const COVER_HUES = [18, 32, 268, 200, 150, 340];
 
 // ── Market state (set in boot) ──────────────────────────────────────────────
-let BRAND = {id:"devotion_path_en_us", label:"Open Vessel Press"};
+let BRAND = {id:"devotion_path_en_us", label:"Open Vessel Press", directorName:"", directorId:"", directorStatus:""};
 let MARKET = "us", LANG = "en", CURRENCY = "usd", PLATFORMS = PLATFORMS_US, T = CHROME.en, CAT = CAT_EN;
 let REAL_CATALOG = null; // the brand's actual books (from brand_catalogs/<base>.json) when available
 let REAL_DELIVERY = null; // the brand's actual rendered files (from brand_deliveries/<base>.json) when available
@@ -525,10 +545,13 @@ let PACKET_BLOCK = null;
 const DELIV_PLAT = {kdp:"Amazon KDP", google_play:"Google Play", apple_books:"Apple Books", kobo:"Rakuten Kobo", audiobook:"Audiobook", audible:"Audible", google_play_audiobook:"Google Play Audiobook", spotify_podcast:"Podcast · Spotify", apple_podcasts:"Podcast · Apple", webtoon:"Webtoon", piccoma:"Piccoma", line_manga:"LINE Manga", pearl_news:"Pearl News"};
 let currentWeekIdx = null;
 function esc(s){ return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+function productionPendingDetail(s){
+  return String(s || "").replace(/^catalog ready,\s*production files pending\s*[—-]\s*/i, "");
+}
 function packetBridgeStatus(brandId){
   if(!PACKET_BRIDGE)return null;
   const blocked=PACKET_BRIDGE.blocked&&PACKET_BRIDGE.blocked[brandId];
-  if(blocked)return{state:"blocked",reason:blocked.reason||"No shippable weekly packet yet."};
+  if(blocked)return{state:"blocked",reason:blocked.reason||"Catalog ready, production files pending."};
   const ready=PACKET_BRIDGE.brands&&PACKET_BRIDGE.brands[brandId];
   if(ready&&ready.buildable)return{state:"ready",info:ready};
   return null;
@@ -537,11 +560,16 @@ function isPacketBlocked(){ return PACKET_BLOCK&&PACKET_BLOCK.state==="blocked";
 function applyPacketBlockUi(){
   const blocked=isPacketBlocked();
   const dlAll=document.getElementById("ui-dlall");
-  if(dlAll){ dlAll.disabled=blocked; dlAll.style.opacity=blocked?"0.45":"1"; dlAll.style.cursor=blocked?"not-allowed":""; }
+  if(dlAll){
+    dlAll.disabled=blocked;
+    dlAll.style.opacity=blocked?"0.45":"1";
+    dlAll.style.cursor=blocked?"not-allowed":"";
+    dlAll.textContent=blocked?(T.downloadsPending||"Downloads pending"):T.dlAll;
+  }
   let banner=document.getElementById("packet-block-banner");
   if(blocked){
-    const msg=PACKET_BLOCK.reason||"No shippable weekly packet yet.";
-    const title=LANG==="zh-Hant"?"無可下載週包":LANG==="zh-Hans"?"无可下载周包":"No shippable download";
+    const msg=productionPendingDetail(PACKET_BLOCK.reason)||"No shippable content yet.";
+    const title=T.productionPendingTitle||"Catalog ready, production files pending";
     if(!banner){
       banner=document.createElement("div");
       banner.id="packet-block-banner";
@@ -575,6 +603,19 @@ function slug(s){ const x = String(s).toLowerCase().replace(/[^a-z0-9]+/g,"-").r
 function isbnFor(i){ return "978" + String(1000000000 + i * 7919).slice(0,10); }
 function priceFor(i){ const lo = i % 3 === 0; if (CURRENCY === "jpy") return lo ? "500" : "700"; if (CURRENCY === "twd") return lo ? "150" : "220"; if (CURRENCY === "cny") return lo ? "25" : "35"; return lo ? "4.99" : "5.99"; }
 function audioPrice(){ return CURRENCY === "jpy" ? "1500" : CURRENCY === "twd" ? "350" : CURRENCY === "cny" ? "45" : "9.99"; }
+
+function renderIdentityStrip() {
+  const el = document.getElementById("identity-strip");
+  if (!el) return;
+  const director = BRAND.directorName || "—";
+  const packetLabel = isPacketBlocked()
+    ? T.productionPending
+    : (PACKET_BLOCK && PACKET_BLOCK.state === "ready" ? T.weeklyPacketReady : T.weeklyPacketPending);
+  el.innerHTML =
+    `<span class="identity-item">${T.brandDirector}: <b>${esc(director)}</b></span>` +
+    `<span class="identity-item">${T.catalogReady}: <b>${REAL_CATALOG && REAL_CATALOG.length ? REAL_CATALOG.length : "—"}</b></span>` +
+    `<span class="identity-item">${packetLabel}</span>`;
+}
 
 function buildCatalog() {
   if (REAL_CATALOG && REAL_CATALOG.length) {
@@ -680,11 +721,31 @@ function renderWeekly() {
   const idx = currentWeekIdx, week = weekLabelFor(idx), pkt = packetFor(idx);
   document.getElementById("brand-name").textContent = BRAND.label;
   document.getElementById("week-label").textContent = week;
+  renderIdentityStrip();
 
   const note = document.getElementById("history-note");
   if (idx == null) note.classList.add("hidden");
   else { note.classList.remove("hidden"); note.innerHTML = `${T.viewingPast(week)} &nbsp;·&nbsp; <a href="#" onclick="goThisWeek();return false" style="color:var(--amber2)">${T.jumpCurrent}</a>`; }
 
+  if (isPacketBlocked()) {
+    const catalogCount = REAL_CATALOG && REAL_CATALOG.length ? REAL_CATALOG.length : buildCatalog().length;
+    document.getElementById("slots-summary").innerHTML =
+      `<span class="lbl">📦 ${T.productionPendingTitle}</span>` +
+      `<span class="chip">${T.catalogCount(catalogCount)}</span>` +
+      `<span class="chip">${T.productionPending}</span>`;
+    document.getElementById("ui-files-note").textContent = T.catalogBlockedNote;
+    document.getElementById("real-files").innerHTML = "";
+    document.getElementById("platforms").innerHTML =
+      `<div class="platform-card"><div class="platform-body">` +
+      `<div class="section-title">${T.productionPendingTitle}</div>` +
+      `<p class="viewing-note">${esc(productionPendingDetail(PACKET_BLOCK.reason) || "No shippable content yet.")}</p>` +
+      `<button class="btn sm primary" onclick="showView('catalog')">${T.openCatalogAction}</button>` +
+      `</div></div>`;
+    applyPacketBlockUi();
+    return;
+  }
+
+  document.getElementById("ui-files-note").textContent = T.filesNote;
   const ebookStores = PLATFORMS.filter(p => p.feed === "ebooks").map(p => p.label).join(T.storeSep);
   const audioStore = (PLATFORMS.find(p => p.feed === "audiobooks") || {}).label || "";
   const podStore = (PLATFORMS.find(p => p.feed === "episodes") || {}).label || "";
@@ -804,7 +865,13 @@ async function boot() {
   let bridge = {};
   try { const r = await fetch("brand_admin_brands.json", {cache:"no-store"}); if (r.ok) bridge = await r.json(); } catch (_e) {}
   const info = bridge[id] || {};
-  BRAND = { id, label: info.d || humanize(id) };
+  BRAND = {
+    id,
+    label: info.d || humanize(id),
+    directorName: info.brand_director_name || "",
+    directorId: info.brand_director_id || "",
+    directorStatus: info.brand_director_status || "",
+  };
   const wos = document.getElementById("ui-weekly-os");
   if (wos) wos.href = "/brand_admin_weekly_os.html?brand=" + encodeURIComponent(id);
   const base = id.replace(/_(en_us|es_us|es_es|pt_br|zh_tw|zh_hk|zh_cn|zh_sg|ja_jp|ko_kr)$/, "");

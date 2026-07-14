@@ -18,10 +18,17 @@ Run:  python3 scripts/onboarding/gen_brand_catalogs.py
 from __future__ import annotations
 import argparse
 import json
+import sys
 from collections import defaultdict, Counter
 from pathlib import Path
 
 import yaml
+
+SCRIPT_DIR = Path(__file__).resolve().parent
+if str(SCRIPT_DIR) not in sys.path:
+    sys.path.insert(0, str(SCRIPT_DIR))
+
+from brand_director_assignments import director_for, load_director_assignments
 
 REPO = Path(__file__).resolve().parents[2]
 SRC = REPO / "config" / "source_of_truth" / "book_plans_en_us"
@@ -71,6 +78,7 @@ def main() -> None:
     if not SRC.exists():
         raise SystemExit(f"book plans dir not found: {SRC}")
     OUTDIR.mkdir(parents=True, exist_ok=True)
+    directors = load_director_assignments()
     by_brand: dict[str, list] = defaultdict(list)
     skipped = 0
     glob_pat = f"{args.brand}__*.yaml" if args.brand else "*.yaml"
@@ -103,6 +111,9 @@ def main() -> None:
             )
         books.sort(key=lambda b: (b["persona"], b["topic"], b["engine"], b["title"]))
         out = {"brand": brand, "count": len(books), "books": books}
+        director = director_for(base_brand=brand, assignments=directors, allow_base=True)
+        if director:
+            out.update(director)
         (OUTDIR / f"{brand}.json").write_text(
             json.dumps(out, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
         print(f"  {brand}: {len(books)} books -> brand_catalogs/{brand}.json")

@@ -49,6 +49,12 @@ except ImportError:
     sys.stderr.write("PyYAML required: pip install pyyaml\n")
     sys.exit(2)
 
+SCRIPT_DIR = Path(__file__).resolve().parent
+if str(SCRIPT_DIR) not in sys.path:
+    sys.path.insert(0, str(SCRIPT_DIR))
+
+from brand_director_assignments import director_for, load_director_assignments
+
 REPO = Path(__file__).resolve().parent.parent.parent
 PUBLIC = REPO / "brand-wizard-app" / "public" / "platform_setup_helper_brands.json"
 OPLINKS = REPO / "artifacts" / "onboarding" / "setup_helper_brand_links.tsv"
@@ -162,6 +168,7 @@ def launch_url(base: str, b: dict, with_email: bool) -> str:
 def build() -> dict:
     corp_by_id = _load_corp_index()
     imprint_by_base = _load_imprint_by_base()
+    directors = load_director_assignments()
 
     files = []
     for g in SCAN_GLOBS:
@@ -178,6 +185,7 @@ def build() -> dict:
         b = derive(cfg, brand_id_from_path(p))
         b["publisher"] = resolve_publisher(b["id"], corp_by_id, imprint_by_base,
                                             fallback_name=b["name"])
+        b.update(director_for(brand_id=b["id"], assignments=directors, allow_base=False))
         brands[b["id"]] = b
 
     # Seed the canonical 39×14 brand_ids the wizard assigns (e.g. stillness_press_en_us)
@@ -185,7 +193,9 @@ def build() -> dict:
     # operator brand-config exists yet. Operator configs above win (don't overwrite).
     for bid, corp in corp_by_id.items():
         if bid not in brands:
-            brands[bid] = {"id": bid, "publisher": corp}
+            entry = {"id": bid, "publisher": corp}
+            entry.update(director_for(brand_id=bid, assignments=directors, allow_base=False))
+            brands[bid] = entry
     return brands
 
 
@@ -195,6 +205,9 @@ def render_public(brands: dict) -> str:
         entry = {k: b[k] for k in ("name", "focus", "desc", "slug", "market") if k in b}
         if b.get("publisher"):
             entry["publisher"] = b["publisher"]
+        for k in ("brand_director_name", "brand_director_id", "brand_director_status"):
+            if b.get(k):
+                entry[k] = b[k]
         public[bid] = entry
     return json.dumps(public, ensure_ascii=False, indent=2, sort_keys=True) + "\n"
 
