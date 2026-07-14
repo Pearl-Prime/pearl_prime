@@ -2610,11 +2610,17 @@ def _run_spine_pipeline_mode(
             ),
             encoding="utf-8",
         )
-        if _enrichment_contract_v1:
-            _contract_id = _resolve_enhancement_contract_id(
-                book_spec=book_spec_for_compiler,
-                render_dir=render_dir,
-            )
+        # Contract reports (assembly_trace.md, enhancement_contract.md/json — all spine
+        # renders, not contract-only). Previously gated on `_enrichment_contract_v1`
+        # (opt-in book_spec flag OR render_dir name containing "enhancement_contract"),
+        # which meant a normal production book render silently never got these two
+        # artifacts. Mirrors the book_outline pattern just above: always attempt, WARN
+        # (do not fail the render) if the reporting layer itself errors.
+        _contract_id = _resolve_enhancement_contract_id(
+            book_spec=book_spec_for_compiler,
+            render_dir=render_dir,
+        )
+        try:
             _write_enhancement_contract_reports(
                 enriched=enriched,
                 render_dir=render_dir,
@@ -2624,6 +2630,11 @@ def _run_spine_pipeline_mode(
                 runtime_format=runtime_fmt,
                 manuscript_text=_prose_out,
                 accent_render_audit=_accent_render_rows,
+            )
+        except Exception as _contract_report_err:
+            print(
+                f"Enhancement contract reports: WARN — {_contract_report_err}",
+                file=sys.stderr,
             )
         _bq_fail, _bq_frag = _apply_book_quality_gate(
             render_dir=render_dir,
