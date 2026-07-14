@@ -1,6 +1,6 @@
 # Program State — Single Source of Truth
 
-**LAST VERIFIED:** 2026-07-14 @ `origin/main` `19edc45e0bd2ebdae63c802866a5297ab125813d` (books-first EPUB micro-wave + GHL attach final audit; #5641)
+**LAST VERIFIED:** 2026-07-15 @ `origin/main` `d63caff873d40154209095708c840d63cd3797de` (old-chat unblock successors merged/closed through #5658; release-smoke fast lane #5659)
 
 > **RULE:** Verify against `origin/main`, never git date or the working tree (shared-tree branch-churn shows
 > other-branch/stale state). This is the entry point — if another doc disagrees with this, this wins or that doc is stale.
@@ -169,7 +169,7 @@ program history. Both goldens now live + byte-frozen:
   landed). Mecha next step is operator blind-read / PROVEN-AT-BAR — v3 pilot is the current honest layered proof surface.
 
 ### DevOps / repo hygiene
-- **Status:** **July 9 wave landed LFS→R2 pilot + GHA catalog-fanout queue guard on `main`**
+- **Status:** **July 9 wave landed LFS→R2 pilot + GHA catalog-fanout queue guard on `main`; July 15 old-chat unblock wave reduced stale PR requeue risk**
 - **Details:**
   - **LFS→R2 offload V1 spec + `composed_v4_qwen` pilot — MERGED** (#5306, `5b3f64e29954e252dc5b2dbc6a688dd2711612d8`).
     V1 pilot only; full `assets/manga_catalog` Wave-2 offload remains a follow-on lane. Parent ws `ws_lfs_setup_20260410`
@@ -179,6 +179,13 @@ program history. Both goldens now live + byte-frozen:
   - **GHA catalog-fanout queue-pressure guard — MERGED** (#5471, tip of `main` after wave). Fail-closed throttle on
     `catalog-fanout-*` workflows when queue is hot; authority: `artifacts/coordination/GHA_CATALOG_FANOUT_QUEUE_GUARD_CLOSEOUT_2026-07-09.md`.
     Supersedes manual queue-relief waves as the durable fix for catalog starvation of non-catalog PRs.
+  - **Old-chat unblock wave — MERGED/REDUCED 2026-07-15:** durable closeout #5652 (`b426f5c547`),
+    #5645 successor #5655 (`b56ce80fc8`), #5629 clean research successor #5656 (`39e9c436e9`),
+    and closeout handoffs #5658 (`2c4b4a5270`) are on `main`. Original PRs #5645 and #5629 were closed as
+    superseded after their successors merged; #5636 had already merged (`73e4a6fbb6`). Do not requeue the old
+    #5645 Core failure or the polluted #5629 batch; use the merged successors as authority. Local worktree cleanup
+    remains preservation-blocked by low disk and dirty/untracked value, with the ledger in
+    `artifacts/coordination/handoffs/05_preservation_first_worktree_cleanup_2026-07-15.md`.
 
 ### Books-first roadmap (operator scan — 2026-07-14 post-#5641)
 - **Authority:** `artifacts/analysis/PROPRIME_100PCT_PRODUCTION_AUDIT_2026-07-10/` (audit snapshot still useful) + `artifacts/qa/thin_persona_buildability_2026-07-11/SUMMARY.md` + `artifacts/qa/books_first_epub_wave_final_audit_20260714/SUMMARY.md`
