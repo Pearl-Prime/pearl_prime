@@ -184,6 +184,55 @@ def test_build_enhancement_contract_payload_reconciles_final_manuscript() -> Non
     assert payload["validation"]["unresolved_markers"] == []
 
 
+def test_v21_analogy_metaphor_not_falsely_true_from_angle_definition_alone() -> None:
+    """Regression: ANGLE_DEFINITION (a callback plant) must not, by itself, make
+    ANALOGY/METAPHOR report present. _sample_book()'s chapter has an
+    ANGLE_DEFINITION + ANGLE_CALLBACK pair but zero analogy/metaphor hooks on
+    any slot — before the fix, both surfaces still lit up on the strength of
+    the angle-definition slot alone (see artifacts/qa/
+    enhancement_contract_v21_integration_2026-07-13/enhancement_contract.json
+    chapter 1, where this exact false positive was observed in a real render).
+    """
+    book = _sample_book()
+    manuscript = _sample_manuscript(book)
+    payload = build_enhancement_contract_payload(
+        enriched=book,
+        manuscript_text=manuscript,
+        contract_id="enhancement_contract_v1",
+        topic_id="anxiety",
+        persona_id="gen_z_professionals",
+        runtime_format="extended_book_2h",
+    )
+    groups = payload["chapters"][0]["v21_surface_groups"]["cohesion_and_craft"]
+    assert "CALLBACK_PLANT" in groups
+    assert "CALLBACK_RETURN" in groups
+    assert "ANALOGY" not in groups
+    assert "METAPHOR" not in groups
+
+
+def test_v21_analogy_metaphor_select_when_real_hook_present() -> None:
+    """ANALOGY/METAPHOR must actually select into the rendered plan's surface
+    report when their own real signal (an analogy/metaphor enrichment hook) is
+    present — proving the class-specific detection path genuinely works, not
+    just that the false-positive fallback was deleted.
+    """
+    book = _sample_book()
+    reflection_slot = next(s for s in book.chapters[0].slots if s.slot_type == "REFLECTION")
+    reflection_slot.enrichment_applied = ["analogy_bridge", "metaphor_thread"]
+    manuscript = _sample_manuscript(book)
+    payload = build_enhancement_contract_payload(
+        enriched=book,
+        manuscript_text=manuscript,
+        contract_id="enhancement_contract_v1",
+        topic_id="anxiety",
+        persona_id="gen_z_professionals",
+        runtime_format="extended_book_2h",
+    )
+    groups = payload["chapters"][0]["v21_surface_groups"]["cohesion_and_craft"]
+    assert "ANALOGY" in groups
+    assert "METAPHOR" in groups
+
+
 def test_callback_layer_returns_reconcile_to_prior_base_plant() -> None:
     book = _sample_book()
     book.chapters[0].slots = [

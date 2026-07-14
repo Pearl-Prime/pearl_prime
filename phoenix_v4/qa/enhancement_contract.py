@@ -272,6 +272,17 @@ def _chapter_v21_groups(
         cohesion_and_craft.append("CALLBACK_PLANT")
     if "ANGLE_CALLBACK" in slot_types:
         cohesion_and_craft.append("CALLBACK_RETURN")
+    # NOTE: ANALOGY/METAPHOR must be driven by their own hook signal only. The
+    # previous `or "ANGLE_DEFINITION" in slot_types` fallback made both surfaces
+    # report present on every chapter that merely plants an angle callback —
+    # regardless of whether any analogy/metaphor content was ever produced —
+    # because no enrichment-hook producer emits an "analogy"/"metaphor" hook
+    # (verified: phoenix_v4/planning/beatmap_compile.py::_slug_hooks has no such
+    # branch). That made the V2.1 contract report a false positive for every
+    # ANGLE_DEFINITION chapter (see artifacts/qa/enhancement_contract_v21_integration_2026-07-13/
+    # enhancement_contract.json chapter 1: ANALOGY/METAPHOR both fired solely
+    # from PROTECTIVE_ALARM's ANGLE_DEFINITION, with zero analogy/metaphor hooks
+    # present). Report only the real, class-specific signal.
     if any("analogy" in hook for hook in hooks):
         cohesion_and_craft.append("ANALOGY")
     if any("metaphor" in hook for hook in hooks):

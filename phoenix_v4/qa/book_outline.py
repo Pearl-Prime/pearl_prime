@@ -202,6 +202,12 @@ def _chapter_v21_groups(
         cohesion_and_craft.append("CALLBACK_PLANT")
     if "ANGLE_CALLBACK" in slot_types:
         cohesion_and_craft.append("CALLBACK_RETURN")
+    # NOTE: keep in sync with phoenix_v4/qa/enhancement_contract.py::_chapter_v21_groups.
+    # ANALOGY/METAPHOR must be driven by their own hook signal only — the old
+    # `or "ANGLE_DEFINITION" in slot_types` fallback reported both as present on
+    # every angle-callback-plant chapter regardless of whether any analogy/metaphor
+    # content was ever produced (no hook producer emits "analogy"/"metaphor";
+    # verified against a real render: artifacts/qa/enhancement_contract_v21_integration_2026-07-13).
     if any("analogy" in hook for hook in hooks):
         cohesion_and_craft.append("ANALOGY")
     if any("metaphor" in hook for hook in hooks):
@@ -230,6 +236,8 @@ def _enrichment_families(
         or any("parable" in hook for hook in hooks)
     )
     return {
+        # See _chapter_v21_groups note above: ANGLE_DEFINITION presence alone is
+        # not evidence of analogy/metaphor content and must not be OR'd in here.
         "metaphor": any("metaphor" in h for h in hooks),
         "analogy": any("analogy" in h for h in hooks),
         "parable_or_external_story": story_like,
