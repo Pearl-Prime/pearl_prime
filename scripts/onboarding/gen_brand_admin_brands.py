@@ -3,7 +3,7 @@
 Bridge: unified brand registry  →  brand_admin_weekly_os.html backend (static JSON).
 
 Same pattern as gen_setup_helper_brands.py (#1600) — a generated public JSON the page
-fetches via ?brand=<id>, so the Phase 0–3 console resolves the canonical 39×14 brand_ids
+fetches via ?brand=<id>, so the Phase 0–3 console resolves the canonical 40×14 brand_ids
 the wizard assigns (e.g. devotion_path_en_us → "Open Vessel Press"), with NO live backend.
 Replaces the page's stale embedded deep-25 brand map.
 

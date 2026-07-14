@@ -12,7 +12,7 @@ Emits two things:
      Two sources are merged:
        • operator brand-config YAMLs (any file with a top-level `brand_admin:` key, e.g.
          `way_stream_sanctuary_brand-config.yaml`) → name/focus/desc/slug/market.
-       • the canonical 39×14 unified registry (config/brand_management/
+       • the canonical 40×14 unified registry (config/brand_management/
          global_brand_registry_unified.yaml) → a `publisher`-only entry per brand_id so the
          wizard-assigned ids resolve their imprint even without a per-brand config.
      The `publisher` label is resolved by the SAME longest-prefix corp lookup #1611 uses
@@ -81,7 +81,7 @@ def humanize(s) -> str:
 # prefix match against brand_display_names.yaml, then to the brand's own humanized name.
 
 def _load_corp_index() -> dict:
-    """brand_id -> publication corp/imprint name, from the unified 39×14 registry."""
+    """brand_id -> publication corp/imprint name, from the unified 40×14 registry."""
     if not UNIFIED.exists():
         return {}
     reg = (yaml.safe_load(UNIFIED.read_text(encoding="utf-8")) or {}).get("brands") or {}
@@ -110,7 +110,7 @@ def _load_imprint_by_base() -> dict:
 def resolve_publisher(brand_id: str, corp_by_id: dict, imprint_by_base: dict,
                       fallback_name: str = "") -> str:
     """Publisher/imprint label for a brand_id (reuses #1611's publication_corp source)."""
-    # 1) exact full-id hit from the unified registry (canonical 39×14 — longest-prefix baked)
+    # 1) exact full-id hit from the unified registry (canonical 40×14 — longest-prefix baked)
     corp = corp_by_id.get(brand_id)
     if corp:
         return corp
@@ -188,7 +188,7 @@ def build() -> dict:
         b.update(director_for(brand_id=b["id"], assignments=directors, allow_base=False))
         brands[b["id"]] = b
 
-    # Seed the canonical 39×14 brand_ids the wizard assigns (e.g. stillness_press_en_us)
+    # Seed the canonical 40×14 brand_ids the wizard assigns (e.g. stillness_press_en_us)
     # with a publisher-only entry, so `?brand=<id>` resolves its imprint even when no
     # operator brand-config exists yet. Operator configs above win (don't overwrite).
     for bid, corp in corp_by_id.items():
