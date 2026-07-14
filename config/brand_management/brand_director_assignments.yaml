@@ -1,0 +1,16 @@
+# Public-safe Brand Director assignment overlay.
+#
+# This file records operator-approved ownership when a Brand Wizard completion is
+# not present in repo-stored onboarding artifacts. It deliberately carries no
+# email, phone, credentials, or contact PII.
+assignments:
+  stabilizer_en_us:
+    brand_id: stabilizer_en_us
+    base_brand: stabilizer
+    display_brand: Harbor Line Books
+    brand_director_name: Kamiko Parker
+    brand_director_id: kamiko_parker
+    status: assigned
+    assigned_at: "2026-07-14"
+    assignment_source: operator_record
+    source_note: "Brand Wizard completion referenced by operator; no repo-stored wizard submission found."

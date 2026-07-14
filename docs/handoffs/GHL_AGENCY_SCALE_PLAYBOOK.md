@@ -61,7 +61,7 @@ Do this **once per brand** (3 sub-accounts):
 | `funnel_base_url` | Yes | `https://brand-admin-onboarding.pages.dev/free/` | Stillness: no brand prefix |
 | `funnel_base_url` | Yes | `https://brand-admin-onboarding.pages.dev/free/devotion_path/` | Devotion / Waystream: include prefix |
 | `webhook_env` | Yes | `PHOENIX_GHL_FUNNEL_WEBHOOK_STILLNESS` | Operator stores returned URL under this name |
-| `webhook_url` | After setup | `https://services.leadconnectorhq.com/hooks/…` | **Filled by GHL admin** after step 4; returned to operator |
+| `webhook_url` | After setup | `<REDACTED_GHL_WEBHOOK_URL> | **Filled by GHL admin** after step 4; returned to operator |
 | `shop_cta_style` | Optional | `pearlprime` or `download_proxy` | Waystream uses `/download/` not pearlprime.shop |
 | `rollout_phase` | Optional | `pilot` | `pilot` → `wave2` → `all` |
 | `ghl_enabled` | Optional | `true` | Skip rows where Phoenix feed not ready |
@@ -101,7 +101,7 @@ Do this **once per brand** (3 sub-accounts):
 ## What admin sends back (per brand)
 
 ```text
-PHOENIX_GHL_FUNNEL_WEBHOOK_<BRAND>=https://services.leadconnectorhq.com/hooks/...
+PHOENIX_GHL_FUNNEL_WEBHOOK_<BRAND>=<REDACTED_GHL_WEBHOOK_URL>
 Feed URL confirmed: yes
 Workflows published: yes
 Test contact created: yes

@@ -36,21 +36,24 @@ def _load_funnel_slugs() -> list[str]:
 
 
 def _assert_funnel_wiring(slug: str) -> None:
-    path = REPO / "brand-wizard-app/public/free" / slug / "index.html"
+    path = REPO / "brand-wizard-app/public/free/way_stream_sanctuary" / slug / "index.html"
     if not path.is_file():
         _fail(f"missing landing page: {slug}")
     text = path.read_text(encoding="utf-8")
     if "phoenix_lead.js" not in text:
         _fail(f"{slug} missing phoenix_lead.js")
-    if "data-ghl-webhook" not in text:
-        _fail(f"{slug} missing data-ghl-webhook on body")
+    if 'data-post-experience-capture="1"' not in text:
+        _fail(f"{slug} missing post-experience capture flag")
+    if "services.leadconnectorhq.com" in text or "webhook-trigger" in text:
+        _fail(f"{slug} exposes a full webhook URL")
     wired = (
         "PhoenixLead.captureLead" in text
         or "PhoenixFunnel.bindEmailBeforeResult" in text
         or "submitEmailGate" in text
+        or "PhoenixFunnel.initPostExperienceCapture" in text
     )
     if not wired:
-        _fail(f"{slug} missing captureLead / bindEmailBeforeResult wiring")
+        _fail(f"{slug} missing capture/report wiring")
 
 
 def main() -> int:

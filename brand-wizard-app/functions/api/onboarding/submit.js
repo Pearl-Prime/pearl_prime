@@ -23,6 +23,7 @@ const MAX_BODY_BYTES = 256 * 1024; // wizard_yaml is capped ~200k upstream; allo
 const DEFAULT_BUCKET = "phoenix-omega-artifacts";
 const CLAIM_PREFIX = "onboarding/claimed/";
 const SUBMISSION_PREFIX = "onboarding/submissions/";
+const ASSIGNMENT_PREFIX = "onboarding/assignments/";
 
 function r2ObjectUrl(env, key) {
   const bucket = (env.R2_BUCKET || DEFAULT_BUCKET).trim();
@@ -41,6 +42,54 @@ function safeKeyPart(s) {
       .replace(/^_+|_+$/g, "")
       .slice(0, 200) || "x"
   );
+}
+
+function directorIdFromName(name) {
+  return (
+    String(name || "")
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "_")
+      .replace(/^_+|_+$/g, "")
+      .slice(0, 80) || "brand_director"
+  );
+}
+
+function baseBrandFromId(brandId) {
+  return String(brandId || "").replace(/_(en_us|es_us|es_es|pt_br|zh_tw|zh_hk|zh_cn|zh_sg|ja_jp|ko_kr)$/, "");
+}
+
+function publicAssignment(payload, brandId, index, ts) {
+  const contact = payload.contact && typeof payload.contact === "object" ? payload.contact : {};
+  const name =
+    String(payload.brand_director_name || "").trim() ||
+    [contact.first_name, contact.last_name].map((v) => String(v || "").trim()).filter(Boolean).join(" ");
+  if (!name) return null;
+  const entry = index && typeof index === "object" ? index[brandId] : null;
+  const displayBrand =
+    String(payload.display_brand || "").trim() ||
+    String(payload.publication_corp || "").trim() ||
+    (entry && String(entry.d || "").trim()) ||
+    brandId;
+  return {
+    brand_id: brandId,
+    base_brand: String(payload.base_brand || "").trim() || baseBrandFromId(brandId),
+    display_brand: displayBrand,
+    brand_director_name: name,
+    brand_director_id: String(payload.brand_director_id || "").trim() || directorIdFromName(name),
+    brand_director_status: "assigned",
+    assigned_at: ts,
+    assignment_source: "brand_onboarding_wizard",
+    source: "r2_live_assignment",
+  };
+}
+
+async function putJson(aws, env, key, value) {
+  const putReq = await aws.sign(r2ObjectUrl(env, key), {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(value),
+  });
+  return fetch(putReq);
 }
 
 // Load the authoritative brand index from the co-deployed static asset. Same-origin fetch
@@ -158,7 +207,15 @@ export async function onRequestPost(context) {
   const emailPart = safeKeyPart(email || "anon");
   const subKey = `${SUBMISSION_PREFIX}${emailPart}__${safeKeyPart(brandId)}__${safeKeyPart(ts)}.json`;
   const subUrl = r2ObjectUrl(env, subKey);
-  const record = { ...payload, brand_id: brandId, is_teacher: isTeacher, teacher_tid: tid || null, ts };
+  const assignment = publicAssignment(payload, brandId, index, ts);
+  const record = {
+    ...payload,
+    brand_id: brandId,
+    is_teacher: isTeacher,
+    teacher_tid: tid || null,
+    brand_assignment: assignment,
+    ts,
+  };
   try {
     const putReq = await aws.sign(subUrl, {
       method: "PUT",
@@ -177,7 +234,25 @@ export async function onRequestPost(context) {
     return json({ status: "error", detail: "submission not persisted", claim }, 502);
   }
 
-  return json({ ok: true, key: subKey, claim }, 200);
+  // --- Publish the live public-safe assignment overlay -------------------------------
+  // The static ops dashboard reads this by brand_id, so wizard completion becomes live
+  // immediately even before an operator promotes the YAML into the repo. No email/phone
+  // or raw wizard YAML is written to this public-safe object.
+  if (assignment) {
+    const assignmentKey = `${ASSIGNMENT_PREFIX}${safeKeyPart(brandId)}.json`;
+    try {
+      const put = await putJson(aws, env, assignmentKey, assignment);
+      if (!put.ok) {
+        console.error(`assignment PUT failed (${put.status}) for ${assignmentKey}`);
+        return json({ status: "error", detail: "assignment not persisted", key: subKey, claim }, 502);
+      }
+    } catch (err) {
+      console.error("assignment PUT error:", err);
+      return json({ status: "error", detail: "assignment not persisted", key: subKey, claim }, 502);
+    }
+  }
+
+  return json({ ok: true, key: subKey, claim, assignment }, 200);
 }
 
 // Non-POST methods → 405 (clearer than a generic 404 for a misrouted client).

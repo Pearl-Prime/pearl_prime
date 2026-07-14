@@ -41,7 +41,7 @@ Buildability + exclusions
 - devotion_path is EXCLUDED unconditionally (its catalog is NOT release-ready; blocked on
   the engine re-point ws). It is never emitted with a packet even if a stale dir exists.
 - brand_buildability.yaml non_buildable archetypes are emitted as buildable:false with a
-  reason and NO download (so the console can render "pending catalog reconciliation"
+  reason and NO download (so the console can render "production/catalog reconciliation pending"
   rather than offer a dead button). They are NEVER stubbed.
 - Brands with no real packet on disk are emitted buildable:<gate> packet:null. Never a stub.
 
@@ -92,10 +92,17 @@ from __future__ import annotations
 import argparse
 import json
 import re
+import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
 import yaml
+
+SCRIPT_DIR = Path(__file__).resolve().parent
+if str(SCRIPT_DIR) not in sys.path:
+    sys.path.insert(0, str(SCRIPT_DIR))
+
+from brand_director_assignments import director_for, load_director_assignments
 
 REPO = Path(__file__).resolve().parents[2]
 UNIFIED = REPO / "config" / "brand_management" / "global_brand_registry_unified.yaml"
@@ -249,6 +256,15 @@ def build_bridge(week: str) -> dict:
         else []
     )
     coord = _coordination_block(week)
+    directors = load_director_assignments()
+
+    def _director_fields(cbid: str, archetype: str) -> dict:
+        return director_for(
+            brand_id=cbid,
+            base_brand=archetype,
+            assignments=directors,
+            allow_base=False,
+        )
 
     brands: dict[str, dict] = {}
     blocked: dict[str, dict] = {}
@@ -260,6 +276,7 @@ def build_bridge(week: str) -> dict:
                 "reason": "excluded — catalog not release-ready (engine re-point ws); see brand_buildability.yaml",
                 "packet_dir": None,
                 "archetype": archetype,
+                **_director_fields(cbid, archetype),
             }
             continue
 
@@ -267,10 +284,11 @@ def build_bridge(week: str) -> dict:
         if archetype in non_buildable:
             entry = non_buildable[archetype] or {}
             blocked[cbid] = {
-                "reason": (str(entry.get("reason") or "blocked, pending catalog reconciliation")).strip(),
+                "reason": (str(entry.get("reason") or "production/catalog reconciliation pending")).strip(),
                 "packet_dir": None,
                 "archetype": archetype,
                 "shippable_count": entry.get("shippable_count"),
+                **_director_fields(cbid, archetype),
             }
             continue
 
@@ -280,9 +298,10 @@ def build_bridge(week: str) -> dict:
         mono = _monolithic_zip(pdir, week) if pdir else None
         if not (pdir and manifest and mono):
             blocked[cbid] = {
-                "reason": "blocked, pending catalog reconciliation — no real weekly packet on disk for this brand/week",
+                "reason": "catalog ready, production files pending — no real weekly packet on disk for this brand/week",
                 "packet_dir": pdir,
                 "archetype": archetype,
+                **_director_fields(cbid, archetype),
             }
             continue
 
@@ -295,11 +314,12 @@ def build_bridge(week: str) -> dict:
         if headline_ready < MIN_READY_HEADLINE_AXES or mono.stat().st_size < MIN_REAL_ZIP_BYTES:
             blocked[cbid] = {
                 "reason": (
-                    "blocked, pending catalog reconciliation — packet dir is a seed scaffold "
+                    "catalog ready, production files pending — packet dir is a seed scaffold "
                     f"({headline_ready} ready headline axes, {mono.stat().st_size}B zip); no shippable content yet"
                 ),
                 "packet_dir": pdir,
                 "archetype": archetype,
+                **_director_fields(cbid, archetype),
             }
             continue
 
@@ -308,6 +328,7 @@ def build_bridge(week: str) -> dict:
             "week": week,
             "week_monday": manifest.get("week_monday") or _week_monday_iso(week),
             "buildable": True,
+            **_director_fields(cbid, archetype),
             "package_type": manifest.get("package_type") or "",
             "axes": axes,
             "axis_count_ready": len(ready),

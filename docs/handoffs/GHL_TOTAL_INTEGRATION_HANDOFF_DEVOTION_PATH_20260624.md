@@ -49,7 +49,7 @@ Skipping either half breaks the funnel: feed without webhook = no contacts; webh
 **Send back to operator:**
 
 ```text
-PHOENIX_GHL_FUNNEL_WEBHOOK_DEVOTION=https://services.leadconnectorhq.com/hooks/...
+PHOENIX_GHL_FUNNEL_WEBHOOK_DEVOTION=<REDACTED_GHL_WEBHOOK_URL>
 Feed URL confirmed: https://pub-4bac5d0b30be4b16824cd1eaa84ae9f5.r2.dev/pearl-prime-content/devotion_path/en_US/<week>/marketing_feed.json
 Sub-account: ...
 Workflows published: yes
@@ -127,7 +127,7 @@ All pages include: `data-brand-id="devotion_path"`, `data-topic`, `data-funnel-s
 ### After GHL admin returns the webhook URL
 
 ```bash
-URL='https://services.leadconnectorhq.com/hooks/...'
+URL='<REDACTED_GHL_WEBHOOK_URL>'
 security add-generic-password -s phoenix-omega -a PHOENIX_GHL_FUNNEL_WEBHOOK_DEVOTION -w "$URL" -U
 export PHOENIX_GHL_FUNNEL_WEBHOOK_DEVOTION="$URL"
 python3 scripts/freebies/inject_ghl_webhook.py --brand-id devotion_path --require-env
