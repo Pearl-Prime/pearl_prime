@@ -1,6 +1,6 @@
 # Program State — Single Source of Truth
 
-**LAST VERIFIED:** 2026-07-11 @ `origin/main` `d8532d2d43874051b90201bda8b07eab5c1ce817` (post-#5535 kenjin EXERCISE readiness; ProPrime modes A/B/C/D verification lane)
+**LAST VERIFIED:** 2026-07-14 @ `origin/main` `19edc45e0bd2ebdae63c802866a5297ab125813d` (books-first EPUB micro-wave + GHL attach final audit; #5641)
 
 > **RULE:** Verify against `origin/main`, never git date or the working tree (shared-tree branch-churn shows
 > other-branch/stale state). This is the entry point — if another doc disagrees with this, this wins or that doc is stale.
@@ -8,7 +8,9 @@
 > **GLOSSARY (read this — it has caused repeated confusion):**
 > **Listing** = catalog metadata (title/subtitle/description/cover/dashboard — what a book is *about*).
 > **EPUB** = the actual readable, sellable file a customer downloads.
-> We have **~1,519 listings** and **1 catalog EPUB assembled** (first Waystream EPUB, #1923 — see Production-Gate).
+> We have **~1,519 listings** and **89 tracked Waystream EPUB artifacts** under
+> `artifacts/epubs/way_stream_sanctuary/` as of #5640/#5641; only cells with merged proof should be
+> treated as real attached assets (see Production-Gate). This is still **not** catalog-scale readiness.
 > "Books" in most docs means *listings* — do NOT read it as "readable/sellable books."
 
 ## Current Status by Track
@@ -57,7 +59,7 @@ program history. Both goldens now live + byte-frozen:
 - **D music mode:** PASS as overlay production lane — `pytest` music suite 12/12; spine render `--music-mode with-lyrics --musician-id ahjan` four-piece chord → book_quality Pass + `music_overlay_audit.json` applied with LYRIC_* + MUSIC_REFLECTION_* injections. Music V2 / MusicGen / first-external-musician remain **proposed/held** (PROGRAM_STATE hold #6); ahjan_music is reference kit only.
 
 ### Production-Gate / Real-EPUBs
-- **Status:** **FIRST EPUB SHIPPED — durable on `main` (1 EPUB); validated brand generalizes across 4 cells**
+- **Status:** **BOOKS-FIRST MICRO-WAVE SHIPPED — durable on `main` (89 Waystream EPUB artifacts; 2 newly verified + attached in the 2026-07-14 pack); not catalog-scale**
 - **Details:** Book assembly is **deterministic atom-composition** (no LLM at build; thin pools must raise
   `InsufficientVariantsError` → fix by adding atoms, never LLM-expand — verify `pearl_writer_expand.py` is NOT on the
   spine/production path). ✅ **F1/F4 + F2/F7 precision all on `main`** via PR #1919 (`ae4991bd3a`). **First gate-passing
@@ -65,7 +67,17 @@ program history. Both goldens now live + byte-frozen:
   ei_v2 0.62, 13,759 words, 1.7 MB → `artifacts/epubs/way_stream_sanctuary/`. **3 generalization cells**
   (anxiety/false_alarm, boundaries/shame, boundaries/comparison) all register-PASS, ei_v2 0.62–0.64 — corporate_managers
   scales with **zero engine work** (loop spine CLI over the F006 arc matrix + `build_epub.py`).
-  **1 catalog EPUB assembled** (was 0).
+  **2026-07-14 books-first pack:** foundation #5627 (`7914b45693f`), thin-persona slate #5630
+  (`3359ea161c`), no-op writer receipt #5632 (`8560a873fd`), four-cell tuple proof #5637 (`5576257ebe`),
+  Waystream EPUB wave #5640 (`2039983797`), and GHL attach #5641 (`19edc45e0b`) all landed. #5640 added two
+  new real EPUBs from proof-approved NYC executive anxiety cells:
+  `way_stream_sanctuary__nyc_executives__anxiety__false_alarm.epub` (45,319 bytes) and
+  `way_stream_sanctuary__nyc_executives__anxiety__watcher.epub` (47,187 bytes). Both passed hard production gates
+  (chapter_flow/book_pass/book_quality/EI V2) with register_gate WARN(F13) and no bracket-stub matches; the current
+  durable Waystream convention is coverless, so `validate_epub.py` records `missing_cover` as expected. The attempted
+  `educators × imposter_syndrome × false_alarm` render did **not** ship because production mode failed
+  chapter_flow/book_pass/book_quality gates. Final audit authority:
+  `artifacts/qa/books_first_epub_wave_final_audit_20260714/SUMMARY.md`.
 - ⚠ **Thin-persona caveat (the next lane):** **canonical atom repair MERGED** (#5489, 2026-07-10) — educators/nyc
   slot-keyed gaps partially closed. **#5530 (2026-07-11, `2d9ada1e21`) closed one more downstream blocker**: `educators ×
   imposter_syndrome` full spine render was still hard-failing with `EnrichmentGapError` on `REFLECTION` (ch7) even
@@ -81,8 +93,9 @@ program history. Both goldens now live + byte-frozen:
   `NO_BINDING` cells** (distinct from repaired legal `false_alarm` cells): educators×boundaries×overwhelm,
   educators×burnout×shame, educators×compassion_fatigue×shame, nyc_executives×burnout×shame; a catalog-wide
   REFLECTION-pool parse audit (header count ≠ usable-atom count per #5530) is a new, separate, not-yet-scoped lane.
-  Next = remaining engine-keyed STORY seeding + rebuild proof + Waystream-scale EPUB wave (binding call only for true
-  `NO_BINDING` cells).
+  The 2026-07-14 pack proved four legal tuples and shipped two NYC-executive EPUBs; next books-first work is another
+  small, proof-approved EPUB batch and/or a focused fix for the failed educators gate, with binding calls only for true
+  `NO_BINDING` cells.
 - **Wave 2026-06-25 (teacher-bank unblock):** 12 teachers now have `TEACHER_DOCTRINE` atoms (PR #1914) — all 26
   brands unblocked from the `library_34` fallback. 29 `CANONICAL.txt` files backfilled for educators + nyc_executives
   thin slots (PR #1915); 69/69 tests pass.
@@ -92,14 +105,19 @@ program history. Both goldens now live + byte-frozen:
   has no `active`/`tier` field, so kenjin is a first-class entry = active-by-presence — **operator to confirm**.
 
 ### GHL marketing feed
-- **Status:** **LIVE** — **first paid EPUB attached** (PR **#1947**, `89a11d5387`, 2026-06-26)
+- **Status:** **LIVE** — **paid EPUB attach path expanded by the 2026-07-14 books-first micro-wave** (#5641, `19edc45e0b`)
 - **Details:** `marketing_feed.json` published on brand-admin Pages (public HTTPS) (#1866/#1867/#1875/#1882); R2
   provisioned; 15-topic integration; all 15 funnel landings → GHL capture. Design: paid items gate on **real attached
   asset** (`pending_asset` until then), free items on **asset-exists**; **free-content-first** — paid auto-promotes on
   attach. Funnel is live on free content + listings. **First paid attach:** Waystream
   `corporate_managers × burnout × overwhelm` EPUB in `brand_deliveries/way_stream_sanctuary.json` week 2026-W26
   (`way_stream_sanctuary__default_teacher__corporate_managers__burnout__overwhelm.epub`, R2-backed download URL) per
-  #1947 — satisfies the GHL paid-slot attach row (OPD-20260630-002 / Q-DRIFT-02).
+  #1947 — satisfies the GHL paid-slot attach row (OPD-20260630-002 / Q-DRIFT-02). **2026-07-14 attach:**
+  #5641 added the two new NYC executive anxiety EPUBs to `brand_deliveries/way_stream_sanctuary.json` and verified R2
+  `head_object` for both keys; feed entries moved `791 -> 793` with proxy URLs
+  `/download/way_stream_sanctuary__nyc_executives__anxiety__false_alarm?week=2026-W29` and
+  `/download/way_stream_sanctuary__nyc_executives__anxiety__watcher?week=2026-W29`. No secrets or presigned URLs were
+  persisted.
 
 ### Localization
 - **Status:** **IN PROGRESS (pilot execution on `main`; not catalog-scale)** — Waystream titles are distinct + hard-gated
@@ -162,16 +180,16 @@ program history. Both goldens now live + byte-frozen:
     `catalog-fanout-*` workflows when queue is hot; authority: `artifacts/coordination/GHA_CATALOG_FANOUT_QUEUE_GUARD_CLOSEOUT_2026-07-09.md`.
     Supersedes manual queue-relief waves as the durable fix for catalog starvation of non-catalog PRs.
 
-### Books-first roadmap (operator scan — 2026-07-11 post-#5530)
-- **Authority:** `artifacts/analysis/PROPRIME_100PCT_PRODUCTION_AUDIT_2026-07-10/` (audit snapshot still useful; queue below is live GitHub truth) + `artifacts/qa/thin_persona_buildability_2026-07-11/SUMMARY.md`
-- **Verdict:** Pearl Prime books **NOT catalog-scale production-ready** (1 EPUB + 1 flagship PROVEN-AT-BAR ≠ ~1,519 listings)
-- **Landed (do not re-queue):** **#5490** spine-default lock (`2236c03a23`, 2026-07-10); **#5501** ja-JP teacher-bank (`45e511ab96`, 2026-07-10); **#5525** book-path workstream closeout (`1f4c3155d8`, 2026-07-10); **#5527** books-first SSOT refresh (`b58cdba62e`, 2026-07-10); **#5489** thin-persona canonical atom repair; **#5530** educators×imposter_syndrome REFLECTION parse-gap + binding contradiction repair (`2d9ada1e21`, 2026-07-11 — one cell only, see thin-persona caveat above; do not re-queue this exact cell); **#5532** PROGRAM_STATE thin-persona reflection (`e11f44b5ab`, 2026-07-11). Adjacency/transition/overlay already on `main`: #5156 / #5162 / #5298 / #5515 / #5516 / #5519.
+### Books-first roadmap (operator scan — 2026-07-14 post-#5641)
+- **Authority:** `artifacts/analysis/PROPRIME_100PCT_PRODUCTION_AUDIT_2026-07-10/` (audit snapshot still useful) + `artifacts/qa/thin_persona_buildability_2026-07-11/SUMMARY.md` + `artifacts/qa/books_first_epub_wave_final_audit_20260714/SUMMARY.md`
+- **Verdict:** Pearl Prime books **NOT catalog-scale production-ready** (89 tracked Waystream EPUB artifacts + 1 flagship PROVEN-AT-BAR ≠ ~1,519 listings; the 2026-07-14 pack shipped/attached a two-EPUB micro-wave only)
+- **Landed (do not re-queue):** **#5490** spine-default lock (`2236c03a23`, 2026-07-10); **#5501** ja-JP teacher-bank (`45e511ab96`, 2026-07-10); **#5525** book-path workstream closeout (`1f4c3155d8`, 2026-07-10); **#5527** books-first SSOT refresh (`b58cdba62e`, 2026-07-10); **#5489** thin-persona canonical atom repair; **#5530** educators×imposter_syndrome REFLECTION parse-gap + binding contradiction repair (`2d9ada1e21`, 2026-07-11 — one cell only, see thin-persona caveat above; do not re-queue this exact cell); **#5532** PROGRAM_STATE thin-persona reflection (`e11f44b5ab`, 2026-07-11); **#5627/#5630/#5632/#5637/#5640/#5641** books-first EPUB wave foundation → slate → no-op seed → tuple proof → two-EPUB ship → GHL/R2 attach. Adjacency/transition/overlay already on `main`: #5156 / #5162 / #5298 / #5515 / #5516 / #5519.
 - **Next books-first actions (live order):**
-  1. **Remaining thin-persona engine-keyed STORY seeding** (educators/nyc cells still thin beyond the #5489/#5530 repaired surfaces) + **4-cell tuple-viability rebuild proof** (#1922 pattern). The `false_alarm`/`imposter_syndrome` binding-governance question is **resolved** (#5530) — do not re-raise it. Split governance: only true `NO_BINDING` cells need a binding call — do **not** conflate with already-legal/repaired `false_alarm` cells. Separate not-yet-scoped follow-on: catalog-wide REFLECTION-pool real-parse depth audit (header count ≠ usable-atom count per #5530).
-  2. **Waystream EPUB wave** expansion from the proven spine CLI lane (#1923 pattern; chord: `--pipeline-mode spine --quality-profile production --exercise-journeys`)
-  3. **GHL attach batch** for each newly shipped real EPUB
-  4. **#5237** atom-cohesion craft lane — **OPEN but RED** (parse-sweep / Schema / Core / Drift / Release failing as of 2026-07-11); repair-needed follow-on, **not** a green next lane; re-evaluate scope against already-landed adjacency/transition/overlay fixes before fresh craft work
-  5. **#5206** bestseller-conformance audit/evidence — **OPEN**; treat as evidence-only / partially stale context (do not treat as fresh implementation authority without live reconciliation)
+  1. **Next proof-approved EPUB micro-wave:** either fix the failed `educators × imposter_syndrome × false_alarm` production gates or choose the next tuple-proof-approved cells; keep smoke→pilot→scale caps and do not promote anything until a real EPUB exists.
+  2. **GHL attach each newly shipped real EPUB** using the existing `brand_deliveries/way_stream_sanctuary.json` + R2 proof convention; no paid promotion without asset-exists proof.
+  3. **True governance-only `NO_BINDING` cells** still require a binding call; do not conflate them with already-legal/repaired `false_alarm` cells.
+  4. **#5237** atom-cohesion craft lane — **OPEN/RED/DIRTY/CONFLICTING**; this pack marked it BLOCKED and held a remote evidence branch. Repair requires a split/rebase follow-up, not a narrow check fix.
+  5. **#5206** bestseller-conformance audit/evidence — **OPEN/DIRTY/stale/hot-file-polluted**; this pack marked it BLOCKED. Treat as historical evidence unless PM serializes a replacement audit without `CANONICAL_ARTIFACTS_REGISTRY.tsv`.
 - **Held / not now:** **#5295** (owner), **#3166** (operator budget), **#4861** (governance audit evidence)
 - **Not books prerequisite / not live authority:** manga PROVEN-AT-BAR; **#5526** manga-only (already merged tip docs); **#5518** agent-execution-fabric docs — **OPEN/RED** and **absent from `origin/main`** (do not cite as live authority); **#5502** dashscope audit; ~150 catalog-skeleton listing PRs
 
@@ -179,7 +197,7 @@ program history. Both goldens now live + byte-frozen:
 | PR | State | Gate |
 |----|-------|------|
 | **#5237** | **OPEN**, CI **red** | Atom cohesion craft — repair-needed follow-on; **not green**; re-scope vs landed #5156/#5162/#5298/#5515–#5519 before rework |
-| **#5206** | **OPEN**, checks green | Bestseller conformance audit/evidence — evidence-only; partially stale vs July 10 adjacency/atom merges |
+| **#5206** | **OPEN**, dirty/stale | Bestseller conformance audit/evidence — evidence-only; hot-file-polluted; replacement audit must be PM-serialized |
 | **#5518** | **OPEN**, CI **red** | Agent execution fabric v1 docs — **not on `origin/main`**; **not live authority** until merged |
 | **#5295** | **OPEN**, checks green | Owner-gated full-repo redundancy/garbage sweep + Q-gated roadmap — **do not merge in this lane** |
 | **#3166** | **OPEN**, **draft** | `ci(budget): lean content-PR gating` — **DO NOT MERGE until Jul 1 reset** (operator-gated) |
@@ -188,10 +206,11 @@ program history. Both goldens now live + byte-frozen:
 
 ### Storefront
 - **Status:** **LIVE (listings)** — **consumer paid-download scale still blocked** on asset depth
-- **Details:** Pearl Prime Storefront renders sample/listing data. **GHL feed attach:** 1 real EPUB attached (#1947 —
-  see GHL row above). **Storefront consumer paid downloads at scale:** still **0 beyond the single attached cell**
-  until the attach pipeline runs for additional titles; Phase A smoke (5 locales × 4 product types) remains **stalled**
-  until real asset depth exists. Do not conflate GHL attach (#1947) with full storefront Phase A go-live.
+- **Details:** Pearl Prime Storefront renders sample/listing data. **GHL feed attach:** the original real EPUB attached
+  by #1947 plus the two 2026-07-14 NYC executive anxiety EPUBs attached by #5641 (see GHL row above). **Storefront
+  consumer paid downloads at scale:** still blocked on real asset depth; Phase A smoke (5 locales × 4 product types)
+  remains **stalled** until deeper real-download coverage exists. Do not conflate GHL attach rows with full storefront
+  Phase A go-live.
 
 ---
 
