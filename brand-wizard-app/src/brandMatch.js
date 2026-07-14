@@ -36,6 +36,68 @@ function norm(s) {
   return String(s == null ? "" : s).toLowerCase().replace(/[\s-]+/g, "_");
 }
 
+function cleanNamePart(s) {
+  return String(s || "")
+    .replace(/<[^>]*>/g, "")
+    .replace(/[<>"'`]/g, "")
+    .trim();
+}
+
+function directorNameFromContact(contact) {
+  const c = contact || {};
+  return [cleanNamePart(c.firstName), cleanNamePart(c.lastName)]
+    .filter(Boolean)
+    .join(" ")
+    .trim();
+}
+
+function directorIdFromName(name) {
+  return (
+    String(name || "")
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "_")
+      .replace(/^_+|_+$/g, "")
+      .slice(0, 80) || "brand_director"
+  );
+}
+
+function baseBrandFromId(brandId) {
+  return String(brandId || "").replace(/_(en_us|es_us|es_es|pt_br|zh_tw|zh_hk|zh_cn|zh_sg|ja_jp|ko_kr)$/, "");
+}
+
+function yamlSafe(s) {
+  return String(s == null ? "" : s).replace(/\\/g, "\\\\").replace(/"/g, '\\"');
+}
+
+export function brandAssignmentPayload(match, contact) {
+  if (!match || !match.brand_id) return null;
+  const name = directorNameFromContact(contact);
+  if (!name) return null;
+  return {
+    brand_id: match.brand_id,
+    base_brand: baseBrandFromId(match.brand_id),
+    display_brand: match.publication_corp || match.brand_id,
+    brand_director_name: name,
+    brand_director_id: directorIdFromName(name),
+    brand_director_status: "assigned",
+  };
+}
+
+export function appendBrandAssignmentToYAML(yamlText, match, contact) {
+  const a = brandAssignmentPayload(match, contact);
+  if (!a) return yamlText;
+  return (
+    String(yamlText || "").replace(/\s*$/, "\n\n") +
+    "matched_brand:\n" +
+    `  brand_id: "${yamlSafe(a.brand_id)}"\n` +
+    `  base_brand: "${yamlSafe(a.base_brand)}"\n` +
+    `  display_brand: "${yamlSafe(a.display_brand)}"\n` +
+    `  brand_director_name: "${yamlSafe(a.brand_director_name)}"\n` +
+    `  brand_director_id: "${yamlSafe(a.brand_director_id)}"\n` +
+    `  brand_director_status: "${yamlSafe(a.brand_director_status)}"\n`
+  );
+}
+
 // state: wizard selections {onboardingMarket, archetype, persona, emotions[], topicTags[], angles[], tradition}
 // brands: brand_admin_brands.json (keyed by brand_id)
 // teacherMode: {mode:"teacher"|"composite", teacher:string|null}  (from phoenix_book_mode / ?teacher / ?mode)

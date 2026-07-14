@@ -424,7 +424,7 @@ function renderPhase2(){
   if(pkt.state==='ready'){
     h+=`<a class="action-btn big" id="admin-packet-dl-btn" onclick="downloadAdminPacket(event)">Download Week 1 Package</a>`;
   }else{
-    h+=`<div class="warn"><strong>Catalog ready, production files pending.</strong> ${pkt.reason||'This brand has no shippable weekly packet on disk yet.'} Use the <a href="brand-wizard-app/public/brand_handoff_dashboard.html?brand=${encodeURIComponent(brandId)}" style="color:var(--acc2)">Weekly packet dashboard</a> to view the live catalog status.</div>`;
+    h+=`<div class="warn"><strong>Catalog ready, production files pending.</strong> ${pkt.reason||'This brand has no shippable weekly packet on disk yet.'} Use the <a href="brand-wizard-app/public/brand_handoff_dashboard.html?brand=${encodeURIComponent(brandId)}" style="color:var(--acc2)">ops metadata dashboard</a> to view the live catalog and download metadata CSVs.</div>`;
   }
   h+=`<div id="coord-build-badge" class="coord-build-badge loading">Packet bridge: checking…</div>
     <div style="margin-top:10px;font-family:var(--mono);font-size:.5rem;color:var(--dim)">${folders}</div>
@@ -511,7 +511,7 @@ function refreshCoordinationBuildBadge(){
 function downloadAdminPacket(ev){
   if(!brandId){alert('Select a brand first.');return;}
   const pkt=packetStatus(brandId);
-  if(pkt.state!=='ready'){alert(pkt.reason||'No shippable package for this brand/week.');return;}
+  if(pkt.state!=='ready'){alert(pkt.reason||'Rendered production package pending. Open the ops dashboard for catalog metadata.');return;}
   var week=(pkt.info&&pkt.info.week)||currentIsoWeek();
   var btn=ev&&ev.target?ev.target:document.getElementById('admin-packet-dl-btn');
   var url=brandAdminApiBase()+'/api/brand_admin/download/'+encodeURIComponent(brandId)+'/'+encodeURIComponent(week);

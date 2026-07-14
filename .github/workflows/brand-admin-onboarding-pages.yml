@@ -65,6 +65,10 @@ jobs:
         run: python3 scripts/ci/validate_onboarding_registry.py
         working-directory: ${{ github.workspace }}
 
+      - name: Validate Brand Director live readiness
+        run: python3 scripts/ci/validate_brand_director_live_readiness.py
+        working-directory: ${{ github.workspace }}
+
       - name: Install and build
         run: |
           npm ci

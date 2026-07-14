@@ -191,10 +191,23 @@ def _email_slug(email: str) -> str:
     return re.sub(r"[^a-z0-9]+", "_", (email or "anon").lower()).strip("_")[:48] or "anon"
 
 
+def _director_slug(name: str) -> str:
+    return re.sub(r"[^a-z0-9]+", "_", (name or "").lower()).strip("_")[:80] or "brand_director"
+
+
+def _base_brand_from_id(brand_id: str) -> str:
+    return re.sub(r"_(en_us|es_us|es_es|pt_br|zh_tw|zh_hk|zh_cn|zh_sg|ja_jp|ko_kr)$", "", brand_id)
+
+
 class OnboardingSubmission(BaseModel):
     brand_id: str = Field(..., min_length=1)        # matched unified brand_id, e.g. stillness_press_en_us
     lane: Optional[str] = None
     publication_corp: Optional[str] = None          # imprint name, e.g. "Stillness Press"
+    base_brand: Optional[str] = None
+    display_brand: Optional[str] = None
+    brand_director_name: Optional[str] = None
+    brand_director_id: Optional[str] = None
+    brand_director_status: Optional[str] = None
     brand_email: Optional[str] = None
     contact: Optional[Dict[str, str]] = None        # first_name/last_name/phone/...
     wizard_yaml: str = Field(..., min_length=1)      # the generated brand-config YAML (text)
@@ -240,6 +253,31 @@ def submit_onboarding(req: OnboardingSubmission) -> dict:
     ts = now.isoformat(timespec="seconds")
     contact = req.contact or {}
     name = " ".join(x for x in [contact.get("first_name"), contact.get("last_name")] if x).strip()
+    index_entry = index.get(brand_id) if isinstance(index.get(brand_id), dict) else {}
+    director_name = (req.brand_director_name or name).strip()
+    director_id = (req.brand_director_id or _director_slug(director_name)).strip()
+    base_brand = (
+        (req.base_brand or "").strip()
+        or str(index_entry.get("arch") or "").strip()
+        or _base_brand_from_id(brand_id)
+    )
+    display_brand = (
+        (req.display_brand or "").strip()
+        or (req.publication_corp or "").strip()
+        or str(index_entry.get("d") or "").strip()
+        or brand_id
+    )
+    director_status = (req.brand_director_status or "assigned").strip() or "assigned"
+    public_assignment = {
+        "brand_id": brand_id,
+        "base_brand": base_brand,
+        "display_brand": display_brand,
+        "brand_director_name": director_name or None,
+        "brand_director_id": director_id if director_name else None,
+        "brand_director_status": director_status,
+        "assigned_at": ts,
+        "assignment_source": "brand_onboarding_wizard",
+    }
 
     # 0. TEACHER 1:1 EXCLUSIVITY — a teacher brand is a real person's voice; only ONE admin
     # may claim it. The teacher identity (lane, tid) is derived server-side from the brands
@@ -269,6 +307,7 @@ def submit_onboarding(req: OnboardingSubmission) -> dict:
         "submitted_at": ts, "brand_id": brand_id, "lane": req.lane,
         "publication_corp": req.publication_corp, "brand_email": email,
         "contact": contact, "match_score": req.match_score, "match_basis": req.match_basis,
+        "brand_assignment": public_assignment,
         "source": "brand_onboarding_wizard",
     }
     _atomic_write(sub_path, yaml.safe_dump(record, sort_keys=False, allow_unicode=True)
@@ -291,6 +330,10 @@ def submit_onboarding(req: OnboardingSubmission) -> dict:
     overlay["assignments"][brand_id] = {
         "status": "assigned", "admin_name": name or None, "admin_email": email or None,
         "publication_corp": req.publication_corp, "assigned_at": ts,
+        "brand_id": brand_id, "base_brand": base_brand, "display_brand": display_brand,
+        "brand_director_name": director_name or None,
+        "brand_director_id": director_id if director_name else None,
+        "brand_director_status": director_status,
         "assigned_via": "brand_onboarding_wizard",
     }
     _atomic_write(ASSIGNMENTS_YAML, yaml.safe_dump(overlay, sort_keys=False, allow_unicode=True))

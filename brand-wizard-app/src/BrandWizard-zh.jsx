@@ -1,6 +1,6 @@
 import { useState, useCallback, useRef, useMemo, useEffect } from "react";
 import { useTranslation } from "./useTranslation.jsx";
-import { matchBrand } from "./brandMatch.js";
+import { appendBrandAssignmentToYAML, brandAssignmentPayload, matchBrand } from "./brandMatch.js";
 import { ChevronRight, ChevronLeft, Eye, Sparkles, BookOpen, Mic, Film, Palette, Heart, Target, Zap, Shield, Sun, Moon, Flame, Feather, Brain, Compass, Star, Check, AlertTriangle, Download, Play, PenTool, Image, Layers, ArrowRight, Users, BarChart3, TrendingUp, Radio, Headphones, Tv, Smartphone, BookMarked, GraduationCap, Clock, Rocket, Award, Crown, Globe, Volume2, Brush, Activity, Search, Hash, Tag, Grip, CircleDot, SlidersHorizontal } from "lucide-react";
 import { OutputProofStrip } from "./onboarding/OutputProofStrip.jsx";
 import { LaneChoiceCard } from "./onboarding/LaneChoiceCard.jsx";
@@ -2817,6 +2817,7 @@ function Step11Launch({ state, update, i18n = {} }) {
   const [yamlCopied, setYamlCopied] = useState(false);
 
   const [matched, setMatched] = useState(null);
+  const [submissionError, setSubmissionError] = useState("");
 
   const readTeacherMode = () => {
     try { const raw = localStorage.getItem("phoenix_book_mode"); if (raw) return JSON.parse(raw); } catch (_) {}
@@ -2828,14 +2829,51 @@ function Step11Launch({ state, update, i18n = {} }) {
   };
 
   const handleLaunch = async () => {
-    setYamlOutput(generateYAML(state));
+    let wizardYaml = generateYAML(state);
+    setYamlOutput(wizardYaml);
+    setSubmissionError("");
     setSubmitted(true);
+    let m = null;
     try {
       const r = await fetch("brand_admin_brands.json", { cache: "no-store" });
       const brands = r.ok ? await r.json() : {};
-      const m = matchBrand(state, brands, readTeacherMode());
+      m = matchBrand(state, brands, readTeacherMode());
+      if (m) {
+        wizardYaml = appendBrandAssignmentToYAML(wizardYaml, m, state.contact || {});
+        setYamlOutput(wizardYaml);
+      }
       if (m) { setMatched(m); try { localStorage.setItem("phoenix_pending_brand", JSON.stringify(m)); } catch (_) {} }
     } catch (_) {}
+    if (m) {
+      const c = state.contact || {};
+      const assignment = brandAssignmentPayload(m, c);
+      try {
+        const response = await fetch("api/onboarding/submit", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            brand_id: m.brand_id,
+            lane: m.lane,
+            publication_corp: m.publication_corp,
+            ...(assignment || {}),
+            brand_email: (c.email || "").trim() || null,
+            contact: {
+              first_name: c.firstName || "",
+              last_name: c.lastName || "",
+              phone: ((c.phoneCode || "+1") + " " + (c.phone || "")).trim(),
+            },
+            wizard_yaml: wizardYaml,
+            match_score: typeof m.score === "number" ? m.score : null,
+            match_basis: m.basis || null,
+          }),
+        });
+        if (!response.ok) {
+          setSubmissionError("Live assignment did not persist. Keep this screen open and contact ops before treating this brand as active.");
+        }
+      } catch (_) {
+        setSubmissionError("Live assignment did not persist. Keep this screen open and contact ops before treating this brand as active.");
+      }
+    }
   };
 
   if (submitted) {
@@ -2883,6 +2921,11 @@ function Step11Launch({ state, update, i18n = {} }) {
             >
               {t("ui", "Open Brand Director")} <ArrowRight size={16} />
             </button>
+          </div>
+        )}
+        {submissionError && (
+          <div className="mb-6 rounded-2xl border border-amber-300 bg-amber-50 p-4 text-sm font-semibold text-amber-900">
+            {submissionError}
           </div>
         )}
         {/* Celebration Header */}

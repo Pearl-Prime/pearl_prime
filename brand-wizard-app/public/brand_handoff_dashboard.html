@@ -177,7 +177,9 @@ const CHROME = {
     weeklyOs:"📅 Weekly OS (setup rhythm)",
     brandDirector:"Brand Director", productionPendingTitle:"Catalog ready, production files pending",
     catalogReady:"Catalog ready", productionPending:"Production files pending", weeklyPacketPending:"Weekly packet pending", weeklyPacketReady:"Weekly packet ready",
-    catalogBlockedNote:"Catalog metadata is live. Production files and a shippable weekly packet are still pending, so upload downloads are disabled.",
+    catalogBlockedNote:"Catalog metadata is live. Production files and a shippable weekly packet are still pending.",
+    metadataOpsTitle:"Catalog metadata ops queue", metadataOpsNote:"Use these catalog metadata files to prepare store intake. Production files are still pending; upload only after rendered files arrive.",
+    metadataDownloads:"⬇ Download metadata CSVs", metadataDownload:"⬇ Metadata CSV",
     openCatalogAction:"Open catalog", downloadsPending:"Downloads pending",
   },
   ja: {
@@ -200,7 +202,9 @@ const CHROME = {
     weeklyOs:"📅 週次OS（セットアップ）",
     brandDirector:"ブランドディレクター", productionPendingTitle:"カタログ準備済み・制作ファイル待ち",
     catalogReady:"カタログ準備済み", productionPending:"制作ファイル待ち", weeklyPacketPending:"週次パケット待ち", weeklyPacketReady:"週次パケット準備済み",
-    catalogBlockedNote:"カタログ情報は公開済みです。制作ファイルと公開可能な週次パケットはまだ待機中のため、アップロード用ダウンロードは無効です。",
+    catalogBlockedNote:"カタログ情報は公開済みです。制作ファイルと公開可能な週次パケットはまだ待機中です。",
+    metadataOpsTitle:"カタログメタデータ運用キュー", metadataOpsNote:"ストア入稿準備用のカタログメタデータです。制作ファイルはまだ待機中のため、完成ファイル到着後にアップロードしてください。",
+    metadataDownloads:"⬇ メタデータCSVをダウンロード", metadataDownload:"⬇ メタデータCSV",
     openCatalogAction:"カタログを開く", downloadsPending:"ダウンロード準備中",
   },
   "zh-Hant": {
@@ -223,7 +227,9 @@ const CHROME = {
     weeklyOs:"📅 每週營運節奏（Weekly OS）",
     brandDirector:"品牌總監", productionPendingTitle:"書目已就緒，製作檔案待完成",
     catalogReady:"書目已就緒", productionPending:"製作檔案待完成", weeklyPacketPending:"每週內容包待完成", weeklyPacketReady:"每週內容包已就緒",
-    catalogBlockedNote:"書目中繼資料已上線。製作檔案與可交付的每週內容包仍待完成，因此上傳下載已停用。",
+    catalogBlockedNote:"書目中繼資料已上線。製作檔案與可交付的每週內容包仍待完成。",
+    metadataOpsTitle:"書目中繼資料營運佇列", metadataOpsNote:"這些是商店上架準備用的書目中繼資料。製作檔案仍待完成；請在渲染檔案抵達後再上傳。",
+    metadataDownloads:"⬇ 下載中繼資料 CSV", metadataDownload:"⬇ 中繼資料 CSV",
     openCatalogAction:"開啟書目", downloadsPending:"下載尚未開放",
   },
   "zh-Hans": {
@@ -246,7 +252,9 @@ const CHROME = {
     weeklyOs:"📅 每周运营节奏（Weekly OS）",
     brandDirector:"品牌总监", productionPendingTitle:"书目已就绪，制作文件待完成",
     catalogReady:"书目已就绪", productionPending:"制作文件待完成", weeklyPacketPending:"每周内容包待完成", weeklyPacketReady:"每周内容包已就绪",
-    catalogBlockedNote:"书目元数据已上线。制作文件与可交付的每周内容包仍待完成，因此上传下载已停用。",
+    catalogBlockedNote:"书目元数据已上线。制作文件与可交付的每周内容包仍待完成。",
+    metadataOpsTitle:"书目元数据运营队列", metadataOpsNote:"这些是商店上架准备用的书目元数据。制作文件仍待完成；请在渲染文件到位后再上传。",
+    metadataDownloads:"⬇ 下载元数据 CSV", metadataDownload:"⬇ 元数据 CSV",
     openCatalogAction:"打开书目", downloadsPending:"下载尚未开放",
   },
 };
@@ -546,7 +554,10 @@ const DELIV_PLAT = {kdp:"Amazon KDP", google_play:"Google Play", apple_books:"Ap
 let currentWeekIdx = null;
 function esc(s){ return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
 function productionPendingDetail(s){
-  return String(s || "").replace(/^catalog ready,\s*production files pending\s*[—-]\s*/i, "");
+  return String(s || "")
+    .replace(/^catalog ready,\s*production files pending\s*[—-]\s*/i, "")
+    .replace(/packet dir is a seed scaffold\s*\(([^)]*)\);\s*no shippable content yet/i, "Seed scaffold detected ($1); rendered production files have not been published yet.")
+    .replace(/no shippable content yet/ig, "rendered production files have not been published yet");
 }
 function packetBridgeStatus(brandId){
   if(!PACKET_BRIDGE)return null;
@@ -557,14 +568,18 @@ function packetBridgeStatus(brandId){
   return null;
 }
 function isPacketBlocked(){ return PACKET_BLOCK&&PACKET_BLOCK.state==="blocked"; }
+function hasCatalogMetadata(){ return !!(REAL_CATALOG && REAL_CATALOG.length); }
+function canDownloadMetadata(){ return !isPacketBlocked() || hasCatalogMetadata(); }
 function applyPacketBlockUi(){
   const blocked=isPacketBlocked();
+  const metadataLive=hasCatalogMetadata();
+  const downloadsDisabled=blocked&&!metadataLive;
   const dlAll=document.getElementById("ui-dlall");
   if(dlAll){
-    dlAll.disabled=blocked;
-    dlAll.style.opacity=blocked?"0.45":"1";
-    dlAll.style.cursor=blocked?"not-allowed":"";
-    dlAll.textContent=blocked?(T.downloadsPending||"Downloads pending"):T.dlAll;
+    dlAll.disabled=downloadsDisabled;
+    dlAll.style.opacity=downloadsDisabled?"0.45":"1";
+    dlAll.style.cursor=downloadsDisabled?"not-allowed":"";
+    dlAll.textContent=blocked&&metadataLive?(T.metadataDownloads||"Download metadata CSVs"):blocked?(T.downloadsPending||"Downloads pending"):T.dlAll;
   }
   let banner=document.getElementById("packet-block-banner");
   if(blocked){
@@ -577,7 +592,7 @@ function applyPacketBlockUi(){
       banner.style.cssText="border:1px solid var(--amber2);padding:12px;margin-bottom:12px;color:var(--amber2)";
       document.getElementById("view-weekly").insertBefore(banner,document.getElementById("slots-summary"));
     }
-    banner.innerHTML=`<strong>${title}.</strong> ${esc(msg)}`;
+    banner.innerHTML=`<strong>${title}.</strong> ${esc(msg)}${metadataLive?`<br><span style="color:var(--muted)">${esc(T.metadataOpsNote||"Catalog metadata is available for ops prep.")}</span>`:""}`;
   }else if(banner){ banner.remove(); }
 }
 function pad(a, n){ a = (a||[]).slice(0,n); while (a.length < n) a.push(""); return a; }
@@ -700,20 +715,21 @@ function buildMetadataFile(p, week, pkt) {
   }
 }
 function dlPacket(pid) {
-  if (isPacketBlocked()) return;
+  if (!canDownloadMetadata()) return;
   const week = weekLabelFor(currentWeekIdx), pkt = packetFor(currentWeekIdx);
   const p = PLATFORMS.find(x => x.id === pid);
   const f = p && buildMetadataFile(p, week, pkt);
   if (f) dl(f.name, f.text, f.mime);
 }
 function downloadAll() {
-  if (isPacketBlocked()) return;
+  if (!canDownloadMetadata()) return;
   const week = weekLabelFor(currentWeekIdx), pkt = packetFor(currentWeekIdx);
   const head = ["channel","format","title","id","description",`price_${CURRENCY}`,"week","brand"];
   const rows = [head];
   PLATFORMS.forEach(p => feedFor(pkt, p).forEach(b =>
     rows.push([p.label, T.fmt[p.feed], (p.feed==="episodes"?`Ep ${b.epNum}: ${b.title}`:p.feed==="manga"?`Ch ${b.epNum}: ${b.title}`:b.title), (b.isbn||b.epNum||""), b.desc, (b.price||audioPrice()), week, BRAND.label])));
-  dl(`all_packets__${BRAND.id}__${week}.csv`, rows.map(r => row(r)).join("\n"), "text/csv");
+  const prefix = isPacketBlocked() ? "catalog_metadata" : "all_packets";
+  dl(`${prefix}__${BRAND.id}__${week}.csv`, rows.map(r => row(r)).join("\n"), "text/csv");
 }
 
 // ── Renders ───────────────────────────────────────────────────────────────
@@ -728,19 +744,44 @@ function renderWeekly() {
   else { note.classList.remove("hidden"); note.innerHTML = `${T.viewingPast(week)} &nbsp;·&nbsp; <a href="#" onclick="goThisWeek();return false" style="color:var(--amber2)">${T.jumpCurrent}</a>`; }
 
   if (isPacketBlocked()) {
-    const catalogCount = REAL_CATALOG && REAL_CATALOG.length ? REAL_CATALOG.length : buildCatalog().length;
+    const metadataLive = hasCatalogMetadata();
+    const catalogCount = metadataLive ? REAL_CATALOG.length : 0;
     document.getElementById("slots-summary").innerHTML =
       `<span class="lbl">📦 ${T.productionPendingTitle}</span>` +
       `<span class="chip">${T.catalogCount(catalogCount)}</span>` +
-      `<span class="chip">${T.productionPending}</span>`;
-    document.getElementById("ui-files-note").textContent = T.catalogBlockedNote;
+      `<span class="chip">${metadataLive ? (T.metadataOpsTitle||"Catalog metadata ops queue") : T.productionPending}</span>`;
+    document.getElementById("ui-files-note").textContent = metadataLive ? T.metadataOpsNote : T.catalogBlockedNote;
     document.getElementById("real-files").innerHTML = "";
-    document.getElementById("platforms").innerHTML =
+    const statusCard =
       `<div class="platform-card"><div class="platform-body">` +
       `<div class="section-title">${T.productionPendingTitle}</div>` +
       `<p class="viewing-note">${esc(productionPendingDetail(PACKET_BLOCK.reason) || "No shippable content yet.")}</p>` +
       `<button class="btn sm primary" onclick="showView('catalog')">${T.openCatalogAction}</button>` +
       `</div></div>`;
+    const metadataCards = metadataLive ? PLATFORMS.map(p => {
+      const items = feedFor(pkt, p);
+      const fmtClass = p.feed === "audiobooks" ? "fmt-audiobook" : p.feed === "episodes" ? "fmt-episode" : p.feed === "manga" ? "fmt-manga" : "fmt-ebook";
+      const noun = p.feed === "audiobooks" ? T.audiobookNoun : p.feed === "episodes" ? T.episodeNoun : p.feed === "manga" ? T.mangaNoun : T.ebookNoun;
+      const titles = items.map((b, i) => {
+        const label = p.feed === "episodes" ? `Ep ${b.epNum}: ${b.title}` : p.feed === "manga" ? `Ch ${b.epNum}: ${b.title}` : b.title;
+        const sub = b.subtitle ? `<span class="title-sub">${esc(b.subtitle)}</span>` : "";
+        return `<li><span class="title-num">${i+1}.</span><span class="title-text">${esc(label)}${sub}</span><span class="format-badge ${fmtClass}">${T.fmt[p.feed]}</span></li>`;
+      }).join("");
+      return `<div class="platform-card">
+        <div class="platform-head">
+          <span class="platform-icon">${p.icon || "📦"}</span>
+          <span class="platform-name">${p.label}</span>
+          <span class="mode-tag ${p.modeClass}">${T.metadataOpsTitle||"Catalog metadata ops queue"}</span>
+          <span class="platform-count">${T.countThisWeek(items.length, noun)}</span>
+          <span class="platform-dls"><button class="btn sm primary" onclick="dlPacket('${p.id}')">${T.metadataDownload||"Metadata CSV"}</button></span>
+        </div>
+        <div class="platform-body">
+          <p class="viewing-note">${esc(T.metadataOpsNote||"Production files are still pending.")}</p>
+          <ul class="title-list">${titles}</ul>
+        </div>
+      </div>`;
+    }).join("") : "";
+    document.getElementById("platforms").innerHTML = statusCard + metadataCards;
     applyPacketBlockUi();
     return;
   }
@@ -770,7 +811,7 @@ function renderWeekly() {
         <span class="platform-name">${p.label}</span>
         <span class="mode-tag ${p.modeClass}">${p.mode}</span>
         <span class="platform-count">${T.countThisWeek(items.length, noun)}</span>
-        <span class="platform-dls"><button class="btn sm primary" ${isPacketBlocked()?"disabled style=\"opacity:.45;cursor:not-allowed\"":""} onclick="dlPacket('${p.id}')">${p.dlLabel}</button></span>
+        <span class="platform-dls"><button class="btn sm primary" ${!canDownloadMetadata()?"disabled style=\"opacity:.45;cursor:not-allowed\"":""} onclick="dlPacket('${p.id}')">${isPacketBlocked()?(T.metadataDownload||"Metadata CSV"):p.dlLabel}</button></span>
       </div>
       <div class="platform-body">
         <details class="howto" open>
@@ -850,6 +891,16 @@ function applyChrome() {
   setText("ui-catalog-h", T.fullCatalog); setText("ui-catalog-back", T.back);
 }
 function humanize(id){ return id.replace(/_(en_us|es_us|es_es|pt_br|zh_tw|zh_hk|zh_cn|zh_sg|ja_jp|ko_kr)$/,"").replace(/_/g," ").replace(/\b\w/g,c=>c.toUpperCase()); }
+async function liveAssignmentFor(id) {
+  try {
+    const r = await fetch(`api/onboarding/assignment?brand=${encodeURIComponent(id)}`, {cache:"no-store"});
+    if (r.ok) {
+      const j = await r.json();
+      return j && j.brand_director_name ? j : null;
+    }
+  } catch (_e) {}
+  return null;
+}
 async function boot() {
   const qid = new URLSearchParams(location.search).get("brand");
   const id = qid || BRAND.id;
@@ -865,12 +916,13 @@ async function boot() {
   let bridge = {};
   try { const r = await fetch("brand_admin_brands.json", {cache:"no-store"}); if (r.ok) bridge = await r.json(); } catch (_e) {}
   const info = bridge[id] || {};
+  const liveAssignment = await liveAssignmentFor(id);
   BRAND = {
     id,
-    label: info.d || humanize(id),
-    directorName: info.brand_director_name || "",
-    directorId: info.brand_director_id || "",
-    directorStatus: info.brand_director_status || "",
+    label: (liveAssignment && liveAssignment.display_brand) || info.d || humanize(id),
+    directorName: (liveAssignment && liveAssignment.brand_director_name) || info.brand_director_name || "",
+    directorId: (liveAssignment && liveAssignment.brand_director_id) || info.brand_director_id || "",
+    directorStatus: (liveAssignment && liveAssignment.brand_director_status) || info.brand_director_status || "",
   };
   const wos = document.getElementById("ui-weekly-os");
   if (wos) wos.href = "/brand_admin_weekly_os.html?brand=" + encodeURIComponent(id);
@@ -883,8 +935,17 @@ async function boot() {
   // Pull the brand's REAL rendered files (only brands with rendered output have a feed).
   REAL_DELIVERY = null;
   try { const r = await fetch(`brand_deliveries/${base}.json`, {cache:"no-store"}); if (r.ok) { const j = await r.json(); if (j && j.weeks) REAL_DELIVERY = j; } } catch (_e) {}
+  if (REAL_DELIVERY) {
+    if (REAL_DELIVERY.display_brand) BRAND.label = REAL_DELIVERY.display_brand;
+    if (!BRAND.directorName && REAL_DELIVERY.brand_director_name) BRAND.directorName = REAL_DELIVERY.brand_director_name;
+    if (!BRAND.directorId && REAL_DELIVERY.brand_director_id) BRAND.directorId = REAL_DELIVERY.brand_director_id;
+    if (!BRAND.directorStatus && REAL_DELIVERY.brand_director_status) BRAND.directorStatus = REAL_DELIVERY.brand_director_status;
+  }
   try { const r = await fetch("brand_admin_weekly_packets.json", {cache:"no-store"}); if (r.ok) PACKET_BRIDGE = await r.json(); } catch (_e) {}
   PACKET_BLOCK = packetBridgeStatus(id);
+  if (!PACKET_BLOCK && REAL_DELIVERY && REAL_DELIVERY.production_files_ready === false) {
+    PACKET_BLOCK = {state:"blocked", reason:"Catalog ready, production files pending."};
+  }
   renderWeekly();
 }
 boot();
