@@ -1,0 +1,195 @@
+schema_version: "1.0"
+last_updated: "2026-07-14"
+description: >
+  Inspectable routing rules for Pearl_Research prompt generation. The prompt
+  builder always emits master, Gemini, Qwen/China, and Rakuten/Japan prompt
+  variants, then recommends the route with the strongest explicit match.
+
+default_provider: gemini_global
+
+providers:
+  gemini_global:
+    prompt_key: gemini
+    display_name: "Gemini Deep Research"
+    engine_family: gemini
+    use_when: "Global, US, Europe, LATAM, cross-market, or ambiguous research."
+    source_language_priority:
+      - "English-language primary sources"
+      - "Local-language sources when the market context calls for them"
+    style_notes:
+      - "Prioritize broad synthesis and multi-source triangulation."
+      - "Look for contradictions across high-authority and niche sources."
+      - "Return decision-oriented synthesis, not a source dump."
+
+  qwen_china:
+    prompt_key: qwen_china
+    display_name: "Qwen / QuinChat-style China Deep Research"
+    engine_family: qwen
+    use_when: "Mainland China or China-native platform, consumer, regulatory, or market research."
+    source_language_priority:
+      - "Simplified Chinese primary sources"
+      - "Chinese-language platform docs, industry reports, regulatory notices, trade press, and academic sources"
+      - "English-language sources only for external triangulation"
+    style_notes:
+      - "Use neutral market, platform, consumer-behavior, and implementation framing."
+      - "Phrase sensitive questions analytically and precisely; do not ask the engine to advocate political positions."
+      - "Prioritize China-native terminology and platform vocabulary."
+
+  rakuten_japan:
+    prompt_key: rakuten_japan
+    display_name: "Rakuten Chat AI / Japan-native Deep Research"
+    engine_family: rakuten
+    use_when: "Japan, Japanese-language, or Japan-native platform and consumer research."
+    source_language_priority:
+      - "Japanese-language primary sources"
+      - "Japanese market terminology, platform docs, trade press, and local consumer research"
+      - "English-language sources only for external triangulation"
+    style_notes:
+      - "Use Japan-native market terminology and platform names."
+      - "Separate imported global advice from Japan-specific evidence."
+      - "Flag language/register and cultural-fit implications for Phoenix Omega."
+
+routes:
+  - id: china_qwen
+    provider: qwen_china
+    priority: 100
+    match:
+      locales:
+        - zh-CN
+        - zh-Hans
+        - cn
+      markets:
+        - China
+        - Mainland China
+        - PRC
+      keywords:
+        - china
+        - chinese
+        - mainland china
+        - prc
+        - beijing
+        - shanghai
+        - shenzhen
+        - guangzhou
+        - hangzhou
+        - wechat
+        - weibo
+        - xiaohongshu
+        - rednote
+        - douyin
+        - bilibili
+        - kuaishou
+        - ximalaya
+        - qq music
+        - netease cloud music
+        - taobao
+        - tmall
+        - jd.com
+        - pinduoduo
+        - baidu
+        - alibaba
+        - tencent
+        - rmb
+        - cny
+        - yuan
+        - 996
+        - tang ping
+        - neijuan
+      platforms:
+        - WeChat
+        - Xiaohongshu
+        - Douyin
+        - Bilibili
+        - Kuaishou
+        - Ximalaya
+        - QQ Music
+        - NetEase Cloud Music
+
+  - id: japan_rakuten
+    provider: rakuten_japan
+    priority: 90
+    match:
+      locales:
+        - ja-JP
+        - ja
+        - jp
+      markets:
+        - Japan
+      keywords:
+        - japan
+        - japanese
+        - tokyo
+        - osaka
+        - kyoto
+        - nagoya
+        - fukuoka
+        - hokkaido
+        - rakuten
+        - line official account
+        - line oa
+        - liff
+        - yahoo japan
+        - mercari
+        - amazon jp
+        - audible japan
+        - audiobook.jp
+        - kobo japan
+        - yen
+        - jpy
+        - meti
+        - boj
+        - salaryman
+        - shachiku
+        - hikikomori
+        - konbini
+        - japanese manga
+        - japanese anime
+        - manga market japan
+        - anime market japan
+      platforms:
+        - LINE
+        - Rakuten
+        - Rakuten Kobo
+        - Yahoo Japan
+        - Audible Japan
+        - audiobook.jp
+        - Amazon JP
+
+  - id: global_gemini
+    provider: gemini_global
+    priority: 1
+    match:
+      locales:
+        - en-US
+        - en
+        - global
+      markets:
+        - Global
+        - United States
+        - US
+        - EU
+        - Europe
+        - LATAM
+      keywords: []
+      platforms: []
+
+deliverable_sections:
+  - executive_summary
+  - direct_answer_to_operator_question
+  - evidence_backed_findings
+  - contradictions_ambiguities
+  - recommended_action
+  - implementation_implications_for_phoenix_omega
+  - open_risks
+  - provenance_sources
+
+quality_rules:
+  - "State the exact research objective."
+  - "Name the Phoenix Omega system/business context."
+  - "Summarize current failure symptoms before analysis."
+  - "List hypotheses to test, including disconfirming evidence."
+  - "Answer specific questions, not generic topic areas."
+  - "Use evidence standards and source-quality rules."
+  - "Surface contradictions, tradeoffs, and uncertainty."
+  - "Return implementation implications for Phoenix Omega."
+  - "Do not give generic advice."

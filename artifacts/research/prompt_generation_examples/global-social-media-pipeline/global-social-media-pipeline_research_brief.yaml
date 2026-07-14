@@ -1,0 +1,110 @@
+schema_version: '1.0'
+brief_id: research-brief-a9bd43a675
+title: Global social media pipeline research prompt repair
+created_at_utc: '2026-07-14T07:36:25Z'
+input_summary: Phoenix Omega needs a global deep-research prompt to decide how to build a reusable book-to-social pipeline across YouTube Shorts, Instagram, TikTok, Pinterest, and email without overfitting to one platform.
+issue_description: 'Phoenix Omega needs a global deep-research prompt to decide how to build a reusable book-to-social pipeline across YouTube Shorts, Instagram, TikTok, Pinterest, and email without overfitting to one platform.
+
+  '
+what_is_broken:
+- no decision framework for which platforms get which content shapes
+- no evidence-backed cadence or asset-sizing recommendations
+- no comparison between educational clips, quote cards, carousel posts, freebie captures, and email proof-loop reuse
+- no source-quality rules
+decision_to_make:
+- 'What should Phoenix Omega automate first: extraction, captions, image generation, video assembly, scheduling, or analytics feedback?'
+unknowns:
+- what current platform mechanics matter in 2026
+- which formats lead to owned-list capture instead of vanity engagement
+- what should be excluded from automation because it needs human review
+missing_evidence:
+- no evidence-backed cadence or asset-sizing recommendations
+- no comparison between educational clips, quote cards, carousel posts, freebie captures, and email proof-loop reuse
+- no source-quality rules
+- Good output should include implementation implications for Phoenix Omega, tables, recommended action, open risks, and provenance.
+exact_questions:
+- 'What should Phoenix Omega automate first: extraction, captions, image generation, video assembly, scheduling, or analytics feedback?'
+hypotheses_to_test:
+- 'The current failure may be caused by: no decision framework for which platforms get which content shapes'
+- 'The current failure may be caused by: no evidence-backed cadence or asset-sizing recommendations'
+- 'The current failure may be caused by: no comparison between educational clips, quote cards, carousel posts, freebie captures, and email proof-loop reuse'
+- Provider-native prompts may produce stronger evidence than a single generic prompt.
+- The right answer may require preserving existing Phoenix Omega behavior while upgrading prompt quality before execution.
+constraints:
+- what should be excluded from automation because it needs human review
+markets_locales_platforms:
+  markets:
+  - Global
+  locales:
+  - en-US
+  platforms:
+  - YouTube Shorts
+  - Instagram
+  - TikTok
+  - Pinterest
+  - Email
+routing_controls:
+  explicit_markets:
+  - Global
+  explicit_locales:
+  - en-US
+  explicit_platforms:
+  - YouTube Shorts
+  - Instagram
+  - TikTok
+  - Pinterest
+  - Email
+  hint_precedence: Explicit market, locale, and platform hints override transcript-only regional mentions during provider selection.
+good_output_should_include:
+- executive summary
+- direct answer to the operator's real question
+- evidence-backed findings
+- contradictions and ambiguities
+- recommended action
+- implementation implications for Phoenix Omega
+- open risks
+- provenance and sources
+source_rules:
+  preferred_sources:
+  - official platform docs
+  - credible creator economy reports
+  - current benchmark studies with methods
+  - official platform documentation and policy pages
+  - primary market data, filings, or regulator publications
+  - credible industry reports and trade press
+  - academic or practitioner research with transparent methods
+  acceptable_sources:
+  - credible news analysis with named sources
+  - platform-native examples when clearly labeled as examples
+  - expert commentary only when triangulated against stronger sources
+  weak_sources:
+  - unsourced trend roundups
+  - affiliate SEO posts
+  - single-anecdote social media claims
+  - AI-generated summaries without source URLs
+  source_languages:
+  - English-language primary sources
+  - Local-language sources when the market context calls for them
+explicit_exclusions:
+- single-platform hacks
+- generic content marketing advice
+- what should be excluded from automation because it needs human review
+phoenix_omega_context:
+  affected_subsystems:
+  - semantic_trend
+  - Pearl_Research
+  - research prompts
+  - provider routing
+  relevant_files: []
+  implementation_constraints:
+  - Extend existing Pearl_Research flow rather than creating a disconnected toy flow.
+  - Keep routing explicit and inspectable.
+  - Do not perform downstream research in the prompt-generation stage.
+  - what should be excluded from automation because it needs human review
+routing_preview:
+  likely_provider: Gemini Deep Research
+  routing_signals:
+  - locales:en-US
+  - markets:Global
+raw_context_excerpt: "Phoenix Omega needs a global deep-research prompt to decide how to build a reusable book-to-social pipeline across YouTube Shorts, Instagram, TikTok, Pinterest, and email without overfitting to one platform.\n\n\nMessy session:\nPearl_Research came back with a decent but shallow summary: \"repurpose\nbook content into social posts.\" That is not enough for implementation.\n\nWhat is broken:\n- no decision framework for which platforms get which content shapes\n- no evidence-backed cadence or asset-sizing recommendations\n- no comparison between educational clips, quote cards, carousel posts,\n  freebie captures, and email proof-loop reuse\n- no source-quality rules\n\nDecision needed:\nWhat should Phoenix Omega automate first: extraction, captions, image\ngeneration, video assembly, scheduling, or analytics feedback?\n\nUnknowns:\n- what current platform mechanics matter in 2026\n- which formats lead to owned-list capture instead of vanity engagement\n- what should\
+  \ be excluded from automation because it needs human review\n\nGood output should include implementation implications for Phoenix Omega,\ntables, recommended action, open risks, and provenance.\n\n\nEvaluation case for Pearl_Research prompt-generation layer.\n\nGlobal en-US YouTube Shorts Instagram TikTok Pinterest Email"
