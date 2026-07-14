@@ -1,6 +1,6 @@
 # Program State — Single Source of Truth
 
-**LAST VERIFIED:** 2026-07-15 @ `origin/main` `d63caff873d40154209095708c840d63cd3797de` (old-chat unblock successors merged/closed through #5658; release-smoke fast lane #5659)
+**LAST VERIFIED:** 2026-07-15 @ `origin/main` `8a0b09f9b02efb3c5fa78002cfe7dd71e105fd35` (old-chat unblock state/router update #5661)
 
 > **RULE:** Verify against `origin/main`, never git date or the working tree (shared-tree branch-churn shows
 > other-branch/stale state). This is the entry point — if another doc disagrees with this, this wins or that doc is stale.
