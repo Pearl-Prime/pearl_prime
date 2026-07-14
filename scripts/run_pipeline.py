@@ -1252,6 +1252,42 @@ def _run_spine_pipeline_mode(
 
         # EXERCISE-BANK-RESOLUTION-01 strict-canonical gate (production only).
         _check_exercise_strict_canonical_gate(quality_profile, enriched.enrichment_audit)
+
+    # LOCALE-FALLBACK HONESTY GATE (zh-TW resolver lane, 2026-07-14):
+    # When a non-English locale is requested, some atom classes localize while
+    # others silently fall back to the English source (their resolver path does not
+    # thread `locale`). Emit a locale_fallback_report.json into the render dir so the
+    # fallback is explicit, and in production FAIL loudly rather than ship an English
+    # book under a localized SKU. Citations / proper nouns / source titles are
+    # classified allowed-English and never trip this. Detection is script-based
+    # (decisive only for non-Latin/CJK locales); see
+    # phoenix_v4/rendering/locale_fallback_report.py for the documented rule.
+    if _enrich_locale and str(_enrich_locale).strip().lower() not in ("", "en-us"):
+        from phoenix_v4.rendering.locale_fallback_report import (
+            LocaleFallbackError,
+            production_blockers,
+            write_locale_fallback_report,
+        )
+        _lfr, _lfr_path = write_locale_fallback_report(
+            enriched, _enrich_locale, quality_profile, render_dir,
+        )
+        _lfr_fallbacks = _lfr.get("english_fallbacks") or []
+        if _lfr.get("applicable") and _lfr_fallbacks:
+            if quality_profile == "production":
+                _lfr_blockers = production_blockers(_lfr)
+                raise LocaleFallbackError(
+                    f"[LOCALE GATE] {len(_lfr_fallbacks)} required localized body-prose "
+                    f"atom(s) fell back to English under --locale {_enrich_locale} "
+                    f"(quality-profile=production). Report: {_lfr_path}\n"
+                    + "\n".join(f"  - {b}" for b in _lfr_blockers[:20])
+                )
+            print(
+                f"[LOCALE FALLBACK] {len(_lfr_fallbacks)} body-prose slot(s) rendered "
+                f"English under --locale {_enrich_locale} (draft — labelled, not "
+                f"blocked). Report: {_lfr_path}",
+                file=sys.stderr,
+            )
+
     pre_depth_words = enriched.total_words
     depth_map_path = repo_root / "config" / "depth" / "depth_module_map.yaml"
     if depth_map_path.exists() and yaml:
