@@ -220,6 +220,22 @@ _PILOT_ACCENT_MINIMUMS: Dict[str, Dict[str, int]] = {
         "WISDOM_ESSENCE": 1,
         "AUTHOR_COMMENTARY": 1,
     },
+    # AUTHOR_DISCLOSURE supply extension (2026-07-14): same author (ravi_chandra,
+    # config/author_registry.yaml) as the anxiety pilot, three OTHER topics he is
+    # already registered for. Each has its own real authored bank under
+    # SOURCE_OF_TRUTH/accent_banks/author_disclosure/<topic>/ravi_chandra/. The
+    # gen_z_professionals:anxiety cell above is deliberately untouched — it stays
+    # entangled with the frozen flagship golden (see GOLDEN_5585_SCOPE_AWAY_2026-07-14
+    # and _author_commentary_and_disclosure_pools() below).
+    "gen_z_professionals:overthinking": {
+        "AUTHOR_DISCLOSURE": 1,
+    },
+    "gen_z_professionals:sleep_anxiety": {
+        "AUTHOR_DISCLOSURE": 1,
+    },
+    "gen_z_professionals:social_anxiety": {
+        "AUTHOR_DISCLOSURE": 1,
+    },
 }
 _PILOT_SHARE_CAP_FLOOR: Dict[str, float] = {
     "gen_z_professionals:anxiety": 0.85,

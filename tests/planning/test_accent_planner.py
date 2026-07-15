@@ -6,6 +6,7 @@ from pathlib import Path
 import pytest
 
 from phoenix_v4.planning.accent_planner import (
+    _load_author_disclosure,
     attach_accent_plan,
     compute_accent_signature,
     locale_to_cluster,
@@ -72,6 +73,42 @@ def _enriched_anxiety(seed: str = "4242"):
             spine_context={
                 "book_idea": ANXIETY_BOOK_IDEA,
                 "book_motif": ANXIETY_BOOK_MOTIF,
+                "enrichment_contract_v1": True,
+            },
+        ),
+        repo_root=REPO_ROOT,
+    )
+
+
+def _enriched_gen_z_sleep_anxiety(seed: str = "4242"):
+    """AUTHOR_DISCLOSURE supply-extension cell (2026-07-14): gen_z_professionals x
+    sleep_anxiety x ravi_chandra. Same author + persona as the anxiety pilot, a
+    different topic he is already registered for (config/author_registry.yaml),
+    chosen because it is the only one of the three extension topics with complete
+    TEACHER_DOCTRINE atom coverage for gen_z_professionals today (overthinking and
+    social_anxiety are missing that atom slot for this persona — a pre-existing,
+    unrelated content gap, not an AUTHOR_DISCLOSURE issue)."""
+    fmt = load_format_spec("standard_book", REPO_ROOT)
+    spine = load_spine("sleep_anxiety", REPO_ROOT, runtime_format="standard_book")
+    shaped = apply_knobs(
+        spine,
+        load_knob_profile("sleep_anxiety", REPO_ROOT),
+        runtime_format="standard_book",
+    )
+    beatmap = compile_beatmap(
+        shaped,
+        load_topic_engines("sleep_anxiety", REPO_ROOT),
+        fmt,
+        repo_root=REPO_ROOT,
+    )
+    return select_enrichment(
+        EnrichmentRequest(
+            beatmap=beatmap,
+            teacher_id=None,
+            persona_id="gen_z_professionals",
+            topic_id="sleep_anxiety",
+            seed=seed,
+            spine_context={
                 "enrichment_contract_v1": True,
             },
         ),
@@ -402,3 +439,117 @@ def test_anxiety_pilot_authored_rq_ts_lands_without_fallback():
             keys.get("preferred_positions") or []
         )
     assert not validate_accent_plan(planned)
+# --- AUTHOR_DISCLOSURE supply extension (2026-07-14) ------------------------
+# Extends authored AUTHOR_DISCLOSURE supply beyond the single existing
+# gen_z_professionals:anxiety pilot bank to other persona/topic cells where the
+# SAME already-operator-approved author (ravi_chandra, assets/authors/ravi_chandra/bio.yaml,
+# status: operator_approved) is already registered (config/author_registry.yaml
+# topic_ids: anxiety, sleep_anxiety, overthinking, social_anxiety, courage). No new
+# biographical claims are invented; the existing approved bio_license_refs
+# vocabulary is reused and applied to each topic's specific mechanics. The
+# gen_z_professionals:anxiety cell itself is untouched — it remains entangled
+# with the open #5585/#5595 flagship-golden question.
+
+_AUTHOR_DISCLOSURE_EXTENSION_TOPICS = ("overthinking", "sleep_anxiety", "social_anxiety")
+
+
+def test_author_disclosure_extension_banks_load_with_valid_schema():
+    """Each new AUTHOR_DISCLOSURE cell's authored bank loads real, schema-valid
+    entries via the same _load_author_disclosure loader the planner uses —
+    proving CODE-WIRED, not just CONFIG-EXISTS."""
+    valid_functions = {
+        "credibility",
+        "vulnerability",
+        "companionship",
+        "failure_model",
+        "turning_point",
+        "limits_of_authority",
+    }
+    for topic in _AUTHOR_DISCLOSURE_EXTENSION_TOPICS:
+        rows = _load_author_disclosure(topic, "ravi_chandra", "en_US", REPO_ROOT)
+        assert len(rows) == 3, f"{topic}: expected 3 authored disclosures, got {len(rows)}"
+        for row in rows:
+            assert row.get("disclosure_id", "").startswith("ad_ravi_")
+            assert row.get("disclosure_function") in valid_functions
+            assert row.get("bio_license_refs"), f"{topic}: entry missing bio_license_refs"
+            assert row.get("allowed_positions"), f"{topic}: entry missing allowed_positions"
+            variants = row.get("position_variants") or {}
+            assert variants, f"{topic}: entry missing position_variants"
+            for position in row["allowed_positions"]:
+                assert position in variants, f"{topic}: no variant body for allowed position {position}"
+
+
+def test_author_disclosure_extension_does_not_touch_anxiety_pilot_cell():
+    """Regression guard: the gen_z_professionals:anxiety cell (entangled with the
+    #5585/#5595 flagship-golden question) must remain exactly as it is on
+    origin/main — this extension added no bank file for it, and its pilot floor
+    in _PILOT_ACCENT_MINIMUMS was not touched.
+
+    Note: _load_author_disclosure("anxiety", ...) itself is NOT empty — that raw
+    bank file already existed pre-extension (3 entries, split out of
+    AUTHOR_COMMENTARY by PR #5585) and this extension correctly leaves it alone.
+    The real invariant this pilot cell depends on is that
+    _author_commentary_and_disclosure_pools() (GOLDEN_5585_SCOPE_AWAY_2026-07-14)
+    still merges those 3 entries back into AUTHOR_COMMENTARY and reports an EMPTY
+    disclosure pool for this exact cell, protecting the frozen flagship golden —
+    checking the raw loader instead would be testing the wrong layer.
+    """
+    from phoenix_v4.planning.accent_planner import _author_commentary_and_disclosure_pools
+
+    _, disclosure_pool = _author_commentary_and_disclosure_pools(
+        "gen_z_professionals", "anxiety", "ravi_chandra", "en_US", REPO_ROOT
+    )
+    assert disclosure_pool == []
+
+    budget, profile, _ = resolve_accent_budget(
+        "stillness_press",
+        persona_id="gen_z_professionals",
+        topic_id="anxiety",
+        enrichment_contract_v1=True,
+        repo_root=REPO_ROOT,
+    )
+    assert profile == "somatic_reflective"
+    # AUTHOR_DISCLOSURE was never part of the anxiety pilot's explicit floor
+    # (QUOTE/ENCOURAGEMENT/REFLECTION_QUESTION/TROUBLESHOOTING/CITED_EVIDENCE/
+    # EXTERNAL_STORY/WISDOM_ESSENCE/AUTHOR_COMMENTARY only) and still is not.
+    assert budget.get("AUTHOR_DISCLOSURE", 0) == 0
+
+
+@pytest.mark.slow
+def test_gen_z_sleep_anxiety_author_disclosure_lands_without_fallback():
+    """Full pipeline proof for one extension cell: gen_z_professionals x
+    sleep_anxiety x ravi_chandra. AUTHOR_DISCLOSURE must be selected from the
+    authored bank (not a fallback/no-op), with the correct id namespace and
+    provenance, exactly like the anxiety pilot's REFLECTION_QUESTION/
+    TROUBLESHOOTING regression above."""
+    enriched = _enriched_gen_z_sleep_anxiety()
+    plan = plan_accent_beats_for_book(
+        enriched,
+        brand_id="stillness_press",
+        seed="4242",
+        teacher_mode=False,
+        repo_root=REPO_ROOT,
+        author_id="ravi_chandra",
+    )
+    planned = attach_accent_plan(
+        enriched,
+        brand_id="stillness_press",
+        seed="4242",
+        teacher_mode=False,
+        repo_root=REPO_ROOT,
+        author_id="ravi_chandra",
+    )
+
+    ad_rows = [r for r in plan.flat_rows if r.get("class") == "AUTHOR_DISCLOSURE"]
+    assert len(ad_rows) >= 1
+    for row in ad_rows:
+        assert str(row.get("accent_id", "")).startswith("ad_ravi_sleep_")
+        assert row.get("supply_source") == "authored_bank"
+
+    strategy = (planned.enrichment_audit or {}).get("enrichment_strategy_report") or {}
+    provenance = strategy.get("supply_provenance_by_class") or {}
+    assert provenance.get("AUTHOR_DISCLOSURE") == "authored_bank"
+
+    v21 = (planned.spine_context or {}).get("enhancement_contract_v21") or {}
+    tracked = {row["surface"]: row for row in (v21.get("tracked_surfaces") or [])}
+    assert tracked["AUTHOR_DISCLOSURE"]["bucket"] == "proof_and_embodiment"
