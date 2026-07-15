@@ -209,6 +209,9 @@ html,body{width:100%;height:100%;font-family:"DM Sans",sans-serif;background:#0e
 <script>
 const JSON_BASE='brand-wizard-app/public/';
 let B={}, OS_DATA=null, PACKET_BRIDGE=null, MARKET_ID='en_us', MARKET=null;
+// The selected brand's real delivery feed (brand_deliveries/<base>.json), when it has one.
+let DELIVERY=null;
+const PRODUCTION_PENDING_REASON='Catalog ready, production files pending.';
 let SETUP=[], UPLOADS=[], UPLOADS_PLANNED=[], WEEK=[], QUICK_LINKS=[];
 
 const KW={anxiety:"anxiety relief, calm, stress management",burnout:"burnout recovery, rest, energy restoration",depression:"emotional healing, hope, mental wellness",self_worth:"self-worth, confidence, self-esteem",somatic_healing:"somatic healing, body awareness, nervous system",mindfulness:"mindfulness, meditation, present moment",courage:"courage, bravery, resilience, inner strength",boundaries:"healthy boundaries, self-protection, assertiveness",grief:"grief support, loss, healing after loss",compassion_fatigue:"compassion fatigue, caregiver support",overthinking:"overthinking, mental clarity, calm mind",sleep_anxiety:"sleep anxiety, insomnia help, restful sleep",social_anxiety:"social anxiety, social confidence",imposter_syndrome:"imposter syndrome, self-doubt, confidence",financial_stress:"financial stress, money anxiety, abundance",financial_anxiety:"financial anxiety, career confidence",adhd_focus:"ADHD focus, neurodivergent support, attention"};
@@ -235,12 +238,31 @@ async function loadBridges(){
   if(pk&&typeof pk==='object')PACKET_BRIDGE=pk;
 }
 
+// All 14 registry lanes — a lane missing here never loads brand_deliveries/<base>.json and so
+// would silently skip the production_files_ready guard in packetStatus().
+function deliveryBase(bid){
+  return String(bid||'').replace(/_(en_us|es_us|es_es|pt_br|zh_tw|zh_hk|zh_cn|zh_sg|ja_jp|ko_kr|de_de|fr_fr|it_it|hu_hu)$/,'');
+}
+async function loadDelivery(bid){
+  DELIVERY=null;
+  try{
+    const r=await fetch(JSON_BASE+'brand_deliveries/'+deliveryBase(bid)+'.json',{cache:'no-store'});
+    if(r.ok){const j=await r.json(); if(j&&j.weeks)DELIVERY=j;}
+  }catch(e){}
+}
+
+// TRUTH-LABELING INVARIANT (harbor-line-production-truth-labeling):
+// production_files_ready === false is AUTHORITATIVE. A packet-bridge "buildable" verdict must
+// never let catalog metadata be offered as a shippable production packet. The bridge only ever
+// adds detail to a pending reason — it can never clear one.
 function packetStatus(bid){
+  const pendingProduction=!!(DELIVERY&&DELIVERY.production_files_ready===false);
+  const blocked=PACKET_BRIDGE&&PACKET_BRIDGE.blocked&&PACKET_BRIDGE.blocked[bid];
+  if(blocked)return{state:'blocked',reason:blocked.reason||PRODUCTION_PENDING_REASON};
+  if(pendingProduction)return{state:'blocked',reason:PRODUCTION_PENDING_REASON};
   if(!PACKET_BRIDGE)return{state:'unknown'};
   const ok=PACKET_BRIDGE.brands&&PACKET_BRIDGE.brands[bid];
   if(ok&&ok.buildable)return{state:'ready',info:ok};
-  const blocked=PACKET_BRIDGE.blocked&&PACKET_BRIDGE.blocked[bid];
-  if(blocked)return{state:'blocked',reason:blocked.reason||'Catalog ready, production files pending.'};
   return{state:'missing'};
 }
 
@@ -646,7 +668,7 @@ function renderPicker(){
 }
 function selectBrand(bid){
   history.replaceState(null,'','?brand='+bid);
-  initBrand(bid);
+  return initBrand(bid);
 }
 function resetBrand(){
   history.replaceState(null,'','?');
@@ -655,9 +677,12 @@ function resetBrand(){
 }
 
 // ── Init ──
-function initBrand(bid){
+async function initBrand(bid){
   if(!B[bid]){ renderPicker(); return; }
   brandId=bid; brand=B[bid];
+  // Must resolve BEFORE renderPhase2(): packetStatus() treats production_files_ready=false as
+  // authoritative, so rendering ahead of this would offer a packet the brand cannot ship.
+  await loadDelivery(bid);
   applyMarketProfile(resolveMarket(bid));
   load();
   document.getElementById('picker').classList.remove('show');
@@ -684,7 +709,7 @@ async function init(){
     LANE_FILTER=laneRaw;
     applyMarketProfile(OS_DATA.lane_to_market[laneRaw]);
   }
-  if(bid && B[bid]) initBrand(bid);
+  if(bid && B[bid]) await initBrand(bid);
   else renderPicker();
 }
 init();

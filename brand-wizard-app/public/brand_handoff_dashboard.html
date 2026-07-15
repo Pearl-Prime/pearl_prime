@@ -567,6 +567,16 @@ function packetBridgeStatus(brandId){
   if(ready&&ready.buildable)return{state:"ready",info:ready};
   return null;
 }
+// TRUTH-LABELING INVARIANT (harbor-line-production-truth-labeling):
+// production_files_ready === false is AUTHORITATIVE. A packet-bridge "ready" verdict must
+// never let catalog metadata be presented as shippable production files. The bridge only
+// ever adds detail to a pending reason — it can never clear one.
+function resolvePacketBlock(bridgeVerdict, delivery){
+  const pendingProduction = !!(delivery && delivery.production_files_ready === false);
+  if(bridgeVerdict && bridgeVerdict.state === "blocked") return bridgeVerdict;
+  if(pendingProduction) return {state:"blocked", reason:"Catalog ready, production files pending."};
+  return bridgeVerdict;
+}
 function isPacketBlocked(){ return PACKET_BLOCK&&PACKET_BLOCK.state==="blocked"; }
 function hasCatalogMetadata(){ return !!(REAL_CATALOG && REAL_CATALOG.length); }
 function canDownloadMetadata(){ return !isPacketBlocked() || hasCatalogMetadata(); }
@@ -926,7 +936,9 @@ async function boot() {
   };
   const wos = document.getElementById("ui-weekly-os");
   if (wos) wos.href = "/brand_admin_weekly_os.html?brand=" + encodeURIComponent(id);
-  const base = id.replace(/_(en_us|es_us|es_es|pt_br|zh_tw|zh_hk|zh_cn|zh_sg|ja_jp|ko_kr)$/, "");
+  // All 14 registry lanes — a lane missing here never loads brand_deliveries/<base>.json and
+  // so would silently skip the production_files_ready guard above.
+  const base = id.replace(/_(en_us|es_us|es_es|pt_br|zh_tw|zh_hk|zh_cn|zh_sg|ja_jp|ko_kr|de_de|fr_fr|it_it|hu_hu)$/, "");
   // Pull the brand's REAL catalog (book plans are en_US only, so US/English view only).
   REAL_CATALOG = null;
   if (LANG === "en") {
@@ -942,10 +954,7 @@ async function boot() {
     if (!BRAND.directorStatus && REAL_DELIVERY.brand_director_status) BRAND.directorStatus = REAL_DELIVERY.brand_director_status;
   }
   try { const r = await fetch("brand_admin_weekly_packets.json", {cache:"no-store"}); if (r.ok) PACKET_BRIDGE = await r.json(); } catch (_e) {}
-  PACKET_BLOCK = packetBridgeStatus(id);
-  if (!PACKET_BLOCK && REAL_DELIVERY && REAL_DELIVERY.production_files_ready === false) {
-    PACKET_BLOCK = {state:"blocked", reason:"Catalog ready, production files pending."};
-  }
+  PACKET_BLOCK = resolvePacketBlock(packetBridgeStatus(id), REAL_DELIVERY);
   renderWeekly();
 }
 boot();
