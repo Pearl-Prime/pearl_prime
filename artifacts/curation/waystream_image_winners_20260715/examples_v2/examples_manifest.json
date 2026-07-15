@@ -1,0 +1,953 @@
+{
+  "schema_version": 1,
+  "status": "NOT_PRODUCTION_APPROVED",
+  "production_ready_count": 0,
+  "ramp": "scale",
+  "registry": "config/publishing/waystream_cover_social_recipes.yaml",
+  "determinism": {
+    "source_rule": "curated verified-first by cover_score then asset_id; else first raw-bank file in sorted order",
+    "crop_rule": "center crop to target ratio, LANCZOS",
+    "placement_rule": "quietest candidate band by (variance/BUSY_VAR + edge/BUSY_EDGE) on a 220px greyscale downsample",
+    "treatment_rule": "quiet->plain, mid->scrim, busy->backing_box (thresholds imported from templates.py)",
+    "type_rule": "no baked text; PIL composites all type; subtitle floored at the thumbnail legibility rule"
+  },
+  "license_note": "No example is license-verified for production. Uncurated rows are raw-bank placeholders.",
+  "topics_covered": 12,
+  "examples_rendered": 24,
+  "treatment_mix": {
+    "plain": 9,
+    "scrim": 2,
+    "backing_box": 1
+  },
+  "topics_missing_source": [],
+  "sheets": [
+    "artifacts/curation/waystream_image_winners_20260715/examples_v2/contact_sheet_covers.jpg",
+    "artifacts/curation/waystream_image_winners_20260715/examples_v2/contact_sheet_social.jpg"
+  ],
+  "rows": [
+    {
+      "topic": "anger",
+      "plan_status": "COVER_READY",
+      "symbol": "jagged",
+      "approval": "NOT_PRODUCTION_APPROVED",
+      "source": {
+        "asset_id": "abstract_anger",
+        "provider": "phoenix_abstract_cover_art",
+        "source_url": null,
+        "local_path": null,
+        "license_status": "not_applicable_generated_in_repo",
+        "image_status": "abstract_generated_placeholder",
+        "attribution_text": null,
+        "metaphor": null
+      },
+      "cover": {
+        "path": "artifacts/curation/waystream_image_winners_20260715/examples_v2/covers/waystream_anger_cover.jpg",
+        "kind": "cover",
+        "size": [
+          1600,
+          2560
+        ],
+        "placement": {
+          "band": {
+            "y0": 0.045,
+            "y1": 0.3544,
+            "variance": 134.3,
+            "edge": 0.92,
+            "luma": 114.7,
+            "busy": false,
+            "quiet": true
+          },
+          "treatment": "plain",
+          "ink": [
+            246,
+            241,
+            226
+          ],
+          "reason": "band is quiet (var=134<=405, edge=0.9<=9.9): type set directly on negative space"
+        },
+        "title_px": 150,
+        "subtitle_px": 63,
+        "subtitle_thumbnail_ok": true,
+        "subtitle_thumb_cap_px": 11.03
+      },
+      "social": [
+        {
+          "path": "artifacts/curation/waystream_image_winners_20260715/examples_v2/social/instagram_feed_4x5/waystream_anger_instagram_feed_4x5.jpg",
+          "kind": "social:instagram_feed_4x5",
+          "size": [
+            1080,
+            1350
+          ],
+          "placement": {
+            "band": {
+              "y0": 0.22,
+              "y1": 0.5237,
+              "variance": 140.0,
+              "edge": 0.79,
+              "luma": 111.9,
+              "busy": false,
+              "quiet": true
+            },
+            "treatment": "plain",
+            "ink": [
+              246,
+              241,
+              226
+            ],
+            "reason": "band is quiet (var=140<=405, edge=0.8<=9.9): type set directly on negative space"
+          },
+          "headline_px": 88,
+          "headline_thumbnail_ok": true,
+          "headline_thumb_cap_px": 22.81
+        }
+      ]
+    },
+    {
+      "topic": "anxiety",
+      "plan_status": "COVER_READY",
+      "symbol": "link",
+      "approval": "NOT_PRODUCTION_APPROVED",
+      "source": {
+        "asset_id": "waystream_anxiety_pexels_8101094_01",
+        "provider": "pexels",
+        "source_url": "https://www.pexels.com/photo/white-electrical-wire-on-gray-concrete-floor-8101094/",
+        "local_path": "artifacts/stock_image_bank/way_stream_sanctuary/mental_health_editorial_100x/downloads/pexels/anxiety/pexels__anxiety__8101094.jpeg",
+        "license_status": "verified",
+        "image_status": "curated_pending_license",
+        "attribution_text": "Photo by Nikita Nikitin on Pexels",
+        "metaphor": "tangled string wire close-up"
+      },
+      "cover": {
+        "path": "artifacts/curation/waystream_image_winners_20260715/examples_v2/covers/waystream_anxiety_cover.jpg",
+        "kind": "cover",
+        "size": [
+          1600,
+          2560
+        ],
+        "placement": {
+          "band": {
+            "y0": 0.705,
+            "y1": 0.9421,
+            "variance": 145.1,
+            "edge": 19.77,
+            "luma": 133.6,
+            "busy": false,
+            "quiet": false
+          },
+          "treatment": "scrim",
+          "ink": [
+            246,
+            241,
+            226
+          ],
+          "reason": "band is mid-busy (var=145, edge=19.8): gradient scrim is enough to hold contrast"
+        },
+        "title_px": 150,
+        "subtitle_px": 63,
+        "subtitle_thumbnail_ok": true,
+        "subtitle_thumb_cap_px": 11.03
+      },
+      "social": [
+        {
+          "path": "artifacts/curation/waystream_image_winners_20260715/examples_v2/social/instagram_feed_4x5/waystream_anxiety_instagram_feed_4x5.jpg",
+          "kind": "social:instagram_feed_4x5",
+          "size": [
+            1080,
+            1350
+          ],
+          "placement": {
+            "band": {
+              "y0": 0.55,
+              "y1": 0.9344,
+              "variance": 184.0,
+              "edge": 20.73,
+              "luma": 136.7,
+              "busy": false,
+              "quiet": false
+            },
+            "treatment": "scrim",
+            "ink": [
+              246,
+              241,
+              226
+            ],
+            "reason": "band is mid-busy (var=184, edge=20.7): gradient scrim is enough to hold contrast"
+          },
+          "headline_px": 88,
+          "headline_thumbnail_ok": true,
+          "headline_thumb_cap_px": 22.81
+        }
+      ]
+    },
+    {
+      "topic": "boundaries",
+      "plan_status": "COVER_READY",
+      "symbol": "divider",
+      "approval": "NOT_PRODUCTION_APPROVED",
+      "source": {
+        "asset_id": "waystream_boundaries_pexels_36120859_01",
+        "provider": "pexels",
+        "source_url": "https://www.pexels.com/photo/abstract-black-and-white-metal-gate-design-36120859/",
+        "local_path": "artifacts/stock_image_bank/way_stream_sanctuary/mental_health_editorial_100x/downloads/pexels/boundaries/pexels__boundaries__36120859.jpeg",
+        "license_status": "verified",
+        "image_status": "curated_pending_license",
+        "attribution_text": "Photo by Hassan Bouamoud on Pexels",
+        "metaphor": "fence or gate opening closing"
+      },
+      "cover": {
+        "path": "artifacts/curation/waystream_image_winners_20260715/examples_v2/covers/waystream_boundaries_cover.jpg",
+        "kind": "cover",
+        "size": [
+          1600,
+          2560
+        ],
+        "placement": {
+          "band": {
+            "y0": 0.045,
+            "y1": 0.2821,
+            "variance": 241.7,
+            "edge": 17.12,
+            "luma": 204.1,
+            "busy": false,
+            "quiet": false
+          },
+          "treatment": "scrim",
+          "ink": [
+            246,
+            241,
+            226
+          ],
+          "reason": "band is mid-busy (var=242, edge=17.1): gradient scrim is enough to hold contrast"
+        },
+        "title_px": 150,
+        "subtitle_px": 63,
+        "subtitle_thumbnail_ok": true,
+        "subtitle_thumb_cap_px": 11.03
+      },
+      "social": [
+        {
+          "path": "artifacts/curation/waystream_image_winners_20260715/examples_v2/social/instagram_feed_4x5/waystream_boundaries_instagram_feed_4x5.jpg",
+          "kind": "social:instagram_feed_4x5",
+          "size": [
+            1080,
+            1350
+          ],
+          "placement": {
+            "band": {
+              "y0": 0.04,
+              "y1": 0.4244,
+              "variance": 395.5,
+              "edge": 18.78,
+              "luma": 200.1,
+              "busy": false,
+              "quiet": false
+            },
+            "treatment": "scrim",
+            "ink": [
+              246,
+              241,
+              226
+            ],
+            "reason": "band is mid-busy (var=396, edge=18.8): gradient scrim is enough to hold contrast"
+          },
+          "headline_px": 88,
+          "headline_thumbnail_ok": true,
+          "headline_thumb_cap_px": 22.81
+        }
+      ]
+    },
+    {
+      "topic": "burnout",
+      "plan_status": "RERUN_NEEDED",
+      "symbol": "ember",
+      "approval": "NOT_PRODUCTION_APPROVED",
+      "source": {
+        "asset_id": "abstract_burnout",
+        "provider": "phoenix_abstract_cover_art",
+        "source_url": null,
+        "local_path": null,
+        "license_status": "not_applicable_generated_in_repo",
+        "image_status": "abstract_generated_placeholder",
+        "attribution_text": null,
+        "metaphor": null
+      },
+      "cover": {
+        "path": "artifacts/curation/waystream_image_winners_20260715/examples_v2/covers/waystream_burnout_cover.jpg",
+        "kind": "cover",
+        "size": [
+          1600,
+          2560
+        ],
+        "placement": {
+          "band": {
+            "y0": 0.435,
+            "y1": 0.5998,
+            "variance": 45.3,
+            "edge": 1.0,
+            "luma": 145.7,
+            "busy": false,
+            "quiet": true
+          },
+          "treatment": "plain",
+          "ink": [
+            246,
+            241,
+            226
+          ],
+          "reason": "band is quiet (var=45<=405, edge=1.0<=9.9): type set directly on negative space"
+        },
+        "title_px": 150,
+        "subtitle_px": 63,
+        "subtitle_thumbnail_ok": true,
+        "subtitle_thumb_cap_px": 11.03
+      },
+      "social": [
+        {
+          "path": "artifacts/curation/waystream_image_winners_20260715/examples_v2/social/instagram_feed_4x5/waystream_burnout_instagram_feed_4x5.jpg",
+          "kind": "social:instagram_feed_4x5",
+          "size": [
+            1080,
+            1350
+          ],
+          "placement": {
+            "band": {
+              "y0": 0.04,
+              "y1": 0.4244,
+              "variance": 80.0,
+              "edge": 1.09,
+              "luma": 163.4,
+              "busy": false,
+              "quiet": true
+            },
+            "treatment": "plain",
+            "ink": [
+              24,
+              24,
+              26
+            ],
+            "reason": "band is quiet (var=80<=405, edge=1.1<=9.9): type set directly on negative space"
+          },
+          "headline_px": 88,
+          "headline_thumbnail_ok": true,
+          "headline_thumb_cap_px": 22.81
+        }
+      ]
+    },
+    {
+      "topic": "depression",
+      "plan_status": "SOCIAL_READY",
+      "symbol": "bars",
+      "approval": "NOT_PRODUCTION_APPROVED",
+      "source": {
+        "asset_id": "abstract_depression",
+        "provider": "phoenix_abstract_cover_art",
+        "source_url": null,
+        "local_path": null,
+        "license_status": "not_applicable_generated_in_repo",
+        "image_status": "abstract_generated_placeholder",
+        "attribution_text": null,
+        "metaphor": null
+      },
+      "cover": {
+        "path": "artifacts/curation/waystream_image_winners_20260715/examples_v2/covers/waystream_depression_cover.jpg",
+        "kind": "cover",
+        "size": [
+          1600,
+          2560
+        ],
+        "placement": {
+          "band": {
+            "y0": 0.045,
+            "y1": 0.2821,
+            "variance": 196.2,
+            "edge": 1.07,
+            "luma": 133.0,
+            "busy": false,
+            "quiet": true
+          },
+          "treatment": "plain",
+          "ink": [
+            246,
+            241,
+            226
+          ],
+          "reason": "band is quiet (var=196<=405, edge=1.1<=9.9): type set directly on negative space"
+        },
+        "title_px": 150,
+        "subtitle_px": 63,
+        "subtitle_thumbnail_ok": true,
+        "subtitle_thumb_cap_px": 11.03
+      },
+      "social": [
+        {
+          "path": "artifacts/curation/waystream_image_winners_20260715/examples_v2/social/instagram_feed_4x5/waystream_depression_instagram_feed_4x5.jpg",
+          "kind": "social:instagram_feed_4x5",
+          "size": [
+            1080,
+            1350
+          ],
+          "placement": {
+            "band": {
+              "y0": 0.19,
+              "y1": 0.4937,
+              "variance": 206.2,
+              "edge": 0.93,
+              "luma": 129.8,
+              "busy": false,
+              "quiet": true
+            },
+            "treatment": "plain",
+            "ink": [
+              246,
+              241,
+              226
+            ],
+            "reason": "band is quiet (var=206<=405, edge=0.9<=9.9): type set directly on negative space"
+          },
+          "headline_px": 88,
+          "headline_thumbnail_ok": true,
+          "headline_thumb_cap_px": 22.81
+        }
+      ]
+    },
+    {
+      "topic": "grief",
+      "plan_status": "COVER_READY",
+      "symbol": "wane",
+      "approval": "NOT_PRODUCTION_APPROVED",
+      "source": {
+        "asset_id": "waystream_grief_pexels_8251591_03",
+        "provider": "pexels",
+        "source_url": "https://www.pexels.com/photo/white-bed-inside-the-bedroom-8251591/",
+        "local_path": "artifacts/stock_image_bank/way_stream_sanctuary/mental_health_editorial_100x/downloads/pexels/grief/pexels__grief__8251591.jpeg",
+        "license_status": "needs_owner_call",
+        "image_status": "curated_pending_license",
+        "attribution_text": "Photo by PNW Production on Pexels",
+        "metaphor": "empty side of bed"
+      },
+      "cover": {
+        "path": "artifacts/curation/waystream_image_winners_20260715/examples_v2/covers/waystream_grief_cover.jpg",
+        "kind": "cover",
+        "size": [
+          1600,
+          2560
+        ],
+        "placement": {
+          "band": {
+            "y0": 0.045,
+            "y1": 0.2821,
+            "variance": 65.2,
+            "edge": 0.98,
+            "luma": 203.9,
+            "busy": false,
+            "quiet": true
+          },
+          "treatment": "plain",
+          "ink": [
+            24,
+            24,
+            26
+          ],
+          "reason": "band is quiet (var=65<=405, edge=1.0<=9.9): type set directly on negative space"
+        },
+        "title_px": 150,
+        "subtitle_px": 63,
+        "subtitle_thumbnail_ok": true,
+        "subtitle_thumb_cap_px": 11.03
+      },
+      "social": [
+        {
+          "path": "artifacts/curation/waystream_image_winners_20260715/examples_v2/social/instagram_feed_4x5/waystream_grief_instagram_feed_4x5.jpg",
+          "kind": "social:instagram_feed_4x5",
+          "size": [
+            1080,
+            1350
+          ],
+          "placement": {
+            "band": {
+              "y0": 0.04,
+              "y1": 0.3437,
+              "variance": 92.5,
+              "edge": 1.17,
+              "luma": 205.4,
+              "busy": false,
+              "quiet": true
+            },
+            "treatment": "plain",
+            "ink": [
+              24,
+              24,
+              26
+            ],
+            "reason": "band is quiet (var=93<=405, edge=1.2<=9.9): type set directly on negative space"
+          },
+          "headline_px": 88,
+          "headline_thumbnail_ok": true,
+          "headline_thumb_cap_px": 22.81
+        }
+      ]
+    },
+    {
+      "topic": "healing",
+      "plan_status": "SOCIAL_READY",
+      "symbol": "rise",
+      "approval": "NOT_PRODUCTION_APPROVED",
+      "source": {
+        "asset_id": "abstract_healing",
+        "provider": "phoenix_abstract_cover_art",
+        "source_url": null,
+        "local_path": null,
+        "license_status": "not_applicable_generated_in_repo",
+        "image_status": "abstract_generated_placeholder",
+        "attribution_text": null,
+        "metaphor": null
+      },
+      "cover": {
+        "path": "artifacts/curation/waystream_image_winners_20260715/examples_v2/covers/waystream_healing_cover.jpg",
+        "kind": "cover",
+        "size": [
+          1600,
+          2560
+        ],
+        "placement": {
+          "band": {
+            "y0": 0.045,
+            "y1": 0.2821,
+            "variance": 59.6,
+            "edge": 1.16,
+            "luma": 159.2,
+            "busy": false,
+            "quiet": true
+          },
+          "treatment": "plain",
+          "ink": [
+            24,
+            24,
+            26
+          ],
+          "reason": "band is quiet (var=60<=405, edge=1.2<=9.9): type set directly on negative space"
+        },
+        "title_px": 150,
+        "subtitle_px": 63,
+        "subtitle_thumbnail_ok": true,
+        "subtitle_thumb_cap_px": 11.03
+      },
+      "social": [
+        {
+          "path": "artifacts/curation/waystream_image_winners_20260715/examples_v2/social/instagram_feed_4x5/waystream_healing_instagram_feed_4x5.jpg",
+          "kind": "social:instagram_feed_4x5",
+          "size": [
+            1080,
+            1350
+          ],
+          "placement": {
+            "band": {
+              "y0": 0.04,
+              "y1": 0.4244,
+              "variance": 79.1,
+              "edge": 1.1,
+              "luma": 152.7,
+              "busy": false,
+              "quiet": true
+            },
+            "treatment": "plain",
+            "ink": [
+              24,
+              24,
+              26
+            ],
+            "reason": "band is quiet (var=79<=405, edge=1.1<=9.9): type set directly on negative space"
+          },
+          "headline_px": 88,
+          "headline_thumbnail_ok": true,
+          "headline_thumb_cap_px": 22.81
+        }
+      ]
+    },
+    {
+      "topic": "hope",
+      "plan_status": "COVER_READY",
+      "symbol": "stem",
+      "approval": "NOT_PRODUCTION_APPROVED",
+      "source": {
+        "asset_id": "waystream_hope_pexels_36541765_06",
+        "provider": "pexels",
+        "source_url": "https://www.pexels.com/photo/vibrant-seedling-growth-in-lush-portuguese-forest-36541765/",
+        "local_path": "artifacts/stock_image_bank/way_stream_sanctuary/mental_health_editorial_100x/downloads/pexels/hope/pexels__hope__36541765.jpeg",
+        "license_status": "verified",
+        "image_status": "curated_pending_license",
+        "attribution_text": "Photo by Ana Morais on Pexels",
+        "metaphor": "seedling sprout"
+      },
+      "cover": {
+        "path": "artifacts/curation/waystream_image_winners_20260715/examples_v2/covers/waystream_hope_cover.jpg",
+        "kind": "cover",
+        "size": [
+          1600,
+          2560
+        ],
+        "placement": {
+          "band": {
+            "y0": 0.135,
+            "y1": 0.3721,
+            "variance": 250.2,
+            "edge": 2.99,
+            "luma": 19.0,
+            "busy": false,
+            "quiet": true
+          },
+          "treatment": "plain",
+          "ink": [
+            246,
+            241,
+            226
+          ],
+          "reason": "band is quiet (var=250<=405, edge=3.0<=9.9): type set directly on negative space"
+        },
+        "title_px": 150,
+        "subtitle_px": 63,
+        "subtitle_thumbnail_ok": true,
+        "subtitle_thumb_cap_px": 11.03
+      },
+      "social": [
+        {
+          "path": "artifacts/curation/waystream_image_winners_20260715/examples_v2/social/instagram_feed_4x5/waystream_hope_instagram_feed_4x5.jpg",
+          "kind": "social:instagram_feed_4x5",
+          "size": [
+            1080,
+            1350
+          ],
+          "placement": {
+            "band": {
+              "y0": 0.04,
+              "y1": 0.4244,
+              "variance": 597.3,
+              "edge": 4.22,
+              "luma": 22.1,
+              "busy": false,
+              "quiet": false
+            },
+            "treatment": "scrim",
+            "ink": [
+              246,
+              241,
+              226
+            ],
+            "reason": "band is mid-busy (var=597, edge=4.2): gradient scrim is enough to hold contrast"
+          },
+          "headline_px": 88,
+          "headline_thumbnail_ok": true,
+          "headline_thumb_cap_px": 22.81
+        }
+      ]
+    },
+    {
+      "topic": "loneliness",
+      "plan_status": "COVER_READY",
+      "symbol": "bars",
+      "approval": "NOT_PRODUCTION_APPROVED",
+      "source": {
+        "asset_id": "waystream_loneliness_pexels_11491926_02",
+        "provider": "pexels",
+        "source_url": "https://www.pexels.com/photo/grayscale-photo-of-a-concrete-bench-11491926/",
+        "local_path": "artifacts/stock_image_bank/way_stream_sanctuary/mental_health_editorial_100x/downloads/pexels/loneliness/pexels__loneliness__11491926.jpeg",
+        "license_status": "verified",
+        "image_status": "curated_pending_license",
+        "attribution_text": "Photo by Mathias Reding on Pexels",
+        "metaphor": "single figure on empty beach bench street"
+      },
+      "cover": {
+        "path": "artifacts/curation/waystream_image_winners_20260715/examples_v2/covers/waystream_loneliness_cover.jpg",
+        "kind": "cover",
+        "size": [
+          1600,
+          2560
+        ],
+        "placement": {
+          "band": {
+            "y0": 0.285,
+            "y1": 0.5221,
+            "variance": 25.0,
+            "edge": 5.01,
+            "luma": 185.0,
+            "busy": false,
+            "quiet": true
+          },
+          "treatment": "plain",
+          "ink": [
+            24,
+            24,
+            26
+          ],
+          "reason": "band is quiet (var=25<=405, edge=5.0<=9.9): type set directly on negative space"
+        },
+        "title_px": 150,
+        "subtitle_px": 63,
+        "subtitle_thumbnail_ok": true,
+        "subtitle_thumb_cap_px": 11.03
+      },
+      "social": [
+        {
+          "path": "artifacts/curation/waystream_image_winners_20260715/examples_v2/social/instagram_feed_4x5/waystream_loneliness_instagram_feed_4x5.jpg",
+          "kind": "social:instagram_feed_4x5",
+          "size": [
+            1080,
+            1350
+          ],
+          "placement": {
+            "band": {
+              "y0": 0.19,
+              "y1": 0.5744,
+              "variance": 37.6,
+              "edge": 4.79,
+              "luma": 182.6,
+              "busy": false,
+              "quiet": true
+            },
+            "treatment": "plain",
+            "ink": [
+              24,
+              24,
+              26
+            ],
+            "reason": "band is quiet (var=38<=405, edge=4.8<=9.9): type set directly on negative space"
+          },
+          "headline_px": 88,
+          "headline_thumbnail_ok": true,
+          "headline_thumb_cap_px": 22.81
+        }
+      ]
+    },
+    {
+      "topic": "overthinking",
+      "plan_status": "COVER_READY",
+      "symbol": "loop",
+      "approval": "NOT_PRODUCTION_APPROVED",
+      "source": {
+        "asset_id": "waystream_overthinking_pexels_10290189_01",
+        "provider": "pexels",
+        "source_url": "https://www.pexels.com/photo/green-hedge-maze-10290189/",
+        "local_path": "artifacts/stock_image_bank/way_stream_sanctuary/mental_health_editorial_100x/downloads/pexels/overthinking/pexels__overthinking__10290189.jpeg",
+        "license_status": "verified",
+        "image_status": "curated_pending_license",
+        "attribution_text": "Photo by Max Ravier on Pexels",
+        "metaphor": "maze labyrinth aerial view"
+      },
+      "cover": {
+        "path": "artifacts/curation/waystream_image_winners_20260715/examples_v2/covers/waystream_overthinking_cover.jpg",
+        "kind": "cover",
+        "size": [
+          1600,
+          2560
+        ],
+        "placement": {
+          "band": {
+            "y0": 0.135,
+            "y1": 0.2998,
+            "variance": 739.5,
+            "edge": 22.29,
+            "luma": 74.5,
+            "busy": true,
+            "quiet": false
+          },
+          "treatment": "backing_box",
+          "ink": [
+            246,
+            241,
+            226
+          ],
+          "reason": "band is busy (var=740, edge=22.3 vs var>=900 or edge>=22): title needs an opaque backing box"
+        },
+        "title_px": 150,
+        "subtitle_px": 63,
+        "subtitle_thumbnail_ok": true,
+        "subtitle_thumb_cap_px": 11.03
+      },
+      "social": [
+        {
+          "path": "artifacts/curation/waystream_image_winners_20260715/examples_v2/social/instagram_feed_4x5/waystream_overthinking_instagram_feed_4x5.jpg",
+          "kind": "social:instagram_feed_4x5",
+          "size": [
+            1080,
+            1350
+          ],
+          "placement": {
+            "band": {
+              "y0": 0.07,
+              "y1": 0.4544,
+              "variance": 756.4,
+              "edge": 24.04,
+              "luma": 72.1,
+              "busy": true,
+              "quiet": false
+            },
+            "treatment": "backing_box",
+            "ink": [
+              246,
+              241,
+              226
+            ],
+            "reason": "band is busy (var=756, edge=24.0 vs var>=900 or edge>=22): title needs an opaque backing box"
+          },
+          "headline_px": 88,
+          "headline_thumbnail_ok": true,
+          "headline_thumb_cap_px": 22.81
+        }
+      ]
+    },
+    {
+      "topic": "self_worth",
+      "plan_status": "RERUN_NEEDED",
+      "symbol": "stem",
+      "approval": "NOT_PRODUCTION_APPROVED",
+      "source": {
+        "asset_id": "abstract_self_worth",
+        "provider": "phoenix_abstract_cover_art",
+        "source_url": null,
+        "local_path": null,
+        "license_status": "not_applicable_generated_in_repo",
+        "image_status": "abstract_generated_placeholder",
+        "attribution_text": null,
+        "metaphor": null
+      },
+      "cover": {
+        "path": "artifacts/curation/waystream_image_winners_20260715/examples_v2/covers/waystream_self_worth_cover.jpg",
+        "kind": "cover",
+        "size": [
+          1600,
+          2560
+        ],
+        "placement": {
+          "band": {
+            "y0": 0.045,
+            "y1": 0.2821,
+            "variance": 57.5,
+            "edge": 1.13,
+            "luma": 162.7,
+            "busy": false,
+            "quiet": true
+          },
+          "treatment": "plain",
+          "ink": [
+            24,
+            24,
+            26
+          ],
+          "reason": "band is quiet (var=57<=405, edge=1.1<=9.9): type set directly on negative space"
+        },
+        "title_px": 150,
+        "subtitle_px": 63,
+        "subtitle_thumbnail_ok": true,
+        "subtitle_thumb_cap_px": 11.03
+      },
+      "social": [
+        {
+          "path": "artifacts/curation/waystream_image_winners_20260715/examples_v2/social/instagram_feed_4x5/waystream_self_worth_instagram_feed_4x5.jpg",
+          "kind": "social:instagram_feed_4x5",
+          "size": [
+            1080,
+            1350
+          ],
+          "placement": {
+            "band": {
+              "y0": 0.25,
+              "y1": 0.5537,
+              "variance": 63.9,
+              "edge": 1.0,
+              "luma": 147.2,
+              "busy": false,
+              "quiet": true
+            },
+            "treatment": "plain",
+            "ink": [
+              246,
+              241,
+              226
+            ],
+            "reason": "band is quiet (var=64<=405, edge=1.0<=9.9): type set directly on negative space"
+          },
+          "headline_px": 88,
+          "headline_thumbnail_ok": true,
+          "headline_thumb_cap_px": 22.81
+        }
+      ]
+    },
+    {
+      "topic": "trauma",
+      "plan_status": "RERUN_NEEDED",
+      "symbol": "jagged",
+      "approval": "NOT_PRODUCTION_APPROVED",
+      "source": {
+        "asset_id": "abstract_trauma",
+        "provider": "phoenix_abstract_cover_art",
+        "source_url": null,
+        "local_path": null,
+        "license_status": "not_applicable_generated_in_repo",
+        "image_status": "abstract_generated_placeholder",
+        "attribution_text": null,
+        "metaphor": null
+      },
+      "cover": {
+        "path": "artifacts/curation/waystream_image_winners_20260715/examples_v2/covers/waystream_trauma_cover.jpg",
+        "kind": "cover",
+        "size": [
+          1600,
+          2560
+        ],
+        "placement": {
+          "band": {
+            "y0": 0.045,
+            "y1": 0.2821,
+            "variance": 55.0,
+            "edge": 1.12,
+            "luma": 155.5,
+            "busy": false,
+            "quiet": true
+          },
+          "treatment": "plain",
+          "ink": [
+            24,
+            24,
+            26
+          ],
+          "reason": "band is quiet (var=55<=405, edge=1.1<=9.9): type set directly on negative space"
+        },
+        "title_px": 150,
+        "subtitle_px": 63,
+        "subtitle_thumbnail_ok": true,
+        "subtitle_thumb_cap_px": 11.03
+      },
+      "social": [
+        {
+          "path": "artifacts/curation/waystream_image_winners_20260715/examples_v2/social/instagram_feed_4x5/waystream_trauma_instagram_feed_4x5.jpg",
+          "kind": "social:instagram_feed_4x5",
+          "size": [
+            1080,
+            1350
+          ],
+          "placement": {
+            "band": {
+              "y0": 0.31,
+              "y1": 0.6137,
+              "variance": 62.4,
+              "edge": 1.0,
+              "luma": 134.9,
+              "busy": false,
+              "quiet": true
+            },
+            "treatment": "plain",
+            "ink": [
+              246,
+              241,
+              226
+            ],
+            "reason": "band is quiet (var=62<=405, edge=1.0<=9.9): type set directly on negative space"
+          },
+          "headline_px": 88,
+          "headline_thumbnail_ok": true,
+          "headline_thumb_cap_px": 22.81
+        }
+      ]
+    }
+  ]
+}
