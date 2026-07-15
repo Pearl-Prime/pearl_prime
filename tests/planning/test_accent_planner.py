@@ -186,6 +186,45 @@ def test_allowed_positions_rejects_illegal_placement():
     assert _position_fit_ok(entry, "after_REFLECTION") is False
 
 
+def test_external_story_pivot_fit_rejects_cold_hook_and_reflection_stack():
+    from phoenix_v4.planning.accent_planner import _position_fit_ok
+
+    entry = {
+        "story_id": "ext_anx_business_kodak_digital_v01",
+        "position_fit": "supports PIVOT",
+    }
+    assert _position_fit_ok(entry, "after_HOOK") is False
+    assert _position_fit_ok(entry, "after_REFLECTION") is False
+    assert _position_fit_ok(entry, "before_STORY") is True
+
+
+def test_external_story_wrapper_is_authorial_not_apparatus():
+    from phoenix_v4.planning.accent_planner import _wrap_external_story
+
+    body = _wrap_external_story(
+        "Kodak protected its film business until the market moved without it.",
+        "Kodak digital camera invention and bankruptcy arc",
+        position="after_HOOK",
+    )
+    assert "This is not fiction from this book's cast" not in body
+    assert "Source:" not in body
+    assert body.startswith("The same alarm can scale")
+
+
+def test_cited_evidence_wrapper_is_body_linked_not_generic_card():
+    from phoenix_v4.planning.accent_planner import _wrap_cited_evidence
+
+    body = _wrap_cited_evidence(
+        "The brain constantly predicts what the body should feel next.",
+        "Barrett LF (2017). How Emotions Are Made.",
+        position="before_STORY",
+        entry={"evidence_id": "anx_predictive_processing_barrett_2017"},
+    )
+    assert "A documented finding worth naming before we go further" not in body
+    assert body.startswith("That replay has a nervous-system explanation.")
+    assert "Carry that explanation back into the scene" in body
+
+
 def test_story_mix_weights_prefer_intimate_over_mythic():
     from phoenix_v4.planning.accent_planner import _score_entry_for_chapter, _story_mix_profile_data
 

@@ -869,25 +869,74 @@ def _entry_body(entry: Mapping[str, Any]) -> str:
     return ""
 
 
-def _wrap_cited_evidence(claim: str, citation: str, *, position: str) -> str:
-    handoff = (
-        "Carry that evidence into the scene that follows."
+def _wrap_cited_evidence(
+    claim: str,
+    citation: str,
+    *,
+    position: str,
+    entry: Optional[Mapping[str, Any]] = None,
+) -> str:
+    claim = claim.strip()
+    citation = citation.strip()
+    prefix = ""
+    try:
+        from phoenix_v4.rendering.science_wrapper import resolve_wrapper
+
+        ctx = {
+            "FINDING": claim,
+            "FIELD": str((entry or {}).get("field") or "affective neuroscience and stress physiology"),
+            "FIELD_SHORT": str((entry or {}).get("field_short") or "stress-physiology"),
+            "MECHANISM": str(
+                (entry or {}).get("mechanism")
+                or "the body's threat-and-safety response"
+            ),
+        }
+        researcher = str((entry or {}).get("researcher") or "").strip()
+        study = str((entry or {}).get("study") or "").strip()
+        if researcher:
+            ctx["RESEARCHER"] = researcher
+        if study:
+            ctx["STUDY"] = study
+        prefix, _suffix = resolve_wrapper(
+            section_type="STORY" if position in ("after_HOOK", "before_STORY") else "REFLECTION",
+            seed=f"{(entry or {}).get('evidence_id') or citation or claim}:{position}",
+            spine_context=ctx,
+        )
+    except Exception:
+        prefix = ""
+    lead = (
+        "That replay has a nervous-system explanation."
         if position in ("after_HOOK", "before_STORY")
-        else "Let that finding sit beside what you already know before the next beat."
+        else "The body pattern has a research-shaped edge worth naming."
     )
-    return f"A documented finding worth naming before we go further. {claim.strip()} ({citation.strip()}). {handoff}"
+    handoff = (
+        "Carry that explanation back into the scene that follows."
+        if position in ("after_HOOK", "before_STORY")
+        else "Let that finding sit beside what the body already showed you."
+    )
+    science_sentence = (prefix or claim).strip().rstrip(".")
+    if prefix and claim and claim.lower() not in prefix.lower():
+        science_sentence = f"{science_sentence}: {claim.rstrip('.')}"
+    citation_part = f" ({citation})." if citation else "."
+    return f"{lead} {science_sentence}{citation_part} {handoff}"
 
 
 def _wrap_external_story(story: str, source: str, *, position: str) -> str:
+    story = story.strip()
+    source = source.strip()
+    if position == "after_HOOK":
+        lead = "The same alarm can scale from one body to a whole room."
+    elif position == "after_REFLECTION":
+        lead = "Before returning to this body, widen the lens for one outside example."
+    else:
+        lead = "One outside story can make the pattern easier to see."
+    source_sentence = f" Public accounts name this arc as {source}." if source else ""
     handoff = (
-        "Let that story echo through what happens next in this room."
+        "Now bring that pattern back into what happens next in this room."
         if position != "before_THREAD"
         else "Carry that image into the thread that follows."
     )
-    return (
-        f"This is not fiction from this book's cast — it is a cited story from elsewhere. "
-        f"{story.strip()} Source: {source.strip()}. {handoff}"
-    )
+    return f"{lead} {story}{source_sentence} {handoff}"
 
 
 def _wrap_encouragement(prose: str, *, position: str) -> str:
@@ -1222,6 +1271,15 @@ def _position_fit_ok(entry: Mapping[str, Any], position: str) -> bool:
         return True
     values = fit if isinstance(fit, list) else [fit]
     normalized = {str(v).strip().lower() for v in values}
+    joined = " ".join(normalized)
+    if "supports pivot" in joined or "pivot" in normalized:
+        return position in {"after_PIVOT", "before_STORY"}
+    if "supports hook" in joined or "hook" in normalized:
+        return position in {"after_HOOK", "before_STORY"}
+    if "supports reflection" in joined or "reflection" in normalized:
+        return position in {"after_REFLECTION", "before_THREAD"}
+    if "supports takeaway" in joined or "takeaway" in normalized:
+        return position in {"before_THREAD", "after_INTEGRATION"}
     if position == "before_HOOK" and "opener" in normalized:
         return True
     if position == "before_THREAD" and "closer" in normalized:
@@ -1418,7 +1476,12 @@ def _resolve_quote_text(entry: Mapping[str, Any], *, locale_cluster: str = "en_U
 def _resolve_body(accent_class: str, entry: Mapping[str, Any], *, position: str, composite_mode: bool, locale_cluster: str = "en_US") -> Tuple[str, str]:
     if accent_class == "CITED_EVIDENCE":
         aid = str(entry.get("evidence_id") or "cited_unknown")
-        return aid, _wrap_cited_evidence(str(entry.get("claim") or _entry_body(entry)), str(entry.get("citation") or ""), position=position)
+        return aid, _wrap_cited_evidence(
+            str(entry.get("claim") or _entry_body(entry)),
+            str(entry.get("citation") or ""),
+            position=position,
+            entry=entry,
+        )
     if accent_class == "EXTERNAL_STORY":
         aid = str(entry.get("story_id") or "ext_unknown")
         return aid, _wrap_external_story(str(entry.get("story") or ""), str(entry.get("source") or ""), position=position)
@@ -1916,12 +1979,15 @@ def _select_entry(
     composite_mode: bool,
     seed: str,
     chapter_number: int,
+    position: str,
     used_ids: set[str],
 ) -> Optional[dict[str, Any]]:
     """Legacy v1 picker — preserved for flagship golden parity when contract-v1 is off."""
     candidates: List[dict[str, Any]] = []
     for row in pool:
         if not _topic_match(row, topic_id) or not _locale_fit_ok(row, locale_cluster) or not _secular_entry_ok(row, composite_mode=composite_mode):
+            continue
+        if not _position_fit_ok(row, position):
             continue
         aid = _entry_id(row)
         if aid and aid in used_ids:
@@ -2032,6 +2098,7 @@ def _plan_accent_beats_for_book_legacy(
                 composite_mode=composite_mode,
                 seed=seed,
                 chapter_number=ch_num,
+                position=position,
                 used_ids=used_ids,
             )
             if not entry:
