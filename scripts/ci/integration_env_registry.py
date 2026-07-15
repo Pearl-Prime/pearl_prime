@@ -80,6 +80,10 @@ REGISTRY: list[tuple[str, str, bool, str]] = [
     ("GoHighLevel", "PHOENIX_GHL_FUNNEL_WEBHOOK_STILLNESS", False, "Stillness Press funnel capture webhook"),
     ("GoHighLevel", "PHOENIX_GHL_FUNNEL_WEBHOOK_DEVOTION", False, "Devotion Path (Open Vessel Press) funnel capture webhook"),
     ("GoHighLevel", "PHOENIX_GHL_FUNNEL_WEBHOOK_WAYSTREAM", False, "Waystream Sanctuary funnel capture webhook"),
+    # --- GHL V2 sub-account sync (YAML desired-state). NOT the legacy V1 funnel vars above. ---
+    ("GoHighLevel", "GHL_PRIVATE_INTEGRATION_TOKEN", False, "GHL V2 Private Integration Token (Bearer). Read-only scopes ONLY: locations.readonly, locations/customValues.readonly, locations/customFields.readonly. Distinct from legacy GHL_API_KEY (V1, end-of-support 2025-12-31 — not accepted for sub-account sync). Static token: no auto-refresh, rotate every 90 days per HighLevel. Get: app.gohighlevel.com > Settings > Private Integrations > Create new Integration. See artifacts/coordination/handoffs/ghl_credential_sandbox_probe_2026-07-15.md §4."),
+    ("GoHighLevel", "GHL_SANDBOX_LOCATION_ID", False, "Operator-selected sandbox/test GHL location id for read-only probes. NEVER a production location. Get: sandbox sub-account > Settings > Business Profile."),
+    ("GoHighLevel", "GHL_API_VERSION", False, "GHL API `Version` request header value, e.g. 2021-07-28 per the Private Integration Token docs. Explicit desired-state metadata — docs are versioned, so never leave this implicit."),
     ("SMTP", "SMTP_HOST", False, "Funnel email host"),
     ("SMTP", "SMTP_PORT", False, "Funnel email port"),
     ("SMTP", "SMTP_USER", False, "Funnel email user"),

@@ -256,6 +256,28 @@ than copy-pasting, so a future endpoint rotation is picked up automatically.
 | **Setup** | `./scripts/freebies/setup_ghl_webhook.sh '<url>'` or Pearl_Int runbook |
 | **Detailed docs** | [docs/GHL_ADMIN_HANDOFF_FREEBIE_CAPTURE.md](../GHL_ADMIN_HANDOFF_FREEBIE_CAPTURE.md) (forward to GHL admin), [skills/pearl-int/references/ghl_freebie_inbound_webhook.md](../skills/pearl-int/references/ghl_freebie_inbound_webhook.md), [config/freebies/ghl_funnel_capture.yaml](../config/freebies/ghl_funnel_capture.yaml) |
 
+### 8d. GoHighLevel (GHL) — V2 sub-account sync (read-only probe)
+
+Separate from 8/8b. Sections 8 and 8b are **legacy V1 funnel/webhook** credentials and are **not accepted** for
+YAML sub-account sync ([research](../artifacts/research/ghl_api_current_docs_20260715.md), PR #5686).
+
+| Field | Value |
+|-------|-------|
+| **Env vars** | `GHL_PRIVATE_INTEGRATION_TOKEN`, `GHL_SANDBOX_LOCATION_ID`, `GHL_API_VERSION` |
+| **Consumed by** | Not yet wired — lane 06 dry-run sync. Registered so the Keychain loader exports them once staged. |
+| **Keychain** | `phoenix-omega` service, account = env var name (e.g. `-s phoenix-omega -a GHL_PRIVATE_INTEGRATION_TOKEN`) |
+| **How to obtain** | app.gohighlevel.com → Settings → Private Integrations → Create new Integration (enable via Settings → Labs if absent). Scope to a **sandbox** sub-account. |
+| **Scopes (read-only, tick exactly these)** | `locations.readonly`, `locations/customValues.readonly`, `locations/customFields.readonly` — no `.write` scopes |
+| **Headers** | `Authorization: Bearer <token>`, `Version: 2021-07-28` |
+| **Rotation** | Every 90 days (HighLevel guidance — PIT is static, no auto-refresh) |
+| **Required vs optional** | Required to unblock the GHL read-only probe; optional for all existing funnel behavior |
+| **Status** | **BLOCKED — not staged (2026-07-15).** No GHL bearer credential exists in Keychain. Operator setup steps in the handoff below. |
+| **Auth model at scale** | OAuth 2.0 is the recommended model for the 37-location program. A Private Integration Token is for internal/single-account validation only — it does not prove multi-location breadth. |
+| **Detailed docs** | [handoff §4 operator setup](../artifacts/coordination/handoffs/ghl_credential_sandbox_probe_2026-07-15.md), [spec](specs/GHL_YAML_SUBACCOUNT_SYNC_V1_SPEC.md), [field map](ghl/GHL_YAML_SYNC_FIELD_MAP.md) |
+
+> **Never** run `load_integration_env_from_keychain.py --verbose` and share the output — it prints `export NAME=<value>`
+> with real secret values for every staged item. Use `--list` (names only) to verify staging.
+
 ### 8c. Pearl Prime Content — GHL weekly feed (R2)
 
 | Field | Value |
