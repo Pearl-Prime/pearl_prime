@@ -3,11 +3,9 @@
 
 generic:
   angle_definition: |
-    [Angle journey — definition placeholder for {display_name}.]
-    This book follows the {analogy_lens} lens: {core_frame}
-    The named object for this topic will be named explicitly once commissioned.
-    For now, treat the angle as the spine that every chapter returns to.
+    This book uses {display_name} as a steady thread for the reader.
+    The central frame is simple: {core_frame}.
+    Each chapter returns to that frame from a new, practical angle.
   angle_callback: |
-    [Angle journey — layer {layer} callback placeholder.]
-    Phase: {phase}. Prior layer: {prior_assertion}
-    This chapter deepens the angle without breaking the thread established in chapter one.
+    This chapter returns to the book's earlier thread and deepens it.
+    What began as {prior_assertion} now becomes a more practical next step.

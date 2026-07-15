@@ -8,6 +8,7 @@ import pytest
 from phoenix_v4.planning.accent_planner import (
     _load_author_disclosure,
     attach_accent_plan,
+    build_enhancement_contract_v21_summary,
     compute_accent_signature,
     locale_to_cluster,
     plan_accent_beats_for_book,
@@ -118,6 +119,37 @@ def _enriched_gen_z_sleep_anxiety(seed: str = "4242"):
 
 def test_locale_to_cluster_en_us():
     assert locale_to_cluster("en-US") == "en_US"
+
+
+def test_optional_accent_underfill_blocks_when_budget_requests_accents():
+    summary = build_enhancement_contract_v21_summary(
+        accent_budget={"QUOTE": 2, "ENCOURAGEMENT": 1},
+        flat_rows=[],
+        chapter_count=12,
+        story_mix_profile="minimal_accent",
+        max_accents_per_chapter=2,
+    )
+    opt = summary["optional_accent_budget"]
+    assert opt["zero_optional_accent_policy"]["authorized"] is False
+    failures = summary["optional_accent_integrity"]["hard_failures"]
+    codes = {row["code"] for row in failures}
+    assert "supported_budget_underfill" in codes
+    assert "optional_accent_chapter_under_target" in codes
+
+
+def test_zero_optional_accent_budget_is_explicit_authorized_exception():
+    summary = build_enhancement_contract_v21_summary(
+        accent_budget={},
+        flat_rows=[],
+        chapter_count=12,
+        story_mix_profile="minimal_accent",
+        max_accents_per_chapter=2,
+    )
+    opt = summary["optional_accent_budget"]
+    assert opt["zero_optional_accent_policy"]["authorized"] is True
+    assert summary["optional_accent_integrity"]["status"] == "PASS"
+    codes = {row["code"] for row in summary["optional_accent_integrity"]["warnings"]}
+    assert "zero_optional_accent_exception" in codes
 
 
 def test_pilot_cell_accent_budget_nonzero():

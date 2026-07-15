@@ -238,6 +238,8 @@ def validate_optional_accent_budget(
     accent_free_count = int(actual.get("accent_free_chapter_count") or max(0, chapters - optional_chapter_count))
     per_chapter = _as_mapping(actual.get("per_chapter_optional_counts"))
     chapter_refs = [int(ch) for ch in _as_list(actual.get("chapters_with_optional_accents")) if str(ch).strip()]
+    zero_policy = _as_mapping(budget.get("zero_optional_accent_policy"))
+    zero_authorized = bool(zero_policy.get("authorized"))
 
     if assigned_total > hard_max_total:
         fail("hard_max_total_optional_accents_exceeded", "assigned optional accents exceed hard total ceiling")
@@ -256,10 +258,26 @@ def validate_optional_accent_budget(
         if ch < 1 or ch > chapters:
             fail("invalid_chapter_reference", "optional accent chapter reference outside book range", chapter=ch)
 
-    if assigned_total < target_total_min:
-        warn("supported_budget_underfill", "assigned optional accents are below target range")
-    if optional_chapter_count < target_ch_min:
-        warn("optional_accent_chapter_under_target", "optional-accent chapters are below target range")
+    if assigned_total < target_total_min and not zero_authorized:
+        fail(
+            "supported_budget_underfill",
+            "assigned optional accents are below target range without an authorized zero-budget exception",
+        )
+    elif assigned_total < target_total_min:
+        warn(
+            "zero_optional_accent_exception",
+            "assigned optional accents are below target range under an explicit zero-budget exception",
+        )
+    if optional_chapter_count < target_ch_min and not zero_authorized:
+        fail(
+            "optional_accent_chapter_under_target",
+            "optional-accent chapters are below target range without an authorized zero-budget exception",
+        )
+    elif optional_chapter_count < target_ch_min:
+        warn(
+            "zero_optional_accent_chapter_exception",
+            "optional-accent chapters are below target range under an explicit zero-budget exception",
+        )
     if optional_chapter_count > target_ch_max:
         warn("optional_accent_chapter_over_target", "optional-accent chapters are above target range")
 

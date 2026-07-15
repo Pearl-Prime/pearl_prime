@@ -184,6 +184,23 @@ def test_build_enhancement_contract_payload_reconciles_final_manuscript() -> Non
     assert payload["validation"]["unresolved_markers"] == []
 
 
+def test_enhancement_contract_reconciles_uppercase_titled_chapter_heading() -> None:
+    book = _sample_book()
+    manuscript = _sample_manuscript(book).replace(
+        "Chapter 1\n", "CHAPTER 1: The Alarm\n", 1
+    )
+    payload = build_enhancement_contract_payload(
+        enriched=book,
+        manuscript_text=manuscript,
+        contract_id="enhancement_contract_v1",
+        topic_id="anxiety",
+        persona_id="gen_z_professionals",
+        runtime_format="extended_book_2h",
+    )
+    assert payload["status"] == "PASS", payload["validation"]["errors"]
+    assert all(row["present_in_manuscript"] for row in payload["core_surface_rows"])
+
+
 def test_v21_analogy_metaphor_not_falsely_true_from_angle_definition_alone() -> None:
     """Regression: ANGLE_DEFINITION (a callback plant) must not, by itself, make
     ANALOGY/METAPHOR report present. _sample_book()'s chapter has an
