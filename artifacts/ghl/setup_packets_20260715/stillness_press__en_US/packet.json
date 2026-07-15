@@ -1,0 +1,512 @@
+{
+  "schema_version": 1,
+  "mode": "setup_packet_dry_run",
+  "live_writes": false,
+  "generated_at": "2026-07-15T00:00:00Z",
+  "field_map_version": "GHL_YAML_SUBACCOUNT_SYNC_V1",
+  "readiness": "BLOCKED",
+  "blockers": [
+    "blocked_missing_active_yaml: no brand-wizard-app/brands/stillness_press.yaml on this checkout",
+    "blocked_missing_location_mapping: manifest row has no location_id",
+    "blocked_manifest_missing_scale_columns: location_id, phoenix_managed_custom_value_ids, last_readback_at, last_sync_sha, rollback_note"
+  ],
+  "brand": {
+    "brand_id": "stillness_press",
+    "locale": "en_US",
+    "display_name": "Stillness Press",
+    "registry_display_name": "Stillness Press",
+    "wizard_display_name": null,
+    "wizard_yaml_path": null,
+    "wizard_active": false,
+    "wizard_inactive_reason": "no brand_wizard YAML found",
+    "rollout_phase": "pilot",
+    "ghl_enabled": true,
+    "default_persona": "corporate_managers"
+  },
+  "admin": {
+    "brand_director_name": null,
+    "brand_director_id": null,
+    "brand_director_status": null,
+    "source": "unresolved",
+    "ghl_admin_action": "Review this packet, then confirm/return the GHL location_id. Phoenix never creates sub-accounts."
+  },
+  "ghl_target": {
+    "location_id": null,
+    "location_id_redacted": true,
+    "location_name": "Stillness Press (en_US)",
+    "manifest_row_id": 1,
+    "manifest_path": "docs/handoffs/ghl_location_manifest.example.tsv",
+    "registry_path": "config/marketing/brand_marketing_registry.yaml",
+    "policy": "update-only; missing sub-account is blocked, never created (spec: Missing Sub-Account Policy)"
+  },
+  "custom_fields": {
+    "phoenix_custom_values": [
+      {
+        "name": "phoenix_brand_id",
+        "safety_class": "phoenix_managed",
+        "source": "registry:brand_id",
+        "live_write_allowed": true,
+        "requires_operator_approval": false,
+        "note": "Must match manifest row."
+      },
+      {
+        "name": "phoenix_brand_display_name",
+        "safety_class": "operator_approval_required",
+        "source": "registry:display_name",
+        "live_write_allowed": false,
+        "requires_operator_approval": true,
+        "note": "Prefer registry display name when GHL pilot row already exists."
+      },
+      {
+        "name": "phoenix_locale",
+        "safety_class": "phoenix_managed",
+        "source": "registry:locale",
+        "live_write_allowed": true,
+        "requires_operator_approval": false,
+        "note": "V1 pilot is en_US."
+      },
+      {
+        "name": "phoenix_feed_url",
+        "safety_class": "phoenix_managed",
+        "source": "manifest:feed_url",
+        "live_write_allowed": true,
+        "requires_operator_approval": false,
+        "note": "Public stable URL only; no presigned URLs."
+      },
+      {
+        "name": "phoenix_funnel_base_url",
+        "safety_class": "phoenix_managed",
+        "source": "manifest:funnel_base_url",
+        "live_write_allowed": true,
+        "requires_operator_approval": false,
+        "note": "Public Cloudflare Pages URL."
+      },
+      {
+        "name": "phoenix_shop_cta_style",
+        "safety_class": "manual_ghl_admin",
+        "source": "manifest:shop_cta_style",
+        "live_write_allowed": false,
+        "requires_operator_approval": false,
+        "note": "Dry-run only until operator approves."
+      },
+      {
+        "name": "phoenix_rollout_phase",
+        "safety_class": "manual_ghl_admin",
+        "source": "registry:rollout_phase",
+        "live_write_allowed": false,
+        "requires_operator_approval": false,
+        "note": "Audit only, not automation switching in V1."
+      },
+      {
+        "name": "phoenix_last_sync_sha",
+        "safety_class": "phoenix_managed",
+        "source": "engine:sync_sha",
+        "live_write_allowed": true,
+        "requires_operator_approval": false,
+        "note": "Preferred one-field live pilot target."
+      },
+      {
+        "name": "phoenix_last_sync_at",
+        "safety_class": "phoenix_managed",
+        "source": "engine:sync_at",
+        "live_write_allowed": true,
+        "requires_operator_approval": false,
+        "note": "Low-risk audit target."
+      },
+      {
+        "name": "phoenix_brand_tagline",
+        "safety_class": "operator_approval_required",
+        "source": "wizard:wizard_core.tagline",
+        "live_write_allowed": false,
+        "requires_operator_approval": true,
+        "note": "Brand identity copy."
+      },
+      {
+        "name": "phoenix_positioning_line",
+        "safety_class": "operator_approval_required",
+        "source": "wizard:wizard_core.positioning_line",
+        "live_write_allowed": false,
+        "requires_operator_approval": true,
+        "note": "Brand identity copy."
+      }
+    ],
+    "pilot_field_order": [
+      "phoenix_last_sync_sha",
+      "phoenix_last_sync_at"
+    ],
+    "quiz_inbound_custom_fields": [
+      "feed_url",
+      "funnel_variant",
+      "persona",
+      "preferred_format",
+      "primary_concern",
+      "quiz_id",
+      "readiness",
+      "score_band",
+      "sent_freebie_ids"
+    ],
+    "note": "Custom fields are read-only in V1. Inbound quiz fields are existing webhook mapping, not YAML sync."
+  },
+  "expected_tags": {
+    "source": "config/freebies/quiz_segment_map.yaml",
+    "score_band_tags": [
+      "severity_high",
+      "severity_low",
+      "severity_medium"
+    ],
+    "preferred_format_tags": [
+      "pref_audio",
+      "pref_somatic",
+      "pref_worksheet"
+    ],
+    "readiness_tags": [
+      "ready_act",
+      "ready_buy",
+      "ready_learn"
+    ],
+    "topic_default_tags": {
+      "anxiety": [
+        "source_freebie_quiz",
+        "quiz_anxiety",
+        "freebie_captured"
+      ],
+      "compassion_fatigue": [
+        "source_freebie_quiz",
+        "quiz_compassion_fatigue",
+        "freebie_captured"
+      ],
+      "overthinking": [
+        "source_freebie_quiz",
+        "quiz_overthinking",
+        "freebie_captured"
+      ],
+      "financial_anxiety": [
+        "source_freebie_quiz",
+        "quiz_financial_anxiety",
+        "freebie_captured"
+      ],
+      "courage": [
+        "source_freebie_quiz",
+        "quiz_courage",
+        "freebie_captured"
+      ],
+      "burnout": [
+        "source_freebie_quiz",
+        "quiz_burnout",
+        "freebie_captured"
+      ],
+      "self_worth": [
+        "source_freebie_quiz",
+        "quiz_self_worth",
+        "freebie_captured"
+      ],
+      "imposter_syndrome": [
+        "source_freebie_quiz",
+        "quiz_imposter_syndrome",
+        "freebie_captured"
+      ],
+      "boundaries": [
+        "source_freebie_quiz",
+        "quiz_boundaries",
+        "freebie_captured"
+      ],
+      "depression": [
+        "source_freebie_quiz",
+        "quiz_depression",
+        "freebie_captured"
+      ],
+      "social_anxiety": [
+        "source_freebie_quiz",
+        "quiz_social_anxiety",
+        "freebie_captured"
+      ],
+      "financial_stress": [
+        "source_freebie_quiz",
+        "quiz_financial_stress",
+        "freebie_captured"
+      ],
+      "sleep_anxiety": [
+        "source_freebie_quiz",
+        "quiz_sleep_anxiety",
+        "freebie_captured"
+      ],
+      "somatic_healing": [
+        "source_freebie_quiz",
+        "quiz_somatic_healing",
+        "freebie_captured"
+      ],
+      "grief": [
+        "source_freebie_quiz",
+        "quiz_grief",
+        "freebie_captured"
+      ]
+    }
+  },
+  "channels": [
+    {
+      "channel": "weekly_marketing_feed",
+      "kind": "r2_public_json",
+      "target": "https://pub-4bac5d0b30be4b16824cd1eaa84ae9f5.r2.dev/pearl-prime-content/stillness_press/en_US/2026-W26/marketing_feed.json",
+      "status": "resolved",
+      "note": "Existing proof-loop feed connector remains authority; no presigned URLs."
+    },
+    {
+      "channel": "freebie_funnel_pages",
+      "kind": "cloudflare_pages",
+      "target": "https://brand-admin-onboarding.pages.dev/free/",
+      "status": "resolved",
+      "note": "15 interactive TOF landings (config/freebies/ghl_funnel_capture.yaml)."
+    },
+    {
+      "channel": "inbound_webhook_capture",
+      "kind": "ghl_inbound_webhook",
+      "target": null,
+      "status": "env_name_only",
+      "note": "URL value is operator-owned and never stored in this repo. See webhook.env_name."
+    },
+    {
+      "channel": "email_automation",
+      "kind": "ghl_workflow",
+      "target": null,
+      "status": "manual_ghl_admin",
+      "note": "Email slots: ['bonus_pre_story', 'e1', 'e3', 'e4', 'e5', 'post_e5'] (config/marketing/ghl_email_slot_rules.yaml). GHL admin owns workflows."
+    },
+    {
+      "channel": "shop",
+      "kind": "storefront",
+      "target": "https://pearlprime.shop",
+      "status": "resolved",
+      "note": "Offer/CTA URLs flow through the existing feed, not YAML sync."
+    }
+  ],
+  "funnel_urls": [
+    {
+      "topic": "anxiety",
+      "funnel_slug": "anxiety-nervous-system-reset",
+      "quiz_id": "breath_timer_interactive",
+      "capture_type": "somatic",
+      "tags": [
+        "source_freebie_quiz",
+        "quiz_anxiety",
+        "freebie_captured"
+      ],
+      "url": "https://brand-admin-onboarding.pages.dev/free/anxiety-nervous-system-reset/",
+      "url_status": "derived_from_manifest_funnel_base_url"
+    },
+    {
+      "topic": "compassion_fatigue",
+      "funnel_slug": "compassion-fatigue-audit",
+      "quiz_id": "capacity_assessment",
+      "capture_type": "assessment",
+      "tags": [
+        "source_freebie_quiz",
+        "quiz_compassion_fatigue",
+        "freebie_captured"
+      ],
+      "url": "https://brand-admin-onboarding.pages.dev/free/compassion-fatigue-audit/",
+      "url_status": "derived_from_manifest_funnel_base_url"
+    },
+    {
+      "topic": "overthinking",
+      "funnel_slug": "overthinking-thought-sorter",
+      "quiz_id": "thought_sorter_assessment",
+      "capture_type": "assessment",
+      "tags": [
+        "source_freebie_quiz",
+        "quiz_overthinking",
+        "freebie_captured"
+      ],
+      "url": "https://brand-admin-onboarding.pages.dev/free/overthinking-thought-sorter/",
+      "url_status": "derived_from_manifest_funnel_base_url"
+    },
+    {
+      "topic": "financial_anxiety",
+      "funnel_slug": "financial-anxiety-check-in",
+      "quiz_id": "financial_checkin",
+      "capture_type": "assessment",
+      "tags": [
+        "source_freebie_quiz",
+        "quiz_financial_anxiety",
+        "freebie_captured"
+      ],
+      "url": "https://brand-admin-onboarding.pages.dev/free/financial-anxiety-check-in/",
+      "url_status": "derived_from_manifest_funnel_base_url"
+    },
+    {
+      "topic": "courage",
+      "funnel_slug": "courage-decision-map",
+      "quiz_id": "decision_resistance_map",
+      "capture_type": "assessment",
+      "tags": [
+        "source_freebie_quiz",
+        "quiz_courage",
+        "freebie_captured"
+      ],
+      "url": "https://brand-admin-onboarding.pages.dev/free/courage-decision-map/",
+      "url_status": "derived_from_manifest_funnel_base_url"
+    },
+    {
+      "topic": "burnout",
+      "funnel_slug": "burnout-energy-audit",
+      "quiz_id": "capacity_assessment",
+      "capture_type": "assessment",
+      "tags": [
+        "source_freebie_quiz",
+        "quiz_burnout",
+        "freebie_captured"
+      ],
+      "url": "https://brand-admin-onboarding.pages.dev/free/burnout-energy-audit/",
+      "url_status": "derived_from_manifest_funnel_base_url"
+    },
+    {
+      "topic": "self_worth",
+      "funnel_slug": "self-worth-inventory",
+      "quiz_id": "worth_inventory",
+      "capture_type": "assessment",
+      "tags": [
+        "source_freebie_quiz",
+        "quiz_self_worth",
+        "freebie_captured"
+      ],
+      "url": "https://brand-admin-onboarding.pages.dev/free/self-worth-inventory/",
+      "url_status": "derived_from_manifest_funnel_base_url"
+    },
+    {
+      "topic": "imposter_syndrome",
+      "funnel_slug": "imposter-evidence-log",
+      "quiz_id": "evidence_log",
+      "capture_type": "assessment",
+      "tags": [
+        "source_freebie_quiz",
+        "quiz_imposter_syndrome",
+        "freebie_captured"
+      ],
+      "url": "https://brand-admin-onboarding.pages.dev/free/imposter-evidence-log/",
+      "url_status": "derived_from_manifest_funnel_base_url"
+    },
+    {
+      "topic": "boundaries",
+      "funnel_slug": "boundaries-script-kit",
+      "quiz_id": "script_practice",
+      "capture_type": "script",
+      "tags": [
+        "source_freebie_quiz",
+        "quiz_boundaries",
+        "freebie_captured"
+      ],
+      "url": "https://brand-admin-onboarding.pages.dev/free/boundaries-script-kit/",
+      "url_status": "derived_from_manifest_funnel_base_url"
+    },
+    {
+      "topic": "depression",
+      "funnel_slug": "depression-momentum-kit",
+      "quiz_id": "micro_action_kit",
+      "capture_type": "kit",
+      "tags": [
+        "source_freebie_quiz",
+        "quiz_depression",
+        "freebie_captured"
+      ],
+      "url": "https://brand-admin-onboarding.pages.dev/free/depression-momentum-kit/",
+      "url_status": "derived_from_manifest_funnel_base_url"
+    },
+    {
+      "topic": "social_anxiety",
+      "funnel_slug": "social-anxiety-toolkit",
+      "quiz_id": "pre_event_protocol",
+      "capture_type": "kit",
+      "tags": [
+        "source_freebie_quiz",
+        "quiz_social_anxiety",
+        "freebie_captured"
+      ],
+      "url": "https://brand-admin-onboarding.pages.dev/free/social-anxiety-toolkit/",
+      "url_status": "derived_from_manifest_funnel_base_url"
+    },
+    {
+      "topic": "financial_stress",
+      "funnel_slug": "financial-stress-audit",
+      "quiz_id": "financial_stress_audit",
+      "capture_type": "assessment",
+      "tags": [
+        "source_freebie_quiz",
+        "quiz_financial_stress",
+        "freebie_captured"
+      ],
+      "url": "https://brand-admin-onboarding.pages.dev/free/financial-stress-audit/",
+      "url_status": "derived_from_manifest_funnel_base_url"
+    },
+    {
+      "topic": "sleep_anxiety",
+      "funnel_slug": "sleep-anxiety-wind-down",
+      "quiz_id": "wind_down_breath",
+      "capture_type": "somatic",
+      "tags": [
+        "source_freebie_quiz",
+        "quiz_sleep_anxiety",
+        "freebie_captured"
+      ],
+      "url": "https://brand-admin-onboarding.pages.dev/free/sleep-anxiety-wind-down/",
+      "url_status": "derived_from_manifest_funnel_base_url"
+    },
+    {
+      "topic": "somatic_healing",
+      "funnel_slug": "somatic-body-scan",
+      "quiz_id": "body_scan_timer",
+      "capture_type": "somatic",
+      "tags": [
+        "source_freebie_quiz",
+        "quiz_somatic_healing",
+        "freebie_captured"
+      ],
+      "url": "https://brand-admin-onboarding.pages.dev/free/somatic-body-scan/",
+      "url_status": "derived_from_manifest_funnel_base_url"
+    },
+    {
+      "topic": "grief",
+      "funnel_slug": "grief-letter-template",
+      "quiz_id": "grief_letter_template",
+      "capture_type": "template",
+      "tags": [
+        "source_freebie_quiz",
+        "quiz_grief",
+        "freebie_captured"
+      ],
+      "url": "https://brand-admin-onboarding.pages.dev/free/grief-letter-template/",
+      "url_status": "derived_from_manifest_funnel_base_url"
+    }
+  ],
+  "sample_payload": {
+    "transport": "GHL Automation -> Inbound Webhook (operator-owned URL)",
+    "payload_fields": [
+      "email",
+      "first_name",
+      "quiz_id",
+      "topic",
+      "score",
+      "score_band",
+      "answers_json",
+      "funnel_slug"
+    ],
+    "example": {
+      "email": "sample.lead@example.invalid",
+      "first_name": "Sample",
+      "quiz_id": "capacity_assessment",
+      "topic": "burnout",
+      "score": 7,
+      "score_band": "medium",
+      "answers_json": "{\"q1\":\"b\",\"q2\":\"c\"}",
+      "funnel_slug": "burnout-energy-audit"
+    },
+    "note": "Placeholder values only. No real contact data. Map JSON keys to GHL custom field UUIDs, not string ids."
+  },
+  "webhook": {
+    "env_name": "PHOENIX_GHL_FUNNEL_WEBHOOK_STILLNESS",
+    "url": null,
+    "value_policy": "ENV NAME ONLY. The webhook URL value is a secret-class field: never committed, never printed, never synced to a GHL custom value. Operator sets it in the deploy env."
+  },
+  "notes": [
+    "LIVE_WRITES=none. This packet is a read-only handoff; it authorizes no GHL write.",
+    "A BLOCKED packet must not be treated as a provisioning green light."
+  ]
+}

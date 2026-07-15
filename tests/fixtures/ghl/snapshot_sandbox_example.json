@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "source": "fixture",
+  "note": "Synthetic read-only current-state snapshot for tests. Not a real GHL location. No credentials, no webhook URLs, no contact data. Real snapshots must be redacted read-only GET output.",
+  "captured_at": "2026-07-15T00:00:00Z",
+  "live_writes": false,
+  "locations": {
+    "LOC_FIXTURE_0001": {
+      "name": "Waystream Sanctuary (en_US)",
+      "custom_values": {
+        "phoenix_brand_id": {
+          "id": "cv_fixture_brand_id",
+          "value": "way_stream_sanctuary"
+        },
+        "phoenix_locale": {
+          "id": "cv_fixture_locale",
+          "value": "en_US"
+        },
+        "phoenix_last_sync_sha": {
+          "id": "cv_fixture_last_sync_sha",
+          "value": "0000000000000000000000000000000000000000"
+        }
+      }
+    }
+  }
+}
