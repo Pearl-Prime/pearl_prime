@@ -707,8 +707,88 @@ def main() -> int:
             skip=True,
         )
 
+    # --- 34. Lean best-book golden integrity (operator Q-LEAN-BEST-01=A) ---
+    lean_best_gate = REPO_ROOT / "scripts" / "ci" / "check_lean_best_book_parity.py"
+    if lean_best_gate.exists():
+        try:
+            env = os.environ.copy()
+            env["PYTHONPATH"] = str(REPO_ROOT)
+            r = subprocess.run(
+                [sys.executable, str(lean_best_gate)],
+                cwd=str(REPO_ROOT),
+                env=env,
+                capture_output=True,
+                text=True,
+                timeout=120,
+            )
+            lb_ok = r.returncode == 0
+            lb_detail = (
+                r.stdout.splitlines()[0]
+                if r.stdout
+                else r.stderr.splitlines()[0]
+                if r.stderr
+                else "check_lean_best_book_parity"
+            ).strip()
+        except Exception as e:
+            lb_ok = False
+            lb_detail = str(e)
+        if not gate(
+            "34. Lean best-book golden integrity (CANONICAL_LEAN_BEST_BOOK sha lock)",
+            lb_ok,
+            lb_detail,
+        ):
+            failed += 1
+    else:
+        gate("34. Lean best-book golden integrity", True, "gate script not present; skip", skip=True)
+
+    # --- 35–37. Pearl Prime perfect-books Wave-1 (G-CLAIM / G-LAYER / G-WRAP+G-DEF4) ---
+    for gate_id, script_name, title, extra_env in (
+        (
+            "35",
+            "check_acceptance_claim_language.py",
+            "35. G-CLAIM / Q-ENFORCE-02 acceptance claim language",
+            {"PYTHONPATH": str(REPO_ROOT / "scripts" / "ci") + os.pathsep + str(REPO_ROOT)},
+        ),
+        (
+            "36",
+            "check_catalog_manifest_acceptance_layer.py",
+            "36. G-LAYER catalog manifest acceptance_layer",
+            {"PYTHONPATH": str(REPO_ROOT)},
+        ),
+        (
+            "37",
+            "check_catalog_ship_wrap_defect4.py",
+            "37. G-WRAP + G-DEF4 catalog ship detectors (integrity)",
+            {"PYTHONPATH": str(REPO_ROOT)},
+        ),
+    ):
+        script = REPO_ROOT / "scripts" / "ci" / script_name
+        if not script.exists():
+            gate(title, True, "gate script not present; skip", skip=True)
+            continue
+        try:
+            env = os.environ.copy()
+            env.update(extra_env)
+            r = subprocess.run(
+                [sys.executable, str(script)],
+                cwd=str(REPO_ROOT),
+                env=env,
+                capture_output=True,
+                text=True,
+                timeout=120,
+            )
+            ok = r.returncode == 0
+            detail = (
+                (r.stdout or r.stderr or script_name).strip().splitlines() or [script_name]
+            )[0][:240]
+        except Exception as e:
+            ok = False
+            detail = str(e)
+        if not gate(title, ok, detail):
+            failed += 1
+
     # --- Report ---
-    print("V4.5 Production Readiness — 31 conditions\n")
+    print("V4.5 Production Readiness — Pearl Prime Wave-1 gates included\n")
     for name, status, detail in RESULTS:
         sym = "✓" if status == "PASS" else ("○" if status == "SKIP" else "✗")
         print(f"  {sym} {status:4}  {name}")

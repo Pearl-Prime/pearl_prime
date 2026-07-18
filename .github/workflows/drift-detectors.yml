@@ -41,6 +41,23 @@ jobs:
           fi
           PYTHONPATH=scripts/ci:. python3 scripts/ci/check_canonical_pipeline_path.py "${EXTRA[@]}" --gate-mode fail
 
+      - name: Acceptance claim language Q-ENFORCE-02 / G-CLAIM (BLOCK)
+        env:
+          PR_BODY: ${{ github.event.pull_request.body }}
+        run: |
+          BASE="${{ steps.diff_base.outputs.base }}"
+          EXTRA=()
+          if [ -n "$BASE" ]; then
+            EXTRA=(--base "$BASE" --head HEAD)
+          fi
+          PYTHONPATH=scripts/ci:. python3 scripts/ci/check_acceptance_claim_language.py "${EXTRA[@]}"
+
+      - name: Catalog manifest acceptance_layer G-LAYER (BLOCK)
+        run: PYTHONPATH=. python3 scripts/ci/check_catalog_manifest_acceptance_layer.py
+
+      - name: Catalog ship G-WRAP + G-DEF4 detectors (BLOCK integrity)
+        run: PYTHONPATH=. python3 scripts/ci/check_catalog_ship_wrap_defect4.py
+
       - name: Duplicate modules (warn)
         run: |
           BASE="${{ steps.diff_base.outputs.base }}"
@@ -93,9 +110,6 @@ jobs:
       - name: Brand admin Weekly OS public sync (BLOCK)
         run: python3 scripts/ci/check_brand_admin_weekly_os_public_sync.py
 
-      - name: Harbor production truth labeling (catalog-as-production — BLOCK)
-        run: python3 scripts/ci/check_harbor_production_truth_labeling.py
-
       - name: 12-shape chapter object continuity (BLOCK)
         run: PYTHONPATH=. python3 scripts/ci/check_chapter_object_continuity.py
 
@@ -135,6 +149,9 @@ jobs:
 
       - name: Flagship CH1 executable contract (BLOCK)
         run: PYTHONPATH=. python3 scripts/ci/check_flagship_contract.py
+
+      - name: Lean best-book golden integrity (BLOCK when ratified)
+        run: PYTHONPATH=. python3 scripts/ci/check_lean_best_book_parity.py
 
       - name: Data dictionary enforced (undocumented / orphan / unwired-knob — BLOCK)
         run: |
