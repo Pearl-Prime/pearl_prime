@@ -1,0 +1,152 @@
+{
+  "source": "spine_pipeline",
+  "topic_id": "burnout",
+  "persona_id": "corporate_managers",
+  "teacher_id": "",
+  "runtime_format": "standard_book",
+  "book_plan_id": "generated_burnout_corporate_managers_standard_book",
+  "quality_profile": "debug",
+  "gates_run": false,
+  "gates_hard": false,
+  "gates": {
+    "chapter_flow": {
+      "status": "SKIPPED",
+      "report": "chapter_flow_report.json"
+    },
+    "register_gate": {
+      "status": "SKIPPED",
+      "verdict": "",
+      "failure_counts_by_id": {},
+      "report": "register_gate_report.json"
+    },
+    "bestseller_craft": {
+      "status": "SKIPPED",
+      "overall_score": 0.0
+    },
+    "ei_v2": {
+      "status": "SKIPPED",
+      "composite": 0.0,
+      "report": "ei_v2_report.json"
+    },
+    "editorial": {
+      "status": "SKIPPED",
+      "report": "editorial_report.json"
+    },
+    "memorable_lines": {
+      "status": "SKIPPED",
+      "chapters_with_two_or_more_quotable_lines": 0,
+      "chapter_count": 0,
+      "report": "memorable_line_report.json"
+    },
+    "transformation_arc": {
+      "status": "SKIPPED",
+      "report": "transformation_heatmap.json"
+    },
+    "book_pass": {
+      "status": "SKIPPED",
+      "report": "book_pass_report.json"
+    }
+  },
+  "quality_gate_failures": [],
+  "overall_status": "PASS",
+  "book_quality_gate": {
+    "release_band": "Pass",
+    "report_path": "artifacts/qa/session_mining_specs_do_all_20260718/rn6_bounded_render/book_quality_report.json",
+    "fail_reasons": [],
+    "hold_reasons": []
+  },
+  "pre_depth_total_words": 19202,
+  "post_depth_total_words": 20403,
+  "frame": "somatic_first",
+  "governance_report": {
+    "exercise_slots_dropped": [],
+    "exercise_slot_contract_violations": [
+      {
+        "chapter": 10,
+        "chapter_index": 9,
+        "exercise_count": 5,
+        "effective_max": 1,
+        "contract_max_exercises": 1,
+        "format_cap": 2
+      }
+    ],
+    "chapter_contract_warnings": [
+      "chapter 12: emotional_job 'resolution' matches previous chapter \u2014 escalation contract may be weak"
+    ],
+    "frame_governance_chapters": [],
+    "frame_softened_sentences": [],
+    "frame_stripped_sentences": [],
+    "frame_hard_fail_reasons": [],
+    "accent_render_audit": [
+      {
+        "chapter": 5,
+        "class": "CITED_EVIDENCE",
+        "accent_id": "burn_case_maslach_teacher_nurse_composites_1997",
+        "position": "before_STORY",
+        "renderer_stream_index": 3,
+        "chapter_insert_index": 3,
+        "body_hash": "60454da39644744aa0aac7cacce311df287ae56f10925ea226f1d07344b23312",
+        "provenance": null,
+        "rendered_excerpt": "That replay has a nervous-system explanation. Within stress-physiology, the data have long pointed to one thing: Christina Maslach's published case studies of teachers and nurses describe professionals who loved their ca",
+        "present_in_manuscript": true
+      },
+      {
+        "chapter": 5,
+        "class": "EXTERNAL_STORY",
+        "accent_id": "ext_burn_mythic_sisyphus_v01",
+        "position": "after_REFLECTION",
+        "renderer_stream_index": 4,
+        "chapter_insert_index": 4,
+        "body_hash": "cd9569820665180580d1e660bc89d08b86d7928ece50c1d1d1927e5cc832a858",
+        "provenance": null,
+        "rendered_excerpt": "Before returning to this body, widen the lens for one outside example. Sisyphus, punished by the gods, must push a boulder uphill forever \u2014 only to watch it roll back each time he nears the summit. Albert Camus later rea",
+        "present_in_manuscript": true
+      },
+      {
+        "chapter": 5,
+        "class": "ENCOURAGEMENT",
+        "accent_id": "enc_corporate_managers_burnout_permission_v04",
+        "position": "after_turning_point",
+        "renderer_stream_index": 8,
+        "chapter_insert_index": 8,
+        "body_hash": "b4a8698abbfc6732f2a5acb2eff074c6d8e3f958af1e83e61d59156380c8984c",
+        "provenance": null,
+        "rendered_excerpt": "You are allowed to need more than a vacation. You are allowed to need something structural to change. ---  Let that land before the next story beat.",
+        "present_in_manuscript": true
+      }
+    ],
+    "whole_book_dedupe_notes": [
+      "book_wide_short_bridge_dedupe: removed re-stamp 'It will feel like proof. It is not proof. It is the shape re'",
+      "book_wide_f1_signature_dedupe: removed re-stamp 'So when the bad week comes \u2014 and it will \u2014 try to read it correctly. Not back to'",
+      "book_wide_f1_signature_dedupe: removed re-stamp 'Right now, unclench your hands. Spread your fingers wide. Hold that for five sec'",
+      "book_wide_f1_signature_dedupe: removed re-stamp 'Sit with how strange that is. The discipline being asked of you now is not the d'",
+      "book_wide_f1_signature_dedupe: removed re-stamp 'The body already knows how to repair itself. It does not need to be driven to do'",
+      "book_wide_f1_signature_dedupe: removed re-stamp 'Before your next one-on-one, sit down first. Place one hand flat on the desk. Pr'",
+      "book_wide_f1_signature_dedupe: removed re-stamp 'None of those loops closed. That is the cost. A task, once done, is finished and'",
+      "book_wide_f1_signature_dedupe: removed re-stamp 'This is why a day of small output can leave you so depleted. The doing was light'",
+      "book_wide_f1_signature_dedupe: removed re-stamp 'Stand up from your chair. Walk to a window. Find one fixed point outside. Hold y'",
+      "book_wide_f1_signature_dedupe: removed re-stamp 'There is room here for a gentler measure. Not against the person who had everyth'",
+      "book_wide_f1_signature_dedupe: removed re-stamp 'After your next performance conversation, go somewhere alone. Press your back fl'",
+      "book_wide_f1_signature_dedupe: removed re-stamp 'Notice your jaw right now. Is it clenched. Release it. Let your tongue drop from'",
+      "book_wide_f1_signature_dedupe: removed re-stamp 'Your body does not actually refill because a task got completed. It refills beca'",
+      "book_wide_f1_signature_dedupe: removed re-stamp 'Before your next one-on-one, sit down first. Place one hand flat on the desk. Pr'",
+      "book_wide_f1_signature_dedupe: removed re-stamp 'Perhaps you have noticed yourself retreating. Invitations declined. Messages lef'",
+      "book_wide_f1_signature_dedupe: removed re-stamp 'Stand up from your chair. Walk to a window. Find one fixed point outside. Hold y'"
+    ],
+    "spine_deprescribe_signals": [
+      {
+        "action": "injector_disabled",
+        "reason": "G1-residual: deprescribe one-line filler disabled on spine; surplus prescribed-action paragraphs dropped, not replaced. PHOENIX_SPINE_DEPRESCRIBE=1 to re-enable."
+      }
+    ]
+  },
+  "exercise_slots_dropped": [],
+  "chapter_contract_warnings": [
+    "chapter 12: emotional_job 'resolution' matches previous chapter \u2014 escalation contract may be weak"
+  ],
+  "frame_governance_chapters": [],
+  "frame_softened_sentences": [],
+  "frame_stripped_sentences": [],
+  "frame_hard_fail_reasons": [],
+  "recurrence_report": []
+}

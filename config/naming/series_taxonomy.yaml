@@ -1,0 +1,16 @@
+schema_version: "1.0.0"
+status: dry_run_operator_review_required
+source_spec: docs/specs/session_mining_batch_20260718/STORE_SERIES_NAMING_ENGINE_V1_SPEC.md
+generic_reject_terms:
+  - anxiety series
+  - burnout series
+  - self help series
+  - healing series
+  - wellness series
+  - mindfulness series
+operator_review_statuses:
+  - required_before_storefront
+  - accepted_for_test_listing
+  - rejected_generic
+  - rejected_collision
+production_public_release_authorized: false

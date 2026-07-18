@@ -1,0 +1,96 @@
+{
+  "source": "spine_pipeline",
+  "requested_topic_id": "burnout",
+  "requested_persona_id": "corporate_managers",
+  "canonical_topic_id": "burnout",
+  "canonical_persona_id": "corporate_managers",
+  "topic_id": "burnout",
+  "persona_id": "corporate_managers",
+  "atoms_model": "legacy",
+  "teacher_id": "",
+  "runtime_format": "standard_book",
+  "output_format_id": null,
+  "target_word_range": null,
+  "format_structural_id": null,
+  "book_plan_id": "generated_burnout_corporate_managers_standard_book",
+  "word_count": 16015,
+  "chapter_count": 12,
+  "pre_depth_total_words": 19202,
+  "post_depth_total_words": 20403,
+  "chapter_architecture_version": 1,
+  "angle_id": "INVISIBLE_COST",
+  "chapter_planner_warnings": [],
+  "accent_budget": {
+    "ENCOURAGEMENT": 1,
+    "CITED_EVIDENCE": 2,
+    "EXTERNAL_STORY": 2,
+    "AUTHOR_COMMENTARY": 0,
+    "WISDOM_ESSENCE": 0
+  },
+  "accent_signature": "daba91e10255436d",
+  "story_mix_profile": "practical_credible",
+  "accent_assignments": [
+    {
+      "chapter": 5,
+      "class": "ENCOURAGEMENT",
+      "accent_id": "enc_corporate_managers_burnout_permission_v04",
+      "position": "after_turning_point",
+      "keys": {
+        "topic_id": "burnout",
+        "persona_id": "corporate_managers"
+      }
+    },
+    {
+      "chapter": 5,
+      "class": "CITED_EVIDENCE",
+      "accent_id": "burn_case_maslach_teacher_nurse_composites_1997",
+      "position": "before_STORY",
+      "keys": {
+        "topic_id": "burnout",
+        "persona_id": "corporate_managers"
+      }
+    },
+    {
+      "chapter": 5,
+      "class": "EXTERNAL_STORY",
+      "accent_id": "ext_burn_mythic_sisyphus_v01",
+      "position": "after_REFLECTION",
+      "keys": {
+        "topic_id": "burnout",
+        "persona_id": "corporate_managers"
+      }
+    }
+  ],
+  "enhancement_contract_v21": {},
+  "accent_beats_by_chapter": {
+    "5": [
+      {
+        "class": "ENCOURAGEMENT",
+        "accent_id": "enc_corporate_managers_burnout_permission_v04",
+        "position": "after_turning_point",
+        "keys": {
+          "topic_id": "burnout",
+          "persona_id": "corporate_managers"
+        }
+      },
+      {
+        "class": "CITED_EVIDENCE",
+        "accent_id": "burn_case_maslach_teacher_nurse_composites_1997",
+        "position": "before_STORY",
+        "keys": {
+          "topic_id": "burnout",
+          "persona_id": "corporate_managers"
+        }
+      },
+      {
+        "class": "EXTERNAL_STORY",
+        "accent_id": "ext_burn_mythic_sisyphus_v01",
+        "position": "after_REFLECTION",
+        "keys": {
+          "topic_id": "burnout",
+          "persona_id": "corporate_managers"
+        }
+      }
+    ]
+  }
+}

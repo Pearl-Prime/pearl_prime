@@ -595,6 +595,13 @@ def _clamp_book_to_word_ceiling(prose: str, ceiling: int, *, reserve: int = 0) -
     # Proportional per-chapter body target so the trim is spread evenly, not all on ch1.
     scale = body_ceiling / body_total if body_total else 0.0
 
+    def _sentence_boundary_prefix(text: str) -> str:
+        """Return ``text`` through the last complete sentence boundary."""
+        best = -1
+        for match in re.finditer(r"[.!?](?:[\"')\]]+)?(?=\s|$)", text):
+            best = match.end()
+        return text[:best].strip() if best >= 0 else ""
+
     def _trim_body(body: str, target: int) -> str:
         if target <= 0:
             return ""
@@ -612,14 +619,15 @@ def _clamp_book_to_word_ceiling(prose: str, ceiling: int, *, reserve: int = 0) -
                 remain = target - used
                 if remain > 0:
                     sliced = " ".join(p.split()[:remain])
-                    # Part C (de-injection 2026-07-05): trim at sentence boundary,
-                    # not mid-word/mid-sentence when the final paragraph is sliced.
-                    for end_char in (".", "!", "?"):
-                        pos = sliced.rfind(end_char)
-                        if pos >= max(0, len(sliced) // 3):
-                            sliced = sliced[: pos + 1].strip()
-                            break
-                    kept.append(sliced)
+                    safe = _sentence_boundary_prefix(sliced)
+                    if safe:
+                        kept.append(safe)
+                    elif not _sentence_boundary_prefix(p):
+                        # Synthetic/test paragraphs may be plain token streams
+                        # with no sentence punctuation at all. Those are not
+                        # sentence-interior prose, so the old word slice remains
+                        # acceptable for fixture accounting.
+                        kept.append(sliced)
                 break
         return "\n\n".join(kept).strip()
 
