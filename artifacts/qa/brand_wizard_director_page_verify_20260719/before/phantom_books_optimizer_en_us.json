@@ -1,0 +1,38 @@
+{
+  "brand_id": "optimizer_en_us",
+  "page": "brand_admin.html (stale ops target)",
+  "url": "http://127.0.0.1:4319/brand_admin.html?brand=optimizer_en_us",
+  "http_status": 200,
+  "phantom_upload_title_counts": {
+    "u_kdp": {
+      "name": "Amazon KDP",
+      "titles": 6
+    },
+    "u_gplay": {
+      "name": "Google Play Books",
+      "titles": 4
+    },
+    "u_apple": {
+      "name": "Apple Books",
+      "titles": 3
+    },
+    "u_webtoon": {
+      "name": "WEBTOON Canvas",
+      "titles": 2
+    },
+    "u_kobo": {
+      "name": "Kobo Writing Life",
+      "titles": 3
+    },
+    "u_tiktok": {
+      "name": "TikTok",
+      "titles": 3
+    },
+    "u_youtube": {
+      "name": "YouTube",
+      "titles": 2
+    }
+  },
+  "has_real_delivery_file": false,
+  "note": "BEFORE: page hardcodes titles:6/4/3/etc regardless of real assets; optimizer has catalog metadata but no brand_deliveries/optimizer.json"
+}

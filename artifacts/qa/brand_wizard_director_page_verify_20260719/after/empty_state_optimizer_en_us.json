@@ -1,0 +1,26 @@
+{
+  "brand_id": "optimizer_en_us",
+  "url": "http://127.0.0.1:4319/brand_handoff_dashboard.html?brand=optimizer_en_us",
+  "http_status": 200,
+  "page_title_marker": true,
+  "has_production_pending_gate": true,
+  "has_real_files_empty_path": true,
+  "optimizer_delivery_exists": false,
+  "stabilizer_delivery_exists": true,
+  "stabilizer_delivery_keys": [
+    "brand",
+    "brand_id",
+    "base_brand",
+    "display_brand",
+    "brand_director_name",
+    "brand_director_id",
+    "brand_director_status",
+    "latest_week",
+    "delivery_status",
+    "production_files_ready",
+    "source",
+    "catalog"
+  ],
+  "ops_url_after": "/brand_handoff_dashboard.html?brand=optimizer_en_us",
+  "note": "AFTER: zero-asset brand routes to handoff which gates on production_files_ready / REAL_DELIVERY; optimizer has no delivery file \u2192 empty real-files / production-pending, never brand_admin phantom titles:6"
+}

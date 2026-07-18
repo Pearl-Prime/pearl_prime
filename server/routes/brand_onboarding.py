@@ -41,6 +41,9 @@ UNIFIED_REGISTRY = REPO_ROOT / "config" / "brand_management" / "global_brand_reg
 # A brand is "catalog-bearing" iff its entry here has buildable != false — the SAME signal
 # the client matcher gates on (brandMatch.js: `b.buildable !== false`), so server == client.
 BRANDS_INDEX_JSON = REPO_ROOT / "brand-wizard-app" / "public" / "brand_admin_brands.json"
+BRAND_DIRECTOR_ASSIGNMENTS_YAML = (
+    REPO_ROOT / "config" / "brand_management" / "brand_director_assignments.yaml"
+)
 ONBOARDING_DIR = REPO_ROOT / "artifacts" / "onboarding"
 SUBMISSIONS_DIR = ONBOARDING_DIR / "submissions"
 LOG_TSV = ONBOARDING_DIR / "submissions_log.tsv"
@@ -95,12 +98,120 @@ def _brands_index() -> Dict[str, dict]:
 def _is_catalog_bearing(brand_id: str, index: Dict[str, dict]) -> bool:
     """A brand is catalog-bearing iff its index entry has buildable != false.
 
-    Unknown brand_id (no entry) → True (fail-open; the registry-membership check already ran).
+    Unknown brand_id (no entry) → False (fail-closed). Catalog membership alone must not
+    imply shippable/available books; only an explicit buildable entry may pass.
+    Empty index (stripped env) → False so availability never invents phantom catalogs.
     """
+    if not index:
+        return False
     entry = index.get(brand_id)
     if not isinstance(entry, dict):
-        return True
+        return False
     return entry.get("buildable") is not False
+
+
+def available_downloadable_assets(delivery: Optional[dict]) -> list:
+    """Return ONLY real downloadable production assets from a brand_deliveries payload.
+
+    Catalog metadata / planned titles / production-pending scaffolds are excluded.
+    A missing or empty delivery → []. Callers must treat [] as the empty state
+    ("no titles available yet"), never invent placeholder book counts.
+    """
+    if not isinstance(delivery, dict):
+        return []
+    if delivery.get("production_files_ready") is False:
+        return []
+    status = str(delivery.get("delivery_status") or "").strip().lower()
+    if status == "catalog_ready_production_files_pending" or "production_files_pending" in status.replace(
+        " ", "_"
+    ):
+        return []
+    weeks = delivery.get("weeks")
+    if not isinstance(weeks, dict) or not weeks:
+        return []
+    out: list = []
+    for week in sorted(weeks.keys()):
+        platforms = weeks.get(week) or {}
+        if not isinstance(platforms, dict):
+            continue
+        for platform, files in platforms.items():
+            if platform == "catalog_metadata":
+                continue
+            if not isinstance(files, list):
+                continue
+            for item in files:
+                if not isinstance(item, dict):
+                    continue
+                if item.get("production_files_ready") is False:
+                    continue
+                url = str(item.get("url") or "").strip()
+                filename = str(item.get("file") or "").strip()
+                if not url or not filename:
+                    continue
+                if filename.lower().endswith((".md", ".cue")):
+                    continue
+                out.append(
+                    {
+                        "week": week,
+                        "platform": platform,
+                        "file": filename,
+                        "url": url,
+                        "kb": item.get("kb"),
+                    }
+                )
+    return out
+
+
+def _assignment_records(path: Path) -> Dict[str, dict]:
+    try:
+        import yaml
+        if not path.exists():
+            return {}
+        data = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
+        records = data.get("assignments") if isinstance(data, dict) else None
+        return records if isinstance(records, dict) else {}
+    except Exception as e:
+        logger.warning("assignment overlay unreadable (%s): %s", path, e)
+        return {}
+
+
+def _is_assigned_record(record: object) -> bool:
+    if not isinstance(record, dict):
+        return False
+    status = str(record.get("brand_director_status") or record.get("status") or "").strip().lower()
+    return (
+        status in {"assigned", "claimed"}
+        or bool(str(record.get("brand_director_name") or record.get("admin_name") or "").strip())
+        or bool(str(record.get("brand_director_id") or "").strip())
+        or bool(str(record.get("admin_email") or "").strip())
+    )
+
+
+def _assignment_conflict(brand_id: str, index: Dict[str, dict]) -> Optional[dict]:
+    """Return a public-safe conflict record if brand_id is already assigned.
+
+    Checks every assignment source the local wizard can see: the generated public brand
+    index, committed operator assignments, and gitignored live local onboarding overlay.
+    """
+    index_entry = index.get(brand_id)
+    if _is_assigned_record(index_entry):
+        return {
+            "source": "brand_admin_brands",
+            "brand_id": brand_id,
+            "assigned_to": (index_entry or {}).get("brand_director_name"),
+        }
+    for source, path in [
+        ("brand_director_assignments", BRAND_DIRECTOR_ASSIGNMENTS_YAML),
+        ("local_roster_assignments", ASSIGNMENTS_YAML),
+    ]:
+        record = _assignment_records(path).get(brand_id)
+        if _is_assigned_record(record):
+            return {
+                "source": source,
+                "brand_id": brand_id,
+                "assigned_to": (record or {}).get("brand_director_name") or (record or {}).get("admin_name"),
+            }
+    return None
 
 
 def _teacher_identity(brand_id: str, index: Dict[str, dict]) -> Optional[tuple[str, str]]:
@@ -196,7 +307,7 @@ def _director_slug(name: str) -> str:
 
 
 def _base_brand_from_id(brand_id: str) -> str:
-    return re.sub(r"_(en_us|es_us|es_es|pt_br|zh_tw|zh_hk|zh_cn|zh_sg|ja_jp|ko_kr)$", "", brand_id)
+    return re.sub(r"_(en_us|es_us|es_es|fr_fr|de_de|it_it|hu_hu|pt_br|zh_tw|zh_hk|zh_cn|zh_sg|ja_jp|ko_kr)$", "", brand_id)
 
 
 class OnboardingSubmission(BaseModel):
@@ -237,6 +348,17 @@ def submit_onboarding(req: OnboardingSubmission) -> dict:
     # even on a direct POST. Same signal the client matcher gates on (brandMatch.js buildable != false).
     if not _is_catalog_bearing(brand_id, index):
         raise HTTPException(status_code=422, detail=f"brand_not_buildable: {brand_id}")
+    conflict = _assignment_conflict(brand_id, index)
+    if conflict:
+        raise HTTPException(
+            status_code=409,
+            detail={
+                "error": "brand_claimed",
+                "brand_id": brand_id,
+                "assigned_to": conflict.get("assigned_to"),
+                "source": conflict.get("source"),
+            },
+        )
     if len(req.wizard_yaml) > 200_000:
         raise HTTPException(status_code=422, detail="wizard_yaml too large")
     email = (req.brand_email or "").strip()
