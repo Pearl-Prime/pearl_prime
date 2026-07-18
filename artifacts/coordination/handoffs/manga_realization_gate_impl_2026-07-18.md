@@ -6,7 +6,9 @@ Acceptance layer: CODE-WIRED (EXECUTED-REAL for fixture/audit runs). Not PROVEN-
 
 ## Signal
 
-manga-realization-gate-impl=b77303cbb2e468ef2fff2a269257248f37c18932
+manga-realization-gate-impl=482f4810c5011c000226492e98926c33d015b690
+
+Code tree (pre-merge parent): `b77303cbb2e468ef2fff2a269257248f37c18932`
 
 ## What changed
 
@@ -40,9 +42,7 @@ PYTHONPATH=. python3 -m pytest tests/test_manga_chapter_runner_e2e_replay.py -q
 PYTHONPATH=. python3 scripts/manga/validate_story_excellence.py \
   --story-handoff …/pass/dark_fantasy_ja_jp_genz/story_architecture_handoff.json \
   --chapter-script …/chapter_script_writer_handoff.json --production
-# PASS
-
-# mention-only → exit 2
+# PASS; mention-only exit=2
 ```
 
 Proof root: `artifacts/qa/oldchats7_finish_20260718/lane02/`
@@ -61,7 +61,7 @@ Proof root: `artifacts/qa/oldchats7_finish_20260718/lane02/`
 
 ## Landed
 
-`offline/manga-realization-gate-20260718@b77303cbb2e468ef2fff2a269257248f37c18932`
+`offline/manga-realization-gate-20260718@482f4810c5011c000226492e98926c33d015b690`
 Base: `9e9b9e606791590337cd7d0f2fb425def2e6f760`
 Substrate: pearlstar_offline
 
@@ -74,9 +74,10 @@ Substrate: pearlstar_offline
 ## Exact next command
 
 ```bash
-grep -E "manga-realization-gate-impl=b77303cbb2e468ef2fff2a269257248f37c18932
+grep -E "manga-realization-gate-impl=" \
   artifacts/coordination/handoffs/manga_realization_gate_impl_2026-07-18.md
-# then dispatch lane 03: docs/agent_prompt_packs/20260718_old_chats_341_347_finish_work/03_Pearl_PM_manga_all_genres_story_qa_run.md
+# then dispatch lane 03:
+# docs/agent_prompt_packs/20260718_old_chats_341_347_finish_work/03_Pearl_PM_manga_all_genres_story_qa_run.md
 ```
 
 ## Cleanup ledger
@@ -85,3 +86,4 @@ grep -E "manga-realization-gate-impl=b77303cbb2e468ef2fff2a269257248f37c18932
 - Mutation backup under lane02 proof root (not production code).
 - No RENDER_PROGRESS / banks / goldens touched.
 - No `git add -A`; dirty shared root not used as commit substrate.
+- Handoff working-tree file updated after tip land (signal matches remote tip).
