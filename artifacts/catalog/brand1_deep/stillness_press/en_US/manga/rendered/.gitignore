@@ -1,6 +1,0 @@
-# Per-panel rendered PNGs are large (~2 MB each) and brand1_deep ships raw blobs
-# (.gitattributes override; LFS budget exhausted), so they would exceed the
-# no-binary-blobs 1 MB cap. They are deterministically reproducible from the
-# render-ready scripts via render_series_panels.py against Pearl Star ComfyUI.
-# Only the small contact-sheet thumbnails + RENDER_PROGRESS.tsv are committed.
-*/ep_001/ep001_*.png

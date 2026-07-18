@@ -1,8 +1,0 @@
-FAIL: 1 bestseller-format failure(s) (100% testing)
-Wrote /tmp/er_out/bestseller_error_report.json
-Wrote /tmp/er_out/bestseller_error_report_SUMMARY.txt
-{
-  "llm_skipped": true,
-  "reason": "ollama_unreachable",
-  "error": "LLM route failed (lang=en, model=gemma2:9b): Connection error."
-}

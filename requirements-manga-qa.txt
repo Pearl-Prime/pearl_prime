@@ -1,9 +1,0 @@
-# Manga V2 — Phase A.3 face-distance QA harness (optional, heavy: pulls torch).
-# Powers scripts/manga/character_individuation/qa_face_distance.py per
-# docs/CHARACTER_INDIVIDUATION_PIPELINE_SPEC_2026-05-02.md §2.5
-# (cosine <0.4 FAIL / 0.4-0.55 BORDERLINE / >=0.55 PASS).
-# Install only where the facenet gate runs (needs rendered reference sheets = Phase B):
-#   pip install -r requirements-manga-qa.txt
-facenet-pytorch>=2.5.0
-deepface>=0.0.92        # borderline cross-validation backend (spec §2.5)
-torch>=2.0             # facenet-pytorch / deepface backend

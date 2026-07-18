@@ -1,0 +1,163 @@
+{
+  "artifact_type": "story_architecture_handoff",
+  "series_id": "rom_block",
+  "genre_id": "romance",
+  "story_strategy_genre": "romance",
+  "story_strategy_id": "romance__default",
+  "reader_market": "en_US",
+  "reader_audience": "gen_z",
+  "modern_reader_context": {
+    "schema_version": "1.0.0",
+    "target_market": "en_US",
+    "target_audience": "gen_z",
+    "genre_id": "romance",
+    "strategy_genre": "romance",
+    "relevance_genre": "romance",
+    "market_surface_rule": "Use social discovery, school/work pressure, gaming, creator culture, comic shop/community, and phone-native life without sounding like an ad for platforms.",
+    "market_touchpoints": [
+      "group_chat",
+      "discord_server",
+      "short_video_clip",
+      "school_bus_or_subway",
+      "comic_shop",
+      "mall_food_court",
+      "campus_library",
+      "delivery_app",
+      "controller",
+      "streaming_queue"
+    ],
+    "market_guardrails": [
+      "avoid_fake_japanese_surface_for_us_scene",
+      "make_city_transport_specific_if_used",
+      "do_not_overexplain_anime_fandom"
+    ],
+    "audience_story_rule": "Treat online identity, economic pressure, burnout, social performance, fandom, romance boundaries, and self-definition as ordinary life texture.",
+    "audience_touchpoints": [
+      "phone_as_social_pressure",
+      "group_chat_status",
+      "creator_or_streaming_identity",
+      "gig_or_work_pressure",
+      "transit_between_roles",
+      "online_offline_self_gap"
+    ],
+    "genre_relevance_rule": "Modern romance must use mediated intimacy: unread messages, shared playlists, transit timing, boundaries, and public/private self-management.",
+    "catalyst": {
+      "id": "shared_playlist_mistake",
+      "logline": "A playlist meant for nobody syncs to the wrong phone, exposing a tenderness the protagonist has not said out loud.",
+      "ordinary_world_objects": [
+        "phone",
+        "earbuds",
+        "cafe_counter",
+        "shared_playlist"
+      ],
+      "genre_transmutation": "Accidental sync becomes almost-confession.",
+      "avoid": [
+        "music_video_flatness",
+        "perfect_couple_pose"
+      ]
+    },
+    "quality_rubric": {
+      "great_story_requires": [
+        "high_concept_collision",
+        "concrete_reader_world_anchor",
+        "genre_engine_not_replaced_by_trend",
+        "protagonist_desire_visible_in_scene",
+        "social_or_system_pressure",
+        "reversal_or_discovery_by_page_two",
+        "market_localized_touchpoint",
+        "no_generic_therapy_summary"
+      ],
+      "flat_story_failure_modes": [
+        "classic_genre_without_modern_entrypoint",
+        "modern_object_as_name_drop_only",
+        "protagonist_waits_for_lesson",
+        "no_personal_stakes_before_lore",
+        "no_social_cost",
+        "no_specific_place_or_object",
+        "genre_strategy_hidden_in_metadata_only"
+      ]
+    },
+    "craft_directive": "Fuse the genre engine with a contemporary reader-world entrypoint. Market=en_US; audience=gen_z. Use catalyst 'shared_playlist_mistake': A playlist meant for nobody syncs to the wrong phone, exposing a tenderness the protagonist has not said out loud. Transmutation: Accidental sync becomes almost-confession. Market surface: Use social discovery, school/work pressure, gaming, creator culture, comic shop/community, and phone-native life without sounding like an ad for platforms. Audience rule: Treat online identity, economic pressure, burnout, social performance, fandom, romance boundaries, and self-definition as ordinary life texture. Use concrete objects and social pressure on page one; do not name-drop trends."
+  },
+  "chapters": [
+    {
+      "chapter_number": 1,
+      "chapter_id": "ch01",
+      "story_craft": {
+        "modern_reader_context": {
+          "schema_version": "1.0.0",
+          "target_market": "en_US",
+          "target_audience": "gen_z",
+          "genre_id": "romance",
+          "strategy_genre": "romance",
+          "relevance_genre": "romance",
+          "market_surface_rule": "Use social discovery, school/work pressure, gaming, creator culture, comic shop/community, and phone-native life without sounding like an ad for platforms.",
+          "market_touchpoints": [
+            "group_chat",
+            "discord_server",
+            "short_video_clip",
+            "school_bus_or_subway",
+            "comic_shop",
+            "mall_food_court",
+            "campus_library",
+            "delivery_app",
+            "controller",
+            "streaming_queue"
+          ],
+          "market_guardrails": [
+            "avoid_fake_japanese_surface_for_us_scene",
+            "make_city_transport_specific_if_used",
+            "do_not_overexplain_anime_fandom"
+          ],
+          "audience_story_rule": "Treat online identity, economic pressure, burnout, social performance, fandom, romance boundaries, and self-definition as ordinary life texture.",
+          "audience_touchpoints": [
+            "phone_as_social_pressure",
+            "group_chat_status",
+            "creator_or_streaming_identity",
+            "gig_or_work_pressure",
+            "transit_between_roles",
+            "online_offline_self_gap"
+          ],
+          "genre_relevance_rule": "Modern romance must use mediated intimacy: unread messages, shared playlists, transit timing, boundaries, and public/private self-management.",
+          "catalyst": {
+            "id": "shared_playlist_mistake",
+            "logline": "A playlist meant for nobody syncs to the wrong phone, exposing a tenderness the protagonist has not said out loud.",
+            "ordinary_world_objects": [
+              "phone",
+              "earbuds",
+              "cafe_counter",
+              "shared_playlist"
+            ],
+            "genre_transmutation": "Accidental sync becomes almost-confession.",
+            "avoid": [
+              "music_video_flatness",
+              "perfect_couple_pose"
+            ]
+          },
+          "quality_rubric": {
+            "great_story_requires": [
+              "high_concept_collision",
+              "concrete_reader_world_anchor",
+              "genre_engine_not_replaced_by_trend",
+              "protagonist_desire_visible_in_scene",
+              "social_or_system_pressure",
+              "reversal_or_discovery_by_page_two",
+              "market_localized_touchpoint",
+              "no_generic_therapy_summary"
+            ],
+            "flat_story_failure_modes": [
+              "classic_genre_without_modern_entrypoint",
+              "modern_object_as_name_drop_only",
+              "protagonist_waits_for_lesson",
+              "no_personal_stakes_before_lore",
+              "no_social_cost",
+              "no_specific_place_or_object",
+              "genre_strategy_hidden_in_metadata_only"
+            ]
+          },
+          "craft_directive": "Fuse the genre engine with a contemporary reader-world entrypoint. Market=en_US; audience=gen_z. Use catalyst 'shared_playlist_mistake': A playlist meant for nobody syncs to the wrong phone, exposing a tenderness the protagonist has not said out loud. Transmutation: Accidental sync becomes almost-confession. Market surface: Use social discovery, school/work pressure, gaming, creator culture, comic shop/community, and phone-native life without sounding like an ad for platforms. Audience rule: Treat online identity, economic pressure, burnout, social performance, fandom, romance boundaries, and self-definition as ordinary life texture. Use concrete objects and social pressure on page one; do not name-drop trends."
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,280 @@
+# Story excellence realization gate config.
+# Authority: docs/specs/MANGA_STORY_EXCELLENCE_REALIZATION_GATE_SPEC.md
+# Canonical genres: config/manga/canonical_genre_list.yaml (via modern_reader_context.canonical_genre_ids)
+
+schema_version: "1.0.0"
+artifact_type: manga_story_excellence_gates
+production_score_threshold: 85
+
+weights:
+  modern_reader_realization: 20
+  genre_core_pleasure: 20
+  protagonist_desire_cost: 15
+  interaction_realization: 15
+  page_one_hook: 10
+  market_native_surface: 10
+  anti_blandness: 10
+
+# Conflict-change signal lexicon (object must change conflict, not name-drop).
+conflict_change_signals:
+  - debt
+  - cost
+  - burns
+  - burn
+  - choice
+  - choose
+  - choose
+  - refuse
+  - delete
+  - rule
+  - oath
+  - wound
+  - threat
+  - clue
+  - evidence
+  - reverse
+  - reversal
+  - intimacy
+  - unread
+  - boundary
+  - pressure
+  - rival
+  - duel
+  - ticket
+  - consequence
+  - priced
+  - marked paid
+  - cannot return
+  - return ticket
+  - belonging
+  - seating
+  - group chat
+  - ranking
+  - public
+  - body
+  - consent
+  - agency
+  - feed
+  - algorithm
+  - privacy
+  - ritual
+  - vending
+  - dead phone
+
+desire_signals:
+  - want
+  - needs
+  - need to
+  - must
+  - have to
+  - won't
+  - refuse
+  - delete
+  - keep
+  - protect
+  - save
+  - pass
+  - win
+  - stay
+  - leave
+  - exam
+  - tryout
+  - shift
+  - deadline
+
+cost_signals:
+  - cost
+  - debt
+  - burns
+  - lose
+  - loss
+  - price
+  - ticket
+  - scar
+  - wound
+  - cannot
+  - can't
+  - forever
+  - public
+  - shame
+  - witness
+  - ranking
+  - body
+  - blood
+  - pain
+  - silence between
+
+hook_signals:
+  - "?"
+  - "but"
+  - "instead"
+  - "then"
+  - "opens"
+  - "calls"
+  - "wrong"
+  - "impossible"
+  - "discovery"
+  - "threat"
+  - "challenge"
+  - "misread"
+  - "reversal"
+  - "promise"
+  - "debt"
+  - "only"
+
+generic_phrases:
+  - "something shifted"
+  - "for the first time"
+  - "the path ahead"
+  - "a quiet strength"
+  - "began to heal"
+  - "everything changed"
+  - "learned to trust"
+  - "not alone anymore"
+  - "a new dawn"
+  - "the journey had only begun"
+  - "his adventure began"
+  - "entered a fantasy world"
+
+stub_dialogue_markers:
+  - "TODO"
+  - "TBD"
+  - "FIXME"
+  - "PLACEHOLDER"
+  - "LOREM IPSUM"
+  - "CHAPTER_END_HOOK"
+  - "{protagonist}"
+  - "{hook}"
+
+# Genre-core evidence classes (keywords). At least 2 classes must hit.
+genre_core_evidence:
+  battle:
+    trained_body: ["training", "muscle", "breath", "stance", "fist", "spar", "sweat", "body"]
+    rival_mentor_team: ["rival", "mentor", "teammate", "team", "coach", "opponent"]
+    public_witness: ["crowd", "arena", "ranking", "clip", "stream", "public", "watch"]
+    visible_cost: ["blood", "bruise", "collapse", "cost", "hurt", "injury", "price"]
+  romance:
+    proximity_delay: ["almost", "unread", "delay", "near", "beside", "hesitat", "message"]
+    boundary: ["boundary", "don't", "stop", "space", "too close", "permission"]
+    intimacy_misread: ["misread", "meant", "confession", "blush", "look away", "almost said"]
+  workplace:
+    institutional_pressure: ["deadline", "manager", "meeting", "slide", "okr", "boss", "review"]
+    private_mask: ["smile", "mask", "fine", "okay", "private", "bathroom", "after hours"]
+    coworker_witness: ["coworker", "desk", "slack", "chat", "colleague", "cc"]
+  healing:
+    concrete_ritual: ["ritual", "vending", "tea", "walk", "breathe", "phone", "bench", "water"]
+    low_arousal_change: ["quieter", "slower", "sit", "stay", "notice", "warm", "soft"]
+    side_by_side: ["beside", "together", "next to", "shared", "same bench", "side by side"]
+  mystery:
+    evidence_asymmetry: ["clue", "evidence", "knows", "hiding", "missing", "gap"]
+    witness_suspect: ["witness", "suspect", "alibi", "lie", "saw"]
+    timed_reveal: ["deadline", "before", "clock", "tonight", "expires", "timer"]
+  horror:
+    familiar_wrong: ["wrong", "familiar", "should not", "too quiet", "smells like"]
+    dread_before_explain: ["dread", "don't look", "behind", "listening", "watching"]
+  sports:
+    body_limitation: ["lungs", "legs", "cramp", "breath", "ankle", "limit", "body"]
+    team_rival_coach: ["team", "rival", "coach", "bench", "pass", "court", "field"]
+    match_training_cost: ["match", "practice", "training", "score", "foul", "cost"]
+  essay:
+    visual_artifact: ["notebook", "photo", "margin", "page", "sketch", "letter", "artifact"]
+    self_interrogation: ["why did i", "what if", "i wrote", "i remember", "ask myself"]
+  slice_of_life:
+    routine_variation: ["same", "usual", "today", "instead", "habit", "routine"]
+    care_belonging_loneliness: ["belong", "alone", "miss", "care", "quiet house", "empty"]
+  fantasy_adventure:
+    threshold: ["threshold", "door", "gate", "crossing", "beyond", "opens"]
+    rule_bound: ["rule", "must not", "contract", "bound", "price of entry"]
+    quest_cost: ["quest", "cost", "cannot return", "ticket", "debt"]
+  food:
+    maker_eater: ["cook", "taste", "recipe", "knife", "steam", "eat", "share plate"]
+    craft_memory: ["remember", "mother", "kitchen", "first bite", "season"]
+  family:
+    domestic_task: ["dishes", "laundry", "dinner", "chore", "sink", "table"]
+    role_pressure: ["eldest", "parent", "role", "expected", "duty", "family"]
+  procedural:
+    workflow: ["procedure", "step", "checklist", "protocol", "method", "case file"]
+    institutional_cost: ["policy", "budget", "hours", "system", "compliance"]
+  historical:
+    period_material: ["kimono", "sword", "letter seal", "rice", "carriage", "period"]
+    rank_duty: ["rank", "duty", "lord", "clan", "honor", "forbidden"]
+  comedy:
+    setup: ["setup", "plan", "if i just", "simple"]
+    escalation: ["worse", "again", "also", "and then"]
+    status_flip: ["boss", "embarrassed", "caught", "status", "laugh"]
+  cultivation:
+    hierarchy: ["sect", "rank", "realm", "elder", "disciple"]
+    body_discipline: ["meridian", "breath", "core", "body", "training"]
+    false_metric: ["points", "ranking", "fake", "breakthrough", "true path"]
+  mecha:
+    pilot_machine_command: ["cockpit", "pilot", "command", "machine", "radio"]
+    cockpit_body: ["harness", "sweat", "hands shake", "sync", "neural"]
+    mission_cost: ["mission", "casualty", "order", "cost", "abort"]
+  dark_fantasy:
+    wound: ["wound", "scar", "bleed", "grief", "dead"]
+    oath_debt: ["oath", "debt", "marked paid", "vow", "bound"]
+    survival_choice: ["choose", "survive", "enter", "burn", "return ticket"]
+    moral_bodily_cost: ["cost", "soul", "name burns", "price", "cannot"]
+  sci_fi_cyberpunk:
+    interface_identity: ["interface", "feed", "implant", "login", "id", "profile"]
+    privacy_power: ["privacy", "algorithm", "recommend", "surveil", "score", "track"]
+    body_threat: ["body", "skin", "port", "hack", "override", "pain"]
+  supernatural_everyday:
+    liminal_trace: ["trace", "threshold", "between", "spirit", "residue"]
+    etiquette: ["bow", "offer", "rule", "etiquette", "must not"]
+    bittersweet: ["bittersweet", "leave", "cannot stay", "aftertaste"]
+  school:
+    peer_status: ["status", "popular", "ignore", "rumor", "seat", "class"]
+    seating_chat_club: ["seat", "group chat", "club", "desk", "homeroom"]
+    belonging: ["belong", "invite", "left out", "together", "alone at lunch"]
+  memoir:
+    body_state: ["chest", "hands", "throat", "body", "tired"]
+    memory_artifact: ["photo", "diary", "letter", "recording", "drawer"]
+    unresolved: ["still", "unfinished", "don't know", "cannot say"]
+  social_issue:
+    access_barrier: ["denied", "form", "waitlist", "access", "barrier", "closed"]
+    power_relation: ["caseworker", "landlord", "officer", "system", "power"]
+    named_relationship: ["my sister", "my mother", "my friend", "named", "care for"]
+  graphic_medicine:
+    body_evidence: ["symptom", "scan", "pain chart", "clinic", "blood"]
+    care_relationship: ["nurse", "doctor", "caregiver", "patient"]
+    consent_agency: ["consent", "choose", "refuse", "agency", "my body"]
+  battle_internal:
+    self_shadow: ["shadow", "mirror", "other me", "counterpart"]
+    body_decision: ["choose", "hands", "step forward", "body decides"]
+    moral_turn: ["wrong", "right", "won't", "refuse", "turn"]
+
+forbidden_replacements:
+  sci_fi_cyberpunk: ["neon wallpaper", "just neon"]
+  healing: ["therapy summary", "you need therapy", "heal your trauma"]
+
+# Strategy bank file stems keyed by canonical genre (or approved alias route).
+strategy_bank_by_genre:
+  battle: action_battle_strategies.yaml
+  romance: romance_josei_drama_strategies.yaml
+  workplace: workplace_drama_strategies.yaml
+  healing: iyashikei_strategies.yaml
+  mystery: supernatural_mystery_strategies.yaml
+  horror: psychological_horror_strategies.yaml
+  sports: sports_competition_strategies.yaml
+  essay: josei_adult_memoir_strategies.yaml
+  slice_of_life: iyashikei_strategies.yaml
+  fantasy_adventure: isekai_strategies.yaml
+  food: food_strategies.yaml
+  family: family_strategies.yaml
+  procedural: procedural_strategies.yaml
+  historical: historical_period_strategies.yaml
+  comedy: comedy_gag_strategies.yaml
+  cultivation: cultivation_martial_strategies.yaml
+  mecha: mecha_strategies.yaml
+  dark_fantasy: dark_fantasy_strategies.yaml
+  sci_fi_cyberpunk: sci_fi_cyberpunk_strategies.yaml
+  supernatural_everyday: supernatural_mystery_strategies.yaml
+  school: school_coming_of_age_strategies.yaml
+  memoir: josei_adult_memoir_strategies.yaml
+  social_issue: seinen_strategies.yaml
+  graphic_medicine: graphic_medicine_strategies.yaml
+  battle_internal: battle_internal_strategies.yaml
+
+reader_markets: [en_US, ja_JP, zh_CN, fr_FR]
+reader_audiences: [gen_z, gen_alpha]

@@ -1,5 +1,0 @@
-# Large assembled binaries (>1 MB no-binary-blobs cap; LFS budget exhausted).
-# These are deterministically reproducible from source panels — see
-# stillness_press/en_US/manga/MANGA_MANIFEST.md. Kept local for operator review;
-# push to Cloudflare R2 for distribution (scripts/artifacts/r2_sync.py).
-**/manga/assembled/

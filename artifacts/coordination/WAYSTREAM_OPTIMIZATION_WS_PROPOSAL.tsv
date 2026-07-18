@@ -1,5 +1,0 @@
-ws_id	phase	owner	depends_on	status	notes
-ws_waystream_parallel_workers_validation_20260622	1	Pearl_Dev	—	proposed	Benchmark workers=1 vs 8 on pilot 18; ops runbook for WAYSTREAM_BATCH_WORKERS
-ws_unified_manuscript_processor_20260622	2	Pearl_Dev	—	proposed	Collapse redundant full-manuscript passes; byte-identical v1 per Q-OPT-03
-ws_atom_compatibility_analyzer_20260622	2	Pearl_Research + Pearl_Dev	render logs	proposed	scripts/audit/analyze_atom_compatibility.py + JSON matrix artifact
-ws_batch_preflight_integration_20260622	2	Pearl_Dev	compatibility matrix	proposed	Dry-run select_enrichment preflight in batch_waystream_epubs.py

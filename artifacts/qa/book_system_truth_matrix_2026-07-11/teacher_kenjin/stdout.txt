@@ -1,9 +1,0 @@
-WARNING: --no-job-check: pipeline job enforcement disabled (CI/testing only).
-Warning: atoms_model missing in spec; derived from config (legacy_personas) -> legacy
-Teacher coverage gate failed. See artifacts/teacher_coverage_report.json
-Traceback (most recent call last):
-  File "/Users/ahjan/phoenix_omega_worktrees/book-system-truth-matrix-20260711/scripts/run_pipeline.py", line 4779, in <module>
-    sys.exit(main())
-  File "/Users/ahjan/phoenix_omega_worktrees/book-system-truth-matrix-20260711/scripts/run_pipeline.py", line 3375, in main
-    raise TeacherCoverageError(
-phoenix_v4.teacher.coverage_gate.TeacherCoverageError: Teacher coverage insufficient for required slots. See artifacts/teacher_coverage_report.json
