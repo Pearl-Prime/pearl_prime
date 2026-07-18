@@ -1,0 +1,14 @@
+RENDER_REF (fresh L1 chord render hard-stops on G-DEF4; using prior manuscript per dispatcher ruling)
+
+Fresh L1 attempt (this lane, live, this run):
+  Command: PYTHONPATH=. python3 scripts/run_pipeline.py --pipeline-mode spine \
+    --quality-profile production --exercise-journeys --persona healthcare_rns \
+    --topic burnout --arc config/source_of_truth/master_arcs/healthcare_rns__burnout__overwhelm__F006.yaml \
+    --locale en-US --render-book --render-dir artifacts/qa/perfect_books_wave2_20260718/lane03/renders/healthcare_rns__burnout__overwhelm
+  Log: artifacts/qa/perfect_books_wave2_20260718/lane03/renders/healthcare_rns__burnout__overwhelm_run.log
+  Result: SystemExit(1), 106 foreign-persona registry drops, persona_id='healthcare_rns'
+  No book.txt written (hard-stop precedes compose). This independently confirms
+  Lane 02's inferred (not independently rendered) prediction for this exact cell.
+
+Prior manuscript used for the ONTGP read (exact persona/topic/engine match by path):
+  artifacts/wave_proof/draft/burnout_overwhelm__healthcare_rns/book.txt
