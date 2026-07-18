@@ -4,6 +4,7 @@
 **STATUS:** partial (pipeline generalized path FIXED + mini EXECUTED proof; full spine
 chord production book BLOCKED)  
 **Offline parent tip at land:** `9756ebbc8890f7e9fb656ee54d1fee7238d5c454`  
+**Offline commit SHA:** `f8d1a0c2358a611d218987d6474276955761b052`  
 **Shared tree:** `codex/realist-social-samples-20260718` (never switched)
 
 ## Routing verdict
