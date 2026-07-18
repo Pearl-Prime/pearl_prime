@@ -1,0 +1,163 @@
+{
+  "artifact_type": "story_architecture_handoff",
+  "series_id": "portal",
+  "genre_id": "dark_fantasy",
+  "story_strategy_genre": "dark_fantasy",
+  "story_strategy_id": "dark_fantasy__default",
+  "reader_market": "ja_JP",
+  "reader_audience": "gen_z",
+  "modern_reader_context": {
+    "schema_version": "1.0.0",
+    "target_market": "ja_JP",
+    "target_audience": "gen_z",
+    "genre_id": "dark_fantasy",
+    "strategy_genre": "dark_fantasy",
+    "relevance_genre": "dark_fantasy",
+    "market_surface_rule": "Use train commute, station platform, conbini, cram school, club room, LINE-style chat, digital manga apps, capsule machines, and quiet public etiquette.",
+    "market_touchpoints": [
+      "train_platform",
+      "commuter_car",
+      "conbini_receipt",
+      "bento_shelf",
+      "club_room",
+      "shoe_locker",
+      "cram_school",
+      "line_chat",
+      "vending_machine",
+      "manga_app"
+    ],
+    "market_guardrails": [
+      "avoid_tourist_japan",
+      "avoid_samurai_default_for_modern_scenes",
+      "preserve_public_private_register_gap"
+    ],
+    "audience_story_rule": "Treat online identity, economic pressure, burnout, social performance, fandom, romance boundaries, and self-definition as ordinary life texture.",
+    "audience_touchpoints": [
+      "phone_as_social_pressure",
+      "group_chat_status",
+      "creator_or_streaming_identity",
+      "gig_or_work_pressure",
+      "transit_between_roles",
+      "online_offline_self_gap"
+    ],
+    "genre_relevance_rule": "Modern dark fantasy can begin with an app, train, game, or artifact, but it must become cost, grief, land, oath, wound, and survival.",
+    "catalyst": {
+      "id": "cursed_app_at_last_train",
+      "logline": "A hidden app opens after the last train misses its stop, and the platform map redraws into a grave-road where every notification is a name owed to the dead.",
+      "ordinary_world_objects": [
+        "hidden_app",
+        "last_train",
+        "platform_map",
+        "dead_battery"
+      ],
+      "genre_transmutation": "App interface becomes oath ledger.",
+      "avoid": [
+        "phone_as_spell_wand",
+        "colorful_portal"
+      ]
+    },
+    "quality_rubric": {
+      "great_story_requires": [
+        "high_concept_collision",
+        "concrete_reader_world_anchor",
+        "genre_engine_not_replaced_by_trend",
+        "protagonist_desire_visible_in_scene",
+        "social_or_system_pressure",
+        "reversal_or_discovery_by_page_two",
+        "market_localized_touchpoint",
+        "no_generic_therapy_summary"
+      ],
+      "flat_story_failure_modes": [
+        "classic_genre_without_modern_entrypoint",
+        "modern_object_as_name_drop_only",
+        "protagonist_waits_for_lesson",
+        "no_personal_stakes_before_lore",
+        "no_social_cost",
+        "no_specific_place_or_object",
+        "genre_strategy_hidden_in_metadata_only"
+      ]
+    },
+    "craft_directive": "Fuse the genre engine with a contemporary reader-world entrypoint. Market=ja_JP; audience=gen_z. Use catalyst 'cursed_app_at_last_train': A hidden app opens after the last train misses its stop, and the platform map redraws into a grave-road where every notification is a name owed to the dead. Transmutation: App interface becomes oath ledger. Market surface: Use train commute, station platform, conbini, cram school, club room, LINE-style chat, digital manga apps, capsule machines, and quiet public etiquette. Audience rule: Treat online identity, economic pressure, burnout, social performance, fandom, romance boundaries, and self-definition as ordinary life texture. Use concrete objects and social pressure on page one; do not name-drop trends."
+  },
+  "chapters": [
+    {
+      "chapter_number": 1,
+      "chapter_id": "ch01",
+      "story_craft": {
+        "modern_reader_context": {
+          "schema_version": "1.0.0",
+          "target_market": "ja_JP",
+          "target_audience": "gen_z",
+          "genre_id": "dark_fantasy",
+          "strategy_genre": "dark_fantasy",
+          "relevance_genre": "dark_fantasy",
+          "market_surface_rule": "Use train commute, station platform, conbini, cram school, club room, LINE-style chat, digital manga apps, capsule machines, and quiet public etiquette.",
+          "market_touchpoints": [
+            "train_platform",
+            "commuter_car",
+            "conbini_receipt",
+            "bento_shelf",
+            "club_room",
+            "shoe_locker",
+            "cram_school",
+            "line_chat",
+            "vending_machine",
+            "manga_app"
+          ],
+          "market_guardrails": [
+            "avoid_tourist_japan",
+            "avoid_samurai_default_for_modern_scenes",
+            "preserve_public_private_register_gap"
+          ],
+          "audience_story_rule": "Treat online identity, economic pressure, burnout, social performance, fandom, romance boundaries, and self-definition as ordinary life texture.",
+          "audience_touchpoints": [
+            "phone_as_social_pressure",
+            "group_chat_status",
+            "creator_or_streaming_identity",
+            "gig_or_work_pressure",
+            "transit_between_roles",
+            "online_offline_self_gap"
+          ],
+          "genre_relevance_rule": "Modern dark fantasy can begin with an app, train, game, or artifact, but it must become cost, grief, land, oath, wound, and survival.",
+          "catalyst": {
+            "id": "cursed_app_at_last_train",
+            "logline": "A hidden app opens after the last train misses its stop, and the platform map redraws into a grave-road where every notification is a name owed to the dead.",
+            "ordinary_world_objects": [
+              "hidden_app",
+              "last_train",
+              "platform_map",
+              "dead_battery"
+            ],
+            "genre_transmutation": "App interface becomes oath ledger.",
+            "avoid": [
+              "phone_as_spell_wand",
+              "colorful_portal"
+            ]
+          },
+          "quality_rubric": {
+            "great_story_requires": [
+              "high_concept_collision",
+              "concrete_reader_world_anchor",
+              "genre_engine_not_replaced_by_trend",
+              "protagonist_desire_visible_in_scene",
+              "social_or_system_pressure",
+              "reversal_or_discovery_by_page_two",
+              "market_localized_touchpoint",
+              "no_generic_therapy_summary"
+            ],
+            "flat_story_failure_modes": [
+              "classic_genre_without_modern_entrypoint",
+              "modern_object_as_name_drop_only",
+              "protagonist_waits_for_lesson",
+              "no_personal_stakes_before_lore",
+              "no_social_cost",
+              "no_specific_place_or_object",
+              "genre_strategy_hidden_in_metadata_only"
+            ]
+          },
+          "craft_directive": "Fuse the genre engine with a contemporary reader-world entrypoint. Market=ja_JP; audience=gen_z. Use catalyst 'cursed_app_at_last_train': A hidden app opens after the last train misses its stop, and the platform map redraws into a grave-road where every notification is a name owed to the dead. Transmutation: App interface becomes oath ledger. Market surface: Use train commute, station platform, conbini, cram school, club room, LINE-style chat, digital manga apps, capsule machines, and quiet public etiquette. Audience rule: Treat online identity, economic pressure, burnout, social performance, fandom, romance boundaries, and self-definition as ordinary life texture. Use concrete objects and social pressure on page one; do not name-drop trends."
+        }
+      }
+    }
+  ]
+}

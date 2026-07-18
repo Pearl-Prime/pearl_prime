@@ -1,0 +1,11 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.9.6, pytest-8.4.2, pluggy-1.6.0
+rootdir: /Users/ahjan/phoenix_omega
+configfile: pytest.ini
+plugins: anyio-4.12.1
+collected 25 items
+
+tests/manga/test_story_excellence_gate.py .....................          [ 84%]
+tests/manga/test_modern_reader_story_context.py ....                     [100%]
+
+======================== 25 passed in 81.22s (0:01:21) =========================

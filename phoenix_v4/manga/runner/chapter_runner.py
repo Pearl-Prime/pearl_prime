@@ -82,7 +82,7 @@ def _stage_transmission(workspace: Path) -> None:
 
 
 def _resolve_writer_mode(workspace: Path) -> str:
-    """Resolve the chapter writer mode: chapter_request > env > 'stub' (CI-safe default).
+    """Resolve the chapter writer mode: chapter_request > env > 'claude' (fail-closed default).
 
     Modes:
       - 'claude': Tier-1 Claude Chapter Writer — the PRODUCTION path. The
@@ -91,12 +91,13 @@ def _resolve_writer_mode(workspace: Path) -> str:
         _stage_writer validates + installs it via the LLM-client writer. No paid API is
         called in-process. When mode is 'claude' and no authored pair exists, the stage
         FAILS LOUDLY rather than silently shipping canned stub dialogue.
-      - 'stub' (default): deterministic ``writer_stub`` — CI / replay smoke tests.
+      - 'stub': deterministic ``writer_stub`` — CI / replay smoke tests only.
 
     Production runs set ``writer_mode: claude`` in chapter_request.json (or
-    ``MANGA_WRITER_MODE=claude``). The default stays 'stub' so the replay-driven test
-    suite and unattended smoke pipelines keep working unchanged. Independent of mode,
-    an authored script pair on disk always activates the Tier-1 path (see _stage_writer).
+    ``MANGA_WRITER_MODE=claude``). The default is 'claude' so missing writer_mode
+    fails closed instead of silently emitting canned writer_stub dialogue. Replay
+    tests must set ``writer_mode: stub`` explicitly. Independent of mode, an authored
+    script pair on disk always activates the Tier-1 path (see _stage_writer).
     """
     cr_path = workspace / manga_paths.CHAPTER_REQUEST
     if cr_path.is_file():
@@ -108,7 +109,7 @@ def _resolve_writer_mode(workspace: Path) -> str:
         except Exception:
             pass
     import os
-    return os.environ.get("MANGA_WRITER_MODE", "stub").strip() or "stub"
+    return os.environ.get("MANGA_WRITER_MODE", "claude").strip() or "claude"
 
 
 def _authored_script_path(workspace: Path) -> Path | None:
@@ -149,6 +150,88 @@ def _install_authored_script(workspace: Path, authored: Path, cr: dict) -> None:
     )
 
 
+def _non_shipping_smoke(workspace: Path) -> bool:
+    """True when the caller marked the workspace as non-shipping smoke/draft."""
+    import os
+
+    cr_path = workspace / manga_paths.CHAPTER_REQUEST
+    if cr_path.is_file():
+        try:
+            cr = json.loads(cr_path.read_text(encoding="utf-8"))
+            if cr.get("non_shipping") or cr.get("smoke_only"):
+                return True
+            if str(cr.get("quality_profile") or "").strip() == "draft":
+                return True
+        except Exception:
+            pass
+    if os.environ.get("MANGA_NON_SHIPPING", "").strip() in {"1", "true", "yes"}:
+        return True
+    if os.environ.get("MANGA_QUALITY_PROFILE", "").strip() == "draft":
+        return True
+    return False
+
+
+def _run_story_excellence_gate(workspace: Path) -> dict[str, Any]:
+    """Post-writer excellence realization gate. Always writes the report artifact."""
+    from phoenix_v4.manga.story_quality.excellence_gate import evaluate_story_excellence
+
+    story_p = workspace / manga_paths.STORY_ARCHITECTURE_HANDOFF
+    writer_p = workspace / manga_paths.CHAPTER_SCRIPT_WRITER_HANDOFF
+    internal_p = workspace / manga_paths.CHAPTER_SCRIPT_INTERNAL_RECORD
+    story = _load_json(story_p) if story_p.is_file() else {}
+    writer = _load_json(writer_p) if writer_p.is_file() else {}
+    internal = _load_json(internal_p) if internal_p.is_file() else None
+    mode = _resolve_writer_mode(workspace)
+    non_shipping = _non_shipping_smoke(workspace)
+    # Fail-closed scoring for production writer (claude). Stub is CI/smoke: still
+    # evaluate + write report, but do not raise (may WARN/BLOCKED).
+    production = mode != "stub"
+    report = evaluate_story_excellence(
+        story_handoff=story,
+        writer_handoff=writer,
+        internal_record=internal,
+        production=production,
+    )
+    out = workspace / "story_excellence_realization_report.json"
+    out.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
+    allow_non_pass = mode == "stub" or non_shipping
+    if report.get("status") != "PASS" and not allow_non_pass:
+        raise RuntimeError(
+            "story excellence realization gate status="
+            f"{report.get('status')!r} (production requires PASS); "
+            f"see {out}"
+        )
+    if allow_non_pass and report.get("status") != "PASS":
+        logger.warning(
+            "story excellence gate %s in stub/non-shipping smoke — report written",
+            report.get("status"),
+        )
+    return report
+
+
+def _require_excellence_pass_for_visual(workspace: Path) -> None:
+    """Refuse visual planning when a production workspace lacks a PASS report."""
+    report_p = workspace / "story_excellence_realization_report.json"
+    mode = _resolve_writer_mode(workspace)
+    # Stub / explicit non-shipping smoke may proceed; production must have PASS.
+    if mode == "stub" or _non_shipping_smoke(workspace):
+        return
+    if not report_p.is_file():
+        raise RuntimeError(
+            "story excellence realization report missing — run chapter writer stage "
+            f"before visual (expected {report_p})"
+        )
+    try:
+        report = json.loads(report_p.read_text(encoding="utf-8"))
+    except Exception as exc:
+        raise RuntimeError(f"unreadable story excellence report: {exc}") from exc
+    if report.get("status") != "PASS":
+        raise RuntimeError(
+            "production visual planning refused: story excellence status="
+            f"{report.get('status')!r} (need PASS); see {report_p}"
+        )
+
+
 def _stage_writer(workspace: Path, chapter_number: int) -> None:
     cr = _load_json(workspace / manga_paths.CHAPTER_REQUEST)
     validate_instance(cr, "chapter_request")
@@ -160,6 +243,7 @@ def _stage_writer(workspace: Path, chapter_number: int) -> None:
     # Tier-1 Claude path: if an operator-authored script pair is present, install it.
     if authored is not None:
         _install_authored_script(workspace, authored, cr)
+        _run_story_excellence_gate(workspace)
         return
 
     if mode == "stub":
@@ -179,6 +263,7 @@ def _stage_writer(workspace: Path, chapter_number: int) -> None:
         (workspace / manga_paths.CHAPTER_SCRIPT_INTERNAL_RECORD).write_text(
             json.dumps(internal, indent=2) + "\n", encoding="utf-8"
         )
+        _run_story_excellence_gate(workspace)
         return
 
     # Production 'claude' mode with no authored pair available: fail loudly rather
@@ -203,6 +288,7 @@ def _stage_visual(
     brand_id: str | None = None,
     genre_id: str | None = None,
 ) -> None:
+    _require_excellence_pass_for_visual(workspace)
     raw = _load_json(workspace / manga_paths.CHAPTER_SCRIPT_WRITER_HANDOFF)
     cr = _load_json(workspace / manga_paths.CHAPTER_REQUEST)
     # Resolve render-routing inputs: explicit caller params win, else chapter_request,

@@ -1,0 +1,163 @@
+{
+  "artifact_type": "story_architecture_handoff",
+  "series_id": "zh_block",
+  "genre_id": "sci_fi_cyberpunk",
+  "story_strategy_genre": "sci_fi_cyberpunk",
+  "story_strategy_id": "sci_fi_cyberpunk__default",
+  "reader_market": "zh_CN",
+  "reader_audience": "gen_z",
+  "modern_reader_context": {
+    "schema_version": "1.0.0",
+    "target_market": "zh_CN",
+    "target_audience": "gen_z",
+    "genre_id": "sci_fi_cyberpunk",
+    "strategy_genre": "sci_fi_cyberpunk",
+    "relevance_genre": "sci_fi_cyberpunk",
+    "market_surface_rule": "Use mobile-first platforms, metro, campus/work pressure, super-app payments, livestream/gaming, recommendations, and IP culture while avoiding direct system-critique framing.",
+    "market_touchpoints": [
+      "metro_gate",
+      "phone_payment_qr",
+      "recommendation_feed",
+      "campus_gate",
+      "gaming_cafe",
+      "livestream_room",
+      "delivery_locker",
+      "group_chat",
+      "webtoon_app",
+      "night_market"
+    ],
+    "market_guardrails": [
+      "frame_as_resilience_or_memory_not_system_attack",
+      "avoid_sensitive_political_metaphor",
+      "make_platform_dynamics_story_specific"
+    ],
+    "audience_story_rule": "Treat online identity, economic pressure, burnout, social performance, fandom, romance boundaries, and self-definition as ordinary life texture.",
+    "audience_touchpoints": [
+      "phone_as_social_pressure",
+      "group_chat_status",
+      "creator_or_streaming_identity",
+      "gig_or_work_pressure",
+      "transit_between_roles",
+      "online_offline_self_gap"
+    ],
+    "genre_relevance_rule": "Cyberpunk should make today's interface life slightly more literal: recommendation feeds, biometric locks, avatars, backups, payment systems, and surveillance.",
+    "catalyst": {
+      "id": "avatar_fork_legal_person",
+      "logline": "A game avatar signs a contract while the protagonist sleeps, and the city recognizes the avatar as the more valid citizen.",
+      "ordinary_world_objects": [
+        "game_avatar",
+        "terms_screen",
+        "subway_gate",
+        "id_scan"
+      ],
+      "genre_transmutation": "Avatar identity becomes legal threat.",
+      "avoid": [
+        "generic_hacker_plot",
+        "no_body_cost"
+      ]
+    },
+    "quality_rubric": {
+      "great_story_requires": [
+        "high_concept_collision",
+        "concrete_reader_world_anchor",
+        "genre_engine_not_replaced_by_trend",
+        "protagonist_desire_visible_in_scene",
+        "social_or_system_pressure",
+        "reversal_or_discovery_by_page_two",
+        "market_localized_touchpoint",
+        "no_generic_therapy_summary"
+      ],
+      "flat_story_failure_modes": [
+        "classic_genre_without_modern_entrypoint",
+        "modern_object_as_name_drop_only",
+        "protagonist_waits_for_lesson",
+        "no_personal_stakes_before_lore",
+        "no_social_cost",
+        "no_specific_place_or_object",
+        "genre_strategy_hidden_in_metadata_only"
+      ]
+    },
+    "craft_directive": "Fuse the genre engine with a contemporary reader-world entrypoint. Market=zh_CN; audience=gen_z. Use catalyst 'avatar_fork_legal_person': A game avatar signs a contract while the protagonist sleeps, and the city recognizes the avatar as the more valid citizen. Transmutation: Avatar identity becomes legal threat. Market surface: Use mobile-first platforms, metro, campus/work pressure, super-app payments, livestream/gaming, recommendations, and IP culture while avoiding direct system-critique framing. Audience rule: Treat online identity, economic pressure, burnout, social performance, fandom, romance boundaries, and self-definition as ordinary life texture. Use concrete objects and social pressure on page one; do not name-drop trends."
+  },
+  "chapters": [
+    {
+      "chapter_number": 1,
+      "chapter_id": "ch01",
+      "story_craft": {
+        "modern_reader_context": {
+          "schema_version": "1.0.0",
+          "target_market": "zh_CN",
+          "target_audience": "gen_z",
+          "genre_id": "sci_fi_cyberpunk",
+          "strategy_genre": "sci_fi_cyberpunk",
+          "relevance_genre": "sci_fi_cyberpunk",
+          "market_surface_rule": "Use mobile-first platforms, metro, campus/work pressure, super-app payments, livestream/gaming, recommendations, and IP culture while avoiding direct system-critique framing.",
+          "market_touchpoints": [
+            "metro_gate",
+            "phone_payment_qr",
+            "recommendation_feed",
+            "campus_gate",
+            "gaming_cafe",
+            "livestream_room",
+            "delivery_locker",
+            "group_chat",
+            "webtoon_app",
+            "night_market"
+          ],
+          "market_guardrails": [
+            "frame_as_resilience_or_memory_not_system_attack",
+            "avoid_sensitive_political_metaphor",
+            "make_platform_dynamics_story_specific"
+          ],
+          "audience_story_rule": "Treat online identity, economic pressure, burnout, social performance, fandom, romance boundaries, and self-definition as ordinary life texture.",
+          "audience_touchpoints": [
+            "phone_as_social_pressure",
+            "group_chat_status",
+            "creator_or_streaming_identity",
+            "gig_or_work_pressure",
+            "transit_between_roles",
+            "online_offline_self_gap"
+          ],
+          "genre_relevance_rule": "Cyberpunk should make today's interface life slightly more literal: recommendation feeds, biometric locks, avatars, backups, payment systems, and surveillance.",
+          "catalyst": {
+            "id": "avatar_fork_legal_person",
+            "logline": "A game avatar signs a contract while the protagonist sleeps, and the city recognizes the avatar as the more valid citizen.",
+            "ordinary_world_objects": [
+              "game_avatar",
+              "terms_screen",
+              "subway_gate",
+              "id_scan"
+            ],
+            "genre_transmutation": "Avatar identity becomes legal threat.",
+            "avoid": [
+              "generic_hacker_plot",
+              "no_body_cost"
+            ]
+          },
+          "quality_rubric": {
+            "great_story_requires": [
+              "high_concept_collision",
+              "concrete_reader_world_anchor",
+              "genre_engine_not_replaced_by_trend",
+              "protagonist_desire_visible_in_scene",
+              "social_or_system_pressure",
+              "reversal_or_discovery_by_page_two",
+              "market_localized_touchpoint",
+              "no_generic_therapy_summary"
+            ],
+            "flat_story_failure_modes": [
+              "classic_genre_without_modern_entrypoint",
+              "modern_object_as_name_drop_only",
+              "protagonist_waits_for_lesson",
+              "no_personal_stakes_before_lore",
+              "no_social_cost",
+              "no_specific_place_or_object",
+              "genre_strategy_hidden_in_metadata_only"
+            ]
+          },
+          "craft_directive": "Fuse the genre engine with a contemporary reader-world entrypoint. Market=zh_CN; audience=gen_z. Use catalyst 'avatar_fork_legal_person': A game avatar signs a contract while the protagonist sleeps, and the city recognizes the avatar as the more valid citizen. Transmutation: Avatar identity becomes legal threat. Market surface: Use mobile-first platforms, metro, campus/work pressure, super-app payments, livestream/gaming, recommendations, and IP culture while avoiding direct system-critique framing. Audience rule: Treat online identity, economic pressure, burnout, social performance, fandom, romance boundaries, and self-definition as ordinary life texture. Use concrete objects and social pressure on page one; do not name-drop trends."
+        }
+      }
+    }
+  ]
+}

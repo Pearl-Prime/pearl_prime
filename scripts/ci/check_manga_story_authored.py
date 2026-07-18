@@ -191,6 +191,67 @@ def assert_story_authored(chapter_script_path: Path) -> None:
         raise StoryNotAuthoredError(f"{chapter_script_path}: {reason}")
 
 
+def assert_story_excellence(
+    chapter_script_path: Path,
+    story_handoff_path: Path,
+    *,
+    production: bool = True,
+    repo_root: Path | None = None,
+) -> dict:
+    """Extend the story-authored entry path with excellence realization.
+
+    Call after ``assert_story_authored``. Raises StoryNotAuthoredError when the
+    excellence gate returns BLOCKED in production. New render-dispatch sites that
+    already import ``assert_story_authored`` should also call this when a story
+    handoff is available.
+    """
+    assert_story_authored(chapter_script_path)
+    import json
+    import yaml
+
+    def _load(path: Path) -> dict:
+        text = path.read_text(encoding="utf-8")
+        if path.suffix.lower() in {".yaml", ".yml"}:
+            data = yaml.safe_load(text)
+        else:
+            data = json.loads(text)
+        if not isinstance(data, dict):
+            raise StoryNotAuthoredError(f"{path}: not a mapping")
+        return data
+
+    if not story_handoff_path.is_file():
+        raise StoryNotAuthoredError(
+            f"excellence check requires story handoff at {story_handoff_path}"
+        )
+    try:
+        from phoenix_v4.manga.story_quality.excellence_gate import (
+            evaluate_story_excellence,
+        )
+    except Exception as exc:  # pragma: no cover
+        raise StoryNotAuthoredError(
+            f"excellence gate unavailable: {exc}"
+        ) from exc
+
+    report = evaluate_story_excellence(
+        story_handoff=_load(story_handoff_path),
+        writer_handoff=_load(chapter_script_path),
+        production=production,
+        repo_root=repo_root or REPO_ROOT,
+    )
+    if production and report.get("status") != "PASS":
+        failed = [
+            g.get("gate_id")
+            for g in report.get("gates") or []
+            if g.get("status") == "BLOCKED"
+        ]
+        raise StoryNotAuthoredError(
+            f"{chapter_script_path}: story excellence {report.get('status')} "
+            f"(failed: {', '.join(failed) or 'score'}); "
+            f"repair_scope={(report.get('repair_packet') or {}).get('repair_scope')}"
+        )
+    return report
+
+
 def resolve_chapter_script(repo_root: Path, series_id: str, episode_id: str) -> Path:
     return repo_root / CHAPTER_SCRIPTS_DIR / series_id / f"{episode_id}.yaml"
 
@@ -214,6 +275,23 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--base", default=None, help="git base ref (scan changed scripts)")
     ap.add_argument("--head", default="HEAD")
     ap.add_argument("--paths", nargs="*", default=None, help="explicit paths (tests)")
+    ap.add_argument(
+        "--require-excellence",
+        action="store_true",
+        help="also run story excellence realization (needs --story-handoff)",
+    )
+    ap.add_argument(
+        "--story-handoff",
+        type=Path,
+        default=None,
+        help="story_architecture_handoff path for --require-excellence",
+    )
+    ap.add_argument(
+        "--excellence-production",
+        action="store_true",
+        default=True,
+        help="excellence gate production mode (default true)",
+    )
     args = ap.parse_args(argv)
 
     # Mode 1: single enqueue-time check
@@ -228,8 +306,26 @@ def main(argv: list[str] | None = None) -> int:
     # Mode 2: single explicit file
     if args.chapter_script:
         try:
-            assert_story_authored(args.chapter_script)
-            print(f"STORY-AUTHORED: PASS ({args.chapter_script})", file=sys.stderr)
+            if args.require_excellence:
+                if not args.story_handoff:
+                    print(
+                        "RENDER BLOCKED: --require-excellence needs --story-handoff",
+                        file=sys.stderr,
+                    )
+                    return 1
+                assert_story_excellence(
+                    args.chapter_script,
+                    args.story_handoff,
+                    production=bool(args.excellence_production),
+                    repo_root=args.repo_root,
+                )
+                print(
+                    f"STORY-AUTHORED+EXCELLENCE: PASS ({args.chapter_script})",
+                    file=sys.stderr,
+                )
+            else:
+                assert_story_authored(args.chapter_script)
+                print(f"STORY-AUTHORED: PASS ({args.chapter_script})", file=sys.stderr)
             return 0
         except StoryNotAuthoredError as e:
             print(f"RENDER BLOCKED: {e}", file=sys.stderr)

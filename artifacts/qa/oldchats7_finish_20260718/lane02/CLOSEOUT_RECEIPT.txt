@@ -1,0 +1,12 @@
+CLOSEOUT_RECEIPT
+AGENT=Pearl_Dev_lane02
+SPEC=docs/specs/MANGA_STORY_EXCELLENCE_REALIZATION_GATE_SPEC.md
+ACCEPTANCE_LAYER=CODE-WIRED (EXECUTED-REAL for the audit run)
+TESTS=21 passed
+MUTATION_CHECK=RED-then-green (mention_only BLOCKED; healing PASS)
+EXISTING_SCRIPT_AUDIT=deferred-to-lane03
+LANDED=offline/manga-realization-gate-20260718@9cfa76f8af8df41ca90385217bd5425ee79ec061
+CLEANUP_COMPLETE=yes
+HANDOFF=artifacts/coordination/handoffs/manga_realization_gate_impl_2026-07-18.md
+SIGNAL=manga-realization-gate-impl=9cfa76f8af8df41ca90385217bd5425ee79ec061
+NEXT_ACTION=lane 03 may launch
